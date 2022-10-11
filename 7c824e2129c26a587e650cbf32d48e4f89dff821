@@ -16,6 +16,24 @@
       "message": "There also appears to be an include/libpldm/requester subdirectory.  Is that considered deprecated?",
       "revId": "7c824e2129c26a587e650cbf32d48e4f89dff821",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e7b4c41_89492830",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-10-11T23:04:01Z",
+      "side": 1,
+      "message": "Hopefully it\u0027s not deprecated? The API might not be ideal, but I don\u0027t think that\u0027s reason to deprecate it. We can evolve it to fix it.",
+      "parentUuid": "1729f83e_4d7ef5ec",
+      "revId": "7c824e2129c26a587e650cbf32d48e4f89dff821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
