@@ -16,6 +16,24 @@
       "message": "I\u0027d prefer this as two separate patches:\n\n1. Add the info for the existing owners/reviewers\n2. A separate patch adding yourself as a reviewer\n\nThere\u0027s no reason for the two to be coupled in the manner you have here. Coupled this way, we would have to delay merging both pieces of information if anyone objects to only one of them.",
       "revId": "2edc4355170b43465f33b6e59a0e6092f80f08fa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf9987c4_159ccbcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-10-11T06:08:20Z",
+      "side": 1,
+      "message": "Sure, that makes sense andrew. Done.",
+      "parentUuid": "29998806_ed09590f",
+      "revId": "2edc4355170b43465f33b6e59a0e6092f80f08fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
