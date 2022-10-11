@@ -39,6 +39,7 @@ reviewers:
 - bradleyb@fuzziesquirrel.com
 - edtanous@google.com
 - jason.m.bills@linux.intel.com
+- manojkiran.eda@gmail.com
 
 matchers:
 
@@ -55,6 +56,9 @@ openbmc:
 - name: Jason Bills
   email: jason.m.bills@intel.com
   discord: jmbills
+- name: Manojkiran Eda
+  email: manojkiran.eda@gmail.com
+  discord: manojkiran
 - name: Patrick Williams
   email: patrick@stwcx.xyz
   discord: stwcx
