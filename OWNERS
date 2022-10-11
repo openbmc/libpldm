@@ -39,3 +39,22 @@ reviewers:
 - bradleyb@fuzziesquirrel.com
 - edtanous@google.com
 - jason.m.bills@linux.intel.com
+
+matchers:
+
+openbmc:
+- name: Andrew Jeffery
+  email: andrew@aj.id.au
+  discord: arj
+- name: Brad Bishop
+  email: bradleyb@fuzziesquirrel.com
+  discord: radsquirrel
+- name: Ed Tanous
+  email: ed@tanous.net
+  discord: edtanous
+- name: Jason Bills
+  email: jason.m.bills@intel.com
+  discord: jmbills
+- name: Patrick Williams
+  email: patrick@stwcx.xyz
+  discord: stwcx
