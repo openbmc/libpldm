@@ -87,6 +87,24 @@
       "parentUuid": "80d7eed3_026def97",
       "revId": "7c824e2129c26a587e650cbf32d48e4f89dff821",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32a45a09_8ccdaa13",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-10-13T06:02:41Z",
+      "side": 1,
+      "message": "Yes, agree with all of your points.\n1 \u0026 2. Yes it does violate it for now, but once we move to MCTP kernel sockets - this won\u0027t be openbmc specific anymore ? \u0026 also there is some work needed to make those API work seamlessly with various backends. I will work towards fixing it. @arj had some thoughts on it per my earlier discussion with him in discord.\n3. I think few of the apps used the requester interface, because pldm does not have a good dbus model, i am planning to work on this next \u0026 come up with a good dbus model to expose the data. By doing that we can stop atleast a few of the apps to change the interface to dbus rather than using the mctp mechanism to get data.\n\n@arj do you want to add anything to what i said ?",
+      "parentUuid": "6b1b33ad_8a0f42a2",
+      "revId": "7c824e2129c26a587e650cbf32d48e4f89dff821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
