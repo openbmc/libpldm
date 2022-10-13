@@ -105,6 +105,24 @@
       "parentUuid": "6b1b33ad_8a0f42a2",
       "revId": "7c824e2129c26a587e650cbf32d48e4f89dff821",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53b8e5a4_dff3867d",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-10-13T10:56:48Z",
+      "side": 1,
+      "message": "@Manoj,\n\nI think we\u0027re on the same page.  I would propose we write some language to this effect in the doc.  (ie. warn that those APIs are going to change and probably aren\u0027t appropriate to be writing new code against).\n\n\u003e Yes it does violate it for now, but once we move to MCTP kernel sockets - this won\u0027t be openbmc specific anymore\n\nI thought the spirit of \"not openbmc specific\" was that the code could compile in non-linux environments too?  I think Hostboot/skiboot/Zephyr are all environments that people want to be able to utilize this code in as well, which won\u0027t have those kernel APIs either.  Obviously we can disable portions via configure flags though.",
+      "parentUuid": "32a45a09_8ccdaa13",
+      "revId": "7c824e2129c26a587e650cbf32d48e4f89dff821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
