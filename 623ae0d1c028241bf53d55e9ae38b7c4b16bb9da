@@ -95,6 +95,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae600cac_ee3658a6",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-10-19T09:04:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e7764c71_11b03619",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 33
+      },
+      "revId": "623ae0d1c028241bf53d55e9ae38b7c4b16bb9da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32df2539_5a08e387",
