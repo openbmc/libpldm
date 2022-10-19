@@ -16,6 +16,24 @@
       "message": "Do you also wanna check tid values for the 0x00, 0xFF as they are reserved and special values ? and return an error ? or invalid data ?",
       "revId": "4e40e24f5aeda9a5c1b75e740df2c04f201e9227",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a341ee3b_c9a25006",
+        "filename": "src/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2022-10-19T03:13:58Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "ec3605e9_2b04a92e",
+      "revId": "4e40e24f5aeda9a5c1b75e740df2c04f201e9227",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
