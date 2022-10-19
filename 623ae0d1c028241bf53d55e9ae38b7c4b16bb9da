@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79b7fea2_936b2ffe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-10-19T03:52:41Z",
+      "side": 1,
+      "message": "not sure if this is needed, as its implicitly understood that when looking at the code that is pushed is libpldm ?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "623ae0d1c028241bf53d55e9ae38b7c4b16bb9da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc150bd9_4b09195c",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-10-19T03:52:41Z",
+      "side": 1,
+      "message": "why is response_bytes added? should that be request_bytes? for encode function? \n\nand also I don\u0027t think this is being used anywhere in the code.",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 33
+      },
+      "revId": "623ae0d1c028241bf53d55e9ae38b7c4b16bb9da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32df2539_5a08e387",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-10-19T03:52:41Z",
+      "side": 1,
+      "message": "request",
+      "range": {
+        "startLine": 221,
+        "startChar": 40,
+        "endLine": 221,
+        "endChar": 48
+      },
+      "revId": "623ae0d1c028241bf53d55e9ae38b7c4b16bb9da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
