@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0984730_deda2ac8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2022-10-19T08:23:37Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "79b7fea2_936b2ffe",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "623ae0d1c028241bf53d55e9ae38b7c4b16bb9da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc150bd9_4b09195c",
@@ -84,6 +108,30 @@
       "writtenOn": "2022-10-19T03:52:41Z",
       "side": 1,
       "message": "request",
+      "range": {
+        "startLine": 221,
+        "startChar": 40,
+        "endLine": 221,
+        "endChar": 48
+      },
+      "revId": "623ae0d1c028241bf53d55e9ae38b7c4b16bb9da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fa630da_b5018570",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2022-10-19T08:23:37Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "32df2539_5a08e387",
       "range": {
         "startLine": 221,
         "startChar": 40,
