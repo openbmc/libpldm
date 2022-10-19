@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7764c71_11b03619",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2022-10-19T08:22:37Z",
+      "side": 1,
+      "message": "Since the patch set originally is one of chained of patch sets for platform-mc implementation, the define is used by this patch set https://gerrit.openbmc.org/c/openbmc/pldm/+/51443/41/platform-mc/terminus_manager.cpp#285\n .",
+      "parentUuid": "fc150bd9_4b09195c",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 33
+      },
+      "revId": "623ae0d1c028241bf53d55e9ae38b7c4b16bb9da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32df2539_5a08e387",
         "filename": "include/libpldm/base.h",
         "patchSetId": 2
