@@ -1983,3 +1983,105 @@ int encode_set_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
 
 	return PLDM_SUCCESS;
 }
+
+int encode_poll_for_platform_event_message_req(uint8_t instance_id,
+					       uint8_t format_version,
+					       uint8_t transfer_operation_flag,
+					       uint32_t data_transfer_handle,
+					       uint16_t event_id_to_acknowledge,
+					       struct pldm_msg *msg,
+					       size_t payload_length)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length != PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_header_info header = {0};
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_poll_for_platform_event_message_req *request =
+	    (struct pldm_poll_for_platform_event_message_req *)msg->payload;
+	request->format_version = format_version;
+	request->data_transfer_handle = htole32(data_transfer_handle);
+	request->transfer_operation_flag = transfer_operation_flag;
+	request->event_id_to_acknowledge = htole16(event_id_to_acknowledge);
+
+	return PLDM_SUCCESS;
+}
+
+int decode_poll_for_platform_event_message_resp(
+    const struct pldm_msg *msg, size_t payload_length, uint8_t *completion_code,
+    uint8_t *tid, uint16_t *event_id, uint32_t *next_data_transfer_handle,
+    uint8_t *transfer_flag, uint8_t *event_class, uint32_t *event_data_size,
+    uint8_t *event_data, uint32_t *event_data_integrity_checksum)
+{
+
+	if (msg == NULL || completion_code == NULL || tid == NULL ||
+	    event_id == NULL || next_data_transfer_handle == NULL ||
+	    transfer_flag == NULL || event_class == NULL ||
+	    event_data_size == NULL || event_data == NULL ||
+	    event_data_integrity_checksum == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	*completion_code = msg->payload[0];
+	if (PLDM_SUCCESS != *completion_code) {
+		return *completion_code;
+	}
+
+	if (payload_length <
+	    PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_poll_for_platform_event_message_min_resp *min_rsp =
+	    (struct pldm_poll_for_platform_event_message_min_resp *)
+		msg->payload;
+
+	*tid = min_rsp->tid;
+	*event_id = le16toh(min_rsp->event_id);
+
+	if ((*event_id == 0) || (*event_id == 0xffff))
+		return PLDM_SUCCESS;
+
+	if (payload_length < PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_RESP_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_poll_for_platform_event_message_resp *response =
+	    (struct pldm_poll_for_platform_event_message_resp *)msg->payload;
+
+	*next_data_transfer_handle =
+	    le32toh(response->next_data_transfer_handle);
+	*transfer_flag = response->transfer_flag;
+	*event_class = response->event_class;
+	*event_data_size = le32toh(response->event_data_size);
+
+	if (*event_data_size > 0) {
+		memcpy(event_data, response->event_data, *event_data_size);
+	}
+
+	if (*transfer_flag == PLDM_END ||
+	    *transfer_flag == PLDM_START_AND_END) {
+		uint8_t *dst = (uint8_t *)msg->payload;
+		dst +=
+		    (sizeof(struct pldm_poll_for_platform_event_message_resp) -
+		     1 - 4) +
+		    *event_data_size;
+		memcpy(event_data_integrity_checksum, dst, sizeof(uint32_t));
+	}
+
+	return PLDM_SUCCESS;
+}

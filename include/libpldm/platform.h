@@ -35,6 +35,10 @@ extern "C" {
 #define PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES 1
 #define PLDM_EVENT_MESSAGE_SUPPORTED_MIN_RESP_BYTES 4
 
+#define PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES 8
+#define PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES 4
+#define PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_RESP_BYTES 14
+
 /* Minimum response length */
 #define PLDM_GET_PDR_MIN_RESP_BYTES 12
 #define PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES 5
@@ -139,6 +143,7 @@ enum pldm_effecter_oper_state {
 enum pldm_platform_commands {
 	PLDM_SET_EVENT_RECEIVER = 0x04,
 	PLDM_PLATFORM_EVENT_MESSAGE = 0x0A,
+	PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE = 0x0B,
 	PLDM_EVENT_MESSAGE_SUPPORTED = 0x0C,
 	PLDM_EVENT_MESSAGE_BUFFER_SIZE = 0x0D,
 	PLDM_GET_SENSOR_READING = 0x11,
@@ -1005,6 +1010,44 @@ struct pldm_platform_event_message_req {
 	uint8_t event_data[1];
 } __attribute__((packed));
 
+/** @struct pldm_poll_for_platform_event_message_req
+ *
+ *  structure representing PollForPlatformEventMessage command request data
+ */
+struct pldm_poll_for_platform_event_message_req {
+	uint8_t format_version;
+	uint8_t transfer_operation_flag;
+	uint32_t data_transfer_handle;
+	uint8_t event_id_to_acknowledge;
+};
+
+/** @struct pldm_poll_for_platform_event_message_resp
+ *
+ *  structure representing PollForPlatformEventMessage command response data
+ */
+struct pldm_poll_for_platform_event_message_resp {
+	uint8_t completion_code;
+	uint8_t tid;
+	uint16_t event_id;
+	uint32_t next_data_transfer_handle;
+	uint8_t transfer_flag;
+	uint8_t event_class;
+	uint32_t event_data_size;
+	uint8_t event_data[1];
+	uint32_t event_data_integrity_checksum;
+};
+
+/** @struct pldm_poll_for_platform_event_message_min_resp
+ *
+ *  structure representing PollForPlatformEventMessage command response data
+ *  if eventId=0x0000 or 0xffff
+ */
+struct pldm_poll_for_platform_event_message_min_resp {
+	uint8_t completion_code;
+	uint8_t tid;
+	uint16_t event_id;
+};
+
 /** @struct pldm_platform_event_message_response
  *
  *  structure representing PlatformEventMessage command response data
@@ -1607,6 +1650,48 @@ int encode_platform_event_message_req(
     uint8_t instance_id, uint8_t format_version, uint8_t tid,
     uint8_t event_class, const uint8_t *event_data, size_t event_data_length,
     struct pldm_msg *msg, size_t payload_length);
+
+/** @brief Encode PollForPlatformEventMessage request data
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] format_version - Version of the event format
+ *  @param[in] transfer_operation_flag - Tranfer operation
+ *  @param[in] data_transfer_handle - The data transfer handle
+ *  @param[in] event_id_to_acknowledge - the event data to acknowleadge
+ *  @param[out] msg - Request message
+ *  @return pldm_completion_codes
+ *  @note Caller is responsible for memory alloc and dealloc of param
+ *  'msg.payload'
+ */
+int encode_poll_for_platform_event_message_req(uint8_t instance_id,
+					       uint8_t format_version,
+					       uint8_t transfer_operation_flag,
+					       uint32_t data_transfer_handle,
+					       uint16_t event_id_to_acknowledge,
+					       struct pldm_msg *msg,
+					       size_t payload_length);
+
+/** @brief Decode PollForPlatformEventMessage response data
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - Length of Response message payload
+ *  @param[out] completion_code - the completion code
+ *  @param[out] tid - the tid
+ *  @param[out] event_id - The event id
+ *  @param[out] next_data_transfer_handle - The next data transfer handle
+ *  @param[out] transfer_flag - The transfer flag
+ *  @param[out] event_class - The event class
+ *  @param[out] event_data_size - The event data size
+ *  @param[out] event_data - The event data
+ *  @param[out] event_data_integrity_checksum - The checksum
+ *  command
+ *  @return pldm_completion_codes
+ *  @note Caller is responsible for memory alloc and dealloc of param
+ *  'msg.payload'
+ */
+int decode_poll_for_platform_event_message_resp(
+    const struct pldm_msg *msg, size_t payload_length, uint8_t *completion_code,
+    uint8_t *tid, uint16_t *event_id, uint32_t *next_data_transfer_handle,
+    uint8_t *transfer_flag, uint8_t *event_class, uint32_t *event_data_size,
+    uint8_t *event_data, uint32_t *event_data_integrity_checksum);
 
 /** @brief Decode PlatformEventMessage response data
  * @param[in] msg - Request message
