@@ -832,6 +832,86 @@ TEST(GetStateSensorReadings, testBadDecodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
+
+TEST(EventMessageBufferSize, testGoodEventMessageBufferSizeRequest)
+{
+    uint8_t eventBufferSize = 32;
+
+    std::array<uint8_t, hdrSize + PLDM_EVENT_SUPPORTED_REQ_BYTES> requestMsg{};
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_event_message_buffer_size_req(0, eventBufferSize, request);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+}
+
+TEST(EventMessageBufferSize, testBadEventMessageBufferSizeRequest)
+{
+    uint16_t eventBufferSize = 512;
+
+    std::array<uint8_t, hdrSize + PLDM_EVENT_SUPPORTED_REQ_BYTES> requestMsg{};
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_event_message_buffer_size_req(0, eventBufferSize, request);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(EventMessageBufferSize, testGoodEventMessageBufferSizeResponse)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint16_t terminusMaxBufferSize = 256;
+
+    std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_BUFFER_SIZE_RESP_BYTES>
+        responseMsg{};
+
+    uint8_t retCompletionCode;
+    uint16_t retMaxBufferSize = 0;
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_event_message_buffer_size_resp* resp =
+        reinterpret_cast<struct pldm_event_message_buffer_size_resp*>(
+            response->payload);
+
+    resp->completion_code = completionCode;
+    resp->terminus_max_buffer_size = terminusMaxBufferSize;
+
+    auto rc = decode_event_message_buffer_size_resp(
+        response, responseMsg.size() - hdrSize, &retCompletionCode,
+        &retMaxBufferSize);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(retCompletionCode, completionCode);
+    EXPECT_EQ(terminusMaxBufferSize, retMaxBufferSize);
+}
+
+TEST(EventMessageBufferSize, testBadEventMessageBufferSizeResponse)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint16_t terminusMaxBufferSize = 256;
+
+    std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_BUFFER_SIZE_RESP_BYTES>
+        responseMsg{};
+
+    uint8_t retCompletionCode;
+    uint16_t retMaxBufferSize = 0;
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_event_message_buffer_size_resp* resp =
+        reinterpret_cast<struct pldm_event_message_buffer_size_resp*>(
+            response->payload);
+    resp->completion_code = completionCode;
+    resp->terminus_max_buffer_size = terminusMaxBufferSize;
+
+    auto rc =
+        decode_event_message_buffer_size_resp(response, 0, nullptr, nullptr);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_event_message_buffer_size_resp(
+        response, responseMsg.size(), &retCompletionCode, &retMaxBufferSize);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+
 TEST(PlatformEventMessage, testGoodStateSensorDecodeRequest)
 {
     std::array<uint8_t,
