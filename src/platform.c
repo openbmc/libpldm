@@ -1983,3 +1983,118 @@ int encode_set_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
 
 	return PLDM_SUCCESS;
 }
+
+int encode_poll_for_platform_event_message_req(uint8_t instance_id,
+					       uint8_t format_version,
+					       uint8_t transfer_operation_flag,
+					       uint32_t data_transfer_handle,
+					       uint16_t event_id_to_acknowledge,
+					       struct pldm_msg *msg,
+					       size_t payload_length)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length != PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_header_info header = {0};
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	uint8_t *ptr = (uint8_t *)msg;
+	ptr += sizeof(struct pldm_msg_hdr);
+	pldm_pack_data(&ptr, &format_version);
+	pldm_pack_data(&ptr, &transfer_operation_flag);
+	pldm_pack_data(&ptr, &data_transfer_handle);
+	pldm_pack_data(&ptr, &event_id_to_acknowledge);
+
+	return PLDM_SUCCESS;
+}
+
+int decode_poll_for_platform_event_message_resp(
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_poll_for_platform_event_message_resp *resp_value)
+{
+	if (msg == NULL || resp_value == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	uint32_t event_data_offset = 0;
+
+	if (payload_length <
+	    PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc = pldm_msgbuf_init(
+	    buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
+	    msg->payload, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, &resp_value->completion_code);
+	pldm_msgbuf_extract(buf, &resp_value->tid);
+	pldm_msgbuf_extract(buf, &resp_value->event_id);
+
+	if (PLDM_SUCCESS != resp_value->completion_code) {
+		return resp_value->completion_code;
+	}
+
+	if ((resp_value->event_id == 0) || (resp_value->event_id == 0xffff)) {
+		return PLDM_SUCCESS;
+	}
+
+	rc = pldm_msgbuf_init(
+	    buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
+	    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, &resp_value->completion_code);
+	event_data_offset += sizeof(uint8_t);
+	pldm_msgbuf_extract(buf, &resp_value->tid);
+	event_data_offset += sizeof(uint8_t);
+	pldm_msgbuf_extract(buf, &resp_value->event_id);
+	event_data_offset += sizeof(uint16_t);
+	pldm_msgbuf_extract(buf, &resp_value->next_data_transfer_handle);
+	event_data_offset += sizeof(uint32_t);
+	pldm_msgbuf_extract(buf, &resp_value->transfer_flag);
+	event_data_offset += sizeof(uint8_t);
+	pldm_msgbuf_extract(buf, &resp_value->event_class);
+	event_data_offset += sizeof(uint8_t);
+	pldm_msgbuf_extract(buf, &resp_value->event_data_size);
+	event_data_offset += sizeof(uint32_t);
+
+	if (resp_value->event_data_size > 0) {
+		uint8_t *dst = (uint8_t *)msg->payload;
+		dst += event_data_offset;
+		memcpy(resp_value->event_data, dst,
+		       resp_value->event_data_size);
+	}
+
+	if (resp_value->transfer_flag == PLDM_END ||
+	    resp_value->transfer_flag == PLDM_START_AND_END) {
+		int event_data_integrity_checksum;
+		uint8_t *dst = (uint8_t *)msg->payload;
+		dst += event_data_offset + resp_value->event_data_size;
+		memcpy(&event_data_integrity_checksum, dst, sizeof(uint32_t));
+		resp_value->event_data_integrity_checksum =
+		    (const uint32_t)event_data_integrity_checksum;
+	}
+
+	return PLDM_SUCCESS;
+}

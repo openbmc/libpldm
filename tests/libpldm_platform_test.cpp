@@ -1181,6 +1181,214 @@ TEST(PlatformEventMessageSupported, testBadDecodeRespond)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
+/** @struct pldm_poll_for_platform_event_message_req
+ *
+ *  structure representing PollForPlatformEventMessage command request data
+ */
+struct pldm_poll_for_platform_event_message_req_pack
+{
+    uint8_t format_version;
+    uint8_t transfer_operation_flag;
+    uint32_t data_transfer_handle;
+    uint16_t event_id_to_acknowledge;
+} __attribute__((packed));
+
+TEST(PollForPlatformEventMessage, testGoodEncodeRequest)
+{
+    uint8_t formatVersion = 0x01;
+    uint8_t transferOperationFlag = 0x1;
+    uint32_t dataTransferHandle = 0xffffffff;
+    uint16_t eventIdToAcknowledge = 0x0;
+
+    std::array<uint8_t,
+               hdrSize + PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES>
+        requestMsg{};
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_poll_for_platform_event_message_req(
+        0, formatVersion, transferOperationFlag, dataTransferHandle,
+        eventIdToAcknowledge, request,
+        PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES);
+
+    struct pldm_poll_for_platform_event_message_req_pack* req =
+        reinterpret_cast<struct pldm_poll_for_platform_event_message_req_pack*>(
+            request->payload);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(formatVersion, req->format_version);
+    EXPECT_EQ(transferOperationFlag, req->transfer_operation_flag);
+    EXPECT_EQ(dataTransferHandle, req->data_transfer_handle);
+    EXPECT_EQ(eventIdToAcknowledge, req->event_id_to_acknowledge);
+}
+
+TEST(PollForPlatformEventMessage, testBadEncodeRequest)
+{
+    uint8_t formatVersion = 0x01;
+    uint8_t transferOperationFlag = 0x1;
+    uint32_t dataTransferHandle = 0xffffffff;
+    uint16_t eventIdToAcknowledge = 0x0;
+
+    std::array<uint8_t,
+               hdrSize + PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES>
+        requestMsg{};
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_poll_for_platform_event_message_req(
+        0, formatVersion, transferOperationFlag, dataTransferHandle,
+        eventIdToAcknowledge, nullptr,
+        PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    encode_poll_for_platform_event_message_req(
+        0, formatVersion, transferOperationFlag, dataTransferHandle,
+        eventIdToAcknowledge, request, hdrSize);
+}
+
+TEST(PollForPlatformEventMessage, testGoodDecodeRespond)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint8_t tId = 0x9;
+    uint16_t eventId = 159;
+    uint32_t nextDataTransferHandle = 0x11223344;
+    uint8_t transferFlag = PLDM_START_AND_END;
+    uint8_t eventClass = 0x5;
+    [[maybe_unused]] uint8_t eventData[5] = {0x11, 0x22, 0x33, 0x44, 0x55};
+    constexpr uint32_t eventDataSize = 0x00000005;
+    uint32_t eventDataIntegrityChecksum = 0x66778899;
+
+    std::vector<uint8_t> responseMsg{
+        0x1,
+        0x0,
+        0x0,
+        PLDM_SUCCESS,
+        0x9, // tid
+        159,
+        0x0, // event id
+        0x44,
+        0x33,
+        0x22,
+        0x11,               // next_data_transfer_handle
+        PLDM_START_AND_END, // transfer_flag
+        0x05,               // event class
+        0x05,
+        0x00,
+        0x00,
+        0x00, // event_data_size
+        0x55,
+        0x44,
+        0x33,
+        0x22,
+        0x11, // event_data[5]
+        0x99,
+        0x88,
+        0x77,
+        0x66 // event_data_integrity_checksum
+    };
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    struct pldm_poll_for_platform_event_message_resp decodeResponseData = {};
+    auto rc = decode_poll_for_platform_event_message_resp(
+        response, responseMsg.size() - hdrSize, &decodeResponseData);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, decodeResponseData.completion_code);
+    EXPECT_EQ(tId, decodeResponseData.tid);
+    EXPECT_EQ(eventId, decodeResponseData.event_id);
+    EXPECT_EQ(nextDataTransferHandle,
+              decodeResponseData.next_data_transfer_handle);
+    EXPECT_EQ(transferFlag, decodeResponseData.transfer_flag);
+    EXPECT_EQ(eventClass, decodeResponseData.event_class);
+    EXPECT_EQ(eventDataSize, decodeResponseData.event_data_size);
+    // EXPECT_EQ(0,
+    //           memcmp(eventData, decodeResponseData.event_data,
+    //           eventDataSize));
+    EXPECT_EQ(eventDataIntegrityChecksum,
+              decodeResponseData.event_data_integrity_checksum);
+}
+
+TEST(PollForPlatformEventMessage, testGoodDecodeAckOnlyRespond)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint8_t tId = 0x9;
+    uint16_t eventId = 0xffff;
+
+    std::vector<uint8_t> responseMsg{
+        0x1,  0x0, 0x0, PLDM_SUCCESS,
+        0x9, // tid
+        0xff,
+        0xff // event id
+    };
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    struct pldm_poll_for_platform_event_message_resp decodeResponseData = {};
+    auto rc = decode_poll_for_platform_event_message_resp(
+        response, responseMsg.size() - hdrSize, &decodeResponseData);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, decodeResponseData.completion_code);
+    EXPECT_EQ(tId, decodeResponseData.tid);
+    EXPECT_EQ(eventId, decodeResponseData.event_id);
+
+    eventId = 0x0000;
+    responseMsg[5] = 0x00;
+    responseMsg[6] = 0x00;
+    response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    rc = decode_poll_for_platform_event_message_resp(
+        response, responseMsg.size() - hdrSize, &decodeResponseData);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, decodeResponseData.completion_code);
+    EXPECT_EQ(tId, decodeResponseData.tid);
+    EXPECT_EQ(eventId, decodeResponseData.event_id);
+}
+
+TEST(PollForPlatformEventMessage, testBadDecodeRespond)
+{
+    std::vector<uint8_t> responseMsg{
+        0x1,
+        0x0,
+        0x0,
+        PLDM_SUCCESS,
+        0x9, // tid
+        159,
+        0x0, // event id
+        0x44,
+        0x33,
+        0x22,
+        0x11,               // next_data_transfer_handle
+        PLDM_START_AND_END, // transfer_flag
+        0x05,               // event class
+        0x05,
+        0x00,
+        0x00,
+        0x00, // event_data_size
+        0x55,
+        0x44,
+        0x33,
+        0x22,
+        0x11, // event_data[5]
+        0x99,
+        0x88,
+        0x77,
+        0x66 // event_data_integrity_checksum
+    };
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    struct pldm_poll_for_platform_event_message_resp decodeResponseData = {};
+    auto rc = decode_poll_for_platform_event_message_resp(nullptr, 0,
+                                                          &decodeResponseData);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_poll_for_platform_event_message_resp(
+        response, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES - 1,
+        &decodeResponseData);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+
 TEST(PlatformEventMessage, testGoodStateSensorDecodeRequest)
 {
     std::array<uint8_t,
