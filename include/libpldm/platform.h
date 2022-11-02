@@ -26,6 +26,11 @@ extern "C" {
 #define PLDM_GET_PDR_REQ_BYTES 13
 
 #define PLDM_SET_EVENT_RECEIVER_RESP_BYTES 1
+
+/* Platform event supported request */
+#define PLDM_EVENT_MESSAGE_BUFFER_SIZE_REQ_BYTES 2
+#define PLDM_EVENT_MESSAGE_BUFFER_SIZE_RESP_BYTES 3
+
 /* Minimum response length */
 #define PLDM_GET_PDR_MIN_RESP_BYTES 12
 #define PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES 5
@@ -115,6 +120,8 @@ enum pldm_effecter_oper_state {
 
 enum pldm_platform_commands {
 	PLDM_SET_EVENT_RECEIVER = 0x04,
+	PLDM_PLATFORM_EVENT_MESSAGE = 0x0A,
+	PLDM_EVENT_MESSAGE_BUFFER_SIZE = 0xD,
 	PLDM_GET_SENSOR_READING = 0x11,
 	PLDM_GET_STATE_SENSOR_READINGS = 0x21,
 	PLDM_SET_NUMERIC_EFFECTER_VALUE = 0x31,
@@ -122,7 +129,6 @@ enum pldm_platform_commands {
 	PLDM_SET_STATE_EFFECTER_STATES = 0x39,
 	PLDM_GET_PDR_REPOSITORY_INFO = 0x50,
 	PLDM_GET_PDR = 0x51,
-	PLDM_PLATFORM_EVENT_MESSAGE = 0x0A
 };
 
 /** @brief PLDM PDR types
@@ -745,6 +751,23 @@ struct pldm_set_event_receiver_req {
 	uint8_t transport_protocol_type;
 	uint8_t event_receiver_address_info;
 	uint16_t heartbeat_timer;
+} __attribute__((packed));
+
+/** @struct pldm_event_message_buffer_size_req
+ *
+ *  Structure representing EventMessageBufferSizes command request data
+ */
+struct pldm_event_message_buffer_size_req {
+	uint16_t event_receiver_max_buffer_size;
+} __attribute__((packed));
+
+/** @struct pldm_event_message_buffer_size_resp
+ *
+ *  Structure representing EventMessageBufferSizes command response data
+ */
+struct pldm_event_message_buffer_size_resp {
+	uint8_t completion_code;
+	uint16_t terminus_max_buffer_size;
 } __attribute__((packed));
 
 /** @struct pldm_set_numeric_effecter_value_req
@@ -1417,6 +1440,29 @@ int decode_platform_event_message_resp(const struct pldm_msg *msg,
 				       size_t payload_length,
 				       uint8_t *completion_code,
 				       uint8_t *platform_event_status);
+
+/** @brief Decode EventMessageBufferSize response data
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - Length of Response message payload
+ *  @param[out] completion_code - PLDM completion code
+ *  @return pldm_completion_codes
+ */
+int decode_event_message_buffer_size_resp(const struct pldm_msg *msg,
+					  size_t payload_length,
+					  uint8_t *completion_code,
+					  uint16_t *terminus_max_buffer_size);
+
+/** @brief Encode EventMessageBufferSize request data
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] event_receiver_max_buffer_size - Max buffer size
+ *  @param[out] msg - Request message
+ *  @return pldm_completion_codes
+ *  @note Caller is responsible for memory alloc and dealloc of param
+ *  'msg.payload'
+ */
+int encode_event_message_buffer_size_req(
+    uint8_t instance_id, uint16_t event_receiver_max_buffer_size,
+    struct pldm_msg *msg);
 
 /** @brief Decode sensorEventData response data
  *
