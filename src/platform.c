@@ -922,6 +922,59 @@ int decode_platform_event_message_resp(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
+int encode_event_message_buffer_size_req(
+    uint8_t instance_id, uint16_t event_receiver_max_buffer_size,
+    struct pldm_msg *msg)
+{
+	if (event_receiver_max_buffer_size >
+	    PLDM_EVENT_MESSAGE_BUFFER_MAX_BUFFER_SIZE) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = {0};
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_EVENT_MESSAGE_BUFFER_SIZE;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_event_message_buffer_size_req *request =
+	    (struct pldm_event_message_buffer_size_req *)msg->payload;
+	request->buffer_size = event_receiver_max_buffer_size;
+
+	return PLDM_SUCCESS;
+}
+
+int decode_event_message_buffer_size_resp(const struct pldm_msg *msg,
+					  size_t payload_length,
+					  uint8_t *completion_code,
+					  uint16_t *terminus_max_buffer_size)
+{
+	if (msg == NULL || completion_code == NULL ||
+	    terminus_max_buffer_size == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	*completion_code = msg->payload[0];
+	if (PLDM_SUCCESS != *completion_code) {
+		return PLDM_SUCCESS;
+	}
+	if (payload_length != PLDM_EVENT_MESSAGE_BUFFER_SIZE_RESP_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_event_message_buffer_size_resp *response =
+	    (struct pldm_event_message_buffer_size_resp *)msg->payload;
+
+	*terminus_max_buffer_size = response->terminus_max_buffer_size;
+
+	return PLDM_SUCCESS;
+}
+
 int decode_sensor_event_data(const uint8_t *event_data,
 			     size_t event_data_length, uint16_t *sensor_id,
 			     uint8_t *sensor_event_class_type,
