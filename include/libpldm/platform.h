@@ -640,6 +640,38 @@ struct state_effecter_possible_states {
 	bitfield8_t states[1];
 } __attribute__((packed));
 
+/** @struct pldm_effecter_name_string
+ *
+ *  Structure representing each effect string name (name language tag, effecter
+ *  name string)
+ */
+struct pldm_effecter_name_string {
+	uint8_t name_language_tag[1];
+	uint8_t effecter_name[1];
+} __attribute__((packed));
+
+/** @struct pldm_effecter_name
+ *
+ *  Structure representing each effect name (name string count, name language
+ *  tags, effecter name strings)
+ */
+struct pldm_effecter_name {
+	uint8_t name_string_count;
+	struct pldm_effecter_name_string name_strings[1];
+} __attribute__((packed));
+
+/** @struct pldm_effecter_aux_name_pdr
+ *
+ *  Structure representing PLDM aux name numeric effecter value PDR
+ */
+struct pldm_effecter_aux_name_pdr {
+	struct pldm_pdr_hdr hdr;
+	uint16_t terminus_handle;
+	uint16_t effecter_id;
+	uint8_t effecter_count;
+	struct pldm_effecter_name effecter_names[1];
+} __attribute__((packed));
+
 /** @brief Encode PLDM state effecter PDR
  *
  * @param[in/out] effecter               Structure to encode. All members of
