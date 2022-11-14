@@ -22,6 +22,70 @@
       },
       "revId": "a1ebd53f793bd43d6ee8bbe13703ece8b7d3e5d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e4b1e65_3a5b7204",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-14T15:24:55Z",
+      "side": 1,
+      "message": "+1, its good to add the spec number, spec version number \u0026 also table number, so that it\u0027s easy for people without pldm knowledge to understand what this commit does just by looking at the commit message.",
+      "parentUuid": "95dee549_31523ace",
+      "range": {
+        "startLine": 9,
+        "startChar": 57,
+        "endLine": 9,
+        "endChar": 61
+      },
+      "revId": "a1ebd53f793bd43d6ee8bbe13703ece8b7d3e5d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6c08cbe_ba4989b1",
+        "filename": "src/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-14T15:24:55Z",
+      "side": 1,
+      "message": "check for repository state {available, updateinprogress, failed} - anything other than this set should be returned a PLDM_ERROR_INVALID_DATA.",
+      "revId": "a1ebd53f793bd43d6ee8bbe13703ece8b7d3e5d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a96e106c_d4014ad9",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-14T15:24:55Z",
+      "side": 1,
+      "message": "please also add the test case for repositoryState - bad path",
+      "range": {
+        "startLine": 525,
+        "startChar": 2,
+        "endLine": 529,
+        "endChar": 43
+      },
+      "revId": "a1ebd53f793bd43d6ee8bbe13703ece8b7d3e5d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
