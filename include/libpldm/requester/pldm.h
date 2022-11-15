@@ -44,6 +44,10 @@ pldm_requester_rc_t pldm_open(void);
  * @param[in] mctp_fd - MCTP socket fd
  * @param[in] pldm_req_msg - caller owned pointer to PLDM request msg
  * @param[in] req_msg_len - size of PLDM request msg
+ * @param[in] num_retries - number of retries to send and wait for response.
+ *            Send -1 for unset value.
+ * @param[in] response_time_out - wait for response time out in miliseconds.
+ *            Send -1 for unset value.
  * @param[out] pldm_resp_msg - *pldm_resp_msg will point to PLDM response msg,
  *             this function allocates memory, caller to free(*pldm_resp_msg) on
  *             success.
@@ -52,10 +56,10 @@ pldm_requester_rc_t pldm_open(void);
  *
  * @return pldm_requester_rc_t (errno may be set)
  */
-pldm_requester_rc_t pldm_send_recv(mctp_eid_t eid, int mctp_fd,
-				   const uint8_t *pldm_req_msg,
-				   size_t req_msg_len, uint8_t **pldm_resp_msg,
-				   size_t *resp_msg_len);
+pldm_requester_rc_t
+pldm_send_recv(mctp_eid_t eid, int mctp_fd, const uint8_t *pldm_req_msg,
+	       size_t req_msg_len, int num_retries, int response_time_out,
+	       uint8_t **pldm_resp_msg, size_t *resp_msg_len);
 
 /**
  * @brief Send a PLDM request message, don't wait for response. Essentially an
