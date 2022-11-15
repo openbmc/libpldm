@@ -95,6 +95,8 @@ pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
  * 	      minimum size of a PLDM msg PLDM_REQUESTER_NOT_REQ_MSG is returned.
  * 	      Otherwise, if this is not the correct length of the PLDM msg,
  * 	      behaviour is undefined.
+ * @param[in] num_retries - number of retries to send and wait for response
+ * @param[in] response_time_out - wait for response time out in miliseconds
  * @param[out] pldm_resp_msg - *pldm_resp_msg will point to PLDM response msg if
  * 	       return code is PLDM_REQUESTER_SUCCESS; otherwise, NULL. On
  * 	       success this function allocates memory, caller to
@@ -108,6 +110,7 @@ pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
 pldm_requester_rc_t
 pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			     const void *pldm_req_msg, size_t req_msg_len,
+			     int num_retries, int response_time_out,
 			     void **pldm_resp_msg, size_t *resp_msg_len);
 
 #ifdef __cplusplus

@@ -7,6 +7,7 @@
 #include <poll.h>
 #endif
 #include <stdlib.h>
+#include <time.h>
 #include <unistd.h>
 
 #ifndef PLDM_HAS_POLL
@@ -101,28 +102,56 @@ pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
 pldm_requester_rc_t
 pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			     const void *pldm_req_msg, size_t req_msg_len,
+			     int num_retries, int response_time_out,
 			     void **pldm_resp_msg, size_t *resp_msg_len)
 
 {
+	int i = 0;
+	pldm_requester_rc_t rc;
+	struct timespec now;
+	uint64_t milliSec;
+	int interval = 0;
+
+	if (num_retries < 0)
+	{
+		num_retries = 0;
+	}
+
+	if (response_time_out <= 0)
+	{
+		response_time_out = -1;
+	}
+
 	if (!resp_msg_len) {
 		return PLDM_REQUESTER_INVALID_SETUP;
 	}
-
-	pldm_requester_rc_t rc = pldm_transport_send_msg(
-		transport, tid, pldm_req_msg, req_msg_len);
-	if (rc != PLDM_REQUESTER_SUCCESS) {
-		return rc;
-	}
-
-	while (1) {
-		rc = pldm_transport_poll(transport, -1);
+	while (i < (num_retries + 1)) {
+		rc =
+			pldm_transport_send_msg(transport, tid, pldm_req_msg, req_msg_len);
 		if (rc != PLDM_REQUESTER_SUCCESS) {
-			break;
+			return rc;
 		}
-		rc = pldm_transport_recv_msg(transport, tid, pldm_resp_msg,
-					     resp_msg_len);
-		if (rc == PLDM_REQUESTER_SUCCESS) {
-			break;
+
+		timespec_get(&now, TIME_UTC);
+		milliSec = now.tv_sec * 1000 + now.tv_nsec / 1000000;
+
+		while (1) {
+			rc = pldm_transport_poll(transport, response_time_out);
+			if (rc != PLDM_REQUESTER_SUCCESS) {
+				break;
+			}
+			rc = pldm_transport_recv_msg(transport, tid, pldm_resp_msg,
+							 resp_msg_len);
+			if (rc == PLDM_REQUESTER_SUCCESS) {
+				break;
+			}
+
+			timespec_get(&now, TIME_UTC);
+			interval = (int)(now.tv_sec * 1000 + now.tv_nsec / 1000000 -
+							 milliSec);
+			if (interval >= response_time_out) {
+				break;
+			}
 		}
 	}
 

@@ -110,11 +110,13 @@ pldm_requester_rc_t pldm_recv(mctp_eid_t eid, int mctp_fd,
 
 pldm_requester_rc_t pldm_send_recv(mctp_eid_t eid, int mctp_fd,
 				   const uint8_t *pldm_req_msg,
-				   size_t req_msg_len, uint8_t **pldm_resp_msg,
+				   size_t req_msg_len, int num_retries,
+				   int response_time_out, uint8_t **pldm_resp_msg,
 				   size_t *resp_msg_len)
 {
 	PLDM_REQ_FN(eid, mctp_fd, pldm_transport_send_recv_msg, pldm_req_msg,
-		    req_msg_len, (void **)pldm_resp_msg, resp_msg_len);
+		    req_msg_len, num_retries, response_time_out,
+		    (void **)pldm_resp_msg, resp_msg_len);
 }
 
 pldm_requester_rc_t pldm_send(mctp_eid_t eid, int mctp_fd,
