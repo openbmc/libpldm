@@ -3,11 +3,20 @@
 #include "libpldm/requester/pldm.h"
 #include "transport.h"
 
+#include <errno.h>
 #ifdef PLDM_HAS_POLL
 #include <poll.h>
 #endif
 #include <stdlib.h>
+#include <sys/time.h>
+#include <time.h>
 #include <unistd.h>
+
+/**
+ * Section "Requirements for requesters" in DSP0240, define the Time-out waiting
+ * for a response of the requester. PT2max = PT3min - 2*PT4max = 4800ms
+*/
+#define PLDM_MAX_RESPONSE_TIME_OUT 4800
 
 #ifndef PLDM_HAS_POLL
 struct pollfd {
@@ -98,24 +107,58 @@ pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
 	return PLDM_REQUESTER_SUCCESS;
 }
 
+static void timespec_to_timeval(const struct timespec *ts, struct timeval *tv)
+{
+	tv->tv_sec = ts->tv_sec;
+	tv->tv_usec = ts->tv_nsec / 1000;
+}
+
+static int clock_gettimeval(clockid_t clockid, struct timeval *tv)
+{
+	struct timespec now;
+	int rc;
+
+	rc = clock_gettime(clockid, &now);
+	if (rc < 0) {
+		return rc;
+	}
+
+	timespec_to_timeval(&now, tv);
+
+	return 0;
+}
+
 pldm_requester_rc_t
 pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			     const void *pldm_req_msg, size_t req_msg_len,
 			     void **pldm_resp_msg, size_t *resp_msg_len)
 
 {
+	struct timeval nowval;
+	struct timeval endval;
+    pldm_requester_rc_t rc;
+	int ret;
+	static const struct timeval max_response_interval = {
+		.tv_sec = 4, .tv_usec = 800000
+	};
+
 	if (!resp_msg_len) {
 		return PLDM_REQUESTER_INVALID_SETUP;
 	}
 
-	pldm_requester_rc_t rc = pldm_transport_send_msg(
-		transport, tid, pldm_req_msg, req_msg_len);
+	rc = pldm_transport_send_msg(transport, tid, pldm_req_msg, req_msg_len);
 	if (rc != PLDM_REQUESTER_SUCCESS) {
 		return rc;
 	}
 
-	while (1) {
-		rc = pldm_transport_poll(transport, -1);
+	ret = clock_gettimeval(CLOCK_MONOTONIC, &nowval);
+	if (ret < 0) {
+		return -errno;
+	}
+	timeradd(&nowval, &max_response_interval, &endval);
+
+	do {
+		rc = pldm_transport_poll(transport, PLDM_MAX_RESPONSE_TIME_OUT);
 		if (rc != PLDM_REQUESTER_SUCCESS) {
 			break;
 		}
@@ -124,7 +167,11 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		if (rc == PLDM_REQUESTER_SUCCESS) {
 			break;
 		}
-	}
+		ret = clock_gettimeval(CLOCK_MONOTONIC, &nowval);
+		if (ret < 0) {
+			continue;
+		}
+	} while (!timercmp(&nowval, &endval, <));
 
 	return rc;
 }
