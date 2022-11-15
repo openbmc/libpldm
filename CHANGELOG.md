@@ -28,3 +28,4 @@ Change categories:
 ### Fixed
 
 1. requester: Make pldm_open() return existing fd
+2. transport: Prevent sticking in waiting for response
