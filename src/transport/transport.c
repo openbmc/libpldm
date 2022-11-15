@@ -3,10 +3,12 @@
 #include "libpldm/requester/pldm.h"
 #include "transport.h"
 
+#include <errno.h>
 #ifdef PLDM_HAS_POLL
 #include <poll.h>
 #endif
 #include <stdlib.h>
+#include <time.h>
 #include <unistd.h>
 
 #ifndef PLDM_HAS_POLL
@@ -104,6 +106,10 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			     void **pldm_resp_msg, size_t *resp_msg_len)
 
 {
+	struct timespec now;
+	uint64_t milliSec;
+	int interval = 0;
+
 	if (!resp_msg_len) {
 		return PLDM_REQUESTER_INVALID_SETUP;
 	}
@@ -114,8 +120,11 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		return rc;
 	}
 
+	timespec_get(&now, TIME_UTC);
+	milliSec = now.tv_sec * 1000 + now.tv_nsec / 1000000;
+
 	while (1) {
-		rc = pldm_transport_poll(transport, -1);
+		rc = pldm_transport_poll(transport, PLDM_MAX_RESPONSE_TIME_OUT);
 		if (rc != PLDM_REQUESTER_SUCCESS) {
 			break;
 		}
@@ -123,6 +132,13 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 					     resp_msg_len);
 		if (rc == PLDM_REQUESTER_SUCCESS) {
 			break;
+		}
+
+		timespec_get(&now, TIME_UTC);
+		interval = (int)(now.tv_sec * 1000 +
+				 now.tv_nsec / 1000000 - milliSec);
+		if (interval >= PLDM_MAX_RESPONSE_TIME_OUT) {
+			return -ETIMEDOUT;
 		}
 	}
 

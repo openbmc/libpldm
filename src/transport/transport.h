@@ -10,6 +10,12 @@ extern "C" {
 struct pollfd;
 
 /**
+ * Section "Requirements for requesters" in DSP0240, define the Time-out waiting
+ * for a response of the requester. PT2max = PT3min - 2*PT4max = 4600ms
+*/
+#define PLDM_MAX_RESPONSE_TIME_OUT      4600
+
+/**
  * @brief Generic PLDM transport struct
  *
  * @var name - name of the transport
