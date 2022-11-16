@@ -872,6 +872,49 @@ int decode_platform_event_message_req(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
+int decode_poll_for_platform_event_message_req(
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_poll_for_platform_event_message_req *req_value)
+{
+	if (msg == NULL || req_value == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length < PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+	rc = pldm_msgbuf_init(buf,
+			      PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, &req_value->format_version);
+	pldm_msgbuf_extract(buf, &req_value->transfer_operation_flag);
+
+	if (req_value->transfer_operation_flag > PLDM_ACKNOWLEDGEMENT_ONLY) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	pldm_msgbuf_extract(buf, &req_value->data_transfer_handle);
+	pldm_msgbuf_extract(buf, &req_value->event_id_to_acknowledge);
+
+	if (((req_value->transfer_operation_flag == PLDM_GET_NEXTPART) &&
+	     (req_value->event_id_to_acknowledge == 0xFFFF)) ||
+	    ((req_value->transfer_operation_flag == PLDM_GET_FIRSTPART) &&
+	     (req_value->event_id_to_acknowledge == 0x000)) ||
+	    (req_value->transfer_operation_flag == PLDM_ACKNOWLEDGEMENT_ONLY)) {
+		return PLDM_SUCCESS;
+	}
+
+	return PLDM_ERROR_INVALID_DATA;
+}
+
 int encode_platform_event_message_resp(uint8_t instance_id,
 				       uint8_t completion_code,
 				       uint8_t platform_event_status,
@@ -900,6 +943,53 @@ int encode_platform_event_message_resp(uint8_t instance_id,
 	    (struct pldm_platform_event_message_resp *)msg->payload;
 	response->completion_code = completion_code;
 	response->platform_event_status = platform_event_status;
+
+	return PLDM_SUCCESS;
+}
+
+int encode_poll_for_platform_event_message_resp(
+    uint8_t instance_id, uint8_t completion_code, uint8_t tid,
+    uint16_t event_id, uint32_t next_data_transfer_handle,
+    uint8_t transfer_flag, uint8_t event_class, uint32_t event_data_size,
+    uint8_t *event_data, uint32_t checksum, struct pldm_msg *msg)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = {0};
+	header.msg_type = PLDM_RESPONSE;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_poll_for_platform_event_message_resp *response =
+	    (struct pldm_poll_for_platform_event_message_resp *)msg->payload;
+	response->completion_code = completion_code;
+	response->tid = tid;
+	response->event_id = htole16(event_id);
+	response->next_data_transfer_handle =
+	    htole32(next_data_transfer_handle);
+	response->transfer_flag = transfer_flag;
+	response->event_class = event_class;
+	response->event_data_size = htole32(event_data_size);
+	memcpy(response->event_data, event_data, event_data_size);
+
+	// add the checksum at the end
+	if (transfer_flag == PLDM_END || transfer_flag == PLDM_START_AND_END) {
+		uint8_t *dst = msg->payload;
+		// calculate the offset of checksum
+		dst +=
+		    (sizeof(struct pldm_poll_for_platform_event_message_resp) -
+		     PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_CHECKSUM_BYTES - 1) +
+		    event_data_size;
+		memcpy(dst, &checksum, sizeof(uint32_t));
+	}
 
 	return PLDM_SUCCESS;
 }
