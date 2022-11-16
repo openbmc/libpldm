@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Added
+
+1. Add encode/decode pldmMessagePollEvent data
+
 ### Changed
 
 1. include: Move installed transport.h under libpldm/
