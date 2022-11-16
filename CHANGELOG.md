@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Added
+
+1. Add encode/decode pldmMessagePollEvent data
+
 ### Fixed
 
 1. requester: Make pldm_open() return existing fd
