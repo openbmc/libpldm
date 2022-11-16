@@ -451,6 +451,22 @@ static inline int pldm_pack_int8(uint8_t **dst, const int8_t *src)
 		 : pldm_pack_uint32, int32_t                                   \
 		 : pldm_pack_int32)(dst, src)
 
+static inline int pldm_package_array_uint8(uint8_t **dst, const uint8_t *src,
+					   size_t size)
+{
+	if (!dst) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	memcpy(*dst, src, size);
+	*dst += size;
+
+	return PLDM_SUCCESS;
+}
+
+#define pldm_package_array(dst, src, size)                                     \
+	_Generic((*(src)), uint8_t : pldm_package_array_uint8)(dst, src, size)
+
 #ifdef __cplusplus
 }
 #endif
