@@ -1855,6 +1855,71 @@ int decode_pldm_pdr_repository_chg_event_data(const uint8_t *event_data,
 	return pldm_msgbuf_destroy(buf);
 }
 
+int decode_pldm_message_poll_event_data(const uint8_t *event_data,
+					size_t event_data_length,
+					uint8_t *format_version,
+					uint16_t *event_id,
+					uint32_t *data_transfer_handle)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (event_data == NULL || format_version == NULL || event_id == NULL ||
+	    data_transfer_handle == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init(buf, PLDM_MSG_POLL_EVENT_LENGTH, event_data,
+			      event_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, format_version);
+	rc = pldm_msgbuf_extract(buf, event_id);
+	if (rc) {
+		return rc;
+	}
+
+	if (*event_id == 0x0000 || *event_id == 0xffff) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	pldm_msgbuf_extract(buf, data_transfer_handle);
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+int encode_pldm_message_poll_event_data(uint8_t format_version,
+					uint16_t event_id,
+					uint32_t data_transfer_handle,
+					uint8_t *event_data,
+					size_t event_data_length)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (event_data == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (event_id == 0x0000 || event_id == 0xffff) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init(buf, PLDM_MSG_POLL_EVENT_LENGTH, event_data,
+			      event_data_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, format_version);
+	pldm_msgbuf_insert(buf, event_id);
+	pldm_msgbuf_insert(buf, data_transfer_handle);
+
+	return pldm_msgbuf_destroy(buf);
+}
 int decode_pldm_pdr_repository_change_record_data(
 	const uint8_t *change_record_data, size_t change_record_data_size,
 	uint8_t *event_data_operation, uint8_t *number_of_change_entries,

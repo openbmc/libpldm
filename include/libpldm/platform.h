@@ -52,6 +52,11 @@ extern "C" {
 #define PLDM_PLATFORM_EVENT_MESSAGE_STATE_SENSOR_STATE_REQ_BYTES 6
 #define PLDM_PLATFORM_EVENT_MESSAGE_RESP_BYTES			 2
 #define PLDM_PLATFORM_EVENT_MESSAGE_FORMAT_VERSION		 1
+#define PLDM_PLATFORM_EVENT_MESSAGE_EVENT_ID			 2
+#define PLDM_PLATFORM_EVENT_MESSAGE_TRANFER_HANDLE		 4
+
+/* Minumum length of senson event data */
+#define PLDM_MSG_POLL_EVENT_LENGTH				7
 
 /* Minumum length of senson event data */
 #define PLDM_SENSOR_EVENT_DATA_MIN_LENGTH			 5
@@ -1937,6 +1942,41 @@ int decode_pldm_pdr_repository_chg_event_data(
 	const uint8_t *event_data, size_t event_data_size,
 	uint8_t *event_data_format, uint8_t *number_of_change_records,
 	size_t *change_record_data_offset);
+
+/** @brief Decode pldmMessagePollEvent event data type
+ *
+ *  @param[in] event_data - event data from the response message
+ *  @param[in] event_data_length - length of the event data
+ *  @param[out] format_version - Version of the event format
+ *  @param[out] event_id - The event id
+ *  @param[out] data_transfer_handle - The data transfer handle
+ *  should be read from event data
+ *  @return pldm_completion_codes
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'event_data'
+ */
+int decode_pldm_message_poll_event_data(const uint8_t *event_data,
+					size_t event_data_length,
+					uint8_t *format_version,
+					uint16_t *event_id,
+					uint32_t *data_transfer_handle);
+
+/** @brief Encode pldmMessagePollEvent event data type
+ *
+ *  @param[in] format_version - Version of the event format
+ *  @param[in] event_id - The event id
+ *  @param[in] data_transfer_handle - The data transfer handle
+ *  @param[out] event_data - event data to the response message
+ *  @param[in] event_data_length - length of the event data
+ *  @return pldm_completion_codes
+ *  @note The caller is responsible for allocating and deallocating the
+ *        event_data
+ */
+int encode_pldm_message_poll_event_data(uint8_t format_version,
+					uint16_t event_id,
+					uint32_t data_transfer_handle,
+					uint8_t *event_data,
+					size_t event_data_length);
 
 /** @brief Encode PLDM PDR Repository Change eventData
  *  @param[in] event_data_format - Format of this event data (e.g.
