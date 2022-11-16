@@ -1511,6 +1511,21 @@ int decode_platform_event_message_req(const struct pldm_msg *msg,
 				      uint8_t *event_class,
 				      size_t *event_data_offset);
 
+/** @brief Decode PollForPlatformEventMessage request data
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] format_version - Version of the event format
+ *  @param[out] transfer_operation_flag - The transfer operation flag
+ *  @param[out] data_transfer_handle - The data transfer handle
+ *  @param[out] event_id_to_acknowledge - The class of event being sent
+ *  from pldm msg
+ *  @return pldm_completion_codes
+ */
+int decode_poll_for_platform_event_message_req(
+    const struct pldm_msg *msg, size_t payload_length, uint8_t *format_version,
+    uint8_t *transfer_operation_flag, uint32_t *data_transfer_handle,
+    uint16_t *event_id_to_acknowledge);
+
 /** @brief Encode PlatformEventMessage response data
  *  @param[in] instance_id - Message's instance id
  *  @param[in] completion_code - PLDM completion code
@@ -1525,6 +1540,28 @@ int encode_platform_event_message_resp(uint8_t instance_id,
 				       uint8_t completion_code,
 				       uint8_t platform_event_status,
 				       struct pldm_msg *msg);
+
+/** @brief Encode PollForPlatformEventMessage response data
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] completion_code - PLDM completion code
+ *  @param[in] tid - Terminus ID
+ *  @param[out] event_id - The event id
+ *  @param[out] next_data_transfer_handle - The next data transfer handle
+ *  @param[out] transfer_flag - The transfer flag
+ *  @param[out] event_class - The event class
+ *  @param[out] event_data_size - The event data size
+ *  @param[out] event_data - The event data
+ *  @param[out] checksum - The checksum
+ *  @param[out] msg - Message will be written to this
+ *  @return pldm_completion_codes
+ *  @note Caller is responsible for memory alloc and dealloc of param
+ *  'msg.payload'
+ */
+int encode_poll_for_platform_event_message_resp(
+    uint8_t instance_id, uint8_t completion_code, uint8_t tid,
+    uint16_t event_id, uint32_t next_data_transfer_handle,
+    uint8_t transfer_flag, uint8_t event_class, uint32_t event_data_size,
+    uint8_t *event_data, uint32_t checksum, struct pldm_msg *msg);
 
 /** @brief Encode PlatformEventMessage request data
  * @param[in] instance_id - Message's instance id
