@@ -47,6 +47,8 @@ extern "C" {
 #define PLDM_PLATFORM_EVENT_MESSAGE_STATE_SENSOR_STATE_REQ_BYTES 6
 #define PLDM_PLATFORM_EVENT_MESSAGE_RESP_BYTES 2
 #define PLDM_PLATFORM_EVENT_MESSAGE_FORMAT_VERSION 1
+#define PLDM_PLATFORM_EVENT_MESSAGE_EVENT_ID 2
+#define PLDM_PLATFORM_EVENT_MESSAGE_TRANFER_HANDLE 4
 
 /* Minumum length of senson event data */
 #define PLDM_SENSOR_EVENT_DATA_MIN_LENGTH 5
@@ -61,6 +63,8 @@ extern "C" {
 /* Minimum length of data for pldmPDRRepositoryChgEvent */
 #define PLDM_PDR_REPOSITORY_CHG_EVENT_MIN_LENGTH 2
 #define PLDM_PDR_REPOSITORY_CHANGE_RECORD_MIN_LENGTH 2
+
+#define PLDM_MSG_POLL_EVENT_LENGTH 7
 
 #define PLDM_INVALID_EFFECTER_ID 0xFFFF
 #define PLDM_TID_RESERVED 0xFF
@@ -919,6 +923,16 @@ struct pldm_pdr_repository_chg_event_data {
 	uint8_t change_records[1];
 } __attribute__((packed));
 
+/** @struct pldm_msg_poll_event_data
+ *
+ *  structure representing pldm_msg_poll_event_data class eventData
+ */
+struct pldm_msg_poll_event_data {
+	uint8_t format_version;
+	uint16_t event_id;
+	uint32_t data_transfer_handle;
+} __attribute__((packed));
+
 /** @struct pldm_pdr_repository_chg_event_change_record_data
  *
  *  structure representing pldmPDRRepositoryChgEvent class eventData's change
@@ -1698,6 +1712,12 @@ int decode_pldm_pdr_repository_chg_event_data(
     const uint8_t *event_data, size_t event_data_size,
     uint8_t *event_data_format, uint8_t *number_of_change_records,
     size_t *change_record_data_offset);
+
+int decode_pldm_message_poll_event_data(const uint8_t *event_data,
+					size_t event_data_size,
+					uint8_t *format_version,
+					uint16_t *event_id,
+					uint32_t *data_transfer_handle);
 
 /** @brief Encode PLDM PDR Repository Change eventData
  *  @param[in] event_data_format - Format of this event data (e.g.

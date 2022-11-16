@@ -1531,6 +1531,36 @@ int decode_pldm_pdr_repository_chg_event_data(const uint8_t *event_data,
 	return PLDM_SUCCESS;
 }
 
+int decode_pldm_message_poll_event_data(const uint8_t *event_data,
+					size_t event_data_size,
+					uint8_t *format_version,
+					uint16_t *event_id,
+					uint32_t *data_transfer_handle)
+{
+	if (event_data == NULL || format_version == NULL || event_id == NULL ||
+	    data_transfer_handle == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (event_data_size < PLDM_MSG_POLL_EVENT_LENGTH) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_msg_poll_event_data *msg_poll_event_data =
+	    (struct pldm_msg_poll_event_data *)event_data;
+
+	if (msg_poll_event_data->event_id == 0x0000 ||
+	    msg_poll_event_data->event_id == 0xffff) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	*format_version = msg_poll_event_data->format_version;
+	*event_id = msg_poll_event_data->event_id;
+	*data_transfer_handle = msg_poll_event_data->data_transfer_handle;
+
+	return PLDM_SUCCESS;
+}
+
 int decode_pldm_pdr_repository_change_record_data(
     const uint8_t *change_record_data, size_t change_record_data_size,
     uint8_t *event_data_operation, uint8_t *number_of_change_entries,
