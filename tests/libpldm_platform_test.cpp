@@ -2124,6 +2124,147 @@ TEST(PlatformEventMessage, testBadSensorEventDataDecodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
+TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataDecodeRequest)
+{
+    std::array<uint8_t, PLDM_PLATFORM_EVENT_MESSAGE_FORMAT_VERSION +
+                            PLDM_PLATFORM_EVENT_MESSAGE_EVENT_ID +
+                            PLDM_PLATFORM_EVENT_MESSAGE_TRANFER_HANDLE>
+        eventData{
+            0x1,                   // version
+            0x88, 0x77,            // Event Id
+            0x44, 0x33, 0x22, 0x11 // Tranfer Handle
+        };
+
+    uint8_t formatVersion = 0x01;
+    uint16_t eventID = 0x7788;
+    uint32_t dataTransferHandle = 0x11223344;
+
+    uint8_t retFormatVersion;
+    uint16_t reteventID;
+    uint32_t retDataTransferHandle;
+
+    auto rc = decode_pldm_message_poll_event_data(
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
+        &retFormatVersion, &reteventID, &retDataTransferHandle);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(retFormatVersion, formatVersion);
+    EXPECT_EQ(reteventID, eventID);
+    EXPECT_EQ(retDataTransferHandle, dataTransferHandle);
+}
+
+TEST(PlatformEventMessage, testBadPldmMsgPollEventDataDecodeRequest)
+{
+
+    std::array<uint8_t, PLDM_PLATFORM_EVENT_MESSAGE_FORMAT_VERSION +
+                            PLDM_PLATFORM_EVENT_MESSAGE_EVENT_ID +
+                            PLDM_PLATFORM_EVENT_MESSAGE_TRANFER_HANDLE>
+        eventData{
+            0x1,                   // version
+            0x88, 0x77,            // Event Id
+            0x44, 0x33, 0x22, 0x11 // Tranfer Handle
+        };
+
+    uint8_t retFormatVersion;
+    uint16_t reteventID;
+    uint32_t retDataTransferHandle;
+
+    auto rc = decode_pldm_message_poll_event_data(
+        NULL, eventData.size(), &retFormatVersion, &reteventID,
+        &retDataTransferHandle);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_pldm_message_poll_event_data(
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
+        &retFormatVersion, &reteventID, &retDataTransferHandle);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    // Event id is 0x0000
+    eventData[1] = 0x00;
+    eventData[2] = 0x00;
+    rc = decode_pldm_message_poll_event_data(
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
+        &retFormatVersion, &reteventID, &retDataTransferHandle);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // Event id is 0xffff
+    eventData[1] = 0xff;
+    eventData[2] = 0xff;
+    rc = decode_pldm_message_poll_event_data(
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
+        &retFormatVersion, &reteventID, &retDataTransferHandle);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
+{
+    std::array<uint8_t, PLDM_PLATFORM_EVENT_MESSAGE_FORMAT_VERSION +
+                            PLDM_PLATFORM_EVENT_MESSAGE_EVENT_ID +
+                            PLDM_PLATFORM_EVENT_MESSAGE_TRANFER_HANDLE>
+        eventData{};
+
+    uint8_t formatVersion = 0x01;
+    uint16_t eventID = 0x7788;
+    uint32_t dataTransferHandle = 0x11223344;
+
+    int rc = encode_pldm_message_poll_event_data(
+        formatVersion, eventID, dataTransferHandle,
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size());
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+
+    rc = pldm_msgbuf_init(buf, PLDM_MSG_POLL_EVENT_LENGTH,
+                          reinterpret_cast<uint8_t*>(eventData.data()),
+                          eventData.size());
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+
+    uint8_t retFormatVersion;
+    uint16_t reteventID;
+    uint32_t retDataTransferHandle;
+
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(buf, &retFormatVersion), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(buf, &reteventID), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint32(buf, &retDataTransferHandle),
+              PLDM_SUCCESS);
+    EXPECT_EQ(retFormatVersion, formatVersion);
+    EXPECT_EQ(reteventID, eventID);
+    EXPECT_EQ(retDataTransferHandle, dataTransferHandle);
+    EXPECT_EQ(pldm_msgbuf_destroy_consumed(buf), PLDM_SUCCESS);
+}
+
+TEST(PlatformEventMessage, testBadPldmMsgPollEventDataEncode)
+{
+    std::array<uint8_t, PLDM_PLATFORM_EVENT_MESSAGE_FORMAT_VERSION +
+                            PLDM_PLATFORM_EVENT_MESSAGE_EVENT_ID +
+                            PLDM_PLATFORM_EVENT_MESSAGE_TRANFER_HANDLE>
+        eventData{};
+
+    uint8_t formatVersion = 0x01;
+    uint16_t eventID = 0x7788;
+    uint32_t dataTransferHandle = 0x11223344;
+
+    int rc = encode_pldm_message_poll_event_data(
+        formatVersion, eventID, dataTransferHandle, NULL, eventData.size());
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    eventID = 0x0000;
+    rc = encode_pldm_message_poll_event_data(
+        formatVersion, eventID, dataTransferHandle,
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size());
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    eventID = 0xffff;
+    rc = encode_pldm_message_poll_event_data(
+        formatVersion, eventID, dataTransferHandle,
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size());
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
 TEST(PlatformEventMessage, testGoodSensorOpEventDataDecodeRequest)
 {
     std::array<uint8_t, PLDM_SENSOR_EVENT_SENSOR_OP_STATE_DATA_LENGTH>
