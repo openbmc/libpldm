@@ -16,6 +16,24 @@
       "message": "This continues to add to the problems outlined here:\n\nhttps://github.com/openbmc/libpldm/issues/3\n\nBut we probably want to fix that all in a single patch at some point.",
       "revId": "0247611bd3ad6caf48f3c9450612c2e1f6274e4e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "169eb3d9_8a356360",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-21T11:47:58Z",
+      "side": 1,
+      "message": "+1, let\u0027s fix that in a separate commit.",
+      "parentUuid": "afb80036_f4854b63",
+      "revId": "0247611bd3ad6caf48f3c9450612c2e1f6274e4e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
