@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20983ca9_86a8520b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-21T11:43:10Z",
+      "side": 1,
+      "message": "eventReceiverMaxBufferSize - is uint16 right ? that means the min request size is 2 ?",
+      "range": {
+        "startLine": 30,
+        "startChar": 21,
+        "endLine": 31,
+        "endChar": 50
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55ca24eb_1f3be508",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-21T11:43:10Z",
+      "side": 1,
+      "message": "this is the default buffer size, right? if EventMessageBufferSize command is not implemented? \n\nIt does not seem like its the max buffer size is it ?",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 53
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c8e54ef_f79b6b14",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-21T11:43:10Z",
+      "side": 1,
+      "message": "not related to this commit, but it would have been nice if we had this enum sorted based on the command value.",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 132,
+        "endChar": 38
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d96f457f_92d2df5e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-21T11:43:10Z",
+      "side": 1,
+      "message": "per spec https://www.dmtf.org/sites/default/files/standards/documents/DSP0248_1.2.1.pdf , eventReceiverMaxBufferSize is 16 bits , not 8.\n\nand also buffer_size seems like a general name, can we rename it like event_receiver_max_buffer_size ?",
+      "range": {
+        "startLine": 634,
+        "startChar": 1,
+        "endLine": 634,
+        "endChar": 21
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a45a659d_35ed4032",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-21T11:43:10Z",
+      "side": 1,
+      "message": "alignment is not proper",
+      "range": {
+        "startLine": 639,
+        "startChar": 2,
+        "endLine": 640,
+        "endChar": 7
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08018a1a_66b08d5f",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1323,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-21T11:43:10Z",
+      "side": 1,
+      "message": "alignment is not proper, please fix it",
+      "range": {
+        "startLine": 1319,
+        "startChar": 1,
+        "endLine": 1323,
+        "endChar": 3
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "342af26e_0bbff1d9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1332,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-21T11:43:10Z",
+      "side": 1,
+      "message": "need to fix the alignment.",
+      "range": {
+        "startLine": 1329,
+        "startChar": 1,
+        "endLine": 1332,
+        "endChar": 7
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
