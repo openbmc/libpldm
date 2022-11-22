@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73441798_d19ec934",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-11-22T01:41:05Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "a65b3048_c8d3ad80",
+      "range": {
+        "startLine": 30,
+        "startChar": 21,
+        "endLine": 31,
+        "endChar": 50
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55ca24eb_1f3be508",
@@ -61,6 +85,30 @@
       "writtenOn": "2022-11-21T11:43:10Z",
       "side": 1,
       "message": "this is the default buffer size, right? if EventMessageBufferSize command is not implemented? \n\nIt does not seem like its the max buffer size is it ?",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 53
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88e4393a_5a73b203",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-11-22T01:41:05Z",
+      "side": 1,
+      "message": "It is the max buffer size. It is used to check the valid of the input buffer_size. But when I update buffer_size to uint16_t. This checking is unnecessary. I will remove this definition.",
+      "parentUuid": "55ca24eb_1f3be508",
       "range": {
         "startLine": 33,
         "startChar": 1,
@@ -118,6 +166,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed1eecfb_ff1aec46",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-11-22T01:41:05Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "34fde9d5_4eb58b61",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 132,
+        "endChar": 38
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d96f457f_92d2df5e",
@@ -131,6 +203,30 @@
       "writtenOn": "2022-11-21T11:43:10Z",
       "side": 1,
       "message": "per spec https://www.dmtf.org/sites/default/files/standards/documents/DSP0248_1.2.1.pdf , eventReceiverMaxBufferSize is 16 bits , not 8.\n\nand also buffer_size seems like a general name, can we rename it like event_receiver_max_buffer_size ?",
+      "range": {
+        "startLine": 634,
+        "startChar": 1,
+        "endLine": 634,
+        "endChar": 21
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "608f83cc_66a7dd7d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-11-22T01:41:05Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "d96f457f_92d2df5e",
       "range": {
         "startLine": 634,
         "startChar": 1,
@@ -164,6 +260,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ea91046_41ac7965",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-11-22T01:41:05Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "a45a659d_35ed4032",
+      "range": {
+        "startLine": 639,
+        "startChar": 2,
+        "endLine": 640,
+        "endChar": 7
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08018a1a_66b08d5f",
@@ -187,6 +307,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db88f855_d5493612",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1323,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-11-22T01:41:05Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "08018a1a_66b08d5f",
+      "range": {
+        "startLine": 1319,
+        "startChar": 1,
+        "endLine": 1323,
+        "endChar": 3
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "342af26e_0bbff1d9",
@@ -200,6 +344,30 @@
       "writtenOn": "2022-11-21T11:43:10Z",
       "side": 1,
       "message": "need to fix the alignment.",
+      "range": {
+        "startLine": 1329,
+        "startChar": 1,
+        "endLine": 1332,
+        "endChar": 7
+      },
+      "revId": "6d011c85a8bc0c403d2665d188b62a391e4ff0dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f23eeca8_c7e953f9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1332,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-11-22T01:41:05Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "342af26e_0bbff1d9",
       "range": {
         "startLine": 1329,
         "startChar": 1,
