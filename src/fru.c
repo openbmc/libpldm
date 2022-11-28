@@ -1,9 +1,12 @@
 #include <assert.h>
 #include <endian.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <string.h>
 
+#include "base.h"
 #include "fru.h"
+#include "utils.h"
 
 int encode_get_fru_record_table_metadata_req(uint8_t instance_id,
 					     struct pldm_msg *msg,

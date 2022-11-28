@@ -4,9 +4,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
 #include "base.h"
+#include "pldm_types.h"
 #include "stdbool.h"
-#include "utils.h"
+#include <stddef.h>
+#include <stdint.h>
+struct variable_field;
 
 #define PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE 8
 #define PLDM_FWUP_INVALID_COMPONENT_COMPARISON_TIMESTAMP 0xFFFFFFFF

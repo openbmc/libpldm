@@ -1,7 +1,8 @@
-#include <endian.h>
-#include <string.h>
-
 #include "base.h"
+#include "pldm_types.h"
+#include <endian.h>
+#include <stdint.h>
+#include <string.h>
 
 uint8_t pack_pldm_header(const struct pldm_header_info *hdr,
 			 struct pldm_msg_hdr *msg)

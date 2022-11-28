@@ -1,5 +1,7 @@
 #include "firmware_update.h"
+#include "utils.h"
 #include <endian.h>
+#include <stdbool.h>
 #include <string.h>
 
 /** @brief Check whether string type value is valid

@@ -1,4 +1,10 @@
+#include <endian.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include <array>
+#include <cstdint>
+#include <vector>
 
 #include "libpldm/pdr.h"
 #include "libpldm/platform.h"
