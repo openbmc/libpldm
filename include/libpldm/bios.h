@@ -5,12 +5,8 @@
 extern "C" {
 #endif
 
-#include <asm/byteorder.h>
 #include <stddef.h>
 #include <stdint.h>
-
-#include "base.h"
-#include "utils.h"
 
 /* Response lengths are inclusive of completion code */
 #define PLDM_GET_DATE_TIME_RESP_BYTES 8
@@ -44,6 +40,9 @@ enum pldm_bios_table_types {
 	PLDM_BIOS_ATTR_TABLE,
 	PLDM_BIOS_ATTR_VAL_TABLE,
 };
+
+struct pldm_msg;
+struct variable_field;
 
 struct pldm_bios_string_table_entry {
 	uint16_t string_handle;

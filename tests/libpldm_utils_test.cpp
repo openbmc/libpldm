@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "libpldm/utils.h"
+#include "pldm_types.h"
 
 #include <gtest/gtest.h>
 

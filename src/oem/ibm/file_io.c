@@ -1,4 +1,5 @@
 #include "libpldm/file_io.h"
+#include "base.h"
 #include <endian.h>
 #include <string.h>
 

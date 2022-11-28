@@ -1,6 +1,9 @@
+#include <endian.h>
 #include <string.h>
 
 #include <array>
+#include <cstdint>
+#include <vector>
 
 #include "libpldm/base.h"
 #include "libpldm/file_io.h"

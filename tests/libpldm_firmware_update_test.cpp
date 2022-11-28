@@ -1,8 +1,18 @@
+#include <endian.h>
+
+#include <algorithm>
+#include <array>
 #include <bitset>
+#include <cstdint>
 #include <cstring>
+#include <string>
+#include <string_view>
+#include <vector>
 
 #include "libpldm/base.h"
 #include "libpldm/firmware_update.h"
+#include "pldm_types.h"
+#include "utils.h"
 
 #include <gtest/gtest.h>
 
@@ -870,12 +880,6 @@ TEST(GetFirmwareParameters, decodeResponse)
     //     0x08, 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01};
     constexpr std::string_view activeCompVersion{"VersionString3"};
     constexpr std::string_view pendingCompVersion{"VersionString4"};
-    // ComponentActivationMethods
-    // DC Power cycle [Bit position 4] & Self-Contained[Bit position 2]
-    constexpr std::bitset<16> compActivationMethod{0x12};
-    // CapabilitiesDuringUpdate of the firmware component
-    // Component downgrade capability [Bit position 2]
-    constexpr std::bitset<32> compCapabilities{0x02};
 
     constexpr size_t compParamTableSize =
         sizeof(pldm_component_parameter_entry) + activeCompVersion.size() +

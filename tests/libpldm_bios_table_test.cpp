@@ -1,7 +1,9 @@
 #include <endian.h>
-#include <string.h>
 
+#include <algorithm>
+#include <cstdint>
 #include <cstring>
+#include <iterator>
 #include <string>
 #include <utility>
 #include <vector>

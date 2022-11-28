@@ -1,7 +1,7 @@
 #include "bios.h"
+#include "base.h"
 #include "utils.h"
 #include <endian.h>
-#include <stdbool.h>
 #include <string.h>
 
 int encode_get_date_time_req(uint8_t instance_id, struct pldm_msg *msg)
