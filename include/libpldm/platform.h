@@ -32,6 +32,9 @@ extern "C" {
 #define PLDM_EVENT_MESSAGE_BUFFER_SIZE_REQ_BYTES 2
 #define PLDM_EVENT_MESSAGE_BUFFER_SIZE_RESP_BYTES 3
 
+#define PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES 1
+#define PLDM_EVENT_MESSAGE_SUPPORTED_MIN_RESP_BYTES 4
+
 /* Minimum response length */
 #define PLDM_GET_PDR_MIN_RESP_BYTES 12
 #define PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES 5
@@ -122,7 +125,8 @@ enum pldm_effecter_oper_state {
 enum pldm_platform_commands {
 	PLDM_SET_EVENT_RECEIVER = 0x04,
 	PLDM_PLATFORM_EVENT_MESSAGE = 0x0A,
-	PLDM_EVENT_MESSAGE_BUFFER_SIZE = 0xD,
+	PLDM_EVENT_MESSAGE_SUPPORTED = 0x0C,
+	PLDM_EVENT_MESSAGE_BUFFER_SIZE = 0x0D,
 	PLDM_GET_SENSOR_READING = 0x11,
 	PLDM_GET_STATE_SENSOR_READINGS = 0x21,
 	PLDM_SET_NUMERIC_EFFECTER_VALUE = 0x31,
@@ -403,6 +407,14 @@ enum pldm_repository_state {
 enum pldm_repository_data_transfer_handler_timeout {
 	PLDM_NO_TIMEOUT,
 	PLDM_DEFALUT_MINIMUM_TIMEOUT
+};
+
+/** @brief PLDM event message type */
+enum pldm_event_message_type {
+	PLDM_MESSAGE_TYPE_NOT_CONFIGURED = 0x00,
+	PLDM_MESSAGE_TYPE_ASYNCHRONOUS = 0x01,
+	PLDM_MESSAGE_TYPE_SYNCHRONOUS = 0x02,
+	PLDM_MESSAGE_TYPE_ASYNCHRONOUS_WITH_HEARTBEAT = 0x03
 };
 
 /** @struct pldm_pdr_hdr
@@ -769,6 +781,26 @@ struct pldm_event_message_buffer_size_req {
 struct pldm_event_message_buffer_size_resp {
 	uint8_t completion_code;
 	uint16_t terminus_max_buffer_size;
+} __attribute__((packed));
+
+/** @struct pldm_platform_event_message_supported_req
+ *
+ *  structure representing PlatformEventMessageSupported command request data
+ */
+struct pldm_event_message_supported_req {
+	uint8_t format_version;
+} __attribute__((packed));
+
+/** @struct pldm_event_message_supported_response
+ *
+ *  structure representing EventMessageSupported command response data
+ */
+struct pldm_event_message_supported_resp {
+	uint8_t completion_code;
+	uint8_t synchrony_configuration;
+	bitfield8_t synchrony_configuration_supported;
+	uint8_t number_event_class_returned;
+	uint8_t event_class[1];
 } __attribute__((packed));
 
 /** @struct pldm_set_numeric_effecter_value_req
@@ -1487,6 +1519,39 @@ int decode_event_message_buffer_size_resp(const struct pldm_msg *msg,
 int encode_event_message_buffer_size_req(
     uint8_t instance_id, uint16_t event_receiver_max_buffer_size,
     struct pldm_msg *msg);
+
+/** @brief Encode EventMessageSupported request data
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] format_version - Version of the event format
+ *  @param[out] msg - Request message
+ *
+ *  @return pldm_completion_codes
+ *  @note Caller is responsible for memory alloc and dealloc of param
+ *  'msg.payload'
+ */
+int encode_event_message_supported_req(uint8_t instance_id,
+				       uint8_t format_version,
+				       struct pldm_msg *msg);
+
+/** @brief Decode EventMessageSupported response data
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - Length of Response message payload
+ *  @param[out] completion_code - PLDM completion code
+ *  @param[out] synchrony_config - the synchrony configuration
+ *  @param[out] synchrony_config_support - the synchrony configuration support
+ *  @param[out] number_event_class_returned - PLDM completion code
+ *  @param[out] event_class - the event classes
+ *  @param[in] event_class_count - the event class count
+ *
+ *  @return pldm_completion_codes
+ */
+int decode_event_message_supported_resp(
+    const struct pldm_msg *msg, size_t payload_length, uint8_t *completion_code,
+    uint8_t *synchrony_config, bitfield8_t *synchrony_config_support,
+    uint8_t *number_event_class_returned, uint8_t *event_class,
+    uint8_t event_class_count);
 
 /** @brief Decode sensorEventData response data
  *
