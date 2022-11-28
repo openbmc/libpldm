@@ -1,7 +1,9 @@
 #include <endian.h>
-#include <string.h>
 
+#include <algorithm>
+#include <cstdint>
 #include <cstring>
+#include <iterator>
 #include <string>
 #include <utility>
 #include <vector>
@@ -11,8 +13,8 @@
 #include "libpldm/bios_table.h"
 #include "libpldm/utils.h"
 
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
+#include "gmock/gmock.h"
+#include "gtest/gtest.h"
 
 using testing::ElementsAreArray;
 using Table = std::vector<uint8_t>;

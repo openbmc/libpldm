@@ -1,4 +1,6 @@
+#include "base.h"
 #include <endian.h>
+#include <stdint.h>
 #include <string.h>
 
 #include "libpldm/host.h"

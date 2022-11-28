@@ -1,6 +1,7 @@
 #include "pdr.h"
 #include "platform.h"
 #include <assert.h>
+#include <endian.h>
 #include <stdlib.h>
 #include <string.h>
 

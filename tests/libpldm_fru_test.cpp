@@ -1,12 +1,15 @@
-#include <string.h>
+#include <endian.h>
 
 #include <array>
+#include <cstdint>
 #include <cstring>
+#include <vector>
 
 #include "libpldm/base.h"
 #include "libpldm/fru.h"
+#include "utils.h"
 
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 
 TEST(GetFruRecordTableMetadata, testGoodEncodeRequest)
 {

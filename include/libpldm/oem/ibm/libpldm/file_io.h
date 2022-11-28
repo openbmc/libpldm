@@ -8,8 +8,7 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 
-#include "base.h"
-
+struct pldm_msg;
 /** @brief PLDM Commands in IBM OEM type
  */
 enum pldm_fileio_commands {

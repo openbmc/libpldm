@@ -6,10 +6,10 @@ extern "C" {
 #endif
 
 #include "bios.h"
-#include "utils.h"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+struct variable_field;
 
 /** @struct pldm_bios_table_iter
  *  structure representing bios table iterator

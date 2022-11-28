@@ -1,12 +1,15 @@
+#include <endian.h>
+#include <stdint.h>
 #include <string.h>
 
 #include <array>
+#include <memory>
 
 #include "libpldm/base.h"
 #include "libpldm/bios.h"
 #include "libpldm/utils.h"
 
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 
 constexpr auto hdrSize = sizeof(pldm_msg_hdr);
 
