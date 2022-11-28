@@ -1,10 +1,10 @@
 #include "pldm.h"
 #include "base.h"
 
-#include <errno.h>
+#include <bits/types/struct_iovec.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/socket.h>
-#include <sys/types.h>
 #include <sys/un.h>
 #include <unistd.h>
 

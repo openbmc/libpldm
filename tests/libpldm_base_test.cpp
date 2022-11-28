@@ -1,13 +1,13 @@
-#include <string.h>
-
 #include <array>
+#include <cstdint>
 #include <cstring>
 #include <vector>
 
 #include "libpldm/base.h"
+#include "pldm_types.h"
 
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
+#include "gmock/gmock.h"
+#include "gtest/gtest.h"
 
 using testing::ElementsAreArray;
 

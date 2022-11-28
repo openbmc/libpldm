@@ -1,4 +1,7 @@
+#include "base.h"
+#include "pldm_types.h"
 #include <endian.h>
+#include <stdint.h>
 #include <string.h>
 
 #include "platform.h"

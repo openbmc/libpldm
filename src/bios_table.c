@@ -1,12 +1,13 @@
+#include "bios_table.h"
+#include "base.h"
+#include "bios.h"
+#include "utils.h"
 #include <assert.h>
 #include <endian.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "bios.h"
-#include "bios_table.h"
 
 #define POINTER_CHECK(pointer)                                                 \
 	do {                                                                   \
