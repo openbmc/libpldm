@@ -900,6 +900,173 @@ TEST(EventMessageBufferSize, testBadEventMessageBufferSizeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
+TEST(PlatformEventMessageSupported, testGoodEncodeRequest)
+{
+    uint8_t formatVersion = 0x01;
+
+    std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES>
+        requestMsg{};
+
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_event_message_supported_req(0, formatVersion, request);
+
+    struct pldm_event_message_supported_req* req =
+        reinterpret_cast<struct pldm_event_message_supported_req*>(
+            request->payload);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(formatVersion, req->format_version);
+}
+
+TEST(PlatformEventMessageSupported, testBadEncodeRequest)
+{
+    uint8_t eventData = 34;
+    uint8_t formatVersion = 0x0;
+
+    std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES +
+                            sizeof(eventData)>
+        requestMsg{};
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_event_message_supported_req(0, formatVersion, request);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = encode_event_message_supported_req(0, formatVersion, nullptr);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(PlatformEventMessageSupported, testGoodDecodeRespond)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint8_t synchConfiguration = PLDM_MESSAGE_TYPE_SYNCHRONOUS;
+    bitfield8_t synchConfigSupported;
+    synchConfigSupported.byte = 0xe;
+    uint8_t numberEventClassReturned = 0x3;
+    std::vector<uint8_t> eventClass{0x0, 0x5, 0xfa};
+    constexpr uint8_t eventClassCount = 3;
+
+    std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_SUPPORTED_MIN_RESP_BYTES +
+                            eventClassCount>
+        responseMsg{};
+
+    uint8_t retCompletionCode;
+    uint8_t retSynchConfig = 0;
+    uint8_t retNumberEventClass = 0;
+    bitfield8_t retSynchConfigSupport;
+    uint8_t retEventClass[eventClassCount] = {0};
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_event_message_supported_resp* resp =
+        reinterpret_cast<struct pldm_event_message_supported_resp*>(
+            response->payload);
+
+    resp->completion_code = completionCode;
+    resp->synchrony_configuration = synchConfiguration;
+    resp->synchrony_configuration_supported.byte = synchConfigSupported.byte;
+    resp->number_event_class_returned = numberEventClassReturned;
+    memcpy(resp->event_class, eventClass.data(), numberEventClassReturned);
+
+    auto rc = decode_event_message_supported_resp(
+        response, responseMsg.size() - hdrSize, &retCompletionCode,
+        &retSynchConfig, &retSynchConfigSupport, &retNumberEventClass,
+        retEventClass, eventClassCount);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(retCompletionCode, completionCode);
+    EXPECT_EQ(retSynchConfig, synchConfiguration);
+    EXPECT_EQ(retNumberEventClass, numberEventClassReturned);
+    EXPECT_EQ(retSynchConfigSupport.byte, synchConfigSupported.byte);
+    EXPECT_EQ(0, memcmp(eventClass.data(), resp->event_class,
+                        numberEventClassReturned));
+}
+
+TEST(PlatformEventMessageSupported, testBadSynchConfiguration)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint8_t synchConfiguration = 0x4;
+    bitfield8_t synchConfigSupported;
+    synchConfigSupported.byte = 0xe;
+    uint8_t numberEventClassReturned = 0x3;
+    std::vector<uint8_t> eventClass{0x0, 0x5, 0xfa};
+    constexpr uint8_t eventClassCount = 3;
+
+    std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_SUPPORTED_MIN_RESP_BYTES +
+                            eventClassCount>
+        responseMsg{};
+
+    uint8_t retCompletionCode;
+    uint8_t retSynchConfig = 0;
+    uint8_t retNumberEventClass = 0;
+    bitfield8_t retSynchConfigSupport;
+    uint8_t retEventClass[eventClassCount] = {0};
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_event_message_supported_resp* resp =
+        reinterpret_cast<struct pldm_event_message_supported_resp*>(
+            response->payload);
+
+    resp->completion_code = completionCode;
+    resp->synchrony_configuration = synchConfiguration;
+    resp->synchrony_configuration_supported.byte = synchConfigSupported.byte;
+    resp->number_event_class_returned = numberEventClassReturned;
+    memcpy(resp->event_class, eventClass.data(), numberEventClassReturned);
+
+    auto rc = decode_event_message_supported_resp(
+        response, responseMsg.size() - hdrSize, &retCompletionCode,
+        &retSynchConfig, &retSynchConfigSupport, &retNumberEventClass,
+        retEventClass, eventClassCount);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(PlatformEventMessageSupported, testBadDecodeRespond)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint8_t synchConfiguration = PLDM_MESSAGE_TYPE_SYNCHRONOUS;
+    bitfield8_t synchConfigSupported;
+    synchConfigSupported.byte = 0xe;
+    uint8_t numberEventClassReturned = 0x3;
+    std::vector<uint8_t> eventClass{0x0, 0x5, 0xfa};
+    constexpr uint8_t eventClassCount = 3;
+
+    std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_SUPPORTED_MIN_RESP_BYTES +
+                            eventClassCount>
+        responseMsg{};
+
+    uint8_t retCompletionCode;
+    uint8_t retSynchConfig = 0;
+    uint8_t retNumberEventClass = 0;
+    bitfield8_t retSynchConfigSupport;
+    uint8_t retEventClass[eventClassCount] = {0};
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_event_message_supported_resp* resp =
+        reinterpret_cast<struct pldm_event_message_supported_resp*>(
+            response->payload);
+    resp->completion_code = completionCode;
+    resp->synchrony_configuration = synchConfiguration;
+    resp->synchrony_configuration_supported.byte = synchConfigSupported.byte;
+    resp->number_event_class_returned = numberEventClassReturned;
+    memcpy(resp->event_class, eventClass.data(), numberEventClassReturned);
+
+    auto rc = decode_event_message_supported_resp(response, 0, nullptr, nullptr,
+                                                  nullptr, nullptr, nullptr, 0);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_event_message_supported_resp(
+        response, PLDM_EVENT_MESSAGE_SUPPORTED_MIN_RESP_BYTES - 1,
+        &retCompletionCode, &retSynchConfig, &retSynchConfigSupport,
+        &retNumberEventClass, retEventClass, eventClassCount);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    rc = decode_event_message_supported_resp(
+        response, responseMsg.size() - hdrSize, &retCompletionCode,
+        &retSynchConfig, &retSynchConfigSupport, &retNumberEventClass,
+        retEventClass, 1);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+
 TEST(PlatformEventMessage, testGoodStateSensorDecodeRequest)
 {
     std::array<uint8_t,
