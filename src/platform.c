@@ -971,6 +971,74 @@ int decode_event_message_buffer_size_resp(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
+int encode_event_message_supported_req(uint8_t instance_id,
+				       uint8_t format_version,
+				       struct pldm_msg *msg)
+{
+	if (format_version != 1) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = {0};
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_EVENT_MESSAGE_SUPPORTED;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_event_message_supported_req *request =
+	    (struct pldm_event_message_supported_req *)msg->payload;
+	request->format_version = format_version;
+
+	return PLDM_SUCCESS;
+}
+
+int decode_event_message_supported_resp(
+    const struct pldm_msg *msg, size_t payload_length, uint8_t *completion_code,
+    uint8_t *synchrony_config, bitfield8_t *synchrony_config_support,
+    uint8_t *number_event_class_returned, uint8_t *event_class,
+    uint8_t event_class_count)
+{
+	if (msg == NULL || completion_code == NULL ||
+	    synchrony_config == NULL || synchrony_config_support == NULL ||
+	    number_event_class_returned == NULL || event_class == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	*completion_code = msg->payload[0];
+	if (PLDM_SUCCESS != *completion_code) {
+		return PLDM_SUCCESS;
+	}
+	if (payload_length < PLDM_EVENT_MESSAGE_SUPPORTED_MIN_RESP_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_event_message_supported_resp *response =
+	    (struct pldm_event_message_supported_resp *)msg->payload;
+
+	*synchrony_config = response->synchrony_configuration;
+	*synchrony_config_support = response->synchrony_configuration_supported;
+	*number_event_class_returned = response->number_event_class_returned;
+
+	if (*number_event_class_returned > 0) {
+		if (event_class_count < *number_event_class_returned) {
+			return PLDM_ERROR_INVALID_LENGTH;
+		}
+		memcpy(event_class, response->event_class,
+		       *number_event_class_returned);
+	}
+
+	return PLDM_SUCCESS;
+}
+
 int decode_sensor_event_data(const uint8_t *event_data,
 			     size_t event_data_length, uint16_t *sensor_id,
 			     uint8_t *sensor_event_class_type,
