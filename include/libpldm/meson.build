@@ -29,7 +29,8 @@ endif
 
 if get_option('requester-api').enabled()
    libpldm_headers += files(
-    'requester/pldm.h'
+    'requester/pldm.h',
+    'requester/pldm_base_requester.h'
     )
 endif
 
