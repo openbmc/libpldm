@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a510831_a20dda20",
+        "filename": "tests/libpldm_base_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-11-29T06:36:18Z",
+      "side": 1,
+      "message": "why this change? these headers aren’t provided by this repo so I would expect them to be \u003c\u003e and not quoted.",
+      "revId": "e699591da7a1fd6a6f65257a4e8a6c75c34875b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b14ce602_ae1d23f8",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-11-29T06:36:18Z",
+      "side": 1,
+      "message": "Blank comment added?",
+      "revId": "e699591da7a1fd6a6f65257a4e8a6c75c34875b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
