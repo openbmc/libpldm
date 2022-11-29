@@ -16,6 +16,24 @@
       "message": "Does this make sense?",
       "revId": "3d1b7350f1dacf1dd5fe334483ac80895fc6c7fe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9714dbc8_bc2ddf69",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-11-29T05:37:59Z",
+      "side": 1,
+      "message": "\u003e Does this make sense?\n\nYes, I think this is correct.\nBecause `PLDM_SUCCESS` means that the protocol analysis is correct.",
+      "parentUuid": "31ee1cad_c7feff73",
+      "revId": "3d1b7350f1dacf1dd5fe334483ac80895fc6c7fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
