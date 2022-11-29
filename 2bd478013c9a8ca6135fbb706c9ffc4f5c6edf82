@@ -16,6 +16,24 @@
       "message": "should it change to 0x0C? and the next one to 0x0D",
       "revId": "2bd478013c9a8ca6135fbb706c9ffc4f5c6edf82",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9690685_8d6224ac",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-11-29T09:13:09Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "102b2a7a_7a27fc50",
+      "revId": "2bd478013c9a8ca6135fbb706c9ffc4f5c6edf82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
