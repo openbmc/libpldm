@@ -37,7 +37,7 @@ pldm_msgbuf_extract_sensor_data(struct pldm_msgbuf *ctx,
 		return pldm_msgbuf_extract(ctx, &dst->value_s32);
 	}
 
-	return -PLDM_ERROR_INVALID_DATA;
+	return PLDM_ERROR_INVALID_DATA;
 }
 
 __attribute__((always_inline)) static inline int
@@ -62,7 +62,7 @@ pldm_msgbuf_extract_range_field_format(struct pldm_msgbuf *ctx,
 		return pldm_msgbuf_extract(ctx, &dst->value_f32);
 	}
 
-	return -PLDM_ERROR_INVALID_DATA;
+	return PLDM_ERROR_INVALID_DATA;
 }
 
 #endif

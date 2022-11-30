@@ -1,10 +1,25 @@
+#include "platform.h"
 #include "base.h"
+#include "msgbuf.h"
+#include "msgbuf/platform.h"
 #include "pldm_types.h"
 #include <endian.h>
 #include <stdint.h>
 #include <string.h>
 
-#include "platform.h"
+static int pldm_platform_pdr_hdr_validate(struct pldm_value_pdr_hdr *ctx,
+					  size_t lower, size_t upper)
+{
+	if (ctx->length + sizeof(*ctx) < lower) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if (ctx->length > upper) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	return PLDM_SUCCESS;
+}
 
 int encode_state_effecter_pdr(
     struct pldm_state_effecter_pdr *const effecter,
@@ -1233,6 +1248,135 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 	return PLDM_SUCCESS;
+}
+
+#define PLDM_NUMERIC_SENSOR_VALUE_PDR_MIN_SIZE 69
+int decode_numeric_sensor_pdr_data(
+    const uint8_t *pdr_data, size_t pdr_data_length,
+    struct pldm_numeric_sensor_value_pdr *pdr_value)
+{
+	size_t expected_length = PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH;
+	struct pldm_msgbuf _buf, *buf = &_buf;
+	int rc;
+
+	rc = pldm_msgbuf_init(buf, PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH,
+			      pdr_data, pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract_value_pdr_hdr(buf, &pdr_value->hdr);
+	rc = pldm_platform_pdr_hdr_validate(
+	    &pdr_value->hdr, PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH,
+	    pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, &pdr_value->terminus_handle);
+	pldm_msgbuf_extract(buf, &pdr_value->sensor_id);
+	pldm_msgbuf_extract(buf, &pdr_value->entity_type);
+	pldm_msgbuf_extract(buf, &pdr_value->entity_instance_num);
+	pldm_msgbuf_extract(buf, &pdr_value->container_id);
+	pldm_msgbuf_extract(buf, &pdr_value->sensor_init);
+	pldm_msgbuf_extract(buf, &pdr_value->sensor_auxiliary_names_pdr);
+	pldm_msgbuf_extract(buf, &pdr_value->base_unit);
+	pldm_msgbuf_extract(buf, &pdr_value->unit_modifier);
+	pldm_msgbuf_extract(buf, &pdr_value->rate_unit);
+	pldm_msgbuf_extract(buf, &pdr_value->base_oem_unit_handle);
+	pldm_msgbuf_extract(buf, &pdr_value->aux_unit);
+	pldm_msgbuf_extract(buf, &pdr_value->aux_unit_modifier);
+	pldm_msgbuf_extract(buf, &pdr_value->aux_rate_unit);
+	pldm_msgbuf_extract(buf, &pdr_value->rel);
+	pldm_msgbuf_extract(buf, &pdr_value->aux_oem_unit_handle);
+	pldm_msgbuf_extract(buf, &pdr_value->is_linear);
+
+	pldm_msgbuf_extract(buf, &pdr_value->sensor_data_size);
+	if (pdr_value->sensor_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	switch (pdr_value->sensor_data_size) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		expected_length += (sizeof(uint16_t) - sizeof(uint8_t));
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		expected_length += (sizeof(uint32_t) - sizeof(uint8_t));
+		break;
+	default:
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (pdr_data_length < expected_length) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	pldm_msgbuf_extract(buf, &pdr_value->resolution);
+	pldm_msgbuf_extract(buf, &pdr_value->offset);
+	pldm_msgbuf_extract(buf, &pdr_value->accuracy);
+	pldm_msgbuf_extract(buf, &pdr_value->plus_tolerance);
+	pldm_msgbuf_extract(buf, &pdr_value->minus_tolerance);
+	pldm_msgbuf_extract_sensor_data(buf, pdr_value->sensor_data_size,
+					&pdr_value->hysteresis);
+	pldm_msgbuf_extract(buf, &pdr_value->supported_thresholds.byte);
+	pldm_msgbuf_extract(
+	    buf, &pdr_value->threshold_and_hysteresis_volatility.byte);
+	pldm_msgbuf_extract(buf, &pdr_value->state_transition_interval);
+	pldm_msgbuf_extract(buf, &pdr_value->update_interval);
+	pldm_msgbuf_extract_sensor_data(buf, pdr_value->sensor_data_size,
+					&pdr_value->max_readable);
+	pldm_msgbuf_extract_sensor_data(buf, pdr_value->sensor_data_size,
+					&pdr_value->min_readable);
+
+	pldm_msgbuf_extract(buf, &pdr_value->range_field_format);
+
+	switch (pdr_value->range_field_format) {
+	case PLDM_RANGE_FIELD_FORMAT_UINT8:
+	case PLDM_RANGE_FIELD_FORMAT_SINT8:
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT16:
+	case PLDM_RANGE_FIELD_FORMAT_SINT16:
+		expected_length += (sizeof(uint16_t) - sizeof(uint8_t));
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT32:
+	case PLDM_RANGE_FIELD_FORMAT_SINT32:
+	case PLDM_RANGE_FIELD_FORMAT_REAL32:
+		expected_length += (sizeof(uint32_t) - sizeof(uint8_t));
+		break;
+	default:
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (pdr_data_length < expected_length) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	pldm_msgbuf_extract(buf, &pdr_value->range_field_support.byte);
+	pldm_msgbuf_extract_range_field_format(
+	    buf, pdr_value->range_field_format, &pdr_value->nominal_value);
+	pldm_msgbuf_extract_range_field_format(
+	    buf, pdr_value->range_field_format, &pdr_value->normal_max);
+	pldm_msgbuf_extract_range_field_format(
+	    buf, pdr_value->range_field_format, &pdr_value->normal_min);
+	pldm_msgbuf_extract_range_field_format(
+	    buf, pdr_value->range_field_format, &pdr_value->warning_high);
+	pldm_msgbuf_extract_range_field_format(
+	    buf, pdr_value->range_field_format, &pdr_value->warning_low);
+	pldm_msgbuf_extract_range_field_format(
+	    buf, pdr_value->range_field_format, &pdr_value->critical_high);
+	pldm_msgbuf_extract_range_field_format(
+	    buf, pdr_value->range_field_format, &pdr_value->critical_low);
+	pldm_msgbuf_extract_range_field_format(
+	    buf, pdr_value->range_field_format, &pdr_value->fatal_high);
+	pldm_msgbuf_extract_range_field_format(
+	    buf, pdr_value->range_field_format, &pdr_value->fatal_low);
+
+	return pldm_msgbuf_destroy(buf);
 }
 
 int encode_get_numeric_effecter_value_req(uint8_t instance_id,
