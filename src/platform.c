@@ -1235,6 +1235,642 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 	return PLDM_SUCCESS;
 }
 
+struct pldm_buf {
+	const uint8_t *cursor;
+	size_t remaining;
+	size_t size;
+};
+
+int pldm_buf_init(struct pldm_buf *ctx, const uint8_t *buf, size_t len)
+{
+	uint8_t *end;
+
+	if (!ctx) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (!buf) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (!len) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	end = (uint8_t *)buf + len;
+	if (end && end < (uint8_t *)buf) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	ctx->cursor = buf;
+	ctx->remaining = len;
+
+	return PLDM_SUCCESS;
+}
+
+int pldm_buf_destroy(struct pldm_buf *ctx)
+{
+	if (!ctx) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	ctx->cursor = 0;
+	ctx->remaining = 0;
+
+	return PLDM_SUCCESS;
+}
+
+int pldm_buf_extract_uint8(struct pldm_buf *ctx, void *dst)
+{
+	uint8_t *ptr = (uint8_t *)dst;
+
+	if (!ctx) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (!dst) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (!ctx->remaining) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	*ptr = *((uint8_t *)(ctx->cursor));
+	ctx->cursor++;
+	ctx->remaining--;
+
+	return PLDM_SUCCESS;
+}
+
+int pldm_buf_extract_uint16(struct pldm_buf *ctx, void *dst)
+{
+	uint16_t ldst;
+	uint16_t *ptr = (uint16_t *)dst;
+
+	if (!ctx) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (!dst) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (!ctx->remaining) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if (ctx->remaining < sizeof(ldst)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	// Use memcpy() to have the compiler deal with any alignment
+	// issues on the target architecture
+	memcpy(&ldst, ctx->cursor, sizeof(ldst));
+	// Only assign the target value once it's correctly decoded
+	*ptr = le16toh(ldst);
+	ctx->cursor += sizeof(ldst);
+	ctx->remaining -= sizeof(ldst);
+
+	return PLDM_SUCCESS;
+}
+
+int pldm_buf_extract_uint32(struct pldm_buf *ctx, void *dst)
+{
+	uint32_t ldst;
+	uint32_t *ptr = (uint32_t *)dst;
+
+	if (!ctx) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (!dst) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (!ctx->remaining) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if (ctx->remaining < sizeof(ldst)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	// Use memcpy() to have the compiler deal with any alignment
+	// issues on the target architecture
+	memcpy(&ldst, ctx->cursor, sizeof(ldst));
+	// Only assign the target value once it's correctly decoded
+	*ptr = le32toh(ldst);
+	ctx->cursor += sizeof(ldst);
+	ctx->remaining -= sizeof(ldst);
+
+	return PLDM_SUCCESS;
+}
+
+int decode_numeric_sensor_pdr_data(
+    const uint8_t *pdr_data, size_t pdr_data_length,
+    struct pldm_numeric_sensor_value_pdr *pdr_value)
+{
+	struct pldm_buf buf;
+	int rc;
+	rc = pldm_buf_init(&buf, pdr_data, pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint32(&buf, &(pdr_value->hdr.record_handle));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->hdr.version));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->hdr.type));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint16(&buf, &(pdr_value->hdr.record_change_num));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint16(&buf, &(pdr_value->hdr.length));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint16(&buf, &(pdr_value->terminus_handle));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint16(&buf, &(pdr_value->sensor_id));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint16(&buf, &(pdr_value->entity_type));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint16(&buf, &(pdr_value->entity_instance_num));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint16(&buf, &(pdr_value->container_id));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->sensor_init));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf,
+				    &(pdr_value->sensor_auxiliary_names_pdr));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->base_unit));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->unit_modifier));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->rate_unit));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->base_oem_unit_handle));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->aux_unit));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->aux_unit_modifier));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->aux_rate_unit));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->rel));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->aux_oem_unit_handle));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->is_linear));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->sensor_data_size));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint32(&buf, &(pdr_value->resolution));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_buf_extract_uint32(&buf, &(pdr_value->offset));
+	if (rc) {
+		return rc;
+	}
+
+	// pdr_value->accuracy = le16toh(*((uint16_t *)ptr));
+	// ptr += sizeof(uint16_t);
+	rc = pldm_buf_extract_uint16(&buf, &(pdr_value->accuracy));
+	if (rc) {
+		return rc;
+	}
+
+	// pdr_value->plus_tolerance = *((uint8_t *)ptr);
+	// ptr += sizeof(uint8_t);
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->plus_tolerance));
+	if (rc) {
+		return rc;
+	}
+
+	// pdr_value->minus_tolerance = *((uint8_t *)ptr);
+	// ptr += sizeof(uint8_t);
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->minus_tolerance));
+	if (rc) {
+		return rc;
+	}
+
+	switch (pdr_value->sensor_data_size) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		// pdr_value->hysteresis.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->hysteresis.value_u8);
+		rc = pldm_buf_extract_uint8(&buf,
+					    &(pdr_value->hysteresis.value_u8));
+		if (rc) {
+			return rc;
+		}
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		// pdr_value->hysteresis.value_u16 = le16toh(*((uint16_t
+		// *)ptr)); ptr += sizeof(pdr_value->hysteresis.value_u16);
+		rc = pldm_buf_extract_uint16(
+		    &buf, &(pdr_value->hysteresis.value_u16));
+		if (rc) {
+			return rc;
+		}
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		// pdr_value->hysteresis.value_u32 = le32toh(*((uint32_t
+		// *)ptr)); ptr += sizeof(pdr_value->hysteresis.value_u32);
+		rc = pldm_buf_extract_uint32(
+		    &buf, &(pdr_value->hysteresis.value_u32));
+		if (rc) {
+			return rc;
+		}
+		break;
+	default:
+		break;
+	}
+
+	// pdr_value->supported_thresholds = *((bitfield8_t *)ptr);
+	// ptr += sizeof(bitfield8_t);
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->supported_thresholds));
+	if (rc) {
+		return rc;
+	}
+
+	// pdr_value->threshold_and_hysteresis_volatility = *((bitfield8_t
+	// *)ptr); ptr += sizeof(bitfield8_t);
+	rc = pldm_buf_extract_uint8(
+	    &buf, &(pdr_value->threshold_and_hysteresis_volatility));
+	if (rc) {
+		return rc;
+	}
+
+	// ptr_uint32_t = (uint32_t *)&pdr_value->state_transition_interval;
+	//*ptr_uint32_t = le32toh(*((uint32_t *)ptr));
+	// ptr += sizeof(uint32_t);
+	rc = pldm_buf_extract_uint32(&buf,
+				     &(pdr_value->state_transition_interval));
+	if (rc) {
+		return rc;
+	}
+
+	// ptr_uint32_t = (uint32_t *)&pdr_value->update_interval;
+	//*ptr_uint32_t = le32toh(*((uint32_t *)ptr));
+	// ptr += sizeof(uint32_t);
+	rc = pldm_buf_extract_uint32(&buf, &(pdr_value->update_interval));
+	if (rc) {
+		return rc;
+	}
+
+	switch (pdr_value->sensor_data_size) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		// pdr_value->max_readable.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->max_readable.value_u8);
+		rc = pldm_buf_extract_uint8(
+		    &buf, &(pdr_value->max_readable.value_u8));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->min_readable.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->min_readable.value_u8);
+		rc = pldm_buf_extract_uint8(
+		    &buf, &(pdr_value->min_readable.value_u8));
+		if (rc) {
+			return rc;
+		}
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		// pdr_value->max_readable.value_u16 = le16toh(*((uint16_t
+		// *)ptr)); ptr += sizeof(pdr_value->max_readable.value_u16);
+		rc = pldm_buf_extract_uint16(
+		    &buf, &(pdr_value->max_readable.value_u16));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->min_readable.value_u16 = le16toh(*((uint16_t
+		// *)ptr)); ptr += sizeof(pdr_value->min_readable.value_u16);
+		rc = pldm_buf_extract_uint16(
+		    &buf, &(pdr_value->min_readable.value_u16));
+		if (rc) {
+			return rc;
+		}
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		// pdr_value->max_readable.value_u32 = le32toh(*((uint32_t
+		// *)ptr)); ptr += sizeof(pdr_value->max_readable.value_u32);
+		rc = pldm_buf_extract_uint32(
+		    &buf, &(pdr_value->max_readable.value_u32));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->min_readable.value_u32 = le32toh(*((uint32_t
+		// *)ptr)); ptr += sizeof(pdr_value->min_readable.value_u32);
+		rc = pldm_buf_extract_uint32(
+		    &buf, &(pdr_value->min_readable.value_u32));
+		if (rc) {
+			return rc;
+		}
+		break;
+	default:
+		break;
+	}
+
+	// pdr_value->range_field_format = *((uint8_t *)ptr);
+	// ptr += sizeof(uint8_t);
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->range_field_format));
+	if (rc) {
+		return rc;
+	}
+
+	// pdr_value->range_field_support = *((bitfield8_t *)ptr);
+	// ptr += sizeof(bitfield8_t);
+	rc = pldm_buf_extract_uint8(&buf, &(pdr_value->range_field_support));
+	if (rc) {
+		return rc;
+	}
+
+	switch (pdr_value->range_field_format) {
+	case PLDM_RANGE_FIELD_FORMAT_UINT8:
+	case PLDM_RANGE_FIELD_FORMAT_SINT8:
+		// pdr_value->nominal_value.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->nominal_value.value_u8);
+		rc = pldm_buf_extract_uint8(
+		    &buf, &(pdr_value->nominal_value.value_u8));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->normal_max.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->normal_max.value_u8);
+		rc = pldm_buf_extract_uint8(&buf,
+					    &(pdr_value->normal_max.value_u8));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->normal_min.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->normal_min.value_u8);
+		rc = pldm_buf_extract_uint8(&buf,
+					    &(pdr_value->normal_min.value_u8));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->warning_high.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->warning_high.value_u8);
+		rc = pldm_buf_extract_uint8(
+		    &buf, &(pdr_value->warning_high.value_u8));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->warning_low.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->warning_low.value_u8);
+		rc = pldm_buf_extract_uint8(&buf,
+					    &(pdr_value->warning_low.value_u8));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->critical_high.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->critical_high.value_u8);
+		rc = pldm_buf_extract_uint8(
+		    &buf, &(pdr_value->critical_high.value_u8));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->critical_low.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->critical_low.value_u8);
+		rc = pldm_buf_extract_uint8(
+		    &buf, &(pdr_value->critical_low.value_u8));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->fatal_high.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->fatal_high.value_u8);
+		rc = pldm_buf_extract_uint8(&buf,
+					    &(pdr_value->fatal_high.value_u8));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->fatal_low.value_u8 = *((uint8_t *)ptr);
+		// ptr += sizeof(pdr_value->fatal_low.value_u8);
+		rc = pldm_buf_extract_uint8(&buf,
+					    &(pdr_value->fatal_low.value_u8));
+		if (rc) {
+			return rc;
+		}
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT16:
+	case PLDM_RANGE_FIELD_FORMAT_SINT16:
+		// pdr_value->nominal_value.value_u16 = le16toh(*((uint16_t
+		// *)ptr)); ptr += sizeof(pdr_value->nominal_value.value_u16);
+		rc = pldm_buf_extract_uint16(
+		    &buf, &(pdr_value->nominal_value.value_u16));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->normal_max.value_u16 = le16toh(*((uint16_t
+		// *)ptr)); ptr += sizeof(pdr_value->normal_max.value_u16);
+		rc = pldm_buf_extract_uint16(
+		    &buf, &(pdr_value->normal_max.value_u16));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->normal_min.value_u16 = le16toh(*((uint16_t
+		// *)ptr)); ptr += sizeof(pdr_value->normal_min.value_u16);
+		rc = pldm_buf_extract_uint16(
+		    &buf, &(pdr_value->normal_min.value_u16));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->warning_high.value_u16 = le16toh(*((uint16_t
+		// *)ptr)); ptr += sizeof(pdr_value->warning_high.value_u16);
+		rc = pldm_buf_extract_uint16(
+		    &buf, &(pdr_value->warning_high.value_u16));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->warning_low.value_u16 = le16toh(*((uint16_t
+		// *)ptr)); ptr += sizeof(pdr_value->warning_low.value_u16);
+		rc = pldm_buf_extract_uint16(
+		    &buf, &(pdr_value->warning_low.value_u16));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->critical_high.value_u16 = le16toh(*((uint16_t
+		// *)ptr)); ptr += sizeof(pdr_value->critical_high.value_u16);
+		rc = pldm_buf_extract_uint16(
+		    &buf, &(pdr_value->critical_high.value_u16));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->critical_low.value_u16 = le16toh(*((uint16_t
+		// *)ptr)); ptr += sizeof(pdr_value->critical_low.value_u16);
+		rc = pldm_buf_extract_uint16(
+		    &buf, &(pdr_value->critical_low.value_u16));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->fatal_high.value_u16 = le16toh(*((uint16_t
+		// *)ptr)); ptr += sizeof(pdr_value->fatal_high.value_u16);
+		rc = pldm_buf_extract_uint16(
+		    &buf, &(pdr_value->fatal_high.value_u16));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->fatal_low.value_u16 = le16toh(*((uint16_t *)ptr));
+		// ptr += sizeof(pdr_value->fatal_low.value_u16);
+		rc = pldm_buf_extract_uint16(&buf,
+					     &(pdr_value->fatal_low.value_u16));
+		if (rc) {
+			return rc;
+		}
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT32:
+	case PLDM_RANGE_FIELD_FORMAT_SINT32:
+	case PLDM_RANGE_FIELD_FORMAT_REAL32:
+		// pdr_value->nominal_value.value_u32 = le32toh(*((uint32_t
+		// *)ptr)); ptr += sizeof(pdr_value->nominal_value.value_u32);
+		rc = pldm_buf_extract_uint32(
+		    &buf, &(pdr_value->nominal_value.value_u32));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->normal_max.value_u32 = le32toh(*((uint32_t
+		// *)ptr)); ptr += sizeof(pdr_value->normal_max.value_u32);
+		rc = pldm_buf_extract_uint32(
+		    &buf, &(pdr_value->normal_max.value_u32));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->normal_min.value_u32 = le32toh(*((uint32_t
+		// *)ptr)); ptr += sizeof(pdr_value->normal_min.value_u32);
+		rc = pldm_buf_extract_uint32(
+		    &buf, &(pdr_value->normal_min.value_u32));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->warning_high.value_u32 = le32toh(*((uint32_t
+		// *)ptr)); ptr += sizeof(pdr_value->warning_high.value_u32);
+		rc = pldm_buf_extract_uint32(
+		    &buf, &(pdr_value->warning_high.value_u32));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->warning_low.value_u32 = le32toh(*((uint32_t
+		// *)ptr)); ptr += sizeof(pdr_value->warning_low.value_u32);
+		rc = pldm_buf_extract_uint32(
+		    &buf, &(pdr_value->warning_low.value_u32));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->critical_high.value_u32 = le32toh(*((uint32_t
+		// *)ptr)); ptr += sizeof(pdr_value->critical_high.value_u32);
+		rc = pldm_buf_extract_uint32(
+		    &buf, &(pdr_value->critical_high.value_u32));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->critical_low.value_u32 = le32toh(*((uint32_t
+		// *)ptr)); ptr += sizeof(pdr_value->critical_low.value_u32);
+		rc = pldm_buf_extract_uint32(
+		    &buf, &(pdr_value->critical_low.value_u32));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->fatal_high.value_u32 = le32toh(*((uint32_t
+		// *)ptr)); ptr += sizeof(pdr_value->fatal_high.value_u32);
+		rc = pldm_buf_extract_uint32(
+		    &buf, &(pdr_value->fatal_high.value_u32));
+		if (rc) {
+			return rc;
+		}
+		// pdr_value->fatal_low.value_u32 = le32toh(*((uint32_t *)ptr));
+		// ptr += sizeof(pdr_value->fatal_low.value_u32);
+		rc = pldm_buf_extract_uint32(&buf,
+					     &(pdr_value->fatal_low.value_u32));
+		if (rc) {
+			return rc;
+		}
+		break;
+	default:
+		break;
+	}
+
+	pldm_buf_destroy(&buf);
+
+	return PLDM_SUCCESS;
+}
+
 int encode_get_numeric_effecter_value_req(uint8_t instance_id,
 					  uint16_t effecter_id,
 					  struct pldm_msg *msg)
