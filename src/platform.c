@@ -1235,6 +1235,297 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 	return PLDM_SUCCESS;
 }
 
+int decode_numeric_sensor_pdr_data(
+    const uint8_t *pdr_data, size_t pdr_data_length,
+    struct pldm_numeric_sensor_value_pdr *pdr_value)
+{
+	size_t expectedPDRSize = PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH;
+	const uint8_t *ptr = pdr_data;
+	uint32_t *ptr_uint32_t = NULL;
+
+	if (pdr_value == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (pdr_data_length < expectedPDRSize) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	pdr_value->hdr.record_handle = le32toh(*((uint32_t *)ptr));
+	ptr += sizeof(uint32_t);
+
+	pdr_value->hdr.version = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	pdr_value->hdr.type = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	pdr_value->hdr.record_change_num = le16toh(*((uint16_t *)ptr));
+	ptr += sizeof(uint16_t);
+
+	pdr_value->hdr.length = le16toh(*((uint16_t *)ptr));
+	ptr += sizeof(uint16_t);
+
+	pdr_value->terminus_handle = le16toh(*((uint16_t *)ptr));
+	ptr += sizeof(uint16_t);
+
+	pdr_value->sensor_id = le16toh(*((uint16_t *)ptr));
+	ptr += sizeof(uint16_t);
+
+	pdr_value->entity_type = le16toh(*((uint16_t *)ptr));
+	ptr += sizeof(uint16_t);
+
+	pdr_value->entity_instance_num = le16toh(*((uint16_t *)ptr));
+	ptr += sizeof(uint16_t);
+
+	pdr_value->container_id = le16toh(*((uint16_t *)ptr));
+	ptr += sizeof(uint16_t);
+
+	pdr_value->sensor_init = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	pdr_value->sensor_auxiliary_names_pdr = *((bool8_t *)ptr);
+	ptr += sizeof(bool8_t);
+
+	pdr_value->base_unit = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	pdr_value->unit_modifier = *((int8_t *)ptr);
+	ptr += sizeof(int8_t);
+
+	pdr_value->rate_unit = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	pdr_value->base_oem_unit_handle = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	pdr_value->aux_unit = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	pdr_value->aux_unit_modifier = *((int8_t *)ptr);
+	ptr += sizeof(int8_t);
+
+	pdr_value->aux_rate_unit = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	pdr_value->rel = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	pdr_value->aux_oem_unit_handle = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	pdr_value->is_linear = *((bool8_t *)ptr);
+	ptr += sizeof(bool8_t);
+
+	pdr_value->sensor_data_size = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	expectedPDRSize -=
+	    PLDM_PDR_NUMERIC_SENSOR_PDR_VARIED_SENSOR_DATA_SIZE_MIN_LENGTH;
+	switch (pdr_value->sensor_data_size) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		expectedPDRSize += 3 * sizeof(uint8_t);
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		expectedPDRSize += 3 * sizeof(uint16_t);
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		expectedPDRSize += 3 * sizeof(uint32_t);
+		break;
+	default:
+		break;
+	}
+
+	if (pdr_data_length < expectedPDRSize) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	ptr_uint32_t = (uint32_t*)&pdr_value->resolution;
+	*ptr_uint32_t = le32toh(*((uint32_t *)ptr));
+	ptr += sizeof(uint32_t);
+
+	ptr_uint32_t = (uint32_t*)&pdr_value->offset;
+	*ptr_uint32_t = le32toh(*((uint32_t *)ptr));
+	ptr += sizeof(uint32_t);
+
+	pdr_value->accuracy = le16toh(*((uint16_t *)ptr));
+	ptr += sizeof(uint16_t);
+
+	pdr_value->plus_tolerance = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	pdr_value->minus_tolerance = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	switch (pdr_value->sensor_data_size) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		pdr_value->hysteresis.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->hysteresis.value_u8);
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		pdr_value->hysteresis.value_u16 = le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->hysteresis.value_u16);
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		pdr_value->hysteresis.value_u32 = le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->hysteresis.value_u32);
+		break;
+	default:
+		break;
+	}
+
+	pdr_value->supported_thresholds = *((bitfield8_t *)ptr);
+	ptr += sizeof(bitfield8_t);
+
+	pdr_value->threshold_and_hysteresis_volatility = *((bitfield8_t *)ptr);
+	ptr += sizeof(bitfield8_t);
+
+	ptr_uint32_t = (uint32_t*)&pdr_value->state_transition_interval;
+	*ptr_uint32_t = le32toh(*((uint32_t *)ptr));
+	ptr += sizeof(uint32_t);
+
+	ptr_uint32_t = (uint32_t*)&pdr_value->update_interval;
+	*ptr_uint32_t = le32toh(*((uint32_t *)ptr));
+	ptr += sizeof(uint32_t);
+
+	switch (pdr_value->sensor_data_size) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		pdr_value->max_readable.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->max_readable.value_u8);
+		pdr_value->min_readable.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->min_readable.value_u8);
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		pdr_value->max_readable.value_u16 = le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->max_readable.value_u16);
+		pdr_value->min_readable.value_u16 = le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->min_readable.value_u16);
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		pdr_value->max_readable.value_u32 = le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->max_readable.value_u32);
+		pdr_value->min_readable.value_u32 = le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->min_readable.value_u32);
+		break;
+	default:
+		break;
+	}
+
+	pdr_value->range_field_format = *((uint8_t *)ptr);
+	ptr += sizeof(uint8_t);
+
+	expectedPDRSize -=
+	    PLDM_PDR_NUMERIC_SENSOR_PDR_VARIED_RANGE_FIELD_MIN_LENGTH;
+	switch (pdr_value->range_field_format) {
+	case PLDM_RANGE_FIELD_FORMAT_UINT8:
+	case PLDM_RANGE_FIELD_FORMAT_SINT8:
+		expectedPDRSize += 9 * sizeof(uint8_t);
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT16:
+	case PLDM_RANGE_FIELD_FORMAT_SINT16:
+		expectedPDRSize += 9 * sizeof(uint16_t);
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT32:
+	case PLDM_RANGE_FIELD_FORMAT_SINT32:
+	case PLDM_RANGE_FIELD_FORMAT_REAL32:
+		expectedPDRSize += 9 * sizeof(uint32_t);
+		break;
+	default:
+		break;
+	}
+
+	if (pdr_data_length < expectedPDRSize) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	pdr_value->range_field_support = *((bitfield8_t *)ptr);
+	ptr += sizeof(bitfield8_t);
+
+	switch (pdr_value->range_field_format) {
+	case PLDM_RANGE_FIELD_FORMAT_UINT8:
+	case PLDM_RANGE_FIELD_FORMAT_SINT8:
+		pdr_value->nominal_value.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->nominal_value.value_u8);
+		pdr_value->normal_max.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->normal_max.value_u8);
+		pdr_value->normal_min.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->normal_min.value_u8);
+		pdr_value->warning_high.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->warning_high.value_u8);
+		pdr_value->warning_low.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->warning_low.value_u8);
+		pdr_value->critical_high.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->critical_high.value_u8);
+		pdr_value->critical_low.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->critical_low.value_u8);
+		pdr_value->fatal_high.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->fatal_high.value_u8);
+		pdr_value->fatal_low.value_u8 = *((uint8_t *)ptr);
+		ptr += sizeof(pdr_value->fatal_low.value_u8);
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT16:
+	case PLDM_RANGE_FIELD_FORMAT_SINT16:
+		pdr_value->nominal_value.value_u16 =
+		    le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->nominal_value.value_u16);
+		pdr_value->normal_max.value_u16 = le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->normal_max.value_u16);
+		pdr_value->normal_min.value_u16 = le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->normal_min.value_u16);
+		pdr_value->warning_high.value_u16 = le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->warning_high.value_u16);
+		pdr_value->warning_low.value_u16 = le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->warning_low.value_u16);
+		pdr_value->critical_high.value_u16 =
+		    le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->critical_high.value_u16);
+		pdr_value->critical_low.value_u16 = le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->critical_low.value_u16);
+		pdr_value->fatal_high.value_u16 = le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->fatal_high.value_u16);
+		pdr_value->fatal_low.value_u16 = le16toh(*((uint16_t *)ptr));
+		ptr += sizeof(pdr_value->fatal_low.value_u16);
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT32:
+	case PLDM_RANGE_FIELD_FORMAT_SINT32:
+	case PLDM_RANGE_FIELD_FORMAT_REAL32:
+		pdr_value->nominal_value.value_u32 =
+		    le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->nominal_value.value_u32);
+		pdr_value->normal_max.value_u32 = le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->normal_max.value_u32);
+		pdr_value->normal_min.value_u32 = le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->normal_min.value_u32);
+		pdr_value->warning_high.value_u32 = le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->warning_high.value_u32);
+		pdr_value->warning_low.value_u32 = le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->warning_low.value_u32);
+		pdr_value->critical_high.value_u32 =
+		    le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->critical_high.value_u32);
+		pdr_value->critical_low.value_u32 = le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->critical_low.value_u32);
+		pdr_value->fatal_high.value_u32 = le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->fatal_high.value_u32);
+		pdr_value->fatal_low.value_u32 = le32toh(*((uint32_t *)ptr));
+		ptr += sizeof(pdr_value->fatal_low.value_u32);
+		break;
+	default:
+		break;
+	}
+
+	return PLDM_SUCCESS;
+}
+
 int encode_get_numeric_effecter_value_req(uint8_t instance_id,
 					  uint16_t effecter_id,
 					  struct pldm_msg *msg)
