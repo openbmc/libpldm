@@ -7,7 +7,8 @@ libpldm_sources += files(
   'firmware_update.c',
   'fru.c',
   'pdr.c',
-  'utils.c'
+  'utils.c',
+  'buf.c'
   )
 
 if get_option('oem-ibm').enabled()
