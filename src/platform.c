@@ -1,10 +1,10 @@
+#include "platform.h"
 #include "base.h"
+#include "buf.h"
 #include "pldm_types.h"
 #include <endian.h>
 #include <stdint.h>
 #include <string.h>
-
-#include "platform.h"
 
 int encode_state_effecter_pdr(
     struct pldm_state_effecter_pdr *const effecter,
@@ -1233,6 +1233,240 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 	return PLDM_SUCCESS;
+}
+
+int decode_numeric_sensor_pdr_data(
+    const uint8_t *pdr_data, size_t pdr_data_length,
+    struct pldm_numeric_sensor_value_pdr *pdr_value)
+{
+	struct pldm_buf _buf, *buf = &_buf;
+
+	pldm_buf_init(buf, pdr_data, pdr_data_length);
+	pldm_buf_extract_uint32(buf, &(pdr_value->hdr.record_handle));
+	pldm_buf_extract_uint8(buf, &(pdr_value->hdr.version));
+	pldm_buf_extract_uint8(buf, &(pdr_value->hdr.type));
+	pldm_buf_extract_uint16(buf, &(pdr_value->hdr.record_change_num));
+	pldm_buf_extract_uint16(buf, &(pdr_value->hdr.length));
+	pldm_buf_extract_uint16(buf, &(pdr_value->terminus_handle));
+	pldm_buf_extract_uint16(buf, &(pdr_value->sensor_id));
+	pldm_buf_extract_uint16(buf, &(pdr_value->entity_type));
+	pldm_buf_extract_uint16(buf, &(pdr_value->entity_instance_num));
+	pldm_buf_extract_uint16(buf, &(pdr_value->container_id));
+	pldm_buf_extract_uint8(buf, &(pdr_value->sensor_init));
+	pldm_buf_extract_uint8(buf, &(pdr_value->sensor_auxiliary_names_pdr));
+	pldm_buf_extract_uint8(buf, &(pdr_value->base_unit));
+	pldm_buf_extract_int8(buf, &(pdr_value->unit_modifier));
+	pldm_buf_extract_uint8(buf, &(pdr_value->rate_unit));
+	pldm_buf_extract_uint8(buf, &(pdr_value->base_oem_unit_handle));
+	pldm_buf_extract_uint8(buf, &(pdr_value->aux_unit));
+	pldm_buf_extract_int8(buf, &(pdr_value->aux_unit_modifier));
+	pldm_buf_extract_uint8(buf, &(pdr_value->aux_rate_unit));
+	pldm_buf_extract_uint8(buf, &(pdr_value->rel));
+	pldm_buf_extract_uint8(buf, &(pdr_value->aux_oem_unit_handle));
+	pldm_buf_extract_uint8(buf, &(pdr_value->is_linear));
+	pldm_buf_extract_uint8(buf, &(pdr_value->sensor_data_size));
+	pldm_buf_extract_real32(buf, &(pdr_value->resolution));
+	pldm_buf_extract_real32(buf, &(pdr_value->offset));
+	pldm_buf_extract_uint16(buf, &(pdr_value->accuracy));
+	pldm_buf_extract_uint8(buf, &(pdr_value->plus_tolerance));
+	pldm_buf_extract_uint8(buf, &(pdr_value->minus_tolerance));
+
+	switch (pdr_value->sensor_data_size) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+		pldm_buf_extract_uint8(buf, &(pdr_value->hysteresis.value_u8));
+		break;
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		pldm_buf_extract_int8(buf, &(pdr_value->hysteresis.value_s8));
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+		pldm_buf_extract_uint16(buf,
+					&(pdr_value->hysteresis.value_u16));
+		break;
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		pldm_buf_extract_int16(buf, &(pdr_value->hysteresis.value_s16));
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+		pldm_buf_extract_uint32(buf,
+					&(pdr_value->hysteresis.value_u32));
+		break;
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		pldm_buf_extract_int32(buf, &(pdr_value->hysteresis.value_s32));
+		break;
+	default:
+		break;
+	}
+
+	pldm_buf_extract_uint8(buf, &(pdr_value->supported_thresholds.byte));
+	pldm_buf_extract_uint8(
+	    buf, &(pdr_value->threshold_and_hysteresis_volatility.byte));
+	pldm_buf_extract_uint32(
+	    buf, (uint32_t *)&(pdr_value->state_transition_interval));
+	pldm_buf_extract_uint32(buf, (uint32_t *)&(pdr_value->update_interval));
+	switch (pdr_value->sensor_data_size) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+		pldm_buf_extract_uint8(buf,
+				       &(pdr_value->max_readable.value_u8));
+		pldm_buf_extract_uint8(buf,
+				       &(pdr_value->min_readable.value_u8));
+		break;
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		pldm_buf_extract_int8(buf, &(pdr_value->max_readable.value_s8));
+		pldm_buf_extract_int8(buf, &(pdr_value->min_readable.value_s8));
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+		pldm_buf_extract_uint16(buf,
+					&(pdr_value->max_readable.value_u16));
+		pldm_buf_extract_uint16(buf,
+					&(pdr_value->min_readable.value_u16));
+		break;
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		pldm_buf_extract_int16(buf,
+				       &(pdr_value->max_readable.value_s16));
+		pldm_buf_extract_int16(buf,
+				       &(pdr_value->min_readable.value_s16));
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+		pldm_buf_extract_uint32(buf,
+					&(pdr_value->max_readable.value_u32));
+		pldm_buf_extract_uint32(buf,
+					&(pdr_value->min_readable.value_u32));
+		break;
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		pldm_buf_extract_int32(buf,
+				       &(pdr_value->max_readable.value_s32));
+		pldm_buf_extract_int32(buf,
+				       &(pdr_value->min_readable.value_s32));
+		break;
+	default:
+		break;
+	}
+
+	pldm_buf_extract_uint8(buf, &(pdr_value->range_field_format));
+	pldm_buf_extract_uint8(buf, &(pdr_value->range_field_support.byte));
+
+	switch (pdr_value->range_field_format) {
+	case PLDM_RANGE_FIELD_FORMAT_UINT8:
+		pldm_buf_extract_uint8(buf,
+				       &(pdr_value->nominal_value.value_u8));
+		pldm_buf_extract_uint8(buf, &(pdr_value->normal_max.value_u8));
+		pldm_buf_extract_uint8(buf, &(pdr_value->normal_min.value_u8));
+		pldm_buf_extract_uint8(buf,
+				       &(pdr_value->warning_high.value_u8));
+		pldm_buf_extract_uint8(buf, &(pdr_value->warning_low.value_u8));
+		pldm_buf_extract_uint8(buf,
+				       &(pdr_value->critical_high.value_u8));
+		pldm_buf_extract_uint8(buf,
+				       &(pdr_value->critical_low.value_u8));
+		pldm_buf_extract_uint8(buf, &(pdr_value->fatal_high.value_u8));
+		pldm_buf_extract_uint8(buf, &(pdr_value->fatal_low.value_u8));
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_SINT8:
+		pldm_buf_extract_int8(buf,
+				      &(pdr_value->nominal_value.value_s8));
+		pldm_buf_extract_int8(buf, &(pdr_value->normal_max.value_s8));
+		pldm_buf_extract_int8(buf, &(pdr_value->normal_min.value_s8));
+		pldm_buf_extract_int8(buf, &(pdr_value->warning_high.value_s8));
+		pldm_buf_extract_int8(buf, &(pdr_value->warning_low.value_s8));
+		pldm_buf_extract_int8(buf,
+				      &(pdr_value->critical_high.value_s8));
+		pldm_buf_extract_int8(buf, &(pdr_value->critical_low.value_s8));
+		pldm_buf_extract_int8(buf, &(pdr_value->fatal_high.value_s8));
+		pldm_buf_extract_int8(buf, &(pdr_value->fatal_low.value_s8));
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT16:
+		pldm_buf_extract_uint16(buf,
+					&(pdr_value->nominal_value.value_u16));
+		pldm_buf_extract_uint16(buf,
+					&(pdr_value->normal_max.value_u16));
+		pldm_buf_extract_uint16(buf,
+					&(pdr_value->normal_min.value_u16));
+		pldm_buf_extract_uint16(buf,
+					&(pdr_value->warning_high.value_u16));
+		pldm_buf_extract_uint16(buf,
+					&(pdr_value->warning_low.value_u16));
+		pldm_buf_extract_uint16(buf,
+					&(pdr_value->critical_high.value_u16));
+		pldm_buf_extract_uint16(buf,
+					&(pdr_value->critical_low.value_u16));
+		pldm_buf_extract_uint16(buf,
+					&(pdr_value->fatal_high.value_u16));
+		pldm_buf_extract_uint16(buf, &(pdr_value->fatal_low.value_u16));
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_SINT16:
+		pldm_buf_extract_int16(buf,
+				       &(pdr_value->nominal_value.value_s16));
+		pldm_buf_extract_int16(buf, &(pdr_value->normal_max.value_s16));
+		pldm_buf_extract_int16(buf, &(pdr_value->normal_min.value_s16));
+		pldm_buf_extract_int16(buf,
+				       &(pdr_value->warning_high.value_s16));
+		pldm_buf_extract_int16(buf,
+				       &(pdr_value->warning_low.value_s16));
+		pldm_buf_extract_int16(buf,
+				       &(pdr_value->critical_high.value_s16));
+		pldm_buf_extract_int16(buf,
+				       &(pdr_value->critical_low.value_s16));
+		pldm_buf_extract_int16(buf, &(pdr_value->fatal_high.value_s16));
+		pldm_buf_extract_int16(buf, &(pdr_value->fatal_low.value_s16));
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT32:
+		pldm_buf_extract_uint32(buf,
+					&(pdr_value->nominal_value.value_u32));
+		pldm_buf_extract_uint32(buf,
+					&(pdr_value->normal_max.value_u32));
+		pldm_buf_extract_uint32(buf,
+					&(pdr_value->normal_min.value_u32));
+		pldm_buf_extract_uint32(buf,
+					&(pdr_value->warning_high.value_u32));
+		pldm_buf_extract_uint32(buf,
+					&(pdr_value->warning_low.value_u32));
+		pldm_buf_extract_uint32(buf,
+					&(pdr_value->critical_high.value_u32));
+		pldm_buf_extract_uint32(buf,
+					&(pdr_value->critical_low.value_u32));
+		pldm_buf_extract_uint32(buf,
+					&(pdr_value->fatal_high.value_u32));
+		pldm_buf_extract_uint32(buf, &(pdr_value->fatal_low.value_u32));
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_SINT32:
+		pldm_buf_extract_int32(buf,
+				       &(pdr_value->nominal_value.value_s32));
+		pldm_buf_extract_int32(buf, &(pdr_value->normal_max.value_s32));
+		pldm_buf_extract_int32(buf, &(pdr_value->normal_min.value_s32));
+		pldm_buf_extract_int32(buf,
+				       &(pdr_value->warning_high.value_s32));
+		pldm_buf_extract_int32(buf,
+				       &(pdr_value->warning_low.value_s32));
+		pldm_buf_extract_int32(buf,
+				       &(pdr_value->critical_high.value_s32));
+		pldm_buf_extract_int32(buf,
+				       &(pdr_value->critical_low.value_s32));
+		pldm_buf_extract_int32(buf, &(pdr_value->fatal_high.value_s32));
+		pldm_buf_extract_int32(buf, &(pdr_value->fatal_low.value_s32));
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_REAL32:
+		pldm_buf_extract_real32(buf,
+					&(pdr_value->nominal_value.value_f32));
+		pldm_buf_extract_real32(buf,
+					&(pdr_value->normal_max.value_f32));
+		pldm_buf_extract_real32(buf,
+					&(pdr_value->normal_min.value_f32));
+		pldm_buf_extract_real32(buf,
+					&(pdr_value->warning_high.value_f32));
+		pldm_buf_extract_real32(buf,
+					&(pdr_value->warning_low.value_f32));
+		pldm_buf_extract_real32(buf,
+					&(pdr_value->critical_high.value_f32));
+		pldm_buf_extract_real32(buf,
+					&(pdr_value->critical_low.value_f32));
+		pldm_buf_extract_real32(buf,
+					&(pdr_value->fatal_high.value_f32));
+		pldm_buf_extract_real32(buf, &(pdr_value->fatal_low.value_f32));
+		break;
+	default:
+		break;
+	}
+
+	return pldm_buf_destroy(buf);
 }
 
 int encode_get_numeric_effecter_value_req(uint8_t instance_id,
