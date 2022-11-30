@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee655f30_eb944934",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-30T05:09:41Z",
+      "side": 1,
+      "message": "DSP0248",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88b9738b_b3a4314c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-30T05:09:41Z",
+      "side": 1,
+      "message": "The latest version is 1.2.2 which is released on Nov 2nd this year, please check if there is any change for this command in the new version.",
+      "range": {
+        "startLine": 10,
+        "startChar": 30,
+        "endLine": 10,
+        "endChar": 37
+      },
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8d45924_b29a207c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-30T05:09:41Z",
+      "side": 1,
+      "message": "PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 38
+      },
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6293c08f_187aff48",
+        "filename": "src/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-30T05:09:41Z",
+      "side": 1,
+      "message": "need a check for the possible values in\n\n{\nNOT_CONFIGURED \u003d 0x00,\nASYNCHRONOUS_MESSAGING \u003d 0x01, \nSYNCHRONOUS_MESSAGING \u003d 0x02\nASYNCHRONOUS_WITH_HEARTBEAT \u003d 0x03\n}\n\nand return PLDM_ERROR_INVALID_DATA if the decoded data is not a supported value",
+      "range": {
+        "startLine": 1027,
+        "startChar": 0,
+        "endLine": 1027,
+        "endChar": 55
+      },
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ce7903f_80fad85b",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-11-30T05:09:41Z",
+      "side": 1,
+      "message": "also add one good \u0026 bad test case that covers the synchConfiguration.",
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
