@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b337fe01_64703604",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-12-01T08:16:42Z",
+      "side": 1,
+      "message": "The struct is difference with section 28.8 Sensor Auxiliary Names PDR.\nIt seem names[1] is simpler form for array of struct which includes nameStringCount, nameLanguageTag and sensorName.\nI also have one MR for pldm_effecter_auxiliary_names_pdr which use difference approach. @ManojKiran Eda Do you have any idea on this?",
+      "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7648f3e1_a6c90f28",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-12-01T08:16:42Z",
+      "side": 1,
+      "message": "This union is the same as union_effecter_data_size, just difference the name. Should we rename union_effecter_data_size to use for both sensor and effecter data size?",
+      "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
