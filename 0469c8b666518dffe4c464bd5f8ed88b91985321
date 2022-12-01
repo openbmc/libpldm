@@ -47,6 +47,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a6c94f6_9eac5df0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-12-01T04:03:10Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "ee655f30_eb944934",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8859fd2_5153fc1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-12-01T04:03:10Z",
+      "side": 1,
+      "message": "As the change log: \"Released as DMTF Standard\". There is no change in the specs.",
+      "parentUuid": "88b9738b_b3a4314c",
+      "range": {
+        "startLine": 10,
+        "startChar": 30,
+        "endLine": 10,
+        "endChar": 37
+      },
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8d45924_b29a207c",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-30T05:09:41Z",
       "side": 1,
       "message": "PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 38
+      },
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0698100b_5248907d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-12-01T04:03:10Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "e8d45924_b29a207c",
       "range": {
         "startLine": 34,
         "startChar": 8,
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d8b106a_ef7c6d81",
+        "filename": "src/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-12-01T04:03:10Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "6293c08f_187aff48",
+      "range": {
+        "startLine": 1027,
+        "startChar": 0,
+        "endLine": 1027,
+        "endChar": 55
+      },
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ce7903f_80fad85b",
@@ -106,6 +202,24 @@
       "writtenOn": "2022-11-30T05:09:41Z",
       "side": 1,
       "message": "also add one good \u0026 bad test case that covers the synchConfiguration.",
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6f2a49c_77ae72ff",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2022-12-01T04:03:10Z",
+      "side": 1,
+      "message": "Because the good test case for synchConfiguration is a part of \"TEST(PlatformEventMessageSupported, testGoodDecodeRespond)\", so I only add new test case for testBadSynchConfiguration.",
+      "parentUuid": "5ce7903f_80fad85b",
       "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
