@@ -95,6 +95,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c62ee4a_0a8dcc3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-12-05T11:02:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b8859fd2_5153fc1d",
+      "range": {
+        "startLine": 10,
+        "startChar": 30,
+        "endLine": 10,
+        "endChar": 37
+      },
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8d45924_b29a207c",
@@ -220,6 +244,24 @@
       "side": 1,
       "message": "Because the good test case for synchConfiguration is a part of \"TEST(PlatformEventMessageSupported, testGoodDecodeRespond)\", so I only add new test case for testBadSynchConfiguration.",
       "parentUuid": "5ce7903f_80fad85b",
+      "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f97be30_ed635bec",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-12-05T11:02:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b6f2a49c_77ae72ff",
       "revId": "0469c8b666518dffe4c464bd5f8ed88b91985321",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
