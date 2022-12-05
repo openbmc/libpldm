@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8edfe547_291b5cdd",
+        "filename": "tests/libpldm_base_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-12-05T10:26:34Z",
+      "side": 1,
+      "message": "ah , yeah you are right. Not sure why the tool shows it as \" \". I guess its not really that matured.",
+      "parentUuid": "5a510831_a20dda20",
+      "revId": "e699591da7a1fd6a6f65257a4e8a6c75c34875b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b14ce602_ae1d23f8",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-29T06:36:18Z",
       "side": 1,
       "message": "Blank comment added?",
+      "revId": "e699591da7a1fd6a6f65257a4e8a6c75c34875b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81376fa4_68381bf4",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2022-12-05T10:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b14ce602_ae1d23f8",
       "revId": "e699591da7a1fd6a6f65257a4e8a6c75c34875b0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
