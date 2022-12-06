@@ -331,6 +331,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a81a4bf0_04b56b58",
+        "filename": "src/requester/rde_requester.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-06T21:31:30Z",
+      "side": 1,
+      "message": "Sorry for the confusion. What I meant is creating another function for initializing the context we are using.\n\nvoid pldm_base_init_context(struct requester_base_context *ctx, uint8_t tid, ...);\n\nI think we shouldn\u0027t add the EID to the lib, since it\u0027s part of MCTP not the requester.",
+      "parentUuid": "4a77a73b_8b9c6274",
+      "range": {
+        "startLine": 62,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 16
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "553903fe_aa46c997",
         "filename": "src/requester/rde_requester.c",
         "patchSetId": 4
