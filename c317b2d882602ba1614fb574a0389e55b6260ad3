@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fcfb3d4_3a576d09",
+        "filename": "include/libpldm/requester/rde_requester.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-06T02:37:06Z",
+      "side": 1,
+      "message": "This is simply the requester for PLDM base type. So we should name it as \"base\", not \"rde\".",
+      "range": {
+        "startLine": 1,
+        "startChar": 8,
+        "endLine": 1,
+        "endChar": 23
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f331712f_a640f9f5",
+        "filename": "include/libpldm/requester/rde_requester.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-06T02:37:06Z",
+      "side": 1,
+      "message": "you can use PLDM_MAX_TYPES in base.h",
+      "range": {
+        "startLine": 40,
+        "startChar": 23,
+        "endLine": 40,
+        "endChar": 33
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55bab592_2417c607",
+        "filename": "include/libpldm/requester/rde_requester.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-06T02:37:06Z",
+      "side": 1,
+      "message": "versions are 32 bits",
+      "range": {
+        "startLine": 40,
+        "startChar": 1,
+        "endLine": 40,
+        "endChar": 8
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f148dd_cbaaddb6",
+        "filename": "include/libpldm/requester/rde_requester.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-06T02:37:06Z",
+      "side": 1,
+      "message": "Why are you passing a pointer here?",
+      "range": {
+        "startLine": 57,
+        "startChar": 10,
+        "endLine": 57,
+        "endChar": 22
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54d789b8_aa898c39",
+        "filename": "include/libpldm/requester/rde_requester.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-06T02:37:06Z",
+      "side": 1,
+      "message": "This should be the request buffer and the length. You can make a struct encapsulating a buffer and a variable for length.",
+      "range": {
+        "startLine": 70,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 39
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cc1a961_5098c6fe",
+        "filename": "include/libpldm/requester/rde_requester.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-06T02:37:06Z",
+      "side": 1,
+      "message": "whats the purpose of this queue?",
+      "range": {
+        "startLine": 90,
+        "startChar": 9,
+        "endLine": 90,
+        "endChar": 24
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bffae90d_f04121cc",
+        "filename": "src/requester/rde_requester.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-06T02:37:06Z",
+      "side": 1,
+      "message": "Since this is just a single value, you can pass by value. No need to use a pointer here.",
+      "range": {
+        "startLine": 59,
+        "startChar": 81,
+        "endLine": 59,
+        "endChar": 93
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4228ea22_c7b86398",
+        "filename": "src/requester/rde_requester.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-06T02:37:06Z",
+      "side": 1,
+      "message": "A context should be tied to a particular eid and a requester tid. So we should initialize it separately. Something like \"pldm_base_init_context\"",
+      "range": {
+        "startLine": 62,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 16
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "553903fe_aa46c997",
+        "filename": "src/requester/rde_requester.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-06T02:37:06Z",
+      "side": 1,
+      "message": "We can simply set the \"current_command\" command to the first request command we need to generate and generate it when we call pldm_base_get_next_request",
+      "range": {
+        "startLine": 63,
+        "startChar": 24,
+        "endLine": 63,
+        "endChar": 51
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
