@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a78177e_d3531897",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2022-12-06T02:55:41Z",
+      "side": 1,
+      "message": "Resolved the comment since https://gerrit.openbmc.org/c/openbmc/libpldm/+/59006 also was updated to unit8_t array",
+      "parentUuid": "67e58408_2bc1de54",
+      "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7648f3e1_a6c90f28",
@@ -49,6 +67,24 @@
       "writtenOn": "2022-12-01T08:16:42Z",
       "side": 1,
       "message": "This union is the same as union_effecter_data_size, just difference the name. Should we rename union_effecter_data_size to use for both sensor and effecter data size?",
+      "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4b27a14_dc9076cf",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2022-12-06T02:55:41Z",
+      "side": 1,
+      "message": "The reason to add union for sensor data size is because that effecter and sensor data size are described in two different tables in DSP0248.\nsensorDataSize: table78\neffecterDataSize: table87",
+      "parentUuid": "7648f3e1_a6c90f28",
       "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
