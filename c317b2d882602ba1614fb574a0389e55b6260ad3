@@ -72,6 +72,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "faaad347_61d4f9eb",
+        "filename": "include/libpldm/requester/rde_requester.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-06T02:51:25Z",
+      "side": 1,
+      "message": "Yes, definitely. Missed that.",
+      "parentUuid": "f331712f_a640f9f5",
+      "range": {
+        "startLine": 40,
+        "startChar": 23,
+        "endLine": 40,
+        "endChar": 33
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba850bf9_6aeb692a",
+        "filename": "include/libpldm/requester/rde_requester.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-06T02:51:25Z",
+      "side": 1,
+      "message": "Yes, I read that later. It is coming in the next CL. It is usually being represented by ver_32.",
+      "parentUuid": "55bab592_2417c607",
+      "range": {
+        "startLine": 40,
+        "startChar": 1,
+        "endLine": 40,
+        "endChar": 8
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "24f148dd_cbaaddb6",
         "filename": "include/libpldm/requester/rde_requester.h",
         "patchSetId": 4
@@ -83,6 +131,30 @@
       "writtenOn": "2022-12-06T02:37:06Z",
       "side": 1,
       "message": "Why are you passing a pointer here?",
+      "range": {
+        "startLine": 57,
+        "startChar": 10,
+        "endLine": 57,
+        "endChar": 22
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a86b2649_9581c2cf",
+        "filename": "include/libpldm/requester/rde_requester.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-06T02:51:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "24f148dd_cbaaddb6",
       "range": {
         "startLine": 57,
         "startChar": 10,
@@ -141,6 +213,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "254d98cf_0cb492f6",
+        "filename": "include/libpldm/requester/rde_requester.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-06T02:51:25Z",
+      "side": 1,
+      "message": "As we discussed, I thought that this queue can be leveraged by the caller in terms of multiple requests (lets say from BMC Web) but I\u0027ll leave that part to the caller instead. Hence removing it and moving the functionality of just creating the request stream in the requester library.",
+      "parentUuid": "6cc1a961_5098c6fe",
+      "range": {
+        "startLine": 90,
+        "startChar": 9,
+        "endLine": 90,
+        "endChar": 24
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bffae90d_f04121cc",
         "filename": "src/requester/rde_requester.c",
         "patchSetId": 4
@@ -152,6 +248,30 @@
       "writtenOn": "2022-12-06T02:37:06Z",
       "side": 1,
       "message": "Since this is just a single value, you can pass by value. No need to use a pointer here.",
+      "range": {
+        "startLine": 59,
+        "startChar": 81,
+        "endLine": 59,
+        "endChar": 93
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aaaa5d0_14f342bb",
+        "filename": "src/requester/rde_requester.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-06T02:51:25Z",
+      "side": 1,
+      "message": "Yes sure.",
+      "parentUuid": "bffae90d_f04121cc",
       "range": {
         "startLine": 59,
         "startChar": 81,
@@ -187,6 +307,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a77a73b_8b9c6274",
+        "filename": "src/requester/rde_requester.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-06T02:51:25Z",
+      "side": 1,
+      "message": "Makes sense. I can create another struct and tie them together",
+      "parentUuid": "4228ea22_c7b86398",
+      "range": {
+        "startLine": 62,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 16
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "553903fe_aa46c997",
         "filename": "src/requester/rde_requester.c",
         "patchSetId": 4
@@ -198,6 +342,30 @@
       "writtenOn": "2022-12-06T02:37:06Z",
       "side": 1,
       "message": "We can simply set the \"current_command\" command to the first request command we need to generate and generate it when we call pldm_base_get_next_request",
+      "range": {
+        "startLine": 63,
+        "startChar": 24,
+        "endLine": 63,
+        "endChar": 51
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "225f62ad_e02a0d16",
+        "filename": "src/requester/rde_requester.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-06T02:51:25Z",
+      "side": 1,
+      "message": "Yes, since we are not using a queueing mechanism, then yes I\u0027ll update that.",
+      "parentUuid": "553903fe_aa46c997",
       "range": {
         "startLine": 63,
         "startChar": 24,
