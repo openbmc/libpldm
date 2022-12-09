@@ -19,6 +19,7 @@ subdir('src')
 libpldm_include_dir = ['include', 'src']
 libpldm_headers = files()
 libpldm_instance_id_headers = files()
+libpldm_transport_headers = files()
 
 subdir('include/libpldm')
 
@@ -40,6 +41,10 @@ install_headers(
   libpldm_instance_id_headers,
   subdir:'libpldm/instance_id'
   )
+install_headers(
+  libpldm_transport_headers,
+  subdir:'libpldm/transport'
+  )
 
 libpldm_dep = declare_dependency(
   include_directories: libpldm_include_dir,
@@ -50,6 +55,15 @@ import('pkgconfig').generate(
   description: 'PLDM protocol encode/decode C lib',
   version: meson.project_version(),
   libraries: libpldm)
+
+compiler = meson.get_compiler('c')
+conf = configuration_data()
+if compiler.has_header('poll.h')
+  conf.set('PLDM_HAS_POLL', 1)
+endif
+configure_file(output: 'config.h',
+  configuration: conf
+)
 
 if get_option('tests').enabled()
   subdir('tests')

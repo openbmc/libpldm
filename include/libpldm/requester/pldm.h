@@ -1,5 +1,5 @@
-#ifndef MCTP_H
-#define MCTP_H
+#ifndef REQUESTER_PLDM_H
+#define REQUESTER_PLDM_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -8,6 +8,8 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 
+typedef uint8_t pldm_tid_t;
+/* Delete when deleting old api */
 typedef uint8_t mctp_eid_t;
 typedef uint8_t pldm_tid_t;
 
@@ -22,8 +24,12 @@ typedef enum pldm_requester_error_codes {
 	PLDM_REQUESTER_SEND_FAIL = -7,
 	PLDM_REQUESTER_RECV_FAIL = -8,
 	PLDM_REQUESTER_INVALID_RECV_LEN = -9,
+	PLDM_REQUESTER_SETUP_FAIL = -10,
+	PLDM_REQUESTER_INVALID_SETUP = -11,
+	PLDM_REQUESTER_POLL_FAIL = -12,
 } pldm_requester_rc_t;
 
+/* ------ Old API ---- deprecated */
 /**
  * @brief Connect to the MCTP socket and provide an fd to it. The fd can be
  *        used to pass as input to other APIs below, or can be polled.
@@ -107,8 +113,63 @@ pldm_requester_rc_t pldm_recv_any(mctp_eid_t eid, int mctp_fd,
 				  uint8_t **pldm_resp_msg,
 				  size_t *resp_msg_len);
 
+/* ------ New API ---- */
+struct pldm_requester;
+struct pldm_transport;
+struct pldm_instance_id;
+
+/**
+ * @brief Initialises pldm requester instance
+ *
+ * @param[in] ctx - *ctx  will be made to point to a pldm requester instance.
+ * 	      Caller to free memory by calling pldm_requester_destroy.
+ * @param[in] idb - caller owned pointer to a pldm instance id database. If this
+ * 	      is NULL PLDM_REQUESTER_INVALID_SETUP is returned.
+ *
+ * @return struct pldm_requester.
+ */
+pldm_requester_rc_t pldm_requester_init(struct pldm_requester **ctx,
+					struct pldm_instance_id *idb);
+/**
+ * @brief Destroys pldm requester instance.
+ *
+ * @pre The requester instance should not have any registered transports.
+ * 	Returns PLDM_REQUESTER_INVALID_SETUP if there are any.
+ *
+ * @return pldm_requester_rc_t (errno may be set)
+ */
+pldm_requester_rc_t pldm_requester_destroy(struct pldm_requester *ctx);
+
+/**
+ * @brief Registers a transport with pldm requester instance
+ *
+ * @param[in] ctx - pldm requester instance
+ * @param[in] transport - PLDM transport
+ *
+ * @pre Both input parameters must be initialised; otherwise, behaviour is
+ * 	undefined.
+ *
+ * @return pldm_requester_rc_t (errno may be set)
+ */
+pldm_requester_rc_t
+pldm_requester_register_transport(struct pldm_requester *ctx,
+				  struct pldm_transport *transport);
+
+/**
+ * @brief Unregisters all transports associated with the pldm requester instance
+ *
+ * @param[in] ctx - pldm requester instance
+ *
+ * @return pldm_requester_rc_t (errno may be set)
+ */
+pldm_requester_rc_t
+pldm_requester_unregister_transports(struct pldm_requester *ctx);
+
+/* */
+pldm_requester_rc_t pldm_requester_init_default(struct pldm_requester **ctx);
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* MCTP_H */
+#endif /* REQUESTER_PLDM_H */
