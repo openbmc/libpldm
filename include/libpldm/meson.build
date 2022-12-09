@@ -32,6 +32,7 @@ if get_option('requester-api').enabled()
     'requester/pldm.h',
   )
    libpldm_transport_headers += files(
+    'transport/af_mctp.h',
     'transport/mctp-demux.h',
     'transport/transport.h'
   )
