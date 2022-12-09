@@ -32,5 +32,9 @@ if get_option('requester-api').enabled()
     'requester/instance-id.h',
     'requester/pldm.h'
     )
+   libpldm_transport_headers += files(
+    'transport/mctp-demux.h',
+    'transport/transport.h'
+  )
 endif
 
