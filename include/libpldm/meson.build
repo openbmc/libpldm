@@ -29,8 +29,12 @@ endif
 
 if get_option('requester-api').enabled()
    libpldm_headers += files(
-    'requester/pldm.h'
-    )
+    'requester/pldm.h',
+  )
+   libpldm_transport_headers += files(
+    'transport/mctp-demux.h',
+    'transport/transport.h'
+  )
    libpldm_instance_id_headers += files(
     'instance_id/instance_id.h'
   )
