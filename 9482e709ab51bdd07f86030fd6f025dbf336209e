@@ -140,6 +140,24 @@
       "parentUuid": "872417ef_a6b49a3c",
       "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68258db4_bb2a3012",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-09T04:14:02Z",
+      "side": 1,
+      "message": "But it\u0027s declared as __attribute__((packed)) on 719, which implies it was intended for casting onto a received buffer, or a buffer to be sent out? Declaring it as __attribute__((packed)) and then only using it in circumstances where the accesses would be properly aligned is going to impact efficiency as the compiler is forced to emit code for arbitrarily aligned accesses.\n\nShouldn\u0027t we be dropping __attribute__((packed)) given you intend to have an explicit parsing function?",
+      "parentUuid": "0855c61f_8a6e0c8e",
+      "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
