@@ -1,3 +1,4 @@
+#include "../mctp_defines.h"
 #include "base.h"
 #include "container_of.h"
 #include "libpldm/requester/pldm.h"
@@ -12,8 +13,6 @@
 #include <sys/un.h>
 #include <unistd.h>
 
-#define MCTP_MSG_TYPE_PLDM 1
-#define MCTP_MAX_NUM_EID 256
 static const uint8_t mctp_msg_type = MCTP_MSG_TYPE_PLDM;
 
 struct pldm_transport_mctp_demux {
