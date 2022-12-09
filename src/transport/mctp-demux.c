@@ -1,3 +1,4 @@
+#include "../mctp_defines.h"
 #include "base.h"
 #include "container_of.h"
 #include "libpldm/pldm.h"
