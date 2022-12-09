@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f48d282_15070b8a",
+        "filename": "include/libpldm/requester/pldm_base_requester.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "nit: Can we make the return type int, to be consistent with the rest.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 24
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b1c7d15_1c6795da",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "You should be able to get rid of some of these headers. I don\u0027t think all of them are needed.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a0497ea_c0818bbd",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "Not used",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec854c0_fdf91445",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "In case there is a failure, maybe it will be useful to print an error message with the command you were trying to encode and the error code.\n\nfprintf(stderr, \"\");",
+      "range": {
+        "startLine": 34,
+        "startChar": 3,
+        "endLine": 34,
+        "endChar": 54
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15db5b69_8d0f5919",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "You can check the return status after the switch. That way you only need to do it once rather than doing it for every case.",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d04b810_0343cfdf",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "nit: naming should be consistent with the rest of the repository. In this everything is snake_case",
+      "range": {
+        "startLine": 45,
+        "startChar": 11,
+        "endLine": 45,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abb287d8_c8d330ee",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "nit: you can pass this directly",
+      "range": {
+        "startLine": 56,
+        "startChar": 24,
+        "endLine": 56,
+        "endChar": 52
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "901fc41d_a687e6de",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "Here, the completion code (CC) hasn\u0027t been considered. We need to look at that before using the result. Applies to all cases",
+      "range": {
+        "startLine": 76,
+        "startChar": 10,
+        "endLine": 76,
+        "endChar": 24
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f5e121_aac54a38",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "You are setting the command_status to one value here and changing it again to a different value in the line after next. Is that intentional?",
+      "range": {
+        "startLine": 87,
+        "startChar": 7,
+        "endLine": 87,
+        "endChar": 21
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1d71b64_d05bbd61",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "the context already has an array to store the types. You don\u0027t need to create a new one.",
+      "range": {
+        "startLine": 95,
+        "startChar": 14,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "238de1e1_508c7d4e",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "Version response data contains a check sum too. But you can add checksum verification later.",
+      "range": {
+        "startLine": 119,
+        "startChar": 6,
+        "endLine": 119,
+        "endChar": 27
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "440cd6c1_d8cfc7d2",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "What happens if there are more than 1 type supported by the responder? How can we get the version of those types?",
+      "range": {
+        "startLine": 137,
+        "startChar": 6,
+        "endLine": 137,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b1a1c5_abcf5023",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "In the context we should create uint8_t pldm_commands[ALL_TYPES][32] and use this array to store commands of all types.",
+      "range": {
+        "startLine": 145,
+        "startChar": 2,
+        "endLine": 145,
+        "endChar": 50
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0acff3b6_6364858e",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "So as i understand, this gives us the requester status. We can use it to know whether the requester is waiting for a response or not. If so, maybe we can rename it to requester status?",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 176,
+        "endChar": 30
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23b62c7b_3379c9be",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-09T04:36:05Z",
+      "side": 1,
+      "message": "Maybe all we need is to know whether the requester is waiting for a response. So you can simply return that status here. \n\nBut if you don\u0027t find this function useful, I think we can get rid of it.",
+      "range": {
+        "startLine": 177,
+        "startChar": 8,
+        "endLine": 177,
+        "endChar": 35
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
