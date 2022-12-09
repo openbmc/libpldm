@@ -45,6 +45,12 @@ import('pkgconfig').generate(
   version: meson.project_version(),
   libraries: libpldm)
 
+compiler = meson.get_compiler('c')
+conf = configuration_data()
+if compiler.has_header('poll.h')
+  conf.set('PLDM_HAS_POLL', 1)
+endif
+
 if get_option('tests').enabled()
   subdir('tests')
 endif
