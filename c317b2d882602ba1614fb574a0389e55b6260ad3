@@ -355,6 +355,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6051df1c_53ba81b5",
+        "filename": "src/requester/rde_requester.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Oh okay. We can keep those on the caller side.",
+      "parentUuid": "a81a4bf0_04b56b58",
+      "range": {
+        "startLine": 62,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 16
+      },
+      "revId": "c317b2d882602ba1614fb574a0389e55b6260ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "553903fe_aa46c997",
         "filename": "src/requester/rde_requester.c",
         "patchSetId": 4

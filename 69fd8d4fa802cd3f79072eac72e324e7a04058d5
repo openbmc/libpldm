@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "117ac453_ad83accb",
+        "filename": "include/libpldm/requester/pldm_base_requester.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Even though `int` is used in other files, I followed this structure as it was used in `pldm.h`, and we are making this under pldm directory. Do you still suggest to remove it?",
+      "parentUuid": "9f48d282_15070b8a",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 24
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b1c7d15_1c6795da",
         "filename": "src/requester/pldm_base_requester.c",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-09T04:36:05Z",
       "side": 1,
       "message": "You should be able to get rid of some of these headers. I don\u0027t think all of them are needed.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b0ffd3_94bfa3c6",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6b1c7d15_1c6795da",
       "range": {
         "startLine": 11,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5a7d24a_cc519920",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3a0497ea_c0818bbd",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ec854c0_fdf91445",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-12-09T04:36:05Z",
       "side": 1,
       "message": "In case there is a failure, maybe it will be useful to print an error message with the command you were trying to encode and the error code.\n\nfprintf(stderr, \"\");",
+      "range": {
+        "startLine": 34,
+        "startChar": 3,
+        "endLine": 34,
+        "endChar": 54
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "234b7adc_14b10983",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8ec854c0_fdf91445",
       "range": {
         "startLine": 34,
         "startChar": 3,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d799407_e6894352",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Oh yes. Of course. I forgot to change it here. It was a left over, since I wrote these cases one at a time.",
+      "parentUuid": "15db5b69_8d0f5919",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d04b810_0343cfdf",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-12-09T04:36:05Z",
       "side": 1,
       "message": "nit: naming should be consistent with the rest of the repository. In this everything is snake_case",
+      "range": {
+        "startLine": 45,
+        "startChar": 11,
+        "endLine": 45,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90500c01_f4863b29",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3d04b810_0343cfdf",
       "range": {
         "startLine": 45,
         "startChar": 11,
@@ -162,6 +306,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d17a545_ab5f22ad",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "abb287d8_c8d330ee",
+      "range": {
+        "startLine": 56,
+        "startChar": 24,
+        "endLine": 56,
+        "endChar": 52
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "901fc41d_a687e6de",
@@ -175,6 +343,30 @@
       "writtenOn": "2022-12-09T04:36:05Z",
       "side": 1,
       "message": "Here, the completion code (CC) hasn\u0027t been considered. We need to look at that before using the result. Applies to all cases",
+      "range": {
+        "startLine": 76,
+        "startChar": 10,
+        "endLine": 76,
+        "endChar": 24
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b36d3096_fd7e9f8d",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Makes sense. I added it in the or clause:\n`if (rc || cc)` and will fprintf the error with rc and completion code if any.\n\nAdded this print too:\n\n```\nfprintf(stderr,\n\"Response decode failed with rc: %d, \"\n\"completion code: %d and err: %d\",\nrc, cc, errno);\n```",
+      "parentUuid": "901fc41d_a687e6de",
       "range": {
         "startLine": 76,
         "startChar": 10,
@@ -210,6 +402,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c6c1a30_46a9f517",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "I intentionally added that. Because that is what the sequence of flow is. It does not hold much of syntactical value, but semantically, that is how the lifecycle of an executed command should be.\nI could remove it if you suggest it.",
+      "parentUuid": "f1f5e121_aac54a38",
+      "range": {
+        "startLine": 87,
+        "startChar": 7,
+        "endLine": 87,
+        "endChar": 21
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1d71b64_d05bbd61",
         "filename": "src/requester/pldm_base_requester.c",
         "patchSetId": 7
@@ -221,6 +437,30 @@
       "writtenOn": "2022-12-09T04:36:05Z",
       "side": 1,
       "message": "the context already has an array to store the types. You don\u0027t need to create a new one.",
+      "range": {
+        "startLine": 95,
+        "startChar": 14,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68181210_ad31c508",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "The decode_get_types_resp only accepts bitfield8_t as a parameter. I changed the context to use bitfield8_t as the data type for types. It is what is being used in the repo in most of the places for these kinds of responses. So this is resolved under that change.",
+      "parentUuid": "e1d71b64_d05bbd61",
       "range": {
         "startLine": 95,
         "startChar": 14,
@@ -256,6 +496,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4fd94a7b_c26b9779",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Sure. I\u0027ll add a TODO here.\nJust a quick question though: If the checksum is incorrect, would it be routed to MCTP at all? Or is it a different checksum",
+      "parentUuid": "238de1e1_508c7d4e",
+      "range": {
+        "startLine": 119,
+        "startChar": 6,
+        "endLine": 119,
+        "endChar": 27
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "440cd6c1_d8cfc7d2",
         "filename": "src/requester/pldm_base_requester.c",
         "patchSetId": 7
@@ -279,6 +543,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72249fb4_0bfb4329",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Since sending a message and receiving a message is handled by the caller and not the requester library, the requester would have to make a call iteratively for all the pldm types. So we would have to call push_response for each of those pldm types and it would store it in the context.\n\nI have that part of code in local on the daemon side.\n\nThis is what I am doing:\n\nI add the corresponding PLDM types to an array. For instance if the PLDM_TYPES returned {0x03 0x00 0x00....} in the response, i get the corresponding bits that are set in the response (in this case index 0 and index 1) and add these indices/corresponding_PLDM_TYPE_values to the array. (For eg PLDM_BASE \u003d 0(index) and whatever type is for index 3 etc). Then I reiterate over this array to make that version request by maintaining the pldm type in ctx-\u003ecommand_pldm_type.\n\nEven if the ctx-\u003enext_command is updated to PLDM_GET_PLDM_COMMANDS, it would not affect the context versions being updated. \n\nAnother thing that we could do, is pass a flag in push_response whether we want to update the context or we have more things to push.\n\nLet me know your thoughts.",
+      "parentUuid": "440cd6c1_d8cfc7d2",
+      "range": {
+        "startLine": 137,
+        "startChar": 6,
+        "endLine": 137,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56b1a1c5_abcf5023",
         "filename": "src/requester/pldm_base_requester.c",
         "patchSetId": 7
@@ -290,6 +578,30 @@
       "writtenOn": "2022-12-09T04:36:05Z",
       "side": 1,
       "message": "In the context we should create uint8_t pldm_commands[ALL_TYPES][32] and use this array to store commands of all types.",
+      "range": {
+        "startLine": 145,
+        "startChar": 2,
+        "endLine": 145,
+        "endChar": 50
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b505d0d2_5f6522b0",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "This makes sense. I\u0027ll add this change. My bad I missed it.",
+      "parentUuid": "56b1a1c5_abcf5023",
       "range": {
         "startLine": 145,
         "startChar": 2,
@@ -325,6 +637,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "935449ae_1788e728",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "Oh I kept it as the command_status, as it talks more about the command that is being processed right now. But i can change it!",
+      "parentUuid": "0acff3b6_6364858e",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 176,
+        "endChar": 30
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23b62c7b_3379c9be",
         "filename": "src/requester/pldm_base_requester.c",
         "patchSetId": 7
@@ -336,6 +672,30 @@
       "writtenOn": "2022-12-09T04:36:05Z",
       "side": 1,
       "message": "Maybe all we need is to know whether the requester is waiting for a response. So you can simply return that status here. \n\nBut if you don\u0027t find this function useful, I think we can get rid of it.",
+      "range": {
+        "startLine": 177,
+        "startChar": 8,
+        "endLine": 177,
+        "endChar": 35
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6292cd3a_abc5aa1e",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-09T22:04:46Z",
+      "side": 1,
+      "message": "I do not think this is very useful as context status can be accessed directly. I will remove it.",
+      "parentUuid": "23b62c7b_3379c9be",
       "range": {
         "startLine": 177,
         "startChar": 8,
