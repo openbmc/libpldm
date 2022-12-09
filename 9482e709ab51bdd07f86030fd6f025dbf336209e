@@ -122,6 +122,24 @@
       "message": "This has me concerned.\n\nThe first concern is that DSP0248 1.2.0 28.4 Table 78 doesn\u0027t specify structure offsets for data elements. If the data structure was composed of fixed-length members then this should be feasible. It\u0027s not possible to provide sensible values for offsets if members are variable length. The implication of not providing them is that some members are variable length.\n\nFurther, the type of sensorDataSize in Table 78 is `enum8`, which is fixed-length, however the type of hysteresis is described as `uint8 | sint8 | uint16 | sint16 | uint32 | sint32`. This suggests the data of the type of any one of the types listed.\n\nFrom the C99 draft specification WG14/N1256 6.7.2.1 Structure and union specifiers we have:\n\n\u003e 14 The size of a union is sufficient to contain the largest of its members. The value of at most one of the members can be stored in a union object at any time. A pointer to a union object, suitably converted, points to each of its members (or if a member is a bit-field, then to the unit in which it resides), and vice versa.\n\nDSP2048 refers us to DSP0240 for PLDM conventions, notations and data types. By DSP0240 5.3 and its associated Table 1, there\u0027s no suggestion of padding out a type disjunction to the largest type, or even of the disjunction notation they\u0027ve used in DSP0248 (|, the pipe character).\n\nI think we have to assume the length of the hysteresis field is entirely defined by the sensorDataSize member, which means it\u0027s inappropriate to cast a buffer containing a sensor value PDR message to this struct-based description. If sensorDataSize is anything but a u32 or s32 type, the data in all following members is corrupt, and accessing members towards the end of the struct may lead to out of bounds memory accesses.\n\nVariable length structures require explicit unpacking of members via e.g. memcpy().",
       "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0855c61f_8a6e0c8e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2022-12-09T02:47:10Z",
+      "side": 1,
+      "message": "Yes, the structure is for unpacked numeric sensor PDR data. Unpacking the variable length field to the structure is done by parseNumericSensorPDR()\nhttps://gerrit.openbmc.org/c/openbmc/pldm/+/53961/35/platform-mc/terminus.cpp#175/\n\nlibpldm has a similar sturcture defined for numeric effecter pdr. The patch set follows its style to define a structure for numeric sensor pdr.\nhttps://github.com/openbmc/libpldm/blob/main/include/libpldm/platform.h#L608.",
+      "parentUuid": "872417ef_a6b49a3c",
+      "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
