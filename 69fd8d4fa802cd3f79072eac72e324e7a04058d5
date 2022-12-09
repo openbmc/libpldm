@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7f3fd09_b45962f9",
+        "filename": "include/libpldm/requester/pldm_base_requester.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001369
+      },
+      "writtenOn": "2022-12-09T22:52:35Z",
+      "side": 1,
+      "message": "Given that you are using negative integer values for enums, using int as return type could mean very different enum values when converting from pldm_base_requester_rc_t to int. Stick to using either int or pldm_base_requester_rc_t (preferred) in all places.",
+      "parentUuid": "117ac453_ad83accb",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 24
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b1c7d15_1c6795da",
         "filename": "src/requester/pldm_base_requester.c",
         "patchSetId": 7
@@ -414,6 +438,30 @@
       "side": 1,
       "message": "I intentionally added that. Because that is what the sequence of flow is. It does not hold much of syntactical value, but semantically, that is how the lifecycle of an executed command should be.\nI could remove it if you suggest it.",
       "parentUuid": "f1f5e121_aac54a38",
+      "range": {
+        "startLine": 87,
+        "startChar": 7,
+        "endLine": 87,
+        "endChar": 21
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0828c822_d5e0369b",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001369
+      },
+      "writtenOn": "2022-12-09T22:52:35Z",
+      "side": 1,
+      "message": "Doesn\u0027t the requestor of API pldm_base_push_response() expect command_status to be COMMAND_COMPLETED instead of COMMAND_NOT_STARTED ?",
+      "parentUuid": "3c6c1a30_46a9f517",
       "range": {
         "startLine": 87,
         "startChar": 7,

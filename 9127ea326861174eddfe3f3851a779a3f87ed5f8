@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d066208e_7cdd4201",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001369
+      },
+      "writtenOn": "2022-12-09T22:52:35Z",
+      "side": 1,
+      "message": "Add a Tested Footer",
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2dd7e84_2010c864",
+        "filename": "include/libpldm/requester/pldm_base_requester.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001369
+      },
+      "writtenOn": "2022-12-09T22:52:35Z",
+      "side": 1,
+      "message": "I wonder what\u0027s the reason to use negative integers ?",
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de661596_a6f185ff",
+        "filename": "include/libpldm/requester/pldm_base_requester.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001369
+      },
+      "writtenOn": "2022-12-09T22:52:35Z",
+      "side": 1,
+      "message": "command_status and requester_status ordering differs (Negative nums at the top vs Negative nums at the bottom)\nMaybe be consistent with enum ordering?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 50
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8af4dc2_fad4a91e",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001369
+      },
+      "writtenOn": "2022-12-09T22:52:35Z",
+      "side": 1,
+      "message": "Out of curiosity, what type is this ?",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 10
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
