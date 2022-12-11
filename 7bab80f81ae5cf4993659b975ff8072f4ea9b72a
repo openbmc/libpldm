@@ -1,0 +1,268 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19246bf3_9db26247",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "Gerrit is claiming this file has been entirely rewritten. That doesn\u0027t feel right?",
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "415c2bbd_f6126703",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "This isn\u0027t quite right 😊\n\nI think `#pragma once` is generally accepted?",
+      "range": {
+        "startLine": 1,
+        "startChar": 8,
+        "endLine": 1,
+        "endChar": 14
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "458d72b7_690dde24",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "I think we just leave maintenance of this kind of data to the specific transport implementation.",
+      "range": {
+        "startLine": 30,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 30
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "853afa37_bc4a0361",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "I think the generic API should only deal in TIDs. We can expose transport-specific APIs for resolving e.g. an MCTP EID to a TID.",
+      "range": {
+        "startLine": 33,
+        "startChar": 53,
+        "endLine": 33,
+        "endChar": 69
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab2f7332_74b94574",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "Again here.",
+      "range": {
+        "startLine": 36,
+        "startChar": 55,
+        "endLine": 36,
+        "endChar": 69
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de4ca502_f39adbfd",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "This should be an int, right? Otherwise in the success case you\u0027re returning a value that\u0027s outside the valid enum range?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 19
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeabe71d_ea3f3822",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "MCTP EIDs shouldn\u0027t be part of this API, this should be a PLDM TID. The (MCTP) transport implementation needs to maintain the TID-to-EID mapping internally.",
+      "range": {
+        "startLine": 159,
+        "startChar": 53,
+        "endLine": 159,
+        "endChar": 67
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15587c5e_a0cdbd22",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "I think you just want to pass `struct pldm *` here, not the transport specifically. Given the existence of pldm_{,un}register_transport() to hook an instance into a `struct pldm` instance, where would we get the `struct pldm_transport` that we need to pass through here from?",
+      "range": {
+        "startLine": 159,
+        "startChar": 19,
+        "endLine": 159,
+        "endChar": 51
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e2e4dc_c5bf0398",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "PLDM TID again.",
+      "range": {
+        "startLine": 176,
+        "startChar": 65,
+        "endLine": 176,
+        "endChar": 79
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc3d1537_31b458ae",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "Drop this.",
+      "range": {
+        "startLine": 197,
+        "startChar": 6,
+        "endLine": 197,
+        "endChar": 20
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "641abd5d_590557f8",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "Drop this",
+      "range": {
+        "startLine": 217,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 23
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d93562_ddfa84af",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-11T23:34:51Z",
+      "side": 1,
+      "message": "Oh. I think my comments on the other header are actually applicable here? And the changes to the other header should be dropped?",
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
