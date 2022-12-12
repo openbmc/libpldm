@@ -81,6 +81,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cab8638_be291b5a",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-12T23:57:59Z",
+      "side": 1,
+      "message": "I understand that. May I could add a check, like this: \n\n```\nif ctx-\u003einitialized \u003d\u003d true:\nreturn CONTEXT_ALREADY_INITIALIZED\n```\n\nAnd it should not allow to reinitialize this after the context is initialized once.\n\nDoes that sound good?",
+      "parentUuid": "4b073005_7e043e54",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4c6f2170_c52aa58c",
@@ -129,6 +153,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f21bea54_780b472e",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-12T23:57:59Z",
+      "side": 1,
+      "message": "** READ RESPONSE TO COMMENT [#87] BEFORE READING THIS **(https://gerrit.openbmc.org/c/openbmc/libpldm/+/59029/comment/f1f5e121_aac54a38/) \n\nInitially I was using a variable to track command status and not the requester status but if Comment #87 response is acceptable then, \n\nDo you mean just put an if condition before the switch case like (in terms of early return):\n\n```\nif (ctx-\u003erequester_status \u003d\u003d NO_PENDING_ACTION) {\nreturn PLDM_BASE_REQUESTER_NO_NEXT_COMMAND_FOUND;\n}\n\nswitch(ctx-\u003enext_command)...\n\n```",
+      "parentUuid": "99e01593_17b8ce8a",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 50
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17ff970a_aa17c031",
         "filename": "src/requester/pldm_base_requester.c",
         "patchSetId": 8
@@ -140,6 +188,30 @@
       "writtenOn": "2022-12-12T19:48:56Z",
       "side": 1,
       "message": "nit: Does the base encoding library set the errno value? If not, we don\u0027t need to print it since it doesn\u0027t contain any information.",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 12
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd08c095_d65a8e8f",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-12T23:57:59Z",
+      "side": 1,
+      "message": "Yes that makes sense. Return code should tell us what the error is, I\u0027ll remove it.",
+      "parentUuid": "17ff970a_aa17c031",
       "range": {
         "startLine": 51,
         "startChar": 7,
@@ -163,6 +235,30 @@
       "writtenOn": "2022-12-12T19:48:56Z",
       "side": 1,
       "message": "nit: You should be able to pass void* without casting.",
+      "range": {
+        "startLine": 66,
+        "startChar": 26,
+        "endLine": 66,
+        "endChar": 45
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7a7d541_5a684a2a",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-12T23:57:59Z",
+      "side": 1,
+      "message": "Oh yes, totally missed it. I\u0027ll remove this.",
+      "parentUuid": "f2b7092e_ebdf9573",
       "range": {
         "startLine": 66,
         "startChar": 26,

@@ -96,6 +96,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef9dcca_31964348",
+        "filename": "include/libpldm/requester/pldm_base_requester.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-12T23:57:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6ea03c64_4c7b9214",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 24
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b1c7d15_1c6795da",
@@ -522,6 +546,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3445e79f_d1ec0f30",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-12T23:57:59Z",
+      "side": 1,
+      "message": "This makes sense. So as per your old suggestion, may I change this to requester_status instead of command_status?\n\nHow about this, i just have these statuses:\n\n```\n// instead of command_status, we have requester_status now\n\ntypedef enum requester_status {\n\tREQUEST_FAILED \u003d -1,\n\tREADY_TO_PICK_NEXT_REQUEST \u003d 0,\n\tWAITING_FOR_RESPONSE \u003d 1,\n\tNO_PENDING_ACTION \u003d 2\n} req_status_t;\n\n```\n\nInitially, we will always start with `READY_TO_PICK_NEXT_REQUEST`\nand once the request creation phase begins we would be in WAITING_FOR_RESPONSE, if it fails we should mark it is as COMMAND_FAILED, else chagne it to READY_TO_PICK_NEXT_REQUEST after pushing the response.\n\nIn the last command to be executed we can change it to NO_PENDING_ACTION.\n\nDoes this sound good?",
+      "parentUuid": "69aa0fd4_e4cbfd9b",
+      "range": {
+        "startLine": 87,
+        "startChar": 7,
+        "endLine": 87,
+        "endChar": 21
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1d71b64_d05bbd61",
         "filename": "src/requester/pldm_base_requester.c",
         "patchSetId": 7
@@ -638,6 +686,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb66cc07_fd925f4c",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-12T23:57:59Z",
+      "side": 1,
+      "message": "Got it. I added a TODO for it in the latest patch set.",
+      "parentUuid": "738b0056_361a8781",
+      "range": {
+        "startLine": 119,
+        "startChar": 6,
+        "endLine": 119,
+        "endChar": 27
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "440cd6c1_d8cfc7d2",
@@ -699,6 +771,30 @@
       "side": 1,
       "message": "I am not sure I understood your explanation. Looks like you are implementing the  logic to read versions of multiple types in the daemon? If that is the case:\n\nThe requester library should handle that.\n\npldm_base_get_next_request should provide the next command until all the commands related to the action are completed. In the pldm_base_push_response we can update the context with the details that pldm_base_get_next_request needs to generate the next command in the sequence.",
       "parentUuid": "72249fb4_0bfb4329",
+      "range": {
+        "startLine": 137,
+        "startChar": 6,
+        "endLine": 137,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ac94034_0e04d541",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-12T23:57:59Z",
+      "side": 1,
+      "message": "I understand that. However, it wasn\u0027t very straight forward to repeat a command for all PLDM Types in the requester library itself as PLDM_TYPE is required to be a part of the request stream.\n\nHere is a suggested solution, let me know your thoughts:\n\n\u003e Can we store an array just for PLDM_Supported_Types in the context instead of the entire response bitfield array.\n\n```\n// **** Current Implementation ****\nbitfield8_t pldm_types[PLDM_MAX_TYPES / 8]\n// The above represents pldm_types \u003d [0x01, 0x00....(8 entries)] where each bit in \n// each of the 8 bytes is a pldm_type and it being 1 or 0 determine whether that \n// pldm_type is supported or not\n\n// \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n// **** Suggested Implementation ****\nuint8_t pldm_types[64] // one byte for each 64 types\n\n// That way we can have lets say:\n\nctx-\u003epldm_types \u003d [PLDM_BASE, PLDM_RDE, PLDM_63rd]\n\n// and we can maintain the index of the current command being processed\n// can rename `command_pldm_type` to `current_pldm_type_index` later\n\nctx-\u003ecommand_pldm_type \u003d 0; // for PLDM_BASE\nctx-\u003ecommand_pldm_type \u003d 1; // for PLDM_RDE\nctx-\u003ecommand_pldm_type \u003d 2; // for PLDM_63rd\n```\n\n\nWe can also have `ctx-\u003enumber_of_supported_pldm_types \u003d 3;` another attribute we can leverage for easier \"if\" condition handling. \n\nOr maintain it as the last index entry of the pldm_types array which is currently of length 64 but with the size at the end would be 65. Such as\n\n```\nuint8_t pldm_types[65] \n\n// one byte for each 64 types + 1 byte for number of supported commands, \n// so that we can move to next command (other than get_version) \n// when ctx-\u003ecommand_pldm_type \u003d\u003d pldm_types[65] -1\n```\n\nThis way we can keep on sending the GET_PLDM_VERSION as next_command with a different pldm_types until all pldm_types are executed (i.e. ctx-\u003ecommand_pldm_type \u003d\u003d pldm_types[65] - 1 (number of supported PLDM_TYPES))\n\nWhat do you think about this.?",
+      "parentUuid": "2042aae9_890b7447",
       "range": {
         "startLine": 137,
         "startChar": 6,
