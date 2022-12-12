@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94de282a_2b7a6bbe",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-12T03:47:09Z",
+      "side": 1,
+      "message": "Though it is a C code-base, openbmc generally uses `#pragma once` in its C++ code. Maybe just flip it to PLDM_H?",
+      "parentUuid": "415c2bbd_f6126703",
+      "range": {
+        "startLine": 1,
+        "startChar": 8,
+        "endLine": 1,
+        "endChar": 14
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "458d72b7_690dde24",
         "filename": "include/libpldm/pldm.h",
         "patchSetId": 2
