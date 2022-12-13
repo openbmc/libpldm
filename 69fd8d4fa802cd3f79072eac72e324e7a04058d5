@@ -831,6 +831,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74652f48_2b39fb97",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-13T18:11:19Z",
+      "side": 1,
+      "message": "You can do a similar thing without keeping a 64byte array. Just keep the index of the next non zero bit. Once you get a response, increment that to the next non zero bit.",
+      "parentUuid": "6ac94034_0e04d541",
+      "range": {
+        "startLine": 137,
+        "startChar": 6,
+        "endLine": 137,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56b1a1c5_abcf5023",
         "filename": "src/requester/pldm_base_requester.c",
         "patchSetId": 7
