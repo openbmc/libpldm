@@ -105,6 +105,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8492b30c_b86142fa",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-13T06:47:09Z",
+      "side": 1,
+      "message": "That won\u0027t work. If someone wants to run this again (say the responder side resets) then you won\u0027t be able to. You can use the command_status variable you are using to indicate the started action hasn\u0027t been completed yet. If it hasn\u0027t, we shouldn\u0027t allow a new action. If the previous action has been completed, then this will allow the user to start a new action.",
+      "parentUuid": "0cab8638_be291b5a",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4c6f2170_c52aa58c",
@@ -165,6 +189,30 @@
       "side": 1,
       "message": "** READ RESPONSE TO COMMENT [#87] BEFORE READING THIS **(https://gerrit.openbmc.org/c/openbmc/libpldm/+/59029/comment/f1f5e121_aac54a38/) \n\nInitially I was using a variable to track command status and not the requester status but if Comment #87 response is acceptable then, \n\nDo you mean just put an if condition before the switch case like (in terms of early return):\n\n```\nif (ctx-\u003erequester_status \u003d\u003d NO_PENDING_ACTION) {\nreturn PLDM_BASE_REQUESTER_NO_NEXT_COMMAND_FOUND;\n}\n\nswitch(ctx-\u003enext_command)...\n\n```",
       "parentUuid": "99e01593_17b8ce8a",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 50
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08094d69_2e17fa8a",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-13T06:47:09Z",
+      "side": 1,
+      "message": "Yes. You could do the same thing with pldm_base_start_discovery()",
+      "parentUuid": "f21bea54_780b472e",
       "range": {
         "startLine": 46,
         "startChar": 9,

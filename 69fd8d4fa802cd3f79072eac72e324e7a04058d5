@@ -570,6 +570,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4b97279_d7c79038",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2022-12-13T06:47:09Z",
+      "side": 1,
+      "message": "Yea this sounds good.\n\nWe should have an initialization function to init the context status value to PLDM_BASE_REQUESTER_NO_PENDING_ACTION.",
+      "parentUuid": "3445e79f_d1ec0f30",
+      "range": {
+        "startLine": 87,
+        "startChar": 7,
+        "endLine": 87,
+        "endChar": 21
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1d71b64_d05bbd61",
         "filename": "src/requester/pldm_base_requester.c",
         "patchSetId": 7
