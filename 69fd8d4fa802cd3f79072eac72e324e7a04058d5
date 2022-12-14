@@ -592,6 +592,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b48770_f572108b",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-14T21:16:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a4b97279_d7c79038",
+      "range": {
+        "startLine": 87,
+        "startChar": 7,
+        "endLine": 87,
+        "endChar": 21
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1d71b64_d05bbd61",
@@ -853,6 +877,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6bd3dac_c0fd9939",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-14T21:16:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "74652f48_2b39fb97",
+      "range": {
+        "startLine": 137,
+        "startChar": 6,
+        "endLine": 137,
+        "endChar": 19
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56b1a1c5_abcf5023",
@@ -947,6 +995,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fdb40f2_a2277688",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-14T21:16:16Z",
+      "side": 1,
+      "message": "Ack. Changed it to requester_status",
+      "parentUuid": "935449ae_1788e728",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 176,
+        "endChar": 30
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23b62c7b_3379c9be",
@@ -984,6 +1056,30 @@
       "side": 1,
       "message": "I do not think this is very useful as context status can be accessed directly. I will remove it.",
       "parentUuid": "23b62c7b_3379c9be",
+      "range": {
+        "startLine": 177,
+        "startChar": 8,
+        "endLine": 177,
+        "endChar": 35
+      },
+      "revId": "69fd8d4fa802cd3f79072eac72e324e7a04058d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca45aa7a_3e74ea5b",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-14T21:16:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6292cd3a_abc5aa1e",
       "range": {
         "startLine": 177,
         "startChar": 8,

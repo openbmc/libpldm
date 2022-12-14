@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f73acb6d_aa9a8381",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-14T21:16:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d066208e_7cdd4201",
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2dd7e84_2010c864",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f421dde_157c441e",
+        "filename": "include/libpldm/requester/pldm_base_requester.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-14T21:16:16Z",
+      "side": 1,
+      "message": "That is what was being used in the repo.\nI followed a similar pattern. I do not see any advantage other than usually return code being checked directly for success as \n\n```\nif(rc) {...}\n\n```",
+      "parentUuid": "c2dd7e84_2010c864",
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de661596_a6f185ff",
         "filename": "include/libpldm/requester/pldm_base_requester.h",
         "patchSetId": 8
@@ -48,6 +84,30 @@
       "writtenOn": "2022-12-09T22:52:35Z",
       "side": 1,
       "message": "command_status and requester_status ordering differs (Negative nums at the top vs Negative nums at the bottom)\nMaybe be consistent with enum ordering?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 50
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc2e854f_e35bb00d",
+        "filename": "include/libpldm/requester/pldm_base_requester.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-14T21:16:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "de661596_a6f185ff",
       "range": {
         "startLine": 13,
         "startChar": 0,
@@ -119,6 +179,30 @@
       "side": 1,
       "message": "That won\u0027t work. If someone wants to run this again (say the responder side resets) then you won\u0027t be able to. You can use the command_status variable you are using to indicate the started action hasn\u0027t been completed yet. If it hasn\u0027t, we shouldn\u0027t allow a new action. If the previous action has been completed, then this will allow the user to start a new action.",
       "parentUuid": "0cab8638_be291b5a",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e00adb_da6f7a3b",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-14T21:16:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8492b30c_b86142fa",
       "range": {
         "startLine": 9,
         "startChar": 0,
@@ -213,6 +297,30 @@
       "side": 1,
       "message": "Yes. You could do the same thing with pldm_base_start_discovery()",
       "parentUuid": "f21bea54_780b472e",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 50
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c745c8b2_29eb3f99",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-14T21:16:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "08094d69_2e17fa8a",
       "range": {
         "startLine": 46,
         "startChar": 9,
@@ -330,6 +438,30 @@
       "writtenOn": "2022-12-09T22:52:35Z",
       "side": 1,
       "message": "Out of curiosity, what type is this ?",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 10
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "134bbfc9_414d3313",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001582
+      },
+      "writtenOn": "2022-12-14T21:16:16Z",
+      "side": 1,
+      "message": "This is a struct defined in pldm repo itself. The following is what the struct stand for:\n\n```\n// It stores the bytes accordingly from the byte array to store the version information for a pldm type. \n\ntypedef struct pldm_version {\n\tuint8_t alpha;\n\tuint8_t update;\n\tuint8_t minor;\n\tuint8_t major;\n} __attribute__((packed)) ver32_t;\n```",
+      "parentUuid": "c8af4dc2_fad4a91e",
       "range": {
         "startLine": 113,
         "startChar": 2,
