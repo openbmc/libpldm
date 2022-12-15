@@ -71,6 +71,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e097ba12_d3a36ac6",
+        "filename": "include/libpldm/requester/pldm_base_requester.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001369
+      },
+      "writtenOn": "2022-12-15T03:36:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0f421dde_157c441e",
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de661596_a6f185ff",
@@ -462,6 +480,30 @@
       "side": 1,
       "message": "This is a struct defined in pldm repo itself. The following is what the struct stand for:\n\n```\n// It stores the bytes accordingly from the byte array to store the version information for a pldm type. \n\ntypedef struct pldm_version {\n\tuint8_t alpha;\n\tuint8_t update;\n\tuint8_t minor;\n\tuint8_t major;\n} __attribute__((packed)) ver32_t;\n```",
       "parentUuid": "c8af4dc2_fad4a91e",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 10
+      },
+      "revId": "9127ea326861174eddfe3f3851a779a3f87ed5f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdd5e538_e1f67ff3",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001369
+      },
+      "writtenOn": "2022-12-15T03:36:02Z",
+      "side": 1,
+      "message": "Interesting",
+      "parentUuid": "134bbfc9_414d3313",
       "range": {
         "startLine": 113,
         "startChar": 2,
