@@ -1,17 +1,8 @@
-libpldm_sources += files(
-  'base.c',
-  'bios.c',
-  'platform.c',
-  'bios_table.c',
-  'firmware_update.c',
-  'fru.c',
-  'pdr.c',
-  'utils.c'
-  )
+libpldm_sources += files('base.c', 'bios.c', 'platform.c', 'bios_table.c',
+			 'firmware_update.c', 'fru.c', 'pdr.c', 'pldm_rde.c',
+			 'utils.c')
 
-subdir('requester')
-subdir('transport')
+			   subdir('requester') subdir('transport')
 
-if get_option('oem-ibm').allowed()
-   subdir('oem/ibm')
-endif
+				   if get_option ('oem-ibm')
+					   .allowed() subdir('oem/ibm') endif
