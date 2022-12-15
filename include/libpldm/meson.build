@@ -11,6 +11,7 @@ libpldm_headers += files(
   'pdr.h',
   'platform.h',
   'pldm_types.h',
+  'rde.h',
   'requester/pldm.h',
   'state_set.h',
   'states.h',
