@@ -21,7 +21,8 @@ tests = [
   'libpldm_fru_test',
   'libpldm_utils_test',
   'libpldm_pdr_test',
-  'libpldm_firmware_update_test'
+  'libpldm_firmware_update_test',
+  'libpldm_rde_test'
 ]
 
 if get_option('oem-ibm').enabled()

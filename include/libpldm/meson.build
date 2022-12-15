@@ -12,7 +12,8 @@ libpldm_headers += files(
   'fru.h',
   'utils.h',
   'pdr.h',
-  'firmware_update.h'
+  'firmware_update.h',
+  'pldm_rde.h'
   )
 
 if get_option('oem-ibm').enabled()
