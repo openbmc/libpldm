@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0f9d1ef_1e1f9c24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-16T02:37:12Z",
+      "side": 1,
+      "message": "Tracking IDs for private issues do not belong in an open source project.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 7
+      },
+      "revId": "fc690db2df2be5c46db55058fbbf2c2116721215",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8ac373e_94361150",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-16T02:37:12Z",
+      "side": 1,
+      "message": "Hello Harsh,\n\nThanks for pushing the patch. However, has this been discussed in the community anywhere prior to pushing it? I ask because we\u0027re in the middle of remodelling the requester API? It looks like what you have may not be impacted by that as you appear to externalise the process of sending and receiving the messages in question, but maybe it\u0027s worth considering.\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/59576\n\nAlso why was it initially a private patch? There a bunch of feedback while it was private. Generally it\u0027s best to engage the community from the start and not try to pre-review things, as community consensus may drive the effort in an entirely different direction (which would put that pre-review effort to waste).",
+      "revId": "fc690db2df2be5c46db55058fbbf2c2116721215",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
