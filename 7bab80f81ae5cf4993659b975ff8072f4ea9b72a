@@ -295,6 +295,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae65767a_b1bad7eb",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-19T07:01:04Z",
+      "side": 1,
+      "message": "\u003e and (if that transport is MCTP) libpldm finds the right EID to use when we init the transport?\n\nRight - basically we divide the code into two distinct groups - areas of the code that know about the transport specifics, and areas of the code that do not. The latter should be the bulk of it and only deal in TIDs and the core APIs. The former deals with instantiating the specific transport implementations, registering them with the requester core, and setting up the TID mappings by whatever mechanisms necessary (e.g. reading a configuration file containing static TID-to-EID mappings, enumerating and querying the MCTP devices exposed on DBus by mctpd during initialisation of the MCTP backend, or in the implementation of a handler registered to listen for DBus signals emitted by mctpd for dynamically discovered devices).\n\nSo we need APIs like:\n\n /* Asks an PLDM-capable MCTP device for its TID(s) */\n int pldm_transport_mctp_query_tid(struct pldm_transport_mctp *ctx, mctp_eid_t eid);\n \n /* Inserts a TID-to-EID mapping into the transport\u0027s device map */\n int pldm_transport_mctp_map_tid(struct pldm_transport_mctp *ctx, pldm_tid_t tid, mctp_eid_t eid);\n \n /* Removes a TID-to-EID mapping from the transport\u0027s device map */\n int pldm_transport_mctp_unmap_tid(struct pldm_transport_mctp *ctx, pldm_tid_t tid, mctp_eid_t eid);\n \n /* Assigns a PLDM TID to the device addressed by the provided MCTP EID and updates the TID-to-EID mapping in the transport\u0027s device map */\n int pldm_transport_mctp_assign_tid(struct pldm_transport_mctp *ctx, pldm_tid_t tid, mctp_eid_t eid);\n\netc, and similar APIs for the needs of NC-SI when we get around to it.",
+      "parentUuid": "93ecfbe2_8b576003",
+      "range": {
+        "startLine": 159,
+        "startChar": 53,
+        "endLine": 159,
+        "endChar": 67
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50e2e4dc_c5bf0398",
         "filename": "include/libpldm/pldm.h",
         "patchSetId": 2
