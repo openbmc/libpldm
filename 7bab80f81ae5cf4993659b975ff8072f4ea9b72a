@@ -229,6 +229,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "348c14b9_b950d240",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-12-19T04:00:25Z",
+      "side": 1,
+      "message": "\u003e What does it mean by (MCTP) transport implementation, in-kernel MCTP stack?\n\u003e \n\u003e It will be a concern, since TID is a PLDM construct and mixing it with MCTP stack is probably a bad choice.\n\nMaybe what I said was unclear. Let me try to clarify.\n\nThe DMTF are defining a set of related protocols. We\u0027re interested in PLDM and MCTP. However, it\u0027s not just a set of protocols, it\u0027s a stack of protocols. PLDM and MCTP both define a set of common behaviours (e.g. DSP0248 PLDM for Platform Monitoring and Control Specification, DSP0236 MCTP Base Specification) _and_ a means to exchange messages implementing those behaviours (e.g. DSP0241 Platform Level Data Model (PLDM) Over MCTP Binding Specification, MCTP PCIe VDM Transport Binding Specification). So:\n\n1. MCTP can use I2C, PCIe, serial and various other buses as its transport\n2. PLDM can use MCTP, NC-SI or potentially other lower level protocols as its transport\n\nTo exchange e.g. PLDM messages with some other device we need to package them for transmission via the underlying transport, and transmit it via that transport using the APIs exposed by its implementation. Consider PLDM over MCTP. Right now there are two implementations and two separate APIs libpldm can access:\n\n1. The mctp-demux-daemon, using an AF_UNIX socket with the abstract socket name \u0027\\0mctp-demux\u0027\n2. The in-kernel MCTP implementation, using an AF_MCTP socket\n\nThe job of the libpldm requester API is to provide an abstract API over either of these two implementations, and more. The code to implement this abstraction in libpldm is what I was referring to by \"transport implementation\" above. A transport implementation for e.g. mctp-demux-daemon AF_UNIX socket in libpldm would contain code to call `socket(AF_UNIX, ...)`, or `socket(AF_MCTP, ...)` for the in-kernel MCTP implementation. The user of the libpldm APIs mustn\u0027t need to care about these mechanics - that\u0027s the point of the abstraction. Again, this is the client code in libpldm, not the implementation of MCTP in e.g libmctp and its associated daemons, or the kernel.\n\nMCTP isn\u0027t the only transport for PLDM messages. We can use NC-SI as well. NC-SI and any future transports have no concept of the MCTP-specific EID, however they may have something similar with different representation and constraints. Thus, we can\u0027t embed the MCTP-specific EID representation in the generic API. TIDs are a PLDM concept and are relevant regardless of the underlying transport. They also uniquely identify a target address. From here, the transport implementation (client) in libpldm can maintain a mapping between TIDs and e.g. EIDs in the case of MCTP in order to encode the PLDM message for transmission via the appropriate MCTP API for the system (until now libpldm has only supported the mctp-demux-daemon as a transport).\n\n\u003e It will be a concern, since TID is a PLDM construct and mixing it with MCTP stack is probably a bad choice.\n\nThis follow-on concern only exists under the misinterpretation of my original statement, which I\u0027ve tried to clarify above. I\u0027m not talking about the in-kernel implementation of MCTP or libmctp, I\u0027m talking about the client code that lives in libpldm. This client code in libpldm needs to map the TID to an address appropriate for the underlying transport.\n\n\u003e It is possible that BMC can have multiple PLDM terminus and the different PLDM apps can be assigned statically TID or dynamically assigned a TID from pldmd.\n\nI don\u0027t think this is a significant concern.",
+      "parentUuid": "55487fb2_19fd5dc6",
+      "range": {
+        "startLine": 159,
+        "startChar": 53,
+        "endLine": 159,
+        "endChar": 67
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50e2e4dc_c5bf0398",
         "filename": "include/libpldm/pldm.h",
         "patchSetId": 2
