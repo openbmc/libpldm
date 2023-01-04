@@ -194,6 +194,24 @@
       "parentUuid": "123308b6_1e063eb0",
       "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab940c92_beb63ef1",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-01-04T14:06:04Z",
+      "side": 1,
+      "message": "Sorry for the late response. The attribute((packed)) is removed and the the unpack function, parseNumericSensorPDR(), in https://gerrit.openbmc.org/c/openbmc/pldm/+/53961/35/platform-mc/terminus.cpp#120 will be updated accordingly.\n\nPer your feedback, will it be better that libpldm provides a function to unpack PDR buffer to this struct? and then I will convert parseNumericSensorPDR() to C function and move to libpldm repo.",
+      "parentUuid": "1278274b_27987aa6",
+      "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
