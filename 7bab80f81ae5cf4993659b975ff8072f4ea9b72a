@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b13bdcb_1b9fd789",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-01-09T10:29:52Z",
+      "side": 1,
+      "message": "Please add few lines regarding the changes. Basically to understand the scope of the change.",
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19246bf3_9db26247",
         "filename": "include/libpldm/pldm.h",
         "patchSetId": 2
@@ -32,6 +49,24 @@
       "side": 1,
       "message": "I think I overwrote the symbolic link. Woops.",
       "parentUuid": "19246bf3_9db26247",
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83dc4c28_03d0dae8",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-01-09T10:29:52Z",
+      "side": 1,
+      "message": "It will be easy to review if this was resolved. Waiting for a patch refresh.",
+      "parentUuid": "bd2d96b8_355e44f8",
       "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
