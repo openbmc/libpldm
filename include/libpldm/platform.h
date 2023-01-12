@@ -522,11 +522,11 @@ struct pldm_state_effecter_pdr {
 	uint8_t possible_states[1];
 } __attribute__((packed));
 
-/** @struct pldm_compact_nummeric_sensor_pdr
+/** @struct pldm_compact_numeric_sensor_pdr
  *
- *  Structure representing PLDM compact nummeric sensor PDR
+ *  Structure representing PLDM compact numeric sensor PDR
  */
-struct pldm_compact_nummeric_sensor_pdr {
+struct pldm_compact_numeric_sensor_pdr {
 	struct pldm_pdr_hdr hdr;
 	uint16_t terminus_handle;
 	uint16_t sensor_id;
