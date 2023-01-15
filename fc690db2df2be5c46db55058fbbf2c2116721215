@@ -99,6 +99,92 @@
       "parentUuid": "8bb50d73_cda9ce97",
       "revId": "fc690db2df2be5c46db55058fbbf2c2116721215",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1291335_3b7adb85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-15T23:41:00Z",
+      "side": 1,
+      "message": "Hello, I have a couple of questions below. I see you replied to Andrew with a brief description of the purpose of this patch - would you be able to update the commit message with this?",
+      "revId": "fc690db2df2be5c46db55058fbbf2c2116721215",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afe627de_412d2bb2",
+        "filename": "include/libpldm/requester/pldm_base_requester.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-15T23:41:00Z",
+      "side": 1,
+      "message": "Is this state used anywhere?",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 46
+      },
+      "revId": "fc690db2df2be5c46db55058fbbf2c2116721215",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c95839b_872f50e0",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-15T23:41:00Z",
+      "side": 1,
+      "message": "I see that we set this in a couple of places but never check for it - which doesn\u0027t make sense to me. Can you help me understand the intended purpose of the requester status? Is this code the only one setting it or will the app also be setting it? If the app is supposed to do or not do specific things based off this status, can we document that? I initially assumed that this requester status was for controlling the sequence of events ie if an app calls pldm_base_get_next_request before pldm_base_start_discovery, then we wouldn\u0027t do anything - but that doesn\u0027t seem to be the case.",
+      "range": {
+        "startLine": 27,
+        "startChar": 25,
+        "endLine": 27,
+        "endChar": 71
+      },
+      "revId": "fc690db2df2be5c46db55058fbbf2c2116721215",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77896dfb_23e428e4",
+        "filename": "src/requester/pldm_base_requester.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-15T23:41:00Z",
+      "side": 1,
+      "message": "Are we expecting apps to use this function? Can we make it static? \n\nCan we check that current_type is within the valid range? At the moment if it was somehow called with current_type\u003d72, we would return 72 - a value that is probably going to be used as an index that would lead to an out of bounds memory access.",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 28
+      },
+      "revId": "fc690db2df2be5c46db55058fbbf2c2116721215",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
