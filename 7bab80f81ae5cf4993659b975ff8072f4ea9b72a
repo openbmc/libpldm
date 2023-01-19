@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0517cf2_6e16dd52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-19T04:43:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b13bdcb_1b9fd789",
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19246bf3_9db26247",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "It will be easy to review if this was resolved. Waiting for a patch refresh.",
       "parentUuid": "bd2d96b8_355e44f8",
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f36f32a0_486091b9",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-19T04:43:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83dc4c28_03d0dae8",
       "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -498,6 +534,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3885b518_b84a82b0",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-19T04:43:57Z",
+      "side": 1,
+      "message": "Given that, inserting and removing TID-to-EID mappings directly in the implementation is enough to maintain the current behaviour, we can defer work on the discovery flow until later.\n\nThe main purpose of the API rework is to \n- create a new API so libpldm supports multiple transports and a consumer of libpldm can choose a transport to send PLDM messages over\n- rewrite the old API in terms of the new API (once all the consumers are moved over to the new API, we can delete the old API).",
+      "parentUuid": "e090c845_04fe8b64",
+      "range": {
+        "startLine": 159,
+        "startChar": 53,
+        "endLine": 159,
+        "endChar": 67
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a56baef0_472996ff",
+        "filename": "include/libpldm/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-19T04:43:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "15587c5e_a0cdbd22",
+      "range": {
+        "startLine": 159,
+        "startChar": 19,
+        "endLine": 159,
+        "endChar": 51
+      },
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50e2e4dc_c5bf0398",
         "filename": "include/libpldm/pldm.h",
         "patchSetId": 2
@@ -650,6 +734,24 @@
       "writtenOn": "2022-12-11T23:34:51Z",
       "side": 1,
       "message": "Oh. I think my comments on the other header are actually applicable here? And the changes to the other header should be dropped?",
+      "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c33ecd8_bd847f9d",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-19T04:43:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10d93562_ddfa84af",
       "revId": "7bab80f81ae5cf4993659b975ff8072f4ea9b72a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
