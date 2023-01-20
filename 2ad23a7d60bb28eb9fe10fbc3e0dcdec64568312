@@ -1,0 +1,367 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26f5b5ef_bec0e88d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Hi Rashmica,\n\nOverall, nice work. I think this is coming along great. I have a bunch of comments, hopefully their resolution leads to improvements. Given this is still marked WIP I haven\u0027t left a score as I don\u0027t expect it to be submitted.",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78dd21c9_34864fd9",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Please include \u0027mctp\u0027 in the symbol name for consistency (and specify `void` for the parameter list if we have no arguments):\n\n```\nstruct pldm_transport_mctp_demux *pldm_transport_mctp_demux_init(void);\n```\n\nAlso please audit the rest of the function symbols for this issue.",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ef4c70_6ee9f0de",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "e.g. this one too 😊",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b158743f_be921f48",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "And this one.",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2edd6912_9cf29a7c",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Need to include the configuration header to pick this up?",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c740f740_8090044b",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "You don\u0027t strictly need the include here as we don\u0027t use the definition. IMO just add a forward-declaration:\n\n```\nstruct pollfd;\nint pldm_transport_mctp_demux_init_pollfd(..., struct pollfd *pollfd)\n```",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abb36474_f2237f53",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Maybe this API should take an intermediate type, `struct pldm_transport_mctp`. Bare in mind that we have two MCTP implementations to cater to, and only one of them is the libmctp demux daemon implementation. How would we pass the kernel (AF_MCTP) implementation through this API?\n\nAlternatively, maybe we could leave the type and make this symbol to be truly backend specific, in which case I\u0027d rename it to `pldm_transport_mctp_demux_map_tid(...)`",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8daa9286_990d556a",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce3e4293_d1d9983a",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Do we need to expose them in the header? Or can they be static functions in the implementation that only serve the reimplementation of the old API?",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed7192b2_a2f9967e",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "I think this has the same intermediate-type-or-rename-symbol query as above.",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc0b0a2b_ec89ad49",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "This one too.\n\nA random personal preference is `s/from/by/`, saves a couple of characters in the symbol name 😊",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba636a7_0b25ae04",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "I think we could future-proof this by taking the transport instance as an argument (`int pldm_unregister_transport(struct pldm *pldm, struct pldm_transport *transport)`). Or rename it to be plural and indicate that all transports will be unregistered (`int pldm_unregister_transports(struct pldm *pldm)`)",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a343dd45_0eb926c5",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Should have consistent indentation?",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e5dda00_1e2ad2bf",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Maybe drop the _inst suffix? I think \u0027any\u0027 provides enough information and we avoid an arbitrary abbreviation 😊",
+      "range": {
+        "startLine": 221,
+        "startChar": 37,
+        "endLine": 221,
+        "endChar": 42
+      },
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b055e72_2024311e",
+        "filename": "meson.build",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Are we writing this configuration file out anywhere? The fact that we\u0027re defining the conf variable here and I can\u0027t see it written out is why I ask.\n\nhttps://mesonbuild.com/Configuration.html",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "807c1465_1b0a465d",
+        "filename": "src/requester/mctp-demux.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Can we add a `transport` directory and put the implementations there? Or prefix the file name with `transport-`? I just want to make it obvious that what we\u0027re doing in this file from its path.",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbbab444_99af24b8",
+        "filename": "src/requester/mctp-demux.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Let\u0027s try to make this a bit more friendly :)\n\nWithout addressing the network concern I think I\u0027d prefer this as\n\n```\n...\nstruct tid_eid_map {\n    uint8_t tid;\n    uint8_t eid;\n};\n\nstruct pldm_transport_mctp_demux {\n    ...\n    size_t num_mappings;\n    struct tid_eid_map[256];\n    ...\n};\n...\n```",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "097fc674_61ecca51",
+        "filename": "src/requester/mctp-demux.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Given that we can only have 256 EIDs per network, I think we can simplify this as above.",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36fc04a_6e50c0b9",
+        "filename": "src/requester/mctp-demux.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "This leaks demux.",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1528662_965d0e51",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "I think if we need the `struct pldm` instance just to get the socket FD out the APIs aren\u0027t quite right? I don\u0027t think we should need to initialise and then destroy it just for that when we\u0027re already instantiating the backend directly. We should have an API that fetches the socket FD straight out of the `struct pldm_transport_mctp_demux` instance directly, right?",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0053a33_1c004d8d",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-01-20T01:59:39Z",
+      "side": 1,
+      "message": "Will this close mctp_fd? Because that will affect global state 😊\n\nRather than creating / destroying the transport instance unconditionally, should we compare mctp_fd to the fd in open_transport and use that directly if we can?\n\nIf we don\u0027t recognise the fd that way, we could dup() the one passed in to avoid closing it prematurely.\n\nAlso, we probably want to pldm_unregister_transport() before we destroy the transport.\n\nThese comments applies to the other reimplementations as well",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
