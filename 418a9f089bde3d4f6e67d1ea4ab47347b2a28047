@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d1f2774_2beb7924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-01-23T10:09:19Z",
+      "side": 1,
+      "message": ".. missed a bit of recvfrom()ing in my earlier review.",
+      "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adea3cc3_a52700a3",
@@ -65,6 +82,23 @@
       "writtenOn": "2023-01-23T09:57:15Z",
       "side": 1,
       "message": "connect() is not yet hooked up for AF_MCTP. However, since you\u0027re using sendto(), this is redundant anyway.\n\nOr (looking at the values you\u0027re passing to addr), did you mean bind()?",
+      "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1c49709_9bd1250e",
+        "filename": "src/requester/af_mctp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-01-23T10:09:19Z",
+      "side": 1,
+      "message": "The usual rationale for doing a recvfrom(MSG_PEEK) is to then use the returned length to allocate an appropriately-sized receive buffer for the actual (non-PEEK) recvfrom later.\n\nHowever, you\u0027re not doing that here - you\u0027re just passing the length back to another recvfrom() (and that might overrun pldm_resp_msg!)\n\nGiven you\u0027re not doing a buffer allocation here, I would suggest simplifying this into just:\n\n    recvfrom(socket, *pldm_resp_msg, *resp_msg_len, MSG_TRUNC, ...)\n    \nie, directly into pldm_resp_msg. You will be able to tell if the incoming message was truncated if the return value is greater than the length you passed.",
       "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
