@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3be150f5_57735949",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-01-23T09:57:15Z",
+      "side": 1,
+      "message": "LGTM, a couple of comments inline",
+      "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adea3cc3_a52700a3",
+        "filename": "include/mctp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-01-23T09:57:15Z",
+      "side": 1,
+      "message": "Do we still need this compat layer? If you just declare that you need recent kernel headers (which provide all of this), then you should be fine to drop this whole file.",
+      "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3af7d789_4280cc90",
+        "filename": "src/requester/af_mctp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-01-23T09:57:15Z",
+      "side": 1,
+      "message": "super minor style nit: you have (const \u003d\u003d var) here, and (var \u003d\u003d const) below.",
+      "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5e1c432_a5121eca",
+        "filename": "src/requester/af_mctp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-01-23T09:57:15Z",
+      "side": 1,
+      "message": "connect() is not yet hooked up for AF_MCTP. However, since you\u0027re using sendto(), this is redundant anyway.\n\nOr (looking at the values you\u0027re passing to addr), did you mean bind()?",
+      "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
