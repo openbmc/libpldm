@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b445fa7_ecc63e33",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-01-23T12:14:54Z",
+      "side": 1,
+      "message": "I believe this should move down the function(may be to L73). Basically to have a minimal input message validation before passing it to deamon.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 56
+      },
+      "revId": "f57188e19d6dbdc7cb35144e4c0bb14de84f6c90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d6ce030_cc1206fe",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-01-23T12:14:54Z",
+      "side": 1,
+      "message": "Are we expecting only say PLDM messages from this MCTP socket? Like what if the same device support NVMe-MI also? We will have a different socket and fd for that?",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 42
+      },
+      "revId": "f57188e19d6dbdc7cb35144e4c0bb14de84f6c90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
