@@ -52,6 +52,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db609f3a_0a7eeadb",
+        "filename": "include/mctp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-24T08:12:10Z",
+      "side": 1,
+      "message": "True!",
+      "parentUuid": "adea3cc3_a52700a3",
+      "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3af7d789_4280cc90",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-01-23T09:57:15Z",
       "side": 1,
       "message": "super minor style nit: you have (const \u003d\u003d var) here, and (var \u003d\u003d const) below.",
+      "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "493f6eea_68c889c2",
+        "filename": "src/requester/af_mctp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-24T08:12:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3af7d789_4280cc90",
       "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +122,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c2410d6_b6d723d9",
+        "filename": "src/requester/af_mctp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-24T08:12:10Z",
+      "side": 1,
+      "message": "You\u0027re right, I don\u0027t need this.",
+      "parentUuid": "d5e1c432_a5121eca",
+      "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1c49709_9bd1250e",
@@ -99,6 +153,24 @@
       "writtenOn": "2023-01-23T10:09:19Z",
       "side": 1,
       "message": "The usual rationale for doing a recvfrom(MSG_PEEK) is to then use the returned length to allocate an appropriately-sized receive buffer for the actual (non-PEEK) recvfrom later.\n\nHowever, you\u0027re not doing that here - you\u0027re just passing the length back to another recvfrom() (and that might overrun pldm_resp_msg!)\n\nGiven you\u0027re not doing a buffer allocation here, I would suggest simplifying this into just:\n\n    recvfrom(socket, *pldm_resp_msg, *resp_msg_len, MSG_TRUNC, ...)\n    \nie, directly into pldm_resp_msg. You will be able to tell if the incoming message was truncated if the return value is greater than the length you passed.",
+      "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aecc8677_38657b4d",
+        "filename": "src/requester/af_mctp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-24T08:12:10Z",
+      "side": 1,
+      "message": "Good spot -  I had accidentally deleted the buffer allocation",
+      "parentUuid": "a1c49709_9bd1250e",
       "revId": "418a9f089bde3d4f6e67d1ea4ab47347b2a28047",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
