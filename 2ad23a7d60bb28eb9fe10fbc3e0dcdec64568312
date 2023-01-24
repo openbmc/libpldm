@@ -140,6 +140,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2740452_6f98ec09",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-24T08:12:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2edd6912_9cf29a7c",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c740f740_8090044b",
@@ -245,6 +263,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa44bcf5_4c47785f",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-24T08:12:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8daa9286_990d556a",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce3e4293_d1d9983a",
@@ -258,6 +294,24 @@
       "writtenOn": "2023-01-20T01:59:39Z",
       "side": 1,
       "message": "Do we need to expose them in the header? Or can they be static functions in the implementation that only serve the reimplementation of the old API?",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7f40fe4_e4fcd35c",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-24T08:12:10Z",
+      "side": 1,
+      "message": "I\u0027ve removed them from the header, but I don\u0027t think they can easily be made static.",
+      "parentUuid": "ce3e4293_d1d9983a",
       "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -279,6 +333,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68eed049_a4b44f81",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-24T08:12:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed7192b2_a2f9967e",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc0b0a2b_ec89ad49",
@@ -292,6 +364,24 @@
       "writtenOn": "2023-01-20T01:59:39Z",
       "side": 1,
       "message": "This one too.\n\nA random personal preference is `s/from/by/`, saves a couple of characters in the symbol name 😊",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa17c7bd_e3481c14",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-24T08:12:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc0b0a2b_ec89ad49",
       "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -444,6 +534,24 @@
       "side": 1,
       "message": "No we are not! I have never touched meson and don\u0027t really know what I\u0027m doing yet. I\u0027ll look at that.",
       "parentUuid": "0b055e72_2024311e",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94f1d1c1_d7765516",
+        "filename": "meson.build",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-24T08:12:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2278d093_f9c7f9fc",
       "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -654,6 +762,24 @@
       "side": 1,
       "message": "\u003eWill this close mctp_fd? Because that will affect global state 😊\n\nIt won\u0027t at the moment. I had avoided closing the socket in `pldm_transport_demux_destroy` because I didn\u0027t want to be closing other people\u0027s sockets. dup() could be a good way forward here.\n\n\n\u003e Rather than creating / destroying the transport instance unconditionally, should we compare mctp_fd to the fd in open_transport and use that directly if we can?\n\nI didn\u0027t do this because it would be more code (and more bugs for me to fix 😄) just to still essentially use the fd passed in. But logically it does make sense to not create and destroy a whole bunch of stuff if we don\u0027t need to.",
       "parentUuid": "c0053a33_1c004d8d",
+      "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cd52285_174cde75",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-01-24T08:12:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7331e75a_28e5a8aa",
       "revId": "2ad23a7d60bb28eb9fe10fbc3e0dcdec64568312",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
