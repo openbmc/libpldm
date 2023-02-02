@@ -280,6 +280,14 @@ void pldm_entity_association_tree_visit(pldm_entity_association_tree *tree,
  */
 pldm_entity pldm_entity_extract(pldm_entity_node *node);
 
+/** @brief Extract host container id by the pldm_entity_node
+ *
+ *  @param[in] entity         - opaque pointer to added entity
+ *
+ *  @return host container id - host container id
+ */
+uint16_t pldm_extract_host_container_id(const pldm_entity_node *entity);
+
 /** @brief Destroy entity association tree
  *
  *  @param[in] tree - opaque pointer acting as a handle to the tree
@@ -362,7 +370,6 @@ bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node);
  *  @param[in] tree - pointer to entity association tree
  *  @param[in/out] entity - entity type and instance id set on input, container
  *                 id set on output
- *
  *  @return pldm_entity_node* pointer to entity if found, NULL otherwise
  */
 pldm_entity_node *
