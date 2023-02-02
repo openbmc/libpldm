@@ -21,6 +21,7 @@ Change categories:
 
 1. Add encode/decode pldmMessagePollEvent data
 2. README: Add a section on working with libpldm
+3. pdr: Introduce remote_container_id and associated APIs
 
 ### Changed
 
