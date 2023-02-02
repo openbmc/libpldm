@@ -16,6 +16,514 @@
       "message": "Need to finish testing this. But would like feedback if anyone has thoughts.",
       "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1788f1fc_51d56e16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "Starting to look pretty good. Some comments inline.",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8abfcdf_9dc251ad",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "I think we want to call this file `transport-mctp-demux.h` in line with the implementation.",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdeaa6ed_6b4aafa8",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "We should probably remove the leading underscore here to get away from C\u0027s reserved namespace. Also fix the guard name to match the new path.",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cda383c_d62a1af6",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "Do we need to expose this in the public API? I don\u0027t think we do? We can do this in an internal header?",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5859c77c_3c4c61f6",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "Maybe given my comment below rephrasing the asynchronous send we rephrase this too:\n\n\u003e Synchronously send a PLDM request and receive the response. Control is returned to the caller once the response is received.",
+      "range": {
+        "startLine": 148,
+        "startChar": 10,
+        "endLine": 149,
+        "endChar": 72
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8cc1dfa_2274b786",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "We probably want to state a precondition here, e.g. that a transport has been registered with the `struct pldm` instance. With that, we can also be explicit about the error returned if that precondition doesn\u0027t hold.\n\nThis also implies that the parameter must not be NULL. Please audit the rest of the added documentation for whether NULL is an acceptable value for pointers.",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19150621_44fedea5",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "What\u0027s the behaviour if the value is zero? Once we decide, please audit the rest of the added documentation for this issue and describe the behaviour.",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af01cfb6_75b10131",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "Will `*pldm_resp_msg` ever be NULL? If so we should be explicit about that case. Audit the rest of the added APIs for this as well.",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82727519_504ccbea",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "I think this might be better if we use `const void *pldm_req_msg` as `void` aliases with all types. This means we don\u0027t force the caller to cast; we can do the cast to `unsigned char *` in the implementation if needed.",
+      "range": {
+        "startLine": 164,
+        "startChar": 17,
+        "endLine": 164,
+        "endChar": 24
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb16cc56_0fd0d39b",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "Here too. Please audit the remainder of the APIs",
+      "range": {
+        "startLine": 166,
+        "startChar": 11,
+        "endLine": 166,
+        "endChar": 18
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69955350_ab008525",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "I\u0027d phrase this as\n\n\u003e Asynchronously send a PLDM message. Control is immediately returned to the caller.",
+      "range": {
+        "startLine": 170,
+        "startChar": 10,
+        "endLine": 170,
+        "endChar": 62
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ee5591d_bf38bb40",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "I think this statement should either be removed, or moved out of this paragraph. libpldm is targeted at freestanding environments as well as hosted environments where we might have POSIX behaviour. Freestanding environments probably aren\u0027t doing file descriptors.",
+      "range": {
+        "startLine": 170,
+        "startChar": 65,
+        "endLine": 172,
+        "endChar": 14
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd941d0c_e7bc5df3",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "Does this block? I think we want this to be async as it means we have an implicit polling function as well, which provides a path for e.g. freestanding users to do async where they don\u0027t have file descriptor events. For example, we could return something like -ENODATA here indicating there was no message available to receive.",
+      "range": {
+        "startLine": 187,
+        "startChar": 3,
+        "endLine": 188,
+        "endChar": 79
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69aa187c_49356f68",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "What happens if it isn\u0027t an instance ID that\u0027s previously been requested? What about if it was previously used but the response has already been received?",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47e5b4f1_6cc953c9",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "Can we talk more about the positive behaviour here? Can the message that was read that didn\u0027t match the IID criteria be retrieved later by a call where it does match?",
+      "range": {
+        "startLine": 200,
+        "startChar": 51,
+        "endLine": 201,
+        "endChar": 67
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fd17103_2d50f389",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "I think this indicates async but perhaps we could use that word explicitly.",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 60
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5989c923_03101d91",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "calloc(3)?",
+      "range": {
+        "startLine": 20,
+        "startChar": 1,
+        "endLine": 24,
+        "endChar": 13
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2f86c69_f7e3a0b7",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "`free(3)` works even if the pointer is NULL, so no need to check here.\n\n\u003e If ptr is NULL, no operation is performed.\n\nhttps://man7.org/linux/man-pages/man3/free.3.html#DESCRIPTION",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc9e62c_6ad20ceb",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "`pldm` is a local so no need to set it to NULL here",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a3a92dc_6802c5ca",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "Maybe we could use an internal helper macro to deal with the setup/teardown pattern used across the reimplementations of the old APIs.",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08680a14_4c6bfbe3",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "Probably want to add check `ctx-\u003enum_mappings !\u003d 0` before this 😊\n\nThat said, this is kinda ugly. What if we instead ditch the struct and index into the array by EID given we have a bounded number of them (256). Then the TID-to-EID lookup would turn into a search over the array to find the TID and returning the corresponding index. That gets rid of the jank problem of keeping the mappings contiguous like we\u0027re trying to do here.\n\nApologies for suggesting yet another approach; I probably should have thought about it more before I commented last time.",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a8bb832_4081a406",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "No VLAs please.",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f175de5a_84bc8ab2",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "Again let\u0027s not do a VLA here.",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "477611cb_96c81a7f",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "NULL check?",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6a515d4_b6c6d3ee",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "calloc(3)?",
+      "range": {
+        "startLine": 223,
+        "startChar": 1,
+        "endLine": 229,
+        "endChar": 34
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3824d828_8436217e",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-02T00:54:15Z",
+      "side": 1,
+      "message": "calloc(3)?",
+      "range": {
+        "startLine": 252,
+        "startChar": 1,
+        "endLine": 258,
+        "endChar": 34
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
