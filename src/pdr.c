@@ -5,6 +5,7 @@
 #include <endian.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 typedef struct pldm_pdr_record {
 	uint32_t record_handle;
@@ -373,6 +374,7 @@ typedef struct pldm_entity_association_tree {
 typedef struct pldm_entity_node {
 	pldm_entity entity;
 	pldm_entity parent;
+	uint16_t remote_container_id;
 	pldm_entity_node *first_child;
 	pldm_entity_node *next_sibling;
 	uint8_t association_type;
@@ -392,6 +394,18 @@ pldm_entity pldm_entity_extract(pldm_entity_node *node)
 	assert(node != NULL);
 
 	return node->entity;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_entity_node_get_remote_container_id(const pldm_entity_node *entity,
+					     uint16_t *cid)
+{
+	if (!entity) {
+		return -EINVAL;
+	}
+
+	*cid = entity->remote_container_id;
+	return 0;
 }
 
 LIBPLDM_ABI_STABLE
@@ -458,12 +472,14 @@ pldm_entity_node *pldm_entity_association_tree_add(
 	node->entity.entity_instance_num =
 		entity_instance_number != 0xFFFF ? entity_instance_number : 1;
 	node->association_type = association_type;
+	node->remote_container_id = 0;
 
 	if (tree->root == NULL) {
 		assert(parent == NULL);
 		tree->root = node;
 		/* container_id 0 here indicates this is the top-most entry */
 		node->entity.entity_container_id = 0;
+		node->remote_container_id = node->entity.entity_container_id;
 	} else if (parent != NULL && parent->first_child == NULL) {
 		parent->first_child = node;
 		node->parent = parent->entity;
@@ -487,6 +503,7 @@ pldm_entity_node *pldm_entity_association_tree_add(
 		node->next_sibling = next;
 		node->entity.entity_container_id =
 			prev->entity.entity_container_id;
+		node->remote_container_id = entity->entity_container_id;
 	}
 	entity->entity_instance_num = node->entity.entity_instance_num;
 	entity->entity_container_id = node->entity.entity_container_id;
@@ -780,9 +797,17 @@ void find_entity_ref_in_tree(pldm_entity_node *tree_node, pldm_entity entity,
 		return;
 	}
 
-	if (tree_node->entity.entity_type == entity.entity_type &&
-	    tree_node->entity.entity_instance_num ==
-		    entity.entity_instance_num) {
+	bool is_entity_container_id;
+	bool is_entity_instance_num;
+	bool is_type;
+
+	is_type = tree_node->entity.entity_type == entity.entity_type;
+	is_entity_instance_num = tree_node->entity.entity_instance_num ==
+				 entity.entity_instance_num;
+	is_entity_container_id = tree_node->entity.entity_container_id ==
+				 entity.entity_container_id;
+
+	if (is_type && is_entity_instance_num && is_entity_container_id) {
 		*node = tree_node;
 		return;
 	}
@@ -910,7 +935,6 @@ void entity_association_tree_find(pldm_entity_node *node, pldm_entity *entity,
 		*out = node;
 		return;
 	}
-
 	entity_association_tree_find(node->next_sibling, entity, out);
 	entity_association_tree_find(node->first_child, entity, out);
 }
@@ -937,6 +961,7 @@ static void entity_association_tree_copy(pldm_entity_node *org_node,
 	(*new_node)->parent = org_node->parent;
 	(*new_node)->entity = org_node->entity;
 	(*new_node)->association_type = org_node->association_type;
+	(*new_node)->remote_container_id = org_node->remote_container_id;
 	(*new_node)->first_child = NULL;
 	(*new_node)->next_sibling = NULL;
 	entity_association_tree_copy(org_node->first_child,
