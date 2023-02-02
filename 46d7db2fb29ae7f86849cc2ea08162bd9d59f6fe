@@ -16,6 +16,24 @@
       "message": "Let\u0027s remove the leading `_` to get away from C\u0027s reserved identifier namespace.",
       "revId": "46d7db2fb29ae7f86849cc2ea08162bd9d59f6fe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b70205f_2788e50e",
+        "filename": "include/container_of.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-02-02T19:50:04Z",
+      "side": 1,
+      "message": "Can we just do `#pragma once`?  Every mainstream compiler has supported it for a long time now.",
+      "parentUuid": "4686e0d2_19c9794a",
+      "revId": "46d7db2fb29ae7f86849cc2ea08162bd9d59f6fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
