@@ -16,6 +16,24 @@
       "message": "The addr argument to recvfrom() is an output: it gets populated by the kernel with data from the incoming message. \n\nYou don\u0027t use addr below (after the recvfrom) anyway though. Don\u0027t you need to know which EID the message is coming from? I\u0027d suggest doing the usual recvfrom sanity checks:\n\n - that addrlen large enough to hold an MCTP addr (ie, \u003e\u003d sizeof(addr)) \n - smctp_family \u003d\u003d AF_MCTP; and\n - smctp_addr \u003d\u003d eid.\n \nOr, if you\u0027re not using the output addr values, just use recv() instead,",
       "revId": "0453a6e082f6ab13e32d667cb402d17cf91a8b16",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2839d13_14f7f260",
+        "filename": "src/requester/transport-afmctp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-06T10:00:26Z",
+      "side": 1,
+      "message": "I somehow missed that you commented! Fixed.",
+      "parentUuid": "72932dee_68d13c0e",
+      "revId": "0453a6e082f6ab13e32d667cb402d17cf91a8b16",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
