@@ -107,6 +107,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9cd8466_a43842c2",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-02-06T10:43:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88d9f48d_0afb0c61",
+      "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "872417ef_a6b49a3c",
@@ -228,6 +246,24 @@
       "side": 1,
       "message": "\u003e Per your feedback, will it be better that libpldm provides a function to unpack PDR buffer to this struct? and then I will convert parseNumericSensorPDR() to C function and move to libpldm repo.\n\nThat certainly sounds sensible.\n\nManoj: What do you think?",
       "parentUuid": "ab940c92_beb63ef1",
+      "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b164dfcc_a8fceef0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-02-06T10:43:30Z",
+      "side": 1,
+      "message": "new API, decode_numeric_sensor_pdr_data(), and unit tests are added.",
+      "parentUuid": "8d4b2670_55c18ab6",
       "revId": "9482e709ab51bdd07f86030fd6f025dbf336209e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
