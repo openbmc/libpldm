@@ -105,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42584482_fe64a614",
+        "filename": "include/libpldm/requester/mctp-demux.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "Not done in PS11",
+      "parentUuid": "e773acfa_aff875e1",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cda383c_d62a1af6",
@@ -529,6 +547,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d40b6ec_8611e71b",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "I think I\u0027d leave errno to libc. Let\u0027s not write it.",
+      "parentUuid": "81b35fb4_37733cfb",
+      "range": {
+        "startLine": 187,
+        "startChar": 3,
+        "endLine": 188,
+        "endChar": 79
+      },
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69aa187c_49356f68",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 9
@@ -558,6 +600,24 @@
       "side": 1,
       "message": "Is it fine to say \"if there is no message available that has this instance id an error is returned\"? That captures both of those without being overly specific.",
       "parentUuid": "69aa187c_49356f68",
+      "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5afd5a62_a5ad4fa3",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "Yes, I think that\u0027s fair",
+      "parentUuid": "a0f8bd03_671968e4",
       "revId": "87e7395911c2da54e0df0cdc61086031b5119ae2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

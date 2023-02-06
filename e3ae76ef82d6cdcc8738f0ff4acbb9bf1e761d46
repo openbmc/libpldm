@@ -1,0 +1,307 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc84caa6_1a55cdbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "Fewer comments this time, looks like we\u0027re converging on something we can merge!",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "735a0894_8bd3b08d",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "That\u0027s fair given that messages can be a variable length, but they do have a fixed-length component - the PLDM header. That\u0027s 3 bytes, so what\u0027s the behaviour if req_msg_len is less than 3? Can we instead state that we\u0027ll return an error in that case?\n\nAdjust the remainder of the documentation based on the decision here.",
+      "range": {
+        "startLine": 166,
+        "startChar": 54,
+        "endLine": 167,
+        "endChar": 53
+      },
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daed0da4_f55f06a0",
+        "filename": "include/libpldm/requester/transport-mctp-demux.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "Still need to remove the underscore.",
+      "range": {
+        "startLine": 2,
+        "startChar": 8,
+        "endLine": 2,
+        "endChar": 9
+      },
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "123dab62_e56511ba",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "The function prototype needs to declare its arguments as `void`, i.e.\n\n```\nstruct pldm_requester *pldm_init(void)\n{\n...\n```",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7886b16b_c51f3c20",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "A trick you can use here is that `sizeof()` can infer the type from a variable, so instead of passing the type directly and having the same on both the left and right of the assignment, we can rewrite this as:\n\n```\nstruct pldm_requester *pldm \u003d calloc(sizeof(*pldm), 1);\n```\n\nThe other part of the trick is that `sizeof()` is guaranteed not to evaluate the expression, only its type, which means we\u0027re not actually dereferencing an undefined pointer value there.\n\nThe other benefit is that if the type of `pldm` changes you don\u0027t have a memory safety hazard, the allocation will always be the right size of the type of the variable (i.e. deals with the case where you somehow end up with different types on the left and right of the assignment operator).\n\nHOWEVER:\n\n(see next comment)",
+      "range": {
+        "startLine": 22,
+        "startChar": 45,
+        "endLine": 22,
+        "endChar": 66
+      },
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f6fc987_156fe5d6",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "The final trick is that this is redundant, as if `!pldm` holds then it\u0027s inferred that `pldm \u003d\u003d NULL`, in which case we can also write `return pldm`. With that we can collapse the implementation to:\n\n```\nstruct pldm_requester *pldm_init(void)\n{\n    return calloc(sizeof(struct pldm_requester), 1);\n}\n```",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 25,
+        "endChar": 13
+      },
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa2e6046_8e28e6b8",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "Need to be careful here as this becomes a tight loop if `pldm_recv_msg()` doesn\u0027t block.\n\nI expect we actually need to introduce a `pldm_wait()` analogous to e.g. `sd_bus_wait()`: https://www.man7.org/linux/man-pages/man3/sd_bus_wait.3.html",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea525576_ca233cc7",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "Add another newline below this one just to separate the comment below from the macro body",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a0ce74e_816b49fe",
+        "filename": "src/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "This should match the file path",
+      "range": {
+        "startLine": 1,
+        "startChar": 8,
+        "endLine": 1,
+        "endChar": 23
+      },
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a1d45c7_afcdf5ff",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "Compilers will warn about assignment vs comparison these days, so let\u0027s avoid yoda conditions and use the more natural formulation:\n\n```\nif (fd \u003d\u003d -1)\n{\n...\n```\n\nAudit the rest of the file for this also.",
+      "range": {
+        "startLine": 41,
+        "startChar": 5,
+        "endLine": 41,
+        "endChar": 13
+      },
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90665339_d49abe2f",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "Given the commentary about `pldm_wait()` elsewhere, I wonder if we make this more generic and take a `struct pldm_transport *` here and hoist ourselves out in the implementation with `transport_to_demux()`.\n\nThis would allow us to have a generic implementation of `pldm_wait()` by having backends optionally supply an `init_pollfd()` function pointer in `struct pldm_transport`.",
+      "range": {
+        "startLine": 62,
+        "startChar": 49,
+        "endLine": 62,
+        "endChar": 74
+      },
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b95334e_b8bb6b97",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "`pldm_transport_mctp_demux_get_eid()` (currently missing `_demux`)",
+      "range": {
+        "startLine": 70,
+        "startChar": 11,
+        "endLine": 70,
+        "endChar": 38
+      },
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ed3de8e_9b7d3b5d",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "Unnecessary assignment, `ctx` is a local.",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7bcd861_4478c300",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "Maybe add a comment here that the `dup()` is so we can unconditionally close the fd in `pldm_transport_mctp_demux_destroy()` as the held fd is then always managed by the implementation.",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a832b53d_a1144841",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-06T22:27:57Z",
+      "side": 1,
+      "message": "Is `-1` reasonable here?",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
