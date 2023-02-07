@@ -18,6 +18,108 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b42695c_c1859b27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-02-07T07:01:54Z",
+      "side": 1,
+      "message": "Half-way through the review, will post any more comments by EOD.",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4616aeff_76cd5299",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-02-07T07:01:54Z",
+      "side": 1,
+      "message": "These response codes don\u0027t have documentation around them, consider adding them?",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccefde3f_ddec7ed8",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-02-07T07:01:54Z",
+      "side": 1,
+      "message": "How is the error handled if there any registered transports, since the return is void?",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "439379ed_d607660e",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-02-07T07:01:54Z",
+      "side": 1,
+      "message": "Better to call this parameter core or pldm_core, variable name pldm seemed vague over here.",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c4a66ba_41624650",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-02-07T07:01:54Z",
+      "side": 1,
+      "message": "Use cases like dynamic device discovery, means removing unregistering individual transports, is it in the scope?",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fccce119_3e6953b9",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-02-07T07:01:54Z",
+      "side": 1,
+      "message": "What is async msg, in the scope of sync API?",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "735a0894_8bd3b08d",
@@ -37,6 +139,40 @@
         "endLine": 167,
         "endChar": 53
       },
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0d50d38_cb4c797c",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-02-07T07:01:54Z",
+      "side": 1,
+      "message": "+1 \n\nI guess we should return PLDM_REQUESTER_NOT_REQ_MSG \u003d -4, if it is less than 3+ bytes. \n\nIn the scope of this function, we need to call out when we will have behavior undefined, otherwise appropriate pldm_requester_codes will be returned.",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc192e89_2ea38653",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-02-07T07:01:54Z",
+      "side": 1,
+      "message": "Why return PLDM_REQUESTER_INSTANCE_ID_MISMATCH, since the expectation is only for a matching TID and InstanceId?\n\nThe value this API provides is instance_id check compared to pldm_recv_msg_any?",
       "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -140,6 +276,23 @@
       "writtenOn": "2023-02-06T22:27:57Z",
       "side": 1,
       "message": "Need to be careful here as this becomes a tight loop if `pldm_recv_msg()` doesn\u0027t block.\n\nI expect we actually need to introduce a `pldm_wait()` analogous to e.g. `sd_bus_wait()`: https://www.man7.org/linux/man-pages/man3/sd_bus_wait.3.html",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fbb862a_ceb3dc7d",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-02-07T07:01:54Z",
+      "side": 1,
+      "message": "why is this not a function?",
       "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
