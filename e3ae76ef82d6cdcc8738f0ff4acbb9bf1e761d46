@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d321ff4_6268e321",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-07T10:24:09Z",
+      "side": 1,
+      "message": "Thanks Tom. I didn\u0027t see this before I posted my changes so I\u0027ll address your feedback tomorrow.",
+      "parentUuid": "6b42695c_c1859b27",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4616aeff_76cd5299",
@@ -553,6 +571,30 @@
       "writtenOn": "2023-02-06T22:27:57Z",
       "side": 1,
       "message": "Given the commentary about `pldm_wait()` elsewhere, I wonder if we make this more generic and take a `struct pldm_transport *` here and hoist ourselves out in the implementation with `transport_to_demux()`.\n\nThis would allow us to have a generic implementation of `pldm_wait()` by having backends optionally supply an `init_pollfd()` function pointer in `struct pldm_transport`.",
+      "range": {
+        "startLine": 62,
+        "startChar": 49,
+        "endLine": 62,
+        "endChar": 74
+      },
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05bd7d48_5f561b4c",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-07T10:24:09Z",
+      "side": 1,
+      "message": "Thoughts on what I\u0027ve added (pldm_wait_for_message)?",
+      "parentUuid": "90665339_d49abe2f",
       "range": {
         "startLine": 62,
         "startChar": 49,
