@@ -70,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e92f66cb_3b63cfaa",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-08T05:47:36Z",
+      "side": 1,
+      "message": "Documenting response codes should probably be in a separate patch from this one - there is enough going on here.",
+      "parentUuid": "4616aeff_76cd5299",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccefde3f_ddec7ed8",
@@ -83,6 +101,24 @@
       "writtenOn": "2023-02-07T07:01:54Z",
       "side": 1,
       "message": "How is the error handled if there any registered transports, since the return is void?",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8379f0_aa18834b",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-08T05:47:36Z",
+      "side": 1,
+      "message": "At this stage it isn\u0027t. I guess we could change the return type, check for registered transports and fail if there are any.",
+      "parentUuid": "ccefde3f_ddec7ed8",
       "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -123,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0895c27b_0ac48904",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-08T05:47:36Z",
+      "side": 1,
+      "message": "It would be straightforward to add a function to unregister individual transports, so this can be added if and when we need it? \n\nWhile this is a trivial example, I\u0027d rather not add in code paths now that we don\u0027t use just because we might need it later. Then we run the risk of defining an API now that is not suitable or buggy in some way (as it\u0027s not used now) and having to redefine/change/fix it later when we do need it.",
+      "parentUuid": "7c4a66ba_41624650",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fccce119_3e6953b9",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 11
@@ -134,6 +188,24 @@
       "writtenOn": "2023-02-07T07:01:54Z",
       "side": 1,
       "message": "What is async msg, in the scope of sync API?",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a6196dd_68a65176",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-08T05:47:36Z",
+      "side": 1,
+      "message": "Right, I see how this is confusing. I wanted to make it clear that we accept not just PLDM request messages but any PLDM message if the Rq bit is one, which are called \u0027asynchronous notifications\u0027 in the PLDM spec. \n\nSo it\u0027s async in terms of the PLDM spec rather than how the consumer uses the API.\n\nDoes my change - \"PLDM request msg or async notification\" - make that clearer? Or do you think we need to be even more explicit and mention the Rq bit?",
+      "parentUuid": "fccce119_3e6953b9",
       "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -204,6 +276,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b91bbf6d_d7010b75",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-08T05:47:36Z",
+      "side": 1,
+      "message": "\u003e I guess we should return PLDM_REQUESTER_NOT_REQ_MSG \u003d -4, if it is less than 3+ bytes.\n\nGood point. Done.\n\n\u003e In the scope of this function, we need to call out when we will have behavior undefined, otherwise appropriate pldm_requester_codes will be returned.\n\nCan you clarify what you mean? Haven\u0027t I done that?",
+      "parentUuid": "c0d50d38_cb4c797c",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc192e89_2ea38653",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 11
@@ -215,6 +305,24 @@
       "writtenOn": "2023-02-07T07:01:54Z",
       "side": 1,
       "message": "Why return PLDM_REQUESTER_INSTANCE_ID_MISMATCH, since the expectation is only for a matching TID and InstanceId?\n\nThe value this API provides is instance_id check compared to pldm_recv_msg_any?",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9adb4c60_6a9118df",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-08T05:47:36Z",
+      "side": 1,
+      "message": "\u003e Why return PLDM_REQUESTER_INSTANCE_ID_MISMATCH, since the expectation is only for a matching TID and InstanceId?\n\nGood catch. \n\n\u003e The value this API provides is instance_id check compared to pldm_recv_msg_any?\n\nYep. An app that sends a singular request and waits for the response would likely use pldm_recv_msg. An app that sends multiple requests off before getting responses might want to use pldm_recv_msg_any.",
+      "parentUuid": "fc192e89_2ea38653",
       "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -425,6 +533,24 @@
       "writtenOn": "2023-02-07T07:01:54Z",
       "side": 1,
       "message": "why is this not a function?",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af2e01d8_5d7e0b16",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-08T05:47:36Z",
+      "side": 1,
+      "message": "This takes in a function with arbitrary type so it has to be a macro.\n\nOr did you mean \u0027why does this macro exist\u0027? It exists because the setup and teardown required to implement the old API in terms of the new API was the same for the four send/recv functions. This makes it clear that we\u0027re doing the same thing in each function as well as reduces the code you need to read to understand what is happening.",
+      "parentUuid": "9fbb862a_ceb3dc7d",
       "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
