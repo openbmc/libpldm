@@ -16,6 +16,24 @@
       "message": "nit: keep the entries in order, move it above 20.\n\nIs it part of the standard specification?",
       "revId": "347cdcb5d5cd297d24ebfb859fe6e0a94568db02",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28bf9a92_99450baf",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2023-02-09T09:30:11Z",
+      "side": 1,
+      "message": "resolved as per comment.\nyes bootprogress state taken from DSP0249 design spec.",
+      "parentUuid": "3ae1a593_049b29f7",
+      "revId": "347cdcb5d5cd297d24ebfb859fe6e0a94568db02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
