@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22630ad5_3d05a2d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-09T10:26:46Z",
+      "side": 1,
+      "message": "Given it\u0027s a standard state value I would prefer we don\u0027t mention specific implementations like hostboot here.",
+      "range": {
+        "startLine": 9,
+        "startChar": 62,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "328bbb549d5ec2ae8b126df45e2defef903a4e51",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc5440c2_cb92b765",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-09T10:26:46Z",
+      "side": 1,
+      "message": "Please make sure to wrap your commit messages at 72 columns 😊 Usually your editor can be configured to do this for you automatically.",
+      "revId": "328bbb549d5ec2ae8b126df45e2defef903a4e51",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be54b0ab_59e824bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-09T10:26:46Z",
+      "side": 1,
+      "message": "Again here.",
+      "revId": "328bbb549d5ec2ae8b126df45e2defef903a4e51",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28bcc9ba_2c648e26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-09T10:26:46Z",
+      "side": 1,
+      "message": "Should this be a space? Also is this first/last name ordering? Or last/first? Ideally it should be first/last\n\n```$ git config --global user.name \u0027Kamalkumar Patel\u0027``` ?",
+      "range": {
+        "startLine": 15,
+        "startChar": 20,
+        "endLine": 15,
+        "endChar": 21
+      },
+      "revId": "328bbb549d5ec2ae8b126df45e2defef903a4e51",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "132871da_d2be82ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-09T10:26:46Z",
+      "side": 1,
+      "message": "Hi Kamalkumar, I have a few comments on the commit message.",
+      "revId": "328bbb549d5ec2ae8b126df45e2defef903a4e51",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
