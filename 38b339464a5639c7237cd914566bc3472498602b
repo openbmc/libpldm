@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ca377fc_412afdde",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-10T05:13:42Z",
+      "side": 1,
+      "message": "+1 for renaming pldm.h to requester.h at some point.\n\n+1 for moving transport to a separate directory. I think it is cleaner.",
+      "parentUuid": "07ea724f_485e1ead",
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5247bca6_a8d5377c",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 13
