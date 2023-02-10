@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd45b168_6af540c6",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "Are these being installed in the correct location? That is, I think we want people to write:\n\n```\n#include \u003cpldm/requester/transport-mctp-demux.h\u003e\n```",
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5247bca6_a8d5377c",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "Should probably be `#ifndef REQUESTER_PLDM_H` for consistency.",
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a752aa_92c54ea0",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "I think we should have this return int too. We can just unconditionally return 0 for now. I don\u0027t think we want to make it a pre-condition that the transport registered and force an error if there isn\u0027t, rather we should consider the post-condition of no transports being registered once the call completes.",
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71fc01d6_78a6a761",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "Starting a sentence with \"Otherwise...\" feels odd. I think you just need to delete the full-stop here and it will be fixed.\n\nMaybe audit the rest of the documentation added in this patch as well.",
+      "range": {
+        "startLine": 157,
+        "startChar": 13,
+        "endLine": 157,
+        "endChar": 14
+      },
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a15e16f0_3e636e05",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "By the renaming suggestion above this would become:\n\n```\npldm_requester_rc_t pldm_requester_wait_for_message(...)\n```\n\nThat\u0027s starting to become a bit of a mouthful. Further, I think \"wait for message\" is slightly misleading. Really we\u0027re waiting for an event to occur that needs to be addressed by the API; we may not strictly be waiting for a message. Leaning on POSIX and libmctp we\u0027ve called things that do this `poll`. How about:\n\n```\npldm_requester_rc_t pldm_requester_poll(...)\n```\n\n?",
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93a2f424_8cd8f305",
+        "filename": "src/requester/pldm_internal.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to ifdef this, we just leave it NULL if we don\u0027t assign to it. I prefer not to change structure sizes this way.",
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

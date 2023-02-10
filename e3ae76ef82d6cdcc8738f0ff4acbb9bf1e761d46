@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f70e08c_ebdb38b3",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "Let\u0027s take the forward-looking approach and make it return an int.",
+      "parentUuid": "cd8379f0_aa18834b",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "439379ed_d607660e",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 11
@@ -136,6 +154,24 @@
       "writtenOn": "2023-02-07T07:01:54Z",
       "side": 1,
       "message": "Better to call this parameter core or pldm_core, variable name pldm seemed vague over here.",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aba02960_96da539c",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "I think you\u0027re right, and that we should actually generalise your point. I think we change the function names to all be prefixed with `pldm_requester`. From there I think we can switch the parameter name to `ctx` (context) to keep things brief:\n\n```\nstruct pldm_requester *pldm_requester_init(void);\nint pldm_requester_destroy(struct pldm_requester *ctx);\npldm_requester_rc_t pldm_requester_register_transport(struct pldm_requester *ctx, struct pldm_transport *transport);\n...\n```\n\netc.\n\nAudit the rest of the API to address this.\n\nPS: Also I\u0027d `s/core/instance/` in the documentation.",
+      "parentUuid": "439379ed_d607660e",
       "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -171,6 +207,24 @@
       "side": 1,
       "message": "It would be straightforward to add a function to unregister individual transports, so this can be added if and when we need it? \n\nWhile this is a trivial example, I\u0027d rather not add in code paths now that we don\u0027t use just because we might need it later. Then we run the risk of defining an API now that is not suitable or buggy in some way (as it\u0027s not used now) and having to redefine/change/fix it later when we do need it.",
       "parentUuid": "7c4a66ba_41624650",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10890a93_8a16408d",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "I agree with Rashmica here. We can add that API when we have a specific use for it. For now we just need to convince ourselves that it\u0027s possible to implement in the future, and I can\u0027t see any reason why it wouldn\u0027t be.",
+      "parentUuid": "0895c27b_0ac48904",
       "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -292,6 +346,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efdb1317_ea8a9911",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bccab989_d208dcc8",
+      "range": {
+        "startLine": 166,
+        "startChar": 54,
+        "endLine": 167,
+        "endChar": 53
+      },
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc192e89_2ea38653",
@@ -322,6 +400,24 @@
       "writtenOn": "2023-02-08T05:47:36Z",
       "side": 1,
       "message": "\u003e Why return PLDM_REQUESTER_INSTANCE_ID_MISMATCH, since the expectation is only for a matching TID and InstanceId?\n\nGood catch. \n\n\u003e The value this API provides is instance_id check compared to pldm_recv_msg_any?\n\nYep. An app that sends a singular request and waits for the response would likely use pldm_recv_msg. An app that sends multiple requests off before getting responses might want to use pldm_recv_msg_any.",
+      "parentUuid": "fc192e89_2ea38653",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f9e90ce_7a8a9b67",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "The key point of this API is the pushing the responsibility of maintaining a queue of unprocessed messages into the library. If the caller wishes to maintain the queue themselves they can use `pldm_recv_msg_any()` as `@Rashmica Gupta` pointed out.\n\nThe current behaviour does not implement this queue and simply discards the message on IID mismatch. `@Rashmica Gupta` has written the documentation such that we can define a useful behaviour in the future (retaining and queuing the messages) while still allowing for the current behaviour of discarding mismatching messages.",
       "parentUuid": "fc192e89_2ea38653",
       "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
@@ -520,6 +616,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "164540f7_3710a5b8",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa2e6046_8e28e6b8",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fbb862a_ceb3dc7d",
@@ -551,6 +665,24 @@
       "side": 1,
       "message": "This takes in a function with arbitrary type so it has to be a macro.\n\nOr did you mean \u0027why does this macro exist\u0027? It exists because the setup and teardown required to implement the old API in terms of the new API was the same for the four send/recv functions. This makes it clear that we\u0027re doing the same thing in each function as well as reduces the code you need to read to understand what is happening.",
       "parentUuid": "9fbb862a_ceb3dc7d",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a663373_4c1d8891",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "Can you please add this explanation in the source comment above the `#define`?",
+      "parentUuid": "af2e01d8_5d7e0b16",
       "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -879,6 +1011,24 @@
       "side": 1,
       "message": "I thought so given that other functions that return fds (eg open, socket) return -1 on error. Or we could change the return type to pldm_requester_rc_t and return the new error code I was thinking we could have (PLDM_REQUESTER_INVALID_SETUP) which I accidentally pushed in my last patch.",
       "parentUuid": "a832b53d_a1144841",
+      "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "652e27ae_30935fa1",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e224160c_d1a61f82",
       "revId": "e3ae76ef82d6cdcc8738f0ff4acbb9bf1e761d46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

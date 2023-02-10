@@ -51,6 +51,24 @@
       "message": "How will this work for apps that wants to use sd_event loop?https://0pointer.net/blog/introducing-sd-event.html",
       "revId": "6f034c8a2b71138c7c0a67a1f9a50aeff9b6696d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ee0fbdf_2a11a39b",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-10T00:08:38Z",
+      "side": 1,
+      "message": "It doesn\u0027t right now. You can use the transport-specific `init_pollfd()` function e.g. `pldm_transport_mctp_demux_init_pollfd()` to get you a `struct pollfd` with the data you need to hook it up to `sd_event`.\n\nWe can add a generic `int pldm_requester_init_pollfds(struct pldm_requester *ctx, struct pollfd **pollfds, unsigned int *len)` later to abstract over multiple transports once we need it.",
+      "parentUuid": "eb5003d6_7d4b8e25",
+      "revId": "6f034c8a2b71138c7c0a67a1f9a50aeff9b6696d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
