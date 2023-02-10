@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9202398b_38e2ca35",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-10T04:33:33Z",
+      "side": 1,
+      "message": "I think that makes sense. \n\nDo we also want pldm.h to be under the requester path? If so, would we get away with installing pldm.h at both `\u003clibpldm/pldm.h\u003e` and `\u003clibpldm/requester/pldm.h\u003e` (so we don\u0027t break current consumers of the API). Then when we delete the old API we delete the install path at `\u003clibpldm/pldm.h\u003e`?",
+      "parentUuid": "cd45b168_6af540c6",
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5247bca6_a8d5377c",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 13
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-10T00:08:38Z",
       "side": 1,
       "message": "Should probably be `#ifndef REQUESTER_PLDM_H` for consistency.",
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e29a9af3_8dcb5e0a",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-10T04:33:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5247bca6_a8d5377c",
       "revId": "38b339464a5639c7237cd914566bc3472498602b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2023-02-10T00:08:38Z",
       "side": 1,
       "message": "I think we should have this return int too. We can just unconditionally return 0 for now. I don\u0027t think we want to make it a pre-condition that the transport registered and force an error if there isn\u0027t, rather we should consider the post-condition of no transports being registered once the call completes.",
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1b5b062_a907c434",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-10T04:33:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "05a752aa_92c54ea0",
       "revId": "38b339464a5639c7237cd914566bc3472498602b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +129,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4205fa6_67fdef18",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-10T04:33:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71fc01d6_78a6a761",
+      "range": {
+        "startLine": 157,
+        "startChar": 13,
+        "endLine": 157,
+        "endChar": 14
+      },
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a15e16f0_3e636e05",
@@ -92,6 +170,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db4c2ef1_22abd7dc",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-10T04:33:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a15e16f0_3e636e05",
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93a2f424_8cd8f305",
@@ -105,6 +201,24 @@
       "writtenOn": "2023-02-10T00:08:38Z",
       "side": 1,
       "message": "I don\u0027t think we need to ifdef this, we just leave it NULL if we don\u0027t assign to it. I prefer not to change structure sizes this way.",
+      "revId": "38b339464a5639c7237cd914566bc3472498602b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc913dc9_4dfe9fd6",
+        "filename": "src/requester/pldm_internal.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-10T04:33:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "93a2f424_8cd8f305",
       "revId": "38b339464a5639c7237cd914566bc3472498602b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
