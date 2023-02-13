@@ -51,6 +51,24 @@
       "parentUuid": "b17e91d6_3776d165",
       "revId": "9510326ddae53b97e142b09a47a8ec17625a116a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccaaa25b_3118f964",
+        "filename": "src/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1255,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-13T05:42:33Z",
+      "side": 1,
+      "message": "Yeah, that sounds good!",
+      "parentUuid": "444dd16b_213a52b2",
+      "revId": "9510326ddae53b97e142b09a47a8ec17625a116a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
