@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d4bb417_8ecdcce0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-13T03:30:52Z",
+      "side": 1,
+      "message": "Hi Gilbert,\n\nI think the buffer handling is going to cause us headaches, but at least explicit is better than `__attribute__((packed))` leaking through the ABI and abusing it to do `memcpy()` in the implementation.\n\nI\u0027ve made a suggestion on value extraction from the buffers. Let me know what you think.",
+      "revId": "9510326ddae53b97e142b09a47a8ec17625a116a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b17e91d6_3776d165",
+        "filename": "src/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1255,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-13T03:30:52Z",
+      "side": 1,
+      "message": "Okay, explicit here is better. I think you\u0027ll agree it\u0027s a bit tedious though, and I wonder if we can make our lives easier by adding a little API to help out? We could encode the endian handling as well as a buffer cursor in it, for example:\n\n```\nstruct pldm_buf {\n    unsigned char *cursor;\n    size_t remaining;\n};\n\nint pldm_buf_init(struct pldm_buf *ctx, void *buf, size_t len)\n{\n    uintptr_t end;\n    \n    if (!buf) {\n        return PLDM_ERROR_INVALID_DATA;\n    }\n    \n    if (!len) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n    \n    end \u003d (uintptr_t)buf + len;\n    if (end \u0026\u0026 end \u003c (uintptr_t)buf) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n    \n    ctx-\u003ecursor \u003d buf;\n    ctx-\u003eremaining \u003d len;\n\n    return PLDM_SUCCESS;\n}\n\nint pldm_buf_destroy(struct pldm_buf *ctx)\n{\n    ctx-\u003ebuf;\n    ctx-\u003eremaining \u003d 0;\n}\n\nint pldm_buf_extract_uint8(struct pldm_buf *ctx, uint8_t *dst)\n{\n    if (!ctx-\u003eremaining) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n    \n    *dst \u003d ((uint8_t *)ctx)-\u003ecursor);\n    ctx-\u003ecursor++;\n    ctx-\u003eremaining--;\n    \n    return PLDM_SUCCESS;\n}\n\nint pldm_buf_extract_uint16(struct pldm_buf *ctx, uint16_t *dst)\n{\n    uint16_t ldst;\n\n    if (!ctx-\u003eremaining) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n    \n    if (ctx-\u003eremaining \u003c sizeof(*dst)) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n    \n    // Use memcpy() to have the compiler deal with any alignment\n    // issues on the target architecture\n    memcpy(\u0026ldst, ctx-\u003ecursor, sizeof(*dst));\n    // Only assign the target value once it\u0027s correctly decoded\n    *dst \u003d le16toh(ldst);\n    ctx-\u003ecursor +\u003d sizeof(*dst);\n    ctx-\u003eremaining -\u003d sizeof(*dst);\n    \n    return 0;\n}\n\n...\n```\n\netc. Fill out the rest of the extractors as required in accordance with the types in Table 1 - PLDM Data Types from DSP0240 v1.0.0. This keeps it safe wrt alignment, endianness and overflows.\n\nThen, all this below turns into:\n\n```\n    struct pldm_buf _buf, *buf \u003d \u0026_buf;\n    int rc;\n    \n    // With this check we can avoid testing the return values on\n    // the extractors below as we know we have enough buffer to\n    // satisfy all the reads.\n    if (pdr_data_length \u003c expectedPDRSize) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n\n    if ((rc \u003d pldm_buf_init(buf, pdr_data, pdr_data_length) \u003c 0) {\n        return rc;\n    }\n    \n    pldm_buf_extract_uint8(buf, \u0026pdr_value-\u003ehdr.version);\n    pldm_buf_extract_uint8(buf, \u0026pdr_value-\u003ehdr.type);\n    pldm_buf_extract_uint16(buf, \u0026pdr_value-\u003ehdr.record_change_num);\n    pldm_buf_extract_uint16(buf, \u0026pdr_value-\u003ehdr.length);\n    ...\n    pldm_buf_destroy(buf);\n```\n\netc.\n\nThoughts?",
+      "revId": "9510326ddae53b97e142b09a47a8ec17625a116a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
