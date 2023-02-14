@@ -88,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26349d5f_0ef5eca9",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T03:49:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "62099eb9_b43263b7",
+      "revId": "b080edebecd22f1e4072b838ea321f92df5ce8a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f818274c_95fe0ad2",
@@ -101,6 +119,24 @@
       "writtenOn": "2023-02-13T00:28:13Z",
       "side": 1,
       "message": "Similarly we need a fixup for this. How about this above the definition of `pldm_requester_poll(...)`:\n\n```\n#ifndef PLDM_HAS_POLL\nstruct pollfd {\n    int   fd;         /* file descriptor */\n    short events;     /* requested events */\n    short revents;    /* returned events */\n};\n\nstatic inline int poll(struct pollfd *fds, int nfds, int timeout)\n{\n    int i;\n    \n    for (i \u003d 0; i \u003c nfds; i++) {\n        fds[i].revents \u003d 0;\n    }\n    \n    return 0;\n}\n#endif\n```",
+      "revId": "b080edebecd22f1e4072b838ea321f92df5ce8a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0918298a_beb935b9",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T03:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f818274c_95fe0ad2",
       "revId": "b080edebecd22f1e4072b838ea321f92df5ce8a6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -122,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "556bfdcc_cf8bcb2e",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T03:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1ea215b_26fa2287",
+      "revId": "b080edebecd22f1e4072b838ea321f92df5ce8a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7f95c13_b8a8a945",
@@ -139,6 +193,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7be512ca_021a864a",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T03:49:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e7f95c13_b8a8a945",
+      "revId": "b080edebecd22f1e4072b838ea321f92df5ce8a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1d4634c_82f27c23",
@@ -152,6 +224,24 @@
       "writtenOn": "2023-02-13T00:28:13Z",
       "side": 1,
       "message": "I think we should sanity-check `length` before we call `malloc()`, otherwise we\u0027re trying to `malloc()` something pretty arbitrary.",
+      "revId": "b080edebecd22f1e4072b838ea321f92df5ce8a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25bb4d92_94ee9c6e",
+        "filename": "src/requester/transport-mctp-demux.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T03:49:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f1d4634c_82f27c23",
       "revId": "b080edebecd22f1e4072b838ea321f92df5ce8a6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
