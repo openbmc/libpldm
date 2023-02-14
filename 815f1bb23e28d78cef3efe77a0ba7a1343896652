@@ -16,6 +16,183 @@
       "message": "Patchset 16 is just reordering functions in the header and source file to be in the same order.",
       "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93447550_d1637c6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:19:47Z",
+      "side": 1,
+      "message": "A few remaining nitpicks :)",
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0a54428_cbccb803",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:19:47Z",
+      "side": 1,
+      "message": "Where does this instance ID come from? There\u0027s no provision in `pldm_requester_send_msg()` to provide it or for it to be returned. Is that something we need to consider?",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 18
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d665b7a_9d3e4a9a",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:19:47Z",
+      "side": 1,
+      "message": "Missing indent?",
+      "range": {
+        "startLine": 246,
+        "startChar": 11,
+        "endLine": 247,
+        "endChar": 24
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c908aeb4_c3611147",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:19:47Z",
+      "side": 1,
+      "message": "Missing indent?",
+      "range": {
+        "startLine": 279,
+        "startChar": 11,
+        "endLine": 280,
+        "endChar": 74
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc3b1b0c_59778c72",
+        "filename": "src/requester/meson.build",
+        "patchSetId": 16
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:19:47Z",
+      "side": 1,
+      "message": "Let\u0027s instead add a meson file in the transport directory and append `mctp-demux.c` there. Will need to add `subdir(\u0027transport\u0027)` to `src/meson.build`.",
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32c74145_3d375316",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:19:47Z",
+      "side": 1,
+      "message": "Given we\u0027re no-longer even looking at `.revents` in `pldm_requester_poll()` I think we can drop this, they\u0027re dead stores and are meaningless.",
+      "range": {
+        "startLine": 68,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 2
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e597ee7f_537f9ae6",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:19:47Z",
+      "side": 1,
+      "message": "nit: Add another newline here to help with visual separation to the function prototype below.",
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a2e3dad_56814c70",
+        "filename": "src/transport/container_of.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:19:47Z",
+      "side": 1,
+      "message": "Do we squash the prior patch into this one? If not we should fix this move there rather than in this patch.\n\nIMO this is trivial enough to just squash in.",
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d524b5f0_962fdbe1",
+        "filename": "src/transport/transport_internal.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:19:47Z",
+      "side": 1,
+      "message": "How about we place this at `src/transport.h`? Any header in `src/` is internal by definition and so I think we can drop that part of the path and include guard symbol name.",
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
