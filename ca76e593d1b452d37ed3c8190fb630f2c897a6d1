@@ -16,6 +16,98 @@
       "message": "manojkiran.eda@gmail.com do you have any comment in this Patch set?",
       "revId": "ca76e593d1b452d37ed3c8190fb630f2c897a6d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d43a968_b87feecf",
+        "filename": "src/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-02-14T09:25:15Z",
+      "side": 1,
+      "message": "we could add a check for transfer operation flag as well {Possible values: {GetNextPart\u003d0x00, GetFirstPart\u003d0x01, AcknowledgementOnly\u003d0x02}}, and return INVALID DATA if the value is not present in the enum.",
+      "range": {
+        "startLine": 880,
+        "startChar": 1,
+        "endLine": 880,
+        "endChar": 62
+      },
+      "revId": "ca76e593d1b452d37ed3c8190fb630f2c897a6d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e726f534_154d20d6",
+        "filename": "src/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-02-14T09:25:15Z",
+      "side": 1,
+      "message": "we could even check the combinations:\n\n1. null \u0026 getfirstpart \n2. 0xFFFF \u0026 getnextpart \n\nand return INVALID_DATA if the combinations are not correct.",
+      "range": {
+        "startLine": 882,
+        "startChar": 1,
+        "endLine": 882,
+        "endChar": 71
+      },
+      "revId": "ca76e593d1b452d37ed3c8190fb630f2c897a6d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d899c1d_6e387366",
+        "filename": "src/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-02-14T09:25:15Z",
+      "side": 1,
+      "message": "magic numbers. please avoid these and have some # defines to denote what these are.",
+      "range": {
+        "startLine": 958,
+        "startChar": 6,
+        "endLine": 958,
+        "endChar": 12
+      },
+      "revId": "ca76e593d1b452d37ed3c8190fb630f2c897a6d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8744fbf_59d883fe",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1487,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-02-14T09:25:15Z",
+      "side": 1,
+      "message": "please also add the relevant test cases for the additional checks that I mentioned in the other file.",
+      "range": {
+        "startLine": 1487,
+        "startChar": 0,
+        "endLine": 1487,
+        "endChar": 1
+      },
+      "revId": "ca76e593d1b452d37ed3c8190fb630f2c897a6d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
