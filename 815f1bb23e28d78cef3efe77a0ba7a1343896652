@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ced80351_43a2ffa4",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T07:36:56Z",
+      "side": 1,
+      "message": "It\u0027s in the PLDM header of the PLDM messages. So the caller is responsible for making sure something sensible is in the header of the msg given to `pldm_requester_send_msg` and passed in here. Do you think this needs to be clearer?",
+      "parentUuid": "a0a54428_cbccb803",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 18
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d665b7a_9d3e4a9a",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 16
@@ -71,6 +95,30 @@
       "writtenOn": "2023-02-14T05:19:47Z",
       "side": 1,
       "message": "Missing indent?",
+      "range": {
+        "startLine": 246,
+        "startChar": 11,
+        "endLine": 247,
+        "endChar": 24
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e282681e_499441c6",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T07:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d665b7a_9d3e4a9a",
       "range": {
         "startLine": 246,
         "startChar": 11,
@@ -104,6 +152,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d18e139_95ccb06b",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T07:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c908aeb4_c3611147",
+      "range": {
+        "startLine": 279,
+        "startChar": 11,
+        "endLine": 280,
+        "endChar": 74
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc3b1b0c_59778c72",
@@ -117,6 +189,24 @@
       "writtenOn": "2023-02-14T05:19:47Z",
       "side": 1,
       "message": "Let\u0027s instead add a meson file in the transport directory and append `mctp-demux.c` there. Will need to add `subdir(\u0027transport\u0027)` to `src/meson.build`.",
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5920d3a_9ba8a5ed",
+        "filename": "src/requester/meson.build",
+        "patchSetId": 16
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T07:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc3b1b0c_59778c72",
       "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -144,6 +234,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82330a4b_2e684a8d",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T07:36:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "32c74145_3d375316",
+      "range": {
+        "startLine": 68,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 2
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e597ee7f_537f9ae6",
@@ -161,6 +275,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd5eb422_6f75a753",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T07:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e597ee7f_537f9ae6",
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a2e3dad_56814c70",
@@ -174,6 +306,24 @@
       "writtenOn": "2023-02-14T05:19:47Z",
       "side": 1,
       "message": "Do we squash the prior patch into this one? If not we should fix this move there rather than in this patch.\n\nIMO this is trivial enough to just squash in.",
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b172785_a8ba8b28",
+        "filename": "src/transport/container_of.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T07:36:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4a2e3dad_56814c70",
       "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -201,6 +351,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd6c7fc_0c9cdc92",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T07:36:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2103168b_b831e3d5",
+      "range": {
+        "startLine": 191,
+        "startChar": 64,
+        "endLine": 191,
+        "endChar": 66
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d524b5f0_962fdbe1",
@@ -214,6 +388,24 @@
       "writtenOn": "2023-02-14T05:19:47Z",
       "side": 1,
       "message": "How about we place this at `src/transport.h`? Any header in `src/` is internal by definition and so I think we can drop that part of the path and include guard symbol name.",
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2783621c_0584d6e4",
+        "filename": "src/transport/transport_internal.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T07:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d524b5f0_962fdbe1",
       "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
