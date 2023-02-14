@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "283d93f8_1fd6a8c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:50:39Z",
+      "side": 1,
+      "message": "I\u0027ve done some nitpicking here too, however, I\u0027d prefer we `s/afmctp/af_mctp/` across all file and symbol names. `afmctp` seems like a surprising choice to me given the `socket()` parameter is `AF_MCTP`.",
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eafeacb_cb7cd3f9",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:50:39Z",
+      "side": 1,
+      "message": "These two appear in the demux transport implementation as well, maybe we add a `src/mctp_ids_codes.h` or something?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a09313cb_9ef8926b",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:50:39Z",
+      "side": 1,
+      "message": "void",
+      "range": {
+        "startLine": 31,
+        "startChar": 53,
+        "endLine": 31,
+        "endChar": 55
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "581494d7_25dcfff4",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:50:39Z",
+      "side": 1,
+      "message": "Need to translate the error cases to `pldm_requester_rc_t`",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 36,
+        "endChar": 11
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "303e50e6_c84e4f49",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:50:39Z",
+      "side": 1,
+      "message": "function symbol name needs fixing here (`s/_mctp_/_afmctp_/`).",
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b5367ea_b2d3706b",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:50:39Z",
+      "side": 1,
+      "message": "Don\u0027t need an `else` clause given the return in the `if` body (early exit)",
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70449380_a4438ff9",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:50:39Z",
+      "side": 1,
+      "message": "`void`",
+      "range": {
+        "startLine": 132,
+        "startChar": 56,
+        "endLine": 132,
+        "endChar": 58
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "531a8f35_24ca2077",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:50:39Z",
+      "side": 1,
+      "message": "Can we not just inline the `socket()` call? Do we really need this function?",
+      "range": {
+        "startLine": 144,
+        "startChar": 18,
+        "endLine": 144,
+        "endChar": 47
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "359632af_e9eb83f8",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-14T05:50:39Z",
+      "side": 1,
+      "message": "Please fix the formatting here. Needs more new-lines.",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 15
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
