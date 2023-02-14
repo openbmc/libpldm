@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34d7a0d_bc0e27fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T22:47:09Z",
+      "side": 1,
+      "message": "yeah, my laziness is showing 😄",
+      "parentUuid": "283d93f8_1fd6a8c9",
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5eafeacb_cb7cd3f9",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-02-14T05:50:39Z",
       "side": 1,
       "message": "These two appear in the demux transport implementation as well, maybe we add a `src/mctp_ids_codes.h` or something?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18214093_bd95dde6",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T22:47:09Z",
+      "side": 1,
+      "message": "If we do this, then we should also pull out the `pldm_transport_XX_get_eid` functions too. We decided not to do that because the mctp-demux implementation is going to be moved away from, and so having mctp specific files wouldn\u0027t make sense then. Happy to pull it all out if things have changed or you think mctp-demux will be around for awhile.",
+      "parentUuid": "5eafeacb_cb7cd3f9",
       "range": {
         "startLine": 15,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e646cdfe_ae80dcee",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T22:47:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a09313cb_9ef8926b",
+      "range": {
+        "startLine": 31,
+        "startChar": 53,
+        "endLine": 31,
+        "endChar": 55
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "581494d7_25dcfff4",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-02-14T05:50:39Z",
       "side": 1,
       "message": "Need to translate the error cases to `pldm_requester_rc_t`",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 36,
+        "endChar": 11
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0d4ea18_788c379c",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T22:47:09Z",
+      "side": 1,
+      "message": "n/a anymore.",
+      "parentUuid": "581494d7_25dcfff4",
       "range": {
         "startLine": 33,
         "startChar": 1,
@@ -104,6 +194,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be3f177c_c067e30d",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T22:47:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "303e50e6_c84e4f49",
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b5367ea_b2d3706b",
@@ -121,6 +229,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03fe638d_76231820",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T22:47:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7b5367ea_b2d3706b",
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70449380_a4438ff9",
@@ -134,6 +260,30 @@
       "writtenOn": "2023-02-14T05:50:39Z",
       "side": 1,
       "message": "`void`",
+      "range": {
+        "startLine": 132,
+        "startChar": 56,
+        "endLine": 132,
+        "endChar": 58
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4964d8bc_e0768dc4",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T22:47:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70449380_a4438ff9",
       "range": {
         "startLine": 132,
         "startChar": 56,
@@ -167,6 +317,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af93bd2e_4a64fbbd",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T22:47:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "531a8f35_24ca2077",
+      "range": {
+        "startLine": 144,
+        "startChar": 18,
+        "endLine": 144,
+        "endChar": 47
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "359632af_e9eb83f8",
@@ -180,6 +354,30 @@
       "writtenOn": "2023-02-14T05:50:39Z",
       "side": 1,
       "message": "Please fix the formatting here. Needs more new-lines.",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 15
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67a8422b_07fd5649",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-02-14T22:47:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "359632af_e9eb83f8",
       "range": {
         "startLine": 152,
         "startChar": 0,
