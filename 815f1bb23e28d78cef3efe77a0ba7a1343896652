@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22195980_89309111",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-15T00:54:10Z",
+      "side": 1,
+      "message": "\u003e Do you think this needs to be clearer?\n\nI suspect we need to change it.\n\nLooking forward, I expect we\u0027re going to have to implement PLDM instance ID tagging in the kernel via specifying the `protocol` parameter to `socket(2)`. This means when we encode the message we will not know the ultimate value for the instance ID field until the message is sent via `sendto(2)`. As such, we need a way for the API to pass the value back out.\n\nI suspect what we should do is change the prototype of `pldm_requester_send_msg(...)` to:\n\n```\npldm_requester_rc_t pldm_requester_send_msg(struct pldm_requester *ctx,\n\t\t\t\t\t    pldm_tid_t tid,\n\t\t\t\t\t    uint8_t *instance_id,\n\t\t\t\t\t    const void *pldm_req_msg,\n\t\t\t\t\t    size_t req_msg_len)\n```\n\n`instance_id` is an `out` parameter only, not in. `instance_id` must not be `NULL`. if `instance_id` is `NULL` then we can return `PLDM_REQUESTER_INVALID_SETUP`. If the call is successful then the value pointed to by `instance_id` is the value of the instance ID the message was sent with.\n\nWith this definition we can maintain the current behaviour of externally requesting an instance ID from pldmd prior to encoding the message. For the implementation of `pldm_requester_send_msg()` we simply extract the encoded instance ID from the message and assign the value to `*instance_id`.\n\nWhen/if we move instance ID allocation into the kernel via `socket()`\u0027s `protocol` parameter we use the metadata returned by `sendto()` to populate `*instance_id`.\n\nThis feels like the API with the fewest sharp edges: We can continue to use `uint8_t` as the fundamental type for `*instance_id` as we don\u0027t need out-of-bounds values like `-1` to indicate a different behaviour, we don\u0027t need a `flags` parameter to control alternative behaviours, and `instance_id` never needs to be `NULL`.",
+      "parentUuid": "ced80351_43a2ffa4",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 18
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d665b7a_9d3e4a9a",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 16
