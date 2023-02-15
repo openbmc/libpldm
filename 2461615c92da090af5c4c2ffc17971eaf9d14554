@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "347ce744_5c1e3c27",
+        "filename": "src/transport/afmctp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-15T01:34:57Z",
+      "side": 1,
+      "message": "I disagree. These values are generic to the MCTP base specification and are not implementation details like the `pldm_transport_*_get_eid()` functions. They are useful to potential transport implementations beyond mctp_demux and af_mctp if we consider that freestanding environments will likely have to provide their own. While we\u0027ll be (effectively) deprecating the mctp_demux transport I don\u0027t expect that we\u0027ll be deleting it any time soon.",
+      "parentUuid": "18214093_bd95dde6",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "2461615c92da090af5c4c2ffc17971eaf9d14554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a09313cb_9ef8926b",
         "filename": "src/transport/afmctp.c",
         "patchSetId": 11
