@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bd8580a_4ca830ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-02-16T13:36:51Z",
+      "side": 1,
+      "message": "upstream does not care about downstream, statements like these does not add any value to the community. please rephrase the entire commit message.\n\n\nand only talk about what change you are making.",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 58
+      },
+      "revId": "b530c07c046d6ce76f63fe82ff898869847e2892",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9795b6fc_8f7f4e82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-02-16T13:36:51Z",
+      "side": 1,
+      "message": "where is the migration happening from ?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "b530c07c046d6ce76f63fe82ff898869847e2892",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
