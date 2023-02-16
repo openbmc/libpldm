@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c03d841_7a73a6bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T01:21:53Z",
+      "side": 1,
+      "message": "Hi Gilbert, we\u0027re getting closer. I have some further suggestions to reduce the tedium and improve the ergonomics of the code.",
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "541c641f_c3e49622",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T01:21:53Z",
+      "side": 1,
+      "message": "I think we should pull this out into its own file: `src/buf.h` and `src/buf.c`",
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "655d38f5_48fe47d3",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T01:21:53Z",
+      "side": 1,
+      "message": "`size` is unused?",
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "880f0f87_392c8fd5",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T01:21:53Z",
+      "side": 1,
+      "message": "We\u0027re constantly taking the address of this variable below. Can you please declare it this way instead?\n\n```\nstruct pldm_buf _buf, *buf \u003d \u0026_buf;\n```\n\nThis way the object is fully allocated in `_buf`, but everywhere else we access it through the pointer `buf`.",
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3470f91_f0cc8d4c",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T01:21:53Z",
+      "side": 1,
+      "message": "So with my comment on PS6 I was hoping to avoid all of these return checks. They\u0027re pretty tedious and add a lot of visual clutter. I think we can avoid them, though I can understand that maybe you don\u0027t want sole reliance on:\n\n```\n\n    // With this check we can avoid testing the return values on\n    // the extractors below as we know we have enough buffer to\n    // satisfy all the reads.\n    if (pdr_data_length \u003c expectedPDRSize) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n```\n\nDespite the fact we won\u0027t cause out of bounds accesses it\u0027s hard to identify and debug where something went wrong if we do away with the return code checks. So what if we adjust the way we\u0027ve implemented the pldm_buf abstraction by switching `remaining` from `size_t` to `ssize_t`:\n\n```\nstruct pldm_buf {\n    const uint8_t *cursor;\n    ssize_t remaining;\n};\n```\n\nFrom there, `pldm_buf_init()` remains the same, but e.g. `pldm_buf_extract_uint16()` and the rest of the extractors look like:\n\n```\nint pldm_buf_extract_uint16(struct pldm_buf *ctx, void *dst)\n{\n    uint16_t ldst;\n    uint16_t *ptr \u003d (uint16_t *)dst;\n    bool overflow;\n\t\n    if (!ctx || !ctx-\u003ecursor || !dst) {\n        return PLDM_ERROR_INVALID_DATA;\n    }\n\n    // Check for buffer overflow. If we overflow, account for the request as\n    // negative values in ctx-\u003eremaining. This way we can debug how far we\u0027ve\n    // overflowed.\n    ctx-\u003eremaining -\u003d sizeof(ldst);\n    \n    // Prevent the access if it would overflow. First, assert so we blow up the\n    // test suite right at the point of failure. However, cater to -DNDEBUG by\n    // explicitly testing that the access is valid.\n    assert(ctx-\u003eremaining \u003e\u003d 0);\n    if (ctx-\u003eremaining \u003c 0) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n\t\n    // Use memcpy() to have the compiler deal with any alignment\n    // issues on the target architecture\n    memcpy(\u0026ldst, ctx-\u003ecursor, sizeof(ldst));\n    ctx-\u003ecursor +\u003d sizeof(ldst);\n    \n    // Only assign the target value once it\u0027s correctly decoded\n    *ptr \u003d le16toh(ldst);\n    \n    return PLDM_SUCCESS;\n}\n```\n\nWith that in place, we can add a new function such as:\n\n```\n/**\n * Validate buffer overflow state\n *\n * @return A positive value if there\u0027s data remaining in the buffer, 0 if the buffer has been completely consumed, or a negative value if an overflow has occurred\n */\nssize_t pldm_buf_validate(struct pldm_buf *ctx)\n{\n    return ctx-\u003eremaining;\n}\n```\n\nIt might also be convenient to implement `pldm_buf_destroy()` in terms of `pldm_buf_validate()`:\n\n```\n/**\n * @return PLDM_SUCCESS if all buffer accesses were in-bounds, PLDM_ERROR_INVALID_LENGTH otherwise.\n */\nint pldm_buf_destroy(struct pldm_buf *ctx)\n{\n\n    ssize_t valid \u003d pldm_buf_validate(ctx);\n    \n    ctx-\u003ecursor \u003d NULL;\n    \n    return valid \u003e\u003d 0 ? PLDM_SUCCESS : PLDM_ERROR_INVALID_LENGTH;\n}\n```\n\nWith this in place we can collapse away all the tests of `pldm_buf_extract_*()` return values to the final `pldm_buf_destroy()`:\n\n```\nint decode_numeric_sensor_pdr_data(\n    const uint8_t *pdr_data, size_t pdr_data_length,\n    struct pldm_numeric_sensor_value_pdr *pdr_value)\n{\n    struct pldm_buf _buf, *buf \u003d \u0026_buf;\n    int rc;\n    \n    rc \u003d pldm_buf_init(buf, pdr_data, pdr_data_length);\n    if (rc) {\n        return rc;\n    }\n    \n    pldm_buf_extract_uint32(buf, \u0026pdr_value-\u003ehdr.record_handle);\n    pldm_buf_extract_uint8(buf, \u0026pdr_value-\u003ehdr.version);\n    pldm_buf_extract_uint8(buf, \u0026pdr_value-\u003ehdr.type);\n    ...\n    \n    return pldm_buf_destroy(buf);\n```\n\nAt this point, the return value will tell the caller of `decode_numeric_sensor_pdr_data()` whether an error has occurred and whether the data in `pdr_value` should be trusted (or not).",
+      "range": {
+        "startLine": 1381,
+        "startChar": 1,
+        "endLine": 1384,
+        "endChar": 2
+      },
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaa23d7e_81d35458",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1508,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T01:21:53Z",
+      "side": 1,
+      "message": "This commented code needs to be deleted, along with all the other similar cases.",
+      "range": {
+        "startLine": 1507,
+        "startChar": 1,
+        "endLine": 1508,
+        "endChar": 28
+      },
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44d11657_ca182dbb",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T01:21:53Z",
+      "side": 1,
+      "message": "Please avoid invoking union-based type-punning here and define signed extractors:\n\n```\nint pldm_buf_extract_sint8(struct pldm_buf *ctx, int8_t *dst)\n{\n    ...\n}\n```\n\nAlso do this for any other required signed extractors",
+      "range": {
+        "startLine": 1529,
+        "startChar": 1,
+        "endLine": 1534,
+        "endChar": 44
+      },
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
