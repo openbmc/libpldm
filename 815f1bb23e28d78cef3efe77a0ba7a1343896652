@@ -180,6 +180,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dda47661_ddc4cfb2",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T22:51:21Z",
+      "side": 1,
+      "message": "\u003e Do we want to impact the libpldm APIs with the future items or make changes as we have more clarity?\n\nIn general we don\u0027t want to influence the public API for use-cases that aren\u0027t yet material because we don\u0027t want to introduce function prototypes or objects that doesn\u0027t actually work for that use-case.\n\nHowever, in this specific case, there\u0027s a fairly concrete understanding of what we might have to do to completely support `AF_MCTP`-based communication, and so I think it\u0027s reasonable that we try to accommodate that now to avoid breaking the API in the future. If we don\u0027t include the parameter now and then implement the in-kernel suggestion, then we already know we *will* have to break the API when we do. So I think the fore-thought here is justified. The insurance is the forward-looking behaviour can be met even with the current implementation, so there\u0027s no penalty for doing it.\n\nAs to whether the parameter is the right way to go about it, maybe we just return it instead? People have to inspect the return value for the failure code, but the only confusing bit about that is we\u0027re kinda introducing a derived type that\u0027s the union of `pldm_requester_rc_t` and `uint8_t`, and sorta have to just mash that into an `int`?\n\n\u003e I thought libpldm was a userspace library and moving instance ID management to kernel came as a surprise. \n\nWe need to be careful here because libpldm isn\u0027t just a hosted (userspace) library. We can\u0027t assume it will be running on OpenBMC, or even under Linux. It should be usable in freestanding (e.g. firmware, kernel) environments also.\n\n\u003e if there is an underlying assumption that all the PLDM apps share the same terminus as source (BMC is a single PLDM terminus).\n\nI don\u0027t think this is a limitation that exists (see below):\n\n\u003e We should also have a flexibility where PLDM apps could act as an independent PLDM terminus\n\nYep. I can\u0027t see this being a problem for in-kernel handling, given it already supports participating in e.g. multiple MCTP networks, using multiple MCTP EIDs in the same way that it supports multiple IP addresses.\n\n\u003e Also need clarity on instance ID expiry, PLDM request retry if we are going ahead with moving instance ID management to kernel.\n\nYep, this is something that needs to be written down and hashed out in a design document, for sure. I think given the implementation of e.g. TCP in the kernel there should be ways we can accommodate PLDM reliable delivery requirements.",
+      "parentUuid": "09963598_867ff01b",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 18
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d665b7a_9d3e4a9a",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 16
