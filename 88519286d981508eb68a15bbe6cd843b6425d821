@@ -200,6 +200,30 @@
       },
       "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a88f4fe8_cd72e5cf",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T05:42:50Z",
+      "side": 1,
+      "message": "As a note, the `memcpy()` in the extractor implementation serves to correctly implement type punning.",
+      "parentUuid": "44d11657_ca182dbb",
+      "range": {
+        "startLine": 1529,
+        "startChar": 1,
+        "endLine": 1534,
+        "endChar": 44
+      },
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
