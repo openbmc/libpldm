@@ -134,6 +134,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8eda850b_d5516394",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T01:42:49Z",
+      "side": 1,
+      "message": "\u003e From there, pldm_buf_init() remains the same\n\nActually, that\u0027s not quite true. We need to make sure `len` doesn\u0027t exceed `SSIZE_MAX`, so:\n\n```\n    if (len \u003e SSIZE_MAX) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n    \n    ctx-\u003eremaining \u003d (ssize_t)len;\n    ...\n```",
+      "parentUuid": "f3470f91_f0cc8d4c",
+      "range": {
+        "startLine": 1381,
+        "startChar": 1,
+        "endLine": 1384,
+        "endChar": 2
+      },
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eaa23d7e_81d35458",
         "filename": "src/platform.c",
         "patchSetId": 8
