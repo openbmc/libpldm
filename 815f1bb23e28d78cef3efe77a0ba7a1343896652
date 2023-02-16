@@ -204,6 +204,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ddd5615_d84b2ed5",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T23:51:46Z",
+      "side": 1,
+      "message": "Oh, as another consideration for the out-parameter approach, this makes the function prototype of `pldm_requester_send_msg()` align with the prototype of `pldm_requester_recv_msg()`",
+      "parentUuid": "dda47661_ddc4cfb2",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 18
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d665b7a_9d3e4a9a",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 16
