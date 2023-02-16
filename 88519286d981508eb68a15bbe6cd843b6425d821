@@ -54,6 +54,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "406726cd_eb21a138",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T01:33:08Z",
+      "side": 1,
+      "message": "Please no. This must be properly typed:\n\n```\nint pldm_buf_extract_uint8(struct pldm_buf *ctx, uint8_t *dst)\n{\n    ...\n}\n```\n\nPlease fix all the other extractors as well.",
+      "range": {
+        "startLine": 1283,
+        "startChar": 49,
+        "endLine": 1285,
+        "endChar": 31
+      },
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f25f916_48676928",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-16T01:33:08Z",
+      "side": 1,
+      "message": "C does not require an explicit cast when converting from `void *`. Regardless, as per the comment above, please fix the types in the function prototype so `void *` is not used.",
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "880f0f87_392c8fd5",
         "filename": "src/platform.c",
         "patchSetId": 8
