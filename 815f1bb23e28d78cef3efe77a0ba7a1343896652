@@ -156,6 +156,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09963598_867ff01b",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-02-16T16:18:41Z",
+      "side": 1,
+      "message": "\u003e Can you unpack what you mean by this? Can you be more specific about what your scope concerns are?\n\nI thought libpldm was a userspace library and moving instance ID management to kernel came as a surprise. But I see that it is a future topic. Do we want to impact the libpldm APIs with the future items or make changes as we have more clarity?\n\n\u003e By introducing this new API we give ourselves the building blocks to implement the NC-SI/RBT PLDM transport - this just becomes yet another transport implementation that exposes a struct pldm_transport, which hooks into the generic portion of the new API provided in this patch. Further, the new API gives us the ability to implement the transition away from the MCTP demux daemon to the kernel\u0027s AF_MCTP sockets. libmctp is deprecated for use in OpenBMC, all future MCTP needs in OpenBMC must be met through AF_MCTP sockets.\n\nI am aligned with these goals, based on the earlier discussions.\n\nI am visualizing that with more adoption of standards (Redfish/PLDM/MCTP) from DMTF, there will be multiple PLDM apps implementing different PLDM types covering FRU management, BIOS, Monitoring \u0026 Control \u0026 firmware update areas. So pldmd(or a single app) being the arbitrator of instance ID and dealing it on D-Bus can be a cause of bottleneck. So, I like the idea of moving instance ID management to kernel. if there is an underlying assumption that all the PLDM apps share the same terminus as source (BMC is a single PLDM terminus).\n\nWe should also have a flexibility where PLDM apps could act as an independent PLDM terminus in which case instance ID management can be contained within app and need not be coordinated across apps. Also need clarity on instance ID expiry, PLDM request retry if we are going ahead with moving instance ID management to kernel.",
+      "parentUuid": "90d4fd19_abd20891",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 18
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d665b7a_9d3e4a9a",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 16
