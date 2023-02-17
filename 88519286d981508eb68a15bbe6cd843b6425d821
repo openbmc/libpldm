@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05c29e72_f26c7112",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-02-17T15:53:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "541c641f_c3e49622",
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "655d38f5_48fe47d3",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-02-16T01:21:53Z",
       "side": 1,
       "message": "`size` is unused?",
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4609af6f_16d12361",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-02-17T15:53:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "655d38f5_48fe47d3",
       "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +111,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3eea728_63222d47",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-02-17T15:53:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "406726cd_eb21a138",
+      "range": {
+        "startLine": 1283,
+        "startChar": 49,
+        "endLine": 1285,
+        "endChar": 31
+      },
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f25f916_48676928",
@@ -92,6 +152,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0e05d43_10c5b565",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-02-17T15:53:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4f25f916_48676928",
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "880f0f87_392c8fd5",
@@ -105,6 +183,24 @@
       "writtenOn": "2023-02-16T01:21:53Z",
       "side": 1,
       "message": "We\u0027re constantly taking the address of this variable below. Can you please declare it this way instead?\n\n```\nstruct pldm_buf _buf, *buf \u003d \u0026_buf;\n```\n\nThis way the object is fully allocated in `_buf`, but everywhere else we access it through the pointer `buf`.",
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffbe18de_f2d95683",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-02-17T15:53:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "880f0f87_392c8fd5",
       "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -156,6 +252,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab7555d6_b2e19367",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-02-17T15:53:57Z",
+      "side": 1,
+      "message": "PS12 implements the above suggestions.",
+      "parentUuid": "8eda850b_d5516394",
+      "range": {
+        "startLine": 1381,
+        "startChar": 1,
+        "endLine": 1384,
+        "endChar": 2
+      },
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eaa23d7e_81d35458",
@@ -169,6 +289,30 @@
       "writtenOn": "2023-02-16T01:21:53Z",
       "side": 1,
       "message": "This commented code needs to be deleted, along with all the other similar cases.",
+      "range": {
+        "startLine": 1507,
+        "startChar": 1,
+        "endLine": 1508,
+        "endChar": 28
+      },
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4b1c39e_aafc6d98",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1508,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-02-17T15:53:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eaa23d7e_81d35458",
       "range": {
         "startLine": 1507,
         "startChar": 1,
@@ -216,6 +360,30 @@
       "side": 1,
       "message": "As a note, the `memcpy()` in the extractor implementation serves to correctly implement type punning.",
       "parentUuid": "44d11657_ca182dbb",
+      "range": {
+        "startLine": 1529,
+        "startChar": 1,
+        "endLine": 1534,
+        "endChar": 44
+      },
+      "revId": "88519286d981508eb68a15bbe6cd843b6425d821",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f297ae9_fa605c18",
+        "filename": "src/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-02-17T15:53:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a88f4fe8_cd72e5cf",
       "range": {
         "startLine": 1529,
         "startChar": 1,
