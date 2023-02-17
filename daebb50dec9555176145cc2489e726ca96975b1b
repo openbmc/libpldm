@@ -16,6 +16,29 @@
       "message": "Update the patch set to follow the comments in https://gerrit.openbmc.org/c/openbmc/libpldm/+/59296",
       "revId": "daebb50dec9555176145cc2489e726ca96975b1b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85b0a9a4_32508de0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-02-17T09:12:31Z",
+      "side": 1,
+      "message": "do we really need two structs ? why cannot be make it with just one ?",
+      "range": {
+        "startLine": 936,
+        "startChar": 0,
+        "endLine": 945,
+        "endChar": 26
+      },
+      "revId": "daebb50dec9555176145cc2489e726ca96975b1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
