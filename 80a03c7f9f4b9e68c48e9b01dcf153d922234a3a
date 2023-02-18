@@ -39,6 +39,30 @@
       },
       "revId": "80a03c7f9f4b9e68c48e9b01dcf153d922234a3a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e036d9_436e5f8a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-02-18T00:34:05Z",
+      "side": 1,
+      "message": "The pldm poll for platform event message struct is updated in latest patch set to follow the spec.\n\nstruct pldm_poll_for_platform_event_message_req {\n\tuint8_t format_version;\n\tuint8_t transfer_operation_flag;\n\tuint32_t data_transfer_handle;\n\tuint16_t event_id_to_acknowledge;\n} __attribute__((packed));\nSo value of PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES should be 8.",
+      "parentUuid": "6a3bb6d3_f5d492b0",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 56
+      },
+      "revId": "80a03c7f9f4b9e68c48e9b01dcf153d922234a3a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

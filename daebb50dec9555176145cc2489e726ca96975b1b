@@ -39,6 +39,30 @@
       },
       "revId": "daebb50dec9555176145cc2489e726ca96975b1b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "884e2dc9_62fb151b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-02-18T00:34:05Z",
+      "side": 1,
+      "message": "Yes we need. When event_id is 0x0000 or 0xffff, the fields after that shall be omitted, so we can\u0027t use pldm_poll_for_platform_event_message_resp.",
+      "parentUuid": "85b0a9a4_32508de0",
+      "range": {
+        "startLine": 936,
+        "startChar": 0,
+        "endLine": 945,
+        "endChar": 26
+      },
+      "revId": "daebb50dec9555176145cc2489e726ca96975b1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
