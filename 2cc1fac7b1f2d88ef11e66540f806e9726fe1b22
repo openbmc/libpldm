@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c48a871_c2a9bf6b",
+        "filename": "include/libpldm/buf.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-20T11:00:02Z",
+      "side": 1,
+      "message": "`pldm_buf` shouldn\u0027t be part of the public API. Please put the header in `src/` as mentioned in the previous review.",
+      "revId": "2cc1fac7b1f2d88ef11e66540f806e9726fe1b22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "673e6cff_68bd431f",
         "filename": "src/buf.c",
         "patchSetId": 12
@@ -14,6 +31,30 @@
       "writtenOn": "2023-02-20T08:41:29Z",
       "side": 1,
       "message": "assert() can completely kill the pldm daemon (incuding PLDM FWUP). Doing the same due to an invalid input from a possible external device might become a security issue. Better to avoid the same.\nhttps://github.com/openbmc/libpldm/issues/7",
+      "range": {
+        "startLine": 103,
+        "startChar": 1,
+        "endLine": 103,
+        "endChar": 7
+      },
+      "revId": "2cc1fac7b1f2d88ef11e66540f806e9726fe1b22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "095d831a_0eb6ca8f",
+        "filename": "src/buf.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-02-20T11:00:02Z",
+      "side": 1,
+      "message": "I\u0027ve commented on this issue; `assert()` is fine so long as it\u0027s followed by an early exit, as it is here. The library should be compiled with `-DNDEBUG` to mitigate your concern.",
+      "parentUuid": "673e6cff_68bd431f",
       "range": {
         "startLine": 103,
         "startChar": 1,
