@@ -228,6 +228,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e53c62c4_c9ab2c43",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-02-21T17:45:01Z",
+      "side": 1,
+      "message": "\u003eAs to whether the parameter is the right way to go about it, maybe we just return it instead? People have to inspect the return value for the failure code, but the only confusing bit about that is we\u0027re kinda introducing a derived type that\u0027s the union of pldm_requester_rc_t and uint8_t, and sorta have to just mash that into an int?\n\nThe current signature of the function looks better than mixing the rc and the generated instance id.",
+      "parentUuid": "3ddd5615_d84b2ed5",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 18
+      },
+      "revId": "815f1bb23e28d78cef3efe77a0ba7a1343896652",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d665b7a_9d3e4a9a",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 16
