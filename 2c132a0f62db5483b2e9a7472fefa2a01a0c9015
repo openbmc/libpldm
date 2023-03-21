@@ -105,6 +105,91 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e891742b_19bde21d",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000929
+      },
+      "writtenOn": "2023-03-21T05:06:47Z",
+      "side": 1,
+      "message": "if request is invalid, we donde need to free ctx ?",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0208c2b_9ce0fa3a",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000929
+      },
+      "writtenOn": "2023-03-21T05:06:47Z",
+      "side": 1,
+      "message": "check transport is null or not",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "522f6206_f9128642",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000929
+      },
+      "writtenOn": "2023-03-21T05:06:47Z",
+      "side": 1,
+      "message": "nit: instead of return 0, maybe we can use the macros ike in line 41",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad8a123_461bbd71",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000929
+      },
+      "writtenOn": "2023-03-21T05:06:47Z",
+      "side": 1,
+      "message": "null check for pldm_req_msg",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e8b8fcb_093f3e2a",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000929
+      },
+      "writtenOn": "2023-03-21T05:06:47Z",
+      "side": 1,
+      "message": "check resp_msg_len anf pld_resp_msg is ull or not and in ohter section of the code as well",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c63e7dbc_2fb4b950",
         "filename": "src/requester/pldm.c",
         "patchSetId": 18
