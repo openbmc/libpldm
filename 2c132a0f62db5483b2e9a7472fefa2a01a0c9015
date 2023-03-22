@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b46990d4_b01febcb",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "It could. I\u0027m not fussed either way. Do you think there is a good reason to do it one way over another? I went with this way as the consumer of the api has to manually set up the transport separate from  `pldm_requester` so it felt natural to keep the destruction of the transport separate too.",
+      "parentUuid": "db8d9f75_d9a3bf9d",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22d4b704_fb785b9f",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 18
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-21T17:45:01Z",
       "side": 1,
       "message": "nit: pldm_send_msg -\u003e pldm_requester_send_msg",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "086968b7_8ac32df1",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "22d4b704_fb785b9f",
       "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fb7ac7b_b96e78b2",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "How do you think this could be better clarified? Adding in \"non-blocking\"?",
+      "parentUuid": "eda01873_f996dc87",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd828c6a_1bf4e2c7",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 18
@@ -65,6 +119,24 @@
       "writtenOn": "2023-02-21T17:45:01Z",
       "side": 1,
       "message": "I prefer to keep [out] parameters after the [in] parameters.",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f93fb092_1d0e711d",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "n/a",
+      "parentUuid": "cd828c6a_1bf4e2c7",
       "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "709174e5_2cd2bb40",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "My intent with this comment was to make it clear that we don\u0027t verify the contents of the PLDM message. In hindsight, I\u0027m not sure that is something that would be expected. I\u0027ll delete this bit.",
+      "parentUuid": "7033e024_f8a38c8c",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e9c13dc_c38edbe2",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-02-21T17:45:01Z",
       "side": 1,
       "message": "`made to point`?",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb2bfa92_4ba9da7b",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6e9c13dc_c38edbe2",
       "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -120,6 +228,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54ca1a8a_5b011f69",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "Currently, the intended usage of this function is to be called after `pldm_requester_unregister_transports`, hence returning an error if there are still registered transports.",
+      "parentUuid": "e891742b_19bde21d",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0208c2b_9ce0fa3a",
@@ -133,6 +259,24 @@
       "writtenOn": "2023-03-21T05:06:47Z",
       "side": 1,
       "message": "check transport is null or not",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deaea65e_dbee833b",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "d0208c2b_9ce0fa3a",
       "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -154,6 +298,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c462281_d8c81e71",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "Good spot.",
+      "parentUuid": "522f6206_f9128642",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ad8a123_461bbd71",
@@ -167,6 +329,24 @@
       "writtenOn": "2023-03-21T05:06:47Z",
       "side": 1,
       "message": "null check for pldm_req_msg",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce90724_aca08839",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ad8a123_461bbd71",
       "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -188,6 +368,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6019104_4cba29d8",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e8b8fcb_093f3e2a",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c63e7dbc_2fb4b950",
@@ -201,6 +399,24 @@
       "writtenOn": "2023-03-20T09:15:43Z",
       "side": 1,
       "message": "What if the requester is interested to receive a PLDM command (I believe PLDM FWUP has some commands which terminus can send back)? Which libpldm API should the daemon use?",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa806ce5_1f61be4e",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-03-22T21:30:06Z",
+      "side": 1,
+      "message": "If a terminus wants to receive commands, it probably wants to act as a responder (it can act as both a receiver and a responder). This API is for requester functionality. There is `libpldmresponder` in the pldm repo. I don\u0027t know what the plan for that code is - Manoj or Andrew might know.",
+      "parentUuid": "c63e7dbc_2fb4b950",
       "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
