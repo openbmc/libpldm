@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "124fada8_bcdc1035",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "Let\u0027s require explicit over implicit behaviour for now. If we feel that explicit is too annoying as we get used to the API we can always add implicit behaviour. It\u0027s usually hard to do the reverse.\n\nI\u0027d be surprised if explicit is annoying in practice because I don\u0027t think we should be doing transport setup / teardown in many places.",
+      "parentUuid": "b46990d4_b01febcb",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22d4b704_fb785b9f",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 18
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "How do you think this could be better clarified? Adding in \"non-blocking\"?",
       "parentUuid": "eda01873_f996dc87",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88b05812_30601f8a",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "Yeah, I think you need to clarify what needs clarification here Tom.",
+      "parentUuid": "2fb7ac7b_b96e78b2",
       "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -417,6 +453,24 @@
       "side": 1,
       "message": "If a terminus wants to receive commands, it probably wants to act as a responder (it can act as both a receiver and a responder). This API is for requester functionality. There is `libpldmresponder` in the pldm repo. I don\u0027t know what the plan for that code is - Manoj or Andrew might know.",
       "parentUuid": "c63e7dbc_2fb4b950",
+      "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9f46b87_d8d8e204",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "Yes, I think this a problem for later, with the patch written by someone who needs the functionality. Nothing we\u0027re doing here prevents us from adding such a set of APIs. That\u0027s the important bit.",
+      "parentUuid": "aa806ce5_1f61be4e",
       "revId": "2c132a0f62db5483b2e9a7472fefa2a01a0c9015",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

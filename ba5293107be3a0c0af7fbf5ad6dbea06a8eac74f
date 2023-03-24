@@ -16,6 +16,24 @@
       "message": "Can probably drop this change 😊",
       "revId": "ba5293107be3a0c0af7fbf5ad6dbea06a8eac74f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6187f9e_d093d927",
+        "filename": "src/requester/meson.build",
+        "patchSetId": 17
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "still relevant :)",
+      "parentUuid": "73c7b6d0_10285e72",
+      "revId": "ba5293107be3a0c0af7fbf5ad6dbea06a8eac74f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

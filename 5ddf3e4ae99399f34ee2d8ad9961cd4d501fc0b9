@@ -1,0 +1,354 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5253528_b70dc97b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "nit: Need to re-wrap the line.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 24
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e96988_d017fc76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "nit: NC-SI is an acronym (Network Controller - Sideband Interface) so we should capitalise it",
+      "range": {
+        "startLine": 15,
+        "startChar": 25,
+        "endLine": 15,
+        "endChar": 30
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eb3df81_4f057a8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "nit: Also re-wrap this one.",
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eaed010_c582e1a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "nit: plural for later grammar, so \"APIs\"",
+      "range": {
+        "startLine": 20,
+        "startChar": 12,
+        "endLine": 20,
+        "endChar": 15
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7567f135_6e12c545",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "nit: As a guide I tend to use markdown in my commit messages. I think it\u0027s nice to highlight specific concepts like the prefix value here, and so tend to enclose them in an inline code block (single backticks)",
+      "range": {
+        "startLine": 22,
+        "startChar": 49,
+        "endLine": 22,
+        "endChar": 63
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3f2e23b_262eb869",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "nit: Again with the single backticks here if you think that\u0027s a useful idea",
+      "range": {
+        "startLine": 23,
+        "startChar": 5,
+        "endLine": 23,
+        "endChar": 19
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22e253de_17f36a06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "I think we either drop the colon, or if we keep it, make the list below an explicit numbered list",
+      "range": {
+        "startLine": 28,
+        "startChar": 63,
+        "endLine": 28,
+        "endChar": 64
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29411e0b_5ab4eed8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "nit: Can you add a blank line above this first bullet, for clarity?",
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5d06067_4d30ed47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "Partial review for now, but I have to run and wanted to publish the comment on the range locking.",
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fbf2b7a_0b04d881",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "Let\u0027s drop \u0027being\u0027 and just state that it\u0027s deprecated.",
+      "range": {
+        "startLine": 32,
+        "startChar": 23,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c33234d_741dc4ee",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "nit: inconsistent capitalisation of acronyms? Should probably go with uppercase throughout.",
+      "range": {
+        "startLine": 141,
+        "startChar": 26,
+        "endLine": 141,
+        "endChar": 30
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d251fb9_86c61a85",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "nit: If we\u0027re capitalising TID then we should capitalise \"ID\" here?",
+      "range": {
+        "startLine": 163,
+        "startChar": 32,
+        "endLine": 163,
+        "endChar": 34
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a567db0_2108d1ab",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "PLDM instance ID *object*",
+      "range": {
+        "startLine": 167,
+        "startChar": 54,
+        "endLine": 167,
+        "endChar": 70
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10e77d2d_ff0855b7",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "Surely we can detect this case and return an error? I further, I think we want an error over success as we want to be able to detect logic bugs like double frees.",
+      "range": {
+        "startLine": 187,
+        "startChar": 46,
+        "endLine": 188,
+        "endChar": 20
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56896ac0_cc54699c",
+        "filename": "include/libpldm/transport/transport.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "nit: Again, inconsistent capitalisation across the documentation. Please audit all the added doxygen and make it consistent :)",
+      "range": {
+        "startLine": 36,
+        "startChar": 32,
+        "endLine": 36,
+        "endChar": 36
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b367dcbd_8d11c796",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-24T04:10:34Z",
+      "side": 1,
+      "message": "I know we brainstormed this quickly elsewhere, but I think I lost track of my own train of thought.\n\nWe need some care as this becomes an internal ABI. If we merge this and then change the paths or behaviour down the track then things will break at runtime.\n\nWith the current implementation we need to make sure that these paths can be created when the loading process\u0027 EUID/EGID isn\u0027t e.g. root. We might need the build system to install the directory tree with the required permissions to allow that. However, configuring permissions for all EUID/EGIDs to create the files could lead to issues where a malicious process unlinks the files instead. Things are going to go south pretty hard at that point.\n\nOn a related point, no mutable state should need to persist across reboots. Having these files present after a reboot is not meaningful (no locks would be held) and we have to assume they don\u0027t exist anyway. Essentially they are ephemeral and probably belong in `/run` instead. However, `/run` suffers from the \"need something to set up the directories and permissions problem\" even more than `/var/lib` as we can\u0027t exploit the build system to initialise a directory in `/run`. Further, we certainly don\u0027t want to go down the path of requiring all applications that link against libpldm to use `ExecStartPre` directives in their service units to force the existence of the directory for the instance ID files. The other option would be to have a unit dedicated to libpldm to set it up before any dependent applications ran, but that still seems annoying and fragile to orchestrate.\n\nRegardless, moving things to `/run` doesn\u0027t solve the integrity problems outlined above. Same problem, different location.\n\nSo, is there something we can do that can solve both issues? I think there is. Essentially, we:\n\n1. Have one database file that caters to all instance IDs for all terminus IDs. The file size is thus `TERMINUS_ID_COUNT * INSTANCE_ID_COUNT \u003d 256 * 32 \u003d 8192` bytes\n2. Store that file in read-only storage, say /usr/share/libpldm/instance-ids\n3. Use the Open File Descriptor advisory locking to contain locks to file descriptors rather than processes (`F_OFD_*LCK` symbols rather than `F_*LCK` symbols)\n4. Exploit the lock escalation behaviour (converting a read lock to a write lock if there isn\u0027t another conflicting read lock) provided by `F_OFD_SETLCK`, where `F_OFD_GETLCK` will report `F_UNLCK` for a `F_WRLCK` request if the file descriptor already holds an `F_RDLCK` for the range.\n5. Exploit the fact that an `F_OFD_GETLCK` operation with an `F_WRLCK` lock type on a read-only file descriptor yields an `F_RDLCK` result on conflict and not an error due to the file descriptor being read-only\n\nWith this we eliminate all our problems. I will post a demo of the behaviour in a blog post and a sketch of the algorithm a bit later.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 52
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
