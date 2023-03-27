@@ -284,6 +284,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3dd3e422_23b99b23",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-27T01:36:36Z",
+      "side": 1,
+      "message": "So I was thinking about this a bit more over the weekend. I think we might want to separate the instance ID allocation API from the `pldm_requester_*` set of APIs. I think we want to do that because as a user of the `pldm_requester_*` APIs, I shouldn\u0027t have to care about details such as instance IDs. Instance IDs are required to handle timeout/retry scenarios, which are details that should be abstracted over by `pldm_requester_*` APIs.\n\nNow, unfortunately, libpldm doesn\u0027t currently separate message serialisation from message framing. That is, the encode APIs require the caller pass in an allocated instance ID. Hopefully we can rework the APIs to remove that requirement, at which point the concept of an instance ID would be entirely contained within the implementation of the `pldm_requester_*` APIs.\n\nSo we separate the instance ID database API out. We bless it with its own object:\n\n```\ntypedef ... pldm_tid_t;\ntypedef ... pldm_iid_t;\nstruct pldm_instance_db;\nint pldm_instance_db_init(struct pldm_instance_db *ctx, const char *dbpath);\nstatic inline int pldm_instance_db_init_default(struct pldm_instance_db *ctx)\n{\n    return pldm_instance_db_init(ctx, \"/usr/share/libpldm/instance-db/default\");\n}\nint pldm_instance_db_destroy(struct pldm_instance_db *ctx);\nint pldm_instance_db_alloc(struct pldm_instance_db *ctx, pldm_tid_t tid, pldm_iid_t *iid);\nint pldm_instance_db_free(struct pldm_instance_db *ctx, pldm_tid_t tid, pldm_iid_t iid);\n```\n\nAnother problem solved in the proposal above is that it seems feasible for a system to contain separate TID domains, e.g. if you talk PLDM to devices over MCTP, these might be in a separate TID domain to devices on an NC-SI transport (i.e. devices on each transport may take the same TID). It\u0027s not clear whether this is something allowed for by the PLDM spec. In the event that it is allowed then the suggested API (of providing the db path to `pldm_instance_db_init()`) yields a correct implementation. We make life easy for those who don\u0027t care for the detail with the `pldm_instance_db_init_default()` function which just provides a path to a default database\n\nFrom here the `pldm_requester_*` object is implemented by the composition of the transport and instance db objects:\n\n```\n+---------------------------------------+\n|                                       |\n|           pldm_requester_*            |\n|                                       |\n+------------------+--------------------+\n|                  |                    |\n| pldm_transport_* | pldm_instance_db_* |\n|                  |                    |\n+------------------+--------------------+\n```\n\nThe prototype for `pldm_requester_init()` would look like:\n\n```\nint pldm_requester_init(struct pldm_requester *ctx,\n                        struct pldm_instance_db *instancedb);\n```\n\nAgain, for those that don\u0027t care about the details, we can do:\n\n```\nstatic inline pldm_requester_init_default(struct pldm_requester *ctx)\n{\n    struct pldm_instance_db idb;\n    int rc;\n    \n    rc \u003d pldm_instance_db_init_default(\u0026idb);\n    if (rc \u003c 0)\n        return rc;\n    \n    return pldm_requester_init(ctx, \u0026idb);\n}\n```\n\nThoughts?",
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10e77d2d_ff0855b7",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 19
