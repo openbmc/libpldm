@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa420f1c_3859193e",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-03-29T08:29:57Z",
+      "side": 1,
+      "message": "We are destroying the buffer here. In that case, do we really need this check? I am not sure if this case can happen, but what if caller is trying to destroy a `pldm_msgbuf` which is having invalid length. In that case `ctx-\u003ecurser` becomes `NULL` but caller will not get PLDM_SUCCESS as return code. It might be confusing for the caller.",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 19
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e3654da_c22a8d8c",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-03-29T08:29:57Z",
+      "side": 1,
+      "message": "nit: Good to follow consistency in null checking style, by combining multiple null checks into one (similar to L152) and avoid multiple if statements.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 2
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
