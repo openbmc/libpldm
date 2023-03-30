@@ -366,6 +366,30 @@
       },
       "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ade7d4e_9ebf45cb",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-30T21:26:35Z",
+      "side": 1,
+      "message": "Blog post!\n\nhttps://amboar.github.io/notes/2023/03/29/a-global-pldm-instance-id-allocator-for-libpldm.html",
+      "parentUuid": "b367dcbd_8d11c796",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 52
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
