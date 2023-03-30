@@ -128,6 +128,24 @@
       "parentUuid": "2515f8f0_0e1a0511",
       "revId": "498966635c7857e3904d3d19d691654dc3391b23",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "571d8153_86939152",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 3327,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-30T19:18:35Z",
+      "side": 1,
+      "message": "@Arun, can you _please_ stop writing \"-ve\" in code review comments?  There is no voltage here.  Software engineers don\u0027t know what you\u0027re talking about.",
+      "parentUuid": "f655a8a6_3141e021",
+      "revId": "498966635c7857e3904d3d19d691654dc3391b23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
