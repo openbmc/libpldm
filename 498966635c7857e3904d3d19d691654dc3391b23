@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0da5c56_d09b566d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 1751,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-03-30T17:01:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c71a0de3_60a928a2",
+      "range": {
+        "startLine": 1751,
+        "startChar": 33,
+        "endLine": 1751,
+        "endChar": 36
+      },
+      "revId": "498966635c7857e3904d3d19d691654dc3391b23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd48e719_5ac8c088",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81664be2_1c5a1f20",
+        "filename": "src/platform.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-03-30T17:01:54Z",
+      "side": 1,
+      "message": "Add pdr_data_length checking when sensor_data_size and range_filed_format are extracted.",
+      "parentUuid": "bd48e719_5ac8c088",
+      "range": {
+        "startLine": 1308,
+        "startChar": 1,
+        "endLine": 1308,
+        "endChar": 20
+      },
+      "revId": "498966635c7857e3904d3d19d691654dc3391b23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2515f8f0_0e1a0511",
         "filename": "tests/libpldm_platform_test.cpp",
         "patchSetId": 14
@@ -60,6 +108,24 @@
       "writtenOn": "2023-03-29T11:14:24Z",
       "side": 1,
       "message": "Can we have a -ve test case for incorrect sensor unit size as well, which can result in buffer overflow?",
+      "revId": "498966635c7857e3904d3d19d691654dc3391b23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f655a8a6_3141e021",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 3327,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-03-30T17:01:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2515f8f0_0e1a0511",
       "revId": "498966635c7857e3904d3d19d691654dc3391b23",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
