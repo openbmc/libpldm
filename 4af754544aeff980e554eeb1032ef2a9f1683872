@@ -3,6 +3,159 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8bdc70ca_09b074a2",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "Comments for struct/variables.",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60522e8b_a14c0697",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "ctx is [out] parameter, \n\nI prefer [in] parameters followed by [out].",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ab551a7_cf11d5c7",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "minSize",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "906d27b3_de698d43",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "init",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae5b7beb_cc431df3",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "first condition is always `true`. if (end).\n\n`end \u003c (uint8_t *)buf` - Is this for overflow?",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8d63ee8_4559dc07",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "nit: @brief",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbcbb303_77c2c039",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "To be specific,\n\n`or a negative value if an` to `-1 if an`",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe9b50cb_97ef5e6b",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "Should there be check for `if(!ctx)` ?",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92b10a40_988aa42b",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "Need to clarify that no memory is freed.",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa420f1c_3859193e",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
@@ -26,6 +179,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7f991c4_acbf42fb",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "fa420f1c_3859193e",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 19
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dfcbb86_f754bba2",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "if (!ctx || !dst)",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e3654da_c22a8d8c",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
@@ -42,6 +236,63 @@
         "startChar": 0,
         "endLine": 135,
         "endChar": 2
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0853793e_b53f52d9",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "This look like C++ templates for C :-) Nice!",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d5b8cd_50345095",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "`__attribute__((always_inline))` why explicit here, but not for src/msgbuf.h?",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9698001_13f0b8cd",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-03-30T08:03:10Z",
+      "side": 1,
+      "message": "Handle error return codes?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 40
       },
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
