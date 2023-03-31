@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f620d8b7_8ba26c87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "Thanks for the reviews. It seems maybe the documentation doesn\u0027t entirely communicate how the API is effectively used. I\u0027ve tried to address that in my replies, but maybe we should figure out how to communicate that in the documentation as well.",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bdc70ca_09b074a2",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-03-30T08:03:10Z",
       "side": 1,
       "message": "Comments for struct/variables.",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980edca4_934ce23d",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "This is an internal struct, doxygen for that seems a bit over the top? I\u0027m all for documenting public structs properly but this isn\u0027t one of them. This header file is not part of the set installed by the build system. Further, if the `pldm_msgbuf` abstraction wasn\u0027t header-only, the struct would go in the `.c` file. The only code that should manipulate its members are the `pldm_msgbuf_*` functions.",
+      "parentUuid": "8bdc70ca_09b074a2",
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -37,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c5547a4_65bfbb81",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "I think the consistency in parameter placement in the API is more important. `ctx` is effectively the `this` pointer of the API. The convention is to pass that first, e.g. python\u0027s `self`: https://docs.python.org/3/tutorial/classes.html#method-objects",
+      "parentUuid": "60522e8b_a14c0697",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ab551a7_cf11d5c7",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
@@ -48,6 +101,24 @@
       "writtenOn": "2023-03-30T08:03:10Z",
       "side": 1,
       "message": "minSize",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42d72d51_a4ce1613",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9ab551a7_cf11d5c7",
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -71,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7267f18b_88ace3be",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "I disagree with that. Initialising it to some unused value prevents us from finding genuine read-before-assignment bugs with e.g. valgrind.",
+      "parentUuid": "906d27b3_de698d43",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae5b7beb_cc431df3",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
@@ -82,6 +171,24 @@
       "writtenOn": "2023-03-30T08:03:10Z",
       "side": 1,
       "message": "first condition is always `true`. if (end).\n\n`end \u003c (uint8_t *)buf` - Is this for overflow?",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdce2bae_65fb4a31",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "\u003e first condition is always true. if (end).\n\nNo? What\u0027s the value of `UINTPTR_MAX + 1`?\n\n\u003e `end \u003c (uint8_t *)buf` - Is this for overflow?\n\nYep",
+      "parentUuid": "ae5b7beb_cc431df3",
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -105,6 +212,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1291d31c_72c3513c",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f8d63ee8_4559dc07",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dbcbb303_77c2c039",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
@@ -116,6 +241,24 @@
       "writtenOn": "2023-03-30T08:03:10Z",
       "side": 1,
       "message": "To be specific,\n\n`or a negative value if an` to `-1 if an`",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a31146e_c95c957b",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "No, that\u0027s not how this works. The value can be arbitrarily negative, depending on how much the extractor accesses would have overflowed the buffer.",
+      "parentUuid": "dbcbb303_77c2c039",
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -139,6 +282,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b15a2ada_8043fc3e",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "Probably, let me consider it again.",
+      "parentUuid": "fe9b50cb_97ef5e6b",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92b10a40_988aa42b",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
@@ -150,6 +311,24 @@
       "writtenOn": "2023-03-30T08:03:10Z",
       "side": 1,
       "message": "Need to clarify that no memory is freed.",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d84f15ea_7d3a5d05",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "Why is that implied? All \"destroy\" indicates to me is that it\u0027s not valid to use the object again after the function returns.",
+      "parentUuid": "92b10a40_988aa42b",
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -203,6 +382,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a4047aa_7c85133f",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "\u003e do we really need this check?\n\nYes. Because the result tells us whether any of the `pldm_msgbuf_extract()` calls would have caused an out-of-bounds access. Out-of-bounds accesses are prevented by the implementations underlying `pldm_msgbuf_extract()`. These implementations are provided in the code following.\n\n\u003e In that case ctx-\u003ecurser becomes NULL but caller will not get PLDM_SUCCESS as return code. It might be confusing for the caller.\n\nThe return value is not an indication of the success or failure to invalidate the object, it\u0027s an indication of whether any out-of-bounds accesses were attempted during the use of the object. I\u0027ve documented this in @return.\n\nExample idiomatic use looks like this:\n\n``` \nint decode_my_msg(const uint8_t *msgdata, size_t msglen, struct my_msg *msg)\n{\n\tint rc;\n\tstruct pldm_msgbuf buf;\n        \n\trc \u003d pldm_msgbuf_init(buf, sizeof(*msg), msgdata, msglen);\n\tif (rc) {\n\t\treturn rc;\n\t}\n\n\tpldm_msgbuf_extract(buf, \u0026msg-\u003efoo);\n\tpldm_msgbuf_extract(buf, \u0026msg-\u003ebar);\n\tpldm_msgbuf_extract(buf, \u0026msg-\u003ebaz);\n\tpldm_msgbuf_extract(buf, \u0026msg-\u003equux);\n\t\n\treturn pldm_msgbuf_destroy(buf);\n}\n```\n\nBy taking the approach of detecting and preventing overflow in the extractors, recording the existence of the problem, and then reporting the problem through the return value of `pldm_msgbuf_destroy()`, we can avoid code that would look like this:\n\n\n``` \nint decode_my_msg(const uint8_t *msgdata, size_t msglen, struct my_msg *msg)\n{\n\tstruct pldm_msgbuf _buf, *buf \u003d \u0026_buf;\n\tint rc;\n        \n\trc \u003d pldm_msgbuf_init(buf, sizeof(*msg), msgdata, msglen);\n\tif (rc) {\n\t\treturn rc;\n\t}\n\n\trc \u003d pldm_msgbuf_extract(buf, \u0026msg-\u003efoo);\n\tif (rc \u003c 0)\n\t\treturn rc;\n\n\trc \u003d pldm_msgbuf_extract(buf, \u0026msg-\u003ebar);\n\tif (rc \u003c 0)\n\t\treturn rc;\n\n\trc \u003d pldm_msgbuf_extract(buf, \u0026msg-\u003ebaz);\n\tif (rc \u003c 0)\n\t\treturn rc;\n\t\t\n\trc \u003d pldm_msgbuf_extract(buf, \u0026msg-\u003equux);\n\tif (rc \u003c 0)\n\t\treturn rc;\n\n\tpldm_msgbuf_destroy(buf);\n\t\n\treturn 0;\n}\n```\n\nThis is called out in the `@return` documentation.\n\nFurther, the way that the overflow is recorded allows us to easily debug the problem after the fact. The magnitude of the negative value in ctx-\u003eremaining represents the magnitude of the overflow. This allows us to pinpoint the member where it went wrong.\n\nBetween the documentation for `pldm_msgbuf_validate()` and `pldm_msgbuf_destroy()` I think this behaviour is reasonably documented. Given there\u0027s clearly some misunderstand here, what can I do to improve it?",
+      "parentUuid": "d7f991c4_acbf42fb",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 19
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dfcbb86_f754bba2",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
@@ -214,6 +417,24 @@
       "writtenOn": "2023-03-30T08:03:10Z",
       "side": 1,
       "message": "if (!ctx || !dst)",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbd643eb_5044830d",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5dfcbb86_f754bba2",
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -243,6 +464,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d510a75_aa5dbfc8",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3e3654da_c22a8d8c",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 2
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0853793e_b53f52d9",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
@@ -254,6 +499,24 @@
       "writtenOn": "2023-03-30T08:03:10Z",
       "side": 1,
       "message": "This look like C++ templates for C :-) Nice!",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dcd28e6_edb0c564",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "Sometimes C can have nice things too, even if the implementation is kinda terrible.",
+      "parentUuid": "0853793e_b53f52d9",
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -277,6 +540,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "301e7550_3e7e4d84",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "We could drop `__attribute__((always_inline))` from this one.\n\nRegarding the instance below (I\u0027ll caveat this with it\u0027s entirely internal, so what we do doesn\u0027t matter too much, but) the reason for `always_inline` was to make sure the compiler had visibility of the same switch condition being used across multiple calls, and thus could hoist the branch for the condition over all the accessors.",
+      "parentUuid": "a0d5b8cd_50345095",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f9698001_13f0b8cd",
         "filename": "src/msgbuf/platform.h",
         "patchSetId": 2
@@ -288,6 +569,30 @@
       "writtenOn": "2023-03-30T08:03:10Z",
       "side": 1,
       "message": "Handle error return codes?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 40
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32503011_09c067f8",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:19:02Z",
+      "side": 1,
+      "message": "I should probably just make it void instead. But see the previous discussion about idiomatic use of `pldm_msgbuf_extract()` on the definition of `pldm_msgbuf_destroy()`.",
+      "parentUuid": "f9698001_13f0b8cd",
       "range": {
         "startLine": 11,
         "startChar": 0,
