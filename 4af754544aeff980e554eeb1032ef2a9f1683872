@@ -406,6 +406,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d5675df_2f380f8c",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2023-03-31T06:02:33Z",
+      "side": 1,
+      "message": "Is the minus operator before PLDM_ERROR_INVALID_LENGTH needed?\nINVALID_LENGTH is defined in PLDM_BASE_CODE in table 5 of DSP0240_1.1.0 and other APIs in libpldm does not negative the PLDM_BASE_CODE for the return code.",
+      "range": {
+        "startLine": 93,
+        "startChar": 36,
+        "endLine": 93,
+        "endChar": 62
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dfcbb86_f754bba2",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
