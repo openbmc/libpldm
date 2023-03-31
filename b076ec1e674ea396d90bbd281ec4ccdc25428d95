@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1042aa39_13034550",
+        "filename": "src/meson.build",
+        "patchSetId": 15
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T02:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdeb0d88_be6af771",
+      "revId": "b076ec1e674ea396d90bbd281ec4ccdc25428d95",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3430fcbb_942dbac1",
@@ -92,6 +110,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c79fe87_5e3855f3",
+        "filename": "src/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1317,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T02:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2868e969_ae7ce838",
+      "range": {
+        "startLine": 1299,
+        "startChar": 1,
+        "endLine": 1317,
+        "endChar": 2
+      },
+      "revId": "b076ec1e674ea396d90bbd281ec4ccdc25428d95",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ce1bb1d_358bceae",
@@ -105,6 +147,30 @@
       "writtenOn": "2023-03-31T00:24:57Z",
       "side": 1,
       "message": "Delete this.",
+      "range": {
+        "startLine": 1338,
+        "startChar": 1,
+        "endLine": 1357,
+        "endChar": 2
+      },
+      "revId": "b076ec1e674ea396d90bbd281ec4ccdc25428d95",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4412678_37db9019",
+        "filename": "src/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T02:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ce1bb1d_358bceae",
       "range": {
         "startLine": 1338,
         "startChar": 1,
