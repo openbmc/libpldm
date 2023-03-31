@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a50246_c37c0d4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:24:57Z",
+      "side": 1,
+      "message": "Scoring myself here as I managed to push something that was very half baked. However, also addressed the comments so far.",
+      "revId": "b076ec1e674ea396d90bbd281ec4ccdc25428d95",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdeb0d88_be6af771",
+        "filename": "src/meson.build",
+        "patchSetId": 15
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:24:57Z",
+      "side": 1,
+      "message": "This is an unnecessary change. I\u0027ll drop it.",
+      "revId": "b076ec1e674ea396d90bbd281ec4ccdc25428d95",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3430fcbb_942dbac1",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:24:57Z",
+      "side": 1,
+      "message": "Ohhh, this all needs fixing.",
+      "revId": "b076ec1e674ea396d90bbd281ec4ccdc25428d95",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e0a89be_028a85a4",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:24:57Z",
+      "side": 1,
+      "message": "Fix this.",
+      "revId": "b076ec1e674ea396d90bbd281ec4ccdc25428d95",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2868e969_ae7ce838",
+        "filename": "src/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1317,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:24:57Z",
+      "side": 1,
+      "message": "Delete this.",
+      "range": {
+        "startLine": 1299,
+        "startChar": 1,
+        "endLine": 1317,
+        "endChar": 2
+      },
+      "revId": "b076ec1e674ea396d90bbd281ec4ccdc25428d95",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ce1bb1d_358bceae",
+        "filename": "src/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:24:57Z",
+      "side": 1,
+      "message": "Delete this.",
+      "range": {
+        "startLine": 1338,
+        "startChar": 1,
+        "endLine": 1357,
+        "endChar": 2
+      },
+      "revId": "b076ec1e674ea396d90bbd281ec4ccdc25428d95",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

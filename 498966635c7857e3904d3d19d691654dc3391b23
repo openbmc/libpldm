@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4893147_88c51c8c",
+        "filename": "src/platform.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-03-31T00:24:57Z",
+      "side": 1,
+      "message": "Please see the discussion on `pldm_msgbuf_destroy()` as to why the checks aren\u0027t necessary and no overflow actually occurs:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/61974/comment/fa420f1c_3859193e/",
+      "parentUuid": "81664be2_1c5a1f20",
+      "range": {
+        "startLine": 1308,
+        "startChar": 1,
+        "endLine": 1308,
+        "endChar": 20
+      },
+      "revId": "498966635c7857e3904d3d19d691654dc3391b23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2515f8f0_0e1a0511",
         "filename": "tests/libpldm_platform_test.cpp",
         "patchSetId": 14
