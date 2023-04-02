@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31d71e6b_a7d58b24",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-02T13:59:31Z",
+      "side": 0,
+      "message": "This changed is applied in the added file of patch set https://gerrit.openbmc.org/c/openbmc/libpldm/+/59576/19.\nLet remove these changing and apply it in the above patch set.\nThe same comment for adding src/mctp_defines.h",
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
