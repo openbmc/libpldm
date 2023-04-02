@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2b629c0_9f5acf89",
+        "filename": "src/transport/af_mctp.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-02T14:19:35Z",
+      "side": 1,
+      "message": "In some system, there is only one or two terminus. For in MCTP_MAX_NUM_EID can reduce the performance.",
+      "revId": "e8c3ac67c8bca51dd4425126e161bad61ee8c18b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
