@@ -347,6 +347,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa481d94_2cddf8d8",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-04-03T06:13:35Z",
+      "side": 1,
+      "message": "\u003e Another problem solved in the proposal above is that it seems feasible for a system to contain separate TID domains, e.g. if you talk PLDM to devices over MCTP, these might be in a separate TID domain to devices on an NC-SI transport (i.e. devices on each transport may take the same TID). It\u0027s not clear whether this is something allowed for by the PLDM spec.\n\nI believe it is possible, but it can be same device reachable on 2 different transports.  In other words, from BMC perspective, A TID X on 2 different transport indicate same Terminus/Device. If we don\u0027t follow that logic, we will end up tracking PLDM UUIDs/transport specifier in other applications which consumes PLDM data.\n\nIf we take a PCIe add in card example, it could be reachable via PCIe and SMBus(not an ideal example though). And it will have different network id/EID. In that case, let\u0027s say card likes to use smbus interface at first and pcie transport later, then having same TID would help in managing PDRs, sensors, FRU, FW inventory etc.\n\n\nOn the other hand, if we provide same TID for 2 different devices then, TID alone will not be sufficient to identify a Terminus. I don\u0027t think this will be a feasible design.",
+      "parentUuid": "3dd3e422_23b99b23",
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10e77d2d_ff0855b7",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 19
@@ -433,6 +451,29 @@
         "startChar": 0,
         "endLine": 20,
         "endChar": 52
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffed1e14_ba8c0026",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-04-03T06:13:35Z",
+      "side": 1,
+      "message": "`pldm_requester_init_iid_file` How about iid(instance id), instead of just id?\nFor other APIs as well.",
+      "range": {
+        "startLine": 65,
+        "startChar": 20,
+        "endLine": 65,
+        "endChar": 22
       },
       "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
