@@ -535,6 +535,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c8964eb_abfa76af",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-04-03T08:22:57Z",
+      "side": 1,
+      "message": "In that case return data of pldm_msgbuf_extract_* are un-used.\n\nAlso,Is it safe to allow out-of-bound access like that?\nBasically, in the final API, we are copying out-of-bound data and returning an error code. But still the caller can read the data which we copied. Also, I believe static analyzer tools will be catching these as issues.",
+      "parentUuid": "0a4047aa_7c85133f",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 19
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dfcbb86_f754bba2",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
