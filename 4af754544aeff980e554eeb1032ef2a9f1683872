@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "50e1e0da_3fddcc82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-03T01:35:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dfb08179_dc522aab",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f620d8b7_8ba26c87",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -83,6 +101,30 @@
       "writtenOn": "2023-03-31T16:54:50Z",
       "side": 1,
       "message": "Throughout the file tab is used. Use space for intonation.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 1
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5891380_f56f38e9",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-03T01:35:07Z",
+      "side": 1,
+      "message": "First, check the formatting of other C files in the project :)\n\nSecond, as-is the patch passes the formatting requirements enforced in CI, as the `.clang-format` says:\n\n```\n2 10:56:19 andrew@fedora:~/src/openbmc/libpldm (msgbuf) $ cat .clang-format\nBasedOnStyle: LLVM\nIndentWidth: 8\nUseTab: Always\nBreakBeforeBraces: Linux\nAllowShortIfStatementsOnASingleLine: false\nIndentCaseLabels: false\n```\n\nhttps://github.com/openbmc/libpldm/blob/0970e332b46a3096267e15686c0972404205ae96/.clang-format\n\nThird, the project documents the use of Linux kernel style for C code:\n\nhttps://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#c",
+      "parentUuid": "4f5ceb4e_0af50015",
       "range": {
         "startLine": 19,
         "startChar": 0,
@@ -457,6 +499,30 @@
       "writtenOn": "2023-03-31T06:02:33Z",
       "side": 1,
       "message": "Is the minus operator before PLDM_ERROR_INVALID_LENGTH needed?\nINVALID_LENGTH is defined in PLDM_BASE_CODE in table 5 of DSP0240_1.1.0 and other APIs in libpldm does not negative the PLDM_BASE_CODE for the return code.",
+      "range": {
+        "startLine": 93,
+        "startChar": 36,
+        "endLine": 93,
+        "endChar": 62
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b92b12ec_e73bf3f3",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-03T01:35:07Z",
+      "side": 1,
+      "message": "Yeah okay, let me sort this out.",
+      "parentUuid": "6d5675df_2f380f8c",
       "range": {
         "startLine": 93,
         "startChar": 36,
