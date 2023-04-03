@@ -559,6 +559,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed116966_f7ec62bf",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-04-03T08:46:59Z",
+      "side": 1,
+      "message": "\u003eAlso,Is it safe to allow out-of-bound access like that?\nBasically, in the final API, we are copying out-of-bound data and returning an error code. But still the caller can read the data which we copied. Also, I believe static analyzer tools will be catching these as issues.\n\nI overlooked. I see the length check is preventing out-of-bound access before memcpy like you mentioned but still the return data is unused. \n\nI think the return error code is creating the confusion. Basic thought goes like \"check for return value when a function returns something.\"😜",
+      "parentUuid": "2c8964eb_abfa76af",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 19
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dfcbb86_f754bba2",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
