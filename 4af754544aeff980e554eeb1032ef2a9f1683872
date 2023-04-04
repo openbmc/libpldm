@@ -135,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef41ad7c_ce9e016e",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5891380_f56f38e9",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 1
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60522e8b_a14c0697",
@@ -242,6 +266,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cde4af9c_24a46b33",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Note that g++ warns on this via `-Werror\u003dmaybe-uninitialized`, but this may not be true for gcc.",
+      "parentUuid": "7267f18b_88ace3be",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae5b7beb_cc431df3",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
@@ -271,6 +313,24 @@
       "side": 1,
       "message": "\u003e first condition is always true. if (end).\n\nNo? What\u0027s the value of `UINTPTR_MAX + 1`?\n\n\u003e `end \u003c (uint8_t *)buf` - Is this for overflow?\n\nYep",
       "parentUuid": "ae5b7beb_cc431df3",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a53208f7_357b32a8",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdce2bae_65fb4a31",
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -310,6 +370,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88210c5b_66010349",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1291d31c_72c3513c",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbcbb303_77c2c039",
@@ -345,6 +423,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b20eb9ef_25b206ee",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a31146e_c95c957b",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe9b50cb_97ef5e6b",
@@ -376,6 +472,24 @@
       "side": 1,
       "message": "Probably, let me consider it again.",
       "parentUuid": "fe9b50cb_97ef5e6b",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba86d20_8e69f920",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b15a2ada_8043fc3e",
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -581,6 +695,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8208d14_38391111",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b92b12ec_e73bf3f3",
+      "range": {
+        "startLine": 93,
+        "startChar": 36,
+        "endLine": 93,
+        "endChar": 62
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10692677_5ea49a6c",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Sure. However, while often we can batch the test it via `pldm_msgbuf_destroy()`, sometimes further data is dependent on the current extraction succeeding. For instance, PLDM often uses a tag field to specify a type for subsequent variably-sized data. We need to know that we successfully extracted the tag value before we do a data-dependent branch on the tag value, otherwise we\u0027re off in undefined behaviour land. I\u0027ve updated the subsequent change from Gilbert along these lines. As an example:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/59033/19/src/platform.c#1321",
+      "parentUuid": "ed116966_f7ec62bf",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 19
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dfcbb86_f754bba2",
@@ -612,6 +774,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "5dfcbb86_f754bba2",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "134e929e_da05453d",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbd643eb_5044830d",
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -663,6 +843,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af60b00a_62baf192",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d510a75_aa5dbfc8",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 2
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0853793e_b53f52d9",
@@ -698,6 +902,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9a6f1df_981e08c9",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dcd28e6_edb0c564",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0d5b8cd_50345095",
@@ -729,6 +951,24 @@
       "side": 1,
       "message": "We could drop `__attribute__((always_inline))` from this one.\n\nRegarding the instance below (I\u0027ll caveat this with it\u0027s entirely internal, so what we do doesn\u0027t matter too much, but) the reason for `always_inline` was to make sure the compiler had visibility of the same switch condition being used across multiple calls, and thus could hoist the branch for the condition over all the accessors.",
       "parentUuid": "a0d5b8cd_50345095",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1838f6c8_e1c66e31",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "301e7550_3e7e4d84",
       "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -770,6 +1010,30 @@
       "side": 1,
       "message": "I should probably just make it void instead. But see the previous discussion about idiomatic use of `pldm_msgbuf_extract()` on the definition of `pldm_msgbuf_destroy()`.",
       "parentUuid": "f9698001_13f0b8cd",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 40
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc088bdf_70f04ae1",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32503011_09c067f8",
       "range": {
         "startLine": 11,
         "startChar": 0,
