@@ -351,7 +351,7 @@ TEST(GetPDR, testBadDecodeResponse)
     uint8_t transferFlag = PLDM_END;
     constexpr uint16_t respCnt = 9;
     uint8_t transferCRC = 96;
-    size_t recordDataLength = 32;
+    size_t recordDataLength = respCnt - 1;
     std::array<uint8_t, hdrSize + PLDM_GET_PDR_MIN_RESP_BYTES + respCnt +
                             sizeof(transferCRC)>
         responseMsg{};
