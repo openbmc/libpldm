@@ -281,24 +281,33 @@ int decode_get_pdr_req(const struct pldm_msg *msg, size_t payload_length,
 		       uint8_t *transfer_op_flag, uint16_t *request_cnt,
 		       uint16_t *record_chg_num)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
 	if (msg == NULL || record_hndl == NULL || data_transfer_hndl == NULL ||
 	    transfer_op_flag == NULL || request_cnt == NULL ||
 	    record_chg_num == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
+
 	if (payload_length != PLDM_GET_PDR_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	struct pldm_get_pdr_req *request =
-	    (struct pldm_get_pdr_req *)msg->payload;
-	*record_hndl = le32toh(request->record_handle);
-	*data_transfer_hndl = le32toh(request->data_transfer_handle);
-	*transfer_op_flag = request->transfer_op_flag;
-	*request_cnt = le16toh(request->request_count);
-	*record_chg_num = le16toh(request->record_change_number);
+	rc = pldm_msgbuf_init(buf, PLDM_GET_PDR_REQ_BYTES, msg->payload,
+			      payload_length);
+	if (rc) {
+		return rc;
+	}
 
-	return PLDM_SUCCESS;
+	pldm_msgbuf_extract(buf, record_hndl);
+	pldm_msgbuf_extract(buf, data_transfer_hndl);
+	pldm_msgbuf_extract(buf, transfer_op_flag);
+	pldm_msgbuf_extract(buf, request_cnt);
+	pldm_msgbuf_extract(buf, record_chg_num);
+
+	return pldm_msgbuf_destroy(buf);
 }
 
 int encode_get_pdr_resp(uint8_t instance_id, uint8_t completion_code,
