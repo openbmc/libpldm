@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "699ccd2b_2338aa09",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-04T00:32:51Z",
+      "side": 1,
+      "message": "It mean the remain part of PDRs bit field is name.\nThe others struct use the same format.",
+      "parentUuid": "b1a7a554_a0a8352c",
+      "range": {
+        "startLine": 475,
+        "startChar": 14,
+        "endLine": 475,
+        "endChar": 17
+      },
+      "revId": "21a92000aac6d73b9455d302d9cc8dca65ee6b32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a687245f_33b0ea38",
         "filename": "src/platform.c",
         "patchSetId": 16
