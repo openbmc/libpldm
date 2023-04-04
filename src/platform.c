@@ -487,53 +487,47 @@ int decode_get_pdr_resp(const struct pldm_msg *msg, size_t payload_length,
 			uint8_t *record_data, size_t record_data_length,
 			uint8_t *transfer_crc)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
 	if (msg == NULL || completion_code == NULL ||
 	    next_record_hndl == NULL || next_data_transfer_hndl == NULL ||
 	    transfer_flag == NULL || resp_cnt == NULL || transfer_crc == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	*completion_code = msg->payload[0];
+	rc = pldm_msgbuf_init(buf, PLDM_GET_PDR_MIN_RESP_BYTES, msg->payload,
+			      payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, completion_code);
 	if (PLDM_SUCCESS != *completion_code) {
 		return PLDM_SUCCESS;
 	}
 
-	if (payload_length < PLDM_GET_PDR_MIN_RESP_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
-
-	struct pldm_get_pdr_resp *response =
-	    (struct pldm_get_pdr_resp *)msg->payload;
-
-	*next_record_hndl = le32toh(response->next_record_handle);
-	*next_data_transfer_hndl = le32toh(response->next_data_transfer_handle);
-	*transfer_flag = response->transfer_flag;
-	*resp_cnt = le16toh(response->response_count);
-
-	if (*transfer_flag != PLDM_END &&
-	    (int)payload_length != PLDM_GET_PDR_MIN_RESP_BYTES + *resp_cnt) {
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
-
-	if (*transfer_flag == PLDM_END &&
-	    (int)payload_length !=
-		PLDM_GET_PDR_MIN_RESP_BYTES + *resp_cnt + 1) {
-		return PLDM_ERROR_INVALID_LENGTH;
+	pldm_msgbuf_extract(buf, next_record_hndl);
+	pldm_msgbuf_extract(buf, next_data_transfer_hndl);
+	pldm_msgbuf_extract(buf, transfer_flag);
+	rc = pldm_msgbuf_extract(buf, resp_cnt);
+	if (rc) {
+		return rc;
 	}
 
 	if (*resp_cnt > 0 && record_data != NULL) {
 		if (record_data_length < *resp_cnt) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
-		memcpy(record_data, response->record_data, *resp_cnt);
+		pldm_msgbuf_extract_array(buf, record_data, *resp_cnt);
 	}
 
 	if (*transfer_flag == PLDM_END) {
-		*transfer_crc =
-		    msg->payload[PLDM_GET_PDR_MIN_RESP_BYTES + *resp_cnt];
+		pldm_msgbuf_extract(buf, transfer_crc);
 	}
 
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy(buf);
 }
 
 int decode_set_numeric_effecter_value_req(const struct pldm_msg *msg,
