@@ -407,6 +407,10 @@ int decode_get_pdr_repository_info_resp(
     uint32_t *record_count, uint32_t *repository_size,
     uint32_t *largest_record_size, uint8_t *data_transfer_handle_timeout)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
 	if (msg == NULL || completion_code == NULL ||
 	    repository_state == NULL || update_time == NULL ||
 	    oem_update_time == NULL || record_count == NULL ||
@@ -415,32 +419,30 @@ int decode_get_pdr_repository_info_resp(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	*completion_code = msg->payload[0];
+	rc = pldm_msgbuf_init(buf, PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, completion_code);
 	if (PLDM_SUCCESS != *completion_code) {
 		return PLDM_SUCCESS;
 	}
 
-	if (payload_length < PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
-
-	struct pldm_pdr_repository_info_resp *response =
-	    (struct pldm_pdr_repository_info_resp *)msg->payload;
-
-	*repository_state = response->repository_state;
+	pldm_msgbuf_extract(buf, repository_state);
 	if (*repository_state > PLDM_FAILED) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	memcpy(update_time, response->update_time, PLDM_TIMESTAMP104_SIZE);
-	memcpy(oem_update_time, response->oem_update_time,
-	       PLDM_TIMESTAMP104_SIZE);
-	*record_count = le32toh(response->record_count);
-	*repository_size = le32toh(response->repository_size);
-	*largest_record_size = le32toh(response->largest_record_size);
-	*data_transfer_handle_timeout = response->data_transfer_handle_timeout;
+	pldm_msgbuf_extract_array(buf, update_time, PLDM_TIMESTAMP104_SIZE);
+	pldm_msgbuf_extract_array(buf, oem_update_time, PLDM_TIMESTAMP104_SIZE);
+	pldm_msgbuf_extract(buf, record_count);
+	pldm_msgbuf_extract(buf, repository_size);
+	pldm_msgbuf_extract(buf, largest_record_size);
+	pldm_msgbuf_extract(buf, data_transfer_handle_timeout);
 
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy(buf);
 }
 
 int encode_get_pdr_req(uint8_t instance_id, uint32_t record_hndl,
