@@ -58,6 +58,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a116abff_e22ecf07",
+        "filename": "src/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:23:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a687245f_33b0ea38",
+      "revId": "21a92000aac6d73b9455d302d9cc8dca65ee6b32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66cad2d9_0a542aea",
@@ -71,6 +89,24 @@
       "writtenOn": "2023-03-31T05:32:11Z",
       "side": 1,
       "message": "The minus operator should be removed to align with other libpldm APIs. It makes that the return code is not matched the definition in DSP0240_1.1.0 table5.",
+      "revId": "21a92000aac6d73b9455d302d9cc8dca65ee6b32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35fd1290_6ab37bb9",
+        "filename": "src/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1317,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-04T00:23:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66cad2d9_0a542aea",
       "revId": "21a92000aac6d73b9455d302d9cc8dca65ee6b32",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
