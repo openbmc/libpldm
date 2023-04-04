@@ -242,6 +242,11 @@ int decode_set_state_effecter_states_req(const struct pldm_msg *msg,
 					 uint8_t *comp_effecter_count,
 					 set_effecter_state_field *field)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+	int i;
+
 	if (msg == NULL || effecter_id == NULL || comp_effecter_count == NULL ||
 	    field == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -251,15 +256,24 @@ int decode_set_state_effecter_states_req(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	struct pldm_set_state_effecter_states_req *request =
-	    (struct pldm_set_state_effecter_states_req *)msg->payload;
+	rc = pldm_msgbuf_init(buf, 3, msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
 
-	*effecter_id = le16toh(request->effecter_id);
-	*comp_effecter_count = request->comp_effecter_count;
-	memcpy(field, request->field,
-	       (sizeof(set_effecter_state_field) * (*comp_effecter_count)));
+	pldm_msgbuf_extract(buf, effecter_id);
+	pldm_msgbuf_extract(buf, comp_effecter_count);
 
-	return PLDM_SUCCESS;
+	if (*comp_effecter_count > 8) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	for (i = 0; i < *comp_effecter_count; i++) {
+		pldm_msgbuf_extract(buf, &field[i].set_request);
+		pldm_msgbuf_extract(buf, &field[i].effecter_state);
+	}
+
+	return pldm_msgbuf_destroy(buf);
 }
 
 int decode_get_pdr_req(const struct pldm_msg *msg, size_t payload_length,
