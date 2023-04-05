@@ -1,5 +1,5 @@
+#include <cstring>
 #include <endian.h>
-#include <string.h>
 
 #include <array>
 #include <cstdint>
@@ -18,7 +18,7 @@ TEST(GetAlertStatus, testGoodEncodeRequest)
 
     uint8_t versionId = 0x0;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto *request = reinterpret_cast<pldm_msg *>(requestMsg.data());
     auto rc = encode_get_alert_status_req(0, versionId, request,
                                           PLDM_GET_ALERT_STATUS_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_SUCCESS);
@@ -29,7 +29,7 @@ TEST(GetAlertStatus, testBadEncodeRequest)
 {
     std::array<uint8_t, hdrSize + PLDM_GET_ALERT_STATUS_REQ_BYTES> requestMsg{};
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto *request = reinterpret_cast<pldm_msg *>(requestMsg.data());
     auto rc = encode_get_alert_status_req(0, 0x0, request,
                                           PLDM_GET_ALERT_STATUS_REQ_BYTES + 1);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
@@ -47,7 +47,7 @@ TEST(GetAlertStatus, testGoodDecodeResponse)
     uint32_t retRack_entry = 0;
     uint32_t retPri_cec_node = 0;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto *response = reinterpret_cast<pldm_msg *>(responseMsg.data());
     struct pldm_get_alert_status_resp* resp =
         reinterpret_cast<struct pldm_get_alert_status_resp*>(response->payload);
     resp->completion_code = completionCode;
@@ -78,7 +78,7 @@ TEST(GetAlertStatus, testBadDecodeResponse)
     uint32_t retRack_entry = 0;
     uint32_t retPri_cec_node = 0;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto *response = reinterpret_cast<pldm_msg *>(responseMsg.data());
     struct pldm_get_alert_status_resp* resp =
         reinterpret_cast<struct pldm_get_alert_status_resp*>(response->payload);
     resp->completion_code = completionCode;
@@ -99,7 +99,7 @@ TEST(GetAlertStatus, testGoodEncodeResponse)
 
     std::vector<uint8_t> responseMsg(hdrSize +
                                      PLDM_GET_ALERT_STATUS_RESP_BYTES);
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto *response = reinterpret_cast<pldm_msg *>(responseMsg.data());
 
     auto rc =
         encode_get_alert_status_resp(0, PLDM_SUCCESS, rack_entry, pri_cec_node,
@@ -121,7 +121,7 @@ TEST(GetAlertStatus, testBadEncodeResponse)
 
     std::vector<uint8_t> responseMsg(hdrSize +
                                      PLDM_GET_ALERT_STATUS_RESP_BYTES);
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto *response = reinterpret_cast<pldm_msg *>(responseMsg.data());
 
     auto rc = encode_get_alert_status_resp(0, PLDM_SUCCESS, rack_entry,
                                            pri_cec_node, response,
@@ -137,7 +137,7 @@ TEST(GetAlertStatus, testGoodDecodeRequest)
     uint8_t versionId = 0x0;
     uint8_t retVersionId;
 
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto *req = reinterpret_cast<pldm_msg *>(requestMsg.data());
 
     req->payload[0] = versionId;
 
@@ -155,7 +155,7 @@ TEST(GetAlertStatus, testBadDecodeRequest)
     uint8_t versionId = 0x0;
     uint8_t retVersionId;
 
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto *req = reinterpret_cast<pldm_msg *>(requestMsg.data());
 
     req->payload[0] = versionId;
 

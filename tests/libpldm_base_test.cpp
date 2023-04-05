@@ -200,7 +200,7 @@ TEST(GetPLDMCommands, testEncodeRequest)
     ver32_t version{0xFF, 0xFF, 0xFF, 0xFF};
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_COMMANDS_REQ_BYTES>
         requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_get_commands_req(0, pldmType, version, request);
     EXPECT_EQ(rc, PLDM_SUCCESS);
@@ -221,7 +221,7 @@ TEST(GetPLDMCommands, testDecodeRequest)
     memcpy(requestMsg.data() + sizeof(pldmType) + hdrSize, &version,
            sizeof(version));
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = decode_get_commands_req(request, requestMsg.size() - hdrSize,
                                       &pldmTypeOut, &versionOut);
 
@@ -235,7 +235,7 @@ TEST(GetPLDMCommands, testEncodeResponse)
     uint8_t completionCode = 0;
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_COMMANDS_RESP_BYTES>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     std::array<bitfield8_t, PLDM_MAX_CMDS_PER_TYPE / 8> commands{};
     commands[0].byte = 1;
     commands[1].byte = 2;
@@ -258,7 +258,7 @@ TEST(GetPLDMTypes, testEncodeResponse)
     uint8_t completionCode = 0;
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_TYPES_RESP_BYTES>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     std::array<bitfield8_t, PLDM_MAX_TYPES / 8> types{};
     types[0].byte = 1;
     types[1].byte = 2;
@@ -285,7 +285,7 @@ TEST(GetPLDMTypes, testGoodDecodeResponse)
     uint8_t completion_code;
     responseMsg[hdrSize] = PLDM_SUCCESS;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_types_resp(response, responseMsg.size() - hdrSize,
                                     &completion_code, outTypes.data());
@@ -308,7 +308,7 @@ TEST(GetPLDMTypes, testBadDecodeResponse)
     uint8_t retcompletion_code = 0;
     responseMsg[hdrSize] = PLDM_SUCCESS;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_types_resp(response, responseMsg.size() - hdrSize - 1,
                                     &retcompletion_code, outTypes.data());
@@ -327,7 +327,7 @@ TEST(GetPLDMCommands, testGoodDecodeResponse)
     uint8_t completion_code;
     responseMsg[hdrSize] = PLDM_SUCCESS;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_commands_resp(response, responseMsg.size() - hdrSize,
                                        &completion_code, outTypes.data());
@@ -350,7 +350,7 @@ TEST(GetPLDMCommands, testBadDecodeResponse)
     uint8_t retcompletion_code = 0;
     responseMsg[hdrSize] = PLDM_SUCCESS;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc =
         decode_get_commands_resp(response, responseMsg.size() - hdrSize - 1,
@@ -363,7 +363,7 @@ TEST(GetPLDMVersion, testGoodEncodeRequest)
 {
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_VERSION_REQ_BYTES>
         requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     uint8_t pldmType = 0x03;
     uint32_t transferHandle = 0x0;
     uint8_t opFlag = 0x01;
@@ -399,7 +399,7 @@ TEST(GetPLDMVersion, testEncodeResponse)
     uint8_t flag = PLDM_START_AND_END;
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_VERSION_RESP_BYTES>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     ver32_t version = {0xFF, 0xFF, 0xFF, 0xFF};
 
     auto rc = encode_get_version_resp(0, PLDM_SUCCESS, 0, PLDM_START_AND_END,
@@ -434,7 +434,7 @@ TEST(GetPLDMVersion, testDecodeRequest)
     memcpy(requestMsg.data() + sizeof(transferHandle) + sizeof(flag) + hdrSize,
            &pldmType, sizeof(pldmType));
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = decode_get_version_req(request, requestMsg.size() - hdrSize,
                                      &retTransferHandle, &retFlag, &retType);
@@ -467,7 +467,7 @@ TEST(GetPLDMVersion, testDecodeResponse)
                sizeof(transferHandle) + sizeof(flag) + hdrSize,
            &version, sizeof(version));
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_version_resp(response, responseMsg.size() - hdrSize,
                                       &completion_code, &retTransferHandle,
@@ -495,7 +495,7 @@ TEST(GetTID, testEncodeResponse)
     uint8_t completionCode = 0;
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_TID_RESP_BYTES>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t tid = 1;
 
     auto rc = encode_get_tid_resp(0, PLDM_SUCCESS, tid, response);
@@ -514,7 +514,7 @@ TEST(GetTID, testDecodeResponse)
     uint8_t completion_code;
     responseMsg[hdrSize] = PLDM_SUCCESS;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_tid_resp(response, responseMsg.size() - hdrSize,
                                   &completion_code, &tid);
@@ -748,7 +748,7 @@ TEST(CcOnlyResponse, testEncode)
                             3 /*complection code*/, &responseMsg);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    auto p = reinterpret_cast<uint8_t*>(&responseMsg);
+    auto* p = reinterpret_cast<uint8_t*>(&responseMsg);
     EXPECT_THAT(std::vector<uint8_t>(p, p + sizeof(responseMsg)),
                 ElementsAreArray({0, 1, 2, 3}));
 
@@ -764,7 +764,7 @@ TEST(SetTID, testGoodEncodeRequest)
     uint8_t instanceId = 0;
     uint8_t tid = 0x01;
     std::array<uint8_t, sizeof(pldm_msg_hdr) + sizeof(tid)> requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_tid_req(instanceId, tid, request);
     ASSERT_EQ(rc, PLDM_SUCCESS);
@@ -781,7 +781,7 @@ TEST(SetTID, testBadEncodeRequest)
 {
     uint8_t tid = 0x01;
     std::array<uint8_t, sizeof(pldm_msg_hdr) + sizeof(tid)> requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_tid_req(0, tid, nullptr);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);

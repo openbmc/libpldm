@@ -14,7 +14,7 @@
 TEST(GetFruRecordTableMetadata, testGoodEncodeRequest)
 {
     std::array<uint8_t, sizeof(pldm_msg_hdr)> requestMsg{};
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_get_fru_record_table_metadata_req(
         0, requestPtr, PLDM_GET_FRU_RECORD_TABLE_METADATA_REQ_BYTES);
     ASSERT_EQ(rc, PLDM_SUCCESS);
@@ -29,7 +29,7 @@ TEST(GetFruRecordTableMetadata, testBadEncodeRequest)
     auto rc = encode_get_fru_record_table_metadata_req(0, NULL, 0);
     ASSERT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     std::array<uint8_t, sizeof(pldm_msg_hdr)> requestMsg{};
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     rc = encode_get_fru_record_table_metadata_req(0, requestPtr, 1);
     ASSERT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
@@ -39,9 +39,9 @@ TEST(GetFruRecordTableMetadata, testGoodDecodeResponse)
 
     std::vector<uint8_t> responseMsg(
         sizeof(pldm_msg_hdr) + PLDM_GET_FRU_RECORD_TABLE_METADATA_RESP_BYTES);
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
-    auto response = reinterpret_cast<pldm_get_fru_record_table_metadata_resp*>(
+    auto* response = reinterpret_cast<pldm_get_fru_record_table_metadata_resp*>(
         responsePtr->payload);
 
     responsePtr->hdr.request = PLDM_RESPONSE;
@@ -118,9 +118,9 @@ TEST(GetFruRecordTableMetadata, testBadDecodeResponse)
 {
     std::vector<uint8_t> responseMsg(
         sizeof(pldm_msg_hdr) + PLDM_GET_FRU_RECORD_TABLE_METADATA_RESP_BYTES);
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
-    auto response = reinterpret_cast<pldm_get_fru_record_table_metadata_resp*>(
+    auto* response = reinterpret_cast<pldm_get_fru_record_table_metadata_resp*>(
         responsePtr->payload);
 
     response->completion_code = PLDM_SUCCESS;
@@ -197,7 +197,7 @@ TEST(GetFruRecordTableMetadata, testGoodEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) +
                             PLDM_GET_FRU_RECORD_TABLE_METADATA_RESP_BYTES>
         responseMsg{};
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     responsePtr->hdr.request = PLDM_RESPONSE;
     responsePtr->hdr.instance_id = 0;
@@ -218,7 +218,7 @@ TEST(GetFruRecordTableMetadata, testGoodEncodeResponse)
         fru_table_maximum_size, fru_table_length, total_record_set_identifiers,
         total_table_records, checksum, responsePtr);
 
-    auto response = reinterpret_cast<pldm_get_fru_record_table_metadata_resp*>(
+    auto* response = reinterpret_cast<pldm_get_fru_record_table_metadata_resp*>(
         responsePtr->payload);
 
     ASSERT_EQ(rc, PLDM_SUCCESS);
@@ -269,7 +269,7 @@ TEST(GetFruRecordTableMetadata, testBadEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) +
                             PLDM_GET_FRU_RECORD_TABLE_METADATA_RESP_BYTES>
         responseMsg{};
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t completion_code = PLDM_SUCCESS;
     uint8_t fru_data_major_version = 0x12;
@@ -285,7 +285,7 @@ TEST(GetFruRecordTableMetadata, testBadEncodeResponse)
         fru_table_maximum_size, fru_table_length, total_record_set_identifiers,
         total_table_records, checksum, NULL);
 
-    auto response = reinterpret_cast<pldm_get_fru_record_table_metadata_resp*>(
+    auto* response = reinterpret_cast<pldm_get_fru_record_table_metadata_resp*>(
         responsePtr->payload);
 
     ASSERT_EQ(rc, PLDM_ERROR_INVALID_DATA);
@@ -306,9 +306,9 @@ TEST(GetFruRecordTable, testGoodDecodeRequest)
     std::array<uint8_t,
                PLDM_GET_FRU_RECORD_TABLE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
-    auto request =
+    auto* request =
         reinterpret_cast<pldm_get_fru_record_table_req*>(requestPtr->payload);
 
     request->data_transfer_handle = htole32(data_transfer_handle);
@@ -335,7 +335,7 @@ TEST(GetFruRecordTable, testBadDecodeRequest)
     std::array<uint8_t,
                sizeof(pldm_msg_hdr) + PLDM_GET_FRU_RECORD_TABLE_REQ_BYTES>
         requestMsg{};
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Payload message is missing
     auto rc = decode_get_fru_record_table_req(NULL, 0, &data_transfer_handle,
@@ -357,8 +357,8 @@ TEST(GetFruRecordTable, testGoodEncodeResponse)
     std::vector<uint8_t> responseMsg(sizeof(pldm_msg_hdr) +
                                      PLDM_GET_FRU_RECORD_TABLE_MIN_RESP_BYTES);
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
-    auto response =
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response =
         reinterpret_cast<pldm_get_fru_record_table_resp*>(responsePtr->payload);
 
     // Invoke encode get FRU record table response api
@@ -385,7 +385,7 @@ TEST(GetFruRecordTable, testBadEncodeResponse)
     std::vector<uint8_t> responseMsg(sizeof(pldm_msg_hdr) +
                                      PLDM_GET_FRU_RECORD_TABLE_MIN_RESP_BYTES);
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     auto rc = encode_get_fru_record_table_resp(
         0, PLDM_ERROR, next_data_transfer_handle, transfer_flag, responsePtr);
 
@@ -409,8 +409,8 @@ TEST(GetFruRecordTable, testGoodEncodeRequest)
                sizeof(pldm_msg_hdr) + PLDM_GET_FRU_RECORD_TABLE_REQ_BYTES>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
-    auto request =
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request =
         reinterpret_cast<pldm_get_fru_record_table_req*>(requestPtr->payload);
 
     // Random value for data transfer handle and transfer operation flag
@@ -458,9 +458,9 @@ TEST(GetFruRecordTable, testGoodDecodeResponse)
                                      PLDM_GET_FRU_RECORD_TABLE_MIN_RESP_BYTES +
                                      fru_record_table_data.size());
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
-    auto response =
+    auto* response =
         reinterpret_cast<pldm_get_fru_record_table_resp*>(responsePtr->payload);
 
     response->completion_code = completion_code;
@@ -502,7 +502,7 @@ TEST(GetFruRecordTable, testBadDecodeResponse)
                                      PLDM_GET_FRU_RECORD_TABLE_MIN_RESP_BYTES +
                                      fru_record_table_data.size());
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Payload message is missing
     auto rc = decode_get_fru_record_table_resp(
@@ -532,7 +532,7 @@ TEST(GetFRURecordByOption, testGoodEncodeRequest)
     constexpr auto payLoadLength = sizeof(pldm_get_fru_record_by_option_req);
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payLoadLength> request;
-    auto reqMsg = reinterpret_cast<pldm_msg*>(request.data());
+    auto* reqMsg = reinterpret_cast<pldm_msg*>(request.data());
 
     auto rc = encode_get_fru_record_by_option_req(
         instanceId, dataTransferHandle, fruTableHandle, recordSetIdentifier,
@@ -541,7 +541,7 @@ TEST(GetFRURecordByOption, testGoodEncodeRequest)
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(instanceId, reqMsg->hdr.instance_id);
 
-    auto payLoadMsg =
+    auto* payLoadMsg =
         reinterpret_cast<pldm_get_fru_record_by_option_req*>(reqMsg->payload);
 
     EXPECT_EQ(le32toh(payLoadMsg->data_transfer_handle), dataTransferHandle);
@@ -562,7 +562,7 @@ TEST(GetFRURecordByOption, testBadEncodeRequest)
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payLoadLength> request;
-    auto reqMsg = reinterpret_cast<pldm_msg*>(request.data());
+    auto* reqMsg = reinterpret_cast<pldm_msg*>(request.data());
 
     rc = encode_get_fru_record_by_option_req(1, 2, 3, 4, 5, 6, 0, reqMsg,
                                              payLoadLength - 1);
@@ -583,7 +583,7 @@ TEST(GetFRURecordByOption, testGoodDecodeRequest)
     constexpr auto payLoadLength = sizeof(pldm_get_fru_record_by_option_req);
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payLoadLength> request;
-    auto reqMsg = reinterpret_cast<pldm_msg*>(request.data());
+    auto* reqMsg = reinterpret_cast<pldm_msg*>(request.data());
 
     auto rc = encode_get_fru_record_by_option_req(
         instanceId, dataTransferHandle, fruTableHandle, recordSetIdentifier,
@@ -616,7 +616,7 @@ TEST(GetFRURecordByOption, testBadDecodeRequest)
 {
     constexpr auto payLoadLength = sizeof(pldm_get_fru_record_by_option_req);
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payLoadLength> request{};
-    auto reqMsg = reinterpret_cast<pldm_msg*>(request.data());
+    auto* reqMsg = reinterpret_cast<pldm_msg*>(request.data());
 
     uint32_t retDataTransferHandle{};
     uint16_t retFruTableHandle{};
@@ -652,13 +652,13 @@ TEST(GetFruRecordByOption, testGoodEncodeResponse)
         sizeof(pldm_get_fru_record_by_option_resp) - 1 + fruData.size();
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payLoadLength> response;
-    auto respMsg = reinterpret_cast<pldm_msg*>(response.data());
+    auto* respMsg = reinterpret_cast<pldm_msg*>(response.data());
 
     auto rc = encode_get_fru_record_by_option_resp(
         instanceId, completionCode, dataTransferHandle, transferFlag,
         fruData.data(), fruData.size(), respMsg, payLoadLength);
 
-    auto payLoadMsg =
+    auto* payLoadMsg =
         reinterpret_cast<pldm_get_fru_record_by_option_resp*>(respMsg->payload);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
@@ -684,7 +684,7 @@ TEST(GetFruRecordByOption, testBadEncodeResponse)
         sizeof(pldm_get_fru_record_by_option_resp) - 1 + fruData.size();
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payLoadLength> response;
-    auto respMsg = reinterpret_cast<pldm_msg*>(response.data());
+    auto* respMsg = reinterpret_cast<pldm_msg*>(response.data());
 
     auto rc = encode_get_fru_record_by_option_resp(
         instanceId, completionCode, dataTransferHandle, transferFlag, nullptr,
@@ -711,7 +711,7 @@ TEST(GetFruRecordByOption, testGoodDecodeResponse)
         sizeof(pldm_get_fru_record_by_option_resp) - 1 + fruData.size();
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payLoadLength> response;
-    auto respMsg = reinterpret_cast<pldm_msg*>(response.data());
+    auto* respMsg = reinterpret_cast<pldm_msg*>(response.data());
 
     auto rc = encode_get_fru_record_by_option_resp(
         instanceId, completionCode, dataTransferHandle, transferFlag,
@@ -749,7 +749,7 @@ TEST(GetFruRecordByOption, testBadDecodeResponse)
         sizeof(pldm_get_fru_record_by_option_resp) - 1 + fruData.size();
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payLoadLength> response;
-    auto respMsg = reinterpret_cast<pldm_msg*>(response.data());
+    auto* respMsg = reinterpret_cast<pldm_msg*>(response.data());
 
     auto rc = encode_get_fru_record_by_option_resp(
         instanceId, completionCode, dataTransferHandle, transferFlag,
@@ -832,7 +832,7 @@ TEST(SetFRURecordTable, testGoodDecodeRequest)
                             PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES +
                             sizeof(tableData)>
         requestMsg{};
-    auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
     struct pldm_set_fru_record_table_req* req =
         reinterpret_cast<struct pldm_set_fru_record_table_req*>(
             request->payload);
@@ -865,7 +865,7 @@ TEST(SetFRURecordTable, testBadDecodeRequest)
                             PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES +
                             sizeof(tableData)>
         requestMsg{};
-    auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
     struct pldm_set_fru_record_table_req* req =
         reinterpret_cast<struct pldm_set_fru_record_table_req*>(
             request->payload);
