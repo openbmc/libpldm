@@ -1,5 +1,5 @@
-#ifndef UTILS_H__
-#define UTILS_H__
+#ifndef LIBPLDM_UTILS_H
+#define LIBPLDM_UTILS_H
 
 #ifdef __cplusplus
 extern "C" {

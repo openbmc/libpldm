@@ -602,12 +602,12 @@ bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node)
 	return false;
 }
 
-static void _entity_association_pdr_add_entry(pldm_entity_node *curr,
-					      pldm_pdr *repo, uint16_t size,
-					      uint8_t contained_count,
-					      uint8_t association_type,
-					      bool is_remote,
-					      uint16_t terminus_handle)
+static void entity_association_pdr_add_children(pldm_entity_node *curr,
+						pldm_pdr *repo, uint16_t size,
+						uint8_t contained_count,
+						uint8_t association_type,
+						bool is_remote,
+						uint16_t terminus_handle)
 {
 	uint8_t pdr[size];
 	uint8_t *start = pdr;
@@ -666,7 +666,7 @@ static void entity_association_pdr_add_entry(pldm_entity_node *curr,
 		    sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t) +
 		    sizeof(uint8_t) + sizeof(pldm_entity) + sizeof(uint8_t) +
 		    (num_logical_children * sizeof(pldm_entity));
-		_entity_association_pdr_add_entry(
+		entity_association_pdr_add_children(
 		    curr, repo, logical_pdr_size, num_logical_children,
 		    PLDM_ENTITY_ASSOCIAION_LOGICAL, is_remote, terminus_handle);
 	}
@@ -676,7 +676,7 @@ static void entity_association_pdr_add_entry(pldm_entity_node *curr,
 		    sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t) +
 		    sizeof(uint8_t) + sizeof(pldm_entity) + sizeof(uint8_t) +
 		    (num_physical_children * sizeof(pldm_entity));
-		_entity_association_pdr_add_entry(
+		entity_association_pdr_add_children(
 		    curr, repo, physical_pdr_size, num_physical_children,
 		    PLDM_ENTITY_ASSOCIAION_PHYSICAL, is_remote,
 		    terminus_handle);

@@ -1,5 +1,5 @@
-#ifndef BIOS_TABLE_H__
-#define BIOS_TABLE_H__
+#ifndef LIBPLDM_BIOS_TABLE_H
+#define LIBPLDM_BIOS_TABLE_H
 
 #ifdef __cplusplus
 extern "C" {
