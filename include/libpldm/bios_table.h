@@ -519,7 +519,7 @@ size_t pldm_bios_table_attr_value_entry_encode_enum_length(uint8_t count);
  */
 void pldm_bios_table_attr_value_entry_encode_enum(
     void *entry, size_t entry_length, uint16_t attr_handle, uint8_t attr_type,
-    uint8_t count, const uint8_t *handle_indexes);
+    uint8_t count, const uint8_t *handles);
 
 /** @brief Get number of current values for the enum entry
  *  @param[in] entry - Pointer to bios attribute value table entry
@@ -554,7 +554,7 @@ uint8_t pldm_bios_table_attr_value_entry_enum_decode_handles(
  */
 int pldm_bios_table_attr_value_entry_encode_enum_check(
     void *entry, size_t entry_length, uint16_t attr_handle, uint8_t attr_type,
-    uint8_t count, uint8_t *handle_indexes);
+    uint8_t count, uint8_t *handles);
 
 /** @brief Get length that an attribute value entry(type: string) will take
  *  @param[in] string_length - Length of the current string in byte, 0 indicates
@@ -577,7 +577,7 @@ pldm_bios_table_attr_value_entry_encode_string_length(uint16_t string_length);
  */
 void pldm_bios_table_attr_value_entry_encode_string(
     void *entry, size_t entry_length, uint16_t attr_handle, uint8_t attr_type,
-    uint16_t string_length, const char *string);
+    uint16_t str_length, const char *string);
 
 /** @brief Get length of the current string in bytes
  *  @param [in] entry - Pointer to bios attribute value table entry
@@ -612,7 +612,7 @@ void pldm_bios_table_attr_value_entry_string_decode_string(
  */
 int pldm_bios_table_attr_value_entry_encode_string_check(
     void *entry, size_t entry_length, uint16_t attr_handle, uint8_t attr_type,
-    uint16_t string_length, const char *string);
+    uint16_t str_length, const char *string);
 
 /** @brief Get length that an attribute value entry(type: integer) will take
  *  @return The length that an entry(type: integer) will take

@@ -449,13 +449,13 @@ int encode_get_bios_current_value_by_handle_resp(
 int encode_set_bios_attribute_current_value_req(
     uint8_t instance_id, uint32_t transfer_handle, uint8_t transfer_flag,
     const uint8_t *attribute_data, size_t attribute_length,
-    struct pldm_msg *msg, size_t payload_lenth)
+    struct pldm_msg *msg, size_t payload_length)
 {
 	if (msg == NULL || attribute_data == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 	if (PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES + attribute_length !=
-	    payload_lenth) {
+	    payload_length) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 	struct pldm_header_info header = {0};
