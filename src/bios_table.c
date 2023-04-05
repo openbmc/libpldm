@@ -11,19 +11,19 @@
 
 #define POINTER_CHECK(pointer)                                                 \
 	do {                                                                   \
-		if (pointer == NULL)                                           \
+		if ((pointer) == NULL)                                         \
 			return PLDM_ERROR_INVALID_DATA;                        \
 	} while (0)
 
 #define ATTR_TYPE_EXPECT(type, expected)                                       \
 	do {                                                                   \
-		if (type != expected && type != (expected | 0x80))             \
+		if ((type) != (expected) && (type) != ((expected) | 0x80))     \
 			return PLDM_ERROR_INVALID_DATA;                        \
 	} while (0)
 
 #define BUFFER_SIZE_EXPECT(current_size, expected_size)                        \
 	do {                                                                   \
-		if (current_size < expected_size)                              \
+		if ((current_size) < (expected_size))                          \
 			return PLDM_ERROR_INVALID_LENGTH;                      \
 	} while (0)
 
@@ -203,7 +203,7 @@ int pldm_bios_table_attr_entry_enum_encode_check(
 
 #define ATTR_TYPE_EXPECT(type, expected)                                       \
 	do {                                                                   \
-		if (type != expected && type != (expected | 0x80))             \
+		if ((type) != (expected) && (type) != ((expected) | 0x80))     \
 			return PLDM_ERROR_INVALID_DATA;                        \
 	} while (0)
 
@@ -560,7 +560,7 @@ struct table_entry_length {
 	size_t (*entry_length_handler)(const void *);
 };
 
-#define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
+#define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
 static const struct table_entry_length *find_table_entry_length_by_type(
     uint8_t attr_type, const struct table_entry_length *handlers, size_t count)

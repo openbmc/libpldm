@@ -104,7 +104,7 @@ uint8_t crc8(const void *data, size_t size)
 #define AS_CHAR(digit) ((digit) + '0')
 #define INSERT_CHAR(c, b, n)                                                   \
 	{                                                                      \
-		if (n > 1) {                                                   \
+		if ((n) > 1) {                                                 \
 			*(b)++ = (c);                                          \
 			(n)--;                                                 \
 		}                                                              \
