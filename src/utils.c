@@ -146,14 +146,12 @@ int ver2str(const ver32_t *version, char *buffer, size_t buffer_size)
 
 uint8_t bcd2dec8(uint8_t bcd)
 {
-	uint8_t dec = (bcd >> 4) * 10 + (bcd & 0x0f);
-	return dec;
+	return (bcd >> 4) * 10 + (bcd & 0x0f);
 }
 
 uint8_t dec2bcd8(uint8_t dec)
 {
-	uint8_t bcd = (dec % 10) | (dec / 10) << 4;
-	return bcd;
+	return (dec % 10) | (dec / 10) << 4;
 }
 
 uint16_t bcd2dec16(uint16_t bcd)
