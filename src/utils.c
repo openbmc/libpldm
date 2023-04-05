@@ -151,7 +151,7 @@ uint8_t bcd2dec8(uint8_t bcd)
 
 uint8_t dec2bcd8(uint8_t dec)
 {
-	return (dec % 10) | (dec / 10) << 4;
+	return ((dec / 10) << 4) + (dec % 10);
 }
 
 uint16_t bcd2dec16(uint16_t bcd)
