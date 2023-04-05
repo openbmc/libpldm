@@ -12,8 +12,8 @@ const uint8_t MCTP_MSG_TYPE_PLDM = 1;
 
 pldm_requester_rc_t pldm_open(void)
 {
+	ssize_t rc = -1;
 	int fd = -1;
-	int rc = -1;
 
 	fd = socket(AF_UNIX, SOCK_SEQPACKET, 0);
 	if (-1 == fd) {
