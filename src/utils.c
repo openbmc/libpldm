@@ -85,8 +85,9 @@ uint32_t crc32(const void *data, size_t size)
 {
 	const uint8_t *p = data;
 	uint32_t crc = ~0U;
-	while (size--)
+	while (size--) {
 		crc = crc32_tab[(crc ^ *p++) & 0xff] ^ (crc >> 8);
+	}
 	return crc ^ ~0U;
 }
 
@@ -94,8 +95,9 @@ uint8_t crc8(const void *data, size_t size)
 {
 	const uint8_t *p = data;
 	uint8_t crc = 0x00;
-	while (size--)
+	while (size--) {
 		crc = crc8_table[crc ^ *p++];
+	}
 	return crc;
 }
 
@@ -115,14 +117,17 @@ ssize_t ver2str(const ver32_t *version, char *buffer, size_t buffer_size)
 	ssize_t remaining;
 	char *cursor;
 
-	if (!version || !buffer)
+	if (!version || !buffer) {
 		return -1;
+	}
 
-	if (!buffer_size)
+	if (!buffer_size) {
 		return -1;
+	}
 
-	if (buffer_size > SSIZE_MAX)
+	if (buffer_size > SSIZE_MAX) {
 		return -1;
+	}
 
 	cursor = buffer;
 	remaining = (ssize_t)buffer_size;
