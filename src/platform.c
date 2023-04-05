@@ -591,7 +591,7 @@ int encode_set_numeric_effecter_value_resp(uint8_t instance_id,
 
 int encode_set_numeric_effecter_value_req(
     uint8_t instance_id, uint16_t effecter_id, uint8_t effecter_data_size,
-    uint8_t *effecter_value, struct pldm_msg *msg, size_t payload_length)
+    const uint8_t *effecter_value, struct pldm_msg *msg, size_t payload_length)
 {
 	if (msg == NULL || effecter_value == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -1263,8 +1263,8 @@ int encode_get_numeric_effecter_value_req(uint8_t instance_id,
 
 int encode_get_numeric_effecter_value_resp(
     uint8_t instance_id, uint8_t completion_code, uint8_t effecter_data_size,
-    uint8_t effecter_oper_state, uint8_t *pending_value, uint8_t *present_value,
-    struct pldm_msg *msg, size_t payload_length)
+    uint8_t effecter_oper_state, const uint8_t *pending_value,
+    const uint8_t *present_value, struct pldm_msg *msg, size_t payload_length)
 {
 	if (msg == NULL || pending_value == NULL || present_value == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -1661,7 +1661,7 @@ int encode_get_sensor_reading_resp(
     uint8_t instance_id, uint8_t completion_code, uint8_t sensor_data_size,
     uint8_t sensor_operational_state, uint8_t sensor_event_message_enable,
     uint8_t present_state, uint8_t previous_state, uint8_t event_state,
-    uint8_t *present_reading, struct pldm_msg *msg, size_t payload_length)
+    const uint8_t *present_reading, struct pldm_msg *msg, size_t payload_length)
 {
 	if (msg == NULL || present_reading == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
