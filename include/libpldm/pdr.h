@@ -158,13 +158,14 @@ void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
  * whether the valid bit is set or not as per the spec DSP0248
  *
  * @param[in] repo - opaque pointer acting as a PDR repo handle
- * @param[in] terminusHandle - PLDM terminus handle
+ * @param[in] terminus_handle - PLDM terminus handle
  * @param[in] tid - Terminus ID
  * @param[in] tlEid - MCTP endpoint EID
  * @param[in] valid - validity bit of TLPDR
  */
-void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminusHandle,
-			    uint8_t tid, uint8_t tlEid, bool valid);
+/* NOLINTNEXTLINE(readability-identifier-naming) */
+void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminus_handle,
+			    uint8_t tid, uint8_t tl_eid, bool valid);
 
 /* ======================= */
 /* FRU Record Set PDR APIs */
