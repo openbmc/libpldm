@@ -34,6 +34,24 @@
       "parentUuid": "ac4926c3_14870059",
       "revId": "319304fd8a5b32e1e349d3fca9884da991cbc5ac",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdb43645_80a606dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-04-05T22:51:24Z",
+      "side": 1,
+      "message": "Maybe I misunderstand how it works but I swear Ed is always complaining that I broke something in sdbusplus wrt some clang-tidy config he has elsewhere.",
+      "parentUuid": "c3569816_70b3a27a",
+      "revId": "319304fd8a5b32e1e349d3fca9884da991cbc5ac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
