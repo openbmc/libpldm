@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7e98fd_bc8e737f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-04-05T17:53:04Z",
+      "side": 1,
+      "message": "I\u0027m really not a fan of this option.  It half defeats the purpose of auto.",
+      "revId": "586b417229adcbf4439e34a1144989606811f564",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dd1c881_3a6402a5",
+        "filename": "tests/oem/ibm/libpldm_host_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-04-05T17:53:04Z",
+      "side": 1,
+      "message": "Did this get missed from an earlier commit?",
+      "revId": "586b417229adcbf4439e34a1144989606811f564",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
