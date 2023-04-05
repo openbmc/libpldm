@@ -1,9 +1,9 @@
 #include <endian.h>
-#include <stdlib.h>
-#include <string.h>
 
 #include <array>
 #include <cstdint>
+#include <cstdlib>
+#include <cstring>
 #include <vector>
 
 #include "libpldm/pdr.h"
