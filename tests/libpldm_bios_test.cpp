@@ -34,7 +34,7 @@ TEST(GetDateTime, testEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_DATE_TIME_RESP_BYTES>
         responseMsg{};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_get_date_time_resp(0, PLDM_SUCCESS, seconds, minutes,
                                         hours, day, month, year, response);
@@ -104,7 +104,7 @@ TEST(GetDateTime, testDecodeResponse)
                hdrSize,
            &yearLe, sizeof(yearLe));
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_date_time_resp(
         response, responseMsg.size() - hdrSize, &completionCode, &retSeconds,
@@ -208,7 +208,7 @@ TEST(SetDateTime, testGoodEncodeRequset)
     std::array<uint8_t, hdrSize + sizeof(struct pldm_set_date_time_req)>
         requestMsg{};
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_set_date_time_req(instanceId, seconds, minutes, hours, day,
                                        month, year, request,
                                        requestMsg.size() - hdrSize);
@@ -241,7 +241,7 @@ TEST(SetDateTime, testBadEncodeRequset)
     std::array<uint8_t, hdrSize + sizeof(struct pldm_set_date_time_req)>
         requestMsg{};
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_date_time_req(instanceId, seconds, minutes, hours, day,
                                        month, year, nullptr,
@@ -270,7 +270,7 @@ TEST(SetDateTime, testGoodDecodeRequest)
     uint8_t month = 0x11;
     uint16_t year = 0x2019;
 
-    auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
     struct pldm_set_date_time_req* req =
         reinterpret_cast<struct pldm_set_date_time_req*>(request->payload);
     req->seconds = seconds;
@@ -312,7 +312,7 @@ TEST(SetDateTime, testBadDecodeRequest)
     std::array<uint8_t, hdrSize + sizeof(struct pldm_set_date_time_req)>
         requestMsg{};
 
-    auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
 
     decode_set_date_time_req(request, requestMsg.size() - hdrSize, &seconds,
                              &minutes, &hours, &day, &month, &year);
@@ -337,7 +337,7 @@ TEST(GetBIOSTable, testGoodEncodeResponse)
     std::array<uint8_t,
                sizeof(pldm_msg_hdr) + PLDM_GET_BIOS_TABLE_MIN_RESP_BYTES + 4>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t completionCode = PLDM_SUCCESS;
     uint32_t nextTransferHandle = 32;
@@ -379,7 +379,7 @@ TEST(GetBIOSTable, testGoodEncodeRequest)
     uint8_t transferOpFlag = 0x01;
     uint8_t tableType = PLDM_BIOS_ATTR_TABLE;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_get_bios_table_req(0, transferHandle, transferOpFlag,
                                         tableType, request);
 
@@ -415,7 +415,7 @@ TEST(GetBIOSTable, testGoodDecodeRequest)
     uint8_t retTransferOpFlag = 0;
     uint8_t retTableType = 0;
 
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_bios_table_req* request =
         reinterpret_cast<struct pldm_get_bios_table_req*>(req->payload);
 
@@ -443,7 +443,7 @@ TEST(GetBIOSTable, testBadDecodeRequest)
     uint8_t retTransferOpFlag = 0;
     uint8_t retTableType = 0;
 
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_bios_table_req* request =
         reinterpret_cast<struct pldm_get_bios_table_req*>(req->payload);
 
@@ -499,7 +499,7 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testGoodDecodeRequest)
                             sizeof(transferOpFlag) + sizeof(attributehandle)>
         requestMsg{};
 
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_bios_attribute_current_value_by_handle_req* request =
         reinterpret_cast<
             struct pldm_get_bios_attribute_current_value_by_handle_req*>(
@@ -532,7 +532,7 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testBadDecodeRequest)
                             sizeof(transferOpFlag) + sizeof(attribute_handle)>
         requestMsg{};
 
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_bios_attribute_current_value_by_handle_req* request =
         reinterpret_cast<
             struct pldm_get_bios_attribute_current_value_by_handle_req*>(
@@ -565,7 +565,7 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testGoodEncodeRequest)
     uint8_t transferOpFlag = PLDM_GET_FIRSTPART;
     uint8_t attributeHandle = 10;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_get_bios_attribute_current_value_by_handle_req(
         0, transferHandle, transferOpFlag, attributeHandle, request);
 
@@ -604,7 +604,7 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testGoodEncodeResponse)
                hdrSize +
                    sizeof(pldm_get_bios_attribute_current_value_by_handle_resp)>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_get_bios_current_value_by_handle_resp(
         instanceId, completionCode, nextTransferHandle, transferFlag,
@@ -639,7 +639,7 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testBadEncodeResponse)
                hdrSize +
                    sizeof(pldm_get_bios_attribute_current_value_by_handle_resp)>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     rc = encode_get_bios_current_value_by_handle_resp(
         0, PLDM_SUCCESS, nextTransferHandle, transferFlag, nullptr,
         sizeof(attributeData), response);
@@ -655,7 +655,7 @@ TEST(SetBiosAttributeCurrentValue, testGoodEncodeRequest)
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES +
                             sizeof(attributeData)>
         requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_set_bios_attribute_current_value_req(
         instanceId, transferHandle, transferFlag,
         reinterpret_cast<uint8_t*>(&attributeData), sizeof(attributeData),
@@ -680,7 +680,7 @@ TEST(SetBiosAttributeCurrentValue, testBadEncodeRequest)
     uint32_t attributeData = 44;
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES>
         requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_bios_attribute_current_value_req(
         instanceId, transferHandle, transferFlag, nullptr, 0, nullptr, 0);
@@ -702,7 +702,7 @@ TEST(SetBiosAttributeCurrentValue, testGoodDecodeRequest)
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES +
                             sizeof(attributeData)>
         requestMsg{};
-    auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
     struct pldm_set_bios_attribute_current_value_req* req =
         reinterpret_cast<struct pldm_set_bios_attribute_current_value_req*>(
             request->payload);
@@ -731,7 +731,7 @@ TEST(SetBiosAttributeCurrentValue, testBadDecodeRequest)
     struct variable_field attribute;
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES - 1>
         requestMsg{};
-    auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
 
     auto rc = decode_set_bios_attribute_current_value_req(
         nullptr, 0, &transferHandle, &transferFlag, &attribute);
@@ -912,7 +912,7 @@ TEST(SetBIOSTable, testGoodEncodeRequest)
     std::array<uint8_t,
                hdrSize + PLDM_SET_BIOS_TABLE_MIN_REQ_BYTES + sizeof(tableData)>
         requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_set_bios_table_req(
         instanceId, transferHandle, transferFlag, tableType,
         reinterpret_cast<uint8_t*>(&tableData), sizeof(tableData), request,
@@ -939,7 +939,7 @@ TEST(SetBIOSTable, testBadEncodeRequest)
     std::array<uint8_t,
                hdrSize + PLDM_SET_BIOS_TABLE_MIN_REQ_BYTES + sizeof(tableData)>
         requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_bios_table_req(
         instanceId, transferHandle, transferFlag, tableType, NULL,
@@ -1037,7 +1037,7 @@ TEST(SetBIOSTable, testGoodDecodeRequest)
     std::array<uint8_t,
                hdrSize + PLDM_SET_BIOS_TABLE_MIN_REQ_BYTES + sizeof(tableData)>
         requestMsg{};
-    auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
     struct pldm_set_bios_table_req* req =
         reinterpret_cast<struct pldm_set_bios_table_req*>(request->payload);
     req->transfer_handle = htole32(transferHandle);
@@ -1071,7 +1071,7 @@ TEST(SetBIOSTable, testBadDecodeRequest)
     std::array<uint8_t,
                hdrSize + PLDM_SET_BIOS_TABLE_MIN_REQ_BYTES + sizeof(tableData)>
         requestMsg{};
-    auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
     struct pldm_set_bios_table_req* req =
         reinterpret_cast<struct pldm_set_bios_table_req*>(request->payload);
     req->transfer_handle = htole32(transferHandle);

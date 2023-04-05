@@ -18,7 +18,7 @@ TEST(SetStateEffecterStates, testEncodeResponse)
     std::array<uint8_t,
                sizeof(pldm_msg_hdr) + PLDM_SET_STATE_EFFECTER_STATES_RESP_BYTES>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t completionCode = 0;
 
     auto rc = encode_set_state_effecter_states_resp(0, PLDM_SUCCESS, response);
@@ -32,7 +32,7 @@ TEST(SetStateEffecterStates, testEncodeRequest)
     std::array<uint8_t,
                sizeof(pldm_msg_hdr) + PLDM_SET_STATE_EFFECTER_STATES_REQ_BYTES>
         requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     uint16_t effecterId = 0x0A;
     uint8_t compEffecterCnt = 0x2;
@@ -69,7 +69,7 @@ TEST(SetStateEffecterStates, testGoodDecodeResponse)
 
     responseMsg[hdrSize] = PLDM_SUCCESS;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_set_state_effecter_states_resp(
         response, responseMsg.size() - hdrSize, &retcompletion_code);
@@ -103,7 +103,7 @@ TEST(SetStateEffecterStates, testGoodDecodeRequest)
                hdrSize,
            &stateField, sizeof(stateField));
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = decode_set_state_effecter_states_req(
         request, requestMsg.size() - hdrSize, &retEffecterId,
@@ -133,7 +133,7 @@ TEST(SetStateEffecterStates, testBadDecodeResponse)
     std::array<uint8_t, PLDM_SET_STATE_EFFECTER_STATES_RESP_BYTES>
         responseMsg{};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_set_state_effecter_states_resp(response,
                                                     responseMsg.size(), NULL);
@@ -154,7 +154,7 @@ TEST(GetPDR, testGoodEncodeResponse)
     // + size of record data and transfer CRC
     std::vector<uint8_t> responseMsg(hdrSize + PLDM_GET_PDR_MIN_RESP_BYTES +
                                      recordData.size() + 1);
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_get_pdr_resp(0, PLDM_SUCCESS, nextRecordHndl,
                                   nextDataTransferHndl, transferFlag, respCnt,
@@ -215,7 +215,7 @@ TEST(GetPDR, testGoodDecodeRequest)
     uint16_t retRequestCnt = 0;
     uint16_t retRecordChangeNum = 0;
 
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_pdr_req* request =
         reinterpret_cast<struct pldm_get_pdr_req*>(req->payload);
 
@@ -240,7 +240,7 @@ TEST(GetPDR, testGoodDecodeRequest)
 TEST(GetPDR, testBadDecodeRequest)
 {
     std::array<uint8_t, PLDM_GET_PDR_REQ_BYTES> requestMsg{};
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* req = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = decode_get_pdr_req(req, requestMsg.size(), NULL, NULL, NULL, NULL,
                                  NULL);
@@ -257,7 +257,7 @@ TEST(GetPDR, testGoodEncodeRequest)
     uint16_t record_chg_num = 0;
 
     std::vector<uint8_t> requestMsg(hdrSize + PLDM_GET_PDR_REQ_BYTES);
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_get_pdr_req(0, record_hndl, data_transfer_hndl,
                                  transfer_op_flag, request_cnt, record_chg_num,
@@ -281,7 +281,7 @@ TEST(GetPDR, testBadEncodeRequest)
     uint16_t record_chg_num = 0;
 
     std::vector<uint8_t> requestMsg(hdrSize + PLDM_GET_PDR_REQ_BYTES);
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_get_pdr_req(0, record_hndl, data_transfer_hndl,
                                  transfer_op_flag, request_cnt, record_chg_num,
@@ -316,7 +316,7 @@ TEST(GetPDR, testGoodDecodeResponse)
     uint16_t retRespCnt = 0;
     uint8_t retTransferCRC = 0;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_pdr_resp* resp =
         reinterpret_cast<struct pldm_get_pdr_resp*>(response->payload);
     resp->completion_code = completionCode;
@@ -363,7 +363,7 @@ TEST(GetPDR, testBadDecodeResponse)
     uint16_t retRespCnt = 0;
     uint8_t retTransferCRC = 0;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_pdr_resp* resp =
         reinterpret_cast<struct pldm_get_pdr_resp*>(response->payload);
     resp->completion_code = completionCode;
@@ -398,7 +398,7 @@ TEST(GetPDRRepositoryInfo, testGoodEncodeResponse)
 
     std::vector<uint8_t> responseMsg(hdrSize +
                                      PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES);
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_get_pdr_repository_info_resp(
         0, PLDM_SUCCESS, repositoryState, updateTime, oemUpdateTime,
@@ -451,7 +451,7 @@ TEST(GetPDRRepositoryInfo, testGoodDecodeResponse)
 
     std::array<uint8_t, hdrSize + PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_pdr_repository_info_resp* resp =
         reinterpret_cast<struct pldm_pdr_repository_info_resp*>(
             response->payload);
@@ -504,7 +504,7 @@ TEST(GetPDRRepositoryInfo, testBadDecodeResponse)
 
     std::array<uint8_t, hdrSize + PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_pdr_repository_info_resp* resp =
         reinterpret_cast<struct pldm_pdr_repository_info_resp*>(
             response->payload);
@@ -561,7 +561,7 @@ TEST(SetNumericEffecterValue, testGoodDecodeRequest)
     uint8_t reteffecter_data_size;
     uint8_t reteffecter_value[4];
 
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_numeric_effecter_value_req* request =
         reinterpret_cast<struct pldm_set_numeric_effecter_value_req*>(
             req->payload);
@@ -600,7 +600,7 @@ TEST(SetNumericEffecterValue, testBadDecodeRequest)
     uint8_t reteffecter_data_size;
     uint8_t reteffecter_value[4];
 
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_numeric_effecter_value_req* request =
         reinterpret_cast<struct pldm_set_numeric_effecter_value_req*>(
             req->payload);
@@ -623,7 +623,7 @@ TEST(SetNumericEffecterValue, testGoodEncodeRequest)
 
     std::vector<uint8_t> requestMsg(
         hdrSize + PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 1);
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_numeric_effecter_value_req(
         0, effecter_id, effecter_data_size,
@@ -645,7 +645,7 @@ TEST(SetNumericEffecterValue, testBadEncodeRequest)
 {
     std::vector<uint8_t> requestMsg(
         hdrSize + PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES);
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_numeric_effecter_value_req(
         0, 0, 0, NULL, NULL, PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES);
@@ -670,7 +670,7 @@ TEST(SetNumericEffecterValue, testGoodDecodeResponse)
     memcpy(responseMsg.data() + hdrSize, &completion_code,
            sizeof(completion_code));
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_set_numeric_effecter_value_resp(
         response, responseMsg.size() - hdrSize, &retcompletion_code);
@@ -684,7 +684,7 @@ TEST(SetNumericEffecterValue, testBadDecodeResponse)
     std::array<uint8_t, PLDM_SET_NUMERIC_EFFECTER_VALUE_RESP_BYTES>
         responseMsg{};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_set_numeric_effecter_value_resp(response,
                                                      responseMsg.size(), NULL);
@@ -697,7 +697,7 @@ TEST(SetNumericEffecterValue, testGoodEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) +
                             PLDM_SET_NUMERIC_EFFECTER_VALUE_RESP_BYTES>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t completionCode = 0;
 
     auto rc = encode_set_numeric_effecter_value_resp(
@@ -721,7 +721,7 @@ TEST(GetStateSensorReadings, testGoodEncodeResponse)
                             sizeof(get_sensor_state_field) * 2>
         responseMsg{};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t completionCode = 0;
     uint8_t comp_sensorCnt = 0x2;
 
@@ -779,7 +779,7 @@ TEST(GetStateSensorReadings, testGoodDecodeResponse)
     uint8_t retcomp_sensorCnt = 0;
     std::array<get_sensor_state_field, 2> retstateField{};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_state_sensor_readings_resp* resp =
         reinterpret_cast<struct pldm_get_state_sensor_readings_resp*>(
             response->payload);
@@ -813,7 +813,7 @@ TEST(GetStateSensorReadings, testBadDecodeResponse)
                             sizeof(get_sensor_state_field) * 2>
         responseMsg{};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_state_sensor_readings_resp(
         response, responseMsg.size() - hdrSize, nullptr, nullptr, nullptr);
@@ -856,7 +856,7 @@ TEST(GetStateSensorReadings, testGoodEncodeRequest)
     bitfield8_t sensorRearm;
     sensorRearm.byte = 0x03;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_get_state_sensor_readings_req(0, sensorId, sensorRearm, 0,
                                                    request);
 
@@ -893,7 +893,7 @@ TEST(GetStateSensorReadings, testGoodDecodeRequest)
     bitfield8_t retsensorRearm;
     uint8_t retreserved;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     struct pldm_get_state_sensor_readings_req* req =
         reinterpret_cast<struct pldm_get_state_sensor_readings_req*>(
@@ -929,7 +929,7 @@ TEST(GetStateSensorReadings, testBadDecodeRequest)
     bitfield8_t retsensorRearm;
     uint8_t retreserved;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     struct pldm_get_state_sensor_readings_req* req =
         reinterpret_cast<struct pldm_get_state_sensor_readings_req*>(
@@ -951,7 +951,7 @@ TEST(EventMessageBufferSize, testGoodEventMessageBufferSizeRequest)
 
     std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_BUFFER_SIZE_REQ_BYTES>
         requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_event_message_buffer_size_req(0, eventBufferSize, request);
 
@@ -969,7 +969,7 @@ TEST(EventMessageBufferSize, testGoodEventMessageBufferSizeResponse)
     uint8_t retCompletionCode;
     uint16_t retMaxBufferSize = 0;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_event_message_buffer_size_resp* resp =
         reinterpret_cast<struct pldm_event_message_buffer_size_resp*>(
             response->payload);
@@ -997,7 +997,7 @@ TEST(EventMessageBufferSize, testBadEventMessageBufferSizeResponse)
     uint8_t retCompletionCode;
     uint16_t retMaxBufferSize = 0;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_event_message_buffer_size_resp* resp =
         reinterpret_cast<struct pldm_event_message_buffer_size_resp*>(
             response->payload);
@@ -1020,7 +1020,7 @@ TEST(PlatformEventMessageSupported, testGoodEncodeRequest)
     std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES>
         requestMsg{};
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_event_message_supported_req(0, formatVersion, request);
 
@@ -1040,7 +1040,7 @@ TEST(PlatformEventMessageSupported, testBadEncodeRequest)
     std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES +
                             sizeof(eventData)>
         requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_event_message_supported_req(0, formatVersion, request);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
@@ -1069,7 +1069,7 @@ TEST(PlatformEventMessageSupported, testGoodDecodeRespond)
     bitfield8_t retSynchConfigSupport;
     uint8_t retEventClass[eventClassCount] = {0};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_event_message_supported_resp* resp =
         reinterpret_cast<struct pldm_event_message_supported_resp*>(
             response->payload);
@@ -1114,7 +1114,7 @@ TEST(PlatformEventMessageSupported, testBadSynchConfiguration)
     bitfield8_t retSynchConfigSupport;
     uint8_t retEventClass[eventClassCount] = {0};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_event_message_supported_resp* resp =
         reinterpret_cast<struct pldm_event_message_supported_resp*>(
             response->payload);
@@ -1153,7 +1153,7 @@ TEST(PlatformEventMessageSupported, testBadDecodeRespond)
     bitfield8_t retSynchConfigSupport;
     uint8_t retEventClass[eventClassCount] = {0};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_event_message_supported_resp* resp =
         reinterpret_cast<struct pldm_event_message_supported_resp*>(
             response->payload);
@@ -1192,7 +1192,7 @@ TEST(PlatformEventMessage, testGoodStateSensorDecodeRequest)
     uint8_t retEventClass = 0;
     size_t retEventDataOffset = 0;
 
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_platform_event_message_req* request =
         reinterpret_cast<struct pldm_platform_event_message_req*>(req->payload);
 
@@ -1225,7 +1225,7 @@ TEST(PlatformEventMessage, testBadDecodeRequest)
                hdrSize + PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES +
                    PLDM_PLATFORM_EVENT_MESSAGE_STATE_SENSOR_STATE_REQ_BYTES - 1>
         requestMsg{};
-    auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     uint8_t retFormatVersion;
     uint8_t retTid = 0;
     uint8_t retEventClass = 0;
@@ -1249,7 +1249,7 @@ TEST(PlatformEventMessage, testGoodEncodeResponse)
                hdrSize + PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES +
                    PLDM_PLATFORM_EVENT_MESSAGE_STATE_SENSOR_STATE_REQ_BYTES - 1>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t completionCode = 0;
     uint8_t instanceId = 0x01;
     uint8_t platformEventStatus = 0x01;
@@ -1279,7 +1279,7 @@ TEST(PlatformEventMessage, testGoodEncodeRequest)
                             sizeof(eventData)>
         requestMsg{};
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_platform_event_message_req(
         0, formatVersion, Tid, eventClass,
         reinterpret_cast<uint8_t*>(&eventData), sizeof(eventData), request,
@@ -1309,7 +1309,7 @@ TEST(PlatformEventMessage, testBadEncodeRequest)
     std::array<uint8_t, hdrSize + PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES +
                             sizeof(eventData)>
         requestMsg{};
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_platform_event_message_req(
         0, formatVersion, Tid, eventClass,
@@ -1340,7 +1340,7 @@ TEST(PlatformEventMessage, testGoodDecodeResponse)
     uint8_t retcompletionCode;
     uint8_t retplatformEventStatus;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_platform_event_message_resp* resp =
         reinterpret_cast<struct pldm_platform_event_message_resp*>(
             response->payload);
@@ -1365,7 +1365,7 @@ TEST(PlatformEventMessage, testBadDecodeResponse)
     uint8_t completionCode = PLDM_SUCCESS;
     uint8_t platformEventStatus = 0x01;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_platform_event_message_resp* resp =
         reinterpret_cast<struct pldm_platform_event_message_resp*>(
             response->payload);
@@ -1656,7 +1656,7 @@ TEST(GetNumericEffecterValue, testGoodEncodeRequest)
 
     uint16_t effecter_id = 0xAB01;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_get_numeric_effecter_value_req(0, effecter_id, request);
 
@@ -1682,7 +1682,7 @@ TEST(GetNumericEffecterValue, testGoodDecodeRequest)
     std::array<uint8_t, hdrSize + PLDM_GET_NUMERIC_EFFECTER_VALUE_REQ_BYTES>
         requestMsg{};
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_numeric_effecter_value_req* req =
         reinterpret_cast<struct pldm_get_numeric_effecter_value_req*>(
             request->payload);
@@ -1709,7 +1709,7 @@ TEST(GetNumericEffecterValue, testBadDecodeRequest)
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_numeric_effecter_value_req* req =
         reinterpret_cast<struct pldm_set_numeric_effecter_value_req*>(
             request->payload);
@@ -1735,7 +1735,7 @@ TEST(GetNumericEffecterValue, testGoodEncodeResponse)
     std::array<uint8_t,
                hdrSize + PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 6>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_get_numeric_effecter_value_resp(
         0, completionCode, effecter_dataSize, effecter_operState,
@@ -1764,7 +1764,7 @@ TEST(GetNumericEffecterValue, testBadEncodeResponse)
     std::array<uint8_t,
                hdrSize + PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 2>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t pendingValue = 0x01;
     uint8_t presentValue = 0x02;
@@ -1809,7 +1809,7 @@ TEST(GetNumericEffecterValue, testGoodDecodeResponse)
     uint8_t retpendingValue[2];
     uint8_t retpresentValue[2];
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_numeric_effecter_value_resp* resp =
         reinterpret_cast<struct pldm_get_numeric_effecter_value_resp*>(
             response->payload);
@@ -1862,7 +1862,7 @@ TEST(GetNumericEffecterValue, testBadDecodeResponse)
     uint8_t retpendingValue[2];
     uint8_t retpresentValue[2];
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_numeric_effecter_value_resp* resp =
         reinterpret_cast<struct pldm_get_numeric_effecter_value_resp*>(
             response->payload);
@@ -2011,7 +2011,7 @@ TEST(GetSensorReading, testGoodEncodeRequest)
     uint16_t sensorId = 0x1234;
     bool8_t rearmEventState = 0x01;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc =
         encode_get_sensor_reading_req(0, sensorId, rearmEventState, request);
 
@@ -2041,7 +2041,7 @@ TEST(GetSensorReading, testGoodDecodeRequest)
     uint16_t retsensorId;
     bool8_t retrearmEventState;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     struct pldm_get_sensor_reading_req* req =
         reinterpret_cast<struct pldm_get_sensor_reading_req*>(request->payload);
@@ -2073,7 +2073,7 @@ TEST(GetSensorReading, testBadDecodeRequest)
     uint16_t retsensorId;
     bool8_t retrearmEventState;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     struct pldm_get_sensor_reading_req* req =
         reinterpret_cast<struct pldm_get_sensor_reading_req*>(request->payload);
@@ -2092,7 +2092,7 @@ TEST(GetSensorReading, testGoodEncodeResponse)
     std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES>
         responseMsg{};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t completionCode = 0;
     uint8_t sensor_dataSize = PLDM_EFFECTER_DATA_SIZE_UINT8;
@@ -2130,7 +2130,7 @@ TEST(GetSensorReading, testBadEncodeResponse)
     std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 3>
         responseMsg{};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t presentReading = 0x1;
 
@@ -2177,7 +2177,7 @@ TEST(GetSensorReading, testGoodDecodeResponse)
     uint8_t reteventState;
     uint8_t retpresentReading[4];
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_sensor_reading_resp* resp =
         reinterpret_cast<struct pldm_get_sensor_reading_resp*>(
             response->payload);
@@ -2241,7 +2241,7 @@ TEST(GetSensorReading, testBadDecodeResponse)
     uint8_t retevent_state;
     uint8_t retpresentReading;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_sensor_reading_resp* resp =
         reinterpret_cast<struct pldm_get_sensor_reading_resp*>(
             response->payload);
@@ -2274,7 +2274,7 @@ TEST(SetEventReceiver, testGoodEncodeRequest)
 
     std::vector<uint8_t> requestMsg(hdrSize +
                                     PLDM_SET_EVENT_RECEIVER_REQ_BYTES);
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_event_receiver_req(
         0, eventMessageGlobalEnable, transportProtocolType,
@@ -2299,7 +2299,7 @@ TEST(SetEventReceiver, testBadEncodeRequest)
 
     std::vector<uint8_t> requestMsg(hdrSize +
                                     PLDM_SET_EVENT_RECEIVER_REQ_BYTES);
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_event_receiver_req(
         0, eventMessageGlobalEnable, transportProtocolType,
@@ -2316,7 +2316,7 @@ TEST(SetEventReceiver, testGoodDecodeResponse)
     uint8_t retcompletion_code = 0;
     responseMsg[hdrSize] = PLDM_SUCCESS;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     auto rc = decode_set_event_receiver_resp(
         response, responseMsg.size() - sizeof(pldm_msg_hdr),
         &retcompletion_code);
@@ -2330,7 +2330,7 @@ TEST(SetEventReceiver, testBadDecodeResponse)
     std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_RESP_BYTES>
         responseMsg{};
     uint8_t retcompletion_code = 0;
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_set_event_receiver_resp(
         response, responseMsg.size() - sizeof(pldm_msg_hdr), NULL);
@@ -2349,7 +2349,7 @@ TEST(SetEventReceiver, testGoodEncodeResponse)
     std::array<uint8_t,
                sizeof(pldm_msg_hdr) + PLDM_SET_EVENT_RECEIVER_RESP_BYTES>
         responseMsg{};
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t completionCode = 0;
 
     auto rc = encode_set_event_receiver_resp(0, PLDM_SUCCESS, response);
@@ -2376,7 +2376,7 @@ TEST(SetEventReceiver, testGoodDecodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0x78;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_event_receiver_req* req =
         reinterpret_cast<struct pldm_set_event_receiver_req*>(request->payload);
 
@@ -2416,7 +2416,7 @@ TEST(SetEventReceiver, testBadDecodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0x78;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_event_receiver_req* req =
         reinterpret_cast<struct pldm_set_event_receiver_req*>(request->payload);
 

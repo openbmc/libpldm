@@ -49,7 +49,7 @@ TEST(AttrTable, HeaderDecodeTest)
         1,    /* number of default value */
         0     /* defaut value string handle index */
     };
-    auto entry =
+    auto* entry =
         reinterpret_cast<struct pldm_bios_attr_table_entry*>(enumEntry.data());
     auto attrHandle = pldm_bios_table_attr_entry_decode_attribute_handle(entry);
     EXPECT_EQ(attrHandle, 2);
@@ -72,7 +72,7 @@ TEST(AttrTable, EnumEntryDecodeTest)
         1     /* defaut value string handle index */
     };
 
-    auto entry =
+    auto* entry =
         reinterpret_cast<struct pldm_bios_attr_table_entry*>(enumEntry.data());
     uint8_t pvNumber = pldm_bios_table_attr_entry_enum_decode_pv_num(entry);
     EXPECT_EQ(pvNumber, 2);
@@ -201,7 +201,7 @@ TEST(AttrTable, StringEntryDecodeTest)
         'a', 'b', 'c' /* default string  */
     };
 
-    auto entry = reinterpret_cast<struct pldm_bios_attr_table_entry*>(
+    auto* entry = reinterpret_cast<struct pldm_bios_attr_table_entry*>(
         stringEntry.data());
     auto stringType =
         pldm_bios_table_attr_entry_string_decode_string_type(entry);
@@ -410,7 +410,7 @@ TEST(AttrTable, integerEntryDecodeTest)
     uint64_t upper;
     uint64_t def;
     uint32_t scalar;
-    auto entry = reinterpret_cast<struct pldm_bios_attr_table_entry*>(
+    auto* entry = reinterpret_cast<struct pldm_bios_attr_table_entry*>(
         integerEntry.data());
     pldm_bios_table_attr_entry_integer_decode(entry, &lower, &upper, &scalar,
                                               &def);
@@ -454,9 +454,9 @@ TEST(AttrTable, ItearatorTest)
 
     Table table;
     buildTable(table, enumEntry, stringEntry, integerEntry, enumEntry);
-    auto iter = pldm_bios_table_iter_create(table.data(), table.size(),
-                                            PLDM_BIOS_ATTR_TABLE);
-    auto entry = pldm_bios_table_iter_attr_entry_value(iter);
+    auto* iter = pldm_bios_table_iter_create(table.data(), table.size(),
+                                             PLDM_BIOS_ATTR_TABLE);
+    const auto* entry = pldm_bios_table_iter_attr_entry_value(iter);
     auto rc = std::memcmp(entry, enumEntry.data(), enumEntry.size());
     EXPECT_EQ(rc, 0);
 
@@ -515,10 +515,10 @@ TEST(AttrTable, FindTest)
     Table table;
     buildTable(table, enumEntry, stringEntry, integerEntry, enumEntry);
 
-    auto entry =
+    const auto* entry =
         pldm_bios_table_attr_find_by_handle(table.data(), table.size(), 1);
     EXPECT_NE(entry, nullptr);
-    auto p = reinterpret_cast<const uint8_t*>(entry);
+    const auto* p = reinterpret_cast<const uint8_t*>(entry);
     EXPECT_THAT(std::vector<uint8_t>(p, p + stringEntry.size()),
                 ElementsAreArray(stringEntry));
 
@@ -546,7 +546,7 @@ TEST(AttrValTable, HeaderDecodeTest)
         0,    /* current value string handle index */
         1,    /* current value string handle index */
     };
-    auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
+    auto* entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         enumEntry.data());
     auto attrHandle =
         pldm_bios_table_attr_value_entry_decode_attribute_handle(entry);
@@ -584,7 +584,7 @@ TEST(AttrValTable, EnumEntryEncodeTest)
         handles);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, enumEntry);
-    auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
+    auto* entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         enumEntry.data());
     entry->attr_type = PLDM_BIOS_ENUMERATION_READ_ONLY;
     rc = pldm_bios_table_attr_value_entry_encode_enum_check(
@@ -612,7 +612,7 @@ TEST(AttrValTable, EnumEntryDecodeTest)
         1,    /* current value string handle index */
     };
 
-    auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
+    auto* entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         enumEntry.data());
     auto number = pldm_bios_table_attr_value_entry_enum_decode_number(entry);
     EXPECT_EQ(2, number);
@@ -650,7 +650,7 @@ TEST(AttrValTable, stringEntryEncodeTest)
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_STRING, 3, "abc");
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, stringEntry);
-    auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
+    auto* entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         stringEntry.data());
     entry->attr_type = PLDM_BIOS_STRING_READ_ONLY;
     rc = pldm_bios_table_attr_value_entry_encode_string_check(
@@ -677,7 +677,7 @@ TEST(AttrValTable, StringEntryDecodeTest)
         'a', 'b', 'c', /* defaut value string handle index */
     };
 
-    auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
+    auto* entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         stringEntry.data());
     auto length = pldm_bios_table_attr_value_entry_string_decode_length(entry);
     EXPECT_EQ(3, length);
@@ -720,7 +720,7 @@ TEST(AttrValTable, integerEntryEncodeTest)
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_INTEGER, 10);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, integerEntry);
-    auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
+    auto* entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         integerEntry.data());
     entry->attr_type = PLDM_BIOS_INTEGER_READ_ONLY;
     rc = pldm_bios_table_attr_value_entry_encode_integer_check(
@@ -746,7 +746,7 @@ TEST(AttrValTable, integerEntryDecodeTest)
         10, 0, 0, 0, 0, 0, 0, 0, /* current value */
     };
 
-    auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
+    auto* entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         integerEntry.data());
     auto cv = pldm_bios_table_attr_value_entry_integer_decode_cv(entry);
     EXPECT_EQ(cv, 10u);
@@ -776,11 +776,11 @@ TEST(AttrValTable, IteratorTest)
     Table table;
     buildTable(table, enumEntry, stringEntry, integerEntry, enumEntry);
 
-    auto iter = pldm_bios_table_iter_create(table.data(), table.size(),
-                                            PLDM_BIOS_ATTR_VAL_TABLE);
-    auto entry = pldm_bios_table_iter_attr_value_entry_value(iter);
+    auto* iter = pldm_bios_table_iter_create(table.data(), table.size(),
+                                             PLDM_BIOS_ATTR_VAL_TABLE);
+    const auto* entry = pldm_bios_table_iter_attr_value_entry_value(iter);
 
-    auto p = reinterpret_cast<const uint8_t*>(entry);
+    const auto* p = reinterpret_cast<const uint8_t*>(entry);
     EXPECT_THAT(std::vector<uint8_t>(p, p + enumEntry.size()),
                 ElementsAreArray(enumEntry));
 
@@ -832,10 +832,10 @@ TEST(AttrValTable, FindTest)
     Table table;
     buildTable(table, enumEntry, stringEntry, integerEntry);
 
-    auto entry = pldm_bios_table_attr_value_find_by_handle(table.data(),
-                                                           table.size(), 1);
+    const auto* entry = pldm_bios_table_attr_value_find_by_handle(
+        table.data(), table.size(), 1);
     EXPECT_NE(entry, nullptr);
-    auto p = reinterpret_cast<const uint8_t*>(entry);
+    const auto* p = reinterpret_cast<const uint8_t*>(entry);
     EXPECT_THAT(std::vector<uint8_t>(p, p + stringEntry.size()),
                 ElementsAreArray(stringEntry));
 
@@ -843,7 +843,7 @@ TEST(AttrValTable, FindTest)
                                                       table.size(), 3);
     EXPECT_EQ(entry, nullptr);
 
-    auto firstEntry =
+    auto* firstEntry =
         reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(table.data());
     firstEntry->attr_type = PLDM_BIOS_PASSWORD;
     EXPECT_DEATH(pldm_bios_table_attr_value_find_by_handle(table.data(),
@@ -984,7 +984,7 @@ TEST(StringTable, EntryDecodeTest)
         7,   0,                            /* string length */
         'A', 'l', 'l', 'o', 'w', 'e', 'd', /* string */
     };
-    auto entry = reinterpret_cast<struct pldm_bios_string_table_entry*>(
+    auto* entry = reinterpret_cast<struct pldm_bios_string_table_entry*>(
         stringEntry.data());
     auto handle = pldm_bios_table_string_entry_decode_handle(entry);
     EXPECT_EQ(handle, 4);
@@ -1027,9 +1027,9 @@ TEST(StringTable, IteratorTest)
     Table table;
     buildTable(table, stringHello, stringWorld);
 
-    auto iter = pldm_bios_table_iter_create(table.data(), table.size(),
-                                            PLDM_BIOS_STRING_TABLE);
-    auto entry = pldm_bios_table_iter_string_entry_value(iter);
+    auto* iter = pldm_bios_table_iter_create(table.data(), table.size(),
+                                             PLDM_BIOS_STRING_TABLE);
+    const auto* entry = pldm_bios_table_iter_string_entry_value(iter);
     auto rc = std::memcmp(entry, stringHello.data(), stringHello.size());
     EXPECT_EQ(rc, 0);
     pldm_bios_table_iter_next(iter);
@@ -1062,8 +1062,8 @@ TEST(StringTable, FindTest)
     Table table;
     buildTable(table, stringHello, stringWorld, stringHi);
 
-    auto entry = pldm_bios_table_string_find_by_string(table.data(),
-                                                       table.size(), "World!");
+    const auto* entry = pldm_bios_table_string_find_by_string(
+        table.data(), table.size(), "World!");
     EXPECT_NE(entry, nullptr);
     auto handle = pldm_bios_table_string_entry_decode_handle(entry);
     EXPECT_EQ(handle, 2);
@@ -1094,10 +1094,10 @@ TEST(Itearator, DeathTest)
     Table table(256, 0);
 
     /* first entry */
-    auto attr_entry =
+    auto* attr_entry =
         reinterpret_cast<struct pldm_bios_attr_table_entry*>(table.data());
-    auto iter = pldm_bios_table_iter_create(table.data(), table.size(),
-                                            PLDM_BIOS_ATTR_TABLE);
+    auto* iter = pldm_bios_table_iter_create(table.data(), table.size(),
+                                             PLDM_BIOS_ATTR_TABLE);
     attr_entry->attr_type = PLDM_BIOS_PASSWORD;
     EXPECT_DEATH(pldm_bios_table_iter_next(iter), "attr_table_entry != NULL");
     pldm_bios_table_iter_free(iter);
