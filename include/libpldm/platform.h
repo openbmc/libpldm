@@ -1175,8 +1175,8 @@ int decode_get_numeric_effecter_value_req(const struct pldm_msg *msg,
  */
 int encode_get_numeric_effecter_value_resp(
     uint8_t instance_id, uint8_t completion_code, uint8_t effecter_data_size,
-    uint8_t effecter_oper_state, uint8_t *pending_value, uint8_t *present_value,
-    struct pldm_msg *msg, size_t payload_length);
+    uint8_t effecter_oper_state, const uint8_t *pending_value,
+    const uint8_t *present_value, struct pldm_msg *msg, size_t payload_length);
 
 /* GetSensorReading */
 
@@ -1217,11 +1217,14 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
  *  @return pldm_completion_codes
  */
 
-int encode_get_sensor_reading_resp(
-    uint8_t instance_id, uint8_t completion_code, uint8_t sensor_data_size,
-    uint8_t sensor_operational_state, uint8_t sensor_event_message_enable,
-    uint8_t present_state, uint8_t previous_state, uint8_t event_state,
-    uint8_t *present_reading, struct pldm_msg *msg, size_t payload_length);
+int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
+				   uint8_t sensor_data_size,
+				   uint8_t sensor_operational_state,
+				   uint8_t sensor_event_message_enable,
+				   uint8_t present_state,
+				   uint8_t previous_state, uint8_t event_state,
+				   const uint8_t *present_reading,
+				   struct pldm_msg *msg, size_t payload_length);
 
 /* Requester */
 
@@ -1395,7 +1398,7 @@ int decode_set_state_effecter_states_resp(const struct pldm_msg *msg,
  */
 int encode_set_numeric_effecter_value_req(
     uint8_t instance_id, uint16_t effecter_id, uint8_t effecter_data_size,
-    uint8_t *effecter_value, struct pldm_msg *msg, size_t payload_length);
+    const uint8_t *effecter_value, struct pldm_msg *msg, size_t payload_length);
 
 /** @brief Decode SetNumericEffecterValue response data
  *  @param[in] msg - Request message
