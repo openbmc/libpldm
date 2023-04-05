@@ -16,6 +16,24 @@
       "message": "Well, annoyingly, you\u0027re now going to break C++ code trying to use libpldm and clang-tidy due to:\n\nhttps://clang.llvm.org/extra/clang-tidy/checks/modernize/redundant-void-arg.html\n\nDo we have to add a stupid macro for this?",
       "revId": "319304fd8a5b32e1e349d3fca9884da991cbc5ac",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3569816_70b3a27a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-05T22:40:48Z",
+      "side": 1,
+      "message": "I don\u0027t follow how that\u0027s going to break other projects. Other projects shouldn\u0027t be sanitizing libpldm interfaces.",
+      "parentUuid": "ac4926c3_14870059",
+      "revId": "319304fd8a5b32e1e349d3fca9884da991cbc5ac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
