@@ -61,38 +61,36 @@ static pldm_requester_rc_t mctp_recv(mctp_eid_t eid, int mctp_fd,
 	ssize_t length = recv(mctp_fd, NULL, 0, MSG_PEEK | MSG_TRUNC);
 	if (length <= 0) {
 		return PLDM_REQUESTER_RECV_FAIL;
-	} else if (length < min_len) {
+	}
+	if (length < min_len) {
 		/* read and discard */
 		uint8_t buf[length];
 		recv(mctp_fd, buf, length, 0);
 		return PLDM_REQUESTER_INVALID_RECV_LEN;
-	} else {
-		struct iovec iov[2];
-		size_t mctp_prefix_len =
-		    sizeof(eid) + sizeof(MCTP_MSG_TYPE_PLDM);
-		uint8_t mctp_prefix[mctp_prefix_len];
-		size_t pldm_len = length - mctp_prefix_len;
-		iov[0].iov_len = mctp_prefix_len;
-		iov[0].iov_base = mctp_prefix;
-		*pldm_resp_msg = malloc(pldm_len);
-		iov[1].iov_len = pldm_len;
-		iov[1].iov_base = *pldm_resp_msg;
-		struct msghdr msg = {0};
-		msg.msg_iov = iov;
-		msg.msg_iovlen = sizeof(iov) / sizeof(iov[0]);
-		ssize_t bytes = recvmsg(mctp_fd, &msg, 0);
-		if (length != bytes) {
-			free(*pldm_resp_msg);
-			return PLDM_REQUESTER_INVALID_RECV_LEN;
-		}
-		if ((mctp_prefix[0] != eid) ||
-		    (mctp_prefix[1] != MCTP_MSG_TYPE_PLDM)) {
-			free(*pldm_resp_msg);
-			return PLDM_REQUESTER_NOT_PLDM_MSG;
-		}
-		*resp_msg_len = pldm_len;
-		return PLDM_REQUESTER_SUCCESS;
 	}
+	struct iovec iov[2];
+	size_t mctp_prefix_len = sizeof(eid) + sizeof(MCTP_MSG_TYPE_PLDM);
+	uint8_t mctp_prefix[mctp_prefix_len];
+	size_t pldm_len = length - mctp_prefix_len;
+	iov[0].iov_len = mctp_prefix_len;
+	iov[0].iov_base = mctp_prefix;
+	*pldm_resp_msg = malloc(pldm_len);
+	iov[1].iov_len = pldm_len;
+	iov[1].iov_base = *pldm_resp_msg;
+	struct msghdr msg = {0};
+	msg.msg_iov = iov;
+	msg.msg_iovlen = sizeof(iov) / sizeof(iov[0]);
+	ssize_t bytes = recvmsg(mctp_fd, &msg, 0);
+	if (length != bytes) {
+		free(*pldm_resp_msg);
+		return PLDM_REQUESTER_INVALID_RECV_LEN;
+	}
+	if ((mctp_prefix[0] != eid) || (mctp_prefix[1] != MCTP_MSG_TYPE_PLDM)) {
+		free(*pldm_resp_msg);
+		return PLDM_REQUESTER_NOT_PLDM_MSG;
+	}
+	*resp_msg_len = pldm_len;
+	return PLDM_REQUESTER_SUCCESS;
 }
 
 pldm_requester_rc_t pldm_recv_any(mctp_eid_t eid, int mctp_fd,
