@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f3c0fe6_aea1bf3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-04-05T17:41:07Z",
+      "side": 1,
+      "message": "Do we need to add a common C clang-format in docs/style?  Personally I\u0027d rather we just have a consistent one between C/C++ but for some reason we seem stuck on following kernel conventions for all C.",
+      "revId": "79bdeacf73b15eb5fe5560ea61761188bfaabb24",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
