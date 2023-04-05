@@ -85,8 +85,8 @@ int encode_state_sensor_pdr(
 	size_t calculated_possible_states_size = 0;
 
 	{
-		char *states_ptr = (char *)possible_states,
-		     *const begin_states_ptr = states_ptr;
+		char *states_ptr = (char *)possible_states;
+		char *const begin_states_ptr = states_ptr;
 
 		for (int i = 0; i < sensor->composite_sensor_count; ++i) {
 			struct state_sensor_possible_states *states =

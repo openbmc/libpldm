@@ -1090,8 +1090,11 @@ int pldm_bios_table_attr_value_copy_and_update(
 	    src_table, src_length, PLDM_BIOS_ATTR_VAL_TABLE);
 
 	int rc = PLDM_SUCCESS;
-	const struct pldm_bios_attr_val_table_entry *tmp, *to_update = entry;
-	size_t buffer_length = *dest_length, copied_length = 0, length = 0;
+	const struct pldm_bios_attr_val_table_entry *tmp;
+	const struct pldm_bios_attr_val_table_entry *to_update = entry;
+	size_t buffer_length = *dest_length;
+	size_t copied_length = 0;
+	size_t length = 0;
 	while (!pldm_bios_table_iter_is_end(iter)) {
 		tmp = pldm_bios_table_iter_attr_value_entry_value(iter);
 		length = attr_value_table_entry_length(tmp);
