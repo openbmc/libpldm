@@ -87,6 +87,24 @@
       "parentUuid": "ddfbb912_f58e03bf",
       "revId": "5fc8aa27ace837a643588c0315a4852d3b1950ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb099bf1_2ed11658",
+        "filename": "src/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-05T02:33:29Z",
+      "side": 1,
+      "message": "For what it\u0027s worth, clang-tidy reorders the includes this way:\n\n```\n2 12:02:43 andrew@fedora:~/src/openbmc/libpldm (msgbuf|REBASE 4/4) $ \\\n\u003e head src/platform.c\n#include \"msgbuf/platform.h\"\n#include \"base.h\"\n#include \"msgbuf.h\"\n#include \"platform.h\"\n#include \"pldm_types.h\"\n```",
+      "parentUuid": "177098df_82e8ef69",
+      "revId": "5fc8aa27ace837a643588c0315a4852d3b1950ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
