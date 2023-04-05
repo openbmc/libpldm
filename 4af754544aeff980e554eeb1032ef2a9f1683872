@@ -282,6 +282,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5a06d60_f7e3a5a8",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-05T02:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cde4af9c_24a46b33",
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae5b7beb_cc431df3",
@@ -733,6 +751,30 @@
       "side": 1,
       "message": "Sure. However, while often we can batch the test it via `pldm_msgbuf_destroy()`, sometimes further data is dependent on the current extraction succeeding. For instance, PLDM often uses a tag field to specify a type for subsequent variably-sized data. We need to know that we successfully extracted the tag value before we do a data-dependent branch on the tag value, otherwise we\u0027re off in undefined behaviour land. I\u0027ve updated the subsequent change from Gilbert along these lines. As an example:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/59033/19/src/platform.c#1321",
       "parentUuid": "ed116966_f7ec62bf",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 19
+      },
+      "revId": "4af754544aeff980e554eeb1032ef2a9f1683872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cbdd78d_ac6bdeeb",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-05T02:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10692677_5ea49a6c",
       "range": {
         "startLine": 93,
         "startChar": 8,
