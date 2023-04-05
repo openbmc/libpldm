@@ -110,7 +110,7 @@ uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 	return record->record_handle;
 }
 
-pldm_pdr *pldm_pdr_init()
+pldm_pdr *pldm_pdr_init(void)
 {
 	pldm_pdr *repo = malloc(sizeof(pldm_pdr));
 	assert(repo != NULL);
@@ -375,7 +375,7 @@ pldm_entity pldm_entity_extract(pldm_entity_node *node)
 	return node->entity;
 }
 
-pldm_entity_association_tree *pldm_entity_association_tree_init()
+pldm_entity_association_tree *pldm_entity_association_tree_init(void)
 {
 	pldm_entity_association_tree *tree =
 	    malloc(sizeof(pldm_entity_association_tree));

@@ -450,7 +450,7 @@ int pldm_bios_table_attr_entry_integer_info_check(
 /** @brief Get length that an attribute entry(type: integer) will take
  *  @return The length that an entry(type: integer) will take
  */
-size_t pldm_bios_table_attr_entry_integer_encode_length();
+size_t pldm_bios_table_attr_entry_integer_encode_length(void);
 
 /** @brief Create an entry of BIOS Attribute Table (type: integer)
  *  @param[out] entry - Pointer to a buffer to create an entry
@@ -617,7 +617,7 @@ int pldm_bios_table_attr_value_entry_encode_string_check(
 /** @brief Get length that an attribute value entry(type: integer) will take
  *  @return The length that an entry(type: integer) will take
  */
-size_t pldm_bios_table_attr_value_entry_encode_integer_length();
+size_t pldm_bios_table_attr_value_entry_encode_integer_length(void);
 
 /** @brief Create an attribute value entry(type: integer)
  *  @param[out] entry - Pointer to bios attribute value entry

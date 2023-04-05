@@ -32,7 +32,7 @@ typedef struct pldm_pdr_record pldm_pdr_record;
  *  for PDRs received by other entities) and can associate the returned handle
  *  to a PLDM terminus id.
  */
-pldm_pdr *pldm_pdr_init();
+pldm_pdr *pldm_pdr_init(void);
 
 /** @brief Destroy a PDR repository (and free up associated resources)
  *
@@ -239,7 +239,7 @@ typedef struct pldm_entity_node pldm_entity_node;
  *  @return opaque pointer that acts as a handle to the tree; NULL if no
  *  tree could be created
  */
-pldm_entity_association_tree *pldm_entity_association_tree_init();
+pldm_entity_association_tree *pldm_entity_association_tree_init(void);
 
 /** @brief Add an entity into the entity association tree
  *

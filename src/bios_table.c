@@ -35,7 +35,7 @@ static void set_errmsg(const char **errmsg, const char *msg)
 		*errmsg = msg;
 }
 
-static uint16_t get_bios_string_handle()
+static uint16_t get_bios_string_handle(void)
 {
 	static uint16_t handle = 0;
 	assert(handle != UINT16_MAX);
@@ -117,7 +117,7 @@ static size_t string_table_entry_length(const void *table_entry)
 	       pldm_bios_table_string_entry_decode_string_length(entry);
 }
 
-static uint16_t get_bios_attr_handle()
+static uint16_t get_bios_attr_handle(void)
 {
 	static uint16_t handle = 0;
 	assert(handle != UINT16_MAX);
@@ -458,7 +458,7 @@ struct attr_table_integer_entry_fields {
 	uint64_t default_value;
 } __attribute__((packed));
 
-size_t pldm_bios_table_attr_entry_integer_encode_length()
+size_t pldm_bios_table_attr_entry_integer_encode_length(void)
 {
 	return sizeof(struct pldm_bios_attr_table_entry) - 1 +
 	       sizeof(struct attr_table_integer_entry_fields);
@@ -743,7 +743,7 @@ static size_t attr_value_table_entry_length_string(const void *entry)
 	    str_length);
 }
 
-size_t pldm_bios_table_attr_value_entry_encode_integer_length()
+size_t pldm_bios_table_attr_value_entry_encode_integer_length(void)
 {
 	return sizeof(struct pldm_bios_attr_val_table_entry) - 1 +
 	       sizeof(uint64_t);

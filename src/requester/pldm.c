@@ -10,7 +10,7 @@
 
 const uint8_t MCTP_MSG_TYPE_PLDM = 1;
 
-pldm_requester_rc_t pldm_open()
+pldm_requester_rc_t pldm_open(void)
 {
 	int fd = -1;
 	int rc = -1;
