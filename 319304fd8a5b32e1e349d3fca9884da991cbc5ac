@@ -52,6 +52,24 @@
       "parentUuid": "c3569816_70b3a27a",
       "revId": "319304fd8a5b32e1e349d3fca9884da991cbc5ac",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b296a250_dc730cca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-05T23:01:28Z",
+      "side": 1,
+      "message": "Hmm. I think my preference is to merge it and then revisit if people complain.",
+      "parentUuid": "bdb43645_80a606dd",
+      "revId": "319304fd8a5b32e1e349d3fca9884da991cbc5ac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
