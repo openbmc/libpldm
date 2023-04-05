@@ -33,6 +33,24 @@
       "message": "Reorder the include.\n#include \"base.h\"\n#include \"msgbuf.h\"\n#include \"msgbuf/platform.h\"\n#include \"platform.h\"",
       "revId": "5fc8aa27ace837a643588c0315a4852d3b1950ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddfbb912_f58e03bf",
+        "filename": "src/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-05T02:09:32Z",
+      "side": 1,
+      "message": "Ack. I\u0027m looking at how we solve this going forward with a clang-tidy config.",
+      "parentUuid": "d26701aa_7d61c0ba",
+      "revId": "5fc8aa27ace837a643588c0315a4852d3b1950ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
