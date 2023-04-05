@@ -8,7 +8,7 @@
 #include <sys/un.h>
 #include <unistd.h>
 
-const uint8_t MCTP_MSG_TYPE_PLDM = 1;
+const uint8_t mctp_msg_type_pldm = 1;
 
 pldm_requester_rc_t pldm_open(void)
 {
@@ -29,7 +29,7 @@ pldm_requester_rc_t pldm_open(void)
 	if (-1 == rc) {
 		return PLDM_REQUESTER_OPEN_FAIL;
 	}
-	rc = write(fd, &MCTP_MSG_TYPE_PLDM, sizeof(MCTP_MSG_TYPE_PLDM));
+	rc = write(fd, &mctp_msg_type_pldm, sizeof(mctp_msg_type_pldm));
 	if (-1 == rc) {
 		return PLDM_REQUESTER_OPEN_FAIL;
 	}
@@ -56,7 +56,7 @@ static pldm_requester_rc_t mctp_recv(mctp_eid_t eid, int mctp_fd,
 				     uint8_t **pldm_resp_msg,
 				     size_t *resp_msg_len)
 {
-	ssize_t min_len = sizeof(eid) + sizeof(MCTP_MSG_TYPE_PLDM) +
+	ssize_t min_len = sizeof(eid) + sizeof(mctp_msg_type_pldm) +
 			  sizeof(struct pldm_msg_hdr);
 	ssize_t length = recv(mctp_fd, NULL, 0, MSG_PEEK | MSG_TRUNC);
 	if (length <= 0) {
@@ -69,7 +69,7 @@ static pldm_requester_rc_t mctp_recv(mctp_eid_t eid, int mctp_fd,
 		return PLDM_REQUESTER_INVALID_RECV_LEN;
 	}
 	struct iovec iov[2];
-	size_t mctp_prefix_len = sizeof(eid) + sizeof(MCTP_MSG_TYPE_PLDM);
+	size_t mctp_prefix_len = sizeof(eid) + sizeof(mctp_msg_type_pldm);
 	uint8_t mctp_prefix[mctp_prefix_len];
 	size_t pldm_len = length - mctp_prefix_len;
 	iov[0].iov_len = mctp_prefix_len;
@@ -85,7 +85,7 @@ static pldm_requester_rc_t mctp_recv(mctp_eid_t eid, int mctp_fd,
 		free(*pldm_resp_msg);
 		return PLDM_REQUESTER_INVALID_RECV_LEN;
 	}
-	if ((mctp_prefix[0] != eid) || (mctp_prefix[1] != MCTP_MSG_TYPE_PLDM)) {
+	if ((mctp_prefix[0] != eid) || (mctp_prefix[1] != mctp_msg_type_pldm)) {
 		free(*pldm_resp_msg);
 		return PLDM_REQUESTER_NOT_PLDM_MSG;
 	}
@@ -166,7 +166,7 @@ pldm_requester_rc_t pldm_send_recv(mctp_eid_t eid, int mctp_fd,
 pldm_requester_rc_t pldm_send(mctp_eid_t eid, int mctp_fd,
 			      const uint8_t *pldm_req_msg, size_t req_msg_len)
 {
-	uint8_t hdr[2] = {eid, MCTP_MSG_TYPE_PLDM};
+	uint8_t hdr[2] = {eid, mctp_msg_type_pldm};
 
 	struct iovec iov[2];
 	iov[0].iov_base = hdr;

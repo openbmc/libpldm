@@ -320,30 +320,31 @@ const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 	return NULL;
 }
 
-void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminusHandle,
-			    uint8_t tid, uint8_t tlEid, bool validBit)
+/* NOLINTNEXTLINE(readability-identifier-naming) */
+void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminus_handle,
+			    uint8_t tid, uint8_t tl_eid, bool valid_bit)
 {
-	uint8_t *outData = NULL;
+	uint8_t *out_data = NULL;
 	uint32_t size = 0;
 	const pldm_pdr_record *record;
 	record = pldm_pdr_find_record_by_type(repo, PLDM_TERMINUS_LOCATOR_PDR,
-					      NULL, &outData, &size);
+					      NULL, &out_data, &size);
 
 	do {
 		if (record != NULL) {
 			struct pldm_terminus_locator_pdr *pdr =
-			    (struct pldm_terminus_locator_pdr *)outData;
+			    (struct pldm_terminus_locator_pdr *)out_data;
 			struct pldm_terminus_locator_type_mctp_eid *value =
 			    (struct pldm_terminus_locator_type_mctp_eid *)
 				pdr->terminus_locator_value;
-			if (pdr->terminus_handle == terminusHandle &&
-			    pdr->tid == tid && value->eid == tlEid) {
-				pdr->validity = validBit;
+			if (pdr->terminus_handle == terminus_handle &&
+			    pdr->tid == tid && value->eid == tl_eid) {
+				pdr->validity = valid_bit;
 				break;
 			}
 		}
 		record = pldm_pdr_find_record_by_type(
-		    repo, PLDM_TERMINUS_LOCATOR_PDR, record, &outData, &size);
+		    repo, PLDM_TERMINUS_LOCATOR_PDR, record, &out_data, &size);
 	} while (record);
 }
 
