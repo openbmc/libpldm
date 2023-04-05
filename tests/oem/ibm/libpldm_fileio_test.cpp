@@ -1,8 +1,8 @@
 #include <endian.h>
-#include <string.h>
 
 #include <array>
 #include <cstdint>
+#include <cstring>
 #include <vector>
 
 #include "libpldm/base.h"
@@ -41,7 +41,7 @@ TEST(ReadWriteFileMemory, testGoodDecodeRequest)
     uint32_t retLength = 0;
     uint64_t retAddress = 0;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Invoke decode the read file memory request
     auto rc = decode_rw_file_memory_req(request, requestMsg.size() - hdrSize,
@@ -69,7 +69,7 @@ TEST(ReadWriteFileMemory, testBadDecodeRequest)
 
     std::array<uint8_t, PLDM_RW_FILE_MEM_REQ_BYTES> requestMsg{};
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Address is NULL
     rc = decode_rw_file_memory_req(request, requestMsg.size() - hdrSize,
@@ -163,7 +163,7 @@ TEST(ReadWriteFileIntoMemory, testGoodDecodeResponse)
     uint8_t retCompletionCode = 0;
     uint32_t retLength = 0;
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Invoke decode the read file memory response
     auto rc = decode_rw_file_memory_resp(response, responseMsg.size() - hdrSize,
@@ -184,7 +184,7 @@ TEST(ReadWriteFileIntoMemory, testBadDecodeResponse)
 
     std::array<uint8_t, PLDM_RW_FILE_MEM_RESP_BYTES> responseMsg{};
 
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Payload length is invalid
     rc = decode_rw_file_memory_resp(response, 0, &completionCode, &length);
@@ -265,7 +265,7 @@ TEST(GetFileTable, GoodDecodeRequest)
     uint8_t retTransferOpFlag = 0;
     uint8_t retTableType = 0;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Invoke decode get file table request
     auto rc = decode_get_file_table_req(request, requestMsg.size() - hdrSize,
@@ -291,7 +291,7 @@ TEST(GetFileTable, BadDecodeRequest)
 
     std::array<uint8_t, PLDM_GET_FILE_TABLE_REQ_BYTES> requestMsg{};
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // TableType is NULL
     rc = decode_get_file_table_req(request, requestMsg.size() - hdrSize,
@@ -376,7 +376,7 @@ TEST(GetFileTable, GoodEncodeRequest)
     uint8_t transferOpFlag = 0x01;
     uint8_t tableType = PLDM_FILE_ATTRIBUTE_TABLE;
 
-    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_get_file_table_req(0, transferHandle, transferOpFlag,
                                         tableType, request);
     EXPECT_EQ(rc, PLDM_SUCCESS);
@@ -410,10 +410,10 @@ TEST(GetFileTable, GoodDecodeResponse)
     std::vector<uint8_t> responseMsg(
         hdrSize + PLDM_GET_FILE_TABLE_MIN_RESP_BYTES + fileTableData.size());
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - hdrSize;
 
-    auto resp = reinterpret_cast<struct pldm_get_file_table_resp*>(
+    auto* resp = reinterpret_cast<struct pldm_get_file_table_resp*>(
         responsePtr->payload);
 
     resp->completion_code = completionCode;
@@ -451,7 +451,7 @@ TEST(GetFileTable, BadDecodeResponse)
     std::vector<uint8_t> responseMsg(
         hdrSize + PLDM_GET_FILE_TABLE_MIN_RESP_BYTES + fileTableData.size());
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_file_table_resp(
         nullptr, 0, &completionCode, &nextTransferHandle, &transferFlag,
@@ -471,9 +471,9 @@ TEST(ReadFile, testGoodDecodeRequest)
     std::array<uint8_t, PLDM_READ_FILE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
-    auto request = reinterpret_cast<pldm_read_file_req*>(requestPtr->payload);
+    auto* request = reinterpret_cast<pldm_read_file_req*>(requestPtr->payload);
 
     // Random value for fileHandle, offset and length
     uint32_t fileHandle = 0x12345678;
@@ -507,9 +507,9 @@ TEST(WriteFile, testGoodDecodeRequest)
 
     std::vector<uint8_t> requestMsg(PLDM_WRITE_FILE_REQ_BYTES +
                                     sizeof(pldm_msg_hdr) + length);
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
-    auto request = reinterpret_cast<pldm_write_file_req*>(requestPtr->payload);
+    auto* request = reinterpret_cast<pldm_write_file_req*>(requestPtr->payload);
 
     size_t fileDataOffset =
         sizeof(fileHandle) + sizeof(offset) + sizeof(length);
@@ -542,9 +542,9 @@ TEST(ReadFile, testGoodDecodeResponse)
 
     std::vector<uint8_t> responseMsg(PLDM_READ_FILE_RESP_BYTES +
                                      sizeof(pldm_msg_hdr) + length);
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
-    auto response =
+    auto* response =
         reinterpret_cast<pldm_read_file_resp*>(responsePtr->payload);
 
     response->completion_code = completionCode;
@@ -571,9 +571,9 @@ TEST(WriteFile, testGoodDecodeResponse)
 {
     std::array<uint8_t, PLDM_WRITE_FILE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
-    auto response =
+    auto* response =
         reinterpret_cast<pldm_write_file_resp*>(responsePtr->payload);
 
     uint8_t completionCode = PLDM_SUCCESS;
@@ -603,7 +603,7 @@ TEST(ReadWriteFile, testBadDecodeResponse)
     // Bad decode response for read file
     std::vector<uint8_t> responseMsg(PLDM_READ_FILE_RESP_BYTES +
                                      sizeof(pldm_msg_hdr) + length);
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Request payload message is missing
     auto rc = decode_read_file_resp(NULL, 0, &completionCode, &length,
@@ -618,7 +618,7 @@ TEST(ReadWriteFile, testBadDecodeResponse)
     // Bad decode response for write file
     std::array<uint8_t, PLDM_WRITE_FILE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsgWr{};
-    auto responseWr = reinterpret_cast<pldm_msg*>(responseMsgWr.data());
+    auto* responseWr = reinterpret_cast<pldm_msg*>(responseMsgWr.data());
 
     // Request payload message is missing
     rc = decode_write_file_resp(NULL, 0, &completionCode, &length);
@@ -638,7 +638,7 @@ TEST(ReadWriteFile, testBadDecodeRequest)
     // Bad decode request for read file
     std::array<uint8_t, PLDM_READ_FILE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Request payload message is missing
     auto rc = decode_read_file_req(NULL, 0, &fileHandle, &offset, &length);
@@ -651,7 +651,7 @@ TEST(ReadWriteFile, testBadDecodeRequest)
     // Bad decode request for write file
     size_t fileDataOffset = 0;
     std::array<uint8_t, PLDM_WRITE_FILE_REQ_BYTES> requestMsgWr{};
-    auto requestWr = reinterpret_cast<pldm_msg*>(requestMsgWr.data());
+    auto* requestWr = reinterpret_cast<pldm_msg*>(requestMsgWr.data());
 
     // Request payload message is missing
     rc = decode_write_file_req(NULL, 0, &fileHandle, &offset, &length,
@@ -671,8 +671,8 @@ TEST(ReadFile, testGoodEncodeResponse)
 
     std::vector<uint8_t> responseMsg(PLDM_READ_FILE_RESP_BYTES +
                                      sizeof(pldm_msg_hdr) + length);
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
-    auto response =
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response =
         reinterpret_cast<pldm_read_file_resp*>(responsePtr->payload);
 
     // ReadFile
@@ -694,8 +694,8 @@ TEST(WriteFile, testGoodEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_WRITE_FILE_RESP_BYTES>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
-    auto response =
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* response =
         reinterpret_cast<pldm_write_file_resp*>(responsePtr->payload);
 
     // WriteFile
@@ -717,8 +717,8 @@ TEST(ReadFile, testGoodEncodeRequest)
     uint32_t fileHandle = 0x12345678;
     uint32_t offset = 0x87654321;
     uint32_t length = 0x13245768;
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
-    auto request = reinterpret_cast<pldm_read_file_req*>(requestPtr->payload);
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_read_file_req*>(requestPtr->payload);
 
     // ReadFile
     auto rc = encode_read_file_req(0, fileHandle, offset, length, requestPtr);
@@ -741,8 +741,8 @@ TEST(WriteFile, testGoodEncodeRequest)
 
     std::vector<uint8_t> requestMsg(PLDM_WRITE_FILE_REQ_BYTES +
                                     sizeof(pldm_msg_hdr) + length);
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
-    auto request = reinterpret_cast<pldm_write_file_req*>(requestPtr->payload);
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* request = reinterpret_cast<pldm_write_file_req*>(requestPtr->payload);
 
     // WriteFile
     auto rc = encode_write_file_req(0, fileHandle, offset, length, requestPtr);
@@ -766,7 +766,7 @@ TEST(ReadWriteFile, testBadEncodeRequest)
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_READ_FILE_REQ_BYTES>
         requestMsg{};
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // ReadFile check invalid file length
     auto rc = encode_read_file_req(0, fileHandle, offset, length, requestPtr);
@@ -776,7 +776,7 @@ TEST(ReadWriteFile, testBadEncodeRequest)
     // Bad encode request for write file
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_WRITE_FILE_REQ_BYTES>
         requestMsgWr{};
-    auto requestWr = reinterpret_cast<pldm_msg*>(requestMsgWr.data());
+    auto* requestWr = reinterpret_cast<pldm_msg*>(requestMsgWr.data());
 
     // WriteFile check for invalid file length
     rc = encode_write_file_req(0, fileHandle, offset, length, requestWr);
@@ -791,7 +791,7 @@ TEST(ReadWriteFile, testBadEncodeResponse)
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_READ_FILE_RESP_BYTES>
         responseMsg{};
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // ReadFile
     auto rc = encode_read_file_resp(0, PLDM_ERROR, length, responsePtr);
@@ -806,7 +806,7 @@ TEST(ReadWriteFile, testBadEncodeResponse)
     // Bad encode response for write file
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_WRITE_FILE_RESP_BYTES>
         responseMsgWr{};
-    auto responseWr = reinterpret_cast<pldm_msg*>(responseMsgWr.data());
+    auto* responseWr = reinterpret_cast<pldm_msg*>(responseMsgWr.data());
 
     // WriteFile
     rc = encode_write_file_resp(0, PLDM_ERROR, length, responseWr);
@@ -825,9 +825,9 @@ TEST(ReadWriteFileByTypeMemory, testGoodDecodeRequest)
                PLDM_RW_FILE_BY_TYPE_MEM_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
-    auto request = reinterpret_cast<pldm_read_write_file_by_type_memory_req*>(
+    auto* request = reinterpret_cast<pldm_read_write_file_by_type_memory_req*>(
         requestPtr->payload);
 
     // Random value for fileHandle, offset and length
@@ -868,10 +868,11 @@ TEST(ReadWriteFileByTypeMemory, testGoodDecodeResponse)
                PLDM_RW_FILE_BY_TYPE_MEM_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
-    auto response = reinterpret_cast<pldm_read_write_file_by_type_memory_resp*>(
-        responsePtr->payload);
+    auto* response =
+        reinterpret_cast<pldm_read_write_file_by_type_memory_resp*>(
+            responsePtr->payload);
 
     // Random value for completion code and length
     uint8_t completionCode = 0x0;
@@ -909,7 +910,7 @@ TEST(ReadWriteFileByTypeMemory, testBadDecodeRequest)
                PLDM_RW_FILE_BY_TYPE_MEM_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Address is NULL
     rc = decode_rw_file_by_type_memory_req(
@@ -937,7 +938,7 @@ TEST(ReadWriteFileByTypeMemory, testBadDecodeResponse)
                PLDM_RW_FILE_BY_TYPE_MEM_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Length is NULL
     rc = decode_rw_file_by_type_memory_resp(
@@ -1070,9 +1071,9 @@ TEST(NewFile, testGoodDecodeRequest)
     std::array<uint8_t, PLDM_NEW_FILE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
-    auto request = reinterpret_cast<pldm_new_file_req*>(requestPtr->payload);
+    auto* request = reinterpret_cast<pldm_new_file_req*>(requestPtr->payload);
 
     // Random value for fileHandle and length
     uint16_t fileType = 0xFF;
@@ -1102,9 +1103,10 @@ TEST(NewFile, testGoodDecodeResponse)
     std::array<uint8_t, PLDM_NEW_FILE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
-    auto response = reinterpret_cast<pldm_new_file_resp*>(responsePtr->payload);
+    auto* response =
+        reinterpret_cast<pldm_new_file_resp*>(responsePtr->payload);
 
     // Random value for completion code
     uint8_t completionCode = 0x0;
@@ -1135,7 +1137,7 @@ TEST(NewFile, testBadDecodeRequest)
     std::array<uint8_t, PLDM_NEW_FILE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Payload length is invalid
     rc = decode_new_file_req(requestPtr, 0, &fileType, &fileHandle, &length);
@@ -1153,7 +1155,7 @@ TEST(NewFile, testBadDecodeResponse)
     std::array<uint8_t, PLDM_NEW_FILE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Payload length is invalid
     rc = decode_new_file_resp(responsePtr, 0, &completionCode);
@@ -1248,9 +1250,9 @@ TEST(ReadWriteFileByType, testGoodDecodeRequest)
     std::array<uint8_t, PLDM_RW_FILE_BY_TYPE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
-    auto request = reinterpret_cast<pldm_read_write_file_by_type_req*>(
+    auto* request = reinterpret_cast<pldm_read_write_file_by_type_req*>(
         requestPtr->payload);
 
     // Random value for fileHandle, offset and length
@@ -1285,9 +1287,9 @@ TEST(ReadWriteFileByType, testGoodDecodeResponse)
     std::array<uint8_t, PLDM_RW_FILE_BY_TYPE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
-    auto response = reinterpret_cast<pldm_read_write_file_by_type_resp*>(
+    auto* response = reinterpret_cast<pldm_read_write_file_by_type_resp*>(
         responsePtr->payload);
 
     // Random value for completion code and length
@@ -1324,7 +1326,7 @@ TEST(ReadWriteFileByType, testBadDecodeRequest)
     std::array<uint8_t, PLDM_RW_FILE_BY_TYPE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Payload length is invalid
     rc = decode_rw_file_by_type_req(requestPtr, 0, &fileType, &fileHandle,
@@ -1344,7 +1346,7 @@ TEST(ReadWriteFileByType, testBadDecodeResponse)
     std::array<uint8_t, PLDM_RW_FILE_BY_TYPE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Length is NULL
     rc = decode_rw_file_by_type_resp(responsePtr, responseMsg.size() - hdrSize,
@@ -1462,9 +1464,9 @@ TEST(FileAck, testGoodDecodeRequest)
     std::array<uint8_t, PLDM_FILE_ACK_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
-    auto request = reinterpret_cast<pldm_file_ack_req*>(requestPtr->payload);
+    auto* request = reinterpret_cast<pldm_file_ack_req*>(requestPtr->payload);
 
     // Random value for fileHandle
     uint16_t fileType = 0xFFFF;
@@ -1494,9 +1496,10 @@ TEST(FileAck, testGoodDecodeResponse)
     std::array<uint8_t, PLDM_FILE_ACK_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
-    auto response = reinterpret_cast<pldm_file_ack_resp*>(responsePtr->payload);
+    auto* response =
+        reinterpret_cast<pldm_file_ack_resp*>(responsePtr->payload);
 
     // Random value for completion code
     uint8_t completionCode = 0x0;
@@ -1527,7 +1530,7 @@ TEST(FileAck, testBadDecodeRequest)
     std::array<uint8_t, PLDM_FILE_ACK_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Payload length is invalid
     rc =
@@ -1546,7 +1549,7 @@ TEST(FileAck, testBadDecodeResponse)
     std::array<uint8_t, PLDM_FILE_ACK_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Payload length is invalid
     rc = decode_file_ack_resp(responsePtr, 0, &completionCode);
@@ -1682,9 +1685,9 @@ TEST(FileAckWithMetadata, testGoodDecodeResponse)
                PLDM_FILE_ACK_WITH_META_DATA_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
-    auto response = reinterpret_cast<pldm_file_ack_with_meta_data_resp*>(
+    auto* response = reinterpret_cast<pldm_file_ack_with_meta_data_resp*>(
         responsePtr->payload);
 
     // Random value for completion code
@@ -1714,7 +1717,7 @@ TEST(FileAckWithMetadata, testBadDecodeResponse)
                PLDM_FILE_ACK_WITH_META_DATA_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Payload length is invalid
     rc = decode_file_ack_with_meta_data_resp(responsePtr, 0, &completionCode);
@@ -1803,9 +1806,9 @@ TEST(FileAckWithMetadata, testGoodDecodeRequest)
                sizeof(pldm_msg_hdr) + PLDM_FILE_ACK_WITH_META_DATA_REQ_BYTES>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
-    auto request = reinterpret_cast<pldm_file_ack_with_meta_data_req*>(
+    auto* request = reinterpret_cast<pldm_file_ack_with_meta_data_req*>(
         requestPtr->payload);
 
     uint16_t fileType = 0xFFFF;
@@ -1867,7 +1870,7 @@ TEST(FileAckWithMetadata, testBadDecodeRequest)
                PLDM_FILE_ACK_WITH_META_DATA_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Payload length is invalid
     rc = decode_file_ack_with_meta_data_req(
@@ -1926,9 +1929,9 @@ TEST(NewFileAvailableWithMetaData, testGoodDecodeResponse)
                             sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
-    auto response = reinterpret_cast<pldm_file_ack_with_meta_data_resp*>(
+    auto* response = reinterpret_cast<pldm_file_ack_with_meta_data_resp*>(
         responsePtr->payload);
 
     // Random value for completion code
@@ -1958,7 +1961,7 @@ TEST(NewFileAvailableWithMetaData, testBadDecodeResponse)
                             sizeof(pldm_msg_hdr)>
         responseMsg{};
 
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto* responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Payload length is invalid
     rc = decode_new_file_with_metadata_resp(responsePtr, 0, &completionCode);
@@ -2050,9 +2053,9 @@ TEST(NewFileAvailableWithMetaData, testGoodDecodeRequest)
                             sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
-    auto request =
+    auto* request =
         reinterpret_cast<pldm_new_file_with_metadata_req*>(requestPtr->payload);
 
     // Random value for fileHandle and length
@@ -2117,7 +2120,7 @@ TEST(NewFileAvailableWithMetaData, testBadDecodeRequest)
                             sizeof(pldm_msg_hdr)>
         requestMsg{};
 
-    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto* requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Payload length is invalid
     rc = decode_new_file_with_metadata_req(
