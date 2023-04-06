@@ -16,6 +16,24 @@
       "message": "I\u0027m not convinced this diagnostic is worth the potential bugs from code maintenance issues.  The compiler will already optimize away dead stores.",
       "revId": "11ae709a1a0fb78725fcd4289947e283ee8667d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc713d0d_a2a13e94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-06T05:28:14Z",
+      "side": 1,
+      "message": "It\u0027s still visual clutter in the source though.",
+      "parentUuid": "cefa5466_758a66b7",
+      "revId": "11ae709a1a0fb78725fcd4289947e283ee8667d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
