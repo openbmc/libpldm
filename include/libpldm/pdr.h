@@ -160,7 +160,7 @@ void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
  * @param[in] repo - opaque pointer acting as a PDR repo handle
  * @param[in] terminus_handle - PLDM terminus handle
  * @param[in] tid - Terminus ID
- * @param[in] tlEid - MCTP endpoint EID
+ * @param[in] tl_eid - MCTP endpoint EID
  * @param[in] valid - validity bit of TLPDR
  */
 /* NOLINTNEXTLINE(readability-identifier-naming) */
