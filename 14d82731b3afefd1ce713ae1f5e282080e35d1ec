@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "507d3eb8_f7546568",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-06T07:41:11Z",
+      "side": 1,
+      "message": "nit: PLDM_ERROR_INVALID_DATA if input is an invalid ctx or buf",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bfe00b3_c1b0da00",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-06T07:41:11Z",
+      "side": 1,
+      "message": "nit: PLDM_ERROR_INVALID_DATA if input a invalid ctx",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ea730f1_8b9e330d",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-06T07:41:11Z",
+      "side": 1,
+      "message": "!ctx-\u003ecursor?",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "160cf9a1_1df6393b",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-06T07:41:11Z",
+      "side": 1,
+      "message": "assert(ctx-\u003eremaining \u003e\u003d 0);?",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f20d2abc_6d02bac8",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-06T07:41:11Z",
+      "side": 1,
+      "message": "!ctx-\u003ecursor?",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
