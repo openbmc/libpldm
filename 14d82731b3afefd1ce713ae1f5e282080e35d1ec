@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02f1483c_3ebe9580",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-06T10:45:27Z",
+      "side": 1,
+      "message": "ah, good point. I think I\u0027ll delete the check from the extractor functions too",
+      "parentUuid": "1784fbc8_cd01d276",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "160cf9a1_1df6393b",
         "filename": "src/msgbuf.h",
         "patchSetId": 8
