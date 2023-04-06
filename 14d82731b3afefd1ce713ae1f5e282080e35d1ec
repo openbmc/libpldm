@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1784fbc8_cd01d276",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-06T09:20:37Z",
+      "side": 1,
+      "message": "I was comparing with the checks in pldm_msgbuf_extract_uint16/pldm_msgbuf_extract_int16/...\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/61974/8/src/msgbuf.h#151",
+      "parentUuid": "19105425_f2607577",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "160cf9a1_1df6393b",
         "filename": "src/msgbuf.h",
         "patchSetId": 8
