@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42bdc7de_9c0efc28",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-04-06T04:52:52Z",
+      "side": 1,
+      "message": "change here too ?",
+      "range": {
+        "startLine": 163,
+        "startChar": 14,
+        "endLine": 163,
+        "endChar": 19
+      },
+      "revId": "6005f1c87fdd831095e66dd97ba4d5f5c4bd9295",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c31b61b3_9bcd9dbe",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-04-06T04:52:52Z",
+      "side": 1,
+      "message": "we are changing the variable names right ? why do we want to suppress the lint ?",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 51
+      },
+      "revId": "6005f1c87fdd831095e66dd97ba4d5f5c4bd9295",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
