@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5be01400_353290d4",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-06T05:32:35Z",
+      "side": 1,
+      "message": "Good catch, let me deal that as a follow-up fix.",
+      "parentUuid": "42bdc7de_9c0efc28",
+      "range": {
+        "startLine": 163,
+        "startChar": 14,
+        "endLine": 163,
+        "endChar": 19
+      },
+      "revId": "6005f1c87fdd831095e66dd97ba4d5f5c4bd9295",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c31b61b3_9bcd9dbe",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-06T04:52:52Z",
       "side": 1,
       "message": "we are changing the variable names right ? why do we want to suppress the lint ?",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 51
+      },
+      "revId": "6005f1c87fdd831095e66dd97ba4d5f5c4bd9295",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54086abc_4d46eeab",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-06T05:32:35Z",
+      "side": 1,
+      "message": "it\u0027s the upper-case `_TL_` in the function name that\u0027s problematic, in addition to the variable names. Changing the function symbol is an API break. Unfortunately the lint suppression also suppresses the renamed formal parameter, but we can fix that manually as I have here.",
+      "parentUuid": "c31b61b3_9bcd9dbe",
       "range": {
         "startLine": 166,
         "startChar": 0,
