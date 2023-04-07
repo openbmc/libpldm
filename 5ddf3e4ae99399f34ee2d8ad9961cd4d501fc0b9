@@ -209,6 +209,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0daedb88_1fe3cc8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-07T09:01:06Z",
+      "side": 1,
+      "message": "Correct the type in the commit message also,",
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb742585_37ae07f3",
         "filename": "include/libpldm/meson.build",
         "patchSetId": 19
@@ -492,6 +509,57 @@
         "endLine": 65,
         "endChar": 22
       },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1534f7f6_ceab16cc",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-07T09:01:06Z",
+      "side": 1,
+      "message": "With this instanceID allocation mechanism the instanceID will continue increasing until it hits 32 then back to 0.\nThis is difference with current mechanism which will priority the smallest free instanceID.\nI think the old mechanism have better performance because we will do less comparing than the new one.",
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31186c39_8122d799",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-07T09:01:06Z",
+      "side": 1,
+      "message": "It is unnecessary, but should we add the default return of function?",
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c0b259c_c59d33fe",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-07T09:01:06Z",
+      "side": 1,
+      "message": "Add constant definition instead of hardcode.",
       "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
