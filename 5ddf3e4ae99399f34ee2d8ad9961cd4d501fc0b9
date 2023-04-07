@@ -192,6 +192,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "374bb763_4ec8c343",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-07T06:51:00Z",
+      "side": 1,
+      "message": "Update commit messages to give some details about \"current API\".\nAPI and APIs which is corrected?",
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb742585_37ae07f3",
         "filename": "include/libpldm/meson.build",
         "patchSetId": 19
