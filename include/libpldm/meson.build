@@ -34,3 +34,11 @@ if get_option('oem-ibm').enabled()
     'oem/ibm/libpldm/state_set_oem_ibm.h'
   )
 endif
+
+if get_option('requester-api').enabled()
+   libpldm_headers += files(
+    'requester/pldm.h',
+    'requester/pldm_base_requester.h'
+    )
+endif
+
