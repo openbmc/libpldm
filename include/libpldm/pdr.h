@@ -5,19 +5,7 @@
 extern "C" {
 #endif
 
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
-
-/** @struct pldm_pdr
- *  opaque structure that acts as a handle to a PDR repository
- */
-typedef struct pldm_pdr pldm_pdr;
-
-/** @struct pldm_pdr_record
- *  opaque structure that acts as a handle to a PDR record
- */
-typedef struct pldm_pdr_record pldm_pdr_record;
+#include "pdr_data.h"
 
 /* ====================== */
 /* Common PDR access APIs */
@@ -260,13 +248,15 @@ pldm_entity_association_tree *pldm_entity_association_tree_init(void);
  *                                      contanier id.
  *                                      true: should be changed
  *                                      false: should not be changed
- *
+ *  @param[in] container_id - container id of the entity added
+ *  
  *  @return pldm_entity_node* - opaque pointer to added entity
  */
 pldm_entity_node *pldm_entity_association_tree_add(
     pldm_entity_association_tree *tree, pldm_entity *entity,
     uint16_t entity_instance_number, pldm_entity_node *parent,
-    uint8_t association_type, bool is_remote, bool is_update_contanier_id);
+    uint8_t association_type, bool is_remote, bool is_update_contanier_id,
+    uint16_t container_id);
 
 /** @brief Visit and note each entity in the entity association tree
  *
@@ -343,7 +333,8 @@ void pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
  */
 void pldm_entity_association_pdr_add_from_node(
     pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
-    size_t num_entities, bool is_remote, uint16_t terminus_handle);
+    size_t num_entities, bool is_remote, uint16_t terminus_handle,
+    uint32_t record_handle);
 
 /** @brief Find entity reference in tree
  *
