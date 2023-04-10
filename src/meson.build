@@ -11,6 +11,8 @@ libpldm_sources += files(
   )
 
 if get_option('oem-ibm').enabled()
+   add_project_arguments('-DOEM_IBM', language : 'c')
+   add_project_arguments('-DOEM_IBM', language : 'cpp')
    subdir('oem/ibm')
 endif
 
