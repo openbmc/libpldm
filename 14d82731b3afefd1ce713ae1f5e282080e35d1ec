@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9d34e57_a0f6b56f",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-11T10:37:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2eb4eee_c5b406ad",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bfe00b3_c1b0da00",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "0bfe00b3_c1b0da00",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b291eb_45e4f4bd",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-11T10:37:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "797fc457_40a17686",
       "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -159,6 +195,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24dae7f6_7f0a2f76",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-11T10:37:20Z",
+      "side": 1,
+      "message": "I\u0027ve changed my mind and will make it consistent as you suggest. Adding the check will avoid the optimiser doing DCE on branches protecting against the NULL case on the basis that a read access has already occurred prior to the NULL check. The optimiser can elide the NULL checks where it can prove that a write hasn\u0027t occurred to ctx-\u003ecursor, so we\u0027ll still wind up with reasonable code.",
+      "parentUuid": "02f1483c_3ebe9580",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "160cf9a1_1df6393b",
@@ -194,6 +248,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94706d12_d7e85e0a",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-11T10:37:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2817081b_c08f9489",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f20d2abc_6d02bac8",
@@ -225,6 +297,24 @@
       "side": 1,
       "message": "as above",
       "parentUuid": "f20d2abc_6d02bac8",
+      "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e894aa7d_c01be2ee",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-11T10:37:20Z",
+      "side": 1,
+      "message": "Changed my mind as above, fixed.",
+      "parentUuid": "31ef13a5_5c417f71",
       "revId": "14d82731b3afefd1ce713ae1f5e282080e35d1ec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
