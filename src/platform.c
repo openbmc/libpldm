@@ -765,36 +765,49 @@ int decode_get_state_sensor_readings_resp(const struct pldm_msg *msg,
 					  uint8_t *comp_sensor_count,
 					  get_sensor_state_field *field)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	uint8_t i;
+	int rc;
+
 	if (msg == NULL || completion_code == NULL ||
 	    comp_sensor_count == NULL || field == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	*completion_code = msg->payload[0];
+	rc =
+	    pldm_msgbuf_init(buf, PLDM_GET_STATE_SENSOR_READINGS_MIN_RESP_BYTES,
+			     msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, completion_code);
+	if (rc) {
+		return rc;
+	}
+
 	if (PLDM_SUCCESS != *completion_code) {
 		return PLDM_SUCCESS;
 	}
 
-	struct pldm_get_state_sensor_readings_resp *response =
-	    (struct pldm_get_state_sensor_readings_resp *)msg->payload;
+	rc = pldm_msgbuf_extract(buf, comp_sensor_count);
+	if (rc) {
+		return rc;
+	}
 
-	if (response->comp_sensor_count < 0x1 ||
-	    response->comp_sensor_count > 0x8) {
+	if (*comp_sensor_count < 0x1 || *comp_sensor_count > 0x8) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length >
-	    PLDM_GET_STATE_SENSOR_READINGS_MIN_RESP_BYTES +
-		sizeof(get_sensor_state_field) * response->comp_sensor_count) {
-		return PLDM_ERROR_INVALID_LENGTH;
+	for (i = 0; i < *comp_sensor_count; i++) {
+		pldm_msgbuf_extract(buf, &field[i].sensor_op_state);
+		pldm_msgbuf_extract(buf, &field[i].present_state);
+		pldm_msgbuf_extract(buf, &field[i].previous_state);
+		pldm_msgbuf_extract(buf, &field[i].event_state);
 	}
 
-	*comp_sensor_count = response->comp_sensor_count;
-
-	memcpy(field, response->field,
-	       (sizeof(get_sensor_state_field) * (*comp_sensor_count)));
-
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 int decode_get_state_sensor_readings_req(const struct pldm_msg *msg,
