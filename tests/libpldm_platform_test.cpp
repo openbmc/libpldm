@@ -1732,6 +1732,8 @@ TEST(GetNumericEffecterValue, testGoodEncodeResponse)
     uint8_t effecter_operState = EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING;
     uint32_t pendingValue = 0x12345678;
     uint32_t presentValue = 0xABCDEF11;
+    uint32_t val_pending;
+    uint32_t val_present;
 
     std::array<uint8_t,
                hdrSize + PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 6>
@@ -1748,16 +1750,18 @@ TEST(GetNumericEffecterValue, testGoodEncodeResponse)
         reinterpret_cast<struct pldm_get_numeric_effecter_value_resp*>(
             response->payload);
 
-    uint32_t* val_pending = (uint32_t*)(&resp->pending_and_present_values[0]);
-    *val_pending = le32toh(*val_pending);
-    uint32_t* val_present = (uint32_t*)(&resp->pending_and_present_values[4]);
-    *val_present = le32toh(*val_present);
+    memcpy(&val_pending, &resp->pending_and_present_values[0],
+           sizeof(val_pending));
+    val_pending = le32toh(val_pending);
+    memcpy(&val_present, &resp->pending_and_present_values[4],
+           sizeof(val_present));
+    val_present = le32toh(val_present);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(effecter_dataSize, resp->effecter_data_size);
     EXPECT_EQ(effecter_operState, resp->effecter_oper_state);
-    EXPECT_EQ(pendingValue, *val_pending);
-    EXPECT_EQ(presentValue, *val_present);
+    EXPECT_EQ(pendingValue, val_pending);
+    EXPECT_EQ(presentValue, val_present);
 }
 
 TEST(GetNumericEffecterValue, testBadEncodeResponse)
