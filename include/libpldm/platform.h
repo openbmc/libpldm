@@ -1098,7 +1098,7 @@ int decode_set_numeric_effecter_value_req(const struct pldm_msg *msg,
 					  size_t payload_length,
 					  uint16_t *effecter_id,
 					  uint8_t *effecter_data_size,
-					  uint8_t *effecter_value);
+					  uint8_t effecter_value[4]);
 
 /** @brief Create a PLDM response message for SetNumericEffecterValue
  *

@@ -73,4 +73,28 @@ pldm_msgbuf_extract_range_field_format(struct pldm_msgbuf *ctx,
 	return -PLDM_ERROR_INVALID_DATA;
 }
 
+/* This API is bad, but it's because the caller's APIs are also bad */
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_extract_effecter_value(struct pldm_msgbuf *ctx,
+				   enum pldm_effecter_data_size tag,
+				   uint8_t *val)
+{
+	switch (tag) {
+	case PLDM_EFFECTER_DATA_SIZE_UINT8:
+		return pldm_msgbuf_extract_uint8(ctx, (uint8_t *)val);
+	case PLDM_EFFECTER_DATA_SIZE_SINT8:
+		return pldm_msgbuf_extract_int8(ctx, (int8_t *)val);
+	case PLDM_EFFECTER_DATA_SIZE_UINT16:
+		return pldm_msgbuf_extract_uint16(ctx, (uint16_t *)val);
+	case PLDM_EFFECTER_DATA_SIZE_SINT16:
+		return pldm_msgbuf_extract_int16(ctx, (int16_t *)val);
+	case PLDM_EFFECTER_DATA_SIZE_UINT32:
+		return pldm_msgbuf_extract_uint32(ctx, (uint32_t *)val);
+	case PLDM_EFFECTER_DATA_SIZE_SINT32:
+		return pldm_msgbuf_extract_int32(ctx, (int32_t *)val);
+	}
+
+	return -PLDM_ERROR_INVALID_DATA;
+}
+
 #endif
