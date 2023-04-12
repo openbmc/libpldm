@@ -18,6 +18,7 @@ subdir('src')
 
 libpldm_include_dir = ['include', 'src']
 libpldm_headers = files()
+libpldm_instance_id_headers = files()
 
 subdir('include/libpldm')
 
@@ -33,6 +34,11 @@ libpldm = library(
 install_headers(
   libpldm_headers,
   subdir:'libpldm'
+  )
+
+install_headers(
+  libpldm_instance_id_headers,
+  subdir:'libpldm/instance_id'
   )
 
 libpldm_dep = declare_dependency(

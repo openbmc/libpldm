@@ -9,6 +9,7 @@ extern "C" {
 #include <stdint.h>
 
 typedef uint8_t mctp_eid_t;
+typedef uint8_t pldm_tid_t;
 
 typedef enum pldm_requester_error_codes {
 	PLDM_REQUESTER_SUCCESS = 0,

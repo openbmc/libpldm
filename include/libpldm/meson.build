@@ -31,5 +31,8 @@ if get_option('requester-api').enabled()
    libpldm_headers += files(
     'requester/pldm.h'
     )
+   libpldm_instance_id_headers += files(
+    'instance_id/instance_id.h'
+  )
 endif
 
