@@ -78,6 +78,26 @@ static inline int pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
 }
 
 /**
+ * @brief Test whether a message buffer has been exactly consumed
+ *
+ * @param[in] ctx - pldm_msgbuf context for extractor
+ *
+ * @return PLDM_SUCCESS iff there are zero bytes of data that remain unread from
+ * the buffer and no overflow has occurred. Otherwise, PLDM_ERROR_INVALID_LENGTH
+ * indicates that an incorrect sequence of accesses have occurred, and
+ * PLDM_ERROR_INVALID_DATA indicates that the provided context was not a valid
+ * pointer.
+ */
+static inline int pldm_msgbuf_consumed(struct pldm_msgbuf *ctx)
+{
+	if (!ctx) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	return ctx->remaining == 0 ? PLDM_SUCCESS : PLDM_ERROR_INVALID_LENGTH;
+}
+
+/**
  * @brief Destroy the pldm buf
  *
  * @param[in] ctx - pldm_msgbuf context for extractor
@@ -101,6 +121,33 @@ static inline int pldm_msgbuf_destroy(struct pldm_msgbuf *ctx)
 	ctx->remaining = 0;
 
 	return valid;
+}
+
+/**
+ * @brief Destroy the pldm_msgbuf instance, and check that the underlying buffer
+ * has been completely consumed without overflow
+ *
+ * @param[in] ctx - pldm_msgbuf context
+ *
+ * @return PLDM_SUCCESS if all buffer access were in-bounds and completely
+ * consume the underlying buffer. Otherwise, PLDM_ERROR_INVALID_DATA if the ctx
+ * parameter is invalid, or PLDM_ERROR_INVALID_LENGTH if prior accesses would
+ * have occurred byond the bounds of the buffer
+ */
+static inline int pldm_msgbuf_destroy_consumed(struct pldm_msgbuf *ctx)
+{
+	int consumed;
+
+	if (!ctx) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	consumed = pldm_msgbuf_consumed(ctx);
+
+	ctx->cursor = NULL;
+	ctx->remaining = 0;
+
+	return consumed;
 }
 
 /**
