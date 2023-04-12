@@ -11,6 +11,8 @@ extern "C" {
 
 #include "pldm_types.h"
 
+typedef uint8_t pldm_tid_t;
+
 /** @brief PLDM Types
  */
 enum pldm_supported_types {
