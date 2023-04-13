@@ -1160,34 +1160,36 @@ int decode_sensor_event_data(const uint8_t *event_data,
 			     uint8_t *sensor_event_class_type,
 			     size_t *event_class_data_offset)
 {
-	if (event_data == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-	if (event_data_length < PLDM_SENSOR_EVENT_DATA_MIN_LENGTH) {
-		return PLDM_ERROR_INVALID_LENGTH;
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	rc = pldm_msgbuf_init(buf, PLDM_SENSOR_EVENT_DATA_MIN_LENGTH,
+			      event_data, event_data_length);
+	if (rc) {
+		return rc;
 	}
 
 	size_t event_class_data_length =
 	    event_data_length - PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES;
 
-	struct pldm_sensor_event_data *sensor_event_data =
-	    (struct pldm_sensor_event_data *)event_data;
-	*sensor_id = sensor_event_data->sensor_id;
-	*sensor_event_class_type = sensor_event_data->sensor_event_class_type;
-	if (sensor_event_data->sensor_event_class_type ==
-	    PLDM_SENSOR_OP_STATE) {
+	pldm_msgbuf_extract(buf, sensor_id);
+	rc = pldm_msgbuf_extract(buf, sensor_event_class_type);
+	if (rc) {
+		return rc;
+	}
+
+	if (*sensor_event_class_type == PLDM_SENSOR_OP_STATE) {
 		if (event_class_data_length !=
 		    PLDM_SENSOR_EVENT_SENSOR_OP_STATE_DATA_LENGTH) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
-	} else if (sensor_event_data->sensor_event_class_type ==
-		   PLDM_STATE_SENSOR_STATE) {
+	} else if (*sensor_event_class_type == PLDM_STATE_SENSOR_STATE) {
 		if (event_class_data_length !=
 		    PLDM_SENSOR_EVENT_STATE_SENSOR_STATE_DATA_LENGTH) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
-	} else if (sensor_event_data->sensor_event_class_type ==
-		   PLDM_NUMERIC_SENSOR_STATE) {
+	} else if (*sensor_event_class_type == PLDM_NUMERIC_SENSOR_STATE) {
 		if (event_class_data_length <
 			PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MIN_DATA_LENGTH ||
 		    event_class_data_length >
@@ -1197,9 +1199,11 @@ int decode_sensor_event_data(const uint8_t *event_data,
 	} else {
 		return PLDM_ERROR_INVALID_DATA;
 	}
+
 	*event_class_data_offset =
 	    sizeof(*sensor_id) + sizeof(*sensor_event_class_type);
-	return PLDM_SUCCESS;
+
+	return pldm_msgbuf_destroy(buf);
 }
 
 int decode_sensor_op_data(const uint8_t *sensor_data, size_t sensor_data_length,
