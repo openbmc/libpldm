@@ -859,25 +859,28 @@ int decode_platform_event_message_req(const struct pldm_msg *msg,
 				      uint8_t *event_class,
 				      size_t *event_data_offset)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
 
 	if (msg == NULL || format_version == NULL || tid == NULL ||
 	    event_class == NULL || event_data_offset == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length <= PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
+	rc = pldm_msgbuf_init(buf, PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
 	}
-	struct pldm_platform_event_message_req *response =
-	    (struct pldm_platform_event_message_req *)msg->payload;
 
-	*format_version = response->format_version;
-	*tid = response->tid;
-	*event_class = response->event_class;
+	pldm_msgbuf_extract(buf, format_version);
+	pldm_msgbuf_extract(buf, tid);
+	pldm_msgbuf_extract(buf, event_class);
 	*event_data_offset =
 	    sizeof(*format_version) + sizeof(*tid) + sizeof(*event_class);
 
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy(buf);
 }
 
 int encode_platform_event_message_resp(uint8_t instance_id,
