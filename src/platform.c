@@ -2004,23 +2004,31 @@ int decode_set_event_receiver_req(const struct pldm_msg *msg,
 				  uint16_t *heartbeat_timer)
 
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
 	if (msg == NULL || event_message_global_enable == NULL ||
 	    transport_protocol_type == NULL ||
 	    event_receiver_address_info == NULL || heartbeat_timer == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_SET_EVENT_RECEIVER_REQ_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
+	rc = pldm_msgbuf_init(buf, PLDM_SET_EVENT_RECEIVER_REQ_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
 	}
 
-	struct pldm_set_event_receiver_req *request =
-	    (struct pldm_set_event_receiver_req *)msg->payload;
+	pldm_msgbuf_extract(buf, event_message_global_enable);
+	pldm_msgbuf_extract(buf, transport_protocol_type);
+	pldm_msgbuf_extract(buf, event_receiver_address_info);
+	pldm_msgbuf_extract(buf, heartbeat_timer);
 
-	*event_message_global_enable = request->event_message_global_enable,
-	*transport_protocol_type = request->transport_protocol_type,
-	*event_receiver_address_info = request->event_receiver_address_info,
-	*heartbeat_timer = le16toh(request->heartbeat_timer);
+	rc = pldm_msgbuf_destroy(buf);
+	if (rc) {
+		return rc;
+	}
 
 	if ((*event_message_global_enable ==
 	     PLDM_EVENT_MESSAGE_GLOBAL_ENABLE_ASYNC_KEEP_ALIVE) &&
