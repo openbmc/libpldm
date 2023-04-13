@@ -1235,21 +1235,27 @@ int decode_state_sensor_data(const uint8_t *sensor_data,
 			     uint8_t *event_state,
 			     uint8_t *previous_event_state)
 {
-	if (sensor_data == NULL || sensor_offset == NULL ||
-	    event_state == NULL || previous_event_state == NULL) {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (sensor_offset == NULL || event_state == NULL ||
+	    previous_event_state == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
-	if (sensor_data_length !=
-	    PLDM_SENSOR_EVENT_STATE_SENSOR_STATE_DATA_LENGTH) {
-		return PLDM_ERROR_INVALID_LENGTH;
+
+	rc = pldm_msgbuf_init(buf,
+			      PLDM_SENSOR_EVENT_STATE_SENSOR_STATE_DATA_LENGTH,
+			      sensor_data, sensor_data_length);
+	if (rc) {
+		return rc;
 	}
 
-	struct pldm_sensor_event_state_sensor_state *sensor_state_data =
-	    (struct pldm_sensor_event_state_sensor_state *)sensor_data;
-	*sensor_offset = sensor_state_data->sensor_offset;
-	*event_state = sensor_state_data->event_state;
-	*previous_event_state = sensor_state_data->previous_event_state;
-	return PLDM_SUCCESS;
+	pldm_msgbuf_extract(buf, sensor_offset);
+	pldm_msgbuf_extract(buf, event_state);
+	pldm_msgbuf_extract(buf, previous_event_state);
+
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 int decode_numeric_sensor_data(const uint8_t *sensor_data,
