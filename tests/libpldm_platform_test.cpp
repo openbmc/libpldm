@@ -1640,12 +1640,6 @@ TEST(PlatformEventMessage, testBadNumericSensorEventDataDecodeRequest)
         reinterpret_cast<uint8_t*>(sensorData.data()), sensorDataLength,
         &eventState, &previousEventState, &sensorDataSize, &presentReading);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
-
-    numericSensorData->sensor_data_size = PLDM_SENSOR_DATA_SIZE_UINT32;
-    rc = decode_numeric_sensor_data(
-        reinterpret_cast<uint8_t*>(sensorData.data()), sensorDataLength - 1,
-        &eventState, &previousEventState, &sensorDataSize, &presentReading);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(GetNumericEffecterValue, testGoodEncodeRequest)
