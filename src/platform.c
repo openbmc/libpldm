@@ -1051,25 +1051,33 @@ int decode_event_message_buffer_size_resp(const struct pldm_msg *msg,
 					  uint8_t *completion_code,
 					  uint16_t *terminus_max_buffer_size)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
 	if (msg == NULL || completion_code == NULL ||
 	    terminus_max_buffer_size == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	*completion_code = msg->payload[0];
+	rc = pldm_msgbuf_init(buf, PLDM_EVENT_MESSAGE_BUFFER_SIZE_RESP_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, completion_code);
+	if (rc) {
+		return rc;
+	}
+
 	if (PLDM_SUCCESS != *completion_code) {
 		return PLDM_SUCCESS;
 	}
-	if (payload_length != PLDM_EVENT_MESSAGE_BUFFER_SIZE_RESP_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
 
-	struct pldm_event_message_buffer_size_resp *response =
-	    (struct pldm_event_message_buffer_size_resp *)msg->payload;
+	pldm_msgbuf_extract(buf, terminus_max_buffer_size);
 
-	*terminus_max_buffer_size = response->terminus_max_buffer_size;
-
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 int encode_event_message_supported_req(uint8_t instance_id,
