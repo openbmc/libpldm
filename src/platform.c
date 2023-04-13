@@ -1701,26 +1701,28 @@ int decode_pldm_pdr_repository_chg_event_data(const uint8_t *event_data,
 					      uint8_t *number_of_change_records,
 					      size_t *change_record_data_offset)
 {
-	if (event_data == NULL || event_data_format == NULL ||
-	    number_of_change_records == NULL ||
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (event_data_format == NULL || number_of_change_records == NULL ||
 	    change_record_data_offset == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
-	if (event_data_size < PLDM_PDR_REPOSITORY_CHG_EVENT_MIN_LENGTH) {
-		return PLDM_ERROR_INVALID_LENGTH;
+
+	rc = pldm_msgbuf_init(buf, PLDM_PDR_REPOSITORY_CHG_EVENT_MIN_LENGTH,
+			      event_data, event_data_size);
+	if (rc) {
+		return rc;
 	}
 
-	struct pldm_pdr_repository_chg_event_data
-	    *pdr_repository_chg_event_data =
-		(struct pldm_pdr_repository_chg_event_data *)event_data;
+	pldm_msgbuf_extract(buf, event_data_format);
+	pldm_msgbuf_extract(buf, number_of_change_records);
 
-	*event_data_format = pdr_repository_chg_event_data->event_data_format;
-	*number_of_change_records =
-	    pdr_repository_chg_event_data->number_of_change_records;
 	*change_record_data_offset =
 	    sizeof(*event_data_format) + sizeof(*number_of_change_records);
 
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy(buf);
 }
 
 int decode_pldm_pdr_repository_change_record_data(
