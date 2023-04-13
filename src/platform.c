@@ -1116,40 +1116,61 @@ int decode_event_message_supported_resp(
     uint8_t *number_event_class_returned, uint8_t *event_class,
     uint8_t event_class_count)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int i;
+	int rc;
+
 	if (msg == NULL || completion_code == NULL ||
 	    synchrony_config == NULL || synchrony_config_support == NULL ||
 	    number_event_class_returned == NULL || event_class == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	*completion_code = msg->payload[0];
+	rc = pldm_msgbuf_init(buf, PLDM_EVENT_MESSAGE_SUPPORTED_MIN_RESP_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, completion_code);
+	if (rc) {
+		return rc;
+	}
+
 	if (PLDM_SUCCESS != *completion_code) {
 		return PLDM_SUCCESS;
 	}
-	if (payload_length < PLDM_EVENT_MESSAGE_SUPPORTED_MIN_RESP_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
+
+	rc = pldm_msgbuf_extract(buf, synchrony_config);
+	if (rc) {
+		return rc;
 	}
 
-	struct pldm_event_message_supported_resp *response =
-	    (struct pldm_event_message_supported_resp *)msg->payload;
-
-	*synchrony_config = response->synchrony_configuration;
 	if (*synchrony_config > PLDM_MESSAGE_TYPE_ASYNCHRONOUS_WITH_HEARTBEAT) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	*synchrony_config_support = response->synchrony_configuration_supported;
-	*number_event_class_returned = response->number_event_class_returned;
+	pldm_msgbuf_extract(buf, &synchrony_config_support->byte);
 
-	if (*number_event_class_returned > 0) {
-		if (event_class_count < *number_event_class_returned) {
-			return PLDM_ERROR_INVALID_LENGTH;
-		}
-		memcpy(event_class, response->event_class,
-		       *number_event_class_returned);
+	rc = pldm_msgbuf_extract(buf, number_event_class_returned);
+	if (rc) {
+		return rc;
 	}
 
-	return PLDM_SUCCESS;
+	if (*number_event_class_returned == 0) {
+		return pldm_msgbuf_destroy(buf);
+	}
+
+	if (event_class_count < *number_event_class_returned) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	for (i = 0; i < *number_event_class_returned; i++) {
+		pldm_msgbuf_extract(buf, &event_class[i]);
+	}
+
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 int decode_sensor_event_data(const uint8_t *event_data,
