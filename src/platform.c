@@ -1559,20 +1559,23 @@ int decode_get_numeric_effecter_value_req(const struct pldm_msg *msg,
 					  size_t payload_length,
 					  uint16_t *effecter_id)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
 	if (msg == NULL || effecter_id == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_GET_NUMERIC_EFFECTER_VALUE_REQ_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
+	rc = pldm_msgbuf_init(buf, PLDM_GET_NUMERIC_EFFECTER_VALUE_REQ_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
 	}
 
-	struct pldm_get_numeric_effecter_value_req *request =
-	    (struct pldm_get_numeric_effecter_value_req *)msg->payload;
+	pldm_msgbuf_extract(buf, effecter_id);
 
-	*effecter_id = le16toh(request->effecter_id);
-
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 int decode_get_numeric_effecter_value_resp(
