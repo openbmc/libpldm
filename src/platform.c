@@ -800,23 +800,25 @@ int decode_get_state_sensor_readings_req(const struct pldm_msg *msg,
 					 bitfield8_t *sensor_rearm,
 					 uint8_t *reserved)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
 	if (msg == NULL || sensor_id == NULL || sensor_rearm == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_GET_STATE_SENSOR_READINGS_REQ_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
+	rc = pldm_msgbuf_init(buf, PLDM_GET_STATE_SENSOR_READINGS_REQ_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
 	}
 
-	struct pldm_get_state_sensor_readings_req *request =
-	    (struct pldm_get_state_sensor_readings_req *)msg->payload;
+	pldm_msgbuf_extract(buf, sensor_id);
+	pldm_msgbuf_extract(buf, &sensor_rearm->byte);
+	pldm_msgbuf_extract(buf, reserved);
 
-	*sensor_id = le16toh(request->sensor_id);
-	*reserved = request->reserved;
-	memcpy(&(sensor_rearm->byte), &(request->sensor_rearm.byte),
-	       sizeof(request->sensor_rearm.byte));
-
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy(buf);
 }
 
 int encode_sensor_event_data(
