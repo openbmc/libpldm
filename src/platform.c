@@ -971,28 +971,40 @@ int decode_platform_event_message_resp(const struct pldm_msg *msg,
 				       uint8_t *completion_code,
 				       uint8_t *platform_event_status)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
 	if (msg == NULL || completion_code == NULL ||
 	    platform_event_status == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	*completion_code = msg->payload[0];
+	rc = pldm_msgbuf_init(buf, PLDM_PLATFORM_EVENT_MESSAGE_RESP_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, completion_code);
+	if (rc) {
+		return rc;
+	}
+
 	if (PLDM_SUCCESS != *completion_code) {
 		return PLDM_SUCCESS;
 	}
-	if (payload_length != PLDM_PLATFORM_EVENT_MESSAGE_RESP_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
 
-	struct pldm_platform_event_message_resp *response =
-	    (struct pldm_platform_event_message_resp *)msg->payload;
-	*platform_event_status = response->platform_event_status;
+	rc = pldm_msgbuf_extract(buf, platform_event_status);
+	if (rc) {
+		return rc;
+	}
 
 	if (*platform_event_status > PLDM_EVENT_LOGGING_REJECTED) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy(buf);
 }
 
 int encode_event_message_buffer_size_req(
