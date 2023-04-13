@@ -1112,6 +1112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0092bf8_605a98d5",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-13T13:49:52Z",
+      "side": 1,
+      "message": "New patch the next free instance ID of the latest allocated instance ID will be used. So there is no difference with the current pldm code.",
+      "parentUuid": "8c157b2d_7b5c1549",
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31186c39_8122d799",
