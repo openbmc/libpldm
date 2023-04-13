@@ -1969,16 +1969,16 @@ int decode_set_event_receiver_req(const struct pldm_msg *msg,
 	struct pldm_set_event_receiver_req *request =
 	    (struct pldm_set_event_receiver_req *)msg->payload;
 
+	*event_message_global_enable = request->event_message_global_enable,
+	*transport_protocol_type = request->transport_protocol_type,
+	*event_receiver_address_info = request->event_receiver_address_info,
+	*heartbeat_timer = le16toh(request->heartbeat_timer);
+
 	if ((*event_message_global_enable ==
 	     PLDM_EVENT_MESSAGE_GLOBAL_ENABLE_ASYNC_KEEP_ALIVE) &&
 	    (*heartbeat_timer == 0)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
-
-	*event_message_global_enable = request->event_message_global_enable,
-	*transport_protocol_type = request->transport_protocol_type,
-	*event_receiver_address_info = request->event_receiver_address_info,
-	*heartbeat_timer = le16toh(request->heartbeat_timer);
 
 	return PLDM_SUCCESS;
 }
