@@ -1583,80 +1583,56 @@ int decode_get_numeric_effecter_value_resp(
     uint8_t *effecter_data_size, uint8_t *effecter_oper_state,
     uint8_t *pending_value, uint8_t *present_value)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
 	if (msg == NULL || effecter_data_size == NULL ||
 	    effecter_oper_state == NULL || pending_value == NULL ||
 	    present_value == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	*completion_code = msg->payload[0];
+	rc = pldm_msgbuf_init(buf,
+			      PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, completion_code);
+	if (rc) {
+		return rc;
+	}
+
 	if (PLDM_SUCCESS != *completion_code) {
 		return PLDM_SUCCESS;
 	}
 
-	if (payload_length < PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
+	rc = pldm_msgbuf_extract(buf, effecter_data_size);
+	if (rc) {
+		return rc;
 	}
-
-	struct pldm_get_numeric_effecter_value_resp *response =
-	    (struct pldm_get_numeric_effecter_value_resp *)msg->payload;
-
-	*effecter_data_size = response->effecter_data_size;
-	*effecter_oper_state = response->effecter_oper_state;
 
 	if (*effecter_data_size > PLDM_EFFECTER_DATA_SIZE_SINT32) {
 		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_extract(buf, effecter_oper_state);
+	if (rc) {
+		return rc;
 	}
 
 	if (*effecter_oper_state > EFFECTER_OPER_STATE_INTEST) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (*effecter_data_size == PLDM_EFFECTER_DATA_SIZE_UINT8 ||
-	    *effecter_data_size == PLDM_EFFECTER_DATA_SIZE_SINT8) {
-		if (payload_length !=
-		    PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES) {
-			return PLDM_ERROR_INVALID_LENGTH;
-		}
-		memcpy(pending_value, response->pending_and_present_values, 1);
-		memcpy(present_value, &response->pending_and_present_values[1],
-		       1);
+	pldm_msgbuf_extract_effecter_value(buf, *effecter_data_size,
+					   pending_value);
+	pldm_msgbuf_extract_effecter_value(buf, *effecter_data_size,
+					   present_value);
 
-	} else if (*effecter_data_size == PLDM_EFFECTER_DATA_SIZE_UINT16 ||
-		   *effecter_data_size == PLDM_EFFECTER_DATA_SIZE_SINT16) {
-		if (payload_length !=
-		    PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 2) {
-			return PLDM_ERROR_INVALID_LENGTH;
-		}
-		memcpy(pending_value, response->pending_and_present_values,
-		       sizeof(uint16_t));
-		uint16_t *val_pending = (uint16_t *)pending_value;
-		*val_pending = le16toh(*val_pending);
-		memcpy(
-		    present_value,
-		    (response->pending_and_present_values + sizeof(uint16_t)),
-		    sizeof(uint16_t));
-		uint16_t *val_present = (uint16_t *)present_value;
-		*val_present = le16toh(*val_present);
-
-	} else if (*effecter_data_size == PLDM_EFFECTER_DATA_SIZE_UINT32 ||
-		   *effecter_data_size == PLDM_EFFECTER_DATA_SIZE_SINT32) {
-		if (payload_length !=
-		    PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 6) {
-			return PLDM_ERROR_INVALID_LENGTH;
-		}
-		memcpy(pending_value, response->pending_and_present_values,
-		       sizeof(uint32_t));
-		uint32_t *val_pending = (uint32_t *)pending_value;
-		*val_pending = le32toh(*val_pending);
-		memcpy(
-		    present_value,
-		    (response->pending_and_present_values + sizeof(uint32_t)),
-		    sizeof(uint32_t));
-		uint32_t *val_present = (uint32_t *)present_value;
-		*val_present = le32toh(*val_present);
-	}
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 int encode_pldm_pdr_repository_chg_event_data(
