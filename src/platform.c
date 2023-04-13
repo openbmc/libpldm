@@ -1217,33 +1217,56 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 
 	switch (*sensor_data_size) {
 	case PLDM_SENSOR_DATA_SIZE_UINT8:
-	case PLDM_SENSOR_DATA_SIZE_SINT8:
 		if (sensor_data_length !=
 		    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_8BIT_DATA_LENGTH) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
 		*present_reading = present_reading_ptr[0];
 		break;
-	case PLDM_SENSOR_DATA_SIZE_UINT16:
-	case PLDM_SENSOR_DATA_SIZE_SINT16:
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		if (sensor_data_length !=
+		    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_8BIT_DATA_LENGTH) {
+			return PLDM_ERROR_INVALID_LENGTH;
+		}
+		*present_reading = (uint32_t)(int32_t)present_reading_ptr[0];
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT16: {
+		uint16_t val_le;
+
 		if (sensor_data_length !=
 		    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_16BIT_DATA_LENGTH) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
-		*present_reading = le16toh(present_reading_ptr[1] |
-					   (present_reading_ptr[0] << 8));
+
+		memcpy(&val_le, present_reading_ptr, sizeof(val_le));
+		*present_reading = (uint32_t)(le16toh(val_le));
 		break;
+	}
+	case PLDM_SENSOR_DATA_SIZE_SINT16: {
+		uint16_t val_le;
+
+		if (sensor_data_length !=
+		    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_16BIT_DATA_LENGTH) {
+			return PLDM_ERROR_INVALID_LENGTH;
+		}
+
+		memcpy(&val_le, present_reading_ptr, sizeof(val_le));
+		*present_reading = (uint32_t)(int32_t)(le16toh(val_le));
+		break;
+	}
 	case PLDM_SENSOR_DATA_SIZE_UINT32:
-	case PLDM_SENSOR_DATA_SIZE_SINT32:
+	case PLDM_SENSOR_DATA_SIZE_SINT32: {
+		uint32_t val_le;
+
 		if (sensor_data_length !=
 		    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_32BIT_DATA_LENGTH) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
-		*present_reading = le32toh(present_reading_ptr[3] |
-					   (present_reading_ptr[2] << 8) |
-					   (present_reading_ptr[1] << 16) |
-					   (present_reading_ptr[0] << 24));
+
+		memcpy(&val_le, present_reading_ptr, sizeof(val_le));
+		*present_reading = le32toh(val_le);
 		break;
+	}
 	default:
 		return PLDM_ERROR_INVALID_DATA;
 	}
