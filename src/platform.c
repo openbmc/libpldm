@@ -1975,20 +1975,23 @@ int decode_set_event_receiver_resp(const struct pldm_msg *msg,
 				   size_t payload_length,
 				   uint8_t *completion_code)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
 	if (msg == NULL || completion_code == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	*completion_code = msg->payload[0];
-	if (PLDM_SUCCESS != *completion_code) {
-		return PLDM_SUCCESS;
+	rc = pldm_msgbuf_init(buf, PLDM_SET_EVENT_RECEIVER_RESP_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
 	}
 
-	if (payload_length > PLDM_SET_EVENT_RECEIVER_RESP_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
+	pldm_msgbuf_extract(buf, completion_code);
 
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy(buf);
 }
 
 int decode_set_event_receiver_req(const struct pldm_msg *msg,
