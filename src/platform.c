@@ -1266,80 +1266,87 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 			       uint8_t *sensor_data_size,
 			       uint32_t *present_reading)
 {
-	if (sensor_data == NULL || sensor_data_size == NULL ||
-	    event_state == NULL || previous_event_state == NULL ||
-	    present_reading == NULL) {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (sensor_data_size == NULL || event_state == NULL ||
+	    previous_event_state == NULL || present_reading == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
-	if (sensor_data_length <
-		PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MIN_DATA_LENGTH ||
-	    sensor_data_length >
-		PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH) {
+
+	if (sensor_data_length >
+	    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
-	struct pldm_sensor_event_numeric_sensor_state *numeric_sensor_data =
-	    (struct pldm_sensor_event_numeric_sensor_state *)sensor_data;
-	*event_state = numeric_sensor_data->event_state;
-	*previous_event_state = numeric_sensor_data->previous_event_state;
-	*sensor_data_size = numeric_sensor_data->sensor_data_size;
-	uint8_t *present_reading_ptr = numeric_sensor_data->present_reading;
 
+	rc = pldm_msgbuf_init(
+	    buf, PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MIN_DATA_LENGTH,
+	    sensor_data, sensor_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, event_state);
+	pldm_msgbuf_extract(buf, previous_event_state);
+	rc = pldm_msgbuf_extract(buf, sensor_data_size);
+	if (rc) {
+		return rc;
+	}
+
+	/*
+	 * The implementation below is bonkers, but it's because the function
+	 * prototype is bonkers. The `present_reading` argument should have been
+	 * a tagged union.
+	 */
 	switch (*sensor_data_size) {
-	case PLDM_SENSOR_DATA_SIZE_UINT8:
-		if (sensor_data_length !=
-		    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_8BIT_DATA_LENGTH) {
-			return PLDM_ERROR_INVALID_LENGTH;
+	case PLDM_SENSOR_DATA_SIZE_UINT8: {
+		uint8_t val;
+		if (!pldm_msgbuf_extract(buf, &val)) {
+			*present_reading = (uint32_t)val;
 		}
-		*present_reading = present_reading_ptr[0];
 		break;
-	case PLDM_SENSOR_DATA_SIZE_SINT8:
-		if (sensor_data_length !=
-		    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_8BIT_DATA_LENGTH) {
-			return PLDM_ERROR_INVALID_LENGTH;
+	}
+	case PLDM_SENSOR_DATA_SIZE_SINT8: {
+		int8_t val;
+		if (!pldm_msgbuf_extract(buf, &val)) {
+			*present_reading = (uint32_t)(int32_t)val;
 		}
-		*present_reading = (uint32_t)(int32_t)present_reading_ptr[0];
 		break;
+	}
 	case PLDM_SENSOR_DATA_SIZE_UINT16: {
-		uint16_t val_le;
-
-		if (sensor_data_length !=
-		    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_16BIT_DATA_LENGTH) {
-			return PLDM_ERROR_INVALID_LENGTH;
+		uint16_t val;
+		if (!pldm_msgbuf_extract(buf, &val)) {
+			*present_reading = (uint32_t)val;
 		}
-
-		memcpy(&val_le, present_reading_ptr, sizeof(val_le));
-		*present_reading = (uint32_t)(le16toh(val_le));
 		break;
 	}
 	case PLDM_SENSOR_DATA_SIZE_SINT16: {
-		uint16_t val_le;
-
-		if (sensor_data_length !=
-		    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_16BIT_DATA_LENGTH) {
-			return PLDM_ERROR_INVALID_LENGTH;
+		int16_t val;
+		if (!pldm_msgbuf_extract(buf, &val)) {
+			*present_reading = (uint32_t)(int32_t)val;
 		}
-
-		memcpy(&val_le, present_reading_ptr, sizeof(val_le));
-		*present_reading = (uint32_t)(int32_t)(le16toh(val_le));
 		break;
 	}
-	case PLDM_SENSOR_DATA_SIZE_UINT32:
-	case PLDM_SENSOR_DATA_SIZE_SINT32: {
-		uint32_t val_le;
-
-		if (sensor_data_length !=
-		    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_32BIT_DATA_LENGTH) {
-			return PLDM_ERROR_INVALID_LENGTH;
+	case PLDM_SENSOR_DATA_SIZE_UINT32: {
+		uint32_t val;
+		if (!pldm_msgbuf_extract(buf, &val)) {
+			*present_reading = (uint32_t)val;
 		}
-
-		memcpy(&val_le, present_reading_ptr, sizeof(val_le));
-		*present_reading = le32toh(val_le);
+		break;
+	}
+	case PLDM_SENSOR_DATA_SIZE_SINT32: {
+		int32_t val;
+		if (!pldm_msgbuf_extract(buf, &val)) {
+			*present_reading = (uint32_t)val;
+		}
 		break;
 	}
 	default:
 		return PLDM_ERROR_INVALID_DATA;
 	}
-	return PLDM_SUCCESS;
+
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 #define PLDM_NUMERIC_SENSOR_VALUE_PDR_MIN_SIZE 69
