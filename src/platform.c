@@ -1909,21 +1909,24 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
 				  size_t payload_length, uint16_t *sensor_id,
 				  uint8_t *rearm_event_state)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
 	if (msg == NULL || sensor_id == NULL || rearm_event_state == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_GET_SENSOR_READING_REQ_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
+	rc = pldm_msgbuf_init(buf, PLDM_GET_SENSOR_READING_REQ_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
 	}
 
-	struct pldm_get_sensor_reading_req *request =
-	    (struct pldm_get_sensor_reading_req *)msg->payload;
+	pldm_msgbuf_extract(buf, sensor_id);
+	pldm_msgbuf_extract(buf, rearm_event_state);
 
-	*sensor_id = le16toh(request->sensor_id);
-	*rearm_event_state = request->rearm_event_state;
-
-	return PLDM_SUCCESS;
+	return pldm_msgbuf_destroy(buf);
 }
 
 int encode_set_event_receiver_req(uint8_t instance_id,
