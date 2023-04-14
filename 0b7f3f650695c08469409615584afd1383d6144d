@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e497097c_cab3d432",
+        "filename": "src/transport/af_mctp.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-14T13:21:10Z",
+      "side": 1,
+      "message": "Check the value of eid with MCTP_MAX_NUM_EID.",
+      "revId": "0b7f3f650695c08469409615584afd1383d6144d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90e1aa4b_6fc12fc8",
+        "filename": "src/transport/af_mctp.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-14T13:21:10Z",
+      "side": 1,
+      "message": "Check the value of eid with MCTP_MAX_NUM_EID.",
+      "revId": "0b7f3f650695c08469409615584afd1383d6144d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65f9fdf6_92ccab30",
+        "filename": "src/transport/af_mctp.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-14T13:21:10Z",
+      "side": 1,
+      "message": "Dirrectly checking length with sizeof(struct pldm_msg_hdr) because min_len is only used in this line.",
+      "revId": "0b7f3f650695c08469409615584afd1383d6144d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
