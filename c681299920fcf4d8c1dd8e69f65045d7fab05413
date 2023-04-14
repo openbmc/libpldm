@@ -163,6 +163,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f16994b_1a6f949c",
+        "filename": "src/instance_id/instance_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001286
+      },
+      "writtenOn": "2023-04-14T04:38:08Z",
+      "side": 1,
+      "message": "Should *ctx be freed if open failed and function returned in line 40.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 2
+      },
+      "revId": "c681299920fcf4d8c1dd8e69f65045d7fab05413",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "828d2d1b_f2400533",
         "filename": "src/instance_id/instance_id.c",
         "patchSetId": 1
@@ -174,6 +197,29 @@
       "writtenOn": "2023-04-13T13:44:35Z",
       "side": 1,
       "message": "Which is initial value of ctx-\u003eprev[tid]?\nIs it 0? In that case, at line #89 the first allocated instance ID is 1 but not 0.",
+      "revId": "c681299920fcf4d8c1dd8e69f65045d7fab05413",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b290b5b_5ef7a315",
+        "filename": "src/instance_id/instance_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001286
+      },
+      "writtenOn": "2023-04-14T04:38:08Z",
+      "side": 1,
+      "message": "If some call in warnx execution fails then errno will be missed.",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 3
+      },
       "revId": "c681299920fcf4d8c1dd8e69f65045d7fab05413",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
