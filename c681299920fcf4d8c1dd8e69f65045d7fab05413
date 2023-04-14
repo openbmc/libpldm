@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2976cf1a_b21d2361",
+        "filename": "include/libpldm/instance_id/instance_id.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-14T02:25:35Z",
+      "side": 1,
+      "message": "oh, another comment - I think the header should just go directly under `libpldm/` rather than nesting it under `libpldm/instance_id/`. What was your thought behind nesting it?",
+      "revId": "c681299920fcf4d8c1dd8e69f65045d7fab05413",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9beb4a45_f64f77ef",
         "filename": "include/libpldm/instance_id/instance_id.h",
         "patchSetId": 1
