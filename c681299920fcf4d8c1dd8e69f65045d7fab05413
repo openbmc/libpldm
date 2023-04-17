@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e851406e_eb95b027",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-17T02:37:54Z",
+      "side": 1,
+      "message": "Not trying to promote my own work here necessarily, but I think it would be useful context to reference the blog posts I wrote in the commit message:\n\n1. https://amboar.github.io/notes/2023/03/28/motivating-a-new-scheme-for-pldm-instance-id-management-in-openbmc.html\n\n2. https://amboar.github.io/notes/2023/03/29/a-global-pldm-instance-id-allocator-for-libpldm.html",
+      "revId": "c681299920fcf4d8c1dd8e69f65045d7fab05413",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2976cf1a_b21d2361",
         "filename": "include/libpldm/instance_id/instance_id.h",
         "patchSetId": 1
