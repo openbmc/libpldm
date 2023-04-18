@@ -33,6 +33,24 @@
       "message": "I think we do the same with the transport implementations as I suggested with the instance ID API: Have the caller pass through the `struct pldm_transport_mctp_demux *` object and we just populate it. This requires moving the struct definition to the header and making it part of the ABI, but it does help with memory management in freestanding environments.",
       "revId": "dfa9b91929e38b61b340fb47f66a2c71e769fea3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bd41c87_e657596c",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T23:38:30Z",
+      "side": 1,
+      "message": "Actually, disregard exposing the struct definition in the header and making it part of the ABI for now. As mentioned on the previous patch, on reflection I think I got the trade-offs wrong, and we should try use a consistent approach.\n\nHowever, we probably want to consider this function signature rhyme with the `pldm_instance_id_init()` signature where it returns an error value and takes a double-pointer as an argument. Then do the same initial checks:\n\n```\nint pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx)\n{\n    struct pldm_transport_mctp_demux *lctx;\n    \n    if (!ctx) {\n        return -EINVAL;\n    }\n    \n    if (*ctx) {\n        return -EINVAL;\n    }\n    \n    lctx \u003d calloc(...);\n    if (!lctx) {\n        return -ENOMEM;\n    }\n    \n    ...\n    \n    *ctx \u003d lctx;\n    \n    return 0;\n}\n```",
+      "parentUuid": "d8ff2bb1_572ca355",
+      "revId": "dfa9b91929e38b61b340fb47f66a2c71e769fea3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
