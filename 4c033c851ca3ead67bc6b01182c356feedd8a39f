@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09cc8024_b14fe8b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T08:13:57Z",
+      "side": 1,
+      "message": "I think there are a couple of small fixes we need. I\u0027ve commented where necessary.",
+      "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffa766df_d5287952",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T08:13:57Z",
+      "side": 1,
+      "message": "I think we need to clarify the returned error values are defined in terms of errno, for each function declared here.",
+      "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc809b37_040a5f69",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T08:13:57Z",
+      "side": 1,
+      "message": "I think we want to wrap this up in an `#if ...` like so:\n\n```\n#if defined(__STDC_HOSTED__)\n    /* Declarations above */\n#endif\n```\n\nThis way people integrating it into a freestanding environment will become aware that they\u0027re missing the implementation.",
+      "range": {
+        "startLine": 14,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 25
+      },
+      "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14cf1752_3936a09c",
+        "filename": "src/requester/instance-id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T08:13:57Z",
+      "side": 1,
+      "message": "I think I\u0027d prefer we have the caller pass through the object and this function just populates it. This gives the caller control of whether the object storage is on the stack or the heap. Freestanding environments tend to want tight control of heap allocations, hence it\u0027s better if the API(s) cater to that.\n\nWhile this implementation doesn\u0027t work in a freestanding environment, we want the API itself to be applicable in both hosted and freestanding contexts.\n\nGiven this, we also should move the definition of `struct pldm_instance_id` into `include/libpldm/requester/instance-id.h` and adjust the function prototype to `int pldm_instance_id_init(struct pldm_instance_id *ctx, const char *dbpath)`",
+      "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fca0e2c_0ee6469a",
+        "filename": "src/requester/instance-id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T08:13:57Z",
+      "side": 1,
+      "message": "As above regarding the function prototype.",
+      "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "762b8bc9_8c2bc316",
+        "filename": "src/requester/instance-id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T08:13:57Z",
+      "side": 1,
+      "message": "With the suggestions above we must drop the free() as well.",
+      "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c264b91_165cc3c2",
+        "filename": "src/requester/instance-id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T08:13:57Z",
+      "side": 1,
+      "message": "I think I need convincing that removing the remaining checks in the sketch implementation is the right thing to do:\n\nhttps://gist.github.com/amboar/b8e997de57b88222d010c99ace80bf03#file-libpldm_iid-c-L154-L160\n\nIn both cases we could `return -EPROTO;`\n\nThis will signal to the caller that something is drastically wrong with the database rather than silently carrying on.",
+      "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
