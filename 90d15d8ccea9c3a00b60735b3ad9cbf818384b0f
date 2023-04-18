@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8e0a55d_b7f99849",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T08:29:24Z",
+      "side": 1,
+      "message": "Same comment on the API/ABI as on the instance ID and mctp-demux transport APIs.",
+      "revId": "90d15d8ccea9c3a00b60735b3ad9cbf818384b0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
