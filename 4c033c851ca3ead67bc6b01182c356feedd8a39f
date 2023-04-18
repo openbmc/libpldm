@@ -77,6 +77,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68045884_e2923a09",
+        "filename": "src/requester/instance-id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T23:20:50Z",
+      "side": 1,
+      "message": "Actually, disregard that. On reflection I think I got the trade-offs wrong. Specifically:\n\nThe struct members are implementation specific. When it comes to supporting some allocator in a freestanding environment, the content of the struct will necessarily be different. That would mean we have multiple ABIs for the one API, which isn\u0027t great for maintenance. It isn\u0027t changing one ABI to another linearly, it\u0027s maintaining multiple concurrently. Let\u0027s avoid that for now using the strategy you already have.\n\nHowever, I\u0027d like some more stringent tests on the provided arguments:\n\n```\nif (!ctx) {\n    return -EINVAL;\n}\n\n/*\n * Make sure the provided pointer was initialised to NULL. In the future if we\n * stabilise the ABI this allows the caller to potentially pass a valid pointer to \n * a struct they\u0027ve allocated\n */\nif (*ctx) {\n    return -EINVAL;\n}\n\n*ctx \u003d calloc(1, sizeof(**ctx));\nif (!*ctx) {\n    return -ENOMEM;\n}\n```\n\nNote the switch to `-ENOMEM` for the `calloc()` error value and fixing the ordering of the parameters to `calloc()`",
+      "parentUuid": "14cf1752_3936a09c",
+      "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2fca0e2c_0ee6469a",
         "filename": "src/requester/instance-id.c",
         "patchSetId": 2
@@ -88,6 +106,24 @@
       "writtenOn": "2023-04-18T08:13:57Z",
       "side": 1,
       "message": "As above regarding the function prototype.",
+      "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f31278_78ab1a04",
+        "filename": "src/requester/instance-id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T23:20:50Z",
+      "side": 1,
+      "message": "Ignore this.",
+      "parentUuid": "2fca0e2c_0ee6469a",
       "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -105,6 +141,24 @@
       "writtenOn": "2023-04-18T08:13:57Z",
       "side": 1,
       "message": "With the suggestions above we must drop the free() as well.",
+      "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "903df6fe_0c3ba96b",
+        "filename": "src/requester/instance-id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T23:20:50Z",
+      "side": 1,
+      "message": "Ignore this.",
+      "parentUuid": "762b8bc9_8c2bc316",
       "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
