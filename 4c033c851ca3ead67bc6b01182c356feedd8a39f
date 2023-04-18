@@ -95,6 +95,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a527aaa0_04b861ee",
+        "filename": "src/requester/instance-id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-18T23:28:58Z",
+      "side": 1,
+      "message": "We at least want to add:\n\n```\n*ctx \u003d NULL;\n```\n\nafter the free so there\u0027s no visible pointer to an invalid object. However, it\u0027s probably better to use an internal variable and structure the code as follows:\n\n```\nstruct pldm_instance_id *lctx;\n...\n\nlctx \u003d calloc(...);\n\n...\n\n*ctx \u003d lctx;\n\nreturn 0;\n```",
+      "revId": "4c033c851ca3ead67bc6b01182c356feedd8a39f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2fca0e2c_0ee6469a",
         "filename": "src/requester/instance-id.c",
         "patchSetId": 2
