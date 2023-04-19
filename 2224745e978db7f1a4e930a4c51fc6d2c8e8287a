@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfd2d805_6f275f95",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:04:30Z",
+      "side": 1,
+      "message": "I\u0027m not sure I\u0027m a fan of the arbitrary contraction of instance as `inst` in `pldm_inst_id_t`. Elsewhere we define `PLDM_TID_MAX` (to pick on something), and not e.g. `PLDM_TERM_ID_MAX`. Expanding it out would leave us with `typedef uint8_t pldm_instance_id_t` which then starts to look like it\u0027s directly associated with the `pldm_instance_id` symbol name for the struct.\n\nIf we can have `tid` and MCTP can have `eid`, why can\u0027t we have `iid` (and by extension e.g. `typedef uint8_t pldm_iid_t`)?\n\nHowever:\n\nI think the current naming of the API starts to blur the concept of two distinct types together:\n\n1. An instance ID (as used for framing a PLDM message)\n2. A database from which we can allocate an instance ID\n\nI think it would help cognitive load to keep them distinct.",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "992d5034_29ae38be",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:04:30Z",
+      "side": 1,
+      "message": "I think I\u0027d prefer we `s/Allocates/Instantiates/`.\n\n\nHowever (again):\n\nI think this sentence reinforces my point above. As it stands, `struct pldm_instance_id` represents a database, type 2 above, but the name suggests it represents type 1 above. If we renamed the API prefix to `pldm_instance_db_*` the sentence might instead read:\n\n\u003e Instantiates an instance ID database object for a given database path\n\nIn this way `pldm_instance_db_alloc()` uses the provided database object (type 2) to allocate an instance ID (type 1), and `pldm_instance_db_free()` undoes the allocation of the instance ID and returns it to the database.\n\nWhat are your thoughts on basically doing an `s/pldm_instance_id/pldm_instance_db/` for the API\u0027s types and symbols?\n\nAlternatively, if `pldm_instance_db*` is too visually similar to `pldm_instance_id*`, how about `pldm_instance_pool*`?",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3ef5204_1b24e22c",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:04:30Z",
+      "side": 1,
+      "message": "What\u0027s the relevant errno?",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580a37ee_7775f44b",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:04:30Z",
+      "side": 1,
+      "message": "`s/Allocates/Instantiates/` as above. Also, I\u0027d use \"instance ID database object\".",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f42724d_9e9a9bb3",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:04:30Z",
+      "side": 1,
+      "message": "Same question as above.",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01f8a17f_dd72519a",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:04:30Z",
+      "side": 1,
+      "message": "\"instance ID database object\"",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cd6a2c2_01b22f5a",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:04:30Z",
+      "side": 1,
+      "message": "... from the instance ID database",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f962de0_fd8a4874",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:04:30Z",
+      "side": 1,
+      "message": "This should be in the `@return` documentation",
+      "range": {
+        "startLine": 51,
+        "startChar": 45,
+        "endLine": 52,
+        "endChar": 40
+      },
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b43ed18a_cb6f2dd5",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:04:30Z",
+      "side": 1,
+      "message": "We should document the values implementations may return.",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "091528fc_8e4f35f6",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:04:30Z",
+      "side": 1,
+      "message": "instance ID database object",
+      "range": {
+        "startLine": 60,
+        "startChar": 19,
+        "endLine": 60,
+        "endChar": 30
+      },
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
