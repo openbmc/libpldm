@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e958c20_01d9ae76",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:29:00Z",
+      "side": 1,
+      "message": "Why `b`? I guess I have the same question for the macro...",
+      "range": {
+        "startLine": 27,
+        "startChar": 59,
+        "endLine": 27,
+        "endChar": 60
+      },
+      "revId": "a5bdaa470b1040278f68fa369fe138542a2e7e2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d02193a_f26826df",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:29:00Z",
+      "side": 1,
+      "message": "Cast is unnecessary",
+      "range": {
+        "startLine": 115,
+        "startChar": 29,
+        "endLine": 115,
+        "endChar": 40
+      },
+      "revId": "a5bdaa470b1040278f68fa369fe138542a2e7e2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "034cdaa8_5e4966f7",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:29:00Z",
+      "side": 1,
+      "message": "This one, on the other-hand, is required. Thanks POSIX.",
+      "range": {
+        "startLine": 116,
+        "startChar": 5,
+        "endLine": 116,
+        "endChar": 24
+      },
+      "revId": "a5bdaa470b1040278f68fa369fe138542a2e7e2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d6eb523_a9753a23",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:29:00Z",
+      "side": 1,
+      "message": "Why `b`?",
+      "range": {
+        "startLine": 148,
+        "startChar": 67,
+        "endLine": 148,
+        "endChar": 68
+      },
+      "revId": "a5bdaa470b1040278f68fa369fe138542a2e7e2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09182ffe_8981f27f",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T06:29:00Z",
+      "side": 1,
+      "message": "Need `close(b-\u003esocket);` before `free(b);`",
+      "revId": "a5bdaa470b1040278f68fa369fe138542a2e7e2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
