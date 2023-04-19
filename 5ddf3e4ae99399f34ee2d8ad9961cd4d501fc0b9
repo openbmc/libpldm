@@ -762,6 +762,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17169937_7d701f93",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-19T00:49:12Z",
+      "side": 1,
+      "message": "Yep, fine with capitalised PLDM everywhere. I don\u0027t think that distinction is obvious.",
+      "parentUuid": "a799e2b0_56184042",
+      "range": {
+        "startLine": 141,
+        "startChar": 26,
+        "endLine": 141,
+        "endChar": 30
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d251fb9_86c61a85",
         "filename": "include/libpldm/requester/pldm.h",
         "patchSetId": 19
