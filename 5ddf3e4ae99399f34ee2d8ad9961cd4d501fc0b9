@@ -619,6 +619,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a9ace11_36ad11fe",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-19T04:10:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb742585_37ae07f3",
+      "range": {
+        "startLine": 32,
+        "startChar": 22,
+        "endLine": 32,
+        "endChar": 23
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccedffef_e891d2f5",
@@ -632,6 +656,30 @@
       "writtenOn": "2023-03-31T17:26:26Z",
       "side": 1,
       "message": "indentation",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 3
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "020af0de_52bb5669",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 19
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-19T04:10:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccedffef_e891d2f5",
       "range": {
         "startLine": 33,
         "startChar": 0,
@@ -774,6 +822,30 @@
       "side": 1,
       "message": "Yep, fine with capitalised PLDM everywhere. I don\u0027t think that distinction is obvious.",
       "parentUuid": "a799e2b0_56184042",
+      "range": {
+        "startLine": 141,
+        "startChar": 26,
+        "endLine": 141,
+        "endChar": 30
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a390d5ff_432d8dd2",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-19T04:10:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "17169937_7d701f93",
       "range": {
         "startLine": 141,
         "startChar": 26,
@@ -991,6 +1063,30 @@
       "writtenOn": "2023-03-24T04:10:34Z",
       "side": 1,
       "message": "nit: Again, inconsistent capitalisation across the documentation. Please audit all the added doxygen and make it consistent :)",
+      "range": {
+        "startLine": 36,
+        "startChar": 32,
+        "endLine": 36,
+        "endChar": 36
+      },
+      "revId": "5ddf3e4ae99399f34ee2d8ad9961cd4d501fc0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b3d4776_5ce1a5e0",
+        "filename": "include/libpldm/transport/transport.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-19T04:10:34Z",
+      "side": 1,
+      "message": "I think I\u0027ve addressed this by deferring the addition of these `pldm_requester` APIs until we actually need them",
+      "parentUuid": "56896ac0_cc54699c",
       "range": {
         "startLine": 36,
         "startChar": 32,
