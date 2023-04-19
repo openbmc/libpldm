@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "916cd88e_27c352bd",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-19T07:44:53Z",
+      "side": 1,
+      "message": "I quite like `IID` for instance ID, but the difference between it and `TID` and `EID` are that they are both documented in the PLDM spec as an abbreviation while `IID` is not. I\u0027m happy to go with whatever but I think if we go with `IID` we should add a comment in so it\u0027s super obvious.\n\nI agree with the struct name needing to change.",
+      "parentUuid": "dfd2d805_6f275f95",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "992d5034_29ae38be",
         "filename": "include/libpldm/requester/instance-id.h",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-19T06:04:30Z",
       "side": 1,
       "message": "I think I\u0027d prefer we `s/Allocates/Instantiates/`.\n\n\nHowever (again):\n\nI think this sentence reinforces my point above. As it stands, `struct pldm_instance_id` represents a database, type 2 above, but the name suggests it represents type 1 above. If we renamed the API prefix to `pldm_instance_db_*` the sentence might instead read:\n\n\u003e Instantiates an instance ID database object for a given database path\n\nIn this way `pldm_instance_db_alloc()` uses the provided database object (type 2) to allocate an instance ID (type 1), and `pldm_instance_db_free()` undoes the allocation of the instance ID and returns it to the database.\n\nWhat are your thoughts on basically doing an `s/pldm_instance_id/pldm_instance_db/` for the API\u0027s types and symbols?\n\nAlternatively, if `pldm_instance_db*` is too visually similar to `pldm_instance_id*`, how about `pldm_instance_pool*`?",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3e1c12b_74ddf973",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-19T07:44:53Z",
+      "side": 1,
+      "message": "I think `pldm_instance_db` is probably a better description of the struct than `pldm_instance_pool`.",
+      "parentUuid": "992d5034_29ae38be",
       "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
