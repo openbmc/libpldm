@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80947adb_ac918db2",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-20T11:40:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "584d37ab_281eebe7",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 518,
+        "endChar": 12
+      },
+      "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06d983b7_30cd1c86",
@@ -85,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c10e851_32c58461",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-20T11:40:59Z",
+      "side": 1,
+      "message": "Just want to confirm my understanding. \n\nIf `*resp_cnt\u003d5`, but there is no data in `buf` matching that, then wouldn\u0027t it be better to check the rc here? since extracting the array will fail.",
+      "parentUuid": "14fc7776_8284377f",
+      "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5db4f85d_20531c1c",
         "filename": "src/platform.c",
         "patchSetId": 4
@@ -114,6 +156,24 @@
       "side": 1,
       "message": "Not required as we don\u0027t dereference `transfer_crc`. Whether it was successfully extracted is captured by `return pldm_msgbuf_destroy(ctx);` below.",
       "parentUuid": "5db4f85d_20531c1c",
+      "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4960cbb3_99852c1f",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-20T11:40:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f1962eb0_6322dd34",
       "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
