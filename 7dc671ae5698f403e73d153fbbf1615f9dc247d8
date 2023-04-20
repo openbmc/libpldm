@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30b6c820_008983a3",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T02:45:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f25626c_d0335e92",
+      "range": {
+        "startLine": 22,
+        "startChar": 40,
+        "endLine": 24,
+        "endChar": 58
+      },
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5264379_df5b2a10",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-04-20T01:41:57Z",
       "side": 1,
       "message": "This looks like a double dereference rather than specifying the type. I think it would improve clarity if we instead wrote this consistently in terms of dereference operators, so:\n\n\u003e Returns -EINVAL if ctx is NULL or *ctx is not NULL.",
+      "range": {
+        "startLine": 35,
+        "startChar": 57,
+        "endLine": 35,
+        "endChar": 70
+      },
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77cbd91f_a54b01ee",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T02:45:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c5264379_df5b2a10",
       "range": {
         "startLine": 35,
         "startChar": 57,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6405f91e_ae7c1ba3",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T02:45:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "53548e5f_7fffb1be",
+      "range": {
+        "startLine": 46,
+        "startChar": 62,
+        "endLine": 47,
+        "endChar": 40
+      },
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acf013d9_bcc3fe2f",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-04-20T01:41:57Z",
       "side": 1,
       "message": "Need to properly specify the errors as per the discussion above.",
+      "range": {
+        "startLine": 65,
+        "startChar": 52,
+        "endLine": 66,
+        "endChar": 34
+      },
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a2bbc4d_fdd96690",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T02:45:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "acf013d9_bcc3fe2f",
       "range": {
         "startLine": 65,
         "startChar": 52,
@@ -127,6 +223,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f2e7aea_4ded3777",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T02:45:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "941eaf5f_118f1c50",
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79889bbb_3e1f2d6e",
@@ -140,6 +254,30 @@
       "writtenOn": "2023-04-20T01:41:57Z",
       "side": 1,
       "message": "Need to properly specify the errors as per the discussion above.",
+      "range": {
+        "startLine": 81,
+        "startChar": 29,
+        "endLine": 82,
+        "endChar": 12
+      },
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50467bff_a8e36272",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T02:45:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "79889bbb_3e1f2d6e",
       "range": {
         "startLine": 81,
         "startChar": 29,
