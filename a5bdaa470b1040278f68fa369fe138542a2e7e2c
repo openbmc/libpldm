@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7a819f7_15bd03ba",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T00:21:18Z",
+      "side": 1,
+      "message": "whoops, remnants from when I called it `binding` rather than `transport`. Fixed.",
+      "parentUuid": "2e958c20_01d9ae76",
+      "range": {
+        "startLine": 27,
+        "startChar": 59,
+        "endLine": 27,
+        "endChar": 60
+      },
+      "revId": "a5bdaa470b1040278f68fa369fe138542a2e7e2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d02193a_f26826df",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-19T06:29:00Z",
       "side": 1,
       "message": "Cast is unnecessary",
+      "range": {
+        "startLine": 115,
+        "startChar": 29,
+        "endLine": 115,
+        "endChar": 40
+      },
+      "revId": "a5bdaa470b1040278f68fa369fe138542a2e7e2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7828fad4_3a62cfec",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T00:21:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8d02193a_f26826df",
       "range": {
         "startLine": 115,
         "startChar": 29,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72e66821_2215b3d0",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T00:21:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "034cdaa8_5e4966f7",
+      "range": {
+        "startLine": 116,
+        "startChar": 5,
+        "endLine": 116,
+        "endChar": 24
+      },
+      "revId": "a5bdaa470b1040278f68fa369fe138542a2e7e2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d6eb523_a9753a23",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f341cfb1_b268f88f",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T00:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d6eb523_a9753a23",
+      "range": {
+        "startLine": 148,
+        "startChar": 67,
+        "endLine": 148,
+        "endChar": 68
+      },
+      "revId": "a5bdaa470b1040278f68fa369fe138542a2e7e2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09182ffe_8981f27f",
@@ -106,6 +202,24 @@
       "writtenOn": "2023-04-19T06:29:00Z",
       "side": 1,
       "message": "Need `close(b-\u003esocket);` before `free(b);`",
+      "revId": "a5bdaa470b1040278f68fa369fe138542a2e7e2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "807f945e_6e63ced8",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T00:21:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "09182ffe_8981f27f",
       "revId": "a5bdaa470b1040278f68fa369fe138542a2e7e2c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
