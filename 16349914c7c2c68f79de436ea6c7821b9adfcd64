@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77ebfed6_80f38254",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-20T03:59:07Z",
+      "side": 1,
+      "message": "Is the check done here because this is beyond the PLDM_GET_PDR_MIN_RESP_BYTES init validation?\n\n#define PLDM_GET_PDR_MIN_RESP_BYTES 12 covers for resp_cnt as well.",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 518,
+        "endChar": 12
+      },
+      "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06d983b7_30cd1c86",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-20T03:59:07Z",
+      "side": 1,
+      "message": "Should we check the rc here? If the buffer didn\u0027t have the *resp_cnt as expected?",
+      "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5db4f85d_20531c1c",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-20T03:59:07Z",
+      "side": 1,
+      "message": "Check rc here as well?",
+      "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
