@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e2ca40_d0d1978a",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 23
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T00:21:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "94f65d0d_19337492",
+      "revId": "c09d0c1b7370e638a0ca9ba2bb3b7ad26672c373",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fbdca62_8be77232",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-19T06:23:34Z",
       "side": 1,
       "message": "Please move this header up one level (so it\u0027s immediately under `libpldm/`) as suggested earlier.",
+      "revId": "c09d0c1b7370e638a0ca9ba2bb3b7ad26672c373",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdaed615_e4328ead",
+        "filename": "include/libpldm/transport/transport.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T00:21:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9fbdca62_8be77232",
       "revId": "c09d0c1b7370e638a0ca9ba2bb3b7ad26672c373",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -58,6 +94,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e124cfa5_0eb8091c",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T00:21:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "66b156a0_24e7e0ca",
+      "range": {
+        "startLine": 67,
+        "startChar": 28,
+        "endLine": 67,
+        "endChar": 51
+      },
+      "revId": "c09d0c1b7370e638a0ca9ba2bb3b7ad26672c373",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1b6f105_bddcfe25",
@@ -71,6 +131,30 @@
       "writtenOn": "2023-04-19T06:23:34Z",
       "side": 1,
       "message": "Cast is unnecessary.",
+      "range": {
+        "startLine": 91,
+        "startChar": 28,
+        "endLine": 91,
+        "endChar": 51
+      },
+      "revId": "c09d0c1b7370e638a0ca9ba2bb3b7ad26672c373",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74350862_a0bcbb94",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-04-20T00:21:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d1b6f105_bddcfe25",
       "range": {
         "startLine": 91,
         "startChar": 28,
