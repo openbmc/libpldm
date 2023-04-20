@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281faa26_619128c6",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-20T06:55:30Z",
+      "side": 1,
+      "message": "Why check for effecter_data_size and not for effecter_id?",
+      "revId": "2a86e88658d8e74391af67bf3e1387d5cf2eaaff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a5e5f02_036fce2b",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-20T06:55:30Z",
+      "side": 1,
+      "message": "Check needed, since buf doesn\u0027t contain the effecter_value?",
+      "revId": "2a86e88658d8e74391af67bf3e1387d5cf2eaaff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
