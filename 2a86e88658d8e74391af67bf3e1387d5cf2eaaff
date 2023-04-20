@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c69b230e_51c66ead",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T11:57:35Z",
+      "side": 1,
+      "message": "Because we deref `effecter_data_size` below (starting with the deref on line 563) and we need to tell the compiler that we won\u0027t hit the potential case of reading uninitialised data. With that information the compiler can then optimise the check away if it can prove it\u0027s unnecessary.\n\nWe don\u0027t use the value of `effecter_id` - that\u0027s something that the caller presumably (eventually) cares about. The caller just has to test the return value of `decode_set_numeric_effecter_value_req()` before reading any of the values stored through the out parameters.",
+      "parentUuid": "281faa26_619128c6",
+      "revId": "2a86e88658d8e74391af67bf3e1387d5cf2eaaff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a5e5f02_036fce2b",
         "filename": "src/platform.c",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-20T06:55:30Z",
       "side": 1,
       "message": "Check needed, since buf doesn\u0027t contain the effecter_value?",
+      "revId": "2a86e88658d8e74391af67bf3e1387d5cf2eaaff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d207c2eb_fd15e50c",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T11:57:35Z",
+      "side": 1,
+      "message": "Can you unpack that question a bit more? It\u0027s not clear to me what the problem is.",
+      "parentUuid": "5a5e5f02_036fce2b",
       "revId": "2a86e88658d8e74391af67bf3e1387d5cf2eaaff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
