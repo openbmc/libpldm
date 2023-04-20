@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "584d37ab_281eebe7",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T06:56:24Z",
+      "side": 1,
+      "message": "Good question. Because we dereference `resp_cnt` below, failing to test `rc` causes warnings about use of `resp_cnt` in a potentially uninitialised state. So the test keeps us honest. However, because the optimiser can eventually prove that the test is unnecessary it should be removed from the generated code (as it\u0027s guaranteed present by the buffer being at least PLDM_GET_PDR_MIN_RESP_BYTES).\n\nMaintaining this pattern of testing `rc` prior to dereferencing the extracted value keeps us safe when we go beyond the minimum message length where it\u0027s actually required.",
+      "parentUuid": "77ebfed6_80f38254",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 518,
+        "endChar": 12
+      },
+      "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06d983b7_30cd1c86",
         "filename": "src/platform.c",
         "patchSetId": 4
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14fc7776_8284377f",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T06:56:24Z",
+      "side": 1,
+      "message": "That\u0027s not necessary because we don\u0027t access any values from `record_data`, and `pldm_msgbuf_extract_array()` prevents overflow of the underlying buffer (i.e. when `resp_cnt` is too large).",
+      "parentUuid": "06d983b7_30cd1c86",
+      "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5db4f85d_20531c1c",
         "filename": "src/platform.c",
         "patchSetId": 4
@@ -54,6 +96,24 @@
       "writtenOn": "2023-04-20T03:59:07Z",
       "side": 1,
       "message": "Check rc here as well?",
+      "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1962eb0_6322dd34",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T06:56:24Z",
+      "side": 1,
+      "message": "Not required as we don\u0027t dereference `transfer_crc`. Whether it was successfully extracted is captured by `return pldm_msgbuf_destroy(ctx);` below.",
+      "parentUuid": "5db4f85d_20531c1c",
       "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
