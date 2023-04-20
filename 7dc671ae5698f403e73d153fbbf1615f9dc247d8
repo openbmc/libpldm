@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6075a3dc_62ad9136",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T01:41:57Z",
+      "side": 1,
+      "message": "I have some minor documentation comments, but otherwise this looks good.",
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f25626c_d0335e92",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T01:41:57Z",
+      "side": 1,
+      "message": "This reads as if the error values are greater than zero, but the implementation returns negative error codes.\n\nThe API must specify the behaviour, and the implementation must conform to it.\n\nGenerally the approach is to use negative error codes to align with libc APIs returning `-1` (i.e. the error check can consistently be `if (rc \u003c 0)`).\n\nI think we should change the specification here to describe negative error codes.",
+      "range": {
+        "startLine": 22,
+        "startChar": 40,
+        "endLine": 24,
+        "endChar": 58
+      },
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5264379_df5b2a10",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T01:41:57Z",
+      "side": 1,
+      "message": "This looks like a double dereference rather than specifying the type. I think it would improve clarity if we instead wrote this consistently in terms of dereference operators, so:\n\n\u003e Returns -EINVAL if ctx is NULL or *ctx is not NULL.",
+      "range": {
+        "startLine": 35,
+        "startChar": 57,
+        "endLine": 35,
+        "endChar": 70
+      },
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53548e5f_7fffb1be",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T01:41:57Z",
+      "side": 1,
+      "message": "Use of `close()` is an implementation detail. The API documentation is a specification of how a conforming implementation must behave. It needs to be explicit, exhaustive and independent of any possible implementation: the documentation needs to own the definition of the error codes that will be returned, and the implementation may only return those errors.\n\nConsider the case of a freestanding implementation of the API - such an implementation is unlikely to call anything that looks like close() and therefore is outside the current specification of the API. That is, the way the API is specified here makes such an implementation invalid (which is not what we want!).",
+      "range": {
+        "startLine": 46,
+        "startChar": 62,
+        "endLine": 47,
+        "endChar": 40
+      },
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf013d9_bcc3fe2f",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T01:41:57Z",
+      "side": 1,
+      "message": "Need to properly specify the errors as per the discussion above.",
+      "range": {
+        "startLine": 65,
+        "startChar": 52,
+        "endLine": 66,
+        "endChar": 34
+      },
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "941eaf5f_118f1c50",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T01:41:57Z",
+      "side": 1,
+      "message": "I actually quite like that you haven\u0027t renamed the alloc and free functions. The result is quite satisfying, and isn\u0027t something that occurred to me. Nice!",
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79889bbb_3e1f2d6e",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-20T01:41:57Z",
+      "side": 1,
+      "message": "Need to properly specify the errors as per the discussion above.",
+      "range": {
+        "startLine": 81,
+        "startChar": 29,
+        "endLine": 82,
+        "endChar": 12
+      },
+      "revId": "7dc671ae5698f403e73d153fbbf1615f9dc247d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
