@@ -285,6 +285,40 @@ static inline int pldm_msgbuf_extract_real32(struct pldm_msgbuf *ctx,
 		 : pldm_msgbuf_extract_int32, real32_t                         \
 		 : pldm_msgbuf_extract_real32)(ctx, dst)
 
+static inline int pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx,
+						  uint8_t *dst, size_t count)
+{
+	size_t len;
+
+	if (!ctx || !ctx->cursor || !dst) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (!count) {
+		return PLDM_SUCCESS;
+	}
+
+	len = sizeof(*dst) * count;
+	if (len > SSIZE_MAX) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	ctx->remaining -= (ssize_t)len;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	memcpy(dst, ctx->cursor, len);
+	ctx->cursor += len;
+
+	return PLDM_SUCCESS;
+}
+
+#define pldm_msgbuf_extract_array(ctx, dst, count)                             \
+	_Generic((*(dst)), uint8_t                                             \
+		 : pldm_msgbuf_extract_array_uint8)(ctx, dst, count)
+
 #ifdef __cplusplus
 }
 #endif
