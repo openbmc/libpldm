@@ -33,6 +33,24 @@
       "message": "Instead of a hardcoded path, I feel this should be configurable.\n\nAlso, if each alloc/free is a write to the file, wouldn\u0027t be it preferred to have the instance ID file on tmpfs. Over a BMC reboot, it is not expected to persist the instance ID assignments.",
       "revId": "9676485b67274ebdabfcb86c54787e3c0292fdea",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a63733aa_2aa11e10",
+        "filename": "src/requester/instance-id.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-21T03:23:27Z",
+      "side": 1,
+      "message": "\u003e https://amboar.github.io/notes/2023/03/29/a-global-pldm-instance-id-allocator-for-libpldm.html\n\nRead this :-), no write operations required.\n\nA configurable lock database allows testing.",
+      "parentUuid": "9fa0e7b6_264ede92",
+      "revId": "9676485b67274ebdabfcb86c54787e3c0292fdea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
