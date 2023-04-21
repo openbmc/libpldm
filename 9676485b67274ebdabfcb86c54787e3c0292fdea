@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9222ff6c_ab5a6432",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-21T03:51:04Z",
+      "side": 1,
+      "message": "Yeah, I had the same thought.\n\nI\u0027m planning to do that in a follow-up change while Rashmica pushes ahead with the AF_MCTP conversion; adding tests is easy, dealing with the many moving parts to get AF_MCTP integrated is not. So I hope she can continue to focus on the integration effort given she has all the routine and experience with testing it.",
+      "parentUuid": "aa8c4c63_8aba2a03",
+      "revId": "9676485b67274ebdabfcb86c54787e3c0292fdea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fa0e7b6_264ede92",
         "filename": "src/requester/instance-id.c",
         "patchSetId": 6

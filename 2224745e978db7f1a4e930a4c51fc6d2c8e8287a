@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab212df9_7f6ae8e1",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-21T03:51:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "916cd88e_27c352bd",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "992d5034_29ae38be",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "I think `pldm_instance_db` is probably a better description of the struct than `pldm_instance_pool`.",
       "parentUuid": "992d5034_29ae38be",
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "731050bf_4023b404",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-21T03:51:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3e1c12b_74ddf973",
       "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -365,6 +401,30 @@
       "side": 1,
       "message": "Isn\u0027t the instance ID database object the struct? We aren\u0027t freeing that.",
       "parentUuid": "091528fc_8e4f35f6",
+      "range": {
+        "startLine": 60,
+        "startChar": 19,
+        "endLine": 60,
+        "endChar": 30
+      },
+      "revId": "2224745e978db7f1a4e930a4c51fc6d2c8e8287a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8755f2f_9e67090c",
+        "filename": "include/libpldm/requester/instance-id.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-21T03:51:04Z",
+      "side": 1,
+      "message": "Uh, I think I highlighted the wrong thing. Disregard.",
+      "parentUuid": "7c6229bd_24201851",
       "range": {
         "startLine": 60,
         "startChar": 19,
