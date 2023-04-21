@@ -16,6 +16,24 @@
       "message": "Just wanted to confirm if this should be `pldm_msgbuf_destroy_consumed` or `pldm_msgbuf_destroy`. I have not looked at the calling code, in case this is processed in a loop.",
       "revId": "155317e5cefebf51d99532d0ce9f87a1479b6139",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0218212_1fb5511a",
+        "filename": "src/platform.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-21T05:23:20Z",
+      "side": 1,
+      "message": "I think the test on lines 1278-1281 suggest that `pldm_msgbuf_destroy_consumed()` is right. IIRC it\u0027s also supported by the test suite requiring this behaviour. I tended to start with just `pldm_msgbuf_destroy()` until the test suite told me I should use `pldm_msgbuf_destroy_consumed()`.",
+      "parentUuid": "ba87e2b6_045e123b",
+      "revId": "155317e5cefebf51d99532d0ce9f87a1479b6139",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
