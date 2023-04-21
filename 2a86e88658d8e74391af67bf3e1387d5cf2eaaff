@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd948ec7_8b406ad8",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-21T05:03:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c69b230e_51c66ead",
+      "revId": "2a86e88658d8e74391af67bf3e1387d5cf2eaaff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a5e5f02_036fce2b",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Can you unpack that question a bit more? It\u0027s not clear to me what the problem is.",
       "parentUuid": "5a5e5f02_036fce2b",
+      "revId": "2a86e88658d8e74391af67bf3e1387d5cf2eaaff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16d9f3df_4f0c522d",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-04-21T05:03:37Z",
+      "side": 1,
+      "message": "Resolved, `pldm_msgbuf_destroy` return INVALID_LENGTH if `pldm_msgbuf_extract_effecter_value` is not successful.",
+      "parentUuid": "d207c2eb_fd15e50c",
       "revId": "2a86e88658d8e74391af67bf3e1387d5cf2eaaff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
