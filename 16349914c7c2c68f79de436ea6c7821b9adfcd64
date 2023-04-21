@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5db9ef59_8643e654",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-21T04:21:14Z",
+      "side": 1,
+      "message": "The value of `*resp_cnt` is extracted from the message itself (line 516). If the message is truncated such that it is shorter than what\u0027s required by `*resp_cnt`, then this call to `pldm_msgbuf_extract_array()` will cause `pldm_msgbuf_destroy()` below to return `PLDM_ERROR_INVALID_LENGTH`.\n\nIf the caller of `decode_get_pdr_resp()` receives the return value `PLDM_ERROR_INVALID_LENGTH` then they mustn\u0027t read through any of the pointers they provided as arguments, as it\u0027s not possible to determine which are valid and which are not. What they do know is that the message was truncated in some fashion and that they need to throw the whole operation out.",
+      "parentUuid": "7c10e851_32c58461",
+      "revId": "16349914c7c2c68f79de436ea6c7821b9adfcd64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5db4f85d_20531c1c",
         "filename": "src/platform.c",
         "patchSetId": 4
