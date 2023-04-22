@@ -389,3 +389,129 @@ TEST(msgbuf, consumed_over)
     EXPECT_NE(pldm_msgbuf_extract_uint8(ctx, &val[1]), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy_consumed(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
+
+TEST(msgbuf, pldm_pack_int32_good)
+{
+    int32_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    int32_t src = 0x11223344;
+
+    auto rc = pldm_pack_int32(&aDst, &src);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(src, dst);
+}
+
+TEST(msgbuf, pldm_pack_int32_bad)
+{
+    int32_t src = 0x11223344;
+
+    auto rc = pldm_pack_int32(NULL, &src);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(msgbuf, pldm_pack_uint32_good)
+{
+    uint32_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    uint32_t src = 0xf1223344;
+
+    auto rc = pldm_pack_uint32(&aDst, &src);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(src, dst);
+}
+
+TEST(msgbuf, pldm_pack_uint32_bad)
+{
+    uint32_t src = 0xf1223344;
+
+    auto rc = pldm_pack_uint32(NULL, &src);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(msgbuf, pldm_pack_uint16_good)
+{
+    uint16_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    uint16_t src = 0x3344;
+
+    auto rc = pldm_pack_uint16(&aDst, &src);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(src, dst);
+}
+
+TEST(msgbuf, pldm_pack_uint16_bad)
+{
+    uint16_t src = 0x3344;
+
+    auto rc = pldm_pack_uint16(NULL, &src);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(msgbuf, pldm_pack_int16_good)
+{
+    int16_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    int16_t src = 0x3344;
+
+    auto rc = pldm_pack_int16(&aDst, &src);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(src, dst);
+}
+
+TEST(msgbuf, pldm_pack_int16_bad)
+{
+    int16_t src = 0x3344;
+
+    auto rc = pldm_pack_int16(NULL, &src);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(msgbuf, pldm_pack_uint8_good)
+{
+    uint8_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    uint8_t src = 0x44;
+
+    auto rc = pldm_pack_uint8(&aDst, &src);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(src, dst);
+}
+
+TEST(msgbuf, pldm_pack_uint8_bad)
+{
+    uint8_t src = 0x44;
+
+    auto rc = pldm_pack_uint8(NULL, &src);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(msgbuf, pldm_pack_int8_good)
+{
+    int8_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    int8_t src = 0x44;
+
+    auto rc = pldm_pack_int8(&aDst, &src);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(src, dst);
+}
+
+TEST(msgbuf, pldm_pack_int8_bad)
+{
+    int8_t src = 0x44;
+
+    auto rc = pldm_pack_int8(NULL, &src);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}

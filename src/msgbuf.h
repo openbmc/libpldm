@@ -366,6 +366,91 @@ static inline int pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx,
 	_Generic((*(dst)), uint8_t                                             \
 		 : pldm_msgbuf_extract_array_uint8)(ctx, dst, count)
 
+static inline int pldm_pack_uint32(uint8_t **dst, const uint32_t *src)
+{
+	uint32_t val = htole32(*src);
+	if (!dst) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	memcpy(*dst, &val, sizeof(uint32_t));
+	*dst += sizeof(uint32_t);
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_pack_uint16(uint8_t **dst, const uint16_t *src)
+{
+	uint16_t val = htole16(*src);
+	if (!dst) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	memcpy(*dst, &val, sizeof(uint16_t));
+	*dst += sizeof(uint16_t);
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_pack_uint8(uint8_t **dst, const uint8_t *src)
+{
+	if (!dst) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	memcpy(*dst, src, sizeof(uint8_t));
+	*dst += sizeof(uint8_t);
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_pack_int32(uint8_t **dst, const int32_t *src)
+{
+	int32_t val = htole32(*src);
+	if (!dst) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	memcpy(*dst, &val, sizeof(int32_t));
+	*dst += sizeof(int32_t);
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_pack_int16(uint8_t **dst, const int16_t *src)
+{
+	int16_t val = htole16(*src);
+	if (!dst) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	memcpy(*dst, &val, sizeof(int16_t));
+	*dst += sizeof(int16_t);
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_pack_int8(uint8_t **dst, const int8_t *src)
+{
+	if (!dst) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	memcpy(*dst, src, sizeof(int8_t));
+	*dst += sizeof(int8_t);
+
+	return PLDM_SUCCESS;
+}
+
+#define pldm_pack_data(dst, src)                                               \
+	_Generic((*(src)), uint8_t                                             \
+		 : pldm_pack_uint8, int8_t                                     \
+		 : pldm_pack_int8, uint16_t                                    \
+		 : pldm_pack_uint16, int16_t                                   \
+		 : pldm_pack_int16, uint32_t                                   \
+		 : pldm_pack_uint32, int32_t                                   \
+		 : pldm_pack_int32)(dst, src)
+
 #ifdef __cplusplus
 }
 #endif

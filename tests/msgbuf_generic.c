@@ -143,6 +143,66 @@ static void test_msgbuf_extract_array_generic_uint8(void)
     expect(pldm_msgbuf_destroy(ctx) == PLDM_SUCCESS);
 }
 
+static void pldm_pack_data_int32(void)
+{
+    int32_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    int32_t src = 0x11223344;
+
+    expect(pldm_pack_data(&aDst, &src) == PLDM_SUCCESS);
+    expect(src == dst);
+}
+
+static void pldm_pack_data_uint32(void)
+{
+    uint32_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    uint32_t src = 0x11223344;
+
+    expect(pldm_pack_data(&aDst, &src) == PLDM_SUCCESS);
+    expect(src == dst);
+}
+
+static void pldm_pack_data_int16(void)
+{
+    int16_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    int16_t src = 0x3344;
+
+    expect(pldm_pack_data(&aDst, &src) == PLDM_SUCCESS);
+    expect(src == dst);
+}
+
+static void pldm_pack_data_uint16(void)
+{
+    uint16_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    uint16_t src = 0x3344;
+
+    expect(pldm_pack_data(&aDst, &src) == PLDM_SUCCESS);
+    expect(src == dst);
+}
+
+static void pldm_pack_data_int8(void)
+{
+    int8_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    int8_t src = 0x44;
+
+    expect(pldm_pack_data(&aDst, &src) == PLDM_SUCCESS);
+    expect(src == dst);
+}
+
+static void pldm_pack_data_uint8(void)
+{
+    uint8_t dst = 0;
+    uint8_t* aDst = (uint8_t*)&dst;
+    uint8_t src = 0x44;
+
+    expect(pldm_pack_data(&aDst, &src) == PLDM_SUCCESS);
+    expect(src == dst);
+}
+
 typedef void (*testfn)(void);
 
 static const testfn tests[] = {test_msgbuf_extract_generic_uint8,
@@ -153,6 +213,12 @@ static const testfn tests[] = {test_msgbuf_extract_generic_uint8,
                                test_msgbuf_extract_generic_int32,
                                test_msgbuf_extract_generic_real32,
                                test_msgbuf_extract_array_generic_uint8,
+                               pldm_pack_data_uint8,
+                               pldm_pack_data_int8,
+                               pldm_pack_data_uint16,
+                               pldm_pack_data_int16,
+                               pldm_pack_data_uint32,
+                               pldm_pack_data_int32,
                                NULL};
 
 int main(void)
