@@ -16,7 +16,7 @@ extern "C" {
 #include <sys/types.h>
 
 struct pldm_msgbuf {
-	const uint8_t *cursor;
+	uint8_t *cursor;
 	ssize_t remaining;
 };
 
@@ -366,6 +366,213 @@ static inline int pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx,
 	_Generic((*(dst)), uint8_t                                             \
 		 : pldm_msgbuf_extract_array_uint8)(ctx, dst, count)
 
+static inline int pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx,
+					    const uint32_t src)
+{
+	uint32_t val = htole32(src);
+
+	if (!ctx || !ctx->cursor) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	ctx->remaining -= sizeof(src);
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	memcpy(ctx->cursor, &val, sizeof(src));
+	ctx->cursor += sizeof(src);
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_msgbuf_insert_uint16(struct pldm_msgbuf *ctx,
+					    const uint16_t src)
+{
+	uint16_t val = htole16(src);
+
+	if (!ctx || !ctx->cursor) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	ctx->remaining -= sizeof(src);
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	memcpy(ctx->cursor, &val, sizeof(src));
+	ctx->cursor += sizeof(src);
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_msgbuf_insert_uint8(struct pldm_msgbuf *ctx,
+					   const uint8_t src)
+{
+	if (!ctx || !ctx->cursor) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	ctx->remaining -= sizeof(src);
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	memcpy(ctx->cursor, &src, sizeof(src));
+	ctx->cursor += sizeof(src);
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_msgbuf_insert_int32(struct pldm_msgbuf *ctx,
+					   const int32_t src)
+{
+	int32_t val = htole32(src);
+
+	if (!ctx || !ctx->cursor) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	ctx->remaining -= sizeof(src);
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	memcpy(ctx->cursor, &val, sizeof(src));
+	ctx->cursor += sizeof(src);
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_msgbuf_insert_int16(struct pldm_msgbuf *ctx,
+					   const int16_t src)
+{
+	int16_t val = htole16(src);
+
+	if (!ctx || !ctx->cursor) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	ctx->remaining -= sizeof(src);
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	memcpy(ctx->cursor, &val, sizeof(src));
+	ctx->cursor += sizeof(src);
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_msgbuf_insert_int8(struct pldm_msgbuf *ctx,
+					  const int8_t src)
+{
+	if (!ctx || !ctx->cursor) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	ctx->remaining -= sizeof(src);
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	memcpy(ctx->cursor, &src, sizeof(src));
+	ctx->cursor += sizeof(src);
+
+	return PLDM_SUCCESS;
+}
+
+#define pldm_msgbuf_insert(dst, src)                                           \
+	_Generic((src), uint8_t                                                \
+		 : pldm_msgbuf_insert_uint8, int8_t                            \
+		 : pldm_msgbuf_insert_int8, uint16_t                           \
+		 : pldm_msgbuf_insert_uint16, int16_t                          \
+		 : pldm_msgbuf_insert_int16, uint32_t                          \
+		 : pldm_msgbuf_insert_uint32, int32_t                          \
+		 : pldm_msgbuf_insert_int32)(dst, src)
+
+static inline int pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx,
+						 const uint8_t *src,
+						 size_t count)
+{
+	size_t len;
+	if (!ctx || !ctx->cursor || !src) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (!count) {
+		return PLDM_SUCCESS;
+	}
+
+	len = sizeof(*src) * count;
+	if (len > SSIZE_MAX) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	ctx->remaining -= (ssize_t)len;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	memcpy(ctx->cursor, src, len);
+	ctx->cursor += len;
+
+	return PLDM_SUCCESS;
+}
+
+#define pldm_msgbuf_insert_array(dst, src, count)                              \
+	_Generic((*(src)), uint8_t                                             \
+		 : pldm_msgbuf_insert_array_uint8)(dst, src, count)
+
+static inline int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
+					    size_t required, void **cursor)
+{
+	if (!ctx || !ctx->cursor || !cursor || *cursor) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (required > SSIZE_MAX) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	ctx->remaining -= (ssize_t)required;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	*cursor = ctx->cursor;
+	ctx->cursor += required;
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx,
+					     void **cursor, size_t *len)
+{
+	if (!ctx || !ctx->cursor || !cursor || *cursor || !len) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	*cursor = ctx->cursor;
+	ctx->cursor += ctx->remaining;
+	*len = ctx->remaining;
+	ctx->remaining = 0;
+
+	return PLDM_SUCCESS;
+}
 #ifdef __cplusplus
 }
 #endif
