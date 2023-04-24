@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df367159_9306b68c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-04-24T14:35:32Z",
+      "side": 1,
+      "message": "I believe you can add a .clang-tidy-ignore in the subprojects folder instead.\n\nhttps://github.com/mesonbuild/meson/issues/7200#issuecomment-1336223058\n\nI generally don\u0027t like the dotfiles, but I\u0027d kind of recommend it in this case because it will make it easier for us to have a common .clang-tidy config for the project down the line.",
+      "revId": "ba1a5eb96b8b0cf507b7eaa2ed231d3392d7c7cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
