@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c62e0d78_05a8a712",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-24T06:33:58Z",
+      "side": 1,
+      "message": "Hi Thu, Dung. Nice work so far, though I have a few suggestions to improve the safety.",
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b15b2a93_ccb83622",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2098,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-24T06:33:58Z",
+      "side": 1,
+      "message": "If you address my comments on the previous patch this will need some rework.",
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18e3a593_c2be798e",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2114,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-24T06:33:58Z",
+      "side": 1,
+      "message": "This is condition is tested for by `pldm_msgbuf_init()` below, so no need to duplicate it here.",
+      "range": {
+        "startLine": 2111,
+        "startChar": 0,
+        "endLine": 2114,
+        "endChar": 2
+      },
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5be4e598_3934ee57",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2131,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-24T06:33:58Z",
+      "side": 1,
+      "message": "I\u0027d move this directly after line 2125. There\u0027s no point continuing with the extractions you have on 2126 and 2127 if the completion code isn\u0027t success, right?\n\nAlso, I think it\u0027s worth following idiomatic use here where you test the result of the `pldm_msgbuf_extract()` call if you need to use the value in later logic in the `decode_*()` implementation, for example:\n\n```\n    int rc;\n    \n    ...\n    \n    rc \u003d pldm_msgbuf_extract(buf, \u0026resp_value-\u003ecompletion_code);\n    if (rc) {\n        return rc;\n    }\n    \n    if (PLDM_SUCCESS !\u003d resp_value-\u003ecompletion_code) {\n        ...\n    }\n```\n\nUsing this idiom makes sure that we don\u0027t accidentally access uninitialised fields. The optimiser may be able to prove that the test of the return code is unnecessary and eliminate it from the generated code, but it\u0027s always correct for it to be present in the source.\n\nNote that this only applies if we access the data in some way, in this case with the\n\n```\n    if (PLDM_SUCCESS !\u003d resp_value-\u003ecompletion_code) {\n        ...\n    }\n```\n\nIf we\u0027re not accessing the field then the check can be batched up for the caller to check in the final\n\n```\n    return pldm_msgbuf_destroy(buf);\n```",
+      "range": {
+        "startLine": 2129,
+        "startChar": 1,
+        "endLine": 2131,
+        "endChar": 2
+      },
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "168eab18_01fc968c",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2146,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-24T06:33:58Z",
+      "side": 1,
+      "message": "Why are you doing all this again?",
+      "range": {
+        "startLine": 2137,
+        "startChar": 1,
+        "endLine": 2146,
+        "endChar": 49
+      },
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da8e8d6c_f8172b92",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2153,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-24T06:33:58Z",
+      "side": 1,
+      "message": "Nice, glad to see this used elsewhere!",
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36cde8f_e7436e03",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2163,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-24T06:33:58Z",
+      "side": 1,
+      "message": "Thus must be\n\n```\n    return pldm_msgbuf_destroy(buf);\n```\n\nThis is required so the caller can determine whether the extraction was successful, which it may not have been due to buffer overflow.",
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd0e3e98_1e651fb6",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-24T06:33:58Z",
+      "side": 1,
+      "message": "Perhaps instead of this we can use `struct pldm_msgbuf` to also extract the encoded values?",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1194,
+        "endChar": 26
+      },
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
