@@ -194,3 +194,40 @@ TEST_F(PldmInstanceDbTest, allocFreeTwoConcurrentDifferentTid)
               0);
     ASSERT_EQ(pldm_instance_db_destroy(connections[0].db), 0);
 }
+
+TEST_F(PldmInstanceDbTest, allocAllInstanceIds)
+{
+    static constexpr pldm_tid_t tid = 1;
+
+    struct pldm_instance_db* db = nullptr;
+    std::array<pldm_instance_id_t, pldmMaxInstanceIds> iids = {};
+    pldm_instance_id_t extra;
+
+    ASSERT_EQ(pldm_instance_db_init(&db, dbPath.c_str()), 0);
+
+    for (auto& iid : iids)
+    {
+        EXPECT_EQ(pldm_instance_id_alloc(db, tid, &iid), 0);
+    }
+
+    EXPECT_EQ(pldm_instance_id_alloc(db, tid, &extra), -EAGAIN);
+
+    for (auto& iid : iids)
+    {
+        EXPECT_EQ(pldm_instance_id_free(db, tid, iid), 0);
+    }
+
+    EXPECT_EQ(pldm_instance_id_alloc(db, tid, &extra), 0);
+
+    ASSERT_EQ(pldm_instance_db_destroy(db), 0);
+}
+
+TEST_F(PldmInstanceDbTest, freeUnallocatedInstanceId)
+{
+    struct pldm_instance_db* db = nullptr;
+    const pldm_tid_t tid = 1;
+
+    ASSERT_EQ(pldm_instance_db_init(&db, dbPath.c_str()), 0);
+    EXPECT_NE(pldm_instance_id_free(db, tid, 0), 0);
+    ASSERT_EQ(pldm_instance_db_destroy(db), 0);
+}
