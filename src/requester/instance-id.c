@@ -5,6 +5,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 #define BIT(i) (1UL << (i))
@@ -32,12 +33,26 @@ static inline int iid_next(pldm_instance_id_t cur)
 int pldm_instance_db_init(struct pldm_instance_db **ctx, const char *dbpath)
 {
 	struct pldm_instance_db *l_ctx;
+	struct stat statbuf;
+	int rc;
 
 	/* Make sure the provided pointer was initialised to NULL. In the future
 	 * if we stabilise the ABI and expose the struct definition the caller
 	 * can potentially pass a valid pointer to a struct they've allocated
 	 */
 	if (!ctx || *ctx) {
+		return -EINVAL;
+	}
+
+	/* Ensure the underlying file is sized for properly managing allocations
+	 */
+	rc = stat(dbpath, &statbuf);
+	if (rc < 0) {
+		return -EINVAL;
+	}
+
+	if (statbuf.st_size <
+	    ((off_t)(PLDM_TID_MAX) * (off_t)(PLDM_INST_ID_MAX))) {
 		return -EINVAL;
 	}
 

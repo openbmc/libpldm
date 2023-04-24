@@ -63,6 +63,23 @@ class PldmInstanceDbTest : public ::testing::Test
     int fd;
 };
 
+TEST_F(PldmInstanceDbTest, dbLengthZero)
+{
+    struct pldm_instance_db* db = nullptr;
+
+    std::filesystem::resize_file(dbPath, 0);
+    EXPECT_EQ(pldm_instance_db_init(&db, dbPath.c_str()), -EINVAL);
+}
+
+TEST_F(PldmInstanceDbTest, dbLengthShort)
+{
+    struct pldm_instance_db* db = nullptr;
+
+    std::filesystem::resize_file(dbPath,
+                                 PLDM_MAX_TIDS * pldmMaxInstanceIds - 1);
+    EXPECT_EQ(pldm_instance_db_init(&db, dbPath.c_str()), -EINVAL);
+}
+
 TEST_F(PldmInstanceDbTest, dbInstance)
 {
     struct pldm_instance_db* db = nullptr;
