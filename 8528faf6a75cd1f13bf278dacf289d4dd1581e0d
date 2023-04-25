@@ -1,0 +1,262 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2447d124_23ef0939",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "Given we\u0027ve renamed the APIs this should instead say:\n\n\u003e msgbuf: Add pldm_msgbuf_insert APIs",
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d361d47c_616ba89d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "Rework this also as it should reflect that we\u0027re expanding the msgbuf API.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 5
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8bc569f_59a6542a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "Hi Thu, this is starting to look good. I have a few minor comments",
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f5b5cb8_d4cb38c4",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "For consistency with `pldm_msgbuf_extract()` can we drop `_data` here so it\u0027s just called `pldm_msgbuf_insert()`?",
+      "range": {
+        "startLine": 491,
+        "startChar": 26,
+        "endLine": 491,
+        "endChar": 31
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f85c8833_fe29096e",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "Nit: Maybe make this `count` for consistency with the definition of `pldm_msgbuf_extract_array()`?",
+      "range": {
+        "startLine": 530,
+        "startChar": 43,
+        "endLine": 530,
+        "endChar": 50
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e2d4e52_12c2ab2b",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "Given we\u0027re testing signed integer insertion it would be nice to test a negative value.\n\nThis applies to all the signed integer tests.",
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c45502_20498865",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "I think it\u0027s less noise just to combine these two lines?\n\n```\nEXPECT_EQ(pldm_msgbuf_insert_int32(ctx, src), PLDM_SUCCESS);\n```",
+      "range": {
+        "startLine": 402,
+        "startChar": 0,
+        "endLine": 403,
+        "endChar": 32
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8b5dbf7_912eca4c",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "I\u0027d much prefer we create a new context rather than fiddle with the internals of the existing context.\n\nAny similar cases below also should be fixed.",
+      "range": {
+        "startLine": 405,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 31
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "126632ba_001d22c9",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "Again, I think it\u0027s less noise to combine them.\n\nDo the same for any similar cases below.",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 409,
+        "endChar": 32
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4abf6d7b_ea2b028d",
+        "filename": "tests/msgbuf_generic.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "This should be calling the generic macro, otherwise the test is no different to what\u0027s in `tests/msgbuf.cpp`:\n\n```\nint rc \u003d pldm_msgbuf_insert(ctx, src);\n```\n\nAgain though, I think it\u0027s an improvement to readability if we combine it with the line below, so:\n\n```\nexpect(pldm_msgbuf_insert(ctx, src) \u003d\u003d PLDM_SUCCESS);\n```",
+      "range": {
+        "startLine": 155,
+        "startChar": 31,
+        "endLine": 155,
+        "endChar": 37
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e28371c_0717b8ac",
+        "filename": "tests/msgbuf_generic.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "As mentioned on the other tests, please just use a separate, second context rather than fiddle with the internals of the one context.",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 31
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7717bb18_1ca1f0bc",
+        "filename": "tests/msgbuf_generic.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-25T23:32:33Z",
+      "side": 1,
+      "message": "The test functions should all use the prefix `pldm_msgbuf_insert_generic_`, e.g. `pldm_msgbuf_insert_generic_uint32`.\n\nWe also need a test for `pldm_msgbuf_insert_array_generic_uint8()`",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 287,
+        "endChar": 60
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
