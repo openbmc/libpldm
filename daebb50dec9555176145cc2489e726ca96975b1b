@@ -99,6 +99,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab523c8c_66198e3e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-25T16:13:56Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "bbf883a9_9a103b44",
+      "revId": "daebb50dec9555176145cc2489e726ca96975b1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c3adab6_d07ca5bf",
@@ -112,6 +130,24 @@
       "writtenOn": "2023-03-31T01:27:01Z",
       "side": 1,
       "message": "Can you take a look at this for an alternate approach to implementing decode?\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/59033/16/src/platform.c#1261",
+      "revId": "daebb50dec9555176145cc2489e726ca96975b1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f477529c_966f5fe5",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1920,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-25T16:13:56Z",
+      "side": 1,
+      "message": "I updated the code.",
+      "parentUuid": "8c3adab6_d07ca5bf",
       "revId": "daebb50dec9555176145cc2489e726ca96975b1b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

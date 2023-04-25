@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a4cdf4c_d579b712",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2098,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-25T16:13:56Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "b15b2a93_ccb83622",
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18e3a593_c2be798e",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-04-24T06:33:58Z",
       "side": 1,
       "message": "This is condition is tested for by `pldm_msgbuf_init()` below, so no need to duplicate it here.",
+      "range": {
+        "startLine": 2111,
+        "startChar": 0,
+        "endLine": 2114,
+        "endChar": 2
+      },
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0f3d532_273f71df",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2114,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-25T16:13:56Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "18e3a593_c2be798e",
       "range": {
         "startLine": 2111,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8981a93_d78c262b",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2131,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-25T16:13:56Z",
+      "side": 1,
+      "message": "I\u0027m also concerning about \"return rc;\" without destroy buf. As you said it is better to call destroy before return. BUT it is unnecessary because return error is unexpected case and should be avoid.",
+      "parentUuid": "5be4e598_3934ee57",
+      "range": {
+        "startLine": 2129,
+        "startChar": 1,
+        "endLine": 2131,
+        "endChar": 2
+      },
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "168eab18_01fc968c",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-04-24T06:33:58Z",
       "side": 1,
       "message": "Why are you doing all this again?",
+      "range": {
+        "startLine": 2137,
+        "startChar": 1,
+        "endLine": 2146,
+        "endChar": 49
+      },
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f02760b_95d036b7",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2146,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-25T16:13:56Z",
+      "side": 1,
+      "message": "I removed the duplicate code.",
+      "parentUuid": "168eab18_01fc968c",
       "range": {
         "startLine": 2137,
         "startChar": 1,
@@ -121,6 +211,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22ceec9c_de30c6a3",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2153,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-25T16:13:56Z",
+      "side": 1,
+      "message": "Yes, It is nice when you already support that function.",
+      "parentUuid": "da8e8d6c_f8172b92",
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d36cde8f_e7436e03",
@@ -138,6 +246,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13aeef0b_1627b5cd",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2163,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-25T16:13:56Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "d36cde8f_e7436e03",
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd0e3e98_1e651fb6",
@@ -151,6 +277,30 @@
       "writtenOn": "2023-04-24T06:33:58Z",
       "side": 1,
       "message": "Perhaps instead of this we can use `struct pldm_msgbuf` to also extract the encoded values?",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1194,
+        "endChar": 26
+      },
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11a10865_272900d7",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-25T16:13:56Z",
+      "side": 1,
+      "message": "Yes, I updated the code to use extract functions.",
+      "parentUuid": "bd0e3e98_1e651fb6",
       "range": {
         "startLine": 1188,
         "startChar": 0,
