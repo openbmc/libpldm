@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb05a75c_9cb93286",
+        "filename": "meson_options.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-25T16:13:34Z",
+      "side": 1,
+      "message": "I removed the file from change list. The file is added because of one mistake.",
+      "parentUuid": "820b147b_e208646f",
+      "revId": "cc32445bb616e45e5e8a1044f61ddb2042042157",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c115bc12_ac3d3eb3",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-24T05:05:49Z",
       "side": 1,
       "message": "I agree we need to add APIs for packing data into a buffer, in addition to the existing `pldm_msgbuf_extract*()` APIs for extracting it.\n\nA couple of things:\n\n1. If we\u0027re going to define these types of APIs in `src/msgbuf.h` then they should integrate with the actual `struct pldm_msgbuf` object\n2. I will argue they should be part of the `struct pldm_msgbuf` object as they are the dual of the \"extract\" operations.\n\nI think the prototype should look like the following:\n\n```\nstatic inline int pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx, uint32_t src);\n```\n\nFor this example the operation should insert a `uint32_t` type, in the correct endian form (LE for the PLDM specs), at the current cursor position for the buffer associated with the `struct pldm_msgbuf` instance.\n\nIn this way we can uphold the \"doesn\u0027t overflow\" property by checking against `struct pldm_msgbuf`\u0027s `remaining` member in the same way that the `pldm_msgbuf_extract*()` functions do.\n\nAlso note that `src` doesn\u0027t need to be a pointer here, I think that just makes the API a little more awkward than is necessary. It\u0027s necessary that it\u0027s a pointer for the `pldm_msgbuf_extract*()` functions as it\u0027s an out-parameter (the return value is the succes/error result) but there\u0027s no reason to try to be consistent with that between these functions you\u0027ve added and the extract functions.\n\nThis comment also applies for the remaining functions you\u0027ve added below.",
+      "revId": "cc32445bb616e45e5e8a1044f61ddb2042042157",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bbe50f4_b17d2958",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-25T16:13:34Z",
+      "side": 1,
+      "message": "I updated the code as you said. Please review.",
+      "parentUuid": "c115bc12_ac3d3eb3",
       "revId": "cc32445bb616e45e5e8a1044f61ddb2042042157",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
