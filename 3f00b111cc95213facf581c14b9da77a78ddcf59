@@ -147,6 +147,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c8799f7_99da78e2",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2131,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "\u003e I\u0027m also concerning about \"return rc;\" without destroy buf. As you said it is better to call destroy before return.\n\nSo there are no memory allocations involved in `pldm_msgbuf_init()` or `pldm_msgbuf_destroy()`. We\u0027re not leaking resources or anything, it\u0027s fine to just `return rc;`\n\n`pldm_msgbuf_destroy()` invalidates the internal state so it is obvious if it\u0027s reused, but it also returns whether the buffer was in an invalid state (i.e. whether it prevented an out-of-bounds buffer access). Making `pldm_msgbuf_destroy()` return whether all accesses were valid or not allows us to batch that test when we don\u0027t care to use the values that were extracted.\n\nIn this case because we\u0027re testing `rc` we know whether an invalid access has occurred. Further, as the `struct pldm_msgbuf` object is stack-allocated it is immediately destroyed upon returning from the function.\n\n\u003e BUT it is unnecessary because return error is unexpected case and should be avoid.\n\nWe need to make sure we\u0027re accurate, but in some cases we can improve the readability of the code by batching the tests.",
+      "parentUuid": "c8981a93_d78c262b",
+      "range": {
+        "startLine": 2129,
+        "startChar": 1,
+        "endLine": 2131,
+        "endChar": 2
+      },
+      "revId": "3f00b111cc95213facf581c14b9da77a78ddcf59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "168eab18_01fc968c",

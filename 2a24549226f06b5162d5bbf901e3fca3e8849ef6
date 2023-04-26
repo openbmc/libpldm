@@ -1,0 +1,220 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d21e55cc_3c1587d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "Hi Thu, I have a problem with the decode API\u0027s handling of the `event_data` buffer. I don\u0027t think it\u0027s a particularly safe API, so I\u0027m marking this as -1 for now. We can discuss how to fix it.\n\nThere\u0027s also an issue of trying to define a struct with a flexible array member that is not the last member of the struct. That must also be fixed.\n\nOther than that I\u0027ve tried to clarify where you do and don\u0027t need to check the return value of the `pldm_msgbuf_insert()` and `pldm_msgbuf_extract()` APIs. Checking their return value is only necessary if the following code dereferences the pointer under which the extracted value was placed. There\u0027s no need to check the return code if the pointer is not dereferenced, which helps improve readability.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b2e393c_a260d81d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "Are you trying to put a flexible array in the middle of a struct definition? Because we really must not do that. Per the standard they must be the last member of a struct. Defining a flexible array member with a length of 1 is undefined behaviour, defining one in the middle of the struct is too much.\n\nEither order `event_data_integrity_checksum` before `event_data` (the order of the members in the struct is less relevant now we use the msgbuf abstraction internally rather than casting packed structs), or remove `event_data_integrity_checksum` entirely.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98c77de6_28a7d919",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2118,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "Because `pldm_msgbuf_insert_data()` ensures an overflow will never occur in practice we can batch the tests up. That allows the code to be written as follows while still being correct:\n\n```\n    pldm_msgbuf_insert_data(buf, format_version);\n    pldm_msgbuf_insert_data(buf, transfer_operation_flag);\n    pldm_msgbuf_insert_data(buf, data_transfer_handle);\n    pldm_msgbuf_insert_data(buf, event_id_to_acknowledge);\n    \n    return pldm_msgbuf_destroy(buf);\n```",
+      "range": {
+        "startLine": 2098,
+        "startChar": 0,
+        "endLine": 2118,
+        "endChar": 33
+      },
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2dda5cf_b0f106a7",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2145,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "This test is necessary because we dereference `completion_code` below on 2148.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3691a752_90c4a47d",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2153,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "This test is not necessary as we do not dereference `tid` in the code below.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14213024_2bacaa72",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2158,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "This test is necessary because we dereference `event_id` on line 2161 below.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c488025_30201678",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2166,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "This test isn\u0027t necessary as we do not dereference `next_data_transfer_handle` in the code below.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30b181b1_cbc94401",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2171,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "This test is necessary because we dereference `transfer_flag on lines 2193 and 2194 below.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1454c5_ff5db4eb",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2176,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "This test is not necessary as we do not dereference `event_class` in the code below.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05222ac4_855c6e01",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2181,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "This test is necessary because we dereference `event_data_size` on line 2185 below.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ff9e919_6bc6e688",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2186,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "How do we know the caller-provided `event_data` buffer is large enough to contain the extracted event data? It must be at least `event_data_size`, but the caller doesn\u0027t know the value of `event_data_size` before calling the function.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bc3a23c_22a2d1c5",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:01:50Z",
+      "side": 1,
+      "message": "Either don\u0027t initialise these at all, or initialise them to zero. Otherwise it\u0027s difficult to tell whether the test succeeded?",
+      "range": {
+        "startLine": 1221,
+        "startChar": 0,
+        "endLine": 1224,
+        "endChar": 43
+      },
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
