@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "228d0191_49a12eb4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "2447d124_23ef0939",
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d361d47c_616ba89d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -31,6 +49,30 @@
       "writtenOn": "2023-04-25T23:32:33Z",
       "side": 1,
       "message": "Rework this also as it should reflect that we\u0027re expanding the msgbuf API.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 5
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bdf6628_5b1ca051",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "d361d47c_616ba89d",
       "range": {
         "startLine": 9,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a95fb1_44c4ebf2",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "7f5b5cb8_d4cb38c4",
+      "range": {
+        "startLine": 491,
+        "startChar": 26,
+        "endLine": 491,
+        "endChar": 31
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f85c8833_fe29096e",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-04-25T23:32:33Z",
       "side": 1,
       "message": "Nit: Maybe make this `count` for consistency with the definition of `pldm_msgbuf_extract_array()`?",
+      "range": {
+        "startLine": 530,
+        "startChar": 43,
+        "endLine": 530,
+        "endChar": 50
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52d11510_3c7fae25",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "f85c8833_fe29096e",
       "range": {
         "startLine": 530,
         "startChar": 43,
@@ -121,6 +211,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f399141_71ee63f5",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:40Z",
+      "side": 1,
+      "message": "Updated to int32_t src \u003d 0xf1223344;",
+      "parentUuid": "8e2d4e52_12c2ab2b",
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46c45502_20498865",
@@ -134,6 +242,30 @@
       "writtenOn": "2023-04-25T23:32:33Z",
       "side": 1,
       "message": "I think it\u0027s less noise just to combine these two lines?\n\n```\nEXPECT_EQ(pldm_msgbuf_insert_int32(ctx, src), PLDM_SUCCESS);\n```",
+      "range": {
+        "startLine": 402,
+        "startChar": 0,
+        "endLine": 403,
+        "endChar": 32
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d98536c_a787551e",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "46c45502_20498865",
       "range": {
         "startLine": 402,
         "startChar": 0,
@@ -167,6 +299,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cf9d979_9c375323",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "f8b5dbf7_912eca4c",
+      "range": {
+        "startLine": 405,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 31
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "126632ba_001d22c9",
@@ -180,6 +336,30 @@
       "writtenOn": "2023-04-25T23:32:33Z",
       "side": 1,
       "message": "Again, I think it\u0027s less noise to combine them.\n\nDo the same for any similar cases below.",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 409,
+        "endChar": 32
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62f2800f_11a3d0c0",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "126632ba_001d22c9",
       "range": {
         "startLine": 408,
         "startChar": 0,
@@ -213,6 +393,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "270b646d_5f88923c",
+        "filename": "tests/msgbuf_generic.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "4abf6d7b_ea2b028d",
+      "range": {
+        "startLine": 155,
+        "startChar": 31,
+        "endLine": 155,
+        "endChar": 37
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e28371c_0717b8ac",
@@ -236,6 +440,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aff1fc0c_5ccf41e9",
+        "filename": "tests/msgbuf_generic.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "2e28371c_0717b8ac",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 31
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7717bb18_1ca1f0bc",
@@ -249,6 +477,30 @@
       "writtenOn": "2023-04-25T23:32:33Z",
       "side": 1,
       "message": "The test functions should all use the prefix `pldm_msgbuf_insert_generic_`, e.g. `pldm_msgbuf_insert_generic_uint32`.\n\nWe also need a test for `pldm_msgbuf_insert_array_generic_uint8()`",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 287,
+        "endChar": 60
+      },
+      "revId": "8528faf6a75cd1f13bf278dacf289d4dd1581e0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3273f013_ad80b7cb",
+        "filename": "tests/msgbuf_generic.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "7717bb18_1ca1f0bc",
       "range": {
         "startLine": 282,
         "startChar": 0,
