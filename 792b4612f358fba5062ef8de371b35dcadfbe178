@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8c4e5dc_d5a352ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T23:33:08Z",
+      "side": 1,
+      "message": "Okay, it\u0027s mostly looking good. One further class of issues and then this should be good to go.",
+      "revId": "792b4612f358fba5062ef8de371b35dcadfbe178",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97fc9021_efb3e35d",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T23:33:08Z",
+      "side": 1,
+      "message": "This yields implementation-defined behaviour - see 6.2.6.2 Integer Types, paragraph 2 of N2176 (C17 draft standard). The representation of signed values is not constrained to twos-complement by the C standard: sign-magnitude and ones-complement are also valid representations.\n\nNow, is twos-complement pretty much the universal signed-value representation? Sure. But why not avoid all the language legalese and use a regular signed source representation for a negative value?\n\n```\nint32_t src \u003d -12345;\n```\n\nPlease fix all the further test cases where this applies.",
+      "revId": "792b4612f358fba5062ef8de371b35dcadfbe178",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28fbdc82_7f7838f9",
+        "filename": "tests/msgbuf_generic.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T23:33:08Z",
+      "side": 1,
+      "message": "Again, please don\u0027t invoke implementation-defined behaviour to assign a negative value. `int32_t src \u003d -12345;` is good enough and doesn\u0027t get us into a fight with the compiler and the language definition.\n\nPlease fix all the cases below as well.",
+      "revId": "792b4612f358fba5062ef8de371b35dcadfbe178",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
