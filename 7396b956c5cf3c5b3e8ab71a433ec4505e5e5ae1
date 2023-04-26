@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "338be695_4796b1b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T06:26:23Z",
+      "side": 1,
+      "message": "Probably worth explaining that it shadows the class member, which then causes a resource leak.",
+      "revId": "7396b956c5cf3c5b3e8ab71a433ec4505e5e5ae1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
