@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "591dbfde_c9fd7421",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:12Z",
+      "side": 1,
+      "message": "Yes. I planed to create a flexible array in the middle of a struct definition. I based on the response data in DSP0248 of PollForPlatformEventMessage command to create the struct.\nAbout moving event_data_integrity_checksum before event_data, I don\u0027t think it is reasonable we should not change the order of struct fields which reflect response data.\n\nI thinks there are two options for this issue:\nOption 1: Remove event_data_integrity_checksum fields (as your comment).\nOption 2: I will removed this struct. We can do this because\n1. After refactor the code to use msgbuf extract/insert we don\u0027t use type casting.\n2. In the old code, this struct is packed structs and the response message is also packed data. If we change the struct to non-packed struct, we can\u0027t use type casting with response message payload. So removing this struct is reasonable.\n\nLet discuss which option should we choose. I will chose option 1.",
+      "parentUuid": "6b2e393c_a260d81d",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98c77de6_28a7d919",
         "filename": "src/platform.c",
         "patchSetId": 13
@@ -48,6 +66,30 @@
       "writtenOn": "2023-04-26T00:01:50Z",
       "side": 1,
       "message": "Because `pldm_msgbuf_insert_data()` ensures an overflow will never occur in practice we can batch the tests up. That allows the code to be written as follows while still being correct:\n\n```\n    pldm_msgbuf_insert_data(buf, format_version);\n    pldm_msgbuf_insert_data(buf, transfer_operation_flag);\n    pldm_msgbuf_insert_data(buf, data_transfer_handle);\n    pldm_msgbuf_insert_data(buf, event_id_to_acknowledge);\n    \n    return pldm_msgbuf_destroy(buf);\n```",
+      "range": {
+        "startLine": 2098,
+        "startChar": 0,
+        "endLine": 2118,
+        "endChar": 33
+      },
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7a1b74d_b26bef57",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2118,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:12Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "98c77de6_28a7d919",
       "range": {
         "startLine": 2098,
         "startChar": 0,
@@ -75,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b005dd7d_48cf226f",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2145,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:12Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "e2dda5cf_b0f106a7",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3691a752_90c4a47d",
@@ -88,6 +148,24 @@
       "writtenOn": "2023-04-26T00:01:50Z",
       "side": 1,
       "message": "This test is not necessary as we do not dereference `tid` in the code below.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6d8a403_83a3b956",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2153,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:12Z",
+      "side": 1,
+      "message": "Removed the checking.",
+      "parentUuid": "3691a752_90c4a47d",
       "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -109,6 +187,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d54ee145_6a1ff0a5",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2158,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:12Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "14213024_2bacaa72",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c488025_30201678",
@@ -122,6 +218,24 @@
       "writtenOn": "2023-04-26T00:01:50Z",
       "side": 1,
       "message": "This test isn\u0027t necessary as we do not dereference `next_data_transfer_handle` in the code below.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73eb52c8_2657b8ce",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2166,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:12Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "4c488025_30201678",
       "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -143,6 +257,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd386e6_0f426786",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2171,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "30b181b1_cbc94401",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf1454c5_ff5db4eb",
@@ -160,6 +292,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbcaa68d_4db81168",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2176,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:12Z",
+      "side": 1,
+      "message": "Removed the checking.",
+      "parentUuid": "bf1454c5_ff5db4eb",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05222ac4_855c6e01",
@@ -173,6 +323,24 @@
       "writtenOn": "2023-04-26T00:01:50Z",
       "side": 1,
       "message": "This test is necessary because we dereference `event_data_size` on line 2185 below.",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "147d8946_8142ce81",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2181,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "05222ac4_855c6e01",
       "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -196,6 +364,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "305e9a5d_92643987",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2186,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:12Z",
+      "side": 1,
+      "message": "event_data will be inited with payload_length size before send to decode functions. payload_length is known value of one response message.\nI also added checking\n\tif (*event_data_size \u003e payload_length) {\n\t\treturn PLDM_ERROR_INVALID_DATA;\n\t}\nbefore extract event_data.",
+      "parentUuid": "9ff9e919_6bc6e688",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2bc3a23c_22a2d1c5",
         "filename": "tests/libpldm_platform_test.cpp",
         "patchSetId": 13
@@ -207,6 +393,30 @@
       "writtenOn": "2023-04-26T00:01:50Z",
       "side": 1,
       "message": "Either don\u0027t initialise these at all, or initialise them to zero. Otherwise it\u0027s difficult to tell whether the test succeeded?",
+      "range": {
+        "startLine": 1221,
+        "startChar": 0,
+        "endLine": 1224,
+        "endChar": 43
+      },
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7767c513_c40a54e1",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-26T08:01:12Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "2bc3a23c_22a2d1c5",
       "range": {
         "startLine": 1221,
         "startChar": 0,
