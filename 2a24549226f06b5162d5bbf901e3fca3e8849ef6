@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8da8adae_d0c3d511",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T23:37:40Z",
+      "side": 1,
+      "message": "I\u0027d prefer we do 2 and not add to the ABI surface of the library if we don\u0027t have to.\n\nThe struct definition can never be correct in its current form if `event_data_size` is greater than 1. We cannot add this struct in its current form.",
+      "parentUuid": "591dbfde_c9fd7421",
+      "revId": "2a24549226f06b5162d5bbf901e3fca3e8849ef6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98c77de6_28a7d919",
         "filename": "src/platform.c",
         "patchSetId": 13
