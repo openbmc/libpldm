@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23deba3e_c7df9046",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T23:53:14Z",
+      "side": 1,
+      "message": "A couple of minor comments.",
+      "revId": "62309fe489ecfe88eadd638cb235f06f0e4742af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b936a07_af17334b",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T23:53:14Z",
+      "side": 1,
+      "message": "Can we please put the variable declarations at the top of the function as is typical with C code (unlike C++).\n\nI know C can do mixed declarations these days, but let\u0027s try to keep things consistent.",
+      "revId": "62309fe489ecfe88eadd638cb235f06f0e4742af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f8cfaf4_49d8a6fd",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T23:53:14Z",
+      "side": 1,
+      "message": "Unnecessary as `data_transfer_handle` isn\u0027t dereferenced below.",
+      "range": {
+        "startLine": 917,
+        "startChar": 1,
+        "endLine": 919,
+        "endChar": 2
+      },
+      "revId": "62309fe489ecfe88eadd638cb235f06f0e4742af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
