@@ -16,6 +16,24 @@
       "message": "I believe you can add a .clang-tidy-ignore in the subprojects folder instead.\n\nhttps://github.com/mesonbuild/meson/issues/7200#issuecomment-1336223058\n\nI generally don\u0027t like the dotfiles, but I\u0027d kind of recommend it in this case because it will make it easier for us to have a common .clang-tidy config for the project down the line.",
       "revId": "ba1a5eb96b8b0cf507b7eaa2ed231d3392d7c7cb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "099fd995_c3095dc7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-26T00:38:29Z",
+      "side": 1,
+      "message": "Dunno if I\u0027m being a dunce, but I tried this and it didn\u0027t work for me.\n\n```\ndiff --git a/.clang-tidy-ignore b/.clang-tidy-ignore\nnew file mode 100644\nindex 000000000000..c6bf34ed9159\n--- /dev/null\n+++ b/.clang-tidy-ignore\n@@ -0,0 +1 @@\n+subprojects/**/*\n```\n\nAfter that I ran `meson setup --wipe build \u0026\u0026 ninja -C build clang-tidy` and `clang-tidy` still failed on `gtest` headers.\n\nI\u0027d like to merge what I have for now unless you can come up with a patch that resolves it? We can also replace what I have now with something more optimal in the future.",
+      "parentUuid": "df367159_9306b68c",
+      "revId": "ba1a5eb96b8b0cf507b7eaa2ed231d3392d7c7cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
