@@ -40,7 +40,6 @@ class PldmInstanceDbTest : public ::testing::Test
     {
         static const char dbTmpl[] = "db.XXXXXX";
         char dbName[sizeof(dbTmpl)] = {};
-        int fd;
 
         ::strncpy(dbName, dbTmpl, sizeof(dbName));
         fd = ::mkstemp(dbName);
