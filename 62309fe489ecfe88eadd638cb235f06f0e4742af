@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64a6a4f7_b80bd199",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-27T16:21:23Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "3b936a07_af17334b",
+      "revId": "62309fe489ecfe88eadd638cb235f06f0e4742af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f8cfaf4_49d8a6fd",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-04-26T23:53:14Z",
       "side": 1,
       "message": "Unnecessary as `data_transfer_handle` isn\u0027t dereferenced below.",
+      "range": {
+        "startLine": 917,
+        "startChar": 1,
+        "endLine": 919,
+        "endChar": 2
+      },
+      "revId": "62309fe489ecfe88eadd638cb235f06f0e4742af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db14cc71_483871e1",
+        "filename": "src/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-27T16:21:23Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "6f8cfaf4_49d8a6fd",
       "range": {
         "startLine": 917,
         "startChar": 1,
