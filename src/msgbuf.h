@@ -531,6 +531,48 @@ static inline int pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx,
 	_Generic((*(src)), uint8_t                                             \
 		 : pldm_msgbuf_insert_array_uint8)(dst, src, count)
 
+static inline int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
+					    size_t required, void **cursor)
+{
+	if (!ctx || !ctx->cursor || !cursor || *cursor) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (required > SSIZE_MAX) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	ctx->remaining -= (ssize_t)required;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	*cursor = ctx->cursor;
+	ctx->cursor += required;
+
+	return PLDM_SUCCESS;
+}
+
+static inline int pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx,
+					     void **cursor, size_t *len)
+{
+	if (!ctx || !ctx->cursor || !cursor || *cursor || !len) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	*cursor = ctx->cursor;
+	ctx->cursor += ctx->remaining;
+	*len = ctx->remaining;
+	ctx->remaining = 0;
+
+	return PLDM_SUCCESS;
+}
 #ifdef __cplusplus
 }
 #endif

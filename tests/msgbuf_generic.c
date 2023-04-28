@@ -298,6 +298,60 @@ static void test_msgbuf_insert_array_generic_uint8(void)
     expect(pldm_msgbuf_destroy(ctx) == PLDM_SUCCESS);
 }
 
+static void test_msgbuf_span_required(void)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    uint8_t src[6] = {0x11, 0x22, 0x44, 0x55, 0x66, 0x77};
+    uint8_t buf[6] = {0};
+    uint8_t expectData[4] = {0x44, 0x55, 0x66, 0x77};
+    const size_t required = 4;
+    uint16_t testVal;
+    uint8_t* retBuff = NULL;
+
+    expect(pldm_msgbuf_init(ctx, 0, buf, sizeof(buf)) == PLDM_SUCCESS);
+    expect(pldm_msgbuf_insert_array(ctx, src, sizeof(src)) == PLDM_SUCCESS);
+
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+
+    expect(pldm_msgbuf_init(ctxExtract, 0, buf, sizeof(buf)) == PLDM_SUCCESS);
+    expect(pldm_msgbuf_extract(ctxExtract, &testVal) == PLDM_SUCCESS);
+    expect(pldm_msgbuf_span_required(ctxExtract, required, (void**)&retBuff) ==
+           PLDM_SUCCESS);
+
+    expect(memcmp(expectData, retBuff, required) == 0);
+    expect(pldm_msgbuf_destroy(ctxExtract) == PLDM_SUCCESS);
+    expect(pldm_msgbuf_destroy(ctx) == PLDM_SUCCESS);
+}
+
+static void test_msgbuf_span_remaining(void)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    uint8_t src[8] = {0x11, 0x22, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99};
+    uint8_t buf[8] = {0};
+    uint16_t testVal;
+    uint8_t expectData[6] = {0x44, 0x55, 0x66, 0x77, 0x88, 0x99};
+    size_t remaining;
+    uint8_t* retBuff = NULL;
+
+    expect(pldm_msgbuf_init(ctx, 0, buf, sizeof(buf)) == PLDM_SUCCESS);
+    expect(pldm_msgbuf_insert_array(ctx, src, sizeof(src)) == PLDM_SUCCESS);
+
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+
+    expect(pldm_msgbuf_init(ctxExtract, 0, buf, sizeof(buf)) == PLDM_SUCCESS);
+    expect(pldm_msgbuf_extract(ctxExtract, &testVal) == PLDM_SUCCESS);
+    expect(pldm_msgbuf_span_remaining(ctxExtract, (void**)&retBuff,
+                                      &remaining) == PLDM_SUCCESS);
+
+    expect(memcmp(expectData, retBuff, remaining) == 0);
+    expect(pldm_msgbuf_destroy(ctxExtract) == PLDM_SUCCESS);
+    expect(pldm_msgbuf_destroy(ctx) == PLDM_SUCCESS);
+}
+
 typedef void (*testfn)(void);
 
 static const testfn tests[] = {test_msgbuf_extract_generic_uint8,
@@ -315,6 +369,8 @@ static const testfn tests[] = {test_msgbuf_extract_generic_uint8,
                                test_msgbuf_insert_generic_uint32,
                                test_msgbuf_insert_generic_int32,
                                test_msgbuf_insert_array_generic_uint8,
+                               test_msgbuf_span_required,
+                               test_msgbuf_span_remaining,
                                NULL};
 
 int main(void)
