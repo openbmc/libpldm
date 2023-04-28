@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "655f42eb_0214f8ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T23:06:27Z",
+      "side": 1,
+      "message": "A couple of minor cleanups suggested. Otherwise looks good",
+      "revId": "3e401238f11c50f889fa0fbc5b8e5d43200ff819",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbf507d3_9860bec9",
+        "filename": "src/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T23:06:27Z",
+      "side": 1,
+      "message": "For insert I can\u0027t immediately think of a need to check the return value. It\u0027s different to the extract case where we need to prevent ourselves from dereferencing a pointer to uninitialized memory. For the \"encode\" functions we know e.g. `event_id` must be initialized as it was passed as an argument to the function. So we can remove this check.",
+      "revId": "3e401238f11c50f889fa0fbc5b8e5d43200ff819",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d5e791f_ab78df12",
+        "filename": "src/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T23:06:27Z",
+      "side": 1,
+      "message": "Also remove this check.",
+      "revId": "3e401238f11c50f889fa0fbc5b8e5d43200ff819",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3731234_f99fbb5a",
+        "filename": "src/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T23:06:27Z",
+      "side": 1,
+      "message": "Also remove this check.",
+      "revId": "3e401238f11c50f889fa0fbc5b8e5d43200ff819",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
