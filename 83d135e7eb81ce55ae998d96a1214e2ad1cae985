@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "802c1100_696853a3",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T22:54:01Z",
+      "side": 1,
+      "message": "we need to state here that the `event_data` pointer points into `msg.payload` and therefore has the same lifetime as `msg.payload`.",
+      "revId": "83d135e7eb81ce55ae998d96a1214e2ad1cae985",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ae06a8_3f58aafd",
+        "filename": "src/platform.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 2175,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T22:54:01Z",
+      "side": 1,
+      "message": "Can we use `pldm_msgbuf_destroy_consumed()` here?",
+      "revId": "83d135e7eb81ce55ae998d96a1214e2ad1cae985",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbe8b7d4_a631b922",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T22:54:01Z",
+      "side": 1,
+      "message": "maybe we should put this in `msgbuf.h` instead and cleanup any other instances of this trickery",
+      "revId": "83d135e7eb81ce55ae998d96a1214e2ad1cae985",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
