@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97898de2_052cf4f4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 1666,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-28T14:10:39Z",
+      "side": 1,
+      "message": "I updated the code.",
+      "parentUuid": "fbdaa5e5_5d88efc1",
+      "revId": "051ddebc09b2facd2314b0831f8d975971ce895c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "203bc5c1_c3d9f0d6",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-04-28T00:44:11Z",
       "side": 1,
       "message": "Okay, this is safer. Thanks for fixing the API.\n\nHowever, looking at it now I\u0027ve just had another thought with a question - how is `event_data` used by the caller? Is it passed to another function for further decoding? If so, maybe we can avoid the allocation and copy?\n\nAssuming it is just for further decoding, what if we pass back a pointer for the relevant offset in `msg-\u003epayload` and tie the buffer lifetime to the lifetime of `msg`? The documentation for the function already states that it\u0027s the caller\u0027s responsibility to free `msg-\u003epayload`.\n\nLike, say we add a `pldm_msgbuf` API like this:\n\n```\nstatic inline int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx, size_t required, void **cursor)\n{\n    if (!ctx || !ctx-\u003ecursor || !cursor || *cursor) {\n        return PLDM_ERROR_INVALID_DATA;\n    }\n    \n    if (required \u003c ctx-\u003eremaining || required \u003e SSIZE_MAX) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n    \n    ctx-\u003eremaining -\u003d (ssize_t)required;\n    assert(ctx-\u003eremaining \u003e\u003d 0);\n    if (ctx-\u003eremaining \u003c 0) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n    \n    *cursor \u003d ctx-\u003ecursor;\n    ctx-\u003ecursor +\u003d len;\n    \n    return PLDM_SUCCESS;\n}\n```\n\nThen here the code would become:\n\n```\n    if (*event_data_size \u003e 0) {\n        pldm_msgbuf_span_required(buf, *event_data_size, event_data);\n    }\n```\n\nAgain, no allocations and no copying, which seems pretty fancy. This also gives us scope for something like the following if we ever come around to needing it:\n\n```\nstatic inline int pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)\n{\n    if (!ctx || !ctx-\u003ecursor || !cursor || *cursor || !remaining) {\n        return PLDM_ERROR_INVALID_DATA;\n    }\n    \n    assert(ctx-\u003eremaining \u003e\u003d 0);\n    if (ctx-\u003eremaining \u003c 0) {\n        return PLDM_ERROR_INVALID_LENGTH;\n    }\n    \n    *cursor \u003d ctx-\u003ecursor;\n    ctx-\u003ecursor +\u003d ctx-\u003eremaining;\n    *len \u003d ctx-\u003eremaining;\n    ctx-\u003eremaining \u003d 0;\n    \n    return PLDM_SUCCESS;\n}\n```",
+      "range": {
+        "startLine": 2167,
+        "startChar": 2,
+        "endLine": 2170,
+        "endChar": 2
+      },
+      "revId": "051ddebc09b2facd2314b0831f8d975971ce895c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60ae4889_247aa9f7",
+        "filename": "src/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2170,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-28T14:10:39Z",
+      "side": 1,
+      "message": "Thank for you advice. I updated code to use pldm_msgbuf_span_required and pldm_msgbuf_span_remaining.",
+      "parentUuid": "203bc5c1_c3d9f0d6",
       "range": {
         "startLine": 2167,
         "startChar": 2,
