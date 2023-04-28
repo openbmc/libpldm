@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab9428af_0bf6cf91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T22:46:58Z",
+      "side": 1,
+      "message": "We\u0027re also adding the span APIs now. How about:\n\n\u003e msgbuf: Add insert and span APIs",
+      "revId": "f310c2ce2aac84f41f2f771730a1c1d12d3666ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dde0252_6588d44c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T22:46:58Z",
+      "side": 1,
+      "message": "Also expand a bit on why the span APIs are useful here.",
+      "revId": "f310c2ce2aac84f41f2f771730a1c1d12d3666ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "288577a3_ed9d17da",
@@ -14,6 +48,74 @@
       "writtenOn": "2023-04-28T14:05:14Z",
       "side": 1,
       "message": "Add pldm_msgbuf_span_required and pldm_msgbuf_span_remaining.",
+      "revId": "f310c2ce2aac84f41f2f771730a1c1d12d3666ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26e50d68_00b57c4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T22:46:58Z",
+      "side": 1,
+      "message": "Hi Thu, a couple more minor comments mainly as a result of adding the span APIs. Once they\u0027re addressed this should be good to go",
+      "revId": "f310c2ce2aac84f41f2f771730a1c1d12d3666ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b136b137_88e027cd",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T22:46:58Z",
+      "side": 1,
+      "message": "Something I just noticed here is you\u0027re providing `val` as the source pointer but defining its size in terms of the `src` variable (`sizeof(src)`). This isn\u0027t wrong as it stands, but it is surprising. Surprising is generally not something we want in buffer handling code. If we\u0027re taking a pointer to `val` then the `sizeof()` expression should be in terms of `val`. So:\n\n```\nmemcpy(ctx-\u003ecursor, \u0026val, sizeof(val));\n```\n\nPlease also address this for all the calls to `memcpy()` added below.",
+      "revId": "f310c2ce2aac84f41f2f771730a1c1d12d3666ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9868e888_7ee4110b",
+        "filename": "tests/msgbuf_generic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T22:46:58Z",
+      "side": 1,
+      "message": "we can remove this as this should be equivalent to the C++ tests right? there\u0027s no `_Generic()` macro for this function",
+      "revId": "f310c2ce2aac84f41f2f771730a1c1d12d3666ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b2e304d_f65f3cc1",
+        "filename": "tests/msgbuf_generic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T22:46:58Z",
+      "side": 1,
+      "message": "we can remove this as this should be equivalent to the C++ tests right? there\u0027s no `_Generic()` macro for this function",
       "revId": "f310c2ce2aac84f41f2f771730a1c1d12d3666ec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
