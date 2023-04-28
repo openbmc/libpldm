@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e0d4856_b875db3f",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T00:55:11Z",
+      "side": 1,
+      "message": "I meant the caller of `encode_poll_for_platform_event_message_resp()`, who doesn\u0027t have access to the `struct pldm_msgbuf` instance, let alone the length data. How does this work when the `struct pldm_msg` buffer gets passed to the transport APIs? How they know how much of the buffer to transmit?",
+      "parentUuid": "c16193a3_4847ea19",
+      "revId": "4549e1f831919409ebe9cdaa039ece9b51aff056",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1fbaa9e7_00b351a2",
         "filename": "src/platform.c",
         "patchSetId": 13
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "This check require the event_data_size which only has after 1018 line.",
       "parentUuid": "1fbaa9e7_00b351a2",
+      "range": {
+        "startLine": 1023,
+        "startChar": 0,
+        "endLine": 1025,
+        "endChar": 2
+      },
+      "revId": "4549e1f831919409ebe9cdaa039ece9b51aff056",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "299a9079_47fff3fa",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T00:55:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f168c5b1_dd4a12a2",
       "range": {
         "startLine": 1023,
         "startChar": 0,
