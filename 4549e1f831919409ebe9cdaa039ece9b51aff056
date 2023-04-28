@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c16193a3_4847ea19",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-28T00:37:47Z",
+      "side": 1,
+      "message": "Do the caller really need that? If it is then we have to add the allocated size fields in pldm_msgbuf. With \"remaining\" and \"length\" fields the caller can know the populated buffer.",
+      "parentUuid": "ad6c542b_c3392e5b",
+      "revId": "4549e1f831919409ebe9cdaa039ece9b51aff056",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1fbaa9e7_00b351a2",
         "filename": "src/platform.c",
         "patchSetId": 13
@@ -31,6 +49,30 @@
       "writtenOn": "2023-04-28T00:14:18Z",
       "side": 1,
       "message": "We can do this check at line 1010 right? That\u0027s no need to do any of the work above if this check fails?",
+      "range": {
+        "startLine": 1023,
+        "startChar": 0,
+        "endLine": 1025,
+        "endChar": 2
+      },
+      "revId": "4549e1f831919409ebe9cdaa039ece9b51aff056",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f168c5b1_dd4a12a2",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-28T00:37:47Z",
+      "side": 1,
+      "message": "This check require the event_data_size which only has after 1018 line.",
+      "parentUuid": "1fbaa9e7_00b351a2",
       "range": {
         "startLine": 1023,
         "startChar": 0,
