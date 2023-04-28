@@ -123,6 +123,30 @@
       },
       "revId": "4549e1f831919409ebe9cdaa039ece9b51aff056",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e359253f_5f8d5d8b",
+        "filename": "src/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-28T01:00:28Z",
+      "side": 1,
+      "message": "Oh, sorry. This is encode function so event_data_size is known. Let me update the code.",
+      "parentUuid": "f168c5b1_dd4a12a2",
+      "range": {
+        "startLine": 1023,
+        "startChar": 0,
+        "endLine": 1025,
+        "endChar": 2
+      },
+      "revId": "4549e1f831919409ebe9cdaa039ece9b51aff056",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
