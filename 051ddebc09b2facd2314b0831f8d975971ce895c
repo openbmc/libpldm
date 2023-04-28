@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fbdaa5e5_5d88efc1",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 1666,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-04-28T00:50:38Z",
+      "side": 1,
+      "message": "As the patch is currently implemented we need to document that the caller needs to free `event_data` once they\u0027re done with it. However, see my comment on the implementation about a possible zero-copy approach (which doesn\u0027t require allocation).",
+      "revId": "051ddebc09b2facd2314b0831f8d975971ce895c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "203bc5c1_c3d9f0d6",
         "filename": "src/platform.c",
         "patchSetId": 17
