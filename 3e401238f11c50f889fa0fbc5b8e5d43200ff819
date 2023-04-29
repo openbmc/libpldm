@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c312a370_5ac59343",
+        "filename": "src/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-29T02:56:33Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "dbf507d3_9860bec9",
+      "revId": "3e401238f11c50f889fa0fbc5b8e5d43200ff819",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d5e791f_ab78df12",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69802a33_a03ac19c",
+        "filename": "src/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-29T02:56:33Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "4d5e791f_ab78df12",
+      "revId": "3e401238f11c50f889fa0fbc5b8e5d43200ff819",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3731234_f99fbb5a",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-04-28T23:06:27Z",
       "side": 1,
       "message": "Also remove this check.",
+      "revId": "3e401238f11c50f889fa0fbc5b8e5d43200ff819",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44d231db_d3addefc",
+        "filename": "src/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-29T02:56:33Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "a3731234_f99fbb5a",
       "revId": "3e401238f11c50f889fa0fbc5b8e5d43200ff819",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
