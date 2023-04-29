@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1cb3a71c_3c177fa0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-29T06:46:06Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "53872010_24d96a70",
+      "revId": "5df3388eb30f2484cb12b1f103cd49c68bad8fab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6137d122_0ddb6d32",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-14T05:34:35Z",
       "side": 1,
       "message": "Please implement this in terms of the pldm_msgbuf API",
+      "revId": "5df3388eb30f2484cb12b1f103cd49c68bad8fab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b864ad22_56a99c2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-29T06:46:06Z",
+      "side": 1,
+      "message": "I updated code.",
+      "parentUuid": "6137d122_0ddb6d32",
       "revId": "5df3388eb30f2484cb12b1f103cd49c68bad8fab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -48,6 +84,30 @@
       "writtenOn": "2023-03-31T17:40:36Z",
       "side": 1,
       "message": "Make these macros which give meaningful name",
+      "range": {
+        "startLine": 1553,
+        "startChar": 38,
+        "endLine": 1553,
+        "endChar": 44
+      },
+      "revId": "5df3388eb30f2484cb12b1f103cd49c68bad8fab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb42ed56_4521fec0",
+        "filename": "src/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1553,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-29T06:46:06Z",
+      "side": 1,
+      "message": "These are invalid value of EventID which is defined in DSP0248 V1.2.2 spec. Do you have any suggestion for the definition for these values?",
+      "parentUuid": "0509da8b_4e3d4c81",
       "range": {
         "startLine": 1553,
         "startChar": 38,
@@ -81,6 +141,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45341279_534905ee",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1467,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-29T06:46:06Z",
+      "side": 1,
+      "message": "This is test code to verify the APIs. These values is selected by hobby. We should not care about the values in testing code.",
+      "parentUuid": "da491a4c_8eb7bbae",
+      "range": {
+        "startLine": 1465,
+        "startChar": 0,
+        "endLine": 1467,
+        "endChar": 45
+      },
+      "revId": "5df3388eb30f2484cb12b1f103cd49c68bad8fab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6c28b09_ee54c7c4",
@@ -94,6 +178,30 @@
       "writtenOn": "2023-03-31T17:40:36Z",
       "side": 1,
       "message": "Magic number and other places too",
+      "range": {
+        "startLine": 1497,
+        "startChar": 0,
+        "endLine": 1499,
+        "endChar": 45
+      },
+      "revId": "5df3388eb30f2484cb12b1f103cd49c68bad8fab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "198ad892_05c5d8bf",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1499,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-29T06:46:06Z",
+      "side": 1,
+      "message": "The same as above.",
+      "parentUuid": "b6c28b09_ee54c7c4",
       "range": {
         "startLine": 1497,
         "startChar": 0,
