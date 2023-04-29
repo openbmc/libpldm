@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66e0dee9_02f7d567",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-29T02:56:00Z",
+      "side": 1,
+      "message": "Added.",
+      "parentUuid": "802c1100_696853a3",
+      "revId": "83d135e7eb81ce55ae998d96a1214e2ad1cae985",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88ae06a8_3f58aafd",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7723c85_a9a2e535",
+        "filename": "src/platform.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 2175,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-29T02:56:00Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "88ae06a8_3f58aafd",
+      "revId": "83d135e7eb81ce55ae998d96a1214e2ad1cae985",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbe8b7d4_a631b922",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-04-28T22:54:01Z",
       "side": 1,
       "message": "maybe we should put this in `msgbuf.h` instead and cleanup any other instances of this trickery",
+      "revId": "83d135e7eb81ce55ae998d96a1214e2ad1cae985",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fddb90d4_52d72b84",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-04-29T02:56:00Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "dbe8b7d4_a631b922",
       "revId": "83d135e7eb81ce55ae998d96a1214e2ad1cae985",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
