@@ -89,9 +89,9 @@ TEST(GetNextRequestInSequenceSuccess, PLDMBaseDiscovery)
     rc = test_get_next_request_seq(&ctx, PLDM_GET_PLDM_COMMANDS);
     EXPECT_EQ(rc, PLDM_BASE_REQUESTER_SUCCESS);
 
-    rc = test_get_next_request_seq(&ctx, PLDM_BASE_REQUESTER_NO_NEXT_COMMAND_FOUND);
+    rc = test_get_next_request_seq(&ctx,
+                                   PLDM_BASE_REQUESTER_NO_NEXT_COMMAND_FOUND);
     EXPECT_EQ(rc, PLDM_BASE_REQUESTER_NO_NEXT_COMMAND_FOUND);
-
 }
 
 TEST(GetNextRequestInSequenceFailure, PLDMBaseDiscovery)
@@ -101,4 +101,130 @@ TEST(GetNextRequestInSequenceFailure, PLDMBaseDiscovery)
     struct requester_base_context* ctx = new requester_base_context();
     rc = test_get_next_request_seq(&ctx, 0x0023);
     EXPECT_EQ(rc, PLDM_BASE_REQUESTER_NO_NEXT_COMMAND_FOUND);
+}
+
+TEST(PushBaseDiscoveryResponseTIDSuccess, PLDMBaseDiscovery)
+{
+    int rc;
+    struct requester_base_context* ctx = new requester_base_context();
+    rc = pldm_base_init_context(ctx, TEST_DEVICE_ID.c_str(), TEST_NET_ID);
+
+    std::vector<uint8_t> msg_tid(sizeof(pldm_msg_hdr) + /*response_bytes=*/3);
+    auto response = reinterpret_cast<pldm_msg*>(msg_tid.data());
+
+    rc = test_get_next_request_seq(&ctx, PLDM_GET_TID);
+    EXPECT_EQ(rc, PLDM_BASE_REQUESTER_SUCCESS);
+    uint8_t completion_code = 0;
+    uint8_t tid = 9;
+    encode_get_tid_resp(/*instance_id*/ 1, completion_code, tid, response);
+    rc = pldm_base_push_response(
+        ctx, response, sizeof(pldm_msg_hdr) + PLDM_GET_TID_RESP_BYTES);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(tid, ctx->tid);
+}
+
+TEST(PushBaseDiscoveryResponseTIDFailure, PLDMBaseDiscovery)
+{
+    int rc;
+    struct requester_base_context* ctx = new requester_base_context();
+    rc = pldm_base_init_context(ctx, TEST_DEVICE_ID.c_str(), TEST_NET_ID);
+
+    std::vector<uint8_t> msg_tid(sizeof(pldm_msg_hdr) +
+                                 PLDM_GET_TID_RESP_BYTES);
+    auto response = reinterpret_cast<pldm_msg*>(msg_tid.data());
+
+    rc = test_get_next_request_seq(&ctx, PLDM_GET_TID);
+    EXPECT_EQ(rc, PLDM_BASE_REQUESTER_SUCCESS);
+    uint8_t completion_code = 86;
+    uint8_t tid = 9;
+    encode_get_tid_resp(/*instance_id*/ 1, completion_code, tid, response);
+    rc = pldm_base_push_response(
+        ctx, response, sizeof(pldm_msg_hdr) + PLDM_GET_TID_RESP_BYTES);
+    EXPECT_EQ(rc, PLDM_BASE_REQUESTER_NOT_RESP_MSG);
+}
+
+TEST(PushBaseDiscoveryResponseGetTypesSuccess, PLDMBaseDiscovery)
+{
+    int rc = 0;
+    struct requester_base_context* ctx = new requester_base_context();
+    rc = pldm_base_init_context(ctx, TEST_DEVICE_ID.c_str(), TEST_NET_ID);
+    rc = test_get_next_request_seq(&ctx, PLDM_GET_PLDM_TYPES);
+    bitfield8_t types[8];
+    types[0].byte = 64;
+
+    std::vector<uint8_t> msg(sizeof(pldm_msg_hdr) + PLDM_GET_TYPES_RESP_BYTES);
+    auto response = reinterpret_cast<pldm_msg*>(msg.data());
+
+    encode_get_types_resp(/*instance_id*/ 1, /*completion_code*/ 0, &types[0],
+                          response);
+
+    rc = pldm_base_push_response(
+        ctx, response, sizeof(pldm_msg_hdr) + PLDM_GET_TYPES_RESP_BYTES);
+    std::cerr << "Context pldm, types:\n";
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(ctx->pldm_types[0].byte, 64);
+}
+
+TEST(PushBaseDiscoveryResponseGetTypesFailure, PLDMBaseDiscovery)
+{
+    int rc = 0;
+    struct requester_base_context* ctx = new requester_base_context();
+    rc = pldm_base_init_context(ctx, TEST_DEVICE_ID.c_str(), TEST_NET_ID);
+    rc = test_get_next_request_seq(&ctx, PLDM_GET_PLDM_TYPES);
+    bitfield8_t types[8];
+
+    std::vector<uint8_t> msg(sizeof(pldm_msg_hdr) + PLDM_GET_TYPES_RESP_BYTES);
+    auto response = reinterpret_cast<pldm_msg*>(msg.data());
+
+    encode_get_types_resp(/*instance_id*/ 1, /*completion_code*/ 86, &types[0],
+                          response);
+
+    rc = pldm_base_push_response(
+        ctx, response, sizeof(pldm_msg_hdr) + PLDM_GET_TYPES_RESP_BYTES);
+    std::cerr << "Context pldm, types:\n";
+    EXPECT_EQ(rc, PLDM_BASE_REQUESTER_NOT_RESP_MSG);
+}
+
+TEST(PushBaseDiscoveryResponseGetCmdsSuccess, PLDMBaseDiscovery)
+{
+    int rc = 0;
+    struct requester_base_context* ctx = new requester_base_context();
+    rc = pldm_base_init_context(ctx, TEST_DEVICE_ID.c_str(), TEST_NET_ID);
+    ctx->command_pldm_type = PLDM_BASE;
+    rc = test_get_next_request_seq(&ctx, PLDM_GET_PLDM_COMMANDS);
+    bitfield8_t cmds[PLDM_MAX_CMDS_PER_TYPE / 8];
+    cmds[0].byte = 64;
+
+    std::vector<uint8_t> msg(sizeof(pldm_msg_hdr) +
+                             PLDM_GET_COMMANDS_RESP_BYTES);
+    auto response = reinterpret_cast<pldm_msg*>(msg.data());
+
+    encode_get_commands_resp(/*instance_id*/ 1, /*completion_code*/ 0, &cmds[0],
+                             response);
+
+    rc = pldm_base_push_response(
+        ctx, response, sizeof(pldm_msg_hdr) + PLDM_GET_COMMANDS_RESP_BYTES);
+    std::cerr << "Context pldm, types:\n";
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(ctx->pldm_commands[0][0], 64);
+}
+
+TEST(PushBaseDiscoveryResponseGetCmdsFailure, PLDMBaseDiscovery)
+{
+    int rc = 0;
+    struct requester_base_context* ctx = new requester_base_context();
+    rc = pldm_base_init_context(ctx, TEST_DEVICE_ID.c_str(), TEST_NET_ID);
+    rc = test_get_next_request_seq(&ctx, PLDM_GET_PLDM_COMMANDS);
+    bitfield8_t cmds[PLDM_MAX_CMDS_PER_TYPE / 8];
+    std::vector<uint8_t> msg(sizeof(pldm_msg_hdr) +
+                             PLDM_GET_COMMANDS_RESP_BYTES);
+    auto response = reinterpret_cast<pldm_msg*>(msg.data());
+
+    encode_get_commands_resp(/*instance_id*/ 1, /*completion_code*/ 86,
+                             &cmds[0], response);
+
+    rc = pldm_base_push_response(
+        ctx, response, sizeof(pldm_msg_hdr) + PLDM_GET_COMMANDS_RESP_BYTES);
+    std::cerr << "Context pldm, types:\n";
+    EXPECT_EQ(rc, PLDM_BASE_REQUESTER_NOT_RESP_MSG);
 }

@@ -51,8 +51,8 @@ struct requester_base_context {
  * @return pldm_requester_rc_t (errno may be set)
  */
 pldm_base_requester_rc_t
-pldm_base_init_context(struct requester_base_context *ctx,
-		       const char *dev_name, int net_id);
+pldm_base_init_context(struct requester_base_context *ctx, const char *dev_name,
+		       int net_id);
 
 /**
  * @brief Sets the first command to be triggered for base discovery and sets the
@@ -79,8 +79,21 @@ pldm_base_requester_rc_t
 pldm_base_get_next_request(struct requester_base_context *ctx,
 			   uint8_t instance_id, struct pldm_msg *request);
 
-//TODO(@harshtya): Add pldm_push_base_response() function declaration that takes
-//care of updating the context with the responses received for PLDM requests
+/**
+ * @brief Pushes the response values to the context based on the command
+ * type that was executed and updates the command status. It alse sets the
+ * next_command attribute of the context based on the last executed command.
+ *
+ * @param[in] ctx - a pointer to the context
+ * @param[in] resp_msg - a pointer to the response message that the caller
+ * received
+ * @param[in] resp_size - size of the response message payload
+ *
+ * @return pldm_requester_rc_t (errno may be set)
+ */
+pldm_base_requester_rc_t
+pldm_base_push_response(struct requester_base_context *ctx, void *resp_msg,
+			size_t resp_size);
 
 #ifdef __cplusplus
 }
