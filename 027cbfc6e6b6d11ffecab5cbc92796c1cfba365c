@@ -81,6 +81,30 @@
       },
       "revId": "027cbfc6e6b6d11ffecab5cbc92796c1cfba365c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f06f540_dea0d24e",
+        "filename": "src/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-05-09T11:44:34Z",
+      "side": 1,
+      "message": "Considering the lack of details in the commit message, I have no idea what you\u0027re trying to accomplish and why it is IBM-specific.  Reading the code it isn\u0027t obvious why this is considered OEM behavior.\n\nIt looks like you\u0027ve defined some magic value (0xFFFFFFFF, why isn\u0027t this a constant?) that triggers some non-standard behavior but I don\u0027t know why.\n\nIf you want to define an \"OEM assigned PDR\" magic (maybe this is in the spec and I just don\u0027t know it), define a constant for it and define a weak function for it.  The OEM code can have the strong value.",
+      "parentUuid": "0cca2aff_574ce45a",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 6
+      },
+      "revId": "027cbfc6e6b6d11ffecab5cbc92796c1cfba365c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
