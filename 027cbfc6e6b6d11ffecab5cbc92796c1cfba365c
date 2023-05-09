@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92327ce0_33954d39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-09T07:27:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46e544b6_64d38fae",
+      "revId": "027cbfc6e6b6d11ffecab5cbc92796c1cfba365c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "691ef1fe_26b99df5",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-05-08T11:44:37Z",
       "side": 1,
       "message": "I don\u0027t think this is an acceptable direction.  We should not start putting OEM behavior into a non-OEM file.  The common files are going to become a complete mess if we do that.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 6
+      },
+      "revId": "027cbfc6e6b6d11ffecab5cbc92796c1cfba365c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cca2aff_574ce45a",
+        "filename": "src/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-09T07:27:14Z",
+      "side": 1,
+      "message": "I agree Patrick, But could you please help me out here, Do you have any suggestions on how this can be done?",
+      "parentUuid": "691ef1fe_26b99df5",
       "range": {
         "startLine": 8,
         "startChar": 0,
