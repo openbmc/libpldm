@@ -26,6 +26,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c32fdd4f_9862a756",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-10T04:11:51Z",
+      "side": 1,
+      "message": "This breaks the existing API. Also, passing booleans directly as a function argument isn\u0027t a great API UX. Can we instead have `pldm_entity_association_tree_add()` stay with its existing prototype and assume false for `is_update_container_id`? Then add a new function, say `pldm_entity_association_tree_add_update()` for want of a better colour bike shed, which assumes true for `is_update_container_id`?",
+      "revId": "aef35826d0d85eeef4b485ec73314fb275143d45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1b1e4e8_52e9733c",
+        "filename": "src/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-10T04:11:51Z",
+      "side": 1,
+      "message": "container is misspelled here also",
+      "revId": "aef35826d0d85eeef4b485ec73314fb275143d45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec56313e_58b57d7b",
+        "filename": "src/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-10T04:11:51Z",
+      "side": 1,
+      "message": "Why are we doing this in the body of both branches? Why can\u0027t we just do this after line 474?",
+      "revId": "aef35826d0d85eeef4b485ec73314fb275143d45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b395fcfa_8935542d",
         "filename": "tests/libpldm_pdr_test.cpp",
         "patchSetId": 2
