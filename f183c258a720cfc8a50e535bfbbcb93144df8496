@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7aa9376_46e13aba",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-10T04:17:01Z",
+      "side": 1,
+      "message": "This breaks the API. If we merge this patch any callers will fail CI. Can we please come up with a new function name with an improved API and then deprecate this one?",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2662bc43_cd5cdab6",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-10T04:17:01Z",
+      "side": 1,
+      "message": "Again this breaks the API. Please come up with a second function that can live in parallel so we can deprecate this one.",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e7cdde3_7ad3b8bb",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-10T04:17:01Z",
+      "side": 1,
+      "message": "Please do not add functions whose only protection against UB is `assert()`.\n\nYou need to find a way to signal an error condition to the caller.",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d87d25d6_7d7d48da",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-10T04:17:01Z",
+      "side": 1,
+      "message": "We\u0027re performing the same actions in both branches with different ordering. Can we instead introduce a temporary variable so that\u0027s not required?",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbb98634_413f2021",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-10T04:17:01Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
