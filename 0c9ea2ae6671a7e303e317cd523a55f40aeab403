@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "349a1532_a895df4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-10T04:19:16Z",
+      "side": 1,
+      "message": "Yes. Please try to submit self-contained, sensible changes.\n\nIf you find yourself writing a list like this in a commit message, it\u0027s a good trigger to reflect on what you\u0027re doing and how you might break it into separate patches.",
+      "parentUuid": "6758e6a1_b12a24ba",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 56
+      },
+      "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "38d247f4_83666679",
