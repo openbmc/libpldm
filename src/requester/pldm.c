@@ -125,7 +125,7 @@ pldm_requester_rc_t pldm_send(mctp_eid_t eid, int mctp_fd,
 
 /* Adding this here for completeness in the case we can't smoothly
  * transition apps over to the new api */
-void pldm_close()
+void pldm_close(void)
 {
 	if (open_transport) {
 		pldm_transport_mctp_demux_destroy(open_transport);
