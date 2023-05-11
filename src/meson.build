@@ -6,7 +6,8 @@ libpldm_sources += files(
   'firmware_update.c',
   'fru.c',
   'pdr.c',
-  'utils.c'
+  'utils.c',
+  'pldm_rde.c'
   )
 
 subdir('requester')

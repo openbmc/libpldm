@@ -16,6 +16,8 @@ libpldm_headers += files(
   'states.h',
   'transport.h',
   'utils.h',
+  'firmware_update.h',
+  'pldm_rde.h',
   )
 
 libpldm_transport_headers += files(
