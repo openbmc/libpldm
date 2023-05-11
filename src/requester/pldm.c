@@ -10,6 +10,7 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <unistd.h>
+#include <stdio.h>
 
 /* Temporary for old api */
 #include "libpldm/transport/mctp-demux.h"
@@ -139,4 +140,120 @@ void pldm_close(void)
 		pldm_transport_mctp_demux_destroy(open_transport);
 	}
 	open_transport = NULL;
+}
+
+pldm_requester_rc_t pldm_send_at_network(mctp_eid_t eid, int network_id,
+                                         int mctp_fd,
+                                         const uint8_t* pldm_req_msg,
+                                         size_t req_msg_len)
+{
+    struct sockaddr_mctp addr = {0};
+    addr.smctp_family = AF_MCTP;
+    addr.smctp_network = network_id;
+    addr.smctp_addr.s_addr = eid;
+    addr.smctp_type = MCTP_MSG_TYPE_PLDM;
+    addr.smctp_tag = MCTP_TAG_OWNER;
+
+    int rc = sendto(mctp_fd, (uint8_t*)pldm_req_msg, req_msg_len, 0,
+                    (struct sockaddr*)&addr, sizeof(addr));
+
+    if (rc == -1)
+    {
+        perror("FAILED ON SEND LIBPLDM");
+        return PLDM_REQUESTER_SEND_FAIL;
+    }
+    return PLDM_REQUESTER_SUCCESS;
+}
+
+static pldm_requester_rc_t mctp_recv_at_network(mctp_eid_t eid, int mctp_fd,
+                                                uint8_t** pldm_resp_msg,
+                                                size_t* resp_msg_len,
+                                                int network_id)
+{
+    ssize_t min_len = sizeof(struct pldm_msg_hdr);
+    struct sockaddr_mctp addr = {0};
+    addr.smctp_family = AF_MCTP;
+    addr.smctp_addr.s_addr = eid;
+    addr.smctp_type = MCTP_MSG_TYPE_PLDM;
+    addr.smctp_tag = MCTP_TAG_OWNER;
+    addr.smctp_network = network_id;
+    socklen_t addrlen = sizeof(addr);
+    ssize_t length = recvfrom(mctp_fd, NULL, 0, MSG_PEEK | MSG_TRUNC,
+                              (struct sockaddr*)&addr, &addrlen);
+    if (length <= 0)
+    {
+        return PLDM_REQUESTER_RECV_FAIL;
+    }
+    else if (length < min_len)
+    {
+        /* read and discard */
+        uint8_t buf[length];
+        recv(mctp_fd, buf, length, 0);
+        return PLDM_REQUESTER_INVALID_RECV_LEN;
+    }
+    else
+    {
+        ssize_t bytes = recvfrom(mctp_fd, *pldm_resp_msg, length, MSG_TRUNC,
+                                 (struct sockaddr*)&addr, &addrlen);
+        if (length != bytes)
+        {
+            free(*pldm_resp_msg);
+            return PLDM_REQUESTER_INVALID_RECV_LEN;
+        }
+        *resp_msg_len = length;
+        return PLDM_REQUESTER_SUCCESS;
+    }
+}
+
+
+pldm_requester_rc_t recv_at_network(mctp_eid_t eid, int mctp_fd,
+                                         uint8_t** pldm_resp_msg,
+                                         size_t* resp_msg_len, int network_id)
+{
+    pldm_requester_rc_t rc = mctp_recv_at_network(eid, mctp_fd, pldm_resp_msg,
+                                                  resp_msg_len, network_id);
+    if (rc != PLDM_REQUESTER_SUCCESS)
+    {
+        fprintf(stderr, "MCTP Data Failure: No data received on network id\n");
+        return rc;
+    }
+
+    struct pldm_msg_hdr* hdr = (struct pldm_msg_hdr*)(*pldm_resp_msg);
+    if (hdr->request != PLDM_RESPONSE)
+    {
+        free(*pldm_resp_msg);
+        return PLDM_REQUESTER_NOT_RESP_MSG;
+    }
+
+    uint8_t pldm_rc = 0;
+    if (*resp_msg_len < (sizeof(struct pldm_msg_hdr) + sizeof(pldm_rc)))
+    {
+        free(*pldm_resp_msg);
+        return PLDM_REQUESTER_RESP_MSG_TOO_SMALL;
+    }
+
+    return PLDM_REQUESTER_SUCCESS;
+}
+
+pldm_requester_rc_t pldm_recv_at_network(mctp_eid_t eid, int mctp_fd,
+                                         uint8_t instance_id,
+                                         uint8_t** pldm_resp_msg,
+                                         size_t* resp_msg_len, int network_id)
+{
+    pldm_requester_rc_t rc = recv_at_network(eid, mctp_fd, pldm_resp_msg,
+                                                  resp_msg_len, network_id);
+
+    if (rc != PLDM_REQUESTER_SUCCESS)
+    {
+        return rc;
+    }
+
+    struct pldm_msg_hdr* hdr = (struct pldm_msg_hdr*)(*pldm_resp_msg);
+    if (hdr->instance_id != instance_id)
+    {
+        free(*pldm_resp_msg);
+        return PLDM_REQUESTER_INSTANCE_ID_MISMATCH;
+    }
+
+    return PLDM_REQUESTER_SUCCESS;
 }
