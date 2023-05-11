@@ -74,6 +74,20 @@ pldm_requester_rc_t pldm_send(mctp_eid_t eid, int mctp_fd,
 			      const uint8_t *pldm_req_msg, size_t req_msg_len);
 
 /**
+ * @brief Similar to pldm send but sends the PLDM request to a specific network id
+ * 
+ * @param[in] eid - destination MCTP eid
+ * @param[in] network_id - Net id to send the request to
+ * @param[in] mctp_fd - MCTP socket fd
+ * @param[in] pldm_req_msg - caller owned pointer to PLDM request msg
+ * @param[in] req_msg_len - size of PLDM request msg
+*/
+pldm_requester_rc_t pldm_send_at_network(mctp_eid_t eid, int network_id,
+                                         int mctp_fd,
+                                         const uint8_t* pldm_req_msg,
+                                         size_t req_msg_len);
+
+/**
  * @brief Read MCTP socket. If there's data available, return success only if
  *        data is a PLDM response message that matches eid and instance_id.
  *
@@ -91,6 +105,28 @@ pldm_requester_rc_t pldm_send(mctp_eid_t eid, int mctp_fd,
  */
 pldm_requester_rc_t pldm_recv(mctp_eid_t eid, int mctp_fd, uint8_t instance_id,
 			      uint8_t **pldm_resp_msg, size_t *resp_msg_len);
+
+/**
+ * @brief Similar to pldm_recv but receives from a specific network id
+ * 
+ * @param[in] eid - destination MCTP eid
+ * @param[in] mctp_fd - MCTP socket fd
+ * @param[in] instance_id - PLDM instance id of previously sent PLDM request msg
+ * @param[out] pldm_resp_msg - *pldm_resp_msg will point to PLDM response msg,
+ *             this function allocates memory, caller to free(*pldm_resp_msg) on
+ *             success.
+ * @param[out] resp_msg_len - caller owned pointer that will be made point to
+ *             the size of the PLDM response msg.
+ * 
+ * @param[in] network_id - Net id to receive the request from
+ *
+ * @return pldm_requester_rc_t (errno may be set). failure is returned even
+ *         when data was read, but didn't match eid or instance_id.
+*/
+pldm_requester_rc_t pldm_recv_at_network(mctp_eid_t eid, int mctp_fd,
+                                         uint8_t instance_id,
+                                         uint8_t** pldm_resp_msg,
+                                         size_t* resp_msg_len, int network_id);
 
 /**
  * @brief Read MCTP socket. If there's data available, return success only if
