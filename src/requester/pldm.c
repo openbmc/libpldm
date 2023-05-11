@@ -176,26 +176,28 @@ pldm_requester_rc_t pldm_send(mctp_eid_t eid, int mctp_fd,
 	return rc;
 }
 
+
 pldm_requester_rc_t pldm_send_at_network(mctp_eid_t eid, int network_id,
-					 int mctp_fd,
-					 const uint8_t *pldm_req_msg,
-					 size_t req_msg_len)
+                                         int mctp_fd,
+                                         const uint8_t* pldm_req_msg,
+                                         size_t req_msg_len)
 {
-	struct sockaddr_mctp addr = { 0 };
-	addr.smctp_family = AF_MCTP;
-	addr.smctp_network = network_id;
-	addr.smctp_addr.s_addr = eid;
-	addr.smctp_type = MCTP_MSG_TYPE_PLDM;
-	addr.smctp_tag = MCTP_TAG_OWNER;
+    struct sockaddr_mctp addr = {0};
+    addr.smctp_family = AF_MCTP;
+    addr.smctp_network = network_id;
+    addr.smctp_addr.s_addr = eid;
+    addr.smctp_type = MCTP_MSG_TYPE_PLDM;
+    addr.smctp_tag = MCTP_TAG_OWNER;
 
-	int rc = sendto(mctp_fd, (uint8_t *)pldm_req_msg, req_msg_len, 0,
-			(struct sockaddr *)&addr, sizeof(addr));
+    int rc = sendto(mctp_fd, (uint8_t*)pldm_req_msg, req_msg_len, 0,
+                    (struct sockaddr*)&addr, sizeof(addr));
 
-	if (rc == -1) {
-		perror("FAILED ON SEND LIBPLDM");
-		return PLDM_REQUESTER_SEND_FAIL;
-	}
-	return PLDM_REQUESTER_SUCCESS;
+    if (rc == -1)
+    {
+        perror("FAILED ON SEND LIBPLDM");
+        return PLDM_REQUESTER_SEND_FAIL;
+    }
+    return PLDM_REQUESTER_SUCCESS;
 }
 
 static pldm_requester_rc_t mctp_recv_at_network(mctp_eid_t eid, int mctp_fd,
@@ -268,24 +270,26 @@ pldm_requester_rc_t recv_at_network(mctp_eid_t eid, int mctp_fd,
 }
 
 pldm_requester_rc_t pldm_recv_at_network(mctp_eid_t eid, int mctp_fd,
-					 uint8_t instance_id,
-					 uint8_t **pldm_resp_msg,
-					 size_t *resp_msg_len, int network_id)
+                                         uint8_t instance_id,
+                                         uint8_t** pldm_resp_msg,
+                                         size_t* resp_msg_len, int network_id)
 {
-	pldm_requester_rc_t rc = recv_at_network(eid, mctp_fd, pldm_resp_msg,
-						 resp_msg_len, network_id);
+    pldm_requester_rc_t rc = recv_at_network(eid, mctp_fd, pldm_resp_msg,
+                                                 resp_msg_len, network_id);
 
-	if (rc != PLDM_REQUESTER_SUCCESS) {
-		return rc;
-	}
+    if (rc != PLDM_REQUESTER_SUCCESS)
+    {
+        return rc;
+    }
 
-	struct pldm_msg_hdr *hdr = (struct pldm_msg_hdr *)(*pldm_resp_msg);
-	if (hdr->instance_id != instance_id) {
-		free(*pldm_resp_msg);
-		return PLDM_REQUESTER_INSTANCE_ID_MISMATCH;
-	}
+    struct pldm_msg_hdr* hdr = (struct pldm_msg_hdr*)(*pldm_resp_msg);
+    if (hdr->instance_id != instance_id)
+    {
+        free(*pldm_resp_msg);
+        return PLDM_REQUESTER_INSTANCE_ID_MISMATCH;
+    }
 
-	return PLDM_REQUESTER_SUCCESS;
+    return PLDM_REQUESTER_SUCCESS;
 }
 
 /* Adding this here for completeness in the case we can't smoothly
