@@ -16,3 +16,7 @@ Change categories:
 - Security
 
 ## [Unreleased]
+
+### Fixed
+
+1. requester: Make pldm_open() return existing fd
