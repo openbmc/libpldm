@@ -76,7 +76,7 @@ pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
 	}
 
 	pldm_requester_rc_t rc =
-	    transport->recv(transport, tid, pldm_resp_msg, resp_msg_len);
+		transport->recv(transport, tid, pldm_resp_msg, resp_msg_len);
 	if (rc != PLDM_REQUESTER_SUCCESS) {
 		return rc;
 	}
@@ -108,8 +108,8 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		return PLDM_REQUESTER_INVALID_SETUP;
 	}
 
-	pldm_requester_rc_t rc =
-	    pldm_transport_send_msg(transport, tid, pldm_req_msg, req_msg_len);
+	pldm_requester_rc_t rc = pldm_transport_send_msg(
+		transport, tid, pldm_req_msg, req_msg_len);
 	if (rc != PLDM_REQUESTER_SUCCESS) {
 		return rc;
 	}
