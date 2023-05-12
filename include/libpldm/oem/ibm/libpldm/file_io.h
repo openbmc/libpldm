@@ -73,25 +73,25 @@ enum pldm_fileio_file_type {
 	PLDM_FILE_TYPE_PSPD_VPD_PDD_KEYWORD = 0x16,
 };
 
-#define PLDM_RW_FILE_MEM_REQ_BYTES 20
-#define PLDM_RW_FILE_MEM_RESP_BYTES 5
-#define PLDM_GET_FILE_TABLE_REQ_BYTES 6
-#define PLDM_GET_FILE_TABLE_MIN_RESP_BYTES 6
-#define PLDM_READ_FILE_REQ_BYTES 12
-#define PLDM_READ_FILE_RESP_BYTES 5
-#define PLDM_WRITE_FILE_REQ_BYTES 12
-#define PLDM_WRITE_FILE_RESP_BYTES 5
-#define PLDM_RW_FILE_BY_TYPE_MEM_REQ_BYTES 22
-#define PLDM_RW_FILE_BY_TYPE_MEM_RESP_BYTES 5
-#define PLDM_NEW_FILE_REQ_BYTES 14
-#define PLDM_NEW_FILE_RESP_BYTES 1
-#define PLDM_RW_FILE_BY_TYPE_REQ_BYTES 14
-#define PLDM_RW_FILE_BY_TYPE_RESP_BYTES 5
-#define PLDM_FILE_ACK_REQ_BYTES 7
-#define PLDM_FILE_ACK_RESP_BYTES 1
-#define PLDM_FILE_ACK_WITH_META_DATA_REQ_BYTES 23
-#define PLDM_FILE_ACK_WITH_META_DATA_RESP_BYTES 1
-#define PLDM_NEW_FILE_AVAILABLE_WITH_META_DATA_REQ_BYTES 30
+#define PLDM_RW_FILE_MEM_REQ_BYTES			  20
+#define PLDM_RW_FILE_MEM_RESP_BYTES			  5
+#define PLDM_GET_FILE_TABLE_REQ_BYTES			  6
+#define PLDM_GET_FILE_TABLE_MIN_RESP_BYTES		  6
+#define PLDM_READ_FILE_REQ_BYTES			  12
+#define PLDM_READ_FILE_RESP_BYTES			  5
+#define PLDM_WRITE_FILE_REQ_BYTES			  12
+#define PLDM_WRITE_FILE_RESP_BYTES			  5
+#define PLDM_RW_FILE_BY_TYPE_MEM_REQ_BYTES		  22
+#define PLDM_RW_FILE_BY_TYPE_MEM_RESP_BYTES		  5
+#define PLDM_NEW_FILE_REQ_BYTES				  14
+#define PLDM_NEW_FILE_RESP_BYTES			  1
+#define PLDM_RW_FILE_BY_TYPE_REQ_BYTES			  14
+#define PLDM_RW_FILE_BY_TYPE_RESP_BYTES			  5
+#define PLDM_FILE_ACK_REQ_BYTES				  7
+#define PLDM_FILE_ACK_RESP_BYTES			  1
+#define PLDM_FILE_ACK_WITH_META_DATA_REQ_BYTES		  23
+#define PLDM_FILE_ACK_WITH_META_DATA_RESP_BYTES		  1
+#define PLDM_NEW_FILE_AVAILABLE_WITH_META_DATA_REQ_BYTES  30
 #define PLDM_NEW_FILE_AVAILABLE_WITH_META_DATA_RESP_BYTES 1
 
 /** @struct pldm_read_write_file_memory_req
@@ -774,9 +774,10 @@ struct pldm_file_ack_with_meta_data_resp {
  *  @return pldm_completion_codes
  */
 int encode_file_ack_with_meta_data_req(
-    uint8_t instance_id, uint16_t file_type, uint32_t file_handle,
-    uint8_t file_status, uint32_t file_meta_data_1, uint32_t file_meta_data_2,
-    uint32_t file_meta_data_3, uint32_t file_meta_data_4, struct pldm_msg *msg);
+	uint8_t instance_id, uint16_t file_type, uint32_t file_handle,
+	uint8_t file_status, uint32_t file_meta_data_1,
+	uint32_t file_meta_data_2, uint32_t file_meta_data_3,
+	uint32_t file_meta_data_4, struct pldm_msg *msg);
 
 /** @brief Decode FileAckWithMetadata command response data
  *
@@ -803,10 +804,10 @@ int decode_file_ack_with_meta_data_resp(const struct pldm_msg *msg,
  * @return pldm_completion_codes
  */
 int decode_file_ack_with_meta_data_req(
-    const struct pldm_msg *msg, size_t payload_length, uint16_t *file_type,
-    uint32_t *file_handle, uint8_t *file_status, uint32_t *file_meta_data_1,
-    uint32_t *file_meta_data_2, uint32_t *file_meta_data_3,
-    uint32_t *file_meta_data_4);
+	const struct pldm_msg *msg, size_t payload_length, uint16_t *file_type,
+	uint32_t *file_handle, uint8_t *file_status, uint32_t *file_meta_data_1,
+	uint32_t *file_meta_data_2, uint32_t *file_meta_data_3,
+	uint32_t *file_meta_data_4);
 
 /** @brief Create a PLDM response message for FileAckWithMetadata
  *
@@ -857,10 +858,13 @@ struct pldm_new_file_with_metadata_resp {
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
-int encode_new_file_with_metadata_req(
-    uint8_t instance_id, uint16_t file_type, uint32_t file_handle,
-    uint64_t length, uint32_t file_meta_data_1, uint32_t file_meta_data_2,
-    uint32_t file_meta_data_3, uint32_t file_meta_data_4, struct pldm_msg *msg);
+int encode_new_file_with_metadata_req(uint8_t instance_id, uint16_t file_type,
+				      uint32_t file_handle, uint64_t length,
+				      uint32_t file_meta_data_1,
+				      uint32_t file_meta_data_2,
+				      uint32_t file_meta_data_3,
+				      uint32_t file_meta_data_4,
+				      struct pldm_msg *msg);
 
 /** @brief Decode NewFileAvailableWithMetaData response data
  *
@@ -887,10 +891,10 @@ int decode_new_file_with_metadata_resp(const struct pldm_msg *msg,
  *  @return pldm_completion_codes
  */
 int decode_new_file_with_metadata_req(
-    const struct pldm_msg *msg, size_t payload_length, uint16_t *file_type,
-    uint32_t *file_handle, uint64_t *length, uint32_t *file_meta_data_1,
-    uint32_t *file_meta_data_2, uint32_t *file_meta_data_3,
-    uint32_t *file_meta_data_4);
+	const struct pldm_msg *msg, size_t payload_length, uint16_t *file_type,
+	uint32_t *file_handle, uint64_t *length, uint32_t *file_meta_data_1,
+	uint32_t *file_meta_data_2, uint32_t *file_meta_data_3,
+	uint32_t *file_meta_data_4);
 
 /** @brief Create a PLDM response for NewFileAvailableWithMetaData
  *

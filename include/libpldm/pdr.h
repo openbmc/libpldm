@@ -206,9 +206,9 @@ uint32_t pldm_pdr_add_fru_record_set(pldm_pdr *repo, uint16_t terminus_handle,
  *  @return uint32_t - record handle assigned to PDR record
  */
 const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
-    const pldm_pdr *repo, uint16_t fru_rsi, uint16_t *terminus_handle,
-    uint16_t *entity_type, uint16_t *entity_instance_num,
-    uint16_t *container_id);
+	const pldm_pdr *repo, uint16_t fru_rsi, uint16_t *terminus_handle,
+	uint16_t *entity_type, uint16_t *entity_instance_num,
+	uint16_t *container_id);
 
 /* =========================== */
 /* Entity Association PDR APIs */
@@ -258,9 +258,9 @@ pldm_entity_association_tree *pldm_entity_association_tree_init(void);
  *  @return pldm_entity_node* - opaque pointer to added entity
  */
 pldm_entity_node *pldm_entity_association_tree_add(
-    pldm_entity_association_tree *tree, pldm_entity *entity,
-    uint16_t entity_instance_number, pldm_entity_node *parent,
-    uint8_t association_type);
+	pldm_entity_association_tree *tree, pldm_entity *entity,
+	uint16_t entity_instance_number, pldm_entity_node *parent,
+	uint8_t association_type);
 
 /** @brief Visit and note each entity in the entity association tree
  *
@@ -328,8 +328,8 @@ void pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
  *  @param[in] terminus_handle - terminus handle of the terminus
  */
 void pldm_entity_association_pdr_add_from_node(
-    pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
-    size_t num_entities, bool is_remote, uint16_t terminus_handle);
+	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
+	size_t num_entities, bool is_remote, uint16_t terminus_handle);
 
 /** @brief Find entity reference in tree
  *
@@ -375,15 +375,15 @@ pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
  *  @param[in/out] new_tree - pointer to destination tree
  */
 void pldm_entity_association_tree_copy_root(
-    pldm_entity_association_tree *org_tree,
-    pldm_entity_association_tree *new_tree);
+	pldm_entity_association_tree *org_tree,
+	pldm_entity_association_tree *new_tree);
 
 /** @brief Destroy all the nodes of the entity association tree
  *
  *  @param[in] tree - pointer to entity association tree
  */
 void pldm_entity_association_tree_destroy_root(
-    pldm_entity_association_tree *tree);
+	pldm_entity_association_tree *tree);
 
 /** @brief Check whether the entity association tree is empty
  *
