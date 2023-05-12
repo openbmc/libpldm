@@ -323,14 +323,14 @@ static inline int pldm_msgbuf_extract_real32(struct pldm_msgbuf *ctx,
 }
 
 #define pldm_msgbuf_extract(ctx, dst)                                          \
-	_Generic((*(dst)), uint8_t                                             \
-		 : pldm_msgbuf_extract_uint8, int8_t                           \
-		 : pldm_msgbuf_extract_int8, uint16_t                          \
-		 : pldm_msgbuf_extract_uint16, int16_t                         \
-		 : pldm_msgbuf_extract_int16, uint32_t                         \
-		 : pldm_msgbuf_extract_uint32, int32_t                         \
-		 : pldm_msgbuf_extract_int32, real32_t                         \
-		 : pldm_msgbuf_extract_real32)(ctx, dst)
+	_Generic((*(dst)),                                                     \
+		uint8_t: pldm_msgbuf_extract_uint8,                            \
+		int8_t: pldm_msgbuf_extract_int8,                              \
+		uint16_t: pldm_msgbuf_extract_uint16,                          \
+		int16_t: pldm_msgbuf_extract_int16,                            \
+		uint32_t: pldm_msgbuf_extract_uint32,                          \
+		int32_t: pldm_msgbuf_extract_int32,                            \
+		real32_t: pldm_msgbuf_extract_real32)(ctx, dst)
 
 static inline int pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx,
 						  uint8_t *dst, size_t count)
@@ -363,8 +363,8 @@ static inline int pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx,
 }
 
 #define pldm_msgbuf_extract_array(ctx, dst, count)                             \
-	_Generic((*(dst)), uint8_t                                             \
-		 : pldm_msgbuf_extract_array_uint8)(ctx, dst, count)
+	_Generic((*(dst)), uint8_t: pldm_msgbuf_extract_array_uint8)(ctx, dst, \
+								     count)
 
 #ifdef __cplusplus
 }
