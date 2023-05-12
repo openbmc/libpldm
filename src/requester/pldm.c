@@ -31,7 +31,8 @@ pldm_requester_rc_t pldm_open(void)
 	int rc;
 
 	if (open_transport) {
-		return -1;
+		fd = pldm_transport_mctp_demux_get_socket_fd(open_transport);
+		return fd;
 	}
 
 	struct pldm_transport_mctp_demux *demux = NULL;
