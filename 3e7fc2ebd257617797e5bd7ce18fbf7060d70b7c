@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "623ef0d5_e3ee2a44",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-15T02:42:42Z",
+      "side": 1,
+      "message": "Can you add a `Fixes:` tag here? Also, if you rebase, we now have a `CHANGELOG.md`. It would be nice if you start a `Fixes` section in there 😊",
+      "revId": "3e7fc2ebd257617797e5bd7ce18fbf7060d70b7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7c6574b_01ee39a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-15T02:42:42Z",
+      "side": 1,
+      "message": "Just had a couple of quick thoughts.",
+      "revId": "3e7fc2ebd257617797e5bd7ce18fbf7060d70b7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
