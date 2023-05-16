@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "607122a7_e363f8e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-16T12:33:52Z",
+      "side": 1,
+      "message": "Hi Thu, I\u0027m sorry but unless you provide a particularly convincing argument, I can\u0027t accept this change. We instead need to convert consumers to the newer transport and instance ID APIs provided by libpldm, and eventually define an explicit requester API once we\u0027ve fixed all the remaining issues.",
+      "revId": "7be7069980773090ad7d22bc45f5776ea7a505be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f12a499c_784390d0",
+        "filename": "include/libpldm/requester/pldm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-16T12:33:52Z",
+      "side": 1,
+      "message": "You\u0027re simultaneously breaking the this API _and_ trying to fix the behaviour of a deprecated function. Please switch pldmtool and any other applications to use the async functions defined in the new transport API.\n\nhttps://github.com/openbmc/libpldm/blob/main/include/libpldm/transport.h#L26-L79",
+      "revId": "7be7069980773090ad7d22bc45f5776ea7a505be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e27e15a_23630b3b",
+        "filename": "include/libpldm/transport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-16T12:33:52Z",
+      "side": 1,
+      "message": "Sorry, but no, that\u0027s muddling the intent of this API. This is a *transport* API, not a *requester* API. The behaviour of the transport API mustn\u0027t encode the mechanics of retries and timeouts.\n\nPlease read this blog post:\n\nhttps://amboar.github.io/notes/2023/03/28/motivating-a-new-scheme-for-pldm-instance-id-management-in-openbmc.html\n\nThe requester API does not yet exist. There\u0027s a lot of work still to do, because a requester API should also abstract over the instance ID lifecycle as well as handling timeouts and retries. But we can\u0027t do that as the encode and decode functions all require instance IDs as an argument. We must fix that before we can provide a sensible requester API.\n\nUntil that\u0027s all sorted out consumers of libpldm must themselves implement a requester API by composing the transport and instance ID APIs now provided by libpldm.\n\nFinally, again, you\u0027re breaking the API. That\u0027s not immediately acceptable - if we need to change the prototype we need to declare one with a new symbol name, otherwise we\u0027re immediately breaking all consumers. I plan to enable `abi-compliance-checker` in CI soon so I don\u0027t have to keep repeating this.\n\nhttps://lvc.github.io/abi-compliance-checker/",
+      "revId": "7be7069980773090ad7d22bc45f5776ea7a505be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23ae9046_49f355fc",
