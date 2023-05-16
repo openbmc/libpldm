@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2efbdbf_c919efb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-16T01:46:32Z",
+      "side": 1,
+      "message": "Actually, can you please add an `Added` section to `CHANGELOG.md` and add an entry for this change there? For the moment just copy/pasting the commit subject is fine.\n\nHere\u0027s a reference:\n\nhttps://github.com/openbmc/obmc-console/blob/master/CHANGELOG.md",
+      "revId": "7366377bca1ca86abc7b96a68da92771f0d3d052",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
