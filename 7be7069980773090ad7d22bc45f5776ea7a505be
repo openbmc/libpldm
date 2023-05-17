@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12e0eb18_4e7b5bdb",
+        "filename": "include/libpldm/transport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-17T01:13:39Z",
+      "side": 1,
+      "message": "DSP0240 1.1.0 Table 6 defines PT3max as 6 seconds. How do you feel about exploiting that as a well-defined upper-bound without requiring new parameters to the function prototype? We don\u0027t retry, we just wait 6 seconds and then return e.g. `-ETIMEDOUT`?",
+      "parentUuid": "cbdfb0c8_d5af2e98",
+      "revId": "7be7069980773090ad7d22bc45f5776ea7a505be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23ae9046_49f355fc",
         "filename": "src/transport/transport.c",
         "patchSetId": 2
