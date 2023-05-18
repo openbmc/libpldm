@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c41e9259_f3ff7514",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-18T10:24:43Z",
+      "side": 1,
+      "message": "Ack\n\nNew commit up - https://gerrit.openbmc.org/c/openbmc/libpldm/+/63585/1",
+      "parentUuid": "a7aa9376_46e13aba",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2662bc43_cd5cdab6",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-10T04:17:01Z",
       "side": 1,
       "message": "Again this breaks the API. Please come up with a second function that can live in parallel so we can deprecate this one.",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0759ddc_270a6f44",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-18T10:24:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2662bc43_cd5cdab6",
       "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0588a57c_af5ebc8d",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-18T10:24:43Z",
+      "side": 1,
+      "message": "I missed this, will do it in next patchset.",
+      "parentUuid": "8e7cdde3_7ad3b8bb",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d87d25d6_7d7d48da",
         "filename": "src/pdr.c",
         "patchSetId": 3
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a55deb2c_0f2406c1",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-18T10:24:43Z",
+      "side": 1,
+      "message": "We are doing different operations in both cases, first case we assign node-\u003ehost_container_id \u003d entity-\u003eentity_container_id and in the next case we assign node-\u003ehost_container_id \u003d node-\u003eentity.entity_container_id.\n\nAre you referring to the common step that we are doing?\n(node-\u003eentity.entity_container_id \u003d next_container_id(tree))",
+      "parentUuid": "d87d25d6_7d7d48da",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbb98634_413f2021",
         "filename": "src/pdr.c",
         "patchSetId": 3
@@ -82,6 +154,24 @@
       "writtenOn": "2023-05-10T04:17:01Z",
       "side": 1,
       "message": "As above.",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d02c07f_c62b66a9",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-18T10:24:43Z",
+      "side": 1,
+      "message": "first \"if\" check has an extra condition and hence we are doing it.",
+      "parentUuid": "cbb98634_413f2021",
       "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
