@@ -262,6 +262,32 @@ pldm_entity_node *pldm_entity_association_tree_add(
 	uint16_t entity_instance_number, pldm_entity_node *parent,
 	uint8_t association_type);
 
+/** @brief Add an entity into the entity association tree if remote
+ *
+ *  @param[in/out] tree - opaque pointer acting as a handle to the tree
+ *  @param[in/out] entity - pointer to the entity to be added. Input has the
+ *                          entity type. On output, instance number and the
+ *                          container id are populated.
+ *  @param[in] entity_instance_number - entity instance number, we can use the
+ *                                      entity instance number of the entity by
+ *                                      default if its value is equal 0xFFFF.
+ *  @param[in] parent - pointer to the node that should be the parent of input
+ *                      entity. If this is NULL, then the entity is the root
+ *  @param[in] association_type - relation with the parent : logical or physical
+ *  @param[in] is_remote - used to denote whether we are adding a BMC entity to
+ *                         the tree or a host entity
+ *  @param[in] is_update_contanier_id - Used to determine whether need to update
+ *                                      contanier id.
+ *                                      true: should be changed
+ *                                      false: should not be changed
+ *
+ *  @return pldm_entity_node* - opaque pointer to added entity
+ */
+pldm_entity_node *pldm_entity_association_tree_add_if_remote(
+	pldm_entity_association_tree *tree, pldm_entity *entity,
+	uint16_t entity_instance_number, pldm_entity_node *parent,
+	uint8_t association_type, bool is_remote, bool is_update_container_id);
+
 /** @brief Visit and note each entity in the entity association tree
  *
  *  @param[in] tree - opaque pointer acting as a handle to the tree
@@ -375,6 +401,21 @@ bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node);
 pldm_entity_node *
 pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
 				  pldm_entity *entity);
+
+/** @brief Find an entity in the entity association tree if remote
+ *
+ *  @param[in] tree - pointer to entity association tree
+ *  @param[in/out] entity - entity type and instance id set on input, container
+ *                          id set on output
+ *  @param[in] is_remote - variable to denote whether we are finding a host
+ *                         entity or a BMC entity
+ *
+ *  @return pldm_entity_node* pointer to entity if found, NULL otherwise
+ */
+pldm_entity_node *
+pldm_entity_association_tree_find_if_remote(pldm_entity_association_tree *tree,
+					    pldm_entity *entity,
+					    bool is_remote);
 
 /** @brief Create a copy of an existing entity association tree
  *
