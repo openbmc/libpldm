@@ -511,6 +511,109 @@ pldm_entity_node *pldm_entity_association_tree_add(
 	return node;
 }
 
+LIBPLDM_ABI_STABLE
+pldm_entity_node *pldm_entity_association_tree_add_entities(
+	pldm_entity_association_tree *tree, pldm_entity *entity,
+	uint16_t entity_instance_number, pldm_entity_node *parent,
+	uint8_t association_type, bool is_remote, bool is_update_container_id,
+	uint16_t container_id)
+{
+	if ((!tree) || (!entity)) {
+		return NULL;
+	}
+
+	if (entity_instance_number != 0xFFFF && parent != NULL) {
+		pldm_entity node;
+		node.entity_type = entity->entity_type;
+		node.entity_instance_num = entity_instance_number;
+		if (pldm_is_current_parent_child(parent, &node)) {
+			return NULL;
+		}
+	}
+	if (association_type != PLDM_ENTITY_ASSOCIAION_PHYSICAL &&
+	    association_type != PLDM_ENTITY_ASSOCIAION_LOGICAL) {
+		return NULL;
+	}
+	pldm_entity_node *node = malloc(sizeof(pldm_entity_node));
+	if (!node) {
+		return NULL;
+	}
+	node->first_child = NULL;
+	node->next_sibling = NULL;
+	node->parent.entity_type = 0;
+	node->parent.entity_instance_num = 0;
+	node->parent.entity_container_id = 0;
+	node->entity.entity_type = entity->entity_type;
+	node->entity.entity_instance_num =
+		entity_instance_number != 0xFFFF ? entity_instance_number : 1;
+	node->association_type = association_type;
+	node->remote_container_id = 0;
+	if (tree->root == NULL) {
+		if (parent != NULL) {
+			free(node);
+			return NULL;
+		}
+		tree->root = node;
+		/* container_id 0 here indicates this is the top-most entry */
+		node->entity.entity_container_id = 0;
+		node->remote_container_id = node->entity.entity_container_id;
+	} else if (parent != NULL && parent->first_child == NULL) {
+		parent->first_child = node;
+		node->parent = parent->entity;
+
+		if (is_remote) {
+			node->remote_container_id = entity->entity_container_id;
+		}
+		if (is_update_container_id) {
+			if (container_id != 0xFFFF) {
+				node->entity.entity_container_id = container_id;
+			} else {
+				node->entity.entity_container_id =
+					next_container_id(tree);
+			}
+		} else {
+			node->entity.entity_container_id =
+				entity->entity_container_id;
+		}
+
+		if (!is_remote) {
+			node->remote_container_id =
+				node->entity.entity_container_id;
+		}
+	} else {
+		pldm_entity_node *start = parent == NULL ? tree->root :
+							   parent->first_child;
+		pldm_entity_node *prev =
+			find_insertion_at(start, entity->entity_type);
+		if (!prev) {
+			free(node);
+			return NULL;
+		}
+		pldm_entity_node *next = prev->next_sibling;
+		if (prev->entity.entity_type == entity->entity_type) {
+			if (prev->entity.entity_instance_num == UINT16_MAX) {
+				free(node);
+				return NULL;
+			}
+			node->entity.entity_instance_num =
+				entity_instance_number != 0xFFFF ?
+					entity_instance_number :
+					prev->entity.entity_instance_num + 1;
+		}
+		prev->next_sibling = node;
+		node->parent = prev->parent;
+		node->next_sibling = next;
+		node->entity.entity_container_id =
+			prev->entity.entity_container_id;
+		node->remote_container_id = entity->entity_container_id;
+	}
+	entity->entity_instance_num = node->entity.entity_instance_num;
+	if (is_update_container_id) {
+		entity->entity_container_id = node->entity.entity_container_id;
+	}
+	return node;
+}
+
 static void get_num_nodes(pldm_entity_node *node, size_t *num)
 {
 	if (node == NULL) {
@@ -919,6 +1022,51 @@ void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo)
 			record = record->next;
 		}
 	}
+}
+
+static void entity_association_tree_find_if_remote(pldm_entity_node *node,
+						   pldm_entity *entity,
+						   pldm_entity_node **out,
+						   bool is_remote)
+{
+	assert(out != NULL && *out == NULL);
+	if (node == NULL) {
+		return;
+	}
+	bool is_entity_type;
+	bool is_entity_instance_num;
+
+	is_entity_type = node->entity.entity_type == entity->entity_type;
+	is_entity_instance_num = node->entity.entity_instance_num ==
+				 entity->entity_instance_num;
+
+	if (!is_remote ||
+	    node->remote_container_id == entity->entity_container_id) {
+		if (is_entity_type && is_entity_instance_num) {
+			entity->entity_container_id =
+				node->entity.entity_container_id;
+			*out = node;
+			return;
+		}
+	}
+	entity_association_tree_find_if_remote(node->next_sibling, entity, out,
+					       is_remote);
+	entity_association_tree_find_if_remote(node->first_child, entity, out,
+					       is_remote);
+}
+
+LIBPLDM_ABI_STABLE
+pldm_entity_node *
+pldm_entity_association_tree_find_if_remote(pldm_entity_association_tree *tree,
+					    pldm_entity *entity, bool is_remote)
+{
+	if (!tree) {
+		return NULL;
+	}
+	pldm_entity_node *node = NULL;
+	entity_association_tree_find_if_remote(tree->root, entity, &node,
+					       is_remote);
+	return node;
 }
 
 LIBPLDM_ABI_STABLE
