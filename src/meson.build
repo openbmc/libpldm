@@ -13,5 +13,6 @@ subdir('requester')
 subdir('transport')
 
 if get_option('oem-ibm').allowed()
+   add_project_arguments('-DOEM_IBM', language : 'c')
    subdir('oem/ibm')
 endif
