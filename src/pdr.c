@@ -72,11 +72,9 @@ static pldm_pdr_record *make_new_record(const pldm_pdr *repo,
 		 * caller supplied the record handle, it would exist in the
 		 * header already.
 		 */
-		if (!record_handle) {
-			struct pldm_pdr_hdr *hdr =
-				(struct pldm_pdr_hdr *)(record->data);
-			hdr->record_handle = htole32(record->record_handle);
-		}
+		struct pldm_pdr_hdr *hdr =
+			(struct pldm_pdr_hdr *)(record->data);
+		hdr->record_handle = htole32(record->record_handle);
 	}
 	record->next = NULL;
 
@@ -675,12 +673,10 @@ bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node)
 	return false;
 }
 
-static void entity_association_pdr_add_children(pldm_entity_node *curr,
-						pldm_pdr *repo, uint16_t size,
-						uint8_t contained_count,
-						uint8_t association_type,
-						bool is_remote,
-						uint16_t terminus_handle)
+static void entity_association_pdr_add_children(
+	pldm_entity_node *curr, pldm_pdr *repo, uint16_t size,
+	uint8_t contained_count, uint8_t association_type, bool is_remote,
+	uint16_t terminus_handle, uint32_t record_handle)
 {
 	uint8_t pdr[size];
 	uint8_t *start = pdr;
@@ -722,12 +718,14 @@ static void entity_association_pdr_add_children(pldm_entity_node *curr,
 		node = node->next_sibling;
 	}
 
-	pldm_pdr_add(repo, pdr, size, 0, is_remote, terminus_handle);
+	pldm_pdr_add(repo, pdr, size, record_handle, is_remote,
+		     terminus_handle);
 }
 
 static void entity_association_pdr_add_entry(pldm_entity_node *curr,
 					     pldm_pdr *repo, bool is_remote,
-					     uint16_t terminus_handle)
+					     uint16_t terminus_handle,
+					     uint32_t record_handle)
 {
 	uint8_t num_logical_children = pldm_entity_get_num_children(
 		curr, PLDM_ENTITY_ASSOCIAION_LOGICAL);
@@ -743,7 +741,7 @@ static void entity_association_pdr_add_entry(pldm_entity_node *curr,
 		entity_association_pdr_add_children(
 			curr, repo, logical_pdr_size, num_logical_children,
 			PLDM_ENTITY_ASSOCIAION_LOGICAL, is_remote,
-			terminus_handle);
+			terminus_handle, record_handle);
 	}
 
 	if (num_physical_children) {
@@ -755,7 +753,7 @@ static void entity_association_pdr_add_entry(pldm_entity_node *curr,
 		entity_association_pdr_add_children(
 			curr, repo, physical_pdr_size, num_physical_children,
 			PLDM_ENTITY_ASSOCIAION_PHYSICAL, is_remote,
-			terminus_handle);
+			terminus_handle, record_handle);
 	}
 }
 
@@ -778,7 +776,8 @@ bool is_present(pldm_entity entity, pldm_entity **entities, size_t num_entities)
 static void entity_association_pdr_add(pldm_entity_node *curr, pldm_pdr *repo,
 				       pldm_entity **entities,
 				       size_t num_entities, bool is_remote,
-				       uint16_t terminus_handle)
+				       uint16_t terminus_handle,
+				       uint32_t record_handle)
 {
 	if (curr == NULL) {
 		return;
@@ -786,13 +785,15 @@ static void entity_association_pdr_add(pldm_entity_node *curr, pldm_pdr *repo,
 	bool to_add = true;
 	to_add = is_present(curr->entity, entities, num_entities);
 	if (to_add) {
-		entity_association_pdr_add_entry(curr, repo, is_remote,
-						 terminus_handle);
+		entity_association_pdr_add_entry(
+			curr, repo, is_remote, terminus_handle, record_handle);
 	}
 	entity_association_pdr_add(curr->next_sibling, repo, entities,
-				   num_entities, is_remote, terminus_handle);
+				   num_entities, is_remote, terminus_handle,
+				   record_handle);
 	entity_association_pdr_add(curr->first_child, repo, entities,
-				   num_entities, is_remote, terminus_handle);
+				   num_entities, is_remote, terminus_handle,
+				   record_handle);
 }
 
 LIBPLDM_ABI_STABLE
@@ -804,7 +805,7 @@ void pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
 	assert(repo != NULL);
 
 	entity_association_pdr_add(tree->root, repo, NULL, 0, is_remote,
-				   terminus_handle);
+				   terminus_handle, 0);
 }
 
 LIBPLDM_ABI_STABLE
@@ -812,10 +813,22 @@ void pldm_entity_association_pdr_add_from_node(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
 	size_t num_entities, bool is_remote, uint16_t terminus_handle)
 {
+	pldm_entity_association_pdr_record_add_from_node(node, repo, entities,
+							 num_entities,
+							 is_remote,
+							 terminus_handle, 0);
+}
+
+LIBPLDM_ABI_TESTING
+void pldm_entity_association_pdr_record_add_from_node(
+	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
+	size_t num_entities, bool is_remote, uint16_t terminus_handle,
+	uint32_t record_handle)
+{
 	assert(repo != NULL);
 
 	entity_association_pdr_add(node, repo, entities, num_entities,
-				   is_remote, terminus_handle);
+				   is_remote, terminus_handle, record_handle);
 }
 
 LIBPLDM_ABI_STABLE
