@@ -382,6 +382,24 @@ void pldm_entity_association_pdr_add_from_node(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
 	size_t num_entities, bool is_remote, uint16_t terminus_handle);
 
+/** @brief Add entity association pdr record based on record handle
+ *  earlier the records where added in a sequential way alone, with
+ *  this change the entity association PDR records gets the new record
+ *  handle based on the input value given.
+ *
+ *  @param[in] node - opaque pointer acting as a handle to an entity node
+ *  @param[in] repo - PDR repo where entity association records should be added
+ *  @param[in] is_remote  - if true, then the PDR is not from this terminus
+ *  @param[in] terminus_handle - terminus handle of the terminus
+ *  @param[in] record_handle - record handle of the PDR
+ *
+ *  @return 0 on succes, -EINVAL if the provided arguments are invalid.
+ */
+int pldm_entity_association_pdr_add_from_node_with_record_handle(
+	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
+	size_t num_entities, bool is_remote, uint16_t terminus_handle,
+	uint32_t record_handle);
+
 /** @brief Find entity reference in tree
  *
  *  @param[in] tree - opaque pointer to entity association tree
