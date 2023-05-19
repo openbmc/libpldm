@@ -155,6 +155,15 @@ void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
 void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminus_handle,
 			    uint8_t tid, uint8_t tl_eid, bool valid);
 
+/** @brief Find the last local record
+ *
+ *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *
+ *  @return opaque pointer to the PDR record,will be NULL if record was not
+ *  found
+ */
+pldm_pdr_record *pldm_pdr_find_last_local_record(const pldm_pdr *repo);
+
 /* ======================= */
 /* FRU Record Set PDR APIs */
 /* ======================= */
