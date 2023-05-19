@@ -997,6 +997,17 @@ pldm_pdr_record *pldm_pdr_find_last_in_range(const pldm_pdr *repo,
 	return NULL;
 }
 
+bool pldm_is_endpoint_range(uint32_t record_handle,
+			    uint32_t first_record_handle,
+			    uint32_t last_record_handle)
+{
+	if (record_handle >= first_record_handle &&
+	    record_handle < last_record_handle) {
+		return true;
+	}
+	return false;
+}
+
 static void entity_association_tree_find_if_remote(pldm_entity_node *node,
 						   pldm_entity *entity,
 						   pldm_entity_node **out,
