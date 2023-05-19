@@ -180,6 +180,24 @@ void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminus_handle,
 pldm_pdr_record *pldm_pdr_find_last_in_range(const pldm_pdr *repo,
 					     uint32_t first, uint32_t last);
 
+/** @brief find the container ID of the contained entity which is not in the
+ *  particular range of record handles given
+ *
+ * @param[in] repo - opaque pointer acting as a PDR repo handle
+ * @param[in] entity_type - entity type
+ * @param[in] entity_instance - instance of the entity
+ * @param[in] range_exclude_start_handle - first record handle in the range of the remote endpoint which is ignored
+ * @param[in] range_exclude_end_handle - last record handle in the range of the remote endpoint which is ignored
+ * @param[out] container_id - container id of the contained entity
+ *
+ * @return container id of the PDR record found on success, ENOKEY on container id not found or
+ * when repo is NULL.
+ */
+int pldm_pdr_find_container_id_range_exclude(
+	const pldm_pdr *repo, uint16_t entity_type, uint16_t entity_instance,
+	uint32_t range_exclude_start_handle, uint32_t range_exclude_end_handle,
+	uint16_t *container_id);
+
 /* ======================= */
 /* FRU Record Set PDR APIs */
 /* ======================= */
