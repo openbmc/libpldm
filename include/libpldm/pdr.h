@@ -5,19 +5,7 @@
 extern "C" {
 #endif
 
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
-
-/** @struct pldm_pdr
- *  opaque structure that acts as a handle to a PDR repository
- */
-typedef struct pldm_pdr pldm_pdr;
-
-/** @struct pldm_pdr_record
- *  opaque structure that acts as a handle to a PDR record
- */
-typedef struct pldm_pdr_record pldm_pdr_record;
+#include "pdr_data.h"
 
 /* ====================== */
 /* Common PDR access APIs */
