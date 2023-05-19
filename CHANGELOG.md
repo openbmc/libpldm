@@ -23,6 +23,7 @@ Change categories:
 2. README: Add a section on working with libpldm
 3. pdr: Introduce remote_container_id and associated APIs
 4. pdr: Add APIs for creating and locating remote PDRs
+5. pdr: Add pldm_pdr_find_last_in_range()
 
 ### Changed
 
