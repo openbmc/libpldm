@@ -280,13 +280,15 @@ pldm_entity_node *pldm_entity_association_tree_add(
  *                                      contanier id.
  *                                      true: should be changed
  *                                      false: should not be changed
- *
+ *  @param[in] container_id - container id of the entity added.
+ * 
  *  @return pldm_entity_node* - opaque pointer to added entity
  */
 pldm_entity_node *pldm_entity_association_tree_add_if_remote(
 	pldm_entity_association_tree *tree, pldm_entity *entity,
 	uint16_t entity_instance_number, pldm_entity_node *parent,
-	uint8_t association_type, bool is_remote, bool is_update_container_id);
+	uint8_t association_type, bool is_remote, bool is_update_container_id,
+	uint16_t container_id);
 
 /** @brief Visit and note each entity in the entity association tree
  *
