@@ -30,6 +30,7 @@ if get_option('oem-ibm').allowed()
     'oem/ibm/libpldm/file_io.h',
     'oem/ibm/libpldm/fru_oem_ibm.h',
     'oem/ibm/libpldm/host.h',
+    'oem/ibm/libpldm/pdr_oem_ibm.h',
     'oem/ibm/libpldm/platform_oem_ibm.h',
     'oem/ibm/libpldm/state_set_oem_ibm.h'
   )

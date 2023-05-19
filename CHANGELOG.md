@@ -24,6 +24,7 @@ Change categories:
 3. pdr: Introduce remote_container_id and associated APIs
 4. pdr: Add APIs for creating and locating remote PDRs
 5. pdr: Add pldm_pdr_find_last_in_range()
+6. oem-ibm: pdr: Add new oem-ibm find_container_id libpldm API
 
 ### Changed
 
