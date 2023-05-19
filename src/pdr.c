@@ -967,6 +967,36 @@ void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo)
 	}
 }
 
+pldm_pdr_record *pldm_pdr_find_last_in_range(const pldm_pdr *repo,
+					     uint32_t first, uint32_t last)
+{
+	if (repo == NULL) {
+		return NULL;
+	}
+	pldm_pdr_record *curr = repo->first;
+	pldm_pdr_record *prev = repo->first;
+	pldm_pdr_record *record = curr;
+	uint32_t recent_record_handle = 0;
+	if (curr != NULL) {
+		recent_record_handle = curr->record_handle;
+	}
+	while (curr != NULL) {
+		if ((curr->record_handle > first) &&
+		    (curr->record_handle < last)) {
+			if (recent_record_handle < curr->record_handle) {
+				recent_record_handle = curr->record_handle;
+				record = curr;
+			}
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+	if (curr == NULL && prev != NULL) {
+		return record;
+	}
+	return NULL;
+}
+
 static void entity_association_tree_find_if_remote(pldm_entity_node *node,
 						   pldm_entity *entity,
 						   pldm_entity_node **out,
