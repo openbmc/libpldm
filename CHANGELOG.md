@@ -25,6 +25,7 @@ Change categories:
 4. pdr: Add APIs for creating and locating remote PDRs
 5. pdr: Add pldm_pdr_find_last_in_range()
 6. pdr: Add new find_container_id libpldm API
+7. pdr: Add API to add entity association record based on record handle
 
 ### Changed
 
