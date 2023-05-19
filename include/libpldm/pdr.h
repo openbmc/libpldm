@@ -359,10 +359,12 @@ void pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
  *  @param[in] repo - PDR repo where entity association records should be added
  *  @param[in] is_remote  - if true, then the PDR is not from this terminus
  *  @param[in] terminus_handle - terminus handle of the terminus
+ *  @param[in] record_handle - record handle of the PDR
  */
 void pldm_entity_association_pdr_add_from_node(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
-	size_t num_entities, bool is_remote, uint16_t terminus_handle);
+	size_t num_entities, bool is_remote, uint16_t terminus_handle,
+	uint32_t record_handle);
 
 /** @brief Find entity reference in tree
  *
