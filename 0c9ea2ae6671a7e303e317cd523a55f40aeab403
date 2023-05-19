@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e76adad5_cb6e73ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-19T15:13:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5d06fe25_d0af4785",
+      "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6758e6a1_b12a24ba",
@@ -67,6 +85,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c0b6c821_0944aa85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-19T15:13:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "349a1532_a895df4a",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 56
+      },
+      "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "38d247f4_83666679",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
@@ -78,6 +120,23 @@
       "writtenOn": "2023-05-10T00:00:47Z",
       "side": 1,
       "message": "This might help with resolving the formatting failure:\n\nhttps://amboar.github.io/notes/2023/05/03/fixing-formatting-CI-failures-in-openbmc.html",
+      "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "addb84f8_39c7e565",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-19T15:13:56Z",
+      "side": 1,
+      "message": "I created a new commit chain considering the comments - https://gerrit.openbmc.org/c/openbmc/libpldm/+/63615",
       "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
