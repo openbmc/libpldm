@@ -169,6 +169,17 @@ void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminus_handle,
 pldm_pdr_record *pldm_pdr_find_last_in_range(const pldm_pdr *repo,
 					     uint32_t first, uint32_t last);
 
+/** @brief method to check if the record handle is within the given endpoint range
+ *  or not
+ *
+ *  @param[in] record_handle - record handle of the pdr
+ *  @param[in] first_record_handle - first handle in the range
+ *  @param[in] last_record_handle - last handle in the range
+ */
+bool pldm_is_endpoint_range(uint32_t record_handle,
+			    uint32_t first_record_handle,
+			    uint32_t last_record_handle);
+
 /* ======================= */
 /* FRU Record Set PDR APIs */
 /* ======================= */
