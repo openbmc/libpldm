@@ -87,6 +87,24 @@
       "parentUuid": "8b391b92_c6bde442",
       "revId": "34436dd6d9499be2a5e763307aacccd49a02a8e3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01c822b2_5e86a5e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-19T00:06:02Z",
+      "side": 1,
+      "message": "\u003e If this is not part of the standard, shouldn\u0027t we be very clear about documenting this as such\n\n+1\n\nI\u0027d take a stronger stance. If this behaviour is outside of DSP0248 then IMO it doesn\u0027t have any business living in a part of the codebase that\u0027s implementing DSP0248. If the necessary behaviour impacts the specified behaviour then we should put in some effort to get it accepted into the specification.\n\nAs it stands the commit message tries to explain *what* and not nearly enough of the *why*. It really must properly explain the why. That said, I feel the whole design point needs actual documentation. Can we get something written down in a separate commit prior to this one?\n\nWho is best placed to help us with this? Manoj?",
+      "parentUuid": "45b278a2_89a2677a",
+      "revId": "34436dd6d9499be2a5e763307aacccd49a02a8e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
