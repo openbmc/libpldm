@@ -156,6 +156,19 @@ void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
 void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminus_handle,
 			    uint8_t tid, uint8_t tl_eid, bool valid);
 
+/** @brief Find the last record within the particular range
+ * of record handles
+ *
+ *  @param[in] repo - pointer acting as a PDR repo handle
+ *  @param[in] first - starting range of the records
+ *  @param[in] last - end range of the records
+ *
+ *  @return pointer to the PDR record,will be NULL if record was not
+ *  found
+ */
+pldm_pdr_record *pldm_pdr_find_last_in_range(const pldm_pdr *repo,
+					     uint32_t first, uint32_t last);
+
 /* ======================= */
 /* FRU Record Set PDR APIs */
 /* ======================= */
