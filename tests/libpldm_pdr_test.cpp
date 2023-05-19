@@ -763,39 +763,39 @@ TEST(EntityAssociationPDR, testBuildIfRemote)
     auto tree = pldm_entity_association_tree_init();
     auto l1 = pldm_entity_association_tree_add_if_remote(
         tree, &entities[0], 0xFFFF, nullptr, PLDM_ENTITY_ASSOCIAION_PHYSICAL,
-        false, true);
+        false, true, 0xFFFF);
     EXPECT_NE(l1, nullptr);
     auto l2a = pldm_entity_association_tree_add_if_remote(
         tree, &entities[1], 0xFFFF, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL, false,
-        false);
+        false, 0xFFFF);
     EXPECT_NE(l2a, nullptr);
     auto l2b = pldm_entity_association_tree_add_if_remote(
         tree, &entities[2], 0xFFFF, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL, false,
-        true);
+        true, 0xFFFF);
     EXPECT_NE(l2b, nullptr);
     auto l2c = pldm_entity_association_tree_add_if_remote(
         tree, &entities[3], 0xFFFF, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL, false,
-        false);
+        false, 0xFFFF);
     EXPECT_NE(l2c, nullptr);
     auto l3a = pldm_entity_association_tree_add_if_remote(
         tree, &entities[4], 0xFFFF, l2a, PLDM_ENTITY_ASSOCIAION_PHYSICAL, true,
-        true);
+        true, 0xFFFF);
     EXPECT_NE(l3a, nullptr);
     auto l3b = pldm_entity_association_tree_add_if_remote(
         tree, &entities[5], 0xFFFF, l2a, PLDM_ENTITY_ASSOCIAION_PHYSICAL, false,
-        true);
+        true, 0xFFFF);
     EXPECT_NE(l3b, nullptr);
     auto l3c = pldm_entity_association_tree_add_if_remote(
         tree, &entities[6], 0xFFFF, l2a, PLDM_ENTITY_ASSOCIAION_PHYSICAL, false,
-        true);
+        true, 0xFFFF);
     EXPECT_NE(l3b, nullptr);
     auto l4a = pldm_entity_association_tree_add_if_remote(
         tree, &entities[7], 0xFFFF, l3a, PLDM_ENTITY_ASSOCIAION_PHYSICAL, false,
-        true);
+        true, 0xFFFF);
     EXPECT_NE(l4a, nullptr);
     auto l4b = pldm_entity_association_tree_add_if_remote(
         tree, &entities[8], 0xFFFF, l3b, PLDM_ENTITY_ASSOCIAION_PHYSICAL, false,
-        true);
+        true, 0xFFFF);
     EXPECT_NE(l4b, nullptr);
     EXPECT_EQ(pldm_entity_is_node_parent(l1), true);
     EXPECT_EQ(pldm_entity_is_node_parent(l2a), true);
