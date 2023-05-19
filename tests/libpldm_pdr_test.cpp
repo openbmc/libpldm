@@ -547,6 +547,32 @@ TEST(PDRUpdate, tesFindtFruRecordSet)
     pldm_pdr_destroy(repo);
 }
 
+TEST(PDRUpdate, testFindLastInRange)
+{
+    auto repo = pldm_pdr_init();
+
+    std::array<uint8_t, 10> data{};
+    auto handle1 = pldm_pdr_add(repo, data.data(), data.size(), 0, false, 1);
+    auto handle2 = pldm_pdr_add(repo, data.data(), data.size(), 23, false, 1);
+    auto handle3 = pldm_pdr_add(repo, data.data(), data.size(), 77, false, 1);
+    auto handle4 =
+        pldm_pdr_add(repo, data.data(), data.size(), 16777325, true, 1);
+    auto handle5 =
+        pldm_pdr_add(repo, data.data(), data.size(), 16777344, true, 1);
+
+    auto rec1 = pldm_pdr_find_last_in_range(repo, 0, 100);
+    auto rec2 = pldm_pdr_find_last_in_range(repo, 16777300, 33554431);
+    EXPECT_NE(rec1, nullptr);
+    EXPECT_NE(rec2, nullptr);
+    EXPECT_NE(handle1, pldm_pdr_get_record_handle(repo, rec1));
+    EXPECT_NE(handle2, pldm_pdr_get_record_handle(repo, rec1));
+    EXPECT_EQ(handle3, pldm_pdr_get_record_handle(repo, rec1));
+    EXPECT_NE(handle4, pldm_pdr_get_record_handle(repo, rec2));
+    EXPECT_EQ(handle5, pldm_pdr_get_record_handle(repo, rec2));
+
+    pldm_pdr_destroy(repo);
+}
+
 TEST(EntityAssociationPDR, testInit)
 {
     auto tree = pldm_entity_association_tree_init();
