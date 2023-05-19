@@ -2137,6 +2137,9 @@ int decode_set_event_receiver_req(const struct pldm_msg *msg,
 int encode_set_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
 				   struct pldm_msg *msg);
 
+/* OEM ranges */
+#define PLDM_PDR_RECORD_HANDLE_HOST_START 16777215
+
 #ifdef __cplusplus
 }
 #endif
