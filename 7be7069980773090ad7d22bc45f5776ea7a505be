@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06da73b4_3f36a559",
+        "filename": "include/libpldm/transport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-20T00:37:49Z",
+      "side": 1,
+      "message": "As my opinion, we should use PT2 max, which mean max of \"Time-out waiting for a response\" for this purpose. The value of PT2max \u003d PT3min - 2*PT4max \u003d 4.6s. We can round that number to 5second if we want.",
+      "parentUuid": "12e0eb18_4e7b5bdb",
+      "revId": "7be7069980773090ad7d22bc45f5776ea7a505be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23ae9046_49f355fc",
         "filename": "src/transport/transport.c",
         "patchSetId": 2
