@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd87250c_85efd302",
+        "filename": "include/libpldm/transport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-20T01:39:35Z",
+      "side": 1,
+      "message": "Updated code to use PT2max \u003d 4800ms (please ignore my wrong value in previous mail) as response time out.",
+      "parentUuid": "06da73b4_3f36a559",
+      "revId": "7be7069980773090ad7d22bc45f5776ea7a505be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23ae9046_49f355fc",
         "filename": "src/transport/transport.c",
         "patchSetId": 2
