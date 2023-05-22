@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84f2cd06_2b2dfa26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-22T01:08:29Z",
+      "side": 1,
+      "message": "Can you please clarify which patches we should be considering? Either tag all the relevant patches in the set or abandon the ones that are no longer relevant (ideally both).",
+      "parentUuid": "1d21d990_48c33c84",
+      "revId": "aef35826d0d85eeef4b485ec73314fb275143d45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47beb5b4_abf93b49",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 2
