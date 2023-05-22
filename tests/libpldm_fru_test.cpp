@@ -640,6 +640,21 @@ TEST(GetFRURecordByOption, testBadDecodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
+TEST(GetFruRecordByOption, testGetFruRecordByOption)
+{
+    std::array<uint8_t, 10> fruRecord = {0x00,
+                                         0x01, // record set identifier
+                                         0x01, // record type
+                                         0x02, // number of fru fileds
+                                         0x01, // encoding type, ascii
+                                         0x01, // field type 1
+                                         0x02, // field length 2
+                                         0x01,
+                                         0x02
+
+    };
+}
+
 TEST(GetFruRecordByOption, testGoodEncodeResponse)
 {
     uint8_t completionCode = PLDM_SUCCESS;
