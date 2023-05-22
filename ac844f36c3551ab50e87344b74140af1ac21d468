@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fcd8ac9_e0268521",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-22T03:45:18Z",
+      "side": 1,
+      "message": "Thank for you info. I tried to study about the difference between clock_gettime and timespec_get. It seem clock_gettime is widely used than timespec_get and clock_gettime is better.",
+      "parentUuid": "0218dada_e9b62a78",
+      "revId": "ac844f36c3551ab50e87344b74140af1ac21d468",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "283669eb_7cb5d329",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "924a29a0_51da9040",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-22T03:45:18Z",
+      "side": 1,
+      "message": "I updated code after studying about clock_gettime().",
+      "parentUuid": "283669eb_7cb5d329",
+      "revId": "ac844f36c3551ab50e87344b74140af1ac21d468",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b7680ee_e2dae5d1",
         "filename": "src/transport/transport.h",
         "patchSetId": 5
@@ -65,6 +101,24 @@
       "writtenOn": "2023-05-22T00:59:06Z",
       "side": 1,
       "message": "Can we define this in `src/transport/transport.c` instead? I don\u0027t think we need visibility of this macro outside the C file at the moment (I realise this is an internal header, but all the same).\n\nIn fact, with some of the discussion I added in the implementation we may be able to do away with this macro.",
+      "revId": "ac844f36c3551ab50e87344b74140af1ac21d468",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac0c2a6d_6286a0cc",
+        "filename": "src/transport/transport.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-22T03:45:18Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "4b7680ee_e2dae5d1",
       "revId": "ac844f36c3551ab50e87344b74140af1ac21d468",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
