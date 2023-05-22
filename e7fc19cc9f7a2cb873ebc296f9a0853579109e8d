@@ -131,6 +131,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18753720_a42dd172",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-05-22T07:38:51Z",
+      "side": 1,
+      "message": "(ignore my first message!)",
+      "parentUuid": "74cc75ce_ac020a9f",
+      "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91282443_7998a90d",
         "filename": "src/transport/transport.c",
         "patchSetId": 10
@@ -177,6 +195,30 @@
       "writtenOn": "2023-05-22T07:36:04Z",
       "side": 1,
       "message": "I would",
+      "range": {
+        "startLine": 177,
+        "startChar": 2,
+        "endLine": 177,
+        "endChar": 20
+      },
+      "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cada37b7_c2919d01",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-05-22T07:38:51Z",
+      "side": 1,
+      "message": "Oops, I forgot to delete my drafts!",
+      "parentUuid": "6c8839b4_84098b8f",
       "range": {
         "startLine": 177,
         "startChar": 2,
