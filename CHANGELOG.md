@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Changed
+
+1. include: Move installed transport.h under libpldm/
+
 ### Fixed
 
 1. requester: Make pldm_open() return existing fd
