@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abd482bf_9db8d84c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-22T00:59:06Z",
+      "side": 1,
+      "message": "Thanks, this is looking a lot better. I\u0027ve added some more thoughts about how we could make the implementation less error-prone by exploiting more library functions. Let me know what you think.",
+      "revId": "ac844f36c3551ab50e87344b74140af1ac21d468",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0218dada_e9b62a78",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-22T00:59:06Z",
+      "side": 1,
+      "message": "I\u0027m a bit torn here because `timespec_get()` is defined by C but I\u0027m concerned that because we\u0027re passing `TIME_UTC` (the only defined time base?) that we\u0027re leaving ourselves open to hangs or early exits from changes to wall-clock time (e.g. chronyd syncing the time).\n\nI\u0027m wondering if we\u0027re better off depending on `clock_gettime()` (defined by POSIX) and using `CLOCK_MONOTONIC`? `CLOCK_MONOTONIC` is guaranteed not to shift with changes to wall clock time. As it is just an implementation detail, for freestanding environments we can substitute use of `clock_gettime()` with something else without affecting the public API.\n\nAlso see the discussion below.",
+      "revId": "ac844f36c3551ab50e87344b74140af1ac21d468",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "283669eb_7cb5d329",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-22T00:59:06Z",
+      "side": 1,
+      "message": "Hmm, we\u0027re kinda stumped by C and its diversity of structures for representing time, and then the disjoint sets of functionality associated with each.\n\nI\u0027m wondering if we\u0027re better of with something like the following so we don\u0027t get caught out by overflow or mixed types:\n\n```\nstatic void timespec_to_timeval(const struct timespec *ts, struct timeval *tv)\n{\n    tv.tv_sec \u003d ts-\u003etv_sec;\n    tv.tv_usec \u003d ts-\u003etv_nsec / 1000;\n}\n\nstatic int clock_gettimeval(clockid_t clockid, struct timeval *tv)\n{\n    struct timespec now;\n    int rc;\n    \n    rc \u003d clock_gettime(clockid, \u0026now);\n    if (rc \u003c 0) {\n        return rc;\n    }\n    \n    timespec_to_timeval(\u0026now, tv);\n    \n    return 0;\n}\n```\n\nFrom here we can do everything in terms of the `struct timeval`s and [take advantage of its helper functions][1]:\n\n[1]: https://man7.org/linux/man-pages/man3/timeradd.3.html\n\n```\n    static const struct timeval max_response_interval \u003d {\n        .tv_sec \u003d 4,\n        .tv_usec \u003d 6000000\n    };\n    struct timeval nowval, endval;\n    \n    ...\n    \n    rc \u003d clock_gettimeval(CLOCK_MONOTONIC, \u0026nowval);\n    if (rc \u003c 0) {\n         return -errno;\n    }\n\n    rc \u003d timeradd(\u0026nowval, \u0026max_response_timeout, \u0026endval);\n    if (rc \u003c 0) {\n        return -errno;\n    }\n\n    do {\n        ...\n        \n        rc \u003d clock_gettimeval(CLOCK_MONOTONIC, \u0026nowval);\n        if (rc \u003c 0) {\n            return -errno;\n        }\n    } while (!timercmp(\u0026nowval, \u0026endval, \u003c));\n    \n    if (!timercmp(\u0026nowval, \u0026endval, \u003e\u003d)) {\n        return -ETIMEDOUT;\n    }\n    \n    ...\n```\n\nIt\u0027s more code, but it gets us idiomatic use of existing library functions. Again that helps mitigate overflow and mixed types.\n\nThoughts?",
+      "revId": "ac844f36c3551ab50e87344b74140af1ac21d468",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b7680ee_e2dae5d1",
+        "filename": "src/transport/transport.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-22T00:59:06Z",
+      "side": 1,
+      "message": "Can we define this in `src/transport/transport.c` instead? I don\u0027t think we need visibility of this macro outside the C file at the moment (I realise this is an internal header, but all the same).\n\nIn fact, with some of the discussion I added in the implementation we may be able to do away with this macro.",
+      "revId": "ac844f36c3551ab50e87344b74140af1ac21d468",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
