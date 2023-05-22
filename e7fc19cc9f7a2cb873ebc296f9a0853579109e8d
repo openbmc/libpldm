@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10b1dc33_3ddcdbf6",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-05-22T07:36:04Z",
+      "side": 1,
+      "message": "I might have miscounted the 0\u0027s but I read this as 8,000,000 us which is 8000 ms. Don\u0027t we want 800?",
+      "range": {
+        "startLine": 140,
+        "startChar": 26,
+        "endLine": 140,
+        "endChar": 33
+      },
+      "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e57e41b_4c8a07c1",
         "filename": "src/transport/transport.c",
         "patchSetId": 10
@@ -65,6 +88,42 @@
       "writtenOn": "2023-05-22T06:09:34Z",
       "side": 1,
       "message": "Also it seems that on hitting error with `pldm_transport_recv_msg`, the loop will be iterated with calls to `pldm_transport_poll/pldm_transport_recv_msg` if nowval \u003c endval. It will break from the loop eventually and rc will be `-ETIMEDOUT`.",
+      "parentUuid": "2e57e41b_4c8a07c1",
+      "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74cc75ce_ac020a9f",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-05-22T07:36:04Z",
+      "side": 1,
+      "message": "+1. Although I\u0027m not sure what\u0027s more important to propagate, why `pldm_transport_recv_msg` failed (if it did) or that we timed out before getting a valid response message...",
+      "parentUuid": "2e57e41b_4c8a07c1",
+      "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4317bf84_5b8d420b",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-05-22T07:36:04Z",
+      "side": 1,
+      "message": "+1. Maybe we give `pldm_transport_recv_msg` it\u0027s own return code that",
       "parentUuid": "2e57e41b_4c8a07c1",
       "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
@@ -101,6 +160,29 @@
       "side": 1,
       "message": "Ignore, hit Enter before completing.",
       "parentUuid": "91282443_7998a90d",
+      "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c8839b4_84098b8f",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-05-22T07:36:04Z",
+      "side": 1,
+      "message": "I would",
+      "range": {
+        "startLine": 177,
+        "startChar": 2,
+        "endLine": 177,
+        "endChar": 20
+      },
       "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
