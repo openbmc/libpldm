@@ -58,6 +58,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60dc9942_719eb132",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-22T17:01:41Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "10b1dc33_3ddcdbf6",
+      "range": {
+        "startLine": 140,
+        "startChar": 26,
+        "endLine": 140,
+        "endChar": 33
+      },
+      "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e57e41b_4c8a07c1",
@@ -149,6 +173,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf5a5641_db442a0e",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-22T17:01:41Z",
+      "side": 1,
+      "message": "Checking time out is just an addition condition to exit the while if the errors happen. The API should ignore the error of clock_gettimeval() ( I don\u0027t think we have error in call clock_gettimeval() ) and focus on the return code of pldm_transport_recv_msg and pldm_transport_poll() in the while loop.",
+      "parentUuid": "18753720_a42dd172",
+      "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91282443_7998a90d",
         "filename": "src/transport/transport.c",
         "patchSetId": 10
@@ -225,6 +267,24 @@
         "endLine": 177,
         "endChar": 20
       },
+      "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bdf594d_be97d85c",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-22T17:01:41Z",
+      "side": 1,
+      "message": "Add my thought above.",
+      "parentUuid": "dd34e60a_3d78a889",
       "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
