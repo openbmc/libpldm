@@ -6,6 +6,7 @@ libpldm_sources += files(
   'bios_table.c',
   'firmware_update.c',
   'fru.c',
+  'fru_record.c',
   'pdr.c',
   'utils.c'
   )

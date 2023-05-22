@@ -10,6 +10,7 @@ libpldm_headers += files(
   'states.h',
   'state_set.h',
   'fru.h',
+  'fru_record.h',
   'utils.h',
   'pdr.h',
   'firmware_update.h'
