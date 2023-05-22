@@ -1,6 +1,7 @@
 project('libpldm', ['c','cpp'],
     default_options: [
-      'buildtype=debugoptimized',
+      'debug=true',
+      'optimization=g',
       'warning_level=3',
       'werror=true',
       'cpp_std=c++20',
@@ -62,6 +63,39 @@ configure_file(output: 'config.h',
 
 if get_option('tests').enabled()
   subdir('tests')
+
+  if get_option('abi-compliance-check').allowed()
+    abi_dumper = find_program('abi-dumper',
+                              native: true,
+                              required: get_option('abi-compliance-check'))
+    abi_compliance_checker = find_program('abi-compliance-checker',
+                                          native: true,
+                                          required: get_option('abi-compliance-check'))
+    public_api_dir = meson.project_source_root() / 'include'
+    baseline_dump = meson.project_source_root() / 'abi' / 'baseline.dump'
+    current_dump = custom_target('abi-dump',
+                             input: libpldm,
+                             output: 'current.dump',
+                             command: [ abi_dumper,
+                                        '-public-headers',
+                                        public_api_dir,
+                                        '@INPUT@',
+                                        '-o',
+                                        '@OUTPUT@',
+                                        '-lver',
+                                        meson.project_version()])
+    abi_compliance = custom_target('abi-compliance',
+                                   input: [baseline_dump, current_dump],
+                                   output: 'abi-compliance',
+                                   command: [ abi_compliance_checker,
+                                              '-l',
+                                              meson.project_name(),
+                                              '-old',
+                                              '@INPUT0@',
+                                              '-new',
+                                              '@INPUT1@' ],
+                                   build_by_default: true)
+  endif
 endif
 
 install_subdir('instance-db',
