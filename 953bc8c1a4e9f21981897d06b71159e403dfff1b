@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32ed23a6_fdd6f0c8",
+        "filename": "meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-23T12:50:24Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s a fair bit of gunk. But I wanted it to be readily available in the build system rather than require people run the docker image to understand what\u0027s going on.\n\nThe ultimate solution would be to add support into meson itself.",
+      "parentUuid": "7a99d2c2_1f76b98e",
+      "revId": "953bc8c1a4e9f21981897d06b71159e403dfff1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd70b5bc_8d15041d",
         "filename": "meson_options.txt",
         "patchSetId": 6
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-23T12:29:31Z",
       "side": 1,
       "message": "Need a default value?  Do we need to disable in Yocto recipe?",
+      "revId": "953bc8c1a4e9f21981897d06b71159e403dfff1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73a5d0a5_5e5ddc63",
+        "filename": "meson_options.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-23T12:50:24Z",
+      "side": 1,
+      "message": "It\u0027s set to `auto` by default. In the `meson.build` we use `find_program(..., required: get_option(\u0027abi-compliance-check\u0027))` which resolves to `find_program(..., required: false)` if `-Dabi-compliance-check\u003denabled` _isn\u0027t_ specified. Whether or not the program is found then feeds into whether the target it built by default. So it shouldn\u0027t require any recipe changes.",
+      "parentUuid": "cd70b5bc_8d15041d",
       "revId": "953bc8c1a4e9f21981897d06b71159e403dfff1b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
