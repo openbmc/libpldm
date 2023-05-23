@@ -34,6 +34,24 @@
       "parentUuid": "fe947398_66d99d28",
       "revId": "89782497185642d7b3ac29e259a7a5d0b5687aed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "175aef19_2355d541",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-23T02:20:54Z",
+      "side": 1,
+      "message": "Sure, but if anything I think that highlights an extra problem we have here, which is that we\u0027re always calling `pldm_transport_poll()` with the fixed constant `PLDM_MAX_RESPONSE_TIMEOUT`. If we make two calls we\u0027re potentially waiting just short of `2 * PLDM_MAX_RESPONSE_TIMEOUT` in total. What we instead want is that for any number of calls to `pldm_transport_poll()` the time between the start of the first call and the end of the last call doesn\u0027t exceed `PLDM_MAX_RESPONSE_TIME`. The value that we pass to `pldm_transport_poll` has to be derived from `nowval` and `endval` to uphold the desired behaviour. Which means that any failure of `clock_gettimeval()` has to be honoured (otherwise we\u0027ll be passing the wrong interval value).",
+      "parentUuid": "8b3eeed8_d4e755e8",
+      "revId": "89782497185642d7b3ac29e259a7a5d0b5687aed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
