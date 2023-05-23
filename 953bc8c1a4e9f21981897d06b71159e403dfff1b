@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a99d2c2_1f76b98e",
+        "filename": "meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-05-23T12:29:31Z",
+      "side": 1,
+      "message": "Is there any way we can add this to the CI infrastructure?  I\u0027d hate to see this much content copied around everywhere.",
+      "revId": "953bc8c1a4e9f21981897d06b71159e403dfff1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd70b5bc_8d15041d",
+        "filename": "meson_options.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-05-23T12:29:31Z",
+      "side": 1,
+      "message": "Need a default value?  Do we need to disable in Yocto recipe?",
+      "revId": "953bc8c1a4e9f21981897d06b71159e403dfff1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
