@@ -52,6 +52,24 @@
       "parentUuid": "8b3eeed8_d4e755e8",
       "revId": "89782497185642d7b3ac29e259a7a5d0b5687aed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d830e222_a8d476d9",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-23T04:31:06Z",
+      "side": 1,
+      "message": "I understand now. Updated the code.",
+      "parentUuid": "175aef19_2355d541",
+      "revId": "89782497185642d7b3ac29e259a7a5d0b5687aed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
