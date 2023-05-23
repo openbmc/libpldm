@@ -69,6 +69,24 @@
       "parentUuid": "cd70b5bc_8d15041d",
       "revId": "953bc8c1a4e9f21981897d06b71159e403dfff1b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c8dd853_e4fbd512",
+        "filename": "meson_options.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-23T13:07:24Z",
+      "side": 1,
+      "message": "e.g. the autobump passes CI: https://gerrit.openbmc.org/c/openbmc/openbmc/+/63688",
+      "parentUuid": "73a5d0a5_5e5ddc63",
+      "revId": "953bc8c1a4e9f21981897d06b71159e403dfff1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
