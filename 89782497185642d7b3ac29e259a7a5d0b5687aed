@@ -16,6 +16,24 @@
       "message": "If `clock_gettimeval()` errors then we potentially don\u0027t update `nowval`, and we loop infinitely. That\u0027s the opposite of the intention of this patch. We need to exit the loop on error.",
       "revId": "89782497185642d7b3ac29e259a7a5d0b5687aed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b3eeed8_d4e755e8",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-23T01:33:56Z",
+      "side": 1,
+      "message": "It is just our choice for below case:\nThe time out is 4800ms, the clock_gettimeval() has error at 2500ms, and the API will get the response from the terminus at 3500ms. What will we want?\nFor the current code, I expected that the while loop will bypass the error at 2500ms and then response the PLDM response data at 3500ms.\nBecause as my opinion, the error or response data from PLDM message have higher priority. Moreover the rate of continuous failure in calling clock_gettimeval() is very very low. So the change to API loop forever because failure in clock_gettimeval() is very low.\nThe purpose of this patch set is catch the case which the pldm_transport_recv_msg() always response error but not clock_gettimeval().",
+      "parentUuid": "fe947398_66d99d28",
+      "revId": "89782497185642d7b3ac29e259a7a5d0b5687aed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
