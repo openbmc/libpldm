@@ -123,6 +123,24 @@
       "parentUuid": "01c822b2_5e86a5e0",
       "revId": "34436dd6d9499be2a5e763307aacccd49a02a8e3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de309d2_638e32b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T06:31:56Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t think there is any need to approach DMTF regarding the functionality as it is already covered in DSP0248\n\nExcellent news.\n\n\u003e @pavithra - can you update the commit message to indicate all of this information a generic terms? And also the words like host e.t.c should be replaced with remote PLDM endpoint.\n\n+100",
+      "parentUuid": "73f20145_297f157c",
+      "revId": "34436dd6d9499be2a5e763307aacccd49a02a8e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
