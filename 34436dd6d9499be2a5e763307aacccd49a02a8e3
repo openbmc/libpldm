@@ -105,6 +105,24 @@
       "parentUuid": "45b278a2_89a2677a",
       "revId": "34436dd6d9499be2a5e763307aacccd49a02a8e3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f20145_297f157c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-05-24T06:14:31Z",
+      "side": 1,
+      "message": "A couple of points here :\n\n\n1) I believe the wording in the commit message is slightly inaccurate in the context of a generic audience. I think `remote container id` [container id of an FRU from a remote PLDM end point].\n\n2) And yes, I think `why` this API is needed \u0026 any references to the need for this API in the spec should be added to the commit message.\n\nAlthough PDR normalization is a word that we[IBM] invented internally, DSP0248 talks about the concept of a Primary PDR repository \u0026 Merging the PDRs from a remote PLDM endpoint.\n\nAs per DSP0248 [https://www.dmtf.org/sites/default/files/standards/documents/DSP0248_1.2.0.pdf] section 14:\nOne of the main functions of the PLDM discovery Agent[assuming a PLDM terminus like BMC] is maintaining a Primary PDR repository, adding/deleting/updating the PDRs to form a complete system model.\n\nHere are the actual words from the Spec :\n\n```\nIf the implementation is maintaining a Primary PDR Repository, the Discovery Agent may also be required to automatically create or update PDRs to support devices such as hot-plug devices that may be dynamically added or removed from the system. This includes the following actions:\n\n - creating records such as Terminus Locator PDRs\n - extracting Device PDR information and merging it into the Primary PDR Repository\n - updating associating records to link Device PDR information into the overall context of the platform management subsystem\n\nAny OEM PDRs in the Device PDR information that are identified to be copied to the Primary PDR Repository are also added to the Primary PDR Repository by the Discovery Agent.\n\n```\n\nI believe the API being added here would help us update the container ID field of a PDR obtained from a remote PLDM terminus. And the discovery agent could leverage this API to merge the PDRs in such a way that it would complete the system model in the right contextual sense.\n\n\n@pavithra - can you update the commit message to indicate all of this information a generic terms? And also the words like host e.t.c should be replaced with remote PLDM endpoint. I don\u0027t think there is any need to approach DMTF regarding the functionality as it is already covered in DSP0248",
+      "parentUuid": "01c822b2_5e86a5e0",
+      "revId": "34436dd6d9499be2a5e763307aacccd49a02a8e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
