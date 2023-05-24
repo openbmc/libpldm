@@ -189,6 +189,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb3f3ea5_f3307edc",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T10:00:30Z",
+      "side": 1,
+      "message": "We\u0027re resolving the error handling as part of reworking the loop behaviour.",
+      "parentUuid": "bf5a5641_db442a0e",
+      "revId": "e7fc19cc9f7a2cb873ebc296f9a0853579109e8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91282443_7998a90d",

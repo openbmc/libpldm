@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4deb5e1c_9bd871eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T10:00:30Z",
+      "side": 1,
+      "message": "Hi Thu, a couple of minor cleanups and this should be good to go. The redundant validation of `end` is the main concern.",
+      "revId": "a5b03a96c01518c7a91eaf32e1fff2ca04ee1d6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f328f84f_a7364ce9",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T10:00:30Z",
+      "side": 1,
+      "message": "A nitpick that I think we can resolve given the other issue with validation below: There\u0027s a silly inconsistency between the names of `struct timeval` and the `timer*()` functions. I think I\u0027d prefer the name to be in terms of the struct here and not get ourselves confused in the extra `r` business. It would be nice to rename this to `timeval_to_msec()` without the `r`. Apologies if I got that wrong in my comment where I defined this function.",
+      "revId": "a5b03a96c01518c7a91eaf32e1fff2ca04ee1d6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "179b2ee2_b1bc175c",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T10:00:30Z",
+      "side": 1,
+      "message": "Nit: As above, let\u0027s drop the `r` and use `timeval_is_valid()`.",
+      "revId": "a5b03a96c01518c7a91eaf32e1fff2ca04ee1d6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "900401d4_643dc37f",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T10:00:30Z",
+      "side": 1,
+      "message": "We don\u0027t need to revalidate here because end doesn\u0027t change after its initial derivation on line 182. The trick was that we only needed to validate once and all future calls to `timeval_to_msec()` are known not to overflow.",
+      "revId": "a5b03a96c01518c7a91eaf32e1fff2ca04ee1d6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
