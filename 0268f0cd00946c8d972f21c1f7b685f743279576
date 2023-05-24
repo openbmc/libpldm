@@ -1,6 +1,74 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f07740c3_7a40bf0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T04:40:09Z",
+      "side": 1,
+      "message": "I\u0027ve suggested an implementation I think has the desired properties.",
+      "revId": "0268f0cd00946c8d972f21c1f7b685f743279576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df00abd2_78358e03",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T04:40:09Z",
+      "side": 1,
+      "message": "Can you please append the time unit to the symbol? `PLDM_MAX_RESPONSE_TIME_OUT_MS`",
+      "revId": "0268f0cd00946c8d972f21c1f7b685f743279576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "267c839f_2196955f",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T04:40:09Z",
+      "side": 1,
+      "message": "Given we\u0027re not mixing `struct timeval` and `struct timespec` at all we can probably drop the `val` suffix` from `nowval` and `endval`",
+      "revId": "0268f0cd00946c8d972f21c1f7b685f743279576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "464d8765_6648d96e",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T04:40:09Z",
+      "side": 1,
+      "message": "This is a bit of a nitpick, but I\u0027d prefer we order `static const` variable declarations before mutable variable declarations.",
+      "revId": "0268f0cd00946c8d972f21c1f7b685f743279576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9cca604_e46dafa6",
@@ -38,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f4e0ee1_020df7cb",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T04:40:09Z",
+      "side": 1,
+      "message": "I\u0027d probably go with `PLDM_REQUESTER_POLL_FAIL`.",
+      "parentUuid": "4f8800db_1fb1ff30",
+      "revId": "0268f0cd00946c8d972f21c1f7b685f743279576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb842a3e_632631a5",
         "filename": "src/transport/transport.c",
         "patchSetId": 15
@@ -67,6 +153,24 @@
       "side": 1,
       "message": "I think we can send PT1 + 2*PT4 \u003d 300ms to pldm_transport_poll() as \"Table 6: Timing specifications for PLDM messages\" in DSP0240\nSo we can reduce the exceed time from 4800ms to 300ms. The bias 6.25% with the expected time out is acceptable also.",
       "parentUuid": "bb842a3e_632631a5",
+      "revId": "0268f0cd00946c8d972f21c1f7b685f743279576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0677528_09ee0f07",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-24T04:40:09Z",
+      "side": 1,
+      "message": "That helps, but it will cause up to ~16 calls to `pldm_transport_poll()` when we could have just one. How does this look?\n\n```c\n...\n\n/* Overflow safety must be upheld before call */\nstatic long timerval_to_msec(const struct timerval *tv)\n{\n    return tv-\u003etv_sec * 1000 + tv-\u003etv_usec / 1000;\n}\n\n...\n\npldm_requester_rc_t\npldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,\n\t\t\t     const void *pldm_req_msg, size_t req_msg_len,\n\t\t\t     void **pldm_resp_msg, size_t *resp_msg_len)\n{\n    static const struct timerval max_response_interval \u003d {\n        .tv_sec \u003d 4,\n        .tv_usec \u003d 800000\n    };\n    struct timerval remaining;\n    struct timerval end;\n    struct timerval now;\n    \n    ...\n    /* Send message */\n    /* Calculate `now` */\n    /* Calculate `end` */\n    ...\n\n    /* If calculations on `end` don\u0027t overflow then operations on derived intervals\n     * can\u0027t either.\n     */\n    if (end.tv_sec \u003c 0 || end.tv_usec \u003c 0 || end.tv_usec \u003e\u003d 1000000) {\n        return PLDM_REQUESTER_POLL_FAIL;\n    }\n    \n    if (end.tv_sec \u003e\u003d (LONG_MAX - end.tv_usec) / 1000) {\n        return PLDM_REQUESTER_POLL_FAIL;\n    }\n\n    do {\n        rc \u003d timersub(\u0026end, \u0026now, \u0026remaining);\n        if (rc \u003c 0) {\n            return PLDM_REQUESTER_POLL_FAIL;\n        }\n\n        rc \u003d pldm_transport_poll(transport, timerval_to_msec(\u0026remaining));\n        if (rc !\u003d PLDM_REQUESTER_SUCCESS) {\n            return rc;\n        }\n        \n        rc \u003d plmd_transport_recv(transport, tid, pldm_resp_msg, resp_msg_len);\n        if (rc \u003d\u003d PLDM_REQUESTER_SUCCESS) {\n            return rc;\n        }\n        \n        rc \u003d clock_gettimeval(CLOCK_MONOTONIC, \u0026now);\n        if (rc \u003c 0) {\n            return PLDM_REQUESTER_POLL_FAIL;\n        }\n    } while (!timercmp(\u0026now, \u0026end, \u003c));\n    \n    return PLDM_REQUESTER_RECV_FAIL;\n}\n```",
+      "parentUuid": "3fef1537_06ae193b",
       "revId": "0268f0cd00946c8d972f21c1f7b685f743279576",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
