@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6e8512e_7fc95fe5",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-24T10:17:10Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "f328f84f_a7364ce9",
+      "revId": "a5b03a96c01518c7a91eaf32e1fff2ca04ee1d6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "179b2ee2_b1bc175c",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b063fdd1_12cf0cb1",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-24T10:17:10Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "179b2ee2_b1bc175c",
+      "revId": "a5b03a96c01518c7a91eaf32e1fff2ca04ee1d6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "900401d4_643dc37f",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-05-24T10:00:30Z",
       "side": 1,
       "message": "We don\u0027t need to revalidate here because end doesn\u0027t change after its initial derivation on line 182. The trick was that we only needed to validate once and all future calls to `timeval_to_msec()` are known not to overflow.",
+      "revId": "a5b03a96c01518c7a91eaf32e1fff2ca04ee1d6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f63cf78_1676de5e",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-24T10:17:10Z",
+      "side": 1,
+      "message": "Sorry for my mistake, I would like to check the valid of \"remaining\", because timersub does not have return value just as we do with \"end\" in timeradd.",
+      "parentUuid": "900401d4_643dc37f",
       "revId": "a5b03a96c01518c7a91eaf32e1fff2ca04ee1d6f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
