@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1228208b_a6bba334",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:21:25Z",
+      "side": 0,
+      "message": "Why were these moved from a private implementation to a public header? Can they be moved to a private header instead?",
+      "revId": "1568adbae2208c92d5c8053f21db05110bb2e0a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

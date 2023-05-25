@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9363f1aa_a5352e30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:21:25Z",
+      "side": 1,
+      "message": "Really this just repeats the patch subject. I think we should delete it. The following sentence begins to justify why we might want to make this change, but still feels a bit short.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 31
+      },
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1a1321_534a8940",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:21:25Z",
+      "side": 1,
+      "message": "There\u0027s some weird formatting going on, but also I\u0027m wondering if we can keep the structs in a private header instead of making them part of the public API. There\u0027s not yet enough detail in the commit message to justify making them public.",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9523bbfa_845b8cda",
+        "filename": "include/libpldm/pdr_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:21:25Z",
+      "side": 1,
+      "message": "Please prefix the header guard with `LIBPLDM_` so we can avoid any potential namespace clashes.",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4965bea5_69dad62b",
+        "filename": "include/libpldm/pdr_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:21:25Z",
+      "side": 1,
+      "message": "What types are used from `stddef.h`?",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43470e94_3bbe759a",
+        "filename": "include/libpldm/pdr_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:21:25Z",
+      "side": 1,
+      "message": "What\u0027s going on with the comment formatting here?",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5392f1c6_8d1413e4",
+        "filename": "include/libpldm/pdr_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:21:25Z",
+      "side": 1,
+      "message": "And here?",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d78ff333_359b398b",
+        "filename": "include/libpldm/pdr_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:21:25Z",
+      "side": 1,
+      "message": "Can we please put some line breaks between the definitions?",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
