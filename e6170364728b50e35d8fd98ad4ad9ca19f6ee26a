@@ -1,0 +1,267 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72835990_95d5fdc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "\"Utility\" is a vague concept and suggests that the behaviours aren\u0027t attached to any particular concept. I don\u0027t think that\u0027s true. We\u0027re finding PDRs in and adding them to some particular thing, probably a PDR database? We should think of behaviours in terms of the data that they\u0027re associated with and name them accordingly. With that perspective the concept of \"utility\" things is unnecessary.",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84daa7cb_27895df7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "nitpick: Capitalisation.",
+      "range": {
+        "startLine": 7,
+        "startChar": 21,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a70d46a9_040d8cc9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "The space here should be removed.",
+      "range": {
+        "startLine": 9,
+        "startChar": 35,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "837f1590_9f035c2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "Not just a host, right? Should be fixed throughout the rest of the commit message.",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36fe89e_c2e828ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "This addresses *what* the patch is doing, which we can tend to see from the diff. The commit message must explain the *why*. The previous paragraph gets to the why, I don\u0027t think this one adds much value.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 14
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1049cdc6_7361e2ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "I have some concerns about the naming and boolean combinations in the new APIs. There are also problems with use of `assert()`.\n\nI\u0027ve made note of a few nitpicks as well.",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00de54ba_35ca7526",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "Requiring boolean values in an API are a bit of an anti-pattern on a couple of fronts. The first is that often sets of booleans allow more states than are valid. Are all four combinations valid for this function?\n\nThe second is how the function might be invoked at the call-site:\n\n```\npldm_entity_association_tree_add_if_remote(..., false, true);\n```\n\nUsing booleans often forces us to remember which way around the parameters go, as we can\u0027t tell from the values. This starts to get into the territory of Rusty\u0027s API scale:\n\n1. [How Do I Make This Hard to Misuse?](https://ozlabs.org/~rusty/index.cgi/tech/2008-03-30.html)\n2. [What If I Don\u0027t Actually Like My Users?](https://ozlabs.org/~rusty/index.cgi/tech/2008-04-01.html)\n\nIf we must have boolean parameters it is nicer to provide named constants. Enums in APIs are often unhelpful because prior to C23 we can\u0027t control their size. This in-turn makes it hard to correctly do FFI from other languages. However, we can define constants with macros.",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 2
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f760dc43_173b90d6",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "Given that we\u0027re passing in the boolean `is_remote`, we already know if the entity is remote before we call the function. It feels like there\u0027s a less complex API design that should work here, or the `_if_remote` suffix could do with some workshopping.",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04a7a2e5_09825ca5",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "Same concerns as with the function as above.",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b8c3510_c16051e1",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "No asserts thanks. This must signal an error to the caller by returning.\n\nPlease audit and fix this issue throughout the rest of the patch.",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaebad43_ead2012c",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "Is this mostly a copy/paste of `pldm_entity_association_tree_add()`? If so, can we instead make `pldm_entity_association_tree_add()` call into this implementation so we don\u0027t have twice the code?",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fcaa8fe_93970ff5",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "This should be declared static?",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a404fcf_22ba95a1",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:00:25Z",
+      "side": 1,
+      "message": "This is the same as the condition below on lines 974-976. Please factor it out.",
+      "range": {
+        "startLine": 964,
+        "startChar": 6,
+        "endLine": 966,
+        "endChar": 35
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
