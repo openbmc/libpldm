@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b15dd98f_232e8c9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:26:13Z",
+      "side": 1,
+      "message": "This needs proper error handling in place of the `assert()` and needs to address the NULL dereference.",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1581ed37_1a67f728",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:26:13Z",
+      "side": 1,
+      "message": "Why is this something we want to do?",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d89c4aa1_cac9f5c3",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:26:13Z",
+      "side": 1,
+      "message": "Do we need to document that the point is opaque here?",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940de3ec_35289e1a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2181,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:26:13Z",
+      "side": 1,
+      "message": "The symbol name contains no indication that it\u0027s an OEM symbol. And if it is an OEM symbol it should mention *which* OEM, and be exposed in an OEM header file (not the generic platform header file).",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af2f2640_c9292042",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:26:13Z",
+      "side": 1,
+      "message": "Please do not use `assert()` for handling bad parameters values. You must signal a failure to the caller through a return value.",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64b4ddf1_4b96a00c",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 967,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:26:13Z",
+      "side": 1,
+      "message": "You\u0027re already dereferencing `curr` before testing whether it is NULL, which leads to UB.",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
