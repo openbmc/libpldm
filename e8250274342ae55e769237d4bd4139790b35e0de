@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79b055fc_8c25e320",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T05:33:17Z",
+      "side": 1,
+      "message": "I think we can drop this paragraph as really it just repeats the patch subject line above.",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91a2cb6d_62002c2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T05:33:17Z",
+      "side": 1,
+      "message": "Can you please be more specific about relevant sections here? DSP0248 is not huge, but also not small.",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c95e34f_555411e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T05:33:17Z",
+      "side": 1,
+      "message": "Again, listing specific sections would be quite helpful here.",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bad915e_4c6fa934",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T05:33:17Z",
+      "side": 1,
+      "message": "Is there any particular significance to this? I think it\u0027s reasonable that we can expect something like this to be added by the patch without calling it out explicitly.",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4238d091_e3ca66f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T05:33:17Z",
+      "side": 1,
+      "message": "A couple of issues aside from several nitpicks:\n\n1. The function name\n2. The use of `assert()`",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1f1dbb_c2ae92ec",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T05:33:17Z",
+      "side": 1,
+      "message": "nitpick: I think \"from\" might fit better here",
+      "range": {
+        "startLine": 283,
+        "startChar": 39,
+        "endLine": 283,
+        "endChar": 41
+      },
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47338451_a99b91c0",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T05:33:17Z",
+      "side": 1,
+      "message": "Added in what sense? Would \"existing\" be a better word to use?\n\nAlso is there any particular significance to the pointer being opaque? If not, do we need to mention that at all?",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f505313b_9567d7df",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T05:33:17Z",
+      "side": 1,
+      "message": "If the function is operating on a `struct pldm_entity_node` then I prefer we prefix the function name with `pldm_entity_node`: `pldm_entity_node_get_remote_container_id()`\n\nEssentially, a strategy I find useful in C is to associate functions with data by prefixing the functions with the struct name. This is the C version of non-virtual methods (an approximation of a virtual method is a function pointer member in the struct).",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f0ff38_0733c60a",
+        "filename": "src/pdr.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T05:33:17Z",
+      "side": 1,
+      "message": "Please don\u0027t add functions to the public API whose only protection against UB is `assert()`. Use of `assert()` in in shared libraries as error handling for caller controlled data is a security concern (denial of service, potentially integrity problems). Further, if the library is compiled with `-DNDEBUG` we get a NULL dereference which also tends to crash the process.\n\nThe general pattern used is to declare the function as returning `int` and then take a pointer as an out-parameter:\n\n```\nint pldm_entity_node_get_remote_container_id(const pldm_entity_node *entity, uint16_t *cid)\n{\n    if (!entity) {\n        return -EINVAL; /* Or some more appropriate error code */\n    }\n    \n    *cid \u003d entity-\u003eremote_container_id;\n    \n    return 0;\n}\n```",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
