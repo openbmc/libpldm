@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd1afaac_6a3b5404",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-25T14:40:56Z",
+      "side": 1,
+      "message": "For these kind of code, I think checking the code logic is enough. I\u0027m testing this code with my systems.",
+      "parentUuid": "099749ae_97e29d8c",
+      "revId": "c339523d9f395a5aa6e4b8ab83bae649ca129f4e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2358292d_1ed8dc03",
