@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eeb7945_fadc8c22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T00:01:50Z",
+      "side": 1,
+      "message": "Some type issues have crept in with the latest patchset, and I\u0027ve also provided some justification about why `timeval_is_valid(\u0026remaining)` is redundant.",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "466b1d0b_02aa5df5",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T00:01:50Z",
+      "side": 1,
+      "message": "Are you doing the cast to int here so the types line up for `pldm_transport_poll()`? If so, we shouldn\u0027t be mixing abstractions that way. The cast should be at the call-site, not in the implementation. Let\u0027s keep a proper separation of concerns.\n\nPlease keep this as returning a `long`.",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d97bbdf8_7b3a39fc",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T00:01:50Z",
+      "side": 1,
+      "message": "Given that the outcome of `timeval_is_valid()` is either \"yes it\u0027s valid\" or \"no it\u0027s not valid\" I think we should just make it return a `bool`.",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46da5504_96f3d258",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T00:01:50Z",
+      "side": 1,
+      "message": "`timeval_is_valid()` protects `timeval_to_msec()` from overflow. If `time_to_msec()` is changed to returning `int`, then this needed to be changed to `INT_MAX`.\n\nBut as mentioned above the types should remain as `long`.",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4185739a_a81ffc88",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T00:01:50Z",
+      "side": 1,
+      "message": "If we switch to `bool` as the return type this becomes\n\n```\n    if (!timeval_is_valid(\u0026end)) {\n       ...\n    }\n```",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "046d744d_e14cad93",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T00:01:50Z",
+      "side": 1,
+      "message": "This check is still unnecessary because we know the calculations won\u0027t overflow for `end`.\n\nA few facts are relevant:\n\n1. We\u0027re using `CLOCK_MONOTONIC` which will never decrease in value (even if the system time is changed)\n2. We derive `end` from `now` by adding an interval\n3. We\u0027re validating `end` for millisecond conversion overflow after adding the interval\n4. We\u0027re subtracting `now` from `end` to derive `remaining`, which yields the initial interval the first time through the loop.\n\nAt this point `remaining` must be positive as `now` is less than `end`. If `end` can be safely converted to milliseconds without overflow then it holds that `now` and `remaining` may also be safely converted without further checks.\n\nNow we have to deal with the loop condition:\n\n1. Prior to testing the loop condition we update `now` to the current time\n2. The loop terminates if `now` is equal to or exceeds `end`\n\nAssume the loop condition evaluates to `false`. `now` is not less than `end` and we exit without recalculating `remaining`. There\u0027s no risk of overflow as there\u0027s no subsequent conversion of `remaining` to milliseconds via `timeval_to_msec()`.\n\nNow assume the loop conditions evaluates to `true`. `now` must be strictly less than `end`. The derivation of `remaining` is `end - now`, which must be a positive interval with a value less than `end`. If the conversion of `end` to milliseconds cannot overflow, it remains the case that `remaining` cannot overflow either.\n\nTherefore it is redundant to call `timeval_is_valid(\u0026remaining)` in the loop. We know that it must be valid by the success of `timeval_is_valid(\u0026end)` on line 183.\n\nSo, I\u0027d prefer we remove this check. If it remains in the code its presence becomes a point of confusion: people will have to re-prove all this to make sure that it is in fact redundant.",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a617f3e_316e2c4b",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T00:01:50Z",
+      "side": 1,
+      "message": "Given the discussion about keeping the return type as `long` above, this will become:\n\n```\n/* 0 \u003c\u003d `timeval_to_msec()` \u003c\u003d 4800000, and 4800000 \u003c INT_MAX */\nrc \u003d pldm_transport_poll(transport, (int)(timeval_to_msec(\u0026remaining)));\n```\n\nWhile C specifies `INT_MAX` as not less than 16-bit signed max, the practical reality tells us:\n\n```\n2 09:26:58 andrew@fedora:~$ \\\n\u003e for a in aarch64 arm powerpc64le riscv64 x86_64; \\\n\u003e do \\\n\u003e    echo $a; \\\n\u003e    ${a}-linux-gnu-gcc -E -dM -x c - \u003c\u003c\u003c\u0027#include \u003climits.h\u003e\u0027 |\n\u003e        grep __INT_MAX__; \\\n\u003e    echo; \\\n\u003e done\naarch64\n#define INT_MAX __INT_MAX__\n#define __INT_MAX__ 0x7fffffff\n\narm\n#define INT_MAX __INT_MAX__\n#define __INT_MAX__ 0x7fffffff\n\npowerpc64le\n#define __INT_MAX__ 0x7fffffff\n#define INT_MAX __INT_MAX__\n\nriscv64\n#define INT_MAX __INT_MAX__\n#define __INT_MAX__ 0x7fffffff\n\nx86_64\n#define INT_MAX __INT_MAX__\n#define __INT_MAX__ 0x7fffffff\n```",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

@@ -204,6 +204,30 @@
       },
       "revId": "7be7069980773090ad7d22bc45f5776ea7a505be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b451005_a4dcbee5",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T00:01:50Z",
+      "side": 1,
+      "message": "This comment is no longer relevant so marking it resolved to make it disappear",
+      "parentUuid": "7a45c468_dda42709",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 24
+      },
+      "revId": "7be7069980773090ad7d22bc45f5776ea7a505be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
