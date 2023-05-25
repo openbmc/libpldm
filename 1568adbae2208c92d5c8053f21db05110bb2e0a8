@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50a4304a_be6eb6f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:04:36Z",
+      "side": 1,
+      "message": "We just added this function in the previous patch. Please squash this one in.",
+      "revId": "1568adbae2208c92d5c8053f21db05110bb2e0a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53c8f982_1b19c7f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:04:36Z",
+      "side": 1,
+      "message": "Can we please find a more generic example.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "1568adbae2208c92d5c8053f21db05110bb2e0a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01656ee5_fed4b0e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T06:04:36Z",
+      "side": 1,
+      "message": "In general, please don\u0027t separate out patches that change the public API introduced in a previous patch. Generally, once we introduce a function it is set in stone. We need to get new function prototypes correct from the outset (which is what makes library development hard vs application development).",
+      "revId": "1568adbae2208c92d5c8053f21db05110bb2e0a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
