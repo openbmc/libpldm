@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64d4e3a3_2249c8e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T03:29:54Z",
+      "side": 1,
+      "message": "quick, while you\u0027re fixing the build!",
+      "revId": "a81b270528dbe37896cd5a621ec85feffc4ff355",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0cdf9db_00cb1069",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T03:29:54Z",
+      "side": 1,
+      "message": "Sorry, I got this comment wrong; it should have `4800` (milliseconds) not `4800000` (microseconds).",
+      "revId": "a81b270528dbe37896cd5a621ec85feffc4ff355",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
