@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c4d478f_312c1ee5",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T04:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "466b1d0b_02aa5df5",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d97bbdf8_7b3a39fc",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-25T00:01:50Z",
       "side": 1,
       "message": "Given that the outcome of `timeval_is_valid()` is either \"yes it\u0027s valid\" or \"no it\u0027s not valid\" I think we should just make it return a `bool`.",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdffaf1e_a76b1162",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T04:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d97bbdf8_7b3a39fc",
       "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5715d32b_9b3996d1",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T04:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46da5504_96f3d258",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4185739a_a81ffc88",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-05-25T00:01:50Z",
       "side": 1,
       "message": "If we switch to `bool` as the return type this becomes\n\n```\n    if (!timeval_is_valid(\u0026end)) {\n       ...\n    }\n```",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f0866b9_602dfbfd",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T04:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4185739a_a81ffc88",
       "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -103,6 +175,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbfd8b80_4c21ff5b",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T04:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "046d744d_e14cad93",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a617f3e_316e2c4b",
@@ -116,6 +206,24 @@
       "writtenOn": "2023-05-25T00:01:50Z",
       "side": 1,
       "message": "Given the discussion about keeping the return type as `long` above, this will become:\n\n```\n/* 0 \u003c\u003d `timeval_to_msec()` \u003c\u003d 4800000, and 4800000 \u003c INT_MAX */\nrc \u003d pldm_transport_poll(transport, (int)(timeval_to_msec(\u0026remaining)));\n```\n\nWhile C specifies `INT_MAX` as not less than 16-bit signed max, the practical reality tells us:\n\n```\n2 09:26:58 andrew@fedora:~$ \\\n\u003e for a in aarch64 arm powerpc64le riscv64 x86_64; \\\n\u003e do \\\n\u003e    echo $a; \\\n\u003e    ${a}-linux-gnu-gcc -E -dM -x c - \u003c\u003c\u003c\u0027#include \u003climits.h\u003e\u0027 |\n\u003e        grep __INT_MAX__; \\\n\u003e    echo; \\\n\u003e done\naarch64\n#define INT_MAX __INT_MAX__\n#define __INT_MAX__ 0x7fffffff\n\narm\n#define INT_MAX __INT_MAX__\n#define __INT_MAX__ 0x7fffffff\n\npowerpc64le\n#define __INT_MAX__ 0x7fffffff\n#define INT_MAX __INT_MAX__\n\nriscv64\n#define INT_MAX __INT_MAX__\n#define __INT_MAX__ 0x7fffffff\n\nx86_64\n#define INT_MAX __INT_MAX__\n#define __INT_MAX__ 0x7fffffff\n```",
+      "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0894d935_9bca280c",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T04:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a617f3e_316e2c4b",
       "revId": "354439886d5100a3c29a2dadf92f9bc400ba4f00",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
