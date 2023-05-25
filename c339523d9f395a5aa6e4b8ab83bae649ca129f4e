@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "099749ae_97e29d8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T07:41:37Z",
+      "side": 1,
+      "message": "It would be nice to have a dummy transport implementation so we can test these kind of things, but I figured Thu had been through too much on this patch already to also ask for that.",
+      "parentUuid": "d4a87291_cd2249fb",
+      "revId": "c339523d9f395a5aa6e4b8ab83bae649ca129f4e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2358292d_1ed8dc03",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-25T07:32:12Z",
       "side": 1,
       "message": "\u003e tv-\u003etv_usec \u003e\u003d 1000000\n\nWhy this is invalid? Can we have the function documentation to summarise the checks.",
+      "revId": "c339523d9f395a5aa6e4b8ab83bae649ca129f4e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7263e596_4cd78b39",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-25T07:41:37Z",
+      "side": 1,
+      "message": "I think this is largely answered by the \"normalized\" language in `man 3 timeradd`:\n\nhttps://man7.org/linux/man-pages/man3/timeradd.3.html\n\nSince it\u0027s a standard library function I figure it\u0027s reasonable that we don\u0027t have to duplicate documentation here.",
+      "parentUuid": "31d13d79_84ff22e0",
       "revId": "c339523d9f395a5aa6e4b8ab83bae649ca129f4e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
