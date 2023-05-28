@@ -50,7 +50,8 @@ pldm_requester_rc_t pldm_open(void);
  * @param[out] resp_msg_len - caller owned pointer that will be made point to
  *             the size of the PLDM response msg.
  *
- * @return pldm_requester_rc_t (errno may be set)
+ * @return pldm_requester_rc_t (errno may be set). success is returned even
+ *         when data was read, but didn't match eid or instance_id.
  */
 pldm_requester_rc_t pldm_send_recv(mctp_eid_t eid, int mctp_fd,
 				   const uint8_t *pldm_req_msg,

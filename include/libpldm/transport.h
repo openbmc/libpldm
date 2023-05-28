@@ -108,7 +108,8 @@ pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
  *             the size of the PLDM response msg. If NULL,
  * 	       PLDM_REQUESTER_INVALID_SETUP is returned.
  *
- * @return pldm_requester_rc_t (errno may be set)
+ * @return pldm_requester_rc_t (errno may be set). success is returned even
+ *         when data was read, but didn't match eid or instance_id.
  */
 pldm_requester_rc_t
 pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
