@@ -164,7 +164,11 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 	struct timeval now;
 	struct timeval end;
 	pldm_requester_rc_t rc;
+	uint8_t req_instance_id = 0;
 	int ret;
+
+	struct pldm_msg_hdr *hdr = (struct pldm_msg_hdr *)pldm_req_msg;
+	req_instance_id = hdr->instance_id;
 
 	if (!resp_msg_len) {
 		return PLDM_REQUESTER_INVALID_SETUP;
@@ -197,7 +201,11 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		rc = pldm_transport_recv_msg(transport, tid, pldm_resp_msg,
 					     resp_msg_len);
 		if (rc == PLDM_REQUESTER_SUCCESS) {
-			return rc;
+			struct pldm_msg_hdr *res_hdr =
+				(struct pldm_msg_hdr *)(*pldm_resp_msg);
+			if (res_hdr->instance_id == req_instance_id) {
+				return rc;
+			}
 		}
 
 		ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
