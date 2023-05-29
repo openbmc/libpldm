@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "989593a0_dd28b848",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-29T19:11:35Z",
+      "side": 1,
+      "message": "This patch set will address the issue \"Pldmtool command receives the response message of the request message from the others services\". The others services in my system is pldmd which is continuously polling many sensors after each seconds.\nThe observation of this issue is pldmtool command can end with error \"Response Message Error: rc\u003d3 cc\u003d0\"",
+      "revId": "ef1a3cd418f6f0c592a706bf03b0c1b866a55ea1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
