@@ -16,6 +16,24 @@
       "message": "Update timercmp() logic. The while will exit when now time \u003e end time.",
       "revId": "9fe077fdca6216b97f77dd3cb52c6cf13323e047",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c68fb4e2_706e88a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-29T03:19:08Z",
+      "side": 1,
+      "message": "Ugh, of course it doesn\u0027t behave like `strcmp()` 😕 Also I failed at reading comprehension.\n\n\u003e        timercmp()  compares the timer values in a and b using the comparison\n\u003e        operator CMP, and returns true (nonzero) or false (0) depending on the\n\u003e        result of the comparison.  Some systems (but not Linux/glibc), have a\n\u003e        broken timercmp() implementation, in which CMP of \u003e\u003d, \u003c\u003d, and \u003d\u003d do not\n\u003e        work; portable applications can instead use\n\u003e\n\u003e           !timercmp(..., \u003c)\n\u003e           !timercmp(..., \u003e)\n\u003e           !timercmp(..., !\u003d)",
+      "parentUuid": "c581b984_8b9aebb9",
+      "revId": "9fe077fdca6216b97f77dd3cb52c6cf13323e047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
