@@ -16,6 +16,24 @@
       "message": "I prefer we don\u0027t do this. `pldm_transport_send_recv_msg()` very much a convenience API for simple use cases, though that\u0027s kind of complicated by the mctp-demux transport behaviour of all listeners receiving all messages.\n\nIf users of libpldm need to care about these problems then they should use the building blocks of `pldm_transport_send_msg()`, `pldm_transport_poll()`, and `pldm_transport_recv_msg()` to get the right behaviour.\n\nOtherwise, as is, we\u0027re discarding potentially valid messages. `AF_MCTP` will typically operate in unconnected mode, which will yield the same problems (though to a lesser extent).",
       "revId": "7c57f7ee506b16f4cd9fad96f41879f5dee35a56",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81704eee_dfec8c75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-05-30T04:11:49Z",
+      "side": 1,
+      "message": "I agree that for the API such as pldm_transport_recv_msg() we don\u0027t have any info about the request message(), so the API requester should handle comparing the InstanceIds of request message (only API requester have this info) and response message.\n\nBut the purpose of pldm_transport_send_recv_msg() is send one pldm transport message and return the response message. So I think the response message should corresponding with the sent message.\nMoreover, If we don\u0027t handle that comparison then the API requester have to re-send the request and hope that the response message match with re-sent request. That mean we can miss the response of first request message.",
+      "parentUuid": "e5a90c16_88a68877",
+      "revId": "7c57f7ee506b16f4cd9fad96f41879f5dee35a56",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
