@@ -23,6 +23,7 @@ struct pldm_transport_mctp_demux {
 	/* In the future this probably needs to move to a tid-eid-uuid/network
 	 * id mapping for multi mctp networks */
 	pldm_tid_t tid_eid_map[MCTP_MAX_NUM_EID];
+	size_t send_buf_size;
 };
 
 #define transport_to_demux(ptr)                                                \
@@ -181,6 +182,18 @@ pldm_transport_mctp_demux_send(struct pldm_transport *t, pldm_tid_t tid,
 	msg.msg_iov = iov;
 	msg.msg_iovlen = sizeof(iov) / sizeof(iov[0]);
 
+	if (demux->send_buf_size < req_msg_len) {
+		size_t old_buf_size = demux->send_buf_size;
+		demux->send_buf_size = req_msg_len;
+		int res = setsockopt(demux->socket, SOL_SOCKET, SO_SNDBUF,
+				     &(demux->send_buf_size),
+				     sizeof(demux->send_buf_size));
+		if (res == -1) {
+			demux->send_buf_size = old_buf_size;
+			return PLDM_REQUESTER_SEND_FAIL;
+		}
+	}
+
 	ssize_t rc = sendmsg(demux->socket, &msg, 0);
 	if (rc == -1) {
 		return PLDM_REQUESTER_SEND_FAIL;
@@ -210,6 +223,15 @@ int pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx)
 		free(demux);
 		return -1;
 	}
+
+	socklen_t optlen = sizeof(demux->send_buf_size);
+	int rc = getsockopt(demux->socket, SOL_SOCKET, SO_SNDBUF,
+			    &(demux->send_buf_size), &optlen);
+	if (rc == -1) {
+		free(demux);
+		return PLDM_REQUESTER_OPEN_FAIL;
+	}
+
 	*ctx = demux;
 	return 0;
 }
@@ -246,6 +268,15 @@ pldm_transport_mctp_demux_init_with_fd(int mctp_fd)
 		free(demux);
 		return NULL;
 	}
+
+	socklen_t optlen = sizeof(demux->send_buf_size);
+	int rc = getsockopt(demux->socket, SOL_SOCKET, SO_SNDBUF,
+			    &(demux->send_buf_size), &optlen);
+	if (rc == -1) {
+		free(demux);
+		return NULL;
+	}
+
 	return demux;
 }
 

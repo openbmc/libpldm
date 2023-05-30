@@ -20,6 +20,7 @@ struct pldm_transport_af_mctp {
 	struct pldm_transport transport;
 	int socket;
 	pldm_tid_t tid_eid_map[MCTP_MAX_NUM_EID];
+	size_t send_buf_size;
 };
 
 #define transport_to_af_mctp(ptr)                                              \
@@ -114,6 +115,18 @@ static pldm_requester_rc_t pldm_transport_af_mctp_send(struct pldm_transport *t,
 	addr.smctp_type = MCTP_MSG_TYPE_PLDM;
 	addr.smctp_tag = MCTP_TAG_OWNER;
 
+	if (af_mctp->send_buf_size < req_msg_len) {
+		size_t old_buf_size = af_mctp->send_buf_size;
+		af_mctp->send_buf_size = req_msg_len;
+		int res = setsockopt(af_mctp->socket, SOL_SOCKET, SO_SNDBUF,
+				     &(af_mctp->send_buf_size),
+				     sizeof(af_mctp->send_buf_size));
+		if (res == -1) {
+			af_mctp->send_buf_size = old_buf_size;
+			return PLDM_REQUESTER_SEND_FAIL;
+		}
+	}
+
 	ssize_t rc = sendto(af_mctp->socket, pldm_req_msg, req_msg_len, 0,
 			    (struct sockaddr *)&addr, sizeof(addr));
 	if (rc == -1) {
@@ -143,6 +156,15 @@ int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
 		free(af_mctp);
 		return -1;
 	}
+
+	socklen_t optlen = sizeof(af_mctp->send_buf_size);
+	int rc = getsockopt(af_mctp->socket, SOL_SOCKET, SO_SNDBUF,
+			    &(af_mctp->send_buf_size), &optlen);
+	if (rc == -1) {
+		free(af_mctp);
+		return PLDM_REQUESTER_OPEN_FAIL;
+	}
+
 	*ctx = af_mctp;
 	return 0;
 }
