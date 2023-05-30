@@ -47,6 +47,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef36745c_1224a0d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84daa7cb_27895df7",
+      "range": {
+        "startLine": 7,
+        "startChar": 21,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec7d0404_32af25f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "72835990_95d5fdc5",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a70d46a9_040d8cc9",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-05-25T06:00:25Z",
       "side": 1,
       "message": "The space here should be removed.",
+      "range": {
+        "startLine": 9,
+        "startChar": 35,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54b35c3d_c826d202",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a70d46a9_040d8cc9",
       "range": {
         "startLine": 9,
         "startChar": 35,
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99d337c8_56c80fba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "837f1590_9f035c2a",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d36fe89e_c2e828ee",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-05-25T06:00:25Z",
       "side": 1,
       "message": "This addresses *what* the patch is doing, which we can tend to see from the diff. The commit message must explain the *why*. The previous paragraph gets to the why, I don\u0027t think this one adds much value.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 14
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4356b76b_3e69ddb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d36fe89e_c2e828ee",
       "range": {
         "startLine": 14,
         "startChar": 0,
@@ -175,6 +295,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dbbd9cb3_1f36b270",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:48Z",
+      "side": 1,
+      "message": "As discussed with you Andrew over the call, the 2 booleans - \nis_remote is used to indicate if the entity is BMC owned or of remote endpoint owned.\nis_update_container_id is used to indicate if the container id of the entity needs to be updated or not.\n\nWe handle 3 different combinations,\n1. Both are false - when it is the parent node in the tree example: - https://github.com/ibm-openbmc/pldm/blob/1050/libpldmresponder/pdr_state_sensor.hpp#L136\n2. is_remote is false and update_container_id is true - when it is a BMC entity but we have a container id change needed. example: - https://github.com/ibm-openbmc/pldm/blob/1050/libpldmresponder/fru.cpp#L130\n3. is_remote is true and update_container_id is false - In IBM PLDM stack talks to two different remote firmware implementations over PLDM, and we had a conflicting requirement to not merge the container ID from one endpoint but merge the container ID from another endpoint. Example: -https://github.com/ibm-openbmc/pldm/blob/1050/host-bmc/host_pdr_handler.cpp#L509",
+      "parentUuid": "f760dc43_173b90d6",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04a7a2e5_09825ca5",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 5
@@ -186,6 +324,24 @@
       "writtenOn": "2023-05-25T06:00:25Z",
       "side": 1,
       "message": "Same concerns as with the function as above.",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d447160_2ed9a2fd",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "04a7a2e5_09825ca5",
       "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -203,6 +359,24 @@
       "writtenOn": "2023-05-25T06:00:25Z",
       "side": 1,
       "message": "No asserts thanks. This must signal an error to the caller by returning.\n\nPlease audit and fix this issue throughout the rest of the patch.",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d23d07d_c4ce00af",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8b8c3510_c16051e1",
       "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -241,6 +415,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51344622_46f2dd11",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fcaa8fe_93970ff5",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a404fcf_22ba95a1",
@@ -254,6 +446,30 @@
       "writtenOn": "2023-05-25T06:00:25Z",
       "side": 1,
       "message": "This is the same as the condition below on lines 974-976. Please factor it out.",
+      "range": {
+        "startLine": 964,
+        "startChar": 6,
+        "endLine": 966,
+        "endChar": 35
+      },
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cdd72bc_7c3374e7",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a404fcf_22ba95a1",
       "range": {
         "startLine": 964,
         "startChar": 6,
