@@ -175,6 +175,24 @@
       "parentUuid": "7338cbfa_44ac715a",
       "revId": "c339523d9f395a5aa6e4b8ab83bae649ca129f4e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7cb34e7_ec87a0cd",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-05-30T04:17:38Z",
+      "side": 1,
+      "message": "I prefer to write documentation for such logic and helps catch issues like this and help code readers.",
+      "parentUuid": "6afa9b85_06666bb8",
+      "revId": "c339523d9f395a5aa6e4b8ab83bae649ca129f4e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
