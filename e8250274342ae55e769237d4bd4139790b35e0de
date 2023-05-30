@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c92a553_ff62c2c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "79b055fc_8c25e320",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91a2cb6d_62002c2b",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d3d5da5_4bf561a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91a2cb6d_62002c2b",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c95e34f_555411e8",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-05-25T05:33:17Z",
       "side": 1,
       "message": "Again, listing specific sections would be quite helpful here.",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7509e01_85934d92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c95e34f_555411e8",
       "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -71,6 +125,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ed82765d_793d33b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8bad915e_4c6fa934",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4238d091_e3ca66f7",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 15
@@ -82,6 +154,23 @@
       "writtenOn": "2023-05-25T05:33:17Z",
       "side": 1,
       "message": "A couple of issues aside from several nitpicks:\n\n1. The function name\n2. The use of `assert()`",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d267b46e_e8c9b908",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:35Z",
+      "side": 1,
+      "message": "I have made all the changes in the next patchset.",
       "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -109,6 +198,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aa6a723_273d3820",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f1f1dbb_c2ae92ec",
+      "range": {
+        "startLine": 283,
+        "startChar": 39,
+        "endLine": 283,
+        "endChar": 41
+      },
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47338451_a99b91c0",
@@ -122,6 +235,24 @@
       "writtenOn": "2023-05-25T05:33:17Z",
       "side": 1,
       "message": "Added in what sense? Would \"existing\" be a better word to use?\n\nAlso is there any particular significance to the pointer being opaque? If not, do we need to mention that at all?",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a48f2f8_ba527b43",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "47338451_a99b91c0",
       "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -143,6 +274,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "554b0f6e_cc8ead6c",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f505313b_9567d7df",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6f0ff38_0733c60a",
@@ -156,6 +305,24 @@
       "writtenOn": "2023-05-25T05:33:17Z",
       "side": 1,
       "message": "Please don\u0027t add functions to the public API whose only protection against UB is `assert()`. Use of `assert()` in in shared libraries as error handling for caller controlled data is a security concern (denial of service, potentially integrity problems). Further, if the library is compiled with `-DNDEBUG` we get a NULL dereference which also tends to crash the process.\n\nThe general pattern used is to declare the function as returning `int` and then take a pointer as an out-parameter:\n\n```\nint pldm_entity_node_get_remote_container_id(const pldm_entity_node *entity, uint16_t *cid)\n{\n    if (!entity) {\n        return -EINVAL; /* Or some more appropriate error code */\n    }\n    \n    *cid \u003d entity-\u003eremote_container_id;\n    \n    return 0;\n}\n```",
+      "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57f1fbe9_f1840140",
+        "filename": "src/pdr.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:22:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6f0ff38_0733c60a",
       "revId": "e8250274342ae55e769237d4bd4139790b35e0de",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
