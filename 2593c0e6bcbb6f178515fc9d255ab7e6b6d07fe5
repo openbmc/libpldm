@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f5c946cd_8119220c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9363f1aa_a5352e30",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 31
+      },
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "aa1a1321_534a8940",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -37,6 +61,23 @@
       "writtenOn": "2023-05-25T06:21:25Z",
       "side": 1,
       "message": "There\u0027s some weird formatting going on, but also I\u0027m wondering if we can keep the structs in a private header instead of making them part of the public API. There\u0027s not yet enough detail in the commit message to justify making them public.",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d309638e_676c8d25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:23:53Z",
+      "side": 1,
+      "message": "@Andrew, we have features like Concurrent Maintenance(CM) of FRUs and Hotplug of pluggable FRUs at runtime, during which there is a necessity to DELETE, MODIFY or ADD the PDRs corresponding to the FRU.\nDuring the ADD of the FRUs, we are adding the PDRs to the end of our PDR REPO, but there is a catch here, IBM has two remote endpoints and each of them has its own range of record handles defined. So when the PDRs corresponding to the new FRU are added during hotplug or CM, there is a need to identify the last BMC (local) record handle used in the PDR repo. Since our repo is linked list in nature, we add the new PDRs after the last BMC record in our repo.\n\nThe implementation we tried:\n\nThe method- \u0027pldm_pdr_find_last_local_record\u0027 - https://gerrit.openbmc.org/c/openbmc/libpldm/+/63155/7/src/oem/ibm/pdr.c#4 was earlier written in path src/oem/ibm/pdr.c, and we make use of this method inside \u0027make_new_record\u0027 https://gerrit.openbmc.org/c/openbmc/libpldm/+/63155/7/src/pdr.c#66 in order to assign proper record handles to satisfy the above use case I mentioned.\n\nTo make this happen we had to include src/pdr.h inside oem-IBM path and also have oem-ibm/pdr.c file inside src/pdr.c path, this resulted in circular dependency and hence we separated the structure definitions into a file- https://gerrit.openbmc.org/c/openbmc/libpldm/+/63611/3/include/libpldm/pdr_data.h",
       "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -58,6 +99,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "793138ce_de057040",
+        "filename": "include/libpldm/pdr_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9523bbfa_845b8cda",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4965bea5_69dad62b",
@@ -71,6 +130,24 @@
       "writtenOn": "2023-05-25T06:21:25Z",
       "side": 1,
       "message": "What types are used from `stddef.h`?",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0ca9640_c5317e09",
+        "filename": "include/libpldm/pdr_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:23:53Z",
+      "side": 1,
+      "message": "yes, it was redundant removed it",
+      "parentUuid": "4965bea5_69dad62b",
       "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -92,6 +169,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc3b06cc_9b8934eb",
+        "filename": "include/libpldm/pdr_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43470e94_3bbe759a",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5392f1c6_8d1413e4",
@@ -109,6 +204,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f16b34d1_ef82c39f",
+        "filename": "include/libpldm/pdr_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5392f1c6_8d1413e4",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d78ff333_359b398b",
@@ -122,6 +235,24 @@
       "writtenOn": "2023-05-25T06:21:25Z",
       "side": 1,
       "message": "Can we please put some line breaks between the definitions?",
+      "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc839078_abeffb9b",
+        "filename": "include/libpldm/pdr_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d78ff333_359b398b",
       "revId": "2593c0e6bcbb6f178515fc9d255ab7e6b6d07fe5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

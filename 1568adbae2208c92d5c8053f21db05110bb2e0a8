@@ -16,6 +16,24 @@
       "message": "Why were these moved from a private implementation to a public header? Can they be moved to a private header instead?",
       "revId": "1568adbae2208c92d5c8053f21db05110bb2e0a8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec9b84c0_aac56100",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:23:53Z",
+      "side": 0,
+      "message": "This was moved from a private implementation to a public header because these struct definitions can be used by OEM implementations.\nWe also encountered circular dependency when we used these definitions in a private header instead.",
+      "parentUuid": "1228208b_a6bba334",
+      "revId": "1568adbae2208c92d5c8053f21db05110bb2e0a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
