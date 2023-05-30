@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8b735f0_70087212",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-30T04:30:04Z",
+      "side": 1,
+      "message": "As discussed in the commit below the use case we are trying to achieve, we had an OEM-IBM method written but we received a comment about not using #if_def in the generic files - https://gerrit.openbmc.org/c/openbmc/libpldm/+/63155/7/src/pdr.c#8\nSo we moved the method to the generic src/pdr.c file and made the magic number used as a constant in a generic platform file with OEM_range- https://gerrit.openbmc.org/c/openbmc/libpldm/+/63612/3/include/libpldm/platform.h\nWe took an example from here - https://github.com/ibm-openbmc/libpldm/blob/main/include/libpldm/entity.h#L140\nI can rename the constant with the OEM symbol in it.\n\nCould you please help us with how to go about it for the use case specified and the constraints we have?",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1581ed37_1a67f728",
