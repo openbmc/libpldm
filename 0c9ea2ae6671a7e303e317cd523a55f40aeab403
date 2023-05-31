@@ -173,6 +173,24 @@
       "message": "Are these constants IBM-specific? Or are they defined in the DMTF PLDM specifications? If the latter, can you please identify the document and section?",
       "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da9b9580_0c7e4105",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-31T07:04:43Z",
+      "side": 1,
+      "message": "these constants are not defined in DMTF PLDM Spec, those are IBM-specific constants, I have defined them here and made the following changes - https://gerrit.openbmc.org/c/openbmc/libpldm/+/63612/3/include/libpldm/platform.h#2180\nand it is used here - https://gerrit.openbmc.org/c/openbmc/libpldm/+/63612/3/src/pdr.c#969",
+      "parentUuid": "1e3217ea_2307459b",
+      "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ],
   "submitRequirementResults": []
