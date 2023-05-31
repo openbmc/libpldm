@@ -213,6 +213,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d59a2b07_ba12a6e6",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-31T07:20:41Z",
+      "side": 1,
+      "message": "Okay, so if the constants are IBM-specific then I assume the concept of \"local record\" and records that are not local is also IBM specific?\n\nWhat if instead of `pldm_pdr_find_last_local_record()` we have `pldm_pdr_find_last_in_range(const pldm_pdr *repo, uint32_t first, uint32_t last)`. That way the range constants can be provided by the caller, and the implementation is generic (and can be moved out of src/oem). In IBM\u0027s case, we can use the magic constants you\u0027ve baked into this patch as the arguments. `isHBRange()` doesn\u0027t have any need to be in the libpldm source at all, as far as I\u0027m concerned.\n\nWith this, we can do something similar for `pldm_find_container_range()` below. If it also takes `first` and `last` record handle values then we constrain the search to that specific range (which we can use to exclude the region where `isHBRange()` returns true).",
+      "parentUuid": "4d0b35a9_30336c08",
+      "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "77fd8077_5902e6ab",
         "filename": "src/pdr.c",
         "patchSetId": 7
