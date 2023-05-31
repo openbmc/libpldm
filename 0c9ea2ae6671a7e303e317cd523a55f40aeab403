@@ -209,6 +209,23 @@
       "parentUuid": "da9b9580_0c7e4105",
       "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77fd8077_5902e6ab",
+        "filename": "src/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-05-31T07:05:57Z",
+      "side": 1,
+      "message": "The caller is already providing the record handle as an argument. Why can\u0027t they call e.g. `pldm_pdr_find_last_local_record()` prior to (indirectly) calling `make_new_record()`?\n\nThat would eliminate this entire `#ifdef OEM_IBM` block.",
+      "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ],
   "submitRequirementResults": []
