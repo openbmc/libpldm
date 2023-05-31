@@ -191,6 +191,24 @@
       "parentUuid": "1e3217ea_2307459b",
       "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d0b35a9_30336c08",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-05-31T07:05:28Z",
+      "side": 1,
+      "message": "Hence we defined them as OEM ranges",
+      "parentUuid": "da9b9580_0c7e4105",
+      "revId": "0c9ea2ae6671a7e303e317cd523a55f40aeab403",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ],
   "submitRequirementResults": []
