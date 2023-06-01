@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "011bb985_84013925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-01T11:01:01Z",
+      "side": 1,
+      "message": "I have made changes according to the comment received here - https://gerrit.openbmc.org/c/openbmc/libpldm/+/63155/7/src/oem/ibm/pdr.c#31",
+      "parentUuid": "d8b735f0_70087212",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1581ed37_1a67f728",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-25T06:26:13Z",
       "side": 1,
       "message": "Why is this something we want to do?",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e40752de_994fd40a",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-01T11:01:01Z",
+      "side": 1,
+      "message": "We need this to identify the records within a particular range, as BMC and remote endpoints have their own ranges defined for the PDR record handles they own.",
+      "parentUuid": "1581ed37_1a67f728",
       "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "325337e0_9fd15db5",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-01T11:01:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d89c4aa1_cac9f5c3",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "940de3ec_35289e1a",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-05-25T06:26:13Z",
       "side": 1,
       "message": "The symbol name contains no indication that it\u0027s an OEM symbol. And if it is an OEM symbol it should mention *which* OEM, and be exposed in an OEM header file (not the generic platform header file).",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "848bff89_fa00e752",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2181,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-01T11:01:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "940de3ec_35289e1a",
       "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -103,6 +175,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "337cfbef_c99ea2c0",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-01T11:01:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "af2f2640_c9292042",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64b4ddf1_4b96a00c",
@@ -116,6 +206,24 @@
       "writtenOn": "2023-05-25T06:26:13Z",
       "side": 1,
       "message": "You\u0027re already dereferencing `curr` before testing whether it is NULL, which leads to UB.",
+      "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f44cfd_70f95203",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 967,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-01T11:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64b4ddf1_4b96a00c",
       "revId": "4078479ed88c7fcd9792b67958ed4ccc2d44a976",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
