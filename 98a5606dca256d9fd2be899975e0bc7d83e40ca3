@@ -1,0 +1,203 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "368cec69_2092dd54",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:39:21Z",
+      "side": 1,
+      "message": "Please try to consistently wrap the commit message at 72 characters. My impression is that it\u0027s been done manually. Often your editor can help you wrap the lines to expectations (e.g. if you use `vim` you can use the sequence `gq` in visual mode)",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1106ff0_0a15f0a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:39:21Z",
+      "side": 1,
+      "message": "Can you please be specific about the name of the field you\u0027re adding, and if possible, its purpose. A vague subject like we currently have here makes it hard for me to remember the purpose of the change when sorting through the one line descriptions in Gerrit (and in the output of `git log`).",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "371bfd02_e763cc99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:39:21Z",
+      "side": 1,
+      "message": "Please make sure the full stop goes after the end of the sentence (the sentence includes the reference in parentheses that currently follows the full stop). Also please make sure to have spaces where appropriate.",
+      "range": {
+        "startLine": 10,
+        "startChar": 44,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "903b9da9_20c14fe0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:39:21Z",
+      "side": 1,
+      "message": "Thanks for adding the section references!",
+      "range": {
+        "startLine": 10,
+        "startChar": 45,
+        "endLine": 13,
+        "endChar": 67
+      },
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39aedcf3_7af0b44c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:39:21Z",
+      "side": 1,
+      "message": "Can we please try to stick to a single type of bracket. Currently we\u0027re mixing parentheses and square brackets throughout the commit message.",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "775de56f_6de4467e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:39:21Z",
+      "side": 1,
+      "message": "Can elaborate on what API you\u0027re referring to here? The patch subject claims we\u0027re just adding a field to a structure.",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bcbdf8b_4810897e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:39:21Z",
+      "side": 1,
+      "message": "As it stands, it\u0027s not until this last sentence that I have some idea what actually happens in this patch.\n\nThis information needs to be in the patch subject and the opening sentences of the description.",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67a7e5e5_fede204d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:39:21Z",
+      "side": 1,
+      "message": "Hi Pavithra, thanks for the rework so far. I have some further comments.",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcc5b9a0_5e4c1bfc",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:39:21Z",
+      "side": 1,
+      "message": "Is this use of an errno value consistent with other functions in the `pldm_entity_*` APIs?",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3bae74c_7f966614",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:39:21Z",
+      "side": 1,
+      "message": "This is starting to get a bit much. Can we please break out the conditions into intermediate variables?\n\n```\n   bool match_entity_container_id;\n   bool match_entity_instance_num;\n   bool match_type;\n   \n   match_type \u003d tree_node-\u003eentity.entity_type \u003d\u003d entity.entity_type;\n   match_entity_instance_num \u003d\n       tree_node-\u003eentity.entity_instance_num \u003d\u003d entity.entity_instance_num;\n   match_entity_container_id \u003d\n       tree_node-\u003eentity.entity_container_id \u003d\u003d entity.entity_container_id;\n   \n   if (match_type \u0026\u0026 match_entity_instance_num \u0026\u0026 match_entity_container_id) {\n      ...\n   }\n```",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ce2197d_9c5d3596",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 1546,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:39:21Z",
+      "side": 1,
+      "message": "It looks like there\u0027s a bit of a vertical alignment problem here. Can you please fix that?\n\nSeparately, I\u0027d prefer we don\u0027t have quite so many spaces before the leading comment on the left and the diagram.",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
