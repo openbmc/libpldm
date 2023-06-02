@@ -1,0 +1,198 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e03de3d_2e55b71f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T06:21:56Z",
+      "side": 1,
+      "message": "Again here, please prefix the patch subject with the affected subsystem. The subject might then look like:\n\n`pdr: Add APIs for creating and locating remote PDRs`",
+      "revId": "f1301d3e17666b285a39e55a2053b6eb1db8f075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a112807b_bc2c1a13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T06:21:56Z",
+      "side": 1,
+      "message": "I have some misgivings about the function naming and parameters still. But before that, I\u0027d like to see the two similar implementations unified. Once that\u0027s done we can address the problem of whether several boolean parameters are really what we need.\n\nI also think we must put some effort in to keep the unit tests maintainable. The current code makes it very difficult to keep track of what properties are being upheld",
+      "revId": "f1301d3e17666b285a39e55a2053b6eb1db8f075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92673a6e_8be579ef",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T06:21:56Z",
+      "side": 1,
+      "message": "Should we be updating the doxygen commentary for this function to indicate that the PDR it adds will be a local PDR?",
+      "revId": "f1301d3e17666b285a39e55a2053b6eb1db8f075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13cd6a2f_92f1c743",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T06:21:56Z",
+      "side": 1,
+      "message": "The immediate problem I have with the name of this function is that it suggests that if `is_remote` is false the PDR will not be added. As far as I\u0027m aware that\u0027s not the behaviour provided by the implementation.",
+      "revId": "f1301d3e17666b285a39e55a2053b6eb1db8f075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f161c3a_b256fe4c",
+        "filename": "src/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T06:21:56Z",
+      "side": 1,
+      "message": "This can be `const`?",
+      "range": {
+        "startLine": 986,
+        "startChar": 51,
+        "endLine": 986,
+        "endChar": 74
+      },
+      "revId": "f1301d3e17666b285a39e55a2053b6eb1db8f075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ca8597b_869be1f8",
+        "filename": "src/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T06:21:56Z",
+      "side": 1,
+      "message": "This can be `const`?",
+      "range": {
+        "startLine": 987,
+        "startChar": 9,
+        "endLine": 987,
+        "endChar": 28
+      },
+      "revId": "f1301d3e17666b285a39e55a2053b6eb1db8f075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4bf465d_b7a9492e",
+        "filename": "src/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T06:21:56Z",
+      "side": 1,
+      "message": "Can we please `assert(out !\u003d NULL \u0026\u0026 *out \u003d\u003d NULL)`?",
+      "revId": "f1301d3e17666b285a39e55a2053b6eb1db8f075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7669ab9_564fe72b",
+        "filename": "src/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T06:21:56Z",
+      "side": 1,
+      "message": "This condition be simplified to:\n\n```\nif (!is_remote || node-\u003eremote_container_id \u003d\u003d entity-\u003eentity_container_id) {\n    ...\n}\n```",
+      "range": {
+        "startLine": 994,
+        "startChar": 5,
+        "endLine": 996,
+        "endChar": 17
+      },
+      "revId": "f1301d3e17666b285a39e55a2053b6eb1db8f075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56e7f3e9_7aa3d530",
+        "filename": "src/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T06:21:56Z",
+      "side": 1,
+      "message": "For readability, please extract these tests into intermediate variables.",
+      "range": {
+        "startLine": 997,
+        "startChar": 6,
+        "endLine": 999,
+        "endChar": 34
+      },
+      "revId": "f1301d3e17666b285a39e55a2053b6eb1db8f075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8fcb3f4_0a00091d",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T06:21:56Z",
+      "side": 1,
+      "message": "Is this a minimal test? I really cannot tell what properties are meant to be upheld here, there\u0027s just too much going on.\n\nPlease try to write tests demonstrating each property being upheld as a separate, minimal unit test function.",
+      "revId": "f1301d3e17666b285a39e55a2053b6eb1db8f075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
