@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "792541f1_0f928a6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T05:51:13Z",
+      "side": 1,
+      "message": "Oh, another established pattern is to prefix the subject with the affected subsystem. So in this case it should be something like:\n\n`pdr: Introduce remote_container_id and associated APIs`",
+      "parentUuid": "a1106ff0_0a15f0a3",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "371bfd02_e763cc99",
         "filename": "/COMMIT_MSG",
         "patchSetId": 17
