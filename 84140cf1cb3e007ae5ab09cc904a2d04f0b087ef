@@ -1,0 +1,283 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "516a32b4_1bd436f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "The patch subject needs to identify the affected subsystems. This should be prefixed with `oem: ibm: pdr: `.\n\nBut further, *what* new APIs? Please try to be as specific as possible in the space available.",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52f51a29_9201a9d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "Again, we shouldn\u0027t be starting the description with \"This commit ...\" as it starts to explain the *what*, not the *why*. Why are we adding these APIs? Adding public APIs to a library is an expensive thing to do in terms of maintenance and thus needs more justification than what we currently have here.",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ece7a05_ca54cfd3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "Please be specific. *Which* IBM-specific operations? And why are they IBM-specific?",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cfb295f_4e3c8623",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "If you\u0027re using words like \"also\" in the commit message it tends to indicate that you should instead have two separate commits to deal with each individually.",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e318949a_1fdf823e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "Hi Pavithra,\n\nIf we\u0027re adding to the public API surface of the library the APIs really must come with unit tests. This should be doable as we\u0027re interacting with the PDR repository, which can be relatively easily synthesised (it\u0027s harder when we interact with e.g. MCTP transports and such, but certainly not impossible).\n\nHowever, further to that, it\u0027s not clear to me why we\u0027ve exposed some of these functions or why some of them must be OEM, and we have a another issue with range specification.\n\nOther comments are inline.",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e969ece1_3d3e2115",
+        "filename": "include/libpldm/oem/ibm/libpldm/pdr_oem_ibm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "This is an operation on a PDR repository. As such the symbol name should be prefixed with `pldm_pdr_*`",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee9b33fa_e08a0db1",
+        "filename": "include/libpldm/oem/ibm/libpldm/pdr_oem_ibm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "This doesn\u0027t look like it\u0027s anything that\u0027s IBM-specific. Why is it in an IBM OEM header?\n\nAlso the variable names should use snake_case, not camelCase.",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ae1cba_2b567af0",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "Why do we need an API for this in libpldm? Are we sure this isn\u0027t something that can be open-coded in the calling code? API maintenance isn\u0027t free.",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3612f8b3_2cd03205",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "See the comment on the symbol name in the header.",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf54c49_403aebf6",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "Why do we need the cast? Is the `data` member not `void *`? Do we have a strict-aliasing problem?",
+      "range": {
+        "startLine": 13,
+        "startChar": 29,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f982ea8c_c0eb85f2",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "`pldm_is_endpoint_range()` could just be a static function in this file such that we don\u0027t have to add to the public API, right?",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "012b6ea8_11e9949b",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "Why is this necessary? How can I be convinced we don\u0027t have an alignment violation here?",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6952ab6e_f82693c0",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "Is this cast necessary?",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feec3a06_741324a0",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "This is all getting very contorted due to the nesting, and is borderline unreadable. Can you please rearrange the code so it\u0027s not so deeply nested?",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c9538fe_4f267963",
+        "filename": "src/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-02T07:20:17Z",
+      "side": 1,
+      "message": "The evaluation of the `if` condition is a boolean value, just like `true` and `false` are booleans. We can just return the evaluation of the condition directly.\n\n```\nreturn record_handle \u003e\u003d first_record_handle \u0026\u0026 record_handle \u003c last_record_handle;\n```\n\nHowever, we again have a problem with ranges here, and by contrast to the previous case where the range was open when it should be closed, this one is half-open (when it should be closed). We must be consistent, or else users of these APIs are going to hate us.\n\nSee Rusty\u0027s API scale:\n\n1. [How Do I Make This Hard to Misuse?](https://ozlabs.org/~rusty/index.cgi/tech/2008-03-30.html)\n2. [What If I Don\u0027t Actually Like My Users?](https://ozlabs.org/~rusty/index.cgi/tech/2008-04-01.html)",
+      "range": {
+        "startLine": 1004,
+        "startChar": 1,
+        "endLine": 1008,
+        "endChar": 14
+      },
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
