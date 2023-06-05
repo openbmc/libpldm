@@ -7,13 +7,21 @@ libpldm_headers += files(
   'entity.h',
   'firmware_update.h',
   'fru.h',
+  'instance-id.h',
   'pdr.h',
   'platform.h',
   'pldm_types.h',
+  'requester/pldm.h',
   'state_set.h',
   'states.h',
+  'transport.h',
   'utils.h',
   )
+
+libpldm_transport_headers += files(
+  'transport/af-mctp.h',
+  'transport/mctp-demux.h'
+)
 
 if get_option('oem-ibm').enabled()
   libpldm_include_dir += include_directories('oem/ibm')
@@ -26,16 +34,3 @@ if get_option('oem-ibm').enabled()
     'oem/ibm/libpldm/state_set_oem_ibm.h'
   )
 endif
-
-if get_option('requester-api').enabled()
-   libpldm_headers += files(
-    'instance-id.h',
-    'requester/pldm.h',
-    'transport.h'
-    )
-   libpldm_transport_headers += files(
-    'transport/af-mctp.h',
-    'transport/mctp-demux.h'
-   )
-endif
-
