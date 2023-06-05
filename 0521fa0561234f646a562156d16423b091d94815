@@ -33,6 +33,24 @@
       "message": "Closer, but this is still `pldm_req_msg`, not `pldm_resp_msg` 😄\n\nYou\u0027ll sneak this patch past me one day.",
       "revId": "0521fa0561234f646a562156d16423b091d94815",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6fa1a27_fcbdc97d",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-05T04:57:19Z",
+      "side": 1,
+      "message": "😄 fixed.",
+      "parentUuid": "e41dcd08_5dbb865f",
+      "revId": "0521fa0561234f646a562156d16423b091d94815",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
