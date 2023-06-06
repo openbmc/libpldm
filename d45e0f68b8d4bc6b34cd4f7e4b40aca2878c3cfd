@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b7dd59c_688ddc3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-06T00:59:32Z",
+      "side": 1,
+      "message": "LGTM. Tested editing the function signature of a function marked with `LIBPLDM_API_STABLE` and one marked with `LIBPLDM_API_TESTING`. The first failed the build, second was ok.",
+      "revId": "d45e0f68b8d4bc6b34cd4f7e4b40aca2878c3cfd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
