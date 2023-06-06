@@ -4,6 +4,7 @@
 #include "container-of.h"
 #include "libpldm/pldm.h"
 #include "libpldm/transport.h"
+#include "socket.h"
 #include "transport.h"
 
 #include <errno.h>
@@ -24,6 +25,8 @@ struct pldm_transport_mctp_demux {
 	/* In the future this probably needs to move to a tid-eid-uuid/network
 	 * id mapping for multi mctp networks */
 	pldm_tid_t tid_eid_map[MCTP_MAX_NUM_EID];
+	int socket_send_buf_size;
+	int max_socket_send_buf_size;
 };
 
 #define transport_to_demux(ptr)                                                \
@@ -181,6 +184,17 @@ pldm_transport_mctp_demux_send(struct pldm_transport *t, pldm_tid_t tid,
 	msg.msg_iov = iov;
 	msg.msg_iovlen = sizeof(iov) / sizeof(iov[0]);
 
+	if (demux->socket_send_buf_size >= 0 &&
+	    (size_t)demux->socket_send_buf_size < req_msg_len) {
+		int buf_size = set_socket_send_buf(
+			demux->socket, demux->max_socket_send_buf_size,
+			demux->socket_send_buf_size, (int)req_msg_len);
+		if (buf_size <= -1) {
+			return PLDM_REQUESTER_SEND_FAIL;
+		}
+		demux->socket_send_buf_size = buf_size;
+	}
+
 	ssize_t rc = sendmsg(demux->socket, &msg, 0);
 	if (rc == -1) {
 		return PLDM_REQUESTER_SEND_FAIL;
@@ -211,6 +225,19 @@ int pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx)
 		free(demux);
 		return -1;
 	}
+
+	demux->max_socket_send_buf_size = get_max_buf_size();
+	if (demux->max_socket_send_buf_size == -1) {
+		free(demux);
+		return -1;
+	}
+
+	demux->socket_send_buf_size = get_socket_send_buf_size(demux->socket);
+	if (demux->socket_send_buf_size == -1) {
+		free(demux);
+		return -1;
+	}
+
 	*ctx = demux;
 	return 0;
 }
@@ -249,6 +276,19 @@ pldm_transport_mctp_demux_init_with_fd(int mctp_fd)
 		free(demux);
 		return NULL;
 	}
+
+	demux->max_socket_send_buf_size = get_max_buf_size();
+	if (demux->max_socket_send_buf_size == -1) {
+		free(demux);
+		return NULL;
+	}
+
+	demux->socket_send_buf_size = get_socket_send_buf_size(demux->socket);
+	if (demux->socket_send_buf_size == -1) {
+		free(demux);
+		return NULL;
+	}
+
 	return demux;
 }
 
