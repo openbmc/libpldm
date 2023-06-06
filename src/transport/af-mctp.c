@@ -3,6 +3,7 @@
 #include "container-of.h"
 #include "libpldm/pldm.h"
 #include "libpldm/transport.h"
+#include "socket.h"
 #include "transport.h"
 
 #include <errno.h>
@@ -20,6 +21,8 @@ struct pldm_transport_af_mctp {
 	struct pldm_transport transport;
 	int socket;
 	pldm_tid_t tid_eid_map[MCTP_MAX_NUM_EID];
+	int socket_send_buf_size;
+	int max_socket_send_buf_size;
 };
 
 #define transport_to_af_mctp(ptr)                                              \
@@ -114,6 +117,16 @@ static pldm_requester_rc_t pldm_transport_af_mctp_send(struct pldm_transport *t,
 	addr.smctp_type = MCTP_MSG_TYPE_PLDM;
 	addr.smctp_tag = MCTP_TAG_OWNER;
 
+	if (af_mctp->socket_send_buf_size  >= 0 && (size_t)af_mctp->socket_send_buf_size < req_msg_len) {
+		int buf_size = set_socket_send_buf(
+		    af_mctp->socket, af_mctp->max_socket_send_buf_size,
+		    af_mctp->socket_send_buf_size, req_msg_len);
+		if (buf_size <= -1) {
+			return PLDM_REQUESTER_SEND_FAIL;
+		}
+		af_mctp->socket_send_buf_size = buf_size;
+	}
+
 	ssize_t rc = sendto(af_mctp->socket, pldm_req_msg, req_msg_len, 0,
 			    (struct sockaddr *)&addr, sizeof(addr));
 	if (rc == -1) {
@@ -143,6 +156,20 @@ int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
 		free(af_mctp);
 		return -1;
 	}
+
+	af_mctp->max_socket_send_buf_size = get_max_buf_size();
+	if (af_mctp->max_socket_send_buf_size == -1) {
+		free(af_mctp);
+		return -1;
+	}
+
+	af_mctp->socket_send_buf_size =
+	    get_socket_send_buf_size(af_mctp->socket);
+	if (af_mctp->socket_send_buf_size == -1) {
+		free(af_mctp);
+		return -1;
+	}
+
 	*ctx = af_mctp;
 	return 0;
 }
