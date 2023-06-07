@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d6cbeeb_b506d586",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e96867b_51d58368",
+      "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "776790ff_f8ac7893",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-02T06:58:31Z",
       "side": 1,
       "message": "Generally if you\u0027re starting a sentence with \"This commit ...\" it indicates that you\u0027re explaining *what*, not *why*. We need the *why* in the commit message. Why would someone want to find the last record?",
+      "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fbbba67_23b5969b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "776790ff_f8ac7893",
       "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -58,6 +94,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc2a68ad_51332dfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b91107f4_fa198023",
+      "range": {
+        "startLine": 10,
+        "startChar": 38,
+        "endLine": 10,
+        "endChar": 62
+      },
+      "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae6f023a_0add9cd8",
@@ -75,6 +135,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3a411bb_d25d24c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae6f023a_0add9cd8",
+      "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93b9b751_49c64375",
@@ -88,6 +166,24 @@
       "writtenOn": "2023-06-02T06:58:31Z",
       "side": 1,
       "message": "`first` itself isn\u0027t a range, it\u0027s the first record handle value in the range. The documentation should state that it\u0027s value is a handle value.",
+      "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b291152f_db2ce349",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93b9b751_49c64375",
       "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -115,6 +211,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92e3f333_da9e72bb",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:20Z",
+      "side": 1,
+      "message": "[first, last] fits better I feel Andrew.",
+      "parentUuid": "d8c1d3ec_14fed2ef",
+      "range": {
+        "startLine": 163,
+        "startChar": 1,
+        "endLine": 164,
+        "endChar": 46
+      },
+      "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e373f448_795e0588",
@@ -128,6 +248,24 @@
       "writtenOn": "2023-06-02T06:58:31Z",
       "side": 1,
       "message": "Is this an IBM-specific value? If so it should not be defined in this file (`include/libpldm/platform.h`). At worst it should be defined in an OEM include. Ideally we\u0027d not define it in libpldm at all.",
+      "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee2bf07c_8e2c3ea4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2181,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e373f448_795e0588",
       "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -155,6 +293,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4b04572_14a6182e",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:20Z",
+      "side": 1,
+      "message": "since we are dereferencing the repo, the \u0027repo \u003d\u003d NULL\u0027 check should happen first right?.",
+      "parentUuid": "f7f77cfd_2bd23856",
+      "range": {
+        "startLine": 976,
+        "startChar": 1,
+        "endLine": 979,
+        "endChar": 35
+      },
+      "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "082b192d_423644ba",
@@ -168,6 +330,24 @@
       "writtenOn": "2023-06-02T06:58:31Z",
       "side": 1,
       "message": "Shouldn\u0027t we do this instead?\n\n```\nif (!curr) {\n    return NULL;\n}\nrecent_record_handle \u003d curr-\u003erecord_handle;\n```\n\nOr better yet, bail out before all the other assignments by just testing `repo-\u003efirst` on line 976 and moving all the assignments down.",
+      "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40702ae7_91798c22",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 980,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "082b192d_423644ba",
       "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -195,6 +375,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0cb3759_dfda8b64",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b8db4d62_232153a4",
+      "range": {
+        "startLine": 984,
+        "startChar": 1,
+        "endLine": 985,
+        "endChar": 37
+      },
+      "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87ba7839_c7b9e49f",
@@ -208,6 +412,24 @@
       "writtenOn": "2023-06-02T06:58:31Z",
       "side": 1,
       "message": "The loop doesn\u0027t contain a break, so it\u0027s implied that `curr \u003d\u003d NULL` here. Further, if we return early as per my suggestion on line 980, that also implies that `prev !\u003d NULL`. Which means we can eliminate this if-block and just do `return record` in place of both it and the `return NULL` on line 997.\n\nFurther, because we know `prev !\u003d NULL` it implies there\u0027s no actual reason to track `prev` anymore, as it doesn\u0027t factor into any of the tests in the loop. That gets us closer to the form where we could re-write it as a `for()` loop. We can also eliminate `recent_record_handle` by relying on `record` instead (the compiler will deal with the inefficiency through the optimiser, hopefully):\n\n```\npldm_pdr_record *record \u003d NULL;\npldm_pdr_record *curr;\n\nif (!repo) {\n    return NULL;\n}\n\nfor (curr \u003d repo-\u003efirst; curr; curr \u003d curr-\u003enext) {\n    if (first \u003e curr-\u003erecord_handle || last \u003c curr-\u003erecord_handle) {\n        continue;\n    }\n    if (!record || curr-\u003erecord_handle \u003e record-\u003erecord_handle) {\n        record \u003d curr;\n    }\n}\n\nreturn record;\n```",
+      "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c5531f9_157cab32",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87ba7839_c7b9e49f",
       "revId": "c224494e5705ef1fdf835f2adb68742de257507e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
