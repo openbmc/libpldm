@@ -418,6 +418,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa857c0e_2fe38673",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:15Z",
+      "side": 1,
+      "message": "This method is not fully a copy/paste of the pldm_entity_association_tree_add() method, there are changes made to the node based on the is_remote and update container_id value before the node is returned from the function.\nhere -\n1. https://gerrit.openbmc.org/c/openbmc/libpldm/+/63585/5..7/src/pdr.c#539 \n2. https://gerrit.openbmc.org/c/openbmc/libpldm/+/63585/5..7/src/pdr.c#544\n3. https://gerrit.openbmc.org/c/openbmc/libpldm/+/63585/5..7/src/pdr.c#591\n\nDo you have any suggestions on how this could be achieved?",
+      "parentUuid": "24e929b7_f767cc85",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fcaa8fe_93970ff5",
         "filename": "src/pdr.c",
         "patchSetId": 5
