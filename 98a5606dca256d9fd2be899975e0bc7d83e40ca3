@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e646bcf_1d28f76e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "368cec69_2092dd54",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1106ff0_0a15f0a3",
@@ -53,6 +71,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b41ade8_f7832727",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "792541f1_0f928a6a",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "371bfd02_e763cc99",
@@ -66,6 +102,30 @@
       "writtenOn": "2023-06-02T05:39:21Z",
       "side": 1,
       "message": "Please make sure the full stop goes after the end of the sentence (the sentence includes the reference in parentheses that currently follows the full stop). Also please make sure to have spaces where appropriate.",
+      "range": {
+        "startLine": 10,
+        "startChar": 44,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70e7397a_d98f25cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "371bfd02_e763cc99",
       "range": {
         "startLine": 10,
         "startChar": 44,
@@ -99,6 +159,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea58832f_672ba0b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "903b9da9_20c14fe0",
+      "range": {
+        "startLine": 10,
+        "startChar": 45,
+        "endLine": 13,
+        "endChar": 67
+      },
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39aedcf3_7af0b44c",
@@ -112,6 +196,24 @@
       "writtenOn": "2023-06-02T05:39:21Z",
       "side": 1,
       "message": "Can we please try to stick to a single type of bracket. Currently we\u0027re mixing parentheses and square brackets throughout the commit message.",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a95d8392_cf7c70dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39aedcf3_7af0b44c",
       "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -133,6 +235,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c703bfcb_11eb11aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "775de56f_6de4467e",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bcbdf8b_4810897e",
@@ -146,6 +266,24 @@
       "writtenOn": "2023-06-02T05:39:21Z",
       "side": 1,
       "message": "As it stands, it\u0027s not until this last sentence that I have some idea what actually happens in this patch.\n\nThis information needs to be in the patch subject and the opening sentences of the description.",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd667732_cad105e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bcbdf8b_4810897e",
       "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -184,6 +322,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efd81fcb_179febcc",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:05Z",
+      "side": 1,
+      "message": "I am not sure about the other APIs as many of them make use of assert.",
+      "parentUuid": "fcc5b9a0_5e4c1bfc",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3bae74c_7f966614",
@@ -197,6 +353,24 @@
       "writtenOn": "2023-06-02T05:39:21Z",
       "side": 1,
       "message": "This is starting to get a bit much. Can we please break out the conditions into intermediate variables?\n\n```\n   bool match_entity_container_id;\n   bool match_entity_instance_num;\n   bool match_type;\n   \n   match_type \u003d tree_node-\u003eentity.entity_type \u003d\u003d entity.entity_type;\n   match_entity_instance_num \u003d\n       tree_node-\u003eentity.entity_instance_num \u003d\u003d entity.entity_instance_num;\n   match_entity_container_id \u003d\n       tree_node-\u003eentity.entity_container_id \u003d\u003d entity.entity_container_id;\n   \n   if (match_type \u0026\u0026 match_entity_instance_num \u0026\u0026 match_entity_container_id) {\n      ...\n   }\n```",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65d6e989_8cd36a4b",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3bae74c_7f966614",
       "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -218,6 +392,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84afe555_e39e99ae",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 1546,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ce2197d_9c5d3596",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "676a656a_d19ff8a5",
@@ -231,6 +423,24 @@
       "writtenOn": "2023-06-02T06:19:00Z",
       "side": 1,
       "message": "Is this really a minimal unit test? Is it testing exactly one property is being upheld? It doesn\u0027t look like it from my brief inspection.\n\nPlease write unit tests such that they exercise a single property per test function and are a minimal test case for that property. Otherwise the implementations become an unwieldy mess and are next to impossible to maintain.",
+      "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "813e9b2b_925efa0a",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 1606,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:05Z",
+      "side": 1,
+      "message": "This is a test case where we have a minimal hierarchy of the system represented. It represents the parent node and children node concept. I have moved this test case to https://gerrit.openbmc.org/c/openbmc/libpldm/+/63585 as we are making changes there.",
+      "parentUuid": "676a656a_d19ff8a5",
       "revId": "98a5606dca256d9fd2be899975e0bc7d83e40ca3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
