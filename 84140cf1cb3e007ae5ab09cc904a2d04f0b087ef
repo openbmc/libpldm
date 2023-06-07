@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef9c2de4_745ed065",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "516a32b4_1bd436f9",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52f51a29_9201a9d0",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-02T07:20:17Z",
       "side": 1,
       "message": "Again, we shouldn\u0027t be starting the description with \"This commit ...\" as it starts to explain the *what*, not the *why*. Why are we adding these APIs? Adding public APIs to a library is an expensive thing to do in terms of maintenance and thus needs more justification than what we currently have here.",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c6464b_1dfb0d67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "52f51a29_9201a9d0",
       "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcb6995d_b75d09e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ece7a05_ca54cfd3",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cfb295f_4e3c8623",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-06-02T07:20:17Z",
       "side": 1,
       "message": "If you\u0027re using words like \"also\" in the commit message it tends to indicate that you should instead have two separate commits to deal with each individually.",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b74a731c_b62d9bf2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1cfb295f_4e3c8623",
       "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -103,6 +175,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dcafdba_3e8ef0e9",
+        "filename": "include/libpldm/oem/ibm/libpldm/pdr_oem_ibm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e969ece1_3d3e2115",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee9b33fa_e08a0db1",
@@ -116,6 +206,24 @@
       "writtenOn": "2023-06-02T07:20:17Z",
       "side": 1,
       "message": "This doesn\u0027t look like it\u0027s anything that\u0027s IBM-specific. Why is it in an IBM OEM header?\n\nAlso the variable names should use snake_case, not camelCase.",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebfc0b43_519c7c06",
+        "filename": "include/libpldm/oem/ibm/libpldm/pdr_oem_ibm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "This API will not be of any use if it\u0027s in a generic path, this API was added during IBM specific use case ( SBE error handling support). What do you suggest Andrew, should I move it to the generic path ?",
+      "parentUuid": "ee9b33fa_e08a0db1",
       "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -137,6 +245,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f291239_6974cd4a",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "Ack, I have moved this API to be a static function in the oem-ibm path.",
+      "parentUuid": "81ae1cba_2b567af0",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3612f8b3_2cd03205",
@@ -150,6 +276,24 @@
       "writtenOn": "2023-06-02T07:20:17Z",
       "side": 1,
       "message": "See the comment on the symbol name in the header.",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff062df0_35832bea",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3612f8b3_2cd03205",
       "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -177,6 +321,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6207c79d_7d6547aa",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4cf54c49_403aebf6",
+      "range": {
+        "startLine": 13,
+        "startChar": 29,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f982ea8c_c0eb85f2",
@@ -194,6 +362,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a883cd9_2887c8f5",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "yes, I did the change.",
+      "parentUuid": "f982ea8c_c0eb85f2",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "012b6ea8_11e9949b",
@@ -207,6 +393,30 @@
       "writtenOn": "2023-06-02T07:20:17Z",
       "side": 1,
       "message": "Why is this necessary? How can I be convinced we don\u0027t have an alignment violation here?",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "724553e4_422c104c",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "typecasting the pdr to this structure: https://github.com/openbmc/libpldm/blob/main/include/libpldm/platform.h#L502 with the additional pldm_hdr structure - https://github.com/openbmc/libpldm/blob/main/include/libpldm/platform.h#L454",
+      "parentUuid": "012b6ea8_11e9949b",
       "range": {
         "startLine": 20,
         "startChar": 9,
@@ -240,6 +450,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "838afe41_fa931f86",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6952ab6e_f82693c0",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "feec3a06_741324a0",
@@ -257,6 +491,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "452ea50b_2e7a97a5",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feec3a06_741324a0",
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c9538fe_4f267963",
@@ -270,6 +522,30 @@
       "writtenOn": "2023-06-02T07:20:17Z",
       "side": 1,
       "message": "The evaluation of the `if` condition is a boolean value, just like `true` and `false` are booleans. We can just return the evaluation of the condition directly.\n\n```\nreturn record_handle \u003e\u003d first_record_handle \u0026\u0026 record_handle \u003c last_record_handle;\n```\n\nHowever, we again have a problem with ranges here, and by contrast to the previous case where the range was open when it should be closed, this one is half-open (when it should be closed). We must be consistent, or else users of these APIs are going to hate us.\n\nSee Rusty\u0027s API scale:\n\n1. [How Do I Make This Hard to Misuse?](https://ozlabs.org/~rusty/index.cgi/tech/2008-03-30.html)\n2. [What If I Don\u0027t Actually Like My Users?](https://ozlabs.org/~rusty/index.cgi/tech/2008-04-01.html)",
+      "range": {
+        "startLine": 1004,
+        "startChar": 1,
+        "endLine": 1008,
+        "endChar": 14
+      },
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28ac255c_e21b2cd5",
+        "filename": "src/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-07T09:50:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7c9538fe_4f267963",
       "range": {
         "startLine": 1004,
         "startChar": 1,
