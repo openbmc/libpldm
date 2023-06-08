@@ -345,6 +345,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45cd5804_84988f6a",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-08T07:11:55Z",
+      "side": 1,
+      "message": "@Andrew, I made a mistake here the data member is not `void *` it\u0027s a `uint8_t *` so we need a cast.",
+      "parentUuid": "6207c79d_7d6547aa",
+      "range": {
+        "startLine": 13,
+        "startChar": 29,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f982ea8c_c0eb85f2",
