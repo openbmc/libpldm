@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0897ecae_f621add5",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-08T09:40:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "28617e70_47af4630",
+      "revId": "6e21013e290e0bdd2faea818347be74dd6fcb90e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95eafa7e_f3eec3a1",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-08T02:47:33Z",
       "side": 1,
       "message": "Did I miss this one? If so, can you please add this annotation in a separate patch.",
+      "revId": "6e21013e290e0bdd2faea818347be74dd6fcb90e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf47cd23_91d6dfc3",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-08T09:40:43Z",
+      "side": 1,
+      "message": "No, Andrew, it\u0027s already there - https://github.com/openbmc/libpldm/blob/main/src/pdr.c#L397, not sure why it came in my patchset.",
+      "parentUuid": "95eafa7e_f3eec3a1",
       "revId": "6e21013e290e0bdd2faea818347be74dd6fcb90e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
