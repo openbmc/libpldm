@@ -20,10 +20,12 @@ Change categories:
 ### Added
 
 1. Add encode/decode pldmMessagePollEvent data
+2. README: Add a section on working with libpldm
 
 ### Changed
 
 1. include: Move installed transport.h under libpldm/
+2. libpldm: Explicit deprecated, stable and testing ABI classes
 
 ### Fixed
 
