@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d750bad0_f06d1245",
+        "filename": "src/pdr.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-08T23:50:51Z",
+      "side": 1,
+      "message": "Nitpick: can you please put the declarations at the top of the function so we\u0027re not mixing declarations and code?",
+      "revId": "daa07024ec996a4e5792dd08eb66dabc12f6acf3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
