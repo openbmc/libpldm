@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f1f1b0f_b94ad250",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-08T02:57:44Z",
+      "side": 1,
+      "message": "Hi Pavithra, I\u0027ve marked this as -1 because must use `LIBPLDM_ABI_TESTING` for now, and not `LIBPLDM_ABI_STABLE`.",
+      "revId": "08db6b5477573a58783b1018b468acb4a531ef54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50501ca3_f04400db",
+        "filename": "src/pdr.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-08T02:57:44Z",
+      "side": 1,
+      "message": "This must be `LIBPLDM_ABI_TESTING`. I acknowledge that how to choose an annotation wasn\u0027t documented anywhere, but I\u0027ve set about rectifying that now:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/64074",
+      "revId": "08db6b5477573a58783b1018b468acb4a531ef54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb67385_bea76bdb",
+        "filename": "src/pdr.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-08T02:57:44Z",
+      "side": 1,
+      "message": "This must be `LIBPLDM_ABI_TESTING`, as above.",
+      "revId": "08db6b5477573a58783b1018b468acb4a531ef54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
