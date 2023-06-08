@@ -454,6 +454,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed227f33_5f10be2a",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-08T09:40:51Z",
+      "side": 1,
+      "message": "This cannot be done, as we get the boolean value arguments from the caller APIs. If one of the arguments (say is_update_conatainer_id) is true we need to update the container id given by the caller which is not available via this `pldm_entity_association_tree_add()` method.\n\nDo you have any other suggestions:)",
+      "parentUuid": "e199777f_d283b838",
+      "revId": "e6170364728b50e35d8fd98ad4ad9ca19f6ee26a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fcaa8fe_93970ff5",
         "filename": "src/pdr.c",
         "patchSetId": 5

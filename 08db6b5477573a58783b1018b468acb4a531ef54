@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b74aa47_26330568",
+        "filename": "src/pdr.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-08T09:40:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "50501ca3_f04400db",
+      "revId": "08db6b5477573a58783b1018b468acb4a531ef54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fb67385_bea76bdb",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-08T02:57:44Z",
       "side": 1,
       "message": "This must be `LIBPLDM_ABI_TESTING`, as above.",
+      "revId": "08db6b5477573a58783b1018b468acb4a531ef54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a4a079e_ee6cd254",
+        "filename": "src/pdr.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-08T09:40:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fb67385_bea76bdb",
       "revId": "08db6b5477573a58783b1018b468acb4a531ef54",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
