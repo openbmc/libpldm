@@ -159,6 +159,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7d817f1_dafb4c1c",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-09T05:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a55deb2c_0f2406c1",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbb98634_413f2021",
@@ -190,6 +208,24 @@
       "side": 1,
       "message": "first \"if\" check has an extra condition and hence we are doing it.",
       "parentUuid": "cbb98634_413f2021",
+      "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71e122a3_83ff0579",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-09T05:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d02c07f_c62b66a9",
       "revId": "f183c258a720cfc8a50e535bfbbcb93144df8496",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
