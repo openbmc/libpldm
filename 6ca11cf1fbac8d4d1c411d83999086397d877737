@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cb44584_ab381d53",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-09T03:13:17Z",
+      "side": 1,
+      "message": "Given that we have socket-specific APIs that we share between `af-mctp` and `mctp-demux`, how do you feel about instead defining a `struct pldm_socket_sndbuf` that contains these two properties in `src/transport/socket.h` and then using that struct here instead?",
+      "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5eb1164_cb7ad400",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-09T03:13:17Z",
+      "side": 1,
+      "message": "See the comment on `af-mctp` about `struct pldm_socket_sndbuf`",
+      "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fc97432_d149b5cb",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-09T03:13:17Z",
+      "side": 1,
+      "message": "SOCKET_H seems like something that\u0027s likely to clash with something else. The algorithm I use is to prefix the transposed header path with the library name, so `LIBPLDM_SRC_TRANSPORT_SOCKET_H`",
+      "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b49409a_7c839320",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-09T03:13:17Z",
+      "side": 1,
+      "message": "Given this is an internal header, is the `__cplusplus` guard necessary?",
+      "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e47517d6_2b645fb9",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-09T03:13:17Z",
+      "side": 1,
+      "message": "So I ended up writing a blog post on how I go about naming things, as I think it\u0027s relevant to how we name these functions:\n\nhttps://amboar.github.io/notes/2023/06/09/naming-functions-in-c.html\n\nIn that light, we\u0027re dealing with sockets, and we\u0027re in libpldm. So I think we should try to name these functions using the strategies outlined in the blog post:\n\n```\nint pldm_socket_sndbuf_init(struct pldm_socket_sndbuf *ctx);\nint pldm_socket_sndbuf_set(struct pldm_socket_sndbuf *ctx, ...);\nint pldm_socket_sndbuf_get(struct pldm_socket_sndbuf *ctx, ...);\n```\n\nIn this case we can have `pldm_socket_sndbuf_init()` set up the maximum buffer size.",
+      "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
