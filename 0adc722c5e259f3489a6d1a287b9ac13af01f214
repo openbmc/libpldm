@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23f5c8cd_4ee1b73d",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-09T09:51:50Z",
+      "side": 1,
+      "message": "When this definition was in pdr.c, I faced this error\n`openbmc/libpldm: ../src/oem/ibm/pdr.c:22:56: error: invalid use of incomplete typedef \u0027pldm_pdr_record\u0027\nopenbmc/libpldm:    22 | const struct pldm_pdr_hdr *hdr \u003d record-\u003edata;`\n\nBut if we could move this method -https://gerrit.openbmc.org/c/openbmc/libpldm/+/63615/16/src/oem/ibm/pdr.c#12\nin the generic path, then I can revert the exposing of structures in public header file.",
+      "parentUuid": "49f4498c_6dfbfbe2",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81344572_34a06fb7",
         "filename": "src/oem/ibm/pdr.c",
         "patchSetId": 16
@@ -65,6 +83,40 @@
       "writtenOn": "2023-06-09T05:48:51Z",
       "side": 1,
       "message": "I\u0027ve rewritten the loop using equivalent logic to un-nest the code as I asked earlier.\n\nI\u0027ve added TODO notes throughout this function on things that you must address before we merge this code.",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2341d43_30e8c3bd",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-09T09:51:50Z",
+      "side": 1,
+      "message": "we have been using the same type of casting in multiple places - https://github.com/openbmc/libpldm/blob/main/src/pdr.c#L216, https://github.com/openbmc/libpldm/blob/main/src/pdr.c#L91 and this structure was defined long back. I am not sure how can we demonstrate if it is of pldm_pdr_header type.",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a57a8e3_3a5aebc0",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-09T09:51:50Z",
+      "side": 1,
+      "message": "In x86 structures will be padded to 4-byte alignment. I didn\u0027t follow your comment.",
       "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
