@@ -26,6 +26,16 @@ Change categories:
 
 1. include: Move installed transport.h under libpldm/
 2. libpldm: Explicit deprecated, stable and testing ABI classes
+3. meson: Reduce strength of oem-ibm requirements from enabled to allowed
+
+   The `oem-ibm` feature is now enabled by the default meson configuration, for
+   CI purposes. `oem-ibm` is still disabled by default in the `libpldm` bitbake
+   recipe:
+
+   https://github.com/openbmc/openbmc/blob/master/meta-phosphor/recipes-phosphor/libpldm/libpldm_git.bb#L10
+
+   To disable `oem-ibm` in your development builds, pass `-Doem-ibm=disabled`
+   when invoking `meson setup`
 
 ### Fixed
 
