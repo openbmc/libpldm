@@ -59,6 +59,18 @@ static int pldm_transport_af_mctp_get_eid(struct pldm_transport_af_mctp *ctx,
 	return -1;
 }
 
+static int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
+					  pldm_tid_t *tid, mctp_eid_t eid)
+{
+	/*if (eid > MCTP_MAX_NUM_EID) {
+		return -1;
+	} will always be in range */
+	if (ctx->tid_eid_map[eid] != 0) {
+		*tid = ctx->tid_eid_map[eid];
+	}
+	return 0;
+}
+
 LIBPLDM_ABI_TESTING
 int pldm_transport_af_mctp_map_tid(struct pldm_transport_af_mctp *ctx,
 				   pldm_tid_t tid, mctp_eid_t eid)
@@ -79,28 +91,43 @@ int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
 }
 
 static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
-						       pldm_tid_t tid,
+						       pldm_tid_t *tid,
 						       void **pldm_resp_msg,
 						       size_t *resp_msg_len)
 {
 	struct pldm_transport_af_mctp *af_mctp = transport_to_af_mctp(t);
 	mctp_eid_t eid = 0;
-	int rc = pldm_transport_af_mctp_get_eid(af_mctp, tid, &eid);
-	if (rc) {
-		return PLDM_REQUESTER_RECV_FAIL;
-	}
+	struct sockaddr_mctp addr = {0};
+	socklen_t addrlen = sizeof(addr);
 
 	ssize_t length = recv(af_mctp->socket, NULL, 0, MSG_PEEK | MSG_TRUNC);
 	if (length <= 0) {
 		return PLDM_REQUESTER_RECV_FAIL;
 	}
 	*pldm_resp_msg = malloc(length);
-	length = recv(af_mctp->socket, *pldm_resp_msg, length, MSG_TRUNC);
+	length = recvfrom(af_mctp->socket, *pldm_resp_msg, length, MSG_TRUNC,
+			  (struct sockaddr *)&addr, &addrlen);
+
 	if (length < (ssize_t)sizeof(struct pldm_msg_hdr)) {
 		free(*pldm_resp_msg);
 		return PLDM_REQUESTER_INVALID_RECV_LEN;
 	}
 	*resp_msg_len = length;
+
+	/* TODO untested */
+	eid = addr.smctp_addr.s_addr;
+	int rc = pldm_transport_af_mctp_get_tid(af_mctp, tid, eid);
+	if (rc) {
+		// Ideally we would get the actual TID, until that
+		// infrastructure is in place, do a 1-1 mapping of EID to TID.
+		rc = pldm_transport_af_mctp_map_tid(af_mctp, (pldm_tid_t)eid,
+						    eid);
+		if (rc) {
+			return PLDM_REQUESTER_RECV_FAIL;
+		}
+		*tid = (pldm_tid_t)eid;
+	}
+
 	return PLDM_REQUESTER_SUCCESS;
 }
 

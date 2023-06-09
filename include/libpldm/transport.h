@@ -79,7 +79,7 @@ pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
  *
  */
 pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
-					    pldm_tid_t tid,
+					    pldm_tid_t *tid,
 					    void **pldm_resp_msg,
 					    size_t *resp_msg_len);
 

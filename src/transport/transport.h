@@ -18,7 +18,7 @@ struct pldm_transport {
 	const char *name;
 	uint8_t version;
 	pldm_requester_rc_t (*recv)(struct pldm_transport *transport,
-				    pldm_tid_t tid, void **pldm_resp_msg,
+				    pldm_tid_t *tid, void **pldm_resp_msg,
 				    size_t *resp_msg_len);
 	pldm_requester_rc_t (*send)(struct pldm_transport *transport,
 				    pldm_tid_t tid, const void *pldm_req_msg,
