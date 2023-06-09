@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd195f5b_57e06192",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-09T05:48:51Z",
+      "side": 1,
+      "message": "But is there any reason why anyone else can\u0027t use it? I don\u0027t know why we have to constrain it this way. If people don\u0027t care about it they just don\u0027t use it. It\u0027s much more hassle to maintain stuff that\u0027s under the OEM directory.",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e562dad1_4ea72baf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-09T05:48:51Z",
+      "side": 1,
+      "message": "There are some problems highlighted in the comments but also in TODO notes in the code. Please address both.",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49f4498c_6dfbfbe2",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-09T05:48:51Z",
+      "side": 1,
+      "message": "Exposing this in the public header still has not been properly justified.",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81344572_34a06fb7",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-09T05:48:51Z",
+      "side": 1,
+      "message": "I\u0027ve rewritten the loop using equivalent logic to un-nest the code as I asked earlier.\n\nI\u0027ve added TODO notes throughout this function on things that you must address before we merge this code.",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
