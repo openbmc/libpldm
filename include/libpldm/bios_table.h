@@ -399,7 +399,8 @@ uint16_t pldm_bios_table_attr_entry_string_decode_def_string_length(
  * validity of the parameters
  *  @param[in] entry - Pointer to bios attribute table entry
  *  @param[out] def_string_length Pointer to length of default string in bytes
- *  @return pldm_completion_codes
+ *  @return PLDM_SUCCESS on success, otherwise PLDM_ERROR_INVALID_DATA if entry or def_string_length
+ *          are NULL, or entry is not of type PLDM_BIOS_STRING
  */
 int pldm_bios_table_attr_entry_string_decode_def_string_length_check(
 	const struct pldm_bios_attr_table_entry *entry,
