@@ -43,6 +43,23 @@ Change categories:
 4. bios_table: Relax pldm_bios_table_string_entry_decode_string_check()
 5. bios_table: Relax pldm_bios_table_attr_entry_enum_decode_pv_hdls_check()
 
+### Deprecated
+
+1. bios_table: Deprecate APIs with arguments sanitized using assert()
+
+   C provides enough foot-guns without us encoding them into library APIs.
+   Specifically, deprecate the following in favour of their `*_check()` variants
+   which ensure assertions won't fail or otherwise invoke UB:
+
+   - pldm_bios_table_string_entry_encode()
+   - pldm_bios_table_string_entry_decode_string()
+   - pldm_bios_table_attr_entry_enum_encode()
+   - pldm_bios_table_attr_entry_enum_decode_pv_num()
+   - pldm_bios_table_attr_entry_enum_decode_def_num()
+   - pldm_bios_table_attr_entry_enum_decode_pv_hdls()
+   - pldm_bios_table_attr_entry_string_encode()
+   - pldm_bios_table_attr_entry_string_decode_def_string_length()
+
 ### Removed
 
 1. libpldm: Remove the requester-api option

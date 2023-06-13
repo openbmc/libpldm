@@ -51,7 +51,7 @@ size_t pldm_bios_table_string_entry_encode_length(uint16_t string_length)
 	       MEMBER_SIZE(pldm_bios_string_table_entry, name) + string_length;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 void pldm_bios_table_string_entry_encode(void *entry, size_t entry_length,
 					 const char *str, uint16_t str_length)
 {
@@ -94,7 +94,7 @@ uint16_t pldm_bios_table_string_entry_decode_string_length(
 	return le16toh(entry->string_length);
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 uint16_t pldm_bios_table_string_entry_decode_string(
 	const struct pldm_bios_string_table_entry *entry, char *buffer,
 	size_t size)
@@ -178,7 +178,7 @@ size_t pldm_bios_table_attr_entry_enum_encode_length(uint8_t pv_num,
 	       def_num;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 void pldm_bios_table_attr_entry_enum_encode(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_enum_info *info)
@@ -225,7 +225,7 @@ int pldm_bios_table_attr_entry_enum_encode_check(
 			return PLDM_ERROR_INVALID_DATA;                        \
 	} while (0)
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 uint8_t pldm_bios_table_attr_entry_enum_decode_pv_num(
 	const struct pldm_bios_attr_table_entry *entry)
 {
@@ -243,7 +243,7 @@ int pldm_bios_table_attr_entry_enum_decode_pv_num_check(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 uint8_t pldm_bios_table_attr_entry_enum_decode_def_num(
 	const struct pldm_bios_attr_table_entry *entry)
 {
@@ -263,7 +263,7 @@ int pldm_bios_table_attr_entry_enum_decode_def_num_check(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 uint8_t pldm_bios_table_attr_entry_enum_decode_pv_hdls(
 	const struct pldm_bios_attr_table_entry *entry, uint16_t *pv_hdls,
 	uint8_t pv_num)
@@ -334,7 +334,7 @@ size_t pldm_bios_table_attr_entry_string_encode_length(uint16_t def_str_len)
 	       def_str_len;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 void pldm_bios_table_attr_entry_string_encode(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_string_info *info)
@@ -414,7 +414,7 @@ int pldm_bios_table_attr_entry_string_encode_check(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 uint16_t pldm_bios_table_attr_entry_string_decode_def_string_length(
 	const struct pldm_bios_attr_table_entry *entry)
 {
