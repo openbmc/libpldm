@@ -252,7 +252,10 @@ void pldm_bios_table_attr_entry_enum_encode(
  *  @param[in] entry_length - Length of the buffer to create an entry
  *  @param[in] info - Pointer to an auxiliary structure @ref
  * pldm_bios_table_attr_entry_enum_info
- *  @return pldm_completion_codes
+ *  @return PLDM_SUCCESS on success, otherwise PLDM_ERROR_INVALID_DATA if entry or info are NULL, or
+ *          PLDM_ERROR_INVALID_LENGTH if entry_length is insufficient to encode info. An appropriate
+ *          value for entry_length can be determined using @ref
+ *          pldm_bios_table_attr_entry_enum_encode_length.
  */
 int pldm_bios_table_attr_entry_enum_encode_check(
 	void *entry, size_t entry_length,
