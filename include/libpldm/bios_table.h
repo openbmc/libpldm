@@ -99,11 +99,15 @@ void pldm_bios_table_string_entry_encode(void *entry, size_t entry_length,
 
 /** @brief Create an entry of BIOS String Table and check the validity of the
  * parameters
+ *
  *  @param[out] entry - Pointer to a buffer to create an entry
  *  @param[in] entry_length - Length of the buffer to create an entry
  *  @param[in] str - String itself
  *  @param[in] str_length - Length of the string
- *  @return pldm_completion_codes
+ *  @return PLDM_SUCCESS on success, PLDM_ERROR_INVALID_DATA if entry or str are NULL, or
+ *          PLDM_ERROR_INVALID_LENGTH if entry_length is insufficient for encoding str. An
+ *          appropriate value for entry_length can be determined using
+ *          @ref pldm_bios_table_string_entry_encode_length
  */
 int pldm_bios_table_string_entry_encode_check(void *entry, size_t entry_length,
 					      const char *str,
