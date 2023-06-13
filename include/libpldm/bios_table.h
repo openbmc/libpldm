@@ -286,7 +286,8 @@ uint8_t pldm_bios_table_attr_entry_enum_decode_def_num(
  * validity of the parameters
  *  @param[in] entry - Pointer to bios attribute table entry
  *  @param[out] def_num - Pointer to total number of default values
- *  @return pldm_completion_codes
+ *  @return PLDM_SUCCESS on success, otherwise PLDM_ERROR_INVALID_DATA if entry or def_num are NULL,
+ *          or entry is not of type PLDM_BIOS_ENUMERATION.
  */
 int pldm_bios_table_attr_entry_enum_decode_def_num_check(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *def_num);
