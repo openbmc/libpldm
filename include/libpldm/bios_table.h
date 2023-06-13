@@ -309,7 +309,10 @@ uint8_t pldm_bios_table_attr_entry_enum_decode_pv_hdls(
  * PossibleValuesStringHandles
  *  @param[in] pv_num - Number of PossibleValuesStringHandles the buffer can
  * store
- *  @return Number of PossibleValuesStringHandles decoded
+ *  @return PLDM_SUCCESS on success, otherwise PLDM_ERROR_INVALID_DATA if entry or pv_hdls are NULL,
+ *          or entry is not of type PLDM_BIOS_ENUMERATION, or the number of possible values is not
+ *          equal to pv_num. An appropriate value for pv_num can be determined using @ref
+ *          pldm_bios_table_attr_entry_enum_decode_pv_num_check
  */
 int pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
 	const struct pldm_bios_attr_table_entry *entry, uint16_t *pv_hdls,
