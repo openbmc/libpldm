@@ -24,6 +24,8 @@ tests = [
   'libpldm_pdr_test',
   'libpldm_firmware_update_test',
   'msgbuf',
+  'requester/base_requester_test',
+  'libpldm_rde_test'
 ]
 
 if get_option('oem-ibm').allowed()
