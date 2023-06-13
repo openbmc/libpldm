@@ -285,7 +285,7 @@ int pldm_bios_table_attr_entry_enum_decode_def_num_check(
 
 /** @brief Get possible values string handles
  *  @param[in] entry - Pointer to bios attribute table entry
- *  @param[out] pv_hdls - Pointer to a buffer to stroe
+ *  @param[out] pv_hdls - Pointer to a buffer to store
  * PossibleValuesStringHandles
  *  @param[in] pv_num - Number of PossibleValuesStringHandles expected
  *  @return pldm_completion_codes
@@ -297,10 +297,10 @@ uint8_t pldm_bios_table_attr_entry_enum_decode_pv_hdls(
 /** @brief Get possible values string handles and check the validity of the
  * parameters
  *  @param[in] entry - Pointer to bios attribute table entry
- *  @param[out] pv_hdls - Pointer to a buffer to stroe
+ *  @param[out] pv_hdls - Pointer to a buffer to store
  * PossibleValuesStringHandles
  *  @param[in] pv_num - Number of PossibleValuesStringHandles the buffer can
- * stroe
+ * store
  *  @return Number of PossibleValuesStringHandles decoded
  */
 int pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
