@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8092f4ad_52166ac5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-13T07:43:22Z",
+      "side": 1,
+      "message": "There is no particular reason for people not to use this API. Since we added this API as part of our use case and it had a range check added, we had written it in the oem-ibm path. This API may not be very much useful for others is what we feel 😊. Will make the change as per your suggestion Andrew.",
+      "parentUuid": "fd195f5b_57e06192",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e562dad1_4ea72baf",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 16
@@ -122,6 +140,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ccb2d49_e4644e5c",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-13T07:43:22Z",
+      "side": 1,
+      "message": "sure Andrew",
+      "parentUuid": "980d65c8_30e28b56",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a57a8e3_3a5aebc0",
@@ -153,6 +189,24 @@
       "side": 1,
       "message": "As it turns out we can disregard the TODO because the type of `pdr` is `struct pldm_pdr_entity_association`, which is specified with `__attribute__((packed))`.\n\nBut that\u0027s nothing to do with x86, and there\u0027s shouldn\u0027t be anything in the x86 ABI that states that structures are always 4-byte aligned. It\u0027s not spelled out directly, but generally structs are aligned to the member with the strongest alignment requirements. From the [C17 draft standard (N2176)](https://files.lhmouse.com/standards/ISO%20C%20N2176.pdf), Section 6.2.8 paragraph 2:\n\n\u003e A fundamental alignment is a valid alignment less than or equal to `_Alignof (max_align_t)`. Fundamental alignments shall be supported by the implementation for objects of all storage durations. The alignment requirements of the following types shall be fundamental alignments:\n\u003e\n\u003e ...\n\u003e\n\u003e — all structure or union types all of whose elements have types with fundamental alignment requirements and none of whose elements have an alignment specifier specifying an alignment that is not a fundamental alignment.\n\nAnd later in paragraph 5:\n\n\u003e Alignments have an order from weaker to stronger or stricter alignments. Stricter alignments have larger alignment values. An address that satisfies an alignment requirement also satisfies any weaker valid alignment requirement.\n\nIn 6.7.2.1 paragraph 14 states:\n\n\u003e Each non-bit-field member of a structure or union object is aligned in an implementation-defined manner appropriate to its type.\n\nA less legalese overview of this is here:\n\nhttp://www.catb.org/esr/structure-packing/#_structure_alignment_and_padding\n\nAnd to make it concrete we can consult the platform ABIs, which specify the fundamental alignments that are supported and their impact on aggregates. Here are a couple:\n\n* [x86_64 psABI](https://gitlab.com/x86-psABIs/x86-64-ABI)\n\n  Aggregates and Unions\n  Structures and unions assume the alignment of their most strictly aligned component. Each member is assigned to the lowest available offset with the appropriate alignment. The size of any object is always a multiple of the object‘s alignment.\n  An array uses the same alignment as its elements, except that a local or global array\nvariable of length at least 16 bytes or a C99 variable-length array variable always has\nalignment of at least 16 bytes.\n  Structure and union objects can require padding to meet size and alignment constraints.\n  The contents of any padding is undefined.\n  \n* [AARCH32 ABI](https://github.com/ARM-software/abi-aa/blob/2982a9f3b512a5bfdc9e3fea5d3b298f9165c36b/aapcs32/aapcs32.rst)\n\n  5.3.1   Aggregates\n\n    The alignment of an aggregate shall be the alignment of its most-aligned component.\n    The size of an aggregate shall be the smallest multiple of its alignment that is sufficient to hold all of its members when they are laid out according to these rules.\n\nIn my opinion it\u0027s a curse that libpldm uses `__attribute__((packed))` absolutely everywhere in its ABI. Generally it inhibits optimisations and has the potential to make the code slower. It is also a non-standard construct (compiler-specific). I aim to remove all use of it throughout libpldm, eventually.\n\nSo we need to care about alignment: In the C17 draft standard (N2176), Annex J.2 \"Undefined behaviour\" lists \n\n\u003e — Conversion between two pointer types produces a result that is incorrectly aligned (6.3.2.3).\n\nFrom there, 6.3.2.3 paragraph 7 states\n\n\u003e A pointer to an object type may be converted to a pointer to a different object type. If the resulting pointer is not correctly aligned(69) for the referenced type, the behavior is undefined.\n\nFootnote 69 states:\n\n\u003e In general, the concept “correctly aligned” is transitive: if a pointer to type A is correctly aligned for a pointer to type B, which in turn is correctly aligned for a pointer to type C, then a pointer to type A is correctly aligned for a pointer to type C.\n\nWe must avoid undefined behaviour, and therefore we must care about problems such as alignment.",
       "parentUuid": "9a57a8e3_3a5aebc0",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86895eff_4734372b",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-13T07:43:22Z",
+      "side": 1,
+      "message": "Thank you Andrew for the detailed explanation and pointers to them 😊",
+      "parentUuid": "b49e4882_79e6303f",
       "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
