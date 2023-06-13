@@ -143,7 +143,10 @@ uint16_t pldm_bios_table_string_entry_decode_string(
  *  @param[in] entry - Pointer to a bios string table entry
  *  @param[out] buffer - Pointer to a buffer to store the string
  *  @param[in] size - Size of the buffer to store the string
- *  @return pldm_completion_codes
+ *  @return PLDM_SUCCESS on success, PLDM_ERROR_INVALID_DATA if entry or buffer are NULL, or
+ *          PLDM_ERROR_INVALID_LENGTH if size is insufficient for the decoded string. An
+ *          appropriate value for size can be determined using the expression
+ *          `pldm_bios_table_string_entry_decode_string_length(entry) + 1`.
  */
 int pldm_bios_table_string_entry_decode_string_check(
 	const struct pldm_bios_string_table_entry *entry, char *buffer,
