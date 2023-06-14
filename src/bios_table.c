@@ -287,10 +287,6 @@ int pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
 	POINTER_CHECK(entry);
 	POINTER_CHECK(pv_hdls);
 	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_ENUMERATION);
-	uint8_t num = pldm_bios_table_attr_entry_enum_decode_pv_num(entry);
-	if (num != pv_num) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
 	pldm_bios_table_attr_entry_enum_decode_pv_hdls(entry, pv_hdls, pv_num);
 	return PLDM_SUCCESS;
 }
