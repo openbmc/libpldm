@@ -1006,9 +1006,10 @@ TEST(StringTable, EntryDecodeTest)
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(std::strcmp("Allowed", buffer.data()), 0);
 
-    rc = pldm_bios_table_string_entry_decode_string_check(entry, buffer.data(),
-                                                          buffer.size() - 1);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    /* Ensure equivalence with the unchecked API */
+    rc = pldm_bios_table_string_entry_decode_string_check(
+        entry, buffer.data(), 2 + 1 /* sizeof '\0' */);
+    EXPECT_EQ(rc, std::strcmp("Al", buffer.data()));
 }
 
 TEST(StringTable, IteratorTest)

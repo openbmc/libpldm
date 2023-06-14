@@ -114,9 +114,9 @@ int pldm_bios_table_string_entry_decode_string_check(
 {
 	POINTER_CHECK(entry);
 	POINTER_CHECK(buffer);
-	size_t length =
-		pldm_bios_table_string_entry_decode_string_length(entry);
-	BUFFER_SIZE_EXPECT(size, length + 1);
+	if (size == 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
 	pldm_bios_table_string_entry_decode_string(entry, buffer, size);
 	return PLDM_SUCCESS;
 }
