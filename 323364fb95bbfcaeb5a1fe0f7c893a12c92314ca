@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3961ef90_c0f92a03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-14T23:46:06Z",
+      "side": 1,
+      "message": "Hi Pavithra, thanks for adding the comments in the implementation. I have a few more concerns that need to be addressed.",
+      "revId": "323364fb95bbfcaeb5a1fe0f7c893a12c92314ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad1e7b81_8fd92c06",
+        "filename": "include/libpldm/oem/ibm/libpldm/pdr_oem_ibm.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-14T23:46:06Z",
+      "side": 1,
+      "message": "We need more words here. From what you\u0027ve described in the implementation the range is a \"stop\" range, not a \"pass\" range. That is, it puts a hole in the searched handle space rather than constrain the search space to the range. That really needs some discussion.",
+      "revId": "323364fb95bbfcaeb5a1fe0f7c893a12c92314ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec1808b2_844bb34b",
+        "filename": "include/libpldm/oem/ibm/libpldm/pdr_oem_ibm.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-14T23:46:06Z",
+      "side": 1,
+      "message": "Make it clear in the description of `first_record_handle` and `last_record_handle` that they define a range that *won\u0027t* be searched.",
+      "revId": "323364fb95bbfcaeb5a1fe0f7c893a12c92314ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f91c73b7_f66f5ab4",
+        "filename": "src/meson.build",
+        "patchSetId": 21
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-14T23:46:06Z",
+      "side": 1,
+      "message": "This will go away when the function is moved.",
+      "revId": "323364fb95bbfcaeb5a1fe0f7c893a12c92314ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
