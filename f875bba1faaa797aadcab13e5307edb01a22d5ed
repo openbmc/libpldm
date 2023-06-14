@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8afe24e_da9cdcb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-14T04:31:05Z",
+      "side": 1,
+      "message": "Marking as unverified because there are some minor mismatches in behaviour between the checked and unchecked APIs (setting aside the issue of assert() sanitization).",
+      "revId": "f875bba1faaa797aadcab13e5307edb01a22d5ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
