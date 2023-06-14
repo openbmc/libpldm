@@ -41,6 +41,7 @@ Change categories:
    when invoking `meson setup`
 
 4. bios_table: Relax pldm_bios_table_string_entry_decode_string_check()
+5. bios_table: Relax pldm_bios_table_attr_entry_enum_decode_pv_hdls_check()
 
 ### Removed
 

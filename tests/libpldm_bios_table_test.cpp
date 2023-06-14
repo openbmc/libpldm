@@ -102,7 +102,7 @@ TEST(AttrTable, EnumEntryDecodeTest)
     EXPECT_EQ(pvHandles[1], 3);
     rc = pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
         entry, pvHandles.data(), 1);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
 
     uint8_t defNumber = pldm_bios_table_attr_entry_enum_decode_def_num(entry);
     EXPECT_EQ(defNumber, 1);
