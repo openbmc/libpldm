@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5c2494d_7cbd5a73",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-14T05:20:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2cb44584_ab381d53",
+      "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5eb1164_cb7ad400",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-09T03:13:17Z",
       "side": 1,
       "message": "See the comment on `af-mctp` about `struct pldm_socket_sndbuf`",
+      "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "268fd79a_28f6c084",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-14T05:20:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d5eb1164_cb7ad400",
       "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6c1f77d_fe2d2c35",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-14T05:20:15Z",
+      "side": 1,
+      "message": "Ack. Should we update the internal transport header file to follow this?",
+      "parentUuid": "5fc97432_d149b5cb",
+      "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b49409a_7c839320",
         "filename": "src/transport/socket.h",
         "patchSetId": 6
@@ -65,6 +119,24 @@
       "writtenOn": "2023-06-09T03:13:17Z",
       "side": 1,
       "message": "Given this is an internal header, is the `__cplusplus` guard necessary?",
+      "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5d58760_39f4e847",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-14T05:20:15Z",
+      "side": 1,
+      "message": "Nope! Fixed.",
+      "parentUuid": "4b49409a_7c839320",
       "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -82,6 +154,24 @@
       "writtenOn": "2023-06-09T03:13:17Z",
       "side": 1,
       "message": "So I ended up writing a blog post on how I go about naming things, as I think it\u0027s relevant to how we name these functions:\n\nhttps://amboar.github.io/notes/2023/06/09/naming-functions-in-c.html\n\nIn that light, we\u0027re dealing with sockets, and we\u0027re in libpldm. So I think we should try to name these functions using the strategies outlined in the blog post:\n\n```\nint pldm_socket_sndbuf_init(struct pldm_socket_sndbuf *ctx);\nint pldm_socket_sndbuf_set(struct pldm_socket_sndbuf *ctx, ...);\nint pldm_socket_sndbuf_get(struct pldm_socket_sndbuf *ctx, ...);\n```\n\nIn this case we can have `pldm_socket_sndbuf_init()` set up the maximum buffer size.",
+      "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "267e3bb6_f4cfbb90",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-14T05:20:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e47517d6_2b645fb9",
       "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
