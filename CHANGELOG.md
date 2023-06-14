@@ -51,3 +51,4 @@ Change categories:
 1. requester: Make pldm_open() return existing fd
 2. transport: Prevent sticking in waiting for response
 3. transport: Match on response in pldm_transport_send_recv_msg()
+4. bios_table: pldm_bios_table_attr_entry_string_info_check() NULL deref
