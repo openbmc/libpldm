@@ -391,7 +391,7 @@ int pldm_bios_table_attr_entry_string_info_check(
 		set_errmsg(errmsg, "Wrong StringType");
 		return PLDM_ERROR_INVALID_DATA;
 	}
-	if (info->def_length != strlen(info->def_string)) {
+	if (info->def_string && info->def_length != strlen(info->def_string)) {
 		set_errmsg(errmsg, "Length of DefaultString should be equal to "
 				   "DefaultStringLength");
 		return PLDM_ERROR_INVALID_DATA;

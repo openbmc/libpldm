@@ -50,3 +50,4 @@ Change categories:
 2. transport: Prevent sticking in waiting for response
 3. transport: Match on response in pldm_transport_send_recv_msg()
 4. requester: Add check before accessing hdr in pldm_recv()
+5. bios_table: pldm_bios_table_attr_entry_string_info_check() NULL deref
