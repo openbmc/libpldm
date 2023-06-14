@@ -15,6 +15,12 @@ Change categories:
 - Fixed
 - Security
 
+## [FIXME]
+
+### Removed
+
+1. bios_table: Remove deprecated APIs sanitized by assert()
+
 ## [Unreleased]
 
 ### Added
