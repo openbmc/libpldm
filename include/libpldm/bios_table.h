@@ -88,15 +88,6 @@ pldm_bios_table_iter_attr_value_entry_value(struct pldm_bios_table_iter *iter)
  */
 size_t pldm_bios_table_string_entry_encode_length(uint16_t string_length);
 
-/** @brief Create an entry of BIOS String Table
- *  @param[out] entry - Pointer to a buffer to create an entry
- *  @param[in] entry_length - Length of the buffer to create an entry
- *  @param[in] str - String itself
- *  @param[in] str_length - Length of the string
- */
-void pldm_bios_table_string_entry_encode(void *entry, size_t entry_length,
-					 const char *str, uint16_t str_length);
-
 /** @brief Create an entry of BIOS String Table and check the validity of the
  * parameters
  *
@@ -126,17 +117,6 @@ uint16_t pldm_bios_table_string_entry_decode_handle(
  */
 uint16_t pldm_bios_table_string_entry_decode_string_length(
 	const struct pldm_bios_string_table_entry *entry);
-
-/** @brief Get the string(at most one less than *size* characters) from the
- * entry
- *  @param[in] entry - Pointer to a bios string table entry
- *  @param[out] buffer - Pointer to a buffer to store the string
- *  @param[in] size - Size of the buffer to store the string
- *  @return Length of the string decoded
- */
-uint16_t pldm_bios_table_string_entry_decode_string(
-	const struct pldm_bios_string_table_entry *entry, char *buffer,
-	size_t size);
 
 /** @brief Get the string from the entry and check the validity of the
  * parameters
@@ -218,7 +198,7 @@ pldm_bios_table_attr_find_by_string_handle(const void *table, size_t length,
 /** @struct pldm_bios_table_attr_entry_enum_info
  *
  *  An auxiliary structure for passing parameters to @ref
- * pldm_bios_table_attr_entry_enum_encode
+ * pldm_bios_table_attr_entry_enum_encode_check
  *
  */
 struct pldm_bios_table_attr_entry_enum_info {
@@ -238,16 +218,6 @@ struct pldm_bios_table_attr_entry_enum_info {
 size_t pldm_bios_table_attr_entry_enum_encode_length(uint8_t pv_num,
 						     uint8_t def_num);
 
-/** @brief Create an entry of BIOS Attribute Table (type: enum)
- *  @param[out] entry - Pointer to a buffer to create an entry
- *  @param[in] entry_length - Length of the buffer to create an entry
- *  @param[in] info - Pointer to an auxiliary structure @ref
- * pldm_bios_table_attr_entry_enum_info
- */
-void pldm_bios_table_attr_entry_enum_encode(
-	void *entry, size_t entry_length,
-	const struct pldm_bios_table_attr_entry_enum_info *info);
-
 /** @brief Create an entry of BIOS Attribute Table (type: enum) and check the
  * validity of the parameters
  *  @param[out] entry - Pointer to a buffer to create an entry
@@ -263,13 +233,6 @@ int pldm_bios_table_attr_entry_enum_encode_check(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_enum_info *info);
 
-/** @brief Get the total number of possible values for the entry
- *  @param[in] entry - Pointer to bios attribute table entry
- *  @return total number of possible values
- */
-uint8_t pldm_bios_table_attr_entry_enum_decode_pv_num(
-	const struct pldm_bios_attr_table_entry *entry);
-
 /** @brief Get the total number of possible values for the entry and check the
  * validity of the parameters
  *  @param[in] entry - Pointer to bios attribute table entry
@@ -280,13 +243,6 @@ uint8_t pldm_bios_table_attr_entry_enum_decode_pv_num(
 int pldm_bios_table_attr_entry_enum_decode_pv_num_check(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *pv_num);
 
-/** @brief Get the total number of default values for the entry
- *  @param[in] entry - Pointer to bios attribute table entry
- *  @return total number of default values
- */
-uint8_t pldm_bios_table_attr_entry_enum_decode_def_num(
-	const struct pldm_bios_attr_table_entry *entry);
-
 /** @brief Get the total number of default values for the entry and check the
  * validity of the parameters
  *  @param[in] entry - Pointer to bios attribute table entry
@@ -296,17 +252,6 @@ uint8_t pldm_bios_table_attr_entry_enum_decode_def_num(
  */
 int pldm_bios_table_attr_entry_enum_decode_def_num_check(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *def_num);
-
-/** @brief Get possible values string handles
- *  @param[in] entry - Pointer to bios attribute table entry
- *  @param[out] pv_hdls - Pointer to a buffer to store
- * PossibleValuesStringHandles
- *  @param[in] pv_num - Number of PossibleValuesStringHandles expected
- *  @return pldm_completion_codes
- */
-uint8_t pldm_bios_table_attr_entry_enum_decode_pv_hdls(
-	const struct pldm_bios_attr_table_entry *entry, uint16_t *pv_hdls,
-	uint8_t pv_num);
 
 /** @brief Get possible values string handles and check the validity of the
  * parameters
@@ -370,16 +315,6 @@ int pldm_bios_table_attr_entry_string_info_check(
  */
 size_t pldm_bios_table_attr_entry_string_encode_length(uint16_t def_str_len);
 
-/** @brief Create an entry of BIOS Attribute Table (type: string)
- *  @param[out] entry - Pointer to a buffer to create an entry
- *  @param[in] entry_length - Length of the buffer to create an entry
- *  @param[in] info - Pointer to an auxiliary structure @ref
- * pldm_bios_table_attr_entry_string_info
- */
-void pldm_bios_table_attr_entry_string_encode(
-	void *entry, size_t entry_length,
-	const struct pldm_bios_table_attr_entry_string_info *info);
-
 /** @brief Create an entry of BIOS Attribute Table (type: string) and check the
  * validity of the parameters
  *  @param[out] entry - Pointer to a buffer to create an entry
@@ -394,13 +329,6 @@ void pldm_bios_table_attr_entry_string_encode(
 int pldm_bios_table_attr_entry_string_encode_check(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_string_info *info);
-
-/** @brief Get the length of default string in bytes for the entry
- *  @param[in] entry - Pointer to bios attribute table entry
- *  @return length of default string in bytes
- */
-uint16_t pldm_bios_table_attr_entry_string_decode_def_string_length(
-	const struct pldm_bios_attr_table_entry *entry);
 
 /** @brief Get the length of default string in bytes for the entry and check the
  * validity of the parameters

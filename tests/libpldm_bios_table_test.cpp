@@ -74,7 +74,10 @@ TEST(AttrTable, EnumEntryDecodeTest)
 
     auto entry =
         reinterpret_cast<struct pldm_bios_attr_table_entry*>(enumEntry.data());
-    uint8_t pvNumber = pldm_bios_table_attr_entry_enum_decode_pv_num(entry);
+    uint8_t pvNumber;
+    ASSERT_EQ(
+        pldm_bios_table_attr_entry_enum_decode_pv_num_check(entry, &pvNumber),
+        PLDM_SUCCESS);
     EXPECT_EQ(pvNumber, 2);
     pvNumber = 0;
     auto rc =
@@ -83,15 +86,16 @@ TEST(AttrTable, EnumEntryDecodeTest)
     EXPECT_EQ(pvNumber, 2);
 
     std::vector<uint16_t> pvHandles(pvNumber, 0);
-    pvNumber = pldm_bios_table_attr_entry_enum_decode_pv_hdls(
-        entry, pvHandles.data(), pvHandles.size());
+    ASSERT_EQ(pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
+                  entry, pvHandles.data(), pvHandles.size()),
+              PLDM_SUCCESS);
     EXPECT_EQ(pvNumber, 2);
     EXPECT_EQ(pvHandles[0], 2);
     EXPECT_EQ(pvHandles[1], 3);
     pvHandles.resize(1);
-    pvNumber = pldm_bios_table_attr_entry_enum_decode_pv_hdls(
-        entry, pvHandles.data(), pvHandles.size());
-    EXPECT_EQ(pvNumber, 1);
+    ASSERT_EQ(pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
+                  entry, pvHandles.data(), pvHandles.size()),
+              PLDM_SUCCESS);
     EXPECT_EQ(pvHandles[0], 2);
 
     pvHandles.resize(2);
@@ -104,7 +108,10 @@ TEST(AttrTable, EnumEntryDecodeTest)
         entry, pvHandles.data(), 1);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    uint8_t defNumber = pldm_bios_table_attr_entry_enum_decode_def_num(entry);
+    uint8_t defNumber;
+    ASSERT_EQ(
+        pldm_bios_table_attr_entry_enum_decode_def_num_check(entry, &defNumber),
+        PLDM_SUCCESS);
     EXPECT_EQ(defNumber, 1);
     std::vector<uint8_t> defIndices(defNumber);
     rc = pldm_bios_table_attr_entry_enum_decode_def_indices(
@@ -164,17 +171,18 @@ TEST(AttrTable, EnumEntryEncodeTest)
     EXPECT_EQ(encodeLength, enumEntry.size());
 
     std::vector<uint8_t> encodeEntry(encodeLength, 0);
-    pldm_bios_table_attr_entry_enum_encode(encodeEntry.data(),
-                                           encodeEntry.size(), &info);
+    ASSERT_EQ(pldm_bios_table_attr_entry_enum_encode_check(
+                  encodeEntry.data(), encodeEntry.size(), &info),
+              PLDM_SUCCESS);
     // set attr handle = 0
     encodeEntry[0] = 0;
     encodeEntry[1] = 0;
 
     EXPECT_EQ(enumEntry, encodeEntry);
 
-    EXPECT_DEATH(pldm_bios_table_attr_entry_enum_encode(
-                     encodeEntry.data(), encodeEntry.size() - 1, &info),
-                 "length <= entry_length");
+    EXPECT_NE(pldm_bios_table_attr_entry_enum_encode_check(
+                  encodeEntry.data(), encodeEntry.size() - 1, &info),
+              PLDM_SUCCESS);
     auto rc = pldm_bios_table_attr_entry_enum_encode_check(
         encodeEntry.data(), encodeEntry.size(), &info);
     EXPECT_EQ(rc, PLDM_SUCCESS);
@@ -211,8 +219,10 @@ TEST(AttrTable, StringEntryDecodeTest)
     auto maxLength = pldm_bios_table_attr_entry_string_decode_max_length(entry);
     EXPECT_EQ(maxLength, 100);
 
-    uint16_t defStringLength =
-        pldm_bios_table_attr_entry_string_decode_def_string_length(entry);
+    uint16_t defStringLength;
+    ASSERT_EQ(pldm_bios_table_attr_entry_string_decode_def_string_length_check(
+                  entry, &defStringLength),
+              PLDM_SUCCESS);
     EXPECT_EQ(defStringLength, 3);
     std::vector<char> defString(defStringLength + 1);
     auto rc = pldm_bios_table_attr_entry_string_decode_def_string(
@@ -271,17 +281,18 @@ TEST(AttrTable, StringEntryEncodeTest)
     EXPECT_EQ(encodeLength, stringEntry.size());
 
     std::vector<uint8_t> encodeEntry(encodeLength, 0);
-    pldm_bios_table_attr_entry_string_encode(encodeEntry.data(),
-                                             encodeEntry.size(), &info);
+    ASSERT_EQ(pldm_bios_table_attr_entry_string_encode_check(
+                  encodeEntry.data(), encodeEntry.size(), &info),
+              PLDM_SUCCESS);
     // set attr handle = 0
     encodeEntry[0] = 0;
     encodeEntry[1] = 0;
 
     EXPECT_EQ(stringEntry, encodeEntry);
 
-    EXPECT_DEATH(pldm_bios_table_attr_entry_string_encode(
-                     encodeEntry.data(), encodeEntry.size() - 1, &info),
-                 "length <= entry_length");
+    EXPECT_NE(pldm_bios_table_attr_entry_string_encode_check(
+                  encodeEntry.data(), encodeEntry.size() - 1, &info),
+              PLDM_SUCCESS);
     auto rc = pldm_bios_table_attr_entry_string_encode_check(
         encodeEntry.data(), encodeEntry.size(), &info);
     EXPECT_EQ(rc, PLDM_SUCCESS);
@@ -310,11 +321,12 @@ TEST(AttrTable, StringEntryEncodeTest)
         1,      /* attr type */
         3,   0, /* attr name handle */
         1,      /* string type */
-        1,   0, /* min string length */
+        0,   0, /* min string length */
         100, 0, /* max string length */
         0,   0, /* default string length */
     };
 
+    info.min_length = 0;
     info.def_length = 0;
     info.def_string = nullptr;
 
@@ -322,8 +334,9 @@ TEST(AttrTable, StringEntryEncodeTest)
     EXPECT_EQ(encodeLength, stringEntryLength0.size());
 
     encodeEntry.resize(encodeLength);
-    pldm_bios_table_attr_entry_string_encode(encodeEntry.data(),
-                                             encodeEntry.size(), &info);
+    ASSERT_EQ(pldm_bios_table_attr_entry_string_encode_check(
+                  encodeEntry.data(), encodeEntry.size(), &info),
+              PLDM_SUCCESS);
     // set attr handle = 0
     encodeEntry[0] = 0;
     encodeEntry[1] = 0;
@@ -960,18 +973,18 @@ TEST(StringTable, EntryEncodeTest)
     EXPECT_EQ(encodeLength, stringEntry.size());
 
     std::vector<uint8_t> encodeEntry(encodeLength, 0);
-    pldm_bios_table_string_entry_encode(encodeEntry.data(), encodeEntry.size(),
-                                        str, str_length);
+    ASSERT_EQ(pldm_bios_table_string_entry_encode_check(
+                  encodeEntry.data(), encodeEntry.size(), str, str_length),
+              PLDM_SUCCESS);
     // set string handle = 0
     encodeEntry[0] = 0;
     encodeEntry[1] = 0;
 
     EXPECT_EQ(stringEntry, encodeEntry);
 
-    EXPECT_DEATH(pldm_bios_table_string_entry_encode(encodeEntry.data(),
-                                                     encodeEntry.size() - 1,
-                                                     str, str_length),
-                 "length <= entry_length");
+    EXPECT_NE(pldm_bios_table_string_entry_encode_check(
+                  encodeEntry.data(), encodeEntry.size() - 1, str, str_length),
+              PLDM_SUCCESS);
     auto rc = pldm_bios_table_string_entry_encode_check(
         encodeEntry.data(), encodeEntry.size() - 1, str, str_length);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
@@ -992,13 +1005,14 @@ TEST(StringTable, EntryDecodeTest)
     EXPECT_EQ(strLength, 7);
 
     std::vector<char> buffer(strLength + 1, 0);
-    auto decodedLength = pldm_bios_table_string_entry_decode_string(
-        entry, buffer.data(), buffer.size());
-    EXPECT_EQ(decodedLength, strLength);
+    pldm_bios_table_string_entry_decode_string_check(entry, buffer.data(),
+                                                     buffer.size());
+    EXPECT_EQ(strlen(buffer.data()), strLength);
     EXPECT_EQ(std::strcmp("Allowed", buffer.data()), 0);
-    decodedLength = pldm_bios_table_string_entry_decode_string(
-        entry, buffer.data(), 2 + 1 /* sizeof '\0'*/);
-    EXPECT_EQ(decodedLength, 2);
+    EXPECT_EQ(pldm_bios_table_string_entry_decode_string_check(
+                  entry, buffer.data(), 2 + 1 /* sizeof '\0'*/),
+              PLDM_SUCCESS);
+    EXPECT_EQ(strlen(buffer.data()), 2);
     EXPECT_EQ(std::strcmp("Al", buffer.data()), 0);
 
     auto rc = pldm_bios_table_string_entry_decode_string_check(

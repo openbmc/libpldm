@@ -17,6 +17,19 @@ Change categories:
 
 ## [Unreleased]
 
+### Removed
+
+1. bios_table: Remove deprecated APIs sanitized by assert():
+
+   - pldm_bios_table_string_entry_encode()
+   - pldm_bios_table_string_entry_decode_string()
+   - pldm_bios_table_attr_entry_enum_encode()
+   - pldm_bios_table_attr_entry_enum_decode_pv_num()
+   - pldm_bios_table_attr_entry_enum_decode_def_num()
+   - pldm_bios_table_attr_entry_enum_decode_pv_hdls()
+   - pldm_bios_table_attr_entry_string_encode()
+   - pldm_bios_table_attr_entry_string_decode_def_string_length()
+
 ## [0.3.0] - 2023-06-23
 
 ### Added
