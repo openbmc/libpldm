@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1a89d0d_642f48b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-14T23:57:34Z",
+      "side": 1,
+      "message": "Hi Pavithra. I really need the test cases to be implemented in a way that\u0027s actually maintainable. What\u0027s being done is very difficult to comprehend. It\u0027s also fragile, and we\u0027re very likely to break it or it to start invoking undefined behaviour with change over time. I have a few other comments besides.",
+      "revId": "b33a5579c74a6c4db1159163e3a3ef047b837824",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f34d5b5_c4d13a0c",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-14T23:57:34Z",
+      "side": 1,
+      "message": "Can you please elaborate a bit more on what this means? Under what circumstances would I need to use this vs calling the existing `pldm_entity_association_pdr_add_from_node()` declared above? How do I know I have a problem that needs to be solved with this function?",
+      "revId": "b33a5579c74a6c4db1159163e3a3ef047b837824",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42dc1afe_9bc040ac",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-14T23:57:34Z",
+      "side": 1,
+      "message": "If the record handle is the differentiator between this and `pldm_entity_association_pdr_add_from_node()` above, then I really think the function name should contain `record_handle`.",
+      "revId": "b33a5579c74a6c4db1159163e3a3ef047b837824",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0524d545_bdf40da4",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-14T23:57:34Z",
+      "side": 1,
+      "message": "what is all this pointer manipulation? It\u0027s completely unclear what properties it\u0027s trying to uphold.\n\nIf we need this then it must be separated out into its own test case that documents what it\u0027s doing, not just tacked in here in some completely unmaintainable way.\n\nAddress this throughout.",
+      "revId": "b33a5579c74a6c4db1159163e3a3ef047b837824",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
