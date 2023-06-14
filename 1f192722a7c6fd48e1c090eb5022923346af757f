@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ede8b99_15f5f304",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-14T06:36:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a9e2db5_4602e1c8",
+      "revId": "1f192722a7c6fd48e1c090eb5022923346af757f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c5d97c5_8df9dc68",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-13T22:25:41Z",
       "side": 1,
       "message": "Is this actually the behaviour that you want?",
+      "revId": "1f192722a7c6fd48e1c090eb5022923346af757f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf30f568_be7019b1",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-14T06:36:14Z",
+      "side": 1,
+      "message": "Yes, Andrew, We are looking for PDR records outside the range. So if it\u0027s inside the range we just continue to the next PDR record",
+      "parentUuid": "7c5d97c5_8df9dc68",
       "revId": "1f192722a7c6fd48e1c090eb5022923346af757f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7798fae2_09a25c9c",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-14T06:36:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d539478b_e8141cd5",
+      "revId": "1f192722a7c6fd48e1c090eb5022923346af757f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4f0c61d_bfd3a2a7",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-06-13T22:25:41Z",
       "side": 1,
       "message": "We treat pdr-\u003echildren as a flexible array member. This check *must* be before we form the pointer assigned to `child` (i.e. placed immediately after line 44 and before the code currently on line 45) otherwise we will cause ourselves headaches. From Appendix J \"Undefined behaviour\" of N2176 (C17 draft standard):\n\n\u003e An attempt is made to access, or generate a pointer to just past, a flexible array member of a structure when the referenced object provides no elements for that array (6.7.2.1).\n\nWe\u0027re currently saved by the fact that the array is declared as length 1. But that means it\u0027s not formally a flexible array member, so any access beyond 0 is UB regardless. That needs to be fixed, but again it\u0027s a long road.",
+      "revId": "1f192722a7c6fd48e1c090eb5022923346af757f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef6e528_ab1aba2c",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-14T06:36:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d4f0c61d_bfd3a2a7",
       "revId": "1f192722a7c6fd48e1c090eb5022923346af757f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
