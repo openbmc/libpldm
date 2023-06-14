@@ -40,6 +40,8 @@ Change categories:
    To disable `oem-ibm` in your development builds, pass `-Doem-ibm=disabled`
    when invoking `meson setup`
 
+4. bios_table: Relax pldm_bios_table_string_entry_decode_string_check()
+
 ### Removed
 
 1. libpldm: Remove the requester-api option
