@@ -106,6 +106,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d0b8f66_7f109d45",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-15T00:09:47Z",
+      "side": 1,
+      "message": "\u003e Ack. Should we update the internal transport header file to follow this?\n\nIdeally, yes.",
+      "parentUuid": "b6c1f77d_fe2d2c35",
+      "revId": "6ca11cf1fbac8d4d1c411d83999086397d877737",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b49409a_7c839320",

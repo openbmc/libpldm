@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8b231e_38a241c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-15T00:09:47Z",
+      "side": 1,
+      "message": "Hi Rashmica, after looking at the result I had a few further thoughts that might improve the clarity. Let me know what you think 😊 (I feel like I\u0027m doing the thing where I drag patches out a bit 😞 sorry)",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40cd6e07_6f68cdad",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-15T00:09:47Z",
+      "side": 1,
+      "message": "Hopefully one of my last thoughts on this 😊\n\nWe\u0027re reaching through into the members of `struct pldm_socket_sndbuf` here, which feels like a bit of a violation of the abstraction. We can instead integrate these tests into `pldm_socket_sndbuf_set()` and do an early exit if the socket buffer is already large enough.\n\nWith that, really we could rename it to something like `pldm_socket_sndbuf_accommodate()`, and invoke it like `pldm_socket_sndbuf_accommodate(\u0026dmux-\u003esocket_send_buf, demux-\u003esocket, (int)req_msg_len)` to be less assertive about actually setting the value",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa6cdb3a_b2524a3e",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-15T00:09:47Z",
+      "side": 1,
+      "message": "I think we should pass the socket fd in as well (effectively \"borrowing\" it), and stash it in `struct pldm_socket_sndbuf`. That way we don\u0027t have to pass it through the other `pldm_socket_sndbuf_*()` APIs (which risks passing an through an inconsistent fd).",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc8b9b7_4d23a8e2",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-15T00:09:47Z",
+      "side": 1,
+      "message": "Can we just integrate this into `pldm_socket_sndbuf_init()`?",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a259a95_6a380c0e",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-15T00:09:47Z",
+      "side": 1,
+      "message": "Based on the previous suggestions we would need to add `int socket` here.",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40d16175_5b72133e",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-15T00:09:47Z",
+      "side": 1,
+      "message": "Based on the previous suggestions, this would become `int pldm_socket_sndbuf_init(struct pldm_socket_sndbuf *ctx, int socket);`",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28f85dd9_a293144c",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-15T00:09:47Z",
+      "side": 1,
+      "message": "With the above we can drop the `socket` parameter to both of these (though as a result of other suggestions, they are replaced by doing the get in `pldm_socket_sndbuf_init()` and renaming set to `pldm_socket_sndbuf_accommodate()`).",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
