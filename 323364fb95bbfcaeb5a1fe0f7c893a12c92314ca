@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "631157b8_996221b8",
+        "filename": "include/libpldm/oem/ibm/libpldm/pdr_oem_ibm.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-15T08:20:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ad1e7b81_8fd92c06",
+      "revId": "323364fb95bbfcaeb5a1fe0f7c893a12c92314ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec1808b2_844bb34b",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f60d896_fd71e12a",
+        "filename": "include/libpldm/oem/ibm/libpldm/pdr_oem_ibm.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-15T08:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec1808b2_844bb34b",
+      "revId": "323364fb95bbfcaeb5a1fe0f7c893a12c92314ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f91c73b7_f66f5ab4",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-06-14T23:46:06Z",
       "side": 1,
       "message": "This will go away when the function is moved.",
+      "revId": "323364fb95bbfcaeb5a1fe0f7c893a12c92314ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62013bdb_eaef7826",
+        "filename": "src/meson.build",
+        "patchSetId": 21
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-15T08:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f91c73b7_f66f5ab4",
       "revId": "323364fb95bbfcaeb5a1fe0f7c893a12c92314ca",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

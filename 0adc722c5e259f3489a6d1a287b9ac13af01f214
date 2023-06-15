@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e2ff80c_a35c4696",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-15T08:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8092f4ad_52166ac5",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e562dad1_4ea72baf",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Yes, please move the function out of the oem directory into `src/pdr.c` and fix all the other fall-out from that move.",
       "parentUuid": "23f5c8cd_4ee1b73d",
+      "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba9a5f3_5cf88a6c",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-15T08:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83aa1aa4_0a5b4308",
       "revId": "0adc722c5e259f3489a6d1a287b9ac13af01f214",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

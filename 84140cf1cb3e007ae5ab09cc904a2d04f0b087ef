@@ -451,6 +451,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66e3f00d_ed41bba8",
+        "filename": "src/oem/ibm/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-15T08:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "724553e4_422c104c",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "84140cf1cb3e007ae5ab09cc904a2d04f0b087ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6952ab6e_f82693c0",
