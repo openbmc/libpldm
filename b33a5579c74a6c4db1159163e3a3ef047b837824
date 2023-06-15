@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67a1692f_c2b0644d",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-15T09:05:42Z",
+      "side": 1,
+      "message": "Yes Andrew, as mentioned in the commit message the entity association PDR was earlier added using `pldm_entity_association_pdr_add_from_node` where the record handle would be in sequential order and no particular record handle was assigned to those entity association records.\n`For Example:` If the PDR repo has the last record with record handle 10 then the next entity association PDR would get record handle 11 and so on even though there were PDRs in different ranges in the repo. With this change, we can assign a record handle for entity association PDR as the caller API wants.",
+      "parentUuid": "0f34d5b5_c4d13a0c",
+      "revId": "b33a5579c74a6c4db1159163e3a3ef047b837824",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42dc1afe_9bc040ac",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 6
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-14T23:57:34Z",
       "side": 1,
       "message": "If the record handle is the differentiator between this and `pldm_entity_association_pdr_add_from_node()` above, then I really think the function name should contain `record_handle`.",
+      "revId": "b33a5579c74a6c4db1159163e3a3ef047b837824",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b92affe_65fe04fe",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-15T09:05:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42dc1afe_9bc040ac",
       "revId": "b33a5579c74a6c4db1159163e3a3ef047b837824",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2023-06-14T23:57:34Z",
       "side": 1,
       "message": "what is all this pointer manipulation? It\u0027s completely unclear what properties it\u0027s trying to uphold.\n\nIf we need this then it must be separated out into its own test case that documents what it\u0027s doing, not just tacked in here in some completely unmaintainable way.\n\nAddress this throughout.",
+      "revId": "b33a5579c74a6c4db1159163e3a3ef047b837824",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3303a8f9_be274871",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-15T09:05:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0524d545_bdf40da4",
       "revId": "b33a5579c74a6c4db1159163e3a3ef047b837824",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
