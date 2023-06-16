@@ -4,9 +4,11 @@
 #include "container-of.h"
 #include "libpldm/pldm.h"
 #include "libpldm/transport.h"
+#include "socket.h"
 #include "transport.h"
 
 #include <errno.h>
+#include <limits.h>
 #include <linux/mctp.h>
 #include <poll.h>
 #include <stdlib.h>
@@ -21,6 +23,7 @@ struct pldm_transport_af_mctp {
 	struct pldm_transport transport;
 	int socket;
 	pldm_tid_t tid_eid_map[MCTP_MAX_NUM_EID];
+	struct pldm_socket_sndbuf socket_send_buf;
 };
 
 #define transport_to_af_mctp(ptr)                                              \
@@ -119,6 +122,12 @@ static pldm_requester_rc_t pldm_transport_af_mctp_send(struct pldm_transport *t,
 	addr.smctp_type = MCTP_MSG_TYPE_PLDM;
 	addr.smctp_tag = MCTP_TAG_OWNER;
 
+	if (req_msg_len > INT_MAX ||
+	    pldm_socket_sndbuf_accomodate(&(af_mctp->socket_send_buf),
+					  (int)req_msg_len)) {
+		return PLDM_REQUESTER_SEND_FAIL;
+	}
+
 	ssize_t rc = sendto(af_mctp->socket, pldm_req_msg, req_msg_len, 0,
 			    (struct sockaddr *)&addr, sizeof(addr));
 	if (rc == -1) {
@@ -149,6 +158,14 @@ int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
 		free(af_mctp);
 		return -1;
 	}
+
+	if (pldm_socket_sndbuf_init(&af_mctp->socket_send_buf,
+				    af_mctp->socket)) {
+		close(af_mctp->socket);
+		free(af_mctp);
+		return -1;
+	}
+
 	*ctx = af_mctp;
 	return 0;
 }
