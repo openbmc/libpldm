@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be783b14_822c273b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-16T00:57:34Z",
+      "side": 1,
+      "message": "Can we please put the function name here directly, instead.\n\n\"new\" is implied by \"add\", and with the function name included it\u0027s implicit that we\u0027re modifying the API.",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f84049b_5ab50edc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-16T00:57:34Z",
+      "side": 1,
+      "message": "Hi Pavithra, thanks for moving this into the generic library portion and away from the OEM bits. I have a few more comments, but one thing I\u0027d very much like to see is some unit tests.",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db346999_d77b5e51",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-16T00:57:34Z",
+      "side": 1,
+      "message": "Update this once the commit message is fixed.",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6fda47e_13fd8db3",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-16T00:57:34Z",
+      "side": 1,
+      "message": "Thanks. This is a better description.",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "125de307_6c177e1f",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-16T00:57:34Z",
+      "side": 1,
+      "message": "Apologies in advance because I thought I mentioned this on the previous review, but clearly didn\u0027t.\n\nGiven the description I think we need to update the function name. At the moment there\u0027s no indication of using a range, or that the range is exclusive. Further, the fact that `uint16_t` is returned suggests there\u0027s no mechanism for this function to indicate a failure to find the container ID in question.\n\nI propose:\n\n```\nint pldm_pdr_find_container_id_range_exclude(const pldm_pdr *repo,\n                                             uint16_t entity_type,\n                                             uint16_t entity_instance,\n                                             uint32_t range_exclude_start,\n                                             uint32_t range_exclude_end,\n                                             uint16_t *container_id);\n```",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cec274ab_303d05f0",
+        "filename": "src/meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-16T00:57:34Z",
+      "side": 1,
+      "message": "Why does this patch need this extra argument? It shouldn\u0027t have any OEM bits in it now.",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17c99902_603bfc25",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-16T00:57:34Z",
+      "side": 1,
+      "message": "Need to update the function name and prototype as per previous comment.",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20f654d2_a1ccfdc5",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-16T00:57:34Z",
+      "side": 1,
+      "message": "Update this to a negative errno. `return -ENOKEY;` maybe? Whatever we pick needs to be added to the doxygen comment for the return values (the return values and the conditions they are returned under must be explicitly defined, in general).",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d151bb1_448aa2da",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-16T00:57:34Z",
+      "side": 1,
+      "message": "See errno comment above.",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
