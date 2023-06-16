@@ -1,4 +1,3 @@
-#include "config.h"
 #include "msgbuf/platform.h"
 #include "base.h"
 #include "msgbuf.h"
