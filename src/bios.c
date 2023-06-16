@@ -1,4 +1,3 @@
-#include "config.h"
 #include "bios.h"
 #include "base.h"
 #include "utils.h"

@@ -1,4 +1,3 @@
-#include "config.h"
 #include "libpldm/requester/pldm.h"
 #include "base.h"
 #include "libpldm/transport.h"

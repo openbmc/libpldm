@@ -1,4 +1,3 @@
-#include "config.h"
 #include "mctp-defines.h"
 #include "base.h"
 #include "container-of.h"

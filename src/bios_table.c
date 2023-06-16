@@ -1,4 +1,3 @@
-#include "config.h"
 #include "bios_table.h"
 #include "base.h"
 #include "bios.h"
