@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9af1110f_dd810cd4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-16T01:02:05Z",
+      "side": 1,
+      "message": "Can you please make sure to put a space after the `:` (should read `pdr: Add API ...`)\n\nAlso, can you please try to include the function name in the summary? I realise it might be \"too long\", but I\u0027m fine with that as including the name makes it obvious what\u0027s going on from `git log --oneline`.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "aec04d8ff697b398ac3907c16b104e9740797a45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dcd777e7_47d535f2",
