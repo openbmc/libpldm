@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0877259d_62d85a67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-16T02:04:25Z",
+      "side": 1,
+      "message": "To clarify, what I mean is to change the subject to e.g. this:\n\n```\npdr: Add pldm_entity_association_pdr_add_from_node_with_record_handle()\n```",
+      "parentUuid": "9af1110f_dd810cd4",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "aec04d8ff697b398ac3907c16b104e9740797a45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dcd777e7_47d535f2",
