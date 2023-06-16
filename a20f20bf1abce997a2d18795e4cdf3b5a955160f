@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d33a1422_65df322a",
+        "filename": "src/transport/socket.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-16T06:40:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11e5b270_802b20b1",
+      "range": {
+        "startLine": 22,
+        "startChar": 31,
+        "endLine": 22,
+        "endChar": 34
+      },
+      "revId": "a20f20bf1abce997a2d18795e4cdf3b5a955160f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "551d00ac_d41febe2",
@@ -61,6 +85,30 @@
       "writtenOn": "2023-06-16T05:19:41Z",
       "side": 1,
       "message": "I\u0027d like to see a test for `max_buf_size \u003c INT_MAX` before the cast.",
+      "range": {
+        "startLine": 35,
+        "startChar": 17,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "revId": "a20f20bf1abce997a2d18795e4cdf3b5a955160f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b935129a_193dda0f",
+        "filename": "src/transport/socket.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-16T06:40:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "551d00ac_d41febe2",
       "range": {
         "startLine": 35,
         "startChar": 17,
