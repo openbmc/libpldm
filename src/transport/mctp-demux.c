@@ -4,9 +4,11 @@
 #include "container-of.h"
 #include "libpldm/pldm.h"
 #include "libpldm/transport.h"
+#include "socket.h"
 #include "transport.h"
 
 #include <errno.h>
+#include <limits.h>
 #include <poll.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,6 +26,7 @@ struct pldm_transport_mctp_demux {
 	/* In the future this probably needs to move to a tid-eid-uuid/network
 	 * id mapping for multi mctp networks */
 	pldm_tid_t tid_eid_map[MCTP_MAX_NUM_EID];
+	struct pldm_socket_sndbuf socket_send_buf;
 };
 
 #define transport_to_demux(ptr)                                                \
@@ -181,6 +184,12 @@ pldm_transport_mctp_demux_send(struct pldm_transport *t, pldm_tid_t tid,
 	msg.msg_iov = iov;
 	msg.msg_iovlen = sizeof(iov) / sizeof(iov[0]);
 
+	if (req_msg_len > INT_MAX ||
+	    pldm_socket_sndbuf_accomodate(&(demux->socket_send_buf),
+					  (int)req_msg_len)) {
+		return PLDM_REQUESTER_SEND_FAIL;
+	}
+
 	ssize_t rc = sendmsg(demux->socket, &msg, 0);
 	if (rc == -1) {
 		return PLDM_REQUESTER_SEND_FAIL;
@@ -211,6 +220,12 @@ int pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx)
 		free(demux);
 		return -1;
 	}
+
+	if (pldm_socket_sndbuf_init(&demux->socket_send_buf, demux->socket)) {
+		free(demux);
+		return -1;
+	}
+
 	*ctx = demux;
 	return 0;
 }
@@ -249,6 +264,12 @@ pldm_transport_mctp_demux_init_with_fd(int mctp_fd)
 		free(demux);
 		return NULL;
 	}
+
+	if (pldm_socket_sndbuf_init(&demux->socket_send_buf, demux->socket)) {
+		free(demux);
+		return NULL;
+	}
+
 	return demux;
 }
 
