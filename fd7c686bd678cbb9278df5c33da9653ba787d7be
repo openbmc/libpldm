@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea3c538e_f9e09516",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-16T06:45:46Z",
+      "side": 1,
+      "message": "Good spot.",
+      "parentUuid": "9d44480a_3573bab3",
+      "revId": "fd7c686bd678cbb9278df5c33da9653ba787d7be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9dc80c0_9080d5df",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9176832_17751867",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-16T06:45:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d9dc80c0_9080d5df",
+      "revId": "fd7c686bd678cbb9278df5c33da9653ba787d7be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bd8beb6_6975a811",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-06-16T06:43:52Z",
       "side": 1,
       "message": "Need to close or shutdown the socket before `free()`, otherwise it leaks",
+      "revId": "fd7c686bd678cbb9278df5c33da9653ba787d7be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68392fad_13968332",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-16T06:45:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8bd8beb6_6975a811",
       "revId": "fd7c686bd678cbb9278df5c33da9653ba787d7be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
