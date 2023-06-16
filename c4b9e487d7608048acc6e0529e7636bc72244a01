@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "672dfa24_5783a6bf",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-16T04:36:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "40cd6e07_6f68cdad",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa6cdb3a_b2524a3e",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-15T00:09:47Z",
       "side": 1,
       "message": "I think we should pass the socket fd in as well (effectively \"borrowing\" it), and stash it in `struct pldm_socket_sndbuf`. That way we don\u0027t have to pass it through the other `pldm_socket_sndbuf_*()` APIs (which risks passing an through an inconsistent fd).",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99d41591_c3c2052c",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-16T04:36:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fa6cdb3a_b2524a3e",
       "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a776276_d4174c6c",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-16T04:36:24Z",
+      "side": 1,
+      "message": "Yeah I was thinking it might be better there.",
+      "parentUuid": "acc8b9b7_4d23a8e2",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a259a95_6a380c0e",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-06-15T00:09:47Z",
       "side": 1,
       "message": "Based on the previous suggestions we would need to add `int socket` here.",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d3a9e3c_f41b1ca1",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-16T04:36:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a259a95_6a380c0e",
       "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -103,6 +175,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1359be5_d2f0207c",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-16T04:36:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "40d16175_5b72133e",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28f85dd9_a293144c",
@@ -116,6 +206,24 @@
       "writtenOn": "2023-06-15T00:09:47Z",
       "side": 1,
       "message": "With the above we can drop the `socket` parameter to both of these (though as a result of other suggestions, they are replaced by doing the get in `pldm_socket_sndbuf_init()` and renaming set to `pldm_socket_sndbuf_accommodate()`).",
+      "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98245b33_e62895a6",
+        "filename": "src/transport/socket.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-16T04:36:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28f85dd9_a293144c",
       "revId": "c4b9e487d7608048acc6e0529e7636bc72244a01",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
