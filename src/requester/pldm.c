@@ -104,7 +104,8 @@ pldm_requester_rc_t pldm_recv(mctp_eid_t eid, int mctp_fd,
 	pldm_requester_rc_t rc =
 		pldm_recv_any(eid, mctp_fd, pldm_resp_msg, resp_msg_len);
 	struct pldm_msg_hdr *hdr = (struct pldm_msg_hdr *)(*pldm_resp_msg);
-	if (hdr->instance_id != instance_id) {
+	if (rc == PLDM_REQUESTER_SUCCESS && hdr &&
+	    hdr->instance_id != instance_id) {
 		free(*pldm_resp_msg);
 		*pldm_resp_msg = NULL;
 		return PLDM_REQUESTER_INSTANCE_ID_MISMATCH;
