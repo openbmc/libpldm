@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c0142a0e_4a41b325",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-17T05:12:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be783b14_822c273b",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8f84049b_5ab50edc",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 24
@@ -58,6 +82,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a11e69a_6fb53836",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-17T05:12:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db346999_d77b5e51",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6fda47e_13fd8db3",
@@ -71,6 +113,24 @@
       "writtenOn": "2023-06-16T00:57:34Z",
       "side": 1,
       "message": "Thanks. This is a better description.",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8304c470_7baa7413",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-17T05:12:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e6fda47e_13fd8db3",
       "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -92,6 +152,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a72abac3_f020015d",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-17T05:12:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "125de307_6c177e1f",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cec274ab_303d05f0",
@@ -105,6 +183,24 @@
       "writtenOn": "2023-06-16T00:57:34Z",
       "side": 1,
       "message": "Why does this patch need this extra argument? It shouldn\u0027t have any OEM bits in it now.",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a5c7e4_a3e7e41b",
+        "filename": "src/meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-17T05:12:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cec274ab_303d05f0",
       "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -126,6 +222,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d022da_8a0d7cac",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-17T05:12:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17c99902_603bfc25",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20f654d2_a1ccfdc5",
@@ -143,6 +257,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22fe206a_0f82abe7",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-17T05:12:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20f654d2_a1ccfdc5",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d151bb1_448aa2da",
@@ -156,6 +288,24 @@
       "writtenOn": "2023-06-16T00:57:34Z",
       "side": 1,
       "message": "See errno comment above.",
+      "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "325d7a27_d703bdfe",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-17T05:12:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d151bb1_448aa2da",
       "revId": "56db4ba94f5bdca42377c749f7bad8ed4da5d492",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
