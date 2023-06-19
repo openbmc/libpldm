@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb18dc2b_45b7f794",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-06-19T14:32:40Z",
+      "side": 1,
+      "message": "Nit: please split the comments into 2 line to avoid crossing 80-character limit.",
+      "revId": "9fd02213c1cde88d485cabe120053186d2c59520",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "439b3560_78f6dbbc",
+        "filename": "src/pdr.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-06-19T14:32:40Z",
+      "side": 1,
+      "message": "The function says find_container_id. You are returning the containedEntityContainerID of the child as the container_id not the containerEntityContainerID. Which seems incorrect. Please correct me if I am wrong.\n\nThere can be multiple contained entities(children) and one container entity as per the Entity Association PDR.",
+      "range": {
+        "startLine": 422,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 46
+      },
+      "revId": "9fd02213c1cde88d485cabe120053186d2c59520",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab11b72d_f08ab65e",
+        "filename": "src/pdr.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-06-19T14:32:40Z",
+      "side": 1,
+      "message": "I suppose we don\u0027t need to loop further if we find a match. Should we return from here?",
+      "revId": "9fd02213c1cde88d485cabe120053186d2c59520",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
