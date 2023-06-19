@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de00f92b_482db3f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-19T03:44:17Z",
+      "side": 1,
+      "message": "Hi Pavithra, I made a mistake with a comment regarding an error code on PS24 so I\u0027ve left a comment about fixing that. But there were are couple of bigger snags, the main one being the issue of handling endianness. The current approach is error prone and needs to be fixed, so I\u0027ve marked the patch as -1 for now.\n\nBroadly though, I think this patch is very close to being something we can merge. Thanks for iterating on it with me.",
+      "revId": "6d26d60ff9675d5b6a082b1799cbca2c2d367ee7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e321e641_11204498",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-19T03:44:17Z",
+      "side": 1,
+      "message": "\u003e or when repo is NULL.\n\nThat sounds more like a case for `EINVAL`.\n\nSeparately, are the error values negative or positive? I\u0027d suggest we go with negative. Whether they\u0027re negative or positive needs to be documented here.",
+      "revId": "6d26d60ff9675d5b6a082b1799cbca2c2d367ee7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb4f3be_d3eeb5cd",
+        "filename": "src/pdr.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-19T03:44:17Z",
+      "side": 1,
+      "message": "Oh whoops, I think I lead you astray here on PS24. I think `repo \u003d\u003d NULL` is a caller error, we should probably use `return -EINVAL` instead. But `return -ENOKEY` down below on line 425 still feels right.",
+      "revId": "6d26d60ff9675d5b6a082b1799cbca2c2d367ee7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb91c39b_f0babe7c",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 1680,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-19T03:44:17Z",
+      "side": 1,
+      "message": "Okay, so this endian conversion makes me glad I asked for tests, if only to spot this problem with the API.\n\nWe must handle endian conversions inside the library\u0027s implementation. We must not expose endian concerns through the library\u0027s APIs. The library\u0027s APIs _must_ _always_ operate with values in host endianness. I\u0027ve written a blog post to unpack this position:\n\nhttps://amboar.github.io/notes/2023/06/19/representations-and-design-boundaries-with-endianness.html\n\nPlease move the endian conversion inside the implementation of `pldm_pdr_find_container_id_range_exclude()`.",
+      "revId": "6d26d60ff9675d5b6a082b1799cbca2c2d367ee7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
