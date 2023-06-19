@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87e3388a_497e4745",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-19T09:55:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e321e641_11204498",
+      "revId": "6d26d60ff9675d5b6a082b1799cbca2c2d367ee7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccb4f3be_d3eeb5cd",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c17cc0c0_8c0d8a9f",
+        "filename": "src/pdr.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-19T09:55:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccb4f3be_d3eeb5cd",
+      "revId": "6d26d60ff9675d5b6a082b1799cbca2c2d367ee7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb91c39b_f0babe7c",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-06-19T03:44:17Z",
       "side": 1,
       "message": "Okay, so this endian conversion makes me glad I asked for tests, if only to spot this problem with the API.\n\nWe must handle endian conversions inside the library\u0027s implementation. We must not expose endian concerns through the library\u0027s APIs. The library\u0027s APIs _must_ _always_ operate with values in host endianness. I\u0027ve written a blog post to unpack this position:\n\nhttps://amboar.github.io/notes/2023/06/19/representations-and-design-boundaries-with-endianness.html\n\nPlease move the endian conversion inside the implementation of `pldm_pdr_find_container_id_range_exclude()`.",
+      "revId": "6d26d60ff9675d5b6a082b1799cbca2c2d367ee7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54088d1b_795faa66",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 1680,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-19T09:55:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb91c39b_f0babe7c",
       "revId": "6d26d60ff9675d5b6a082b1799cbca2c2d367ee7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
