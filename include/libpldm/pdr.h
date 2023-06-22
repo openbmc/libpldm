@@ -186,19 +186,18 @@ pldm_pdr_record *pldm_pdr_find_last_in_range(const pldm_pdr *repo,
  * @param[in] repo - opaque pointer acting as a PDR repo handle
  * @param[in] entity_type - entity type
  * @param[in] entity_instance - instance of the entity
- * @param[in] range_exclude_start_handle - first record handle in the range of the remote endpoint
- *            which is ignored
- * @param[in] range_exclude_end_handle - last record handle in the range of the remote endpoint
- *            which is ignored
+ * @param[in] child_index - index of the child entity whose container id needs to be found
+ * @param[in] range_exclude_start_handle - first record handle in the range of the remote endpoint which is ignored
+ * @param[in] range_exclude_end_handle - last record handle in the range of the remote endpoint which is ignored
  * @param[out] container_id - container id of the contained entity
  *
- * @return container id of the PDR record found on success, -EINVAL when repo is NULL, or -ENOKEY if
- * the container id is not found.
+ * @return container id of the PDR record found on success,-EINVAL when repo is NULL
+ * or -ENOKEY if the container id is not found.
  */
-int pldm_pdr_find_container_id_range_exclude(
+int pldm_pdr_find_child_container_id_index_range_exclude(
 	const pldm_pdr *repo, uint16_t entity_type, uint16_t entity_instance,
-	uint32_t range_exclude_start_handle, uint32_t range_exclude_end_handle,
-	uint16_t *container_id);
+	uint8_t child_index, uint32_t range_exclude_start_handle,
+	uint32_t range_exclude_end_handle, uint16_t *container_id);
 
 /* ======================= */
 /* FRU Record Set PDR APIs */

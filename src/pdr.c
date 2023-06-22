@@ -374,10 +374,10 @@ static bool pldm_record_handle_in_range(uint32_t record_handle,
 }
 
 LIBPLDM_ABI_TESTING
-int pldm_pdr_find_container_id_range_exclude(
+int pldm_pdr_find_child_container_id_index_range_exclude(
 	const pldm_pdr *repo, uint16_t entity_type, uint16_t entity_instance,
-	uint32_t range_exclude_start_handle, uint32_t range_exclude_end_handle,
-	uint16_t *container_id)
+	uint8_t child_index, uint32_t range_exclude_start_handle,
+	uint32_t range_exclude_end_handle, uint16_t *container_id)
 {
 	pldm_pdr_record *record;
 	if (!repo) {
@@ -408,10 +408,15 @@ int pldm_pdr_find_container_id_range_exclude(
 		// this cast is valid with respect to alignment because
 		// struct pldm_pdr_hdr is declared with __attribute__((packed))
 		pdr = (void *)(record->data + sizeof(struct pldm_pdr_hdr));
+		if (pdr->num_children < child_index) {
+			continue;
+		}
+
 		if (pdr->num_children == 0) {
 			continue;
 		}
-		child = (&pdr->children[0]);
+
+		child = (&pdr->children[child_index]);
 		is_container_entity_type = pdr->container.entity_type ==
 					   entity_type;
 		is_container_entity_instance_number =
