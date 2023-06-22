@@ -374,7 +374,7 @@ static bool pldm_record_handle_in_range(uint32_t record_handle,
 }
 
 LIBPLDM_ABI_TESTING
-int pldm_pdr_find_container_id_range_exclude(
+int pldm_pdr_find_child_container_id_range_exclude(
 	const pldm_pdr *repo, uint16_t entity_type, uint16_t entity_instance,
 	uint32_t range_exclude_start_handle, uint32_t range_exclude_end_handle,
 	uint16_t *container_id)
