@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5fbb556_653d9f72",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-22T10:20:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fb18dc2b_45b7f794",
+      "revId": "9fd02213c1cde88d485cabe120053186d2c59520",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "439b3560_78f6dbbc",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-06-19T14:32:40Z",
       "side": 1,
       "message": "The function says find_container_id. You are returning the containedEntityContainerID of the child as the container_id not the containerEntityContainerID. Which seems incorrect. Please correct me if I am wrong.\n\nThere can be multiple contained entities(children) and one container entity as per the Entity Association PDR.",
+      "range": {
+        "startLine": 422,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 46
+      },
+      "revId": "9fd02213c1cde88d485cabe120053186d2c59520",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b52ceb8b_a6812a1d",
+        "filename": "src/pdr.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-22T10:20:27Z",
+      "side": 1,
+      "message": "Yes,  will change the name of the function to `pldm_pdr_find_child_container_id_range_exclude()`. \nYes, there can be multiple contained entities but only when the instance number and entity type of the contained entity (which is unique) match we are returning the container id corresponding to that containedEntity.",
+      "parentUuid": "439b3560_78f6dbbc",
       "range": {
         "startLine": 422,
         "startChar": 0,
