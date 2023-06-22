@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5080505_1f3fdc11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-22T23:33:05Z",
+      "side": 1,
+      "message": "Can we please be more explicit here. For example:\n\n```pdr: Rename pldm_pdr_find_container_id_range_exclude()```",
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea82642b_6a9c7375",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-22T23:33:05Z",
+      "side": 1,
+      "message": "This should be \"renamed\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 49,
+        "endLine": 9,
+        "endChar": 54
+      },
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d66b51_f1032a54",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-22T23:33:05Z",
+      "side": 1,
+      "message": "Can you please mention in the commit message that the change addresses the comment below (i.e. include the link in the commit message as well):\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/63615/comment/439b3560_78f6dbbc/",
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fbe1a48_48f42d4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-22T23:33:05Z",
+      "side": 1,
+      "message": "Can you please add `Fixes: 5dc025719dc3 (“pdr: Add pldm_pdr_find_container_id_range_exclude() API”)` above this line",
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06264771_98f7eaba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-22T23:33:05Z",
+      "side": 1,
+      "message": "Hi Pavithra. Each commit needs to address a single problem. This commit addresses multiple problems. Not only that, but it leaves the fact that it addresses a correctness bug unmentioned in the commit message.\n\nPlease make separate changes for the separate problems:\n\n1. Fix the name of the function\n2. Fix the fact that it returns failure even if the relevant child container ID is found.\n\nI\u0027ve mentioned in my comments on the commit message that you need to add a `Fixes: ...` tag. Please do this for both commits I\u0027ve asked for above.\n\nIMO you can drop the line wrapping changes. I\u0027ve left more comments on that inline.",
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "465aba26_9232ec48",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-22T23:33:05Z",
+      "side": 1,
+      "message": "Trailing whitespace needs to be removed.",
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09fceaaa_1238b47c",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-22T23:33:05Z",
+      "side": 1,
+      "message": "Contrary to Arun\u0027s comment there\u0027s no need to line wrap this IMO as the project line wrap point is set at 120 characters, not 80. It was fine as it was.\n\nHowever, if you feel the need to wrap the line then please also indent it as it was prior to your change.",
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00e0bbb7_dd53c866",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-22T23:33:05Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d38c8e40_0053b508",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-22T23:33:05Z",
+      "side": 1,
+      "message": "Trailing whitespace needs to be removed.",
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca2ba99d_975e7f2d",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-22T23:33:05Z",
+      "side": 1,
+      "message": "This takes the patch beyond just \"renaming the function\". This must be a separate commit with its own justification. There\u0027s no mention of this fix anywhere in the commit message, or why it\u0027s correct.",
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
