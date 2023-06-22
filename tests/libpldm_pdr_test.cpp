@@ -1642,7 +1642,7 @@ TEST(EntityAssociationPDR, testEntityInstanceNumber)
     pldm_entity_association_tree_destroy(tree);
 }
 
-TEST(EntityAssociationPDR, testFindContainerID)
+TEST(EntityAssociationPDR, testFindChildContainerID)
 {
     pldm_entity entities[3]{};
     entities[0].entity_type = 1;
@@ -1675,13 +1675,13 @@ TEST(EntityAssociationPDR, testFindContainerID)
     EXPECT_EQ(pldm_pdr_get_record_count(repo), 1u);
 
     uint16_t container_id{};
-    pldm_pdr_find_container_id_range_exclude(repo, 1, 1, 0x01000000, 0x01FFFFFF,
-                                             &container_id);
+    pldm_pdr_find_child_container_id_range_exclude(repo, 1, 1, 0x01000000,
+                                                   0x01FFFFFF, &container_id);
     EXPECT_EQ(container_id, 2);
 
     uint16_t container_id1{};
-    pldm_pdr_find_container_id_range_exclude(repo, 1, 1, 0x00000001, 0x00FFFFFF,
-                                             &container_id1);
+    pldm_pdr_find_child_container_id_range_exclude(repo, 1, 1, 0x00000001,
+                                                   0x00FFFFFF, &container_id1);
     EXPECT_EQ(container_id1, 0);
 
     pldm_pdr_destroy(repo);
