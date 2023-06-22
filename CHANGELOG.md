@@ -40,7 +40,7 @@ Change categories:
 4. pdr: Add APIs for creating and locating remote PDRs
 5. pdr: Add pldm_pdr_find_last_in_range()
 6. pdr: Add pldm_entity_association_pdr_add_from_node_with_record_handle()
-7. pdr: Add pldm_pdr_find_container_id_range_exclude()
+7. pdr: Add pldm_pdr_find_child_container_id_range_exclude()
 
 ### Changed
 
