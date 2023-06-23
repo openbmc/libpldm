@@ -17,6 +17,8 @@ Change categories:
 
 ## [Unreleased]
 
+## [0.3.0] - 2023-06-23
+
 ### Added
 
 1. Add encode/decode pldmMessagePollEvent data
