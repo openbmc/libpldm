@@ -30,6 +30,10 @@ Change categories:
    - pldm_bios_table_attr_entry_string_encode()
    - pldm_bios_table_attr_entry_string_decode_def_string_length()
 
+### Fixes
+
+1. pdr: Return success for pldm_pdr_find_child_container_id_range_exclude() API
+
 ## [0.3.0] - 2023-06-23
 
 ### Added
