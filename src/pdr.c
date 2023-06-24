@@ -419,6 +419,7 @@ int pldm_pdr_find_container_id_range_exclude(
 		if (is_container_entity_type &&
 		    is_container_entity_instance_number) {
 			*container_id = le16toh(child->entity_container_id);
+			return 0;
 		}
 	}
 	return -ENOKEY;
