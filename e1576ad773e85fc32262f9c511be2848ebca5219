@@ -183,6 +183,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f7803d1_8c8f416a",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-24T03:53:33Z",
+      "side": 1,
+      "message": "Arun, as per spec DSP0248 (section 11.3) all the child containedEntitys have the same container ids. So if we return the first child contained entity it will be the same for all the contained entities for that particular parent.",
+      "parentUuid": "47fb7be8_3b90e659",
+      "range": {
+        "startLine": 377,
+        "startChar": 20,
+        "endLine": 377,
+        "endChar": 24
+      },
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca2ba99d_975e7f2d",
