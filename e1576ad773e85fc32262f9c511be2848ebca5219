@@ -359,6 +359,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42d37630_69d4c588",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-26T01:47:39Z",
+      "side": 1,
+      "message": "@Pavithra that is an excellent reference and explanation. Can you please include this information in the commit message?",
+      "parentUuid": "7f7803d1_8c8f416a",
+      "range": {
+        "startLine": 377,
+        "startChar": 20,
+        "endLine": 377,
+        "endChar": 24
+      },
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca2ba99d_975e7f2d",
         "filename": "src/pdr.c",
         "patchSetId": 1
