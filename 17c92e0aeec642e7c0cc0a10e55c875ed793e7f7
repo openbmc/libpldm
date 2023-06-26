@@ -16,6 +16,24 @@
       "message": "Please delete the blank line here. The `Fixes:` tag must form part of the \"commit trailer\" as the final paragraph. This is important as git has tooling to extract these \"trailers\". Being consistent with the tags means we can exploit the tooling to understand our development behaviours by inspection:\n\nhttps://git-scm.com/docs/git-interpret-trailers",
       "revId": "17c92e0aeec642e7c0cc0a10e55c875ed793e7f7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b315a09_ab856652",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-26T09:21:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fd48ee1_b2e4f1ca",
+      "revId": "17c92e0aeec642e7c0cc0a10e55c875ed793e7f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
