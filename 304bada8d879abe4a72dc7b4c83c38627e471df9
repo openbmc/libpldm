@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "323e02ea_4033c833",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-26T01:39:17Z",
+      "side": 1,
+      "message": "Please try to be as specific as possible in the commit subject. \"Minor fix\" is vague. I think this is an improvement, for example:\n\n```\npdr: Return success for pldm_pdr_find_child_container_id_range_exclude()\n```",
+      "revId": "304bada8d879abe4a72dc7b4c83c38627e471df9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50a31aab_0ab84a80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-26T01:39:17Z",
+      "side": 1,
+      "message": "The problem isn\u0027t the extra looping (though that is *a* performance problem), it\u0027s that the function returns `-ENOKEY` _even if a child node meeting the criteria is found_. Until this patch we can\u0027t actually use the function to do what we need unless we ignore the return value, in which case it still won\u0027t do what we need as not every call is guaranteed to succeed.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 31
+      },
+      "revId": "304bada8d879abe4a72dc7b4c83c38627e471df9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6b51bd4_c31e21d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-26T01:39:17Z",
+      "side": 1,
+      "message": "Can you please put a blank line above so this properly forms its own paragraph?",
+      "revId": "304bada8d879abe4a72dc7b4c83c38627e471df9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
