@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Changed
+
+1. bios_table: pldm_bios_table_string_entry_encode_check(): Handle overflow
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():

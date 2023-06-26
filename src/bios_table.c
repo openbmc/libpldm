@@ -36,12 +36,16 @@ static void set_errmsg(const char **errmsg, const char *msg)
 	}
 }
 
-static uint16_t get_bios_string_handle(void)
+static int get_bios_string_handle(uint16_t *val)
 {
 	static uint16_t handle = 0;
 	assert(handle != UINT16_MAX);
+	if (handle == UINT16_MAX) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
 
-	return handle++;
+	*val = handle++;
+	return PLDM_SUCCESS;
 }
 
 LIBPLDM_ABI_STABLE
@@ -64,7 +68,12 @@ int pldm_bios_table_string_entry_encode_check(void *entry, size_t entry_length,
 	size_t length = pldm_bios_table_string_entry_encode_length(str_length);
 	BUFFER_SIZE_EXPECT(entry_length, length);
 	struct pldm_bios_string_table_entry *string_entry = entry;
-	string_entry->string_handle = htole16(get_bios_string_handle());
+	uint16_t handle;
+	int rc = get_bios_string_handle(&handle);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+	string_entry->string_handle = htole16(handle);
 	string_entry->string_length = htole16(str_length);
 	memcpy(string_entry->name, str, str_length);
 	return PLDM_SUCCESS;
