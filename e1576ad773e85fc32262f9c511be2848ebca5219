@@ -431,6 +431,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0b60a44_5be10dc8",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-26T09:45:41Z",
+      "side": 1,
+      "message": "Arun, Could you please explain it with a diagram? I am not following you. AFAIK, every child-contained entity will have the same container ID always. Only the parent container id can be different. Even though if child container id differs, the entity instance number and entity type should match and only then container id is returned corresponding to that.",
+      "parentUuid": "10a8b73f_a22ad6b8",
+      "range": {
+        "startLine": 377,
+        "startChar": 20,
+        "endLine": 377,
+        "endChar": 24
+      },
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca2ba99d_975e7f2d",
         "filename": "src/pdr.c",
         "patchSetId": 1
