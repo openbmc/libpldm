@@ -1642,6 +1642,7 @@ TEST(EntityAssociationPDR, testEntityInstanceNumber)
     pldm_entity_association_tree_destroy(tree);
 }
 
+#ifdef LIBPLDM_API_TESTING
 TEST(EntityAssociationPDR, testFindContainerID)
 {
     pldm_entity entities[3]{};
@@ -1687,3 +1688,4 @@ TEST(EntityAssociationPDR, testFindContainerID)
     pldm_pdr_destroy(repo);
     pldm_entity_association_tree_destroy(tree);
 }
+#endif
