@@ -21,6 +21,7 @@ Change categories:
 
 1. requester: Mark pldm_close() as LIBPLDM_ABI_TESTING
 2. requester: Expose pldm_close() in header
+3. bios_table: pldm_bios_table_string_entry_encode_check(): Handle overflow
 
 ### Removed
 
