@@ -19,8 +19,8 @@ $VAR1 = {
                          'utils.h' => 1
                        },
           'Language' => 'C',
-          'LibraryName' => 'libpldm.so.0.2.0',
-          'LibraryVersion' => '0.2.0',
+          'LibraryName' => 'libpldm.so.0.3.0',
+          'LibraryVersion' => '0.3.0',
           'NameSpaces' => {},
           'Needed' => {
                         'libc.so.6' => 1
@@ -158,7 +158,22 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_get_date_time_resp'
                                        },
-                            '108596' => {
+                            '10972' => {
+                                         'Header' => 'bios.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'instance_id',
+                                                               'type' => '168'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'msg',
+                                                               'type' => '1615'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'encode_get_date_time_req'
+                                       },
+                            '111614' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -177,7 +192,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_new_file_with_metadata_resp'
                                         },
-                            '108779' => {
+                            '111797' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -221,7 +236,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_new_file_with_metadata_req'
                                         },
-                            '108997' => {
+                            '112015' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -240,7 +255,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_new_file_with_metadata_resp'
                                         },
-                            '109104' => {
+                            '112122' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -283,7 +298,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_new_file_with_metadata_req'
                                         },
-                            '109397' => {
+                            '112415' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -302,7 +317,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_file_ack_with_meta_data_resp'
                                         },
-                            '109575' => {
+                            '112593' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -346,22 +361,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_file_ack_with_meta_data_req'
                                         },
-                            '10972' => {
-                                         'Header' => 'bios.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'instance_id',
-                                                               'type' => '168'
-                                                             },
-                                                      '1' => {
-                                                               'name' => 'msg',
-                                                               'type' => '1615'
-                                                             }
-                                                    },
-                                         'Return' => '74',
-                                         'ShortName' => 'encode_get_date_time_req'
-                                       },
-                            '109773' => {
+                            '112791' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -380,7 +380,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_file_ack_with_meta_data_resp'
                                         },
-                            '109875' => {
+                            '112893' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -423,7 +423,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_file_ack_with_meta_data_req'
                                         },
-                            '110168' => {
+                            '113186' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -442,7 +442,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_file_ack_resp'
                                         },
-                            '110275' => {
+                            '113293' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -469,7 +469,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_file_ack_req'
                                         },
-                            '110493' => {
+                            '113511' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -488,7 +488,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_file_ack_resp'
                                         },
-                            '110666' => {
+                            '113684' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -515,7 +515,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_file_ack_req'
                                         },
-                            '110802' => {
+                            '113820' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -538,7 +538,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_by_type_resp'
                                         },
-                            '110929' => {
+                            '113947' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -573,7 +573,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_by_type_req'
                                         },
-                            '111187' => {
+                            '114205' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -600,7 +600,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_by_type_resp'
                                         },
-                            '111400' => {
+                            '114418' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -631,7 +631,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_by_type_req'
                                         },
-                            '111550' => {
+                            '114568' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -650,7 +650,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_new_file_resp'
                                         },
-                            '111657' => {
+                            '114675' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -677,7 +677,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_new_file_req'
                                         },
-                            '111875' => {
+                            '114893' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -696,7 +696,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_new_file_resp'
                                         },
-                            '112048' => {
+                            '115066' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -723,7 +723,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_new_file_req'
                                         },
-                            '112184' => {
+                            '115202' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -746,7 +746,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_by_type_memory_resp'
                                         },
-                            '112311' => {
+                            '115329' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -785,7 +785,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_by_type_memory_req'
                                         },
-                            '112589' => {
+                            '115607' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -812,7 +812,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_by_type_memory_resp'
                                         },
-                            '112802' => {
+                            '115820' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -847,7 +847,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_by_type_memory_req'
                                         },
-                            '112966' => {
+                            '115984' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -870,7 +870,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_write_file_resp'
                                         },
-                            '113164' => {
+                            '116182' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -893,7 +893,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_write_file_resp'
                                         },
-                            '113286' => {
+                            '116304' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -920,7 +920,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_write_file_req'
                                         },
-                            '113504' => {
+                            '116522' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -951,7 +951,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_write_file_req'
                                         },
-                            '113653' => {
+                            '116671' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -974,7 +974,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_read_file_resp'
                                         },
-                            '113851' => {
+                            '116869' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1001,7 +1001,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_read_file_resp'
                                         },
-                            '113981' => {
+                            '116999' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1028,7 +1028,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_read_file_req'
                                         },
-                            '114199' => {
+                            '117217' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1055,7 +1055,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_read_file_req'
                                         },
-                            '114328' => {
+                            '117346' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1090,7 +1090,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_get_file_table_resp'
                                         },
-                            '114494' => {
+                            '117512' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1117,7 +1117,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_get_file_table_req'
                                         },
-                            '114703' => {
+                            '117721' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1152,7 +1152,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_get_file_table_resp'
                                         },
-                            '114986' => {
+                            '118004' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1179,7 +1179,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_get_file_table_req'
                                         },
-                            '115115' => {
+                            '118133' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1202,7 +1202,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_memory_resp'
                                         },
-                            '115236' => {
+                            '118254' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1237,7 +1237,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_memory_req'
                                         },
-                            '115483' => {
+                            '118501' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1264,7 +1264,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_memory_resp'
                                         },
-                            '115687' => {
+                            '118705' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1295,7 +1295,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_memory_req'
                                         },
-                            '116633' => {
+                            '119651' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1326,7 +1326,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_get_alert_status_resp'
                                         },
-                            '116864' => {
+                            '119882' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1345,7 +1345,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_get_alert_status_req'
                                         },
-                            '116952' => {
+                            '119970' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1372,7 +1372,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_get_alert_status_resp'
                                         },
-                            '117085' => {
+                            '120103' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1395,7 +1395,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_get_alert_status_req'
                                         },
-                            '118124' => {
+                            '121142' => {
                                           'Header' => 'platform_oem_ibm.h',
                                           'Param' => {
                                                        '0' => {
@@ -4302,7 +4302,7 @@ $VAR1 = {
                                          'Return' => '168',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_decode_def_indices'
                                        },
-                            '57167' => {
+                            '57166' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4321,7 +4321,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_decode_pv_hdls_check'
                                        },
-                            '57318' => {
+                            '57317' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4336,7 +4336,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_decode_def_num_check'
                                        },
-                            '57483' => {
+                            '57482' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4351,7 +4351,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_decode_pv_num_check'
                                        },
-                            '57549' => {
+                            '57548' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4364,13 +4364,13 @@ $VAR1 = {
                                                              },
                                                       '2' => {
                                                                'name' => 'info',
-                                                               'type' => '57802'
+                                                               'type' => '57801'
                                                              }
                                                     },
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_encode_check'
                                        },
-                            '57807' => {
+                            '57806' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4385,7 +4385,7 @@ $VAR1 = {
                                          'Return' => '123',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_encode_length'
                                        },
-                            '57873' => {
+                            '57872' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4396,7 +4396,7 @@ $VAR1 = {
                                          'Return' => '4895',
                                          'ShortName' => 'pldm_bios_table_attr_entry_decode_string_handle'
                                        },
-                            '57926' => {
+                            '57925' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4407,7 +4407,7 @@ $VAR1 = {
                                          'Return' => '168',
                                          'ShortName' => 'pldm_bios_table_attr_entry_decode_attribute_type'
                                        },
-                            '57979' => {
+                            '57978' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4418,7 +4418,7 @@ $VAR1 = {
                                          'Return' => '4895',
                                          'ShortName' => 'pldm_bios_table_attr_entry_decode_attribute_handle'
                                        },
-                            '58514' => {
+                            '58513' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4437,7 +4437,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_string_entry_decode_string_check'
                                        },
-                            '58680' => {
+                            '58679' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4448,7 +4448,7 @@ $VAR1 = {
                                          'Return' => '4895',
                                          'ShortName' => 'pldm_bios_table_string_entry_decode_string_length'
                                        },
-                            '58733' => {
+                            '58732' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4459,7 +4459,7 @@ $VAR1 = {
                                          'Return' => '4895',
                                          'ShortName' => 'pldm_bios_table_string_entry_decode_handle'
                                        },
-                            '58786' => {
+                            '58785' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4482,7 +4482,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_string_entry_encode_check'
                                        },
-                            '59013' => {
+                            '59012' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
                                                       '0' => {
@@ -4599,7 +4599,7 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_set_bios_table_req'
                                       },
-                            '64581' => {
+                            '64580' => {
                                          'Header' => 'utils.h',
                                          'Param' => {
                                                       '0' => {
@@ -4610,7 +4610,7 @@ $VAR1 = {
                                          'Return' => '6265',
                                          'ShortName' => 'is_transfer_flag_valid'
                                        },
-                            '64732' => {
+                            '64731' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4627,11 +4627,11 @@ $VAR1 = {
                                                              },
                                                       '3' => {
                                                                'name' => 'non_functioning_component_indication',
-                                                               'type' => '64916'
+                                                               'type' => '64915'
                                                              },
                                                       '4' => {
                                                                'name' => 'non_functioning_component_bitmap',
-                                                               'type' => '64921'
+                                                               'type' => '64920'
                                                              }
                                                     },
                                          'Return' => '74',
@@ -4660,7 +4660,7 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_set_bios_table_resp'
                                       },
-                            '64931' => {
+                            '64930' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4679,7 +4679,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_cancel_update_req'
                                        },
-                            '65084' => {
+                            '65083' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4698,7 +4698,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_cancel_update_component_resp'
                                        },
-                            '65166' => {
+                            '65165' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4717,7 +4717,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_cancel_update_component_req'
                                        },
-                            '65319' => {
+                            '65318' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4758,13 +4758,13 @@ $VAR1 = {
                                                              },
                                                       '9' => {
                                                                'name' => 'update_option_flags_enabled',
-                                                               'type' => '65660'
+                                                               'type' => '65659'
                                                              }
                                                     },
                                          'Return' => '74',
                                          'ShortName' => 'decode_get_status_resp'
                                        },
-                            '65670' => {
+                            '65669' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4783,7 +4783,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_get_status_req'
                                        },
-                            '65823' => {
+                            '65822' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4806,7 +4806,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_activate_firmware_resp'
                                        },
-                            '65949' => {
+                            '65948' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4829,7 +4829,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_activate_firmware_req'
                                        },
-                            '66170' => {
+                            '66169' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4852,7 +4852,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_apply_complete_resp'
                                        },
-                            '66342' => {
+                            '66341' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4869,13 +4869,13 @@ $VAR1 = {
                                                              },
                                                       '3' => {
                                                                'name' => 'comp_activation_methods_modification',
-                                                               'type' => '66464'
+                                                               'type' => '66463'
                                                              }
                                                     },
                                          'Return' => '74',
                                          'ShortName' => 'decode_apply_complete_req'
                                        },
-                            '66474' => {
+                            '66473' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4898,7 +4898,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_verify_complete_resp'
                                        },
-                            '66646' => {
+                            '66645' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4917,7 +4917,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_verify_complete_req'
                                        },
-                            '66728' => {
+                            '66727' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4940,7 +4940,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_transfer_complete_resp'
                                        },
-                            '66900' => {
+                            '66899' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -4982,7 +4982,7 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_set_bios_table_resp'
                                       },
-                            '66982' => {
+                            '66981' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5005,7 +5005,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_request_firmware_data_resp'
                                        },
-                            '67154' => {
+                            '67153' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5028,7 +5028,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_request_firmware_data_req'
                                        },
-                            '67286' => {
+                            '67285' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5053,7 +5053,7 @@ $VAR1 = {
                                                              },
                                                       '5' => {
                                                                'name' => 'update_option_flags_enabled',
-                                                               'type' => '65660'
+                                                               'type' => '65659'
                                                              },
                                                       '6' => {
                                                                'name' => 'time_before_req_fw_data',
@@ -5063,7 +5063,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_update_component_resp'
                                        },
-                            '67522' => {
+                            '67521' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5100,7 +5100,7 @@ $VAR1 = {
                                                              },
                                                       '6' => {
                                                                'name' => 'update_option_flags',
-                                                               'type' => '60415'
+                                                               'type' => '60414'
                                                              },
                                                       '7' => {
                                                                'name' => 'comp_ver_str_type',
@@ -5112,13 +5112,13 @@ $VAR1 = {
                                                              },
                                                       '9' => {
                                                                'name' => 'comp_ver_str',
-                                                               'type' => '67926'
+                                                               'type' => '67925'
                                                              }
                                                     },
                                          'Return' => '74',
                                          'ShortName' => 'encode_update_component_req'
                                        },
-                            '67936' => {
+                            '67935' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5184,7 +5184,7 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_set_bios_table_req'
                                       },
-                            '68132' => {
+                            '68131' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5225,7 +5225,7 @@ $VAR1 = {
                                                              },
                                                       '8' => {
                                                                'name' => 'comp_ver_str',
-                                                               'type' => '67926'
+                                                               'type' => '67925'
                                                              },
                                                       '9' => {
                                                                'name' => 'msg',
@@ -5235,7 +5235,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_pass_component_table_req'
                                        },
-                            '68545' => {
+                            '68544' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5262,7 +5262,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_request_update_resp'
                                        },
-                            '68686' => {
+                            '68685' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5295,7 +5295,7 @@ $VAR1 = {
                                                              },
                                                       '7' => {
                                                                'name' => 'comp_img_set_ver_str',
-                                                               'type' => '67926'
+                                                               'type' => '67925'
                                                              },
                                                       '8' => {
                                                                'name' => 'msg',
@@ -5309,7 +5309,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_request_update_req'
                                        },
-                            '69051' => {
+                            '69050' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5322,7 +5322,7 @@ $VAR1 = {
                                                              },
                                                       '2' => {
                                                                'name' => 'component_data',
-                                                               'type' => '69207'
+                                                               'type' => '69206'
                                                              },
                                                       '3' => {
                                                                'name' => 'active_comp_ver_str',
@@ -5336,7 +5336,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_get_firmware_parameters_resp_comp_entry'
                                        },
-                            '69217' => {
+                            '69216' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5349,7 +5349,7 @@ $VAR1 = {
                                                              },
                                                       '2' => {
                                                                'name' => 'resp_data',
-                                                               'type' => '69437'
+                                                               'type' => '69436'
                                                              },
                                                       '3' => {
                                                                'name' => 'active_comp_image_set_ver_str',
@@ -5367,7 +5367,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_get_firmware_parameters_resp'
                                        },
-                            '69442' => {
+                            '69441' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5386,7 +5386,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_get_firmware_parameters_req'
                                        },
-                            '69579' => {
+                            '69578' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5411,13 +5411,13 @@ $VAR1 = {
                                                              },
                                                       '5' => {
                                                                'name' => 'descriptor_data',
-                                                               'type' => '69735'
+                                                               'type' => '69734'
                                                              }
                                                     },
                                          'Return' => '74',
                                          'ShortName' => 'decode_query_device_identifiers_resp'
                                        },
-                            '69745' => {
+                            '69744' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5436,7 +5436,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_query_device_identifiers_req'
                                        },
-                            '69882' => {
+                            '69881' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5449,7 +5449,7 @@ $VAR1 = {
                                                              },
                                                       '2' => {
                                                                'name' => 'pldm_comp_image_info',
-                                                               'type' => '70029'
+                                                               'type' => '70028'
                                                              },
                                                       '3' => {
                                                                'name' => 'comp_version_str',
@@ -5459,7 +5459,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_pldm_comp_image_info'
                                        },
-                            '70034' => {
+                            '70033' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5486,7 +5486,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_vendor_defined_descriptor_value'
                                        },
-                            '70213' => {
+                            '70212' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5509,7 +5509,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_descriptor_type_length_value'
                                        },
-                            '70385' => {
+                            '70384' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5526,7 +5526,7 @@ $VAR1 = {
                                                              },
                                                       '3' => {
                                                                'name' => 'fw_device_id_record',
-                                                               'type' => '70652'
+                                                               'type' => '70651'
                                                              },
                                                       '4' => {
                                                                'name' => 'applicable_components',
@@ -5548,7 +5548,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_firmware_device_id_record'
                                        },
-                            '70657' => {
+                            '70656' => {
                                          'Header' => 'firmware_update.h',
                                          'Param' => {
                                                       '0' => {
@@ -5561,7 +5561,7 @@ $VAR1 = {
                                                              },
                                                       '2' => {
                                                                'name' => 'package_header_info',
-                                                               'type' => '70804'
+                                                               'type' => '70803'
                                                              },
                                                       '3' => {
                                                                'name' => 'package_version_str',
@@ -5594,7 +5594,7 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_set_bios_attribute_current_value_resp'
                                       },
-                            '72995' => {
+                            '72994' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -5648,7 +5648,7 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_set_bios_attribute_current_value_req'
                                       },
-                            '73218' => {
+                            '73217' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -5675,7 +5675,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_set_fru_record_table_req'
                                        },
-                            '73385' => {
+                            '73384' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -5710,7 +5710,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_get_fru_record_table_resp'
                                        },
-                            '73633' => {
+                            '73632' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -5749,7 +5749,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_get_fru_record_table_resp_safe'
                                        },
-                            '73891' => {
+                            '73890' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -5776,7 +5776,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_get_fru_record_table_req'
                                        },
-                            '74109' => {
+                            '74108' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -5807,7 +5807,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_get_fru_record_by_option_resp'
                                        },
-                            '74270' => {
+                            '74269' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -5846,7 +5846,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_get_fru_record_by_option_resp'
                                        },
-                            '74579' => {
+                            '74578' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -5908,7 +5908,7 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_set_bios_attribute_current_value_resp'
                                       },
-                            '74767' => {
+                            '74766' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -5951,7 +5951,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_get_fru_record_by_option_req'
                                        },
-                            '75060' => {
+                            '75059' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -5986,7 +5986,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'get_fru_record_by_option'
                                        },
-                            '75742' => {
+                            '75741' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -6064,7 +6064,7 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_set_bios_attribute_current_value_req'
                                       },
-                            '76005' => {
+                            '76004' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -6091,7 +6091,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_get_fru_record_table_resp'
                                        },
-                            '76209' => {
+                            '76208' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -6114,7 +6114,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_get_fru_record_table_req'
                                        },
-                            '76325' => {
+                            '76324' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -6161,7 +6161,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_get_fru_record_table_metadata_resp'
                                        },
-                            '76629' => {
+                            '76628' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -6209,7 +6209,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'decode_get_fru_record_table_metadata_resp'
                                        },
-                            '76836' => {
+                            '76835' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
                                                       '0' => {
@@ -6228,7 +6228,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_get_fru_record_table_metadata_req'
                                        },
-                            '78453' => {
+                            '78459' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
@@ -6245,7 +6245,7 @@ $VAR1 = {
                                                              },
                                                       '3' => {
                                                                'name' => 'entities',
-                                                               'type' => '79103'
+                                                               'type' => '79109'
                                                              }
                                                     },
                                          'Return' => '1',
@@ -6286,75 +6286,75 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_get_bios_current_value_by_handle_resp'
                                       },
-                            '79144' => {
+                            '79150' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'tree',
-                                                               'type' => '79199'
+                                                               'type' => '79205'
                                                              }
                                                     },
                                          'Return' => '6265',
                                          'ShortName' => 'pldm_is_empty_entity_assoc_tree'
                                        },
-                            '79204' => {
+                            '79210' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'tree',
-                                                               'type' => '79199'
+                                                               'type' => '79205'
                                                              }
                                                     },
                                          'Return' => '1',
                                          'ShortName' => 'pldm_entity_association_tree_destroy_root'
                                        },
-                            '79367' => {
+                            '79373' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'org_tree',
-                                                               'type' => '79199'
+                                                               'type' => '79205'
                                                              },
                                                       '1' => {
                                                                'name' => 'new_tree',
-                                                               'type' => '79199'
+                                                               'type' => '79205'
                                                              }
                                                     },
                                          'Return' => '1',
                                          'ShortName' => 'pldm_entity_association_tree_copy_root'
                                        },
-                            '79583' => {
+                            '79589' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'tree',
-                                                               'type' => '79199'
+                                                               'type' => '79205'
                                                              },
                                                       '1' => {
                                                                'name' => 'entity',
-                                                               'type' => '79108'
+                                                               'type' => '79114'
                                                              }
                                                     },
-                                         'Return' => '78341',
+                                         'Return' => '78347',
                                          'ShortName' => 'pldm_entity_association_tree_find'
                                        },
-                            '80536' => {
+                            '80542' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'repo',
-                                                               'type' => '80872'
+                                                               'type' => '80878'
                                                              }
                                                     },
                                          'Return' => '1',
                                          'ShortName' => 'pldm_pdr_remove_remote_pdrs'
                                        },
-                            '80898' => {
+                            '80904' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'repo',
-                                                               'type' => '80872'
+                                                               'type' => '80878'
                                                              },
                                                       '1' => {
                                                                'name' => 'terminus_handle',
@@ -6364,21 +6364,21 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_pdr_remove_pdrs_by_terminus_handle'
                                        },
-                            '81271' => {
+                            '81277' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'tree',
-                                                               'type' => '79199'
+                                                               'type' => '79205'
                                                              },
                                                       '1' => {
                                                                'name' => 'entity',
                                                                'offset' => '-8',
-                                                               'type' => '77489'
+                                                               'type' => '77488'
                                                              },
                                                       '2' => {
                                                                'name' => 'node',
-                                                               'type' => '79578'
+                                                               'type' => '79584'
                                                              }
                                                     },
                                          'Return' => '1',
@@ -6411,20 +6411,20 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_get_bios_attribute_current_value_by_handle_req'
                                       },
-                            '81662' => {
+                            '81906' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'node',
-                                                               'type' => '78341'
+                                                               'type' => '78347'
                                                              },
                                                       '1' => {
                                                                'name' => 'repo',
-                                                               'type' => '80872'
+                                                               'type' => '80878'
                                                              },
                                                       '2' => {
                                                                'name' => 'entities',
-                                                               'type' => '79103'
+                                                               'type' => '79109'
                                                              },
                                                       '3' => {
                                                                'name' => 'num_entities',
@@ -6442,16 +6442,16 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_entity_association_pdr_add_from_node'
                                        },
-                            '81951' => {
+                            '82200' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'tree',
-                                                               'type' => '79199'
+                                                               'type' => '79205'
                                                              },
                                                       '1' => {
                                                                'name' => 'repo',
-                                                               'type' => '80872'
+                                                               'type' => '80878'
                                                              },
                                                       '2' => {
                                                                'name' => 'is_remote',
@@ -6496,27 +6496,27 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_get_bios_attribute_current_value_by_handle_resp'
                                       },
-                            '83489' => {
+                            '83835' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'parent',
-                                                               'type' => '78341'
+                                                               'type' => '78347'
                                                              },
                                                       '1' => {
                                                                'name' => 'node',
-                                                               'type' => '79108'
+                                                               'type' => '79114'
                                                              }
                                                     },
                                          'Return' => '6265',
                                          'ShortName' => 'pldm_is_current_parent_child'
                                        },
-                            '83727' => {
+                            '84073' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'node',
-                                                               'type' => '78341'
+                                                               'type' => '78347'
                                                              },
                                                       '1' => {
                                                                'name' => 'association_type',
@@ -6526,49 +6526,27 @@ $VAR1 = {
                                          'Return' => '168',
                                          'ShortName' => 'pldm_entity_get_num_children'
                                        },
-                            '84049' => {
+                            '84395' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'node',
-                                                               'type' => '78341'
+                                                               'type' => '78347'
                                                              }
                                                     },
                                          'Return' => '6265',
                                          'ShortName' => 'pldm_entity_is_exist_parent'
                                        },
-                            '84183' => {
+                            '84529' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'node',
-                                                               'type' => '78341'
+                                                               'type' => '78347'
                                                              }
                                                     },
-                                         'Return' => '77489',
+                                         'Return' => '77488',
                                          'ShortName' => 'pldm_entity_get_parent'
-                                       },
-                            '84338' => {
-                                         'Header' => 'pdr.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'node',
-                                                               'type' => '78341'
-                                                             }
-                                                    },
-                                         'Return' => '6265',
-                                         'ShortName' => 'pldm_entity_is_node_parent'
-                                       },
-                            '84493' => {
-                                         'Header' => 'pdr.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'tree',
-                                                               'type' => '79199'
-                                                             }
-                                                    },
-                                         'Return' => '1',
-                                         'ShortName' => 'pldm_entity_association_tree_destroy'
                                        },
                             '8460' => {
                                         'Header' => 'bios.h',
@@ -6597,16 +6575,38 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_get_bios_attribute_current_value_by_handle_req'
                                       },
-                            '84776' => {
+                            '84684' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'node',
+                                                               'type' => '78347'
+                                                             }
+                                                    },
+                                         'Return' => '6265',
+                                         'ShortName' => 'pldm_entity_is_node_parent'
+                                       },
+                            '84839' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'tree',
-                                                               'type' => '79199'
+                                                               'type' => '79205'
+                                                             }
+                                                    },
+                                         'Return' => '1',
+                                         'ShortName' => 'pldm_entity_association_tree_destroy'
+                                       },
+                            '85122' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'tree',
+                                                               'type' => '79205'
                                                              },
                                                       '1' => {
                                                                'name' => 'entities',
-                                                               'type' => '79103'
+                                                               'type' => '79109'
                                                              },
                                                       '2' => {
                                                                'name' => 'size',
@@ -6616,16 +6616,16 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_entity_association_tree_visit'
                                        },
-                            '85812' => {
+                            '86158' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'tree',
-                                                               'type' => '79199'
+                                                               'type' => '79205'
                                                              },
                                                       '1' => {
                                                                'name' => 'entity',
-                                                               'type' => '79108'
+                                                               'type' => '79114'
                                                              },
                                                       '2' => {
                                                                'name' => 'entity_instance_number',
@@ -6633,31 +6633,20 @@ $VAR1 = {
                                                              },
                                                       '3' => {
                                                                'name' => 'parent',
-                                                               'type' => '78341'
+                                                               'type' => '78347'
                                                              },
                                                       '4' => {
                                                                'name' => 'association_type',
                                                                'type' => '168'
                                                              }
                                                     },
-                                         'Return' => '78341',
+                                         'Return' => '78347',
                                          'ShortName' => 'pldm_entity_association_tree_add'
                                        },
-                            '86249' => {
+                            '86595' => {
                                          'Header' => 'pdr.h',
-                                         'Return' => '79199',
+                                         'Return' => '79205',
                                          'ShortName' => 'pldm_entity_association_tree_init'
-                                       },
-                            '86481' => {
-                                         'Header' => 'pdr.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'node',
-                                                               'type' => '78341'
-                                                             }
-                                                    },
-                                         'Return' => '77489',
-                                         'ShortName' => 'pldm_entity_extract'
                                        },
                             '8672' => {
                                         'Header' => 'bios.h',
@@ -6690,12 +6679,23 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_get_bios_table_resp'
                                       },
-                            '86834' => {
+                            '86827' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'node',
+                                                               'type' => '78347'
+                                                             }
+                                                    },
+                                         'Return' => '77488',
+                                         'ShortName' => 'pldm_entity_extract'
+                                       },
+                            '87613' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'repo',
-                                                               'type' => '80531'
+                                                               'type' => '80537'
                                                              },
                                                       '1' => {
                                                                'name' => 'terminus_handle',
@@ -6717,12 +6717,12 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_pdr_update_TL_pdr'
                                        },
-                            '87174' => {
+                            '87953' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'repo',
-                                                               'type' => '80531'
+                                                               'type' => '80537'
                                                              },
                                                       '1' => {
                                                                'name' => 'fru_rsi',
@@ -6745,15 +6745,42 @@ $VAR1 = {
                                                                'type' => '8294'
                                                              }
                                                     },
-                                         'Return' => '87159',
+                                         'Return' => '87938',
                                          'ShortName' => 'pldm_pdr_fru_record_set_find_by_rsi'
                                        },
-                            '87768' => {
+                            '8832' => {
+                                        'Header' => 'bios.h',
+                                        'Param' => {
+                                                     '0' => {
+                                                              'name' => 'msg',
+                                                              'type' => '2029'
+                                                            },
+                                                     '1' => {
+                                                              'name' => 'payload_length',
+                                                              'type' => '123'
+                                                            },
+                                                     '2' => {
+                                                              'name' => 'transfer_handle',
+                                                              'type' => '2039'
+                                                            },
+                                                     '3' => {
+                                                              'name' => 'transfer_op_flag',
+                                                              'type' => '2034'
+                                                            },
+                                                     '4' => {
+                                                              'name' => 'table_type',
+                                                              'type' => '2034'
+                                                            }
+                                                   },
+                                        'Return' => '74',
+                                        'ShortName' => 'decode_get_bios_table_req'
+                                      },
+                            '88547' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'repo',
-                                                               'type' => '80872'
+                                                               'type' => '80878'
                                                              },
                                                       '1' => {
                                                                'name' => 'terminus_handle',
@@ -6783,87 +6810,60 @@ $VAR1 = {
                                          'Return' => '180',
                                          'ShortName' => 'pldm_pdr_add_fru_record_set'
                                        },
-                            '88085' => {
+                            '88864' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'record',
-                                                               'type' => '87159'
+                                                               'type' => '87938'
                                                              }
                                                     },
                                          'Return' => '6265',
                                          'ShortName' => 'pldm_pdr_record_is_remote'
                                        },
-                            '88240' => {
+                            '89019' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'repo',
-                                                               'type' => '80531'
+                                                               'type' => '80537'
                                                              },
                                                       '1' => {
                                                                'name' => 'record',
-                                                               'type' => '87159'
+                                                               'type' => '87938'
                                                              }
                                                     },
                                          'Return' => '180',
                                          'ShortName' => 'pldm_pdr_get_record_handle'
                                        },
-                            '8832' => {
-                                        'Header' => 'bios.h',
-                                        'Param' => {
-                                                     '0' => {
-                                                              'name' => 'msg',
-                                                              'type' => '2029'
-                                                            },
-                                                     '1' => {
-                                                              'name' => 'payload_length',
-                                                              'type' => '123'
-                                                            },
-                                                     '2' => {
-                                                              'name' => 'transfer_handle',
-                                                              'type' => '2039'
-                                                            },
-                                                     '3' => {
-                                                              'name' => 'transfer_op_flag',
-                                                              'type' => '2034'
-                                                            },
-                                                     '4' => {
-                                                              'name' => 'table_type',
-                                                              'type' => '2034'
-                                                            }
-                                                   },
-                                        'Return' => '74',
-                                        'ShortName' => 'decode_get_bios_table_req'
-                                      },
-                            '88453' => {
+                            '89232' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'repo',
-                                                               'type' => '80531'
+                                                               'type' => '80537'
                                                              }
                                                     },
                                          'Return' => '180',
                                          'ShortName' => 'pldm_pdr_get_repo_size'
                                        },
-                            '88584' => {
+                            '89363' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'repo',
-                                                               'type' => '80531'
+                                                               'type' => '80537'
                                                              }
                                                     },
                                          'Return' => '180',
                                          'ShortName' => 'pldm_pdr_get_record_count'
                                        },
-                            '88715' => {
+                            '89494' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'repo',
-                                                               'type' => '80531'
+                                                               'type' => '80537'
                                                              },
                                                       '1' => {
                                                                'name' => 'pdr_type',
@@ -6871,73 +6871,19 @@ $VAR1 = {
                                                              },
                                                       '2' => {
                                                                'name' => 'curr_record',
-                                                               'type' => '87159'
+                                                               'type' => '87938'
                                                              },
                                                       '3' => {
                                                                'name' => 'data',
-                                                               'type' => '69735'
+                                                               'type' => '69734'
                                                              },
                                                       '4' => {
                                                                'name' => 'size',
                                                                'type' => '2039'
                                                              }
                                                     },
-                                         'Return' => '87159',
+                                         'Return' => '87938',
                                          'ShortName' => 'pldm_pdr_find_record_by_type'
-                                       },
-                            '88980' => {
-                                         'Header' => 'pdr.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'repo',
-                                                               'type' => '80531'
-                                                             },
-                                                      '1' => {
-                                                               'name' => 'curr_record',
-                                                               'type' => '87159'
-                                                             },
-                                                      '2' => {
-                                                               'name' => 'data',
-                                                               'type' => '69735'
-                                                             },
-                                                      '3' => {
-                                                               'name' => 'size',
-                                                               'type' => '2039'
-                                                             },
-                                                      '4' => {
-                                                               'name' => 'next_record_handle',
-                                                               'type' => '2039'
-                                                             }
-                                                    },
-                                         'Return' => '87159',
-                                         'ShortName' => 'pldm_pdr_get_next_record'
-                                       },
-                            '89509' => {
-                                         'Header' => 'pdr.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'repo',
-                                                               'type' => '80531'
-                                                             },
-                                                      '1' => {
-                                                               'name' => 'record_handle',
-                                                               'type' => '180'
-                                                             },
-                                                      '2' => {
-                                                               'name' => 'data',
-                                                               'type' => '69735'
-                                                             },
-                                                      '3' => {
-                                                               'name' => 'size',
-                                                               'type' => '2039'
-                                                             },
-                                                      '4' => {
-                                                               'name' => 'next_record_handle',
-                                                               'type' => '2039'
-                                                             }
-                                                    },
-                                         'Return' => '87159',
-                                         'ShortName' => 'pldm_pdr_find_record'
                                        },
                             '8973' => {
                                         'Header' => 'bios.h',
@@ -6966,28 +6912,82 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_get_bios_table_req'
                                       },
-                            '89969' => {
+                            '89759' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'repo',
-                                                               'type' => '80872'
+                                                               'type' => '80537'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'curr_record',
+                                                               'type' => '87938'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'data',
+                                                               'type' => '69734'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'size',
+                                                               'type' => '2039'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'next_record_handle',
+                                                               'type' => '2039'
+                                                             }
+                                                    },
+                                         'Return' => '87938',
+                                         'ShortName' => 'pldm_pdr_get_next_record'
+                                       },
+                            '90288' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'repo',
+                                                               'type' => '80537'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'record_handle',
+                                                               'type' => '180'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'data',
+                                                               'type' => '69734'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'size',
+                                                               'type' => '2039'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'next_record_handle',
+                                                               'type' => '2039'
+                                                             }
+                                                    },
+                                         'Return' => '87938',
+                                         'ShortName' => 'pldm_pdr_find_record'
+                                       },
+                            '90748' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'repo',
+                                                               'type' => '80878'
                                                              }
                                                     },
                                          'Return' => '1',
                                          'ShortName' => 'pldm_pdr_destroy'
                                        },
-                            '90227' => {
+                            '91006' => {
                                          'Header' => 'pdr.h',
-                                         'Return' => '80872',
+                                         'Return' => '80878',
                                          'ShortName' => 'pldm_pdr_init'
                                        },
-                            '90402' => {
+                            '91181' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'repo',
-                                                               'type' => '80872'
+                                                               'type' => '80878'
                                                              },
                                                       '1' => {
                                                                'name' => 'data',
@@ -7048,7 +7048,7 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_get_bios_table_resp'
                                       },
-                            '92938' => {
+                            '93717' => {
                                          'Header' => 'utils.h',
                                          'Param' => {
                                                       '0' => {
@@ -7059,7 +7059,7 @@ $VAR1 = {
                                          'Return' => '180',
                                          'ShortName' => 'dec2bcd32'
                                        },
-                            '93030' => {
+                            '93809' => {
                                          'Header' => 'utils.h',
                                          'Param' => {
                                                       '0' => {
@@ -7070,7 +7070,7 @@ $VAR1 = {
                                          'Return' => '180',
                                          'ShortName' => 'bcd2dec32'
                                        },
-                            '93440' => {
+                            '94219' => {
                                          'Header' => 'utils.h',
                                          'Param' => {
                                                       '0' => {
@@ -7089,7 +7089,7 @@ $VAR1 = {
                                          'Return' => '12204',
                                          'ShortName' => 'ver2str'
                                        },
-                            '93568' => {
+                            '94347' => {
                                          'Header' => 'utils.h',
                                          'Param' => {
                                                       '0' => {
@@ -7123,44 +7123,6 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_set_date_time_resp'
                                       },
-                            '94839' => {
-                                         'Header' => 'instance-id.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'ctx',
-                                                               'type' => '95047'
-                                                             },
-                                                      '1' => {
-                                                               'name' => 'tid',
-                                                               'type' => '94164'
-                                                             },
-                                                      '2' => {
-                                                               'name' => 'iid',
-                                                               'type' => '94176'
-                                                             }
-                                                    },
-                                         'Return' => '74',
-                                         'ShortName' => 'pldm_instance_id_free'
-                                       },
-                            '95052' => {
-                                         'Header' => 'instance-id.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'ctx',
-                                                               'type' => '95047'
-                                                             },
-                                                      '1' => {
-                                                               'name' => 'tid',
-                                                               'type' => '94164'
-                                                             },
-                                                      '2' => {
-                                                               'name' => 'iid',
-                                                               'type' => '95453'
-                                                             }
-                                                    },
-                                         'Return' => '74',
-                                         'ShortName' => 'pldm_instance_id_alloc'
-                                       },
                             '9534' => {
                                         'Header' => 'bios.h',
                                         'Param' => {
@@ -7184,34 +7146,72 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_set_date_time_resp'
                                       },
-                            '95458' => {
+                            '95618' => {
                                          'Header' => 'instance-id.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'ctx',
-                                                               'type' => '95047'
+                                                               'type' => '95826'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '94943'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'iid',
+                                                               'type' => '94955'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_instance_id_free'
+                                       },
+                            '95831' => {
+                                         'Header' => 'instance-id.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '95826'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '94943'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'iid',
+                                                               'type' => '96232'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_instance_id_alloc'
+                                       },
+                            '96237' => {
+                                         'Header' => 'instance-id.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '95826'
                                                              }
                                                     },
                                          'Return' => '74',
                                          'ShortName' => 'pldm_instance_db_destroy'
                                        },
-                            '95543' => {
+                            '96322' => {
                                          'Header' => 'instance-id.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'ctx',
-                                                               'type' => '95629'
+                                                               'type' => '96408'
                                                              }
                                                     },
                                          'Return' => '74',
                                          'ShortName' => 'pldm_instance_db_init_default'
                                        },
-                            '95634' => {
+                            '96413' => {
                                          'Header' => 'instance-id.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'ctx',
-                                                               'type' => '95629'
+                                                               'type' => '96408'
                                                              },
                                                       '1' => {
                                                                'name' => 'dbpath',
@@ -7220,60 +7220,6 @@ $VAR1 = {
                                                     },
                                          'Return' => '74',
                                          'ShortName' => 'pldm_instance_db_init'
-                                       },
-                            '96745' => {
-                                         'Header' => 'pldm.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'eid',
-                                                               'type' => '96115'
-                                                             },
-                                                      '1' => {
-                                                               'name' => 'mctp_fd',
-                                                               'type' => '74'
-                                                             },
-                                                      '2' => {
-                                                               'name' => 'pldm_req_msg',
-                                                               'type' => '6087'
-                                                             },
-                                                      '3' => {
-                                                               'name' => 'req_msg_len',
-                                                               'type' => '123'
-                                                             }
-                                                    },
-                                         'Return' => '96224',
-                                         'ShortName' => 'pldm_send'
-                                       },
-                            '97126' => {
-                                         'Header' => 'pldm.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'eid',
-                                                               'type' => '96115'
-                                                             },
-                                                      '1' => {
-                                                               'name' => 'mctp_fd',
-                                                               'type' => '74'
-                                                             },
-                                                      '2' => {
-                                                               'name' => 'pldm_req_msg',
-                                                               'type' => '6087'
-                                                             },
-                                                      '3' => {
-                                                               'name' => 'req_msg_len',
-                                                               'type' => '123'
-                                                             },
-                                                      '4' => {
-                                                               'name' => 'pldm_resp_msg',
-                                                               'type' => '69735'
-                                                             },
-                                                      '5' => {
-                                                               'name' => 'resp_msg_len',
-                                                               'type' => '8822'
-                                                             }
-                                                    },
-                                         'Return' => '96224',
-                                         'ShortName' => 'pldm_send_recv'
                                        },
                             '9723' => {
                                         'Header' => 'bios.h',
@@ -7314,12 +7260,66 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_set_date_time_req'
                                       },
-                            '97555' => {
+                            '97524' => {
                                          'Header' => 'pldm.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'eid',
-                                                               'type' => '96115'
+                                                               'type' => '96894'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'mctp_fd',
+                                                               'type' => '74'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'pldm_req_msg',
+                                                               'type' => '6087'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'req_msg_len',
+                                                               'type' => '123'
+                                                             }
+                                                    },
+                                         'Return' => '97003',
+                                         'ShortName' => 'pldm_send'
+                                       },
+                            '97940' => {
+                                         'Header' => 'pldm.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'eid',
+                                                               'type' => '96894'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'mctp_fd',
+                                                               'type' => '74'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'pldm_req_msg',
+                                                               'type' => '6087'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'req_msg_len',
+                                                               'type' => '123'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'pldm_resp_msg',
+                                                               'type' => '69734'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'resp_msg_len',
+                                                               'type' => '8822'
+                                                             }
+                                                    },
+                                         'Return' => '97003',
+                                         'ShortName' => 'pldm_send_recv'
+                                       },
+                            '98416' => {
+                                         'Header' => 'pldm.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'eid',
+                                                               'type' => '96894'
                                                              },
                                                       '1' => {
                                                                'name' => 'mctp_fd',
@@ -7331,22 +7331,22 @@ $VAR1 = {
                                                              },
                                                       '3' => {
                                                                'name' => 'pldm_resp_msg',
-                                                               'type' => '69735'
+                                                               'type' => '69734'
                                                              },
                                                       '4' => {
                                                                'name' => 'resp_msg_len',
                                                                'type' => '8822'
                                                              }
                                                     },
-                                         'Return' => '96224',
+                                         'Return' => '97003',
                                          'ShortName' => 'pldm_recv'
                                        },
-                            '97783' => {
+                            '98639' => {
                                          'Header' => 'pldm.h',
                                          'Param' => {
                                                       '0' => {
                                                                'name' => 'eid',
-                                                               'type' => '96115'
+                                                               'type' => '96894'
                                                              },
                                                       '1' => {
                                                                'name' => 'mctp_fd',
@@ -7354,25 +7354,25 @@ $VAR1 = {
                                                              },
                                                       '2' => {
                                                                'name' => 'pldm_resp_msg',
-                                                               'type' => '69735'
+                                                               'type' => '69734'
                                                              },
                                                       '3' => {
                                                                'name' => 'resp_msg_len',
                                                                'type' => '8822'
                                                              }
                                                     },
-                                         'Return' => '96224',
+                                         'Return' => '97003',
                                          'ShortName' => 'pldm_recv_any'
                                        },
-                            '98152' => {
+                            '99081' => {
                                          'Header' => 'pldm.h',
-                                         'Return' => '96224',
+                                         'Return' => '97003',
                                          'ShortName' => 'pldm_open'
                                        }
                           },
           'SymbolVersion' => {},
           'Symbols' => {
-                         'libpldm.so.0.2.0' => {
+                         'libpldm.so.0.3.0' => {
                                                  'bcd2dec16' => 1,
                                                  'bcd2dec32' => 1,
                                                  'bcd2dec8' => 1,
@@ -8819,7 +8819,7 @@ $VAR1 = {
                                      },
                           '45869' => {
                                        'Header' => 'bios_table.h',
-                                       'Line' => '202',
+                                       'Line' => '204',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'name_handle',
@@ -8870,7 +8870,7 @@ $VAR1 = {
                                      },
                           '45982' => {
                                        'Header' => 'bios_table.h',
-                                       'Line' => '299',
+                                       'Line' => '292',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'name_handle',
@@ -8925,7 +8925,7 @@ $VAR1 = {
                                      },
                           '46104' => {
                                        'Header' => 'bios_table.h',
-                                       'Line' => '399',
+                                       'Line' => '382',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'name_handle',
@@ -8993,7 +8993,7 @@ $VAR1 = {
                                     },
                           '46614' => {
                                        'Header' => undef,
-                                       'Line' => '904',
+                                       'Line' => '902',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'table_data',
@@ -9110,7 +9110,7 @@ $VAR1 = {
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '57802' => {
+                          '57801' => {
                                        'BaseType' => '45960',
                                        'Name' => 'struct pldm_bios_table_attr_entry_enum_info const*',
                                        'Size' => '8',
@@ -9146,14 +9146,14 @@ $VAR1 = {
                                       'Size' => '1',
                                       'Type' => 'Intrinsic'
                                     },
-                          '62912' => {
+                          '62911' => {
                                        'Header' => 'firmware_update.h',
                                        'Line' => '329',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'uuid',
                                                             'offset' => '0',
-                                                            'type' => '63016'
+                                                            'type' => '63015'
                                                           },
                                                    '1' => {
                                                             'name' => 'package_header_format_version',
@@ -9190,13 +9190,13 @@ $VAR1 = {
                                        'Size' => '36',
                                        'Type' => 'Struct'
                                      },
-                          '63016' => {
+                          '63015' => {
                                        'BaseType' => '168',
                                        'Name' => 'uint8_t[16]',
                                        'Size' => '16',
                                        'Type' => 'Array'
                                      },
-                          '63048' => {
+                          '63047' => {
                                        'Header' => 'firmware_update.h',
                                        'Line' => '343',
                                        'Memb' => {
@@ -9213,7 +9213,7 @@ $VAR1 = {
                                                    '2' => {
                                                             'name' => 'device_update_option_flags',
                                                             'offset' => '3',
-                                                            'type' => '60415'
+                                                            'type' => '60414'
                                                           },
                                                    '3' => {
                                                             'name' => 'comp_image_set_version_string_type',
@@ -9235,7 +9235,7 @@ $VAR1 = {
                                        'Size' => '11',
                                        'Type' => 'Struct'
                                      },
-                          '63243' => {
+                          '63242' => {
                                        'Header' => 'firmware_update.h',
                                        'Line' => '377',
                                        'Memb' => {
@@ -9257,12 +9257,12 @@ $VAR1 = {
                                                    '3' => {
                                                             'name' => 'comp_options',
                                                             'offset' => '8',
-                                                            'type' => '59917'
+                                                            'type' => '59916'
                                                           },
                                                    '4' => {
                                                             'name' => 'requested_comp_activation_method',
                                                             'offset' => '16',
-                                                            'type' => '59917'
+                                                            'type' => '59916'
                                                           },
                                                    '5' => {
                                                             'name' => 'comp_location_offset',
@@ -9289,7 +9289,7 @@ $VAR1 = {
                                        'Size' => '22',
                                        'Type' => 'Struct'
                                      },
-                          '63425' => {
+                          '63424' => {
                                        'Header' => 'firmware_update.h',
                                        'Line' => '403',
                                        'Memb' => {
@@ -9301,7 +9301,7 @@ $VAR1 = {
                                                    '1' => {
                                                             'name' => 'capabilities_during_update',
                                                             'offset' => '1',
-                                                            'type' => '60415'
+                                                            'type' => '60414'
                                                           },
                                                    '2' => {
                                                             'name' => 'comp_count',
@@ -9333,7 +9333,7 @@ $VAR1 = {
                                        'Size' => '11',
                                        'Type' => 'Struct'
                                      },
-                          '63529' => {
+                          '63528' => {
                                        'Header' => 'firmware_update.h',
                                        'Line' => '417',
                                        'Memb' => {
@@ -9350,17 +9350,17 @@ $VAR1 = {
                                                    '10' => {
                                                              'name' => 'pending_comp_release_date',
                                                              'offset' => '37',
-                                                             'type' => '63711'
+                                                             'type' => '63710'
                                                            },
                                                    '11' => {
                                                              'name' => 'comp_activation_methods',
                                                              'offset' => '51',
-                                                             'type' => '59917'
+                                                             'type' => '59916'
                                                            },
                                                    '12' => {
                                                              'name' => 'capabilities_during_update',
                                                              'offset' => '53',
-                                                             'type' => '60415'
+                                                             'type' => '60414'
                                                            },
                                                    '2' => {
                                                             'name' => 'comp_classification_index',
@@ -9385,7 +9385,7 @@ $VAR1 = {
                                                    '6' => {
                                                             'name' => 'active_comp_release_date',
                                                             'offset' => '17',
-                                                            'type' => '63711'
+                                                            'type' => '63710'
                                                           },
                                                    '7' => {
                                                             'name' => 'pending_comp_comparison_stamp',
@@ -9407,13 +9407,13 @@ $VAR1 = {
                                        'Size' => '39',
                                        'Type' => 'Struct'
                                      },
-                          '63711' => {
+                          '63710' => {
                                        'BaseType' => '168',
                                        'Name' => 'uint8_t[8]',
                                        'Size' => '8',
                                        'Type' => 'Array'
                                      },
-                          '64571' => {
+                          '64570' => {
                                        'BaseType' => '6048',
                                        'Name' => 'struct variable_field const',
                                        'Size' => '16',
@@ -9425,7 +9425,7 @@ $VAR1 = {
                                       'Size' => '8',
                                       'Type' => 'Pointer'
                                     },
-                          '64916' => {
+                          '64915' => {
                                        'BaseType' => '11646',
                                        'Name' => 'bool8_t*',
                                        'Size' => '8',
@@ -9436,44 +9436,44 @@ $VAR1 = {
                                     'Size' => '2',
                                     'Type' => 'Intrinsic'
                                   },
-                          '67926' => {
-                                       'BaseType' => '64571',
+                          '67925' => {
+                                       'BaseType' => '64570',
                                        'Name' => 'struct variable_field const*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '69207' => {
-                                       'BaseType' => '63529',
+                          '69206' => {
+                                       'BaseType' => '63528',
                                        'Name' => 'struct pldm_component_parameter_entry*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '69437' => {
-                                       'BaseType' => '63425',
+                          '69436' => {
+                                       'BaseType' => '63424',
                                        'Name' => 'struct pldm_get_firmware_parameters_resp*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '69735' => {
+                          '69734' => {
                                        'BaseType' => '2034',
                                        'Name' => 'uint8_t**',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '70029' => {
-                                       'BaseType' => '63243',
+                          '70028' => {
+                                       'BaseType' => '63242',
                                        'Name' => 'struct pldm_component_image_information*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '70652' => {
-                                       'BaseType' => '63048',
+                          '70651' => {
+                                       'BaseType' => '63047',
                                        'Name' => 'struct pldm_firmware_device_id_record*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '70804' => {
-                                       'BaseType' => '62912',
+                          '70803' => {
+                                       'BaseType' => '62911',
                                        'Name' => 'struct pldm_package_header_information*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
@@ -9497,8 +9497,8 @@ $VAR1 = {
                                     'Size' => '4',
                                     'Type' => 'Intrinsic'
                                   },
-                          '77247' => {
-                                       'BaseType' => '77264',
+                          '77246' => {
+                                       'BaseType' => '77263',
                                        'Header' => undef,
                                        'Line' => '15',
                                        'Name' => 'pldm_pdr',
@@ -9506,15 +9506,15 @@ $VAR1 = {
                                        'Size' => '24',
                                        'Type' => 'Typedef'
                                      },
-                          '77259' => {
-                                       'BaseType' => '77247',
+                          '77258' => {
+                                       'BaseType' => '77246',
                                        'Name' => 'pldm_pdr const',
                                        'Size' => '24',
                                        'Type' => 'Const'
                                      },
-                          '77264' => {
+                          '77263' => {
                                        'Header' => undef,
-                                       'Line' => '19',
+                                       'Line' => '18',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'record_count',
@@ -9529,12 +9529,12 @@ $VAR1 = {
                                                    '2' => {
                                                             'name' => 'first',
                                                             'offset' => '8',
-                                                            'type' => '78336'
+                                                            'type' => '78342'
                                                           },
                                                    '3' => {
                                                             'name' => 'last',
                                                             'offset' => '22',
-                                                            'type' => '78336'
+                                                            'type' => '78342'
                                                           }
                                                  },
                                        'Name' => 'struct pldm_pdr',
@@ -9542,8 +9542,8 @@ $VAR1 = {
                                        'Size' => '24',
                                        'Type' => 'Struct'
                                      },
-                          '77329' => {
-                                       'BaseType' => '77346',
+                          '77328' => {
+                                       'BaseType' => '77345',
                                        'Header' => undef,
                                        'Line' => '20',
                                        'Name' => 'pldm_pdr_record',
@@ -9551,15 +9551,15 @@ $VAR1 = {
                                        'Size' => '32',
                                        'Type' => 'Typedef'
                                      },
-                          '77341' => {
-                                       'BaseType' => '77329',
+                          '77340' => {
+                                       'BaseType' => '77328',
                                        'Name' => 'pldm_pdr_record const',
                                        'Size' => '32',
                                        'Type' => 'Const'
                                      },
-                          '77346' => {
+                          '77345' => {
                                        'Header' => undef,
-                                       'Line' => '10',
+                                       'Line' => '9',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'record_handle',
@@ -9579,7 +9579,7 @@ $VAR1 = {
                                                    '3' => {
                                                             'name' => 'next',
                                                             'offset' => '22',
-                                                            'type' => '78324'
+                                                            'type' => '78330'
                                                           },
                                                    '4' => {
                                                             'name' => 'is_remote',
@@ -9597,9 +9597,9 @@ $VAR1 = {
                                        'Size' => '32',
                                        'Type' => 'Struct'
                                      },
-                          '77437' => {
+                          '77436' => {
                                        'Header' => 'pdr.h',
-                                       'Line' => '230',
+                                       'Line' => '250',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'entity_type',
@@ -9621,31 +9621,31 @@ $VAR1 = {
                                        'Size' => '6',
                                        'Type' => 'Struct'
                                      },
-                          '77489' => {
-                                       'BaseType' => '77437',
+                          '77488' => {
+                                       'BaseType' => '77436',
                                        'Header' => 'pdr.h',
-                                       'Line' => '234',
+                                       'Line' => '254',
                                        'Name' => 'pldm_entity',
                                        'Size' => '6',
                                        'Type' => 'Typedef'
                                      },
-                          '77529' => {
-                                       'BaseType' => '77541',
+                          '77532' => {
+                                       'BaseType' => '77544',
                                        'Header' => undef,
-                                       'Line' => '244',
+                                       'Line' => '264',
                                        'Name' => 'pldm_entity_association_tree',
                                        'PrivateABI' => 1,
                                        'Size' => '16',
                                        'Type' => 'Typedef'
                                      },
-                          '77541' => {
+                          '77544' => {
                                        'Header' => undef,
-                                       'Line' => '369',
+                                       'Line' => '427',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'root',
                                                             'offset' => '0',
-                                                            'type' => '78341'
+                                                            'type' => '78347'
                                                           },
                                                    '1' => {
                                                             'name' => 'last_used_container_id',
@@ -9658,28 +9658,28 @@ $VAR1 = {
                                        'Size' => '16',
                                        'Type' => 'Struct'
                                      },
-                          '77584' => {
-                                       'BaseType' => '77601',
+                          '77587' => {
+                                       'BaseType' => '77604',
                                        'Header' => undef,
-                                       'Line' => '249',
+                                       'Line' => '269',
                                        'Name' => 'pldm_entity_node',
                                        'PrivateABI' => 1,
                                        'Size' => '40',
                                        'Type' => 'Typedef'
                                      },
-                          '77601' => {
+                          '77604' => {
                                        'Header' => undef,
-                                       'Line' => '374',
+                                       'Line' => '432',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'entity',
                                                             'offset' => '0',
-                                                            'type' => '77489'
+                                                            'type' => '77488'
                                                           },
                                                    '1' => {
                                                             'name' => 'parent',
                                                             'offset' => '6',
-                                                            'type' => '77489'
+                                                            'type' => '77488'
                                                           },
                                                    '2' => {
                                                             'name' => 'remote_container_id',
@@ -9689,12 +9689,12 @@ $VAR1 = {
                                                    '3' => {
                                                             'name' => 'first_child',
                                                             'offset' => '22',
-                                                            'type' => '78341'
+                                                            'type' => '78347'
                                                           },
                                                    '4' => {
                                                             'name' => 'next_sibling',
                                                             'offset' => '36',
-                                                            'type' => '78341'
+                                                            'type' => '78347'
                                                           },
                                                    '5' => {
                                                             'name' => 'association_type',
@@ -9707,56 +9707,56 @@ $VAR1 = {
                                        'Size' => '40',
                                        'Type' => 'Struct'
                                      },
-                          '78324' => {
-                                       'BaseType' => '77346',
+                          '78330' => {
+                                       'BaseType' => '77345',
                                        'Name' => 'struct pldm_pdr_record*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '78336' => {
-                                       'BaseType' => '77329',
+                          '78342' => {
+                                       'BaseType' => '77328',
                                        'Name' => 'pldm_pdr_record*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '78341' => {
-                                       'BaseType' => '77584',
+                          '78347' => {
+                                       'BaseType' => '77587',
                                        'Name' => 'pldm_entity_node*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '79103' => {
-                                       'BaseType' => '79108',
+                          '79109' => {
+                                       'BaseType' => '79114',
                                        'Name' => 'pldm_entity**',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '79108' => {
-                                       'BaseType' => '77489',
+                          '79114' => {
+                                       'BaseType' => '77488',
                                        'Name' => 'pldm_entity*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '79199' => {
-                                       'BaseType' => '77529',
+                          '79205' => {
+                                       'BaseType' => '77532',
                                        'Name' => 'pldm_entity_association_tree*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '79578' => {
-                                       'BaseType' => '78341',
+                          '79584' => {
+                                       'BaseType' => '78347',
                                        'Name' => 'pldm_entity_node**',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '80531' => {
-                                       'BaseType' => '77259',
+                          '80537' => {
+                                       'BaseType' => '77258',
                                        'Name' => 'pldm_pdr const*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '80872' => {
-                                       'BaseType' => '77247',
+                          '80878' => {
+                                       'BaseType' => '77246',
                                        'Name' => 'pldm_pdr*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
@@ -9803,18 +9803,18 @@ $VAR1 = {
                                      'Size' => '4',
                                      'Type' => 'Const'
                                    },
-                          '87159' => {
-                                       'BaseType' => '77341',
-                                       'Name' => 'pldm_pdr_record const*',
-                                       'Size' => '8',
-                                       'Type' => 'Pointer'
-                                     },
                           '874' => {
                                      'BaseType' => '168',
                                      'Name' => 'uint8_t[1]',
                                      'Size' => '1',
                                      'Type' => 'Array'
                                    },
+                          '87938' => {
+                                       'BaseType' => '77340',
+                                       'Name' => 'pldm_pdr_record const*',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
+                                     },
                           '8822' => {
                                       'BaseType' => '123',
                                       'Name' => 'size_t*',
@@ -9855,7 +9855,7 @@ $VAR1 = {
                                      'Size' => '8',
                                      'Type' => 'Struct'
                                    },
-                          '94164' => {
+                          '94943' => {
                                        'BaseType' => '168',
                                        'Header' => 'base.h',
                                        'Line' => '14',
@@ -9863,7 +9863,7 @@ $VAR1 = {
                                        'Size' => '1',
                                        'Type' => 'Typedef'
                                      },
-                          '94176' => {
+                          '94955' => {
                                        'BaseType' => '168',
                                        'Header' => 'instance-id.h',
                                        'Line' => '11',
@@ -9871,14 +9871,14 @@ $VAR1 = {
                                        'Size' => '1',
                                        'Type' => 'Typedef'
                                      },
-                          '94553' => {
+                          '95332' => {
                                        'Header' => undef,
-                                       'Line' => '19',
+                                       'Line' => '18',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'prev',
                                                             'offset' => '0',
-                                                            'type' => '94176'
+                                                            'type' => '94955'
                                                           },
                                                    '1' => {
                                                             'name' => 'allocations',
@@ -9891,14 +9891,14 @@ $VAR1 = {
                                        'Size' => '8',
                                        'Type' => 'Struct'
                                      },
-                          '94592' => {
+                          '95371' => {
                                        'Header' => undef,
-                                       'Line' => '24',
+                                       'Line' => '23',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'state',
                                                             'offset' => '0',
-                                                            'type' => '94634'
+                                                            'type' => '95413'
                                                           },
                                                    '1' => {
                                                             'name' => 'lock_db_fd',
@@ -9911,31 +9911,31 @@ $VAR1 = {
                                        'Size' => '2052',
                                        'Type' => 'Struct'
                                      },
-                          '94634' => {
-                                       'BaseType' => '94553',
+                          '95413' => {
+                                       'BaseType' => '95332',
                                        'Name' => 'struct pldm_tid_state[256]',
                                        'Size' => '2048',
                                        'Type' => 'Array'
                                      },
-                          '95047' => {
-                                       'BaseType' => '94592',
+                          '95826' => {
+                                       'BaseType' => '95371',
                                        'Name' => 'struct pldm_instance_db*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '95453' => {
-                                       'BaseType' => '94176',
+                          '96232' => {
+                                       'BaseType' => '94955',
                                        'Name' => 'pldm_instance_id_t*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '95629' => {
-                                       'BaseType' => '95047',
+                          '96408' => {
+                                       'BaseType' => '95826',
                                        'Name' => 'struct pldm_instance_db**',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
-                          '96115' => {
+                          '96894' => {
                                        'BaseType' => '168',
                                        'Header' => 'pldm.h',
                                        'Line' => '12',
@@ -9943,7 +9943,13 @@ $VAR1 = {
                                        'Size' => '1',
                                        'Type' => 'Typedef'
                                      },
-                          '96127' => {
+                          '969' => {
+                                     'BaseType' => '890',
+                                     'Name' => 'struct pldm_header_info const',
+                                     'Size' => '8',
+                                     'Type' => 'Const'
+                                   },
+                          '96906' => {
                                        'Header' => 'pldm.h',
                                        'Line' => '14',
                                        'Memb' => {
@@ -10004,23 +10010,17 @@ $VAR1 = {
                                        'Size' => '4',
                                        'Type' => 'Enum'
                                      },
-                          '96224' => {
-                                       'BaseType' => '96127',
+                          '97003' => {
+                                       'BaseType' => '96906',
                                        'Header' => 'pldm.h',
                                        'Line' => '28',
                                        'Name' => 'pldm_requester_rc_t',
                                        'Size' => '4',
                                        'Type' => 'Typedef'
-                                     },
-                          '969' => {
-                                     'BaseType' => '890',
-                                     'Name' => 'struct pldm_header_info const',
-                                     'Size' => '8',
-                                     'Type' => 'Const'
-                                   }
+                                     }
                         },
           'UndefinedSymbols' => {
-                                  'libpldm.so.0.2.0' => {
+                                  'libpldm.so.0.3.0' => {
                                                           '_ITM_deregisterTMCloneTable' => 0,
                                                           '_ITM_registerTMCloneTable' => 0,
                                                           '__assert_fail@GLIBC_2.17' => 0,
@@ -10032,8 +10032,12 @@ $VAR1 = {
                                                           'close@GLIBC_2.17' => 0,
                                                           'connect@GLIBC_2.17' => 0,
                                                           'dup@GLIBC_2.17' => 0,
+                                                          'fclose@GLIBC_2.17' => 0,
                                                           'fcntl64@GLIBC_2.28' => 0,
+                                                          'fgets@GLIBC_2.17' => 0,
+                                                          'fopen64@GLIBC_2.17' => 0,
                                                           'free@GLIBC_2.17' => 0,
+                                                          'getsockopt@GLIBC_2.17' => 0,
                                                           'malloc@GLIBC_2.17' => 0,
                                                           'memcmp@GLIBC_2.17' => 0,
                                                           'memcpy@GLIBC_2.17' => 0,
@@ -10043,9 +10047,11 @@ $VAR1 = {
                                                           'recvmsg@GLIBC_2.17' => 0,
                                                           'sendmsg@GLIBC_2.17' => 0,
                                                           'sendto@GLIBC_2.17' => 0,
+                                                          'setsockopt@GLIBC_2.17' => 0,
                                                           'socket@GLIBC_2.17' => 0,
                                                           'stat64@GLIBC_2.33' => 0,
                                                           'strlen@GLIBC_2.17' => 0,
+                                                          'strtol@GLIBC_2.17' => 0,
                                                           'write@GLIBC_2.17' => 0
                                                         }
                                 },
