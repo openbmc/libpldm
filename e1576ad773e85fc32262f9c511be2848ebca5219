@@ -479,6 +479,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e713be27_058a00c1",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-06-27T06:43:35Z",
+      "side": 1,
+      "message": "Further discussions were made offline (discord - https://discord.com/channels/775381525260664832/778790638563885086/1122892556989108435) and concluded to rename the API as pldm_pdr_find_child_container_id_index_range_exclude() which takes child index as an argument.",
+      "parentUuid": "fccd8cc6_0cc308e2",
+      "range": {
+        "startLine": 377,
+        "startChar": 20,
+        "endLine": 377,
+        "endChar": 24
+      },
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca2ba99d_975e7f2d",
         "filename": "src/pdr.c",
         "patchSetId": 1
