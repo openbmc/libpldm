@@ -504,11 +504,13 @@ uint8_t pldm_bios_table_attr_value_entry_enum_decode_handles(
  *  @param[in] count - Total number of current values for this enum attribute
  *  @param[in] handle_indexes - Index into the array(provided in the BIOS
  * Attribute Table) of the possible values of string handles for this attribute.
- *  @return pldm_completion_codes
+ *  @return PLDM_SUCCESS on success. PLDM_ERROR_INVALID_DATA if entry or handles are NULL, or if
+ *          attr_type is not a PLDM_BIOS_ENUMERATION. PLDM_ERROR_INVALID_LENGTH if entry_length
+ *          lacks capacity to encode handles into entry.
  */
 int pldm_bios_table_attr_value_entry_encode_enum_check(
 	void *entry, size_t entry_length, uint16_t attr_handle,
-	uint8_t attr_type, uint8_t count, uint8_t *handles);
+	uint8_t attr_type, uint8_t count, const uint8_t *handles);
 
 /** @brief Get length that an attribute value entry(type: string) will take
  *  @param[in] string_length - Length of the current string in byte, 0 indicates
