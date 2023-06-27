@@ -35,6 +35,10 @@ Change categories:
 
    Migrate to pldm_bios_table_attr_value_entry_encode_string_check()
 
+4. bios_table: Deprecate pldm_bios_table_attr_value_entry_encode_integer()
+
+   Migrate to pldm_bios_table_attr_value_entry_encode_integer_check()
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
