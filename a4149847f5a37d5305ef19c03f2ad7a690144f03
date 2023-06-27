@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36c32f8e_7139c718",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-27T11:49:37Z",
+      "side": 1,
+      "message": "What editor do you use to write your commit messages? Can we configure it to hard-wrap at the appropriate width? For instance in vim you can use `gq` to wrap the text:\n\nhttps://vimhelp.org/change.txt.html#gq",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a3df059_2d0e1a98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-27T11:49:37Z",
+      "side": 1,
+      "message": "Hi Pavithra, my main concerns are around fixing the changelog to correctly reflect the function name and also clarifying the behaviour of the function in the documentation for the corner cases.",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d59ac67b_d4ddaf75",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-27T11:49:37Z",
+      "side": 1,
+      "message": "This needs to match the new function name.",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3db6165f_9d88b456",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 8
@@ -14,6 +65,57 @@
       "writtenOn": "2023-06-27T11:41:42Z",
       "side": 1,
       "message": "nit: May be split the comments into 2 lines(80-character limit)?",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70abbe95_23d7ef8a",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-27T11:49:37Z",
+      "side": 1,
+      "message": "This is a bit of a nitpick, but can we put the parameter before the range so its position aligns with the function name?",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d86484_eec984df",
+        "filename": "src/pdr.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-27T11:49:37Z",
+      "side": 1,
+      "message": "Adjust the position of the child_index parameter in accordance with the comment on the header.",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "288a26a7_9259ef58",
+        "filename": "src/pdr.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-27T11:49:37Z",
+      "side": 1,
+      "message": "Is this the behaviour we want? I\u0027m not suggesting that this is wrong, I\u0027m just after confirmation or clarification. It seems inconsistent with the `continue` on line 415 if `pdr-\u003enum_children \u003d\u003d 0` holds.\n\nWhatever the case, the behaviour under these conditions should be described in the doxygen for the function.",
       "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
