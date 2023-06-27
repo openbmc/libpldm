@@ -31,6 +31,10 @@ Change categories:
 
    Migrate to pldm_bios_table_attr_value_entry_encode_enum_check()
 
+3. bios_table: Deprecate pldm_bios_table_attr_value_entry_encode_string()
+
+   Migrate to pldm_bios_table_attr_value_entry_encode_string_check()
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
