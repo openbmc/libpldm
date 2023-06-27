@@ -564,7 +564,9 @@ void pldm_bios_table_attr_value_entry_string_decode_string(
  *  @param[in] string_length - Length of current string in bytes. 0 indicates
  * that the current string value is not set.
  *  @param[in] string - The current string itsel
- *  @return pldm_completion_codes
+ *  @return PLDM_SUCCESS on success. PLDM_ERROR_INVALID_DATA if entry is NULL, str is NULL while
+ *  	    str_length is non-zero, or attr_type is not PLDM_BIOS_STRING. PLDM_ERROR_INVALID_LENGTH
+ *  	    if entry_length lacks capacity to encode str into entry.
  */
 int pldm_bios_table_attr_value_entry_encode_string_check(
 	void *entry, size_t entry_length, uint16_t attr_handle,

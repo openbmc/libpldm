@@ -718,24 +718,15 @@ pldm_bios_table_attr_value_entry_encode_string_length(uint16_t string_length)
 	       sizeof(string_length) + string_length;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 void pldm_bios_table_attr_value_entry_encode_string(
 	void *entry, size_t entry_length, uint16_t attr_handle,
 	uint8_t attr_type, uint16_t str_length, const char *str)
 {
-	size_t length = pldm_bios_table_attr_value_entry_encode_string_length(
-		str_length);
-	assert(length <= entry_length);
-
-	struct pldm_bios_attr_val_table_entry *table_entry = entry;
-	table_entry->attr_handle = htole16(attr_handle);
-	table_entry->attr_type = attr_type;
-	if (str_length != 0) {
-		memcpy(table_entry->value + sizeof(str_length), str,
-		       str_length);
-	}
-	str_length = htole16(str_length);
-	memcpy(table_entry->value, &str_length, sizeof(str_length));
+	int rc = pldm_bios_table_attr_value_entry_encode_string_check(
+		entry, entry_length, attr_handle, attr_type, str_length, str);
+	(void)rc;
+	assert(rc == PLDM_SUCCESS);
 }
 
 LIBPLDM_ABI_STABLE
@@ -771,8 +762,15 @@ int pldm_bios_table_attr_value_entry_encode_string_check(
 	size_t length = pldm_bios_table_attr_value_entry_encode_string_length(
 		str_length);
 	BUFFER_SIZE_EXPECT(entry_length, length);
-	pldm_bios_table_attr_value_entry_encode_string(
-		entry, entry_length, attr_handle, attr_type, str_length, str);
+	struct pldm_bios_attr_val_table_entry *table_entry = entry;
+	table_entry->attr_handle = htole16(attr_handle);
+	table_entry->attr_type = attr_type;
+	if (str_length != 0) {
+		memcpy(table_entry->value + sizeof(str_length), str,
+		       str_length);
+	}
+	str_length = htole16(str_length);
+	memcpy(table_entry->value, &str_length, sizeof(str_length));
 	return PLDM_SUCCESS;
 }
 
