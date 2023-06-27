@@ -608,7 +608,9 @@ uint64_t pldm_bios_table_attr_value_entry_integer_decode_cv(
  *  @param[in] attr_type - Type of this attribute in the BIOS Attribute Value
  * Table
  *  @param[in] cv - Current Value
- *  @return pldm_completion_codes
+ *  @return PLDM_SUCCESS on success. PLDM_ERROR_INVALID_DATA if entry is NULL or attr_type is not
+ *  	    PLDM_BIOS_INTEGER. PLDM_ERROR_INVALID_LENGTH if entry_length lacks capacity to encode cv
+ *  	    in entry.
  */
 int pldm_bios_table_attr_value_entry_encode_integer_check(void *entry,
 							  size_t entry_length,
