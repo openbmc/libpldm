@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c7c010_dd9e5a59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-27T00:24:00Z",
+      "side": 1,
+      "message": "Hi Harsh. This isn\u0027t the right way forward. Please work with the the `pldm_transport_*` APIs we already have that will replace the `pldm_send()` and `pldm_recv()` functions.",
+      "revId": "75941fd63c785ec827a4ee19b6db6cc8eb552766",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
