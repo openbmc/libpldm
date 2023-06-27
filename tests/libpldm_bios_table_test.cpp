@@ -381,7 +381,7 @@ TEST(AttrTable, integerEntryEncodeTest)
 
     EXPECT_DEATH(pldm_bios_table_attr_entry_integer_encode(
                      encodeEntry.data(), encodeEntry.size() - 1, &info),
-                 "length <= entry_length");
+                 "rc == PLDM_SUCCESS");
 
     auto rc = pldm_bios_table_attr_entry_integer_encode_check(
         encodeEntry.data(), encodeEntry.size(), &info);

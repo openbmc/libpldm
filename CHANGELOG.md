@@ -23,6 +23,12 @@ Change categories:
 2. requester: Expose pldm_close() in header
 3. bios_table: pldm_bios_table_string_entry_encode_check(): Handle overflow
 
+### Deprecated
+
+1. pldm_bios_table_attr_entry_integer_encode()
+
+   Migrate to pldm_bios_table_attr_entry_integer_encode_check()
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
