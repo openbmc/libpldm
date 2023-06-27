@@ -796,15 +796,10 @@ void pldm_bios_table_attr_value_entry_encode_integer(void *entry,
 						     uint8_t attr_type,
 						     uint64_t cv)
 {
-	size_t length =
-		pldm_bios_table_attr_value_entry_encode_integer_length();
-	assert(length <= entry_length);
-
-	struct pldm_bios_attr_val_table_entry *table_entry = entry;
-	table_entry->attr_handle = htole16(attr_handle);
-	table_entry->attr_type = attr_type;
-	cv = htole64(cv);
-	memcpy(table_entry->value, &cv, sizeof(uint64_t));
+	int rc = pldm_bios_table_attr_value_entry_encode_integer_check(
+		entry, entry_length, attr_handle, attr_type, cv);
+	(void)rc;
+	assert(rc == PLDM_SUCCESS);
 }
 
 LIBPLDM_ABI_STABLE
@@ -819,8 +814,11 @@ int pldm_bios_table_attr_value_entry_encode_integer_check(void *entry,
 		pldm_bios_table_attr_value_entry_encode_integer_length();
 	ATTR_TYPE_EXPECT(attr_type, PLDM_BIOS_INTEGER);
 	BUFFER_SIZE_EXPECT(entry_length, length);
-	pldm_bios_table_attr_value_entry_encode_integer(
-		entry, entry_length, attr_handle, attr_type, cv);
+	struct pldm_bios_attr_val_table_entry *table_entry = entry;
+	table_entry->attr_handle = htole16(attr_handle);
+	table_entry->attr_type = attr_type;
+	cv = htole64(cv);
+	memcpy(table_entry->value, &cv, sizeof(uint64_t));
 	return PLDM_SUCCESS;
 }
 
