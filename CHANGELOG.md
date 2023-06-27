@@ -36,6 +36,8 @@ Change categories:
    pldm_bios_table_attr_entry_integer_encode() to continue working towards
    making the library assert()-safe.
 
+2. bios_table: Deprecate pldm_bios_table_attr_value_entry_encode_enum()
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():

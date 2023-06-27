@@ -648,22 +648,15 @@ size_t pldm_bios_table_attr_value_entry_encode_enum_length(uint8_t count)
 	       sizeof(count) + count;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 void pldm_bios_table_attr_value_entry_encode_enum(
 	void *entry, size_t entry_length, uint16_t attr_handle,
 	uint8_t attr_type, uint8_t count, const uint8_t *handles)
 {
-	size_t length =
-		pldm_bios_table_attr_value_entry_encode_enum_length(count);
-	assert(length <= entry_length);
-
-	struct pldm_bios_attr_val_table_entry *table_entry = entry;
-	table_entry->attr_handle = htole16(attr_handle);
-	table_entry->attr_type = attr_type;
-	table_entry->value[0] = count;
-	if (count != 0) {
-		memcpy(&table_entry->value[1], handles, count);
-	}
+	int rc = pldm_bios_table_attr_value_entry_encode_enum_check(
+		entry, entry_length, attr_handle, attr_type, count, handles);
+	(void)rc;
+	assert(rc == PLDM_SUCCESS);
 }
 
 LIBPLDM_ABI_STABLE
@@ -689,9 +682,10 @@ uint8_t pldm_bios_table_attr_value_entry_enum_decode_handles(
 LIBPLDM_ABI_STABLE
 int pldm_bios_table_attr_value_entry_encode_enum_check(
 	void *entry, size_t entry_length, uint16_t attr_handle,
-	uint8_t attr_type, uint8_t count, uint8_t *handles)
+	uint8_t attr_type, uint8_t count, const uint8_t *handles)
 {
 	POINTER_CHECK(entry);
+	POINTER_CHECK(handles);
 	if (count != 0 && handles == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -699,8 +693,13 @@ int pldm_bios_table_attr_value_entry_encode_enum_check(
 	size_t length =
 		pldm_bios_table_attr_value_entry_encode_enum_length(count);
 	BUFFER_SIZE_EXPECT(entry_length, length);
-	pldm_bios_table_attr_value_entry_encode_enum(
-		entry, entry_length, attr_handle, attr_type, count, handles);
+	struct pldm_bios_attr_val_table_entry *table_entry = entry;
+	table_entry->attr_handle = htole16(attr_handle);
+	table_entry->attr_type = attr_type;
+	table_entry->value[0] = count;
+	if (count != 0) {
+		memcpy(&table_entry->value[1], handles, count);
+	}
 	return PLDM_SUCCESS;
 }
 
