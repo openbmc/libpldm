@@ -118,23 +118,40 @@ static size_t string_table_entry_length(const void *table_entry)
 	       pldm_bios_table_string_entry_decode_string_length(entry);
 }
 
-static uint16_t get_bios_attr_handle(void)
+static int get_bios_attr_handle(uint16_t *val)
 {
 	static uint16_t handle = 0;
 	assert(handle != UINT16_MAX);
+	if (handle == UINT16_MAX) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
 
-	return handle++;
+	*val = handle++;
+	return PLDM_SUCCESS;
 }
 
-static void attr_table_entry_encode_header(void *entry, size_t length,
-					   uint8_t attr_type,
-					   uint16_t string_handle)
+static int attr_table_entry_encode_header(void *entry, size_t length,
+					  uint8_t attr_type,
+					  uint16_t string_handle)
 {
 	struct pldm_bios_attr_table_entry *attr_entry = entry;
+
 	assert(sizeof(*attr_entry) <= length);
-	attr_entry->attr_handle = htole16(get_bios_attr_handle());
+	if (sizeof(*attr_entry) > length) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	uint16_t handle;
+	int rc = get_bios_attr_handle(&handle);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	attr_entry->attr_handle = htole16(handle);
 	attr_entry->attr_type = attr_type;
 	attr_entry->string_handle = htole16(string_handle);
+
+	return PLDM_SUCCESS;
 }
 
 LIBPLDM_ABI_STABLE
@@ -178,11 +195,13 @@ int pldm_bios_table_attr_entry_enum_encode_check(
 	size_t length = pldm_bios_table_attr_entry_enum_encode_length(
 		info->pv_num, info->def_num);
 	BUFFER_SIZE_EXPECT(entry_length, length);
-	assert(length <= entry_length);
 	uint8_t attr_type = info->read_only ? PLDM_BIOS_ENUMERATION_READ_ONLY :
 					      PLDM_BIOS_ENUMERATION;
-	attr_table_entry_encode_header(entry, entry_length, attr_type,
-				       info->name_handle);
+	int rc = attr_table_entry_encode_header(entry, entry_length, attr_type,
+						info->name_handle);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
 	struct pldm_bios_attr_table_entry *attr_entry = entry;
 	attr_entry->metadata[0] = info->pv_num;
 	uint16_t *pv_hdls =
@@ -351,8 +370,11 @@ int pldm_bios_table_attr_entry_string_encode_check(
 	}
 	uint8_t attr_type = info->read_only ? PLDM_BIOS_STRING_READ_ONLY :
 					      PLDM_BIOS_STRING;
-	attr_table_entry_encode_header(entry, entry_length, attr_type,
-				       info->name_handle);
+	int rc = attr_table_entry_encode_header(entry, entry_length, attr_type,
+						info->name_handle);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
 	struct pldm_bios_attr_table_entry *attr_entry = entry;
 	struct attr_table_string_entry_fields *attr_fields =
 		(struct attr_table_string_entry_fields *)attr_entry->metadata;
@@ -456,24 +478,15 @@ size_t pldm_bios_table_attr_entry_integer_encode_length(void)
 	       sizeof(struct attr_table_integer_entry_fields);
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 void pldm_bios_table_attr_entry_integer_encode(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_integer_info *info)
 {
-	size_t length = pldm_bios_table_attr_entry_integer_encode_length();
-	assert(length <= entry_length);
-	uint8_t attr_type = info->read_only ? PLDM_BIOS_INTEGER_READ_ONLY :
-					      PLDM_BIOS_INTEGER;
-	attr_table_entry_encode_header(entry, entry_length, attr_type,
-				       info->name_handle);
-	struct pldm_bios_attr_table_entry *attr_entry = entry;
-	struct attr_table_integer_entry_fields *attr_fields =
-		(struct attr_table_integer_entry_fields *)attr_entry->metadata;
-	attr_fields->lower_bound = htole64(info->lower_bound);
-	attr_fields->upper_bound = htole64(info->upper_bound);
-	attr_fields->scalar_increment = htole32(info->scalar_increment);
-	attr_fields->default_value = htole64(info->default_value);
+	int rc = pldm_bios_table_attr_entry_integer_encode_check(
+		entry, entry_length, info);
+	(void)rc;
+	assert(rc == PLDM_SUCCESS);
 }
 
 LIBPLDM_ABI_STABLE
@@ -529,7 +542,20 @@ int pldm_bios_table_attr_entry_integer_encode_check(
 	    PLDM_SUCCESS) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
-	pldm_bios_table_attr_entry_integer_encode(entry, entry_length, info);
+	uint8_t attr_type = info->read_only ? PLDM_BIOS_INTEGER_READ_ONLY :
+					      PLDM_BIOS_INTEGER;
+	int rc = attr_table_entry_encode_header(entry, entry_length, attr_type,
+						info->name_handle);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+	struct pldm_bios_attr_table_entry *attr_entry = entry;
+	struct attr_table_integer_entry_fields *attr_fields =
+		(struct attr_table_integer_entry_fields *)attr_entry->metadata;
+	attr_fields->lower_bound = htole64(info->lower_bound);
+	attr_fields->upper_bound = htole64(info->upper_bound);
+	attr_fields->scalar_increment = htole32(info->scalar_increment);
+	attr_fields->default_value = htole64(info->default_value);
 	return PLDM_SUCCESS;
 }
 
