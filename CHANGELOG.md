@@ -21,6 +21,21 @@ Change categories:
 
 1. bios_table: pldm_bios_table_string_entry_encode_check(): Handle overflow
 
+### Deprecated
+
+1. pldm_bios_table_attr_entry_integer_encode()
+
+   Most transitive callers of get_bios_attr_handle() exposed in the public API
+   surface already had the ability to return an error code.
+   pldm_bios_table_attr_entry_integer_encode() was the one case where there
+   wasn't the case, but the equivalent
+   pldm_bios_table_attr_entry_integer_encode_check() API did already exist.
+
+   We reimplement pldm_bios_table_attr_entry_integer_encode() in terms of
+   pldm_bios_table_attr_entry_integer_encode_check() and then deprecate
+   pldm_bios_table_attr_entry_integer_encode() to continue working towards
+   making the library assert()-safe.
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():

@@ -420,7 +420,9 @@ void pldm_bios_table_attr_entry_integer_encode(
  *  @param[in] entry_length - Length of the buffer to create an entry
  *  @param[in] info - Pointer to an auxiliary structure @ref
  * pldm_bios_table_attr_entry_integer_info
- *  @return pldm_completion_codes
+ *  @return PLDM_SUCCESS on success. PLDM_ERROR_INVALID_DATA if entry or info are null, or the data
+ *          in info is not logically consistent. PLDM_ERROR_INVALID_LENGTH if entry_length lacks
+ *          capacity to encode the attribute.
  */
 int pldm_bios_table_attr_entry_integer_encode_check(
 	void *entry, size_t entry_length,
