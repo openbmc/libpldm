@@ -455,6 +455,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fccd8cc6_0cc308e2",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2023-06-27T06:39:02Z",
+      "side": 1,
+      "message": "I was talking about a logical entity association PDR which can looks something like this.\n\n```\n                           SYSTEM\n+-----------------------------------------------------------------+\n|                                                                 |\n|                 PDB 1 with continer ID 123                      |\n|         +----------------------------------------+              |\n|         |                                        |              |\n|         |                                        |              |\n|         |         Logical power supply           |              |\n|   +-----+----------------------------------------+----+         |\n|   |     |                                        |    |         |\n|   |     |    +-------------------------------+   |    |         |\n|   |     |    |                               |   |    |         |\n|   |     |    | Physical power supply 1       |   |    |         |\n|   |     |    |                               |   |    |         |\n|   |     |    |                               |   |    |         |\n|   |     |    | Continer ID \u003d 123             |   |    |         |\n|   |     |    +-------------------------------+   |    |         |\n|   |     |                                        |    |         |\n|   |     |        Continer ID \u003d SYSTEM            |    |         |\n|   |     +----------------------------------------+    |         |\n|   |                                                   |         |\n|   |            PDB 2 with continer ID 345             |         |\n|   |     +----------------------------------------+    |         |\n|   |     |                                        |    |         |\n|   |     |                                        |    |         |\n|   |     |    +-------------------------------+   |    |         |\n|   |     |    |                               |   |    |         |\n|   |     |    |   Physical power supply 2     |   |    |         |\n|   |     |    |                               |   |    |         |\n|   |     |    |                               |   |    |         |\n|   |     |    |    Continer ID \u003d 345          |   |    |         |\n|   |     |    |                               |   |    |         |\n|   |     |    +-------------------------------+   |    |         |\n|   |     |                                        |    |         |\n|   +-----+----------------------------------------+----+         |\n|         |                                        |              |\n|         |                                        |              |\n|         |                                        |              |\n|         |        Continer ID \u003d SYSTEM            |              |\n|         +----------------------------------------+              |\n|                                                                 |\n+-----------------------------------------------------------------+\n```\n\nWhere the Entity association PDR for logical power supply will look like below\n```\nContainer Entity\ncontainerID \u003d SYSTEM\n\nentityType \u003d logical | Power Supply\nentityInstanceNumber \u003d 1\ncontainerID \u003d SYSTEM\n\nassociationType \u003d logical containment\n\nContained Entity 1\nentityType \u003d physical | Power Supply\nentityInstanceNumber \u003d 1\ncontainerID \u003d 123\n\nContained Entity 2 \nentityType \u003d physical | Power Supply \nentityInstanceNumber \u003d 1 \ncontainerID \u003d 345 \n```",
+      "parentUuid": "e0b60a44_5be10dc8",
+      "range": {
+        "startLine": 377,
+        "startChar": 20,
+        "endLine": 377,
+        "endChar": 24
+      },
+      "revId": "e1576ad773e85fc32262f9c511be2848ebca5219",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca2ba99d_975e7f2d",
         "filename": "src/pdr.c",
         "patchSetId": 1
