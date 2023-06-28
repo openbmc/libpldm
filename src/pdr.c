@@ -34,15 +34,6 @@ static inline uint32_t get_next_record_handle(const pldm_pdr *repo,
 	return record->next->record_handle;
 }
 
-static inline uint32_t get_new_record_handle(const pldm_pdr *repo)
-{
-	assert(repo != NULL);
-	uint32_t last_used_hdl = repo->last ? repo->last->record_handle : 0;
-	assert(last_used_hdl != UINT32_MAX);
-
-	return last_used_hdl + 1;
-}
-
 LIBPLDM_ABI_STABLE
 uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		      uint32_t record_handle, bool is_remote,
@@ -55,9 +46,14 @@ uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 	pldm_pdr_record *record = malloc(sizeof(pldm_pdr_record));
 	assert(record != NULL);
 
-	record->record_handle = record_handle == 0 ?
-					get_new_record_handle(repo) :
-					record_handle;
+	if (record_handle) {
+		record->record_handle = record_handle;
+	} else {
+		uint32_t curr = repo->last ? repo->last->record_handle : 0;
+		assert(curr != UINT32_MAX);
+		record->record_handle = curr + 1;
+	}
+
 	record->size = size;
 	record->is_remote = is_remote;
 	record->terminus_handle = terminus_handle;
