@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c6a055_b63c9a2c",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T06:59:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98f75985_0dc72cfe",
+      "revId": "98a90bf2cd0ab4ea667fdbd0ba4ae31bd8f509b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4eb0ee4a_0b619220",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b77c2ef_d52e1bf2",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T06:59:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4eb0ee4a_0b619220",
+      "revId": "98a90bf2cd0ab4ea667fdbd0ba4ae31bd8f509b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1ec0faa_0362c401",
@@ -65,6 +101,30 @@
       "writtenOn": "2023-06-28T04:57:04Z",
       "side": 1,
       "message": "With the changes and reasoning above we can delete this.",
+      "range": {
+        "startLine": 414,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 3
+      },
+      "revId": "98a90bf2cd0ab4ea667fdbd0ba4ae31bd8f509b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94b590cf_9322078c",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T06:59:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1ec0faa_0362c401",
       "range": {
         "startLine": 414,
         "startChar": 0,
