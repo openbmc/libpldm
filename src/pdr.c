@@ -34,23 +34,6 @@ static inline uint32_t get_next_record_handle(const pldm_pdr *repo,
 	return record->next->record_handle;
 }
 
-static void add_record(pldm_pdr *repo, pldm_pdr_record *record)
-{
-	assert(repo != NULL);
-	assert(record != NULL);
-
-	if (repo->first == NULL) {
-		assert(repo->last == NULL);
-		repo->first = record;
-		repo->last = record;
-	} else {
-		repo->last->next = record;
-		repo->last = record;
-	}
-	repo->size += record->size;
-	++repo->record_count;
-}
-
 static inline uint32_t get_new_record_handle(const pldm_pdr *repo)
 {
 	assert(repo != NULL);
@@ -61,16 +44,18 @@ static inline uint32_t get_new_record_handle(const pldm_pdr *repo)
 	return last_used_hdl + 1;
 }
 
-static pldm_pdr_record *make_new_record(const pldm_pdr *repo,
-					const uint8_t *data, uint32_t size,
-					uint32_t record_handle, bool is_remote,
-					uint16_t terminus_handle)
+LIBPLDM_ABI_STABLE
+uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
+		      uint32_t record_handle, bool is_remote,
+		      uint16_t terminus_handle)
 {
 	assert(repo != NULL);
+	assert(data != NULL);
 	assert(size != 0);
 
 	pldm_pdr_record *record = malloc(sizeof(pldm_pdr_record));
 	assert(record != NULL);
+
 	record->record_handle = record_handle == 0 ?
 					get_new_record_handle(repo) :
 					record_handle;
@@ -95,20 +80,17 @@ static pldm_pdr_record *make_new_record(const pldm_pdr *repo,
 	}
 	record->next = NULL;
 
-	return record;
-}
+	if (repo->first == NULL) {
+		assert(repo->last == NULL);
+		repo->first = record;
+		repo->last = record;
+	} else {
+		repo->last->next = record;
+		repo->last = record;
+	}
 
-LIBPLDM_ABI_STABLE
-uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
-		      uint32_t record_handle, bool is_remote,
-		      uint16_t terminus_handle)
-{
-	assert(size != 0);
-	assert(data != NULL);
-
-	pldm_pdr_record *record = make_new_record(
-		repo, data, size, record_handle, is_remote, terminus_handle);
-	add_record(repo, record);
+	repo->size += record->size;
+	++repo->record_count;
 
 	return record->record_handle;
 }
