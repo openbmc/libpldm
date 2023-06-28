@@ -20,7 +20,7 @@ struct pldm_bios_table_iter;
  *  @param[in] table - Pointer to table data
  *  @param[in] length - Length of table data
  *  @param[in] type - Type of pldm bios table
- *  @return Iterator to the beginning
+ *  @return Iterator to the beginning on success. Returns NULL on failure.
  */
 struct pldm_bios_table_iter *
 pldm_bios_table_iter_create(const void *table, size_t length,
