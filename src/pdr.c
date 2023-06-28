@@ -37,8 +37,7 @@ static inline uint32_t get_next_record_handle(const pldm_pdr *repo,
 static inline uint32_t get_new_record_handle(const pldm_pdr *repo)
 {
 	assert(repo != NULL);
-	uint32_t last_used_hdl =
-		repo->last != NULL ? repo->last->record_handle : 0;
+	uint32_t last_used_hdl = repo->last ? repo->last->record_handle : 0;
 	assert(last_used_hdl != UINT32_MAX);
 
 	return last_used_hdl + 1;
