@@ -16,6 +16,24 @@
       "message": "This patch needs to be added to the `Fixes` section in `CHANGELOG.md`.",
       "revId": "f778a3b6ff7a88a22fd96ecb421e9e4256604896",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab97e3d8_bdc28a6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T06:59:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f00915f_64597465",
+      "revId": "f778a3b6ff7a88a22fd96ecb421e9e4256604896",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
