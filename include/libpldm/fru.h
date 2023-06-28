@@ -464,6 +464,22 @@ int decode_get_fru_record_by_option_resp(
 void get_fru_record_by_option(const uint8_t *table, size_t table_size,
 			      uint8_t *record_table, size_t *record_size,
 			      uint16_t rsi, uint8_t rt, uint8_t ft);
+
+/** @brief Get FRU Record Table By Option or return an error
+ *  @param[in] table - The source fru record table
+ *  @param[in] table_size - Size of the source fru record table
+ *  @param[out] record_table - Fru table fetched based on the input option
+ *  @param[in/out] record_size - Size of the table fetched by fru record option
+ *  @param[in] rsi - FRU record set identifier
+ *  @param[in] rt - FRU record type
+ *  @param[in] ft - FRU field type
+ *
+ *  @return PLDM_SUCCESS if no error occurs. PLDM_ERROR_INVALID_LENGTH if record_size lacks capacity
+ *  	    to encode the relevant records.
+ */
+int get_fru_record_by_option_check(const uint8_t *table, size_t table_size,
+				   uint8_t *record_table, size_t *record_size,
+				   uint16_t rsi, uint8_t rt, uint8_t ft);
 /* SetFruRecordTable */
 
 /** @brief Decode SetFruRecordTable request data
