@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Added
+
+1. bios_table: Introduce pldm_bios_table_append_pad_checksum_check()
+
 ### Changed
 
 1. requester: Mark pldm_close() as LIBPLDM_ABI_TESTING
