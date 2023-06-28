@@ -46,6 +46,11 @@ foreach t : tests
        workdir: meson.current_source_dir())
 endforeach
 
+test('bios_table_iter', executable('bios_table_iter',
+                                   'bios_table_iter.c',
+                                   implicit_include_directories: false,
+                                   include_directories: src_includes))
+
 test('msgbuf_generic', executable('msgbuf_generic',
                                   'msgbuf_generic.c',
                                   implicit_include_directories: false,
