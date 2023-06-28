@@ -111,7 +111,7 @@ int pldm_bios_table_string_entry_decode_string_check(
 	return PLDM_SUCCESS;
 }
 
-static size_t string_table_entry_length(const void *table_entry)
+static ssize_t string_table_entry_length(const void *table_entry)
 {
 	const struct pldm_bios_string_table_entry *entry = table_entry;
 	return sizeof(*entry) - sizeof(entry->name) +
@@ -614,7 +614,7 @@ static const struct table_entry_length attr_table_entries[] = {
 	  .entry_length_handler = attr_table_entry_length_integer },
 };
 
-static size_t attr_table_entry_length(const void *table_entry)
+static ssize_t attr_table_entry_length(const void *table_entry)
 {
 	const struct pldm_bios_attr_table_entry *entry = table_entry;
 	const struct table_entry_length *attr_table_entry =
@@ -853,7 +853,7 @@ static const struct table_entry_length attr_value_table_entries[] = {
 	  .entry_length_handler = attr_value_table_entry_length_integer },
 };
 
-static size_t attr_value_table_entry_length(const void *table_entry)
+static ssize_t attr_value_table_entry_length(const void *table_entry)
 {
 	const struct pldm_bios_attr_val_table_entry *entry = table_entry;
 	const struct table_entry_length *entry_length =
@@ -861,7 +861,13 @@ static size_t attr_value_table_entry_length(const void *table_entry)
 			entry->attr_type, attr_value_table_entries,
 			ARRAY_SIZE(attr_value_table_entries));
 	assert(entry_length != NULL);
+	if (!entry_length) {
+		return -1;
+	}
 	assert(entry_length->entry_length_handler != NULL);
+	if (!entry_length->entry_length_handler) {
+		return -1;
+	}
 
 	return entry_length->entry_length_handler(entry);
 }
@@ -951,7 +957,7 @@ struct pldm_bios_table_iter {
 	const uint8_t *table_data;
 	size_t table_len;
 	size_t current_pos;
-	size_t (*entry_length_handler)(const void *table_entry);
+	ssize_t (*entry_length_handler)(const void *table_entry);
 };
 
 LIBPLDM_ABI_STABLE
@@ -996,6 +1002,9 @@ bool pldm_bios_table_iter_is_end(const struct pldm_bios_table_iter *iter)
 	if (iter->table_len - iter->current_pos <= pad_and_check_max) {
 		return true;
 	}
+	if (iter->entry_length_handler(iter->table_data + iter->current_pos) < 0) {
+		return true;
+	}
 	return false;
 }
 
@@ -1006,7 +1015,12 @@ void pldm_bios_table_iter_next(struct pldm_bios_table_iter *iter)
 		return;
 	}
 	const void *entry = iter->table_data + iter->current_pos;
-	iter->current_pos += iter->entry_length_handler(entry);
+	ssize_t rc = iter->entry_length_handler(entry);
+	/* Prevent bad behaviour by acting as if we've hit the end of the iterator */
+	if (rc < 0) {
+		return;
+	}
+	iter->current_pos += rc;
 }
 
 LIBPLDM_ABI_STABLE
