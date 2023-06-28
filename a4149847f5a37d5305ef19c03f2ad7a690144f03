@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a12839_93766c6e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T03:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb333f80_4b10d630",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36c32f8e_7139c718",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-27T11:49:37Z",
       "side": 1,
       "message": "What editor do you use to write your commit messages? Can we configure it to hard-wrap at the appropriate width? For instance in vim you can use `gq` to wrap the text:\n\nhttps://vimhelp.org/change.txt.html#gq",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16729c01_08ed0b82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T03:47:51Z",
+      "side": 1,
+      "message": "Done, I use vim editor and I made use of `gq` to wrap the text.",
+      "parentUuid": "36c32f8e_7139c718",
       "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7135b784_82ff9ffa",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T03:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d59ac67b_d4ddaf75",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3db6165f_9d88b456",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-06-27T11:41:42Z",
       "side": 1,
       "message": "nit: May be split the comments into 2 lines(80-character limit)?",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0678ab4d_3a084bd7",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T03:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3db6165f_9d88b456",
       "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -103,6 +175,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f699ae5_8336a49e",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T03:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70abbe95_23d7ef8a",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0d86484_eec984df",
@@ -116,6 +206,24 @@
       "writtenOn": "2023-06-27T11:49:37Z",
       "side": 1,
       "message": "Adjust the position of the child_index parameter in accordance with the comment on the header.",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "216512ca_b8f584fe",
+        "filename": "src/pdr.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T03:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0d86484_eec984df",
       "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -137,6 +245,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2325534e_efc034e8",
+        "filename": "src/pdr.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T03:47:51Z",
+      "side": 1,
+      "message": "Ack, I was wrong, we must continue from that loop and check for the next matching record.",
+      "parentUuid": "288a26a7_9259ef58",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "521ef721_2057fc8f",
@@ -150,6 +276,24 @@
       "writtenOn": "2023-06-27T11:41:42Z",
       "side": 1,
       "message": "I suppose you are planning to add `return 0;` in another path set.",
+      "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d11a312_90dfcc4d",
+        "filename": "src/pdr.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-06-28T03:47:51Z",
+      "side": 1,
+      "message": "yes, moved it before this commit as per Andrew\u0027s suggestion.",
+      "parentUuid": "521ef721_2057fc8f",
       "revId": "a4149847f5a37d5305ef19c03f2ad7a690144f03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
