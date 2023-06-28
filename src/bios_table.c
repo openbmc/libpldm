@@ -961,6 +961,9 @@ pldm_bios_table_iter_create(const void *table, size_t length,
 {
 	struct pldm_bios_table_iter *iter = malloc(sizeof(*iter));
 	assert(iter != NULL);
+	if (!iter) {
+		return NULL;
+	}
 	iter->table_data = table;
 	iter->table_len = length;
 	iter->current_pos = 0;
