@@ -20,6 +20,7 @@ Change categories:
 ### Changed
 
 1. bios_table: pldm_bios_table_string_entry_encode_check(): Handle overflow
+2. bios_table: pldm_bios_table_iter_create(): Return NULL on failed alloc
 
 ### Deprecated
 
