@@ -154,10 +154,14 @@ const pldm_pdr_record *pldm_pdr_find_record(const pldm_pdr *repo,
 	assert(data != NULL);
 	assert(size != NULL);
 	assert(next_record_handle != NULL);
+	if (!repo || !data || !size || !next_record_handle) {
+		return NULL;
+	}
 
 	if (!record_handle && (repo->first != NULL)) {
 		record_handle = repo->first->record_handle;
 	}
+
 	pldm_pdr_record *record = repo->first;
 	while (record != NULL) {
 		if (record->record_handle == record_handle) {
@@ -186,6 +190,9 @@ pldm_pdr_get_next_record(const pldm_pdr *repo,
 	assert(data != NULL);
 	assert(size != NULL);
 	assert(next_record_handle != NULL);
+	if (!repo || !curr_record || !data || !size || !next_record_handle) {
+		return NULL;
+	}
 
 	if (curr_record == repo->last) {
 		*data = NULL;
