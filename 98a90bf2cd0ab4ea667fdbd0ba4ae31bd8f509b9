@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "533adcc5_c3d5932d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-28T04:57:04Z",
+      "side": 1,
+      "message": "Hi Pavithra, apologies in advance but I missed commenting on a bug that was present in the previous patch. I\u0027ve outlined the reasoning in the comments.",
+      "revId": "98a90bf2cd0ab4ea667fdbd0ba4ae31bd8f509b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eb0ee4a_0b619220",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-28T04:57:04Z",
+      "side": 1,
+      "message": "I think this comparison might be a concern. For example, let:\n\n1. `pdr-\u003enum_children \u003d\u003d 1`\n2. `child_index \u003d\u003d 1`\n\nSubstituting into the condition yields:\n\n```\nif (1 \u003c 1) {\n    continue;\n}\n```\n\n`1 \u003c 1` evaluates to false and therefore we do not reach the `continue` and instead perform an out-of-bounds access on line 419. This problem generalises to any invocation where `pdr-\u003enum_children \u003d\u003d child_index` holds. Essentially the inequality used causes an off-by-one error.\n\nThe following yields correct behaviour and IMO is a bit easier to understand:\n\n```\nif (child_index \u003e\u003d pdr-\u003enum_children) {\n    continue;\n}\n```\n\nAnd with that the test below on line 415 becomes redundant.",
+      "revId": "98a90bf2cd0ab4ea667fdbd0ba4ae31bd8f509b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ec0faa_0362c401",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-06-28T04:57:04Z",
+      "side": 1,
+      "message": "With the changes and reasoning above we can delete this.",
+      "range": {
+        "startLine": 414,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 3
+      },
+      "revId": "98a90bf2cd0ab4ea667fdbd0ba4ae31bd8f509b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
