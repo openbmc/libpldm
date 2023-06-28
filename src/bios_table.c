@@ -911,22 +911,40 @@ size_t pldm_bios_table_pad_checksum_size(size_t size_without_pad)
 }
 
 LIBPLDM_ABI_STABLE
-size_t pldm_bios_table_append_pad_checksum(void *table, size_t size,
-					   size_t size_without_pad)
+size_t pldm_bios_table_append_pad_checksum(void *table, size_t capacity,
+					   size_t size)
 {
-	size_t pad_checksum_size =
-		pldm_bios_table_pad_checksum_size(size_without_pad);
-	size_t total_length = size_without_pad + pad_checksum_size;
-	assert(size >= total_length);
+	int rc = pldm_bios_table_append_pad_checksum_check(table, capacity,
+							   &size);
+	(void)rc;
+	assert(rc == PLDM_SUCCESS);
+	return size;
+}
 
-	uint8_t *table_end = (uint8_t *)table + size_without_pad;
-	size_t pad_size = pad_size_get(size_without_pad);
+LIBPLDM_ABI_TESTING
+int pldm_bios_table_append_pad_checksum_check(void *table, size_t capacity,
+					      size_t *size)
+{
+	if (!table || !size) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	size_t pad_checksum_size = pldm_bios_table_pad_checksum_size(*size);
+	size_t total_length = *size + pad_checksum_size;
+	assert(capacity >= total_length);
+	if (capacity < total_length) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	uint8_t *table_end = (uint8_t *)table + *size;
+	size_t pad_size = pad_size_get(*size);
 	table_end = pad_append(table_end, pad_size);
 
-	uint32_t checksum = crc32(table, size_without_pad + pad_size);
+	uint32_t checksum = crc32(table, *size + pad_size);
 	checksum_append(table_end, checksum);
+	*size = total_length;
 
-	return total_length;
+	return PLDM_SUCCESS;
 }
 
 struct pldm_bios_table_iter {
