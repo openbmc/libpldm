@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d758902_a6a0b9e2",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-06-29T04:19:08Z",
+      "side": 1,
+      "message": "Nit: Might be worth a comment that this sets open_transport to NULL, (so it\u0027s clear why the next block isn\u0027t in an `else` branch of `if (open_transport)` )? Otherwise LGTM.",
+      "range": {
+        "startLine": 42,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 16
+      },
+      "revId": "d1898bf948258e6a43dbb0ff58bc22fe2ad78e63",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
