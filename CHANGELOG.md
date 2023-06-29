@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Changed
+
+1. requester: Mark pldm_close() as LIBPLDM_ABI_TESTING
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
