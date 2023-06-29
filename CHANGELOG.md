@@ -39,6 +39,7 @@ Change categories:
 
 1. pdr: Return success for pldm_pdr_find_child_container_id_range_exclude() API
 2. pdr: Rework pldm_pdr_find_container_id_range_exclude() API
+3. transport: mctp-demux: Don't test socket for non-zero value
 
 ## [0.3.0] - 2023-06-23
 
