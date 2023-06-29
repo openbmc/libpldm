@@ -3,6 +3,7 @@
 #include "libpldm/transport.h"
 
 #include <bits/types/struct_iovec.h>
+#include <fcntl.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
@@ -28,23 +29,31 @@ static struct pldm_transport_mctp_demux *open_transport;
 LIBPLDM_ABI_STABLE
 pldm_requester_rc_t pldm_open(void)
 {
-	int fd;
-	int rc;
+	int fd = PLDM_REQUESTER_OPEN_FAIL;
 
 	if (open_transport) {
 		fd = pldm_transport_mctp_demux_get_socket_fd(open_transport);
-		return fd;
+
+		/*
+		 * If someone has externally issued close() on fd then we need to start again. Use
+		 * `fcntl(..., F_GETFD)` to test whether fd is valid
+		 */
+		if (fd < 0 || fcntl(fd, F_GETFD) < 0) {
+			pldm_close();
+		}
 	}
 
-	struct pldm_transport_mctp_demux *demux = NULL;
-	rc = pldm_transport_mctp_demux_init(&demux);
-	if (rc) {
-		return rc;
+	if (!open_transport) {
+		struct pldm_transport_mctp_demux *demux = NULL;
+
+		if (pldm_transport_mctp_demux_init(&demux) < 0) {
+			return PLDM_REQUESTER_OPEN_FAIL;
+		}
+
+		open_transport = demux;
+
+		fd = pldm_transport_mctp_demux_get_socket_fd(open_transport);
 	}
-
-	fd = pldm_transport_mctp_demux_get_socket_fd(demux);
-
-	open_transport = demux;
 
 	return fd;
 }
