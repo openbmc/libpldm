@@ -111,6 +111,11 @@ pldm_requester_rc_t pldm_recv_any(mctp_eid_t eid, int mctp_fd,
 				  uint8_t **pldm_resp_msg,
 				  size_t *resp_msg_len);
 
+/**
+ * @brief Shutdown the MCTP socket
+ */
+void pldm_close(void);
+
 #ifdef __cplusplus
 }
 #endif
