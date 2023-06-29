@@ -20,6 +20,7 @@ Change categories:
 ### Changed
 
 1. requester: Mark pldm_close() as LIBPLDM_ABI_TESTING
+2. requester: Expose pldm_close() in header
 
 ### Removed
 
