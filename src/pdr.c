@@ -131,7 +131,9 @@ pldm_pdr *pldm_pdr_init(void)
 LIBPLDM_ABI_STABLE
 void pldm_pdr_destroy(pldm_pdr *repo)
 {
-	assert(repo != NULL);
+	if (!repo) {
+		return;
+	}
 
 	pldm_pdr_record *record = repo->first;
 	while (record != NULL) {
