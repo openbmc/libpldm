@@ -477,6 +477,9 @@ uint8_t pldm_entity_get_num_children(pldm_entity_node *node,
  *
  *  @param[in] parent    - opaque pointer acting as a handle to an entity parent
  *  @param[in] node      - pointer to the node of the pldm entity
+ *
+ *  @return True if the node is a child of parent, false otherwise, including if one or both of
+ *  parent or node are NULL.
  */
 bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node);
 
