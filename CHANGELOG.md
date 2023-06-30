@@ -30,6 +30,7 @@ Change categories:
 4. bios_table: pldm_bios_table_iter_create(): Return NULL on failed alloc
 5. bios_table: pldm_bios_table_iter_next(): Invalid entry halts iteration
 6. pdr: pldm_pdr_init(): Return NULL on allocation failure
+7. pdr: pldm_pdr_destroy(): Exit early if repo is NULL
 
 ### Deprecated
 
