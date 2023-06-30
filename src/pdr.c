@@ -772,6 +772,9 @@ bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node)
 {
 	assert(parent != NULL);
 	assert(node != NULL);
+	if (!parent || !node) {
+		return false;
+	}
 
 	pldm_entity_node *curr = parent->first_child;
 	while (curr != NULL) {
