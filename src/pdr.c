@@ -319,6 +319,10 @@ const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 	assert(entity_type != NULL);
 	assert(entity_instance_num != NULL);
 	assert(container_id != NULL);
+	if (!repo || !terminus_handle || !entity_type || !entity_instance_num ||
+	    !container_id) {
+		return NULL;
+	}
 
 	uint8_t *data = NULL;
 	uint32_t size = 0;
