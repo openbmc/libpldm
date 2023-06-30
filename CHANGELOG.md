@@ -51,6 +51,7 @@ Change categories:
    - pldm_pdr_record_is_remote()
 
 9. pdr: pldm_entity_node_get_remote_container_id() is a trivial accessor
+10. pdr: pldm_pdr_fru_record_set_find_by_rsi(): Exit early on NULL arguments
 
 ### Deprecated
 
