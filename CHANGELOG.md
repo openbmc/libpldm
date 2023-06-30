@@ -84,6 +84,12 @@ Change categories:
    out how to stop, or get in touch. This symbol will be marked static the
    release after deprecation.
 
+6. pdr: Deprecate find_entity_ref_in_tree()
+
+   There should be no users of this symbol. If you are a user, you should figure
+   out how to stop, or get in touch. This symbol will be marked static the
+   release after deprecation.
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
