@@ -50,6 +50,8 @@ Change categories:
    - pldm_pdr_get_repo_size()
    - pldm_pdr_record_is_remote()
 
+9. pdr: pldm_entity_node_get_remote_container_id() is a trivial accessor
+
 ### Deprecated
 
 1. pldm_bios_table_attr_entry_integer_encode()
