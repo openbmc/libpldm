@@ -77,6 +77,12 @@ Change categories:
 
    Migrate to pldm_bios_table_attr_value_entry_encode_integer_check()
 
+5. pdr: Deprecate is_present()
+
+   There should be no users of this symbol. If you are a user, you should figure
+   out how to stop, or get in touch. This symbol will be marked static the
+   release after deprecation.
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
