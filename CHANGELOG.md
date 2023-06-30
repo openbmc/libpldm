@@ -29,6 +29,7 @@ Change categories:
 3. bios_table: pldm_bios_table_string_entry_encode_check(): Handle overflow
 4. bios_table: pldm_bios_table_iter_create(): Return NULL on failed alloc
 5. bios_table: pldm_bios_table_iter_next(): Invalid entry halts iteration
+6. pdr: pldm_pdr_init(): Return NULL on allocation failure
 
 ### Deprecated
 
