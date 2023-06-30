@@ -117,7 +117,9 @@ LIBPLDM_ABI_STABLE
 pldm_pdr *pldm_pdr_init(void)
 {
 	pldm_pdr *repo = malloc(sizeof(pldm_pdr));
-	assert(repo != NULL);
+	if (!repo) {
+		return NULL;
+	}
 	repo->record_count = 0;
 	repo->size = 0;
 	repo->first = NULL;
