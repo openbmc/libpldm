@@ -250,7 +250,7 @@ uint32_t pldm_pdr_add_fru_record_set(pldm_pdr *repo, uint16_t terminus_handle,
  *  @param[in] container_id - *cintainer_id will be FRU container id of found
  *  PDR, or 0 if not found
  *
- *  @return uint32_t - record handle assigned to PDR record
+ *  @return An opaque pointer to the PDR record on success, or NULL on failure
  */
 const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 	const pldm_pdr *repo, uint16_t fru_rsi, uint16_t *terminus_handle,
