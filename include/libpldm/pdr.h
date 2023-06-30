@@ -463,7 +463,9 @@ void pldm_find_entity_ref_in_tree(pldm_entity_association_tree *tree,
  *  @param[in] node - opaque pointer acting as a handle to an entity node
  *  @param[in] association_type - relation type filter : logical or physical
  *
- *  @return uint8_t number of children
+ *  @return uint8_t number of children. The returned value is zero if node is NULL or
+ *  	    association_type is not one of PLDM_ENTITY_ASSOCIAION_PHYSICAL or
+ *  	    PLDM_ENTITY_ASSOCIAION_LOGICAL.
  */
 uint8_t pldm_entity_get_num_children(pldm_entity_node *node,
 				     uint8_t association_type);
