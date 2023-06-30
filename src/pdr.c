@@ -261,7 +261,8 @@ uint32_t pldm_pdr_get_repo_size(const pldm_pdr *repo)
 }
 
 LIBPLDM_ABI_STABLE
-uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo,
+uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo
+				    __attribute__((unused)),
 				    const pldm_pdr_record *record)
 {
 	assert(repo != NULL);
