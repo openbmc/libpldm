@@ -54,6 +54,7 @@ Change categories:
 10. pdr: pldm_pdr_fru_record_set_find_by_rsi(): Exit early on NULL arguments
 11. pdr: pldm_entity_association_tree_init(): Return NULL on failed alloc
 12. pdr: pldm_entity_association_tree_visit(): Document preconditions
+13. pdr: pldm_entity_association_tree_visit(): Exit early on failure
 
 ### Deprecated
 

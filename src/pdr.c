@@ -667,6 +667,9 @@ void pldm_entity_association_tree_visit(pldm_entity_association_tree *tree,
 					pldm_entity **entities, size_t *size)
 {
 	assert(tree != NULL);
+	if (!tree || !entities || !size) {
+		return;
+	}
 
 	*size = 0;
 	if (tree->root == NULL) {
@@ -675,6 +678,9 @@ void pldm_entity_association_tree_visit(pldm_entity_association_tree *tree,
 
 	get_num_nodes(tree->root, size);
 	*entities = malloc(*size * sizeof(pldm_entity));
+	if (!entities) {
+		return;
+	}
 	size_t index = 0;
 	entity_association_tree_visit(tree->root, *entities, &index);
 }
