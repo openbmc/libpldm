@@ -31,6 +31,24 @@ Change categories:
 5. bios_table: pldm_bios_table_iter_next(): Invalid entry halts iteration
 6. pdr: pldm_pdr_init(): Return NULL on allocation failure
 7. pdr: pldm_pdr_destroy(): Exit early if repo is NULL
+8. pdr: Document preconditions for trivial accessor functions
+
+   A trivial accessor function is one that exposes properties of an object in a
+   way can't result in an error, beyond passing an invalid argument to the
+   function. For APIs meeting this definition we define a precondition that
+   struct pointers must point to valid objects to avoid polluting the function
+   prototypes. The following APIs now have this precondition explicitly defined:
+
+   - pldm_entity_extract()
+   - pldm_entity_get_parent()
+   - pldm_entity_is_exist_parent()
+   - pldm_entity_is_node_parent()
+   - pldm_is_current_parent_child
+   - pldm_is_empty_entity_assoc_tree()
+   - pldm_pdr_get_record_count()
+   - pldm_pdr_get_record_handle()
+   - pldm_pdr_get_repo_size()
+   - pldm_pdr_record_is_remote()
 
 ### Deprecated
 

@@ -42,6 +42,8 @@ void pldm_pdr_destroy(pldm_pdr *repo);
 
 /** @brief Get number of records in a PDR repository
  *
+ *  @pre repo must point to a valid object
+ *
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
  *
  *  @return uint32_t - number of records
@@ -49,6 +51,8 @@ void pldm_pdr_destroy(pldm_pdr *repo);
 uint32_t pldm_pdr_get_record_count(const pldm_pdr *repo);
 
 /** @brief Get size of a PDR repository, in bytes
+ *
+ *  @pre repo must point to a valid object
  *
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
  *
@@ -74,6 +78,9 @@ uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		      uint16_t terminus_handle);
 
 /** @brief Get record handle of a PDR record
+ *
+ *  @pre repo must point to a valid object
+ *  @pre record must point to a valid object
  *
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
  *  @param[in] record - opaque pointer acting as a PDR record handle
@@ -138,6 +145,12 @@ pldm_pdr_find_record_by_type(const pldm_pdr *repo, uint8_t pdr_type,
 			     const pldm_pdr_record *curr_record, uint8_t **data,
 			     uint32_t *size);
 
+/** @brief Determine if a record is a remote record
+ *
+ *  @pre record must point to a valid object
+ *
+ *  @return true if the record is a remote record, false otherwise.
+ */
 bool pldm_pdr_record_is_remote(const pldm_pdr_record *record);
 
 /** @brief Remove all PDR records that belong to a remote terminus
@@ -337,6 +350,8 @@ void pldm_entity_association_tree_visit(pldm_entity_association_tree *tree,
 
 /** @brief Extract pldm entity by the pldm_entity_node
  *
+ *  @pre node must point to a valid object
+ *
  *  @param[in] node     - opaque pointer to added entity
  *
  *  @return pldm_entity - pldm entity
@@ -360,6 +375,8 @@ void pldm_entity_association_tree_destroy(pldm_entity_association_tree *tree);
 
 /** @brief Check if input enity node is a parent
  *
+ *  @pre node must point to a valid object
+ *
  *  @param[in] node - opaque pointer acting as a handle to an entity node
  *
  *  @return bool true if node is a parent, false otherwise
@@ -368,6 +385,8 @@ bool pldm_entity_is_node_parent(pldm_entity_node *node);
 
 /** @brief Get parent of entity
  *
+ *  @pre node must point to a valid object
+ *
  *  @param[in] node - opaque pointer acting as a handle to an entity node
  *
  *  @return pldm_entity - pldm entity
@@ -375,6 +394,8 @@ bool pldm_entity_is_node_parent(pldm_entity_node *node);
 pldm_entity pldm_entity_get_parent(pldm_entity_node *node);
 
 /** @brief Check the current pldm entity is exist parent
+ *
+ *  @pre node must point to a valid object
  *
  *  @param[in] node - opaque pointer acting as a handle to an entity node
  *
@@ -442,6 +463,9 @@ uint8_t pldm_entity_get_num_children(pldm_entity_node *node,
 
 /** @brief Verify that the current node is a child of the current parent
  *
+ *  @pre parent must point to a valid object
+ *  @pre node must point to a valid object
+ *
  *  @param[in] parent    - opaque pointer acting as a handle to an entity parent
  *  @param[in] node      - pointer to the node of the pldm entity
  */
@@ -490,6 +514,8 @@ void pldm_entity_association_tree_destroy_root(
 	pldm_entity_association_tree *tree);
 
 /** @brief Check whether the entity association tree is empty
+ *
+ *  @pre tree must point to a valid object
  *
  *  @param[in] tree - pointer to entity association tree
  *  @return bool, true if tree is empty
