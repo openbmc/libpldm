@@ -89,6 +89,7 @@ Change categories:
 2. pdr: Rework pldm_pdr_find_container_id_range_exclude() API
 3. transport: mctp-demux: Don't test socket for non-zero value
 4. requester: Return PLDM_REQUESTER_OPEN_FAIL from pldm_open() on error
+5. pdr: pldm_pdr_fru_record_set_find_by_rsi(): Document reality of return
 
 ## [0.3.0] - 2023-06-23
 
