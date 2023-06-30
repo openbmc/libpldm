@@ -743,8 +743,16 @@ uint8_t pldm_entity_get_num_children(pldm_entity_node *node,
 				     uint8_t association_type)
 {
 	assert(node != NULL);
+	if (!node) {
+		return 0;
+	}
+
 	assert(association_type == PLDM_ENTITY_ASSOCIAION_PHYSICAL ||
 	       association_type == PLDM_ENTITY_ASSOCIAION_LOGICAL);
+	if (!(association_type == PLDM_ENTITY_ASSOCIAION_PHYSICAL ||
+	      association_type == PLDM_ENTITY_ASSOCIAION_LOGICAL)) {
+		return 0;
+	}
 
 	size_t count = 0;
 	pldm_entity_node *curr = node->first_child;
