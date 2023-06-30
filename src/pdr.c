@@ -218,6 +218,9 @@ pldm_pdr_find_record_by_type(const pldm_pdr *repo, uint8_t pdr_type,
 			     uint32_t *size)
 {
 	assert(repo != NULL);
+	if (!repo) {
+		return NULL;
+	}
 
 	pldm_pdr_record *record = repo->first;
 	if (curr_record != NULL) {
