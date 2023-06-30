@@ -919,6 +919,9 @@ void pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
 {
 	assert(tree != NULL);
 	assert(repo != NULL);
+	if (!tree || !repo) {
+		return;
+	}
 
 	entity_association_pdr_add(tree->root, repo, NULL, 0, is_remote,
 				   terminus_handle, 0);
