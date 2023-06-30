@@ -340,6 +340,11 @@ pldm_entity_node *pldm_entity_association_tree_add_entity(
 
 /** @brief Visit and note each entity in the entity association tree
  *
+ *  @pre `*entities == NULL` and `*size == 0` must hold at the time of invocation.
+ *
+ *  Callers must inspect the values of `*entities` and `*size` post-invocation to determine if the
+ *  invocation was a success or failure.
+ *
  *  @param[in] tree - opaque pointer acting as a handle to the tree
  *  @param[out] entities - pointer to list of pldm_entity's. To be free()'d by
  *                         the caller
