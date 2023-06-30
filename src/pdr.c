@@ -699,7 +699,9 @@ static void entity_association_tree_destroy(pldm_entity_node *node)
 LIBPLDM_ABI_STABLE
 void pldm_entity_association_tree_destroy(pldm_entity_association_tree *tree)
 {
-	assert(tree != NULL);
+	if (!tree) {
+		return;
+	}
 
 	entity_association_tree_destroy(tree->root);
 	free(tree);
