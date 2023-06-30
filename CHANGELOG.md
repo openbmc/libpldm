@@ -58,6 +58,7 @@ Change categories:
 14. pdr: pldm_entity_association_tree_destroy(): Exit early on bad argument
 15. pdr: pldm_entity_get_num_children(): Return zero for invalid arguments
 16. pdr: pldm_is_current_parent_child(): Return false for invalid arguments
+17. pdr: pldm_entity_association_pdr_add(): Exit early on bad arguments
 
 ### Deprecated
 

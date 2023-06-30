@@ -412,6 +412,8 @@ bool pldm_entity_is_exist_parent(pldm_entity_node *node);
 
 /** @brief Convert entity association tree to PDR
  *
+ *  No conversion takes place if one or both of tree or repo are NULL.
+ *
  *  @param[in] tree - opaque pointer to entity association tree
  *  @param[in] repo - PDR repo where entity association records should be added
  *  @param[in] is_remote - if true, then the PDR is not from this terminus
