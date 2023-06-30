@@ -55,6 +55,7 @@ Change categories:
 11. pdr: pldm_entity_association_tree_init(): Return NULL on failed alloc
 12. pdr: pldm_entity_association_tree_visit(): Document preconditions
 13. pdr: pldm_entity_association_tree_visit(): Exit early on failure
+14. pdr: pldm_entity_association_tree_destroy(): Exit early on bad argument
 
 ### Deprecated
 
