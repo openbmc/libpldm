@@ -360,12 +360,14 @@ pldm_entity pldm_entity_extract(pldm_entity_node *node);
 
 /** @brief Extract remote container id from the pldm_entity_node
  *
- *  @param[in] entity         - pointer to existing entity
+ *  @pre entity must point to a valid object
  *
- *  @param[out] cid           -  remote container id
+ *  @param[in] entity - pointer to existing entity
+ *
+ *  @return The remote container id
  */
-int pldm_entity_node_get_remote_container_id(const pldm_entity_node *entity,
-					     uint16_t *cid);
+uint16_t
+pldm_entity_node_get_remote_container_id(const pldm_entity_node *entity);
 
 /** @brief Destroy entity association tree
  *

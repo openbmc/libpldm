@@ -472,15 +472,12 @@ pldm_entity pldm_entity_extract(pldm_entity_node *node)
 }
 
 LIBPLDM_ABI_TESTING
-int pldm_entity_node_get_remote_container_id(const pldm_entity_node *entity,
-					     uint16_t *cid)
+uint16_t
+pldm_entity_node_get_remote_container_id(const pldm_entity_node *entity)
 {
-	if (!entity) {
-		return -EINVAL;
-	}
+	assert(entity != NULL);
 
-	*cid = entity->remote_container_id;
-	return 0;
+	return entity->remote_container_id;
 }
 
 LIBPLDM_ABI_STABLE
