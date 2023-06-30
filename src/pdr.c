@@ -955,7 +955,7 @@ int pldm_entity_association_pdr_add_from_node_with_record_handle(
 	return 0;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 void find_entity_ref_in_tree(pldm_entity_node *tree_node, pldm_entity entity,
 			     pldm_entity_node **node)
 {
