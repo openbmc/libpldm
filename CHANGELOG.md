@@ -52,6 +52,7 @@ Change categories:
 
 9. pdr: pldm_entity_node_get_remote_container_id() is a trivial accessor
 10. pdr: pldm_pdr_fru_record_set_find_by_rsi(): Exit early on NULL arguments
+11. pdr: pldm_entity_association_tree_init(): Return NULL on failed alloc
 
 ### Deprecated
 

@@ -490,7 +490,9 @@ pldm_entity_association_tree *pldm_entity_association_tree_init(void)
 {
 	pldm_entity_association_tree *tree =
 		malloc(sizeof(pldm_entity_association_tree));
-	assert(tree != NULL);
+	if (!tree) {
+		return NULL;
+	}
 	tree->root = NULL;
 	tree->last_used_container_id = 0;
 
