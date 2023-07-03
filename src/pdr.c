@@ -1253,14 +1253,23 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 					 pldm_entity **entities)
 {
 	assert(pdr != NULL);
-	assert(pdr_len >= sizeof(struct pldm_pdr_hdr) +
-				  sizeof(struct pldm_pdr_entity_association));
+	if (!pdr || !num_entities || !entities) {
+		return;
+	}
+#define PDR_MIN_SIZE                                                           \
+	(sizeof(struct pldm_pdr_hdr) +                                         \
+	 sizeof(struct pldm_pdr_entity_association))
+	assert(pdr_len >= PDR_MIN_SIZE);
+	if (pdr_len < PDR_MIN_SIZE) {
+		return;
+	}
+#undef PDR_MIN_SIZE
 
 	struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)pdr;
 	assert(hdr->type == PLDM_PDR_ENTITY_ASSOCIATION);
 
 	const uint8_t *start = (uint8_t *)pdr;
-	const uint8_t *end =
+	const uint8_t *end __attribute__((unused)) =
 		start + sizeof(struct pldm_pdr_hdr) + le16toh(hdr->length);
 	start += sizeof(struct pldm_pdr_hdr);
 	struct pldm_pdr_entity_association *entity_association_pdr =
