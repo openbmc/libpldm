@@ -39,40 +39,68 @@ uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		      uint32_t record_handle, bool is_remote,
 		      uint16_t terminus_handle)
 {
+	int rc = pldm_pdr_add_check(repo, data, size, is_remote,
+				    terminus_handle, &record_handle);
+	(void)rc;
+	assert(!rc);
+	return record_handle;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
+		       bool is_remote, uint16_t terminus_handle,
+		       uint32_t *record_handle)
+{
 	assert(repo != NULL);
 	assert(data != NULL);
 	assert(size != 0);
+	assert(record_handle != NULL);
+	if (!repo || !data || !size || !record_handle) {
+		return -EINVAL;
+	}
 
 	pldm_pdr_record *record = malloc(sizeof(pldm_pdr_record));
 	assert(record != NULL);
+	if (!record) {
+		return -ENOMEM;
+	}
 
-	if (record_handle) {
-		record->record_handle = record_handle;
-	} else {
-		uint32_t curr = repo->last ? repo->last->record_handle : 0;
-		assert(curr != UINT32_MAX);
-		record->record_handle = curr + 1;
+	if (data) {
+		record->data = malloc(size);
+		assert(record->data != NULL);
+		if (!record->data) {
+			free(record);
+			return -ENOMEM;
+		}
+		memcpy(record->data, data, size);
 	}
 
 	record->size = size;
 	record->is_remote = is_remote;
 	record->terminus_handle = terminus_handle;
-	if (data != NULL) {
-		record->data = malloc(size);
-		assert(record->data != NULL);
-		memcpy(record->data, data, size);
-		/* If record handle is 0, that is an indication for this API to
-		 * compute a new handle. For that reason, the computed handle
-		 * needs to be populated in the PDR header. For a case where the
-		 * caller supplied the record handle, it would exist in the
-		 * header already.
-		 */
-		if (!record_handle) {
-			struct pldm_pdr_hdr *hdr =
-				(struct pldm_pdr_hdr *)(record->data);
+
+	if (*record_handle) {
+		record->record_handle = *record_handle;
+	} else {
+		uint32_t curr = repo->last ? repo->last->record_handle : 0;
+		assert(curr != UINT32_MAX);
+		if (curr == UINT32_MAX) {
+			return -EOVERFLOW;
+		}
+		record->record_handle = curr + 1;
+
+		if (data != NULL) {
+			/* If record handle is 0, that is an indication for this API to
+			 * compute a new handle. For that reason, the computed handle
+			 * needs to be populated in the PDR header. For a case where the
+			 * caller supplied the record handle, it would exist in the
+			 * header already.
+			 */
+			struct pldm_pdr_hdr *hdr = (void *)record->data;
 			hdr->record_handle = htole32(record->record_handle);
 		}
 	}
+
 	record->next = NULL;
 
 	if (repo->first == NULL) {
@@ -87,7 +115,9 @@ uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 	repo->size += record->size;
 	++repo->record_count;
 
-	return record->record_handle;
+	*record_handle = record->record_handle;
+
+	return 0;
 }
 
 LIBPLDM_ABI_STABLE
