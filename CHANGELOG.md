@@ -61,6 +61,7 @@ Change categories:
 17. pdr: pldm_entity_association_pdr_add(): Exit early on bad arguments
 18. pdr: pldm_find_entity_ref_in_tree(): Early exit to protect assert()
 19. pdr: pldm_entity_association_tree_find(): Early exit on bad arguments
+20. pdr: pldm_entity_association_tree_destroy_root(): Exit early on bad arg
 
 ### Deprecated
 
