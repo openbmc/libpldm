@@ -1051,6 +1051,10 @@ LIBPLDM_ABI_STABLE
 void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo)
 {
 	assert(repo != NULL);
+	if (!repo) {
+		return;
+	}
+
 	bool removed = false;
 
 	pldm_pdr_record *record = repo->first;
