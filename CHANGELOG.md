@@ -66,6 +66,7 @@ Change categories:
 19. pdr: pldm_entity_association_tree_find(): Early exit on bad arguments
 20. pdr: pldm_entity_association_tree_destroy_root(): Exit early on bad arg
 21. pdr: pldm_entity_association_pdr_extract(): Early exit on bad arguments
+22. meson: Apply `b_ndebug=if-release` by default
 
 ### Deprecated
 
