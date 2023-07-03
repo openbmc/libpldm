@@ -495,6 +495,9 @@ bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node);
  *  @param[in/out] entity - entity type and instance id set on input, container
  *                 id set on output
  *  @return pldm_entity_node* pointer to entity if found, NULL otherwise
+ *
+ *  There are no entity nodes to search if tree is NULL, nor are there entity nodes to find if the
+ *  search criteria are unspecified when entity is NULL.
  */
 pldm_entity_node *
 pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
