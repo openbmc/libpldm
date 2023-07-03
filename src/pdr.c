@@ -987,6 +987,10 @@ void pldm_find_entity_ref_in_tree(pldm_entity_association_tree *tree,
 				  pldm_entity entity, pldm_entity_node **node)
 {
 	assert(tree != NULL);
+	if (!tree || !node) {
+		return;
+	}
+
 	find_entity_ref_in_tree(tree->root, entity, node);
 }
 
