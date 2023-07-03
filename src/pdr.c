@@ -1190,6 +1190,9 @@ pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
 				  pldm_entity *entity)
 {
 	assert(tree != NULL);
+	if (!tree || !entity) {
+		return NULL;
+	}
 
 	pldm_entity_node *node = NULL;
 	entity_association_tree_find(tree->root, entity, &node);
