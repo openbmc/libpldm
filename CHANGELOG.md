@@ -20,6 +20,7 @@ Change categories:
 ### Changed
 
 1. pdr: Avoid ID overflow in pldm_entity_association_tree_add_entity()
+2. meson: Apply `b_ndebug=if-release` by default
 
 ### Removed
 
