@@ -23,6 +23,7 @@ Change categories:
 2. fru: Introduce get_fru_record_by_option_check()
 3. pdr: Introduce pldm_entity_association_pdr_add_from_node_check()
 4. pdr: Introduce pldm_pdr_add_check()
+5. pdr: Introduce pldm_pdr_add_fru_record_set_check()
 
 ### Changed
 
