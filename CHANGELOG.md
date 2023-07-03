@@ -69,6 +69,7 @@ Change categories:
 22. pdr: pldm_entity_association_pdr_extract(): Assign out params at exit
 23. pdr: pldm_entity_get_num_children(): Don't return invalid values
 24. libpldm: Lift or remove asserts where a subsequent check exists
+25. meson: Apply `b_ndebug=if-release` by default
 
 ### Deprecated
 
