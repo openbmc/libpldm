@@ -530,6 +530,8 @@ void pldm_entity_association_tree_copy_root(
 /** @brief Destroy all the nodes of the entity association tree
  *
  *  @param[in] tree - pointer to entity association tree
+ *
+ *  There is no tree to destroy if tree is NULL.
  */
 void pldm_entity_association_tree_destroy_root(
 	pldm_entity_association_tree *tree);
