@@ -426,6 +426,7 @@ bool pldm_entity_is_exist_parent(pldm_entity_node *node);
 void pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
 				     pldm_pdr *repo, bool is_remote,
 				     uint16_t terminus_handle);
+
 /** @brief Add entity association pdr from node
  *
  *  @param[in] node - opaque pointer acting as a handle to an entity node
@@ -434,6 +435,19 @@ void pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
  *  @param[in] terminus_handle - terminus handle of the terminus
  */
 void pldm_entity_association_pdr_add_from_node(
+	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
+	size_t num_entities, bool is_remote, uint16_t terminus_handle);
+
+/** @brief Add entity association pdr from node, or return an error
+ *
+ *  @param[in] node - opaque pointer acting as a handle to an entity node
+ *  @param[in] repo - PDR repo where entity association records should be added
+ *  @param[in] is_remote  - if true, then the PDR is not from this terminus
+ *  @param[in] terminus_handle - terminus handle of the terminus
+ *
+ *  @return 0 on success, -EINVAL if the provided arguments are invalid.
+ */
+int pldm_entity_association_pdr_add_from_node_check(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
 	size_t num_entities, bool is_remote, uint16_t terminus_handle);
 

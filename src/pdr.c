@@ -932,9 +932,18 @@ void pldm_entity_association_pdr_add_from_node(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
 	size_t num_entities, bool is_remote, uint16_t terminus_handle)
 {
-	assert(repo != NULL);
+	int rc = pldm_entity_association_pdr_add_from_node_check(
+		node, repo, entities, num_entities, is_remote, terminus_handle);
+	(void)rc;
+	assert(!rc);
+}
 
-	pldm_entity_association_pdr_add_from_node_with_record_handle(
+LIBPLDM_ABI_TESTING
+int pldm_entity_association_pdr_add_from_node_check(
+	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
+	size_t num_entities, bool is_remote, uint16_t terminus_handle)
+{
+	return pldm_entity_association_pdr_add_from_node_with_record_handle(
 		node, repo, entities, num_entities, is_remote, terminus_handle,
 		0);
 }
