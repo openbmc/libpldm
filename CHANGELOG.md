@@ -21,6 +21,7 @@ Change categories:
 
 1. bios_table: Introduce pldm_bios_table_append_pad_checksum_check()
 2. fru: Introduce get_fru_record_by_option_check()
+3. pdr: Introduce pldm_entity_association_pdr_add_from_node_check()
 
 ### Changed
 
