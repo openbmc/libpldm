@@ -163,6 +163,8 @@ void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo);
  *         handle
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
  *  @param[in] terminus_handle - Terminus Handle of the remove PLDM terminus
+ *
+ *  If repo is NULL there are no PDRs that can be removed.
  */
 void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
 					     uint16_t terminus_handle);

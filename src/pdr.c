@@ -998,6 +998,10 @@ void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
 					     uint16_t terminus_handle)
 {
 	assert(repo != NULL);
+	if (!repo) {
+		return;
+	}
+
 	bool removed = false;
 
 	pldm_pdr_record *record = repo->first;
