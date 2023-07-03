@@ -91,6 +91,12 @@ Change categories:
    out how to stop, or get in touch. This symbol will be marked static the
    release after deprecation.
 
+7. pdr: Deprecate entity_association_tree_find()
+
+   There should be no users of this symbol. If you are a user, you should figure
+   out how to stop, or get in touch. This symbol will be marked static the
+   release after deprecation.
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
