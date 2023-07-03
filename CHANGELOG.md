@@ -68,6 +68,7 @@ Change categories:
 21. pdr: pldm_entity_association_pdr_extract(): Early exit on bad arguments
 22. pdr: pldm_entity_association_pdr_extract(): Assign out params at exit
 23. pdr: pldm_entity_get_num_children(): Don't return invalid values
+24. meson: Apply `b_ndebug=if-release` by default
 
 ### Deprecated
 
