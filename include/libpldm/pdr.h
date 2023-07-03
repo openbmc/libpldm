@@ -77,6 +77,25 @@ uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		      uint32_t record_handle, bool is_remote,
 		      uint16_t terminus_handle);
 
+/** @brief Add a PDR record to a PDR repository, or return an error
+ *
+ *  @param[in/out] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in] data - pointer to a PDR record, pointing to a PDR definition as
+ *  per DSP0248. This data is memcpy'd.
+ *  @param[in] size - size of input PDR record in bytes
+ *  @param[in] is_remote - if true, then the PDR is not from this terminus
+ *  @param[in] terminus_handle - terminus handle of the input PDR record
+ *  @param[in,out] record_handle - record handle of input PDR record. If this is set to 0 then a
+ *  record handle is computed. The computed handle is assigned to both the PDR record and back into
+ *  record_handle for the caller to consume.
+ *
+ *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
+ *  allocation fails, or -EOVERFLOW if a record handle could not be allocated
+ */
+int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
+		       bool is_remote, uint16_t terminus_handle,
+		       uint32_t *record_handle);
+
 /** @brief Get record handle of a PDR record
  *
  *  @pre repo must point to a valid object
