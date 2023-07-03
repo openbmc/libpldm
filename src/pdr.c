@@ -963,9 +963,7 @@ void find_entity_ref_in_tree(pldm_entity_node *tree_node, pldm_entity entity,
 	bool is_entity_instance_num;
 	bool is_type;
 
-	if (tree_node == NULL) {
-		return;
-	}
+	assert(tree_node != NULL);
 
 	is_type = tree_node->entity.entity_type == entity.entity_type;
 	is_entity_instance_num = tree_node->entity.entity_instance_num ==
@@ -986,7 +984,10 @@ LIBPLDM_ABI_STABLE
 void pldm_find_entity_ref_in_tree(pldm_entity_association_tree *tree,
 				  pldm_entity entity, pldm_entity_node **node)
 {
-	assert(tree != NULL);
+	if (!tree || !node) {
+		return;
+	}
+
 	find_entity_ref_in_tree(tree->root, entity, node);
 }
 
