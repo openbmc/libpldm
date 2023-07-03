@@ -1229,6 +1229,10 @@ void pldm_entity_association_tree_destroy_root(
 	pldm_entity_association_tree *tree)
 {
 	assert(tree != NULL);
+	if (!tree) {
+		return;
+	}
+
 	entity_association_tree_destroy(tree->root);
 	tree->last_used_container_id = 0;
 	tree->root = NULL;
