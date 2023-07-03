@@ -156,6 +156,8 @@ bool pldm_pdr_record_is_remote(const pldm_pdr_record *record);
 /** @brief Remove all PDR records that belong to a remote terminus
  *
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *
+ *  If repo is NULL then there are no PDRs that can be removed.
  */
 void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo);
 
