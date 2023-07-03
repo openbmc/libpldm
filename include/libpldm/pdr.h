@@ -547,6 +547,8 @@ bool pldm_is_empty_entity_assoc_tree(pldm_entity_association_tree *tree);
 
 /** @brief Extract entities from entity association PDR
  *
+ *  @pre `*entities == NULL` and `*num_entities == 0` must hold at the time of invocation.
+ *
  *  @param[in] pdr - entity association PDR
  *  @param[in] pdr_len - size of entity association PDR in bytes
  *  @param[out] num_entities - number of entities found, including the container
