@@ -79,8 +79,8 @@ uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 	}
 	record->next = NULL;
 
+	assert(!repo->first == !repo->last);
 	if (repo->first == NULL) {
-		assert(repo->last == NULL);
 		repo->first = record;
 		repo->last = record;
 	} else {
