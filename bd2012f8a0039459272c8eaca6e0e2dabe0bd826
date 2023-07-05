@@ -105,6 +105,24 @@
       "parentUuid": "bb9d8473_c973c983",
       "revId": "bd2012f8a0039459272c8eaca6e0e2dabe0bd826",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebe2868b_053c33cd",
+        "filename": "src/bios_table.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2023-07-05T07:00:36Z",
+      "side": 1,
+      "message": "the previous assert was if `size \u003e\u003d total_length` but now the behaviour has changed to assert if `rc \u003d\u003d PLDM_SUCCESS` thats not the same as the previous behaviour?",
+      "parentUuid": "6d72f695_529499ce",
+      "revId": "bd2012f8a0039459272c8eaca6e0e2dabe0bd826",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
