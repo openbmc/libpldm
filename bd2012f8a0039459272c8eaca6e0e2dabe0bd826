@@ -22,6 +22,30 @@
       },
       "revId": "bd2012f8a0039459272c8eaca6e0e2dabe0bd826",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e8b0683_e3009326",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-05T04:58:45Z",
+      "side": 1,
+      "message": "Ah yep. Good catch.",
+      "parentUuid": "9a298004_9eea0251",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 21
+      },
+      "revId": "bd2012f8a0039459272c8eaca6e0e2dabe0bd826",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
