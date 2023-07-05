@@ -1103,7 +1103,7 @@ TEST(StringTable, FindTest)
     EXPECT_EQ(entry, nullptr);
 }
 
-TEST(Itearator, DeathTest)
+TEST(Iterator, DeathTest)
 {
 
     Table table(256, 0);
