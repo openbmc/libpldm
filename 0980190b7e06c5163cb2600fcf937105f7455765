@@ -22,6 +22,30 @@
       },
       "revId": "0980190b7e06c5163cb2600fcf937105f7455765",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9ecdb0c_b4fe9764",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-05T04:57:15Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "71bcd427_1ae06482",
+      "range": {
+        "startLine": 474,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 11
+      },
+      "revId": "0980190b7e06c5163cb2600fcf937105f7455765",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
