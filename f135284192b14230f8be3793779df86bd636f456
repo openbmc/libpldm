@@ -22,6 +22,30 @@
       },
       "revId": "f135284192b14230f8be3793779df86bd636f456",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed3fd509_c151494f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-07-05T04:32:35Z",
+      "side": 1,
+      "message": "Ah, i see this is not the one with pldm_ , sorry.\n\nThis can be deprecated and made static. yes.",
+      "parentUuid": "f7153a98_49800d38",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 56
+      },
+      "revId": "f135284192b14230f8be3793779df86bd636f456",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
