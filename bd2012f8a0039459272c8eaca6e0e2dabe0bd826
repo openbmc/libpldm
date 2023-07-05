@@ -87,6 +87,24 @@
       "message": "are we still asserting?",
       "revId": "bd2012f8a0039459272c8eaca6e0e2dabe0bd826",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d72f695_529499ce",
+        "filename": "src/bios_table.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-05T06:06:39Z",
+      "side": 1,
+      "message": "For `pldm_bios_table_append_pad_checksum()` yes, because we must maintain its behaviour, which is to `assert()` on error.\n\nWe define a new function, `pldm_bios_table_append_pad_checksum_check()` which does not assert(), and implement `pldm_bios_table_append_pad_checksum()` in terms of `pldm_bios_table_append_pad_checksum_check()`. That means asserting that the result of `pldm_bios_table_append_pad_checksum_check()` is success, because if it isn\u0027t then the previous implementation of `pldm_bios_table_append_pad_checksum()` would have asserted.\n\nConsumers of libpldm that don\u0027t want the `assert()` behaviour of `pldm_bios_table_append_pad_checksum()` must migrate to using `pldm_bios_table_append_pad_checksum_check()` instead.\n\nHowever, note that all `assert()` calls are elided by passing `-DNDEBUG` in `CFLAGS` (which is how `meson` configures the build if you pass `-Db_ndebug\u003dtrue` to `meson setup`). See `man 3 assert`:\n\n\u003e If the macro NDEBUG is defined at the moment \u003cassert.h\u003e was last\n\u003e included, the macro assert() generates no code, and hence does\n\u003e nothing at all.  It is not recommended to define NDEBUG if using\n\u003e assert() to detect error conditions since the software may behave\n\u003e non-deterministically.\n\nhttps://www.man7.org/linux/man-pages/man3/assert.3.html\n\nIf `pldm_bios_table_append_pad_checksum()` is invoked on a build where `-DNDEBUG` was passed then the behaviour will be undefined as the application won\u0027t be prevented from using an invalid result. Previously the assert() would have prevented that, but it will have been removed during pre-processing.\n\nSo before we can set `b_ndebug\u003dif-release` in `meson.build` we must tag a release of libpldm where all the `*_check()` functions have been stabilised, all users in the OpenBMC ecosystem have been migrated to the `*_check()` functions, and all the deprecated \"unchecked\" functions have been removed. Once that\u0027s done we can merge the patch to set `b_ndebug\u003dif-release` by default as there can no longer be any users relying on `assert()` in libpldm to avoid erroneous results.",
+      "parentUuid": "bb9d8473_c973c983",
+      "revId": "bd2012f8a0039459272c8eaca6e0e2dabe0bd826",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
