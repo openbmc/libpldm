@@ -22,6 +22,30 @@
       },
       "revId": "4f1c19bee2f782d2d6290309ca260bb20b049fce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f7cb0e5_d1b4d406",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-05T05:05:54Z",
+      "side": 1,
+      "message": "We can\u0027t change the return type without introducing a new function. This seemed like the least intrusive way to avoid hitting assert(). I think if we want an improvement on the accuracy of the result then we can address that in a future patch that does introduce the new function?",
+      "parentUuid": "9d7993aa_157a01fa",
+      "range": {
+        "startLine": 466,
+        "startChar": 0,
+        "endLine": 471,
+        "endChar": 35
+      },
+      "revId": "4f1c19bee2f782d2d6290309ca260bb20b049fce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
