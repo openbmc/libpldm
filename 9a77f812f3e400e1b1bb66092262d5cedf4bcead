@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9738131_705ac960",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-06T02:55:49Z",
+      "side": 1,
+      "message": "Any chance you can be more specific about where the NULL deref might occur? Perhaps try to include the function name?",
+      "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c877214_208a260f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-06T02:55:49Z",
+      "side": 1,
+      "message": "Can you explain a bit about how that might happen? For instance, if you have output from a static analysis tool\u0027s report, can you paste it here (inside a markdown code block)?",
+      "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23f0b4bf_66a9ad7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-06T02:55:49Z",
+      "side": 1,
+      "message": "Can you please add a `Fixes:` line as well? And add the change subject under the `Fixed` section in `CHANGELOG.md`?",
+      "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ca79f23_5a7e1c2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-06T02:55:49Z",
+      "side": 1,
+      "message": "A few minor requests.",
+      "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37aec4ba_939ce9a0",
+        "filename": "src/transport/socket.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-06T02:55:49Z",
+      "side": 1,
+      "message": "Bit of a nit, but I\u0027d prefer we put an empty line above this one.",
+      "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
