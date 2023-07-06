@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1299667f_49e1a047",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-07-06T04:29:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f9738131_705ac960",
+      "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c877214_208a260f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-07-06T02:55:49Z",
       "side": 1,
       "message": "Can you explain a bit about how that might happen? For instance, if you have output from a static analysis tool\u0027s report, can you paste it here (inside a markdown code block)?",
+      "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf92f718_3609e634",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-07-06T04:29:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2c877214_208a260f",
       "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2b9dd73_ef960eaa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-07-06T04:29:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23f0b4bf_66a9ad7a",
+      "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ca79f23_5a7e1c2f",
@@ -69,6 +123,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "389aea68_c9d6c165",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-07-06T04:29:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3ca79f23_5a7e1c2f",
+      "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37aec4ba_939ce9a0",
@@ -82,6 +154,24 @@
       "writtenOn": "2023-07-06T02:55:49Z",
       "side": 1,
       "message": "Bit of a nit, but I\u0027d prefer we put an empty line above this one.",
+      "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09c93381_65ba0466",
+        "filename": "src/transport/socket.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2023-07-06T04:29:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "37aec4ba_939ce9a0",
       "revId": "9a77f812f3e400e1b1bb66092262d5cedf4bcead",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
