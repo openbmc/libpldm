@@ -60,6 +60,7 @@ Change categories:
 2. pdr: Rework pldm_pdr_find_container_id_range_exclude() API
 3. transport: mctp-demux: Don't test socket for non-zero value
 4. requester: Return PLDM_REQUESTER_OPEN_FAIL from pldm_open() on error
+5. transport: Fix possible NULL ptr deref in pldm_socket_sndbuf_init()
 
 ## [0.3.0] - 2023-06-23
 
