@@ -7102,6 +7102,37 @@ $VAR1 = {
                                          'Return' => '81757',
                                          'ShortName' => 'pldm_pdr_init'
                                        },
+                            '92350' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'repo',
+                                                               'type' => '81757'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'data',
+                                                               'type' => '6087'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'size',
+                                                               'type' => '180'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'is_remote',
+                                                               'type' => '6265'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'terminus_handle',
+                                                               'type' => '4895'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'record_handle',
+                                                               'type' => '2039'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_pdr_add_check'
+                                       },
                             '93213' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
@@ -7746,6 +7777,7 @@ $VAR1 = {
                                                  'pldm_is_empty_entity_assoc_tree' => 1,
                                                  'pldm_open' => 1,
                                                  'pldm_pdr_add' => 1,
+                                                 'pldm_pdr_add_check' => 1,
                                                  'pldm_pdr_add_fru_record_set' => 1,
                                                  'pldm_pdr_destroy' => 1,
                                                  'pldm_pdr_find_record' => 1,
