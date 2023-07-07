@@ -124,6 +124,7 @@ Change categories:
 4. requester: Return PLDM_REQUESTER_OPEN_FAIL from pldm_open() on error
 5. pdr: pldm_pdr_fru_record_set_find_by_rsi(): Document reality of return
 6. transport: Fix possible NULL ptr deref in pldm_socket_sndbuf_init()
+7. abi: Update to remove pldm_close() from reference dumps
 
 ## [0.3.0] - 2023-06-23
 
