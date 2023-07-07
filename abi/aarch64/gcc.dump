@@ -3740,6 +3740,25 @@ $VAR1 = {
                                          'Return' => '47738',
                                          'ShortName' => 'pldm_bios_table_iter_create'
                                        },
+                            '50235' => {
+                                         'Header' => 'bios_table.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'table',
+                                                               'type' => '166'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'capacity',
+                                                               'type' => '123'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'size',
+                                                               'type' => '8822'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_bios_table_append_pad_checksum_check'
+                                       },
                             '50639' => {
                                          'Header' => 'bios_table.h',
                                          'Param' => {
@@ -7575,6 +7594,7 @@ $VAR1 = {
                                                  'is_transfer_flag_valid' => 1,
                                                  'pack_pldm_header' => 1,
                                                  'pldm_bios_table_append_pad_checksum' => 1,
+                                                 'pldm_bios_table_append_pad_checksum_check' => 1,
                                                  'pldm_bios_table_attr_entry_decode_attribute_handle' => 1,
                                                  'pldm_bios_table_attr_entry_decode_attribute_type' => 1,
                                                  'pldm_bios_table_attr_entry_decode_string_handle' => 1,

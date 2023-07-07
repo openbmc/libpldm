@@ -954,7 +954,7 @@ size_t pldm_bios_table_pad_checksum_size(size_t size_without_pad)
 	return size;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 size_t pldm_bios_table_append_pad_checksum(void *table, size_t capacity,
 					   size_t size)
 {
@@ -965,7 +965,7 @@ size_t pldm_bios_table_append_pad_checksum(void *table, size_t capacity,
 	return size;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_bios_table_append_pad_checksum_check(void *table, size_t capacity,
 					      size_t *size)
 {
