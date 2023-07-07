@@ -123,6 +123,7 @@ Change categories:
 3. transport: mctp-demux: Don't test socket for non-zero value
 4. requester: Return PLDM_REQUESTER_OPEN_FAIL from pldm_open() on error
 5. pdr: pldm_pdr_fru_record_set_find_by_rsi(): Document reality of return
+6. abi: Update to remove pldm_close() from reference dumps
 
 ## [0.3.0] - 2023-06-23
 
