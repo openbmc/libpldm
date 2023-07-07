@@ -108,6 +108,11 @@ Change categories:
    Users of pldm_bios_table_append_pad_checksum() should migrate to
    pldm_bios_table_append_pad_checksum_check()
 
+9. fru: Stabilise get_fru_record_by_option_check()
+
+   Users of get_fru_record_by_option() should migrate to
+   get_fru_record_by_option_check()
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
