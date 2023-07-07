@@ -7441,6 +7441,42 @@ $VAR1 = {
                                          'Return' => '90223',
                                          'ShortName' => 'pldm_pdr_fru_record_set_find_by_rsi'
                                        },
+                            '90855' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'repo',
+                                                               'type' => '82972'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'terminus_handle',
+                                                               'type' => '5053'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'fru_rsi',
+                                                               'type' => '5053'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'entity_type',
+                                                               'type' => '5053'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'entity_instance_num',
+                                                               'type' => '5053'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'container_id',
+                                                               'type' => '5053'
+                                                             },
+                                                      '6' => {
+                                                               'name' => 'bmc_record_handle',
+                                                               'offset' => '0',
+                                                               'type' => '2087'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_pdr_add_fru_record_set_check'
+                                       },
                             '9094' => {
                                         'Header' => 'bios.h',
                                         'Param' => {
@@ -8275,6 +8311,7 @@ $VAR1 = {
                                                  'pldm_pdr_add' => 1,
                                                  'pldm_pdr_add_check' => 1,
                                                  'pldm_pdr_add_fru_record_set' => 1,
+                                                 'pldm_pdr_add_fru_record_set_check' => 1,
                                                  'pldm_pdr_destroy' => 1,
                                                  'pldm_pdr_find_record' => 1,
                                                  'pldm_pdr_find_record_by_type' => 1,
