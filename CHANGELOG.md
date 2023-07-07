@@ -120,6 +120,11 @@ Change categories:
     Users of pldm_entity_association_pdr_add_from_node() should migrate to
     pldm_entity_association_pdr_add_from_node_check()
 
+11. pdr: Stabilise pldm_pdr_add_check()
+
+    pldm_pdr_add() is deprecated by this change. Users of pldm_pdr_add() should
+    migrate to pldm_pdr_add_check()
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
