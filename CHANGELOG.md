@@ -113,6 +113,11 @@ Change categories:
    Users of get_fru_record_by_option() should migrate to
    get_fru_record_by_option_check()
 
+10. pdr: Stabilise pldm_entity_association_pdr_add_from_node_check()
+
+    Users of pldm_entity_association_pdr_add_from_node() should migrate to
+    pldm_entity_association_pdr_add_from_node_check()
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
