@@ -103,6 +103,11 @@ Change categories:
    out how to stop, or get in touch. This symbol will be marked static the
    release after deprecation.
 
+8. bios_table: Stabilise pldm_bios_table_append_pad_checksum_check()
+
+   Users of pldm_bios_table_append_pad_checksum() should migrate to
+   pldm_bios_table_append_pad_checksum_check()
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
