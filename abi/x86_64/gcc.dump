@@ -6540,6 +6540,42 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_set_bios_attribute_current_value_resp'
                                       },
+                            '76776' => {
+                                         'Header' => 'fru.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'table',
+                                                               'type' => '6245'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'table_size',
+                                                               'type' => '123'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'record_table',
+                                                               'type' => '2082'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'record_size',
+                                                               'type' => '9084'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'rsi',
+                                                               'type' => '5053'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'rt',
+                                                               'type' => '168'
+                                                             },
+                                                      '6' => {
+                                                               'name' => 'ft',
+                                                               'offset' => '0',
+                                                               'type' => '168'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'get_fru_record_by_option_check'
+                                       },
                             '77367' => {
                                          'Header' => 'fru.h',
                                          'Param' => {
@@ -8084,6 +8120,7 @@ $VAR1 = {
                                                  'entity_association_tree_find' => 1,
                                                  'find_entity_ref_in_tree' => 1,
                                                  'get_fru_record_by_option' => 1,
+                                                 'get_fru_record_by_option_check' => 1,
                                                  'is_present' => 1,
                                                  'is_time_legal' => 1,
                                                  'is_transfer_flag_valid' => 1,
