@@ -122,6 +122,11 @@ Change categories:
 
     Users of pldm_pdr_add() should migrate to pldm_pdr_add_check()
 
+12. pdr: Stabilise pldm_pdr_add_fru_record_set_check()
+
+    Users of pldm_pdr_add_fru_record_set() should migrate to
+    pldm_pdr_add_fru_record_set_check()
+
 ### Removed
 
 1. bios_table: Remove deprecated APIs sanitized by assert():
