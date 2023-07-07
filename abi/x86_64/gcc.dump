@@ -7065,6 +7065,37 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_get_bios_attribute_current_value_by_handle_req'
                                       },
+                            '83987' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'node',
+                                                               'type' => '80410'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'repo',
+                                                               'type' => '82972'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'entities',
+                                                               'type' => '81172'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'num_entities',
+                                                               'type' => '123'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'is_remote',
+                                                               'type' => '6423'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'terminus_handle',
+                                                               'type' => '5053'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_entity_association_pdr_add_from_node_check'
+                                       },
                             '84205' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
@@ -8187,6 +8218,7 @@ $VAR1 = {
                                                  'pldm_bios_table_string_find_by_string' => 1,
                                                  'pldm_entity_association_pdr_add' => 1,
                                                  'pldm_entity_association_pdr_add_from_node' => 1,
+                                                 'pldm_entity_association_pdr_add_from_node_check' => 1,
                                                  'pldm_entity_association_pdr_extract' => 1,
                                                  'pldm_entity_association_tree_add' => 1,
                                                  'pldm_entity_association_tree_copy_root' => 1,
