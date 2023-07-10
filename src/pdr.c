@@ -39,6 +39,9 @@ uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		      uint32_t record_handle, bool is_remote,
 		      uint16_t terminus_handle)
 {
+	assert(repo != NULL);
+	assert(data != NULL);
+	assert(size != 0);
 	int rc = pldm_pdr_add_check(repo, data, size, is_remote,
 				    terminus_handle, &record_handle);
 	(void)rc;
@@ -51,23 +54,17 @@ int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		       bool is_remote, uint16_t terminus_handle,
 		       uint32_t *record_handle)
 {
-	assert(repo != NULL);
-	assert(data != NULL);
-	assert(size != 0);
-	assert(record_handle != NULL);
 	if (!repo || !data || !size || !record_handle) {
 		return -EINVAL;
 	}
 
 	pldm_pdr_record *record = malloc(sizeof(pldm_pdr_record));
-	assert(record != NULL);
 	if (!record) {
 		return -ENOMEM;
 	}
 
 	if (data) {
 		record->data = malloc(size);
-		assert(record->data != NULL);
 		if (!record->data) {
 			free(record);
 			return -ENOMEM;
@@ -83,7 +80,6 @@ int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		record->record_handle = *record_handle;
 	} else {
 		uint32_t curr = repo->last ? repo->last->record_handle : 0;
-		assert(curr != UINT32_MAX);
 		if (curr == UINT32_MAX) {
 			return -EOVERFLOW;
 		}
@@ -161,10 +157,6 @@ const pldm_pdr_record *pldm_pdr_find_record(const pldm_pdr *repo,
 					    uint8_t **data, uint32_t *size,
 					    uint32_t *next_record_handle)
 {
-	assert(repo != NULL);
-	assert(data != NULL);
-	assert(size != NULL);
-	assert(next_record_handle != NULL);
 	if (!repo || !data || !size || !next_record_handle) {
 		return NULL;
 	}
@@ -196,11 +188,6 @@ pldm_pdr_get_next_record(const pldm_pdr *repo,
 			 const pldm_pdr_record *curr_record, uint8_t **data,
 			 uint32_t *size, uint32_t *next_record_handle)
 {
-	assert(repo != NULL);
-	assert(curr_record != NULL);
-	assert(data != NULL);
-	assert(size != NULL);
-	assert(next_record_handle != NULL);
 	if (!repo || !curr_record || !data || !size || !next_record_handle) {
 		return NULL;
 	}
@@ -224,7 +211,6 @@ pldm_pdr_find_record_by_type(const pldm_pdr *repo, uint8_t pdr_type,
 			     const pldm_pdr_record *curr_record, uint8_t **data,
 			     uint32_t *size)
 {
-	assert(repo != NULL);
 	if (!repo) {
 		return NULL;
 	}
@@ -337,10 +323,6 @@ const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 	uint16_t *entity_type, uint16_t *entity_instance_num,
 	uint16_t *container_id)
 {
-	assert(terminus_handle != NULL);
-	assert(entity_type != NULL);
-	assert(entity_instance_num != NULL);
-	assert(container_id != NULL);
 	if (!repo || !terminus_handle || !entity_type || !entity_instance_num ||
 	    !container_id) {
 		return NULL;
@@ -688,7 +670,6 @@ LIBPLDM_ABI_STABLE
 void pldm_entity_association_tree_visit(pldm_entity_association_tree *tree,
 					pldm_entity **entities, size_t *size)
 {
-	assert(tree != NULL);
 	if (!tree || !entities || !size) {
 		return;
 	}
@@ -763,13 +744,10 @@ LIBPLDM_ABI_STABLE
 uint8_t pldm_entity_get_num_children(pldm_entity_node *node,
 				     uint8_t association_type)
 {
-	assert(node != NULL);
 	if (!node) {
 		return 0;
 	}
 
-	assert(association_type == PLDM_ENTITY_ASSOCIAION_PHYSICAL ||
-	       association_type == PLDM_ENTITY_ASSOCIAION_LOGICAL);
 	if (!(association_type == PLDM_ENTITY_ASSOCIAION_PHYSICAL ||
 	      association_type == PLDM_ENTITY_ASSOCIAION_LOGICAL)) {
 		return 0;
@@ -791,8 +769,6 @@ uint8_t pldm_entity_get_num_children(pldm_entity_node *node,
 LIBPLDM_ABI_STABLE
 bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node)
 {
-	assert(parent != NULL);
-	assert(node != NULL);
 	if (!parent || !node) {
 		return false;
 	}
@@ -938,8 +914,6 @@ void pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
 				     pldm_pdr *repo, bool is_remote,
 				     uint16_t terminus_handle)
 {
-	assert(tree != NULL);
-	assert(repo != NULL);
 	if (!tree || !repo) {
 		return;
 	}
@@ -1016,7 +990,6 @@ LIBPLDM_ABI_STABLE
 void pldm_find_entity_ref_in_tree(pldm_entity_association_tree *tree,
 				  pldm_entity entity, pldm_entity_node **node)
 {
-	assert(tree != NULL);
 	if (!tree || !node) {
 		return;
 	}
@@ -1028,7 +1001,6 @@ LIBPLDM_ABI_STABLE
 void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
 					     uint16_t terminus_handle)
 {
-	assert(repo != NULL);
 	if (!repo) {
 		return;
 	}
@@ -1080,7 +1052,6 @@ void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
 LIBPLDM_ABI_STABLE
 void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo)
 {
-	assert(repo != NULL);
 	if (!repo) {
 		return;
 	}
@@ -1156,7 +1127,6 @@ static void entity_association_tree_find_if_remote(pldm_entity_node *node,
 						   pldm_entity_node **out,
 						   bool is_remote)
 {
-	assert(out != NULL && *out == NULL);
 	if (node == NULL) {
 		return;
 	}
@@ -1219,7 +1189,6 @@ pldm_entity_node *
 pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
 				  pldm_entity *entity)
 {
-	assert(tree != NULL);
 	if (!tree || !entity) {
 		return NULL;
 	}
@@ -1261,7 +1230,6 @@ LIBPLDM_ABI_STABLE
 void pldm_entity_association_tree_destroy_root(
 	pldm_entity_association_tree *tree)
 {
-	assert(tree != NULL);
 	if (!tree) {
 		return;
 	}
@@ -1282,21 +1250,18 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 					 size_t *num_entities,
 					 pldm_entity **entities)
 {
-	assert(pdr != NULL);
 	if (!pdr || !num_entities || !entities) {
 		return;
 	}
 #define PDR_MIN_SIZE                                                           \
 	(sizeof(struct pldm_pdr_hdr) +                                         \
 	 sizeof(struct pldm_pdr_entity_association))
-	assert(pdr_len >= PDR_MIN_SIZE);
 	if (pdr_len < PDR_MIN_SIZE) {
 		return;
 	}
 #undef PDR_MIN_SIZE
 
 	struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)pdr;
-	assert(hdr->type == PLDM_PDR_ENTITY_ASSOCIATION);
 	if (hdr->type != PLDM_PDR_ENTITY_ASSOCIATION) {
 		return;
 	}
@@ -1308,20 +1273,15 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 	struct pldm_pdr_entity_association *entity_association_pdr =
 		(struct pldm_pdr_entity_association *)start;
 	size_t l_num_entities = entity_association_pdr->num_children + 1;
-	assert(l_num_entities >= 2);
 	if (l_num_entities < 2) {
 		return;
 	}
-	assert(start + sizeof(struct pldm_pdr_entity_association) +
-		       sizeof(pldm_entity) * (l_num_entities - 2) ==
-	       end);
 	if (start + sizeof(struct pldm_pdr_entity_association) +
 		    sizeof(pldm_entity) * (l_num_entities - 2) !=
 	    end) {
 		return;
 	}
 	pldm_entity *l_entities = malloc(sizeof(pldm_entity) * l_num_entities);
-	assert(l_entities != NULL);
 	if (!l_entities) {
 		return;
 	}

@@ -256,7 +256,6 @@ int get_fru_record_by_option_check(const uint8_t *table, size_t table_size,
 		len = sizeof(struct pldm_fru_record_data_format) -
 		      sizeof(struct pldm_fru_record_tlv);
 
-		assert(pos - record_table + len < *record_size);
 		if (pos - record_table + len >= *record_size) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
@@ -270,7 +269,6 @@ int get_fru_record_by_option_check(const uint8_t *table, size_t table_size,
 		for (int i = 0; i < record_data_src->num_fru_fields; i++) {
 			len = sizeof(*tlv) - 1 + tlv->length;
 			if (tlv->type == ft || ft == 0) {
-				assert(pos - record_table + len < *record_size);
 				if (pos - record_table + len >= *record_size) {
 					return PLDM_ERROR_INVALID_LENGTH;
 				}

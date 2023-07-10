@@ -975,7 +975,6 @@ int pldm_bios_table_append_pad_checksum_check(void *table, size_t capacity,
 
 	size_t pad_checksum_size = pldm_bios_table_pad_checksum_size(*size);
 	size_t total_length = *size + pad_checksum_size;
-	assert(capacity >= total_length);
 	if (capacity < total_length) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
