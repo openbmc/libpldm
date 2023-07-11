@@ -1306,11 +1306,11 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 		(struct pldm_pdr_entity_association *)start;
 	*num_entities = entity_association_pdr->num_children + 1;
 	assert(*num_entities >= 2);
-	*entities = malloc(sizeof(pldm_entity) * *num_entities);
-	assert(*entities != NULL);
 	assert(start + sizeof(struct pldm_pdr_entity_association) +
 		       sizeof(pldm_entity) * (*num_entities - 2) ==
 	       end);
+	*entities = malloc(sizeof(pldm_entity) * *num_entities);
+	assert(*entities != NULL);
 	(*entities)[0].entity_type =
 		le16toh(entity_association_pdr->container.entity_type);
 	(*entities)[0].entity_instance_num =
