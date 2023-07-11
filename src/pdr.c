@@ -785,7 +785,7 @@ uint8_t pldm_entity_get_num_children(pldm_entity_node *node,
 	}
 
 	assert(count < UINT8_MAX);
-	return count;
+	return count < UINT8_MAX ? count : 0;
 }
 
 LIBPLDM_ABI_STABLE

@@ -67,6 +67,7 @@ Change categories:
 20. pdr: pldm_entity_association_tree_destroy_root(): Exit early on bad arg
 21. pdr: pldm_entity_association_pdr_extract(): Early exit on bad arguments
 22. pdr: pldm_entity_association_pdr_extract(): Assign out params at exit
+23. pdr: pldm_entity_get_num_children(): Don't return invalid values
 
 ### Deprecated
 
