@@ -153,6 +153,7 @@ Change categories:
 5. pdr: pldm_pdr_fru_record_set_find_by_rsi(): Document reality of return
 6. transport: Fix possible NULL ptr deref in pldm_socket_sndbuf_init()
 7. abi: Update to remove pldm_close() from reference dumps
+8. bios_table: Annotate pldm_bios_table_attr_value_entry_encode_integer()
 
 ## [0.3.0] - 2023-06-23
 

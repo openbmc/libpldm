@@ -823,7 +823,7 @@ size_t pldm_bios_table_attr_value_entry_encode_integer_length(void)
 	       sizeof(uint64_t);
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 void pldm_bios_table_attr_value_entry_encode_integer(void *entry,
 						     size_t entry_length,
 						     uint16_t attr_handle,
