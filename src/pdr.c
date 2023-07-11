@@ -1304,25 +1304,28 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 	start += sizeof(struct pldm_pdr_hdr);
 	struct pldm_pdr_entity_association *entity_association_pdr =
 		(struct pldm_pdr_entity_association *)start;
-	*num_entities = entity_association_pdr->num_children + 1;
-	assert(*num_entities >= 2);
+	size_t l_num_entities = entity_association_pdr->num_children + 1;
+	assert(l_num_entities >= 2);
 	assert(start + sizeof(struct pldm_pdr_entity_association) +
-		       sizeof(pldm_entity) * (*num_entities - 2) ==
+		       sizeof(pldm_entity) * (l_num_entities - 2) ==
 	       end);
-	*entities = malloc(sizeof(pldm_entity) * *num_entities);
-	assert(*entities != NULL);
-	(*entities)[0].entity_type =
+	pldm_entity *l_entities = malloc(sizeof(pldm_entity) * l_num_entities);
+	assert(l_entities != NULL);
+	l_entities[0].entity_type =
 		le16toh(entity_association_pdr->container.entity_type);
-	(*entities)[0].entity_instance_num =
+	l_entities[0].entity_instance_num =
 		le16toh(entity_association_pdr->container.entity_instance_num);
-	(*entities)[0].entity_container_id =
+	l_entities[0].entity_container_id =
 		le16toh(entity_association_pdr->container.entity_container_id);
 	pldm_entity *curr_entity = entity_association_pdr->children;
-	for (size_t i = 1; i < *num_entities; i++, curr_entity++) {
-		(*entities)[i].entity_type = le16toh(curr_entity->entity_type);
-		(*entities)[i].entity_instance_num =
+	for (size_t i = 1; i < l_num_entities; i++, curr_entity++) {
+		l_entities[i].entity_type = le16toh(curr_entity->entity_type);
+		l_entities[i].entity_instance_num =
 			le16toh(curr_entity->entity_instance_num);
-		(*entities)[i].entity_container_id =
+		l_entities[i].entity_container_id =
 			le16toh(curr_entity->entity_container_id);
 	}
+
+	*num_entities = l_num_entities;
+	*entities = l_entities;
 }
