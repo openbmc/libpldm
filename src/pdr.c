@@ -1297,6 +1297,9 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 
 	struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)pdr;
 	assert(hdr->type == PLDM_PDR_ENTITY_ASSOCIATION);
+	if (hdr->type != PLDM_PDR_ENTITY_ASSOCIATION) {
+		return;
+	}
 
 	const uint8_t *start = (uint8_t *)pdr;
 	const uint8_t *end __attribute__((unused)) =
@@ -1306,11 +1309,22 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 		(struct pldm_pdr_entity_association *)start;
 	size_t l_num_entities = entity_association_pdr->num_children + 1;
 	assert(l_num_entities >= 2);
+	if (l_num_entities < 2) {
+		return;
+	}
 	assert(start + sizeof(struct pldm_pdr_entity_association) +
 		       sizeof(pldm_entity) * (l_num_entities - 2) ==
 	       end);
+	if (start + sizeof(struct pldm_pdr_entity_association) +
+		    sizeof(pldm_entity) * (l_num_entities - 2) !=
+	    end) {
+		return;
+	}
 	pldm_entity *l_entities = malloc(sizeof(pldm_entity) * l_num_entities);
 	assert(l_entities != NULL);
+	if (!l_entities) {
+		return;
+	}
 	l_entities[0].entity_type =
 		le16toh(entity_association_pdr->container.entity_type);
 	l_entities[0].entity_instance_num =
