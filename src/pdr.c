@@ -1318,15 +1318,12 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 	(*entities)->entity_container_id =
 		le16toh(entity_association_pdr->container.entity_container_id);
 	pldm_entity *curr_entity = entity_association_pdr->children;
-	size_t i = 1;
-	while (i < *num_entities) {
+	for (size_t i = 1; i < *num_entities; i++, curr_entity++) {
 		(*entities + i)->entity_type =
 			le16toh(curr_entity->entity_type);
 		(*entities + i)->entity_instance_num =
 			le16toh(curr_entity->entity_instance_num);
 		(*entities + i)->entity_container_id =
 			le16toh(curr_entity->entity_container_id);
-		++curr_entity;
-		++i;
 	}
 }
