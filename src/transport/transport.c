@@ -30,16 +30,17 @@ static inline int poll(struct pollfd *fds __attribute__((unused)),
 #endif
 
 LIBPLDM_ABI_TESTING
-pldm_requester_rc_t pldm_transport_poll(struct pldm_transport *transport,
-					int timeout)
+int pldm_transport_poll(struct pldm_transport *transport, int timeout)
 {
 	struct pollfd pollfd;
 	int rc = 0;
 	if (!transport) {
 		return PLDM_REQUESTER_INVALID_SETUP;
 	}
+
+	/* If polling isn't supported then always indicate the transport is ready */
 	if (!transport->init_pollfd) {
-		return PLDM_REQUESTER_SUCCESS;
+		return 1;
 	}
 
 	rc = transport->init_pollfd(transport, &pollfd);
@@ -52,7 +53,8 @@ pldm_requester_rc_t pldm_transport_poll(struct pldm_transport *transport,
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
 
-	return PLDM_REQUESTER_SUCCESS;
+	/* rc is 0 if poll(2) times out, or 1 if pollfd becomes active. */
+	return rc;
 }
 
 LIBPLDM_ABI_TESTING
@@ -185,10 +187,10 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 	do {
 		timersub(&end, &now, &remaining);
 		/* 0 <= `timeval_to_msec()` <= 4800, and 4800 < INT_MAX */
-		rc = pldm_transport_poll(transport,
-					 (int)(timeval_to_msec(&remaining)));
-		if (rc != PLDM_REQUESTER_SUCCESS) {
-			return rc;
+		ret = pldm_transport_poll(transport,
+					  (int)(timeval_to_msec(&remaining)));
+		if (ret <= 0) {
+			break;
 		}
 
 		rc = pldm_transport_recv_msg(transport, tid, pldm_resp_msg,
