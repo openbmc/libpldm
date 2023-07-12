@@ -44,10 +44,17 @@ pldm_requester_rc_t pldm_transport_poll(struct pldm_transport *transport,
 
 	transport->init_pollfd(transport, &pollfd);
 	rc = poll(&pollfd, 1, timeout);
+	/* Invocation error */
 	if (rc < 0) {
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
 
+	/* Timeout */
+	if (rc == 0) {
+		return PLDM_REQUESTER_POLL_FAIL;
+	}
+
+	/* Otherwise, the transport is ready for action */
 	return PLDM_REQUESTER_SUCCESS;
 }
 
