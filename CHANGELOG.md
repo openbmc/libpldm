@@ -24,6 +24,7 @@ Change categories:
 ### Changed
 
 1. pdr: Allow record_handle to be NULL for pldm_pdr_add_check()
+2. transport: pldm_transport_poll(): Adjust return value semantics
 
 ### Deprecated
 
