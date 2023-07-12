@@ -21,6 +21,10 @@ Change categories:
 
 1. requester: Fix response buffer cast in pldm_send_recv()
 
+### Changed
+
+1. transport: pldm_transport_poll(): Adjust return value semantics
+
 ## [0.4.0] - 2023-07-14
 
 ### Added
