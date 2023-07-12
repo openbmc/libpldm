@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Changed
+
+1. transport: pldm_transport_poll(): Adjust return value semantics
+
 ## [0.4.0] - 2023-07-14
 
 ### Added
