@@ -4,12 +4,12 @@ project('libpldm', ['c','cpp'],
       'optimization=g',
       'warning_level=3',
       'werror=true',
-      'cpp_std=c++20',
+      'cpp_std=c++2b',
       'c_std=c17',
       'tests=' + (meson.is_subproject() ? 'disabled' : 'enabled'),
     ],
     version: '0.3.0',
-    meson_version: '>=0.63.0',
+    meson_version: '>=1.1.1',
 )
 
 add_project_arguments('-D_DEFAULT_SOURCE', language: ['c'])
