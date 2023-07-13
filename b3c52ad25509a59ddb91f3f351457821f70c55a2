@@ -34,6 +34,24 @@
       "parentUuid": "2a23f738_07389019",
       "revId": "b3c52ad25509a59ddb91f3f351457821f70c55a2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59ba57c5_c2e91d9a",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-13T11:39:22Z",
+      "side": 1,
+      "message": "I guess another thought is that we could make it behave like the return value for `poll(2)`. The only thing would be it could return at most a value of 1, as we\u0027re only polling one transport. A return value of 0 would mean timeout.\n\nI feel like that\u0027s probably the most satisfactory approach (principle of least surprise for people who know `poll(2)`\u0027s behaviour).",
+      "parentUuid": "26da8a44_b6c5990c",
+      "revId": "b3c52ad25509a59ddb91f3f351457821f70c55a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
