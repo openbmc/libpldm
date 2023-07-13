@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a23f738_07389019",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-13T02:38:30Z",
+      "side": 1,
+      "message": "I do wonder whether it\u0027s worth adding a `PLDM_REQUESTER_TIMEOUT` to disambiguate this (in case people want to treat it as not-an-error).",
+      "revId": "b3c52ad25509a59ddb91f3f351457821f70c55a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
