@@ -404,16 +404,6 @@ int pldm_bios_table_attr_entry_integer_info_check(
  */
 size_t pldm_bios_table_attr_entry_integer_encode_length(void);
 
-/** @brief Create an entry of BIOS Attribute Table (type: integer)
- *  @param[out] entry - Pointer to a buffer to create an entry
- *  @param[in] entry_length - Length of the buffer to create an entry
- *  @param[in] info - Pointer to an auxiliary structure @ref
- * pldm_bios_table_attr_entry_integer_info
- */
-void pldm_bios_table_attr_entry_integer_encode(
-	void *entry, size_t entry_length,
-	const struct pldm_bios_table_attr_entry_integer_info *info);
-
 /** @brief Create an entry of BIOS Attribute Table (type: integer) and check the
  * validity of the parameters
  *  @param[out] entry - Pointer to a buffer to create an entry

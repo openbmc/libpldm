@@ -493,17 +493,6 @@ size_t pldm_bios_table_attr_entry_integer_encode_length(void)
 	       sizeof(struct attr_table_integer_entry_fields);
 }
 
-LIBPLDM_ABI_DEPRECATED
-void pldm_bios_table_attr_entry_integer_encode(
-	void *entry, size_t entry_length,
-	const struct pldm_bios_table_attr_entry_integer_info *info)
-{
-	int rc = pldm_bios_table_attr_entry_integer_encode_check(
-		entry, entry_length, info);
-	(void)rc;
-	assert(rc == PLDM_SUCCESS);
-}
-
 LIBPLDM_ABI_STABLE
 int pldm_bios_table_attr_entry_integer_info_check(
 	const struct pldm_bios_table_attr_entry_integer_info *info,
