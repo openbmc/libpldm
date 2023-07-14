@@ -721,14 +721,16 @@ TEST(AttrValTable, integerEntryEncodeTest)
     auto length = pldm_bios_table_attr_value_entry_encode_integer_length();
     EXPECT_EQ(length, integerEntry.size());
     std::vector<uint8_t> encodeEntry(length, 0);
-    pldm_bios_table_attr_value_entry_encode_integer(
-        encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_INTEGER, 10);
+    ASSERT_EQ(
+        pldm_bios_table_attr_value_entry_encode_integer_check(
+            encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_INTEGER, 10),
+        PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, integerEntry);
 
-    EXPECT_DEATH(pldm_bios_table_attr_value_entry_encode_integer(
-                     encodeEntry.data(), encodeEntry.size() - 1, 0,
-                     PLDM_BIOS_INTEGER, 10),
-                 "rc == PLDM_SUCCESS");
+    EXPECT_NE(pldm_bios_table_attr_value_entry_encode_integer_check(
+                  encodeEntry.data(), encodeEntry.size() - 1, 0,
+                  PLDM_BIOS_INTEGER, 10),
+              PLDM_SUCCESS);
 
     auto rc = pldm_bios_table_attr_value_entry_encode_integer_check(
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_INTEGER, 10);

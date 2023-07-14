@@ -790,19 +790,6 @@ size_t pldm_bios_table_attr_value_entry_encode_integer_length(void)
 	       sizeof(uint64_t);
 }
 
-LIBPLDM_ABI_DEPRECATED
-void pldm_bios_table_attr_value_entry_encode_integer(void *entry,
-						     size_t entry_length,
-						     uint16_t attr_handle,
-						     uint8_t attr_type,
-						     uint64_t cv)
-{
-	int rc = pldm_bios_table_attr_value_entry_encode_integer_check(
-		entry, entry_length, attr_handle, attr_type, cv);
-	(void)rc;
-	assert(rc == PLDM_SUCCESS);
-}
-
 LIBPLDM_ABI_STABLE
 int pldm_bios_table_attr_value_entry_encode_integer_check(void *entry,
 							  size_t entry_length,
