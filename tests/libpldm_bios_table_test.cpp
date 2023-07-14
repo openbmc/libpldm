@@ -651,14 +651,14 @@ TEST(AttrValTable, stringEntryEncodeTest)
     auto length = pldm_bios_table_attr_value_entry_encode_string_length(3);
     EXPECT_EQ(length, stringEntry.size());
     std::vector<uint8_t> encodeEntry(length, 0);
-    pldm_bios_table_attr_value_entry_encode_string(
-        encodeEntry.data(), encodeEntry.size(), 0, 1, 3, "abc");
+    ASSERT_EQ(pldm_bios_table_attr_value_entry_encode_string_check(
+                  encodeEntry.data(), encodeEntry.size(), 0, 1, 3, "abc"),
+              PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, stringEntry);
 
-    EXPECT_DEATH(
-        pldm_bios_table_attr_value_entry_encode_string(
-            encodeEntry.data(), encodeEntry.size() - 1, 0, 1, 3, "abc"),
-        "rc == PLDM_SUCCESS");
+    EXPECT_NE(pldm_bios_table_attr_value_entry_encode_string_check(
+                  encodeEntry.data(), encodeEntry.size() - 1, 0, 1, 3, "abc"),
+              PLDM_SUCCESS);
 
     auto rc = pldm_bios_table_attr_value_entry_encode_string_check(
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_STRING, 3, "abc");

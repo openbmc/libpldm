@@ -726,17 +726,6 @@ pldm_bios_table_attr_value_entry_encode_string_length(uint16_t string_length)
 	       sizeof(string_length) + string_length;
 }
 
-LIBPLDM_ABI_DEPRECATED
-void pldm_bios_table_attr_value_entry_encode_string(
-	void *entry, size_t entry_length, uint16_t attr_handle,
-	uint8_t attr_type, uint16_t str_length, const char *str)
-{
-	int rc = pldm_bios_table_attr_value_entry_encode_string_check(
-		entry, entry_length, attr_handle, attr_type, str_length, str);
-	(void)rc;
-	assert(rc == PLDM_SUCCESS);
-}
-
 LIBPLDM_ABI_STABLE
 uint16_t pldm_bios_table_attr_value_entry_string_decode_length(
 	const struct pldm_bios_attr_val_table_entry *entry)
