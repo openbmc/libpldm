@@ -206,7 +206,7 @@ int encode_fru_record(uint8_t *fru_table, size_t total_size, size_t *curr_size,
 static bool is_table_end(const struct pldm_fru_record_data_format *p,
 			 const void *table, size_t table_size)
 {
-	return p ==
+	return p >=
 	       (const struct pldm_fru_record_data_format *)((uint8_t *)table +
 							    table_size);
 }
