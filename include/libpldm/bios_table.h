@@ -537,21 +537,6 @@ int pldm_bios_table_attr_value_entry_encode_string_check(
  */
 size_t pldm_bios_table_attr_value_entry_encode_integer_length(void);
 
-/** @brief Create an attribute value entry(type: integer)
- *  @param[out] entry - Pointer to bios attribute value entry
- *  @param[in] entry_length - Length of attribute value entry
- *  @param[in] attr_handle - This handle points to an attribute in the
- *  BIOS Attribute Vlaue Table.
- *  @param[in] attr_type - Type of this attribute in the BIOS Attribute Value
- * Table
- *  @param[in] cv - Current Value
- */
-void pldm_bios_table_attr_value_entry_encode_integer(void *entry,
-						     size_t entry_length,
-						     uint16_t attr_handle,
-						     uint8_t attr_type,
-						     uint64_t cv);
-
 /** @brief Get current values for the integer entry
  *  @param[in] entry - Pointer to bios attribute value table entry
  *  @return Current Value
