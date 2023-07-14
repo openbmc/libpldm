@@ -594,15 +594,6 @@ pldm_bios_table_attr_value_find_by_handle(const void *table, size_t length,
  */
 size_t pldm_bios_table_pad_checksum_size(size_t size_without_pad);
 
-/** @brief Append pad and checksum at the end of the table
- *  @param[in,out] table - Pointer to a buffer of a bios table
- *  @param[in] capacity - Size of the buffer of a bios table
- *  @param[in] size - Table size without pad and checksum
- *  @return Total size of the table
- */
-size_t pldm_bios_table_append_pad_checksum(void *table, size_t capacity,
-					   size_t size);
-
 /** @brief Append pad and checksum at the end of the table or return an error
  *  @param[in,out] table - Pointer to a buffer of a bios table
  *  @param[in] capacity - Size of the buffer of a bios table

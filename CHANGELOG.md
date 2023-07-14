@@ -31,6 +31,7 @@ Change categories:
 2. bios_table: Remove pldm_bios_table_attr_value_entry_encode_enum()
 3. bios_table: Remove pldm_bios_table_attr_value_entry_encode_string()
 4. bios_table: Remove pldm_bios_table_attr_value_entry_encode_integer()
+5. bios_table: Remove pldm_bios_table_append_pad_checksum()
 
 ### Fixed
 

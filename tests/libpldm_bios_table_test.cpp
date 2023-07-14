@@ -1136,8 +1136,9 @@ TEST(PadAndChecksum, PadAndChecksum)
     auto sizeWithoutPad = attrValTable.size();
     attrValTable.resize(sizeWithoutPad +
                         pldm_bios_table_pad_checksum_size(sizeWithoutPad));
-    pldm_bios_table_append_pad_checksum(attrValTable.data(),
-                                        attrValTable.size(), sizeWithoutPad);
+    ASSERT_EQ(pldm_bios_table_append_pad_checksum_check(
+                  attrValTable.data(), attrValTable.size(), &sizeWithoutPad),
+              PLDM_SUCCESS);
     Table expectedTable = {0x09, 0x00, 0x01, 0x02, 0x00, 0x65,
                            0x66, 0x00, 0x6d, 0x81, 0x4a, 0xb6};
     EXPECT_EQ(attrValTable, expectedTable);
