@@ -45,6 +45,15 @@ Change categories:
 1. requester: Fix response buffer cast in pldm_send_recv()
 2. pdr: Hoist record handle overflow test to avoid memory leak
 
+### Deprecated
+
+1. state-set: Enum pldm_state_set_operational_fault_status_values
+
+   The enum operational_fault_status is defined with wrong members and will
+   eventually be replaced with the correct members. Any uses of
+   pldm_state_set_operational_fault_status_values members should move to
+   equivalent pldm_state_set_operational_stress_status_values members if needed.
+
 ## [0.4.0] - 2023-07-14
 
 ### Added
