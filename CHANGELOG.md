@@ -20,6 +20,7 @@ Change categories:
 ### Fixed
 
 1. requester: Fix response buffer cast in pldm_send_recv()
+2. transport: Correct comparison in while loop condition
 
 ## [0.4.0] - 2023-07-14
 
