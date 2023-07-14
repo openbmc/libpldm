@@ -209,7 +209,7 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		if (ret < 0) {
 			return PLDM_REQUESTER_POLL_FAIL;
 		}
-	} while (!timercmp(&now, &end, <));
+	} while (timercmp(&now, &end, <));
 
 	return PLDM_REQUESTER_RECV_FAIL;
 }
