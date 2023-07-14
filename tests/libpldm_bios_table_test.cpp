@@ -584,14 +584,14 @@ TEST(AttrValTable, EnumEntryEncodeTest)
     EXPECT_EQ(length, enumEntry.size());
     std::vector<uint8_t> encodeEntry(length, 0);
     uint8_t handles[] = {0, 1};
-    pldm_bios_table_attr_value_entry_encode_enum(
-        encodeEntry.data(), encodeEntry.size(), 0, 0, 2, handles);
+    ASSERT_EQ(pldm_bios_table_attr_value_entry_encode_enum_check(
+                  encodeEntry.data(), encodeEntry.size(), 0, 0, 2, handles),
+              PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, enumEntry);
 
-    EXPECT_DEATH(
-        pldm_bios_table_attr_value_entry_encode_enum(
-            encodeEntry.data(), encodeEntry.size() - 1, 0, 0, 2, handles),
-        "rc == PLDM_SUCCESS");
+    EXPECT_NE(pldm_bios_table_attr_value_entry_encode_enum_check(
+                  encodeEntry.data(), encodeEntry.size() - 1, 0, 0, 2, handles),
+              PLDM_SUCCESS);
 
     auto rc = pldm_bios_table_attr_value_entry_encode_enum_check(
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_ENUMERATION, 2,

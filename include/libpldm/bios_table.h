@@ -450,21 +450,6 @@ uint8_t pldm_bios_table_attr_value_entry_decode_attribute_type(
  */
 size_t pldm_bios_table_attr_value_entry_encode_enum_length(uint8_t count);
 
-/** @brief Create an attribute value entry(type: enum)
- *  @param[out] entry - Pointer to bios attribute value entry
- *  @param[in] entry_length - Length of attribute value entry
- *  @param[in] attr_handle - This handle points to an attribute in the
- *  BIOS Attribute Vlaue Table.
- *  @param[in] attr_type - Type of this attribute in the BIOS Attribute Value
- * Table
- *  @param[in] count - Total number of current values for this enum attribute
- *  @param[in] handle_indexes - Index into the array(provided in the BIOS
- * Attribute Table) of the possible values of string handles for this attribute.
- */
-void pldm_bios_table_attr_value_entry_encode_enum(
-	void *entry, size_t entry_length, uint16_t attr_handle,
-	uint8_t attr_type, uint8_t count, const uint8_t *handles);
-
 /** @brief Get number of current values for the enum entry
  *  @param[in] entry - Pointer to bios attribute value table entry
  *  @return Total number of current values for this enumeration
