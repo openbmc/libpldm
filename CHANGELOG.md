@@ -12,8 +12,12 @@ Change categories:
 - Changed
 - Deprecated
 - Removed
-- Fixed
 - Security
+
+### Fixed
+
+1. transport: Correct comparation while loop condition
+   Fixes: abaf61f45e2a ("transport: Prevent sticking in waiting for response")
 
 ## [Unreleased]
 
