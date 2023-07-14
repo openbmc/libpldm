@@ -17,6 +17,8 @@ Change categories:
 
 ## [Unreleased]
 
+## [0.4.0] - 2023-07-14
+
 ### Added
 
 1. bios_table: Introduce pldm_bios_table_append_pad_checksum_check()
