@@ -29,6 +29,7 @@ Change categories:
 
 1. bios_table: Remove pldm_bios_table_attr_entry_integer_encode_length()
 2. bios_table: Remove pldm_bios_table_attr_value_entry_encode_enum()
+3. bios_table: Remove pldm_bios_table_attr_value_entry_encode_string()
 
 ### Fixed
 

@@ -495,21 +495,6 @@ int pldm_bios_table_attr_value_entry_encode_enum_check(
 size_t
 pldm_bios_table_attr_value_entry_encode_string_length(uint16_t string_length);
 
-/** @brief Create an attribute value entry(type: string)
- *  @param[out] entry - Pointer to bios attribute value entry
- *  @param[in] entry_length - Length of attribute value entry
- *  @param[in] attr_handle - This handle points to an attribute in the
- *  BIOS Attribute Vlaue Table.
- *  @param[in] attr_type - Type of this attribute in the BIOS Attribute Value
- * Table
- *  @param[in] string_length - Length of current string in bytes. 0 indicates
- * that the current string value is not set.
- *  @param[in] string - The current string itsel
- */
-void pldm_bios_table_attr_value_entry_encode_string(
-	void *entry, size_t entry_length, uint16_t attr_handle,
-	uint8_t attr_type, uint16_t str_length, const char *string);
-
 /** @brief Get length of the current string in bytes
  *  @param [in] entry - Pointer to bios attribute value table entry
  *  @return The length of the current string in bytes
