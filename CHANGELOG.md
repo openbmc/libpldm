@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Fixed
+
+1. transport: Correct comparison in while loop condition
+
 ## [0.4.0] - 2023-07-14
 
 ### Added
