@@ -25,6 +25,10 @@ Change categories:
 
 1. pdr: Allow record_handle to be NULL for pldm_pdr_add_check()
 
+### Removed
+
+1. bios_table: Remove pldm_bios_table_attr_entry_integer_encode_length()
+
 ### Fixed
 
 1. requester: Fix response buffer cast in pldm_send_recv()
