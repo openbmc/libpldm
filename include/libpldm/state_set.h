@@ -149,11 +149,19 @@ enum pldm_state_set_availability_values {
 	PLDM_STATE_SET_AVAILABILITY_REBOOTING = 8
 };
 
-/* @brief List of states for the Operational Fault status (ID 10).
+/* @brief List of states for the Operational Stress status (ID 9).
  */
-enum pldm_state_set_operational_fault_status_values {
+enum pldm_state_set_operational_stress_status_values {
 	PLDM_STATE_SET_OPERATIONAL_FAULT_STATUS_NORMAL = 1,
 	PLDM_STATE_SET_OPERATIONAL_FAULT_STATUS_STRESSED = 2,
+};
+
+/* @brief List of states for Operational Fault status (ID 10).
+ */
+enum pldm_state_set_operational_fault_status_values {
+	PLDM_STATE_SET_OPERATIONAL_NORMAL = 1,
+	PLDM_STATE_SET_OPERATIONAL_ERROR = 2,
+	PLDM_STATE_SET_OPERATIONAL_NON_RECOVERABLE_ERROR = 3,
 };
 
 /* @brief List of states for the Operational Running Status state set (ID 11).
