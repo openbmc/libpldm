@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58767252_5eb1a109",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-07-15T15:27:25Z",
+      "side": 1,
+      "message": "@Andrew - does this change qualify to be added to the changelog ? \n\nI thought that we need to add things here only when we add a new feature. - some sort of new functionality. And adding an enum does not feel like it.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 59
+      },
+      "revId": "79b7db372845d1c81a2dc6ffc401529478d8f4b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
