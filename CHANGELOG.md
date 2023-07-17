@@ -20,6 +20,7 @@ Change categories:
 ### Fixed
 
 1. requester: Fix response buffer cast in pldm_send_recv()
+2. pdr: Hoist record handle overflow test to avoid memory leak
 
 ## [0.4.0] - 2023-07-14
 
