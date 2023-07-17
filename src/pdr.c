@@ -56,11 +56,11 @@ int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 {
 	uint32_t curr;
 
-	if (!repo || !data || !size || !record_handle) {
+	if (!repo || !data || !size) {
 		return -EINVAL;
 	}
 
-	if (*record_handle) {
+	if (record_handle && *record_handle) {
 		curr = *record_handle;
 	} else if (repo->last) {
 		curr = repo->last->record_handle;
@@ -91,7 +91,7 @@ int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 	record->terminus_handle = terminus_handle;
 	record->record_handle = curr;
 
-	if (!*record_handle && data) {
+	if (record_handle && !*record_handle && data) {
 		/* If record handle is 0, that is an indication for this API to
 		 * compute a new handle. For that reason, the computed handle
 		 * needs to be populated in the PDR header. For a case where the
@@ -116,7 +116,9 @@ int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 	repo->size += record->size;
 	++repo->record_count;
 
-	*record_handle = record->record_handle;
+	if (record_handle) {
+		*record_handle = record->record_handle;
+	}
 
 	return 0;
 }
