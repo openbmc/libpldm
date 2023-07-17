@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Fixed
+
+1. pdr: Hoist record handle overflow test to avoid memory leak
+
 ## [0.4.0] - 2023-07-14
 
 ### Added
