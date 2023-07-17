@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Added
+
+1. pdr: Introduce pldm_entity_association_pdr_add_check()
+
 ### Changed
 
 1. pdr: Allow record_handle to be NULL for pldm_pdr_add_check()
