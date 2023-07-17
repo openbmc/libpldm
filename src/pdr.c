@@ -299,6 +299,10 @@ int pldm_pdr_add_fru_record_set_check(pldm_pdr *repo, uint16_t terminus_handle,
 				      uint16_t container_id,
 				      uint32_t *bmc_record_handle)
 {
+	if (!repo || !bmc_record_handle) {
+		return -EINVAL;
+	}
+
 	uint32_t size = sizeof(struct pldm_pdr_hdr) +
 			sizeof(struct pldm_pdr_fru_record_set);
 	uint8_t data[size];
