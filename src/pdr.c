@@ -890,8 +890,8 @@ static int entity_association_pdr_add_entry(pldm_entity_node *curr,
 	return 0;
 }
 
-LIBPLDM_ABI_DEPRECATED
-bool is_present(pldm_entity entity, pldm_entity **entities, size_t num_entities)
+static bool is_present(pldm_entity entity, pldm_entity **entities,
+		       size_t num_entities)
 {
 	if (entities == NULL || num_entities == 0) {
 		return true;
