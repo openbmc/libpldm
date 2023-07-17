@@ -33,6 +33,7 @@ Change categories:
 4. bios_table: Remove pldm_bios_table_attr_value_entry_encode_integer()
 5. bios_table: Remove pldm_bios_table_append_pad_checksum()
 6. fru: Remove get_fru_record_by_option()
+7. pdr: Make is_present() static
 
 ### Fixed
 
