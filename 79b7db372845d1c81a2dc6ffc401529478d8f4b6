@@ -22,6 +22,30 @@
       },
       "revId": "79b7db372845d1c81a2dc6ffc401529478d8f4b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b0da830_cae39316",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-17T10:36:43Z",
+      "side": 1,
+      "message": "I did suggest to add this elsewhere, but that was before I\u0027d seen the patch. We could probably do without the changelog entry in this case. I\u0027m more concerned about noting new functions and behaviours.",
+      "parentUuid": "58767252_5eb1a109",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 59
+      },
+      "revId": "79b7db372845d1c81a2dc6ffc401529478d8f4b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
