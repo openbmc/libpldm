@@ -153,7 +153,7 @@ pldm_requester_rc_t pldm_send_recv(mctp_eid_t eid, int mctp_fd,
 	if (rc != PLDM_REQUESTER_SUCCESS) {
 		return rc;
 	}
-	hdr = (struct pldm_msg_hdr *)pldm_resp_msg;
+	hdr = (struct pldm_msg_hdr *)(*pldm_resp_msg);
 	if (hdr && (hdr->request || hdr->datagram)) {
 		free(*pldm_resp_msg);
 		*pldm_resp_msg = NULL;

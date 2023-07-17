@@ -12,8 +12,11 @@ Change categories:
 - Changed
 - Deprecated
 - Removed
-- Fixed
 - Security
+
+### Fixed
+
+1. requester: Fix response buffer cast in pldm_send_recv()
 
 ## [Unreleased]
 
