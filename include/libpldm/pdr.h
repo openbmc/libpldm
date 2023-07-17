@@ -469,6 +469,24 @@ void pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
 				     pldm_pdr *repo, bool is_remote,
 				     uint16_t terminus_handle);
 
+/** @brief Convert entity association tree to PDR, or return an error
+ *
+ *  No conversion takes place if one or both of tree or repo are NULL.
+ *
+ *  If an error is returned then the state and consistency of the PDR repository is undefined.
+ *
+ *  @param[in] tree - opaque pointer to entity association tree
+ *  @param[in] repo - PDR repo where entity association records should be added
+ *  @param[in] is_remote - if true, then the PDR is not from this terminus
+ *  @param[in] terminus_handle - terminus handle of the terminus
+ *
+ *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
+ *  allocation fails, or -EOVERFLOW if a record handle could not be allocated
+ */
+int pldm_entity_association_pdr_add_check(pldm_entity_association_tree *tree,
+					  pldm_pdr *repo, bool is_remote,
+					  uint16_t terminus_handle);
+
 /** @brief Add entity association pdr from node
  *
  *  @param[in] node - opaque pointer acting as a handle to an entity node
