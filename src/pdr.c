@@ -1164,9 +1164,9 @@ pldm_entity_association_tree_find_if_remote(pldm_entity_association_tree *tree,
 	return node;
 }
 
-LIBPLDM_ABI_DEPRECATED
-void entity_association_tree_find(pldm_entity_node *node, pldm_entity *entity,
-				  pldm_entity_node **out)
+static void entity_association_tree_find(pldm_entity_node *node,
+					 pldm_entity *entity,
+					 pldm_entity_node **out)
 {
 	if (node == NULL) {
 		return;
