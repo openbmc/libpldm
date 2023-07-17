@@ -224,25 +224,6 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
 /* FRU Record Set PDR APIs */
 /* ======================= */
 
-/** @brief Add a FRU record set PDR record to a PDR repository
- *
- *  @param[in/out] repo - opaque pointer acting as a PDR repo handle
- *  @param[in] terminus_handle - PLDM terminus handle of terminus owning the PDR
- *  record
- *  @param[in] fru_rsi - FRU record set identifier
- *  @param[in] entity_type - entity type of FRU
- *  @param[in] entity_instance_num - entity instance number of FRU
- *  @param[in] container_id - container id of FRU
- *  @param[in] bmc_record_handle - handle used to construct the next record
- *
- *  @return uint32_t - record handle assigned to PDR record
- */
-uint32_t pldm_pdr_add_fru_record_set(pldm_pdr *repo, uint16_t terminus_handle,
-				     uint16_t fru_rsi, uint16_t entity_type,
-				     uint16_t entity_instance_num,
-				     uint16_t container_id,
-				     uint32_t bmc_record_handle);
-
 /** @brief Add a FRU record set PDR record to a PDR repository, or return an error
  *
  *  @param[in/out] repo - opaque pointer acting as a PDR repo handle
