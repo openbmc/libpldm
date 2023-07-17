@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Changed
+
+1. pdr: Allow record_handle to be NULL for pldm_pdr_add_check()
+
 ### Fixed
 
 1. pdr: Hoist record handle overflow test to avoid memory leak
