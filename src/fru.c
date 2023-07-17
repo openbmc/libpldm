@@ -211,17 +211,6 @@ static bool is_table_end(const struct pldm_fru_record_data_format *p,
 							    table_size);
 }
 
-LIBPLDM_ABI_DEPRECATED
-void get_fru_record_by_option(const uint8_t *table, size_t table_size,
-			      uint8_t *record_table, size_t *record_size,
-			      uint16_t rsi, uint8_t rt, uint8_t ft)
-{
-	int rc = get_fru_record_by_option_check(table, table_size, record_table,
-						record_size, rsi, rt, ft);
-	(void)rc;
-	assert(rc == PLDM_SUCCESS);
-}
-
 LIBPLDM_ABI_STABLE
 int get_fru_record_by_option_check(const uint8_t *table, size_t table_size,
 				   uint8_t *record_table, size_t *record_size,
