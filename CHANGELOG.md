@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Fixed
+
+1. requester: Fix response buffer cast in pldm_send_recv()
+
 ## [0.4.0] - 2023-07-14
 
 ### Added
