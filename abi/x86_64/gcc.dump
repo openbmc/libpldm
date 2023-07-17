@@ -6816,6 +6816,29 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_entity_association_pdr_add_from_node_check'
                                        },
+                            '81115' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'tree',
+                                                               'type' => '78780'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'repo',
+                                                               'type' => '80103'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'is_remote',
+                                                               'type' => '6423'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'terminus_handle',
+                                                               'type' => '5053'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_entity_association_pdr_add_check'
+                                       },
                             '81275' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
@@ -8023,6 +8046,7 @@ $VAR1 = {
                                                  'pldm_bios_table_string_find_by_handle' => 1,
                                                  'pldm_bios_table_string_find_by_string' => 1,
                                                  'pldm_entity_association_pdr_add' => 1,
+                                                 'pldm_entity_association_pdr_add_check' => 1,
                                                  'pldm_entity_association_pdr_add_from_node_check' => 1,
                                                  'pldm_entity_association_pdr_extract' => 1,
                                                  'pldm_entity_association_tree_add' => 1,
