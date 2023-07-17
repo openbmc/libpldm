@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8db6926f_2c5740e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-07-17T09:54:20Z",
+      "side": 1,
+      "message": "@Patric\nPlease address `Merge Conflict`, because I used the latest CI scripts and see the following error:\n```\n[1/125] Compiling C++ object libpldmresponder/libpldmresponder.so.0.1.p/bios_table.cpp.o\nerror: invalid value \u0027c++23\u0027 in \u0027-std\u003dc++23\u0027\n```",
+      "revId": "dc4ddac396391d431f068ce8d540c5ff3b10ed19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
