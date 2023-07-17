@@ -37,6 +37,7 @@ Change categories:
 8. pdr: Remove pldm_pdr_add()
 9. pdr: Remove pldm_pdr_add_fru_record_set()
 10. pdr: Remove pldm_entity_association_pdr_add_from_node()
+11. pdr: Make find_entity_ref_in_tree() static
 
 ### Fixed
 
