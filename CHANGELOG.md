@@ -35,6 +35,7 @@ Change categories:
 6. fru: Remove get_fru_record_by_option()
 7. pdr: Make is_present() static
 8. pdr: Remove pldm_pdr_add()
+9. pdr: Remove pldm_pdr_add_fru_record_set()
 
 ### Fixed
 

@@ -264,21 +264,6 @@ bool pldm_pdr_record_is_remote(const pldm_pdr_record *record)
 	return record->is_remote;
 }
 
-LIBPLDM_ABI_DEPRECATED
-uint32_t pldm_pdr_add_fru_record_set(pldm_pdr *repo, uint16_t terminus_handle,
-				     uint16_t fru_rsi, uint16_t entity_type,
-				     uint16_t entity_instance_num,
-				     uint16_t container_id,
-				     uint32_t bmc_record_handle)
-{
-	int rc = pldm_pdr_add_fru_record_set_check(
-		repo, terminus_handle, fru_rsi, entity_type,
-		entity_instance_num, container_id, &bmc_record_handle);
-	(void)rc;
-	assert(!rc);
-	return bmc_record_handle;
-}
-
 LIBPLDM_ABI_STABLE
 int pldm_pdr_add_fru_record_set_check(pldm_pdr *repo, uint16_t terminus_handle,
 				      uint16_t fru_rsi, uint16_t entity_type,
