@@ -60,23 +60,6 @@ uint32_t pldm_pdr_get_record_count(const pldm_pdr *repo);
  */
 uint32_t pldm_pdr_get_repo_size(const pldm_pdr *repo);
 
-/** @brief Add a PDR record to a PDR repository
- *
- *  @param[in/out] repo - opaque pointer acting as a PDR repo handle
- *  @param[in] data - pointer to a PDR record, pointing to a PDR definition as
- *  per DSP0248. This data is memcpy'd.
- *  @param[in] size - size of input PDR record in bytes
- *  @param[in] record_handle - record handle of input PDR record; if this is set
- *  to 0, then a record handle is computed and assigned to this PDR record
- *  @param[in] is_remote - if true, then the PDR is not from this terminus
- *  @param[in] terminus_handle - terminus handle of the input PDR record
- *
- *  @return uint32_t - record handle assigned to PDR record
- */
-uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
-		      uint32_t record_handle, bool is_remote,
-		      uint16_t terminus_handle);
-
 /** @brief Add a PDR record to a PDR repository, or return an error
  *
  *  @param[in/out] repo - opaque pointer acting as a PDR repo handle

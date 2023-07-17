@@ -34,21 +34,6 @@ static inline uint32_t get_next_record_handle(const pldm_pdr *repo,
 	return record->next->record_handle;
 }
 
-LIBPLDM_ABI_DEPRECATED
-uint32_t pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
-		      uint32_t record_handle, bool is_remote,
-		      uint16_t terminus_handle)
-{
-	assert(repo != NULL);
-	assert(data != NULL);
-	assert(size != 0);
-	int rc = pldm_pdr_add_check(repo, data, size, is_remote,
-				    terminus_handle, &record_handle);
-	(void)rc;
-	assert(!rc);
-	return record_handle;
-}
-
 LIBPLDM_ABI_STABLE
 int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		       bool is_remote, uint16_t terminus_handle,

@@ -34,6 +34,7 @@ Change categories:
 5. bios_table: Remove pldm_bios_table_append_pad_checksum()
 6. fru: Remove get_fru_record_by_option()
 7. pdr: Make is_present() static
+8. pdr: Remove pldm_pdr_add()
 
 ### Fixed
 
