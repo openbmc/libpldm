@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba7eb6af_fe024e1f",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-18T11:55:43Z",
+      "side": 1,
+      "message": "We can\u0027t just rename the type. That\u0027s an API break to any users of the previous name.\n\nIt\u0027s unfortunate that it was incorrectly named to start with, but to fix this we\u0027ll need to create a parallel enum with the correct name while leaving the original enum in place. Then we convert everyone over to the new name, create a tag, then delete the old one. After that we can create another tag and introduce the new enum below.",
+      "revId": "61de91da47ac914e37957c418c329cd4e8308ec3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
