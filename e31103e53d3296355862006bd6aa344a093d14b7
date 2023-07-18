@@ -16,6 +16,24 @@
       "message": "Do you have an example of where these might be used? If you haven\u0027t already, can you push a Work-In-Progress (WIP) patch to some component that demonstrates its use? I would appreciate it if you put a link to the demonstrated use in the commit message.",
       "revId": "e31103e53d3296355862006bd6aa344a093d14b7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "172656d5_567971e5",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-07-18T07:46:04Z",
+      "side": 1,
+      "message": "This is being used here - https://gerrit.openbmc.org/c/openbmc/pldm/+/39796/76\nBut we are working on solving merge conflicts and having a proper chain of commits for `p10bmc-hw-ci`",
+      "parentUuid": "09404581_995067cd",
+      "revId": "e31103e53d3296355862006bd6aa344a093d14b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
