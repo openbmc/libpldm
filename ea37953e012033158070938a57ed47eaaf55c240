@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5828f811_c95c4153",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-18T03:59:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "de8be6f4_7a0e2d30",
+      "revId": "ea37953e012033158070938a57ed47eaaf55c240",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1593939_5fb68814",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6ec6647_701bbb24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-18T03:59:40Z",
+      "side": 1,
+      "message": "Update commit message and commit title.",
+      "parentUuid": "c1593939_5fb68814",
+      "revId": "ea37953e012033158070938a57ed47eaaf55c240",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b7dfa5b_721f0144",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2023-07-18T03:17:50Z",
       "side": 1,
       "message": "Please add the following in a line immediately above your `Signed-off-by: ...`:\n\n```\nFixes: 0411b712b746 (\"transport: Make APIs work for all types of messages\")\n```\n\nPlease also update the `### Fixed` section of `CHANGELOG.md`.",
+      "revId": "ea37953e012033158070938a57ed47eaaf55c240",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ad662e3_551ba194",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-18T03:59:40Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "4b7dfa5b_721f0144",
       "revId": "ea37953e012033158070938a57ed47eaaf55c240",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
