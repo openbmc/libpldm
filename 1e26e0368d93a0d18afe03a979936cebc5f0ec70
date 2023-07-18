@@ -69,6 +69,24 @@
       "parentUuid": "b3fc2296_e8a5f6c7",
       "revId": "1e26e0368d93a0d18afe03a979936cebc5f0ec70",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6743b64_3b07e588",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-18T03:39:56Z",
+      "side": 1,
+      "message": "\u003e Maybe it is my mistake, you can see my comment that the #25 is passed the test case. But I also request about the correction of timercmp() in patch set #25. Which cause you\u0027re changing in patch set #26.\n\nYeah, no doubt I messed something up there. My apologies.\n\n\u003e I think we should not drop the negation, in the description about timercmp():\n\nI think we should assume that we\u0027re not operating with a broken `timercmp()` implementation. If someone wants to run libpldm on a platform that has such a broken implementation then they can fix it then. Let\u0027s keep the code simple to understand, we\u0027ve already messed it up once 😊",
+      "parentUuid": "890303aa_63bfa74c",
+      "revId": "1e26e0368d93a0d18afe03a979936cebc5f0ec70",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
