@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ec4c9ed_eb9f3456",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-18T03:59:03Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "75c1b245_96b81bdc",
+      "revId": "d8d2990171296e09e4effb009c4c37d378e12f83",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24e83f40_295c93ce",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "873a8c45_c442d26e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-18T03:59:03Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "24e83f40_295c93ce",
+      "revId": "d8d2990171296e09e4effb009c4c37d378e12f83",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3864836_f0c42930",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-07-18T03:54:28Z",
       "side": 1,
       "message": "CI\u0027s failing with this diff:\n\n```\ndiff --git a/CHANGELOG.md b/CHANGELOG.md\nindex 4b89d70..67da2ef 100644\n--- a/CHANGELOG.md\n+++ b/CHANGELOG.md\n@@ -15,8 +15,9 @@ Change categories:\n - Security\n \n ### Fixed\n-1. requester: Fix response buffer cast in pldm_send_recv()\n-   Fixes: 0411b712b746 (\"transport: Make APIs work for all types of messages\")\n+\n+1. requester: Fix response buffer cast in pldm_send_recv() Fixes: 0411b712b746\n+   (\"transport: Make APIs work for all types of messages\")\n \n ## [Unreleased]\n```\n\nI\u0027d just drop the `Fixes:` text. A trick is that because we\u0027re updating the changelog as part of the change itself, people can use `git blame CHANGELOG.md` to identify the specific commits in question, which will lead them to the `Fixes:` information.",
+      "revId": "d8d2990171296e09e4effb009c4c37d378e12f83",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f967d32_1d6db646",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-18T03:59:03Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "e3864836_f0c42930",
       "revId": "d8d2990171296e09e4effb009c4c37d378e12f83",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
