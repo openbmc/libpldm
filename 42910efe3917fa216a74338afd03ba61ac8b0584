@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea866b3_b88373cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-18T12:07:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14091d9a_733902a2",
+      "revId": "42910efe3917fa216a74338afd03ba61ac8b0584",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "247400fa_be687120",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-07-18T03:43:51Z",
       "side": 1,
       "message": "Note that I said:\n\n\u003e in a line immediately above your Signed-off-by: ...:\n\nThat means no blank line here. git has tools for processing the \"trailer\" paragraph:\n\nhttps://git-scm.com/docs/git-interpret-trailers\n\nWe want that tooling to work.",
+      "revId": "42910efe3917fa216a74338afd03ba61ac8b0584",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "554c6fcf_a8b0f10f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-18T12:07:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "247400fa_be687120",
       "revId": "42910efe3917fa216a74338afd03ba61ac8b0584",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b03c2448_41f0c2d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-18T12:07:41Z",
+      "side": 1,
+      "message": "Typo: comparison\n\nWe should probably also fix the grammar:\n\n```\ntransport: Correct comparison in while loop condition\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "515f3af16ae6c0069d9ea86f1812a5c34f0fc133",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c55c27_4b1d24ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-18T12:07:41Z",
+      "side": 1,
+      "message": "Typo: comparison",
+      "range": {
+        "startLine": 15,
+        "startChar": 23,
+        "endLine": 15,
+        "endChar": 34
+      },
+      "revId": "515f3af16ae6c0069d9ea86f1812a5c34f0fc133",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "163c50b6_e9f1823e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-18T12:07:41Z",
+      "side": 1,
+      "message": "Actually, I caught some nit-picky things. Otherwise this looks good though.",
+      "revId": "515f3af16ae6c0069d9ea86f1812a5c34f0fc133",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de18d63f_df3c1fe0",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-18T12:07:41Z",
+      "side": 1,
+      "message": "Also update this with the new patch subject :)",
+      "revId": "515f3af16ae6c0069d9ea86f1812a5c34f0fc133",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
