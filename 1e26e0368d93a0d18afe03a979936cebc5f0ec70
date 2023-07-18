@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fea07bb9_a81d11d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-18T03:22:20Z",
+      "side": 1,
+      "message": "Added and updated.",
+      "parentUuid": "3d8a9ee6_36e8da4b",
+      "revId": "1e26e0368d93a0d18afe03a979936cebc5f0ec70",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3fc2296_e8a5f6c7",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-07-18T03:11:05Z",
       "side": 1,
       "message": "Rather than flipping the operator I think we should drop the negation:\n\n```\ndo {\n    ...\n} while (timercmp(\u0026now, \u0026end, \u003c));\n```\n\nSomehow we noted the problem here but I merged it before we fixed it:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/63517/comments/c581b984_8b9aebb9",
+      "revId": "1e26e0368d93a0d18afe03a979936cebc5f0ec70",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "890303aa_63bfa74c",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-18T03:22:20Z",
+      "side": 1,
+      "message": "Maybe it is my mistake, you can see my comment that the #25 is passed the test case. But I also request about the correction of timercmp() in patch set #25. Which cause you\u0027re changing in patch set #26. 😞\n\nI think we should not drop the negation, in the description about timercmp():\n```\nSome systems (but not Linux/glibc), have a broken timercmp() implementation, in which CMP of \u003e\u003d, \u003c\u003d, and \u003d\u003d do not work; portable applications can instead use\n!timercmp(..., \u003c) !timercmp(..., \u003e) !timercmp(..., !\u003d)\n```",
+      "parentUuid": "b3fc2296_e8a5f6c7",
       "revId": "1e26e0368d93a0d18afe03a979936cebc5f0ec70",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
