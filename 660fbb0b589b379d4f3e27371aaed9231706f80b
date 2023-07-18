@@ -33,6 +33,24 @@
       "message": "This should go into the Fixed section around line 152",
       "revId": "660fbb0b589b379d4f3e27371aaed9231706f80b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21fb660f_84179ad6",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-18T06:46:45Z",
+      "side": 1,
+      "message": "The line 152 is for the fixed of version 0.4 which already release. We are are changing the code on top of version 0.4 that why these codes should be added at those lines.",
+      "parentUuid": "1ddca255_db38aad9",
+      "revId": "660fbb0b589b379d4f3e27371aaed9231706f80b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
