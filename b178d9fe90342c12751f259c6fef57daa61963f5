@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcd1b617_edd3e1f9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-18T02:39:05Z",
+      "side": 1,
+      "message": "If this is from DSP0249 then it should be in `include/libpldm/state_set.h`, right? Putting it in `include/libpldm/platform.h` is a bit misleading, as that is oriented towards definitions from DSP0248.",
+      "revId": "b178d9fe90342c12751f259c6fef57daa61963f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
