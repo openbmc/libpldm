@@ -42,7 +42,11 @@ pldm_requester_rc_t pldm_transport_poll(struct pldm_transport *transport,
 		return PLDM_REQUESTER_SUCCESS;
 	}
 
-	transport->init_pollfd(transport, &pollfd);
+	rc = transport->init_pollfd(transport, &pollfd);
+	if (rc < 0) {
+		return PLDM_REQUESTER_POLL_FAIL;
+	}
+
 	rc = poll(&pollfd, 1, timeout);
 	if (rc < 0) {
 		return PLDM_REQUESTER_POLL_FAIL;
