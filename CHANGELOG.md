@@ -58,6 +58,10 @@ Change categories:
 
    References to entity_instance_num should be changed to entity_instance
 
+3. platform: Struct field name in numeric sensor value PDR
+
+   References to entity_instance_num should be changed to entity_instance
+
 ## [0.4.0] - 2023-07-14
 
 ### Added
