@@ -34,6 +34,24 @@
       "parentUuid": "ba7eb6af_fe024e1f",
       "revId": "61de91da47ac914e37957c418c329cd4e8308ec3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cef2c25_aaf168e3",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-07-19T06:51:46Z",
+      "side": 1,
+      "message": "making changes based on discussion with Andrew",
+      "parentUuid": "903a561d_6a0a8c93",
+      "revId": "61de91da47ac914e37957c418c329cd4e8308ec3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
