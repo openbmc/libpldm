@@ -21,6 +21,10 @@ Change categories:
 
 1. requester: Fix response buffer cast in pldm_send_recv()
 
+### Changed
+
+1. platform: Struct field name in fru_record_set PDR
+
 ## [0.4.0] - 2023-07-14
 
 ### Added
