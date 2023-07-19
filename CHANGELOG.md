@@ -54,6 +54,10 @@ Change categories:
    pldm_state_set_operational_fault_status_values members should move to
    equivalent pldm_state_set_operational_stress_status_values members if needed.
 
+2. platform: Struct field name in fru_record_set PDR
+
+   References to entity_instance_num should be changed to entity_instance
+
 ## [0.4.0] - 2023-07-14
 
 ### Added
