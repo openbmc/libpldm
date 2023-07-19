@@ -48,6 +48,7 @@ Change categories:
 ### Changed
 
 1. platform: Struct field name in fru_record_set PDR
+2. platform: Struct field name in numeric sensor value PDR
 
 ## [0.4.0] - 2023-07-14
 
