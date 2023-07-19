@@ -16,6 +16,24 @@
       "message": "How do the openbmc builds behave if you add an `__attribute__((deprecated))` annotation to this member? Do we immediately break lots of stuff?\n\nMaybe we add that after we make a tag?",
       "revId": "74566f4a5595676ed8ef6b282f1e382acd2e7632",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a3a2a0_9078b667",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-19T07:23:29Z",
+      "side": 1,
+      "message": "Also, what about the member of the same name in `struct pldm_numeric_sensor_value_pdr`?",
+      "parentUuid": "d3644b17_3b1fc5e8",
+      "revId": "74566f4a5595676ed8ef6b282f1e382acd2e7632",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
