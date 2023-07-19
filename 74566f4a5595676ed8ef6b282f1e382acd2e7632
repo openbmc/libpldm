@@ -52,6 +52,24 @@
       "parentUuid": "c0a3a2a0_9078b667",
       "revId": "74566f4a5595676ed8ef6b282f1e382acd2e7632",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a44cff1_15335d23",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-07-19T11:26:47Z",
+      "side": 1,
+      "message": "Yes, I can try adding `__attribute__((deprecated))` annotation but I feel we could make a tag first. I pushed a separate commit for `struct pldm_numeric_sensor_value_pdr` here - https://gerrit.openbmc.org/c/openbmc/libpldm/+/65150",
+      "parentUuid": "e56c4327_5eb3a9a3",
+      "revId": "74566f4a5595676ed8ef6b282f1e382acd2e7632",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
