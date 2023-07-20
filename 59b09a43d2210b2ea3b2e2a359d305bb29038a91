@@ -16,6 +16,23 @@
       "message": "I just clicked this link to make sure it went to the right place, and of course it didn\u0027t. It should be this one:\n\nhttps://gerrit.openbmc.org/c/openbmc/pldm/+/65040\n\nNot sure how I managed that.",
       "revId": "59b09a43d2210b2ea3b2e2a359d305bb29038a91",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cb24863_93988e3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-20T01:03:10Z",
+      "side": 1,
+      "message": "This is also missing the update to the ABI dumps. Aggh.",
+      "revId": "59b09a43d2210b2ea3b2e2a359d305bb29038a91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
