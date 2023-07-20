@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "337c4ac7_8e980604",
+        "filename": "tests/transport.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-20T00:30:23Z",
+      "side": 1,
+      "message": "I think using non-zero instanceID is better because we can test the InstanceID matching code in the transport functions.",
+      "revId": "503609749a498dc7a6fc53c1bb11134fadec633c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f7e820d_e6666fec",
+        "filename": "tests/transport.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-20T00:30:23Z",
+      "side": 1,
+      "message": "The timeout test case for pldm_transport_send_recv_msg() should be added I think.",
+      "revId": "503609749a498dc7a6fc53c1bb11134fadec633c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
