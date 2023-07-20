@@ -1,3 +1,4 @@
+#include "array.h"
 #include "bios_table.h"
 #include "base.h"
 #include "bios.h"
@@ -601,8 +602,6 @@ struct table_entry_length {
 	uint8_t attr_type;
 	ssize_t (*entry_length_handler)(const void *);
 };
-
-#define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
 static const struct table_entry_length *
 find_table_entry_length_by_type(uint8_t attr_type,
