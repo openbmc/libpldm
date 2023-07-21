@@ -65,6 +65,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88eb2f41_02cdadc1",
+        "filename": "include/libpldm/transport.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-21T04:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "961ab223_302c561c",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 15
+      },
+      "revId": "a03453c08e347b59afc69333b22dad83a720e276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "710f0864_b93df432",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "I don\u0027t think it\u0027s useful information. The outcome is the same, we failed to receive a message. If a caller is concerned about timeouts then they should probably use the async functions directly and manage that themselves. `pldm_transport_send_recv()` is a bit of a hack of an API already as it doesn\u0027t account for retries. It\u0027s just a convenience for users who don\u0027t quite care for those details.",
       "parentUuid": "710f0864_b93df432",
+      "range": {
+        "startLine": 191,
+        "startChar": 3,
+        "endLine": 191,
+        "endChar": 9
+      },
+      "revId": "a03453c08e347b59afc69333b22dad83a720e276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f361891_b2360734",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-21T04:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74a4190a_242ac696",
       "range": {
         "startLine": 191,
         "startChar": 3,
