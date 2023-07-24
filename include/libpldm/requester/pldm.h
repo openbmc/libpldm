@@ -25,6 +25,8 @@ typedef enum pldm_requester_error_codes {
 	PLDM_REQUESTER_SETUP_FAIL = -10,
 	PLDM_REQUESTER_INVALID_SETUP = -11,
 	PLDM_REQUESTER_POLL_FAIL = -12,
+	PLDM_REQUESTER_POLL_TIME_OUT = -13,
+	PLDM_REQUESTER_EID_MISMATCH = -14,
 } pldm_requester_rc_t;
 
 /* ------ Old API ---- deprecated */

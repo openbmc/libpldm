@@ -152,7 +152,11 @@ pldm_transport_mctp_demux_recv(struct pldm_transport *t, pldm_tid_t tid,
 		free(buf);
 		return PLDM_REQUESTER_INVALID_RECV_LEN;
 	}
-	if ((mctp_prefix[0] != eid) || (mctp_prefix[1] != mctp_msg_type)) {
+	if (mctp_prefix[0] != eid) {
+		free(buf);
+		return PLDM_REQUESTER_EID_MISMATCH;
+	}
+	if (mctp_prefix[1] != mctp_msg_type) {
 		free(buf);
 		return PLDM_REQUESTER_NOT_PLDM_MSG;
 	}
