@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "783e1100_2d21a419",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-07-24T06:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c47c1d1_81098d8b",
+      "revId": "bea75d07a5873d6031234fdc6af0461e99c58347",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf42e346_09bf6245",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-07-24T01:20:49Z",
       "side": 1,
       "message": "Why is this desirable though (I think that it is, but I want you to justify it here in the commit message).",
+      "revId": "bea75d07a5873d6031234fdc6af0461e99c58347",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faf94c3f_547f839e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-07-24T06:13:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bf42e346_09bf6245",
       "revId": "bea75d07a5873d6031234fdc6af0461e99c58347",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -66,6 +102,24 @@
       "side": 1,
       "message": "In fact, the aarch64 dump suffers from this problem also. Please fix both.",
       "parentUuid": "18a242ff_a32edd0b",
+      "revId": "bea75d07a5873d6031234fdc6af0461e99c58347",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad839191_65568ed6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-07-24T06:13:58Z",
+      "side": 1,
+      "message": "Thank you, Andrew, I configured x86_64 as suggested, but the aarch64 dump seems to be the same when I try the above-mentioned way.",
+      "parentUuid": "87251c81_3388038b",
       "revId": "bea75d07a5873d6031234fdc6af0461e99c58347",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
