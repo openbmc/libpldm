@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c47c1d1_81098d8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-24T01:20:49Z",
+      "side": 1,
+      "message": "Please be specific about which structure we\u0027re changing. If we do not, we end up with multiple commits with the same subject, as you have done in this series. There\u0027s no way to tell which patch affects what structure in the Gerrit overview pages or in the `git log --oneline` output.",
+      "revId": "bea75d07a5873d6031234fdc6af0461e99c58347",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf42e346_09bf6245",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-24T01:20:49Z",
+      "side": 1,
+      "message": "Why is this desirable though (I think that it is, but I want you to justify it here in the commit message).",
+      "revId": "bea75d07a5873d6031234fdc6af0461e99c58347",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18a242ff_a32edd0b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -14,6 +48,24 @@
       "writtenOn": "2023-07-24T01:12:56Z",
       "side": 1,
       "message": "Hi Pavithra, nice work on updating the ABI dumps. However it looks like the x86_64 dump has been updated without restricting the build via `-Dabi\u003ddeprecated,stable` (it includes symbols marked `LIBPLDM_ABI_TESTING`). Hopefully if you fix that (i.e., configure the x86_64 build with e.g. `meson setup -Dabi\u003ddeprecated,stable builds/x86_64/stable`) the diff won\u0027t be quite so large.",
+      "revId": "bea75d07a5873d6031234fdc6af0461e99c58347",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87251c81_3388038b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-24T01:20:49Z",
+      "side": 1,
+      "message": "In fact, the aarch64 dump suffers from this problem also. Please fix both.",
+      "parentUuid": "18a242ff_a32edd0b",
       "revId": "bea75d07a5873d6031234fdc6af0461e99c58347",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
