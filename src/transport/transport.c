@@ -163,6 +163,20 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 
 	req_hdr = pldm_req_msg;
 
+	do {
+		rc = pldm_transport_poll(transport, 0);
+		if (rc != PLDM_REQUESTER_SUCCESS) {
+			break;
+		}
+
+		rc = pldm_transport_recv_msg(transport, tid, pldm_resp_msg,
+					     resp_msg_len);
+		if (rc == PLDM_REQUESTER_SUCCESS) {
+			/* This isn't the message we wanted */
+			free(*pldm_resp_msg);
+		}
+	} while (rc == PLDM_REQUESTER_SUCCESS);
+
 	rc = pldm_transport_send_msg(transport, tid, pldm_req_msg, req_msg_len);
 	if (rc != PLDM_REQUESTER_SUCCESS) {
 		return rc;
