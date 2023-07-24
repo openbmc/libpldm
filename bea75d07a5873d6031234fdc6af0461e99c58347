@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a242ff_a32edd0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-24T01:12:56Z",
+      "side": 1,
+      "message": "Hi Pavithra, nice work on updating the ABI dumps. However it looks like the x86_64 dump has been updated without restricting the build via `-Dabi\u003ddeprecated,stable` (it includes symbols marked `LIBPLDM_ABI_TESTING`). Hopefully if you fix that (i.e., configure the x86_64 build with e.g. `meson setup -Dabi\u003ddeprecated,stable builds/x86_64/stable`) the diff won\u0027t be quite so large.",
+      "revId": "bea75d07a5873d6031234fdc6af0461e99c58347",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
