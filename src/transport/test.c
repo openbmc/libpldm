@@ -49,19 +49,32 @@ int pldm_transport_test_init_pollfd(struct pldm_transport *ctx,
 
 	desc = &test->seq[test->cursor];
 
-	if (desc->type != PLDM_TRANSPORT_TEST_ELEMENT_LATENCY) {
-		return PLDM_REQUESTER_POLL_FAIL;
-	}
+	if (desc->type == PLDM_TRANSPORT_TEST_ELEMENT_LATENCY) {
+		rc = timerfd_settime(test->timerfd, 0, &desc->latency, NULL);
+		if (rc < 0) {
+			return PLDM_REQUESTER_POLL_FAIL;
+		}
 
-	rc = timerfd_settime(test->timerfd, 0, &desc->latency, NULL);
-	if (rc < 0) {
+		/* This was an explicit latency element, so now move beyond it for recv */
+		test->cursor++;
+	} else if (desc->type == PLDM_TRANSPORT_TEST_ELEMENT_MSG_RECV) {
+		/* Expire the timer immediately so it appears ready */
+		static const struct itimerspec ready = {
+			.it_value = { 0, 1 },
+			.it_interval = { 0, 0 },
+		};
+		rc = timerfd_settime(test->timerfd, 0, &ready, NULL);
+		if (rc < 0) {
+			return PLDM_REQUESTER_POLL_FAIL;
+		}
+
+		/* Don't increment test->cursor as recv needs to consume the current test element */
+	} else {
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
 
 	pollfd->fd = test->timerfd;
 	pollfd->events = POLLIN;
-
-	test->cursor++;
 
 	return 0;
 }
