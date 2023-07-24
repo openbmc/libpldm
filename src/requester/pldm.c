@@ -64,7 +64,7 @@ pldm_requester_rc_t pldm_open(void)
 	do {                                                                     \
 		struct pldm_transport_mctp_demux *demux;                         \
 		bool using_open_transport = false;                               \
-		pldm_tid_t tid = 1;                                              \
+		pldm_tid_t tid = eid;                                            \
 		struct pldm_transport *ctx;                                      \
 		/* The fd can be for a socket we opened or one the consumer    \
 		 * opened. */ \
