@@ -70,6 +70,24 @@
       "parentUuid": "523b9daf_bad0b2f8",
       "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7736e56_093a933e",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-25T04:49:52Z",
+      "side": 1,
+      "message": "\u003e As such, it must also be the case that draining the socket on entry to `pldm_transport_mctp_demux_recv()` is enough\n\nUgh, that was meant to be `pldm_transport_mctp_demux_send()`.\n\nBut thinking about that some more, `pldm_transport_send_recv()` is only useful for requests, while the the transport-specific send and recv callbacks shouldn\u0027t care about whether they\u0027re sending or receiving requests or responses.\n\nSo maybe the draining should be done in `pldm_transport_send_recv()`, contrary to the first point in my previous comment. It will just never be the case that if the AF_MCTP transport is in use that anything needs to be drained. We can test whether or not anything needs to be drained using the `pldm_transport_poll()`. Something like:\n\n```\nfor (int i \u003d 0; i \u003c\u003d PLDM_TID_MAX \u0026\u0026 pldm_transport_poll(transport, 0) \u003d\u003d 1; i++) {\n    pldm_transport_recv_msg(...);\n    /* Discard the message */\n}\n```",
+      "parentUuid": "9931aae6_bc17f831",
+      "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
