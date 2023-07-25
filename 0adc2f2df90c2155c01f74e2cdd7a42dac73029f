@@ -16,6 +16,24 @@
       "message": "I don\u0027t think this is right. The instance ID is unique to the TID for the issued command for the period over which that command is valid (i.e. before timeout). However, we\u0027re not validating the TID of the received message matches the TID to which we sent the request. I think that\u0027s the primary problem here. We shouldn\u0027t need to be matching on the type and command.",
       "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81172233_857ff7c5",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-25T02:51:04Z",
+      "side": 1,
+      "message": "Note that we probably need to base this fix on top of Rashmica\u0027s fix for the `pldm_transport_recv_msg()` API:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/65337\n\nThat way we can learn the TID for the comparison we require here.",
+      "parentUuid": "263ab00d_2f981f5f",
+      "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
