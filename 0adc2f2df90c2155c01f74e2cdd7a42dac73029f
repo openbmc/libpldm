@@ -52,6 +52,24 @@
       "parentUuid": "81172233_857ff7c5",
       "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9931aae6_bc17f831",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-25T04:42:36Z",
+      "side": 1,
+      "message": "Okay. Several things:\n\n1. Your scenario outlined above is in terms of the behaviour of the mctp-demux-daemon with its broadcasts. AF_MCTP sockets do not behave this way, therefore any work-arounds like you\u0027re proposing should go in the mctp-demux transport implementation, and not in generic code like you have here.\n\n2. If pldmtool successfully allocates an instance ID at step 5, then it must be the case that there\u0027s no in-flight request associated with that instance ID. As such, it must also be the case that draining the socket on entry to `pldm_transport_mctp_demux_recv()` is enough - any message that previously used that instance ID must already be enqueued in the socket, and can be removed prior to invoking `pldm_transport_send_msg()` to remove the ambiguity.",
+      "parentUuid": "523b9daf_bad0b2f8",
+      "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
