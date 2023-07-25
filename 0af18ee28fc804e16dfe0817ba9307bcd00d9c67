@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "829fdb5b_0513277d",
+        "filename": "include/libpldm/transport.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-25T00:13:07Z",
+      "side": 1,
+      "message": "Can you please update the doxygen also? 😊",
+      "revId": "0af18ee28fc804e16dfe0817ba9307bcd00d9c67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58d0752f_39fb9264",
+        "filename": "src/requester/pldm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-25T00:13:07Z",
+      "side": 1,
+      "message": "I don\u0027t think this is worth the complication. Use the macro when we can, if we can\u0027t, then so it if we copy/paste then hack in the bits that we need.",
+      "revId": "0af18ee28fc804e16dfe0817ba9307bcd00d9c67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124e4ae1_963b4a20",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-25T00:13:07Z",
+      "side": 1,
+      "message": "I know I suggested this behaviour initially, but on reflection I don\u0027t think we want to bake expectation of this behaviour into the new API. We can\u0027t fix it once we do TIDs properly. Rather, users of libpldm should initialise the mappings themselves if this is what they desire. For example, the user of libpldm can do the following when first setting up the transport:\n\n```c\nfor (int i \u003d 0; i \u003c\u003d PLDM_TID_MAX; i++) {\n    rc \u003d pldm_transport_af_mctp_map_tid(af_mctp, (pldm_tid_t)i, i);\n    if (rc) { ... }\n}\n```\n\nThen here we just drop the message if there\u0027s no mapping in place.",
+      "revId": "0af18ee28fc804e16dfe0817ba9307bcd00d9c67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05f5f217_552ee094",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-25T00:13:07Z",
+      "side": 1,
+      "message": "See the comment on the AF_MCTP transport implementation.",
+      "revId": "0af18ee28fc804e16dfe0817ba9307bcd00d9c67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "650a53b3_cb8f5a8e",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-25T00:13:07Z",
+      "side": 1,
+      "message": "If this is a clang-format change then it should be separated out.",
+      "revId": "0af18ee28fc804e16dfe0817ba9307bcd00d9c67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
