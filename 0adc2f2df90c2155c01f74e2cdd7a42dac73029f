@@ -34,6 +34,24 @@
       "parentUuid": "263ab00d_2f981f5f",
       "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "523b9daf_bad0b2f8",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-25T03:37:18Z",
+      "side": 1,
+      "message": "Below one example which the instanceID can be equal.\n1. When `pldmtool platform GetPDR -a` command is called. pldmtool open the mctp socket, to start getting PDRs. -\u003e pldmtool owes one socket instance.\n\n2. At time t (ms) pldmtool send GetPDR to get the first PDRs and get the response -\u003e it has PDRs. Right after that it calls DBus interface to get next instanceId to get next PDR.\n\n3. At time t + 1 (ms) pldmd call GetSensorReading to get the sensor value. pldmd continue call GetSensorReading after each 2 ms.\n\n4. from time t + 1 to t + 1 + 32*2 pldmd sent 32 GetSensorReading request and received 32 response for that command. InstanceID of those command will occupy the range [0:31] of instance ID.\n\n5. At time t + 1 + 32*2 + 1, pldmtool get new InstanceID from D-Bus interface, it sends the GetPDR request. Because the response messages is broadcast between the mctp socket instances. The socket instance of pldmtool will feed the pldmtool with the response of GetSensorReading commands from pldmd. pldmd is free these responses but the pldmtool is not free them.\n\n6. One of instanceId of GetSensorReading response equal with the instance id in GetPDRs request.",
+      "parentUuid": "81172233_857ff7c5",
+      "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
