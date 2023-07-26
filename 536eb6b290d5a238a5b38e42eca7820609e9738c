@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61e34e5a_7f4dc23f",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-26T23:49:32Z",
+      "side": 1,
+      "message": "When the poll() is time out, the method will return zero. Use PLDM_REQUESTER_POLL_TIME_OUT error to different with PLDM_REQUESTER_SUCCESS when time out happens.",
+      "revId": "536eb6b290d5a238a5b38e42eca7820609e9738c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d073b0ff_6b4ed8ba",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-26T23:49:32Z",
+      "side": 1,
+      "message": "The while will continue until there is no more message. The poll returns error or time out.",
+      "revId": "536eb6b290d5a238a5b38e42eca7820609e9738c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
