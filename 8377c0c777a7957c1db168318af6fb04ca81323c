@@ -16,6 +16,24 @@
       "message": "Can we put this in the `Deprecated` section instead, and explain what should be changed (source references to `entity_instance_num` should be changed to `entity_instance`)?",
       "revId": "8377c0c777a7957c1db168318af6fb04ca81323c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6be13e3c_3e79d987",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-07-27T06:37:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6bb8ffc_38d9a504",
+      "revId": "8377c0c777a7957c1db168318af6fb04ca81323c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
