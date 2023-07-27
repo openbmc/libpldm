@@ -106,6 +106,24 @@
       "parentUuid": "e7736e56_093a933e",
       "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3d4212a_7016d964",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-27T23:55:02Z",
+      "side": 1,
+      "message": "We can\u0027t have an infinite loop. My upper bound of 32 was wrong as you point out, but `32 * 256` should work?",
+      "parentUuid": "6aa716a6_c01b3125",
+      "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

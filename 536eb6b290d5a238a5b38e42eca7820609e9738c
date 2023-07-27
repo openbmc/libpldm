@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "abb0e957_2c762583",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-27T23:55:02Z",
+      "side": 1,
+      "message": "Please rebase on top of this:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/64812",
+      "parentUuid": "61e34e5a_7f4dc23f",
+      "revId": "536eb6b290d5a238a5b38e42eca7820609e9738c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d073b0ff_6b4ed8ba",
@@ -48,6 +66,41 @@
       "writtenOn": "2023-07-26T23:49:32Z",
       "side": 1,
       "message": "The while will continue until there is no more message. The poll returns error or time out.",
+      "revId": "536eb6b290d5a238a5b38e42eca7820609e9738c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1419f7b5_307103f2",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-27T23:55:02Z",
+      "side": 1,
+      "message": "See my reply on line 51.",
+      "parentUuid": "d073b0ff_6b4ed8ba",
+      "revId": "536eb6b290d5a238a5b38e42eca7820609e9738c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aac3bc5_52cfc7c1",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-27T23:55:02Z",
+      "side": 1,
+      "message": "We need an upper bound here. We need to avoid infinite loops in a library. I was wrong about my bound of 32 before, but really it\u0027s `32 * 256` for the reason you mentioned previously.",
       "revId": "536eb6b290d5a238a5b38e42eca7820609e9738c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
