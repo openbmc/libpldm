@@ -25,6 +25,23 @@ Change categories:
 
 1. pdr: Allow record_handle to be NULL for pldm_pdr_add_check()
 
+### Deprecated
+
+1. state-set: Enum pldm_state_set_operational_fault_status_values
+
+   The enum operational_fault_status is defined with wrong members and will
+   eventually be replaced with the correct members. Any uses of
+   pldm_state_set_operational_fault_status_values members should move to
+   equivalent pldm_state_set_operational_stress_status_values members if needed.
+
+2. platform: Struct field name in fru_record_set PDR
+
+   References to entity_instance_num should be changed to entity_instance
+
+3. platform: Struct field name in numeric sensor value PDR
+
+   References to entity_instance_num should be changed to entity_instance
+
 ### Removed
 
 1. bios_table: Remove pldm_bios_table_attr_entry_integer_encode_length()
@@ -44,23 +61,6 @@ Change categories:
 
 1. requester: Fix response buffer cast in pldm_send_recv()
 2. pdr: Hoist record handle overflow test to avoid memory leak
-
-### Deprecated
-
-1. state-set: Enum pldm_state_set_operational_fault_status_values
-
-   The enum operational_fault_status is defined with wrong members and will
-   eventually be replaced with the correct members. Any uses of
-   pldm_state_set_operational_fault_status_values members should move to
-   equivalent pldm_state_set_operational_stress_status_values members if needed.
-
-2. platform: Struct field name in fru_record_set PDR
-
-   References to entity_instance_num should be changed to entity_instance
-
-3. platform: Struct field name in numeric sensor value PDR
-
-   References to entity_instance_num should be changed to entity_instance
 
 ## [0.4.0] - 2023-07-14
 
