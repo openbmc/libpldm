@@ -18,6 +18,8 @@ libpldm_headers += files(
   'utils.h',
   'firmware_update.h',
   'pldm_rde.h',
+  'requester/pldm_base_requester.h',
+  'requester/pldm_rde_requester.h'
   )
 
 libpldm_transport_headers += files(
