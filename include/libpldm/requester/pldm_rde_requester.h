@@ -239,7 +239,48 @@ pldm_rde_requester_rc_t pldm_rde_get_next_discovery_command(
  */
 pldm_rde_requester_rc_t
 pldm_rde_create_context(struct pldm_rde_requester_context *current_ctx);
-
+/**
+ * @brief Initializes the context to trigger dictionary schema RDE ops
+ *
+ * @param[in] ctx - RDE Requester context to be initialized and set the state to
+ * trigger Dictionary Operations over RDE/PLDM
+ *
+ * @return pldm_requester_rc_t (errno may be set)
+ */
+pldm_rde_requester_rc_t
+pldm_rde_init_get_dictionary_schema(struct pldm_rde_requester_context *ctx);
+/**
+ * @brief Gets the next command in sequence required to extract dictionaries
+ * from the RDE Device for the given resources
+ *
+ * @param[in] instance_id - Instance ID corresponding to the request
+ * @param[in] manager - Context Manager
+ * @param[in] current_ctx - RDE Request Context
+ * @param[out] request - Request object that would hold the encoded request
+ * message for the requester to send
+ *
+ * @return pldm_requester_rc_t (errno may be set)
+ */
+pldm_rde_requester_rc_t pldm_rde_get_next_dictionary_schema_command(
+    uint8_t instance_id, struct pldm_rde_requester_manager *manager,
+    struct pldm_rde_requester_context *current_ctx, struct pldm_msg *request);
+/**
+ * @brief Pushes the response received into current context, updates the state
+ * of the context and/or returns the response payload back to the requester
+ *
+ * @param[in] manager - Context Manager
+ * @param[in] ctx - RDE Request Context
+ * @param[in] resp_msg - Response received from the RDE Device
+ * @param[in] resp_size - Size of the response message
+ * @param[in] callback - Pointer to a function that would be executed over the
+ * response payload as per requester's requirement
+ * 
+ * @return pldm_requester_rc_t (errno may be set)
+ */
+pldm_rde_requester_rc_t pldm_rde_push_get_dictionary_response(
+    struct pldm_rde_requester_manager *manager,
+    struct pldm_rde_requester_context *ctx, void *resp_msg, size_t resp_size,
+    callback_funct callback);
 #ifdef __cplusplus
 }
 #endif

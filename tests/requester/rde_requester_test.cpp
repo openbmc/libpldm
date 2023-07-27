@@ -408,3 +408,213 @@ TEST(PushDiscoveryResponseFailure, PLDMRDEDiscovery)
 
     EXPECT_EQ(rc, PLDM_RDE_REQUESTER_NO_NEXT_COMMAND_FOUND);
 }
+
+TEST(InitDictionarySchemaSuccess, RDEDictionaryExtraction)
+{
+    initial_setup();
+    struct pldm_rde_requester_manager* manager =
+        new pldm_rde_requester_manager();
+
+    int rc = pldm_rde_init_context(
+        TEST_DEV_ID.c_str(), TEST_NET_ID, manager, TEST_MC_CONCURRENCY,
+        TEST_MC_TRANSFER_SIZE, TEST_MC_FEATURES, TEST_NUMBER_OF_RESOURCES,
+        &resource_ids.front(), allocate_memory_to_contexts, free_memory);
+
+    struct pldm_rde_requester_context* base_context =
+        new pldm_rde_requester_context();
+    rc = pldm_rde_create_context(base_context);
+
+    rc = pldm_rde_init_get_dictionary_schema(base_context);
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_SUCCESS);
+    EXPECT_EQ(base_context->current_pdr_resource->schema_class,
+              PLDM_RDE_SCHEMA_MAJOR);
+}
+
+TEST(InitDictionarySchemaFailure, RDEDictionaryExtraction)
+{
+    initial_setup();
+    struct pldm_rde_requester_manager* manager =
+        new pldm_rde_requester_manager();
+
+    int rc = pldm_rde_init_context(
+        TEST_DEV_ID.c_str(), TEST_NET_ID, manager, TEST_MC_CONCURRENCY,
+        TEST_MC_TRANSFER_SIZE, TEST_MC_FEATURES, TEST_NUMBER_OF_RESOURCES,
+        &resource_ids.front(), allocate_memory_to_contexts, free_memory);
+
+    struct pldm_rde_requester_context* base_context =
+        new pldm_rde_requester_context();
+    base_context->context_status = CONTEXT_BUSY;
+
+    rc = pldm_rde_init_get_dictionary_schema(base_context);
+    EXPECT_EQ(rc, PLDM_RDE_CONTEXT_INITIALIZATION_ERROR);
+}
+
+TEST(GetNextDictionarySchemaSuccess, RDEDictionaryExtraction)
+{
+    initial_setup();
+    struct pldm_rde_requester_manager* manager =
+        new pldm_rde_requester_manager();
+
+    int rc = pldm_rde_init_context(
+        TEST_DEV_ID.c_str(), TEST_NET_ID, manager, TEST_MC_CONCURRENCY,
+        TEST_MC_TRANSFER_SIZE, TEST_MC_FEATURES, TEST_NUMBER_OF_RESOURCES,
+        &resource_ids.front(), allocate_memory_to_contexts, free_memory);
+
+    struct pldm_rde_requester_context* base_context =
+        new pldm_rde_requester_context();
+    rc = pldm_rde_create_context(base_context);
+
+    rc = pldm_rde_init_get_dictionary_schema(base_context);
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_SUCCESS);
+
+    int requestBytes = 0;
+    if (rde_command_request_size.find(base_context->next_command) !=
+        rde_command_request_size.end())
+    {
+        requestBytes = rde_command_request_size[base_context->next_command];
+    }
+    std::vector<uint8_t> requestMsg(sizeof(pldm_msg_hdr) + requestBytes);
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    rc = pldm_rde_get_next_dictionary_schema_command(TEST_INSTANCE_ID, manager,
+                                                     base_context, request);
+
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_SUCCESS);
+}
+
+TEST(GetNextDictionarySchemaFailure, RDEDictionaryExtraction)
+{
+    initial_setup();
+    struct pldm_rde_requester_manager* manager =
+        new pldm_rde_requester_manager();
+
+    int rc = pldm_rde_init_context(
+        TEST_DEV_ID.c_str(), TEST_NET_ID, manager, TEST_MC_CONCURRENCY,
+        TEST_MC_TRANSFER_SIZE, TEST_MC_FEATURES, TEST_NUMBER_OF_RESOURCES,
+        &resource_ids.front(), allocate_memory_to_contexts, free_memory);
+
+    struct pldm_rde_requester_context* base_context =
+        new pldm_rde_requester_context();
+    rc = pldm_rde_create_context(base_context);
+
+    base_context->next_command = 0x23;
+
+    std::vector<uint8_t> requestMsg(sizeof(pldm_msg_hdr));
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    rc = pldm_rde_get_next_dictionary_schema_command(TEST_INSTANCE_ID, manager,
+                                                     base_context, request);
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_ENCODING_REQUEST_FAILURE);
+}
+
+TEST(MultipartReceiveSuccess, RDEDictionaryExtraction)
+{
+    initial_setup();
+    struct pldm_rde_requester_manager* manager =
+        new pldm_rde_requester_manager();
+
+    int rc = pldm_rde_init_context(
+        TEST_DEV_ID.c_str(), TEST_NET_ID, manager, TEST_MC_CONCURRENCY,
+        TEST_MC_TRANSFER_SIZE, TEST_MC_FEATURES, TEST_NUMBER_OF_RESOURCES,
+        &resource_ids.front(), allocate_memory_to_contexts, free_memory);
+
+    struct pldm_rde_requester_context* base_context =
+        new pldm_rde_requester_context();
+    rc = pldm_rde_create_context(base_context);
+
+    rc = pldm_rde_init_get_dictionary_schema(base_context);
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_SUCCESS);
+
+    base_context->next_command = PLDM_RDE_MULTIPART_RECEIVE;
+    base_context->current_pdr_resource->transfer_handle = 0x00;
+
+    int requestBytes = 0;
+    if (rde_command_request_size.find(base_context->next_command) !=
+        rde_command_request_size.end())
+    {
+        requestBytes = rde_command_request_size[base_context->next_command];
+    }
+    std::vector<uint8_t> requestMsg(sizeof(pldm_msg_hdr) + requestBytes);
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    rc = pldm_rde_get_next_dictionary_schema_command(TEST_INSTANCE_ID, manager,
+                                                     base_context, request);
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_SUCCESS);
+}
+void dummy_callback(struct pldm_rde_requester_manager* manager,
+                    struct pldm_rde_requester_context* ctx, uint8_t** payload,
+                    uint32_t payload_length, bool has_checksum)
+{
+    IGNORE(manager);
+    IGNORE(ctx);
+    IGNORE(payload);
+    IGNORE(payload_length);
+    IGNORE(has_checksum);
+}
+TEST(PushResponseForGetDictionarySchema, RDEDictionaryExtraction)
+{
+    initial_setup();
+    struct pldm_rde_requester_manager* manager =
+        new pldm_rde_requester_manager();
+
+    int rc = pldm_rde_init_context(
+        TEST_DEV_ID.c_str(), TEST_NET_ID, manager, TEST_MC_CONCURRENCY,
+        TEST_MC_TRANSFER_SIZE, TEST_MC_FEATURES, TEST_NUMBER_OF_RESOURCES,
+        &resource_ids.front(), allocate_memory_to_contexts, free_memory);
+
+    struct pldm_rde_requester_context* base_context =
+        new pldm_rde_requester_context();
+    rc = pldm_rde_create_context(base_context);
+
+    rc = pldm_rde_init_get_dictionary_schema(base_context);
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_SUCCESS);
+
+    std::vector<uint8_t> response(sizeof(pldm_msg_hdr) + 6, 0);
+    uint8_t* responseMsg = response.data();
+    size_t responseMsgSize = sizeof(pldm_msg_hdr) + 6;
+    auto responsePtr = reinterpret_cast<struct pldm_msg*>(responseMsg);
+
+    rc = encode_get_schema_dictionary_resp(TEST_INSTANCE_ID,
+                                           /*cc*/ 0,
+                                           /* dictionary_format*/ 0x00,
+                                           /*transfer_handle*/ 0x00,
+                                           responsePtr);
+
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_SUCCESS);
+    rc = pldm_rde_push_get_dictionary_response(
+        manager, base_context, responsePtr, responseMsgSize, dummy_callback);
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_SUCCESS);
+}
+
+TEST(PushResponseForMultipartReceive, RDEDictionaryExtraction)
+{
+    initial_setup();
+    struct pldm_rde_requester_manager* manager =
+        new pldm_rde_requester_manager();
+
+    int rc = pldm_rde_init_context(
+        TEST_DEV_ID.c_str(), TEST_NET_ID, manager, TEST_MC_CONCURRENCY,
+        TEST_MC_TRANSFER_SIZE, TEST_MC_FEATURES, TEST_NUMBER_OF_RESOURCES,
+        &resource_ids.front(), allocate_memory_to_contexts, free_memory);
+
+    struct pldm_rde_requester_context* base_context =
+        new pldm_rde_requester_context();
+    rc = pldm_rde_create_context(base_context);
+
+    rc = pldm_rde_init_get_dictionary_schema(base_context);
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_SUCCESS);
+
+    base_context->next_command = PLDM_RDE_MULTIPART_RECEIVE;
+    std::vector<uint8_t> response(sizeof(pldm_msg_hdr) + 20, 0);
+    uint8_t* responseMsg = response.data();
+    size_t responseMsgSize = sizeof(pldm_msg_hdr) + 20;
+    auto responsePtr = reinterpret_cast<struct pldm_msg*>(responseMsg);
+
+    uint8_t payload[] = {2, 3, 4};
+    rc = encode_rde_multipart_receive_resp(
+        TEST_INSTANCE_ID, /*completion_code*/ 0, /*transfer_flag*/ 0x00,
+        /*next_data_transfer_handle*/ 0x00, /*data_length_bytes*/ 8,
+        /*add_checksum*/ false, /*checksum*/ 0x00, &payload[0], responsePtr);
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_SUCCESS);
+    rc = pldm_rde_push_get_dictionary_response(
+        manager, base_context, responsePtr, responseMsgSize, dummy_callback);
+    EXPECT_EQ(rc, PLDM_RDE_REQUESTER_SUCCESS);
+}

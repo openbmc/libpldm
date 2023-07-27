@@ -49,8 +49,7 @@ pldm_rde_init_context(const char *device_id, int net_id,
 	}
 	manager->number_of_resources = number_of_resources;
 	// alloactor returns the index of the first context in the array
-	manager->ctx = alloc_requester_ctx(
-	    mc_concurrency);
+	manager->ctx = alloc_requester_ctx(mc_concurrency);
 
 	manager->free_requester_ctx = *free_requester_ctx;
 	return PLDM_RDE_REQUESTER_SUCCESS;
@@ -165,4 +164,161 @@ pldm_rde_discovery_push_response(struct pldm_rde_requester_manager *manager,
 	default:
 		return PLDM_RDE_REQUESTER_NO_NEXT_COMMAND_FOUND;
 	}
+}
+
+pldm_rde_requester_rc_t
+pldm_rde_init_get_dictionary_schema(struct pldm_rde_requester_context *ctx)
+{
+	if (ctx->context_status == CONTEXT_BUSY) {
+		return PLDM_RDE_CONTEXT_INITIALIZATION_ERROR;
+	}
+	ctx->next_command = PLDM_GET_SCHEMA_DICTIONARY;
+	struct pdr_resource *current_pdr_resource =
+	    (struct pdr_resource *)malloc(sizeof(struct pdr_resource));
+	ctx->current_pdr_resource = current_pdr_resource;
+	// start with 0th index of resource id array
+	current_pdr_resource->resource_id_index = 0;
+	current_pdr_resource->schema_class = PLDM_RDE_SCHEMA_MAJOR;
+	ctx->requester_status = PLDM_RDE_REQUESTER_READY_TO_PICK_NEXT_REQUEST;
+	return PLDM_RDE_REQUESTER_SUCCESS;
+}
+
+pldm_rde_requester_rc_t pldm_rde_get_next_dictionary_schema_command(
+    uint8_t instance_id, struct pldm_rde_requester_manager *manager,
+    struct pldm_rde_requester_context *current_ctx, struct pldm_msg *request)
+{
+	if (manager->number_of_resources == 0) {
+		return PLDM_RDE_NO_PDR_RESOURCES_FOUND;
+	}
+	if (!manager->initialized) {
+		return PLDM_RDE_CONTEXT_INITIALIZATION_ERROR;
+	}
+
+	if (current_ctx->context_status == CONTEXT_BUSY) {
+		return PLDM_RDE_CONTEXT_NOT_READY;
+	}
+
+	int rc = 0;
+	switch (current_ctx->next_command) {
+	case PLDM_GET_SCHEMA_DICTIONARY: {
+		uint32_t resource_id =
+		    current_ctx->current_pdr_resource->resource_id_index;
+		rc = encode_get_schema_dictionary_req(
+		    instance_id, manager->resource_ids[resource_id],
+		    PLDM_RDE_SCHEMA_MAJOR, request);
+		break;
+	}
+	case PLDM_RDE_MULTIPART_RECEIVE:
+		rc = encode_rde_multipart_receive_req(
+		    instance_id,
+		    current_ctx->current_pdr_resource->transfer_handle, 0x00,
+		    current_ctx->current_pdr_resource->transfer_operation,
+		    request);
+		break;
+	default:
+		rc = PLDM_RDE_REQUESTER_NO_NEXT_COMMAND_FOUND;
+		break;
+	}
+	if (rc) {
+		fprintf(stderr, "Unable to encode request with rc: %d\n", rc);
+		return PLDM_RDE_REQUESTER_ENCODING_REQUEST_FAILURE;
+	}
+	return rc;
+}
+
+int set_next_dictionary_index(struct pldm_rde_requester_manager *manager,
+			      struct pldm_rde_requester_context *ctx)
+{
+	int rc = PLDM_RDE_REQUESTER_SUCCESS;
+	uint8_t new_rid_idx = ctx->current_pdr_resource->resource_id_index + 1;
+
+	if (new_rid_idx == manager->number_of_resources) {
+		fprintf(stdout,
+			"Processed all resources for dictionaries: %x \n",
+			new_rid_idx);
+		ctx->next_command =
+		    PLDM_RDE_REQUESTER_READY_TO_PICK_NEXT_REQUEST;
+		ctx->current_pdr_resource->transfer_operation =
+		    PLDM_XFER_COMPLETE;
+		ctx->requester_status = PLDM_RDE_REQUESTER_NO_PENDING_ACTION;
+		ctx->context_status = CONTEXT_FREE;
+	} else {
+		ctx->next_command = PLDM_GET_SCHEMA_DICTIONARY;
+		ctx->current_pdr_resource->resource_id_index = new_rid_idx;
+		ctx->current_pdr_resource->schema_class = PLDM_RDE_SCHEMA_MAJOR;
+		ctx->requester_status =
+		    PLDM_RDE_REQUESTER_READY_TO_PICK_NEXT_REQUEST;
+	}
+	return rc;
+}
+
+pldm_rde_requester_rc_t pldm_rde_push_get_dictionary_response(
+    struct pldm_rde_requester_manager *manager,
+    struct pldm_rde_requester_context *ctx, void *resp_msg, size_t resp_size,
+    callback_funct callback)
+{
+	int rc = 0;
+	switch (ctx->next_command) {
+	case PLDM_GET_SCHEMA_DICTIONARY: {
+		uint8_t completion_code;
+		rc = decode_get_schema_dictionary_resp(
+		    resp_msg, resp_size - sizeof(struct pldm_msg_hdr),
+		    &completion_code,
+		    &(ctx->current_pdr_resource->dictionary_format),
+		    &(ctx->current_pdr_resource->transfer_handle));
+		if (rc || completion_code) {
+			ctx->context_status = CONTEXT_FREE;
+			set_next_dictionary_index(manager, ctx);
+			break;
+		}
+
+		ctx->next_command = PLDM_RDE_MULTIPART_RECEIVE;
+		ctx->current_pdr_resource->transfer_operation =
+		    PLDM_XFER_FIRST_PART;
+		ctx->context_status = CONTEXT_FREE;
+		ctx->requester_status =
+		    PLDM_RDE_REQUESTER_READY_TO_PICK_NEXT_REQUEST;
+		return PLDM_RDE_REQUESTER_SUCCESS;
+	}
+	case PLDM_RDE_MULTIPART_RECEIVE: {
+		uint8_t completion_code, ret_transfer_flag;
+		uint8_t *payload = malloc(sizeof(uint8_t));
+		uint32_t ret_data_transfer_handle, data_length_bytes;
+
+		rc = decode_rde_multipart_receive_resp(
+		    resp_msg, resp_size - sizeof(struct pldm_msg_hdr),
+		    &completion_code, &ret_transfer_flag,
+		    &ret_data_transfer_handle, &data_length_bytes, &payload);
+
+		if (rc || completion_code) {
+			ctx->context_status = CONTEXT_FREE;
+			set_next_dictionary_index(manager, ctx);
+			break;
+		}
+		if ((ret_transfer_flag == PLDM_RDE_START) ||
+		    (ret_transfer_flag == PLDM_RDE_MIDDLE)) {
+			// Call the callback method to send back response
+			// payload to requester
+			callback(manager, ctx, &payload, data_length_bytes,
+				 false);
+			ctx->next_command = PLDM_RDE_MULTIPART_RECEIVE;
+			ctx->current_pdr_resource->transfer_operation =
+			    PLDM_XFER_NEXT_PART;
+			ctx->current_pdr_resource->transfer_handle =
+			    ret_data_transfer_handle;
+			ctx->requester_status =
+			    PLDM_RDE_REQUESTER_READY_TO_PICK_NEXT_REQUEST;
+		} else if ((ret_transfer_flag == PLDM_RDE_START_AND_END) ||
+			   (ret_transfer_flag == PLDM_RDE_END)) {
+			callback(manager, ctx, &payload, data_length_bytes,
+				 true);
+			// find the next resource id from the resource id array
+			// if exists
+			set_next_dictionary_index(manager, ctx);
+		}
+		ctx->context_status = CONTEXT_FREE;
+		return PLDM_RDE_REQUESTER_SUCCESS;
+	}
+	}
+	return rc;
 }
