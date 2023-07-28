@@ -4,6 +4,7 @@ $VAR1 = {
           'Arch' => 'x86_64',
           'GccVersion' => '13.1.0',
           'Headers' => {
+                         'af-mctp.h' => 1,
                          'base.h' => 1,
                          'bios.h' => 1,
                          'bios_table.h' => 1,
@@ -12,11 +13,13 @@ $VAR1 = {
                          'fru.h' => 1,
                          'host.h' => 1,
                          'instance-id.h' => 1,
+                         'mctp-demux.h' => 1,
                          'pdr.h' => 1,
                          'platform.h' => 1,
                          'platform_oem_ibm.h' => 1,
                          'pldm.h' => 1,
                          'pldm_types.h' => 1,
+                         'transport.h' => 1,
                          'utils.h' => 1
                        },
           'Language' => 'C',
@@ -28,6 +31,7 @@ $VAR1 = {
                       },
           'PublicABI' => '1',
           'Sources' => {
+                         'af-mctp.c' => 1,
                          'base.c' => 1,
                          'bios.c' => 1,
                          'bios_table.c' => 1,
@@ -36,9 +40,11 @@ $VAR1 = {
                          'fru.c' => 1,
                          'host.c' => 1,
                          'instance-id.c' => 1,
+                         'mctp-demux.c' => 1,
                          'pdr.c' => 1,
                          'platform.c' => 1,
                          'pldm.c' => 1,
+                         'transport.c' => 1,
                          'utils.c' => 1
                        },
           'SymbolInfo' => {
@@ -151,6 +157,111 @@ $VAR1 = {
                                           'Source' => 'pldm.c',
                                           'SourceLine' => '30'
                                         },
+                            '102671' => {
+                                          'Header' => 'af-mctp.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 'ctx',
+                                                                'type' => '102754'
+                                                              }
+                                                     },
+                                          'Reg' => {
+                                                     '0' => 'rdi'
+                                                   },
+                                          'Return' => '1',
+                                          'ShortName' => 'pldm_transport_af_mctp_destroy',
+                                          'Source' => 'af-mctp.c',
+                                          'SourceLine' => '173'
+                                        },
+                            '102759' => {
+                                          'Header' => 'af-mctp.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 'ctx',
+                                                                'type' => '102983'
+                                                              }
+                                                     },
+                                          'Reg' => {
+                                                     '0' => 'r12'
+                                                   },
+                                          'Return' => '74',
+                                          'ShortName' => 'pldm_transport_af_mctp_init',
+                                          'Source' => 'af-mctp.c',
+                                          'SourceLine' => '139'
+                                        },
+                            '103814' => {
+                                          'Header' => 'af-mctp.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 'ctx',
+                                                                'type' => '102754'
+                                                              },
+                                                       '1' => {
+                                                                'name' => 'tid',
+                                                                'type' => '96470'
+                                                              },
+                                                       '2' => {
+                                                                'name' => 'eid',
+                                                                'type' => '98632'
+                                                              }
+                                                     },
+                                          'Reg' => {
+                                                     '0' => 'rdi',
+                                                     '1' => 'rsi',
+                                                     '2' => 'rdx'
+                                                   },
+                                          'Return' => '74',
+                                          'ShortName' => 'pldm_transport_af_mctp_unmap_tid',
+                                          'Source' => 'af-mctp.c',
+                                          'SourceLine' => '72'
+                                        },
+                            '103887' => {
+                                          'Header' => 'af-mctp.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 'ctx',
+                                                                'type' => '102754'
+                                                              },
+                                                       '1' => {
+                                                                'name' => 'tid',
+                                                                'type' => '96470'
+                                                              },
+                                                       '2' => {
+                                                                'name' => 'eid',
+                                                                'type' => '98632'
+                                                              }
+                                                     },
+                                          'Reg' => {
+                                                     '0' => 'rdi',
+                                                     '1' => 'rsi',
+                                                     '2' => 'rdx'
+                                                   },
+                                          'Return' => '74',
+                                          'ShortName' => 'pldm_transport_af_mctp_map_tid',
+                                          'Source' => 'af-mctp.c',
+                                          'SourceLine' => '63'
+                                        },
+                            '104055' => {
+                                          'Header' => 'af-mctp.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 't',
+                                                                'type' => '98958'
+                                                              },
+                                                       '1' => {
+                                                                'name' => 'pollfd',
+                                                                'type' => '101687'
+                                                              }
+                                                     },
+                                          'Reg' => {
+                                                     '0' => 'rdi',
+                                                     '1' => 'rsi'
+                                                   },
+                                          'Return' => '74',
+                                          'ShortName' => 'pldm_transport_af_mctp_init_pollfd',
+                                          'Source' => 'af-mctp.c',
+                                          'SourceLine' => '39'
+                                        },
                             '10411' => {
                                          'Header' => 'bios.h',
                                          'Param' => {
@@ -177,6 +288,22 @@ $VAR1 = {
                                          'Source' => 'bios.c',
                                          'SourceLine' => '192'
                                        },
+                            '104133' => {
+                                          'Header' => 'af-mctp.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 'ctx',
+                                                                'type' => '102754'
+                                                              }
+                                                     },
+                                          'Reg' => {
+                                                     '0' => 'rdi'
+                                                   },
+                                          'Return' => '98958',
+                                          'ShortName' => 'pldm_transport_af_mctp_core',
+                                          'Source' => 'af-mctp.c',
+                                          'SourceLine' => '33'
+                                        },
                             '10483' => {
                                          'Header' => 'bios.h',
                                          'Param' => {
@@ -251,6 +378,53 @@ $VAR1 = {
                                          'Source' => 'bios.c',
                                          'SourceLine' => '133'
                                        },
+                            '107720' => {
+                                          'Header' => 'mctp-demux.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 'ctx',
+                                                                'type' => '98916'
+                                                              },
+                                                       '1' => {
+                                                                'name' => 'tid',
+                                                                'type' => '96470'
+                                                              },
+                                                       '2' => {
+                                                                'name' => 'eid',
+                                                                'type' => '98632'
+                                                              }
+                                                     },
+                                          'Reg' => {
+                                                     '0' => 'rdi',
+                                                     '1' => 'rsi',
+                                                     '2' => 'rdx'
+                                                   },
+                                          'Return' => '74',
+                                          'ShortName' => 'pldm_transport_mctp_demux_unmap_tid',
+                                          'Source' => 'mctp-demux.c',
+                                          'SourceLine' => '103'
+                                        },
+                            '107961' => {
+                                          'Header' => 'mctp-demux.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 't',
+                                                                'type' => '98958'
+                                                              },
+                                                       '1' => {
+                                                                'name' => 'pollfd',
+                                                                'type' => '101687'
+                                                              }
+                                                     },
+                                          'Reg' => {
+                                                     '0' => 'rdi',
+                                                     '1' => 'rsi'
+                                                   },
+                                          'Return' => '74',
+                                          'ShortName' => 'pldm_transport_mctp_demux_init_pollfd',
+                                          'Source' => 'mctp-demux.c',
+                                          'SourceLine' => '69'
+                                        },
                             '10979' => {
                                          'Header' => 'bios.h',
                                          'Param' => {
@@ -299,6 +473,23 @@ $VAR1 = {
                                          'Source' => 'bios.c',
                                          'SourceLine' => '93'
                                        },
+                            '112800' => {
+                                          'Header' => 'transport.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 'transport',
+                                                                'type' => '98958'
+                                                              },
+                                                       '1' => {
+                                                                'name' => 'timeout',
+                                                                'type' => '74'
+                                                              }
+                                                     },
+                                          'Return' => '74',
+                                          'ShortName' => 'pldm_transport_poll',
+                                          'Source' => 'transport.c',
+                                          'SourceLine' => '33'
+                                        },
                             '11471' => {
                                          'Header' => 'bios.h',
                                          'Param' => {
@@ -2468,6 +2659,68 @@ $VAR1 = {
                                          'ShortName' => 'decode_pldm_pdr_repository_change_record_data',
                                          'Source' => 'platform.c',
                                          'SourceLine' => '1969'
+                                       },
+                            '21983' => {
+                                         'Header' => 'platform.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'format_version',
+                                                               'type' => '173'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'event_id',
+                                                               'type' => '5485'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'data_transfer_handle',
+                                                               'type' => '185'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'event_data',
+                                                               'type' => '2049'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'event_data_length',
+                                                               'type' => '123'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'encode_pldm_message_poll_event_data',
+                                         'Source' => 'platform.c',
+                                         'SourceLine' => '1938'
+                                       },
+                            '22429' => {
+                                         'Header' => 'platform.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'event_data',
+                                                               'type' => '6677'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'event_data_length',
+                                                               'type' => '123'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'format_version',
+                                                               'type' => '2049'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'event_id',
+                                                               'type' => '9116'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'data_transfer_handle',
+                                                               'type' => '2054'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '2' => 'rbp',
+                                                    '3' => 'r12'
+                                                  },
+                                         'Return' => '74',
+                                         'ShortName' => 'decode_pldm_message_poll_event_data',
+                                         'Source' => 'platform.c',
+                                         'SourceLine' => '1901'
                                        },
                             '2258' => {
                                         'Header' => 'base.h',
@@ -7790,6 +8043,31 @@ $VAR1 = {
                                          'Source' => 'pdr.c',
                                          'SourceLine' => '1154'
                                        },
+                            '84679' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'repo',
+                                                               'type' => '84802'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'first',
+                                                               'type' => '185'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'last',
+                                                               'type' => '185'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '1' => 'rsi',
+                                                    '2' => 'rdx'
+                                                  },
+                                         'Return' => '83266',
+                                         'ShortName' => 'pldm_pdr_find_last_in_range',
+                                         'Source' => 'pdr.c',
+                                         'SourceLine' => '1102'
+                                       },
                             '84807' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
@@ -7847,6 +8125,52 @@ $VAR1 = {
                                          'ShortName' => 'pldm_find_entity_ref_in_tree',
                                          'Source' => 'pdr.c',
                                          'SourceLine' => '988'
+                                       },
+                            '85617' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'node',
+                                                               'type' => '83271'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'repo',
+                                                               'type' => '85056'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'entities',
+                                                               'type' => '83664'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'num_entities',
+                                                               'type' => '123'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'is_remote',
+                                                               'type' => '6812'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'terminus_handle',
+                                                               'type' => '5485'
+                                                             },
+                                                      '6' => {
+                                                               'name' => 'record_handle',
+                                                               'offset' => '0',
+                                                               'type' => '185'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '0' => 'rdi',
+                                                    '1' => 'rsi',
+                                                    '2' => 'rdx',
+                                                    '3' => 'rcx',
+                                                    '4' => 'r8',
+                                                    '5' => 'r9'
+                                                  },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_entity_association_pdr_add_from_node_with_record_handle',
+                                         'Source' => 'pdr.c',
+                                         'SourceLine' => '946'
                                        },
                             '85850' => {
                                          'Header' => 'pdr.h',
@@ -8096,6 +8420,49 @@ $VAR1 = {
                                          'Source' => 'pdr.c',
                                          'SourceLine' => '651'
                                        },
+                            '89280' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'tree',
+                                                               'type' => '83733'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'entity',
+                                                               'type' => '83669'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'entity_instance_number',
+                                                               'type' => '5485'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'parent',
+                                                               'type' => '83271'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'association_type',
+                                                               'type' => '173'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'is_remote',
+                                                               'type' => '6812'
+                                                             },
+                                                      '6' => {
+                                                               'name' => 'is_update_container_id',
+                                                               'offset' => '0',
+                                                               'type' => '6812'
+                                                             },
+                                                      '7' => {
+                                                               'name' => 'container_id',
+                                                               'offset' => '8',
+                                                               'type' => '5485'
+                                                             }
+                                                    },
+                                         'Return' => '83271',
+                                         'ShortName' => 'pldm_entity_association_tree_add_entity',
+                                         'Source' => 'pdr.c',
+                                         'SourceLine' => '520'
+                                       },
                             '8974' => {
                                         'Header' => 'bios.h',
                                         'Param' => {
@@ -8167,6 +8534,19 @@ $VAR1 = {
                                          'Source' => 'pdr.c',
                                          'SourceLine' => '473'
                                        },
+                            '90290' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'entity',
+                                                               'type' => '90424'
+                                                             }
+                                                    },
+                                         'Return' => '5485',
+                                         'ShortName' => 'pldm_entity_node_get_remote_container_id',
+                                         'Source' => 'pdr.c',
+                                         'SourceLine' => '465'
+                                       },
                             '90450' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
@@ -8179,6 +8559,52 @@ $VAR1 = {
                                          'ShortName' => 'pldm_entity_extract',
                                          'Source' => 'pdr.c',
                                          'SourceLine' => '456'
+                                       },
+                            '90803' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'repo',
+                                                               'type' => '84802'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'entity_type',
+                                                               'type' => '5485'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'entity_instance',
+                                                               'type' => '5485'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'child_index',
+                                                               'type' => '173'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'range_exclude_start_handle',
+                                                               'type' => '185'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'range_exclude_end_handle',
+                                                               'type' => '185'
+                                                             },
+                                                      '6' => {
+                                                               'name' => 'container_id',
+                                                               'offset' => '0',
+                                                               'type' => '9116'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '0' => 'rdi',
+                                                    '1' => 'rsi',
+                                                    '2' => 'rdx',
+                                                    '3' => 'rcx',
+                                                    '4' => 'r8',
+                                                    '5' => 'r9'
+                                                  },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_pdr_find_child_container_id_index_range_exclude',
+                                         'Source' => 'pdr.c',
+                                         'SourceLine' => '381'
                                        },
                             '91245' => {
                                          'Header' => 'pdr.h',
@@ -8845,6 +9271,192 @@ $VAR1 = {
                                         'Source' => 'bios.c',
                                         'SourceLine' => '251'
                                       },
+                            '98921' => {
+                                         'Header' => 'transport.h',
+                                         'Line' => '52',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'transport',
+                                                               'type' => '98958'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '96470'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'pldm_req_msg',
+                                                               'type' => '5228'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'req_msg_len',
+                                                               'type' => '123'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '0' => 'rdi',
+                                                    '1' => 'rsi',
+                                                    '2' => 'rdx',
+                                                    '3' => 'rcx'
+                                                  },
+                                         'Return' => '98747',
+                                         'ShortName' => 'pldm_transport_send_msg',
+                                         'Source' => 'transport.c',
+                                         'SourceLine' => '61'
+                                       },
+                            '98968' => {
+                                         'Header' => 'transport.h',
+                                         'Line' => '119',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'transport',
+                                                               'type' => '98958'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '96470'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'pldm_req_msg',
+                                                               'type' => '5228'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'req_msg_len',
+                                                               'type' => '123'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'pldm_resp_msg',
+                                                               'type' => '17655'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'resp_msg_len',
+                                                               'type' => '9679'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '2' => 'r15'
+                                                  },
+                                         'Return' => '98747',
+                                         'ShortName' => 'pldm_transport_send_recv_msg',
+                                         'Source' => 'transport.c',
+                                         'SourceLine' => '146'
+                                       },
+                            '99044' => {
+                                         'Header' => 'mctp-demux.h',
+                                         'Line' => '18',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '98916'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '0' => 'rdi'
+                                                  },
+                                         'Return' => '1',
+                                         'ShortName' => 'pldm_transport_mctp_demux_destroy',
+                                         'Source' => 'mctp-demux.c',
+                                         'SourceLine' => '234'
+                                       },
+                            '99062' => {
+                                         'Header' => 'transport.h',
+                                         'Line' => '81',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'transport',
+                                                               'type' => '98958'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '96470'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'pldm_resp_msg',
+                                                               'type' => '17655'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'resp_msg_len',
+                                                               'type' => '9679'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '0' => 'rdi',
+                                                    '1' => 'rsi',
+                                                    '2' => 'rbp',
+                                                    '3' => 'rcx'
+                                                  },
+                                         'Return' => '98747',
+                                         'ShortName' => 'pldm_transport_recv_msg',
+                                         'Source' => 'transport.c',
+                                         'SourceLine' => '78'
+                                       },
+                            '99099' => {
+                                         'Header' => 'mctp-demux.h',
+                                         'Line' => '32',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '98916'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '96470'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'eid',
+                                                               'type' => '98632'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '0' => 'rdi',
+                                                    '1' => 'rsi',
+                                                    '2' => 'rdx'
+                                                  },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_transport_mctp_demux_map_tid',
+                                         'Source' => 'mctp-demux.c',
+                                         'SourceLine' => '94'
+                                       },
+                            '99131' => {
+                                         'Header' => 'mctp-demux.h',
+                                         'Line' => '22',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '98916'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '0' => 'rdi'
+                                                  },
+                                         'Return' => '98958',
+                                         'ShortName' => 'pldm_transport_mctp_demux_core',
+                                         'Source' => 'mctp-demux.c',
+                                         'SourceLine' => '36'
+                                       },
+                            '99175' => {
+                                         'Header' => 'mctp-demux.h',
+                                         'Line' => '15',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '99197'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '0' => 'r12'
+                                                  },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_transport_mctp_demux_init',
+                                         'Source' => 'mctp-demux.c',
+                                         'SourceLine' => '200'
+                                       },
+                            '99256' => {
+                                         'Header' => 'pldm.h',
+                                         'Return' => '1',
+                                         'ShortName' => 'pldm_close',
+                                         'Source' => 'pldm.c',
+                                         'SourceLine' => '182'
+                                       },
                             '99300' => {
                                          'Header' => 'pldm.h',
                                          'Param' => {
@@ -8985,6 +9597,7 @@ $VAR1 = {
                                                  'decode_platform_event_message_req' => 1,
                                                  'decode_platform_event_message_resp' => 1,
                                                  'decode_pldm_comp_image_info' => 1,
+                                                 'decode_pldm_message_poll_event_data' => 1,
                                                  'decode_pldm_package_header_info' => 1,
                                                  'decode_pldm_pdr_repository_change_record_data' => 1,
                                                  'decode_pldm_pdr_repository_chg_event_data' => 1,
@@ -9079,6 +9692,7 @@ $VAR1 = {
                                                  'encode_platform_event_message_req' => 1,
                                                  'encode_platform_event_message_resp' => 1,
                                                  'encode_pldm_header_only' => 1,
+                                                 'encode_pldm_message_poll_event_data' => 1,
                                                  'encode_pldm_pdr_repository_chg_event_data' => 1,
                                                  'encode_poll_for_platform_event_message_req' => 1,
                                                  'encode_poll_for_platform_event_message_resp' => 1,
@@ -9174,11 +9788,14 @@ $VAR1 = {
                                                  'pldm_bios_table_string_entry_encode_length' => 1,
                                                  'pldm_bios_table_string_find_by_handle' => 1,
                                                  'pldm_bios_table_string_find_by_string' => 1,
+                                                 'pldm_close' => 1,
                                                  'pldm_entity_association_pdr_add' => 1,
                                                  'pldm_entity_association_pdr_add_check' => 1,
                                                  'pldm_entity_association_pdr_add_from_node_check' => 1,
+                                                 'pldm_entity_association_pdr_add_from_node_with_record_handle' => 1,
                                                  'pldm_entity_association_pdr_extract' => 1,
                                                  'pldm_entity_association_tree_add' => 1,
+                                                 'pldm_entity_association_tree_add_entity' => 1,
                                                  'pldm_entity_association_tree_copy_root' => 1,
                                                  'pldm_entity_association_tree_destroy' => 1,
                                                  'pldm_entity_association_tree_destroy_root' => 1,
@@ -9191,6 +9808,7 @@ $VAR1 = {
                                                  'pldm_entity_get_parent' => 1,
                                                  'pldm_entity_is_exist_parent' => 1,
                                                  'pldm_entity_is_node_parent' => 1,
+                                                 'pldm_entity_node_get_remote_container_id' => 1,
                                                  'pldm_find_entity_ref_in_tree' => 1,
                                                  'pldm_instance_db_destroy' => 1,
                                                  'pldm_instance_db_init' => 1,
@@ -9203,6 +9821,8 @@ $VAR1 = {
                                                  'pldm_pdr_add_check' => 1,
                                                  'pldm_pdr_add_fru_record_set_check' => 1,
                                                  'pldm_pdr_destroy' => 1,
+                                                 'pldm_pdr_find_child_container_id_index_range_exclude' => 1,
+                                                 'pldm_pdr_find_last_in_range' => 1,
                                                  'pldm_pdr_find_record' => 1,
                                                  'pldm_pdr_find_record_by_type' => 1,
                                                  'pldm_pdr_fru_record_set_find_by_rsi' => 1,
@@ -9219,6 +9839,28 @@ $VAR1 = {
                                                  'pldm_recv_any' => 1,
                                                  'pldm_send' => 1,
                                                  'pldm_send_recv' => 1,
+                                                 'pldm_transport_af_mctp_core' => 1,
+                                                 'pldm_transport_af_mctp_destroy' => 1,
+                                                 'pldm_transport_af_mctp_init' => 1,
+                                                 'pldm_transport_af_mctp_init_pollfd' => 1,
+                                                 'pldm_transport_af_mctp_map_tid' => 1,
+                                                 'pldm_transport_af_mctp_unmap_tid' => 1,
+                                                 'pldm_transport_mctp_demux_core' => 1,
+                                                 'pldm_transport_mctp_demux_destroy' => 1,
+                                                 'pldm_transport_mctp_demux_get_socket_fd' => 1,
+                                                 'pldm_transport_mctp_demux_init' => 1,
+                                                 'pldm_transport_mctp_demux_init_pollfd' => 1,
+                                                 'pldm_transport_mctp_demux_init_with_fd' => 1,
+                                                 'pldm_transport_mctp_demux_map_tid' => 1,
+                                                 'pldm_transport_mctp_demux_unmap_tid' => 1,
+                                                 'pldm_transport_poll' => 1,
+                                                 'pldm_transport_recv_msg' => 1,
+                                                 'pldm_transport_send_msg' => 1,
+                                                 'pldm_transport_send_recv_msg' => 1,
+                                                 'pldm_transport_test_core' => 1,
+                                                 'pldm_transport_test_destroy' => 1,
+                                                 'pldm_transport_test_init' => 1,
+                                                 'pldm_transport_test_init_pollfd' => 1,
                                                  'unpack_pldm_header' => 1,
                                                  'ver2str' => 1
                                                }
@@ -9229,11 +9871,169 @@ $VAR1 = {
                                    'Name' => 'void',
                                    'Type' => 'Intrinsic'
                                  },
+                          '101441' => {
+                                        'Header' => 'socket.h',
+                                        'Line' => '4',
+                                        'Memb' => {
+                                                    '0' => {
+                                                             'name' => 'size',
+                                                             'offset' => '0',
+                                                             'type' => '74'
+                                                           },
+                                                    '1' => {
+                                                             'name' => 'socket',
+                                                             'offset' => '4',
+                                                             'type' => '74'
+                                                           },
+                                                    '2' => {
+                                                             'name' => 'max_size',
+                                                             'offset' => '8',
+                                                             'type' => '74'
+                                                           }
+                                                  },
+                                        'Name' => 'struct pldm_socket_sndbuf',
+                                        'PrivateABI' => 1,
+                                        'Size' => '12',
+                                        'Type' => 'Struct'
+                                      },
+                          '101621' => {
+                                        'Name' => 'pldm_requester_rc_t(*)(struct pldm_transport*, pldm_tid_t, void**, size_t*)',
+                                        'Param' => {
+                                                     '0' => {
+                                                              'type' => '98958'
+                                                            },
+                                                     '1' => {
+                                                              'type' => '96470'
+                                                            },
+                                                     '2' => {
+                                                              'type' => '17655'
+                                                            },
+                                                     '3' => {
+                                                              'type' => '9679'
+                                                            }
+                                                   },
+                                        'Return' => '98747',
+                                        'Size' => '8',
+                                        'Type' => 'FuncPtr'
+                                      },
+                          '101662' => {
+                                        'Name' => 'pldm_requester_rc_t(*)(struct pldm_transport*, pldm_tid_t, void const*, size_t)',
+                                        'Param' => {
+                                                     '0' => {
+                                                              'type' => '98958'
+                                                            },
+                                                     '1' => {
+                                                              'type' => '96470'
+                                                            },
+                                                     '2' => {
+                                                              'type' => '5228'
+                                                            },
+                                                     '3' => {
+                                                              'type' => '123'
+                                                            }
+                                                   },
+                                        'Return' => '98747',
+                                        'Size' => '8',
+                                        'Type' => 'FuncPtr'
+                                      },
+                          '101687' => {
+                                        'BaseType' => '101692',
+                                        'Name' => 'struct pollfd*',
+                                        'Size' => '8',
+                                        'Type' => 'Pointer'
+                                      },
+                          '101692' => {
+                                        'Header' => 'poll.h',
+                                        'Line' => '36',
+                                        'Memb' => {
+                                                    '0' => {
+                                                             'name' => 'fd',
+                                                             'offset' => '0',
+                                                             'type' => '74'
+                                                           },
+                                                    '1' => {
+                                                             'name' => 'events',
+                                                             'offset' => '4',
+                                                             'type' => '60'
+                                                           },
+                                                    '2' => {
+                                                             'name' => 'revents',
+                                                             'offset' => '6',
+                                                             'type' => '60'
+                                                           }
+                                                  },
+                                        'Name' => 'struct pollfd',
+                                        'PrivateABI' => 1,
+                                        'Size' => '8',
+                                        'Type' => 'Struct'
+                                      },
+                          '101743' => {
+                                        'Name' => 'int(*)(struct pldm_transport*, struct pollfd*)',
+                                        'Param' => {
+                                                     '0' => {
+                                                              'type' => '98958'
+                                                            },
+                                                     '1' => {
+                                                              'type' => '101687'
+                                                            }
+                                                   },
+                                        'Return' => '74',
+                                        'Size' => '8',
+                                        'Type' => 'FuncPtr'
+                                      },
                           '102' => {
                                      'Name' => 'unsigned long',
                                      'Size' => '8',
                                      'Type' => 'Intrinsic'
                                    },
+                          '102226' => {
+                                        'Line' => '21',
+                                        'Memb' => {
+                                                    '0' => {
+                                                             'name' => 'transport',
+                                                             'offset' => '0',
+                                                             'type' => '98963'
+                                                           },
+                                                    '1' => {
+                                                             'name' => 'socket',
+                                                             'offset' => '64',
+                                                             'type' => '74'
+                                                           },
+                                                    '2' => {
+                                                             'name' => 'tid_eid_map',
+                                                             'offset' => '68',
+                                                             'type' => '102294'
+                                                           },
+                                                    '3' => {
+                                                             'name' => 'socket_send_buf',
+                                                             'offset' => '768',
+                                                             'type' => '101441'
+                                                           }
+                                                  },
+                                        'Name' => 'struct pldm_transport_af_mctp',
+                                        'PrivateABI' => 1,
+                                        'Size' => '312',
+                                        'Source' => 'af-mctp.c',
+                                        'Type' => 'Struct'
+                                      },
+                          '102294' => {
+                                        'BaseType' => '96470',
+                                        'Name' => 'pldm_tid_t[256]',
+                                        'Size' => '256',
+                                        'Type' => 'Array'
+                                      },
+                          '102754' => {
+                                        'BaseType' => '102226',
+                                        'Name' => 'struct pldm_transport_af_mctp*',
+                                        'Size' => '8',
+                                        'Type' => 'Pointer'
+                                      },
+                          '102983' => {
+                                        'BaseType' => '102754',
+                                        'Name' => 'struct pldm_transport_af_mctp**',
+                                        'Size' => '8',
+                                        'Type' => 'Pointer'
+                                      },
                           '109' => {
                                      'Name' => 'long',
                                      'Size' => '8',
@@ -11524,6 +12324,12 @@ $VAR1 = {
                                        'Size' => '40',
                                        'Type' => 'Typedef'
                                      },
+                          '82493' => {
+                                       'BaseType' => '82481',
+                                       'Name' => 'pldm_entity_node const',
+                                       'Size' => '40',
+                                       'Type' => 'Const'
+                                     },
                           '82498' => {
                                        'Line' => '438',
                                        'Memb' => {
@@ -11689,6 +12495,12 @@ $VAR1 = {
                                      'Size' => '8',
                                      'Type' => 'Struct'
                                    },
+                          '90424' => {
+                                       'BaseType' => '82493',
+                                       'Name' => 'pldm_entity_node const*',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
+                                     },
                           '9116' => {
                                       'BaseType' => '5485',
                                       'Name' => 'uint16_t*',
@@ -11873,6 +12685,88 @@ $VAR1 = {
                                        'Name' => 'pldm_requester_rc_t',
                                        'Size' => '4',
                                        'Type' => 'Typedef'
+                                     },
+                          '98890' => {
+                                       'Line' => '22',
+                                       'Memb' => {
+                                                   '0' => {
+                                                            'name' => 'transport',
+                                                            'offset' => '0',
+                                                            'type' => '98963'
+                                                          },
+                                                   '1' => {
+                                                            'name' => 'socket',
+                                                            'offset' => '64',
+                                                            'type' => '74'
+                                                          },
+                                                   '2' => {
+                                                            'name' => 'tid_eid_map',
+                                                            'offset' => '68',
+                                                            'type' => '102294'
+                                                          },
+                                                   '3' => {
+                                                            'name' => 'socket_send_buf',
+                                                            'offset' => '768',
+                                                            'type' => '101441'
+                                                          }
+                                                 },
+                                       'Name' => 'struct pldm_transport_mctp_demux',
+                                       'PrivateABI' => 1,
+                                       'Size' => '312',
+                                       'Source' => 'mctp-demux.c',
+                                       'Type' => 'Struct'
+                                     },
+                          '98916' => {
+                                       'BaseType' => '98890',
+                                       'Name' => 'struct pldm_transport_mctp_demux*',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
+                                     },
+                          '98958' => {
+                                       'BaseType' => '98963',
+                                       'Name' => 'struct pldm_transport*',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
+                                     },
+                          '98963' => {
+                                       'Header' => 'transport.h',
+                                       'Line' => '17',
+                                       'Memb' => {
+                                                   '0' => {
+                                                            'name' => 'name',
+                                                            'offset' => '0',
+                                                            'type' => '13269'
+                                                          },
+                                                   '1' => {
+                                                            'name' => 'version',
+                                                            'offset' => '8',
+                                                            'type' => '173'
+                                                          },
+                                                   '2' => {
+                                                            'name' => 'recv',
+                                                            'offset' => '22',
+                                                            'type' => '101621'
+                                                          },
+                                                   '3' => {
+                                                            'name' => 'send',
+                                                            'offset' => '36',
+                                                            'type' => '101662'
+                                                          },
+                                                   '4' => {
+                                                            'name' => 'init_pollfd',
+                                                            'offset' => '50',
+                                                            'type' => '101743'
+                                                          }
+                                                 },
+                                       'Name' => 'struct pldm_transport',
+                                       'Size' => '40',
+                                       'Type' => 'Struct'
+                                     },
+                          '99197' => {
+                                       'BaseType' => '98916',
+                                       'Name' => 'struct pldm_transport_mctp_demux**',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
                                      }
                         },
           'UndefinedSymbols' => {
