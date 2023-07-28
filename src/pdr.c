@@ -1150,7 +1150,7 @@ static void entity_association_tree_find_if_remote(pldm_entity_node *node,
 					       is_remote);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 pldm_entity_node *
 pldm_entity_association_tree_find_if_remote(pldm_entity_association_tree *tree,
 					    pldm_entity *entity, bool is_remote)
