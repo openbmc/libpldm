@@ -540,10 +540,9 @@ pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
  *
  *  @return pldm_entity_node* pointer to entity if found, NULL otherwise
  */
-pldm_entity_node *
-pldm_entity_association_tree_find_if_remote(pldm_entity_association_tree *tree,
-					    pldm_entity *entity,
-					    bool is_remote);
+pldm_entity_node *pldm_entity_association_tree_find_with_locality(
+	pldm_entity_association_tree *tree, pldm_entity *entity,
+	bool is_remote);
 
 /** @brief Create a copy of an existing entity association tree
  *
