@@ -6523,6 +6523,45 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'decode_get_bios_attribute_current_value_by_handle_resp'
                                       },
+                            '83121' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'tree',
+                                                               'type' => '77663'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'entity',
+                                                               'type' => '77593'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'entity_instance_number',
+                                                               'type' => '4895'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'parent',
+                                                               'type' => '77163'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'association_type',
+                                                               'type' => '168'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'is_remote',
+                                                               'type' => '6265'
+                                                             },
+                                                      '6' => {
+                                                               'name' => 'is_update_container_id',
+                                                               'type' => '6265'
+                                                             },
+                                                      '7' => {
+                                                               'name' => 'container_id',
+                                                               'type' => '4895'
+                                                             }
+                                                    },
+                                         'Return' => '77163',
+                                         'ShortName' => 'pldm_entity_association_tree_add_entity'
+                                       },
                             '83611' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
@@ -7565,6 +7604,7 @@ $VAR1 = {
                                                  'pldm_entity_association_pdr_add_from_node_check' => 1,
                                                  'pldm_entity_association_pdr_extract' => 1,
                                                  'pldm_entity_association_tree_add' => 1,
+                                                 'pldm_entity_association_tree_add_entity' => 1,
                                                  'pldm_entity_association_tree_copy_root' => 1,
                                                  'pldm_entity_association_tree_destroy' => 1,
                                                  'pldm_entity_association_tree_destroy_root' => 1,
