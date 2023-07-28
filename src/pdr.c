@@ -516,7 +516,7 @@ pldm_entity_node *pldm_entity_association_tree_add(
 						       false, true, 0xFFFF);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 pldm_entity_node *pldm_entity_association_tree_add_entity(
 	pldm_entity_association_tree *tree, pldm_entity *entity,
 	uint16_t entity_instance_number, pldm_entity_node *parent,
