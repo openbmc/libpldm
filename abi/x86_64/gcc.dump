@@ -354,7 +354,55 @@ $VAR1 = {
                                          'Source' => 'bios.c',
                                          'SourceLine' => '59'
                                        },
-                            '114851' => {
+                            '11672' => {
+                                         'Header' => 'bios.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'instance_id',
+                                                               'type' => '173'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'completion_code',
+                                                               'type' => '173'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'seconds',
+                                                               'type' => '173'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'minutes',
+                                                               'type' => '173'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'hours',
+                                                               'type' => '173'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'day',
+                                                               'type' => '173'
+                                                             },
+                                                      '6' => {
+                                                               'name' => 'month',
+                                                               'offset' => '0',
+                                                               'type' => '173'
+                                                             },
+                                                      '7' => {
+                                                               'name' => 'year',
+                                                               'offset' => '8',
+                                                               'type' => '5485'
+                                                             },
+                                                      '8' => {
+                                                               'name' => 'msg',
+                                                               'offset' => '16',
+                                                               'type' => '1599'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'encode_get_date_time_resp',
+                                         'Source' => 'bios.c',
+                                         'SourceLine' => '23'
+                                       },
+                            '117129' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -375,7 +423,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '1075'
                                         },
-                            '115051' => {
+                            '117329' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -430,7 +478,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '1045'
                                         },
-                            '115283' => {
+                            '117561' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -456,7 +504,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '1021'
                                         },
-                            '115384' => {
+                            '117662' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -507,7 +555,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '985'
                                         },
-                            '115681' => {
+                            '117959' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -528,7 +576,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '959'
                                         },
-                            '115876' => {
+                            '118154' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -583,7 +631,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '931'
                                         },
-                            '116088' => {
+                            '118366' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -609,7 +657,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '911'
                                         },
-                            '116184' => {
+                            '118462' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -660,7 +708,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '877'
                                         },
-                            '116481' => {
+                            '118759' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -686,7 +734,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '858'
                                         },
-                            '116582' => {
+                            '118860' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -715,55 +763,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '830'
                                         },
-                            '11672' => {
-                                         'Header' => 'bios.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'instance_id',
-                                                               'type' => '173'
-                                                             },
-                                                      '1' => {
-                                                               'name' => 'completion_code',
-                                                               'type' => '173'
-                                                             },
-                                                      '2' => {
-                                                               'name' => 'seconds',
-                                                               'type' => '173'
-                                                             },
-                                                      '3' => {
-                                                               'name' => 'minutes',
-                                                               'type' => '173'
-                                                             },
-                                                      '4' => {
-                                                               'name' => 'hours',
-                                                               'type' => '173'
-                                                             },
-                                                      '5' => {
-                                                               'name' => 'day',
-                                                               'type' => '173'
-                                                             },
-                                                      '6' => {
-                                                               'name' => 'month',
-                                                               'offset' => '0',
-                                                               'type' => '173'
-                                                             },
-                                                      '7' => {
-                                                               'name' => 'year',
-                                                               'offset' => '8',
-                                                               'type' => '5485'
-                                                             },
-                                                      '8' => {
-                                                               'name' => 'msg',
-                                                               'offset' => '16',
-                                                               'type' => '1599'
-                                                             }
-                                                    },
-                                         'Return' => '74',
-                                         'ShortName' => 'encode_get_date_time_resp',
-                                         'Source' => 'bios.c',
-                                         'SourceLine' => '23'
-                                       },
-                            '116817' => {
+                            '119095' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -784,7 +784,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '805'
                                         },
-                            '117007' => {
+                            '119285' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -819,7 +819,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '783'
                                         },
-                            '117149' => {
+                            '119427' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -850,7 +850,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '760'
                                         },
-                            '117264' => {
+                            '119542' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -888,7 +888,24 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '726'
                                         },
-                            '117534' => {
+                            '11955' => {
+                                         'Header' => 'bios.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'instance_id',
+                                                               'type' => '173'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'msg',
+                                                               'type' => '1599'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'encode_get_date_time_req',
+                                         'Source' => 'bios.c',
+                                         'SourceLine' => '8'
+                                       },
+                            '119812' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -917,7 +934,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '693'
                                         },
-                            '117764' => {
+                            '120042' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -957,7 +974,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '668'
                                         },
-                            '117926' => {
+                            '120204' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -983,7 +1000,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '649'
                                         },
-                            '118027' => {
+                            '120305' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1012,7 +1029,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '621'
                                         },
-                            '118262' => {
+                            '120540' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1033,7 +1050,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '596'
                                         },
-                            '118452' => {
+                            '120730' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1068,7 +1085,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '573'
                                         },
-                            '118594' => {
+                            '120872' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1099,7 +1116,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '549'
                                         },
-                            '118709' => {
+                            '120987' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1142,7 +1159,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '518'
                                         },
-                            '118994' => {
+                            '121272' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1171,7 +1188,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '489'
                                         },
-                            '119224' => {
+                            '121502' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1216,7 +1233,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '462'
                                         },
-                            '119401' => {
+                            '121679' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1241,24 +1258,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '433'
                                         },
-                            '11955' => {
-                                         'Header' => 'bios.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'instance_id',
-                                                               'type' => '173'
-                                                             },
-                                                      '1' => {
-                                                               'name' => 'msg',
-                                                               'type' => '1599'
-                                                             }
-                                                    },
-                                         'Return' => '74',
-                                         'ShortName' => 'encode_get_date_time_req',
-                                         'Source' => 'bios.c',
-                                         'SourceLine' => '8'
-                                       },
-                            '119616' => {
+                            '121894' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1289,7 +1289,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '410'
                                         },
-                            '119726' => {
+                            '122004' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1318,7 +1318,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '377'
                                         },
-                            '119961' => {
+                            '122239' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1357,7 +1357,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '349'
                                         },
-                            '120116' => {
+                            '122394' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1382,7 +1382,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '320'
                                         },
-                            '120331' => {
+                            '122609' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1417,7 +1417,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '292'
                                         },
-                            '120467' => {
+                            '122745' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1446,7 +1446,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '260'
                                         },
-                            '120702' => {
+                            '122980' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1481,7 +1481,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '236'
                                         },
-                            '120837' => {
+                            '123115' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1526,7 +1526,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '198'
                                         },
-                            '121010' => {
+                            '123288' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1555,7 +1555,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '170'
                                         },
-                            '121236' => {
+                            '123514' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1596,7 +1596,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '137'
                                         },
-                            '121594' => {
+                            '123872' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1631,7 +1631,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '113'
                                         },
-                            '121729' => {
+                            '124007' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1662,7 +1662,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '90'
                                         },
-                            '121838' => {
+                            '124116' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1703,7 +1703,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '61'
                                         },
-                            '122097' => {
+                            '124375' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1732,7 +1732,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '32'
                                         },
-                            '122318' => {
+                            '124596' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1772,7 +1772,7 @@ $VAR1 = {
                                           'Source' => 'file_io.c',
                                           'SourceLine' => '7'
                                         },
-                            '123341' => {
+                            '125619' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1808,7 +1808,7 @@ $VAR1 = {
                                           'Source' => 'host.c',
                                           'SourceLine' => '82'
                                         },
-                            '123589' => {
+                            '125867' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1834,7 +1834,7 @@ $VAR1 = {
                                           'Source' => 'host.c',
                                           'SourceLine' => '65'
                                         },
-                            '123672' => {
+                            '125950' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1869,7 +1869,7 @@ $VAR1 = {
                                           'Source' => 'host.c',
                                           'SourceLine' => '36'
                                         },
-                            '123811' => {
+                            '126089' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1894,7 +1894,7 @@ $VAR1 = {
                                           'Source' => 'host.c',
                                           'SourceLine' => '9'
                                         },
-                            '124847' => {
+                            '127125' => {
                                           'Header' => 'platform_oem_ibm.h',
                                           'Param' => {
                                                        '0' => {
@@ -4453,7 +4453,7 @@ $VAR1 = {
                                          'Return' => '6812',
                                          'ShortName' => 'pldm_bios_table_checksum',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '1204'
+                                         'SourceLine' => '1203'
                                        },
                             '51131' => {
                                          'Header' => 'bios_table.h',
@@ -4490,7 +4490,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_value_copy_and_update',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '1149'
+                                         'SourceLine' => '1148'
                                        },
                             '51819' => {
                                          'Header' => 'bios_table.h',
@@ -4514,7 +4514,7 @@ $VAR1 = {
                                          'Return' => '51814',
                                          'ShortName' => 'pldm_bios_table_attr_value_find_by_handle',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '1140'
+                                         'SourceLine' => '1139'
                                        },
                             '52082' => {
                                          'Header' => 'bios_table.h',
@@ -4538,7 +4538,7 @@ $VAR1 = {
                                          'Return' => '52229',
                                          'ShortName' => 'pldm_bios_table_attr_find_by_string_handle',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '1124'
+                                         'SourceLine' => '1123'
                                        },
                             '52350' => {
                                          'Header' => 'bios_table.h',
@@ -4562,7 +4562,7 @@ $VAR1 = {
                                          'Return' => '52229',
                                          'ShortName' => 'pldm_bios_table_attr_find_by_handle',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '1107'
+                                         'SourceLine' => '1106'
                                        },
                             '52613' => {
                                          'Header' => 'bios_table.h',
@@ -4588,7 +4588,7 @@ $VAR1 = {
                                          'Return' => '52835',
                                          'ShortName' => 'pldm_bios_table_string_find_by_string',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '1087'
+                                         'SourceLine' => '1086'
                                        },
                             '53004' => {
                                          'Header' => 'bios_table.h',
@@ -4612,7 +4612,7 @@ $VAR1 = {
                                          'Return' => '52835',
                                          'ShortName' => 'pldm_bios_table_string_find_by_handle',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '1057'
+                                         'SourceLine' => '1056'
                                        },
                             '53766' => {
                                          'Header' => 'bios_table.h',
@@ -4628,7 +4628,7 @@ $VAR1 = {
                                          'Return' => '5228',
                                          'ShortName' => 'pldm_bios_table_iter_value',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '1009'
+                                         'SourceLine' => '1008'
                                        },
                             '53815' => {
                                          'Header' => 'bios_table.h',
@@ -4641,7 +4641,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_bios_table_iter_next',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '994'
+                                         'SourceLine' => '993'
                                        },
                             '53926' => {
                                          'Header' => 'bios_table.h',
@@ -4654,7 +4654,7 @@ $VAR1 = {
                                          'Return' => '6812',
                                          'ShortName' => 'pldm_bios_table_iter_is_end',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '980'
+                                         'SourceLine' => '979'
                                        },
                             '54007' => {
                                          'Header' => 'bios_table.h',
@@ -4667,7 +4667,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_bios_table_iter_free',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '973'
+                                         'SourceLine' => '972'
                                        },
                             '54078' => {
                                          'Header' => 'bios_table.h',
@@ -4693,7 +4693,7 @@ $VAR1 = {
                                          'Return' => '51809',
                                          'ShortName' => 'pldm_bios_table_iter_create',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '945'
+                                         'SourceLine' => '944'
                                        },
                             '54317' => {
                                          'Header' => 'bios_table.h',
@@ -4719,7 +4719,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_append_pad_checksum_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '912'
+                                         'SourceLine' => '911'
                                        },
                             '54617' => {
                                          'Header' => 'bios_table.h',
@@ -4732,7 +4732,7 @@ $VAR1 = {
                                          'Return' => '123',
                                          'ShortName' => 'pldm_bios_table_pad_checksum_size',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '904'
+                                         'SourceLine' => '903'
                                        },
                             '54972' => {
                                          'Header' => 'bios_table.h',
@@ -4748,7 +4748,7 @@ $VAR1 = {
                                          'Return' => '5485',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_decode_handle',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '875'
+                                         'SourceLine' => '874'
                                        },
                             '55021' => {
                                          'Header' => 'bios_table.h',
@@ -4761,7 +4761,7 @@ $VAR1 = {
                                          'Return' => '123',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '868'
+                                         'SourceLine' => '867'
                                        },
                             '55505' => {
                                          'Header' => 'bios_table.h',
@@ -4777,7 +4777,7 @@ $VAR1 = {
                                          'Return' => '49579',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_integer_decode_cv',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '814'
+                                         'SourceLine' => '813'
                                        },
                             '55645' => {
                                          'Header' => 'bios_table.h',
@@ -4813,14 +4813,14 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_encode_integer_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '794'
+                                         'SourceLine' => '793'
                                        },
                             '55914' => {
                                          'Header' => 'bios_table.h',
                                          'Return' => '123',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_encode_integer_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '787'
+                                         'SourceLine' => '786'
                                        },
                             '56076' => {
                                          'Header' => 'bios_table.h',
@@ -4861,7 +4861,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_encode_string_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '750'
+                                         'SourceLine' => '749'
                                        },
                             '56476' => {
                                          'Header' => 'bios_table.h',
@@ -4878,7 +4878,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_string_decode_string',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '739'
+                                         'SourceLine' => '738'
                                        },
                             '56571' => {
                                          'Header' => 'bios_table.h',
@@ -4894,7 +4894,7 @@ $VAR1 = {
                                          'Return' => '5485',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_string_decode_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '730'
+                                         'SourceLine' => '729'
                                        },
                             '56712' => {
                                          'Header' => 'bios_table.h',
@@ -4910,7 +4910,7 @@ $VAR1 = {
                                          'Return' => '123',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_encode_string_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '723'
+                                         'SourceLine' => '722'
                                        },
                             '56894' => {
                                          'Header' => 'bios_table.h',
@@ -4948,7 +4948,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_encode_enum_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '686'
+                                         'SourceLine' => '685'
                                        },
                             '57213' => {
                                          'Header' => 'bios_table.h',
@@ -4972,7 +4972,7 @@ $VAR1 = {
                                          'Return' => '173',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_enum_decode_handles',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '673'
+                                         'SourceLine' => '672'
                                        },
                             '57460' => {
                                          'Header' => 'bios_table.h',
@@ -4988,7 +4988,7 @@ $VAR1 = {
                                          'Return' => '173',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_enum_decode_number',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '666'
+                                         'SourceLine' => '665'
                                        },
                             '57509' => {
                                          'Header' => 'bios_table.h',
@@ -5004,7 +5004,7 @@ $VAR1 = {
                                          'Return' => '123',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_encode_enum_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '659'
+                                         'SourceLine' => '658'
                                        },
                             '57558' => {
                                          'Header' => 'bios_table.h',
@@ -5020,7 +5020,7 @@ $VAR1 = {
                                          'Return' => '173',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_decode_attribute_type',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '652'
+                                         'SourceLine' => '651'
                                        },
                             '57607' => {
                                          'Header' => 'bios_table.h',
@@ -5036,7 +5036,7 @@ $VAR1 = {
                                          'Return' => '5485',
                                          'ShortName' => 'pldm_bios_table_attr_value_entry_decode_attribute_handle',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '645'
+                                         'SourceLine' => '644'
                                        },
                             '58154' => {
                                          'Header' => 'bios_table.h',
@@ -5072,7 +5072,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_bios_table_attr_entry_integer_decode',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '567'
+                                         'SourceLine' => '568'
                                        },
                             '58290' => {
                                          'Header' => 'bios_table.h',
@@ -5098,7 +5098,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_integer_encode_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '537'
+                                         'SourceLine' => '538'
                                        },
                             '58562' => {
                                          'Header' => 'bios_table.h',
@@ -5115,14 +5115,14 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_integer_info_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '497'
+                                         'SourceLine' => '498'
                                        },
                             '58866' => {
                                          'Header' => 'bios_table.h',
                                          'Return' => '123',
                                          'ShortName' => 'pldm_bios_table_attr_entry_integer_encode_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '490'
+                                         'SourceLine' => '491'
                                        },
                             '59028' => {
                                          'Header' => 'bios_table.h',
@@ -5143,7 +5143,7 @@ $VAR1 = {
                                          'Return' => '5485',
                                          'ShortName' => 'pldm_bios_table_attr_entry_string_decode_def_string',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '452'
+                                         'SourceLine' => '453'
                                        },
                             '59297' => {
                                          'Header' => 'bios_table.h',
@@ -5159,7 +5159,7 @@ $VAR1 = {
                                          'Return' => '5485',
                                          'ShortName' => 'pldm_bios_table_attr_entry_string_decode_min_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '443'
+                                         'SourceLine' => '444'
                                        },
                             '59366' => {
                                          'Header' => 'bios_table.h',
@@ -5175,7 +5175,7 @@ $VAR1 = {
                                          'Return' => '5485',
                                          'ShortName' => 'pldm_bios_table_attr_entry_string_decode_max_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '434'
+                                         'SourceLine' => '435'
                                        },
                             '59435' => {
                                          'Header' => 'bios_table.h',
@@ -5191,7 +5191,7 @@ $VAR1 = {
                                          'Return' => '173',
                                          'ShortName' => 'pldm_bios_table_attr_entry_string_decode_string_type',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '425'
+                                         'SourceLine' => '426'
                                        },
                             '59504' => {
                                          'Header' => 'bios_table.h',
@@ -5212,7 +5212,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_string_decode_def_string_length_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '411'
+                                         'SourceLine' => '412'
                                        },
                             '59674' => {
                                          'Header' => 'bios_table.h',
@@ -5237,7 +5237,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_string_encode_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '368'
+                                         'SourceLine' => '369'
                                        },
                             '60038' => {
                                          'Header' => 'bios_table.h',
@@ -5257,7 +5257,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_string_info_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '334'
+                                         'SourceLine' => '335'
                                        },
                             '60307' => {
                                          'Header' => 'bios_table.h',
@@ -5273,7 +5273,7 @@ $VAR1 = {
                                          'Return' => '123',
                                          'ShortName' => 'pldm_bios_table_attr_entry_string_encode_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '321'
+                                         'SourceLine' => '322'
                                        },
                             '60539' => {
                                          'Header' => 'bios_table.h',
@@ -5294,7 +5294,7 @@ $VAR1 = {
                                          'Return' => '173',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_decode_def_indices',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '282'
+                                         'SourceLine' => '283'
                                        },
                             '60818' => {
                                          'Header' => 'bios_table.h',
@@ -5320,7 +5320,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_decode_pv_hdls_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '263'
+                                         'SourceLine' => '264'
                                        },
                             '60983' => {
                                          'Header' => 'bios_table.h',
@@ -5341,7 +5341,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_decode_def_num_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '252'
+                                         'SourceLine' => '253'
                                        },
                             '61142' => {
                                          'Header' => 'bios_table.h',
@@ -5362,7 +5362,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_decode_pv_num_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '233'
+                                         'SourceLine' => '234'
                                        },
                             '61202' => {
                                          'Header' => 'bios_table.h',
@@ -5387,7 +5387,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_encode_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '194'
+                                         'SourceLine' => '195'
                                        },
                             '61536' => {
                                          'Header' => 'bios_table.h',
@@ -5408,7 +5408,7 @@ $VAR1 = {
                                          'Return' => '123',
                                          'ShortName' => 'pldm_bios_table_attr_entry_enum_encode_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '184'
+                                         'SourceLine' => '185'
                                        },
                             '61596' => {
                                          'Header' => 'bios_table.h',
@@ -5424,7 +5424,7 @@ $VAR1 = {
                                          'Return' => '5485',
                                          'ShortName' => 'pldm_bios_table_attr_entry_decode_string_handle',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '177'
+                                         'SourceLine' => '178'
                                        },
                             '61643' => {
                                          'Header' => 'bios_table.h',
@@ -5440,7 +5440,7 @@ $VAR1 = {
                                          'Return' => '173',
                                          'ShortName' => 'pldm_bios_table_attr_entry_decode_attribute_type',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '170'
+                                         'SourceLine' => '171'
                                        },
                             '61690' => {
                                          'Header' => 'bios_table.h',
@@ -5456,7 +5456,7 @@ $VAR1 = {
                                          'Return' => '5485',
                                          'ShortName' => 'pldm_bios_table_attr_entry_decode_attribute_handle',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '163'
+                                         'SourceLine' => '164'
                                        },
                             '62323' => {
                                          'Header' => 'bios_table.h',
@@ -5482,7 +5482,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_string_entry_decode_string_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '98'
+                                         'SourceLine' => '99'
                                        },
                             '62560' => {
                                          'Header' => 'bios_table.h',
@@ -5498,7 +5498,7 @@ $VAR1 = {
                                          'Return' => '5485',
                                          'ShortName' => 'pldm_bios_table_string_entry_decode_string_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '91'
+                                         'SourceLine' => '92'
                                        },
                             '62607' => {
                                          'Header' => 'bios_table.h',
@@ -5514,7 +5514,7 @@ $VAR1 = {
                                          'Return' => '5485',
                                          'ShortName' => 'pldm_bios_table_string_entry_decode_handle',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '84'
+                                         'SourceLine' => '85'
                                        },
                             '62654' => {
                                          'Header' => 'bios_table.h',
@@ -5539,7 +5539,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_bios_table_string_entry_encode_check',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '60'
+                                         'SourceLine' => '61'
                                        },
                             '63015' => {
                                          'Header' => 'bios_table.h',
@@ -5555,7 +5555,7 @@ $VAR1 = {
                                          'Return' => '123',
                                          'ShortName' => 'pldm_bios_table_string_entry_encode_length',
                                          'Source' => 'bios_table.c',
-                                         'SourceLine' => '53'
+                                         'SourceLine' => '54'
                                        },
                             '6682' => {
                                         'Header' => 'utils.h',
@@ -7769,6 +7769,27 @@ $VAR1 = {
                                          'Source' => 'pdr.c',
                                          'SourceLine' => '1187'
                                        },
+                            '84300' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'tree',
+                                                               'type' => '83736'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'entity',
+                                                               'type' => '83672'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'is_remote',
+                                                               'type' => '6812'
+                                                             }
+                                                    },
+                                         'Return' => '83274',
+                                         'ShortName' => 'pldm_entity_association_tree_find_with_locality',
+                                         'Source' => 'pdr.c',
+                                         'SourceLine' => '1155'
+                                       },
                             '84810' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
@@ -9162,6 +9183,7 @@ $VAR1 = {
                                                  'pldm_entity_association_tree_destroy' => 1,
                                                  'pldm_entity_association_tree_destroy_root' => 1,
                                                  'pldm_entity_association_tree_find' => 1,
+                                                 'pldm_entity_association_tree_find_with_locality' => 1,
                                                  'pldm_entity_association_tree_init' => 1,
                                                  'pldm_entity_association_tree_visit' => 1,
                                                  'pldm_entity_extract' => 1,
@@ -10665,7 +10687,7 @@ $VAR1 = {
                                        'Type' => 'FuncPtr'
                                      },
                           '50669' => {
-                                       'Line' => '936',
+                                       'Line' => '935',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'table_data',
@@ -11883,6 +11905,8 @@ $VAR1 = {
                                                           'stat64@GLIBC_2.33' => 0,
                                                           'strlen@GLIBC_2.2.5' => 0,
                                                           'strtol@GLIBC_2.2.5' => 0,
+                                                          'timerfd_create@GLIBC_2.8' => 0,
+                                                          'timerfd_settime@GLIBC_2.8' => 0,
                                                           'write@GLIBC_2.2.5' => 0
                                                         }
                                 },
