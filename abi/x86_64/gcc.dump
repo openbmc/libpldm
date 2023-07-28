@@ -8096,6 +8096,49 @@ $VAR1 = {
                                          'Source' => 'pdr.c',
                                          'SourceLine' => '651'
                                        },
+                            '89280' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'tree',
+                                                               'type' => '83733'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'entity',
+                                                               'type' => '83669'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'entity_instance_number',
+                                                               'type' => '5485'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'parent',
+                                                               'type' => '83271'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'association_type',
+                                                               'type' => '173'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'is_remote',
+                                                               'type' => '6812'
+                                                             },
+                                                      '6' => {
+                                                               'name' => 'is_update_container_id',
+                                                               'offset' => '0',
+                                                               'type' => '6812'
+                                                             },
+                                                      '7' => {
+                                                               'name' => 'container_id',
+                                                               'offset' => '8',
+                                                               'type' => '5485'
+                                                             }
+                                                    },
+                                         'Return' => '83271',
+                                         'ShortName' => 'pldm_entity_association_tree_add_entity',
+                                         'Source' => 'pdr.c',
+                                         'SourceLine' => '520'
+                                       },
                             '8974' => {
                                         'Header' => 'bios.h',
                                         'Param' => {
@@ -9179,6 +9222,7 @@ $VAR1 = {
                                                  'pldm_entity_association_pdr_add_from_node_check' => 1,
                                                  'pldm_entity_association_pdr_extract' => 1,
                                                  'pldm_entity_association_tree_add' => 1,
+                                                 'pldm_entity_association_tree_add_entity' => 1,
                                                  'pldm_entity_association_tree_copy_root' => 1,
                                                  'pldm_entity_association_tree_destroy' => 1,
                                                  'pldm_entity_association_tree_destroy_root' => 1,
