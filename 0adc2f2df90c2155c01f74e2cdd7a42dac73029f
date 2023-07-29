@@ -124,6 +124,24 @@
       "parentUuid": "6aa716a6_c01b3125",
       "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47090c4d_cb3075c2",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-29T02:35:01Z",
+      "side": 1,
+      "message": "A) That is just my example which the second GetPDRs command is sent by pldmtool after 32 GetSensorReading of pldmd. But it can be more than 32 GetSensorReading responses. It depends on:\n1. How long does it take to finish one GetSensorReading commands?\n2. How long does GetInstanceID method of D-Bus take to response new InstanceId for pldmtool?\n3. How fast the pldmd reads the sensors?\n\nMaybe \n```\nfor (int i \u003d 0; i \u003c\u003d (32 * 256) \u0026\u0026 pldm_transport_poll(transport, 0) \u003d\u003d 1; i++) {\n    pldm_transport_recv_msg(...);\n    /* Discard the message */\n}\n```\ncan make sure all existing responses will be freed (I don\u0027t think we can have 32 * 256 response messages)  but if `polling is not supported` then the above `for` will always run 32 * 256 times.\n```\n\t/* If polling isn\u0027t supported then always indicate the transport is ready */\n\tif (!transport-\u003einit_pollfd) {\n\t\treturn 1;\n\t}\n```\n\n\nB) With current implementation, I\u0027m assuming that there is some point which pldm_transport_send_recv_msg will polls all of existing messages.\nBut this assumption can be incorrect if `polling isn\u0027t supported`.\n\nIn that case, we need some way to checking there is no response using pldm_transport_recv_msg().\n \n\nC) Can you think again about original solution \u0027add checking type/command\u0027 after those discussion?\n+ It is simple.\n+ No definite case because we have time out 4800ms\n+ If we use above solutions , when we polling the existing response before sending request more response from pldmd can come -\u003e take more time.",
+      "parentUuid": "b3d4212a_7016d964",
+      "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
