@@ -144,6 +144,29 @@ int decode_negotiate_redfish_parameters_req(const struct pldm_msg *msg,
 					    uint8_t *mc_concurrency_support,
 					    bitfield16_t *mc_feature_support);
 
+/**
+ * @brief Create a PLDM response message for NegotiateRedfishParameters.
+ *
+ * @param[in] instance_id - Message's instance id.
+ * @param[in] completion_code - PLDM completion code.
+ * @param[in] device_concurrency_support - Concurrency support.
+ * @param[in] device_capabilities_flags - Capabilities flags.
+ * @param[in] device_feature_support - Feature support flags.
+ * @param[in] device_configuration_signature - RDE device signature.
+ * @param[in] device_provider_name - Null terminated device provider name.
+ * @param[in] name_format - String format of the device_provider_name.
+ * @param[out] msg - Response message will be written to this.
+ * @return pldm_completion_codes.
+ */
+int encode_negotiate_redfish_parameters_resp(
+	uint8_t instance_id, uint8_t completion_code,
+	uint8_t device_concurrency_support,
+	bitfield8_t device_capabilities_flags,
+	bitfield16_t device_feature_support,
+	uint32_t device_configuration_signature,
+	const char *device_provider_name,
+	enum pldm_rde_varstring_format name_format, struct pldm_msg *msg);
+
 #ifdef __cplusplus
 }
 #endif
