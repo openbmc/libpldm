@@ -16,6 +16,24 @@
       "message": "Hello Kasun, can you please rebase this onto the tip of the main branch and re-push?",
       "revId": "db1c59ef15249714583235069c2f629ffcd81ea2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "873615be_77ac48c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-07-30T21:25:34Z",
+      "side": 1,
+      "message": "Hi Andrew, I rebased the change. Please take a look now.",
+      "parentUuid": "df56bb3d_25bd9fd3",
+      "revId": "db1c59ef15249714583235069c2f629ffcd81ea2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
