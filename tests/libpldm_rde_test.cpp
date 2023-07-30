@@ -117,3 +117,54 @@ TEST(NegotiateRedfishParametersTest, EncodeResponseSuccess)
                      strlen(device) + 1),
               0);
 }
+
+TEST(NegotiateMediumParametersTest, EncodeRequestSuccess)
+{
+    uint8_t instanceId = 11;
+    uint32_t maxTranferSize = 0xABCDEF18;
+
+    std::array<uint8_t,
+               sizeof(struct pldm_msg_hdr) +
+                   sizeof(struct pldm_rde_negotiate_medium_parameters_req)>
+        requestMsg{};
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto req_payload =
+        reinterpret_cast<pldm_rde_negotiate_medium_parameters_req*>(
+            request->payload);
+
+    EXPECT_EQ(encode_negotiate_medium_parameters_req(instanceId, maxTranferSize,
+                                                     request),
+              PLDM_SUCCESS);
+
+    EXPECT_EQ(request->hdr.instance_id, instanceId);
+    EXPECT_EQ(request->hdr.type, PLDM_RDE);
+    EXPECT_EQ(request->hdr.request, 1);
+    EXPECT_EQ(request->hdr.command, PLDM_NEGOTIATE_MEDIUM_PARAMETERS);
+    EXPECT_EQ(le32toh(req_payload->mc_maximum_transfer_chunk_size_bytes),
+              maxTranferSize);
+}
+
+TEST(NegotiateMediumParametersTest, DecodeRequestSuccess)
+{
+    uint32_t mcSize = 0x10000000;
+
+    std::array<uint8_t,
+               sizeof(struct pldm_msg_hdr) +
+                   sizeof(struct pldm_rde_negotiate_medium_parameters_req)>
+        requestMsg{};
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto req_payload =
+        reinterpret_cast<pldm_rde_negotiate_medium_parameters_req*>(
+            request->payload);
+
+    req_payload->mc_maximum_transfer_chunk_size_bytes = htole32(mcSize);
+
+    uint32_t decodedMcSize;
+    EXPECT_EQ(decode_negotiate_medium_parameters_req(
+                  request,
+                  sizeof(struct pldm_rde_negotiate_medium_parameters_req),
+                  &decodedMcSize),
+              PLDM_SUCCESS);
+
+    EXPECT_EQ(decodedMcSize, mcSize);
+}
