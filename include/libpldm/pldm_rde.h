@@ -125,6 +125,14 @@ struct pldm_rde_negotiate_medium_parameters_req {
 } __attribute__((packed));
 
 /**
+ * @brief NegotiateMediumParameters response data structure.
+ */
+struct pldm_rde_negotiate_medium_parameters_resp {
+	uint8_t completion_code;
+	uint32_t device_maximum_transfer_chunk_size_bytes;
+} __attribute__((packed));
+
+/**
  * @brief Encode NegotiateRedfishParameters request.
  *
  * @param[in] instance_id - Message's instance id.
@@ -199,6 +207,20 @@ int encode_negotiate_medium_parameters_req(uint8_t instance_id,
 int decode_negotiate_medium_parameters_req(const struct pldm_msg *msg,
 					   size_t payload_length,
 					   uint32_t *mc_maximum_transfer_size);
+
+/**
+ * @brief Create a PLDM response message for NegotiateMediumParameters.
+ *
+ * @param[in] instance_id - Message's instance id.
+ * @param[in] completion_code - PLDM completion code.
+ * @param[in] device_maximum_transfer_bytes - Device maximum transfer byte
+ * support.
+ * @param[out] msg - Response message will be written to this.
+ * @return pldm_completion_codes.
+ */
+int encode_negotiate_medium_parameters_resp(
+	uint8_t instance_id, uint8_t completion_code,
+	uint32_t device_maximum_transfer_bytes, struct pldm_msg *msg);
 
 #ifdef __cplusplus
 }
