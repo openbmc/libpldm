@@ -15,6 +15,11 @@ extern "C" {
  */
 #define PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_REQ_SIZE 3
 
+/**
+ * @brief Minimum data sizes required for variable size RDE commands.
+ */
+#define PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_RESP_MIN_SIZE 12
+
 enum pldm_rde_commands {
 	PLDM_NEGOTIATE_REDFISH_PARAMETERS = 0x01,
 };
@@ -136,6 +141,54 @@ int encode_rde_negotiate_redfish_parameters_req(uint8_t instance_id,
 int decode_rde_negotiate_redfish_parameters_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *mc_concurrency_support, bitfield16_t *mc_feature_support);
+
+/**
+ * @brief Create a PLDM response message for NegotiateRedfishParameters.
+ *
+ * @param[in] instance_id - Message's instance id.
+ * @param[in] completion_code - PLDM completion code.
+ * @param[in] device_concurrency_support - Concurrency support.
+ * @param[in] device_capabilities_flags - Capabilities flags.
+ * @param[in] device_feature_support - Feature support flags.
+ * @param[in] device_configuration_signature - RDE device signature.
+ * @param[in] device_provider_name - Null terminated device provider name.
+ * @param[in] name_format - String format of the device_provider_name.
+ * @param[in] payload_length - Length of the payload buffer.
+ * @param[out] msg - Response message will be written to this.
+ * @return pldm_completion_codes.
+ */
+int encode_negotiate_redfish_parameters_resp(
+	uint8_t instance_id, uint8_t completion_code,
+	uint8_t device_concurrency_support,
+	bitfield8_t *device_capabilities_flags,
+	bitfield16_t *device_feature_support,
+	uint32_t device_configuration_signature,
+	const char *device_provider_name,
+	enum pldm_rde_varstring_format name_format, size_t payload_length,
+	struct pldm_msg *msg);
+
+/**
+ * @brief Decode NegotiateRedfishParameters response.
+ *
+ * @param[in] msg - Response message.
+ * @param[in] payload_length - Length of the response message.
+ * @param[out] completion_code - PLDM completion code.
+ * @param[out] device_concurrency_support - Concurrency support.
+ * @param[out] device_capabilities_flags - Capabilities flags.
+ * @param[out] device_feature_support - Feature support flags.
+ * @param[out] device_configuration_signature - RDE device signature.
+ * @param[out] provider_name - Device provider name. provider_name.string_data
+ * will point to the starting location of the provider name in the pldm_msg
+ * buffer.
+ * @return pldm_completion_codes
+ */
+int decode_negotiate_redfish_parameters_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	uint8_t *completion_code, uint8_t *device_concurrency_support,
+	bitfield8_t *device_capabilities_flags,
+	bitfield16_t *device_feature_support,
+	uint32_t *device_configuration_signature,
+	struct pldm_rde_varstring *provider_name);
 
 #ifdef __cplusplus
 }
