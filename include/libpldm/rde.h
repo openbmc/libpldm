@@ -14,6 +14,7 @@ extern "C" {
  * @brief Data sizes for fixed size RDE commands.
  */
 #define PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_REQ_SIZE 3
+#define PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_SIZE  4
 
 /**
  * @brief Minimum data sizes required for variable size RDE commands.
@@ -22,6 +23,7 @@ extern "C" {
 
 enum pldm_rde_commands {
 	PLDM_NEGOTIATE_REDFISH_PARAMETERS = 0x01,
+	PLDM_NEGOTIATE_MEDIUM_PARAMETERS = 0x02,
 };
 
 enum pldm_rde_varstring_format {
@@ -189,6 +191,33 @@ int decode_negotiate_redfish_parameters_resp(
 	bitfield16_t *device_feature_support,
 	uint32_t *device_configuration_signature,
 	struct pldm_rde_varstring *provider_name);
+
+/**
+ * @brief Encode NegotiateMediumParameters request.
+ *
+ * @param[in] instance_id - Message's instance id.
+ * @param[in] maximum_transfer_size - Maximum amount of data the MC can
+ * support for a single message transfer.
+ * @param[in] payload_length - Length of the encoded payload segment.
+ * @param[out] msg - Request message.
+ * @return pldm_completion_codes.
+ */
+int encode_negotiate_medium_parameters_req(uint8_t instance_id,
+					   uint32_t maximum_transfer_size,
+					   size_t payload_length,
+					   struct pldm_msg *msg);
+
+/**
+ * @brief Decode NegotiateMediumParameters request.
+ *
+ * @param[in] msg - Request message.
+ * @param[in] payload_length - Length of request message payload.
+ * @param[out] mc_maximum_transfer_size - Pointer to a uint32_t variable.
+ * @return pldm_completion_codes.
+ */
+int decode_negotiate_medium_parameters_req(const struct pldm_msg *msg,
+					   size_t payload_length,
+					   uint32_t *mc_maximum_transfer_size);
 
 #ifdef __cplusplus
 }

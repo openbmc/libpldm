@@ -99,3 +99,31 @@ TEST(NegotiateRedfishParametersTest, EncodeResponseSuccess)
     EXPECT_EQ(strncmp(device, decodedProviderName.string_data, strlen(device)),
               0);
 }
+
+TEST(NegotiateMediumParametersTest, EncodeDecodeRequestSuccess)
+{
+    uint8_t instanceId = 11;
+    uint32_t maxTranferSize = 0xABCDEF18;
+
+    std::array<uint8_t, sizeof(struct pldm_msg_hdr) +
+                            PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_SIZE>
+        requestMsg{};
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    EXPECT_EQ(encode_negotiate_medium_parameters_req(
+                  instanceId, maxTranferSize,
+                  PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_SIZE, request),
+              PLDM_SUCCESS);
+
+    EXPECT_EQ(request->hdr.instance_id, instanceId);
+    EXPECT_EQ(request->hdr.type, PLDM_RDE);
+    EXPECT_EQ(request->hdr.request, 1);
+    EXPECT_EQ(request->hdr.command, PLDM_NEGOTIATE_MEDIUM_PARAMETERS);
+
+    uint32_t decodedMaxTranferSize;
+    EXPECT_EQ(decode_negotiate_medium_parameters_req(
+                  request, PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_SIZE,
+                  &decodedMaxTranferSize),
+              PLDM_SUCCESS);
+    EXPECT_EQ(decodedMaxTranferSize, maxTranferSize);
+}

@@ -189,3 +189,67 @@ int decode_negotiate_redfish_parameters_resp(
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }
+
+LIBPLDM_ABI_TESTING
+int encode_negotiate_medium_parameters_req(uint8_t instance_id,
+					   uint32_t maximum_transfer_size,
+					   size_t payload_length,
+					   struct pldm_msg *msg)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.pldm_type = PLDM_RDE;
+	header.msg_type = PLDM_REQUEST;
+	header.command = PLDM_NEGOTIATE_MEDIUM_PARAMETERS;
+	rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init(buf,
+			      PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_SIZE,
+			      msg->payload, payload_length);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert_uint32(buf, maximum_transfer_size);
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_negotiate_medium_parameters_req(const struct pldm_msg *msg,
+					   size_t payload_length,
+					   uint32_t *mc_maximum_transfer_size)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (msg == NULL || mc_maximum_transfer_size == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init(buf,
+			      PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_SIZE,
+			      msg->payload, payload_length);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, mc_maximum_transfer_size);
+	if (*mc_maximum_transfer_size < PLDM_RDE_MIN_TRANSFER_SIZE_BYTES) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
