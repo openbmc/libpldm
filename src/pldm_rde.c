@@ -115,3 +115,55 @@ int encode_negotiate_redfish_parameters_resp(
 	       response->device_provider_name.string_length_bytes);
 	return PLDM_SUCCESS;
 }
+
+LIBPLDM_ABI_TESTING
+int encode_negotiate_medium_parameters_req(uint8_t instance_id,
+					   uint32_t maximum_transfer_size,
+					   struct pldm_msg *msg)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.pldm_type = PLDM_RDE;
+	header.msg_type = PLDM_REQUEST;
+	header.command = PLDM_NEGOTIATE_MEDIUM_PARAMETERS;
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_rde_negotiate_medium_parameters_req *req =
+		(struct pldm_rde_negotiate_medium_parameters_req *)msg->payload;
+	req->mc_maximum_transfer_chunk_size_bytes =
+		htole32(maximum_transfer_size);
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_negotiate_medium_parameters_req(const struct pldm_msg *msg,
+					   size_t payload_length,
+					   uint32_t *mc_maximum_transfer_size)
+{
+	if (msg == NULL || mc_maximum_transfer_size == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length !=
+	    sizeof(struct pldm_rde_negotiate_medium_parameters_req)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_rde_negotiate_medium_parameters_req *request =
+		(struct pldm_rde_negotiate_medium_parameters_req *)msg->payload;
+
+	*mc_maximum_transfer_size =
+		le32toh(request->mc_maximum_transfer_chunk_size_bytes);
+	if (*mc_maximum_transfer_size < PLDM_RDE_MIN_TRANSFER_SIZE_BYTES) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	return PLDM_SUCCESS;
+}
