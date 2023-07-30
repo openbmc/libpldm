@@ -21,6 +21,7 @@ extern "C" {
 #include <stdbool.h>
 #include <string.h>
 #include <sys/types.h>
+#include <stdio.h>
 
 /*
  * Fix up C11's _Static_assert() vs C++'s static_assert().
@@ -556,12 +557,14 @@ static inline int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
 	}
 
 	if (required > SSIZE_MAX) {
+		fprintf(stderr, "SSIZE_MAX\n");
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
 	ctx->remaining -= (ssize_t)required;
 	assert(ctx->remaining >= 0);
 	if (ctx->remaining < 0) {
+		fprintf(stderr, "ctx->remaining < 0\n");
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
