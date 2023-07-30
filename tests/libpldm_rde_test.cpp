@@ -62,3 +62,58 @@ TEST(NegotiateRedfishParametersTest, DecodeRequestSuccess)
     EXPECT_EQ(decodedMcConcurrencySupport, mcConcurrencySupport);
     EXPECT_EQ(decodedMcFeatureSupport.value, mcFeatureSupport.value);
 }
+
+TEST(NegotiateRedfishParametersTest, EncodeResponseSuccess)
+{
+    uint8_t completionCode = 0;
+    uint8_t instanceId = 11;
+
+    uint8_t deviceConcurrencySupport = 1;
+    bitfield8_t deviceCapabilitiesFlags = {.byte = 0x3F};
+    bitfield16_t deviceFeatureSupport = {.value = 0x7389};
+    uint32_t deviceConfigurationSignature = 0xABCDEF12;
+    constexpr const char* device = "This is a test";
+
+    // Already has the space for the null character in sizeof(struct
+    // pldm_rde_negotiate_redfish_parameters_resp).
+    std::array<uint8_t,
+               sizeof(struct pldm_msg_hdr) +
+                   sizeof(struct pldm_rde_negotiate_redfish_parameters_resp) +
+                   14>
+        responseMsg{};
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    EXPECT_EQ(encode_negotiate_redfish_parameters_resp(
+                  instanceId, completionCode, deviceConcurrencySupport,
+                  deviceCapabilitiesFlags, deviceFeatureSupport,
+                  deviceConfigurationSignature, device,
+                  PLDM_RDE_VARSTRING_ASCII, response),
+              PLDM_SUCCESS);
+
+    // verify header.
+    EXPECT_EQ(response->hdr.instance_id, instanceId);
+    EXPECT_EQ(response->hdr.request, 0);
+    EXPECT_EQ(response->hdr.type, PLDM_RDE);
+    EXPECT_EQ(response->hdr.command, PLDM_NEGOTIATE_REDFISH_PARAMETERS);
+
+    // verify payload.
+    auto resp_payload =
+        reinterpret_cast<pldm_rde_negotiate_redfish_parameters_resp*>(
+            response->payload);
+    EXPECT_EQ(resp_payload->completion_code, completionCode);
+    EXPECT_EQ(resp_payload->device_concurrency_support,
+              deviceConcurrencySupport);
+    EXPECT_EQ(resp_payload->device_capabilities_flags.byte,
+              deviceCapabilitiesFlags.byte);
+    EXPECT_EQ(le16toh(resp_payload->device_feature_support.value),
+              deviceFeatureSupport.value);
+    EXPECT_EQ(le32toh(resp_payload->device_configuration_signature),
+              deviceConfigurationSignature);
+    EXPECT_EQ(resp_payload->device_provider_name.string_format,
+              PLDM_RDE_VARSTRING_ASCII);
+    EXPECT_EQ(resp_payload->device_provider_name.string_length_bytes,
+              strlen(device) + 1);
+    EXPECT_EQ(memcmp(resp_payload->device_provider_name.string_data, device,
+                     strlen(device) + 1),
+              0);
+}

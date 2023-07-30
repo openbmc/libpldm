@@ -64,3 +64,54 @@ int decode_negotiate_redfish_parameters_req(const struct pldm_msg *msg,
 
 	return PLDM_SUCCESS;
 }
+
+LIBPLDM_ABI_TESTING
+int encode_negotiate_redfish_parameters_resp(
+	uint8_t instance_id, uint8_t completion_code,
+	uint8_t device_concurrency_support,
+	bitfield8_t device_capabilities_flags,
+	bitfield16_t device_feature_support,
+	uint32_t device_configuration_signature,
+	const char *device_provider_name,
+	enum pldm_rde_varstring_format name_format, struct pldm_msg *msg)
+{
+	if (NULL == msg || NULL == device_provider_name) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_RESPONSE;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_RDE;
+	header.command = PLDM_NEGOTIATE_REDFISH_PARAMETERS;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_rde_negotiate_redfish_parameters_resp *response =
+		(struct pldm_rde_negotiate_redfish_parameters_resp *)
+			msg->payload;
+	response->completion_code = completion_code;
+	if (response->completion_code != PLDM_SUCCESS) {
+		return PLDM_SUCCESS;
+	}
+
+	response->device_concurrency_support = device_concurrency_support;
+	response->device_capabilities_flags.byte =
+		device_capabilities_flags.byte;
+	response->device_feature_support.value =
+		htole16(device_feature_support.value);
+	response->device_configuration_signature =
+		htole32(device_configuration_signature);
+
+	response->device_provider_name.string_format = name_format;
+	// length should include NULL terminator.
+	response->device_provider_name.string_length_bytes =
+		strlen(device_provider_name) + 1;
+	// Copy including NULL terminator.
+	memcpy(response->device_provider_name.string_data, device_provider_name,
+	       response->device_provider_name.string_length_bytes);
+	return PLDM_SUCCESS;
+}
