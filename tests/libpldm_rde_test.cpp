@@ -168,3 +168,35 @@ TEST(NegotiateMediumParametersTest, DecodeRequestSuccess)
 
     EXPECT_EQ(decodedMcSize, mcSize);
 }
+
+TEST(NegotiateMediumParametersTest, EncodeResponseSuccess)
+{
+    uint8_t completionCode = 0;
+    uint8_t instanceId = 11;
+    uint32_t deviceSize = 0x10000000;
+
+    std::array<uint8_t,
+               sizeof(struct pldm_msg_hdr) +
+                   sizeof(struct pldm_rde_negotiate_medium_parameters_resp)>
+        responseMsg{};
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    EXPECT_EQ(encode_negotiate_medium_parameters_resp(
+                  instanceId, completionCode, deviceSize, response),
+              PLDM_SUCCESS);
+
+    // verify header.
+    EXPECT_EQ(response->hdr.instance_id, instanceId);
+    EXPECT_EQ(response->hdr.request, 0);
+    EXPECT_EQ(response->hdr.type, PLDM_RDE);
+    EXPECT_EQ(response->hdr.command, PLDM_NEGOTIATE_MEDIUM_PARAMETERS);
+
+    // verify payload.
+    auto resp_payload =
+        reinterpret_cast<pldm_rde_negotiate_medium_parameters_resp*>(
+            response->payload);
+    EXPECT_EQ(resp_payload->completion_code, completionCode);
+    EXPECT_EQ(le32toh(resp_payload->device_maximum_transfer_chunk_size_bytes),
+              deviceSize);
+}

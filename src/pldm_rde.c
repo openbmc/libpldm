@@ -167,3 +167,35 @@ int decode_negotiate_medium_parameters_req(const struct pldm_msg *msg,
 
 	return PLDM_SUCCESS;
 }
+
+LIBPLDM_ABI_TESTING
+int encode_negotiate_medium_parameters_resp(
+	uint8_t instance_id, uint8_t completion_code,
+	uint32_t device_maximum_transfer_bytes, struct pldm_msg *msg)
+{
+	if (NULL == msg) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_RESPONSE;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_RDE;
+	header.command = PLDM_NEGOTIATE_MEDIUM_PARAMETERS;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_rde_negotiate_medium_parameters_resp *response =
+		(struct pldm_rde_negotiate_medium_parameters_resp *)msg->payload;
+	response->completion_code = completion_code;
+	if (response->completion_code != PLDM_SUCCESS) {
+		return PLDM_SUCCESS;
+	}
+
+	response->device_maximum_transfer_chunk_size_bytes =
+		htole32(device_maximum_transfer_bytes);
+	return PLDM_SUCCESS;
+}
