@@ -112,7 +112,7 @@ int pldm_transport_mctp_demux_unmap_tid(struct pldm_transport_mctp_demux *ctx,
 
 static pldm_requester_rc_t
 pldm_transport_mctp_demux_recv(struct pldm_transport *t, pldm_tid_t tid,
-			       void **pldm_resp_msg, size_t *resp_msg_len)
+			       void **pldm_msg, size_t *msg_len)
 {
 	struct pldm_transport_mctp_demux *demux = transport_to_demux(t);
 	mctp_eid_t eid = 0;
@@ -157,14 +157,14 @@ pldm_transport_mctp_demux_recv(struct pldm_transport *t, pldm_tid_t tid,
 		free(buf);
 		return PLDM_REQUESTER_NOT_PLDM_MSG;
 	}
-	*pldm_resp_msg = buf;
-	*resp_msg_len = pldm_len;
+	*pldm_msg = buf;
+	*msg_len = pldm_len;
 	return PLDM_REQUESTER_SUCCESS;
 }
 
 static pldm_requester_rc_t
 pldm_transport_mctp_demux_send(struct pldm_transport *t, pldm_tid_t tid,
-			       const void *pldm_req_msg, size_t req_msg_len)
+			       const void *pldm_msg, size_t msg_len)
 {
 	struct pldm_transport_mctp_demux *demux = transport_to_demux(t);
 	mctp_eid_t eid = 0;
@@ -177,16 +177,16 @@ pldm_transport_mctp_demux_send(struct pldm_transport *t, pldm_tid_t tid,
 	struct iovec iov[2];
 	iov[0].iov_base = hdr;
 	iov[0].iov_len = sizeof(hdr);
-	iov[1].iov_base = (uint8_t *)pldm_req_msg;
-	iov[1].iov_len = req_msg_len;
+	iov[1].iov_base = (uint8_t *)pldm_msg;
+	iov[1].iov_len = msg_len;
 
 	struct msghdr msg = { 0 };
 	msg.msg_iov = iov;
 	msg.msg_iovlen = sizeof(iov) / sizeof(iov[0]);
 
-	if (req_msg_len > INT_MAX ||
+	if (msg_len > INT_MAX ||
 	    pldm_socket_sndbuf_accomodate(&(demux->socket_send_buf),
-					  (int)req_msg_len)) {
+					  (int)msg_len)) {
 		return PLDM_REQUESTER_SEND_FAIL;
 	}
 
