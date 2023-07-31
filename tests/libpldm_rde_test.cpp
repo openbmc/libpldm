@@ -200,3 +200,53 @@ TEST(NegotiateMediumParametersTest, EncodeResponseSuccess)
     EXPECT_EQ(le32toh(resp_payload->device_maximum_transfer_chunk_size_bytes),
               deviceSize);
 }
+
+TEST(GetSchemaDictionaryTest, EncodeRequestSuccess)
+{
+    uint8_t instanceId = 11;
+    uint8_t schema_class = 1;
+    uint32_t resourceId = 0xABCDEF18;
+
+    std::array<uint8_t, sizeof(struct pldm_msg_hdr) +
+                            sizeof(struct pldm_rde_get_schema_dictionary_req)>
+        requestMsg{};
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto req_payload =
+        reinterpret_cast<pldm_rde_get_schema_dictionary_req*>(request->payload);
+
+    EXPECT_EQ(encode_get_schema_dictionary_req(instanceId, resourceId,
+                                               schema_class, request),
+              PLDM_SUCCESS);
+
+    EXPECT_EQ(request->hdr.instance_id, instanceId);
+    EXPECT_EQ(request->hdr.type, PLDM_RDE);
+    EXPECT_EQ(request->hdr.request, 1);
+    EXPECT_EQ(request->hdr.command, PLDM_GET_SCHEMA_DICTIONARY);
+    EXPECT_EQ(le32toh(req_payload->resource_id), resourceId);
+    EXPECT_EQ(req_payload->requested_schema_class, schema_class);
+}
+
+TEST(GetSchemaDictionaryTest, DecodeRequestSuccess)
+{
+    uint32_t resourceId = 0xABCDEF12;
+
+    std::array<uint8_t, sizeof(struct pldm_msg_hdr) +
+                            sizeof(struct pldm_rde_get_schema_dictionary_req)>
+        requestMsg{};
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto req_payload =
+        reinterpret_cast<pldm_rde_get_schema_dictionary_req*>(request->payload);
+
+    req_payload->resource_id = htole32(resourceId);
+    req_payload->requested_schema_class = PLDM_RDE_SCHEMA_ANNOTATION;
+
+    uint32_t decodedResourceId;
+    uint8_t decodedSchemaClass;
+    EXPECT_EQ(decode_get_schema_dictionary_req(
+                  request, sizeof(struct pldm_rde_get_schema_dictionary_req),
+                  &decodedResourceId, &decodedSchemaClass),
+              PLDM_SUCCESS);
+
+    EXPECT_EQ(decodedResourceId, resourceId);
+    EXPECT_EQ(decodedSchemaClass, PLDM_RDE_SCHEMA_ANNOTATION);
+}

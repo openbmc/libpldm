@@ -16,6 +16,7 @@ extern "C" {
 enum pldm_rde_commands {
 	PLDM_NEGOTIATE_REDFISH_PARAMETERS = 0x01,
 	PLDM_NEGOTIATE_MEDIUM_PARAMETERS = 0x02,
+	PLDM_GET_SCHEMA_DICTIONARY = 0x03,
 };
 
 enum pldm_rde_varstring_format {
@@ -25,6 +26,15 @@ enum pldm_rde_varstring_format {
 	PLDM_RDE_VARSTRING_UTF_16 = 3,
 	PLDM_RDE_VARSTRING_UTF_16LE = 4,
 	PLDM_RDE_VARSTRING_UTF_16BE = 5,
+};
+
+enum pldm_rde_schema_type {
+	PLDM_RDE_SCHEMA_MAJOR = 0,
+	PLDM_RDE_SCHEMA_EVENT = 1,
+	PLDM_RDE_SCHEMA_ANNOTATION = 2,
+	PLDM_RDE_SCHEMA_COLLECTION_MEMBER_TYPE = 3,
+	PLDM_RDE_SCHEMA_ERROR = 4,
+	PLDM_RDE_SCHEMA_REGISTRY = 5,
 };
 
 enum pldm_rde_completion_codes {
@@ -133,6 +143,14 @@ struct pldm_rde_negotiate_medium_parameters_resp {
 } __attribute__((packed));
 
 /**
+ * @brief GetSchemaDictionary request data structure.
+ */
+struct pldm_rde_get_schema_dictionary_req {
+	uint32_t resource_id;
+	uint8_t requested_schema_class;
+} __attribute__((packed));
+
+/**
  * @brief Encode NegotiateRedfishParameters request.
  *
  * @param[in] instance_id - Message's instance id.
@@ -221,6 +239,34 @@ int decode_negotiate_medium_parameters_req(const struct pldm_msg *msg,
 int encode_negotiate_medium_parameters_resp(
 	uint8_t instance_id, uint8_t completion_code,
 	uint32_t device_maximum_transfer_bytes, struct pldm_msg *msg);
+
+/**
+ * @brief Encode GetSchemaDictionary request.
+ *
+ * @param[in] instance_id - Message's instance id.
+ * @param[in] resource_id - The ResourceID of any resource in the Redfish
+ * Resource PDR.
+ * @param[in] schema_class - The class of schema being requested.
+ * @param[out] msg - Request message.
+ * @return pldm_completion_codes.
+ */
+int encode_get_schema_dictionary_req(uint8_t instance_id, uint32_t resource_id,
+				     uint8_t schema_class,
+				     struct pldm_msg *msg);
+
+/**
+ * @brief Decode GetSchemaDictionary request.
+ *
+ * @param[in] msg - Request message.
+ * @param[in] payload_length - Length of request message payload.
+ * @param[out] resource_id - Pointer to a uint32_t variable.
+ * @param[out] requested_schema_class - Pointer to a uint8_t variable.
+ * @return pldm_completion_codes.
+ */
+int decode_get_schema_dictionary_req(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     uint32_t *resource_id,
+				     uint8_t *requested_schema_class);
 
 #ifdef __cplusplus
 }

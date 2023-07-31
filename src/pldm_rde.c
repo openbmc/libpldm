@@ -199,3 +199,56 @@ int encode_negotiate_medium_parameters_resp(
 		htole32(device_maximum_transfer_bytes);
 	return PLDM_SUCCESS;
 }
+
+LIBPLDM_ABI_TESTING
+int encode_get_schema_dictionary_req(uint8_t instance_id, uint32_t resource_id,
+				     uint8_t schema_class, struct pldm_msg *msg)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.pldm_type = PLDM_RDE;
+	header.msg_type = PLDM_REQUEST;
+	header.command = PLDM_GET_SCHEMA_DICTIONARY;
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_rde_get_schema_dictionary_req *req =
+		(struct pldm_rde_get_schema_dictionary_req *)msg->payload;
+	req->resource_id = htole32(resource_id);
+	req->requested_schema_class = schema_class;
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_schema_dictionary_req(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     uint32_t *resource_id,
+				     uint8_t *requested_schema_class)
+{
+	if (msg == NULL || resource_id == NULL ||
+	    requested_schema_class == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length !=
+	    sizeof(struct pldm_rde_get_schema_dictionary_req)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_rde_get_schema_dictionary_req *request =
+		(struct pldm_rde_get_schema_dictionary_req *)msg->payload;
+
+	*resource_id = le32toh(request->resource_id);
+	*requested_schema_class = request->requested_schema_class;
+	if (*requested_schema_class > PLDM_RDE_SCHEMA_REGISTRY) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	return PLDM_SUCCESS;
+}
