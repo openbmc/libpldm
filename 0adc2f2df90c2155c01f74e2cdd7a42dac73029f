@@ -142,6 +142,24 @@
       "parentUuid": "b3d4212a_7016d964",
       "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cabcc6d_ceb5997c",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T02:35:30Z",
+      "side": 1,
+      "message": "\u003e but if polling is not supported then the above for will always run 32 256 times\n\nI assume you meant `32 * 256 (\u003d 8196)` there, not `32256`. A bound of 8196 iterations is *much* better than non-termination.\n\nBut setting that calculation aside, the main concern is around when polling is not supported.\n\nWhat we need to be clear about here is the split between *consumers* of libpldm and *implementers* of libpldm. A *consumer* of libpldm is an actor who merely uses libpldm\u0027s existing APIs and does not add or modify them. By contrast, an *implementer* of libpldm is an actor who expands or modifies libpldm\u0027s APIs.\n\nThe available transport implementations provided by libpldm are a closed set. Anyone adding a new transport implementation to libpldm is necessarily an *implementer* of libpldm by the definition above. Your concern about the case where polling is not supported would be a problem if the path could be triggered by a *consumer* of libpldm (through a consumer-supplied callback, for example), but that is not the case. Both transport implementations currently provided by libpldm have functional `poll()` implementations. An implementer introducing a new transport must test that the library\u0027s behaviours are sensible for their new transport. At the point of that testing we may have to change the implementation of `pldm_transport_send_recv()` to accommodate any unique behaviours of the new transport implementation. But that\u0027s fine, because they\u0027re just implementation details, and are not changes in behaviour of a public API.\n\n\u003e C) Can you think again about original solution \u0027add checking type/command\u0027 after those discussion?\n\u003e\n\u003e - It is simple.\n\u003e - No definite case because we have time out 4800ms\n\u003e - If we use above solutions , when we polling the existing response before sending request more response from pldmd can come -\u003e take more time.\n\nI still prefer we do not do this. This test is not required by the specification and IMO it muddies the waters of the implementation. Draining the socket prior to send deals with some implementation warts that are beyond the specification and its implementation matches that concern.\n\nRegarding the timeouts and taking more time, no matter which approach we take we still have to process the the same number of messages from the socket in a given scenario. The point of difference is *where* we discard them in time and in the implementation. If anything, I think my proposal has a positive impact on potential timeouts because we discard any messages in the socket prior to sending the request (starting the timer), which means that the timeout period more accurately reflects the intent of the spec.\n\nWhat are your thoughts?",
+      "parentUuid": "47090c4d_cb3075c2",
+      "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
