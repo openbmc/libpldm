@@ -47,12 +47,13 @@ TEST(Transport, send_one)
 TEST(Transport, recv_one)
 {
     uint8_t msg[] = {0x01, 0x00, 0x01, 0x00};
+    const pldm_tid_t src_tid = 1;
     const struct pldm_transport_test_descriptor seq[] = {
         {
             .type = PLDM_TRANSPORT_TEST_ELEMENT_MSG_RECV,
             .recv_msg =
                 {
-                    .src = 1,
+                    .src = src_tid,
                     .msg = msg,
                     .len = sizeof(msg),
                 },
@@ -63,13 +64,15 @@ TEST(Transport, recv_one)
     void* recvd;
     size_t len;
     int rc;
+    pldm_tid_t tid;
 
     EXPECT_EQ(pldm_transport_test_init(&test, seq, ARRAY_SIZE(seq)), 0);
     ctx = pldm_transport_test_core(test);
-    rc = pldm_transport_recv_msg(ctx, 1, &recvd, &len);
+    rc = pldm_transport_recv_msg(ctx, &tid, &recvd, &len);
     EXPECT_EQ(rc, PLDM_REQUESTER_SUCCESS);
     EXPECT_EQ(len, sizeof(msg));
     EXPECT_EQ(memcmp(recvd, msg, len), 0);
+    EXPECT_EQ(tid, src_tid);
     free(recvd);
     pldm_transport_test_destroy(test);
 }
