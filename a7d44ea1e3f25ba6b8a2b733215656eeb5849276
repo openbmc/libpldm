@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcc99d6d_f29a51f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "Hi Kasun. This is a good start. I\u0027ve made a few structural comments alongside a few nitpicks. Let me know if anything needs clarification.\n\nI\u0027ll hold off on reviewing your later patches until we get consensus on the comments here.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da439cf4_f851c1b0",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "Bit of a nitpick, but it\u0027s worth addressing now because it\u0027s harder to undo later (this is a public header):\n\nGiven this is `libpldm`, prefixing the header name with `pldm_` feels a bit redundant. Excluding `pldm_types.h` none of the other public headers use this prefix (I\u0027m on the fence about whether it\u0027s necessary for `pldm_types.h`).\n\nThe `#include` directives already look like `#include \u003clibpldm/...\u003e`. In this case we would have `#include \u003clibpldm/pldm_rde.h\u003e`. Essentially I think `#include \u003clibpldm/rde.h\u003e` is an improvement.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "108f33db_2b55aca2",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "We don\u0027t have good consistency with header guards, but my preference is that (roughly) we transform the header\u0027s path by replacing `/` with `_` and capitalise the letters. So in this case:\n\n```\n#ifndef LIBPLDM_PLDM_RDE_H\n#define LIBPLDM_PLDM_RDE_H\n...\n```\n\nAnd taking into account the file renaming comment above:\n\n```\n#ifndef LIBPLDM_RDE_H\n#define LIBPLDM_RDE_H\n```",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1d5f9a_7a1b48db",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "Should we be complete for the referenced version of the spec? There are several more defined that aren\u0027t listed here.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1282142_a2db5fc4",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "I realise that many of the structures in libpldm are defined with `__attribute__((packed))`, but I\u0027ve put a chunk of effort into giving us a path to avoid it. The internal APIs in `src/msgbuf.h` allow us to not require `__attribute__((packed))`.\n\nWhat is the feasibility of avoiding its use here and for the other structs in this header?",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023d0e42_2f5ce437",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "A one-element-array as a flexible array member is another thing that we need to get away from. Its use as a flexible array member is not specified by C but we\u0027re stuck with the problem that flexible arrays are entirely not supported by C++. The path forward that I have in mind is that:\n\n1. We provide a public accessor API that returns a pointer to the flexible array:\n\n   ```\n   char *pldm_rde_varstring_data(struct pldm_rde_varstring *ctx)\n   {\n       return ctx-\u003estring_data;\n   }\n   ```\n   \n2. We declare the struct as follows:\n\n   ```\n   struct pldm_rde_varstring {\n       uint8_t string_format;\n       uint8_t string_length_bytes;\n   #ifndef __cplusplus\n       char string_data[]\n   #endif\n   }\n   ```\n\nThis way `sizeof(struct pldm_rde_varstring)` is the same for both C and C++, isn\u0027t incorrectly sized in either, provides well-defined behaviour for C, and C++ won\u0027t choke on the flexible array member definition.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "506592fa_1daffa9f",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "We can use the types we defined above if we exploit the msgbuf APIs for encoding and decoding. That helps the compiler enforce semantic correctness.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cbf2567_7d7b39a9",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "Can you please include `rde` in the symbol name?\n\n```\nint encode_rde_negotiate_redfish_parameters_req(...)\n```",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cae10742_0f58dbe1",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "With the above suggestions regarding the struct and the internal use of the msgbuf APIs this prototype could potentially take the struct:\n\n```\nint encode_rde_negotiate_redfish_parameters_req(\n    const struct pldm_rde_negotiate_redfish_parameters_req *req,\n    struct pldm_msg *msg);\n```\n\nSimilarly for the decode API below.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1d56964_9ce9a426",
+        "filename": "src/meson.build",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "Probably only need to add it once 😊",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84e4e303_48684d22",
+        "filename": "src/pldm_rde.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "Right, please take a look at the APIs in `src/msgbuf.h`. The commit message outlines some motivations for using it:\n\nhttps://github.com/openbmc/libpldm/commit/c63f63a2d9d7d25b21b76a1a6098ee1a3176be7e\n\nHere\u0027s a small example of implementing a decode function with it:\n\nhttps://github.com/openbmc/libpldm/commit/2d1d1bdf88c03388d467760540543106695ad2e1",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a48db30b_a3374b55",
+        "filename": "src/pldm_rde.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "See the comment above regarding the internal msgbuf APIs.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3954b41c_e87e6650",
+        "filename": "tests/meson.build",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T05:31:07Z",
+      "side": 1,
+      "message": "The `libpldm_` prefix on the test case names came from a time when libpldm was part of openbmc/pldm. It made sense then, but we\u0027ve since chopped libpldm out into its own repo, and now it\u0027s a bit redundant. I\u0027d prefer we don\u0027t continue with the tradition now it\u0027s passed its used-by date 😊. Maybe we\u0027ll eventually rename the other tests to drop the prefix as well.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
