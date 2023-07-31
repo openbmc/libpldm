@@ -252,3 +252,37 @@ int decode_get_schema_dictionary_req(const struct pldm_msg *msg,
 
 	return PLDM_SUCCESS;
 }
+
+LIBPLDM_ABI_TESTING
+int encode_get_schema_dictionary_resp(uint8_t instance_id,
+				      uint8_t completion_code,
+				      uint8_t dictionary_format,
+				      uint32_t transfer_handle,
+				      struct pldm_msg *msg)
+{
+	if (NULL == msg) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_RESPONSE;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_RDE;
+	header.command = PLDM_GET_SCHEMA_DICTIONARY;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_rde_get_schema_dictionary_resp *response =
+		(struct pldm_rde_get_schema_dictionary_resp *)msg->payload;
+	response->completion_code = completion_code;
+	if (response->completion_code != PLDM_SUCCESS) {
+		return PLDM_SUCCESS;
+	}
+
+	response->dictionary_format = dictionary_format;
+	response->transfer_handle = htole32(transfer_handle);
+	return PLDM_SUCCESS;
+}

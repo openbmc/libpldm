@@ -151,6 +151,15 @@ struct pldm_rde_get_schema_dictionary_req {
 } __attribute__((packed));
 
 /**
+ * @brief GetSchemaDictionary response data structure.
+ */
+struct pldm_rde_get_schema_dictionary_resp {
+	uint8_t completion_code;
+	uint8_t dictionary_format;
+	uint32_t transfer_handle;
+} __attribute__((packed));
+
+/**
  * @brief Encode NegotiateRedfishParameters request.
  *
  * @param[in] instance_id - Message's instance id.
@@ -267,6 +276,23 @@ int decode_get_schema_dictionary_req(const struct pldm_msg *msg,
 				     size_t payload_length,
 				     uint32_t *resource_id,
 				     uint8_t *requested_schema_class);
+
+/**
+ * @brief Encode GetSchemaDictionary response.
+ *
+ * @param[in] instance_id - Message's instance id.
+ * @param[in] completion_code - PLDM completion code.
+ * @param[in] dictionary_format - The format of the dictionary.
+ * @param[in] transfer_handle - A data transfer handle that the MC shall
+ * use.
+ * @param[out] msg - Response message will be written to this.
+ * @return pldm_completion_codes.
+ */
+int encode_get_schema_dictionary_resp(uint8_t instance_id,
+				      uint8_t completion_code,
+				      uint8_t dictionary_format,
+				      uint32_t transfer_handle,
+				      struct pldm_msg *msg);
 
 #ifdef __cplusplus
 }
