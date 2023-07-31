@@ -91,6 +91,18 @@ pldm_transport_mctp_demux_get_eid(struct pldm_transport_mctp_demux *ctx,
 	return -1;
 }
 
+static int
+pldm_transport_mctp_demux_get_tid(struct pldm_transport_mctp_demux *ctx,
+				  mctp_eid_t eid, pldm_tid_t *tid)
+{
+	/* mapping exists */
+	if (ctx->tid_eid_map[eid] != 0) {
+		*tid = ctx->tid_eid_map[eid];
+		return 0;
+	}
+	return -1;
+}
+
 LIBPLDM_ABI_TESTING
 int pldm_transport_mctp_demux_map_tid(struct pldm_transport_mctp_demux *ctx,
 				      pldm_tid_t tid, mctp_eid_t eid)
@@ -111,7 +123,7 @@ int pldm_transport_mctp_demux_unmap_tid(struct pldm_transport_mctp_demux *ctx,
 }
 
 static pldm_requester_rc_t
-pldm_transport_mctp_demux_recv(struct pldm_transport *t, pldm_tid_t tid,
+pldm_transport_mctp_demux_recv(struct pldm_transport *t, pldm_tid_t *tid,
 			       void **pldm_msg, size_t *msg_len)
 {
 	struct pldm_transport_mctp_demux *demux = transport_to_demux(t);
@@ -127,11 +139,6 @@ pldm_transport_mctp_demux_recv(struct pldm_transport *t, pldm_tid_t tid,
 	ssize_t bytes;
 	uint8_t *buf;
 	int rc;
-
-	rc = pldm_transport_mctp_demux_get_eid(demux, tid, &eid);
-	if (rc) {
-		return PLDM_REQUESTER_RECV_FAIL;
-	}
 
 	min_len = sizeof(eid) + sizeof(mctp_msg_type) +
 		  sizeof(struct pldm_msg_hdr);
@@ -167,8 +174,15 @@ pldm_transport_mctp_demux_recv(struct pldm_transport *t, pldm_tid_t tid,
 		goto cleanup_buf;
 	}
 
-	if ((mctp_prefix[0] != eid) || (mctp_prefix[1] != mctp_msg_type)) {
+	if (mctp_prefix[1] != mctp_msg_type) {
 		res = PLDM_REQUESTER_NOT_PLDM_MSG;
+		goto cleanup_buf;
+	}
+
+	eid = mctp_prefix[0];
+	rc = pldm_transport_mctp_demux_get_tid(demux, eid, tid);
+	if (rc) {
+		res = PLDM_REQUESTER_RECV_FAIL;
 		goto cleanup_buf;
 	}
 
