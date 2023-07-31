@@ -70,6 +70,24 @@
       "parentUuid": "10d8adc1_d2f5308d",
       "revId": "04a8d7d6a7c16633a382625c38aac35932ce3084",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c4f83b1_32a99fce",
+        "filename": "src/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-07-31T06:44:10Z",
+      "side": 1,
+      "message": "Yes , the bool here basically indicate that the PDR in the repository is basically a PDR obtained from a remote PLDM terminus[in ibm systems its host firmware] and is not originated from the terminus where this PLDM stack is currently running.\n\nAgree that this API could be named better and can have a potential to be used for multiple other devices.",
+      "parentUuid": "28d076bf_6995904d",
+      "revId": "04a8d7d6a7c16633a382625c38aac35932ce3084",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
