@@ -196,6 +196,24 @@
       "parentUuid": "51b5934e_33951fd1",
       "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eae867d9_59e0bb70",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T04:19:38Z",
+      "side": 1,
+      "message": "\u003e IMO, there is the point which pldm_transport_poll(transport, 0) will return 0 (time out) so both codes will be exited at some points (no infinity loop).\n\nI don\u0027t think we can state that in general. We can\u0027t be putting constraints, beyond the PLDM specification, on the behaviour of processes that are running concurrent to ours. Applications running concurrent to ours can continue sending messages as much as they wish (especially currently, given our violation of the spec with the lack of per-TID queuing), which we will keep receiving due to the behaviour of mctp-demux-daemon.\n\n\u003e Because there is no guarantee that there are only 8196 messages which are not consumed by pldmtool\n\nIf you\u0027re going to state that then you\u0027re acknowledging that the do-while loop doesn\u0027t really have a bound. We need a bound so execution doesn\u0027t just disappear into libpldm and never return to the application (this is also true of your proposal in option C). If we hit the 8196 limit we should return an error, as there isn\u0027t really any other sensible bound that I can think of. We need to choose an error which is appropriate to return.",
+      "parentUuid": "94962397_705084b5",
+      "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
