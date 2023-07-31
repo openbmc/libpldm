@@ -34,6 +34,24 @@
       "parentUuid": "66230c97_771e51f2",
       "revId": "04a8d7d6a7c16633a382625c38aac35932ce3084",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d8adc1_d2f5308d",
+        "filename": "src/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2023-07-31T05:23:49Z",
+      "side": 1,
+      "message": "`pldm_entity_association_tree_find_with_locality()` this looks better, with the current usecase of BMC\u0027s and Host tree.\n\nIn the future, if this has to cover multiple devices etc, the params will have to change instead of `bool`. We can deal with it later.",
+      "parentUuid": "fc7b6016_78880e0c",
+      "revId": "04a8d7d6a7c16633a382625c38aac35932ce3084",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
