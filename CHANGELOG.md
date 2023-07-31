@@ -25,6 +25,7 @@ Change categories:
 4. pdr: Stabilise pldm_entity_association_tree_find_with_locality()
 5. pdr: Stabilize pldm_entity_node_get_remote_container_id()
 6. transport: af-mctp: Assign out-params on success in \*\_recv()
+7. transport: Generalise the pldm_transport_recv_msg() API
 
 ### Removed
 

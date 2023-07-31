@@ -98,15 +98,13 @@ int pldm_transport_test_init_pollfd(struct pldm_transport *ctx,
 #endif
 
 static pldm_requester_rc_t pldm_transport_test_recv(struct pldm_transport *ctx,
-						    pldm_tid_t tid,
+						    pldm_tid_t *tid,
 						    void **pldm_resp_msg,
 						    size_t *resp_msg_len)
 {
 	struct pldm_transport_test *test = transport_to_test(ctx);
 	const struct pldm_transport_test_descriptor *desc;
 	void *msg;
-
-	(void)tid;
 
 	if (test->cursor >= test->count) {
 		return PLDM_REQUESTER_RECV_FAIL;
@@ -126,6 +124,7 @@ static pldm_requester_rc_t pldm_transport_test_recv(struct pldm_transport *ctx,
 	memcpy(msg, desc->recv_msg.msg, desc->recv_msg.len);
 	*pldm_resp_msg = msg;
 	*resp_msg_len = desc->recv_msg.len;
+	*tid = desc->recv_msg.src;
 
 	test->cursor++;
 
