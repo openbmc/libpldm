@@ -232,6 +232,24 @@
       "parentUuid": "eae867d9_59e0bb70",
       "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67a7339d_5e67562a",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T08:04:22Z",
+      "side": 1,
+      "message": "yeah, though maybe `s/SOCKET/TRANSPORT/` (`PLDM_REQUESTER_TRANSPORT_BUSY`) so we\u0027re not leaking implementation details?",
+      "parentUuid": "cfcec8aa_8bdae723",
+      "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
