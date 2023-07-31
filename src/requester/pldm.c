@@ -99,8 +99,35 @@ pldm_requester_rc_t pldm_recv_any(mctp_eid_t eid, int mctp_fd,
 				  uint8_t **pldm_resp_msg, size_t *resp_msg_len)
 {
 	pldm_requester_rc_t rc = 0;
-	PLDM_REQ_FN(eid, mctp_fd, pldm_transport_recv_msg, rc,
-		    (void **)pldm_resp_msg, resp_msg_len);
+
+	struct pldm_transport_mctp_demux *demux;
+	bool using_open_transport = false;
+	pldm_tid_t tid = eid;
+	struct pldm_transport *ctx;
+	/* The fd can be for a socket we opened or one the consumer
+	 * opened. */
+	if (open_transport &&
+	    mctp_fd ==
+		    pldm_transport_mctp_demux_get_socket_fd(open_transport)) {
+		using_open_transport = true;
+		demux = open_transport;
+	} else {
+		demux = pldm_transport_mctp_demux_init_with_fd(mctp_fd);
+		if (!demux) {
+			rc = PLDM_REQUESTER_OPEN_FAIL;
+			goto transport_out;
+		}
+	}
+	ctx = pldm_transport_mctp_demux_core(demux);
+	rc = pldm_transport_mctp_demux_map_tid(demux, tid, eid);
+	if (rc) {
+		rc = PLDM_REQUESTER_OPEN_FAIL;
+		goto transport_out;
+	}
+	/* TODO this is the only change, can we work this into the macro? */
+	rc = pldm_transport_recv_msg(ctx, &tid, (void **)pldm_resp_msg,
+				     resp_msg_len);
+
 	struct pldm_msg_hdr *hdr = (struct pldm_msg_hdr *)(*pldm_resp_msg);
 	if (rc != PLDM_REQUESTER_SUCCESS) {
 		return rc;
@@ -116,6 +143,12 @@ pldm_requester_rc_t pldm_recv_any(mctp_eid_t eid, int mctp_fd,
 		*pldm_resp_msg = NULL;
 		return PLDM_REQUESTER_RESP_MSG_TOO_SMALL;
 	}
+
+transport_out:
+	if (!using_open_transport) {
+		pldm_transport_mctp_demux_destroy(demux);
+	}
+
 	return rc;
 }
 
