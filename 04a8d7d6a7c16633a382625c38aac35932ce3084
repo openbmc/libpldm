@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66230c97_771e51f2",
+        "filename": "src/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-07-31T02:54:40Z",
+      "side": 1,
+      "message": "I\u0027m not particularly sold on the function name, but I won\u0027t let that hold us up. We can rename it through the usual deprecation process if necessary.\n\nI will ask for input from others though in case they have any concerns.",
+      "revId": "04a8d7d6a7c16633a382625c38aac35932ce3084",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
