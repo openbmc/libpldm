@@ -63,13 +63,15 @@ TEST(Transport, recv_one)
     void* recvd;
     size_t len;
     int rc;
+    pldm_tid_t tid;
 
     EXPECT_EQ(pldm_transport_test_init(&test, seq, ARRAY_SIZE(seq)), 0);
     ctx = pldm_transport_test_core(test);
-    rc = pldm_transport_recv_msg(ctx, 1, &recvd, &len);
+    rc = pldm_transport_recv_msg(ctx, &tid, &recvd, &len);
     EXPECT_EQ(rc, PLDM_REQUESTER_SUCCESS);
     EXPECT_EQ(len, sizeof(msg));
     EXPECT_EQ(memcmp(recvd, msg, len), 0);
+    EXPECT_EQ(tid, 1);
     free(recvd);
     pldm_transport_test_destroy(test);
 }
