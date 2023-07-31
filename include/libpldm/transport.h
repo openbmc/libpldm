@@ -63,7 +63,7 @@ pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
  * 	up.
  *
  * @param[in] ctx - pldm transport instance
- * @param[in] tid - destination PLDM TID
+ * @param[out] tid - source PLDM TID
  * @param[out] pldm_msg - *pldm_msg will point to the received PLDM msg if
  * 	       return code is PLDM_REQUESTER_SUCCESS; otherwise, NULL. On
  * 	       success this function allocates memory, caller to
@@ -77,7 +77,7 @@ pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
  *
  */
 pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
-					    pldm_tid_t tid, void **pldm_msg,
+					    pldm_tid_t *tid, void **pldm_msg,
 					    size_t *msg_len);
 
 /**

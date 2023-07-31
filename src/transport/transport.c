@@ -76,7 +76,7 @@ pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
 
 LIBPLDM_ABI_TESTING
 pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
-					    pldm_tid_t tid, void **pldm_msg,
+					    pldm_tid_t *tid, void **pldm_msg,
 					    size_t *msg_len)
 {
 	if (!transport || !msg_len) {
@@ -172,7 +172,8 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 	for (cnt = 0; cnt <= (PLDM_INSTANCE_MAX + 1) * PLDM_MAX_TIDS &&
 		      pldm_transport_poll(transport, 0) == 1;
 	     cnt++) {
-		rc = pldm_transport_recv_msg(transport, tid, pldm_resp_msg,
+		pldm_tid_t l_tid;
+		rc = pldm_transport_recv_msg(transport, &l_tid, pldm_resp_msg,
 					     resp_msg_len);
 		if (rc == PLDM_REQUESTER_SUCCESS) {
 			/* This isn't the message we wanted */
@@ -207,11 +208,13 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			break;
 		}
 
-		rc = pldm_transport_recv_msg(transport, tid, pldm_resp_msg,
+		pldm_tid_t src_tid;
+		rc = pldm_transport_recv_msg(transport, &src_tid, pldm_resp_msg,
 					     resp_msg_len);
 		if (rc == PLDM_REQUESTER_SUCCESS) {
 			const struct pldm_msg_hdr *resp_hdr = *pldm_resp_msg;
-			if (req_hdr->instance_id == resp_hdr->instance_id) {
+			if ((src_tid == tid) &&
+			    (req_hdr->instance_id == resp_hdr->instance_id)) {
 				return rc;
 			}
 

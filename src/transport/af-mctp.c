@@ -60,6 +60,16 @@ static int pldm_transport_af_mctp_get_eid(struct pldm_transport_af_mctp *ctx,
 	return -1;
 }
 
+static int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
+					  mctp_eid_t eid, pldm_tid_t *tid)
+{
+	if (ctx->tid_eid_map[eid] != 0) {
+		*tid = ctx->tid_eid_map[eid];
+		return 0;
+	}
+	return -1;
+}
+
 LIBPLDM_ABI_TESTING
 int pldm_transport_af_mctp_map_tid(struct pldm_transport_af_mctp *ctx,
 				   pldm_tid_t tid, mctp_eid_t eid)
@@ -80,20 +90,18 @@ int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
 }
 
 static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
-						       pldm_tid_t tid,
+						       pldm_tid_t *tid,
 						       void **pldm_msg,
 						       size_t *msg_len)
 {
 	struct pldm_transport_af_mctp *af_mctp = transport_to_af_mctp(t);
+	struct sockaddr_mctp addr = { 0 };
+	socklen_t addrlen = sizeof(addr);
+	pldm_requester_rc_t res;
 	mctp_eid_t eid = 0;
 	ssize_t length;
 	void *msg;
 	int rc;
-
-	rc = pldm_transport_af_mctp_get_eid(af_mctp, tid, &eid);
-	if (rc) {
-		return PLDM_REQUESTER_RECV_FAIL;
-	}
 
 	length = recv(af_mctp->socket, NULL, 0, MSG_PEEK | MSG_TRUNC);
 	if (length <= 0) {
@@ -105,16 +113,29 @@ static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
 		return PLDM_REQUESTER_RECV_FAIL;
 	}
 
-	length = recv(af_mctp->socket, msg, length, MSG_TRUNC);
+	length = recvfrom(af_mctp->socket, msg, length, MSG_TRUNC,
+			  (struct sockaddr *)&addr, &addrlen);
 	if (length < (ssize_t)sizeof(struct pldm_msg_hdr)) {
-		free(msg);
-		return PLDM_REQUESTER_INVALID_RECV_LEN;
+		res = PLDM_REQUESTER_INVALID_RECV_LEN;
+		goto cleanup_msg;
+	}
+
+	eid = addr.smctp_addr.s_addr;
+	rc = pldm_transport_af_mctp_get_tid(af_mctp, eid, tid);
+	if (rc) {
+		res = PLDM_REQUESTER_RECV_FAIL;
+		goto cleanup_msg;
 	}
 
 	*pldm_msg = msg;
 	*msg_len = length;
 
 	return PLDM_REQUESTER_SUCCESS;
+
+cleanup_msg:
+	free(msg);
+
+	return res;
 }
 
 static pldm_requester_rc_t pldm_transport_af_mctp_send(struct pldm_transport *t,
