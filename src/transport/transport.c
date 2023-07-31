@@ -60,39 +60,39 @@ int pldm_transport_poll(struct pldm_transport *transport, int timeout)
 LIBPLDM_ABI_TESTING
 pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
 					    pldm_tid_t tid,
-					    const void *pldm_req_msg,
-					    size_t req_msg_len)
+					    const void *pldm_msg,
+					    size_t msg_len)
 {
-	if (!transport || !pldm_req_msg) {
+	if (!transport || !pldm_msg) {
 		return PLDM_REQUESTER_INVALID_SETUP;
 	}
 
-	if (req_msg_len < sizeof(struct pldm_msg_hdr)) {
+	if (msg_len < sizeof(struct pldm_msg_hdr)) {
 		return PLDM_REQUESTER_NOT_REQ_MSG;
 	}
 
-	return transport->send(transport, tid, pldm_req_msg, req_msg_len);
+	return transport->send(transport, tid, pldm_msg, msg_len);
 }
 
 LIBPLDM_ABI_TESTING
 pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
 					    pldm_tid_t tid,
-					    void **pldm_resp_msg,
-					    size_t *resp_msg_len)
+					    void **pldm_msg,
+					    size_t *msg_len)
 {
-	if (!transport || !resp_msg_len) {
+	if (!transport || !msg_len) {
 		return PLDM_REQUESTER_INVALID_SETUP;
 	}
 
 	pldm_requester_rc_t rc =
-		transport->recv(transport, tid, pldm_resp_msg, resp_msg_len);
+		transport->recv(transport, tid, pldm_msg, msg_len);
 	if (rc != PLDM_REQUESTER_SUCCESS) {
 		return rc;
 	}
 
-	if (*resp_msg_len < sizeof(struct pldm_msg_hdr)) {
-		free(*pldm_resp_msg);
-		*pldm_resp_msg = NULL;
+	if (*msg_len < sizeof(struct pldm_msg_hdr)) {
+		free(*pldm_msg);
+		*pldm_msg = NULL;
 		return PLDM_REQUESTER_INVALID_RECV_LEN;
 	}
 	return PLDM_REQUESTER_SUCCESS;
