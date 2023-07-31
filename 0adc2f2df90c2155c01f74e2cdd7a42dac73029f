@@ -214,6 +214,24 @@
       "parentUuid": "94962397_705084b5",
       "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfcec8aa_8bdae723",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-31T07:56:22Z",
+      "side": 1,
+      "message": "How about adding new return `PLDM_REQUESTER_SOCKET_BUSY \u003d -13,`to `pldm_requester_error_codes`?\n```\ntypedef enum pldm_requester_error_codes {\n\tPLDM_REQUESTER_SUCCESS \u003d 0,\n\tPLDM_REQUESTER_OPEN_FAIL \u003d -1,\n\tPLDM_REQUESTER_NOT_PLDM_MSG \u003d -2,\n\tPLDM_REQUESTER_NOT_RESP_MSG \u003d -3,\n\tPLDM_REQUESTER_NOT_REQ_MSG \u003d -4,\n\tPLDM_REQUESTER_RESP_MSG_TOO_SMALL \u003d -5,\n\tPLDM_REQUESTER_INSTANCE_ID_MISMATCH \u003d -6,\n\tPLDM_REQUESTER_SEND_FAIL \u003d -7,\n\tPLDM_REQUESTER_RECV_FAIL \u003d -8,\n\tPLDM_REQUESTER_INVALID_RECV_LEN \u003d -9,\n\tPLDM_REQUESTER_SETUP_FAIL \u003d -10,\n\tPLDM_REQUESTER_INVALID_SETUP \u003d -11,\n\tPLDM_REQUESTER_POLL_FAIL \u003d -12,\n\tPLDM_REQUESTER_SOCKET_BUSY \u003d -13,\n} pldm_requester_rc_t;\n```",
+      "parentUuid": "eae867d9_59e0bb70",
+      "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
