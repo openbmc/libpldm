@@ -178,6 +178,24 @@
       "parentUuid": "2cabcc6d_ceb5997c",
       "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94962397_705084b5",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-07-31T03:27:16Z",
+      "side": 1,
+      "message": "So the final question is which solution will we choose? \n```\nfor (int i \u003d 0; i \u003c\u003d 8196 \u0026\u0026 pldm_transport_poll(transport, 0) \u003d\u003d 1; i++) {\n    pldm_transport_recv_msg(...);\n    /* Discard the message */\n}\n```\n\nor \n```\ndo\n{\n    pldm_transport_recv_msg(...);\n    /* Discard the message */\n}\nwhile (pldm_transport_poll(transport, 0) \u003d\u003d 1);\n```\nIMO, there is the point which `pldm_transport_poll(transport, 0)` will return 0 (time out) so both codes will be exited at some points (no infinity loop).\nBecause there is no guarantee that there are only 8196 messages which are not consumed by pldmtool so I think `do while` is the good way to go.",
+      "parentUuid": "51b5934e_33951fd1",
+      "revId": "0adc2f2df90c2155c01f74e2cdd7a42dac73029f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
