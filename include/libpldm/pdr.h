@@ -530,20 +530,20 @@ pldm_entity_node *
 pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
 				  pldm_entity *entity);
 
-/** @brief Find an entity in the entity association tree if remote
+/** @brief Find an entity in the entity association tree with locality specified,
+ *         ie - remote entity or local entity
  *
  *  @param[in] tree - pointer to entity association tree
  *  @param[in/out] entity - entity type and instance id set on input, container
  *                          id set on output
- *  @param[in] is_remote - variable to denote whether we are finding a host
- *                         entity or a BMC entity
+ *  @param[in] is_remote - variable to denote whether we are finding a remote
+ *                         entity or a local entity
  *
  *  @return pldm_entity_node* pointer to entity if found, NULL otherwise
  */
-pldm_entity_node *
-pldm_entity_association_tree_find_if_remote(pldm_entity_association_tree *tree,
-					    pldm_entity *entity,
-					    bool is_remote);
+pldm_entity_node *pldm_entity_association_tree_find_with_locality(
+	pldm_entity_association_tree *tree, pldm_entity *entity,
+	bool is_remote);
 
 /** @brief Create a copy of an existing entity association tree
  *
