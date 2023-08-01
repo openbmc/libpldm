@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89c015a9_4c71d513",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-01T19:19:19Z",
+      "side": 1,
+      "message": "Make sense. I changed them to to rde.h and rde.c",
+      "parentUuid": "da439cf4_f851c1b0",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "108f33db_2b55aca2",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-07-31T05:31:07Z",
       "side": 1,
       "message": "We don\u0027t have good consistency with header guards, but my preference is that (roughly) we transform the header\u0027s path by replacing `/` with `_` and capitalise the letters. So in this case:\n\n```\n#ifndef LIBPLDM_PLDM_RDE_H\n#define LIBPLDM_PLDM_RDE_H\n...\n```\n\nAnd taking into account the file renaming comment above:\n\n```\n#ifndef LIBPLDM_RDE_H\n#define LIBPLDM_RDE_H\n```",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea6f051b_68c93082",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-01T19:19:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "108f33db_2b55aca2",
       "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61deb76a_61fd1bc4",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-01T19:19:19Z",
+      "side": 1,
+      "message": "Good catch! It was just the ones I used. Now I added them all.",
+      "parentUuid": "aa1d5f9a_7a1b48db",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1282142_a2db5fc4",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-07-31T05:31:07Z",
       "side": 1,
       "message": "I realise that many of the structures in libpldm are defined with `__attribute__((packed))`, but I\u0027ve put a chunk of effort into giving us a path to avoid it. The internal APIs in `src/msgbuf.h` allow us to not require `__attribute__((packed))`.\n\nWhat is the feasibility of avoiding its use here and for the other structs in this header?",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63dfd2ae_2a761141",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-01T19:19:19Z",
+      "side": 1,
+      "message": "I see. Yea I wrote this code around the beginning of this year and I was trying to follow the rest of the repo.\n\nI did write everything using __attribute__((packed)). It would require a significant effort for me to change it to using the new API.\n\nI addressed all the comments except the things that depend on the new API. Looks like only some of the decoding functions in platform.c use the new API so far. So would you be Ok to keep this as is for now? or do you prefer to migrate everything to the new API?",
+      "parentUuid": "e1282142_a2db5fc4",
       "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -137,6 +209,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59d93d48_c62f96f4",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-01T19:19:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cbf2567_7d7b39a9",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cae10742_0f58dbe1",
@@ -167,6 +257,24 @@
       "writtenOn": "2023-07-31T05:31:07Z",
       "side": 1,
       "message": "Probably only need to add it once 😊",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61345f8_cb077f5e",
+        "filename": "src/meson.build",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-01T19:19:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1d56964_9ce9a426",
       "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -218,6 +326,24 @@
       "writtenOn": "2023-07-31T05:31:07Z",
       "side": 1,
       "message": "The `libpldm_` prefix on the test case names came from a time when libpldm was part of openbmc/pldm. It made sense then, but we\u0027ve since chopped libpldm out into its own repo, and now it\u0027s a bit redundant. I\u0027d prefer we don\u0027t continue with the tradition now it\u0027s passed its used-by date 😊. Maybe we\u0027ll eventually rename the other tests to drop the prefix as well.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b012062_eebcee2b",
+        "filename": "tests/meson.build",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-01T19:19:19Z",
+      "side": 1,
+      "message": "Renamed the test to rde_test.cpp",
+      "parentUuid": "3954b41c_e87e6650",
       "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
