@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d2ba655_2a862034",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-03T04:10:09Z",
+      "side": 1,
+      "message": "So I think there\u0027s less of an impact if we keep the RDE encode/decode APIs as they are now (i.e. with the individual parameters, not passing a struct pointer), but use the msgbuf APIs in the implementation, and drop `__attribute__((packed))` from the struct definition. I\u0027d merge that approach, given that it reflects the rest of the encode/decode APIs that already exist. Does that make it more feasible for you? I will be putting up some resistance to merging the current implementation which doesn\u0027t use the msgbuf APIs. Let\u0027s try to avoid carrying on with the mistakes of the past.\n\n\u003e Looks like only some of the decoding functions in platform.c use the new API so far. \n\nAll of the decode implementations in `src/platform.c` should have been converted over. If I\u0027ve missed some I\u0027d appreciate if you could point out which 😊 I\u0027d left the encode API implementations alone though, as fixing those was potentially a little harder.",
+      "parentUuid": "63dfd2ae_2a761141",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "023d0e42_2f5ce437",
         "filename": "include/libpldm/pldm_rde.h",
         "patchSetId": 5
