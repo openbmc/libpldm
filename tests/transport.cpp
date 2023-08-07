@@ -255,13 +255,13 @@ TEST(Transport, send_recv_drain_one_unwanted)
     struct pldm_transport_test* test = NULL;
     struct pldm_transport* ctx;
     size_t len;
-    void* msg;
+    void* msg = NULL;
     int rc;
 
     EXPECT_EQ(pldm_transport_test_init(&test, seq, ARRAY_SIZE(seq)), 0);
     ctx = pldm_transport_test_core(test);
     rc = pldm_transport_send_recv_msg(ctx, 1, req, sizeof(req), &msg, &len);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    ASSERT_EQ(rc, PLDM_REQUESTER_SUCCESS);
     EXPECT_NE(memcmp(msg, unwanted, len), 0);
     EXPECT_EQ(memcmp(msg, resp, len), 0);
     free(msg);
