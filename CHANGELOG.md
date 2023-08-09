@@ -17,6 +17,8 @@ Change categories:
 
 ## [Unreleased]
 
+## [0.5.0] - 2023-08-09
+
 ### Added
 
 1. pdr: Introduce pldm_entity_association_pdr_add_check()
