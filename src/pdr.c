@@ -563,6 +563,12 @@ pldm_entity_node *pldm_entity_association_tree_add_entity(
 		node->entity.entity_container_id = 0;
 		node->remote_container_id = node->entity.entity_container_id;
 	} else if (parent != NULL && parent->first_child == NULL) {
+		/* Ensure next_container_id() will yield a valid ID */
+		if (tree->last_used_container_id == UINT16_MAX) {
+			free(node);
+			return NULL;
+		}
+
 		parent->first_child = node;
 		node->parent = parent->entity;
 

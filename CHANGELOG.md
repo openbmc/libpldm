@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Changed
+
+1. pdr: Avoid ID overflow in pldm_entity_association_tree_add_entity()
+
 ### Removed
 
 1. pdr: Remove pldm_entity_association_pdr_add()
