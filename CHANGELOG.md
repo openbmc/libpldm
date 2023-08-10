@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Removed
+
+1. pdr: Remove pldm_entity_association_pdr_add()
+
 ## [0.5.0] - 2023-08-09
 
 ### Added

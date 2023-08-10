@@ -908,17 +908,6 @@ static int entity_association_pdr_add(pldm_entity_node *curr, pldm_pdr *repo,
 					  terminus_handle, record_handle);
 }
 
-LIBPLDM_ABI_DEPRECATED
-void pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
-				     pldm_pdr *repo, bool is_remote,
-				     uint16_t terminus_handle)
-{
-	int rc = pldm_entity_association_pdr_add_check(tree, repo, is_remote,
-						       terminus_handle);
-	(void)rc;
-	assert(!rc);
-}
-
 LIBPLDM_ABI_STABLE
 int pldm_entity_association_pdr_add_check(pldm_entity_association_tree *tree,
 					  pldm_pdr *repo, bool is_remote,
