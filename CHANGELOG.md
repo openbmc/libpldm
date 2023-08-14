@@ -30,6 +30,7 @@ Change categories:
 ### Removed
 
 1. pdr: Remove pldm_entity_association_pdr_add()
+2. state-set: Remove enum pldm_state_set_operational_fault_status_values
 
 ### Fixed
 
