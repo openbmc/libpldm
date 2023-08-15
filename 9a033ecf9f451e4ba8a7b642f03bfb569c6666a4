@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9658674f_a50a0e03",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-08-15T03:43:36Z",
+      "side": 1,
+      "message": "You are trying to avoid adding one variable as the changing in line 175. But this can cause the confusing because tid is input of pldm_transport_send_recv_msg then become output of pldm_transport_recv_msg.",
+      "revId": "9a033ecf9f451e4ba8a7b642f03bfb569c6666a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
