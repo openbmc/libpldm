@@ -28,6 +28,10 @@ Change categories:
 
 1. pdr: Remove pldm_entity_association_pdr_add()
 
+### Fixed
+
+1. transport: register init_pollfd callback for af-mctp
+
 ## [0.5.0] - 2023-08-09
 
 ### Added

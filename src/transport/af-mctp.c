@@ -152,6 +152,7 @@ int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
 	af_mctp->transport.version = 1;
 	af_mctp->transport.recv = pldm_transport_af_mctp_recv;
 	af_mctp->transport.send = pldm_transport_af_mctp_send;
+	af_mctp->transport.init_pollfd = pldm_transport_af_mctp_init_pollfd;
 	af_mctp->socket = socket(AF_MCTP, SOCK_DGRAM, 0);
 	if (af_mctp->socket == -1) {
 		free(af_mctp);
