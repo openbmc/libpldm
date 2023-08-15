@@ -16,6 +16,24 @@
       "message": "You are trying to avoid adding one variable as the changing in line 175. But this can cause the confusing because tid is input of pldm_transport_send_recv_msg then become output of pldm_transport_recv_msg.",
       "revId": "9a033ecf9f451e4ba8a7b642f03bfb569c6666a4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0123585f_f1961cd5",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-15T04:30:50Z",
+      "side": 1,
+      "message": "We should probably use a separate local and compare it to the passed value rather than overwrite the passed value.",
+      "parentUuid": "9658674f_a50a0e03",
+      "revId": "9a033ecf9f451e4ba8a7b642f03bfb569c6666a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
