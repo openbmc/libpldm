@@ -32,6 +32,7 @@ Change categories:
 ### Fixed
 
 1. transport: register init_pollfd callback for af-mctp
+2. transport: fix init_pollfd function parameter
 
 ## [0.5.0] - 2023-08-09
 

@@ -3,6 +3,7 @@
 #include "container-of.h"
 #include "libpldm/pldm.h"
 #include "libpldm/transport.h"
+#include "libpldm/transport/af-mctp.h"
 #include "socket.h"
 #include "transport.h"
 
