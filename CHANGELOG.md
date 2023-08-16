@@ -23,6 +23,7 @@ Change categories:
 2. meson: Apply `b_ndebug=if-release` by default
 3. pdr : Stabilize pldm_entity_association_tree_add_entity()
 4. pdr: Stabilise pldm_entity_association_tree_find_with_locality()
+5. pdr: Stabilize pldm_entity_node_get_remote_container_id()
 
 ### Removed
 
