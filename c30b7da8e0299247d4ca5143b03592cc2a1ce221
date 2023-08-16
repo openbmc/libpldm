@@ -22,6 +22,30 @@
       },
       "revId": "c30b7da8e0299247d4ca5143b03592cc2a1ce221",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be9957d5_bac9a6fa",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-16T07:37:43Z",
+      "side": 1,
+      "message": "I don\u0027t see that it shouldn\u0027t work. Perhaps we could delete the comment?",
+      "parentUuid": "021d9c58_f683436b",
+      "range": {
+        "startLine": 115,
+        "startChar": 1,
+        "endLine": 115,
+        "endChar": 20
+      },
+      "revId": "c30b7da8e0299247d4ca5143b03592cc2a1ce221",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
