@@ -36,10 +36,10 @@ pldm_transport_af_mctp_core(struct pldm_transport_af_mctp *ctx)
 }
 
 LIBPLDM_ABI_TESTING
-int pldm_transport_af_mctp_init_pollfd(struct pldm_transport *t,
+int pldm_transport_af_mctp_init_pollfd(struct pldm_transport *transport,
 				       struct pollfd *pollfd)
 {
-	struct pldm_transport_af_mctp *ctx = transport_to_af_mctp(t);
+	struct pldm_transport_af_mctp *ctx = transport_to_af_mctp(transport);
 	pollfd->fd = ctx->socket;
 	pollfd->events = POLLIN;
 	return 0;
@@ -88,12 +88,12 @@ int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
 	return 0;
 }
 
-static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
-						       pldm_tid_t *tid,
-						       void **pldm_msg,
-						       size_t *msg_len)
+static pldm_requester_rc_t
+pldm_transport_af_mctp_recv(struct pldm_transport *transport, pldm_tid_t *tid,
+			    void **pldm_msg, size_t *msg_len)
 {
-	struct pldm_transport_af_mctp *af_mctp = transport_to_af_mctp(t);
+	struct pldm_transport_af_mctp *af_mctp =
+		transport_to_af_mctp(transport);
 	mctp_eid_t eid = 0;
 	struct sockaddr_mctp addr = { 0 };
 	socklen_t addrlen = sizeof(addr);
@@ -122,12 +122,12 @@ static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
 	return PLDM_REQUESTER_SUCCESS;
 }
 
-static pldm_requester_rc_t pldm_transport_af_mctp_send(struct pldm_transport *t,
-						       pldm_tid_t tid,
-						       const void *pldm_msg,
-						       size_t msg_len)
+static pldm_requester_rc_t
+pldm_transport_af_mctp_send(struct pldm_transport *transport, pldm_tid_t tid,
+			    const void *pldm_msg, size_t msg_len)
 {
-	struct pldm_transport_af_mctp *af_mctp = transport_to_af_mctp(t);
+	struct pldm_transport_af_mctp *af_mctp =
+		transport_to_af_mctp(transport);
 	mctp_eid_t eid = 0;
 	if (pldm_transport_af_mctp_get_eid(af_mctp, tid, &eid)) {
 		return PLDM_REQUESTER_SEND_FAIL;
