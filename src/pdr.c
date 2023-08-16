@@ -460,7 +460,7 @@ pldm_entity pldm_entity_extract(pldm_entity_node *node)
 	return node->entity;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 uint16_t
 pldm_entity_node_get_remote_container_id(const pldm_entity_node *entity)
 {
