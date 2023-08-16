@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d22e7b4b_e058d33d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-08-16T07:05:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "847b53d5_49806c27",
+      "range": {
+        "startLine": 7,
+        "startChar": 3,
+        "endLine": 7,
+        "endChar": 4
+      },
+      "revId": "b62a8ee14ab5e58ef94fb9f28573a07bfe045ab7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36024a74_a87a0053",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-08-16T06:50:28Z",
       "side": 1,
       "message": "Can you please list this commit in `CHANGELOG.md` in a `### Changed` section under `## [Unreleased]`?\n\nPlease do try to remember to update the changelog as necessary in the future, it\u0027s important information for people trying to consume the library. Anything touching the public API/ABI should be listed (introduction of new symbols, stabilisation, deprecation, removal, etc). Fixes should also be listed if there are one or more tags between the patch introducing the bug and the patch fixing it.",
+      "revId": "b62a8ee14ab5e58ef94fb9f28573a07bfe045ab7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "addb9dc6_f2d98e15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-08-16T07:05:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "36024a74_a87a0053",
       "revId": "b62a8ee14ab5e58ef94fb9f28573a07bfe045ab7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
