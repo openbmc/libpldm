@@ -24,7 +24,7 @@ pldm_transport_af_mctp_core(struct pldm_transport_af_mctp *ctx);
 #ifdef PLDM_HAS_POLL
 struct pollfd;
 /* Init pollfd for async calls */
-int pldm_transport_af_mctp_init_pollfd(struct pldm_transport_af_mctp *ctx,
+int pldm_transport_af_mctp_init_pollfd(struct pldm_transport *ctx,
 				       struct pollfd *pollfd);
 #endif
 
