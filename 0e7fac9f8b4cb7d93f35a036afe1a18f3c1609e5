@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43286b53_91f2b5fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T05:24:41Z",
+      "side": 1,
+      "message": "Honestly, we didn\u0027t read `af-mctp.h` in the first place. We saw the `af-mctp.c` implementation and we tried to call this function with `pldm_transport`. It compiled fail with the output `error: cannot convert \u0027pldm_transport*\u0027 to \u0027pldm_transport_af_mctp*\u0027`.\n\nThe `af-mctp.c` implementation seems to be intended to use `pldm_transport*` instead. It is also declared as `pldm_transport*` for function pointer in `struct pldm_transport` in `transport.h`.\n\nIf we call the function with `pldm_transport_af_mctp`, it wont\u0027t show any error in compile time. Maybe something wrong would happen during the run time.",
+      "parentUuid": "8db356aa_8f303562",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c0c8b8d_3b566fd9",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-08-17T00:26:49Z",
       "side": 1,
       "message": "Thanks for listing the affected patches! A couple of notes though:\n\n1. These need to be part of the \"trailer\". This can be processed by tooling, see https://git-scm.com/docs/git-interpret-trailers\n2. The trailer tags should be in \"email\" form (to quote the man-page linked above: \"Help parsing or adding trailers lines, that look similar to RFC 822 e-mail headers, at the end of the otherwise free-form part of a commit message.\")\n\nI have a git alias that makes this quick and easy to do correctly. You can set yourself up with the following two commands:\n\n```\n$ git config --global pretty.fixes \u0027Fixes: %h (\"%s\")\u0027\n$ git config --global alias.fixes \"log -1 --pretty\u003dfixes\"\n```\n\nWith that you can do the following:\n\n```\n$ git fixes c1b66f420912\nFixes: c1b66f420912 (\"requester: Add new APIs to support multiple transports\")\n$ git fixes ba6971b9ae69\nFixes: ba6971b9ae69 (\"requester: Add af_mctp transport\")\n```\n\nFrom there you can put the output of each `git fixes ...` invocation below `Change-Id: ...` on line 17.\n\nFinally, this patch needs an entry in `CHANGELOG.md` in the `### Fixes` section under `## [Unreleased]`.",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1302538a_e35d846e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T05:24:41Z",
+      "side": 1,
+      "message": "Thank you for advise. Updated the commit message and `CHANGELOG.md`.",
+      "parentUuid": "3c0c8b8d_3b566fd9",
       "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e4edf2_43653f61",
+        "filename": "include/libpldm/transport/af-mctp.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T05:24:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b42d208c_9499a5b9",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4799184e_b0d33d64",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-08-17T00:26:49Z",
       "side": 1,
       "message": "Please avoid renaming the variable in this patch. It\u0027s a distraction from the problem the patch is solving.",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dc812fd_a6aab345",
+        "filename": "include/libpldm/transport/mctp-demux.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T05:24:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4799184e_b0d33d64",
       "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97d713da_8ad132b8",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T05:24:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b3258779_2b63381b",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f82c4dd_48f9b55e",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-08-17T00:26:49Z",
       "side": 1,
       "message": "Please avoid renaming the variable in this patch. It\u0027s a distraction from the problem the patch is solving.",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "516a5885_3d07d54e",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T05:24:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0f82c4dd_48f9b55e",
       "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -120,6 +228,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29b4f912_1bf01bed",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T05:24:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "787b91e6_4868a485",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e4080cf_a0e74aa4",
@@ -133,6 +259,24 @@
       "writtenOn": "2023-08-17T00:26:49Z",
       "side": 1,
       "message": "Please avoid renaming the variable in this patch. It\u0027s a distraction from the problem the patch is solving.",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8073213_ab2bf14f",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T05:24:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1e4080cf_a0e74aa4",
       "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -154,6 +298,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38a95d5e_6131d293",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T05:24:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "efeddaff_826b9086",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97ff632b_127da316",
@@ -167,6 +329,24 @@
       "writtenOn": "2023-08-17T00:26:49Z",
       "side": 1,
       "message": "Please avoid renaming the variable in this patch. It\u0027s a distraction from the problem the patch is solving.",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "742d6fa7_08aa9193",
+        "filename": "src/transport/mctp-demux.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T05:24:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "97ff632b_127da316",
       "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
