@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8493c7a_57a9238e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-17T05:45:04Z",
+      "side": 1,
+      "message": "Right, but why did this patch not fail to build? I don\u0027t know the answer, I\u0027m kinda surprised.\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/65672",
+      "parentUuid": "43286b53_91f2b5fd",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c0c8b8d_3b566fd9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
