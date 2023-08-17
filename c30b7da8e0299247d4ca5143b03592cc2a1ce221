@@ -46,6 +46,30 @@
       },
       "revId": "c30b7da8e0299247d4ca5143b03592cc2a1ce221",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9769edc6_40baccf2",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-17T11:34:08Z",
+      "side": 1,
+      "message": "Meta have confirmed this works in their testing:\n\n\u003e We have implemented the pldmtool with the transport APIs based on rkg\u0027s patches. We have also add a Meson option to choose between af-mtcp and mctp-demux, in order to avoid impacting ongoing projects.\n\u003e https://gerrit.openbmc.org/c/openbmc/libpldm/+/65675\n\u003e https://gerrit.openbmc.org/c/openbmc/pldm/+/65676\n\u003e And the code has tested communicating with bridge-IC and NIC.\n\nhttps://discord.com/channels/775381525260664832/778790638563885086/1141327023839641640\n\nSo I think deleting the comment is enough.",
+      "parentUuid": "be9957d5_bac9a6fa",
+      "range": {
+        "startLine": 115,
+        "startChar": 1,
+        "endLine": 115,
+        "endChar": 20
+      },
+      "revId": "c30b7da8e0299247d4ca5143b03592cc2a1ce221",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
