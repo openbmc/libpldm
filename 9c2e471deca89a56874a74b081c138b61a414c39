@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6128e8e_ec135159",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-17T00:15:09Z",
+      "side": 1,
+      "message": "C++ is only required for the tests (and ideally that wouldn\u0027t be the case either). Given the lack of meson support for detecting clang++\u0027s c++23 support I don\u0027t see any advantage to submitting this prematurely, given that we leverage clang-tidy.",
+      "revId": "9c2e471deca89a56874a74b081c138b61a414c39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
