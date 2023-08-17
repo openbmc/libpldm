@@ -54,6 +54,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92563e47_57c3609c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T06:44:06Z",
+      "side": 1,
+      "message": "We found that the headers were not included in the c file, so it didn\u0027t find conflicting types at compile time. We updated the patch for this change.",
+      "parentUuid": "f8493c7a_57a9238e",
+      "revId": "0e7fac9f8b4cb7d93f35a036afe1a18f3c1609e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c0c8b8d_3b566fd9",

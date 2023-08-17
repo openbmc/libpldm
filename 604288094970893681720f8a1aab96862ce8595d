@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d16cd7d_65709b79",
+        "filename": "include/libpldm/transport/af-mctp.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T06:44:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8aae06e4_3f156810",
+      "revId": "604288094970893681720f8a1aab96862ce8595d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b1f5d90_6737e238",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-08-17T05:45:04Z",
       "side": 1,
       "message": "This also still renames the variable 😊",
+      "revId": "604288094970893681720f8a1aab96862ce8595d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f820a1d_01c5c1cf",
+        "filename": "include/libpldm/transport/mctp-demux.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T06:44:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b1f5d90_6737e238",
       "revId": "604288094970893681720f8a1aab96862ce8595d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
