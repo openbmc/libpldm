@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72e981ff_43240aa6",
+        "filename": "include/libpldm/transport/af-mctp.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T07:04:12Z",
+      "side": 1,
+      "message": "It seems like the CI test not allowing us to use different names between h file and c file. We made it follow the name from c file.",
+      "parentUuid": "2d16cd7d_65709b79",
+      "revId": "604288094970893681720f8a1aab96862ce8595d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b1f5d90_6737e238",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "4b1f5d90_6737e238",
+      "revId": "604288094970893681720f8a1aab96862ce8595d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b70ef8d3_9536a622",
+        "filename": "include/libpldm/transport/mctp-demux.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-08-17T07:04:12Z",
+      "side": 1,
+      "message": "It seems like the CI test not allowing us to use different names between h file and c file. We made it follow the name from c file.",
+      "parentUuid": "1f820a1d_01c5c1cf",
       "revId": "604288094970893681720f8a1aab96862ce8595d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
