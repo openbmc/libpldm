@@ -87,6 +87,7 @@ static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
 	struct pldm_transport_af_mctp *af_mctp = transport_to_af_mctp(t);
 	mctp_eid_t eid = 0;
 	ssize_t length;
+	void *msg;
 	int rc;
 
 	rc = pldm_transport_af_mctp_get_eid(af_mctp, tid, &eid);
@@ -99,13 +100,14 @@ static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
 		return PLDM_REQUESTER_RECV_FAIL;
 	}
 
-	*pldm_msg = malloc(length);
-	length = recv(af_mctp->socket, *pldm_msg, length, MSG_TRUNC);
+	msg = malloc(length);
+	length = recv(af_mctp->socket, msg, length, MSG_TRUNC);
 	if (length < (ssize_t)sizeof(struct pldm_msg_hdr)) {
-		free(*pldm_msg);
+		free(msg);
 		return PLDM_REQUESTER_INVALID_RECV_LEN;
 	}
 
+	*pldm_msg = msg;
 	*msg_len = length;
 
 	return PLDM_REQUESTER_SUCCESS;
