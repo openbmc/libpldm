@@ -101,6 +101,10 @@ static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
 	}
 
 	msg = malloc(length);
+	if (!msg) {
+		return PLDM_REQUESTER_RECV_FAIL;
+	}
+
 	length = recv(af_mctp->socket, msg, length, MSG_TRUNC);
 	if (length < (ssize_t)sizeof(struct pldm_msg_hdr)) {
 		free(msg);
