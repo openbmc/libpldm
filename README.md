@@ -184,7 +184,7 @@ figure. They must be adhering to the rules mentioned under the libpldm section
 above.
 
 Once the above is done a meson option has to be created in
-`libpldm/meson_options.txt` with its mapped compiler flag to enable conditional
+`libpldm/meson.options` with its mapped compiler flag to enable conditional
 compilation.
 
 For consistency would recommend using "oem-<oem_name>".
