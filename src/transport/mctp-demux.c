@@ -115,50 +115,65 @@ pldm_transport_mctp_demux_recv(struct pldm_transport *t, pldm_tid_t tid,
 			       void **pldm_msg, size_t *msg_len)
 {
 	struct pldm_transport_mctp_demux *demux = transport_to_demux(t);
+	size_t mctp_prefix_len = 2;
+	struct msghdr msg = { 0 };
+	uint8_t mctp_prefix[2];
+	struct iovec iov[2];
 	mctp_eid_t eid = 0;
-	int rc = pldm_transport_mctp_demux_get_eid(demux, tid, &eid);
+	ssize_t min_len;
+	size_t pldm_len;
+	ssize_t length;
+	ssize_t bytes;
+	uint8_t *buf;
+	int rc;
+
+	rc = pldm_transport_mctp_demux_get_eid(demux, tid, &eid);
 	if (rc) {
 		return PLDM_REQUESTER_RECV_FAIL;
 	}
 
-	ssize_t min_len = sizeof(eid) + sizeof(mctp_msg_type) +
-			  sizeof(struct pldm_msg_hdr);
-	ssize_t length = recv(demux->socket, NULL, 0, MSG_PEEK | MSG_TRUNC);
+	min_len = sizeof(eid) + sizeof(mctp_msg_type) +
+		  sizeof(struct pldm_msg_hdr);
+	length = recv(demux->socket, NULL, 0, MSG_PEEK | MSG_TRUNC);
 	if (length <= 0) {
 		return PLDM_REQUESTER_RECV_FAIL;
 	}
-	uint8_t *buf = malloc(length);
+
+	buf = malloc(length);
 	if (buf == NULL) {
 		return PLDM_REQUESTER_RECV_FAIL;
 	}
+
 	if (length < min_len) {
 		/* read and discard */
 		recv(demux->socket, buf, length, 0);
 		free(buf);
 		return PLDM_REQUESTER_INVALID_RECV_LEN;
 	}
-	struct iovec iov[2];
-	uint8_t mctp_prefix[2];
-	size_t mctp_prefix_len = 2;
-	size_t pldm_len = length - mctp_prefix_len;
+
+	pldm_len = length - mctp_prefix_len;
 	iov[0].iov_len = mctp_prefix_len;
 	iov[0].iov_base = mctp_prefix;
 	iov[1].iov_len = pldm_len;
 	iov[1].iov_base = buf;
-	struct msghdr msg = { 0 };
+
 	msg.msg_iov = iov;
 	msg.msg_iovlen = sizeof(iov) / sizeof(iov[0]);
-	ssize_t bytes = recvmsg(demux->socket, &msg, 0);
+
+	bytes = recvmsg(demux->socket, &msg, 0);
 	if (length != bytes) {
 		free(buf);
 		return PLDM_REQUESTER_INVALID_RECV_LEN;
 	}
+
 	if ((mctp_prefix[0] != eid) || (mctp_prefix[1] != mctp_msg_type)) {
 		free(buf);
 		return PLDM_REQUESTER_NOT_PLDM_MSG;
 	}
+
 	*pldm_msg = buf;
 	*msg_len = pldm_len;
+
 	return PLDM_REQUESTER_SUCCESS;
 }
 
