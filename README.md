@@ -183,9 +183,8 @@ should be placed under the respective folder hierarchy as mentioned in the above
 figure. They must be adhering to the rules mentioned under the libpldm section
 above.
 
-Once the above is done a meson option has to be created in
-`libpldm/meson_options.txt` with its mapped compiler flag to enable conditional
-compilation.
+Once the above is done a meson option has to be created in `meson.options` with
+its mapped compiler flag to enable conditional compilation.
 
 For consistency would recommend using "oem-<oem_name>".
 
