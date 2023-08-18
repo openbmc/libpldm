@@ -16,6 +16,24 @@
       "message": "Do we need update CHANGELOG.md?",
       "revId": "27f041cac2f339d6c5bc22cf003dba038b63272a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c7df4a2_6bc151df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-18T04:40:04Z",
+      "side": 1,
+      "message": "I didn\u0027t for this as it\u0027s entirely internal. There aren\u0027t any changes to the API or how out-parameters are dealt with. It\u0027s not a bug fix for something someone one an earlier release might be affected by, its just a bit of a refactor of the implementation.\n\nEssentially, the only thing that should go into the changelog are things whose knowledge would benefit anyone trying to consume libpldm. I don\u0027t think this meets that bar.",
+      "parentUuid": "e52130a0_25a6b994",
+      "revId": "27f041cac2f339d6c5bc22cf003dba038b63272a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
