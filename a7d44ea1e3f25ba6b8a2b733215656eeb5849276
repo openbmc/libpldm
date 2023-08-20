@@ -178,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14375afb_9cad2161",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-20T21:53:40Z",
+      "side": 1,
+      "message": "Here\u0027s a blog post that motivates the use of the msgbuf APIs:\n\nhttps://trust-in-soft.com/blog/2020/04/06/gcc-always-assumes-aligned-pointer-accesses/\n\nHN discussion:\n\nhttps://news.ycombinator.com/item?id\u003d37194953",
+      "parentUuid": "7d2ba655_2a862034",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "023d0e42_2f5ce437",
         "filename": "include/libpldm/pldm_rde.h",
         "patchSetId": 5
