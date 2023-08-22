@@ -214,7 +214,9 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		if (rc == PLDM_REQUESTER_SUCCESS) {
 			const struct pldm_msg_hdr *resp_hdr = *pldm_resp_msg;
 			if ((src_tid == tid) &&
-			    (req_hdr->instance_id == resp_hdr->instance_id)) {
+			    (req_hdr->instance_id == resp_hdr->instance_id) &&
+			    (req_hdr->type == resp_hdr->type) &&
+			    (req_hdr->command == resp_hdr->command)) {
 				return rc;
 			}
 

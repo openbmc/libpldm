@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 1. state-set: Add new enum for Operational Fault Status enum
+2. transport: Match command type/index on response in _send_recv_msg()
 
 ## [0.6.0] - 2023-08-22
 
