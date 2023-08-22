@@ -4,6 +4,7 @@ $VAR1 = {
           'Arch' => 'AARCH64',
           'GccVersion' => '13.2.1',
           'Headers' => {
+                         'af-mctp.h' => 1,
                          'base.h' => 1,
                          'bios.h' => 1,
                          'bios_table.h' => 1,
@@ -12,10 +13,12 @@ $VAR1 = {
                          'fru.h' => 1,
                          'host.h' => 1,
                          'instance-id.h' => 1,
+                         'mctp-demux.h' => 1,
                          'pdr.h' => 1,
                          'platform.h' => 1,
                          'platform_oem_ibm.h' => 1,
                          'pldm.h' => 1,
+                         'transport.h' => 1,
                          'utils.h' => 1
                        },
           'Language' => 'C',
@@ -72,6 +75,55 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_set_date_time_req'
                                        },
+                            '100429' => {
+                                          'Header' => 'mctp-demux.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 'ctx',
+                                                                'type' => '92097'
+                                                              },
+                                                       '1' => {
+                                                                'name' => 'tid',
+                                                                'type' => '89858'
+                                                              },
+                                                       '2' => {
+                                                                'name' => 'eid',
+                                                                'type' => '91813'
+                                                              }
+                                                     },
+                                          'Return' => '74',
+                                          'ShortName' => 'pldm_transport_mctp_demux_unmap_tid'
+                                        },
+                            '100765' => {
+                                          'Header' => 'mctp-demux.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 't',
+                                                                'type' => '92139'
+                                                              },
+                                                       '1' => {
+                                                                'name' => 'pollfd',
+                                                                'type' => '94838'
+                                                              }
+                                                     },
+                                          'Return' => '74',
+                                          'ShortName' => 'pldm_transport_mctp_demux_init_pollfd'
+                                        },
+                            '105042' => {
+                                          'Header' => 'transport.h',
+                                          'Param' => {
+                                                       '0' => {
+                                                                'name' => 'transport',
+                                                                'type' => '92139'
+                                                              },
+                                                       '1' => {
+                                                                'name' => 'timeout',
+                                                                'type' => '74'
+                                                              }
+                                                     },
+                                          'Return' => '74',
+                                          'ShortName' => 'pldm_transport_poll'
+                                        },
                             '10505' => {
                                          'Header' => 'bios.h',
                                          'Param' => {
@@ -7141,6 +7193,135 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_get_bios_table_resp'
                                       },
+                            '92102' => {
+                                         'Header' => 'transport.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'transport',
+                                                               'type' => '92139'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '89858'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'pldm_msg',
+                                                               'type' => '1434'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'msg_len',
+                                                               'type' => '123'
+                                                             }
+                                                    },
+                                         'Return' => '91928',
+                                         'ShortName' => 'pldm_transport_send_msg'
+                                       },
+                            '92149' => {
+                                         'Header' => 'transport.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'transport',
+                                                               'type' => '92139'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '89858'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'pldm_req_msg',
+                                                               'type' => '1434'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'req_msg_len',
+                                                               'type' => '123'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'pldm_resp_msg',
+                                                               'type' => '16616'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'resp_msg_len',
+                                                               'type' => '8822'
+                                                             }
+                                                    },
+                                         'Return' => '91928',
+                                         'ShortName' => 'pldm_transport_send_recv_msg'
+                                       },
+                            '92206' => {
+                                         'Header' => 'mctp-demux.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '92097'
+                                                             }
+                                                    },
+                                         'Return' => '1',
+                                         'ShortName' => 'pldm_transport_mctp_demux_destroy'
+                                       },
+                            '92243' => {
+                                         'Header' => 'transport.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'transport',
+                                                               'type' => '92139'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '92280'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'pldm_msg',
+                                                               'type' => '16616'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'msg_len',
+                                                               'type' => '8822'
+                                                             }
+                                                    },
+                                         'Return' => '91928',
+                                         'ShortName' => 'pldm_transport_recv_msg'
+                                       },
+                            '92285' => {
+                                         'Header' => 'mctp-demux.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '92097'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '89858'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'eid',
+                                                               'type' => '91813'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_transport_mctp_demux_map_tid'
+                                       },
+                            '92317' => {
+                                         'Header' => 'mctp-demux.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '92097'
+                                                             }
+                                                    },
+                                         'Return' => '92139',
+                                         'ShortName' => 'pldm_transport_mctp_demux_core'
+                                       },
+                            '92361' => {
+                                         'Header' => 'mctp-demux.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '92383'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_transport_mctp_demux_init'
+                                       },
                             '92486' => {
                                          'Header' => 'pldm.h',
                                          'Param' => {
@@ -7292,6 +7473,81 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_set_date_time_resp'
                                       },
+                            '95801' => {
+                                         'Header' => 'af-mctp.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '95884'
+                                                             }
+                                                    },
+                                         'Return' => '1',
+                                         'ShortName' => 'pldm_transport_af_mctp_destroy'
+                                       },
+                            '95889' => {
+                                         'Header' => 'af-mctp.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '96112'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_transport_af_mctp_init'
+                                       },
+                            '96822' => {
+                                         'Header' => 'af-mctp.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '95884'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '89858'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'eid',
+                                                               'type' => '91813'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_transport_af_mctp_unmap_tid'
+                                       },
+                            '96900' => {
+                                         'Header' => 'af-mctp.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '95884'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'tid',
+                                                               'type' => '89858'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'eid',
+                                                               'type' => '91813'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_transport_af_mctp_map_tid'
+                                       },
+                            '97158' => {
+                                         'Header' => 'af-mctp.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 't',
+                                                               'type' => '92139'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'pollfd',
+                                                               'type' => '94838'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_transport_af_mctp_init_pollfd'
+                                       },
                             '9723' => {
                                         'Header' => 'bios.h',
                                         'Param' => {
@@ -7330,7 +7586,18 @@ $VAR1 = {
                                                    },
                                         'Return' => '74',
                                         'ShortName' => 'decode_set_date_time_req'
-                                      }
+                                      },
+                            '97241' => {
+                                         'Header' => 'af-mctp.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'ctx',
+                                                               'type' => '95884'
+                                                             }
+                                                    },
+                                         'Return' => '92139',
+                                         'ShortName' => 'pldm_transport_af_mctp_core'
+                                       }
                           },
           'SymbolVersion' => {},
           'Symbols' => {
@@ -7634,6 +7901,22 @@ $VAR1 = {
                                                  'pldm_recv_any' => 1,
                                                  'pldm_send' => 1,
                                                  'pldm_send_recv' => 1,
+                                                 'pldm_transport_af_mctp_core' => 1,
+                                                 'pldm_transport_af_mctp_destroy' => 1,
+                                                 'pldm_transport_af_mctp_init' => 1,
+                                                 'pldm_transport_af_mctp_init_pollfd' => 1,
+                                                 'pldm_transport_af_mctp_map_tid' => 1,
+                                                 'pldm_transport_af_mctp_unmap_tid' => 1,
+                                                 'pldm_transport_mctp_demux_core' => 1,
+                                                 'pldm_transport_mctp_demux_destroy' => 1,
+                                                 'pldm_transport_mctp_demux_init' => 1,
+                                                 'pldm_transport_mctp_demux_init_pollfd' => 1,
+                                                 'pldm_transport_mctp_demux_map_tid' => 1,
+                                                 'pldm_transport_mctp_demux_unmap_tid' => 1,
+                                                 'pldm_transport_poll' => 1,
+                                                 'pldm_transport_recv_msg' => 1,
+                                                 'pldm_transport_send_msg' => 1,
+                                                 'pldm_transport_send_recv_msg' => 1,
                                                  'unpack_pldm_header' => 1,
                                                  'ver2str' => 1
                                                }
@@ -9092,6 +9375,11 @@ $VAR1 = {
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
+                          '60' => {
+                                    'Name' => 'short',
+                                    'Size' => '2',
+                                    'Type' => 'Intrinsic'
+                                  },
                           '6048' => {
                                       'Header' => 'utils.h',
                                       'Line' => '18',
@@ -10003,6 +10291,253 @@ $VAR1 = {
                                        'Name' => 'pldm_requester_rc_t',
                                        'Size' => '4',
                                        'Type' => 'Typedef'
+                                     },
+                          '92071' => {
+                                       'Header' => undef,
+                                       'Line' => '23',
+                                       'Memb' => {
+                                                   '0' => {
+                                                            'name' => 'transport',
+                                                            'offset' => '0',
+                                                            'type' => '92144'
+                                                          },
+                                                   '1' => {
+                                                            'name' => 'socket',
+                                                            'offset' => '64',
+                                                            'type' => '74'
+                                                          },
+                                                   '2' => {
+                                                            'name' => 'tid_eid_map',
+                                                            'offset' => '68',
+                                                            'type' => '95445'
+                                                          },
+                                                   '3' => {
+                                                            'name' => 'socket_send_buf',
+                                                            'offset' => '768',
+                                                            'type' => '94587'
+                                                          }
+                                                 },
+                                       'Name' => 'struct pldm_transport_mctp_demux',
+                                       'PrivateABI' => 1,
+                                       'Size' => '312',
+                                       'Type' => 'Struct'
+                                     },
+                          '92097' => {
+                                       'BaseType' => '92071',
+                                       'Name' => 'struct pldm_transport_mctp_demux*',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
+                                     },
+                          '92139' => {
+                                       'BaseType' => '92144',
+                                       'Name' => 'struct pldm_transport*',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
+                                     },
+                          '92144' => {
+                                       'Header' => undef,
+                                       'Line' => '17',
+                                       'Memb' => {
+                                                   '0' => {
+                                                            'name' => 'name',
+                                                            'offset' => '0',
+                                                            'type' => '12199'
+                                                          },
+                                                   '1' => {
+                                                            'name' => 'version',
+                                                            'offset' => '8',
+                                                            'type' => '168'
+                                                          },
+                                                   '2' => {
+                                                            'name' => 'recv',
+                                                            'offset' => '22',
+                                                            'type' => '94772'
+                                                          },
+                                                   '3' => {
+                                                            'name' => 'send',
+                                                            'offset' => '36',
+                                                            'type' => '94813'
+                                                          },
+                                                   '4' => {
+                                                            'name' => 'init_pollfd',
+                                                            'offset' => '50',
+                                                            'type' => '94894'
+                                                          }
+                                                 },
+                                       'Name' => 'struct pldm_transport',
+                                       'PrivateABI' => 1,
+                                       'Size' => '40',
+                                       'Type' => 'Struct'
+                                     },
+                          '92280' => {
+                                       'BaseType' => '89858',
+                                       'Name' => 'pldm_tid_t*',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
+                                     },
+                          '92383' => {
+                                       'BaseType' => '92097',
+                                       'Name' => 'struct pldm_transport_mctp_demux**',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
+                                     },
+                          '94587' => {
+                                       'Header' => undef,
+                                       'Line' => '4',
+                                       'Memb' => {
+                                                   '0' => {
+                                                            'name' => 'size',
+                                                            'offset' => '0',
+                                                            'type' => '74'
+                                                          },
+                                                   '1' => {
+                                                            'name' => 'socket',
+                                                            'offset' => '4',
+                                                            'type' => '74'
+                                                          },
+                                                   '2' => {
+                                                            'name' => 'max_size',
+                                                            'offset' => '8',
+                                                            'type' => '74'
+                                                          }
+                                                 },
+                                       'Name' => 'struct pldm_socket_sndbuf',
+                                       'PrivateABI' => 1,
+                                       'Size' => '12',
+                                       'Type' => 'Struct'
+                                     },
+                          '94772' => {
+                                       'Name' => 'pldm_requester_rc_t(*)(struct pldm_transport*, pldm_tid_t*, void**, size_t*)',
+                                       'Param' => {
+                                                    '0' => {
+                                                             'type' => '92139'
+                                                           },
+                                                    '1' => {
+                                                             'type' => '92280'
+                                                           },
+                                                    '2' => {
+                                                             'type' => '16616'
+                                                           },
+                                                    '3' => {
+                                                             'type' => '8822'
+                                                           }
+                                                  },
+                                       'Return' => '91928',
+                                       'Size' => '8',
+                                       'Type' => 'FuncPtr'
+                                     },
+                          '94813' => {
+                                       'Name' => 'pldm_requester_rc_t(*)(struct pldm_transport*, pldm_tid_t, void const*, size_t)',
+                                       'Param' => {
+                                                    '0' => {
+                                                             'type' => '92139'
+                                                           },
+                                                    '1' => {
+                                                             'type' => '89858'
+                                                           },
+                                                    '2' => {
+                                                             'type' => '1434'
+                                                           },
+                                                    '3' => {
+                                                             'type' => '123'
+                                                           }
+                                                  },
+                                       'Return' => '91928',
+                                       'Size' => '8',
+                                       'Type' => 'FuncPtr'
+                                     },
+                          '94838' => {
+                                       'BaseType' => '94843',
+                                       'Name' => 'struct pollfd*',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
+                                     },
+                          '94843' => {
+                                       'Header' => undef,
+                                       'Line' => '36',
+                                       'Memb' => {
+                                                   '0' => {
+                                                            'name' => 'fd',
+                                                            'offset' => '0',
+                                                            'type' => '74'
+                                                          },
+                                                   '1' => {
+                                                            'name' => 'events',
+                                                            'offset' => '4',
+                                                            'type' => '60'
+                                                          },
+                                                   '2' => {
+                                                            'name' => 'revents',
+                                                            'offset' => '6',
+                                                            'type' => '60'
+                                                          }
+                                                 },
+                                       'Name' => 'struct pollfd',
+                                       'PrivateABI' => 1,
+                                       'Size' => '8',
+                                       'Type' => 'Struct'
+                                     },
+                          '94894' => {
+                                       'Name' => 'int(*)(struct pldm_transport*, struct pollfd*)',
+                                       'Param' => {
+                                                    '0' => {
+                                                             'type' => '92139'
+                                                           },
+                                                    '1' => {
+                                                             'type' => '94838'
+                                                           }
+                                                  },
+                                       'Return' => '74',
+                                       'Size' => '8',
+                                       'Type' => 'FuncPtr'
+                                     },
+                          '95377' => {
+                                       'Header' => undef,
+                                       'Line' => '22',
+                                       'Memb' => {
+                                                   '0' => {
+                                                            'name' => 'transport',
+                                                            'offset' => '0',
+                                                            'type' => '92144'
+                                                          },
+                                                   '1' => {
+                                                            'name' => 'socket',
+                                                            'offset' => '64',
+                                                            'type' => '74'
+                                                          },
+                                                   '2' => {
+                                                            'name' => 'tid_eid_map',
+                                                            'offset' => '68',
+                                                            'type' => '95445'
+                                                          },
+                                                   '3' => {
+                                                            'name' => 'socket_send_buf',
+                                                            'offset' => '768',
+                                                            'type' => '94587'
+                                                          }
+                                                 },
+                                       'Name' => 'struct pldm_transport_af_mctp',
+                                       'PrivateABI' => 1,
+                                       'Size' => '312',
+                                       'Type' => 'Struct'
+                                     },
+                          '95445' => {
+                                       'BaseType' => '89858',
+                                       'Name' => 'pldm_tid_t[256]',
+                                       'Size' => '256',
+                                       'Type' => 'Array'
+                                     },
+                          '95884' => {
+                                       'BaseType' => '95377',
+                                       'Name' => 'struct pldm_transport_af_mctp*',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
+                                     },
+                          '96112' => {
+                                       'BaseType' => '95884',
+                                       'Name' => 'struct pldm_transport_af_mctp**',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
                                      },
                           '969' => {
                                      'BaseType' => '890',

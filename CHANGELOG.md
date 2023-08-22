@@ -20,6 +20,26 @@ Change categories:
 ### Changed
 
 1. transport: mctp-demux: Drop ABI annotation for internal symbols
+2. transport: Stabilise core transport and implementation APIs
+
+### Deprecated
+
+1. All the existing "requester" APIs from `libpldm/pldm.h` (also
+   known as `libpldm/requester/pldm.h`):
+
+   - pldm_open()
+   - pldm_send_recv()
+   - pldm_send()
+   - pldm_recv()
+   - pldm_recv_any()
+   - pldm_close()
+
+   Users should migrate to the newer "transport" APIs instead, exposed in the
+   following headers:
+
+   - `libpldm/transport.h`
+   - `libpldm/transport/af-mctp.h`
+   - `libpldm/transport/mctp-demux.h`
 
 ## [0.6.0] - 2023-08-22
 
