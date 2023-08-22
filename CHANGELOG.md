@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Changed
+
+1. transport: mctp-demux: Drop ABI annotation for internal symbols
+
 ## [0.6.0] - 2023-08-22
 
 ### Changed

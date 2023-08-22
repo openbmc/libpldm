@@ -277,7 +277,6 @@ void pldm_transport_mctp_demux_destroy(struct pldm_transport_mctp_demux *ctx)
 }
 
 /* Temporary for old API */
-LIBPLDM_ABI_TESTING
 struct pldm_transport_mctp_demux *
 pldm_transport_mctp_demux_init_with_fd(int mctp_fd)
 {
@@ -310,7 +309,6 @@ pldm_transport_mctp_demux_init_with_fd(int mctp_fd)
 	return demux;
 }
 
-LIBPLDM_ABI_TESTING
 int pldm_transport_mctp_demux_get_socket_fd(
 	struct pldm_transport_mctp_demux *ctx)
 {
