@@ -29,7 +29,7 @@ static inline int poll(struct pollfd *fds __attribute__((unused)),
 }
 #endif
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_transport_poll(struct pldm_transport *transport, int timeout)
 {
 	struct pollfd pollfd;
@@ -57,7 +57,7 @@ int pldm_transport_poll(struct pldm_transport *transport, int timeout)
 	return rc;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
 					    pldm_tid_t tid,
 					    const void *pldm_msg,
@@ -74,7 +74,7 @@ pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
 	return transport->send(transport, tid, pldm_msg, msg_len);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
 					    pldm_tid_t *tid, void **pldm_msg,
 					    size_t *msg_len)
@@ -140,7 +140,7 @@ static int clock_gettimeval(clockid_t clockid, struct timeval *tv)
 	return 0;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 pldm_requester_rc_t
 pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			     const void *pldm_req_msg, size_t req_msg_len,
