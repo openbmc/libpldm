@@ -5,7 +5,6 @@
 
 #include <gtest/gtest.h>
 
-#ifdef LIBPLDM_API_TESTING
 TEST(Transport, create)
 {
     struct pldm_transport_test* test = NULL;
@@ -14,9 +13,7 @@ TEST(Transport, create)
     EXPECT_NE(pldm_transport_test_core(test), nullptr);
     pldm_transport_test_destroy(test);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(Transport, send_one)
 {
     const uint8_t msg[] = {0x81, 0x00, 0x01, 0x01};
@@ -41,9 +38,7 @@ TEST(Transport, send_one)
     EXPECT_EQ(rc, PLDM_REQUESTER_SUCCESS);
     pldm_transport_test_destroy(test);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(Transport, recv_one)
 {
     uint8_t msg[] = {0x01, 0x00, 0x01, 0x00};
@@ -76,9 +71,7 @@ TEST(Transport, recv_one)
     free(recvd);
     pldm_transport_test_destroy(test);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(Transport, send_recv_one)
 {
     uint8_t req[] = {0x81, 0x00, 0x01, 0x01};
@@ -126,9 +119,7 @@ TEST(Transport, send_recv_one)
     free(msg);
     pldm_transport_test_destroy(test);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(Transport, send_recv_timeout)
 {
     uint8_t req[] = {0x81, 0x00, 0x01, 0x01};
@@ -163,9 +154,7 @@ TEST(Transport, send_recv_timeout)
     EXPECT_EQ(rc, PLDM_REQUESTER_RECV_FAIL);
     pldm_transport_test_destroy(test);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(Transport, send_recv_unwanted)
 {
     uint8_t req[] = {0x81, 0x00, 0x01, 0x01};
@@ -218,9 +207,7 @@ TEST(Transport, send_recv_unwanted)
     EXPECT_EQ(rc, PLDM_REQUESTER_RECV_FAIL);
     pldm_transport_test_destroy(test);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(Transport, send_recv_drain_one_unwanted)
 {
     uint8_t unwanted[] = {0x01, 0x00, 0x01, 0x01};
@@ -270,4 +257,3 @@ TEST(Transport, send_recv_drain_one_unwanted)
     free(msg);
     pldm_transport_test_destroy(test);
 }
-#endif
