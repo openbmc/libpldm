@@ -196,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a85bfcc8_117d0b34",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-22T19:30:47Z",
+      "side": 1,
+      "message": "Very interesting post. Thanks for sharing. I changed things to using msgbuf API.",
+      "parentUuid": "14375afb_9cad2161",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "023d0e42_2f5ce437",
         "filename": "include/libpldm/pldm_rde.h",
         "patchSetId": 5
@@ -207,6 +225,24 @@
       "writtenOn": "2023-07-31T05:31:07Z",
       "side": 1,
       "message": "A one-element-array as a flexible array member is another thing that we need to get away from. Its use as a flexible array member is not specified by C but we\u0027re stuck with the problem that flexible arrays are entirely not supported by C++. The path forward that I have in mind is that:\n\n1. We provide a public accessor API that returns a pointer to the flexible array:\n\n   ```\n   char *pldm_rde_varstring_data(struct pldm_rde_varstring *ctx)\n   {\n       return ctx-\u003estring_data;\n   }\n   ```\n   \n2. We declare the struct as follows:\n\n   ```\n   struct pldm_rde_varstring {\n       uint8_t string_format;\n       uint8_t string_length_bytes;\n   #ifndef __cplusplus\n       char string_data[]\n   #endif\n   }\n   ```\n\nThis way `sizeof(struct pldm_rde_varstring)` is the same for both C and C++, isn\u0027t incorrectly sized in either, provides well-defined behaviour for C, and C++ won\u0027t choke on the flexible array member definition.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f8d37df_0df49c47",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-22T19:30:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "023d0e42_2f5ce437",
       "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -224,6 +260,24 @@
       "writtenOn": "2023-07-31T05:31:07Z",
       "side": 1,
       "message": "We can use the types we defined above if we exploit the msgbuf APIs for encoding and decoding. That helps the compiler enforce semantic correctness.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1971c156_96c67590",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-22T19:30:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "506592fa_1daffa9f",
       "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -280,6 +334,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31310620_7ee8ade9",
+        "filename": "include/libpldm/pldm_rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-22T19:30:47Z",
+      "side": 1,
+      "message": "I kept the params similar to the original implementation to minimize the changes I have to do to migrate this to msgbuf API.",
+      "parentUuid": "cae10742_0f58dbe1",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1d56964_9ce9a426",
@@ -332,6 +404,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea20adb0_caaed315",
+        "filename": "src/pldm_rde.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-22T19:30:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "84e4e303_48684d22",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a48db30b_a3374b55",
@@ -345,6 +435,24 @@
       "writtenOn": "2023-07-31T05:31:07Z",
       "side": 1,
       "message": "See the comment above regarding the internal msgbuf APIs.",
+      "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca5b4651_6840fca1",
+        "filename": "src/pldm_rde.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-22T19:30:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a48db30b_a3374b55",
       "revId": "a7d44ea1e3f25ba6b8a2b733215656eeb5849276",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
