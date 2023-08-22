@@ -17,6 +17,8 @@ Change categories:
 
 ## [Unreleased]
 
+## [0.6.0] - 2023-08-22
+
 ### Changed
 
 1. pdr: Avoid ID overflow in pldm_entity_association_tree_add_entity()

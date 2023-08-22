@@ -2,7 +2,7 @@ $VAR1 = {
           'ABI_DUMPER_VERSION' => '1.2',
           'ABI_DUMP_VERSION' => '3.5',
           'Arch' => 'AARCH64',
-          'GccVersion' => '13.1.1',
+          'GccVersion' => '13.2.1',
           'Headers' => {
                          'base.h' => 1,
                          'bios.h' => 1,
@@ -19,10 +19,11 @@ $VAR1 = {
                          'utils.h' => 1
                        },
           'Language' => 'C',
-          'LibraryName' => 'libpldm.so.0.5.0',
-          'LibraryVersion' => '0.5.0',
+          'LibraryName' => 'libpldm.so.0.6.0',
+          'LibraryVersion' => '0.6.0',
           'NameSpaces' => {},
           'Needed' => {
+                        'ld-linux-aarch64.so.1' => 1,
                         'libc.so.6' => 1
                       },
           'PublicABI' => '1',
@@ -158,7 +159,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'encode_get_date_time_resp'
                                        },
-                            '109207' => {
+                            '109579' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -177,7 +178,22 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_new_file_with_metadata_resp'
                                         },
-                            '109390' => {
+                            '10972' => {
+                                         'Header' => 'bios.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'instance_id',
+                                                               'type' => '168'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'msg',
+                                                               'type' => '1615'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'encode_get_date_time_req'
+                                       },
+                            '109762' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -221,7 +237,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_new_file_with_metadata_req'
                                         },
-                            '109608' => {
+                            '109980' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -240,7 +256,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_new_file_with_metadata_resp'
                                         },
-                            '109715' => {
+                            '110087' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -283,22 +299,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_new_file_with_metadata_req'
                                         },
-                            '10972' => {
-                                         'Header' => 'bios.h',
-                                         'Param' => {
-                                                      '0' => {
-                                                               'name' => 'instance_id',
-                                                               'type' => '168'
-                                                             },
-                                                      '1' => {
-                                                               'name' => 'msg',
-                                                               'type' => '1615'
-                                                             }
-                                                    },
-                                         'Return' => '74',
-                                         'ShortName' => 'encode_get_date_time_req'
-                                       },
-                            '110008' => {
+                            '110380' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -317,7 +318,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_file_ack_with_meta_data_resp'
                                         },
-                            '110186' => {
+                            '110558' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -361,7 +362,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_file_ack_with_meta_data_req'
                                         },
-                            '110384' => {
+                            '110756' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -380,7 +381,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_file_ack_with_meta_data_resp'
                                         },
-                            '110486' => {
+                            '110858' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -423,7 +424,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_file_ack_with_meta_data_req'
                                         },
-                            '110779' => {
+                            '111151' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -442,7 +443,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_file_ack_resp'
                                         },
-                            '110886' => {
+                            '111258' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -469,7 +470,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_file_ack_req'
                                         },
-                            '111104' => {
+                            '111476' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -488,7 +489,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_file_ack_resp'
                                         },
-                            '111277' => {
+                            '111649' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -515,7 +516,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_file_ack_req'
                                         },
-                            '111413' => {
+                            '111785' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -538,7 +539,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_by_type_resp'
                                         },
-                            '111540' => {
+                            '111912' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -573,7 +574,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_by_type_req'
                                         },
-                            '111798' => {
+                            '112170' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -600,7 +601,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_by_type_resp'
                                         },
-                            '112011' => {
+                            '112383' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -631,7 +632,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_by_type_req'
                                         },
-                            '112161' => {
+                            '112533' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -650,7 +651,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_new_file_resp'
                                         },
-                            '112268' => {
+                            '112640' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -677,7 +678,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_new_file_req'
                                         },
-                            '112486' => {
+                            '112858' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -696,7 +697,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_new_file_resp'
                                         },
-                            '112659' => {
+                            '113031' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -723,7 +724,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_new_file_req'
                                         },
-                            '112795' => {
+                            '113167' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -746,7 +747,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_by_type_memory_resp'
                                         },
-                            '112922' => {
+                            '113294' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -785,7 +786,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_by_type_memory_req'
                                         },
-                            '113200' => {
+                            '113572' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -812,7 +813,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_by_type_memory_resp'
                                         },
-                            '113413' => {
+                            '113785' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -847,7 +848,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_by_type_memory_req'
                                         },
-                            '113577' => {
+                            '113949' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -870,7 +871,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_write_file_resp'
                                         },
-                            '113775' => {
+                            '114147' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -893,7 +894,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_write_file_resp'
                                         },
-                            '113897' => {
+                            '114269' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -920,7 +921,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_write_file_req'
                                         },
-                            '114115' => {
+                            '114487' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -951,7 +952,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_write_file_req'
                                         },
-                            '114264' => {
+                            '114636' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -974,7 +975,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_read_file_resp'
                                         },
-                            '114462' => {
+                            '114834' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1001,7 +1002,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_read_file_resp'
                                         },
-                            '114592' => {
+                            '114964' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1028,7 +1029,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_read_file_req'
                                         },
-                            '114810' => {
+                            '115182' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1055,7 +1056,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_read_file_req'
                                         },
-                            '114939' => {
+                            '115311' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1090,7 +1091,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_get_file_table_resp'
                                         },
-                            '115105' => {
+                            '115477' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1117,7 +1118,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_get_file_table_req'
                                         },
-                            '115314' => {
+                            '115686' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1152,7 +1153,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_get_file_table_resp'
                                         },
-                            '115597' => {
+                            '115969' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1179,7 +1180,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_get_file_table_req'
                                         },
-                            '115726' => {
+                            '116098' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1202,7 +1203,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_memory_resp'
                                         },
-                            '115847' => {
+                            '116219' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1237,7 +1238,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_memory_req'
                                         },
-                            '116094' => {
+                            '116466' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1264,7 +1265,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_rw_file_memory_resp'
                                         },
-                            '116298' => {
+                            '116670' => {
                                           'Header' => 'file_io.h',
                                           'Param' => {
                                                        '0' => {
@@ -1295,7 +1296,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_rw_file_memory_req'
                                         },
-                            '117244' => {
+                            '117616' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1326,7 +1327,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_get_alert_status_resp'
                                         },
-                            '117475' => {
+                            '117847' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1345,7 +1346,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_get_alert_status_req'
                                         },
-                            '117563' => {
+                            '117935' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1372,7 +1373,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'decode_get_alert_status_resp'
                                         },
-                            '117696' => {
+                            '118068' => {
                                           'Header' => 'host.h',
                                           'Param' => {
                                                        '0' => {
@@ -1395,7 +1396,7 @@ $VAR1 = {
                                           'Return' => '74',
                                           'ShortName' => 'encode_get_alert_status_req'
                                         },
-                            '118735' => {
+                            '119107' => {
                                           'Header' => 'platform_oem_ibm.h',
                                           'Param' => {
                                                        '0' => {
@@ -7140,7 +7141,7 @@ $VAR1 = {
                                         'Return' => '74',
                                         'ShortName' => 'encode_get_bios_table_resp'
                                       },
-                            '92481' => {
+                            '92486' => {
                                          'Header' => 'pldm.h',
                                          'Param' => {
                                                       '0' => {
@@ -7163,7 +7164,7 @@ $VAR1 = {
                                          'Return' => '91928',
                                          'ShortName' => 'pldm_send'
                                        },
-                            '92897' => {
+                            '92905' => {
                                          'Header' => 'pldm.h',
                                          'Param' => {
                                                       '0' => {
@@ -7194,7 +7195,7 @@ $VAR1 = {
                                          'Return' => '91928',
                                          'ShortName' => 'pldm_send_recv'
                                        },
-                            '93373' => {
+                            '93384' => {
                                          'Header' => 'pldm.h',
                                          'Param' => {
                                                       '0' => {
@@ -7221,7 +7222,7 @@ $VAR1 = {
                                          'Return' => '91928',
                                          'ShortName' => 'pldm_recv'
                                        },
-                            '93596' => {
+                            '93607' => {
                                          'Header' => 'pldm.h',
                                          'Param' => {
                                                       '0' => {
@@ -7333,7 +7334,7 @@ $VAR1 = {
                           },
           'SymbolVersion' => {},
           'Symbols' => {
-                         'libpldm.so.0.5.0' => {
+                         'libpldm.so.0.6.0' => {
                                                  'bcd2dec16' => 1,
                                                  'bcd2dec32' => 1,
                                                  'bcd2dec8' => 1,
@@ -10011,7 +10012,7 @@ $VAR1 = {
                                    }
                         },
           'UndefinedSymbols' => {
-                                  'libpldm.so.0.5.0' => {
+                                  'libpldm.so.0.6.0' => {
                                                           '_ITM_deregisterTMCloneTable' => 0,
                                                           '_ITM_registerTMCloneTable' => 0,
                                                           '__assert_fail@GLIBC_2.17' => 0,
@@ -10036,6 +10037,7 @@ $VAR1 = {
                                                           'poll@GLIBC_2.17' => 0,
                                                           'ppoll@GLIBC_2.17' => 0,
                                                           'recv@GLIBC_2.17' => 0,
+                                                          'recvfrom@GLIBC_2.17' => 0,
                                                           'recvmsg@GLIBC_2.17' => 0,
                                                           'sendmsg@GLIBC_2.17' => 0,
                                                           'sendto@GLIBC_2.17' => 0,
