@@ -29,14 +29,14 @@ struct pldm_transport_af_mctp {
 #define transport_to_af_mctp(ptr)                                              \
 	container_of(ptr, struct pldm_transport_af_mctp, transport)
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 struct pldm_transport *
 pldm_transport_af_mctp_core(struct pldm_transport_af_mctp *ctx)
 {
 	return &ctx->transport;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_init_pollfd(struct pldm_transport *t,
 				       struct pollfd *pollfd)
 {
@@ -70,7 +70,7 @@ static int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
 	return -1;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_map_tid(struct pldm_transport_af_mctp *ctx,
 				   pldm_tid_t tid, mctp_eid_t eid)
 {
@@ -79,7 +79,7 @@ int pldm_transport_af_mctp_map_tid(struct pldm_transport_af_mctp *ctx,
 	return 0;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
 				     __attribute__((unused)) pldm_tid_t tid,
 				     mctp_eid_t eid)
@@ -169,7 +169,7 @@ static pldm_requester_rc_t pldm_transport_af_mctp_send(struct pldm_transport *t,
 	return PLDM_REQUESTER_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
 {
 	if (!ctx || *ctx) {
@@ -204,7 +204,7 @@ int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
 	return 0;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 void pldm_transport_af_mctp_destroy(struct pldm_transport_af_mctp *ctx)
 {
 	if (!ctx) {
