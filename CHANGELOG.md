@@ -24,6 +24,7 @@ Change categories:
 ### Changed
 
 1. transport: Match specified metadata in pldm_transport_send_recv_msg()
+2. transport: mctp-demux: Drop ABI annotation for internal symbols
 
 ## [0.6.0] - 2023-08-22
 
