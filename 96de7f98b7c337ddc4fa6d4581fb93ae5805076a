@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8079dd2d_8efe1bdc",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-23T18:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f527dc78_f038f2a0",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5907b9f3_13785f67",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-08-23T05:22:14Z",
       "side": 1,
       "message": "I appreciate that this is an improvement over the previous approach that invoked UB, but what was the reasoning behind avoiding the strategy I suggested on PS5?",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7ea1f11_e8d2af29",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-23T18:16:35Z",
+      "side": 1,
+      "message": "I did not understand it fully. In your suggestion we have,\n\n```\nstruct pldm_rde_varstring {\n    uint8_t string_format;\n    uint8_t string_length_bytes;\n#ifndef __cplusplus\n    char string_data[]\n#endif\n}\n```\n\n```\nchar *pldm_rde_varstring_data(struct pldm_rde_varstring *ctx)\n{\n    return ctx-\u003estring_data;\n}\n```\n\nFor my understanding;\n\n1. For C++ compilers, string_data property will be missing. So how does this work with a C++ compiler? \n\n2. Is there an advantage of doing it as above vs simply using a uint8_t *string_data and pointing it to the starting location of the string in a given buffer?",
+      "parentUuid": "5907b9f3_13785f67",
       "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef157d3_94164ac4",
+        "filename": "src/rde.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-23T18:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1686fac3_214f7289",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48e9a641_a1327527",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-08-23T05:22:14Z",
       "side": 1,
       "message": "Why do we extract to the `feature_support` local rather than passing through `\u0026mc_feature_support-\u003evalue` to `pldm_msgbuf_extract()` on line 72? The latter approach would make the local variable unnecessary.",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc181517_79810f3b",
+        "filename": "src/rde.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-23T18:16:35Z",
+      "side": 1,
+      "message": "As a habit I try to avoid passing pointers of packed array properties. Changed it.",
+      "parentUuid": "48e9a641_a1327527",
       "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
