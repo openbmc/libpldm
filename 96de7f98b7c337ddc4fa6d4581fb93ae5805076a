@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eac25edd_faf51981",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-23T05:22:14Z",
+      "side": 1,
+      "message": "Hi Kasun, thanks for the updates. I have a few more queries.",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f527dc78_f038f2a0",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-23T05:22:14Z",
+      "side": 1,
+      "message": "Do you mind if we keep these constants in the implementation (i.e. `src/rde.c`) until we have a strong motivation to expose them in the public headers?",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5907b9f3_13785f67",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-23T05:22:14Z",
+      "side": 1,
+      "message": "I appreciate that this is an improvement over the previous approach that invoked UB, but what was the reasoning behind avoiding the strategy I suggested on PS5?",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1686fac3_214f7289",
+        "filename": "src/rde.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-23T05:22:14Z",
+      "side": 1,
+      "message": "Why not test this before we extract the feature support? That way we would not be doing unnecessary work.",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48e9a641_a1327527",
+        "filename": "src/rde.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-23T05:22:14Z",
+      "side": 1,
+      "message": "Why do we extract to the `feature_support` local rather than passing through `\u0026mc_feature_support-\u003evalue` to `pldm_msgbuf_extract()` on line 72? The latter approach would make the local variable unnecessary.",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
