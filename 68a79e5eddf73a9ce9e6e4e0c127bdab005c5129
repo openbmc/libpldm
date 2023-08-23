@@ -16,6 +16,24 @@
       "message": "Do we also need to remove the `LIBPLDM_ABI_TESTING` from src/transport/test.c?",
       "revId": "68a79e5eddf73a9ce9e6e4e0c127bdab005c5129",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e479d497_0e6bcb3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-23T03:56:31Z",
+      "side": 1,
+      "message": "Good question! The answer is no, because that\u0027s purely an internal transport. There should not be any circumstance where a genuine consumer of libpldm would want to use that transport. The test transport APIs need to be exposed in the shared object for the purpose of successfully linking the test cases. As such it will always carry the `LIBPLDM_ABI_TESTING` annotation.",
+      "parentUuid": "3db967d7_44b04320",
+      "revId": "68a79e5eddf73a9ce9e6e4e0c127bdab005c5129",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
