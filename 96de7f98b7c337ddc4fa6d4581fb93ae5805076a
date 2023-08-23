@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31a7cbf7_e764a3c1",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-23T21:58:22Z",
+      "side": 1,
+      "message": "\u003e 1. For C++ compilers, string_data property will be missing. So how does this work with a C++ compiler?\n\nThe library is a C library and must be compiled with a C compiler (and not a C++ compiler). The library uses features of the C standard that are not part of the subset of C allowed by C++.\n\n`pldm_rde_varstring_data()` is a function provided by the library, therefore it\u0027s a function that\u0027s compiled with a C compiler, and has access to the `string_data` member.\n\nC++ has access to `pldm_rde_varstring_data()` as a function in the library, and so it can retrieve the pointer by invoking the function.\n\n\u003e 2. Is there an advantage of doing it as above vs simply using a uint8_t *string_data and pointing it to the starting location of the string in a given buffer?\n\nIt saves an extra allocation and indirection, and is more cache friendly for short strings.",
+      "parentUuid": "d7ea1f11_e8d2af29",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1686fac3_214f7289",
         "filename": "src/rde.c",
         "patchSetId": 10
