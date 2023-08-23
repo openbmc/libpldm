@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "adc333f8_ce4378a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-08-23T00:50:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aa18f66_50b95677",
+      "revId": "c862377c045a31bd51dc64f3ae732e71b53e9468",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4393166e_17b9ade0",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eadbe6a_28c26b8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-08-23T00:50:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4393166e_17b9ade0",
+      "revId": "c862377c045a31bd51dc64f3ae732e71b53e9468",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60d9c0ee_12ae679b",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-08-23T00:06:13Z",
       "side": 1,
       "message": "This isn\u0027t enough though. Before this sentence, please quote and reference the specification to justify why this solution is acceptable.",
+      "revId": "c862377c045a31bd51dc64f3ae732e71b53e9468",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2848f0_9ab2bd82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-08-23T00:50:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60d9c0ee_12ae679b",
       "revId": "c862377c045a31bd51dc64f3ae732e71b53e9468",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -82,6 +136,24 @@
       "writtenOn": "2023-08-23T00:06:13Z",
       "side": 1,
       "message": "Can you please add test cases that validate this logic (in a positive and negative sense)?",
+      "revId": "c862377c045a31bd51dc64f3ae732e71b53e9468",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fda1fc8_3fe952df",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-08-23T00:50:37Z",
+      "side": 1,
+      "message": "I added two new test cases `send_recv_wrong_command_code` and `send_recv_wrong_pldm_type` which are checking the failed cases. The passed cases are already checked in the existing test cases.",
+      "parentUuid": "09181702_b72ef5f0",
       "revId": "c862377c045a31bd51dc64f3ae732e71b53e9468",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
