@@ -4,13 +4,13 @@ project('libpldm', 'c',
       'optimization=g',
       'warning_level=3',
       'werror=true',
-      'cpp_std=c++20',
+      'cpp_std=c++23',
       'c_std=c17',
       'b_ndebug=if-release',
       'tests=' + (meson.is_subproject() ? 'disabled' : 'enabled'),
     ],
     version: '0.8.0',
-    meson_version: '>=1.1.0',
+    meson_version: '>=1.1.1',
 )
 
 if get_option('tests').allowed()
