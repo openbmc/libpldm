@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "792d59ad_a01b203d",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-08-24T05:15:30Z",
+      "side": 1,
+      "message": "\u003e I removed pldm_rde_negotiate_redfish_parameters_resp struct definition for the moment since it\u0027s not really used.\n\nOkay, yes, it\u0027s best to avoid defining things that aren\u0027t yet used. Otherwise we back ourselves into a corner if we need to change the structure down the track.\n\n\u003e The compiler doesn\u0027t allow me to put struct pldm_rde_varstring as a property at the end of struct pldm_rde_negotiate_redfish_parameters_resp. \n\nAh, so that my approach prevents embedding is a significant problem. We should probably switch back to your approach of using the pointer. Sorry for the noise there.",
+      "parentUuid": "914be5b5_6a085042",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1686fac3_214f7289",
         "filename": "src/rde.c",
         "patchSetId": 10
