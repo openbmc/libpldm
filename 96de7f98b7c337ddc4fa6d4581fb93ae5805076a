@@ -106,6 +106,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "914be5b5_6a085042",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2023-08-24T04:31:43Z",
+      "side": 1,
+      "message": "Thanks for the clarification. Updated the code.\n\nThe compiler doesn\u0027t allow me to put struct pldm_rde_varstring as a property at the end of struct pldm_rde_negotiate_redfish_parameters_resp. So I removed pldm_rde_negotiate_redfish_parameters_resp struct definition for the moment since it\u0027s not really used.",
+      "parentUuid": "31a7cbf7_e764a3c1",
+      "revId": "96de7f98b7c337ddc4fa6d4581fb93ae5805076a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1686fac3_214f7289",
