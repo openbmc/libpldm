@@ -17,6 +17,8 @@ Change categories:
 
 ## [Unreleased]
 
+## [0.7.0] - 2023-08-29
+
 ### Added
 
 1. state-set: Add new enum for Operational Fault Status enum

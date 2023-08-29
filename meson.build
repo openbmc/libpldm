@@ -9,7 +9,7 @@ project('libpldm', ['c','cpp'],
       'b_ndebug=if-release',
       'tests=' + (meson.is_subproject() ? 'disabled' : 'enabled'),
     ],
-    version: '0.6.0',
+    version: '0.7.0',
     meson_version: '>=1.1.0',
 )
 
