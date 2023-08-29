@@ -67,6 +67,10 @@ Change categories:
 
    Users should migrate to the newer "transport" APIs instead.
 
+## Fixed
+
+1. tests: Exclude transport tests when build excludes testing ABIs
+
 ## [0.6.0] - 2023-08-22
 
 ### Changed
