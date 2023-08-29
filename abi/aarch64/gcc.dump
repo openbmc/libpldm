@@ -7322,6 +7322,11 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_transport_mctp_demux_init'
                                        },
+                            '92442' => {
+                                         'Header' => 'pldm.h',
+                                         'Return' => '1',
+                                         'ShortName' => 'pldm_close'
+                                       },
                             '92486' => {
                                          'Header' => 'pldm.h',
                                          'Param' => {
@@ -7855,6 +7860,7 @@ $VAR1 = {
                                                  'pldm_bios_table_string_entry_encode_length' => 1,
                                                  'pldm_bios_table_string_find_by_handle' => 1,
                                                  'pldm_bios_table_string_find_by_string' => 1,
+                                                 'pldm_close' => 1,
                                                  'pldm_entity_association_pdr_add_check' => 1,
                                                  'pldm_entity_association_pdr_add_from_node_check' => 1,
                                                  'pldm_entity_association_pdr_extract' => 1,

@@ -70,6 +70,7 @@ Change categories:
 ## Fixed
 
 1. tests: Exclude transport tests when build excludes testing ABIs
+2. abi: Capture deprecation of pldm_close()
 
 ## [0.6.0] - 2023-08-22
 
