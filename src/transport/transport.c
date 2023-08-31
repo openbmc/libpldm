@@ -169,6 +169,10 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 
 	req_hdr = pldm_req_msg;
 
+	if (!req_hdr->request) {
+		return PLDM_REQUESTER_NOT_REQ_MSG;
+	}
+
 	for (cnt = 0; cnt <= (PLDM_INSTANCE_MAX + 1) * PLDM_MAX_TIDS &&
 		      pldm_transport_poll(transport, 0) == 1;
 	     cnt++) {
@@ -216,7 +220,8 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			if ((src_tid == tid) &&
 			    (req_hdr->instance_id == resp_hdr->instance_id) &&
 			    (req_hdr->type == resp_hdr->type) &&
-			    (req_hdr->command == resp_hdr->command)) {
+			    (req_hdr->command == resp_hdr->command) &&
+			    !resp_hdr->request) {
 				return rc;
 			}
 
