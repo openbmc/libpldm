@@ -363,3 +363,53 @@ TEST(Transport, send_recv_wrong_command_code)
     EXPECT_EQ(rc, PLDM_REQUESTER_RECV_FAIL);
     pldm_transport_test_destroy(test);
 }
+
+TEST(Transport, send_recv_req_echo)
+{
+    uint8_t req[] = {0x81, 0x00, 0x01, 0x01};
+    uint8_t echo[] = {0x81, 0x00, 0x01, 0x01};
+    uint8_t resp[] = {0x01, 0x00, 0x01, 0x00};
+    const struct pldm_transport_test_descriptor seq[] = {
+        {
+            .type = PLDM_TRANSPORT_TEST_ELEMENT_MSG_SEND,
+            .send_msg =
+                {
+                    .dst = 1,
+                    .msg = req,
+                    .len = sizeof(req),
+                },
+        },
+        {
+            .type = PLDM_TRANSPORT_TEST_ELEMENT_MSG_RECV,
+            .recv_msg =
+                {
+                    .src = 1,
+                    .msg = echo,
+                    .len = sizeof(echo),
+                },
+        },
+        {
+            .type = PLDM_TRANSPORT_TEST_ELEMENT_MSG_RECV,
+            .recv_msg =
+                {
+                    .src = 1,
+                    .msg = resp,
+                    .len = sizeof(resp),
+                },
+        },
+    };
+    struct pldm_transport_test* test = NULL;
+    struct pldm_transport* ctx;
+    size_t len;
+    void* msg;
+    int rc;
+
+    EXPECT_EQ(pldm_transport_test_init(&test, seq, ARRAY_SIZE(seq)), 0);
+    ctx = pldm_transport_test_core(test);
+    rc = pldm_transport_send_recv_msg(ctx, 1, req, sizeof(req), &msg, &len);
+    ASSERT_EQ(rc, PLDM_REQUESTER_SUCCESS);
+    EXPECT_NE(memcmp(msg, echo, len), 0);
+    EXPECT_EQ(memcmp(msg, resp, len), 0);
+    free(msg);
+    pldm_transport_test_destroy(test);
+}
