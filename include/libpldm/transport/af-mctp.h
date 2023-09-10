@@ -10,6 +10,9 @@ extern "C" {
 #endif
 
 struct pldm_transport_af_mctp;
+struct pldm_responder_af_mctp;
+struct pldm_responder;
+struct sockaddr_mctp;
 
 /* Init the transport backend */
 int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx);
@@ -35,6 +38,16 @@ int pldm_transport_af_mctp_map_tid(struct pldm_transport_af_mctp *ctx,
 /* Removes a TID-to-EID mapping from the transport's device map */
 int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
 				     pldm_tid_t tid, mctp_eid_t eid);
+
+/* Promote the transport to respond to requests */
+int pldm_transport_af_mctp_bind(struct pldm_transport_af_mctp *transport,
+				struct sockaddr_mctp *smctp, size_t len,
+				struct pldm_responder_af_mctp **responder);
+
+void pldm_responder_af_mctp_destroy(struct pldm_responder_af_mctp *responder);
+
+struct pldm_responder *
+pldm_responder_af_mctp_core(struct pldm_responder_af_mctp *responder);
 
 #ifdef __cplusplus
 }
