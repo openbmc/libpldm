@@ -4,6 +4,7 @@
 #include "libpldm/pldm.h"
 #include "libpldm/transport.h"
 #include "libpldm/transport/mctp-demux.h"
+#include "responder.h"
 #include "socket.h"
 #include "transport.h"
 
@@ -31,6 +32,11 @@ struct pldm_transport_mctp_demux {
 
 #define transport_to_demux(ptr)                                                \
 	container_of(ptr, struct pldm_transport_mctp_demux, transport)
+
+struct pldm_responder_mctp_demux {
+	struct pldm_responder responder;
+	struct pldm_transport_mctp_demux *transport;
+};
 
 LIBPLDM_ABI_STABLE
 struct pldm_transport *
@@ -317,4 +323,34 @@ int pldm_transport_mctp_demux_get_socket_fd(
 	}
 
 	return -1;
+}
+
+int pldm_transport_mctp_demux_bind(struct pldm_transport_mctp_demux *transport,
+				   struct pldm_responder_mctp_demux **responder)
+{
+	struct pldm_responder_mctp_demux *lresponder =
+		malloc(sizeof(*responder));
+	if (!lresponder) {
+		return PLDM_REQUESTER_SETUP_FAIL;
+	}
+
+	lresponder->responder.transport = &transport->transport;
+	lresponder->transport = transport;
+	*responder = lresponder;
+
+	return PLDM_REQUESTER_SUCCESS;
+}
+
+void pldm_responder_mctp_demux_destroy(
+	struct pldm_responder_mctp_demux *responder)
+{
+	struct pldm_transport_mctp_demux *transport = responder->transport;
+	free(responder);
+	pldm_transport_mctp_demux_destroy(transport);
+}
+
+struct pldm_responder *
+pldm_responder_mctp_demux_core(struct pldm_responder_mctp_demux *responder)
+{
+	return &responder->responder;
 }
