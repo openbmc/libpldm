@@ -6,6 +6,7 @@ libpldm_sources += files(
   'firmware_update.c',
   'fru.c',
   'pdr.c',
+  'responder.c',
   'utils.c'
   )
 
