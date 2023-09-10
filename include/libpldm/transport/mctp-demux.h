@@ -10,6 +10,7 @@ extern "C" {
 #endif
 
 struct pldm_transport_mctp_demux;
+struct pldm_responder_mctp_demux;
 
 /* Init the transport backend */
 int pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx);
@@ -35,6 +36,14 @@ int pldm_transport_mctp_demux_map_tid(struct pldm_transport_mctp_demux *ctx,
 /* Removes a TID-to-EID mapping from the transport's device map */
 int pldm_transport_mctp_demux_unmap_tid(struct pldm_transport_mctp_demux *ctx,
 					pldm_tid_t tid, mctp_eid_t eid);
+
+int pldm_transport_mctp_demux_bind(struct pldm_transport_mctp_demux *transport,
+				   struct pldm_responder_mctp_demux **responder);
+
+void pldm_responder_mctp_demux_destroy(struct pldm_responder_mctp_demux *responder);
+
+struct pldm_responder *
+pldm_responder_mctp_demux_core(struct pldm_responder_mctp_demux *responder);
 
 #ifdef __cplusplus
 }
