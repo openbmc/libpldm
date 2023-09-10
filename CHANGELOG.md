@@ -23,6 +23,7 @@ Change categories:
 
 1. state-set: Add new enum for Operational Fault Status enum
 2. base: Provide pldm_msg_hdr_correlate_response()
+3. transport: af-mctp: Add pldm_transport_af_mctp_bind()
 
 ### Changed
 
