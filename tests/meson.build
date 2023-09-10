@@ -24,6 +24,7 @@ tests = [
   'libpldm_pdr_test',
   'libpldm_firmware_update_test',
   'msgbuf',
+  'responder',
 ]
 
 if get_option('abi').contains('testing')

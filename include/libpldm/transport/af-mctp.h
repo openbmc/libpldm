@@ -10,6 +10,7 @@ extern "C" {
 #endif
 
 struct pldm_transport_af_mctp;
+struct sockaddr_mctp;
 
 /* Init the transport backend */
 int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx);
@@ -35,6 +36,23 @@ int pldm_transport_af_mctp_map_tid(struct pldm_transport_af_mctp *ctx,
 /* Removes a TID-to-EID mapping from the transport's device map */
 int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
 				     pldm_tid_t tid, mctp_eid_t eid);
+
+/**
+ * @brief Allow the transport to receive requests from remote endpoints
+ *
+ * @param[in] transport - The transport instance on which to listen for requests
+ * @param[in] smctp - The configuration provided to bind(2). NULL may be passed,
+ *		      in which case the transport is bound to all available
+ *		      interfaces on the system's default network. If NULL is
+ *		      passed then len must be zero.
+ * @param[in] len - The size of the object pointed to by the smctp argument. If
+ *		    smctp is NULL then len must be zero.
+ *
+ * @return PLDM_REQUESTER_SUCCESS on success, or a negative error code on
+ * failure.
+ */
+int pldm_transport_af_mctp_bind(struct pldm_transport_af_mctp *transport,
+				const struct sockaddr_mctp *smctp, size_t len);
 
 #ifdef __cplusplus
 }
