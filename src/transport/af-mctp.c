@@ -4,6 +4,7 @@
 #include "libpldm/pldm.h"
 #include "libpldm/transport.h"
 #include "libpldm/transport/af-mctp.h"
+#include "responder.h"
 #include "socket.h"
 #include "transport.h"
 
@@ -11,6 +12,7 @@
 #include <limits.h>
 #include <linux/mctp.h>
 #include <poll.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
@@ -18,12 +20,22 @@
 #include <sys/un.h>
 #include <unistd.h>
 
+struct pldm_responder_cookie_af_mctp {
+	struct pldm_responder_cookie req;
+	struct sockaddr_mctp smctp;
+};
+
+#define cookie_to_af_mctp(c)                                                   \
+	container_of((c), struct pldm_responder_cookie_af_mctp, req)
+
 #define AF_MCTP_NAME "AF_MCTP"
 struct pldm_transport_af_mctp {
 	struct pldm_transport transport;
 	int socket;
 	pldm_tid_t tid_eid_map[MCTP_MAX_NUM_EID];
 	struct pldm_socket_sndbuf socket_send_buf;
+	bool bound;
+	struct pldm_responder_cookie cookie_jar;
 };
 
 #define transport_to_af_mctp(ptr)                                              \
@@ -97,6 +109,7 @@ static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
 	struct pldm_transport_af_mctp *af_mctp = transport_to_af_mctp(t);
 	struct sockaddr_mctp addr = { 0 };
 	socklen_t addrlen = sizeof(addr);
+	struct pldm_msg_hdr *hdr;
 	pldm_requester_rc_t res;
 	mctp_eid_t eid = 0;
 	ssize_t length;
@@ -127,6 +140,31 @@ static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
 		goto cleanup_msg;
 	}
 
+	hdr = msg;
+
+	if (af_mctp->bound && hdr->request) {
+		struct pldm_responder_cookie_af_mctp *cookie;
+
+		cookie = malloc(sizeof(*cookie));
+		if (!cookie) {
+			res = PLDM_REQUESTER_RECV_FAIL;
+			goto cleanup_msg;
+		}
+
+		cookie->req.tid = *tid,
+		cookie->req.instance_id = hdr->instance_id,
+		cookie->req.type = hdr->type,
+		cookie->req.command = hdr->command;
+		cookie->smctp = addr;
+
+		rc = pldm_responder_cookie_track(&af_mctp->cookie_jar,
+						 &cookie->req);
+		if (rc) {
+			res = PLDM_REQUESTER_RECV_FAIL;
+			goto cleanup_msg;
+		}
+	}
+
 	*pldm_msg = msg;
 	*msg_len = length;
 
@@ -144,16 +182,44 @@ static pldm_requester_rc_t pldm_transport_af_mctp_send(struct pldm_transport *t,
 						       size_t msg_len)
 {
 	struct pldm_transport_af_mctp *af_mctp = transport_to_af_mctp(t);
-	mctp_eid_t eid = 0;
-	if (pldm_transport_af_mctp_get_eid(af_mctp, tid, &eid)) {
+	const struct pldm_msg_hdr *hdr;
+	struct sockaddr_mctp addr = { 0 };
+
+	if (msg_len < (ssize_t)sizeof(struct pldm_msg_hdr)) {
 		return PLDM_REQUESTER_SEND_FAIL;
 	}
 
-	struct sockaddr_mctp addr = { 0 };
-	addr.smctp_family = AF_MCTP;
-	addr.smctp_addr.s_addr = eid;
-	addr.smctp_type = MCTP_MSG_TYPE_PLDM;
-	addr.smctp_tag = MCTP_TAG_OWNER;
+	hdr = pldm_msg;
+	if (af_mctp->bound && !hdr->request) {
+		struct pldm_responder_cookie_af_mctp *cookie;
+		struct pldm_responder_cookie *req;
+
+		req = pldm_responder_cookie_untrack(&af_mctp->cookie_jar, tid,
+						    hdr->instance_id, hdr->type,
+						    hdr->command);
+		if (!req) {
+			return PLDM_REQUESTER_SEND_FAIL;
+		}
+
+		cookie = cookie_to_af_mctp(req);
+		addr = cookie->smctp;
+		addr.smctp_family = cookie->smctp.smctp_family;
+		addr.smctp_addr.s_addr = cookie->smctp.smctp_addr.s_addr;
+		addr.smctp_type = cookie->smctp.smctp_type;
+		/* Clear the TO bit (MCTP_TAG_OWNER) to indicate a response */
+		addr.smctp_tag = cookie->smctp.smctp_tag & MCTP_TAG_MASK;
+		free(cookie);
+	} else {
+		mctp_eid_t eid = 0;
+		if (pldm_transport_af_mctp_get_eid(af_mctp, tid, &eid)) {
+			return PLDM_REQUESTER_SEND_FAIL;
+		}
+
+		addr.smctp_family = AF_MCTP;
+		addr.smctp_addr.s_addr = eid;
+		addr.smctp_type = MCTP_MSG_TYPE_PLDM;
+		addr.smctp_tag = MCTP_TAG_OWNER;
+	}
 
 	if (msg_len > INT_MAX ||
 	    pldm_socket_sndbuf_accomodate(&(af_mctp->socket_send_buf),
@@ -166,6 +232,7 @@ static pldm_requester_rc_t pldm_transport_af_mctp_send(struct pldm_transport *t,
 	if (rc == -1) {
 		return PLDM_REQUESTER_SEND_FAIL;
 	}
+
 	return PLDM_REQUESTER_SUCCESS;
 }
 
@@ -187,6 +254,8 @@ int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
 	af_mctp->transport.recv = pldm_transport_af_mctp_recv;
 	af_mctp->transport.send = pldm_transport_af_mctp_send;
 	af_mctp->transport.init_pollfd = pldm_transport_af_mctp_init_pollfd;
+	af_mctp->bound = false;
+	af_mctp->cookie_jar.next = NULL;
 	af_mctp->socket = socket(AF_MCTP, SOCK_DGRAM, 0);
 	if (af_mctp->socket == -1) {
 		free(af_mctp);
@@ -212,4 +281,50 @@ void pldm_transport_af_mctp_destroy(struct pldm_transport_af_mctp *ctx)
 	}
 	close(ctx->socket);
 	free(ctx);
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_transport_af_mctp_bind(struct pldm_transport_af_mctp *transport,
+				const struct sockaddr_mctp *smctp, size_t len)
+{
+	struct sockaddr_mctp lsmctp = { 0 };
+	int rc;
+
+	if (!transport) {
+		return PLDM_REQUESTER_INVALID_SETUP;
+	}
+
+	if (!smctp && len) {
+		return PLDM_REQUESTER_INVALID_SETUP;
+	}
+
+	if (!smctp) {
+		lsmctp.smctp_family = AF_MCTP;
+		lsmctp.smctp_network = MCTP_NET_ANY;
+		lsmctp.smctp_addr.s_addr = MCTP_ADDR_ANY;
+		lsmctp.smctp_type = MCTP_MSG_TYPE_PLDM;
+		lsmctp.smctp_tag = MCTP_TAG_OWNER;
+		smctp = &lsmctp;
+		len = sizeof(lsmctp);
+	}
+
+	if (smctp->smctp_family != AF_MCTP ||
+	    smctp->smctp_type != MCTP_MSG_TYPE_PLDM ||
+	    smctp->smctp_tag != MCTP_TAG_OWNER) {
+		return PLDM_REQUESTER_INVALID_SETUP;
+	}
+
+	if (len != sizeof(*smctp)) {
+		return PLDM_REQUESTER_INVALID_SETUP;
+	}
+
+	rc = bind(transport->socket, (const struct sockaddr *)smctp,
+		  sizeof(*smctp));
+	if (rc) {
+		return PLDM_REQUESTER_SETUP_FAIL;
+	}
+
+	transport->bound = true;
+
+	return PLDM_REQUESTER_SUCCESS;
 }
