@@ -4,6 +4,7 @@
 #include "libpldm/pldm.h"
 #include "libpldm/transport.h"
 #include "libpldm/transport/mctp-demux.h"
+#include "responder.h"
 #include "socket.h"
 #include "transport.h"
 
@@ -31,6 +32,11 @@ struct pldm_transport_mctp_demux {
 
 #define transport_to_demux(ptr)                                                \
 	container_of(ptr, struct pldm_transport_mctp_demux, transport)
+
+struct pldm_responder_mctp_demux {
+	struct pldm_responder responder;
+	struct pldm_transport_mctp_demux *transport;
+};
 
 LIBPLDM_ABI_STABLE
 struct pldm_transport *

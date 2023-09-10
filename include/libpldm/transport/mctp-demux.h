@@ -10,6 +10,7 @@ extern "C" {
 #endif
 
 struct pldm_transport_mctp_demux;
+struct pldm_responder_mctp_demux;
 
 /* Init the transport backend */
 int pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx);
