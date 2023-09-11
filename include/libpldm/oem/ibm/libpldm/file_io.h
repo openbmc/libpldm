@@ -36,6 +36,7 @@ enum pldm_fileio_completion_codes {
 	PLDM_DATA_OUT_OF_RANGE = 0x87,
 	PLDM_INVALID_FILE_TYPE = 0x89,
 	PLDM_ERROR_FILE_DISCARDED = 0x8A,
+	PLDM_FULL_FILE_DISCARDED = 0x8B,
 };
 
 /** @brief PLDM File I/O table types
