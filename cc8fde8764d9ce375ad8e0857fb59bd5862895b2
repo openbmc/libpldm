@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ab4f9f_97c6b439",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-09-19T01:06:48Z",
+      "side": 1,
+      "message": "Hi Kasun, apologies for the delay, but I switched employers in between reviews. Hopefully I\u0027ll have some more time now. This looks okay, I just have a couple of small comments. Hopefully we can merge it on the next iteration.",
+      "revId": "cc8fde8764d9ce375ad8e0857fb59bd5862895b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b511bc3c_91d2b8dd",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-09-19T01:06:48Z",
+      "side": 1,
+      "message": "Can we move this to the next patch where it\u0027s actually required? I don\u0027t think anything in this patch needs it.",
+      "revId": "cc8fde8764d9ce375ad8e0857fb59bd5862895b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a849461d_43c95115",
+        "filename": "src/rde.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-09-19T01:06:48Z",
+      "side": 1,
+      "message": "No need to call the explicitly-typed functions here, it\u0027s enough to do:\n\n```\npldm_msgbuf_insert(buf, concurrency_support);\npldm_msgbuf_insert(buf, feature_support-\u003evalue);\n```\n\nThe `_Generic()` macro automatically calls the right function for you based on the type of the parameters you provide.",
+      "revId": "cc8fde8764d9ce375ad8e0857fb59bd5862895b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
