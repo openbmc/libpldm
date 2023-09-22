@@ -1,5 +1,5 @@
 #include "libpldm/transport.h"
-#include "base.h"
+#include "libpldm/base.h"
 #include "libpldm/requester/pldm.h"
 #include "transport.h"
 
