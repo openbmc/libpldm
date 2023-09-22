@@ -203,8 +203,11 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
 
-	do {
+	while (timercmp(&now, &end, <)) {
+		pldm_tid_t src_tid;
+
 		timersub(&end, &now, &remaining);
+
 		/* 0 <= `timeval_to_msec()` <= 4800, and 4800 < INT_MAX */
 		ret = pldm_transport_poll(transport,
 					  (int)(timeval_to_msec(&remaining)));
@@ -217,23 +220,25 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			return PLDM_REQUESTER_POLL_FAIL;
 		}
 
-		pldm_tid_t src_tid;
 		rc = pldm_transport_recv_msg(transport, &src_tid, pldm_resp_msg,
 					     resp_msg_len);
-		if (rc == PLDM_REQUESTER_SUCCESS) {
-			const struct pldm_msg_hdr *resp_hdr = *pldm_resp_msg;
-			if ((src_tid == tid) &&
-			    (req_hdr->instance_id == resp_hdr->instance_id) &&
-			    (req_hdr->type == resp_hdr->type) &&
-			    (req_hdr->command == resp_hdr->command) &&
-			    !resp_hdr->request) {
-				return rc;
-			}
+		if (rc != PLDM_REQUESTER_SUCCESS) {
+			continue;
+		}
 
+		if (src_tid != tid) {
+			continue;
+		}
+
+		if (!pldm_msg_hdr_correlate_response(pldm_req_msg,
+						     *pldm_resp_msg)) {
 			/* This isn't the message we wanted */
 			free(*pldm_resp_msg);
+			continue;
 		}
-	} while (timercmp(&now, &end, <));
+
+		return PLDM_REQUESTER_SUCCESS;
+	}
 
 	return PLDM_REQUESTER_RECV_FAIL;
 }
