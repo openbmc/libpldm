@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 #include <asm/byteorder.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -151,6 +152,22 @@ struct pldm_msg {
 	struct pldm_msg_hdr hdr; //!< PLDM message header
 	uint8_t payload[1]; //!< &payload[0] is the beginning of the payload
 } __attribute__((packed));
+
+/**
+ * @brief Compare the headers from two PLDM messages to determine if the latter
+ * is a message representing a response to the former, where the former must be
+ * a request.
+ *
+ * @param[in] req - A pointer to a PLDM header object, which must represent a
+ *                  request
+ * @param[in] resp - A pointer to a PLDM header object, which may represent a
+ *		     response to the provided request.
+ *
+ * @return true if the header pointed to by resp represents a message that is a
+ *	   response to the header pointed to by req, otherwise false.
+ */
+bool pldm_msg_hdr_correlate_response(const struct pldm_msg_hdr *req,
+				     const struct pldm_msg_hdr *resp);
 
 /** @struct pldm_header_info
  *

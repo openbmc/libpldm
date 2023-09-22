@@ -792,3 +792,159 @@ TEST(SetTID, testBadEncodeRequest)
     rc = encode_set_tid_req(0, 0xff, request);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PldmMsgHdr, correlateSuccess)
+{
+    static const struct pldm_msg_hdr req = {
+        .instance_id = 0,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 1,
+        .type = 0,
+        .header_ver = 1,
+        .command = 0x01,
+    };
+    static const struct pldm_msg_hdr resp = {
+        .instance_id = 0,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 0,
+        .type = 0,
+        .header_ver = 1,
+        .command = 0x01,
+    };
+
+    ASSERT_EQ(pldm_msg_hdr_correlate_response(&req, &resp), true);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PldmMsgHdr, correlateFailInstanceID)
+{
+    static const struct pldm_msg_hdr req = {
+        .instance_id = 0,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 1,
+        .type = 0,
+        .header_ver = 1,
+        .command = 0x01,
+    };
+    static const struct pldm_msg_hdr resp = {
+        .instance_id = 1,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 0,
+        .type = 0,
+        .header_ver = 1,
+        .command = 0x01,
+    };
+
+    ASSERT_EQ(pldm_msg_hdr_correlate_response(&req, &resp), false);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PldmMsgHdr, correlateFailRequest)
+{
+    static const struct pldm_msg_hdr req = {
+        .instance_id = 0,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 1,
+        .type = 0,
+        .header_ver = 1,
+        .command = 0x01,
+    };
+    static const struct pldm_msg_hdr resp = {
+        .instance_id = 0,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 1,
+        .type = 0,
+        .header_ver = 1,
+        .command = 0x01,
+    };
+
+    ASSERT_EQ(pldm_msg_hdr_correlate_response(&req, &resp), false);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PldmMsgHdr, correlateFailType)
+{
+    static const struct pldm_msg_hdr req = {
+        .instance_id = 0,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 1,
+        .type = 0,
+        .header_ver = 1,
+        .command = 0x01,
+    };
+    static const struct pldm_msg_hdr resp = {
+        .instance_id = 0,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 0,
+        .type = 1,
+        .header_ver = 1,
+        .command = 0x01,
+    };
+
+    ASSERT_EQ(pldm_msg_hdr_correlate_response(&req, &resp), false);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PldmMsgHdr, correlateFailCommand)
+{
+    static const struct pldm_msg_hdr req = {
+        .instance_id = 0,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 1,
+        .type = 0,
+        .header_ver = 1,
+        .command = 0x01,
+    };
+    static const struct pldm_msg_hdr resp = {
+        .instance_id = 0,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 0,
+        .type = 0,
+        .header_ver = 1,
+        .command = 0x02,
+    };
+
+    ASSERT_EQ(pldm_msg_hdr_correlate_response(&req, &resp), false);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PldmMsgHdr, correlateFailRequestIsResponse)
+{
+    static const struct pldm_msg_hdr req = {
+        .instance_id = 0,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 0,
+        .type = 0,
+        .header_ver = 1,
+        .command = 0x01,
+    };
+    static const struct pldm_msg_hdr resp = {
+        .instance_id = 0,
+        .reserved = 0,
+        .datagram = 0,
+        .request = 0,
+        .type = 0,
+        .header_ver = 1,
+        .command = 0x02,
+    };
+
+    ASSERT_EQ(pldm_msg_hdr_correlate_response(&req, &resp), false);
+}
+#endif
