@@ -27,7 +27,14 @@ tests = [
 ]
 
 if get_option('abi').contains('testing')
-  tests += [ 'transport' ]
+  tests += [
+    'transport',
+    'transport/send_recv_one',
+    'transport/send_recv_timeout',
+    'transport/send_recv_unwanted',
+    'transport/send_recv_wrong_pldm_type',
+    'transport/send_recv_wrong_command_code'
+  ]
 endif
 
 if get_option('oem-ibm').allowed()
