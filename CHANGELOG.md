@@ -22,6 +22,7 @@ Change categories:
 ### Added
 
 1. state-set: Add new enum for Operational Fault Status enum
+2. base: Provide pldm_msg_hdr_correlate_response()
 
 ### Changed
 

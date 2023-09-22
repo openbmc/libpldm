@@ -65,6 +65,15 @@ uint8_t unpack_pldm_header(const struct pldm_msg_hdr *msg,
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+bool pldm_msg_hdr_correlate_response(const struct pldm_msg_hdr *req,
+				     const struct pldm_msg_hdr *resp)
+{
+	return req->instance_id == resp->instance_id && req->request &&
+	       !resp->request && req->type == resp->type &&
+	       req->command == resp->command;
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_types_req(uint8_t instance_id, struct pldm_msg *msg)
 {

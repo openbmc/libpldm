@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 #include <asm/byteorder.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -151,6 +152,9 @@ struct pldm_msg {
 	struct pldm_msg_hdr hdr; //!< PLDM message header
 	uint8_t payload[1]; //!< &payload[0] is the beginning of the payload
 } __attribute__((packed));
+
+bool pldm_msg_hdr_correlate_response(const struct pldm_msg_hdr *req,
+				     const struct pldm_msg_hdr *resp);
 
 /** @struct pldm_header_info
  *
