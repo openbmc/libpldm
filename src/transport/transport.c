@@ -209,7 +209,7 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		ret = pldm_transport_poll(transport,
 					  (int)(timeval_to_msec(&remaining)));
 		if (ret <= 0) {
-			break;
+			return PLDM_REQUESTER_RECV_FAIL;
 		}
 
 		pldm_tid_t src_tid;
