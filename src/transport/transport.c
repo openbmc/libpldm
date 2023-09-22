@@ -212,6 +212,11 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			return PLDM_REQUESTER_RECV_FAIL;
 		}
 
+		ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
+		if (ret < 0) {
+			return PLDM_REQUESTER_POLL_FAIL;
+		}
+
 		pldm_tid_t src_tid;
 		rc = pldm_transport_recv_msg(transport, &src_tid, pldm_resp_msg,
 					     resp_msg_len);
@@ -227,11 +232,6 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 
 			/* This isn't the message we wanted */
 			free(*pldm_resp_msg);
-		}
-
-		ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
-		if (ret < 0) {
-			return PLDM_REQUESTER_POLL_FAIL;
 		}
 	} while (timercmp(&now, &end, <));
 
