@@ -34,6 +34,24 @@
       "parentUuid": "0cd3a210_46e4849b",
       "revId": "455abf57bc710a171d5b5cda72ad5e7c08b6cffc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a926f0d7_4e27fed6",
+        "filename": "src/responder.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-09-25T02:28:46Z",
+      "side": 1,
+      "message": "I mean `terminus_id` to `tid`. Like below code\nhttps://github.com/openbmc/libpldm/blob/main/src/transport/transport.c#L62C10-L62C24\n\nAbout `instance_id` some code use `iid` but in transport.c/h we are using instance_id. So `instance_id` is fine to me.",
+      "parentUuid": "9504d465_457768a7",
+      "revId": "455abf57bc710a171d5b5cda72ad5e7c08b6cffc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
