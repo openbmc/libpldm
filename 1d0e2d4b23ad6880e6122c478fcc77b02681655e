@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36d3ecfc_7edc3806",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2023-09-28T03:55:27Z",
+      "side": 1,
+      "message": "hey andrew - code looks okay to me, but this API is introduced as a testing API right ? can we plug that into a stable API without breaking things ?",
+      "range": {
+        "startLine": 229,
+        "startChar": 25,
+        "endLine": 229,
+        "endChar": 56
+      },
+      "revId": "1d0e2d4b23ad6880e6122c478fcc77b02681655e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
