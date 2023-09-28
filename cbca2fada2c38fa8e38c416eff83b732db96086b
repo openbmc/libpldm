@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d689196_65632746",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-09-28T04:33:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "596339ec_f9f2fa97",
+      "range": {
+        "startLine": 206,
+        "startChar": 1,
+        "endLine": 208,
+        "endChar": 45
+      },
+      "revId": "cbca2fada2c38fa8e38c416eff83b732db96086b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e934c350_7b74ba1e",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-09-27T10:54:24Z",
       "side": 1,
       "message": "This can be:\n\n```\n/* Clear the TO bit (MCTP_TAG_OWNER) to indicate a response */\naddr.smctp_tag \u0026\u003d ~MCTP_TAG_OWNER;\n```",
+      "revId": "cbca2fada2c38fa8e38c416eff83b732db96086b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffea1121_da496166",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-09-28T04:33:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e934c350_7b74ba1e",
       "revId": "cbca2fada2c38fa8e38c416eff83b732db96086b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
