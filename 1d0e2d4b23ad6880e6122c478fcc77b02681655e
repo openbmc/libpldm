@@ -22,6 +22,30 @@
       },
       "revId": "1d0e2d4b23ad6880e6122c478fcc77b02681655e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd6f5227_f64f4c95",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-09-28T04:23:41Z",
+      "side": 1,
+      "message": "The symbols are always visible internal to the library at compilation time so there\u0027s no practical impediment to doing so.\n\nOtherwise, we\u0027re dealing with the implementation of `pldm_transport_send_recv_msg()` here. We can call any functions we see fit so long as we maintain the API\u0027s documented behaviour, including functions annotated as `LIBPLDM_ABI_TESTING`. Calling functions that we\u0027re not yet ready to commit to in the public ABI is fine, because even if we choose to remove the called function down the track we just refactor the implementation here when we do so.\n\nI guess putting it another way: Annotating functions with `LIBPLDM_ABI_STABLE` doesn\u0027t mean \"free of implementation bugs\", it means \"we will not remove or change the symbol name, argument count, argument types, return type, or interpretation of relevant values for the function before first marking it as `LIBPLDM_ABI_DEPRECATED` and then subsequently creating a tagged release\".\n\nDoes that help?",
+      "parentUuid": "36d3ecfc_7edc3806",
+      "range": {
+        "startLine": 229,
+        "startChar": 25,
+        "endLine": 229,
+        "endChar": 56
+      },
+      "revId": "1d0e2d4b23ad6880e6122c478fcc77b02681655e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
