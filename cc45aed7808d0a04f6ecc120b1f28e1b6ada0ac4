@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cea70ec_199ede2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-10-07T02:45:30Z",
+      "side": 1,
+      "message": "Verify the latest patch set V#19 with Ampere system. BMC can send the requests to the SOC and receive the event messages from SoC.",
+      "revId": "cc45aed7808d0a04f6ecc120b1f28e1b6ada0ac4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
