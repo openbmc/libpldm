@@ -60,6 +60,25 @@ stable category. However, this may not always be possible. What to do when
 required functions fall into the deprecated or testing categories is outlined
 below.
 
+### What does it mean to mark a function as stable?
+
+Marking a function as stable makes the following promise to users of the
+library:
+
+> We will not remove or change the symbol name, argument count, argument types,
+> return type, or interpretation of relevant values for the function before
+> first marking it as `LIBPLDM_ABI_DEPRECATED` and then subsequently creating a
+> tagged release
+
+Marking a function as stable does _not_ promise that it is free of
+implementation bugs. It is just a promise that the prototype won't change
+without notice.
+
+Given this, it is always okay to implement functions marked stable in terms of
+functions marked testing inside of libpldm. If we remove or change the prototype
+of a function marked testing the only impact is that we need to fix up any call
+sites of that function in the same patch.
+
 ### The ABI lifecycle
 
 ```mermaid
