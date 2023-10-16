@@ -8150,6 +8150,27 @@ $VAR1 = {
                                         'Source' => 'bios.c',
                                         'SourceLine' => '163'
                                       },
+                            '97042' => {
+                                         'Header' => 'af-mctp.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'transport',
+                                                               'type' => '97187'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'smctp',
+                                                               'type' => '97192'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'len',
+                                                               'type' => '123'
+                                                             }
+                                                    },
+                                         'Return' => '74',
+                                         'ShortName' => 'pldm_transport_af_mctp_bind',
+                                         'Source' => 'af-mctp.c',
+                                         'SourceLine' => '284'
+                                       },
                             '97197' => {
                                          'Header' => 'af-mctp.h',
                                          'Param' => {
@@ -8594,6 +8615,7 @@ $VAR1 = {
                                                  'pldm_recv_any' => 1,
                                                  'pldm_send' => 1,
                                                  'pldm_send_recv' => 1,
+                                                 'pldm_transport_af_mctp_bind' => 1,
                                                  'pldm_transport_af_mctp_core' => 1,
                                                  'pldm_transport_af_mctp_destroy' => 1,
                                                  'pldm_transport_af_mctp_init' => 1,
@@ -11400,6 +11422,24 @@ $VAR1 = {
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
+                          '95138' => {
+                                       'BaseType' => '53',
+                                       'Header' => 'int-ll64.h',
+                                       'Line' => '21',
+                                       'Name' => '__u8',
+                                       'PrivateABI' => 1,
+                                       'Size' => '1',
+                                       'Type' => 'Typedef'
+                                     },
+                          '95164' => {
+                                       'BaseType' => '67',
+                                       'Header' => 'int-ll64.h',
+                                       'Line' => '24',
+                                       'Name' => '__u16',
+                                       'PrivateABI' => 1,
+                                       'Size' => '2',
+                                       'Type' => 'Typedef'
+                                     },
                           '95653' => {
                                        'Header' => 'socket.h',
                                        'Line' => '4',
@@ -11510,6 +11550,81 @@ $VAR1 = {
                                        'Size' => '8',
                                        'Type' => 'FuncPtr'
                                      },
+                          '95964' => {
+                                       'BaseType' => '67',
+                                       'Header' => 'socket.h',
+                                       'Line' => '10',
+                                       'Name' => '__kernel_sa_family_t',
+                                       'PrivateABI' => 1,
+                                       'Size' => '2',
+                                       'Type' => 'Typedef'
+                                     },
+                          '96312' => {
+                                       'Header' => 'mctp.h',
+                                       'Line' => '18',
+                                       'Memb' => {
+                                                   '0' => {
+                                                            'name' => 's_addr',
+                                                            'offset' => '0',
+                                                            'type' => '92682'
+                                                          }
+                                                 },
+                                       'Name' => 'struct mctp_addr',
+                                       'PrivateABI' => 1,
+                                       'Size' => '1',
+                                       'Type' => 'Struct'
+                                     },
+                          '96338' => {
+                                       'Header' => 'mctp.h',
+                                       'Line' => '22',
+                                       'Memb' => {
+                                                   '0' => {
+                                                            'name' => 'smctp_family',
+                                                            'offset' => '0',
+                                                            'type' => '95964'
+                                                          },
+                                                   '1' => {
+                                                            'name' => '__smctp_pad0',
+                                                            'offset' => '2',
+                                                            'type' => '95164'
+                                                          },
+                                                   '2' => {
+                                                            'name' => 'smctp_network',
+                                                            'offset' => '4',
+                                                            'type' => '81'
+                                                          },
+                                                   '3' => {
+                                                            'name' => 'smctp_addr',
+                                                            'offset' => '8',
+                                                            'type' => '96312'
+                                                          },
+                                                   '4' => {
+                                                            'name' => 'smctp_type',
+                                                            'offset' => '9',
+                                                            'type' => '95138'
+                                                          },
+                                                   '5' => {
+                                                            'name' => 'smctp_tag',
+                                                            'offset' => '16',
+                                                            'type' => '95138'
+                                                          },
+                                                   '6' => {
+                                                            'name' => '__smctp_pad1',
+                                                            'offset' => '17',
+                                                            'type' => '95138'
+                                                          }
+                                                 },
+                                       'Name' => 'struct sockaddr_mctp',
+                                       'PrivateABI' => 1,
+                                       'Size' => '12',
+                                       'Type' => 'Struct'
+                                     },
+                          '96442' => {
+                                       'BaseType' => '96338',
+                                       'Name' => 'struct sockaddr_mctp const',
+                                       'Size' => '12',
+                                       'Type' => 'Const'
+                                     },
                           '96485' => {
                                        'Line' => '32',
                                        'Memb' => {
@@ -11565,6 +11680,12 @@ $VAR1 = {
                           '97187' => {
                                        'BaseType' => '96485',
                                        'Name' => 'struct pldm_transport_af_mctp*',
+                                       'Size' => '8',
+                                       'Type' => 'Pointer'
+                                     },
+                          '97192' => {
+                                       'BaseType' => '96442',
+                                       'Name' => 'struct sockaddr_mctp const*',
                                        'Size' => '8',
                                        'Type' => 'Pointer'
                                      },
