@@ -58,6 +58,7 @@ Change categories:
      - pldm_transport_mctp_demux_unmap_tid()
 
 4. base: Stabilise pldm_msg_hdr_correlate_response()
+5. transport: af-mctp: Stabilise pldm_transport_af_mctp_bind()
 
 ### Deprecated
 
