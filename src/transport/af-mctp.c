@@ -280,7 +280,7 @@ void pldm_transport_af_mctp_destroy(struct pldm_transport_af_mctp *ctx)
 	free(ctx);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_bind(struct pldm_transport_af_mctp *transport,
 				const struct sockaddr_mctp *smctp, size_t len)
 {
