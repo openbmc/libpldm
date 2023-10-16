@@ -4641,6 +4641,28 @@ $VAR1 = {
                                         'Source' => 'base.c',
                                         'SourceLine' => '78'
                                       },
+                            '5034' => {
+                                        'Header' => 'base.h',
+                                        'Line' => '169',
+                                        'Param' => {
+                                                     '0' => {
+                                                              'name' => 'req',
+                                                              'type' => '5101'
+                                                            },
+                                                     '1' => {
+                                                              'name' => 'resp',
+                                                              'type' => '5101'
+                                                            }
+                                                   },
+                                        'Reg' => {
+                                                   '0' => 'rdi',
+                                                   '1' => 'rsi'
+                                                 },
+                                        'Return' => '5094',
+                                        'ShortName' => 'pldm_msg_hdr_correlate_response',
+                                        'Source' => 'base.c',
+                                        'SourceLine' => '69'
+                                      },
                             '51025' => {
                                          'Header' => 'utils.h',
                                          'Line' => '37',
@@ -9609,6 +9631,7 @@ $VAR1 = {
                                                  'pldm_instance_id_free' => 1,
                                                  'pldm_is_current_parent_child' => 1,
                                                  'pldm_is_empty_entity_assoc_tree' => 1,
+                                                 'pldm_msg_hdr_correlate_response' => 1,
                                                  'pldm_open' => 1,
                                                  'pldm_pdr_add_check' => 1,
                                                  'pldm_pdr_add_fru_record_set_check' => 1,

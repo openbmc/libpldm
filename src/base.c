@@ -65,7 +65,7 @@ uint8_t unpack_pldm_header(const struct pldm_msg_hdr *msg,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 bool pldm_msg_hdr_correlate_response(const struct pldm_msg_hdr *req,
 				     const struct pldm_msg_hdr *resp)
 {

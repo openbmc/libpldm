@@ -57,6 +57,8 @@ Change categories:
      - pldm_transport_mctp_demux_map_tid()
      - pldm_transport_mctp_demux_unmap_tid()
 
+4. base: Stabilise pldm_msg_hdr_correlate_response()
+
 ### Deprecated
 
 1. All the existing "requester" APIs from `libpldm/pldm.h` (also known as
