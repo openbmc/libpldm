@@ -637,6 +637,21 @@ TEST(AttrValTable, EnumEntryDecodeTest)
     EXPECT_EQ(rc, 2);
     EXPECT_EQ(handles[0], 0);
     EXPECT_EQ(handles[1], 1);
+
+    /* Buffer size is more than the number of current string handles */
+    std::vector<uint8_t> handleIndexes(3, 0);
+    rc = pldm_bios_table_attr_value_entry_enum_decode_handles(
+        entry, handleIndexes.data(), handleIndexes.size());
+    EXPECT_EQ(rc, 2);
+    EXPECT_EQ(handleIndexes[0], 0);
+    EXPECT_EQ(handleIndexes[1], 1);
+
+    /* Buffersize is less than the number of current string handles */
+    std::vector<uint8_t> strHandles(1, 0);
+    rc = pldm_bios_table_attr_value_entry_enum_decode_handles(
+        entry, strHandles.data(), strHandles.size());
+    EXPECT_EQ(rc, 1);
+    EXPECT_EQ(strHandles[0], 0);
 }
 
 TEST(AttrValTable, stringEntryEncodeTest)
