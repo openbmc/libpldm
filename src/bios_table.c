@@ -675,10 +675,10 @@ uint8_t pldm_bios_table_attr_value_entry_enum_decode_handles(
 {
 	uint8_t curr_num =
 		pldm_bios_table_attr_value_entry_enum_decode_number(entry);
-	number = number < curr_num ? number : curr_num;
-	memcpy(handles, &entry->value[1], number);
+	curr_num = number < curr_num ? number : curr_num;
+	memcpy(handles, &entry->value[1], curr_num);
 
-	return number;
+	return curr_num;
 }
 
 LIBPLDM_ABI_STABLE
