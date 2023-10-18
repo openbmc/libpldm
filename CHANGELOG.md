@@ -17,13 +17,21 @@ Change categories:
 
 ## [Unreleased]
 
+### Added
+
+1. base: Provide pldm_msg_hdr_correlate_response()
+2. transport: af-mctp: Add pldm_transport_af_mctp_bind()
+
+### Changed
+
+1. base: Stabilise pldm_msg_hdr_correlate_response()
+2. transport: af-mctp: Stabilise pldm_transport_af_mctp_bind()
+
 ## [0.7.0] - 2023-08-29
 
 ### Added
 
 1. state-set: Add new enum for Operational Fault Status enum
-2. base: Provide pldm_msg_hdr_correlate_response()
-3. transport: af-mctp: Add pldm_transport_af_mctp_bind()
 
 ### Changed
 
@@ -56,9 +64,6 @@ Change categories:
      - pldm_transport_mctp_demux_init_pollfd()
      - pldm_transport_mctp_demux_map_tid()
      - pldm_transport_mctp_demux_unmap_tid()
-
-4. base: Stabilise pldm_msg_hdr_correlate_response()
-5. transport: af-mctp: Stabilise pldm_transport_af_mctp_bind()
 
 ### Deprecated
 
