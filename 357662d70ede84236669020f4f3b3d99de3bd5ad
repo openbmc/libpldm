@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80d125e3_9ce55281",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-19T04:01:46Z",
+      "side": 1,
+      "message": "I mean, not immediately. Why does it think there\u0027s a buffer overflow? Did it give any explanation? Regardless, the information needs to go into the commit message (in addition to any discussion in the comments here).",
+      "parentUuid": "0b5dd223_6004405d",
+      "revId": "357662d70ede84236669020f4f3b3d99de3bd5ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "955ec076_aa9416dc",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -106,6 +124,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94814ddb_7b1ae274",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-19T04:01:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6983bf5e_17edad5a",
+      "revId": "357662d70ede84236669020f4f3b3d99de3bd5ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d93772d_50964079",
@@ -137,6 +173,24 @@
       "side": 1,
       "message": "There would not be any buffer overflow because of the minimum size check at line 678. But the static analyzer tool detects change in the current buffer size which is sent by the consumer of the function. Though, it is valid to set the buffer size to minimum of the buffer size provided in the argument and the actual buffer size required, tool is throwing an error as the change in the actual buffer size provided by the user of the function is unexpected.",
       "parentUuid": "1d93772d_50964079",
+      "revId": "357662d70ede84236669020f4f3b3d99de3bd5ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12a60cf2_6f442553",
+        "filename": "src/bios_table.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-19T04:01:46Z",
+      "side": 1,
+      "message": "So it\u0027s not actually fixing a buffer overflow? We\u0027re just silencing a false-positive in some static analysis tool? This needs to be made clear in the commit message, if we choose to continue to mention the tool there at all. Can the detection be silenced in the static analysis tool itself?\n\nEssentially, I think a better way to tackle this is to consider why we need this change if the existing code is not incorrect. Perhaps you can argue (in the commit message) for the change on the basis of improving the clarity of the code and avoid mentioning the static analysis tool altogether?",
+      "parentUuid": "d19bd6aa_accb262f",
       "revId": "357662d70ede84236669020f4f3b3d99de3bd5ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
