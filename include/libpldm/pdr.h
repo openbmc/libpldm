@@ -292,6 +292,10 @@ typedef struct pldm_entity_association_tree pldm_entity_association_tree;
  */
 typedef struct pldm_entity_node pldm_entity_node;
 
+bool pldm_record_handle_in_range(uint32_t record_handle,
+				 uint32_t first_record_handle,
+				 uint32_t last_record_handle);
+
 /** @brief Make a new entity association tree
  *
  *  @return opaque pointer that acts as a handle to the tree; NULL if no
@@ -462,7 +466,10 @@ int pldm_entity_association_pdr_add_check(pldm_entity_association_tree *tree,
  */
 int pldm_entity_association_pdr_add_from_node_check(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
-	size_t num_entities, bool is_remote, uint16_t terminus_handle);
+	size_t num_entities, bool is_remote, uint16_t terminus_handle,
+	uint32_t record_handle);
+
+pldm_pdr_record *pldm_pdr_find_last_local_record(const pldm_pdr *repo);
 
 /** @brief Add entity association pdr record based on record handle
  *  earlier the records where added in a sequential way alone, with

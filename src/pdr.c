@@ -34,6 +34,16 @@ static inline uint32_t get_next_record_handle(const pldm_pdr *repo,
 	return record->next->record_handle;
 }
 
+static inline uint32_t get_new_record_handle(const pldm_pdr *repo)
+{
+	assert(repo != NULL);
+	uint32_t last_used_hdl =
+		repo->last != NULL ? repo->last->record_handle : 0;
+	assert(last_used_hdl != UINT32_MAX);
+
+	return last_used_hdl + 1;
+}
+
 LIBPLDM_ABI_STABLE
 int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		       bool is_remote, uint16_t terminus_handle,
@@ -47,6 +57,12 @@ int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 
 	if (record_handle && *record_handle) {
 		curr = *record_handle;
+		if (curr == UINT32_MAX) {
+			// return -EOVERFLOW;
+			pldm_pdr_record *rec =
+				pldm_pdr_find_last_local_record(repo);
+			curr = rec->record_handle + 1;
+		}
 	} else if (repo->last) {
 		curr = repo->last->record_handle;
 		if (curr == UINT32_MAX) {
@@ -76,16 +92,16 @@ int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 	record->terminus_handle = terminus_handle;
 	record->record_handle = curr;
 
-	if (record_handle && !*record_handle && data) {
-		/* If record handle is 0, that is an indication for this API to
+	// if (record_handle && !*record_handle && data) {
+	/* If record handle is 0, that is an indication for this API to
 		 * compute a new handle. For that reason, the computed handle
 		 * needs to be populated in the PDR header. For a case where the
 		 * caller supplied the record handle, it would exist in the
 		 * header already.
 		 */
-		struct pldm_pdr_hdr *hdr = (void *)record->data;
-		hdr->record_handle = htole32(record->record_handle);
-	}
+	struct pldm_pdr_hdr *hdr = (void *)record->data;
+	hdr->record_handle = htole32(record->record_handle);
+	// }
 
 	record->next = NULL;
 
@@ -369,9 +385,10 @@ void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminus_handle,
 	} while (record);
 }
 
-static bool pldm_record_handle_in_range(uint32_t record_handle,
-					uint32_t first_record_handle,
-					uint32_t last_record_handle)
+LIBPLDM_ABI_STABLE
+bool pldm_record_handle_in_range(uint32_t record_handle,
+				 uint32_t first_record_handle,
+				 uint32_t last_record_handle)
 {
 	return record_handle >= first_record_handle &&
 	       record_handle <= last_record_handle;
@@ -930,11 +947,12 @@ int pldm_entity_association_pdr_add_check(pldm_entity_association_tree *tree,
 LIBPLDM_ABI_STABLE
 int pldm_entity_association_pdr_add_from_node_check(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
-	size_t num_entities, bool is_remote, uint16_t terminus_handle)
+	size_t num_entities, bool is_remote, uint16_t terminus_handle,
+	uint32_t record_handle)
 {
 	return pldm_entity_association_pdr_add_from_node_with_record_handle(
 		node, repo, entities, num_entities, is_remote, terminus_handle,
-		0);
+		record_handle);
 }
 
 LIBPLDM_ABI_TESTING
@@ -1040,6 +1058,32 @@ void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
 			record = record->next;
 		}
 	}
+}
+
+LIBPLDM_ABI_STABLE
+pldm_pdr_record *pldm_pdr_find_last_local_record(const pldm_pdr *repo)
+{
+	assert(repo != NULL);
+	pldm_pdr_record *curr = repo->first;
+	pldm_pdr_record *prev = repo->first;
+	pldm_pdr_record *record = curr;
+	uint32_t recent_record_handle = curr->record_handle;
+
+	while (curr != NULL) {
+		if ((curr->record_handle > 0x00000000) &&
+		    (curr->record_handle < 0x00FFFFFF)) {
+			if (recent_record_handle < curr->record_handle) {
+				recent_record_handle = curr->record_handle;
+				record = curr;
+			}
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+	if (curr == NULL && prev != NULL) {
+		return record;
+	}
+	return NULL;
 }
 
 LIBPLDM_ABI_STABLE

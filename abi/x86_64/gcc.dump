@@ -8018,7 +8018,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_entity_association_pdr_extract',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '1241'
+                                         'SourceLine' => '1242'
                                        },
                             '83851' => {
                                          'Header' => 'pdr.h',
@@ -8034,7 +8034,7 @@ $VAR1 = {
                                          'Return' => '5094',
                                          'ShortName' => 'pldm_is_empty_entity_assoc_tree',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '1235'
+                                         'SourceLine' => '1236'
                                        },
                             '83905' => {
                                          'Header' => 'pdr.h',
@@ -8050,7 +8050,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_entity_association_tree_destroy_root',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '1222'
+                                         'SourceLine' => '1223'
                                        },
                             '83968' => {
                                          'Header' => 'pdr.h',
@@ -8067,7 +8067,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_entity_association_tree_copy_root',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '1213'
+                                         'SourceLine' => '1214'
                                        },
                             '84184' => {
                                          'Header' => 'pdr.h',
@@ -8084,7 +8084,7 @@ $VAR1 = {
                                          'Return' => '83438',
                                          'ShortName' => 'pldm_entity_association_tree_find',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '1181'
+                                         'SourceLine' => '1182'
                                        },
                             '84464' => {
                                          'Header' => 'pdr.h',
@@ -8105,7 +8105,7 @@ $VAR1 = {
                                          'Return' => '83438',
                                          'ShortName' => 'pldm_entity_association_tree_find_with_locality',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '1149'
+                                         'SourceLine' => '1150'
                                        },
                             '84974' => {
                                          'Header' => 'pdr.h',
@@ -8121,7 +8121,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_pdr_remove_remote_pdrs',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '1046'
+                                         'SourceLine' => '1047'
                                        },
                             '85228' => {
                                          'Header' => 'pdr.h',
@@ -8142,7 +8142,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_pdr_remove_pdrs_by_terminus_handle',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '994'
+                                         'SourceLine' => '995'
                                        },
                             '85497' => {
                                          'Header' => 'pdr.h',
@@ -8163,7 +8163,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_find_entity_ref_in_tree',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '983'
+                                         'SourceLine' => '984'
                                        },
                             '86017' => {
                                          'Header' => 'pdr.h',
@@ -8196,7 +8196,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_entity_association_pdr_add_from_node_check',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '931'
+                                         'SourceLine' => '932'
                                        },
                             '86235' => {
                                          'Header' => 'pdr.h',
@@ -8221,7 +8221,7 @@ $VAR1 = {
                                          'Return' => '74',
                                          'ShortName' => 'pldm_entity_association_pdr_add_check',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '918'
+                                         'SourceLine' => '919'
                                        },
                             '8702' => {
                                         'Header' => 'bios.h',
@@ -8283,7 +8283,7 @@ $VAR1 = {
                                          'Return' => '5094',
                                          'ShortName' => 'pldm_is_current_parent_child',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '757'
+                                         'SourceLine' => '758'
                                        },
                             '87847' => {
                                          'Header' => 'pdr.h',
@@ -8304,7 +8304,7 @@ $VAR1 = {
                                          'Return' => '187',
                                          'ShortName' => 'pldm_entity_get_num_children',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '731'
+                                         'SourceLine' => '732'
                                        },
                             '88062' => {
                                          'Header' => 'pdr.h',
@@ -8320,7 +8320,7 @@ $VAR1 = {
                                          'Return' => '5094',
                                          'ShortName' => 'pldm_entity_is_exist_parent',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '717'
+                                         'SourceLine' => '718'
                                        },
                             '88217' => {
                                          'Header' => 'pdr.h',
@@ -8333,7 +8333,7 @@ $VAR1 = {
                                          'Return' => '82535',
                                          'ShortName' => 'pldm_entity_get_parent',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '709'
+                                         'SourceLine' => '710'
                                        },
                             '88372' => {
                                          'Header' => 'pdr.h',
@@ -8346,7 +8346,7 @@ $VAR1 = {
                                          'Return' => '5094',
                                          'ShortName' => 'pldm_entity_is_node_parent',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '701'
+                                         'SourceLine' => '702'
                                        },
                             '88527' => {
                                          'Header' => 'pdr.h',
@@ -8362,7 +8362,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_entity_association_tree_destroy',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '690'
+                                         'SourceLine' => '691'
                                        },
                             '88706' => {
                                          'Header' => 'pdr.h',
@@ -8386,7 +8386,7 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_entity_association_tree_visit',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '657'
+                                         'SourceLine' => '658'
                                        },
                             '89165' => {
                                          'Header' => 'pdr.h',
@@ -8429,7 +8429,7 @@ $VAR1 = {
                                          'Return' => '83438',
                                          'ShortName' => 'pldm_entity_association_tree_add_entity',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '520'
+                                         'SourceLine' => '521'
                                        },
                             '89692' => {
                                          'Header' => 'pdr.h',
@@ -8458,14 +8458,14 @@ $VAR1 = {
                                          'Return' => '83438',
                                          'ShortName' => 'pldm_entity_association_tree_add',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '508'
+                                         'SourceLine' => '509'
                                        },
                             '90125' => {
                                          'Header' => 'pdr.h',
                                          'Return' => '83900',
                                          'ShortName' => 'pldm_entity_association_tree_init',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '473'
+                                         'SourceLine' => '474'
                                        },
                             '90199' => {
                                          'Header' => 'pdr.h',
@@ -8478,7 +8478,7 @@ $VAR1 = {
                                          'Return' => '5568',
                                          'ShortName' => 'pldm_entity_node_get_remote_container_id',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '465'
+                                         'SourceLine' => '466'
                                        },
                             '90359' => {
                                          'Header' => 'pdr.h',
@@ -8491,7 +8491,7 @@ $VAR1 = {
                                          'Return' => '82535',
                                          'ShortName' => 'pldm_entity_extract',
                                          'Source' => 'pdr.c',
-                                         'SourceLine' => '456'
+                                         'SourceLine' => '457'
                                        },
                             '9071' => {
                                         'Header' => 'bios.h',
@@ -8528,6 +8528,31 @@ $VAR1 = {
                                         'Source' => 'bios.c',
                                         'SourceLine' => '403'
                                       },
+                            '91071' => {
+                                         'Header' => 'pdr.h',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'record_handle',
+                                                               'type' => '199'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'first_record_handle',
+                                                               'type' => '199'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'last_record_handle',
+                                                               'type' => '199'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '0' => 'rdi',
+                                                    '1' => 'rsi'
+                                                  },
+                                         'Return' => '5094',
+                                         'ShortName' => 'pldm_record_handle_in_range',
+                                         'Source' => 'pdr.c',
+                                         'SourceLine' => '373'
+                                       },
                             '91154' => {
                                          'Header' => 'pdr.h',
                                          'Param' => {
@@ -9673,6 +9698,7 @@ $VAR1 = {
                                                  'pldm_pdr_remove_pdrs_by_terminus_handle' => 1,
                                                  'pldm_pdr_remove_remote_pdrs' => 1,
                                                  'pldm_pdr_update_TL_pdr' => 1,
+                                                 'pldm_record_handle_in_range' => 1,
                                                  'pldm_recv' => 1,
                                                  'pldm_recv_any' => 1,
                                                  'pldm_send' => 1,
@@ -12239,7 +12265,7 @@ $VAR1 = {
                                        'Type' => 'Typedef'
                                      },
                           '82591' => {
-                                       'Line' => '433',
+                                       'Line' => '434',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'root',
@@ -12273,7 +12299,7 @@ $VAR1 = {
                                        'Type' => 'Const'
                                      },
                           '82651' => {
-                                       'Line' => '438',
+                                       'Line' => '439',
                                        'Memb' => {
                                                    '0' => {
                                                             'name' => 'entity',
