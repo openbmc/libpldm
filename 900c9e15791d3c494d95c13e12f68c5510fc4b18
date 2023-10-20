@@ -125,6 +125,23 @@
       "message": "Hi Kamalkumar. I\u0027d like the commit message to be improved a little. I\u0027ve left some comments highlighting the issues. Please ask questions if I need to clarify what I\u0027m asking for!",
       "revId": "900c9e15791d3c494d95c13e12f68c5510fc4b18",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea63277_44cdad0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-20T04:58:48Z",
+      "side": 1,
+      "message": "Also, can you please add an entry to CHANGELOG.md?",
+      "revId": "900c9e15791d3c494d95c13e12f68c5510fc4b18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
