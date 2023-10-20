@@ -211,6 +211,24 @@
       "parentUuid": "12a60cf2_6f442553",
       "revId": "357662d70ede84236669020f4f3b3d99de3bd5ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e33c6f56_a5ca36cc",
+        "filename": "src/bios_table.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-20T05:10:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fa8e216_e0ebd631",
+      "revId": "357662d70ede84236669020f4f3b3d99de3bd5ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
