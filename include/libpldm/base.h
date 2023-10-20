@@ -132,8 +132,8 @@ struct pldm_msg_hdr {
 	uint8_t type : 6;	//!< PLDM type
 	uint8_t header_ver : 2; //!< Header version
 #elif defined(__BIG_ENDIAN_BITFIELD)
-	uint8_t header_ver : 2;	 //!< Header version
-	uint8_t type : 6;	 //!< PLDM type
+	uint8_t header_ver : 2; //!< Header version
+	uint8_t type : 6;	//!< PLDM type
 #endif
 	uint8_t command; //!< PLDM command code
 } __attribute__((packed));

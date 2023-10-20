@@ -106,7 +106,7 @@ uint8_t crc8(const void *data, size_t size)
 }
 
 #define BCD_H(v)       (((v) >> 4) & 0xf)
-#define BCD_L(v)       ((v)&0xf)
+#define BCD_L(v)       ((v) & 0xf)
 #define AS_CHAR(digit) ((digit) + '0')
 #define INSERT_CHAR(c, b, n)                                                   \
 	{                                                                      \
