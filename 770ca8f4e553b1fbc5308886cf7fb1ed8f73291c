@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "582556c4_ec3ea085",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "I don\u0027t think we need a `Summary:` header here.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7a32766_642a05c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "Is this the expected structure? Should we be using e.g. an IANA number here to differentiate OEMs? Maybe I should look at the IBM OEM stuff.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccbb7d5c_81407d32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "Slightly frustrating that DSP0242 is yet to be published. It would be nice to contrast what you have to what\u0027s specified there.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae893e03_e939a382",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "Hi Delphine, thanks for the patch. I have a few requests to get this in shape for merging. We might need to coordinate with IBM to get some logistical problems resolved with the implementation, as it must be possible to build and install the library with both `oem-ibm` and `oem-meta` enabled simultaneously.\n\nA request not directly dealt with by the inline comments is that you also need to provide some test cases demonstrating expected behaviours for the positive and negative cases.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dc07d91_78870629",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "I think we\u0027re a bit inconsistent with its application, but can you please add a SPDX license marker and your copyright to the top of the file?",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac754204_cb1749a6",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "Please use LIBPLDM_OEM_META_FILE_IO_H as the guard.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01987e83_5109c2cc",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "Isn\u0027t this specific to Meta? Should we include that in the names of the types and constants?",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42e32095_0f3f76c0",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "As above?",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d24a7a13_81bb96a3",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "Please do not add further `__attribute__((packed))` structs. We\u0027ve done a bunch of work to move away from that. You should be able to solve that by removing `__attribute__((packed))` here and using the `msgbuf` abstraction in the implementation of `decode_write_file_io_req()`",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e9d12ff_cd690aa9",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "Again, I think we probably want to include the name of the OEM in the symbol.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1745f73a_3574473c",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "Fix the comment as well after you rename the header guard.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2924307_7f9d417e",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "I think we\u0027re a bit inconsistent with its application, but can you please add a SPDX license marker and your copyright to the top of the file?",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c93a65e_a7acfbd3",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "It needs to be possible to build libpldm with both `oem-ibm` and `oem-meta` enabled simultaneously. That can\u0027t work well if both install the same header file.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d78a3d_7bb0955b",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "The patch must first be merged with the function marked as `LIBPLDM_ABI_TESTING`. Only once it\u0027s merged - and once you\u0027ve subsequently demonstrated its use in an application depending on the library - do we consider changing it to `LIBPLDM_ABI_STABLE` and capturing it in the ABI dump.\n\nSee the process described here:\n\nhttps://github.com/openbmc/libpldm#development",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b50c7b55_e8d831d9",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-23T23:23:34Z",
+      "side": 1,
+      "message": "Firstly, C is less strict than C++ and doesn\u0027t require explicit casting to or from `void *` types.\n\nHowever, that should not be necessary anyway as you should use the `msgbuf` abstraction to implement this function:\n\nhttps://github.com/openbmc/libpldm/commit/c63f63a2d9d7d25b21b76a1a6098ee1a3176be7e",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
