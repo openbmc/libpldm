@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c36b09d0_c0b5420a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-24T01:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4d22673_c20b855c",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "900c9e15791d3c494d95c13e12f68c5510fc4b18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dec3340b_76573f6d",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-20T04:58:06Z",
       "side": 1,
       "message": "Can you please add some context explaining chapdata in the commit message? As it stands it has no meaning.\n\nPlease also try to write your commit messages in the imperative mood. Here\u0027s a good blog post that outlines the expectations:\n\nhttps://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html",
+      "range": {
+        "startLine": 9,
+        "startChar": 33,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "900c9e15791d3c494d95c13e12f68c5510fc4b18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31389414_fe2c041e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-24T01:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dec3340b_76573f6d",
       "range": {
         "startLine": 9,
         "startChar": 33,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f346b33_7d4d769e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-24T01:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d84f5d79_2cc2cbc0",
+      "range": {
+        "startLine": 9,
+        "startChar": 64,
+        "endLine": 10,
+        "endChar": 20
+      },
+      "revId": "900c9e15791d3c494d95c13e12f68c5510fc4b18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78cb298e_8b134965",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "321d8315_9767d8c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-24T01:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78cb298e_8b134965",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 35
+      },
+      "revId": "900c9e15791d3c494d95c13e12f68c5510fc4b18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62552d1d_0ac6b34a",
@@ -106,6 +202,24 @@
       "writtenOn": "2023-10-20T04:58:06Z",
       "side": 1,
       "message": "Either this is two paragraphs or it isn\u0027t. If it is two then please separate them both with an empty line. If it\u0027s one paragrah, then please have one sentence follow the other with no interleaving new-line.",
+      "revId": "900c9e15791d3c494d95c13e12f68c5510fc4b18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adb69895_42fa392d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-24T01:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62552d1d_0ac6b34a",
       "revId": "900c9e15791d3c494d95c13e12f68c5510fc4b18",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -140,6 +254,24 @@
       "writtenOn": "2023-10-20T04:58:48Z",
       "side": 1,
       "message": "Also, can you please add an entry to CHANGELOG.md?",
+      "revId": "900c9e15791d3c494d95c13e12f68c5510fc4b18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "378d0591_f7509a24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-24T01:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea63277_44cdad0d",
       "revId": "900c9e15791d3c494d95c13e12f68c5510fc4b18",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
