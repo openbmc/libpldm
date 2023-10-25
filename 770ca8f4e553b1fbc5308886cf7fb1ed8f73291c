@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b735709_e01d40f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-10-25T03:36:33Z",
+      "side": 1,
+      "message": "Other than the IANA related to firmware update, I don\u0027t see any consistent way of adding IANA to PLDM OEM commands.  The existing IBM OEM code doesn\u0027t do it.\n\nLike I mentioned earlier, we\u0027re likely going to need to support OEM commands for vendors that we (the OpenBMC project) are not going to be able to dictate what their command set looks like.  What does it look like going forward to handle that use case?",
+      "parentUuid": "a7a32766_642a05c6",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccbb7d5c_81407d32",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2023-10-23T23:23:34Z",
       "side": 1,
       "message": "Slightly frustrating that DSP0242 is yet to be published. It would be nice to contrast what you have to what\u0027s specified there.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ccabb0c_50a8864f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-10-25T03:36:33Z",
+      "side": 1,
+      "message": "We can certainly transition to using DSP0242 once it becomes available if satisfies the needs (I don\u0027t have visibility to it).",
+      "parentUuid": "ccbb7d5c_81407d32",
       "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -89,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74b6cd58_3bc889af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-10-25T03:36:33Z",
+      "side": 1,
+      "message": "\u003e it must be possible to build and install the library with both oem-ibm and oem-meta enabled simultaneously.\n\nWhy is this a problem?  The libpldm doesn\u0027t have the routing, right?  It is up to the pldmd to call the appropriate functions based on which device / OEM it is communicating with, right?\n\nMy reading is that PLDM doesn\u0027t explicitly have an IANA field, or similar, in OEM commands.  We have flexibility in the Meta ones where we could certainly define an OEM command that ends up with the {IANA + secondary command number} embedded as an early part of the payload but I don\u0027t think there is any way to do that natively in PLDM.\n\nIt is quite possible to need to enable multiple OEM command sets on a BMC.  Suppose, for example, that we have two different NIC vendors both using PLDM but with their own set of OEM commands.  We would need to support both of those OEM sets at once because either NIC could be attached to the BMC.",
+      "parentUuid": "1a3adfc0_f75cf37d",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dc07d91_78870629",
         "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
         "patchSetId": 2
@@ -117,6 +171,24 @@
       "writtenOn": "2023-10-23T23:23:34Z",
       "side": 1,
       "message": "Please use LIBPLDM_OEM_META_FILE_IO_H as the guard.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93252cae_4751e45a",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-10-25T03:36:33Z",
+      "side": 1,
+      "message": "Do we need header guards or can we just use `#pragma once`?",
+      "parentUuid": "ac754204_cb1749a6",
       "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -236,6 +308,24 @@
       "writtenOn": "2023-10-23T23:23:34Z",
       "side": 1,
       "message": "It needs to be possible to build libpldm with both `oem-ibm` and `oem-meta` enabled simultaneously. That can\u0027t work well if both install the same header file.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d39b9ca_e0b36a24",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-10-25T03:36:33Z",
+      "side": 1,
+      "message": "Agreed.  We should probably install the header file in a way that doesn\u0027t lose the `oem/meta` portions.\n\nMaybe the IBM ones aren\u0027t currently doing that?  We should probably transition them as such.",
+      "parentUuid": "6c93a65e_a7acfbd3",
       "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
