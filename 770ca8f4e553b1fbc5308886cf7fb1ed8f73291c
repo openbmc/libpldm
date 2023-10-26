@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb14ac9a_f2530731",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-26T05:28:45Z",
+      "side": 1,
+      "message": "This wasn\u0027t a blocking complaint, I was just thinking out loud and trying to educate myself.",
+      "parentUuid": "9b735709_e01d40f0",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccbb7d5c_81407d32",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "We can certainly transition to using DSP0242 once it becomes available if satisfies the needs (I don\u0027t have visibility to it).",
       "parentUuid": "ccbb7d5c_81407d32",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6918b2fb_abb501f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-26T05:28:45Z",
+      "side": 1,
+      "message": "Yeah I don\u0027t have any visibility either. Hopefully it\u0027s not too far away so we can avoid further OEM implementations of the concept.",
+      "parentUuid": "0ccabb0c_50a8864f",
       "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -143,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ec4a74f_c685d4de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-26T05:28:45Z",
+      "side": 1,
+      "message": "I think you\u0027re conflating two of my concerns here but in your defense I didn\u0027t properly state my motivation. The comment about enabling them both at once related to the header file collision and not the lack of an IANA separator for OEM commands (though I do think that is an oversight in the PLDM spec and I\u0027m not what the behaviour is expected to be at runtime - your NIC example makes an excellent point).",
+      "parentUuid": "74b6cd58_3bc889af",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dc07d91_78870629",
         "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
         "patchSetId": 2
@@ -189,6 +243,24 @@
       "side": 1,
       "message": "Do we need header guards or can we just use `#pragma once`?",
       "parentUuid": "ac754204_cb1749a6",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ba21cdb_429d7944",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-26T05:28:45Z",
+      "side": 1,
+      "message": "I prefer we deviate the least we can achieve from the C standard. `#pragma once` isn\u0027t standardised so I\u0027d prefer to avoid it.",
+      "parentUuid": "93252cae_4751e45a",
       "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -326,6 +398,24 @@
       "side": 1,
       "message": "Agreed.  We should probably install the header file in a way that doesn\u0027t lose the `oem/meta` portions.\n\nMaybe the IBM ones aren\u0027t currently doing that?  We should probably transition them as such.",
       "parentUuid": "6c93a65e_a7acfbd3",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94682815_e5b96257",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-26T05:28:45Z",
+      "side": 1,
+      "message": "\u003e Maybe the IBM ones aren\u0027t currently doing that?\n\nThey aren\u0027t\n\n\u003e We should probably transition them as such.\n\nYep, I would like Manoj or someone from IBM to follow up on that.",
+      "parentUuid": "6d39b9ca_e0b36a24",
       "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
