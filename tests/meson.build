@@ -45,6 +45,12 @@ if get_option('oem-ibm').allowed()
   ]
 endif
 
+if get_option('oem-meta').allowed()
+  tests += [
+    'oem/meta/libpldm_fileio_test',
+  ]
+endif
+
 src_includes = include_directories('..' / 'src', '..' / 'include' / 'libpldm')
 
 foreach t : tests
