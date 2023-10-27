@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1abf266c_d26af486",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-27T03:18:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "582556c4_ec3ea085",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7a32766_642a05c6",
@@ -282,6 +300,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c90db425_28c8ec19",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-27T03:18:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01987e83_5109c2cc",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42e32095_0f3f76c0",
@@ -295,6 +331,24 @@
       "writtenOn": "2023-10-23T23:23:34Z",
       "side": 1,
       "message": "As above?",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9597501_341598ae",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-27T03:18:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42e32095_0f3f76c0",
       "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -316,6 +370,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3d420bb_2d025476",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-27T03:18:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d24a7a13_81bb96a3",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e9d12ff_cd690aa9",
@@ -333,6 +405,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "409fabaa_66b0557d",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-27T03:18:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e9d12ff_cd690aa9",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1745f73a_3574473c",
@@ -346,6 +436,24 @@
       "writtenOn": "2023-10-23T23:23:34Z",
       "side": 1,
       "message": "Fix the comment as well after you rename the header guard.",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e04023_a908a7bf",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-27T03:18:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1745f73a_3574473c",
       "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -420,6 +528,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3818d225_86222b0e",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-27T03:18:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94682815_e5b96257",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10d78a3d_7bb0955b",
@@ -437,6 +563,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84004983_7520f94d",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-27T03:18:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10d78a3d_7bb0955b",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b50c7b55_e8d831d9",
@@ -450,6 +594,24 @@
       "writtenOn": "2023-10-23T23:23:34Z",
       "side": 1,
       "message": "Firstly, C is less strict than C++ and doesn\u0027t require explicit casting to or from `void *` types.\n\nHowever, that should not be necessary anyway as you should use the `msgbuf` abstraction to implement this function:\n\nhttps://github.com/openbmc/libpldm/commit/c63f63a2d9d7d25b21b76a1a6098ee1a3176be7e",
+      "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "214bdf6b_710bd0ad",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-27T03:18:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b50c7b55_e8d831d9",
       "revId": "770ca8f4e553b1fbc5308886cf7fb1ed8f73291c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
