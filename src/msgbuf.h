@@ -343,8 +343,6 @@ static inline int pldm_msgbuf_extract_real32(struct pldm_msgbuf *ctx,
 static inline int pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx,
 						  uint8_t *dst, size_t count)
 {
-	size_t len;
-
 	if (!ctx || !ctx->cursor || !dst) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -353,19 +351,18 @@ static inline int pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx,
 		return PLDM_SUCCESS;
 	}
 
-	len = sizeof(*dst) * count;
-	if (len > SSIZE_MAX) {
+	if (count >= SSIZE_MAX) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	ctx->remaining -= (ssize_t)len;
+	ctx->remaining -= (ssize_t)count;
 	assert(ctx->remaining >= 0);
 	if (ctx->remaining < 0) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	memcpy(dst, ctx->cursor, len);
-	ctx->cursor += len;
+	memcpy(dst, ctx->cursor, count);
+	ctx->cursor += count;
 
 	return PLDM_SUCCESS;
 }
@@ -509,7 +506,6 @@ static inline int pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx,
 						 const uint8_t *src,
 						 size_t count)
 {
-	size_t len;
 	if (!ctx || !ctx->cursor || !src) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -518,19 +514,18 @@ static inline int pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx,
 		return PLDM_SUCCESS;
 	}
 
-	len = sizeof(*src) * count;
-	if (len > SSIZE_MAX) {
+	if (count >= SSIZE_MAX) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	ctx->remaining -= (ssize_t)len;
+	ctx->remaining -= (ssize_t)count;
 	assert(ctx->remaining >= 0);
 	if (ctx->remaining < 0) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	memcpy(ctx->cursor, src, len);
-	ctx->cursor += len;
+	memcpy(ctx->cursor, src, count);
+	ctx->cursor += count;
 
 	return PLDM_SUCCESS;
 }
