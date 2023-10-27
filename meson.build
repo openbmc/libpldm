@@ -49,6 +49,7 @@ subdir('src')
 libpldm_include_dir = ['.', 'include', 'src']
 libpldm_headers = files()
 libpldm_transport_headers = files()
+libpldm_oem_headers = files()
 
 subdir('include/libpldm')
 
@@ -71,6 +72,13 @@ install_headers(
   libpldm_transport_headers,
   subdir:'libpldm/transport'
   )
+
+if get_option('oem-meta').allowed()
+  install_headers(
+    libpldm_oem_headers,
+    subdir:'libpldm/oem/meta'
+  )
+endif
 
 libpldm_dep = declare_dependency(
   include_directories: libpldm_include_dir,

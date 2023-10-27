@@ -34,3 +34,9 @@ if get_option('oem-ibm').allowed()
     'oem/ibm/libpldm/state_set_oem_ibm.h'
   )
 endif
+
+if get_option('oem-meta').allowed()
+  libpldm_oem_headers += files(
+    'oem/meta/libpldm/file_io.h'
+  )
+endif
