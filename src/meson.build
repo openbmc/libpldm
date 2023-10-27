@@ -16,3 +16,7 @@ subdir('transport')
 if get_option('oem-ibm').allowed()
    subdir('oem/ibm')
 endif
+
+if get_option('oem-meta').allowed()
+   subdir('oem/meta')
+endif
