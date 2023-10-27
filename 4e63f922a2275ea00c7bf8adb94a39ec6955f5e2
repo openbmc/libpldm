@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c6a6f29_6ae9bbd7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-27T04:28:44Z",
+      "side": 1,
+      "message": "My comment on PS2 wasn\u0027t specifically with respect to the response, it was covering the whole concept. I don\u0027t think it\u0027s appropriate to put `Follow DSP0242` here, especially when it is not yet published.",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31a70fff_258640e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-27T04:28:44Z",
+      "side": 1,
+      "message": "Hi Delphine, thanks for switching the implementation to use msgbuf. However, I do have a few further requests.",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a13562_a1bedc36",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-27T04:28:44Z",
+      "side": 1,
+      "message": "Can we please move this macro to the implementation until there\u0027s a strict need for it to be in a public header? Or if there already is a strict need, can we add a comment documenting the motivation?",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a41b2e67_5b21ce43",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-27T04:28:44Z",
+      "side": 1,
+      "message": "Let\u0027s try to be consistent and avoid `oem_meta` as a suffix. Instead I think this should be `decode_oem_meta_file_io_req()`, consistent with e.g. `struct pldm_oem_meta_file_io_type` above.",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30aab207_f06963be",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-27T04:28:44Z",
+      "side": 1,
+      "message": "Still missing the SPDX marker as requested on PS2",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b34c8b_0a45cdaf",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-27T04:28:44Z",
+      "side": 1,
+      "message": "This must test `data` also",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "277c0641_ebdb88b2",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-27T04:28:44Z",
+      "side": 1,
+      "message": "Nice! Thanks for using msgbuf.",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "952bd8e1_5b18b6e7",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-27T04:28:44Z",
+      "side": 1,
+      "message": "How do you feel about using the msgbuf insert APIs here to encode the message rather than open-coded endian handling and memcpy? I think that would make the test more maintainable.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
