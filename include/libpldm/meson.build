@@ -36,4 +36,11 @@ if get_option('oem-ibm').allowed()
   install_symlink('state_set_oem_ibm.h', pointing_to: 'oem/ibm/state_set.h', install_dir: 'include/libpldm')
 endif
 
+if get_option('oem-meta').allowed()
+  libpldm_headers += files(
+    'oem/meta/file_io.h',
+  )
+endif
+
+
 install_headers(libpldm_headers, subdir: 'libpldm', preserve_path: true)
