@@ -23,6 +23,7 @@ Change categories:
 2. transport: af-mctp: Add pldm_transport_af_mctp_bind()
 3. oem: ibm: Add chapdata file type support
 4. base: Added PLDM_SMBIOS & PLDM_RDE message types
+5. oem: meta: Add decode_oem_meta_file_io_req()
 
 ### Changed
 
