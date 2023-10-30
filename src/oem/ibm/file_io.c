@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include <libpldm/base.h>
-#include <libpldm/oem/ibm/libpldm/file_io.h>
+#include <libpldm/oem/ibm/file_io.h>
 
 #include <endian.h>
 #include <string.h>

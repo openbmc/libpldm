@@ -61,15 +61,7 @@ libpldm = library(
    install: true
    )
 
-install_headers(
-  libpldm_headers,
-  subdir:'libpldm'
-  )
-
-install_headers(
-  libpldm_transport_headers,
-  subdir:'libpldm/transport'
-  )
+install_headers(libpldm_headers, subdir: 'libpldm', preserve_path: true)
 
 libpldm_dep = declare_dependency(
   include_directories: libpldm_include_dirs,
