@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "libpldm/host.h"
+#include "libpldm/oem/ibm/host.h"
 
 LIBPLDM_ABI_STABLE
 int encode_get_alert_status_req(uint8_t instance_id, uint8_t version_id,
