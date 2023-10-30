@@ -23,9 +23,22 @@ libpldm_transport_headers += files(
   'transport/mctp-demux.h'
 )
 
+#This will be removed once we migrate the headers to oem-ibm
 if get_option('oem-ibm').allowed()
   libpldm_include_dir += include_directories('oem/ibm')
   libpldm_headers += files(
+    'oem/ibm/libpldm/entity_oem_ibm.h',
+    'oem/ibm/libpldm/file_io.h',
+    'oem/ibm/libpldm/fru_oem_ibm.h',
+    'oem/ibm/libpldm/host.h',
+    'oem/ibm/libpldm/platform_oem_ibm.h',
+    'oem/ibm/libpldm/state_set_oem_ibm.h'
+  )
+endif
+
+if get_option('oem-ibm').allowed()
+  libpldm_include_dir += include_directories('oem/ibm')
+  libpldm_oem_ibm_headers += files(
     'oem/ibm/libpldm/entity_oem_ibm.h',
     'oem/ibm/libpldm/file_io.h',
     'oem/ibm/libpldm/fru_oem_ibm.h',
