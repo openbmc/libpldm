@@ -44,17 +44,20 @@ config = configure_file(output: 'config.h',
 add_project_arguments('-include', '@0@'.format(config), language: 'c')
 
 libpldm_sources = files()
+libpldm_oem_ibm_sources = files()
 subdir('src')
 
 libpldm_include_dir = ['.', 'include', 'src']
 libpldm_headers = files()
 libpldm_transport_headers = files()
+libpldm_oem_ibm_headers = files()
 
 subdir('include/libpldm')
 
 libpldm = library(
   'pldm',
    libpldm_sources,
+   libpldm_oem_ibm_sources,
    implicit_include_directories: false,
    include_directories: libpldm_include_dir,
    version: meson.project_version(),
@@ -71,6 +74,25 @@ install_headers(
   libpldm_transport_headers,
   subdir:'libpldm/transport'
   )
+
+install_headers(
+  libpldm_oem_ibm_headers,
+  subdir:'libpldm/oem/ibm'
+  )
+
+if get_option('oem-ibm').enabled()
+  install_headers(
+    libpldm_oem_ibm_headers,
+    subdir:'libpldm/oem/ibm'
+    )
+endif
+
+install_symlink('file_io.h', pointing_to: 'libpldm/oem/ibm/file_io.h', install_dir: 'include/libpldm')
+install_symlink('entity_oem_ibm.h', pointing_to: 'libpldm/oem/ibm/entity_oem_ibm.h', install_dir: 'include/libpldm')
+install_symlink('fru_oem_ibm.h', pointing_to: 'include/libpldm/oem/ibm/fru_oem_ibm.h', install_dir: 'include/libpldm')
+install_symlink('host.h', pointing_to: 'include/libpldm/oem/ibm/host.h', install_dir: 'include/libpldm')
+install_symlink('platform_oem_ibm.h', pointing_to: 'include/libpldm/oem/ibm/platform_oem_ibm.h', install_dir: 'include/libpldm')
+install_symlink('state_set_oem_ibm.h', pointing_to: 'include/libpldm/oem/ibm/state_set_oem_ibm.h', install_dir: 'include/libpldm')
 
 libpldm_dep = declare_dependency(
   include_directories: libpldm_include_dir,
