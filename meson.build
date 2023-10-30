@@ -44,46 +44,9 @@ config = configure_file(output: 'config.h',
 add_project_arguments('-include', '@0@'.format(config), language: 'c')
 
 libpldm_include_dir = include_directories('include', is_system: true)
-libpldm_headers = files()
-libpldm_transport_headers = files()
+
 subdir('include')
-
-libpldm_sources = files()
 subdir('src')
-
-libpldm = library(
-  'pldm',
-   libpldm_sources,
-   implicit_include_directories: false,
-   include_directories: [
-     libpldm_include_dir,
-     include_directories('src')
-   ],
-   version: meson.project_version(),
-   gnu_symbol_visibility: 'hidden',
-   install: true
-   )
-
-install_headers(
-  libpldm_headers,
-  subdir:'libpldm'
-  )
-
-install_headers(
-  libpldm_transport_headers,
-  subdir:'libpldm/transport'
-  )
-
-libpldm_dep = declare_dependency(
-  include_directories: libpldm_include_dir
-,
-  link_with: libpldm)
-
-import('pkgconfig').generate(
-  name: 'libpldm',
-  description: 'PLDM protocol encode/decode C lib',
-  version: meson.project_version(),
-  libraries: libpldm)
 
 if get_option('tests').enabled()
   subdir('tests')
