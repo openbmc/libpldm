@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63af4bad_b011873a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-31T23:24:14Z",
+      "side": 1,
+      "message": "Hi Pavithra, many thanks for putting in the effort to clean this up. There are a few things that need to be addressed, but the general gist of the change is on the right track.",
+      "revId": "1fa441003a100ce47c9ca54f3ca25f067243d94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "687796cc_0100b56e",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-31T23:24:14Z",
+      "side": 1,
+      "message": "While we\u0027re at it, let\u0027s rename the files themselves as well to drop the `_oem_ibm` suffix from any file names containing it, as this is now implied by directories in the path. However, we still install the symlinks with the old names to maintain compatibility.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 41
+      },
+      "revId": "1fa441003a100ce47c9ca54f3ca25f067243d94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d8e98f3_fe2a6218",
+        "filename": "meson.build",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-31T23:24:14Z",
+      "side": 1,
+      "message": "Does this need to be separate? If not we can conditionally append the source files directly to `libpldm_sources` in the relevant `meson.build` (and not in the root `meson.build` here). If it must be separate, again, its use should be confined to the relevant `meson.build` files, not the root `meson.build`.",
+      "revId": "1fa441003a100ce47c9ca54f3ca25f067243d94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "610a1006_b7de04c1",
+        "filename": "meson.build",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-31T23:24:14Z",
+      "side": 1,
+      "message": "Does this need to be separate? And why can\u0027t it go in the relevant `meson.build` file rather than the root `meson.build`?",
+      "revId": "1fa441003a100ce47c9ca54f3ca25f067243d94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdf8ae0f_6ff12474",
+        "filename": "meson.build",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-31T23:24:14Z",
+      "side": 1,
+      "message": "If the sources were instead conditionally added to `libpldm_sources` this would be unnecessary?",
+      "revId": "1fa441003a100ce47c9ca54f3ca25f067243d94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92cfb3bf_86e4becd",
+        "filename": "meson.build",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-31T23:24:14Z",
+      "side": 1,
+      "message": "This is unconditional, which is not correct, and duplicates the conditional `install_headers()` directive immediately below. I think this should be removed.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 3
+      },
+      "revId": "1fa441003a100ce47c9ca54f3ca25f067243d94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f84c769_49857121",
+        "filename": "meson.build",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-31T23:24:14Z",
+      "side": 1,
+      "message": "This should go in the relevant meson.build",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "1fa441003a100ce47c9ca54f3ca25f067243d94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3125e69_faf37f5a",
+        "filename": "meson.build",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-31T23:24:14Z",
+      "side": 1,
+      "message": "Need to fix the `pointing_to` values to align with the renamed files mentioned in the prior comment.\n\nAlso this should go in the relevant `meson.build`, not the root `meson.build`.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 114
+      },
+      "revId": "1fa441003a100ce47c9ca54f3ca25f067243d94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b219c82_5791fa23",
+        "filename": "src/oem/ibm/meson.build",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-31T23:24:14Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to do anything conditional in this file. Instead, do a conditional `subdir()` at the parent `meson.build`\n\n```\nif get_option(\u0027oem-ibm\u0027).allowed()\n  subdir(\u0027ibm\u0027)\nendif\n```\n\nThat reduces the indentation and clutter in this file.\n\nIn-fact, that\u0027s already done here:\n\nhttps://github.com/openbmc/libpldm/blob/cc45aed7808d0a04f6ecc120b1f28e1b6ada0ac4/src/meson.build#L16-L18",
+      "revId": "1fa441003a100ce47c9ca54f3ca25f067243d94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "688b72f1_f3bd78a4",
+        "filename": "src/oem/ibm/meson.build",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-10-31T23:24:14Z",
+      "side": 1,
+      "message": "We\u0027re already appending these to `libpldm_sources` directly above. Why is this necessary?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 3
+      },
+      "revId": "1fa441003a100ce47c9ca54f3ca25f067243d94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
