@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2a3916db_4c691e70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-31T03:00:47Z",
+      "side": 1,
+      "message": "reverted",
+      "parentUuid": "0c6a6f29_6ae9bbd7",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "31a70fff_258640e1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ab6ff1e_c2776b62",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-31T03:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42a13562_a1bedc36",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a41b2e67_5b21ce43",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-10-27T04:28:44Z",
       "side": 1,
       "message": "Let\u0027s try to be consistent and avoid `oem_meta` as a suffix. Instead I think this should be `decode_oem_meta_file_io_req()`, consistent with e.g. `struct pldm_oem_meta_file_io_type` above.",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04d8743c_f41e9aa0",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-31T03:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a41b2e67_5b21ce43",
       "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +140,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8dcc337_9a906868",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-31T03:00:47Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "30aab207_f06963be",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93b34c8b_0a45cdaf",
@@ -99,6 +171,24 @@
       "writtenOn": "2023-10-27T04:28:44Z",
       "side": 1,
       "message": "This must test `data` also",
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f3fe4cf_39d1a23f",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-31T03:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93b34c8b_0a45cdaf",
       "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -133,6 +223,30 @@
       "writtenOn": "2023-10-27T04:28:44Z",
       "side": 1,
       "message": "How do you feel about using the msgbuf insert APIs here to encode the message rather than open-coded endian handling and memcpy? I think that would make the test more maintainable.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "4e63f922a2275ea00c7bf8adb94a39ec6955f5e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1504057f_d3d52655",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-10-31T03:00:47Z",
+      "side": 1,
+      "message": "Change to use pldm_msgbuf_insert.\nBut I\u0027m unsure of the correct way to use pldm_msgbuf_insert when I want to skip the header size.",
+      "parentUuid": "952bd8e1_5b18b6e7",
       "range": {
         "startLine": 21,
         "startChar": 0,
