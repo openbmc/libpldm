@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2a2cd33_36ba9e0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-01T22:53:48Z",
+      "side": 1,
+      "message": "Hi Delphine, at a minimum the header installation path needs to be fixed. Patrick also has an opinion on the negative testing that I think is reasonable. Please address both in the next patchset.",
+      "revId": "04004f1901d7dead94dd10a75340bacb4c923e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42b9c447_47bb640a",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-11-01T13:28:05Z",
       "side": 1,
       "message": "This test is a little weak.  What does \"bad\" mean?  What about the request is \"bad\"?\n\nThe code has like 8 different error conditions but we\u0027re really only testing a single one.",
+      "revId": "04004f1901d7dead94dd10a75340bacb4c923e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fbaf902_4e6d149f",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-01T22:53:48Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "42b9c447_47bb640a",
       "revId": "04004f1901d7dead94dd10a75340bacb4c923e68",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

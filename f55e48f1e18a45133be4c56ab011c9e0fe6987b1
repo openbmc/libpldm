@@ -237,6 +237,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ecb65e11_9f3173cf",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-01T22:53:48Z",
+      "side": 1,
+      "message": "```\n$ meson install -C build --destdir root\n...\nInstalling /home/andrew/src/openbmc.org/openbmc/libpldm/include/libpldm/oem/meta/libpldm/file_io.h to /home/andrew/src/openbmc.org/openbmc/libpldm/build/root/usr/local/include/libpldm/\n...\n```\n\nSo the header is not installed in the expected location, under `${PREFIX}/${INCLUDE}/libpldm/oem/meta/`. Please update the patch with the expected location.",
+      "parentUuid": "ab0be925_f891e8ee",
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "555905df_3763be28",
         "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
         "patchSetId": 5
