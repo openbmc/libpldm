@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #ifndef FW_UPDATE_H
 #define FW_UPDATE_H
 

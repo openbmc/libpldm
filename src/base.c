@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "base.h"
 #include "pldm_types.h"
 #include <endian.h>

@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #ifndef LIBPLDM_SRC_RESPONDER_H
 #define LIBPLDM_SRC_RESPONDER_H
 

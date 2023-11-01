@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #ifndef CONTAINER_OF_H
 #define CONTAINER_OF_H
 

@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 /* Test pldm_msgbuf_extract() separately because we can't do _Generic() in C++
  * code, i.e. gtest */
 

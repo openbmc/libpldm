@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #ifndef INSTANCE_ID_H
 #define INSTANCE_ID_H
 

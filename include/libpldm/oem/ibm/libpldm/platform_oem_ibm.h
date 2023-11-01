@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #ifndef PLATFORM_OEM_IBM_H
 #define PLATFORM_OEM_IBM_H
 
