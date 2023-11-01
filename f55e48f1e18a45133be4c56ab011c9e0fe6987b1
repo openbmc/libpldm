@@ -219,6 +219,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab0be925_f891e8ee",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-01T13:28:05Z",
+      "side": 1,
+      "message": "We need to fix the install directives then.  This file should be installed at: `/usr/include/libpldm/oem/meta/file_io.h`.  If it isn\u0027t installed in that location, something needs to be changed to make it so.",
+      "parentUuid": "d4adf071_1b40d705",
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "555905df_3763be28",
         "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
         "patchSetId": 5
