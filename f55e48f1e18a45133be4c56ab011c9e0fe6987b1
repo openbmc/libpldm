@@ -402,6 +402,30 @@
       },
       "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5f4ef89_13bd0996",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-01T09:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24d9ad54_2ddfbe9d",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 27
+      },
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
