@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a2cea14_567b4b2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-01T09:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "564808a2_82d61211",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf59897d_10283a49",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-31T11:15:49Z",
       "side": 1,
       "message": "Can you please wrap this at 72 characters? This seems to be wrapped far to early.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33aff590_e2cb0d5e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-01T09:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf59897d_10283a49",
       "range": {
         "startLine": 9,
         "startChar": 0,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4e1a07a_a4122461",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-01T09:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa4df250_dde55d85",
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43ad59e5_f5151ee9",
@@ -77,6 +143,24 @@
       "writtenOn": "2023-10-31T11:15:49Z",
       "side": 1,
       "message": "Can you please switch the tabs to 4 spaces?",
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe7be1b8_62c29d63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-01T09:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43ad59e5_f5151ee9",
       "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -117,6 +201,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4adf071_1b40d705",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-01T09:56:31Z",
+      "side": 1,
+      "message": "It won\u0027t installed under /usr/include/libpldm after I remove out this one.",
+      "parentUuid": "b35b23ae_0ca41966",
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "555905df_3763be28",
         "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
         "patchSetId": 5
@@ -128,6 +230,24 @@
       "writtenOn": "2023-10-31T11:15:49Z",
       "side": 1,
       "message": "Copyrights should include have a year.",
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b78d56_564190ae",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-01T09:56:31Z",
+      "side": 1,
+      "message": "Thanks for the info. Done",
+      "parentUuid": "555905df_3763be28",
       "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -149,6 +269,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68d056fe_4748ff26",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-01T09:56:31Z",
+      "side": 1,
+      "message": "Thanks for the info ! done",
+      "parentUuid": "fb9ef520_d1235902",
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4bd85ff_ee838f37",
@@ -162,6 +300,24 @@
       "writtenOn": "2023-10-31T11:15:49Z",
       "side": 1,
       "message": "Again, please look at other files for how they apply SPDX or see https://spdx.dev/learn/handling-license-info/\n\nlibpldm is licensed under Apache-2.0: https://github.com/openbmc/libpldm/blob/main/LICENSE",
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d6d5411_673b9483",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-01T09:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4bd85ff_ee838f37",
       "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -183,6 +339,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bee3276_c936a382",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-01T09:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3798eec9_4d60770e",
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fcff901_7467d9df",
@@ -196,6 +370,30 @@
       "writtenOn": "2023-10-31T11:15:49Z",
       "side": 1,
       "message": "This could instead be dealt with when initialising the msgbuf:\n\n```\npldm_msgbuf_init(ctx, 0 \u0026buf[hdrSize], sizeof(buf) - hdrSize);\n```",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 27
+      },
+      "revId": "f55e48f1e18a45133be4c56ab011c9e0fe6987b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24d9ad54_2ddfbe9d",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-01T09:56:31Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. done",
+      "parentUuid": "5fcff901_7467d9df",
       "range": {
         "startLine": 32,
         "startChar": 1,
