@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "base.h"
+#include "utils.h"
 #include "pldm_types.h"
 #include <endian.h>
 #include <stdint.h>
@@ -254,7 +255,7 @@ int encode_get_version_req(uint8_t instance_id, uint32_t transfer_handle,
 			   uint8_t transfer_opflag, uint8_t type,
 			   struct pldm_msg *msg)
 {
-	if (NULL == msg) {
+	if (NULL == msg || !is_transfer_flag_valid(transfer_opflag)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -285,7 +286,7 @@ int encode_get_version_resp(uint8_t instance_id, uint8_t completion_code,
 			    uint8_t transfer_flag, const ver32_t *version_data,
 			    size_t version_size, struct pldm_msg *msg)
 {
-	if (NULL == msg) {
+	if (NULL == msg || !is_transfer_flag_valid(transfer_flag)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -324,6 +325,9 @@ int decode_get_version_req(const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_get_version_req *request =
 		(struct pldm_get_version_req *)msg->payload;
 	*transfer_handle = le32toh(request->transfer_handle);
+	if (!is_transfer_flag_valid(request->transfer_opflag)) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
 	*transfer_opflag = request->transfer_opflag;
 	*type = request->type;
 	return PLDM_SUCCESS;
@@ -353,6 +357,9 @@ int decode_get_version_resp(const struct pldm_msg *msg, size_t payload_length,
 		(struct pldm_get_version_resp *)msg->payload;
 
 	*next_transfer_handle = le32toh(response->next_transfer_handle);
+	if (!is_transfer_flag_valid(response->transfer_flag)) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
 	*transfer_flag = response->transfer_flag;
 	memcpy(version, (uint8_t *)response->version_data, sizeof(ver32_t));
 
