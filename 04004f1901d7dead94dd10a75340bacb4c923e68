@@ -51,6 +51,24 @@
       "parentUuid": "42b9c447_47bb640a",
       "revId": "04004f1901d7dead94dd10a75340bacb4c923e68",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d454b252_e48f4e1e",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-02T05:31:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fbaf902_4e6d149f",
+      "revId": "04004f1901d7dead94dd10a75340bacb4c923e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
