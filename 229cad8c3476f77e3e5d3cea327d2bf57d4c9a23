@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82dc66ce_0dc97ad0",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T12:01:06Z",
+      "side": 1,
+      "message": "Isn\u0027t there still an extra \u0027libpldm\u0027 here?",
+      "range": {
+        "startLine": 40,
+        "startChar": 14,
+        "endLine": 40,
+        "endChar": 21
+      },
+      "revId": "229cad8c3476f77e3e5d3cea327d2bf57d4c9a23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4409cc19_3f74eab3",
+        "filename": "meson.build",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T12:01:06Z",
+      "side": 1,
+      "message": "This variable isn\u0027t obviously meta related and ... I don\u0027t really think we _should_ have one that is meta related.\n\n\nPlease see the \u0027preserve_path\u0027 option.  I\u0027m pretty sure that is really what you\u0027re looking for.\n\nhttps://mesonbuild.com/Reference-manual_functions.html#install_headers",
+      "revId": "229cad8c3476f77e3e5d3cea327d2bf57d4c9a23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
