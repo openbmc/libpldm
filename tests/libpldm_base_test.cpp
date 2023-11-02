@@ -382,13 +382,23 @@ TEST(GetPLDMVersion, testGoodEncodeRequest)
 
 TEST(GetPLDMVersion, testBadEncodeRequest)
 {
+    // valid values
     uint8_t pldmType = 0x03;
     uint32_t transferHandle = 0x0;
-    uint8_t opFlag = 0x01;
+    uint8_t transferOpFlag = 0x01;
+    uint8_t instanceId = 0;
 
-    auto rc =
-        encode_get_version_req(0, transferHandle, opFlag, pldmType, nullptr);
+    auto rc = encode_get_version_req(instanceId, transferHandle, transferOpFlag,
+                                     pldmType, nullptr);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
+    // invalid transferOpFlag
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_VERSION_REQ_BYTES>
+        requestMsg{};
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    transferOpFlag = 0x06;
+    rc = encode_get_version_req(instanceId, transferHandle, transferOpFlag,
+                                pldmType, request);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
@@ -417,8 +427,34 @@ TEST(GetPLDMVersion, testEncodeResponse)
                         &version, sizeof(version)));
 }
 
+TEST(GetPLDMVersion, testEncodeBadResponse)
+{
+    // valid values
+    uint8_t completionCode = 0;
+    uint32_t transferHandle = 0;
+    uint8_t flag = PLDM_START_AND_END;
+    ver32_t version = {0xFF, 0xFF, 0xFF, 0xFF};
+
+    auto rc = encode_get_version_resp(0, completionCode, transferHandle,
+                                      PLDM_START_AND_END, &version,
+                                      sizeof(ver32_t), nullptr);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // Invalid value
+    flag = 0x06;
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_VERSION_RESP_BYTES>
+        responseMsg{};
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    rc = encode_get_version_resp(0, completionCode, transferHandle, flag,
+                                 &version, sizeof(ver32_t), response);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
 TEST(GetPLDMVersion, testDecodeRequest)
 {
+    // valid values
     std::array<uint8_t, hdrSize + PLDM_GET_VERSION_REQ_BYTES> requestMsg{};
     uint32_t transferHandle = 0x0;
     uint32_t retTransferHandle = 0x0;
@@ -443,10 +479,20 @@ TEST(GetPLDMVersion, testDecodeRequest)
     EXPECT_EQ(transferHandle, retTransferHandle);
     EXPECT_EQ(flag, retFlag);
     EXPECT_EQ(pldmType, retType);
+
+    // invalid values
+    retFlag = 0x06;
+    memcpy(requestMsg.data() + sizeof(transferHandle) + hdrSize, &retFlag,
+           sizeof(flag));
+    request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    rc = decode_get_version_req(request, requestMsg.size() - hdrSize,
+                                &retTransferHandle, &retFlag, &retType);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
 TEST(GetPLDMVersion, testDecodeResponse)
 {
+    // valid values
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_VERSION_RESP_BYTES>
         responseMsg{};
     uint32_t transferHandle = 0x0;
@@ -480,6 +526,17 @@ TEST(GetPLDMVersion, testDecodeResponse)
     EXPECT_EQ(versionOut.minor, version.minor);
     EXPECT_EQ(versionOut.update, version.update);
     EXPECT_EQ(versionOut.alpha, version.alpha);
+
+    // Invalid values
+    retFlag = 0x06;
+    memcpy(responseMsg.data() + sizeof(completionCode) +
+               sizeof(transferHandle) + hdrSize,
+           &retFlag, sizeof(retFlag));
+    response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    rc = decode_get_version_resp(response, responseMsg.size() - hdrSize,
+                                 &completion_code, &retTransferHandle, &retFlag,
+                                 &versionOut);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
 TEST(GetTID, testEncodeRequest)
