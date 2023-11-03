@@ -50,6 +50,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4ed1a22_90f40267",
+        "filename": "include/libpldm/oem/meta/libpldm/file_io.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-03T07:00:09Z",
+      "side": 1,
+      "message": "please add doxygen",
+      "revId": "229cad8c3476f77e3e5d3cea327d2bf57d4c9a23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e716feb_6cf7e8a0",
+        "filename": "meson.build",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-03T07:00:09Z",
+      "side": 1,
+      "message": "we could remove this if moved under relevant `meson.build`",
+      "revId": "229cad8c3476f77e3e5d3cea327d2bf57d4c9a23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4409cc19_3f74eab3",
         "filename": "meson.build",
         "patchSetId": 7
@@ -79,6 +113,75 @@
       "side": 1,
       "message": "+1 for `preserve_path` - that\u0027s also needed by the IBM OEM cleanup patch.",
       "parentUuid": "4409cc19_3f74eab3",
+      "revId": "229cad8c3476f77e3e5d3cea327d2bf57d4c9a23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50bcb90a_818df4a6",
+        "filename": "meson.build",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-03T07:00:09Z",
+      "side": 1,
+      "message": "I think we can move these to relevant `meson.build` rather than root.",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 24
+      },
+      "revId": "229cad8c3476f77e3e5d3cea327d2bf57d4c9a23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f208ea75_a0a7e164",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-03T07:00:09Z",
+      "side": 1,
+      "message": "magic number?",
+      "range": {
+        "startLine": 23,
+        "startChar": 17,
+        "endLine": 23,
+        "endChar": 18
+      },
+      "revId": "229cad8c3476f77e3e5d3cea327d2bf57d4c9a23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa5c4898_a15cda32",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-03T07:00:09Z",
+      "side": 1,
+      "message": "magic number?",
+      "range": {
+        "startLine": 82,
+        "startChar": 24,
+        "endLine": 82,
+        "endChar": 25
+      },
       "revId": "229cad8c3476f77e3e5d3cea327d2bf57d4c9a23",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
