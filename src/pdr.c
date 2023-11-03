@@ -370,9 +370,10 @@ void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminus_handle,
 	} while (record);
 }
 
-static bool pldm_record_handle_in_range(uint32_t record_handle,
-					uint32_t first_record_handle,
-					uint32_t last_record_handle)
+LIBPLDM_ABI_TESTING
+bool pldm_record_handle_in_range(uint32_t record_handle,
+				 uint32_t first_record_handle,
+				 uint32_t last_record_handle)
 {
 	return record_handle >= first_record_handle &&
 	       record_handle <= last_record_handle;
