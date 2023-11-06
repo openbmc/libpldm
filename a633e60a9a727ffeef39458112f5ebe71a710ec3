@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c39b9d6b_20f5d648",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-06T23:03:33Z",
+      "side": 1,
+      "message": "Can you please hard-wrap these lines at 72 characters? One way to accomplish that is with the following in `vim`: `:set tw\u003d72` and then `v2}gq`",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 27
+      },
+      "revId": "a633e60a9a727ffeef39458112f5ebe71a710ec3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "334c2a62_22dc7818",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-06T23:03:33Z",
+      "side": 1,
+      "message": "Hi Pavithra, we\u0027re getting close! I have a couple of comments, but I made them based on the fact that I\u0027d like the patch to include a new entry in `CHANGELOG.md`. Can you please make that addition?",
+      "revId": "a633e60a9a727ffeef39458112f5ebe71a710ec3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aba163a5_531b8731",
+        "filename": "include/libpldm/oem/ibm/meson.build",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-06T23:03:33Z",
+      "side": 1,
+      "message": "Instead of this I think we should set `preserve_path: true` in the `install_headers()` invocation in the root `meson.build`. That way we can just append the files to `libpldm_headers` rather than create a separate target for installing the IBM OEM headers.\n\nhttps://mesonbuild.com/Reference-manual_functions.html#install_headers_preserve_path\n\nThe same suggestion was made on the patch adding Meta\u0027s OEM bits:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/67051/comment/4409cc19_3f74eab3/",
+      "revId": "a633e60a9a727ffeef39458112f5ebe71a710ec3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09eec97f_897f0c24",
+        "filename": "include/libpldm/oem/ibm/meson.build",
+        "patchSetId": 12
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-06T23:03:33Z",
+      "side": 1,
+      "message": "Can you please trim off these extra blank lines?",
+      "revId": "a633e60a9a727ffeef39458112f5ebe71a710ec3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
