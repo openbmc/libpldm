@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e730e069_394795f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-06T06:13:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed668dd1_7a525887",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 10
+      },
+      "revId": "268c53c43304002d4ec996faa86e3e351455c8e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a53cdb28_21270c99",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-06T01:47:54Z",
       "side": 1,
       "message": "I prefer we avoid using the phrase \"This commit\". Instead, use the imperative voice:\n\n\u003e Install the header files in a way ...",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 12
+      },
+      "revId": "268c53c43304002d4ec996faa86e3e351455c8e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac96ace5_51cd4f61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-06T06:13:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a53cdb28_21270c99",
       "range": {
         "startLine": 12,
         "startChar": 0,
@@ -81,6 +129,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52eb2aff_3c29fd8b",
+        "filename": "include/libpldm/oem/ibm/libpldm/meson.build",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-06T06:13:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88247925_55d36c1e",
+      "revId": "268c53c43304002d4ec996faa86e3e351455c8e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31c89ff9_87fec091",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-11-06T01:47:54Z",
       "side": 1,
       "message": "The files need to be moved so this final `libpldm` directory is removed.",
+      "range": {
+        "startLine": 13,
+        "startChar": 26,
+        "endLine": 13,
+        "endChar": 34
+      },
+      "revId": "268c53c43304002d4ec996faa86e3e351455c8e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5174422_e276597e",
+        "filename": "include/libpldm/oem/ibm/libpldm/meson.build",
+        "patchSetId": 11
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-06T06:13:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31c89ff9_87fec091",
       "range": {
         "startLine": 13,
         "startChar": 26,
@@ -127,6 +217,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d6f325e_1d03983c",
+        "filename": "src/oem/ibm/file_io.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-06T06:13:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37e31235_3db0762f",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 25
+      },
+      "revId": "268c53c43304002d4ec996faa86e3e351455c8e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7d7d1d8_c13df04e",
@@ -140,6 +254,24 @@
       "writtenOn": "2023-11-06T01:47:54Z",
       "side": 1,
       "message": "See previous comment",
+      "revId": "268c53c43304002d4ec996faa86e3e351455c8e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e0577e5_f8970c60",
+        "filename": "src/oem/ibm/host.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-06T06:13:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7d7d1d8_c13df04e",
       "revId": "268c53c43304002d4ec996faa86e3e351455c8e6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -161,6 +293,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a53f061_1bac4dcd",
+        "filename": "src/oem/ibm/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-06T06:13:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "135b9607_06f14917",
+      "revId": "268c53c43304002d4ec996faa86e3e351455c8e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1077f501_733ead8f",
@@ -174,6 +324,24 @@
       "writtenOn": "2023-11-06T01:47:54Z",
       "side": 1,
       "message": "See previous comment",
+      "revId": "268c53c43304002d4ec996faa86e3e351455c8e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cacb063_8e319fc3",
+        "filename": "tests/oem/ibm/libpldm_fileio_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-06T06:13:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1077f501_733ead8f",
       "revId": "268c53c43304002d4ec996faa86e3e351455c8e6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
