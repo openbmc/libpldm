@@ -16,6 +16,24 @@
       "message": "@Andrew Needed your suggestion here, Can we stabilize the above API in the same commit or shall I create a separate commit to stabilize it?",
       "revId": "9740890d82e8f017c054ad5dd9e8dfe5c0e7d313",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7fd391d_f0d9e3ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-06T23:08:32Z",
+      "side": 1,
+      "message": "I think I\u0027d rather not expose this in the library API at all. It doesn\u0027t involve any PLDM-specific types provided by libpldm, and is just a straight-up conjunction of inequalities. I think the implementation can be copied directly into the pldmd source as a static function there without any trouble.\n\nUnless there\u0027s significant justification otherwise, I\u0027d prefer we abandon this patch.",
+      "parentUuid": "016dbb52_2a35ae90",
+      "revId": "9740890d82e8f017c054ad5dd9e8dfe5c0e7d313",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
