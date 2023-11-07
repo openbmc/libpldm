@@ -27,6 +27,7 @@ Change categories:
 
 1. base: Stabilise pldm_msg_hdr_correlate_response()
 2. transport: af-mctp: Stabilise pldm_transport_af_mctp_bind()
+3. libpldm: Fix header use
 
 ## [0.7.0] - 2023-08-29
 
