@@ -16,6 +16,74 @@
       "message": "What\u0027s the intent here? Is there something I can help with?",
       "revId": "bd552c1c90d16162cb7f44a6c7b23672c72e5a81",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eed713ce_309b70b4",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-07T08:32:43Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "bd552c1c90d16162cb7f44a6c7b23672c72e5a81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f56a4eab_ba6e3c26",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-07T08:32:43Z",
+      "side": 1,
+      "message": "this change is not needed and can be handled in the caller APIs",
+      "revId": "bd552c1c90d16162cb7f44a6c7b23672c72e5a81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "410eeae0_0dc6ccd2",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-07T08:32:43Z",
+      "side": 1,
+      "message": "even this is not needed",
+      "revId": "bd552c1c90d16162cb7f44a6c7b23672c72e5a81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b33ae1f_e0a75f34",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-07T08:32:43Z",
+      "side": 1,
+      "message": "caller API can directly call this `pldm_entity_association_pdr_add_from_node_with_record_handle`",
+      "revId": "bd552c1c90d16162cb7f44a6c7b23672c72e5a81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
