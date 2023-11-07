@@ -78,6 +78,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e9e36cf_33b7545e",
+        "filename": "include/libpldm/oem/ibm/meson.build",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-07T05:27:44Z",
+      "side": 1,
+      "message": "\"[63/64] Installing files.\nInstalling subdir /home/pavithra/Documents/libpldm/instance-db to /usr/local/share/libpldm/instance-db\nInstallation failed due to insufficient permissions.\nAttempt to use /usr/bin/sudo to gain elevated privileges? [y/n] y\nInstalling subdir /home/pavithra/Documents/libpldm/instance-db to /usr/local/share/libpldm/instance-db\nInstalling /home/pavithra/Documents/libpldm/instance-db/default to /usr/local/share/libpldm/instance-db\nInstalling libpldm.so.0.7.0 to /usr/local/lib64\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/entity.h to /usr/local/include/libpldm/oem/ibm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/file_io.h to /usr/local/include/libpldm/oem/ibm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/fru.h to /usr/local/include/libpldm/oem/ibm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/host.h to /usr/local/include/libpldm/oem/ibm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/platform.h to /usr/local/include/libpldm/oem/ibm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/state_set.h to /usr/local/include/libpldm/oem/ibm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/entity.h to /usr/local/include/libpldm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/file_io.h to /usr/local/include/libpldm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/fru.h to /usr/local/include/libpldm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/host.h to /usr/local/include/libpldm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/platform.h to /usr/local/include/libpldm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/oem/ibm/state_set.h to /usr/local/include/libpldm/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/transport/af-mctp.h to /usr/local/include/libpldm/transport/\nInstalling /home/pavithra/Documents/libpldm/include/libpldm/transport/mctp-demux.h to /usr/local/include/libpldm/transport/\nInstalling /home/pavithra/Documents/libpldm/build/meson-private/libpldm.pc to /usr/local/lib64/pkgconfig\nInstalling symlink pointing to libpldm.so.0.7.0 to /usr/local/lib64/libpldm.so.0\nInstalling symlink pointing to libpldm.so.0 to /usr/local/lib64/libpldm.so\n\nERROR: Destination \u0027/usr/local/include/libpldm/file_io.h\u0027 already exists and is not a symlink\"",
+      "parentUuid": "b4065403_bdecc53d",
+      "revId": "a633e60a9a727ffeef39458112f5ebe71a710ec3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09eec97f_897f0c24",
         "filename": "include/libpldm/oem/ibm/meson.build",
         "patchSetId": 12
