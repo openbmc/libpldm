@@ -60,6 +60,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4065403_bdecc53d",
+        "filename": "include/libpldm/oem/ibm/meson.build",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-07T05:25:31Z",
+      "side": 1,
+      "message": "@Andrew, By doing this change we are not able to create a symlink for the oem headers - I get this error\n`ERROR: Destination \u0027/usr/local/include/libpldm/file_io.h\u0027 already exists and is not a symlink`\n\nWhat do you suggest, am I missing something?",
+      "parentUuid": "aba163a5_531b8731",
+      "revId": "a633e60a9a727ffeef39458112f5ebe71a710ec3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09eec97f_897f0c24",
         "filename": "include/libpldm/oem/ibm/meson.build",
         "patchSetId": 12
