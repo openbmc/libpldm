@@ -21,6 +21,7 @@ enum pldm_oem_meta_fileio_commands {
 
 enum pldm_oem_meta_file_io_type {
 	POST_CODE = 0x00,
+	POWER_STATUS = 0x02,
 };
 
 struct pldm_write_file_req {
