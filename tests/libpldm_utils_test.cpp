@@ -1,10 +1,9 @@
+#include <libpldm/pldm_types.h>
+#include <libpldm/utils.h>
+
 #include <cstring>
-#include <vector>
-
-#include "libpldm/utils.h"
-#include "pldm_types.h"
-
 #include <gtest/gtest.h>
+#include <vector>
 
 TEST(Crc32, CheckSumTest)
 {

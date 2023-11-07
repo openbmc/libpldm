@@ -1,3 +1,5 @@
+libpldm_include_dirs += include_directories('.')
+
 libpldm_sources += files(
   'base.c',
   'bios.c',

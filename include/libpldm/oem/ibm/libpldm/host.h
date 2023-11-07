@@ -6,10 +6,10 @@
 extern "C" {
 #endif
 
+#include <libpldm/base.h>
+
 #include <stddef.h>
 #include <stdint.h>
-
-#include "base.h"
 
 /* Maximum size for request */
 #define PLDM_GET_ALERT_STATUS_REQ_BYTES 1

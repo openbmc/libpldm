@@ -1,20 +1,18 @@
-#include <endian.h>
+#include <libpldm/base.h>
+#include <libpldm/firmware_update.h>
+#include <libpldm/pldm_types.h>
+#include <libpldm/utils.h>
 
 #include <algorithm>
 #include <array>
 #include <bitset>
 #include <cstdint>
 #include <cstring>
+#include <endian.h>
+#include <gtest/gtest.h>
 #include <string>
 #include <string_view>
 #include <vector>
-
-#include "libpldm/base.h"
-#include "libpldm/firmware_update.h"
-#include "pldm_types.h"
-#include "utils.h"
-
-#include <gtest/gtest.h>
 
 constexpr auto hdrSize = sizeof(pldm_msg_hdr);
 

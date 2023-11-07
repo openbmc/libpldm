@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#include "pdr.h"
-#include "platform.h"
+#include <libpldm/pdr.h>
+#include <libpldm/platform.h>
+
 #include <assert.h>
 #include <endian.h>
 #include <stdlib.h>

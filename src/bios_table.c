@@ -1,9 +1,11 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "array.h"
-#include "bios_table.h"
-#include "base.h"
-#include "bios.h"
-#include "utils.h"
+
+#include <libpldm/base.h>
+#include <libpldm/bios.h>
+#include <libpldm/bios_table.h>
+#include <libpldm/utils.h>
+
 #include <assert.h>
 #include <endian.h>
 #include <limits.h>

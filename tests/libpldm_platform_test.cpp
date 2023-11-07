@@ -1,17 +1,16 @@
-#include <endian.h>
+#include "msgbuf.h"
+
+#include <libpldm/base.h>
+#include <libpldm/entity.h>
+#include <libpldm/platform.h>
+#include <libpldm/pldm_types.h>
 
 #include <array>
 #include <cstdint>
 #include <cstring>
-#include <vector>
-
-#include "libpldm/base.h"
-#include "libpldm/entity.h"
-#include "libpldm/platform.h"
-#include "msgbuf.h"
-#include "pldm_types.h"
-
+#include <endian.h>
 #include <gtest/gtest.h>
+#include <vector>
 
 constexpr auto hdrSize = sizeof(pldm_msg_hdr);
 

@@ -45,12 +45,10 @@ if get_option('oem-ibm').allowed()
   ]
 endif
 
-src_includes = include_directories('..' / 'src', '..' / 'include' / 'libpldm')
-
 foreach t : tests
   test(t, executable(t.underscorify(), t + '.cpp',
                      implicit_include_directories: false,
-                     include_directories: src_includes,
+                     include_directories: libpldm_include_dirs,
                      dependencies: [
                          libpldm_dep,
                          gtest_dep,
@@ -61,9 +59,9 @@ endforeach
 test('bios_table_iter', executable('bios_table_iter',
                                    'bios_table_iter.c',
                                    implicit_include_directories: false,
-                                   include_directories: src_includes))
+                                   include_directories: libpldm_include_dirs))
 
 test('msgbuf_generic', executable('msgbuf_generic',
                                   'msgbuf_generic.c',
                                   implicit_include_directories: false,
-                                  include_directories: src_includes))
+                                  include_directories: libpldm_include_dirs))

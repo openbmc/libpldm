@@ -1,5 +1,3 @@
-libpldm_include_dir += include_directories('.')
-
 libpldm_headers += files(
   'base.h',
   'bios.h',
@@ -24,7 +22,6 @@ libpldm_transport_headers += files(
 )
 
 if get_option('oem-ibm').allowed()
-  libpldm_include_dir += include_directories('oem/ibm')
   libpldm_headers += files(
     'oem/ibm/libpldm/entity_oem_ibm.h',
     'oem/ibm/libpldm/file_io.h',
