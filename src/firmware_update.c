@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#include "firmware_update.h"
-#include "utils.h"
+#include <libpldm/firmware_update.h>
+#include <libpldm/utils.h>
+
 #include <endian.h>
 #include <stdbool.h>
 #include <string.h>

@@ -1,15 +1,15 @@
 #include <endian.h>
+#include <libpldm/base.h>
+#include <libpldm/entity.h>
+#include <libpldm/platform.h>
+#include <libpldm/pldm_types.h>
 
 #include <array>
 #include <cstdint>
 #include <cstring>
 #include <vector>
 
-#include "libpldm/base.h"
-#include "libpldm/entity.h"
-#include "libpldm/platform.h"
 #include "msgbuf.h"
-#include "pldm_types.h"
 
 #include <gtest/gtest.h>
 

@@ -6,7 +6,8 @@
 extern "C" {
 #endif
 
-#include "base.h"
+#include <libpldm/base.h>
+
 #include <stddef.h>
 #include <stdint.h>
 

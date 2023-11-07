@@ -1,9 +1,11 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#include "msgbuf/platform.h"
-#include "base.h"
 #include "msgbuf.h"
-#include "platform.h"
-#include "pldm_types.h"
+#include "msgbuf/platform.h"
+
+#include <libpldm/base.h>
+#include <libpldm/platform.h>
+#include <libpldm/pldm_types.h>
+
 #include <endian.h>
 #include <stdint.h>
 #include <stdlib.h>

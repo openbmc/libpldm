@@ -1,13 +1,13 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include <libpldm/base.h>
+#include <libpldm/fru.h>
+#include <libpldm/utils.h>
+
 #include <assert.h>
 #include <endian.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
-
-#include "base.h"
-#include "fru.h"
-#include "utils.h"
 
 LIBPLDM_ABI_STABLE
 int encode_get_fru_record_table_metadata_req(uint8_t instance_id,

@@ -13,8 +13,8 @@
 extern "C" {
 #endif
 
-#include "base.h"
-#include "pldm_types.h"
+#include <libpldm/base.h>
+#include <libpldm/pldm_types.h>
 
 #include <assert.h>
 #include <endian.h>

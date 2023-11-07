@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#include "libpldm/platform.h"
-#include "libpldm/platform_oem_ibm.h"
+#include <libpldm/platform.h>
+#include <libpldm/oem/ibm/libpldm/platform_oem_ibm.h>
+
 #include <string.h>
 
 LIBPLDM_ABI_STABLE
