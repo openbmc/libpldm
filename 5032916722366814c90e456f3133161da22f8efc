@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "092a2b18_b35d6865",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-08T16:08:31Z",
+      "side": 1,
+      "message": "What\u0027s going on that requires the use of `cfloat`?",
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b631fa6_0a4cd6ae",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-08T16:08:31Z",
+      "side": 1,
+      "message": "nit: since this is C++, can we use `static constexpr size_t` on these?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 24
+      },
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d162b68_0f7d6a18",
+        "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-08T16:08:31Z",
+      "side": 1,
+      "message": "Also this (static constexpr size_t).",
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
