@@ -48,7 +48,7 @@ libpldm_include_dir = include_directories('include', is_system: true)
 subdir('include')
 subdir('src')
 
-if get_option('tests').enabled()
+if get_option('tests').allowed()
   subdir('tests')
 
   c_suite = meson.get_compiler('c').get_id()
