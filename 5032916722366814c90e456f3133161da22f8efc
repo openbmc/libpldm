@@ -1,6 +1,120 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f39f2d9e_298bbd31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-08T23:27:05Z",
+      "side": 1,
+      "message": "Hi Delphine, thanks for rebasing the patch on top of the rework from IBM. It makes the meson much cleaner. The main issue that needs to be addressed is the name of the struct (which becomes part of the API we have to control). The other comments are on implementation details.",
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c528b4d_0ffde1e1",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-08T23:27:05Z",
+      "side": 1,
+      "message": "The struct name needs to be `pldm_oem_meta_write_file_req` (i.e. include `_oem_meta`)",
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26e31b19_4ea32d21",
+        "filename": "meson.options",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-08T23:27:05Z",
+      "side": 1,
+      "message": "Bit of a nit but should this be `Meta`? I don\u0027t think it\u0027s an acronym?",
+      "range": {
+        "startLine": 5,
+        "startChar": 57,
+        "endLine": 5,
+        "endChar": 61
+      },
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff73586e_6b17a770",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-08T23:27:05Z",
+      "side": 1,
+      "message": "Don\u0027t need to stash the return value here...",
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1d3456f_74534d67",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-08T23:27:05Z",
+      "side": 1,
+      "message": "... as this is redundant - it will be captured by `return pldm_msgbuf_destroy()` below.",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 40,
+        "endChar": 2
+      },
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe068ab_964d18ea",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-08T23:27:05Z",
+      "side": 1,
+      "message": "Please use `return pldm_msgbuf_destroy_consumed();` - this requires we\u0027ve consumed exactly the size of the provided buffer and neither more (buffer overflow) nor less",
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "092a2b18_b35d6865",
