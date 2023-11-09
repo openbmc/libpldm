@@ -70,6 +70,24 @@
       "parentUuid": "e9070874_e9bac3be",
       "revId": "5e54fbacb1c021cd1081c46956b1ac9d182c27e7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbab5935_6e7ed739",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-09T04:09:23Z",
+      "side": 1,
+      "message": "\u003e So you mean change to if (org_tree \u003d\u003d NULL || new_tree \u003d\u003d NULL) {return;}, or abandon this submission?\n\nYou can\u0027t do that either, because then the function is explicitly not doing what is documented and isn\u0027t reporting that it didn\u0027t do anything. It\u0027s just not crashing. It\u0027s still incorrect behaviour, it\u0027s just more subtle.\n\n\u003e At the very least, if we are to do this, this requires an update to document the non-NULL precondition in the doxygen and an addition to the changelog\n\nI\u0027m saying you can add the `assert()`s _if you change the doxygen comment in the header to specify it\u0027s a precondition of calling the function that the arguments point to valid objects_.\n\nHere\u0027s the doxygen documentation for the function which will need to be modified:\n\nhttps://github.com/openbmc/libpldm/blob/main/include/libpldm/pdr.h#L549-L553\n\nHere\u0027s a different function that documents some non-NULL pre-conditions that you could use as a reference:\n\nhttps://github.com/openbmc/libpldm/blob/main/include/libpldm/pdr.h#L85-L86\n\nIf you do the same in the documentation for `pldm_entity_association_tree_copy_root()` then you can keep the `asserts()` that you have in this patch, but you _must also_ update `CHANGELOG.md` to highlight your change.\n\nAnd again, the `assert()`s won\u0027t actually do anything in a release builds of libpldm because they are _deleted by the compiler_. So your firmware image builds will likely have just as much undefined behaviour as they did previously.",
+      "parentUuid": "d2d7d172_e4ad0dd5",
+      "revId": "5e54fbacb1c021cd1081c46956b1ac9d182c27e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
