@@ -547,6 +547,9 @@ pldm_entity_node *pldm_entity_association_tree_find_with_locality(
 	bool is_remote);
 
 /** @brief Create a copy of an existing entity association tree
+ * 
+ *  @pre org_tree must point to a valid object
+ *  @pre new_tree must point to a valid object
  *
  *  @param[in] org_tree - pointer to source tree
  *  @param[in/out] new_tree - pointer to destination tree
