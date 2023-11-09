@@ -82,21 +82,21 @@ extern "C" {
 	 PLDM_PDR_NUMERIC_SENSOR_PDR_VARIED_SENSOR_DATA_SIZE_MIN_LENGTH +      \
 	 PLDM_PDR_NUMERIC_SENSOR_PDR_VARIED_RANGE_FIELD_MIN_LENGTH)
 
+/* Minimum length of numeric effecter PDR */
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_FIXED_LENGTH			   56
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_EFFECTER_DATA_SIZE_MIN_LENGTH 2
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_RANGE_FIELD_MIN_LENGTH	   5
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH                               \
+	(PLDM_PDR_NUMERIC_EFFECTER_PDR_FIXED_LENGTH +                          \
+	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_EFFECTER_DATA_SIZE_MIN_LENGTH +  \
+	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_RANGE_FIELD_MIN_LENGTH)
+
 #define PLDM_INVALID_EFFECTER_ID 0xFFFF
 #define PLDM_TID_RESERVED	 0xFF
 
 /* DSP0248 Table1 PLDM monitoring and control data types */
 #define PLDM_STR_UTF_8_MAX_LEN	256
 #define PLDM_STR_UTF_16_MAX_LEN 256
-
-enum pldm_effecter_data_size {
-	PLDM_EFFECTER_DATA_SIZE_UINT8,
-	PLDM_EFFECTER_DATA_SIZE_SINT8,
-	PLDM_EFFECTER_DATA_SIZE_UINT16,
-	PLDM_EFFECTER_DATA_SIZE_SINT16,
-	PLDM_EFFECTER_DATA_SIZE_UINT32,
-	PLDM_EFFECTER_DATA_SIZE_SINT32
-};
 
 enum pldm_range_field_format {
 	PLDM_RANGE_FIELD_FORMAT_UINT8,
@@ -281,6 +281,17 @@ enum pldm_sensor_readings_data_type {
 	PLDM_SENSOR_DATA_SIZE_SINT16,
 	PLDM_SENSOR_DATA_SIZE_UINT32,
 	PLDM_SENSOR_DATA_SIZE_SINT32
+};
+
+/** @brief PLDM NumericEffecterStatePresentReading data type
+ */
+enum pldm_effecter_readings_data_type {
+	PLDM_EFFECTER_DATA_SIZE_UINT8,
+	PLDM_EFFECTER_DATA_SIZE_SINT8,
+	PLDM_EFFECTER_DATA_SIZE_UINT16,
+	PLDM_EFFECTER_DATA_SIZE_SINT16,
+	PLDM_EFFECTER_DATA_SIZE_UINT32,
+	PLDM_EFFECTER_DATA_SIZE_SINT32
 };
 #define PLDM_SENSOR_DATA_SIZE_MAX PLDM_SENSOR_DATA_SIZE_SINT32
 
@@ -647,16 +658,32 @@ typedef union {
 	real32_t value_f32;
 } union_range_field_format;
 
+/** @struct pldm_value_pdr_hdr
+ *
+ *  Structure representing PLDM PDR header for unpacked value
+ *  Refer to: DSP0248_1.2.0: 28.1 Table 75
+ */
+struct pldm_value_pdr_hdr {
+	uint32_t record_handle;
+	uint8_t version;
+	uint8_t type;
+	uint16_t record_change_num;
+	uint16_t length;
+};
+
 /** @struct pldm_numeric_effecter_value_pdr
  *
  *  Structure representing PLDM numeric effecter value PDR
  */
 struct pldm_numeric_effecter_value_pdr {
-	struct pldm_pdr_hdr hdr;
+	struct pldm_value_pdr_hdr hdr;
 	uint16_t terminus_handle;
 	uint16_t effecter_id;
 	uint16_t entity_type;
-	uint16_t entity_instance;
+	union {
+		uint16_t entity_instance_num;
+		uint16_t entity_instance;
+	};
 	uint16_t container_id;
 	uint16_t effecter_semantic_id;
 	uint8_t effecter_init;
@@ -687,7 +714,7 @@ struct pldm_numeric_effecter_value_pdr {
 	union_range_field_format normal_min;
 	union_range_field_format rated_max;
 	union_range_field_format rated_min;
-} __attribute__((packed));
+};
 
 /** @union union_sensor_data_size
  *
@@ -703,19 +730,6 @@ typedef union {
 	uint32_t value_u32;
 	int32_t value_s32;
 } union_sensor_data_size;
-
-/** @struct pldm_value_pdr_hdr
- *
- *  Structure representing PLDM PDR header for unpacked value
- *  Refer to: DSP0248_1.2.0: 28.1 Table 75
- */
-struct pldm_value_pdr_hdr {
-	uint32_t record_handle;
-	uint8_t version;
-	uint8_t type;
-	uint16_t record_change_num;
-	uint16_t length;
-};
 
 /** @struct pldm_numeric_sensor_value_pdr
  *
@@ -2183,6 +2197,16 @@ int decode_set_event_receiver_req(const struct pldm_msg *msg,
  */
 int encode_set_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
 				   struct pldm_msg *msg);
+
+/** @brief Decode Numeric effecter Pdr data
+ *
+ *  @param[in] pdr_data - pdr data for numeric effecter
+ *  @param[in] pdr_data_length - Length of pdr data
+ *  @param[out] pdr_value - unpacked numeric effecter PDR struct
+ */
+int decode_numeric_effecter_pdr_data(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_numeric_effecter_value_pdr *pdr_value);
 
 #ifdef __cplusplus
 }

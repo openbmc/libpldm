@@ -104,7 +104,7 @@ pldm_msgbuf_extract_range_field_format(struct pldm_msgbuf *ctx,
 /* This API is bad, but it's because the caller's APIs are also bad */
 __attribute__((always_inline)) static inline int
 pldm_msgbuf_extract_effecter_value(struct pldm_msgbuf *ctx,
-				   enum pldm_effecter_data_size tag,
+				   enum pldm_effecter_readings_data_type tag,
 				   uint8_t *val)
 {
 	switch (tag) {
@@ -125,4 +125,33 @@ pldm_msgbuf_extract_effecter_value(struct pldm_msgbuf *ctx,
 	return -PLDM_ERROR_INVALID_DATA;
 }
 
+/*
+ * We use __attribute__((always_inline)) below so the compiler has visibility of
+ * the switch() at the call site. It is often the case that the size of multiple
+ * fields depends on the tag. Inlining thus gives the compiler visibility to
+ * hoist one tag-based code-path condition to cover all invocations.
+ */
+
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_extract_effecter_data(struct pldm_msgbuf *ctx,
+				  enum pldm_effecter_readings_data_type tag,
+				  union_effecter_data_size *dst)
+{
+	switch (tag) {
+	case PLDM_EFFECTER_DATA_SIZE_UINT8:
+		return pldm_msgbuf_extract(ctx, &dst->value_u8);
+	case PLDM_EFFECTER_DATA_SIZE_SINT8:
+		return pldm_msgbuf_extract(ctx, &dst->value_s8);
+	case PLDM_EFFECTER_DATA_SIZE_UINT16:
+		return pldm_msgbuf_extract(ctx, &dst->value_u16);
+	case PLDM_EFFECTER_DATA_SIZE_SINT16:
+		return pldm_msgbuf_extract(ctx, &dst->value_s16);
+	case PLDM_EFFECTER_DATA_SIZE_UINT32:
+		return pldm_msgbuf_extract(ctx, &dst->value_u32);
+	case PLDM_EFFECTER_DATA_SIZE_SINT32:
+		return pldm_msgbuf_extract(ctx, &dst->value_s32);
+	}
+
+	return -PLDM_ERROR_INVALID_DATA;
+}
 #endif
