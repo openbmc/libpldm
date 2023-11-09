@@ -16,6 +16,24 @@
       "message": "Generally, you must not use `assert()` to manage conditions that can be created by the caller. `assert()` must only be used to test _invariants that are properties of the implementation_.\n\nConsider that libpldm may be integrated into host firmware, which runs freestanding and underneath the OS. If an `assert()` is executed that brings down the entire machine. That\u0027s undesirable, hence it\u0027s usually the case we propagate an error instead. This allows the caller to make a choice about how to handle the error (that may still be to bring down the machine, but at least the caller owns that choice).\n\nYou can only use `assert()` if the doxygen documentation for the function lists non-NULL as a precondition for these functions. The doxygen documentation currently does not list any preconditions.\n\nWhat motivated you to make this change? What error occurred in practice? Please provide more context in the commit message.\n\nAt the very least, if we are to do this, this requires an update to document the precondition in the doxygen and an addition to the changelog, OR, defining a second function with a different symbol name that returns an error if the argument values are invalid and deprecate this one.\n\nNote that libpldm is configured by default with `b_ndebug\u003dif-release`:\n\nhttps://github.com/openbmc/libpldm/blob/5664cf20d414ceeefa2569462c7278077bbb7c49/meson.build#L9\n\nThis means that all `assert()` invocations _are removed_ from the resulting binary. Any invariants they were testing are _required_ to be upheld else the execution yields undefined behaviour.",
       "revId": "5e54fbacb1c021cd1081c46956b1ac9d182c27e7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "597d4595_58bb9f0d",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-09T03:18:00Z",
+      "side": 1,
+      "message": "\u003e Generally, you must not use `assert()` to manage conditions that can be created by the caller. `assert()` must only be used to test _invariants that are properties of the implementation_.\n\u003e \n\u003e Consider that libpldm may be integrated into host firmware, which runs freestanding and underneath the OS. If an `assert()` is executed that brings down the entire machine. That\u0027s undesirable, hence it\u0027s usually the case we propagate an error instead. This allows the caller to make a choice about how to handle the error (that may still be to bring down the machine, but at least the caller owns that choice).\n\u003e \n\u003e You can only use `assert()` if the doxygen documentation for the function lists non-NULL as a precondition for these functions. The doxygen documentation currently does not list any preconditions.\n\u003e \n\u003e What motivated you to make this change? What error occurred in practice? Please provide more context in the commit message.\n\nThanks arj.\nBecause in our internal testing, when calling the this method in pldm, due to some errors, a null value was passed in, causing coredump.\nAccording to your suggestion, for this situation, I want to confirm with you that we should use assert for forward verification? Or should we judge whether the parameter is NULL and return it directly?\n\n\u003e \n\u003e At the very least, if we are to do this, this requires an update to document the precondition in the doxygen and an addition to the changelog, OR, defining a second function with a different symbol name that returns an error if the argument values are invalid and deprecate this one.\n\nSorry, I am not familiar with API/ABI.\n\n\u003e \n\u003e Note that libpldm is configured by default with `b_ndebug\u003dif-release`:\n\u003e \n\u003e https://github.com/openbmc/libpldm/blob/5664cf20d414ceeefa2569462c7278077bbb7c49/meson.build#L9\n\u003e \n\u003e This means that all `assert()` invocations _are removed_ from the resulting binary. Any invariants they were testing are _required_ to be upheld else the execution yields undefined behaviour.",
+      "parentUuid": "fd3f0661_005265f9",
+      "revId": "5e54fbacb1c021cd1081c46956b1ac9d182c27e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
