@@ -42,6 +42,7 @@ Change categories:
 2. pdr: Assign record_handle in entity_association_pdr_add_children()
 3. msgbuf: Require sensor data enum in pldm_msgbuf_extract_sensor_value()
 4. pdr: Remove redundant constant for minimum numeric sensor PDR length
+5. pdr: Conditional field extraction for decode_numeric_sensor_pdr_data()
 
 ## [0.7.0] - 2023-08-29
 

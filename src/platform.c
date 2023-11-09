@@ -1589,24 +1589,45 @@ int decode_numeric_sensor_pdr_data(
 	}
 
 	pldm_msgbuf_extract(buf, &pdr_value->range_field_support.byte);
-	pldm_msgbuf_extract_range_field_format(
-		buf, pdr_value->range_field_format, &pdr_value->nominal_value);
-	pldm_msgbuf_extract_range_field_format(
-		buf, pdr_value->range_field_format, &pdr_value->normal_max);
-	pldm_msgbuf_extract_range_field_format(
-		buf, pdr_value->range_field_format, &pdr_value->normal_min);
+	if (pdr_value->range_field_support.bits.bit0) {
+		pldm_msgbuf_extract_range_field_format(
+			buf, pdr_value->range_field_format,
+			&pdr_value->nominal_value);
+	}
+	if (pdr_value->range_field_support.bits.bit1) {
+		pldm_msgbuf_extract_range_field_format(
+			buf, pdr_value->range_field_format,
+			&pdr_value->normal_max);
+	}
+	if (pdr_value->range_field_support.bits.bit2) {
+		pldm_msgbuf_extract_range_field_format(
+			buf, pdr_value->range_field_format,
+			&pdr_value->normal_min);
+	}
 	pldm_msgbuf_extract_range_field_format(
 		buf, pdr_value->range_field_format, &pdr_value->warning_high);
 	pldm_msgbuf_extract_range_field_format(
 		buf, pdr_value->range_field_format, &pdr_value->warning_low);
-	pldm_msgbuf_extract_range_field_format(
-		buf, pdr_value->range_field_format, &pdr_value->critical_high);
-	pldm_msgbuf_extract_range_field_format(
-		buf, pdr_value->range_field_format, &pdr_value->critical_low);
-	pldm_msgbuf_extract_range_field_format(
-		buf, pdr_value->range_field_format, &pdr_value->fatal_high);
-	pldm_msgbuf_extract_range_field_format(
-		buf, pdr_value->range_field_format, &pdr_value->fatal_low);
+	if (pdr_value->range_field_support.bits.bit3) {
+		pldm_msgbuf_extract_range_field_format(
+			buf, pdr_value->range_field_format,
+			&pdr_value->critical_high);
+	}
+	if (pdr_value->range_field_support.bits.bit4) {
+		pldm_msgbuf_extract_range_field_format(
+			buf, pdr_value->range_field_format,
+			&pdr_value->critical_low);
+	}
+	if (pdr_value->range_field_support.bits.bit5) {
+		pldm_msgbuf_extract_range_field_format(
+			buf, pdr_value->range_field_format,
+			&pdr_value->fatal_high);
+	}
+	if (pdr_value->range_field_support.bits.bit6) {
+		pldm_msgbuf_extract_range_field_format(
+			buf, pdr_value->range_field_format,
+			&pdr_value->fatal_low);
+	}
 
 	return pldm_msgbuf_destroy(buf);
 }
