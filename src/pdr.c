@@ -1216,6 +1216,9 @@ void pldm_entity_association_tree_copy_root(
 	pldm_entity_association_tree *org_tree,
 	pldm_entity_association_tree *new_tree)
 {
+	assert(org_tree != NULL);
+	assert(new_tree != NULL);
+
 	new_tree->last_used_container_id = org_tree->last_used_container_id;
 	entity_association_tree_copy(org_tree->root, &(new_tree->root));
 }
