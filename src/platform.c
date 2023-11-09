@@ -2429,3 +2429,94 @@ int decode_poll_for_platform_event_message_resp(
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }
+
+LIBPLDM_ABI_TESTING
+int decode_numeric_effecter_pdr_data(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_numeric_effecter_value_pdr *pdr_value)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	struct pldm_value_pdr_hdr hdr;
+	int rc;
+
+	rc = pldm_msgbuf_init(buf, PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH,
+			      pdr_data, pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_value_pdr_hdr(buf, &hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_platform_pdr_hdr_validate(
+		&hdr, PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH,
+		pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	memcpy(&pdr_value->hdr, &hdr, sizeof(hdr));
+
+	pldm_msgbuf_extract(buf, pdr_value->terminus_handle);
+	pldm_msgbuf_extract(buf, pdr_value->effecter_id);
+	pldm_msgbuf_extract(buf, pdr_value->entity_type);
+	pldm_msgbuf_extract(buf, pdr_value->entity_instance);
+	pldm_msgbuf_extract(buf, pdr_value->container_id);
+	pldm_msgbuf_extract(buf, pdr_value->effecter_semantic_id);
+	pldm_msgbuf_extract(buf, pdr_value->effecter_init);
+	pldm_msgbuf_extract(buf, pdr_value->effecter_auxiliary_names);
+	pldm_msgbuf_extract(buf, pdr_value->base_unit);
+	pldm_msgbuf_extract(buf, pdr_value->unit_modifier);
+	pldm_msgbuf_extract(buf, pdr_value->rate_unit);
+	pldm_msgbuf_extract(buf, pdr_value->base_oem_unit_handle);
+	pldm_msgbuf_extract(buf, pdr_value->aux_unit);
+	pldm_msgbuf_extract(buf, pdr_value->aux_unit_modifier);
+	pldm_msgbuf_extract(buf, pdr_value->aux_rate_unit);
+	pldm_msgbuf_extract(buf, pdr_value->aux_oem_unit_handle);
+	pldm_msgbuf_extract(buf, pdr_value->is_linear);
+
+	rc = pldm_msgbuf_extract(buf, pdr_value->effecter_data_size);
+	if (rc) {
+		return rc;
+	}
+	if (pdr_value->effecter_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	pldm_msgbuf_extract(buf, pdr_value->resolution);
+	pldm_msgbuf_extract(buf, pdr_value->offset);
+	pldm_msgbuf_extract(buf, pdr_value->accuracy);
+	pldm_msgbuf_extract(buf, pdr_value->plus_tolerance);
+	pldm_msgbuf_extract(buf, pdr_value->minus_tolerance);
+	pldm_msgbuf_extract(buf, pdr_value->state_transition_interval);
+	pldm_msgbuf_extract(buf, pdr_value->transition_interval);
+	pldm_msgbuf_extract_effecter_data(buf, pdr_value->effecter_data_size,
+					  pdr_value->max_settable);
+	pldm_msgbuf_extract_effecter_data(buf, pdr_value->effecter_data_size,
+					  pdr_value->min_settable);
+
+	rc = pldm_msgbuf_extract(buf, pdr_value->range_field_format);
+	if (rc) {
+		return rc;
+	}
+	if (pdr_value->range_field_format > PLDM_RANGE_FIELD_FORMAT_MAX) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	pldm_msgbuf_extract(buf, pdr_value->range_field_support.byte);
+	pldm_msgbuf_extract_range_field_format(
+		buf, pdr_value->range_field_format, pdr_value->nominal_value);
+	pldm_msgbuf_extract_range_field_format(
+		buf, pdr_value->range_field_format, pdr_value->normal_max);
+	pldm_msgbuf_extract_range_field_format(
+		buf, pdr_value->range_field_format, pdr_value->normal_min);
+	pldm_msgbuf_extract_range_field_format(
+		buf, pdr_value->range_field_format, pdr_value->rated_max);
+	pldm_msgbuf_extract_range_field_format(
+		buf, pdr_value->range_field_format, pdr_value->rated_min);
+
+	return pldm_msgbuf_destroy(buf);
+}
