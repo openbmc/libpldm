@@ -188,6 +188,7 @@ Change categories:
    struct pointers must point to valid objects to avoid polluting the function
    prototypes. The following APIs now have this precondition explicitly defined:
 
+   - pldm_entity_association_tree_copy_root()
    - pldm_entity_extract()
    - pldm_entity_get_parent()
    - pldm_entity_is_exist_parent()
