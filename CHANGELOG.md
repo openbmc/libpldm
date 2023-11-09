@@ -34,6 +34,7 @@ Change categories:
 
 1. Fix the parameter type in the extractor function
 2. Remove the redefined minimum length of the PDR message
+3. Only extract values that are marked as present by the bitfield
 
 ## [0.7.0] - 2023-08-29
 

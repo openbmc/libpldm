@@ -3311,7 +3311,7 @@ TEST(decodeNumericSensorPdrData, Uint8Test)
         255,                           // maxReadable
         0,                             // minReadable
         PLDM_RANGE_FIELD_FORMAT_UINT8, // rangeFieldFormat
-        0,                             // rangeFieldsupport
+        0x7f,                          // rangeFieldsupport
         50,                            // nominalValue = 50
         60,                            // normalMax = 60
         40,                            // normalMin = 40
@@ -3362,7 +3362,7 @@ TEST(decodeNumericSensorPdrData, Uint8Test)
     EXPECT_EQ(255, decodedPdr.max_readable.value_u8);
     EXPECT_EQ(0, decodedPdr.min_readable.value_u8);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_UINT8, decodedPdr.range_field_format);
-    EXPECT_EQ(0, decodedPdr.range_field_support.byte);
+    EXPECT_EQ(0x7f, decodedPdr.range_field_support.byte);
     EXPECT_EQ(50, decodedPdr.nominal_value.value_u8);
     EXPECT_EQ(60, decodedPdr.normal_max.value_u8);
     EXPECT_EQ(40, decodedPdr.normal_min.value_u8);
@@ -3438,7 +3438,7 @@ TEST(decodeNumericSensorPdrData, Sint8Test)
         0x64,                          // maxReadable = 100
         0x9c,                          // minReadable = -100
         PLDM_RANGE_FIELD_FORMAT_SINT8, // rangeFieldFormat
-        0,                             // rangeFieldsupport
+        0x7f,                          // rangeFieldsupport
         0,                             // nominalValue = 0
         5,                             // normalMax = 5
         0xfb,                          // normalMin = -5
@@ -3459,6 +3459,7 @@ TEST(decodeNumericSensorPdrData, Sint8Test)
     EXPECT_EQ(100, decodedPdr.max_readable.value_s8);
     EXPECT_EQ(-100, decodedPdr.min_readable.value_s8);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_SINT8, decodedPdr.range_field_format);
+    EXPECT_EQ(0x7f, decodedPdr.range_field_support.byte);
     EXPECT_EQ(0, decodedPdr.nominal_value.value_s8);
     EXPECT_EQ(5, decodedPdr.normal_max.value_s8);
     EXPECT_EQ(-5, decodedPdr.normal_min.value_s8);
@@ -3537,7 +3538,7 @@ TEST(decodeNumericSensorPdrData, Uint16Test)
         0,
         0,                              // minReadable = 0
         PLDM_RANGE_FIELD_FORMAT_UINT16, // rangeFieldFormat
-        0,                              // rangeFieldsupport
+        0x7f,                           // rangeFieldsupport
         0x88,
         0x13, // nominalValue = 5,000
         0x70,
@@ -3567,6 +3568,7 @@ TEST(decodeNumericSensorPdrData, Uint16Test)
     EXPECT_EQ(4096, decodedPdr.max_readable.value_u16);
     EXPECT_EQ(0, decodedPdr.min_readable.value_u16);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_UINT16, decodedPdr.range_field_format);
+    EXPECT_EQ(0x7f, decodedPdr.range_field_support.byte);
     EXPECT_EQ(5000, decodedPdr.nominal_value.value_u16);
     EXPECT_EQ(6000, decodedPdr.normal_max.value_u16);
     EXPECT_EQ(4000, decodedPdr.normal_min.value_u16);
@@ -3645,7 +3647,7 @@ TEST(decodeNumericSensorPdrData, Sint16Test)
         0x18,
         0xfc,                           // minReadable = -1000
         PLDM_RANGE_FIELD_FORMAT_SINT16, // rangeFieldFormat
-        0,                              // rangeFieldsupport
+        0x7f,                           // rangeFieldsupport
         0,
         0, // nominalValue = 0
         0xf4,
@@ -3675,6 +3677,7 @@ TEST(decodeNumericSensorPdrData, Sint16Test)
     EXPECT_EQ(1000, decodedPdr.max_readable.value_s16);
     EXPECT_EQ(-1000, decodedPdr.min_readable.value_s16);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_SINT16, decodedPdr.range_field_format);
+    EXPECT_EQ(0x7f, decodedPdr.range_field_support.byte);
     EXPECT_EQ(0, decodedPdr.nominal_value.value_s16);
     EXPECT_EQ(500, decodedPdr.normal_max.value_s16);
     EXPECT_EQ(-500, decodedPdr.normal_min.value_s16);
@@ -3759,7 +3762,7 @@ TEST(decodeNumericSensorPdrData, Uint32Test)
         0,
         0,                              // minReadable = 0
         PLDM_RANGE_FIELD_FORMAT_UINT32, // rangeFieldFormat
-        0,                              // rangeFieldsupport
+        0x7f,                           // rangeFieldsupport
         0x40,
         0x4b,
         0x4c,
@@ -3807,6 +3810,7 @@ TEST(decodeNumericSensorPdrData, Uint32Test)
     EXPECT_EQ(4096, decodedPdr.max_readable.value_u32);
     EXPECT_EQ(0, decodedPdr.min_readable.value_u32);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_UINT32, decodedPdr.range_field_format);
+    EXPECT_EQ(0x7f, decodedPdr.range_field_support.byte);
     EXPECT_EQ(5000000, decodedPdr.nominal_value.value_u32);
     EXPECT_EQ(6000000, decodedPdr.normal_max.value_u32);
     EXPECT_EQ(4000000, decodedPdr.normal_min.value_u32);
@@ -3891,7 +3895,7 @@ TEST(decodeNumericSensorPdrData, Sint32Test)
         0xfe,
         0xff,                           // minReadable = -10000
         PLDM_RANGE_FIELD_FORMAT_SINT32, // rangeFieldFormat
-        0,                              // rangeFieldsupport
+        0x7f,                           // rangeFieldsupport
         0,
         0,
         0,
@@ -3939,6 +3943,7 @@ TEST(decodeNumericSensorPdrData, Sint32Test)
     EXPECT_EQ(100000, decodedPdr.max_readable.value_s32);
     EXPECT_EQ(-100000, decodedPdr.min_readable.value_s32);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_SINT32, decodedPdr.range_field_format);
+    EXPECT_EQ(0x7f, decodedPdr.range_field_support.byte);
     EXPECT_EQ(0, decodedPdr.nominal_value.value_s32);
     EXPECT_EQ(500000, decodedPdr.normal_max.value_s32);
     EXPECT_EQ(-500000, decodedPdr.normal_min.value_s32);
@@ -4023,7 +4028,7 @@ TEST(decodeNumericSensorPdrData, Real32Test)
         0xfe,
         0xff,                           // minReadable = -10000
         PLDM_RANGE_FIELD_FORMAT_REAL32, // rangeFieldFormat
-        0,                              // rangeFieldsupport
+        0x7f,                           // rangeFieldsupport
         0,
         0,
         0,
@@ -4071,6 +4076,7 @@ TEST(decodeNumericSensorPdrData, Real32Test)
     EXPECT_EQ(100000, decodedPdr.max_readable.value_s32);
     EXPECT_EQ(-100000, decodedPdr.min_readable.value_s32);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_REAL32, decodedPdr.range_field_format);
+    EXPECT_EQ(0x7f, decodedPdr.range_field_support.byte);
     EXPECT_FLOAT_EQ(0, decodedPdr.nominal_value.value_f32);
     EXPECT_FLOAT_EQ(50.05f, decodedPdr.normal_max.value_f32);
     EXPECT_FLOAT_EQ(-50.05f, decodedPdr.normal_min.value_f32);
@@ -4080,6 +4086,109 @@ TEST(decodeNumericSensorPdrData, Real32Test)
     EXPECT_FLOAT_EQ(-200.002f, decodedPdr.critical_low.value_f32);
     EXPECT_FLOAT_EQ(300.003f, decodedPdr.fatal_high.value_f32);
     EXPECT_FLOAT_EQ(-300.003f, decodedPdr.fatal_low.value_f32);
+}
+
+TEST(decodeNumericSensorPdrData, Real32TestOnlyNormalMin)
+{
+    std::vector<uint8_t> pdr1{
+        0x1,
+        0x0,
+        0x0,
+        0x0,                     // record handle
+        0x1,                     // PDRHeaderVersion
+        PLDM_NUMERIC_SENSOR_PDR, // PDRType
+        0x0,
+        0x0, // recordChangeNumber
+        PLDM_PDR_NUMERIC_SENSOR_PDR_FIXED_LENGTH +
+            PLDM_PDR_NUMERIC_SENSOR_PDR_VARIED_SENSOR_DATA_SIZE_MIN_LENGTH * 4 +
+            3 * 4,
+        0, // dataLength
+        0,
+        0, // PLDMTerminusHandle
+        0x1,
+        0x0, // sensorID=1
+        PLDM_ENTITY_POWER_SUPPLY,
+        0, // entityType=Power Supply(120)
+        1,
+        0, // entityInstanceNumber
+        0x1,
+        0x0,                          // containerID=1
+        PLDM_NO_INIT,                 // sensorInit
+        false,                        // sensorAuxiliaryNamesPDR
+        PLDM_SENSOR_UNIT_DEGRESS_C,   // baseUint(2)=degrees C
+        0,                            // unitModifier
+        0,                            // rateUnit
+        0,                            // baseOEMUnitHandle
+        0,                            // auxUnit
+        0,                            // auxUnitModifier
+        0,                            // auxRateUnit
+        0,                            // rel
+        0,                            // auxOEMUnitHandle
+        true,                         // isLinear
+        PLDM_SENSOR_DATA_SIZE_SINT32, // sensorDataSize
+        0,
+        0,
+        0,
+        0, // resolution
+        0,
+        0,
+        0,
+        0, // offset
+        0,
+        0, // accuracy
+        0, // plusTolerance
+        0, // minusTolerance
+        3,
+        0,
+        0,
+        0, // hysteresis
+        0, // supportedThresholds
+        0, // thresholdAndHysteresisVolatility
+        0,
+        0,
+        0x80,
+        0x3f, // stateTransistionInterval=1.0
+        0,
+        0,
+        0x80,
+        0x3f, // updateInverval=1.0
+        0xa0,
+        0x86,
+        0x01,
+        0x00, // maxReadable = 100000
+        0x60,
+        0x79,
+        0xfe,
+        0xff,                           // minReadable = -10000
+        PLDM_RANGE_FIELD_FORMAT_REAL32, // rangeFieldFormat
+        0x04,                           // rangeFieldsupport
+        0x33,
+        0x33,
+        0x48,
+        0xc2, // normalMin = -50.05
+        0x83,
+        0x00,
+        0xc8,
+        0x42, // warningHigh = 100.001
+        0x83,
+        0x00,
+        0xc8,
+        0xc2 // warningLow = -100.001
+    };
+
+    struct pldm_numeric_sensor_value_pdr decodedPdr;
+    auto rc =
+        decode_numeric_sensor_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
+    EXPECT_EQ(PLDM_SUCCESS, rc);
+
+    EXPECT_EQ(PLDM_SENSOR_DATA_SIZE_SINT32, decodedPdr.sensor_data_size);
+    EXPECT_EQ(100000, decodedPdr.max_readable.value_s32);
+    EXPECT_EQ(-100000, decodedPdr.min_readable.value_s32);
+    EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_REAL32, decodedPdr.range_field_format);
+    EXPECT_EQ(0x04, decodedPdr.range_field_support.byte);
+    EXPECT_FLOAT_EQ(-50.05f, decodedPdr.normal_min.value_f32);
+    EXPECT_FLOAT_EQ(100.001f, decodedPdr.warning_high.value_f32);
+    EXPECT_FLOAT_EQ(-100.001f, decodedPdr.warning_low.value_f32);
 }
 
 TEST(decodeNumericSensorPdrDataDeathTest, InvalidSizeTest)
