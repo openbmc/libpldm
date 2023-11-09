@@ -82,6 +82,15 @@ extern "C" {
 	 PLDM_PDR_NUMERIC_SENSOR_PDR_VARIED_SENSOR_DATA_SIZE_MIN_LENGTH +      \
 	 PLDM_PDR_NUMERIC_SENSOR_PDR_VARIED_RANGE_FIELD_MIN_LENGTH)
 
+/* Minimum length of numeric effecter PDR */
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_FIXED_LENGTH			   56
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_EFFECTER_DATA_SIZE_MIN_LENGTH 2
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_RANGE_FIELD_MIN_LENGTH	   5
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH                               \
+	(PLDM_PDR_NUMERIC_EFFECTER_PDR_FIXED_LENGTH +                          \
+	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_EFFECTER_DATA_SIZE_MIN_LENGTH +  \
+	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_RANGE_FIELD_MIN_LENGTH)
+
 #define PLDM_INVALID_EFFECTER_ID 0xffff
 #define PLDM_TID_RESERVED	 0xff
 
@@ -776,6 +785,51 @@ struct pldm_numeric_sensor_value_pdr {
 	union_range_field_format critical_low;
 	union_range_field_format fatal_high;
 	union_range_field_format fatal_low;
+};
+
+/** @struct pldm_numeric_effecter_value_pdr_unpkg
+ *
+ *  Unpacked Structure representing PLDM numeric effecter value PDR
+ */
+struct pldm_numeric_effecter_value_pdr_unpkg {
+	struct pldm_value_pdr_hdr hdr;
+	uint16_t terminus_handle;
+	uint16_t effecter_id;
+	uint16_t entity_type;
+	union {
+		uint16_t entity_instance_num;
+		uint16_t entity_instance;
+	};
+	uint16_t container_id;
+	uint16_t effecter_semantic_id;
+	uint8_t effecter_init;
+	bool8_t effecter_auxiliary_names;
+	uint8_t base_unit;
+	int8_t unit_modifier;
+	uint8_t rate_unit;
+	uint8_t base_oem_unit_handle;
+	uint8_t aux_unit;
+	int8_t aux_unit_modifier;
+	uint8_t aux_rate_unit;
+	uint8_t aux_oem_unit_handle;
+	bool8_t is_linear;
+	uint8_t effecter_data_size;
+	real32_t resolution;
+	real32_t offset;
+	uint16_t accuracy;
+	uint8_t plus_tolerance;
+	uint8_t minus_tolerance;
+	real32_t state_transition_interval;
+	real32_t transition_interval;
+	union_effecter_data_size max_settable;
+	union_effecter_data_size min_settable;
+	uint8_t range_field_format;
+	bitfield8_t range_field_support;
+	union_range_field_format nominal_value;
+	union_range_field_format normal_max;
+	union_range_field_format normal_min;
+	union_range_field_format rated_max;
+	union_range_field_format rated_min;
 };
 
 /** @struct state_effecter_possible_states
@@ -2191,6 +2245,16 @@ int decode_set_event_receiver_req(const struct pldm_msg *msg,
  */
 int encode_set_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
 				   struct pldm_msg *msg);
+
+/** @brief Decode Numeric effecter Pdr data
+ *
+ *  @param[in] pdr_data - pdr data for numeric effecter
+ *  @param[in] pdr_data_length - Length of pdr data
+ *  @param[out] pdr_value - unpacked numeric effecter PDR struct
+ */
+int decode_numeric_effecter_pdr_data(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_numeric_effecter_value_pdr_unpkg *pdr_value);
 
 #ifdef __cplusplus
 }
