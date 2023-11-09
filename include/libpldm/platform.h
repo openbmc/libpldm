@@ -82,6 +82,15 @@ extern "C" {
 	 PLDM_PDR_NUMERIC_SENSOR_PDR_VARIED_SENSOR_DATA_SIZE_MIN_LENGTH +      \
 	 PLDM_PDR_NUMERIC_SENSOR_PDR_VARIED_RANGE_FIELD_MIN_LENGTH)
 
+/* Minimum length of numeric effecter PDR */
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_FIXED_LENGTH			   56
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_EFFECTER_DATA_SIZE_MIN_LENGTH 2
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_RANGE_FIELD_MIN_LENGTH	   5
+#define PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH                               \
+	(PLDM_PDR_NUMERIC_EFFECTER_PDR_FIXED_LENGTH +                          \
+	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_EFFECTER_DATA_SIZE_MIN_LENGTH +  \
+	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_RANGE_FIELD_MIN_LENGTH)
+
 #define PLDM_INVALID_EFFECTER_ID 0xffff
 #define PLDM_TID_RESERVED	 0xff
 
@@ -2191,6 +2200,18 @@ int decode_set_event_receiver_req(const struct pldm_msg *msg,
  */
 int encode_set_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
 				   struct pldm_msg *msg);
+
+/** @brief Decode Numeric effecter Pdr data
+ *
+ *  @param[in] pdr_data - PDR data of the numeric effecter in DSP0248_1.2.2
+ *         table 87. This must be a pointer to the PDR data in the GetPDR
+ *         message body
+ *  @param[in] pdr_data_length - Length of pdr data
+ *  @param[out] pdr_value - the numeric effecter PDR data struct
+ */
+int decode_numeric_effecter_pdr_data(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_numeric_effecter_value_pdr *pdr_value);
 
 #ifdef __cplusplus
 }

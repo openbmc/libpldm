@@ -143,6 +143,44 @@ pldm_msgbuf_extract_effecter_value(struct pldm_msgbuf *ctx,
 	return -PLDM_ERROR_INVALID_DATA;
 }
 
+#define pldm_msgbuf_extract_effecter_data(ctx, tag, dst)                       \
+	pldm_msgbuf_extract_typecheck(union_effecter_data_size,                \
+				      pldm__msgbuf_extract_range_field_format, \
+				      dst, ctx, tag, (void *)&(dst))
+__attribute__((always_inline)) static inline int
+pldm__msgbuf_extract_effecter_data(struct pldm_msgbuf *ctx,
+				   enum pldm_effecter_data_size tag, void *ed)
+{
+	switch (tag) {
+	case PLDM_EFFECTER_DATA_SIZE_UINT8:
+		return pldm__msgbuf_extract_uint8(
+			ctx, ((char *)ed) + offsetof(union_effecter_data_size,
+						     value_u8));
+	case PLDM_EFFECTER_DATA_SIZE_SINT8:
+		return pldm__msgbuf_extract_int8(
+			ctx, ((char *)ed) + offsetof(union_effecter_data_size,
+						     value_s8));
+	case PLDM_EFFECTER_DATA_SIZE_UINT16:
+		return pldm__msgbuf_extract_uint16(
+			ctx, ((char *)ed) + offsetof(union_effecter_data_size,
+						     value_u16));
+	case PLDM_EFFECTER_DATA_SIZE_SINT16:
+		return pldm__msgbuf_extract_int16(
+			ctx, ((char *)ed) + offsetof(union_effecter_data_size,
+						     value_s16));
+	case PLDM_EFFECTER_DATA_SIZE_UINT32:
+		return pldm__msgbuf_extract_uint32(
+			ctx, ((char *)ed) + offsetof(union_effecter_data_size,
+						     value_u32));
+	case PLDM_EFFECTER_DATA_SIZE_SINT32:
+		return pldm__msgbuf_extract_int32(
+			ctx, ((char *)ed) + offsetof(union_effecter_data_size,
+						     value_s32));
+	}
+
+	return -PLDM_ERROR_INVALID_DATA;
+}
+
 #ifdef __cplusplus
 #include <type_traits>
 
