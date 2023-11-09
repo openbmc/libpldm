@@ -126,4 +126,26 @@ pldm_msgbuf_extract_effecter_value(struct pldm_msgbuf *ctx,
 	return -PLDM_ERROR_INVALID_DATA;
 }
 
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_extract_effecter_data(struct pldm_msgbuf *ctx,
+				  enum pldm_effecter_data_size tag,
+				  union_effecter_data_size *dst)
+{
+	switch (tag) {
+	case PLDM_EFFECTER_DATA_SIZE_UINT8:
+		return pldm_msgbuf_extract(ctx, &dst->value_u8);
+	case PLDM_EFFECTER_DATA_SIZE_SINT8:
+		return pldm_msgbuf_extract(ctx, &dst->value_s8);
+	case PLDM_EFFECTER_DATA_SIZE_UINT16:
+		return pldm_msgbuf_extract(ctx, &dst->value_u16);
+	case PLDM_EFFECTER_DATA_SIZE_SINT16:
+		return pldm_msgbuf_extract(ctx, &dst->value_s16);
+	case PLDM_EFFECTER_DATA_SIZE_UINT32:
+		return pldm_msgbuf_extract(ctx, &dst->value_u32);
+	case PLDM_EFFECTER_DATA_SIZE_SINT32:
+		return pldm_msgbuf_extract(ctx, &dst->value_s32);
+	}
+
+	return -PLDM_ERROR_INVALID_DATA;
+}
 #endif
