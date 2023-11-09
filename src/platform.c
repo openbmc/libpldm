@@ -2429,3 +2429,174 @@ int decode_poll_for_platform_event_message_resp(
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }
+
+LIBPLDM_ABI_TESTING
+int decode_numeric_effecter_pdr_data(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_numeric_effecter_value_pdr *pdr_value)
+{
+	struct pldm_numeric_effecter_value_pdr_unpkg {
+		struct pldm_value_pdr_hdr hdr;
+		uint16_t terminus_handle;
+		uint16_t effecter_id;
+		uint16_t entity_type;
+		uint16_t entity_instance;
+		uint16_t container_id;
+		uint16_t effecter_semantic_id;
+		uint8_t effecter_init;
+		bool8_t effecter_auxiliary_names;
+		uint8_t base_unit;
+		int8_t unit_modifier;
+		uint8_t rate_unit;
+		uint8_t base_oem_unit_handle;
+		uint8_t aux_unit;
+		int8_t aux_unit_modifier;
+		uint8_t aux_rate_unit;
+		uint8_t aux_oem_unit_handle;
+		bool8_t is_linear;
+		uint8_t effecter_data_size;
+		real32_t resolution;
+		real32_t offset;
+		uint16_t accuracy;
+		uint8_t plus_tolerance;
+		uint8_t minus_tolerance;
+		real32_t state_transition_interval;
+		real32_t transition_interval;
+		union_effecter_data_size max_settable;
+		union_effecter_data_size min_settable;
+		uint8_t range_field_format;
+		bitfield8_t range_field_support;
+		union_range_field_format nominal_value;
+		union_range_field_format normal_max;
+		union_range_field_format normal_min;
+		union_range_field_format rated_max;
+		union_range_field_format rated_min;
+	};
+	struct pldm_numeric_effecter_value_pdr_unpkg unpkg_value;
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	rc = pldm_msgbuf_init(buf, PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH,
+			      pdr_data, pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_value_pdr_hdr(buf, &unpkg_value.hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_platform_pdr_hdr_validate(
+		&unpkg_value.hdr, PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH,
+		pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, &unpkg_value.terminus_handle);
+	pldm_msgbuf_extract(buf, &unpkg_value.effecter_id);
+	pldm_msgbuf_extract(buf, &unpkg_value.entity_type);
+	pldm_msgbuf_extract(buf, &unpkg_value.entity_instance);
+	pldm_msgbuf_extract(buf, &unpkg_value.container_id);
+	pldm_msgbuf_extract(buf, &unpkg_value.effecter_semantic_id);
+	pldm_msgbuf_extract(buf, &unpkg_value.effecter_init);
+	pldm_msgbuf_extract(buf, &unpkg_value.effecter_auxiliary_names);
+	pldm_msgbuf_extract(buf, &unpkg_value.base_unit);
+	pldm_msgbuf_extract(buf, &unpkg_value.unit_modifier);
+	pldm_msgbuf_extract(buf, &unpkg_value.rate_unit);
+	pldm_msgbuf_extract(buf, &unpkg_value.base_oem_unit_handle);
+	pldm_msgbuf_extract(buf, &unpkg_value.aux_unit);
+	pldm_msgbuf_extract(buf, &unpkg_value.aux_unit_modifier);
+	pldm_msgbuf_extract(buf, &unpkg_value.aux_rate_unit);
+	pldm_msgbuf_extract(buf, &unpkg_value.aux_oem_unit_handle);
+	pldm_msgbuf_extract(buf, &unpkg_value.is_linear);
+
+	rc = pldm_msgbuf_extract(buf, &unpkg_value.effecter_data_size);
+	if (rc) {
+		return rc;
+	}
+	if (unpkg_value.effecter_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	pldm_msgbuf_extract(buf, &unpkg_value.resolution);
+	pldm_msgbuf_extract(buf, &unpkg_value.offset);
+	pldm_msgbuf_extract(buf, &unpkg_value.accuracy);
+	pldm_msgbuf_extract(buf, &unpkg_value.plus_tolerance);
+	pldm_msgbuf_extract(buf, &unpkg_value.minus_tolerance);
+	pldm_msgbuf_extract(buf, &unpkg_value.state_transition_interval);
+	pldm_msgbuf_extract(buf, &unpkg_value.transition_interval);
+	pldm_msgbuf_extract_effecter_data(buf, unpkg_value.effecter_data_size,
+					  &unpkg_value.max_settable);
+	pldm_msgbuf_extract_effecter_data(buf, unpkg_value.effecter_data_size,
+					  &unpkg_value.min_settable);
+
+	rc = pldm_msgbuf_extract(buf, &unpkg_value.range_field_format);
+	if (rc) {
+		return rc;
+	}
+	if (unpkg_value.range_field_format > PLDM_RANGE_FIELD_FORMAT_MAX) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	pldm_msgbuf_extract(buf, &unpkg_value.range_field_support.byte);
+	pldm_msgbuf_extract_range_field_format(buf,
+					       unpkg_value.range_field_format,
+					       &unpkg_value.nominal_value);
+	pldm_msgbuf_extract_range_field_format(
+		buf, unpkg_value.range_field_format, &unpkg_value.normal_max);
+	pldm_msgbuf_extract_range_field_format(
+		buf, unpkg_value.range_field_format, &unpkg_value.normal_min);
+	pldm_msgbuf_extract_range_field_format(
+		buf, unpkg_value.range_field_format, &unpkg_value.rated_max);
+	pldm_msgbuf_extract_range_field_format(
+		buf, unpkg_value.range_field_format, &unpkg_value.rated_min);
+
+	// Map the unpacked struct to packed struct
+	pdr_value->hdr.record_handle = unpkg_value.hdr.record_handle;
+	pdr_value->hdr.version = unpkg_value.hdr.version;
+	pdr_value->hdr.type = unpkg_value.hdr.type;
+	pdr_value->hdr.record_change_num = unpkg_value.hdr.record_change_num;
+	pdr_value->hdr.length = unpkg_value.hdr.length;
+
+	pdr_value->terminus_handle = unpkg_value.terminus_handle;
+	pdr_value->effecter_id = unpkg_value.effecter_id;
+	pdr_value->entity_type = unpkg_value.entity_type;
+	pdr_value->entity_instance = unpkg_value.entity_instance;
+	pdr_value->container_id = unpkg_value.container_id;
+	pdr_value->effecter_semantic_id = unpkg_value.effecter_semantic_id;
+	pdr_value->effecter_init = unpkg_value.effecter_init;
+	pdr_value->effecter_auxiliary_names =
+		unpkg_value.effecter_auxiliary_names;
+	pdr_value->base_unit = unpkg_value.base_unit;
+	pdr_value->unit_modifier = unpkg_value.unit_modifier;
+	pdr_value->rate_unit = unpkg_value.rate_unit;
+	pdr_value->base_oem_unit_handle = unpkg_value.base_oem_unit_handle;
+	pdr_value->aux_unit = unpkg_value.aux_unit;
+	pdr_value->aux_unit_modifier = unpkg_value.aux_unit_modifier;
+	pdr_value->aux_rate_unit = unpkg_value.aux_rate_unit;
+	pdr_value->aux_oem_unit_handle = unpkg_value.aux_oem_unit_handle;
+	pdr_value->is_linear = unpkg_value.is_linear;
+	pdr_value->effecter_data_size = unpkg_value.effecter_data_size;
+	pdr_value->resolution = unpkg_value.resolution;
+	pdr_value->offset = unpkg_value.offset;
+	pdr_value->accuracy = unpkg_value.accuracy;
+	pdr_value->plus_tolerance = unpkg_value.plus_tolerance;
+	pdr_value->minus_tolerance = unpkg_value.minus_tolerance;
+	pdr_value->state_transition_interval =
+		unpkg_value.state_transition_interval;
+	pdr_value->transition_interval = unpkg_value.transition_interval;
+	pdr_value->max_settable = unpkg_value.max_settable;
+	pdr_value->min_settable = unpkg_value.min_settable;
+	pdr_value->range_field_format = unpkg_value.range_field_format;
+	pdr_value->range_field_support = unpkg_value.range_field_support;
+	pdr_value->nominal_value = unpkg_value.nominal_value;
+	pdr_value->normal_max = unpkg_value.normal_max;
+	pdr_value->normal_min = unpkg_value.normal_min;
+	pdr_value->rated_max = unpkg_value.rated_max;
+	pdr_value->rated_min = unpkg_value.rated_min;
+
+	return pldm_msgbuf_destroy(buf);
+}
