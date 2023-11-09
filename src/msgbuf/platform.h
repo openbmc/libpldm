@@ -56,7 +56,8 @@ pldm_msgbuf_extract_sensor_data(struct pldm_msgbuf *ctx,
  */
 __attribute__((always_inline)) static inline int
 pldm_msgbuf_extract_sensor_value(struct pldm_msgbuf *ctx,
-				 enum pldm_effecter_data_size tag, uint8_t *val)
+				 enum pldm_sensor_readings_data_type tag,
+				 uint8_t *val)
 {
 	switch (tag) {
 	case PLDM_SENSOR_DATA_SIZE_UINT8:
