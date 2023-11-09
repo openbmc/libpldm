@@ -52,6 +52,24 @@
       "parentUuid": "597d4595_58bb9f0d",
       "revId": "5e54fbacb1c021cd1081c46956b1ac9d182c27e7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d7d172_e4ad0dd5",
+        "filename": "src/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-09T03:41:35Z",
+      "side": 1,
+      "message": "\u003e \u003e Because in our internal testing, when calling the this method in pldm, due to some errors, a null value was passed in, causing coredump.\n\u003e \n\u003e Use of `assert()` doesn\u0027t help with not crashing. It may help you identify problems earlier, but only in debug builds. Release builds of the library _remove assert() from the compiled binary_.\n\u003e \n\u003e \u003e According to your suggestion, for this situation, I want to confirm with you that we should use assert for forward verification?\n\u003e \n\u003e Bluntly: You must not use `assert()`.\n\u003e \n\u003e Less bluntly, please re-read this:\n\u003e \n\u003e \u003e You can only use `assert()` if the doxygen documentation for the function lists non-NULL as a precondition for these parameters. The doxygen documentation currently does not list any preconditions.\n\u003e \n\u003e and this:\n\u003e \n\u003e \u003e At the very least, if we are to do this, this requires an update to document the non-NULL precondition in the doxygen and an addition to the changelog\n\nGot it.\nSo you mean change to `if (org_tree \u003d\u003d NULL || new_tree \u003d\u003d NULL) {return;}`, or abandon this submission?\n\n\u003e \n\u003e \u003e Sorry, I am not familiar with API/ABI.\n\u003e \n\u003e I\u0027m not sure what you mean by this. The current function prototype returns void, allowing no mechanism for informing the caller of a problem. We can\u0027t change the prototype because the function is tracked in our ABI definition (marked stable), but we can provide an alternative one that has better behaviour.",
+      "parentUuid": "e9070874_e9bac3be",
+      "revId": "5e54fbacb1c021cd1081c46956b1ac9d182c27e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
