@@ -30,6 +30,7 @@ Change categories:
 2. transport: af-mctp: Stabilise pldm_transport_af_mctp_bind()
 3. libpldm: Fix header use
 4. libpldm: More fixes for header use
+5. pdr: Removing a if check in pldm_pdr_add_check()
 
 ### Fixed
 
