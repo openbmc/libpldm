@@ -6,8 +6,9 @@
 extern "C" {
 #endif
 
-#include "libpldm/base.h"
-#include "libpldm/pldm.h"
+#include <libpldm/base.h>
+#include <libpldm/pldm.h>
+
 #include <stddef.h>
 
 struct pldm_transport;

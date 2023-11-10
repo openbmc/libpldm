@@ -6,7 +6,8 @@
 extern "C" {
 #endif
 
-#include "bios.h"
+#include <libpldm/bios.h>
+
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>

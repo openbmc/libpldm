@@ -2,8 +2,8 @@
 #ifndef LIBPLDM_AF_MCTP_H
 #define LIBPLDM_AF_MCTP_H
 
-#include "libpldm/base.h"
-#include "libpldm/pldm.h"
+#include <libpldm/base.h>
+#include <libpldm/pldm.h>
 
 #ifdef __cplusplus
 extern "C" {

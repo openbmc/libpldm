@@ -1,13 +1,12 @@
 #include <endian.h>
+#include <libpldm/pdr.h>
+#include <libpldm/platform.h>
 
 #include <array>
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
 #include <vector>
-
-#include "libpldm/pdr.h"
-#include "libpldm/platform.h"
 
 #include <gtest/gtest.h>
 
