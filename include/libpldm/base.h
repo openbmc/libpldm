@@ -6,12 +6,12 @@
 extern "C" {
 #endif
 
+#include <libpldm/pldm_types.h>
+
 #include <asm/byteorder.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-
-#include "pldm_types.h"
 
 typedef uint8_t pldm_tid_t;
 

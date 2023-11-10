@@ -6,7 +6,8 @@
 extern "C" {
 #endif
 
-#include "pldm_types.h"
+#include <libpldm/pldm_types.h>
+
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>

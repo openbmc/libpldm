@@ -6,12 +6,12 @@
 extern "C" {
 #endif
 
+#include <libpldm/base.h>
+#include <libpldm/utils.h>
+
 #include <asm/byteorder.h>
 #include <stddef.h>
 #include <stdint.h>
-
-#include "base.h"
-#include "utils.h"
 
 #define PLDM_GET_FRU_RECORD_TABLE_METADATA_REQ_BYTES  0
 #define PLDM_GET_FRU_RECORD_TABLE_METADATA_RESP_BYTES 19

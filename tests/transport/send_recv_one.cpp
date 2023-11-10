@@ -1,5 +1,6 @@
+#include <libpldm/transport.h>
+
 #include "array.h"
-#include "libpldm/transport.h"
 #include "transport/test.h"
 
 #include <gtest/gtest.h>
