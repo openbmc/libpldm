@@ -1,4 +1,8 @@
 #include <endian.h>
+#include <libpldm/base.h>
+#include <libpldm/bios.h>
+#include <libpldm/bios_table.h>
+#include <libpldm/utils.h>
 
 #include <algorithm>
 #include <cstdint>
@@ -7,11 +11,6 @@
 #include <string>
 #include <utility>
 #include <vector>
-
-#include "libpldm/base.h"
-#include "libpldm/bios.h"
-#include "libpldm/bios_table.h"
-#include "libpldm/utils.h"
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

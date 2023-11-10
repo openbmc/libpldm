@@ -6,7 +6,8 @@
 extern "C" {
 #endif
 
-#include "libpldm/base.h"
+#include <libpldm/base.h>
+
 #include <stdint.h>
 
 typedef uint8_t pldm_instance_id_t;

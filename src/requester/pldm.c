@@ -13,7 +13,7 @@
 #include <unistd.h>
 
 /* Temporary for old api */
-#include "libpldm/transport/mctp-demux.h"
+#include <libpldm/transport/mctp-demux.h>
 extern int
 pldm_transport_mctp_demux_get_socket_fd(struct pldm_transport_mctp_demux *ctx);
 extern struct pldm_transport_mctp_demux *

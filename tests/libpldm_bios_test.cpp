@@ -1,13 +1,12 @@
 #include <endian.h>
+#include <libpldm/base.h>
+#include <libpldm/bios.h>
+#include <libpldm/utils.h>
 
 #include <array>
 #include <cstdint>
 #include <cstring>
 #include <memory>
-
-#include "libpldm/base.h"
-#include "libpldm/bios.h"
-#include "libpldm/utils.h"
 
 #include <gtest/gtest.h>
 
