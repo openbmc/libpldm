@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "libpldm/transport.h"
 #include "libpldm/base.h"
-#include "libpldm/requester/pldm.h"
+#include "libpldm/pldm.h"
 #include "transport.h"
 
 #include <errno.h>
