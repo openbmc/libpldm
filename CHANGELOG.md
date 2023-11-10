@@ -30,6 +30,10 @@ Change categories:
 2. transport: af-mctp: Stabilise pldm_transport_af_mctp_bind()
 3. libpldm: Fix header use
 
+### Fixed
+
+1. libpldm: Rationalise the local and installed path of pldm.h
+
 ## [0.7.0] - 2023-08-29
 
 ### Added

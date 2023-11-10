@@ -2,7 +2,7 @@
 #include "responder.h"
 
 #include <libpldm/base.h>
-#include <libpldm/requester/pldm.h>
+#include <libpldm/pldm.h>
 
 #include <stdbool.h>
 

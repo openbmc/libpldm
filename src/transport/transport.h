@@ -3,7 +3,7 @@
 #define LIBPLDM_SRC_TRANSPORT_TRANSPORT_H
 
 #include "libpldm/base.h"
-#include "libpldm/requester/pldm.h"
+#include "libpldm/pldm.h"
 struct pollfd;
 
 /**
