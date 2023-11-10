@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2863175f_780263ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-10T02:14:33Z",
+      "side": 1,
+      "message": "Also, please update the \"Fixed\" section of `CHANGELOG.md` in each case :)",
+      "parentUuid": "c27ab8ff_0dbdb5ae",
+      "revId": "205597059be8cb7fbed7c21bad0a3c7c49b9206e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "869137cc_b62f8931",
         "filename": "src/msgbuf/platform.h",
         "patchSetId": 1
