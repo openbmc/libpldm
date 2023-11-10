@@ -1510,7 +1510,6 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 	return pldm_msgbuf_destroy_consumed(buf);
 }
 
-#define PLDM_NUMERIC_SENSOR_VALUE_PDR_MIN_SIZE 69
 LIBPLDM_ABI_STABLE
 int decode_numeric_sensor_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
@@ -1520,7 +1519,7 @@ int decode_numeric_sensor_pdr_data(
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	rc = pldm_msgbuf_init(buf, PLDM_NUMERIC_SENSOR_VALUE_PDR_MIN_SIZE,
+	rc = pldm_msgbuf_init(buf, PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH,
 			      pdr_data, pdr_data_length);
 	if (rc) {
 		return rc;
@@ -1532,7 +1531,7 @@ int decode_numeric_sensor_pdr_data(
 	}
 
 	rc = pldm_platform_pdr_hdr_validate(
-		&pdr_value->hdr, PLDM_NUMERIC_SENSOR_VALUE_PDR_MIN_SIZE,
+		&pdr_value->hdr, PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH,
 		pdr_data_length);
 	if (rc) {
 		return rc;

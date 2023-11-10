@@ -35,6 +35,7 @@ Change categories:
 
 1. libpldm: Rationalise the local and installed path of pldm.h
 2. Fix the parameter type in the extractor function
+3. Remove the redefined minimum length of the PDR message
 
 ## [0.7.0] - 2023-08-29
 
