@@ -6249,6 +6249,30 @@ $VAR1 = {
                                          'Return' => '83533',
                                          'ShortName' => 'pldm_entity_association_tree_find_with_locality'
                                        },
+                            '84941' => {
+                                         'Header' => 'pdr.h',
+                                         'Line' => '200',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'repo',
+                                                               'type' => '85063'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'first',
+                                                               'type' => '199'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'last',
+                                                               'type' => '199'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '1' => 'rsi',
+                                                    '2' => 'rdx'
+                                                  },
+                                         'Return' => '83528',
+                                         'ShortName' => 'pldm_pdr_find_last_in_range'
+                                       },
                             '85068' => {
                                          'Header' => 'pdr.h',
                                          'Line' => '165',
@@ -9310,6 +9334,7 @@ $VAR1 = {
                                                  'pldm_pdr_add_check' => 1,
                                                  'pldm_pdr_add_fru_record_set_check' => 1,
                                                  'pldm_pdr_destroy' => 1,
+                                                 'pldm_pdr_find_last_in_range' => 1,
                                                  'pldm_pdr_find_record' => 1,
                                                  'pldm_pdr_find_record_by_type' => 1,
                                                  'pldm_pdr_fru_record_set_find_by_rsi' => 1,
