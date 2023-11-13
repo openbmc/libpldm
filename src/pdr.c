@@ -1095,7 +1095,7 @@ void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo)
 	}
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 pldm_pdr_record *pldm_pdr_find_last_in_range(const pldm_pdr *repo,
 					     uint32_t first, uint32_t last)
 {
