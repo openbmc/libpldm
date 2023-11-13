@@ -7925,6 +7925,51 @@ $VAR1 = {
                                          'Return' => '1',
                                          'ShortName' => 'pldm_find_entity_ref_in_tree'
                                        },
+                            '85876' => {
+                                         'Header' => 'pdr.h',
+                                         'Line' => '481',
+                                         'Param' => {
+                                                      '0' => {
+                                                               'name' => 'node',
+                                                               'type' => '83533'
+                                                             },
+                                                      '1' => {
+                                                               'name' => 'repo',
+                                                               'type' => '85316'
+                                                             },
+                                                      '2' => {
+                                                               'name' => 'entities',
+                                                               'type' => '83926'
+                                                             },
+                                                      '3' => {
+                                                               'name' => 'num_entities',
+                                                               'type' => '453'
+                                                             },
+                                                      '4' => {
+                                                               'name' => 'is_remote',
+                                                               'type' => '5126'
+                                                             },
+                                                      '5' => {
+                                                               'name' => 'terminus_handle',
+                                                               'type' => '5576'
+                                                             },
+                                                      '6' => {
+                                                               'name' => 'record_handle',
+                                                               'offset' => '0',
+                                                               'type' => '152'
+                                                             }
+                                                    },
+                                         'Reg' => {
+                                                    '0' => 'rdi',
+                                                    '1' => 'rsi',
+                                                    '2' => 'rdx',
+                                                    '3' => 'rcx',
+                                                    '4' => 'r8',
+                                                    '5' => 'r9'
+                                                  },
+                                         'Return' => '100',
+                                         'ShortName' => 'pldm_entity_association_pdr_add_from_node_with_record_handle'
+                                       },
                             '86109' => {
                                          'Header' => 'pdr.h',
                                          'Line' => '464',
@@ -9305,6 +9350,7 @@ $VAR1 = {
                                                  'pldm_close' => 1,
                                                  'pldm_entity_association_pdr_add_check' => 1,
                                                  'pldm_entity_association_pdr_add_from_node_check' => 1,
+                                                 'pldm_entity_association_pdr_add_from_node_with_record_handle' => 1,
                                                  'pldm_entity_association_pdr_extract' => 1,
                                                  'pldm_entity_association_tree_add' => 1,
                                                  'pldm_entity_association_tree_add_entity' => 1,
