@@ -30,6 +30,7 @@ Change categories:
 2. transport: af-mctp: Stabilise pldm_transport_af_mctp_bind()
 3. libpldm: Fix header use
 4. libpldm: More fixes for header use
+5. pdr: Stabilise pldm_pdr_find_last_in_range() API
 
 ### Fixed
 
