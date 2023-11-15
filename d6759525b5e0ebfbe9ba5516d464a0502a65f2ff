@@ -16,6 +16,24 @@
       "message": "what is the reason behind this change? Please mention in the description as well to make it clear.",
       "revId": "d6759525b5e0ebfbe9ba5516d464a0502a65f2ff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f70e063_df6d109d",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-11-15T12:18:21Z",
+      "side": 1,
+      "message": "Updated the commit message.\nThis function is not include the description. So I think commit message is enough.",
+      "parentUuid": "4e3acd9a_4338b7d7",
+      "revId": "d6759525b5e0ebfbe9ba5516d464a0502a65f2ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
