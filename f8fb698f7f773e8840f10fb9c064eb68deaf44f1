@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1fdac46_e692f3d1",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-16T09:33:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5329401_318906dd",
+      "revId": "f8fb698f7f773e8840f10fb9c064eb68deaf44f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "609b0793_c39d6578",
@@ -58,6 +76,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16bb75f0_2c75a157",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-16T09:33:53Z",
+      "side": 1,
+      "message": "Ack. move to pldm.",
+      "parentUuid": "609b0793_c39d6578",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 2
+      },
+      "revId": "f8fb698f7f773e8840f10fb9c064eb68deaf44f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6b5b74e_663845de",
@@ -71,6 +113,24 @@
       "writtenOn": "2023-11-16T02:22:07Z",
       "side": 1,
       "message": "This might be a C-style vs C++-style, but are we ok moving `int rc` down to here since this is the only usage of it anyhow?",
+      "revId": "f8fb698f7f773e8840f10fb9c064eb68deaf44f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8468401f_146aa251",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-16T09:33:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c6b5b74e_663845de",
       "revId": "f8fb698f7f773e8840f10fb9c064eb68deaf44f1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
