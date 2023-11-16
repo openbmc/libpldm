@@ -16,6 +16,63 @@
       "message": "Looks like we have a merge conflict now.  Is this code close to being ready for review?  Seems like https://gerrit.openbmc.org/c/openbmc/pldm/+/67050 depends on it but this one is still marked WIP.",
       "revId": "f8fb698f7f773e8840f10fb9c064eb68deaf44f1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5329401_318906dd",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-16T02:22:07Z",
+      "side": 1,
+      "message": "I suspect we need these prefixed in some way to include OEM_META also?  In C, enums pollute the global namespace.",
+      "revId": "f8fb698f7f773e8840f10fb9c064eb68deaf44f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "609b0793_c39d6578",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-16T02:22:07Z",
+      "side": 1,
+      "message": "Do you actually want these to be in libpldm?  Seems like this is a command-handler artifact that you probably want to put in pldm only so that you don\u0027t need to make 2 commits for every new type?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 2
+      },
+      "revId": "f8fb698f7f773e8840f10fb9c064eb68deaf44f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6b5b74e_663845de",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-16T02:22:07Z",
+      "side": 1,
+      "message": "This might be a C-style vs C++-style, but are we ok moving `int rc` down to here since this is the only usage of it anyhow?",
+      "revId": "f8fb698f7f773e8840f10fb9c064eb68deaf44f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
