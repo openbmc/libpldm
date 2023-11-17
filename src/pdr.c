@@ -785,7 +785,7 @@ static int entity_association_pdr_add_children(
 
 	struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)start;
 	hdr->version = 1;
-	hdr->record_handle = 0;
+	hdr->record_handle = record_handle;
 	hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
 	hdr->record_change_num = 0;
 	hdr->length = htole16(size - sizeof(struct pldm_pdr_hdr));
