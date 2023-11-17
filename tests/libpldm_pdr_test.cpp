@@ -1861,3 +1861,62 @@ TEST(EntityAssociationPDR, testFindChildContainerID)
     pldm_entity_association_tree_destroy(tree);
 }
 #endif
+
+TEST(EntityAssociationPDR, testNodeAddCheck)
+{
+    pldm_entity* entities = (pldm_entity*)malloc(sizeof(pldm_entity) * 4);
+    entities[0].entity_type = 1;
+    entities[1].entity_type = 2;
+    entities[2].entity_type = 2;
+    entities[3].entity_type = 3;
+
+    auto tree = pldm_entity_association_tree_init();
+
+    auto l1 = pldm_entity_association_tree_add(
+        tree, &entities[0], 0xFFFF, nullptr, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l1, nullptr);
+    auto l2a = pldm_entity_association_tree_add(
+        tree, &entities[1], 0xFFFF, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l2a, nullptr);
+    auto l2b = pldm_entity_association_tree_add(
+        tree, &entities[2], 0xFFFF, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l2b, nullptr);
+    auto l2c = pldm_entity_association_tree_add(
+        tree, &entities[3], 0xFFFF, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l2c, nullptr);
+
+    auto repo = pldm_pdr_init();
+
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 4, false, 1, 0),
+              0);
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 4, false, 1, 17),
+              0);
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 4, false, 1, 23),
+              0);
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 4, false, 1, 34),
+              0);
+
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 4u);
+
+    uint8_t* outData = nullptr;
+    uint32_t size{};
+    uint32_t nextRecHdl{};
+    auto hdl = pldm_pdr_find_record(repo, 0, &outData, &size, &nextRecHdl);
+    EXPECT_NE(hdl, nullptr);
+
+    outData = nullptr;
+    auto hdl1 = pldm_pdr_find_record(repo, 17, &outData, &size, &nextRecHdl);
+    EXPECT_NE(hdl1, nullptr);
+
+    outData = nullptr;
+    auto hdl2 = pldm_pdr_find_record(repo, 3, &outData, &size, &nextRecHdl);
+    EXPECT_EQ(hdl2, nullptr);
+    outData = nullptr;
+
+    pldm_pdr_destroy(repo);
+    pldm_entity_association_tree_destroy(tree);
+}
