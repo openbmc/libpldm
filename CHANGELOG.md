@@ -36,6 +36,8 @@ Change categories:
 ### Fixed
 
 1. libpldm: Rationalise the local and installed path of pldm.h
+2. pdr: Fix to assign the record_handle value sent by caller in
+   entity_association_pdr_add_children() API
 
 ## [0.7.0] - 2023-08-29
 
