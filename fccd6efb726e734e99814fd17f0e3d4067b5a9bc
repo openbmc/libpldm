@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a41f021e_3a44ac5b",
+        "filename": "src/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1513,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T05:41:57Z",
+      "side": 0,
+      "message": "Mildly irritating that the other macro was exposed in the public API, but nothing we can easily do about that now.",
+      "revId": "fccd6efb726e734e99814fd17f0e3d4067b5a9bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

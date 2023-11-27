@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e5c8395_ebf2e89d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T05:41:57Z",
+      "side": 1,
+      "message": "Can you please prefix this with `pdr: `? That way we easily spot the affected subsystem:\n\nFurther, it\u0027s a bit of a nit but it wasn\u0027t redefined, rather we had redundant and differently named symbols. So I\u0027d prefer we go with:\n\n```\npdr: Remove redundant constant for minimum numeric sensor PDR length\n```",
+      "revId": "f4bc5881135e898b4b765965a8c50dfff05723e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "944fe494_be7626d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T05:41:57Z",
+      "side": 1,
+      "message": "Can you please add the following?\n\n```\nFixes: 7992eb8415cb (\"Add numeric sensor PDR and sensor aux names PDR\")\n```",
+      "revId": "f4bc5881135e898b4b765965a8c50dfff05723e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8ead5b1_51f8ae6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T05:41:57Z",
+      "side": 1,
+      "message": "Hi Thu, a couple of requests on the commit message.",
+      "revId": "f4bc5881135e898b4b765965a8c50dfff05723e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1890fe3c_e1a1e109",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T05:41:57Z",
+      "side": 1,
+      "message": "Update this too if you update the commit subject.",
+      "revId": "f4bc5881135e898b4b765965a8c50dfff05723e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
