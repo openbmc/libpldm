@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01895e74_b474975b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T05:28:52Z",
+      "side": 1,
+      "message": "Please be as specific as possible in the commit subject. I prefer something like this:\n\n```\nmsgbuf: Require sensor data enum in pldm_msgbuf_extract_sensor_value()\n```\n\nIt\u0027s okay if the subject is a bit long in this case as we are trying to be specific.",
+      "revId": "fccd6efb726e734e99814fd17f0e3d4067b5a9bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d3885d9_a47fdd95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T05:28:52Z",
+      "side": 1,
+      "message": "Hi Thu, I\u0027d like just a quick change to the commit subject to be a little more specific about what\u0027s going on.",
+      "revId": "fccd6efb726e734e99814fd17f0e3d4067b5a9bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cead5f74_cd6eed68",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T05:28:52Z",
+      "side": 1,
+      "message": "Change this entry too if you change the commit subject.",
+      "revId": "fccd6efb726e734e99814fd17f0e3d4067b5a9bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
