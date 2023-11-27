@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3c43d6a_b6c29968",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T03:31:59Z",
+      "side": 1,
+      "message": "Please be as specific as possible in the commit subject. What was it that was actually fixed?",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 70
+      },
+      "revId": "daf1d99e182ce14011f36ae4ed826f3cb23ae1e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "819e8a1d_88e9f1eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T03:31:59Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right. I expect that we could capture the broken functionality in a unit test and then show that it passes with your fix here. If that\u0027s not what\u0027s happened then the test needs to be written.",
+      "revId": "daf1d99e182ce14011f36ae4ed826f3cb23ae1e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9e1edc_3cd571e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T03:31:59Z",
+      "side": 1,
+      "message": "Can you please add a `Fixes:` tag here pointing the the commit that introduced the bug?",
+      "revId": "daf1d99e182ce14011f36ae4ed826f3cb23ae1e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05eb0dc9_3485e63f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T03:31:59Z",
+      "side": 1,
+      "message": "Hi Pavithra - can you please add a unit test demonstrating the impact of the fix?\n\nAlso, please add a changelog entry and a `Fixes:` tag.",
+      "revId": "daf1d99e182ce14011f36ae4ed826f3cb23ae1e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
