@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c84d4186_6560ee32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T02:56:41Z",
+      "side": 1,
+      "message": "Hi Delphine. I think there are just a couple of things that remain to be addressed, and then it can be merged.",
+      "revId": "119b5c36f6ed0108abb766a6cec7a765e477011e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1909ea8f_18aca4c8",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T02:56:41Z",
+      "side": 1,
+      "message": "I realise you sorta directly addressed Patrick\u0027s comment on PS10, but I really prefer the prefix at least be `PLDM_OEM_META_` to be consistent with all the other symbol prefixes. Possibly we want something in there to indicate the associated enum type as well, perhaps `PLDM_OEM_META_FILEIO_CMD_` ?\n\n```\nenum plmd_oem_meta_fileio_commands {\n    PLDM_OEM_META_FILEIO_CMD_WRITE_FILE \u003d 0x2,\n    PLDM_OEM_META_FILEIO_CMD_READ_FILE \u003d 0x3,\n};\n```",
+      "range": {
+        "startLine": 17,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 31
+      },
+      "revId": "119b5c36f6ed0108abb766a6cec7a765e477011e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cb46532_5779d5ee",
+        "filename": "meson.options",
+        "patchSetId": 12
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T02:56:41Z",
+      "side": 1,
+      "message": "Please drop this, it was recently removed from the other options.",
+      "range": {
+        "startLine": 5,
+        "startChar": 71,
+        "endLine": 5,
+        "endChar": 84
+      },
+      "revId": "119b5c36f6ed0108abb766a6cec7a765e477011e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

@@ -195,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f21fc88_13b21f8c",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-27T02:56:41Z",
+      "side": 1,
+      "message": "This fixes it:\n\n```\ndiff --git a/src/oem/meta/file_io.c b/src/oem/meta/file_io.c\nindex 686eb02f0535..6662e8f51eed 100644\n--- a/src/oem/meta/file_io.c\n+++ b/src/oem/meta/file_io.c\n@@ -30,5 +30,5 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,\n        pldm_msgbuf_extract(buf, length);\n        pldm_msgbuf_extract_array_uint8(buf, data, *length);\n \n-       return pldm_msgbuf_destroy(buf);\n+       return pldm_msgbuf_destroy_consumed(buf);\n }\ndiff --git a/tests/oem/meta/libpldm_fileio_test.cpp b/tests/oem/meta/libpldm_fileio_test.cpp\nindex 440c6d407eca..ab16971b2dee 100644\n--- a/tests/oem/meta/libpldm_fileio_test.cpp\n+++ b/tests/oem/meta/libpldm_fileio_test.cpp\n@@ -36,7 +36,7 @@ TEST(DecodeOemMetaFileIoReq, testGoodDecodeRequest)\n \n     auto request \u003d reinterpret_cast\u003cpldm_msg*\u003e(buf);\n \n-    auto rc \u003d decode_oem_meta_file_io_req(request, sizeof(buf), \u0026retfileHandle,\n+    auto rc \u003d decode_oem_meta_file_io_req(request, sizeof(buf) - hdrSize, \u0026retfileHandle,\n                                           \u0026retFileDataCnt, retDataField.data());\n \n     EXPECT_EQ(rc, PLDM_SUCCESS);\n@@ -88,4 +88,4 @@ TEST(DecodeOemMetaFileIoReq, testInvalidDataRequest)\n                                           \u0026retFileDataCnt, retDataField.data());\n \n     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);\n-}\n\\ No newline at end of file\n+}\n```\n\nEssentially, `payload_length` really does mean `payload_length` - it must not include the size of the PLDM header.\n\nThis is a pervasive pattern in the existing APIs and I think it\u0027s terrible. It needs to be fixed, but it\u0027s better that we\u0027re consistent for now (to avoid a double violation of the principle of least surprise).",
+      "parentUuid": "59e0cf19_f863d876",
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "092a2b18_b35d6865",
         "filename": "tests/oem/meta/libpldm_fileio_test.cpp",
         "patchSetId": 9
