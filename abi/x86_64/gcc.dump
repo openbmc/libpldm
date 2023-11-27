@@ -11576,6 +11576,7 @@ $VAR1 = {
                                        'Header' => 'pdr.h',
                                        'Line' => '16',
                                        'Name' => 'pldm_pdr',
+                                       'PrivateABI' => 1,
                                        'Size' => '24',
                                        'Type' => 'Typedef'
                                      },
@@ -11620,6 +11621,7 @@ $VAR1 = {
                                        'Header' => 'pdr.h',
                                        'Line' => '21',
                                        'Name' => 'pldm_pdr_record',
+                                       'PrivateABI' => 1,
                                        'Size' => '32',
                                        'Type' => 'Typedef'
                                      },
@@ -11706,6 +11708,7 @@ $VAR1 = {
                                        'Header' => 'pdr.h',
                                        'Line' => '289',
                                        'Name' => 'pldm_entity_association_tree',
+                                       'PrivateABI' => 1,
                                        'Size' => '16',
                                        'Type' => 'Typedef'
                                      },
@@ -11734,6 +11737,7 @@ $VAR1 = {
                                        'Header' => 'pdr.h',
                                        'Line' => '294',
                                        'Name' => 'pldm_entity_node',
+                                       'PrivateABI' => 1,
                                        'Size' => '40',
                                        'Type' => 'Typedef'
                                      },
@@ -12124,6 +12128,7 @@ $VAR1 = {
                                                           }
                                                  },
                                        'Name' => 'struct pldm_transport',
+                                       'PrivateABI' => 1,
                                        'Size' => '40',
                                        'Type' => 'Struct'
                                      },
