@@ -66,6 +66,7 @@ if get_option('tests').allowed()
                                command: [ abi_dumper,
                                           '-public-headers',
                                           meson.project_source_root() / 'include',
+                                          '-sort',
                                           '@INPUT@',
                                           '-o',
                                           '@OUTPUT@',
