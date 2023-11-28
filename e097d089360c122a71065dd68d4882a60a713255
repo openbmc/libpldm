@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33606e0c_bf0949c3",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-28T07:01:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e9fb37f_012d8a81",
+      "range": {
+        "startLine": 17,
+        "startChar": 15,
+        "endLine": 17,
+        "endChar": 20
+      },
+      "revId": "e097d089360c122a71065dd68d4882a60a713255",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df3d4522_fb003b5e",
