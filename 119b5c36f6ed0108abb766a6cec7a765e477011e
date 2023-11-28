@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d5fac03_1da8582c",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-28T06:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1909ea8f_18aca4c8",
+      "range": {
+        "startLine": 17,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 31
+      },
+      "revId": "119b5c36f6ed0108abb766a6cec7a765e477011e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cb46532_5779d5ee",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-27T02:56:41Z",
       "side": 1,
       "message": "Please drop this, it was recently removed from the other options.",
+      "range": {
+        "startLine": 5,
+        "startChar": 71,
+        "endLine": 5,
+        "endChar": 84
+      },
+      "revId": "119b5c36f6ed0108abb766a6cec7a765e477011e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96bd1d4_820c1e0c",
+        "filename": "meson.options",
+        "patchSetId": 12
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2023-11-28T06:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cb46532_5779d5ee",
       "range": {
         "startLine": 5,
         "startChar": 71,
