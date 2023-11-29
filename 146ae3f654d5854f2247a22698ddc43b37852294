@@ -33,6 +33,24 @@
       "message": "Are you sure these tests are exercising what you think they are? If I undo the change in pdr.c this still passes. That shouldn\u0027t happen. Can you please update the test to make sure you\u0027re hitting the case we care about?",
       "revId": "146ae3f654d5854f2247a22698ddc43b37852294",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a4fb1f9_9eb5284d",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1923,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2023-11-29T06:13:45Z",
+      "side": 1,
+      "message": "Ack, I have updated the test case.",
+      "parentUuid": "dbdea3d1_f7fa1565",
+      "revId": "146ae3f654d5854f2247a22698ddc43b37852294",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
