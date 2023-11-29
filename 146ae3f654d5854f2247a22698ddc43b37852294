@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d7ab5ed_b3c0ee84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-29T01:27:06Z",
+      "side": 1,
+      "message": "Hi Pavithra, the test doesn\u0027t appear to be demonstrating the flaw. See my comment there.",
+      "revId": "146ae3f654d5854f2247a22698ddc43b37852294",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbdea3d1_f7fa1565",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1923,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-29T01:27:06Z",
+      "side": 1,
+      "message": "Are you sure these tests are exercising what you think they are? If I undo the change in pdr.c this still passes. That shouldn\u0027t happen. Can you please update the test to make sure you\u0027re hitting the case we care about?",
+      "revId": "146ae3f654d5854f2247a22698ddc43b37852294",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
