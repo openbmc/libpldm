@@ -117,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "380e0c35_e03d7655",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-29T01:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff73586e_6b17a770",
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1d3456f_74534d67",
@@ -130,6 +148,30 @@
       "writtenOn": "2023-11-08T23:27:05Z",
       "side": 1,
       "message": "... as this is redundant - it will be captured by `return pldm_msgbuf_destroy()` below.",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 40,
+        "endChar": 2
+      },
+      "revId": "5032916722366814c90e456f3133161da22f8efc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e238b45_e345b24a",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-11-29T01:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1d3456f_74534d67",
       "range": {
         "startLine": 38,
         "startChar": 1,
