@@ -6,7 +6,7 @@
 #include "msgbuf.h"
 
 #define PLDM_OEM_META_DECODE_WRITE_FILE_IO_MIN_SIZE 6
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 				size_t payload_length, uint8_t *file_handle,
 				uint32_t *length, uint8_t *data)

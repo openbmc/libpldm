@@ -33,6 +33,7 @@ Change categories:
 4. libpldm: More fixes for header use
 5. pdr: Stabilise pldm_pdr_find_last_in_range() API
 6. pdr: Stabilise pldm_entity_association_pdr_add_from_node_with_record_handle()
+7. oem: meta: stabilise decode_oem_meta_file_io_req()
 
 ### Fixed
 
