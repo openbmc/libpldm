@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "517f2e71_a94b2ed7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-12-04T03:45:13Z",
+      "side": 1,
+      "message": "\u003e I rather think this should be written in terms of the newly-required pre-conditions and not the `assert()`s. The asserts may or may not exist depending the state of the `NDEBUG` macro at build time, but the preconditions must always be upheld.\n\u003e \n\u003e Perhaps the subject can be something like:\n\u003e \n\u003e ```\n\u003e pdr: Add preconditions for pldm_entity_association_tree_copy_root()\n\u003e ```\n\u003e \n\u003e And then in the body:\n\u003e \n\u003e \u003e `pldm_entity_association_tree_copy_root()` requires that the arguments passed point to valid objects. Ensure this is documented, and add `assert()`s for early warning of precondition violation in debug builds.\n\nThanks @arj",
+      "parentUuid": "3f4efe86_e9cef210",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 49
+      },
+      "revId": "67c7ec59d2997fe55305ca5a1e2578e0e20a0cf3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fec719ad_2f2a74a6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -71,6 +95,24 @@
       "writtenOn": "2023-11-27T06:14:06Z",
       "side": 1,
       "message": "This is not how the changelog works. If you look at line 164 you\u0027ll see that this is section `[0.4.0]`, released 4 months ago.\n\nAll new changes need to go into the `[Unreleased]` section near the top of the file.",
+      "revId": "67c7ec59d2997fe55305ca5a1e2578e0e20a0cf3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a535646b_0cc47546",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-12-04T03:45:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5e1dd95_f6a1b57e",
       "revId": "67c7ec59d2997fe55305ca5a1e2578e0e20a0cf3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
