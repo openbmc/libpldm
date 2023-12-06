@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a81a236_11ff809e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-12-06T10:41:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b30348b5_398e1513",
+      "revId": "b6c7a913a92f3d741a46e4fc1097078ed2118dcb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0650b653_1d0ae51f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-27T05:46:58Z",
       "side": 1,
       "message": "```\nFixes: 7992eb8415cb (\"Add numeric sensor PDR and sensor aux names PDR\")\n```",
+      "revId": "b6c7a913a92f3d741a46e4fc1097078ed2118dcb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f841c79_c268f24e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-12-06T10:41:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0650b653_1d0ae51f",
       "revId": "b6c7a913a92f3d741a46e4fc1097078ed2118dcb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2023-11-27T05:46:58Z",
       "side": 1,
       "message": "Update this too if you update the commit subject.",
+      "revId": "b6c7a913a92f3d741a46e4fc1097078ed2118dcb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22dd3d6d_e9f81e25",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-12-06T10:41:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6360106a_cd3736f4",
       "revId": "b6c7a913a92f3d741a46e4fc1097078ed2118dcb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
