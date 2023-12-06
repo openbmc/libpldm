@@ -34,6 +34,24 @@
       "parentUuid": "f1ad8514_fbc77b6d",
       "revId": "94eb2b6728fd05c15a11b9fa790c0e542cfab42f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e56d1fc4_88e3cfa9",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1596,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-12-06T23:58:56Z",
+      "side": 1,
+      "message": "Yeah, my interpretation of the spec is that the field is always present in the wire encoding of the PDR, just its value is undefined if the corresponding flag is not set in `rangeFieldSupport`.",
+      "parentUuid": "d45d94e1_ebda813b",
+      "revId": "94eb2b6728fd05c15a11b9fa790c0e542cfab42f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
