@@ -16,6 +16,24 @@
       "message": "DSP0248 v1.2.2 28.4 (`Numeric Sensor PDR`) says the following about the `rangeFieldSupport` field:\n\n\u003e rangeFieldSupport\n\u003e Indicates which of the fields that identify the operating ranges of the parameter monitored by the sensor are supported. (This bitfield indicates whether the following nominalValue, normalMax, and so on, fields contain valid range values.)\n\nHowever, with this code you are treating the field as if it\u0027s *absent* from the wire encoding of the PDR. That doesn\u0027t match what\u0027s specified. Keep in mind that the `pldm_msgbuf_extract_*` functions advance the buffer pointer internally, so by not calling them you are not advancing the buffer pointer.\n\nSo with that in mind, I don\u0027t think the code changing. It\u0027s the caller\u0027s responsibility to not read values that are not marked as valid in `pdr_value-\u003erange_field_support`.",
       "revId": "94eb2b6728fd05c15a11b9fa790c0e542cfab42f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d45d94e1_ebda813b",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1596,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-12-06T23:57:26Z",
+      "side": 1,
+      "message": "So you mean when the bit field of `normal_max` is not set. The `normal_max` field still exists in the PDRs but just the invalid value?",
+      "parentUuid": "f1ad8514_fbc77b6d",
+      "revId": "94eb2b6728fd05c15a11b9fa790c0e542cfab42f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
