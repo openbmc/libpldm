@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca1c90a5_79f2c798",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-12-06T10:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01895e74_b474975b",
+      "revId": "fccd6efb726e734e99814fd17f0e3d4067b5a9bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68fcb87b_f4eca140",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-27T05:35:49Z",
       "side": 1,
       "message": "Actually, can you also add a `Fixes:` tag here as well?\n\n```\nFixes: 840b140a92aa (\"platform: pldm_msgbuf for decode_get_sensor_reading_resp()\")\n```",
+      "revId": "fccd6efb726e734e99814fd17f0e3d4067b5a9bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3be4e3a1_73db7f91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-12-06T10:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68fcb87b_f4eca140",
       "revId": "fccd6efb726e734e99814fd17f0e3d4067b5a9bc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2023-11-27T05:28:52Z",
       "side": 1,
       "message": "Change this entry too if you change the commit subject.",
+      "revId": "fccd6efb726e734e99814fd17f0e3d4067b5a9bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e301e310_45a12dab",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2023-12-06T10:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cead5f74_cd6eed68",
       "revId": "fccd6efb726e734e99814fd17f0e3d4067b5a9bc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
