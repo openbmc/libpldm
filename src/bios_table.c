@@ -194,6 +194,17 @@ size_t pldm_bios_table_attr_entry_enum_encode_length(uint8_t pv_num,
 	       def_num;
 }
 
+LIBPLDM_ABI_TESTING
+size_t pldm_bios_table_attr_entry_enum_encode_length_with_vdn(uint8_t pv_num,
+							      uint8_t def_num,
+							      uint8_t vdn_num)
+{
+	return sizeof(struct pldm_bios_attr_table_entry) -
+	       MEMBER_SIZE(pldm_bios_attr_table_entry, metadata) +
+	       sizeof(pv_num) + pv_num * sizeof(uint16_t) + sizeof(def_num) +
+	       def_num + sizeof(vdn_num) + vdn_num * sizeof(uint16_t);
+}
+
 LIBPLDM_ABI_STABLE
 int pldm_bios_table_attr_entry_enum_encode_check(
 	void *entry, size_t entry_length,
@@ -219,11 +230,57 @@ int pldm_bios_table_attr_entry_enum_encode_check(
 	for (i = 0; i < info->pv_num; i++) {
 		pv_hdls[i] = htole16(info->pv_handle[i]);
 	}
+
 	attr_entry->metadata[1 + info->pv_num * sizeof(uint16_t)] =
 		info->def_num;
 	memcpy(attr_entry->metadata + 1 /* sizeof(pv num) */ +
 		       info->pv_num * sizeof(uint16_t) + 1 /* sizeof(def num)*/,
 	       info->def_index, info->def_num);
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_bios_table_attr_entry_enum_encode_with_vdn(
+	void *entry, size_t entry_length,
+	const struct pldm_bios_table_attr_entry_enum_info *info)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(info);
+	size_t length = pldm_bios_table_attr_entry_enum_encode_length_with_vdn(
+		info->pv_num, info->def_num, info->vdn_num);
+	BUFFER_SIZE_EXPECT(entry_length, length);
+	uint8_t attr_type = info->read_only ? PLDM_BIOS_ENUMERATION_READ_ONLY :
+					      PLDM_BIOS_ENUMERATION;
+	int rc = attr_table_entry_encode_header(entry, entry_length, attr_type,
+						info->name_handle);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+	struct pldm_bios_attr_table_entry *attr_entry = entry;
+	attr_entry->metadata[0] = info->pv_num;
+	uint16_t *pv_hdls =
+		(uint16_t *)(attr_entry->metadata + 1 /* sizeof(pv num) */);
+	size_t i;
+	for (i = 0; i < info->pv_num; i++) {
+		pv_hdls[i] = htole16(info->pv_handle[i]);
+	}
+
+	attr_entry->metadata[1 + info->pv_num * sizeof(uint16_t)] =
+		info->def_num;
+	memcpy(attr_entry->metadata + 1 /* sizeof(pv num) */ +
+		       info->pv_num * sizeof(uint16_t) + 1 /* sizeof(def num)*/,
+	       info->def_index, info->def_num);
+
+	attr_entry->metadata[1 + info->pv_num * sizeof(uint16_t) + 1 +
+			     /* sizeof(def num)*/ +info->def_num *
+				     sizeof(uint8_t)] = info->vdn_num;
+	uint16_t *vdn_hdls =
+		(uint16_t *)(attr_entry->metadata + 1 /* sizeof(pv num) */ +
+			     info->pv_num * sizeof(uint16_t) +
+			     1 /* sizeof(def num)*/ +
+			     info->def_num * sizeof(uint8_t) +
+			     1 /* sizeof(vdn num)*/);
+	memcpy(vdn_hdls, info->vdn_handle, info->vdn_num * sizeof(uint16_t));
 	return PLDM_SUCCESS;
 }
 
@@ -260,6 +317,49 @@ int pldm_bios_table_attr_entry_enum_decode_def_num_check(
 	POINTER_CHECK(def_num);
 	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_ENUMERATION);
 	*def_num = pldm_bios_table_attr_entry_enum_decode_def_num(entry);
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_bios_table_attr_entry_enum_decode_vdn_num(
+	const struct pldm_bios_attr_table_entry *entry, uint8_t *vdn_num)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(vdn_num);
+	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_ENUMERATION);
+	uint8_t pv_num = entry->metadata[0];
+	uint8_t def_num = pldm_bios_table_attr_entry_enum_decode_def_num(entry);
+	*vdn_num = entry->metadata[sizeof(uint8_t) /* pv_num */ +
+				   sizeof(uint16_t) * pv_num +
+				   sizeof(uint8_t) /* def_num */ +
+				   sizeof(uint8_t) * def_num];
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_bios_table_attr_entry_enum_decode_vdn_hdls(
+	const struct pldm_bios_attr_table_entry *entry, uint16_t *vdn_hdls,
+	uint8_t vdn_num)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(vdn_hdls);
+	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_ENUMERATION);
+	uint8_t num;
+	pldm_bios_table_attr_entry_enum_decode_vdn_num(entry, &num);
+	num = num < vdn_num ? num : vdn_num;
+	uint8_t pv_num = entry->metadata[0];
+	uint8_t def_num = pldm_bios_table_attr_entry_enum_decode_def_num(entry);
+	size_t i;
+	uint16_t vdhdl;
+	for (i = 0; i < num; i++) {
+		memcpy(&vdhdl,
+		       (entry->metadata + sizeof(uint8_t) +
+			pv_num * sizeof(uint16_t) + sizeof(uint8_t) +
+			sizeof(uint8_t) * def_num + sizeof(uint8_t) +
+			i * sizeof(uint16_t)),
+		       sizeof(uint16_t));
+		vdn_hdls[i] = le16toh(vdhdl);
+	}
 	return PLDM_SUCCESS;
 }
 
@@ -305,8 +405,11 @@ static ssize_t attr_table_entry_length_enum(const void *arg)
 	const struct pldm_bios_attr_table_entry *entry = arg;
 	uint8_t pv_num = entry->metadata[0];
 	uint8_t def_num = pldm_bios_table_attr_entry_enum_decode_def_num(entry);
-	size_t len =
-		pldm_bios_table_attr_entry_enum_encode_length(pv_num, def_num);
+	uint8_t vdn_num = 0;
+	pldm_bios_table_attr_entry_enum_decode_vdn_num(entry, &vdn_num);
+
+	size_t len = pldm_bios_table_attr_entry_enum_encode_length_with_vdn(
+		pv_num, def_num, vdn_num);
 	if (len > SSIZE_MAX) {
 		return -1;
 	}
