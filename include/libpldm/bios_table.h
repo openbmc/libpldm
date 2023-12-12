@@ -207,18 +207,22 @@ struct pldm_bios_table_attr_entry_enum_info {
 	uint16_t name_handle; //!< attribute name handle
 	bool read_only;	      //!< indicate whether the attribute is read-only
 	uint8_t pv_num;	      //!< number of possible values
-	const uint16_t *pv_handle; //!< handles of possible values
-	uint8_t def_num;	   //!< nnumber of default values
-	const uint8_t *def_index;  //!< indices of default values.
+	const uint16_t *pv_handle;  //!< handles of possible values
+	uint8_t def_num;	    //!< nnumber of default values
+	const uint8_t *def_index;   //!< indices of default values.
+	uint8_t vdn_num;	    //!< number of value display names
+	const uint16_t *vdn_handle; //!< handles of value display names
 };
 
 /** @brief Get length that an attribute entry(type: enum) will take
  *  @param[in] pv_num - Number of possible values
  *  @param[in] def_num - Number of default values
+ *  @param[in] vdn_num - Number of value display names
  *  @return The length that an entry(type: enum) will take
  */
 size_t pldm_bios_table_attr_entry_enum_encode_length(uint8_t pv_num,
-						     uint8_t def_num);
+						     uint8_t def_num,
+						     uint8_t vdn_num);
 
 /** @brief Create an entry of BIOS Attribute Table (type: enum) and check the
  * validity of the parameters
@@ -244,6 +248,16 @@ int pldm_bios_table_attr_entry_enum_encode_check(
  */
 int pldm_bios_table_attr_entry_enum_decode_pv_num_check(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *pv_num);
+
+/** @brief Get the total number of value display names for the entry and check the
+ * valiity of the parameters
+ *  @param[in] entry - Pointer to bios attribute table entry
+ *  @param[out] vdn_num - Pointer to total number of value display names
+ *  @return PLDM_SUCCESS on success, PLDM_ERROR_INVALID_DATA if entry or vdn_num are NULL, or
+ *          PLDM_ERROR_INVALID_DATA if entry is not a valid PLDM_BIOS_ENUMERATION
+ */
+int pldm_bios_table_attr_entry_enum_decode_vdn_num_check(
+	const struct pldm_bios_attr_table_entry *entry, uint8_t *vdn_num);
 
 /** @brief Get the total number of default values for the entry and check the
  * validity of the parameters
@@ -284,6 +298,24 @@ int pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
 uint8_t pldm_bios_table_attr_entry_enum_decode_def_indices(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *def_indices,
 	uint8_t def_num);
+
+/** @brief value display name string handles and check the validity of the
+ * parameters
+ *  @param[in] entry - Pointer to bios attribute table entry
+ *  @param[out] vdn_hdls - Pointer to a buffer to store
+ *  ValueDisplayNamesStringHandles
+ *  @param[in] vdn_num - Number of ValueDisplayNamesStringHandles  the buffer can
+ *  store
+ *  @return PLDM_SUCCESS on success, otherwise PLDM_ERROR_INVALID_DATA if entry or vdn_hdls are NULL,
+ *          or entry is not of type PLDM_BIOS_ENUMERATION. An appropriate value for vdn_num can be
+ *          determined using @ref pldm_bios_table_attr_entry_enum_decode_vdn_num_check. vdn_num may be
+ *          less than the value provided by @ref
+ *          pldm_bios_table_attr_entry_enum_decode_vdn_num_check, in which case only the first vdn_num
+ *          handles will be decoded.
+ */
+int pldm_bios_table_attr_entry_enum_decode_vdn_hdls_check(
+	const struct pldm_bios_attr_table_entry *entry, uint16_t *vdn_hdls,
+	uint8_t vdn_num);
 
 /** @struct pldm_bios_table_attr_entry_string_info
  *
