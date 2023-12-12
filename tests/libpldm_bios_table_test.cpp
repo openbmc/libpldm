@@ -46,7 +46,10 @@ TEST(AttrTable, HeaderDecodeTest)
         2, 0, /* possible value handle */
         3, 0, /* possible value handle */
         1,    /* number of default value */
-        0     /* defaut value string handle index */
+        0,    /* defaut value string handle index */
+        2,    /* number of value display names*/
+        2, 0, /* value display names handle*/
+        3, 0  /* value display names handle*/
     };
     auto entry =
         reinterpret_cast<struct pldm_bios_attr_table_entry*>(enumEntry.data());
@@ -68,7 +71,10 @@ TEST(AttrTable, EnumEntryDecodeTest)
         2, 0, /* possible value handle */
         3, 0, /* possible value handle */
         1,    /* number of default value */
-        1     /* defaut value string handle index */
+        1,    /* defaut value string handle index */
+        2,    /* number of value display names*/
+        2, 0, /* value display names handle*/
+        3, 0  /* value display names handle*/
     };
 
     auto entry =
@@ -140,6 +146,53 @@ TEST(AttrTable, EnumEntryDecodeTest)
     rc =
         pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(entry, nullptr, 0);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    uint8_t vdnNumber;
+    ASSERT_EQ(
+        pldm_bios_table_attr_entry_enum_decode_vdn_num_check(entry, &vdnNumber),
+        PLDM_SUCCESS);
+    EXPECT_EQ(vdnNumber, 2);
+    vdnNumber = 0;
+    rc =
+        pldm_bios_table_attr_entry_enum_decode_vdn_num_check(entry, &vdnNumber);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(vdnNumber, 2);
+
+    std::vector<uint16_t> vdnHandles(vdnNumber, 0);
+    ASSERT_EQ(pldm_bios_table_attr_entry_enum_decode_vdn_hdls_check(
+                  entry, vdnHandles.data(), vdnHandles.size()),
+              PLDM_SUCCESS);
+    EXPECT_EQ(vdnNumber, 2);
+    EXPECT_EQ(vdnHandles[0], 2);
+    EXPECT_EQ(vdnHandles[1], 3);
+    vdnHandles.resize(1);
+    ASSERT_EQ(pldm_bios_table_attr_entry_enum_decode_vdn_hdls_check(
+                  entry, vdnHandles.data(), vdnHandles.size()),
+              PLDM_SUCCESS);
+    EXPECT_EQ(vdnHandles[0], 2);
+
+    vdnHandles.resize(2);
+    rc = pldm_bios_table_attr_entry_enum_decode_vdn_hdls_check(
+        entry, vdnHandles.data(), vdnHandles.size());
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(vdnHandles[0], 2);
+    EXPECT_EQ(vdnHandles[1], 3);
+    rc = pldm_bios_table_attr_entry_enum_decode_vdn_hdls_check(
+        entry, vdnHandles.data(), 1);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+
+    rc = pldm_bios_table_attr_entry_enum_decode_vdn_num_check(nullptr,
+                                                              &vdnNumber);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    entry->attr_type = PLDM_BIOS_STRING;
+    rc =
+        pldm_bios_table_attr_entry_enum_decode_vdn_num_check(entry, &vdnNumber);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = pldm_bios_table_attr_entry_enum_decode_vdn_hdls_check(entry, nullptr,
+                                                               0);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
 TEST(AttrTable, EnumEntryEncodeTest)
@@ -152,10 +205,14 @@ TEST(AttrTable, EnumEntryEncodeTest)
         2, 0, /* possible value handle */
         3, 0, /* possible value handle */
         1,    /* number of default value */
-        0     /* defaut value string handle index */
+        0,    /* defaut value string handle index */
+        2,    /* number of value display names */
+        2, 0, /* value display name handle*/
+        3, 0  /* value display name handle*/
     };
 
     std::vector<uint16_t> pv_hdls{2, 3};
+    std::vector<uint16_t> vdn_hdls{2, 3};
     std::vector<uint8_t> defs{0};
 
     struct pldm_bios_table_attr_entry_enum_info info = {
@@ -164,9 +221,11 @@ TEST(AttrTable, EnumEntryEncodeTest)
         2,              /* pv number */
         pv_hdls.data(), /* pv handle */
         1,              /*def number */
-        defs.data()     /*def index*/
+        defs.data(),    /*def index*/
+        2,              /* vdn number*/
+        vdn_hdls.data() /* vdn handle */
     };
-    auto encodeLength = pldm_bios_table_attr_entry_enum_encode_length(2, 1);
+    auto encodeLength = pldm_bios_table_attr_entry_enum_encode_length(2, 1, 2);
     EXPECT_EQ(encodeLength, enumEntry.size());
 
     std::vector<uint8_t> encodeEntry(encodeLength, 0);
@@ -443,7 +502,10 @@ TEST(AttrTable, ItearatorTest)
         2, 0, /* possible value handle */
         3, 0, /* possible value handle */
         1,    /* number of default value */
-        0     /* defaut value string handle index */
+        0,    /* defaut value string handle index */
+        2,    /* number of value display names */
+        2, 0, /* value display name handle */
+        3, 0  /* value display name handle */
     };
     std::vector<uint8_t> stringEntry{
         1,   0,       /* attr handle */
@@ -503,7 +565,10 @@ TEST(AttrTable, FindTest)
         2, 0, /* possible value handle */
         3, 0, /* possible value handle */
         1,    /* number of default value */
-        0     /* defaut value string handle index */
+        0,    /* defaut value string handle index */
+        2,    /* number of value display names */
+        2, 0, /* value display name handle*/
+        3, 0  /* value display name handle*/
     };
     std::vector<uint8_t> stringEntry{
         1,   0,       /* attr handle */
