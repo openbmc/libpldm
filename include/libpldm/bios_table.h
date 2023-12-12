@@ -210,6 +210,8 @@ struct pldm_bios_table_attr_entry_enum_info {
 	const uint16_t *pv_handle; //!< handles of possible values
 	uint8_t def_num;	   //!< nnumber of default values
 	const uint8_t *def_index;  //!< indices of default values.
+        uint8_t vdn_num;
+        const uint16_t *vdn_handle;
 };
 
 /** @brief Get length that an attribute entry(type: enum) will take
@@ -218,7 +220,8 @@ struct pldm_bios_table_attr_entry_enum_info {
  *  @return The length that an entry(type: enum) will take
  */
 size_t pldm_bios_table_attr_entry_enum_encode_length(uint8_t pv_num,
-						     uint8_t def_num);
+						     uint8_t def_num,
+                                                     uint8_t vdn_num);
 
 /** @brief Create an entry of BIOS Attribute Table (type: enum) and check the
  * validity of the parameters
@@ -244,6 +247,9 @@ int pldm_bios_table_attr_entry_enum_encode_check(
  */
 int pldm_bios_table_attr_entry_enum_decode_pv_num_check(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *pv_num);
+
+int pldm_bios_table_attr_entry_enum_decode_vdn_num_check(
+        const struct pldm_bios_attr_table_entry *entry, uint8_t *vdn_num);
 
 /** @brief Get the total number of default values for the entry and check the
  * validity of the parameters
@@ -284,6 +290,10 @@ int pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
 uint8_t pldm_bios_table_attr_entry_enum_decode_def_indices(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *def_indices,
 	uint8_t def_num);
+
+int pldm_bios_table_attr_entry_enum_decode_vdn_hdls_check(
+        const struct pldm_bios_attr_table_entry *entry, uint16_t *vdn_hdls,
+        uint8_t vdn_num);
 
 /** @struct pldm_bios_table_attr_entry_string_info
  *
