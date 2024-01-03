@@ -318,7 +318,8 @@ pldm_entity_association_tree *pldm_entity_association_tree_init(void);
 pldm_entity_node *pldm_entity_association_tree_add(
 	pldm_entity_association_tree *tree, pldm_entity *entity,
 	uint16_t entity_instance_number, pldm_entity_node *parent,
-	uint8_t association_type);
+	uint8_t association_type, bool is_remote, bool is_update_container_id,
+	uint16_t container_id);
 
 /** @brief Add an entity into the entity association tree based on remote field
  *  set or unset.
@@ -529,7 +530,7 @@ bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node);
  */
 pldm_entity_node *
 pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
-				  pldm_entity *entity);
+				  pldm_entity *entity, bool is_remote);
 
 /** @brief Find an entity in the entity association tree with locality specified,
  *         ie - remote entity or local entity
