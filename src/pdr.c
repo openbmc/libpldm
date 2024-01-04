@@ -518,6 +518,18 @@ pldm_entity_node *pldm_entity_association_tree_add(
 						       false, true, 0xFFFF);
 }
 
+LIBPLDM_ABI_TESTING
+pldm_entity_node *pldm_entity_association_tree_add_if_remote(
+	pldm_entity_association_tree *tree, pldm_entity *entity,
+	uint16_t entity_instance_number, pldm_entity_node *parent,
+	uint8_t association_type, bool is_remote, bool is_update_container_id,
+	uint16_t container_id)
+{
+	return pldm_entity_association_tree_add_entity(
+		tree, entity, entity_instance_number, parent, association_type,
+		is_remote, is_update_container_id, container_id);
+}
+
 LIBPLDM_ABI_STABLE
 pldm_entity_node *pldm_entity_association_tree_add_entity(
 	pldm_entity_association_tree *tree, pldm_entity *entity,
@@ -636,6 +648,119 @@ static void get_num_nodes(pldm_entity_node *node, size_t *num)
 	++(*num);
 	get_num_nodes(node->next_sibling, num);
 	get_num_nodes(node->first_child, num);
+}
+
+inline uint32_t get_new_record_handle(const pldm_pdr *repo)
+{
+	assert(repo != NULL);
+	uint32_t last_used_hdl =
+		repo->last != NULL ? repo->last->record_handle : 0;
+	assert(last_used_hdl != UINT32_MAX);
+
+	return last_used_hdl + 1;
+}
+
+pldm_pdr_record *make_new_record(const pldm_pdr *repo,
+					const uint8_t *data, uint32_t size,
+					uint32_t record_handle, bool is_remote,
+					uint16_t terminus_handle)
+{
+	assert(repo != NULL);
+	assert(size != 0);
+
+	pldm_pdr_record *record = malloc(sizeof(pldm_pdr_record));
+	assert(record != NULL);
+	if (record_handle == 0) {
+		record->record_handle = get_new_record_handle(repo);
+	}
+#ifdef OEM_IBM
+	else if (record_handle == 0xFFFFFFFF) {
+		pldm_pdr_record *rec = pldm_pdr_find_last_local_record(repo);
+		record->record_handle = rec->record_handle + 1;
+	}
+#endif
+	else {
+		record->record_handle = record_handle;
+	}
+	record->size = size;
+	record->is_remote = is_remote;
+	record->terminus_handle = terminus_handle;
+	if (data != NULL) {
+		record->data = malloc(size);
+		assert(record->data != NULL);
+		memcpy(record->data, data, size);
+		/* If record handle is 0, that is an indication for this API to
+		 * compute a new handle. For that reason, the computed handle
+		 * needs to be populated in the PDR header. For a case where the
+		 * caller supplied the record handle, it would exist in the
+		 * header already.
+		 */
+		struct pldm_pdr_hdr *hdr =
+			(struct pldm_pdr_hdr *)(record->data);
+		hdr->record_handle = htole32(record->record_handle);
+	}
+	record->next = NULL;
+
+	return record;
+}
+
+static void add_hotplug_record(pldm_pdr *repo, pldm_pdr_record *record,
+			       uint32_t prev_record_handle)
+{
+	// the new record
+	// needs to be added after prev_record_handle
+	assert(repo != NULL);
+	assert(record != NULL);
+	record->next = NULL;
+	bool recordAdded = false;
+	if (repo->first == NULL) {
+		assert(repo->last == NULL);
+		repo->first = record;
+		repo->last = record;
+		recordAdded = true;
+	} else {
+		pldm_pdr_record *curr = repo->first;
+		while (curr != NULL) {
+			if (curr->record_handle == prev_record_handle) {
+				record->next = curr->next;
+				curr->next = record;
+				if (record->next == NULL) {
+					repo->last->next = record;
+					repo->last = record;
+				}
+				recordAdded = true;
+				break;
+			}
+			curr = curr->next;
+		}
+		// printf("\nadding the fru hotplug here
+		// curr->record_handle=%d",curr->record_handle);
+		// printf("repo-last=%x, curr=%x, curr-next=%x",(unsigned
+		// int)repo->last, (unsigned int)curr, (unsigned
+		// int)curr->next);
+	}
+	if (recordAdded == false) {
+		free(record);
+		assert(recordAdded != false);
+	}
+	repo->size += record->size;
+	++repo->record_count;
+}
+
+LIBPLDM_ABI_STABLE
+uint32_t pldm_pdr_add_hotplug_record(pldm_pdr *repo, const uint8_t *data,
+				     uint32_t size, uint32_t record_handle,
+				     bool is_remote,
+				     uint32_t prev_record_handle,
+				     uint16_t terminus_handle)
+{
+	assert(size != 0);
+	assert(data != NULL);
+
+	pldm_pdr_record *record = make_new_record(
+		repo, data, size, record_handle, is_remote, terminus_handle);
+	add_hotplug_record(repo, record, prev_record_handle);
+	return record->record_handle;
 }
 
 static void entity_association_tree_visit(pldm_entity_node *node,

@@ -94,6 +94,12 @@ int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo,
 				    const pldm_pdr_record *record);
 
+uint32_t pldm_pdr_add_hotplug_record(pldm_pdr *repo, const uint8_t *data,
+				     uint32_t size, uint32_t record_handle,
+				     bool is_remote,
+				     uint32_t prev_record_handle,
+				     uint16_t terminus_handle);
+					 
 /** @brief Find PDR record by record handle
  *
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
