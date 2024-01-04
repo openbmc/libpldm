@@ -8,6 +8,7 @@ libpldm_headers = files(
   'instance-id.h',
   'pdr.h',
   'platform.h',
+  'pdr_data.h',
   'pldm_types.h',
   'pldm.h',
   'state_set.h',
@@ -25,6 +26,7 @@ if get_option('oem-ibm').allowed()
     'oem/ibm/fru.h',
     'oem/ibm/host.h',
     'oem/ibm/platform.h',
+    'oem/ibm/pdr_oem_ibm.h',
     'oem/ibm/state_set.h'
   )
 
@@ -34,6 +36,7 @@ if get_option('oem-ibm').allowed()
   install_symlink('host.h', pointing_to: 'oem/ibm/host.h', install_dir: 'include/libpldm')
   install_symlink('platform_oem_ibm.h', pointing_to: 'oem/ibm/platform.h', install_dir: 'include/libpldm')
   install_symlink('state_set_oem_ibm.h', pointing_to: 'oem/ibm/state_set.h', install_dir: 'include/libpldm')
+  install_symlink('pdr_oem_ibm.h', pointing_to: 'oem/ibm/pdr_oem_ibm.h', install_dir: 'include/libpldm')
 endif
 
 if get_option('oem-meta').allowed()
