@@ -10,15 +10,27 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 
-/** @struct pldm_pdr
- *  opaque structure that acts as a handle to a PDR repository
- */
-typedef struct pldm_pdr pldm_pdr;
-
 /** @struct pldm_pdr_record
  *  opaque structure that acts as a handle to a PDR record
  */
-typedef struct pldm_pdr_record pldm_pdr_record;
+typedef struct pldm_pdr_record {
+	uint32_t record_handle;
+	uint32_t size;
+	uint8_t *data;
+	struct pldm_pdr_record *next;
+	bool is_remote;
+	uint16_t terminus_handle;
+} pldm_pdr_record;
+
+/** @struct pldm_pdr
+ *  opaque structure that acts as a handle to a PDR repository
+ */
+typedef struct pldm_pdr {
+	uint32_t record_count;
+	uint32_t size;
+	pldm_pdr_record *first;
+	pldm_pdr_record *last;
+} pldm_pdr;
 
 /* ====================== */
 /* Common PDR access APIs */
@@ -94,6 +106,12 @@ int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo,
 				    const pldm_pdr_record *record);
 
+uint32_t pldm_pdr_add_hotplug_record(pldm_pdr *repo, const uint8_t *data,
+				     uint32_t size, uint32_t record_handle,
+				     bool is_remote,
+				     uint32_t prev_record_handle,
+				     uint16_t terminus_handle);
+					 
 /** @brief Find PDR record by record handle
  *
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
@@ -283,6 +301,22 @@ enum entity_association_containment_type {
 	PLDM_ENTITY_ASSOCIAION_LOGICAL = 0x1,
 };
 
+/** @brief Add a contained entity into an entity association PDR
+ *  @param[in] repo - opaque pointer to pldm PDR repo
+ *  @param[in] entity - the pldm entity to be added
+ *  @param[in] parent - the parent entity
+ *  @param[in] event_data_op - the event data operation that happens on the
+ *                             record
+ *  @param[in] is_remote - whether to add in the local or remote PDR
+ *
+ *  @param[in] bmc_record_handle - handle to be added to the pdr
+ *
+ *  @return uint32_t the updated PDR record handle
+ */
+uint32_t pldm_entity_association_pdr_add_contained_entity(
+	pldm_pdr *repo, pldm_entity entity, pldm_entity parent,
+	uint8_t *event_data_op, bool is_remote, uint32_t bmc_record_handle);
+	
 /** @struct pldm_entity_association_tree
  *  opaque structure that represents the entity association hierarchy
  */

@@ -8,21 +8,6 @@
 #include <string.h>
 #include <errno.h>
 
-typedef struct pldm_pdr_record {
-	uint32_t record_handle;
-	uint32_t size;
-	uint8_t *data;
-	struct pldm_pdr_record *next;
-	bool is_remote;
-	uint16_t terminus_handle;
-} pldm_pdr_record;
-
-typedef struct pldm_pdr {
-	uint32_t record_count;
-	uint32_t size;
-	pldm_pdr_record *first;
-	pldm_pdr_record *last;
-} pldm_pdr;
 
 static inline uint32_t get_next_record_handle(const pldm_pdr *repo,
 					      const pldm_pdr_record *record)
@@ -518,6 +503,18 @@ pldm_entity_node *pldm_entity_association_tree_add(
 						       false, true, 0xFFFF);
 }
 
+LIBPLDM_ABI_TESTING
+pldm_entity_node *pldm_entity_association_tree_add_if_remote(
+	pldm_entity_association_tree *tree, pldm_entity *entity,
+	uint16_t entity_instance_number, pldm_entity_node *parent,
+	uint8_t association_type, bool is_remote, bool is_update_container_id,
+	uint16_t container_id)
+{
+	return pldm_entity_association_tree_add_entity(
+		tree, entity, entity_instance_number, parent, association_type,
+		is_remote, is_update_container_id, container_id);
+}
+
 LIBPLDM_ABI_STABLE
 pldm_entity_node *pldm_entity_association_tree_add_entity(
 	pldm_entity_association_tree *tree, pldm_entity *entity,
@@ -636,6 +633,119 @@ static void get_num_nodes(pldm_entity_node *node, size_t *num)
 	++(*num);
 	get_num_nodes(node->next_sibling, num);
 	get_num_nodes(node->first_child, num);
+}
+
+inline uint32_t get_new_record_handle(const pldm_pdr *repo)
+{
+	assert(repo != NULL);
+	uint32_t last_used_hdl =
+		repo->last != NULL ? repo->last->record_handle : 0;
+	assert(last_used_hdl != UINT32_MAX);
+
+	return last_used_hdl + 1;
+}
+
+pldm_pdr_record *make_new_record(const pldm_pdr *repo,
+					const uint8_t *data, uint32_t size,
+					uint32_t record_handle, bool is_remote,
+					uint16_t terminus_handle)
+{
+	assert(repo != NULL);
+	assert(size != 0);
+
+	pldm_pdr_record *record = malloc(sizeof(pldm_pdr_record));
+	assert(record != NULL);
+	if (record_handle == 0) {
+		record->record_handle = get_new_record_handle(repo);
+	}
+#ifdef OEM_IBM
+	else if (record_handle == 0xFFFFFFFF) {
+		pldm_pdr_record *rec = pldm_pdr_find_last_in_range(repo);
+		record->record_handle = rec->record_handle + 1;
+	}
+#endif
+	else {
+		record->record_handle = record_handle;
+	}
+	record->size = size;
+	record->is_remote = is_remote;
+	record->terminus_handle = terminus_handle;
+	if (data != NULL) {
+		record->data = malloc(size);
+		assert(record->data != NULL);
+		memcpy(record->data, data, size);
+		/* If record handle is 0, that is an indication for this API to
+		 * compute a new handle. For that reason, the computed handle
+		 * needs to be populated in the PDR header. For a case where the
+		 * caller supplied the record handle, it would exist in the
+		 * header already.
+		 */
+		struct pldm_pdr_hdr *hdr =
+			(struct pldm_pdr_hdr *)(record->data);
+		hdr->record_handle = htole32(record->record_handle);
+	}
+	record->next = NULL;
+
+	return record;
+}
+
+static void add_hotplug_record(pldm_pdr *repo, pldm_pdr_record *record,
+			       uint32_t prev_record_handle)
+{
+	// the new record
+	// needs to be added after prev_record_handle
+	assert(repo != NULL);
+	assert(record != NULL);
+	record->next = NULL;
+	bool recordAdded = false;
+	if (repo->first == NULL) {
+		assert(repo->last == NULL);
+		repo->first = record;
+		repo->last = record;
+		recordAdded = true;
+	} else {
+		pldm_pdr_record *curr = repo->first;
+		while (curr != NULL) {
+			if (curr->record_handle == prev_record_handle) {
+				record->next = curr->next;
+				curr->next = record;
+				if (record->next == NULL) {
+					repo->last->next = record;
+					repo->last = record;
+				}
+				recordAdded = true;
+				break;
+			}
+			curr = curr->next;
+		}
+		// printf("\nadding the fru hotplug here
+		// curr->record_handle=%d",curr->record_handle);
+		// printf("repo-last=%x, curr=%x, curr-next=%x",(unsigned
+		// int)repo->last, (unsigned int)curr, (unsigned
+		// int)curr->next);
+	}
+	if (recordAdded == false) {
+		free(record);
+		assert(recordAdded != false);
+	}
+	repo->size += record->size;
+	++repo->record_count;
+}
+
+LIBPLDM_ABI_TESTING
+uint32_t pldm_pdr_add_hotplug_record(pldm_pdr *repo, const uint8_t *data,
+				     uint32_t size, uint32_t record_handle,
+				     bool is_remote,
+				     uint32_t prev_record_handle,
+				     uint16_t terminus_handle)
+{
+	assert(size != 0);
+	assert(data != NULL);
+
+	pldm_pdr_record *record = make_new_record(
+		repo, data, size, record_handle, is_remote, terminus_handle);
+	add_hotplug_record(repo, record, prev_record_handle);
+	return record->record_handle;
 }
 
 static void entity_association_tree_visit(pldm_entity_node *node,
@@ -1094,6 +1204,221 @@ void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo)
 		}
 	}
 }
+
+LIBPLDM_ABI_STABLE
+uint32_t pldm_entity_association_pdr_add_contained_entity(
+	pldm_pdr *repo, pldm_entity entity, pldm_entity parent,
+	uint8_t *event_data_op, bool is_remote, uint32_t bmc_record_handle)
+{
+	/*printf("\nenter pldm_entity_association_pdr_add_contained_entity
+      entity type=%d entity ins=%d container id=%d", entity.entity_type,
+      entity.entity_instance_num, entity.entity_container_id); printf("\n and
+      parent entity type=%d entity ins=%d container id=%d",parent.entity_type,
+      parent.entity_instance_num, parent.entity_container_id);*/
+	// testing pending with pcie slot-card. can test once cards are placed
+	// under slots in DBus. usecase: will not find the PDR and need to
+	// create a new entity assoc PDR since the number of child is always 1
+	// if the PDR is not found then search for the PDR having parent as a
+	// child if found then parent is valid and create a new enitity assoc
+	// PDR with parent-entity
+	uint32_t updated_hdl = 0;
+	bool added = false;
+	*event_data_op = PLDM_RECORDS_MODIFIED;
+	pldm_pdr_record *record = repo->first;
+	pldm_pdr_record *prev = repo->first;
+	pldm_pdr_record *new_record = malloc(sizeof(pldm_pdr_record));
+	new_record->data = NULL; // sm00
+	// new_record->data = malloc(record->size + sizeof(pldm_entity)); //sm00
+	// new_record->next = NULL; //sm00
+	uint8_t *new_data = NULL; // new_record->data; //sm00
+	bool found = false;
+	while (record != NULL) {
+		pldm_pdr_record *next = record->next;
+		struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)record->data;
+		if ((record->is_remote == is_remote) &&
+		    hdr->type == PLDM_PDR_ENTITY_ASSOCIATION) {
+			struct pldm_pdr_entity_association *pdr =
+				(struct pldm_pdr_entity_association
+					 *)((uint8_t *)record->data +
+					    sizeof(struct pldm_pdr_hdr));
+			if (pdr->container.entity_type == parent.entity_type &&
+			    pdr->container.entity_instance_num ==
+				    parent.entity_instance_num &&
+			    pdr->container.entity_container_id ==
+				    parent.entity_container_id) {
+				found = true;
+				new_record->data =
+					malloc(record->size +
+					       sizeof(pldm_entity)); // sm00
+				new_record->next = NULL;	     // sm00
+				new_data = new_record->data;	     // sm00
+				updated_hdl = record->record_handle;
+				new_record->record_handle =
+					htole32(record->record_handle);
+				new_record->size = htole32(record->size +
+							   sizeof(pldm_entity));
+				new_record->is_remote = record->is_remote;
+				uint8_t *new_start = new_data;
+				struct pldm_pdr_hdr *new_hdr =
+					(struct pldm_pdr_hdr *)new_data;
+				new_hdr->version = hdr->version;
+				new_hdr->record_handle =
+					htole32(hdr->record_handle);
+				new_hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
+				new_hdr->record_change_num =
+					htole16(hdr->record_change_num);
+				/*	new_hdr->length = htole16(
+					    record->size - sizeof(struct
+				   pldm_pdr_hdr) + sizeof(pldm_entity)); */
+				new_hdr->length =
+					htole16(hdr->length +
+						sizeof(pldm_entity)); // sm00
+				new_start += sizeof(struct pldm_pdr_hdr);
+				struct pldm_pdr_entity_association *new_pdr =
+					(struct pldm_pdr_entity_association *)
+						new_start;
+
+				struct pldm_entity *child =
+					(struct pldm_entity
+						 *)(&pdr->children[0]);
+
+				new_pdr->container_id = pdr->container_id;
+				new_pdr->association_type =
+					pdr->association_type;
+				new_pdr->container.entity_type =
+					pdr->container.entity_type;
+				new_pdr->container.entity_instance_num =
+					pdr->container.entity_instance_num;
+				new_pdr->container.entity_container_id =
+					pdr->container.entity_container_id;
+				new_pdr->num_children = pdr->num_children + 1;
+				struct pldm_entity *new_child =
+					(struct pldm_entity
+						 *)(&new_pdr->children[0]);
+				for (int i = 0; i < pdr->num_children; ++i) {
+					new_child->entity_type =
+						child->entity_type;
+					new_child->entity_instance_num =
+						child->entity_instance_num;
+					new_child->entity_container_id =
+						child->entity_container_id;
+					new_child++;
+					child++;
+				}
+				new_child->entity_type = entity.entity_type;
+				new_child->entity_instance_num =
+					entity.entity_instance_num;
+				new_child->entity_container_id =
+					entity.entity_container_id;
+
+				added = true;
+				if (repo->first == record) {
+					repo->first = new_record;
+					new_record->next = record->next;
+				} else {
+					prev->next = new_record;
+					new_record->next = record->next;
+				}
+				if (repo->last == record) {
+					repo->last = new_record;
+				}
+				repo->size -= record->size;
+				repo->size += new_record->size;
+
+				if (record->data) {
+					free(record->data);
+				}
+				free(record);
+				break;
+			}
+		}
+
+		prev = record;
+		record = next;
+	}
+	if (!found && !is_remote) // need to create a new entity assoc pdr
+	{
+		// printf("\ncreating a new entity assoc pdr for slot \n");
+		uint8_t num_children = 1;
+		added = false;
+		*event_data_op = PLDM_RECORDS_ADDED;
+		prev = repo->first;
+		pldm_pdr_record *curr = repo->first;
+		while (curr != NULL) {
+			if (curr->record_handle == bmc_record_handle) {
+				// printf("\nfound the place \n");
+				added = true;
+				break;
+			}
+			prev = curr;
+			curr = curr->next;
+		}
+
+		if (added) {
+			uint16_t new_pdr_size =
+				sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t) +
+				sizeof(uint8_t) + sizeof(pldm_entity) +
+				sizeof(uint8_t) +
+				num_children * sizeof(pldm_entity);
+			new_record->data = malloc(new_pdr_size);
+			new_record->record_handle = bmc_record_handle + 1;
+			new_record->size = new_pdr_size;
+			new_record->is_remote = false;
+			new_record->next = curr->next;
+			curr->next = new_record;
+			if (repo->last == prev) {
+				repo->last = new_record;
+			}
+			repo->size += new_record->size;
+			++repo->record_count;
+
+			updated_hdl = new_record->record_handle;
+
+			struct pldm_pdr_hdr *new_hdr =
+				(struct pldm_pdr_hdr *)new_record->data;
+			new_hdr->version = 1;
+			new_hdr->record_handle = new_record->record_handle;
+			new_hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
+			new_hdr->record_change_num = 0;
+			new_hdr->length = htole16(new_pdr_size -
+						  sizeof(struct pldm_pdr_hdr));
+
+			struct pldm_pdr_entity_association *new_pdr =
+				(struct pldm_pdr_entity_association
+					 *)((uint8_t *)new_record->data +
+					    sizeof(struct pldm_pdr_hdr));
+			new_pdr->container.entity_type = parent.entity_type;
+			new_pdr->container.entity_instance_num =
+				parent.entity_instance_num;
+			new_pdr->container.entity_container_id =
+				parent.entity_container_id;
+			new_pdr->container_id = entity.entity_container_id;
+			new_pdr->association_type =
+				PLDM_ENTITY_ASSOCIAION_PHYSICAL;
+			new_pdr->num_children = 1;
+			struct pldm_entity *new_child =
+				(struct pldm_entity *)(&new_pdr->children[0]);
+			new_child->entity_type = entity.entity_type;
+			new_child->entity_instance_num =
+				entity.entity_instance_num;
+			new_child->entity_container_id =
+				entity.entity_container_id;
+		}
+	}
+	if (!added) {
+		if (new_record->data)		// sm00
+		{
+			free(new_record->data); // sm00
+		}
+		if (new_record)			// sm00
+		{
+			free(new_record);	// sm00
+		}
+	}
+	// printf("\nreturning updated_hdl=%d", updated_hdl);
+	return updated_hdl;
+}
+
 
 LIBPLDM_ABI_STABLE
 pldm_pdr_record *pldm_pdr_find_last_in_range(const pldm_pdr *repo,
