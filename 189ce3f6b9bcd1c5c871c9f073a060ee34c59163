@@ -1,0 +1,203 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "574071ce_1b8022db",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-01-08T05:41:29Z",
+      "side": 1,
+      "message": "this change is not needed",
+      "revId": "189ce3f6b9bcd1c5c871c9f073a060ee34c59163",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2c02aca_0be1e78a",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-01-08T05:41:29Z",
+      "side": 1,
+      "message": "extra line",
+      "revId": "189ce3f6b9bcd1c5c871c9f073a060ee34c59163",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9e8fc7b_d1a41a02",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-01-08T05:41:29Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "189ce3f6b9bcd1c5c871c9f073a060ee34c59163",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320fadba_3c951634",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-01-08T05:41:29Z",
+      "side": 1,
+      "message": "Can you please separate this change into a different commit quoting the reason",
+      "revId": "189ce3f6b9bcd1c5c871c9f073a060ee34c59163",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "061449e6_5dc16b10",
+        "filename": "src/oem/ibm/meson.build",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-01-08T05:41:29Z",
+      "side": 1,
+      "message": "why this is needed",
+      "revId": "189ce3f6b9bcd1c5c871c9f073a060ee34c59163",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56c2bc20_3cefff8e",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-01-08T05:41:29Z",
+      "side": 1,
+      "message": "this API is already defined - https://gerrit.openbmc.org/c/openbmc/libpldm/+/63585",
+      "revId": "189ce3f6b9bcd1c5c871c9f073a060ee34c59163",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a88049_972060b3",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-01-08T05:41:29Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 638,
+        "startChar": 0,
+        "endLine": 645,
+        "endChar": 26
+      },
+      "revId": "189ce3f6b9bcd1c5c871c9f073a060ee34c59163",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ff7cd87_59f2e096",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-01-08T05:41:29Z",
+      "side": 1,
+      "message": "these changes not needed",
+      "range": {
+        "startLine": 648,
+        "startChar": 0,
+        "endLine": 688,
+        "endChar": 1
+      },
+      "revId": "189ce3f6b9bcd1c5c871c9f073a060ee34c59163",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f165e1_fd276148",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-01-08T05:41:29Z",
+      "side": 1,
+      "message": "please remove the comments",
+      "revId": "189ce3f6b9bcd1c5c871c9f073a060ee34c59163",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8373658_6ab529ba",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1208,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-01-08T05:41:29Z",
+      "side": 1,
+      "message": "should be a TESTING API",
+      "revId": "189ce3f6b9bcd1c5c871c9f073a060ee34c59163",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91fc8fc4_4ee8f9ba",
+        "filename": "src/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-01-08T05:41:29Z",
+      "side": 1,
+      "message": "same comment as above",
+      "revId": "189ce3f6b9bcd1c5c871c9f073a060ee34c59163",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
