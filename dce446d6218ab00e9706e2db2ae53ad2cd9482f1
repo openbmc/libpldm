@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8216a377_6db2f9e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-01-11T04:12:01Z",
+      "side": 1,
+      "message": "Can you please be more precise here? What is this change actually doing? Having that information in the change subject makes reading the one-line change history much more informative. Further, please prefix the change subject with the affected subsystem. Something like the following would be good improvement:\n\n```\nbios: Add support for enum value display names\n```",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a261cfc5_7c4dc082",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-01-11T04:12:01Z",
+      "side": 1,
+      "message": "Changes to libpldm generally aren\u0027t driven by changes to things like bios-settings-mgr, rather by specified features that haven\u0027t yet been implemented, or changes to the related specifications.\n\nCan you please add a reference to the relevant section in the relevant specification (DSP0247?) that highlights the libpldm deficiency?",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faeeb554_854f62a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-01-11T04:12:01Z",
+      "side": 1,
+      "message": "What upstream code in pldm? Can you provide a link here too?",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e943b36d_504e6d3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-01-11T04:12:01Z",
+      "side": 1,
+      "message": "Hi Sagar, I realise this is marked WIP, but I think it\u0027s worth providing some early feedback so we can get it out of WIP sooner rather than later.",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93966ec8_fcd4d7da",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-01-11T04:12:01Z",
+      "side": 1,
+      "message": "This is probably a necessary evil wrt to abi-compliance-checker, assuming the change is backed by the BIOS specification. While it\u0027s an ABI break it\u0027s not an API break. API breaks are what cause build failures in applications depending on libpldm, so while I\u0027m concerned about both, we can live with an ABI break (I\u0027m not aware of any consumers of libpldm binaries).",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98298f6e_84792aeb",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-01-11T04:12:01Z",
+      "side": 1,
+      "message": "This will give you grief from abi-compliance-checker, and that\u0027s a warning that you\u0027ll break the build of any application depending on libpldm if we merge this, as it\u0027s an API break.",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9385b829_ba52645c",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-01-11T04:12:01Z",
+      "side": 1,
+      "message": "Please don\u0027t add any more `_check` suffixed functions. We have some currently, but they only exist for me to break away from libpldm requiring `assert()` for error handling. I intend to remove all the `_check` suffixes.",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1305c005_9e72186a",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-01-11T04:12:01Z",
+      "side": 1,
+      "message": "Again, please don\u0027t add more functions with a `_check` suffix. Let\u0027s design a functional API from the start.",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
