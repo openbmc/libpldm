@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfda2a30_b544cbab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-01-14T14:03:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8216a377_6db2f9e1",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a261cfc5_7c4dc082",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae134485_32eb867d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-01-14T14:03:15Z",
+      "side": 1,
+      "message": "There is no relevant section in the BIOS SPEC(DSP0247), as the value display name support is added in the structure pldm_bios_table_attr_entry_enum_info, which is an auxiliary structure for passing parameters to pldm_bios_table_attr_entry_enum_encode_check_with_vdn",
+      "parentUuid": "a261cfc5_7c4dc082",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "faeeb554_854f62a8",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-01-11T04:12:01Z",
       "side": 1,
       "message": "What upstream code in pldm? Can you provide a link here too?",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0064862d_ad01a148",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-01-14T14:03:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "faeeb554_854f62a8",
       "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +140,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c1b2891_1433866b",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-01-14T14:03:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "93966ec8_fcd4d7da",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98298f6e_84792aeb",
@@ -99,6 +171,24 @@
       "writtenOn": "2024-01-11T04:12:01Z",
       "side": 1,
       "message": "This will give you grief from abi-compliance-checker, and that\u0027s a warning that you\u0027ll break the build of any application depending on libpldm if we merge this, as it\u0027s an API break.",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62d9aaba_bfb797b4",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-01-14T14:03:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "98298f6e_84792aeb",
       "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -120,6 +210,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f7921c1_04cbf86a",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-01-14T14:03:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9385b829_ba52645c",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1305c005_9e72186a",
@@ -133,6 +241,24 @@
       "writtenOn": "2024-01-11T04:12:01Z",
       "side": 1,
       "message": "Again, please don\u0027t add more functions with a `_check` suffix. Let\u0027s design a functional API from the start.",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8c8ca85_b3a40a3b",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-01-14T14:03:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1305c005_9e72186a",
       "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
