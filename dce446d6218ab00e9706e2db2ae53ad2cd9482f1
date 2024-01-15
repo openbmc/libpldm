@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f3ee573_0bd15718",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-01-15T22:09:42Z",
+      "side": 1,
+      "message": "Essentially, behaviours beyond the PLDM specifications are not something I consider in-scope for libpldm.",
+      "parentUuid": "94b9d758_3d9ea72a",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "faeeb554_854f62a8",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
