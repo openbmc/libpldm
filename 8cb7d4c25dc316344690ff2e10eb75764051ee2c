@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03a8e720_5fb4b7e7",
+        "filename": "abi/x86_64/gcc.dump",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-01-15T03:02:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "518fc382_cca8348e",
+      "revId": "8cb7d4c25dc316344690ff2e10eb75764051ee2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "153bfa7e_a8a04e81",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-01-14T22:08:33Z",
       "side": 1,
       "message": "Renaming the struct is an API break. Please do not rename it (yes, this is a different rule to functions).",
+      "revId": "8cb7d4c25dc316344690ff2e10eb75764051ee2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "330927c9_1d7c01ce",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-01-15T03:02:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "153bfa7e_a8a04e81",
       "revId": "8cb7d4c25dc316344690ff2e10eb75764051ee2c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

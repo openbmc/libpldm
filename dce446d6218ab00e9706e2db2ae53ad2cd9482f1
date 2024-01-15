@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "259c87eb_8bb4a714",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-01-15T03:02:32Z",
+      "side": 1,
+      "message": "@Andrew I did not get this comment, this struct has always existed in libpldm. And is used in creating the attribute tables. And these are existing encode/decode functions for\nBIOS Attribute Table - DSP0247 Section 7.2",
+      "parentUuid": "f8628458_6df3c1c3",
+      "revId": "dce446d6218ab00e9706e2db2ae53ad2cd9482f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "faeeb554_854f62a8",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
