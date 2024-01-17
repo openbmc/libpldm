@@ -63,6 +63,13 @@ struct pldm_bios_enum_attr {
 	uint16_t indices[1];
 } __attribute__((packed));
 
+struct pldm_bios_boot_config_setting_attr_val_entry {
+	uint8_t boot_config_type;
+	uint8_t order_and_fail_through_mode;
+	uint8_t boot_source_num;
+	uint8_t boot_sources_index[1];
+} __attribute__((packed));
+
 struct pldm_bios_attr_val_table_entry {
 	uint16_t attr_handle;
 	uint8_t attr_type;
@@ -74,10 +81,12 @@ enum pldm_bios_attribute_type {
 	PLDM_BIOS_STRING = 0x1,
 	PLDM_BIOS_PASSWORD = 0x2,
 	PLDM_BIOS_INTEGER = 0x3,
+	PLDM_BIOS_BOOT_CONFIG_SETTING = 0x4,
 	PLDM_BIOS_ENUMERATION_READ_ONLY = 0x80,
 	PLDM_BIOS_STRING_READ_ONLY = 0x81,
 	PLDM_BIOS_PASSWORD_READ_ONLY = 0x82,
 	PLDM_BIOS_INTEGER_READ_ONLY = 0x83,
+	PLDM_BIOS_BOOT_CONFIG_SETTING_READ_ONLY = 0x84,
 };
 
 /** @struct pldm_get_bios_table_req
