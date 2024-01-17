@@ -313,6 +313,165 @@ static ssize_t attr_table_entry_length_enum(const void *arg)
 	return (ssize_t)len;
 }
 
+LIBPLDM_ABI_STABLE
+size_t pldm_bios_table_attr_entry_boot_config_setting_encode_length(
+	uint8_t boot_config_type, uint8_t supported_order_and_fail_through_mode,
+	uint8_t minimum_boot_source_num, uint8_t maximum_boot_source_num,
+	uint8_t possible_boot_source_num)
+{
+	return sizeof(struct pldm_bios_attr_table_entry) -
+	       MEMBER_SIZE(pldm_bios_attr_table_entry, metadata) +
+	       sizeof(boot_config_type) +
+	       sizeof(supported_order_and_fail_through_mode) +
+	       sizeof(minimum_boot_source_num) +
+	       sizeof(maximum_boot_source_num) +
+	       sizeof(possible_boot_source_num) +
+	       sizeof(uint16_t) * possible_boot_source_num;
+}
+
+struct attr_table_boot_config_setting_entry_fields {
+	uint8_t boot_config_type;
+	uint8_t supported_order_and_fail_through_mode;
+	uint8_t minimum_boot_source_num;
+	uint8_t maximum_boot_source_num;
+	uint8_t possible_boot_source_num;
+	uint16_t possible_boot_source_handles[1];
+} __attribute__((packed));
+
+LIBPLDM_ABI_STABLE
+int pldm_bios_table_attr_entry_boot_config_setting_encode_check(
+	void *entry, size_t entry_length,
+	const struct pldm_bios_table_attr_entry_boot_config_setting_info *info)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(info);
+	size_t length =
+		pldm_bios_table_attr_entry_boot_config_setting_encode_length(
+			info->boot_config_type,
+			info->supported_order_and_fail_through_mode,
+			info->minimum_boot_source_num,
+			info->maximum_boot_source_num,
+			info->possible_boot_source_num);
+
+	BUFFER_SIZE_EXPECT(entry_length, length);
+	uint8_t attr_type = info->read_only ?
+				    PLDM_BIOS_BOOT_CONFIG_SETTING_READ_ONLY :
+				    PLDM_BIOS_BOOT_CONFIG_SETTING;
+	int rc = attr_table_entry_encode_header(entry, entry_length, attr_type,
+						info->name_handle);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+	struct pldm_bios_attr_table_entry *attr_entry = entry;
+	struct attr_table_boot_config_setting_entry_fields *attr_fields =
+		(struct attr_table_boot_config_setting_entry_fields *)
+			attr_entry->metadata;
+	attr_fields->boot_config_type = info->boot_config_type;
+	attr_fields->supported_order_and_fail_through_mode =
+		info->supported_order_and_fail_through_mode;
+	attr_fields->minimum_boot_source_num = info->minimum_boot_source_num;
+	attr_fields->maximum_boot_source_num = info->maximum_boot_source_num;
+	attr_fields->possible_boot_source_num = info->possible_boot_source_num;
+	if (info->possible_boot_source_num != 0 &&
+	    info->possible_boot_source_handles != NULL) {
+		memcpy(attr_fields->possible_boot_source_handles,
+		       info->possible_boot_source_handles,
+		       info->possible_boot_source_num * sizeof(uint16_t));
+	}
+
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_STABLE
+int pldm_bios_table_attr_entry_boot_config_setting_decode_pv_num_check(
+	const struct pldm_bios_attr_table_entry *entry, uint8_t *pv_num)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(pv_num);
+	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_BOOT_CONFIG_SETTING);
+	*pv_num = entry->metadata[4];
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_STABLE
+int pldm_bios_table_attr_entry_boot_config_setting_decode_pv_hdls_check(
+	const struct pldm_bios_attr_table_entry *entry, uint16_t *pv_hdls,
+	uint8_t pv_num)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(pv_hdls);
+	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_BOOT_CONFIG_SETTING);
+	const uint8_t PV_INDEX = 4; // DSP0247_1.0.0 Table 10
+	uint8_t num = entry->metadata[PV_INDEX];
+	num = num < pv_num ? num : pv_num;
+	size_t i;
+	for (i = 0; i < num; i++) {
+		uint16_t *hdl = (uint16_t *)(entry->metadata +
+					     (1 + PV_INDEX * sizeof(uint8_t)) +
+					     i * sizeof(uint16_t));
+		pv_hdls[i] = le16toh(*hdl);
+	}
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_STABLE
+int pldm_bios_table_attr_entry_boot_config_setting_decode_boot_config_type_check(
+	const struct pldm_bios_attr_table_entry *entry,
+	uint8_t *boot_config_type)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(boot_config_type);
+	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_BOOT_CONFIG_SETTING);
+	const uint8_t TYPE_INDEX = 0; // DSP0247_1.0.0 Table 10
+	*boot_config_type = entry->metadata[TYPE_INDEX];
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_STABLE
+int pldm_bios_table_attr_entry_boot_config_setting_decode_supported_order_and_fail_through_mode_check(
+	const struct pldm_bios_attr_table_entry *entry,
+	uint8_t *supported_order_and_fail_through_mode)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(supported_order_and_fail_through_mode);
+	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_BOOT_CONFIG_SETTING);
+	const uint8_t SUPPORTED_ORDER_AND_FAIL_THROUGH_MODE_INDEX =
+		1; // DSP0247_1.0.0 Table 10
+	*supported_order_and_fail_through_mode =
+		entry->metadata[SUPPORTED_ORDER_AND_FAIL_THROUGH_MODE_INDEX];
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_STABLE
+int pldm_bios_table_attr_entry_boot_config_setting_decode_minimum_boot_source_num_check(
+	const struct pldm_bios_attr_table_entry *entry,
+	uint8_t *minimum_boot_source_num)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(minimum_boot_source_num);
+	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_BOOT_CONFIG_SETTING);
+	const uint8_t MINIMUM_BOOT_SOURCE_NUM_INDEX =
+		2; // DSP0247_1.0.0 Table 10
+	*minimum_boot_source_num =
+		entry->metadata[MINIMUM_BOOT_SOURCE_NUM_INDEX];
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_STABLE
+int pldm_bios_table_attr_entry_boot_config_setting_decode_maximum_boot_source_num_check(
+	const struct pldm_bios_attr_table_entry *entry,
+	uint8_t *maximum_boot_source_num)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(maximum_boot_source_num);
+	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_BOOT_CONFIG_SETTING);
+	const uint8_t MAXIMUM_BOOT_SOURCE_NUM_INDEX =
+		3; // DSP0247_1.0.0 Table 10
+	*maximum_boot_source_num =
+		entry->metadata[MAXIMUM_BOOT_SOURCE_NUM_INDEX];
+	return PLDM_SUCCESS;
+}
+
 struct attr_table_string_entry_fields {
 	uint8_t string_type;
 	uint16_t min_length;
@@ -721,6 +880,43 @@ static ssize_t attr_value_table_entry_length_enum(const void *entry)
 }
 
 LIBPLDM_ABI_STABLE
+uint8_t pldm_bios_table_attr_value_entry_boot_config_setting_decode_number(
+	const struct pldm_bios_attr_val_table_entry *entry)
+{
+	POINTER_CHECK(entry);
+	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_BOOT_CONFIG_SETTING);
+	const uint8_t BOOT_SOURCE_NUM_INDEX = 2; // DSP0247_1.0.0 Table 19
+	return entry->value[BOOT_SOURCE_NUM_INDEX];
+}
+
+LIBPLDM_ABI_STABLE
+int pldm_bios_table_attr_entry_boot_config_setting_decode_boot_source_num_check(
+	const struct pldm_bios_attr_val_table_entry *entry,
+	uint8_t *boot_source_num)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(boot_source_num);
+	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_BOOT_CONFIG_SETTING);
+	const uint8_t BOOT_SOURCE_NUM_INDEX = 2; // DSP0247_1.0.0 Table 19
+	*boot_source_num = entry->value[BOOT_SOURCE_NUM_INDEX];
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_STABLE
+uint8_t pldm_bios_table_attr_value_entry_boot_config_setting_decode_handles(
+	const struct pldm_bios_attr_val_table_entry *entry, uint8_t *handles,
+	uint8_t number)
+{
+	uint8_t curr_num =
+		pldm_bios_table_attr_value_entry_boot_config_setting_decode_number(
+			entry);
+	curr_num = number < curr_num ? number : curr_num;
+	memcpy(handles, &entry->value[3], curr_num);
+
+	return curr_num;
+}
+
+LIBPLDM_ABI_STABLE
 size_t
 pldm_bios_table_attr_value_entry_encode_string_length(uint16_t string_length)
 {
@@ -830,6 +1026,51 @@ static ssize_t attr_value_table_entry_length_integer(const void *entry)
 		return -1;
 	}
 	return (ssize_t)len;
+}
+
+LIBPLDM_ABI_STABLE
+size_t pldm_bios_table_attr_value_entry_encode_boot_config_setting_length(
+	uint8_t boot_source_num)
+{
+	return sizeof(struct pldm_bios_attr_val_table_entry) - 1 +
+	       sizeof(uint8_t /*Boot Config Type*/) +
+	       sizeof(uint8_t /*Order And Fail Through Mode*/) +
+	       sizeof(boot_source_num) + boot_source_num;
+}
+
+LIBPLDM_ABI_STABLE
+int pldm_bios_table_attr_value_entry_encode_boot_config_setting_check(
+	void *entry, size_t entry_length, uint16_t attr_handle,
+	uint8_t attr_type, uint8_t boot_config_type,
+	uint8_t order_and_fail_through_mode, uint8_t count,
+	const uint8_t *handlesIndex)
+{
+	POINTER_CHECK(entry);
+	POINTER_CHECK(handlesIndex);
+	if (count != 0 && handlesIndex == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+	ATTR_TYPE_EXPECT(attr_type, PLDM_BIOS_BOOT_CONFIG_SETTING);
+	size_t length =
+		pldm_bios_table_attr_value_entry_encode_boot_config_setting_length(
+			count);
+	BUFFER_SIZE_EXPECT(entry_length, length);
+	struct pldm_bios_attr_val_table_entry *table_entry = entry;
+	table_entry->attr_handle = htole16(attr_handle);
+	table_entry->attr_type = attr_type;
+	struct pldm_bios_boot_config_setting_attr_val_entry *attr_val_fields =
+		(struct pldm_bios_boot_config_setting_attr_val_entry *)
+			table_entry->value;
+	attr_val_fields->boot_config_type = boot_config_type;
+	attr_val_fields->order_and_fail_through_mode =
+		order_and_fail_through_mode;
+	attr_val_fields->boot_source_num = count;
+	if (count != 0) {
+		memcpy(attr_val_fields->boot_sources_index, handlesIndex,
+		       count);
+	}
+
+	return PLDM_SUCCESS;
 }
 
 static const struct table_entry_length attr_value_table_entries[] = {
