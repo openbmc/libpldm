@@ -22,6 +22,30 @@
       },
       "revId": "17849ae079888fed00e9485fe568f75b5a248887",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90dfd918_229833e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000207
+      },
+      "writtenOn": "2024-01-25T10:01:49Z",
+      "side": 1,
+      "message": "We needed to have two file types as both are unique and different operations.Also input and output parameters of each of them are different too.",
+      "parentUuid": "e7af3a71_b91cc48b",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 51
+      },
+      "revId": "17849ae079888fed00e9485fe568f75b5a248887",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
