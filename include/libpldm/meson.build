@@ -16,6 +16,7 @@ libpldm_headers = files(
   'transport/af-mctp.h',
   'transport/mctp-demux.h',
   'utils.h',
+  'rde/pldm_rde.h',
   )
 
 if get_option('oem-ibm').allowed()
