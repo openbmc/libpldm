@@ -93,6 +93,30 @@
       },
       "revId": "8f107e5a97075ce85671d18cecf760627e3c07ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6939460_f9c5d6ad",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-05T06:00:56Z",
+      "side": 1,
+      "message": "Also, how did you come to these enum values? There are only 4 states, but if you\u0027re 0-indexing them then the maximum value should be 3, not 4. Is there some confusion between the numbered list value and the `Dx` numbers from 257?",
+      "parentUuid": "17c6cdad_f0270bfe",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 43
+      },
+      "revId": "8f107e5a97075ce85671d18cecf760627e3c07ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
