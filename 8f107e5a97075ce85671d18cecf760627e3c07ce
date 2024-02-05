@@ -189,6 +189,30 @@
       },
       "revId": "8f107e5a97075ce85671d18cecf760627e3c07ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f187cad_fb2054dd",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-02-05T07:00:01Z",
+      "side": 1,
+      "message": "@arj - as per section 6.2 of state set spec, 0 is a common value across all the state sets.",
+      "parentUuid": "838207c8_d1e30d8a",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 43
+      },
+      "revId": "8f107e5a97075ce85671d18cecf760627e3c07ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

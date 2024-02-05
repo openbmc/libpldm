@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc79b4db_939a5bf4",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-02-05T07:00:01Z",
+      "side": 1,
+      "message": "apologies for not pointing this out earlier, but i think having the word ACPI in the enum values might add more value and also helps people to correlate with the spec better.\n\nfor example : PLDM_STATE_SET_ACPI_DEVICE_POWER_STATE_UNKNOWN e.t.c.",
+      "range": {
+        "startLine": 240,
+        "startChar": 1,
+        "endLine": 244,
+        "endChar": 43
+      },
+      "revId": "080cadcfe15068454ee6fe279b96c201406ce732",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
