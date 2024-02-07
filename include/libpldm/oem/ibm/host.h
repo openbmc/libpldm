@@ -18,7 +18,7 @@ extern "C" {
 #define PLDM_GET_ALERT_STATUS_RESP_BYTES 9
 
 enum pldm_host_commands {
-	PLDM_HOST_GET_ALERT_STATUS = 0xF0 // Custom oem cmd
+	PLDM_HOST_GET_ALERT_STATUS = 0xf0 // Custom oem cmd
 };
 
 /** @brief PLDM Command specific codes

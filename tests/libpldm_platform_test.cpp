@@ -36,7 +36,7 @@ TEST(SetStateEffecterStates, testEncodeRequest)
         requestMsg{};
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
-    uint16_t effecterId = 0x0A;
+    uint16_t effecterId = 0x0a;
     uint8_t compEffecterCnt = 0x2;
     std::array<set_effecter_state_field, 8> stateField{};
     stateField[0] = {PLDM_REQUEST_SET, 2};
@@ -665,7 +665,7 @@ TEST(SetNumericEffecterValue, testGoodDecodeResponse)
     std::array<uint8_t, hdrSize + PLDM_SET_NUMERIC_EFFECTER_VALUE_RESP_BYTES>
         responseMsg{};
 
-    uint8_t completion_code = 0xA0;
+    uint8_t completion_code = 0xa0;
 
     uint8_t retcompletion_code;
 
@@ -854,7 +854,7 @@ TEST(GetStateSensorReadings, testGoodEncodeRequest)
     std::array<uint8_t, hdrSize + PLDM_GET_STATE_SENSOR_READINGS_REQ_BYTES>
         requestMsg{};
 
-    uint16_t sensorId = 0xAB;
+    uint16_t sensorId = 0xab;
     bitfield8_t sensorRearm;
     sensorRearm.byte = 0x03;
 
@@ -887,7 +887,7 @@ TEST(GetStateSensorReadings, testGoodDecodeRequest)
     std::array<uint8_t, hdrSize + PLDM_GET_STATE_SENSOR_READINGS_REQ_BYTES>
         requestMsg{};
 
-    uint16_t sensorId = 0xCD;
+    uint16_t sensorId = 0xcd;
     bitfield8_t sensorRearm;
     sensorRearm.byte = 0x10;
 
@@ -2463,7 +2463,7 @@ TEST(GetNumericEffecterValue, testGoodEncodeRequest)
     std::vector<uint8_t> requestMsg(hdrSize +
                                     PLDM_GET_NUMERIC_EFFECTER_VALUE_REQ_BYTES);
 
-    uint16_t effecter_id = 0xAB01;
+    uint16_t effecter_id = 0xab01;
 
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
@@ -2496,7 +2496,7 @@ TEST(GetNumericEffecterValue, testGoodDecodeRequest)
         reinterpret_cast<struct pldm_get_numeric_effecter_value_req*>(
             request->payload);
 
-    uint16_t effecter_id = 0x12AB;
+    uint16_t effecter_id = 0x12ab;
     req->effecter_id = htole16(effecter_id);
 
     uint16_t reteffecter_id;
@@ -2523,7 +2523,7 @@ TEST(GetNumericEffecterValue, testBadDecodeRequest)
         reinterpret_cast<struct pldm_set_numeric_effecter_value_req*>(
             request->payload);
 
-    uint16_t effecter_id = 0x1A;
+    uint16_t effecter_id = 0x1a;
     req->effecter_id = htole16(effecter_id);
     uint16_t reteffecter_id;
 
@@ -2539,7 +2539,7 @@ TEST(GetNumericEffecterValue, testGoodEncodeResponse)
     uint8_t effecter_dataSize = PLDM_EFFECTER_DATA_SIZE_UINT32;
     uint8_t effecter_operState = EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING;
     uint32_t pendingValue = 0x12345678;
-    uint32_t presentValue = 0xABCDEF11;
+    uint32_t presentValue = 0xabcdef11;
     uint32_t val_pending;
     uint32_t val_present;
 
@@ -2614,7 +2614,7 @@ TEST(GetNumericEffecterValue, testGoodDecodeResponse)
     uint8_t effecter_dataSize = PLDM_EFFECTER_DATA_SIZE_UINT16;
     uint8_t effecter_operState = EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING;
     uint16_t pendingValue = 0x4321;
-    uint16_t presentValue = 0xDCBA;
+    uint16_t presentValue = 0xdcba;
 
     uint8_t retcompletionCode;
     uint8_t reteffecter_dataSize;
@@ -2667,7 +2667,7 @@ TEST(GetNumericEffecterValue, testBadDecodeResponse)
     uint8_t effecter_dataSize = PLDM_EFFECTER_DATA_SIZE_SINT16;
     uint8_t effecter_operState = EFFECTER_OPER_STATE_DISABLED;
     uint16_t pendingValue = 0x5678;
-    uint16_t presentValue = 0xCDEF;
+    uint16_t presentValue = 0xcdef;
 
     uint8_t retcompletionCode;
     uint8_t reteffecter_dataSize;
@@ -2848,8 +2848,8 @@ TEST(GetSensorReading, testGoodDecodeRequest)
     std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_REQ_BYTES>
         requestMsg{};
 
-    uint16_t sensorId = 0xABCD;
-    bool8_t rearmEventState = 0xA;
+    uint16_t sensorId = 0xabcd;
+    bool8_t rearmEventState = 0xa;
 
     uint16_t retsensorId;
     bool8_t retrearmEventState;
@@ -2880,8 +2880,8 @@ TEST(GetSensorReading, testBadDecodeRequest)
         nullptr, requestMsg.size() - hdrSize, nullptr, nullptr);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
-    uint16_t sensorId = 0xABCD;
-    bool8_t rearmEventState = 0xA;
+    uint16_t sensorId = 0xabcd;
+    bool8_t rearmEventState = 0xa;
 
     uint16_t retsensorId;
     bool8_t retrearmEventState;
@@ -2979,7 +2979,7 @@ TEST(GetSensorReading, testGoodDecodeResponse)
     uint8_t presentState = PLDM_SENSOR_CRITICAL;
     uint8_t previousState = PLDM_SENSOR_UPPERCRITICAL;
     uint8_t eventState = PLDM_SENSOR_WARNING;
-    uint32_t presentReading = 0xABCDEF11;
+    uint32_t presentReading = 0xabcdef11;
 
     uint8_t retcompletionCode;
     uint8_t retsensor_dataSize = PLDM_SENSOR_DATA_SIZE_UINT32;
@@ -3043,7 +3043,7 @@ TEST(GetSensorReading, testBadDecodeResponse)
     uint8_t presentState = PLDM_SENSOR_FATAL;
     uint8_t previousState = PLDM_SENSOR_UPPERFATAL;
     uint8_t eventState = PLDM_SENSOR_WARNING;
-    uint8_t presentReading = 0xA;
+    uint8_t presentReading = 0xa;
 
     uint8_t retcompletionCode;
     uint8_t retsensor_dataSize = PLDM_SENSOR_DATA_SIZE_SINT16;

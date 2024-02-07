@@ -16,7 +16,7 @@ TEST(DecodeOemMetaFileIoReq, testGoodDecodeRequest)
     struct pldm_msgbuf* ctx = &_ctx;
     uint8_t fileHandle = 0x00;
     int32_t dataLengthLE = 0x04;
-    uint8_t postCode[4] = {0x93, 0xE0, 0x00, 0xEA};
+    uint8_t postCode[4] = {0x93, 0xe0, 0x00, 0xea};
 
     constexpr auto hdrSize = sizeof(pldm_msg_hdr);
 

@@ -308,7 +308,7 @@ pldm_entity_association_tree *pldm_entity_association_tree_init(void);
  *                          container id are populated.
  *  @param[in] entity_instance_number - entity instance number, we can use the
  *                                      entity instance number of the entity by
- *                                      default if its value is equal 0xFFFF.
+ *                                      default if its value is equal 0xffff.
  *  @param[in] parent - pointer to the node that should be the parent of input
  *                      entity. If this is NULL, then the entity is the root
  *  @param[in] association_type - relation with the parent : logical or physical
@@ -329,7 +329,7 @@ pldm_entity_node *pldm_entity_association_tree_add(
  *                          container id are populated.
  *  @param[in] entity_instance_number - entity instance number, we can use the
  *                                      entity instance number of the entity by
- *                                      default if its value is equal 0xFFFF.
+ *                                      default if its value is equal 0xffff.
  *  @param[in] parent - pointer to the node that should be the parent of input
  *                      entity. If this is NULL, then the entity is the root
  *  @param[in] association_type - relation with the parent : logical or physical

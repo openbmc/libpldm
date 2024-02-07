@@ -25,7 +25,7 @@ enum pldm_supported_types {
 	PLDM_FRU = 0x04,
 	PLDM_FWUP = 0x05,
 	PLDM_RDE = 0x06,
-	PLDM_OEM = 0x3F,
+	PLDM_OEM = 0x3f,
 };
 
 /** @brief PLDM Commands
@@ -77,7 +77,7 @@ enum transfer_resp_flag {
  */
 enum pldm_transport_protocol_type {
 	PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP = 0x00,
-	PLDM_TRANSPORT_PROTOCOL_TYPE_OEM = 0xFF,
+	PLDM_TRANSPORT_PROTOCOL_TYPE_OEM = 0xff,
 };
 
 /** @enum MessageType

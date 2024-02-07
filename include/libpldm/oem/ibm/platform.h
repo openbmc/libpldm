@@ -12,7 +12,7 @@ extern "C" {
 #include <stdint.h>
 
 enum pldm_event_types_ibm_oem {
-	PLDM_EVENT_TYPE_OEM_EVENT_BIOS_ATTRIBUTE_UPDATE = 0xF0,
+	PLDM_EVENT_TYPE_OEM_EVENT_BIOS_ATTRIBUTE_UPDATE = 0xf0,
 };
 
 /** @struct pldm_bios_attribute_update_event_req

@@ -22,7 +22,7 @@ TEST(DecodePackageHeaderInfo, goodPath)
     // Package header identifier for Version 1.0.x
     constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH> uuid{
         0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43,
-        0x98, 0x00, 0xa0, 0x2F, 0x05, 0x9a, 0xca, 0x02};
+        0x98, 0x00, 0xa0, 0x2f, 0x05, 0x9a, 0xca, 0x02};
     // Package header version for DSP0267 version 1.0.x
     constexpr uint8_t pkgHeaderFormatRevision = 0x01;
     // Random PackageHeaderSize
@@ -38,7 +38,7 @@ TEST(DecodePackageHeaderInfo, goodPath)
         sizeof(pldm_package_header_information) + packageVersionStr.size();
 
     constexpr std::array<uint8_t, packagerHeaderSize> packagerHeaderInfo{
-        0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00, 0xa0, 0x2F,
+        0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00, 0xa0, 0x2f,
         0x05, 0x9a, 0xca, 0x02, 0x01, 0x2f, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x19, 0x0c, 0xe5, 0x07, 0x00, 0x08, 0x00, 0x01, 0x0b,
         0x4f, 0x70, 0x65, 0x6e, 0x42, 0x4d, 0x43, 0x76, 0x31, 0x2e, 0x30};
@@ -81,7 +81,7 @@ TEST(DecodePackageHeaderInfo, errorPaths)
     constexpr std::array<uint8_t, packagerHeaderSize>
         invalidPackagerHeaderInfo1{
             0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00,
-            0xa0, 0x2F, 0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00,
+            0xa0, 0x2f, 0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00,
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x0c, 0xe5,
             0x07, 0x00, 0x08, 0x00, 0x06, 0x0b, 0x4f, 0x70, 0x65, 0x6e,
             0x42, 0x4d, 0x43, 0x76, 0x31, 0x2e, 0x30};
@@ -119,7 +119,7 @@ TEST(DecodePackageHeaderInfo, errorPaths)
     constexpr std::array<uint8_t, packagerHeaderSize>
         invalidPackagerHeaderInfo2{
             0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00,
-            0xa0, 0x2F, 0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00,
+            0xa0, 0x2f, 0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00,
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x0c, 0xe5,
             0x07, 0x00, 0x08, 0x00, 0x01, 0x00, 0x4f, 0x70, 0x65, 0x6e,
             0x42, 0x4d, 0x43, 0x76, 0x31, 0x2e, 0x30};
@@ -132,7 +132,7 @@ TEST(DecodePackageHeaderInfo, errorPaths)
     constexpr std::array<uint8_t, packagerHeaderSize - 1>
         invalidPackagerHeaderInfo3{
             0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00,
-            0xa0, 0x2F, 0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00,
+            0xa0, 0x2f, 0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00,
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x0c, 0xe5,
             0x07, 0x00, 0x08, 0x00, 0x01, 0x0b, 0x4f, 0x70, 0x65, 0x6e,
             0x42, 0x4d, 0x43, 0x76, 0x31, 0x2e};
@@ -145,7 +145,7 @@ TEST(DecodePackageHeaderInfo, errorPaths)
     constexpr std::array<uint8_t, packagerHeaderSize>
         invalidPackagerHeaderInfo4{
             0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00,
-            0xa0, 0x2F, 0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00,
+            0xa0, 0x2f, 0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00,
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x0c, 0xe5,
             0x07, 0x00, 0x09, 0x00, 0x01, 0x0b, 0x4f, 0x70, 0x65, 0x6e,
             0x42, 0x4d, 0x43, 0x76, 0x31, 0x2e, 0x30};
@@ -460,7 +460,7 @@ TEST(DecodeDescriptors, goodPath3Descriptors)
     constexpr std::array<uint8_t, descriptorsLength> descriptors{
         0x01, 0x00, 0x04, 0x00, 0x0a, 0x0b, 0x0c, 0x0d, 0x02, 0x00, 0x10,
         0x00, 0x12, 0x44, 0xd2, 0x64, 0x8d, 0x7d, 0x47, 0x18, 0xa0, 0x30,
-        0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5b, 0xFF, 0xFF, 0x0B, 0x00, 0x01,
+        0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5b, 0xff, 0xff, 0x0b, 0x00, 0x01,
         0x07, 0x4f, 0x70, 0x65, 0x6e, 0x42, 0x4d, 0x43, 0x01, 0x02};
 
     size_t descriptorCount = 1;
@@ -651,7 +651,7 @@ TEST(DecodeComponentImageInfo, goodPath)
     // Firmware
     constexpr uint16_t compClassification = 16;
     constexpr uint16_t compIdentifier = 300;
-    constexpr uint32_t compComparisonStamp = 0xFFFFFFFF;
+    constexpr uint32_t compComparisonStamp = 0xffffffff;
     // Force update
     constexpr std::bitset<16> compOptions{1};
     // System reboot[Bit position 3] & Medium-specific reset[Bit position 2]
@@ -748,7 +748,7 @@ TEST(DecodeComponentImageInfo, errorPaths)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     // Use Component Comparison Stamp is not set, but ComponentComparisonStamp
-    // is not 0xFFFFFFFF
+    // is not 0xffffffff
     constexpr std::array<uint8_t, compImageInfoSize> invalidCompImageInfo3{
         0x10, 0x00, 0x2c, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x0c, 0x00,
         0x65, 0x01, 0x00, 0x00, 0x1b, 0x00, 0x00, 0x00, 0x01, 0x0e, 0x56, 0x65,
@@ -819,7 +819,7 @@ TEST(QueryDeviceIdentifiers, goodPathDecodeResponse)
     // filling descriptor data
     std::fill_n(responseMsg.data() + hdrSize +
                     sizeof(struct pldm_query_device_identifiers_resp),
-                descriptorDataLen, 0xFF);
+                descriptorDataLen, 0xff);
 
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t completionCode = PLDM_SUCCESS;
@@ -871,7 +871,7 @@ TEST(GetFirmwareParameters, decodeResponse)
     // constexpr uint16_t compClassification = 16;
     // constexpr uint16_t compIdentifier = 300;
     // constexpr uint8_t compClassificationIndex = 20;
-    // constexpr uint32_t activeCompComparisonStamp = 0xABCDEFAB;
+    // constexpr uint32_t activeCompComparisonStamp = 0xabcdefab;
     // constexpr std::array<uint8_t, 8> activeComponentReleaseData = {
     //     0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
     // constexpr uint32_t pendingCompComparisonStamp = 0x12345678;
@@ -885,7 +885,7 @@ TEST(GetFirmwareParameters, decodeResponse)
         pendingCompVersion.size();
 
     constexpr std::array<uint8_t, compParamTableSize> compParamTable{
-        0x10, 0x00, 0x2c, 0x01, 0x14, 0xAB, 0xEF, 0xCD, 0xAB, 0x01, 0x0e, 0x01,
+        0x10, 0x00, 0x2c, 0x01, 0x14, 0xab, 0xef, 0xcd, 0xab, 0x01, 0x0e, 0x01,
         0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x78, 0x56, 0x34, 0x12, 0x01,
         0x0e, 0x08, 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x12, 0x00, 0x02,
         0x00, 0x00, 0x00, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x53, 0x74,
@@ -903,7 +903,7 @@ TEST(GetFirmwareParameters, decodeResponse)
             0x0e, 0x01, 0x0e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x53,
             0x74, 0x72, 0x69, 0x6e, 0x67, 0x31, 0x56, 0x65, 0x72, 0x73, 0x69,
             0x6f, 0x6e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x32, 0x10, 0x00,
-            0x2c, 0x01, 0x14, 0xAB, 0xEF, 0xCD, 0xAB, 0x01, 0x0e, 0x01, 0x02,
+            0x2c, 0x01, 0x14, 0xab, 0xef, 0xcd, 0xab, 0x01, 0x0e, 0x01, 0x02,
             0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x78, 0x56, 0x34, 0x12, 0x01,
             0x0e, 0x08, 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x12, 0x00,
             0x02, 0x00, 0x00, 0x00, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
@@ -1188,15 +1188,15 @@ TEST(GetFirmwareParameters, errorPathdecodeResponse)
 TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
 {
     // Random value for component classification
-    constexpr uint16_t compClassification = 0x0A0B;
+    constexpr uint16_t compClassification = 0x0a0b;
     // Random value for component classification
-    constexpr uint16_t compIdentifier = 0x0C0D;
+    constexpr uint16_t compIdentifier = 0x0c0d;
     // Random value for component classification
-    constexpr uint32_t timestamp = 0X12345678;
+    constexpr uint32_t timestamp = 0x12345678;
     // Random value for component activation methods
-    constexpr uint16_t compActivationMethods = 0xBBDD;
+    constexpr uint16_t compActivationMethods = 0xbbdd;
     // Random value for capabilities during update
-    constexpr uint32_t capabilitiesDuringUpdate = 0xBADBEEFE;
+    constexpr uint32_t capabilitiesDuringUpdate = 0xbadbeefe;
 
     // ActiveCompImageSetVerStrLen is not fixed here taking it as 8
     constexpr uint8_t activeCompVerStrLen = 8;
@@ -1212,27 +1212,27 @@ TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
 
     inEntry->comp_classification = htole16(compClassification);
     inEntry->comp_identifier = htole16(compIdentifier);
-    inEntry->comp_classification_index = 0x0F;
+    inEntry->comp_classification_index = 0x0f;
     inEntry->active_comp_comparison_stamp = htole32(timestamp);
     inEntry->active_comp_ver_str_type = 1;
     inEntry->active_comp_ver_str_len = activeCompVerStrLen;
     std::fill_n(inEntry->active_comp_release_date,
-                sizeof(inEntry->active_comp_release_date), 0xFF);
+                sizeof(inEntry->active_comp_release_date), 0xff);
     inEntry->pending_comp_comparison_stamp = htole32(timestamp);
     inEntry->pending_comp_ver_str_type = 1;
     inEntry->pending_comp_ver_str_len = pendingCompVerStrLen;
     std::fill_n(inEntry->pending_comp_release_date,
-                sizeof(inEntry->pending_comp_release_date), 0xFF);
+                sizeof(inEntry->pending_comp_release_date), 0xff);
     inEntry->comp_activation_methods.value = htole16(compActivationMethods);
     inEntry->capabilities_during_update.value =
         htole32(capabilitiesDuringUpdate);
     constexpr auto activeCompVerStrPos =
         sizeof(struct pldm_component_parameter_entry);
-    std::fill_n(entry.data() + activeCompVerStrPos, activeCompVerStrLen, 0xAA);
+    std::fill_n(entry.data() + activeCompVerStrPos, activeCompVerStrLen, 0xaa);
     constexpr auto pendingCompVerStrPos =
         activeCompVerStrPos + activeCompVerStrLen;
     std::fill_n(entry.data() + pendingCompVerStrPos, pendingCompVerStrLen,
-                0xBB);
+                0xbb);
 
     struct pldm_component_parameter_entry outEntry;
     struct variable_field outActiveCompVerStr;
@@ -1368,7 +1368,7 @@ TEST(RequestUpdate, errorPathEncodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     compImgSetVerStrLen = static_cast<uint8_t>(compImgSetVerStr.size());
 
-    compImgSetVerStrInfo.length = 0xFFFF;
+    compImgSetVerStrInfo.length = 0xffff;
     rc = encode_request_update_req(
         instanceId, maxTransferSize, numOfComp, maxOutstandingTransferReq,
         pkgDataLen, PLDM_STR_TYPE_ASCII, compImgSetVerStrLen,
@@ -1507,9 +1507,9 @@ TEST(PassComponentTable, goodPathEncodeRequest)
 
     std::array<uint8_t,
                hdrSize + sizeof(pldm_pass_component_table_req) + compVerStrLen>
-        outRequest{0x81, 0x05, 0x13, 0x05, 0x0A, 0x00, 0x90, 0x01, 0x28,
-                   0x78, 0x56, 0x34, 0x12, 0x01, 0x0B, 0x30, 0x70, 0x65,
-                   0x6E, 0x42, 0x6D, 0x63, 0x76, 0x31, 0x2E, 0x31};
+        outRequest{0x81, 0x05, 0x13, 0x05, 0x0a, 0x00, 0x90, 0x01, 0x28,
+                   0x78, 0x56, 0x34, 0x12, 0x01, 0x0b, 0x30, 0x70, 0x65,
+                   0x6e, 0x42, 0x6d, 0x63, 0x76, 0x31, 0x2e, 0x31};
     EXPECT_EQ(request, outRequest);
 }
 
@@ -1612,7 +1612,7 @@ TEST(PassComponentTable, goodPathDecodeResponse)
 
     constexpr std::array<uint8_t,
                          hdrSize + sizeof(pldm_pass_component_table_resp)>
-        passCompTableResponse2{0x00, 0x00, 0x00, 0x00, 0x00, 0xD0};
+        passCompTableResponse2{0x00, 0x00, 0x00, 0x00, 0x00, 0xd0};
     auto responseMsg2 =
         reinterpret_cast<const pldm_msg*>(passCompTableResponse2.data());
     rc = decode_pass_component_table_resp(
@@ -1691,7 +1691,7 @@ TEST(PassComponentTable, errorPathDecodeResponse)
 
     constexpr std::array<uint8_t,
                          hdrSize + sizeof(pldm_pass_component_table_resp)>
-        passCompTableResponse3{0x00, 0x00, 0x00, 0x00, 0x00, 0x0C};
+        passCompTableResponse3{0x00, 0x00, 0x00, 0x00, 0x00, 0x0c};
     auto responseMsg3 =
         reinterpret_cast<const pldm_msg*>(passCompTableResponse3.data());
     rc = decode_pass_component_table_resp(
@@ -1701,7 +1701,7 @@ TEST(PassComponentTable, errorPathDecodeResponse)
 
     constexpr std::array<uint8_t,
                          hdrSize + sizeof(pldm_pass_component_table_resp)>
-        passCompTableResponse4{0x00, 0x00, 0x00, 0x00, 0x00, 0xF0};
+        passCompTableResponse4{0x00, 0x00, 0x00, 0x00, 0x00, 0xf0};
     auto responseMsg4 =
         reinterpret_cast<const pldm_msg*>(passCompTableResponse4.data());
     rc = decode_pass_component_table_resp(
@@ -1715,7 +1715,7 @@ TEST(UpdateComponent, goodPathEncodeRequest)
     constexpr uint8_t instanceId = 2;
     constexpr uint16_t compIdentifier = 500;
     constexpr uint8_t compClassificationIndex = 50;
-    constexpr uint32_t compComparisonStamp = 0x89ABCDEF;
+    constexpr uint32_t compComparisonStamp = 0x89abcdef;
     constexpr uint32_t compImageSize = 4096;
     constexpr bitfield32_t updateOptionFlags{1};
     constexpr std::string_view compVerStr = "OpenBmcv2.2";
@@ -1738,10 +1738,10 @@ TEST(UpdateComponent, goodPathEncodeRequest)
 
     std::array<uint8_t,
                hdrSize + sizeof(pldm_update_component_req) + compVerStrLen>
-        outRequest{0x82, 0x05, 0x14, 0x0A, 0x00, 0xF4, 0x01, 0x32, 0xEF,
-                   0xCD, 0xAB, 0x89, 0x00, 0x10, 0x00, 0x00, 0x01, 0x00,
-                   0x00, 0x00, 0x01, 0x0B, 0x4f, 0x70, 0x65, 0x6E, 0x42,
-                   0x6D, 0x63, 0x76, 0x32, 0x2E, 0x32};
+        outRequest{0x82, 0x05, 0x14, 0x0a, 0x00, 0xf4, 0x01, 0x32, 0xef,
+                   0xcd, 0xab, 0x89, 0x00, 0x10, 0x00, 0x00, 0x01, 0x00,
+                   0x00, 0x00, 0x01, 0x0b, 0x4f, 0x70, 0x65, 0x6e, 0x42,
+                   0x6d, 0x63, 0x76, 0x32, 0x2e, 0x32};
     EXPECT_EQ(request, outRequest);
 }
 
@@ -1750,7 +1750,7 @@ TEST(UpdateComponent, errorPathEncodeRequest)
     constexpr uint8_t instanceId = 2;
     constexpr uint16_t compIdentifier = 500;
     constexpr uint8_t compClassificationIndex = 50;
-    constexpr uint32_t compComparisonStamp = 0x89ABCDEF;
+    constexpr uint32_t compComparisonStamp = 0x89abcdef;
     constexpr uint32_t compImageSize = 4096;
     constexpr bitfield32_t updateOptionFlags{1};
     constexpr std::string_view compVerStr = "OpenBmcv2.2";
@@ -1959,7 +1959,7 @@ TEST(UpdateComponent, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     constexpr std::array<uint8_t, hdrSize + sizeof(pldm_update_component_resp)>
-        updateComponentResponse3{0x00, 0x00, 0x00, 0x00, 0x00, 0x0C,
+        updateComponentResponse3{0x00, 0x00, 0x00, 0x00, 0x00, 0x0c,
                                  0x01, 0x00, 0x00, 0x00, 0x64, 0x00};
     auto responseMsg3 =
         reinterpret_cast<const pldm_msg*>(updateComponentResponse3.data());
@@ -1970,7 +1970,7 @@ TEST(UpdateComponent, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     constexpr std::array<uint8_t, hdrSize + sizeof(pldm_update_component_resp)>
-        updateComponentResponse4{0x00, 0x00, 0x00, 0x00, 0x00, 0xF0,
+        updateComponentResponse4{0x00, 0x00, 0x00, 0x00, 0x00, 0xf0,
                                  0x01, 0x00, 0x00, 0x00, 0x64, 0x00};
     auto responseMsg4 =
         reinterpret_cast<const pldm_msg*>(updateComponentResponse4.data());
@@ -1987,8 +1987,8 @@ TEST(RequestFirmwareData, goodPathDecodeRequest)
     constexpr uint32_t length = 255;
     constexpr std::array<uint8_t,
                          hdrSize + sizeof(pldm_request_firmware_data_req)>
-        reqFWDataReq{0x00, 0x00, 0x00, 0x2C, 0x01, 0x00,
-                     0x00, 0xFF, 0x00, 0x00, 0x00};
+        reqFWDataReq{0x00, 0x00, 0x00, 0x2c, 0x01, 0x00,
+                     0x00, 0xff, 0x00, 0x00, 0x00};
     auto requestMsg = reinterpret_cast<const pldm_msg*>(reqFWDataReq.data());
 
     uint32_t outOffset = 0;
@@ -2006,8 +2006,8 @@ TEST(RequestFirmwareData, errorPathDecodeRequest)
 {
     constexpr std::array<uint8_t,
                          hdrSize + sizeof(pldm_request_firmware_data_req)>
-        reqFWDataReq{0x00, 0x00, 0x00, 0x2C, 0x01, 0x00,
-                     0x00, 0x1F, 0x00, 0x00, 0x00};
+        reqFWDataReq{0x00, 0x00, 0x00, 0x2c, 0x01, 0x00,
+                     0x00, 0x1f, 0x00, 0x00, 0x00};
     auto requestMsg = reinterpret_cast<const pldm_msg*>(reqFWDataReq.data());
 
     uint32_t outOffset = 0;
@@ -2045,17 +2045,17 @@ TEST(RequestFirmwareData, goodPathEncodeResponse)
     constexpr std::array<uint8_t, hdrSize + sizeof(completionCode) +
                                       PLDM_FWUP_BASELINE_TRANSFER_SIZE>
         outReqFwDataResponse1{0x03, 0x05, 0x15, 0x00, 0x01, 0x02, 0x03, 0x04,
-                              0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
-                              0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14,
-                              0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C,
-                              0x1D, 0x1E, 0x1F, 0x20};
+                              0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c,
+                              0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14,
+                              0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c,
+                              0x1d, 0x1e, 0x1f, 0x20};
     std::array<uint8_t, hdrSize + sizeof(completionCode) +
                             PLDM_FWUP_BASELINE_TRANSFER_SIZE>
         reqFwDataResponse1{0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04,
-                           0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
-                           0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14,
-                           0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C,
-                           0x1D, 0x1E, 0x1F, 0x20};
+                           0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c,
+                           0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14,
+                           0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c,
+                           0x1d, 0x1e, 0x1f, 0x20};
     auto responseMsg1 = reinterpret_cast<pldm_msg*>(reqFwDataResponse1.data());
     auto rc = encode_request_firmware_data_resp(
         instanceId, completionCode, responseMsg1,
@@ -2368,7 +2368,7 @@ TEST(ActivateFirmware, goodPathEncodeRequest)
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     std::array<uint8_t, hdrSize + sizeof(pldm_activate_firmware_req)>
-        outRequest{0x87, 0x05, 0x1A, 0x01};
+        outRequest{0x87, 0x05, 0x1a, 0x01};
     EXPECT_EQ(request, outRequest);
 }
 
@@ -2468,7 +2468,7 @@ TEST(GetStatus, goodPathEncodeRequest)
                                     PLDM_GET_STATUS_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    constexpr std::array<uint8_t, hdrSize> outRequest{0x88, 0x05, 0x1B};
+    constexpr std::array<uint8_t, hdrSize> outRequest{0x88, 0x05, 0x1b};
     EXPECT_EQ(request, outRequest);
 }
 
@@ -2675,7 +2675,7 @@ TEST(GetStatus, errorPathDecodeResponse)
 
     constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
         getStatusResponse6{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                           0x0B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+                           0x0b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     auto responseMsg6 =
         reinterpret_cast<const pldm_msg*>(getStatusResponse6.data());
     rc = decode_get_status_resp(
@@ -2697,7 +2697,7 @@ TEST(GetStatus, errorPathDecodeResponse)
 
     constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
         getStatusResponse8{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                           0x00, 0x00, 0xC7, 0x00, 0x00, 0x00, 0x00};
+                           0x00, 0x00, 0xc7, 0x00, 0x00, 0x00, 0x00};
     auto responseMsg8 =
         reinterpret_cast<const pldm_msg*>(getStatusResponse8.data());
     rc = decode_get_status_resp(
@@ -2730,7 +2730,7 @@ TEST(CancelUpdateComponent, goodPathEncodeRequest)
         instanceId, requestMsg, PLDM_CANCEL_UPDATE_COMPONENT_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    constexpr std::array<uint8_t, hdrSize> outRequest{0x89, 0x05, 0x1C};
+    constexpr std::array<uint8_t, hdrSize> outRequest{0x89, 0x05, 0x1c};
     EXPECT_EQ(request, outRequest);
 }
 
@@ -2805,7 +2805,7 @@ TEST(CancelUpdate, goodPathEncodeRequest)
                                        PLDM_CANCEL_UPDATE_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    constexpr std::array<uint8_t, hdrSize> outRequest{0x8A, 0x05, 0x1D};
+    constexpr std::array<uint8_t, hdrSize> outRequest{0x8a, 0x05, 0x1d};
     EXPECT_EQ(request, outRequest);
 }
 

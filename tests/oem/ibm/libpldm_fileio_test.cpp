@@ -19,7 +19,7 @@ TEST(ReadWriteFileMemory, testGoodDecodeRequest)
     uint32_t fileHandle = 0x12345678;
     uint32_t offset = 0x87654321;
     uint32_t length = 0x13245768;
-    uint64_t address = 0x124356879ACBDE0F;
+    uint64_t address = 0x124356879acbde0f;
     uint32_t fileHandleLe = htole32(fileHandle);
     uint32_t offsetLe = htole32(offset);
     uint32_t lengthLe = htole32(length);
@@ -85,7 +85,7 @@ TEST(ReadWriteFileMemory, testGoodEncodeResponse)
 {
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_RW_FILE_MEM_RESP_BYTES>
         responseMsg{};
-    uint32_t length = 0xFF00EE11;
+    uint32_t length = 0xff00ee11;
     uint32_t lengthLe = htole32(length);
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
@@ -150,7 +150,7 @@ TEST(ReadWriteFileIntoMemory, testGoodDecodeResponse)
 {
     std::array<uint8_t, PLDM_RW_FILE_MEM_RESP_BYTES + hdrSize> responseMsg{};
     // Random value for length
-    uint32_t length = 0xFF00EE12;
+    uint32_t length = 0xff00ee12;
     uint32_t lengthLe = htole32(length);
     uint8_t completionCode = 0;
 
@@ -198,7 +198,7 @@ TEST(ReadWriteFileIntoMemory, testGoodEncodeRequest)
     uint32_t fileHandle = 0x12345678;
     uint32_t offset = 0x87654321;
     uint32_t length = 0x13245768;
-    uint64_t address = 0x124356879ACBDE0F;
+    uint64_t address = 0x124356879acbde0f;
     uint32_t fileHandleLe = htole32(fileHandle);
     uint32_t offsetLe = htole32(offset);
     uint32_t lengthLe = htole32(length);
@@ -834,7 +834,7 @@ TEST(ReadWriteFileByTypeMemory, testGoodDecodeRequest)
     uint32_t fileHandle = 0x12345678;
     uint32_t offset = 0x87654321;
     uint32_t length = 0x13245768;
-    uint64_t address = 0x124356879ACBD456;
+    uint64_t address = 0x124356879acbd456;
 
     request->file_type = htole16(fileType);
     request->file_handle = htole32(fileHandle);
@@ -959,7 +959,7 @@ TEST(ReadWriteFileByTypeMemory, testGoodEncodeRequest)
     uint32_t fileHandle = 0x12345678;
     uint32_t offset = 0x87654321;
     uint32_t length = 0x13245768;
-    uint64_t address = 0x124356879ACBDE0F;
+    uint64_t address = 0x124356879acbde0f;
     uint16_t fileTypeLe = htole16(fileType);
     uint32_t fileHandleLe = htole32(fileHandle);
     uint32_t offsetLe = htole32(offset);
@@ -1074,7 +1074,7 @@ TEST(NewFile, testGoodDecodeRequest)
     auto request = reinterpret_cast<pldm_new_file_req*>(requestPtr->payload);
 
     // Random value for fileHandle and length
-    uint16_t fileType = 0xFF;
+    uint16_t fileType = 0xff;
     uint32_t fileHandle = 0x12345678;
     uint64_t length = 0x13245768;
 
@@ -1082,7 +1082,7 @@ TEST(NewFile, testGoodDecodeRequest)
     request->file_handle = htole32(fileHandle);
     request->length = htole64(length);
 
-    uint16_t retFileType = 0xFF;
+    uint16_t retFileType = 0xff;
     uint32_t retFileHandle = 0;
     uint64_t retLength = 0;
 
@@ -1164,7 +1164,7 @@ TEST(NewFile, testGoodEncodeRequest)
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_NEW_FILE_REQ_BYTES>
         requestMsg{};
 
-    uint16_t fileType = 0xFF;
+    uint16_t fileType = 0xff;
     uint32_t fileHandle = 0x12345678;
     uint32_t length = 0x13245768;
     uint16_t fileTypeLe = htole16(fileType);
@@ -1232,7 +1232,7 @@ TEST(NewFile, testBadEncodeResponse)
 
 TEST(NewFile, testBadEncodeRequest)
 {
-    uint8_t fileType = 0xFF;
+    uint8_t fileType = 0xff;
     uint32_t fileHandle = 0;
     uint32_t length = 0;
 
@@ -1466,15 +1466,15 @@ TEST(FileAck, testGoodDecodeRequest)
     auto request = reinterpret_cast<pldm_file_ack_req*>(requestPtr->payload);
 
     // Random value for fileHandle
-    uint16_t fileType = 0xFFFF;
+    uint16_t fileType = 0xffff;
     uint32_t fileHandle = 0x12345678;
-    uint8_t fileStatus = 0xFF;
+    uint8_t fileStatus = 0xff;
 
     request->file_type = htole16(fileType);
     request->file_handle = htole32(fileHandle);
     request->file_status = fileStatus;
 
-    uint16_t retFileType = 0xFF;
+    uint16_t retFileType = 0xff;
     uint32_t retFileHandle = 0;
     uint8_t retFileStatus = 0;
 
@@ -1557,9 +1557,9 @@ TEST(FileAck, testGoodEncodeRequest)
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_FILE_ACK_REQ_BYTES>
         requestMsg{};
 
-    uint16_t fileType = 0xFFFF;
+    uint16_t fileType = 0xffff;
     uint32_t fileHandle = 0x12345678;
-    uint8_t fileStatus = 0xFF;
+    uint8_t fileStatus = 0xff;
     uint16_t fileTypeLe = htole16(fileType);
     uint32_t fileHandleLe = htole32(fileHandle);
 
@@ -1621,7 +1621,7 @@ TEST(FileAck, testBadEncodeResponse)
 
 TEST(FileAck, testBadEncodeRequest)
 {
-    uint8_t fileType = 0xFF;
+    uint8_t fileType = 0xff;
     uint32_t fileHandle = 0;
     uint8_t fileStatus = 0;
 
@@ -1726,13 +1726,13 @@ TEST(FileAckWithMetadata, testGoodEncodeRequest)
                sizeof(pldm_msg_hdr) + PLDM_FILE_ACK_WITH_META_DATA_REQ_BYTES>
         requestMsg{};
 
-    uint16_t fileType = 0xFFFF;
+    uint16_t fileType = 0xffff;
     uint32_t fileHandle = 0x12345678;
-    uint8_t fileStatus = 0xFF;
-    uint32_t fileMetaData1 = 0xFFFFFFFF;
-    uint32_t fileMetaData2 = 0xFFFFFFFF;
-    uint32_t fileMetaData3 = 0xFFFFFFFF;
-    uint32_t fileMetaData4 = 0xFFFFFFFF;
+    uint8_t fileStatus = 0xff;
+    uint32_t fileMetaData1 = 0xffffffff;
+    uint32_t fileMetaData2 = 0xffffffff;
+    uint32_t fileMetaData3 = 0xffffffff;
+    uint32_t fileMetaData4 = 0xffffffff;
 
     uint16_t fileTypeLe = htole16(fileType);
     uint32_t fileHandleLe = htole32(fileHandle);
@@ -1780,7 +1780,7 @@ TEST(FileAckWithMetadata, testGoodEncodeRequest)
 
 TEST(FileAckWithMetadata, testBadEncodeRequest)
 {
-    uint8_t fileType = 0xFF;
+    uint8_t fileType = 0xff;
     uint32_t fileHandle = 0;
     uint8_t fileStatus = 0;
     uint32_t fileMetaData1 = 0;
@@ -1807,9 +1807,9 @@ TEST(FileAckWithMetadata, testGoodDecodeRequest)
     auto request = reinterpret_cast<pldm_file_ack_with_meta_data_req*>(
         requestPtr->payload);
 
-    uint16_t fileType = 0xFFFF;
+    uint16_t fileType = 0xffff;
     uint32_t fileHandle = 0x12345678;
-    uint8_t fileStatus = 0xFF;
+    uint8_t fileStatus = 0xff;
     uint32_t fileMetaData1 = 0x12345678;
     uint32_t fileMetaData2 = 0x87654321;
     uint32_t fileMetaData3 = 0x22121117;
@@ -1823,7 +1823,7 @@ TEST(FileAckWithMetadata, testGoodDecodeRequest)
     request->file_meta_data_3 = htole32(fileMetaData3);
     request->file_meta_data_4 = htole32(fileMetaData4);
 
-    uint16_t retFileType = 0xFFFF;
+    uint16_t retFileType = 0xffff;
     uint32_t retFileHandle = 0;
     uint8_t retFileStatus = 0;
     uint32_t retFileMetaData1 = 0;
@@ -1970,13 +1970,13 @@ TEST(NewFileAvailableWithMetaData, testGoodEncodeRequest)
                             PLDM_NEW_FILE_AVAILABLE_WITH_META_DATA_REQ_BYTES>
         requestMsg{};
 
-    uint16_t fileType = 0xFFFF;
+    uint16_t fileType = 0xffff;
     uint32_t fileHandle = 0x12345678;
     uint32_t length = 0x13245768;
-    uint64_t fileMetaData1 = 0xFFFFFFFF;
-    uint32_t fileMetaData2 = 0xFFFFFFFF;
-    uint32_t fileMetaData3 = 0xFFFFFFFF;
-    uint32_t fileMetaData4 = 0xFFFFFFFF;
+    uint64_t fileMetaData1 = 0xffffffff;
+    uint32_t fileMetaData2 = 0xffffffff;
+    uint32_t fileMetaData3 = 0xffffffff;
+    uint32_t fileMetaData4 = 0xffffffff;
 
     uint16_t fileTypeLe = htole16(fileType);
     uint32_t fileHandleLe = htole32(fileHandle);
@@ -2027,7 +2027,7 @@ TEST(NewFileAvailableWithMetaData, testGoodEncodeRequest)
 
 TEST(NewFileAvailableWithMetaData, testBadEncodeRequest)
 {
-    uint8_t fileType = 0xFF;
+    uint8_t fileType = 0xff;
     uint32_t fileHandle = 0;
     uint32_t length = 0;
     uint32_t fileMetaData1 = 0;
@@ -2055,7 +2055,7 @@ TEST(NewFileAvailableWithMetaData, testGoodDecodeRequest)
         reinterpret_cast<pldm_new_file_with_metadata_req*>(requestPtr->payload);
 
     // Random value for fileHandle and length
-    uint16_t fileType = 0xFFFF;
+    uint16_t fileType = 0xffff;
     uint32_t fileHandle = 0x12345678;
     uint64_t length = 0x13245768;
     uint32_t fileMetaData1 = 0x12345678;
@@ -2071,7 +2071,7 @@ TEST(NewFileAvailableWithMetaData, testGoodDecodeRequest)
     request->file_meta_data_3 = htole32(fileMetaData3);
     request->file_meta_data_4 = htole32(fileMetaData4);
 
-    uint16_t retFileType = 0xFFFF;
+    uint16_t retFileType = 0xffff;
     uint32_t retFileHandle = 0;
     uint64_t retLength = 0;
     uint32_t retFileMetaData1 = 0;
