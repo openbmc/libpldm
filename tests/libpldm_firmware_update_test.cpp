@@ -1188,15 +1188,15 @@ TEST(GetFirmwareParameters, errorPathdecodeResponse)
 TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
 {
     // Random value for component classification
-    constexpr uint16_t compClassification = 0x0A0B;
+    constexpr uint16_t compClassification = 0x0a0b;
     // Random value for component classification
-    constexpr uint16_t compIdentifier = 0x0C0D;
+    constexpr uint16_t compIdentifier = 0x0c0d;
     // Random value for component classification
-    constexpr uint32_t timestamp = 0X12345678;
+    constexpr uint32_t timestamp = 0x12345678;
     // Random value for component activation methods
-    constexpr uint16_t compActivationMethods = 0xBBDD;
+    constexpr uint16_t compActivationMethods = 0xbbdd;
     // Random value for capabilities during update
-    constexpr uint32_t capabilitiesDuringUpdate = 0xBADBEEFE;
+    constexpr uint32_t capabilitiesDuringUpdate = 0xbadbeefe;
 
     // ActiveCompImageSetVerStrLen is not fixed here taking it as 8
     constexpr uint8_t activeCompVerStrLen = 8;
@@ -1212,27 +1212,27 @@ TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
 
     inEntry->comp_classification = htole16(compClassification);
     inEntry->comp_identifier = htole16(compIdentifier);
-    inEntry->comp_classification_index = 0x0F;
+    inEntry->comp_classification_index = 0x0f;
     inEntry->active_comp_comparison_stamp = htole32(timestamp);
     inEntry->active_comp_ver_str_type = 1;
     inEntry->active_comp_ver_str_len = activeCompVerStrLen;
     std::fill_n(inEntry->active_comp_release_date,
-                sizeof(inEntry->active_comp_release_date), 0xFF);
+                sizeof(inEntry->active_comp_release_date), 0xff);
     inEntry->pending_comp_comparison_stamp = htole32(timestamp);
     inEntry->pending_comp_ver_str_type = 1;
     inEntry->pending_comp_ver_str_len = pendingCompVerStrLen;
     std::fill_n(inEntry->pending_comp_release_date,
-                sizeof(inEntry->pending_comp_release_date), 0xFF);
+                sizeof(inEntry->pending_comp_release_date), 0xff);
     inEntry->comp_activation_methods.value = htole16(compActivationMethods);
     inEntry->capabilities_during_update.value =
         htole32(capabilitiesDuringUpdate);
     constexpr auto activeCompVerStrPos =
         sizeof(struct pldm_component_parameter_entry);
-    std::fill_n(entry.data() + activeCompVerStrPos, activeCompVerStrLen, 0xAA);
+    std::fill_n(entry.data() + activeCompVerStrPos, activeCompVerStrLen, 0xaa);
     constexpr auto pendingCompVerStrPos =
         activeCompVerStrPos + activeCompVerStrLen;
     std::fill_n(entry.data() + pendingCompVerStrPos, pendingCompVerStrLen,
-                0xBB);
+                0xbb);
 
     struct pldm_component_parameter_entry outEntry;
     struct variable_field outActiveCompVerStr;
@@ -1368,7 +1368,7 @@ TEST(RequestUpdate, errorPathEncodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     compImgSetVerStrLen = static_cast<uint8_t>(compImgSetVerStr.size());
 
-    compImgSetVerStrInfo.length = 0xFFFF;
+    compImgSetVerStrInfo.length = 0xffff;
     rc = encode_request_update_req(
         instanceId, maxTransferSize, numOfComp, maxOutstandingTransferReq,
         pkgDataLen, PLDM_STR_TYPE_ASCII, compImgSetVerStrLen,
