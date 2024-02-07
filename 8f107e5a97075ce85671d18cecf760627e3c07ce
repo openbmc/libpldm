@@ -285,6 +285,30 @@
       },
       "revId": "8f107e5a97075ce85671d18cecf760627e3c07ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a428f377_76c9eed0",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-07T00:45:56Z",
+      "side": 1,
+      "message": "Okay, thanks for clarifying.",
+      "parentUuid": "5447df2b_f6feda97",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 43
+      },
+      "revId": "8f107e5a97075ce85671d18cecf760627e3c07ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
