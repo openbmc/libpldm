@@ -50,13 +50,13 @@ TEST(GetFruRecordTableMetadata, testGoodDecodeResponse)
     response->completion_code = PLDM_SUCCESS;
     response->fru_data_major_version = 0x12;
     response->fru_data_minor_version = 0x21;
-    response->fru_table_maximum_size = htole32(0x1234ABCD);
+    response->fru_table_maximum_size = htole32(0x1234abcd);
     response->fru_table_length = htole32(0x56781234);
-    response->total_record_set_identifiers = htole16(0x34EF);
-    response->total_table_records = htole16(0xEEEF);
-    response->checksum = htole32(0x6543FA71);
+    response->total_record_set_identifiers = htole16(0x34ef);
+    response->total_table_records = htole16(0xeeef);
+    response->checksum = htole32(0x6543fa71);
 
-    uint8_t completion_code = 0xFF;
+    uint8_t completion_code = 0xff;
     uint8_t fru_data_major_version = 0x00;
     uint8_t fru_data_minor_version = 0x00;
     uint32_t fru_table_maximum_size = htole32(0x00000000);
@@ -73,11 +73,11 @@ TEST(GetFruRecordTableMetadata, testGoodDecodeResponse)
     ASSERT_EQ(completion_code, PLDM_SUCCESS);
     ASSERT_EQ(fru_data_major_version, 0x12u);
     ASSERT_EQ(fru_data_minor_version, 0x21u);
-    ASSERT_EQ(fru_table_maximum_size, 0x1234ABCDu);
+    ASSERT_EQ(fru_table_maximum_size, 0x1234abcdu);
     ASSERT_EQ(fru_table_length, 0x56781234u);
-    ASSERT_EQ(total_record_set_identifiers, 0x34EFu);
-    ASSERT_EQ(total_table_records, 0xEEEFu);
-    ASSERT_EQ(checksum, 0x6543FA71u);
+    ASSERT_EQ(total_record_set_identifiers, 0x34efu);
+    ASSERT_EQ(total_table_records, 0xeeefu);
+    ASSERT_EQ(checksum, 0x6543fa71u);
 
     response->fru_data_major_version = 0x00;
     response->fru_data_minor_version = 0x00;
@@ -125,13 +125,13 @@ TEST(GetFruRecordTableMetadata, testBadDecodeResponse)
     response->completion_code = PLDM_SUCCESS;
     response->fru_data_major_version = 0x12;
     response->fru_data_minor_version = 0x21;
-    response->fru_table_maximum_size = htole32(0x1234ABCD);
+    response->fru_table_maximum_size = htole32(0x1234abcd);
     response->fru_table_length = htole32(0x56781234);
-    response->total_record_set_identifiers = htole16(0x34EF);
-    response->total_table_records = htole16(0xEEEF);
-    response->checksum = htole32(0x6543FA71);
+    response->total_record_set_identifiers = htole16(0x34ef);
+    response->total_table_records = htole16(0xeeef);
+    response->checksum = htole32(0x6543fa71);
 
-    uint8_t completion_code = 0xFF;
+    uint8_t completion_code = 0xff;
     uint8_t fru_data_major_version = 0x00;
     uint8_t fru_data_minor_version = 0x00;
     uint32_t fru_table_maximum_size = htole32(0x00000000);
@@ -206,11 +206,11 @@ TEST(GetFruRecordTableMetadata, testGoodEncodeResponse)
     uint8_t completion_code = PLDM_SUCCESS;
     uint8_t fru_data_major_version = 0x12;
     uint8_t fru_data_minor_version = 0x21;
-    uint32_t fru_table_maximum_size = htole32(0x1234ABCD);
+    uint32_t fru_table_maximum_size = htole32(0x1234abcd);
     uint32_t fru_table_length = htole32(0x56781234);
-    uint16_t total_record_set_identifiers = htole16(0x34EF);
-    uint16_t total_table_records = htole16(0xEEEF);
-    uint32_t checksum = htole32(0x6543FA71);
+    uint16_t total_record_set_identifiers = htole16(0x34ef);
+    uint16_t total_table_records = htole16(0xeeef);
+    uint32_t checksum = htole32(0x6543fa71);
 
     auto rc = encode_get_fru_record_table_metadata_resp(
         0, completion_code, fru_data_major_version, fru_data_minor_version,
@@ -228,11 +228,11 @@ TEST(GetFruRecordTableMetadata, testGoodEncodeResponse)
     ASSERT_EQ(response->completion_code, PLDM_SUCCESS);
     ASSERT_EQ(response->fru_data_major_version, 0x12u);
     ASSERT_EQ(response->fru_data_minor_version, 0x21u);
-    ASSERT_EQ(response->fru_table_maximum_size, 0x1234ABCDu);
+    ASSERT_EQ(response->fru_table_maximum_size, 0x1234abcdu);
     ASSERT_EQ(response->fru_table_length, 0x56781234u);
-    ASSERT_EQ(response->total_record_set_identifiers, 0x34EFu);
-    ASSERT_EQ(response->total_table_records, 0xEEEFu);
-    ASSERT_EQ(response->checksum, 0x6543FA71u);
+    ASSERT_EQ(response->total_record_set_identifiers, 0x34efu);
+    ASSERT_EQ(response->total_table_records, 0xeeefu);
+    ASSERT_EQ(response->checksum, 0x6543fa71u);
 
     response->fru_data_major_version = 0;
     response->fru_data_major_version = 0x00;
@@ -273,11 +273,11 @@ TEST(GetFruRecordTableMetadata, testBadEncodeResponse)
     uint8_t completion_code = PLDM_SUCCESS;
     uint8_t fru_data_major_version = 0x12;
     uint8_t fru_data_minor_version = 0x21;
-    uint32_t fru_table_maximum_size = htole32(0x1234ABCD);
+    uint32_t fru_table_maximum_size = htole32(0x1234abcd);
     uint32_t fru_table_length = htole32(0x56781234);
-    uint16_t total_record_set_identifiers = htole16(0x34EF);
-    uint16_t total_table_records = htole16(0xEEEF);
-    uint32_t checksum = htole32(0x6543FA71);
+    uint16_t total_record_set_identifiers = htole16(0x34ef);
+    uint16_t total_table_records = htole16(0xeeef);
+    uint32_t checksum = htole32(0x6543fa71);
 
     auto rc = encode_get_fru_record_table_metadata_resp(
         0, completion_code, fru_data_major_version, fru_data_minor_version,

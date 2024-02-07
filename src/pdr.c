@@ -515,7 +515,7 @@ pldm_entity_node *pldm_entity_association_tree_add(
 	return pldm_entity_association_tree_add_entity(tree, entity,
 						       entity_instance_number,
 						       parent, association_type,
-						       false, true, 0xFFFF);
+						       false, true, 0xffff);
 }
 
 LIBPLDM_ABI_STABLE
@@ -529,7 +529,7 @@ pldm_entity_node *pldm_entity_association_tree_add_entity(
 		return NULL;
 	}
 
-	if (entity_instance_number != 0xFFFF && parent != NULL) {
+	if (entity_instance_number != 0xffff && parent != NULL) {
 		pldm_entity node;
 		node.entity_type = entity->entity_type;
 		node.entity_instance_num = entity_instance_number;
@@ -552,7 +552,7 @@ pldm_entity_node *pldm_entity_association_tree_add_entity(
 	node->parent.entity_container_id = 0;
 	node->entity.entity_type = entity->entity_type;
 	node->entity.entity_instance_num =
-		entity_instance_number != 0xFFFF ? entity_instance_number : 1;
+		entity_instance_number != 0xffff ? entity_instance_number : 1;
 	node->association_type = association_type;
 	node->remote_container_id = 0;
 	if (tree->root == NULL) {
@@ -578,7 +578,7 @@ pldm_entity_node *pldm_entity_association_tree_add_entity(
 			node->remote_container_id = entity->entity_container_id;
 		}
 		if (is_update_container_id) {
-			if (container_id != 0xFFFF) {
+			if (container_id != 0xffff) {
 				node->entity.entity_container_id = container_id;
 			} else {
 				node->entity.entity_container_id =
@@ -609,7 +609,7 @@ pldm_entity_node *pldm_entity_association_tree_add_entity(
 				return NULL;
 			}
 			node->entity.entity_instance_num =
-				entity_instance_number != 0xFFFF ?
+				entity_instance_number != 0xffff ?
 					entity_instance_number :
 					prev->entity.entity_instance_num + 1;
 		}

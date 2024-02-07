@@ -37,7 +37,7 @@ TEST(GetAlertStatus, testBadEncodeRequest)
 TEST(GetAlertStatus, testGoodDecodeResponse)
 {
     uint8_t completionCode = PLDM_SUCCESS;
-    uint32_t rack_entry = 0xFF000030;
+    uint32_t rack_entry = 0xff000030;
     uint32_t pri_cec_node = 0x00008030;
     std::array<uint8_t, hdrSize + PLDM_GET_ALERT_STATUS_RESP_BYTES>
         responseMsg{};
@@ -68,7 +68,7 @@ TEST(GetAlertStatus, testBadDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     uint8_t completionCode = PLDM_SUCCESS;
-    uint32_t rack_entry = 0xFF000030;
+    uint32_t rack_entry = 0xff000030;
     uint32_t pri_cec_node = 0x00008030;
     std::array<uint8_t, hdrSize + PLDM_GET_ALERT_STATUS_RESP_BYTES>
         responseMsg{};
@@ -93,7 +93,7 @@ TEST(GetAlertStatus, testBadDecodeResponse)
 TEST(GetAlertStatus, testGoodEncodeResponse)
 {
     uint8_t completionCode = 0;
-    uint32_t rack_entry = 0xFF000030;
+    uint32_t rack_entry = 0xff000030;
     uint32_t pri_cec_node = 0x00008030;
 
     std::vector<uint8_t> responseMsg(hdrSize +
@@ -115,7 +115,7 @@ TEST(GetAlertStatus, testGoodEncodeResponse)
 
 TEST(GetAlertStatus, testBadEncodeResponse)
 {
-    uint32_t rack_entry = 0xFF000030;
+    uint32_t rack_entry = 0xff000030;
     uint32_t pri_cec_node = 0x00008030;
 
     std::vector<uint8_t> responseMsg(hdrSize +

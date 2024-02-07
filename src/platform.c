@@ -956,7 +956,7 @@ int decode_poll_for_platform_event_message_req(
 	}
 
 	if (!(((*transfer_operation_flag == PLDM_GET_NEXTPART) &&
-	       (*event_id_to_acknowledge == 0xFFFF)) ||
+	       (*event_id_to_acknowledge == 0xffff)) ||
 	      ((*transfer_operation_flag == PLDM_GET_FIRSTPART) &&
 	       (*event_id_to_acknowledge == 0x000)) ||
 	      (*transfer_operation_flag == PLDM_ACKNOWLEDGEMENT_ONLY))) {
@@ -1090,7 +1090,7 @@ int encode_platform_event_message_req(
 	}
 
 	if (event_class > PLDM_HEARTBEAT_TIMER_ELAPSED_EVENT &&
-	    !(event_class >= 0xF0 && event_class <= 0xFE)) {
+	    !(event_class >= 0xf0 && event_class <= 0xfe)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
