@@ -197,7 +197,7 @@ TEST(UnpackPLDMMessage, ResponseMessageGoodPath)
 TEST(GetPLDMCommands, testEncodeRequest)
 {
     uint8_t pldmType = 0x05;
-    ver32_t version{0xFF, 0xFF, 0xFF, 0xFF};
+    ver32_t version{0xff, 0xff, 0xff, 0xff};
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_COMMANDS_REQ_BYTES>
         requestMsg{};
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
@@ -212,9 +212,9 @@ TEST(GetPLDMCommands, testEncodeRequest)
 TEST(GetPLDMCommands, testDecodeRequest)
 {
     uint8_t pldmType = 0x05;
-    ver32_t version{0xFF, 0xFF, 0xFF, 0xFF};
+    ver32_t version{0xff, 0xff, 0xff, 0xff};
     uint8_t pldmTypeOut{};
-    ver32_t versionOut{0xFF, 0xFF, 0xFF, 0xFF};
+    ver32_t versionOut{0xff, 0xff, 0xff, 0xff};
     std::array<uint8_t, hdrSize + PLDM_GET_COMMANDS_REQ_BYTES> requestMsg{};
 
     memcpy(requestMsg.data() + hdrSize, &pldmType, sizeof(pldmType));
@@ -400,7 +400,7 @@ TEST(GetPLDMVersion, testEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_VERSION_RESP_BYTES>
         responseMsg{};
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
-    ver32_t version = {0xFF, 0xFF, 0xFF, 0xFF};
+    ver32_t version = {0xff, 0xff, 0xff, 0xff};
 
     auto rc = encode_get_version_resp(0, PLDM_SUCCESS, 0, PLDM_START_AND_END,
                                       &version, sizeof(ver32_t), response);
@@ -454,7 +454,7 @@ TEST(GetPLDMVersion, testDecodeResponse)
     uint8_t flag = PLDM_START_AND_END;
     uint8_t retFlag = PLDM_START_AND_END;
     uint8_t completionCode = 0;
-    ver32_t version = {0xFF, 0xFF, 0xFF, 0xFF};
+    ver32_t version = {0xff, 0xff, 0xff, 0xff};
     ver32_t versionOut;
     uint8_t completion_code;
 
