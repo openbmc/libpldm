@@ -52,6 +52,24 @@
       "parentUuid": "a7932c3b_d2ecd478",
       "revId": "5afbf07c6fd7415cc615d8023842aebfc6522ecd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e673042c_fb5c55fa",
+        "filename": "meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-02-08T04:15:42Z",
+      "side": 1,
+      "message": "do you mean meson.project_build_root() ? i think project_build_root would return the root projects(parents) build directory (if running in subproject mode).\nthat would be a problem if libdpldm is being consumed as a subproject right ? but i guess we can use either of them since we dropped libpldm support for subproject.",
+      "parentUuid": "b8c71941_586d1c98",
+      "revId": "5afbf07c6fd7415cc615d8023842aebfc6522ecd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
