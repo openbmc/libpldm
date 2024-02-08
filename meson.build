@@ -37,11 +37,11 @@ else
   conf.set('LIBPLDM_ABI_TESTING', '')
 endif
 
-config = configure_file(output: 'config.h',
+configure_file(output: 'config.h',
   configuration: conf
 )
 
-add_project_arguments('-include', '@0@'.format(config), language: 'c')
+add_project_arguments('-include', '@0@'.format(meson.current_build_dir() / 'config.h'), language: 'c')
 
 libpldm_include_dir = include_directories('include', is_system: true)
 
