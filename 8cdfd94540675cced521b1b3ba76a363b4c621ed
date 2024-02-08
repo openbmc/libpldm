@@ -16,6 +16,24 @@
       "message": "Can you please fix all values? The `x` in `0x` should be lower-case also.\n\n```\n$ git grep -F \u00270X\u0027\ninclude/libpldm/fru.h:  PLDM_GET_FRU_RECORD_TABLE_METADATA \u003d 0X01,\ninclude/libpldm/fru.h:  PLDM_GET_FRU_RECORD_TABLE \u003d 0X02,\ninclude/libpldm/fru.h:  PLDM_SET_FRU_RECORD_TABLE \u003d 0X03,\ninclude/libpldm/fru.h:  PLDM_GET_FRU_RECORD_BY_OPTION \u003d 0X04\ninclude/libpldm/fru.h:  PLDM_FRU_RECORD_TYPE_GENERAL \u003d 0X01,\ninclude/libpldm/fru.h:  PLDM_FRU_RECORD_TYPE_OEM \u003d 0XFE,\ninclude/libpldm/fru.h:  PLDM_FRU_ENCODING_UNSPECIFIED \u003d 0X00,\ninclude/libpldm/fru.h:  PLDM_FRU_ENCODING_ASCII \u003d 0X01,\ninclude/libpldm/fru.h:  PLDM_FRU_ENCODING_UTF8 \u003d 0X02,\ninclude/libpldm/fru.h:  PLDM_FRU_ENCODING_UTF16 \u003d 0X03,\ninclude/libpldm/fru.h:  PLDM_FRU_ENCODING_UTF16LE \u003d 0X04,\ninclude/libpldm/fru.h:  PLDM_FRU_ENCODING_UTF16BE \u003d 0X05,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_CHASSIS \u003d 0X01,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_MODEL \u003d 0X02,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_PN \u003d 0X03,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_SN \u003d 0X04,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_MANUFAC \u003d 0X05,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_MANUFAC_DATE \u003d 0X06,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_VENDOR \u003d 0X07,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_NAME \u003d 0X08,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_SKU \u003d 0X09,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_VERSION \u003d 0X0A,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_ASSET_TAG \u003d 0X0B,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_DESC \u003d 0X0C,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_EC_LVL \u003d 0X0D,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_OTHER \u003d 0X0E,\ninclude/libpldm/fru.h:  PLDM_FRU_FIELD_TYPE_IANA \u003d 0X0F,\ninclude/libpldm/oem/ibm/fru.h:  PLDM_OEM_FRU_FIELD_TYPE_IANA \u003d 0X01,\ninclude/libpldm/oem/ibm/fru.h:  PLDM_OEM_FRU_FIELD_TYPE_RT \u003d 0X02,\ninclude/libpldm/oem/ibm/fru.h:  PLDM_OEM_FRU_FIELD_TYPE_LOCATION_CODE \u003d 0XFE,\ntests/libpldm_firmware_update_test.cpp:    constexpr uint32_t timestamp \u003d 0X12345678;\n```",
       "revId": "8cdfd94540675cced521b1b3ba76a363b4c621ed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fec51a9b_6c84cca1",
+        "filename": "include/libpldm/oem/ibm/fru.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-02-08T05:31:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f89b7c0_a59a23a6",
+      "revId": "8cdfd94540675cced521b1b3ba76a363b4c621ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
