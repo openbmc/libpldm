@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7932c3b_d2ecd478",
+        "filename": "meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-08T00:28:44Z",
+      "side": 1,
+      "message": "I\u0027d prefer we leave the violation for the moment until we can upgrade to meson 1.4. `configure_file()` returns a `file` object, and in 1.4 we have the `full_path()` method on file objects:\n\nhttps://mesonbuild.com/Reference-manual_returned_file.html#filefull_path\n\nAs it stands what you\u0027ve proposed here relies meson implementation details, and I\u0027m not more enthused about that approach than I am the warning.",
+      "revId": "5afbf07c6fd7415cc615d8023842aebfc6522ecd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
