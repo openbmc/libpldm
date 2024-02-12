@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "020fa728_86ea3848",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-02-12T11:35:42Z",
+      "side": 1,
+      "message": "the title is too generic , and not capturing what the libpldm commit is doing, please fix it.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "88060a264e1f1c792b612882309bf98c920df1f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de298243_aedc13b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-02-12T11:35:42Z",
+      "side": 1,
+      "message": "can you explain what the use-case is at a high level. and why we need to introduce a new oem state set ? doesn\u0027t the spec capture this use case ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 1
+      },
+      "revId": "88060a264e1f1c792b612882309bf98c920df1f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af310c09_9a206fd5",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-02-12T11:35:42Z",
+      "side": 1,
+      "message": "needs to be sorted.",
+      "range": {
+        "startLine": 17,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 47
+      },
+      "revId": "88060a264e1f1c792b612882309bf98c920df1f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
