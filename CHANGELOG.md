@@ -24,6 +24,7 @@ Change categories:
 3. oem: ibm: Add chapdata file type support
 4. base: Added PLDM_SMBIOS & PLDM_RDE message types
 5. oem: meta: Add decode_oem_meta_file_io_req()
+6. state-set: Add all state set values to system power state enum as per DSP0249
 
 ### Changed
 
