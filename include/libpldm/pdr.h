@@ -452,6 +452,23 @@ int pldm_entity_association_pdr_add_check(pldm_entity_association_tree *tree,
 					  pldm_pdr *repo, bool is_remote,
 					  uint16_t terminus_handle);
 
+/** @brief Add a contained entity into an entity association PDR
+ *  @param[in] repo - opaque pointer to pldm PDR repo
+ *  @param[in] entity - the pldm entity to be added
+ *  @param[in] parent - the parent entity
+ *  @param[in] event_data_op - the event data operation that happens on the
+ *                             record
+ *  @param[in] is_remote - whether to add in the local or remote PDR
+ *
+ *  @param[in] bmc_record_handle - handle to be added to the pdr
+ *
+ *  @return the updated PDR record handle on success or -ENOMEM if an internal
+ *  memory allocation fails or 0 if the PDR record handle not updated.
+ */
+uint32_t pldm_entity_association_pdr_add_contained_entity(
+	pldm_pdr *repo, pldm_entity *entity, pldm_entity *parent,
+	enum event_data_op, bool is_remote, uint32_t bmc_record_handle);
+
 /** @brief Add entity association pdr from node, or return an error
  *
  *  @param[in] node - opaque pointer acting as a handle to an entity node
