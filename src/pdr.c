@@ -8,6 +8,13 @@
 #include <string.h>
 #include <errno.h>
 
+typedef struct pldm_pdr {
+	uint32_t record_count;
+	uint32_t size;
+	pldm_pdr_record *first;
+	pldm_pdr_record *last;
+} pldm_pdr;
+
 typedef struct pldm_pdr_record {
 	uint32_t record_handle;
 	uint32_t size;
@@ -16,13 +23,6 @@ typedef struct pldm_pdr_record {
 	bool is_remote;
 	uint16_t terminus_handle;
 } pldm_pdr_record;
-
-typedef struct pldm_pdr {
-	uint32_t record_count;
-	uint32_t size;
-	pldm_pdr_record *first;
-	pldm_pdr_record *last;
-} pldm_pdr;
 
 static inline uint32_t get_next_record_handle(const pldm_pdr *repo,
 					      const pldm_pdr_record *record)
@@ -1299,4 +1299,197 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 
 	*num_entities = l_num_entities;
 	*entities = l_entities;
+}
+
+LIBPLDM_ABI_TESTING
+uint32_t pldm_entity_association_pdr_add_contained_entity(
+	pldm_pdr *repo, pldm_entity *entity, pldm_entity *parent,
+	uint8_t *event_data_op, bool is_remote, uint32_t bmc_record_handle)
+{
+	uint32_t updated_hdl = 0;
+	bool pdr_added = false;
+	*event_data_op = PLDM_RECORDS_MODIFIED;
+	pldm_pdr_record *record = repo->first;
+	pldm_pdr_record *prev = repo->first;
+	pldm_pdr_record *new_record = malloc(sizeof(pldm_pdr_record));
+	if (!new_record) {
+		return -ENOMEM;
+	}
+	new_record->data = NULL;
+	uint8_t *new_data = NULL;
+	bool found = false;
+	while (record != NULL) {
+		pldm_pdr_record *next = record->next;
+		struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)record->data;
+		if ((record->is_remote == is_remote) &&
+		    hdr->type == PLDM_PDR_ENTITY_ASSOCIATION) {
+			/*PDR entity association structure contains record data
+			 * and pdr header and its size should exceed the total
+			 * size of pdr record data and pdr header*/
+			struct pldm_pdr_entity_association *pdr =
+				(struct pldm_pdr_entity_association
+					 *)((uint8_t *)record->data +
+					    sizeof(struct pldm_pdr_hdr));
+			if (pdr->container.entity_type == parent->entity_type &&
+			    pdr->container.entity_instance_num ==
+				    parent->entity_instance_num &&
+			    pdr->container.entity_container_id ==
+				    parent->entity_container_id) {
+				found = true;
+				new_record->data = malloc(record->size +
+							  sizeof(pldm_entity));
+				if (!(new_record->data)) {
+					return -ENOMEM;
+				}
+				new_record->next = NULL;
+				new_data = new_record->data;
+				updated_hdl = record->record_handle;
+				new_record->record_handle =
+					htole32(record->record_handle);
+				new_record->size = htole32(record->size +
+							   sizeof(pldm_entity));
+				new_record->is_remote = record->is_remote;
+				uint8_t *new_start = new_data;
+				struct pldm_pdr_hdr *new_hdr =
+					(struct pldm_pdr_hdr *)new_data;
+				new_hdr->version = hdr->version;
+				new_hdr->record_handle =
+					htole32(hdr->record_handle);
+				new_hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
+				new_hdr->record_change_num =
+					htole16(hdr->record_change_num);
+				new_hdr->length = htole16(hdr->length +
+							  sizeof(pldm_entity));
+				new_start += sizeof(struct pldm_pdr_hdr);
+				struct pldm_pdr_entity_association *new_pdr =
+					(struct pldm_pdr_entity_association *)
+						new_start;
+				struct pldm_entity *child =
+					(struct pldm_entity
+						 *)(&pdr->children[0]);
+				new_pdr->container_id = pdr->container_id;
+				new_pdr->association_type =
+					pdr->association_type;
+				new_pdr->container.entity_type =
+					pdr->container.entity_type;
+				new_pdr->container.entity_instance_num =
+					pdr->container.entity_instance_num;
+				new_pdr->container.entity_container_id =
+					pdr->container.entity_container_id;
+				new_pdr->num_children = pdr->num_children + 1;
+				struct pldm_entity *new_child =
+					(struct pldm_entity
+						 *)(&new_pdr->children[0]);
+				for (int i = 0; i < pdr->num_children; ++i) {
+					new_child->entity_type =
+						child->entity_type;
+					new_child->entity_instance_num =
+						child->entity_instance_num;
+					new_child->entity_container_id =
+						child->entity_container_id;
+					new_child++;
+					child++;
+				}
+				new_child->entity_type = entity->entity_type;
+				new_child->entity_instance_num =
+					entity->entity_instance_num;
+				new_child->entity_container_id =
+					entity->entity_container_id;
+				pdr_added = true;
+				if (repo->first == record) {
+					repo->first = new_record;
+					new_record->next = record->next;
+				} else {
+					prev->next = new_record;
+					new_record->next = record->next;
+				}
+				if (repo->last == record) {
+					repo->last = new_record;
+				}
+				repo->size -= record->size;
+				repo->size += new_record->size;
+				if (record->data) {
+					free(record->data);
+				}
+				free(record);
+				break;
+			}
+		}
+		prev = record;
+		record = next;
+	}
+	if (!found && !is_remote) {
+		uint8_t num_children = 1;
+		pdr_added = false;
+		*event_data_op = PLDM_RECORDS_ADDED;
+		prev = repo->first;
+		pldm_pdr_record *curr = repo->first;
+		while (curr != NULL) {
+			if (curr->record_handle == bmc_record_handle) {
+				pdr_added = true;
+				break;
+			}
+			prev = curr;
+			curr = curr->next;
+		}
+		if (pdr_added) {
+			uint16_t new_pdr_size =
+				sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t) +
+				sizeof(uint8_t) + sizeof(pldm_entity) +
+				sizeof(uint8_t) +
+				num_children * sizeof(pldm_entity);
+			new_record->data = malloc(new_pdr_size);
+			if (!new_record) {
+				return -ENOMEM;
+			}
+			new_record->record_handle = bmc_record_handle + 1;
+			new_record->size = new_pdr_size;
+			new_record->is_remote = false;
+			new_record->next = curr->next;
+			curr->next = new_record;
+			if (repo->last == prev) {
+				repo->last = new_record;
+			}
+			repo->size += new_record->size;
+			++repo->record_count;
+			updated_hdl = new_record->record_handle;
+			struct pldm_pdr_hdr *new_hdr =
+				(struct pldm_pdr_hdr *)new_record->data;
+			new_hdr->version = 1;
+			new_hdr->record_handle = new_record->record_handle;
+			new_hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
+			new_hdr->record_change_num = 0;
+			new_hdr->length = htole16(new_pdr_size -
+						  sizeof(struct pldm_pdr_hdr));
+			struct pldm_pdr_entity_association *new_pdr =
+				(struct pldm_pdr_entity_association
+					 *)((uint8_t *)new_record->data +
+					    sizeof(struct pldm_pdr_hdr));
+			new_pdr->container.entity_type = parent->entity_type;
+			new_pdr->container.entity_instance_num =
+				parent->entity_instance_num;
+			new_pdr->container.entity_container_id =
+				parent->entity_container_id;
+			new_pdr->container_id = entity->entity_container_id;
+			new_pdr->association_type =
+				PLDM_ENTITY_ASSOCIAION_PHYSICAL;
+			new_pdr->num_children = 1;
+			struct pldm_entity *new_child =
+				(struct pldm_entity *)(&new_pdr->children[0]);
+			new_child->entity_type = entity->entity_type;
+			new_child->entity_instance_num =
+				entity->entity_instance_num;
+			new_child->entity_container_id =
+				entity->entity_container_id;
+		}
+	}
+	if (!pdr_added) {
+		if (new_record->data) {
+			free(new_record->data);
+		}
+		if (new_record) {
+			free(new_record);
+		}
+	}
+	return updated_hdl;
 }
