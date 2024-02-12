@@ -1929,3 +1929,152 @@ TEST(EntityAssociationPDR, testNodeAddCheck)
     pldm_pdr_destroy(repo);
     pldm_entity_association_tree_destroy(tree);
 }
+
+TEST(EntityAssociationPDR, testAddContainedEntityRemotePDR)
+{
+    // pldm_entity entities[5]{};
+    pldm_entity* entities = (pldm_entity*)malloc(sizeof(pldm_entity) * 5);
+    entities[0].entity_type = 1;
+    entities[0].entity_instance_num = 1;
+    entities[0].entity_container_id = 0;
+
+    entities[1].entity_type = 2;
+    entities[1].entity_instance_num = 1;
+    entities[1].entity_container_id = 1;
+
+    entities[2].entity_type = 3;
+    entities[2].entity_instance_num = 1;
+    entities[2].entity_container_id = 1;
+
+    entities[3].entity_type = 4;
+    entities[3].entity_instance_num = 1;
+    entities[3].entity_container_id = 1;
+
+    entities[4].entity_type = 5;
+    entities[4].entity_instance_num = 1;
+    entities[4].entity_container_id = 1;
+
+    auto tree = pldm_entity_association_tree_init();
+    auto l1 = pldm_entity_association_tree_add(
+        tree, &entities[0], 0xffff, nullptr, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l1, nullptr);
+    auto l2a = pldm_entity_association_tree_add(
+        tree, &entities[1], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l2a, nullptr);
+    auto l2b = pldm_entity_association_tree_add(
+        tree, &entities[2], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l2b, nullptr);
+    auto l2c = pldm_entity_association_tree_add(
+        tree, &entities[3], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l2c, nullptr);
+    auto l3a = pldm_entity_association_tree_add(
+        tree, &entities[4], 0xffff, l2a, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l3a, nullptr);
+
+    auto repo = pldm_pdr_init();
+
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 4, false, 1, 0),
+              0);
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 1, false, 1, 2),
+              0);
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 0, false, 1, 23),
+              0);
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 0, false, 1, 34),
+              0);
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l2a, repo, &entities, 0, false, 1, 3),
+              0);
+
+    pldm_entity entity1[1];
+    entity1[0].entity_type = 2;
+
+    EXPECT_EQ(pldm_entity_association_pdr_add_contained_entity_to_remote_pdr(
+                  repo, &entity1[0], 2),
+              0);
+
+    free(entities);
+    pldm_pdr_destroy(repo);
+    pldm_entity_association_tree_destroy(tree);
+}
+
+TEST(EntityAssociationPDR, testAddContainedEntityNew)
+{
+    // pldm_entity entities[5]{};
+    pldm_entity* entities = (pldm_entity*)malloc(sizeof(pldm_entity) * 5);
+    entities[0].entity_type = 1;
+    entities[0].entity_instance_num = 1;
+    entities[0].entity_container_id = 0;
+
+    entities[1].entity_type = 2;
+    entities[1].entity_instance_num = 1;
+    entities[1].entity_container_id = 1;
+
+    entities[2].entity_type = 3;
+    entities[2].entity_instance_num = 1;
+    entities[2].entity_container_id = 1;
+
+    entities[3].entity_type = 4;
+    entities[3].entity_instance_num = 1;
+    entities[3].entity_container_id = 1;
+
+    entities[4].entity_type = 5;
+    entities[4].entity_instance_num = 1;
+    entities[4].entity_container_id = 1;
+
+    auto tree = pldm_entity_association_tree_init();
+    auto l1 = pldm_entity_association_tree_add(
+        tree, &entities[0], 0xffff, nullptr, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l1, nullptr);
+    auto l2a = pldm_entity_association_tree_add(
+        tree, &entities[1], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l2a, nullptr);
+    auto l2b = pldm_entity_association_tree_add(
+        tree, &entities[2], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l2b, nullptr);
+    auto l2c = pldm_entity_association_tree_add(
+        tree, &entities[3], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l2c, nullptr);
+    auto l3a = pldm_entity_association_tree_add(
+        tree, &entities[4], 0xffff, l2a, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    EXPECT_NE(l3a, nullptr);
+
+    auto repo = pldm_pdr_init();
+
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 4, false, 1, 0),
+              0);
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 1, false, 1, 2),
+              0);
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 0, false, 1, 23),
+              0);
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l1, repo, &entities, 0, false, 1, 34),
+              0);
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  l2a, repo, &entities, 0, false, 1, 3),
+              0);
+
+    uint32_t updated_record_handle = 0;
+
+    pldm_entity entity2[1]{};
+    entity2[0].entity_type = 4;
+
+    pldm_entity entity3[1]{};
+    entity3[0].entity_type = 4;
+
+    EXPECT_EQ(pldm_entity_association_pdr_create_new(
+                  repo, 34, &entity2[0], &entity3[0], &updated_record_handle),
+              0);
+
+    EXPECT_EQ(updated_record_handle, 35);
+
+    free(entities);
+    pldm_pdr_destroy(repo);
+    pldm_entity_association_tree_destroy(tree);
+}
