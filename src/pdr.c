@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "msgbuf.h"
 #include <libpldm/pdr.h>
 #include <libpldm/platform.h>
 
@@ -23,6 +24,20 @@ typedef struct pldm_pdr {
 	pldm_pdr_record *first;
 	pldm_pdr_record *last;
 } pldm_pdr;
+
+static int pldm_platform_pdr_hdr_validate(struct pldm_pdr_hdr *ctx,
+					  size_t lower, size_t upper)
+{
+	if (ctx->length + sizeof(*ctx) < lower) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if (ctx->length > upper) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	return PLDM_SUCCESS;
+}
 
 static inline uint32_t get_next_record_handle(const pldm_pdr *repo,
 					      const pldm_pdr_record *record)
@@ -1299,4 +1314,260 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 
 	*num_entities = l_num_entities;
 	*entities = l_entities;
+}
+
+/* API to validate of the record data in entity association PDR matches the parent
+ * entity
+ */
+static bool
+pldm_entity_association_pdr_data_matches_parent_entity(pldm_pdr_record *record,
+						       pldm_entity *parent)
+{
+	bool match = false;
+	struct pldm_pdr_entity_association *pdr =
+		(struct pldm_pdr_entity_association
+			 *)((uint8_t *)record->data +
+			    sizeof(struct pldm_pdr_hdr));
+	if (pdr->container.entity_type == parent->entity_type &&
+	    pdr->container.entity_instance_num == parent->entity_instance_num &&
+	    pdr->container.entity_container_id == parent->entity_container_id) {
+		match = true;
+	}
+	return match;
+}
+
+/* API to populate the fields of a new header created for the new PDR added into
+ * an existing entity association PDR
+ */
+static void pldm_entity_association_pdr_build_new_pdr_hdr(
+	uint8_t version, uint16_t record_change_num, uint16_t length,
+	uint32_t record_handle, struct pldm_pdr_hdr *hdr)
+{
+	hdr->version = version;
+	hdr->record_handle = record_handle;
+	hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
+	hdr->record_change_num = record_change_num;
+	hdr->length = length;
+}
+
+/* API to add a contained entity as a remote PDR to an existing entity association PDR.
+ * Remote PDRs are PDRs added to the host entity and not to the tree directly which means
+ * remote PDRs have a parent PDR in the entity association tree to which they are linked.
+ */
+static uint32_t pldm_entity_association_pdr_add_contained_entity_to_remote_pdr(
+	pldm_pdr *repo, pldm_pdr_record *prev, pldm_pdr_record *record,
+	pldm_entity *entity)
+{
+	assert(repo != NULL || prev != NULL || record != NULL ||
+	       entity != NULL);
+
+	uint32_t updated_record_handle = record->record_handle;
+	uint8_t *new_data = NULL;
+
+	pldm_pdr_record *new_record = malloc(sizeof(pldm_pdr_record));
+	assert(new_record != NULL);
+
+	new_record->data = malloc(record->size + sizeof(pldm_entity));
+	assert((new_record->data) != NULL);
+
+	new_record->next = NULL;
+	new_data = new_record->data;
+	new_record->record_handle = htole32(record->record_handle);
+	new_record->size = htole32(record->size + sizeof(pldm_entity));
+	new_record->is_remote = record->is_remote;
+
+	// Initialize new PDR record with data from original PDR record.
+	// Start with adding the header of original PDR
+	struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)record->data;
+	int rc = pldm_platform_pdr_hdr_validate(
+		hdr,
+		(sizeof(struct pldm_pdr_hdr) +
+		 sizeof(struct pldm_pdr_entity_association)),
+		(record->size + sizeof(struct pldm_pdr_hdr)));
+	assert(rc >= 0);
+	struct pldm_pdr_hdr *new_hdr = (struct pldm_pdr_hdr *)new_data;
+	pldm_entity_association_pdr_build_new_pdr_hdr(
+		hdr->version, htole16(hdr->record_change_num),
+		htole16(hdr->length + sizeof(pldm_entity)),
+		htole32(hdr->record_handle), new_hdr);
+	uint8_t *new_start = new_data;
+	new_start += sizeof(struct pldm_pdr_hdr);
+	struct pldm_pdr_entity_association *new_pdr =
+		(struct pldm_pdr_entity_association *)new_start;
+
+	//Add original PDR data to new PDR initalized
+	struct pldm_pdr_entity_association *pdr =
+		(struct pldm_pdr_entity_association
+			 *)((uint8_t *)record->data +
+			    sizeof(struct pldm_pdr_hdr));
+	assert(pdr != NULL);
+	struct pldm_entity *child = (struct pldm_entity *)(&pdr->children[0]);
+	new_pdr->container_id = pdr->container_id;
+	new_pdr->association_type = pdr->association_type;
+	new_pdr->container.entity_type = pdr->container.entity_type;
+	new_pdr->container.entity_instance_num =
+		pdr->container.entity_instance_num;
+	new_pdr->container.entity_container_id =
+		pdr->container.entity_container_id;
+	//Add all children of original PDR to new PDR
+	new_pdr->num_children = pdr->num_children + 1;
+	struct pldm_entity *new_child =
+		(struct pldm_entity *)(&new_pdr->children[0]);
+	for (int i = 0; i < pdr->num_children; ++i) {
+		new_child->entity_type = child->entity_type;
+		new_child->entity_instance_num = child->entity_instance_num;
+		new_child->entity_container_id = child->entity_container_id;
+		new_child++;
+		child++;
+	}
+
+	// Add new contained entity as a child of new PDR
+	new_child->entity_type = entity->entity_type;
+	new_child->entity_instance_num = entity->entity_instance_num;
+	new_child->entity_container_id = entity->entity_container_id;
+
+	if (repo->first == record) {
+		repo->first = new_record;
+		new_record->next = record->next;
+	} else {
+		prev->next = new_record;
+		new_record->next = record->next;
+	}
+	if (repo->last == record) {
+		repo->last = new_record;
+	}
+	repo->size -= record->size;
+	repo->size += new_record->size;
+
+	return updated_record_handle;
+}
+
+/* API to add a contained entity and its parent to an existing entity association PDR
+ */
+static uint32_t
+pldm_entity_association_pdr_create_new(pldm_pdr *repo,
+				       uint32_t pdr_record_handle,
+				       pldm_entity *parent, pldm_entity *entity)
+{
+	assert(repo != NULL || parent != NULL || entity != NULL);
+
+	uint8_t num_children = 1;
+	uint32_t updated_record_handle = 0;
+	bool pdr_added = false;
+
+	pldm_pdr_record *prev = repo->first;
+	pldm_pdr_record *curr = repo->first;
+	while (curr != NULL) {
+		if (curr->record_handle == pdr_record_handle) {
+			pdr_added = true;
+			break;
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+	if (pdr_added) {
+		uint16_t new_pdr_size = sizeof(struct pldm_pdr_hdr) +
+					sizeof(uint16_t) + sizeof(uint8_t) +
+					sizeof(pldm_entity) + sizeof(uint8_t) +
+					num_children * sizeof(pldm_entity);
+		pldm_pdr_record *new_record = malloc(sizeof(pldm_pdr_record));
+		assert(new_record != NULL);
+
+		new_record->data = malloc(new_pdr_size);
+		assert((new_record->data) != NULL);
+
+		// Initialise new PDR to be added with the header, size and handle.
+		// Set the position of new PDR
+		new_record->record_handle = pdr_record_handle + 1;
+		new_record->size = new_pdr_size;
+		new_record->is_remote = false;
+		new_record->next = curr->next;
+		curr->next = new_record;
+		if (repo->last == prev) {
+			repo->last = new_record;
+		}
+		repo->size += new_record->size;
+		++repo->record_count;
+		updated_record_handle = new_record->record_handle;
+		struct pldm_pdr_hdr *new_hdr =
+			(struct pldm_pdr_hdr *)new_record->data;
+		pldm_entity_association_pdr_build_new_pdr_hdr(
+			1, 0,
+			htole16(new_pdr_size + sizeof(struct pldm_pdr_hdr)),
+			new_record->record_handle, new_hdr);
+		struct pldm_pdr_entity_association *new_pdr =
+			(struct pldm_pdr_entity_association
+				 *)((uint8_t *)new_record->data +
+				    sizeof(struct pldm_pdr_hdr));
+
+		// Data for new PDR is obtained from parent PDR and new contained entity
+		// is added as the child
+		new_pdr->container.entity_type = parent->entity_type;
+		new_pdr->container.entity_instance_num =
+			parent->entity_instance_num;
+		new_pdr->container.entity_container_id =
+			parent->entity_container_id;
+		new_pdr->container_id = entity->entity_container_id;
+		new_pdr->association_type = PLDM_ENTITY_ASSOCIAION_PHYSICAL;
+		new_pdr->num_children = 1;
+		struct pldm_entity *new_child =
+			(struct pldm_entity *)(&new_pdr->children[0]);
+		new_child->entity_type = entity->entity_type;
+		new_child->entity_instance_num = entity->entity_instance_num;
+		new_child->entity_container_id = entity->entity_container_id;
+	}
+
+	return updated_record_handle;
+}
+
+LIBPLDM_ABI_TESTING
+uint32_t pldm_entity_association_pdr_add_contained_entity(
+	pldm_pdr *repo, pldm_entity *entity, pldm_entity *parent,
+	uint8_t *event_data_op, bool is_remote, uint32_t pdr_record_handle)
+{
+	assert(repo != NULL || entity != NULL || parent != NULL ||
+	       event_data_op != NULL);
+
+	uint32_t updated_record_handle = 0;
+	*event_data_op = PLDM_PDR_RECORDS_MODIFIED;
+	pldm_pdr_record *record = repo->first;
+	pldm_pdr_record *prev = repo->first;
+	bool pdr_position_found = false;
+	while (record != NULL) {
+		// Check if the parent entity is part of the entity association PDRs
+		pldm_pdr_record *next = record->next;
+		struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)record->data;
+		int rc = pldm_platform_pdr_hdr_validate(
+			hdr,
+			(sizeof(struct pldm_pdr_hdr) +
+			 sizeof(struct pldm_pdr_entity_association)),
+			(record->size + sizeof(struct pldm_pdr_hdr)));
+		assert(rc >= 0);
+		if ((record->is_remote == is_remote) &&
+		    hdr->type == PLDM_PDR_ENTITY_ASSOCIATION) {
+			if (pldm_entity_association_pdr_data_matches_parent_entity(
+				    record, parent)) {
+				pdr_position_found = true;
+				updated_record_handle =
+					pldm_entity_association_pdr_add_contained_entity_to_remote_pdr(
+						repo, prev, record, entity);
+				if (record->data) {
+					free(record->data);
+				}
+				free(record);
+				break;
+			}
+		}
+		prev = record;
+		record = next;
+	}
+	if (!pdr_position_found && !is_remote) {
+		// If new PDR belongs to none of the association PDRs,
+		// create new etity assoctaion PDR
+		*event_data_op = PLDM_PDR_RECORDS_ADDED;
+		updated_record_handle = pldm_entity_association_pdr_create_new(
+			repo, pdr_record_handle, parent, entity);
+	}
+
+	return updated_record_handle;
 }
