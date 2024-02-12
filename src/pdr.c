@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "msgbuf.h"
 #include <libpldm/pdr.h>
 #include <libpldm/platform.h>
 
@@ -7,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <stdio.h>
 
 typedef struct pldm_pdr_record {
 	uint32_t record_handle;
@@ -1299,4 +1301,371 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 
 	*num_entities = l_num_entities;
 	*entities = l_entities;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_entity_association_pdr_add_contained_entity_to_remote_pdr(
+	pldm_pdr *repo, pldm_entity *entity, uint32_t updated_record_handle)
+{
+	if (!repo || !entity) {
+		return -EINVAL;
+	}
+
+	pldm_pdr_record *record = repo->first;
+	pldm_pdr_record *prev = repo->first;
+	uint32_t val_uint32;
+	uint16_t val_uint16;
+	uint8_t val_uint8;
+	uint8_t num_children_pdr;
+	int rc = 0;
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	struct pldm_msgbuf _buf1;
+	struct pldm_msgbuf *buf1 = &_buf1;
+
+	while (record != NULL) {
+		pldm_pdr_record *next = record->next;
+		if (record->record_handle == updated_record_handle) {
+			break;
+		}
+		prev = record;
+		record = next;
+	}
+
+	if (!record) {
+		return -EINVAL;
+	}
+	pldm_pdr_record *new_record = malloc(sizeof(pldm_pdr_record));
+	if (!new_record) {
+		return -ENOMEM;
+	}
+
+	new_record->data = malloc(record->size + sizeof(pldm_entity));
+	if (!new_record->data) {
+		if (new_record->data) {
+			free(new_record->data);
+		}
+		free(new_record);
+		return -ENOMEM;
+	}
+
+	new_record->record_handle = htole32(record->record_handle);
+	new_record->size = htole32(record->size + sizeof(struct pldm_entity));
+	new_record->next = NULL;
+	new_record->is_remote = record->is_remote;
+
+	// Initialize new PDR record with data from original PDR record.
+	// Start with adding the header of original PDR
+	rc = pldm_msgbuf_init(buf,
+			      (sizeof(struct pldm_pdr_entity_association) +
+			       sizeof(struct pldm_pdr_hdr)),
+			      record->data, record->size);
+	if (rc) {
+		if (new_record->data) {
+			free(new_record->data);
+		}
+		free(new_record);
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init(buf1,
+			      (sizeof(struct pldm_pdr_entity_association) +
+			       sizeof(struct pldm_pdr_hdr)),
+			      new_record->data, new_record->size);
+	if (rc) {
+		if (new_record->data) {
+			free(new_record->data);
+		}
+		free(new_record);
+		return rc;
+	}
+
+	// header record handle
+	pldm_msgbuf_extract(buf, &val_uint32);
+	pldm_msgbuf_insert(buf1, val_uint32);
+	// header version
+	pldm_msgbuf_extract(buf, &val_uint8);
+	pldm_msgbuf_insert(buf1, val_uint8);
+	// header type
+	pldm_msgbuf_extract(buf, &val_uint8);
+	pldm_msgbuf_insert(buf1, val_uint8);
+	// header record change number
+	pldm_msgbuf_extract(buf, &val_uint16);
+	pldm_msgbuf_insert(buf1, val_uint16);
+	// header length
+	pldm_msgbuf_extract(buf, &val_uint16);
+	val_uint16 += sizeof(pldm_entity);
+	pldm_msgbuf_insert(buf1, val_uint16);
+	// container ID
+	pldm_msgbuf_extract(buf, &val_uint16);
+	pldm_msgbuf_insert(buf1, val_uint16);
+	// association type
+	pldm_msgbuf_extract(buf, &val_uint8);
+	pldm_msgbuf_insert(buf1, val_uint8);
+	// entity type
+	pldm_msgbuf_extract(buf, &val_uint16);
+	pldm_msgbuf_insert(buf1, val_uint16);
+	// entity instance number
+	pldm_msgbuf_extract(buf, &val_uint16);
+	pldm_msgbuf_insert(buf1, val_uint16);
+	// entity container ID
+	pldm_msgbuf_extract(buf, &val_uint16);
+	pldm_msgbuf_insert(buf1, val_uint16);
+
+	//Add all children of original PDR to new PDR
+	pldm_msgbuf_extract(buf, &val_uint8);
+	if (val_uint8 >= UINT8_MAX - 1) {
+		if (new_record->data) {
+			free(new_record->data);
+		}
+		free(new_record);
+		return -EOVERFLOW;
+	}
+	val_uint8 += 1;
+	num_children_pdr = val_uint8;
+	pldm_msgbuf_insert(buf1, val_uint8);
+
+	for (int i = 0; i < num_children_pdr - 1; i++) {
+		pldm_msgbuf_extract(buf, &val_uint16);
+		pldm_msgbuf_insert(buf1, val_uint16);
+		pldm_msgbuf_extract(buf, &val_uint16);
+		pldm_msgbuf_insert(buf1, val_uint16);
+		pldm_msgbuf_extract(buf, &val_uint16);
+		pldm_msgbuf_insert(buf1, val_uint16);
+	}
+
+	// Add new contained entity as a child of new PDR
+	rc = pldm_msgbuf_init(buf, sizeof(struct pldm_entity), entity,
+			      sizeof(struct pldm_entity));
+	if (rc) {
+		if (new_record->data) {
+			free(new_record->data);
+		}
+		free(new_record);
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, &val_uint16);
+	pldm_msgbuf_insert(buf1, val_uint16);
+	pldm_msgbuf_extract(buf, &val_uint16);
+	pldm_msgbuf_insert(buf1, val_uint16);
+	pldm_msgbuf_extract(buf, &val_uint16);
+	pldm_msgbuf_insert(buf1, val_uint16);
+
+	rc = pldm_msgbuf_destroy(buf);
+	if (rc) {
+		if (new_record->data) {
+			free(new_record->data);
+		}
+		free(new_record);
+		return rc;
+	}
+	rc = pldm_msgbuf_destroy(buf1);
+	if (rc) {
+		if (new_record->data) {
+			free(new_record->data);
+		}
+		free(new_record);
+		return rc;
+	}
+
+	if (repo->first == record) {
+		repo->first = new_record;
+		new_record->next = record->next;
+	} else {
+		prev->next = new_record;
+		new_record->next = record->next;
+	}
+	if (repo->last == record) {
+		repo->last = new_record;
+	}
+	repo->size -= record->size;
+	repo->size += new_record->size;
+
+	new_record->is_remote = record->is_remote;
+
+	if (record->data) {
+		free(record->data);
+	}
+	free(record);
+
+	return rc;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_entity_association_pdr_create_new(pldm_pdr *repo,
+					   uint32_t pdr_record_handle,
+					   pldm_entity *parent,
+					   pldm_entity *entity,
+					   uint32_t *updated_record_handle)
+{
+	if (!repo || !parent || !entity || !updated_record_handle) {
+		return -EINVAL;
+	}
+
+	uint8_t num_children = 1;
+	bool pdr_added = false;
+	uint16_t new_pdr_size;
+	uint16_t val_uint16;
+	uint8_t val_uint8;
+	uint8_t *ptr;
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	struct pldm_msgbuf _buf1;
+	struct pldm_msgbuf *buf1 = &_buf1;
+	struct pldm_msgbuf _buf2;
+	struct pldm_msgbuf *buf2 = &_buf2;
+	int rc;
+
+	pldm_pdr_record *prev = repo->first;
+	pldm_pdr_record *curr = repo->first;
+	while (curr != NULL) {
+		if (curr->record_handle == pdr_record_handle) {
+			pdr_added = true;
+			break;
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+	if (pdr_added) {
+		new_pdr_size = sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t) +
+			       sizeof(uint8_t) + sizeof(pldm_entity) +
+			       sizeof(uint8_t) +
+			       num_children * sizeof(pldm_entity);
+		pldm_pdr_record *new_record = malloc(sizeof(pldm_pdr_record));
+		if (!new_record) {
+			return -ENOMEM;
+		}
+
+		new_record->data = malloc(new_pdr_size);
+		if (!new_record->data) {
+			free(new_record);
+			return -ENOMEM;
+		}
+
+		// Initialise new PDR to be added with the header, size and handle.
+		// Set the position of new PDR
+		new_record->record_handle = pdr_record_handle + 1;
+		if (new_record->record_handle == UINT32_MAX) {
+			if (new_record->data) {
+				free(new_record->data);
+			}
+			free(new_record);
+			return -EOVERFLOW;
+		}
+		new_record->size = new_pdr_size;
+		new_record->is_remote = false;
+		new_record->next = curr->next;
+		curr->next = new_record;
+		if (repo->last == prev) {
+			repo->last = new_record;
+		}
+		repo->size += new_record->size;
+		++repo->record_count;
+		*updated_record_handle = new_record->record_handle;
+
+		rc = pldm_msgbuf_init(
+			buf,
+			(sizeof(struct pldm_pdr_hdr) +
+			 sizeof(struct pldm_pdr_entity_association)),
+			new_record->data, new_record->size);
+		if (rc) {
+			if (new_record->data) {
+				free(new_record->data);
+			}
+			free(new_record);
+			return rc;
+		}
+
+		// header record handle
+		pldm_msgbuf_insert(buf, *updated_record_handle);
+		// header version
+		val_uint8 = 1;
+		pldm_msgbuf_insert(buf, val_uint8);
+		// header type
+		val_uint8 = PLDM_PDR_ENTITY_ASSOCIATION;
+		pldm_msgbuf_insert(buf, val_uint8);
+		// header change number
+		val_uint16 = 0;
+		pldm_msgbuf_insert(buf, val_uint16);
+		// header length
+		val_uint16 = new_pdr_size - sizeof(struct pldm_pdr_hdr);
+		pldm_msgbuf_insert(buf, val_uint16);
+
+		// Data for new PDR is obtained from parent PDR and new contained entity
+		// is added as the child
+		rc = pldm_msgbuf_init(buf1, sizeof(struct pldm_entity), parent,
+				      sizeof(struct pldm_entity));
+		if (rc) {
+			if (new_record->data) {
+				free(new_record->data);
+			}
+			free(new_record);
+			return rc;
+		}
+
+		rc = pldm_msgbuf_init(buf2, sizeof(struct pldm_entity), entity,
+				      sizeof(struct pldm_entity));
+		if (rc) {
+			if (new_record->data) {
+				free(new_record->data);
+			}
+			free(new_record);
+			return rc;
+		}
+
+		// add 0 to container ID for now and store address
+		val_uint16 = 0;
+		ptr = buf->cursor;
+		pldm_msgbuf_insert(buf, val_uint16);
+		// association type
+		val_uint8 = PLDM_ENTITY_ASSOCIAION_PHYSICAL;
+		pldm_msgbuf_insert(buf, val_uint8);
+		// entity type
+		pldm_msgbuf_extract(buf1, &val_uint16);
+		pldm_msgbuf_insert(buf, val_uint16);
+		// entity instance number
+		pldm_msgbuf_extract(buf1, &val_uint16);
+		pldm_msgbuf_insert(buf, val_uint16);
+		// entity conatiner ID
+		pldm_msgbuf_extract(buf1, &val_uint16);
+		pldm_msgbuf_insert(buf, val_uint16);
+		// number of children
+		val_uint8 = 1;
+		pldm_msgbuf_insert(buf, val_uint8);
+
+		// Add new entity as child
+		pldm_msgbuf_extract(buf2, &val_uint16);
+		pldm_msgbuf_insert(buf, val_uint16);
+		pldm_msgbuf_extract(buf2, &val_uint16);
+		pldm_msgbuf_insert(buf, val_uint16);
+		pldm_msgbuf_extract(buf2, &val_uint16);
+		pldm_msgbuf_insert(buf, val_uint16);
+		*ptr = val_uint16;
+
+		rc = pldm_msgbuf_destroy(buf);
+		if (rc) {
+			if (new_record->data) {
+				free(new_record->data);
+			}
+			free(new_record);
+			return rc;
+		}
+		rc = pldm_msgbuf_destroy(buf1);
+		if (rc) {
+			if (new_record->data) {
+				free(new_record->data);
+			}
+			free(new_record);
+			return rc;
+		}
+		rc = pldm_msgbuf_destroy(buf2);
+		if (rc) {
+			if (new_record->data) {
+				free(new_record->data);
+			}
+			free(new_record);
+			return rc;
+		}
+	}
+	return 0;
 }
