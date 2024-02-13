@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61399678_5de66a72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-02-13T08:36:31Z",
+      "side": 1,
+      "message": "spec here is the PLDM state set spec.",
+      "parentUuid": "de298243_aedc13b3",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 1
+      },
+      "revId": "88060a264e1f1c792b612882309bf98c920df1f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af310c09_9a206fd5",
         "filename": "include/libpldm/oem/ibm/state_set.h",
         "patchSetId": 2
