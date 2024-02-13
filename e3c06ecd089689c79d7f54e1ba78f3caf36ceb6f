@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83bf24f4_9a349033",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:42:54Z",
+      "side": 1,
+      "message": "Please prefix the patch subject with the affected subsystem. In this case `state-set: `",
+      "revId": "e3c06ecd089689c79d7f54e1ba78f3caf36ceb6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbb10a10_df72002c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:42:54Z",
+      "side": 1,
+      "message": "typo: perform",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 39
+      },
+      "revId": "e3c06ecd089689c79d7f54e1ba78f3caf36ceb6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96b074a4_b173711c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:42:54Z",
+      "side": 1,
+      "message": "Please wrap the text at 72 characters. Your editor likely provides the ability to do this automatically (for example, in `vim` you can select the text and then use [`gq` to wrap it](https://www.programmerhat.com/vim-gq/)). Failing that you can can use e.g. `fold --spaces --width\u003d72` via [fold(1)](https://www.man7.org/linux/man-pages/man1/fold.1.html)",
+      "revId": "e3c06ecd089689c79d7f54e1ba78f3caf36ceb6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0be8075d_1c4cc925",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:42:54Z",
+      "side": 1,
+      "message": "Please remove \"This commits\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 13
+      },
+      "revId": "e3c06ecd089689c79d7f54e1ba78f3caf36ceb6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce517295_92076062",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:42:54Z",
+      "side": 1,
+      "message": "These are Power-specific terms for the most part, but you\u0027re modifying the DSP0249 header. Please use the specified terminology, not platform-specific terminology",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "e3c06ecd089689c79d7f54e1ba78f3caf36ceb6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00e8c049_1886a79c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:42:54Z",
+      "side": 1,
+      "message": "This seems unrelated?",
+      "range": {
+        "startLine": 10,
+        "startChar": 37,
+        "endLine": 13,
+        "endChar": 1
+      },
+      "revId": "e3c06ecd089689c79d7f54e1ba78f3caf36ceb6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92ac60e6_d5fd08f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:42:54Z",
+      "side": 1,
+      "message": "Hi Varsha. I have some comments. Mostly its the commit message that needs some work.\n\nPlease also add a changelog entry for the new functionality.",
+      "revId": "e3c06ecd089689c79d7f54e1ba78f3caf36ceb6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "264edaf4_978448d4",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:42:54Z",
+      "side": 1,
+      "message": "Can we just add all the constants specified by 260?",
+      "revId": "e3c06ecd089689c79d7f54e1ba78f3caf36ceb6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
