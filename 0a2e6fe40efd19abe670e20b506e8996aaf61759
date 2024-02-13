@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f56b85_01a48349",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:33:04Z",
+      "side": 1,
+      "message": "I\u0027d prefer we go with `oem: ibm:` (with spaces after the `:`)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "0a2e6fe40efd19abe670e20b506e8996aaf61759",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cbbe279_e7fb6cd9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:33:04Z",
+      "side": 1,
+      "message": "I prefer we don\u0027t use the phrase \"This commit\" in commit messages. The commit message is intrinsically about the commit its attached to. Dropping it yields \n\n\u003e Add sensor and effector set IDs ...\n\nI think that\u0027s a reasonable start to a sentence :)",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "0a2e6fe40efd19abe670e20b506e8996aaf61759",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d060e8f_4caece6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:33:04Z",
+      "side": 1,
+      "message": "What does this testing demonstrate though? Please unpack your explanation in the commit message.",
+      "revId": "0a2e6fe40efd19abe670e20b506e8996aaf61759",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bd0f06e_bf965723",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:33:04Z",
+      "side": 1,
+      "message": "Hi Varsha, thanks for the change. I have some comments that will need to be addressed.",
+      "revId": "0a2e6fe40efd19abe670e20b506e8996aaf61759",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3246363c_6fae01ad",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-13T23:33:04Z",
+      "side": 1,
+      "message": "C does not namespace its enum symbols. With this patch you\u0027ve now defined a global constant called `ADD` for any source file that transitively includes this header, which isn\u0027t something I\u0027m prepared to accept.\n\nWhile there are other violations of my preference in this file (`P` and `T` particularly!), I require you to prefix these with `PLDM`, `OEM`, `IBM` and something representative of the enum type. For example:\n\n```\nenum pldm_oem_ibm_slot_enable_effecter_state {\n    PLDM_OEM_IBM_SLOT_ENABLE_ADD \u003d 0x1,\n    ...\n};\n```\n\nNote that I\u0027ve prefixed the `enum` type name as well, with the pattern I expect libpldm and OEM symbols to be prefixed with. Please apply this to all types added in this patch and future patches you contribute.\n\nWe will fix the naming of the other types and symbols over time by providing a compatibility `#define` and then fixing the known consumers.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 2
+      },
+      "revId": "0a2e6fe40efd19abe670e20b506e8996aaf61759",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
