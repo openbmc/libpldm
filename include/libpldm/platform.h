@@ -265,11 +265,24 @@ enum pldm_pdr_repository_chg_event_data_format {
 /** @brief PLDM pldmPDRRepositoryChgEvent class changeRecord format
  * eventDataOperation
  */
+//remove this enum after backward compatibility cleanup is done using
+//pldm_pdr_repo_chg_change_record_event_data_operation
 enum pldm_pdr_repository_chg_event_change_record_event_data_operation {
 	PLDM_REFRESH_ALL_RECORDS,
 	PLDM_RECORDS_DELETED,
 	PLDM_RECORDS_ADDED,
 	PLDM_RECORDS_MODIFIED
+};
+
+/** @brief PLDM pldmPDRRepositoryChgEvent class changeRecord format
+ * eventDataOperation
+ */
+enum pldm_pdr_repo_chg_change_record_event_data_operation {
+	PLDM_PDR_RECORDS_REFRESH_ALL,
+	PLDM_PDR_RECORDS_DELETED,
+	PLDM_PDR_RECORDS_ADDED,
+	PLDM_PDR_RECORDS_MODIFIED,
+	PLDM_PDR_RECORDS_INVALID_OP
 };
 
 /** @brief PLDM NumericSensorStatePresentReading data type
