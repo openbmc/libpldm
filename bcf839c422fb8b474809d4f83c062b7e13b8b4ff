@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a11080f_a2b487cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-02-16T11:15:10Z",
+      "side": 1,
+      "message": "This change is addressing a review comment given in https://gerrit.openbmc.org/c/openbmc/libpldm/+/69353. \n1. Moved the platform.h to a separate commit\n2. added a new enum with names of the constant and enum itself changed while keeping the old enum to support backward compatibility",
+      "revId": "bcf839c422fb8b474809d4f83c062b7e13b8b4ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
