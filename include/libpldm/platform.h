@@ -263,13 +263,18 @@ enum pldm_pdr_repository_chg_event_data_format {
 };
 
 /** @brief PLDM pldmPDRRepositoryChgEvent class changeRecord format
- * eventDataOperation
+ * eventDataOperation. See CHANGELOG.md for info on the alias members.
  */
 enum pldm_pdr_repository_chg_event_change_record_event_data_operation {
-	PLDM_REFRESH_ALL_RECORDS,
-	PLDM_RECORDS_DELETED,
-	PLDM_RECORDS_ADDED,
-	PLDM_RECORDS_MODIFIED
+	PLDM_REFRESH_ALL_RECORDS = 0,
+	PLDM_RECORDS_DELETED = 1,
+	PLDM_RECORDS_ADDED = 2,
+	PLDM_RECORDS_MODIFIED = 3,
+
+	PLDM_PDR_RECORDS_REFRESH_ALL = 0,
+	PLDM_PDR_RECORDS_DELETED = 1,
+	PLDM_PDR_RECORDS_ADDED = 2,
+	PLDM_PDR_RECORDS_MODIFIED = 3
 };
 
 /** @brief PLDM NumericSensorStatePresentReading data type

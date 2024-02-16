@@ -25,6 +25,10 @@ Change categories:
 4. base: Added PLDM_SMBIOS & PLDM_RDE message types
 5. oem: meta: Add decode_oem_meta_file_io_req()
 6. state-set: Add all state set values to system power state enum as per DSP0249
+7. platform: Add alias members to the enum pldm_pdr_repository_chg_event_change_record_event_data_operation.
+
+   enum constants with inconsistent names are deprecated with this change.
+   remove old inconsistent enum members after backward compatibility cleanup is done
 
 ### Changed
 
@@ -43,6 +47,10 @@ Change categories:
 2. pdr: Assign record_handle in entity_association_pdr_add_children()
 3. msgbuf: Require sensor data enum in pldm_msgbuf_extract_sensor_value()
 4. pdr: Remove redundant constant for minimum numeric sensor PDR length
+
+### Deprecated
+
+1. platform: members of the enum pldm_pdr_repository_chg_event_change_record_event_data_operation 
 
 ## [0.7.0] - 2023-08-29
 
