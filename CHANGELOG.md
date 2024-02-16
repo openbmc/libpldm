@@ -1,4 +1,4 @@
-# Changelog
+#Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -25,6 +25,12 @@ Change categories:
 4. base: Added PLDM_SMBIOS & PLDM_RDE message types
 5. oem: meta: Add decode_oem_meta_file_io_req()
 6. state-set: Add all state set values to system power state enum as per DSP0249
+7. platform: Add alias members to the enum
+   pldm_pdr_repository_chg_event_change_record_event_data_operation.
+
+   enum constants with inconsistent names are deprecated with this change.
+   remove old inconsistent enum members after backward compatibility cleanup is
+   done
 
 ### Changed
 
