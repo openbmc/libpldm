@@ -3,6 +3,92 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0191ca32_79fe26f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T00:11:46Z",
+      "side": 1,
+      "message": "A few points:\n\n1. I don\u0027t think the `q` is meant to be there?\n2. Can you remove the space before the colon (`:`)?\n3. It would be ideal to specify the set ID as well.\n\nFor example:\n\n```\nstate-set: Add all system power states (set ID 260)\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 1
+      },
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "021b1560_6117d7aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T00:11:46Z",
+      "side": 1,
+      "message": "I think we can remove this sentence given the suggestion for the patch subject above.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 15
+      },
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20e4c530_22737d2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T00:11:46Z",
+      "side": 1,
+      "message": "Why does this test the patch? What code is using it? How does it demonstrate the patch is correct?\n\nRegarding the latter point, I think the patch is demonstrably correct by inspection with the spec (DSP0249) in hand? I\u0027m not sure it\u0027s necessary to make any statement here.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "670aab9f_9fad4642",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T00:11:46Z",
+      "side": 1,
+      "message": "Hi Varsha. I\u0027ve made a few comments. I feel they should be relatively easy to address.",
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e161de38_9a621f9e",
         "filename": "CHANGELOG.md",
         "patchSetId": 11
@@ -20,6 +106,70 @@
         "endLine": 379,
         "endChar": 6
       },
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c3cb7c8_7e01a85f",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T00:11:46Z",
+      "side": 1,
+      "message": "The newest items go at the top of the file. See the `[Unreleased]` section on line 18. It should be added there.",
+      "parentUuid": "e161de38_9a621f9e",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 6
+      },
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b80bddd_d67b3f77",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T00:11:46Z",
+      "side": 1,
+      "message": "From the documentation I feel like `HIBERNATE` would be a better description than `OFF_SOFT`.",
+      "range": {
+        "startLine": 235,
+        "startChar": 32,
+        "endLine": 235,
+        "endChar": 40
+      },
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2133976_d2f15724",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T00:11:46Z",
+      "side": 1,
+      "message": "What about `PLDM_STATE_SET_SYS_POWER_CYCLE_OFF_HARD_GRACEFUL \u003d 8`?",
       "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
