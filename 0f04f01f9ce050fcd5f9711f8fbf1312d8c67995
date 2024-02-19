@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84c177e5_ba041f1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T01:03:22Z",
+      "side": 1,
+      "message": "This is too abstract. You need to explain why the tests your performed explicitly exercise what\u0027s being changed in the patch. That\u0027s not clear to me. Doubly-so given the patch just adds new enums and enum members.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 22
+      },
+      "revId": "0f04f01f9ce050fcd5f9711f8fbf1312d8c67995",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccccc4bc_0a63223b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T01:03:22Z",
+      "side": 1,
+      "message": "Hi Varsha, I still have some concerns around type and member names. I\u0027ve unpacked those concerns in the comments.",
+      "revId": "0f04f01f9ce050fcd5f9711f8fbf1312d8c67995",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faa94604_8387d25e",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T01:03:22Z",
+      "side": 1,
+      "message": "These names still skip what I think is necessary context. Add _what_? Remove _what_?\n\nI think you need to introduce what they\u0027re affecting. `PLDM_OEM_IBM_SLOT_EFFECTER_*`?\n\nI\u0027d also consider dropping `enable` from the type and member names?\n\nAlso if this is specific to PCIe then I think you should probably have `PCIE` in the name? `PLDM_OEM_IBM_PCIE_SLOT_EFFECTER_*`?",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 24,
+        "endChar": 28
+      },
+      "revId": "0f04f01f9ce050fcd5f9711f8fbf1312d8c67995",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
