@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1433c4ee_d64ae984",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T00:56:02Z",
+      "side": 1,
+      "message": "Please update the subject, and also remove the space before the colon (`:`).",
+      "revId": "bcf839c422fb8b474809d4f83c062b7e13b8b4ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ddb7f68_20b96552",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T00:56:02Z",
+      "side": 1,
+      "message": "You must be specific when writing any statements about testing. Why does what you did test this change? For me it\u0027s not clear at all, the description is far too abstract.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 23
+      },
+      "revId": "bcf839c422fb8b474809d4f83c062b7e13b8b4ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7a11080f_a2b487cc",
@@ -14,6 +54,40 @@
       "writtenOn": "2024-02-16T11:15:10Z",
       "side": 1,
       "message": "This change is addressing a review comment given in https://gerrit.openbmc.org/c/openbmc/libpldm/+/69353. \n1. Moved the platform.h to a separate commit\n2. added a new enum with names of the constant and enum itself changed while keeping the old enum to support backward compatibility",
+      "revId": "bcf839c422fb8b474809d4f83c062b7e13b8b4ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "514b5f52_821bb9b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T00:56:02Z",
+      "side": 1,
+      "message": "Hi Varsha, I think there\u0027s a better approach available to us that doesn\u0027t involve introducing a new type. I\u0027ve outlined it in my comments.",
+      "revId": "bcf839c422fb8b474809d4f83c062b7e13b8b4ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c16f452_a522830c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-19T00:56:02Z",
+      "side": 1,
+      "message": "Ah, I appreciate your concerns for backwards compatibility here!\n\nHowever, I think a trick we could use is aliasing the enum members to given them the same underlying value. This capability has been available since C89 by the draft here:\n\nhttps://port70.net/%7Ensz/c/c89/c89-draft.html#3.5.2.2\n\n\u003e The identifiers in an enumerator list are declared as constants that have type int and may appear wherever such are permitted.52 An enumerator with \u003d defines its enumeration constant as the value of the constant expression. If the first enumerator has no \u003d , the value of its enumeration constant is 0. Each subsequent enumerator with no \u003d defines its enumeration constant as the value of the constant expression obtained by adding 1 to the value of the previous enumeration constant. **(A combination of both forms of enumerators may produce enumeration constants with values that duplicate other values in the same enumeration.)**\n\n(emphasis mine).\n\nSo instead of adding the new enum below, we could do the following instead:\n\n```\nenum pldm_pdr_repository_chg_event_change_record_event_data_operation {\n    PLDM_REFRESH_ALL_RECORDS \u003d 0,\n    PLDM_RECORDS_DELETED \u003d 1,\n    PLDM_RECORDS_ADDED \u003d 2,\n    PLDM_RECORDS_MODIFIED \u003d 3,\n    \n    PLDM_PDR_RECORDS_REFRESH_ALL \u003d 0,\n    PLDM_PDR_RECORDS_DELETED \u003d 1,\n    PLDM_PDR_RECORDS_ADDED \u003d 2,\n    PLDM_PDR_RECORDS_MODIFIED \u003d 3,\n};\n```\n\nWe should do this in a separate change before the introduction of `PLDM_PDR_RECORDS_INVALID_OP`.\n\nHowever, what\u0027s the background on these enumerations? Are there sections of DSP0240 that are relevant? Can you please list them if so?",
       "revId": "bcf839c422fb8b474809d4f83c062b7e13b8b4ff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
