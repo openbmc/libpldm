@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ecfdfa3_1215cf22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-02-21T10:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0191ca32_79fe26f0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 1
+      },
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "021b1560_6117d7aa",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d3a5387_efce04b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-02-21T10:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "021b1560_6117d7aa",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 15
+      },
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20e4c530_22737d2a",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-02-19T00:11:46Z",
       "side": 1,
       "message": "Why does this test the patch? What code is using it? How does it demonstrate the patch is correct?\n\nRegarding the latter point, I think the patch is demonstrably correct by inspection with the spec (DSP0249) in hand? I\u0027m not sure it\u0027s necessary to make any statement here.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a979f0_32f5e40b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-02-21T10:42:22Z",
+      "side": 1,
+      "message": "removed this part of commit message for this commit",
+      "parentUuid": "20e4c530_22737d2a",
       "range": {
         "startLine": 13,
         "startChar": 0,
@@ -134,6 +206,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66eb8baf_1af98a4d",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-02-21T10:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c3cb7c8_7e01a85f",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 6
+      },
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b80bddd_d67b3f77",
@@ -157,6 +253,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41f71e76_68166703",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-02-21T10:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b80bddd_d67b3f77",
+      "range": {
+        "startLine": 235,
+        "startChar": 32,
+        "endLine": 235,
+        "endChar": 40
+      },
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2133976_d2f15724",
@@ -170,6 +290,24 @@
       "writtenOn": "2024-02-19T00:11:46Z",
       "side": 1,
       "message": "What about `PLDM_STATE_SET_SYS_POWER_CYCLE_OFF_HARD_GRACEFUL \u003d 8`?",
+      "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b66ac3f1_ec1b1a68",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-02-21T10:42:22Z",
+      "side": 1,
+      "message": "i think I missed it with a branch rebase , adding it back.",
+      "parentUuid": "a2133976_d2f15724",
       "revId": "3ac4a585f53716799ab281376582baec7d8761a3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
