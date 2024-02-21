@@ -274,7 +274,8 @@ enum pldm_pdr_repository_chg_event_change_record_event_data_operation {
 	PLDM_PDR_RECORDS_REFRESH_ALL = 0,
 	PLDM_PDR_RECORDS_DELETED = 1,
 	PLDM_PDR_RECORDS_ADDED = 2,
-	PLDM_PDR_RECORDS_MODIFIED = 3
+	PLDM_PDR_RECORDS_MODIFIED = 3,
+	PLDM_PDR_RECORDS_INVALID_OP = 4
 };
 
 /** @brief PLDM NumericSensorStatePresentReading data type
