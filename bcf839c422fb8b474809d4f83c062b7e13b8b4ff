@@ -168,6 +168,24 @@
       "parentUuid": "5f60193f_bf510bed",
       "revId": "bcf839c422fb8b474809d4f83c062b7e13b8b4ff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8e9b9cd_ed13becd",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-02-27T04:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfd18f26_76e9e8c4",
+      "revId": "bcf839c422fb8b474809d4f83c062b7e13b8b4ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
