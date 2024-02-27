@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb8435f5_f1469c23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-02-27T06:17:19Z",
+      "side": 1,
+      "message": "@andrew, I have addressed the review comments on my pldm commit and it\u0027s reviewed well. Could you please re-review this patch set?",
+      "parentUuid": "70daa7ac_7b847891",
+      "revId": "f423f7c2a8b04f500744eb76a71c2a7aeffd33ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2190a8b2_a9a9c151",
