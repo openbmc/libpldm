@@ -70,6 +70,30 @@
       },
       "revId": "e539a84b00f0382e4cc495638a1c79d129709ddb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2baacb3_948d5fe2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-02-28T09:35:28Z",
+      "side": 1,
+      "message": "Yes, this seems like some sort of hack that was put in libpldm to make things work . and also i feel we wanted some sort of reference point which is not one of the values mentioned in the spec. we should either use what we have in the spec or have some sort of fix in pldm to address the issue. Pushing this odd value into the enum that captures the spec does not seem like a right direction to go.",
+      "parentUuid": "540180a2_4703f3c0",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 36
+      },
+      "revId": "e539a84b00f0382e4cc495638a1c79d129709ddb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
