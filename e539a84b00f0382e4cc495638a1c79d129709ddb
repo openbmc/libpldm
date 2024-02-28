@@ -46,6 +46,30 @@
       },
       "revId": "e539a84b00f0382e4cc495638a1c79d129709ddb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "540180a2_4703f3c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-28T00:58:32Z",
+      "side": 1,
+      "message": "That sounds like accidental complexity on `pldmd`\u0027s part. I don\u0027t think it\u0027s right to invent enumeration members here. I expect there\u0027s some refactoring we can do to address the problem directly in `pldmd`.",
+      "parentUuid": "a67d9db4_5f126e60",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 36
+      },
+      "revId": "e539a84b00f0382e4cc495638a1c79d129709ddb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
