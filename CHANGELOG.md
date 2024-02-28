@@ -32,6 +32,8 @@ Change categories:
    remove old inconsistent enum members after backward compatibility cleanup is
    done
 
+8. oem-ibm: Alias pldm*oem_ibm_fru_field_type members as `PLDM_OEM_IBM*\*`
+
 ### Changed
 
 1. base: Stabilise pldm_msg_hdr_correlate_response()
@@ -42,6 +44,11 @@ Change categories:
 6. pdr: Stabilise pldm_entity_association_pdr_add_from_node_with_record_handle()
 7. oem: meta: stabilise decode_oem_meta_file_io_req()
 8. pdr: pldm_entity_association_tree_copy_root(): Document preconditions
+
+### Deprecated
+
+1. Deprecate pldm*oem_ibm_fru_field_type members that that are not prefixed with
+   `PLDM_OEM_IBM*`
 
 ### Fixed
 
