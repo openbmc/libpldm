@@ -27,6 +27,8 @@ Change categories:
 6. state-set: Add all state set values to system power state enum as per DSP0249
 7. platform: Add alias members to the enum
    pldm_pdr_repository_chg_event_change_record_event_data_operation.
+8. oem-ibm: Aliasing the members of the enum pldm_oem_ibm_fru_field_type with
+   prefix PLDM_OEM_IBM.
 
    enum constants with inconsistent names are deprecated with this change.
    remove old inconsistent enum members after backward compatibility cleanup is
