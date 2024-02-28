@@ -27,6 +27,7 @@ Change categories:
 6. state-set: Add all state set values to system power state enum as per DSP0249
 7. platform: Add alias members to the enum
    pldm_pdr_repository_chg_event_change_record_event_data_operation.
+8. oem-ibm: Alias pldm_oem_ibm_fru_field_type members as PLDM_OEM_IBM_*
 
    enum constants with inconsistent names are deprecated with this change.
    remove old inconsistent enum members after backward compatibility cleanup is
@@ -49,6 +50,10 @@ Change categories:
 2. pdr: Assign record_handle in entity_association_pdr_add_children()
 3. msgbuf: Require sensor data enum in pldm_msgbuf_extract_sensor_value()
 4. pdr: Remove redundant constant for minimum numeric sensor PDR length
+
+### Deprecated
+
+1. oem-ibm: Alias pldm_oem_ibm_fru_field_type members as PLDM_OEM_IBM_*
 
 ## [0.7.0] - 2023-08-29
 
