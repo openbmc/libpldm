@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e60115ff_47692c1a",
+        "filename": "include/libpldm/oem/ibm/fru.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-02-29T01:32:23Z",
+      "side": 1,
+      "message": "Elsewhere I\u0027ve asked for you to re-order this patch after the patch adding the new member names with the `IBM` component. For this specific member, please only add it with the new prefix containing the `IBM` component (and not this one which lacks the `IBM` component).",
+      "revId": "02ca4a361d77780bc1034d682aa26a94b4fd5ee1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
