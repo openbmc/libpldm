@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f32bc5a4_8216ad4f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-01T00:47:24Z",
+      "side": 1,
+      "message": "Best to keep it succinct with imperative language. We can drop the `ing` suffix:\n\n```\noem-ibm: Alias ...`\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "3b03a1cd02610dfd1a8ddadd20bc7142d207162f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c089cb9b_f4b64515",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-01T00:47:24Z",
+      "side": 1,
+      "message": "The members of what? 😊\n\nHow about:\n\n```\noem-ibm: Alias pldm_oem_ibm_fru_field_type members as PLDM_OEM_IBM_*\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 18,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "3b03a1cd02610dfd1a8ddadd20bc7142d207162f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7185ffe3_30b19e16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-01T00:47:24Z",
+      "side": 1,
+      "message": "I think we can drop this. I expect people will be working backwards from the changelog to the commits they care about, in which case they\u0027ll find this statement after they\u0027ve already looked there.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 1
+      },
+      "revId": "3b03a1cd02610dfd1a8ddadd20bc7142d207162f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24a08f3e_908329f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-01T00:47:24Z",
+      "side": 1,
+      "message": "Hi Pavithra, I have a couple of nit-picky comments on the commit message and a comment that should be straight-forward to address for the changelog. Otherwise it looks good to go. Thanks for helping to tidy up libpldm.",
+      "revId": "3b03a1cd02610dfd1a8ddadd20bc7142d207162f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bacf96ee_4272557c",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-01T00:47:24Z",
+      "side": 1,
+      "message": "Can you also add an entry to the `Deprecated` header? That way people looking in either place (`Added` or `Deprecated`) will hit the information they need.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "3b03a1cd02610dfd1a8ddadd20bc7142d207162f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
