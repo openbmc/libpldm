@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "087853a7_09cb8fe0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-01T07:18:40Z",
+      "side": 1,
+      "message": "@andrew, the CI fails with a prettier fail if we add PLDM_OEM_IBM_* in the CHANGELOG.md file as is, I just kept it PLDM_OEM_IBM for now. Do you have any other suggestions?",
+      "revId": "c84ae55629f55b09e9df9c22f0943631260e75ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
