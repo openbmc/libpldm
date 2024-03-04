@@ -47,6 +47,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f92edc56_880a3e33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-04T14:18:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b36f1e35_a5125404",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b9210eb_d86d1d55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-04T14:18:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fc48b4f_658eba3b",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6d02bcb_136e8bbb",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-03-04T05:16:55Z",
       "side": 1,
       "message": "Can you please unpack the `UAK` acronym in the commit message?",
+      "range": {
+        "startLine": 10,
+        "startChar": 28,
+        "endLine": 10,
+        "endChar": 31
+      },
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8695c20d_b3184a22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-04T14:18:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d6d02bcb_136e8bbb",
       "range": {
         "startLine": 10,
         "startChar": 28,
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a3116b6_1ddc2a99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-04T14:18:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b2c7d295_9d274571",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1d795ed_a6814831",
@@ -110,6 +206,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeaa6a34_829a48eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-04T14:18:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d795ed_a6814831",
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89c64b9a_cd952919",
@@ -123,6 +237,24 @@
       "writtenOn": "2024-03-04T05:16:55Z",
       "side": 1,
       "message": "Hi Pavithra. I previously gave this a CR+1 but on reflection I think it\u0027s worth tidying up the commit message a little. I\u0027m not sure of exactly what the `U` in `UAK` stands for - it would be nice for readers to unpack that. I\u0027ve made some other nitpick-y comments as well and appreciate it if you can address those while unpacking the acronym.\n\nCan you please also add an entry to the changelog?",
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e354612a_4f35e292",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-04T14:18:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89c64b9a_cd952919",
       "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
