@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b36f1e35_a5125404",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-04T05:16:55Z",
+      "side": 1,
+      "message": "I think this is a little vague (no mention of _what_ member we\u0027re adding) and misleading (we\u0027re not adding a whole new enum, just a new member to an existing enum). Perhaps:\n\n```\noem: ibm: Add Firmware UAK as a FRU field type\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc48b4f_658eba3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-04T05:16:55Z",
+      "side": 1,
+      "message": "A couple of preferences on my part:\n\n1. No space before the colon (`:`)\n2. We separate the `oem` and `ibm` portions with a colon.\n\nSo:\n\n```\noem: ibm: ...\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d02bcb_136e8bbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-04T05:16:55Z",
+      "side": 1,
+      "message": "Can you please unpack the `UAK` acronym in the commit message?",
+      "range": {
+        "startLine": 10,
+        "startChar": 28,
+        "endLine": 10,
+        "endChar": 31
+      },
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c7d295_9d274571",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-04T05:16:55Z",
+      "side": 1,
+      "message": "Please wrap the commit message at the appropriate boundary (72 characters). Your editor should be capable of this, but if not you can use `fold --width 72`\n\nhttps://www.man7.org/linux/man-pages/man1/fold.1.html",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1d795ed_a6814831",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-04T05:16:55Z",
+      "side": 1,
+      "message": "I\u0027d prefer a line break between the paragraph and the link where the paragraph is terminated by a colon, e.g.\n\n```\nThe PLDM commit that uses this enum value is:\n\nhttps://gerrit.openbmc.org/c/openbmc/pldm/+/49054\n```\n\nOr for slightly more context, use of a markdown reference link, e.g. \n\n```\nThe PLDM commit that uses this enum value is [oem-ibm: Access key update support][1]\n\n[1]: https://gerrit.openbmc.org/c/openbmc/pldm/+/49054\n```",
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89c64b9a_cd952919",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-04T05:16:55Z",
+      "side": 1,
+      "message": "Hi Pavithra. I previously gave this a CR+1 but on reflection I think it\u0027s worth tidying up the commit message a little. I\u0027m not sure of exactly what the `U` in `UAK` stands for - it would be nice for readers to unpack that. I\u0027ve made some other nitpick-y comments as well and appreciate it if you can address those while unpacking the acronym.\n\nCan you please also add an entry to the changelog?",
+      "revId": "62bb56d4ddae46a4d783723a4d5d0bf97b4d1483",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
