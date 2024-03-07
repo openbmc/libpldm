@@ -1,0 +1,392 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dab7ed1_513aefdb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "Can you please mention which specification and the relevant section in the description here?",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e4d9575_3c4b2975",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "Hello. Overall I have quite a few comments with some diversity of concerns. I\u0027ve addressed them inline where necessary.\n\nA couple of further things are missing:\n\n1. Unit tests covering the code-paths of all new functionality\n2. An update to the changelog detailing the new APIs.",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f2e35d0_014880a8",
+        "filename": "include/libpldm/bios.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "Please don\u0027t add more structs with flexible arrays of size 1. This is leads to undefined behaviour in both C and C++ (as it is not a flexible array by definition, it\u0027s an array of size 1, and you must not generate pointers beyond one-past-the-end). It also breaks the calculation of `sizeof()` for the structure to-boot.\n\nInstead, please use:\n\n```\nstruct pldm_bios_boot_config_setting_attr_val_entry {\n    ...\n    #ifndef __cplusplus\n    uint8_t boot_sources_index[]\n    #endif\n};\n\nuint8_t *pldm_bios_boot_config_setting_attr_val_entry_boot_sources_index(struct pldm_bios_boot_config_setting_attr_val_entry *entry);\n```\n\nAnd then in the `.c` file provide the implementation:\n\n```\nuint8_t *pldm_bios_boot_config_setting_attr_val_entry_boot_sources_index(struct pldm_bios_boot_config_setting_attr_val_entry *entry)\n{\n    return entry-\u003eboot_sources_index;\n}\n```\n\nThis way the C code can just access the flexible array member directly, while in C++ we can invoke the accessor function to maintain valid behaviour (as the function is compiled with a C compiler that has access to the flexible array member).",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da3cdfdd_9f023b04",
+        "filename": "include/libpldm/bios.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "I realise all the other structs have `__attribute__((packed))`, but can you please justify why it\u0027s necessary, or if you cannot, please remove it.\n\nUltimately none of the structs defined in the public APIs should require it.",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9768f993_f81707ab",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "I don\u0027t think the descriptions from the inline doxygen comments are really adding any value here over the member names. Can you either write the comments such that they have context for how the members are used, or remove them altogether.",
+      "range": {
+        "startLine": 436,
+        "startChar": 1,
+        "endLine": 444,
+        "endChar": 80
+      },
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71d05866_bdf57b81",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "While there are many other functions that have the `_check` suffix, please don\u0027t add new functions with it. The `_check` suffix was used to migrate functions using `assert()` as error handling to returning error codes. New APIs should be designed correctly from the outset.\n\nPlease audit the rest of the functions added in the patch against this comment.",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "569b2ba5_01768b1d",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "`void *` is a last resort. It should be avoided, or if it cannot be, you must justify its use in comments in the code.\n\nPlease audit the rest of the functions added in the patch against this comment.",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ed57799_180591b9",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "What does it mean to check it? What happens if we don\u0027t? How do we react to the result of the check? Answers should be provided in the doxygen description for the function.\n\nPlease audit the rest of the functions added in the patch against this comment.",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ff1fb49_4b27e1eb",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "Why are we adding a function to check each member of `struct pldm_bios_table_attr_entry_boot_config_setting_info` to the public library API? This seems excessive. Please discuss what other approaches may be used.",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 539,
+        "endChar": 27
+      },
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c080fd59_76b3556f",
+        "filename": "src/bios_table.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "APIs must not be added directly to the stable category. This must be `LIBPLDM_ABI_TESTING` for now.\n\nSee:\n\nhttps://gerrit.openbmc.org/plugins/gitiles/openbmc/libpldm/+/refs/heads/main/README.md#development\n\nPlease audit the rest of the functions added in the patch against this comment.",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c3e248_277f64dd",
+        "filename": "src/bios_table.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "This feels a little tedious. Is there a better way?",
+      "range": {
+        "startLine": 322,
+        "startChar": 1,
+        "endLine": 329,
+        "endChar": 52
+      },
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40238437_f3af4b17",
+        "filename": "src/bios_table.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "While it\u0027s not ideal, functions for encoding and decoding PLDM messages:\n\n1. Don\u0027t have a `pldm_` prefix to the symbol\n2. Start with `encode_` or `decode_`\n\nSee:\n\nhttps://gerrit.openbmc.org/plugins/gitiles/openbmc/libpldm/+/refs/heads/main/README.md#libpldm\n\nAt this point consistency of the API is more important than namespacing. Fixing the namespacing is on the todo list.\n\nPlease rename the encoding/decoding functions for consistency with the rest of the libpldm API.\n\nPlease audit the rest of the added functions in the patch against this comment.",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ca42807_f6746f97",
+        "filename": "src/bios_table.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "Please implement this in terms of the `msgbuf` APIs.\n\nhttps://gerrit.openbmc.org/plugins/gitiles/openbmc/libpldm/+/refs/heads/main/src/msgbuf.h\n\nHere\u0027s an example implementation:\n\nhttps://gerrit.openbmc.org/plugins/gitiles/openbmc/libpldm/+/refs/heads/main/src/platform.c#1003",
+      "range": {
+        "startLine": 346,
+        "startChar": 1,
+        "endLine": 382,
+        "endChar": 21
+      },
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9d2c477_04ed55f7",
+        "filename": "src/bios_table.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "`const` in C means \u0027memory that cannot be written\u0027, which is not the same as a compile-time constant. This should probably be a `#define`.",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dab835a_4683a34c",
+        "filename": "src/bios_table.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "Where is the check that this array access is not out-of-bounds?\n\nWhy are we indexing into metadata this way? Much better would be to use the `msgbuf` APIs to handle this safely (as they do all the necessary bounds checking).",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "051ecf3d_1f5cedb0",
+        "filename": "src/bios_table.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "The alignment of `struct pldm_bios_attr_table_entry` is 1, which means this access may be unaligned. Unaligned accesses can generate traps in freestanding contexts.\n\nPlease try to exploit the `msbguf` APIs, which correctly handle issues with alignment and also perform the endian conversion for you.\n\nFinally, please integrate assertions that demonstrate that this calculation can\u0027t overflow.",
+      "range": {
+        "startLine": 409,
+        "startChar": 1,
+        "endLine": 411,
+        "endChar": 32
+      },
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1693def5_c0fd7f1f",
+        "filename": "src/bios_table.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "Why are all of these individual accessor functions?",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f400baa_a3428623",
+        "filename": "src/bios_table.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "There\u0027s no bounds checking in any of this. Please use the `msgbuf` APIs.",
+      "range": {
+        "startLine": 883,
+        "startChar": 0,
+        "endLine": 918,
+        "endChar": 1
+      },
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "577f54a5_3e33bdf4",
+        "filename": "src/bios_table.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "Why are we subtracting one here?",
+      "range": {
+        "startLine": 1035,
+        "startChar": 53,
+        "endLine": 1035,
+        "endChar": 58
+      },
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42f4e99f_7f3f561c",
+        "filename": "src/bios_table.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-07T23:03:56Z",
+      "side": 1,
+      "message": "Please implement this in terms of the `msgbuf` APIs.",
+      "range": {
+        "startLine": 1048,
+        "startChar": 1,
+        "endLine": 1073,
+        "endChar": 21
+      },
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
