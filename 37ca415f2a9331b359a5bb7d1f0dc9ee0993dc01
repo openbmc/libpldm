@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7e0747c_4c9bdf43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-03-08T05:58:55Z",
+      "side": 1,
+      "message": "Hi, first, thank you for all the reviews.\n\nI\u0027ll improve the code based on your suggestion. About the 2nd missing part.\n\u003e 2. An update to the changelog detailing the new APIs.\n\nDo you mean that adding a new minor version at (https://github.com/openbmc/libpldm/blob/main/CHANGELOG.md) and mark what I\u0027ve added, am I correct? If so, since the lastest version is 0.3.0, I plan to add version 0.4.0 and mark the details of the new APIs.",
+      "parentUuid": "2e4d9575_3c4b2975",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f2e35d0_014880a8",
         "filename": "include/libpldm/bios.h",
         "patchSetId": 3
