@@ -432,6 +432,158 @@ void pldm_bios_table_attr_entry_integer_decode(
 	const struct pldm_bios_attr_table_entry *entry, uint64_t *lower,
 	uint64_t *upper, uint32_t *scalar, uint64_t *def);
 
+struct pldm_bios_table_attr_entry_boot_config_setting_info {
+	uint16_t name_handle; //!< attribute name handle
+	bool read_only;	      //!< indicate whether the attribute is read-only
+	uint8_t boot_config_type; //!< The type of the boot config setting
+	uint8_t supported_order_and_fail_through_mode; //!< The supported order and fail through mode
+	uint8_t minimum_boot_source_num; //!< The minimum number of boot sources
+	uint8_t maximum_boot_source_num; //!< The maximum number of boot sources
+	uint8_t possible_boot_source_num; //!< The number of possible boot sources
+	const uint16_t *
+		possible_boot_source_handles; //!< The string handles of possible boot sources
+};
+
+/**
+ * @brief Calculates the encoded length of the BIOS table attribute entry for boot configuration settings.
+ * @param[in] boot_config_type The type of boot configuration.
+ * @param[in] supported_order_and_fail_through_mode The supported order and fail-through mode.
+ * @param[in] minimum_boot_source_num The minimum number of boot source settings.
+ * @param[in] maximum_boot_source_num The maximum number of boot source settings.
+ * @param[in] possible_boot_source_num The possible boot source number.
+ * @return The encoded length of the BIOS table attribute entry for boot configuration settings.
+ */
+size_t pldm_bios_table_attr_entry_boot_config_setting_encode_length(
+	uint8_t boot_config_type, uint8_t supported_order_and_fail_through_mode,
+	uint8_t minimum_boot_source_num, uint8_t maximum_boot_source_num,
+	uint8_t possible_boot_source_num);
+
+/**
+ * @brief Check the boot configuration setting attribute entry for the BIOS table.
+ * @param[in] entry The pointer to the entry buffer.
+ * @param[in] entry_length The length of the entry buffer.
+ * @param[in] info The pointer to the boot configuration setting information.
+ * @return Returns PLDM completoion code. PLDM_SUCCESS on success.
+ */
+int pldm_bios_table_attr_entry_boot_config_setting_encode_check(
+	void *entry, size_t entry_length,
+	const struct pldm_bios_table_attr_entry_boot_config_setting_info *info);
+
+/**
+ * @brief Check possible values of the boot configuration setting for a BIOS attribute table entry.
+ * @param[in] entry The BIOS attribute table entry to decode.
+ * @param[out] pv_num Pointer to store the decoded boot configuration setting.
+ * @return Returns PLDM completoion code. PLDM_SUCCESS on success.
+ */
+int pldm_bios_table_attr_entry_boot_config_setting_decode_pv_num_check(
+	const struct pldm_bios_attr_table_entry *entry, uint8_t *pv_num);
+
+/**
+ * @brief Check possible handles of the boot configuration setting for a BIOS attribute table entry.
+ * @param[in] entry The BIOS attribute table entry to decode.
+ * @param[out] pv_hdls Pointer to store the decoded possible value handles.
+ * @return Returns PLDM completoion code. PLDM_SUCCESS on success.
+ */
+int pldm_bios_table_attr_entry_boot_config_setting_decode_pv_hdls_check(
+	const struct pldm_bios_attr_table_entry *entry, uint16_t *pv_hdls,
+	uint8_t pv_num);
+
+/**
+ * @brief Check boot config type of the boot configuration setting for a BIOS attribute table entry.
+ * @param[in] entry The BIOS attribute table entry to decode.
+ * @param[out] boot_config_type Pointer to store the decoded boot config type.
+ * @return Returns PLDM completoion code. PLDM_SUCCESS on success.
+ */
+int pldm_bios_table_attr_entry_boot_config_setting_decode_boot_config_type_check(
+	const struct pldm_bios_attr_table_entry *entry,
+	uint8_t *boot_config_type);
+
+/**
+ * @brief Check supported order and mode of the boot configuration setting for a BIOS attribute table entry.
+ * @param[in] entry The BIOS attribute table entry to decode.
+ * @param[out] supported_order_and_fail_through_mode Pointer to store the decoded supported order and mode.
+ * @return Returns PLDM completoion code. PLDM_SUCCESS on success.
+ */
+int pldm_bios_table_attr_entry_boot_config_setting_decode_supported_order_and_fail_through_mode_check(
+	const struct pldm_bios_attr_table_entry *entry,
+	uint8_t *supported_order_and_fail_through_mode);
+
+/**
+ * @brief Check minimum boot source of the boot configuration setting for a BIOS attribute table entry.
+ * @param[in] entry The BIOS attribute table entry to decode.
+ * @param[out] minimum_boot_source_num Pointer to store the decoded minimum boot source.
+ * @return Returns PLDM completoion code. PLDM_SUCCESS on success.
+ */
+int pldm_bios_table_attr_entry_boot_config_setting_decode_minimum_boot_source_num_check(
+	const struct pldm_bios_attr_table_entry *entry,
+	uint8_t *minimum_boot_source_num);
+
+/**
+ * @brief Check maximum boot source of the boot configuration setting for a BIOS attribute table entry.
+ * @param[in] entry The BIOS attribute table entry to decode.
+ * @param[out] minimum_boot_source_num Pointer to store the decoded maximum boot source.
+ * @return Returns PLDM completoion code. PLDM_SUCCESS on success.
+ */
+int pldm_bios_table_attr_entry_boot_config_setting_decode_maximum_boot_source_num_check(
+	const struct pldm_bios_attr_table_entry *entry,
+	uint8_t *maximum_boot_source_num);
+
+/**
+ * @brief Check boot source number of the boot configuration setting for a BIOS attribute table entry.
+ * @param[in] entry The BIOS attribute table entry to decode.
+ * @param[out] minimum_boot_source_num Pointer to store the decoded boot source number.
+ * @return Returns PLDM completoion code. PLDM_SUCCESS on success.
+ */
+int pldm_bios_table_attr_entry_boot_config_setting_decode_boot_source_num_check(
+	const struct pldm_bios_attr_val_table_entry *entry,
+	uint8_t *boot_source_num);
+
+/**
+ * @brief Decodes the boot configuration setting number from a BIOS attribute value table entry.
+ * @param[in] entry A pointer to the BIOS attribute value table entry.
+ * @return The decoded boot configuration setting number.
+ */
+uint8_t pldm_bios_table_attr_value_entry_boot_config_setting_decode_number(
+	const struct pldm_bios_attr_val_table_entry *entry);
+
+/**
+ * @brief Decodes the boot config handles from a BIOS attribute value table entry.
+ * @param[in] entry A pointer to the BIOS attribute value table entry.
+ * @param[out] handles A pointer to a buffer to store the boot config handles.
+ * @param[in] number The number of boot config handles expected.
+ * @return The length of boot config handles.
+ */
+uint8_t pldm_bios_table_attr_value_entry_boot_config_setting_decode_handles(
+	const struct pldm_bios_attr_val_table_entry *entry, uint8_t *handles,
+	uint8_t number);
+
+/**
+ * @brief Encodes the length of a boot configuration setting entry in the BIOS table attribute value.
+ * @param boot_source_num The boot source number for which the length needs to be calculated.
+ * @return The length of the boot configuration setting entry.
+ */
+size_t pldm_bios_table_attr_value_entry_encode_boot_config_setting_length(
+	uint8_t boot_source_num);
+
+/**
+ * @brief Check a BIOS table attribute value entry for boot configuration setting.
+ * @param[out] entry The pointer to the entry buffer.
+ * @param[in] entry_length The length of the entry buffer.
+ * @param[in] attr_handle The attribute handle.
+ * @param[in] attr_type The attribute type.
+ * @param[in] boot_config_type The boot configuration type.
+ * @param[in] order_and_fail_through_mode The order and fail-through mode.
+ * @param[in] count The count of boot config handles.
+ * @param[in] handlesIndex The pointer to the boot config handles.
+ *
+ * @return Returns 0 on success, or a negative error code on failure.
+ */
+int pldm_bios_table_attr_value_entry_encode_boot_config_setting_check(
+	void *entry, size_t entry_length, uint16_t attr_handle,
+	uint8_t attr_type, uint8_t boot_config_type,
+	uint8_t order_and_fail_through_mode, uint8_t count,
+	const uint8_t *handlesIndex);
+
 /** @brief Get the attribute handle from the attribute value table entry
  *  @param[in] entry - Pointer to bios attribute value table entry
  *  @return handle to identify the attribute in the attribute value table
