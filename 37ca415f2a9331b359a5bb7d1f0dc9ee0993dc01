@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5937f6ae_46b8e3f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-08T08:09:58Z",
+      "side": 1,
+      "message": "\u003e Do you mean that adding a new minor version at (https://github.com/openbmc/libpldm/blob/main/CHANGELOG.md) and mark what I\u0027ve added, am I correct?\n\n- In CHANGELOG.md: Yes, thanks\n- Mark what you\u0027ve added: Yes, please list what you\u0027ve added in an entry under the `Added` subheader\n- Adding a new minor version: No, please don\u0027t. There\u0027s an `[Unreleased]` section near the top of the file under which you should add your entries:\n\nhttps://github.com/openbmc/libpldm/blob/main/CHANGELOG.md#unreleased\n\n\u003e since the lastest version is 0.3.0\n\nCan you unpack how you\u0027ve come to that conclusion? The latest tag is v0.7.0:\n\nhttps://github.com/openbmc/libpldm/releases/tag/v0.7.0\n\nThe changelog lists it here:\n\nhttps://github.com/openbmc/libpldm/blob/main/CHANGELOG.md#070---2023-08-29\n\n\u003e I plan to add version 0.4.0\n\nPlease do not invent new sections or add to sections of already tagged releases.\nIf you read through the file you should find it is organised from the newest release at the top to the oldest at the bottom.",
+      "parentUuid": "c7e0747c_4c9bdf43",
+      "revId": "37ca415f2a9331b359a5bb7d1f0dc9ee0993dc01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f2e35d0_014880a8",
         "filename": "include/libpldm/bios.h",
         "patchSetId": 3
