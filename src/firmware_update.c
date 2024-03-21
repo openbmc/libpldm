@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "msgbuf.h"
 #include <libpldm/firmware_update.h>
 #include <libpldm/utils.h>
 
@@ -71,6 +72,17 @@ static uint16_t get_descriptor_type_length(uint16_t descriptor_type)
 		return PLDM_FWUP_UBM_CONTROLLER_DEVICE_CODE_LENGTH;
 	default:
 		return 0;
+	}
+}
+
+static bool is_downstream_device_update_support_valid(uint8_t resp)
+{
+	switch (resp) {
+	case PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_NOT_SUPPORTED:
+	case PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_SUPPORTED:
+		return true;
+	default:
+		return false;
 	}
 }
 
@@ -851,6 +863,63 @@ int decode_get_firmware_parameters_resp_comp_entry(
 		pending_comp_ver_str->ptr = NULL;
 		pending_comp_ver_str->length = 0;
 	}
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_query_downstream_devices_req(uint8_t instance_id,
+					size_t payload_length,
+					struct pldm_msg *msg)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length != PLDM_QUERY_DOWNSTREAM_DEVICES_REQ_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	return encode_pldm_header_only(PLDM_REQUEST, instance_id, PLDM_FWUP,
+				       PLDM_QUERY_DOWNSTREAM_DEVICES, msg);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_query_downstream_devices_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_query_downstream_devices_resp *resp_data)
+{
+	if (msg == NULL || resp_data == NULL || !payload_length) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	resp_data->completion_code = msg->payload[0];
+	if (PLDM_SUCCESS != resp_data->completion_code) {
+		// Return the CC directly without decoding the rest of the payload
+		return PLDM_SUCCESS;
+	}
+
+	if (payload_length <
+	    sizeof(struct pldm_query_downstream_devices_resp)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_query_downstream_devices_resp *response =
+		(struct pldm_query_downstream_devices_resp *)msg->payload;
+
+	if (is_downstream_device_update_support_valid(
+		    response->downstream_device_update_supported)) {
+		resp_data->downstream_device_update_supported =
+			response->downstream_device_update_supported;
+	} else {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	resp_data->number_of_downstream_devices =
+		le16toh(response->number_of_downstream_devices);
+	resp_data->max_number_of_downstream_devices =
+		le16toh(response->max_number_of_downstream_devices);
+	resp_data->capabilities.value = le32toh(response->capabilities.value);
+
 	return PLDM_SUCCESS;
 }
 
