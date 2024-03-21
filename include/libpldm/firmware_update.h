@@ -16,7 +16,31 @@ struct variable_field;
 
 #define PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE		 8
 #define PLDM_FWUP_INVALID_COMPONENT_COMPARISON_TIMESTAMP 0xffffffff
-#define PLDM_QUERY_DEVICE_IDENTIFIERS_REQ_BYTES		 0
+
+/** @brief Minimum length of response for a optional PLDM command
+ *
+ *         For a optional PLDM command, the command handler might not be
+ *         implemented in a device's firmware, a response contains only CC
+ *         might come in, such as ERROR_UNSUPPORTED_PLDM_CMD.
+ *
+ *         The description can be found in DSP0240:
+ *         > For an unsupported PLDM command, the ERROR_UNSUPPORTED_PLDM_CMD
+ *         > completion code shall be returned unless the responder is in a
+ *         > transient state (not ready), in which it cannot process the PLDM
+ *         > command. If the responder is in a transient state, it may return
+ *         > the ERROR_NOT_READY completion code.
+*/
+#define PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN	1
+#define PLDM_QUERY_DEVICE_IDENTIFIERS_REQ_BYTES 0
+#define PLDM_QUERY_DOWNSTREAM_DEVICES_REQ_BYTES 0
+/** @brief Length of QueryDownstreamDevices response defined in DSP0267_1.1.0
+ * 	       Table 15 - QueryDownstreamDevices command format.
+ *
+ *         1 byte for completion code, 1 byte for downstream device update supported,
+ *         2 bytes for number of downstream devices, 2 bytes for max number of downstream devices
+ *         4 bytes for capabilities.
+ */
+#define PLDM_QUERY_DOWNSTREAM_DEVICES_RESP_BYTES 10
 /** @brief Minimum length of device descriptor, 2 bytes for descriptor type,
  *         2 bytes for descriptor length and atleast 1 byte of descriptor data
  */
@@ -35,6 +59,7 @@ struct variable_field;
 enum pldm_firmware_update_commands {
 	PLDM_QUERY_DEVICE_IDENTIFIERS = 0x01,
 	PLDM_GET_FIRMWARE_PARAMETERS = 0x02,
+	PLDM_QUERY_DOWNSTREAM_DEVICES = 0x03,
 	PLDM_REQUEST_UPDATE = 0x10,
 	PLDM_PASS_COMPONENT_TABLE = 0x13,
 	PLDM_UPDATE_COMPONENT = 0x14,
@@ -324,6 +349,14 @@ enum pldm_firmware_update_non_functioning_component_indication {
 	PLDM_FWUP_COMPONENTS_NOT_FUNCTIONING = 1
 };
 
+/** @brief Downstream device update supported in QueryDownstreamDevices response
+ *         defined in DSP0267_1.1.0
+*/
+enum pldm_firmware_update_downstream_device_update_supported {
+	PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_NOT_SUPPORTED = 0,
+	PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_SUPPORTED = 1
+};
+
 /** @struct pldm_package_header_information
  *
  *  Structure representing fixed part of package header information
@@ -411,6 +444,20 @@ struct pldm_get_firmware_parameters_resp {
 	uint8_t pending_comp_image_set_ver_str_type;
 	uint8_t pending_comp_image_set_ver_str_len;
 } __attribute__((packed));
+
+/** @struct pldm_query_downstream_devices_resp
+ *
+ *  Structure representing response of QueryDownstreamDevices.
+ *  The definition can be found Table 15 - QueryDownstreamDevices command format
+ *  in DSP0267_1.1.0
+ */
+struct pldm_query_downstream_devices_resp {
+	uint8_t completion_code;
+	uint8_t downstream_device_update_supported;
+	uint16_t number_of_downstream_devices;
+	uint16_t max_number_of_downstream_devices;
+	bitfield32_t capabilities;
+};
 
 /** @struct pldm_component_parameter_entry
  *
@@ -737,6 +784,36 @@ int decode_get_firmware_parameters_resp_comp_entry(
 	struct pldm_component_parameter_entry *component_data,
 	struct variable_field *active_comp_ver_str,
 	struct variable_field *pending_comp_ver_str);
+
+/** @brief Create a PLDM request message for QueryDownstreamDevices
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of the request message payload
+ *
+ *  @return pldm_completion_codes
+ *
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_query_downstream_devices_req(uint8_t instance_id,
+					struct pldm_msg *msg,
+					size_t payload_length);
+
+/**
+ * @brief Decodes the response message for Querying Downstream Devices.
+ *
+ * @param[in] msg The PLDM message to decode.
+ * @param[in] payload_length The length of the message payload.
+ * @param[in,out] resp_data Pointer to the structure to store the decoded response data.
+ * @return pldm_completion_codes
+ *
+ * @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int decode_query_downstream_devices_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_query_downstream_devices_resp *resp_data);
 
 /** @brief Create PLDM request message for RequestUpdate
  *
