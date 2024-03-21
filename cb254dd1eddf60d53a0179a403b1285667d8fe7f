@@ -3,6 +3,114 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "724c6477_e80088fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-03-21T08:42:57Z",
+      "side": 1,
+      "message": "Could you please add what use-cases, did you tested as part of this change?\nyou can use this changes and plugin with existing API in pldm and test the use-case.",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da947d9_c16be389",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-03-21T08:42:57Z",
+      "side": 1,
+      "message": "Extra line",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "520139d4_2a936619",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-03-21T08:42:57Z",
+      "side": 1,
+      "message": "since this function is for local use, so please add proper doxygen comments to understand function better.\nplease mention remote_pdr means also.",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d5d2312_89ff2d95",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-03-21T08:42:57Z",
+      "side": 1,
+      "message": "copying existing pdr data into new pdr is common code from line number 1333 to 1342 and \n1433 to 1454, this could be moved new copy function.",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74f827c_f72c074c",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-03-21T08:42:57Z",
+      "side": 1,
+      "message": "since this function is for local use, so please add proper doxygen comments to understand function better.",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59ad52ba_2b67a389",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1465,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-03-21T08:42:57Z",
+      "side": 1,
+      "message": "This needs to be LIBPLDM_ABI_TESTING",
+      "range": {
+        "startLine": 1465,
+        "startChar": 0,
+        "endLine": 1465,
+        "endChar": 18
+      },
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e5962fc3_b2b1ae88",
         "filename": "src/pdr.c",
         "patchSetId": 17
