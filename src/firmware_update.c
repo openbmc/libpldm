@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "msgbuf.h"
 #include <libpldm/firmware_update.h>
 #include <libpldm/utils.h>
 
@@ -71,6 +72,17 @@ static uint16_t get_descriptor_type_length(uint16_t descriptor_type)
 		return PLDM_FWUP_UBM_CONTROLLER_DEVICE_CODE_LENGTH;
 	default:
 		return 0;
+	}
+}
+
+static bool is_downstream_device_update_support_valid(uint8_t resp)
+{
+	switch (resp) {
+	case PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_NOT_SUPPORTED:
+	case PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_SUPPORTED:
+		return true;
+	default:
+		return false;
 	}
 }
 
@@ -852,6 +864,68 @@ int decode_get_firmware_parameters_resp_comp_entry(
 		pending_comp_ver_str->length = 0;
 	}
 	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_query_downstream_devices_req(uint8_t instance_id,
+					struct pldm_msg *msg)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	return encode_pldm_header_only(PLDM_REQUEST, instance_id, PLDM_FWUP,
+				       PLDM_QUERY_DOWNSTREAM_DEVICES, msg);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_query_downstream_devices_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_query_downstream_devices_resp *resp_data)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (msg == NULL || resp_data == NULL || !payload_length) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init(buf, PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, resp_data->completion_code);
+	if (rc) {
+		return rc;
+	}
+	if (PLDM_SUCCESS != resp_data->completion_code) {
+		// Return the CC directly without decoding the rest of the payload
+		return PLDM_SUCCESS;
+	}
+
+	if (payload_length < PLDM_QUERY_DOWNSTREAM_DEVICES_RESP_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	rc = pldm_msgbuf_extract(buf,
+				 resp_data->downstream_device_update_supported);
+	if (rc) {
+		return rc;
+	}
+
+	if (!is_downstream_device_update_support_valid(
+		    resp_data->downstream_device_update_supported)) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	pldm_msgbuf_extract(buf, resp_data->number_of_downstream_devices);
+	pldm_msgbuf_extract(buf, resp_data->max_number_of_downstream_devices);
+	pldm_msgbuf_extract(buf, resp_data->capabilities.value);
+
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
