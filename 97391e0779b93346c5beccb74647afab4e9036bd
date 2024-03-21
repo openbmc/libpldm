@@ -35,6 +35,60 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc5b7781_2147125b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "orphan entities are IBM specific , removed it and explained the commit in a different way",
+      "parentUuid": "5f3dadb4_e06f3f23",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01013165_24189c99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f3dadb4_e06f3f23",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "056845d5_f631fb56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb5a24da_b25b1f9e",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e3e0d98_7c2201d4",
@@ -75,6 +129,48 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3038e29_c0a42c94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b215dd32_333f5d73",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 33
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5349e6c1_bb95dcdd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e3e0d98_7c2201d4",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5010c93a_2b686a0b",
@@ -98,6 +194,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3546d148_71cb8b6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "DSP0248_1.2.0 - SECTION 28.17 AND TABLE 94 - format of entity association PDR format. This spec explains the meaning of entity association PDR, contained entity and container entity",
+      "parentUuid": "5010c93a_2b686a0b",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 11,
+        "endChar": 1
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e15711b3_103f4420",
@@ -111,6 +231,30 @@
       "writtenOn": "2024-02-14T00:19:14Z",
       "side": 1,
       "message": "Seeing \"also\" in a commit message peaks my interest, because it suggests that it probably should be split into separate, isolated changes.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 4
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a0595d5_85b8a2fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e15711b3_103f4420",
       "range": {
         "startLine": 12,
         "startChar": 0,
@@ -173,6 +317,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd626c9e_42917408",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "removed this .",
+      "parentUuid": "8a333b34_cf3c061c",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98fd5620_3bf63cc5",
@@ -190,6 +352,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a9cb5e_d8d29d06",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98fd5620_3bf63cc5",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35c457f8_84cd86e0",
@@ -203,6 +383,30 @@
       "writtenOn": "2024-02-14T00:19:14Z",
       "side": 1,
       "message": "Why are these being passed by value?",
+      "range": {
+        "startLine": 475,
+        "startChar": 17,
+        "endLine": 475,
+        "endChar": 55
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6bc5161_4ce068da",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "changed to pass by reference",
+      "parentUuid": "35c457f8_84cd86e0",
       "range": {
         "startLine": 475,
         "startChar": 17,
@@ -236,6 +440,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6ec8e4f_04b078d1",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "This enum is not required here as an input parameter so removed it",
+      "parentUuid": "c3c9f80f_c5104500",
+      "range": {
+        "startLine": 476,
+        "startChar": 1,
+        "endLine": 476,
+        "endChar": 23
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "020d6dbf_0678e6b4",
@@ -253,6 +481,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "138f522f_2f471f47",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "020d6dbf_0678e6b4",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c3a9bf4_4049f63b",
@@ -266,6 +512,24 @@
       "writtenOn": "2024-02-14T00:19:14Z",
       "side": 1,
       "message": "Adding functions straight to the stable ABI is forbidden.\n\nPlease take a few minutes to review the following:\n\nhttps://github.com/openbmc/libpldm/?tab\u003dreadme-ov-file#working-with-libpldm",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05d72814_47257f80",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c3a9bf4_4049f63b",
       "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -293,6 +557,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57447110_3a121c3f",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9b96002_2b53f3a0",
+      "range": {
+        "startLine": 1300,
+        "startChar": 1,
+        "endLine": 1304,
+        "endChar": 64
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e16b0b13_36a12740",
@@ -306,6 +594,30 @@
       "writtenOn": "2024-02-14T00:19:14Z",
       "side": 1,
       "message": "I find this comment quite hard to understand. Please use full-stops.",
+      "range": {
+        "startLine": 1305,
+        "startChar": 1,
+        "endLine": 1310,
+        "endChar": 26
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75ff6bae_43f7cc47",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1310,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e16b0b13_36a12740",
       "range": {
         "startLine": 1305,
         "startChar": 1,
@@ -351,6 +663,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c374d6cf_a8563076",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c87fdb55_17e48a8c",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0b72ee7_d7a1c564",
@@ -364,6 +694,30 @@
       "writtenOn": "2024-02-14T00:19:14Z",
       "side": 1,
       "message": "Why is this cast valid? Please justify it in a comment and via asserts.\n\nPlease audit the patch and address this issue throughout.",
+      "range": {
+        "startLine": 1328,
+        "startChar": 1,
+        "endLine": 1330,
+        "endChar": 36
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "583cd2dc_705e9371",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1330,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0b72ee7_d7a1c564",
       "range": {
         "startLine": 1328,
         "startChar": 1,
@@ -391,6 +745,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3bf055d_d029d2d9",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1339,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce1bcbed_272415b6",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "601c3efd_18e2dd54",
@@ -408,6 +780,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76ded844_b534a7e9",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "The PDR is obtained from the host and after the PDR is updated once the contained entity is included, its record handle is once accessed by the host so we need to make sure we store the record handle in the correct endian format",
+      "parentUuid": "601c3efd_18e2dd54",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2dcdcfb_8dbd5c87",
@@ -421,6 +811,24 @@
       "writtenOn": "2024-02-14T00:19:14Z",
       "side": 1,
       "message": "Delete this.",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7889995_fc5f95a4",
+        "filename": "src/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1505,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T05:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2dcdcfb_8dbd5c87",
       "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
