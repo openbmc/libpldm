@@ -39,6 +39,7 @@ Change categories:
 11. state_set: Add CONNECTED and DISCONNECTED enum for Link State set
 12. entity: Add enum for Network Interface Connectors and Network Ports
     Connection Types
+13. fw_update: Add encode req & decode resp for query_downstream_devices
 
 ### Changed
 

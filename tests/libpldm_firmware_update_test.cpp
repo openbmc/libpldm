@@ -1276,6 +1276,97 @@ TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
                         outPendingCompVerStr.length));
 }
 
+TEST(QueryDownstreamDevices, goodPathEncodeRequest)
+{
+    constexpr uint8_t instanceId = 1;
+    constexpr uint8_t payload_length = PLDM_QUERY_DOWNSTREAM_DEVICES_REQ_BYTES;
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + payload_length> requestMsg{};
+    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_query_downstream_devices_req(instanceId, payload_length,
+                                                  requestPtr);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(requestPtr->hdr.request, PLDM_REQUEST);
+    EXPECT_EQ(requestPtr->hdr.instance_id, instanceId);
+    EXPECT_EQ(requestPtr->hdr.type, PLDM_FWUP);
+    EXPECT_EQ(requestPtr->hdr.command, PLDM_QUERY_DOWNSTREAM_DEVICES);
+}
+
+TEST(QueryDownstreamDevices, encodeRequestWrongPayloadLength)
+{
+    constexpr uint8_t instanceId = 1;
+    constexpr uint8_t payload_length = 3; /* Wrong request length*/
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + payload_length> requestMsg{};
+    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_query_downstream_devices_req(
+        instanceId, payload_length - 1, requestPtr);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+
+TEST(QueryDownstreamDevices, goodPathDecodeResponse)
+{
+    // Capabilities of updating downstream devices
+    // FDP supports downstream devices dynamically attached [Bit position 0] &
+    // FDP supports downstream devices dynamically removed [Bit position 1]
+    constexpr std::bitset<32> capabilities{0x0002};
+
+    std::array<uint8_t, hdrSize + sizeof(pldm_query_downstream_devices_resp)>
+        responseMsg{};
+
+    auto payload = reinterpret_cast<struct pldm_query_downstream_devices_resp*>(
+        responseMsg.data() + hdrSize);
+
+    payload->completion_code = PLDM_SUCCESS;
+    payload->downstream_device_update_supported =
+        PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_SUPPORTED;
+    payload->number_of_downstream_devices = 1;
+    payload->max_number_of_downstream_devices = 1;
+    payload->capabilities.value = capabilities.to_ulong();
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_query_downstream_devices_resp resp_data;
+
+    auto rc = decode_query_downstream_devices_resp(
+        response, responseMsg.size() - hdrSize, &resp_data);
+
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+    ASSERT_EQ(resp_data.completion_code, PLDM_SUCCESS);
+    ASSERT_EQ(resp_data.downstream_device_update_supported,
+              PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_SUPPORTED);
+    ASSERT_EQ(resp_data.number_of_downstream_devices, 1);
+    ASSERT_EQ(resp_data.max_number_of_downstream_devices, 1);
+    ASSERT_EQ(resp_data.capabilities.value, capabilities);
+}
+
+TEST(QueryDownstreamDevices, decodeRequestUndefinedValue)
+{
+    // Capabilities of updating downstream devices
+    // FDP supports downstream devices dynamically attached [Bit position 0] &
+    // FDP supports downstream devices dynamically removed [Bit position 1]
+    constexpr std::bitset<32> capabilities{0x0002};
+
+    std::array<uint8_t, hdrSize + sizeof(pldm_query_downstream_devices_resp)>
+        responseMsg{};
+
+    auto payload = reinterpret_cast<struct pldm_query_downstream_devices_resp*>(
+        responseMsg.data() + hdrSize);
+
+    payload->completion_code = PLDM_SUCCESS;
+    payload->downstream_device_update_supported = 0xe; /*Undefined value*/
+    payload->number_of_downstream_devices = 1;
+    payload->max_number_of_downstream_devices = 1;
+    payload->capabilities.value = capabilities.to_ulong();
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_query_downstream_devices_resp resp_data;
+
+    auto rc = decode_query_downstream_devices_resp(
+        response, responseMsg.size() - hdrSize, &resp_data);
+
+    ASSERT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
 TEST(RequestUpdate, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
