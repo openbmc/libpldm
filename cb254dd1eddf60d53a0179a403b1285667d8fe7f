@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66882ba5_5b4339d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-21T09:16:39Z",
+      "side": 1,
+      "message": "pdr:",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2012fbf_6fe99c86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-21T09:16:39Z",
+      "side": 1,
+      "message": "Can you mention the spec that talks about this use case of adding the entity?",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "724c6477_e80088fd",
         "filename": "/COMMIT_MSG",
         "patchSetId": 17
@@ -14,6 +54,23 @@
       "writtenOn": "2024-03-21T08:42:57Z",
       "side": 1,
       "message": "Could you please add what use-cases, did you tested as part of this change?\nyou can use this changes and plugin with existing API in pldm and test the use-case.",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5db8293_f5a26953",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-21T09:16:39Z",
+      "side": 1,
+      "message": "Hi Varsha, can you please add associated abi dumps? - https://amboar.github.io/notes/2023/06/26/managing-the-libpldm-abi-reference-dumps.html\n\nAlso an entry in CHANGELOG.md in the ADDED section.",
       "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -71,6 +128,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98bf0a16_27c37d95",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1354,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-21T09:16:39Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 1354,
+        "startChar": 11,
+        "endLine": 1354,
+        "endChar": 18
+      },
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b74f827c_f72c074c",
         "filename": "src/pdr.c",
         "patchSetId": 17
@@ -99,6 +179,30 @@
       "writtenOn": "2024-03-21T08:42:57Z",
       "side": 1,
       "message": "This needs to be LIBPLDM_ABI_TESTING",
+      "range": {
+        "startLine": 1465,
+        "startChar": 0,
+        "endLine": 1465,
+        "endChar": 18
+      },
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0977dde_ad6a6173",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1465,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-21T09:16:39Z",
+      "side": 1,
+      "message": "+1\nThe API should be marked STABLE only after we imply we are not breaking any of the functions.\nhttps://amboar.github.io/notes/2023/06/26/managing-the-libpldm-abi-reference-dumps.html",
+      "parentUuid": "59ad52ba_2b67a389",
       "range": {
         "startLine": 1465,
         "startChar": 0,
@@ -151,6 +255,57 @@
         "endLine": 1506,
         "endChar": 37
       },
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b3081c_6e3fc972",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 1933,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-21T09:16:39Z",
+      "side": 1,
+      "message": "can you explain this test case a bit? I am confused on what we tried here.",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b32e51_dafebe8f",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 2002,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-21T09:16:39Z",
+      "side": 1,
+      "message": "How is this valid? the record handle sent as part of the function looks to be 11 and expected record handle is 2?",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7728d475_600901ab",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 2010,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-03-21T09:16:39Z",
+      "side": 1,
+      "message": "even here ?",
       "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
