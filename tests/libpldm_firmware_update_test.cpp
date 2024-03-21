@@ -13,6 +13,8 @@
 #include <string_view>
 #include <vector>
 
+#include "msgbuf.h"
+
 #include <gtest/gtest.h>
 
 constexpr auto hdrSize = sizeof(pldm_msg_hdr);
@@ -1274,6 +1276,157 @@ TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
     EXPECT_EQ(0, memcmp(outPendingCompVerStr.ptr,
                         entry.data() + pendingCompVerStrPos,
                         outPendingCompVerStr.length));
+}
+
+TEST(QueryDownstreamDevices, goodPathEncodeRequest)
+{
+    constexpr uint8_t instanceId = 1;
+    constexpr uint8_t payload_length = PLDM_QUERY_DOWNSTREAM_DEVICES_REQ_BYTES;
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + payload_length> requestMsg{};
+    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_query_downstream_devices_req(instanceId, requestPtr,
+                                                  payload_length);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(requestPtr->hdr.request, PLDM_REQUEST);
+    EXPECT_EQ(requestPtr->hdr.instance_id, instanceId);
+    EXPECT_EQ(requestPtr->hdr.type, PLDM_FWUP);
+    EXPECT_EQ(requestPtr->hdr.command, PLDM_QUERY_DOWNSTREAM_DEVICES);
+}
+
+TEST(QueryDownstreamDevices, encodeRequestWrongPayloadLength)
+{
+    constexpr uint8_t instanceId = 1;
+    constexpr uint8_t payload_length = 3; /* Wrong request length*/
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + payload_length> requestMsg{};
+    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_query_downstream_devices_req(instanceId, requestPtr,
+                                                  payload_length - 1);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+
+TEST(QueryDownstreamDevices, goodPathDecodeResponse)
+{
+    uint8_t completion_code_resp = PLDM_SUCCESS;
+    uint8_t downstream_device_update_supported_resp =
+        PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_SUPPORTED;
+    uint16_t number_of_downstream_devices_resp = 1;
+    uint16_t max_number_of_downstream_devices_resp = 1;
+    /** Capabilities of updating downstream devices
+     * FDP supports downstream devices dynamically attached [Bit position 0] &
+     * FDP supports downstream devices dynamically removed [Bit position 1]
+     */
+    bitfield32_t capabilities_resp = {.value = 0x0002};
+    int rc;
+
+    std::array<uint8_t, hdrSize + PLDM_QUERY_DOWNSTREAM_DEVICES_RESP_BYTES>
+        responseMsg{};
+
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    rc = pldm_msgbuf_init(buf, 0, responseMsg.data() + hdrSize,
+                          responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+
+    pldm_msgbuf_insert_uint8(buf, completion_code_resp);
+    pldm_msgbuf_insert_uint8(buf, downstream_device_update_supported_resp);
+    pldm_msgbuf_insert_uint16(buf, number_of_downstream_devices_resp);
+    pldm_msgbuf_insert_uint16(buf, max_number_of_downstream_devices_resp);
+    pldm_msgbuf_insert_uint32(buf, capabilities_resp.value);
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_query_downstream_devices_resp resp_data;
+
+    rc = decode_query_downstream_devices_resp(
+        response, responseMsg.size() - hdrSize, &resp_data);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(resp_data.completion_code, completion_code_resp);
+    EXPECT_EQ(resp_data.downstream_device_update_supported,
+              downstream_device_update_supported_resp);
+    EXPECT_EQ(resp_data.number_of_downstream_devices,
+              number_of_downstream_devices_resp);
+    EXPECT_EQ(resp_data.max_number_of_downstream_devices,
+              max_number_of_downstream_devices_resp);
+    EXPECT_EQ(resp_data.capabilities.value, capabilities_resp.value);
+}
+
+TEST(QueryDownstreamDevices, decodeRequestUndefinedValue)
+{
+    uint8_t completion_code_resp = PLDM_SUCCESS;
+    uint8_t downstream_device_update_supported_resp = 0xe; /*Undefined value*/
+    uint16_t number_of_downstream_devices_resp = 1;
+    uint16_t max_number_of_downstream_devices_resp = 1;
+    /** Capabilities of updating downstream devices
+     * FDP supports downstream devices dynamically attached [Bit position 0] &
+     * FDP supports downstream devices dynamically removed [Bit position 1]
+     */
+    bitfield32_t capabilities_resp = {.value = 0x0002};
+    int rc;
+
+    std::array<uint8_t, hdrSize + PLDM_QUERY_DOWNSTREAM_DEVICES_RESP_BYTES>
+        responseMsg{};
+
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    rc = pldm_msgbuf_init(buf, 0, responseMsg.data() + hdrSize,
+                          responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+
+    pldm_msgbuf_insert_uint8(buf, completion_code_resp);
+    pldm_msgbuf_insert_uint8(buf, downstream_device_update_supported_resp);
+    pldm_msgbuf_insert_uint16(buf, number_of_downstream_devices_resp);
+    pldm_msgbuf_insert_uint16(buf, max_number_of_downstream_devices_resp);
+    pldm_msgbuf_insert_uint32(buf, capabilities_resp.value);
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_query_downstream_devices_resp resp_data;
+
+    rc = decode_query_downstream_devices_resp(
+        response, responseMsg.size() - hdrSize, &resp_data);
+
+    ASSERT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(QueryDownstreamDevices, decodeRequestErrorBufSize)
+{
+    uint8_t completion_code_resp = PLDM_SUCCESS;
+    uint8_t downstream_device_update_supported_resp =
+        PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_SUPPORTED;
+    uint16_t number_of_downstream_devices_resp = 1;
+    uint16_t max_number_of_downstream_devices_resp = 1;
+    /** Capabilities of updating downstream devices
+     * FDP supports downstream devices dynamically attached [Bit position 0] &
+     * FDP supports downstream devices dynamically removed [Bit position 1]
+     */
+    bitfield32_t capabilities_resp = {.value = 0x0002};
+    int rc;
+
+    std::array<uint8_t, hdrSize + PLDM_QUERY_DOWNSTREAM_DEVICES_RESP_BYTES -
+                            2 /* Inject error length*/>
+        responseMsg{};
+
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    rc = pldm_msgbuf_init(buf, 0, responseMsg.data() + hdrSize,
+                          responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+
+    pldm_msgbuf_insert_uint8(buf, completion_code_resp);
+    pldm_msgbuf_insert_uint8(buf, downstream_device_update_supported_resp);
+    pldm_msgbuf_insert_uint16(buf, number_of_downstream_devices_resp);
+    pldm_msgbuf_insert_uint16(buf, max_number_of_downstream_devices_resp);
+    // Inject error value
+    pldm_msgbuf_insert_uint16(buf, (uint16_t)capabilities_resp.value);
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_query_downstream_devices_resp resp_data;
+
+    rc = decode_query_downstream_devices_resp(
+        response, responseMsg.size() - hdrSize, &resp_data);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(RequestUpdate, goodPathEncodeRequest)
