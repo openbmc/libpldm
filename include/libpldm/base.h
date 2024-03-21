@@ -114,6 +114,21 @@ typedef enum {
 
 #define PLDM_TIMESTAMP104_SIZE 13
 
+/** @brief Minimum length of response for a optional PLDM command
+ *
+ *  For a optional PLDM command, the command handler might not be
+ *  implemented in a device's firmware, a response contains only CC
+ *  might come in, such as ERROR_UNSUPPORTED_PLDM_CMD.
+ *
+ *  The description can be found in DSP0240:
+ *  > For an unsupported PLDM command, the ERROR_UNSUPPORTED_PLDM_CMD
+ *  > completion code shall be returned unless the responder is in a
+ *  > transient state (not ready), in which it cannot process the PLDM
+ *  > command. If the responder is in a transient state, it may return
+ *  > the ERROR_NOT_READY completion code.
+*/
+#define PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN 1
+
 /** @struct pldm_msg_hdr
  *
  * Structure representing PLDM message header fields
