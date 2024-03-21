@@ -89,6 +89,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b9def28_4b252fdc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "EDIT: Orphan entities will be changed in the next patch set.",
+      "parentUuid": "cc5b7781_2147125b",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e3e0d98_7c2201d4",
@@ -454,6 +472,30 @@
       "side": 1,
       "message": "This enum is not required here as an input parameter so removed it",
       "parentUuid": "c3c9f80f_c5104500",
+      "range": {
+        "startLine": 476,
+        "startChar": 1,
+        "endLine": 476,
+        "endChar": 23
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82875473_5dec2f0a",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "EDIT: This enum is required to keep track of change in BMC event operation, so it is an in-out parameter and needs to be a pointer. Also i am unable to change this from uint8_t to enum type pldm_pdr_repository_chg_event_change_record_event_data_operation because -\n1. enum pldm_pdr_repository_chg_event_change_record_event_data_operation is defined inside platform.h\n2. platform.h is included in pdr.c and not in pdr.h\n3. pdr.h is included in platform.h\n\nI did not find any example of something similar done inside libpldm, please suggest what we can do here? should we move the enum definition of pldm_pdr_repository_chg_event_change_record_event_data_operation to pldr.h instead of platform.h?",
+      "parentUuid": "a6ec8e4f_04b078d1",
       "range": {
         "startLine": 476,
         "startChar": 1,

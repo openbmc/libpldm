@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97e1ce73_814fa8b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66882ba5_5b4339d1",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2012fbf_6fe99c86",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-03-21T09:16:39Z",
       "side": 1,
       "message": "Can you mention the spec that talks about this use case of adding the entity?",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85fc82da_47672c87",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2012fbf_6fe99c86",
       "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -162,6 +204,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8111d05_de7fb825",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "520139d4_2a936619",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d5d2312_89ff2d95",
@@ -175,6 +235,24 @@
       "writtenOn": "2024-03-21T08:42:57Z",
       "side": 1,
       "message": "copying existing pdr data into new pdr is common code from line number 1333 to 1342 and \n1433 to 1454, this could be moved new copy function.",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1da6ec3_c6527cf9",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "It is not the same. We are updating the same same structure fields but the values given to the structure fields and its size different. So I cannot call the same function for this section of code in both places.",
+      "parentUuid": "9d5d2312_89ff2d95",
       "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -202,6 +280,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80d39b26_6a2d60b2",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1354,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98bf0a16_27c37d95",
+      "range": {
+        "startLine": 1354,
+        "startChar": 11,
+        "endLine": 1354,
+        "endChar": 18
+      },
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b74f827c_f72c074c",
@@ -215,6 +317,24 @@
       "writtenOn": "2024-03-21T08:42:57Z",
       "side": 1,
       "message": "since this function is for local use, so please add proper doxygen comments to understand function better.",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "821664dc_a2416344",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b74f827c_f72c074c",
       "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -266,6 +386,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53faa047_73ce29e0",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1465,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0977dde_ad6a6173",
+      "range": {
+        "startLine": 1465,
+        "startChar": 0,
+        "endLine": 1465,
+        "endChar": 18
+      },
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5962fc3_b2b1ae88",
@@ -279,6 +423,30 @@
       "writtenOn": "2024-03-21T06:26:42Z",
       "side": 1,
       "message": "need to change this PLDM_PDR_RECORDS_MODIFIED",
+      "range": {
+        "startLine": 1471,
+        "startChar": 18,
+        "endLine": 1471,
+        "endChar": 40
+      },
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9170436b_be5d78f6",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5962fc3_b2b1ae88",
       "range": {
         "startLine": 1471,
         "startChar": 18,
@@ -312,6 +480,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c622c4e_503805ef",
+        "filename": "src/pdr.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1506,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2668eb6f_a4f4391b",
+      "range": {
+        "startLine": 1506,
+        "startChar": 19,
+        "endLine": 1506,
+        "endChar": 37
+      },
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3b3081c_6e3fc972",
@@ -325,6 +517,24 @@
       "writtenOn": "2024-03-21T09:16:39Z",
       "side": 1,
       "message": "can you explain this test case a bit? I am confused on what we tried here.",
+      "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2c483da_eed94dbc",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 1933,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-21T11:35:53Z",
+      "side": 1,
+      "message": "we are creating a test association PDR and adding/modifying its PDRs.\nCASE 1: Association PDR is modified by including a new child to an aexisting parent PDR\nCASE 2: PDR is added to the association PDRs by sending the parent and its child as input. The position where the new parent-child should be added is decided by the bmc_record_handle sent with the function. \n\nPlease review src/pdr.c to verify above explanation",
+      "parentUuid": "c3b3081c_6e3fc972",
       "revId": "cb254dd1eddf60d53a0179a403b1285667d8fe7f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
