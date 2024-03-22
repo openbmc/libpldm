@@ -10,9 +10,14 @@
 #include <libpldm/transport.h>
 #include <libpldm/transport/af-mctp.h>
 
+#if PLDM_HAS_LINUX_MCTP_H
+#include <linux/mctp.h>
+#else
+#include "compat/linux/mctp.h"
+#endif
+
 #include <errno.h>
 #include <limits.h>
-#include <linux/mctp.h>
 #include <poll.h>
 #include <stdbool.h>
 #include <stdlib.h>

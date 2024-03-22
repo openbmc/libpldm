@@ -32,6 +32,8 @@ Change categories:
    remove old inconsistent enum members after backward compatibility cleanup is
    done
 
+8. Compat header for <linux/mctp.h>
+
 ### Changed
 
 1. base: Stabilise pldm_msg_hdr_correlate_response()
