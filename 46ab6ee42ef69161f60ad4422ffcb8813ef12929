@@ -1,0 +1,221 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e70e3fe9_5b0bfced",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-22T02:19:35Z",
+      "side": 1,
+      "message": "Hi Varsha, thanks for the rework. This seems cleaner than previous iterations. I have fewer comments than before, but still some of high concern around the implementation. Some ask for further discussion.",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1d23d68_794fec38",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-22T02:19:35Z",
+      "side": 1,
+      "message": "Please wrap all comments at the usual column limit.\n\nAlso, please put a space after `/*` and before `*/`. Multi-line `/* */` comments should\n\n```\n/*\n * Look like this\n */\n```\n\nPlease audit the rest of the patch and fix all other instances of the problem.",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61400b77_aa139832",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-22T02:19:35Z",
+      "side": 1,
+      "message": "Given this is a static function, please add assertions that all these pointers are not `NULL`. In the callers, please add (early-return) conditions that ensure the assertions are upheld prior to invoking this function.\n\nPlease audit the rest of the patch for this concern and fix all other instances.",
+      "range": {
+        "startLine": 1306,
+        "startChar": 1,
+        "endLine": 1307,
+        "endChar": 20
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc57e94f_32f4cf16",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1315,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-22T02:19:35Z",
+      "side": 1,
+      "message": "The implementation here contains no checks or assertions that the formed pointer is valid. That must be fixed.\n\nPlease audit the rest of the patch for this concern and fix all other instances.\n\nFurther, can you please discuss whether there\u0027s an opportunity to use the `msgbuf` APIs throughout to help provide correctness? They provide correct buffer bounds management, alignment and endianness conversions that generate efficient code.",
+      "range": {
+        "startLine": 1313,
+        "startChar": 1,
+        "endLine": 1315,
+        "endChar": 36
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4346963_54c6d7d2",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-22T02:19:35Z",
+      "side": 1,
+      "message": "You\u0027re returning a negative value here, but the return type is `uint32_t`. That invokes clause 2 of 6.3.1.3 in the C23 (draft) spec (to pick one):\n\n\u003e 6.3.1.3 Signed and unsigned integers\n\u003e 1. When a value with integer type is converted to another integer type other than bool, if the value can be represented by the new type, it is unchanged.\n\u003e\n\u003e 2. Otherwise, if the new type is unsigned, the value is converted by repeatedly adding or subtracting one more than the maximum value that can be represented in the new type until the value is in the range of the new type.64)\n\nWe have:\n\n```\n$ errno -l | grep ENOMEM\nENOMEM 12 Cannot allocate memory\n```\n\nSo perhaps you\u0027re returning `-12` here. By the spec statements above, that yields e.g. `(-12 + UINT32_MAX + 1)`, which is not a number that anyone will expect.\n\nPlease fix the return type so that it can cope with error values. Either use a larger signed value representation, or just use `int` to indicate success or failure, and take the record handle as an out-parameter to the function.\n\nPlease audit the rest of hte patch for the concern and fix all other instances.",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4f19272_2a4d6b2b",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-22T02:19:35Z",
+      "side": 1,
+      "message": "Which endianness is this size member? On line 1329 we\u0027re setting a size member to LE32, and now I\u0027m worried.\n\nFurther, what evidence do we have that this won\u0027t overflow? There are no checks or assertions.",
+      "range": {
+        "startLine": 1321,
+        "startChar": 27,
+        "endLine": 1321,
+        "endChar": 39
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfbde3c2_9d0f8cb0",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-22T02:19:35Z",
+      "side": 1,
+      "message": "Is this an operation we do elsewhere? Can we extract it to its own function if so?\n\nPlease discuss whether there other opportunities for this strategy as well with respect to the code that follows.",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59411f72_ead94bba",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-22T02:19:35Z",
+      "side": 1,
+      "message": "You must add tests to validate all caller-provided values. There is an opportunity for a trivial NULL deref, for instance, as there\u0027s no test for the validity of `event_data_op`.\n\nPlease audit the other parameters for the same problem.",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "691aa1b7_5c4a5807",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-22T02:19:35Z",
+      "side": 1,
+      "message": "Why do we know this cast is valid? What assurance do we have that the type is in-bounds of the buffer pointed-to by the `data` member?\n\nAn error must be returned if this is not a valid construction.\n\nPlease audit the rest of the patch for this concern and fix all other instances.",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "372b352a_e593529b",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-22T02:19:35Z",
+      "side": 1,
+      "message": "Please extract this condition to a static function that returns `bool` to improve readability.",
+      "range": {
+        "startLine": 1487,
+        "startChar": 7,
+        "endLine": 1491,
+        "endChar": 35
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9087d77c_d9c4c454",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-22T02:19:35Z",
+      "side": 1,
+      "message": "This needs error handling.",
+      "range": {
+        "startLine": 1493,
+        "startChar": 1,
+        "endLine": 1498,
+        "endChar": 5
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
