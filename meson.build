@@ -21,6 +21,13 @@ if compiler.has_header('poll.h')
   conf.set('PLDM_HAS_POLL', 1)
 endif
 
+if (
+  compiler.has_header('linux/mctp.h')
+  and 'linux/mctp.h' not in get_option('force-compat-header')
+)
+  conf.set('PLDM_HAS_LINUX_MCTP_H', 1)
+endif
+
 # ABI control
 visible =  '__attribute__((visibility("default")))'
 if get_option('abi').contains('deprecated')

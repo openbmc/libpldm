@@ -31,6 +31,7 @@ Change categories:
    enum constants with inconsistent names are deprecated with this change.
    remove old inconsistent enum members after backward compatibility cleanup is
    done
+8. Compat header for <linux/mctp.h>
 
 ### Changed
 
