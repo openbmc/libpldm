@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8d8b954_650ea0ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "not done.",
+      "parentUuid": "056845d5_f631fb56",
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e3e0d98_7c2201d4",
         "filename": "/COMMIT_MSG",
         "patchSetId": 9
@@ -273,6 +291,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "e15711b3_103f4420",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 4
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2de0fbb_59e6dddf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "was this added as part of a different commit ? marking it done does not give an idea on how this is fixed in the commit.",
+      "parentUuid": "4a0595d5_85b8a2fd",
       "range": {
         "startLine": 12,
         "startChar": 0,
@@ -495,6 +537,30 @@
       "writtenOn": "2024-03-21T11:35:53Z",
       "side": 1,
       "message": "EDIT: This enum is required to keep track of change in BMC event operation, so it is an in-out parameter and needs to be a pointer. Also i am unable to change this from uint8_t to enum type pldm_pdr_repository_chg_event_change_record_event_data_operation because -\n1. enum pldm_pdr_repository_chg_event_change_record_event_data_operation is defined inside platform.h\n2. platform.h is included in pdr.c and not in pdr.h\n3. pdr.h is included in platform.h\n\nI did not find any example of something similar done inside libpldm, please suggest what we can do here? should we move the enum definition of pldm_pdr_repository_chg_event_change_record_event_data_operation to pldr.h instead of platform.h?",
+      "parentUuid": "a6ec8e4f_04b078d1",
+      "range": {
+        "startLine": 476,
+        "startChar": 1,
+        "endLine": 476,
+        "endChar": 23
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d0901da_e701fbb2",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "is this still a concern @arj ?",
       "parentUuid": "a6ec8e4f_04b078d1",
       "range": {
         "startLine": 476,

@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "07cf8cf4_bcb75f9e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "is it tree or PDR ? both of those words seem to be used interchangeably in this commit. are they same or different ? could we use one for consistency ?",
+      "range": {
+        "startLine": 7,
+        "startChar": 43,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "465ab00f_352a7e4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "could you explain what\u0027s a remote PDR and primary PDR in the commit message? are these words coming from the specification ?",
+      "range": {
+        "startLine": 11,
+        "startChar": 11,
+        "endLine": 11,
+        "endChar": 40
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e70e3fe9_5b0bfced",
@@ -14,6 +60,98 @@
       "writtenOn": "2024-03-22T02:19:35Z",
       "side": 1,
       "message": "Hi Varsha, thanks for the rework. This seems cleaner than previous iterations. I have fewer comments than before, but still some of high concern around the implementation. Some ask for further discussion.",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "468601fa_ebd2f365",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "nit : contained entity id ?",
+      "range": {
+        "startLine": 457,
+        "startChar": 24,
+        "endLine": 457,
+        "endChar": 51
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4defc668_efe6b2c5",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "nit: container entity id ? \n\nuse of words container \u0026 contained entity id\u0027s would make much sense here since they are documented in the spec ? \n\ndo you think otherwise ?",
+      "range": {
+        "startLine": 458,
+        "startChar": 25,
+        "endLine": 458,
+        "endChar": 41
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf9073f_32642e2b",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "what is the significance of this word `bmc` here ? are there any other handles that we generate out of this stack ?",
+      "range": {
+        "startLine": 462,
+        "startChar": 15,
+        "endLine": 462,
+        "endChar": 19
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9091f0c4_085eacf0",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "so this assumes that there is already a PDR with the same container entity in the repository ? and we are merely modifying it ? or does it work if we dont have any PDR with the container entity at all ? if so we need to add a little more detail into the @brief section to make things more clear.",
+      "range": {
+        "startLine": 464,
+        "startChar": 12,
+        "endLine": 464,
+        "endChar": 50
+      },
       "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -37,6 +175,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12f2b6d8_f92913a9",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "does the record handle change after this function is called ? if so what happens to the older record ? is that deleted or stays in the system ?",
+      "range": {
+        "startLine": 1304,
+        "startChar": 54,
+        "endLine": 1304,
+        "endChar": 85
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d096c80_fa78f9b0",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "not sure what this really means, can you elaborate in the comment description itself.",
+      "range": {
+        "startLine": 1304,
+        "startChar": 87,
+        "endLine": 1304,
+        "endChar": 163
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61400b77_aa139832",
         "filename": "src/pdr.c",
         "patchSetId": 18
@@ -53,6 +237,29 @@
         "startChar": 1,
         "endLine": 1307,
         "endChar": 20
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93a665a7_c4488238",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "it looks like updated_record_handle is initialized with that ever was passed to this function, but that never really is modified, but sent back as return in 1385 ?what is the purpose of it ? did i miss it changing some where else ?",
+      "range": {
+        "startLine": 1309,
+        "startChar": 1,
+        "endLine": 1309,
+        "endChar": 56
       },
       "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
@@ -123,6 +330,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "047bfc3f_7c5c80dd",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1332,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "wrapping needed here as well.",
+      "range": {
+        "startLine": 1332,
+        "startChar": 1,
+        "endLine": 1332,
+        "endChar": 104
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfbde3c2_9d0f8cb0",
         "filename": "src/pdr.c",
         "patchSetId": 18
@@ -134,6 +364,29 @@
       "writtenOn": "2024-03-22T02:19:35Z",
       "side": 1,
       "message": "Is this an operation we do elsewhere? Can we extract it to its own function if so?\n\nPlease discuss whether there other opportunities for this strategy as well with respect to the code that follows.",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc716c10_986d5285",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-03-22T08:36:53Z",
+      "side": 1,
+      "message": "how many max children that can be added in an entity association PDR ? as per the spec ? without a check for that adding more children here could result in a spec violation right ?",
+      "range": {
+        "startLine": 1367,
+        "startChar": 1,
+        "endLine": 1370,
+        "endChar": 62
+      },
       "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
