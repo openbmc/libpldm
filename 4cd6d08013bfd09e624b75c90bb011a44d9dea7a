@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c85516da_09d02d6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-25T06:18:03Z",
+      "side": 1,
+      "message": "Just noticed the GPL SPDX marker at the top of the compat file. Need to unwind that, given libpldm is Apache-2.0",
+      "revId": "4cd6d08013bfd09e624b75c90bb011a44d9dea7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
