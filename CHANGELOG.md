@@ -40,6 +40,7 @@ Change categories:
 12. entity: Add enum for Network Interface Connectors and Network Ports
     Connection Types
 13. fw_update: Add encode req & decode resp for query_downstream_devices
+14. fw_update: Add encode req & decode resp for query_downstream_identifiers
 
 ### Changed
 
