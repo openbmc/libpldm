@@ -85,6 +85,17 @@ static bool is_downstream_device_update_support_valid(uint8_t resp)
 	}
 }
 
+static bool is_tranfsfer_operation_flag_valid(uint8_t transfer_op_flag)
+{
+	switch (transfer_op_flag) {
+	case PLDM_GET_NEXTPART:
+	case PLDM_GET_FIRSTPART:
+		return true;
+	default:
+		return false;
+	}
+}
+
 /** @brief Check whether ComponentResponse is valid
  *
  *  @return true if ComponentResponse is valid, false if not
@@ -918,6 +929,84 @@ int decode_query_downstream_devices_resp(
 	resp_data->max_number_of_downstream_devices =
 		le16toh(response->max_number_of_downstream_devices);
 	resp_data->capabilities.value = le32toh(response->capabilities.value);
+
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_query_downstream_identifiers_req(uint8_t instance_id,
+					    uint32_t data_transfer_handle,
+					    uint8_t transfer_operation_flag,
+					    size_t payload_length,
+					    struct pldm_msg *msg)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length !=
+	    sizeof(struct pldm_query_downstream_identifiers_req)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if (!is_tranfsfer_operation_flag_valid(transfer_operation_flag)) {
+		return PLDM_INVALID_TRANSFER_OPERATION_FLAG;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_REQUEST;
+	header.pldm_type = PLDM_FWUP;
+	header.command = PLDM_QUERY_DOWNSTREAM_IDENTIFIERS;
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc) {
+		return rc;
+	}
+
+	struct pldm_query_downstream_identifiers_req *request =
+		(struct pldm_query_downstream_identifiers_req *)msg->payload;
+	request->data_transfer_handle = htole32(data_transfer_handle);
+	request->transfer_operation_flag = transfer_operation_flag;
+
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_query_downstream_identifiers_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_query_downstream_identifiers_resp *resp_data,
+	struct variable_field *downstream_devices)
+{
+	if (msg == NULL || resp_data == NULL || downstream_devices == NULL ||
+	    !payload_length) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	resp_data->completion_code = msg->payload[0];
+	if (PLDM_SUCCESS != resp_data->completion_code) {
+		return PLDM_SUCCESS;
+	}
+
+	if (payload_length <
+	    sizeof(struct pldm_query_downstream_identifiers_resp)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_query_downstream_identifiers_resp *response =
+		(struct pldm_query_downstream_identifiers_resp *)msg->payload;
+
+	resp_data->next_data_transfer_handle =
+		le32toh(response->next_data_transfer_handle);
+	resp_data->transfer_flag = response->transfer_flag;
+	resp_data->downstream_devices_length =
+		le16toh(response->downstream_devices_length);
+	resp_data->number_of_downstream_devices =
+		response->number_of_downstream_devices;
+
+	downstream_devices->ptr =
+		msg->payload +
+		sizeof(struct pldm_query_downstream_identifiers_resp);
+	downstream_devices->length = resp_data->downstream_devices_length;
 
 	return PLDM_SUCCESS;
 }
