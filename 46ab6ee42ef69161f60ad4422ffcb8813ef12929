@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42c51700_beac5bf3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07cf8cf4_bcb75f9e",
+      "range": {
+        "startLine": 7,
+        "startChar": 43,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "465ab00f_352a7e4a",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-22T08:36:53Z",
       "side": 1,
       "message": "could you explain what\u0027s a remote PDR and primary PDR in the commit message? are these words coming from the specification ?",
+      "range": {
+        "startLine": 11,
+        "startChar": 11,
+        "endLine": 11,
+        "endChar": 40
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f6160a4_33f63880",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "465ab00f_352a7e4a",
       "range": {
         "startLine": 11,
         "startChar": 11,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22e2e052_8d14d8d8",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "468601fa_ebd2f365",
+      "range": {
+        "startLine": 457,
+        "startChar": 24,
+        "endLine": 457,
+        "endChar": 51
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4defc668_efe6b2c5",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-03-22T08:36:53Z",
       "side": 1,
       "message": "nit: container entity id ? \n\nuse of words container \u0026 contained entity id\u0027s would make much sense here since they are documented in the spec ? \n\ndo you think otherwise ?",
+      "range": {
+        "startLine": 458,
+        "startChar": 25,
+        "endLine": 458,
+        "endChar": 41
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57d18a5c_08ed82b7",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "agree",
+      "parentUuid": "4defc668_efe6b2c5",
       "range": {
         "startLine": 458,
         "startChar": 25,
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16896c80_52e75e61",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "I have changed it to pdr_record_handle. bmc_record_handle is a common variable name for record handle throughout this file",
+      "parentUuid": "fdf9073f_32642e2b",
+      "range": {
+        "startLine": 462,
+        "startChar": 15,
+        "endLine": 462,
+        "endChar": 19
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9091f0c4_085eacf0",
@@ -146,6 +266,30 @@
       "writtenOn": "2024-03-22T08:36:53Z",
       "side": 1,
       "message": "so this assumes that there is already a PDR with the same container entity in the repository ? and we are merely modifying it ? or does it work if we dont have any PDR with the container entity at all ? if so we need to add a little more detail into the @brief section to make things more clear.",
+      "range": {
+        "startLine": 464,
+        "startChar": 12,
+        "endLine": 464,
+        "endChar": 50
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69d2c4b8_bb5c1462",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "This works when there is no PDR with the container entity also. In such a case we add the contained entity passed in this API to the association PDR and attach the container entity to it and we will return the event data operation as PDR_ADDED instead of PDR_MODIFIED.",
+      "parentUuid": "9091f0c4_085eacf0",
       "range": {
         "startLine": 464,
         "startChar": 12,
@@ -219,6 +363,72 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acdaade2_d385e935",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "By older record handle do you mean the record handle of the PDR already present in the association PDR? If yes, in line no 1309, the record handle of the PDR parent which matched the parent entity sent will be added as the updated record handle. So in this case record handle present in the system is the handle of new PDR added. No record handle is deleted.",
+      "parentUuid": "12f2b6d8_f92913a9",
+      "range": {
+        "startLine": 1304,
+        "startChar": 54,
+        "endLine": 1304,
+        "endChar": 85
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "802900b9_0d23e9bb",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d23d68_794fec38",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "932bd060_291a7884",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d096c80_fa78f9b0",
+      "range": {
+        "startLine": 1304,
+        "startChar": 87,
+        "endLine": 1304,
+        "endChar": 163
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61400b77_aa139832",
@@ -232,6 +442,30 @@
       "writtenOn": "2024-03-22T02:19:35Z",
       "side": 1,
       "message": "Given this is a static function, please add assertions that all these pointers are not `NULL`. In the callers, please add (early-return) conditions that ensure the assertions are upheld prior to invoking this function.\n\nPlease audit the rest of the patch for this concern and fix all other instances.",
+      "range": {
+        "startLine": 1306,
+        "startChar": 1,
+        "endLine": 1307,
+        "endChar": 20
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95334640_f1379d27",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61400b77_aa139832",
       "range": {
         "startLine": 1306,
         "startChar": 1,
@@ -265,6 +499,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a4cdc7c_d66811d4",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "yes updated record handle whatever passed into the function. This can also be added in the calling function and not necessarily here.",
+      "parentUuid": "93a665a7_c4488238",
+      "range": {
+        "startLine": 1309,
+        "startChar": 1,
+        "endLine": 1309,
+        "endChar": 56
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc57e94f_32f4cf16",
@@ -278,6 +536,30 @@
       "writtenOn": "2024-03-22T02:19:35Z",
       "side": 1,
       "message": "The implementation here contains no checks or assertions that the formed pointer is valid. That must be fixed.\n\nPlease audit the rest of the patch for this concern and fix all other instances.\n\nFurther, can you please discuss whether there\u0027s an opportunity to use the `msgbuf` APIs throughout to help provide correctness? They provide correct buffer bounds management, alignment and endianness conversions that generate efficient code.",
+      "range": {
+        "startLine": 1313,
+        "startChar": 1,
+        "endLine": 1315,
+        "endChar": 36
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7bfa2a1_a691a98b",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1315,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "Cannot add msgbuf in this case because we need to extract data of type pldm_entity from the msgbuf to get the address of child entity. \nstruct pldm_entity *child \u003d (struct pldm_entity *)(\u0026pdr-\u003echildren[0])\nAbove line needs pdr defined. with msgbuf i cannot get the child pldm_entity",
+      "parentUuid": "bc57e94f_32f4cf16",
       "range": {
         "startLine": 1313,
         "startChar": 1,
@@ -305,6 +587,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "685941af_f5b01577",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "Using assert has taken care of this issue. we no longer return ENOMEM or EINVAL for this change",
+      "parentUuid": "a4346963_54c6d7d2",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4f19272_2a4d6b2b",
@@ -318,6 +618,30 @@
       "writtenOn": "2024-03-22T02:19:35Z",
       "side": 1,
       "message": "Which endianness is this size member? On line 1329 we\u0027re setting a size member to LE32, and now I\u0027m worried.\n\nFurther, what evidence do we have that this won\u0027t overflow? There are no checks or assertions.",
+      "range": {
+        "startLine": 1321,
+        "startChar": 27,
+        "endLine": 1321,
+        "endChar": 39
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03d84f42_1bfcdd09",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "1. since the record-\u003esize is the size of a record already present in the entity association PDR, it is already in the correct endianness format. Because new_record-\u003esize is the size of a new record being added we need to take of care that it has the correct endianness.\n\n2. I have used assert to check for overflows and memory allocation issues throughout the changes made by me for this commit. Assert has been used to validate input parameters and malloc",
+      "parentUuid": "d4f19272_2a4d6b2b",
       "range": {
         "startLine": 1321,
         "startChar": 27,
@@ -351,6 +675,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99858077_35504733",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1332,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "047bfc3f_7c5c80dd",
+      "range": {
+        "startLine": 1332,
+        "startChar": 1,
+        "endLine": 1332,
+        "endChar": 104
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfbde3c2_9d0f8cb0",
@@ -364,6 +712,24 @@
       "writtenOn": "2024-03-22T02:19:35Z",
       "side": 1,
       "message": "Is this an operation we do elsewhere? Can we extract it to its own function if so?\n\nPlease discuss whether there other opportunities for this strategy as well with respect to the code that follows.",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f262f7e2_3ba3c9ba",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfbde3c2_9d0f8cb0",
       "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -391,6 +757,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "335ae1d8_6062b87c",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "yes it should be a violation. I have not come across the maximum value but the num of children is of type uint8 so I think we cannot have more than 255 children. Adding a check here needs further discussion because -\n1. just doing if(children\u003cmax_children) here or in the calling function is not enough, we need to return an error back to PLDM\n2. This API return uint32_t so how can we return error back to PLDM to indicate that the new entity is not added and the association PDR is not modified?",
+      "parentUuid": "cc716c10_986d5285",
+      "range": {
+        "startLine": 1367,
+        "startChar": 1,
+        "endLine": 1370,
+        "endChar": 62
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59411f72_ead94bba",
@@ -408,6 +798,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13f30349_c7ea7d6a",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "I am checking event_data_op and other parameters with an assert and early return for NULL cases. Also added a check for the value of event_data_op in the unit tests",
+      "parentUuid": "59411f72_ead94bba",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "691aa1b7_5c4a5807",
@@ -421,6 +829,24 @@
       "writtenOn": "2024-03-22T02:19:35Z",
       "side": 1,
       "message": "Why do we know this cast is valid? What assurance do we have that the type is in-bounds of the buffer pointed-to by the `data` member?\n\nAn error must be returned if this is not a valid construction.\n\nPlease audit the rest of the patch for this concern and fix all other instances.",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac66cee1_641ca325",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "used pldm_platform_pdr_hdr_validate to check if the header will be in-bound. I did not see this function used inside pdr.c anywhere else, but I thought this meets the use case.",
+      "parentUuid": "691aa1b7_5c4a5807",
       "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -448,6 +874,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f0a20a9_1cccabf3",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "372b352a_e593529b",
+      "range": {
+        "startLine": 1487,
+        "startChar": 7,
+        "endLine": 1491,
+        "endChar": 35
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9087d77c_d9c4c454",
@@ -461,6 +911,30 @@
       "writtenOn": "2024-03-22T02:19:35Z",
       "side": 1,
       "message": "This needs error handling.",
+      "range": {
+        "startLine": 1493,
+        "startChar": 1,
+        "endLine": 1498,
+        "endChar": 5
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47c03869_09e14d36",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-03-26T20:48:03Z",
+      "side": 1,
+      "message": "if the PDR is not added to the existing entity association PDR then the updated record will be returned as 0. If the called PLDM function see that updated record handle is 0 we can log an error there. I feel we dont need to do any error handling for this section inside LIBPLDM",
+      "parentUuid": "9087d77c_d9c4c454",
       "range": {
         "startLine": 1493,
         "startChar": 1,
