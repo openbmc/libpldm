@@ -45,6 +45,25 @@ struct variable_field;
  */
 #define PLDM_QUERY_DOWNSTREAM_DEVICES_RESP_BYTES 10
 
+/** @brief Length of QueryDownstreamIdentifiers request defined in DSP0267_1.1.0
+ * 	Table 16 - QueryDownstreamIdentifiers command format.
+ *
+ *  4 bytes for data transfer handle
+ *  1 byte for transfer operation flag
+*/
+#define PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_REQ_BYTES 5
+
+/** @brief Minimum length of QueryDownstreamIdentifiers response from DSP0267_1.1.0
+ *  if the complement code is success.
+ *
+ *  1 byte for completion code
+ *  4 bytes for next data transfer handle
+ *  1 byte for transfer flag
+ *  4 bytes for downstream devices length
+ *  2 bytes for number of downstream devices
+ */
+#define PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN 12
+
 /** @brief Minimum length of device descriptor, 2 bytes for descriptor type,
  *         2 bytes for descriptor length and atleast 1 byte of descriptor data
  */
@@ -64,6 +83,7 @@ enum pldm_firmware_update_commands {
 	PLDM_QUERY_DEVICE_IDENTIFIERS = 0x01,
 	PLDM_GET_FIRMWARE_PARAMETERS = 0x02,
 	PLDM_QUERY_DOWNSTREAM_DEVICES = 0x03,
+	PLDM_QUERY_DOWNSTREAM_IDENTIFIERS = 0x04,
 	PLDM_REQUEST_UPDATE = 0x10,
 	PLDM_PASS_COMPONENT_TABLE = 0x13,
 	PLDM_UPDATE_COMPONENT = 0x14,
@@ -483,6 +503,40 @@ struct pldm_component_parameter_entry {
 	bitfield32_t capabilities_during_update;
 } __attribute__((packed));
 
+/** @struct pldm_query_downstream_identifiers_req
+ *
+ *  Structure for QueryDownstreamIdentifiers request defined in Table 16 -
+ *  QueryDownstreamIdentifiers command format in DSP0267_1.1.0
+ */
+struct pldm_query_downstream_identifiers_req {
+	uint32_t data_transfer_handle;
+	uint8_t transfer_operation_flag;
+};
+
+/** @struct pldm_query_downstream_identifiers_resp
+ *
+ *  Structure representing the fixed part of QueryDownstreamIdentifiers response
+ *  defined in Table 16 - QueryDownstreamIdentifiers command format in
+ *  DSP0267_1.1.0
+ */
+struct pldm_query_downstream_identifiers_resp {
+	uint8_t completion_code;
+	uint32_t next_data_transfer_handle;
+	uint8_t transfer_flag;
+	uint32_t downstream_devices_length;
+	uint16_t number_of_downstream_devices;
+};
+
+/** @struct pldm_downstream_device
+ *
+ *  Structure representing downstream device information defined in
+ *  Table 18 - DownstreamDevice definition in DSP0267_1.1.0
+ */
+struct pldm_downstream_device {
+	uint16_t downstream_device_index;
+	uint8_t downstream_descriptor_count;
+};
+
 /** @struct pldm_request_update_req
  *
  *  Structure representing fixed part of Request Update request
@@ -818,6 +872,39 @@ int encode_query_downstream_devices_req(uint8_t instance_id,
 int decode_query_downstream_devices_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_query_downstream_devices_resp *resp_data);
+
+/**
+ * @brief Encodes a request message for Query Downstream Identifiers.
+ *
+ * @param[in] instance_id The instance ID of the PLDM entity.
+ * @param[in] data_transfer_handle The handle for the data transfer.
+ * @param[in] transfer_operation_flag The flag indicating the transfer operation.
+ * @param[in,out] msg Pointer to the PLDM message structure to store the encoded message.
+ * @param[in] payload_length The length of the payload.
+ * @return pldm_completion_codes
+ *
+ * @note Caller is responsible for memory alloc and dealloc of param
+ *        'msg.payload'
+ */
+int encode_query_downstream_identifiers_req(
+	uint8_t instance_id, uint32_t data_transfer_handle,
+	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
+	size_t payload_length);
+
+/**
+ * @brief Decodes the response message for Querying Downstream Identifiers.
+ * @param[in] msg The PLDM message to decode.
+ * @param[in] payload_length The length of the message payload.
+ * @param[in,out] resp_data Pointer to the decoded response data.
+ * @param[in,out] downstream_devices Pointer to the downstream devices.
+ * @return pldm_completion_codes
+ * 
+ * @note Caller is responsible for memory alloc and dealloc of pointer params
+ */
+int decode_query_downstream_identifiers_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_query_downstream_identifiers_resp *resp_data,
+	struct variable_field *downstream_devices);
 
 /** @brief Create PLDM request message for RequestUpdate
  *
