@@ -86,6 +86,18 @@ static bool is_downstream_device_update_support_valid(uint8_t resp)
 	}
 }
 
+static bool
+is_tranfsfer_operation_flag_valid(enum transfer_op_flag transfer_op_flag)
+{
+	switch (transfer_op_flag) {
+	case PLDM_GET_NEXTPART:
+	case PLDM_GET_FIRSTPART:
+		return true;
+	default:
+		return false;
+	}
+}
+
 /** @brief Check whether ComponentResponse is valid
  *
  *  @return true if ComponentResponse is valid, false if not
@@ -921,6 +933,94 @@ int decode_query_downstream_devices_resp(
 	resp_data->capabilities.value = le32toh(response->capabilities.value);
 
 	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_query_downstream_identifiers_req(
+	uint8_t instance_id, uint32_t data_transfer_handle,
+	enum transfer_op_flag transfer_operation_flag, size_t payload_length,
+	struct pldm_msg *msg)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (!is_tranfsfer_operation_flag_valid(transfer_operation_flag)) {
+		return PLDM_INVALID_TRANSFER_OPERATION_FLAG;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_REQUEST;
+	header.pldm_type = PLDM_FWUP;
+	header.command = PLDM_QUERY_DOWNSTREAM_IDENTIFIERS;
+	rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init(buf, PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_REQ_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, data_transfer_handle);
+	// Data correctness has been verified, cast it to 1-byte data directly.
+	pldm_msgbuf_insert(buf, (uint8_t)transfer_operation_flag);
+
+	return pldm_msgbuf_destroy(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_query_downstream_identifiers_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	const uint8_t *completion_code,
+	const uint32_t *next_data_transfer_handle, const uint8_t *transfer_flag,
+	const uint32_t *downstream_devices_length,
+	const uint16_t *number_of_downstream_devices,
+	struct variable_field *downstream_devices)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc = PLDM_ERROR;
+
+	if (msg == NULL || completion_code == NULL ||
+	    next_data_transfer_handle == NULL || transfer_flag == NULL ||
+	    downstream_devices_length == NULL ||
+	    number_of_downstream_devices == NULL ||
+	    downstream_devices == NULL || !payload_length) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init(buf,
+			      PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, *completion_code);
+	if (PLDM_SUCCESS != *completion_code) {
+		return PLDM_SUCCESS;
+	}
+
+	if (payload_length < PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	pldm_msgbuf_extract(buf, *next_data_transfer_handle);
+	pldm_msgbuf_extract(buf, *transfer_flag);
+	pldm_msgbuf_extract(buf, *downstream_devices_length);
+	pldm_msgbuf_extract(buf, *number_of_downstream_devices);
+	downstream_devices->ptr = buf->cursor;
+	downstream_devices->length = *downstream_devices_length;
+
+	return pldm_msgbuf_destroy(buf);
 }
 
 LIBPLDM_ABI_STABLE
