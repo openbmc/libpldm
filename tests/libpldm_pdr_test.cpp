@@ -1929,3 +1929,22 @@ TEST(EntityAssociationPDR, testNodeAddCheck)
     pldm_pdr_destroy(repo);
     pldm_entity_association_tree_destroy(tree);
 }
+
+TEST(InitEntityNode, testNodeCreation)
+{
+    // Setting up data to create node
+    uint16_t entityType = 33;
+    uint16_t instanceNum = 2;
+    uint16_t containerId = 1;
+    uint16_t entityTypeP = 32903;
+    uint16_t instanceNumP = 2;
+    uint16_t containerIdP = 1;
+    pldm_entity entitynode{entityType, instanceNum, containerId};
+    pldm_entity parent{entityTypeP, instanceNumP, containerIdP};
+    // Calling functione to initialize node
+    auto node =
+        pldm_init_entity_node(entitynode, parent, 0, nullptr, nullptr, 1);
+    // Verifying the pointer after initializing
+    EXPECT_NE(node, nullptr);
+    free(node);
+}
