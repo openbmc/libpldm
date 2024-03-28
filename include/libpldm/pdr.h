@@ -590,6 +590,22 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 					 size_t *num_entities,
 					 pldm_entity **entities);
 
+/** @brief Initialize the pldm_entity_node structure, to store and restore entity data 
+ * 	when serialize and deserialize data operation.
+ *
+ *  @param[in] entity - node of pldm entity
+ *  @param[in] parent - parent of pldm entity
+ *  @param[in] host_container_id - host container id
+ *  @param[in] first_child - first child of pldm entity
+ *  @param[in] next_sibling - next sibling of pldm entity
+ *  @param[in] association_type - association type
+ */
+pldm_entity_node *init_pldm_entity_node(pldm_entity entity, pldm_entity parent,
+					uint16_t remote_container_id,
+					pldm_entity_node *first_child,
+					pldm_entity_node *next_sibling,
+					uint8_t association_type);
+
 #ifdef __cplusplus
 }
 #endif
