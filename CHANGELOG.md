@@ -34,6 +34,7 @@ Change categories:
 
 8. oem-ibm: Alias `pldm_oem_ibm_fru_field_type` members as `PLDM_OEM_IBM_*`
 9. oem: ibm: Add Firmware Update Access Key(UAK) as a FRU field type
+10. pdr: Adding pldm_entity_node_init() API
 
 ### Changed
 

@@ -1300,3 +1300,20 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 	*num_entities = l_num_entities;
 	*entities = l_entities;
 }
+
+LIBPLDM_ABI_TESTING
+pldm_entity_node *pldm_entity_node_init(void)
+{
+	pldm_entity_node *node = malloc(sizeof(pldm_entity_node));
+	if (!node) {
+		return NULL;
+	}
+	memset(&(node->entity), 0, sizeof(node->entity));
+	memset(&(node->parent), 0, sizeof(node->parent));
+	node->remote_container_id = 0;
+	node->first_child = NULL;
+	node->next_sibling = NULL;
+	node->association_type = 0;
+
+	return node;
+}
