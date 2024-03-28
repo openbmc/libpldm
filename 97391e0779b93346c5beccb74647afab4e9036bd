@@ -640,6 +640,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60089305_28386d9e",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-28T00:15:27Z",
+      "side": 1,
+      "message": "Yes this is still a concern. We shouldn\u0027t lose type information like this. We should untangle the definitions in the headers. It sounds like their content isn\u0027t split appropriately.\n\n@Varsha please don\u0027t mark discussion threads as resolved until there is consensus on how to proceed. Making a unilateral choice isn\u0027t consensus.",
+      "parentUuid": "2399c9d4_8c2f9bb4",
+      "range": {
+        "startLine": 476,
+        "startChar": 1,
+        "endLine": 476,
+        "endChar": 23
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "020d6dbf_0678e6b4",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 9

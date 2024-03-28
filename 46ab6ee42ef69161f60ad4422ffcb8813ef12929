@@ -572,6 +572,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "791d4691_05a047e8",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1315,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-28T00:15:27Z",
+      "side": 1,
+      "message": "As requested above, please don\u0027t mark discussion threads as resolved until we have consensus on a direction. As the original commenter, I don\u0027t feel like consensus has been achieved.\n\n\u003e Cannot add msgbuf in this case because we need to extract data of type pldm_entity from the msgbuf to get the address of child entity.\n\u003e struct pldm_entity child \u003d (struct pldm_entity )(\u0026pdr-\u003echildren[0])\n\u003e Above line needs pdr defined. with msgbuf i cannot get the child pldm_entity\n\nThe `msgbuf` APIs provide a generic and ergonomic means for packing and unpacking serialised message types, with correct handling of buffer bounds and value endianness with reasonable performance. If you need access to the child data it too can be unpacked. Other uses of `msgbuf` already demonstrate unpacking of nested data, for example:\n\nhttps://github.com/openbmc/libpldm/blob/main/src/platform.c#L253-L292\n\nUsing this one concern to dismiss using `msgbuf` everywhere doesn\u0027t sit well with me.\n\nUnless there\u0027s exceptional justification to the contrary, I\u0027m going to require use of `msgbuf` for any new code touching data encoded in the PLDM wire format.",
+      "parentUuid": "f7bfa2a1_a691a98b",
+      "range": {
+        "startLine": 1313,
+        "startChar": 1,
+        "endLine": 1315,
+        "endChar": 36
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4346963_54c6d7d2",
         "filename": "src/pdr.c",
         "patchSetId": 18
@@ -601,6 +625,24 @@
       "side": 1,
       "message": "Using assert has taken care of this issue. we no longer return ENOMEM or EINVAL for this change",
       "parentUuid": "a4346963_54c6d7d2",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a741635_d5ca2eeb",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-28T00:15:27Z",
+      "side": 1,
+      "message": "You must not use `assert()` for error handling. If you\u0027re doing dynamic memory allocation with `malloc()` then you must handle the `NULL` case as an error.",
+      "parentUuid": "685941af_f5b01577",
       "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -642,6 +684,30 @@
       "side": 1,
       "message": "1. since the record-\u003esize is the size of a record already present in the entity association PDR, it is already in the correct endianness format. Because new_record-\u003esize is the size of a new record being added we need to take of care that it has the correct endianness.\n\n2. I have used assert to check for overflows and memory allocation issues throughout the changes made by me for this commit. Assert has been used to validate input parameters and malloc",
       "parentUuid": "d4f19272_2a4d6b2b",
+      "range": {
+        "startLine": 1321,
+        "startChar": 27,
+        "endLine": 1321,
+        "endChar": 39
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1cdc801_7cd8fd8f",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-28T00:15:27Z",
+      "side": 1,
+      "message": "You\u0027re using a value specifically encoded as LE32 in a calculation executed in host-endianness. What happens if libpldm is used on a big-endian system?",
+      "parentUuid": "03d84f42_1bfcdd09",
       "range": {
         "startLine": 1321,
         "startChar": 27,
@@ -935,6 +1001,30 @@
       "side": 1,
       "message": "if the PDR is not added to the existing entity association PDR then the updated record will be returned as 0. If the called PLDM function see that updated record handle is 0 we can log an error there. I feel we dont need to do any error handling for this section inside LIBPLDM",
       "parentUuid": "9087d77c_d9c4c454",
+      "range": {
+        "startLine": 1493,
+        "startChar": 1,
+        "endLine": 1498,
+        "endChar": 5
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e75dc30_a0c523c5",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-28T00:15:27Z",
+      "side": 1,
+      "message": "You were doing a dynamic memory allocation in `pldm_entity_association_pdr_add_contained_entity_to_remote_pdr()`, which may fail.",
+      "parentUuid": "47c03869_09e14d36",
       "range": {
         "startLine": 1493,
         "startChar": 1,
