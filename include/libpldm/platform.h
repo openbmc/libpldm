@@ -162,7 +162,7 @@ enum pldm_platform_commands {
 	PLDM_GET_PDR = 0x51,
 };
 
-/** @brief PLDM PDR types
+/** @brief PLDM PDR types defined in DSP0248_1.2.0 section 28.2
  */
 enum pldm_pdr_types {
 	PLDM_TERMINUS_LOCATOR_PDR = 1,
@@ -186,6 +186,9 @@ enum pldm_pdr_types {
 	PLDM_EVENT_LOG_PDR = 19,
 	PLDM_PDR_FRU_RECORD_SET = 20,
 	PLDM_COMPACT_NUMERIC_SENSOR_PDR = 21,
+	PLDM_REDFISH_RESOURCE_PDR = 22,
+	PLDM_REDFISH_ENTITY_ASSOCIATION_PDR = 23,
+	PLDM_REDFISH_ACTION_PDR = 24,
 	PLDM_OEM_DEVICE_PDR = 126,
 	PLDM_OEM_PDR = 127,
 };
