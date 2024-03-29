@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aaf20ea_98216321",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-03-29T06:37:06Z",
+      "side": 1,
+      "message": "where is this \u0027persistent file\u0027 that you have mentioned hosted? if there is a commit that is using this API you could mention that in the commit message, it would help understand better.",
+      "range": {
+        "startLine": 10,
+        "startChar": 23,
+        "endLine": 10,
+        "endChar": 38
+      },
+      "revId": "fdc09b7517006965c190002fb5344b92d8266946",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d6dd14_4fdde73d",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-03-29T06:37:06Z",
+      "side": 1,
+      "message": "what\u0027s the significance of this?",
+      "range": {
+        "startLine": 593,
+        "startChar": 54,
+        "endLine": 593,
+        "endChar": 62
+      },
+      "revId": "fdc09b7517006965c190002fb5344b92d8266946",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e891fca_89754597",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2024-03-29T06:37:06Z",
+      "side": 1,
+      "message": "next",
+      "range": {
+        "startLine": 599,
+        "startChar": 30,
+        "endLine": 599,
+        "endChar": 33
+      },
+      "revId": "fdc09b7517006965c190002fb5344b92d8266946",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
