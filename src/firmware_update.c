@@ -1011,6 +1011,104 @@ int decode_query_downstream_identifiers_resp(
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int encode_get_downstream_firmware_params_req(uint8_t instance_id,
+					      uint32_t data_transfer_handle,
+					      uint8_t transfer_operation_flag,
+					      size_t payload_length,
+					      struct pldm_msg *msg)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length !=
+	    sizeof(struct pldm_get_downstream_firmware_params_req)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if (!is_tranfsfer_operation_flag_valid(transfer_operation_flag)) {
+		return PLDM_INVALID_TRANSFER_OPERATION_FLAG;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_REQUEST;
+	header.pldm_type = PLDM_FWUP;
+	header.command = PLDM_QUERY_DOWNSTREAM_FIRMWARE_PARAMETERS;
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc) {
+		return rc;
+	}
+
+	struct pldm_get_downstream_firmware_params_req *request =
+		(struct pldm_get_downstream_firmware_params_req *)msg->payload;
+	request->data_transfer_handle = htole32(data_transfer_handle);
+	request->transfer_operation_flag = transfer_operation_flag;
+
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_downstream_firmware_params_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_get_downstream_firmware_params_resp *resp_data,
+	struct variable_field *downstream_device_param_table)
+{
+	if (msg == NULL || resp_data == NULL ||
+	    downstream_device_param_table == NULL || !payload_length) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	resp_data->completion_code = msg->payload[0];
+	if (PLDM_SUCCESS != resp_data->completion_code) {
+		return PLDM_SUCCESS;
+	}
+
+	if (payload_length <
+	    sizeof(struct pldm_get_downstream_firmware_params_resp)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_get_downstream_firmware_params_resp *response =
+		(struct pldm_get_downstream_firmware_params_resp *)msg->payload;
+
+	resp_data->next_data_transfer_handle =
+		le32toh(response->next_data_transfer_handle);
+	resp_data->transfer_flag = response->transfer_flag;
+	resp_data->fdp_capabilities_during_update.value =
+		le32toh(response->fdp_capabilities_during_update.value);
+	resp_data->downstream_device_count = response->downstream_device_count;
+
+	// Calculate the length of the downstream device parameter table
+	size_t downstream_param_table_length = 0;
+	const uint8_t *curr =
+		msg->payload +
+		sizeof(struct pldm_get_downstream_firmware_params_resp);
+	for (uint8_t i = 0; i < resp_data->downstream_device_count; i++) {
+		struct pldm_component_parameter_entry *entry =
+			(struct pldm_component_parameter_entry *)curr;
+		size_t curr_length =
+			sizeof(struct pldm_component_parameter_entry) +
+			entry->active_comp_ver_str_len +
+			entry->pending_comp_ver_str_len;
+		downstream_param_table_length += curr_length;
+		curr += curr_length;
+	}
+
+	if (payload_length -
+		    sizeof(struct pldm_get_downstream_firmware_params_resp) !=
+	    downstream_param_table_length) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+	downstream_device_param_table->length = downstream_param_table_length;
+	downstream_device_param_table->ptr =
+		msg->payload +
+		sizeof(struct pldm_get_downstream_firmware_params_resp);
+
+	return PLDM_SUCCESS;
+}
+
 LIBPLDM_ABI_STABLE
 int encode_request_update_req(uint8_t instance_id, uint32_t max_transfer_size,
 			      uint16_t num_of_comp,

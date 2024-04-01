@@ -38,6 +38,7 @@ enum pldm_firmware_update_commands {
 	PLDM_GET_FIRMWARE_PARAMETERS = 0x02,
 	PLDM_QUERY_DOWNSTREAM_DEVICES = 0x03,
 	PLDM_QUERY_DOWNSTREAM_IDENTIFIERS = 0x04,
+	PLDM_QUERY_DOWNSTREAM_FIRMWARE_PARAMETERS = 0x05,
 	PLDM_REQUEST_UPDATE = 0x10,
 	PLDM_PASS_COMPONENT_TABLE = 0x13,
 	PLDM_UPDATE_COMPONENT = 0x14,
@@ -491,6 +492,27 @@ struct pldm_downstream_device {
 	uint8_t downstream_descriptor_count;
 } __attribute__((packed));
 
+/** @struct pldm_query_downstream_firmware_param_req
+ *
+ *  Structure representing QueryDownstreamFirmwareParameters request
+ */
+struct pldm_get_downstream_firmware_params_req {
+	uint32_t data_transfer_handle;
+	uint8_t transfer_operation_flag;
+} __attribute__((packed));
+
+/** @struct pldm_query_downstream_firmware_param_resp
+ *
+ *  Structure representing the fixed part of QueryDownstreamFirmwareParameters response
+ */
+struct pldm_get_downstream_firmware_params_resp {
+	uint8_t completion_code;
+	uint32_t next_data_transfer_handle;
+	uint8_t transfer_flag;
+	bitfield32_t fdp_capabilities_during_update;
+	uint16_t downstream_device_count;
+} __attribute__((packed));
+
 /** @struct pldm_request_update_req
  *
  *  Structure representing fixed part of Request Update request
@@ -864,6 +886,45 @@ int decode_query_downstream_identifiers_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_query_downstream_identifiers_resp *resp_data,
 	struct variable_field *downstream_devices);
+
+/**
+ * @brief Encodes request message for Get Downstream Firmware Parameters.
+ *
+ * @param[in] instance_id The instance ID of the PLDM entity.
+ * @param[in] data_transfer_handle The handle for the data transfer.
+ * @param[in] transfer_operation_flag The flag indicating the transfer operation.
+ * @param[in] payload_length The length of the payload.
+ * @param[in,out] msg A pointer to the PLDM message structure to store the encoded message.
+ *
+ * @return pldm_completion_codes
+ *
+ * @note Caller is responsible for memory alloc and dealloc of param
+ *        'msg.payload'
+ */
+int encode_get_downstream_firmware_params_req(uint8_t instance_id,
+					      uint32_t data_transfer_handle,
+					      uint8_t transfer_operation_flag,
+					      size_t payload_length,
+					      struct pldm_msg *msg);
+
+/**
+ * @brief Decode response message for Get Downstream Firmware Parameters
+ *
+ * @param[in] msg The PLDM message to decode
+ * @param[in] payload_length The length of the message payload
+ * @param[in,out] resp_data Pointer to the structure to store the decoded response data
+ * @param[in,out] downstream_device_param_table Pointer to the variable field structure
+ *                                           to store the decoded downstream device
+ *                                           parameter table
+ * @return pldm_completion_codes
+ *
+ * @note Caller is responsible for memory alloc and dealloc of param
+ *        'resp_data' and 'downstream_device_param_table'
+ */
+int decode_get_downstream_firmware_params_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_get_downstream_firmware_params_resp *resp_data,
+	struct variable_field *downstream_device_param_table);
 
 /** @brief Create PLDM request message for RequestUpdate
  *
