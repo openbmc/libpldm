@@ -66,7 +66,26 @@ struct variable_field;
 /** @brief Minimum length of device descriptor, 2 bytes for descriptor type,
  *         2 bytes for descriptor length and atleast 1 byte of descriptor data
  */
-#define PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN    5
+#define PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN 5
+
+/** @brief Length of GetDownstreamFirmwareParameters request defined in DSP0267_1.1.0
+ *
+ * 4 bytes for Data Transfer Handle
+ * 1 byte for Transfer Operation Flag
+*/
+#define PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES 5
+
+/** @brief Minimum length of GetDownstreamFirmwareParameters response from
+ * DSP0267_1.1.0 if the completion code is success.
+ *
+ * 1 byte for completion code
+ * 4 bytes for next data transfer handle
+ * 1 byte for transfer flag
+ * 4 bytes for FDP capabilities during update
+ * 2 bytes for downstream device count
+*/
+#define PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN 12
+
 #define PLDM_GET_FIRMWARE_PARAMETERS_REQ_BYTES 0
 #define PLDM_FWUP_BASELINE_TRANSFER_SIZE       32
 #define PLDM_FWUP_MIN_OUTSTANDING_REQ	       1
@@ -83,6 +102,7 @@ enum pldm_firmware_update_commands {
 	PLDM_GET_FIRMWARE_PARAMETERS = 0x02,
 	PLDM_QUERY_DOWNSTREAM_DEVICES = 0x03,
 	PLDM_QUERY_DOWNSTREAM_IDENTIFIERS = 0x04,
+	PLDM_QUERY_DOWNSTREAM_FIRMWARE_PARAMETERS = 0x05,
 	PLDM_REQUEST_UPDATE = 0x10,
 	PLDM_PASS_COMPONENT_TABLE = 0x13,
 	PLDM_UPDATE_COMPONENT = 0x14,
@@ -536,6 +556,27 @@ struct pldm_downstream_device {
 	uint8_t downstream_descriptor_count;
 };
 
+/** @struct pldm_query_downstream_firmware_param_req
+ *
+ *  Structure representing QueryDownstreamFirmwareParameters request
+ */
+struct pldm_get_downstream_firmware_params_req {
+	uint32_t data_transfer_handle;
+	uint8_t transfer_operation_flag;
+};
+
+/** @struct pldm_query_downstream_firmware_param_resp
+ *
+ *  Structure representing the fixed part of QueryDownstreamFirmwareParameters response
+ */
+struct pldm_get_downstream_firmware_params_resp {
+	uint8_t completion_code;
+	uint32_t next_data_transfer_handle;
+	uint8_t transfer_flag;
+	bitfield32_t fdp_capabilities_during_update;
+	uint16_t downstream_device_count;
+};
+
 /** @struct pldm_request_update_req
  *
  *  Structure representing fixed part of Request Update request
@@ -902,6 +943,44 @@ int decode_query_downstream_identifiers_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_query_downstream_identifiers_resp *resp_data,
 	struct variable_field *downstream_devices);
+
+/**
+ * @brief Encodes request message for Get Downstream Firmware Parameters.
+ *
+ * @param[in] instance_id The instance ID of the PLDM entity.
+ * @param[in] data_transfer_handle The handle for the data transfer.
+ * @param[in] transfer_operation_flag The flag indicating the transfer operation.
+ * @param[in,out] msg A pointer to the PLDM message structure to store the encoded message.
+ * @param[in] payload_length The length of the payload.
+ *
+ * @return pldm_completion_codes
+ *
+ * @note Caller is responsible for memory alloc and dealloc of param
+ *        'msg.payload'
+ */
+int encode_get_downstream_firmware_params_req(
+	uint8_t instance_id, uint32_t data_transfer_handle,
+	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
+	size_t payload_length);
+
+/**
+ * @brief Decode response message for Get Downstream Firmware Parameters
+ *
+ * @param[in] msg The PLDM message to decode
+ * @param[in] payload_length The length of the message payload
+ * @param[out] resp_data Pointer to the structure to store the decoded response data
+ * @param[out] downstream_device_param_table Pointer to the variable field structure
+ *                                           to store the decoded downstream device
+ *                                           parameter table
+ * @return pldm_completion_codes
+ *
+ * @note Caller is responsible for memory alloc and dealloc of param
+ *        'resp_data' and 'downstream_device_param_table'
+ */
+int decode_get_downstream_firmware_params_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_get_downstream_firmware_params_resp *resp_data,
+	struct variable_field *downstream_device_param_table);
 
 /** @brief Create PLDM request message for RequestUpdate
  *
