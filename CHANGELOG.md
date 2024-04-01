@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 1. base: Define macros for reserved TIDs
+2. fw_update: Add encode req & decode resp for get_downstream_fw_params
 
 ### Deprecated
 
