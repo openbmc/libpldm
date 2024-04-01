@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1223d2b_c4b655a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-01T13:14:49Z",
+      "side": 1,
+      "message": "improved commit massage with Gerrit link.",
+      "parentUuid": "8aaf20ea_98216321",
+      "range": {
+        "startLine": 10,
+        "startChar": 23,
+        "endLine": 10,
+        "endChar": 38
+      },
+      "revId": "fdc09b7517006965c190002fb5344b92d8266946",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17d6dd14_4fdde73d",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9efba18_e7135010",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-01T13:14:49Z",
+      "side": 1,
+      "message": "improved function doxygen comment.",
+      "parentUuid": "17d6dd14_4fdde73d",
+      "range": {
+        "startLine": 593,
+        "startChar": 54,
+        "endLine": 593,
+        "endChar": 62
+      },
+      "revId": "fdc09b7517006965c190002fb5344b92d8266946",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e891fca_89754597",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-03-29T06:37:06Z",
       "side": 1,
       "message": "next",
+      "range": {
+        "startLine": 599,
+        "startChar": 30,
+        "endLine": 599,
+        "endChar": 33
+      },
+      "revId": "fdc09b7517006965c190002fb5344b92d8266946",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4638bff8_254b834e",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-01T13:14:49Z",
+      "side": 1,
+      "message": "corrected",
+      "parentUuid": "6e891fca_89754597",
       "range": {
         "startLine": 599,
         "startChar": 30,
