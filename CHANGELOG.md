@@ -50,6 +50,7 @@ Change categories:
 15. fw_update: Add encode req & decode resp for query_downstream_devices
 16. fw_update: Add encode req & decode resp for query_downstream_identifiers
 17. platform: Add support for GetStateEffecterStates command
+18. fw_update: Add encode req & decode resp for get_downstream_fw_params
 
 ### Changed
 
