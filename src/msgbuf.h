@@ -723,6 +723,40 @@ pldm__msgbuf_extract_real32(struct pldm_msgbuf *ctx, void *dst)
 		real32_t *: pldm__msgbuf_extract_real32)(ctx, dst)
 
 __attribute__((always_inline)) static inline int
+pldm_msgbuf_extract_array_char(struct pldm_msgbuf *ctx, char *dst, size_t count)
+{
+	assert(ctx);
+
+	if (!ctx->cursor || !dst) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	if (!count) {
+		return 0;
+	}
+
+#if INTMAX_MAX < SIZE_MAX
+	if (count > INTMAX_MAX) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+#endif
+
+	if (ctx->remaining < INTMAX_MIN + (intmax_t)count) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+	ctx->remaining -= (intmax_t)count;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	memcpy(dst, ctx->cursor, count);
+	ctx->cursor += count;
+
+	return 0;
+}
+
+__attribute__((always_inline)) static inline int
 pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, uint8_t *dst,
 				size_t count)
 {
@@ -758,8 +792,9 @@ pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, uint8_t *dst,
 }
 
 #define pldm_msgbuf_extract_array(ctx, dst, count)                             \
-	_Generic((*(dst)), uint8_t: pldm_msgbuf_extract_array_uint8)(ctx, dst, \
-								     count)
+	_Generic((*(dst)),                                                     \
+		uint8_t: pldm_msgbuf_extract_array_uint8,                      \
+		char: pldm_msgbuf_extract_array_char)(ctx, dst, count)
 
 __attribute__((always_inline)) static inline int
 pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx, const uint32_t src)
@@ -953,6 +988,41 @@ pldm_msgbuf_insert_int8(struct pldm_msgbuf *ctx, const int8_t src)
 		int32_t: pldm_msgbuf_insert_int32)(dst, src)
 
 __attribute__((always_inline)) static inline int
+pldm_msgbuf_insert_array_char(struct pldm_msgbuf *ctx, const char *src,
+			      size_t count)
+{
+	assert(ctx);
+
+	if (!ctx->cursor || !src) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	if (!count) {
+		return 0;
+	}
+
+#if INTMAX_MAX < SIZE_MAX
+	if (count > INTMAX_MAX) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+#endif
+
+	if (ctx->remaining < INTMAX_MIN + (intmax_t)count) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+	ctx->remaining -= (intmax_t)count;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	memcpy(ctx->cursor, src, count);
+	ctx->cursor += count;
+
+	return 0;
+}
+
+__attribute__((always_inline)) static inline int
 pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx, const uint8_t *src,
 			       size_t count)
 {
@@ -988,8 +1058,9 @@ pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx, const uint8_t *src,
 }
 
 #define pldm_msgbuf_insert_array(dst, src, count)                              \
-	_Generic((*(src)), uint8_t: pldm_msgbuf_insert_array_uint8)(dst, src,  \
-								    count)
+	_Generic((*(src)),                                                     \
+		uint8_t: pldm_msgbuf_insert_array_uint8,                       \
+		char: pldm_msgbuf_insert_array_char)(dst, src, count)
 
 __attribute__((always_inline)) static inline int
 pldm_msgbuf_span_required(struct pldm_msgbuf *ctx, size_t required,
