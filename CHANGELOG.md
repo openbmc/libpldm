@@ -43,6 +43,7 @@ Change categories:
 14. oem: ibm: Support for the Real SAI entity id
 15. fw_update: Add encode req & decode resp for query_downstream_devices
 16. fw_update: Add encode req & decode resp for query_downstream_identifiers
+17. fw_update: Add encode req & decode resp for get_downstream_fw_params
 
 ### Changed
 
