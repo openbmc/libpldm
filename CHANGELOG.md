@@ -41,6 +41,7 @@ Change categories:
     Connection Types
 13. fw_update: Add encode req & decode resp for query_downstream_devices
 14. fw_update: Add encode req & decode resp for query_downstream_identifiers
+15. fw_update: Add encode req & decode resp for get_downstream_fw_params
 
 ### Changed
 
