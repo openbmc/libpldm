@@ -35,6 +35,7 @@ Change categories:
 8. oem-ibm: Alias `pldm_oem_ibm_fru_field_type` members as `PLDM_OEM_IBM_*`
 9. oem: ibm: Add Firmware Update Access Key(UAK) as a FRU field type
 <<<<<<< HEAD
+<<<<<<< HEAD
 10. platform: Add 3 PDR type enum for Redfish Device Enablement per
     DSP0248_1.2.0
 11. state_set: Add CONNECTED and DISCONNECTED enum for Link State set
@@ -42,6 +43,7 @@ Change categories:
     Connection Types
 13. fw_update: Add encode req & decode resp for query_downstream_devices
 14. fw_update: Add encode req & decode resp for query_downstream_identifiers
+15. fw_update: Add encode req & decode resp for get_downstream_fw_params
 
 ### Changed
 
