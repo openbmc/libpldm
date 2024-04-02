@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "632734c2_5c6dc8f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-02T07:04:38Z",
+      "side": 1,
+      "message": "acknowledged.",
+      "parentUuid": "46f63d92_b82e1b18",
+      "range": {
+        "startLine": 7,
+        "startChar": 12,
+        "endLine": 7,
+        "endChar": 33
+      },
+      "revId": "2ccab4705bc933435548cbcac888a4c5ccb20742",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "813030d8_03270f4b",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f29f909a_6577ab5b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-02T07:04:38Z",
+      "side": 1,
+      "message": "acknowledged.",
+      "parentUuid": "813030d8_03270f4b",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 61
+      },
+      "revId": "2ccab4705bc933435548cbcac888a4c5ccb20742",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88193df3_324fb2f8",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-04-02T02:31:08Z",
       "side": 1,
       "message": "For the BMC to boot properly? Hopefully not?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 35
+      },
+      "revId": "2ccab4705bc933435548cbcac888a4c5ccb20742",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c160a1d4_bbad97d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-02T07:04:38Z",
+      "side": 1,
+      "message": "acknowledged.",
+      "parentUuid": "88193df3_324fb2f8",
       "range": {
         "startLine": 12,
         "startChar": 0,
@@ -110,6 +182,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93418625_6a2bd6f0",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-02T07:04:38Z",
+      "side": 1,
+      "message": "acknowledged.",
+      "parentUuid": "32086989_71ead245",
+      "range": {
+        "startLine": 603,
+        "startChar": 18,
+        "endLine": 603,
+        "endChar": 39
+      },
+      "revId": "2ccab4705bc933435548cbcac888a4c5ccb20742",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f180bda_699c8cec",
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4014c913_de2f2692",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1310,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-02T07:04:38Z",
+      "side": 1,
+      "message": "This function will add initialise empty/new data set which will be used in below gerrit commit and also used for code optimisation for repetitive code which will be taking care for next set of commit.",
+      "parentUuid": "8f180bda_699c8cec",
+      "range": {
+        "startLine": 1304,
+        "startChar": 0,
+        "endLine": 1310,
+        "endChar": 1
+      },
+      "revId": "2ccab4705bc933435548cbcac888a4c5ccb20742",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ab5d6c1_61ec539a",
@@ -146,6 +266,24 @@
       "writtenOn": "2024-04-02T02:31:08Z",
       "side": 1,
       "message": "You mustn\u0027t assume the returned pointer is valid. Please handle the error.",
+      "revId": "2ccab4705bc933435548cbcac888a4c5ccb20742",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01189981_4f860965",
+        "filename": "src/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-02T07:04:38Z",
+      "side": 1,
+      "message": "acknowledged.",
+      "parentUuid": "2ab5d6c1_61ec539a",
       "revId": "2ccab4705bc933435548cbcac888a4c5ccb20742",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
