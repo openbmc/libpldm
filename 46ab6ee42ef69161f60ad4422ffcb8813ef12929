@@ -253,6 +253,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58b727c5_482469d5",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-04-02T12:41:28Z",
+      "side": 1,
+      "message": "yeah we should change those as well , probably in a different commit.",
+      "parentUuid": "16896c80_52e75e61",
+      "range": {
+        "startLine": 462,
+        "startChar": 15,
+        "endLine": 462,
+        "endChar": 19
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9091f0c4_085eacf0",
@@ -290,6 +314,30 @@
       "side": 1,
       "message": "This works when there is no PDR with the container entity also. In such a case we add the contained entity passed in this API to the association PDR and attach the container entity to it and we will return the event data operation as PDR_ADDED instead of PDR_MODIFIED.",
       "parentUuid": "9091f0c4_085eacf0",
+      "range": {
+        "startLine": 464,
+        "startChar": 12,
+        "endLine": 464,
+        "endChar": 50
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5d57acf_35a6b533",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-04-02T12:41:28Z",
+      "side": 1,
+      "message": "so this here is inaccurate right ?\n\n\u003e  uint32_t the updated PDR record handle\n\nits not always updated record handle, it can be newly created record handle as well ?",
+      "parentUuid": "69d2c4b8_bb5c1462",
       "range": {
         "startLine": 464,
         "startChar": 12,
@@ -837,6 +885,30 @@
       "side": 1,
       "message": "yes it should be a violation. I have not come across the maximum value but the num of children is of type uint8 so I think we cannot have more than 255 children. Adding a check here needs further discussion because -\n1. just doing if(children\u003cmax_children) here or in the calling function is not enough, we need to return an error back to PLDM\n2. This API return uint32_t so how can we return error back to PLDM to indicate that the new entity is not added and the association PDR is not modified?",
       "parentUuid": "cc716c10_986d5285",
+      "range": {
+        "startLine": 1367,
+        "startChar": 1,
+        "endLine": 1370,
+        "endChar": 62
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ecc70ee_0e21abcd",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-04-02T12:41:28Z",
+      "side": 1,
+      "message": "please dont mark things as resolved without getting consensus.\n\nusing uint32_t as return type was your design choice right ? its not a hard and fast rule to just have uint32_t as return type. Yes, the API needs to be changed, so that it can return an ERROR back to the consumers stating that (cannot assume that this API always works right ? since there could be a spec violation)",
+      "parentUuid": "335ae1d8_6062b87c",
       "range": {
         "startLine": 1367,
         "startChar": 1,

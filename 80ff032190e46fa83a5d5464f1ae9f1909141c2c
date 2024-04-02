@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90ff64fa_e8d09b91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 20
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-04-02T12:41:28Z",
+      "side": 1,
+      "message": "could you please wrap this to 72 characters ? this seems like its wrapped to even less than 50 characters in some lines.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 23
+      },
+      "revId": "80ff032190e46fa83a5d5464f1ae9f1909141c2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d007e19_d5227112",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 20
@@ -49,6 +72,116 @@
       "side": 1,
       "message": "This was marked resolved by mistake",
       "parentUuid": "27606762_46d8b445",
+      "revId": "80ff032190e46fa83a5d5464f1ae9f1909141c2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e9bee5_de980fc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-04-02T12:41:28Z",
+      "side": 1,
+      "message": "\u003e Replace assert for error handling - I will change the return type of this API as \u003e int instead of uint32 so that we can return error cases . Record handle will be\n\u003e added as an in-out parameter for the API. We will also modify the calling \n\u003e function in PLDM to handle the errors correctly.\n\nsounds like this could work.\n\n\u003e event_data_op should be of enum type and not uint8* - We have found a way to not \u003e include this parameter as an input in this API. It will be modified in the              \u003e calling function inside PLDM itself. So we dont need to address this concern at  \u003e all.\n\n\u003e Msgbuf - I will include a generic case for the function pldm_msgbuf_extract that \u003e handles pldm_entity data type. This will allow me to use msgbuf to extract the      \u003e contents of PDR. This will be a separate commit on top of this commit.\n\nShouldn\u0027t this be below this commit and shouldn\u0027t your commit be using that infrastructure ?",
+      "parentUuid": "ecce02fd_2ce633ff",
+      "revId": "80ff032190e46fa83a5d5464f1ae9f1909141c2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85863caa_574ac3b1",
+        "filename": "src/pdr.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-04-02T12:41:28Z",
+      "side": 1,
+      "message": "could this be split into another commit with its own unit test ?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "80ff032190e46fa83a5d5464f1ae9f1909141c2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0009b78_1f875b78",
+        "filename": "src/pdr.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-04-02T12:41:28Z",
+      "side": 1,
+      "message": "doxygen for parameters missing.",
+      "range": {
+        "startLine": 1319,
+        "startChar": 0,
+        "endLine": 1321,
+        "endChar": 3
+      },
+      "revId": "80ff032190e46fa83a5d5464f1ae9f1909141c2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0799653e_02279d1f",
+        "filename": "src/pdr.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1326,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-04-02T12:41:28Z",
+      "side": 1,
+      "message": "match seems like a redundant variable. Implicitly sending true or false is better. Again this also seems like something that could be seperated into its own commit with its own unit tests.",
+      "range": {
+        "startLine": 1326,
+        "startChar": 1,
+        "endLine": 1326,
+        "endChar": 20
+      },
+      "revId": "80ff032190e46fa83a5d5464f1ae9f1909141c2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0455835_e42e4b5a",
+        "filename": "src/pdr.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-04-02T12:41:28Z",
+      "side": 1,
+      "message": "this API does not feel like something that should be separated, as most of the things seems to be hard coded within the function (like the PDR type as entity association), i don\u0027t foresee this being consumed by any other API in the future.",
+      "range": {
+        "startLine": 1341,
+        "startChar": 0,
+        "endLine": 1351,
+        "endChar": 1
+      },
       "revId": "80ff032190e46fa83a5d5464f1ae9f1909141c2c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
