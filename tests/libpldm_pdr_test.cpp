@@ -1929,3 +1929,11 @@ TEST(EntityAssociationPDR, testNodeAddCheck)
     pldm_pdr_destroy(repo);
     pldm_entity_association_tree_destroy(tree);
 }
+
+TEST(InitEntityNode, testNodeCreation)
+{
+    auto node = pldm_entity_node_init();
+    // Verifying the pointer after initializing
+    EXPECT_NE(node, nullptr);
+    free(node);
+}
