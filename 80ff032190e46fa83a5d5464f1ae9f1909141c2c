@@ -114,6 +114,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9c587e4_b377404e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-03T06:21:22Z",
+      "side": 1,
+      "message": "Sorry, I lost track of this change somewhere.\n\n\u003e Replace assert for error handling - I will change the return type of this API as int instead of uint32 so that we can return error cases . Record handle will be added as an in-out parameter for the API. We will also modify the calling function in PLDM to handle the errors correctly.\n\nOkay, thanks. That sounds like a good way forward.\n\n\u003e event_data_op should be of enum type and not uint8* - We have found a way to not include this parameter as an input in this API. It will be modified in the calling function inside PLDM itself. So we dont need to address this concern at all.\n\nOkay. I guess I\u0027ll wait and see how that turns out 😊\n\n\u003e Msgbuf - I will include a generic case for the function pldm_msgbuf_extract that handles pldm_entity data type. This will allow me to use msgbuf to extract the contents of PDR. This will be a separate commit on top of this commit.\n\nI\u0027m not following what you\u0027re proposing here. I haven\u0027t yet seen a need to _add_ to the `msgbuf` API behaviours - the point was you should implement the PDR manipulation in terms of what it already supports. Adding _any_ behaviour to `msgbuf` is something that needs to be done with a lot of care, precisely because it provides the abstractions that make parsing and packing buffers safe.",
+      "parentUuid": "7ca317e7_3b27459b",
+      "revId": "80ff032190e46fa83a5d5464f1ae9f1909141c2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85863caa_574ac3b1",
         "filename": "src/pdr.c",
         "patchSetId": 20
