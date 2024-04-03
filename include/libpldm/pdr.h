@@ -590,6 +590,13 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 					 size_t *num_entities,
 					 pldm_entity **entities);
 
+/** @brief Make a new pldm entity node
+ *
+ *  @return opaque pointer that acts as a handle to the node; NULL if no
+ *  node could be created
+ */
+pldm_entity_node *pldm_entity_node_init(void);
+
 #ifdef __cplusplus
 }
 #endif
