@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7716c6a7_f5412f46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-03T15:03:42Z",
+      "side": 1,
+      "message": "clarifying commit msg, hope it\u0027s enough, if not, we could discuss over discord.",
+      "parentUuid": "fd12caf8_54309c15",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 51
+      },
+      "revId": "f151dab34440f91f8f71933ec95e7a773e2425c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9a982cd_31949c0b",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-03T03:45:55Z",
       "side": 1,
       "message": "Please trim trailing whitespace",
+      "range": {
+        "startLine": 593,
+        "startChar": 86,
+        "endLine": 593,
+        "endChar": 87
+      },
+      "revId": "f151dab34440f91f8f71933ec95e7a773e2425c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dd4bc6d_75c57ee6",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-03T15:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9a982cd_31949c0b",
       "range": {
         "startLine": 593,
         "startChar": 86,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93da836a_ff6b17db",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-03T15:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32073145_b1647e63",
+      "revId": "f151dab34440f91f8f71933ec95e7a773e2425c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d85ee103_25db3e99",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-04-03T03:45:55Z",
       "side": 1,
       "message": "The problem I have here is the type is opaque, but the function signature exposes all the members of the opaque type. Why should the type remain opaque when we lose all advantage of keeping it so (any changes would require updating this function signature - and either way it\u0027s an ABI break).",
+      "range": {
+        "startLine": 603,
+        "startChar": 0,
+        "endLine": 608,
+        "endChar": 1
+      },
+      "revId": "f151dab34440f91f8f71933ec95e7a773e2425c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb61eef_3d635f8f",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-03T15:03:42Z",
+      "side": 1,
+      "message": "Hi andrew,\nAgree with you, I tried to use opaque pointer but it won\u0027t work, but now i modified initialisation of structure only with pldm entity data which is as per PLDM usecase.\nIt also support empty structure initialisation for other usecase as well.",
+      "parentUuid": "d85ee103_25db3e99",
       "range": {
         "startLine": 603,
         "startChar": 0,
