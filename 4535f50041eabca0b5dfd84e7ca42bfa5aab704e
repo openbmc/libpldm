@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba29a37d_403bccaa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001504
+      },
+      "writtenOn": "2024-04-03T05:27:11Z",
+      "side": 1,
+      "message": "Changed to motivation instead of change content.",
+      "parentUuid": "c67d436e_5fa71334",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 53
+      },
+      "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "491eef2c_02eff0e8",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -37,6 +61,24 @@
       "writtenOn": "2024-04-03T04:04:30Z",
       "side": 1,
       "message": "Also DSP0248 for the Redfish resource PDR type.",
+      "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7a3c41a_faccd978",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001504
+      },
+      "writtenOn": "2024-04-03T05:27:11Z",
+      "side": 1,
+      "message": "Added as comment in the platform.h.",
+      "parentUuid": "491eef2c_02eff0e8",
       "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b431164_6072716d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001504
+      },
+      "writtenOn": "2024-04-03T05:27:11Z",
+      "side": 1,
+      "message": "Added in the CHANGELOG.md",
+      "parentUuid": "64405d36_bc39c5a4",
+      "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63da7d86_19b3db33",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 2
@@ -71,6 +131,24 @@
       "writtenOn": "2024-04-03T04:04:30Z",
       "side": 1,
       "message": "It would be nice if we listed the spec (DSP0248) and the section (28.2) in the comment here...",
+      "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a02caa5c_adba9b0c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1001504
+      },
+      "writtenOn": "2024-04-03T05:27:11Z",
+      "side": 1,
+      "message": "Added \" defined in DSP0248_1.2.0 section 28.2\"",
+      "parentUuid": "63da7d86_19b3db33",
       "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
