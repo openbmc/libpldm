@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "932fa061_cb647024",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-03T05:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba29a37d_403bccaa",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 53
+      },
+      "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "491eef2c_02eff0e8",
@@ -79,6 +103,24 @@
       "side": 1,
       "message": "Added as comment in the platform.h.",
       "parentUuid": "491eef2c_02eff0e8",
+      "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b217beb_a80645e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-03T05:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7a3c41a_faccd978",
       "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -118,6 +160,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3964c7f1_fca85be8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-03T05:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b431164_6072716d",
+      "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63da7d86_19b3db33",
@@ -149,6 +209,24 @@
       "side": 1,
       "message": "Added \" defined in DSP0248_1.2.0 section 28.2\"",
       "parentUuid": "63da7d86_19b3db33",
+      "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8d6e506_11889595",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-03T05:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a02caa5c_adba9b0c",
       "revId": "4535f50041eabca0b5dfd84e7ca42bfa5aab704e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
