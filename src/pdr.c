@@ -1300,3 +1300,16 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 	*num_entities = l_num_entities;
 	*entities = l_entities;
 }
+
+LIBPLDM_ABI_TESTING
+pldm_entity_node *pldm_entity_node_init(pldm_entity *entity)
+{
+	pldm_entity_node *node = calloc(1, sizeof(pldm_entity_node));
+	if (!node) {
+		return NULL;
+	}
+	if (entity != NULL) {
+		node->entity = *entity;
+	}
+	return node;
+}
