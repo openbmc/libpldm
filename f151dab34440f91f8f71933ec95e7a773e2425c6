@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd12caf8_54309c15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-03T03:45:55Z",
+      "side": 1,
+      "message": "Sorry, but this description is not convincing enough for me to agree to add to the library API surface, especially given the function signature and intent.\n\nAt the very least it needs to provide a compelling argument as to why the proposal is the only reasonable course of action possible, by enumerating the alternatives and arguing convincingly why they\u0027re not as good.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 51
+      },
+      "revId": "f151dab34440f91f8f71933ec95e7a773e2425c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9a982cd_31949c0b",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-03T03:45:55Z",
+      "side": 1,
+      "message": "Please trim trailing whitespace",
+      "range": {
+        "startLine": 593,
+        "startChar": 86,
+        "endLine": 593,
+        "endChar": 87
+      },
+      "revId": "f151dab34440f91f8f71933ec95e7a773e2425c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32073145_b1647e63",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-03T03:45:55Z",
+      "side": 1,
+      "message": "Please don\u0027t use tabs after spaces.",
+      "revId": "f151dab34440f91f8f71933ec95e7a773e2425c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d85ee103_25db3e99",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-03T03:45:55Z",
+      "side": 1,
+      "message": "The problem I have here is the type is opaque, but the function signature exposes all the members of the opaque type. Why should the type remain opaque when we lose all advantage of keeping it so (any changes would require updating this function signature - and either way it\u0027s an ABI break).",
+      "range": {
+        "startLine": 603,
+        "startChar": 0,
+        "endLine": 608,
+        "endChar": 1
+      },
+      "revId": "f151dab34440f91f8f71933ec95e7a773e2425c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
