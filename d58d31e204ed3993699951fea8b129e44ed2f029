@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4be2e474_f4b9a9d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-04T06:02:24Z",
+      "side": 1,
+      "message": "Why? What\u0027s the motivation?",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 57
+      },
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15988ba3_a0ff8c52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-04T06:02:24Z",
+      "side": 1,
+      "message": "Right, but why should there be?",
+      "range": {
+        "startLine": 10,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 68
+      },
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bde7caf_d93197b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-04T06:02:24Z",
+      "side": 1,
+      "message": "What is this use case?",
+      "range": {
+        "startLine": 11,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8f93734_fb058bde",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-04T06:02:24Z",
+      "side": 1,
+      "message": "Why this API is the best approach above all other possible approaches (and even enumeration of other possible approaches) is still missing from the description. I don\u0027t plan to merge new APIs with mysterious motivations. Can you provide some brief demonstrations how the returned opaque pointer can be used with other, existing libpldm APIs to integrate the entity node into and relate it to other structures?\n\nAlso, please try to write your commit messages as regular prose and not a bullet list.",
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76dfeb19_fcbb7bcf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-04T06:02:24Z",
+      "side": 1,
+      "message": "While it\u0027s important that we demonstrate there\u0027s a user of the proposed API, the justification for its existence must be entirely self-contained in the libpldm commit, either in the commit message or in documentation added in the commit.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 51
+      },
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ca33770_05ec9596",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-04T06:02:24Z",
+      "side": 1,
+      "message": "Hi Kamalkumar, I\u0027ve still got some concerns with the commit message and the API generally. Despite my concerns there, I\u0027ve also made a comment on the implementation and the test.",
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa020d5_b97cd32e",
+        "filename": "src/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-04T06:02:24Z",
+      "side": 1,
+      "message": "Perhaps all this would be better as:\n\n```\n    return calloc(1UL, sizeof(struct pldm_entity_node));\n```",
+      "range": {
+        "startLine": 1307,
+        "startChar": 1,
+        "endLine": 1321,
+        "endChar": 13
+      },
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a0f3152_64c8db9b",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-04T06:02:24Z",
+      "side": 1,
+      "message": "I\u0027m not convinced at test that validates a dynamic memory allocation succeeds is beneficial. It doesn\u0027t demonstrate anything about the function\u0027s behaviour in a production environment.",
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
