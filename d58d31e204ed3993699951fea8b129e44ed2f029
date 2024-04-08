@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c072463f_3e9a2127",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-08T18:11:56Z",
+      "side": 1,
+      "message": "improved commit message.",
+      "parentUuid": "4be2e474_f4b9a9d1",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 57
+      },
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15988ba3_a0ff8c52",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af1c2db0_edb8924e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-08T18:11:56Z",
+      "side": 1,
+      "message": "improved commit message.",
+      "parentUuid": "15988ba3_a0ff8c52",
+      "range": {
+        "startLine": 10,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 68
+      },
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bde7caf_d93197b7",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-04-04T06:02:24Z",
       "side": 1,
       "message": "What is this use case?",
+      "range": {
+        "startLine": 11,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d41c20_6b847dc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-08T18:11:56Z",
+      "side": 1,
+      "message": "improved commit message.",
+      "parentUuid": "5bde7caf_d93197b7",
       "range": {
         "startLine": 11,
         "startChar": 2,
@@ -112,6 +184,48 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "86a94fb2_41904bbf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-08T18:11:56Z",
+      "side": 1,
+      "message": "Libpldm is allocating memory and pldm is using this node as per pldm storing/restoring node object path into dbus, PLDM is having opaque pointer of \u0027pldm_entity_node\u0027 which can\u0027t extracted in PLDM, but it can holds the assigned pldm_entity data. using  pldm_entity pinter which will be null for other usecases and code optimization but for PLDM it will holds the pldm entity values.",
+      "parentUuid": "e8f93734_fb058bde",
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcd13d47_7a0af5d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-08T18:11:56Z",
+      "side": 1,
+      "message": "improved commit message.",
+      "parentUuid": "76dfeb19_fcbb7bcf",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 51
+      },
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3ca33770_05ec9596",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
@@ -150,6 +264,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cd46ff6_ccf30238",
+        "filename": "src/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-08T18:11:56Z",
+      "side": 1,
+      "message": "acknowledge.",
+      "parentUuid": "9aa020d5_b97cd32e",
+      "range": {
+        "startLine": 1307,
+        "startChar": 1,
+        "endLine": 1321,
+        "endChar": 13
+      },
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a0f3152_64c8db9b",
@@ -163,6 +301,24 @@
       "writtenOn": "2024-04-04T06:02:24Z",
       "side": 1,
       "message": "I\u0027m not convinced at test that validates a dynamic memory allocation succeeds is beneficial. It doesn\u0027t demonstrate anything about the function\u0027s behaviour in a production environment.",
+      "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e545cbae_02253b37",
+        "filename": "tests/libpldm_pdr_test.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1001539
+      },
+      "writtenOn": "2024-04-08T18:11:56Z",
+      "side": 1,
+      "message": "agree, but since it\u0027s opaque pointer so can\u0027t extract other values to check in test case.it\u0027s gives error when i try to check structure values.",
+      "parentUuid": "8a0f3152_64c8db9b",
       "revId": "d58d31e204ed3993699951fea8b129e44ed2f029",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
