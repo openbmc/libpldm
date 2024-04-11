@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e7bcff_666e2dd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-11T01:36:27Z",
+      "side": 1,
+      "message": "Hello; The comments on [fw_update: Add encode req \u0026 decode resp for query_downtream_identifiers](https://gerrit.openbmc.org/c/openbmc/libpldm/+/70729) also apply to this patch. Please identify the corresponding issues and fix.",
+      "revId": "91678b99506147732b9740953f1ba1dbc93dc577",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
