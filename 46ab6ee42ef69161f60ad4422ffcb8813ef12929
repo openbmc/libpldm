@@ -350,6 +350,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea5f01e8_4484b1f8",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-12T05:40:00Z",
+      "side": 1,
+      "message": "do u prefer updated record handle or modified record handle? I dont think we should use new record handle because when we find the container entity inside the entity association PDR the record handle of the contained entity \u003d record handle of the container entity which is not new.",
+      "parentUuid": "d5d57acf_35a6b533",
+      "range": {
+        "startLine": 464,
+        "startChar": 12,
+        "endLine": 464,
+        "endChar": 50
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1d23d68_794fec38",
         "filename": "src/pdr.c",
         "patchSetId": 18
@@ -644,6 +668,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ef262a6_b9d2b8fb",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1315,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-12T05:40:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "791d4691_05a047e8",
+      "range": {
+        "startLine": 1313,
+        "startChar": 1,
+        "endLine": 1315,
+        "endChar": 36
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4346963_54c6d7d2",
         "filename": "src/pdr.c",
         "patchSetId": 18
@@ -691,6 +739,24 @@
       "side": 1,
       "message": "You must not use `assert()` for error handling. If you\u0027re doing dynamic memory allocation with `malloc()` then you must handle the `NULL` case as an error.",
       "parentUuid": "685941af_f5b01577",
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7839e870_ee23b979",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-12T05:40:00Z",
+      "side": 1,
+      "message": "This feedback is taken care of when we change the return type of the function from unt32_t to int. We return error codes for error handling now",
+      "parentUuid": "5a741635_d5ca2eeb",
       "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -909,6 +975,30 @@
       "side": 1,
       "message": "please dont mark things as resolved without getting consensus.\n\nusing uint32_t as return type was your design choice right ? its not a hard and fast rule to just have uint32_t as return type. Yes, the API needs to be changed, so that it can return an ERROR back to the consumers stating that (cannot assume that this API always works right ? since there could be a spec violation)",
       "parentUuid": "335ae1d8_6062b87c",
+      "range": {
+        "startLine": 1367,
+        "startChar": 1,
+        "endLine": 1370,
+        "endChar": 62
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed61e7c6_3da8dfbe",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-12T05:40:00Z",
+      "side": 1,
+      "message": "I can address this now because we have decided to change the return type of the function. So now we will return PLDM_ERROR error trace if the number of children is more than 255.",
+      "parentUuid": "3ecc70ee_0e21abcd",
       "range": {
         "startLine": 1367,
         "startChar": 1,

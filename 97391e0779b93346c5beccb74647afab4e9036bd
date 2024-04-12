@@ -664,6 +664,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99881deb_376f1d4c",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-12T05:40:00Z",
+      "side": 1,
+      "message": "As per discussions done earlier, we will remove bmc_event_data_op as an input parameter here and handle its updated enum inside PLDM code as per the updated record handle or by checking the parent entity of the entity that is added to the entity association PDR",
+      "parentUuid": "60089305_28386d9e",
+      "range": {
+        "startLine": 476,
+        "startChar": 1,
+        "endLine": 476,
+        "endChar": 23
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "020d6dbf_0678e6b4",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 9
