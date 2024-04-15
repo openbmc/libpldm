@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c79e5765_d422d28e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-15T04:55:00Z",
+      "side": 1,
+      "message": "Please reference in the commit message the specification and section that the patch is implementing",
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bad0fa9f_10f7cfb4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-15T04:55:00Z",
+      "side": 1,
+      "message": "I didn\u0027t see anything changed? From my quick look it adds the struct, just it\u0027s not annotated as packed (thanks).",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 16
+      },
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d8fb0e0_7858a278",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-15T04:55:00Z",
+      "side": 1,
+      "message": "Hi Thu, thanks for the patch and thanks for implementing the decoding in terms of the `msgbuf` APIs. I have some preliminary comments. I\u0027ll take a deeper look once they are resolved.",
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd49bfd6_58367ace",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-15T04:55:00Z",
+      "side": 1,
+      "message": "I\u0027m not super keen on the `_unpkg` suffix. Can we drop it? Ideally none of these structs would be packed. We\u0027ll get there some day, but I don\u0027t want to do an API break to rename this one down the track.",
+      "range": {
+        "startLine": 794,
+        "startChar": 38,
+        "endLine": 794,
+        "endChar": 44
+      },
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "645abc33_024b0482",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2256,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-15T04:55:00Z",
+      "side": 1,
+      "message": "This is not `struct pldm_msg` because we\u0027ve extracted the pointer to the PDR data buffer from a message elsewhere? Can you clarify that in the doxygen commentary?",
+      "range": {
+        "startLine": 2256,
+        "startChar": 1,
+        "endLine": 2256,
+        "endChar": 22
+      },
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "176b36f5_745837dd",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-15T04:55:00Z",
+      "side": 1,
+      "message": "This is mentioned earlier in the file, I think we can probably drop it.",
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
