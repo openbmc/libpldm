@@ -179,6 +179,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b98e00c9_f4a03035",
+        "filename": "src/pdr.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-16T06:49:47Z",
+      "side": 1,
+      "message": "yes we can but this is a static function also it is defined in platform.c . I cannot call that function so I added it in pdr.c as well. This was a requirement from @arj saying we need to validate the headers. Do we need to convert it into a non static function and add its own unit test ?\n\nTEST(HeaderValidate, testPdrHdrValidate)\n{\n    struct pldm_msgbuf _ctx;\n    struct pldm_msgbuf* ctx \u003d \u0026_ctx;\n\n    ASSERT_EQ(pldm_platform_pdr_hdr_validate(ctx, 0, 0),\n              PLDM_ERROR_INVALID_LENGTH);\n    ASSERT_EQ(pldm_platform_pdr_hdr_validate(ctx, 10, 0),\n              PLDM_ERROR_INVALID_LENGTH);\n    ASSERT_EQ(pldm_platform_pdr_hdr_validate(ctx, 0, 10), PLDM_SUCCESS);\n}",
+      "parentUuid": "85863caa_574ac3b1",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "80ff032190e46fa83a5d5464f1ae9f1909141c2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0009b78_1f875b78",
         "filename": "src/pdr.c",
         "patchSetId": 20
