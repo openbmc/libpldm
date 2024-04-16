@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bead149d_ba5b3985",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-04-16T02:45:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccddb476_a1cbe63a",
+      "range": {
+        "startLine": 463,
+        "startChar": 3,
+        "endLine": 463,
+        "endChar": 4
+      },
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e2d2d0a_558f5d1d",
@@ -58,6 +82,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea73d355_39203409",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-04-16T02:45:20Z",
+      "side": 1,
+      "message": "If `__attribute__((packed))` is not specified, the calculation of sizeof would be optimized for performance by compiler, here is an example:\n```\n#include \u003cstdio.h\u003e\n#include \u003cstdint.h\u003e\n\nstruct not_packed {\n    uint8_t one_byte;\n    uint16_t two_bytes;\n};\n\nstruct packed {\n    uint8_t one_byte;\n    uint16_t two_bytes;\n} __attribute__((packed));\n\nint main()\n{\n    // Some compiler would be 4\n    printf(\"not_packed size: %lu \\n\", sizeof(struct not_packed));\n    // Always be 3\n    printf(\"packed size: %lu\", sizeof(struct packed));\n\n    return 0;\n}\n```\n\nIt can be simply reproduced on some online compiler website such as [onelinegdb.com](https://www.onlinegdb.com/online_c_compiler). If there is a mechanism to avoid this problem in `libpldm`, please let me know, thanks.",
+      "parentUuid": "4e2d2d0a_558f5d1d",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e371e8f2_b579f052",
@@ -71,6 +113,24 @@
       "writtenOn": "2024-04-11T01:32:37Z",
       "side": 1,
       "message": "Can we please not mark this as `__attribute__((packed))`? Given we have the codec functions nothing should be trying to cast this type over a wire-format buffer.",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a32bf490_6e661c90",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-04-16T02:45:20Z",
+      "side": 1,
+      "message": "Please refer the reply above, thanks.",
+      "parentUuid": "e371e8f2_b579f052",
       "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -98,6 +158,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16fcda91_34f1f62c",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-04-16T02:45:20Z",
+      "side": 1,
+      "message": "Done, thanks for reminding.",
+      "parentUuid": "75b4883b_56438950",
+      "range": {
+        "startLine": 490,
+        "startChar": 28,
+        "endLine": 490,
+        "endChar": 29
+      },
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61ce9be2_4d2f8c69",
@@ -115,6 +199,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfb9a42e_dddec0c2",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-04-16T02:45:20Z",
+      "side": 1,
+      "message": "Please refer the reply about `__attribute__((packed))` above, thanks.",
+      "parentUuid": "61ce9be2_4d2f8c69",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f89064d0_2220aaea",
@@ -128,6 +230,24 @@
       "writtenOn": "2024-04-11T01:32:37Z",
       "side": 1,
       "message": "I\u0027d prefer we define this to be an enum type and do the conversion to the wire type internal to the implementation.",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d9f3615_76b0fed8",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-04-16T02:45:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f89064d0_2220aaea",
       "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -151,6 +271,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "200ab2eb_756940ee",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-04-16T02:45:20Z",
+      "side": 1,
+      "message": "I\u0027ve tried to refactor the API using msgbuf, but I encountered an issue which cause unit test failed:\n```\n[ RUN      ] QueryDownstreamIdentifiers.goodPathEncodeRequest\n----------------------------------- stderr -----------------------------------\nlibpldm_firmware_update_test: ../src/msgbuf.h:384: pldm_msgbuf_insert_uint32: Assertion `ctx-\u003eremaining \u003e\u003d 0\u0027 failed.\n```\n\nIn my code, I use pldm_msgbuf_init and specify the payload length, it should assign to the remaining in the msgbuf. However, when the unit test is ran, the error indicates that remaining \u003e\u003d0 failed, did I missed something?\n\n```\n(Can refer to the new commit I just uploaded)\nrc \u003d pldm_msgbuf_init(\n\t\tbuf, sizeof(struct pldm_query_downstream_identifiers_req),\n\t\tmsg-\u003epayload, payload_length);\nif (rc) {\n\treturn rc;\n}\n\npldm_msgbuf_insert(buf, data_transfer_handle);\npldm_msgbuf_insert(buf, transfer_operation_flag);\n```\n\nNote: And after my investigation, I think that the failed unit test case should not refactored to msgbug cause it is a test case for encoding a request.",
+      "parentUuid": "73085ee5_3732fadd",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e82187eb_42a2fb25",
         "filename": "src/firmware_update.c",
         "patchSetId": 4
@@ -162,6 +300,24 @@
       "writtenOn": "2024-04-11T01:32:37Z",
       "side": 1,
       "message": "This seems unexpected?",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10bf73de_730ea3a7",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-04-16T02:45:20Z",
+      "side": 1,
+      "message": "Done, my original thought is that the decoding is successful but the completion code of the response is not SUCCESS, I have changed it into an error code instead.",
+      "parentUuid": "e82187eb_42a2fb25",
       "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -200,6 +356,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "825338e9_64eb5d2b",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-04-16T02:45:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a945b970_80ba7f4b",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56c2dc10_16fe8f33",
@@ -213,6 +387,24 @@
       "writtenOn": "2024-04-11T01:32:37Z",
       "side": 1,
       "message": "Can you please exercise all of the error paths?",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5babcfc_984412d6",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-04-16T02:45:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56c2dc10_16fe8f33",
       "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
