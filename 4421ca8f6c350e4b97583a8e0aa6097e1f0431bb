@@ -322,6 +322,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cabd8e8d_89db220e",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-04-17T09:03:29Z",
+      "side": 1,
+      "message": "Here is a case: If the the completion code of the response is PLDM_ERROR_UNSUPPORTED_PLDM_CMD, the decode function would fail. However, I think it should be considered as SUCCESS and let the caller decide how to handle the completion code.",
+      "parentUuid": "10bf73de_730ea3a7",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "154d5efb_50cf7ece",
