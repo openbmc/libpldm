@@ -16,6 +16,361 @@
       "message": "@arj we have modified the API design by adding some functionality to PLDM. \nWe will now check if the parent entity is present in the entity association PDR inside PLDM and call pldm_entity_association_pdr_add_contained_entity_to_remote_pdr if the parent entity is present. If it is not present we call pldm_entity_association_pdr_create_new and add both parent and child entity to the association PDR.\n\nEarlier pldm_entity_association_pdr_add_contained_entity_to_remote_pdr  and pldm_entity_association_pdr_create_new were static function , with this new change they are not.",
       "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2150c7f2_0e9e12eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "Hi Varsha,\n\nFirstly, this is so much more readable than previous patchsets, thank you for continuing to rework it!\n\nThat said, I still have a number of concerns. See my comments inline.",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75b8800b_8919cbfc",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "What assurance do we have that the addition can\u0027t overflow?\n\nDo you need an additional check for the overflow condition?",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "384d4536_94eb31ec",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "My preferred style for libpldm is not to mix code and variable declarations. Please declare the variables at the top of the function before any further statements (i.e. not like how you have done here, or might do in C++).",
+      "range": {
+        "startLine": 1341,
+        "startChar": 1,
+        "endLine": 1343,
+        "endChar": 37
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce9adf7_314b6134",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "Searching over the records for a specific handle seems like something we should lift out though, mainly to start building a vocabulary over the implementation. `pldm_pdr_find_record_by_handle()`? Make it static for now.",
+      "range": {
+        "startLine": 1341,
+        "startChar": 1,
+        "endLine": 1352,
+        "endChar": 2
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "465a187a_bcc24030",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "Okay, some alarm bells here. The processor _has_ to do arithmetic in its own (host, `h`) endianness by definition, therefore this should be `le16toh()` right? `htole16()` and `le16toh()` are _not_ the same as `bswap()`.\n\nMore broadly, this sets off alarm-bells for the whole implementation of the PDR data structures - we should not be storing them in the wire format. However, fixing that is a _much_ bigger change than what you\u0027re trying to achieve with this patch.\n\nPlease read this for some context on my opinions: [Representations and Design Boundaries with Endianness](https://amboar.github.io/notes/2023/06/19/representations-and-design-boundaries-with-endianness.html)",
+      "range": {
+        "startLine": 1362,
+        "startChar": 27,
+        "endLine": 1362,
+        "endChar": 34
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78609793_be1766cf",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1364,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "Okay, so this is not a particularly interesting case, but things start to get more complex below as we acquire more resources.\n\nPlease use `goto` for resource cleanup; this will reduce the chance of leaks as much as possible given the constraints of C.\n\nIf you\u0027re after an example of what I\u0027m suggesting, check the use of `goto`s in this patch:\n\nhttps://github.com/amboar/culvert/commit/502ba2008e642fb3188d74f1b57cef41685b46bc",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82bb3677_499ab910",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "You\u0027ve done an endian conversion on `record-\u003esize` on line 1362, but not here. Regardless of which is correct (and whatever the case, the endian conversion on 1362 is wrong), there is a bug due to the inconsistency.\n\nThis is why I\u0027d rather that all wire-format accesses be done via the `msgbuf` APIs. Admittedly, we would need to make them more ergonomic (add new APIs) for this specific case.",
+      "range": {
+        "startLine": 1371,
+        "startChar": 28,
+        "endLine": 1371,
+        "endChar": 40
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa8e4f9_07cc7865",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "Why is this cast valid? What assurance do we have that the object pointed-to by `data` is of the appropriate size and doesn\u0027t represent another type?\n\nPlease add necessary runtime checks for errors and assertions for invariants to support your case",
+      "range": {
+        "startLine": 1376,
+        "startChar": 28,
+        "endLine": 1376,
+        "endChar": 64
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e149a25b_3e181748",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "I expect this is incorrect wrt endianness as well.",
+      "range": {
+        "startLine": 1387,
+        "startChar": 10,
+        "endLine": 1387,
+        "endChar": 21
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0a7e232_a3f30b12",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1388,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "As is this? Is it in host endianness or LE? I feel this is all quite confused.",
+      "range": {
+        "startLine": 1388,
+        "startChar": 10,
+        "endLine": 1388,
+        "endChar": 28
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b2a687_a33d107b",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "Okay, together with the endianness issues above this starts to build the case for implement PDR header handling in the `msgbuf` APIs, as helpers.\n\nLet\u0027s discuss how this might look. Currently I think the buffer should encapsulate the entire encoded message size, and the `msgbuf` helper for the PDR header should encode it into that buffer. That way you can continue to use the same `struct pldm_msgbuf` instance to continue encoding the rest of the entry.",
+      "range": {
+        "startLine": 1389,
+        "startChar": 1,
+        "endLine": 1392,
+        "endChar": 50
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "353ab3f6_852a9dcd",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1397,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "Please create a `#define` for the size and implement it in terms of a literal value. That way we avoid open-coding a `sizeof()` and can eventually drop the `__attribute__((packed))` without impact here.",
+      "range": {
+        "startLine": 1397,
+        "startChar": 28,
+        "endLine": 1397,
+        "endChar": 70
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96027f4b_d27b5e9d",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1417,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "Why are we bounce-buffering these through `val_uint{8,16}` if we\u0027re not using `pldm_msgbuf_insert()`? Also if you\u0027re not using a corresponding `pldm_msgbuf_insert()` then the endianness incoherent, so that must be fixed.\n\nTogether this suggests we might need something like `pldm_msgbuf_memcpy()` (where we would avoid endian conversion but continue to enforce buffer limits).",
+      "range": {
+        "startLine": 1406,
+        "startChar": 1,
+        "endLine": 1417,
+        "endChar": 53
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2562ce95_85f82a37",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "Is this limit called out in the spec? I assume it is, or is implied by some specific section?",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07958893_3d90decd",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "You _must_ test the return value of this function. The return value determines whether what you\u0027ve done is coherent. If it\u0027s not then there\u0027s no sensible way forward and you must return the error (and do appropriate resource cleanup).\n\nPlease audit the rest of the patch for the issue.",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9de575b_e17338fd",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "Is there a reason not to reuse the variables we\u0027ve already declared?",
+      "range": {
+        "startLine": 1442,
+        "startChar": 1,
+        "endLine": 1443,
+        "endChar": 35
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61497d99_1a806e11",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-17T08:27:43Z",
+      "side": 1,
+      "message": "I\u0027m going to hold off reviewing this one, as I suspect contains many of the issues identified above.",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
