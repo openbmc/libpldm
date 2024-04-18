@@ -16,6 +16,46 @@
       "message": "Thanks for reviewing, I\u0027ve modified the code based on the suggestion, but I encountered some difficulties about `msgbuf`, which cause the test case failed, it would be great if you can point out the root cause of the error, thank you so much.",
       "revId": "3b7fc37100268d3e210df70dac2025cc506b9c53",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af249625_ac0eb772",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-18T00:01:46Z",
+      "side": 1,
+      "message": "Hello, I have some remaining concerns from PS4.",
+      "revId": "3b7fc37100268d3e210df70dac2025cc506b9c53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d31991e6_b53575b3",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-18T00:01:46Z",
+      "side": 1,
+      "message": "Please remove `__attribute__((packed))`.\n\nPlease audit the rest of the patch for any such concerns.",
+      "range": {
+        "startLine": 468,
+        "startChar": 3,
+        "endLine": 468,
+        "endChar": 26
+      },
+      "revId": "3b7fc37100268d3e210df70dac2025cc506b9c53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

@@ -102,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d4219fb_59a6f2a9",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-18T00:01:46Z",
+      "side": 1,
+      "message": "Please don\u0027t mark discussion threads as resolved unless we have reached consensus.\n\nYes, not marking as packed have that effect. This isn\u0027t surprising. The problem is using `sizeof()` derive the buffer size. Why must you do that?\n\nMy preferred strategy is to provide a #define` in the appropriate public header that provides the associated wire-format buffer size.",
+      "parentUuid": "ea73d355_39203409",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e371e8f2_b579f052",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 4
@@ -131,6 +149,24 @@
       "side": 1,
       "message": "Please refer the reply above, thanks.",
       "parentUuid": "e371e8f2_b579f052",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a2170ee_d2865580",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-18T00:01:46Z",
+      "side": 1,
+      "message": "likewise.",
+      "parentUuid": "a32bf490_6e661c90",
       "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -219,6 +255,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54973aeb_2084767b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-18T00:01:46Z",
+      "side": 1,
+      "message": "likewise.",
+      "parentUuid": "bfb9a42e_dddec0c2",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f89064d0_2220aaea",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 4
@@ -289,6 +343,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0bc24314_f304c2c5",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-18T00:01:46Z",
+      "side": 1,
+      "message": "If you\u0027re triggering an assert that indicates a buffer overrun then the calling code must be fixed. Either the buffer you supplied is too small, the `payload_length` value is incorrect, or you tried to pack too many members into the buffer for its size. This is not an error of the `msgbuf` APIs.",
+      "parentUuid": "200ab2eb_756940ee",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e82187eb_42a2fb25",
         "filename": "src/firmware_update.c",
         "patchSetId": 4
@@ -336,6 +408,24 @@
       "side": 1,
       "message": "Here is a case: If the the completion code of the response is PLDM_ERROR_UNSUPPORTED_PLDM_CMD, the decode function would fail. However, I think it should be considered as SUCCESS and let the caller decide how to handle the completion code.",
       "parentUuid": "10bf73de_730ea3a7",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48b2d5a8_a5b5787d",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-18T00:01:46Z",
+      "side": 1,
+      "message": "Yes, I think perhaps we need to disregard my concern for now. It\u0027s part of a broader problem of libpldm not separating the protocol command codes from library error codes.\n\nHowever, please note the previous point about not marking discussion threads as resolved unless we\u0027ve reached consensus.",
+      "parentUuid": "cabd8e8d_89db220e",
       "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
