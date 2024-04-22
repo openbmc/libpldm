@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3926b0ff_d2b26689",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-04-22T08:47:57Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "c79e5765_d422d28e",
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bad0fa9f_10f7cfb4",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -31,6 +49,30 @@
       "writtenOn": "2024-04-15T04:55:00Z",
       "side": 1,
       "message": "I didn\u0027t see anything changed? From my quick look it adds the struct, just it\u0027s not annotated as packed (thanks).",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 16
+      },
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80401ad0_a6a6e837",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-04-22T08:47:57Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "bad0fa9f_10f7cfb4",
       "range": {
         "startLine": 10,
         "startChar": 0,
@@ -83,6 +125,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9bd6350_a940890c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-04-22T08:47:57Z",
+      "side": 1,
+      "message": "There are many codes already use the struct name `pldm_numeric_effecter_value_pdr` in pldm repo:\nhttps://github.com/openbmc/pldm/blob/master/libpldmresponder/pdr_numeric_effecter.hpp#L40\nhttps://github.com/openbmc/pldm/blob/963c0fdf1aef305f266e00b2321fc244f89d0fa7/libpldmresponder/platform_numeric_effecter.hpp#L35\nThey required the `packed` struct (I think so). But we need the `unpack` struct in `decode_numeric_effecter_pdr_data` as `decode_numeric_sensor_pdr_data`.\nThat is the reason of adding `pldm_numeric_effecter_value_pdr_unpkg`.\nWhat do you think?",
+      "parentUuid": "dd49bfd6_58367ace",
+      "range": {
+        "startLine": 794,
+        "startChar": 38,
+        "endLine": 794,
+        "endChar": 44
+      },
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "645abc33_024b0482",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 3
@@ -106,6 +172,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4713121a_c37720de",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2256,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-04-22T08:47:57Z",
+      "side": 1,
+      "message": "Added.",
+      "parentUuid": "645abc33_024b0482",
+      "range": {
+        "startLine": 2256,
+        "startChar": 1,
+        "endLine": 2256,
+        "endChar": 22
+      },
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "176b36f5_745837dd",
         "filename": "src/msgbuf/platform.h",
         "patchSetId": 3
@@ -117,6 +207,24 @@
       "writtenOn": "2024-04-15T04:55:00Z",
       "side": 1,
       "message": "This is mentioned earlier in the file, I think we can probably drop it.",
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab4cfd04_727f932e",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-04-22T08:47:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "176b36f5_745837dd",
       "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
