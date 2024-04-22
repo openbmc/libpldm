@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46480854_b9c16de9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-22T23:36:49Z",
+      "side": 1,
+      "message": "I\u0027d prefer we drop \"This commit\". \"Add the struct for the numeric effecter PDRs ...\" is enough. Hopefully we can assume the commit message is talking about the commit itself 😊",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "838c58f63640ba0cc90a56608441c08bf1c7f259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e751c318_bd50af79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-22T23:36:49Z",
+      "side": 1,
+      "message": "Nit: Please add a space after \"table\"",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 10,
+        "endChar": 21
+      },
+      "revId": "838c58f63640ba0cc90a56608441c08bf1c7f259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39432ad6_dad4a853",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-22T23:36:49Z",
+      "side": 1,
+      "message": "Hi Thu, I have a few nitpicks, but also a concern around the doxygen comment for the new decode API. Further, if we already have the packed struct let\u0027s just keep using that and not add a new un-packed sibling.",
+      "revId": "838c58f63640ba0cc90a56608441c08bf1c7f259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba1c0f96_7a228939",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2252,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-22T23:36:49Z",
+      "side": 1,
+      "message": "Nit: space after \"table\"",
+      "range": {
+        "startLine": 2252,
+        "startChar": 11,
+        "endLine": 2252,
+        "endChar": 18
+      },
+      "revId": "838c58f63640ba0cc90a56608441c08bf1c7f259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55e6a487_dfb2cc0c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2252,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-22T23:36:49Z",
+      "side": 1,
+      "message": "I prefer you say what it _must be_ as well, not just what it\u0027s not. Something like \"This must be a pointer to the PDR data in the GetPDR message body\" or something equivalent.",
+      "range": {
+        "startLine": 2252,
+        "startChar": 20,
+        "endLine": 2252,
+        "endChar": 66
+      },
+      "revId": "838c58f63640ba0cc90a56608441c08bf1c7f259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9a6ba06_89a3ee63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-22T23:36:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3926b0ff_d2b26689",
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bad0fa9f_10f7cfb4",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "Updated.",
       "parentUuid": "bad0fa9f_10f7cfb4",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 16
+      },
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a53de650_61823c68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-22T23:36:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80401ad0_a6a6e837",
       "range": {
         "startLine": 10,
         "startChar": 0,
@@ -149,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5611d05c_014fb3bc",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-22T23:36:49Z",
+      "side": 1,
+      "message": "If we already have a packed version of the struct let\u0027s just use that rather than add a new non-packed one. We\u0027ll have an ABI break twice otherwise. We can still use the `msgbuf` APIs to pack/unpack it - they handle with endianness as well.",
+      "parentUuid": "d9bd6350_a940890c",
+      "range": {
+        "startLine": 794,
+        "startChar": 38,
+        "endLine": 794,
+        "endChar": 44
+      },
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "645abc33_024b0482",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 3
@@ -184,6 +250,30 @@
       "side": 1,
       "message": "Added.",
       "parentUuid": "645abc33_024b0482",
+      "range": {
+        "startLine": 2256,
+        "startChar": 1,
+        "endLine": 2256,
+        "endChar": 22
+      },
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a294f3b_85760660",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2256,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-22T23:36:49Z",
+      "side": 1,
+      "message": "See comment above.",
+      "parentUuid": "4713121a_c37720de",
       "range": {
         "startLine": 2256,
         "startChar": 1,
