@@ -24,6 +24,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc98cb6e_8200a85b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-04-23T03:20:18Z",
+      "side": 1,
+      "message": "Updated. I agree with you. I will remove `This commit` in the future patch set. 😄",
+      "parentUuid": "46480854_b9c16de9",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "838c58f63640ba0cc90a56608441c08bf1c7f259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f492993_caa95c16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-04-23T03:20:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46480854_b9c16de9",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "838c58f63640ba0cc90a56608441c08bf1c7f259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e751c318_bd50af79",
@@ -37,6 +85,30 @@
       "writtenOn": "2024-04-22T23:36:49Z",
       "side": 1,
       "message": "Nit: Please add a space after \"table\"",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 10,
+        "endChar": 21
+      },
+      "revId": "838c58f63640ba0cc90a56608441c08bf1c7f259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff536246_6d0ebcf1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-04-23T03:20:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e751c318_bd50af79",
       "range": {
         "startLine": 10,
         "startChar": 14,
@@ -100,6 +172,54 @@
       "writtenOn": "2024-04-22T23:36:49Z",
       "side": 1,
       "message": "I prefer you say what it _must be_ as well, not just what it\u0027s not. Something like \"This must be a pointer to the PDR data in the GetPDR message body\" or something equivalent.",
+      "range": {
+        "startLine": 2252,
+        "startChar": 20,
+        "endLine": 2252,
+        "endChar": 66
+      },
+      "revId": "838c58f63640ba0cc90a56608441c08bf1c7f259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad703130_b2e78af7",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2252,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-04-23T03:20:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1c0f96_7a228939",
+      "range": {
+        "startLine": 2252,
+        "startChar": 11,
+        "endLine": 2252,
+        "endChar": 18
+      },
+      "revId": "838c58f63640ba0cc90a56608441c08bf1c7f259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43f35219_b131e24d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2252,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-04-23T03:20:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55e6a487_dfb2cc0c",
       "range": {
         "startLine": 2252,
         "startChar": 20,
