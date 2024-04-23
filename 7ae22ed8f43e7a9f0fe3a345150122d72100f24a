@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1c47c7d_355a826c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-23T23:22:34Z",
+      "side": 1,
+      "message": "Hi Thu, I\u0027ve left a note about removing the `_unpkg` struct entirely. It\u0027s not the case that the `msgbuf` APIs _require_ a struct that isn\u0027t packed, rather the use of the `msgbuf` APIs allow us to _not require_ a packed struct (and this is better for correctness, portability, and performance).\n\nPut another way, it\u0027s still fine to use the `msgbuf` APIs to extract data into a packed struct member.",
+      "revId": "7ae22ed8f43e7a9f0fe3a345150122d72100f24a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bf61250_4c6dd50b",
+        "filename": "src/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2474,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-23T23:22:34Z",
+      "side": 1,
+      "message": "The point I was trying to make on PS4 is that we can drop this completely. There should be no need to bounce through such a struct, instead we can decode straight into the `pdr_value` object passed in as a parameter, and avoid the copying at the bottom of the function.\n\nAgain the point I was trying to make was it\u0027s still important to use the `msgbuf` APIs here as the result will be endian-correct.",
+      "range": {
+        "startLine": 2438,
+        "startChar": 1,
+        "endLine": 2474,
+        "endChar": 3
+      },
+      "revId": "7ae22ed8f43e7a9f0fe3a345150122d72100f24a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
