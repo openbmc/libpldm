@@ -80,23 +80,45 @@ pldm_msgbuf_extract_sensor_value(struct pldm_msgbuf *ctx,
 __attribute__((always_inline)) static inline int
 pldm_msgbuf_extract_range_field_format(struct pldm_msgbuf *ctx,
 				       enum pldm_range_field_format tag,
-				       union_range_field_format *dst)
+				       void *dst)
 {
+	int ret;
+	uint8_t value_u8;
+	int8_t value_i8;
+	uint16_t value_u16;
+	int16_t value_i16;
+	uint32_t value_u32;
+	int32_t value_i32;
+	real32_t value_r32;
 	switch (tag) {
 	case PLDM_RANGE_FIELD_FORMAT_UINT8:
-		return pldm_msgbuf_extract(ctx, &dst->value_u8);
+		ret = pldm_msgbuf_extract(ctx, &value_u8);
+		memcpy(dst, &value_u8, sizeof(uint8_t));
+		return ret;
 	case PLDM_RANGE_FIELD_FORMAT_SINT8:
-		return pldm_msgbuf_extract(ctx, &dst->value_s8);
+		ret = pldm_msgbuf_extract(ctx, &value_i8);
+		memcpy(dst, &value_i8, sizeof(int8_t));
+		return ret;
 	case PLDM_RANGE_FIELD_FORMAT_UINT16:
-		return pldm_msgbuf_extract(ctx, &dst->value_u16);
+		ret = pldm_msgbuf_extract(ctx, &value_u16);
+		memcpy(dst, &value_u16, sizeof(uint16_t));
+		return ret;
 	case PLDM_RANGE_FIELD_FORMAT_SINT16:
-		return pldm_msgbuf_extract(ctx, &dst->value_s16);
+		ret = pldm_msgbuf_extract(ctx, &value_i16);
+		memcpy(dst, &value_i16, sizeof(int16_t));
+		return ret;
 	case PLDM_RANGE_FIELD_FORMAT_UINT32:
-		return pldm_msgbuf_extract(ctx, &dst->value_u32);
+		ret = pldm_msgbuf_extract(ctx, &value_u32);
+		memcpy(dst, &value_u32, sizeof(uint32_t));
+		return ret;
 	case PLDM_RANGE_FIELD_FORMAT_SINT32:
-		return pldm_msgbuf_extract(ctx, &dst->value_s32);
+		ret = pldm_msgbuf_extract(ctx, &value_i32);
+		memcpy(dst, &value_i32, sizeof(int32_t));
+		return ret;
 	case PLDM_RANGE_FIELD_FORMAT_REAL32:
-		return pldm_msgbuf_extract(ctx, &dst->value_f32);
+		ret = pldm_msgbuf_extract(ctx, &value_r32);
+		memcpy(dst, &value_r32, sizeof(real32_t));
+		return ret;
 	}
 
 	return -PLDM_ERROR_INVALID_DATA;

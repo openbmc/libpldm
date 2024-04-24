@@ -168,43 +168,42 @@ static inline int pldm_msgbuf_destroy_consumed(struct pldm_msgbuf *ctx)
  * PLDM_ERROR_INVALID_LENGTH otherwise.
  * PLDM_ERROR_INVALID_DATA if input a invalid ctx
  */
-static inline int pldm_msgbuf_extract_uint8(struct pldm_msgbuf *ctx,
-					    uint8_t *dst)
+static inline int pldm_msgbuf_extract_uint8(struct pldm_msgbuf *ctx, void *dst)
 {
 	if (!ctx || !ctx->cursor || !dst) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	ctx->remaining -= sizeof(*dst);
+	ctx->remaining -= sizeof(uint8_t);
 	assert(ctx->remaining >= 0);
 	if (ctx->remaining < 0) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	*dst = *((uint8_t *)(ctx->cursor));
+	memcpy(dst, ctx->cursor, sizeof(uint8_t));
+
 	ctx->cursor++;
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_extract_int8(struct pldm_msgbuf *ctx, int8_t *dst)
+static inline int pldm_msgbuf_extract_int8(struct pldm_msgbuf *ctx, void *dst)
 {
 	if (!ctx || !ctx->cursor || !dst) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	ctx->remaining -= sizeof(*dst);
+	ctx->remaining -= sizeof(int8_t);
 	assert(ctx->remaining >= 0);
 	if (ctx->remaining < 0) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	*dst = *((int8_t *)(ctx->cursor));
+	memcpy(dst, ctx->cursor, sizeof(int8_t));
 	ctx->cursor++;
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_extract_uint16(struct pldm_msgbuf *ctx,
-					     uint16_t *dst)
+static inline int pldm_msgbuf_extract_uint16(struct pldm_msgbuf *ctx, void *dst)
 {
 	uint16_t ldst;
 
@@ -230,14 +229,17 @@ static inline int pldm_msgbuf_extract_uint16(struct pldm_msgbuf *ctx,
 	memcpy(&ldst, ctx->cursor, sizeof(ldst));
 
 	// Only assign the target value once it's correctly decoded
-	*dst = le16toh(ldst);
+	ldst = le16toh(ldst);
+
+	// Allow storing to unaligned
+	memcpy(dst, &ldst, sizeof(ldst));
+
 	ctx->cursor += sizeof(ldst);
 
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_extract_int16(struct pldm_msgbuf *ctx,
-					    int16_t *dst)
+static inline int pldm_msgbuf_extract_int16(struct pldm_msgbuf *ctx, void *dst)
 {
 	int16_t ldst;
 
@@ -253,14 +255,14 @@ static inline int pldm_msgbuf_extract_int16(struct pldm_msgbuf *ctx,
 
 	memcpy(&ldst, ctx->cursor, sizeof(ldst));
 
-	*dst = le16toh(ldst);
+	ldst = le16toh(ldst);
+	memcpy(dst, &ldst, sizeof(ldst));
 	ctx->cursor += sizeof(ldst);
 
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_extract_uint32(struct pldm_msgbuf *ctx,
-					     uint32_t *dst)
+static inline int pldm_msgbuf_extract_uint32(struct pldm_msgbuf *ctx, void *dst)
 {
 	uint32_t ldst;
 
@@ -276,14 +278,14 @@ static inline int pldm_msgbuf_extract_uint32(struct pldm_msgbuf *ctx,
 
 	memcpy(&ldst, ctx->cursor, sizeof(ldst));
 
-	*dst = le32toh(ldst);
+	ldst = le32toh(ldst);
+	memcpy(dst, &ldst, sizeof(ldst));
 	ctx->cursor += sizeof(ldst);
 
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_extract_int32(struct pldm_msgbuf *ctx,
-					    int32_t *dst)
+static inline int pldm_msgbuf_extract_int32(struct pldm_msgbuf *ctx, void *dst)
 {
 	int32_t ldst;
 
@@ -299,16 +301,19 @@ static inline int pldm_msgbuf_extract_int32(struct pldm_msgbuf *ctx,
 
 	memcpy(&ldst, ctx->cursor, sizeof(ldst));
 
-	*dst = le32toh(ldst);
+	ldst = le32toh(ldst);
+	memcpy(dst, &ldst, sizeof(ldst));
 	ctx->cursor += sizeof(ldst);
 
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_extract_real32(struct pldm_msgbuf *ctx,
-					     real32_t *dst)
+static inline int pldm_msgbuf_extract_real32(struct pldm_msgbuf *ctx, void *dst)
 {
 	uint32_t ldst;
+
+	_Static_assert(sizeof(real32_t) == sizeof(ldst),
+		       "Mismatched type sizes for dst and ldst");
 
 	if (!ctx || !ctx->cursor || !dst) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -320,12 +325,10 @@ static inline int pldm_msgbuf_extract_real32(struct pldm_msgbuf *ctx,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	_Static_assert(sizeof(*dst) == sizeof(ldst),
-		       "Mismatched type sizes for dst and ldst");
 	memcpy(&ldst, ctx->cursor, sizeof(ldst));
 	ldst = le32toh(ldst);
-	memcpy(dst, &ldst, sizeof(*dst));
-	ctx->cursor += sizeof(*dst);
+	memcpy(dst, &ldst, sizeof(ldst));
+	ctx->cursor += sizeof(ldst);
 
 	return PLDM_SUCCESS;
 }
