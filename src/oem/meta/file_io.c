@@ -26,8 +26,8 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 		return rc;
 	}
 
-	pldm_msgbuf_extract(buf, file_handle);
-	pldm_msgbuf_extract(buf, length);
+	pldm_msgbuf_extract_p(buf, file_handle);
+	pldm_msgbuf_extract_p(buf, length);
 	pldm_msgbuf_extract_array_uint8(buf, data, *length);
 
 	return pldm_msgbuf_destroy_consumed(buf);
