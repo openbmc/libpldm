@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2610ce5_93a71461",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "This API is not required with the latest change",
+      "parentUuid": "75b8800b_8919cbfc",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "384d4536_94eb31ec",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -65,6 +83,30 @@
       "writtenOn": "2024-04-17T08:27:43Z",
       "side": 1,
       "message": "My preferred style for libpldm is not to mix code and variable declarations. Please declare the variables at the top of the function before any further statements (i.e. not like how you have done here, or might do in C++).",
+      "range": {
+        "startLine": 1341,
+        "startChar": 1,
+        "endLine": 1343,
+        "endChar": 37
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "809dba6e_86bc421c",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "384d4536_94eb31ec",
       "range": {
         "startLine": 1341,
         "startChar": 1,
@@ -100,6 +142,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0252e93_ed3cf6bb",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "I found it hard implementing this comment because inside the static function prev will always be set but not used or initialized but bot used or set but never read.\nPlease suggest",
+      "parentUuid": "9ce9adf7_314b6134",
+      "range": {
+        "startLine": 1341,
+        "startChar": 1,
+        "endLine": 1352,
+        "endChar": 2
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "465a187a_bcc24030",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -111,6 +177,30 @@
       "writtenOn": "2024-04-17T08:27:43Z",
       "side": 1,
       "message": "Okay, some alarm bells here. The processor _has_ to do arithmetic in its own (host, `h`) endianness by definition, therefore this should be `le16toh()` right? `htole16()` and `le16toh()` are _not_ the same as `bswap()`.\n\nMore broadly, this sets off alarm-bells for the whole implementation of the PDR data structures - we should not be storing them in the wire format. However, fixing that is a _much_ bigger change than what you\u0027re trying to achieve with this patch.\n\nPlease read this for some context on my opinions: [Representations and Design Boundaries with Endianness](https://amboar.github.io/notes/2023/06/19/representations-and-design-boundaries-with-endianness.html)",
+      "range": {
+        "startLine": 1362,
+        "startChar": 27,
+        "endLine": 1362,
+        "endChar": 34
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6064e32e_bfd117b1",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "To fix this bug I have remove the endian conversion at malloc and covert it only when the value needs to be added to the new record directly",
+      "parentUuid": "465a187a_bcc24030",
       "range": {
         "startLine": 1362,
         "startChar": 27,
@@ -140,6 +230,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27324359_037f1081",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1364,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "Adding a goto to free this resource is causing malloc failure. Not sure why adding a goto can be problem , any suggestions?",
+      "parentUuid": "78609793_be1766cf",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82bb3677_499ab910",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -151,6 +259,30 @@
       "writtenOn": "2024-04-17T08:27:43Z",
       "side": 1,
       "message": "You\u0027ve done an endian conversion on `record-\u003esize` on line 1362, but not here. Regardless of which is correct (and whatever the case, the endian conversion on 1362 is wrong), there is a bug due to the inconsistency.\n\nThis is why I\u0027d rather that all wire-format accesses be done via the `msgbuf` APIs. Admittedly, we would need to make them more ergonomic (add new APIs) for this specific case.",
+      "range": {
+        "startLine": 1371,
+        "startChar": 28,
+        "endLine": 1371,
+        "endChar": 40
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86b6d2b9_94e1667b",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "@arj one of your review comments suggest that I should be using the pldm_msg_buf for the record-\u003edata starting from the header. I did that and also used pldm_msgbuf_insert to insert the data to new_record. Therefore, we dont need to worry about incorrect endian conversion.",
+      "parentUuid": "82bb3677_499ab910",
       "range": {
         "startLine": 1371,
         "startChar": 28,
@@ -186,6 +318,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29ed7fc1_cb932b25",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "This line is not present with the latest change",
+      "parentUuid": "1fa8e4f9_07cc7865",
+      "range": {
+        "startLine": 1376,
+        "startChar": 28,
+        "endLine": 1376,
+        "endChar": 64
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e149a25b_3e181748",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -197,6 +353,30 @@
       "writtenOn": "2024-04-17T08:27:43Z",
       "side": 1,
       "message": "I expect this is incorrect wrt endianness as well.",
+      "range": {
+        "startLine": 1387,
+        "startChar": 10,
+        "endLine": 1387,
+        "endChar": 21
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b62fc2e_fc18acad",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "new change does not contain this conversion",
+      "parentUuid": "e149a25b_3e181748",
       "range": {
         "startLine": 1387,
         "startChar": 10,
@@ -232,6 +412,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "524b5aa8_4fc305f4",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1388,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "new change does not contain this conversion",
+      "parentUuid": "f0a7e232_a3f30b12",
+      "range": {
+        "startLine": 1388,
+        "startChar": 10,
+        "endLine": 1388,
+        "endChar": 28
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03b2a687_a33d107b",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -243,6 +447,30 @@
       "writtenOn": "2024-04-17T08:27:43Z",
       "side": 1,
       "message": "Okay, together with the endianness issues above this starts to build the case for implement PDR header handling in the `msgbuf` APIs, as helpers.\n\nLet\u0027s discuss how this might look. Currently I think the buffer should encapsulate the entire encoded message size, and the `msgbuf` helper for the PDR header should encode it into that buffer. That way you can continue to use the same `struct pldm_msgbuf` instance to continue encoding the rest of the entry.",
+      "range": {
+        "startLine": 1389,
+        "startChar": 1,
+        "endLine": 1392,
+        "endChar": 50
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f14ea21_782ae87c",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "took this suggestion and used msgbuf on the entire record including the header",
+      "parentUuid": "03b2a687_a33d107b",
       "range": {
         "startLine": 1389,
         "startChar": 1,
@@ -278,6 +506,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7563440_9cad5eb0",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1397,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "The new change does not require this to be addressed",
+      "parentUuid": "353ab3f6_852a9dcd",
+      "range": {
+        "startLine": 1397,
+        "startChar": 28,
+        "endLine": 1397,
+        "endChar": 70
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96027f4b_d27b5e9d",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -289,6 +541,30 @@
       "writtenOn": "2024-04-17T08:27:43Z",
       "side": 1,
       "message": "Why are we bounce-buffering these through `val_uint{8,16}` if we\u0027re not using `pldm_msgbuf_insert()`? Also if you\u0027re not using a corresponding `pldm_msgbuf_insert()` then the endianness incoherent, so that must be fixed.\n\nTogether this suggests we might need something like `pldm_msgbuf_memcpy()` (where we would avoid endian conversion but continue to enforce buffer limits).",
+      "range": {
+        "startLine": 1406,
+        "startChar": 1,
+        "endLine": 1417,
+        "endChar": 53
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f5f4edc_aea2ffcb",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1417,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "Used pldm_msgbuf_insert",
+      "parentUuid": "96027f4b_d27b5e9d",
       "range": {
         "startLine": 1406,
         "startChar": 1,
@@ -318,6 +594,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7574fb02_77d8c21e",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "num_children is of type uint8. Added a check here so we don\u0027t have undefined behaviour when we call this API to add another child if the number of children is already 255. This is not checked anywhere else. The SPEC only specifies that the type is uint8",
+      "parentUuid": "2562ce95_85f82a37",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07958893_3d90decd",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -335,6 +629,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8351fb1e_c6cf1680",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07958893_3d90decd",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9de575b_e17338fd",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -346,6 +658,30 @@
       "writtenOn": "2024-04-17T08:27:43Z",
       "side": 1,
       "message": "Is there a reason not to reuse the variables we\u0027ve already declared?",
+      "range": {
+        "startLine": 1442,
+        "startChar": 1,
+        "endLine": 1443,
+        "endChar": 35
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e185441_b8fa402f",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "reused the variable with new change.",
+      "parentUuid": "a9de575b_e17338fd",
       "range": {
         "startLine": 1442,
         "startChar": 1,

@@ -203,6 +203,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b34d285_92e8f06d",
+        "filename": "src/pdr.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "This is removed and not required with the latest change",
+      "parentUuid": "b98e00c9_f4a03035",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "80ff032190e46fa83a5d5464f1ae9f1909141c2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0009b78_1f875b78",
         "filename": "src/pdr.c",
         "patchSetId": 20
@@ -356,6 +380,30 @@
       "side": 1,
       "message": "Mmm, I may have been wrong about it, or we may have changed the code to the point where it is more obviously unnecessary. I\u0027m not convinced I asked you to do the right thing there 😊",
       "parentUuid": "859d95b2_ba51802a",
+      "range": {
+        "startLine": 1341,
+        "startChar": 0,
+        "endLine": 1351,
+        "endChar": 1
+      },
+      "revId": "80ff032190e46fa83a5d5464f1ae9f1909141c2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b801bb22_6add3620",
+        "filename": "src/pdr.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-04-30T03:09:38Z",
+      "side": 1,
+      "message": "Removed this , since both parties agreed it is not required",
+      "parentUuid": "5b4fc917_e9b6a38c",
       "range": {
         "startLine": 1341,
         "startChar": 0,
