@@ -40,6 +40,7 @@ Change categories:
 12. entity: Add enum for Network Interface Connectors and Network Ports
     Connection Types
 13. pdr: Add decode_numeric_effecter_pdr_data()
+14. oem: ibm: Support for the Real SAI entity id
 
 ### Changed
 
