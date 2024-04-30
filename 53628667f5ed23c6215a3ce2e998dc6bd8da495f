@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d13971ec_1eb15096",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Hi Varsha, this continues to look better. Certainly there are fewer endianness concerns where the `msgbuf` API is now used (however others still linger).\n\nI can\u0027t help but suggest add to the `msgbuf` API to try improve its ergonomics for what you\u0027re trying to achieve here. I think we can further improve the readability of the code.\n\nI\u0027ve marked many previous comments as resolved because their context isn\u0027t relevant in the latest implementation.",
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3407822e_a194518d",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "The endian conversion is still inconsistent, both with itself and with line 1343.",
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62080a7b_fcbab75c",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "You can invoke `pldm_msgbuf_init()` for the `record-\u003edata` buffer before the allocation of the `new_record` resources so that you don\u0027t have to do the `new_record` resource cleanup here.",
+      "range": {
+        "startLine": 1359,
+        "startChar": 1,
+        "endLine": 1369,
+        "endChar": 2
+      },
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d4638ca_8a9e9096",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1381,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "This is in terms of the `new_record-\u003edata` resource and so we can\u0027t do the same thing as suggested above (hopefully that\u0027s obvious).",
+      "range": {
+        "startLine": 1371,
+        "startChar": 1,
+        "endLine": 1381,
+        "endChar": 2
+      },
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49868c27_50843252",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "So this is the pattern I expected (and is correct), however I think you\u0027ll agree it\u0027s not super ergonomic. We should fix that by adding a new function to the `msgbuf` APIs, e.g.\n\n```\n#define pldm_msgbuf_copy(dst, src, type, name) \\\n    pldm__msgbuf_copy(dst, src, sizeof(type), #name)\nint pldm__msgbuf_copy(struct pldm_msgbuf *dst, struct pldm_msgbuf *src, size_t size, const char *description)\n{\n    /* A bunch of necessary checks */\n    \n    memcpy(dst, src, size);\n}\n```\n\nThat way all of this bouncing between `pldm_msgbuf_extract()` and `pldm_msgbuf_insert()` becomes e.g.:\n\n```\npldm_msgbuf_copy(buf1, buf, uint32_t, record_handle);\n```\n\nAre you happy to tackle such a patch (introduce the new `msgbuf` API in a patch prior to this one)?\n\nIf not I\u0027m happy to, but I will be stoked if you\u0027re up for it.\n\nRelated (and either way we go above), this patch should be rebased on another we have in motion at the moment:\n\n[msgbuf: Enable pldm_msgbuf_extract() into packed members](https://gerrit.openbmc.org/c/openbmc/libpldm/+/71064)",
+      "range": {
+        "startLine": 1384,
+        "startChar": 1,
+        "endLine": 1385,
+        "endChar": 38
+      },
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

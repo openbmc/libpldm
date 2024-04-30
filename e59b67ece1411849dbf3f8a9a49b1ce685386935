@@ -70,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c63a4d_c1df30b6",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2610ce5_93a71461",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "384d4536_94eb31ec",
@@ -107,6 +125,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "384d4536_94eb31ec",
+      "range": {
+        "startLine": 1341,
+        "startChar": 1,
+        "endLine": 1343,
+        "endChar": 37
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd0ef8de_118a42b3",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "809dba6e_86bc421c",
       "range": {
         "startLine": 1341,
         "startChar": 1,
@@ -166,6 +208,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75b927ac_86373a70",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "You need to show me what your implementation was in order for me to make any sensible feedback. Please paste the code in a markdown code-block.",
+      "parentUuid": "a0252e93_ed3cf6bb",
+      "range": {
+        "startLine": 1341,
+        "startChar": 1,
+        "endLine": 1352,
+        "endChar": 2
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "465a187a_bcc24030",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -201,6 +267,30 @@
       "side": 1,
       "message": "To fix this bug I have remove the endian conversion at malloc and covert it only when the value needs to be added to the new record directly",
       "parentUuid": "465a187a_bcc24030",
+      "range": {
+        "startLine": 1362,
+        "startChar": 27,
+        "endLine": 1362,
+        "endChar": 34
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa101a6d_7092a9ba",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6064e32e_bfd117b1",
       "range": {
         "startLine": 1362,
         "startChar": 27,
@@ -248,6 +338,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f29d4fb5_3df9ff24",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1364,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Can you please add more details about what you mean by that? How did you determine that gotos were the cause of a malloc failure? Please paste all evidence somewhere we can reason about it (test cases, log output, the actual patch you wrote to implement the goto approach, anything else relevant).",
+      "parentUuid": "27324359_037f1081",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82bb3677_499ab910",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -283,6 +391,30 @@
       "side": 1,
       "message": "@arj one of your review comments suggest that I should be using the pldm_msg_buf for the record-\u003edata starting from the header. I did that and also used pldm_msgbuf_insert to insert the data to new_record. Therefore, we dont need to worry about incorrect endian conversion.",
       "parentUuid": "82bb3677_499ab910",
+      "range": {
+        "startLine": 1371,
+        "startChar": 28,
+        "endLine": 1371,
+        "endChar": 40
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aefaec23_aa9d3f84",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "I\u0027m not convinced by the reasoning here yet, however I\u0027m marking this as done as the context is lost in the most recent patchset. I\u0027ll make further comments on endian correctness as I see fit.",
+      "parentUuid": "86b6d2b9_94e1667b",
       "range": {
         "startLine": 1371,
         "startChar": 28,
@@ -340,6 +472,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f05e838_8a997849",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29ed7fc1_cb932b25",
+      "range": {
+        "startLine": 1376,
+        "startChar": 28,
+        "endLine": 1376,
+        "endChar": 64
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e149a25b_3e181748",
@@ -377,6 +533,30 @@
       "side": 1,
       "message": "new change does not contain this conversion",
       "parentUuid": "e149a25b_3e181748",
+      "range": {
+        "startLine": 1387,
+        "startChar": 10,
+        "endLine": 1387,
+        "endChar": 21
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a97ae69_8593390e",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b62fc2e_fc18acad",
       "range": {
         "startLine": 1387,
         "startChar": 10,
@@ -434,6 +614,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34052286_eef1f092",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1388,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "524b5aa8_4fc305f4",
+      "range": {
+        "startLine": 1388,
+        "startChar": 10,
+        "endLine": 1388,
+        "endChar": 28
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03b2a687_a33d107b",
@@ -471,6 +675,30 @@
       "side": 1,
       "message": "took this suggestion and used msgbuf on the entire record including the header",
       "parentUuid": "03b2a687_a33d107b",
+      "range": {
+        "startLine": 1389,
+        "startChar": 1,
+        "endLine": 1392,
+        "endChar": 50
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7260019_120b5e62",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f14ea21_782ae87c",
       "range": {
         "startLine": 1389,
         "startChar": 1,
@@ -528,6 +756,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee46e5e0_fc7bd296",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1397,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7563440_9cad5eb0",
+      "range": {
+        "startLine": 1397,
+        "startChar": 28,
+        "endLine": 1397,
+        "endChar": 70
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96027f4b_d27b5e9d",
@@ -575,6 +827,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "716036cc_cac1db12",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1417,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f5f4edc_aea2ffcb",
+      "range": {
+        "startLine": 1406,
+        "startChar": 1,
+        "endLine": 1417,
+        "endChar": 53
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2562ce95_85f82a37",
@@ -610,6 +886,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e580696e_eb0e4b56",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7574fb02_77d8c21e",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07958893_3d90decd",
@@ -641,6 +935,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "07958893_3d90decd",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe34b0f3_264d2502",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8351fb1e_c6cf1680",
       "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -692,6 +1004,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7727233a_15cce78a",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e185441_b8fa402f",
+      "range": {
+        "startLine": 1442,
+        "startChar": 1,
+        "endLine": 1443,
+        "endChar": 35
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61497d99_1a806e11",
@@ -705,6 +1041,24 @@
       "writtenOn": "2024-04-17T08:27:43Z",
       "side": 1,
       "message": "I\u0027m going to hold off reviewing this one, as I suspect contains many of the issues identified above.",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1d3e01b_40c84a96",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Same again.",
+      "parentUuid": "61497d99_1a806e11",
       "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

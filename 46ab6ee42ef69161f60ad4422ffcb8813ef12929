@@ -690,6 +690,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49c738ed_01a11e2e",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1315,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ef262a6_b9d2b8fb",
+      "range": {
+        "startLine": 1313,
+        "startChar": 1,
+        "endLine": 1315,
+        "endChar": 36
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4346963_54c6d7d2",
@@ -840,6 +864,30 @@
       "side": 1,
       "message": "You\u0027re using a value specifically encoded as LE32 in a calculation executed in host-endianness. What happens if libpldm is used on a big-endian system?",
       "parentUuid": "03d84f42_1bfcdd09",
+      "range": {
+        "startLine": 1321,
+        "startChar": 27,
+        "endLine": 1321,
+        "endChar": 39
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e5affff_b28f216f",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "This still needs to be addressed.",
+      "parentUuid": "f1cdc801_7cd8fd8f",
       "range": {
         "startLine": 1321,
         "startChar": 27,
@@ -1229,6 +1277,30 @@
       "side": 1,
       "message": "this is removed with the latest patchset",
       "parentUuid": "1e75dc30_a0c523c5",
+      "range": {
+        "startLine": 1493,
+        "startChar": 1,
+        "endLine": 1498,
+        "endChar": 5
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7918e8af_9efb6114",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-04-30T04:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2625bae8_95fa7fe4",
       "range": {
         "startLine": 1493,
         "startChar": 1,
