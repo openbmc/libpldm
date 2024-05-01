@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bf56e3c_dfc176a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-01T02:14:33Z",
+      "side": 1,
+      "message": "Can you unpack a bit about how it was tested? What platforms? What errors? What tests?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 16
+      },
+      "revId": "3468bf7391748cda5d643baeacbf21a225d8320a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "648e7a6a_2c08964c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-01T02:14:33Z",
+      "side": 1,
+      "message": "Hi Jay, Can you please add an entry to the changelog as well?",
+      "revId": "3468bf7391748cda5d643baeacbf21a225d8320a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
