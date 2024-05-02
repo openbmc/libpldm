@@ -102,6 +102,30 @@
       },
       "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "249cc7ef_5cc83948",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-02T05:16:26Z",
+      "side": 1,
+      "message": "@arj Will work on the pldm_msgbuf_copy API and add this commit on top of new commit for pldm_msgbuf_copy. both these commits will be rebased on top of https://gerrit.openbmc.org/c/openbmc/libpldm/+/71064",
+      "parentUuid": "49868c27_50843252",
+      "range": {
+        "startLine": 1384,
+        "startChar": 1,
+        "endLine": 1385,
+        "endChar": 38
+      },
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
