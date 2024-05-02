@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51b52be9_f98d797a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-02T12:49:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0384133b_e63f95e6",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa5f9dfa_bd6c1a31",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfa4ed3b_d049847c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-02T12:49:38Z",
+      "side": 1,
+      "message": "Thanks, I somehow missed the CLA section, I\u0027ve just send a signed individual copy.\n\nAlso, I added the commit to the changelog.",
+      "parentUuid": "aa5f9dfa_bd6c1a31",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e2621c0_0f870f4c",
@@ -48,6 +84,30 @@
       "writtenOn": "2024-05-02T06:48:27Z",
       "side": 1,
       "message": "shouldn\u0027t the MIN_RESP_BYTES be 5? \nAccording to spec- https://www.dmtf.org/sites/default/files/standards/documents/DSP0248_1.2.0.pdf?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 56
+      },
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d69779f_34318b7a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-02T12:49:38Z",
+      "side": 1,
+      "message": "This was something I wasn\u0027t sure of. It seems like in other commands with similar optional data (like `PLDM_GET_STATE_SENSOR_READINGS_MIN_RESP_BYTES`) the min size is without the optional data so I went with that approach.",
+      "parentUuid": "0e2621c0_0f870f4c",
       "range": {
         "startLine": 48,
         "startChar": 0,
@@ -81,6 +141,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eff2139_c6e0ae8f",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-02T12:49:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29e3e6b7_164e769e",
+      "range": {
+        "startLine": 859,
+        "startChar": 15,
+        "endLine": 859,
+        "endChar": 49
+      },
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09aea61c_b201489d",
@@ -94,6 +178,24 @@
       "writtenOn": "2024-05-02T01:55:18Z",
       "side": 1,
       "message": "I realise the other structs are marked `__attribute__((packed))`, but going forward this is not desired. Please remove the attribute.",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4cc35b0_9b3869d9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-02T12:49:38Z",
+      "side": 1,
+      "message": "Not sure if strictly needed but I added a `#define` of the size just to make sure it\u0027s still consistent instead of using `sizeof`.",
+      "parentUuid": "09aea61c_b201489d",
       "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -115,6 +217,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86c907ef_9d6cbb0b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-02T12:49:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a69729bf_fa592f6f",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e74452f_5c4a8ed6",
@@ -132,6 +252,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7678df83_0a6e3ae8",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-02T12:49:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e74452f_5c4a8ed6",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d095ead_caefed84",
@@ -145,6 +283,24 @@
       "writtenOn": "2024-05-02T01:55:18Z",
       "side": 1,
       "message": "As above, please drop the packed attribute.",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33438c20_d8bc65b9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-02T12:49:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d095ead_caefed84",
       "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -174,6 +330,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ecee228e_d6e52a89",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1647,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-02T12:49:38Z",
+      "side": 1,
+      "message": "This was based on `decode_get_state_sensor_readings_resp` which has the same parameter. I\u0027m not too sure why it\u0027s declared as \"in\".",
+      "parentUuid": "26d9eb1d_0b799074",
+      "range": {
+        "startLine": 1647,
+        "startChar": 3,
+        "endLine": 1647,
+        "endChar": 43
+      },
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc9db0b2_159c414b",
         "filename": "src/platform.c",
         "patchSetId": 2
@@ -191,6 +371,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6cda0829_728852d5",
+        "filename": "src/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2433,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-02T12:49:38Z",
+      "side": 1,
+      "message": "I assume `LIBPLDM_API_STABLE` is a typo and you meant `LIBPLDM_ABI_STABLE`, if so, done.\n\nI do a have a patch ready for openbmc/pldm pldmtool that can be uploaded as well.",
+      "parentUuid": "cc9db0b2_159c414b",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ad065aa_df028faa",
         "filename": "src/platform.c",
         "patchSetId": 2
@@ -202,6 +400,24 @@
       "writtenOn": "2024-05-02T01:55:18Z",
       "side": 1,
       "message": "Please use the `msgbuf` APIs instead, as you\u0027ve done below. That way there\u0027s no question about safety with respect to memory and endianness concerns.",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5af69a9_2dc49bf7",
+        "filename": "src/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2455,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-02T12:49:38Z",
+      "side": 1,
+      "message": "I didn\u0027t see an exact example of using `msgbuf` in an encode request function so let me know if I\u0027ve fixed it correctly.",
+      "parentUuid": "5ad065aa_df028faa",
       "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
