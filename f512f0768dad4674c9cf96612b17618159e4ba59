@@ -37,6 +37,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e2621c0_0f870f4c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-05-02T06:48:27Z",
+      "side": 1,
+      "message": "shouldn\u0027t the MIN_RESP_BYTES be 5? \nAccording to spec- https://www.dmtf.org/sites/default/files/standards/documents/DSP0248_1.2.0.pdf?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 56
+      },
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e3e6b7_164e769e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-05-02T06:48:27Z",
+      "side": 1,
+      "message": "state_field_for_get_state_effecter ?",
+      "range": {
+        "startLine": 859,
+        "startChar": 15,
+        "endLine": 859,
+        "endChar": 49
+      },
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09aea61c_b201489d",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 2
@@ -99,6 +145,29 @@
       "writtenOn": "2024-05-02T01:55:18Z",
       "side": 1,
       "message": "As above, please drop the packed attribute.",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26d9eb1d_0b799074",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1647,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-05-02T06:48:27Z",
+      "side": 1,
+      "message": "is it not \"out\" parameter alone?",
+      "range": {
+        "startLine": 1647,
+        "startChar": 3,
+        "endLine": 1647,
+        "endChar": 43
+      },
       "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
