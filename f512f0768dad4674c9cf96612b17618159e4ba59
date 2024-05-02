@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0384133b_e63f95e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-02T01:55:18Z",
+      "side": 1,
+      "message": "Can you please reference the spec ID and name, its version, and the relevant section used to define the message type in the commit message?",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa5f9dfa_bd6c1a31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-02T01:55:18Z",
+      "side": 1,
+      "message": "Hi Tal, thanks for the patch. Before we go too much further I do have to ask that you be party to an OpenBMC CLA. If you work for a company that already has a CLA registered, then talk to the CLA manager to get yourself added to your company\u0027s CI group. You may also organise an individual CLA if you wish.\n\nMore information is available here:\n\nhttps://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#starting-out\n\nBeyond that, can you please add an entry to `CHANGELOG.md`?",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09aea61c_b201489d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-02T01:55:18Z",
+      "side": 1,
+      "message": "I realise the other structs are marked `__attribute__((packed))`, but going forward this is not desired. Please remove the attribute.",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a69729bf_fa592f6f",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-02T01:55:18Z",
+      "side": 1,
+      "message": "I understand that other structs try to implement flexible arrays this way, but ultimately it leads to undefined behaviour in both C and C++.\n\nRather than add more instances, can you please instead use:\n\n```c\nstruct pldm_get_state_effecter_states_resp {\n    uint8_t completion_code;\n    uint8_t comp_effecter_count;\n#ifndef __cplusplus\n    get_effecter_state_field field[]\n#endif\n};\n\nget_effecter_state_field *pldm_get_effecter_states_resp_field(struct pldm_get_effecter_states_resp *resp);\n```\n\nand then in `src/platform.c`:\n\n```c\nget_effecter_state_field *pldm_get_effecter_states_resp_field(struct pldm_get_effecter_states_resp *resp)\n{\n    return resp-\u003efield;\n}\n```\n\nThis way `sizeof(struct pldm_get_state_effecter_states_resp)` yields the expected value (2 in this case), we avoid defining the flexible array for C++ (where they are not specified), and we correctly define the flexible array for C (where the concept is specified, see N1570 (C11 draft specification) 6.7.2.1 paragraph 18). The helper function enables access to the flexible array member from C++ (by way of being implemented in C).",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e74452f_5c4a8ed6",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-02T01:55:18Z",
+      "side": 1,
+      "message": "Also drop the packed attribute here.",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d095ead_caefed84",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-02T01:55:18Z",
+      "side": 1,
+      "message": "As above, please drop the packed attribute.",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc9db0b2_159c414b",
+        "filename": "src/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2433,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-02T01:55:18Z",
+      "side": 1,
+      "message": "New APIs must be marked `LIBPLDM_API_TESTING` in the patch introducing them. This allows us to ship the API but not yet promise that we won\u0027t break it in the future if it\u0027s deemed to need fixing.\n\nConverting it to `LIBPLDM_API_STABLE` must be done in a follow-up patch, that also links to at least on use of the API in another project (usually openbmc/pldm).",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ad065aa_df028faa",
+        "filename": "src/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2455,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-02T01:55:18Z",
+      "side": 1,
+      "message": "Please use the `msgbuf` APIs instead, as you\u0027ve done below. That way there\u0027s no question about safety with respect to memory and endianness concerns.",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e6dd035_1f40dc6b",
+        "filename": "src/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2460,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-02T01:55:18Z",
+      "side": 1,
+      "message": "Needs to be `LIBPLDM_API_TESTING` as noted above.",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
