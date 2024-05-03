@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff5cff1e_457b16c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "Hi Tal, thanks for the rework. I have a few follow-up comments.",
+      "revId": "d11b24ec68c8f0fefdcf937ffc844fb7c8357e03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee33c95a_0778a4df",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "Can we please change this to \"Wire-format substructure sizes\" to make it clear?",
+      "revId": "d11b24ec68c8f0fefdcf937ffc844fb7c8357e03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e0f7eed_92826610",
+        "filename": "src/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2458,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "The parentheses here feel unnecessary.",
+      "range": {
+        "startLine": 2458,
+        "startChar": 33,
+        "endLine": 2458,
+        "endChar": 43
+      },
+      "revId": "d11b24ec68c8f0fefdcf937ffc844fb7c8357e03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f739f98_1cfb6c74",
+        "filename": "src/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2465,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "We need this value passed through by the caller, otherwise the operation is not safe. Why the payload length isn\u0027t described in `struct pldm_msg` is a mystery to me right now.",
+      "range": {
+        "startLine": 2465,
+        "startChar": 23,
+        "endLine": 2465,
+        "endChar": 63
+      },
+      "revId": "d11b24ec68c8f0fefdcf937ffc844fb7c8357e03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71224421_b09fc38c",
+        "filename": "src/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2472,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "Can we use `pldm_msgbuf_destroy_consumed()` here?",
+      "revId": "d11b24ec68c8f0fefdcf937ffc844fb7c8357e03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a33c6dce_841f6b26",
+        "filename": "src/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2519,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "Can you please rebase on the tip of the main branch? Yesterday I merged [msgbuf: Enable pldm_msgbuf_extract() into packed members](https://gerrit.openbmc.org/c/openbmc/libpldm/+/71064) and it changes the behaviour of the `pldm_msgbuf_extract()` macro (you now need to pass the lvalue rather than a pointer).",
+      "range": {
+        "startLine": 2517,
+        "startChar": 1,
+        "endLine": 2519,
+        "endChar": 52
+      },
+      "revId": "d11b24ec68c8f0fefdcf937ffc844fb7c8357e03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

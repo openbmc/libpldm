@@ -118,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae0c2ed1_f069fe08",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "Yes, I prefer we use 2 for the minimum size, despite the spec suggesting that a compositeEffectorCount value of 0 is not valid. Using 2 aligns with the use of a flexible array, though maybe we want to consider some way of making the maths for allocation a bit more ergonomic. We can do that later though.",
+      "parentUuid": "3d69779f_34318b7a",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 56
+      },
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29e3e6b7_164e769e",
@@ -196,6 +220,24 @@
       "side": 1,
       "message": "Not sure if strictly needed but I added a `#define` of the size just to make sure it\u0027s still consistent instead of using `sizeof`.",
       "parentUuid": "09aea61c_b201489d",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d25510d_3496a2ec",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "Perfect, thanks.",
+      "parentUuid": "d4cc35b0_9b3869d9",
       "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -354,6 +396,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1616ee1_ad666243",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1647,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "Let\u0027s not get hung up on the unknown and just declare it as out.",
+      "parentUuid": "ecee228e_d6e52a89",
+      "range": {
+        "startLine": 1647,
+        "startChar": 3,
+        "endLine": 1647,
+        "endChar": 43
+      },
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc9db0b2_159c414b",
         "filename": "src/platform.c",
         "patchSetId": 2
@@ -383,6 +449,24 @@
       "side": 1,
       "message": "I assume `LIBPLDM_API_STABLE` is a typo and you meant `LIBPLDM_ABI_STABLE`, if so, done.\n\nI do a have a patch ready for openbmc/pldm pldmtool that can be uploaded as well.",
       "parentUuid": "cc9db0b2_159c414b",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f03c470_b973e287",
+        "filename": "src/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2433,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "\u003e I assume LIBPLDM_API_STABLE is a typo and you meant LIBPLDM_ABI_STABLE, if so, done.\n\nSorry, yes, typo.",
+      "parentUuid": "6cda0829_728852d5",
       "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -422,6 +506,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e7980da_ae86237e",
+        "filename": "src/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2455,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "👍",
+      "parentUuid": "b5af69a9_2dc49bf7",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e6dd035_1f40dc6b",
@@ -435,6 +537,24 @@
       "writtenOn": "2024-05-02T01:55:18Z",
       "side": 1,
       "message": "Needs to be `LIBPLDM_API_TESTING` as noted above.",
+      "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4822b31_ca62b79c",
+        "filename": "src/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2460,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T01:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e6dd035_1f40dc6b",
       "revId": "f512f0768dad4674c9cf96612b17618159e4ba59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
