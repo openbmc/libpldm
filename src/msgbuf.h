@@ -52,6 +52,8 @@ extern "C" {
 #include <string.h>
 #include <sys/types.h>
 
+#define SSIZE_MIN (-1)
+
 struct pldm_msgbuf {
 	uint8_t *cursor;
 	ssize_t remaining;
@@ -751,6 +753,61 @@ static inline int pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx,
 	ctx->cursor += ctx->remaining;
 	*len = ctx->remaining;
 	ctx->remaining = 0;
+
+	return PLDM_SUCCESS;
+}
+
+/**
+ * @brief pldm_msgbuf copy data between two msg buffers
+ *
+ * @param[inout] src - pldm_msgbuf for source from where value should be copied
+ * @param[inout] dst - destination of copy from source
+ * @param[in] size - size of data to be copied
+ * @param[in] description - description of data copied
+ *
+ * @return PLDM_SUCCESS if buffer accesses were in-bounds,
+ * PLDM_ERROR_INVALID_LENGTH otherwise.
+ * PLDM_ERROR_INVALID_DATA if input is invalid
+ */
+#define pldm_msgbuf_copy(dst, src, type, name)                                 \
+	pldm__msgbuf_copy(dst, src, sizeof(type), #name)
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+static inline int pldm__msgbuf_copy(struct pldm_msgbuf *dst,
+				    struct pldm_msgbuf *src, size_t size,
+				    const char *description)
+{
+	if (!src || !src->cursor || !dst || !dst->cursor || size == 0 ||
+	    !description) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (size > SSIZE_MAX) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if ((SSIZE_MIN + (ssize_t)size) > src->remaining) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	src->remaining -= (ssize_t)size;
+	assert(src->remaining >= 0);
+	if (src->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if ((SSIZE_MIN + (ssize_t)size) > dst->remaining) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	dst->remaining -= (ssize_t)size;
+	assert(dst->remaining >= 0);
+	if (dst->remaining < 0) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	memcpy(dst->cursor, src->cursor, size);
+	src->cursor += size;
+	dst->cursor += size;
 
 	return PLDM_SUCCESS;
 }
