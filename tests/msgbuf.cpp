@@ -721,3 +721,65 @@ TEST(msgbuf, pldm_msgbuf_span_remaining_bad)
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
+
+TEST(msgbuf, pldm_msgbuf_copy_good)
+{
+    struct pldm_msgbuf _src;
+    struct pldm_msgbuf* src = &_src;
+    uint16_t buf[1] = {htole16(0x5aa5)};
+
+    ASSERT_EQ(pldm_msgbuf_init(src, sizeof(buf), buf, sizeof(buf)),
+              PLDM_SUCCESS);
+
+    struct pldm_msgbuf _dst;
+    struct pldm_msgbuf* dst = &_dst;
+    uint16_t checkVal = 0;
+    uint8_t buf1[sizeof(buf)] = {};
+
+    ASSERT_EQ(pldm_msgbuf_init(dst, sizeof(buf1), buf1, sizeof(buf1)),
+              PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_copy(dst, src, buf[0], name), PLDM_SUCCESS);
+
+    ASSERT_EQ(pldm_msgbuf_init(dst, sizeof(buf1), buf1, sizeof(buf1)),
+              PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(dst, &checkVal), PLDM_SUCCESS);
+
+    EXPECT_EQ(buf[0], checkVal);
+    EXPECT_EQ(pldm_msgbuf_destroy(src), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(dst), PLDM_SUCCESS);
+}
+
+TEST(msgbuf, pldm_msgbuf_copy_bad)
+{
+    struct pldm_msgbuf _src;
+    struct pldm_msgbuf* src = &_src;
+    struct pldm_msgbuf _dst;
+    struct pldm_msgbuf* dst = &_dst;
+    uint8_t buf[1] = {sizeof(uint8_t)};
+    uint8_t buf1[1] = {sizeof(uint16_t)};
+    uint16_t value = 8;
+
+    ASSERT_EQ(pldm_msgbuf_init(src, sizeof(buf), buf, sizeof(buf)),
+              PLDM_SUCCESS);
+    ASSERT_EQ(pldm_msgbuf_init(dst, sizeof(buf1), buf1, sizeof(buf1)),
+              PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_copy(dst, src, value, name),
+              PLDM_ERROR_INVALID_LENGTH);
+
+    ASSERT_EQ(pldm_msgbuf_init(src, sizeof(buf1), buf1, sizeof(buf1)),
+              PLDM_SUCCESS);
+    ASSERT_EQ(pldm_msgbuf_init(dst, sizeof(buf), buf, sizeof(buf)),
+              PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_copy(dst, src, value, name),
+              PLDM_ERROR_INVALID_LENGTH);
+
+    EXPECT_EQ(pldm_msgbuf_copy(dst, NULL, buf[0], name),
+              PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(pldm_msgbuf_copy(NULL, src, buf[0], name),
+              PLDM_ERROR_INVALID_DATA);
+
+    src->remaining = 0;
+    dst->remaining = 0;
+    EXPECT_EQ(pldm_msgbuf_destroy(src), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(dst), PLDM_SUCCESS);
+}
