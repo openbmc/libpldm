@@ -261,6 +261,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f50f892_09120258",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-03T04:03:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ffeee82_99ff6003",
+      "range": {
+        "startLine": 794,
+        "startChar": 38,
+        "endLine": 794,
+        "endChar": 44
+      },
+      "revId": "319b360a198eb91660f6097c4d84a6b81028ac9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "645abc33_024b0482",
