@@ -64,6 +64,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "146cf599_6db00059",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 2210,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-05-03T05:11:17Z",
+      "side": 1,
+      "message": ". As description of `recordData ` in the table 68 \n```\nrecordData:\nPDR data bytes. This field is absent if responseCount \u003d 0x0000. The number of PDR data bytes\nreturned in this field must match responseCount.\n```\n-\u003e The statement will be true if the PDR is single part PDR (PDR data can be response in single GetPDRs commands).\n\nIf the PDR is multi-parts, the statement will be wrong.\n\nI will remove the statement.",
+      "parentUuid": "184d9afb_00404c30",
+      "range": {
+        "startLine": 2209,
+        "startChar": 33,
+        "endLine": 2210,
+        "endChar": 37
+      },
+      "revId": "fa85eee92cdec0861ba313d6392a660d64ef666e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ec41545_de252e5d",
@@ -77,6 +101,30 @@
       "writtenOn": "2024-05-03T04:03:52Z",
       "side": 1,
       "message": "The `rff` parameter in `pldm__msgbuf_extract_range_field_format()` is the acronym of \"range field format\". You should probably use `ed` here (for \"effecter data\"). Or at least, something other than `rff`.",
+      "range": {
+        "startLine": 152,
+        "startChar": 47,
+        "endLine": 152,
+        "endChar": 50
+      },
+      "revId": "fa85eee92cdec0861ba313d6392a660d64ef666e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eb898ab_c556fc46",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-05-03T05:11:17Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "0ec41545_de252e5d",
       "range": {
         "startLine": 152,
         "startChar": 47,
@@ -135,6 +183,24 @@
       "writtenOn": "2024-05-03T04:03:52Z",
       "side": 1,
       "message": "Can we use `pldm_msgbuf_destroy_consumed()`?",
+      "revId": "fa85eee92cdec0861ba313d6392a660d64ef666e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e2f353d_c53ea2b3",
+        "filename": "src/platform.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2521,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-05-03T05:11:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "709fcf21_ecee1c45",
       "revId": "fa85eee92cdec0861ba313d6392a660d64ef666e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
