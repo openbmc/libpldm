@@ -17,6 +17,7 @@ extern "C" {
 #define PLDM_SET_STATE_EFFECTER_STATES_REQ_BYTES  19
 #define PLDM_GET_STATE_SENSOR_READINGS_REQ_BYTES  4
 #define PLDM_GET_NUMERIC_EFFECTER_VALUE_REQ_BYTES 2
+#define PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES  2
 #define PLDM_GET_SENSOR_READING_REQ_BYTES	  3
 #define PLDM_SET_EVENT_RECEIVER_REQ_BYTES	  5
 /* Response lengths are inclusive of completion code */
@@ -44,6 +45,7 @@ extern "C" {
 /* Minimum response length */
 #define PLDM_GET_PDR_MIN_RESP_BYTES		       12
 #define PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES 5
+#define PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES  2
 #define PLDM_GET_SENSOR_READING_MIN_RESP_BYTES	       8
 #define PLDM_GET_STATE_SENSOR_READINGS_MIN_RESP_BYTES  2
 #define PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES	       41
@@ -97,6 +99,13 @@ extern "C" {
 /* DSP0248 Table1 PLDM monitoring and control data types */
 #define PLDM_STR_UTF_8_MAX_LEN	256
 #define PLDM_STR_UTF_16_MAX_LEN 256
+
+/* Wire-format substructure sizes */
+#define PLDM_GET_EFFECTER_STATE_FIELD_SIZE 3
+
+/* State fields count bounds */
+#define PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MIN 1
+#define PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MAX 8
 
 enum pldm_effecter_data_size {
 	PLDM_EFFECTER_DATA_SIZE_UINT8,
@@ -167,6 +176,7 @@ enum pldm_platform_commands {
 	PLDM_SET_NUMERIC_EFFECTER_VALUE = 0x31,
 	PLDM_GET_NUMERIC_EFFECTER_VALUE = 0x32,
 	PLDM_SET_STATE_EFFECTER_STATES = 0x39,
+	PLDM_GET_STATE_EFFECTER_STATES = 0x3a,
 	PLDM_GET_PDR_REPOSITORY_INFO = 0x50,
 	PLDM_GET_PDR = 0x51,
 };
@@ -858,6 +868,16 @@ typedef struct state_field_for_get_state_sensor_readings {
 				//! that is associated with the sensor
 } __attribute__((packed)) get_sensor_state_field;
 
+/** @struct get_effecter_state_field
+ *
+ *  Structure representing a stateField in GetStateEffecterStates command
+ */
+typedef struct state_field_for_get_state_effecter_states {
+	uint8_t effecter_op_state; //!< The state of the effecter itself
+	uint8_t pending_state; //!< The state that is currently being processed
+	uint8_t present_state; //!< Return a state value
+} get_effecter_state_field;
+
 /** @struct PLDM_SetStateEffecterStates_Request
  *
  *  Structure representing PLDM set state effecter states request.
@@ -988,6 +1008,24 @@ struct pldm_get_state_sensor_readings_resp {
 	uint8_t comp_sensor_count;
 	get_sensor_state_field field[1];
 } __attribute__((packed));
+
+/** @struct pldm_get_state_effecter_states_req
+ *
+ *  structure representing GetStateEffecterStates request packet
+ */
+struct pldm_get_state_effecter_states_req {
+	uint16_t effecter_id;
+};
+
+/** @struct pldm_get_state_effecter_states_resp
+ *
+ *  Structure representing PLDM get state effecter states response.
+ */
+struct pldm_get_state_effecter_states_resp {
+	uint8_t completion_code;
+	uint8_t comp_effecter_count;
+	get_effecter_state_field *field;
+};
 
 /** @struct pldm_sensor_event
  *
@@ -1616,6 +1654,72 @@ int decode_get_state_sensor_readings_resp(const struct pldm_msg *msg,
 					  uint8_t *completion_code,
 					  uint8_t *comp_sensor_count,
 					  get_sensor_state_field *field);
+
+/* GetStateEffecterStates */
+
+/** @brief Decode GetStateEffecterStates request data
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - Length of request message payload
+ *  @param[out] effecter_id - used to identify and access the effecter
+ *  @return pldm_completion_codes
+ */
+int decode_get_state_effecter_states_req(const struct pldm_msg *msg,
+					 size_t payload_length,
+					 uint16_t *effecter_id);
+
+/** @brief Create a PLDM request message for GetStateEffecterStates
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] effecter_id - used to identify and access the effecter
+ *  @param[out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of request message payload
+ *  @return pldm_completion_codes
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'~
+ */
+int encode_get_state_effecter_states_req(uint8_t instance_id,
+					 uint16_t effecter_id,
+					 struct pldm_msg *msg,
+					 size_t payload_length);
+
+/** @brief Decode GetStateEffecterStates response data
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] get_state_effecter_states_resp - consists of PLDM completion code,
+*		   The number of individual sets of
+ *  	   effecters information that this command accesses
+ *		   and an instance of a stateField structure
+ *  	   that is used to return the present operational state setting and the
+ *         present state and event state for a particular set of effecter
+ *         information contained within the state effecter
+ *  @return pldm_completion_codes
+ */
+int decode_get_state_effecter_states_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_get_state_effecter_states_resp
+		*get_state_effecter_states_resp);
+
+/** @brief Encode GetStateEffecterStates response data
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] get_state_effecter_states_resp - consists of PLDM completion code,
+*		   The number of individual sets of
+ *  	   effecters information that this command accesses
+ *		   and an instance of a stateField structure
+ *  	   that is used to return the present operational state setting and the
+ *         present state and event state for a particular set of effecter
+ *         information contained within the state effecter
+ *  @param[out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of response message payload
+ *  @return pldm_completion_codes
+ */
+int encode_get_state_effecter_states_resp(
+	uint8_t instance_id,
+	struct pldm_get_state_effecter_states_resp
+		*get_state_effecter_states_resp,
+	struct pldm_msg *msg, size_t payload_length);
 
 /* PlatformEventMessage */
 

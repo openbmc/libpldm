@@ -4855,3 +4855,150 @@ TEST(decodeNumericEffecterPdrData, Real32Test)
     EXPECT_FLOAT_EQ(300.003f, decodedPdr.rated_max.value_f32);
     EXPECT_FLOAT_EQ(-300.003f, decodedPdr.rated_min.value_f32);
 }
+
+TEST(GetStateEffecterStates, testEncodeAndDecodeRequest)
+{
+    std::array<uint8_t, hdrSize + PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES>
+        requestMsg{};
+
+    constexpr std::array<uint8_t,
+                         hdrSize + PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES>
+        expectedRequestMsg{
+            {0x80, PLDM_PLATFORM, PLDM_GET_STATE_EFFECTER_STATES, 1, 0xab}};
+
+    constexpr uint16_t effecter_id = 0xab01;
+
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_get_state_effecter_states_req(
+        0, effecter_id, request, PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(requestMsg, expectedRequestMsg);
+
+    uint16_t ret_effecter_id;
+
+    rc = decode_get_state_effecter_states_req(
+        request, requestMsg.size() - hdrSize, &ret_effecter_id);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(effecter_id, ret_effecter_id);
+
+    // Test invalid length decode request
+
+    rc = decode_get_state_effecter_states_req(
+        request, requestMsg.size() - hdrSize - 1, &ret_effecter_id);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+
+TEST(GetStateEffecterStates, testBadEncodeRequest)
+{
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES);
+
+    auto rc = encode_get_state_effecter_states_req(
+        0, 0, nullptr, PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(GetStateEffecterStates, testBadDecodeRequest)
+{
+    std::array<uint8_t, hdrSize + PLDM_GET_NUMERIC_EFFECTER_VALUE_REQ_BYTES>
+        requestMsg{};
+
+    auto rc = decode_get_state_effecter_states_req(
+        nullptr, requestMsg.size() - hdrSize, nullptr);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(GetStateEffecterStates, testEncodeAndDecodeResponse)
+{
+    constexpr uint8_t comp_effecterCnt = 0x2;
+    constexpr uint8_t completionCode = 0;
+    std::array<uint8_t,
+               hdrSize + PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES +
+                   PLDM_GET_EFFECTER_STATE_FIELD_SIZE * comp_effecterCnt>
+        expectedResponseMsg{{0, PLDM_PLATFORM, PLDM_GET_STATE_EFFECTER_STATES,
+                             completionCode, comp_effecterCnt,
+                             EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING, 2, 2,
+                             EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING, 2, 3}};
+
+    decltype(expectedResponseMsg) responseMsg{};
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    std::array<get_effecter_state_field, comp_effecterCnt> stateField{
+        {{EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING, 2, 2},
+         {EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING, 2, 3}}};
+
+    struct pldm_get_state_effecter_states_resp resp_fields
+    {
+        PLDM_SUCCESS, comp_effecterCnt, stateField.data()
+    };
+
+    auto rc = encode_get_state_effecter_states_resp(
+        0, &resp_fields, response, responseMsg.size() - hdrSize);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(expectedResponseMsg, responseMsg);
+
+    decltype(stateField) ret_stateField;
+    struct pldm_get_state_effecter_states_resp ret_resp_fields;
+    ret_resp_fields.field = ret_stateField.data();
+
+    rc = decode_get_state_effecter_states_resp(
+        response, responseMsg.size() - hdrSize, &ret_resp_fields);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, ret_resp_fields.completion_code);
+    EXPECT_EQ(comp_effecterCnt, ret_resp_fields.comp_effecter_count);
+    EXPECT_EQ(stateField[0].effecter_op_state,
+              ret_resp_fields.field[0].effecter_op_state);
+    EXPECT_EQ(stateField[0].pending_state,
+              ret_resp_fields.field[0].pending_state);
+    EXPECT_EQ(stateField[0].present_state,
+              ret_resp_fields.field[0].present_state);
+    EXPECT_EQ(stateField[1].effecter_op_state,
+              ret_resp_fields.field[1].effecter_op_state);
+    EXPECT_EQ(stateField[1].pending_state,
+              ret_resp_fields.field[1].pending_state);
+    EXPECT_EQ(stateField[1].present_state,
+              ret_resp_fields.field[1].present_state);
+
+    // Test invalid length decode
+
+    rc = decode_get_state_effecter_states_resp(
+        response,
+        responseMsg.size() - hdrSize + PLDM_GET_EFFECTER_STATE_FIELD_SIZE,
+        &ret_resp_fields);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+
+TEST(GetStateEffecterStates, testBadEncodeResponse)
+{
+    struct pldm_get_state_effecter_states_resp resp
+    {
+        PLDM_SUCCESS, 0, nullptr
+    };
+    auto rc = decode_get_state_effecter_states_resp(nullptr, 0, &resp);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(GetStateEffecterStates, testBadDecodeResponse)
+{
+    std::array<uint8_t, hdrSize +
+                            PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES +
+                            PLDM_GET_EFFECTER_STATE_FIELD_SIZE * 2>
+        responseMsg{};
+
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    auto rc = decode_get_state_effecter_states_resp(
+        response, responseMsg.size() - hdrSize, nullptr);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
