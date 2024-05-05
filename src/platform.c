@@ -2520,3 +2520,180 @@ int decode_numeric_effecter_pdr_data(
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }
+
+LIBPLDM_ABI_TESTING
+int encode_get_state_effecter_states_req(uint8_t instance_id,
+					 uint16_t effecter_id,
+					 struct pldm_msg *msg,
+					 size_t payload_length)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_GET_STATE_EFFECTER_STATES;
+
+	rc = pack_pldm_header(&header, &msg->hdr);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init(buf, PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, effecter_id);
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_state_effecter_states_req(const struct pldm_msg *msg,
+					 size_t payload_length,
+					 uint16_t *effecter_id)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (msg == NULL || effecter_id == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init(buf,
+			      PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract_p(buf, effecter_id);
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_state_effecter_states_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_get_state_effecter_states_resp
+		*get_state_effecter_states_resp)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	get_effecter_state_field *field;
+	int rc;
+	int i;
+
+	if (msg == NULL || get_state_effecter_states_resp == NULL ||
+	    get_state_effecter_states_resp->field == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init(buf,
+			      PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(
+		buf, get_state_effecter_states_resp->completion_code);
+	if (rc) {
+		return rc;
+	}
+
+	if (PLDM_SUCCESS != get_state_effecter_states_resp->completion_code) {
+		return PLDM_SUCCESS;
+	}
+
+	rc = pldm_msgbuf_extract(
+		buf, get_state_effecter_states_resp->comp_effecter_count);
+	if (rc) {
+		return rc;
+	}
+
+	uint8_t comp_effecter_count =
+		get_state_effecter_states_resp->comp_effecter_count;
+
+	if (comp_effecter_count < PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MIN ||
+	    comp_effecter_count > PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MAX) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	for (i = 0, field = get_state_effecter_states_resp->field;
+	     i < comp_effecter_count; i++, field++) {
+		pldm_msgbuf_extract(buf, field->effecter_op_state);
+		pldm_msgbuf_extract(buf, field->pending_state);
+		pldm_msgbuf_extract(buf, field->present_state);
+	}
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int encode_get_state_effecter_states_resp(
+	uint8_t instance_id,
+	struct pldm_get_state_effecter_states_resp
+		*get_state_effecter_states_resp,
+	struct pldm_msg *msg, size_t payload_length)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	get_effecter_state_field *field;
+	int rc;
+	int i;
+
+	if (msg == NULL || get_state_effecter_states_resp == NULL ||
+	    get_state_effecter_states_resp->field == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	uint8_t comp_effecter_count =
+		get_state_effecter_states_resp->comp_effecter_count;
+
+	if (comp_effecter_count < PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MIN ||
+	    comp_effecter_count > PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MAX) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_RESPONSE;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_GET_STATE_EFFECTER_STATES;
+
+	rc = pack_pldm_header(&header, &msg->hdr);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init(buf,
+			      PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf,
+			   get_state_effecter_states_resp->completion_code);
+	pldm_msgbuf_insert(buf, comp_effecter_count);
+
+	for (i = 0, field = get_state_effecter_states_resp->field;
+	     i < comp_effecter_count; i++, field++) {
+		pldm_msgbuf_insert(buf, field->effecter_op_state);
+		pldm_msgbuf_insert(buf, field->pending_state);
+		pldm_msgbuf_insert(buf, field->present_state);
+	}
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
