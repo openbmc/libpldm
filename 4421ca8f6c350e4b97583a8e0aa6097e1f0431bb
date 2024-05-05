@@ -120,6 +120,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ca4860e_7ff57b64",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-05T13:26:54Z",
+      "side": 1,
+      "message": "\u003e Please don\u0027t mark discussion threads as resolved unless we have reached consensus.\n\nSure, I\u0027ll remember that, thanks.\n\nI\u0027ve removed the `__attribute__((packed))` keyword and replace it with a `#define`.",
+      "parentUuid": "2d4219fb_59a6f2a9",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e371e8f2_b579f052",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 4
@@ -167,6 +185,24 @@
       "side": 1,
       "message": "likewise.",
       "parentUuid": "a32bf490_6e661c90",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33ea1475_587ff938",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-05T13:26:54Z",
+      "side": 1,
+      "message": "Done, marked resolved since already removed it.",
+      "parentUuid": "2a2170ee_d2865580",
       "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -271,6 +307,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5964155b_03be9fec",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-05T13:26:54Z",
+      "side": 1,
+      "message": "Done, marked resolved since already removed it.",
+      "parentUuid": "54973aeb_2084767b",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f89064d0_2220aaea",
@@ -355,6 +409,24 @@
       "side": 1,
       "message": "If you\u0027re triggering an assert that indicates a buffer overrun then the calling code must be fixed. Either the buffer you supplied is too small, the `payload_length` value is incorrect, or you tried to pack too many members into the buffer for its size. This is not an error of the `msgbuf` APIs.",
       "parentUuid": "200ab2eb_756940ee",
+      "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e32411e_928ac2b9",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-05T13:26:54Z",
+      "side": 1,
+      "message": "Done, refactored to msgbuf.",
+      "parentUuid": "0bc24314_f304c2c5",
       "revId": "4421ca8f6c350e4b97583a8e0aa6097e1f0431bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
