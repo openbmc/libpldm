@@ -41,6 +41,7 @@ Change categories:
     Connection Types
 13. pdr: Add decode_numeric_effecter_pdr_data()
 14. oem: ibm: Support for the Real SAI entity id
+15. platform: Add support for GetStateEffecterStates command
 
 ### Changed
 
