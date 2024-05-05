@@ -2520,3 +2520,95 @@ int decode_numeric_effecter_pdr_data(
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }
+
+get_effecter_state_field *pldm_get_effecter_states_resp_field(struct pldm_get_state_effecter_states_resp *resp)
+{
+    return resp->field;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_get_state_effecter_states_req(uint8_t instance_id,
+					  uint16_t effecter_id,
+					  struct pldm_msg *msg,
+					  size_t payload_length)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_GET_STATE_EFFECTER_STATES;
+
+	rc = pack_pldm_header(&header, &msg->hdr);
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init(buf,
+			      PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, effecter_id);
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_state_effecter_states_resp(const struct pldm_msg *msg,
+					   size_t payload_length,
+					   uint8_t *completion_code,
+					   uint8_t *composite_effecter_count,
+					   get_effecter_state_field *field)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc, i;
+
+	if (msg == NULL || completion_code == NULL ||
+	    composite_effecter_count == NULL || field == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init(buf,
+			      PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES,
+			      msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_p(buf, completion_code);
+	if (rc) {
+		return rc;
+	}
+
+	if (PLDM_SUCCESS != *completion_code) {
+		return PLDM_SUCCESS;
+	}
+
+	rc = pldm_msgbuf_extract_p(buf, composite_effecter_count);
+	if (rc) {
+		return rc;
+	}
+
+	if (*composite_effecter_count < 0x1 || *composite_effecter_count > 0x8) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	for (i = 0; i < *composite_effecter_count; i++) {
+		pldm_msgbuf_extract(buf, field[i].effecter_op_state);
+		pldm_msgbuf_extract(buf, field[i].pending_state);
+		pldm_msgbuf_extract(buf, field[i].present_state);
+	}
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
