@@ -1,0 +1,175 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8be475f_a85a4d47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T00:43:46Z",
+      "side": 1,
+      "message": "Hi, I have several comments inline. One of the more important is the memory safety risks identified, but there are others that require rework as well.",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe704e74_84ecd06b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T00:43:46Z",
+      "side": 1,
+      "message": "`NextDataTransferHandle` (`uint32`) and `TransferFlag` (`enum8`) are (at least) required in the response. In addition to `CompletionCode` this yields a minimum response size of (at least) 6 bytes. Why have you only counted `CompletionCode` here?",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd5037d9_94258cc5",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T00:43:46Z",
+      "side": 1,
+      "message": "How did you derive the value 12 here?\n\n`QueryDownstreamIdentifiers` has a complex response. I would really prefer that you add references to the relevant tables in a comment justifying the derivation.",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8beae584_8ca6f669",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T00:43:46Z",
+      "side": 1,
+      "message": "These are a part of table 17. I think I\u0027d prefer we use a separate struct? Let\u0027s make the structure of the implementation match the structure of the spec.",
+      "range": {
+        "startLine": 483,
+        "startChar": 1,
+        "endLine": 484,
+        "endChar": 39
+      },
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecdc4fe3_65ee4dd3",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T00:43:46Z",
+      "side": 1,
+      "message": "Can we please order this parameter after `struct pldm_msg *msg`? So:\n\n```c\nint encode_query_downstream_identifiers_req(\n    uint8_t instance_id, uint32_t data_transfer_handle,\n    enum transfer_op_flag transfer_operation_flag,\n    struct pldm_msg *msg, size_t payload_length);\n```\n\nYou\u0027ll also need to fix the ordering in the doxygen comment.",
+      "range": {
+        "startLine": 848,
+        "startChar": 48,
+        "endLine": 848,
+        "endChar": 69
+      },
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9452744e_dd5e45a4",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T00:43:46Z",
+      "side": 1,
+      "message": "How are we meant to write the decoded values through these pointers if the object they point to is declared to be const?",
+      "range": {
+        "startLine": 867,
+        "startChar": 1,
+        "endLine": 870,
+        "endChar": 46
+      },
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b24bbe50_3a6946ef",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T00:43:46Z",
+      "side": 1,
+      "message": "Dereferencing the pointer makes no sense for what you\u0027re trying to do. Use the `pldm_msgbuf_extract_p()` macro function, which requires a pointer argument. This applies to the next 3 calls below where you\u0027re currently dereferencing a pointer as well.",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b535ade5_ecc69f23",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T00:43:46Z",
+      "side": 1,
+      "message": "I would prefer we don\u0027t open-code reaching into the msgbuf struct. Perhaps we should add something to the `msgbuf` API to allow this. Perhaps we add support for `struct variable_field` to `pldm_msgbuf_extract_p()`?",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc230347_51fd5df4",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T00:43:46Z",
+      "side": 1,
+      "message": "This is problematic on a few fronts:\n\n1. You haven\u0027t tested the result of `pldm_msgbuf_extract()` on line 1018 above to validate that you actually extracted a value at all. `pldm_msgbuf_extract()` will return an error if we\u0027ve already exhausted the buffer (in which case no value will be extracted). You can only avoid testing the return value of `pldm_msgbuf_extract*()` if you _do not_ use the extract value in a subsequent computation inside the codec function.\n2. `downstream_devices_length` has not been validated against the actual buffer length, and could allow the sender to drive an out-of-bounds memory access.\n\nYou must validate both - as it stands the implementation puts us on the receiving end of a CVE.",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
