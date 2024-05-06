@@ -33,6 +33,24 @@
       "message": "This is a bit of a nit, but in the spirit of keep-things-that-are-together-together, and the observation that `payload_length` refers to the buffer contained by `struct pldm_msg`, I\u0027d prefer we order `payload_length` after `msg`, so:\n\n```c\nint encode_get_state_effecter_states_req(uint8_t instance_id,\n                                         uint16_t effecter_id,\n                                         struct pldm_msg *msg,\n                                         size_t payload_length);\n```",
       "revId": "ef3c054c64403dd06f7f8042f8b0befe20cd7cbb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7d455b_020ced85",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1996,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-06T07:07:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5de7f027_6b95d4c6",
+      "revId": "ef3c054c64403dd06f7f8042f8b0befe20cd7cbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
