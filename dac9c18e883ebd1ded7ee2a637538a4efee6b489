@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e17dcc6c_42b046df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T01:11:45Z",
+      "side": 1,
+      "message": "Hi Varsha, this is a good first pass. Thanks for digging in. I have a few requests inline.",
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b72ac3da_572d5a64",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T01:11:45Z",
+      "side": 1,
+      "message": "We will run into CVEs if we blindly cast from unsigned to signed. This first needs to go through a test:\n\n```\nif (size \u003e SSIZE_MAX) {\n    return PLDM_ERROR_INVALID_LENGTH;\n}\n```\n\nHowever, we also need to test for underflow of `src-\u003eremaining` prior to performing the subtraction:\n\n```\nif ((SSIZE_MIN + (ssize_t)size) \u003e src-\u003eremaining) {\n    return PLDM_ERROR_INVALID_LENGTH;\n}\n```\n\nPutting it together the whole operation should look like:\n\n```\nif (size \u003e SSIZE_MAX) {\n    return PLDM_ERROR_INVALID_LENGTH;\n}\n\nif ((SSIZE_MIN + (ssize_t)size) \u003e src-\u003eremaining) {\n    return PLDM_ERROR_INVALID_LENGTH;\n}\n\nsrc-\u003eremaining -\u003d (ssize_t)size;\nassert(src-\u003eremaining \u003e\u003d 0);\nif (src-\u003eremaining \u003c 0) {\n    return PLDM_ERROR_INVALID_LENGTH;\n}\n```\n\nOn reflection the rest of the `msgbuf` API implementations should have the underflow check as well.",
+      "range": {
+        "startLine": 780,
+        "startChar": 1,
+        "endLine": 785,
+        "endChar": 1
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75a7058b_ce7fad40",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T01:11:45Z",
+      "side": 1,
+      "message": "As above.",
+      "range": {
+        "startLine": 786,
+        "startChar": 1,
+        "endLine": 791,
+        "endChar": 1
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78d15602_d1d71d6b",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T01:11:45Z",
+      "side": 1,
+      "message": "Perhaps `sizeof(buf)` instead?",
+      "range": {
+        "startLine": 737,
+        "startChar": 17,
+        "endLine": 737,
+        "endChar": 33
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ad09c24_62c556e1",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-06T01:11:45Z",
+      "side": 1,
+      "message": "Can we add some tests for buffer overruns in both the source (read) and destination (write) buffers?",
+      "range": {
+        "startLine": 752,
+        "startChar": 0,
+        "endLine": 764,
+        "endChar": 1
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
