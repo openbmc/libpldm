@@ -16,6 +16,24 @@
       "message": "One minor cleanup from CI:\n\n```\ndiff --git a/src/platform.c b/src/platform.c\nindex 37fd90f..009acbe 100644\n--- a/src/platform.c\n+++ b/src/platform.c\n@@ -2573,7 +2573,8 @@ int decode_get_state_effecter_states_resp(const struct pldm_msg *msg,\n {\n \tstruct pldm_msgbuf _buf;\n \tstruct pldm_msgbuf *buf \u003d \u0026_buf;\n-\tint rc, i;\n+\tint rc;\n+\tint i;\n \n \tif (msg \u003d\u003d NULL || completion_code \u003d\u003d NULL ||\n \t    composite_effecter_count \u003d\u003d NULL || field \u003d\u003d NULL) {\n```",
       "revId": "44866fa377ae1e57644f1f8e211a674e61b38c9a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98265ac9_00347c14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-07T08:55:04Z",
+      "side": 1,
+      "message": "Done, do we maybe prefer to declare it inside the for statement? I see both styles here so I went with the older style just in case.",
+      "parentUuid": "1ff2e73c_d6abe780",
+      "revId": "44866fa377ae1e57644f1f8e211a674e61b38c9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
