@@ -34,6 +34,23 @@
       "parentUuid": "f665af2d_a9cf3bfc",
       "revId": "b73ae8204c68433179fb840fd32d343253452788",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee5f96a9_480a9120",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-07T00:16:01Z",
+      "side": 1,
+      "message": "This blog post might help when sorting out the formatting failure:\n\nhttps://amboar.github.io/notes/2023/05/03/fixing-formatting-CI-failures-in-openbmc.html",
+      "revId": "b73ae8204c68433179fb840fd32d343253452788",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
