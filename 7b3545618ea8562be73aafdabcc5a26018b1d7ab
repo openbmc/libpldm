@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a29111c_c5d2e4d1",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-07T10:41:47Z",
+      "side": 1,
+      "message": "I found some cases which the response would contain only CC, in [DSP0240](https://www.dmtf.org/sites/default/files/standards/documents/DSP0240_1.1.0.pdf):\n\n\u003e For an unsupported PLDM command, the ERROR_UNSUPPORTED_PLDM_CMD completion code shall be returned unless the responder is in a transient state (not ready), in which it cannot process the PLDM command. If the responder is in a transient state, it may return the ERROR_NOT_READY completion code.\n\nSince this command is optional, the command handler might not be implemented in a device\u0027s firmware, after dig into the DSP0267, I didn\u0027t see `NextDataTransferHandle ` and `TransferFlag` are required if the CC is `ERROR_UNSUPPORTED_PLDM_CMD `, please let me know if I am wrong.\n\nFor instance, if a command receiver does not support this command, it won\u0027t know the existence of `NextDataTransferHandle` and `TransferFlag` but only response ERROR_UNSUPPORTED_PLDM_CMD, in my perspective, such response should be treated as Pass in the decode function.\n\nI refactored the decode function to use `msgbuf`, AFAIK, I have to init the `msgbuf` before I access any data in the response msg, to fulfill the requirement above, I defined `PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN 1` to init the `msgbuf`.",
+      "parentUuid": "fe704e74_84ecd06b",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd5037d9_94258cc5",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 8
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88d1d9dc_c4127052",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-07T10:41:47Z",
+      "side": 1,
+      "message": "Done, please review the comment I added, thanks.",
+      "parentUuid": "dd5037d9_94258cc5",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8beae584_8ca6f669",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 8
@@ -65,6 +101,30 @@
       "writtenOn": "2024-05-06T00:43:46Z",
       "side": 1,
       "message": "These are a part of table 17. I think I\u0027d prefer we use a separate struct? Let\u0027s make the structure of the implementation match the structure of the spec.",
+      "range": {
+        "startLine": 483,
+        "startChar": 1,
+        "endLine": 484,
+        "endChar": 39
+      },
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4075ccfb_a25fa040",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-07T10:41:47Z",
+      "side": 1,
+      "message": "I have some different thought about this, the name of Table 17 is `QueryDownstreamIdentifiers response definition`, and the description of the `Variable` in Table 16 is `Portion of QueryDownstreamIdentifiers response`, so I prefer to let it be squshed together.\n\nNot like `DownstreamDevices` in Table 18, if we split them into 2 structs, the naming of the struct for Table 17 would become tricky because it is still a response of QueryDownstreamIdentifiers, do you have any suggestion for it?",
+      "parentUuid": "8beae584_8ca6f669",
       "range": {
         "startLine": 483,
         "startChar": 1,
@@ -98,6 +158,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e334347b_56553c2a",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-07T10:41:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecdc4fe3_65ee4dd3",
+      "range": {
+        "startLine": 848,
+        "startChar": 48,
+        "endLine": 848,
+        "endChar": 69
+      },
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9452744e_dd5e45a4",
@@ -121,6 +205,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7083de2b_ccb87972",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-07T10:41:47Z",
+      "side": 1,
+      "message": "There is a new [commit](https://github.com/openbmc/libpldm/commit/66c7723adbdcc7594038167a78f3101a277021f7) to change pldm_msgbuf_extract() to accept a lvalue\n\u003e 1. `pldm_msgbuf_extract()` no-longer requires that the `dst`\n   argument be a pointer. Instead, it must be an lvalue, removing all\n   the `\u0026\u003clvalue\u003e` noise from the call-sites.\n\nThe const was revised by clang-tidy, but I think I have some misunderstanding about this change, use pldm_msgbuf_extract_p() instead and removed the `const`.",
+      "parentUuid": "9452744e_dd5e45a4",
+      "range": {
+        "startLine": 867,
+        "startChar": 1,
+        "endLine": 870,
+        "endChar": 46
+      },
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b24bbe50_3a6946ef",
@@ -134,6 +242,24 @@
       "writtenOn": "2024-05-06T00:43:46Z",
       "side": 1,
       "message": "Dereferencing the pointer makes no sense for what you\u0027re trying to do. Use the `pldm_msgbuf_extract_p()` macro function, which requires a pointer argument. This applies to the next 3 calls below where you\u0027re currently dereferencing a pointer as well.",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ebfda88_3f8e257b",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-07T10:41:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b24bbe50_3a6946ef",
       "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -191,6 +317,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a76f2e3_2001857f",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-07T10:41:47Z",
+      "side": 1,
+      "message": "Done, thanks for reminding, these functions looks good. BTW, is there a doc to explain all available functions and its usage for `msgbuf`? Clearly I missed these good functions because I did not dig into the source code \u0026 tests for `msgbuf`, sorry for that.",
+      "parentUuid": "5990cff1_30df7b4d",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc230347_51fd5df4",
@@ -204,6 +348,24 @@
       "writtenOn": "2024-05-06T00:43:46Z",
       "side": 1,
       "message": "This is problematic on a few fronts:\n\n1. You haven\u0027t tested the result of `pldm_msgbuf_extract()` on line 1018 above to validate that you actually extracted a value at all. `pldm_msgbuf_extract()` will return an error if we\u0027ve already exhausted the buffer (in which case no value will be extracted). You can only avoid testing the return value of `pldm_msgbuf_extract*()` if you _do not_ use the extract value in a subsequent computation inside the codec function.\n2. `downstream_devices_length` has not been validated against the actual buffer length, and could allow the sender to drive an out-of-bounds memory access.\n\nYou must validate both - as it stands the implementation puts us on the receiving end of a CVE.",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b8e823a_8d990a49",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-07T10:41:47Z",
+      "side": 1,
+      "message": "Sure, I\u0027ve revised the code and added two test cases to test the failure of `pldm_msgbuf_extract_p` and `pldm_msgbuf_span_required`.\n\n`decodeRequestErrorBufSize` tests the buff is exhausted during `pldm_msgbuf_extract_p`.\n\n`decodeRequestErrorDownstreamDevicesSize` tests the incorrect length of DownstreamDevicesLength.",
+      "parentUuid": "bc230347_51fd5df4",
       "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
