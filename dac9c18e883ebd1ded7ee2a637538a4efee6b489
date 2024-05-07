@@ -43,6 +43,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12560ee8_e149aceb",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-07T01:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b72ac3da_572d5a64",
+      "range": {
+        "startLine": 780,
+        "startChar": 1,
+        "endLine": 785,
+        "endChar": 1
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "708532a9_e61b7c84",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-07T01:51:14Z",
+      "side": 1,
+      "message": "I have defined SSIZE_MIN as a #define",
+      "parentUuid": "b72ac3da_572d5a64",
+      "range": {
+        "startLine": 780,
+        "startChar": 1,
+        "endLine": 785,
+        "endChar": 1
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75a7058b_ce7fad40",
         "filename": "src/msgbuf.h",
         "patchSetId": 1
@@ -54,6 +102,54 @@
       "writtenOn": "2024-05-06T01:11:45Z",
       "side": 1,
       "message": "As above.",
+      "range": {
+        "startLine": 786,
+        "startChar": 1,
+        "endLine": 791,
+        "endChar": 1
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26593192_85e1dca4",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-07T01:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75a7058b_ce7fad40",
+      "range": {
+        "startLine": 786,
+        "startChar": 1,
+        "endLine": 791,
+        "endChar": 1
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9c276c0_e01fc130",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-07T01:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75a7058b_ce7fad40",
       "range": {
         "startLine": 786,
         "startChar": 1,
@@ -89,6 +185,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99199166_264e04b5",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-07T01:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78d15602_d1d71d6b",
+      "range": {
+        "startLine": 737,
+        "startChar": 17,
+        "endLine": 737,
+        "endChar": 33
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ad09c24_62c556e1",
         "filename": "tests/msgbuf.cpp",
         "patchSetId": 1
@@ -100,6 +220,30 @@
       "writtenOn": "2024-05-06T01:11:45Z",
       "side": 1,
       "message": "Can we add some tests for buffer overruns in both the source (read) and destination (write) buffers?",
+      "range": {
+        "startLine": 752,
+        "startChar": 0,
+        "endLine": 764,
+        "endChar": 1
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a4e50f7_0af56581",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-07T01:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ad09c24_62c556e1",
       "range": {
         "startLine": 752,
         "startChar": 0,
