@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4dc4424_2f763f31",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T01:48:28Z",
+      "side": 1,
+      "message": "Okay, with the comment you\u0027ve added to the code I think this is reasonable. Thanks.\n\nI\u0027m wondering whether there\u0027s a better API design-point to handle these cases. I\u0027ll mull on that some more.",
+      "parentUuid": "8a29111c_c5d2e4d1",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd5037d9_94258cc5",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Done, please review the comment I added, thanks.",
       "parentUuid": "dd5037d9_94258cc5",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31c9c61e_0d5007fd",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T01:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88d1d9dc_c4127052",
       "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -125,6 +161,30 @@
       "side": 1,
       "message": "I have some different thought about this, the name of Table 17 is `QueryDownstreamIdentifiers response definition`, and the description of the `Variable` in Table 16 is `Portion of QueryDownstreamIdentifiers response`, so I prefer to let it be squshed together.\n\nNot like `DownstreamDevices` in Table 18, if we split them into 2 structs, the naming of the struct for Table 17 would become tricky because it is still a response of QueryDownstreamIdentifiers, do you have any suggestion for it?",
       "parentUuid": "8beae584_8ca6f669",
+      "range": {
+        "startLine": 483,
+        "startChar": 1,
+        "endLine": 484,
+        "endChar": 39
+      },
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2af5e73d_768c6fe0",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T01:48:28Z",
+      "side": 1,
+      "message": "Okay, that\u0027s probably fair. Perhaps the spec could combine table 16 and 17...",
+      "parentUuid": "4075ccfb_a25fa040",
       "range": {
         "startLine": 483,
         "startChar": 1,
@@ -366,6 +426,24 @@
       "side": 1,
       "message": "Sure, I\u0027ve revised the code and added two test cases to test the failure of `pldm_msgbuf_extract_p` and `pldm_msgbuf_span_required`.\n\n`decodeRequestErrorBufSize` tests the buff is exhausted during `pldm_msgbuf_extract_p`.\n\n`decodeRequestErrorDownstreamDevicesSize` tests the incorrect length of DownstreamDevicesLength.",
       "parentUuid": "bc230347_51fd5df4",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90e1f4f6_cb9702fd",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T01:48:28Z",
+      "side": 1,
+      "message": "This is done, though see my comments above about where testing the return code of `pldm_msgbuf_extract_p()` is and is not necessary.",
+      "parentUuid": "4b8e823a_8d990a49",
       "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

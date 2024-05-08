@@ -16,6 +16,155 @@
       "message": "Hi, I\u0027ve modified the code base on the suggestion, and improved the validation of buff exhausted issues, please review, thanks.",
       "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c93ed838_d5523097",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T01:48:28Z",
+      "side": 1,
+      "message": "Hi, I have a couple of minor cleanup requests, but overall this is an improvement. Thanks!",
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd4205a9_de75b8f5",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T01:48:28Z",
+      "side": 1,
+      "message": "This is good. Thanks.",
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62b2b3ff_494d154f",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T01:48:28Z",
+      "side": 1,
+      "message": "The value of `next_data_transfer_handle` is not used below, we can remove this check",
+      "range": {
+        "startLine": 1019,
+        "startChar": 1,
+        "endLine": 1021,
+        "endChar": 2
+      },
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3cc4700_a0a85e36",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T01:48:28Z",
+      "side": 1,
+      "message": "The value of `transfer_flag` is not used below, we can remove this check",
+      "range": {
+        "startLine": 1023,
+        "startChar": 1,
+        "endLine": 1025,
+        "endChar": 2
+      },
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "497e0269_3ec62440",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T01:48:28Z",
+      "side": 1,
+      "message": "This needs to be kept, because we dereference `downstream_devices_length` below in the call to `pldm_msgbuf_span_required()`.",
+      "range": {
+        "startLine": 1027,
+        "startChar": 1,
+        "endLine": 1029,
+        "endChar": 2
+      },
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4303034_d0587169",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T01:48:28Z",
+      "side": 1,
+      "message": "The value of `number_of_downstream_devices` is not used below, we can remove this check",
+      "range": {
+        "startLine": 1031,
+        "startChar": 1,
+        "endLine": 1033,
+        "endChar": 2
+      },
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3dd4ba4_457d5af1",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T01:48:28Z",
+      "side": 1,
+      "message": "Hmm, is the cast necessary here?",
+      "range": {
+        "startLine": 1035,
+        "startChar": 11,
+        "endLine": 1035,
+        "endChar": 20
+      },
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
