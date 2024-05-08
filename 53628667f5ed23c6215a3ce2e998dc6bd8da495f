@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73f84ec8_26724a72",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "To be self-consistent, and assuming `new_record-\u003esize` must be LE-encoded, this line must be:\n\n```\nnew_record-\u003esize \u003d htole32(le32toh(record-\u003esize) + sizeof(struct pldm_entity)));\n```\n\nYou must also ensure that the addition doesn\u0027t overflow.",
+      "parentUuid": "8563105d_8775fe86",
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "62080a7b_fcbab75c",
         "filename": "src/pdr.c",
         "patchSetId": 24
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "62080a7b_fcbab75c",
+      "range": {
+        "startLine": 1359,
+        "startChar": 1,
+        "endLine": 1369,
+        "endChar": 2
+      },
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "177f19c3_3f05be3f",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0118b99c_ab4203ae",
       "range": {
         "startLine": 1359,
         "startChar": 1,
@@ -137,6 +179,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "6d4638ca_8a9e9096",
+      "range": {
+        "startLine": 1371,
+        "startChar": 1,
+        "endLine": 1381,
+        "endChar": 2
+      },
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "475c4b54_1210380b",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1381,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62f24f55_9f5de36f",
       "range": {
         "startLine": 1371,
         "startChar": 1,
@@ -232,6 +298,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "b88a9dc7_1f95b08c",
+      "range": {
+        "startLine": 1384,
+        "startChar": 1,
+        "endLine": 1385,
+        "endChar": 38
+      },
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "527b4490_71f31112",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86eef117_4cffc3b0",
       "range": {
         "startLine": 1384,
         "startChar": 1,

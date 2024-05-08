@@ -16,6 +16,406 @@
       "message": "@arj I had to rebase this commit with the msgbuf copy AI correctly so I pushed another patchset , apologies",
       "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0081e39_17f4b0d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Hi Varsha, hopefully my comments help clarify the endianness issue(s). I have some others also. I think the new `pldm_msgbuf_copy()` API makes the process feel less tedious 😊",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04f05f51_8125f734",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "These should both be pointer-to-pointer, right?\n\n```\nstatic bool pldm_pdr_find_record_by_handle(pldm_pdr_record **record,\n                                           pldm_pdr_record **prev,\n                                           uint32_t record_handle)\n```\n\nThat way they act as in-out parameters.",
+      "range": {
+        "startLine": 1307,
+        "startChar": 43,
+        "endLine": 1308,
+        "endChar": 30
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b370cdd0_6dd95790",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1339,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Can we please use relevant names?",
+      "range": {
+        "startLine": 1338,
+        "startChar": 1,
+        "endLine": 1339,
+        "endChar": 23
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8001449_5106b83b",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Can we give these relevant names? Like `src` and `dst` or something?",
+      "range": {
+        "startLine": 1340,
+        "startChar": 1,
+        "endLine": 1343,
+        "endChar": 35
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dff34f4_c354ee33",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "`\u0026prev`",
+      "range": {
+        "startLine": 1345,
+        "startChar": 40,
+        "endLine": 1345,
+        "endChar": 44
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1270adc1_4e76c54b",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "`\u0026record`",
+      "range": {
+        "startLine": 1345,
+        "startChar": 32,
+        "endLine": 1345,
+        "endChar": 38
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd62d3c9_83e6f63e",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "I suggest we drop the `end` label and instead immediately return here.",
+      "range": {
+        "startLine": 1348,
+        "startChar": 1,
+        "endLine": 1349,
+        "endChar": 11
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50d53fd3_ab6bf5da",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Again, just return rather than use goto.",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a9b4458_b920bfb2",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Return again.",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fef9abc_efeb6f0a",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "You must check the return value of `pldm_msgbuf_extract()` in this case because you are using the extracted value below.",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21f23b34_d9fb5505",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1403,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "This needs a return value check also.",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f004fae_68cdd2be",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1453,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "So rather than goto here, just return. It\u0027s fine to have labels (like `cleanup_new_record` below) beyond a return statement 😊",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe0db72e_12f906d5",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1485,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "I\u0027d like these to have relevant names also.",
+      "range": {
+        "startLine": 1480,
+        "startChar": 1,
+        "endLine": 1485,
+        "endChar": 35
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02433347_35d05027",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1492,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "I think it would be cleaner to return early here, so:\n\n```\nif (!pdr_added) {\n    return 0;\n}\n```\n\n(Not sure if `return 0;` is what we want though?)\n\nWith that, you can un-indent all the code below.",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54f8c0de_6e30ae83",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "A comment explaining the arithmetic here would be very helpful.",
+      "range": {
+        "startLine": 1493,
+        "startChar": 17,
+        "endLine": 1496,
+        "endChar": 45
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61fc5cef_56bf986d",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Do we need to deal with endianness?",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cf75881_487b18f1",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1531,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "What endianness is the size member?",
+      "range": {
+        "startLine": 1531,
+        "startChar": 21,
+        "endLine": 1531,
+        "endChar": 37
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23c0147b_ce341e7c",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1564,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Use `pldm_msgbuf_span_require()` to extract the pointer to a field of a specific length. You must also check the return value.",
+      "range": {
+        "startLine": 1563,
+        "startChar": 1,
+        "endLine": 1564,
+        "endChar": 36
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03adea4b_628d0411",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "You\u0027re using the value below on line 1580 so you must check the return value here.",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2ea34e2_1f91d6da",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Need to fix up the endianness, right? Also, you need to be very careful about alignment. I think this may need to be:\n\n```\nval_uint16 \u003d htole16(val_uint16);\nmemcpy(ptr, \u0026val_uint16, sizeof(val_uint16));\n```\n\nOr we could come up with another `msgbuf` API that is less error-prone",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

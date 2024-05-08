@@ -256,6 +256,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f17c1a21_9c784e54",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "If you need prev in the caller then you need to pass a pointer-to-pointer right?",
+      "parentUuid": "4d980df8_3006a004",
+      "range": {
+        "startLine": 1341,
+        "startChar": 1,
+        "endLine": 1352,
+        "endChar": 2
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "465a187a_bcc24030",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -392,6 +416,24 @@
       "side": 1,
       "message": "I figured out the issue with my implementation. Added a goto.",
       "parentUuid": "f29d4fb5_3df9ff24",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b139a7a_9452d8b0",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1364,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1edca49_bbccfafd",
       "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -1119,6 +1161,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "d1d3e01b_40c84a96",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e8303a_8482e7cc",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Again, Some of the commentary above applies to this function also.",
+      "parentUuid": "8c796dfa_db42d3ab",
       "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

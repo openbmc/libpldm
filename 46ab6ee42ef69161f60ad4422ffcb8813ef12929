@@ -924,6 +924,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2e63e70_99e24fb9",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:42:46Z",
+      "side": 1,
+      "message": "Okay, so the point is that on line 1373 you have:\n\n```\nnew_record-\u003esize \u003d htole32(...);\n```\n\nThis asserts that the size member should be little-endian. Is that actually the case? If so, to use the size member value here in the calculation for `malloc()` we need:\n\n```\nnew_record-\u003edata \u003d malloc(le32toh(record-\u003esize) + sizeof(pldm_entity));\n```\n\nAnd you need to do similar on line 1373.\n\nYou also need to ensure the addition does not overflow.",
+      "parentUuid": "c478400a_a81788fe",
+      "range": {
+        "startLine": 1321,
+        "startChar": 27,
+        "endLine": 1321,
+        "endChar": 39
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "047bfc3f_7c5c80dd",
         "filename": "src/pdr.c",
         "patchSetId": 18
