@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99bc5395_44324fb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T02:07:04Z",
+      "side": 1,
+      "message": "Hi Tal, CI picked up some undefined behaviour in the test cases. I\u0027ve left a comment inline with some suggestions.",
+      "revId": "4a7f410224b3d04cee46bd6d7f7ca8600abd7b0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9298329c_3669c428",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 4876,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T02:07:04Z",
+      "side": 1,
+      "message": "So this yields a UBSAN error (see https://jenkins.openbmc.org/job/ci-repository/83942/console):\n\n```\nstderr:\n../tests/libpldm_platform_test.cpp:4876:5: runtime error: member access within misaligned address 0x502000002c53 for type \u0027struct pldm_get_state_effecter_states_req\u0027, which requires 2 byte alignment\n0x502000002c53: note: pointer points here\n 00  80 02 3a 01 ab 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00\n              ^ \n```\n\nThis is because the required alignment of `struct pldm_get_state_effecter_states_req` is not met by the offset of `request-\u003epayload` held in `std::vector\u003cuint8_t\u003e requestMsg`. Essentially, the `reinterpret_cast\u003c\u003e` used to assign to `req` on lines 4871-4873 is invalid.\n\nThat (among other issues) comes about because we no-longer declare the `struct pldm_get_state_effecter_states_req` as packed, and so this approach to implementing the tests isn\u0027t valid any more.\n\nPerhaps a better strategy is to first exercise the decode path by packing the bytes into a vector, either manually or using the `msgbuf` APIs, and using `EXPECT_*()` calls to demonstrate the decoding is successful. As a concrete example, see:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/67663/11/tests/libpldm_platform_test.cpp\n\nFrom there you can validate the encode function by round-tripping your values through an encode/decode cycle, and validating the decode yields expected values.\n\nConsider these casting concerns in the test cases below as well.",
+      "range": {
+        "startLine": 4876,
+        "startChar": 4,
+        "endLine": 4876,
+        "endChar": 54
+      },
+      "revId": "4a7f410224b3d04cee46bd6d7f7ca8600abd7b0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
