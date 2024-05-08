@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0637a88_aa6b1ad3",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T02:11:42Z",
+      "side": 1,
+      "message": "Alright, I just learned something about `ssize_t`:\n\n\u003e The type `ssize_t` shall be capable of storing values at least in the range `[-1, {SSIZE_MAX}]`.\n\nFrom: The Open Group Base Specifications Issue 7, 2018 edition. IEEE Std 1003.1-2017 (Revision of IEEE Std 1003.1-2008)\n\nThis breaks what I was wanting from `ssize_t`, and so I\u0027m going to write some patches to clean that up. I\u0027ll rebase this patch on top of that work.",
+      "revId": "8216808a993a346c57635cbdf5c760ce35ed0103",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
