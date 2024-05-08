@@ -75,6 +75,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf71a92d_0fe97f34",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T09:15:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62b2b3ff_494d154f",
+      "range": {
+        "startLine": 1019,
+        "startChar": 1,
+        "endLine": 1021,
+        "endChar": 2
+      },
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3cc4700_a0a85e36",
@@ -88,6 +112,30 @@
       "writtenOn": "2024-05-08T01:48:28Z",
       "side": 1,
       "message": "The value of `transfer_flag` is not used below, we can remove this check",
+      "range": {
+        "startLine": 1023,
+        "startChar": 1,
+        "endLine": 1025,
+        "endChar": 2
+      },
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29a95375_316a6bcb",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T09:15:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3cc4700_a0a85e36",
       "range": {
         "startLine": 1023,
         "startChar": 1,
@@ -121,6 +169,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2114580d_c8c6fb9e",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T09:15:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "497e0269_3ec62440",
+      "range": {
+        "startLine": 1027,
+        "startChar": 1,
+        "endLine": 1029,
+        "endChar": 2
+      },
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4303034_d0587169",
@@ -144,6 +216,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da340fbe_82b6bdc9",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T09:15:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4303034_d0587169",
+      "range": {
+        "startLine": 1031,
+        "startChar": 1,
+        "endLine": 1033,
+        "endChar": 2
+      },
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3dd4ba4_457d5af1",
@@ -157,6 +253,30 @@
       "writtenOn": "2024-05-08T01:48:28Z",
       "side": 1,
       "message": "Hmm, is the cast necessary here?",
+      "range": {
+        "startLine": 1035,
+        "startChar": 11,
+        "endLine": 1035,
+        "endChar": 20
+      },
+      "revId": "895ee9552f8d9755e893debf749acc901c147fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72c96b67_77cb65ef",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T09:15:46Z",
+      "side": 1,
+      "message": "Yes, the variable_field-\u003eptr is a `const uint8_t*`, there will be a compilling error if don\u0027t do this. I saw the unit tests for `pldm_msgbuf_span_required` also do this castinig.",
+      "parentUuid": "c3dd4ba4_457d5af1",
       "range": {
         "startLine": 1035,
         "startChar": 11,
