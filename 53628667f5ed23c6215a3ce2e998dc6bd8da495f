@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8563105d_8775fe86",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-08T02:25:06Z",
+      "side": 1,
+      "message": "discussion above",
+      "parentUuid": "3407822e_a194518d",
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "62080a7b_fcbab75c",
         "filename": "src/pdr.c",
         "patchSetId": 24
@@ -60,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0118b99c_ab4203ae",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-08T02:25:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62080a7b_fcbab75c",
+      "range": {
+        "startLine": 1359,
+        "startChar": 1,
+        "endLine": 1369,
+        "endChar": 2
+      },
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d4638ca_8a9e9096",
         "filename": "src/pdr.c",
         "patchSetId": 24
@@ -71,6 +113,30 @@
       "writtenOn": "2024-04-30T04:25:32Z",
       "side": 1,
       "message": "This is in terms of the `new_record-\u003edata` resource and so we can\u0027t do the same thing as suggested above (hopefully that\u0027s obvious).",
+      "range": {
+        "startLine": 1371,
+        "startChar": 1,
+        "endLine": 1381,
+        "endChar": 2
+      },
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62f24f55_9f5de36f",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1381,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-08T02:25:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d4638ca_8a9e9096",
       "range": {
         "startLine": 1371,
         "startChar": 1,
@@ -142,6 +208,30 @@
       "side": 1,
       "message": "Great! Thanks 😊",
       "parentUuid": "249cc7ef_5cc83948",
+      "range": {
+        "startLine": 1384,
+        "startChar": 1,
+        "endLine": 1385,
+        "endChar": 38
+      },
+      "revId": "53628667f5ed23c6215a3ce2e998dc6bd8da495f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86eef117_4cffc3b0",
+        "filename": "src/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-08T02:25:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b88a9dc7_1f95b08c",
       "range": {
         "startLine": 1384,
         "startChar": 1,

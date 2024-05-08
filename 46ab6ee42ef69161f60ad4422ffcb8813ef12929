@@ -900,6 +900,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c478400a_a81788fe",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-08T02:25:06Z",
+      "side": 1,
+      "message": "can we discuss how we can approach this?- can we add #ifdef or #define IS_BIG_ENDIAN to make sure this part is error free on both little endian or big endian systems?",
+      "parentUuid": "9e5affff_b28f216f",
+      "range": {
+        "startLine": 1321,
+        "startChar": 27,
+        "endLine": 1321,
+        "endChar": 39
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "047bfc3f_7c5c80dd",
         "filename": "src/pdr.c",
         "patchSetId": 18

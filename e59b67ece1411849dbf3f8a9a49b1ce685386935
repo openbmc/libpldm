@@ -232,6 +232,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d980df8_3006a004",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-08T02:25:06Z",
+      "side": 1,
+      "message": "static bool pldm_pdr_find_record_by_handle(pldm_pdr_record *record,\n                                           pldm_pdr_record *prev,\n                                           uint32_t record_handle)\n{\n        if (!record || !prev) {\n                return false;\n        }\n        while (record !\u003d NULL) {\n                if (record-\u003erecord_handle \u003d\u003d record_handle) {\n                        return true;\n                }\n                prev \u003d record;\n                record \u003d record-\u003enext;\n        }\n        return false;\n}\n\nAdding a function like above makes prev unused inside this API. We do need prev in the caller function so we cannot remove the variable. Compiler complains of \"set but never read\". I was not sure how to best resolve this issue so I added a check on prev inside the while loop. If this is not ok, can you please suggest how to overcome the compile failure or if I can override the check during compilation?",
+      "parentUuid": "75b927ac_86373a70",
+      "range": {
+        "startLine": 1341,
+        "startChar": 1,
+        "endLine": 1352,
+        "endChar": 2
+      },
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "465a187a_bcc24030",
         "filename": "src/pdr.c",
         "patchSetId": 23
@@ -350,6 +374,24 @@
       "side": 1,
       "message": "Can you please add more details about what you mean by that? How did you determine that gotos were the cause of a malloc failure? Please paste all evidence somewhere we can reason about it (test cases, log output, the actual patch you wrote to implement the goto approach, anything else relevant).",
       "parentUuid": "27324359_037f1081",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1edca49_bbccfafd",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1364,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-08T02:25:06Z",
+      "side": 1,
+      "message": "I figured out the issue with my implementation. Added a goto.",
+      "parentUuid": "f29d4fb5_3df9ff24",
       "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -1059,6 +1101,24 @@
       "side": 1,
       "message": "Same again.",
       "parentUuid": "61497d99_1a806e11",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c796dfa_db42d3ab",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-08T02:25:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1d3e01b_40c84a96",
       "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
