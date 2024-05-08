@@ -1,0 +1,198 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36b9feed_678a3443",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:58:05Z",
+      "side": 1,
+      "message": "Hi, I\u0027ve have some comments inline. Broadly, one of the purposes of the `msgbuf` APIs is to deal with the endian conversions for you, in addition to being spatially memory-safe and avoiding various forms of undefined behaviour (mainly around issues of alignment). Some of the comments are on that theme.",
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba1a984f_f996c135",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:58:05Z",
+      "side": 1,
+      "message": "I expect you should rather extract the values straight into the members of `resp_data`.",
+      "range": {
+        "startLine": 894,
+        "startChar": 1,
+        "endLine": 899,
+        "endChar": 1
+      },
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "128fb78e_5e6d9b04",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:58:05Z",
+      "side": 1,
+      "message": "```\nrc \u003d pldm_msgbuf_extract(buf, resp_data-\u003ecompletion_code);\n```",
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd54a89f_946421a8",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:58:05Z",
+      "side": 1,
+      "message": "Extract this directly into `resp_data-\u003edownstream_device_update_supported`.",
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d541e86_84b95611",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:58:05Z",
+      "side": 1,
+      "message": "I\u0027d prefer we invert this condition and do an early return rather than have an `else` branch.",
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9ac727c_2ab07974",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:58:05Z",
+      "side": 1,
+      "message": "`pldm_msgbuf_extract(buf, resp_data-\u003enumber_of_downstream_devices)`.",
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1bb7c46_1b5b29a1",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:58:05Z",
+      "side": 1,
+      "message": "This is unnecessary (and incorrect). The `msgbuf` API already does the endianness conversion for you.",
+      "range": {
+        "startLine": 937,
+        "startChar": 1,
+        "endLine": 938,
+        "endChar": 40
+      },
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72a76fdc_5d7cd5cf",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:58:05Z",
+      "side": 1,
+      "message": "See comments above.",
+      "range": {
+        "startLine": 940,
+        "startChar": 1,
+        "endLine": 945,
+        "endChar": 61
+      },
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b8316f2_ddf9b473",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:58:05Z",
+      "side": 1,
+      "message": "This must at least be `return pldm_msgbuf_destroy(buf);`. Preferably `return pldm_msgbuf_destroy_consumed(buf);`. The design of the `msgbuf` APIs is such that most of the time the error handling can be punted to the caller, and the `pldm_msgbuf_destroy*()` functions are how we implement this signalling.",
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cbdfe5e_f027ab16",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-08T04:58:05Z",
+      "side": 1,
+      "message": "Please don\u0027t submit commented out code.",
+      "range": {
+        "startLine": 1383,
+        "startChar": 2,
+        "endLine": 1391,
+        "endChar": 61
+      },
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
