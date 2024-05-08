@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e26d419d_af842e32",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T08:38:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1a984f_f996c135",
+      "range": {
+        "startLine": 894,
+        "startChar": 1,
+        "endLine": 899,
+        "endChar": 1
+      },
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "128fb78e_5e6d9b04",
@@ -54,6 +78,24 @@
       "writtenOn": "2024-05-08T04:58:05Z",
       "side": 1,
       "message": "```\nrc \u003d pldm_msgbuf_extract(buf, resp_data-\u003ecompletion_code);\n```",
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e39234a9_1c8525f8",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T08:38:10Z",
+      "side": 1,
+      "message": "Done, thanks for reminding, I would like to check something:\n\nBefore the commit to split `pldm_msgbuf_extract` and `pldm_msgbuf_extract_p`, `pldm_msgbuf_extract` accepts a pointer, if I take the address of the struct member, such as `\u0026resp_data-\u003ecompletion_code`, it might get the wrong address with some padded struct, am I correct? I remember that I\u0027ve encountered such error before.",
+      "parentUuid": "128fb78e_5e6d9b04",
       "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dde06ae_c0314d6d",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T08:38:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd54a89f_946421a8",
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d541e86_84b95611",
@@ -88,6 +148,24 @@
       "writtenOn": "2024-05-08T04:58:05Z",
       "side": 1,
       "message": "I\u0027d prefer we invert this condition and do an early return rather than have an `else` branch.",
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc9fc451_616229b1",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T08:38:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d541e86_84b95611",
       "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -109,6 +187,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f03dbc8d_755ae81c",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T08:38:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9ac727c_2ab07974",
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1bb7c46_1b5b29a1",
@@ -122,6 +218,30 @@
       "writtenOn": "2024-05-08T04:58:05Z",
       "side": 1,
       "message": "This is unnecessary (and incorrect). The `msgbuf` API already does the endianness conversion for you.",
+      "range": {
+        "startLine": 937,
+        "startChar": 1,
+        "endLine": 938,
+        "endChar": 40
+      },
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4282369_1b93ac14",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T08:38:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1bb7c46_1b5b29a1",
       "range": {
         "startLine": 937,
         "startChar": 1,
@@ -155,6 +275,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cac10cb1_b6bfcc42",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T08:38:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72a76fdc_5d7cd5cf",
+      "range": {
+        "startLine": 940,
+        "startChar": 1,
+        "endLine": 945,
+        "endChar": 61
+      },
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b8316f2_ddf9b473",
@@ -172,6 +316,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c01237_13fe5e63",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T08:38:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b8316f2_ddf9b473",
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cbdfe5e_f027ab16",
@@ -185,6 +347,30 @@
       "writtenOn": "2024-05-08T04:58:05Z",
       "side": 1,
       "message": "Please don\u0027t submit commented out code.",
+      "range": {
+        "startLine": 1383,
+        "startChar": 2,
+        "endLine": 1391,
+        "endChar": 61
+      },
+      "revId": "14cd4d7f81850ecbc51921cef1b136faee319adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f912b232_88b55eeb",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-08T08:38:10Z",
+      "side": 1,
+      "message": "Oops, that\u0027s a missed part, sorry for that.",
+      "parentUuid": "4cbdfe5e_f027ab16",
       "range": {
         "startLine": 1383,
         "startChar": 2,
