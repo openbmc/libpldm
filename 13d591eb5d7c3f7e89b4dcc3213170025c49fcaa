@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49ac7411_807402a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:00:48Z",
+      "side": 1,
+      "message": "Hello. This is starting to look good. Probably the main comment is regarding using the struct you defined for the decode API. I think that will improve the ergonomics.  Thanks for iterating!",
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4181e459_774898cc",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:00:48Z",
+      "side": 1,
+      "message": "We now have `PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN` from the prior patch so I think we can drop this? I don\u0027t think it\u0027s helpful any more.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 56
+      },
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "723dbc17_72089826",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:00:48Z",
+      "side": 1,
+      "message": "This is the response minimum length, maybe rename it to `PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN` now that we have dealt with the optional command problem?",
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c927e552_e622b9a7",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:00:48Z",
+      "side": 1,
+      "message": "Okay, given we\u0027ve sorted out some of the other issues, we can start honing in on the API. Rather than all of these individual parameters, why not take a pointer to `struct pldm_query_downstream_identifiers_resp`? So:\n\n```\nint decode_query_downstream_identifiers_resp(const struct pldm_msg *msg,\n        size_t payload_length,\n        struct pldm_query_downstream_identifiers_resp *resp,\n        struct variable_field *downstream_devices);\n```",
+      "range": {
+        "startLine": 903,
+        "startChar": 1,
+        "endLine": 905,
+        "endChar": 40
+      },
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42ac4458_8df6b420",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:00:48Z",
+      "side": 1,
+      "message": "Typo: `transfer`",
+      "range": {
+        "startLine": 90,
+        "startChar": 3,
+        "endLine": 90,
+        "endChar": 12
+      },
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a51b625_8f98bdf0",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:00:48Z",
+      "side": 1,
+      "message": "If this becomes a wider problem we should look at addressing it. I have ideas, but we don\u0027t need to do anything just yet.",
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbac6c89_91f76f60",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:00:48Z",
+      "side": 1,
+      "message": "See comment on the header.\n\nNote that if you make that change the `pldm_msgbuf_extract_p()` invocations below change back to `pldm_msgbuf_extract()`, as you pass the struct member lvalue.",
+      "range": {
+        "startLine": 992,
+        "startChar": 1,
+        "endLine": 994,
+        "endChar": 40
+      },
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de5192b7_f7e61338",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:00:48Z",
+      "side": 1,
+      "message": "Can you add a comment about why we need `ASSERT_DEATH()`?",
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3438fa7_463b0bb1",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:00:48Z",
+      "side": 1,
+      "message": "Can you please provide an explanation here?",
+      "range": {
+        "startLine": 1629,
+        "startChar": 17,
+        "endLine": 1629,
+        "endChar": 19
+      },
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

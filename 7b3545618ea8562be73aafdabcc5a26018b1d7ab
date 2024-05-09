@@ -89,6 +89,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eddd00f_09b404c6",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:00:48Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "66a0aa0f_d0d9643c",
+      "revId": "7b3545618ea8562be73aafdabcc5a26018b1d7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd5037d9_94258cc5",
