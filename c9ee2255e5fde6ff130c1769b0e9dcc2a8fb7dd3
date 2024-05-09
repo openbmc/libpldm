@@ -58,6 +58,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ff0bed2_66473d09",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04f05f51_8125f734",
+      "range": {
+        "startLine": 1307,
+        "startChar": 43,
+        "endLine": 1308,
+        "endChar": 30
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b370cdd0_6dd95790",
@@ -81,6 +105,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ed53a06_c6d88142",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1339,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b370cdd0_6dd95790",
+      "range": {
+        "startLine": 1338,
+        "startChar": 1,
+        "endLine": 1339,
+        "endChar": 23
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8001449_5106b83b",
@@ -94,6 +142,30 @@
       "writtenOn": "2024-05-08T04:42:46Z",
       "side": 1,
       "message": "Can we give these relevant names? Like `src` and `dst` or something?",
+      "range": {
+        "startLine": 1340,
+        "startChar": 1,
+        "endLine": 1343,
+        "endChar": 35
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f59466a_93966e24",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8001449_5106b83b",
       "range": {
         "startLine": 1340,
         "startChar": 1,
@@ -150,6 +222,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c8a79b_0fcc3e01",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1270adc1_4e76c54b",
+      "range": {
+        "startLine": 1345,
+        "startChar": 32,
+        "endLine": 1345,
+        "endChar": 38
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "980d351b_c1fdb09e",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dff34f4_c354ee33",
+      "range": {
+        "startLine": 1345,
+        "startChar": 40,
+        "endLine": 1345,
+        "endChar": 44
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd62d3c9_83e6f63e",
@@ -163,6 +283,30 @@
       "writtenOn": "2024-05-08T04:42:46Z",
       "side": 1,
       "message": "I suggest we drop the `end` label and instead immediately return here.",
+      "range": {
+        "startLine": 1348,
+        "startChar": 1,
+        "endLine": 1349,
+        "endChar": 11
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5baea8e3_8bac4573",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd62d3c9_83e6f63e",
       "range": {
         "startLine": 1348,
         "startChar": 1,
@@ -190,6 +334,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2373d0b_62b798ce",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50d53fd3_ab6bf5da",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a9b4458_b920bfb2",
@@ -203,6 +365,24 @@
       "writtenOn": "2024-05-08T04:42:46Z",
       "side": 1,
       "message": "Return again.",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e11e3da_f3d40353",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a9b4458_b920bfb2",
       "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -226,6 +406,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "651c1b6e_9beebbec",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "I have checked the return value of extract everywhere. Do we also need to check the same for pldm_msgbuf_insert?",
+      "parentUuid": "8fef9abc_efeb6f0a",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21f23b34_d9fb5505",
         "filename": "src/pdr.c",
         "patchSetId": 26
@@ -237,6 +435,24 @@
       "writtenOn": "2024-05-08T04:42:46Z",
       "side": 1,
       "message": "This needs a return value check also.",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d5cb190_9dcdf91f",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1403,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21f23b34_d9fb5505",
       "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -254,6 +470,24 @@
       "writtenOn": "2024-05-08T04:42:46Z",
       "side": 1,
       "message": "So rather than goto here, just return. It\u0027s fine to have labels (like `cleanup_new_record` below) beyond a return statement 😊",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10f9099a_95ac7bf0",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1453,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f004fae_68cdd2be",
       "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -281,6 +515,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "663e7558_1d67e5c9",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1485,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe0db72e_12f906d5",
+      "range": {
+        "startLine": 1480,
+        "startChar": 1,
+        "endLine": 1485,
+        "endChar": 35
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02433347_35d05027",
@@ -298,6 +556,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b2cccc_34b983dd",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1492,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02433347_35d05027",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54f8c0de_6e30ae83",
@@ -311,6 +587,30 @@
       "writtenOn": "2024-05-08T04:42:46Z",
       "side": 1,
       "message": "A comment explaining the arithmetic here would be very helpful.",
+      "range": {
+        "startLine": 1493,
+        "startChar": 17,
+        "endLine": 1496,
+        "endChar": 45
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5370cd7_881f5f40",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54f8c0de_6e30ae83",
       "range": {
         "startLine": 1493,
         "startChar": 17,
@@ -340,6 +640,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b231c51_1f26e6c1",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "yes because we save the value in new_record so we need to make sure it is in little endian",
+      "parentUuid": "61fc5cef_56bf986d",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2cf75881_487b18f1",
         "filename": "src/pdr.c",
         "patchSetId": 26
@@ -351,6 +669,30 @@
       "writtenOn": "2024-05-08T04:42:46Z",
       "side": 1,
       "message": "What endianness is the size member?",
+      "range": {
+        "startLine": 1531,
+        "startChar": 21,
+        "endLine": 1531,
+        "endChar": 37
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "719334ce_68652e26",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1531,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cf75881_487b18f1",
       "range": {
         "startLine": 1531,
         "startChar": 21,
@@ -384,6 +726,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b522824_a5835a43",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1564,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23c0147b_ce341e7c",
+      "range": {
+        "startLine": 1563,
+        "startChar": 1,
+        "endLine": 1564,
+        "endChar": 36
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03adea4b_628d0411",
@@ -403,6 +769,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c134940_50cd07cc",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "This can be changed to pldm_msgbuf_copy(...). Using the new API we can use copy for child container ID. No need to extract and insert",
+      "parentUuid": "03adea4b_628d0411",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2ea34e2_1f91d6da",
         "filename": "src/pdr.c",
         "patchSetId": 26
@@ -414,6 +798,24 @@
       "writtenOn": "2024-05-08T04:42:46Z",
       "side": 1,
       "message": "Need to fix up the endianness, right? Also, you need to be very careful about alignment. I think this may need to be:\n\n```\nval_uint16 \u003d htole16(val_uint16);\nmemcpy(ptr, \u0026val_uint16, sizeof(val_uint16));\n```\n\nOr we could come up with another `msgbuf` API that is less error-prone",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1be8f3ce_eb57c1f9",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "I want to add a new API pldm_msgbuf_copy_data(...) to address this.\n\n\nstatic inline int pldm_msgbuf_copy_data(struct pldm_msgbuf *src, size_t size, void **cursor)\n{\n        if (!src || !src-\u003ecursor || !cursor || *cursor || size \u003d\u003d 0) {\n                return PLDM_ERROR_INVALID_DATA;\n        }\n\n        if (size \u003e SSIZE_MAX) {\n                return PLDM_ERROR_INVALID_LENGTH;\n        }\n\n        if ((SSIZE_MIN + (ssize_t)size) \u003e src-\u003eremaining) {\n                return PLDM_ERROR_INVALID_LENGTH;\n        }\n\n        memcpy(*cursor, src-\u003ecursor, size);\n\n        return PLDM_SUCCESS;\n}",
+      "parentUuid": "f2ea34e2_1f91d6da",
       "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

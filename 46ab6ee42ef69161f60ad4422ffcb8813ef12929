@@ -948,6 +948,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee3c359c_9c451a89",
+        "filename": "src/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T03:41:15Z",
+      "side": 1,
+      "message": "Thank you. I have corrected the endian conversion of record-\u003esize.",
+      "parentUuid": "b2e63e70_99e24fb9",
+      "range": {
+        "startLine": 1321,
+        "startChar": 27,
+        "endLine": 1321,
+        "endChar": 39
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "047bfc3f_7c5c80dd",
         "filename": "src/pdr.c",
         "patchSetId": 18
