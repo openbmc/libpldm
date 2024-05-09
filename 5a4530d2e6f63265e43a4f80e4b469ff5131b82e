@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "720eb33e_9c51a810",
+        "filename": "src/pdr.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T11:10:12Z",
+      "side": 1,
+      "message": "Adding the same check is throwing an error \ncomparison is always false due to limited range of data type [-Werror\u003dtype-limits]\n 1357 |         if ((size_t)(le32toh(record-\u003esize)) \u003e\n \n So i fixed the line differently.",
+      "parentUuid": "b5df6a9a_4d70c56e",
+      "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b683e40_b2b12a44",
         "filename": "src/pdr.c",
         "patchSetId": 28
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ed33697_de26be87",
+        "filename": "src/pdr.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T11:10:12Z",
+      "side": 1,
+      "message": "I have added the static assert. But I have a question , isnt it safer to free resources and error out with a -EOVERFLOW ?",
+      "parentUuid": "0b683e40_b2b12a44",
+      "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e76141c0_d0a4f09f",
         "filename": "src/pdr.c",
         "patchSetId": 28
@@ -65,6 +101,24 @@
       "writtenOn": "2024-05-09T07:42:16Z",
       "side": 1,
       "message": "Do we need to check for underflow?",
+      "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "247f734c_46a45e2f",
+        "filename": "src/pdr.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T11:10:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e76141c0_d0a4f09f",
       "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -99,6 +153,24 @@
       "writtenOn": "2024-05-09T07:42:16Z",
       "side": 1,
       "message": "Overflow check?",
+      "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e7fd741_48b9ae60",
+        "filename": "src/pdr.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-09T11:10:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dba1985f_83caa6b1",
       "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
