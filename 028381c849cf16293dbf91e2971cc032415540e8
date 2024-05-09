@@ -347,6 +347,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7f9e8f2_a73cb31b",
+        "filename": "src/pdr.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1373,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-05-09T10:21:28Z",
+      "side": 1,
+      "message": "I think we need to make sure that when pldm call into the libpldm API\u0027s we give it data in host-endianness format, so that we could avoid complicated conversions in libpldm. \n\n@andrew in this case, looks to me like the `record` is basically coming from `repo` which is created by PLDM at https://github.com/openbmc/pldm/blob/ba741d5fd0e0f0f245e74d40caa159581a45479c/libpldmresponder/pdr_utils.cpp#L31 , its created in little endian because its created by the BMC app..and if we convert that to host endian before passing it to the libpldm API we would not have these conversions in libpldm. is that the right way to fix things ?",
+      "parentUuid": "c6a7dd09_b122a0e5",
+      "revId": "028381c849cf16293dbf91e2971cc032415540e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76aec7b0_9103631e",
         "filename": "src/pdr.c",
         "patchSetId": 27
