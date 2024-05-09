@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a425bf7_c1ce91a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T07:42:16Z",
+      "side": 1,
+      "message": "Hi Varsha, thanks for resolving many of the issues. I have just a few left.",
+      "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5df6a9a_4d70c56e",
+        "filename": "src/pdr.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T07:42:16Z",
+      "side": 1,
+      "message": "Unsigned arithmetic is defined to overflow (unlike signed arithmetic, where any such behaviour is explicitly undefined). The test isn\u0027t correct as overflow is not the same as saturation (which is effectively what you\u0027re testing here). This should be:\n\n```\nif ((size_t)(le32toh(record-\u003esize)) \u003e (SIZE_MAX - sizeof(pldm_entity)) {\n```\n\nThe `\u003d\u003d` trick worked below on line 1408 because subsequently we add only the constant `1` to the value. Here\u0027 we\u0027re adding another (sort-of) arbitrary value and so we need a different strategy.",
+      "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b683e40_b2b12a44",
+        "filename": "src/pdr.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T07:42:16Z",
+      "side": 1,
+      "message": "So this is fine, because by \"the usual arithmetic conversions\" (N2176, C17 draft standard, section 6.3.1.8) we have:\n\n\u003e Otherwise, the integer promotions are performed on both operands. Then the following rules\nare applied to the promoted operands:\n\u003e - If both operands have the same type, then no further conversion is needed.\n\u003e - Otherwise, if both operands have signed integer types or both have unsigned integer\ntypes, the operand with the type of lesser integer conversion rank is converted to the type of the operand with greater rank.\n\nThe `sizeof` operator yields a `size_t`, which will cause `header_length` to be promoted to `size_t` from the underlying type for `uint16_t`.\n\nWe could add\n\n```\nstatic_assert(UINT16_MAX \u003c (SIZE_MAX - sizeof(pldm_entity)), \"Fix the following bounds check\");\n```\n\nabove line 1391 to be completely safe.",
+      "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e76141c0_d0a4f09f",
+        "filename": "src/pdr.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T07:42:16Z",
+      "side": 1,
+      "message": "Do we need to check for underflow?",
+      "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20ecbe0d_572f0cc0",
+        "filename": "src/pdr.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T07:42:16Z",
+      "side": 1,
+      "message": "Right; you can see why storing these values in the wire-format endianness is tedious and error-prone...",
+      "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba1985f_83caa6b1",
+        "filename": "src/pdr.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T07:42:16Z",
+      "side": 1,
+      "message": "Overflow check?",
+      "revId": "5a4530d2e6f63265e43a4f80e4b469ff5131b82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
