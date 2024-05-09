@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daf71c82_d6bf02a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:17:26Z",
+      "side": 1,
+      "message": "Hello. The blocking concern on this patch is that it\u0027s trusting untrustworthy input. That must be fixed before we can reconsider submitting it.\n\nI\u0027ve made a few other minor comments as well.",
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa6b904e_347f6c54",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:17:26Z",
+      "side": 1,
+      "message": "Add the whitespace in the relevant patch instead. It shouldn\u0027t be part of this patch.",
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d11ae00_b16be174",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:17:26Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "827b5e74_06a7af21",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:17:26Z",
+      "side": 1,
+      "message": "We shouldn\u0027t be renaming this? Where did it get introduced?",
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03d4d47c_3dc8c017",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:17:26Z",
+      "side": 1,
+      "message": "Requests don\u0027t have a completion code?",
+      "range": {
+        "startLine": 68,
+        "startChar": 11,
+        "endLine": 68,
+        "endChar": 45
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd34483_e4c7f4de",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:17:26Z",
+      "side": 1,
+      "message": "completion?",
+      "range": {
+        "startLine": 74,
+        "startChar": 32,
+        "endLine": 74,
+        "endChar": 42
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b2c16bf_b235c1c7",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:17:26Z",
+      "side": 1,
+      "message": "This is out-only, so should be `@param[out]`",
+      "range": {
+        "startLine": 971,
+        "startChar": 3,
+        "endLine": 971,
+        "endChar": 87
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "192c4834_5242c162",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:17:26Z",
+      "side": 1,
+      "message": "As above.",
+      "range": {
+        "startLine": 972,
+        "startChar": 3,
+        "endLine": 972,
+        "endChar": 17
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df9ab559_9bd3cd0f",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T03:17:26Z",
+      "side": 1,
+      "message": "I can\u0027t accept this sorry, it\u0027s not safe at all. Much better would be to replace all of this with:\n\n```\nreturn pldm_msgbuf_span_remaining(buf,\n    (void **)\u0026downstream_device_param_table-\u003eptr,\n    \u0026downstream_device_param_table-\u003elength);\n```\n\nSomeone can then feed the content of `downstream_device_param_table` into another `pldm_msgbuf` (via another public API) for subsequent decoding.\n\nAgain, the translation between a `struct pldm_msgbuf` and `struct variable_field` is something we can make a bit more ergonomic if necessary.",
+      "range": {
+        "startLine": 1132,
+        "startChar": 1,
+        "endLine": 1155,
+        "endChar": 42
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
