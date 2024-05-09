@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08610c6_4b8c1cc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T02:34:21Z",
+      "side": 1,
+      "message": "Hello, the only remaining comments I have are regarding some whitespace in the comments. I think the code looks good now. Thanks for iterating on it.",
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36934222_8e1ffcbe",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T02:34:21Z",
+      "side": 1,
+      "message": "Bit of a nit, but can we un-indent this?\n\nI appreciate the use of the markdown-style quote though 😊",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 49
+      },
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c2f4fba_4a83a56f",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T02:34:21Z",
+      "side": 1,
+      "message": "Same here (remove indendation). Maybe also turn the explanation into a list?",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 36
+      },
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6b661fa_8aea8abf",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T02:34:21Z",
+      "side": 1,
+      "message": "Looking good!",
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
