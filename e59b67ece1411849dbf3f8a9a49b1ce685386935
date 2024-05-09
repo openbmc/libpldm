@@ -1223,6 +1223,24 @@
       "parentUuid": "e2e8303a_8482e7cc",
       "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d7c1422_59e89cdf",
+        "filename": "src/pdr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T05:01:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecf33b4b_73c13a43",
+      "revId": "e59b67ece1411849dbf3f8a9a49b1ce685386935",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

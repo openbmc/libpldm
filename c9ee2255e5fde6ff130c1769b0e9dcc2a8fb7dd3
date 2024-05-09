@@ -818,6 +818,24 @@
       "parentUuid": "f2ea34e2_1f91d6da",
       "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a3420b_79124b67",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T05:01:32Z",
+      "side": 1,
+      "message": "I\u0027d prefer not. Use of this API puts on the onus on the caller for endian-correctness, and they\u0027re just not going to get that correct all of the time. We need the endian-correctness invariant upheld by the `msgbuf` API itself.",
+      "parentUuid": "1be8f3ce_eb57c1f9",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
