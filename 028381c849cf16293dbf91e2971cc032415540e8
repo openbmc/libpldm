@@ -352,6 +352,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80c498cb_80de6f0c",
+        "filename": "src/pdr.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1461,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T05:05:46Z",
+      "side": 1,
+      "message": "Oh, so rather than a conditional here, I prefer we add another label, so:\n\n```\ncleanup_new_record_data:\n    free(new_record-\u003edata);\n\ncleanup_new_record:\n    free(new_record);\n    \n    return rc;\n```\n\nAnd then adjust the `goto`s above.",
+      "range": {
+        "startLine": 1459,
+        "startChar": 1,
+        "endLine": 1461,
+        "endChar": 2
+      },
+      "revId": "028381c849cf16293dbf91e2971cc032415540e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf397dd9_aa2eaeb0",
         "filename": "src/pdr.c",
         "patchSetId": 27
@@ -426,6 +449,29 @@
       "writtenOn": "2024-05-09T05:01:32Z",
       "side": 1,
       "message": "`pldm_msgbuf_insert()`? The type information is encoded in the variable declaration.",
+      "revId": "028381c849cf16293dbf91e2971cc032415540e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "871b3e7d_ef0bdd60",
+        "filename": "src/pdr.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1605,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T05:05:46Z",
+      "side": 1,
+      "message": "Use the `cleanup_new_record_data` label approach discussed above here as well.",
+      "range": {
+        "startLine": 1603,
+        "startChar": 1,
+        "endLine": 1605,
+        "endChar": 2
+      },
       "revId": "028381c849cf16293dbf91e2971cc032415540e8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
