@@ -422,6 +422,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd986c84_a9dbd341",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T05:09:41Z",
+      "side": 1,
+      "message": "No, because we don\u0027t use the value subsequently. Whether an error has occurred for `pldm_msgbuf_insert()` will be caught by the eventual `pldm_msgbuf_destroy*()` call for the buffer into which we inserted the value.",
+      "parentUuid": "651c1b6e_9beebbec",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21f23b34_d9fb5505",
@@ -656,6 +674,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98aaf953_cb7cbc0b",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T05:09:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b231c51_1f26e6c1",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cf75881_487b18f1",
@@ -693,6 +729,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "2cf75881_487b18f1",
+      "range": {
+        "startLine": 1531,
+        "startChar": 21,
+        "endLine": 1531,
+        "endChar": 37
+      },
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f3123d_ba93288e",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1531,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T05:09:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "719334ce_68652e26",
       "range": {
         "startLine": 1531,
         "startChar": 21,
@@ -781,6 +841,24 @@
       "side": 1,
       "message": "This can be changed to pldm_msgbuf_copy(...). Using the new API we can use copy for child container ID. No need to extract and insert",
       "parentUuid": "03adea4b_628d0411",
+      "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e363407d_63bdba61",
+        "filename": "src/pdr.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-09T05:09:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c134940_50cd07cc",
       "revId": "c9ee2255e5fde6ff130c1769b0e9dcc2a8fb7dd3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
