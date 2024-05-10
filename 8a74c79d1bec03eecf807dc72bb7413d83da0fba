@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1333c330_bb63284f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-10T01:45:39Z",
+      "side": 1,
+      "message": "Hi Varsha, Manoj - I\u0027ve taken the time to try to make sure we\u0027re on the same page regarding endianness. Any confusion on anyone\u0027s part is only going to yield more confusion and bugs, so we need to straighten that out. Besides that I have some comments on the overflow tests.",
+      "revId": "8a74c79d1bec03eecf807dc72bb7413d83da0fba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e883b07_48a2e1b4",
+        "filename": "src/pdr.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-10T01:45:39Z",
+      "side": 1,
+      "message": "I apologise for not testing the expression I suggested, but this cast is not the right way to deal with the problem either. The cast will truncate the value[^1] on some platforms, which is not what we want. For instance, on x86-64:\n\n```\nIn file included from \u003csource\u003e:1:\n\u003csource\u003e: In function \u0027main\u0027:\n\u003csource\u003e:8:5: error: static assertion failed: \"Truncation\"\n    8 |     static_assert(UINT32_MAX \u003e\u003d SIZE_MAX, \"Truncation\");\n      |     ^~~~~~~~~~~~~\nCompiler returned: 1\n```\n\nAn approach that works for multiple platforms is to perform the addition and then check for overflow (this is defined behaviour as we\u0027re working with unsigned types):\n\n```\nif (le32toh(record-\u003esize) + sizeof(pldm_entity) \u003c sizeof(pldm_entity))\n```\n\nYou can see this in action for both (32-bit) ARM and x86-64 here:\n\nhttps://godbolt.org/z/dxGPefeKW\n\n[^1]: From N2176 (C17 draft specification), 6.5.4 Cast operators:\n\n\u003e If the value of the expression is represented with greater range or precision than required by the type named by the cast (6.3.1.8), then the cast specifies a conversion even if the type of the expression is the same as the named type and **removes any extra range and precision**.",
+      "range": {
+        "startLine": 1358,
+        "startChar": 5,
+        "endLine": 1358,
+        "endChar": 46
+      },
+      "revId": "8a74c79d1bec03eecf807dc72bb7413d83da0fba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4242a496_04730ad9",
+        "filename": "src/pdr.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-10T01:45:39Z",
+      "side": 1,
+      "message": "We needed _both_ the `static_assert()` _and_ the `if (...)` check you had previously (the latter being the \"following bounds check\" referred to by the message in the `static_assert()`). The `static_assert()` is not enough on its own. Please put the `if (...)` check back.",
+      "range": {
+        "startLine": 1392,
+        "startChar": 1,
+        "endLine": 1393,
+        "endChar": 43
+      },
+      "revId": "8a74c79d1bec03eecf807dc72bb7413d83da0fba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee0953ed_6c6a6b7e",
+        "filename": "src/pdr.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 1453,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-10T01:45:39Z",
+      "side": 1,
+      "message": "Can we reflect on the endian conversions here in the context of the endian discussion above?",
+      "revId": "8a74c79d1bec03eecf807dc72bb7413d83da0fba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba12703_94759afe",
+        "filename": "src/pdr.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 1458,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-10T01:45:39Z",
+      "side": 1,
+      "message": "Can we reflect on the endian conversions here in the context of the endian discussion above?\n\nTesting for equality is not enough here. You must check for the overflow. Assuming we don\u0027t require the endianness conversions:\n\n```\nif (repo-\u003esize + new_record-\u003esize \u003c new_record_size) {\n```",
+      "revId": "8a74c79d1bec03eecf807dc72bb7413d83da0fba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3713245e_6d2415da",
+        "filename": "src/pdr.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-10T01:45:39Z",
+      "side": 1,
+      "message": "The comparison doesn\u0027t make sense here as the addition will overflow around to a near-zero value. This should be (again, discarding the endianness conversion thing for the moment):\n\n```\nif (repo-\u003esize + new_record-\u003esize \u003c new_record-\u003esize) {\n```",
+      "revId": "8a74c79d1bec03eecf807dc72bb7413d83da0fba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
