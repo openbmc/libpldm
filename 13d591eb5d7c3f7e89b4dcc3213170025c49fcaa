@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c4e294_a1bce1bb",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4181e459_774898cc",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 56
+      },
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "723dbc17_72089826",
@@ -58,6 +82,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b39ab4c_5e1093af",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "723dbc17_72089826",
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c927e552_e622b9a7",
@@ -71,6 +113,30 @@
       "writtenOn": "2024-05-09T03:00:48Z",
       "side": 1,
       "message": "Okay, given we\u0027ve sorted out some of the other issues, we can start honing in on the API. Rather than all of these individual parameters, why not take a pointer to `struct pldm_query_downstream_identifiers_resp`? So:\n\n```\nint decode_query_downstream_identifiers_resp(const struct pldm_msg *msg,\n        size_t payload_length,\n        struct pldm_query_downstream_identifiers_resp *resp,\n        struct variable_field *downstream_devices);\n```",
+      "range": {
+        "startLine": 903,
+        "startChar": 1,
+        "endLine": 905,
+        "endChar": 40
+      },
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c72bad2_701352ce",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:45:50Z",
+      "side": 1,
+      "message": "Done, yeah, this is more concise, thanks.",
+      "parentUuid": "c927e552_e622b9a7",
       "range": {
         "startLine": 903,
         "startChar": 1,
@@ -106,6 +172,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7b352486_76cffc9b",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42ac4458_8df6b420",
+      "range": {
+        "startLine": 90,
+        "startChar": 3,
+        "endLine": 90,
+        "endChar": 12
+      },
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9a51b625_8f98bdf0",
         "filename": "src/firmware_update.c",
         "patchSetId": 12
@@ -117,6 +207,24 @@
       "writtenOn": "2024-05-09T03:00:48Z",
       "side": 1,
       "message": "If this becomes a wider problem we should look at addressing it. I have ideas, but we don\u0027t need to do anything just yet.",
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01977bcd_34fecadc",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:45:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9a51b625_8f98bdf0",
       "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -134,6 +242,30 @@
       "writtenOn": "2024-05-09T03:00:48Z",
       "side": 1,
       "message": "See comment on the header.\n\nNote that if you make that change the `pldm_msgbuf_extract_p()` invocations below change back to `pldm_msgbuf_extract()`, as you pass the struct member lvalue.",
+      "range": {
+        "startLine": 992,
+        "startChar": 1,
+        "endLine": 994,
+        "endChar": 40
+      },
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2408395_fed4d445",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbac6c89_91f76f60",
       "range": {
         "startLine": 992,
         "startChar": 1,
@@ -163,6 +295,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d788d136_d3a6a99f",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:45:50Z",
+      "side": 1,
+      "message": "Originally, I use the return code to verify the result like this:\n```\nrc \u003d decode_query_downstream_identifiers_resp(\n                     response, responseMsg.size() - hdrSize, \u0026resp_data,\n                     \u0026downstreamDevices);\nEXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);\n```\n\nBut I got the assert failure and the test case containtly fails.\n```\nlibpldm_firmware_update_test: ../src/msgbuf.h:727:\npldm_msgbuf_span_required: Assertion `ctx-\u003eremaining \u003e\u003d 0\u0027 failed.\n```\n\nIt was a little bit unexpected for me, it should work by checking the rc, I changed to use `ASSERT_DEATH` to pass the test case instead, do you have any suggestion for it?",
+      "parentUuid": "de5192b7_f7e61338",
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3438fa7_463b0bb1",
         "filename": "tests/libpldm_firmware_update_test.cpp",
         "patchSetId": 12
@@ -174,6 +324,30 @@
       "writtenOn": "2024-05-09T03:00:48Z",
       "side": 1,
       "message": "Can you please provide an explanation here?",
+      "range": {
+        "startLine": 1629,
+        "startChar": 17,
+        "endLine": 1629,
+        "endChar": 19
+      },
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7496cb21_eb1366fe",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:45:50Z",
+      "side": 1,
+      "message": "The string compares to the error message, the code in `pldm_msgbuf_span_required` does not output any error message, so I let it be empty. [Reference](https://google.github.io/googletest/reference/assertions.html#EXPECT_DEATH)",
+      "parentUuid": "f3438fa7_463b0bb1",
       "range": {
         "startLine": 1629,
         "startChar": 17,
