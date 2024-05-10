@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1173d04_6e88c800",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:40:48Z",
+      "side": 1,
+      "message": "Done, thank you😇",
+      "parentUuid": "36934222_8e1ffcbe",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 49
+      },
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e97baec9_924785aa",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-05-09T02:37:03Z",
       "side": 1,
       "message": "Actually, are we going to use these in practice? I think we can omit them? I just prefer to not add to the library API unless we really need to.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 49
+      },
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "215b7bbd_c9394db6",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:40:48Z",
+      "side": 1,
+      "message": "A use case of `QueryDeviceIdentifier` is at the inventory_manager in [pldmd](https://github.com/openbmc/pldm/blob/ba741d5fd0e0f0f245e74d40caa159581a45479c/fw-update/inventory_manager.cpp#L26).\n```\nauto rc \u003d encode_query_device_identifiers_req(\n            instanceId, PLDM_QUERY_DEVICE_IDENTIFIERS_REQ_BYTES, request);\n        if (rc)\n```\n\nAn alternative solution is that just remove tha parameter of request length in the implementation of encode_req, I think it is reasonable cause the spec don\u0027t have any request data except PLDM header.\n\nPseudo code:\n```\nLIBPLDM_ABI_TESTING\nint encode_query_downstream_devices_req(uint8_t instance_id,\n\t\t\t\t\tstruct pldm_msg *msg)\n{\n\tif (msg \u003d\u003d NULL) {\n\t\treturn PLDM_ERROR_INVALID_DATA;\n\t}\n\n\treturn encode_pldm_header_only(PLDM_REQUEST, instance_id, PLDM_FWUP,\n\t\t\t\t       PLDM_QUERY_DOWNSTREAM_DEVICES, msg);\n}\n```",
+      "parentUuid": "e97baec9_924785aa",
       "range": {
         "startLine": 34,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ac5af5_b786a79d",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:40:48Z",
+      "side": 1,
+      "message": "Done, not sure if the list-style is good to you.",
+      "parentUuid": "7c2f4fba_4a83a56f",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 36
+      },
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d6b661fa_8aea8abf",
@@ -100,6 +172,24 @@
       "writtenOn": "2024-05-09T02:34:21Z",
       "side": 1,
       "message": "Looking good!",
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23d817bd_0b4a7a17",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-10T10:40:48Z",
+      "side": 1,
+      "message": "Thanks for the suggestion.🙂",
+      "parentUuid": "d6b661fa_8aea8abf",
       "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
