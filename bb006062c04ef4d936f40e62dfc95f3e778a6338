@@ -16,6 +16,92 @@
       "message": "Note: There is a copy patchset since the CI build was aborted.",
       "revId": "bb006062c04ef4d936f40e62dfc95f3e778a6338",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd77998a_e79d89ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-13T00:21:06Z",
+      "side": 1,
+      "message": "What do you mean?\n\nFor your awareness, you can manually retrigger CI without re-pushing patches. You need to navigate to the job in jenkins.openbmc.org (usually using the build failure link in the patch comments). From there select \"log in\" up the top-right. Jenkins is configured to use Github authentication in the same way as this Gerrit instance, so no extra credentials are required. From there, on the menu on the left of the Jenkins UI you should see a \"Retrigger\" option.\n\nMark this comment thread as resolved if that works for you.",
+      "parentUuid": "a4da03ac_83769c51",
+      "revId": "bb006062c04ef4d936f40e62dfc95f3e778a6338",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aec61343_ae515080",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-13T00:21:06Z",
+      "side": 1,
+      "message": "Hi, just a few minor comments remaining.",
+      "revId": "bb006062c04ef4d936f40e62dfc95f3e778a6338",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cde610e_0c89b4b8",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-13T00:21:06Z",
+      "side": 1,
+      "message": "This is just an `out` parameter, not `in,out`.",
+      "revId": "bb006062c04ef4d936f40e62dfc95f3e778a6338",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf1fb982_08ebff6b",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1608,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-13T00:21:06Z",
+      "side": 1,
+      "message": "Needs a code comment explaining why you\u0027re using `ASSERT_DEATH()` here.",
+      "revId": "bb006062c04ef4d936f40e62dfc95f3e778a6338",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "031b58ec_d9f3ee5f",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1611,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-13T00:21:06Z",
+      "side": 1,
+      "message": "Empty string needs a comment in the code explaining it.",
+      "revId": "bb006062c04ef4d936f40e62dfc95f3e778a6338",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
