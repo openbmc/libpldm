@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa2cb2b8_283cee98",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-13T00:24:13Z",
+      "side": 1,
+      "message": "Right, yes, I think it\u0027s best if we don\u0027t require unnecessary parameters. Can we please use your pseudo code above?",
+      "parentUuid": "215b7bbd_c9394db6",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 49
+      },
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c2f4fba_4a83a56f",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 6
@@ -149,6 +173,30 @@
       "side": 1,
       "message": "Done, not sure if the list-style is good to you.",
       "parentUuid": "7c2f4fba_4a83a56f",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 36
+      },
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce5c0081_1f515d0a",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-13T00:24:13Z",
+      "side": 1,
+      "message": "That\u0027ll do for now, thanks.",
+      "parentUuid": "74ac5af5_b786a79d",
       "range": {
         "startLine": 37,
         "startChar": 0,
