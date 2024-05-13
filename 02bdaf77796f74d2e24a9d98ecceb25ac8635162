@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a815cefe_950c66f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-13T00:44:32Z",
+      "side": 1,
+      "message": "Hi Varsha, there\u0027s still some confusion regarding endianness, and one of the underflow checks is no-longer correct. I\u0027ve left comments inline.",
+      "revId": "02bdaf77796f74d2e24a9d98ecceb25ac8635162",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11984293_6338e019",
+        "filename": "src/pdr.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-13T00:44:32Z",
+      "side": 1,
+      "message": "Why did you change the condition expression? I don\u0027t think this makes sense anymore. Underflow of unsigned types yields a relatively large result (as opposed to overflow, which yields a relatively small result). Did you try the math yourself?\n\nRegardless, the expression you had previuosly (`repo-\u003esize \u003c record-\u003esize`) correctly determines the possibility of underflow. We shouldn\u0027t need anything more complex (unlike for addition).",
+      "revId": "02bdaf77796f74d2e24a9d98ecceb25ac8635162",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
