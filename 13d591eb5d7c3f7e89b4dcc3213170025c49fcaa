@@ -329,6 +329,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8c46ab8_0ea59018",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T07:19:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1821c2b5_da202631",
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3438fa7_463b0bb1",
@@ -390,6 +408,30 @@
       "side": 1,
       "message": "Again, this comment would be more helpful in the code 😊",
       "parentUuid": "7496cb21_eb1366fe",
+      "range": {
+        "startLine": 1629,
+        "startChar": 17,
+        "endLine": 1629,
+        "endChar": 19
+      },
+      "revId": "13d591eb5d7c3f7e89b4dcc3213170025c49fcaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9cf5568_8007943c",
+        "filename": "tests/libpldm_firmware_update_test.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T07:19:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e7c1405_695038b8",
       "range": {
         "startLine": 1629,
         "startChar": 17,
