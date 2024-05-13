@@ -419,6 +419,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "139c1eb9_19ad2faf",
+        "filename": "src/pdr.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1373,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-05-13T11:59:28Z",
+      "side": 1,
+      "message": "Thanks @arj for the explanation.",
+      "parentUuid": "5c81cce3_93aff2de",
+      "revId": "028381c849cf16293dbf91e2971cc032415540e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76aec7b0_9103631e",
         "filename": "src/pdr.c",
         "patchSetId": 27
