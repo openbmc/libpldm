@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f529f3_326c5581",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T08:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa6b904e_347f6c54",
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d11ae00_b16be174",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-05-09T03:17:26Z",
       "side": 1,
       "message": "As above.",
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68bc8b34_64292b46",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T08:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d11ae00_b16be174",
       "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fe9af4a_3e390401",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T08:48:19Z",
+      "side": 1,
+      "message": "We indeed shouldn\u0027t, clange-tidy told me to do that instead. I tried to keep this macro unchanged, but the error showed up:\n```\n@@ -66,7 +66,7 @@ struct variable_field;\n /** @brief Minimum length of device descriptor, 2 bytes for descriptor type,\n  *         2 bytes for descriptor length and atleast 1 byte of descriptor data\n  */\n-#define PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN    5\n+#define PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN 5\n```\n\nThis macro is used to some stable APIs such as `decode_firmware_device_id_record`.",
+      "parentUuid": "827b5e74_06a7af21",
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03d4d47c_3dc8c017",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 6
@@ -82,6 +136,30 @@
       "writtenOn": "2024-05-09T03:17:26Z",
       "side": 1,
       "message": "Requests don\u0027t have a completion code?",
+      "range": {
+        "startLine": 68,
+        "startChar": 11,
+        "endLine": 68,
+        "endChar": 45
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba72f445_a34ed11f",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T08:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03d4d47c_3dc8c017",
       "range": {
         "startLine": 68,
         "startChar": 11,
@@ -115,6 +193,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb9b7d7_97042643",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T08:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afd34483_e4c7f4de",
+      "range": {
+        "startLine": 74,
+        "startChar": 32,
+        "endLine": 74,
+        "endChar": 42
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b2c16bf_b235c1c7",
@@ -128,6 +230,30 @@
       "writtenOn": "2024-05-09T03:17:26Z",
       "side": 1,
       "message": "This is out-only, so should be `@param[out]`",
+      "range": {
+        "startLine": 971,
+        "startChar": 3,
+        "endLine": 971,
+        "endChar": 87
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c773588_66ad30ad",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T08:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b2c16bf_b235c1c7",
       "range": {
         "startLine": 971,
         "startChar": 3,
@@ -161,6 +287,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4af38aab_f9f75bdd",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T08:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "192c4834_5242c162",
+      "range": {
+        "startLine": 972,
+        "startChar": 3,
+        "endLine": 972,
+        "endChar": 17
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df9ab559_9bd3cd0f",
@@ -174,6 +324,30 @@
       "writtenOn": "2024-05-09T03:17:26Z",
       "side": 1,
       "message": "I can\u0027t accept this sorry, it\u0027s not safe at all. Much better would be to replace all of this with:\n\n```\nreturn pldm_msgbuf_span_remaining(buf,\n    (void **)\u0026downstream_device_param_table-\u003eptr,\n    \u0026downstream_device_param_table-\u003elength);\n```\n\nSomeone can then feed the content of `downstream_device_param_table` into another `pldm_msgbuf` (via another public API) for subsequent decoding.\n\nAgain, the translation between a `struct pldm_msgbuf` and `struct variable_field` is something we can make a bit more ergonomic if necessary.",
+      "range": {
+        "startLine": 1132,
+        "startChar": 1,
+        "endLine": 1155,
+        "endChar": 42
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7ca6b8c_6a0bc8dc",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T08:48:19Z",
+      "side": 1,
+      "message": "Yes, this is totally fair to reject, just like you said, we should not trust untrustworthy input, thank you for the reminding.\n\nI\u0027ve changed it into `pldm_msgbuf_span_remaining`, leave the data verification to users, and modifed the test case to verify the invalid data length of the variable_field:\n\n```\nTEST(GetDownstreamFirmwareParameters, decodeResponseInvalidLength)\n{\n    ...skip\n    while (resp_data.downstream_device_count-- \u0026\u0026 (paramTableLen \u003e 0))\n    {\n        rc \u003d decode_get_firmware_parameters_resp_comp_entry(\n            currentDevice, paramTableLen, \u0026compEntry, \u0026activeCompVerStr,\n            \u0026pendingCompVerStr);\n        if (rc)\n        {\n            break;\n        }\n    }\n\n    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);\n}\n```\nFor the subsequent decoding, `downstream_device_param_table` is a series of `Firmware Parameter Table` defined in DSP0267_1.1.0, the decode function has been implemented already, which is `decode_get_firmware_parameters_resp_comp_entry`.\n\nPlease let me know if you have any suggestions, thanks.",
+      "parentUuid": "df9ab559_9bd3cd0f",
       "range": {
         "startLine": 1132,
         "startChar": 1,
