@@ -136,6 +136,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7c670c7_734c5073",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T07:17:10Z",
+      "side": 1,
+      "message": "Sure, done and removed the unneeded marco.",
+      "parentUuid": "aa2cb2b8_283cee98",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 49
+      },
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c2f4fba_4a83a56f",
@@ -197,6 +221,30 @@
       "side": 1,
       "message": "That\u0027ll do for now, thanks.",
       "parentUuid": "74ac5af5_b786a79d",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 36
+      },
+      "revId": "f91c4e36fc3109454eb8d4aca8cf9b815c88ac77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56a38d44_2c3eea55",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-13T07:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce5c0081_1f515d0a",
       "range": {
         "startLine": 37,
         "startChar": 0,
