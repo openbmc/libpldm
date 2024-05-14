@@ -16,6 +16,24 @@
       "message": "Hi Tal, we have some documentation covering running the CI container locally if that helps with testing:\n\nhttps://github.com/openbmc/docs/blob/master/testing/local-ci-build.md\n\nHowever, you can also smoke test it with something like `meson setup -Dabi-compliance-check\u003ddisabled build \u0026\u0026 meson test -C build`.\n\nHopefully one of those helps 😊",
       "revId": "860de8af79f09cd8dd6e72a4663f015ca782ee34",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74dda13d_390b68ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-14T08:55:35Z",
+      "side": 1,
+      "message": "Thanks! I ran the CI locally, it should pass now.",
+      "parentUuid": "2f4ee33c_dad9f127",
+      "revId": "860de8af79f09cd8dd6e72a4663f015ca782ee34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
