@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86c15c11_877f714e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-14T00:47:20Z",
+      "side": 1,
+      "message": "Hello, we\u0027re down to a few straight-forward comments inline. Thanks for iterating on the patch!",
+      "revId": "6572d2e5778b9365b6569cc01b31d29c3ec04eb9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb360887_3c85bec2",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-14T00:47:20Z",
+      "side": 1,
+      "message": "Actually, on further thought this should go in `base.h` instead, as the base spec (DSP0240) is where the `ERROR_UNSUPPORTED_PLDM_CMD` error code is defined. Moving this now before we merge the patch means that we don\u0027t have people having to swap `#include`s around later on.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 44
+      },
+      "revId": "6572d2e5778b9365b6569cc01b31d29c3ec04eb9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab240135_7c7da445",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-14T00:47:20Z",
+      "side": 1,
+      "message": "Do we need this any more?",
+      "revId": "6572d2e5778b9365b6569cc01b31d29c3ec04eb9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4a21ee9_706573e2",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-14T00:47:20Z",
+      "side": 1,
+      "message": "This should be `out`, not `in,out`.",
+      "range": {
+        "startLine": 794,
+        "startChar": 11,
+        "endLine": 794,
+        "endChar": 17
+      },
+      "revId": "6572d2e5778b9365b6569cc01b31d29c3ec04eb9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
