@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce8539b_dbb9cbd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-14T01:01:22Z",
+      "side": 1,
+      "message": "Hello, just a couple of minor requests left. Thanks for iterating on the patch.",
+      "revId": "25be91f73e3f2e64244cb6b8544dfebd2c63fd44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5615c3a_66f255be",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-14T01:01:22Z",
+      "side": 1,
+      "message": "Can you mention the relationship to Table 17 as well?",
+      "revId": "25be91f73e3f2e64244cb6b8544dfebd2c63fd44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e06670_044170ab",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-14T01:01:22Z",
+      "side": 1,
+      "message": "This is should be `out`, not `in,out`.",
+      "range": {
+        "startLine": 879,
+        "startChar": 10,
+        "endLine": 879,
+        "endChar": 16
+      },
+      "revId": "25be91f73e3f2e64244cb6b8544dfebd2c63fd44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
