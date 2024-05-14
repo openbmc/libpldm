@@ -123,6 +123,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2120d506_e4be0f2f",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-14T01:21:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fe9af4a_3e390401",
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03d4d47c_3dc8c017",
@@ -348,6 +366,30 @@
       "side": 1,
       "message": "Yes, this is totally fair to reject, just like you said, we should not trust untrustworthy input, thank you for the reminding.\n\nI\u0027ve changed it into `pldm_msgbuf_span_remaining`, leave the data verification to users, and modifed the test case to verify the invalid data length of the variable_field:\n\n```\nTEST(GetDownstreamFirmwareParameters, decodeResponseInvalidLength)\n{\n    ...skip\n    while (resp_data.downstream_device_count-- \u0026\u0026 (paramTableLen \u003e 0))\n    {\n        rc \u003d decode_get_firmware_parameters_resp_comp_entry(\n            currentDevice, paramTableLen, \u0026compEntry, \u0026activeCompVerStr,\n            \u0026pendingCompVerStr);\n        if (rc)\n        {\n            break;\n        }\n    }\n\n    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);\n}\n```\nFor the subsequent decoding, `downstream_device_param_table` is a series of `Firmware Parameter Table` defined in DSP0267_1.1.0, the decode function has been implemented already, which is `decode_get_firmware_parameters_resp_comp_entry`.\n\nPlease let me know if you have any suggestions, thanks.",
       "parentUuid": "df9ab559_9bd3cd0f",
+      "range": {
+        "startLine": 1132,
+        "startChar": 1,
+        "endLine": 1155,
+        "endChar": 42
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2c25bc9_a319f912",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-14T01:21:23Z",
+      "side": 1,
+      "message": "I don\u0027t think that works, because while Table 20 says to refer to Table 14, it\u0027s actually table 21 that\u0027s relevant. Table 21 has an extra parameter at the front (`DownstreamDeviceIndex`), and so you need a decoding function specific to the `GetDOwnstreamFirmwareParameters` response. However, aside from decoding that (extra) first field, I think you can then call `decode_get_firmware_parameters_resp_comp_entry()` in the implementation. Please confirm my understanding for yourself and respond in this thread.",
+      "parentUuid": "d7ca6b8c_6a0bc8dc",
       "range": {
         "startLine": 1132,
         "startChar": 1,
