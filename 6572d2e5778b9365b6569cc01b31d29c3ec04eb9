@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "520539b3_c17f6a3c",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-14T04:32:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb360887_3c85bec2",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 44
+      },
+      "revId": "6572d2e5778b9365b6569cc01b31d29c3ec04eb9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab240135_7c7da445",
@@ -58,6 +82,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e974343b_f9c01c8d",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-14T04:32:00Z",
+      "side": 1,
+      "message": "This was revised by clang-tidy, the error disappeared after I moved `ERROR_UNSUPPORTED_PLDM_CMD` to base.h. It should be good now, thanks.",
+      "parentUuid": "ab240135_7c7da445",
+      "revId": "6572d2e5778b9365b6569cc01b31d29c3ec04eb9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4a21ee9_706573e2",
@@ -71,6 +113,30 @@
       "writtenOn": "2024-05-14T00:47:20Z",
       "side": 1,
       "message": "This should be `out`, not `in,out`.",
+      "range": {
+        "startLine": 794,
+        "startChar": 11,
+        "endLine": 794,
+        "endChar": 17
+      },
+      "revId": "6572d2e5778b9365b6569cc01b31d29c3ec04eb9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc2172e1_9cd0d277",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-05-14T04:32:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4a21ee9_706573e2",
       "range": {
         "startLine": 794,
         "startChar": 11,
