@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5dfa903_7993c46f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-14T04:45:04Z",
+      "side": 1,
+      "message": "So close!",
+      "revId": "dc2f652b94ddda13450f9e2f7a0a91826ef4b1e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e27a857c_b814345e",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-14T04:45:04Z",
+      "side": 1,
+      "message": "Very much a nitpick, but can you indent this properly? There should be one space at the start of the line so the stars line up.",
+      "revId": "dc2f652b94ddda13450f9e2f7a0a91826ef4b1e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
