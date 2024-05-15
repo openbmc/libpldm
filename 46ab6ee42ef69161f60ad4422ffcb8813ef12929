@@ -398,6 +398,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "45974f8e_46997e32",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-15T09:24:08Z",
+      "side": 1,
+      "message": "changed the name of variable and its descriptin. Agreed keeping the word updated in name does not make sense for both cases",
+      "parentUuid": "ea5f01e8_4484b1f8",
+      "range": {
+        "startLine": 464,
+        "startChar": 12,
+        "endLine": 464,
+        "endChar": 50
+      },
+      "revId": "46ab6ee42ef69161f60ad4422ffcb8813ef12929",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1d23d68_794fec38",
         "filename": "src/pdr.c",
         "patchSetId": 18

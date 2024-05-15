@@ -686,6 +686,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcc930fe_4d156064",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-15T09:24:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99881deb_376f1d4c",
+      "range": {
+        "startLine": 476,
+        "startChar": 1,
+        "endLine": 476,
+        "endChar": 23
+      },
+      "revId": "97391e0779b93346c5beccb74647afab4e9036bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "020d6dbf_0678e6b4",

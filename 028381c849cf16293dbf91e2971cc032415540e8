@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4acb62bc_cb881947",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-15T09:24:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba293a77_f9f9a138",
+      "range": {
+        "startLine": 455,
+        "startChar": 88,
+        "endLine": 455,
+        "endChar": 89
+      },
+      "revId": "028381c849cf16293dbf91e2971cc032415540e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22036b8b_0dc806c2",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-05-09T05:01:32Z",
       "side": 1,
       "message": "This shouldn\u0027t mention host, right?",
+      "range": {
+        "startLine": 457,
+        "startChar": 38,
+        "endLine": 457,
+        "endChar": 42
+      },
+      "revId": "028381c849cf16293dbf91e2971cc032415540e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5914a63b_a5339106",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-15T09:24:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22036b8b_0dc806c2",
       "range": {
         "startLine": 457,
         "startChar": 38,
@@ -110,6 +158,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f75f3c0_c463a40b",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-15T09:24:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1de1883_768c323b",
+      "range": {
+        "startLine": 462,
+        "startChar": 64,
+        "endLine": 462,
+        "endChar": 73
+      },
+      "revId": "028381c849cf16293dbf91e2971cc032415540e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b9b203c_208abf4d",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-15T09:24:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cc9280a_ee0ae689",
+      "range": {
+        "startLine": 462,
+        "startChar": 39,
+        "endLine": 462,
+        "endChar": 46
+      },
+      "revId": "028381c849cf16293dbf91e2971cc032415540e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ada8bc4f_df0ba02e",
@@ -123,6 +219,30 @@
       "writtenOn": "2024-05-09T05:01:32Z",
       "side": 1,
       "message": "Typo: contained",
+      "range": {
+        "startLine": 477,
+        "startChar": 68,
+        "endLine": 477,
+        "endChar": 77
+      },
+      "revId": "028381c849cf16293dbf91e2971cc032415540e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "887f88b2_c627b049",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-15T09:24:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ada8bc4f_df0ba02e",
       "range": {
         "startLine": 477,
         "startChar": 68,
@@ -430,6 +550,24 @@
       "writtenOn": "2024-05-13T11:59:28Z",
       "side": 1,
       "message": "Thanks @arj for the explanation.",
+      "parentUuid": "5c81cce3_93aff2de",
+      "revId": "028381c849cf16293dbf91e2971cc032415540e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64a6f14e_95863560",
+        "filename": "src/pdr.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1373,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-15T09:24:08Z",
+      "side": 1,
+      "message": "removed endianess conversion for all members of pldm_pdr_record",
       "parentUuid": "5c81cce3_93aff2de",
       "revId": "028381c849cf16293dbf91e2971cc032415540e8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
