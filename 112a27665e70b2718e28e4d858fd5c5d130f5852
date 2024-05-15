@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6ae3692_1938e66e",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 4866,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-15T02:05:14Z",
+      "side": 1,
+      "message": "Hate to point this out, but can we put the missing `e` in `Requst` here?",
+      "range": {
+        "startLine": 4866,
+        "startChar": 8,
+        "endLine": 4866,
+        "endChar": 25
+      },
+      "revId": "112a27665e70b2718e28e4d858fd5c5d130f5852",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

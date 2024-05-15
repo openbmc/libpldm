@@ -63,6 +63,30 @@
       },
       "revId": "4a7f410224b3d04cee46bd6d7f7ca8600abd7b0b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51925a12_a5a1f1c1",
+        "filename": "tests/libpldm_platform_test.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 4876,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-15T02:05:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e939a88a_9e0a93b9",
+      "range": {
+        "startLine": 4876,
+        "startChar": 4,
+        "endLine": 4876,
+        "endChar": 54
+      },
+      "revId": "4a7f410224b3d04cee46bd6d7f7ca8600abd7b0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
