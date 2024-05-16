@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1abe5309_259604c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:43:58Z",
+      "side": 1,
+      "message": "Hi Tal, I had a bit of a half-baked thought while giving this a (hopefully) final look. As it stands we\u0027re just waiting on the CLA business to be sorted out.",
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e01c1f4_0640feab",
+        "filename": "src/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2597,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:43:58Z",
+      "side": 1,
+      "message": "I do wonder whether it would be more effective to define the API like:\n\n```\nint decode_get_state_effecter_states_resp(const struct pldm_msg *msg,\n    size_t payload_length,\n    uint8_t *completion_code,\n    uint8_t *composite_effecter_count,\n    struct variable_field *field)\n```\n\nand then add a second API to decode from the `struct variable_field *field` out-parameter into an array of `get_effecter_state_field` objects. The split allows the caller to allocate exactly the memory required relative to `composite_effecter_count`.\n\nI\u0027m marking this comment as resolved because maybe we answer the question by gaining experience using the API in anger, and as its `LIBPLDM_ABI_TESTING` we can come back and fix it if needed. However, I\u0027m interested in your thoughts.",
+      "range": {
+        "startLine": 2596,
+        "startChar": 1,
+        "endLine": 2597,
+        "endChar": 39
+      },
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
