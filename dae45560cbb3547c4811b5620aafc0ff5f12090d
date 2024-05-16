@@ -20,6 +20,52 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6f5a8204_91ec63a0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:46:53Z",
+      "side": 1,
+      "message": "I guess to go with the other API-related comment I left in the implementation, we could pass `struct pldm_get_state_effecter_states_resp *` here instead of the two individual arguments.",
+      "range": {
+        "startLine": 1702,
+        "startChar": 1,
+        "endLine": 1703,
+        "endChar": 41
+      },
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a799e6e8_64bee680",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 1721,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:46:53Z",
+      "side": 1,
+      "message": "As above.",
+      "range": {
+        "startLine": 1720,
+        "startChar": 2,
+        "endLine": 1721,
+        "endChar": 35
+      },
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2e01c1f4_0640feab",
         "filename": "src/platform.c",
         "patchSetId": 16
