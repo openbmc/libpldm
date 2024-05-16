@@ -43,6 +43,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8dc132f_33153b29",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-16T08:27:35Z",
+      "side": 1,
+      "message": "It should be fine if it can avoid resource cleanup, but I will add a comment there to explain the overflow check for better understanding. Hope that\u0027s ok",
+      "parentUuid": "69fbe53e_6fae702d",
+      "range": {
+        "startLine": 1355,
+        "startChar": 1,
+        "endLine": 1358,
+        "endChar": 2
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124f2915_840478b7",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-16T08:27:35Z",
+      "side": 1,
+      "message": "I removed this , because this gets assigned with the right value when pldm_pdr_replace_record is called.",
+      "range": {
+        "startLine": 1367,
+        "startChar": 1,
+        "endLine": 1367,
+        "endChar": 25
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf88326c_89e0a099",
         "filename": "src/pdr.c",
         "patchSetId": 33
@@ -54,6 +101,30 @@
       "writtenOn": "2024-05-16T00:34:16Z",
       "side": 1,
       "message": "Okay, I did ask the `if (...)` to be put back, but the condition needs some work. I think it should be:\n\n```\nif (header_length + sizeof(pldm_entity) \u003e UINT16_MAX) {\n```\n\nMark as resolved if this makes sense and you\u0027ve applied the change.",
+      "range": {
+        "startLine": 1390,
+        "startChar": 43,
+        "endLine": 1390,
+        "endChar": 56
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2176b4e_5ac64360",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1390,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-16T08:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf88326c_89e0a099",
       "range": {
         "startLine": 1390,
         "startChar": 43,
@@ -87,6 +158,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0350c94_1b40a2ca",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1462,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-16T08:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d4928ed_f04fd5d2",
+      "range": {
+        "startLine": 1443,
+        "startChar": 1,
+        "endLine": 1462,
+        "endChar": 44
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7969d434_50fd26a6",
@@ -100,6 +195,24 @@
       "writtenOn": "2024-05-16T00:34:16Z",
       "side": 1,
       "message": "We already did this on line 1368.",
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ec81f0f_dc43bd74",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-16T08:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7969d434_50fd26a6",
       "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -122,6 +235,53 @@
         "startChar": 1,
         "endLine": 1513,
         "endChar": 52
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24baca58_d483a368",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1513,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-16T08:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7336203e_fed071cf",
+      "range": {
+        "startLine": 1508,
+        "startChar": 1,
+        "endLine": 1513,
+        "endChar": 52
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "698090ab_9afa0a85",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-16T08:27:35Z",
+      "side": 1,
+      "message": "I moved it to the beginning so that we can avoid resource cleanup here as well. This is an input parameter so I think it makes sense to do this check in the beginning of the function.",
+      "range": {
+        "startLine": 1527,
+        "startChar": 2,
+        "endLine": 1530,
+        "endChar": 2
       },
       "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
@@ -152,6 +312,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7a95440_3696a31c",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1539,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-16T08:27:35Z",
+      "side": 1,
+      "message": "Assigning values to pldm_pdr_record members such as is_remote, and next should be done in the end because these come after data in the structure definition. \ntypedef struct pldm_pdr_record {\n        uint32_t record_handle;\n        uint32_t size;\n        uint8_t *data;\n        struct pldm_pdr_record *next;\n        bool is_remote;\n        ...\n\nSo I have rearranged the same in both functions",
+      "parentUuid": "b969ff73_65511452",
+      "range": {
+        "startLine": 1537,
+        "startChar": 1,
+        "endLine": 1539,
+        "endChar": 2
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "557374f8_b6f2f4ca",
         "filename": "src/pdr.c",
         "patchSetId": 33
@@ -169,6 +353,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa0c70a7_c1f2f029",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1545,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-16T08:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "557374f8_b6f2f4ca",
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "837ddad7_0296563b",
         "filename": "src/pdr.c",
         "patchSetId": 33
@@ -180,6 +382,30 @@
       "writtenOn": "2024-05-16T00:34:16Z",
       "side": 1,
       "message": "This should at least be `sizeof(*parent)` (for maintenance purposes).",
+      "range": {
+        "startLine": 1567,
+        "startChar": 9,
+        "endLine": 1567,
+        "endChar": 35
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f29c413_cdbc6c99",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1567,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-16T08:27:35Z",
+      "side": 1,
+      "message": "made the actual size for both msgbuf_init as sizeof(*parent) and sizeof(*entity) but kept the minimum size as sizeof(struct pldm_entity).",
+      "parentUuid": "837ddad7_0296563b",
       "range": {
         "startLine": 1567,
         "startChar": 9,
