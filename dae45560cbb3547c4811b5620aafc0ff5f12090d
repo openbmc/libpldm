@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2c49ecc5_c6498e11",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-16T10:38:59Z",
+      "side": 1,
+      "message": "Hi Andrew, I actually it\u0027s a good and feasible idea, but I would also suggest, since we don\u0027t rely on `sizeof` anymore, that we change `get_effecter_state_field field[]` inside `struct pldm_get_state_effecter_states_resp` to `get_effecter_state_field *field` which should make allocating memory in C++ much easier without any additional API needs.",
+      "parentUuid": "6f5a8204_91ec63a0",
+      "range": {
+        "startLine": 1702,
+        "startChar": 1,
+        "endLine": 1703,
+        "endChar": 41
+      },
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a799e6e8_64bee680",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 16
