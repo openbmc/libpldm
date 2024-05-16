@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf4fd10a_665d4416",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:34:16Z",
+      "side": 1,
+      "message": "Hi Varsha, I\u0027m glad we\u0027ve cleared up the endianness concerns, hopefully that\u0027s a weight off of everyone\u0027s shoulders. Now that we\u0027ve cleaned things up further a few more concerns have become visible, none of them are quite at the scale of the endianness problem, thought there is a memory-corruption concern. I\u0027ve left comments inline.",
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69fbe53e_6fae702d",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:34:16Z",
+      "side": 1,
+      "message": "We can do this overflow test prior to the `malloc()` on line 1350, and save ourselves the resource cleanup.\n\nWhat are your feelings about the trade-offs of that idea vs the proximity to the actual use below on line 1359?",
+      "range": {
+        "startLine": 1355,
+        "startChar": 1,
+        "endLine": 1358,
+        "endChar": 2
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf88326c_89e0a099",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1390,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:34:16Z",
+      "side": 1,
+      "message": "Okay, I did ask the `if (...)` to be put back, but the condition needs some work. I think it should be:\n\n```\nif (header_length + sizeof(pldm_entity) \u003e UINT16_MAX) {\n```\n\nMark as resolved if this makes sense and you\u0027ve applied the change.",
+      "range": {
+        "startLine": 1390,
+        "startChar": 43,
+        "endLine": 1390,
+        "endChar": 56
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d4928ed_f04fd5d2",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1462,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:34:16Z",
+      "side": 1,
+      "message": "Perhaps we can pull this out to a static function? `pldm_pdr_replace_record()`?",
+      "range": {
+        "startLine": 1443,
+        "startChar": 1,
+        "endLine": 1462,
+        "endChar": 44
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7969d434_50fd26a6",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:34:16Z",
+      "side": 1,
+      "message": "We already did this on line 1368.",
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7336203e_fed071cf",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1513,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:34:16Z",
+      "side": 1,
+      "message": "Is this not `PDR_MIN_SIZE`?",
+      "range": {
+        "startLine": 1508,
+        "startChar": 1,
+        "endLine": 1513,
+        "endChar": 52
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b969ff73_65511452",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1539,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:34:16Z",
+      "side": 1,
+      "message": "I think this must be done only after we\u0027ve completed any actions that have the possibility of failing. That is, it should be almost the last thing we do. Otherwise you\u0027re going to leave a dangling pointer e.g. if the repo size update would overflow on lines 1540-1543 (as an example).",
+      "range": {
+        "startLine": 1537,
+        "startChar": 1,
+        "endLine": 1539,
+        "endChar": 2
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "557374f8_b6f2f4ca",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1545,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:34:16Z",
+      "side": 1,
+      "message": "Overflow check.",
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "837ddad7_0296563b",
+        "filename": "src/pdr.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1567,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-16T00:34:16Z",
+      "side": 1,
+      "message": "This should at least be `sizeof(*parent)` (for maintenance purposes).",
+      "range": {
+        "startLine": 1567,
+        "startChar": 9,
+        "endLine": 1567,
+        "endChar": 35
+      },
+      "revId": "3f0f3639b03dd8f6d0bc9beb36a89f629cca7583",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
