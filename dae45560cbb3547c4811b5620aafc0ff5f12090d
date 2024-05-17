@@ -65,6 +65,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fd9bf0d_2f51bf6c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-17T00:25:49Z",
+      "side": 1,
+      "message": "Yeah, I agree. Are you happy to rework that (marking this as unresolved so we don\u0027t lose it)?",
+      "parentUuid": "2c49ecc5_c6498e11",
+      "range": {
+        "startLine": 1702,
+        "startChar": 1,
+        "endLine": 1703,
+        "endChar": 41
+      },
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a799e6e8_64bee680",
