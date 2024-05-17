@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "025f6fd3_d54241b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-17T00:19:50Z",
+      "side": 1,
+      "message": "Hi Varsha, the implementation of the extracted `pldm_pdr_replace_record()` made me look more closely at its implementation, and I\u0027ve found a few concerns. I\u0027ve left comments inline.",
+      "revId": "c44b93ec1f602eb8898af9f850ad672a8be7ed98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b821b13f_756da383",
+        "filename": "src/pdr.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1310,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-17T00:19:50Z",
+      "side": 1,
+      "message": "Are any of these actually out-parameters? Surely this can be re-written with them as in-only, removing the tedium and risk from the implementation?\n\nLet me try (also accounting for the following comments below):\n\n```\nstatic int pldm_pdr_replace_record(pldm_pdr *repo, pldm_pdr_record *record, pldm_pdr_record *prev, pldm_pdr_record *new_record) {\n    if (repo-\u003esize \u003c record-\u003esize) {\n        return -EOVERFLOW;\n    }\n    \n    if (repo-\u003esize + new_record-\u003esize \u003c new_record-\u003esize) {\n        return -EOVERFLOW;\n    }\n    \n    if (repo-\u003efirst \u003d\u003d record) {\n        repo-\u003efirst \u003d new_record;\n    } else {\n        prev-\u003enext \u003d new_record;\n    }\n    \n    new_record-\u003enext \u003d record-\u003enext;\n    \n    if (repo-\u003elast \u003d\u003d record) {\n        repo-\u003elast \u003d new_record;\n    }\n    \n    repo-\u003esize -\u003d record-\u003esize;\n    repo-\u003esize +\u003d new_record-\u003esize;\n    \n    return 0;\n}\n```",
+      "range": {
+        "startLine": 1308,
+        "startChar": 35,
+        "endLine": 1310,
+        "endChar": 35
+      },
+      "revId": "c44b93ec1f602eb8898af9f850ad672a8be7ed98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "441fde92_163502bc",
+        "filename": "src/pdr.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-17T00:19:50Z",
+      "side": 1,
+      "message": "This is done in both branches, and so shouldn\u0027t be conditional.",
+      "revId": "c44b93ec1f602eb8898af9f850ad672a8be7ed98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1314aa4_b962e0ed",
+        "filename": "src/pdr.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-17T00:19:50Z",
+      "side": 1,
+      "message": "We must do this test before we manipulate any pointers, otherwise we\u0027re going to get list corruption.",
+      "revId": "c44b93ec1f602eb8898af9f850ad672a8be7ed98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a0033da_c7cee4fb",
+        "filename": "src/pdr.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1325,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-17T00:19:50Z",
+      "side": 1,
+      "message": "Missing `return rc;`",
+      "revId": "c44b93ec1f602eb8898af9f850ad672a8be7ed98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15298160_870107b5",
+        "filename": "src/pdr.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1325,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-17T00:19:50Z",
+      "side": 1,
+      "message": "Why `-ERANGE` here and `-EOVERFLOW` below? It should be consistent. `-EOVERFLOW` seems best?",
+      "revId": "c44b93ec1f602eb8898af9f850ad672a8be7ed98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d191dc_40567923",
+        "filename": "src/pdr.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1328,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-17T00:19:50Z",
+      "side": 1,
+      "message": "Same here - this test must be done before any pointer manipulation.",
+      "revId": "c44b93ec1f602eb8898af9f850ad672a8be7ed98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d393204_df307101",
+        "filename": "src/pdr.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-17T00:19:50Z",
+      "side": 1,
+      "message": "Why here on line 1477, and not somewhere around 1397? I think that putting it here violates the [principle of least surprise](https://en.wikipedia.org/wiki/Principle_of_least_astonishment), and would prefer it be moved.",
+      "revId": "c44b93ec1f602eb8898af9f850ad672a8be7ed98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4583446_df1e4667",
+        "filename": "src/pdr.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-17T00:19:50Z",
+      "side": 1,
+      "message": "Sorry, I should have suggested you extract this too. This is `static int pldm_pdr_insert_record()`, right?\n\nPlease pay attention to all the comments I made on `pldm_pdr_replace_record()`, as they apply to this section of code as well.",
+      "range": {
+        "startLine": 1615,
+        "startChar": 1,
+        "endLine": 1629,
+        "endChar": 22
+      },
+      "revId": "c44b93ec1f602eb8898af9f850ad672a8be7ed98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d340262b_e37d406a",
+        "filename": "src/pdr.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1631,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-17T00:19:50Z",
+      "side": 1,
+      "message": "See comment on line 1477",
+      "revId": "c44b93ec1f602eb8898af9f850ad672a8be7ed98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
