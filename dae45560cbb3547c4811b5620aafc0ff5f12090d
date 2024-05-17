@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ef770d2_fac5c0d2",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1000929
+      },
+      "writtenOn": "2024-05-17T07:34:14Z",
+      "side": 1,
+      "message": "__attribute__((packed)) is not required ?",
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6f5a8204_91ec63a0",
@@ -112,6 +129,40 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "91f402b8_21ac4799",
+        "filename": "src/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2528,
+      "author": {
+        "id": 1000929
+      },
+      "writtenOn": "2024-05-17T07:34:14Z",
+      "side": 1,
+      "message": "check resp for nullptr",
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "587685d4_49b12afa",
+        "filename": "src/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2541,
+      "author": {
+        "id": 1000929
+      },
+      "writtenOn": "2024-05-17T07:34:14Z",
+      "side": 1,
+      "message": "validate payload_Length ?",
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2e01c1f4_0640feab",
@@ -131,6 +182,40 @@
         "endLine": 2597,
         "endChar": 39
       },
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d7cb882_67b87af9",
+        "filename": "src/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2657,
+      "author": {
+        "id": 1000929
+      },
+      "writtenOn": "2024-05-17T07:34:14Z",
+      "side": 1,
+      "message": "add check for filed also",
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aa75b31_bcb0af9c",
+        "filename": "src/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1000929
+      },
+      "writtenOn": "2024-05-17T07:34:14Z",
+      "side": 1,
+      "message": "nit :- avoid using magic numbers",
       "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
