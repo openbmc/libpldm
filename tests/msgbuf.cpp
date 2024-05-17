@@ -143,6 +143,20 @@ TEST(msgbuf, extract_over_uint8)
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
+TEST(msgbuf, extract_under_uint8)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint8_t buf[1] = {};
+    uint8_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN;
+    EXPECT_NE(pldm_msgbuf_extract_uint8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
+}
+
 TEST(msgbuf, extract_one_int8)
 {
     struct pldm_msgbuf _ctx;
@@ -169,6 +183,20 @@ TEST(msgbuf, extract_over_int8)
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
+TEST(msgbuf, extract_under_int8)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint8_t buf[1] = {};
+    int8_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN;
+    EXPECT_NE(pldm_msgbuf_extract_int8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
+}
+
 TEST(msgbuf, extract_one_uint16)
 {
     struct pldm_msgbuf _ctx;
@@ -181,6 +209,20 @@ TEST(msgbuf, extract_one_uint16)
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctx, &val), PLDM_SUCCESS);
     EXPECT_EQ(val, 0x5aa5);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
+}
+
+TEST(msgbuf, extract_under_uint16)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint16_t buf[1] = {};
+    uint16_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_extract_uint16(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(msgbuf, extract_over_uint16)
@@ -221,6 +263,20 @@ TEST(msgbuf, extract_over_int16)
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
+TEST(msgbuf, extract_under_int16)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    int16_t buf[1] = {};
+    int16_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_extract_int16(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
+}
+
 TEST(msgbuf, extract_one_uint32)
 {
     struct pldm_msgbuf _ctx;
@@ -247,6 +303,20 @@ TEST(msgbuf, extract_over_uint32)
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
+TEST(msgbuf, extract_under_uint32)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint32_t buf[1] = {};
+    uint32_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_extract_uint32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
+}
+
 TEST(msgbuf, extract_one_int32)
 {
     struct pldm_msgbuf _ctx;
@@ -269,6 +339,20 @@ TEST(msgbuf, extract_over_int32)
     int32_t val;
 
     ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_int32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
+}
+
+TEST(msgbuf, extract_under_int32)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    int32_t buf[1] = {};
+    int32_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
     EXPECT_NE(pldm_msgbuf_extract_int32(ctx, &val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
@@ -301,6 +385,20 @@ TEST(msgbuf, extract_over_real32)
     real32_t val;
 
     ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_real32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
+}
+
+TEST(msgbuf, extract_under_real32)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    real32_t buf[1] = {};
+    real32_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
     EXPECT_NE(pldm_msgbuf_extract_real32(ctx, &val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
@@ -341,6 +439,19 @@ TEST(msgbuf, extract_array_uint8_buf1_req2)
     ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
     EXPECT_NE(pldm_msgbuf_extract_array_uint8(ctx, arr, sizeof(arr)),
               PLDM_SUCCESS);
+    ASSERT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
+}
+
+TEST(msgbuf, extract_under_array_uint8)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    uint8_t buf[1] = {};
+    uint8_t arr[1];
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN;
+    EXPECT_NE(pldm_msgbuf_extract_array_uint8(ctx, arr, 1), PLDM_SUCCESS);
     ASSERT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -410,6 +521,20 @@ TEST(msgbuf, pldm_msgbuf_insert_int32_bad)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
+TEST(msgbuf, insert_under_int32)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    int32_t buf[1] = {};
+    int32_t val = 0;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_insert_int32(ctx, val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
+}
+
 TEST(msgbuf, pldm_msgbuf_insert_uint32_good)
 {
     struct pldm_msgbuf _ctx;
@@ -439,6 +564,20 @@ TEST(msgbuf, pldm_msgbuf_insert_uint32_bad)
     auto rc = pldm_msgbuf_insert_uint32(NULL, src);
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(msgbuf, insert_under_uint32)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint32_t buf[1] = {};
+    uint32_t val = 0;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_insert_uint32(ctx, val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(msgbuf, pldm_msgbuf_insert_uint16_good)
@@ -472,6 +611,20 @@ TEST(msgbuf, pldm_msgbuf_insert_uint16_bad)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
+TEST(msgbuf, insert_under_uint16)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint16_t buf[1] = {};
+    uint16_t val = 0;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_insert_uint16(ctx, val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
+}
+
 TEST(msgbuf, pldm_msgbuf_insert_int16_good)
 {
     struct pldm_msgbuf _ctx;
@@ -501,6 +654,20 @@ TEST(msgbuf, pldm_msgbuf_insert_int16_bad)
     auto rc = pldm_msgbuf_insert_int16(NULL, src);
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(msgbuf, insert_under_int16)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    int16_t buf[1] = {};
+    int16_t val = 0;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_insert_int16(ctx, val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(msgbuf, pldm_msgbuf_insert_uint8_good)
@@ -534,6 +701,20 @@ TEST(msgbuf, pldm_msgbuf_insert_uint8_bad)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
+TEST(msgbuf, insert_under_uint8)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint8_t buf[1] = {};
+    uint8_t val = 0;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_insert_uint8(ctx, val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
+}
+
 TEST(msgbuf, pldm_msgbuf_insert_int8_good)
 {
     struct pldm_msgbuf _ctx;
@@ -563,6 +744,20 @@ TEST(msgbuf, pldm_msgbuf_insert_int8_bad)
     auto rc = pldm_msgbuf_insert_int8(NULL, src);
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(msgbuf, insert_under_int8)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    int8_t buf[1] = {};
+    int8_t val = 0;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_insert_int8(ctx, val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(msgbuf, pldm_msgbuf_insert_array_uint8_good)
@@ -603,6 +798,21 @@ TEST(msgbuf, pldm_msgbuf_insert_array_uint8_bad)
     EXPECT_EQ(pldm_msgbuf_insert_array_uint8(ctx, NULL, sizeof(src)),
               PLDM_ERROR_INVALID_DATA);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
+}
+
+TEST(msgbuf, insert_under_array_uint8)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint8_t buf[1] = {};
+    uint8_t val[1] = {0};
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_insert_array_uint8(ctx, val, sizeof(val)),
+              PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(msgbuf, pldm_msgbuf_span_required_good)
@@ -659,6 +869,20 @@ TEST(msgbuf, pldm_msgbuf_span_required_bad)
 
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
+}
+
+TEST(msgbuf, span_required_under)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint8_t buf[1] = {};
+    void* cursor = nullptr;
+
+    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, buf, 0), PLDM_SUCCESS);
+    ctx->remaining = INTMAX_MIN;
+    EXPECT_NE(pldm_msgbuf_span_required(ctx, 1, &cursor), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(msgbuf, pldm_msgbuf_span_remaining_good)
