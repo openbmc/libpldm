@@ -69,12 +69,9 @@ struct pldm_msgbuf {
  * PLDM_ERROR_INVALID_DATA if pointer parameters are invalid, or
  * PLDM_ERROR_INVALID_LENGTH if length constraints are violated.
  */
-__attribute__((no_sanitize("pointer-overflow"))) static inline int
-pldm_msgbuf_init(struct pldm_msgbuf *ctx, size_t minsize, const void *buf,
-		 size_t len)
+static inline int pldm_msgbuf_init(struct pldm_msgbuf *ctx, size_t minsize,
+				   const void *buf, size_t len)
 {
-	uint8_t *end;
-
 	if (!ctx || !buf) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -83,8 +80,7 @@ pldm_msgbuf_init(struct pldm_msgbuf *ctx, size_t minsize, const void *buf,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	end = (uint8_t *)buf + len;
-	if (end && end < (uint8_t *)buf) {
+	if ((uintptr_t)buf + len < len) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 

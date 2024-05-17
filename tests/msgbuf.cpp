@@ -47,9 +47,8 @@ TEST(msgbuf, init_overflow)
 {
     struct pldm_msgbuf _ctx;
     struct pldm_msgbuf* ctx = &_ctx;
-    // This is an intrinsic part of the test.
     // NOLINTNEXTLINE(performance-no-int-to-ptr)
-    uint8_t* buf = (uint8_t*)SIZE_MAX;
+    void* buf = (void*)UINTPTR_MAX;
 
     EXPECT_NE(pldm_msgbuf_init(ctx, 0, buf, 2), PLDM_SUCCESS);
 }
