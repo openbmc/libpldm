@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "acaaa251_b6c1a7a8",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-17T10:06:51Z",
+      "side": 1,
+      "message": "Not anymore, please check out earlier comments.",
+      "parentUuid": "1ef770d2_fac5c0d2",
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6f5a8204_91ec63a0",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 16
@@ -108,6 +126,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0a125c25_91c7b0e3",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-17T10:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fd9bf0d_2f51bf6c",
+      "range": {
+        "startLine": 1702,
+        "startChar": 1,
+        "endLine": 1703,
+        "endChar": 41
+      },
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a799e6e8_64bee680",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 16
@@ -146,6 +188,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c1f0425_37a450e4",
+        "filename": "src/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2528,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-17T10:06:51Z",
+      "side": 1,
+      "message": "This function is not longer needed so it was removed in the current patch.",
+      "parentUuid": "91f402b8_21ac4799",
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "587685d4_49b12afa",
@@ -159,6 +219,24 @@
       "writtenOn": "2024-05-17T07:34:14Z",
       "side": 1,
       "message": "validate payload_Length ?",
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aecffbd8_7db18cf6",
+        "filename": "src/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2541,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-17T10:06:51Z",
+      "side": 1,
+      "message": "I believe that the `msgbuf` API should handle payload_length validation.",
+      "parentUuid": "587685d4_49b12afa",
       "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -203,6 +281,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cd20880_86b956e1",
+        "filename": "src/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2657,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-17T10:06:51Z",
+      "side": 1,
+      "message": "Reworked in the current patch",
+      "parentUuid": "7d7cb882_67b87af9",
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1aa75b31_bcb0af9c",
@@ -216,6 +312,24 @@
       "writtenOn": "2024-05-17T07:34:14Z",
       "side": 1,
       "message": "nit :- avoid using magic numbers",
+      "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53eefe52_66f58319",
+        "filename": "src/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-17T10:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa75b31_bcb0af9c",
       "revId": "dae45560cbb3547c4811b5620aafc0ff5f12090d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
