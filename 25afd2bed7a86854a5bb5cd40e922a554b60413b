@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4916fa58_29d3e91a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-20T12:50:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44e9f200_f8234407",
+      "revId": "25afd2bed7a86854a5bb5cd40e922a554b60413b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9866669b_2c0f6bb5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -48,6 +66,30 @@
       "writtenOn": "2024-05-20T06:45:04Z",
       "side": 1,
       "message": "What\u0027s the motivation for this?",
+      "range": {
+        "startLine": 1004,
+        "startChar": 1,
+        "endLine": 1007,
+        "endChar": 54
+      },
+      "revId": "25afd2bed7a86854a5bb5cd40e922a554b60413b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c174d8_816de7e8",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-05-20T12:50:10Z",
+      "side": 1,
+      "message": "This was a wrong way of handling an issue . I have fixed it in the next patch.\n\nSo when we test the case where copy tries to copy data of type uint16 from/to a buffer of size uint8 , the pointers become invalid after the copy is attempted. So when we do try to destroy the buffer we get an error of invalid length when pldm_msgbuf_validate(..) checks the buffer pointer to be destroyed. I have removed destroy for the bad path unit tests. Clang tidy is not throwing any warnings or errors so it should be fine.\n\nI dont think we need to do any cleaning up of resources here. Please give me your feedback if I am wrong",
+      "parentUuid": "07734730_64cfa0fe",
       "range": {
         "startLine": 1004,
         "startChar": 1,
