@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "007c55f9_22dfb215",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-20T00:49:44Z",
+      "side": 1,
+      "message": "Hi Tal, I have some minor comments based on your latest rework. Sorry this is dragging out a bit (though, we\u0027re also still waiting on LF to deal with your CLA, so I guess while we\u0027re idling we may as well try to polish things...)",
+      "revId": "89a450e18302c9699b12c48465b0878f32c70fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd4139ed_f5f14c0c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-20T00:49:44Z",
+      "side": 1,
+      "message": "Do we expect library users to need these? If not, I\u0027d prefer we define them in the implementation rather than the public header.",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 1
+      },
+      "revId": "89a450e18302c9699b12c48465b0878f32c70fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f0a0054_816dbde5",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-20T00:49:44Z",
+      "side": 1,
+      "message": "Bit of a mouthful, I\u0027d be fine if we just called this `resp` or something, but it doesn\u0027t matter too much.",
+      "range": {
+        "startLine": 1702,
+        "startChar": 3,
+        "endLine": 1702,
+        "endChar": 33
+      },
+      "revId": "89a450e18302c9699b12c48465b0878f32c70fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1efec239_06f0239c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 1721,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-20T00:49:44Z",
+      "side": 1,
+      "message": "As above.",
+      "range": {
+        "startLine": 1721,
+        "startChar": 3,
+        "endLine": 1721,
+        "endChar": 33
+      },
+      "revId": "89a450e18302c9699b12c48465b0878f32c70fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96b5bd95_cffea15d",
+        "filename": "src/platform.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2597,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-20T00:49:44Z",
+      "side": 1,
+      "message": "`resp` would be a lot more succinct here 😊 I\u0027m leaving this comment as unresolved as I think I prefer my proposal from a readability perspective. It should be fixed in `encode_get_state_effecter_states_resp()` as well.",
+      "range": {
+        "startLine": 2597,
+        "startChar": 20,
+        "endLine": 2597,
+        "endChar": 50
+      },
+      "revId": "89a450e18302c9699b12c48465b0878f32c70fd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
