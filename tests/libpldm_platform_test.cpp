@@ -1202,9 +1202,9 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequest)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init(buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES,
-                          request->payload,
-                          PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES);
+    rc = pldm_msgbuf_init_cc(
+        buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES, request->payload,
+        PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     uint8_t retFormatVersion;
@@ -1636,9 +1636,9 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP1)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init(buf,
-                          PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
-                          response->payload, payloadLength);
+    rc = pldm_msgbuf_init_cc(
+        buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
+        response->payload, payloadLength);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     uint8_t retCompletionCode;
@@ -1694,9 +1694,9 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP2)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init(buf,
-                          PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
-                          response->payload, payloadLength);
+    rc = pldm_msgbuf_init_cc(
+        buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
+        response->payload, payloadLength);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     uint8_t retCompletionCode;
@@ -1733,9 +1733,9 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP3)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init(buf,
-                          PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
-                          response->payload, payloadLength);
+    rc = pldm_msgbuf_init_cc(
+        buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
+        response->payload, payloadLength);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     uint8_t retCompletionCode;
@@ -1781,9 +1781,9 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP4)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init(buf,
-                          PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
-                          response->payload, payloadLength);
+    rc = pldm_msgbuf_init_cc(
+        buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
+        response->payload, payloadLength);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     uint8_t retCompletionCode;
@@ -2223,9 +2223,9 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
 
-    rc = pldm_msgbuf_init(buf, PLDM_MSG_POLL_EVENT_LENGTH,
-                          reinterpret_cast<uint8_t*>(eventData.data()),
-                          eventData.size());
+    rc = pldm_msgbuf_init_cc(buf, PLDM_MSG_POLL_EVENT_LENGTH,
+                             reinterpret_cast<uint8_t*>(eventData.data()),
+                             eventData.size());
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     uint8_t retFormatVersion;
