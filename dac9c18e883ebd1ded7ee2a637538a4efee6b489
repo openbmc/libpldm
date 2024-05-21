@@ -255,6 +255,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "707c5415_8e6f74dd",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T05:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99199166_264e04b5",
+      "range": {
+        "startLine": 737,
+        "startChar": 17,
+        "endLine": 737,
+        "endChar": 33
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ad09c24_62c556e1",
@@ -292,6 +316,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "2ad09c24_62c556e1",
+      "range": {
+        "startLine": 752,
+        "startChar": 0,
+        "endLine": 764,
+        "endChar": 1
+      },
+      "revId": "dac9c18e883ebd1ded7ee2a637538a4efee6b489",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c82f05_b398a10d",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T05:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a4e50f7_0af56581",
       "range": {
         "startLine": 752,
         "startChar": 0,

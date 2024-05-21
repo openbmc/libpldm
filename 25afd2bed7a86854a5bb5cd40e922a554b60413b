@@ -98,6 +98,30 @@
       },
       "revId": "25afd2bed7a86854a5bb5cd40e922a554b60413b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92f824b2_db79e52e",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T05:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6c174d8_816de7e8",
+      "range": {
+        "startLine": 1004,
+        "startChar": 1,
+        "endLine": 1007,
+        "endChar": 54
+      },
+      "revId": "25afd2bed7a86854a5bb5cd40e922a554b60413b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
