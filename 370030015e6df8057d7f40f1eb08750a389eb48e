@@ -16,6 +16,218 @@
       "message": "Hi Andrew, I have no issue polishing it as much as possible, it\u0027s better than revising it later in my opinion. 😊",
       "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeade099_76d766b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T01:55:29Z",
+      "side": 1,
+      "message": "Hi Tal, we\u0027ve got the CLA stuff sorted, so now it\u0027s just down to the reviews. I\u0027ve had some more thoughts on the API. I\u0027ve also made some minor whitespace/wrapping comments.",
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04f9f661_b2b5b94c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T01:55:29Z",
+      "side": 1,
+      "message": "How does the caller know how much memory to allocate for the pointer provided by `field` prior to receiving the message?\n\nI think it\u0027s right for this member to be contained in the structure, but I think we need to change how it is dealt with by the `decode_get_state_effecter_states_resp()` API. See comment below.\n\nAs an alternative to changing the API, we could instead re-specify this member as:\n\n```\nget_effecter_state_field field[PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MAX];\n```\n\nThis has the downside of potentially wasting a small amount of memory, but perhaps that\u0027s a small price to pay in the trade-off against dynamic allocation and splitting the API.",
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5732c4de_96cc69c0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1690,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T01:55:29Z",
+      "side": 1,
+      "message": "Can we please rename this to `resp` to align with the implementation?",
+      "range": {
+        "startLine": 1690,
+        "startChar": 16,
+        "endLine": 1690,
+        "endChar": 46
+      },
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "043fae42_8d3048b8",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1696,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T01:55:29Z",
+      "side": 1,
+      "message": "I notice there\u0027s a mix of tabs and spaces used for indentation here. Given it\u0027s a doxygen comment we should probably only have spaces (to avoid the tab-after-space problem). It would also be nice if the wrapping was a bit more sensible.",
+      "range": {
+        "startLine": 1691,
+        "startChar": 1,
+        "endLine": 1696,
+        "endChar": 58
+      },
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "212d7773_aeac035a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1699,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T01:55:29Z",
+      "side": 1,
+      "message": "Regarding my comment on line 1027, if we don\u0027t specify the `fields` member as an array, I think we need to split the decoding into two steps:\n\n1. Decode the fixed-size portion of the message, which allows us to obtain the value for `comp_effecter_count`\n2. Decode the variable sized portion of the message, based on the memory allocated proportional to `comp_effecter_count`.\n\nWith that in mind, perhaps:\n\n```\nint decode_get_state_effecter_states_resp(\n    const struct pldm_msg *msg,\n    size_t payload_length,\n    struct pldm_get_state_effecter_states_resp *resp,\n    struct variable_field *fields);\n\nint decode_state_effecter_state_fields(\n    const struct variable_field *fields,\n    const struct pldm_get_state_effecter_states_resp *resp);\n```\n\nThe split allows the caller to sequence things like in the following sketch (error handling required):\n\n```\nstruct pldm_get_state_effecter_states_resp *resp;\nstruct variable_field fields;\nint rc;\n\nresp \u003d malloc(sizeof(*resp));\ndecode_get_state_effecter_states_resp(msg, length, resp, \u0026fields);\nresp-\u003efields \u003d calloc(resp-\u003ecomp_effecter_count, sizeof(*resp-\u003efields));\ndecode_state_effecter_state_fields(\u0026fields, resp);\n```\n\nThis way the caller is in control of the allocations (which is what I prefer for something that\u0027s intended as an embedded library).",
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11ae5581_5c0199f4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T01:55:29Z",
+      "side": 1,
+      "message": "`resp` again here so it lines up with the documentation and implementation.",
+      "range": {
+        "startLine": 1702,
+        "startChar": 3,
+        "endLine": 1702,
+        "endChar": 33
+      },
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5409e52_e452a90c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1707,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T01:55:29Z",
+      "side": 1,
+      "message": "Rename to `resp` to align with the implementation.",
+      "range": {
+        "startLine": 1707,
+        "startChar": 15,
+        "endLine": 1707,
+        "endChar": 45
+      },
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c2ffaa_9709193d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1713,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T01:55:29Z",
+      "side": 1,
+      "message": "Mixed tabs/spaces and wrapping here too.",
+      "range": {
+        "startLine": 1708,
+        "startChar": 1,
+        "endLine": 1713,
+        "endChar": 58
+      },
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26fc932a_c0aac98e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1721,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T01:55:29Z",
+      "side": 1,
+      "message": "`resp` again here, as above.",
+      "range": {
+        "startLine": 1721,
+        "startChar": 3,
+        "endLine": 1721,
+        "endChar": 33
+      },
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c58665_33dd901b",
+        "filename": "src/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 2629,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-21T01:55:29Z",
+      "side": 1,
+      "message": "The problem I have here is it\u0027s not communicated anywhere that we\u0027ve been supplied enough memory to accomodate this.",
+      "range": {
+        "startLine": 2621,
+        "startChar": 1,
+        "endLine": 2629,
+        "endChar": 21
+      },
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
