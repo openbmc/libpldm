@@ -19,9 +19,9 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	int rc = pldm_msgbuf_init(buf,
-				  PLDM_OEM_META_DECODE_WRITE_FILE_IO_MIN_SIZE,
-				  msg->payload, payload_length);
+	int rc = pldm_msgbuf_init_cc(
+		buf, PLDM_OEM_META_DECODE_WRITE_FILE_IO_MIN_SIZE, msg->payload,
+		payload_length);
 	if (rc) {
 		return rc;
 	}

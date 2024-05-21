@@ -13,6 +13,12 @@
       the `msgbuf` APIs found in `src/msgbuf.h` (and under `src/msgbuf/`) to
       minimise concerns around spatial memory safety and endian-correctness.
 
+- [ ] If I've implemented a new function, then it returns a negative `errno`
+      value on error and not a PLDM completion code.
+
+  - [ ] The specific error values my function returns and their meaning in the
+        context of the function call are listed in the API documentation.
+
 - [ ] If I've added support for a new PLDM message type, then I've implemented
       both the encoder and decoder for that message. Note this applies for both
       request _and_ response message types.
