@@ -903,8 +903,8 @@ int decode_query_downstream_devices_resp(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	rc = pldm_msgbuf_init(buf, PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN,
-			      msg->payload, payload_length);
+	rc = pldm_msgbuf_init_cmdcode(buf, PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN,
+				      msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -968,8 +968,9 @@ int encode_query_downstream_identifiers_req(
 		return rc;
 	}
 
-	rc = pldm_msgbuf_init(buf, PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_REQ_BYTES,
-			      msg->payload, payload_length);
+	rc = pldm_msgbuf_init_cmdcode(
+		buf, PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_REQ_BYTES, msg->payload,
+		payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -996,8 +997,8 @@ int decode_query_downstream_identifiers_resp(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	rc = pldm_msgbuf_init(buf, PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN,
-			      msg->payload, payload_length);
+	rc = pldm_msgbuf_init_cmdcode(buf, PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN,
+				      msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}

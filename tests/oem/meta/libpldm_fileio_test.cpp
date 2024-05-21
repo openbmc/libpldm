@@ -23,8 +23,9 @@ TEST(DecodeOemMetaFileIoReq, testGoodDecodeRequest)
     uint8_t buf[hdrSize + sizeof(uint8_t) + sizeof(int32_t) +
                 (postCodeSize * sizeof(uint8_t))] = {};
 
-    ASSERT_EQ(pldm_msgbuf_init(ctx, 0, &buf[hdrSize], sizeof(buf) - hdrSize),
-              0);
+    ASSERT_EQ(
+        pldm_msgbuf_init_cmdcode(ctx, 0, &buf[hdrSize], sizeof(buf) - hdrSize),
+        0);
 
     pldm_msgbuf_insert_uint8(ctx, fileHandle);
     pldm_msgbuf_insert_int32(ctx, dataLengthLE);
