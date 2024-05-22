@@ -17,6 +17,8 @@ Change categories:
 
 ## [Unreleased]
 
+## [0.8.0] - 2024-05-23
+
 ### Added
 
 1. base: Provide pldm_msg_hdr_correlate_response()
