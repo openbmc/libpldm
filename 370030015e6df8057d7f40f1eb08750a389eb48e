@@ -219,6 +219,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1c64351_13b3a791",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1699,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-22T17:41:09Z",
+      "side": 1,
+      "message": "I think we can settle for the fixed-length array, it is simpler for both us and the users.\n\nThis will also solve the issue you raised on an earlier comment, where we can\u0027t be sure whether the user supplied enough memory.",
+      "parentUuid": "8db01277_1ef87675",
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11ae5581_5c0199f4",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 19
@@ -418,6 +436,30 @@
       "writtenOn": "2024-05-21T01:55:29Z",
       "side": 1,
       "message": "The problem I have here is it\u0027s not communicated anywhere that we\u0027ve been supplied enough memory to accomodate this.",
+      "range": {
+        "startLine": 2621,
+        "startChar": 1,
+        "endLine": 2629,
+        "endChar": 21
+      },
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "642edd8e_b1f2dd66",
+        "filename": "src/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 2629,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-22T17:41:09Z",
+      "side": 1,
+      "message": "Should be solved with the fixed-array approach.",
+      "parentUuid": "d4c58665_33dd901b",
       "range": {
         "startLine": 2621,
         "startChar": 1,
