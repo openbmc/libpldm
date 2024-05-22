@@ -201,6 +201,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8db01277_1ef87675",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1699,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-22T01:57:20Z",
+      "side": 1,
+      "message": "Yeah, the double call idea is kinda neat, but I have reservations about its generality, and the performance / fragility trade-offs with msgbuf.\n\nOn the second concern, because we\u0027re not maintaining internal state between calls we either need to reparse the message buffer from the start to again locate the offset of the state effecter states, or hard-code initialising `struct pldm_msgbuf` with the fixed offset of the state effecter states if `fields !\u003d NULL`. Both feel a little off to me; if we\u0027re going to have two invocations either side of a call to `calloc()`, I think I prefer my suggestion of explicitly passing an instance of `struct variable_field` between the calls.\n\nI guess a third option is to do the double-call approach and pass a NULL value for the `struct variable_field` parameter the first time? Similar to how e.g. `strtok_r()` uses an out-parameter for holding state. Not sure whether `strtok_r()` is a good design reference point though.\n\nOn the generality front, if we have nested variable-length structures the allocation picture could get a bit ugly, mainly from the perspective of *what* the caller needs to allocate, where they assign the pointer in the structure, and how the need to allocate gets signaled. That\u0027s not really a concern for this specific API, but if we\u0027re solving this problem and trying to create a consistent API design point across the library, then I feel it needs some thought.\n\nMaybe it\u0027s simpler to punt on it all for now and do the fixed-length array thing 😄",
+      "parentUuid": "03ced099_20c476a6",
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11ae5581_5c0199f4",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 19
