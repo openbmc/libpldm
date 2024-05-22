@@ -84,8 +84,9 @@ struct pldm_msgbuf {
  * PLDM_ERROR_INVALID_DATA if pointer parameters are invalid, or
  * PLDM_ERROR_INVALID_LENGTH if length constraints are violated.
  */
-static inline int pldm_msgbuf_init(struct pldm_msgbuf *ctx, size_t minsize,
-				   const void *buf, size_t len)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_init(struct pldm_msgbuf *ctx, size_t minsize, const void *buf,
+		 size_t len)
 {
 	if (!ctx || !buf) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -122,7 +123,8 @@ static inline int pldm_msgbuf_init(struct pldm_msgbuf *ctx, size_t minsize,
  * PLDM_ERROR_INVALID_DATA indicates that the provided context was not a valid
  * pointer.
  */
-static inline int pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
 {
 	if (!ctx) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -142,7 +144,8 @@ static inline int pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
  * PLDM_ERROR_INVALID_DATA indicates that the provided context was not a valid
  * pointer.
  */
-static inline int pldm_msgbuf_consumed(struct pldm_msgbuf *ctx)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_consumed(struct pldm_msgbuf *ctx)
 {
 	if (!ctx) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -161,7 +164,8 @@ static inline int pldm_msgbuf_consumed(struct pldm_msgbuf *ctx)
  * PLDM_ERROR_INVALID_LENGTH if prior accesses would have occurred beyond the
  * bounds of the buffer.
  */
-static inline int pldm_msgbuf_destroy(struct pldm_msgbuf *ctx)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_destroy(struct pldm_msgbuf *ctx)
 {
 	int valid;
 
@@ -188,7 +192,8 @@ static inline int pldm_msgbuf_destroy(struct pldm_msgbuf *ctx)
  * parameter is invalid, or PLDM_ERROR_INVALID_LENGTH if prior accesses would
  * have occurred byond the bounds of the buffer
  */
-static inline int pldm_msgbuf_destroy_consumed(struct pldm_msgbuf *ctx)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_destroy_consumed(struct pldm_msgbuf *ctx)
 {
 	int consumed;
 
@@ -304,8 +309,9 @@ static inline int pldm_msgbuf_destroy_consumed(struct pldm_msgbuf *ctx)
 #define pldm_msgbuf_extract_uint8(ctx, dst)                                    \
 	pldm_msgbuf_extract_typecheck(uint8_t, pldm__msgbuf_extract_uint8,     \
 				      dst, ctx, dst)
+__attribute__((always_inline)) static inline int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-static inline int pldm__msgbuf_extract_uint8(struct pldm_msgbuf *ctx, void *dst)
+pldm__msgbuf_extract_uint8(struct pldm_msgbuf *ctx, void *dst)
 {
 	if (!ctx || !ctx->cursor || !dst) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -330,8 +336,9 @@ static inline int pldm__msgbuf_extract_uint8(struct pldm_msgbuf *ctx, void *dst)
 #define pldm_msgbuf_extract_int8(ctx, dst)                                     \
 	pldm_msgbuf_extract_typecheck(int8_t, pldm__msgbuf_extract_int8, dst,  \
 				      ctx, dst)
+__attribute__((always_inline)) static inline int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-static inline int pldm__msgbuf_extract_int8(struct pldm_msgbuf *ctx, void *dst)
+pldm__msgbuf_extract_int8(struct pldm_msgbuf *ctx, void *dst)
 {
 	if (!ctx || !ctx->cursor || !dst) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -355,9 +362,9 @@ static inline int pldm__msgbuf_extract_int8(struct pldm_msgbuf *ctx, void *dst)
 #define pldm_msgbuf_extract_uint16(ctx, dst)                                   \
 	pldm_msgbuf_extract_typecheck(uint16_t, pldm__msgbuf_extract_uint16,   \
 				      dst, ctx, dst)
+__attribute__((always_inline)) static inline int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-static inline int pldm__msgbuf_extract_uint16(struct pldm_msgbuf *ctx,
-					      void *dst)
+pldm__msgbuf_extract_uint16(struct pldm_msgbuf *ctx, void *dst)
 {
 	uint16_t ldst;
 
@@ -406,8 +413,9 @@ static inline int pldm__msgbuf_extract_uint16(struct pldm_msgbuf *ctx,
 #define pldm_msgbuf_extract_int16(ctx, dst)                                    \
 	pldm_msgbuf_extract_typecheck(int16_t, pldm__msgbuf_extract_int16,     \
 				      dst, ctx, dst)
+__attribute__((always_inline)) static inline int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-static inline int pldm__msgbuf_extract_int16(struct pldm_msgbuf *ctx, void *dst)
+pldm__msgbuf_extract_int16(struct pldm_msgbuf *ctx, void *dst)
 {
 	int16_t ldst;
 
@@ -441,9 +449,9 @@ static inline int pldm__msgbuf_extract_int16(struct pldm_msgbuf *ctx, void *dst)
 #define pldm_msgbuf_extract_uint32(ctx, dst)                                   \
 	pldm_msgbuf_extract_typecheck(uint32_t, pldm__msgbuf_extract_uint32,   \
 				      dst, ctx, dst)
+__attribute__((always_inline)) static inline int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-static inline int pldm__msgbuf_extract_uint32(struct pldm_msgbuf *ctx,
-					      void *dst)
+pldm__msgbuf_extract_uint32(struct pldm_msgbuf *ctx, void *dst)
 {
 	uint32_t ldst;
 
@@ -477,8 +485,9 @@ static inline int pldm__msgbuf_extract_uint32(struct pldm_msgbuf *ctx,
 #define pldm_msgbuf_extract_int32(ctx, dst)                                    \
 	pldm_msgbuf_extract_typecheck(int32_t, pldm__msgbuf_extract_int32,     \
 				      dst, ctx, dst)
+__attribute__((always_inline)) static inline int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-static inline int pldm__msgbuf_extract_int32(struct pldm_msgbuf *ctx, void *dst)
+pldm__msgbuf_extract_int32(struct pldm_msgbuf *ctx, void *dst)
 {
 	int32_t ldst;
 
@@ -512,9 +521,9 @@ static inline int pldm__msgbuf_extract_int32(struct pldm_msgbuf *ctx, void *dst)
 #define pldm_msgbuf_extract_real32(ctx, dst)                                   \
 	pldm_msgbuf_extract_typecheck(real32_t, pldm__msgbuf_extract_real32,   \
 				      dst, ctx, dst)
+__attribute__((always_inline)) static inline int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-static inline int pldm__msgbuf_extract_real32(struct pldm_msgbuf *ctx,
-					      void *dst)
+pldm__msgbuf_extract_real32(struct pldm_msgbuf *ctx, void *dst)
 {
 	uint32_t ldst;
 
@@ -585,8 +594,9 @@ static inline int pldm__msgbuf_extract_real32(struct pldm_msgbuf *ctx,
 		int32_t *: pldm__msgbuf_extract_int32,                         \
 		real32_t *: pldm__msgbuf_extract_real32)(ctx, dst)
 
-static inline int pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx,
-						  uint8_t *dst, size_t count)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, uint8_t *dst,
+				size_t count)
 {
 	if (!ctx || !ctx->cursor || !dst) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -621,8 +631,8 @@ static inline int pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx,
 	_Generic((*(dst)), uint8_t: pldm_msgbuf_extract_array_uint8)(ctx, dst, \
 								     count)
 
-static inline int pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx,
-					    const uint32_t src)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx, const uint32_t src)
 {
 	uint32_t val = htole32(src);
 
@@ -650,8 +660,8 @@ static inline int pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx,
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_insert_uint16(struct pldm_msgbuf *ctx,
-					    const uint16_t src)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_insert_uint16(struct pldm_msgbuf *ctx, const uint16_t src)
 {
 	uint16_t val = htole16(src);
 
@@ -679,8 +689,8 @@ static inline int pldm_msgbuf_insert_uint16(struct pldm_msgbuf *ctx,
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_insert_uint8(struct pldm_msgbuf *ctx,
-					   const uint8_t src)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_insert_uint8(struct pldm_msgbuf *ctx, const uint8_t src)
 {
 	if (!ctx || !ctx->cursor) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -706,8 +716,8 @@ static inline int pldm_msgbuf_insert_uint8(struct pldm_msgbuf *ctx,
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_insert_int32(struct pldm_msgbuf *ctx,
-					   const int32_t src)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_insert_int32(struct pldm_msgbuf *ctx, const int32_t src)
 {
 	int32_t val = htole32(src);
 
@@ -735,8 +745,8 @@ static inline int pldm_msgbuf_insert_int32(struct pldm_msgbuf *ctx,
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_insert_int16(struct pldm_msgbuf *ctx,
-					   const int16_t src)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_insert_int16(struct pldm_msgbuf *ctx, const int16_t src)
 {
 	int16_t val = htole16(src);
 
@@ -764,8 +774,8 @@ static inline int pldm_msgbuf_insert_int16(struct pldm_msgbuf *ctx,
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_insert_int8(struct pldm_msgbuf *ctx,
-					  const int8_t src)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_insert_int8(struct pldm_msgbuf *ctx, const int8_t src)
 {
 	if (!ctx || !ctx->cursor) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -800,9 +810,9 @@ static inline int pldm_msgbuf_insert_int8(struct pldm_msgbuf *ctx,
 		uint32_t: pldm_msgbuf_insert_uint32,                           \
 		int32_t: pldm_msgbuf_insert_int32)(dst, src)
 
-static inline int pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx,
-						 const uint8_t *src,
-						 size_t count)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx, const uint8_t *src,
+			       size_t count)
 {
 	if (!ctx || !ctx->cursor || !src) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -837,8 +847,9 @@ static inline int pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx,
 	_Generic((*(src)), uint8_t: pldm_msgbuf_insert_array_uint8)(dst, src,  \
 								    count)
 
-static inline int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
-					    size_t required, void **cursor)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_span_required(struct pldm_msgbuf *ctx, size_t required,
+			  void **cursor)
 {
 	if (!ctx || !ctx->cursor || !cursor || *cursor) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -865,8 +876,8 @@ static inline int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
 	return PLDM_SUCCESS;
 }
 
-static inline int pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx,
-					     void **cursor, size_t *len)
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 {
 	if (!ctx || !ctx->cursor || !cursor || *cursor || !len) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -899,10 +910,10 @@ static inline int pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx,
  */
 #define pldm_msgbuf_copy(dst, src, type, name)                                 \
 	pldm__msgbuf_copy(dst, src, sizeof(type), #name)
+__attribute__((always_inline)) static inline int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-static inline int pldm__msgbuf_copy(struct pldm_msgbuf *dst,
-				    struct pldm_msgbuf *src, size_t size,
-				    const char *description)
+pldm__msgbuf_copy(struct pldm_msgbuf *dst, struct pldm_msgbuf *src, size_t size,
+		  const char *description)
 {
 	if (!src || !src->cursor || !dst || !dst->cursor || !description) {
 		return PLDM_ERROR_INVALID_DATA;
