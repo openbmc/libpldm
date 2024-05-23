@@ -4138,6 +4138,7 @@ TEST(decodeNumericSensorPdrDataDeathTest, InvalidSizeTest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
+#ifdef LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint8Test)
 {
     std::vector<uint8_t> pdr1{
@@ -4249,7 +4250,9 @@ TEST(decodeNumericEffecterPdrData, Uint8Test)
     EXPECT_EQ(90, decodedPdr.rated_max.value_u8);
     EXPECT_EQ(10, decodedPdr.rated_min.value_u8);
 }
+#endif
 
+#ifdef LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Sint8Test)
 {
     std::vector<uint8_t> pdr1{
@@ -4336,7 +4339,9 @@ TEST(decodeNumericEffecterPdrData, Sint8Test)
     EXPECT_EQ(30, decodedPdr.rated_max.value_s8);
     EXPECT_EQ(-30, decodedPdr.rated_min.value_s8);
 }
+#endif
 
+#ifdef LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint16Test)
 {
     std::vector<uint8_t> pdr1{
@@ -4431,7 +4436,9 @@ TEST(decodeNumericEffecterPdrData, Uint16Test)
     EXPECT_EQ(9000, decodedPdr.rated_max.value_u16);
     EXPECT_EQ(1000, decodedPdr.rated_min.value_u16);
 }
+#endif
 
+#ifdef LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Sint16Test)
 {
     std::vector<uint8_t> pdr1{
@@ -4526,7 +4533,9 @@ TEST(decodeNumericEffecterPdrData, Sint16Test)
     EXPECT_EQ(3000, decodedPdr.rated_max.value_s16);
     EXPECT_EQ(-3000, decodedPdr.rated_min.value_s16);
 }
+#endif
 
+#ifdef LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -4635,7 +4644,9 @@ TEST(decodeNumericEffecterPdrData, Uint32Test)
     EXPECT_EQ(9000000, decodedPdr.rated_max.value_u32);
     EXPECT_EQ(1000000, decodedPdr.rated_min.value_u32);
 }
+#endif
 
+#ifdef LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Sint32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -4743,7 +4754,9 @@ TEST(decodeNumericEffecterPdrData, Sint32Test)
     EXPECT_EQ(3000000, decodedPdr.rated_max.value_s32);
     EXPECT_EQ(-3000000, decodedPdr.rated_min.value_s32);
 }
+#endif
 
+#ifdef LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Real32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -4855,3 +4868,4 @@ TEST(decodeNumericEffecterPdrData, Real32Test)
     EXPECT_FLOAT_EQ(300.003f, decodedPdr.rated_max.value_f32);
     EXPECT_FLOAT_EQ(-300.003f, decodedPdr.rated_min.value_f32);
 }
+#endif
