@@ -876,9 +876,15 @@ TEST(AttrValTable, FindTest)
     auto firstEntry =
         reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(table.data());
     firstEntry->attr_type = PLDM_BIOS_PASSWORD;
+#ifdef NDEBUG
+    EXPECT_EQ(pldm_bios_table_attr_value_find_by_handle(table.data(),
+                                                        table.size(), 1),
+              nullptr);
+#else
     EXPECT_DEATH(pldm_bios_table_attr_value_find_by_handle(table.data(),
                                                            table.size(), 1),
                  "entry_length != NULL");
+#endif
 }
 
 TEST(AttrValTable, CopyAndUpdateTest)
@@ -1131,7 +1137,9 @@ TEST(Iterator, DeathTest)
     auto iter = pldm_bios_table_iter_create(table.data(), table.size(),
                                             PLDM_BIOS_ATTR_TABLE);
     attr_entry->attr_type = PLDM_BIOS_PASSWORD;
+#ifndef NDEBUG
     EXPECT_DEATH(pldm_bios_table_iter_next(iter), "attr_table_entry != NULL");
+#endif
     pldm_bios_table_iter_free(iter);
 }
 

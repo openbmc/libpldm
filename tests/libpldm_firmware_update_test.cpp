@@ -1608,12 +1608,19 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
      *  The 1st parameter is the function under test.
      *  The 2nd parameter compares the output of the program.
      */
-    ASSERT_DEATH(
+#ifdef NDEBUG
+    EXPECT_NE(decode_query_downstream_identifiers_resp(
+                  response, responseMsg.size() - hdrSize, &resp_data,
+                  &downstreamDevices),
+              PLDM_SUCCESS);
+#else
+    EXPECT_DEATH(
         decode_query_downstream_identifiers_resp(
             response, responseMsg.size() - hdrSize, &resp_data,
             &downstreamDevices),
         // This error doesn't output any error message, leave it be empty
         "");
+#endif
 }
 
 TEST(QueryDownstreamIdentifiers, decodeRequestErrorBufSize)
