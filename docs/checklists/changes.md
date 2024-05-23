@@ -62,7 +62,7 @@ Each of the following must succeed:
     `docker run --cap-add=sys_admin --rm=true --privileged=true -u $USER -w $(pwd) -v $(pwd):$(pwd) -e MAKEFLAGS= -it openbmc/ubuntu-unit-test:2024-W21-ce361f95ff4fa669`
 - [ ] `CC=gcc CXX=g++; [ $(uname -m) = 'x86_64' ] && meson setup -Dabi=deprecated,stable build`
 - [ ] `meson compile -C build`
-- [ ] `cp build/src/current.dump abi/x86_64/gcc.dump`
+- [ ] `./scripts/abi-dump-formatter < build/src/current.dump > abi/x86_64/gcc.dump`
 
 ## Removing an API
 
