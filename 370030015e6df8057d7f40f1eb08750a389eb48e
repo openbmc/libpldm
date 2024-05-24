@@ -70,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c47ce6fa_04834d9d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-24T00:46:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3babb7c_bad11539",
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5732c4de_96cc69c0",
@@ -231,6 +249,24 @@
       "side": 1,
       "message": "I think we can settle for the fixed-length array, it is simpler for both us and the users.\n\nThis will also solve the issue you raised on an earlier comment, where we can\u0027t be sure whether the user supplied enough memory.",
       "parentUuid": "8db01277_1ef87675",
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fc60e88_8f685102",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1699,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-24T00:46:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1c64351_13b3a791",
       "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -460,6 +496,30 @@
       "side": 1,
       "message": "Should be solved with the fixed-array approach.",
       "parentUuid": "d4c58665_33dd901b",
+      "range": {
+        "startLine": 2621,
+        "startChar": 1,
+        "endLine": 2629,
+        "endChar": 21
+      },
+      "revId": "370030015e6df8057d7f40f1eb08750a389eb48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba5326a_47c2fe94",
+        "filename": "src/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 2629,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-24T00:46:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "642edd8e_b1f2dd66",
       "range": {
         "startLine": 2621,
         "startChar": 1,
