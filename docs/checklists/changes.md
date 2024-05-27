@@ -2,7 +2,33 @@
 
 ## Definitions
 
-- Public API: Any definitions and declarations under `include/libpldm`
+- **Error condition**: An invalid state reached at runtime, caused either by
+  resource exhaustion, or incorrect use of the library's public APIs and data
+  types.
+
+- **Invariant**: A condition in the library's implementation that must never
+  evaluate false.
+
+- **Public API**: Any definitions and declarations under `include/libpldm`.
+
+## Elaborations
+
+- Resource exhaustion is always an error condition and never an invariant
+  violation.
+
+- An invariant violation is always a programming failure of the library's
+  implementation, and never the result of incorrect use of the library's public
+  APIs (see error condition).
+
+- Corrollaries of the above two points:
+
+  - Incorrect use of public API functions is always an error condition, and is
+    dealt with by returning an error code.
+
+  - Incorrect use of static functions in the library's implementation is an
+    invariant violation which may be established using `assert()`.
+
+- `assert()` is the recommended way to demonstrate invariants are upheld.
 
 ## Adding a new API
 
@@ -12,6 +38,17 @@
 - [ ] If my work interacts with the PLDM wire format, then I have done so using
       the `msgbuf` APIs found in `src/msgbuf.h` (and under `src/msgbuf/`) to
       minimise concerns around spatial memory safety and endian-correctness.
+
+- [ ] All my error conditions are handled by returning an error code to the
+      caller.
+
+- [ ] All my invariants are tested using `assert()`.
+
+- [ ] I have not used `assert()` to evaluate any error conditions without also
+      handling the error condition by returning an error code the the caller.
+
+  - Release builds of the library are configured with `assert()` disabled
+    (`-Db_ndebug=if-release`, which provides `-DNDEBUG` in `CFLAGS`).
 
 - [ ] If I've implemented a new function, then it returns a negative `errno`
       value on error and not a PLDM completion code.
