@@ -48,7 +48,7 @@ meson setup builddir && meson test -C builddir
 
 ## Working with `libpldm`
 
-Components of the [library ABI][^1] (loosely, functions) are separated into
+Components of the library ABI[^1] (loosely, functions) are separated into
 three categories:
 
 [^1]: ["library API + compiler ABI = library ABI"][libstdc++-library-abi]
