@@ -48,8 +48,13 @@ meson setup builddir && meson test -C builddir
 
 ## Working with `libpldm`
 
-The ABIs (symbols, generally functions) exposed by the library are separated
-into three categories:
+Components of the [library ABI][^1] (loosely, functions) are separated into
+three categories:
+
+[^1]: ["library API + compiler ABI = library ABI"][libstdc++-library-abi]
+
+[libstdc++-library-abi]:
+  https://gcc.gnu.org/onlinedocs/libstdc++/manual/abi.html
 
 1. Stable
 2. Testing
