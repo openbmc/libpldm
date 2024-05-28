@@ -1,5 +1,27 @@
 # Checklist for making changes to `libpldm`
 
+## Philosophy and influences
+
+- [Good Practices in Library Design, Implementation, and Maintenance - Ulrich
+  Drepper][goodpractice]
+
+[goodpractice]: https://www.akkadia.org/drepper/goodpractice.pdf
+
+- [How Do I Make This Hard to Misuse? - Rusty Russell][rusty-api-scale-good]
+
+[rusty-api-scale-good]: https://ozlabs.org/~rusty/index.cgi/tech/2008-03-30.html
+
+- [What If I Don't Actually Like My Users? - Rusty Russell][rusty-api-scale-bad]
+
+[rusty-api-scale-bad]: https://ozlabs.org/~rusty/index.cgi/tech/2008-04-01.html
+
+## References
+
+- [C17 draft standard][c17-draft-standard]
+
+[c17-draft-standard]:
+  https://web.archive.org/web/20181230041359if_/http://www.open-std.org/jtc1/sc22/wg14/www/abq/c17_updated_proposed_fdis.pdf
+
 ## Definitions
 
 - **Error condition**: An invalid state reached at runtime, caused either by
