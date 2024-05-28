@@ -72,8 +72,8 @@
   - Release builds of the library are configured with `assert()` disabled
     (`-Db_ndebug=if-release`, which provides `-DNDEBUG` in `CFLAGS`).
 
-- [ ] If I've implemented a new function, then it returns a negative `errno`
-      value on error and not a PLDM completion code.
+- [ ] My new APIs return negative `errno` values on error and not PLDM
+      completion codes.
 
   - [ ] The specific error values my function returns and their meaning in the
         context of the function call are listed in the API documentation.
