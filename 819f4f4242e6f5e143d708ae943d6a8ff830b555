@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e706c4b6_d86ec5f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-05-28T11:41:55Z",
+      "side": 1,
+      "message": "The patch set will help to remove those magic number in the pldm code\nhttps://github.com/openbmc/pldm/blob/087a751fbae04142d7c95a39b4fd4a37b95a83e5/pldmtool/pldm_platform_cmd.cpp#L1691",
+      "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
