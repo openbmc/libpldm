@@ -29,8 +29,10 @@ TEST(GetAlertStatus, testBadEncodeRequest)
     std::array<uint8_t, hdrSize + PLDM_GET_ALERT_STATUS_REQ_BYTES> requestMsg{};
 
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
-    auto rc = encode_get_alert_status_req(0, 0x0, request,
-                                          PLDM_GET_ALERT_STATUS_REQ_BYTES + 1);
+    auto rc = encode_get_alert_status_req(
+        0, 0x0, request,
+        PLDM_GET_ALERT_STATUS_REQ_BYTES +
+            MESSAGE_SIZE_BYTES_INCREASE_EACH_16BITS_DATA);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 

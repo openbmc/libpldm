@@ -2888,7 +2888,10 @@ TEST(GetStatus, errorPathEncodeRequest)
     auto rc = encode_get_status_req(0, nullptr, PLDM_GET_STATUS_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
-    rc = encode_get_status_req(0, requestMsg, PLDM_GET_STATUS_REQ_BYTES + 1);
+    rc =
+        encode_get_status_req(0, requestMsg,
+                              PLDM_GET_STATUS_REQ_BYTES +
+                                  MESSAGE_SIZE_BYTES_INCREASE_EACH_16BITS_DATA);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -3152,7 +3155,9 @@ TEST(CancelUpdateComponent, errorPathEncodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     rc = encode_cancel_update_component_req(
-        0, requestMsg, PLDM_CANCEL_UPDATE_COMPONENT_REQ_BYTES + 1);
+        0, requestMsg,
+        PLDM_CANCEL_UPDATE_COMPONENT_REQ_BYTES +
+            MESSAGE_SIZE_BYTES_INCREASE_EACH_16BITS_DATA);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -3226,8 +3231,10 @@ TEST(CancelUpdate, errorPathEncodeRequest)
         encode_cancel_update_req(0, nullptr, PLDM_CANCEL_UPDATE_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
-    rc = encode_cancel_update_req(0, requestMsg,
-                                  PLDM_CANCEL_UPDATE_REQ_BYTES + 1);
+    rc = encode_cancel_update_req(
+        0, requestMsg,
+        PLDM_CANCEL_UPDATE_REQ_BYTES +
+            MESSAGE_SIZE_BYTES_INCREASE_EACH_16BITS_DATA);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 

@@ -114,6 +114,11 @@ typedef enum {
 
 #define PLDM_TIMESTAMP104_SIZE 13
 
+/* The increased size of MIN_REQ/RESP_BYTES for each data size type */
+#define MESSAGE_SIZE_BYTES_INCREASE_EACH_8BITS_DATA  0
+#define MESSAGE_SIZE_BYTES_INCREASE_EACH_16BITS_DATA 1
+#define MESSAGE_SIZE_BYTES_INCREASE_EACH_32BITS_DATA 3
+
 /** @brief Minimum length of response for a optional PLDM command
  *
  *  For a optional PLDM command, the command handler might not be

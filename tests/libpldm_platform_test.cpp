@@ -290,9 +290,10 @@ TEST(GetPDR, testBadEncodeRequest)
                                  nullptr, PLDM_GET_PDR_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
-    rc = encode_get_pdr_req(0, record_hndl, data_transfer_hndl,
-                            transfer_op_flag, request_cnt, record_chg_num,
-                            request, PLDM_GET_PDR_REQ_BYTES + 1);
+    rc = encode_get_pdr_req(
+        0, record_hndl, data_transfer_hndl, transfer_op_flag, request_cnt,
+        record_chg_num, request,
+        PLDM_GET_PDR_REQ_BYTES + MESSAGE_SIZE_BYTES_INCREASE_EACH_16BITS_DATA);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -551,8 +552,9 @@ TEST(GetPDRRepositoryInfo, testBadDecodeResponse)
 
 TEST(SetNumericEffecterValue, testGoodDecodeRequest)
 {
-    std::array<uint8_t,
-               hdrSize + PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 3>
+    std::array<uint8_t, hdrSize +
+                            PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES +
+                            MESSAGE_SIZE_BYTES_INCREASE_EACH_32BITS_DATA>
         requestMsg{};
 
     uint16_t effecter_id = 32768;
@@ -624,13 +626,15 @@ TEST(SetNumericEffecterValue, testGoodEncodeRequest)
     uint16_t effecter_value = 65534;
 
     std::vector<uint8_t> requestMsg(
-        hdrSize + PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 1);
+        hdrSize + PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES +
+        MESSAGE_SIZE_BYTES_INCREASE_EACH_16BITS_DATA);
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_numeric_effecter_value_req(
         0, effecter_id, effecter_data_size,
         reinterpret_cast<uint8_t*>(&effecter_value), request,
-        PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 1);
+        PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES +
+            MESSAGE_SIZE_BYTES_INCREASE_EACH_16BITS_DATA);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_set_numeric_effecter_value_req* req =
@@ -2940,7 +2944,8 @@ TEST(GetSensorReading, testGoodEncodeResponse)
 
 TEST(GetSensorReading, testBadEncodeResponse)
 {
-    std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 3>
+    std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES +
+                            MESSAGE_SIZE_BYTES_INCREASE_EACH_32BITS_DATA>
         responseMsg{};
 
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
@@ -2969,7 +2974,8 @@ TEST(GetSensorReading, testBadEncodeResponse)
 
 TEST(GetSensorReading, testGoodDecodeResponse)
 {
-    std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 3>
+    std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES +
+                            MESSAGE_SIZE_BYTES_INCREASE_EACH_32BITS_DATA>
         responseMsg{};
 
     uint8_t completionCode = 0;
@@ -3027,7 +3033,8 @@ TEST(GetSensorReading, testGoodDecodeResponse)
 
 TEST(GetSensorReading, testBadDecodeResponse)
 {
-    std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 1>
+    std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES +
+                            MESSAGE_SIZE_BYTES_INCREASE_EACH_16BITS_DATA>
         responseMsg{};
 
     auto rc = decode_get_sensor_reading_resp(

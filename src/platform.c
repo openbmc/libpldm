@@ -660,7 +660,8 @@ int encode_set_numeric_effecter_value_req(uint8_t instance_id,
 	} else if (effecter_data_size == PLDM_EFFECTER_DATA_SIZE_UINT16 ||
 		   effecter_data_size == PLDM_EFFECTER_DATA_SIZE_SINT16) {
 		if (payload_length !=
-		    PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 1) {
+		    PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES +
+			    MESSAGE_SIZE_BYTES_INCREASE_EACH_16BITS_DATA) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
 
@@ -671,7 +672,8 @@ int encode_set_numeric_effecter_value_req(uint8_t instance_id,
 	} else if (effecter_data_size == PLDM_EFFECTER_DATA_SIZE_UINT32 ||
 		   effecter_data_size == PLDM_EFFECTER_DATA_SIZE_SINT32) {
 		if (payload_length !=
-		    PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 3) {
+		    PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES +
+			    MESSAGE_SIZE_BYTES_INCREASE_EACH_32BITS_DATA) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
 
@@ -2134,7 +2136,8 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 	} else if (sensor_data_size == PLDM_EFFECTER_DATA_SIZE_UINT16 ||
 		   sensor_data_size == PLDM_EFFECTER_DATA_SIZE_SINT16) {
 		if (payload_length !=
-		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 1) {
+		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES +
+			    MESSAGE_SIZE_BYTES_INCREASE_EACH_16BITS_DATA) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
 		uint16_t val = *(uint16_t *)present_reading;
@@ -2144,7 +2147,8 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 	} else if (sensor_data_size == PLDM_EFFECTER_DATA_SIZE_UINT32 ||
 		   sensor_data_size == PLDM_EFFECTER_DATA_SIZE_SINT32) {
 		if (payload_length !=
-		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 3) {
+		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES +
+			    MESSAGE_SIZE_BYTES_INCREASE_EACH_32BITS_DATA) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
 		uint32_t val = *(uint32_t *)present_reading;
