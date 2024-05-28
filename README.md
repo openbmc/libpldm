@@ -188,7 +188,7 @@ Following directory structure has to be used:
 ```text
  libpldm
     |---- include/libpldm
-    |        |---- oem/<oem_name>/libpldm
+    |        |---- oem/<oem_name>
     |                    |----<oem based .h files>
     |---- src
     |        |---- oem/<oem_name>
