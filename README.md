@@ -215,14 +215,3 @@ For consistency would recommend using "oem-<oem_name>".
 The `meson.build` and the corresponding source file(s) will need to incorporate
 the logic of adding its mapped compiler flag to allow conditional compilation of
 the code.
-
-## Requester APIs
-
-The pldm requester API's are present in `src/requester` folder and they are
-intended to provide API's to interact with the desired underlying transport
-layer to send/receive pldm messages.
-
-**NOTE** : In the current state, the requester API's in the repository only
-works with [specific transport mechanism](https://github.com/openbmc/libmctp) &
-these are going to change in future & probably aren't appropriate to be writing
-code against.
