@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "13b7c8d6_77f18b74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-29T01:10:41Z",
+      "side": 1,
+      "message": "Please add a link to the code in question.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 5
+      },
+      "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a974f7a_c9bfc325",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-29T01:10:41Z",
+      "side": 1,
+      "message": "Please add a link to the code in question.",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 21
+      },
+      "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e706c4b6_d86ec5f5",
@@ -14,6 +60,46 @@
       "writtenOn": "2024-05-28T11:41:55Z",
       "side": 1,
       "message": "The patch set will help to remove those magic number in the pldm code\nhttps://github.com/openbmc/pldm/blob/087a751fbae04142d7c95a39b4fd4a37b95a83e5/pldmtool/pldm_platform_cmd.cpp#L1691",
+      "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a509ead7_6880545f",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-29T01:10:41Z",
+      "side": 1,
+      "message": "Should this not be `4`?",
+      "range": {
+        "startLine": 120,
+        "startChar": 53,
+        "endLine": 120,
+        "endChar": 54
+      },
+      "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51cfdf7a_17df45d0",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-29T01:10:41Z",
+      "side": 1,
+      "message": "I\u0027d much prefer we find a more ergonomic way to do this than contribute to error-prone calculations by library users.\n\nThe users should be allowed to specify what types they need to encode in the message, and then query libpldm for the appropriate buffer size.\n\nAlternatively, we need to provide an API that returns the maximum possible size of an encoded message.",
       "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
