@@ -89,6 +89,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dbdba224_d02f8dd3",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-05-29T03:37:36Z",
+      "side": 1,
+      "message": "The constant is increased by when compare with the 8 bits data type.\nSo it should be 3.",
+      "parentUuid": "a509ead7_6880545f",
+      "range": {
+        "startLine": 120,
+        "startChar": 53,
+        "endLine": 120,
+        "endChar": 54
+      },
+      "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51cfdf7a_17df45d0",
         "filename": "include/libpldm/base.h",
         "patchSetId": 1
@@ -100,6 +124,24 @@
       "writtenOn": "2024-05-29T01:10:41Z",
       "side": 1,
       "message": "I\u0027d much prefer we find a more ergonomic way to do this than contribute to error-prone calculations by library users.\n\nThe users should be allowed to specify what types they need to encode in the message, and then query libpldm for the appropriate buffer size.\n\nAlternatively, we need to provide an API that returns the maximum possible size of an encoded message.",
+      "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15505bd5_a80acd62",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-05-29T03:37:36Z",
+      "side": 1,
+      "message": "The message buffer size is depend on the command type, the data size of the  value, min/max, thresholds fields in PDRs, and number of those fields.\nIn the current implementation, the caller of message_encode/decode API will allocate the request message/response message buffer. Change that behavior can take much effort.\n\nhttps://github.com/openbmc/libpldm/blob/8c0e7a3150e246960e4680cacae6692a272cd326/tests/libpldm_bios_test.cpp#L33\nhttps://github.com/openbmc/libpldm/blob/8c0e7a3150e246960e4680cacae6692a272cd326/tests/libpldm_fru_test.cpp#L500\nhttps://github.com/openbmc/pldm/blob/087a751fbae04142d7c95a39b4fd4a37b95a83e5/host-bmc/host_pdr_handler.cpp#L384",
+      "parentUuid": "51cfdf7a_17df45d0",
       "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
