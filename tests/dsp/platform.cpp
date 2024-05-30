@@ -4871,7 +4871,6 @@ TEST(decodeNumericEffecterPdrData, Real32Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetStateEffecterStates, testEncodeAndDecodeRequest)
 {
     std::array<uint8_t, hdrSize + PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES>
@@ -4907,9 +4906,7 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeRequest)
 
     EXPECT_EQ(rc, -EOVERFLOW);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetStateEffecterStates, testBadEncodeRequest)
 {
     std::vector<uint8_t> requestMsg(hdrSize +
@@ -4919,9 +4916,7 @@ TEST(GetStateEffecterStates, testBadEncodeRequest)
         0, 0, nullptr, PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES);
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetStateEffecterStates, testBadDecodeRequest)
 {
     std::array<uint8_t, hdrSize + PLDM_GET_NUMERIC_EFFECTER_VALUE_REQ_BYTES>
@@ -4932,9 +4927,7 @@ TEST(GetStateEffecterStates, testBadDecodeRequest)
 
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetStateEffecterStates, testEncodeAndDecodeResponse)
 {
     constexpr uint8_t comp_effecterCnt = 0x2;
@@ -4999,9 +4992,7 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeResponse)
 
     EXPECT_EQ(rc, -EBADMSG);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetStateEffecterStates, testBadEncodeResponse)
 {
     struct pldm_get_state_effecter_states_resp resp
@@ -5014,9 +5005,7 @@ TEST(GetStateEffecterStates, testBadEncodeResponse)
 
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetStateEffecterStates, testBadDecodeResponse)
 {
     std::array<uint8_t, hdrSize +
@@ -5031,4 +5020,3 @@ TEST(GetStateEffecterStates, testBadDecodeResponse)
 
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
