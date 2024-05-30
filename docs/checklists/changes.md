@@ -15,6 +15,12 @@
 
 [rusty-api-scale-bad]: https://ozlabs.org/~rusty/index.cgi/tech/2008-04-01.html
 
+- [Red flags that indicate questionable quality - Lennart
+  Poettering][poettering-library-red-flags]
+
+[poettering-library-red-flags]:
+  https://mastodon.social/@pid_eins/112517953375791453
+
 ## References
 
 - [C17 draft standard][c17-draft-standard]
