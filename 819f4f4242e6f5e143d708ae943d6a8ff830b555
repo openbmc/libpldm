@@ -113,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df7bd3d8_72273076",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-30T01:45:25Z",
+      "side": 1,
+      "message": "I don\u0027t feel that\u0027s very intuitive 😞",
+      "parentUuid": "dbdba224_d02f8dd3",
+      "range": {
+        "startLine": 120,
+        "startChar": 53,
+        "endLine": 120,
+        "endChar": 54
+      },
+      "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51cfdf7a_17df45d0",
         "filename": "include/libpldm/base.h",
         "patchSetId": 1
@@ -142,6 +166,24 @@
       "side": 1,
       "message": "The message buffer size is depend on the command type, the data size of the  value, min/max, thresholds fields in PDRs, and number of those fields.\nIn the current implementation, the caller of message_encode/decode API will allocate the request message/response message buffer. Change that behavior can take much effort.\n\nhttps://github.com/openbmc/libpldm/blob/8c0e7a3150e246960e4680cacae6692a272cd326/tests/libpldm_bios_test.cpp#L33\nhttps://github.com/openbmc/libpldm/blob/8c0e7a3150e246960e4680cacae6692a272cd326/tests/libpldm_fru_test.cpp#L500\nhttps://github.com/openbmc/pldm/blob/087a751fbae04142d7c95a39b4fd4a37b95a83e5/host-bmc/host_pdr_handler.cpp#L384",
       "parentUuid": "51cfdf7a_17df45d0",
+      "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1f17437_7145780c",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-30T01:45:25Z",
+      "side": 1,
+      "message": "But you\u0027re proposing to change it anyway by introducing these macros to remove the magic numbers. I think we need a conversation about how this should be done in a way that eliminates or significantly reduces the chance of user error.",
+      "parentUuid": "15505bd5_a80acd62",
       "revId": "819f4f4242e6f5e143d708ae943d6a8ff830b555",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
