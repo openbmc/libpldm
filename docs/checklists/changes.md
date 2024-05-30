@@ -42,7 +42,7 @@
   implementation, and never the result of incorrect use of the library's public
   APIs (see error condition).
 
-- Corrollaries of the above two points:
+- Corollaries of the above two points:
 
   - Incorrect use of public API functions is always an error condition, and is
     dealt with by returning an error code.
