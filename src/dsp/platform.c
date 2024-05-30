@@ -2524,7 +2524,7 @@ int decode_numeric_effecter_pdr_data(
 	return pldm_msgbuf_destroy_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_get_state_effecter_states_req(uint8_t instance_id,
 					 uint16_t effecter_id,
 					 struct pldm_msg *msg,
@@ -2561,7 +2561,7 @@ int encode_get_state_effecter_states_req(uint8_t instance_id,
 	return pldm_msgbuf_destroy_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_get_state_effecter_states_req(const struct pldm_msg *msg,
 					 size_t payload_length,
 					 uint16_t *effecter_id)
@@ -2586,7 +2586,7 @@ int decode_get_state_effecter_states_req(const struct pldm_msg *msg,
 	return pldm_msgbuf_destroy_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_get_state_effecter_states_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_get_state_effecter_states_resp *resp)
@@ -2639,7 +2639,7 @@ int decode_get_state_effecter_states_resp(
 	return pldm_msgbuf_destroy_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_get_state_effecter_states_resp(
 	uint8_t instance_id, struct pldm_get_state_effecter_states_resp *resp,
 	struct pldm_msg *msg, size_t payload_length)
