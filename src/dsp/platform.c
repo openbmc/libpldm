@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "dsp/base.h"
 #include "msgbuf.h"
 #include "msgbuf/platform.h"
 
@@ -2534,7 +2535,7 @@ int encode_get_state_effecter_states_req(uint8_t instance_id,
 	int rc;
 
 	if (msg == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	struct pldm_header_info header = { 0 };
@@ -2543,13 +2544,14 @@ int encode_get_state_effecter_states_req(uint8_t instance_id,
 	header.pldm_type = PLDM_PLATFORM;
 	header.command = PLDM_GET_STATE_EFFECTER_STATES;
 
-	rc = pack_pldm_header(&header, &msg->hdr);
-	if (rc != PLDM_SUCCESS) {
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc < 0) {
 		return rc;
 	}
 
-	rc = pldm_msgbuf_init_cc(buf, PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES,
-				 msg->payload, payload_length);
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES,
+				    msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -2569,12 +2571,12 @@ int decode_get_state_effecter_states_req(const struct pldm_msg *msg,
 	int rc;
 
 	if (msg == NULL || effecter_id == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
-	rc = pldm_msgbuf_init_cc(buf,
-				 PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES,
-				 msg->payload, payload_length);
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES,
+		msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -2596,12 +2598,12 @@ int decode_get_state_effecter_states_resp(
 	int i;
 
 	if (msg == NULL || resp == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
-	rc = pldm_msgbuf_init_cc(buf,
-				 PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES,
-				 msg->payload, payload_length);
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES,
+		msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -2612,7 +2614,7 @@ int decode_get_state_effecter_states_resp(
 	}
 
 	if (PLDM_SUCCESS != resp->completion_code) {
-		return PLDM_SUCCESS;
+		return 0;
 	}
 
 	rc = pldm_msgbuf_extract(buf, resp->comp_effecter_count);
@@ -2624,7 +2626,7 @@ int decode_get_state_effecter_states_resp(
 
 	if (comp_effecter_count < PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MIN ||
 	    comp_effecter_count > PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MAX) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EBADMSG;
 	}
 
 	for (i = 0, field = resp->field; i < comp_effecter_count;
@@ -2649,14 +2651,14 @@ int encode_get_state_effecter_states_resp(
 	int i;
 
 	if (msg == NULL || resp == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	uint8_t comp_effecter_count = resp->comp_effecter_count;
 
 	if (comp_effecter_count < PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MIN ||
 	    comp_effecter_count > PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MAX) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EBADMSG;
 	}
 
 	struct pldm_header_info header = { 0 };
@@ -2665,14 +2667,14 @@ int encode_get_state_effecter_states_resp(
 	header.pldm_type = PLDM_PLATFORM;
 	header.command = PLDM_GET_STATE_EFFECTER_STATES;
 
-	rc = pack_pldm_header(&header, &msg->hdr);
-	if (rc != PLDM_SUCCESS) {
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc < 0) {
 		return rc;
 	}
 
-	rc = pldm_msgbuf_init_cc(buf,
-				 PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES,
-				 msg->payload, payload_length);
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_GET_STATE_EFFECTER_STATES_MIN_RESP_BYTES,
+		msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}

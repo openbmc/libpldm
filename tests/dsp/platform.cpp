@@ -5,6 +5,7 @@
 #include <libpldm/pldm_types.h>
 
 #include <array>
+#include <cerrno>
 #include <cstdint>
 #include <cstring>
 #include <vector>
@@ -4904,7 +4905,7 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeRequest)
     rc = decode_get_state_effecter_states_req(
         request, requestMsg.size() - hdrSize - 1, &ret_effecter_id);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
 
@@ -4916,7 +4917,7 @@ TEST(GetStateEffecterStates, testBadEncodeRequest)
 
     auto rc = encode_get_state_effecter_states_req(
         0, 0, nullptr, PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 }
 #endif
 
@@ -4929,7 +4930,7 @@ TEST(GetStateEffecterStates, testBadDecodeRequest)
     auto rc = decode_get_state_effecter_states_req(
         nullptr, requestMsg.size() - hdrSize, nullptr);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 }
 #endif
 
@@ -4996,7 +4997,7 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeResponse)
         responseMsg.size() - hdrSize + PLDM_GET_EFFECTER_STATE_FIELD_SIZE,
         &ret_resp_fields);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EBADMSG);
 }
 #endif
 
@@ -5011,7 +5012,7 @@ TEST(GetStateEffecterStates, testBadEncodeResponse)
     };
     auto rc = decode_get_state_effecter_states_resp(nullptr, 0, &resp);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 }
 #endif
 
@@ -5028,6 +5029,6 @@ TEST(GetStateEffecterStates, testBadDecodeResponse)
     auto rc = decode_get_state_effecter_states_resp(
         response, responseMsg.size() - hdrSize, nullptr);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 }
 #endif
