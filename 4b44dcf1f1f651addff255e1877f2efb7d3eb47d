@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f5da4a9_e0a9b6d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-31T00:24:12Z",
+      "side": 1,
+      "message": "Ah, so I had a thought at https://gerrit.openbmc.org/c/openbmc/pldm/+/71657/comment/86c5dab1_199d17ed/",
+      "revId": "4b44dcf1f1f651addff255e1877f2efb7d3eb47d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2b6ea92_f80b9cdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-31T00:24:12Z",
+      "side": 1,
+      "message": "Hi Tal, before we stabilise this one I think it might be worth changing the error handling of the affected functions.",
+      "revId": "4b44dcf1f1f651addff255e1877f2efb7d3eb47d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab66f3b7_35d5467b",
+        "filename": "src/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2551,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-05-31T00:24:12Z",
+      "side": 1,
+      "message": "In a separate patch prior to this stabilisation patch, can we change the error personality (and in the other affected functions) to `pldm_msgbuf_init_errno()`? That way we can satisfy this:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L81-L85\n\nThe change may precipitate some fixes in the patch to pldmtool as well.\n\nAnyway, hooray for API/ABI control 😊",
+      "revId": "4b44dcf1f1f651addff255e1877f2efb7d3eb47d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
