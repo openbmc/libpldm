@@ -50,6 +50,24 @@
       "message": "In a separate patch prior to this stabilisation patch, can we change the error personality (and in the other affected functions) to `pldm_msgbuf_init_errno()`? That way we can satisfy this:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L81-L85\n\nThe change may precipitate some fixes in the patch to pldmtool as well.\n\nAnyway, hooray for API/ABI control 😊",
       "revId": "4b44dcf1f1f651addff255e1877f2efb7d3eb47d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53fa755a_c20931d3",
+        "filename": "src/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2551,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-31T08:06:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab66f3b7_35d5467b",
+      "revId": "4b44dcf1f1f651addff255e1877f2efb7d3eb47d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

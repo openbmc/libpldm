@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1424385_0af78694",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-31T08:06:49Z",
+      "side": 1,
+      "message": "Hi Andrew, I addressed your comment but I do have one small concern regarding `pack_pldm_header()` which still return a PLDM completion code.",
+      "revId": "32bd58b732d61c720017a00ce704b9bc8d0f81c3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe043959_11a132cb",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2546,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-05-31T08:06:49Z",
+      "side": 1,
+      "message": "Regarding the errno, this function still returns a PLDM completion code.\nWill this be addressed in the future or should I return something else here?",
+      "revId": "32bd58b732d61c720017a00ce704b9bc8d0f81c3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
