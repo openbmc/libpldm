@@ -5,6 +5,7 @@
 #include <libpldm/pldm_types.h>
 
 #include <array>
+#include <cerrno>
 #include <cstdint>
 #include <cstring>
 #include <vector>
@@ -4904,7 +4905,7 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeRequest)
     rc = decode_get_state_effecter_states_req(
         request, requestMsg.size() - hdrSize - 1, &ret_effecter_id);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
 
@@ -4996,7 +4997,7 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeResponse)
         responseMsg.size() - hdrSize + PLDM_GET_EFFECTER_STATE_FIELD_SIZE,
         &ret_resp_fields);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EBADMSG);
 }
 #endif
 
