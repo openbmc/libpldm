@@ -44,6 +44,9 @@
 
 - **Public API**: Any definitions and declarations under `include/libpldm`.
 
+- **Wire format**: Any message structure defined in the DMTF PLDM protocol
+  specifications.
+
 ## Elaborations
 
 - Resource exhaustion is always an error condition and never an invariant
