@@ -21,6 +21,11 @@
 [poettering-library-red-flags]:
   https://mastodon.social/@pid_eins/112517953375791453
 
+- [Not sure if this is a gcc bug or some weird corner of UB or what... - Andrew
+  Zonenberg][azonenberg-packed-struct]
+
+[azonenberg-packed-struct]: https://ioc.exchange/@azonenberg/112535511250395148
+
 ## References
 
 - [C17 draft standard][c17-draft-standard]
