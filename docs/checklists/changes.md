@@ -71,6 +71,24 @@
 - [ ] My new public `struct` definitions are _not_ marked
       `__attribute__((packed))`
 
+- [ ] My new public `struct` definitions do _not_ define a flexible array
+      member, unless:
+
+  - [ ] It's contained in an `#ifndef __cplusplus` macro guard, as flexible
+        arrays are not specified by C++, and
+
+  - [ ] I've implemented an accessor function so the array base pointer can be
+        accessed from C++, and
+
+  - [ ] It is defined as per the C17 specification by omitting the length[^1]
+
+    - Note: Any array defined with length 1 is _not_ a flexible array, and any
+      access beyond the first element invokes undefined behaviour in both C and
+      C++.
+
+[^1]: [C17 draft specification][c17-draft-standard], 6.7.2.1 Structure and union
+      specifiers, paragraph 18.
+
 - [ ] If my work interacts with the PLDM wire format, then I have done so using
       the `msgbuf` APIs found in `src/msgbuf.h` (and under `src/msgbuf/`) to
       minimise concerns around spatial memory safety and endian-correctness.
