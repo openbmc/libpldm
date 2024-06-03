@@ -12,20 +12,16 @@ if not gtest_dep.found() or not gmock_dep.found()
         gmock_dep = gtest_proj.dependency('gmock')
 endif
 
+test_include_dirs = [ libpldm_include_dir, include_directories('../src') ]
 
 tests = [
   'instance-id',
-  'libpldm_base_test',
-  'libpldm_bios_table_test',
-  'libpldm_bios_test',
-  'libpldm_firmware_update_test',
-  'libpldm_fru_test',
-  'libpldm_pdr_test',
-  'libpldm_platform_test',
-  'libpldm_utils_test',
   'msgbuf',
   'responder',
+  'utils',
 ]
+
+subdir('dsp')
 
 # The 'test' transport APIs will never be marked stable as they are just for
 # testing.
@@ -41,8 +37,6 @@ if get_option('oem-meta').allowed()
   subdir('oem/meta')
 endif
 
-test_include_dirs = [ libpldm_include_dir, include_directories('../src') ]
-
 foreach t : tests
   test(t, executable(t.underscorify(), t + '.cpp',
                      implicit_include_directories: false,
@@ -53,11 +47,6 @@ foreach t : tests
                          gmock_dep]),
        workdir: meson.current_source_dir())
 endforeach
-
-test('bios_table_iter', executable('bios_table_iter',
-                                   'bios_table_iter.c',
-                                   implicit_include_directories: false,
-                                   include_directories: test_include_dirs))
 
 test('msgbuf_generic', executable('msgbuf_generic',
                                   'msgbuf_generic.c',

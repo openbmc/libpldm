@@ -1,3 +1,3 @@
 tests += [
-  'oem/meta/libpldm_fileio_test',
+  'oem/meta/fileio',
 ]
