@@ -10,7 +10,7 @@
 #include <stdlib.h>
 
 /* NOLINTNEXTLINE(bugprone-suspicious-include) */
-#include "bios_table.c"
+#include "dsp/bios_table.c"
 
 /* Satisfy the symbol needs of bios_table.c */
 uint32_t crc32(const void* data __attribute__((unused)),

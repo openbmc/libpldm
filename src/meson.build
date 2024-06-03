@@ -1,15 +1,9 @@
 libpldm_sources = files(
-  'base.c',
-  'bios.c',
-  'platform.c',
-  'bios_table.c',
-  'firmware_update.c',
-  'fru.c',
-  'pdr.c',
   'responder.c',
   'utils.c'
-  )
+)
 
+subdir('dsp')
 subdir('requester')
 subdir('transport')
 
