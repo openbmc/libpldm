@@ -33,6 +33,24 @@
       "message": "Regarding the errno, this function still returns a PLDM completion code.\nWill this be addressed in the future or should I return something else here?",
       "revId": "32bd58b732d61c720017a00ce704b9bc8d0f81c3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94c15c84_fba2ecc3",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2546,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-03T02:33:57Z",
+      "side": 1,
+      "message": "I\u0027ll grab your series and refactor things underneath it to deal with this issue. I\u0027ll re-push it once I\u0027m done.",
+      "parentUuid": "fe043959_11a132cb",
+      "revId": "32bd58b732d61c720017a00ce704b9bc8d0f81c3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
