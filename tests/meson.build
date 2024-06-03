@@ -30,27 +30,15 @@ tests = [
 # The 'test' transport APIs will never be marked stable as they are just for
 # testing.
 if get_option('abi').contains('testing')
-  tests += [
-    'transport',
-    'transport/send_recv_one',
-    'transport/send_recv_timeout',
-    'transport/send_recv_unwanted',
-    'transport/send_recv_wrong_command_code',
-    'transport/send_recv_wrong_pldm_type',
-  ]
+  subdir('transport')
 endif
 
 if get_option('oem-ibm').allowed()
-  tests += [
-    'oem/ibm/libpldm_fileio_test',
-    'oem/ibm/libpldm_host_test',
-  ]
+  subdir('oem/ibm')
 endif
 
 if get_option('oem-meta').allowed()
-  tests += [
-    'oem/meta/libpldm_fileio_test',
-  ]
+  subdir('oem/meta')
 endif
 
 test_include_dirs = [ libpldm_include_dir, include_directories('../src') ]
