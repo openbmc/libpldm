@@ -80,6 +80,21 @@ struct pldm_msgbuf {
 	enum pldm_msgbuf_error_mode mode;
 };
 
+/**
+ * @brief Either negate an errno value or return a value mapped to a PLDM
+ * completion code.
+ *
+ * Note that `pldm_msgbuf_status()` is purely internal to the msgbuf API
+ * for ergonomics. It's preferred that we don't try to unify this with
+ * `pldm_xlate_errno()` from src/api.h despite the similarities.
+ *
+ * @param[in] ctx - The msgbuf context providing the personality info
+ * @param[in] err - The positive errno value to translate
+ *
+ * @return Either the negated value of @p err if the context's error mode is
+ *         `PLDM_MSGBUF_C_ERRNO`, or the equivalent PLDM completion code if the
+ *         error mode is `PLDM_MSGBUF_PLDM_CC`.
+ */
 __attribute__((always_inline)) static inline int
 pldm_msgbuf_status(struct pldm_msgbuf *ctx, unsigned int err)
 {
