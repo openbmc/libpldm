@@ -27,6 +27,8 @@ tests = [
   'responder',
 ]
 
+# The 'test' transport APIs will never be marked stable as they are just for
+# testing.
 if get_option('abi').contains('testing')
   tests += [
     'transport',
