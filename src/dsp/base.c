@@ -1,30 +1,34 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "api.h"
+#include "dsp/base.h"
+
+#include <assert.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
 
 #include <endian.h>
+#include <errno.h>
 #include <stdint.h>
 #include <string.h>
 
-LIBPLDM_ABI_STABLE
-uint8_t pack_pldm_header(const struct pldm_header_info *hdr,
-			 struct pldm_msg_hdr *msg)
+int pack_pldm_header_errno(const struct pldm_header_info *hdr,
+			   struct pldm_msg_hdr *msg)
 {
 	if (msg == NULL || hdr == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	if (hdr->msg_type != PLDM_RESPONSE && hdr->msg_type != PLDM_REQUEST &&
 	    hdr->msg_type != PLDM_ASYNC_REQUEST_NOTIFY) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	if (hdr->instance > PLDM_INSTANCE_MAX) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	if (hdr->pldm_type > (PLDM_MAX_TYPES - 1)) {
-		return PLDM_ERROR_INVALID_PLDM_TYPE;
+		return -ENOMSG;
 	}
 
 	uint8_t datagram = (hdr->msg_type == PLDM_ASYNC_REQUEST_NOTIFY) ? 1 : 0;
@@ -42,15 +46,14 @@ uint8_t pack_pldm_header(const struct pldm_header_info *hdr,
 	msg->type = hdr->pldm_type;
 	msg->command = hdr->command;
 
-	return PLDM_SUCCESS;
+	return 0;
 }
 
-LIBPLDM_ABI_STABLE
-uint8_t unpack_pldm_header(const struct pldm_msg_hdr *msg,
-			   struct pldm_header_info *hdr)
+int unpack_pldm_header_errno(const struct pldm_msg_hdr *msg,
+			     struct pldm_header_info *hdr)
 {
 	if (msg == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	if (msg->request == PLDM_RESPONSE) {
@@ -64,7 +67,51 @@ uint8_t unpack_pldm_header(const struct pldm_msg_hdr *msg,
 	hdr->pldm_type = msg->type;
 	hdr->command = msg->command;
 
-	return PLDM_SUCCESS;
+	return 0;
+}
+
+LIBPLDM_ABI_STABLE
+uint8_t pack_pldm_header(const struct pldm_header_info *hdr,
+			 struct pldm_msg_hdr *msg)
+{
+	enum pldm_completion_codes cc;
+	int rc;
+
+	rc = pack_pldm_header_errno(hdr, msg);
+	if (!rc) {
+		return PLDM_SUCCESS;
+	}
+
+	cc = pldm_xlate_errno(rc);
+	assert(cc < UINT8_MAX);
+	if (cc > UINT8_MAX) {
+		static_assert(PLDM_ERROR < UINT8_MAX, "Unable to report error");
+		return PLDM_ERROR;
+	}
+
+	return cc;
+}
+
+LIBPLDM_ABI_STABLE
+uint8_t unpack_pldm_header(const struct pldm_msg_hdr *msg,
+			   struct pldm_header_info *hdr)
+{
+	enum pldm_completion_codes cc;
+	int rc;
+
+	rc = unpack_pldm_header_errno(msg, hdr);
+	if (!rc) {
+		return PLDM_SUCCESS;
+	}
+
+	cc = pldm_xlate_errno(rc);
+	assert(cc < UINT8_MAX);
+	if (cc > UINT8_MAX) {
+		static_assert(PLDM_ERROR < UINT8_MAX, "Unable to report error");
+		return PLDM_ERROR;
+	}
+
+	return cc;
 }
 
 LIBPLDM_ABI_STABLE
