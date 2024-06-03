@@ -193,3 +193,5 @@ Each of the following must succeed when executed in order. Note that to avoid
 - [ ] `meson configure --buildtype=debug build`
 - [ ] `meson configure -Dabi=deprecated,stable build`
 - [ ] `meson compile -C build && meson test -C build`
+
+This process is captured in `scripts/pre-submit` for automation.

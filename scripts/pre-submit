@@ -1,0 +1,14 @@
+#!/usr/bin/sh
+set -eu
+BUILD="$(mktemp --directory --tmpdir=.)"
+trap 'rm -rf "$BUILD"' EXIT
+meson setup -Dabi-compliance-check=disabled "$BUILD"
+meson compile -C "$BUILD"
+meson test -C "$BUILD"
+meson configure --buildtype=release "$BUILD"
+meson compile -C "$BUILD"
+meson test -C "$BUILD"
+meson configure --buildtype=debug "$BUILD"
+meson configure -Dabi=deprecated,stable "$BUILD"
+meson compile -C "$BUILD"
+meson test -C "$BUILD"
