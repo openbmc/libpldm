@@ -16,13 +16,13 @@ endif
 tests = [
   'instance-id',
   'libpldm_base_test',
-  'libpldm_platform_test',
-  'libpldm_bios_test',
   'libpldm_bios_table_test',
-  'libpldm_fru_test',
-  'libpldm_utils_test',
-  'libpldm_pdr_test',
+  'libpldm_bios_test',
   'libpldm_firmware_update_test',
+  'libpldm_fru_test',
+  'libpldm_pdr_test',
+  'libpldm_platform_test',
+  'libpldm_utils_test',
   'msgbuf',
   'responder',
 ]
@@ -33,8 +33,8 @@ if get_option('abi').contains('testing')
     'transport/send_recv_one',
     'transport/send_recv_timeout',
     'transport/send_recv_unwanted',
+    'transport/send_recv_wrong_command_code',
     'transport/send_recv_wrong_pldm_type',
-    'transport/send_recv_wrong_command_code'
   ]
 endif
 
