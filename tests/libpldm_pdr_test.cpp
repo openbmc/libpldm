@@ -1930,6 +1930,7 @@ TEST(EntityAssociationPDR, testNodeAddCheck)
     pldm_entity_association_tree_destroy(tree);
 }
 
+#ifdef LIBPLDM_API_TESTING
 TEST(EntityAssociationPDR, testAddContainedEntityRemotePDR)
 {
     // pldm_entity entities[5]{};
@@ -1986,7 +1987,9 @@ TEST(EntityAssociationPDR, testAddContainedEntityRemotePDR)
     pldm_pdr_destroy(repo);
     pldm_entity_association_tree_destroy(tree);
 }
+#endif
 
+#ifdef LIBPLDM_API_TESTING
 TEST(EntityAssociationPDR, testAddContainedEntityNew)
 {
     // pldm_entity entities[5]{};
@@ -2050,3 +2053,4 @@ TEST(EntityAssociationPDR, testAddContainedEntityNew)
     pldm_pdr_destroy(repo);
     pldm_entity_association_tree_destroy(tree);
 }
+#endif
