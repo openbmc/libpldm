@@ -1,4 +1,4 @@
-project('libpldm', ['c','cpp'],
+project('libpldm', 'c',
     default_options: [
       'debug=true',
       'optimization=g',
@@ -12,6 +12,10 @@ project('libpldm', ['c','cpp'],
     version: '0.8.0',
     meson_version: '>=1.1.0',
 )
+
+if get_option('tests').allowed()
+  add_languages('cpp')
+endif
 
 add_project_arguments('-D_DEFAULT_SOURCE', language: ['c'])
 
