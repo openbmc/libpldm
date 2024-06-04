@@ -16,6 +16,24 @@
       "message": "Why is this change needed? PLDM Error codes are themselves self explanatory. could you please update it in the commit message",
       "revId": "83fde36c3b0018214d7c1a0752fc3d22a694b48e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5be58942_7c0cafff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-06-04T11:25:08Z",
+      "side": 1,
+      "message": "That\u0027s the general preference of the library, please check out https://gerrit.openbmc.org/c/openbmc/libpldm/+/71597 for a more detailed explanation.",
+      "parentUuid": "1c9351ed_d7f51ded",
+      "revId": "83fde36c3b0018214d7c1a0752fc3d22a694b48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
