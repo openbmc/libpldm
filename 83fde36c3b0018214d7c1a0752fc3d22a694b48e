@@ -34,6 +34,24 @@
       "parentUuid": "1c9351ed_d7f51ded",
       "revId": "83fde36c3b0018214d7c1a0752fc3d22a694b48e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49cb0f3f_62077c89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-04T11:27:02Z",
+      "side": 1,
+      "message": "PLDM completion codes deal with problems of the PLDM protocol at the specification level. They are quite constrained compared with the set of problems an implementation of the protocol might encounter at runtime. C errno values are:\n\n1. A well-worn set of error codes that are well-recognised\n2. A better match to the problems the implementation will encounter at runtime\n\nDocumentation has been added here describing as much:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/71763/1/src/api.h#13\n\nPerhaps the commit message could link to that or something equally relevant. But at this point I don\u0027t consider switching contentious, and I plan to rework the existing stable APIs so we have consistency.",
+      "parentUuid": "1c9351ed_d7f51ded",
+      "revId": "83fde36c3b0018214d7c1a0752fc3d22a694b48e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
