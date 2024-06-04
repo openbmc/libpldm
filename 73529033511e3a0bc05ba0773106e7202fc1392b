@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34a55976_43c3c772",
+        "filename": "src/api.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-06-04T07:32:03Z",
+      "side": 1,
+      "message": "In this case it\u0027s fine as is.",
+      "parentUuid": "f5de8cec_d3bbce3c",
+      "revId": "73529033511e3a0bc05ba0773106e7202fc1392b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2439067a_a706b73a",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "I didn\u0027t yet provide an annotation as I didn\u0027t want to expose them to the dynamic linker at all - for now they\u0027re just for the internal link.\n\nI want to bikeshed the name for the new API a bit; my preference is `int pldm_pack_header()` and `int pldm_unpack_header()`, returning the negative errno. I was concerned that was too confusing, and I\u0027m half-wondering whether we can get away without them altogether, so punted it to later (as it\u0027s not urgent). I would like to deprecate `{un,}pack_pldm_header()` though (but again, can do that later).",
       "parentUuid": "2439067a_a706b73a",
+      "revId": "73529033511e3a0bc05ba0773106e7202fc1392b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b78ff860_0baa8e54",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-06-04T07:32:03Z",
+      "side": 1,
+      "message": "ACK",
+      "parentUuid": "d995e525_2da2a84f",
       "revId": "73529033511e3a0bc05ba0773106e7202fc1392b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
