@@ -16,6 +16,24 @@
       "message": "Tal: Do you mind giving some feedback on the prior patches in this series?",
       "revId": "013eb44d254eede589b3ca66e618be69fbb7e535",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0150d63_41db3de4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-06-04T08:52:24Z",
+      "side": 1,
+      "message": "Sure, everything looks good. I did have a couple of questions on the rework pack header patch which you\u0027ve already addressed.",
+      "parentUuid": "c8b1d269_a5caed3f",
+      "revId": "013eb44d254eede589b3ca66e618be69fbb7e535",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
