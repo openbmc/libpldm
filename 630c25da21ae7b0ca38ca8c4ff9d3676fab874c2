@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d69f0d_120378c9",
+        "filename": "scripts/pre-submit",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-06-06T05:27:48Z",
+      "side": 1,
+      "message": "ack, sounds good.",
+      "parentUuid": "9656641e_2b2ba891",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 7
+      },
+      "revId": "630c25da21ae7b0ca38ca8c4ff9d3676fab874c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "743f7fb5_99c85bb9",
