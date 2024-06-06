@@ -51,6 +51,24 @@
       "parentUuid": "fe043959_11a132cb",
       "revId": "32bd58b732d61c720017a00ce704b9bc8d0f81c3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57b5b2b6_83e043a4",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2546,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-06T06:22:20Z",
+      "side": 1,
+      "message": "Okay, I\u0027ve merged all the refactoring patches and your patch to change the error personality. I think that gives us what we need to re-evaluate this one. Can you do some testing and report back?",
+      "parentUuid": "94c15c84_fba2ecc3",
+      "revId": "32bd58b732d61c720017a00ce704b9bc8d0f81c3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
