@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4f3b101_e2884c51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-06T02:48:36Z",
+      "side": 1,
+      "message": "Hi Varsha, I have a couple of comments.",
+      "revId": "dc4c2e1b58551684deac400727d839aa15f4ea0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "003c28dc_b26ace73",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-06T02:48:36Z",
+      "side": 1,
+      "message": "These are all in the `0.8.0` release section, but the patch wasn\u0027t included in the v0.8.0 tag. You need to start a new `### Added` header under `## [Unreleased]` and list the changes there.",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 53
+      },
+      "revId": "dc4c2e1b58551684deac400727d839aa15f4ea0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34a558a_88877220",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-06T02:48:36Z",
+      "side": 1,
+      "message": "No need to mention msgbuf changes in the changelog IMO, as they only impact the implementation and not the public API/ABI. My preference is that the changelog is kept to user-facing impacts.",
+      "revId": "dc4c2e1b58551684deac400727d839aa15f4ea0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
