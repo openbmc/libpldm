@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "933309bb_7b0021f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-06T03:20:29Z",
+      "side": 1,
+      "message": "Well, we need to be careful with that statement. The existence of the header is driven by me trying to sort out some error handling stuff, but the purpose of the header is not for error handling. Specifically:\n\nThe header is under `src/` and not `include/` so it\u0027s not part of the public API of the library. We need the functions declared in a header because they\u0027re used elsewhere in the libpldm implementation, but at the moment it\u0027s most sensible for their definitions to live in `src/dsp/base.c`. Further, because the function implementations in `src/dsp/base.c` are not annotated with one of the `LIBPLDM_ABI_*` macros they will never be visible to the dynamic linker. An internal header is the right place for the declarations.\n\nThe same goes for any other internal-only declarations we need. We should just drop a header under `src/` alongside the `.c` file where the things are defined, and go from there.\n\nDoes that make sense?",
+      "parentUuid": "f7774eab_245237ee",
+      "revId": "73529033511e3a0bc05ba0773106e7202fc1392b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ea75d8e_797111b6",
         "filename": "src/api.h",
         "patchSetId": 1
