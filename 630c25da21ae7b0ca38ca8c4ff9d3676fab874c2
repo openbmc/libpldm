@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9656641e_2b2ba891",
+        "filename": "scripts/pre-submit",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-06T04:44:12Z",
+      "side": 1,
+      "message": "I prefer we don\u0027t `set -x` by default - if the caller wants verbose output they can always `sh -x ./scripts/pre-submit`?",
+      "parentUuid": "bfddbe8e_f8a2e2b2",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 7
+      },
+      "revId": "630c25da21ae7b0ca38ca8c4ff9d3676fab874c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "743f7fb5_99c85bb9",
         "filename": "scripts/pre-submit",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-05T04:53:11Z",
       "side": 1,
       "message": "would prefer to group them and add newlines between groups \u0026 also add comments on what each group of command does.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 22
+      },
+      "revId": "630c25da21ae7b0ca38ca8c4ff9d3676fab874c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f04875_0ec874af",
+        "filename": "scripts/pre-submit",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-06T04:44:12Z",
+      "side": 1,
+      "message": "Rather than what, perhaps I\u0027ll add why each set is interesting/necessary.",
+      "parentUuid": "743f7fb5_99c85bb9",
       "range": {
         "startLine": 5,
         "startChar": 0,
