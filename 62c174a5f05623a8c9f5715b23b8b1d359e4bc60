@@ -33,6 +33,24 @@
       "message": "Hey andrew, this change look good to me. But i was thinking if we can have subfolders like\n\n`dsp/base/base.c` ,`dsp/platform/pdr.c` \u0026 `dsp/platform/platform.c` \n\nthis will also allow us to have unique documentation on what commands we support per spec.",
       "revId": "62c174a5f05623a8c9f5715b23b8b1d359e4bc60",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "708c9b57_923e7782",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-06T03:28:35Z",
+      "side": 1,
+      "message": "Yeah, I\u0027m thinking directories are an eventual goal. We can do that later though. I don\u0027t prefer that we have paths like `src/dsp/platform/platform.c` as it seems redundant. Rather, my eventual goal is to split implementations out of e.g. `platform.c` based around message type, e.g. `src/dsp/248-platform/16.1-settid.c` (lots of bikeshedding here), and then break out the associated tests in the same fashion.",
+      "parentUuid": "9d93d19c_d1f4873b",
+      "revId": "62c174a5f05623a8c9f5715b23b8b1d359e4bc60",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
