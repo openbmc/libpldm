@@ -15,6 +15,11 @@ if get_option('oem-meta').allowed()
    subdir('oem/meta')
 endif
 
+libpldm_link_args = []
+foreach alias : libpldm_deprecated_aliases
+  libpldm_link_args += '-Wl,--defsym=@0@=@1@'.format(alias[0], alias[1])
+endforeach
+
 libpldm = library(
   'pldm',
    libpldm_sources,
@@ -23,6 +28,7 @@ libpldm = library(
      libpldm_include_dir,
      include_directories('.')
    ],
+   link_args: libpldm_link_args,
    version: meson.project_version(),
    gnu_symbol_visibility: 'hidden',
    install: true
