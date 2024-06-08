@@ -21,6 +21,23 @@ Change categories:
 
 1. base: Define macros for reserved TIDs
 
+### Deprecated
+
+1. fru: Deprecate `get_fru_record_by_option_check()`
+
+   Users should switch to `get_fru_record_by_option()`. Migration can be
+   performed using the [Coccinelle semantic patch][coccinelle]
+   `get_fru_record_by_option_check.cocci`:
+
+   ```
+   $ spatch \
+      --sp-file=${LIBPLDM_DIR}/evolutions/current/get_fru_record_by_option_check.cocci \
+      --in-place \
+      $(git ls-files | grep -E '\.[ch](pp)?')
+   ```
+
+[coccinelle]: https://coccinelle.gitlabpages.inria.fr/website/
+
 ## [0.8.0] - 2024-05-23
 
 ### Added

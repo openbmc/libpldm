@@ -213,9 +213,9 @@ static bool is_table_end(const struct pldm_fru_record_data_format *p,
 }
 
 LIBPLDM_ABI_STABLE
-int get_fru_record_by_option_check(const uint8_t *table, size_t table_size,
-				   uint8_t *record_table, size_t *record_size,
-				   uint16_t rsi, uint8_t rt, uint8_t ft)
+int get_fru_record_by_option(const uint8_t *table, size_t table_size,
+			     uint8_t *record_table, size_t *record_size,
+			     uint16_t rsi, uint8_t rt, uint8_t ft)
 {
 	const struct pldm_fru_record_data_format *record_data_src =
 		(const struct pldm_fru_record_data_format *)table;
