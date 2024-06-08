@@ -176,6 +176,24 @@ Each of the following must succeed:
   - [ ] There has been at least one tagged release of `libpldm` subsequent to
         the API being marked deprecated
 
+## Renaming an API
+
+Renaming an API with no other behavioural changes is really two actions:
+
+1. Introducing the new API name
+2. Deprecating the old API name
+
+- [ ] Only the name of the API has changed. None of its behaviour has changed.
+
+- [ ] Both the new and the old APIs are declared in the public headers
+
+- [ ] I've updated the list of deprecated function aliases in the build scripts
+
+- [ ] I've added a [semantic patch][coccinelle] to migrate users off of the old
+      API name
+
+[coccinelle]: https://coccinelle.gitlabpages.inria.fr/website/
+
 ## Testing my changes
 
 Each of the following must succeed when executed in order. Note that to avoid
