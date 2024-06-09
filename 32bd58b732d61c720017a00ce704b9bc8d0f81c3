@@ -69,6 +69,24 @@
       "parentUuid": "94c15c84_fba2ecc3",
       "revId": "32bd58b732d61c720017a00ce704b9bc8d0f81c3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a35fcca_8edf7285",
+        "filename": "src/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2546,
+      "author": {
+        "id": 1002058
+      },
+      "writtenOn": "2024-06-09T08:36:21Z",
+      "side": 1,
+      "message": "Tested the changes on my setup and everything seems to be working fine.",
+      "parentUuid": "57b5b2b6_83e043a4",
+      "revId": "32bd58b732d61c720017a00ce704b9bc8d0f81c3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
