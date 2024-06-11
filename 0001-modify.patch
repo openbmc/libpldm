@@ -1,0 +1,117 @@
+From 7c037ee74253fab1edb45811932a48b95b710d54 Mon Sep 17 00:00:00 2001
+From: Jeff_Shih <Jeff_Shih@wiwynn.com>
+Date: Fri, 17 May 2024 15:04:36 +0800
+Subject: [PATCH] modify
+
+---
+ include/libpldm/oem/meta/file_io.h | 16 ++++++--
+ src/oem/meta/file_io.c             | 61 ++++++++++++++++++++++++++++--
+ 2 files changed, 71 insertions(+), 6 deletions(-)
+
+diff --git a/include/libpldm/oem/meta/file_io.h b/include/libpldm/oem/meta/file_io.h
+index 32a7109..bdb3145 100644
+--- a/include/libpldm/oem/meta/file_io.h
++++ b/include/libpldm/oem/meta/file_io.h
+@@ -33,9 +33,19 @@ struct pldm_oem_meta_write_file_req {
+  *  @param[out] data - Message will be written to this
+  *  @return pldm_completion_codes
+  */
+-int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
+-				size_t payload_length, uint8_t *file_handle,
+-				uint32_t *length, uint8_t *data);
++int decode_oem_meta_write_file_io_req(const struct pldm_msg *msg,
++				      size_t payload_length,
++				      uint8_t *file_handle, uint32_t *length,
++				      uint8_t *data);
++
++int decode_oem_meta_read_file_io_req(const struct pldm_msg *msg,
++				     size_t payload_length,
++				     uint8_t *file_handle, uint8_t *length,
++				     uint8_t *transferFlag, uint8_t *highOffset,
++				     uint8_t *lowOffset);
++
++int encode_http_boot_header_resp(uint8_t instance_id, uint8_t completion_code,
++				 struct pldm_msg *responseMsg);
+ 
+ #ifdef __cplusplus
+ }
+diff --git a/src/oem/meta/file_io.c b/src/oem/meta/file_io.c
+index 073c446..ab4cb73 100644
+--- a/src/oem/meta/file_io.c
++++ b/src/oem/meta/file_io.c
+@@ -6,10 +6,12 @@
+ #include "msgbuf.h"
+ 
+ #define PLDM_OEM_META_DECODE_WRITE_FILE_IO_MIN_SIZE 6
++#define PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE  1
+ LIBPLDM_ABI_STABLE
+-int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
+-				size_t payload_length, uint8_t *file_handle,
+-				uint32_t *length, uint8_t *data)
++int decode_oem_meta_write_file_io_req(const struct pldm_msg *msg,
++				      size_t payload_length,
++				      uint8_t *file_handle, uint32_t *length,
++				      uint8_t *data)
+ {
+ 	struct pldm_msgbuf _buf;
+ 	struct pldm_msgbuf *buf = &_buf;
+@@ -32,3 +34,56 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
+ 
+ 	return pldm_msgbuf_destroy_consumed(buf);
+ }
++
++LIBPLDM_ABI_STABLE
++int decode_oem_meta_read_file_io_req(const struct pldm_msg *msg,
++				     size_t payload_length,
++				     uint8_t *file_handle, uint8_t *length,
++				     uint8_t *transferFlag, uint8_t *highOffset,
++				     uint8_t *lowOffset)
++{
++	struct pldm_msgbuf _buf;
++	struct pldm_msgbuf *buf = &_buf;
++
++	if (msg == NULL || file_handle == NULL || length == NULL) {
++		return PLDM_ERROR_INVALID_DATA;
++	}
++
++	int rc = pldm_msgbuf_init(buf,
++				  PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE,
++				  msg->payload, payload_length);
++	if (rc) {
++		return rc;
++	}
++	pldm_msgbuf_extract_p(buf, file_handle);
++	pldm_msgbuf_extract_p(buf, length);
++	pldm_msgbuf_extract_p(buf, transferFlag);
++	pldm_msgbuf_extract_p(buf, highOffset);
++	pldm_msgbuf_extract_p(buf, lowOffset);
++
++	return pldm_msgbuf_destroy_consumed(buf);
++}
++
++LIBPLDM_ABI_STABLE
++int encode_http_boot_header_resp(uint8_t instance_id, uint8_t completion_code,
++				 struct pldm_msg *responseMsg)
++{
++	if (responseMsg == NULL) {
++		return PLDM_ERROR_INVALID_DATA;
++	}
++
++	struct pldm_header_info header = { 0 };
++	header.instance = instance_id;
++	header.msg_type = PLDM_RESPONSE;
++	header.pldm_type = PLDM_OEM;
++	header.command = PLDM_OEM_META_FILEIO_CMD_READ_FILE;
++	uint8_t rc = pack_pldm_header(&header, &(responseMsg->hdr));
++
++	if (rc != PLDM_SUCCESS) {
++		return rc;
++	}
++
++	responseMsg->payload[0] = completion_code;
++
++	return PLDM_SUCCESS;
++}
+-- 
+2.25.1
+
