@@ -1,0 +1,374 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e30596d0_1245f205",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "Please try to make the commit subject a little more succinct. Currently it exceeds the recommended column count by a fair margin.\n\nAlso, you should follow convention and prefix the subject with the subsystem touched by the patch. In this case you\u0027re changing some code specific to Meta, so this should be:\n\n```\noem: meta: \u003cdescription\u003e\n```",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49ec4526_6e60da94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "If you have a numbered/bulleted list of things your patch is doing, it\u0027s _very_ they should be implemented as separate patches.",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 10,
+        "endChar": 49
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "687f91b4_bcd6434f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "The `Signed-off-by` email address _must_ match the author. As an author you are not listed on Wywinn\u0027s CLA.\n\nBy project policy I can\u0027t accept this contribution until you are party to the CLA.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee9bd82d_b7c85e17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "Hi Jeff. I have a number of comments inline, but also you must update the changelog with any details affecting the public API of the project.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abe0e07b_e69d8be2",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "See my comment in the implementation.\n\nAt the very least this change needs to be in a separate patch.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "112d701c_753ae36c",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "This needs doxygen documentation covering the parameters and enumerating the possible return values.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d814117_e4248bdd",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "Can we define these in a struct instead and pass a pointer in?",
+      "range": {
+        "startLine": 43,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 27
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b93cad95_b768d9fe",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "This seems unrelated to file IO. Why is it in this header? Also, it should be a separate patch and it needs doxygen comments covering the parameters and enumerating the possible return values.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca4c91fb_7787fc8f",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "As this is an API marked `LIBPLDM_ABI_STABLE` we mustn\u0027t just rename it, as it\u0027s an API/ABI break. Through the documented processes I\u0027m trying to encourage good discipline here, to keep the library easy to use and upgrade.\n\nI started collecting a checklist of things to work through before submitting patches. It should help address some of the issues with this patch:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md\n\nSpecifically, see:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md#removing-an-api\n\nand\n\nhttps://github.com/openbmc/libpldm/blob/main/README.md#the-abi-lifecycle\n\nRenaming a function requires introducing a new function with the new name without yet deleting the old one.\n\nI have some work in this area as I also want to rename a bunch of functions. I\u0027ll push that and you can base this change on it.\n\nFinally, renaming this function should happen in its own patch, not mixed with other changes, and needs an entry in the changelog.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7032fc3e_d5875924",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "If we\u0027re \"renaming\" the function then can you please take the opportunity to make the new function return a negative errno?\n\nSee https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L108-L112\n\nThere\u0027s an internal-only API for doing error code translation that will be useful here:\n\nhttps://github.com/openbmc/libpldm/blob/main/src/api.h#L10-L43",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de3765ad_2f81a683",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "The double-underscore was meant to be a suggestion that you shouldn\u0027t call this function directly, and the direct invocation is the cause of your CI failure.\n\nYou must instead choose from `pldm_msgbuf_init_cc()` or `pldm_msgbuf_init_errno()`. As this the implementation of a function marked `LIBPLDM_ABI_STABLE`, you mustn\u0027t change the behaviour of the returned error codes. As such you should use `pldm_msgbuf_init_cc()`.\n\nHowever, for future reference, it\u0027s strongly preferred that newly added functions return negative errnos and _not_ PLDM completion codes. This is because the _implementation_ can have error states that can\u0027t be described in terms of protocol-level completion codes.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68e53374_545eace4",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "New functions must be marked `LIBPLDM_ABI_TESTING`, with a subsequent stabilisation patch linking to a demonstration of their use in another open source project. See:\n\nhttps://github.com/openbmc/libpldm/blob/main/README.md#requirements-for-stabilising-a-function",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "228c5e7b_a69b22af",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "See query on the header about whether this should be a struct. Passing so many uint8_t pointers is going to make the call-site easy to get wrong.",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "026a7abd_b25528ef",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "This would need to test the rest of the pointers as well. If you pass a struct pointer there are many fewer concerns.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3399a4e_04cb8ac0",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "New functions are _strongly_ preferred to return negative errno values. Also with the renaming of the write function we have an opportunity to keep that consistent.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9802d4f6_f73120a2",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "Accounting for the error-handling comment on line 49 above, this should be `plmd_msgbuf_init_errno()`.",
+      "range": {
+        "startLine": 52,
+        "startChar": 10,
+        "endLine": 52,
+        "endChar": 27
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6017c966_ba497cc8",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "This must be `LIBPLDM_ABI_TESTING` for now.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3986e1_438937d5",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "Negative errno for errors. `-EINVAL` in this case.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0eeaaa9_ffcc8fe0",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "Please\n\n```\n#include \"dsp/base.h\"\n```\n\nand switch to `pack_pldm_header_errno()`, fixing the test on line 82 as well.",
+      "range": {
+        "startLine": 80,
+        "startChar": 14,
+        "endLine": 80,
+        "endChar": 30
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1590e517_dda5ea14",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-12T02:46:00Z",
+      "side": 1,
+      "message": "`return 0;`",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
