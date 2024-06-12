@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23062180_d55ec2ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-06-12T08:37:18Z",
+      "side": 1,
+      "message": "Looks good to me andrew, but i also think its worth to document the command to run the `spatch` to pick up all cocci patches for a specific release in the libpldm README.md file.",
+      "revId": "37c6460c04bb49b6a5a3e408aa6d9aaf8eafad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7556c356_56b37129",
+        "filename": "docs/checklists/changes.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-06-12T08:37:18Z",
+      "side": 1,
+      "message": "build scripts is a little confusing with openbmc-build-scripts..can we change it to `meson build files` ?",
+      "range": {
+        "startLine": 190,
+        "startChar": 66,
+        "endLine": 190,
+        "endChar": 79
+      },
+      "revId": "37c6460c04bb49b6a5a3e408aa6d9aaf8eafad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
