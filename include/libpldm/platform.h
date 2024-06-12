@@ -94,7 +94,6 @@ extern "C" {
 	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_RANGE_FIELD_MIN_LENGTH)
 
 #define PLDM_INVALID_EFFECTER_ID 0xffff
-#define PLDM_TID_RESERVED	 0xff
 
 /* DSP0248 Table1 PLDM monitoring and control data types */
 #define PLDM_STR_UTF_8_MAX_LEN	256
