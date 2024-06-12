@@ -95,6 +95,8 @@ typedef enum {
 #define PLDM_MAX_TYPES	       64
 #define PLDM_MAX_CMDS_PER_TYPE 256
 #define PLDM_MAX_TIDS	       256
+#define PLDM_TID_UNASSIGNED    0x00
+#define PLDM_TID_RESERVED      0xff
 
 /* Message payload lengths */
 #define PLDM_GET_COMMANDS_REQ_BYTES 5
