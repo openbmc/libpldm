@@ -95,6 +95,7 @@ extern "C" {
 
 #define PLDM_INVALID_EFFECTER_ID 0xffff
 #define PLDM_TID_RESERVED	 0xff
+#define PLDM_TID_SPECIAL	 0x00
 
 /* DSP0248 Table1 PLDM monitoring and control data types */
 #define PLDM_STR_UTF_8_MAX_LEN	256
