@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83736b6c_afe6c8c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-13T02:26:58Z",
+      "side": 1,
+      "message": "The outcomes of what I\u0027ve done here are not any different to the existing process. Several points:\n\n1. Use of coccinelle is purely about helping users of the library to migrate from old to new APIs. Coccinelle is very powerful, and can do much more than reliably rename functions, but that\u0027s how I\u0027ve started using it here. Use of coccinelle doesn\u0027t have any impact on the actual deprecation process.\n\n2. `LIBPLDM_ABI_DEPRECATED` changes the visibility of a function based on how the `abi` option is specified in the meson configuration. The `libpldm_deprecated_aliases` list is equivalent, but removes the noise of manual implementation of a function wrapper by making the linker do the work. There\u0027s no performance improvement or change to impact on library users, it\u0027s just a different way of going about the process that\u0027s specialised to renaming stable functions.\n\nThe `LIBPLDM_ABI_DEPRECATED` annotation is still necessary when we\u0027re trying to remove a function from the library for reasons that are not a pure rename.\n\nDoes that make sense?\n\nis there something I can add to the documentation or the commit message to clarify?",
+      "parentUuid": "363fa53f_fa6e7040",
+      "revId": "37c6460c04bb49b6a5a3e408aa6d9aaf8eafad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7556c356_56b37129",
         "filename": "docs/checklists/changes.md",
         "patchSetId": 3
@@ -48,6 +66,30 @@
       "writtenOn": "2024-06-12T08:37:18Z",
       "side": 1,
       "message": "build scripts is a little confusing with openbmc-build-scripts..can we change it to `meson build files` ?",
+      "range": {
+        "startLine": 190,
+        "startChar": 66,
+        "endLine": 190,
+        "endChar": 79
+      },
+      "revId": "37c6460c04bb49b6a5a3e408aa6d9aaf8eafad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a60c9aef_67c620fa",
+        "filename": "docs/checklists/changes.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-13T02:26:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7556c356_56b37129",
       "range": {
         "startLine": 190,
         "startChar": 66,
