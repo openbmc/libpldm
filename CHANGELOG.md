@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 1. base: Define macros for reserved TIDs
+2. mctp: Define macros for NULL, reserved and broadcast EIDs
 
 ## [0.8.0] - 2024-05-23
 

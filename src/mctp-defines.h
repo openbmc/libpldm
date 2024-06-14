@@ -7,7 +7,16 @@ extern "C" {
 #endif
 
 #define MCTP_MSG_TYPE_PLDM 1
-#define MCTP_MAX_NUM_EID   256
+
+#define MCTP_NULL_EID          0
+/**
+ * In `Table 2 - Special endpoint IDs` of DSP0236.
+ * EID from 1 to 7 is reserved EID. So the start valid EID is 8
+ */
+#define MCTP_START_VALID_EID   8
+#define MCTP_BMC_EID           8
+#define MCTP_BROADCAST_EID     0xff
+#define MCTP_MAX_NUM_EID       256
 
 #ifdef __cplusplus
 }
