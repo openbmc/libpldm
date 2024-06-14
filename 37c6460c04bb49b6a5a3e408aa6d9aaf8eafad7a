@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9186e521_62e77334",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-06-14T04:54:26Z",
+      "side": 1,
+      "message": "Thanks Andrew for the explanation!\nSo Coccinelle is just for API rename purposes but the `LIBPLDM_ABI_DEPRECATED` annotation is for removing an API.\n\nSo for every API rename change a `.cocci` file needs to be created right?",
+      "parentUuid": "83736b6c_afe6c8c1",
+      "revId": "37c6460c04bb49b6a5a3e408aa6d9aaf8eafad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7556c356_56b37129",
         "filename": "docs/checklists/changes.md",
         "patchSetId": 3
