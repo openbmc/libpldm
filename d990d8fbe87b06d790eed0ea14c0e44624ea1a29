@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95234d9b_9ab93928",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-14T05:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38335580_8b9d0a68",
+      "range": {
+        "startLine": 10,
+        "startChar": 29,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "d990d8fbe87b06d790eed0ea14c0e44624ea1a29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10de8549_c1dac585",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b2c75f_da7f2bbc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-14T05:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10de8549_c1dac585",
+      "range": {
+        "startLine": 12,
+        "startChar": 8,
+        "endLine": 12,
+        "endChar": 44
+      },
+      "revId": "d990d8fbe87b06d790eed0ea14c0e44624ea1a29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b11e685_7e3db9b3",
@@ -60,6 +108,24 @@
       "writtenOn": "2024-06-14T04:01:18Z",
       "side": 1,
       "message": "Can we reword the commit message so it\u0027s not a list? Perhaps something like:\n\n```\nbase: Define macros for reserved TIDs\n\nMove the definition of `PLDM_TID_RESERVED` from platform.h to base.h as the value is defined in the base specification (DSP0240). platform.h already includes base.h so the move is not an API-breaking change.\n\nFurther, add the definition for `PLDM_TID_UNASSIGNED`, which is the other reserved TID value.\n```\n\nThis takes into account the suggestion to rename `PLDM_TID_SPECIAL`. I feel we can give it a better name.",
+      "revId": "d990d8fbe87b06d790eed0ea14c0e44624ea1a29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1274f4c_4d0a41cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-14T05:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b11e685_7e3db9b3",
       "revId": "d990d8fbe87b06d790eed0ea14c0e44624ea1a29",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -115,6 +181,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "043f6ed0_38c30e41",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-14T05:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe516605_9504426c",
+      "revId": "d990d8fbe87b06d790eed0ea14c0e44624ea1a29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35f2e427_e4f52d56",
@@ -128,6 +212,24 @@
       "writtenOn": "2024-06-14T04:01:18Z",
       "side": 1,
       "message": "By the documentation for `GetTID` the TID value `0x00` is \"Unassigned\". We should call this `PLDM_TID_UNASSIGNED`.\n\nAlso can we order these two in ascending order?",
+      "revId": "d990d8fbe87b06d790eed0ea14c0e44624ea1a29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9155635_4f59ab6c",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-14T05:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35f2e427_e4f52d56",
       "revId": "d990d8fbe87b06d790eed0ea14c0e44624ea1a29",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
