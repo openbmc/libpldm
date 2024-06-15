@@ -280,6 +280,16 @@ const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 int pldm_pdr_record_check_fru_rsi_match(const pldm_pdr_record *record,
 					uint16_t rsi, bool *match);
 
+/** @brief deletes a FRU record
+ *
+ *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in] record - opaque pointer acting as a PDR record handle
+ *
+ *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
+ *  allocation fails, or -EOVERFLOW if a record handle could not be allocated
+ */
+int pldm_pdr_remove_fru_record(pldm_pdr *repo, pldm_pdr_record *record);
+
 /* =========================== */
 /* Entity Association PDR APIs */
 /* =========================== */
