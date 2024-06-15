@@ -268,6 +268,18 @@ const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 	uint16_t *entity_type, uint16_t *entity_instance_num,
 	uint16_t *container_id);
 
+/** @brief checks if the FRU record set idetifier of a record matches the give record set identifier
+ *
+ *  @param[in] record - opaque pointer acting as a PDR record handle
+ *  @param[in] rsi - FRU record set identifier
+ *  @param[in-out] match - boolean value to indicate if the given rsi matches the FRU record rsi
+ *
+ *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
+ *  allocation fails, or -EOVERFLOW if a record handle could not be allocated
+ */
+int pldm_pdr_record_check_fru_rsi_match(const pldm_pdr_record *record,
+					uint16_t rsi, bool *match);
+
 /* =========================== */
 /* Entity Association PDR APIs */
 /* =========================== */

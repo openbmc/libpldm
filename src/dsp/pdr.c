@@ -271,6 +271,41 @@ bool pldm_pdr_record_is_remote(const pldm_pdr_record *record)
 	return record->is_remote;
 }
 
+LIBPLDM_ABI_TESTING
+int pldm_pdr_record_check_fru_rsi_match(const pldm_pdr_record *record,
+					uint16_t rsi, bool *match)
+{
+	if (!record) {
+		return -EINVAL;
+	}
+	uint16_t record_fru_rsi = 0;
+	int rc = 0;
+
+	struct pldm_msgbuf _dst;
+	struct pldm_msgbuf *dst = &_dst;
+
+	rc = pldm_msgbuf_init_errno(
+		dst, sizeof(uint16_t),
+		(record->data + sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t)),
+		sizeof(uint16_t));
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(dst, record_fru_rsi);
+
+	rc = pldm_msgbuf_destroy(dst);
+	if (rc) {
+		return rc;
+	}
+
+	if (record_fru_rsi == rsi) {
+		*match = true;
+	} else {
+		*match = false;
+	}
+	return 0;
+}
+
 LIBPLDM_ABI_STABLE
 int pldm_pdr_add_fru_record_set_check(pldm_pdr *repo, uint16_t terminus_handle,
 				      uint16_t fru_rsi, uint16_t entity_type,

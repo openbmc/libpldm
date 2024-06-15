@@ -683,6 +683,38 @@ TEST(PDRUpdate, tesFindtFruRecordSet)
     pldm_pdr_destroy(repo);
 }
 
+TEST(PDRUpdate, testFruRecordRsiMatch)
+{
+    auto repo = pldm_pdr_init();
+    uint32_t record_handle = 1;
+    bool match = false;
+
+    EXPECT_EQ(pldm_pdr_add_fru_record_set_check(repo, 1, 1, 1, 0, 100,
+                                                &record_handle),
+              0);
+    record_handle = 2;
+    EXPECT_EQ(pldm_pdr_add_fru_record_set_check(repo, 1, 2, 1, 1, 100,
+                                                &record_handle),
+              0);
+    record_handle = 3;
+    EXPECT_EQ(pldm_pdr_add_fru_record_set_check(repo, 1, 3, 1, 2, 100,
+                                                &record_handle),
+              0);
+
+    uint16_t terminusHdl{};
+    uint16_t entityType{};
+    uint16_t entityInstanceNum{};
+    uint16_t containerId{};
+    auto record = pldm_pdr_fru_record_set_find_by_rsi(
+        repo, 2, &terminusHdl, &entityType, &entityInstanceNum, &containerId);
+    EXPECT_NE(record, nullptr);
+
+    EXPECT_EQ(pldm_pdr_record_check_fru_rsi_match(record, 2, &match), 0);
+    EXPECT_EQ(match, true);
+
+    pldm_pdr_destroy(repo);
+}
+
 #ifdef LIBPLDM_API_TESTING
 TEST(PDRUpdate, testFindLastInRange)
 {
