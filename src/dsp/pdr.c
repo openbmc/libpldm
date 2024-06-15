@@ -13,6 +13,9 @@
 	(sizeof(struct pldm_pdr_hdr) +                                         \
 	 sizeof(struct pldm_pdr_entity_association))
 
+#define PDR_FRU_RECORD_SET_MIN_SIZE                                            \
+	(sizeof(struct pldm_pdr_hdr) + sizeof(struct pldm_pdr_fru_record_set))
+
 typedef struct pldm_pdr_record {
 	uint32_t record_handle;
 	uint32_t size;
@@ -46,7 +49,7 @@ int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		       bool is_remote, uint16_t terminus_handle,
 		       uint32_t *record_handle)
 {
-	uint32_t curr;
+	uint32_t curr = 0;
 
 	if (!repo || !data || !size) {
 		return -EINVAL;
@@ -1873,5 +1876,167 @@ cleanup_new_record_data:
 	free(new_record->data);
 cleanup_new_record:
 	free(new_record);
+	return rc;
+}
+
+/* API to find the PDR record that is previous to a given PLDM PDR
+ * record in a given PLDM PDR repository
+ */
+static pldm_pdr_record *pldm_pdr_get_prev_record(pldm_pdr *repo,
+						 pldm_pdr_record *record)
+{
+	assert(repo);
+	assert(record);
+
+	pldm_pdr_record *prev = NULL;
+	pldm_pdr_record *curr = repo->first;
+
+	while (curr != NULL) {
+		if (curr->record_handle == record->record_handle) {
+			break;
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+	return prev;
+}
+
+/* API to check if a PLDM PDR record is present in a PLDM PDR repository
+ */
+static bool is_record_present(pldm_pdr *repo, pldm_pdr_record *record)
+{
+	assert(repo);
+	assert(record);
+
+	if (repo->first == record) {
+		return true;
+	}
+
+	return pldm_pdr_get_prev_record(repo, record) != NULL;
+}
+
+/* API to check if FRU RSI of record matches the given record set identifier.
+ * Returns 1 if the provided FRU record matches the provided record set identifier,
+ * 0 if it does not, otherwise -EINVAL if the arguments are invalid.
+ */
+static int pldm_pdr_record_matches_fru_rsi(const pldm_pdr_record *record,
+					   uint16_t rsi)
+{
+	uint16_t record_fru_rsi = 0;
+	uint8_t *skip_data = NULL;
+	uint8_t skip_data_size = 0;
+	struct pldm_msgbuf _dst;
+	struct pldm_msgbuf *dst = &_dst;
+	int rc = 0;
+
+	assert(record);
+
+	rc = pldm_msgbuf_init_errno(dst, PDR_FRU_RECORD_SET_MIN_SIZE,
+				    record->data, record->size);
+	if (rc) {
+		return rc;
+	}
+	skip_data_size = sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t);
+	pldm_msgbuf_span_required(dst, skip_data_size, (void **)&skip_data);
+	pldm_msgbuf_extract(dst, record_fru_rsi);
+
+	rc = pldm_msgbuf_destroy(dst);
+	if (rc) {
+		return rc;
+	}
+	return record_fru_rsi == rsi;
+}
+
+/* API to remove PLDM PDR record from a PLDM PDR repository
+ */
+static int pldm_pdr_remove_record(pldm_pdr *repo, pldm_pdr_record *record,
+				  pldm_pdr_record *prev)
+{
+	assert(repo);
+	assert(record);
+
+	if (!is_record_present(repo, record)) {
+		return -EINVAL;
+	}
+
+	assert(repo->size >= record->size);
+	if (repo->size < record->size) {
+		return -EOVERFLOW;
+	}
+
+	if (repo->first == record) {
+		repo->first = record->next;
+	} else {
+		if (prev != NULL) {
+			prev->next = record->next;
+		}
+	}
+	if (repo->last == record) {
+		repo->last = prev;
+		if (prev != NULL) {
+			prev->next = NULL;
+		}
+	}
+	repo->record_count -= 1;
+	repo->size -= record->size;
+	free(record->data);
+	free(record);
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
+					  bool is_remote,
+					  uint32_t *record_handle)
+{
+	pldm_pdr_record *record = repo->first;
+	pldm_pdr_record *prev = NULL;
+	int match = 0;
+	int rc = 0;
+	uint8_t skip_data_size = 0;
+	uint8_t hdr_type = 0;
+	struct pldm_msgbuf _dst;
+	struct pldm_msgbuf *dst = &_dst;
+
+	assert(repo);
+	assert(record_handle);
+
+	while (record != NULL) {
+		uint8_t *skip_hdr_data = NULL;
+		rc = pldm_msgbuf_init_errno(dst, PDR_FRU_RECORD_SET_MIN_SIZE,
+					    record->data, record->size);
+		if (rc) {
+			return rc;
+		}
+		skip_data_size = sizeof(uint32_t) + sizeof(uint8_t);
+		pldm_msgbuf_span_required(dst, skip_data_size,
+					  (void **)&skip_hdr_data);
+		pldm_msgbuf_extract(dst, hdr_type);
+		if (record->is_remote != is_remote ||
+		    hdr_type != PLDM_PDR_FRU_RECORD_SET) {
+			rc = pldm_msgbuf_destroy(dst);
+			if (rc) {
+				return rc;
+			}
+			record = record->next;
+			continue;
+		}
+		match = pldm_pdr_record_matches_fru_rsi(record, fru_rsi);
+		if (match) {
+			*record_handle = record->record_handle;
+			prev = pldm_pdr_get_prev_record(repo, record);
+			rc = pldm_pdr_remove_record(repo, record, prev);
+			if (rc) {
+				return rc;
+			}
+			rc = pldm_msgbuf_destroy(dst);
+			if (rc) {
+				return rc;
+			}
+			break;
+		}
+		record = record->next;
+	}
 	return rc;
 }
