@@ -663,22 +663,22 @@ TEST(PDRUpdate, tesFindtFruRecordSet)
     EXPECT_EQ(first, pldm_pdr_get_record_handle(
                          repo, pldm_pdr_fru_record_set_find_by_rsi(
                                    repo, 1, &terminusHdl, &entityType,
-                                   &entityInstanceNum, &containerId)));
+                                   &entityInstanceNum, &containerId, false)));
     EXPECT_EQ(second, pldm_pdr_get_record_handle(
                           repo, pldm_pdr_fru_record_set_find_by_rsi(
                                     repo, 2, &terminusHdl, &entityType,
-                                    &entityInstanceNum, &containerId)));
+                                    &entityInstanceNum, &containerId, false)));
     EXPECT_EQ(third, pldm_pdr_get_record_handle(
                          repo, pldm_pdr_fru_record_set_find_by_rsi(
                                    repo, 3, &terminusHdl, &entityType,
-                                   &entityInstanceNum, &containerId)));
+                                   &entityInstanceNum, &containerId, false)));
     EXPECT_EQ(terminusHdl, 1u);
     EXPECT_EQ(entityType, 1u);
     EXPECT_EQ(entityInstanceNum, 2u);
     EXPECT_EQ(containerId, 100u);
     EXPECT_EQ(nullptr, pldm_pdr_fru_record_set_find_by_rsi(
                            repo, 4, &terminusHdl, &entityType,
-                           &entityInstanceNum, &containerId));
+                           &entityInstanceNum, &containerId, false));
 
     pldm_pdr_destroy(repo);
 }
@@ -1699,7 +1699,7 @@ TEST(EntityAssociationPDR, testEntityInstanceNumber)
     EXPECT_EQ(first, pldm_pdr_get_record_handle(
                          repo, pldm_pdr_fru_record_set_find_by_rsi(
                                    repo, 1, &terminusHdl, &entityType,
-                                   &entityInstanceNum, &containerId)));
+                                   &entityInstanceNum, &containerId, false)));
     EXPECT_EQ(entityType, 2);
     EXPECT_EQ(entityInstanceNum, 63);
 
@@ -1716,7 +1716,7 @@ TEST(EntityAssociationPDR, testEntityInstanceNumber)
     EXPECT_EQ(second, pldm_pdr_get_record_handle(
                           repo, pldm_pdr_fru_record_set_find_by_rsi(
                                     repo, 2, &terminusHdl, &entityType,
-                                    &entityInstanceNum, &containerId)));
+                                    &entityInstanceNum, &containerId, false)));
     EXPECT_EQ(entityType, 2);
     EXPECT_EQ(entityInstanceNum, 37);
 
@@ -1733,7 +1733,7 @@ TEST(EntityAssociationPDR, testEntityInstanceNumber)
     EXPECT_EQ(third, pldm_pdr_get_record_handle(
                          repo, pldm_pdr_fru_record_set_find_by_rsi(
                                    repo, 3, &terminusHdl, &entityType,
-                                   &entityInstanceNum, &containerId)));
+                                   &entityInstanceNum, &containerId, false)));
     EXPECT_EQ(entityType, 2);
     EXPECT_EQ(entityInstanceNum, 44);
 
@@ -1750,7 +1750,7 @@ TEST(EntityAssociationPDR, testEntityInstanceNumber)
     EXPECT_EQ(fourth, pldm_pdr_get_record_handle(
                           repo, pldm_pdr_fru_record_set_find_by_rsi(
                                     repo, 4, &terminusHdl, &entityType,
-                                    &entityInstanceNum, &containerId)));
+                                    &entityInstanceNum, &containerId, false)));
     EXPECT_EQ(entityType, 2);
     EXPECT_EQ(entityInstanceNum, 89);
 
@@ -1767,7 +1767,7 @@ TEST(EntityAssociationPDR, testEntityInstanceNumber)
     EXPECT_EQ(fifth, pldm_pdr_get_record_handle(
                          repo, pldm_pdr_fru_record_set_find_by_rsi(
                                    repo, 5, &terminusHdl, &entityType,
-                                   &entityInstanceNum, &containerId)));
+                                   &entityInstanceNum, &containerId, false)));
     EXPECT_EQ(entityType, 2);
     EXPECT_EQ(entityInstanceNum, 90);
 
@@ -1788,7 +1788,7 @@ TEST(EntityAssociationPDR, testEntityInstanceNumber)
     EXPECT_EQ(seventh, pldm_pdr_get_record_handle(
                            repo, pldm_pdr_fru_record_set_find_by_rsi(
                                      repo, 7, &terminusHdl, &entityType,
-                                     &entityInstanceNum, &containerId)));
+                                     &entityInstanceNum, &containerId, false)));
     EXPECT_EQ(entityType, 3);
     EXPECT_EQ(entityInstanceNum, 100);
 
@@ -1805,7 +1805,7 @@ TEST(EntityAssociationPDR, testEntityInstanceNumber)
     EXPECT_EQ(eighth, pldm_pdr_get_record_handle(
                           repo, pldm_pdr_fru_record_set_find_by_rsi(
                                     repo, 8, &terminusHdl, &entityType,
-                                    &entityInstanceNum, &containerId)));
+                                    &entityInstanceNum, &containerId, false)));
     EXPECT_EQ(entityType, 3);
     EXPECT_EQ(entityInstanceNum, 100);
 

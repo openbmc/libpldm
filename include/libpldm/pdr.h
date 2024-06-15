@@ -258,15 +258,16 @@ int pldm_pdr_add_fru_record_set_check(pldm_pdr *repo, uint16_t terminus_handle,
  *  or 0 if not found
  *  @param[in] entity_instance_num - *entity_instance_num will be FRU entity
  *  instance number of found PDR, or 0 if not found
- *  @param[in] container_id - *cintainer_id will be FRU container id of found
+ *  @param[in] container_id - *container_id will be FRU container id of found
  *  PDR, or 0 if not found
+ *  @param[in] is_remote - if true, then the fund PDR is not from this terminus
  *
  *  @return An opaque pointer to the PDR record on success, or NULL on failure
  */
 const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 	const pldm_pdr *repo, uint16_t fru_rsi, uint16_t *terminus_handle,
 	uint16_t *entity_type, uint16_t *entity_instance_num,
-	uint16_t *container_id);
+	uint16_t *container_id, bool is_remote);
 
 /* =========================== */
 /* Entity Association PDR APIs */

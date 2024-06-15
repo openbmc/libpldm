@@ -305,11 +305,11 @@ int pldm_pdr_add_fru_record_set_check(pldm_pdr *repo, uint16_t terminus_handle,
 				  bmc_record_handle);
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_TESTING
 const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 	const pldm_pdr *repo, uint16_t fru_rsi, uint16_t *terminus_handle,
 	uint16_t *entity_type, uint16_t *entity_instance_num,
-	uint16_t *container_id)
+	uint16_t *container_id, bool is_remote)
 {
 	if (!repo || !terminus_handle || !entity_type || !entity_instance_num ||
 	    !container_id) {
@@ -324,7 +324,8 @@ const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 		struct pldm_pdr_fru_record_set *fru =
 			(struct pldm_pdr_fru_record_set
 				 *)(data + sizeof(struct pldm_pdr_hdr));
-		if (fru->fru_rsi == htole16(fru_rsi)) {
+		if (fru->fru_rsi == htole16(fru_rsi) &&
+		    curr_record->is_remote == is_remote) {
 			*terminus_handle = le16toh(fru->terminus_handle);
 			*entity_type = le16toh(fru->entity_type);
 			*entity_instance_num =
