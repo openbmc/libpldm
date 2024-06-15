@@ -16,6 +16,24 @@
       "message": "This header is internal to the libpldm implementation, that\u0027s is, it\u0027s not part of the public API of the library. You\u0027re not using these definitions in the libpldm implementation in this patch, so I\u0027m wondering if there\u0027s a misunderstanding somewhere. What are we trying to achieve?",
       "revId": "951e6b2e5b97f3b1e287280196dd4bce840a09c6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e3b505_4b0da279",
+        "filename": "src/mctp-defines.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-15T00:34:43Z",
+      "side": 1,
+      "message": "In the patch set https://gerrit.openbmc.org/c/openbmc/pldm/+/51443/108/platform-mc/terminus_manager.cpp#38, I do some checking in the input EID.\nI thought those value should be defined in the libpldm instead of pldm repo and only find EID definition `mctp-defines.h` and thought it is right place.\nAny suggestion in this case?",
+      "parentUuid": "15d5df99_b36accad",
+      "revId": "951e6b2e5b97f3b1e287280196dd4bce840a09c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
