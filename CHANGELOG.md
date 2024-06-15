@@ -28,6 +28,7 @@ Change categories:
 7. fw_update: Add encode req & decode resp for get_downstream_fw_params
 8. platform: Add decode_pldm_platform_cper_event_data() API
 9. pdr: Add pldm_entity_association_pdr_remove_contained_entity()
+10. pdr: Add pldm_pdr_remove_fru_record_set_by_rsi()
 
 ### Changed
 
