@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 1. base: Define macros for reserved TIDs
+2. pdr: Add remove PDR record that matched given record set identifier
 
 ### Deprecated
 
