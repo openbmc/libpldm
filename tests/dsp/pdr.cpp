@@ -2060,3 +2060,70 @@ TEST(EntityAssociationPDR, testRemoveContainedEntity)
     pldm_entity_association_tree_destroy(tree);
 }
 #endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PDRUpdate, testRemoveFruRecord)
+{
+    auto repo = pldm_pdr_init();
+
+    uint32_t record_handle = 1;
+    int rc = pldm_pdr_add_fru_record_set(repo, 1, 1, 1, 0, 100, &record_handle);
+    EXPECT_EQ(rc, 0);
+    record_handle = 2;
+    rc = pldm_pdr_add_fru_record_set(repo, 1, 2, 1, 1, 100, &record_handle);
+    EXPECT_EQ(rc, 0);
+    record_handle = 3;
+    rc = pldm_pdr_add_fru_record_set(repo, 1, 3, 1, 2, 100, &record_handle);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 3);
+
+    uint32_t removed_record_handle{};
+    rc = pldm_pdr_remove_fru_record_set_by_rsi(repo, 2, false,
+                                               &removed_record_handle);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(removed_record_handle, 2);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 2);
+
+    uint16_t terminusHdl{};
+    uint16_t entityType{};
+    uint16_t entityInstanceNum{};
+    uint16_t containerId{};
+    auto record = pldm_pdr_fru_record_set_find_by_rsi(
+        repo, 1, &terminusHdl, &entityType, &entityInstanceNum, &containerId);
+    EXPECT_NE(record, nullptr);
+    record_handle = pldm_pdr_get_record_handle(repo, record);
+    EXPECT_EQ(record_handle, 1);
+
+    record = pldm_pdr_fru_record_set_find_by_rsi(
+        repo, 3, &terminusHdl, &entityType, &entityInstanceNum, &containerId);
+    EXPECT_NE(record, nullptr);
+    record_handle = pldm_pdr_get_record_handle(repo, record);
+    EXPECT_EQ(record_handle, 3);
+
+    record = pldm_pdr_fru_record_set_find_by_rsi(
+        repo, 2, &terminusHdl, &entityType, &entityInstanceNum, &containerId);
+    EXPECT_EQ(record, nullptr);
+
+    rc = pldm_pdr_remove_fru_record_set_by_rsi(repo, 1, false,
+                                               &removed_record_handle);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(removed_record_handle, 1);
+
+    // remove the same record again
+    removed_record_handle = 5;
+    rc = pldm_pdr_remove_fru_record_set_by_rsi(repo, 1, false,
+                                               &removed_record_handle);
+    EXPECT_EQ(rc, 0);
+    EXPECT_NE(removed_record_handle, 1);
+    EXPECT_EQ(removed_record_handle, 5);
+
+    rc = pldm_pdr_remove_fru_record_set_by_rsi(repo, 3, false,
+                                               &removed_record_handle);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(removed_record_handle, 3);
+
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 0);
+
+    pldm_pdr_destroy(repo);
+}
+#endif
