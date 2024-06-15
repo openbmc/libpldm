@@ -654,6 +654,19 @@ int pldm_entity_association_pdr_remove_contained_entity(
 	pldm_pdr *repo, pldm_entity *entity, bool is_remote,
 	uint32_t *pdr_record_handle);
 
+/** @brief removes a PLDM PDR record if it matches given record set identifier
+ *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in] fru_rsi - FRU record set identifier
+ *  @param[in] is_remote - indicates which PDR to remove, local or remote
+ *  @param[in] pdr_record_handle - record handle of the fru record to be removed
+ *
+ *  @return 0 on success, -EINVAL if the arguments are invalid or -EOVERFLOW if value is too
+ *  large for defined type
+ */
+int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
+					  bool is_remote,
+					  uint32_t *record_handle);
+
 #ifdef __cplusplus
 }
 #endif
