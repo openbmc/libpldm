@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a68bfdd9_03defc67",
+        "filename": "src/mctp-defines.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-06-17T02:00:09Z",
+      "side": 1,
+      "message": "this also does not seem like something that should come as a definition ? rather it should be coming from dbus ?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 27
+      },
+      "revId": "951e6b2e5b97f3b1e287280196dd4bce840a09c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15d5df99_b36accad",
         "filename": "src/mctp-defines.h",
         "patchSetId": 2
@@ -86,6 +109,24 @@
       "side": 1,
       "message": "Further, I wouldn\u0027t accept definitions like `MCTP_BMC_EID` regardless. That\u0027s not specified anywhere or even required. It might be an idiomatic choice, but there\u0027s no reason for it. libpldm needs to be constrained to what\u0027s in the PLDM specifications. \n\nHowever, consider that Linux exposes some useful MCTP address macros in its UAPI header (which is in-turn exposed through glibc): \n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/uapi/linux/mctp.h?h\u003dv6.10-rc3#n40",
       "parentUuid": "b0adcbb0_2c2e7938",
+      "revId": "951e6b2e5b97f3b1e287280196dd4bce840a09c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a74a22c_99c01ba4",
+        "filename": "src/mctp-defines.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-06-17T02:00:09Z",
+      "side": 1,
+      "message": "@Thu - yes i agree with arj as well. Its better to use the UAPI header in pldm.",
+      "parentUuid": "1b1d8e08_78612359",
       "revId": "951e6b2e5b97f3b1e287280196dd4bce840a09c6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
