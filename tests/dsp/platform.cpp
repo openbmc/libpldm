@@ -4871,6 +4871,117 @@ TEST(decodeNumericEffecterPdrData, Real32Test)
 }
 #endif
 
+#ifdef LIBPLDM_API_TESTING
+TEST(decodeAuxNameData, GoodTest)
+{
+    std::vector<uint8_t> names_data{
+        0x65, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x53, 0x00, 0x30, 0x00, 0x53, 0x00, 0x00, // Entity Name "S0S"
+        0x66, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x53, 0x00, 0x31, 0x00, 0x00,             // Entity Name "S1"
+        0x67, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x00, 0x00  // Entity Name "RR3"
+    };
+    int name_string_count = 3;
+
+    std::vector<char> tag0{0x65, 0x6e, 0x00};
+    std::vector<char> name0{0x00, 0x53, 0x00, 0x30, 0x00, 0x53, 0x00, 0x00};
+    std::vector<char> tag1{0x66, 0x6e, 0x00};
+    std::vector<char> name1{0x00, 0x53, 0x00, 0x31, 0x00, 0x00};
+    std::vector<char> tag2{0x67, 0x6e, 0x00};
+    std::vector<char> name2{0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x00, 0x00};
+
+    auto aux_names = (struct pldm_entity_auxiliary_name*)calloc(
+        name_string_count, sizeof(struct pldm_entity_auxiliary_name));
+    auto rc = decode_auxiliary_names_data((const char*)names_data.data(),
+                                          names_data.size(), name_string_count,
+                                          aux_names);
+    EXPECT_EQ(PLDM_SUCCESS, rc);
+
+    EXPECT_EQ(0,
+              memcmp(aux_names[0].name_language_tag, tag0.data(), tag0.size()));
+    EXPECT_EQ(8, aux_names[0].name_size);
+    EXPECT_EQ(0, memcmp(aux_names[0].entity_aux_name, name0.data(),
+                        aux_names[0].name_size));
+
+    EXPECT_EQ(0,
+              memcmp(aux_names[1].name_language_tag, tag1.data(), tag1.size()));
+    EXPECT_EQ(6, aux_names[1].name_size);
+    EXPECT_EQ(0, memcmp(aux_names[1].entity_aux_name, name1.data(),
+                        aux_names[1].name_size));
+
+    EXPECT_EQ(0,
+              memcmp(aux_names[2].name_language_tag, tag2.data(), tag2.size()));
+    EXPECT_EQ(8, aux_names[2].name_size);
+    EXPECT_EQ(0, memcmp(aux_names[2].entity_aux_name, name2.data(),
+                        aux_names[2].name_size));
+    free(aux_names);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(decodeAuxNameData, BadTest)
+{
+    std::vector<uint8_t> names_data{
+        0x65, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x53, 0x00, 0x30, 0x00, 0x53, 0x00, 0x00, // Entity Name "S0S"
+        0x66, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x53, 0x00, 0x31, 0x00, 0x00,             // Entity Name "S1"
+        0x67, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x00, 0x00  // Entity Name "RR3"
+    };
+    int name_string_count = 3;
+
+    auto aux_names = (struct pldm_entity_auxiliary_name*)calloc(
+        name_string_count, sizeof(struct pldm_entity_auxiliary_name));
+    auto rc = decode_auxiliary_names_data((const char*)names_data.data(),
+                                          names_data.size(), 0, aux_names);
+    EXPECT_EQ(PLDM_ERROR_INVALID_DATA, rc);
+
+    rc = decode_auxiliary_names_data((const char*)names_data.data(), 0,
+                                     name_string_count, aux_names);
+    EXPECT_EQ(PLDM_ERROR_INVALID_DATA, rc);
+
+    rc = decode_auxiliary_names_data(nullptr, names_data.size(),
+                                     name_string_count, aux_names);
+    EXPECT_EQ(PLDM_ERROR_INVALID_DATA, rc);
+
+    rc = decode_auxiliary_names_data((const char*)names_data.data(),
+                                     names_data.size() - 1, name_string_count,
+                                     aux_names);
+    EXPECT_EQ(PLDM_ERROR_INVALID_DATA, rc);
+
+    /* no terminator for first language tag */
+    std::vector<uint8_t> names_data1{
+        0x65, 0x6e, 0x01,                               // Language Tag "en"
+        0x00, 0x53, 0x00, 0x30, 0x00, 0x53, 0x00, 0x00, // Entity Name "S0S"
+        0x66, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x53, 0x00, 0x31, 0x00, 0x00,             // Entity Name "S1"
+        0x67, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x01, 0x00  // Entity Name "RR3"
+    };
+    rc = decode_auxiliary_names_data((const char*)names_data1.data(),
+                                     names_data1.size(), name_string_count,
+                                     aux_names);
+    EXPECT_EQ(PLDM_ERROR_INVALID_DATA, rc);
+
+    /* no terminator for final name */
+    std::vector<uint8_t> names_data2{
+        0x65, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x53, 0x00, 0x30, 0x00, 0x53, 0x00, 0x00, // Entity Name "S0S"
+        0x66, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x53, 0x00, 0x31, 0x00, 0x00,             // Entity Name "S1"
+        0x67, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x01, 0x00  // Entity Name "RR3"
+    };
+    rc = decode_auxiliary_names_data((const char*)names_data2.data(),
+                                     names_data2.size(), name_string_count,
+                                     aux_names);
+    free(aux_names);
+    EXPECT_EQ(PLDM_ERROR_INVALID_DATA, rc);
+}
+#endif
+
 TEST(GetStateEffecterStates, testEncodeAndDecodeRequest)
 {
     std::array<uint8_t, hdrSize + PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES>
