@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 1. base: Define macros for reserved TIDs
+2. platform: Define pldm_entity_auxiliary_names_pdr struct
 
 ### Deprecated
 
