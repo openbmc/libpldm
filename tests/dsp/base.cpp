@@ -745,7 +745,7 @@ TEST(CcOnlyResponse, testEncode)
 
     auto rc =
         encode_cc_only_resp(0 /*instance id*/, 1 /*pldm type*/, 2 /*command*/,
-                            3 /*complection code*/, &responseMsg);
+                            3 /*completion code*/, &responseMsg);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     auto p = reinterpret_cast<uint8_t*>(&responseMsg);

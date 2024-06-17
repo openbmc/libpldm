@@ -164,7 +164,7 @@ bool pldm_pdr_record_is_remote(const pldm_pdr_record *record);
  */
 void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo);
 
-/** @brief Remove all remote PDR's that beling to a specific terminus
+/** @brief Remove all remote PDR's that belong to a specific terminus
  *         handle
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
  *  @param[in] terminus_handle - Terminus Handle of the remove PLDM terminus
@@ -391,7 +391,7 @@ pldm_entity_node_get_remote_container_id(const pldm_entity_node *entity);
  */
 void pldm_entity_association_tree_destroy(pldm_entity_association_tree *tree);
 
-/** @brief Check if input enity node is a parent
+/** @brief Check if input entity node is a parent
  *
  *  @pre node must point to a valid object
  *
@@ -512,7 +512,7 @@ int pldm_entity_association_pdr_add_from_node_check(
  *  @param[in] terminus_handle - terminus handle of the terminus
  *  @param[in] record_handle - record handle of the PDR
  *
- *  @return 0 on succes, -EINVAL if the provided arguments are invalid.
+ *  @return 0 on success, -EINVAL if the provided arguments are invalid.
  */
 int pldm_entity_association_pdr_add_from_node_with_record_handle(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,

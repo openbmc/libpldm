@@ -36,7 +36,7 @@ int main(void)
 
     /*
      * We expect the test configuration to claim the iterator has reached the
-     * end beause the there's no entry length descriptor for the
+     * end because the there's no entry length descriptor for the
      * PLDM_BIOS_PASSWORD entry type. By the attr_able_entry_length()
      * implementation this would normally trigger an assert() to uphold that the
      * necessary pointers are not NULL. However, we've defined NDEBUG above and

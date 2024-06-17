@@ -62,7 +62,7 @@ pldm_bios_table_iter_attr_entry_value(struct pldm_bios_table_iter *iter)
 		pldm_bios_table_iter_value(iter);
 }
 
-/** @brief Get the bios string table entry that the iterator ponit to
+/** @brief Get the bios string table entry that the iterator points to
  *  @param[in] iter - Pointer the bios string table iterator
  *  @return Pointer to an entry in bios string table
  */
@@ -73,7 +73,7 @@ pldm_bios_table_iter_string_entry_value(struct pldm_bios_table_iter *iter)
 		pldm_bios_table_iter_value(iter);
 }
 
-/** @brief Get the bios attribute value table entry that the iterator ponit to
+/** @brief Get the bios attribute value table entry that the iterator points to
  *  @param[in] iter - Pointer the bios attribute value table iterator
  *  @return Pointer to an entry in bios attribute value table
  */
@@ -208,7 +208,7 @@ struct pldm_bios_table_attr_entry_enum_info {
 	bool read_only;	      //!< indicate whether the attribute is read-only
 	uint8_t pv_num;	      //!< number of possible values
 	const uint16_t *pv_handle; //!< handles of possible values
-	uint8_t def_num;	   //!< nnumber of default values
+	uint8_t def_num;	   //!< number of default values
 	const uint8_t *def_index;  //!< indices of default values.
 };
 
@@ -297,7 +297,7 @@ struct pldm_bios_table_attr_entry_string_info {
 	uint8_t string_type;	//!< The type of the string
 	uint16_t min_length;	//!< The minimum length of the string in bytes
 	uint16_t max_length;	//!< The maximum length of the string in bytes
-	uint16_t def_length;	//!< The length of the defaut string in bytes
+	uint16_t def_length;	//!< The length of the default string in bytes
 	const char *def_string; //!< The default string itself
 };
 
@@ -475,7 +475,7 @@ uint8_t pldm_bios_table_attr_value_entry_enum_decode_handles(
  *  @param[out] entry - Pointer to bios attribute value entry
  *  @param[in] entry_length - Length of attribute value entry
  *  @param[in] attr_handle - This handle points to an attribute in the
- *  BIOS Attribute Vlaue Table.
+ *  BIOS Attribute Value Table.
  *  @param[in] attr_type - Type of this attribute in the BIOS Attribute Value
  * Table
  *  @param[in] count - Total number of current values for this enum attribute
@@ -520,12 +520,12 @@ void pldm_bios_table_attr_value_entry_string_decode_string(
  *  @param[out] entry - Pointer to bios attribute value entry
  *  @param[in] entry_length - Length of attribute value entry
  *  @param[in] attr_handle - This handle points to an attribute in the
- *  BIOS Attribute Vlaue Table.
+ *  BIOS Attribute Value Table.
  *  @param[in] attr_type - Type of this attribute in the BIOS Attribute Value
  * Table
  *  @param[in] string_length - Length of current string in bytes. 0 indicates
  * that the current string value is not set.
- *  @param[in] string - The current string itsel
+ *  @param[in] string - The current string itself
  *  @return PLDM_SUCCESS on success. PLDM_ERROR_INVALID_DATA if entry is NULL, str is NULL while
  *  	    str_length is non-zero, or attr_type is not PLDM_BIOS_STRING. PLDM_ERROR_INVALID_LENGTH
  *  	    if entry_length lacks capacity to encode str into entry.
@@ -551,7 +551,7 @@ uint64_t pldm_bios_table_attr_value_entry_integer_decode_cv(
  *  @param[out] entry - Pointer to bios attribute value entry
  *  @param[in] entry_length - Length of attribute value entry
  *  @param[in] attr_handle - This handle points to an attribute in the
- *  BIOS Attribute Vlaue Table.
+ *  BIOS Attribute Value Table.
  *  @param[in] attr_type - Type of this attribute in the BIOS Attribute Value
  * Table
  *  @param[in] cv - Current Value
