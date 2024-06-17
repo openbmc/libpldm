@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d1c536d_736ae27d",
+        "filename": "src/mctp-defines.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-17T05:09:28Z",
+      "side": 1,
+      "message": "Ok, I will remove `MCTP_BMC_EID` if I add those definitions in pldm.",
+      "parentUuid": "a68bfdd9_03defc67",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 27
+      },
+      "revId": "951e6b2e5b97f3b1e287280196dd4bce840a09c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15d5df99_b36accad",
@@ -127,6 +151,24 @@
       "side": 1,
       "message": "@Thu - yes i agree with arj as well. Its better to use the UAPI header in pldm.",
       "parentUuid": "1b1d8e08_78612359",
+      "revId": "951e6b2e5b97f3b1e287280196dd4bce840a09c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c8b04ba_3fcae4f5",
+        "filename": "src/mctp-defines.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-17T05:09:28Z",
+      "side": 1,
+      "message": "Thanks Andrew and ManojKiran for your comments. I will remove this patch set. I update the `platform-mc: Added Terminus/TerminusManager class` patch set in PLDM to add these definitions.",
+      "parentUuid": "5a74a22c_99c01ba4",
       "revId": "951e6b2e5b97f3b1e287280196dd4bce840a09c6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
