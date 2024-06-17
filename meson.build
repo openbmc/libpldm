@@ -23,9 +23,13 @@ endif
 
 # ABI control
 visible =  '__attribute__((visibility("default")))'
+libpldm_deprecated_aliases = []
 if get_option('abi').contains('deprecated')
   conf.set('LIBPLDM_ABI_DEPRECATED', visible)
   add_project_arguments('-DLIBPLDM_API_DEPRECATED', language: ['c', 'cpp'])
+  libpldm_deprecated_aliases += [
+    ['decode_oem_meta_file_io_req', 'decode_oem_meta_write_file_io_req'],
+  ]
 else
   conf.set('LIBPLDM_ABI_DEPRECATED', '')
 endif
