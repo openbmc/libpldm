@@ -33,6 +33,24 @@
       "message": "Please note the table number(s). For instance, this is a combination of tables 19 and 20, and that needs some explanation.",
       "revId": "fb49fcd82be59401a5c8ca0f8acb384dcd81cc1c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0abbef99_dda39fb2",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-17T05:31:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12150968_9da497cc",
+      "revId": "fb49fcd82be59401a5c8ca0f8acb384dcd81cc1c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

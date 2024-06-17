@@ -398,6 +398,30 @@
       },
       "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ba7671f_51ad82b7",
+        "filename": "src/firmware_update.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-17T05:31:17Z",
+      "side": 1,
+      "message": "Hi, I summarized the difference between Table 21 \u0026 14, they are different at the first three data members, since Table 21 is not append just 1 `DownstreamDeviceIndex` but don\u0027t have 2 data defined in Table 14, for concern of cohesion, I personally prefer to implement another decode function for Table 21, I\u0027ve written to code and their test cases, please review, thanks.\n\n| Type| Table 21 data | Type | Table 14 data |   |\n|--------|--------------------------------|--------|--------------------------------|---|\n| uint16 | DownstreamDeviceIndex          | uint16 | ComponentClassification        |   |\n| N/A    | N/A                            | uint16 | ComponentIdentifier            |   |\n| N/A    | N/A                            | uint8  | ComponentClassificationIndex   |   |\n| uint32 | ActiveComponentComparisonStamp | uint32 | ActiveComponentComparisonStamp |   |\n| ...    | ...same                         | ...    | ...same                        |   |",
+      "parentUuid": "f2c25bc9_a319f912",
+      "range": {
+        "startLine": 1132,
+        "startChar": 1,
+        "endLine": 1155,
+        "endChar": 42
+      },
+      "revId": "55df94610e18d92dbd7eddfd5b5141f64d6f3554",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
