@@ -534,6 +534,24 @@ struct pldm_pdr_entity_association {
 	pldm_entity children[1];
 } __attribute__((packed));
 
+typedef char pldm_str_utf16be;
+
+struct pldm_entity_auxiliary_name {
+	/* name_language_tag type is char which terminator is 0x00*/
+	char *name_language_tag;
+	/**
+	 * entity_aux_name type is str_utf16be which terminator is 0x00 0x00.
+	 * The two bytes of one characters is in BE order.
+	 * entity_aux_name will be responsed as a flexible array of char but not
+	 * name string. The size of array will be decode in name_size.
+	 */
+	pldm_str_utf16be *entity_aux_name;
+	/**
+	 * name_size is used to identify the size in bytes of entity_aux_name.
+	 */
+	size_t name_size;
+};
+
 /** @struct pldm_pdr_fru_record_set
  *
  *  Structure representing PLDM FRU record set PDR
@@ -2311,6 +2329,19 @@ int decode_numeric_effecter_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_effecter_value_pdr *pdr_value);
 
+/** @brief Decode Entity Auxiliary name data
+ *
+ *  @param[in] aux_names - Aux Name data can be `Entity auxiliary name`,
+ *                         `Sensor auxiliary name`, `Effecter auxiliary name`...
+ *  @param[in] names_size - Size in bytes of Aux Name data from PDRs
+ *  @param[in] name_string_count - Number of name in Aux Name data
+ *  @param[out] names - Array of Aux names struct
+ *
+ *  @return pldm_completion_codes
+ */
+int decode_auxiliary_names_data(const char *aux_names, size_t names_size,
+				uint8_t name_string_count,
+				struct pldm_entity_auxiliary_name *names);
 #ifdef __cplusplus
 }
 #endif
