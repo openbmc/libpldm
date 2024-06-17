@@ -33,6 +33,7 @@ if get_option('abi').contains('deprecated')
   add_project_arguments('-DLIBPLDM_API_DEPRECATED', language: ['c', 'cpp'])
   libpldm_deprecated_aliases += [
     ['get_fru_record_by_option_check', 'get_fru_record_by_option'],
+    ['decode_oem_meta_file_io_req', 'decode_oem_meta_write_file_io_req'],
   ]
 else
   conf.set('LIBPLDM_ABI_DEPRECATED', '')
