@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c369ac09_936c2603",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-17T09:02:33Z",
+      "side": 1,
+      "message": "In Table `Table 2 – Parts of the Entity Identification Information format` of DSP 0248, `If this value is 0x0000, the containing entity is considered to be the overall system`. That why the patch set uses this name.",
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
