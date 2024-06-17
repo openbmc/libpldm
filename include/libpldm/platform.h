@@ -106,6 +106,13 @@ extern "C" {
 #define PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MIN 1
 #define PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MAX 8
 
+/* Container ID */
+/** @brief Table 2 - Parts of the Entity Identification Information format in
+ *         PLDM Platform and Control spec, DSP0248 v1.2.2. "If this value is
+ *         0x0000, the containing entity is considered to be the overall system"
+ */
+#define PLDM_OVERALL_SYSTEM_CONTAINER_ID 0
+
 enum pldm_effecter_data_size {
 	PLDM_EFFECTER_DATA_SIZE_UINT8,
 	PLDM_EFFECTER_DATA_SIZE_SINT8,
@@ -533,6 +540,20 @@ struct pldm_pdr_entity_association {
 	uint8_t num_children;
 	pldm_entity children[1];
 } __attribute__((packed));
+
+#ifndef __cplusplus
+/** @struct pldm_entity_auxiliary_names_pdr
+ *
+ *  Structure representing PLDM Entity Auxiliary Names PDR
+ *  Section Entity Auxiliary Names PDR of DSP0248
+ */
+struct pldm_entity_auxiliary_names_pdr {
+	struct pldm_pdr_hdr hdr;
+	pldm_entity container;
+	uint8_t shared_name_count;
+	uint8_t names[];
+};
+#endif
 
 /** @struct pldm_pdr_fru_record_set
  *
