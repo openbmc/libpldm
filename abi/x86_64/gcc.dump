@@ -9174,7 +9174,7 @@ $VAR1 = {
         }
       },
       'Return' => '100',
-      'ShortName' => 'decode_oem_meta_file_io_req'
+      'ShortName' => 'decode_oem_meta_write_file_io_req'
     }
   },
   'SymbolVersion' => {},
@@ -9242,7 +9242,7 @@ $VAR1 = {
       'decode_new_file_with_metadata_resp' => 1,
       'decode_numeric_sensor_data' => 1,
       'decode_numeric_sensor_pdr_data' => 1,
-      'decode_oem_meta_file_io_req' => 1,
+      'decode_oem_meta_write_file_io_req' => 1,
       'decode_pass_component_table_resp' => 1,
       'decode_platform_event_message_req' => 1,
       'decode_platform_event_message_resp' => 1,
