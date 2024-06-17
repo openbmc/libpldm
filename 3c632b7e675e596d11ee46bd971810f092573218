@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66fafa68_e4546f71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T00:31:17Z",
+      "side": 1,
+      "message": "Hi Varsha,\n\nIf we\u0027re adding to the public API of the library I very much prefer we add an entry to the changelog as well. Working through the checklist at https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md should help ensure that everything necessary is covered off.\n\nI\u0027ve commented on some further concerns inline.",
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f006cdb_53bc2e06",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T00:31:17Z",
+      "side": 1,
+      "message": "I don\u0027t think this is an in-parameter? It should be `out`-only. However, see below.",
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffd0626d_a81ca16d",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T00:31:17Z",
+      "side": 1,
+      "message": "We can take advantage of the non-negative number space to provide the result without resorting to an out-pointer:\n\n```\n@return 1 if the provided FRU record matches the provided record set identifier, 0 if it does not, otherwise -EINVAL if the arguments are invalid.\n```\n\nThis way the function prototype becomes:\n\n```\nint pldm_pdr_record_check_fru_rsi_match(const pldm_pdr_record *record, uint16_t rsi);\n```\n\nWhile typing that out I had a thought. How do you feel about changing the name?\n\n```\nint pldm_pdr_record_matches_fru_rsi(const pldm_pdr_record *record, uint16_t rsi);\n```",
+      "range": {
+        "startLine": 277,
+        "startChar": 4,
+        "endLine": 277,
+        "endChar": 25
+      },
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfb051dd_b93df309",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T00:31:17Z",
+      "side": 1,
+      "message": "Why would we be allocating a record handle?",
+      "range": {
+        "startLine": 278,
+        "startChar": 22,
+        "endLine": 278,
+        "endChar": 77
+      },
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f5c665b_ac4a0a55",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T00:31:17Z",
+      "side": 1,
+      "message": "What memory allocation do you plan on doing for a search?",
+      "range": {
+        "startLine": 277,
+        "startChar": 64,
+        "endLine": 278,
+        "endChar": 21
+      },
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "108029db_bfe702a2",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T00:31:17Z",
+      "side": 1,
+      "message": "If we\u0027re taking `match` as a pointer argument we must check that also.",
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28f1104d_514fe4b6",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T00:31:17Z",
+      "side": 1,
+      "message": "I can\u0027t accept this sorry. There should be no buffer bounds arithmetic going on in the arguments to `pldm_msgbuf_init_*()`. The purpose of the `msgbuf` APIs is to ensure buffer bounds are respected, and doing this arithmetic defeats that purpose.\n\nThe arguments to `pldm_msgbuf_init_*()` must always refer to the base buffer pointer, and the buffer\u0027s own size, to the exclusion of all else. This is how we ensure accesses stay inside the buffer bounds.\n\nAt the very least this needs to be something like:\n\n```\nrc \u003d pldm_msgbuf_init_errno(dst,\n    sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t),\n    record-\u003edata,\n    record-\u003esize);\n```",
+      "range": {
+        "startLine": 288,
+        "startChar": 7,
+        "endLine": 290,
+        "endChar": 18
+      },
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f5257bc_5725d4de",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T00:31:17Z",
+      "side": 1,
+      "message": "I think part of the problem you were solving above with the pointer arithmetic is the need to extract a data member at a specific location without extracting all the preceding members. We could use `pldm_msgbuf_span_required()` to ignore that chunk, or we could add e.g. a `pldm_msgbuf_load_from(buf, offset, dst)` API (and supporting infrastructure) to do this for us.\n\nThe `pldm_msgbuf_span_required()` \"hack\" is the easiest way to make forward progress so I\u0027ll suggest going that route for now. I\u0027ll need to consider the trade-offs of the `pldm_msgbuf_load_from()` idea over using packed structs internally.",
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82533cc5_1d790d09",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T00:31:17Z",
+      "side": 1,
+      "message": "This is a bit verbose. If we have the `match` parameter, this could instead be:\n\n```\n*match \u003d record_fru_rsi \u003d\u003d rsi;\n```\n\nBut accounting for the suggestion to drop the `match` parameter and return the result instead, it becomes:\n\n```\nreturn record_fru_rsi \u003d\u003d rsi;\n```",
+      "range": {
+        "startLine": 301,
+        "startChar": 1,
+        "endLine": 305,
+        "endChar": 2
+      },
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "656b9e10_3ec320da",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T00:31:17Z",
+      "side": 1,
+      "message": "What about testing non-match conditions?",
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
