@@ -25,8 +25,8 @@ Change categories:
 
 1. fru: Deprecate `get_fru_record_by_option_check()`
 
-   Users should switch to `get_fru_record_by_option()`. Migration can be
-   performed using the [Coccinelle semantic patch][coccinelle]
+   Users should switch to `get_fru_record_by_option()`. Migration can
+   be performed using the [Coccinelle semantic patch][coccinelle]
    `get_fru_record_by_option_check.cocci`:
 
    ```
@@ -83,6 +83,18 @@ Change categories:
 
 1. Deprecate `pldm_oem_ibm_fru_field_type` members that that are not prefixed
    with `PLDM_OEM_IBM_`
+2. Deprecate `decode_oem_meta_file_io_req()`
+
+   Users should switch to `decode_oem_meta_write_file_io_req()`. Migration can be
+   performed using the [Coccinelle semantic patch][coccinelle]
+   `decode_oem_meta_write_file_io_req.cocci`:
+
+   ```
+   $ spatch \
+      --sp-file=${LIBPLDM_DIR}/evolutions/current/decode_oem_meta_write_file_io_req.cocci \
+      --in-place \
+      $(git ls-files | grep -E '\.[ch](pp)?')
+   ```
 
 ### Fixed
 
