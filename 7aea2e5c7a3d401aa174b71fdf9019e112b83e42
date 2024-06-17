@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebf98717_3d08f421",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T23:57:07Z",
+      "side": 1,
+      "message": "Hi Manoj, I have a few minor queries inline.",
+      "revId": "7aea2e5c7a3d401aa174b71fdf9019e112b83e42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6f17046_aa472633",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T23:57:07Z",
+      "side": 1,
+      "message": "Should be \"points\"?",
+      "range": {
+        "startLine": 65,
+        "startChar": 61,
+        "endLine": 65,
+        "endChar": 66
+      },
+      "revId": "7aea2e5c7a3d401aa174b71fdf9019e112b83e42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97273460_655b62d7",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T23:57:07Z",
+      "side": 1,
+      "message": "Should be \"points\"?",
+      "range": {
+        "startLine": 76,
+        "startChar": 70,
+        "endLine": 76,
+        "endChar": 75
+      },
+      "revId": "7aea2e5c7a3d401aa174b71fdf9019e112b83e42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "610df815_94864fb3",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T23:57:07Z",
+      "side": 1,
+      "message": "Is this acceptable syntax for doxygen?",
+      "revId": "7aea2e5c7a3d401aa174b71fdf9019e112b83e42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cc82e61_0549fc49",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T23:57:07Z",
+      "side": 1,
+      "message": "Is this acceptable notation for doxygen?",
+      "range": {
+        "startLine": 1050,
+        "startChar": 10,
+        "endLine": 1050,
+        "endChar": 16
+      },
+      "revId": "7aea2e5c7a3d401aa174b71fdf9019e112b83e42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcfdaba2_21d111da",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-17T23:57:07Z",
+      "side": 1,
+      "message": "Is this acceptable notation for doxygen?",
+      "range": {
+        "startLine": 1051,
+        "startChar": 10,
+        "endLine": 1051,
+        "endChar": 16
+      },
+      "revId": "7aea2e5c7a3d401aa174b71fdf9019e112b83e42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
