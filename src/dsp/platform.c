@@ -2691,3 +2691,47 @@ int encode_get_state_effecter_states_resp(
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }
+
+LIBPLDM_ABI_TESTING
+int decode_auxiliary_names_data(const char *aux_names, size_t names_size,
+				uint8_t name_string_count,
+				struct pldm_entity_auxiliary_name *names)
+{
+	char *names_ptr;
+	size_t name_pos = 0;
+	size_t name_size = 0;
+
+	if (name_string_count == 0 || names_size == 0 || !aux_names) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	names_ptr = (char *)aux_names;
+	for (size_t i = 0; i < name_string_count; i++) {
+		names[i].name_language_tag = names_ptr;
+
+		/* Point to name */
+		names_ptr += strlen(names[i].name_language_tag) + 1;
+		name_pos = name_pos + strlen(names[i].name_language_tag) + 1;
+		name_size = 0;
+		/* Find terminator of str_utf16be [0x00, 0x00] */
+		while ((name_pos + name_size + 1) < names_size &&
+		       (*(names_ptr + name_size) ||
+			*(names_ptr + name_size + 1))) {
+			name_size = name_size + 2;
+		}
+
+		if ((name_pos + name_size + 1) >= names_size) {
+			return PLDM_ERROR_INVALID_DATA;
+		}
+		/* added null terminator of str_utf16be*/
+		name_size = name_size + 2;
+		names[i].entity_aux_name = names_ptr;
+		names[i].name_size = name_size;
+
+		/* Point to next language_tag*/
+		names_ptr += name_size;
+		name_pos += name_size;
+	}
+
+	return PLDM_SUCCESS;
+}
