@@ -1490,7 +1490,7 @@ TEST(QueryDownstreamIdentifiers, encodeRequestInvalidErrorPaths)
 #ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, goodPathDecodeResponse)
 {
-    // Len is not fixed here taking it as 9, constains 1 downstream device with
+    // Len is not fixed here taking it as 9, contains 1 downstream device with
     // 1 descriptor
     constexpr uint32_t downstreamDevicesLen = 9;
     constexpr uint8_t complition_code_resp = PLDM_SUCCESS;
@@ -1582,7 +1582,7 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorPaths)
 #ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
 {
-    // Len is not fixed here taking it as 9, constains 1 downstream device with
+    // Len is not fixed here taking it as 9, contains 1 downstream device with
     // 1 descriptor
     constexpr uint32_t actualDownstreamDevicesLen = 9;
     constexpr uint8_t complition_code_resp = PLDM_SUCCESS;

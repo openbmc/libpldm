@@ -375,7 +375,7 @@ int encode_get_commands_req(uint8_t instance_id, uint8_t type, ver32_t version,
  * protocol layer error and all the out-parameters are invalid.
  *
  *  @param[in] msg - Response message
- *  @param[in] payload_length - Length of reponse message payload
+ *  @param[in] payload_length - Length of response message payload
  *  @param[out] completion_code - Pointer to response msg's PLDM completion code
  *  @param[in] commands - pointer to array bitfield8_t[32] containing supported
  *             commands (PLDM_MAX_CMDS_PER_TYPE/8) = 32), as per DSP0240
@@ -413,7 +413,7 @@ int encode_get_version_req(uint8_t instance_id, uint32_t transfer_handle,
  * protocol layer error and all the out-parameters are invalid.
  *
  *  @param[in] msg - Response message
- *  @param[in] payload_length - Length of reponse message payload
+ *  @param[in] payload_length - Length of response message payload
  *  @param[out] completion_code - Pointer to response msg's PLDM completion code
  *  @param[out] next_transfer_handle - the next handle for the next part of data
  *  @param[out] transfer_flag - flag to indicate the part of data

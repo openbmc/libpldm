@@ -496,7 +496,7 @@ static pldm_entity_node *find_insertion_at(pldm_entity_node *start,
 	assert(start != NULL);
 
 	/* Insert after the the last node that matches the input entity type, or
-	 * at the end if no such match occurrs
+	 * at the end if no such match occurs
 	 */
 	while (start->next_sibling != NULL) {
 		uint16_t this_type = start->entity.entity_type;
@@ -1302,7 +1302,7 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 	*entities = l_entities;
 }
 
-/* Find the postion of record in pldm_pdr repo and place new_record in
+/* Find the position of record in pldm_pdr repo and place new_record in
  * the same position.
  */
 static int pldm_pdr_replace_record(pldm_pdr *repo, pldm_pdr_record *record,

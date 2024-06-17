@@ -304,7 +304,7 @@ int decode_get_fru_record_by_option_req(
  *  @param[in] transfer_flag - The transfer flag that indicates what part of the
  *             transfer this response represents
  *  @param[in] fru_structure_data - FRU Structure Data
- *  @param[in] data_size - Size of FRU Structrue Data
+ *  @param[in] data_size - Size of FRU Structure Data
  *  @param[in,out] msg - Message will be written to this
  *  @return pldm_completion_codes
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg',

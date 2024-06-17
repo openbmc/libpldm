@@ -533,7 +533,7 @@ int decode_vendor_defined_descriptor_value(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	// Assuming atleast 1 byte of VendorDefinedDescriptorData
+	// Assuming at least 1 byte of VendorDefinedDescriptorData
 	if (length < (sizeof(struct pldm_vendor_defined_descriptor_title_data) +
 		      entry->vendor_defined_descriptor_title_str_len)) {
 		return PLDM_ERROR_INVALID_LENGTH;

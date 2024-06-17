@@ -49,7 +49,7 @@ struct variable_field;
 #define PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN 12
 
 /** @brief Minimum length of device descriptor, 2 bytes for descriptor type,
- *         2 bytes for descriptor length and atleast 1 byte of descriptor data
+ *         2 bytes for descriptor length and at least 1 byte of descriptor data
  */
 #define PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN    5
 #define PLDM_GET_FIRMWARE_PARAMETERS_REQ_BYTES 0

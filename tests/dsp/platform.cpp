@@ -2134,7 +2134,7 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataDecodeRequest)
         eventData{
             0x1,                   // version
             0x88, 0x77,            // Event Id
-            0x44, 0x33, 0x22, 0x11 // Tranfer Handle
+            0x44, 0x33, 0x22, 0x11 // Transfer Handle
         };
 
     uint8_t formatVersion = 0x01;
@@ -2166,7 +2166,7 @@ TEST(PlatformEventMessage, testBadPldmMsgPollEventDataDecodeRequest)
         eventData{
             0x1,                   // version
             0x88, 0x77,            // Event Id
-            0x44, 0x33, 0x22, 0x11 // Tranfer Handle
+            0x44, 0x33, 0x22, 0x11 // Transfer Handle
         };
 
     uint8_t retFormatVersion;

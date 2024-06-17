@@ -46,7 +46,7 @@ TEST(AttrTable, HeaderDecodeTest)
         2, 0, /* possible value handle */
         3, 0, /* possible value handle */
         1,    /* number of default value */
-        0     /* defaut value string handle index */
+        0     /* default value string handle index */
     };
     auto entry =
         reinterpret_cast<struct pldm_bios_attr_table_entry*>(enumEntry.data());
@@ -68,7 +68,7 @@ TEST(AttrTable, EnumEntryDecodeTest)
         2, 0, /* possible value handle */
         3, 0, /* possible value handle */
         1,    /* number of default value */
-        1     /* defaut value string handle index */
+        1     /* default value string handle index */
     };
 
     auto entry =
@@ -152,7 +152,7 @@ TEST(AttrTable, EnumEntryEncodeTest)
         2, 0, /* possible value handle */
         3, 0, /* possible value handle */
         1,    /* number of default value */
-        0     /* defaut value string handle index */
+        0     /* default value string handle index */
     };
 
     std::vector<uint16_t> pv_hdls{2, 3};
@@ -264,7 +264,7 @@ TEST(AttrTable, StringEntryEncodeTest)
         1,   0,        /* min string length */
         100, 0,        /* max string length */
         3,   0,        /* default string length */
-        'a', 'b', 'c', /* defaul string */
+        'a', 'b', 'c', /* default string */
     };
 
     struct pldm_bios_table_attr_entry_string_info info = {
@@ -352,7 +352,7 @@ TEST(AttrTable, integerEntryEncodeTest)
         1,  0, 0, 0, 0, 0, 0, 0, /* lower bound */
         10, 0, 0, 0, 0, 0, 0, 0, /* upper bound */
         2,  0, 0, 0,             /* scalar increment */
-        3,  0, 0, 0, 0, 0, 0, 0, /* defaut value */
+        3,  0, 0, 0, 0, 0, 0, 0, /* default value */
     };
 
     std::vector<uint16_t> pv_hdls{2, 3};
@@ -363,7 +363,7 @@ TEST(AttrTable, integerEntryEncodeTest)
         false, /* read only */
         1,     /* lower bound */
         10,    /* upper bound */
-        2,     /* sacalar increment */
+        2,     /* scalar increment */
         3      /* default value */
     };
     auto encodeLength = pldm_bios_table_attr_entry_integer_encode_length();
@@ -416,7 +416,7 @@ TEST(AttrTable, integerEntryDecodeTest)
         1,  0, 0, 0, 0, 0, 0, 0, /* lower bound */
         10, 0, 0, 0, 0, 0, 0, 0, /* upper bound */
         2,  0, 0, 0,             /* scalar increment */
-        3,  0, 0, 0, 0, 0, 0, 0, /* defaut value */
+        3,  0, 0, 0, 0, 0, 0, 0, /* default value */
     };
 
     uint64_t lower;
@@ -443,7 +443,7 @@ TEST(AttrTable, ItearatorTest)
         2, 0, /* possible value handle */
         3, 0, /* possible value handle */
         1,    /* number of default value */
-        0     /* defaut value string handle index */
+        0     /* default value string handle index */
     };
     std::vector<uint8_t> stringEntry{
         1,   0,       /* attr handle */
@@ -462,7 +462,7 @@ TEST(AttrTable, ItearatorTest)
         1,  0, 0, 0, 0, 0, 0, 0, /* lower bound */
         10, 0, 0, 0, 0, 0, 0, 0, /* upper bound */
         2,  0, 0, 0,             /* scalar increment */
-        3,  0, 0, 0, 0, 0, 0, 0, /* defaut value */
+        3,  0, 0, 0, 0, 0, 0, 0, /* default value */
     };
 
     Table table;
@@ -503,7 +503,7 @@ TEST(AttrTable, FindTest)
         2, 0, /* possible value handle */
         3, 0, /* possible value handle */
         1,    /* number of default value */
-        0     /* defaut value string handle index */
+        0     /* default value string handle index */
     };
     std::vector<uint8_t> stringEntry{
         1,   0,       /* attr handle */
@@ -522,7 +522,7 @@ TEST(AttrTable, FindTest)
         1,  0, 0, 0, 0, 0, 0, 0, /* lower bound */
         10, 0, 0, 0, 0, 0, 0, 0, /* upper bound */
         2,  0, 0, 0,             /* scalar increment */
-        3,  0, 0, 0, 0, 0, 0, 0, /* defaut value */
+        3,  0, 0, 0, 0, 0, 0, 0, /* default value */
     };
 
     Table table;
@@ -659,7 +659,7 @@ TEST(AttrValTable, stringEntryEncodeTest)
         0,   0,        /* attr handle */
         1,             /* attr type */
         3,   0,        /* current string length */
-        'a', 'b', 'c', /* defaut value string handle index */
+        'a', 'b', 'c', /* default value string handle index */
     };
 
     auto length = pldm_bios_table_attr_value_entry_encode_string_length(3);
@@ -702,7 +702,7 @@ TEST(AttrValTable, StringEntryDecodeTest)
         0,   0,        /* attr handle */
         1,             /* attr type */
         3,   0,        /* current string length */
-        'a', 'b', 'c', /* defaut value string handle index */
+        'a', 'b', 'c', /* default value string handle index */
     };
 
     auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
@@ -795,7 +795,7 @@ TEST(AttrValTable, IteratorTest)
         0,   0,        /* attr handle */
         1,             /* attr type */
         3,   0,        /* current string length */
-        'a', 'b', 'c', /* defaut value string handle index */
+        'a', 'b', 'c', /* default value string handle index */
     };
     std::vector<uint8_t> integerEntry{
         0,  0,                   /* attr handle */
@@ -851,7 +851,7 @@ TEST(AttrValTable, FindTest)
         1,   0,        /* attr handle */
         1,             /* attr type */
         3,   0,        /* current string length */
-        'a', 'b', 'c', /* defaut value string handle index */
+        'a', 'b', 'c', /* default value string handle index */
     };
     std::vector<uint8_t> integerEntry{
         2,  0,                   /* attr handle */
@@ -900,7 +900,7 @@ TEST(AttrValTable, CopyAndUpdateTest)
         1,   0,        /* attr handle */
         1,             /* attr type */
         3,   0,        /* current string length */
-        'a', 'b', 'c', /* defaut value string handle index */
+        'a', 'b', 'c', /* default value string handle index */
     };
     std::vector<uint8_t> integerEntry{
         2,  0,                   /* attr handle */
@@ -915,7 +915,7 @@ TEST(AttrValTable, CopyAndUpdateTest)
         1,   0,        /* attr handle */
         1,             /* attr type */
         3,   0,        /* current string length */
-        'd', 'e', 'f', /* defaut value string handle index */
+        'd', 'e', 'f', /* default value string handle index */
     };
 
     Table expectTable;
@@ -935,7 +935,7 @@ TEST(AttrValTable, CopyAndUpdateTest)
         1,   0,                  /* attr handle */
         1,                       /* attr type */
         5,   0,                  /* current string length */
-        'd', 'e', 'f', 'a', 'b', /* defaut value string handle index */
+        'd', 'e', 'f', 'a', 'b', /* default value string handle index */
     };
     expectTable.resize(0);
     buildTable(expectTable, enumEntry, stringEntry2, integerEntry);
@@ -953,7 +953,7 @@ TEST(AttrValTable, CopyAndUpdateTest)
         1,   0, /* attr handle */
         1,      /* attr type */
         1,   0, /* current string length */
-        'd',    /* defaut value string handle index */
+        'd',    /* default value string handle index */
     };
     expectTable.resize(0);
     buildTable(expectTable, enumEntry, stringEntry3, integerEntry);
