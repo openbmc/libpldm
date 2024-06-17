@@ -24,7 +24,15 @@ struct pldm_oem_meta_write_file_req {
 	uint8_t file_data[1];
 };
 
-/** @brief Decode OEM meta file io req
+struct pldm_oem_meta_read_file_req {
+	uint8_t file_handle;
+	uint8_t length;
+	uint8_t transferFlag;
+	uint8_t highOffset;
+	uint8_t lowOffset;
+} __attribute__((packed));
+
+/** @brief Decode OEM meta write file io req
  *
  *  @param[in] msg - Pointer to PLDM request message
  *  @param[in] payload_length - Length of request payload
@@ -33,9 +41,32 @@ struct pldm_oem_meta_write_file_req {
  *  @param[out] data - Message will be written to this
  *  @return pldm_completion_codes
  */
-int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
-				size_t payload_length, uint8_t *file_handle,
-				uint32_t *length, uint8_t *data);
+int decode_oem_meta_write_file_io_req(const struct pldm_msg *msg,
+				      size_t payload_length,
+				      uint8_t *file_handle, uint32_t *length,
+				      uint8_t *data);
+
+/** @brief Decode OEM meta read file io req
+ *
+ *  @param[in] msg - Pointer to PLDM request message
+ *  @param[in] payload_length - Length of request payload
+ *  @param[out] req - Pointer to the structure to store the decoded response data
+ *  @return pldm_completion_codes
+ */
+int decode_oem_meta_read_file_io_req(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     struct pldm_oem_meta_read_file_req *req);
+
+/**
+ * @brief Encode OEM meta read file io resp
+ *
+ * @param[in] instance_id - The instance ID of the PLDM entity
+ * @param[out] completion_code - The completion code of response
+ * @param[out] responseMsg - Pointer to the buffer to store the response data
+ * @return pldm_completion_codes
+ */
+int encode_http_boot_header_resp(uint8_t instance_id, uint8_t completion_code,
+				 struct pldm_msg *responseMsg);
 
 #ifdef __cplusplus
 }
