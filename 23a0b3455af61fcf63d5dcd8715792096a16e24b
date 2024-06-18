@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c248fb38_0473db25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-18T03:57:14Z",
+      "side": 1,
+      "message": "Because the number of entity name is different between the PDRs and the size of name and language tags also be different. As the current implementation of pldm/libpldm, those parsers are implemented in `pldmd`, no parser API implement in libpldm.\nI knew that the PDRs parser API should be implemented in libpldm. I also tried to apply that rule for others PDRs but in this case I\u0027m not sure how to follow that.\nTo support parsing language tag and name we also need the strASCII, strUTF-16BE parser.",
+      "parentUuid": "cf2e632a_98b4d40b",
+      "range": {
+        "startLine": 11,
+        "startChar": 45,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "acec8039_0a17ba77",
@@ -76,6 +100,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbc6a562_83c05457",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-18T03:57:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f787571b_7f559474",
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe839ad2_1343c0cb",
@@ -95,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "adeaa5e6_f9769d27",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-18T03:57:14Z",
+      "side": 1,
+      "message": "I updated the code, can you check?",
+      "parentUuid": "fe839ad2_1343c0cb",
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1d3a4d2_2964f3e4",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 2
@@ -106,6 +166,24 @@
       "writtenOn": "2024-06-18T00:05:18Z",
       "side": 1,
       "message": "The changes checklist requests that we don\u0027t add further packed structs:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L71-L72\n\nWhat\u0027s the justification for doing so here?",
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e13d0ad2_b421d90c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-18T03:57:14Z",
+      "side": 1,
+      "message": "I updated the code, can you check?",
+      "parentUuid": "c1d3a4d2_2964f3e4",
       "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
