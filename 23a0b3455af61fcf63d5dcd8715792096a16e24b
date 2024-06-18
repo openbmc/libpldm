@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf2e632a_98b4d40b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T00:05:18Z",
+      "side": 1,
+      "message": "If the implementation of the PDR parser isn\u0027t yet in libpldm then I prefer we don\u0027t add structure definitions to the libpldm public API. The patch doesn\u0027t currently use the struct you\u0027re adding in any functions exposed in the public API.",
+      "range": {
+        "startLine": 11,
+        "startChar": 45,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acec8039_0a17ba77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T00:05:18Z",
+      "side": 1,
+      "message": "Hi Thu, I have a few comments inline.",
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c369ac09_936c2603",
@@ -14,6 +54,58 @@
       "writtenOn": "2024-06-17T09:02:33Z",
       "side": 1,
       "message": "In Table `Table 2 – Parts of the Entity Identification Information format` of DSP 0248, `If this value is 0x0000, the containing entity is considered to be the overall system`. That why the patch set uses this name.",
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f787571b_7f559474",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T00:05:18Z",
+      "side": 1,
+      "message": "Can you perhaps add that quote in a comment above the macro definition (along with the specific version of DSP0248 containing the quoted text)?",
+      "parentUuid": "c369ac09_936c2603",
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe839ad2_1343c0cb",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T00:05:18Z",
+      "side": 1,
+      "message": "Are you trying to do a flexible array here? Because they don\u0027t work this way, and they aren\u0027t specified by C++. This issue is called out in the change checklist:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L74-L87\n\nThe definition will need to change if we choose to go ahead with the patch.",
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1d3a4d2_2964f3e4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T00:05:18Z",
+      "side": 1,
+      "message": "The changes checklist requests that we don\u0027t add further packed structs:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L71-L72\n\nWhat\u0027s the justification for doing so here?",
       "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
