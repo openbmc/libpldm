@@ -1,0 +1,306 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02203201_823fb210",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "Hello, I have some comments inline, but I\u0027m more confident in the implementation this time. Thanks for reworking it.",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8118baf_f0acdd90",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "Can we please specify this as `char active_comp_release_date[9]` so it can be used as a `NUL`-terminated string? The encode function can drop the final `NUL` when constructing the wire-format message, and the decoder can ensure the final byte is `NUL` when populating the struct member.\n\nAlso consider defining a macro for the magic number.",
+      "range": {
+        "startLine": 600,
+        "startChar": 1,
+        "endLine": 600,
+        "endChar": 37
+      },
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f4bfcad_b82d1308",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "As above: `char pending_comp_release_date[9];` (taking into account the decision on a macro definition for the magic number).",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03d901dd_b5a590c7",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "Can you please separate the description with a `-`? It makes it easier to find where the description starts.\n\nPlease audit the rest of the doxygen documentation you\u0027ve added for this.",
+      "range": {
+        "startLine": 979,
+        "startChar": 25,
+        "endLine": 979,
+        "endChar": 26
+      },
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95f7fb12_89e41cd9",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "Okay, so in between your last patchset and this one, I added a checklist for making changes to libpldm. I\u0027m hoping the checklist helps us achieve consistency in API design (among other things).\n\nPart of the checklist requests that new functions return negative `errno` values:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L108-L112\n\nCan you please update the documentation and the implementation to conform with that?\n\nPlease also audit the rest of the functions you\u0027ve added so they adhere with this.",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fa13d08_6391dae4",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "There\u0027s some unnecessary whitespace here. Can you please trim that off and audit the rest of the change for any further instances?",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7848c18a_015aff03",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "We can pass in the `struct variable_field *` that we extracted the region into via `decode_get_downstream_firmware_params_resp()` here, right? That would feel more ergonomic to me.",
+      "range": {
+        "startLine": 1029,
+        "startChar": 1,
+        "endLine": 1029,
+        "endChar": 36
+      },
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "191893c3_f5859dfb",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "See comment in the header about return values. This should be `-EINVAL`.\n\nPlease audit the rest of the patch for this.",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87fa5511_75f29efd",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "... and switch to `pldm_msgbuf_init_errno(...)`.",
+      "range": {
+        "startLine": 1052,
+        "startChar": 6,
+        "endLine": 1052,
+        "endChar": 25
+      },
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9b8a6cd_c43e392b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "Don\u0027t need this one, as it will be handled by `pldm_msgbuf_init_cc()` below.",
+      "range": {
+        "startLine": 1091,
+        "startChar": 43,
+        "endLine": 1091,
+        "endChar": 61
+      },
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "427cbde5_b7e83fd1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "And this becomes `return 0`.",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e964c8e_5c87a5a3",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "Maybe we can add a helper to extract a string for this.",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a84c1d8_5fb54cf3",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "This should be `pldm_msgbuf_destroy_consumed()`?",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf5810b1_94e048fb",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1687,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "All the test functions you\u0027ve added should be individually guarded to ensure the tests don\u0027t fail to link when the library is built with `-Dabi\u003ddeprecated,stable`:\n\n```\nFound ninja-1.11.1.git.kitware.jobserver-1 at /home/andrew/.local/bin/ninja\nCleaning... 12 files.\n[58/62] Linking target tests/dsp_firmware_update\nFAILED: tests/dsp_firmware_update \nc++  -o tests/dsp_firmware_update tests/dsp_firmware_update.p/dsp_firmware_update.cpp.o -Wl,--as-needed -Wl,--no-undefined \u0027-Wl,-rpath,$ORIGIN/../src\u0027 -Wl,-rpath-link,/home/andrew/src/openbmc.org/openbmc/libpldm/origin/tmp.cvHWAXriQc/src -Wl,--start-group src/libpldm.so.0.8.0 subprojects/googletest/libgtest.a subprojects/googletest/libgtest_main.a subprojects/googletest/libgmock.a -Wl,--end-group -pthread\n/usr/bin/ld: tests/dsp_firmware_update.p/dsp_firmware_update.cpp.o: in function `GetDownstreamFirmwareParameters_goodPathEncodeRequest_Test::TestBody()\u0027:\n/home/andrew/src/openbmc.org/openbmc/libpldm/origin/tmp.cvHWAXriQc/../tests/dsp/firmware_update.cpp:1697:(.text+0x105b4): undefined reference to `encode_get_downstream_firmware_params_req\u0027\n/usr/bin/ld: tests/dsp_firmware_update.p/dsp_firmware_update.cpp.o: in function `GetDownstreamFirmwareParameters_encodeRequestInvalidTransferOperationFlag_Test::TestBody()\u0027:\n/home/andrew/src/openbmc.org/openbmc/libpldm/origin/tmp.cvHWAXriQc/../tests/dsp/firmware_update.cpp:1719:(.text+0x10808): undefined reference to `encode_get_downstream_firmware_params_req\u0027\n/usr/bin/ld: tests/dsp_firmware_update.p/dsp_firmware_update.cpp.o: in function `GetDownstreamFirmwareParameters_encodeRequestErrorBufSize_Test::TestBody()\u0027:\n/home/andrew/src/openbmc.org/openbmc/libpldm/origin/tmp.cvHWAXriQc/../tests/dsp/firmware_update.cpp:1739:(.text+0x1095e): undefined reference to `encode_get_downstream_firmware_params_req\u0027\n/usr/bin/ld: tests/dsp_firmware_update.p/dsp_firmware_update.cpp.o: in function `GetDownstreamFirmwareParameters_goodPathDecodeResponse_Test::TestBody()\u0027:\n/home/andrew/src/openbmc.org/openbmc/libpldm/origin/tmp.cvHWAXriQc/../tests/dsp/firmware_update.cpp:1797:(.text+0x13059): undefined reference to `decode_get_downstream_firmware_params_resp\u0027\n/usr/bin/ld: tests/dsp_firmware_update.p/dsp_firmware_update.cpp.o: in function `GetDownstreamFirmwareParameters_decodeResponseInvalidLength_Test::TestBody()\u0027:\n/home/andrew/src/openbmc.org/openbmc/libpldm/origin/tmp.cvHWAXriQc/../tests/dsp/firmware_update.cpp:1865:(.text+0x15ed2): undefined reference to `decode_get_downstream_firmware_params_resp\u0027\n/usr/bin/ld: /home/andrew/src/openbmc.org/openbmc/libpldm/origin/tmp.cvHWAXriQc/../tests/dsp/firmware_update.cpp:1889:(.text+0x16177): undefined reference to `decode_downstream_device_parameter_table_entry\u0027\n/usr/bin/ld: tests/dsp_firmware_update.p/dsp_firmware_update.cpp.o: in function `GetDownstreamFirmwareParameters_goodPathDecodeDownstreamDeivceParamTable_Test::TestBody()\u0027:\n/home/andrew/src/openbmc.org/openbmc/libpldm/origin/tmp.cvHWAXriQc/../tests/dsp/firmware_update.cpp:1954:(.text+0x1be55): undefined reference to `decode_downstream_device_parameter_table_entry\u0027\ncollect2: error: ld returned 1 exit status\n[62/62] Linking target tests/oem_ibm_fileio\nninja: build stopped: subcommand failed.\n```\n\nThis issue is caught by running `./scripts/pre-submit`.\n\nFor an example of how to resolve this issue, see the way this change guards each test:\n\nhttps://github.com/openbmc/libpldm/commit/a6fa5559a934a887f436a1011de8ba5554221b60#diff-e0782f432277f708536334f4fbbae580d428042a8f6c18819078de9e22d5c1fe\n\nThis approach allows us to stabilise each API individually.",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32287215_d648a667",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1883,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "You need to make this conditional on `NDEBUG` being defined. If you run `./scripts/pre-submit` this assertion will fail when the build is configured with `--buildtype\u003drelease`:\n\n```\n[ RUN      ] GetDownstreamFirmwareParameters.decodeResponseInvalidLength\n../tests/dsp/firmware_update.cpp:1883: Failure\nDeath test: decode_downstream_device_parameter_table_entry( currentDevice, paramTableLen, \u0026entry, \u0026activeCompVerStr, \u0026pendingCompVerStr)\n    Result: failed to die.\n Error msg:\n[  DEATH   ]\n\n[  FAILED  ] GetDownstreamFirmwareParameters.decodeResponseInvalidLength (0 ms)\n```\nSee how this change solves the problem:\n\nhttps://github.com/openbmc/libpldm/commit/fbaea23332f750c7c67d6fec6144df2fc3f90f2a",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84529b0d_3718be37",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-18T01:08:28Z",
+      "side": 1,
+      "message": "We can probably add helpers for string insertion as well.",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
