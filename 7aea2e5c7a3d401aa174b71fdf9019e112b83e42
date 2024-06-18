@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e78d3c_bf159a13",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-06-18T05:58:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6f17046_aa472633",
+      "range": {
+        "startLine": 65,
+        "startChar": 61,
+        "endLine": 65,
+        "endChar": 66
+      },
+      "revId": "7aea2e5c7a3d401aa174b71fdf9019e112b83e42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97273460_655b62d7",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-06-17T23:57:07Z",
       "side": 1,
       "message": "Should be \"points\"?",
+      "range": {
+        "startLine": 76,
+        "startChar": 70,
+        "endLine": 76,
+        "endChar": 75
+      },
+      "revId": "7aea2e5c7a3d401aa174b71fdf9019e112b83e42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a27014c6_87a53954",
+        "filename": "include/libpldm/bios_table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-06-18T05:58:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97273460_655b62d7",
       "range": {
         "startLine": 76,
         "startChar": 70,
@@ -81,6 +129,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37007c1d_7d35665d",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-06-18T05:58:35Z",
+      "side": 1,
+      "message": "yes andrew, per https://doxygen.nl/manual/commands.html#cmdparam\n\n```\nThe \\param command has an optional attribute, \u003cdir\u003e, specifying\nthe direction of the parameter. Possible values are \"[in]\", \"[in,out]\",\nand \"[out]\".\n```",
+      "parentUuid": "610df815_94864fb3",
+      "revId": "7aea2e5c7a3d401aa174b71fdf9019e112b83e42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cc82e61_0549fc49",
@@ -104,6 +170,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f415b766_28062799",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-06-18T05:58:35Z",
+      "side": 1,
+      "message": "same as above.",
+      "parentUuid": "1cc82e61_0549fc49",
+      "range": {
+        "startLine": 1050,
+        "startChar": 10,
+        "endLine": 1050,
+        "endChar": 16
+      },
+      "revId": "7aea2e5c7a3d401aa174b71fdf9019e112b83e42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcfdaba2_21d111da",
@@ -117,6 +207,30 @@
       "writtenOn": "2024-06-17T23:57:07Z",
       "side": 1,
       "message": "Is this acceptable notation for doxygen?",
+      "range": {
+        "startLine": 1051,
+        "startChar": 10,
+        "endLine": 1051,
+        "endChar": 16
+      },
+      "revId": "7aea2e5c7a3d401aa174b71fdf9019e112b83e42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56dc83db_11b88707",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-06-18T05:58:35Z",
+      "side": 1,
+      "message": "same as above.",
+      "parentUuid": "bcfdaba2_21d111da",
       "range": {
         "startLine": 1051,
         "startChar": 10,
