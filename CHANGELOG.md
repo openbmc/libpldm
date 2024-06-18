@@ -35,6 +35,18 @@ Change categories:
       --in-place \
       $(git ls-files | grep -E '\.[ch](pp)?')
    ```
+2. Deprecate `decode_oem_meta_file_io_req()`
+
+   Users should switch to `decode_oem_meta_write_file_io_req()`. Migration can
+   be performed using the [Coccinelle semantic patch][coccinelle]
+   `decode_oem_meta_write_file_io_req.cocci`:
+
+   ```
+   $ spatch \
+      --sp-file=${LIBPLDM_DIR}/evolutions/current/decode_oem_meta_write_file_io_req.cocci \
+      --in-place \
+      $(git ls-files | grep -E '\.[ch](pp)?')
+   ```
 
 [coccinelle]: https://coccinelle.gitlabpages.inria.fr/website/
 
