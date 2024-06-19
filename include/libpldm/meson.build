@@ -27,13 +27,6 @@ if get_option('oem-ibm').allowed()
     'oem/ibm/platform.h',
     'oem/ibm/state_set.h'
   )
-
-  install_symlink('file_io.h', pointing_to: 'oem/ibm/file_io.h', install_dir: 'include/libpldm')
-  install_symlink('entity_oem_ibm.h', pointing_to: 'oem/ibm/entity.h', install_dir: 'include/libpldm')
-  install_symlink('fru_oem_ibm.h', pointing_to: 'oem/ibm/fru.h', install_dir: 'include/libpldm')
-  install_symlink('host.h', pointing_to: 'oem/ibm/host.h', install_dir: 'include/libpldm')
-  install_symlink('platform_oem_ibm.h', pointing_to: 'oem/ibm/platform.h', install_dir: 'include/libpldm')
-  install_symlink('state_set_oem_ibm.h', pointing_to: 'oem/ibm/state_set.h', install_dir: 'include/libpldm')
 endif
 
 if get_option('oem-meta').allowed()

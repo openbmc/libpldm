@@ -38,6 +38,13 @@ Change categories:
 
 [coccinelle]: https://coccinelle.gitlabpages.inria.fr/website/
 
+### Removed
+
+1. IBM OEM header compatibility symlinks.
+
+   Anyone left using the deprecated paths can migrate using the coccinelle patch
+   at `evolutions/current/oem-ibm-header-compat.cocci`.
+
 ## [0.8.0] - 2024-05-23
 
 ### Added
