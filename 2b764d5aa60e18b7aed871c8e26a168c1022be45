@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d72c3e6b_c21d541a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-19T05:41:58Z",
+      "side": 1,
+      "message": "A couple of considerations here:\n\n1. Perhaps we should namespace it by the spec, so `PLDM_PLATFORM_...`\n2. If it\u0027s part of the entity identification information, perhaps we should include that too.\n\nWhat do you think of `PLDM_PLATFORM_ENTITY_ID_SYSTEM_CONTAINER_ID`?",
+      "revId": "2b764d5aa60e18b7aed871c8e26a168c1022be45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7d1c516_d21b1874",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-19T05:41:58Z",
+      "side": 1,
+      "message": "Ah, perhaps I should have been more precise. What I was trying to get at was:\n\n```\nstruct pldm_entity_auxiliary_names_pdr {\n    struct pldm_pdr_hdr hdr;\n    pldm_entity container;\n    uint8_t shared_name_count;\n#ifndef __cplusplus\n    uint8_t names[];\n#endif\n};\n\nuint8_t *pldm_entity_auxiliary_names_pdr_get_names(struct pldm_entity_auxiliary_names_pdr *pdr);\n```\n\nWhere the implementation of `pldm_entity_auxiliary_names_pdr_get_names()` in `src/dsp/platform.c` is:\n\n```\nuint8_t *pldm_entity_auxiliary_names_pdr_get_names(struct pldm_entity_auxiliary_names_pdr *pdr)\n{\n    return pdr-\u003enames;\n}\n```\n\nBut really `uint8_t` isn\u0027t right anyway.\n\nHowever, why can\u0027t we add the usual decoding functions for it? Given the nature of the structure I don\u0027t think what we have here is particularly helpful anyway.\n\nRoughly, this might instead look like:\n\n```\ntypedef char pldm_str_utf16be;\n\nstruct pldm_entity_auxiliary_name {\n    char *name_language_tag;\n    pldm_str_utf16be *entity_aux_name;\n};\n\nstruct pldm_entity_auxiliary_names_pdr {\n    struct pldm_pdr_hdr hdr;\n    pldm_entity container;\n    uint8_t shared_name_count;\n    uint8_t name_string_count;\n    struct pldm_entity_auxiliary_name *names;\n#ifndef __cplusplus\n    char auxiliary_name_data[];\n#endif\n};\n\nint decode_pldm_entity_auxiliary_names_pdr(struct pldm_msg *msg, size_t payload_length, struct pldm_entity_auxiliary_names_pdr *pdr, size_t pdr_length);\n```\n\nThen we can use this like:\n\n```\nstruct pldm_entity_auxiliary_names_pdr *pdr;\nsize_t pdr_length;\nint rc;\n\n// Add overflow check for addition\npdr_length \u003d sizeof(*pdr) + payload_length;\npdr \u003d malloc(pdr_length);\nif (!pdr) {\n    ...\n}\n\npdr-\u003enames \u003d NULL;\nrc \u003d decode_pldm_entity_auxiliary_names_pdr(msg, payload_length, pdr, pdr_length);\nif (rc \u003c 0) {\n    ...\n}\n\npdr-\u003enames \u003d calloc(aux_names_pdr-\u003ename_string_count, sizeof(*aux_names_pdr-\u003enames));\nif (!pdr-\u003enames) {\n    ...\n}\n\nrc \u003d decode_pldm_entity_auxiliary_names_pdr(NULL, 0, pdr, pdr_length);\n...\n```\n\nThen in the implementation we:\n\n1. Copy all the string data out of the message into `auxiliary_name_data` (unfortunate, but allows us to discard the message storage) as part of the operations in the first call to `decode_pldm_entity_auxiliary_names_pdr()`\n2. Construct the index into the string data in the second call.",
+      "revId": "2b764d5aa60e18b7aed871c8e26a168c1022be45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
