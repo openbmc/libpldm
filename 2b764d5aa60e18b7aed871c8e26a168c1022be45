@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "279e2330_13bb16a4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-19T10:37:28Z",
+      "side": 1,
+      "message": "CONTAINER_ID is a part of `Entity Identification Information` but not `Entity Identification` So I think if you want to include `ENTITY_ID` then we should use `ENTITY_ID_INFO`.\nBecause look at `Figure 5 – Entity Identification Information format`, `entity Id` and `Container Id` are parts `Entity Identification Information`. Using only `ENTITY_ID` then we don\u0027t SYSTEM is for `ENTITY_ID` or `CONTAINER_ID`.\n\nAs my opinion, `PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID` can be one option too.",
+      "parentUuid": "d72c3e6b_c21d541a",
+      "revId": "2b764d5aa60e18b7aed871c8e26a168c1022be45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7d1c516_d21b1874",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-19T05:41:58Z",
       "side": 1,
       "message": "Ah, perhaps I should have been more precise. What I was trying to get at was:\n\n```\nstruct pldm_entity_auxiliary_names_pdr {\n    struct pldm_pdr_hdr hdr;\n    pldm_entity container;\n    uint8_t shared_name_count;\n#ifndef __cplusplus\n    uint8_t names[];\n#endif\n};\n\nuint8_t *pldm_entity_auxiliary_names_pdr_get_names(struct pldm_entity_auxiliary_names_pdr *pdr);\n```\n\nWhere the implementation of `pldm_entity_auxiliary_names_pdr_get_names()` in `src/dsp/platform.c` is:\n\n```\nuint8_t *pldm_entity_auxiliary_names_pdr_get_names(struct pldm_entity_auxiliary_names_pdr *pdr)\n{\n    return pdr-\u003enames;\n}\n```\n\nBut really `uint8_t` isn\u0027t right anyway.\n\nHowever, why can\u0027t we add the usual decoding functions for it? Given the nature of the structure I don\u0027t think what we have here is particularly helpful anyway.\n\nRoughly, this might instead look like:\n\n```\ntypedef char pldm_str_utf16be;\n\nstruct pldm_entity_auxiliary_name {\n    char *name_language_tag;\n    pldm_str_utf16be *entity_aux_name;\n};\n\nstruct pldm_entity_auxiliary_names_pdr {\n    struct pldm_pdr_hdr hdr;\n    pldm_entity container;\n    uint8_t shared_name_count;\n    uint8_t name_string_count;\n    struct pldm_entity_auxiliary_name *names;\n#ifndef __cplusplus\n    char auxiliary_name_data[];\n#endif\n};\n\nint decode_pldm_entity_auxiliary_names_pdr(struct pldm_msg *msg, size_t payload_length, struct pldm_entity_auxiliary_names_pdr *pdr, size_t pdr_length);\n```\n\nThen we can use this like:\n\n```\nstruct pldm_entity_auxiliary_names_pdr *pdr;\nsize_t pdr_length;\nint rc;\n\n// Add overflow check for addition\npdr_length \u003d sizeof(*pdr) + payload_length;\npdr \u003d malloc(pdr_length);\nif (!pdr) {\n    ...\n}\n\npdr-\u003enames \u003d NULL;\nrc \u003d decode_pldm_entity_auxiliary_names_pdr(msg, payload_length, pdr, pdr_length);\nif (rc \u003c 0) {\n    ...\n}\n\npdr-\u003enames \u003d calloc(aux_names_pdr-\u003ename_string_count, sizeof(*aux_names_pdr-\u003enames));\nif (!pdr-\u003enames) {\n    ...\n}\n\nrc \u003d decode_pldm_entity_auxiliary_names_pdr(NULL, 0, pdr, pdr_length);\n...\n```\n\nThen in the implementation we:\n\n1. Copy all the string data out of the message into `auxiliary_name_data` (unfortunate, but allows us to discard the message storage) as part of the operations in the first call to `decode_pldm_entity_auxiliary_names_pdr()`\n2. Construct the index into the string data in the second call.",
+      "revId": "2b764d5aa60e18b7aed871c8e26a168c1022be45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d58196e8_488f7f8b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-19T10:37:28Z",
+      "side": 1,
+      "message": "\u003e Ah, perhaps I should have been more precise. What I was trying to get at was:\n\u003e \n\u003e ```\n\u003e struct pldm_entity_auxiliary_names_pdr {\n\u003e     struct pldm_pdr_hdr hdr;\n\u003e     pldm_entity container;\n\u003e     uint8_t shared_name_count;\n\u003e #ifndef __cplusplus\n\u003e     uint8_t names[];\n\u003e #endif\n\u003e };\n\u003e \n\u003e uint8_t *pldm_entity_auxiliary_names_pdr_get_names(struct pldm_entity_auxiliary_names_pdr *pdr);\n\u003e ```\n\u003e \n\u003e Where the implementation of `pldm_entity_auxiliary_names_pdr_get_names()` in `src/dsp/platform.c` is:\n\u003e \n\u003e ```\n\u003e uint8_t *pldm_entity_auxiliary_names_pdr_get_names(struct pldm_entity_auxiliary_names_pdr *pdr)\n\u003e {\n\u003e     return pdr-\u003enames;\n\u003e }\n\u003e ```\n\u003e \n\u003e But really `uint8_t` isn\u0027t right anyway.\n\u003e \n\u003e However, why can\u0027t we add the usual decoding functions for it? Given the nature of the structure I don\u0027t think what we have here is particularly helpful anyway.\n\u003e \n\u003e Roughly, this might instead look like:\n\u003e \n\u003e ```\n\u003e typedef char pldm_str_utf16be;\n\u003e \n\u003e struct pldm_entity_auxiliary_name {\n\u003e     char *name_language_tag;\n\u003e     pldm_str_utf16be *entity_aux_name;\n\u003e };\n\u003e \n\u003e struct pldm_entity_auxiliary_names_pdr {\n\u003e     struct pldm_pdr_hdr hdr;\n\u003e     pldm_entity container;\n\u003e     uint8_t shared_name_count;\n\u003e     uint8_t name_string_count;\n\u003e     struct pldm_entity_auxiliary_name *names;\n\n\nI don\u0027t get your idea in adding this field in here. Is it list of `struct pldm_entity_auxiliary_name`\u003e?\n\n\n\u003e #ifndef __cplusplus\n\u003e     char auxiliary_name_data[];\n\u003e #endif\n\u003e };\n\u003e \n\u003e int decode_pldm_entity_auxiliary_names_pdr(struct pldm_msg *msg, size_t payload_length, struct pldm_entity_auxiliary_names_pdr *pdr, size_t pdr_length);\n\u003e ```\n\u003e \n\u003e Then we can use this like:\n\u003e \n\u003e ```\n\u003e struct pldm_entity_auxiliary_names_pdr *pdr;\n\u003e size_t pdr_length;\n\u003e int rc;\n\u003e \n\u003e // Add overflow check for addition\n\u003e pdr_length \u003d sizeof(*pdr) + payload_length;\n\u003e pdr \u003d malloc(pdr_length);\n\u003e if (!pdr) {\n\u003e     ...\n\u003e }\n\u003e \n\u003e pdr-\u003enames \u003d NULL;\n\u003e rc \u003d decode_pldm_entity_auxiliary_names_pdr(msg, payload_length, pdr, pdr_length);\n\u003e if (rc \u003c 0) {\n\u003e     ...\n\u003e }\n\u003e \n\u003e pdr-\u003enames \u003d calloc(aux_names_pdr-\u003ename_string_count, sizeof(*aux_names_pdr-\u003enames));\n\u003e if (!pdr-\u003enames) {\n\u003e     ...\n\u003e }\n\u003e \n\u003e rc \u003d decode_pldm_entity_auxiliary_names_pdr(NULL, 0, pdr, pdr_length);\n\u003e ...\n\u003e ```\n\n\nThese code will be in `pldmd`, is this right?\n\n\n\u003e \n\u003e Then in the implementation we:\n\u003e \n\u003e 1. Copy all the string data out of the message into `auxiliary_name_data` (unfortunate, but allows us to discard the message storage) as part of the operations in the first call to `decode_pldm_entity_auxiliary_names_pdr()`\n\nThe decode_pldm_entity_auxiliary_names_pdr() will decode the response message to get hdr, container, shared_name_count, name_string_count and the pointer to the names data to auxiliary_name_data.\nIs this your idea?\n\n\u003e 2. Construct the index into the string data in the second call.\n\nCan you give more detail about this line?",
+      "parentUuid": "d7d1c516_d21b1874",
       "revId": "2b764d5aa60e18b7aed871c8e26a168c1022be45",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
