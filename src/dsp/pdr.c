@@ -42,9 +42,9 @@ static inline uint32_t get_next_record_handle(const pldm_pdr *repo,
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
-		       bool is_remote, uint16_t terminus_handle,
-		       uint32_t *record_handle)
+int pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
+		 bool is_remote, uint16_t terminus_handle,
+		 uint32_t *record_handle)
 {
 	uint32_t curr;
 
@@ -312,8 +312,8 @@ int pldm_pdr_add_fru_record_set_check(pldm_pdr *repo, uint16_t terminus_handle,
 	fru->entity_instance_num = htole16(entity_instance_num);
 	fru->container_id = htole16(container_id);
 
-	return pldm_pdr_add_check(repo, data, size, false, terminus_handle,
-				  bmc_record_handle);
+	return pldm_pdr_add(repo, data, size, false, terminus_handle,
+			    bmc_record_handle);
 }
 
 LIBPLDM_ABI_STABLE
@@ -836,8 +836,8 @@ static int entity_association_pdr_add_children(
 		node = node->next_sibling;
 	}
 
-	return pldm_pdr_add_check(repo, pdr, size, is_remote, terminus_handle,
-				  &record_handle);
+	return pldm_pdr_add(repo, pdr, size, is_remote, terminus_handle,
+			    &record_handle);
 }
 
 static int entity_association_pdr_add_entry(pldm_entity_node *curr,
