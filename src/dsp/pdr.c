@@ -283,11 +283,11 @@ bool pldm_pdr_record_is_remote(const pldm_pdr_record *record)
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_pdr_add_fru_record_set_check(pldm_pdr *repo, uint16_t terminus_handle,
-				      uint16_t fru_rsi, uint16_t entity_type,
-				      uint16_t entity_instance_num,
-				      uint16_t container_id,
-				      uint32_t *bmc_record_handle)
+int pldm_pdr_add_fru_record_set(pldm_pdr *repo, uint16_t terminus_handle,
+				uint16_t fru_rsi, uint16_t entity_type,
+				uint16_t entity_instance_num,
+				uint16_t container_id,
+				uint32_t *bmc_record_handle)
 {
 	if (!repo || !bmc_record_handle) {
 		return -EINVAL;

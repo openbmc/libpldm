@@ -258,6 +258,11 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
  *  @return 0 on success, -EINVAL if the arguments are invalid, or -ENOMEM if an internal allocation
  *  	    fails.
  */
+int pldm_pdr_add_fru_record_set(pldm_pdr *repo, uint16_t terminus_handle,
+				uint16_t fru_rsi, uint16_t entity_type,
+				uint16_t entity_instance_num,
+				uint16_t container_id,
+				uint32_t *bmc_record_handle);
 int pldm_pdr_add_fru_record_set_check(pldm_pdr *repo, uint16_t terminus_handle,
 				      uint16_t fru_rsi, uint16_t entity_type,
 				      uint16_t entity_instance_num,
