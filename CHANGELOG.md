@@ -47,6 +47,11 @@ Change categories:
 
 [clang-rename]: https://clang.llvm.org/extra/clang-rename.html
 
+2. dsp: pdr: Rename pldm_pdr_add_check()
+
+   Users should switch to `pldm_pdr_add()`. Migration can be automated with
+   `evolutions/current/pldm_pdr_add_check.yaml`.
+
 ### Removed
 
 1. IBM OEM header compatibility symlinks.
