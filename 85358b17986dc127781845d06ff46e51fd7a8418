@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c95dc82_143730b4",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8118baf_f0acdd90",
+      "range": {
+        "startLine": 600,
+        "startChar": 1,
+        "endLine": 600,
+        "endChar": 37
+      },
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f4bfcad_b82d1308",
@@ -58,6 +82,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d191aa1_f7fb151c",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f4bfcad_b82d1308",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03d901dd_b5a590c7",
@@ -71,6 +113,30 @@
       "writtenOn": "2024-06-18T01:08:28Z",
       "side": 1,
       "message": "Can you please separate the description with a `-`? It makes it easier to find where the description starts.\n\nPlease audit the rest of the doxygen documentation you\u0027ve added for this.",
+      "range": {
+        "startLine": 979,
+        "startChar": 25,
+        "endLine": 979,
+        "endChar": 26
+      },
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a8c9e8a_c4e8ea1f",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03d901dd_b5a590c7",
       "range": {
         "startLine": 979,
         "startChar": 25,
@@ -100,6 +166,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea76f4e4_a1fe5534",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Sure, thanks for reminding, I\u0027ve changed the `@return` into `errno` and list all possible return values, and check each items on the checklist myself, please review.",
+      "parentUuid": "95f7fb12_89e41cd9",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fa13d08_6391dae4",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 9
@@ -111,6 +195,24 @@
       "writtenOn": "2024-06-18T01:08:28Z",
       "side": 1,
       "message": "There\u0027s some unnecessary whitespace here. Can you please trim that off and audit the rest of the change for any further instances?",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "759c068c_38297403",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fa13d08_6391dae4",
       "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -138,6 +240,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ece727_12f70d23",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "True, thanks for the suggestion, done.",
+      "parentUuid": "7848c18a_015aff03",
+      "range": {
+        "startLine": 1029,
+        "startChar": 1,
+        "endLine": 1029,
+        "endChar": 36
+      },
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "191893c3_f5859dfb",
@@ -155,6 +281,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9a97ffd_a451de84",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Done.\n\nI modifed the code based on the commit you contributed before: https://github.com/openbmc/libpldm/commit/f490a38f7c78dee6d71db0706d8ddbb5d37c95c1, please let me know if I miss anythiing else.",
+      "parentUuid": "191893c3_f5859dfb",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87fa5511_75f29efd",
@@ -168,6 +312,30 @@
       "writtenOn": "2024-06-18T01:08:28Z",
       "side": 1,
       "message": "... and switch to `pldm_msgbuf_init_errno(...)`.",
+      "range": {
+        "startLine": 1052,
+        "startChar": 6,
+        "endLine": 1052,
+        "endChar": 25
+      },
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e621ac58_0b5bee21",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87fa5511_75f29efd",
       "range": {
         "startLine": 1052,
         "startChar": 6,
@@ -201,6 +369,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c77f2581_f7676f77",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9b8a6cd_c43e392b",
+      "range": {
+        "startLine": 1091,
+        "startChar": 43,
+        "endLine": 1091,
+        "endChar": 61
+      },
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "427cbde5_b7e83fd1",
@@ -214,6 +406,24 @@
       "writtenOn": "2024-06-18T01:08:28Z",
       "side": 1,
       "message": "And this becomes `return 0`.",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "470998c9_a3f11d3d",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "427cbde5_b7e83fd1",
       "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -237,6 +447,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a548f5f_994c1152",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Yes, I think that will be more elegant, I\u0027ll have to do some calculation for the real data length in my code for now, like this:\n```\npldm_msgbuf_extract_array_uint8(\n\t\tbuf, entry-\u003eactive_comp_release_date,\n\t\tPLDM_FWUP_COMPONENT_RELEASE_DATA_LEN -\n\t\t\t1 /*minus the null terminator*/);\n```\n\nBut I think this should be a seperate commit for refactoring purpose?",
+      "parentUuid": "4e964c8e_5c87a5a3",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a84c1d8_5fb54cf3",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 9
@@ -248,6 +476,24 @@
       "writtenOn": "2024-06-18T01:08:28Z",
       "side": 1,
       "message": "This should be `pldm_msgbuf_destroy_consumed()`?",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40c2b153_a83ac41b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a84c1d8_5fb54cf3",
       "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -269,6 +515,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b81dde4a_3149274d",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1687,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf5810b1_94e048fb",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32287215_d648a667",
@@ -286,6 +550,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "017c4a00_6c1ad898",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1883,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "Done, thanks for the hint, I\u0027ve run the script locally and all tests passed.",
+      "parentUuid": "32287215_d648a667",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84529b0d_3718be37",
@@ -299,6 +581,24 @@
       "writtenOn": "2024-06-18T01:08:28Z",
       "side": 1,
       "message": "We can probably add helpers for string insertion as well.",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "783ac1b4_af309ea0",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-20T09:34:14Z",
+      "side": 1,
+      "message": "I think this should be a seperate commit for refactoring purpose?",
+      "parentUuid": "84529b0d_3718be37",
       "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
