@@ -35,22 +35,21 @@ Change categories:
 
 ### Deprecated
 
-1. fru: Deprecate `get_fru_record_by_option_check()`
+1. Rename and deprecate functions with the `_check` suffix
 
-   Users should switch to `get_fru_record_by_option()`. Migration can be
-   performed using the `apply-renames` script and the [clang-rename][]
-   configuration under `evolutions/`:
+   All library function return values always need to be checked. The `_check`
+   suffix is redundant, so remove it. Migration to the non-deprecated
+   equivalents without the `_check` suffix can be performed using
+   `scripts/ apply-renames` and the [clang-rename][] configurations under
+   `evolutions/`
 
-   ```
-   $ ./scripts/apply-renames evolutions/current/get_fru_record_by_option_check.yaml
-   ```
+   The deprecated functions:
+
+   - `get_fru_record_by_option_check()`
+   - `pldm_pdr_add_check()`
+   - `pldm_pdr_add_fru_record_set_check()`
 
 [clang-rename]: https://clang.llvm.org/extra/clang-rename.html
-
-2. dsp: pdr: Rename pldm_pdr_add_check()
-
-   Users should switch to `pldm_pdr_add()`. Migration can be automated with
-   `evolutions/current/pldm_pdr_add_check.yaml`.
 
 ### Removed
 

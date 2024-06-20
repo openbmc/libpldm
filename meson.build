@@ -35,6 +35,7 @@ if get_option('abi').contains('deprecated')
   libpldm_deprecated_aliases += [
     ['get_fru_record_by_option_check', 'get_fru_record_by_option'],
     ['pldm_pdr_add_check', 'pldm_pdr_add'],
+    ['pldm_pdr_add_fru_record_set_check', 'pldm_pdr_add_fru_record_set'],
   ]
 else
   conf.set('LIBPLDM_ABI_DEPRECATED', '')
