@@ -76,6 +76,9 @@ uint32_t pldm_pdr_get_repo_size(const pldm_pdr *repo);
  *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
  *  allocation fails, or -EOVERFLOW if a record handle could not be allocated
  */
+int pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
+		 bool is_remote, uint16_t terminus_handle,
+		 uint32_t *record_handle);
 int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		       bool is_remote, uint16_t terminus_handle,
 		       uint32_t *record_handle);
