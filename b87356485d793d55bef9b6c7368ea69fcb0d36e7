@@ -1,6 +1,108 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b52e2441_df14b4d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "Hello, thanks for addressing the review comments. I have a few more inline. The critical thing is that we get the bits that are in `include/libpldm/firmware_update.h` right. Changing the library\u0027s public API after the fact is a difficult process, so if we catch things in review that can be improved, it\u0027s best they\u0027re dealt with before we merge the work.",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9436227e_7c07ebc2",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "Please move this to `### Added` under the `## [Unreleased]` section.",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70c460fa_d0d7b899",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "Thinking about this some more perhaps we should align this more tightly to the spec. I think we should define it to be `8`, not `9`, and then we do the arithmetic in the struct declaration below.",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c46d1a8_8f72c53b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "Make this\n\n```\nuint8_t active_comp_release_data[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN + 1];\n```\n\nAnd maybe add a comment above it that the additional byte is for the null terminator.\n\nHowever, this should also be an array of `char`, not `uint8_t`.",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff2f8cb0_d1048b49",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "`... + 1` here for the array length as well.\n\nAlso an array of `char`, not `uint8_t`.",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03f39d30_86952f0d",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "Can we please use a prose description here? For example:\n\n```\n@return 0 on success, otherwise -EINVAL if ..., -EOVERFLOW if ..., or -EBADMSG if ...\n```\n\nWhere you replace the `...` bits with a description of why that error code is returned.\n\nPlease also address this in the documentation for the remaining added functions below.",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39685ff8_148a556a",
@@ -14,6 +116,93 @@
       "writtenOn": "2024-06-20T09:48:49Z",
       "side": 1,
       "message": "I noticed that I cannot use `pack_pldm_header_errno()` since there is no declaration for it in `include/libpldm/base.h`, I saw it is marked as a `Internal functions` in `src/dsp/base.h`, but `pack_pldm_header()` still return a CC, is it expected?",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37a996fe_396bdee1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "You should `#include \"dsp/base.h\"` and use `pack_pldm_header_errno()`.\n\n`include/libpldm/base.h` is part of the library\u0027s _public_ API - it must only expose API details relevant to the _users_ of libpldm (as opposed to the _implementation_ of libpldm, which is what you\u0027re changing here). I\u0027m not yet ready to expose `pack_pldm_header_errno()` to library users, thus it\u0027s declared in the internal header.",
+      "parentUuid": "39685ff8_148a556a",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f7411c7_08d776c1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "By defining `PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN` as `8` as suggested on the header you should drop the `- 1` here.",
+      "range": {
+        "startLine": 1157,
+        "startChar": 38,
+        "endLine": 1158,
+        "endChar": 34
+      },
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8123f7f1_e4645046",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "As above.",
+      "range": {
+        "startLine": 1160,
+        "startChar": 33,
+        "endLine": 1161,
+        "endChar": 6
+      },
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd5baf7f_ec7b2488",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "As above.",
+      "range": {
+        "startLine": 1174,
+        "startChar": 70,
+        "endLine": 1175,
+        "endChar": 7
+      },
       "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

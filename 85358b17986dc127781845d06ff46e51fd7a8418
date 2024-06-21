@@ -465,6 +465,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2eac453b_7f062009",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "Well, I\u0027m concerned about the types. Whether `char` is signed or unsigned is platform-dependent, but `uint8_t` is always unsigned.\n\nAre you happy to add an implementation of `pldm_msgbuf_extract_array_char()`?",
+      "parentUuid": "0a548f5f_994c1152",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a84c1d8_5fb54cf3",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 9
@@ -599,6 +617,24 @@
       "side": 1,
       "message": "I think this should be a seperate commit for refactoring purpose?",
       "parentUuid": "84529b0d_3718be37",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b8c98a0_488bf660",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-21T01:10:54Z",
+      "side": 1,
+      "message": "No, the types need to be correct in this patch, as it affects the public API of the library.",
+      "parentUuid": "783ac1b4_af309ea0",
       "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
