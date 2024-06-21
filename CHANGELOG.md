@@ -38,17 +38,14 @@ Change categories:
 1. fru: Deprecate `get_fru_record_by_option_check()`
 
    Users should switch to `get_fru_record_by_option()`. Migration can be
-   performed using the [Coccinelle semantic patch][coccinelle]
-   `get_fru_record_by_option_check.cocci`:
+   performed using the `apply-renames` script and the [clang-rename][]
+   configuration under `evolutions/`:
 
-   ```text
-   $ spatch \
-      --sp-file=${LIBPLDM_DIR}/evolutions/current/get_fru_record_by_option_check.cocci \
-      --in-place \
-      $(git ls-files | grep -E '\.[ch](pp)?')
+   ```
+   $ ./scripts/apply-renames evolutions/current/get_fru_record_by_option_check.yaml
    ```
 
-[coccinelle]: https://coccinelle.gitlabpages.inria.fr/website/
+[clang-rename]: https://clang.llvm.org/extra/clang-rename.html
 
 ### Removed
 
