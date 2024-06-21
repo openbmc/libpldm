@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "208c237d_aaf543be",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-21T06:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9436227e_7c07ebc2",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70c460fa_d0d7b899",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-06-21T01:10:54Z",
       "side": 1,
       "message": "Thinking about this some more perhaps we should align this more tightly to the spec. I think we should define it to be `8`, not `9`, and then we do the arithmetic in the struct declaration below.",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc0e0e40_7ee9729a",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-21T06:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70c460fa_d0d7b899",
       "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "375f3d04_4a98ed3d",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-21T06:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c46d1a8_8f72c53b",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff2f8cb0_d1048b49",
@@ -86,6 +140,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db4d7b1f_16145744",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-21T06:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff2f8cb0_d1048b49",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03f39d30_86952f0d",
@@ -99,6 +171,24 @@
       "writtenOn": "2024-06-21T01:10:54Z",
       "side": 1,
       "message": "Can we please use a prose description here? For example:\n\n```\n@return 0 on success, otherwise -EINVAL if ..., -EOVERFLOW if ..., or -EBADMSG if ...\n```\n\nWhere you replace the `...` bits with a description of why that error code is returned.\n\nPlease also address this in the documentation for the remaining added functions below.",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dc2eb67_f29181ea",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-21T06:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03f39d30_86952f0d",
       "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -138,6 +228,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "adc1d208_19b6edd7",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-21T06:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37a996fe_396bdee1",
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f7411c7_08d776c1",
@@ -151,6 +259,30 @@
       "writtenOn": "2024-06-21T01:10:54Z",
       "side": 1,
       "message": "By defining `PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN` as `8` as suggested on the header you should drop the `- 1` here.",
+      "range": {
+        "startLine": 1157,
+        "startChar": 38,
+        "endLine": 1158,
+        "endChar": 34
+      },
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64d7867c_61c03c40",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-21T06:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f7411c7_08d776c1",
       "range": {
         "startLine": 1157,
         "startChar": 38,
@@ -184,6 +316,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "429b3ec0_b35927f9",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-21T06:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8123f7f1_e4645046",
+      "range": {
+        "startLine": 1160,
+        "startChar": 33,
+        "endLine": 1161,
+        "endChar": 6
+      },
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd5baf7f_ec7b2488",
@@ -197,6 +353,30 @@
       "writtenOn": "2024-06-21T01:10:54Z",
       "side": 1,
       "message": "As above.",
+      "range": {
+        "startLine": 1174,
+        "startChar": 70,
+        "endLine": 1175,
+        "endChar": 7
+      },
+      "revId": "b87356485d793d55bef9b6c7368ea69fcb0d36e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c43c7d71_c7aa6a1f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-21T06:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd5baf7f_ec7b2488",
       "range": {
         "startLine": 1174,
         "startChar": 70,

@@ -483,6 +483,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72da6a3a_9bd286ec",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-21T06:30:51Z",
+      "side": 1,
+      "message": "Done, add `pldm_msgbuf_extract_array_char()` and related test cases, please let me know if there is any concern.",
+      "parentUuid": "2eac453b_7f062009",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a84c1d8_5fb54cf3",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 9
@@ -635,6 +653,24 @@
       "side": 1,
       "message": "No, the types need to be correct in this patch, as it affects the public API of the library.",
       "parentUuid": "783ac1b4_af309ea0",
+      "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd4e77a_a2a8b6a6",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-21T06:30:51Z",
+      "side": 1,
+      "message": "Done, added helper `pldm_msgbuf_insert_array_char`, added related test cases to reach 100% line coverage (verified by local-ci-build).",
+      "parentUuid": "8b8c98a0_488bf660",
       "revId": "85358b17986dc127781845d06ff46e51fd7a8418",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
