@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <uchar.h>
 
 static int pldm_platform_pdr_hdr_validate(struct pldm_value_pdr_hdr *ctx,
 					  size_t lower, size_t upper)
@@ -2687,6 +2688,179 @@ int encode_get_state_effecter_states_resp(
 		pldm_msgbuf_insert(buf, field->effecter_op_state);
 		pldm_msgbuf_insert(buf, field->pending_state);
 		pldm_msgbuf_insert(buf, field->present_state);
+	}
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_entity_auxiliary_names_pdr(
+	const void *data, size_t data_length,
+	struct pldm_entity_auxiliary_names_pdr *pdr, size_t pdr_length)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	struct pldm_msgbuf _src;
+	struct pldm_msgbuf *src = &_src;
+	struct pldm_msgbuf _dst;
+	struct pldm_msgbuf *dst = &_dst;
+	size_t names_len = 0;
+	void *names = NULL;
+	int rc;
+	int i;
+
+	/*
+	 * Alignment of auxiliary_name_data is an invariant as we statically assert
+	 * its behaviour in the header.
+	 */
+	assert(!((uintptr_t)pdr->auxiliary_name_data &
+		 (alignof(pldm_utf16be) - 1)));
+
+	/* Reject any lengths that are obviously invalid */
+	if (pdr_length < data_length || pdr_length < sizeof(*pdr)) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH, data,
+		data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_value_pdr_hdr(buf, &pdr->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_platform_pdr_hdr_validate(
+		&pdr->hdr, PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH,
+		data_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, pdr->container.entity_type);
+	pldm_msgbuf_extract(buf, pdr->container.entity_instance_num);
+	pldm_msgbuf_extract(buf, pdr->container.entity_container_id);
+	pldm_msgbuf_extract(buf, pdr->shared_name_count);
+	rc = pldm_msgbuf_extract(buf, pdr->name_string_count);
+	if (rc < 0) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_span_remaining(buf, &names, &names_len);
+	if (rc < 0) {
+		return rc;
+	}
+
+	pdr->auxiliary_name_data_size = pdr_length - sizeof(*pdr);
+
+	rc = pldm_msgbuf_init_errno(dst, pdr->auxiliary_name_data_size,
+				    pdr->auxiliary_name_data,
+				    pdr->auxiliary_name_data_size);
+	if (rc < 0) {
+		return rc;
+	}
+
+	/*
+	 * Below we do two passes over the same region. This is to first pack the
+	 * UTF16-BE strings into auxiliary_name_data, followed by the ASCII strings,
+	 * to maintain appropriate alignment.
+	 */
+
+	/* Initialise for the first pass to extract the UTF16-BE name strings */
+	rc = pldm_msgbuf_init_errno(src, names_len, names, names_len);
+	if (rc < 0) {
+		return rc;
+	}
+
+	for (i = 0; i < pdr->name_string_count; i++) {
+		pldm_msgbuf_span_string_ascii(src, NULL, NULL);
+		pldm_msgbuf_copy_string_utf16(dst, src);
+	}
+
+	rc = pldm_msgbuf_destroy_consumed(src);
+	if (rc < 0) {
+		return rc;
+	}
+
+	/* Reinitialise for the second pass to extract the ASCII tag strings */
+	rc = pldm_msgbuf_init_errno(src, names_len, names, names_len);
+	if (rc < 0) {
+		return rc;
+	}
+
+	for (i = 0; i < pdr->name_string_count; i++) {
+		pldm_msgbuf_copy_string_ascii(dst, src);
+		pldm_msgbuf_span_string_utf16(src, NULL, NULL);
+	}
+
+	if ((rc = pldm_msgbuf_destroy(dst)) ||
+	    (rc = pldm_msgbuf_destroy(src)) ||
+	    (rc = pldm_msgbuf_destroy(buf))) {
+		return rc;
+	}
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_entity_auxiliary_names_pdr_index(
+	struct pldm_entity_auxiliary_names_pdr *pdr)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+	int i;
+
+	if (!pdr) {
+		return -EINVAL;
+	}
+
+	if (pdr->name_string_count == 0 && pdr->names) {
+		return -EINVAL;
+	}
+
+	if (pdr->name_string_count > 0 && !pdr->names) {
+		return -EINVAL;
+	}
+
+	if (pdr->name_string_count == 0) {
+		return 0;
+	}
+
+	/*
+	 * Minimum size is one NUL for each member of each entry
+	 *
+	 * Note that the definition of nameLanguageTag in DSP0248 v1.2.2
+	 * states the following:
+	 *
+	 * > A null-terminated ISO646 ASCII string ...
+	 * >
+	 * > special value: null string = 0x0000 = unspecified.
+	 *
+	 * Until proven otherwise we will assume the "0x0000" is a
+	 * misrepresentation of an ASCII NUL, and that ASCII NUL is
+	 * represented by a single byte.
+	 */
+	rc = pldm_msgbuf_init_errno(
+		buf, pdr->name_string_count * (sizeof(char) + sizeof(char16_t)),
+		pdr->auxiliary_name_data, pdr->auxiliary_name_data_size);
+	if (rc) {
+		return rc;
+	}
+
+	for (i = 0; i < pdr->name_string_count; i++) {
+		void *loc = NULL;
+		pldm_msgbuf_span_string_utf16(buf, &loc, NULL);
+		pdr->names[i].name = loc;
+	}
+
+	for (i = 0; i < pdr->name_string_count; i++) {
+		void *loc = NULL;
+		pldm_msgbuf_span_string_ascii(buf, &loc, NULL);
+		pdr->names[i].tag = loc;
 	}
 
 	return pldm_msgbuf_destroy_consumed(buf);

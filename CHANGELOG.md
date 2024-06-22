@@ -24,6 +24,7 @@ Change categories:
 3. pdr: Add pldm_entity_association_pdr_create_new()
 4. platform: Define macros for the responded transferflags
 5. pdr: Add pldm_pdr_get_terminus_handle() API
+6. pdr: Add related decode_entity_auxiliary_names_pdr() APIs
 
 ### Deprecated
 

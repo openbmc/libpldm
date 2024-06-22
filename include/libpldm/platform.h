@@ -6,8 +6,11 @@
 extern "C" {
 #endif
 
+#include <assert.h>
+#include <stdalign.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <uchar.h>
 
 #include <libpldm/base.h>
 #include <libpldm/pdr.h>
@@ -104,6 +107,14 @@ enum pldm_platform_transfer_flag {
 	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_EFFECTER_DATA_SIZE_MIN_LENGTH +  \
 	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_RANGE_FIELD_MIN_LENGTH)
 
+/**
+ * Minimum length of entity auxiliary name effecter PDR includes size of hdr,
+ * entityType, entityInstanceNumber, entityContainerID, sharedNameCount and
+ * nameStringCount in `Table 95 - Entity Auxiliary Names PDR format` of DSP0248
+ * v1.2.2
+ */
+#define PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH 8
+
 #define PLDM_INVALID_EFFECTER_ID 0xffff
 
 /* DSP0248 Table1 PLDM monitoring and control data types */
@@ -116,6 +127,13 @@ enum pldm_platform_transfer_flag {
 /* State fields count bounds */
 #define PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MIN 1
 #define PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MAX 8
+
+/* Container ID */
+/** @brief Table 2 - Parts of the Entity Identification Information format in
+ *         PLDM Platform and Control spec, DSP0248 v1.2.2. "If this value is
+ *         0x0000, the containing entity is considered to be the overall system"
+ */
+#define PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID 0
 
 enum pldm_effecter_data_size {
 	PLDM_EFFECTER_DATA_SIZE_UINT8,
@@ -805,6 +823,44 @@ struct pldm_numeric_sensor_value_pdr {
 	union_range_field_format critical_low;
 	union_range_field_format fatal_high;
 	union_range_field_format fatal_low;
+};
+
+typedef char16_t pldm_utf16be;
+
+struct pldm_entity_auxiliary_name {
+	/* name_language_tag type is char which terminator is 0x00*/
+	char *tag;
+	/**
+	 * entity_aux_name type is str_utf16be which terminator is 0x00 0x00.
+	 * The two bytes of one characters is in BE order.
+	 */
+	pldm_utf16be *name;
+};
+
+struct pldm_entity_auxiliary_names_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	pldm_entity container;
+	uint8_t shared_name_count;
+	uint8_t name_string_count;
+	struct pldm_entity_auxiliary_name *names;
+	size_t auxiliary_name_data_size;
+#ifndef __cplusplus
+#if defined __has_attribute
+	/*
+	 * auxiliary_name_data is organised in the fashion of struct-of-arrays, by
+	 * contrast to the approach of an array-of-structs. By Table 95 the entity
+	 * name data is provided in (ASCII, UTF16-BE) pairs, but we rearrange that
+	 * to be an array of UTF16-BE strings followed by an array of ASCII strings,
+	 * with the pairs associated by index, to maintain alignment.
+	 */
+	static_assert(__has_attribute(aligned),
+		      "auxiliary_name_data risks undefined behaviour");
+	char auxiliary_name_data[]
+		__attribute__((aligned(alignof(pldm_utf16be))));
+#else
+#error("__has_attribute() support is required to uphold runtime safety")
+#endif
+#endif
 };
 
 /** @struct state_effecter_possible_states
@@ -2322,6 +2378,55 @@ int decode_numeric_effecter_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_effecter_value_pdr *pdr_value);
 
+/** @brief Decode date fields from Entity Auxiliary name PDR
+ *
+ *  @note Use case:
+ *        1. Call `decode_entity_auxiliary_names_pdr()` to decode the Entity
+ *           Auxiliary names PDR raw data to the PDR data fields in
+ *           `struct pldm_entity_auxiliary_names_pdr` equivalent the fields in
+ *           `table 95` of DSP0248_1.2.2. Excepts the entity language tags and
+ *           names.
+ *        2. Use the decoded `name_string_count` and size of
+ *           `struct pldm_entity_auxiliary_name` to allocate memory for the
+ *           `struct pldm_entity_auxiliary_name *names` field in
+ *           `struct pldm_entity_auxiliary_names_pdr`.
+ *        3. Call `decode_pldm_entity_auxiliary_names_pdr_index()` to decode
+ *           `auxiliary_name_data[]` in `struct pldm_entity_auxiliary_names_pdr`
+ *           to the entity language tags and names in
+ *           `struct pldm_entity_auxiliary_name`.
+ *
+ *  @param[in] data - PLDM response message which includes the entity
+ *                        auxiliary name PDRs in DSP0248_1.2.2 table 95.
+ *  @param[in] data_length - Length of response message payload
+ *  @param[out] pdr - Entity auxiliary names pdr struct
+ *  @param[out] pdr_length - Entity auxiliary names pdr struct
+ *
+ *  @return error code
+ */
+int decode_entity_auxiliary_names_pdr(
+	const void *data, size_t data_length,
+	struct pldm_entity_auxiliary_names_pdr *pdr, size_t pdr_length);
+
+/** @brief Decode Entity Auxiliary name data. The API will update the name
+ *         directly to names field in the pdr struct.
+ *
+ *  @pre The API will decode `auxiliary_name_data[]` array in
+ *       `struct pldm_entity_auxiliary_names_pdr pdr` to
+ *       the entity auxiliary language tags and names in
+ *       `struct pldm_entity_auxiliary_name *names` of the same pdr struct.
+ *       Before call the API, the caller has to allocate memory for the `names`
+ *       struct with the number of name(`name_string_count`) in PDR and size of
+ *       `struct pldm_entity_auxiliary_name`.
+ *       The value of `auxiliary_name_data` and `name_string_count` are decoded
+ *       by `decode_entity_auxiliary_names_pdr()` method so the caller has to
+ *       call that API first.
+ *
+ *  @param[out] pdr_value - Entity auxiliary names pdr struct
+ *  @param[in] names_size - Size of names data
+ *  @return error code
+ */
+int decode_pldm_entity_auxiliary_names_pdr_index(
+	struct pldm_entity_auxiliary_names_pdr *pdr_value);
 #ifdef __cplusplus
 }
 #endif
