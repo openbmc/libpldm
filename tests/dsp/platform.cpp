@@ -5131,3 +5131,161 @@ TEST(GetStateEffecterStates, testBadDecodeResponse)
 
     EXPECT_EQ(rc, -EINVAL);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(decodeEntityAuxNamePdrData, GoodTest)
+{
+    std::vector<uint8_t> pdr1{
+        // Common PDR Header
+        0x1, 0x0, 0x0, 0x0,              // record handle
+        0x1,                             // PDRHeaderVersion
+        PLDM_ENTITY_AUXILIARY_NAMES_PDR, // PDRType
+        0x1,
+        0x0, // recordChangeNumber
+        0x27,
+        0, // dataLength
+        /* Entity Auxiliary Names PDR Data*/
+        3,
+        0, // entityType system software
+        0x1,
+        0x0, // Entity instance number =1
+        PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
+        0,                // Overal system
+        0,                // shared Name Count one name only
+        03,               // nameStringCount
+        0x65, 0x6e, 0x00, // Language Tag "en"
+        0x00, 0x53, 0x00, 0x30, 0x00, 0x53, 0x00, 0x00, // Entity Name "S0S"
+        0x66, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x53, 0x00, 0x31, 0x00, 0x00,             // Entity Name "S1"
+        0x67, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x00, 0x00  // Entity Name "RR3"
+    };
+    std::vector<char> tag0{0x65, 0x6e, 0x00};
+    std::vector<char> name0{0x00, 0x53, 0x00, 0x30, 0x00, 0x53, 0x00, 0x00};
+    std::vector<char> tag1{0x66, 0x6e, 0x00};
+    std::vector<char> name1{0x00, 0x53, 0x00, 0x31, 0x00, 0x00};
+    std::vector<char> tag2{0x67, 0x6e, 0x00};
+    std::vector<char> name2{0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x00, 0x00};
+    auto names_offset = sizeof(struct pldm_pdr_hdr) +
+                        PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH;
+    auto names_size = pdr1.size() - names_offset;
+
+    auto decodedPdr = (struct pldm_entity_auxiliary_names_pdr*)malloc(
+        sizeof(struct pldm_entity_auxiliary_names_pdr) + names_size);
+
+    auto rc = decode_entity_auxiliary_names_pdr_data(pdr1.data(), pdr1.size(),
+                                                     decodedPdr);
+
+    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(1, decodedPdr->hdr.record_handle);
+    EXPECT_EQ(1, decodedPdr->hdr.version);
+    EXPECT_EQ(PLDM_ENTITY_AUXILIARY_NAMES_PDR, decodedPdr->hdr.type);
+    EXPECT_EQ(1, decodedPdr->hdr.record_change_num);
+    EXPECT_EQ(pdr1.size() - sizeof(struct pldm_pdr_hdr),
+              decodedPdr->hdr.length);
+    EXPECT_EQ(3, decodedPdr->container.entity_type);
+    EXPECT_EQ(1, decodedPdr->container.entity_instance_num);
+    EXPECT_EQ(PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
+              decodedPdr->container.entity_container_id);
+    EXPECT_EQ(0, decodedPdr->shared_name_count);
+    EXPECT_EQ(3, decodedPdr->name_string_count);
+
+    auto aux_names = (struct pldm_entity_auxiliary_name*)calloc(
+        decodedPdr->name_string_count,
+        sizeof(struct pldm_entity_auxiliary_name));
+    rc = decode_auxiliary_names_data(
+        (const char*)decodedPdr->auxiliary_name_data, names_size,
+        decodedPdr->name_string_count, aux_names);
+    EXPECT_EQ(PLDM_SUCCESS, rc);
+
+    EXPECT_EQ(0,
+              memcmp(aux_names[0].name_language_tag, tag0.data(), tag0.size()));
+    EXPECT_EQ(8, aux_names[0].name_size);
+    EXPECT_EQ(0, memcmp(aux_names[0].entity_aux_name, name0.data(),
+                        aux_names[0].name_size));
+
+    EXPECT_EQ(0,
+              memcmp(aux_names[1].name_language_tag, tag1.data(), tag1.size()));
+    EXPECT_EQ(6, aux_names[1].name_size);
+    EXPECT_EQ(0, memcmp(aux_names[1].entity_aux_name, name1.data(),
+                        aux_names[1].name_size));
+
+    EXPECT_EQ(0,
+              memcmp(aux_names[2].name_language_tag, tag2.data(), tag2.size()));
+    EXPECT_EQ(8, aux_names[2].name_size);
+    EXPECT_EQ(0, memcmp(aux_names[2].entity_aux_name, name2.data(),
+                        aux_names[2].name_size));
+    free(aux_names);
+    free(decodedPdr);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(decodeEntityAuxNamePdrData, BadTest)
+{
+    std::vector<uint8_t> pdr1{
+        // Common PDR Header
+        0x1, 0x0, 0x0, 0x0,              // record handle
+        0x1,                             // PDRHeaderVersion
+        PLDM_ENTITY_AUXILIARY_NAMES_PDR, // PDRType
+        0x1,
+        0x0,  // recordChangeNumber
+        0x25, // correct size is 0x27, input invalid size
+        0,    // dataLength
+        /* Entity Auxiliary Names PDR Data*/
+        3,
+        0, // entityType system software
+        0x1,
+        0x0, // Entity instance number =1
+        PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
+        0,                // Overal system
+        0,                // shared Name Count one name only
+        00,               // Invalid nameStringCount
+        0x65, 0x6e, 0x00, // Language Tag "en"
+        0x00, 0x53, 0x00, 0x30, 0x00, 0x53, 0x00, 0x00, // Entity Name "S0S"
+        0x66, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x53, 0x00, 0x31, 0x00, 0x00,             // Entity Name "S1"
+        0x67, 0x6e, 0x00,                               // Language Tag "en"
+        0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x00, 0x00  // Entity Name "RR3"
+    };
+    std::vector<char> tag0{0x65, 0x6e, 0x00};
+    std::vector<char> name0{0x00, 0x53, 0x00, 0x30, 0x00, 0x53, 0x00, 0x00};
+    std::vector<char> tag1{0x66, 0x6e, 0x00};
+    std::vector<char> name1{0x00, 0x53, 0x00, 0x31, 0x00, 0x00};
+    std::vector<char> tag2{0x67, 0x6e, 0x00};
+    std::vector<char> name2{0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x00, 0x00};
+    auto names_offset = sizeof(struct pldm_pdr_hdr) +
+                        PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH;
+    auto names_size = pdr1.size() - names_offset;
+
+    auto decodedPdr = (struct pldm_entity_auxiliary_names_pdr*)malloc(
+        sizeof(struct pldm_entity_auxiliary_names_pdr) + names_size);
+
+    auto rc = decode_entity_auxiliary_names_pdr_data(pdr1.data(), pdr1.size(),
+                                                     decodedPdr);
+
+    EXPECT_EQ(PLDM_ERROR_INVALID_DATA, rc);
+    EXPECT_EQ(1, decodedPdr->hdr.record_handle);
+    EXPECT_EQ(1, decodedPdr->hdr.version);
+    EXPECT_EQ(PLDM_ENTITY_AUXILIARY_NAMES_PDR, decodedPdr->hdr.type);
+    EXPECT_EQ(1, decodedPdr->hdr.record_change_num);
+    EXPECT_NE(pdr1.size() - sizeof(struct pldm_pdr_hdr),
+              decodedPdr->hdr.length);
+    EXPECT_EQ(3, decodedPdr->container.entity_type);
+    EXPECT_EQ(1, decodedPdr->container.entity_instance_num);
+    EXPECT_EQ(PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
+              decodedPdr->container.entity_container_id);
+    EXPECT_EQ(0, decodedPdr->shared_name_count);
+    EXPECT_EQ(0, decodedPdr->name_string_count);
+
+    auto aux_names = (struct pldm_entity_auxiliary_name*)calloc(
+        decodedPdr->name_string_count,
+        sizeof(struct pldm_entity_auxiliary_name));
+    rc = decode_auxiliary_names_data(
+        (const char*)decodedPdr->auxiliary_name_data, names_size,
+        decodedPdr->name_string_count, aux_names);
+    EXPECT_EQ(PLDM_ERROR_INVALID_DATA, rc);
+    free(aux_names);
+    free(decodedPdr);
+}
+#endif

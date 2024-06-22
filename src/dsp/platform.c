@@ -2735,3 +2735,55 @@ int decode_auxiliary_names_data(const char *aux_names, size_t names_size,
 
 	return PLDM_SUCCESS;
 }
+
+LIBPLDM_ABI_TESTING
+int decode_entity_auxiliary_names_pdr_data(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_entity_auxiliary_names_pdr *pdr_value)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	struct pldm_value_pdr_hdr hdr;
+	int rc;
+	size_t names_offset = 0;
+	size_t names_size = 0;
+
+	rc = pldm_msgbuf_init_cc(buf,
+				 PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH,
+				 pdr_data, pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_value_pdr_hdr(buf, &hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_platform_pdr_hdr_validate(
+		&hdr, PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH,
+		pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	memcpy(&pdr_value->hdr, &hdr, sizeof(struct pldm_pdr_hdr));
+
+	pldm_msgbuf_extract(buf, pdr_value->container.entity_type);
+	pldm_msgbuf_extract(buf, pdr_value->container.entity_instance_num);
+	pldm_msgbuf_extract(buf, pdr_value->container.entity_container_id);
+	pldm_msgbuf_extract(buf, pdr_value->shared_name_count);
+	pldm_msgbuf_extract(buf, pdr_value->name_string_count);
+
+	if (pdr_value->name_string_count == 0) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+	names_offset = sizeof(struct pldm_pdr_hdr) +
+		       PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH;
+	names_size = pdr_data_length - names_offset;
+
+	pldm_msgbuf_extract_array(
+		buf, (uint8_t *)pdr_value->auxiliary_name_data, names_size);
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}

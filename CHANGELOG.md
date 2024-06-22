@@ -21,6 +21,7 @@ Change categories:
 
 1. base: Define macros for reserved TIDs
 2. pdr: Add decode_auxiliary_names_data()
+3. pdr: Add decode_entity_auxiliary_names_pdr_data()
 
 ### Deprecated
 
