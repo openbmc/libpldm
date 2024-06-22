@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <uchar.h>
 
 static int pldm_platform_pdr_hdr_validate(struct pldm_value_pdr_hdr *ctx,
 					  size_t lower, size_t upper)
@@ -2687,6 +2688,84 @@ int encode_get_state_effecter_states_resp(
 		pldm_msgbuf_insert(buf, field->effecter_op_state);
 		pldm_msgbuf_insert(buf, field->pending_state);
 		pldm_msgbuf_insert(buf, field->present_state);
+	}
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+static size_t char16len(char16_t *startptr)
+{
+	char16_t *endptr = startptr;
+	while (*endptr) {
+		endptr++;
+	}
+	return endptr - startptr;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_entity_auxiliary_names_pdr_data(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_entity_auxiliary_names_pdr *pdr_value)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	struct pldm_value_pdr_hdr hdr;
+	int rc;
+
+	rc = pldm_msgbuf_init_cc(buf,
+				 PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH,
+				 pdr_data, pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_value_pdr_hdr(buf, &hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_platform_pdr_hdr_validate(
+		&hdr, PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH,
+		pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	memcpy(&pdr_value->hdr, &hdr, sizeof(struct pldm_pdr_hdr));
+
+	pldm_msgbuf_extract(buf, pdr_value->container.entity_type);
+	pldm_msgbuf_extract(buf, pdr_value->container.entity_instance_num);
+	pldm_msgbuf_extract(buf, pdr_value->container.entity_container_id);
+	pldm_msgbuf_extract(buf, pdr_value->shared_name_count);
+	pldm_msgbuf_extract(buf, pdr_value->name_string_count);
+
+	if (pdr_value->name_string_count == 0) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	pdr_value->names = (struct pldm_entity_auxiliary_name *)calloc(
+		pdr_value->name_string_count,
+		sizeof(struct pldm_entity_auxiliary_name));
+
+	for (size_t i = 0; i < pdr_value->name_string_count; i++) {
+		rc = pldm_msgbuf_span_string_ascii(
+			buf, (void **)&pdr_value->names[i].name_language_tag);
+		if (rc) {
+			return 123;
+		}
+		if (strlen(pdr_value->names[i].name_language_tag) != 2) {
+			return 787;
+		}
+		rc = pldm_msgbuf_span_string_utf16(
+			buf, (void **)&pdr_value->names[i].entity_aux_name);
+		if (rc) {
+			return rc;
+		}
+		for (size_t j = 0;
+		     j < char16len(pdr_value->names[i].entity_aux_name); j++) {
+			*(pdr_value->names[i].entity_aux_name + j) = be16toh(
+				*(pdr_value->names[i].entity_aux_name + j));
+		}
 	}
 
 	return pldm_msgbuf_destroy_consumed(buf);

@@ -8,6 +8,7 @@ extern "C" {
 
 #include <stddef.h>
 #include <stdint.h>
+#include <uchar.h>
 
 #include <libpldm/base.h>
 #include <libpldm/pdr.h>
@@ -93,6 +94,14 @@ extern "C" {
 	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_EFFECTER_DATA_SIZE_MIN_LENGTH +  \
 	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_RANGE_FIELD_MIN_LENGTH)
 
+/**
+ * Minimum length of entity auxiliary name effecter PDR includes size of hdr,
+ * entityType, entityInstanceNumber, entityContainerID, sharedNameCount and
+ * nameStringCount in `Table 95 - Entity Auxiliary Names PDR format` of DSP0248
+ * v1.2.2
+ */
+#define PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH 8
+
 #define PLDM_INVALID_EFFECTER_ID 0xffff
 
 /* DSP0248 Table1 PLDM monitoring and control data types */
@@ -105,6 +114,13 @@ extern "C" {
 /* State fields count bounds */
 #define PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MIN 1
 #define PLDM_GET_EFFECTER_STATE_FIELD_COUNT_MAX 8
+
+/* Container ID */
+/** @brief Table 2 - Parts of the Entity Identification Information format in
+ *         PLDM Platform and Control spec, DSP0248 v1.2.2. "If this value is
+ *         0x0000, the containing entity is considered to be the overall system"
+ */
+#define PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID 0
 
 enum pldm_effecter_data_size {
 	PLDM_EFFECTER_DATA_SIZE_UINT8,
@@ -533,6 +549,29 @@ struct pldm_pdr_entity_association {
 	uint8_t num_children;
 	pldm_entity children[1];
 } __attribute__((packed));
+
+typedef char16_t pldm_str_utf16be;
+
+struct pldm_entity_auxiliary_name {
+	/* name_language_tag type is char which terminator is 0x00*/
+	char *name_language_tag;
+	/**
+	 * entity_aux_name type is str_utf16be which terminator is 0x00 0x00.
+	 * The two bytes of one characters is in BE order.
+	 */
+	pldm_str_utf16be *entity_aux_name;
+};
+
+struct pldm_entity_auxiliary_names_pdr {
+	struct pldm_pdr_hdr hdr;
+	pldm_entity container;
+	uint8_t shared_name_count;
+	uint8_t name_string_count;
+	struct pldm_entity_auxiliary_name *names;
+#ifndef __cplusplus
+	char auxiliary_name_data[];
+#endif
+};
 
 /** @struct pldm_pdr_fru_record_set
  *
@@ -2310,6 +2349,19 @@ int encode_set_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
 int decode_numeric_effecter_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_effecter_value_pdr *pdr_value);
+
+/** @brief Decode Entity Auxiliary name Pdr
+ *
+ *  @param[in] pdr_data - PLDM response message which includes the entity auxiliary
+ *                        name PDRs in DSP0248_1.2.2 table 95.
+ *  @param[in] pdr_data_length - Length of response message payload
+ *  @param[out] pdr_value - Entity auxiliary names pdr struct
+ *
+ *  @return pldm_completion_codes
+ */
+int decode_entity_auxiliary_names_pdr_data(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_entity_auxiliary_names_pdr *pdr_value);
 
 #ifdef __cplusplus
 }
