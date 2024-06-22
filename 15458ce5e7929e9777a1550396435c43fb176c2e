@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26e17cc7_5dac8162",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-22T14:47:36Z",
+      "side": 1,
+      "message": "The entity-aux-name in response message is in format `0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x00, 0x00  // Entity Name \"RR3\"`. To decode this format the codecvt_utf8_utf16 is required. This codec is available in cpp. So the entity_aux_name will be responsed as flexible array of char. That why name_size is added.",
+      "revId": "15458ce5e7929e9777a1550396435c43fb176c2e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
