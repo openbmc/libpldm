@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e576ca9d_541dbd5f",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 4883,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-22T15:00:24Z",
+      "side": 1,
+      "message": "For mat of one entity aux name in str_utf16be format. terminator is `0x00, 0x00`. One character needs two bytes.\nPLDM data is response in BE, the character bytes is utf16be -\u003e Response data for `R` s `0x00 0x52` in LE.",
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
