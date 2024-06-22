@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <uchar.h>
 
 static int pldm_platform_pdr_hdr_validate(struct pldm_value_pdr_hdr *ctx,
 					  size_t lower, size_t upper)
@@ -2687,6 +2688,108 @@ int encode_get_state_effecter_states_resp(
 		pldm_msgbuf_insert(buf, field->effecter_op_state);
 		pldm_msgbuf_insert(buf, field->pending_state);
 		pldm_msgbuf_insert(buf, field->present_state);
+	}
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+uint8_t *pldm_entity_auxiliary_names_pdr_get_names(
+	struct pldm_entity_auxiliary_names_pdr *pdr)
+{
+	return (uint8_t *)pdr->auxiliary_name_data;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_entity_auxiliary_names_pdr_data(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_entity_auxiliary_names_pdr *pdr_value)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH, pdr_data,
+		pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_value_pdr_hdr(buf, &pdr_value->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_platform_pdr_hdr_validate(
+		&pdr_value->hdr, PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH,
+		pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, pdr_value->container.entity_type);
+	pldm_msgbuf_extract(buf, pdr_value->container.entity_instance_num);
+	pldm_msgbuf_extract(buf, pdr_value->container.entity_container_id);
+	pldm_msgbuf_extract(buf, pdr_value->shared_name_count);
+	pldm_msgbuf_extract(buf, pdr_value->name_string_count);
+
+	if (pdr_value->name_string_count == 0) {
+		return -EBADMSG;
+	}
+
+#ifndef __cplusplus
+	rc = pldm_msgbuf_extract_array_uint8(
+		buf, (uint8_t *)pdr_value->auxiliary_name_data, buf->remaining);
+	if (rc) {
+		return rc;
+	}
+#endif
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_entity_auxiliary_names_pdr_index(
+	struct pldm_entity_auxiliary_names_pdr *pdr, size_t names_size)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+	char *name = NULL;
+	size_t length = 0;
+
+	if (!pdr || pdr->name_string_count == 0) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    sizeof(struct pldm_entity_auxiliary_name),
+				    pdr->auxiliary_name_data, names_size);
+	if (rc) {
+		return rc;
+	}
+
+	for (size_t i = 0; i < pdr->name_string_count; i++) {
+		rc = pldm_msgbuf_span_string_ascii(
+			buf, (void **)&pdr->names[i].tag, NULL);
+		if (rc) {
+			return rc;
+		}
+		rc = pldm_msgbuf_span_string_utf16(buf, (void **)&name,
+						   &length);
+		if (rc) {
+			return rc;
+		}
+		if (length % 2) {
+			return -EINVAL;
+		}
+
+		pdr->names[i].name = (char16_t *)name;
+		for (size_t j = 0; j < ((length / 2) - 1); j++) {
+			*(pdr->names[i].name + j) =
+				be16toh(*(pdr->names[i].name + j));
+		}
 	}
 
 	return pldm_msgbuf_destroy_consumed(buf);
