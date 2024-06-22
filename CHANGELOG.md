@@ -22,6 +22,7 @@ Change categories:
 1. base: Define macros for reserved TIDs
 2. pdr: Add pldm_entity_association_pdr_add_contained_entity_to_remote_pdr()
 3. pdr: Add pldm_entity_association_pdr_create_new()
+4. pdr: Add related decode_entity_auxiliary_names_pdr() APIs
 
 ### Deprecated
 
