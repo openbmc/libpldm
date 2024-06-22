@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a86370a6_3e0d5ebd",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-22T15:11:23Z",
+      "side": 1,
+      "message": "I added the API to decode the entity auxiliary names `decode_auxiliary_names_data` in  other patch set for future using.\nThe input of that API is pointer of auxiliary_name_data flexible char array. So I think we don\u0027t ned pldm_entity_auxiliary_name in this struct.",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcd7df29_238c0f3d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-22T15:11:23Z",
+      "side": 1,
+      "message": "`#ifndef __cplusplus` is temporary comment out because when I run unit-test the build will failed.\n```\n../tests/dsp/platform.cpp: In member function ‘virtual void decodeEntityAuxNamePdrData_GoodTest_Test::TestBody()’:\n../tests/dsp/platform.cpp:5197:34: error: ‘struct pldm_entity_auxiliary_names_pdr’ has no member named ‘auxiliary_name_data’\n 5197 |         (const char*)decodedPdr-\u003eauxiliary_name_data, names_size,\n      |                                  ^~~~~~~~~~~~~~~~~~~\n../tests/dsp/platform.cpp: In member function ‘virtual void decodeEntityAuxNamePdrData_BadTest_Test::TestBody()’:\n../tests/dsp/platform.cpp:5285:34: error: ‘struct pldm_entity_auxiliary_names_pdr’ has no member named ‘auxiliary_name_data’\n 5285 |         (const char*)decodedPdr-\u003eauxiliary_name_data, names_size,\n```",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c344109f_898189c7",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-06-22T15:11:23Z",
+      "side": 1,
+      "message": "I don\u0027t understand why we use `char` type but not `uint8_t`. Both `char auxiliary_name_data[]` and `uint8_t auxiliary_name_data[]` is flexible array.",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
