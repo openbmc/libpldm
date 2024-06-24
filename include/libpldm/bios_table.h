@@ -102,6 +102,8 @@ size_t pldm_bios_table_string_entry_encode_length(uint16_t string_length);
  *          appropriate value for entry_length can be determined using
  *          @ref pldm_bios_table_string_entry_encode_length
  */
+int pldm_bios_table_string_entry_encode(void *entry, size_t entry_length,
+					const char *str, uint16_t str_length);
 int pldm_bios_table_string_entry_encode_check(void *entry, size_t entry_length,
 					      const char *str,
 					      uint16_t str_length);
