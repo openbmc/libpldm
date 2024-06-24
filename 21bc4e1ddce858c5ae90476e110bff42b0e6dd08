@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dba0008_a387bc20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T03:47:22Z",
+      "side": 1,
+      "message": "Hi Thu, hopefully some of the replies help straighten out your concerns.",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a86370a6_3e0d5ebd",
@@ -31,6 +48,24 @@
       "writtenOn": "2024-06-22T15:11:23Z",
       "side": 1,
       "message": "I added the API to decode the entity auxiliary names `decode_auxiliary_names_data` in  other patch set for future using.\nThe input of that API is pointer of auxiliary_name_data flexible char array. So I think we don\u0027t ned pldm_entity_auxiliary_name in this struct.",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd4c528a_41121520",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T03:47:22Z",
+      "side": 1,
+      "message": "That\u0027s missing the point. You need to consider how you *access* the strings. The intent was that this was a \"table of contents\" or an \"index\" into the string blob.",
+      "parentUuid": "a86370a6_3e0d5ebd",
       "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -54,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be474979_78c70d4b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T03:47:22Z",
+      "side": 1,
+      "message": "The point of this was that flexible arrays mustn\u0027t be exposed to C++ compilers because they\u0027re not defined by C++ the language.\n\nIf you need to access data held in a flexible array in C++ you need the C helper function I mentioned to you previously, that returns the pointer to the base of the array.\n\nPlease un-comment the `#ifndef __cplusplus` and replace any direct reference to `auxiliary_name_data` in C++ code with a call through the helper function to access the base pointer.\n\nHowever, if you add the `names` member above, there should be no reason to access `auxiliary_name_data` outside the implementation of the decoder/encoder for the names PDR.",
+      "parentUuid": "bcd7df29_238c0f3d",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c344109f_898189c7",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 6
@@ -65,6 +118,156 @@
       "writtenOn": "2024-06-22T15:11:23Z",
       "side": 1,
       "message": "I don\u0027t understand why we use `char` type but not `uint8_t`. Both `char auxiliary_name_data[]` and `uint8_t auxiliary_name_data[]` is flexible array.",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c48ce5f7_15285752",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T03:47:22Z",
+      "side": 1,
+      "message": "Because `char` is defined to safely alias all object types. `char` is distinct from `uint8_t` as whether `char` is signed or not is implementation-defined. Using `char` is unrelated to the flexible array, aside from the fact that it\u0027s by definition a single-byte quantity (... that safely aliases all other object types).",
+      "parentUuid": "c344109f_898189c7",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b6d86bd_85c6961a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2379,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T03:47:22Z",
+      "side": 1,
+      "message": "Please, no more functions that do this. All new functions should return 0 on success or a negative errno value.\n\nSee: https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L108-L112",
+      "range": {
+        "startLine": 2379,
+        "startChar": 12,
+        "endLine": 2379,
+        "endChar": 33
+      },
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa05e1d_d445a769",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2382,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T03:47:22Z",
+      "side": 1,
+      "message": "`const struct variable_field`?",
+      "range": {
+        "startLine": 2382,
+        "startChar": 1,
+        "endLine": 2382,
+        "endChar": 46
+      },
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "971e506a_deb329f1",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2751,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T03:47:22Z",
+      "side": 1,
+      "message": "`pldm_msgbuf_init_errno()`.",
+      "range": {
+        "startLine": 2751,
+        "startChar": 6,
+        "endLine": 2751,
+        "endChar": 25
+      },
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44cb0638_760f8643",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2770,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T03:47:22Z",
+      "side": 1,
+      "message": "Why bounce through the stack object? Why not decode it straight into the provided object (`pdr_value-\u003ehdr`)?",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8784eeac_ebe4dbc0",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2779,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T03:47:22Z",
+      "side": 1,
+      "message": "Needs to be a negative errno. `-EBADMSG` is probably okay?",
+      "range": {
+        "startLine": 2779,
+        "startChar": 9,
+        "endLine": 2779,
+        "endChar": 32
+      },
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f62dd34f_5ade9a25",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2783,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T03:47:22Z",
+      "side": 1,
+      "message": "`pldm_msgbuf_span_remaining()`?",
+      "range": {
+        "startLine": 2781,
+        "startChar": 1,
+        "endLine": 2783,
+        "endChar": 45
+      },
       "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
