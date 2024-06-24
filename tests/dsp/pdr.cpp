@@ -1162,7 +1162,7 @@ TEST(EntityAssociationPDR, testPDR)
               1);
 
     auto repo = pldm_pdr_init();
-    int rc = pldm_entity_association_pdr_add_check(tree, repo, false, 1);
+    int rc = pldm_entity_association_pdr_add(tree, repo, false, 1);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(pldm_pdr_get_record_count(repo), 6u);
@@ -1794,7 +1794,7 @@ TEST(EntityAssociationPDR, testFindChildContainerID)
               2);
 
     auto repo = pldm_pdr_init();
-    int rc = pldm_entity_association_pdr_add_check(tree, repo, false, 1);
+    int rc = pldm_entity_association_pdr_add(tree, repo, false, 1);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(pldm_pdr_get_record_count(repo), 1u);
