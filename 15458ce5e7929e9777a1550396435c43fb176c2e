@@ -16,6 +16,24 @@
       "message": "The entity-aux-name in response message is in format `0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x00, 0x00  // Entity Name \"RR3\"`. To decode this format the codecvt_utf8_utf16 is required. This codec is available in cpp. So the entity_aux_name will be responsed as flexible array of char. That why name_size is added.",
       "revId": "15458ce5e7929e9777a1550396435c43fb176c2e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0623a180_8fe4751d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "We don\u0027t need it though, because we don\u0027t care for the flexible array size. The utf16-be string is null-terminated.\n\nI did have a look at whether we should try to use `wchar_t` here, but that ties into all the locale junk, and that\u0027s not what we want. That does mean that we can\u0027t exploit e.g. `wcsnlen()`, but we can use `memmem(cursor, remaining, u\"\", sizeof(char16_t))` as an equivalent (C17, 6.4.5 paragraph 6 for the `u` character prefix).",
+      "parentUuid": "26e17cc7_5dac8162",
+      "revId": "15458ce5e7929e9777a1550396435c43fb176c2e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

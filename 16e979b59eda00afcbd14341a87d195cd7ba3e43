@@ -3,6 +3,234 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "048177f8_b3b098d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "Can we please use forward-slashes (`/`) throughout? Back-slashes (`\\`) make me twitch.",
+      "range": {
+        "startLine": 9,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 11
+      },
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9471c514_e42c61ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "What provides this? Why are we prescribing it here?",
+      "range": {
+        "startLine": 36,
+        "startChar": 23,
+        "endLine": 36,
+        "endChar": 41
+      },
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6f7a011_0a4c0d6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "Hi Thu, I have some comments throughout. I think the most fundamental bit is implementing the string span helpers in the `msgbuf` API.",
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bd09dc7_70b1266e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "Actually, instead of `char` we can make this `char16_t`, which is specified by the C standard.",
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "905cbdda_0ca7342e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "Please drop this.",
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a025d23_ed0c7b39",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2696,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "Instead of `aux_names` and `names_size` we could pass a `struct variable_field`.",
+      "range": {
+        "startLine": 2696,
+        "startChar": 38,
+        "endLine": 2696,
+        "endChar": 42
+      },
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63c648b3_3dc485fe",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2697,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "Perhaps we should use `size_t` here?",
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f62eb1f_dacaef6e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2704,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "Need to test `names` also?",
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01f1b963_5d8e6521",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2705,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "New functions should return 0 on success or a negative errno. See:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L108-L112",
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bca8ff6_4c3b15c7",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2708,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "No; casting away `const` may yield undefined behaviour. Why is that necessary?",
+      "range": {
+        "startLine": 2708,
+        "startChar": 13,
+        "endLine": 2708,
+        "endChar": 21
+      },
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9aa621d_9a45d1e5",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2713,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "This may overrun the buffer bounds. At a minimum we need to use `strnlen()`. But really this should all be implemented as `msgbuf` APIs for spanning a null-terminated ASCII string (`pldm_msgbuf_span_string_ascii()`), and a null-terminated `char16_t` string (`pldm_msgbuf_span_string_utf16()`). We make the prototypes of these functions take a `struct variable_field *` as an out-parameter, and through that provide the start address and the string size, and from there we can do with that what we please.\n\nThen this loop becomes alternating calls to e.g. `pldm_msgbuf_span_string_ascii()`, and `pldm_msgbuf_span_string_utf16()`.",
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5795876_454eea05",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2736,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T02:36:57Z",
+      "side": 1,
+      "message": "New functions should return 0 on success or a negative errno. See:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L108-L112",
+      "revId": "16e979b59eda00afcbd14341a87d195cd7ba3e43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e576ca9d_541dbd5f",
         "filename": "tests/dsp/platform.cpp",
         "patchSetId": 3
