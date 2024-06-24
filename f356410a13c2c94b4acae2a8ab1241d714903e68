@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b96ce51_0392db7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T11:35:23Z",
+      "side": 1,
+      "message": "Hello! Thanks for iterating on the patch, I think we\u0027re getting towards a dependable implementation. I have a few comments which I think will help the ergonomics. Please ask questions if anything I\u0027ve said is unclear.",
+      "revId": "f356410a13c2c94b4acae2a8ab1241d714903e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dbde751_f2679766",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T11:35:23Z",
+      "side": 1,
+      "message": "So I think we should add the two string pointers here for `ActiveComponentVersionString` and `PendingComponentVersionString`, so:\n\n```\nstruct pldm_downstream_device_parameter_entry {\n    ...\n    const char *active_comp_ver_str;\n    const char *pending_comp_ver_str;\n};\n```\nAnd then define an additional struct:\n\n```\nstruct pldm_downstream_device_parameter_entry_versions {\n    struct pldm_downstream_device_parameter_entry entry;\n    char active_comp_ver_str[UINT8_MAX + 1];\n    char pending_comp_ver_str[UINT8_MAX + 1];\n};\n```\n\nAnd another function:\n\n```\nint decode_downstream_device_parameter_table_entry_versions(\n    const struct variable_field *versions,\n    struct pldm_downstream_device_parameter_entry *entry,\n    char *active, char *pending);\n```\n\nI\u0027m suggesting this because currently the prototype for `decode_downstream_device_parameter_table_entry()` takes a couple of `struct variable_field *` arguments as parameters which then point to the string data in _the message buffer_, which will be problematic if the message buffer is subsequently freed. We should copy it out so we don\u0027t have dangling references, but the question immediately following is \"copy it _where_?\".\n\nFrom there, the `active_comp_ver_str` and `pending_comp_ver_str` members should be updated to point to wherever we copy the data. This is where the `*_versions` variant of the struct comes into play. Users that aren\u0027t constrained on space and can afford the over-allocation can use this to create an array of structs that represent the table entries which _also_ hold the string data.\n\nSome care needs to be taken, as it\u0027s not clear that the strings in the message buffer are null-terminated. There\u0027s no language suggesting they are, and we\u0027re provided with string lengths, so my _strong_ suspicion is that they\u0027re not.\n\nAs `active_comp_ver_str_len` and `pending_comp_ver_str_len` are `uint8_t` the maximum length in the message for each is 255 bytes. We add 1 for the NUL terminator. Combining all the suggestions above the calling code would look something like:\n\n```\nstruct pldm_downstream_device_parameter_entry_versions *entries;\nstruct pldm_get_downstream_firmware_params_resp *resp;\nstruct variable_field device_params;\nint rc;\n\nresp \u003d malloc(sizeof(*resp));\nif (!resp) { ... }\n\nrc \u003d decode_get_downstream_firmware_params_resp(msg, payload_length, resp, \u0026device_params);\nif (rc \u003c 0) { ... }\n\nentries \u003d calloc(resp-\u003edownstream_device_count, sizeof(*entries));\nif (!entries) { ... }\n\nstatic_assert(SSIZE_MAX \u003e UINT16_MAX, \"Iteration is broken\");\nssize_t ddc \u003d (ssize_t)resp-\u003edownstream_device_count;\nfor (ssize_t i \u003d 0; i \u003c ddc; i++) {\n    struct pldm_downstream_device_parameter_entry_versions *curr \u003d \u0026entries[i];\n    struct variable_field versions;\n    \n    rc \u003d decode_downstream_device_parameter_table_entry(\u0026device_params,\n            \u0026curr-\u003eentry, \u0026versions);\n    if (rc \u003c 0) { ... }\n    \n    rc \u003d decode_downstream_device_parameter_table_entry_versions(\u0026versions,\n            \u0026curr-\u003eentry, curr-\u003eactive_comp_ver_str, curr-\u003epending_comp_ver_str);\n    if (rc \u003c 0) { ... }\n}\n```\n\nThis iteration style does mean that `decode_downstream_device_parameter_table_entry()` uses `device_params` as an `in,out` parameter, updating the base pointer as we work our way through decoding the table.\n\n`decode_downstream_device_parameter_table_entry_versions()` also requires that the buffers passed for `active` and `pending` are at least as long as `entry-\u003eactive_comp_ver_str_len + 1` and `entry-\u003epending_comp_ver_str_len + 1` respectively. That\u0027s covered in the example above because we\u0027re using the associated members of `struct pldm_downstream_device_parameter_entry_versions` (but the interface allows the caller to choose to manage the allocations themselves). I\u0027m pointing that out because this requirement _must_ be documented.",
+      "revId": "f356410a13c2c94b4acae2a8ab1241d714903e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2160bde9_fcaf34fa",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T11:35:23Z",
+      "side": 1,
+      "message": "With the suggestions above I combined these into just the one `struct variable_field`, as we then have a subsequent decoding function (`decode_downstream_device_parameter_table_entry_versions()`).",
+      "range": {
+        "startLine": 1051,
+        "startChar": 1,
+        "endLine": 1052,
+        "endChar": 44
+      },
+      "revId": "f356410a13c2c94b4acae2a8ab1241d714903e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c625e894_a80b6008",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T11:35:23Z",
+      "side": 1,
+      "message": "No need for the parentheses. This should be `\u0026msg-\u003ehdr`.",
+      "range": {
+        "startLine": 1069,
+        "startChar": 38,
+        "endLine": 1069,
+        "endChar": 49
+      },
+      "revId": "f356410a13c2c94b4acae2a8ab1241d714903e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0023a27a_b2e06684",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T11:35:23Z",
+      "side": 1,
+      "message": "I think this should be `-EBADMSG` as the requirements are not upheld by the response - it\u0027s a \"bad message\".",
+      "range": {
+        "startLine": 1112,
+        "startChar": 9,
+        "endLine": 1112,
+        "endChar": 19
+      },
+      "revId": "f356410a13c2c94b4acae2a8ab1241d714903e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c59404cb_31dfc9c8",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1188,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T11:35:23Z",
+      "side": 1,
+      "message": "Given how `decode_downstream_device_parameter_table_entry()` will be used in practice I don\u0027t think we can use `pldm_msgbuf_destroy_consumed()` here. Rather, give the suggestion in the header of having just the one `struct variable_field *versions` `out`-parameter, and the observation that `data` needs to be used as an `out`-parameter, we can instead do:\n\n```\npldm_msgbuf_span_required(buf, (void **)\u0026versions-\u003eptr,\n    (size_t)entry-\u003eactive_comp_ver_str_len + (size_t)entry-\u003epending_comp_ver_str_len);\n    \nreturn pldm_msgbuf_span_remaining(buf, (void **)\u0026data-\u003eptr, \u0026data-\u003elen);\n```",
+      "range": {
+        "startLine": 1188,
+        "startChar": 8,
+        "endLine": 1188,
+        "endChar": 36
+      },
+      "revId": "f356410a13c2c94b4acae2a8ab1241d714903e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a645f920_fac3f9dc",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T11:35:23Z",
+      "side": 1,
+      "message": "Rather than copy/paste the implementation, I think can move the implementation of `pldm_msgbuf_extract_array_uint8()` into a function like:\n\n```\n__attribute__((always_inline)) static inline int\npldm__msgbuf_extract_array_void(struct pldm_msgbuf *ctx, void *dst, size_t count)\n{\n    ...\n}\n```\n\nAnd then implement both `pldm_msgbuf_extract_array_uint8()` and `pldm_msgbuf_extract_array_char()` like:\n\n```\n__attribute__((always_inline)) static inline int\npldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, uint8 *dst, size_t count)\n{\n    return pldm__msgbuf_extract_array_void(ctx, dst, count);\n}\n\n__attribute__((always_inline)) static inline int\npldm_msgbuf_extract_array_char(struct pldm_msgbuf *ctx, char *dst, size_t count)\n{\n    return pldm__msgbuf_extract_array_void(ctx, dst, count);\n}\n```\n\nThat way it avoids duplication now, while down the track if we need to extract an array of e.g. `uint32_t`s, we\u0027d implement it like:\n\n```\n__attribute__((always_inline)) static inline int\npldm_msgbuf_extract_array_uint32(struct pldm_msgbuf *ctx, uint32_t *dst, size_t count)\n{\n    if (UINT32_MAX / sizeof(*dst) \u003c count) {\n        return -EINVAL;\n    }\n    \n    return pldm__msgbuf_extract_array_void(ctx, dst, count * sizeof(*dst));\n}\n```",
+      "range": {
+        "startLine": 728,
+        "startChar": 1,
+        "endLine": 756,
+        "endChar": 10
+      },
+      "revId": "f356410a13c2c94b4acae2a8ab1241d714903e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07743c0a_e9345c3d",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 991,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-24T11:35:23Z",
+      "side": 1,
+      "message": "See the deduplication suggestion above.",
+      "revId": "f356410a13c2c94b4acae2a8ab1241d714903e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
