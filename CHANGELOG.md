@@ -47,6 +47,7 @@ Change categories:
 
    - `get_fru_record_by_option_check()`
    - `pldm_entity_association_pdr_add_check()`
+   - `pldm_entity_association_pdr_add_from_node_check()`
    - `pldm_pdr_add_check()`
    - `pldm_pdr_add_fru_record_set_check()`
 

@@ -946,7 +946,7 @@ int pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_entity_association_pdr_add_from_node_check(
+int pldm_entity_association_pdr_add_from_node(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
 	size_t num_entities, bool is_remote, uint16_t terminus_handle)
 {
