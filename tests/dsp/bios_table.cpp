@@ -996,7 +996,7 @@ TEST(StringTable, EntryEncodeTest)
     EXPECT_EQ(encodeLength, stringEntry.size());
 
     std::vector<uint8_t> encodeEntry(encodeLength, 0);
-    ASSERT_EQ(pldm_bios_table_string_entry_encode_check(
+    ASSERT_EQ(pldm_bios_table_string_entry_encode(
                   encodeEntry.data(), encodeEntry.size(), str, str_length),
               PLDM_SUCCESS);
     // set string handle = 0
@@ -1005,10 +1005,10 @@ TEST(StringTable, EntryEncodeTest)
 
     EXPECT_EQ(stringEntry, encodeEntry);
 
-    EXPECT_NE(pldm_bios_table_string_entry_encode_check(
+    EXPECT_NE(pldm_bios_table_string_entry_encode(
                   encodeEntry.data(), encodeEntry.size() - 1, str, str_length),
               PLDM_SUCCESS);
-    auto rc = pldm_bios_table_string_entry_encode_check(
+    auto rc = pldm_bios_table_string_entry_encode(
         encodeEntry.data(), encodeEntry.size() - 1, str, str_length);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
