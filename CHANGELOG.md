@@ -72,6 +72,8 @@ Change categories:
     Replaces decode_get_pdr_resp() as discussed in the `Deprecated` section
     below
 
+11. pdr: Add pldm_entity_association_pdr_remove_contained_entity()
+
 ### Changed
 
 1. pdr: Stabilise related decode_entity_auxiliary_names_pdr() APIs
