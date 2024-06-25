@@ -357,6 +357,9 @@ int pldm_bios_table_attr_entry_string_encode_check(
  *  @return PLDM_SUCCESS on success, otherwise PLDM_ERROR_INVALID_DATA if entry or def_string_length
  *          are NULL, or entry is not of type PLDM_BIOS_STRING
  */
+int pldm_bios_table_attr_entry_string_decode_def_string_length(
+	const struct pldm_bios_attr_table_entry *entry,
+	uint16_t *def_string_length);
 int pldm_bios_table_attr_entry_string_decode_def_string_length_check(
 	const struct pldm_bios_attr_table_entry *entry,
 	uint16_t *def_string_length);
