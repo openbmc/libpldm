@@ -281,6 +281,9 @@ int pldm_bios_table_attr_entry_enum_decode_def_num_check(
  *          pldm_bios_table_attr_entry_enum_decode_pv_num_check, in which case only the first pv_num
  *          handles will be decoded.
  */
+int pldm_bios_table_attr_entry_enum_decode_pv_hdls(
+	const struct pldm_bios_attr_table_entry *entry, uint16_t *pv_hdls,
+	uint8_t pv_num);
 int pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
 	const struct pldm_bios_attr_table_entry *entry, uint16_t *pv_hdls,
 	uint8_t pv_num);
