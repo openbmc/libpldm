@@ -27,6 +27,7 @@ Change categories:
 6. pdr: Add related decode_entity_auxiliary_names_pdr() APIs
 7. fw_update: Add encode req & decode resp for get_downstream_fw_params
 8. platform: Add decode_pldm_platform_cper_event_data() API
+9. pdr: Add pldm_entity_association_pdr_remove_contained_entity()
 
 ### Changed
 
