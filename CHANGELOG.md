@@ -46,6 +46,7 @@ Change categories:
    The deprecated functions:
 
    - `get_fru_record_by_option_check()`
+   - `pldm_bios_table_string_entry_decode_string_check()`
    - `pldm_bios_table_string_entry_encode_check()`
    - `pldm_entity_association_pdr_add_check()`
    - `pldm_entity_association_pdr_add_from_node_check()`
