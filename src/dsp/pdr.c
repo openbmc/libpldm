@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <stdio.h>
 
 #define PDR_ENTITY_ASSOCIATION_MIN_SIZE                                        \
 	(sizeof(struct pldm_pdr_hdr) +                                         \
@@ -1643,7 +1644,9 @@ int pldm_entity_association_pdr_create_new(pldm_pdr *repo,
 	pldm_msgbuf_extract(src_c, container_id);
 	pldm_msgbuf_insert(dst, container_id);
 	container_id = htole16(container_id);
-	memcpy(container_id_addr, &container_id, sizeof(uint16_t));
+	if (container_id_addr != NULL) {
+		memcpy(container_id_addr, &container_id, sizeof(uint16_t));
+	}
 
 	rc = pldm_msgbuf_destroy(dst);
 	if (rc) {
@@ -1664,6 +1667,212 @@ int pldm_entity_association_pdr_create_new(pldm_pdr *repo,
 	}
 
 	return rc;
+cleanup_new_record_data:
+	free(new_record->data);
+cleanup_new_record:
+	free(new_record);
+	return rc;
+}
+
+LIBPLDM_CC_NONNULL
+static bool pldm_entity_cmp(const struct pldm_entity *l,
+			    const struct pldm_entity *r)
+{
+	return l->entity_type == r->entity_type &&
+	       l->entity_instance_num == r->entity_instance_num &&
+	       l->entity_container_id == r->entity_container_id;
+}
+
+/* Find record handle of a PDR record from PDR repo and
+ * entity
+ */
+static int pldm_entity_association_find_record_handle_by_entity(
+	pldm_pdr *repo, pldm_entity *entity, bool is_remote,
+	uint32_t *record_handle)
+{
+	uint8_t num_children = 0;
+	uint8_t hdr_type = 0;
+	int rc = 0;
+	uint8_t skip_data_size = 0;
+	pldm_pdr_record *record = repo->first;
+	struct pldm_msgbuf _dst;
+	struct pldm_msgbuf *dst = &_dst;
+
+	assert(repo);
+	assert(entity);
+	assert(record_handle);
+
+	while (record != NULL) {
+		rc = pldm_msgbuf_init_errno(dst,
+					    PDR_ENTITY_ASSOCIATION_MIN_SIZE,
+					    record->data, record->size);
+		if (rc) {
+			return rc;
+		}
+		skip_data_size = sizeof(uint32_t) + sizeof(uint8_t);
+		pldm_msgbuf_span_required(dst, skip_data_size, NULL);
+		pldm_msgbuf_extract(dst, hdr_type);
+		if (record->is_remote != is_remote ||
+		    hdr_type != PLDM_PDR_ENTITY_ASSOCIATION) {
+			goto cleanup;
+		}
+		skip_data_size = sizeof(uint16_t) + sizeof(uint16_t) +
+				 sizeof(uint16_t) + sizeof(uint8_t) +
+				 sizeof(struct pldm_entity);
+		pldm_msgbuf_span_required(dst, skip_data_size, NULL);
+		pldm_msgbuf_extract(dst, num_children);
+		for (int i = 0; i < num_children; ++i) {
+			struct pldm_entity e;
+
+			if ((rc = pldm_msgbuf_extract(dst, e.entity_type)) ||
+			    (rc = pldm_msgbuf_extract(dst,
+						      e.entity_instance_num)) ||
+			    (rc = pldm_msgbuf_extract(dst,
+						      e.entity_container_id))) {
+				return rc;
+			}
+
+			if (pldm_entity_cmp(entity, &e)) {
+				*record_handle = record->record_handle;
+				break;
+			}
+		}
+	cleanup:
+		rc = pldm_msgbuf_destroy(dst);
+		if (rc) {
+			return rc;
+		}
+		record = record->next;
+	}
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_entity_association_pdr_remove_contained_entity(
+	pldm_pdr *repo, pldm_entity *entity, bool is_remote,
+	uint32_t *pdr_record_handle)
+{
+	pldm_pdr_record *record = repo->first;
+	pldm_pdr_record *prev = repo->first;
+	int rc = 0;
+	uint16_t header_length = 0;
+	uint8_t num_children = 0;
+	uint16_t entity_type = 0;
+	uint16_t entity_instance_num = 0;
+	uint16_t entity_container_id = 0;
+	struct pldm_msgbuf _src;
+	struct pldm_msgbuf *src = &_src;
+	struct pldm_msgbuf _dst;
+	struct pldm_msgbuf *dst = &_dst;
+
+	if (!repo || !entity || !pdr_record_handle) {
+		return -EINVAL;
+	}
+
+	rc = pldm_entity_association_find_record_handle_by_entity(
+		repo, entity, is_remote, pdr_record_handle);
+	if (rc) {
+		return rc;
+	}
+	pldm_pdr_find_record_by_handle(&record, &prev, *pdr_record_handle);
+	if (!record) {
+		return -EINVAL;
+	}
+	// Initialize msg buffer for record and record->data
+	rc = pldm_msgbuf_init_errno(src, PDR_ENTITY_ASSOCIATION_MIN_SIZE,
+				    record->data, record->size);
+	if (rc) {
+		return rc;
+	}
+	// check if removing an entity from record causes overflow before
+	// allocating memory for new_record.
+	if (record->size < sizeof(pldm_entity)) {
+		return -EOVERFLOW;
+	}
+	pldm_pdr_record *new_record = malloc(sizeof(pldm_pdr_record));
+	if (!new_record) {
+		return -ENOMEM;
+	}
+	new_record->data = malloc(record->size - sizeof(pldm_entity));
+	if (!new_record->data) {
+		rc = -ENOMEM;
+		goto cleanup_new_record;
+	}
+	new_record->record_handle = record->record_handle;
+	new_record->size = record->size - sizeof(struct pldm_entity);
+	new_record->is_remote = record->is_remote;
+
+	// Initialize new PDR record with data from original PDR record.
+	// Start with adding the header of original PDR
+	rc = pldm_msgbuf_init_errno(dst, PDR_ENTITY_ASSOCIATION_MIN_SIZE,
+				    new_record->data, new_record->size);
+	if (rc) {
+		goto cleanup_new_record_data;
+	}
+	pldm_msgbuf_copy(dst, src, uint32_t, hdr_record_handle);
+	pldm_msgbuf_copy(dst, src, uint8_t, hdr_version);
+	pldm_msgbuf_copy(dst, src, uint8_t, hdr_type);
+	pldm_msgbuf_copy(dst, src, uint16_t, hdr_record_change_num);
+	// extract the header length from record and decrement size with
+	// size of pldm_entity before inserting the value into new_record.
+	rc = pldm_msgbuf_extract(src, header_length);
+	if (rc) {
+		goto cleanup_new_record_data;
+	}
+	if (header_length < sizeof(pldm_entity)) {
+		rc = -EOVERFLOW;
+		goto cleanup_new_record_data;
+	}
+	header_length -= sizeof(pldm_entity);
+	pldm_msgbuf_insert(dst, header_length);
+	pldm_msgbuf_copy(dst, src, uint16_t, container_id);
+	pldm_msgbuf_copy(dst, src, uint8_t, association_type);
+	pldm_msgbuf_copy(dst, src, uint16_t, entity_type);
+	pldm_msgbuf_copy(dst, src, uint16_t, entity_instance_num);
+	pldm_msgbuf_copy(dst, src, uint16_t, entity_container_id);
+	// extract value of number of children from record and decrement it
+	// by 1 before insert the value to new record.
+	rc = pldm_msgbuf_extract(src, num_children);
+	if (rc) {
+		goto cleanup_new_record_data;
+	}
+	if (num_children == 1) {
+		prev->next = record->next;
+		free(record->data);
+		free(record);
+		goto cleanup_new_record_data;
+	} else if (num_children < 1) {
+		rc = -EOVERFLOW;
+		goto cleanup_new_record_data;
+	}
+	num_children -= 1;
+	pldm_msgbuf_insert(dst, num_children);
+	//Add all children of original PDR to new PDR
+	for (int i = 0; i < num_children - 1; i++) {
+		if ((rc = pldm_msgbuf_extract(src, entity_type)) ||
+		    (rc = pldm_msgbuf_extract(src, entity_instance_num)) ||
+		    (rc = pldm_msgbuf_extract(src, entity_container_id))) {
+			goto cleanup_new_record_data;
+		}
+		if (entity_type == entity->entity_type &&
+		    entity_instance_num == entity->entity_instance_num &&
+		    entity_container_id == entity->entity_container_id) {
+			continue;
+		}
+		pldm_msgbuf_copy(dst, src, uint16_t, child_entity_type);
+		pldm_msgbuf_copy(dst, src, uint16_t, child_entity_instance_num);
+		pldm_msgbuf_copy(dst, src, uint16_t, child_entity_container_id);
+	}
+	if ((rc = pldm_msgbuf_destroy(src)) ||
+	    (rc = pldm_msgbuf_destroy(dst)) ||
+	    (rc = pldm_pdr_replace_record(repo, record, prev, new_record))) {
+		goto cleanup_new_record_data;
+	}
+
+	free(record->data);
+	free(record);
+	return rc;
+
 cleanup_new_record_data:
 	free(new_record->data);
 cleanup_new_record:
