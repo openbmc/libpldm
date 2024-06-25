@@ -298,7 +298,7 @@ TEST(AttrTable, StringEntryEncodeTest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
     std::swap(info.max_length, info.min_length);
     const char* errmsg;
-    rc = pldm_bios_table_attr_entry_string_info_check(&info, &errmsg);
+    rc = pldm_bios_table_attr_entry_string_info(&info, &errmsg);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     EXPECT_STREQ(
         "MinimumStingLength should not be greater than MaximumStringLength",
