@@ -22,6 +22,7 @@ Change categories:
 1. oem: meta: Add decode_oem_meta_file_io_write_req()
 2. oem: meta: Add decode_oem_meta_file_io_read_req()
 3. oem: meta: Add encode_oem_meta_file_io_read_resp()
+4. pdr: Add pldm_entity_association_pdr_remove_contained_entity()
 
 ### Deprecated
 
