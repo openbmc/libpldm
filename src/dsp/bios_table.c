@@ -233,7 +233,7 @@ int pldm_bios_table_attr_entry_enum_encode(
 	} while (0)
 
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_attr_entry_enum_decode_pv_num_check(
+int pldm_bios_table_attr_entry_enum_decode_pv_num(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *pv_num)
 {
 	POINTER_CHECK(entry);
