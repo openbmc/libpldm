@@ -11,10 +11,13 @@
 static struct {
 	static_assert(__has_attribute(unused),
 		      "`unused` attribute is required");
+	static_assert(__has_attribute(nonnull),
+		      "`nonnull` attribute is required");
 	int compliance;
 } pldm_required_attributes __attribute__((unused));
 
-#define LIBPLDM_CC_UNUSED __attribute__((unused))
+#define LIBPLDM_CC_UNUSED  __attribute__((unused))
+#define LIBPLDM_CC_NONNULL __attribute((nonnull))
 
 // NOLINTBEGIN(bugprone-macro-parentheses)
 /**
