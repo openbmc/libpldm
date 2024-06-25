@@ -50,6 +50,7 @@ Change categories:
    - `pldm_bios_table_attr_entry_enum_decode_pv_hdls_check()`
    - `pldm_bios_table_attr_entry_enum_decode_pv_num_check()`
    - `pldm_bios_table_attr_entry_enum_encode_check()`
+   - `pldm_bios_table_attr_entry_string_encode_check()`
    - `pldm_bios_table_string_entry_decode_string_check()`
    - `pldm_bios_table_string_entry_encode_check()`
    - `pldm_entity_association_pdr_add_check()`

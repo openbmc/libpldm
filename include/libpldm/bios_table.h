@@ -343,6 +343,9 @@ size_t pldm_bios_table_attr_entry_string_encode_length(uint16_t def_str_len);
  *          not sufficient to encode info. An appropriate value for entry_length can be determined
  *          using @ref pldm_bios_table_attr_entry_string_encode_length
  */
+int pldm_bios_table_attr_entry_string_encode(
+	void *entry, size_t entry_length,
+	const struct pldm_bios_table_attr_entry_string_info *info);
 int pldm_bios_table_attr_entry_string_encode_check(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_string_info *info);

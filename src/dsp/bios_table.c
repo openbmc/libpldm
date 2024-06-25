@@ -369,7 +369,7 @@ int pldm_bios_table_attr_entry_string_info_check(
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_attr_entry_string_encode_check(
+int pldm_bios_table_attr_entry_string_encode(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_string_info *info)
 {
