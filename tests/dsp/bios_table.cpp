@@ -106,9 +106,8 @@ TEST(AttrTable, EnumEntryDecodeTest)
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     uint8_t defNumber;
-    ASSERT_EQ(
-        pldm_bios_table_attr_entry_enum_decode_def_num_check(entry, &defNumber),
-        PLDM_SUCCESS);
+    ASSERT_EQ(pldm_bios_table_attr_entry_enum_decode_def_num(entry, &defNumber),
+              PLDM_SUCCESS);
     EXPECT_EQ(defNumber, 1);
     std::vector<uint8_t> defIndices(defNumber);
     rc = pldm_bios_table_attr_entry_enum_decode_def_indices(
@@ -117,22 +116,20 @@ TEST(AttrTable, EnumEntryDecodeTest)
     EXPECT_THAT(defIndices, ElementsAreArray({1}));
 
     defNumber = 0;
-    rc =
-        pldm_bios_table_attr_entry_enum_decode_def_num_check(entry, &defNumber);
+    rc = pldm_bios_table_attr_entry_enum_decode_def_num(entry, &defNumber);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(defNumber, 1);
 
     rc = pldm_bios_table_attr_entry_enum_decode_pv_num(nullptr, &pvNumber);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-    rc = pldm_bios_table_attr_entry_enum_decode_def_num_check(entry, nullptr);
+    rc = pldm_bios_table_attr_entry_enum_decode_def_num(entry, nullptr);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     entry->attr_type = PLDM_BIOS_STRING;
     rc = pldm_bios_table_attr_entry_enum_decode_pv_num(entry, &pvNumber);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
-    rc =
-        pldm_bios_table_attr_entry_enum_decode_def_num_check(entry, &defNumber);
+    rc = pldm_bios_table_attr_entry_enum_decode_def_num(entry, &defNumber);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     rc =
         pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(entry, nullptr, 0);
