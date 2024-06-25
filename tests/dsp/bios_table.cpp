@@ -74,13 +74,11 @@ TEST(AttrTable, EnumEntryDecodeTest)
     auto entry =
         reinterpret_cast<struct pldm_bios_attr_table_entry*>(enumEntry.data());
     uint8_t pvNumber;
-    ASSERT_EQ(
-        pldm_bios_table_attr_entry_enum_decode_pv_num_check(entry, &pvNumber),
-        PLDM_SUCCESS);
+    ASSERT_EQ(pldm_bios_table_attr_entry_enum_decode_pv_num(entry, &pvNumber),
+              PLDM_SUCCESS);
     EXPECT_EQ(pvNumber, 2);
     pvNumber = 0;
-    auto rc =
-        pldm_bios_table_attr_entry_enum_decode_pv_num_check(entry, &pvNumber);
+    auto rc = pldm_bios_table_attr_entry_enum_decode_pv_num(entry, &pvNumber);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(pvNumber, 2);
 
@@ -124,14 +122,13 @@ TEST(AttrTable, EnumEntryDecodeTest)
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(defNumber, 1);
 
-    rc =
-        pldm_bios_table_attr_entry_enum_decode_pv_num_check(nullptr, &pvNumber);
+    rc = pldm_bios_table_attr_entry_enum_decode_pv_num(nullptr, &pvNumber);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     rc = pldm_bios_table_attr_entry_enum_decode_def_num_check(entry, nullptr);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     entry->attr_type = PLDM_BIOS_STRING;
-    rc = pldm_bios_table_attr_entry_enum_decode_pv_num_check(entry, &pvNumber);
+    rc = pldm_bios_table_attr_entry_enum_decode_pv_num(entry, &pvNumber);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     rc =
