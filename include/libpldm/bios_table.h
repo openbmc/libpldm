@@ -134,6 +134,9 @@ uint16_t pldm_bios_table_string_entry_decode_string_length(
  *          may be smaller than the entry's string, in which case the string placed in buffer will
  *          be truncated (but still NUL terminated).
  */
+int pldm_bios_table_string_entry_decode_string(
+	const struct pldm_bios_string_table_entry *entry, char *buffer,
+	size_t size);
 int pldm_bios_table_string_entry_decode_string_check(
 	const struct pldm_bios_string_table_entry *entry, char *buffer,
 	size_t size);
