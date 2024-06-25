@@ -212,7 +212,7 @@ TEST(AttrTable, StringEntryDecodeTest)
     EXPECT_EQ(maxLength, 100);
 
     uint16_t defStringLength;
-    ASSERT_EQ(pldm_bios_table_attr_entry_string_decode_def_string_length_check(
+    ASSERT_EQ(pldm_bios_table_attr_entry_string_decode_def_string_length(
                   entry, &defStringLength),
               PLDM_SUCCESS);
     EXPECT_EQ(defStringLength, 3);
@@ -227,22 +227,22 @@ TEST(AttrTable, StringEntryDecodeTest)
     EXPECT_STREQ(defString.data(), "ab");
 
     defStringLength = 0;
-    rc = pldm_bios_table_attr_entry_string_decode_def_string_length_check(
+    rc = pldm_bios_table_attr_entry_string_decode_def_string_length(
         entry, &defStringLength);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(defStringLength, 3);
 
-    rc = pldm_bios_table_attr_entry_string_decode_def_string_length_check(
-        entry, nullptr);
+    rc = pldm_bios_table_attr_entry_string_decode_def_string_length(entry,
+                                                                    nullptr);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-    rc = pldm_bios_table_attr_entry_string_decode_def_string_length_check(
+    rc = pldm_bios_table_attr_entry_string_decode_def_string_length(
         nullptr, &defStringLength);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     entry->attr_type = PLDM_BIOS_INTEGER;
-    rc = pldm_bios_table_attr_entry_string_decode_def_string_length_check(
+    rc = pldm_bios_table_attr_entry_string_decode_def_string_length(
         entry, &defStringLength);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-    rc = pldm_bios_table_attr_entry_string_decode_def_string_length_check(
+    rc = pldm_bios_table_attr_entry_string_decode_def_string_length(
         nullptr, &defStringLength);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
