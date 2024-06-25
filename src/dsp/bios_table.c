@@ -194,7 +194,7 @@ size_t pldm_bios_table_attr_entry_enum_encode_length(uint8_t pv_num,
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_attr_entry_enum_encode_check(
+int pldm_bios_table_attr_entry_enum_encode(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_enum_info *info)
 {
