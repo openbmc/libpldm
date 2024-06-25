@@ -250,6 +250,8 @@ int pldm_bios_table_attr_entry_enum_encode_check(
  *  @return PLDM_SUCCESS on success, PLDM_ERROR_INVALID_DATA if entry or pv_num are NULL, or
  *          PLDM_ERROR_INVALID_DATA if entry is not a valid PLDM_BIOS_ENUMERATION
  */
+int pldm_bios_table_attr_entry_enum_decode_pv_num(
+	const struct pldm_bios_attr_table_entry *entry, uint8_t *pv_num);
 int pldm_bios_table_attr_entry_enum_decode_pv_num_check(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *pv_num);
 
