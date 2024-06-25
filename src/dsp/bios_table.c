@@ -403,25 +403,17 @@ int pldm_bios_table_attr_entry_string_encode(
 	return PLDM_SUCCESS;
 }
 
-static uint16_t pldm_bios_table_attr_entry_string_decode_def_string_length(
-	const struct pldm_bios_attr_table_entry *entry)
-{
-	struct attr_table_string_entry_fields *fields =
-		(struct attr_table_string_entry_fields *)entry->metadata;
-	return le16toh(fields->def_length);
-}
-
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_attr_entry_string_decode_def_string_length_check(
+int pldm_bios_table_attr_entry_string_decode_def_string_length(
 	const struct pldm_bios_attr_table_entry *entry,
 	uint16_t *def_string_length)
 {
 	POINTER_CHECK(entry);
 	POINTER_CHECK(def_string_length);
 	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_STRING);
-	*def_string_length =
-		pldm_bios_table_attr_entry_string_decode_def_string_length(
-			entry);
+	struct attr_table_string_entry_fields *fields =
+		(struct attr_table_string_entry_fields *)entry->metadata;
+	*def_string_length = le16toh(fields->def_length);
 	return PLDM_SUCCESS;
 }
 
@@ -457,9 +449,20 @@ uint16_t pldm_bios_table_attr_entry_string_decode_def_string(
 	const struct pldm_bios_attr_table_entry *entry, char *buffer,
 	size_t size)
 {
-	uint16_t length =
-		pldm_bios_table_attr_entry_string_decode_def_string_length(
-			entry);
+	uint16_t length = 0;
+	int rc;
+
+	if (!entry || !buffer || size == 0) {
+		return 0;
+	}
+
+	/* TODO: Rework the API to propagate the error */
+	rc = pldm_bios_table_attr_entry_string_decode_def_string_length(
+		entry, &length);
+	if (rc != PLDM_SUCCESS) {
+		return 0;
+	}
+
 	length = length < (size - 1) ? length : (size - 1);
 	struct attr_table_string_entry_fields *fields =
 		(struct attr_table_string_entry_fields *)entry->metadata;
@@ -472,9 +475,11 @@ uint16_t pldm_bios_table_attr_entry_string_decode_def_string(
  */
 static ssize_t attr_table_entry_length_string(const void *entry)
 {
-	uint16_t def_str_len =
-		pldm_bios_table_attr_entry_string_decode_def_string_length(
-			entry);
+	uint16_t def_str_len = 0;
+
+	/* TODO: Rework the API to propagate the error */
+	pldm_bios_table_attr_entry_string_decode_def_string_length(
+		entry, &def_str_len);
 	size_t len =
 		pldm_bios_table_attr_entry_string_encode_length(def_str_len);
 	if (len > SSIZE_MAX) {
