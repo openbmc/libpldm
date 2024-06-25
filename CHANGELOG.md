@@ -21,6 +21,7 @@ Change categories:
 
 1. base: Define macros for reserved TIDs
 2. pdr: Add remove PDR record that matched given record set identifier
+3. pdr: Add pldm_entity_association_pdr_remove_contained_entity()
 
 ### Deprecated
 
