@@ -258,7 +258,7 @@ int pldm_bios_table_attr_entry_enum_decode_def_num(
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
+int pldm_bios_table_attr_entry_enum_decode_pv_hdls(
 	const struct pldm_bios_attr_table_entry *entry, uint16_t *pv_hdls,
 	uint8_t pv_num)
 {

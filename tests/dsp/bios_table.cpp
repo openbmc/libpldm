@@ -83,26 +83,26 @@ TEST(AttrTable, EnumEntryDecodeTest)
     EXPECT_EQ(pvNumber, 2);
 
     std::vector<uint16_t> pvHandles(pvNumber, 0);
-    ASSERT_EQ(pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
+    ASSERT_EQ(pldm_bios_table_attr_entry_enum_decode_pv_hdls(
                   entry, pvHandles.data(), pvHandles.size()),
               PLDM_SUCCESS);
     EXPECT_EQ(pvNumber, 2);
     EXPECT_EQ(pvHandles[0], 2);
     EXPECT_EQ(pvHandles[1], 3);
     pvHandles.resize(1);
-    ASSERT_EQ(pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
+    ASSERT_EQ(pldm_bios_table_attr_entry_enum_decode_pv_hdls(
                   entry, pvHandles.data(), pvHandles.size()),
               PLDM_SUCCESS);
     EXPECT_EQ(pvHandles[0], 2);
 
     pvHandles.resize(2);
-    rc = pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
-        entry, pvHandles.data(), pvHandles.size());
+    rc = pldm_bios_table_attr_entry_enum_decode_pv_hdls(entry, pvHandles.data(),
+                                                        pvHandles.size());
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(pvHandles[0], 2);
     EXPECT_EQ(pvHandles[1], 3);
-    rc = pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
-        entry, pvHandles.data(), 1);
+    rc = pldm_bios_table_attr_entry_enum_decode_pv_hdls(entry, pvHandles.data(),
+                                                        1);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     uint8_t defNumber;
@@ -131,8 +131,7 @@ TEST(AttrTable, EnumEntryDecodeTest)
 
     rc = pldm_bios_table_attr_entry_enum_decode_def_num(entry, &defNumber);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-    rc =
-        pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(entry, nullptr, 0);
+    rc = pldm_bios_table_attr_entry_enum_decode_pv_hdls(entry, nullptr, 0);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
