@@ -243,22 +243,17 @@ int pldm_bios_table_attr_entry_enum_decode_pv_num(
 	return PLDM_SUCCESS;
 }
 
-static uint8_t pldm_bios_table_attr_entry_enum_decode_def_num(
-	const struct pldm_bios_attr_table_entry *entry)
-{
-	uint8_t pv_num = entry->metadata[0];
-	return entry->metadata[sizeof(uint8_t) /* pv_num */ +
-			       sizeof(uint16_t) * pv_num];
-}
-
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_attr_entry_enum_decode_def_num_check(
+int pldm_bios_table_attr_entry_enum_decode_def_num(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *def_num)
 {
+	uint8_t pv_num;
+
 	POINTER_CHECK(entry);
 	POINTER_CHECK(def_num);
 	ATTR_TYPE_EXPECT(entry->attr_type, PLDM_BIOS_ENUMERATION);
-	*def_num = pldm_bios_table_attr_entry_enum_decode_def_num(entry);
+	pv_num = entry->metadata[0];
+	*def_num = entry->metadata[sizeof(uint8_t) + sizeof(uint16_t) * pv_num];
 	return PLDM_SUCCESS;
 }
 
@@ -286,7 +281,10 @@ uint8_t pldm_bios_table_attr_entry_enum_decode_def_indices(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *def_indices,
 	uint8_t def_num)
 {
-	uint8_t num = pldm_bios_table_attr_entry_enum_decode_def_num(entry);
+	uint8_t num = 0;
+
+	/* TODO: Fix the API to propagate errors */
+	pldm_bios_table_attr_entry_enum_decode_def_num(entry, &num);
 	num = num < def_num ? num : def_num;
 	uint8_t pv_num = entry->metadata[0];
 	const uint8_t *p = entry->metadata +
@@ -303,7 +301,10 @@ static ssize_t attr_table_entry_length_enum(const void *arg)
 {
 	const struct pldm_bios_attr_table_entry *entry = arg;
 	uint8_t pv_num = entry->metadata[0];
-	uint8_t def_num = pldm_bios_table_attr_entry_enum_decode_def_num(entry);
+	uint8_t def_num = 0;
+
+	/* TODO: Fix the API to propagate errors */
+	pldm_bios_table_attr_entry_enum_decode_def_num(entry, &def_num);
 	size_t len =
 		pldm_bios_table_attr_entry_enum_encode_length(pv_num, def_num);
 	if (len > SSIZE_MAX) {
