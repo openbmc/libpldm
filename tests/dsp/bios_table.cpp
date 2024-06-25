@@ -170,8 +170,8 @@ TEST(AttrTable, EnumEntryEncodeTest)
     EXPECT_EQ(encodeLength, enumEntry.size());
 
     std::vector<uint8_t> encodeEntry(encodeLength, 0);
-    ASSERT_EQ(pldm_bios_table_attr_entry_enum_encode_check(
-                  encodeEntry.data(), encodeEntry.size(), &info),
+    ASSERT_EQ(pldm_bios_table_attr_entry_enum_encode(encodeEntry.data(),
+                                                     encodeEntry.size(), &info),
               PLDM_SUCCESS);
     // set attr handle = 0
     encodeEntry[0] = 0;
@@ -179,19 +179,19 @@ TEST(AttrTable, EnumEntryEncodeTest)
 
     EXPECT_EQ(enumEntry, encodeEntry);
 
-    EXPECT_NE(pldm_bios_table_attr_entry_enum_encode_check(
+    EXPECT_NE(pldm_bios_table_attr_entry_enum_encode(
                   encodeEntry.data(), encodeEntry.size() - 1, &info),
               PLDM_SUCCESS);
-    auto rc = pldm_bios_table_attr_entry_enum_encode_check(
-        encodeEntry.data(), encodeEntry.size(), &info);
+    auto rc = pldm_bios_table_attr_entry_enum_encode(encodeEntry.data(),
+                                                     encodeEntry.size(), &info);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     // set attr handle = 0
     encodeEntry[0] = 0;
     encodeEntry[1] = 0;
 
     EXPECT_EQ(enumEntry, encodeEntry);
-    rc = pldm_bios_table_attr_entry_enum_encode_check(
-        encodeEntry.data(), encodeEntry.size() - 1, &info);
+    rc = pldm_bios_table_attr_entry_enum_encode(encodeEntry.data(),
+                                                encodeEntry.size() - 1, &info);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 

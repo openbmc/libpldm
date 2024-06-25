@@ -236,6 +236,9 @@ size_t pldm_bios_table_attr_entry_enum_encode_length(uint8_t pv_num,
  *          value for entry_length can be determined using @ref
  *          pldm_bios_table_attr_entry_enum_encode_length.
  */
+int pldm_bios_table_attr_entry_enum_encode(
+	void *entry, size_t entry_length,
+	const struct pldm_bios_table_attr_entry_enum_info *info);
 int pldm_bios_table_attr_entry_enum_encode_check(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_enum_info *info);
