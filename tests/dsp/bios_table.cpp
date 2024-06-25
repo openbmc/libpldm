@@ -273,7 +273,7 @@ TEST(AttrTable, StringEntryEncodeTest)
     EXPECT_EQ(encodeLength, stringEntry.size());
 
     std::vector<uint8_t> encodeEntry(encodeLength, 0);
-    ASSERT_EQ(pldm_bios_table_attr_entry_string_encode_check(
+    ASSERT_EQ(pldm_bios_table_attr_entry_string_encode(
                   encodeEntry.data(), encodeEntry.size(), &info),
               PLDM_SUCCESS);
     // set attr handle = 0
@@ -282,10 +282,10 @@ TEST(AttrTable, StringEntryEncodeTest)
 
     EXPECT_EQ(stringEntry, encodeEntry);
 
-    EXPECT_NE(pldm_bios_table_attr_entry_string_encode_check(
+    EXPECT_NE(pldm_bios_table_attr_entry_string_encode(
                   encodeEntry.data(), encodeEntry.size() - 1, &info),
               PLDM_SUCCESS);
-    auto rc = pldm_bios_table_attr_entry_string_encode_check(
+    auto rc = pldm_bios_table_attr_entry_string_encode(
         encodeEntry.data(), encodeEntry.size(), &info);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     // set attr handle = 0
@@ -293,7 +293,7 @@ TEST(AttrTable, StringEntryEncodeTest)
     encodeEntry[1] = 0;
 
     EXPECT_EQ(stringEntry, encodeEntry);
-    rc = pldm_bios_table_attr_entry_string_encode_check(
+    rc = pldm_bios_table_attr_entry_string_encode(
         encodeEntry.data(), encodeEntry.size() - 1, &info);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
     std::swap(info.max_length, info.min_length);
@@ -303,8 +303,8 @@ TEST(AttrTable, StringEntryEncodeTest)
     EXPECT_STREQ(
         "MinimumStingLength should not be greater than MaximumStringLength",
         errmsg);
-    rc = pldm_bios_table_attr_entry_string_encode_check(
-        encodeEntry.data(), encodeEntry.size(), &info);
+    rc = pldm_bios_table_attr_entry_string_encode(encodeEntry.data(),
+                                                  encodeEntry.size(), &info);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     std::swap(info.max_length, info.min_length);
 
@@ -326,7 +326,7 @@ TEST(AttrTable, StringEntryEncodeTest)
     EXPECT_EQ(encodeLength, stringEntryLength0.size());
 
     encodeEntry.resize(encodeLength);
-    ASSERT_EQ(pldm_bios_table_attr_entry_string_encode_check(
+    ASSERT_EQ(pldm_bios_table_attr_entry_string_encode(
                   encodeEntry.data(), encodeEntry.size(), &info),
               PLDM_SUCCESS);
     // set attr handle = 0
