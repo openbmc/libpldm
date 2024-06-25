@@ -1598,7 +1598,7 @@ $VAR1 = {
     },
     '17275' => {
       'Header' => 'bios_table.h',
-      'Line' => '670',
+      'Line' => '673',
       'Param' => {
         '0' => {
           'name' => 'table',
@@ -1618,7 +1618,7 @@ $VAR1 = {
     },
     '17420' => {
       'Header' => 'bios_table.h',
-      'Line' => '661',
+      'Line' => '664',
       'Param' => {
         '0' => {
           'name' => 'src_table',
@@ -1654,7 +1654,7 @@ $VAR1 = {
     },
     '18108' => {
       'Header' => 'bios_table.h',
-      'Line' => '625',
+      'Line' => '628',
       'Param' => {
         '0' => {
           'name' => 'table',
@@ -1847,7 +1847,7 @@ $VAR1 = {
     },
     '20598' => {
       'Header' => 'bios_table.h',
-      'Line' => '644',
+      'Line' => '647',
       'Param' => {
         '0' => {
           'name' => 'table',
@@ -1872,7 +1872,7 @@ $VAR1 = {
     },
     '20898' => {
       'Header' => 'bios_table.h',
-      'Line' => '632',
+      'Line' => '635',
       'Param' => {
         '0' => {
           'name' => 'size_without_pad',
@@ -1884,7 +1884,7 @@ $VAR1 = {
     },
     '21253' => {
       'Header' => 'bios_table.h',
-      'Line' => '607',
+      'Line' => '610',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -1899,7 +1899,7 @@ $VAR1 = {
     },
     '21302' => {
       'Header' => 'bios_table.h',
-      'Line' => '614',
+      'Line' => '617',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -1911,7 +1911,7 @@ $VAR1 = {
     },
     '21786' => {
       'Header' => 'bios_table.h',
-      'Line' => '576',
+      'Line' => '579',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -1926,7 +1926,7 @@ $VAR1 = {
     },
     '21926' => {
       'Header' => 'bios_table.h',
-      'Line' => '592',
+      'Line' => '595',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -1961,13 +1961,13 @@ $VAR1 = {
     },
     '22195' => {
       'Header' => 'bios_table.h',
-      'Line' => '570',
+      'Line' => '573',
       'Return' => '1145',
       'ShortName' => 'pldm_bios_table_attr_value_entry_encode_integer_length'
     },
     '22357' => {
       'Header' => 'bios_table.h',
-      'Line' => '560',
+      'Line' => '563',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2007,7 +2007,7 @@ $VAR1 = {
     },
     '22757' => {
       'Header' => 'bios_table.h',
-      'Line' => '541',
+      'Line' => '544',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2023,7 +2023,7 @@ $VAR1 = {
     },
     '22852' => {
       'Header' => 'bios_table.h',
-      'Line' => '531',
+      'Line' => '534',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2038,7 +2038,7 @@ $VAR1 = {
     },
     '22993' => {
       'Header' => 'bios_table.h',
-      'Line' => '525',
+      'Line' => '528',
       'Param' => {
         '0' => {
           'name' => 'string_length',
@@ -2053,7 +2053,7 @@ $VAR1 = {
     },
     '23175' => {
       'Header' => 'bios_table.h',
-      'Line' => '512',
+      'Line' => '515',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2090,7 +2090,7 @@ $VAR1 = {
     },
     '23494' => {
       'Header' => 'bios_table.h',
-      'Line' => '493',
+      'Line' => '496',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2110,7 +2110,7 @@ $VAR1 = {
     },
     '23741' => {
       'Header' => 'bios_table.h',
-      'Line' => '483',
+      'Line' => '486',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2125,7 +2125,7 @@ $VAR1 = {
     },
     '23790' => {
       'Header' => 'bios_table.h',
-      'Line' => '477',
+      'Line' => '480',
       'Param' => {
         '0' => {
           'name' => 'count',
@@ -2140,7 +2140,7 @@ $VAR1 = {
     },
     '23839' => {
       'Header' => 'bios_table.h',
-      'Line' => '470',
+      'Line' => '473',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2155,7 +2155,7 @@ $VAR1 = {
     },
     '23888' => {
       'Header' => 'bios_table.h',
-      'Line' => '463',
+      'Line' => '466',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2170,7 +2170,7 @@ $VAR1 = {
     },
     '24435' => {
       'Header' => 'bios_table.h',
-      'Line' => '455',
+      'Line' => '458',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2205,7 +2205,7 @@ $VAR1 = {
     },
     '24571' => {
       'Header' => 'bios_table.h',
-      'Line' => '440',
+      'Line' => '443',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2230,7 +2230,7 @@ $VAR1 = {
     },
     '24843' => {
       'Header' => 'bios_table.h',
-      'Line' => '421',
+      'Line' => '424',
       'Param' => {
         '0' => {
           'name' => 'info',
@@ -2246,13 +2246,13 @@ $VAR1 = {
     },
     '25147' => {
       'Header' => 'bios_table.h',
-      'Line' => '428',
+      'Line' => '431',
       'Return' => '1145',
       'ShortName' => 'pldm_bios_table_attr_entry_integer_encode_length'
     },
     '25323' => {
       'Header' => 'bios_table.h',
-      'Line' => '395',
+      'Line' => '398',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2275,7 +2275,7 @@ $VAR1 = {
     },
     '25617' => {
       'Header' => 'bios_table.h',
-      'Line' => '387',
+      'Line' => '390',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2290,7 +2290,7 @@ $VAR1 = {
     },
     '25686' => {
       'Header' => 'bios_table.h',
-      'Line' => '379',
+      'Line' => '382',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2305,7 +2305,7 @@ $VAR1 = {
     },
     '25755' => {
       'Header' => 'bios_table.h',
-      'Line' => '371',
+      'Line' => '374',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2320,7 +2320,7 @@ $VAR1 = {
     },
     '25824' => {
       'Header' => 'bios_table.h',
-      'Line' => '360',
+      'Line' => '363',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2340,7 +2340,7 @@ $VAR1 = {
     },
     '25912' => {
       'Header' => 'bios_table.h',
-      'Line' => '346',
+      'Line' => '349',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -2379,11 +2379,11 @@ $VAR1 = {
         '1' => 'rbx'
       },
       'Return' => '100',
-      'ShortName' => 'pldm_bios_table_attr_entry_string_info_check'
+      'ShortName' => 'pldm_bios_table_attr_entry_string_info'
     },
     '26545' => {
       'Header' => 'bios_table.h',
-      'Line' => '333',
+      'Line' => '336',
       'Param' => {
         '0' => {
           'name' => 'def_str_len',
@@ -9482,6 +9482,7 @@ $VAR1 = {
       'pldm_bios_table_attr_entry_string_encode' => 1,
       'pldm_bios_table_attr_entry_string_encode_check' => 1,
       'pldm_bios_table_attr_entry_string_encode_length' => 1,
+      'pldm_bios_table_attr_entry_string_info' => 1,
       'pldm_bios_table_attr_entry_string_info_check' => 1,
       'pldm_bios_table_attr_find_by_handle' => 1,
       'pldm_bios_table_attr_find_by_string_handle' => 1,
@@ -10456,7 +10457,7 @@ $VAR1 = {
     },
     '16507' => {
       'Header' => 'bios_table.h',
-      'Line' => '405',
+      'Line' => '408',
       'Memb' => {
         '0' => {
           'name' => 'name_handle',

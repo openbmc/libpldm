@@ -322,6 +322,9 @@ struct pldm_bios_table_attr_entry_string_info {
  * memory
  *  @return pldm_completion_codes
  */
+int pldm_bios_table_attr_entry_string_info(
+	const struct pldm_bios_table_attr_entry_string_info *info,
+	const char **errmsg);
 int pldm_bios_table_attr_entry_string_info_check(
 	const struct pldm_bios_table_attr_entry_string_info *info,
 	const char **errmsg);
