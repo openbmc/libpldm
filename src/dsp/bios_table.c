@@ -98,7 +98,7 @@ uint16_t pldm_bios_table_string_entry_decode_string_length(
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_string_entry_decode_string_check(
+int pldm_bios_table_string_entry_decode_string(
 	const struct pldm_bios_string_table_entry *entry, char *buffer,
 	size_t size)
 {
