@@ -335,7 +335,7 @@ size_t pldm_bios_table_attr_entry_string_encode_length(uint16_t def_str_len)
 #define PLDM_STRING_TYPE_VENDOR 0xff
 
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_attr_entry_string_info_check(
+int pldm_bios_table_attr_entry_string_info(
 	const struct pldm_bios_table_attr_entry_string_info *info,
 	const char **errmsg)
 {
@@ -378,7 +378,7 @@ int pldm_bios_table_attr_entry_string_encode(
 	size_t length = pldm_bios_table_attr_entry_string_encode_length(
 		info->def_length);
 	BUFFER_SIZE_EXPECT(entry_length, length);
-	if (pldm_bios_table_attr_entry_string_info_check(info, NULL) !=
+	if (pldm_bios_table_attr_entry_string_info(info, NULL) !=
 	    PLDM_SUCCESS) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
