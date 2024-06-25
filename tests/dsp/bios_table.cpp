@@ -1028,24 +1028,24 @@ TEST(StringTable, EntryDecodeTest)
     EXPECT_EQ(strLength, 7);
 
     std::vector<char> buffer(strLength + 1, 0);
-    pldm_bios_table_string_entry_decode_string_check(entry, buffer.data(),
-                                                     buffer.size());
+    pldm_bios_table_string_entry_decode_string(entry, buffer.data(),
+                                               buffer.size());
     EXPECT_EQ(strlen(buffer.data()), strLength);
     EXPECT_EQ(std::strcmp("Allowed", buffer.data()), 0);
-    EXPECT_EQ(pldm_bios_table_string_entry_decode_string_check(
+    EXPECT_EQ(pldm_bios_table_string_entry_decode_string(
                   entry, buffer.data(), 2 + 1 /* sizeof '\0'*/),
               PLDM_SUCCESS);
     EXPECT_EQ(strlen(buffer.data()), 2);
     EXPECT_EQ(std::strcmp("Al", buffer.data()), 0);
 
-    auto rc = pldm_bios_table_string_entry_decode_string_check(
-        entry, buffer.data(), buffer.size());
+    auto rc = pldm_bios_table_string_entry_decode_string(entry, buffer.data(),
+                                                         buffer.size());
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(std::strcmp("Allowed", buffer.data()), 0);
 
     /* Ensure equivalence with the unchecked API */
-    rc = pldm_bios_table_string_entry_decode_string_check(
-        entry, buffer.data(), 2 + 1 /* sizeof '\0' */);
+    rc = pldm_bios_table_string_entry_decode_string(entry, buffer.data(),
+                                                    2 + 1 /* sizeof '\0' */);
     EXPECT_EQ(rc, std::strcmp("Al", buffer.data()));
 }
 
@@ -1116,8 +1116,8 @@ TEST(StringTable, FindTest)
     auto str_length = pldm_bios_table_string_entry_decode_string_length(entry);
     EXPECT_EQ(str_length, 2);
     std::vector<char> strBuf(str_length + 1, 0);
-    auto rc = pldm_bios_table_string_entry_decode_string_check(
-        entry, strBuf.data(), strBuf.size());
+    auto rc = pldm_bios_table_string_entry_decode_string(entry, strBuf.data(),
+                                                         strBuf.size());
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(std::strcmp("Hi", strBuf.data()), 0);
 
