@@ -639,6 +639,21 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 					 size_t *num_entities,
 					 pldm_entity **entities);
 
+/** @brief Remove a contained entity from an entity association PDR
+ *
+ *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in] entity - the pldm entity to be deleted. Data inside the entity struct must be
+ *  			host-endianess format
+ *  @param[in] is_remote - indicates which PDR to remove, local or remote
+ *  @param[in] pdr_record_handle - record handle of the container entity which has to be removed
+ *
+ *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
+ *  allocation fails, or -EOVERFLOW if given data is too large for memory allocated
+ */
+int pldm_entity_association_pdr_remove_contained_entity(
+	pldm_pdr *repo, pldm_entity *entity, bool is_remote,
+	uint32_t *pdr_record_handle);
+
 #ifdef __cplusplus
 }
 #endif
