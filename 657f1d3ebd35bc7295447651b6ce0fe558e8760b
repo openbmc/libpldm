@@ -16,6 +16,23 @@
       "message": "This implementation is an API/ABI break; you\u0027re going to have to find another approach.",
       "revId": "657f1d3ebd35bc7295447651b6ce0fe558e8760b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56563898_a1942418",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T11:10:21Z",
+      "side": 1,
+      "message": "@arj i want to abandon this change for now because I will be adding this change as part of bigger change. I have noted the review comments already given here",
+      "revId": "657f1d3ebd35bc7295447651b6ce0fe558e8760b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
