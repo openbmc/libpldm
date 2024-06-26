@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a3eae4c_a802c23c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-26T02:47:58Z",
+      "side": 1,
+      "message": "Hello! Nice work; I have some pretty minor comments remaining. Thanks for iterating on the patch!",
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16cd6b76_38fcf18b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-26T02:47:58Z",
+      "side": 1,
+      "message": "I understand what you mean, but I think what you\u0027ve written could be confusing to some. Can we rewrite this as:\n\n\u003e The \"Length of ComponentVersionString\" field is 1 byte, so \"ComponentVersionString\" can be at most 255 characters. Allocate memory for it and append 1 byte for null termination ...",
+      "range": {
+        "startLine": 642,
+        "startChar": 4,
+        "endLine": 642,
+        "endChar": 36
+      },
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8233c0dc_c00f96eb",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-26T02:47:58Z",
+      "side": 1,
+      "message": "This needs to be `return pldm_msgbuf_span_remaining(buf, (void **)\u0026data-\u003eptr, \u0026data-\u003elength);` so the subsequent iteration can decode the subsequent table entry.",
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f75b33_0901013c",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-26T02:47:58Z",
+      "side": 1,
+      "message": "Can you add a double-underscore after the `pldm` prefix, so `pldm__msgbuf_extract_array_void()`? I\u0027m using that as an indicator that it shouldn\u0027t be called directly under normal circumstances (\"it looks weird, and most code shouldn\u0027t look weird\").",
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17928751_1122b837",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-26T02:47:58Z",
+      "side": 1,
+      "message": "This needs to be `uint8_t *dst`",
+      "range": {
+        "startLine": 766,
+        "startChar": 57,
+        "endLine": 766,
+        "endChar": 66
+      },
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad75ce40_745851aa",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-26T02:47:58Z",
+      "side": 1,
+      "message": "`pldm__msgbuf_insert_array_void()` (double underscore again).",
+      "range": {
+        "startLine": 969,
+        "startChar": 0,
+        "endLine": 969,
+        "endChar": 5
+      },
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
