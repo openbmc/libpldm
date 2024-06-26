@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bc1a0c0_596b0147",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T10:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f980af62_34b906c7",
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8967b9f3_fde8c9cc",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-06-17T00:07:40Z",
       "side": 1,
       "message": "Should we be using \"FRU\" here? Why not PDR? If it is a FRU type in the formal (DSP0257?) sense, is there a reason \"fru\" is not in the type names?\n\nThis query probably extends beyond the scope of the patch, but I wonder if there\u0027s a missed opportunity for more tightly constraining the types.",
+      "range": {
+        "startLine": 283,
+        "startChar": 21,
+        "endLine": 283,
+        "endChar": 24
+      },
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f0c0b9d_eac66eb6",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T10:45:04Z",
+      "side": 1,
+      "message": "I have added a bit more detail to @brief here and I feel FRU should be used since this API is meant for FRU records. I understand making it more meaningful in a broader sense, I am looking into what term I can use here",
+      "parentUuid": "8967b9f3_fde8c9cc",
       "range": {
         "startLine": 283,
         "startChar": 21,
@@ -89,6 +131,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba8cd855_33b12168",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T10:45:04Z",
+      "side": 1,
+      "message": "removed this",
+      "parentUuid": "e7005871_6254fdcd",
+      "range": {
+        "startLine": 289,
+        "startChar": 21,
+        "endLine": 289,
+        "endChar": 77
+      },
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f4c776_70a9cb92",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T10:45:04Z",
+      "side": 1,
+      "message": "removed this",
+      "parentUuid": "5ab8add6_1f762647",
+      "range": {
+        "startLine": 288,
+        "startChar": 65,
+        "endLine": 289,
+        "endChar": 21
+      },
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "961fabab_d4300627",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 1
@@ -100,6 +190,30 @@
       "writtenOn": "2024-06-17T00:07:40Z",
       "side": 1,
       "message": "I think it would be more ergonomic with the signature\n\n```\nstatic pldm_pdr_record *pldm_pdr_get_prev_record(const pldm_pdr *repo,\n    const pldm_pdr_record *record);\n```\n\nThat way we just return the previous record (or `NULL`) directly.",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 32
+      },
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfb344ed_7eef15d2",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T10:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "961fabab_d4300627",
       "range": {
         "startLine": 309,
         "startChar": 0,
@@ -127,6 +241,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c19d53f2_1a1a09fd",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T10:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "699e1110_e5513315",
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7881490_431d640d",
@@ -140,6 +272,24 @@
       "writtenOn": "2024-06-17T00:07:40Z",
       "side": 1,
       "message": "We really must only do this if we know we\u0027ve removed the record. For instance, what if we try to remove the same record twice? This obviously isn\u0027t a sensible thing to do when so directly stated, but that doesn\u0027t mean that there won\u0027t be some other bug in the calling applications that causes the condition.\n\nSo we need to know the record actually exists in the repo first. The hints we have that it is not are that `pldm_pdr_get_prev_record()` returns `NULL`, and that `record` is neither the first nor last in the repo.\n\nWithout ensuring that it\u0027s actually part of the repo we will corrupt the repo size and cause an error that has a large separation in time from the failure.",
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d2f8fd_22f8d098",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T10:45:04Z",
+      "side": 1,
+      "message": "included checks for above",
+      "parentUuid": "c7881490_431d640d",
       "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -161,6 +311,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60bde303_4a5aa112",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T10:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6ee88dc_54c218fe",
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3f2e855_599d54d4",
@@ -174,6 +342,24 @@
       "writtenOn": "2024-06-17T00:07:40Z",
       "side": 1,
       "message": "Please also test other conditions like trying to remove the same record twice, followed by removing all records successfully.",
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a78c15_fc3866c7",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T10:45:04Z",
+      "side": 1,
+      "message": "i have included other cases but removing the same record twice will just return rc \u003d 0 because when match is not found for fru_rsi no remove will be done",
+      "parentUuid": "d3f2e855_599d54d4",
       "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
