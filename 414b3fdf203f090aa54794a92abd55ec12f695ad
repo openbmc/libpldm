@@ -178,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3dca9b48_5154e10f",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Done. Please check.",
+      "parentUuid": "abe0e07b_e69d8be2",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "112d701c_753ae36c",
         "filename": "include/libpldm/oem/meta/file_io.h",
         "patchSetId": 2
@@ -189,6 +207,24 @@
       "writtenOn": "2024-06-12T02:46:00Z",
       "side": 1,
       "message": "This needs doxygen documentation covering the parameters and enumerating the possible return values.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "190265f1_362cb63d",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Done. Please check.",
+      "parentUuid": "112d701c_753ae36c",
       "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -218,6 +254,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86ee7e76_e9ca4af0",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Done. Please check.",
+      "parentUuid": "3d814117_e4248bdd",
+      "range": {
+        "startLine": 43,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 27
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b93cad95_b768d9fe",
         "filename": "include/libpldm/oem/meta/file_io.h",
         "patchSetId": 2
@@ -229,6 +289,24 @@
       "writtenOn": "2024-06-12T02:46:00Z",
       "side": 1,
       "message": "This seems unrelated to file IO. Why is it in this header? Also, it should be a separate patch and it needs doxygen comments covering the parameters and enumerating the possible return values.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "744b1f89_ab7e047f",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Add doxygen comments done.\nThe reason related to file IO is to read the data of the file.",
+      "parentUuid": "b93cad95_b768d9fe",
       "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -270,6 +348,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba4fbb08_d8d8f658",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Done. Please check.",
+      "parentUuid": "0291a9f5_8a893b81",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7032fc3e_d5875924",
         "filename": "src/oem/meta/file_io.c",
         "patchSetId": 2
@@ -287,6 +383,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b833fdf_485af43d",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "If modified to return a negative value, errors will occur when using the check items of the decode_oem_meta_write_file_io_req function.\n\nreference\nhttps://github.com/openbmc/libpldm/blob/main/tests/oem/meta/fileio.cpp#L44\nhttps://github.com/openbmc/libpldm/blob/main/tests/oem/meta/fileio.cpp#L61\nhttps://github.com/openbmc/libpldm/blob/main/tests/oem/meta/fileio.cpp#L76",
+      "parentUuid": "7032fc3e_d5875924",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de3765ad_2f81a683",
         "filename": "src/oem/meta/file_io.c",
         "patchSetId": 2
@@ -298,6 +412,24 @@
       "writtenOn": "2024-06-12T02:46:00Z",
       "side": 1,
       "message": "The double-underscore was meant to be a suggestion that you shouldn\u0027t call this function directly, and the direct invocation is the cause of your CI failure.\n\nYou must instead choose from `pldm_msgbuf_init_cc()` or `pldm_msgbuf_init_errno()`. As this the implementation of a function marked `LIBPLDM_ABI_STABLE`, you mustn\u0027t change the behaviour of the returned error codes. As such you should use `pldm_msgbuf_init_cc()`.\n\nHowever, for future reference, it\u0027s strongly preferred that newly added functions return negative errnos and _not_ PLDM completion codes. This is because the _implementation_ can have error states that can\u0027t be described in terms of protocol-level completion codes.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c3b2df6_23ef39ca",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Done. Please check.",
+      "parentUuid": "de3765ad_2f81a683",
       "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -362,6 +494,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08d6a422_a274b6c1",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Modified to pass structure pointer.",
+      "parentUuid": "228c5e7b_a69b22af",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "026a7abd_b25528ef",
         "filename": "src/oem/meta/file_io.c",
         "patchSetId": 2
@@ -373,6 +529,24 @@
       "writtenOn": "2024-06-12T02:46:00Z",
       "side": 1,
       "message": "This would need to test the rest of the pointers as well. If you pass a struct pointer there are many fewer concerns.",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aed67c3_09d7b3d2",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Modified to pass structure pointer.",
+      "parentUuid": "026a7abd_b25528ef",
       "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -396,6 +570,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3688cb58_becf656b",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Done. Please check.",
+      "parentUuid": "e3399a4e_04cb8ac0",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9802d4f6_f73120a2",
         "filename": "src/oem/meta/file_io.c",
         "patchSetId": 2
@@ -407,6 +599,30 @@
       "writtenOn": "2024-06-12T02:46:00Z",
       "side": 1,
       "message": "Accounting for the error-handling comment on line 49 above, this should be `plmd_msgbuf_init_errno()`.",
+      "range": {
+        "startLine": 52,
+        "startChar": 10,
+        "endLine": 52,
+        "endChar": 27
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c708ea6_1de3c4e0",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Done. Please check.",
+      "parentUuid": "9802d4f6_f73120a2",
       "range": {
         "startLine": 52,
         "startChar": 10,
@@ -471,6 +687,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa305692_671fc68a",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Done, Please check.",
+      "parentUuid": "5d3986e1_438937d5",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0eeaaa9_ffcc8fe0",
         "filename": "src/oem/meta/file_io.c",
         "patchSetId": 2
@@ -482,6 +716,30 @@
       "writtenOn": "2024-06-12T02:46:00Z",
       "side": 1,
       "message": "Please\n\n```\n#include \"dsp/base.h\"\n```\n\nand switch to `pack_pldm_header_errno()`, fixing the test on line 82 as well.",
+      "range": {
+        "startLine": 80,
+        "startChar": 14,
+        "endLine": 80,
+        "endChar": 30
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88f80862_4b9a802d",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T09:02:03Z",
+      "side": 1,
+      "message": "Done. Please check.",
+      "parentUuid": "f0eeaaa9_ffcc8fe0",
       "range": {
         "startLine": 80,
         "startChar": 14,
