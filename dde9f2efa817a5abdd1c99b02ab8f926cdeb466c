@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "496c8525_b585fd3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-26T08:42:40Z",
+      "side": 1,
+      "message": "Hi Andrew, \nI have modified the content according to the suggestions.\n\nHere are some replies to some parts.\n1. There is no modification to the \"decode_oem_meta_write_file_io_req\" function, because all functions that use this function use PLDM completion code to determine the result.\n\n2. How is HTTP boot messaging related to file IO ? Why is there no discussion of the API break?\n- To use http boot, you need to enable http boot by confirming whether the certification is correct. Therefore, we need to use the read file IO command to read whether the certification of http boot is correct. When an exception occurs during encode/decode, the function will be break.",
+      "parentUuid": "a248fb92_c83a2cab",
+      "revId": "dde9f2efa817a5abdd1c99b02ab8f926cdeb466c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "49b2d238_d2f9c140",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
