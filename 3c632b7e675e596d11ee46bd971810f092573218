@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51375ddf_781de3d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T06:37:31Z",
+      "side": 1,
+      "message": "@arj I would like to abandon this change and combine the changes in this commit with https://gerrit.openbmc.org/c/openbmc/libpldm/+/72058 and make some of the APIs as static. New APIs also included after considering your review comments in both commits. All the review comments given here are addressed and pushed into https://gerrit.openbmc.org/c/openbmc/libpldm/+/72058",
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f006cdb_53bc2e06",
@@ -37,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "765a905d_11893965",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T06:37:31Z",
+      "side": 1,
+      "message": "this is taken care in other APIs",
+      "parentUuid": "0f006cdb_53bc2e06",
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ffd0626d_a81ca16d",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 1
@@ -48,6 +83,30 @@
       "writtenOn": "2024-06-17T00:31:17Z",
       "side": 1,
       "message": "We can take advantage of the non-negative number space to provide the result without resorting to an out-pointer:\n\n```\n@return 1 if the provided FRU record matches the provided record set identifier, 0 if it does not, otherwise -EINVAL if the arguments are invalid.\n```\n\nThis way the function prototype becomes:\n\n```\nint pldm_pdr_record_check_fru_rsi_match(const pldm_pdr_record *record, uint16_t rsi);\n```\n\nWhile typing that out I had a thought. How do you feel about changing the name?\n\n```\nint pldm_pdr_record_matches_fru_rsi(const pldm_pdr_record *record, uint16_t rsi);\n```",
+      "range": {
+        "startLine": 277,
+        "startChar": 4,
+        "endLine": 277,
+        "endChar": 25
+      },
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "298c4d2e_7e318cf0",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T06:37:31Z",
+      "side": 1,
+      "message": "added the explanation in the static function and changed name of function",
+      "parentUuid": "ffd0626d_a81ca16d",
       "range": {
         "startLine": 277,
         "startChar": 4,
@@ -106,6 +165,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06ba7f14_0b98c4a4",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T06:37:31Z",
+      "side": 1,
+      "message": "removed this",
+      "parentUuid": "0f5c665b_ac4a0a55",
+      "range": {
+        "startLine": 277,
+        "startChar": 64,
+        "endLine": 278,
+        "endChar": 21
+      },
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b89b81d_a4aa47ef",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T06:37:31Z",
+      "side": 1,
+      "message": "removed this",
+      "parentUuid": "bfb051dd_b93df309",
+      "range": {
+        "startLine": 278,
+        "startChar": 22,
+        "endLine": 278,
+        "endChar": 77
+      },
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "108029db_bfe702a2",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 1
@@ -117,6 +224,24 @@
       "writtenOn": "2024-06-17T00:31:17Z",
       "side": 1,
       "message": "If we\u0027re taking `match` as a pointer argument we must check that also.",
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fb6d98a_12f564cc",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T06:37:31Z",
+      "side": 1,
+      "message": "match is made an output parameter",
+      "parentUuid": "108029db_bfe702a2",
       "revId": "3c632b7e675e596d11ee46bd971810f092573218",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -146,6 +271,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae8bad5c_e88474d3",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T06:37:31Z",
+      "side": 1,
+      "message": "used span required",
+      "parentUuid": "28f1104d_514fe4b6",
+      "range": {
+        "startLine": 288,
+        "startChar": 7,
+        "endLine": 290,
+        "endChar": 18
+      },
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f5257bc_5725d4de",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 1
@@ -157,6 +306,24 @@
       "writtenOn": "2024-06-17T00:31:17Z",
       "side": 1,
       "message": "I think part of the problem you were solving above with the pointer arithmetic is the need to extract a data member at a specific location without extracting all the preceding members. We could use `pldm_msgbuf_span_required()` to ignore that chunk, or we could add e.g. a `pldm_msgbuf_load_from(buf, offset, dst)` API (and supporting infrastructure) to do this for us.\n\nThe `pldm_msgbuf_span_required()` \"hack\" is the easiest way to make forward progress so I\u0027ll suggest going that route for now. I\u0027ll need to consider the trade-offs of the `pldm_msgbuf_load_from()` idea over using packed structs internally.",
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11a06429_bec263af",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T06:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f5257bc_5725d4de",
       "revId": "3c632b7e675e596d11ee46bd971810f092573218",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -186,6 +353,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e81c41df_3f51b5da",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T06:37:31Z",
+      "side": 1,
+      "message": "is part is removed",
+      "parentUuid": "82533cc5_1d790d09",
+      "range": {
+        "startLine": 301,
+        "startChar": 1,
+        "endLine": 305,
+        "endChar": 2
+      },
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "656b9e10_3ec320da",
         "filename": "tests/dsp/pdr.cpp",
         "patchSetId": 1
@@ -197,6 +388,24 @@
       "writtenOn": "2024-06-17T00:31:17Z",
       "side": 1,
       "message": "What about testing non-match conditions?",
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5066c14_526d98ca",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-06-26T06:37:31Z",
+      "side": 1,
+      "message": "this API is changed to a static API so removed the unit test",
+      "parentUuid": "656b9e10_3ec320da",
       "revId": "3c632b7e675e596d11ee46bd971810f092573218",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
