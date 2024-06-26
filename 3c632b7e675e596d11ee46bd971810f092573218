@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0c8320a_8f7e8ae5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-26T07:55:42Z",
+      "side": 1,
+      "message": "Sure, please do as you see fit, however https://gerrit.openbmc.org/c/openbmc/libpldm/+/72058 hasn\u0027t been updated since June 17th?",
+      "parentUuid": "51375ddf_781de3d8",
+      "revId": "3c632b7e675e596d11ee46bd971810f092573218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f006cdb_53bc2e06",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 1
