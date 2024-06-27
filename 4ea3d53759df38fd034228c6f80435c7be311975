@@ -1,0 +1,382 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15801125_8bd8fa3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "Hi Varsha, I have a few comments. Nothing terribly structural, but there are some misunderstandings in there that I\u0027ve hopefully addressed.",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87f47252_6e05775d",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "What value might be too large?",
+      "range": {
+        "startLine": 637,
+        "startChar": 22,
+        "endLine": 637,
+        "endChar": 74
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9086b4b_516fd951",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1667,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "Why did we chop out all the vowels of \"handle\"?",
+      "range": {
+        "startLine": 1667,
+        "startChar": 47,
+        "endLine": 1667,
+        "endChar": 51
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2a02f29_7d86a810",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "Can we not assert these given the function is static? Also need to account for `record_handle`?",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5348b489_fa22a8fa",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1683,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "Please declare the variables before any code to keep the formatting idiomatic.",
+      "range": {
+        "startLine": 1674,
+        "startChar": 1,
+        "endLine": 1683,
+        "endChar": 33
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "906c0e81_6a179a7a",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1694,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "Please use `pldm_msgbuf_extract()`.",
+      "range": {
+        "startLine": 1693,
+        "startChar": 2,
+        "endLine": 1694,
+        "endChar": 29
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4aa81f4_d029ca86",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1700,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "Please do not do any pointer arithmetic when initialising the msgbuf object. You can use `pldm_msgbuf_span_required()` to skip over any unwanted regions for now.",
+      "range": {
+        "startLine": 1699,
+        "startChar": 4,
+        "endLine": 1700,
+        "endChar": 41
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd36cfb8_21cc4cc0",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "Please no, these should all just be `pldm_msgbuf_extract()`. Spans are for \"opaque\" regions of memory; here you\u0027re trying to actually use them, and the endianness handling is broken.",
+      "range": {
+        "startLine": 1709,
+        "startChar": 1,
+        "endLine": 1717,
+        "endChar": 38
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f13f8cf_bfa2d013",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "`LIBPLDM_ABI_TESTING`.",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99d1746b_7568ddbd",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1744,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "What about `pdr_record_handle`?",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceddd67a_4090e387",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1758,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "Please declare the variables before any code.",
+      "range": {
+        "startLine": 1747,
+        "startChar": 1,
+        "endLine": 1758,
+        "endChar": 33
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7effa7e6_83ba3a3c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1775,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "we\u0027re not adding, right? We\u0027re removing?",
+      "range": {
+        "startLine": 1775,
+        "startChar": 13,
+        "endLine": 1775,
+        "endChar": 19
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32c766ca_b0bc65af",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1804,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "We decrement it below...",
+      "range": {
+        "startLine": 1804,
+        "startChar": 46,
+        "endLine": 1804,
+        "endChar": 55
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0acd528f_3f447f04",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "We decrement it below...",
+      "range": {
+        "startLine": 1821,
+        "startChar": 56,
+        "endLine": 1821,
+        "endChar": 65
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "972f037f_d085b67d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1845,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "These all must be `pldm_msgbuf_extract()` for the reasons outlined in the static function above.",
+      "range": {
+        "startLine": 1840,
+        "startChar": 1,
+        "endLine": 1845,
+        "endChar": 40
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb56eeb_db76ce89",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1867,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "Maybe we can do this like:\n\n```\nif ((rc \u003d pldm_msgbuf_destroy(src)) ||\n    (rc \u003d pldm_msgbuf_destroy) ||\n    (rc \u003d pldm_pdr_replace_record(repo, record, prev, new_record)) {\n    goto cleanup_new_record_data;\n}\n```",
+      "range": {
+        "startLine": 1855,
+        "startChar": 1,
+        "endLine": 1867,
+        "endChar": 2
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76f2798d_ce38ac67",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1871,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "Perhaps a new line above this label would be helpful for readability.",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cb7a82a_67cda4c7",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2108,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:00:00Z",
+      "side": 1,
+      "message": "Please don\u0027t combine all the tests under one ifdef - they should each have their own.",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
