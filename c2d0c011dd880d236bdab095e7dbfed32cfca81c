@@ -318,6 +318,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9beb16fc_3896c41c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28d2f8fd_22f8d098",
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6ee88dc_54c218fe",
@@ -384,6 +402,24 @@
       "side": 1,
       "message": "i have included other cases but removing the same record twice will just return rc \u003d 0 because when match is not found for fru_rsi no remove will be done",
       "parentUuid": "d3f2e855_599d54d4",
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8b0e73_4733a775",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "That\u0027s because you\u0027ve fixed the implementation. But the implementation might change in the future and we want to protect against reintroducing that problem.",
+      "parentUuid": "51a78c15_fc3866c7",
       "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

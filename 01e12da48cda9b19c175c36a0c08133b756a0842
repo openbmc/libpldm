@@ -1,0 +1,314 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d298fba_ed0158a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "Hi Varsha. I have a number of comments, many of them are similar to the previous patch.",
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c13c3ca7_5448982d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1910,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "We should test `repo-\u003efirst \u003d\u003d record` first right? As it is not expensive at all, unlike `pldm_pdr_get_prev_record()` which is `O(N)` wrt the repository size.\n\nso:\n\n```\nif (repo-\u003efirst \u003d\u003d record) {\n    return true;\n}\n\nreturn pldm_pdr_get_prev_record(repo, record) !\u003d NULL;\n```",
+      "range": {
+        "startLine": 1906,
+        "startChar": 1,
+        "endLine": 1910,
+        "endChar": 14
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b68b315c_0af54d15",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "Trailing whitespace.",
+      "range": {
+        "startLine": 1913,
+        "startChar": 77,
+        "endLine": 1913,
+        "endChar": 78
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f5c2481_fd9fdfc4",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1923,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "Just `assert()` it and punt the check here out to the caller?",
+      "range": {
+        "startLine": 1920,
+        "startChar": 1,
+        "endLine": 1923,
+        "endChar": 1
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a886feff_8862d31b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1927,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "Please put all variable declarations before the implementation.",
+      "range": {
+        "startLine": 1924,
+        "startChar": 1,
+        "endLine": 1927,
+        "endChar": 12
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1232c3b9_029c4d41",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1931,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "Please no pointer arithmetic when initialising the msgbuf.\n\nIf you want to skip regions, use `plmd_msgbuf_span_required()` for now.",
+      "range": {
+        "startLine": 1931,
+        "startChar": 2,
+        "endLine": 1931,
+        "endChar": 66
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44fc8b88_0c6d38da",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1932,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "Please just pass the size of the `record-\u003edata` buffer.",
+      "range": {
+        "startLine": 1932,
+        "startChar": 2,
+        "endLine": 1932,
+        "endChar": 18
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7c37a7c_819e698f",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1937,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "This must be `pldm_msgbuf_extract()` or else the endianness is broken.",
+      "range": {
+        "startLine": 1936,
+        "startChar": 1,
+        "endLine": 1937,
+        "endChar": 39
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b962a117_327552ac",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1948,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "`return record_fru_rsi \u0026\u0026 *record_fru_rsi \u003d\u003d rsi;`",
+      "range": {
+        "startLine": 1945,
+        "startChar": 1,
+        "endLine": 1948,
+        "endChar": 10
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feba0b1e_edf6bed4",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "`assert()`, but also what about `prev`?",
+      "range": {
+        "startLine": 1955,
+        "startChar": 1,
+        "endLine": 1958,
+        "endChar": 2
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52829be5_ae8c199f",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2005,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "Please declare variables before any implementation.",
+      "range": {
+        "startLine": 1998,
+        "startChar": 1,
+        "endLine": 2005,
+        "endChar": 1
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d715325_d3d8b825",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2009,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "Please no pointer arithmetic when initialising the msgbuf. Use `pldm_msgbuf_span_required()` if you need to skip a region for now.",
+      "range": {
+        "startLine": 2009,
+        "startChar": 3,
+        "endLine": 2009,
+        "endChar": 55
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "303bbdc5_30a7bd7d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2016,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "This must be `pldm_msgbuf_extract()`.",
+      "range": {
+        "startLine": 2015,
+        "startChar": 1,
+        "endLine": 2016,
+        "endChar": 29
+      },
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "569f1a97_31b0eb83",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2170,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-06-27T05:23:01Z",
+      "side": 1,
+      "message": "Each test should be in its own `#ifdef`, please don\u0027t combine them.",
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
