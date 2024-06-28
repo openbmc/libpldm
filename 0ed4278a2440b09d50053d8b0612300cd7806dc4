@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6002bd33_4b51fdf4",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-28T08:49:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16cd6b76_38fcf18b",
+      "range": {
+        "startLine": 642,
+        "startChar": 4,
+        "endLine": 642,
+        "endChar": 36
+      },
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8233c0dc_c00f96eb",
@@ -60,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad842047_52352964",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-28T08:49:48Z",
+      "side": 1,
+      "message": "I think this might not work since the `data`\u0027s ptr is const, and the `variable_field data` has been initilized by `decode_get_downstream_firmware_params_resp()`, use `pldm_msgbuf_span_remaining()` would return `-EINVAL` caused by the data verification in the function:\n```\npldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)\n{\n\tassert(ctx);\n\n\tif (!ctx-\u003ecursor || !cursor || *cursor || !len) { \u003c\u003c trigger `*cursor`\n\t\treturn pldm_msgbuf_status(ctx, EINVAL);\n\t}\n\t...\n}\n```\n\nThis leads to two seperate problem:\n1. `ptr` in `variable_field` is a const pointer.\n  - `ptr` cannot be assigned to a new address.\n2. `pldm_msgbuf_span_remaining()` assumes the `cursor` should point to `NULL`.\n  - `variable_field data` has been initilized.\n  \nDo you have any thought about this? And please let me know if I was wrong.",
+      "parentUuid": "8233c0dc_c00f96eb",
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5f75b33_0901013c",
         "filename": "src/msgbuf.h",
         "patchSetId": 14
@@ -71,6 +113,24 @@
       "writtenOn": "2024-06-26T02:47:58Z",
       "side": 1,
       "message": "Can you add a double-underscore after the `pldm` prefix, so `pldm__msgbuf_extract_array_void()`? I\u0027m using that as an indicator that it shouldn\u0027t be called directly under normal circumstances (\"it looks weird, and most code shouldn\u0027t look weird\").",
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c13a5e1_37b56591",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-28T08:49:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5f75b33_0901013c",
       "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -98,6 +158,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "292b507b_40c2ea34",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-28T08:49:48Z",
+      "side": 1,
+      "message": "Oops, missed it, thanks for reminding. Done.",
+      "parentUuid": "17928751_1122b837",
+      "range": {
+        "startLine": 766,
+        "startChar": 57,
+        "endLine": 766,
+        "endChar": 66
+      },
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad75ce40_745851aa",
@@ -111,6 +195,30 @@
       "writtenOn": "2024-06-26T02:47:58Z",
       "side": 1,
       "message": "`pldm__msgbuf_insert_array_void()` (double underscore again).",
+      "range": {
+        "startLine": 969,
+        "startChar": 0,
+        "endLine": 969,
+        "endChar": 5
+      },
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6f9bfd1_4e55e5dd",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1001618
+      },
+      "writtenOn": "2024-06-28T08:49:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad75ce40_745851aa",
       "range": {
         "startLine": 969,
         "startChar": 0,
