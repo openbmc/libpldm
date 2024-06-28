@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6b9f190_043f7fad",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1888,
+      "author": {
+        "id": 1001322
+      },
+      "writtenOn": "2024-06-28T12:24:27Z",
+      "side": 1,
+      "message": "nit: have a better naming convention of the variables",
+      "revId": "01e12da48cda9b19c175c36a0c08133b756a0842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c13c3ca7_5448982d",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 4
