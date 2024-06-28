@@ -45,6 +45,10 @@ Change categories:
    Anyone left using the deprecated paths can migrate using the coccinelle patch
    at `evolutions/current/oem-ibm-header-compat.cocci`.
 
+### Fixed
+
+1. requester: instance-id: Release read lock on conflict
+
 ## [0.8.0] - 2024-05-23
 
 ### Added
