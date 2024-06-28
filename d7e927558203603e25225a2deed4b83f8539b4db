@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2091befc_b2aa096f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001049
+      },
+      "writtenOn": "2024-06-28T11:07:13Z",
+      "side": 1,
+      "message": "Parameters",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9967bc3_dda6af4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001049
+      },
+      "writtenOn": "2024-06-28T11:07:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f596d34_b275afe2",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1001049
+      },
+      "writtenOn": "2024-06-28T11:07:13Z",
+      "side": 1,
+      "message": "Clean up?",
+      "range": {
+        "startLine": 726,
+        "startChar": 0,
+        "endLine": 726,
+        "endChar": 75
+      },
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
