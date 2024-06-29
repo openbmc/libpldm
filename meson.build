@@ -38,6 +38,7 @@ if get_option('abi').contains('deprecated')
     ['pldm_bios_table_attr_entry_enum_decode_pv_hdls_check', 'pldm_bios_table_attr_entry_enum_decode_pv_hdls'],
     ['pldm_bios_table_attr_entry_enum_decode_pv_num_check', 'pldm_bios_table_attr_entry_enum_decode_pv_num'],
     ['pldm_bios_table_attr_entry_enum_encode_check', 'pldm_bios_table_attr_entry_enum_encode'],
+    ['pldm_bios_table_attr_entry_integer_encode_check', 'pldm_bios_table_attr_entry_integer_encode'],
     ['pldm_bios_table_attr_entry_string_decode_def_string_length_check', 'pldm_bios_table_attr_entry_string_decode_def_string_length'],
     ['pldm_bios_table_attr_entry_string_encode_check', 'pldm_bios_table_attr_entry_string_encode'],
     ['pldm_bios_table_string_entry_decode_string_check', 'pldm_bios_table_string_entry_decode_string'],

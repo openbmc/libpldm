@@ -437,6 +437,9 @@ size_t pldm_bios_table_attr_entry_integer_encode_length(void);
  *          in info is not logically consistent. PLDM_ERROR_INVALID_LENGTH if entry_length lacks
  *          capacity to encode the attribute.
  */
+int pldm_bios_table_attr_entry_integer_encode(
+	void *entry, size_t entry_length,
+	const struct pldm_bios_table_attr_entry_integer_info *info);
 int pldm_bios_table_attr_entry_integer_encode_check(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_integer_info *info);
