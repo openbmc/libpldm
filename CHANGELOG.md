@@ -46,6 +46,7 @@ Change categories:
    The deprecated functions:
 
    - `get_fru_record_by_option_check()`
+   - `pldm_bios_table_append_pad_checksum_check()`
    - `pldm_bios_table_attr_entry_enum_decode_def_num_check()`
    - `pldm_bios_table_attr_entry_enum_decode_pv_hdls_check()`
    - `pldm_bios_table_attr_entry_enum_decode_pv_num_check()`

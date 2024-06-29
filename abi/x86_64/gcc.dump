@@ -1598,7 +1598,7 @@ $VAR1 = {
     },
     '17275' => {
       'Header' => 'bios_table.h',
-      'Line' => '668',
+      'Line' => '670',
       'Param' => {
         '0' => {
           'name' => 'table',
@@ -1618,7 +1618,7 @@ $VAR1 = {
     },
     '17420' => {
       'Header' => 'bios_table.h',
-      'Line' => '659',
+      'Line' => '661',
       'Param' => {
         '0' => {
           'name' => 'src_table',
@@ -1868,7 +1868,7 @@ $VAR1 = {
         '2' => 'rbx'
       },
       'Return' => '100',
-      'ShortName' => 'pldm_bios_table_append_pad_checksum_check'
+      'ShortName' => 'pldm_bios_table_append_pad_checksum'
     },
     '20898' => {
       'Header' => 'bios_table.h',
@@ -9453,6 +9453,7 @@ $VAR1 = {
       'is_time_legal' => 1,
       'is_transfer_flag_valid' => 1,
       'pack_pldm_header' => 1,
+      'pldm_bios_table_append_pad_checksum' => 1,
       'pldm_bios_table_append_pad_checksum_check' => 1,
       'pldm_bios_table_attr_entry_decode_attribute_handle' => 1,
       'pldm_bios_table_attr_entry_decode_attribute_type' => 1,

@@ -34,6 +34,7 @@ if get_option('abi').contains('deprecated')
   add_project_arguments('-DLIBPLDM_API_DEPRECATED', language: ['c', 'cpp'])
   libpldm_deprecated_aliases += [
     ['get_fru_record_by_option_check', 'get_fru_record_by_option'],
+    ['pldm_bios_table_append_pad_checksum_check', 'pldm_bios_table_append_pad_checksum'],
     ['pldm_bios_table_attr_entry_enum_decode_def_num_check', 'pldm_bios_table_attr_entry_enum_decode_def_num'],
     ['pldm_bios_table_attr_entry_enum_decode_pv_hdls_check', 'pldm_bios_table_attr_entry_enum_decode_pv_hdls'],
     ['pldm_bios_table_attr_entry_enum_decode_pv_num_check', 'pldm_bios_table_attr_entry_enum_decode_pv_num'],

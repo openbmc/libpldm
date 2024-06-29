@@ -641,6 +641,8 @@ size_t pldm_bios_table_pad_checksum_size(size_t size_without_pad);
  *  	    buffer provided by table. The appropriate buffer capacity can be determined with the
  *  	    help of @ref pldm_bios_table_pad_checksum_size
  */
+int pldm_bios_table_append_pad_checksum(void *table, size_t capacity,
+					size_t *size);
 int pldm_bios_table_append_pad_checksum_check(void *table, size_t capacity,
 					      size_t *size);
 

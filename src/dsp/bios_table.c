@@ -916,8 +916,8 @@ size_t pldm_bios_table_pad_checksum_size(size_t size_without_pad)
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_append_pad_checksum_check(void *table, size_t capacity,
-					      size_t *size)
+int pldm_bios_table_append_pad_checksum(void *table, size_t capacity,
+					size_t *size)
 {
 	if (!table || !size) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -1197,8 +1197,8 @@ int pldm_bios_table_attr_value_copy_and_update(
 		goto out;
 	}
 
-	rc = pldm_bios_table_append_pad_checksum_check(
-		dest_table, buffer_length, &copied_length);
+	rc = pldm_bios_table_append_pad_checksum(dest_table, buffer_length,
+						 &copied_length);
 	if (rc == PLDM_SUCCESS) {
 		*dest_length = copied_length;
 	}
