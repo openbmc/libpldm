@@ -754,7 +754,7 @@ void pldm_bios_table_attr_value_entry_string_decode_string(
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_attr_value_entry_encode_string_check(
+int pldm_bios_table_attr_value_entry_encode_string(
 	void *entry, size_t entry_length, uint16_t attr_handle,
 	uint8_t attr_type, uint16_t str_length, const char *str)
 {
