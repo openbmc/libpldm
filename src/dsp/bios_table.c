@@ -798,11 +798,11 @@ size_t pldm_bios_table_attr_value_entry_encode_integer_length(void)
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_attr_value_entry_encode_integer_check(void *entry,
-							  size_t entry_length,
-							  uint16_t attr_handle,
-							  uint8_t attr_type,
-							  uint64_t cv)
+int pldm_bios_table_attr_value_entry_encode_integer(void *entry,
+						    size_t entry_length,
+						    uint16_t attr_handle,
+						    uint8_t attr_type,
+						    uint64_t cv)
 {
 	POINTER_CHECK(entry);
 	size_t length =

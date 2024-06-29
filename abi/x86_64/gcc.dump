@@ -1598,7 +1598,7 @@ $VAR1 = {
     },
     '17275' => {
       'Header' => 'bios_table.h',
-      'Line' => '663',
+      'Line' => '668',
       'Param' => {
         '0' => {
           'name' => 'table',
@@ -1618,7 +1618,7 @@ $VAR1 = {
     },
     '17420' => {
       'Header' => 'bios_table.h',
-      'Line' => '654',
+      'Line' => '659',
       'Param' => {
         '0' => {
           'name' => 'src_table',
@@ -1654,7 +1654,7 @@ $VAR1 = {
     },
     '18108' => {
       'Header' => 'bios_table.h',
-      'Line' => '620',
+      'Line' => '625',
       'Param' => {
         '0' => {
           'name' => 'table',
@@ -1847,7 +1847,7 @@ $VAR1 = {
     },
     '20598' => {
       'Header' => 'bios_table.h',
-      'Line' => '639',
+      'Line' => '644',
       'Param' => {
         '0' => {
           'name' => 'table',
@@ -1872,7 +1872,7 @@ $VAR1 = {
     },
     '20898' => {
       'Header' => 'bios_table.h',
-      'Line' => '627',
+      'Line' => '632',
       'Param' => {
         '0' => {
           'name' => 'size_without_pad',
@@ -1884,7 +1884,7 @@ $VAR1 = {
     },
     '21253' => {
       'Header' => 'bios_table.h',
-      'Line' => '602',
+      'Line' => '607',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -1899,7 +1899,7 @@ $VAR1 = {
     },
     '21302' => {
       'Header' => 'bios_table.h',
-      'Line' => '609',
+      'Line' => '614',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -1957,7 +1957,7 @@ $VAR1 = {
         '4' => 'r8'
       },
       'Return' => '100',
-      'ShortName' => 'pldm_bios_table_attr_value_entry_encode_integer_check'
+      'ShortName' => 'pldm_bios_table_attr_value_entry_encode_integer'
     },
     '22195' => {
       'Header' => 'bios_table.h',
@@ -9491,6 +9491,7 @@ $VAR1 = {
       'pldm_bios_table_attr_value_entry_encode_enum' => 1,
       'pldm_bios_table_attr_value_entry_encode_enum_check' => 1,
       'pldm_bios_table_attr_value_entry_encode_enum_length' => 1,
+      'pldm_bios_table_attr_value_entry_encode_integer' => 1,
       'pldm_bios_table_attr_value_entry_encode_integer_check' => 1,
       'pldm_bios_table_attr_value_entry_encode_integer_length' => 1,
       'pldm_bios_table_attr_value_entry_encode_string' => 1,
