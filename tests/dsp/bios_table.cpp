@@ -729,33 +729,33 @@ TEST(AttrValTable, integerEntryEncodeTest)
     EXPECT_EQ(length, integerEntry.size());
     std::vector<uint8_t> encodeEntry(length, 0);
     ASSERT_EQ(
-        pldm_bios_table_attr_value_entry_encode_integer_check(
+        pldm_bios_table_attr_value_entry_encode_integer(
             encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_INTEGER, 10),
         PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, integerEntry);
 
-    EXPECT_NE(pldm_bios_table_attr_value_entry_encode_integer_check(
+    EXPECT_NE(pldm_bios_table_attr_value_entry_encode_integer(
                   encodeEntry.data(), encodeEntry.size() - 1, 0,
                   PLDM_BIOS_INTEGER, 10),
               PLDM_SUCCESS);
 
-    auto rc = pldm_bios_table_attr_value_entry_encode_integer_check(
+    auto rc = pldm_bios_table_attr_value_entry_encode_integer(
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_INTEGER, 10);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, integerEntry);
     auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         integerEntry.data());
     entry->attr_type = PLDM_BIOS_INTEGER_READ_ONLY;
-    rc = pldm_bios_table_attr_value_entry_encode_integer_check(
+    rc = pldm_bios_table_attr_value_entry_encode_integer(
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_INTEGER_READ_ONLY,
         10);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, integerEntry);
 
-    rc = pldm_bios_table_attr_value_entry_encode_integer_check(
+    rc = pldm_bios_table_attr_value_entry_encode_integer(
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_PASSWORD, 10);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-    rc = pldm_bios_table_attr_value_entry_encode_integer_check(
+    rc = pldm_bios_table_attr_value_entry_encode_integer(
         encodeEntry.data(), encodeEntry.size() - 1, 0,
         PLDM_BIOS_INTEGER_READ_ONLY, 10);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
