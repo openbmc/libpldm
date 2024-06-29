@@ -503,7 +503,7 @@ size_t pldm_bios_table_attr_entry_integer_encode_length(void)
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_bios_table_attr_entry_integer_info_check(
+int pldm_bios_table_attr_entry_integer_info(
 	const struct pldm_bios_table_attr_entry_integer_info *info,
 	const char **errmsg)
 {
@@ -551,7 +551,7 @@ int pldm_bios_table_attr_entry_integer_encode(
 	POINTER_CHECK(info);
 	size_t length = pldm_bios_table_attr_entry_integer_encode_length();
 	BUFFER_SIZE_EXPECT(entry_length, length);
-	if (pldm_bios_table_attr_entry_integer_info_check(info, NULL) !=
+	if (pldm_bios_table_attr_entry_integer_info(info, NULL) !=
 	    PLDM_SUCCESS) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
