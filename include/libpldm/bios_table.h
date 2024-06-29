@@ -509,6 +509,9 @@ uint8_t pldm_bios_table_attr_value_entry_enum_decode_handles(
  *          attr_type is not a PLDM_BIOS_ENUMERATION. PLDM_ERROR_INVALID_LENGTH if entry_length
  *          lacks capacity to encode handles into entry.
  */
+int pldm_bios_table_attr_value_entry_encode_enum(
+	void *entry, size_t entry_length, uint16_t attr_handle,
+	uint8_t attr_type, uint8_t count, const uint8_t *handles);
 int pldm_bios_table_attr_value_entry_encode_enum_check(
 	void *entry, size_t entry_length, uint16_t attr_handle,
 	uint8_t attr_type, uint8_t count, const uint8_t *handles);
