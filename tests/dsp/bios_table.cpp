@@ -363,7 +363,7 @@ TEST(AttrTable, integerEntryEncodeTest)
     EXPECT_EQ(encodeLength, integerEntry.size());
 
     std::vector<uint8_t> encodeEntry(encodeLength, 0);
-    ASSERT_EQ(pldm_bios_table_attr_entry_integer_encode_check(
+    ASSERT_EQ(pldm_bios_table_attr_entry_integer_encode(
                   encodeEntry.data(), encodeEntry.size(), &info),
               PLDM_SUCCESS);
     // set attr handle = 0
@@ -372,11 +372,11 @@ TEST(AttrTable, integerEntryEncodeTest)
 
     EXPECT_EQ(integerEntry, encodeEntry);
 
-    EXPECT_NE(pldm_bios_table_attr_entry_integer_encode_check(
+    EXPECT_NE(pldm_bios_table_attr_entry_integer_encode(
                   encodeEntry.data(), encodeEntry.size() - 1, &info),
               PLDM_SUCCESS);
 
-    auto rc = pldm_bios_table_attr_entry_integer_encode_check(
+    auto rc = pldm_bios_table_attr_entry_integer_encode(
         encodeEntry.data(), encodeEntry.size(), &info);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     // set attr handle = 0
@@ -385,7 +385,7 @@ TEST(AttrTable, integerEntryEncodeTest)
 
     EXPECT_EQ(integerEntry, encodeEntry);
 
-    rc = pldm_bios_table_attr_entry_integer_encode_check(
+    rc = pldm_bios_table_attr_entry_integer_encode(
         encodeEntry.data(), encodeEntry.size() - 1, &info);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 
@@ -395,8 +395,8 @@ TEST(AttrTable, integerEntryEncodeTest)
     rc = pldm_bios_table_attr_entry_integer_info_check(&info, &errmsg);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     EXPECT_STREQ("LowerBound should not be greater than UpperBound", errmsg);
-    rc = pldm_bios_table_attr_entry_integer_encode_check(
-        encodeEntry.data(), encodeEntry.size(), &info);
+    rc = pldm_bios_table_attr_entry_integer_encode(encodeEntry.data(),
+                                                   encodeEntry.size(), &info);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
