@@ -392,7 +392,7 @@ TEST(AttrTable, integerEntryEncodeTest)
     info.lower_bound = 100;
     info.upper_bound = 50;
     const char* errmsg;
-    rc = pldm_bios_table_attr_entry_integer_info_check(&info, &errmsg);
+    rc = pldm_bios_table_attr_entry_integer_info(&info, &errmsg);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     EXPECT_STREQ("LowerBound should not be greater than UpperBound", errmsg);
     rc = pldm_bios_table_attr_entry_integer_encode(encodeEntry.data(),
