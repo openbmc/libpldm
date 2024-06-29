@@ -53,6 +53,7 @@ Change categories:
    - `pldm_bios_table_attr_entry_integer_encode_check()`
    - `pldm_bios_table_attr_entry_string_decode_def_string_length_check()`
    - `pldm_bios_table_attr_entry_string_encode_check()`
+   - `pldm_bios_table_attr_value_entry_encode_enum_check()`
    - `pldm_bios_table_string_entry_decode_string_check()`
    - `pldm_bios_table_string_entry_encode_check()`
    - `pldm_entity_association_pdr_add_check()`

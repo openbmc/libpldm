@@ -576,16 +576,16 @@ TEST(AttrValTable, EnumEntryEncodeTest)
     EXPECT_EQ(length, enumEntry.size());
     std::vector<uint8_t> encodeEntry(length, 0);
     uint8_t handles[] = {0, 1};
-    ASSERT_EQ(pldm_bios_table_attr_value_entry_encode_enum_check(
+    ASSERT_EQ(pldm_bios_table_attr_value_entry_encode_enum(
                   encodeEntry.data(), encodeEntry.size(), 0, 0, 2, handles),
               PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, enumEntry);
 
-    EXPECT_NE(pldm_bios_table_attr_value_entry_encode_enum_check(
+    EXPECT_NE(pldm_bios_table_attr_value_entry_encode_enum(
                   encodeEntry.data(), encodeEntry.size() - 1, 0, 0, 2, handles),
               PLDM_SUCCESS);
 
-    auto rc = pldm_bios_table_attr_value_entry_encode_enum_check(
+    auto rc = pldm_bios_table_attr_value_entry_encode_enum(
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_ENUMERATION, 2,
         handles);
     EXPECT_EQ(rc, PLDM_SUCCESS);
@@ -593,16 +593,16 @@ TEST(AttrValTable, EnumEntryEncodeTest)
     auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         enumEntry.data());
     entry->attr_type = PLDM_BIOS_ENUMERATION_READ_ONLY;
-    rc = pldm_bios_table_attr_value_entry_encode_enum_check(
+    rc = pldm_bios_table_attr_value_entry_encode_enum(
         encodeEntry.data(), encodeEntry.size(), 0,
         PLDM_BIOS_ENUMERATION_READ_ONLY, 2, handles);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, enumEntry);
-    rc = pldm_bios_table_attr_value_entry_encode_enum_check(
+    rc = pldm_bios_table_attr_value_entry_encode_enum(
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_PASSWORD, 2,
         handles);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-    rc = pldm_bios_table_attr_value_entry_encode_enum_check(
+    rc = pldm_bios_table_attr_value_entry_encode_enum(
         encodeEntry.data(), encodeEntry.size() - 1, 0, PLDM_BIOS_ENUMERATION, 2,
         handles);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
