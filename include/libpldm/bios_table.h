@@ -421,6 +421,9 @@ struct pldm_bios_table_attr_entry_integer_info {
  * memory
  *  @return pldm_completion_codes
  */
+int pldm_bios_table_attr_entry_integer_info(
+	const struct pldm_bios_table_attr_entry_integer_info *info,
+	const char **errmsg);
 int pldm_bios_table_attr_entry_integer_info_check(
 	const struct pldm_bios_table_attr_entry_integer_info *info,
 	const char **errmsg);
