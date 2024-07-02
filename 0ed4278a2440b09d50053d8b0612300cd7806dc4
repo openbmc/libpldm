@@ -102,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcd5c9bd_bc2a349b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-02T06:27:23Z",
+      "side": 1,
+      "message": "\u003e I think this might not work since the data\u0027s ptr is const,\n\nYes, but we\u0027re defining that - we can change it so it isn\u0027t `const`?\n\n\u003e the variable_field data has been initilized by decode_get_downstream_firmware_params_resp(), use pldm_msgbuf_span_remaining() would return -EINVAL caused by the data verification in the function\n\nProbably the least effort thing to do there is to set the pointer to `NULL` before the call:\n\n```\n/* Update the span */\ndata-\u003eptr \u003d NULL;\nreturn pldm_msgbuf_span_remaining(buf, (void **)\u0026data-\u003eptr, \u0026data-\u003elength);\n```\n\nIf this becomes a broader problem we can add another `msgbuf` API.",
+      "parentUuid": "ad842047_52352964",
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5f75b33_0901013c",
         "filename": "src/msgbuf.h",
         "patchSetId": 14

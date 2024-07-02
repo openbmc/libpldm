@@ -43,6 +43,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0304efaa_1c79247d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-02T06:27:23Z",
+      "side": 1,
+      "message": "While \"Tested\" sections are encouraged at a project level I don\u0027t require them for repositories I maintain. I find that they often become inaccurate due to iteration on the patch or are so vague as to provide no confidence anyway. I already have an expectation that patches have been tested before submission, and that they also come with unit tests.",
+      "parentUuid": "5e180ca2_ba0c5b42",
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c9967bc3_dda6af4b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 18
@@ -54,6 +72,109 @@
       "writtenOn": "2024-06-28T11:07:13Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb375d67_3c6cff2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-02T06:27:23Z",
+      "side": 1,
+      "message": "Hello, I\u0027ve made a few responses and suggestions inline.",
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccab86ba_f4c09469",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-02T06:27:23Z",
+      "side": 1,
+      "message": "The documentation for `active` and `pending` must note that the objects pointed-to must be at least as large as `entry-\u003eactive_comp_ver_str_len + 1` and `entry-\u003epending_comp_ver_str_len + 1` respectively.",
+      "range": {
+        "startLine": 1084,
+        "startChar": 0,
+        "endLine": 1085,
+        "endChar": 68
+      },
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf4fec11_82b7f3de",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-02T06:27:23Z",
+      "side": 1,
+      "message": "This should be `pldm_msgbuf_destroy()`, rather than `pldm_msgbuf_destroy_consumed()`. The caller might over-allocate the buffer, and we don\u0027t want to return an error in that case. We should also indicate the size of the buffer consumed back to the caller. Perhaps `payload_length` could be an `in,out` parameter (would need to change to `size_t *`)? We could also return the size, but I\u0027m wondering whether we want that as a general pattern. We can\u0027t use `ssize_t` for the return type easily as it only supports `-1` as a negative value.",
+      "range": {
+        "startLine": 1078,
+        "startChar": 8,
+        "endLine": 1078,
+        "endChar": 36
+      },
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1970731_cffde2ad",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-02T06:27:23Z",
+      "side": 1,
+      "message": "also needs to check `versions-\u003eptr` and `versions-\u003elength`.",
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146b1dac_8bb8c11a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-02T06:27:23Z",
+      "side": 1,
+      "message": "s/succesffuly/successfully/",
+      "range": {
+        "startLine": 1202,
+        "startChar": 9,
+        "endLine": 1202,
+        "endChar": 20
+      },
       "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -77,6 +198,47 @@
         "endLine": 726,
         "endChar": 75
       },
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9d4e98_2deb8550",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-02T06:27:23Z",
+      "side": 1,
+      "message": "I\u0027ve investigated this and the lint seems to falsely trigger on any double underscore. C\u0027s reserved identifiers (approximately) match `^_[A-Z].+` and `^__.+`. `pldm__msgbuf_extract_array_void` does not match either of those as it has the `pldm` prefix prior to the double-underscore.",
+      "parentUuid": "3f596d34_b275afe2",
+      "range": {
+        "startLine": 726,
+        "startChar": 0,
+        "endLine": 726,
+        "endChar": 75
+      },
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ef5610b_db556e62",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-02T06:27:23Z",
+      "side": 1,
+      "message": "Does this zero-initialise the array? Can we make that more explicit? Please address this concern on the other test cases below.",
       "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
