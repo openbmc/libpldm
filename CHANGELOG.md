@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 1. base: Define macros for reserved TIDs
+2. msgbuf: Add pldm_msgbuf_span_string_ascii()
 
 ### Deprecated
 
