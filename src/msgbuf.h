@@ -2,6 +2,13 @@
 #ifndef PLDM_MSGBUF_H
 #define PLDM_MSGBUF_H
 
+// NOLINTBEGIN(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+#ifndef _GNU_SOURCE
+/* For memmem(3) */
+#define _GNU_SOURCE
+#endif
+// NOLINTEND(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+
 /*
  * Historically, many of the structs exposed in libpldm's public headers are
  * defined with __attribute__((packed)). This is unfortunate: it gives the
@@ -52,6 +59,7 @@ extern "C" {
 #include <stdint.h>
 #include <string.h>
 #include <sys/types.h>
+#include <uchar.h>
 
 /*
  * We can't use static_assert() outside of some other C construct. Deal
@@ -1103,6 +1111,87 @@ pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor,
 
 	if (length) {
 		*length = measured;
+	}
+
+	return 0;
+}
+
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor,
+			      size_t *length)
+{
+	static const char16_t term = 0;
+	ptrdiff_t measured;
+	void *end;
+
+	assert(ctx);
+
+	if (!ctx->cursor || (cursor && *cursor)) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	if (ctx->remaining < 0) {
+		/* Tracking the amount of overflow gets disturbed here */
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	/*
+	 * Avoid tripping up on UTF16-LE: We may have consecutive NUL _bytes_ that do
+	 * not form a UTF16 NUL _code-point_ due to alignment with respect to the
+	 * start of the string
+	 */
+	end = (char *)ctx->cursor;
+	do {
+		if (end != ctx->cursor) {
+			/*
+			 * If we've looped we've found a relatively-unaligned NUL code-point.
+			 * Scan again from a relatively-aligned start point.
+			 */
+			end = (char *)end + 1;
+		}
+		measured = (char *)end - (char *)ctx->cursor;
+		end = (char *)memmem(end, ctx->remaining - measured, &term,
+				     sizeof(term));
+	} while (end && ((uintptr_t)end & 1) != ((uintptr_t)ctx->cursor & 1));
+
+	if (!end) {
+		/*
+		 * Optimistically, the last required pattern byte was one beyond the end of
+		 * the buffer. Setting ctx->remaining negative ensures the
+		 * `pldm_msgbuf_destroy*()` APIs also return an error.
+		 */
+		ctx->remaining = -1;
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	end = (char *)end + sizeof(char16_t);
+	measured = (char *)end - (char *)ctx->cursor;
+
+#if INTMAX_MAX < PTRDIFF_MAX
+	if (measured >= INTMAX_MAX) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+#endif
+
+	if (ctx->remaining < INTMAX_MIN + (intmax_t)measured) {
+		assert(ctx->remaining < 0);
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	ctx->remaining -= (intmax_t)measured;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	if (cursor) {
+		*cursor = ctx->cursor;
+	}
+
+	ctx->cursor += measured;
+
+	if (length) {
+		*length = (size_t)measured;
 	}
 
 	return 0;
