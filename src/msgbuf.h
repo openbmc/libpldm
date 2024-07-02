@@ -52,6 +52,7 @@ extern "C" {
 #include <stdint.h>
 #include <string.h>
 #include <sys/types.h>
+#include <uchar.h>
 
 /*
  * We can't use static_assert() outside of some other C construct. Deal
@@ -1053,6 +1054,54 @@ pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor,
 	ctx->cursor += measured;
 	if (length) {
 		*length = measured;
+	}
+
+	return 0;
+}
+
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor,
+			      size_t *length)
+{
+	ptrdiff_t measured;
+	void *end;
+	uint8_t term[2] = { 0x00, 0x00 };
+
+	assert(ctx);
+	static_assert(sizeof(term) == sizeof(char16_t));
+
+	if (!ctx->cursor || !cursor || *cursor ||
+	    (ctx->remaining < (intmax_t)sizeof(char16_t))) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	end = memmem(ctx->cursor, ctx->remaining, term, sizeof(term));
+	if (!end) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	end = (uint8_t *)end + sizeof(char16_t);
+	measured = (uint8_t *)end - ctx->cursor;
+	if (measured % 2) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	if ((measured >= INTMAX_MAX) ||
+	    (ctx->remaining < INTMAX_MIN + (intmax_t)measured)) {
+		assert(ctx->remaining < 0);
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	ctx->remaining -= (intmax_t)measured;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	*cursor = ctx->cursor;
+	ctx->cursor += measured;
+	if (length) {
+		*length = (size_t)measured;
 	}
 
 	return 0;
