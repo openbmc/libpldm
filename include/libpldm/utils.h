@@ -12,6 +12,7 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 #include <sys/types.h>
+#include <uchar.h>
 
 /** @struct variable_field
  *
@@ -106,6 +107,21 @@ bool is_time_legal(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t day,
  *  @return true if transfer flag is valid, false if not
  */
 bool is_transfer_flag_valid(uint8_t transfer_flag);
+
+/** @brief Check the char16 string length
+ *
+ *  @param[in] startptr - start of char16 string
+ *
+ *  @return number of character of char16 string without terminator
+ */
+static size_t char16len(char16_t *startptr)
+{
+	char16_t *endptr = startptr;
+	while (*endptr) {
+		endptr++;
+	}
+	return endptr - startptr;
+}
 
 #ifdef __cplusplus
 }

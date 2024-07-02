@@ -41,6 +41,7 @@ extern "C" {
 
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
+#include <libpldm/utils.h>
 
 #include "compiler.h"
 
@@ -52,6 +53,7 @@ extern "C" {
 #include <stdint.h>
 #include <string.h>
 #include <sys/types.h>
+#include <uchar.h>
 
 /*
  * We can't use static_assert() outside of some other C construct. Deal
@@ -1045,6 +1047,46 @@ pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor)
 
 	*cursor = (char *)ctx->cursor;
 	ctx->cursor += length + 1;
+
+	return 0;
+}
+
+__attribute__((always_inline)) static inline int
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor)
+{
+	assert(ctx);
+	size_t str_size;
+	void *terminator_ptr;
+	uint8_t terminator[2] = { 0x00, 0x00 };
+
+	if (!ctx->cursor || !cursor || *cursor) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	terminator_ptr = memmem(ctx->cursor, ctx->remaining, terminator,
+				sizeof(terminator));
+	if (!terminator_ptr) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	terminator_ptr = (uint8_t *)terminator_ptr + sizeof(char16_t);
+	str_size = (uint8_t *)terminator_ptr - ctx->cursor;
+	if (str_size % 2) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+	if (ctx->remaining - (intmax_t)str_size < 0) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	ctx->remaining -= (intmax_t)str_size;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	*cursor = (char16_t *)ctx->cursor;
+	ctx->cursor += str_size;
 
 	return 0;
 }
