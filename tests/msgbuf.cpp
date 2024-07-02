@@ -1,4 +1,5 @@
 #include <endian.h>
+#include <libpldm/utils.h>
 
 #include <cfloat>
 
@@ -879,6 +880,108 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_bad_no_terminator)
     EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&retBuff),
               PLDM_ERROR_INVALID_LENGTH);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
+}
+
+static size_t char16len(char16_t* startptr)
+{
+    char16_t* endptr = startptr;
+    while (*endptr)
+    {
+        endptr++;
+    }
+    return endptr - startptr;
+}
+
+TEST(msgbuf, pldm_msgbuf_span_string_utf16_good)
+{
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    uint8_t src[16] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33, 0x6c,
+                       0x44, 0x6c, 0x55, 0x6f, 0x00, 0x00, 0x34, 0x12};
+    const size_t required = 6;
+    const char16_t expectData[required] = {0x6811, 0x6522, 0x6c33,
+                                           0x6c44, 0x6f55, 0x0000};
+    uint16_t testVal;
+    uint16_t testVal1;
+    char16_t* retBuff = NULL;
+
+    ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, src, sizeof(src)),
+              PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), PLDM_SUCCESS);
+    EXPECT_EQ(0x2211, testVal);
+
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff),
+              PLDM_SUCCESS);
+
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal1), PLDM_SUCCESS);
+    EXPECT_EQ(0x1234, testVal1);
+
+    EXPECT_EQ(memcmp(expectData, retBuff,
+                     sizeof(char16_t) * (char16len(retBuff) + 1)),
+              0);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
+}
+
+TEST(msgbuf, pldm_msgbuf_span_string_utf16_bad)
+{
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    uint8_t src[14] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33,
+                       0x6c, 0x44, 0x6c, 0x55, 0x6f, 0x00, 0x00};
+    uint16_t testVal;
+
+    ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, src, sizeof(src)),
+              PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), PLDM_SUCCESS);
+    EXPECT_EQ(0x2211, testVal);
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, NULL),
+              PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
+}
+
+TEST(msgbuf, pldm_msgbuf_span_string_utf16_bad_no_terminator)
+{
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    uint8_t src[14] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33,
+                       0x6c, 0x44, 0x6c, 0x55, 0x6f, 0x66, 0x77};
+    uint16_t testVal;
+    char16_t* retBuff = NULL;
+
+    ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, src, sizeof(src)),
+              PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), PLDM_SUCCESS);
+    EXPECT_EQ(0x2211, testVal);
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff),
+              PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
+}
+
+TEST(msgbuf, pldm_msgbuf_span_string_utf16_bad_odd_size)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    uint8_t src[13] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33,
+                       0x6c, 0x44, 0x6c, 0x55, 0x00, 0x00};
+    uint8_t buf[13] = {0};
+    uint16_t testVal;
+    char16_t* retBuff = NULL;
+
+    ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_insert_array_uint8(ctx, src, sizeof(src)),
+              PLDM_SUCCESS);
+
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+
+    ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
+              PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), PLDM_SUCCESS);
+    EXPECT_EQ(0x2211, testVal);
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff),
+              PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
 
 TEST(msgbuf, span_required_under)
