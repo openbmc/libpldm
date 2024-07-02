@@ -52,6 +52,7 @@ extern "C" {
 #include <stdint.h>
 #include <string.h>
 #include <sys/types.h>
+#include <uchar.h>
 
 /*
  * We can't use static_assert() outside of some other C construct. Deal
@@ -1039,6 +1040,42 @@ pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor)
 
 	*cursor = (char *)ctx->cursor;
 	ctx->cursor += strlen((char *)ctx->cursor) + 1;
+
+	return 0;
+}
+
+static size_t char16len(char16_t *startptr)
+{
+	char16_t *endptr = startptr;
+	while (*endptr) {
+		endptr++;
+	}
+	return endptr - startptr;
+}
+
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor)
+{
+	assert(ctx);
+
+	if (!ctx->cursor || !cursor || *cursor) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	ctx->remaining -= (intmax_t)(sizeof(char16_t) *
+				     (char16len((char16_t *)ctx->cursor) + 1));
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+	*cursor = (char16_t *)ctx->cursor;
+#if defined(__LITTLE_ENDIAN_BITFIELD)
+	for (size_t j = 0; j < char16len((char16_t *)*cursor); j++) {
+		*((char16_t *)*cursor + j) =
+			be16toh(*((char16_t *)*cursor + j));
+	}
+#endif
+	ctx->cursor += sizeof(char16_t) * (char16len((char16_t *)*cursor) + 1);
 
 	return 0;
 }
