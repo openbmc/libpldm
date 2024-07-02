@@ -41,6 +41,7 @@ extern "C" {
 
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
+#include <libpldm/utils.h>
 
 #include "compiler.h"
 
@@ -52,6 +53,7 @@ extern "C" {
 #include <stdint.h>
 #include <string.h>
 #include <sys/types.h>
+#include <uchar.h>
 
 /*
  * We can't use static_assert() outside of some other C construct. Deal
@@ -1046,6 +1048,42 @@ pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor)
 
 	*cursor = (char *)ctx->cursor;
 	ctx->cursor += strlen((char *)ctx->cursor) + 1;
+
+	return 0;
+}
+
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor)
+{
+	assert(ctx);
+	intmax_t remaining;
+	size_t length;
+
+	if (!ctx->cursor || !cursor || *cursor) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	length = char16len((char16_t *)ctx->cursor);
+	remaining =
+		ctx->remaining - (intmax_t)(sizeof(char16_t) * (length + 1));
+	if (remaining < 0) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	ctx->remaining = remaining;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	*cursor = (char16_t *)ctx->cursor;
+#if defined(__LITTLE_ENDIAN_BITFIELD)
+	for (size_t j = 0; j < length; j++) {
+		*((char16_t *)*cursor + j) =
+			be16toh(*((char16_t *)*cursor + j));
+	}
+#endif
+	ctx->cursor += sizeof(char16_t) * (length + 1);
 
 	return 0;
 }
