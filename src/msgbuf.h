@@ -1023,6 +1023,42 @@ pldm_msgbuf_span_required(struct pldm_msgbuf *ctx, size_t required,
 }
 
 __attribute__((always_inline)) static inline int
+pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor,
+			      size_t *length)
+{
+	intmax_t measured;
+
+	assert(ctx);
+
+	if (!ctx->cursor || !cursor || *cursor) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	measured = (intmax_t)strnlen((const char *)ctx->cursor, ctx->remaining);
+	if (measured == ctx->remaining) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+	measured++;
+	if (ctx->remaining < INTMAX_MIN + measured) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	ctx->remaining -= measured;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	*cursor = ctx->cursor;
+	ctx->cursor += measured;
+	if (length) {
+		*length = measured;
+	}
+
+	return 0;
+}
+
+__attribute__((always_inline)) static inline int
 pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 {
 	assert(ctx);
