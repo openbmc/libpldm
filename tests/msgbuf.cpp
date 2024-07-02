@@ -1,4 +1,5 @@
 #include <endian.h>
+#include <libpldm/utils.h>
 
 #include <cfloat>
 
@@ -1029,6 +1030,224 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_under)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, 0), 0);
     ctxExtract->remaining = INTMAX_MIN;
     EXPECT_NE(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&retBuff, NULL),
+              0);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), -EOVERFLOW);
+}
+
+static size_t str16len(char16_t* startptr)
+{
+    char16_t* endptr = startptr;
+    while (*endptr)
+    {
+        endptr++;
+    }
+    return endptr - startptr;
+}
+
+TEST(msgbuf, pldm_msgbuf_span_string_utf16_good)
+{
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    uint8_t src[] __attribute__((aligned(alignof(char16_t)))) = {
+        0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33, 0x6c,
+        0x44, 0x6c, 0x55, 0x6f, 0x00, 0x00, 0x34, 0x12};
+    const char expectData[] = {0x11, 0x68, 0x22, 0x65, 0x33, 0x6c,
+                               0x44, 0x6c, 0x55, 0x6f, 0x00, 0x00};
+    uint16_t testVal;
+    uint16_t testVal1;
+    void* retBuff = NULL;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(0x2211, testVal);
+
+    ASSERT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
+              0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal1), 0);
+    EXPECT_EQ(0x1234, testVal1);
+
+    ASSERT_EQ(0, (uintptr_t)retBuff & (alignof(char16_t) - 1));
+    EXPECT_EQ(6, str16len((char16_t*)retBuff) + 1);
+    EXPECT_EQ(0, memcmp(expectData, retBuff, sizeof(expectData)));
+    EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), 0);
+}
+
+TEST(msgbuf, pldm_msgbuf_span_string_utf16_good2)
+{
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    uint8_t src[24] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33, 0x6c,
+                       0x44, 0x6c, 0x55, 0x6f, 0x00, 0x00, 0x34, 0x12,
+                       0x44, 0x6c, 0x55, 0x6f, 0x00, 0x00, 0x34, 0x12};
+    constexpr size_t required = 6;
+    const char16_t expectData[required] = {0x6811, 0x6522, 0x6c33,
+                                           0x6c44, 0x6f55, 0x0000};
+    const char16_t expectData1[3] = {0x6c44, 0x6f55, 0x0000};
+    uint16_t testVal;
+    uint16_t testVal1;
+    char* retBuff = NULL;
+    char* retBuff1 = NULL;
+    size_t length = 0;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(0x2211, testVal);
+
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
+              0);
+
+    ASSERT_EQ(0, (uintptr_t)retBuff & (alignof(char16_t) - 1));
+    EXPECT_EQ(6, str16len((char16_t*)retBuff) + 1);
+    EXPECT_EQ(memcmp(expectData, retBuff,
+                     sizeof(char16_t) * (str16len((char16_t*)retBuff) + 1)),
+              0);
+
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal1), 0);
+    EXPECT_EQ(0x1234, testVal1);
+
+    EXPECT_EQ(
+        pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff1, &length),
+        0);
+
+    EXPECT_EQ(0, length % 2);
+    EXPECT_EQ(memcmp(expectData1, retBuff1, length), 0);
+
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal1), 0);
+    EXPECT_EQ(0x1234, testVal1);
+
+    EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), 0);
+}
+
+TEST(msgbuf, pldm_msgbuf_span_string_utf16_allow_null_args)
+{
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    uint8_t src[14] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33,
+                       0x6c, 0x44, 0x6c, 0x55, 0x6f, 0x00, 0x00};
+    uint16_t testVal;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(0x2211, testVal);
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, NULL, NULL), 0);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), 0);
+}
+
+TEST(msgbuf, pldm_msgbuf_span_string_utf16_bad_no_terminator)
+{
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    uint8_t src[14] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33,
+                       0x6c, 0x44, 0x6c, 0x55, 0x6f, 0x66, 0x77};
+    uint16_t testVal;
+    char16_t* retBuff = NULL;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(0x2211, testVal);
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
+              -EOVERFLOW);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), -EOVERFLOW);
+}
+
+TEST(msgbuf, pldm_msgbuf_span_string_utf16_bad_odd_size)
+{
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    uint8_t src[] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33,
+                     0x6c, 0x44, 0x6c, 0x55, 0x00, 0x00};
+    uint16_t testVal;
+    char16_t* retBuff = NULL;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(0x2211, testVal);
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
+              -EOVERFLOW);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), -EOVERFLOW);
+}
+
+TEST(msgbuf, pldm_msgbuf_span_string_utf16_mix)
+{
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    uint8_t src[36] = {0x2,  0x65, 0x6e, 0x00, // Language Tag "en"
+                       0x00, 0x53, 0x00, 0x30, 0x00, 0x53, 0x00,
+                       0x58, 0x00, 0x00,                   // Entity Name "S0S"
+                       0x66, 0x6e, 0x00,                   // Language Tag "en"
+                       0x00, 0x53, 0x00, 0x31, 0x00, 0x00, // Entity Name "S1"
+                       0x67, 0x6e, 0x00,                   // Language Tag "en"
+                       0x00, 0x52, 0x00, 0x52, 0x00, 0x33, 0x00,
+                       0x00, // Entity Name "RR3"
+                       0x77, 0x88};
+    uint8_t name_count;
+    uint16_t test_val;
+    char* tag = NULL;
+    char* name = NULL;
+    char* tag1 = NULL;
+    char* name1 = NULL;
+    char* tag2 = NULL;
+    char* name2 = NULL;
+    const char expectTag0[3] = {0x65, 0x6e, 0x00};
+    const char expectTag1[3] = {0x66, 0x6e, 0x00};
+    const char expectTag2[3] = {0x67, 0x6e, 0x00};
+
+    const char16_t expectName0[5] = {0x5300, 0x3000, 0x5300, 0x5800, 0x0000};
+    const char16_t expectName1[3] = {0x5300, 0x3100, 0x0000};
+    const char16_t expectName2[4] = {0x5200, 0x5200, 0x3300, 0x0000};
+    size_t length = 0;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, &name_count), 0);
+    EXPECT_EQ(0x2, name_count);
+
+    EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&tag, NULL), 0);
+    EXPECT_EQ(strncmp(expectTag0, tag, strlen(tag) + 1), 0);
+
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&name, NULL),
+              0);
+    ASSERT_EQ(0, (uintptr_t)name & (alignof(char16_t) - 1));
+    EXPECT_EQ(5, str16len((char16_t*)name) + 1);
+    EXPECT_EQ(memcmp(expectName0, name,
+                     sizeof(char16_t) * (str16len((char16_t*)name) + 1)),
+              0);
+
+    EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&tag1, &length),
+              0);
+    EXPECT_EQ(strncmp(expectTag1, tag1, length), 0);
+    EXPECT_EQ(
+        pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&name1, &length), 0);
+    EXPECT_EQ(0, length % 2);
+    EXPECT_EQ(memcmp(expectName1, name1, length), 0);
+
+    EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&tag2, NULL),
+              0);
+    EXPECT_EQ(strncmp(expectTag2, tag2, strlen(tag2) + 1), 0);
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&name2, NULL),
+              0);
+    ASSERT_EQ(0, (uintptr_t)name2 & (alignof(char16_t) - 1));
+    EXPECT_EQ(4, str16len((char16_t*)name2) + 1);
+    EXPECT_EQ(memcmp(expectName2, name2,
+                     sizeof(char16_t) * (str16len((char16_t*)name2) + 1)),
+              0);
+
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &test_val), 0);
+    EXPECT_EQ(0x8877, test_val);
+
+    EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), 0);
+}
+
+TEST(msgbuf, pldm_msgbuf_span_string_utf16_under)
+{
+    struct pldm_msgbuf _ctxExtract;
+    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+
+    uint8_t src[1] = {};
+    char* retBuff = NULL;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, 0), 0);
+    ctxExtract->remaining = INTMAX_MIN;
+    EXPECT_NE(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
               0);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), -EOVERFLOW);
 }
