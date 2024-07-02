@@ -1054,6 +1054,61 @@ pldm_msgbuf_span_required(struct pldm_msgbuf *ctx, size_t required,
 }
 
 __attribute__((always_inline)) static inline int
+pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor,
+			      size_t *length)
+{
+	intmax_t measured;
+
+	assert(ctx);
+
+	if (!ctx->cursor || (cursor && *cursor)) {
+		return pldm_msgbuf_status(ctx, EINVAL);
+	}
+
+	if (ctx->remaining < 0) {
+		/* Tracking the amount of overflow gets disturbed here */
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	measured = (intmax_t)strnlen((const char *)ctx->cursor, ctx->remaining);
+	if (measured == ctx->remaining) {
+		/*
+		 * We have hit the end of the buffer prior to the NUL terminator.
+		 * Optimistically, the NUL terminator was one-beyond-the-end. Setting
+		 * ctx->remaining negative ensures the `pldm_msgbuf_destroy*()` APIs also
+		 * return an error.
+		 */
+		ctx->remaining = -1;
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	/* Include the NUL terminator in the span length, as spans are opaque */
+	measured++;
+
+	if (ctx->remaining < INTMAX_MIN + measured) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	ctx->remaining -= measured;
+	assert(ctx->remaining >= 0);
+	if (ctx->remaining < 0) {
+		return pldm_msgbuf_status(ctx, EOVERFLOW);
+	}
+
+	if (cursor) {
+		*cursor = ctx->cursor;
+	}
+
+	ctx->cursor += measured;
+
+	if (length) {
+		*length = measured;
+	}
+
+	return 0;
+}
+
+__attribute__((always_inline)) static inline int
 pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 {
 	assert(ctx);
