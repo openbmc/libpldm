@@ -26,12 +26,23 @@
 
 [azonenberg-packed-struct]: https://ioc.exchange/@azonenberg/112535511250395148
 
+- [The Good, the Bad, and the Weird - Trail of Bits
+  Blog][trail-of-bits-weird-machines]
+
+[trail-of-bits-weird-machines]:
+  https://blog.trailofbits.com/2018/10/26/the-good-the-bad-and-the-weird/
+
 ## References
 
 - [C17 draft standard][c17-draft-standard]
 
 [c17-draft-standard]:
   https://web.archive.org/web/20181230041359if_/http://www.open-std.org/jtc1/sc22/wg14/www/abq/c17_updated_proposed_fdis.pdf
+
+- [SEI CERT C Coding Standard][sei-cert-c-coding-standard]
+
+[sei-cert-c-coding-standard]:
+  https://wiki.sei.cmu.edu/confluence/display/c/SEI+CERT+C+Coding+Standard
 
 ## Definitions
 
