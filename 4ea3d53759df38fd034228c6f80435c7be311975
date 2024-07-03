@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "04105ac7_f5fc973f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:21:04Z",
+      "side": 1,
+      "message": "Hi Ankita, \nI had removed tested section from earlier commits because @arj did not feel it necessary for libpldm when unit tests have been added. I have however added it here. Will wait for his feedback and add in other commits",
+      "parentUuid": "8e9a527f_6377134e",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "15801125_8bd8fa3b",
