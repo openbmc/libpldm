@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90b20b1e_0c7263dc",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T01:27:39Z",
+      "side": 1,
+      "message": "Thanks for updating the changelog :) However, the intent is that it\u0027s to track changes to the public API/ABI. This way it\u0027s easy for users of the library to understand how they\u0027re impacted by upgrading. The `msgbuf` APIs are purely internal to the library implementation, users have no visibility of them, hence I\u0027d prefer to not add `msgbuf`-related changes here.",
+      "revId": "14a0a2c8673e57bd21a4154d2b834b043348e840",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dee0b3ce_e1746288",
         "filename": "include/libpldm/utils.h",
         "patchSetId": 5
