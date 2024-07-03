@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d8e4a7c_9bdd330d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:09:03Z",
+      "side": 1,
+      "message": "Hi Thu, I have a few minor concerns inline. Hopefully we\u0027ll converge a bit once they\u0027re addressed.",
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ece357_a188bbd9",
+        "filename": "include/libpldm/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:09:03Z",
+      "side": 1,
+      "message": "I don\u0027t think we need this now?",
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d693141_fd8ca5ed",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:09:03Z",
+      "side": 1,
+      "message": "This one is unnecessary 😊",
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf11bd0_57addacf",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:09:03Z",
+      "side": 1,
+      "message": "The `assert()` should go below the variable declarations.",
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc6d2910_bbbb9478",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:09:03Z",
+      "side": 1,
+      "message": "I have a mild preference for naming these `len` and `end` respectively.",
+      "range": {
+        "startLine": 1059,
+        "startChar": 1,
+        "endLine": 1060,
+        "endChar": 22
+      },
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3e56d61_f08258e3",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:09:03Z",
+      "side": 1,
+      "message": "I don\u0027t think we need this, see below.",
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49ef1d74_180a617a",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:09:03Z",
+      "side": 1,
+      "message": "We can use `u\"\"` here instead of the `terminator` variable. The `u` prefix designates that the string literal should be encoded as a `char16_t`. The empty string always generates a `NUL` terminator, so combined this generates a pointer to the value we\u0027re looking for 😊 (a 16-bit 0).",
+      "range": {
+        "startLine": 1067,
+        "startChar": 54,
+        "endLine": 1067,
+        "endChar": 64
+      },
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfd8ecd5_161da572",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:09:03Z",
+      "side": 1,
+      "message": "This can be `sizeof(char16_t)` as with the suggestion above we no-longer need a named variable.",
+      "range": {
+        "startLine": 1068,
+        "startChar": 4,
+        "endLine": 1068,
+        "endChar": 22
+      },
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08e06bd7_deb2d3ce",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:09:03Z",
+      "side": 1,
+      "message": "The condition as you\u0027ve written it is is handled down on line 1084 below.\n\nHowever, we can re-purpose this by using the condition `ctx-\u003eremaining \u003c INTMAX_MIN + (intmax_t)str_size`, with the error being `EOVERFLOW` below. But we also need to ensure that `str_size \u003c INTMAX_MAX` before doing the cast.",
+      "range": {
+        "startLine": 1078,
+        "startChar": 5,
+        "endLine": 1078,
+        "endChar": 44
+      },
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9728ead_db88c875",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:09:03Z",
+      "side": 1,
+      "message": "This cast should be unnecessary? It may also cause some grief as even _creating_ an unaligned pointer yields undefined behaviour.",
+      "range": {
+        "startLine": 1088,
+        "startChar": 11,
+        "endLine": 1088,
+        "endChar": 23
+      },
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
