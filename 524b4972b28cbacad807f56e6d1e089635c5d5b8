@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e51bd78_bb94830d",
+        "filename": "include/libpldm/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-03T07:26:41Z",
+      "side": 1,
+      "message": "Actually we are using this function https://gerrit.openbmc.org/c/openbmc/libpldm/+/72547/6/tests/msgbuf.cpp#910 to compare the parsed char16_t string with the expected string.\nWe can use `required` to replace `sizeof(char16_t) * (char16len(retBuff) + 1)`, But I think in the real case we don\u0027t have `required`",
+      "parentUuid": "97ece357_a188bbd9",
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d693141_fd8ca5ed",
         "filename": "src/msgbuf.h",
         "patchSetId": 6
