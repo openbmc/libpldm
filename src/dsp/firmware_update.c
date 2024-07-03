@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "dsp/base.h"
 #include "msgbuf.h"
 #include <libpldm/firmware_update.h>
 #include <libpldm/utils.h>
@@ -1033,6 +1034,200 @@ int decode_query_downstream_identifiers_resp(
 	downstream_devices->length = resp_data->downstream_devices_length;
 
 	return pldm_msgbuf_destroy(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int encode_get_downstream_firmware_params_req(
+	uint8_t instance_id, uint32_t data_transfer_handle,
+	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
+	size_t payload_length)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (msg == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES,
+		msg->payload, payload_length);
+	if (rc < 0) {
+		return rc;
+	}
+
+	if (!is_transfer_operation_flag_valid(transfer_operation_flag)) {
+		return -EBADMSG;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_REQUEST;
+	header.pldm_type = PLDM_FWUP;
+	header.command = PLDM_QUERY_DOWNSTREAM_FIRMWARE_PARAMETERS;
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc < 0) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, data_transfer_handle);
+	// Data correctness has been verified, cast it to 1-byte data directly.
+	pldm_msgbuf_insert(buf, (uint8_t)transfer_operation_flag);
+
+	return pldm_msgbuf_destroy(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_downstream_firmware_params_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_get_downstream_firmware_params_resp *resp_data,
+	struct variable_field *downstream_device_param_table)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (msg == NULL || resp_data == NULL ||
+	    downstream_device_param_table == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN,
+				    msg->payload, payload_length);
+	if (rc < 0) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, resp_data->completion_code);
+	if (rc < 0) {
+		return rc;
+	}
+	if (PLDM_SUCCESS != resp_data->completion_code) {
+		return 0;
+	}
+
+	if (payload_length < PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN) {
+		return -EBADMSG;
+	}
+
+	pldm_msgbuf_extract(buf, resp_data->next_data_transfer_handle);
+	pldm_msgbuf_extract(buf, resp_data->transfer_flag);
+	pldm_msgbuf_extract(buf,
+			    resp_data->fdp_capabilities_during_update.value);
+	pldm_msgbuf_extract(buf, resp_data->downstream_device_count);
+
+	return pldm_msgbuf_span_remaining(
+		buf, (void **)&downstream_device_param_table->ptr,
+		&downstream_device_param_table->length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_downstream_device_parameter_table_entry(
+	struct variable_field *data,
+	struct pldm_downstream_device_parameter_entry *entry,
+	struct variable_field *versions)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	void *cursor = NULL;
+	size_t remaining;
+	int rc;
+
+	if (data == NULL || entry == NULL || versions == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_DOWNSTREAM_DEVICE_PARAMETER_ENTRY_MIN_LEN, data->ptr,
+		data->length);
+	if (rc < 0) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, entry->downstream_device_index);
+	pldm_msgbuf_extract(buf, entry->active_comp_comparison_stamp);
+	pldm_msgbuf_extract(buf, entry->active_comp_ver_str_type);
+	rc = pldm_msgbuf_extract(buf, entry->active_comp_ver_str_len);
+	if (rc < 0) {
+		return rc;
+	}
+	pldm_msgbuf_extract_array(buf, entry->active_comp_release_date,
+				  PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN);
+	// Fill the last byte with NULL character
+	entry->active_comp_release_date[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN] =
+		'\0';
+
+	pldm_msgbuf_extract(buf, entry->pending_comp_comparison_stamp);
+	pldm_msgbuf_extract(buf, entry->pending_comp_ver_str_type);
+	rc = pldm_msgbuf_extract(buf, entry->pending_comp_ver_str_len);
+	if (rc < 0) {
+		return rc;
+	}
+	pldm_msgbuf_extract_array(buf, entry->pending_comp_release_date,
+				  PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN);
+	// Fill the last byte with NULL character
+	entry->pending_comp_release_date[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN] =
+		'\0';
+
+	pldm_msgbuf_extract(buf, entry->comp_activation_methods.value);
+	pldm_msgbuf_extract(buf, entry->capabilities_during_update.value);
+	const size_t versions_len = entry->active_comp_ver_str_len +
+				    entry->pending_comp_ver_str_len;
+	rc = pldm_msgbuf_span_required(buf, versions_len,
+				       (void **)&versions->ptr);
+	if (rc < 0) {
+		return rc;
+	}
+	versions->length = versions_len;
+
+	rc = pldm_msgbuf_span_remaining(buf, &cursor, &remaining);
+	if (rc < 0) {
+		return rc;
+	}
+
+	data->ptr = cursor;
+	data->length = remaining;
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_downstream_device_parameter_table_entry_versions(
+	const struct variable_field *versions,
+	struct pldm_downstream_device_parameter_entry *entry, char *active,
+	char *pending)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (versions == NULL || versions->ptr == NULL || !versions->length ||
+	    entry == NULL || active == NULL || pending == NULL) {
+		return -EINVAL;
+	}
+
+	/* This API should be called after decode_downstream_device_parameter_table_entry
+	 * has successfully decoded the entry, assume the entry data is valid here.
+	 */
+	const size_t versions_len = entry->active_comp_ver_str_len +
+				    entry->pending_comp_ver_str_len;
+	rc = pldm_msgbuf_init_errno(buf, versions_len, versions->ptr,
+				    versions->length);
+	if (rc < 0) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract_array(buf, active, entry->active_comp_ver_str_len);
+	active[entry->active_comp_ver_str_len] = '\0';
+	pldm_msgbuf_extract_array(buf, pending,
+				  entry->pending_comp_ver_str_len);
+	pending[entry->pending_comp_ver_str_len] = '\0';
+
+	entry->active_comp_ver_str = active;
+	entry->pending_comp_ver_str = pending;
+
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
