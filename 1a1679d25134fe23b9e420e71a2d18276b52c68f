@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8945507_b946ad36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T01:27:25Z",
+      "side": 1,
+      "message": "Hi Thu, I\u0027ve suggested some improvements that should help with the clarity of the implementation.",
+      "revId": "1a1679d25134fe23b9e420e71a2d18276b52c68f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5e10824_1e6daa55",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T01:27:25Z",
+      "side": 1,
+      "message": "Thanks for updating the changelog :) However, the intent is that it\u0027s to track changes to the public API/ABI. This way it\u0027s easy for users of the library to understand how they\u0027re impacted by upgrading. The `msgbuf` APIs are purely internal to the library implementation, users have no visibility of them, hence I\u0027d prefer to not add `msgbuf`-related changes here.",
+      "revId": "1a1679d25134fe23b9e420e71a2d18276b52c68f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8059cd94_50bbba26",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T01:27:25Z",
+      "side": 1,
+      "message": "[strnlen(3)](https://www.man7.org/linux/man-pages/man3/strnlen.3.html)?",
+      "range": {
+        "startLine": 1037,
+        "startChar": 1,
+        "endLine": 1042,
+        "endChar": 27
+      },
+      "revId": "1a1679d25134fe23b9e420e71a2d18276b52c68f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e6a2dcb_a371aa39",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T01:27:25Z",
+      "side": 1,
+      "message": "We already discovered the length above, so I don\u0027t think we need to use `strlen()` again here.",
+      "range": {
+        "startLine": 1054,
+        "startChar": 16,
+        "endLine": 1054,
+        "endChar": 47
+      },
+      "revId": "1a1679d25134fe23b9e420e71a2d18276b52c68f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
