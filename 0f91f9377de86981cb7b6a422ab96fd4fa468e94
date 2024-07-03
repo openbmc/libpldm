@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1076b6c_42d5a093",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:26:13Z",
+      "side": 1,
+      "message": "Hi Thu, I have a few concerns. Probably the main one is not adding more calls to `pldm_msgbuf_init_cc()` 😄",
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4153f77_845d5932",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:26:13Z",
+      "side": 1,
+      "message": "Ah, do you mind putting this after the variable declaration below?",
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baea51db_098ba368",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:26:13Z",
+      "side": 1,
+      "message": "I think `EOVERFLOW` is probably better here.",
+      "range": {
+        "startLine": 1037,
+        "startChar": 33,
+        "endLine": 1037,
+        "endChar": 39
+      },
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc298781_961eee03",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:26:13Z",
+      "side": 1,
+      "message": "If we do `length++;` here we can avoid doing the same addition twice below.",
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d6831f9_0750e526",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:26:13Z",
+      "side": 1,
+      "message": "The cast shouldn\u0027t be necessary?",
+      "range": {
+        "startLine": 1046,
+        "startChar": 11,
+        "endLine": 1046,
+        "endChar": 19
+      },
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f44ba33_123f7261",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:26:13Z",
+      "side": 1,
+      "message": "Please let\u0027s not add more use of `pldm_msgbuf_init_cc()` in the codebase.\n\nPlease audit the rest of the tests for this concern.",
+      "range": {
+        "startLine": 838,
+        "startChar": 30,
+        "endLine": 838,
+        "endChar": 33
+      },
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0510079c_80967a15",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-03T07:26:13Z",
+      "side": 1,
+      "message": "Why do we need to insert the data from `src` into `buf`? Why not use `src` directly below on line 845?",
+      "range": {
+        "startLine": 839,
+        "startChar": 1,
+        "endLine": 840,
+        "endChar": 28
+      },
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
