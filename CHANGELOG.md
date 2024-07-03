@@ -25,6 +25,7 @@ Change categories:
 4. platform: Define macros for the responded transferflags
 5. pdr: Add pldm_pdr_get_terminus_handle() API
 6. pdr: Add related decode_entity_auxiliary_names_pdr() APIs
+7. fw_update: Add encode req & decode resp for get_downstream_fw_params
 
 ### Deprecated
 
