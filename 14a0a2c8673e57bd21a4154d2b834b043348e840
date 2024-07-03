@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b15b67_2cfc292b",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-03T04:41:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90b20b1e_0c7263dc",
+      "revId": "14a0a2c8673e57bd21a4154d2b834b043348e840",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dee0b3ce_e1746288",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-07-03T01:22:50Z",
       "side": 1,
       "message": "Use [memmem(3)](https://www.man7.org/linux/man-pages/man3/memmem.3.html)?",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 116,
+        "endChar": 2
+      },
+      "revId": "14a0a2c8673e57bd21a4154d2b834b043348e840",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1772117_acd14a34",
+        "filename": "include/libpldm/utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-03T04:41:04Z",
+      "side": 1,
+      "message": "memmem() required the max size of str pointer. But we are finding that value. So we can\u0027t use memmem().",
+      "parentUuid": "dee0b3ce_e1746288",
       "range": {
         "startLine": 113,
         "startChar": 1,
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e99f47e5_34da594a",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1079,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-03T04:41:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "039fc8d7_3119ab0f",
+      "range": {
+        "startLine": 1075,
+        "startChar": 1,
+        "endLine": 1079,
+        "endChar": 27
+      },
+      "revId": "14a0a2c8673e57bd21a4154d2b834b043348e840",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57ce3f2e_efe6cf25",
@@ -104,6 +170,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b98a012_53a865ff",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-03T04:41:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57ce3f2e_efe6cf25",
+      "range": {
+        "startLine": 1084,
+        "startChar": 1,
+        "endLine": 1084,
+        "endChar": 45
+      },
+      "revId": "14a0a2c8673e57bd21a4154d2b834b043348e840",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4539047_525b8b9d",
@@ -117,6 +207,30 @@
       "writtenOn": "2024-07-03T01:22:50Z",
       "side": 1,
       "message": "Please no. The `msgbuf` `span` APIs should never change data in the buffer, they should only provide a pointer to an opaque byte range inside the buffer. They are a means to advance the `msgbuf` cursor over something we\u0027ll decode later.\n\nAny decoding should be left to a different API: UTF16-BE is its own thing, please leave the endianness handling to the string decoding library.",
+      "range": {
+        "startLine": 1098,
+        "startChar": 1,
+        "endLine": 1103,
+        "endChar": 6
+      },
+      "revId": "14a0a2c8673e57bd21a4154d2b834b043348e840",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f8b7543_7c6f3664",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-03T04:41:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4539047_525b8b9d",
       "range": {
         "startLine": 1098,
         "startChar": 1,
