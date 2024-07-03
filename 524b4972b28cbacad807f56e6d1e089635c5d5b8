@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1f09d9a_f3267ea8",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-03T07:29:08Z",
+      "side": 1,
+      "message": "Without that line I got this error\n```\nUse -header-filter\u003d.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.\n95084 warnings generated.\n../src/msgbuf.h:1131:8: error: declaration uses identifier \u0027pldm__msgbuf_copy\u0027, which is a reserved identifier; cannot be fixed because \u0027pldm_msgbuf_copy\u0027 would conflict with a macro definition [bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp,-warnings-as-errors]\n 1131 | pldm__msgbuf_copy(struct pldm_msgbuf *dst, struct pldm_msgbuf *src, size_t size,\n+               memmem(ptr, ctx-\u003eremaining, terminator, sizeof(terminator));\n+       if (!ret) {\n+               return pldm_msgbuf_status(ctx, EINVAL);\n+       }\n+       terminator_ptr +\u003d sizeof(char16_t);\nSuppressed 95048 warnings (95048 in non-user code).\nUse -header-filter\u003d.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.\n97265 warnings generated.\n```",
+      "parentUuid": "2d693141_fd8ca5ed",
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbf11bd0_57addacf",
         "filename": "src/msgbuf.h",
         "patchSetId": 6
