@@ -51,7 +51,43 @@ struct variable_field;
 /** @brief Minimum length of device descriptor, 2 bytes for descriptor type,
  *         2 bytes for descriptor length and at least 1 byte of descriptor data
  */
-#define PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN    5
+#define PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN 5
+
+/** @brief Length of GetDownstreamFirmwareParameters request defined in DSP0267_1.1.0
+ *
+ * 4 bytes for Data Transfer Handle
+ * 1 byte for Transfer Operation Flag
+ */
+#define PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES 5
+
+/** @brief Minimum length of GetDownstreamFirmwareParameters response from
+ * DSP0267_1.1.0 if the completion code is success.
+ *
+ * 1 byte for completion code
+ * 4 bytes for next data transfer handle
+ * 1 byte for transfer flag
+ * 4 bytes for FDP capabilities during update
+ * 2 bytes for downstream device count
+ */
+#define PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN 12
+
+/** @brief Minimum length of DownstreamDeviceParameterTable entry from
+ * DSP0267_1.1.0 table 21 - DownstreamDeviceParameterTable
+ *
+ * 2 bytes for Downstream Device Index
+ * 4 bytes for Active Component Comparison Stamp
+ * 1 byte for Active Component Version String Type
+ * 1 byte for Active Component Version String Length
+ * 8 bytes for Active Component Release Date
+ * 4 bytes for Pending Component Comparison Stamp
+ * 1 byte for Pending Component Version String Type
+ * 1 byte for Pending Component Version String Length
+ * 8 bytes for Pending Component Release Date
+ * 2 bytes for Component Activation Methods
+ * 4 bytes for Capabilities During Update
+ */
+#define PLDM_DOWNSTREAM_DEVICE_PARAMETER_ENTRY_MIN_LEN 36
+
 #define PLDM_GET_FIRMWARE_PARAMETERS_REQ_BYTES 0
 #define PLDM_FWUP_BASELINE_TRANSFER_SIZE       32
 #define PLDM_FWUP_MIN_OUTSTANDING_REQ	       1
@@ -61,6 +97,14 @@ struct variable_field;
 #define PLDM_CANCEL_UPDATE_COMPONENT_REQ_BYTES 0
 #define PLDM_CANCEL_UPDATE_REQ_BYTES	       0
 
+/** @brief PLDM component release data size in bytes defined in DSP0267_1.1.0
+ * Table 14 - ComponentParameterTable and Table 21 - ComponentParameterTable
+ *
+ * The size can be used in `ASCII[8] - ActiveComponentReleaseDate` and
+ * `ASCII[8] - PendingComponentReleaseDate` fields in the tables above.
+ */
+#define PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN 8
+
 /** @brief PLDM Firmware update commands
  */
 enum pldm_firmware_update_commands {
@@ -68,6 +112,7 @@ enum pldm_firmware_update_commands {
 	PLDM_GET_FIRMWARE_PARAMETERS = 0x02,
 	PLDM_QUERY_DOWNSTREAM_DEVICES = 0x03,
 	PLDM_QUERY_DOWNSTREAM_IDENTIFIERS = 0x04,
+	PLDM_QUERY_DOWNSTREAM_FIRMWARE_PARAMETERS = 0x05,
 	PLDM_REQUEST_UPDATE = 0x10,
 	PLDM_PASS_COMPONENT_TABLE = 0x13,
 	PLDM_UPDATE_COMPONENT = 0x14,
@@ -524,6 +569,85 @@ struct pldm_downstream_device {
 	uint8_t downstream_descriptor_count;
 };
 
+/** @struct pldm_query_downstream_firmware_param_req
+ *
+ *  Structure representing QueryDownstreamFirmwareParameters request
+ */
+struct pldm_get_downstream_firmware_params_req {
+	uint32_t data_transfer_handle;
+	uint8_t transfer_operation_flag;
+};
+
+/** @struct pldm_query_downstream_firmware_param_resp
+ *
+ *  Structure representing the fixed part of QueryDownstreamFirmwareParameters
+ *  response in Table 19 - GetDownstreamFirmwareParameters command format, and
+ *  Table 20 - QueryDownstreamFirmwareParameters response definition in
+ *  DSP0267_1.1.0.
+ *
+ *  Squash the two tables into one since the definition of Table 20 is `Portion
+ *  of GetDownstreamFirmwareParameters response`
+ */
+struct pldm_get_downstream_firmware_params_resp {
+	uint8_t completion_code;
+	uint32_t next_data_transfer_handle;
+	uint8_t transfer_flag;
+	bitfield32_t fdp_capabilities_during_update;
+	uint16_t downstream_device_count;
+};
+
+/** @struct pldm_downstream_device_parameter_entry
+ *
+ *  Structure representing downstream device parameter table entry defined in
+ *  Table 21 - DownstreamDeviceParameterTable in DSP0267_1.1.0
+ *
+ *  Clients should not allocate memory for this struct to decode the response,
+ *  use `pldm_downstream_device_parameter_entry_versions` instead to make sure
+ *  that the active and pending component version strings are copied from the
+ *  message buffer.
+ */
+struct pldm_downstream_device_parameter_entry {
+	uint16_t downstream_device_index;
+	uint32_t active_comp_comparison_stamp;
+	uint8_t active_comp_ver_str_type;
+	uint8_t active_comp_ver_str_len;
+	/* Append 1 bytes for null termination so that it can be used as a
+	 * Null-terminated string.
+	 */
+	char active_comp_release_date[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN + 1];
+	uint32_t pending_comp_comparison_stamp;
+	uint8_t pending_comp_ver_str_type;
+	uint8_t pending_comp_ver_str_len;
+	/* Append 1 bytes for null termination so that it can be used as a
+	 * Null-terminated string.
+	 */
+	char pending_comp_release_date[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN + 1];
+	bitfield16_t comp_activation_methods;
+	bitfield32_t capabilities_during_update;
+	const char *active_comp_ver_str;
+	const char *pending_comp_ver_str;
+};
+
+/** @struct pldm_downstream_device_parameter_entry_versions
+ *
+ *  Structure representing downstream device parameter table entry with
+ *  copies of active and pending component version strings to avoid the
+ *  message buffer is subsequently freed.
+ *
+ *  Clients should allocate memory for this struct then decode the response
+ *  instead of using `pldm_downstream_device_parameter_entry`.
+ */
+struct pldm_downstream_device_parameter_entry_versions {
+	struct pldm_downstream_device_parameter_entry entry;
+	/* The "Length of ComponentVersionString" field is 1 byte, so
+	 * "ComponentVersionString" can be at most 255 characters, allocate
+	 * memory for it and append 1 bytes for null termination so that it
+	 * can be used as a Null-terminated string.
+	 */
+	char active_comp_ver_str[UINT8_MAX + 1];
+	char pending_comp_ver_str[UINT8_MAX + 1];
+};
+
 /** @struct pldm_request_update_req
  *
  *  Structure representing fixed part of Request Update request
@@ -890,6 +1014,97 @@ int decode_query_downstream_identifiers_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_query_downstream_identifiers_resp *resp_data,
 	struct variable_field *downstream_devices);
+
+/**
+ * @brief Encodes request message for Get Downstream Firmware Parameters.
+ *
+ * @param[in] instance_id - The instance ID of the PLDM entity.
+ * @param[in] data_transfer_handle - The handle for the data transfer.
+ * @param[in] transfer_operation_flag - The flag indicating the transfer operation.
+ * @param[in,out] msg - A pointer to the PLDM message structure to store the encoded message.
+ * @param[in] payload_length - The length of the payload.
+ *
+ * @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *         are not allocated, -EOVERFLOW if the payload length is not enough
+ *         to encode the message, -EBADMSG if the message is not valid.
+ *
+ * @note Caller is responsible for memory alloc and dealloc of param
+ *        'msg.payload'
+ */
+int encode_get_downstream_firmware_params_req(
+	uint8_t instance_id, uint32_t data_transfer_handle,
+	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
+	size_t payload_length);
+
+/**
+ * @brief Decode response message for Get Downstream Firmware Parameters
+ *
+ * @param[in] msg - The PLDM message to decode
+ * @param[in] payload_length - The length of the message payload
+ * @param[out] resp_data - Pointer to the structure to store the decoded response data
+ * @param[out] downstream_device_param_table - Pointer to the variable field structure
+ *                                           to store the decoded downstream device
+ *                                           parameter table
+ * @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *         are not allocated, -EOVERFLOW if the payload length is not enough
+ *         to decode the message, -EBADMSG if the message is not valid.
+ *
+ * @note Caller is responsible for memory alloc and dealloc of param
+ *        'resp_data' and 'downstream_device_param_table'
+ */
+int decode_get_downstream_firmware_params_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_get_downstream_firmware_params_resp *resp_data,
+	struct variable_field *downstream_device_param_table);
+
+/**
+ * @brief Decode the next downstream device parameter table entry
+ *
+ * @param[in,out] data - A variable field covering the table entries in the
+ *                       response message data. @p data is updated to point to
+ *                       the remaining entries once the current entry has been
+ *                       decoded.
+
+ * @param[out] entry - The struct object into which the current table entry will
+ *                     be decoded
+
+ * @param[out] versions - A variable field covering the active and
+ *                        pending component version strings in the
+ *                        response message data. The component version
+ *                        strings can be decoded into @p entry using
+ *                        decode_downstream_device_parameter_table_entry_versions()
+ *
+ * @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *         are not allocated, -EOVERFLOW if the payload length is not enough
+ *         to decode the entry.
+ *
+ * @note Caller is responsible for memory alloc and dealloc of param
+ * 	  'entry', 'active_comp_ver_str' and 'pending_comp_ver_str'
+ */
+int decode_downstream_device_parameter_table_entry(
+	struct variable_field *data,
+	struct pldm_downstream_device_parameter_entry *entry,
+	struct variable_field *versions);
+
+/**
+ * @brief Decode the downstream device parameter table entry versions
+ *
+ * @param[in] versions - pointer to version strings raw data
+ * @param[in,out] entry - pointer to the decoded downstream device parameter table entry
+ * @param[out] active - pointer to active component version string, the object pointed-to
+ *                      must be at least as large as `entry->active_comp_ver_str_len + 1`
+ * @param[out] pending - pointer to pending component version string, the object pointed-to
+ *                      must be at least as large as `entry->pending_comp_ver_str_len + 1`
+ *
+ * @note Caller is responsible for memory alloc and dealloc of all the params,
+ *    and the param `entry` should be the instance which has successfully decoded
+ *    by `decode_downstream_device_parameter_table_entry()`.
+ *
+ */
+int decode_downstream_device_parameter_table_entry_versions(
+	const struct variable_field *versions,
+	struct pldm_downstream_device_parameter_entry *entry, char *active,
+	char *pending);
 
 /** @brief Create PLDM request message for RequestUpdate
  *
