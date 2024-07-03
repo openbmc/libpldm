@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e9a527f_6377134e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "this has been unit tested and functionality testing being done on systems as well",
+      "parentUuid": "54243ff2_f0db117e",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "15801125_8bd8fa3b",
@@ -58,6 +76,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f60ba808_d0ff4dfa",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87f47252_6e05775d",
+      "range": {
+        "startLine": 637,
+        "startChar": 22,
+        "endLine": 637,
+        "endChar": 74
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9086b4b_516fd951",
@@ -71,6 +113,30 @@
       "writtenOn": "2024-06-27T05:00:00Z",
       "side": 1,
       "message": "Why did we chop out all the vowels of \"handle\"?",
+      "range": {
+        "startLine": 1667,
+        "startChar": 47,
+        "endLine": 1667,
+        "endChar": 51
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2dc3217_3159124b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1667,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9086b4b_516fd951",
       "range": {
         "startLine": 1667,
         "startChar": 47,
@@ -98,6 +164,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fd1c688_2948f2a3",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2a02f29_7d86a810",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5348b489_fa22a8fa",
@@ -111,6 +195,30 @@
       "writtenOn": "2024-06-27T05:00:00Z",
       "side": 1,
       "message": "Please declare the variables before any code to keep the formatting idiomatic.",
+      "range": {
+        "startLine": 1674,
+        "startChar": 1,
+        "endLine": 1683,
+        "endChar": 33
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d6b11cd_ba1d1eba",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1683,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5348b489_fa22a8fa",
       "range": {
         "startLine": 1674,
         "startChar": 1,
@@ -144,6 +252,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e6de5cc_f7a6c24d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1694,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "906c0e81_6a179a7a",
+      "range": {
+        "startLine": 1693,
+        "startChar": 2,
+        "endLine": 1694,
+        "endChar": 29
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4aa81f4_d029ca86",
@@ -157,6 +289,30 @@
       "writtenOn": "2024-06-27T05:00:00Z",
       "side": 1,
       "message": "Please do not do any pointer arithmetic when initialising the msgbuf object. You can use `pldm_msgbuf_span_required()` to skip over any unwanted regions for now.",
+      "range": {
+        "startLine": 1699,
+        "startChar": 4,
+        "endLine": 1700,
+        "endChar": 41
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f339f94d_00dd6fa9",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1700,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4aa81f4_d029ca86",
       "range": {
         "startLine": 1699,
         "startChar": 4,
@@ -190,6 +346,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "983f9505_fbc1e764",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd36cfb8_21cc4cc0",
+      "range": {
+        "startLine": 1709,
+        "startChar": 1,
+        "endLine": 1717,
+        "endChar": 38
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f13f8cf_bfa2d013",
@@ -203,6 +383,24 @@
       "writtenOn": "2024-06-27T05:00:00Z",
       "side": 1,
       "message": "`LIBPLDM_ABI_TESTING`.",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac87039a_6c1dd042",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f13f8cf_bfa2d013",
       "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -224,6 +422,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f10cce46_cb92bff0",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1744,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99d1746b_7568ddbd",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceddd67a_4090e387",
@@ -237,6 +453,30 @@
       "writtenOn": "2024-06-27T05:00:00Z",
       "side": 1,
       "message": "Please declare the variables before any code.",
+      "range": {
+        "startLine": 1747,
+        "startChar": 1,
+        "endLine": 1758,
+        "endChar": 33
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5996f7ac_7de425e9",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1758,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceddd67a_4090e387",
       "range": {
         "startLine": 1747,
         "startChar": 1,
@@ -270,6 +510,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b56c8edb_25a01c8a",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1775,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7effa7e6_83ba3a3c",
+      "range": {
+        "startLine": 1775,
+        "startChar": 13,
+        "endLine": 1775,
+        "endChar": 19
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32c766ca_b0bc65af",
@@ -283,6 +547,30 @@
       "writtenOn": "2024-06-27T05:00:00Z",
       "side": 1,
       "message": "We decrement it below...",
+      "range": {
+        "startLine": 1804,
+        "startChar": 46,
+        "endLine": 1804,
+        "endChar": 55
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2ef1c5d_4b4a240a",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1804,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32c766ca_b0bc65af",
       "range": {
         "startLine": 1804,
         "startChar": 46,
@@ -316,6 +604,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01bd666c_e4741d5c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0acd528f_3f447f04",
+      "range": {
+        "startLine": 1821,
+        "startChar": 56,
+        "endLine": 1821,
+        "endChar": 65
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "972f037f_d085b67d",
@@ -329,6 +641,30 @@
       "writtenOn": "2024-06-27T05:00:00Z",
       "side": 1,
       "message": "These all must be `pldm_msgbuf_extract()` for the reasons outlined in the static function above.",
+      "range": {
+        "startLine": 1840,
+        "startChar": 1,
+        "endLine": 1845,
+        "endChar": 40
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b061d1c2_1a4bde3f",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1845,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "972f037f_d085b67d",
       "range": {
         "startLine": 1840,
         "startChar": 1,
@@ -362,6 +698,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80c275b8_4f3cae9a",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1867,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afb56eeb_db76ce89",
+      "range": {
+        "startLine": 1855,
+        "startChar": 1,
+        "endLine": 1867,
+        "endChar": 2
+      },
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76f2798d_ce38ac67",
@@ -379,6 +739,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85d5d46b_2bec8a34",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1871,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76f2798d_ce38ac67",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cb7a82a_67cda4c7",
@@ -392,6 +770,24 @@
       "writtenOn": "2024-06-27T05:00:00Z",
       "side": 1,
       "message": "Please don\u0027t combine all the tests under one ifdef - they should each have their own.",
+      "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79872aaa_3f33ed01",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2108,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-03T11:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cb7a82a_67cda4c7",
       "revId": "4ea3d53759df38fd034228c6f80435c7be311975",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
