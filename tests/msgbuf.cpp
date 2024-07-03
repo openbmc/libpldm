@@ -461,8 +461,9 @@ TEST(msgbuf, extract_array_char_buf0_req0)
 {
     struct pldm_msgbuf _ctx;
     struct pldm_msgbuf* ctx = &_ctx;
-    char buf[1] = {};
-    char arr[1];
+    // make sure that the two arrays ​​​​are different
+    char buf[1] = {'\0'};
+    char arr[1] = {'1'};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
     EXPECT_EQ(pldm_msgbuf_extract_array_char(ctx, arr, 0), 0);
@@ -473,12 +474,13 @@ TEST(msgbuf, extract_array_char_buf1_req1)
 {
     struct pldm_msgbuf _ctx;
     struct pldm_msgbuf* ctx = &_ctx;
-    char buf[1] = {};
-    char arr[1];
+    // make sure that the two arrays ​​​​are different
+    char buf[1] = {'\0'};
+    char arr[1] = {'1'};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_array_char(ctx, arr, sizeof(arr)), 0);
-    EXPECT_EQ(arr[0], 0);
+    EXPECT_EQ(arr[0], '\0');
     ASSERT_EQ(pldm_msgbuf_destroy(ctx), 0);
 }
 
@@ -486,8 +488,9 @@ TEST(msgbuf, extract_array_char_buf1_req2)
 {
     struct pldm_msgbuf _ctx;
     struct pldm_msgbuf* ctx = &_ctx;
-    char buf[1] = {};
-    char arr[2];
+    // make sure that the two arrays ​​​​are different
+    char buf[1] = {'\0'};
+    char arr[2] = {'1', '2'};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
     EXPECT_NE(pldm_msgbuf_extract_array_char(ctx, arr, sizeof(arr)), 0);
@@ -498,8 +501,9 @@ TEST(msgbuf, extract_under_array_char)
 {
     struct pldm_msgbuf _ctx;
     struct pldm_msgbuf* ctx = &_ctx;
-    char buf[1] = {};
-    char arr[1];
+    // make sure that the two arrays ​​​​are different
+    char buf[1] = {'\0'};
+    char arr[1] = {'1'};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
     ctx->remaining = INTMAX_MIN;
