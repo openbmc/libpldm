@@ -1,0 +1,226 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fa00110_56445768",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "Hi Thu, thanks for iterating on this. I have some similar suggestions to the previous patch.",
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b8b1381_79b8c595",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "Ah, I think I missed commenting last time that we no-longer need this?",
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d03221_02e94517",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "On the `pldm_msgbuf_span_string_ascii()` patch I suggested adding a `size_t *length` argument - can you please do the same here?",
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86804a6e_c605502a",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "... and with the suggestion of the `length` argument, can we rename `str_size` to `measured` for consistency with the `pldm_msgbuf_span_string_ascii()` patch?",
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce177f5c_26409ef6",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "Use `u\"\"` and remove `term` from line 1061 above?",
+      "range": {
+        "startLine": 1069,
+        "startChar": 43,
+        "endLine": 1069,
+        "endChar": 47
+      },
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dfb0796_c9b9059f",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1075,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "The expression suggests `str_size` should be of type `ptrdiff_t`.",
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0797c505_6c02b99c",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "Can you drop the extra parentheses here?\n\n```\nif (str_size % 2) {\n```",
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e1e09ce_636067ee",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "... and regarding the `length` argument, add the following:\n\n```\nif (length) {\n    *length \u003d measured;\n}\n```",
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c6fc95_9f1b4e21",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "No need for this now.",
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bd211c2_fb6a3a67",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "Please use `pldm_msgbuf_init_errno()` throughout, I don\u0027t want to see more calls to `pldm_msgbuf_init_cc()` added to the codebase.",
+      "range": {
+        "startLine": 908,
+        "startChar": 31,
+        "endLine": 908,
+        "endChar": 33
+      },
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20a70719_6c8170e5",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "`retBuf` is declared `char16_t *`, which means you must obey alignment requirements. Given that we end up pointing into an arbitrary buffer, that\u0027s likely problematic. You\u0027ll need to change it to `char *`. Please address that concern throughout.",
+      "range": {
+        "startLine": 913,
+        "startChar": 56,
+        "endLine": 913,
+        "endChar": 72
+      },
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec7a598e_66fefb2d",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:23:54Z",
+      "side": 1,
+      "message": "This test was grouped with the other `span_required` tests; can you please fix the ordering so we don\u0027t fragment them?",
+      "revId": "e0844f549bd2ac417135bc32c7f6fb130e1e3aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
