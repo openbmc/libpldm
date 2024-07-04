@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8d7e722_71f43287",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:02:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4153f77_845d5932",
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baea51db_098ba368",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-07-03T07:26:13Z",
       "side": 1,
       "message": "I think `EOVERFLOW` is probably better here.",
+      "range": {
+        "startLine": 1037,
+        "startChar": 33,
+        "endLine": 1037,
+        "endChar": 39
+      },
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "023142d9_a203e34d",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:02:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baea51db_098ba368",
       "range": {
         "startLine": 1037,
         "startChar": 33,
@@ -75,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7657bbc0_8bfa8a67",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:02:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc298781_961eee03",
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d6831f9_0750e526",
@@ -88,6 +148,30 @@
       "writtenOn": "2024-07-03T07:26:13Z",
       "side": 1,
       "message": "The cast shouldn\u0027t be necessary?",
+      "range": {
+        "startLine": 1046,
+        "startChar": 11,
+        "endLine": 1046,
+        "endChar": 19
+      },
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a0967ba_5c40f605",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:02:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d6831f9_0750e526",
       "range": {
         "startLine": 1046,
         "startChar": 11,
