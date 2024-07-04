@@ -312,6 +312,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5e6dece_8764e592",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T05:09:46Z",
+      "side": 1,
+      "message": "Uggghh, of course it does. Okay, no worries.",
+      "parentUuid": "56cc229e_9260aca5",
+      "range": {
+        "startLine": 1067,
+        "startChar": 54,
+        "endLine": 1067,
+        "endChar": 64
+      },
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfd8ecd5_161da572",
