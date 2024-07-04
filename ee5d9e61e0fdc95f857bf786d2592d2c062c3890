@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f14519_b222b03e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:53:30Z",
+      "side": 1,
+      "message": "Hi Varsha, I have a few queries and concerns inline.",
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d7c064a_22140b7f",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:53:30Z",
+      "side": 1,
+      "message": "Where does the pointer come from? Do you have an example of how this API will be used in practice?",
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fe53996_26676641",
@@ -19,6 +53,150 @@
         "startChar": 5,
         "endLine": 1636,
         "endChar": 23
+      },
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bc20346_885764e1",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1636,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:53:30Z",
+      "side": 1,
+      "message": "Interesting. Let me experiment with that.",
+      "parentUuid": "7fe53996_26676641",
+      "range": {
+        "startLine": 1636,
+        "startChar": 5,
+        "endLine": 1636,
+        "endChar": 23
+      },
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22cfed3d_8bc0ae1d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1690,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:53:30Z",
+      "side": 1,
+      "message": "Please no pointer arithmetic here. Use `pldm_msgbuf_span_required()` to skip over a range of memory.",
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25028bd5_6235c1aa",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1691,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:53:30Z",
+      "side": 1,
+      "message": "I expect because of the pointer arithmetic above, using `record-\u003esize` here will allow for a buffer overflow.",
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89e722f4_93234a0d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:53:30Z",
+      "side": 1,
+      "message": "Please no pointer arithmetic here. See the comment above.",
+      "range": {
+        "startLine": 1700,
+        "startChar": 1,
+        "endLine": 1702,
+        "endChar": 24
+      },
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa3cb7fc_5eb95231",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:53:30Z",
+      "side": 1,
+      "message": "See the overflow comment above.",
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8f884a5_aa37b093",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1716,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:53:30Z",
+      "side": 1,
+      "message": "I asked where the `entity` pointer comes from, because depending on the answer, the endianness for the comparison may or may not be correct here.",
+      "range": {
+        "startLine": 1712,
+        "startChar": 1,
+        "endLine": 1716,
+        "endChar": 31
+      },
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e14ceba2_feef2901",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1839,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:53:30Z",
+      "side": 1,
+      "message": "I think this might be better expressed as:\n\n```\nif (entity_type \u003d\u003d entity-\u003eentity_type \u0026\u0026\n        entity_instance_num \u003d\u003d entity-\u003eentity_instance_num \u0026\u0026\n        entity_container_id \u003d\u003d entity-\u003eentity_container_id) {\n    continue;\n}\npldm_msgbuf_copy(...);\n...\n```\n\nHowever, also see the endianness concern in the comments above.",
+      "range": {
+        "startLine": 1837,
+        "startChar": 2,
+        "endLine": 1839,
+        "endChar": 59
       },
       "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
