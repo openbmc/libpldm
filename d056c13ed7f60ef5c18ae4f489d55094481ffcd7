@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "daa02d08_d4d61b83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "171935fe_882419e2",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "128df463_2693fd47",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 8
@@ -60,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fac96eb1_4166625d",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done. Do you want to apply this change to next patch `\nmsgbuf: Add pldm_msgbuf_span_string_utf16()`?",
+      "parentUuid": "b330c34e_e69054ce",
+      "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6202516e_58f65878",
         "filename": "src/msgbuf.h",
         "patchSetId": 8
@@ -71,6 +113,24 @@
       "writtenOn": "2024-07-04T02:02:59Z",
       "side": 1,
       "message": "Might have to rename this given the `length` argument suggestion, maybe `measured`?",
+      "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb9dbac6_4f77b7d6",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6202516e_58f65878",
       "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -92,6 +152,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a313dbb1_0991c36c",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "668874bc_b009fb87",
+      "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50aea928_75d25f0c",
@@ -109,6 +187,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a0f7593_9c4b140f",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50aea928_75d25f0c",
+      "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "850cdf67_3a189124",
@@ -122,6 +218,30 @@
       "writtenOn": "2024-07-04T02:02:59Z",
       "side": 1,
       "message": "Unfortunately this creates a VLA (\"variable length array\"), as `const` variables cannot be used as an \"integer constant expression\". See:\n\nhttps://thephd.dev/constant-integers-are-actually-constant-wow-finally-someones-writing-the-goddamn-paper-%F0%9F%99%84\n\nIf you declare `required` as `constexpr` that should help.",
+      "range": {
+        "startLine": 832,
+        "startChar": 26,
+        "endLine": 832,
+        "endChar": 34
+      },
+      "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b1f86d7_1fd4965a",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "850cdf67_3a189124",
       "range": {
         "startLine": 832,
         "startChar": 26,
@@ -155,6 +275,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b5bb8e_c30ade50",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "360046b1_063fbf08",
+      "range": {
+        "startLine": 837,
+        "startChar": 14,
+        "endLine": 837,
+        "endChar": 33
+      },
+      "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4231395c_50008a5d",
@@ -168,6 +312,30 @@
       "writtenOn": "2024-07-04T02:02:59Z",
       "side": 1,
       "message": "`strncmp()`?",
+      "range": {
+        "startLine": 847,
+        "startChar": 14,
+        "endLine": 847,
+        "endChar": 20
+      },
+      "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf55ba57_ac2aefec",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4231395c_50008a5d",
       "range": {
         "startLine": 847,
         "startChar": 14,
@@ -195,6 +363,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7de05f1_c5448331",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "802843d6_0ee5d03b",
+      "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5afe3fbd_9eb124da",
@@ -208,6 +394,24 @@
       "writtenOn": "2024-07-04T02:02:59Z",
       "side": 1,
       "message": "The tests you\u0027ve added should be after this one.",
+      "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9958c961_fc43ff99",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5afe3fbd_9eb124da",
       "revId": "d056c13ed7f60ef5c18ae4f489d55094481ffcd7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

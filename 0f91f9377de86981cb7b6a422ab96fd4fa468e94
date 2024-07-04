@@ -205,6 +205,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cd6f199_f0ffdb66",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f44ba33_123f7261",
+      "range": {
+        "startLine": 838,
+        "startChar": 30,
+        "endLine": 838,
+        "endChar": 33
+      },
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0510079c_80967a15",
@@ -218,6 +242,30 @@
       "writtenOn": "2024-07-03T07:26:13Z",
       "side": 1,
       "message": "Why do we need to insert the data from `src` into `buf`? Why not use `src` directly below on line 845?",
+      "range": {
+        "startLine": 839,
+        "startChar": 1,
+        "endLine": 840,
+        "endChar": 28
+      },
+      "revId": "0f91f9377de86981cb7b6a422ab96fd4fa468e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c38610c_931c0b32",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0510079c_80967a15",
       "range": {
         "startLine": 839,
         "startChar": 1,
