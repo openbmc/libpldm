@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79331533_20f51790",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:33:49Z",
+      "side": 1,
+      "message": "Not if the pointers from the `pldm_msgbuf_span_string_*()` calls are pointing into the message buffer - the strings need to be copied out. That will also help with the alignment problem.",
+      "parentUuid": "bf1d92ac_98e0c36d",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c344109f_898189c7",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 6

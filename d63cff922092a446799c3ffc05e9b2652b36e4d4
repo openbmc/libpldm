@@ -16,6 +16,81 @@
       "message": "Do you have any idea to fix the unit-test error @Andrew?\n```\nstderr:\n../src/dsp/platform.c:2699:9: runtime error: load of misaligned address 0x506000004295 for type \u0027char16_t\u0027, which requires 2 byte alignment\n0x506000004295: note: pointer points here\n 03 65 6e 00 00 53 00  30 00 53 00 00 66 6e 00  00 53 00 31 00 00 67 6e  00 00 52 00 52 00 33 00  00\n```",
       "revId": "d63cff922092a446799c3ffc05e9b2652b36e4d4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5304105c_8a391a33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:33:49Z",
+      "side": 1,
+      "message": "Can we address the other concerns first, and then look into this?",
+      "parentUuid": "00606d2c_7d6e95f3",
+      "revId": "d63cff922092a446799c3ffc05e9b2652b36e4d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1bb040c_93aab4eb",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2696,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:33:49Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be necessary. See the comments on the prior patches about the span APIs providing the buffer length.",
+      "revId": "d63cff922092a446799c3ffc05e9b2652b36e4d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0226f3d2_49c979ff",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2707,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:33:49Z",
+      "side": 1,
+      "message": "It\u0027s unclear to me whether these pointers are pointing into a buffer containing the received message, or somewhere else. If they\u0027re pointing into the message buffer then we mustn\u0027t use the pointers returned by the `pldm_msgbuf_span_string_*()` calls below, as that would either prevent the user from freeing the message buffer, or they will free it anyway and we\u0027re left with dangling pointers.",
+      "revId": "d63cff922092a446799c3ffc05e9b2652b36e4d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c71e0f66_523e304a",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2748,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-04T02:33:49Z",
+      "side": 1,
+      "message": "Please avoid allocation inside the encode/decode APIs. This is why I was suggesting splitting the function in two. The allocation must be done by the caller.\n\nSee the discussion here:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/72099/comment/d7d1c516_d21b1874/",
+      "range": {
+        "startLine": 2746,
+        "startChar": 1,
+        "endLine": 2748,
+        "endChar": 45
+      },
+      "revId": "d63cff922092a446799c3ffc05e9b2652b36e4d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
