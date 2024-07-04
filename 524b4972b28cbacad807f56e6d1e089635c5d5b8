@@ -290,6 +290,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56cc229e_9260aca5",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-04T04:42:31Z",
+      "side": 1,
+      "message": "Add `u\"\"` in the code. The unit-test will auto update the code to \n`u \"\"` as below. It seems that is the unit-test issue.\nSo I temporarily keep `uint8_t term[2] \u003d {0x00, 0x00};`\n\n```\ndiff --git a/src/msgbuf.h b/src/msgbuf.h\nindex 8b4d571..45c4194 100644\n--- a/src/msgbuf.h\n+++ b/src/msgbuf.h\n@@ -1065,7 +1065,7 @@ pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor)\n                return pldm_msgbuf_status(ctx, EINVAL);\n        }\n\n-       end \u003d memmem(ctx-\u003ecursor, ctx-\u003eremaining, u\"\", sizeof(char16_t));\n+       end \u003d memmem(ctx-\u003ecursor, ctx-\u003eremaining, u \"\", sizeof(char16_t));\n```",
+      "parentUuid": "49ef1d74_180a617a",
+      "range": {
+        "startLine": 1067,
+        "startChar": 54,
+        "endLine": 1067,
+        "endChar": 64
+      },
+      "revId": "524b4972b28cbacad807f56e6d1e089635c5d5b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfd8ecd5_161da572",
         "filename": "src/msgbuf.h",
         "patchSetId": 6
