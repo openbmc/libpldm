@@ -33,6 +33,24 @@
       "message": "Do we want to add this entry in CHNAGELOG.md file?",
       "revId": "fa8baa731abfb022de25ba012932fd596a2d4cda",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d0cbd5_1c2591cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-05T12:29:21Z",
+      "side": 1,
+      "message": "I\u0027d like to keep the changelog useful to users of the library, rather than implementers. As the `msgbuf` APIs are internal to the library implementation I prefer we avoid adding a changelog entry.",
+      "parentUuid": "5381b36e_58fd3d13",
+      "revId": "fa8baa731abfb022de25ba012932fd596a2d4cda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
