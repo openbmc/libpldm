@@ -16,6 +16,29 @@
       "message": "Looks good. Thanks.",
       "revId": "37d8cb85046e87d3da107408b2c0703ce7c04082",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3333961a_1fee654b",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-05T02:57:59Z",
+      "side": 1,
+      "message": "Ah, actually, can you make this `sizeof(term)`, just so we\u0027re actually reflecting the relevant buffer size? If you\u0027re feeling truly paranoid you could add `static_assert(sizeof(term) \u003d\u003d sizeof(char16_t));`, but it shouldn\u0027t be necessary 😊",
+      "range": {
+        "startLine": 1077,
+        "startChar": 49,
+        "endLine": 1077,
+        "endChar": 65
+      },
+      "revId": "37d8cb85046e87d3da107408b2c0703ce7c04082",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
