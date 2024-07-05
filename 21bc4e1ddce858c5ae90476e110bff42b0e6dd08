@@ -70,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efff481d_5fe0bc34",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T12:26:48Z",
+      "side": 1,
+      "message": "Agree.",
+      "parentUuid": "cd4c528a_41121520",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcd7df29_238c0f3d",
@@ -141,6 +159,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ddc302a_1c66e266",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T12:26:48Z",
+      "side": 1,
+      "message": "Sure, I agree that we will keep auxiliary_name_data.",
+      "parentUuid": "79331533_20f51790",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c344109f_898189c7",
@@ -194,6 +230,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f5f0b8b_10bfc1e8",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T12:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c48ce5f7_15285752",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b6d86bd_85c6961a",
@@ -207,6 +261,30 @@
       "writtenOn": "2024-06-24T03:47:22Z",
       "side": 1,
       "message": "Please, no more functions that do this. All new functions should return 0 on success or a negative errno value.\n\nSee: https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L108-L112",
+      "range": {
+        "startLine": 2379,
+        "startChar": 12,
+        "endLine": 2379,
+        "endChar": 33
+      },
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1763a7e9_38c66c30",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2379,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T12:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b6d86bd_85c6961a",
       "range": {
         "startLine": 2379,
         "startChar": 12,
@@ -263,6 +341,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b5c9cad_c5323bad",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2751,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T12:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "971e506a_deb329f1",
+      "range": {
+        "startLine": 2751,
+        "startChar": 6,
+        "endLine": 2751,
+        "endChar": 25
+      },
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44cb0638_760f8643",
@@ -276,6 +378,24 @@
       "writtenOn": "2024-06-24T03:47:22Z",
       "side": 1,
       "message": "Why bounce through the stack object? Why not decode it straight into the provided object (`pdr_value-\u003ehdr`)?",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "727fbf2e_8d999167",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2770,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T12:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44cb0638_760f8643",
       "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -303,6 +423,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e481f66_9e68b776",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2779,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T12:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8784eeac_ebe4dbc0",
+      "range": {
+        "startLine": 2779,
+        "startChar": 9,
+        "endLine": 2779,
+        "endChar": 32
+      },
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f62dd34f_5ade9a25",
@@ -316,6 +460,30 @@
       "writtenOn": "2024-06-24T03:47:22Z",
       "side": 1,
       "message": "`pldm_msgbuf_span_remaining()`?",
+      "range": {
+        "startLine": 2781,
+        "startChar": 1,
+        "endLine": 2783,
+        "endChar": 45
+      },
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c471f50_000d25dc",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2783,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T12:26:48Z",
+      "side": 1,
+      "message": "Should we use `pldm_msgbuf_extract_array_uint8()` which extract data from `buf` to `pdr_value-\u003eauxiliary_name_data` then we can `pldm_msgbuf_destroy_consumed` the `buf`. With `pldm_msgbuf_span_remaining()`, we have to keep `buf`.\n\nThe decode_pldm_entity_auxiliary_names_pdr_index() will response aux name pointer which point to the pdr_value-\u003eauxiliary_name_data. Which is allocated by the caller instead of the buff which allocated by the API.\n\nLet me know if I\u0027m wrong.",
+      "parentUuid": "f62dd34f_5ade9a25",
       "range": {
         "startLine": 2781,
         "startChar": 1,

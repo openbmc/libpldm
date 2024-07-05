@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6593c3a4_d0cba238",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T12:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c248fb38_0473db25",
+      "range": {
+        "startLine": 11,
+        "startChar": 45,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "acec8039_0a17ba77",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -153,6 +177,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "632bf911_515d8176",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T12:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adeaa5e6_f9769d27",
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1d3a4d2_2964f3e4",
@@ -184,6 +226,24 @@
       "side": 1,
       "message": "I updated the code, can you check?",
       "parentUuid": "c1d3a4d2_2964f3e4",
+      "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9cc8a71_33582c47",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T12:26:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e13d0ad2_b421d90c",
       "revId": "23a0b3455af61fcf63d5dcd8715792096a16e24b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
