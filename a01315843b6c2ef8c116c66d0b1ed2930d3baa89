@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d3d30b6_98a96f73",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T02:52:20Z",
+      "side": 1,
+      "message": "Sure. I updated the code.",
+      "parentUuid": "7729fe33_c3603403",
+      "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2365ddea_1b68b57d",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-07-05T01:11:31Z",
       "side": 1,
       "message": "maybe `str16len()` given we\u0027re measuring the length of the `char16_t` string, and not \"`sizeof(char16_t)`\"?",
+      "range": {
+        "startLine": 938,
+        "startChar": 14,
+        "endLine": 938,
+        "endChar": 23
+      },
+      "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fac82a68_2cefaa92",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T02:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2365ddea_1b68b57d",
       "range": {
         "startLine": 938,
         "startChar": 14,
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "368463cc_6a7367e9",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T02:52:20Z",
+      "side": 1,
+      "message": "I updated the code to add `ASSERT_EQ(0, (uintptr_t)retBuf \u0026 (alignof(char16_t) - 1));` as your suggested.",
+      "parentUuid": "77535c5a_2a41c897",
+      "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a6df823_e30802a9",
         "filename": "tests/msgbuf.cpp",
         "patchSetId": 13
@@ -88,6 +148,24 @@
       "writtenOn": "2024-07-05T01:11:31Z",
       "side": 1,
       "message": "I\u0027d add `ASSERT_EQ(0, (uintptr_t)retBuf \u0026 (alignof(char16_t) - 1));` on the line before just to be on the safe side. That will protect the `char16_t *` cast here.\n\nCheck the rest of the tests for any similar cast and add the same assertion where necessary.",
+      "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aca55c4_ebbb842c",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T02:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a6df823_e30802a9",
       "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -105,6 +183,24 @@
       "writtenOn": "2024-07-05T01:11:31Z",
       "side": 1,
       "message": "This will need to be adjusted in the context of the discussion about the `length` value.",
+      "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d724c3ee_2a4cf50b",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-05T02:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71d89dca_47576c4a",
       "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
