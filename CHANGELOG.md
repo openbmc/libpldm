@@ -23,6 +23,7 @@ Change categories:
 2. pdr: Add pldm_entity_association_pdr_add_contained_entity_to_remote_pdr()
 3. pdr: Add pldm_entity_association_pdr_create_new()
 4. platform: Define macros for the responded transferflags
+5. pdr: Add pldm_pdr_get_terminus_handle() API
 
 ### Deprecated
 

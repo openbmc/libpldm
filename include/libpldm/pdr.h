@@ -94,6 +94,19 @@ int pldm_pdr_add_check(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo,
 				    const pldm_pdr_record *record);
 
+/** @brief Get terminus handle of a PDR record
+ *
+ *  @pre repo must point to a valid object
+ *  @pre record must point to a valid object
+ *
+ *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in] reocrd - opaque pointer acting as a PDR record handle
+ *
+ *  @return uint16_t - terminus handle assigned to PDR record
+ */
+uint16_t pldm_pdr_get_terminus_handle(const pldm_pdr *repo,
+				      const pldm_pdr_record *record);
+
 /** @brief Find PDR record by record handle
  *
  *  @param[in] repo - opaque pointer acting as a PDR repo handle

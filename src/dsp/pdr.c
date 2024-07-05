@@ -263,6 +263,17 @@ uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo
 	return record->record_handle;
 }
 
+LIBPLDM_ABI_TESTING
+uint16_t pldm_pdr_get_terminus_handle(const pldm_pdr *repo
+				      __attribute__((unused)),
+				      const pldm_pdr_record *record)
+{
+	assert(repo != NULL);
+	assert(record != NULL);
+
+	return record->terminus_handle;
+}
+
 LIBPLDM_ABI_STABLE
 bool pldm_pdr_record_is_remote(const pldm_pdr_record *record)
 {

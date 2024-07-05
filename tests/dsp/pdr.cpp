@@ -724,6 +724,57 @@ TEST(PDRUpdate, testFindLastInRange)
 }
 #endif
 
+#ifdef LIBPLDM_API_TESTING
+TEST(PDRAccess, testGetTerminusHandle)
+{
+
+    auto repo = pldm_pdr_init();
+
+    pldm_pdr_hdr hdr;
+
+    hdr.type = 1;
+    uint16_t firstTerminusHandle = 1;
+    EXPECT_EQ(pldm_pdr_add_check(repo, reinterpret_cast<const uint8_t*>(&hdr),
+                                 sizeof(hdr), false, firstTerminusHandle, NULL),
+              0);
+
+    hdr.type = 2;
+    uint16_t secondTerminusHandle = 2;
+    EXPECT_EQ(pldm_pdr_add_check(repo, reinterpret_cast<const uint8_t*>(&hdr),
+                                 sizeof(hdr), true, secondTerminusHandle, NULL),
+              0);
+
+    hdr.type = 3;
+    uint16_t thirdTerminusHandle = 3;
+    EXPECT_EQ(pldm_pdr_add_check(repo, reinterpret_cast<const uint8_t*>(&hdr),
+                                 sizeof(hdr), true, thirdTerminusHandle, NULL),
+              0);
+
+    uint8_t* outData = nullptr;
+    uint32_t size{};
+
+    auto firstRec =
+        pldm_pdr_find_record_by_type(repo, 1, nullptr, &outData, &size);
+    EXPECT_EQ(pldm_pdr_get_terminus_handle(repo, firstRec),
+              firstTerminusHandle);
+    outData = nullptr;
+
+    auto secondRec =
+        pldm_pdr_find_record_by_type(repo, 2, nullptr, &outData, &size);
+    EXPECT_EQ(pldm_pdr_get_terminus_handle(repo, secondRec),
+              secondTerminusHandle);
+    outData = nullptr;
+
+    auto thirdRec =
+        pldm_pdr_find_record_by_type(repo, 3, nullptr, &outData, &size);
+    EXPECT_EQ(pldm_pdr_get_terminus_handle(repo, thirdRec),
+              thirdTerminusHandle);
+    outData = nullptr;
+
+    pldm_pdr_destroy(repo);
+}
+#endif
+
 TEST(EntityAssociationPDR, testInit)
 {
     auto tree = pldm_entity_association_tree_init();
