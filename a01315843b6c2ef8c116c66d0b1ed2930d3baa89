@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7fdb3b7_abc95b46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-05T01:11:31Z",
+      "side": 1,
+      "message": "Hi Thu, this largely looks good as well. The two significant comments are really the behaviour of the `length` out-parameter, and the one about adding an assert to enforce alignment before casting to `char16_t *` in the tests.",
+      "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7729fe33_c3603403",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-05T01:11:31Z",
+      "side": 1,
+      "message": "Ah, so you really made me think with this one 😄\n\nI debated with myself whether we should be providing a \"count\" here. As further consideration we have the proposed `pldm_msgbuf_extract_array()` behaviour where we do accept a \"count\" value. However, and I\u0027ve arrived at the conclusion that we really do want \"length\" here (equivalent to `sizeof()`), for the following reasons:\n\n1. Because of the lack of alignment constraints in the message buffer, the spanned range of memory cannot immediately be treated as an array of e.g. `char16_t`. It can only be used as blob of bytes (despite the fact that we \"know\" at a higher-level what type of data is in the span). The only sensible way to measure a blob of bytes is in terms of the number of bytes.\n\n2. The span APIs were always about an \"opaque\" region of memory. Again, with this context the only useful measure is the number of bytes.\n\nSo with these combined can you please just assign `measured` to `length` without the division to account for the type size?",
+      "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2365ddea_1b68b57d",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-05T01:11:31Z",
+      "side": 1,
+      "message": "maybe `str16len()` given we\u0027re measuring the length of the `char16_t` string, and not \"`sizeof(char16_t)`\"?",
+      "range": {
+        "startLine": 938,
+        "startChar": 14,
+        "endLine": 938,
+        "endChar": 23
+      },
+      "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77535c5a_2a41c897",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-05T01:11:31Z",
+      "side": 1,
+      "message": "As a general note, you\u0027ll need to be very careful about alignment with your test case data if you\u0027re creating `char16_t` pointers into the message data buffer.",
+      "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a6df823_e30802a9",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-05T01:11:31Z",
+      "side": 1,
+      "message": "I\u0027d add `ASSERT_EQ(0, (uintptr_t)retBuf \u0026 (alignof(char16_t) - 1));` on the line before just to be on the safe side. That will protect the `char16_t *` cast here.\n\nCheck the rest of the tests for any similar cast and add the same assertion where necessary.",
+      "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71d89dca_47576c4a",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-05T01:11:31Z",
+      "side": 1,
+      "message": "This will need to be adjusted in the context of the discussion about the `length` value.",
+      "revId": "a01315843b6c2ef8c116c66d0b1ed2930d3baa89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
