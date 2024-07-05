@@ -178,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2bb275b2_3525acac",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-05T06:24:52Z",
+      "side": 1,
+      "message": "A thought I had here is we should declare `auxiliary_name_data` with `__attribute__((aligned(alignof(char16_t))))`, and then arrange the data so all the UTF16-BE strings are first (as this maintains their alignment requirements), and then we put all the ASCII strings last. That way we don\u0027t need to split the types and have to play funny games with allocation.",
+      "parentUuid": "c48ce5f7_15285752",
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b6d86bd_85c6961a",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 6
