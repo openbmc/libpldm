@@ -13,6 +13,17 @@ extern "C" {
 #include <libpldm/pdr.h>
 #include <libpldm/pldm_types.h>
 
+/**
+ * Response flag for the Platform and control commands (GetPDRs,
+ * PollForPlatformEventMessage)
+ **/
+enum transfer_platform_resp_flag {
+	PLDM_PLATFORM_MSG_START = 0x00,
+	PLDM_PLATFORM_MSG_MIDDLE = 0x01,
+	PLDM_PLATFORM_MSG_END = 0x04,
+	PLDM_PLATFORM_MSG_START_AND_END = 0x05,
+};
+
 /* Maximum size for request */
 #define PLDM_SET_STATE_EFFECTER_STATES_REQ_BYTES  19
 #define PLDM_GET_STATE_SENSOR_READINGS_REQ_BYTES  4
