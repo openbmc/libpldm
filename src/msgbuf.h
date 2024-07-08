@@ -1190,6 +1190,21 @@ pldm__msgbuf_copy(struct pldm_msgbuf *dst, struct pldm_msgbuf *src, size_t size,
 	return 0;
 }
 
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_copy_string_ascii(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
+{
+	void *ascii = NULL;
+	size_t len = 0;
+	int rc;
+
+	rc = pldm_msgbuf_span_string_ascii(src, &ascii, &len);
+	if (rc < 0) {
+		return rc;
+	}
+
+	return pldm__msgbuf_insert_array_void(dst, ascii, len);
+}
+
 #ifdef __cplusplus
 }
 #endif
