@@ -1294,6 +1294,21 @@ pldm_msgbuf_copy_string_ascii(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
 	return pldm__msgbuf_insert_array_void(dst, ascii, len);
 }
 
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_copy_string_utf16(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
+{
+	void *utf16 = NULL;
+	size_t len = 0;
+	int rc;
+
+	rc = pldm_msgbuf_span_string_utf16(src, &utf16, &len);
+	if (rc < 0) {
+		return rc;
+	}
+
+	return pldm__msgbuf_insert_array_void(dst, utf16, len);
+}
+
 #ifdef __cplusplus
 }
 #endif
