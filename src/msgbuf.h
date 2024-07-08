@@ -723,7 +723,8 @@ pldm__msgbuf_extract_real32(struct pldm_msgbuf *ctx, void *dst)
 		real32_t *: pldm__msgbuf_extract_real32)(ctx, dst)
 
 __attribute__((always_inline)) static inline int
-pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, uint8_t *dst,
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm__msgbuf_extract_array_void(struct pldm_msgbuf *ctx, void *dst,
 				size_t count)
 {
 	assert(ctx);
@@ -757,9 +758,23 @@ pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, uint8_t *dst,
 	return 0;
 }
 
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_extract_array_char(struct pldm_msgbuf *ctx, char *dst, size_t count)
+{
+	return pldm__msgbuf_extract_array_void(ctx, dst, count);
+}
+
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, uint8_t *dst,
+				size_t count)
+{
+	return pldm__msgbuf_extract_array_void(ctx, dst, count);
+}
+
 #define pldm_msgbuf_extract_array(ctx, dst, count)                             \
-	_Generic((*(dst)), uint8_t: pldm_msgbuf_extract_array_uint8)(ctx, dst, \
-								     count)
+	_Generic((*(dst)),                                                     \
+		uint8_t: pldm_msgbuf_extract_array_uint8,                      \
+		char: pldm_msgbuf_extract_array_char)(ctx, dst, count)
 
 __attribute__((always_inline)) static inline int
 pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx, const uint32_t src)
@@ -953,7 +968,8 @@ pldm_msgbuf_insert_int8(struct pldm_msgbuf *ctx, const int8_t src)
 		int32_t: pldm_msgbuf_insert_int32)(dst, src)
 
 __attribute__((always_inline)) static inline int
-pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx, const uint8_t *src,
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm__msgbuf_insert_array_void(struct pldm_msgbuf *ctx, const void *src,
 			       size_t count)
 {
 	assert(ctx);
@@ -987,9 +1003,24 @@ pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx, const uint8_t *src,
 	return 0;
 }
 
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_insert_array_char(struct pldm_msgbuf *ctx, const char *src,
+			      size_t count)
+{
+	return pldm__msgbuf_insert_array_void(ctx, src, count);
+}
+
+__attribute__((always_inline)) static inline int
+pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx, const uint8_t *src,
+			       size_t count)
+{
+	return pldm__msgbuf_insert_array_void(ctx, src, count);
+}
+
 #define pldm_msgbuf_insert_array(dst, src, count)                              \
-	_Generic((*(src)), uint8_t: pldm_msgbuf_insert_array_uint8)(dst, src,  \
-								    count)
+	_Generic((*(src)),                                                     \
+		uint8_t: pldm_msgbuf_insert_array_uint8,                       \
+		char: pldm_msgbuf_insert_array_char)(dst, src, count)
 
 __attribute__((always_inline)) static inline int
 pldm_msgbuf_span_required(struct pldm_msgbuf *ctx, size_t required,
