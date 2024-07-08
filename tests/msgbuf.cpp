@@ -1115,9 +1115,10 @@ TEST(msgbuf, pldm_msgbuf_copy_good)
               PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(dst, &checkVal), PLDM_SUCCESS);
 
-    EXPECT_EQ(buf[0], checkVal);
     EXPECT_EQ(pldm_msgbuf_destroy(src), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(dst), PLDM_SUCCESS);
+
+    EXPECT_EQ(buf[0], checkVal);
 }
 
 TEST(msgbuf, pldm_msgbuf_copy_bad)
@@ -1139,4 +1140,78 @@ TEST(msgbuf, pldm_msgbuf_copy_bad)
     ASSERT_EQ(pldm_msgbuf_init_cc(dst, 0, buf, sizeof(buf)), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_copy(dst, src, value, name),
               PLDM_ERROR_INVALID_LENGTH);
+}
+
+TEST(msgbuf, pldm_msgbuf_copy_string_ascii_exact)
+{
+    const char msg[] = "this is a message";
+
+    struct pldm_msgbuf _src;
+    struct pldm_msgbuf* src = &_src;
+    struct pldm_msgbuf _dst;
+    struct pldm_msgbuf* dst = &_dst;
+
+    char buf[sizeof(msg)] = {};
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(src, 0, msg, sizeof(msg)), 0);
+    ASSERT_EQ(pldm_msgbuf_init_errno(dst, 0, buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_copy_string_ascii(dst, src), 0);
+    ASSERT_EQ(pldm_msgbuf_destroy(dst), 0);
+    ASSERT_EQ(pldm_msgbuf_destroy(src), 0);
+    EXPECT_EQ(0, memcmp(msg, buf, sizeof(buf)));
+}
+
+TEST(msgbuf, pldm_msgbuf_copy_string_ascii_dst_exceeds_src)
+{
+    const char msg[] = "this is a message";
+
+    struct pldm_msgbuf _src;
+    struct pldm_msgbuf* src = &_src;
+    struct pldm_msgbuf _dst;
+    struct pldm_msgbuf* dst = &_dst;
+
+    char buf[sizeof(msg) + 1] = {};
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(src, 0, msg, sizeof(msg)), 0);
+    ASSERT_EQ(pldm_msgbuf_init_errno(dst, 0, buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_copy_string_ascii(dst, src), 0);
+    ASSERT_EQ(pldm_msgbuf_destroy(dst), 0);
+    ASSERT_EQ(pldm_msgbuf_destroy(src), 0);
+    EXPECT_EQ(0, memcmp(buf, msg, sizeof(msg)));
+}
+
+TEST(msgbuf, pldm_msgbuf_copy_string_ascii_src_exceeds_dst)
+{
+    const char msg[] = "this is a message";
+
+    struct pldm_msgbuf _src;
+    struct pldm_msgbuf* src = &_src;
+    struct pldm_msgbuf _dst;
+    struct pldm_msgbuf* dst = &_dst;
+
+    char buf[sizeof(msg) - 1] = {};
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(src, 0, msg, sizeof(msg)), 0);
+    ASSERT_EQ(pldm_msgbuf_init_errno(dst, 0, buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_copy_string_ascii(dst, src), -EOVERFLOW);
+    ASSERT_EQ(pldm_msgbuf_destroy(dst), -EOVERFLOW);
+    ASSERT_EQ(pldm_msgbuf_destroy(src), 0);
+}
+
+TEST(msgbuf, pldm_msgbuf_copy_string_ascii_unterminated_src)
+{
+    const char msg[] = {'a'};
+
+    struct pldm_msgbuf _src;
+    struct pldm_msgbuf* src = &_src;
+    struct pldm_msgbuf _dst;
+    struct pldm_msgbuf* dst = &_dst;
+
+    char buf[sizeof(msg)] = {};
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(src, 0, msg, sizeof(msg)), 0);
+    ASSERT_EQ(pldm_msgbuf_init_errno(dst, 0, buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_copy_string_ascii(dst, src), -EOVERFLOW);
+    ASSERT_EQ(pldm_msgbuf_destroy(dst), 0);
+    ASSERT_EQ(pldm_msgbuf_destroy(src), -EOVERFLOW);
 }
