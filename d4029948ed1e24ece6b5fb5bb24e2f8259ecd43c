@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a6731e_d86908e4",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2780,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-08T21:38:30Z",
+      "side": 1,
+      "message": "will the change of dst affect on auxiliary_name_data?",
+      "revId": "d4029948ed1e24ece6b5fb5bb24e2f8259ecd43c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51999fdb_068f39bd",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2799,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-08T21:38:30Z",
+      "side": 1,
+      "message": "Do we need to destroy buf?",
+      "revId": "d4029948ed1e24ece6b5fb5bb24e2f8259ecd43c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26463cc7_e967726f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2849,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-08T21:38:30Z",
+      "side": 1,
+      "message": "Should we move definition of variable to start of function?",
+      "revId": "d4029948ed1e24ece6b5fb5bb24e2f8259ecd43c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
