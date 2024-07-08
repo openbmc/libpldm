@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ebcab5c_64a47c74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-08T09:35:24Z",
+      "side": 1,
+      "message": "The commit is LGTM. Just one comment about the test case to confirm about the API.",
+      "revId": "084fdede743e1cf6b1105dc18e1a63ac2641af38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef67469b_fc474885",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-08T09:35:24Z",
+      "side": 1,
+      "message": "Should we move this line above `EXPECT_EQ(0, memcmp(msg, buf, sizeof(buf)));` to confirm that the source is already copy to dst and we can destroy the src?\nAlso Apply the change for the others test case.",
+      "revId": "084fdede743e1cf6b1105dc18e1a63ac2641af38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
