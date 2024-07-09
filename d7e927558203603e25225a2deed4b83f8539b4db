@@ -189,6 +189,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd4bcc0a_5913e44c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-09T10:41:30Z",
+      "side": 1,
+      "message": "I have a few questions about it:\n1. Do you mean that the `payload_length` should minus the part that the decode function has proccessed, so that the caller can know how many buffers are still remain?\n2. What kind of condition would cause the `payload_length` be a negative value? In my perspective, it should always be a positive value, pop out an `errno` if there is any failure during the decode function.",
+      "parentUuid": "bf4fec11_82b7f3de",
+      "range": {
+        "startLine": 1078,
+        "startChar": 8,
+        "endLine": 1078,
+        "endChar": 36
+      },
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1970731_cffde2ad",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 18
