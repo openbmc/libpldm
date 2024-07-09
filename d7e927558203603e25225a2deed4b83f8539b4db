@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7ce8b15_117f36b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-09T10:35:07Z",
+      "side": 1,
+      "message": "Done, thanks for reminding.",
+      "parentUuid": "2091befc_b2aa096f",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e180ca2_ba0c5b42",
@@ -116,6 +140,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a2e6247_09760241",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-09T10:35:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccab86ba_f4c09469",
+      "range": {
+        "startLine": 1084,
+        "startChar": 0,
+        "endLine": 1085,
+        "endChar": 68
+      },
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf4fec11_82b7f3de",
@@ -156,6 +204,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6afb81cf_a645ca79",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-09T10:35:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1970731_cffde2ad",
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "146b1dac_8bb8c11a",
@@ -169,6 +235,30 @@
       "writtenOn": "2024-07-02T06:27:23Z",
       "side": 1,
       "message": "s/succesffuly/successfully/",
+      "range": {
+        "startLine": 1202,
+        "startChar": 9,
+        "endLine": 1202,
+        "endChar": 20
+      },
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d1248ad_21acf3b1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-09T10:35:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "146b1dac_8bb8c11a",
       "range": {
         "startLine": 1202,
         "startChar": 9,
@@ -239,6 +329,24 @@
       "writtenOn": "2024-07-02T06:27:23Z",
       "side": 1,
       "message": "Does this zero-initialise the array? Can we make that more explicit? Please address this concern on the other test cases below.",
+      "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0734cd5a_57d76156",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-09T10:35:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ef5610b_db556e62",
       "revId": "d7e927558203603e25225a2deed4b83f8539b4db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

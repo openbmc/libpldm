@@ -120,6 +120,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5fc9e92_7e23c5b0",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-09T10:35:07Z",
+      "side": 1,
+      "message": "\u003e Yes, but we\u0027re defining that - we can change it so it isn\u0027t const?\n\nChanging the `ptr` into a non-const pointer causes many errors and warnings, including the stable APIs, such as\n```\n../src/dsp/firmware_update.c:374:34: error: assignment discards ‘const’ qualifier from pointer target type [-Werror\u003ddiscarded-qualifiers]\n  374 |         package_version_str-\u003eptr \u003d\n\nor\n\n../tests/dsp/firmware_update.cpp:2020:16: error: invalid conversion from ‘const uint8_t*’ {aka ‘const unsigned char*’} to ‘uint8_t*’ {aka ‘unsigned char*’} [-fpermissive]\n 2020 |         .ptr \u003d reinterpret_cast\u003cconst uint8_t*\u003e(versionsStr),\n\n```\n\nAlso, assigning the `ptr` to `NULL` is not acceptable too.\n```\n../src/dsp/firmware_update.c: In function ‘decode_downstream_device_parameter_table_entry’:\n../src/dsp/firmware_update.c:1184:19: error: assignment of member ‘ptr’ in read-only object\n 1184 |         data-\u003eptr \u003d NULL;\n```\n\nIt looks like this change would cause many side effects, I personally recommand that let the users to calculate the offset on themself by the macro `PLDM_DOWNSTREAM_DEVICE_PARAMETER_ENTRY_MIN_LEN`, `active_comp_ver_str_len`, and `pending_comp_ver_str_len` in this change.",
+      "parentUuid": "fcd5c9bd_bc2a349b",
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5f75b33_0901013c",
         "filename": "src/msgbuf.h",
         "patchSetId": 14
