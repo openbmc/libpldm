@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "275333f7_88190b0e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2780,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-10T11:00:15Z",
+      "side": 1,
+      "message": "Yes. The `src` buff will point to with aux names data in `names` pointers. The `dst` will point to auxiliary_name_data.\nCopy data from `src` do `dst` will change auxiliary_name_data.",
+      "parentUuid": "79a6731e_d86908e4",
+      "revId": "d4029948ed1e24ece6b5fb5bb24e2f8259ecd43c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51999fdb_068f39bd",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-07-08T21:38:30Z",
       "side": 1,
       "message": "Do we need to destroy buf?",
+      "revId": "d4029948ed1e24ece6b5fb5bb24e2f8259ecd43c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f8cec83_fe0764dc",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2799,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-10T11:00:15Z",
+      "side": 1,
+      "message": "Updated code to destroy `buf` and `dst`.",
+      "parentUuid": "51999fdb_068f39bd",
       "revId": "d4029948ed1e24ece6b5fb5bb24e2f8259ecd43c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
