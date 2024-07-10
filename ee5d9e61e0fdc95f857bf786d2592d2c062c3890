@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82f30e4f_dfbba664",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-10T11:48:35Z",
+      "side": 1,
+      "message": "this is how we use it in pldm, I dont have this change in gerrit yet-\n\nwe call the below API to find a FRU/PDR from a given RSI and gave the entity structure fields. We know that is the entity which needs to be removed so we save it as removeEntity.\n\npldm_pdr_fru_record_set_find_by_rsi(pdrRepo, rsi, \u0026terminusHdl, \u0026entityType,\n                                    \u0026entityInsNum, \u0026containerId, false);\n    removeEntity.entity_type \u003d entityType;\n    removeEntity.entity_instance_num \u003d entityInsNum;\n    removeEntity.entity_container_id \u003d containerId;\n    \nwe then pass removeEntity into our API so that it can be removed from the entity association tree.\n\nauto removeBmcEntityRc \u003d pldm_entity_association_pdr_remove_contained_entity(pdrRepo, \u0026removeEntity, false, \u0026updateRecordHdlBmc);\n\nThis is the only place we use this API for now.\n\nI dont think we need to take care of endian conversion here when comparing entity fields because when we extract it in pldm_pdr_fru_record_set_find_by_rsi API we are doing the endian conversion. Please correct me if I am wrong",
+      "parentUuid": "2d7c064a_22140b7f",
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7fe53996_26676641",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 4
@@ -99,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca66649b_43c5f16a",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1690,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-10T11:48:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22cfed3d_8bc0ae1d",
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25028bd5_6235c1aa",
@@ -112,6 +148,24 @@
       "writtenOn": "2024-07-04T02:53:30Z",
       "side": 1,
       "message": "I expect because of the pointer arithmetic above, using `record-\u003esize` here will allow for a buffer overflow.",
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90506925_71588d82",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1691,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-10T11:48:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25028bd5_6235c1aa",
       "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -139,6 +193,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7e88a40_8507ad26",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-10T11:48:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89e722f4_93234a0d",
+      "range": {
+        "startLine": 1700,
+        "startChar": 1,
+        "endLine": 1702,
+        "endChar": 24
+      },
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa3cb7fc_5eb95231",
@@ -152,6 +230,24 @@
       "writtenOn": "2024-07-04T02:53:30Z",
       "side": 1,
       "message": "See the overflow comment above.",
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eeab943_fbcbb1c1",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-10T11:48:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa3cb7fc_5eb95231",
       "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -181,6 +277,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ba8ad37_731f847e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1716,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-10T11:48:35Z",
+      "side": 1,
+      "message": "I dont think it is required. see comment in pdr.h. I will correct it if I a wrong in next review",
+      "parentUuid": "e8f884a5_aa37b093",
+      "range": {
+        "startLine": 1712,
+        "startChar": 1,
+        "endLine": 1716,
+        "endChar": 31
+      },
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e14ceba2_feef2901",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 4
@@ -192,6 +312,30 @@
       "writtenOn": "2024-07-04T02:53:30Z",
       "side": 1,
       "message": "I think this might be better expressed as:\n\n```\nif (entity_type \u003d\u003d entity-\u003eentity_type \u0026\u0026\n        entity_instance_num \u003d\u003d entity-\u003eentity_instance_num \u0026\u0026\n        entity_container_id \u003d\u003d entity-\u003eentity_container_id) {\n    continue;\n}\npldm_msgbuf_copy(...);\n...\n```\n\nHowever, also see the endianness concern in the comments above.",
+      "range": {
+        "startLine": 1837,
+        "startChar": 2,
+        "endLine": 1839,
+        "endChar": 59
+      },
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32fb2145_a2b80f7b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1839,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-07-10T11:48:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e14ceba2_feef2901",
       "range": {
         "startLine": 1837,
         "startChar": 2,
