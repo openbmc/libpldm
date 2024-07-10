@@ -138,6 +138,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d455e78e_7328b807",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-10T07:07:20Z",
+      "side": 1,
+      "message": "Unfortunately your reply above isn\u0027t making a lot of sense to me.\n\n\u003e Changing the ptr into a non-const pointer causes many errors and warnings, including the stable APIs\n\nThis function is literally annotated with `LIBPLDM_ABI_TESTING`. Changes to it are not going to affect stable APIs - given that it\u0027s not yet even merged into the code-base, it can\u0027t even affect the _implementation_ of stable APIs (let alone break them). It\u0027s not clear to me what changes you made to get the effect you\u0027ve reported in the output above.\n\n\u003e I personally recommand that let the users to calculate the offset on themself by the macro PLDM_DOWNSTREAM_DEVICE_PARAMETER_ENTRY_MIN_LEN, active_comp_ver_str_len, and pending_comp_ver_str_len in this change\n\nSorry, but most definitely no. That kind of API design falls into the [What If I Don\u0027t Actually Like My Users?](https://ozlabs.org/~rusty/index.cgi/tech/2008-04-01.html) category as far as I\u0027m concerned, it\u0027s just far too easy for it to go wrong and cause CVEs.\n\nlibpldm exists to provide ergonomic and (as much as we can) safe decoding of PLDM messages. Let\u0027s please try to keep that true for our users.",
+      "parentUuid": "e5fc9e92_7e23c5b0",
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5f75b33_0901013c",
         "filename": "src/msgbuf.h",
         "patchSetId": 14
