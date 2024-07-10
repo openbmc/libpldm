@@ -54,6 +54,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "517fe668_a612aca9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-10T10:30:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6393910_a9b75cca",
+      "revId": "d63cff922092a446799c3ffc05e9b2652b36e4d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1bb040c_93aab4eb",
@@ -71,6 +89,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ac800cc_2cd86cef",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2696,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-10T10:30:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1bb040c_93aab4eb",
+      "revId": "d63cff922092a446799c3ffc05e9b2652b36e4d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0226f3d2_49c979ff",
@@ -84,6 +120,24 @@
       "writtenOn": "2024-07-04T02:33:49Z",
       "side": 1,
       "message": "It\u0027s unclear to me whether these pointers are pointing into a buffer containing the received message, or somewhere else. If they\u0027re pointing into the message buffer then we mustn\u0027t use the pointers returned by the `pldm_msgbuf_span_string_*()` calls below, as that would either prevent the user from freeing the message buffer, or they will free it anyway and we\u0027re left with dangling pointers.",
+      "revId": "d63cff922092a446799c3ffc05e9b2652b36e4d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cae6d099_24e36f17",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2707,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-10T10:30:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0226f3d2_49c979ff",
       "revId": "d63cff922092a446799c3ffc05e9b2652b36e4d4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

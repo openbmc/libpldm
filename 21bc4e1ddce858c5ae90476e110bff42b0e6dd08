@@ -318,6 +318,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef67384_bb460288",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2382,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-10T10:30:34Z",
+      "side": 1,
+      "message": "The code is changed the comment will be closed.",
+      "parentUuid": "1fa05e1d_d445a769",
+      "range": {
+        "startLine": 2382,
+        "startChar": 1,
+        "endLine": 2382,
+        "endChar": 46
+      },
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "971e506a_deb329f1",
@@ -484,6 +508,30 @@
       "side": 1,
       "message": "Should we use `pldm_msgbuf_extract_array_uint8()` which extract data from `buf` to `pdr_value-\u003eauxiliary_name_data` then we can `pldm_msgbuf_destroy_consumed` the `buf`. With `pldm_msgbuf_span_remaining()`, we have to keep `buf`.\n\nThe decode_pldm_entity_auxiliary_names_pdr_index() will response aux name pointer which point to the pdr_value-\u003eauxiliary_name_data. Which is allocated by the caller instead of the buff which allocated by the API.\n\nLet me know if I\u0027m wrong.",
       "parentUuid": "f62dd34f_5ade9a25",
+      "range": {
+        "startLine": 2781,
+        "startChar": 1,
+        "endLine": 2783,
+        "endChar": 45
+      },
+      "revId": "21bc4e1ddce858c5ae90476e110bff42b0e6dd08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28774669_17385bc8",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2783,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-10T10:30:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c471f50_000d25dc",
       "range": {
         "startLine": 2781,
         "startChar": 1,
