@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55b7ce8c_626e1b2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T06:34:40Z",
+      "side": 1,
+      "message": "Hi Pavithra, I have a few queries inline.",
+      "revId": "a4f7d04103999b33e68a6460ff1ebc085628e20d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52415f16_a237ca7b",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T06:34:40Z",
+      "side": 1,
+      "message": "`s/va;id/valid/`",
+      "range": {
+        "startLine": 99,
+        "startChar": 30,
+        "endLine": 99,
+        "endChar": 35
+      },
+      "revId": "a4f7d04103999b33e68a6460ff1ebc085628e20d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f08a3e_f00839bc",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T06:34:40Z",
+      "side": 1,
+      "message": "Can you locate for me the constraint that says a terminus handle can\u0027t be zero? I couldn\u0027t find it in a quick inspection of DSP0248.",
+      "range": {
+        "startLine": 105,
+        "startChar": 63,
+        "endLine": 106,
+        "endChar": 9
+      },
+      "revId": "a4f7d04103999b33e68a6460ff1ebc085628e20d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b883ad7e_e921b48c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T06:34:40Z",
+      "side": 1,
+      "message": "What does it mean for this not to be found? I think the doxygen documentation is a bit confusing?",
+      "revId": "a4f7d04103999b33e68a6460ff1ebc085628e20d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afe0f389_e427c22e",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T06:34:40Z",
+      "side": 1,
+      "message": "Can you unpack why we need this complexity vs declaring `pldm_pdr_hdr hdr;`?",
+      "range": {
+        "startLine": 733,
+        "startChar": 0,
+        "endLine": 734,
+        "endChar": 69
+      },
+      "revId": "a4f7d04103999b33e68a6460ff1ebc085628e20d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "597773f0_6a99a8e6",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T06:34:40Z",
+      "side": 1,
+      "message": "Then we can do `pldm_pdr_add_check(..., \u0026hdr, sizeof(hdr), ...)` ?",
+      "range": {
+        "startLine": 738,
+        "startChar": 39,
+        "endLine": 738,
+        "endChar": 63
+      },
+      "revId": "a4f7d04103999b33e68a6460ff1ebc085628e20d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
