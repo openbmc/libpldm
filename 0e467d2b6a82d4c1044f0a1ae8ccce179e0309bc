@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "727c9b75_cfb6c14f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-11T08:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c52388f_419061d4",
+      "range": {
+        "startLine": 10,
+        "startChar": 53,
+        "endLine": 11,
+        "endChar": 32
+      },
+      "revId": "0e467d2b6a82d4c1044f0a1ae8ccce179e0309bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca557ad2_48a97e4f",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "929c3fb3_2dcd1bf9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-11T08:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca557ad2_48a97e4f",
+      "revId": "0e467d2b6a82d4c1044f0a1ae8ccce179e0309bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "687f3999_f9555c44",
@@ -54,6 +96,24 @@
       "writtenOn": "2024-07-11T06:00:24Z",
       "side": 1,
       "message": "Again, another line-break above here, so it\u0027s not so cluttered.",
+      "revId": "0e467d2b6a82d4c1044f0a1ae8ccce179e0309bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21309ae2_6067ba9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-11T08:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "687f3999_f9555c44",
       "revId": "0e467d2b6a82d4c1044f0a1ae8ccce179e0309bc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
