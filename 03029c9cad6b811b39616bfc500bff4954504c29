@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29b2bd52_f0cae44a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T06:14:43Z",
+      "side": 1,
+      "message": "Hi Thu, thanks for the pointers to the definitions in the commit message. I\u0027ve listed a few concerns in a comment inline.",
+      "revId": "03029c9cad6b811b39616bfc500bff4954504c29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c677fdd7_3cf683e0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T06:14:43Z",
+      "side": 1,
+      "message": "A few things:\n\n1. All new symbols (I\u0027m excluding `encode_*` and `decode_*` functions for now though, we\u0027ll rename them later) must be prefixed with `pldm_`\n2. I think we can come up with a name that better reflects the type\n3. The enum member names are not consistent with the type name 😞\n\nSo, here\u0027s my proposal:\n\n```\nenum pldm_platform_transfer_flag {\n    PLDM_PLATFORM_TRANSFER_START \u003d 0x00,\n    PLDM_PLATFORM_TRANSFER_MIDDLE \u003d 0x01,\n    PLDM_PLATFORM_TRANSFER_END \u003d 0x04,\n    PLDM_PLATFORM_TRANSFER_START_AND_END \u003d 0x05,\n};\n```",
+      "range": {
+        "startLine": 20,
+        "startChar": 5,
+        "endLine": 20,
+        "endChar": 32
+      },
+      "revId": "03029c9cad6b811b39616bfc500bff4954504c29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
