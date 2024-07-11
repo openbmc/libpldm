@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb330727_8b1503ea",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T05:29:32Z",
+      "side": 1,
+      "message": "Right, I think this sounds okay. I\u0027d just like to document here in the doxygen comment that the values in the struct pointed to by `entity` must be in \"host\" endianness (... as-in, BMC CPU endianness if libpldm is being used on a BMC), just to be explicit.",
+      "parentUuid": "82f30e4f_dfbba664",
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7fe53996_26676641",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 4
@@ -289,6 +307,30 @@
       "side": 1,
       "message": "I dont think it is required. see comment in pdr.h. I will correct it if I a wrong in next review",
       "parentUuid": "e8f884a5_aa37b093",
+      "range": {
+        "startLine": 1712,
+        "startChar": 1,
+        "endLine": 1716,
+        "endChar": 31
+      },
+      "revId": "ee5d9e61e0fdc95f857bf786d2592d2c062c3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e34762f_626e5405",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1716,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T05:29:32Z",
+      "side": 1,
+      "message": "Nope, all good, just the change to the doxygen as discussed in the header.",
+      "parentUuid": "3ba8ad37_731f847e",
       "range": {
         "startLine": 1712,
         "startChar": 1,
