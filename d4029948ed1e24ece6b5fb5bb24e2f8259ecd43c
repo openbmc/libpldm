@@ -86,6 +86,24 @@
       "message": "Should we move definition of variable to start of function?",
       "revId": "d4029948ed1e24ece6b5fb5bb24e2f8259ecd43c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ac5eba_f0ef4321",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2849,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T05:48:43Z",
+      "side": 1,
+      "message": "No, I think it\u0027s better that the scope is constrained to where it\u0027s needed.",
+      "parentUuid": "26463cc7_e967726f",
+      "revId": "d4029948ed1e24ece6b5fb5bb24e2f8259ecd43c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

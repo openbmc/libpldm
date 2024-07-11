@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dec58d7_d4041e58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T05:48:43Z",
+      "side": 1,
+      "message": "Hi Thu, only a few comments that should be straight-forward to rectify. Hopefully we\u0027ve broken the back of this thing 😊",
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0839f50a_277988ce",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 2376,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T05:48:43Z",
+      "side": 1,
+      "message": "I think it would be quite useful to put the usage example in the documentation here.",
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7bea6d2_52cf218d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 2379,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T05:48:43Z",
+      "side": 1,
+      "message": "I prefer we drop the `_data()` here, I don\u0027t think it\u0027s necessary.",
+      "range": {
+        "startLine": 2379,
+        "startChar": 37,
+        "endLine": 2379,
+        "endChar": 42
+      },
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a82d8a45_774bd9b7",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 2380,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T05:48:43Z",
+      "side": 1,
+      "message": "Any reason why this must be `const void *` and not `const struct pldm_msg *`? Then `data_length` becomes `payload_length` consistent with the other APIs (... which is still not great, but it\u0027s better than being inconsistent).",
+      "range": {
+        "startLine": 2380,
+        "startChar": 1,
+        "endLine": 2380,
+        "endChar": 17
+      },
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ba63579_a927cd8e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 2385,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T05:48:43Z",
+      "side": 1,
+      "message": "Can you please add e.g. `@pre` descriptions here to describe the pre-conditions that must be met when calling this function? You mention in the commit message the expectations we have on the `names` array for instance - we need to make sure that\u0027s clearly documented here.",
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60d139d9_eff96fc9",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2714,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T05:48:43Z",
+      "side": 1,
+      "message": "Busted whitespace (was that me?)",
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42ea7c0b_d8130938",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2809,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-11T05:48:43Z",
+      "side": 1,
+      "message": "ah, so we can cheat a bit here to make it less verbose. I reckon:\n\n```\nif ((rc \u003d pldm_msgbuf_destroy(dst)) ||\n    (rc \u003d pldm_msgbuf_destroy(src)) ||\n    (rc \u003d pldm_msgbuf_destroy(buf))) {\n    return rc;\n}\n\nreturn 0;\n```",
+      "range": {
+        "startLine": 2799,
+        "startChar": 1,
+        "endLine": 2809,
+        "endChar": 42
+      },
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
