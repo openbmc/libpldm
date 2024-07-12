@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f9bfc71_330dd76a",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-07-12T08:24:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52415f16_a237ca7b",
+      "range": {
+        "startLine": 99,
+        "startChar": 30,
+        "endLine": 99,
+        "endChar": 35
+      },
+      "revId": "a4f7d04103999b33e68a6460ff1ebc085628e20d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8f08a3e_f00839bc",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-07-11T06:34:40Z",
       "side": 1,
       "message": "Can you locate for me the constraint that says a terminus handle can\u0027t be zero? I couldn\u0027t find it in a quick inspection of DSP0248.",
+      "range": {
+        "startLine": 105,
+        "startChar": 63,
+        "endLine": 106,
+        "endChar": 9
+      },
+      "revId": "a4f7d04103999b33e68a6460ff1ebc085628e20d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72466256_a050b608",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-07-12T08:24:05Z",
+      "side": 1,
+      "message": "Acknowledged, yes, terminus handle can be 0. Changed the doxygen properly.",
+      "parentUuid": "a8f08a3e_f00839bc",
       "range": {
         "startLine": 105,
         "startChar": 63,
@@ -81,6 +129,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6000973d_fd659b0d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-07-12T08:24:05Z",
+      "side": 1,
+      "message": "Acknowledged, yes modified the doxygen.",
+      "parentUuid": "b883ad7e_e921b48c",
+      "revId": "a4f7d04103999b33e68a6460ff1ebc085628e20d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afe0f389_e427c22e",
@@ -104,6 +170,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b545165f_7baf0e36",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-07-12T08:24:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "afe0f389_e427c22e",
+      "range": {
+        "startLine": 733,
+        "startChar": 0,
+        "endLine": 734,
+        "endChar": 69
+      },
+      "revId": "a4f7d04103999b33e68a6460ff1ebc085628e20d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "597773f0_6a99a8e6",
@@ -117,6 +207,30 @@
       "writtenOn": "2024-07-11T06:34:40Z",
       "side": 1,
       "message": "Then we can do `pldm_pdr_add_check(..., \u0026hdr, sizeof(hdr), ...)` ?",
+      "range": {
+        "startLine": 738,
+        "startChar": 39,
+        "endLine": 738,
+        "endChar": 63
+      },
+      "revId": "a4f7d04103999b33e68a6460ff1ebc085628e20d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a98443d_941c8702",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-07-12T08:24:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "597773f0_6a99a8e6",
       "range": {
         "startLine": 738,
         "startChar": 39,
