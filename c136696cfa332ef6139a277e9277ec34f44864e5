@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8952005_9ddc9c90",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 2376,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-12T15:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0839f50a_277988ce",
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7bea6d2_52cf218d",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-07-11T05:48:43Z",
       "side": 1,
       "message": "I prefer we drop the `_data()` here, I don\u0027t think it\u0027s necessary.",
+      "range": {
+        "startLine": 2379,
+        "startChar": 37,
+        "endLine": 2379,
+        "endChar": 42
+      },
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f79c0a96_5dc5c43c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 2379,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-12T15:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7bea6d2_52cf218d",
       "range": {
         "startLine": 2379,
         "startChar": 37,
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7ef0a84_a2cb437c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 2380,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-12T15:28:07Z",
+      "side": 1,
+      "message": "Actually, I follow the below API format:\n```\n/** @brief Decode Numeric Sensor Pdr data\n *\n *  @param[in] pdr_data - pdr data for numeric sensor\n *  @param[in] pdr_data_length - Length of pdr data\n *  @param[out] pdr_value - unpacked numeric sensor PDR struct\n */\nint decode_numeric_sensor_pdr_data(\n    const void *pdr_data, size_t pdr_data_length,\n    struct pldm_numeric_sensor_value_pdr *pdr_value);\n```\nTo create new API to make the PDR decode APIs consistence.",
+      "parentUuid": "a82d8a45_774bd9b7",
+      "range": {
+        "startLine": 2380,
+        "startChar": 1,
+        "endLine": 2380,
+        "endChar": 17
+      },
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ba63579_a927cd8e",
@@ -94,6 +160,24 @@
       "writtenOn": "2024-07-11T05:48:43Z",
       "side": 1,
       "message": "Can you please add e.g. `@pre` descriptions here to describe the pre-conditions that must be met when calling this function? You mention in the commit message the expectations we have on the `names` array for instance - we need to make sure that\u0027s clearly documented here.",
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22ea7041_ac37baf6",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 2385,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-12T15:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ba63579_a927cd8e",
       "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -115,6 +199,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb35ccba_be01b93f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2714,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-12T15:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60d139d9_eff96fc9",
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42ea7c0b_d8130938",
@@ -128,6 +230,30 @@
       "writtenOn": "2024-07-11T05:48:43Z",
       "side": 1,
       "message": "ah, so we can cheat a bit here to make it less verbose. I reckon:\n\n```\nif ((rc \u003d pldm_msgbuf_destroy(dst)) ||\n    (rc \u003d pldm_msgbuf_destroy(src)) ||\n    (rc \u003d pldm_msgbuf_destroy(buf))) {\n    return rc;\n}\n\nreturn 0;\n```",
+      "range": {
+        "startLine": 2799,
+        "startChar": 1,
+        "endLine": 2809,
+        "endChar": 42
+      },
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16250993_6d3131a0",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2809,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-12T15:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42ea7c0b_d8130938",
       "range": {
         "startLine": 2799,
         "startChar": 1,
