@@ -154,6 +154,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca1ea4c_75b1af4c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-12T06:48:38Z",
+      "side": 1,
+      "message": "I\u0027ve made the change and the tests as you had written them pass with a minor change to drop the `const` on the relevant `struct variable_field` variable.",
+      "parentUuid": "d455e78e_7328b807",
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5f75b33_0901013c",
