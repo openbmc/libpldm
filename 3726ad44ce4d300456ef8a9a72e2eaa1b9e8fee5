@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b6db9d2_cf95ad1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-15T06:14:35Z",
+      "side": 1,
+      "message": "Hi, I\u0027ve checked the patchset and added some verfication in a test case for the `data` in `decode_downstream_device_parameter_table_entry()`, make sure that the `data`\u0027s `ptr` and \u0027length\u0027 is correct.",
+      "revId": "3726ad44ce4d300456ef8a9a72e2eaa1b9e8fee5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

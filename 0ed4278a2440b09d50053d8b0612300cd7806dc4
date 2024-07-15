@@ -172,6 +172,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e698e0_81b6036f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-15T06:14:35Z",
+      "side": 1,
+      "message": "Sorry for my misunderstanding, what I also did was changing the definition of `variable_field` and ran the local ci build, which affected other APIs.\n```\nstruct variable_field {\n\tconst uint8_t *ptr;  \u003c\u003c I changed it to the not const one\n\tsize_t length;\n};\n```\n\nThe change you made LGTM, thanks for your correction.",
+      "parentUuid": "bca1ea4c_75b1af4c",
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5f75b33_0901013c",
