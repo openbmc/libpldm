@@ -196,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de54ae85_c855e238",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "You need to keep the declaration of the old function name as well, for backwards compatibility. But also, can you please split this into a separate patch?",
+      "parentUuid": "3dca9b48_5154e10f",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "112d701c_753ae36c",
         "filename": "include/libpldm/oem/meta/file_io.h",
         "patchSetId": 2
@@ -225,6 +243,24 @@
       "side": 1,
       "message": "Done. Please check.",
       "parentUuid": "112d701c_753ae36c",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5ab4518_e926c769",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "190265f1_362cb63d",
       "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -276,6 +312,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee7ad3eb_39090259",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86ee7e76_e9ca4af0",
+      "range": {
+        "startLine": 43,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 27
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b93cad95_b768d9fe",
@@ -307,6 +367,24 @@
       "side": 1,
       "message": "Add doxygen comments done.\nThe reason related to file IO is to read the data of the file.",
       "parentUuid": "b93cad95_b768d9fe",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71da83cc_185ecbe1",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "This needs at least be called `encode_oem_meta_http_boot_header_resp()`",
+      "parentUuid": "744b1f89_ab7e047f",
       "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -364,6 +442,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "217eef4f_7907635b",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba4fbb08_d8d8f658",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7032fc3e_d5875924",
@@ -401,6 +497,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57bd7219_86d45699",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Please also fix the tests.",
+      "parentUuid": "0b833fdf_485af43d",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de3765ad_2f81a683",
         "filename": "src/oem/meta/file_io.c",
         "patchSetId": 2
@@ -430,6 +544,24 @@
       "side": 1,
       "message": "Done. Please check.",
       "parentUuid": "de3765ad_2f81a683",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b14c1d9d_a1129c42",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c3b2df6_23ef39ca",
       "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -516,6 +648,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "507ff7c5_a9bbddf3",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08d6a422_a274b6c1",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "026a7abd_b25528ef",
@@ -551,6 +707,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21bb4e08_955cb998",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3aed67c3_09d7b3d2",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3399a4e_04cb8ac0",
@@ -582,6 +756,24 @@
       "side": 1,
       "message": "Done. Please check.",
       "parentUuid": "e3399a4e_04cb8ac0",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26cb7697_41e08eeb",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3688cb58_becf656b",
       "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -623,6 +815,30 @@
       "side": 1,
       "message": "Done. Please check.",
       "parentUuid": "9802d4f6_f73120a2",
+      "range": {
+        "startLine": 52,
+        "startChar": 10,
+        "endLine": 52,
+        "endChar": 27
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bf05ecf_30740a2a",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c708ea6_1de3c4e0",
       "range": {
         "startLine": 52,
         "startChar": 10,
@@ -703,6 +919,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c04ed0e_c90691e8",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa305692_671fc68a",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0eeaaa9_ffcc8fe0",
@@ -740,6 +974,30 @@
       "side": 1,
       "message": "Done. Please check.",
       "parentUuid": "f0eeaaa9_ffcc8fe0",
+      "range": {
+        "startLine": 80,
+        "startChar": 14,
+        "endLine": 80,
+        "endChar": 30
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0276b0ec_4aae5573",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88f80862_4b9a802d",
       "range": {
         "startLine": 80,
         "startChar": 14,

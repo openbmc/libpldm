@@ -16,6 +16,74 @@
       "message": "Hi Andrew,\nI have modified the content according to the suggestions.\nIf you have any questions, please let me know, thank you.",
       "revId": "0ecbe53e8a8d6c851ef7e7fd0d3f3a95beaad76d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1b17982_ffc04202",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Hi; I\u0027m going to pull this down and make some fixes myself, then push it back. I\u0027d appreciate it if you test it and adjust change as necessary once I\u0027ve done so.",
+      "revId": "0ecbe53e8a8d6c851ef7e7fd0d3f3a95beaad76d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c636c0_59389139",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Please no more structs marked `__attribute__((packed))` in the public API. I put together a checklist that\u0027s helpful for adding new APIs, and avoiding this is one of the items in the list:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L82-L83",
+      "revId": "0ecbe53e8a8d6c851ef7e7fd0d3f3a95beaad76d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59d57e89_220dfe89",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "New functions should return negative errno values, not PLDM completion codes. Please see:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L119-L123",
+      "revId": "0ecbe53e8a8d6c851ef7e7fd0d3f3a95beaad76d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a0a0bc1_15bc72bc",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:42:56Z",
+      "side": 1,
+      "message": "Negative errno values please, not PLDM completion codes:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L119-L123",
+      "revId": "0ecbe53e8a8d6c851ef7e7fd0d3f3a95beaad76d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
