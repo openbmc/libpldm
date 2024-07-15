@@ -147,6 +147,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a42e33e3_a5f872bf",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 2380,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T02:38:10Z",
+      "side": 1,
+      "message": "Okay, yeah, I guess we go with that for now. It feels like something that needs more thought though, as just passing void pointers around is a pretty poor UX.",
+      "parentUuid": "d7ef0a84_a2cb437c",
+      "range": {
+        "startLine": 2380,
+        "startChar": 1,
+        "endLine": 2380,
+        "endChar": 17
+      },
+      "revId": "c136696cfa332ef6139a277e9277ec34f44864e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ba63579_a927cd8e",
