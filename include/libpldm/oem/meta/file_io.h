@@ -24,6 +24,14 @@ struct pldm_oem_meta_write_file_req {
 	uint8_t file_data[1];
 };
 
+struct pldm_oem_meta_read_file_req {
+	uint8_t file_handle;
+	uint8_t length;
+	uint8_t transferFlag;
+	uint8_t highOffset;
+	uint8_t lowOffset;
+};
+
 /** @brief Decode OEM meta write file io req
  *
  *  @param[in] msg - Pointer to PLDM request message
@@ -50,6 +58,17 @@ int decode_oem_meta_write_file_io_req(const struct pldm_msg *msg,
 int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 				size_t payload_length, uint8_t *file_handle,
 				uint32_t *length, uint8_t *data);
+
+/** @brief Decode OEM meta read file io req
+ *
+ *  @param[in] msg - Pointer to PLDM request message
+ *  @param[in] payload_length - Length of request payload
+ *  @param[out] req - Pointer to the structure to store the decoded response data
+ *  @return 0 on success, negative errno value on failure
+ */
+int decode_oem_meta_read_file_io_req(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     struct pldm_oem_meta_read_file_req *req);
 
 #ifdef __cplusplus
 }
