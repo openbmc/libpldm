@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56537643_228dfc4f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T04:15:02Z",
+      "side": 1,
+      "message": "I\u0027ve split the commit up, so this will need to be rewritten to reflect what\u0027s actually going on in the patch. Can you please do so? Perhaps:\n\n```\noem: meta: Add decode_oem_meta_write_file_io_req()\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 66
+      },
+      "revId": "97f0669deab3b29a6911a08c65e68f19b13932de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

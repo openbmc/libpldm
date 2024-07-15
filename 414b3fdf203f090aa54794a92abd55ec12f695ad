@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ff4b223_090acef7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T04:15:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b085a85_3bcb3e28",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49ec4526_6e60da94",
@@ -107,6 +125,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aae30e38_5406c966",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T04:15:02Z",
+      "side": 1,
+      "message": "Removing the content of the commit message was not what I was after. I\u0027ve split the changes.",
+      "parentUuid": "8e491d04_94ba0565",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 10,
+        "endChar": 49
+      },
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "687f91b4_bcd6434f",
@@ -138,6 +180,24 @@
       "side": 1,
       "message": "Done. Please check.",
       "parentUuid": "687f91b4_bcd6434f",
+      "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac7014a1_6de41756",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-15T04:15:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c638ce67_0eefb133",
       "revId": "414b3fdf203f090aa54794a92abd55ec12f695ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
