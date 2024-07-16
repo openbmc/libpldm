@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 1. oem: meta: Add decode_oem_meta_file_io_write_req()
+2. oem: meta: Add decode_oem_meta_file_io_read_req()
 
 ### Deprecated
 
