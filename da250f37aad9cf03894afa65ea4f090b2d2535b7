@@ -70,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b8aaaef_483d48c4",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-16T02:30:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "752b96ac_698dec83",
+      "revId": "da250f37aad9cf03894afa65ea4f090b2d2535b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c086c813_85cd354e",
@@ -83,6 +101,30 @@
       "writtenOn": "2024-07-16T02:04:33Z",
       "side": 1,
       "message": "The double-star is a trigger for doxygen processing, but this is not a doxygen comment, just something to capture some concerns. Can you please remove one star here (so we have `/*` rather than `/**`).",
+      "range": {
+        "startLine": 1211,
+        "startChar": 3,
+        "endLine": 1211,
+        "endChar": 4
+      },
+      "revId": "da250f37aad9cf03894afa65ea4f090b2d2535b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ff50dcb_d8503aad",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 1211,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-16T02:30:11Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "c086c813_85cd354e",
       "range": {
         "startLine": 1211,
         "startChar": 3,
@@ -116,6 +158,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d6ae66f_2bad63fd",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1904,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-16T02:30:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8422657_32fb560f",
+      "range": {
+        "startLine": 1904,
+        "startChar": 62,
+        "endLine": 1904,
+        "endChar": 68
+      },
+      "revId": "da250f37aad9cf03894afa65ea4f090b2d2535b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83098499_edcd9e9e",
@@ -129,6 +195,30 @@
       "writtenOn": "2024-07-16T02:04:33Z",
       "side": 1,
       "message": "Rather than \"Random\", can we please use \"Arbitrary\"? Otherwise this looks a lot like https://xkcd.com/221/\n\nFix this in the instances below as well.",
+      "range": {
+        "startLine": 1906,
+        "startChar": 7,
+        "endLine": 1906,
+        "endChar": 13
+      },
+      "revId": "da250f37aad9cf03894afa65ea4f090b2d2535b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa40852_9b8b01d7",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1906,
+      "author": {
+        "id": 1002120
+      },
+      "writtenOn": "2024-07-16T02:30:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83098499_edcd9e9e",
       "range": {
         "startLine": 1906,
         "startChar": 7,
