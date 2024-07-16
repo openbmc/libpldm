@@ -38,6 +38,7 @@ Change categories:
     below
 
 11. oem: meta: Add decode_oem_meta_file_io_write_req()
+12. oem: meta: Add decode_oem_meta_file_io_read_req()
 
 ### Changed
 
