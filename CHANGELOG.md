@@ -25,6 +25,7 @@ Change categories:
 4. platform: Define macros for the responded transferflags
 5. pdr: Add pldm_pdr_get_terminus_handle() API
 6. pdr: Add related decode_entity_auxiliary_names_pdr() APIs
+7. oem: meta: Add decode_oem_meta_write_file_io_req()
 
 ### Deprecated
 
@@ -40,6 +41,10 @@ Change categories:
       --in-place \
       $(git ls-files | grep -E '\.[ch](pp)?')
    ```
+
+2. Deprecate `decode_oem_meta_file_io_req()`
+
+   Users should switch to `decode_oem_meta_write_file_io_req()`.
 
 [coccinelle]: https://coccinelle.gitlabpages.inria.fr/website/
 
