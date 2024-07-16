@@ -20,12 +20,44 @@ enum pldm_oem_meta_file_io_commands {
 	PLDM_OEM_META_FILE_IO_CMD_READ_FILE = 0x3,
 };
 
+/** @brief read options in read file io command
+ */
+enum pldm_oem_meta_file_io_read_option {
+	// Read file attribute
+	PLDM_OEM_META_FILE_IO_READ_ATTR = 0x00,
+	// Read file data
+	PLDM_OEM_META_FILE_IO_READ_DATA = 0x01,
+};
+
 struct pldm_oem_meta_file_io_write_req {
 	uint8_t handle;
 	uint32_t length;
 #ifndef __cplusplus
 	uint8_t data[] LIBPLDM_CC_COUNTED_BY(length);
 #endif
+};
+
+/** @struct pldm_oem_meta_file_io_read_data_info
+ *
+ *  Structure representing PLDM read file data info
+ */
+struct pldm_oem_meta_file_io_read_data_info {
+	uint8_t length;
+	uint8_t transferFlag;
+	uint8_t highOffset;
+	uint8_t lowOffset;
+};
+
+/** @struct pldm_oem_meta_file_io_read_req
+ *
+ *  Structure representing PLDM read file request
+ */
+struct pldm_oem_meta_file_io_read_req {
+	uint8_t handle;
+	uint8_t option;
+	union {
+		struct pldm_oem_meta_file_io_read_data_info data;
+	} info;
 };
 
 /** @brief Obtain the pointer to the data array of a write request
@@ -61,6 +93,17 @@ int decode_oem_meta_file_io_write_req(
 int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 				size_t payload_length, uint8_t *file_handle,
 				uint32_t *length, uint8_t *data);
+
+/** @brief Decode OEM meta read file io req
+ *
+ *  @param[in] msg - Pointer to PLDM request message
+ *  @param[in] payload_length - Length of request payload
+ *  @param[out] req - Pointer to the structure to store the decoded response data
+ *  @return 0 on success, negative errno value on failure
+ */
+int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     struct pldm_oem_meta_file_io_read_req *req);
 
 #ifdef __cplusplus
 }

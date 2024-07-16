@@ -10,6 +10,7 @@
 #include "dsp/base.h"
 
 #define PLDM_OEM_META_DECODE_WRITE_FILE_IO_MIN_SIZE 6u
+#define PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE  3u
 
 LIBPLDM_ABI_TESTING
 void *pldm_oem_meta_file_io_write_req_data(
@@ -90,4 +91,52 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 	free(request_msg);
 
 	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     struct pldm_oem_meta_file_io_read_req *req)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	int rc = pldm_msgbuf_init_errno(
+		buf, PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE, msg->payload,
+		payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, req->handle);
+	rc = pldm_msgbuf_extract(buf, req->option);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, req->info.data.length);
+	if (rc) {
+		return rc;
+	}
+
+	switch (req->option) {
+	case PLDM_OEM_META_FILE_IO_READ_ATTR:
+		if (req->info.data.length != 0) {
+			return -EINVAL;
+		}
+		break;
+	case PLDM_OEM_META_FILE_IO_READ_DATA:
+		pldm_msgbuf_extract(buf, req->info.data.transferFlag);
+		pldm_msgbuf_extract(buf, req->info.data.highOffset);
+		pldm_msgbuf_extract(buf, req->info.data.lowOffset);
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	return pldm_msgbuf_destroy_consumed(buf);
 }
