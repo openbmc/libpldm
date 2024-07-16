@@ -28,6 +28,7 @@ Change categories:
 7. fw_update: Add encode req & decode resp for get_downstream_fw_params
 8. platform: Add decode_pldm_platform_cper_event_data() API
 9. oem: meta: Add decode_oem_meta_file_io_write_req()
+10. oem: meta: Add decode_oem_meta_file_io_read_req()
 
 ### Changed
 
