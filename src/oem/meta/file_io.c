@@ -54,3 +54,30 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 
 	return 0;
 }
+
+LIBPLDM_ABI_TESTING
+int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     struct pldm_oem_meta_read_file_req *req)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	int rc = pldm_msgbuf_init_errno(
+		buf, PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE, msg->payload,
+		payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, req->file_handle);
+	pldm_msgbuf_extract(buf, req->length);
+	pldm_msgbuf_extract(buf, req->transferFlag);
+	pldm_msgbuf_extract(buf, req->highOffset);
+	pldm_msgbuf_extract(buf, req->lowOffset);
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
