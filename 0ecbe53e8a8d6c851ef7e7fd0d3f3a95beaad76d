@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d64f10d2_c8fee328",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-16T02:58:46Z",
+      "side": 1,
+      "message": "Hi Andrew,\nI will include subsequent commits to retest whether the features we want to support work properly.\nWhen the test passes, I will report the test results in subsequent commits.\nThank you.",
+      "parentUuid": "b5546004_d7f7b96a",
+      "revId": "0ecbe53e8a8d6c851ef7e7fd0d3f3a95beaad76d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07c636c0_59389139",
         "filename": "include/libpldm/oem/meta/file_io.h",
         "patchSetId": 14
