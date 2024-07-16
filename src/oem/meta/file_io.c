@@ -9,7 +9,7 @@
 #include "dsp/base.h"
 
 #define PLDM_OEM_META_DECODE_WRITE_FILE_IO_MIN_SIZE 6
-#define PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE  1
+#define PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE  4
 
 LIBPLDM_ABI_STABLE
 int decode_oem_meta_file_io_write_req(const struct pldm_msg *msg,
@@ -53,4 +53,30 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 	}
 
 	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     struct pldm_oem_meta_read_file_req *req)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	int rc = pldm_msgbuf_init_errno(
+		buf, PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE, msg->payload,
+		payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, req->file_handle);
+	pldm_msgbuf_extract(buf, req->read_option);
+	pldm_msgbuf_extract(buf, req->length);
+	pldm_msgbuf_extract_array_uint8(buf, req->read_info, req->length);
+
+	return pldm_msgbuf_destroy_consumed(buf);
 }
