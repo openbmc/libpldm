@@ -27,6 +27,7 @@ Change categories:
 6. pdr: Add related decode_entity_auxiliary_names_pdr() APIs
 7. fw_update: Add encode req & decode resp for get_downstream_fw_params
 8. oem: meta: Add decode_oem_meta_write_file_io_req()
+9. oem: meta: Add decode_oem_meta_read_file_io_req()
 
 ### Deprecated
 
