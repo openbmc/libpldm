@@ -87,3 +87,76 @@ TEST(DecodeOemMetaFileIoWriteReq, testInvalidDataRequest)
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeOemMetaFileIoReadReq, testGoodDecodeRequest)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    int rc;
+
+    constexpr size_t payloadLen = PLDM_OEM_META_FILE_IO_READ_REQ_MIN_LENGTH +
+                                  PLDM_OEM_META_FILE_IO_READ_DATA_INFO_LENGTH;
+    alignas(pldm_msg) unsigned char buf[sizeof(pldm_msg_hdr) + payloadLen]{};
+    auto* msg = new (buf) pldm_msg;
+
+    rc = pldm_msgbuf_init_errno(ctx, 0, msg->payload, payloadLen);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint8(ctx, 0);
+    pldm_msgbuf_insert_uint8(ctx, PLDM_OEM_META_FILE_IO_READ_DATA);
+    pldm_msgbuf_insert_uint8(ctx, PLDM_OEM_META_FILE_IO_READ_DATA_INFO_LENGTH);
+    pldm_msgbuf_insert_uint8(ctx, 1);
+    pldm_msgbuf_insert_uint8(ctx, 12);
+    pldm_msgbuf_insert_uint8(ctx, 23);
+
+    rc = pldm_msgbuf_destroy_consumed(ctx);
+    ASSERT_EQ(rc, 0);
+
+    struct pldm_oem_meta_file_io_read_req req = {};
+    rc = decode_oem_meta_file_io_read_req(msg, payloadLen, &req);
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(req.version, sizeof(struct pldm_oem_meta_file_io_read_req);
+    EXPECT_EQ(req.handle, 0);
+    EXPECT_EQ(req.option, PLDM_OEM_META_FILE_IO_READ_DATA);
+    EXPECT_EQ(req.length, PLDM_OEM_META_FILE_IO_READ_DATA_INFO_LENGTH);
+    EXPECT_EQ(req.info.data.transferFlag, 1);
+    EXPECT_EQ(req.info.data.highOffset, 12);
+    EXPECT_EQ(req.info.data.lowOffset, 23);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeOemMetaFileIoReadReq, testInvalidFieldsDecodeRequest)
+{
+    struct pldm_msg msg = {};
+
+    auto rc = decode_oem_meta_file_io_read_req(
+        &msg, PLDM_OEM_META_FILE_IO_READ_REQ_MIN_LENGTH, NULL);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeOemMetaFileIoReadReq, testInvalidLengthDecodeRequest)
+{
+    struct pldm_oem_meta_file_io_read_req req = {};
+    struct pldm_msg msg = {};
+
+    auto rc = decode_oem_meta_file_io_read_req(&msg, 0, &req);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeOemMetaFileIoReadReq, testInvalidDataRequest)
+{
+    struct pldm_oem_meta_file_io_read_req req = {};
+    struct pldm_msg msg = {};
+
+    auto rc = decode_oem_meta_file_io_read_req(
+        &msg, PLDM_OEM_META_FILE_IO_READ_REQ_MIN_LENGTH - 1, &req);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
