@@ -20,6 +20,15 @@ enum pldm_oem_meta_file_io_commands {
 	PLDM_OEM_META_FILE_IO_CMD_READ_FILE = 0x3,
 };
 
+/** @brief read options in read file io command
+ */
+enum pldm_oem_meta_file_io_read_option {
+	// Read file attribute
+	PLDM_OEM_META_FILE_IO_READ_ATTR = 0x00,
+	// Read file data
+	PLDM_OEM_META_FILE_IO_READ_DATA = 0x01,
+};
+
 struct pldm_oem_meta_file_io_write_req {
 	uint8_t handle;
 	uint32_t length;
@@ -28,14 +37,28 @@ struct pldm_oem_meta_file_io_write_req {
 #endif
 };
 
-/** @brief Obtain the pointer to the data array of a write request
+/** @struct pldm_oem_meta_file_io_read_data_info
  *
- * @param[in] req - The pointer to the write request struct
- *
- * @return The write request data pointer.
+ *  Structure representing PLDM read file data info
  */
-void *pldm_oem_meta_file_io_write_req_data(
-	struct pldm_oem_meta_file_io_write_req *req);
+struct pldm_oem_meta_file_io_read_data_info {
+	uint8_t length;
+	uint8_t transferFlag;
+	uint8_t highOffset;
+	uint8_t lowOffset;
+};
+
+/** @struct pldm_oem_meta_file_io_read_req
+ *
+ *  Structure representing PLDM read file request
+ */
+struct pldm_oem_meta_file_io_read_req {
+	uint8_t handle;
+	uint8_t option;
+	union {
+		struct pldm_oem_meta_file_io_read_data_info data;
+	} info;
+};
 
 /** @brief Decode OEM meta write file io req
  *
@@ -61,6 +84,28 @@ int decode_oem_meta_file_io_write_req(
 int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 				size_t payload_length, uint8_t *file_handle,
 				uint32_t *length, uint8_t *data);
+
+/** @brief Obtain the pointer to the data array of a read request
+ *
+ * @param[in] req - The pointer to the read request struct
+ *
+ * @return The read request data pointer.
+ */
+void *
+pldm_oem_meta_file_io_read_req_data(struct pldm_oem_meta_file_io_read_req *req);
+
+/** @brief Decode OEM meta read file io req
+ *
+ *  @param[in] msg - Pointer to PLDM request message
+ *  @param[in] payload_length - Length of request payload
+ *  @param[out] req - Pointer to the structure to store the decoded response data
+ *  @param[in] req_length - Length of request structure
+ *  @return 0 on success, negative errno value on failure
+ */
+int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     struct pldm_oem_meta_file_io_read_req *req,
+				     uint16_t req_length);
 
 #ifdef __cplusplus
 }
