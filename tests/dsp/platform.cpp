@@ -5031,7 +5031,6 @@ TEST(GetStateEffecterStates, testBadDecodeResponse)
     return endptr - startptr;
 }
 
-#ifdef LIBPLDM_API_TESTING
 TEST(decodeEntityAuxNamePdrData, GoodTest)
 {
     std::vector<uint8_t> pdr1{
@@ -5150,9 +5149,7 @@ TEST(decodeEntityAuxNamePdrData, GoodTest)
     free(decodedPdr->names);
     free(decodedPdr);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(decodeEntityAuxNamePdrData, BadTest)
 {
     std::vector<uint8_t> pdr1{
@@ -5196,4 +5193,3 @@ TEST(decodeEntityAuxNamePdrData, BadTest)
     EXPECT_EQ(-EBADMSG, rc);
     free(decodedPdr);
 }
-#endif

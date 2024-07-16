@@ -27,6 +27,10 @@ Change categories:
 6. pdr: Add related decode_entity_auxiliary_names_pdr() APIs
 7. fw_update: Add encode req & decode resp for get_downstream_fw_params
 
+### Changed
+
+1. pdr: Stabilise related decode_entity_auxiliary_names_pdr() APIs
+
 ### Deprecated
 
 1. fru: Deprecate `get_fru_record_by_option_check()`
