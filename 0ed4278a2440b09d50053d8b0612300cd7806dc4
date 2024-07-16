@@ -190,6 +190,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d83fcdb_5aa062bf",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-16T01:45:55Z",
+      "side": 1,
+      "message": "Ah, yes, that would cause a lot of grief 😊 The code I ended up with to avoid that problem is a little verbose, but we can refactor it later to improve the ergonomics if more cases appear. Thanks for your patience here. Designing these APIs can be tricky 😊",
+      "parentUuid": "b6e698e0_81b6036f",
+      "revId": "0ed4278a2440b09d50053d8b0612300cd7806dc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5f75b33_0901013c",
