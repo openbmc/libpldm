@@ -2693,7 +2693,7 @@ int encode_get_state_effecter_states_resp(
 	return pldm_msgbuf_destroy_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_entity_auxiliary_names_pdr(
 	const void *data, size_t data_length,
 	struct pldm_entity_auxiliary_names_pdr *pdr, size_t pdr_length)
@@ -2805,7 +2805,7 @@ int decode_entity_auxiliary_names_pdr(
 	return 0;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_entity_auxiliary_names_pdr_index(
 	struct pldm_entity_auxiliary_names_pdr *pdr)
 {

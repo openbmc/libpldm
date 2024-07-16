@@ -5176,6 +5176,45 @@ $VAR1 = {
       'Return' => '100',
       'ShortName' => 'pldm_pdr_add_check'
     },
+    '94945' => {
+      'Header' => 'platform.h',
+      'Line' => '2428',
+      'Param' => {
+        '0' => {
+          'name' => 'pdr',
+          'type' => '95858'
+        }
+      },
+      'Return' => '100',
+      'ShortName' => 'decode_pldm_entity_auxiliary_names_pdr_index'
+    },
+    '95868' => {
+      'Header' => 'platform.h',
+      'Line' => '2406',
+      'Param' => {
+        '0' => {
+          'name' => 'data',
+          'type' => '2341'
+        },
+        '1' => {
+          'name' => 'data_length',
+          'type' => '1145'
+        },
+        '2' => {
+          'name' => 'pdr',
+          'type' => '95858'
+        },
+        '3' => {
+          'name' => 'pdr_length',
+          'type' => '1145'
+        }
+      },
+      'Reg' => {
+        '2' => 'rbx'
+      },
+      'Return' => '100',
+      'ShortName' => 'decode_entity_auxiliary_names_pdr'
+    },
     '102380' => {
       'Header' => 'platform.h',
       'Line' => '1781',
@@ -9193,6 +9232,7 @@ $VAR1 = {
       'decode_cancel_update_component_resp' => 1,
       'decode_cancel_update_resp' => 1,
       'decode_descriptor_type_length_value' => 1,
+      'decode_entity_auxiliary_names_pdr' => 1,
       'decode_event_message_buffer_size_resp' => 1,
       'decode_event_message_supported_resp' => 1,
       'decode_file_ack_req' => 1,
@@ -9247,6 +9287,7 @@ $VAR1 = {
       'decode_platform_event_message_req' => 1,
       'decode_platform_event_message_resp' => 1,
       'decode_pldm_comp_image_info' => 1,
+      'decode_pldm_entity_auxiliary_names_pdr_index' => 1,
       'decode_pldm_package_header_info' => 1,
       'decode_pldm_pdr_repository_change_record_data' => 1,
       'decode_pldm_pdr_repository_chg_event_data' => 1,
@@ -11312,6 +11353,15 @@ $VAR1 = {
       'Size' => '4',
       'Type' => 'Typedef'
     },
+    '88958' => {
+      'BaseType' => '927',
+      'Header' => 'types.h',
+      'Line' => '55',
+      'Name' => '__uint_least16_t',
+      'PrivateABI' => 1,
+      'Size' => '2',
+      'Type' => 'Typedef'
+    },
     '89011' => {
       'BaseType' => '88858',
       'Header' => 'stdint-intn.h',
@@ -11345,6 +11395,15 @@ $VAR1 = {
       'Line' => '164',
       'Name' => 'real32_t',
       'Size' => '4',
+      'Type' => 'Typedef'
+    },
+    '89922' => {
+      'BaseType' => '88958',
+      'Header' => 'uchar.h',
+      'Line' => '51',
+      'Name' => 'char16_t',
+      'PrivateABI' => 1,
+      'Size' => '2',
       'Type' => 'Typedef'
     },
     '90633' => {
@@ -11888,6 +11947,95 @@ $VAR1 = {
       'Size' => '112',
       'Type' => 'Struct'
     },
+    '92888' => {
+      'BaseType' => '89922',
+      'Header' => 'platform.h',
+      'Line' => '828',
+      'Name' => 'pldm_utf16be',
+      'Size' => '2',
+      'Type' => 'Typedef'
+    },
+    '92901' => {
+      'Header' => 'platform.h',
+      'Line' => '830',
+      'Memb' => {
+        '0' => {
+          'name' => 'tag',
+          'offset' => '0',
+          'type' => '982'
+        },
+        '1' => {
+          'name' => 'name',
+          'offset' => '8',
+          'type' => '92943'
+        }
+      },
+      'Name' => 'struct pldm_entity_auxiliary_name',
+      'Size' => '16',
+      'Type' => 'Struct'
+    },
+    '92943' => {
+      'BaseType' => '92888',
+      'Name' => 'pldm_utf16be*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '92948' => {
+      'Header' => 'platform.h',
+      'Line' => '840',
+      'Memb' => {
+        '0' => {
+          'name' => 'hdr',
+          'offset' => '0',
+          'type' => '92176'
+        },
+        '1' => {
+          'name' => 'container',
+          'offset' => '18',
+          'type' => '63152'
+        },
+        '2' => {
+          'name' => 'shared_name_count',
+          'offset' => '24',
+          'type' => '121'
+        },
+        '3' => {
+          'name' => 'name_string_count',
+          'offset' => '25',
+          'type' => '121'
+        },
+        '4' => {
+          'name' => 'names',
+          'offset' => '36',
+          'type' => '93062'
+        },
+        '5' => {
+          'name' => 'auxiliary_name_data_size',
+          'offset' => '50',
+          'type' => '1145'
+        },
+        '6' => {
+          'name' => 'auxiliary_name_data',
+          'offset' => '64',
+          'type' => '93067'
+        }
+      },
+      'Name' => 'struct pldm_entity_auxiliary_names_pdr',
+      'Size' => '40',
+      'Type' => 'Struct'
+    },
+    '93062' => {
+      'BaseType' => '92901',
+      'Name' => 'struct pldm_entity_auxiliary_name*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '93067' => {
+      'BaseType' => '114',
+      'Name' => 'char[]',
+      'Size' => '8',
+      'Type' => 'Array'
+    },
     '93082' => {
       'Header' => 'platform.h',
       'Line' => '870',
@@ -12091,6 +12239,12 @@ $VAR1 = {
       'Name' => 'struct pldm_pdr_repository_chg_event_data',
       'Size' => '3',
       'Type' => 'Struct'
+    },
+    '95858' => {
+      'BaseType' => '92948',
+      'Name' => 'struct pldm_entity_auxiliary_names_pdr*',
+      'Size' => '8',
+      'Type' => 'Pointer'
     },
     '103985' => {
       'BaseType' => '94070',
