@@ -28,6 +28,7 @@ Change categories:
 7. fw_update: Add encode req & decode resp for get_downstream_fw_params
 8. oem: meta: Add decode_oem_meta_write_file_io_req()
 9. oem: meta: Add decode_oem_meta_read_file_io_req()
+10. oem: meta: Add encode_oem_meta_http_boot_header_resp()
 
 ### Deprecated
 
