@@ -10,7 +10,6 @@
 
 static constexpr size_t oemMetaDecodeWriteFileIoReqBytes = 9;
 static constexpr size_t postCodeSize = 4;
-static constexpr size_t invalidDataSize = 0;
 
 TEST(DecodeOemMetaFileIoReq, testGoodDecodeRequest)
 {

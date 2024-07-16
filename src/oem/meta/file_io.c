@@ -10,6 +10,7 @@
 #include "dsp/base.h"
 
 #define PLDM_OEM_META_DECODE_WRITE_FILE_IO_MIN_SIZE 6u
+#define PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE  4u
 
 LIBPLDM_ABI_TESTING
 void *pldm_oem_meta_file_io_write_req_data(
@@ -87,4 +88,42 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 	memcpy(data, request_msg->data, request_msg->length);
 
 	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     struct pldm_oem_meta_file_io_read_req *req,
+				     uint16_t req_length)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+
+	if (msg == NULL || req == NULL || req->read_info == NULL) {
+		return -EINVAL;
+	}
+
+	int rc = pldm_msgbuf_init_errno(
+		buf, PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE, msg->payload,
+		payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, req->file_handle);
+	pldm_msgbuf_extract(buf, req->read_option);
+	rc = pldm_msgbuf_extract(buf, req->length);
+	if (rc) {
+		return rc;
+	}
+
+	if ((req->length + PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE) >
+	    req_length) {
+		// The total length of the request message exceeds the length provided
+		return -EOVERFLOW;
+	}
+
+	pldm_msgbuf_extract_array_uint8(buf, req->read_info, req->length);
+
+	return pldm_msgbuf_destroy_consumed(buf);
 }
