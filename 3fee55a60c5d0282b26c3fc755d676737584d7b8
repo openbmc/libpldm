@@ -16,6 +16,24 @@
       "message": "I\u0027ve left some comments on the linked patch.",
       "revId": "3fee55a60c5d0282b26c3fc755d676737584d7b8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26bda8e2_12ed939d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-17T07:40:05Z",
+      "side": 1,
+      "message": "Yeah, we resolved the discussion on the linked patch.\nLet back to this patch set.",
+      "parentUuid": "a5f9b1fd_1b2f214e",
+      "revId": "3fee55a60c5d0282b26c3fc755d676737584d7b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
