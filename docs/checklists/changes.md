@@ -180,6 +180,9 @@ Each of the following must succeed:
 - [ ] If the function is marked `LIBPLDM_ABI_STABLE`, then I have changed the
       annotation to `LIBPLDM_ABI_DEPRECATED` and left it in-place.
 
+  - [ ] I have updated the ABI dump, or will mark the change as WIP until it has
+        been.
+
 - [ ] If the function is marked `LIBPLDM_ABI_DEPRECATED`, then I have removed it
       only after satisfying myself that each of the following is true:
 
@@ -208,6 +211,9 @@ actions:
       name to the new name
 
 [coccinelle]: https://coccinelle.gitlabpages.inria.fr/website/
+
+- [ ] I've updated the ABI dump to capture the rename, or will mark the change
+      as WIP until it has been.
 
 ## Testing my changes
 
