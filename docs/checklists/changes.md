@@ -32,6 +32,10 @@
 [trail-of-bits-weird-machines]:
   https://blog.trailofbits.com/2018/10/26/the-good-the-bad-and-the-weird/
 
+- [Logic for Programmers - Hillel Wayne][logic-for-programmers]
+
+[logic-for-programmers]: https://leanpub.com/logic
+
 ## References
 
 - [C17 draft standard][c17-draft-standard]
