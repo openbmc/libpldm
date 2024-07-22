@@ -17,6 +17,23 @@ Change categories:
 
 ## [Unreleased]
 
+### Added
+
+1. oem: meta: Add decode_oem_meta_file_io_write_req()
+
+### Deprecated
+
+1. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
+
+   Users should switch to `decode_oem_meta_file_io_write_req()`. Modify this
+   function to make it safer.
+
+   Modification:
+
+   - The meaning of the returned result.
+   - Change parameters from individual pointers to a struct.
+   - Check the length provided in the message won't exceed the buffer.
+
 ### Removed
 
 1. Deprecated functions with the `_check` suffix
