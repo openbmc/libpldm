@@ -37,6 +37,8 @@ Change categories:
     Replaces decode_get_pdr_resp() as discussed in the `Deprecated` section
     below
 
+11. oem: meta: Add decode_oem_meta_file_io_write_req()
+
 ### Changed
 
 1. pdr: Stabilise related decode_entity_auxiliary_names_pdr() APIs
@@ -93,6 +95,17 @@ Change categories:
 
    Users should move to `decode_get_pdr_resp_safe()` which reduces the
    invocation tedium and improves memory safety over `decode_get_pdr_resp()`.
+
+4. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
+
+   Users should switch to `decode_oem_meta_file_io_write_req()`. Modify this
+   function to make it safer.
+
+   Modification:
+
+   - The meaning of the returned result.
+   - Change parameters from individual pointers to a struct.
+   - Check the length provided in the message won't exceed the buffer.
 
 ### Removed
 
