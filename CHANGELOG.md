@@ -26,6 +26,7 @@ Change categories:
 5. pdr: Add pldm_pdr_get_terminus_handle() API
 6. pdr: Add related decode_entity_auxiliary_names_pdr() APIs
 7. fw_update: Add encode req & decode resp for get_downstream_fw_params
+8. oem: meta: Add decode_oem_meta_file_io_write_req()
 
 ### Changed
 
@@ -45,6 +46,10 @@ Change categories:
       --in-place \
       $(git ls-files | grep -E '\.[ch](pp)?')
    ```
+
+2. Deprecate `decode_oem_meta_file_io_req()`
+
+   Users should switch to `decode_oem_meta_file_io_write_req()`.
 
 [coccinelle]: https://coccinelle.gitlabpages.inria.fr/website/
 
