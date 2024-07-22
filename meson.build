@@ -51,6 +51,7 @@ if get_option('abi').contains('deprecated')
     ['pldm_entity_association_pdr_add_from_node_check', 'pldm_entity_association_pdr_add_from_node'],
     ['pldm_pdr_add_check', 'pldm_pdr_add'],
     ['pldm_pdr_add_fru_record_set_check', 'pldm_pdr_add_fru_record_set'],
+    ['decode_oem_meta_file_io_req', 'decode_oem_meta_file_io_write_req'],
   ]
 else
   conf.set('LIBPLDM_ABI_DEPRECATED', '')
