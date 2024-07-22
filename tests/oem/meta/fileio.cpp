@@ -2,13 +2,14 @@
 #include <endian.h>
 #include <libpldm/oem/meta/file_io.h>
 
+#include <cstdlib>
+
 #include "msgbuf.h"
 
 #include <gtest/gtest.h>
 
 static constexpr size_t oemMetaDecodeWriteFileIoReqBytes = 9;
 static constexpr size_t postCodeSize = 4;
-static constexpr size_t invalidDataSize = 0;
 
 TEST(DecodeOemMetaFileIoReq, testGoodDecodeRequest)
 {
@@ -30,24 +31,26 @@ TEST(DecodeOemMetaFileIoReq, testGoodDecodeRequest)
     pldm_msgbuf_insert_int32(ctx, dataLengthLE);
     pldm_msgbuf_insert_array_uint8(ctx, postCode, sizeof(postCode));
 
-    std::array<uint8_t, oemMetaDecodeWriteFileIoReqBytes> retDataField{};
-
-    uint8_t retfileHandle = 0;
-    uint32_t retFileDataCnt = 0;
-
+    size_t request_msg_len =
+        sizeof(struct pldm_oem_meta_file_io_write_req) + sizeof(postCode);
+    auto* request_msg = static_cast<struct pldm_oem_meta_file_io_write_req*>(
+        malloc(request_msg_len));
+    auto* retDataField = static_cast<uint8_t*>(
+        pldm_oem_meta_file_io_write_req_data(request_msg));
     auto request = reinterpret_cast<pldm_msg*>(buf);
 
-    auto rc = decode_oem_meta_file_io_req(request, sizeof(buf) - hdrSize,
-                                          &retfileHandle, &retFileDataCnt,
-                                          retDataField.data());
+    auto rc = decode_oem_meta_file_io_write_req(request, sizeof(buf) - hdrSize,
+                                                request_msg, request_msg_len);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
-    EXPECT_EQ(retfileHandle, fileHandle);
-    EXPECT_EQ(retFileDataCnt, dataLengthLE);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(request_msg->handle, fileHandle);
+    EXPECT_EQ(request_msg->length, dataLengthLE);
     EXPECT_EQ(retDataField[0], postCode[0]);
     EXPECT_EQ(retDataField[1], postCode[1]);
     EXPECT_EQ(retDataField[2], postCode[2]);
     EXPECT_EQ(retDataField[3], postCode[3]);
+
+    free(request_msg);
 }
 
 TEST(DecodeOemMetaFileIoReq, testInvalidFieldsDecodeRequest)
@@ -55,39 +58,32 @@ TEST(DecodeOemMetaFileIoReq, testInvalidFieldsDecodeRequest)
     std::array<uint8_t, oemMetaDecodeWriteFileIoReqBytes> requestMsg{};
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
-    auto rc = decode_oem_meta_file_io_req(request, requestMsg.size(), NULL,
-                                          NULL, NULL);
+    auto rc =
+        decode_oem_meta_file_io_write_req(request, requestMsg.size(), NULL, 0);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 }
 
 TEST(DecodeOemMetaFileIoReq, testInvalidLengthDecodeRequest)
 {
-    uint8_t retfileHandle = 0;
-    uint32_t retFileDataCnt = 0;
+    struct pldm_oem_meta_file_io_write_req request_msg;
     uint8_t buf[1] = {};
-    std::array<uint8_t, oemMetaDecodeWriteFileIoReqBytes> retDataField{};
 
     auto request = reinterpret_cast<pldm_msg*>(buf);
+    auto rc = decode_oem_meta_file_io_write_req(request, 0, &request_msg,
+                                                sizeof(request_msg));
 
-    auto rc = decode_oem_meta_file_io_req(request, 0, &retfileHandle,
-                                          &retFileDataCnt, retDataField.data());
-
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EOVERFLOW);
 }
 
 TEST(DecodeOemMetaFileIoReq, testInvalidDataRequest)
 {
+    struct pldm_oem_meta_file_io_write_req request_msg;
     uint8_t buf[1] = {};
-    uint8_t retfileHandle = 0;
-    uint32_t retFileDataCnt = 0;
-
-    std::array<uint8_t, invalidDataSize> retDataField{};
 
     auto request = reinterpret_cast<pldm_msg*>(buf);
+    auto rc = decode_oem_meta_file_io_write_req(
+        request, sizeof(buf), &request_msg, sizeof(request_msg));
 
-    auto rc = decode_oem_meta_file_io_req(request, sizeof(buf), &retfileHandle,
-                                          &retFileDataCnt, retDataField.data());
-
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EOVERFLOW);
 }
