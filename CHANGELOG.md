@@ -27,6 +27,7 @@ Change categories:
 6. pdr: Add related decode_entity_auxiliary_names_pdr() APIs
 7. fw_update: Add encode req & decode resp for get_downstream_fw_params
 8. platform: Add decode_pldm_platform_cper_event_data() API
+9. oem: meta: Add decode_oem_meta_file_io_write_req()
 
 ### Changed
 
@@ -64,6 +65,17 @@ Change categories:
    - `pldm_entity_association_pdr_add_from_node_check()`
    - `pldm_pdr_add_check()`
    - `pldm_pdr_add_fru_record_set_check()`
+
+2. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
+
+   Users should switch to `decode_oem_meta_file_io_write_req()`. Modify this
+   function to make it safer.
+
+   Modification:
+
+   - The meaning of the returned result.
+   - Change parameters from individual pointers to a struct.
+   - Check the length provided in the message won't exceed the buffer.
 
 [clang-rename]: https://clang.llvm.org/extra/clang-rename.html
 
