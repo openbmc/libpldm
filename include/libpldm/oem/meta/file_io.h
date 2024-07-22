@@ -21,10 +21,24 @@ enum pldm_oem_meta_fileio_commands {
 struct pldm_oem_meta_write_file_req {
 	uint8_t file_handle;
 	uint32_t length;
-	uint8_t file_data[1];
+	uint8_t *file_data;
 };
 
-/** @brief Decode OEM meta file io req
+/** @brief Decode OEM meta write file io req
+ *
+ *  @param[in] msg - Pointer to PLDM request message
+ *  @param[in] payload_length - Length of request payload
+ *  @param[out] req - Pointer to the structure to store the decoded response data
+ *  @param[in] req_length - Length of request structure
+ *  @param[out] data - Message will be written to this
+ *  @return 0 on success, negative errno value on failure
+ */
+int decode_oem_meta_file_io_write_req(const struct pldm_msg *msg,
+				      size_t payload_length,
+				      struct pldm_oem_meta_write_file_req *req,
+				      uint32_t req_length);
+
+/** @brief Deprecated decoder for OEM meta write file io req
  *
  *  @param[in] msg - Pointer to PLDM request message
  *  @param[in] payload_length - Length of request payload
