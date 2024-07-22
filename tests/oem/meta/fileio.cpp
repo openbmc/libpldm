@@ -37,11 +37,11 @@ TEST(DecodeOemMetaFileIoReq, testGoodDecodeRequest)
 
     auto request = reinterpret_cast<pldm_msg*>(buf);
 
-    auto rc = decode_oem_meta_file_io_req(request, sizeof(buf) - hdrSize,
-                                          &retfileHandle, &retFileDataCnt,
-                                          retDataField.data());
+    auto rc = decode_oem_meta_file_io_write_req(request, sizeof(buf) - hdrSize,
+                                                &retfileHandle, &retFileDataCnt,
+                                                retDataField.data());
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
     EXPECT_EQ(retfileHandle, fileHandle);
     EXPECT_EQ(retFileDataCnt, dataLengthLE);
     EXPECT_EQ(retDataField[0], postCode[0]);
@@ -55,10 +55,10 @@ TEST(DecodeOemMetaFileIoReq, testInvalidFieldsDecodeRequest)
     std::array<uint8_t, oemMetaDecodeWriteFileIoReqBytes> requestMsg{};
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
-    auto rc = decode_oem_meta_file_io_req(request, requestMsg.size(), NULL,
-                                          NULL, NULL);
+    auto rc = decode_oem_meta_file_io_write_req(request, requestMsg.size(),
+                                                NULL, NULL, NULL);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 }
 
 TEST(DecodeOemMetaFileIoReq, testInvalidLengthDecodeRequest)
@@ -70,10 +70,10 @@ TEST(DecodeOemMetaFileIoReq, testInvalidLengthDecodeRequest)
 
     auto request = reinterpret_cast<pldm_msg*>(buf);
 
-    auto rc = decode_oem_meta_file_io_req(request, 0, &retfileHandle,
-                                          &retFileDataCnt, retDataField.data());
+    auto rc = decode_oem_meta_file_io_write_req(
+        request, 0, &retfileHandle, &retFileDataCnt, retDataField.data());
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EOVERFLOW);
 }
 
 TEST(DecodeOemMetaFileIoReq, testInvalidDataRequest)
@@ -86,8 +86,9 @@ TEST(DecodeOemMetaFileIoReq, testInvalidDataRequest)
 
     auto request = reinterpret_cast<pldm_msg*>(buf);
 
-    auto rc = decode_oem_meta_file_io_req(request, sizeof(buf), &retfileHandle,
+    auto rc =
+        decode_oem_meta_file_io_write_req(request, sizeof(buf), &retfileHandle,
                                           &retFileDataCnt, retDataField.data());
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 }
