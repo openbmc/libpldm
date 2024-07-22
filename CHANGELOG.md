@@ -26,6 +26,7 @@ Change categories:
 5. pdr: Add pldm_pdr_get_terminus_handle() API
 6. pdr: Add related decode_entity_auxiliary_names_pdr() APIs
 7. fw_update: Add encode req & decode resp for get_downstream_fw_params
+8. oem: meta: Add decode_oem_meta_file_io_write_req()
 
 ### Changed
 
@@ -63,6 +64,11 @@ Change categories:
    - `pldm_entity_association_pdr_add_from_node_check()`
    - `pldm_pdr_add_check()`
    - `pldm_pdr_add_fru_record_set_check()`
+
+2. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
+
+   Users should switch to `decode_oem_meta_file_io_write_req()`. Migration can
+   be automated with `evolutions/current/decode_oem_meta_file_io_req.yaml`.
 
 [clang-rename]: https://clang.llvm.org/extra/clang-rename.html
 
