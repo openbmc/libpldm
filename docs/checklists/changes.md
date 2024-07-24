@@ -36,6 +36,11 @@
 
 [logic-for-programmers]: https://leanpub.com/logic
 
+- [Parse, don’t validate][alexis-king-parse-dont-validate]
+
+[alexis-king-parse-dont-validate]:
+  https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/
+
 ## References
 
 - [C17 draft standard][c17-draft-standard]
