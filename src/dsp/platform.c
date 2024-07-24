@@ -1902,7 +1902,7 @@ int decode_pldm_pdr_repository_chg_event_data(const uint8_t *event_data,
 	return pldm_msgbuf_destroy(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_message_poll_event_data(
 	const void *event_data, size_t event_data_length,
 	struct pldm_message_poll_event *poll_event)

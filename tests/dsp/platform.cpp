@@ -2125,7 +2125,6 @@ TEST(PlatformEventMessage, testBadSensorEventDataDecodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
-#ifdef LIBPLDM_API_TESTING
 TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataDecodeRequest)
 {
     std::array<uint8_t, PLDM_PLATFORM_EVENT_MESSAGE_FORMAT_VERSION +
@@ -2152,9 +2151,7 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataDecodeRequest)
     EXPECT_EQ(poll_event.event_id, eventID);
     EXPECT_EQ(poll_event.data_transfer_handle, dataTransferHandle);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(PlatformEventMessage, testBadPldmMsgPollEventDataDecodeRequest)
 {
 
@@ -2200,7 +2197,6 @@ TEST(PlatformEventMessage, testBadPldmMsgPollEventDataDecodeRequest)
 
     EXPECT_EQ(rc, -EPROTO);
 }
-#endif
 
 #ifdef LIBPLDM_API_TESTING
 TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
