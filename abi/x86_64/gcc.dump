@@ -5700,6 +5700,34 @@ $VAR1 = {
       'Return' => '100',
       'ShortName' => 'decode_pldm_pdr_repository_change_record_data'
     },
+    '161678' => {
+      'Header' => 'platform.h',
+      'Line' => '2147',
+      'Param' => {
+        '0' => {
+          'name' => 'event_data',
+          'type' => '1219'
+        },
+        '1' => {
+          'name' => 'event_data_length',
+          'type' => '1145'
+        },
+        '2' => {
+          'name' => 'format_version',
+          'type' => '4572'
+        },
+        '3' => {
+          'name' => 'event_id',
+          'type' => '12495'
+        },
+        '4' => {
+          'name' => 'data_transfer_handle',
+          'type' => '4577'
+        }
+      },
+      'Return' => '100',
+      'ShortName' => 'decode_pldm_message_poll_event_data'
+    },
     '162953' => {
       'Header' => 'platform.h',
       'Line' => '2130',
@@ -9288,6 +9316,7 @@ $VAR1 = {
       'decode_platform_event_message_resp' => 1,
       'decode_pldm_comp_image_info' => 1,
       'decode_pldm_entity_auxiliary_names_pdr_index' => 1,
+      'decode_pldm_message_poll_event_data' => 1,
       'decode_pldm_package_header_info' => 1,
       'decode_pldm_pdr_repository_change_record_data' => 1,
       'decode_pldm_pdr_repository_chg_event_data' => 1,
