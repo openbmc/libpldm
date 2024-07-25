@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25542c65_7f14e669",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-25T02:04:26Z",
+      "side": 1,
+      "message": "Please remove the `wip: ` prefix if this is no-longer a work-in-progress change.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2047e94_edff2ef0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-25T02:04:26Z",
+      "side": 1,
+      "message": "Please say something more descriptive here. Can you provide some context for the message and maybe document the serialised message layout (that way we can make sure it matches the implementation).",
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c21bf627_fdd7363e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-25T02:04:26Z",
+      "side": 1,
+      "message": "Hi Lora, I\u0027ve outlined a number of concerns inline.",
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c90ed5fb_186d96f1",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-25T02:04:26Z",
+      "side": 1,
+      "message": "Please name this `pldm_oem_meta_fileio_read_option`",
+      "range": {
+        "startLine": 23,
+        "startChar": 5,
+        "endLine": 23,
+        "endChar": 37
+      },
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fb551e4_8635ef26",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-25T02:04:26Z",
+      "side": 1,
+      "message": "Similar to the review comment above: `pldm_oem_meta_fileio_read_req`, and fix the doxygen to be consistent.",
+      "range": {
+        "startLine": 40,
+        "startChar": 7,
+        "endLine": 40,
+        "endChar": 34
+      },
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5aaed90_f8302f92",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-25T02:04:26Z",
+      "side": 1,
+      "message": "This is not a valid flexible array definition. Please see the guidance here:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L89-L102",
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1185fc7c_915c63f0",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-25T02:04:26Z",
+      "side": 1,
+      "message": "`pldm_oem_meta_fileio_read_data_info`, and fix the doxygen.",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 40
+      },
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e9b39a2_67dbecea",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-25T02:04:26Z",
+      "side": 1,
+      "message": "`file_io` or `fileio`? Can we please be consistent.",
+      "range": {
+        "startLine": 92,
+        "startChar": 20,
+        "endLine": 92,
+        "endChar": 27
+      },
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12301cf1_5c89dfdf",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-25T02:04:26Z",
+      "side": 1,
+      "message": "If `struct pldm_oem_meta_read_file_req` contains a flexible array member then you must also pass the length of the `req` object through the API.",
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27d09a1c_a1edaefa",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-25T02:04:26Z",
+      "side": 1,
+      "message": "You use `req-\u003elength` in the call immediately below, but you\u0027ve neither checked the return value of `pldm_msgbuf_extract()` here, nor verified that the decoded length is in any way sensible. `msgbuf` will prevent out-of-bounds reads, but let\u0027s avoid even attempting them if we can determine the value isn\u0027t sensible to begin with. For instance `req-\u003elength \u003c payload_length` seems like a sensible check.",
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
