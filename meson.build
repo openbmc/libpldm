@@ -17,7 +17,8 @@ if get_option('tests').allowed()
   add_languages('cpp')
 endif
 
-add_project_arguments('-D_DEFAULT_SOURCE', language: ['c'])
+# For memmem() in src/msgbuf.h
+add_project_arguments('-D_GNU_SOURCE', language: ['c'])
 
 compiler = meson.get_compiler('c')
 conf = configuration_data()

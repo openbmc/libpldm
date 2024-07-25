@@ -2,13 +2,6 @@
 #ifndef PLDM_MSGBUF_H
 #define PLDM_MSGBUF_H
 
-// NOLINTBEGIN(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-#ifndef _GNU_SOURCE
-/* For memmem(3) */
-#define _GNU_SOURCE
-#endif
-// NOLINTEND(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-
 /*
  * Historically, many of the structs exposed in libpldm's public headers are
  * defined with __attribute__((packed)). This is unfortunate: it gives the
@@ -1140,7 +1133,7 @@ pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor,
 	 * not form a UTF16 NUL _code-point_ due to alignment with respect to the
 	 * start of the string
 	 */
-	end = (char *)ctx->cursor;
+	end = ctx->cursor;
 	do {
 		if (end != ctx->cursor) {
 			/*
@@ -1150,8 +1143,8 @@ pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor,
 			end = (char *)end + 1;
 		}
 		measured = (char *)end - (char *)ctx->cursor;
-		end = (char *)memmem(end, ctx->remaining - measured, &term,
-				     sizeof(term));
+		end = memmem(end, ctx->remaining - measured, &term,
+			     sizeof(term));
 	} while (end && ((uintptr_t)end & 1) != ((uintptr_t)ctx->cursor & 1));
 
 	if (!end) {
