@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "454b2435_93f19913",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-26T07:50:32Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "25542c65_7f14e669",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2047e94_edff2ef0",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-07-25T02:04:26Z",
       "side": 1,
       "message": "Please say something more descriptive here. Can you provide some context for the message and maybe document the serialised message layout (that way we can make sure it matches the implementation).",
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6dcf1a9_ce6a6291",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-26T07:50:32Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "b2047e94_edff2ef0",
       "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c82895a_dd576c0d",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-26T07:50:32Z",
+      "side": 1,
+      "message": "Done. Change to pldm_oem_meta_file_io_read_option.\nPlease check, thank you.",
+      "parentUuid": "c90ed5fb_186d96f1",
+      "range": {
+        "startLine": 23,
+        "startChar": 5,
+        "endLine": 23,
+        "endChar": 37
+      },
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fb551e4_8635ef26",
@@ -94,6 +160,30 @@
       "writtenOn": "2024-07-25T02:04:26Z",
       "side": 1,
       "message": "Similar to the review comment above: `pldm_oem_meta_fileio_read_req`, and fix the doxygen to be consistent.",
+      "range": {
+        "startLine": 40,
+        "startChar": 7,
+        "endLine": 40,
+        "endChar": 34
+      },
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82c389b4_67727ae8",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-26T07:50:32Z",
+      "side": 1,
+      "message": "Done. Change to pldm_oem_meta_file_io_read_req.\nPlease check, thank you.",
+      "parentUuid": "0fb551e4_8635ef26",
       "range": {
         "startLine": 40,
         "startChar": 7,
@@ -121,6 +211,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f9a6bae_67b81765",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-26T07:50:32Z",
+      "side": 1,
+      "message": "Done. Use pointers instead of flexible arrays.\nPlease check, thank you.",
+      "parentUuid": "b5aaed90_f8302f92",
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1185fc7c_915c63f0",
@@ -134,6 +242,30 @@
       "writtenOn": "2024-07-25T02:04:26Z",
       "side": 1,
       "message": "`pldm_oem_meta_fileio_read_data_info`, and fix the doxygen.",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 40
+      },
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2def1c00_beecaadb",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-26T07:50:32Z",
+      "side": 1,
+      "message": "Done. Change to pldm_oem_meta_file_io_read_data_info.\nPlease check, thank you.",
+      "parentUuid": "1185fc7c_915c63f0",
       "range": {
         "startLine": 51,
         "startChar": 7,
@@ -167,6 +299,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0655b1fb_cde16ff6",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-26T07:50:32Z",
+      "side": 1,
+      "message": "Done. All modified parts are changed to file_io.\nPlease check, thank you.",
+      "parentUuid": "8e9b39a2_67dbecea",
+      "range": {
+        "startLine": 92,
+        "startChar": 20,
+        "endLine": 92,
+        "endChar": 27
+      },
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12301cf1_5c89dfdf",
@@ -184,6 +340,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abd77975_02cd30ad",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-26T07:50:32Z",
+      "side": 1,
+      "message": "Done. Added req_length parameter to check whether the total length of the requested message meets expectations.\nPlease check, thank you.",
+      "parentUuid": "12301cf1_5c89dfdf",
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27d09a1c_a1edaefa",
@@ -197,6 +371,24 @@
       "writtenOn": "2024-07-25T02:04:26Z",
       "side": 1,
       "message": "You use `req-\u003elength` in the call immediately below, but you\u0027ve neither checked the return value of `pldm_msgbuf_extract()` here, nor verified that the decoded length is in any way sensible. `msgbuf` will prevent out-of-bounds reads, but let\u0027s avoid even attempting them if we can determine the value isn\u0027t sensible to begin with. For instance `req-\u003elength \u003c payload_length` seems like a sensible check.",
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72f6d746_24ae2eaf",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-26T07:50:32Z",
+      "side": 1,
+      "message": "Done. Checks whether the total length of the request message is the same as the provided length plus the minimum decoded length.\nPlease check, thank you.",
+      "parentUuid": "27d09a1c_a1edaefa",
       "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
