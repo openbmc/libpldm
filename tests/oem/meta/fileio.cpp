@@ -7,6 +7,7 @@
 
 #include "msgbuf.h"
 
+#include "gmock/gmock.h"
 #include <gtest/gtest.h>
 
 #ifdef LIBPLDM_API_TESTING
@@ -155,6 +156,73 @@ TEST(DecodeOemMetaFileIoReadReq, testInvalidDataRequest)
 
     auto rc = decode_oem_meta_file_io_read_req(
         &msg, PLDM_OEM_META_FILE_IO_READ_REQ_MIN_LENGTH - 1, &req);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeOemMetaFileIoReadResp, testGoodEncodeResponse)
+{
+    int rc;
+
+    alignas(pldm_oem_meta_file_io_read_resp) unsigned char
+        decodedBuf[sizeof(pldm_oem_meta_file_io_read_resp)];
+    auto* resp = new (decodedBuf) pldm_oem_meta_file_io_read_resp;
+    resp->version = sizeof(pldm_oem_meta_file_io_read_resp);
+    resp->completion_code = PLDM_SUCCESS;
+    resp->handle = 1;
+    resp->option = PLDM_OEM_META_FILE_IO_READ_ATTR;
+    resp->length = 0;
+    resp->attr.size = 0x1284;
+    resp->attr.crc32 = 0xab715432;
+
+    constexpr size_t payloadLen = PLDM_OEM_META_FILE_IO_READ_RESP_MIN_SIZE;
+    alignas(pldm_msg) unsigned char
+        encodedBuf[sizeof(pldm_msg_hdr) + payloadLen] = {};
+    auto* msg = new (encodedBuf) pldm_msg;
+
+    rc = encode_oem_meta_file_io_read_resp(
+        0, sizeof(pldm_oem_meta_file_io_read_resp), resp, payloadLen, msg);
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_THAT(encodedBuf, testing::ElementsAreArray(
+                                {0x00, 0x3f, 0x03, 0x00, 0x01, 0x00, 0x00, 0x84,
+                                 0x12, 0x32, 0x54, 0x71, 0xab}));
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeOemMetaFileIoReadResp, testInvalidFieldsEncodeResponse)
+{
+    struct pldm_msg msg = {};
+
+    auto rc = encode_oem_meta_file_io_read_resp(
+        0, 0, NULL, PLDM_OEM_META_FILE_IO_READ_RESP_MIN_SIZE, &msg);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeOemMetaFileIoReadResp, testInvalidLengthEncodeResponse)
+{
+    struct pldm_oem_meta_file_io_read_resp resp = {};
+    struct pldm_msg msg = {};
+
+    auto rc =
+        encode_oem_meta_file_io_read_resp(0, sizeof(resp), &resp, 0, &msg);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeOemMetaFileIoReadResp, testInvalidDataEncodeResponse)
+{
+    struct pldm_oem_meta_file_io_read_resp resp = {};
+    struct pldm_msg msg = {};
+
+    auto rc = encode_oem_meta_file_io_read_resp(
+        0, sizeof(resp), &resp, PLDM_OEM_META_FILE_IO_READ_RESP_MIN_SIZE - 1,
+        &msg);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
