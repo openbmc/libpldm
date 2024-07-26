@@ -58,6 +58,7 @@ Change categories:
 ### Fixed
 
 1. requester: instance-id: Release read lock on conflict
+2. platform: Rework decode/encode_pldm_message_poll_event_data() APIs
 
 ## [0.8.0] - 2024-05-23
 
