@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1138b3be_08788eba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-26T00:07:29Z",
+      "side": 1,
+      "message": "Hi Thu, I have a few requests based on experience since merging this API.",
+      "revId": "7fc43e6cde5be6fd803d507e68ae3f7d7c3aa7e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc308058_b97b8151",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1906,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-26T00:07:29Z",
+      "side": 1,
+      "message": "Prior to stabilisation, can we please make this `const void *`?",
+      "range": {
+        "startLine": 1906,
+        "startChar": 46,
+        "endLine": 1906,
+        "endChar": 53
+      },
+      "revId": "7fc43e6cde5be6fd803d507e68ae3f7d7c3aa7e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a09369a7_004e1deb",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1910,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-26T00:07:29Z",
+      "side": 1,
+      "message": "Can we please do this as a struct instead?",
+      "range": {
+        "startLine": 1907,
+        "startChar": 5,
+        "endLine": 1910,
+        "endChar": 35
+      },
+      "revId": "7fc43e6cde5be6fd803d507e68ae3f7d7c3aa7e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55ea6894_4da1e5b6",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1921,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-26T00:07:29Z",
+      "side": 1,
+      "message": "Please let\u0027s also convert this to `pldm_msgbuf_init_errno()` and fix the doxygen.",
+      "range": {
+        "startLine": 1921,
+        "startChar": 6,
+        "endLine": 1921,
+        "endChar": 25
+      },
+      "revId": "7fc43e6cde5be6fd803d507e68ae3f7d7c3aa7e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
