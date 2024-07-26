@@ -3,6 +3,7 @@
 ## List of read file IO functions
 
 - decode_oem_meta_file_io_read_req function
+- encode_oem_meta_file_io_read_resp function
 
 ## decode_oem_meta_file_io_read_req function format
 
