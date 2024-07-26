@@ -127,3 +127,28 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }
+
+LIBPLDM_ABI_TESTING
+int encode_oem_meta_file_io_read_resp(uint8_t instance_id,
+				      uint8_t completion_code,
+				      struct pldm_msg *responseMsg)
+{
+	if (responseMsg == NULL) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_RESPONSE;
+	header.pldm_type = PLDM_OEM;
+	header.command = PLDM_OEM_META_FILE_IO_CMD_READ_FILE;
+	uint8_t rc = pack_pldm_header_errno(&header, &(responseMsg->hdr));
+
+	if (rc) {
+		return rc;
+	}
+
+	responseMsg->payload[0] = completion_code;
+
+	return 0;
+}

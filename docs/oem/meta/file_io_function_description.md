@@ -3,6 +3,7 @@
 ## List of functions related to reading file IO command
 
 - decode_oem_meta_file_io_read_req function
+- encode_oem_meta_file_io_read_resp function
 
 ## Read file IO command format
 
