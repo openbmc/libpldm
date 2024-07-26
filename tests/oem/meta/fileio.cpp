@@ -163,3 +163,88 @@ TEST(DecodeOemMetaFileIoReadReq, testInvalidDataRequest)
 
     EXPECT_EQ(rc, -EOVERFLOW);
 }
+
+TEST(EncodeOemMetaFileIoReadResp, testGoodEncodeResponse)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_oem_meta_file_io_read_resp resp;
+
+    uint8_t instance_id = 0x00;
+    uint8_t crc32[4] = {0x32, 0x54, 0x71. 0xab};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.handle = 0x01;
+    resp.option = PLDM_OEM_META_FILE_IO_READ_ATTR;
+    resp.length = 0x04;
+    resp.data = crc32;
+
+    constexpr auto hdrSize = sizeof(pldm_msg_hdr);
+
+    uint8_t buf[hdrSize + sizeof(struct pldm_oem_meta_file_io_read_resp)] = {};
+
+    ASSERT_EQ(
+        pldm_msgbuf_init_errno(ctx, 0, &buf[hdrSize], sizeof(buf) - hdrSize),
+        0);
+
+    pldm_msgbuf_insert_uint8(ctx, resp.completion_code);
+    pldm_msgbuf_insert_uint8(ctx, resp.handle);
+    pldm_msgbuf_insert_uint8(ctx, resp.option);
+    pldm_msgbuf_insert_uint8(ctx, resp.length);
+    pldm_msgbuf_insert_array_uint8(ctx, crc32, sizeof(crc32));
+
+    auto response_msg = reinterpret_cast<pldm_msg*>(buf);
+
+    auto rc = encode_oem_meta_file_io_read_resp(
+        instance_id, &resp, sizeof(buf) - hdrSize, response_msg);
+    struct pldm_oem_meta_file_io_read_resp* resp_buf =
+        (struct pldm_oem_meta_file_io_read_resp*)response_msg->payload;
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(response_msg->hdr.instance_id, instance_id);
+    EXPECT_EQ(resp_buf->completion_code, resp.completion_code);
+    EXPECT_EQ(resp_buf->handle, resp.handle);
+    EXPECT_EQ(resp_buf->option, resp.option);
+    EXPECT_EQ(resp_buf->length, resp.length);
+    EXPECT_EQ(resp_buf->data[0], crc32[0]);
+    EXPECT_EQ(resp_buf->data[1], crc32[1]);
+    EXPECT_EQ(resp_buf->data[2], crc32[2]);
+    EXPECT_EQ(resp_buf->data[3], crc32[3]);
+}
+
+TEST(EncodeOemMetaFileIoReadResp, testInvalidFieldsEncodeResponse)
+{
+    uint8_t instance_id = 0x00;
+    uint8_t buf[sizeof(struct pldm_oem_meta_file_io_read_resp)] = {};
+    auto response_msg = reinterpret_cast<pldm_msg*>(buf);
+
+    auto rc = encode_oem_meta_file_io_read_resp(instance_id, NULL, sizeof(buf),
+                                                response_msg);
+
+    EXPECT_EQ(rc, -EINVAL);
+}
+
+TEST(EncodeOemMetaFileIoReadResp, testInvalidLengthEncodeResponse)
+{
+    uint8_t instance_id = 0x00;
+    struct pldm_oem_meta_file_io_read_resp resp;
+    uint8_t buf[1] = {};
+    auto response_msg = reinterpret_cast<pldm_msg*>(buf);
+
+    auto rc =
+        encode_oem_meta_file_io_read_resp(instance_id, &resp, 0, response_msg);
+
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+
+TEST(EncodeOemMetaFileIoReadResp, testInvalidDataEncodeResponse)
+{
+    uint8_t instance_id = 0x00;
+    struct pldm_oem_meta_file_io_read_resp resp;
+    uint8_t buf[1] = {};
+    auto response_msg = reinterpret_cast<pldm_msg*>(buf);
+
+    auto rc = encode_oem_meta_file_io_read_resp(instance_id, &resp, sizeof(buf),
+                                                response_msg);
+
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
