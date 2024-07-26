@@ -137,3 +137,94 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }
+
+LIBPLDM_ABI_TESTING
+void *pldm_oem_meta_file_io_read_resp_data(
+	struct pldm_oem_meta_file_io_read_resp *resp)
+{
+	return resp->data;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_oem_meta_file_io_read_resp(
+	uint8_t instance_id, uint16_t resp_len,
+	struct pldm_oem_meta_file_io_read_resp *resp, uint16_t payload_length,
+	struct pldm_msg *responseMsg)
+{
+	int rc;
+	uint8_t compare_length;
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	struct pldm_header_info header = { 0 };
+
+	if (resp == NULL || responseMsg == NULL) {
+		return -EINVAL;
+	}
+
+	if (resp_len < sizeof(*resp)) {
+		return -EINVAL;
+	}
+
+	if (resp->version > sizeof(*resp)) {
+		return -E2BIG;
+	}
+
+	switch (resp->option) {
+	case PLDM_OEM_META_FILE_IO_READ_ATTR:
+		compare_length = PLDM_OEM_META_FILE_IO_READ_RESP_MIN_SIZE +
+				 PLDM_OEM_META_FILE_IO_READ_ATTR_INFO_LENGTH;
+		break;
+	case PLDM_OEM_META_FILE_IO_READ_DATA:
+		compare_length = PLDM_OEM_META_FILE_IO_READ_RESP_MIN_SIZE +
+				 PLDM_OEM_META_FILE_IO_READ_DATA_INFO_LENGTH;
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	if (payload_length < compare_length + resp->length) {
+		return -EOVERFLOW;
+	}
+
+	header.instance = instance_id;
+	header.msg_type = PLDM_RESPONSE;
+	header.pldm_type = PLDM_OEM;
+	header.command = PLDM_OEM_META_FILE_IO_CMD_READ_FILE;
+	rc = pack_pldm_header_errno(&header, &(responseMsg->hdr));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_OEM_META_FILE_IO_READ_RESP_MIN_SIZE,
+				    responseMsg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, resp->completion_code);
+	pldm_msgbuf_insert(buf, resp->handle);
+	pldm_msgbuf_insert(buf, resp->option);
+	pldm_msgbuf_insert(buf, resp->length);
+
+	switch (resp->option) {
+	case PLDM_OEM_META_FILE_IO_READ_ATTR:
+		pldm_msgbuf_insert(buf, resp->attr.size);
+		pldm_msgbuf_insert(buf, resp->attr.crc32);
+		break;
+	case PLDM_OEM_META_FILE_IO_READ_DATA:
+		pldm_msgbuf_insert(buf, resp->info.transferFlag);
+		pldm_msgbuf_insert(buf, resp->info.offset);
+		rc = pldm_msgbuf_insert_array_uint8(
+			buf, resp->length, resp->data,
+			payload_length - compare_length);
+		if (rc) {
+			return rc;
+		}
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}

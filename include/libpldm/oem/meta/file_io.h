@@ -73,6 +73,26 @@ struct pldm_oem_meta_file_io_read_req {
 };
 #define PLDM_OEM_META_FILE_IO_READ_REQ_MIN_LENGTH 3u
 
+/** @struct pldm_oem_meta_file_io_read_resp
+ *
+ *  Structure representing PLDM read file response
+ */
+struct pldm_oem_meta_file_io_read_resp {
+	size_t version;
+	uint8_t completion_code;
+	uint8_t handle;
+	uint8_t option;
+	uint8_t length;
+	union {
+		struct pldm_oem_meta_file_io_read_attr_info attr;
+		struct pldm_oem_meta_file_io_read_data_info info;
+	};
+#ifndef __cplusplus
+	uint8_t data[] LIBPLDM_CC_COUNTED_BY(length);
+#endif
+};
+#define PLDM_OEM_META_FILE_IO_READ_RESP_MIN_SIZE 4u
+
 /** @brief Obtain the pointer to the data array of a write request
  *
  * @param[in] req - The pointer to the write request struct
@@ -117,6 +137,30 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 				     size_t payload_length,
 				     struct pldm_oem_meta_file_io_read_req *req);
+
+/** @brief Obtain the pointer to the data array of a read response
+ *
+ * @param[in] resp - The pointer to the read response struct
+ *
+ * @return The read response data pointer.
+ */
+void *pldm_oem_meta_file_io_read_resp_data(
+	struct pldm_oem_meta_file_io_read_resp *resp);
+
+/**
+ * @brief Encode OEM meta read file io resp
+ *
+ * @param[in] instance_id - The instance ID of the PLDM entity
+ * @param[in] resp_len - Length of response message
+ * @param[out] resp - Pointer to the reqponse message
+ * @param[in] payload_length - Length of response payload
+ * @param[out] responseMsg - Pointer to the buffer to store the response data
+ * @return 0 on success, negative errno value on failure
+ */
+int encode_oem_meta_file_io_read_resp(
+	uint8_t instance_id, uint16_t resp_len,
+	struct pldm_oem_meta_file_io_read_resp *resp, uint16_t payload_length,
+	struct pldm_msg *responseMsg);
 
 #ifdef __cplusplus
 }
