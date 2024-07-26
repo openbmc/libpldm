@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50d5d4be_e2e3a8d9",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1906,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-26T12:08:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc308058_b97b8151",
+      "range": {
+        "startLine": 1906,
+        "startChar": 46,
+        "endLine": 1906,
+        "endChar": 53
+      },
+      "revId": "7fc43e6cde5be6fd803d507e68ae3f7d7c3aa7e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a09369a7_004e1deb",
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c8300ca_f0052cf5",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1910,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-26T12:08:37Z",
+      "side": 1,
+      "message": "I added struct\n```\n/** @struct pldm_message_poll_event\n *\n *  structure representing pldmMessagePollEvent\n */\nstruct pldm_message_poll_event {\n\tuint8_t format_version;\n\tuint8_t event_id;\n\tuint8_t data_transfer_handle;\n};\n```\nAnd update function to\n```\nint decode_pldm_message_poll_event_data(const void *event_data,\n\t\t\t\t\tsize_t event_data_length,\n\t\t\t\t\tstruct pldm_message_poll_event poll_event);\n```",
+      "parentUuid": "a09369a7_004e1deb",
+      "range": {
+        "startLine": 1907,
+        "startChar": 5,
+        "endLine": 1910,
+        "endChar": 35
+      },
+      "revId": "7fc43e6cde5be6fd803d507e68ae3f7d7c3aa7e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55ea6894_4da1e5b6",
         "filename": "src/dsp/platform.c",
         "patchSetId": 1
@@ -77,6 +125,30 @@
       "writtenOn": "2024-07-26T00:07:29Z",
       "side": 1,
       "message": "Please let\u0027s also convert this to `pldm_msgbuf_init_errno()` and fix the doxygen.",
+      "range": {
+        "startLine": 1921,
+        "startChar": 6,
+        "endLine": 1921,
+        "endChar": 25
+      },
+      "revId": "7fc43e6cde5be6fd803d507e68ae3f7d7c3aa7e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "593eb7b3_9f77b0ae",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1921,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-26T12:08:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55ea6894_4da1e5b6",
       "range": {
         "startLine": 1921,
         "startChar": 6,
