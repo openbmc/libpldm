@@ -1903,71 +1903,62 @@ int decode_pldm_pdr_repository_chg_event_data(const uint8_t *event_data,
 }
 
 LIBPLDM_ABI_TESTING
-int decode_pldm_message_poll_event_data(const uint8_t *event_data,
-					size_t event_data_length,
-					uint8_t *format_version,
-					uint16_t *event_id,
-					uint32_t *data_transfer_handle)
+int decode_pldm_message_poll_event_data(
+	const void *event_data, size_t event_data_length,
+	struct pldm_message_poll_event *poll_event)
 {
 	struct pldm_msgbuf _buf;
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (event_data == NULL || format_version == NULL || event_id == NULL ||
-	    data_transfer_handle == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+	if (!poll_event) {
+		return -EINVAL;
 	}
 
-	rc = pldm_msgbuf_init_cc(buf, PLDM_MSG_POLL_EVENT_LENGTH, event_data,
-				 event_data_length);
+	rc = pldm_msgbuf_init_errno(buf, PLDM_MSG_POLL_EVENT_LENGTH, event_data,
+				    event_data_length);
 	if (rc) {
 		return rc;
 	}
 
-	pldm_msgbuf_extract_p(buf, format_version);
-	rc = pldm_msgbuf_extract_p(buf, event_id);
+	pldm_msgbuf_extract(buf, poll_event->format_version);
+	rc = pldm_msgbuf_extract(buf, poll_event->event_id);
 	if (rc) {
 		return rc;
 	}
 
-	if (*event_id == 0x0000 || *event_id == 0xffff) {
-		return PLDM_ERROR_INVALID_DATA;
+	if (poll_event->event_id == 0x0000 || poll_event->event_id == 0xffff) {
+		return -EPROTO;
 	}
 
-	pldm_msgbuf_extract_p(buf, data_transfer_handle);
+	pldm_msgbuf_extract(buf, poll_event->data_transfer_handle);
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 LIBPLDM_ABI_TESTING
-int encode_pldm_message_poll_event_data(uint8_t format_version,
-					uint16_t event_id,
-					uint32_t data_transfer_handle,
-					uint8_t *event_data,
-					size_t event_data_length)
+int encode_pldm_message_poll_event_data(
+	const struct pldm_message_poll_event *poll_event, void *event_data,
+	size_t event_data_length)
 {
 	struct pldm_msgbuf _buf;
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (event_data == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+	if (poll_event->event_id == 0x0000 || poll_event->event_id == 0xffff) {
+		return -EPROTO;
 	}
 
-	if (event_id == 0x0000 || event_id == 0xffff) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-
-	rc = pldm_msgbuf_init_cc(buf, PLDM_MSG_POLL_EVENT_LENGTH, event_data,
-				 event_data_length);
+	rc = pldm_msgbuf_init_errno(buf, PLDM_MSG_POLL_EVENT_LENGTH, event_data,
+				    event_data_length);
 	if (rc) {
 		return rc;
 	}
-	pldm_msgbuf_insert(buf, format_version);
-	pldm_msgbuf_insert(buf, event_id);
-	pldm_msgbuf_insert(buf, data_transfer_handle);
+	pldm_msgbuf_insert(buf, poll_event->format_version);
+	pldm_msgbuf_insert(buf, poll_event->event_id);
+	pldm_msgbuf_insert(buf, poll_event->data_transfer_handle);
 
-	return pldm_msgbuf_destroy(buf);
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE

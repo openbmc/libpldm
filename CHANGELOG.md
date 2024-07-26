@@ -30,6 +30,7 @@ Change categories:
 ### Changed
 
 1. pdr: Stabilise related decode_entity_auxiliary_names_pdr() APIs
+2. platform: Rework decode/encode_pldm_message_poll_event_data() APIs
 
 ### Deprecated
 
