@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f02f1aae_3a14f136",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-26T07:32:05Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "55ea3b87_77748f49",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 49
+      },
+      "revId": "8cc87baa2ac5bb510d7192560a2243a3f17b255a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6013219b_26da6a77",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-07-25T02:23:08Z",
       "side": 1,
       "message": "This is an unrelated change? Please move it to the appropriate commit.",
+      "revId": "8cc87baa2ac5bb510d7192560a2243a3f17b255a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1194482_8e37d52c",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-26T07:32:05Z",
+      "side": 1,
+      "message": "Done. (Remove the unrelated change)\nPlease check, thank you.",
+      "parentUuid": "6013219b_26da6a77",
       "revId": "8cc87baa2ac5bb510d7192560a2243a3f17b255a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
