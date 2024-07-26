@@ -11,6 +11,7 @@
 
 #define PLDM_OEM_META_DECODE_WRITE_FILE_IO_MIN_SIZE 6u
 #define PLDM_OEM_META_DECODE_READ_FILE_IO_MIN_SIZE  3u
+#define PLDM_OEM_META_ENCODE_READ_FILE_IO_MIN_SIZE  4u
 
 LIBPLDM_ABI_TESTING
 void *pldm_oem_meta_file_io_write_req_data(
@@ -139,4 +140,47 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 	}
 
 	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int encode_oem_meta_file_io_read_resp(
+	uint8_t instance_id, struct pldm_oem_meta_file_io_read_resp *resp,
+	struct pldm_msg *responseMsg, uint16_t payload_length)
+{
+	if (resp == NULL || responseMsg == NULL) {
+		return -EINVAL;
+	}
+
+	if (payload_length <= PLDM_OEM_META_ENCODE_READ_FILE_IO_MIN_SIZE) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_RESPONSE;
+	header.pldm_type = PLDM_OEM;
+	header.command = PLDM_OEM_META_FILE_IO_CMD_READ_FILE;
+	int rc = pack_pldm_header_errno(&header, &(responseMsg->hdr));
+
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert_uint8(responseMsg->payload, resp->completion_code);
+	pldm_msgbuf_insert_uint8(responseMsg->payload, resp->handle);
+	pldm_msgbuf_insert_uint8(responseMsg->payload, resp->option);
+	rc = pldm_msgbuf_insert_uint8(responseMsg->payload, resp->length);
+
+	if (rc) {
+		return rc;
+	}
+
+	if (payload_length < sizeof(*resp)) {
+		return -EOVERFLOW;
+	}
+
+	pldm_msgbuf_extract_array_uint8(responseMsg->payload, resp->data,
+					resp->length);
+
+	return 0;
 }
