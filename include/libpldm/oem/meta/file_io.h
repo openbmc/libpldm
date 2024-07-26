@@ -60,6 +60,16 @@ struct pldm_oem_meta_file_io_read_req {
 	} info;
 };
 
+/** @struct pldm_oem_meta_file_io_read_resp
+ *
+ *  Structure representing PLDM read file response
+ */
+struct pldm_oem_meta_file_io_read_resp {
+	uint8_t completion_code;
+	uint8_t handle;
+	uint8_t option;
+};
+
 /** @brief Obtain the pointer to the data array of a write request
  *
  * @param[in] req - The pointer to the write request struct
@@ -104,6 +114,18 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 				     size_t payload_length,
 				     struct pldm_oem_meta_file_io_read_req *req);
+
+/**
+ * @brief Encode OEM meta read file io resp
+ *
+ * @param[in] instance_id - The instance ID of the PLDM entity
+ * @param[out] completion_code - The completion code of response
+ * @param[out] responseMsg - Pointer to the buffer to store the response data
+ * @return 0 on success, negative errno value on failure
+ */
+int encode_oem_meta_file_io_read_resp(uint8_t instance_id,
+				      uint8_t completion_code,
+				      struct pldm_msg *responseMsg);
 
 #ifdef __cplusplus
 }
