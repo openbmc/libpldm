@@ -3,6 +3,7 @@
 ## List of read file IO messages
 
 - API for decode read file IO messages
+- API for encode read file IO messages
 
 ## Message format
 
