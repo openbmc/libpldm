@@ -29,6 +29,7 @@ Change categories:
 8. platform: Add decode_pldm_platform_cper_event_data() API
 9. oem: meta: Add decode_oem_meta_file_io_write_req()
 10. oem: meta: Add decode_oem_meta_file_io_read_req()
+11. oem: meta: Add encode_oem_meta_file_io_read_resp()
 
 ### Changed
 
