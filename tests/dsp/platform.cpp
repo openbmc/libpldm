@@ -2141,18 +2141,16 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataDecodeRequest)
     uint16_t eventID = 0x7788;
     uint32_t dataTransferHandle = 0x11223344;
 
-    uint8_t retFormatVersion;
-    uint16_t reteventID;
-    uint32_t retDataTransferHandle;
+    struct pldm_message_poll_event poll_event = {};
 
     auto rc = decode_pldm_message_poll_event_data(
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
-        &retFormatVersion, &reteventID, &retDataTransferHandle);
+        &poll_event);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
-    EXPECT_EQ(retFormatVersion, formatVersion);
-    EXPECT_EQ(reteventID, eventID);
-    EXPECT_EQ(retDataTransferHandle, dataTransferHandle);
+    EXPECT_EQ(poll_event.format_version, formatVersion);
+    EXPECT_EQ(poll_event.event_id, eventID);
+    EXPECT_EQ(poll_event.data_transfer_handle, dataTransferHandle);
 }
 #endif
 
@@ -2169,37 +2167,38 @@ TEST(PlatformEventMessage, testBadPldmMsgPollEventDataDecodeRequest)
             0x44, 0x33, 0x22, 0x11 // Transfer Handle
         };
 
-    uint8_t retFormatVersion;
-    uint16_t reteventID;
-    uint32_t retDataTransferHandle;
+    struct pldm_message_poll_event poll_event = {};
 
-    auto rc = decode_pldm_message_poll_event_data(
-        NULL, eventData.size(), &retFormatVersion, &reteventID,
-        &retDataTransferHandle);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    auto rc = decode_pldm_message_poll_event_data(NULL, eventData.size(),
+                                                  &poll_event);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_message_poll_event_data(
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(), NULL);
+    EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_message_poll_event_data(
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
-        &retFormatVersion, &reteventID, &retDataTransferHandle);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+        &poll_event);
+    EXPECT_EQ(rc, -EOVERFLOW);
 
     // Event id is 0x0000
     eventData[1] = 0x00;
     eventData[2] = 0x00;
     rc = decode_pldm_message_poll_event_data(
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
-        &retFormatVersion, &reteventID, &retDataTransferHandle);
+        &poll_event);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EPROTO);
 
     // Event id is 0xffff
     eventData[1] = 0xff;
     eventData[2] = 0xff;
     rc = decode_pldm_message_poll_event_data(
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
-        &retFormatVersion, &reteventID, &retDataTransferHandle);
+        &poll_event);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EPROTO);
 }
 #endif
 
@@ -2211,13 +2210,14 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
                             PLDM_PLATFORM_EVENT_MESSAGE_TRANFER_HANDLE>
         eventData{};
 
-    uint8_t formatVersion = 0x01;
-    uint16_t eventID = 0x7788;
-    uint32_t dataTransferHandle = 0x11223344;
+    struct pldm_message_poll_event poll_event = {};
+    poll_event.format_version = 0x01;
+    poll_event.event_id = 0x7788;
+    poll_event.data_transfer_handle = 0x11223344;
 
     int rc = encode_pldm_message_poll_event_data(
-        formatVersion, eventID, dataTransferHandle,
-        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size());
+        &poll_event, reinterpret_cast<uint8_t*>(eventData.data()),
+        eventData.size());
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
@@ -2237,9 +2237,9 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
     EXPECT_EQ(pldm_msgbuf_extract_uint16(buf, &reteventID), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_extract_uint32(buf, &retDataTransferHandle),
               PLDM_SUCCESS);
-    EXPECT_EQ(retFormatVersion, formatVersion);
-    EXPECT_EQ(reteventID, eventID);
-    EXPECT_EQ(retDataTransferHandle, dataTransferHandle);
+    EXPECT_EQ(retFormatVersion, poll_event.format_version);
+    EXPECT_EQ(reteventID, poll_event.event_id);
+    EXPECT_EQ(retDataTransferHandle, poll_event.data_transfer_handle);
     EXPECT_EQ(pldm_msgbuf_destroy_consumed(buf), PLDM_SUCCESS);
 }
 #endif
@@ -2252,25 +2252,26 @@ TEST(PlatformEventMessage, testBadPldmMsgPollEventDataEncode)
                             PLDM_PLATFORM_EVENT_MESSAGE_TRANFER_HANDLE>
         eventData{};
 
-    uint8_t formatVersion = 0x01;
-    uint16_t eventID = 0x7788;
-    uint32_t dataTransferHandle = 0x11223344;
+    struct pldm_message_poll_event poll_event = {};
+    poll_event.format_version = 0x01;
+    poll_event.event_id = 0x7788;
+    poll_event.data_transfer_handle = 0x11223344;
 
-    int rc = encode_pldm_message_poll_event_data(
-        formatVersion, eventID, dataTransferHandle, NULL, eventData.size());
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    int rc = encode_pldm_message_poll_event_data(&poll_event, NULL,
+                                                 eventData.size());
+    EXPECT_EQ(rc, -EINVAL);
 
-    eventID = 0x0000;
+    poll_event.event_id = 0x0000;
     rc = encode_pldm_message_poll_event_data(
-        formatVersion, eventID, dataTransferHandle,
-        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size());
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+        &poll_event, reinterpret_cast<uint8_t*>(eventData.data()),
+        eventData.size());
+    EXPECT_EQ(rc, -EPROTO);
 
-    eventID = 0xffff;
+    poll_event.event_id = 0xffff;
     rc = encode_pldm_message_poll_event_data(
-        formatVersion, eventID, dataTransferHandle,
-        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size());
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+        &poll_event, reinterpret_cast<uint8_t*>(eventData.data()),
+        eventData.size());
+    EXPECT_EQ(rc, -EPROTO);
 }
 #endif
 

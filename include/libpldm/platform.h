@@ -1133,6 +1133,16 @@ struct pldm_sensor_event_sensor_op_state {
 	uint8_t previous_op_state;
 } __attribute__((packed));
 
+/** @struct pldm_message_poll_event
+ *
+ *  structure representing pldmMessagePollEvent
+ */
+struct pldm_message_poll_event {
+	uint8_t format_version;
+	uint16_t event_id;
+	uint32_t data_transfer_handle;
+};
+
 /** @struct pldm_platform_event_message_req
  *
  *  structure representing PlatformEventMessage command request data
@@ -2136,36 +2146,27 @@ int decode_pldm_pdr_repository_chg_event_data(
  *
  *  @param[in] event_data - event data from the response message
  *  @param[in] event_data_length - length of the event data
- *  @param[out] format_version - Version of the event format
- *  @param[out] event_id - The event id
- *  @param[out] data_transfer_handle - The data transfer handle
- *  should be read from event data
- *  @return pldm_completion_codes
+ *  @param[out] poll_event - the decoded pldm_message_poll_event struct
+ *  @return error code
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'event_data'
  */
-int decode_pldm_message_poll_event_data(const uint8_t *event_data,
-					size_t event_data_length,
-					uint8_t *format_version,
-					uint16_t *event_id,
-					uint32_t *data_transfer_handle);
+int decode_pldm_message_poll_event_data(
+	const void *event_data, size_t event_data_length,
+	struct pldm_message_poll_event *poll_event);
 
 /** @brief Encode pldmMessagePollEvent event data type
  *
- *  @param[in] format_version - Version of the event format
- *  @param[in] event_id - The event id
- *  @param[in] data_transfer_handle - The data transfer handle
+ *  @param[in] poll_event - the encoded pldm_message_poll_event struct
  *  @param[out] event_data - event data to the response message
  *  @param[in] event_data_length - length of the event data
- *  @return pldm_completion_codes
+ *  @return error code
  *  @note The caller is responsible for allocating and deallocating the
  *        event_data
  */
-int encode_pldm_message_poll_event_data(uint8_t format_version,
-					uint16_t event_id,
-					uint32_t data_transfer_handle,
-					uint8_t *event_data,
-					size_t event_data_length);
+int encode_pldm_message_poll_event_data(
+	const struct pldm_message_poll_event *poll_event, void *event_data,
+	size_t event_data_length);
 
 /** @brief Encode PLDM PDR Repository Change eventData
  *  @param[in] event_data_format - Format of this event data (e.g.
