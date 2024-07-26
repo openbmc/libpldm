@@ -137,3 +137,60 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }
+
+LIBPLDM_ABI_TESTING
+void *pldm_oem_meta_file_io_read_resp_data(
+	struct pldm_oem_meta_file_io_read_resp *resp)
+{
+	return resp->data;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_oem_meta_file_io_read_resp(
+	uint8_t instance_id, struct pldm_oem_meta_file_io_read_resp *resp,
+	uint16_t payload_length, struct pldm_msg *responseMsg)
+{
+	if (resp == NULL || responseMsg == NULL) {
+		return -EINVAL;
+	}
+
+	if (payload_length < sizeof(*resp)) {
+		return -EOVERFLOW;
+	}
+
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_RESPONSE;
+	header.pldm_type = PLDM_OEM;
+	header.command = PLDM_OEM_META_FILE_IO_CMD_READ_FILE;
+	int rc = pack_pldm_header_errno(&header, &(responseMsg->hdr));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_OEM_META_FILE_IO_READ_RESP_MIN_SIZE,
+				    responseMsg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, resp->completion_code);
+	pldm_msgbuf_insert(buf, resp->handle);
+	pldm_msgbuf_insert(buf, resp->option);
+	rc = pldm_msgbuf_insert(buf, resp->length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_insert_array_uint8(buf, resp->length, resp->data,
+					    payload_length - sizeof(*resp));
+	if (rc) {
+		return rc;
+	}
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
