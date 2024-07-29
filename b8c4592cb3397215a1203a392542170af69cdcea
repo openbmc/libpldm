@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b962ec6_ace72838",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-29T04:36:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b179bbb_53203625",
+      "revId": "b8c4592cb3397215a1203a392542170af69cdcea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cadc5523_72c2183b",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "246a1b9b_c641ae84",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1931,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-29T04:36:15Z",
+      "side": 1,
+      "message": "Done. I updated the same for this type of checking in `encode_pldm_message_poll_event_data`.",
+      "parentUuid": "cadc5523_72c2183b",
+      "revId": "b8c4592cb3397215a1203a392542170af69cdcea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28aa85fe_9b8417b3",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-07-29T01:28:25Z",
       "side": 1,
       "message": "This is tested by `pldm_msgbuf_init_errno()`, so I think we can drop it here as it\u0027s redundant.",
+      "revId": "b8c4592cb3397215a1203a392542170af69cdcea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef174a72_b52bc248",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1948,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-07-29T04:36:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28aa85fe_9b8417b3",
       "revId": "b8c4592cb3397215a1203a392542170af69cdcea",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
