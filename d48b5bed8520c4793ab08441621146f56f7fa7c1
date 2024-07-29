@@ -22,6 +22,30 @@
       },
       "revId": "d48b5bed8520c4793ab08441621146f56f7fa7c1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2d73c5e_b03d458a",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T01:57:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7266a60b_cd33b1b8",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 36
+      },
+      "revId": "d48b5bed8520c4793ab08441621146f56f7fa7c1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

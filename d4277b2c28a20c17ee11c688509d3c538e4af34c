@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20432f40_8ec8ca1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T01:57:58Z",
+      "side": 1,
+      "message": "A bit of a nit-pick, but I would prefer we drop the bullet points, they don\u0027t contribute much to the communication.",
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5be9f8e_302c697d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T01:57:58Z",
+      "side": 1,
+      "message": "Hi Lora, I have a few comments inline.",
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b1c159a_eaf2b44b",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T01:57:58Z",
+      "side": 1,
+      "message": "`FILEIO` here is inconsistent with using an underscore between `file` and `io` in the type names. Please use `FILE_IO` here, or no underscore everywhere else.",
+      "range": {
+        "startLine": 25,
+        "startChar": 15,
+        "endLine": 25,
+        "endChar": 21
+      },
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c3f201c_57796dfc",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T01:57:58Z",
+      "side": 1,
+      "message": "Also here.",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 21
+      },
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceac3a5a_e69bf674",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T01:57:58Z",
+      "side": 1,
+      "message": "If we have a pair of parameters that represent an object and its length, please be consistent and put the length parameter after the object pointer. In this case, order `req_length` after `req`.",
+      "range": {
+        "startLine": 59,
+        "startChar": 32,
+        "endLine": 59,
+        "endChar": 52
+      },
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3be8727_aa1bcfc5",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T01:57:58Z",
+      "side": 1,
+      "message": "I don\u0027t understand why a read request would be providing data. Wouldn\u0027t this be the case for the response?",
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
