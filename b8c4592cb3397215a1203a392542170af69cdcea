@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c311c6bb_3895c294",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T01:28:25Z",
+      "side": 1,
+      "message": "Hi Thu, I have a few small suggestions inline.",
+      "revId": "b8c4592cb3397215a1203a392542170af69cdcea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b179bbb_53203625",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T01:28:25Z",
+      "side": 1,
+      "message": "I prefer we put this under \"Changed\" rather than \"Fixed\".",
+      "revId": "b8c4592cb3397215a1203a392542170af69cdcea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cadc5523_72c2183b",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1931,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T01:28:25Z",
+      "side": 1,
+      "message": "I think this should be `-EPROTO` as these values violate the statement \"This value shall be between 0x0001 and 0xFFFE\" in `16.15 eventData format for pldmMessagePollEvent`. `-EINVAL` is for \"the caller passed a value or pointer that isn\u0027t valid\", which isn\u0027t the case here.",
+      "revId": "b8c4592cb3397215a1203a392542170af69cdcea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28aa85fe_9b8417b3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1948,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T01:28:25Z",
+      "side": 1,
+      "message": "This is tested by `pldm_msgbuf_init_errno()`, so I think we can drop it here as it\u0027s redundant.",
+      "revId": "b8c4592cb3397215a1203a392542170af69cdcea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
