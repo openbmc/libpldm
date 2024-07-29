@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caaaa1fd_6dfaa194",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T02:01:12Z",
+      "side": 1,
+      "message": "I prefer we don\u0027t use bullet-lists here. Please drop them and leave the discussion as a regular paragraph.",
+      "revId": "6ef4cc5dcc4b5ef7e32c00ae912e932f6f606e0e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9be6804_8af640db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-29T02:01:12Z",
+      "side": 1,
+      "message": "Hi Lora, I have one minor request inline, but can you also please add tests for the new functionality?",
+      "revId": "6ef4cc5dcc4b5ef7e32c00ae912e932f6f606e0e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
