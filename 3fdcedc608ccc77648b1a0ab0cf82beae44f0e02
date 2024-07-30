@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "657ed68c_67896523",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-30T04:07:46Z",
+      "side": 1,
+      "message": "Hi Thu, a couple more comments as a result of the previous changes 😊",
+      "revId": "3fdcedc608ccc77648b1a0ab0cf82beae44f0e02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50beccb6_6f19e788",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2168,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-30T04:07:46Z",
+      "side": 1,
+      "message": "Why are we passing this by value and not reference (pointer)? Please pass it by reference to save the copy. Also, it can be `const`?",
+      "range": {
+        "startLine": 2168,
+        "startChar": 32,
+        "endLine": 2168,
+        "endChar": 42
+      },
+      "revId": "3fdcedc608ccc77648b1a0ab0cf82beae44f0e02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0065f8a_5d088eb6",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2168,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-30T04:07:46Z",
+      "side": 1,
+      "message": "This should be `void`.",
+      "range": {
+        "startLine": 2168,
+        "startChar": 44,
+        "endLine": 2168,
+        "endChar": 51
+      },
+      "revId": "3fdcedc608ccc77648b1a0ab0cf82beae44f0e02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
