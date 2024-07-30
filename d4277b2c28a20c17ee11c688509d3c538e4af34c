@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b2abb296_195edc0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-30T08:48:09Z",
+      "side": 1,
+      "message": "I\u0027ve removed the bullet points description. Please check, thank you.",
+      "parentUuid": "20432f40_8ec8ca1e",
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b5be9f8e_302c697d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
@@ -75,6 +93,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d05a714_c6246840",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-30T08:48:09Z",
+      "side": 1,
+      "message": "Change to FILE_IO. Please check, thank you.",
+      "parentUuid": "9b1c159a_eaf2b44b",
+      "range": {
+        "startLine": 25,
+        "startChar": 15,
+        "endLine": 25,
+        "endChar": 21
+      },
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c3f201c_57796dfc",
@@ -88,6 +130,30 @@
       "writtenOn": "2024-07-29T01:57:58Z",
       "side": 1,
       "message": "Also here.",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 21
+      },
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ddd396_90865e6c",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-30T08:48:09Z",
+      "side": 1,
+      "message": "Change to FILE_IO. Please check, thank you.",
+      "parentUuid": "4c3f201c_57796dfc",
       "range": {
         "startLine": 27,
         "startChar": 15,
@@ -121,6 +187,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7cc2da2_f9fbff6b",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-30T08:48:09Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "ceac3a5a_e69bf674",
+      "range": {
+        "startLine": 59,
+        "startChar": 32,
+        "endLine": 59,
+        "endChar": 52
+      },
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3be8727_aa1bcfc5",
@@ -134,6 +224,24 @@
       "writtenOn": "2024-07-29T01:57:58Z",
       "side": 1,
       "message": "I don\u0027t understand why a read request would be providing data. Wouldn\u0027t this be the case for the response?",
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e40fa4_9cdf0f6a",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-07-30T08:48:09Z",
+      "side": 1,
+      "message": "read_info needs to include the information of the reading file.\nTake reading file data as an example: read_info needs to contain length (read file length), transferFlag, highOffset and lowOffset to know the starting position, length and transfer progress of the read file.",
+      "parentUuid": "e3be8727_aa1bcfc5",
       "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
