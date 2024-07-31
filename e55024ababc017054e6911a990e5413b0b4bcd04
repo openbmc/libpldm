@@ -409,6 +409,24 @@
       "parentUuid": "27d09a1c_a1edaefa",
       "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec208335_6e3ca84c",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-31T05:32:37Z",
+      "side": 1,
+      "message": "You must first check the return value of `pldm_msgbuf_extract()` before doing any arithmetic with `req-\u003elength`. You need to know that the extraction succeeded, otherwise you\u0027re off in the weeds. This needs to be:\n\n```\n...\nrc \u003d pldm_msgbuf_extract(buf, req-\u003elength);\nif (rc \u003c 0) {\n    return rc;\n}\n\nif ((req-\u003elength + ....) \u003e req_length) {\n    return -EBADMSG;\n}\n...\n```",
+      "parentUuid": "72f6d746_24ae2eaf",
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
