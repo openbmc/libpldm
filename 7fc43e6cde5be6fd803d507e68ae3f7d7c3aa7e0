@@ -112,6 +112,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efbc2986_51e4bafb",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1910,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-31T05:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c8300ca_f0052cf5",
+      "range": {
+        "startLine": 1907,
+        "startChar": 5,
+        "endLine": 1910,
+        "endChar": 35
+      },
+      "revId": "7fc43e6cde5be6fd803d507e68ae3f7d7c3aa7e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55ea6894_4da1e5b6",
