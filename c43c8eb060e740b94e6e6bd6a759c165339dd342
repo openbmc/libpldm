@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "315fe1b7_b5a4f852",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-31T05:47:31Z",
+      "side": 1,
+      "message": "Hi Lora, I just realised that this API is quite broken in terms of memory safety. In light of that, I can\u0027t accept the rework being marked as `LIBPLDM_ABI_STABLE` as it is, it must become `LIBPLDM_ABI_TESTING` and the interface fixed.\n\nPlease also expand the test case to demonstrate that the implementation returns an error if memory safety would be violated.",
+      "revId": "c43c8eb060e740b94e6e6bd6a759c165339dd342",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64917b70_21ae0fdd",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-31T05:47:31Z",
+      "side": 1,
+      "message": "Please describe a struct to contain these values rather than passing individual pointers.",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 49
+      },
+      "revId": "c43c8eb060e740b94e6e6bd6a759c165339dd342",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a501bbe6_f0054dd4",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-31T05:47:31Z",
+      "side": 1,
+      "message": "The doxygen says this is an out-parameter, which can only mean that the decoding writes data into it. `length` is not documented as an `in` parameter, so the upshot is that we\u0027re never specifying the length of the array pointed to by `data` to the function, which means it cannot be safe. This API must be fixed so it\u0027s possible to implement well-defined behaviour.",
+      "range": {
+        "startLine": 39,
+        "startChar": 10,
+        "endLine": 39,
+        "endChar": 23
+      },
+      "revId": "c43c8eb060e740b94e6e6bd6a759c165339dd342",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2762748c_bcd651d3",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-31T05:47:31Z",
+      "side": 1,
+      "message": "Please change this to `LIBPLDM_ABI_TESTING`, based on the memory safety issue discussed below.",
+      "revId": "c43c8eb060e740b94e6e6bd6a759c165339dd342",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f974930f_0b795b1d",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-07-31T05:47:31Z",
+      "side": 1,
+      "message": "Sorry, I only just looked more closely at this, and this is not at all safe. At no point is the length of the region pointed to by `data` provided, and we\u0027re just assuming the length provided in the message won\u0027t exceed the buffer. This is CVE-worthy stuff, and I\u0027m bothered that it\u0027s made its way into the codebase as it is.",
+      "range": {
+        "startLine": 34,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 53
+      },
+      "revId": "c43c8eb060e740b94e6e6bd6a759c165339dd342",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
