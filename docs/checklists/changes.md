@@ -53,6 +53,12 @@
 [sei-cert-c-coding-standard]:
   https://wiki.sei.cmu.edu/confluence/display/c/SEI+CERT+C+Coding+Standard
 
+- [Common Weakness Enumeration (CWE) - Software
+  Development][common-weakness-enumeration-sw]
+
+[common-weakness-enumeration-sw]:
+  https://cwe.mitre.org/data/definitions/699.html
+
 ## Definitions
 
 - **Error condition**: An invalid state reached at runtime, caused either by
