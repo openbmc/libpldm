@@ -40,6 +40,9 @@ Change categories:
 
   The change removes redundant APIs in the process.
 
+- pdr: Indicates success or failure depending on the outcome of the entity
+  association PDR creation 
+   
 ### Deprecated
 
 ### Removed
@@ -48,6 +51,7 @@ Change categories:
 
 - pdr: Remove PDR if the contained entity to be removed is the last one
 - meson: sizes.h: add includedir to install path
+- pdr: Create entity association PDRs with unique record handle
 
 ### Security
 
