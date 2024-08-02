@@ -52,6 +52,9 @@ Change categories:
 
   No new error values will be returned, but existing error values may be
   returned under new conditions.
+  
+- pdr: Indicates success or failure depending on the outcome of the entity
+  association PDR creation
 
 ### Deprecated
 
@@ -61,6 +64,7 @@ Change categories:
 
 - pdr: Remove PDR if the contained entity to be removed is the last one
 - meson: sizes.h: add includedir to install path
+- pdr: Create entity association PDRs with unique record handle
 
 ### Security
 
