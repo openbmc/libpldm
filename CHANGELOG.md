@@ -606,3 +606,4 @@ Change categories:
 3. transport: Match on response in pldm_transport_send_recv_msg()
 4. requester: Add check before accessing hdr in pldm_recv()
 5. bios_table: pldm_bios_table_attr_entry_string_info_check() NULL deref
+6. pdr: Create entity association PDRs with unique record handle
