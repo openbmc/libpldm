@@ -11,6 +11,85 @@
 
 #include <gtest/gtest.h>
 
+typedef struct pldm_association_pdr_test
+{
+    uint32_t record_handle;
+    uint8_t version;
+    uint8_t type;
+    uint16_t record_change_num;
+    uint16_t length;
+    uint16_t container_id;
+    uint8_t association_type;
+    uint8_t num_children;
+
+    inline bool operator==(pldm_association_pdr_test pdr) const
+    {
+        return (record_handle == pdr.record_handle) && (type == pdr.type) &&
+               (length == pdr.length) && (container_id == pdr.container_id) &&
+               (association_type == pdr.association_type) &&
+               (num_children == pdr.num_children);
+    }
+} pldm_association_pdr_test;
+
+typedef struct pldm_entity_test
+{
+    uint16_t entity_type;
+    uint16_t entity_instance_num;
+    uint16_t entity_container_id;
+
+    inline bool operator==(pldm_entity_test entity) const
+    {
+        return (entity_type == entity.entity_type) &&
+               (entity_instance_num == entity.entity_instance_num) &&
+               (entity_container_id == entity.entity_container_id);
+    }
+} pldm_entity_test;
+
+static void getEntity(struct pldm_msgbuf* buf, pldm_entity_test& entity)
+{
+    entity = pldm_entity_test{};
+    pldm_msgbuf_extract_uint16(buf, entity.entity_type);
+    pldm_msgbuf_extract_uint16(buf, entity.entity_instance_num);
+    pldm_msgbuf_extract_uint16(buf, entity.entity_container_id);
+}
+
+static void
+    getAssociationPdrDetails(struct pldm_msgbuf* buf,
+                             pldm_association_pdr_test& association_pdr_test)
+{
+    association_pdr_test = pldm_association_pdr_test{};
+    pldm_msgbuf_extract_uint32(buf, association_pdr_test.record_handle);
+    pldm_msgbuf_extract_uint8(buf, association_pdr_test.version);
+    pldm_msgbuf_extract_uint8(buf, association_pdr_test.type);
+    pldm_msgbuf_extract_uint16(buf, association_pdr_test.record_change_num);
+    pldm_msgbuf_extract_uint16(buf, association_pdr_test.length);
+
+    pldm_msgbuf_extract_uint16(buf, association_pdr_test.container_id);
+    pldm_msgbuf_extract_uint8(buf, association_pdr_test.association_type);
+}
+
+static void
+    verifyEntityAssociationPdr(struct pldm_msgbuf* buf,
+                               const pldm_association_pdr_test& association_pdr,
+                               const pldm_entity_test& container_entity1,
+                               const pldm_entity_test& child_entity1)
+{
+    struct pldm_entity_test container_entity = {};
+    struct pldm_entity_test child_entity = {};
+    pldm_association_pdr_test association_pdr_test{};
+
+    getAssociationPdrDetails(buf, association_pdr_test);
+    getEntity(buf, container_entity);
+    pldm_msgbuf_extract_uint8(buf, association_pdr_test.num_children);
+    getEntity(buf, child_entity);
+
+    ASSERT_EQ(pldm_msgbuf_validate(buf), 0);
+
+    EXPECT_TRUE(association_pdr_test == association_pdr);
+    EXPECT_TRUE(container_entity == container_entity1);
+    EXPECT_TRUE(child_entity == child_entity1);
+}
+
 TEST(PDRAccess, testInit)
 {
     auto repo = pldm_pdr_init();
@@ -1426,6 +1505,416 @@ TEST(EntityAssociationPDR, testPDR)
     pldm_entity_association_tree_destroy(tree);
 }
 
+TEST(EntityAssociationPDR, testPDRWithRecordHandle)
+{
+    // e = entity type, c = container id, i = instance num
+
+    //        INPUT
+    //        1(e=1)
+    //        |
+    //        2(e=2)--3(e=2)
+
+    //        Expected OUTPUT
+    //        1(e=1,c=0,i=1)
+    //        |
+    //        2(e=2,c=1,i=1)--3(e=2,c=1,i=2)
+
+    pldm_entity entities[3] = {{1, 1, 0}, {2, 1, 1}, {3, 1, 1}};
+    pldm_entity_test testEntities[3] = {{1, 1, 0}, {2, 1, 1}, {3, 1, 1}};
+
+    auto tree = pldm_entity_association_tree_init();
+
+    auto l1 = pldm_entity_association_tree_add(
+        tree, &entities[0], 0xffff, nullptr, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(l1, nullptr);
+
+    auto l2a = pldm_entity_association_tree_add(
+        tree, &entities[1], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(l2a, nullptr);
+    pldm_entity_association_tree_add(tree, &entities[2], 0xffff, l1,
+                                     PLDM_ENTITY_ASSOCIAION_LOGICAL);
+    auto repo = pldm_pdr_init();
+    pldm_entity* l_entities = entities;
+
+    pldm_entity_node* node = nullptr;
+    pldm_find_entity_ref_in_tree(tree, entities[0], &node);
+
+    ASSERT_NE(node, nullptr);
+
+    int numEntities = 3;
+    pldm_entity_association_pdr_add_from_node_with_record_handle(
+        node, repo, &l_entities, numEntities, true, 1, (10));
+
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 2u);
+
+    uint32_t currRecHandle{};
+    uint32_t nextRecHandle{};
+    uint8_t* data = nullptr;
+    uint32_t size{};
+
+    pldm_pdr_find_record(repo, currRecHandle, &data, &size, &nextRecHandle);
+
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+
+    auto rc =
+        pldm_msgbuf_init_errno(buf,
+                               (sizeof(struct pldm_pdr_hdr) +
+                                sizeof(struct pldm_pdr_entity_association)),
+                               data, size);
+    ASSERT_EQ(rc, 0);
+
+    pldm_association_pdr_test association_pdr = pldm_association_pdr_test{
+        10,
+        1,
+        PLDM_PDR_ENTITY_ASSOCIATION,
+        1,
+        static_cast<uint16_t>(size - sizeof(struct pldm_pdr_hdr)),
+        1,
+        PLDM_ENTITY_ASSOCIAION_LOGICAL,
+        1};
+
+    verifyEntityAssociationPdr(buf, association_pdr, testEntities[0],
+                               testEntities[2]);
+
+    currRecHandle = nextRecHandle;
+    pldm_pdr_find_record(repo, currRecHandle, &data, &size, &nextRecHandle);
+    rc = pldm_msgbuf_init_errno(buf,
+                                (sizeof(struct pldm_pdr_hdr) +
+                                 sizeof(struct pldm_pdr_entity_association)),
+                                data, size);
+    ASSERT_EQ(rc, 0);
+
+    pldm_association_pdr_test association_pdr1 = pldm_association_pdr_test{
+        11,
+        1,
+        PLDM_PDR_ENTITY_ASSOCIATION,
+        1,
+        static_cast<uint16_t>(size - sizeof(struct pldm_pdr_hdr)),
+        1,
+        PLDM_ENTITY_ASSOCIAION_PHYSICAL,
+        1};
+
+    verifyEntityAssociationPdr(buf, association_pdr1, testEntities[0],
+                               testEntities[1]);
+
+    pldm_pdr_destroy(repo);
+    pldm_entity_association_tree_destroy(tree);
+}
+
+#if 0
+TEST(EntityAssociationPDR, testPDRWithRecordHandleMultipleChildren)
+{
+    // e = entity type, c = container id, i = instance num
+
+    //        INPUT
+    //        1(e=1)--1a(e=2)
+    //        |
+    //        2(e=2)--3(e=2)--4(e=2)--5(e=3)
+    //        |
+    //        6(e=4)--7(e=5)--8(e=5)--9(e=5)
+    //        |       |
+    //        11(e=6) 10(e=7)
+
+    //        Expected OUTPUT
+    //        1(e=1,c=0,i=1)
+    //        |
+    //        2(e=2,c=1,i=1)--3(e=2,c=1,i=2)--4(e=3,c=1,i=1)--5(e=3,c=1,i=2)
+    //        |
+    //        6(e=4,c=2,i=1)--7(e=5,c=2,i=1)--8(e=5,c=2,i=2)--9(e=5,c=2,i=3)
+    //        |               |
+    //        10(e=6,c=3,i=1) 11(e=7,c=4,i=1)
+
+    pldm_entity entities[11]{};
+
+    entities[0].entity_type = 1;
+    entities[1].entity_type = 2;
+    entities[2].entity_type = 3;
+    entities[3].entity_type = 2;
+    entities[4].entity_type = 3;
+    entities[5].entity_type = 4;
+    entities[6].entity_type = 5;
+    entities[7].entity_type = 5;
+    entities[8].entity_type = 5;
+    entities[9].entity_type = 6;
+    entities[10].entity_type = 7;
+
+    auto tree = pldm_entity_association_tree_init();
+
+    auto l1 = pldm_entity_association_tree_add(
+        tree, &entities[0], 0xffff, nullptr, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(l1, nullptr);
+    auto l1a = pldm_entity_association_tree_add(
+        tree, &entities[1], 0xffff, nullptr, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(l1a, nullptr);
+
+    auto l2a = pldm_entity_association_tree_add(
+        tree, &entities[1], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(l2a, nullptr);
+    auto l2b = pldm_entity_association_tree_add(tree, &entities[2], 0xffff, l1,
+                                                PLDM_ENTITY_ASSOCIAION_LOGICAL);
+    ASSERT_NE(l2b, nullptr);
+    auto l2c = pldm_entity_association_tree_add(
+        tree, &entities[3], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(l2c, nullptr);
+    auto l2d = pldm_entity_association_tree_add(tree, &entities[4], 0xffff, l1,
+                                                PLDM_ENTITY_ASSOCIAION_LOGICAL);
+    ASSERT_NE(l2d, nullptr);
+
+    auto l3a = pldm_entity_association_tree_add(
+        tree, &entities[5], 0xffff, l2a, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(l3a, nullptr);
+    auto l3b = pldm_entity_association_tree_add(
+        tree, &entities[6], 0xffff, l2a, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(l3b, nullptr);
+    auto l3c = pldm_entity_association_tree_add(tree, &entities[7], 0xffff, l2a,
+                                                PLDM_ENTITY_ASSOCIAION_LOGICAL);
+    ASSERT_NE(l3c, nullptr);
+    auto l3d = pldm_entity_association_tree_add(tree, &entities[8], 0xffff, l2a,
+                                                PLDM_ENTITY_ASSOCIAION_LOGICAL);
+    ASSERT_NE(l3d, nullptr);
+
+    auto l4a = pldm_entity_association_tree_add(
+        tree, &entities[9], 0xffff, l3a, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(l4a, nullptr);
+    auto l4b = pldm_entity_association_tree_add(
+        tree, &entities[10], 0xffff, l3b, PLDM_ENTITY_ASSOCIAION_LOGICAL);
+    ASSERT_NE(l4b, nullptr);
+
+    EXPECT_EQ(pldm_entity_get_num_children(l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL),
+              2);
+    EXPECT_EQ(pldm_entity_get_num_children(l1, PLDM_ENTITY_ASSOCIAION_LOGICAL),
+              2);
+    EXPECT_EQ(
+        pldm_entity_get_num_children(l2a, PLDM_ENTITY_ASSOCIAION_PHYSICAL), 2);
+    EXPECT_EQ(
+        pldm_entity_get_num_children(l3b, PLDM_ENTITY_ASSOCIAION_PHYSICAL), 0);
+    EXPECT_EQ(pldm_entity_get_num_children(l3b, PLDM_ENTITY_ASSOCIAION_LOGICAL),
+              1);
+
+    auto repo = pldm_pdr_init();
+    pldm_entity* l_entities = entities;
+
+    pldm_entity_node* node = nullptr;
+    pldm_find_entity_ref_in_tree(tree, entities[0], &node);
+
+    ASSERT_NE(node, nullptr);
+
+    int numEntities = 11;
+    pldm_entity_association_pdr_add_from_node_with_record_handle(
+        node, repo, &l_entities, numEntities, true, 1, (10));
+
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 6u);
+
+    uint32_t currRecHandle{};
+    uint32_t nextRecHandle{};
+    uint8_t* data = nullptr;
+    uint32_t size{};
+    uint32_t commonSize = sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t) +
+                          sizeof(uint8_t) + sizeof(pldm_entity) +
+                          sizeof(uint8_t);
+
+    pldm_pdr_find_record(repo, currRecHandle, &data, &size, &nextRecHandle);
+
+    EXPECT_EQ(size, commonSize + (pldm_entity_get_num_children(
+                                      l1, PLDM_ENTITY_ASSOCIAION_LOGICAL) *
+                                  sizeof(pldm_entity)));
+
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    struct pldm_association_pdr_test association_pdr_test = {};
+    struct pldm_entity_test container_entity = {};
+    struct pldm_entity_test child_entity[2] = {};
+
+    auto rc =
+        pldm_msgbuf_init_errno(buf,
+                               (sizeof(struct pldm_pdr_hdr) +
+                                sizeof(struct pldm_pdr_entity_association)),
+                               data, size);
+    ASSERT_EQ(rc, 0);
+
+    getAssociationPdrDetails(buf, association_pdr_test);
+    getEntity(buf, container_entity);
+    pldm_msgbuf_extract_uint8(buf, association_pdr_test.num_children);
+    for (int i = 0; i < association_pdr_test.num_children; ++i)
+    {
+        getEntity(buf, child_entity[i]);
+    }
+
+    ASSERT_EQ(pldm_msgbuf_destroy(buf), 0);
+
+    EXPECT_TRUE(compareEntityAssociationPDR(
+        association_pdr_test,
+        pldm_association_pdr_test{
+            10, 1, PLDM_PDR_ENTITY_ASSOCIATION, 1,
+            (uint16_t)(size - sizeof(struct pldm_pdr_hdr)), 1,
+            PLDM_ENTITY_ASSOCIAION_LOGICAL, 2}));
+    EXPECT_EQ(association_pdr_test.num_children, 2u);
+
+    EXPECT_TRUE(compareEntities(container_entity, pldm_entity_test{1, 1, 0}));
+    EXPECT_TRUE(compareEntities(child_entity[0], pldm_entity_test{3, 1, 1}));
+    EXPECT_TRUE(compareEntities(child_entity[1], pldm_entity_test{3, 2, 1}));
+
+    // PDR2
+    currRecHandle = nextRecHandle;
+    pldm_pdr_find_record(repo, currRecHandle, &data, &size, &nextRecHandle);
+
+    rc = pldm_msgbuf_init_errno(buf,
+                                (sizeof(struct pldm_pdr_hdr) +
+                                 sizeof(struct pldm_pdr_entity_association)),
+                                data, size);
+    ASSERT_EQ(rc, 0);
+
+    getAssociationPdrDetails(buf, association_pdr_test);
+    getEntity(buf, container_entity);
+    pldm_msgbuf_extract_uint8(buf, association_pdr_test.num_children);
+    for (int i = 0; i < association_pdr_test.num_children; ++i)
+    {
+        getEntity(buf, child_entity[i]);
+    }
+
+    ASSERT_EQ(pldm_msgbuf_destroy(buf), 0);
+
+    EXPECT_TRUE(compareEntityAssociationPDR(
+        association_pdr_test,
+        pldm_association_pdr_test{
+            11, 1, PLDM_PDR_ENTITY_ASSOCIATION, 1,
+            (uint16_t)(size - sizeof(struct pldm_pdr_hdr)), 1,
+            PLDM_ENTITY_ASSOCIAION_PHYSICAL, 2}));
+
+    EXPECT_TRUE(compareEntities(container_entity, pldm_entity_test{1, 1, 0}));
+    EXPECT_TRUE(compareEntities(child_entity[0], pldm_entity_test{2, 1, 1}));
+    EXPECT_TRUE(compareEntities(child_entity[1], pldm_entity_test{2, 2, 1}));
+
+    // Third PDR
+    currRecHandle = nextRecHandle;
+    pldm_pdr_find_record(repo, currRecHandle, &data, &size, &nextRecHandle);
+
+    rc = pldm_msgbuf_init_errno(buf,
+                                (sizeof(struct pldm_pdr_hdr) +
+                                 sizeof(struct pldm_pdr_entity_association)),
+                                data, size);
+    ASSERT_EQ(rc, 0);
+
+    getAssociationPdrDetails(buf, association_pdr_test);
+    getEntity(buf, container_entity);
+    pldm_msgbuf_extract_uint8(buf, association_pdr_test.num_children);
+    for (int i = 0; i < association_pdr_test.num_children; ++i)
+    {
+        getEntity(buf, child_entity[i]);
+    }
+
+    ASSERT_EQ(pldm_msgbuf_destroy(buf), 0);
+
+    EXPECT_TRUE(compareEntityAssociationPDR(
+        association_pdr_test,
+        pldm_association_pdr_test{
+            12, 1, PLDM_PDR_ENTITY_ASSOCIATION, 1,
+            (uint16_t)(size - sizeof(struct pldm_pdr_hdr)), 2,
+            PLDM_ENTITY_ASSOCIAION_LOGICAL, 2}));
+
+    EXPECT_TRUE(compareEntities(container_entity, pldm_entity_test{2, 1, 1}));
+    EXPECT_TRUE(compareEntities(child_entity[0], pldm_entity_test{5, 2, 2}));
+    EXPECT_TRUE(compareEntities(child_entity[1], pldm_entity_test{5, 3, 2}));
+
+    // PDR4
+    currRecHandle = nextRecHandle;
+    pldm_pdr_find_record(repo, currRecHandle, &data, &size, &nextRecHandle);
+
+    rc = pldm_msgbuf_init_errno(buf,
+                                (sizeof(struct pldm_pdr_hdr) +
+                                 sizeof(struct pldm_pdr_entity_association)),
+                                data, size);
+    ASSERT_EQ(rc, 0);
+
+    getAssociationPdrDetails(buf, association_pdr_test);
+    getEntity(buf, container_entity);
+    pldm_msgbuf_extract_uint8(buf, association_pdr_test.num_children);
+    for (int i = 0; i < association_pdr_test.num_children; ++i)
+    {
+        getEntity(buf, child_entity[i]);
+    }
+
+    ASSERT_EQ(pldm_msgbuf_destroy(buf), 0);
+
+    EXPECT_TRUE(compareEntityAssociationPDR(
+        association_pdr_test,
+        pldm_association_pdr_test{
+            13, 1, PLDM_PDR_ENTITY_ASSOCIATION, 1,
+            (uint16_t)(size - sizeof(struct pldm_pdr_hdr)), 2,
+            PLDM_ENTITY_ASSOCIAION_PHYSICAL, 2}));
+
+    EXPECT_TRUE(compareEntities(container_entity, pldm_entity_test{2, 1, 1}));
+    EXPECT_TRUE(compareEntities(child_entity[0], pldm_entity_test{4, 1, 2}));
+    EXPECT_TRUE(compareEntities(child_entity[1], pldm_entity_test{5, 1, 2}));
+
+    // PDR5
+    currRecHandle = nextRecHandle;
+    pldm_pdr_find_record(repo, currRecHandle, &data, &size, &nextRecHandle);
+
+    rc = pldm_msgbuf_init_errno(buf,
+                                (sizeof(struct pldm_pdr_hdr) +
+                                 sizeof(struct pldm_pdr_entity_association)),
+                                data, size);
+    ASSERT_EQ(rc, 0);
+
+    getAssociationPdrDetails(buf, association_pdr_test);
+    getEntity(buf, container_entity);
+    pldm_msgbuf_extract_uint8(buf, association_pdr_test.num_children);
+    for (int i = 0; i < association_pdr_test.num_children; ++i)
+    {
+        getEntity(buf, child_entity[i]);
+    }
+
+    ASSERT_EQ(pldm_msgbuf_destroy(buf), 0);
+
+    EXPECT_TRUE(compareEntityAssociationPDR(
+        association_pdr_test,
+        pldm_association_pdr_test{
+            14, 1, PLDM_PDR_ENTITY_ASSOCIATION, 1,
+            (uint16_t)(size - sizeof(struct pldm_pdr_hdr)), 3,
+            PLDM_ENTITY_ASSOCIAION_PHYSICAL, 1}));
+
+    EXPECT_TRUE(compareEntities(container_entity, pldm_entity_test{4, 1, 2}));
+    EXPECT_TRUE(compareEntities(child_entity[0], pldm_entity_test{6, 1, 3}));
+
+    // PDR6
+    currRecHandle = nextRecHandle;
+    pldm_pdr_find_record(repo, currRecHandle, &data, &size, &nextRecHandle);
+
+    rc = pldm_msgbuf_init_errno(buf,
+                                (sizeof(struct pldm_pdr_hdr) +
+                                 sizeof(struct pldm_pdr_entity_association)),
+                                data, size);
+    ASSERT_EQ(rc, 0);
+
+    getAssociationPdrDetails(buf, association_pdr_test);
+    getEntity(buf, container_entity);
+    pldm_msgbuf_extract_uint8(buf, association_pdr_test.num_children);
+    for (int i = 0; i < association_pdr_test.num_children; ++i)
+    {
+        getEntity(buf, child_entity[i]);
+    }
+
+    ASSERT_EQ(pldm_msgbuf_destroy(buf), 0);
+
+    EXPECT_TRUE(compareEntityAssociationPDR(
+        association_pdr_test,
+        pldm_association_pdr_test{
+            15, 1, PLDM_PDR_ENTITY_ASSOCIATION, 1,
+            (uint16_t)(size - sizeof(struct pldm_pdr_hdr)), 4,
+            PLDM_ENTITY_ASSOCIAION_LOGICAL, 1}));
+
+    EXPECT_TRUE(compareEntities(container_entity, pldm_entity_test{5, 1, 2}));
+    EXPECT_TRUE(compareEntities(child_entity[0], pldm_entity_test{7, 1, 4}));
+
+    EXPECT_EQ(nextRecHandle, 0u);
+
+    pldm_pdr_destroy(repo);
+    pldm_entity_association_tree_destroy(tree);
+}
+#endif
+
 TEST(EntityAssociationPDR, testFind)
 {
     //        1
@@ -1562,12 +2051,12 @@ TEST(EntityAssociationPDR, testExtract)
 {
     std::vector<uint8_t> pdr{};
     pdr.resize(sizeof(pldm_pdr_hdr) + sizeof(pldm_pdr_entity_association) +
-               sizeof(pldm_entity) * 5);
+               sizeof(pldm_entity) * 4);
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_pdr_hdr* hdr = reinterpret_cast<pldm_pdr_hdr*>(pdr.data());
     hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
     hdr->length =
-        htole16(sizeof(pldm_pdr_entity_association) + sizeof(pldm_entity) * 5);
+        htole16(sizeof(pldm_pdr_entity_association) + sizeof(pldm_entity) * 4);
 
     pldm_pdr_entity_association* e =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
