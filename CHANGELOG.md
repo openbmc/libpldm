@@ -38,31 +38,17 @@ Change categories:
    pldm_bios_table_iter_is_end() now returns true if the provided argument is
    NULL.
 
-2. Register assignment for parameters of a number of APIs changed with increased
-   scrutiny on their implementations.
+2. ABI break for pldm_pdr_find_record()
 
-   - `decode_entity_auxiliary_names_pdr()`
-   - `decode_get_state_sensor_readings_resp()`
-   - `decode_oem_meta_file_io_req()`
-   - `decode_platform_event_message_req()`
-   - `decode_platform_event_message_resp()`
-   - `decode_sensor_op_data()`
-   - `encode_get_state_effecter_states_resp()`
-   - `encode_state_effecter_pdr()`
-   - `encode_state_sensor_pdr()`
-   - `pldm_bios_table_append_pad_checksum()`
-   - `pldm_bios_table_attr_value_entry_encode_enum()`
-   - `pldm_bios_table_attr_value_entry_encode_string()`
-   - `pldm_pdr_find_record()`
-   - `pldm_pdr_get_next_record()`
+   Register assignment for function parameters was changed with the removal of
+   some asserts in related implementations.
 
-3. platform: Support PLDM_CPER_EVENT in encode_platform_event_message_req()
+3. ABI break for pldm_pdr_get_next_record()
 
-4. dsp: firmware_update: Bounds check
-   decode_downstream_device_parameter_table_entry_versions()
+   Register assignment for function parameters was changed with the removal of
+   some asserts in related implementations.
 
-   The additional bounds-checking required the addition of further length
-   parameters.
+4. platform: Support PLDM_CPER_EVENT in encode_platform_event_message_req()
 
 ### Deprecated
 
@@ -82,38 +68,6 @@ Change categories:
    The implementation allocates, but gives no indication to the caller if an
    allocation (and hence the copy) has failed. Users should migrate to
    pldm_entity_association_tree_copy_root_check().
-
-3. The following APIs are deprecated as unsafe due to various unfixable CWE
-   violations:
-
-   - [CWE-129: Improper Validation of Array Index](https://cwe.mitre.org/data/definitions/129.html)
-
-     - `encode_get_bios_current_value_by_handle_resp()`
-     - `encode_get_bios_table_resp()`
-     - `encode_get_file_table_resp()`
-     - `encode_get_version_resp()`
-     - `pldm_bios_table_attr_entry_enum_decode_def_indices()`
-     - `pldm_bios_table_attr_entry_enum_decode_def_num()`
-     - `pldm_bios_table_attr_find_by_handle()`
-     - `pldm_bios_table_attr_find_by_string_handle()`
-     - `pldm_bios_table_attr_value_find_by_handle()`
-     - `pldm_bios_table_iter_create()`
-     - `pldm_bios_table_iter_is_end()`
-     - `pldm_bios_table_string_find_by_handle()`
-     - `pldm_bios_table_string_find_by_string()`
-
-   - [CWE-617: Reachable Assertion](https://cwe.mitre.org/data/definitions/617.html)
-
-     - `pldm_entity_association_tree_copy_root()`
-
-   - [CWE-789: Memory Allocation with Excessive Size Value](https://cwe.mitre.org/data/definitions/789.html)
-
-     - `decode_oem_meta_file_io_req()`
-
-   - [CWE-823: Use of Out-of-range Pointer Offset](https://cwe.mitre.org/data/definitions/823.html)
-     - `encode_fru_record()`
-     - `encode_get_pdr_resp()`
-     - `pldm_bios_table_attr_entry_enum_encode_length()`
 
 ### Removed
 
@@ -156,22 +110,10 @@ Change categories:
    `tranferFlag` is `AcknowledgementOnly`, the value `eventIDToAcknowledge`
    should be the previously retrieved eventID (from the PLDM terminus).
 
-4. dsp: platform: Prevent overflow of arithmetic on event_data_length
-5. dsp: platform: Bounds check encode_sensor_state_pdr()
-6. dsp: platform: Bounds check encode_state_effecter_pdr()
-7. dsp: pdr: Bounds check pldm_entity_association_pdr_extract()
-8. dsp: bios_table: Bounds check pldm_bios_table_append_pad_checksum()
-9. dsp: bios_table: Bounds check
-   pldm_bios_table_attr_value_entry_encode_string()
-10. dsp: bios_table: Bounds check pldm_bios_table_attr_value_entry_encode_enum()
-11. dsp: firmware_update: Bounds check
-    decode_downstream_device_parameter_table_entry_versions()
-12. oem: ibm: platform: Bounds check encode_bios_attribute_update_event_req()
-13. dsp: fru: Bounds check encode_get_fru_record_by_option_resp()
-14. dsp: fru: Bounds check encode_fru_record()
-15. dsp: bios: Bounds check encode_set_bios_table_req()
-16. dsp: bios: Bounds check encode_set_bios_attribute_current_value_req()
-17. dsp: bios_table: Bounds check pldm_bios_table_string_entry_encode()
+4. dsp: platform: Fix decode_set_event_receiver_req()
+
+   The heartbeat field shall be omitted if `eventMessageGlobalEnable` is not
+   `enableAsyncKeepAlive`.
 
 ## [0.9.1] - 2024-09-07
 
@@ -635,6 +577,12 @@ Change categories:
 
 4. bios_table: Relax pldm_bios_table_string_entry_decode_string_check()
 5. bios_table: Relax pldm_bios_table_attr_entry_enum_decode_pv_hdls_check()
+6. pdr: Modified entity_association_pdr_add_children
+7. pdr: Modified entity_association_pdr_add_entry
+8. pdr: Modified entity_association_pdr_add_children
+9. pdr: Modified entity_association_pdr_add
+10. pdr: Modified the return value of pldm_entity_association_pdr_add
+11. pdr: Modified pldm_entity_association_pdr_add_from_node_with_record_handle
 
 ### Deprecated
 
@@ -664,3 +612,4 @@ Change categories:
 3. transport: Match on response in pldm_transport_send_recv_msg()
 4. requester: Add check before accessing hdr in pldm_recv()
 5. bios_table: pldm_bios_table_attr_entry_string_info_check() NULL deref
+6. pdr: Create entity association PDRs with unique record handle
