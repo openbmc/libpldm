@@ -704,6 +704,12 @@ Change categories:
 
 4. bios_table: Relax pldm_bios_table_string_entry_decode_string_check()
 5. bios_table: Relax pldm_bios_table_attr_entry_enum_decode_pv_hdls_check()
+6. pdr: Modified entity_association_pdr_add_children
+7. pdr: Modified entity_association_pdr_add_entry
+8. pdr: Modified entity_association_pdr_add_children
+9. pdr: Modified entity_association_pdr_add
+10. pdr: Modified the return value of pldm_entity_association_pdr_add
+11. pdr: Modified pldm_entity_association_pdr_add_from_node_with_record_handle
 
 ### Deprecated
 
@@ -734,3 +740,4 @@ Change categories:
 4. requester: Add check before accessing hdr in pldm_recv()
 5. bios_table: pldm_bios_table_attr_entry_string_info_check() NULL deref
 6. meson: sizes.h: add includedir to install path
+7. pdr: Create entity association PDRs with unique record handle
