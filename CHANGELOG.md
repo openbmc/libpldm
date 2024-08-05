@@ -41,7 +41,7 @@ Change categories:
    performed using the [Coccinelle semantic patch][coccinelle]
    `get_fru_record_by_option_check.cocci`:
 
-   ```
+   ```text
    $ spatch \
       --sp-file=${LIBPLDM_DIR}/evolutions/current/get_fru_record_by_option_check.cocci \
       --in-place \
