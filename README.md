@@ -147,9 +147,9 @@ These annotations go immediately before your function signature:
 ```c
 LIBPLDM_ABI_TESTING
 pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
-					    pldm_tid_t tid,
-					    const void *pldm_req_msg,
-					    size_t req_msg_len)
+                                            pldm_tid_t tid,
+                                            const void *pldm_req_msg,
+                                            size_t req_msg_len)
 {
     ...
 }
