@@ -177,7 +177,7 @@ Use of `libpldm` as a subproject is both supported and encouraged.
 subproject configuration syntax:
 
 ```shell
-$ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
+meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 ```
 
 ## OEM/vendor-specific functions
