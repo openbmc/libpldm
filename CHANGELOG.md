@@ -411,7 +411,7 @@ Change categories:
    CI purposes. `oem-ibm` is still disabled by default in the `libpldm` bitbake
    recipe:
 
-   https://github.com/openbmc/openbmc/blob/master/meta-phosphor/recipes-phosphor/libpldm/libpldm_git.bb#L10
+   <https://github.com/openbmc/openbmc/blob/master/meta-phosphor/recipes-phosphor/libpldm/libpldm_git.bb#L10>
 
    To disable `oem-ibm` in your development builds, pass `-Doem-ibm=disabled`
    when invoking `meson setup`
