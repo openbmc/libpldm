@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a5b25a0_382a6e5f",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2006,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-06T11:42:20Z",
+      "side": 1,
+      "message": "@arj, I understand that you may be unhappy with the declaration done here. But here is the problem I faced- \n\nI need to declare a pointer to be used in pldm_msgbuf_span_required because I need to skip some data in msgbuf and extract one specific data. When I put this inside a while loop I end up reusing the same pointer. This pointer is not initialized correctly in the next iteration that results in msgbuf pointing to the wrong address. I am not sure how to deference or reinitialize this pointer *skip_hdr_data and reuse the same variable inside while loop",
+      "range": {
+        "startLine": 2006,
+        "startChar": 2,
+        "endLine": 2006,
+        "endChar": 32
+      },
+      "revId": "6e7b73f8b2fbec415c2af8c87c5db1bca042bb49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
