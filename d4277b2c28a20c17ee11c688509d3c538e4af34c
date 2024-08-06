@@ -280,6 +280,24 @@
       "parentUuid": "47e216b2_2b728421",
       "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d67840f_857348c5",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-06T02:36:32Z",
+      "side": 1,
+      "message": "That would make sense if you were decoding the read _response_, but this function is decoding the read _request_. There can\u0027t be data, the message is requesting that a read be performed.\n\nPlease add a document in `docs/oem/meta/` that describes the serialised layout of each of the messages (requests and responses) that you\u0027re adding in this series. This should be in the same manner as done in the DMTF documents: A table containing type and description columns, with rows documenting the order of the fields in the message. This needs to be written down and considered in its own right, so that we have a reference for the _implementation_ of the serialisation functions (encode/decode).",
+      "parentUuid": "07950f79_0b325e0a",
+      "revId": "d4277b2c28a20c17ee11c688509d3c538e4af34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
