@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77286a91_20bad42d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1699,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-06T11:34:50Z",
+      "side": 1,
+      "message": "in pldm_msgbuf_span_required, no harm is caused of cursor can be allowed to be NULL. IMO",
+      "parentUuid": "d6c122c3_5b3b11ef",
+      "range": {
+        "startLine": 1699,
+        "startChar": 7,
+        "endLine": 1699,
+        "endChar": 30
+      },
+      "revId": "d6a20a3c671cca560ed8162a95feda2ec6eaa82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7de251be_3bcfddba",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 5
@@ -54,6 +78,24 @@
       "writtenOn": "2024-07-11T05:29:32Z",
       "side": 1,
       "message": "Can we please invert this condition so we can un-nest the current body?\n\n```\nif (record-\u003eis_remote !\u003d is_remote || hdr_type !\u003d PLDM_PDR_ENTITY_ASSOCIATION) {\n    rc \u003d pldm_msgbuf_destroy(dst);\n    if (rc) {\n        return rc;\n    }\n    record \u003d record-\u003enext;\n    continue;\n}\n\n...\n```",
+      "revId": "d6a20a3c671cca560ed8162a95feda2ec6eaa82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66aa0eb2_6c686580",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-06T11:34:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7de251be_3bcfddba",
       "revId": "d6a20a3c671cca560ed8162a95feda2ec6eaa82c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -71,6 +113,30 @@
       "writtenOn": "2024-07-11T05:29:32Z",
       "side": 1,
       "message": "Probably best to use calloc()",
+      "range": {
+        "startLine": 2062,
+        "startChar": 42,
+        "endLine": 2062,
+        "endChar": 73
+      },
+      "revId": "d6a20a3c671cca560ed8162a95feda2ec6eaa82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a6fd9b_c4f123f9",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2062,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-06T11:34:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6936a6a_a5429f7b",
       "range": {
         "startLine": 2062,
         "startChar": 42,
