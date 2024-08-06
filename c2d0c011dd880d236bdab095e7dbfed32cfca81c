@@ -422,6 +422,24 @@
       "parentUuid": "51a78c15_fc3866c7",
       "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ad0034f_76ebd9e7",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-06T11:34:43Z",
+      "side": 1,
+      "message": "I have addressed this. I was wrong I check the record handle to verify this test",
+      "parentUuid": "7a8b0e73_4733a775",
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
