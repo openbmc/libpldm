@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb8dc35_f4682f83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:06:19Z",
+      "side": 1,
+      "message": "Hi Varsha, this continues to improve. I have a few more suggestions.",
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "655899a1_231b7885",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1686,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:06:19Z",
+      "side": 1,
+      "message": "Can we please move these declarations into the for-loop below to reduce the scope?\n\nHowever, looking more closely, this is just an exploded `struct pldm_entity`. We can just declare a variable of that type instead and assign into its members?",
+      "range": {
+        "startLine": 1684,
+        "startChar": 1,
+        "endLine": 1686,
+        "endChar": 34
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d5c8d12_ad968214",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1691,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:06:19Z",
+      "side": 1,
+      "message": "If you change `pldm_msgbuf_span_require()` to allow `NULL` for the cursor then we can drop these.",
+      "range": {
+        "startLine": 1690,
+        "startChar": 1,
+        "endLine": 1691,
+        "endChar": 27
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31585ec3_97cfd038",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:06:19Z",
+      "side": 1,
+      "message": "I commented below about how this needs to happen at the end of each loop iteration. Perhaps if we move the code down and give it a label we can use a goto for cleanup here.",
+      "range": {
+        "startLine": 1714,
+        "startChar": 3,
+        "endLine": 1717,
+        "endChar": 4
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d0726a_4d0aaf27",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1730,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:06:19Z",
+      "side": 1,
+      "message": "We\u0027ll need our other return value test trick here, as you need to check the extracted values are valid before you use them:\n\n```\nif ((rc \u003d pldm_msgbuf_extract(dst, entity_type)) ||\n    (rc \u003d pldm_msgbuf_extract(dst, entity_instance_num) ||\n    (rc \u003d pldm_msgbuf_extract(dts, entity_container_id)) {\n    return rc;\n}\n```",
+      "range": {
+        "startLine": 1728,
+        "startChar": 1,
+        "endLine": 1730,
+        "endChar": 49
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c7c27c2_5da7c2b2",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:06:19Z",
+      "side": 1,
+      "message": "If we use a `struct pldm_entity` instead and switch the `pldm_msgbuf_extract()` calls to assign into its members, like:\n\n```\nstruct pldm_entity curr;\n...\npldm_msgbuf_extract(dst, curr.entity_type);\n...\n```\n\nThen this condition can just be `if (entity \u003d\u003d curr)` which saves the visual mess.",
+      "range": {
+        "startLine": 1731,
+        "startChar": 7,
+        "endLine": 1735,
+        "endChar": 27
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "345be1ec_88e7f841",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1740,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:06:19Z",
+      "side": 1,
+      "message": "This needs to happen at the end of each iteration of the `while()` loop, right? Can you move this down after line 1743 below?",
+      "range": {
+        "startLine": 1737,
+        "startChar": 4,
+        "endLine": 1740,
+        "endChar": 5
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
