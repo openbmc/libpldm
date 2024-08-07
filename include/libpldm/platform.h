@@ -74,6 +74,8 @@ enum pldm_platform_transfer_flag {
 
 /* Minimum length of sensor event data */
 #define PLDM_MSG_POLL_EVENT_LENGTH 7
+/* Minimum data length of CPER event type */
+#define PLDM_CPER_EVENT_MIN_LENGTH 4
 
 /* Minimum length of sensor event data */
 #define PLDM_SENSOR_EVENT_DATA_MIN_LENGTH			 5
@@ -1143,6 +1145,25 @@ struct pldm_message_poll_event {
 	uint32_t data_transfer_handle;
 };
 
+/** @struct pldm_platform_cper_event
+ *
+ *  structure representing cperEvent fields
+ */
+struct pldm_platform_cper_event {
+	uint8_t format_version;
+	uint8_t format_type;
+	uint16_t event_data_length;
+#ifndef __cplusplus
+	uint8_t event_data[];
+#endif
+};
+
+/** @brief PLDM CPER event format type */
+enum pldm_cper_event_format_type {
+	PLDM_CPER_EVENT_WITH_HEADER = 0x00,
+	PLDM_CPER_EVENT_WITHOUT_HEADER = 0x01
+};
+
 /** @struct pldm_platform_event_message_req
  *
  *  structure representing PlatformEventMessage command request data
@@ -2154,6 +2175,25 @@ int decode_pldm_pdr_repository_chg_event_data(
 int decode_pldm_message_poll_event_data(
 	const void *event_data, size_t event_data_length,
 	struct pldm_message_poll_event *poll_event);
+
+/** @brief Decode CPER event data type
+ *
+ *  @param[in] event_data - event data from the response message
+ *  @param[in] event_data_length - length of the event data
+ *  @param[out] cper_event - the decoded pldm_platform_cper_event struct
+ *  @return error code
+ */
+int decode_pldm_cper_event_data(const void *event_data,
+				size_t event_data_length,
+				struct pldm_platform_cper_event *cper_event);
+
+/** @brief Helper function to response CPER event event data
+ *
+ *  @param[out] cper_event - the decoded pldm_platform_cper_event struct
+ *  @return cper event event data array pointer
+ */
+uint8_t *
+pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event);
 
 /** @brief Encode pldmMessagePollEvent event data type
  *
