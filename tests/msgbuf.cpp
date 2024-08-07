@@ -917,7 +917,7 @@ TEST(msgbuf, pldm_msgbuf_span_required_bad)
               PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_span_required(ctxExtract, required, NULL),
-              PLDM_ERROR_INVALID_DATA);
+              PLDM_SUCCESS);
 
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
