@@ -1031,7 +1031,7 @@ pldm_msgbuf_span_required(struct pldm_msgbuf *ctx, size_t required,
 {
 	assert(ctx);
 
-	if (!ctx->cursor || !cursor || *cursor) {
+	if (!ctx->cursor || (cursor && *cursor)) {
 		return pldm_msgbuf_status(ctx, EINVAL);
 	}
 
@@ -1050,7 +1050,9 @@ pldm_msgbuf_span_required(struct pldm_msgbuf *ctx, size_t required,
 		return pldm_msgbuf_status(ctx, EOVERFLOW);
 	}
 
-	*cursor = ctx->cursor;
+	if (cursor) {
+		*cursor = ctx->cursor;
+	}
 	ctx->cursor += required;
 
 	return 0;
