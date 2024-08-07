@@ -1992,6 +1992,58 @@ int decode_pldm_pdr_repository_change_record_data(
 	return pldm_msgbuf_destroy(buf);
 }
 
+LIBPLDM_ABI_TESTING
+int decode_pldm_cper_event_data(const void *event_data,
+				size_t event_data_length,
+				struct pldm_platform_cper_event *cper_event)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (!cper_event || !event_data) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_CPER_EVENT_MIN_LENGTH, event_data,
+				    event_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, cper_event->format_version);
+	pldm_msgbuf_extract(buf, cper_event->format_type);
+	if (rc) {
+		return rc;
+	}
+	if (cper_event->format_type != PLDM_CPER_EVENT_WITH_HEADER &&
+	    cper_event->format_type != PLDM_CPER_EVENT_WITHOUT_HEADER) {
+		return -EPROTO;
+	}
+
+	pldm_msgbuf_extract(buf, cper_event->event_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	if (cper_event->event_data_length !=
+	    (event_data_length - PLDM_CPER_EVENT_MIN_LENGTH)) {
+		return -EOVERFLOW;
+	}
+
+	pldm_msgbuf_extract_array_uint8(buf, cper_event->event_data,
+					cper_event->event_data_length);
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+uint8_t *
+pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event)
+{
+	return event->event_data;
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_sensor_reading_req(uint8_t instance_id, uint16_t sensor_id,
 				  uint8_t rearm_event_state,
