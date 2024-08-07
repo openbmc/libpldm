@@ -5190,3 +5190,121 @@ TEST(decodeEntityAuxNamePdrData, BadTest)
     EXPECT_EQ(-EBADMSG, rc);
     free(decodedPdr);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PlatformEventMessage, testGoodCperEventDataDecodeRequest)
+{
+    const size_t cperEventSize = 8;
+    std::array<uint8_t, cperEventSize> eventData{
+        0x1,                   // format version
+        0x0,                   // format type
+        0x4,  0x0,             // event data length
+        0x44, 0x33, 0x22, 0x11 // data
+    };
+
+    uint8_t expectedFormatVersion = 1;
+    uint8_t expectedFormatType = 0;
+    uint16_t expectedEventDataLength = 4;
+    uint8_t expectCperEventData[] = {0x44, 0x33, 0x22, 0x11};
+
+    /**
+     * cperEventSize subtract size of format_version, format_type and
+     * event_data_length
+     */
+    size_t cperEventDataSize =
+        eventData.size() - PLDM_PLATFORM_CPER_EVENT_MIN_LENGTH;
+
+    auto cper_event = reinterpret_cast<struct pldm_platform_cper_event*>(
+        malloc(sizeof(struct pldm_platform_cper_event) + cperEventDataSize));
+
+    auto rc = decode_pldm_platform_cper_event_data(
+        reinterpret_cast<const void*>(eventData.data()), eventData.size(),
+        cper_event, cperEventDataSize);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(cper_event->format_version, expectedFormatVersion);
+    EXPECT_EQ(cper_event->format_type, expectedFormatType);
+    EXPECT_EQ(cper_event->event_data_length, expectedEventDataLength);
+
+    auto cperEventData = pldm_platform_cper_event_event_data(cper_event);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(
+        0, memcmp(expectCperEventData, cperEventData, expectedEventDataLength));
+
+    free(cper_event);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
+{
+
+    const size_t cperEventSize = 8;
+    std::array<uint8_t, cperEventSize> eventData{
+        0x1,                   // format version
+        0x0,                   // format type
+        0x4,  0x0,             // event data length
+        0x44, 0x33, 0x22, 0x11 // data
+    };
+
+    /**
+     * cperEventSize subtract size of format_version, format_type and
+     * event_data_length
+     */
+    size_t cperEventDataSize =
+        eventData.size() - PLDM_PLATFORM_CPER_EVENT_MIN_LENGTH;
+
+    auto cper_event = reinterpret_cast<struct pldm_platform_cper_event*>(
+        malloc(sizeof(struct pldm_platform_cper_event) + cperEventDataSize));
+
+    auto rc = decode_pldm_platform_cper_event_data(
+        NULL, eventData.size(), cper_event, cperEventDataSize);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_platform_cper_event_data(
+        reinterpret_cast<const void*>(eventData.data()), eventData.size(), NULL,
+        cperEventDataSize);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_platform_cper_event_data(
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
+        cper_event, cperEventDataSize);
+    EXPECT_EQ(rc, -EOVERFLOW);
+
+    rc = decode_pldm_platform_cper_event_data(
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
+        cper_event, cperEventDataSize - 1);
+    EXPECT_EQ(rc, 0);
+
+    rc = decode_pldm_platform_cper_event_data(
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
+        cper_event, cperEventDataSize + 1);
+    EXPECT_EQ(rc, -EOVERFLOW);
+
+    // Invalid CPER Event Format Type
+    eventData[1] = 0x2;
+    rc = decode_pldm_platform_cper_event_data(
+        reinterpret_cast<const void*>(eventData.data()), eventData.size(),
+        cper_event, cperEventDataSize);
+
+    EXPECT_EQ(rc, -EPROTO);
+
+    // Invalid cper event data size
+    eventData[1] = 0x1;
+    eventData[2] = 3;
+    rc = decode_pldm_platform_cper_event_data(
+        reinterpret_cast<const void*>(eventData.data()), eventData.size(),
+        cper_event, cperEventDataSize);
+
+    EXPECT_EQ(rc, -EBADMSG);
+
+    eventData[2] = 5;
+    rc = decode_pldm_platform_cper_event_data(
+        reinterpret_cast<const void*>(eventData.data()), eventData.size(),
+        cper_event, cperEventDataSize);
+
+    EXPECT_EQ(rc, -EOVERFLOW);
+
+    free(cper_event);
+}
+#endif
