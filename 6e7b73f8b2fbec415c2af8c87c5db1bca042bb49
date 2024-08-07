@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "707ba360_158da6f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:12:10Z",
+      "side": 1,
+      "message": "Hi Varsha, I have a few suggestions inline.",
+      "revId": "6e7b73f8b2fbec415c2af8c87c5db1bca042bb49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a5b25a0_382a6e5f",
@@ -20,6 +37,81 @@
         "endLine": 2006,
         "endChar": 32
       },
+      "revId": "6e7b73f8b2fbec415c2af8c87c5db1bca042bb49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e06972fb_a9c10643",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2006,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:12:10Z",
+      "side": 1,
+      "message": "If we allow `pldm_msgbuf_span_required()` to accept `NULL` for the cursor then this problem goes away. See my request on your previous patch 😊",
+      "parentUuid": "4a5b25a0_382a6e5f",
+      "range": {
+        "startLine": 2006,
+        "startChar": 2,
+        "endLine": 2006,
+        "endChar": 32
+      },
+      "revId": "6e7b73f8b2fbec415c2af8c87c5db1bca042bb49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5bb9fb5_22f385d5",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2015,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:12:10Z",
+      "side": 1,
+      "message": "Need to test the return value here before using `hdr_type`.",
+      "revId": "6e7b73f8b2fbec415c2af8c87c5db1bca042bb49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "253f8a6d_461003ef",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:12:10Z",
+      "side": 1,
+      "message": "Please make this cleanup a common path toward the end of the function, and use a label and goto to jump to it.",
+      "revId": "6e7b73f8b2fbec415c2af8c87c5db1bca042bb49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e35c8106_4a228c4b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2026,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T01:12:10Z",
+      "side": 1,
+      "message": "Please invert the condition and jump to an appropriate cleanup label so we can un-nest the code here.",
       "revId": "6e7b73f8b2fbec415c2af8c87c5db1bca042bb49",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
