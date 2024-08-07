@@ -1056,12 +1056,12 @@ pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx, size_t count,
 		char: pldm_msgbuf_insert_array_char)(dst, count, src,          \
 						     src_count)
 
-LIBPLDM_CC_NONNULL
+LIBPLDM_CC_NONNULL_ARGS(1)
 LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
 						       size_t required,
 						       void **cursor)
 {
-	if (!ctx->cursor || *cursor) {
+	if (!ctx->cursor || (cursor && *cursor)) {
 		return pldm_msgbuf_status(ctx, EINVAL);
 	}
 
@@ -1080,7 +1080,9 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
 		return pldm_msgbuf_status(ctx, EOVERFLOW);
 	}
 
-	*cursor = ctx->cursor;
+	if (cursor) {
+		*cursor = ctx->cursor;
+	}
 	ctx->cursor += required;
 
 	return 0;

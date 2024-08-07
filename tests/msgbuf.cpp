@@ -873,6 +873,7 @@ TEST(msgbuf, pldm_msgbuf_span_required_bad)
     struct pldm_msgbuf* ctx = &_ctx;
     uint8_t src[6] = {0x11, 0x22, 0x44, 0x55, 0x66, 0x77};
     uint8_t buf[6] = {0};
+    const size_t required = 4;
     uint16_t testVal;
     [[maybe_unused]] uint8_t* retBuff = NULL;
 
@@ -887,6 +888,8 @@ TEST(msgbuf, pldm_msgbuf_span_required_bad)
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_span_required(ctxExtract, required, NULL),
+              PLDM_SUCCESS);
 
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
