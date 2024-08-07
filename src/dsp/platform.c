@@ -2856,3 +2856,60 @@ int decode_pldm_entity_auxiliary_names_pdr_index(
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_cper_event_data(
+	const void *event_data, size_t event_data_length,
+	struct pldm_platform_cper_event *cper_event, size_t cper_event_length)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (!cper_event || !event_data) {
+		return -EINVAL;
+	}
+
+	if (cper_event_length < sizeof(*cper_event)) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_PLATFORM_CPER_EVENT_MIN_LENGTH,
+				    event_data, event_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, cper_event->format_version);
+	rc = pldm_msgbuf_extract(buf, cper_event->format_type);
+	if (rc) {
+		return rc;
+	}
+	if (cper_event->format_type != PLDM_PLATFORM_CPER_EVENT_WITH_HEADER &&
+	    cper_event->format_type !=
+		    PLDM_PLATFORM_CPER_EVENT_WITHOUT_HEADER) {
+		return -EPROTO;
+	}
+
+	rc = pldm_msgbuf_extract(buf, cper_event->event_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	if (cper_event->event_data_length >
+	    (cper_event_length - sizeof(*cper_event))) {
+		return -EOVERFLOW;
+	}
+
+	pldm_msgbuf_extract_array_uint8(buf, cper_event->event_data,
+					cper_event->event_data_length);
+
+	return pldm_msgbuf_destroy_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+uint8_t *
+pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event)
+{
+	return event->event_data;
+}
