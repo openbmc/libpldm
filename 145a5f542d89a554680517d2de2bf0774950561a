@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d33070ed_6e87fb54",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T00:37:54Z",
+      "side": 1,
+      "message": "Can you please describe your approach to fixing the issue here, along with why it\u0027s appropriate and what alternatives were considered.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 60
+      },
+      "revId": "145a5f542d89a554680517d2de2bf0774950561a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1291b192_3a50fc46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T00:37:54Z",
+      "side": 1,
+      "message": "Hello Archana. I\u0027d like some more explanation of your approach, as the patch itself seems like it is more complex than it needs to be.",
+      "revId": "145a5f542d89a554680517d2de2bf0774950561a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9539be2d_7dfda7ae",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T00:37:54Z",
+      "side": 1,
+      "message": "This isn\u0027t used?",
+      "revId": "145a5f542d89a554680517d2de2bf0774950561a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0dbcd08_f0875ee1",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-07T00:37:54Z",
+      "side": 1,
+      "message": "Why pass a pointer? Nothing consumes any value written?",
+      "range": {
+        "startLine": 974,
+        "startChar": 35,
+        "endLine": 974,
+        "endChar": 50
+      },
+      "revId": "145a5f542d89a554680517d2de2bf0774950561a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
