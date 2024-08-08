@@ -107,6 +107,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69bf0434_57788d02",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-08T09:16:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01bf8d08_6bfd5a95",
+      "range": {
+        "startLine": 283,
+        "startChar": 21,
+        "endLine": 283,
+        "endChar": 24
+      },
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ab8add6_1f762647",
@@ -196,6 +220,54 @@
         "startChar": 65,
         "endLine": 289,
         "endChar": 21
+      },
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d60ac031_d357331a",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-08T09:16:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6f4c776_70a9cb92",
+      "range": {
+        "startLine": 288,
+        "startChar": 65,
+        "endLine": 289,
+        "endChar": 21
+      },
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d8cca1_30136d68",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-08T09:16:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba8cd855_33b12168",
+      "range": {
+        "startLine": 289,
+        "startChar": 21,
+        "endLine": 289,
+        "endChar": 77
       },
       "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
@@ -438,6 +510,24 @@
       "side": 1,
       "message": "I have addressed this. I was wrong I check the record handle to verify this test",
       "parentUuid": "7a8b0e73_4733a775",
+      "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "940e06be_fe192ec9",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-08T09:16:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ad0034f_76ebd9e7",
       "revId": "c2d0c011dd880d236bdab095e7dbfed32cfca81c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
