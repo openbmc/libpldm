@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b173b160_f79af2d6",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1686,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-08T09:16:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "655899a1_231b7885",
+      "range": {
+        "startLine": 1684,
+        "startChar": 1,
+        "endLine": 1686,
+        "endChar": 34
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d5c8d12_ad968214",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-08-07T01:06:19Z",
       "side": 1,
       "message": "If you change `pldm_msgbuf_span_require()` to allow `NULL` for the cursor then we can drop these.",
+      "range": {
+        "startLine": 1690,
+        "startChar": 1,
+        "endLine": 1691,
+        "endChar": 27
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b06d9315_587b2e13",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1691,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-08T09:16:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d5c8d12_ad968214",
       "range": {
         "startLine": 1690,
         "startChar": 1,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fff1118_05c1ea18",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-08T09:16:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31585ec3_97cfd038",
+      "range": {
+        "startLine": 1714,
+        "startChar": 3,
+        "endLine": 1717,
+        "endChar": 4
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39d0726a_4d0aaf27",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-08-07T01:06:19Z",
       "side": 1,
       "message": "We\u0027ll need our other return value test trick here, as you need to check the extracted values are valid before you use them:\n\n```\nif ((rc \u003d pldm_msgbuf_extract(dst, entity_type)) ||\n    (rc \u003d pldm_msgbuf_extract(dst, entity_instance_num) ||\n    (rc \u003d pldm_msgbuf_extract(dts, entity_container_id)) {\n    return rc;\n}\n```",
+      "range": {
+        "startLine": 1728,
+        "startChar": 1,
+        "endLine": 1730,
+        "endChar": 49
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6157d397_ee073285",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1730,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-08T09:16:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39d0726a_4d0aaf27",
       "range": {
         "startLine": 1728,
         "startChar": 1,
@@ -135,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "703f5179_9dfd10af",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-08T09:16:21Z",
+      "side": 1,
+      "message": "I think there is no way to compare two structures in C we have to compare each member (as per stack overflow). So I have kept the variable definition just before the for loop to reduce its scope. \n\nAlso unable to declare the structure as pldm_entity curr instead of declaring each individual member because extract returns -ENIVAL complaining that curr.entity_type and other members is not set or initialized so it is NULL. I added traces to understand where it was failing.",
+      "parentUuid": "7c7c27c2_5da7c2b2",
+      "range": {
+        "startLine": 1731,
+        "startChar": 7,
+        "endLine": 1735,
+        "endChar": 27
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "345be1ec_88e7f841",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 6
@@ -146,6 +266,30 @@
       "writtenOn": "2024-08-07T01:06:19Z",
       "side": 1,
       "message": "This needs to happen at the end of each iteration of the `while()` loop, right? Can you move this down after line 1743 below?",
+      "range": {
+        "startLine": 1737,
+        "startChar": 4,
+        "endLine": 1740,
+        "endChar": 5
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffb8096b_2fdc299d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1740,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-08T09:16:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "345be1ec_88e7f841",
       "range": {
         "startLine": 1737,
         "startChar": 4,
