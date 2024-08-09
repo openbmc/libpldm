@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a324f7f0_93569e06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:07:59Z",
+      "side": 1,
+      "message": "Hi Varsha, a couple of thoughts inline.",
+      "revId": "cd5d1319880bafc51f0ba769c79ea4141a6332b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8389b9e6_5aca4856",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2011,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:07:59Z",
+      "side": 1,
+      "message": "Given we\u0027re skipping it we can avoid testing the result, but we do need to test the result of the `hdr_type` extraction below. So this could instead look like:\n\n```\npldm_msgbuf_span_required(dst, skip_data_size, NULL);\nif ((rc \u003d pldm_msgbuf_extract(dst, hdr_type))) {\n   return rc;\n}\n```\n\nThat should save the awkward wrapping of the `NULL` parameter.",
+      "range": {
+        "startLine": 2010,
+        "startChar": 7,
+        "endLine": 2011,
+        "endChar": 16
+      },
+      "revId": "cd5d1319880bafc51f0ba769c79ea4141a6332b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ee1df76_175c57b2",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2029,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:07:59Z",
+      "side": 1,
+      "message": "I feel like we need to give this some more thought to avoid the weird break here.",
+      "revId": "cd5d1319880bafc51f0ba769c79ea4141a6332b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
