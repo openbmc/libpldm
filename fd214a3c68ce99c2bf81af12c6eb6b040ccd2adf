@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45958070_81d774d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:02:27Z",
+      "side": 1,
+      "message": "Hi Varsha, I have a few queries inline.",
+      "revId": "fd214a3c68ce99c2bf81af12c6eb6b040ccd2adf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efb4c782_a6b77df9",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:02:27Z",
+      "side": 1,
+      "message": "Why is this a pointer if it\u0027s an in-parameter?",
+      "range": {
+        "startLine": 655,
+        "startChar": 1,
+        "endLine": 655,
+        "endChar": 28
+      },
+      "revId": "fd214a3c68ce99c2bf81af12c6eb6b040ccd2adf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47c345aa_6b6fbddc",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:02:27Z",
+      "side": 1,
+      "message": "Move these inside the for-loop? There\u0027s no reason for them to be at the outer-scope.",
+      "range": {
+        "startLine": 1716,
+        "startChar": 2,
+        "endLine": 1718,
+        "endChar": 35
+      },
+      "revId": "fd214a3c68ce99c2bf81af12c6eb6b040ccd2adf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1759d51_a1e01a9c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1850,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:02:27Z",
+      "side": 1,
+      "message": "These need tests in the same way that the similar code above has. Also given the similarities, is there some way we could make it common?",
+      "range": {
+        "startLine": 1848,
+        "startChar": 1,
+        "endLine": 1850,
+        "endChar": 48
+      },
+      "revId": "fd214a3c68ce99c2bf81af12c6eb6b040ccd2adf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

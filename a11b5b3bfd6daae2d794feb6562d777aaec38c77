@@ -255,6 +255,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "acaeedc9_b206813e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:02:27Z",
+      "side": 1,
+      "message": "\u003e Also unable to declare the structure as pldm_entity curr instead of declaring each individual member because extract returns -ENIVAL complaining that curr.entity_type and other members is not set or initialized so it is NULL\n\nCan you paste me the code you wrote? And the errors that you received?",
+      "parentUuid": "703f5179_9dfd10af",
+      "range": {
+        "startLine": 1731,
+        "startChar": 7,
+        "endLine": 1735,
+        "endChar": 27
+      },
+      "revId": "a11b5b3bfd6daae2d794feb6562d777aaec38c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "345be1ec_88e7f841",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 6
