@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7afbcf2e_805c77f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T05:51:07Z",
+      "side": 1,
+      "message": "Hi Varsha, I have a couple of requests inline.",
+      "revId": "54688aeddaf69a8138ac94bbac012da28f77f261",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cd2393a_927a2b0c",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T05:51:07Z",
+      "side": 1,
+      "message": "As this isn\u0027t a change to the public API, can you please remove it from the changelog? The changelog should only capture things that are relevant to library _users_, not library _implementers_.",
+      "revId": "54688aeddaf69a8138ac94bbac012da28f77f261",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
