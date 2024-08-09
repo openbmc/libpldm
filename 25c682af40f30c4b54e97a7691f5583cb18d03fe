@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcb23fd0_5e18eee9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-09T09:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "047d669a_19007f00",
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21443c0b_3cd76223",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-08-09T06:46:59Z",
       "side": 1,
       "message": "`pldm_platform_cper_event_format_type`?\n\nAlso, do we need the `type` suffix? Can we just have `pldm_platform_cper_event_format`?",
+      "range": {
+        "startLine": 1163,
+        "startChar": 5,
+        "endLine": 1163,
+        "endChar": 32
+      },
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45be4de9_cad8275b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-09T09:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21443c0b_3cd76223",
       "range": {
         "startLine": 1163,
         "startChar": 5,
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c8da6a9_a3f75113",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-09T09:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d32b001_eb98e7c0",
+      "range": {
+        "startLine": 1164,
+        "startChar": 1,
+        "endLine": 1164,
+        "endChar": 28
+      },
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "311a8f79_91f90cf7",
@@ -94,6 +160,24 @@
       "writtenOn": "2024-08-09T06:46:59Z",
       "side": 1,
       "message": "Why have you put these new API declarations in-between the encode and decode APIs for message poll event? That\u0027s a bit too chaotic for my taste.",
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5776bb7_20059f48",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2180,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-09T09:06:15Z",
+      "side": 1,
+      "message": "I just want to put the API decode/encode for the PLDM eventClass in the same place.",
+      "parentUuid": "311a8f79_91f90cf7",
       "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -121,6 +205,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "403befa1_41251b0d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2187,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-09T09:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbdadd04_da9f919a",
+      "range": {
+        "startLine": 2187,
+        "startChar": 4,
+        "endLine": 2187,
+        "endChar": 31
+      },
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bb95c7d_a9c3ee6b",
@@ -134,6 +242,24 @@
       "writtenOn": "2024-08-09T06:46:59Z",
       "side": 1,
       "message": "As `struct pldm_platform_cper_event` has a flexible array member you must also pass the length of `cper_event` as an argument to the function.",
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fea28c5_5e1b111f",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2189,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-09T09:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bb95c7d_a9c3ee6b",
       "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -161,6 +287,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f0e74d4_5dccef95",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2016,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-09T09:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3ac37bb_62a6f949",
+      "range": {
+        "startLine": 2016,
+        "startChar": 1,
+        "endLine": 2016,
+        "endChar": 10
+      },
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff5514fa_27e569ac",
@@ -178,6 +328,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec4a74df_d66d51f6",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2025,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-09T09:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff5514fa_27e569ac",
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "556d9642_00d85ce3",
@@ -191,6 +359,30 @@
       "writtenOn": "2024-08-09T06:46:59Z",
       "side": 1,
       "message": "There\u0027s no overflow check, and we don\u0027t have enough information to do one as you haven\u0027t passed the length of the `cper_event` object through the API.\n\nI think we may need to improve the API of `pldm_msgbuf_exract_array_uint8()` as you\u0027re not the first person making this mistake.",
+      "range": {
+        "startLine": 2034,
+        "startChar": 38,
+        "endLine": 2035,
+        "endChar": 34
+      },
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "943bba2f_8a707443",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2035,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-09T09:06:15Z",
+      "side": 1,
+      "message": "I think the `pldm__msgbuf_extract_array_void` API which is called by `pldm_msgbuf_extract_array_uint8` already check the overflow condition as below.\nhttps://github.com/openbmc/libpldm/blob/8be6bc3541598ecb318c43b1fd3ef36578b39c54/src/msgbuf.h#L747",
+      "parentUuid": "556d9642_00d85ce3",
       "range": {
         "startLine": 2034,
         "startChar": 38,
