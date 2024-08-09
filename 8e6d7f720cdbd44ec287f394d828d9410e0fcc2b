@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7fe62a7_42d4cbbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:22:27Z",
+      "side": 1,
+      "message": "Hi, I have several concerns still with this.",
+      "revId": "8e6d7f720cdbd44ec287f394d828d9410e0fcc2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5686e823_01a28023",
+        "filename": "abi/x86_64/gcc.dump",
+        "patchSetId": 30
+      },
+      "lineNbr": 9216,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:22:27Z",
+      "side": 1,
+      "message": "Please don\u0027t update the ABI dumps for patches that aren\u0027t stabilisation patches.",
+      "revId": "8e6d7f720cdbd44ec287f394d828d9410e0fcc2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b655b232_83893eb3",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:22:27Z",
+      "side": 1,
+      "message": "Why `uint32_t` and not `size_t`?",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "8e6d7f720cdbd44ec287f394d828d9410e0fcc2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01b23edc_d1ab448d",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:22:27Z",
+      "side": 1,
+      "message": "You can\u0027t change this API as its definition is not marked `LIBPLDM_ABI_TESTING`. This change breaks the stable ABI contract and any software that depends on it. The only thing you can do for safety is to stop using it and switch to a better API like we\u0027re trying to design above.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 26
+      },
+      "revId": "8e6d7f720cdbd44ec287f394d828d9410e0fcc2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9853f8af_be068353",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:22:27Z",
+      "side": 1,
+      "message": "This check is unnecessary as it\u0027s effectively performed by `return pldm_msgbuf_destroy_consumed(buf)` immediately below.\n\nThe code instead can look like:\n\n```\npldm_msgbuf_extract_array_uint8(buf, req-\u003efile_data, req-\u003elength);\n\nreturn pldm_msgbuf_destroy_consumed(buf);\n```",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 46,
+        "endChar": 2
+      },
+      "revId": "8e6d7f720cdbd44ec287f394d828d9410e0fcc2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1793a024_2ff14943",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-09T06:22:27Z",
+      "side": 1,
+      "message": "You might as well pass `UINT32_MAX` for compatibility here, as that\u0027s what the code was effectively already assuming. You can\u0027t fix this API by adding the `data_length` parameter because it\u0027s not marked `LIBPLDM_ABI_TESTING`, it\u0027s is just broken and we have to live with it, as discussed on the header.",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 59
+      },
+      "revId": "8e6d7f720cdbd44ec287f394d828d9410e0fcc2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
