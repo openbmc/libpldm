@@ -722,14 +722,18 @@ pldm__msgbuf_extract_real32(struct pldm_msgbuf *ctx, void *dst)
 		int32_t *: pldm__msgbuf_extract_int32,                         \
 		real32_t *: pldm__msgbuf_extract_real32)(ctx, dst)
 
+/**
+ * @ref pldm_msgbuf_extract_array
+ */
+LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_array_void(struct pldm_msgbuf *ctx, void *dst,
-				size_t count)
+pldm__msgbuf_extract_array_void(struct pldm_msgbuf *ctx, size_t count,
+				void *dst, size_t dst_count)
 {
 	assert(ctx);
 
-	if (!ctx->cursor || !dst) {
+	if (!ctx->cursor || !dst || count > dst_count) {
 		return pldm_msgbuf_status(ctx, EINVAL);
 	}
 
@@ -758,23 +762,46 @@ pldm__msgbuf_extract_array_void(struct pldm_msgbuf *ctx, void *dst,
 	return 0;
 }
 
+/**
+ * @ref pldm_msgbuf_extract_array
+ */
+LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_extract_array_char(struct pldm_msgbuf *ctx, char *dst, size_t count)
+pldm_msgbuf_extract_array_char(struct pldm_msgbuf *ctx, size_t count, char *dst,
+			       size_t dst_count)
 {
-	return pldm__msgbuf_extract_array_void(ctx, dst, count);
+	return pldm__msgbuf_extract_array_void(ctx, count, dst, dst_count);
 }
 
+/**
+ * @ref pldm_msgbuf_extract_array
+ */
+LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, uint8_t *dst,
-				size_t count)
+pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, size_t count,
+				uint8_t *dst, size_t dst_count)
 {
-	return pldm__msgbuf_extract_array_void(ctx, dst, count);
+	return pldm__msgbuf_extract_array_void(ctx, count, dst, dst_count);
 }
 
-#define pldm_msgbuf_extract_array(ctx, dst, count)                             \
+/**
+ * Extract an array of data from the msgbuf instance
+ *
+ * @param ctx - The msgbuf instance from which to extract an array of data
+ * @param count - The number of array elements to extract
+ * @param dst - The array object into which elements from @p ctx should be
+                extracted
+ * @param dst_count - The maximum number of elements to place into @p dst
+ *
+ * Note that both @p count and @p dst_count can only be counted by `sizeof` for
+ * arrays where `sizeof(*dst) == 1` holds. Specifically, they count the number
+ * of array elements and _not_ the object size of the array.
+ */
+#define pldm_msgbuf_extract_array(ctx, count, dst, dst_count)                  \
 	_Generic((*(dst)),                                                     \
 		uint8_t: pldm_msgbuf_extract_array_uint8,                      \
-		char: pldm_msgbuf_extract_array_char)(ctx, dst, count)
+		char: pldm_msgbuf_extract_array_char)(ctx, count, dst,         \
+						      dst_count)
 
 LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx,
 						       const uint32_t src)
@@ -967,14 +994,18 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int8(struct pldm_msgbuf *ctx,
 		uint32_t: pldm_msgbuf_insert_uint32,                           \
 		int32_t: pldm_msgbuf_insert_int32)(dst, src)
 
+/**
+ * @ref pldm_msgbuf_insert_array
+ */
+LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_insert_array_void(struct pldm_msgbuf *ctx, const void *src,
-			       size_t count)
+pldm__msgbuf_insert_array_void(struct pldm_msgbuf *ctx, size_t count,
+			       const void *src, size_t src_count)
 {
 	assert(ctx);
 
-	if (!ctx->cursor || !src) {
+	if (!ctx->cursor || !src || count > src_count) {
 		return pldm_msgbuf_status(ctx, EINVAL);
 	}
 
@@ -1003,24 +1034,47 @@ pldm__msgbuf_insert_array_void(struct pldm_msgbuf *ctx, const void *src,
 	return 0;
 }
 
+/**
+ * @ref pldm_msgbuf_insert_array
+ */
+LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_insert_array_char(struct pldm_msgbuf *ctx, const char *src,
-			      size_t count)
+pldm_msgbuf_insert_array_char(struct pldm_msgbuf *ctx, size_t count,
+			      const char *src, size_t src_count)
 {
-	return pldm__msgbuf_insert_array_void(ctx, src, count);
+	return pldm__msgbuf_insert_array_void(ctx, count, src, src_count);
 }
 
+/**
+ * @ref pldm_msgbuf_insert_array
+ */
+LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx, const uint8_t *src,
-			       size_t count)
+pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx, size_t count,
+			       const uint8_t *src, size_t src_count)
 {
-	return pldm__msgbuf_insert_array_void(ctx, src, count);
+	return pldm__msgbuf_insert_array_void(ctx, count, src, src_count);
 }
 
-#define pldm_msgbuf_insert_array(dst, src, count)                              \
+/**
+ * Insert an array of data into the msgbuf instance
+ *
+ * @param ctx - The msgbuf instance into which the array of data should be
+ *              inserted
+ * @param count - The number of array elements to insert
+ * @param src - The array object from which elements should be inserted into
+                @p ctx
+ * @param src_count - The maximum number of elements to insert from @p src
+ *
+ * Note that both @p count and @p src_count can only be counted by `sizeof` for
+ * arrays where `sizeof(*dst) == 1` holds. Specifically, they count the number
+ * of array elements and _not_ the object size of the array.
+ */
+#define pldm_msgbuf_insert_array(dst, count, src, src_count)                   \
 	_Generic((*(src)),                                                     \
 		uint8_t: pldm_msgbuf_insert_array_uint8,                       \
-		char: pldm_msgbuf_insert_array_char)(dst, src, count)
+		char: pldm_msgbuf_insert_array_char)(dst, count, src,          \
+						     src_count)
 
 LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
 						       size_t required,
@@ -1271,6 +1325,7 @@ pldm__msgbuf_copy(struct pldm_msgbuf *dst, struct pldm_msgbuf *src, size_t size,
 	return 0;
 }
 
+LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
 pldm_msgbuf_copy_string_ascii(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
 {
@@ -1283,9 +1338,10 @@ pldm_msgbuf_copy_string_ascii(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
 		return rc;
 	}
 
-	return pldm__msgbuf_insert_array_void(dst, ascii, len);
+	return pldm__msgbuf_insert_array_void(dst, len, ascii, len);
 }
 
+LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
 pldm_msgbuf_copy_string_utf16(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
 {
@@ -1298,7 +1354,7 @@ pldm_msgbuf_copy_string_utf16(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
 		return rc;
 	}
 
-	return pldm__msgbuf_insert_array_void(dst, utf16, len);
+	return pldm__msgbuf_insert_array_void(dst, len, utf16, len);
 }
 
 #ifdef __cplusplus

@@ -27,6 +27,15 @@ Change categories:
 6. pdr: Add related decode_entity_auxiliary_names_pdr() APIs
 7. fw_update: Add encode req & decode resp for get_downstream_fw_params
 8. platform: Add decode_pldm_platform_cper_event() API
+9. decode_get_pdr_repository_info_resp_safe()
+
+   Replaces decode_get_pdr_repository_info_resp() as discussed in the
+   `Deprecated` section below
+
+10. decode_get_pdr_resp_safe()
+
+    Replaces decode_get_pdr_resp() as discussed in the `Deprecated` section
+    below
 
 ### Changed
 
@@ -66,6 +75,17 @@ Change categories:
    - `pldm_pdr_add_fru_record_set_check()`
 
 [clang-rename]: https://clang.llvm.org/extra/clang-rename.html
+
+2. `decode_get_pdr_repository_info_resp()`
+
+   Users should move to `decode_get_pdr_repository_info_resp_safe()` which
+   eliminates the opportunity for buffer overruns when extracting objects from
+   the message.
+
+3. `decode_get_pdr_resp()`
+
+   Users should move to `decode_get_pdr_resp_safe()` which reduces the
+   invocation tedium and improves memory safety over `decode_get_pdr_resp()`.
 
 ### Removed
 

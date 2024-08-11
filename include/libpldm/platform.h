@@ -1577,6 +1577,18 @@ int decode_get_pdr_repository_info_resp(
 	uint32_t *repository_size, uint32_t *largest_record_size,
 	uint8_t *data_transfer_handle_timeout);
 
+/** @brief Decode GetPDRRepositoryInfo response data
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] resp - The response structure to populate with the extracted message data. Output member values are host-endian.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_get_pdr_repository_info_resp_safe(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_pdr_repository_info_resp *resp);
+
 /* GetPDR */
 
 /** @brief Create a PLDM request message for GetPDR
@@ -1633,6 +1645,26 @@ int decode_get_pdr_resp(const struct pldm_msg *msg, size_t payload_length,
 			uint8_t *transfer_flag, uint16_t *resp_cnt,
 			uint8_t *record_data, size_t record_data_length,
 			uint8_t *transfer_crc);
+
+/** @brief Decode GetPDR response data
+ *
+ *  Note:
+ *  * If the return value is not PLDM_SUCCESS, it represents a
+ * transport layer error.
+ *  * If the completion_code value is not PLDM_SUCCESS, it represents a
+ * protocol layer error and all the out-parameters are invalid.
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - Length of request message payload
+ *  @param[out] resp - The response structure into which the message will be unpacked
+ *  @param[in] resp_len - The size of the resp object in memory
+ *  @param[out] transfer_crc - A CRC-8 for the overall PDR. This is present only
+ *        in the last part of a PDR being transferred
+ *  @return 0 on success, otherwise, a negative errno value on failure
+ */
+int decode_get_pdr_resp_safe(const struct pldm_msg *msg, size_t payload_length,
+			     struct pldm_get_pdr_resp *resp, size_t resp_len,
+			     uint8_t *transfer_crc);
 
 /* SetStateEffecterStates */
 
