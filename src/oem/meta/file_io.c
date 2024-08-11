@@ -13,22 +13,29 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 {
 	struct pldm_msgbuf _buf;
 	struct pldm_msgbuf *buf = &_buf;
+	int rc;
 
 	if (msg == NULL || file_handle == NULL || length == NULL ||
 	    data == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	int rc = pldm_msgbuf_init_cc(
-		buf, PLDM_OEM_META_DECODE_WRITE_FILE_IO_MIN_SIZE, msg->payload,
-		payload_length);
+	rc = pldm_msgbuf_init_cc(buf,
+				 PLDM_OEM_META_DECODE_WRITE_FILE_IO_MIN_SIZE,
+				 msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}
 
 	pldm_msgbuf_extract_p(buf, file_handle);
 	pldm_msgbuf_extract_p(buf, length);
-	pldm_msgbuf_extract_array_uint8(buf, data, *length);
+
+	/* NOTE: Memory safety failure */
+	rc = pldm_msgbuf_extract_array_uint8(buf, (size_t)(*length), data,
+					     UINT32_MAX);
+	if (rc) {
+		return rc;
+	}
 
 	return pldm_msgbuf_destroy_consumed(buf);
 }

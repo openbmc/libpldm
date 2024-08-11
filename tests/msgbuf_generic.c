@@ -139,7 +139,7 @@ static void test_msgbuf_extract_array_generic_uint8(void)
 
     expect(pldm_msgbuf_init_cc(ctx, sizeof(buf), buf, sizeof(buf)) ==
            PLDM_SUCCESS);
-    expect(pldm_msgbuf_extract_array(ctx, arr, 1) == PLDM_SUCCESS);
+    expect(pldm_msgbuf_extract_array(ctx, 1, arr, 1) == PLDM_SUCCESS);
     expect(arr[0] == 0);
     expect(pldm_msgbuf_destroy(ctx) == PLDM_SUCCESS);
 }
@@ -291,15 +291,16 @@ static void test_msgbuf_insert_array_generic_uint8(void)
     uint8_t retBuff[6] = {0};
 
     expect(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)) == PLDM_SUCCESS);
-    expect(pldm_msgbuf_insert_array(ctx, src, sizeof(src)) == PLDM_SUCCESS);
+    expect(pldm_msgbuf_insert_array(ctx, sizeof(src), src, sizeof(src)) ==
+           PLDM_SUCCESS);
 
     struct pldm_msgbuf _ctxExtract;
     struct pldm_msgbuf* ctxExtract = &_ctxExtract;
 
     expect(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)) ==
            PLDM_SUCCESS);
-    expect(pldm_msgbuf_extract_array(ctxExtract, retBuff, sizeof(retBuff)) ==
-           PLDM_SUCCESS);
+    expect(pldm_msgbuf_extract_array(ctxExtract, sizeof(retBuff), retBuff,
+                                     sizeof(retBuff)) == PLDM_SUCCESS);
 
     expect(memcmp(src, retBuff, sizeof(retBuff)) == 0);
     expect(pldm_msgbuf_destroy(ctxExtract) == PLDM_SUCCESS);
