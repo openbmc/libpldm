@@ -1940,17 +1940,24 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamDeviceParamTable)
     pldm_msgbuf_insert_uint32(buf, comparisonStamp);
     pldm_msgbuf_insert_uint8(buf, (uint8_t)PLDM_STR_TYPE_ASCII);
     pldm_msgbuf_insert_uint8(buf, activeCompVerStrLen);
-    pldm_msgbuf_insert_array_char(buf, release_date, sizeof(release_date));
+    rc = pldm_msgbuf_insert_array_char(buf, sizeof(release_date), release_date,
+                                       sizeof(release_date));
+    ASSERT_EQ(rc, 0);
     pldm_msgbuf_insert_uint32(buf, comparisonStamp);
     pldm_msgbuf_insert_uint8(buf, (uint8_t)PLDM_STR_TYPE_ASCII);
     pldm_msgbuf_insert_uint8(buf, pendingCompVerStrLen);
-    pldm_msgbuf_insert_array_char(buf, release_date, sizeof(release_date));
+    rc = pldm_msgbuf_insert_array_char(buf, sizeof(release_date), release_date,
+                                       sizeof(release_date));
+    ASSERT_EQ(rc, 0);
     pldm_msgbuf_insert_uint16(buf, compActivationMethods);
     pldm_msgbuf_insert_uint32(buf, capabilitiesDuringUpdate);
-    pldm_msgbuf_insert_array_char(buf, activeCompVerStr,
-                                  sizeof(activeCompVerStr));
-    pldm_msgbuf_insert_array_char(buf, pendingCompVerStr,
-                                  sizeof(pendingCompVerStr));
+    rc = pldm_msgbuf_insert_array_char(
+        buf, activeCompVerStrLen, activeCompVerStr, sizeof(activeCompVerStr));
+    ASSERT_EQ(rc, 0);
+    rc = pldm_msgbuf_insert_array_char(buf, pendingCompVerStrLen,
+                                       pendingCompVerStr,
+                                       sizeof(pendingCompVerStr));
+    ASSERT_EQ(rc, 0);
 
     variable_field rawData = {.ptr = responseMsg.data(),
                               .length = responseMsg.size()};

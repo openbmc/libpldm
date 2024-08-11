@@ -1152,8 +1152,14 @@ int decode_downstream_device_parameter_table_entry(
 	if (rc < 0) {
 		return rc;
 	}
-	pldm_msgbuf_extract_array(buf, entry->active_comp_release_date,
-				  PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN);
+	rc = pldm_msgbuf_extract_array(buf,
+				       PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN,
+				       entry->active_comp_release_date,
+				       sizeof(entry->active_comp_release_date));
+	if (rc < 0) {
+		return rc;
+	}
+
 	// Fill the last byte with NULL character
 	entry->active_comp_release_date[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN] =
 		'\0';
@@ -1164,8 +1170,15 @@ int decode_downstream_device_parameter_table_entry(
 	if (rc < 0) {
 		return rc;
 	}
-	pldm_msgbuf_extract_array(buf, entry->pending_comp_release_date,
-				  PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN);
+
+	rc = pldm_msgbuf_extract_array(
+		buf, PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN,
+		entry->pending_comp_release_date,
+		sizeof(entry->pending_comp_release_date));
+	if (rc < 0) {
+		return rc;
+	}
+
 	// Fill the last byte with NULL character
 	entry->pending_comp_release_date[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN] =
 		'\0';
@@ -1218,10 +1231,20 @@ int decode_downstream_device_parameter_table_entry_versions(
 		return rc;
 	}
 
-	pldm_msgbuf_extract_array(buf, active, entry->active_comp_ver_str_len);
+	rc = pldm_msgbuf_extract_array(buf, entry->active_comp_ver_str_len,
+				       active, entry->active_comp_ver_str_len);
+	if (rc < 0) {
+		return rc;
+	}
+
 	active[entry->active_comp_ver_str_len] = '\0';
-	pldm_msgbuf_extract_array(buf, pending,
-				  entry->pending_comp_ver_str_len);
+	rc = pldm_msgbuf_extract_array(buf, entry->pending_comp_ver_str_len,
+				       pending,
+				       entry->pending_comp_ver_str_len);
+	if (rc < 0) {
+		return rc;
+	}
+
 	pending[entry->pending_comp_ver_str_len] = '\0';
 
 	entry->active_comp_ver_str = active;

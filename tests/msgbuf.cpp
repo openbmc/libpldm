@@ -413,7 +413,7 @@ TEST(msgbuf, extract_array_uint8_buf0_req0)
     uint8_t arr[1];
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_array_uint8(ctx, arr, 0), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_array_uint8(ctx, 0, arr, 0), PLDM_SUCCESS);
     ASSERT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
 
@@ -425,8 +425,9 @@ TEST(msgbuf, extract_array_uint8_buf1_req1)
     uint8_t arr[1];
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_array_uint8(ctx, arr, sizeof(arr)),
-              PLDM_SUCCESS);
+    EXPECT_EQ(
+        pldm_msgbuf_extract_array_uint8(ctx, sizeof(arr), arr, sizeof(arr)),
+        PLDM_SUCCESS);
     EXPECT_EQ(arr[0], 0);
     ASSERT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
@@ -439,8 +440,9 @@ TEST(msgbuf, extract_array_uint8_buf1_req2)
     uint8_t arr[2];
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
-    EXPECT_NE(pldm_msgbuf_extract_array_uint8(ctx, arr, sizeof(arr)),
-              PLDM_SUCCESS);
+    EXPECT_NE(
+        pldm_msgbuf_extract_array_uint8(ctx, sizeof(arr), arr, sizeof(arr)),
+        PLDM_SUCCESS);
     ASSERT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -453,7 +455,7 @@ TEST(msgbuf, extract_under_array_uint8)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
     ctx->remaining = INTMAX_MIN;
-    EXPECT_NE(pldm_msgbuf_extract_array_uint8(ctx, arr, 1), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_array_uint8(ctx, 1, arr, 1), PLDM_SUCCESS);
     ASSERT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -465,7 +467,7 @@ TEST(msgbuf, extract_array_char_buf0_req0)
     char arr[1] = {'1'};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_array_char(ctx, arr, 0), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_array_char(ctx, 0, arr, 0), 0);
     ASSERT_EQ(pldm_msgbuf_destroy(ctx), 0);
 }
 
@@ -477,7 +479,8 @@ TEST(msgbuf, extract_array_char_buf1_req1)
     char arr[1] = {'1'};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_array_char(ctx, arr, sizeof(arr)), 0);
+    EXPECT_EQ(
+        pldm_msgbuf_extract_array_char(ctx, sizeof(arr), arr, sizeof(arr)), 0);
     EXPECT_EQ(arr[0], '\0');
     ASSERT_EQ(pldm_msgbuf_destroy(ctx), 0);
 }
@@ -490,7 +493,8 @@ TEST(msgbuf, extract_array_char_buf1_req2)
     char arr[2] = {'1', '2'};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
-    EXPECT_NE(pldm_msgbuf_extract_array_char(ctx, arr, sizeof(arr)), 0);
+    EXPECT_NE(
+        pldm_msgbuf_extract_array_char(ctx, sizeof(arr), arr, sizeof(arr)), 0);
     ASSERT_EQ(pldm_msgbuf_destroy(ctx), -EOVERFLOW);
 }
 
@@ -503,7 +507,7 @@ TEST(msgbuf, extract_under_array_char)
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
     ctx->remaining = INTMAX_MIN;
-    EXPECT_NE(pldm_msgbuf_extract_array_char(ctx, arr, 1), 0);
+    EXPECT_NE(pldm_msgbuf_extract_array_char(ctx, 1, arr, 1), 0);
     ASSERT_EQ(pldm_msgbuf_destroy(ctx), -EOVERFLOW);
 }
 
@@ -773,17 +777,18 @@ TEST(msgbuf, pldm_msgbuf_insert_array_uint8_good)
     uint8_t retBuff[6] = {};
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_insert_array_uint8(ctx, src, sizeof(src)),
-              PLDM_SUCCESS);
+    EXPECT_EQ(
+        pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), src, sizeof(src)),
+        PLDM_SUCCESS);
 
     struct pldm_msgbuf _ctxExtract;
     struct pldm_msgbuf* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(
-        pldm_msgbuf_extract_array_uint8(ctxExtract, retBuff, sizeof(retBuff)),
-        PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_array_uint8(ctxExtract, sizeof(retBuff),
+                                              retBuff, sizeof(retBuff)),
+              PLDM_SUCCESS);
 
     EXPECT_EQ(memcmp(src, retBuff, sizeof(retBuff)), 0);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
@@ -798,8 +803,9 @@ TEST(msgbuf, pldm_msgbuf_insert_array_uint8_bad)
     uint8_t buf[6] = {};
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_insert_array_uint8(ctx, NULL, sizeof(src)),
-              PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(
+        pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), NULL, sizeof(src)),
+        PLDM_ERROR_INVALID_DATA);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
 
@@ -813,8 +819,9 @@ TEST(msgbuf, insert_under_array_uint8)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
     ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
-    EXPECT_NE(pldm_msgbuf_insert_array_uint8(ctx, val, sizeof(val)),
-              PLDM_SUCCESS);
+    EXPECT_NE(
+        pldm_msgbuf_insert_array_uint8(ctx, sizeof(val), val, sizeof(val)),
+        PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -827,15 +834,16 @@ TEST(msgbuf, pldm_msgbuf_insert_array_char_good)
     char retBuff[6] = {};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
-    EXPECT_EQ(pldm_msgbuf_insert_array_char(ctx, src, sizeof(src)), 0);
+    EXPECT_EQ(pldm_msgbuf_insert_array_char(ctx, sizeof(src), src, sizeof(src)),
+              0);
 
     struct pldm_msgbuf _ctxExtract;
     struct pldm_msgbuf* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
-    EXPECT_EQ(
-        pldm_msgbuf_extract_array_char(ctxExtract, retBuff, sizeof(retBuff)),
-        0);
+    EXPECT_EQ(pldm_msgbuf_extract_array_char(ctxExtract, sizeof(retBuff),
+                                             retBuff, sizeof(retBuff)),
+              0);
 
     EXPECT_EQ(memcmp(src, retBuff, sizeof(retBuff)), 0);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), 0);
@@ -850,7 +858,9 @@ TEST(msgbuf, pldm_msgbuf_insert_array_char_bad)
     char buf[6] = {};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
-    EXPECT_EQ(pldm_msgbuf_insert_array_char(ctx, NULL, sizeof(src)), -EINVAL);
+    EXPECT_EQ(
+        pldm_msgbuf_insert_array_char(ctx, sizeof(src), NULL, sizeof(src)),
+        -EINVAL);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), 0);
 }
 
@@ -863,7 +873,8 @@ TEST(msgbuf, insert_under_array_char)
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
     ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
-    EXPECT_NE(pldm_msgbuf_insert_array_char(ctx, val, sizeof(val)), 0);
+    EXPECT_NE(pldm_msgbuf_insert_array_char(ctx, sizeof(val), val, sizeof(val)),
+              0);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), -EOVERFLOW);
 }
 
@@ -879,8 +890,9 @@ TEST(msgbuf, pldm_msgbuf_span_required_good)
     uint8_t* retBuff = NULL;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_insert_array_uint8(ctx, src, sizeof(src)),
-              PLDM_SUCCESS);
+    EXPECT_EQ(
+        pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), src, sizeof(src)),
+        PLDM_SUCCESS);
 
     struct pldm_msgbuf _ctxExtract;
     struct pldm_msgbuf* ctxExtract = &_ctxExtract;
@@ -907,8 +919,9 @@ TEST(msgbuf, pldm_msgbuf_span_required_bad)
     [[maybe_unused]] uint8_t* retBuff = NULL;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_insert_array_uint8(ctx, src, sizeof(src)),
-              PLDM_SUCCESS);
+    EXPECT_EQ(
+        pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), src, sizeof(src)),
+        PLDM_SUCCESS);
 
     struct pldm_msgbuf _ctxExtract;
     struct pldm_msgbuf* ctxExtract = &_ctxExtract;
@@ -1264,8 +1277,9 @@ TEST(msgbuf, pldm_msgbuf_span_remaining_good)
     uint8_t* retBuff = NULL;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_insert_array_uint8(ctx, src, sizeof(src)),
-              PLDM_SUCCESS);
+    EXPECT_EQ(
+        pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), src, sizeof(src)),
+        PLDM_SUCCESS);
 
     struct pldm_msgbuf _ctxExtract;
     struct pldm_msgbuf* ctxExtract = &_ctxExtract;
@@ -1294,8 +1308,9 @@ TEST(msgbuf, pldm_msgbuf_span_remaining_bad)
     uint8_t* retBuff = NULL;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_insert_array_uint8(ctx, src, sizeof(src)),
-              PLDM_SUCCESS);
+    EXPECT_EQ(
+        pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), src, sizeof(src)),
+        PLDM_SUCCESS);
 
     struct pldm_msgbuf _ctxExtract;
     struct pldm_msgbuf* ctxExtract = &_ctxExtract;

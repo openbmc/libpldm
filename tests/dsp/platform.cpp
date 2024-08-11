@@ -388,6 +388,81 @@ TEST(GetPDR, testBadDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
+#ifdef LIBPLDM_API_TESTING
+TEST(GetPDR, testGoodDecodeResponseSafe)
+{
+    static const char recordData[] = "123456789";
+
+    alignas(pldm_msg) unsigned char data[sizeof(pldm_msg_hdr) +
+                                         PLDM_GET_PDR_MIN_RESP_BYTES +
+                                         sizeof(recordData) - 1 + 1];
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    int rc;
+
+    pldm_msg* msg = new (data) pldm_msg;
+
+    rc = pldm_msgbuf_init_errno(buf, PLDM_GET_PDR_MIN_RESP_BYTES, msg->payload,
+                                sizeof(data) - sizeof(msg->hdr));
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint8(buf, PLDM_SUCCESS);
+    pldm_msgbuf_insert_uint32(buf, 0);
+    pldm_msgbuf_insert_uint32(buf, 0);
+    pldm_msgbuf_insert_uint8(buf, PLDM_END);
+    pldm_msgbuf_insert_uint16(buf, sizeof(recordData) - 1);
+    rc = pldm_msgbuf_insert_array_char(buf, sizeof(recordData) - 1, recordData,
+                                       sizeof(recordData) - 1);
+    ASSERT_EQ(rc, 0);
+    pldm_msgbuf_insert_uint8(buf, 96);
+    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+
+    alignas(pldm_get_pdr_resp) unsigned char
+        resp_data[sizeof(pldm_get_pdr_resp) + sizeof(recordData) - 1];
+    pldm_get_pdr_resp* resp = new (resp_data) pldm_get_pdr_resp;
+    uint8_t crc;
+    rc = decode_get_pdr_resp_safe(msg, sizeof(data) - sizeof(msg->hdr), resp,
+                                  sizeof(resp_data) - sizeof(*resp), &crc);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(resp->completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(resp->next_record_handle, 0);
+    EXPECT_EQ(resp->next_data_transfer_handle, 0);
+    EXPECT_EQ(resp->transfer_flag, PLDM_END);
+    ASSERT_EQ(resp->response_count, sizeof(recordData) - 1);
+    EXPECT_EQ(crc, 96);
+    EXPECT_EQ(0, memcmp(recordData, resp->record_data, resp->response_count));
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetPDR, testBadDecodeResponseSafeTrivial)
+{
+    pldm_get_pdr_resp resp;
+    uint8_t crc;
+    int rc;
+
+    rc = decode_get_pdr_resp_safe(nullptr, PLDM_GET_PDR_MIN_RESP_BYTES, &resp,
+                                  sizeof(resp), &crc);
+    EXPECT_EQ(rc, -EINVAL);
+
+    alignas(pldm_msg) unsigned char
+        msg_data[sizeof(pldm_msg_hdr) + PLDM_GET_PDR_MIN_RESP_BYTES];
+    pldm_msg* msg = new (msg_data) pldm_msg;
+    rc = decode_get_pdr_resp_safe(msg, PLDM_GET_PDR_MIN_RESP_BYTES, nullptr,
+                                  sizeof(resp), &crc);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_get_pdr_resp_safe(msg, PLDM_GET_PDR_MIN_RESP_BYTES, &resp,
+                                  sizeof(resp), nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+
+    msg->payload[0] = PLDM_ERROR_INVALID_DATA;
+    rc = decode_get_pdr_resp_safe(msg, 1, &resp, sizeof(resp), &crc);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(resp.completion_code, PLDM_ERROR_INVALID_DATA);
+}
+#endif
+
 TEST(GetPDRRepositoryInfo, testGoodEncodeResponse)
 {
     uint8_t completionCode = 0;
@@ -549,6 +624,82 @@ TEST(GetPDRRepositoryInfo, testBadDecodeResponse)
         &retDataTransferHandleTimeout);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetPDRRepositoryInfo, testGoodDecodeResponseSafe)
+{
+    alignas(pldm_msg) unsigned char
+        data[sizeof(pldm_msg_hdr) + PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES];
+    uint8_t updateTime[PLDM_TIMESTAMP104_SIZE] = {0};
+    uint8_t oemUpdateTime[PLDM_TIMESTAMP104_SIZE] = {0};
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    int rc;
+
+    pldm_msg* msg = new (data) pldm_msg;
+
+    rc = pldm_msgbuf_init_errno(buf, PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES,
+                                msg->payload, sizeof(data) - sizeof(msg->hdr));
+    ASSERT_EQ(rc, 0);
+    pldm_msgbuf_insert_uint8(buf, PLDM_SUCCESS);
+    pldm_msgbuf_insert_uint8(buf, PLDM_AVAILABLE);
+    rc = pldm_msgbuf_insert_array_uint8(buf, PLDM_TIMESTAMP104_SIZE, updateTime,
+                                        sizeof(updateTime));
+    ASSERT_EQ(rc, 0);
+    rc = pldm_msgbuf_insert_array_uint8(buf, PLDM_TIMESTAMP104_SIZE,
+                                        oemUpdateTime, sizeof(oemUpdateTime));
+    ASSERT_EQ(rc, 0);
+    pldm_msgbuf_insert_uint32(buf, 100);
+    pldm_msgbuf_insert_uint32(buf, 100);
+    pldm_msgbuf_insert_uint32(buf, UINT32_MAX);
+    pldm_msgbuf_insert_uint8(buf, PLDM_NO_TIMEOUT);
+    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+
+    struct pldm_pdr_repository_info_resp resp;
+    rc = decode_get_pdr_repository_info_resp_safe(
+        msg, sizeof(data) - sizeof(msg->hdr), &resp);
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(PLDM_SUCCESS, resp.completion_code);
+    EXPECT_EQ(PLDM_AVAILABLE, resp.repository_state);
+    EXPECT_EQ(0,
+              memcmp(updateTime, resp.update_time, sizeof(resp.update_time)));
+    EXPECT_EQ(0, memcmp(oemUpdateTime, resp.oem_update_time,
+                        sizeof(resp.oem_update_time)));
+    EXPECT_EQ(100, resp.record_count);
+    EXPECT_EQ(100, resp.repository_size);
+    EXPECT_EQ(UINT32_MAX, resp.largest_record_size);
+    EXPECT_EQ(PLDM_NO_TIMEOUT, resp.data_transfer_handle_timeout);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetPDRRepositoryInfo, testBadDecodeResponseSafeTrivial)
+{
+    struct pldm_pdr_repository_info_resp resp;
+    int rc;
+
+    rc = decode_get_pdr_repository_info_resp_safe(
+        nullptr, PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES, &resp);
+    EXPECT_EQ(rc, -EINVAL);
+
+    alignas(pldm_msg) unsigned char
+        msg_data[sizeof(pldm_msg) - 1 +
+                 PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES];
+    pldm_msg* msg = new (msg_data) pldm_msg;
+    rc = decode_get_pdr_repository_info_resp_safe(msg, 0, &resp);
+    EXPECT_EQ(rc, -EOVERFLOW);
+
+    rc = decode_get_pdr_repository_info_resp_safe(
+        msg, PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+
+    msg->payload[0] = PLDM_ERROR_INVALID_DATA;
+    rc = decode_get_pdr_repository_info_resp_safe(msg, 1, &resp);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(resp.completion_code, PLDM_ERROR_INVALID_DATA);
+}
+#endif
 
 TEST(SetNumericEffecterValue, testGoodDecodeRequest)
 {
@@ -1659,7 +1810,9 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP1)
     pldm_msgbuf_extract_uint8(buf, &retTransferFlag);
     pldm_msgbuf_extract_uint8(buf, &retEventClass);
     pldm_msgbuf_extract_uint32(buf, &retEventDataSize);
-    pldm_msgbuf_extract_array_uint8(buf, retEventData, retEventDataSize);
+    rc = pldm_msgbuf_extract_array_uint8(buf, retEventDataSize, retEventData,
+                                         sizeof(retEventData));
+    ASSERT_EQ(rc, 0);
     pldm_msgbuf_extract_uint32(buf, &retEventDataIntegrityChecksum);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
@@ -5267,7 +5420,7 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
     rc = decode_pldm_platform_cper_event(
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
         cperEvent, cperEventSize);
-    EXPECT_EQ(rc, -EBADMSG);
+    EXPECT_EQ(rc, -EOVERFLOW);
 #else
     EXPECT_DEATH(decode_pldm_platform_cper_event(
                      reinterpret_cast<uint8_t*>(eventData.data()),
