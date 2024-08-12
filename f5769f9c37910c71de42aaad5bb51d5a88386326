@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6828439c_f3f3d8c3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2008,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-12T01:14:53Z",
+      "side": 1,
+      "message": "can you please add a comment on the line above that tells the reader this check protects the call to `pldm_msgbuf_extract_array_uint8()` below from overflowing `cper_event-\u003eevent_data`.\n\nAlso, I think it\u0027s more accurate if this test is `cper_event_length \u003c (event_data_length - PLDM_PLATFORM_CPER_EVENT_MIN_LENGTH)`?",
+      "revId": "f5769f9c37910c71de42aaad5bb51d5a88386326",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ec0173_29d5da04",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2038,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-12T01:14:53Z",
+      "side": 1,
+      "message": "I think we can drop this based on the check on line 2008?",
+      "range": {
+        "startLine": 2035,
+        "startChar": 1,
+        "endLine": 2038,
+        "endChar": 2
+      },
+      "revId": "f5769f9c37910c71de42aaad5bb51d5a88386326",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

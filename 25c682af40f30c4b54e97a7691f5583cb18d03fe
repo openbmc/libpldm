@@ -184,6 +184,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66c0ebc4_efb2e0dc",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2180,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-12T01:14:53Z",
+      "side": 1,
+      "message": "Check line 2176 above and then line 2197 below, and reconsider whether putting your new functions declarations in-between those two is sensible.",
+      "parentUuid": "e5776bb7_20059f48",
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dbdadd04_da9f919a",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 3
