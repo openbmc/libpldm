@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b5d9405_3cc11999",
+        "filename": "abi/x86_64/gcc.dump",
+        "patchSetId": 30
+      },
+      "lineNbr": 9216,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-12T03:40:20Z",
+      "side": 1,
+      "message": "I have revised it back. Thank you.",
+      "parentUuid": "5686e823_01a28023",
+      "revId": "8e6d7f720cdbd44ec287f394d828d9410e0fcc2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b655b232_83893eb3",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-08-09T06:22:27Z",
       "side": 1,
       "message": "Why `uint32_t` and not `size_t`?",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "8e6d7f720cdbd44ec287f394d828d9410e0fcc2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "195687d9_a0e1df14",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-12T03:40:20Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "b655b232_83893eb3",
       "range": {
         "startLine": 38,
         "startChar": 10,
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a83317_30e1a11d",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-12T03:40:20Z",
+      "side": 1,
+      "message": "I have revised it back. Thank you.",
+      "parentUuid": "01b23edc_d1ab448d",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 26
+      },
+      "revId": "8e6d7f720cdbd44ec287f394d828d9410e0fcc2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9853f8af_be068353",
@@ -104,6 +170,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6104a53_fcfc84bd",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-12T03:40:20Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "9853f8af_be068353",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 46,
+        "endChar": 2
+      },
+      "revId": "8e6d7f720cdbd44ec287f394d828d9410e0fcc2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1793a024_2ff14943",
@@ -117,6 +207,30 @@
       "writtenOn": "2024-08-09T06:22:27Z",
       "side": 1,
       "message": "You might as well pass `UINT32_MAX` for compatibility here, as that\u0027s what the code was effectively already assuming. You can\u0027t fix this API by adding the `data_length` parameter because it\u0027s not marked `LIBPLDM_ABI_TESTING`, it\u0027s is just broken and we have to live with it, as discussed on the header.",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 59
+      },
+      "revId": "8e6d7f720cdbd44ec287f394d828d9410e0fcc2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed0e89d1_83bdbc4a",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-12T03:40:20Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "1793a024_2ff14943",
       "range": {
         "startLine": 68,
         "startChar": 2,
