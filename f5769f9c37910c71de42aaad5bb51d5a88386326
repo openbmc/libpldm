@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a3717cb_1f4a80f7",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2008,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-13T23:06:15Z",
+      "side": 1,
+      "message": "The expectation is `cper_event_length \u003d\u003d (event_data_length - PLDM_PLATFORM_CPER_EVENT_MIN_LENGTH)` so the condition should be `cper_event_length !\u003d (event_data_length - PLDM_PLATFORM_CPER_EVENT_MIN_LENGTH)` I think.",
+      "parentUuid": "6828439c_f3f3d8c3",
+      "revId": "f5769f9c37910c71de42aaad5bb51d5a88386326",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28ec0173_29d5da04",
         "filename": "src/dsp/platform.c",
         "patchSetId": 4
@@ -31,6 +49,30 @@
       "writtenOn": "2024-08-12T01:14:53Z",
       "side": 1,
       "message": "I think we can drop this based on the check on line 2008?",
+      "range": {
+        "startLine": 2035,
+        "startChar": 1,
+        "endLine": 2038,
+        "endChar": 2
+      },
+      "revId": "f5769f9c37910c71de42aaad5bb51d5a88386326",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6280ed71_b89dbc16",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2038,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-13T23:06:15Z",
+      "side": 1,
+      "message": "This condition check the `event data length` in CPER event message. it is different with the calculated `cper_event_length` value.",
+      "parentUuid": "28ec0173_29d5da04",
       "range": {
         "startLine": 2035,
         "startChar": 1,

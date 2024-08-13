@@ -200,6 +200,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7e1956_493c238e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2180,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-13T23:06:15Z",
+      "side": 1,
+      "message": "I moved the added API to the end of file.",
+      "parentUuid": "66c0ebc4_efb2e0dc",
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbdadd04_da9f919a",
@@ -401,6 +419,30 @@
       "side": 1,
       "message": "I think the `pldm__msgbuf_extract_array_void` API which is called by `pldm_msgbuf_extract_array_uint8` already check the overflow condition as below.\nhttps://github.com/openbmc/libpldm/blob/8be6bc3541598ecb318c43b1fd3ef36578b39c54/src/msgbuf.h#L747",
       "parentUuid": "556d9642_00d85ce3",
+      "range": {
+        "startLine": 2034,
+        "startChar": 38,
+        "endLine": 2035,
+        "endChar": 34
+      },
+      "revId": "25c682af40f30c4b54e97a7691f5583cb18d03fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d870e374_30979a5e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2035,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-13T23:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "943bba2f_8a707443",
       "range": {
         "startLine": 2034,
         "startChar": 38,
