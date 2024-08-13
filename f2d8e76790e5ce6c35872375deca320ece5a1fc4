@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4597336_561cc696",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-13T06:44:19Z",
+      "side": 1,
+      "message": "I have revised it. Please help to review. Thank you.",
+      "parentUuid": "c4069efa_518d0f78",
+      "range": {
+        "startLine": 81,
+        "startChar": 62,
+        "endLine": 81,
+        "endChar": 66
+      },
+      "revId": "f2d8e76790e5ce6c35872375deca320ece5a1fc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7ad3a29_652d5897",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-07-31T05:32:37Z",
       "side": 1,
       "message": "Perhaps `-EOVERFLOW`?",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 18
+      },
+      "revId": "f2d8e76790e5ce6c35872375deca320ece5a1fc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dfc1d71_e2cde04e",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-13T06:44:19Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "d7ad3a29_652d5897",
       "range": {
         "startLine": 84,
         "startChar": 2,

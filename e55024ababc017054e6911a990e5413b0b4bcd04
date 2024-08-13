@@ -427,6 +427,24 @@
       "parentUuid": "72f6d746_24ae2eaf",
       "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72aa767b_923be465",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-13T06:44:19Z",
+      "side": 1,
+      "message": "Modify according to suggestions. Please help to review. Thank you.",
+      "parentUuid": "ec208335_6e3ca84c",
+      "revId": "e55024ababc017054e6911a990e5413b0b4bcd04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
