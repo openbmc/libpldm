@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e287665_ccb23efe",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 19
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-14T05:31:01Z",
+      "side": 1,
+      "message": "This isn\u0027t readable and doesn\u0027t render as a table:\n\nhttps://gerrit.openbmc.org/plugins/gitiles/openbmc/libpldm/+/refs/changes/58/72758/19/docs/oem/meta/file_io_function_description.md\n\nPlease fix the markdown:\n\nhttps://github.github.com/gfm/#tables-extension-",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 77
+      },
+      "revId": "8025ecc57108269cdd73b4e5a82e3f6d4a828383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd3a96e_bc05b1be",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-14T05:31:01Z",
+      "side": 1,
+      "message": "I think these enum members should be assigned explicit values.",
+      "revId": "8025ecc57108269cdd73b4e5a82e3f6d4a828383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33c9dd82_61ee0c3e",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-14T05:31:01Z",
+      "side": 1,
+      "message": "This should be a flexible array like we have on line 36 above (along with the helper function for accessing the data in C++).",
+      "revId": "8025ecc57108269cdd73b4e5a82e3f6d4a828383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82210109_6587c73c",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-14T05:31:01Z",
+      "side": 1,
+      "message": "Please see how the checks are done in `decode_oem_meta_file_io_write_req()` above and do the same here.",
+      "revId": "8025ecc57108269cdd73b4e5a82e3f6d4a828383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
