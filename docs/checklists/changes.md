@@ -94,6 +94,15 @@
 
 ## Adding a new API
 
+- [ ] My new public message codec functions take a `struct` representing the
+      message as a parameter
+
+  - Function prototypes must _not_ decompose the message to individual
+    parameters. This approach is not ergonomic and is difficult to make
+    type-safe. This is especially true for message decoding functions which must
+    use pointers for out-parameters, where it has often become ambiguous whether
+    the underlying memory represents a single object or an array.
+
 - [ ] My new public `struct` definitions are _not_ marked
       `__attribute__((packed))`
 
