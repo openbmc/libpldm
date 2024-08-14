@@ -2,6 +2,7 @@ libpldm_headers = files(
   'base.h',
   'bios.h',
   'bios_table.h',
+  'compiler.h',
   'entity.h',
   'firmware_update.h',
   'fru.h',
