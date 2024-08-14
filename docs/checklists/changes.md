@@ -112,6 +112,8 @@
       access beyond the first element invokes undefined behaviour in both C and
       C++.
 
+  - [ ] I've annotated the flexible array member with `LIBPLDM_CC_COUNTED_BY()`
+
 [^1]:
     [C17 draft specification][c17-draft-standard], 6.7.2.1 Structure and union
     specifiers, paragraph 18.
