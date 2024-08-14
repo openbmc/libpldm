@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd7b6f5_f4491052",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-14T04:49:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19ad130e_56419041",
+      "revId": "dbe4bd2711488a36fa4f754d3e0ea75d0ff276dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4ba1697_bc8b7bd1",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-08-14T01:41:43Z",
       "side": 1,
       "message": "Thanks for the comment, however can you please fix the whitespace?",
+      "range": {
+        "startLine": 2874,
+        "startChar": 1,
+        "endLine": 2876,
+        "endChar": 7
+      },
+      "revId": "dbe4bd2711488a36fa4f754d3e0ea75d0ff276dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c2a47ef_ae5e0a71",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2876,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-14T04:49:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4ba1697_bc8b7bd1",
       "range": {
         "startLine": 2874,
         "startChar": 1,
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ba8093f_3318abb2",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2877,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-14T04:49:39Z",
+      "side": 1,
+      "message": "We want `cper_event_length \u003c (event_data_length - PLDM_PLATFORM_CPER_EVENT_MIN_LENGTH)` to avoid overflow. So this check should be `cper_event_length \u003e (event_data_length - PLDM_PLATFORM_CPER_EVENT_MIN_LENGTH)`",
+      "parentUuid": "c55e2ae2_3d941d2e",
+      "range": {
+        "startLine": 2877,
+        "startChar": 23,
+        "endLine": 2877,
+        "endChar": 25
+      },
+      "revId": "dbe4bd2711488a36fa4f754d3e0ea75d0ff276dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebaa9d9a_03318d35",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-08-14T01:41:43Z",
       "side": 1,
       "message": "This prevents the valid message data from being smaller than the provided buffer. I think the check is too strict, and should be `\u003e` instead.",
+      "range": {
+        "startLine": 2904,
+        "startChar": 1,
+        "endLine": 2907,
+        "endChar": 2
+      },
+      "revId": "dbe4bd2711488a36fa4f754d3e0ea75d0ff276dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b66c7ac_7af66687",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2907,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-08-14T04:49:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebaa9d9a_03318d35",
       "range": {
         "startLine": 2904,
         "startChar": 1,
