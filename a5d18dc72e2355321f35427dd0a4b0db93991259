@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ebbf512_997c4359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-15T01:35:36Z",
+      "side": 1,
+      "message": "Hi Thu, based on some similar approaches over in https://gerrit.openbmc.org/c/openbmc/libpldm/+/71888/34/src/oem/meta/file_io.c I\u0027ve reworked this change and fixed up the test cases. Note that you were passing the data length for `cper_event_length` in the tests - rather, this should be the complete size of the object pointed to by the `cper_event` parameter.",
+      "revId": "a5d18dc72e2355321f35427dd0a4b0db93991259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
