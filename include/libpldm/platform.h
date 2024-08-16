@@ -276,6 +276,7 @@ enum pldm_pdr_types {
 	PLDM_REDFISH_RESOURCE_PDR = 22,
 	PLDM_REDFISH_ENTITY_ASSOCIATION_PDR = 23,
 	PLDM_REDFISH_ACTION_PDR = 24,
+	PLDM_FILE_DESCRIPTOR_PDR = 25,
 	PLDM_OEM_DEVICE_PDR = 126,
 	PLDM_OEM_PDR = 127,
 };
@@ -926,6 +927,32 @@ struct pldm_effecter_aux_name_pdr {
 	uint8_t effecter_names[1];
 } __attribute__((packed));
 
+
+/** @struct pldm_file_descriptor_pdr
+ *
+ *  Structure representing PLDM File Descriptor PDR for unpacked value
+ *  Refer to: DSP0248_1.2.0: 28.4 Table 78
+ */
+struct pldm_file_descriptor_pdr {
+    struct pldm_pdr_hdr hdr;
+    uint16_t terminus_handle;
+    uint16_t file_identifier;
+    uint16_t entity_type;
+    uint16_t entity_instance;
+    uint16_t container_id;
+    uint16_t supper_dir_file_identifier;
+    uint8_t file_classification;
+    uint8_t oem_file_classification;
+    bitfield16_t file_capabilities;
+    ver32_t file_version;
+    uint32_t file_max_size;
+    uint8_t file_maximum_file_descriptor_count;
+    uint8_t file_name_len;
+    uint8_t file_name_string[1];
+    uint8_t oem_file_classification_name_length;
+    uint8_t oem_file_classification_name[1];
+
+} __attribute__((packed));
 /** @brief Encode PLDM state effecter PDR
  *
  * @param[in/out] effecter               Structure to encode. All members of
