@@ -103,6 +103,9 @@
     use pointers for out-parameters, where it has often become ambiguous whether
     the underlying memory represents a single object or an array.
 
+- [ ] Each new `struct` I've defined is used in at least one new function I've
+      added to the public API.
+
 - [ ] My new public `struct` definitions are _not_ marked
       `__attribute__((packed))`
 
