@@ -33,6 +33,24 @@
       "message": "The reason `decode_oem_meta_file_io_req()` is deprecated is not related to the rest of this entry. Please give your work its own entry (i.e. entry `2.` in the numbered list.)",
       "revId": "1fa623b2bca0970b40128abd514ca03812a06d76",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba079d43_1bdd5726",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 32
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-16T10:54:45Z",
+      "side": 1,
+      "message": "Done. Please check. Thank you.",
+      "parentUuid": "58fe41c3_49d9f911",
+      "revId": "1fa623b2bca0970b40128abd514ca03812a06d76",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
