@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa205698_4013316b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T02:03:11Z",
+      "side": 1,
+      "message": "Hi Lora, I\u0027ve provided an explicit example of the markdown table syntax example I was after. The documentation isn\u0027t readable as it stands and this needs to be fixed.",
+      "revId": "5aa6f8afee245ef4f186499a7958c38be24bf963",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff600373_d23ab26a",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 21
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T02:03:11Z",
+      "side": 1,
+      "message": "You\u0027ve replaced it with HTML content - that\u0027s not what the documentation I linked to on PS19 was suggesting at all. The HTML in the GFM documentation is demonstrating the _rendered output_ from the markdown syntax. \n\nThe example syntax is:\n\n```\n| foo | bar |\n| --- | --- |\n| baz | bim |\n```\n\nWhich renders like:\n\n| foo | bar |\n| --- | --- |\n| baz | bim |\n\nThat\u0027s all I\u0027m asking for here.",
+      "revId": "5aa6f8afee245ef4f186499a7958c38be24bf963",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
