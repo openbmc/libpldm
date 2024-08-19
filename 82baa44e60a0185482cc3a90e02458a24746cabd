@@ -1,0 +1,192 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24abd3d5_9e34bae4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 36
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T01:53:53Z",
+      "side": 1,
+      "message": "Can you please add an empty line above? That way the bullet list entry is separated from the descriptive paragraph.",
+      "revId": "82baa44e60a0185482cc3a90e02458a24746cabd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbc6071c_49ef471d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 36
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T01:53:53Z",
+      "side": 1,
+      "message": "This looks like a nested list. Please indent it by 2 spaces and add the `-` bullet point marker at the start.",
+      "revId": "82baa44e60a0185482cc3a90e02458a24746cabd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c36df13_77324d20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 36
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T01:53:53Z",
+      "side": 1,
+      "message": "Another nested bullet point.",
+      "revId": "82baa44e60a0185482cc3a90e02458a24746cabd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca99285_71ebb369",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 36
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T01:53:53Z",
+      "side": 1,
+      "message": "This is an implementation detail. Let\u0027s remove it from the commit message.",
+      "revId": "82baa44e60a0185482cc3a90e02458a24746cabd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b2c052_d1f6b6b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 36
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T01:53:53Z",
+      "side": 1,
+      "message": "Another nested bullet point.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 31
+      },
+      "revId": "82baa44e60a0185482cc3a90e02458a24746cabd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da9f6a83_e26be684",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 36
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T01:53:53Z",
+      "side": 1,
+      "message": "Nested bullet point.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 16
+      },
+      "revId": "82baa44e60a0185482cc3a90e02458a24746cabd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc7c6a1_215e4424",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 36
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T01:53:53Z",
+      "side": 1,
+      "message": "Nested bullet point.",
+      "revId": "82baa44e60a0185482cc3a90e02458a24746cabd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a09e433_a9cd9589",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T01:53:53Z",
+      "side": 1,
+      "message": "Hi Lora, I\u0027ve left a few minor comments, though the main one is that you must drop the rename yaml file as this isn\u0027t a pure rename.",
+      "revId": "82baa44e60a0185482cc3a90e02458a24746cabd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96d5461f_2cb54909",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 36
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T01:53:53Z",
+      "side": 1,
+      "message": "This is _not_ true, as they take different parameters and the meaning of the returned result is different.",
+      "range": {
+        "startLine": 71,
+        "startChar": 65,
+        "endLine": 72,
+        "endChar": 75
+      },
+      "revId": "82baa44e60a0185482cc3a90e02458a24746cabd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "646427ce_20dd8303",
+        "filename": "evolutions/current/decode_oem_meta_file_io_req.yaml",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-19T01:53:53Z",
+      "side": 1,
+      "message": "Please drop this rename config. The behaviour of the function has changed, what is in this patch is _not_ a pure rename.\n\nPlease review the changes checklist:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md#renaming-an-api\n\nIf it\u0027s not clear that this patch is not a pure rename from that description, then we need to rework that documentation so it is clear.",
+      "revId": "82baa44e60a0185482cc3a90e02458a24746cabd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
