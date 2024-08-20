@@ -33,6 +33,24 @@
       "message": "As this isn\u0027t a change to the public API, can you please remove it from the changelog? The changelog should only capture things that are relevant to library _users_, not library _implementers_.",
       "revId": "54688aeddaf69a8138ac94bbac012da28f77f261",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33dd4fb4_505e6568",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-20T10:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cd2393a_927a2b0c",
+      "revId": "54688aeddaf69a8138ac94bbac012da28f77f261",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
