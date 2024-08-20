@@ -33,6 +33,24 @@
       "message": "You\u0027ve replaced it with HTML content - that\u0027s not what the documentation I linked to on PS19 was suggesting at all. The HTML in the GFM documentation is demonstrating the _rendered output_ from the markdown syntax. \n\nThe example syntax is:\n\n```\n| foo | bar |\n| --- | --- |\n| baz | bim |\n```\n\nWhich renders like:\n\n| foo | bar |\n| --- | --- |\n| baz | bim |\n\nThat\u0027s all I\u0027m asking for here.",
       "revId": "5aa6f8afee245ef4f186499a7958c38be24bf963",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bfdae36_534ab284",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 21
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-20T06:10:46Z",
+      "side": 1,
+      "message": "Thank you for your explanation.\nI have modified it as suggested. Please check, thank you.\n\nAccording to the link check, it seems that the table can be displayed normally.\nlink：https://gerrit.openbmc.org/plugins/gitiles/openbmc/libpldm/+/refs/changes/58/72758/22/docs/oem/meta/file_io_function_description.md",
+      "parentUuid": "ff600373_d23ab26a",
+      "revId": "5aa6f8afee245ef4f186499a7958c38be24bf963",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
