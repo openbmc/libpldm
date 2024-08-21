@@ -56,6 +56,24 @@
       "message": "This is unrelated? I think there\u0027s another patch for this. Let me sort it out.",
       "revId": "5971c1bd8adc973e04c68d2a717a333b83054efb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c370c619_8ce481bb",
+        "filename": "src/transport/container-of.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-21T05:24:31Z",
+      "side": 1,
+      "message": "this is fixed by Patrick\u0027s re-format clang-18 commit https://gerrit.openbmc.org/c/openbmc/libpldm/+/71180\nso once that gets merged this line will take care of itself.",
+      "parentUuid": "d9838db0_0545c1a8",
+      "revId": "5971c1bd8adc973e04c68d2a717a333b83054efb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
