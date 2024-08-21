@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5b8fcf2_9be57887",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 38
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:38:36Z",
+      "side": 1,
+      "message": "Oh, this isn\u0027t true any more, right? Can you remove this (sorry for not catching this last time).",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 10
+      },
+      "revId": "5971c1bd8adc973e04c68d2a717a333b83054efb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2553cb40_46031203",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:38:36Z",
+      "side": 1,
+      "message": "Hi Lora, this is looking okay to me now, though I have one request on the commit message. Thanks for persisting. Hopefully we can drop the old API sooner rather than later.",
+      "revId": "5971c1bd8adc973e04c68d2a717a333b83054efb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9838db0_0545c1a8",
+        "filename": "src/transport/container-of.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:38:36Z",
+      "side": 1,
+      "message": "This is unrelated? I think there\u0027s another patch for this. Let me sort it out.",
+      "revId": "5971c1bd8adc973e04c68d2a717a333b83054efb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
