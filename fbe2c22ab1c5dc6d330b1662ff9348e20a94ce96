@@ -1,0 +1,342 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96837ba_034018ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "Hi Lora, thanks for the documentation, it\u0027s been quite helpful. I have some follow-up thoughts now that I better understand what you\u0027re trying to achieve.",
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ff2a79c_1bf91d28",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "This file is documenting your OEM message types, not any specific functions. The implementation in libpldm then provides APIs to encode and decode these messages, but that\u0027s a separate matter. This document should only refer to _messages_.",
+      "range": {
+        "startLine": 1,
+        "startChar": 25,
+        "endLine": 1,
+        "endChar": 39
+      },
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "461724e0_66f16fab",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "messages",
+      "range": {
+        "startLine": 3,
+        "startChar": 24,
+        "endLine": 3,
+        "endChar": 33
+      },
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb0d107_effa9fff",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "This should be the name of the message type.",
+      "range": {
+        "startLine": 5,
+        "startChar": 2,
+        "endLine": 5,
+        "endChar": 43
+      },
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea6bec94_889ab087",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "Message format",
+      "range": {
+        "startLine": 7,
+        "startChar": 3,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c0b650_043397a6",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "You\u0027re implementing an OEM PLDM message, these must be PLDM completion codes, not errno values. errno values are for the _APIs of the library_, PLDM completion codes are for _PLDM messages_.",
+      "range": {
+        "startLine": 18,
+        "startChar": 48,
+        "endLine": 18,
+        "endChar": 74
+      },
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1f2b5e4_8b4b4253",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "Message type",
+      "range": {
+        "startLine": 21,
+        "startChar": 26,
+        "endLine": 21,
+        "endChar": 67
+      },
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37722168_9b8d0d44",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "Please make this a header and not a bullet-point. Same for the rest of the table titles.",
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6514c141_e360c896",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "Message type",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 43
+      },
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c22aad6_d9d850dc",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "Message type.",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 43
+      },
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "834f2df3_daaeabec",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "Message type.",
+      "range": {
+        "startLine": 46,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 43
+      },
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d0e0474_b5e091b2",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "Message type.",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 43
+      },
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b595ef40_1057125b",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "Can we just call this `option`? The `read` prefix seems redundant to me.",
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f5a0218_d510f3a2",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "Thanks to your documentation I now understand what you\u0027re trying to do here. I think we can make some improvements.\n\nIf you move the definition of `struct pldm_oem_meta_file_io_read_data_info` above, we can instead have:\n\n```\nstruct pldm_oem_meta_file_io_read_req {\n    uint8_t handle;\n    uint8_t read_option;\n    union {\n        struct pldm_oem_meta_file_io_read_data_info data;\n    } info;\n};\n```\n\nAnd then in the implementation of `decode_oem_meta_file_io_read_req()` you just unpack the message values directly using the provided value of `read_option`.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 6
+      },
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a556e1e_8b9b4771",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "This can go away with the suggestion above.",
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20433ee8_bdde4fbf",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-21T01:54:40Z",
+      "side": 1,
+      "message": "Okay, so thanks to your message format documentation I understand what you\u0027re trying to do here. But I think we can do better. Why not properly decode the structure based on the value of `req-\u003eread_option`? This way we can drop the flexible array member from `struct pldm_oem_meta_file_io_read_req` and replace it with a union over (at least) `struct pldm_oem_meta_file_io_read_data_info`. I\u0027ll add a comment on the header.",
+      "revId": "fbe2c22ab1c5dc6d330b1662ff9348e20a94ce96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
