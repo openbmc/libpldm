@@ -1,0 +1,209 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749d1896_cd8178cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T00:48:09Z",
+      "side": 1,
+      "message": "Hi Lora, thanks for the changes. I\u0027m picking at the details a bit here because I want future changes adding support for OEM messages to use this work as a reference. Thanks for bearing with me.",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36a29ad_0a793273",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T00:48:09Z",
+      "side": 1,
+      "message": "Ah, I just realised the file uses \u0027function_description\u0027 in the name. Can we please rename it to `file-io.md`? Again, we\u0027re documenting the message formats here, not any libpldm APIs.",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9cbd3a7_3a765ee9",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T00:48:09Z",
+      "side": 1,
+      "message": "The documentation for messages shouldn\u0027t mention APIs. APIs involve a whole set of further choices. Here we\u0027re just trying to nail down the message format, so the location, type and semantics of data in a serialised message.\n\nThis should be e.g. `Read`. Generally messages imply both request and response, so we don\u0027t list that here.",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b6255dc_c929ce14",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T00:48:09Z",
+      "side": 1,
+      "message": "Sorry, I should have clarified in my previous comment: This should be `Read Message Format`.",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7898dd19_2b1a1b33",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T00:48:09Z",
+      "side": 1,
+      "message": "This should be `Table 1`, right? The numbering for the tables below should be incremented.\n\nSo we should have:\n\n```\n### Table 1. Read Request\n\n...\n```",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e758bfc6_0bda7369",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T00:48:09Z",
+      "side": 1,
+      "message": "I just had a thought: Perhaps it would be best if we split these into separate `Name` and `Description` columns. Put the bit on the left of the `\u003cbr\u003e` into the `Name` column, and the bit on the right into the `Description` column.\n\nAlso, I think it might be best if we rename the `Byte` column to `Offset`.\n\nSo the table becomes:\n\n```\n| Offset | Type | Name | Description |\n| ------ | ---- | ---- | ----------- |\n```\n\nPlease use this scheme for the tables below where appropriate (i.e. what is currently `Table 1` uses a different scheme and my suggestion above doesn\u0027t apply there).",
+      "range": {
+        "startLine": 11,
+        "startChar": 28,
+        "endLine": 11,
+        "endChar": 32
+      },
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "912fceb0_ba2d8e9c",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T00:48:09Z",
+      "side": 1,
+      "message": "This is `Table 2`, so:\n\n```\n### Table 2. Read response\n\n...\n```",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e490f9e_58f82196",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T00:48:09Z",
+      "side": 1,
+      "message": "Table number needs updating based on the above.",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9066d5d_b87b3143",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T00:48:09Z",
+      "side": 1,
+      "message": "Please test each of your changes with `./scripts/pre-submit` and make sure there are no errors. These tests need guards around them so that they aren\u0027t built when the testing symbols are excluded from the ABI.\n\nThe straight-forward way to do this is with `git rebase -x ./scripts/pre-submit origin/main`.",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7accd107_012d1615",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T00:48:09Z",
+      "side": 1,
+      "message": "Please use `pldm_msgbuf_init_errno()` here and for all future work. `pldm_msgbuf_init_cc()` only exists to handle backwards-compatibility.",
+      "range": {
+        "startLine": 110,
+        "startChar": 31,
+        "endLine": 110,
+        "endChar": 33
+      },
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "000c1c91_e7d2c775",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T00:48:09Z",
+      "side": 1,
+      "message": "The struct is not an array. Please insert each struct member explicitly.",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 61
+      },
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
