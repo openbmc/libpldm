@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "compiler.h"
 #include "container-of.h"
 #include "mctp-defines.h"
 #include "socket.h"
@@ -116,7 +117,7 @@ int pldm_transport_mctp_demux_map_tid(struct pldm_transport_mctp_demux *ctx,
 
 LIBPLDM_ABI_STABLE
 int pldm_transport_mctp_demux_unmap_tid(struct pldm_transport_mctp_demux *ctx,
-					__attribute__((unused)) pldm_tid_t tid,
+					LIBPLDM_CC_UNUSED pldm_tid_t tid,
 					mctp_eid_t eid)
 {
 	ctx->tid_eid_map[eid] = 0;
