@@ -1,0 +1,301 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09974d6d_759235d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "... by record set identifier?",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a26ea0b_4e21473a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "Hi Varsha, some changes I made earlier to provide `LIBPLDM_CC_NONNULL` can be applied here as well. Beyond that, on further inspection I think we can improve some of the implementation. Finally, there are some assert()s that are not correct and must be fixed before we can merge this.",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47d16ff2_a632b3ad",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "Why is this a pointer if it\u0027s an in-parameter?",
+      "range": {
+        "startLine": 669,
+        "startChar": 7,
+        "endLine": 669,
+        "endChar": 17
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd7a07f_151b6b2f",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1893,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "I introduced the `LIBPLDM_CC_NONNULL` attribute macro in an earlier change. We should use it for this function.",
+      "range": {
+        "startLine": 1892,
+        "startChar": 1,
+        "endLine": 1893,
+        "endChar": 16
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "832aebda_6a2e2e9b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "`LIBPLDM_CC_NONNULL` here also",
+      "range": {
+        "startLine": 1912,
+        "startChar": 1,
+        "endLine": 1913,
+        "endChar": 16
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e9233ea_9805ae76",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1936,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "`LIBPLDM_CC_NONNULL`",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d92eccd_eb74ac7f",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1961,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "`LIBPLDM_CC_NONNULL`.",
+      "range": {
+        "startLine": 1959,
+        "startChar": 1,
+        "endLine": 1961,
+        "endChar": 1
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d6e650_781585f3",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1978,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "Can you put a blank line above so people don\u0027t confuse this as another arm of the original `if (...)` on line 1971?",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ba1c1b7_9cf60bd0",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1999,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "There\u0027s no need to declare `match` at this scope. Move it into the while loop.",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d04cea_1c671de2",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2001,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "There\u0027s no need to declare `skip_data_size` at this scope. Move it into the while loop.",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64e96d54_5ed36856",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2002,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "There\u0027s no need to declare `hdr_type` at this scope. Move it into the while loop.",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4be48bb_61962939",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2004,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "Why are we calling this `dst`? That\u0027s super confusing when there\u0027s no `src` to move data from. Can we call this `buf`?\n\nAlso there\u0027s no need to declare it at this scope. Move it into the while loop.",
+      "range": {
+        "startLine": 2003,
+        "startChar": 1,
+        "endLine": 2004,
+        "endChar": 33
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f362fdf1_90917a74",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2007,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "You mustn\u0027t use asserts here, this is a public API, not an internal one. You need to return an error to the caller if these are `NULL` (similarly, you can\u0027t use `LIBPLDM_CC_NONNULL` either, that\u0027s only for internal APIs).",
+      "range": {
+        "startLine": 2006,
+        "startChar": 1,
+        "endLine": 2007,
+        "endChar": 23
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddcdee3f_fec0cf7e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "We can save a bit of noise here and write it as:\n\n```\npldm_msgbuf_span_required(dst, skip_data_size, NULL);\nif ((rc \u003d pldm_msgbuf_extract(dst, hdr_type))) {\n    return rc;\n}\n```",
+      "range": {
+        "startLine": 2016,
+        "startChar": 1,
+        "endLine": 2018,
+        "endChar": 50
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70117f0b_6b13c43c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2027,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:33:38Z",
+      "side": 1,
+      "message": "If we\u0027re jumping out to cleanup in this case then there\u0027s no need to encase the rest in the `} else {` block below. It should be:\n\n```\nif (!match) {\n    goto cleanup;\n}\n\n*record_handle \u003d record-\u003erecord_handle;\nprev \u003d pldm_pdr_get_prev_record(repo, record);\nreturn pldm_pdr_remove_record(repo, record, prev);\n```\n\nNote that we can return the result of `pldm_pdr_remove_record()` directly. We can do this because we tested the results of the extraction above on line 2018 (that is, we already know all the information that will be given to us by `pldm_msgbuf_destroy()`). We\u0027ve also hit the condition we were trying to match, so there\u0027s no more work to do. Therefore we can just return directly.",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
