@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c12a4d4_103af51c",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-23T08:55:50Z",
+      "side": 1,
+      "message": "I have been renamed to file-io.md. Thank you.",
+      "parentUuid": "d36a29ad_0a793273",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9cbd3a7_3a765ee9",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-08-23T00:48:09Z",
       "side": 1,
       "message": "The documentation for messages shouldn\u0027t mention APIs. APIs involve a whole set of further choices. Here we\u0027re just trying to nail down the message format, so the location, type and semantics of data in a serialised message.\n\nThis should be e.g. `Read`. Generally messages imply both request and response, so we don\u0027t list that here.",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe55f949_ce4d32e1",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-23T08:55:50Z",
+      "side": 1,
+      "message": "I removed unnecessary titles \"List of read file IO messages\".",
+      "parentUuid": "d9cbd3a7_3a765ee9",
       "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d2e05cc_c75a646b",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-23T08:55:50Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "9b6255dc_c929ce14",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7898dd19_2b1a1b33",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-08-23T00:48:09Z",
       "side": 1,
       "message": "This should be `Table 1`, right? The numbering for the tables below should be incremented.\n\nSo we should have:\n\n```\n### Table 1. Read Request\n\n...\n```",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c15d85a_7d1e04db",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-23T08:55:50Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "7898dd19_2b1a1b33",
       "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -109,6 +181,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae658a76_6cde9797",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-23T08:55:50Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "e758bfc6_0bda7369",
+      "range": {
+        "startLine": 11,
+        "startChar": 28,
+        "endLine": 11,
+        "endChar": 32
+      },
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "912fceb0_ba2d8e9c",
@@ -122,6 +218,24 @@
       "writtenOn": "2024-08-23T00:48:09Z",
       "side": 1,
       "message": "This is `Table 2`, so:\n\n```\n### Table 2. Read response\n\n...\n```",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93974563_baa22fc0",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-23T08:55:50Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "912fceb0_ba2d8e9c",
       "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -143,6 +257,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daa1e93d_db0db8f9",
+        "filename": "docs/oem/meta/file_io_function_description.md",
+        "patchSetId": 26
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-23T08:55:50Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "0e490f9e_58f82196",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9066d5d_b87b3143",
@@ -156,6 +288,24 @@
       "writtenOn": "2024-08-23T00:48:09Z",
       "side": 1,
       "message": "Please test each of your changes with `./scripts/pre-submit` and make sure there are no errors. These tests need guards around them so that they aren\u0027t built when the testing symbols are excluded from the ABI.\n\nThe straight-forward way to do this is with `git rebase -x ./scripts/pre-submit origin/main`.",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b628e9ff_1c395d66",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-23T08:55:50Z",
+      "side": 1,
+      "message": "Sorry, I encountered the following problems during execution. It seems that the mctp.h file under the linux repo cannot be found and stopped.\nI tried to clone the linux repo at the same level as the libpldm folder, but this error message still appeared.\n\nExecution result：\n[1/86] Compiling C object src/libpldm.so.0.8.0.p/transport_af-mctp.c.o\nFAILED: src/libpldm.so.0.8.0.p/transport_af-mctp.c.o\nccache cc -Isrc/libpldm.so.0.8.0.p -Isrc -I../src -fvisibility\u003dhidden -fdiagnostics-color\u003dalways -D_FILE_OFFSET_BITS\u003d64 -Wall -Winvalid-pch -Wextra -Wpedantic -Werror -std\u003dc17 -Og -g -D_GNU_SOURCE -DLIBPLDM_API_DEPRECATED -DLIBPLDM_API_TESTING -include config.h -fPIC -isystem../include -isysteminclude -MD -MQ src/libpldm.so.0.8.0.p/transport_af-mctp.c.o -MF src/libpldm.so.0.8.0.p/transport_af-mctp.c.o.d -o src/libpldm.so.0.8.0.p/transport_af-mctp.c.o -c ../src/transport/af-mctp.c\n../src/transport/af-mctp.c:15:10: fatal error: linux/mctp.h: No such file or directory\n   15 | #include \u003clinux/mctp.h\u003e\n      |          ^~~~~~~~~~~~~~\ncompilation terminated.\n[62/86] Compiling C++ object tests/dsp_platform.p/dsp_platform.cpp.o\nninja: build stopped: subcommand failed.",
+      "parentUuid": "d9066d5d_b87b3143",
       "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -183,6 +333,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d005091_9bfa1e01",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-23T08:55:50Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "7accd107_012d1615",
+      "range": {
+        "startLine": 110,
+        "startChar": 31,
+        "endLine": 110,
+        "endChar": 33
+      },
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "000c1c91_e7d2c775",
@@ -196,6 +370,30 @@
       "writtenOn": "2024-08-23T00:48:09Z",
       "side": 1,
       "message": "The struct is not an array. Please insert each struct member explicitly.",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 61
+      },
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b105c20_ca211aff",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-23T08:55:50Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "000c1c91_e7d2c775",
       "range": {
         "startLine": 115,
         "startChar": 4,
