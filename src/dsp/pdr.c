@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "compiler.h"
 #include "msgbuf.h"
 #include <libpldm/pdr.h>
 #include <libpldm/platform.h>
@@ -253,8 +254,7 @@ uint32_t pldm_pdr_get_repo_size(const pldm_pdr *repo)
 }
 
 LIBPLDM_ABI_STABLE
-uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo
-				    __attribute__((unused)),
+uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo LIBPLDM_CC_UNUSED,
 				    const pldm_pdr_record *record)
 {
 	assert(repo != NULL);
@@ -264,8 +264,7 @@ uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo
 }
 
 LIBPLDM_ABI_TESTING
-uint16_t pldm_pdr_get_terminus_handle(const pldm_pdr *repo
-				      __attribute__((unused)),
+uint16_t pldm_pdr_get_terminus_handle(const pldm_pdr *repo LIBPLDM_CC_UNUSED,
 				      const pldm_pdr_record *record)
 {
 	assert(repo != NULL);
@@ -1276,7 +1275,7 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 	}
 
 	const uint8_t *start = (uint8_t *)pdr;
-	const uint8_t *end __attribute__((unused)) =
+	const uint8_t *end LIBPLDM_CC_UNUSED =
 		start + sizeof(struct pldm_pdr_hdr) + le16toh(hdr->length);
 	start += sizeof(struct pldm_pdr_hdr);
 	struct pldm_pdr_entity_association *entity_association_pdr =
