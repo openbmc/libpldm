@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0f2f980_f51bdc06",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:16:09Z",
+      "side": 1,
+      "message": "Why do we need `stdio.h`?",
+      "revId": "fc3b3034385f64c4e9a76ba80043c6a06cfa4800",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d65bfe4_f11b3d36",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1647,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:16:09Z",
+      "side": 1,
+      "message": "Ah, yes, I still need to understand this one. I rather think we need to improve the proof to the compiler.",
+      "revId": "fc3b3034385f64c4e9a76ba80043c6a06cfa4800",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9304b456_d2c5308f",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1737,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:16:09Z",
+      "side": 1,
+      "message": "We can directly return at this point? Just using `break;` here jumps us out of the for-loop, but not the outer while-loop.",
+      "range": {
+        "startLine": 1737,
+        "startChar": 4,
+        "endLine": 1737,
+        "endChar": 10
+      },
+      "revId": "fc3b3034385f64c4e9a76ba80043c6a06cfa4800",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

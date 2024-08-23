@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36d80d2e_d0089789",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:16:09Z",
+      "side": 1,
+      "message": "That seems surprising. Why is it an out-parameter? The documentation doesn\u0027t give any hint as to why that should be true.",
+      "parentUuid": "bf3557d2_1272f38d",
+      "range": {
+        "startLine": 655,
+        "startChar": 1,
+        "endLine": 655,
+        "endChar": 28
+      },
+      "revId": "fd214a3c68ce99c2bf81af12c6eb6b040ccd2adf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47c345aa_6b6fbddc",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 7

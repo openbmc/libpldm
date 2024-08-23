@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4f8ec0c_163668f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:16:09Z",
+      "side": 1,
+      "message": "Hi Varsha, I\u0027ve made a few small changes myself, but also have some queries for you.",
+      "revId": "590ae67e97f029479b31cad9b3b304062b22433b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8133585_f0c823a2",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:16:09Z",
+      "side": 1,
+      "message": "I\u0027ve pushed an update that extracts out your equality check here. I did that because I wanted to add the `LIBPLDM_CC_NONNULL` attribute macro. We can also use `pldm_entity_cmp()` below.",
+      "revId": "590ae67e97f029479b31cad9b3b304062b22433b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b77b7864_be287960",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:16:09Z",
+      "side": 1,
+      "message": "Can you explain to me how this is used as an out-parameter?",
+      "revId": "590ae67e97f029479b31cad9b3b304062b22433b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3be7e762_4a577561",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1857,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:16:09Z",
+      "side": 1,
+      "message": "Here we use `pldm_entity_cmp()` again.",
+      "revId": "590ae67e97f029479b31cad9b3b304062b22433b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94f7d08b_ec7485e2",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-23T03:16:09Z",
+      "side": 1,
+      "message": "Given we\u0027ve used `pldm_msgbuf_extract()` above, these must be `pldm_msgbuf_insert(dst, e.*)`, otherwise you\u0027re copying from data at the wrong offset in `src`.\n\nYour test cases should demonstrate correct behaviour here.",
+      "range": {
+        "startLine": 1861,
+        "startChar": 1,
+        "endLine": 1863,
+        "endChar": 66
+      },
+      "revId": "590ae67e97f029479b31cad9b3b304062b22433b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
