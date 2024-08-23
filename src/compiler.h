@@ -2,6 +2,20 @@
 #ifndef PLDM_COMPILER_H
 #define PLDM_COMPILER_H
 
+#ifndef __has_attribute
+#error The libpldm implementation requires __has_attribute
+#endif
+
+#include <assert.h>
+
+static struct {
+	static_assert(__has_attribute(unused),
+		      "`unused` attribute is required");
+	int compliance;
+} pldm_required_attributes __attribute__((unused));
+
+#define LIBPLDM_CC_UNUSED __attribute__((unused))
+
 // NOLINTBEGIN(bugprone-macro-parentheses)
 /**
  * Require that the given object is of the specified type.

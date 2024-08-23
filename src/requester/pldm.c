@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "compiler.h"
 #include <libpldm/base.h>
 #include <libpldm/pldm.h>
 #include <libpldm/transport.h>
@@ -155,7 +156,7 @@ transport_out:
 
 LIBPLDM_ABI_DEPRECATED
 pldm_requester_rc_t pldm_recv(mctp_eid_t eid, int mctp_fd,
-			      __attribute__((unused)) uint8_t instance_id,
+			      LIBPLDM_CC_UNUSED uint8_t instance_id,
 			      uint8_t **pldm_resp_msg, size_t *resp_msg_len)
 {
 	pldm_requester_rc_t rc =

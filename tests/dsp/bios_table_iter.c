@@ -9,12 +9,14 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include "compiler.h"
+
 /* NOLINTNEXTLINE(bugprone-suspicious-include) */
 #include "dsp/bios_table.c"
 
 /* Satisfy the symbol needs of bios_table.c */
-uint32_t crc32(const void* data __attribute__((unused)),
-               size_t size __attribute__((unused)))
+uint32_t crc32(const void* data LIBPLDM_CC_UNUSED,
+               size_t size LIBPLDM_CC_UNUSED)
 {
     return 0;
 }
