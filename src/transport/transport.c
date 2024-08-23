@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "compiler.h"
 #include "transport.h"
 
 #include <libpldm/transport.h>
@@ -23,9 +24,9 @@ struct pollfd {
 	short revents; /* returned events */
 };
 
-static inline int poll(struct pollfd *fds __attribute__((unused)),
-		       int nfds __attribute__((unused)),
-		       int timeout __attribute__((unused)))
+static inline int poll(struct pollfd *fds LIBPLDM_CC_UNUSED,
+		       int nfds LIBPLDM_CC_UNUSED,
+		       int timeout LIBPLDM_CC_UNUSED)
 {
 	return 0;
 }

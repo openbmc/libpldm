@@ -2,6 +2,8 @@
 #ifndef PLDM_MSGBUF_H
 #define PLDM_MSGBUF_H
 
+#include "compiler.h"
+
 /*
  * Historically, many of the structs exposed in libpldm's public headers are
  * defined with __attribute__((packed)). This is unfortunate: it gives the
@@ -68,7 +70,7 @@ static struct {
 		      "Extraction and insertion arithmetic may be broken");
 	static_assert(PLDM_SUCCESS == 0, "Error handling is broken");
 	int compliance;
-} build_assertions __attribute__((unused));
+} build_assertions LIBPLDM_CC_UNUSED;
 
 enum pldm_msgbuf_error_mode {
 	PLDM_MSGBUF_PLDM_CC = 0x5a,
