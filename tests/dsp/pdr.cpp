@@ -92,6 +92,68 @@ TEST(PDRRemoveByTerminus, testRemoveByTerminus)
     pldm_pdr_destroy(repo);
 }
 
+#ifdef LIBPLDM_API_TESTING
+TEST(FindContainerID, testValidInstanceID)
+{
+    auto repo = pldm_pdr_init();
+    ASSERT_NE(repo, nullptr);
+
+    size_t size = sizeof(struct pldm_pdr_hdr) +
+                  sizeof(struct pldm_pdr_entity_association);
+    std::unique_ptr<uint8_t[]> data(new uint8_t[size]);
+    ASSERT_NE(data, nullptr);
+
+    struct pldm_pdr_hdr* hdr =
+        reinterpret_cast<struct pldm_pdr_hdr*>(data.get());
+    hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
+    hdr->length = size - sizeof(struct pldm_pdr_hdr);
+
+    struct pldm_pdr_entity_association* pdr =
+        reinterpret_cast<struct pldm_pdr_entity_association*>(
+            data.get() + sizeof(struct pldm_pdr_hdr));
+    pdr->container.entity_type = 1;
+    pdr->container.entity_instance_num = 2;
+    pdr->num_children = 1;
+    pdr->children[0].entity_container_id = 42;
+
+    EXPECT_EQ(pldm_pdr_add(repo, data.get(), size, false, 0, NULL), 0);
+
+    EXPECT_EQ(pldm_find_container_id(repo, 1, 2), 42);
+    pldm_pdr_destroy(repo);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(FindContainerID, testInvalidInstanceID)
+{
+    auto repo = pldm_pdr_init();
+    ASSERT_NE(repo, nullptr);
+
+    size_t size = sizeof(struct pldm_pdr_hdr) +
+                  sizeof(struct pldm_pdr_entity_association);
+    std::unique_ptr<uint8_t[]> data(new uint8_t[size]);
+    ASSERT_NE(data, nullptr);
+
+    struct pldm_pdr_hdr* hdr =
+        reinterpret_cast<struct pldm_pdr_hdr*>(data.get());
+    hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
+    hdr->length = size - sizeof(struct pldm_pdr_hdr);
+
+    struct pldm_pdr_entity_association* pdr =
+        reinterpret_cast<struct pldm_pdr_entity_association*>(
+            data.get() + sizeof(struct pldm_pdr_hdr));
+    pdr->container.entity_type = 1;
+    pdr->container.entity_instance_num = 2;
+    pdr->num_children = 1;
+    pdr->children[0].entity_container_id = 42;
+
+    EXPECT_EQ(pldm_pdr_add(repo, data.get(), size, false, 0, NULL), 0);
+
+    EXPECT_EQ(pldm_find_container_id(repo, 3, 4), 0);
+    pldm_pdr_destroy(repo);
+}
+#endif
+
 TEST(PDRUpdate, testRemove)
 {
     std::array<uint8_t, 10> data{};
