@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d3595e5_8469d01a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-27T01:21:53Z",
+      "side": 1,
+      "message": "Hi Lora, I have some concerns with this still.",
+      "revId": "c93804ca8f3cba998747e96b25520748e9f7020f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35fe9f9e_d201c8f4",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-27T01:21:53Z",
+      "side": 1,
+      "message": "Shouldn\u0027t there be some data as well?",
+      "revId": "c93804ca8f3cba998747e96b25520748e9f7020f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e469b4ec_16db2a7b",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-27T01:21:53Z",
+      "side": 1,
+      "message": "Why a request message when we\u0027re encoding a response?",
+      "revId": "c93804ca8f3cba998747e96b25520748e9f7020f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408c8f8d_aa1550a3",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-27T01:21:53Z",
+      "side": 1,
+      "message": "This is the wrong type? We\u0027re dealing with a response, right?",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 38
+      },
+      "revId": "c93804ca8f3cba998747e96b25520748e9f7020f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b57cb2_c9d57751",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-27T01:21:53Z",
+      "side": 1,
+      "message": "No, please use `pldm_msgbuf_insert()`.",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 36
+      },
+      "revId": "c93804ca8f3cba998747e96b25520748e9f7020f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
