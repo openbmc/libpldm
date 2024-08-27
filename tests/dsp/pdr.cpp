@@ -8,7 +8,12 @@
 #include <cstring>
 #include <vector>
 
+#include "msgbuf.h"
+
 #include <gtest/gtest.h>
+
+#define PDR_ENTITY_ASSOCIATION_MIN_SIZE                                        \
+    (sizeof(struct pldm_pdr_hdr) + sizeof(struct pldm_pdr_entity_association))
 
 TEST(PDRAccess, testInit)
 {
@@ -91,6 +96,103 @@ TEST(PDRRemoveByTerminus, testRemoveByTerminus)
     EXPECT_EQ(pldm_pdr_get_record_count(repo), 0u);
     pldm_pdr_destroy(repo);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(FindContainerID, testValidInstanceID)
+{
+    auto repo = pldm_pdr_init();
+    ASSERT_NE(repo, nullptr);
+
+    std::vector<uint8_t> msg_buf(PDR_ENTITY_ASSOCIATION_MIN_SIZE);
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    uint8_t* skip_data = NULL;
+    void* skip_hdr_data = NULL;
+    uint8_t skip_data_size = 0;
+
+    int rc =
+        pldm_msgbuf_init_errno(buf, PDR_ENTITY_ASSOCIATION_MIN_SIZE,
+                               msg_buf.data(), PDR_ENTITY_ASSOCIATION_MIN_SIZE);
+    ASSERT_EQ(rc, 0);
+
+    skip_data_size = sizeof(uint32_t) + sizeof(uint8_t);
+    pldm_msgbuf_span_required(buf, skip_data_size, (void**)&skip_hdr_data);
+    pldm_msgbuf_insert_uint8(buf, PLDM_PDR_ENTITY_ASSOCIATION);
+
+    // Add container data
+    skip_data_size = sizeof(uint16_t) + sizeof(uint16_t) + sizeof(uint16_t) +
+                     sizeof(uint8_t);
+    pldm_msgbuf_span_required(buf, skip_data_size, (void**)&skip_data);
+    struct pldm_entity container_entity = {
+        .entity_type = 1, .entity_instance_num = 2, .entity_container_id = 42};
+
+    pldm_msgbuf_insert_uint16(buf, container_entity.entity_type);
+    pldm_msgbuf_insert_uint16(buf, container_entity.entity_instance_num);
+    pldm_msgbuf_insert_uint16(buf, container_entity.entity_container_id);
+
+    pldm_msgbuf_insert_uint8(buf, 1);
+
+    struct pldm_entity e = {
+        .entity_type = 0, .entity_instance_num = 0, .entity_container_id = 42};
+    pldm_msgbuf_insert_uint16(buf, e.entity_type);
+    pldm_msgbuf_insert_uint16(buf, e.entity_instance_num);
+    pldm_msgbuf_insert_uint16(buf, e.entity_container_id);
+
+    // Use the message buffer data for adding to the PDR repository
+    EXPECT_EQ(pldm_pdr_add(repo, msg_buf.data(),
+                           PDR_ENTITY_ASSOCIATION_MIN_SIZE, false, 0, NULL),
+              0);
+    EXPECT_EQ(pldm_find_container_id(repo, 1, 2), 42);
+    pldm_pdr_destroy(repo);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(FindContainerID, testInvalidInstanceID)
+{
+    auto repo = pldm_pdr_init();
+    ASSERT_NE(repo, nullptr);
+    std::vector<uint8_t> msg_buf(PDR_ENTITY_ASSOCIATION_MIN_SIZE);
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    uint8_t* skip_data = NULL;
+    void* skip_hdr_data = NULL;
+    uint8_t skip_data_size = 0;
+
+    int rc =
+        pldm_msgbuf_init_errno(buf, PDR_ENTITY_ASSOCIATION_MIN_SIZE,
+                               msg_buf.data(), PDR_ENTITY_ASSOCIATION_MIN_SIZE);
+    ASSERT_EQ(rc, 0);
+
+    skip_data_size = sizeof(uint32_t) + sizeof(uint8_t);
+    pldm_msgbuf_span_required(buf, skip_data_size, (void**)&skip_hdr_data);
+    pldm_msgbuf_insert_uint8(buf, PLDM_PDR_ENTITY_ASSOCIATION);
+
+    skip_data_size = sizeof(uint16_t) + sizeof(uint16_t) + sizeof(uint16_t) +
+                     sizeof(uint8_t);
+    pldm_msgbuf_span_required(buf, skip_data_size, (void**)&skip_data);
+
+    struct pldm_entity container_entity = {
+        .entity_type = 1, .entity_instance_num = 2, .entity_container_id = 42};
+    pldm_msgbuf_insert_uint16(buf, container_entity.entity_type);
+    pldm_msgbuf_insert_uint16(buf, container_entity.entity_instance_num);
+    pldm_msgbuf_insert_uint16(buf, container_entity.entity_container_id);
+
+    pldm_msgbuf_insert_uint8(buf, 1);
+
+    struct pldm_entity e = {
+        .entity_type = 0, .entity_instance_num = 0, .entity_container_id = 42};
+    pldm_msgbuf_insert_uint16(buf, e.entity_type);
+    pldm_msgbuf_insert_uint16(buf, e.entity_instance_num);
+    pldm_msgbuf_insert_uint16(buf, e.entity_container_id);
+
+    EXPECT_EQ(pldm_pdr_add(repo, msg_buf.data(),
+                           PDR_ENTITY_ASSOCIATION_MIN_SIZE, false, 0, NULL),
+              0);
+    EXPECT_EQ(pldm_find_container_id(repo, 3, 4), 0);
+    pldm_pdr_destroy(repo);
+}
+#endif
 
 TEST(PDRUpdate, testRemove)
 {
