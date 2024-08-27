@@ -470,6 +470,84 @@ typedef struct pldm_entity_node {
 	uint8_t association_type;
 } pldm_entity_node;
 
+LIBPLDM_ABI_TESTING
+int pldm_pdr_find_entity_container_id(const pldm_pdr *repo, uint16_t entityType,
+				      uint16_t entityInstance)
+{
+	pldm_pdr_record *record;
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	uint8_t skip_data_size;
+	uint8_t hdr_type;
+	uint8_t num_children;
+	int rc;
+
+	if (!repo) {
+		return -EINVAL;
+	}
+
+	record = repo->first;
+
+	while (record != NULL) {
+		rc = pldm_msgbuf_init_errno(buf,
+					    PDR_ENTITY_ASSOCIATION_MIN_SIZE,
+					    record->data, record->size);
+		if (rc) {
+			return rc;
+		}
+		skip_data_size = sizeof(uint32_t) + sizeof(uint8_t);
+		pldm_msgbuf_span_required(buf, skip_data_size, NULL);
+		rc = pldm_msgbuf_extract(buf, hdr_type);
+		if (rc) {
+			goto cleanup;
+		}
+		if (hdr_type != PLDM_PDR_ENTITY_ASSOCIATION) {
+			goto cleanup;
+		}
+
+		skip_data_size = sizeof(uint16_t) + sizeof(uint16_t) +
+				 sizeof(uint16_t) + sizeof(uint8_t);
+		pldm_msgbuf_span_required(buf, skip_data_size, NULL);
+		struct pldm_entity container_entity = { 0 };
+		pldm_msgbuf_extract(buf, container_entity.entity_type);
+		pldm_msgbuf_extract(buf, container_entity.entity_instance_num);
+		pldm_msgbuf_extract(buf, container_entity.entity_container_id);
+		rc = pldm_msgbuf_extract(buf, num_children);
+		if (rc) {
+			goto cleanup;
+		}
+
+		for (int i = 0; i < num_children; i++) {
+			struct pldm_entity e;
+			if ((rc = pldm_msgbuf_extract(buf, e.entity_type)) ||
+			    (rc = pldm_msgbuf_extract(buf,
+						      e.entity_instance_num)) ||
+			    (rc = pldm_msgbuf_extract(buf,
+						      e.entity_container_id))) {
+				return rc;
+			}
+
+			if (container_entity.entity_type == entityType &&
+			    container_entity.entity_instance_num ==
+				    entityInstance) {
+				uint16_t id = e.entity_container_id;
+				rc = pldm_msgbuf_destroy(buf);
+				if (rc) {
+					return rc;
+				}
+				return id;
+			}
+		}
+	cleanup:
+		rc = pldm_msgbuf_destroy(buf);
+		if (rc) {
+			return rc;
+		}
+		record = record->next;
+	}
+	return -ENOENT;
+}
+
 LIBPLDM_ABI_STABLE
 pldm_entity pldm_entity_extract(pldm_entity_node *node)
 {
