@@ -11,6 +11,8 @@
 #include <string.h>
 #include <errno.h>
 
+#include <stdio.h>
+
 #define PDR_ENTITY_ASSOCIATION_MIN_SIZE                                        \
 	(sizeof(struct pldm_pdr_hdr) +                                         \
 	 sizeof(struct pldm_pdr_entity_association))
@@ -461,6 +463,85 @@ typedef struct pldm_entity_node {
 	pldm_entity_node *next_sibling;
 	uint8_t association_type;
 } pldm_entity_node;
+
+LIBPLDM_ABI_TESTING
+uint16_t pldm_find_container_id(const pldm_pdr *repo, uint16_t entityType,
+				uint16_t entityInstance)
+{
+	assert(repo != NULL);
+	pldm_pdr_record *record = repo->first;
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	uint8_t *skip_data = NULL;
+	void *skip_hdr_data = NULL;
+	uint8_t skip_data_size = 0;
+	uint8_t hdr_type = 0;
+	uint8_t num_children = 0;
+	int rc = 0;
+
+	while (record != NULL) {
+		rc = pldm_msgbuf_init_errno(buf,
+					    PDR_ENTITY_ASSOCIATION_MIN_SIZE,
+					    record->data, record->size);
+		if (rc) {
+			return rc;
+		}
+		skip_data_size = sizeof(uint32_t) + sizeof(uint8_t);
+		pldm_msgbuf_span_required(buf, skip_data_size,
+					  (void **)&skip_hdr_data);
+		pldm_msgbuf_extract(buf, hdr_type);
+		if (hdr_type == PLDM_PDR_ENTITY_ASSOCIATION) {
+			skip_data_size = sizeof(uint16_t) + sizeof(uint16_t) +
+					 sizeof(uint16_t) + sizeof(uint8_t);
+			pldm_msgbuf_span_required(buf, skip_data_size,
+						  (void **)&skip_data);
+			struct pldm_entity container_entity = { 0 };
+			pldm_msgbuf_extract(buf, container_entity.entity_type);
+			pldm_msgbuf_extract(
+				buf, container_entity.entity_instance_num);
+			pldm_msgbuf_extract(
+				buf, container_entity.entity_container_id);
+			pldm_msgbuf_extract(buf, num_children);
+
+			for (int i = 0; i < num_children; i++) {
+				struct pldm_entity e;
+				if (pldm_msgbuf_extract(buf, e.entity_type) !=
+					    0 ||
+				    pldm_msgbuf_extract(
+					    buf, e.entity_instance_num) != 0 ||
+				    pldm_msgbuf_extract(
+					    buf, e.entity_container_id) != 0) {
+					return -1; // Or an appropriate error code
+				}
+
+				if (container_entity.entity_type ==
+					    entityType &&
+				    container_entity.entity_instance_num ==
+					    entityInstance) {
+					uint16_t id = e.entity_container_id;
+					pldm_msgbuf_destroy(buf);
+					return id;
+				}
+			}
+		}
+		record = record->next;
+	}
+	rc = pldm_msgbuf_destroy_consumed(buf);
+	if (rc) {
+		printf("hi 531");
+		return rc;
+	}
+	printf("hi 534");
+	return 0;
+}
+
+static inline uint16_t next_container_id(pldm_entity_association_tree *tree)
+{
+	assert(tree != NULL);
+	assert(tree->last_used_container_id != UINT16_MAX);
+
+	return ++tree->last_used_container_id;
+}
 
 LIBPLDM_ABI_STABLE
 pldm_entity pldm_entity_extract(pldm_entity_node *node)
