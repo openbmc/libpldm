@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eced0ae2_4d9ded1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-27T01:19:01Z",
+      "side": 1,
+      "message": "Hi Lora, thanks for the updated documentation, it looks good to me now and I think it\u0027s really helpful. I have a few straight-forward requests inline.",
+      "revId": "13cd19ef69b5b03d89b87f84ffd0884a69183c6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdbcf038_994c0f2b",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-27T01:19:01Z",
+      "side": 1,
+      "message": "The documented message format describes the length separate from the variable data. Can you please move this to `struct pldm_oem_meta_file_io_read_req`? The move will also help future-proof this design.",
+      "revId": "13cd19ef69b5b03d89b87f84ffd0884a69183c6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "578f3b97_a4a3f0e2",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-27T01:19:01Z",
+      "side": 1,
+      "message": "See the comment on the header about moving the length member.",
+      "revId": "13cd19ef69b5b03d89b87f84ffd0884a69183c6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76315de6_fff79ce7",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-27T01:19:01Z",
+      "side": 1,
+      "message": "This is only used once. I think it\u0027s not necessary. Just do the `sizeof()` at the current call-site.",
+      "revId": "13cd19ef69b5b03d89b87f84ffd0884a69183c6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5d5f800_e6401c93",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-08-27T01:19:01Z",
+      "side": 1,
+      "message": "Tests still need guards. See unresolved comment on PS26.",
+      "revId": "13cd19ef69b5b03d89b87f84ffd0884a69183c6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
