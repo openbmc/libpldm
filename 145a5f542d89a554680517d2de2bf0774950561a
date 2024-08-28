@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "54d44c93_3bd15d4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2024-08-28T03:49:35Z",
+      "side": 1,
+      "message": "To fix the PDR looping issue, while adding the entity association PDR, we are incrementing the record handle for every PDR which gets added in the path so that next PDR which gets added while adding entity association PDR should be with new record handle.\nI wasn\u0027t able to think of another way to solve this issue. I will rework on this based on your suggestion to solve the issue.",
+      "parentUuid": "d33070ed_6e87fb54",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 60
+      },
+      "revId": "145a5f542d89a554680517d2de2bf0774950561a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1291b192_3a50fc46",
@@ -60,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1abcfdd_bf12660a",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2024-08-28T03:49:35Z",
+      "side": 1,
+      "message": "Signature of function entity_association_pdr_add is modified to take pointer to record handle. So added new variable record_handle.",
+      "parentUuid": "9539be2d_7dfda7ae",
+      "revId": "145a5f542d89a554680517d2de2bf0774950561a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0dbcd08_f0875ee1",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 1
@@ -71,6 +113,30 @@
       "writtenOn": "2024-08-07T00:37:54Z",
       "side": 1,
       "message": "Why pass a pointer? Nothing consumes any value written?",
+      "range": {
+        "startLine": 974,
+        "startChar": 35,
+        "endLine": 974,
+        "endChar": 50
+      },
+      "revId": "145a5f542d89a554680517d2de2bf0774950561a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a4fb239_a02e6035",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2024-08-28T03:49:35Z",
+      "side": 1,
+      "message": "entity_association_pdr_add function is called recursively for the child and sibling. \nhttps://github.com/openbmc/libpldm/blob/main/src/dsp/pdr.c#L923\nhttps://github.com/openbmc/libpldm/blob/main/src/dsp/pdr.c#L930\n\nIf new PDR gets added for child/sibling, the record handle which is needed for next PDR has to be incremented for next entity_association_pdr_add. The record handle is incremented inside this function\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/73465/1/src/dsp/pdr.c#843\nIf there are Physical and logical children for an parent entity we are creating separate PDRs for each of them, and incrementing the record handle.\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/73465/1/src/dsp/pdr.c#867\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/73465/1/src/dsp/pdr.c#883",
+      "parentUuid": "d0dbcd08_f0875ee1",
       "range": {
         "startLine": 974,
         "startChar": 35,
