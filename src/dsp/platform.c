@@ -2857,7 +2857,7 @@ int decode_pldm_entity_auxiliary_names_pdr_index(
 	return pldm_msgbuf_destroy_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_cper_event_data(
 	const void *event_data, size_t event_data_length,
 	struct pldm_platform_cper_event *cper_event, size_t cper_event_length)
@@ -2907,7 +2907,7 @@ int decode_pldm_platform_cper_event_data(
 	return pldm_msgbuf_destroy_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 uint8_t *
 pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event)
 {
