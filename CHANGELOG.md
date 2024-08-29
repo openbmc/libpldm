@@ -48,6 +48,8 @@ Change categories:
    abi-compliance-checker to flag a change in the register containing the
    parameter `previous_op_state`.
 
+5. platform: Stabilise decode_pldm_platform_cper_event() API
+
 ### Deprecated
 
 1. Rename and deprecate functions with the `_check` suffix

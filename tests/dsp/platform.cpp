@@ -5344,7 +5344,6 @@ TEST(decodeEntityAuxNamePdrData, BadTest)
     free(decodedPdr);
 }
 
-#ifdef LIBPLDM_API_TESTING
 TEST(PlatformEventMessage, testGoodCperEventDataDecodeRequest)
 {
     constexpr const size_t eventDataSize = 4;
@@ -5386,9 +5385,7 @@ TEST(PlatformEventMessage, testGoodCperEventDataDecodeRequest)
 
     free(cper_event);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
 {
 
@@ -5464,4 +5461,3 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
 
     free(cperEvent);
 }
-#endif
