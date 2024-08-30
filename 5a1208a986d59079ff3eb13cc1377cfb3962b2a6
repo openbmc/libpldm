@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e38c8f75_507864b9",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "this should be out parameter, corrected it. we read the record handle of the PDR from which entity is removed so we can update the lists carrying PDR info in PLDM that this particular handle has been modified with one entity removed. We need to define this as a pointer because we initialize it in PLDM, call this libpldm API and use that record handle variable.",
+      "parentUuid": "47d16ff2_a632b3ad",
+      "range": {
+        "startLine": 669,
+        "startChar": 7,
+        "endLine": 669,
+        "endChar": 17
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afd7a07f_151b6b2f",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 11
@@ -71,6 +95,30 @@
       "writtenOn": "2024-08-23T03:33:38Z",
       "side": 1,
       "message": "I introduced the `LIBPLDM_CC_NONNULL` attribute macro in an earlier change. We should use it for this function.",
+      "range": {
+        "startLine": 1892,
+        "startChar": 1,
+        "endLine": 1893,
+        "endChar": 16
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8d61409_ab78ded9",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1893,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afd7a07f_151b6b2f",
       "range": {
         "startLine": 1892,
         "startChar": 1,
@@ -104,6 +152,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d964122f_e14e384a",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "832aebda_6a2e2e9b",
+      "range": {
+        "startLine": 1912,
+        "startChar": 1,
+        "endLine": 1913,
+        "endChar": 16
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e9233ea_9805ae76",
@@ -117,6 +189,24 @@
       "writtenOn": "2024-08-23T03:33:38Z",
       "side": 1,
       "message": "`LIBPLDM_CC_NONNULL`",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09d2e56b_273e6ea1",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1936,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9233ea_9805ae76",
       "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -146,6 +236,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07f8ca5e_d0d790b1",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1961,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "In this case prev can be NULL if record \u003d repo-\u003efirst. So I cannot add the LIBPLDM_CC_NONNULL. Please correct me of I am wrong",
+      "parentUuid": "2d92eccd_eb74ac7f",
+      "range": {
+        "startLine": 1959,
+        "startChar": 1,
+        "endLine": 1961,
+        "endChar": 1
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "77d6e650_781585f3",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 11
@@ -157,6 +271,24 @@
       "writtenOn": "2024-08-23T03:33:38Z",
       "side": 1,
       "message": "Can you put a blank line above so people don\u0027t confuse this as another arm of the original `if (...)` on line 1971?",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddb6306f_4291deb8",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1978,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77d6e650_781585f3",
       "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -178,6 +310,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fb9c94d_2b238fae",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1999,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ba1c1b7_9cf60bd0",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6d04cea_1c671de2",
@@ -191,6 +341,24 @@
       "writtenOn": "2024-08-23T03:33:38Z",
       "side": 1,
       "message": "There\u0027s no need to declare `skip_data_size` at this scope. Move it into the while loop.",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ea6744_1954b614",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2001,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6d04cea_1c671de2",
       "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -212,6 +380,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5afa608_5e503251",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2002,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64e96d54_5ed36856",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4be48bb_61962939",
@@ -225,6 +411,30 @@
       "writtenOn": "2024-08-23T03:33:38Z",
       "side": 1,
       "message": "Why are we calling this `dst`? That\u0027s super confusing when there\u0027s no `src` to move data from. Can we call this `buf`?\n\nAlso there\u0027s no need to declare it at this scope. Move it into the while loop.",
+      "range": {
+        "startLine": 2003,
+        "startChar": 1,
+        "endLine": 2004,
+        "endChar": 33
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49e61283_25fc67f5",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2004,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4be48bb_61962939",
       "range": {
         "startLine": 2003,
         "startChar": 1,
@@ -258,6 +468,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4865fdc6_6dad681f",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2007,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f362fdf1_90917a74",
+      "range": {
+        "startLine": 2006,
+        "startChar": 1,
+        "endLine": 2007,
+        "endChar": 23
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddcdee3f_fec0cf7e",
@@ -281,6 +515,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "393ff9df_450c283e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddcdee3f_fec0cf7e",
+      "range": {
+        "startLine": 2016,
+        "startChar": 1,
+        "endLine": 2018,
+        "endChar": 50
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70117f0b_6b13c43c",
@@ -294,6 +552,24 @@
       "writtenOn": "2024-08-23T03:33:38Z",
       "side": 1,
       "message": "If we\u0027re jumping out to cleanup in this case then there\u0027s no need to encase the rest in the `} else {` block below. It should be:\n\n```\nif (!match) {\n    goto cleanup;\n}\n\n*record_handle \u003d record-\u003erecord_handle;\nprev \u003d pldm_pdr_get_prev_record(repo, record);\nreturn pldm_pdr_remove_record(repo, record, prev);\n```\n\nNote that we can return the result of `pldm_pdr_remove_record()` directly. We can do this because we tested the results of the extraction above on line 2018 (that is, we already know all the information that will be given to us by `pldm_msgbuf_destroy()`). We\u0027ve also hit the condition we were trying to match, so there\u0027s no more work to do. Therefore we can just return directly.",
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca780500_a9765aab",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2027,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T11:30:20Z",
+      "side": 1,
+      "message": "thank you , will keep this in mind",
+      "parentUuid": "70117f0b_6b13c43c",
       "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
