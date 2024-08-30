@@ -97,6 +97,7 @@ Change categories:
 
 9. entity: Add new entity types from DSP0249 v1.3.0
 10. stateset: Add new state sets from DSP0249 v1.3.0
+11. pdr: Add pldm_entity_association_find_parent_entity()
 
 ### Changed
 

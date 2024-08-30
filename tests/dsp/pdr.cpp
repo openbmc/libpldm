@@ -7,9 +7,69 @@
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
+#include <iostream>
 #include <vector>
 
 #include <gtest/gtest.h>
+
+#ifdef LIBPLDM_API_TESTING
+/* API to create PLDM entity association tree to be used in unit tests
+ * to verify other PLDM PDR APIs
+ */
+static int createEntityAssociationTree(
+    uint32_t record_handle, uint8_t version, uint16_t record_change_num,
+    uint16_t container_id, uint8_t association_type, pldm_entity container,
+    uint8_t num_children, struct pldm_entity* children, bool is_remote,
+    uint16_t terminus_handle, pldm_pdr* repo)
+{
+    std::vector<uint8_t> pdr{};
+    pdr.resize(sizeof(pldm_pdr_hdr) + sizeof(pldm_pdr_entity_association) +
+               sizeof(pldm_entity) * (num_children - 1));
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    int rc;
+    uint16_t pdr_length;
+    rc = pldm_msgbuf_init_errno(buf,
+                                (sizeof(struct pldm_pdr_hdr) +
+                                 sizeof(struct pldm_pdr_entity_association)),
+                                pdr.data(), pdr.size());
+    if (rc)
+    {
+        return rc;
+    }
+
+    // Add pldm_pdr_hdr
+    pldm_msgbuf_insert_uint32(buf, record_handle);
+    pldm_msgbuf_insert_uint8(buf, version);
+    pldm_msgbuf_insert_uint8(buf, PLDM_PDR_ENTITY_ASSOCIATION);
+    pldm_msgbuf_insert_uint16(buf, record_change_num);
+    pdr_length = sizeof(pldm_pdr_entity_association) +
+                 (sizeof(pldm_entity) * (num_children - 1));
+    pldm_msgbuf_insert_uint16(buf, pdr_length);
+
+    // Add data for struct pldm_pdr_entity_association
+    pldm_msgbuf_insert_uint16(buf, container_id);
+    pldm_msgbuf_insert_uint8(buf, association_type);
+    pldm_msgbuf_insert_uint16(buf, container.entity_type);
+    pldm_msgbuf_insert_uint16(buf, container.entity_instance_num);
+    pldm_msgbuf_insert_uint16(buf, container.entity_container_id);
+    for (int i = 0; i < num_children; i++)
+    {
+        pldm_msgbuf_insert_uint8(buf, children[i].entity_type);
+        pldm_msgbuf_insert_uint16(buf, children[i].entity_instance_num);
+        pldm_msgbuf_insert_uint16(buf, children[i].entity_container_id);
+    }
+
+    pldm_pdr_add(repo, pdr.data(), pdr.size(), is_remote, terminus_handle,
+                 &record_handle);
+    rc = pldm_msgbuf_destroy(buf);
+    if (rc)
+    {
+        return rc;
+    }
+    return rc;
+}
+#endif
 
 TEST(PDRAccess, testInit)
 {
@@ -2198,6 +2258,58 @@ TEST(PDRUpdate, testRemoveFruRecord)
     EXPECT_EQ(removed_record_handle, 3);
 
     EXPECT_EQ(pldm_pdr_get_record_count(repo), 0);
+
+    pldm_pdr_destroy(repo);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EntityAssociationPDR, testfindParentEntityPresent)
+{
+    uint32_t record_handle = 3;
+    uint8_t version = 1;
+    uint16_t record_change_num = 0;
+    uint16_t container_id = 1;
+    uint8_t association_type = PLDM_ENTITY_ASSOCIAION_PHYSICAL;
+    struct pldm_entity container = {
+        .entity_type = 1, .entity_instance_num = 1, .entity_container_id = 0};
+    uint8_t num_children = 3;
+    struct pldm_entity children[3] = {
+        {.entity_type = 2, .entity_instance_num = 1, .entity_container_id = 1},
+        {.entity_type = 3, .entity_instance_num = 1, .entity_container_id = 1},
+        {.entity_type = 4, .entity_instance_num = 1, .entity_container_id = 1}};
+    int rc;
+    bool is_remote = false;
+    uint16_t terminus_handle = 1;
+
+    // Initialize pldm_pdr repo
+    pldm_pdr* repo = pldm_pdr_init();
+
+    rc = createEntityAssociationTree(record_handle, version, record_change_num,
+                                     container_id, association_type, container,
+                                     num_children, children, is_remote,
+                                     terminus_handle, repo);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 1u);
+
+    uint32_t found_record_handle{};
+    pldm_entity entity1{};
+    entity1.entity_type = 1;
+    entity1.entity_instance_num = 1;
+    entity1.entity_container_id = 0;
+
+    EXPECT_EQ(pldm_entity_association_find_parent_entity(repo, &entity1, false,
+                                                         &found_record_handle),
+              1);
+    EXPECT_EQ(found_record_handle, 3);
+
+    entity1.entity_type = 5;
+    entity1.entity_instance_num = 4;
+    entity1.entity_container_id = 3;
+
+    EXPECT_EQ(pldm_entity_association_find_parent_entity(repo, &entity1, false,
+                                                         &found_record_handle),
+              0);
 
     pldm_pdr_destroy(repo);
 }
