@@ -22,6 +22,30 @@
       },
       "revId": "3209e7fbafeb989141d1e2b04bb4899988d525f8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f6d12b7_7ea154d2",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T08:32:22Z",
+      "side": 1,
+      "message": "It should be an out parameter. I was wrong abut in-out. In PLDM we initially it to 0 and call this API to remove the record, if this API returns a SUCCESS then PDR repo is updated that this particular record handle has been removed.",
+      "parentUuid": "bca89807_9a876842",
+      "range": {
+        "startLine": 649,
+        "startChar": 13,
+        "endLine": 649,
+        "endChar": 17
+      },
+      "revId": "3209e7fbafeb989141d1e2b04bb4899988d525f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

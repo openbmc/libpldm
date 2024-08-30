@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a91f590_d82b8759",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T08:32:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b8133585_f0c823a2",
+      "revId": "590ae67e97f029479b31cad9b3b304062b22433b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b77b7864_be287960",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-08-23T03:16:09Z",
       "side": 1,
       "message": "Can you explain to me how this is used as an out-parameter?",
+      "revId": "590ae67e97f029479b31cad9b3b304062b22433b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05730b97_6f4050ed",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T08:32:22Z",
+      "side": 1,
+      "message": "yes I have explained in the pdr.h file",
+      "parentUuid": "b77b7864_be287960",
       "revId": "590ae67e97f029479b31cad9b3b304062b22433b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a725ba45_6797e8b9",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1857,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T08:32:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3be7e762_4a577561",
+      "revId": "590ae67e97f029479b31cad9b3b304062b22433b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94f7d08b_ec7485e2",
@@ -82,6 +136,30 @@
       "writtenOn": "2024-08-23T03:16:09Z",
       "side": 1,
       "message": "Given we\u0027ve used `pldm_msgbuf_extract()` above, these must be `pldm_msgbuf_insert(dst, e.*)`, otherwise you\u0027re copying from data at the wrong offset in `src`.\n\nYour test cases should demonstrate correct behaviour here.",
+      "range": {
+        "startLine": 1861,
+        "startChar": 1,
+        "endLine": 1863,
+        "endChar": 66
+      },
+      "revId": "590ae67e97f029479b31cad9b3b304062b22433b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16896217_1fbf3da0",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T08:32:22Z",
+      "side": 1,
+      "message": "this was a bug in the code , and it was not caught because the unit test only checks the return value which is the record handle. I have enhanced the unit test a bit. There are no APIs yet to check each child entity values but I did add traces in the unit test to make sure I fixed this bug",
+      "parentUuid": "94f7d08b_ec7485e2",
       "range": {
         "startLine": 1861,
         "startChar": 1,

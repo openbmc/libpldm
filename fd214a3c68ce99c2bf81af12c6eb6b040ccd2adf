@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3781c9d_0fbfbf5f",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-08-30T08:32:22Z",
+      "side": 1,
+      "message": "I was wrong it is just an out parameter. Conventional way to call this API would be to make the API return the record handle because it is an out parameter instead of return code. But we would prefer the API return the rc because we call multiple other APIs inside it which may fail. That is the reason we have included the record handle as a pointer",
+      "parentUuid": "36d80d2e_d0089789",
+      "range": {
+        "startLine": 655,
+        "startChar": 1,
+        "endLine": 655,
+        "endChar": 28
+      },
+      "revId": "fd214a3c68ce99c2bf81af12c6eb6b040ccd2adf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47c345aa_6b6fbddc",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 7
