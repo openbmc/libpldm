@@ -2135,3 +2135,68 @@ TEST(PDRUpdate, testRemoveFruRecord)
     pldm_pdr_destroy(repo);
 }
 #endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EntityAssociationPDR, testfindParentEntityPresent)
+{
+    std::vector<uint8_t> pdr{};
+    pdr.resize(sizeof(pldm_pdr_hdr) + sizeof(pldm_pdr_entity_association) +
+               sizeof(pldm_entity) * 2);
+    pldm_pdr_hdr* hdr = reinterpret_cast<pldm_pdr_hdr*>(pdr.data());
+    hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
+    hdr->length =
+        htole16(sizeof(pldm_pdr_entity_association) + sizeof(pldm_entity) * 2);
+
+    pldm_pdr_entity_association* e =
+        reinterpret_cast<pldm_pdr_entity_association*>(pdr.data() +
+                                                       sizeof(pldm_pdr_hdr));
+    e->container_id = htole16(1);
+    e->num_children = 5;
+    e->container.entity_type = htole16(1);
+    e->container.entity_instance_num = htole16(1);
+    e->container.entity_container_id = htole16(0);
+
+    pldm_entity* entity = e->children;
+    entity->entity_type = htole16(2);
+    entity->entity_instance_num = htole16(1);
+    entity->entity_container_id = htole16(1);
+    ++entity;
+    entity->entity_type = htole16(3);
+    entity->entity_instance_num = htole16(1);
+    entity->entity_container_id = htole16(1);
+    ++entity;
+    entity->entity_type = htole16(4);
+    entity->entity_instance_num = htole16(1);
+    entity->entity_container_id = htole16(1);
+
+    uint32_t handle = 3;
+    auto repo = pldm_pdr_init();
+    pldm_pdr_add_check(repo, pdr.data(), pdr.size(), false, 1, &handle);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 1u);
+
+    uint32_t found_record_handle{};
+    bool found = false;
+    pldm_entity entity1{};
+    entity1.entity_type = htole16(1);
+    entity1.entity_instance_num = htole16(1);
+    entity1.entity_container_id = htole16(0);
+
+    EXPECT_EQ(pldm_entity_association_find_parent_entity(
+                  repo, &entity1, false, &found_record_handle, &found),
+              0);
+    EXPECT_EQ(found_record_handle, 3);
+    EXPECT_EQ(found, true);
+
+    entity1.entity_type = 5;
+    entity1.entity_instance_num = 4;
+    entity1.entity_container_id = 3;
+
+    found = false;
+    EXPECT_EQ(pldm_entity_association_find_parent_entity(
+                  repo, &entity1, false, &found_record_handle, &found),
+              0);
+    EXPECT_EQ(found, false);
+
+    pldm_pdr_destroy(repo);
+}
+#endif
