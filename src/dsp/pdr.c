@@ -2043,3 +2043,66 @@ int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 	}
 	return rc;
 }
+
+LIBPLDM_ABI_TESTING
+int pldm_entity_association_find_parent_entity(const pldm_pdr *repo,
+					       pldm_entity *parent,
+					       bool is_remote,
+					       uint32_t *record_handle,
+					       bool *found)
+{
+	uint8_t hdr_type = 0;
+	pldm_pdr_record *record = repo->first;
+	int rc = 0;
+	uint8_t skip_data_size = 0;
+	struct pldm_msgbuf _dst;
+	struct pldm_msgbuf *dst = &_dst;
+
+	if (!repo || !parent || !record_handle || !found) {
+		return -EINVAL;
+	}
+
+	while (record != NULL) {
+		rc = pldm_msgbuf_init_errno(dst,
+					    PDR_ENTITY_ASSOCIATION_MIN_SIZE,
+					    record->data, record->size);
+		if (rc) {
+			return rc;
+		}
+		skip_data_size = sizeof(uint32_t) + sizeof(uint8_t);
+		pldm_msgbuf_span_required(dst, skip_data_size, NULL);
+		pldm_msgbuf_extract(dst, hdr_type);
+		if (record->is_remote != is_remote ||
+		    hdr_type != PLDM_PDR_ENTITY_ASSOCIATION) {
+			goto cleanup;
+		}
+		skip_data_size = sizeof(uint16_t) + sizeof(uint16_t) +
+				 sizeof(uint16_t) + sizeof(uint8_t);
+		pldm_msgbuf_span_required(dst, skip_data_size, NULL);
+		struct pldm_entity container_entity = {
+			.entity_type = 0,
+			.entity_instance_num = 0,
+			.entity_container_id = 0
+		};
+		if ((rc = pldm_msgbuf_extract(dst,
+					      container_entity.entity_type)) ||
+		    (rc = pldm_msgbuf_extract(
+			     dst, container_entity.entity_instance_num)) ||
+		    (rc = pldm_msgbuf_extract(
+			     dst, container_entity.entity_container_id))) {
+			return rc;
+		}
+		if (pldm_entity_cmp(parent, &container_entity)) {
+			*record_handle = record->record_handle;
+			*found = true;
+			return rc;
+		}
+	cleanup:
+		rc = pldm_msgbuf_destroy(dst);
+		if (rc) {
+			return rc;
+		}
+		record = record->next;
+	}
+	return rc;
+}
