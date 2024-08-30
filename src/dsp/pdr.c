@@ -2030,3 +2030,59 @@ int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 	}
 	return rc;
 }
+
+LIBPLDM_ABI_TESTING
+int pldm_entity_association_find_parent_entity(const pldm_pdr *repo,
+					       pldm_entity *parent,
+					       bool is_remote,
+					       uint32_t *record_handle)
+{
+	uint8_t hdr_type = 0;
+	int rc = 0;
+	uint8_t skip_data_size = 0;
+	void *skip_data = NULL;
+	void *skip_data_hdr = NULL;
+	struct pldm_msgbuf _dst;
+	struct pldm_msgbuf *dst = &_dst;
+
+	if (!repo || !parent || !record_handle) {
+		return -EINVAL;
+	}
+	pldm_pdr_record *record = repo->first;
+
+	while (record != NULL) {
+		rc = pldm_msgbuf_init_errno(dst,
+					    PDR_ENTITY_ASSOCIATION_MIN_SIZE,
+					    record->data, record->size);
+		if (rc) {
+			return rc;
+		}
+		skip_data_size = sizeof(uint32_t) + sizeof(uint8_t);
+		pldm_msgbuf_span_required(dst, skip_data_size, &skip_data_hdr);
+		pldm_msgbuf_extract(dst, hdr_type);
+		if (record->is_remote != is_remote ||
+		    hdr_type != PLDM_PDR_ENTITY_ASSOCIATION) {
+			goto cleanup;
+		}
+		skip_data_size = sizeof(uint16_t) + sizeof(uint16_t) +
+				 sizeof(uint16_t) + sizeof(uint8_t);
+		pldm_msgbuf_span_required(dst, skip_data_size, skip_data);
+		struct pldm_entity e = { 0 };
+		if ((rc = pldm_msgbuf_extract(dst, e.entity_type)) ||
+		    (rc = pldm_msgbuf_extract(dst, e.entity_instance_num)) ||
+		    (rc = pldm_msgbuf_extract(dst, e.entity_container_id))) {
+			return rc;
+		}
+		if (pldm_entity_cmp(parent, &e)) {
+			*record_handle = record->record_handle;
+			return 1;
+		}
+	cleanup:
+		rc = pldm_msgbuf_destroy(dst);
+		if (rc) {
+			return rc;
+		}
+		record = record->next;
+	}
+	return rc;
+}

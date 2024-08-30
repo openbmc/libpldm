@@ -74,6 +74,7 @@ Change categories:
 
 11. pdr: Add pldm_entity_association_pdr_remove_contained_entity()
 12. pdr: Add pldm_pdr_remove_fru_record_set_by_rsi()
+13. pdr: Add pldm_entity_association_find_parent_entity()
 
 ### Changed
 
