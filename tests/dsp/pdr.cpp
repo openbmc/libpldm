@@ -8,6 +8,8 @@
 #include <cstring>
 #include <vector>
 
+#include "msgbuf.h"
+
 #include <gtest/gtest.h>
 
 TEST(PDRAccess, testInit)
@@ -2128,6 +2130,77 @@ TEST(PDRUpdate, testRemoveFruRecord)
     EXPECT_EQ(removed_record_handle, 3);
 
     EXPECT_EQ(pldm_pdr_get_record_count(repo), 0);
+
+    pldm_pdr_destroy(repo);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EntityAssociationPDR, testfindParentEntityPresent)
+{
+    std::vector<uint8_t> pdr{};
+    pdr.resize(sizeof(pldm_pdr_hdr) + sizeof(pldm_pdr_entity_association) +
+               sizeof(pldm_entity) * 2);
+
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf,
+                                (sizeof(struct pldm_pdr_hdr) +
+                                 sizeof(struct pldm_pdr_entity_association)),
+                                pdr.data(), pdr.size());
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint32(buf, 3);
+    pldm_msgbuf_insert_uint8(buf, 1);
+    pldm_msgbuf_insert_uint8(buf, PLDM_PDR_ENTITY_ASSOCIATION);
+    pldm_msgbuf_insert_uint16(buf, 0);
+    pldm_msgbuf_insert_uint16(
+        buf, (sizeof(pldm_pdr_entity_association) + sizeof(pldm_entity) * 2));
+
+    // adding data for struct pldm_pdr_entity_association
+    pldm_msgbuf_insert_uint16(buf, 1);
+    pldm_msgbuf_insert_uint8(buf, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    pldm_msgbuf_insert_uint16(buf, 1);
+    pldm_msgbuf_insert_uint16(buf, 1);
+    pldm_msgbuf_insert_uint16(buf, 0);
+    pldm_msgbuf_insert_uint8(buf, 3);
+    pldm_msgbuf_insert_uint16(buf, 2);
+    pldm_msgbuf_insert_uint16(buf, 1);
+    pldm_msgbuf_insert_uint16(buf, 1);
+    pldm_msgbuf_insert_uint16(buf, 3);
+    pldm_msgbuf_insert_uint16(buf, 1);
+    pldm_msgbuf_insert_uint16(buf, 1);
+    pldm_msgbuf_insert_uint16(buf, 4);
+    pldm_msgbuf_insert_uint16(buf, 1);
+    pldm_msgbuf_insert_uint16(buf, 1);
+    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(rc, 0);
+
+    uint32_t handle = 3;
+    auto repo = pldm_pdr_init();
+    pldm_pdr_add(repo, pdr.data(), pdr.size(), false, 1, &handle);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 1u);
+
+    uint32_t found_record_handle{};
+    pldm_entity entity1{};
+    entity1.entity_type = 1;
+    entity1.entity_instance_num = 1;
+    entity1.entity_container_id = 0;
+
+    EXPECT_EQ(pldm_entity_association_find_parent_entity(repo, &entity1, false,
+                                                         &found_record_handle),
+              1);
+    EXPECT_EQ(found_record_handle, 3);
+
+    entity1.entity_type = 5;
+    entity1.entity_instance_num = 4;
+    entity1.entity_container_id = 3;
+
+    EXPECT_EQ(pldm_entity_association_find_parent_entity(repo, &entity1, false,
+                                                         &found_record_handle),
+              0);
 
     pldm_pdr_destroy(repo);
 }

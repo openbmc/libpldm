@@ -670,6 +670,22 @@ int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 					  bool is_remote,
 					  uint32_t *record_handle);
 
+/** @brief Find if given container entity belongs to the PLDM entity association tree
+ *
+ * @param[in] repo - opaque pointer to pldm PDR repo
+ * @param[in] parent - the container entity
+ * @param[in] is_remote - indicates which PDR to remove, local or remote
+ * @param[in] pdr_record_handle - record handle of the container entity
+ * @param[out] found - bool to indicate if parent entity is present in tree
+ *
+ * @return 0 if parent entity is not found, 1 is found, -EINVAL if the
+ * arguments are invalid, -ENOMEM if an internal memory allocation fails,
+ * or -EOVERFLOW if value is too large for defined type
+ */
+int pldm_entity_association_find_parent_entity(const pldm_pdr *repo,
+					       pldm_entity *parent,
+					       bool is_remote,
+					       uint32_t *record_handle);
 #ifdef __cplusplus
 }
 #endif
