@@ -330,6 +330,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb8e7e9b_daf9d580",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-30T09:28:53Z",
+      "side": 1,
+      "message": "Sorry, according to your description it should be：\n1. Use docker build command to build an image based on Dockerfile\n(Should you be looking for the Dockerfile in the openbmc repo?)\ncommand：docker build -t $image -f ./openbmc/poky/bitbake/contrib/prserv/Dockerfile .\n2. Open a container based on the constructed image\ncommand：docker run --interactive --tty $image /bin/bash\n3. Execute the script in the container\n\nBut a problem occurred when I performed step 1. It seems that the folder inside docker cannot be found.\nI\u0027m sorry, so I still didn\u0027t execute pre-submit script successfully.\nIt may take some time to research what the problem is.\n\nFinally I execute CI build： [Not sure if this behavior helps]\n1. Run CI for testing purposes only\n/data/chris/ci_test_area/libpldm \u003e meson test --print-errorlogs --repeat 1 -C build\nninja: Entering directory `/data/chris/ci_test_area/libpldm/build\u0027\nninja: no work to do.\n 1/22 dsp/bios_table_iter                            OK              0.19s\n 2/22 instance-id                                    OK              0.18s\n 3/22 msgbuf                                         OK              0.17s\n 4/22 responder                                      OK              0.17s\n 5/22 utils                                          OK              0.16s\n 6/22 dsp/base                                       OK              0.15s\n 7/22 dsp/bios                                       OK              0.13s\n 8/22 dsp/fru                                        OK              0.12s\n 9/22 dsp/pdr                                        OK              0.12s\n10/22 transport/transport                            OK              0.10s\n11/22 oem/ibm/fileio                                 OK              0.05s\n12/22 oem/ibm/host                                   OK              0.04s\n13/22 oem/meta/fileio                                OK              0.03s\n14/22 msgbuf_generic                                 OK              0.03s\n15/22 dsp/platform                                   OK              0.14s\n16/22 dsp/bios_table                                 OK              0.26s\n17/22 dsp/firmware_update                            OK              0.26s\n18/22 transport/send_recv_one                        OK              1.01s\n19/22 transport/send_recv_timeout                    OK              4.82s\n20/22 transport/send_recv_unwanted                   OK              4.81s\n21/22 transport/send_recv_wrong_command_code         OK              4.82s\n22/22 transport/send_recv_wrong_pldm_type            OK              4.82s\n\nOk:                 22\nExpected Fail:      0\nFail:               0\nUnexpected Pass:    0\nSkipped:            0\nTimeout:            0\n\nFull log written to /data/chris/ci_test_area/libpldm/build/meson-logs/testlog.txt\n\n2. Run CI on local changed Repo\nI only retrieve the following results：\nChecking tests/dsp/fru.cpp ...\n7/42 files checked 0% done\nChecking tests/transport/send_recv_unwanted.cpp ...\nChecking tests/dsp/pdr.cpp ...\nChecking tests/dsp/platform.cpp ...\nChecking tests/transport/transport.cpp ...\nChecking tests/transport/send_recv_one.cpp ...\nChecking tests/oem/ibm/host.cpp ...\nChecking tests/transport/send_recv_timeout.cpp ...\n8/42 files checked 0% done\nChecking tests/msgbuf_generic.c ...\nChecking tests/transport/send_recv_wrong_command_code.cpp ...\nChecking tests/transport/send_recv_wrong_pldm_type.cpp ...\n9/42 files checked 0% done\nChecking tests/oem/ibm/fileio.cpp ...\nChecking tests/oem/meta/fileio.cpp ...\n10/42 files checked 0% done\n11/42 files checked 0% done\n12/42 files checked 0% done\n\nDoes this mean that tests/oem/meta/fileio.cpp has no errors?",
+      "parentUuid": "3352a8e5_9169d9d5",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7accd107_012d1615",
         "filename": "tests/oem/meta/fileio.cpp",
         "patchSetId": 26

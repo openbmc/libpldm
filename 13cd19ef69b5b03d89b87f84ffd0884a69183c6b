@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07bc302a_afcbebf6",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-30T09:28:53Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "fdbcf038_994c0f2b",
+      "revId": "13cd19ef69b5b03d89b87f84ffd0884a69183c6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "578f3b97_a4a3f0e2",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27eb56be_a1ae1ce6",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-30T09:28:53Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "578f3b97_a4a3f0e2",
+      "revId": "13cd19ef69b5b03d89b87f84ffd0884a69183c6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76315de6_fff79ce7",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-08-27T01:19:01Z",
       "side": 1,
       "message": "This is only used once. I think it\u0027s not necessary. Just do the `sizeof()` at the current call-site.",
+      "revId": "13cd19ef69b5b03d89b87f84ffd0884a69183c6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96c843e3_00b24042",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-30T09:28:53Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "76315de6_fff79ce7",
       "revId": "13cd19ef69b5b03d89b87f84ffd0884a69183c6b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
