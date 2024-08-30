@@ -346,6 +346,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6803abe_b63ccaf2",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-30T10:36:56Z",
+      "side": 1,
+      "message": "Hi Andrew：\nI asked my former colleagues and found out that it is because our server version is too old (Ubuntu 20.04.6) and does not have af mctp.\nWe need to add this commit to run unit test.\nlink：https://gerrit.openbmc.org/c/openbmc/libpldm/+/70195\n\nAfter adding this commit, the results of executing the pre-submit script will be Pass.\n\nNote:\nI changed label from LIBPLDM_ABI_TESTING to LIBPLDM_ABI_STABLE first so that I can find the function (pldm_oem_meta_file_io_write_req_data, decode_oem_meta_file_io_write_req and decode_oem_meta_file_io_read_req) during build.\n\nThank you.\n\nTest log：\n......\nFound ninja-1.10.0 at /usr/bin/ninja\nCleaning... 18 files.\n[68/68] Linking target tests/dsp_platform\nninja: Entering directory `/data/lora/LF_BMC/libpldm/tmp.oQjw1lARBs\u0027\nninja: no work to do.\n 1/16 dsp/bios_table_iter         OK              0.13s\n 2/16 instance-id                 OK              0.12s\n 3/16 msgbuf                      OK              0.12s\n 4/16 responder                   OK              0.11s\n 5/16 utils                       OK              0.10s\n 6/16 dsp/base                    OK              0.10s\n 7/16 dsp/bios                    OK              0.09s\n 8/16 dsp/firmware_update         OK              0.08s\n 9/16 dsp/fru                     OK              0.07s\n10/16 dsp/pdr                     OK              0.07s\n11/16 dsp/platform                OK              0.06s\n12/16 oem/ibm/fileio              OK              0.05s\n13/16 oem/ibm/host                OK              0.04s\n14/16 oem/meta/fileio             OK              0.04s\n15/16 msgbuf_generic              OK              0.03s\n16/16 dsp/bios_table              OK              0.26s\n\nOk:                 16\nExpected Fail:      0\nFail:               0\nUnexpected Pass:    0\nSkipped:            0\nTimeout:            0\n\nFull log written to /data/lora/LF_BMC/libpldm/tmp.oQjw1lARBs/meson-logs/testlog.txt",
+      "parentUuid": "cb8e7e9b_daf9d580",
+      "revId": "8944b29aa0dab5b0e7959fcb5c06bfd39b8b656c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7accd107_012d1615",
