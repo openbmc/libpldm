@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5faecb8a_4c300172",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-30T11:11:08Z",
+      "side": 1,
+      "message": "Data buffer has been added. Please check, thank you.",
+      "parentUuid": "35fe9f9e_d201c8f4",
+      "revId": "c93804ca8f3cba998747e96b25520748e9f7020f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e469b4ec_16db2a7b",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-08-27T01:21:53Z",
       "side": 1,
       "message": "Why a request message when we\u0027re encoding a response?",
+      "revId": "c93804ca8f3cba998747e96b25520748e9f7020f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e6e8d69_187c36f1",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-30T11:11:08Z",
+      "side": 1,
+      "message": "Originally I wanted to put the handle and option in req_msg into responseMsg.\nPut struct pldm_oem_meta_file_io_read_resp pointer instead.\nPlease check, thank you.",
+      "parentUuid": "e469b4ec_16db2a7b",
       "revId": "c93804ca8f3cba998747e96b25520748e9f7020f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +111,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33c7623f_179d2fcd",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-30T11:11:08Z",
+      "side": 1,
+      "message": "Has been modified to put in struct pldm_oem_meta_file_io_read_resp pointer.\nPlease check, thank you.",
+      "parentUuid": "408c8f8d_aa1550a3",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 38
+      },
+      "revId": "c93804ca8f3cba998747e96b25520748e9f7020f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7b57cb2_c9d57751",
@@ -88,6 +148,30 @@
       "writtenOn": "2024-08-27T01:21:53Z",
       "side": 1,
       "message": "No, please use `pldm_msgbuf_insert()`.",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 36
+      },
+      "revId": "c93804ca8f3cba998747e96b25520748e9f7020f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8f3bf6f_1d0a3f39",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-08-30T11:11:08Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "e7b57cb2_c9d57751",
       "range": {
         "startLine": 170,
         "startChar": 1,
