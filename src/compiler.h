@@ -9,12 +9,15 @@
 #include <assert.h>
 
 static struct {
+	static_assert(__has_attribute(always_inline),
+		      "`always_inline` attribute is required");
 	static_assert(__has_attribute(unused),
 		      "`unused` attribute is required");
 	int compliance;
 } pldm_required_attributes __attribute__((unused));
 
-#define LIBPLDM_CC_UNUSED __attribute__((unused))
+#define LIBPLDM_CC_ALWAYS_INLINE __attribute__((always_inline)) static inline
+#define LIBPLDM_CC_UNUSED	 __attribute__((unused))
 
 // NOLINTBEGIN(bugprone-macro-parentheses)
 /**
