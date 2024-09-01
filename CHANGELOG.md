@@ -42,6 +42,11 @@ Change categories:
 1. pdr: Stabilise related decode_entity_auxiliary_names_pdr() APIs
 2. platform: Rework decode/encode_pldm_message_poll_event_data() APIs
 3. platform: Stabilise decode_pldm_message_poll_event_data() APIs
+4. ABI break for decode_sensor_op_data()
+
+   Applying LIBPLDM_CC_NONNULL to the internal msgbuf APIs caused
+   abi-compliance-checker to flag a change in the register containing the
+   parameter `previous_op_state`.
 
 ### Deprecated
 
