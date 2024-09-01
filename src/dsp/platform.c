@@ -1056,7 +1056,9 @@ int decode_poll_for_platform_event_message_req(
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (msg == NULL) {
+	if (msg == NULL || format_version == NULL ||
+	    transfer_operation_flag == NULL || data_transfer_handle == NULL ||
+	    event_id_to_acknowledge == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -1456,6 +1458,12 @@ int decode_sensor_event_data(const uint8_t *event_data,
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
+	if (event_data == NULL || sensor_id == NULL ||
+	    sensor_event_class_type == NULL ||
+	    event_class_data_offset == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
 	rc = pldm_msgbuf_init_cc(buf, PLDM_SENSOR_EVENT_DATA_MIN_LENGTH,
 				 event_data, event_data_length);
 	if (rc) {
@@ -1506,7 +1514,8 @@ int decode_sensor_op_data(const uint8_t *sensor_data, size_t sensor_data_length,
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (present_op_state == NULL || previous_op_state == NULL) {
+	if (sensor_data == NULL || present_op_state == NULL ||
+	    previous_op_state == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -1533,8 +1542,8 @@ int decode_state_sensor_data(const uint8_t *sensor_data,
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (sensor_offset == NULL || event_state == NULL ||
-	    previous_event_state == NULL) {
+	if (sensor_data == NULL || sensor_offset == NULL ||
+	    event_state == NULL || previous_event_state == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -1563,8 +1572,9 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (sensor_data_size == NULL || event_state == NULL ||
-	    previous_event_state == NULL || present_reading == NULL) {
+	if (sensor_data == NULL || sensor_data_size == NULL ||
+	    event_state == NULL || previous_event_state == NULL ||
+	    present_reading == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -2011,7 +2021,8 @@ int decode_pldm_pdr_repository_chg_event_data(const uint8_t *event_data,
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (event_data_format == NULL || number_of_change_records == NULL ||
+	if (event_data == NULL || event_data_format == NULL ||
+	    number_of_change_records == NULL ||
 	    change_record_data_offset == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -2040,7 +2051,7 @@ int decode_pldm_message_poll_event_data(
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (!poll_event) {
+	if (!event_data || !poll_event) {
 		return -EINVAL;
 	}
 
@@ -2074,6 +2085,10 @@ int encode_pldm_message_poll_event_data(
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
+	if (poll_event == NULL || event_data == NULL) {
+		return -EINVAL;
+	}
+
 	if (poll_event->event_id == 0x0000 || poll_event->event_id == 0xffff) {
 		return -EPROTO;
 	}
@@ -2100,7 +2115,8 @@ int decode_pldm_pdr_repository_change_record_data(
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (event_data_operation == NULL || number_of_change_entries == NULL ||
+	if (change_record_data == NULL || event_data_operation == NULL ||
+	    number_of_change_entries == NULL ||
 	    change_entry_data_offset == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -2564,6 +2580,10 @@ int decode_numeric_effecter_pdr_data(
 	struct pldm_value_pdr_hdr hdr;
 	int rc;
 
+	if (!pdr_data || !pdr_value) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
 	rc = pldm_msgbuf_init_cc(buf, PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH,
 				 pdr_data, pdr_data_length);
 	if (rc) {
@@ -2829,6 +2849,10 @@ int decode_entity_auxiliary_names_pdr(
 	int rc;
 	int i;
 
+	if (!data || !pdr) {
+		return -EINVAL;
+	}
+
 	/*
 	 * Alignment of auxiliary_name_data is an invariant as we statically assert
 	 * its behaviour in the header.
@@ -2873,6 +2897,7 @@ int decode_entity_auxiliary_names_pdr(
 	if (rc < 0) {
 		return rc;
 	}
+	assert(names);
 
 	pdr->auxiliary_name_data_size = pdr_length - sizeof(*pdr);
 
