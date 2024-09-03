@@ -2858,9 +2858,10 @@ int decode_pldm_entity_auxiliary_names_pdr_index(
 }
 
 LIBPLDM_ABI_TESTING
-int decode_pldm_platform_cper_event_data(
-	const void *event_data, size_t event_data_length,
-	struct pldm_platform_cper_event *cper_event, size_t cper_event_length)
+int decode_pldm_platform_cper_event(const void *event_data,
+				    size_t event_data_length,
+				    struct pldm_platform_cper_event *cper_event,
+				    size_t cper_event_length)
 {
 	struct pldm_msgbuf _buf;
 	struct pldm_msgbuf *buf = &_buf;

@@ -5214,7 +5214,7 @@ TEST(PlatformEventMessage, testGoodCperEventDataDecodeRequest)
     auto cper_event = reinterpret_cast<struct pldm_platform_cper_event*>(
         malloc(cperEventSize));
 
-    auto rc = decode_pldm_platform_cper_event_data(
+    auto rc = decode_pldm_platform_cper_event(
         reinterpret_cast<const void*>(eventData.data()), eventData.size(),
         cper_event, cperEventSize);
 
@@ -5254,40 +5254,40 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
     auto cperEvent = reinterpret_cast<struct pldm_platform_cper_event*>(
         malloc(cperEventSize));
 
-    auto rc = decode_pldm_platform_cper_event_data(NULL, eventData.size(),
-                                                   cperEvent, cperEventSize);
+    auto rc = decode_pldm_platform_cper_event(NULL, eventData.size(), cperEvent,
+                                              cperEventSize);
     EXPECT_EQ(rc, -EINVAL);
 
-    rc = decode_pldm_platform_cper_event_data(
+    rc = decode_pldm_platform_cper_event(
         reinterpret_cast<const void*>(eventData.data()), eventData.size(), NULL,
         cperEventSize);
     EXPECT_EQ(rc, -EINVAL);
 
 #ifdef NDEBUG
-    rc = decode_pldm_platform_cper_event_data(
+    rc = decode_pldm_platform_cper_event(
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
         cperEvent, cperEventSize);
     EXPECT_EQ(rc, -EBADMSG);
 #else
-    EXPECT_DEATH(decode_pldm_platform_cper_event_data(
+    EXPECT_DEATH(decode_pldm_platform_cper_event(
                      reinterpret_cast<uint8_t*>(eventData.data()),
                      eventData.size() - 1, cperEvent, cperEventSize),
                  "ctx->remaining >= 0");
 #endif
 
-    rc = decode_pldm_platform_cper_event_data(
+    rc = decode_pldm_platform_cper_event(
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
         cperEvent, cperEventSize - 1);
     EXPECT_EQ(rc, -EOVERFLOW);
 
-    rc = decode_pldm_platform_cper_event_data(
+    rc = decode_pldm_platform_cper_event(
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
         cperEvent, cperEventSize + 1);
     EXPECT_EQ(rc, 0);
 
     // Invalid CPER Event Format Type
     eventData[1] = 0x2;
-    rc = decode_pldm_platform_cper_event_data(
+    rc = decode_pldm_platform_cper_event(
         reinterpret_cast<const void*>(eventData.data()), eventData.size(),
         cperEvent, cperEventSize);
 
@@ -5296,14 +5296,14 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
     // Invalid cper event data size
     eventData[1] = 0x1;
     eventData[2] = 3;
-    rc = decode_pldm_platform_cper_event_data(
+    rc = decode_pldm_platform_cper_event(
         reinterpret_cast<const void*>(eventData.data()), eventData.size(),
         cperEvent, cperEventSize);
 
     EXPECT_EQ(rc, -EBADMSG);
 
     eventData[2] = 5;
-    rc = decode_pldm_platform_cper_event_data(
+    rc = decode_pldm_platform_cper_event(
         reinterpret_cast<const void*>(eventData.data()), eventData.size(),
         cperEvent, cperEventSize);
 
