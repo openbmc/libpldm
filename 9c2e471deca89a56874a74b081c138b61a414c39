@@ -16,6 +16,24 @@
       "message": "C++ is only required for the tests (and ideally that wouldn\u0027t be the case either). Given the lack of meson support for detecting clang++\u0027s c++23 support I don\u0027t see any advantage to submitting this prematurely, given that we leverage clang-tidy.",
       "revId": "9c2e471deca89a56874a74b081c138b61a414c39",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb5e2dbf_5227b190",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-09-03T18:22:42Z",
+      "side": 1,
+      "message": "I think this concern is resolved now?  We have newer Meson widely available and clang-tidy is working in the Docker container.",
+      "parentUuid": "e6128e8e_ec135159",
+      "revId": "9c2e471deca89a56874a74b081c138b61a414c39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
