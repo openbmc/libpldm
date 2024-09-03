@@ -2460,9 +2460,10 @@ int decode_pldm_entity_auxiliary_names_pdr_index(
  *  @param[in] cper_event_length - the length of cper event
  *  @return error code
  */
-int decode_pldm_platform_cper_event_data(
-	const void *event_data, size_t event_data_length,
-	struct pldm_platform_cper_event *cper_event, size_t cper_event_length);
+int decode_pldm_platform_cper_event(const void *event_data,
+				    size_t event_data_length,
+				    struct pldm_platform_cper_event *cper_event,
+				    size_t cper_event_length);
 
 /** @brief Helper function to response CPER event event data
  *
