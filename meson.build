@@ -16,7 +16,7 @@ project(
 )
 
 if get_option('tests')
-    add_languages('cpp')
+    add_languages('cpp', native: false)
 endif
 
 # For memmem() in src/msgbuf.h
