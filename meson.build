@@ -12,7 +12,7 @@ project(
         'tests': not meson.is_subproject(),
     },
     version: '0.11.0',
-    meson_version: '>=1.3.0',
+    meson_version: '>=1.4.0',
 )
 
 if get_option('tests')
@@ -67,7 +67,7 @@ endif
 
 config = configure_file(output: 'config.h', configuration: conf)
 
-add_project_arguments('-include', '@0@'.format(config), language: 'c')
+add_project_arguments('-include', config.full_path(), language: 'c')
 
 libpldm_include_dir = include_directories('include', is_system: true)
 
