@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e1af70_d260c6ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-04T06:04:02Z",
+      "side": 1,
+      "message": "Can you unpack that a bit more? It\u0027s not clear whether you don\u0027t have comments because the change seems irrelevant, or because it was well justified. If it\u0027s not obviously relevant then I have some work to do describing the motivation, but if it\u0027s well-justified then I don\u0027t need to do anything further 😊",
+      "parentUuid": "11158430_253947bc",
+      "revId": "ce520440ba6447616aa21d0fd092e2cce3863e48",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8764c6e7_6ec3d1a4",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-04T01:16:29Z",
       "side": 1,
       "message": "Please update these lines for more meaning.",
+      "revId": "ce520440ba6447616aa21d0fd092e2cce3863e48",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f7963f5_d2c56b8c",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-04T06:04:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8764c6e7_6ec3d1a4",
       "revId": "ce520440ba6447616aa21d0fd092e2cce3863e48",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
