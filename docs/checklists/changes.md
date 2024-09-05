@@ -243,23 +243,3 @@ actions:
 
 - [ ] I've updated the ABI dump to capture the rename, or will mark the change
       as WIP until it has been.
-
-## Testing my changes
-
-Each of the following must succeed when executed in order. Note that to avoid
-[googletest bug #4232][googletest-issue-4232] you must avoid using GCC 12
-(shipped in Debian Bookworm).
-
-[googletest-issue-4232]: https://github.com/google/googletest/issues/4232
-
-- [ ] `meson setup -Dabi-compliance-check=disabled build`
-- [ ] `meson compile -C build && meson test -C build`
-
-- [ ] `meson configure --buildtype=release build`
-- [ ] `meson compile -C build && meson test -C build`
-
-- [ ] `meson configure --buildtype=debug build`
-- [ ] `meson configure -Dabi=deprecated,stable build`
-- [ ] `meson compile -C build && meson test -C build`
-
-This process is captured in `scripts/pre-submit` for automation.
