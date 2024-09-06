@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "921968e7_a1280210",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-06T16:55:09Z",
+      "side": 1,
+      "message": "Hi Lora, I\u0027ve reworked the tests and code a bit to align with some new thoughts I have on removing all use of `reinterpret_cast\u003c\u003e()`. I\u0027ll do a follow-up review of the actual functionality soon.",
+      "revId": "1ac89c0cc4173802e0c1f2102c96ec3a0a8c8e4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
