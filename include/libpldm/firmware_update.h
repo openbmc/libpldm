@@ -568,6 +568,7 @@ struct pldm_downstream_device {
 	uint16_t downstream_device_index;
 	uint8_t downstream_descriptor_count;
 };
+#define PLDM_DOWNSTREAM_DEVICE_BYTES 3
 
 /** @struct pldm_query_downstream_firmware_param_req
  *
