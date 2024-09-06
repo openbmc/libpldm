@@ -510,7 +510,7 @@ struct pldm_query_downstream_devices_resp {
 	uint16_t number_of_downstream_devices;
 	uint16_t max_number_of_downstream_devices;
 	bitfield32_t capabilities;
-};
+} __attribute__((packed));
 
 /** @struct pldm_component_parameter_entry
  *
@@ -540,7 +540,7 @@ struct pldm_component_parameter_entry {
 struct pldm_query_downstream_identifiers_req {
 	uint32_t data_transfer_handle;
 	uint8_t transfer_operation_flag;
-};
+} __attribute__((packed));
 
 /** @struct pldm_query_downstream_identifiers_resp
  *
@@ -557,7 +557,7 @@ struct pldm_query_downstream_identifiers_resp {
 	uint8_t transfer_flag;
 	uint32_t downstream_devices_length;
 	uint16_t number_of_downstream_devices;
-};
+} __attribute__((packed));
 
 /** @struct pldm_downstream_device
  *
@@ -567,7 +567,7 @@ struct pldm_query_downstream_identifiers_resp {
 struct pldm_downstream_device {
 	uint16_t downstream_device_index;
 	uint8_t downstream_descriptor_count;
-};
+} __attribute__((packed));
 
 /** @struct pldm_query_downstream_firmware_param_req
  *
@@ -576,7 +576,7 @@ struct pldm_downstream_device {
 struct pldm_get_downstream_firmware_params_req {
 	uint32_t data_transfer_handle;
 	uint8_t transfer_operation_flag;
-};
+} __attribute__((packed));
 
 /** @struct pldm_query_downstream_firmware_param_resp
  *
@@ -594,7 +594,7 @@ struct pldm_get_downstream_firmware_params_resp {
 	uint8_t transfer_flag;
 	bitfield32_t fdp_capabilities_during_update;
 	uint16_t downstream_device_count;
-};
+} __attribute__((packed));
 
 /** @struct pldm_downstream_device_parameter_entry
  *
@@ -626,7 +626,7 @@ struct pldm_downstream_device_parameter_entry {
 	bitfield32_t capabilities_during_update;
 	const char *active_comp_ver_str;
 	const char *pending_comp_ver_str;
-};
+} __attribute__((packed));
 
 /** @struct pldm_downstream_device_parameter_entry_versions
  *
@@ -646,7 +646,7 @@ struct pldm_downstream_device_parameter_entry_versions {
 	 */
 	char active_comp_ver_str[UINT8_MAX + 1];
 	char pending_comp_ver_str[UINT8_MAX + 1];
-};
+} __attribute__((packed));
 
 /** @struct pldm_request_update_req
  *
