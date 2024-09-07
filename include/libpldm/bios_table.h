@@ -350,9 +350,6 @@ int pldm_bios_table_attr_entry_string_encode_check(
 int pldm_bios_table_attr_entry_string_decode_def_string_length(
 	const struct pldm_bios_attr_table_entry *entry,
 	uint16_t *def_string_length);
-int pldm_bios_table_attr_entry_string_decode_def_string_length_check(
-	const struct pldm_bios_attr_table_entry *entry,
-	uint16_t *def_string_length);
 
 /** @brief Get the type of string of bios attribute table entry
  *  @param[in] entry - Pointer to bios attribute table entry
