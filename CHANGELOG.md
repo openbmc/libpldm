@@ -15,6 +15,12 @@ Change categories:
 - Fixed
 - Security
 
+## [Unreleased]
+
+### Removed
+
+1. `pldm_bios_table_append_pad_checksum_check()`
+
 ## [0.9.1] - 2024-09-07
 
 ### Changed

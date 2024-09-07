@@ -37,10 +37,6 @@ if get_option('abi').contains('deprecated')
     libpldm_deprecated_aliases += [
         ['get_fru_record_by_option_check', 'get_fru_record_by_option'],
         [
-            'pldm_bios_table_append_pad_checksum_check',
-            'pldm_bios_table_append_pad_checksum',
-        ],
-        [
             'pldm_bios_table_attr_entry_enum_decode_def_num_check',
             'pldm_bios_table_attr_entry_enum_decode_def_num',
         ],

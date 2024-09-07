@@ -643,8 +643,6 @@ size_t pldm_bios_table_pad_checksum_size(size_t size_without_pad);
  */
 int pldm_bios_table_append_pad_checksum(void *table, size_t capacity,
 					size_t *size);
-int pldm_bios_table_append_pad_checksum_check(void *table, size_t capacity,
-					      size_t *size);
 
 /** @brief Build a new table and update an entry
  *  @param[in] src_table - Pointer to the source table

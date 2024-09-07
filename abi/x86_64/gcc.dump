@@ -1598,7 +1598,7 @@ $VAR1 = {
     },
     '17310' => {
       'Header' => 'bios_table.h',
-      'Line' => '670',
+      'Line' => '668',
       'Param' => {
         '0' => {
           'name' => 'table',
@@ -1618,7 +1618,7 @@ $VAR1 = {
     },
     '17455' => {
       'Header' => 'bios_table.h',
-      'Line' => '661',
+      'Line' => '659',
       'Param' => {
         '0' => {
           'name' => 'src_table',
@@ -9497,7 +9497,6 @@ $VAR1 = {
       'is_transfer_flag_valid' => 1,
       'pack_pldm_header' => 1,
       'pldm_bios_table_append_pad_checksum' => 1,
-      'pldm_bios_table_append_pad_checksum_check' => 1,
       'pldm_bios_table_attr_entry_decode_attribute_handle' => 1,
       'pldm_bios_table_attr_entry_decode_attribute_type' => 1,
       'pldm_bios_table_attr_entry_decode_string_handle' => 1,
