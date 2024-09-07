@@ -20,7 +20,7 @@ meson test -C "$BUILD"
 # and incorrect test case implementations.
 meson configure --buildtype=release "$BUILD"
 meson compile -C "$BUILD"
-meson test -C "$BUILD"
+meson test -C "$BUILD" --timeout-multiplier 10 --wrapper 'valgrind --error-exitcode=1'
 
 # Ensure the test suite links when testing symbols are removed from the ABI
 meson configure --buildtype=debug "$BUILD"
