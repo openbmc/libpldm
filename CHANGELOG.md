@@ -23,6 +23,7 @@ Change categories:
 
    - `pldm_bios_table_append_pad_checksum_check()`
    - `pldm_bios_table_attr_entry_enum_decode_def_num_check()`
+   - `pldm_bios_table_attr_entry_enum_decode_pv_hdls_check()`
 
 ## [0.9.1] - 2024-09-07
 

@@ -282,9 +282,6 @@ int pldm_bios_table_attr_entry_enum_decode_def_num(
 int pldm_bios_table_attr_entry_enum_decode_pv_hdls(
 	const struct pldm_bios_attr_table_entry *entry, uint16_t *pv_hdls,
 	uint8_t pv_num);
-int pldm_bios_table_attr_entry_enum_decode_pv_hdls_check(
-	const struct pldm_bios_attr_table_entry *entry, uint16_t *pv_hdls,
-	uint8_t pv_num);
 
 /** @brief Get Indices of default values
  *  @param[in] entry - Pointer to bios attribute table entry
