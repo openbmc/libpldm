@@ -538,9 +538,6 @@ void pldm_bios_table_attr_value_entry_string_decode_string(
 int pldm_bios_table_attr_value_entry_encode_string(
 	void *entry, size_t entry_length, uint16_t attr_handle,
 	uint8_t attr_type, uint16_t str_length, const char *string);
-int pldm_bios_table_attr_value_entry_encode_string_check(
-	void *entry, size_t entry_length, uint16_t attr_handle,
-	uint8_t attr_type, uint16_t str_length, const char *string);
 
 /** @brief Get length that an attribute value entry(type: integer) will take
  *  @return The length that an entry(type: integer) will take

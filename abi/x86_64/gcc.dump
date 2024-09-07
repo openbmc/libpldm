@@ -1598,7 +1598,7 @@ $VAR1 = {
     },
     '17310' => {
       'Header' => 'bios_table.h',
-      'Line' => '641',
+      'Line' => '638',
       'Param' => {
         '0' => {
           'name' => 'table',
@@ -1618,7 +1618,7 @@ $VAR1 = {
     },
     '17455' => {
       'Header' => 'bios_table.h',
-      'Line' => '632',
+      'Line' => '629',
       'Param' => {
         '0' => {
           'name' => 'src_table',
@@ -1654,7 +1654,7 @@ $VAR1 = {
     },
     '18143' => {
       'Header' => 'bios_table.h',
-      'Line' => '598',
+      'Line' => '595',
       'Param' => {
         '0' => {
           'name' => 'table',
@@ -1847,7 +1847,7 @@ $VAR1 = {
     },
     '20633' => {
       'Header' => 'bios_table.h',
-      'Line' => '617',
+      'Line' => '614',
       'Param' => {
         '0' => {
           'name' => 'table',
@@ -1872,7 +1872,7 @@ $VAR1 = {
     },
     '20933' => {
       'Header' => 'bios_table.h',
-      'Line' => '605',
+      'Line' => '602',
       'Param' => {
         '0' => {
           'name' => 'size_without_pad',
@@ -1884,7 +1884,7 @@ $VAR1 = {
     },
     '21288' => {
       'Header' => 'bios_table.h',
-      'Line' => '580',
+      'Line' => '577',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -1899,7 +1899,7 @@ $VAR1 = {
     },
     '21337' => {
       'Header' => 'bios_table.h',
-      'Line' => '587',
+      'Line' => '584',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -1911,7 +1911,7 @@ $VAR1 = {
     },
     '21821' => {
       'Header' => 'bios_table.h',
-      'Line' => '554',
+      'Line' => '551',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -1926,7 +1926,7 @@ $VAR1 = {
     },
     '21961' => {
       'Header' => 'bios_table.h',
-      'Line' => '570',
+      'Line' => '567',
       'Param' => {
         '0' => {
           'name' => 'entry',
@@ -1961,7 +1961,7 @@ $VAR1 = {
     },
     '22230' => {
       'Header' => 'bios_table.h',
-      'Line' => '548',
+      'Line' => '545',
       'Return' => '1145',
       'ShortName' => 'pldm_bios_table_attr_value_entry_encode_integer_length'
     },
@@ -9529,7 +9529,6 @@ $VAR1 = {
       'pldm_bios_table_attr_value_entry_encode_integer' => 1,
       'pldm_bios_table_attr_value_entry_encode_integer_length' => 1,
       'pldm_bios_table_attr_value_entry_encode_string' => 1,
-      'pldm_bios_table_attr_value_entry_encode_string_check' => 1,
       'pldm_bios_table_attr_value_entry_encode_string_length' => 1,
       'pldm_bios_table_attr_value_entry_enum_decode_handles' => 1,
       'pldm_bios_table_attr_value_entry_enum_decode_number' => 1,
