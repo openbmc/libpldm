@@ -252,8 +252,6 @@ int pldm_bios_table_attr_entry_enum_encode_check(
  */
 int pldm_bios_table_attr_entry_enum_decode_pv_num(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *pv_num);
-int pldm_bios_table_attr_entry_enum_decode_pv_num_check(
-	const struct pldm_bios_attr_table_entry *entry, uint8_t *pv_num);
 
 /** @brief Get the total number of default values for the entry and check the
  * validity of the parameters
@@ -274,9 +272,9 @@ int pldm_bios_table_attr_entry_enum_decode_def_num(
  * store
  *  @return PLDM_SUCCESS on success, otherwise PLDM_ERROR_INVALID_DATA if entry or pv_hdls are NULL,
  *          or entry is not of type PLDM_BIOS_ENUMERATION. An appropriate value for pv_num can be
- *          determined using @ref pldm_bios_table_attr_entry_enum_decode_pv_num_check. pv_num may be
+ *          determined using @ref pldm_bios_table_attr_entry_enum_decode_pv_num. pv_num may be
  *          less than the value provided by @ref
- *          pldm_bios_table_attr_entry_enum_decode_pv_num_check, in which case only the first pv_num
+ *          pldm_bios_table_attr_entry_enum_decode_pv_num, in which case only the first pv_num
  *          handles will be decoded.
  */
 int pldm_bios_table_attr_entry_enum_decode_pv_hdls(
