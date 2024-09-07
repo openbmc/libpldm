@@ -572,11 +572,6 @@ int pldm_bios_table_attr_value_entry_encode_integer(void *entry,
 						    uint16_t attr_handle,
 						    uint8_t attr_type,
 						    uint64_t cv);
-int pldm_bios_table_attr_value_entry_encode_integer_check(void *entry,
-							  size_t entry_length,
-							  uint16_t attr_handle,
-							  uint8_t attr_type,
-							  uint64_t cv);
 
 /** @brief Get the handle from the attribute value entry
  *  @param[in] entry - Pointer to bios attribute value entry
