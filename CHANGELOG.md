@@ -36,6 +36,7 @@ Change categories:
    - `pldm_bios_table_string_entry_encode_check()`
    - `pldm_entity_association_pdr_add_check()`
    - `pldm_entity_association_pdr_add_from_node_check()`
+   - `pldm_pdr_add_check()`
 
 ## [0.9.1] - 2024-09-07
 

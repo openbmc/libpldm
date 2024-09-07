@@ -635,20 +635,20 @@ TEST(PDRAccess, testGetTerminusHandle)
 
     hdr.type = 1;
     uint16_t firstTerminusHandle = 1;
-    EXPECT_EQ(pldm_pdr_add_check(repo, reinterpret_cast<const uint8_t*>(&hdr),
-                                 sizeof(hdr), false, firstTerminusHandle, NULL),
+    EXPECT_EQ(pldm_pdr_add(repo, reinterpret_cast<const uint8_t*>(&hdr),
+                           sizeof(hdr), false, firstTerminusHandle, NULL),
               0);
 
     hdr.type = 2;
     uint16_t secondTerminusHandle = 2;
-    EXPECT_EQ(pldm_pdr_add_check(repo, reinterpret_cast<const uint8_t*>(&hdr),
-                                 sizeof(hdr), true, secondTerminusHandle, NULL),
+    EXPECT_EQ(pldm_pdr_add(repo, reinterpret_cast<const uint8_t*>(&hdr),
+                           sizeof(hdr), true, secondTerminusHandle, NULL),
               0);
 
     hdr.type = 3;
     uint16_t thirdTerminusHandle = 3;
-    EXPECT_EQ(pldm_pdr_add_check(repo, reinterpret_cast<const uint8_t*>(&hdr),
-                                 sizeof(hdr), true, thirdTerminusHandle, NULL),
+    EXPECT_EQ(pldm_pdr_add(repo, reinterpret_cast<const uint8_t*>(&hdr),
+                           sizeof(hdr), true, thirdTerminusHandle, NULL),
               0);
 
     uint8_t* outData = nullptr;
