@@ -137,9 +137,6 @@ uint16_t pldm_bios_table_string_entry_decode_string_length(
 int pldm_bios_table_string_entry_decode_string(
 	const struct pldm_bios_string_table_entry *entry, char *buffer,
 	size_t size);
-int pldm_bios_table_string_entry_decode_string_check(
-	const struct pldm_bios_string_table_entry *entry, char *buffer,
-	size_t size);
 
 /** @brief Find an entry in bios string table by string
  *  @param[in] table - The BIOS String Table
