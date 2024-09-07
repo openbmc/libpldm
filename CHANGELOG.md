@@ -15,7 +15,15 @@ Change categories:
 - Fixed
 - Security
 
-## [Unreleased]
+## [0.9.1] - 2024-09-07
+
+### Changed
+
+1. Moved evolutions intended for v0.9.0 into place
+
+   Evolutions for the release have been moved from `evolutions/current` to
+   `evolutions/v0.9.1`. Library users can apply them to migrate off of
+   deprecated APIs.
 
 ## [0.9.0] - 2024-09-07
 
