@@ -104,9 +104,6 @@ size_t pldm_bios_table_string_entry_encode_length(uint16_t string_length);
  */
 int pldm_bios_table_string_entry_encode(void *entry, size_t entry_length,
 					const char *str, uint16_t str_length);
-int pldm_bios_table_string_entry_encode_check(void *entry, size_t entry_length,
-					      const char *str,
-					      uint16_t str_length);
 
 /** @brief Get the string handle for the entry
  *  @param[in] entry - Pointer to a bios string table entry
