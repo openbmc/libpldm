@@ -37,10 +37,6 @@ if get_option('abi').contains('deprecated')
     libpldm_deprecated_aliases += [
         ['get_fru_record_by_option_check', 'get_fru_record_by_option'],
         [
-            'pldm_entity_association_pdr_add_check',
-            'pldm_entity_association_pdr_add',
-        ],
-        [
             'pldm_entity_association_pdr_add_from_node_check',
             'pldm_entity_association_pdr_add_from_node',
         ],

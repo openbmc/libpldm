@@ -459,9 +459,6 @@ bool pldm_entity_is_exist_parent(pldm_entity_node *node);
 int pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
 				    pldm_pdr *repo, bool is_remote,
 				    uint16_t terminus_handle);
-int pldm_entity_association_pdr_add_check(pldm_entity_association_tree *tree,
-					  pldm_pdr *repo, bool is_remote,
-					  uint16_t terminus_handle);
 
 /** @brief Add a contained entity as a remote PDR to an existing entity association PDR.
  *
