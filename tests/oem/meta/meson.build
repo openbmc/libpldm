@@ -1,3 +1,1 @@
-tests += [
-  'oem/meta/fileio',
-]
+tests += ['oem/meta/fileio']
