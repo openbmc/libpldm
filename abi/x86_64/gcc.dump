@@ -4358,7 +4358,7 @@ $VAR1 = {
     },
     '76846' => {
       'Header' => 'pdr.h',
-      'Line' => '636',
+      'Line' => '633',
       'Param' => {
         '0' => {
           'name' => 'pdr',
@@ -4386,7 +4386,7 @@ $VAR1 = {
     },
     '77174' => {
       'Header' => 'pdr.h',
-      'Line' => '624',
+      'Line' => '621',
       'Param' => {
         '0' => {
           'name' => 'tree',
@@ -4401,7 +4401,7 @@ $VAR1 = {
     },
     '77228' => {
       'Header' => 'pdr.h',
-      'Line' => '614',
+      'Line' => '611',
       'Param' => {
         '0' => {
           'name' => 'tree',
@@ -4416,7 +4416,7 @@ $VAR1 = {
     },
     '77291' => {
       'Header' => 'pdr.h',
-      'Line' => '604',
+      'Line' => '601',
       'Param' => {
         '0' => {
           'name' => 'org_tree',
@@ -4432,7 +4432,7 @@ $VAR1 = {
     },
     '77675' => {
       'Header' => 'pdr.h',
-      'Line' => '578',
+      'Line' => '575',
       'Param' => {
         '0' => {
           'name' => 'tree',
@@ -4448,7 +4448,7 @@ $VAR1 = {
     },
     '77955' => {
       'Header' => 'pdr.h',
-      'Line' => '592',
+      'Line' => '589',
       'Param' => {
         '0' => {
           'name' => 'tree',
@@ -4527,7 +4527,7 @@ $VAR1 = {
     },
     '78980' => {
       'Header' => 'pdr.h',
-      'Line' => '539',
+      'Line' => '536',
       'Param' => {
         '0' => {
           'name' => 'tree',
@@ -4547,7 +4547,7 @@ $VAR1 = {
     },
     '79267' => {
       'Header' => 'pdr.h',
-      'Line' => '528',
+      'Line' => '525',
       'Param' => {
         '0' => {
           'name' => 'node',
@@ -4648,7 +4648,7 @@ $VAR1 = {
     },
     '81241' => {
       'Header' => 'pdr.h',
-      'Line' => '565',
+      'Line' => '562',
       'Param' => {
         '0' => {
           'name' => 'parent',
@@ -4668,7 +4668,7 @@ $VAR1 = {
     },
     '81330' => {
       'Header' => 'pdr.h',
-      'Line' => '551',
+      'Line' => '548',
       'Param' => {
         '0' => {
           'name' => 'node',
@@ -9554,7 +9554,6 @@ $VAR1 = {
       'pldm_close' => 1,
       'pldm_entity_association_pdr_add' => 1,
       'pldm_entity_association_pdr_add_from_node' => 1,
-      'pldm_entity_association_pdr_add_from_node_check' => 1,
       'pldm_entity_association_pdr_add_from_node_with_record_handle' => 1,
       'pldm_entity_association_pdr_extract' => 1,
       'pldm_entity_association_tree_add' => 1,

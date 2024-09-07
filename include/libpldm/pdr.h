@@ -508,9 +508,6 @@ int pldm_entity_association_pdr_create_new(pldm_pdr *repo,
 int pldm_entity_association_pdr_add_from_node(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
 	size_t num_entities, bool is_remote, uint16_t terminus_handle);
-int pldm_entity_association_pdr_add_from_node_check(
-	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
-	size_t num_entities, bool is_remote, uint16_t terminus_handle);
 
 /** @brief Add entity association pdr record based on record handle
  *  earlier the records where added in a sequential way alone, with
