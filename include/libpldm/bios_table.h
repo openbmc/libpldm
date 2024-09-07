@@ -336,9 +336,6 @@ size_t pldm_bios_table_attr_entry_string_encode_length(uint16_t def_str_len);
 int pldm_bios_table_attr_entry_string_encode(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_string_info *info);
-int pldm_bios_table_attr_entry_string_encode_check(
-	void *entry, size_t entry_length,
-	const struct pldm_bios_table_attr_entry_string_info *info);
 
 /** @brief Get the length of default string in bytes for the entry and check the
  * validity of the parameters

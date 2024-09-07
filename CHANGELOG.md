@@ -28,6 +28,7 @@ Change categories:
    - `pldm_bios_table_attr_entry_enum_encode_check()`
    - `pldm_bios_table_attr_entry_integer_encode_check()`
    - `pldm_bios_table_attr_entry_string_decode_def_string_length_check()`
+   - `pldm_bios_table_attr_entry_string_encode_check()`
 
 ## [0.9.1] - 2024-09-07
 
