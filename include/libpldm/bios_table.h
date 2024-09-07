@@ -205,7 +205,7 @@ pldm_bios_table_attr_find_by_string_handle(const void *table, size_t length,
 /** @struct pldm_bios_table_attr_entry_enum_info
  *
  *  An auxiliary structure for passing parameters to @ref
- * pldm_bios_table_attr_entry_enum_encode_check
+ * pldm_bios_table_attr_entry_enum_encode
  *
  */
 struct pldm_bios_table_attr_entry_enum_info {
@@ -237,9 +237,6 @@ size_t pldm_bios_table_attr_entry_enum_encode_length(uint8_t pv_num,
  *          pldm_bios_table_attr_entry_enum_encode_length.
  */
 int pldm_bios_table_attr_entry_enum_encode(
-	void *entry, size_t entry_length,
-	const struct pldm_bios_table_attr_entry_enum_info *info);
-int pldm_bios_table_attr_entry_enum_encode_check(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_enum_info *info);
 
