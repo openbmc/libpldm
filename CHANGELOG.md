@@ -17,6 +17,8 @@ Change categories:
 
 ## [Unreleased]
 
+## [0.9.0] - 2024-09-07
+
 ### Added
 
 1. base: Define macros for reserved TIDs
