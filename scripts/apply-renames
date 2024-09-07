@@ -11,7 +11,7 @@ ABSPATH="$(command -v "$0" | xargs realpath)"
 : "${LIBPLDM_ROOT:="${ABSPATH%scripts/apply-renames}"}"
 
 # Deal with clang including its version in all the tool names
-: "${CLANG_VERSION:=17}"
+: "${CLANG_VERSION:=18}"
 : "${CLANG_RENAME:="$(command -v clang-rename-"${CLANG_VERSION}")"}"
 : "${CLANG_APPLY_REPLACEMENTS:="$(command -v clang-apply-replacements-"${CLANG_VERSION}")"}"
 
