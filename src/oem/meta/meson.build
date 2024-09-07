@@ -1,3 +1,1 @@
-libpldm_sources += files(
-    'file_io.c'
-  )
+libpldm_sources += files('file_io.c')
