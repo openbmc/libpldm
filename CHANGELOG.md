@@ -19,7 +19,10 @@ Change categories:
 
 ### Removed
 
-1. `pldm_bios_table_append_pad_checksum_check()`
+1. Deprecated functions with the `_check` suffix
+
+   - `pldm_bios_table_append_pad_checksum_check()`
+   - `pldm_bios_table_attr_entry_enum_decode_def_num_check()`
 
 ## [0.9.1] - 2024-09-07
 

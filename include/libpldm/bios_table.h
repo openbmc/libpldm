@@ -264,8 +264,6 @@ int pldm_bios_table_attr_entry_enum_decode_pv_num_check(
  */
 int pldm_bios_table_attr_entry_enum_decode_def_num(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *def_num);
-int pldm_bios_table_attr_entry_enum_decode_def_num_check(
-	const struct pldm_bios_attr_table_entry *entry, uint8_t *def_num);
 
 /** @brief Get possible values string handles and check the validity of the
  * parameters
