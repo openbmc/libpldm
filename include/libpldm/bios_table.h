@@ -430,9 +430,6 @@ size_t pldm_bios_table_attr_entry_integer_encode_length(void);
 int pldm_bios_table_attr_entry_integer_encode(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_integer_info *info);
-int pldm_bios_table_attr_entry_integer_encode_check(
-	void *entry, size_t entry_length,
-	const struct pldm_bios_table_attr_entry_integer_info *info);
 
 /** @brief Decode the specific fields(integer) of attribute table entry
  *  @param[in] entry - Pointer to an entry of attribute table
