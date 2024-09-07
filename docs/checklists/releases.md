@@ -8,6 +8,7 @@
   - This must be done from a shell session inside the OpenBMC CI Docker
     container for consistency
 
+- [ ] Rename the directory for unreleased evolutions
 - [ ] Commit the changes above with the subject `libpldm: Release <version>`
 - [ ] Push the release commit for review in Gerrit
 - [ ] Submit the release commit once approved
