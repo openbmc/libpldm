@@ -21,6 +21,7 @@ TEST(SetStateEffecterStates, testEncodeResponse)
     std::array<uint8_t,
                sizeof(pldm_msg_hdr) + PLDM_SET_STATE_EFFECTER_STATES_RESP_BYTES>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t completionCode = 0;
 
@@ -35,6 +36,7 @@ TEST(SetStateEffecterStates, testEncodeRequest)
     std::array<uint8_t,
                sizeof(pldm_msg_hdr) + PLDM_SET_STATE_EFFECTER_STATES_REQ_BYTES>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     uint16_t effecterId = 0x0a;
@@ -72,6 +74,7 @@ TEST(SetStateEffecterStates, testGoodDecodeResponse)
 
     responseMsg[hdrSize] = PLDM_SUCCESS;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_set_state_effecter_states_resp(
@@ -106,6 +109,7 @@ TEST(SetStateEffecterStates, testGoodDecodeRequest)
                hdrSize,
            &stateField, sizeof(stateField));
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = decode_set_state_effecter_states_req(
@@ -136,6 +140,7 @@ TEST(SetStateEffecterStates, testBadDecodeResponse)
     std::array<uint8_t, PLDM_SET_STATE_EFFECTER_STATES_RESP_BYTES>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_set_state_effecter_states_resp(response,
@@ -157,6 +162,7 @@ TEST(GetPDR, testGoodEncodeResponse)
     // + size of record data and transfer CRC
     std::vector<uint8_t> responseMsg(hdrSize + PLDM_GET_PDR_MIN_RESP_BYTES +
                                      recordData.size() + 1);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_get_pdr_resp(0, PLDM_SUCCESS, nextRecordHndl,
@@ -165,6 +171,7 @@ TEST(GetPDR, testGoodEncodeResponse)
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
     struct pldm_get_pdr_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_pdr_resp*>(response->payload);
 
     EXPECT_EQ(completionCode, resp->completion_code);
@@ -218,8 +225,10 @@ TEST(GetPDR, testGoodDecodeRequest)
     uint16_t retRequestCnt = 0;
     uint16_t retRecordChangeNum = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_pdr_req* request =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_pdr_req*>(req->payload);
 
     request->record_handle = htole32(recordHndl);
@@ -243,6 +252,7 @@ TEST(GetPDR, testGoodDecodeRequest)
 TEST(GetPDR, testBadDecodeRequest)
 {
     std::array<uint8_t, PLDM_GET_PDR_REQ_BYTES> requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = decode_get_pdr_req(req, requestMsg.size(), NULL, NULL, NULL, NULL,
@@ -260,6 +270,7 @@ TEST(GetPDR, testGoodEncodeRequest)
     uint16_t record_chg_num = 0;
 
     std::vector<uint8_t> requestMsg(hdrSize + PLDM_GET_PDR_REQ_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_get_pdr_req(0, record_hndl, data_transfer_hndl,
@@ -267,6 +278,7 @@ TEST(GetPDR, testGoodEncodeRequest)
                                  request, PLDM_GET_PDR_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     struct pldm_get_pdr_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_pdr_req*>(request->payload);
     EXPECT_EQ(record_hndl, le32toh(req->record_handle));
     EXPECT_EQ(data_transfer_hndl, le32toh(req->data_transfer_handle));
@@ -284,6 +296,7 @@ TEST(GetPDR, testBadEncodeRequest)
     uint16_t record_chg_num = 0;
 
     std::vector<uint8_t> requestMsg(hdrSize + PLDM_GET_PDR_REQ_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_get_pdr_req(0, record_hndl, data_transfer_hndl,
@@ -319,8 +332,10 @@ TEST(GetPDR, testGoodDecodeResponse)
     uint16_t retRespCnt = 0;
     uint8_t retTransferCRC = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_pdr_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_pdr_resp*>(response->payload);
     resp->completion_code = completionCode;
     resp->next_record_handle = htole32(nextRecordHndl);
@@ -366,8 +381,10 @@ TEST(GetPDR, testBadDecodeResponse)
     uint16_t retRespCnt = 0;
     uint8_t retTransferCRC = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_pdr_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_pdr_resp*>(response->payload);
     resp->completion_code = completionCode;
     resp->next_record_handle = htole32(nextRecordHndl);
@@ -476,6 +493,7 @@ TEST(GetPDRRepositoryInfo, testGoodEncodeResponse)
 
     std::vector<uint8_t> responseMsg(hdrSize +
                                      PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_get_pdr_repository_info_resp(
@@ -485,6 +503,7 @@ TEST(GetPDRRepositoryInfo, testGoodEncodeResponse)
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
     struct pldm_pdr_repository_info_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_pdr_repository_info_resp*>(
             response->payload);
 
@@ -529,8 +548,10 @@ TEST(GetPDRRepositoryInfo, testGoodDecodeResponse)
 
     std::array<uint8_t, hdrSize + PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_pdr_repository_info_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_pdr_repository_info_resp*>(
             response->payload);
     resp->completion_code = completionCode;
@@ -582,8 +603,10 @@ TEST(GetPDRRepositoryInfo, testBadDecodeResponse)
 
     std::array<uint8_t, hdrSize + PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_pdr_repository_info_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_pdr_repository_info_resp*>(
             response->payload);
     resp->completion_code = completionCode;
@@ -715,8 +738,10 @@ TEST(SetNumericEffecterValue, testGoodDecodeRequest)
     uint8_t reteffecter_data_size;
     uint8_t reteffecter_value[4];
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_numeric_effecter_value_req* request =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_numeric_effecter_value_req*>(
             req->payload);
 
@@ -730,6 +755,7 @@ TEST(SetNumericEffecterValue, testGoodDecodeRequest)
         req, requestMsg.size() - hdrSize, &reteffecter_id,
         &reteffecter_data_size, reteffecter_value);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     uint32_t value = *(reinterpret_cast<uint32_t*>(reteffecter_value));
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(reteffecter_id, effecter_id);
@@ -754,8 +780,10 @@ TEST(SetNumericEffecterValue, testBadDecodeRequest)
     uint8_t reteffecter_data_size;
     uint8_t reteffecter_value[4];
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_numeric_effecter_value_req* request =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_numeric_effecter_value_req*>(
             req->payload);
 
@@ -765,6 +793,7 @@ TEST(SetNumericEffecterValue, testBadDecodeRequest)
 
     rc = decode_set_numeric_effecter_value_req(
         req, requestMsg.size() - hdrSize - 1, &reteffecter_id,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         &reteffecter_data_size, reinterpret_cast<uint8_t*>(&reteffecter_value));
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
@@ -777,15 +806,18 @@ TEST(SetNumericEffecterValue, testGoodEncodeRequest)
 
     std::vector<uint8_t> requestMsg(
         hdrSize + PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 1);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_numeric_effecter_value_req(
         0, effecter_id, effecter_data_size,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&effecter_value), request,
         PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 1);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_set_numeric_effecter_value_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_numeric_effecter_value_req*>(
             request->payload);
     EXPECT_EQ(effecter_id, req->effecter_id);
@@ -799,6 +831,7 @@ TEST(SetNumericEffecterValue, testBadEncodeRequest)
 {
     std::vector<uint8_t> requestMsg(
         hdrSize + PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_numeric_effecter_value_req(
@@ -807,6 +840,7 @@ TEST(SetNumericEffecterValue, testBadEncodeRequest)
 
     uint16_t effecter_value;
     rc = encode_set_numeric_effecter_value_req(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         0, 0, 6, reinterpret_cast<uint8_t*>(&effecter_value), request,
         PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
@@ -824,6 +858,7 @@ TEST(SetNumericEffecterValue, testGoodDecodeResponse)
     memcpy(responseMsg.data() + hdrSize, &completion_code,
            sizeof(completion_code));
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_set_numeric_effecter_value_resp(
@@ -838,6 +873,7 @@ TEST(SetNumericEffecterValue, testBadDecodeResponse)
     std::array<uint8_t, PLDM_SET_NUMERIC_EFFECTER_VALUE_RESP_BYTES>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_set_numeric_effecter_value_resp(response,
@@ -851,6 +887,7 @@ TEST(SetNumericEffecterValue, testGoodEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) +
                             PLDM_SET_NUMERIC_EFFECTER_VALUE_RESP_BYTES>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t completionCode = 0;
 
@@ -875,6 +912,7 @@ TEST(GetStateSensorReadings, testGoodEncodeResponse)
                             sizeof(get_sensor_state_field) * 2>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t completionCode = 0;
     uint8_t comp_sensorCnt = 0x2;
@@ -889,6 +927,7 @@ TEST(GetStateSensorReadings, testGoodEncodeResponse)
         0, PLDM_SUCCESS, comp_sensorCnt, stateField.data(), response);
 
     struct pldm_get_state_sensor_readings_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_state_sensor_readings_resp*>(
             response->payload);
 
@@ -933,8 +972,10 @@ TEST(GetStateSensorReadings, testGoodDecodeResponse)
     uint8_t retcomp_sensorCnt = 0;
     std::array<get_sensor_state_field, 2> retstateField{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_state_sensor_readings_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_state_sensor_readings_resp*>(
             response->payload);
 
@@ -967,6 +1008,7 @@ TEST(GetStateSensorReadings, testBadDecodeResponse)
                             sizeof(get_sensor_state_field) * 2>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_state_sensor_readings_resp(
@@ -986,6 +1028,7 @@ TEST(GetStateSensorReadings, testBadDecodeResponse)
     std::array<get_sensor_state_field, 1> retstateField{};
 
     struct pldm_get_state_sensor_readings_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_state_sensor_readings_resp*>(
             response->payload);
 
@@ -1010,11 +1053,13 @@ TEST(GetStateSensorReadings, testGoodEncodeRequest)
     bitfield8_t sensorRearm;
     sensorRearm.byte = 0x03;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_get_state_sensor_readings_req(0, sensorId, sensorRearm, 0,
                                                    request);
 
     struct pldm_get_state_sensor_readings_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_state_sensor_readings_req*>(
             request->payload);
 
@@ -1047,9 +1092,11 @@ TEST(GetStateSensorReadings, testGoodDecodeRequest)
     bitfield8_t retsensorRearm;
     uint8_t retreserved;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     struct pldm_get_state_sensor_readings_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_state_sensor_readings_req*>(
             request->payload);
 
@@ -1083,9 +1130,11 @@ TEST(GetStateSensorReadings, testBadDecodeRequest)
     bitfield8_t retsensorRearm;
     uint8_t retreserved;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     struct pldm_get_state_sensor_readings_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_state_sensor_readings_req*>(
             request->payload);
 
@@ -1105,6 +1154,7 @@ TEST(EventMessageBufferSize, testGoodEventMessageBufferSizeRequest)
 
     std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_BUFFER_SIZE_REQ_BYTES>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_event_message_buffer_size_req(0, eventBufferSize, request);
@@ -1123,8 +1173,10 @@ TEST(EventMessageBufferSize, testGoodEventMessageBufferSizeResponse)
     uint8_t retCompletionCode;
     uint16_t retMaxBufferSize = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_event_message_buffer_size_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_event_message_buffer_size_resp*>(
             response->payload);
 
@@ -1151,8 +1203,10 @@ TEST(EventMessageBufferSize, testBadEventMessageBufferSizeResponse)
     uint8_t retCompletionCode;
     uint16_t retMaxBufferSize = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_event_message_buffer_size_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_event_message_buffer_size_resp*>(
             response->payload);
     resp->completion_code = completionCode;
@@ -1174,11 +1228,13 @@ TEST(PlatformEventMessageSupported, testGoodEncodeRequest)
     std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_event_message_supported_req(0, formatVersion, request);
 
     struct pldm_event_message_supported_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_event_message_supported_req*>(
             request->payload);
 
@@ -1194,6 +1250,7 @@ TEST(PlatformEventMessageSupported, testBadEncodeRequest)
     std::array<uint8_t, hdrSize + PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES +
                             sizeof(eventData)>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_event_message_supported_req(0, formatVersion, request);
@@ -1223,8 +1280,10 @@ TEST(PlatformEventMessageSupported, testGoodDecodeRespond)
     bitfield8_t retSynchConfigSupport;
     uint8_t retEventClass[eventClassCount] = {0};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_event_message_supported_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_event_message_supported_resp*>(
             response->payload);
 
@@ -1268,8 +1327,10 @@ TEST(PlatformEventMessageSupported, testBadSynchConfiguration)
     bitfield8_t retSynchConfigSupport;
     uint8_t retEventClass[eventClassCount] = {0};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_event_message_supported_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_event_message_supported_resp*>(
             response->payload);
 
@@ -1307,8 +1368,10 @@ TEST(PlatformEventMessageSupported, testBadDecodeRespond)
     bitfield8_t retSynchConfigSupport;
     uint8_t retEventClass[eventClassCount] = {0};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_event_message_supported_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_event_message_supported_resp*>(
             response->payload);
     resp->completion_code = completionCode;
@@ -1344,6 +1407,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequest)
     std::array<uint8_t,
                hdrSize + PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_poll_for_platform_event_message_req(
@@ -1386,6 +1450,7 @@ TEST(PollForPlatformEventMessage, testBadEncodeRequest)
     std::array<uint8_t,
                hdrSize + PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_poll_for_platform_event_message_req(
@@ -1442,6 +1507,7 @@ TEST(PollForPlatformEventMessage, testGoodDecodeRespond)
     };
     const uint32_t respMsgLen = 23;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t retCompletionCode;
@@ -1486,6 +1552,7 @@ TEST(PollForPlatformEventMessage, testGoodDecodeAckOnlyRespond)
     };
     const uint32_t respMsgLen = 4;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t retCompletionCode;
@@ -1512,6 +1579,7 @@ TEST(PollForPlatformEventMessage, testGoodDecodeAckOnlyRespond)
     eventId = 0x0000;
     responseMsg[5] = 0x00;
     responseMsg[6] = 0x00;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     rc = decode_poll_for_platform_event_message_resp(
@@ -1558,6 +1626,7 @@ TEST(PollForPlatformEventMessage, testBadDecodeRespond)
     };
     // const uint32_t respMsgLen = 23;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_poll_for_platform_event_message_resp(
@@ -1594,6 +1663,7 @@ TEST(PollForPlatformEventMessage, testGoodDecodeRequestFirstPart)
     std::vector<uint8_t> requestMsg{0x1,  0x0,  0x0,  0x1,  PLDM_GET_FIRSTPART,
                                     0x44, 0x33, 0x22, 0x11, 0x00,
                                     0x00};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     uint8_t retFormatVersion;
@@ -1622,6 +1692,7 @@ TEST(PollForPlatformEventMessage, testGoodDecodeRequestNextPart)
     std::vector<uint8_t> requestMsg{0x1,  0x0,  0x0,  0x1,  PLDM_GET_NEXTPART,
                                     0x44, 0x33, 0x22, 0x11, 0xff,
                                     0xff};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     uint8_t retFormatVersion;
@@ -1650,6 +1721,7 @@ TEST(PollForPlatformEventMessage, testGoodDecodeRequestAck)
     std::vector<uint8_t> requestMsg{
         0x1,  0x0,  0x0,  0x1, PLDM_ACKNOWLEDGEMENT_ONLY, 0x44, 0x33,
         0x22, 0x11, 0xff, 0xff};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     uint8_t retFormatVersion;
@@ -1674,6 +1746,7 @@ TEST(PollForPlatformEventMessage, testBadDecodeRequest)
     std::vector<uint8_t> requestMsg{0x1,  0x0,  0x0,  0x1,  PLDM_GET_FIRSTPART,
                                     0x44, 0x33, 0x22, 0x11, 0x66,
                                     0x55};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     uint8_t retFormatVersion;
@@ -1778,6 +1851,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP1)
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_RESP_BYTES + eventDataSize + 4;
 
     std::array<uint8_t, hdrSize + payloadLength> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_poll_for_platform_event_message_resp(
@@ -1839,6 +1913,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP2)
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES;
 
     std::array<uint8_t, hdrSize + payloadLength> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_poll_for_platform_event_message_resp(
@@ -1878,6 +1953,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP3)
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES;
 
     std::array<uint8_t, hdrSize + payloadLength> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_poll_for_platform_event_message_resp(
@@ -1925,6 +2001,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP4)
                             PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_RESP_BYTES +
                             eventDataSize + 4>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_poll_for_platform_event_message_resp(
@@ -1986,6 +2063,7 @@ TEST(PollForPlatformEventMessage, testBadEncodeResponse)
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_RESP_BYTES + eventDataSize + 4;
 
     std::array<uint8_t, hdrSize + payloadLength> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_poll_for_platform_event_message_resp(
@@ -2014,8 +2092,10 @@ TEST(PlatformEventMessage, testGoodStateSensorDecodeRequest)
     uint8_t retEventClass = 0;
     size_t retEventDataOffset = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_platform_event_message_req* request =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_platform_event_message_req*>(req->payload);
 
     uint8_t formatVersion = 0x01;
@@ -2047,6 +2127,7 @@ TEST(PlatformEventMessage, testBadDecodeRequest)
                hdrSize + PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES +
                    PLDM_PLATFORM_EVENT_MESSAGE_STATE_SENSOR_STATE_REQ_BYTES - 1>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     uint8_t retFormatVersion;
     uint8_t retTid = 0;
@@ -2071,6 +2152,7 @@ TEST(PlatformEventMessage, testGoodEncodeResponse)
                hdrSize + PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES +
                    PLDM_PLATFORM_EVENT_MESSAGE_STATE_SENSOR_STATE_REQ_BYTES - 1>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t completionCode = 0;
     uint8_t instanceId = 0x01;
@@ -2101,13 +2183,16 @@ TEST(PlatformEventMessage, testGoodEncodeRequest)
                             sizeof(eventData)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_platform_event_message_req(
         0, formatVersion, Tid, eventClass,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&eventData), sizeof(eventData), request,
         sizeof(eventData) + PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES);
 
     struct pldm_platform_event_message_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_platform_event_message_req*>(
             request->payload);
 
@@ -2131,14 +2216,17 @@ TEST(PlatformEventMessage, testBadEncodeRequest)
     std::array<uint8_t, hdrSize + PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES +
                             sizeof(eventData)>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_platform_event_message_req(
         0, formatVersion, Tid, eventClass,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&eventData), sz_eventData, nullptr,
         payloadLen);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     rc = encode_platform_event_message_req(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         0, 0, Tid, eventClass, reinterpret_cast<uint8_t*>(&eventData),
         sz_eventData, request, payloadLen);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
@@ -2147,6 +2235,7 @@ TEST(PlatformEventMessage, testBadEncodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     rc = encode_platform_event_message_req(
         0, formatVersion, Tid, eventClass,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&eventData), sz_eventData, request, 0);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
@@ -2162,8 +2251,10 @@ TEST(PlatformEventMessage, testGoodDecodeResponse)
     uint8_t retcompletionCode;
     uint8_t retplatformEventStatus;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_platform_event_message_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_platform_event_message_resp*>(
             response->payload);
 
@@ -2187,8 +2278,10 @@ TEST(PlatformEventMessage, testBadDecodeResponse)
     uint8_t completionCode = PLDM_SUCCESS;
     uint8_t platformEventStatus = 0x01;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_platform_event_message_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_platform_event_message_resp*>(
             response->payload);
     resp->completion_code = completionCode;
@@ -2224,6 +2317,7 @@ TEST(PlatformEventMessage, testGoodSensorEventDataDecodeRequest)
     uint8_t retSensorEventClassType;
     size_t sensorOpDataOffset = sizeof(sensorId) + sizeof(sensorEventClassType);
     auto rc = decode_sensor_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventData), eventDataArr.size(),
         &retSensorId, &retSensorEventClassType, &retSensorOpDataOffset);
     EXPECT_EQ(rc, PLDM_SUCCESS);
@@ -2251,6 +2345,7 @@ TEST(PlatformEventMessage, testBadSensorEventDataDecodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     rc = decode_sensor_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventDataArr.data()),
         eventDataArr.size() -
             PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH,
@@ -2260,18 +2355,21 @@ TEST(PlatformEventMessage, testBadSensorEventDataDecodeRequest)
     eventData->sensor_event_class_type = PLDM_SENSOR_OP_STATE;
 
     rc = decode_sensor_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventDataArr.data()), eventDataArr.size(),
         &retSensorId, &retSensorEventClassType, &retSensorOpDataOffset);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 
     eventData->sensor_event_class_type = PLDM_STATE_SENSOR_STATE;
     rc = decode_sensor_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventDataArr.data()), eventDataArr.size(),
         &retSensorId, &retSensorEventClassType, &retSensorOpDataOffset);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 
     eventData->sensor_event_class_type = PLDM_NUMERIC_SENSOR_STATE;
     rc = decode_sensor_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventDataArr.data()),
         eventDataArr.size() + 1, &retSensorId, &retSensorEventClassType,
         &retSensorOpDataOffset);
@@ -2296,6 +2394,7 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataDecodeRequest)
     struct pldm_message_poll_event poll_event = {};
 
     auto rc = decode_pldm_message_poll_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
         &poll_event);
 
@@ -2324,10 +2423,12 @@ TEST(PlatformEventMessage, testBadPldmMsgPollEventDataDecodeRequest)
     EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_message_poll_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(), NULL);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_message_poll_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
         &poll_event);
     EXPECT_EQ(rc, -EOVERFLOW);
@@ -2336,6 +2437,7 @@ TEST(PlatformEventMessage, testBadPldmMsgPollEventDataDecodeRequest)
     eventData[1] = 0x00;
     eventData[2] = 0x00;
     rc = decode_pldm_message_poll_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
         &poll_event);
 
@@ -2345,6 +2447,7 @@ TEST(PlatformEventMessage, testBadPldmMsgPollEventDataDecodeRequest)
     eventData[1] = 0xff;
     eventData[2] = 0xff;
     rc = decode_pldm_message_poll_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
         &poll_event);
 
@@ -2365,6 +2468,7 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
     poll_event.data_transfer_handle = 0x11223344;
 
     int rc = encode_pldm_message_poll_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         &poll_event, reinterpret_cast<uint8_t*>(eventData.data()),
         eventData.size());
 
@@ -2373,9 +2477,10 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
 
-    rc = pldm_msgbuf_init_cc(buf, PLDM_MSG_POLL_EVENT_LENGTH,
-                             reinterpret_cast<uint8_t*>(eventData.data()),
-                             eventData.size());
+    rc = pldm_msgbuf_init_cc(
+        buf, PLDM_MSG_POLL_EVENT_LENGTH,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<uint8_t*>(eventData.data()), eventData.size());
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     uint8_t retFormatVersion;
@@ -2412,12 +2517,14 @@ TEST(PlatformEventMessage, testBadPldmMsgPollEventDataEncode)
 
     poll_event.event_id = 0x0000;
     rc = encode_pldm_message_poll_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         &poll_event, reinterpret_cast<uint8_t*>(eventData.data()),
         eventData.size());
     EXPECT_EQ(rc, -EPROTO);
 
     poll_event.event_id = 0xffff;
     rc = encode_pldm_message_poll_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         &poll_event, reinterpret_cast<uint8_t*>(eventData.data()),
         eventData.size());
     EXPECT_EQ(rc, -EPROTO);
@@ -2438,6 +2545,7 @@ TEST(PlatformEventMessage, testGoodSensorOpEventDataDecodeRequest)
 
     uint8_t retPresentState;
     uint8_t retPreviousState;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto rc = decode_sensor_op_data(reinterpret_cast<uint8_t*>(sensorData),
                                     eventDataArr.size(), &retPresentState,
                                     &retPreviousState);
@@ -2457,11 +2565,13 @@ TEST(PlatformEventMessage, testBadSensorOpEventDataDecodeRequest)
 
     std::array<uint8_t, PLDM_SENSOR_EVENT_SENSOR_OP_STATE_DATA_LENGTH>
         sensorData{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     rc = decode_sensor_op_data(reinterpret_cast<uint8_t*>(sensorData.data()),
                                sensorDataLength + 1, &presentOpState,
                                &previousOpState);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     rc = decode_sensor_op_data(reinterpret_cast<uint8_t*>(sensorData.data()),
                                sensorDataLength, nullptr, &previousOpState);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
@@ -2484,6 +2594,7 @@ TEST(PlatformEventMessage, testGoodSensorStateEventDataDecodeRequest)
     uint8_t retSensorOffset;
     uint8_t retEventState;
     uint8_t retPreviousState;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto rc = decode_state_sensor_data(reinterpret_cast<uint8_t*>(sensorData),
                                        eventDataArr.size(), &retSensorOffset,
                                        &retEventState, &retPreviousState);
@@ -2505,11 +2616,13 @@ TEST(PlatformEventMessage, testBadStateSensorEventDataDecodeRequest)
 
     std::array<uint8_t, PLDM_SENSOR_EVENT_STATE_SENSOR_STATE_DATA_LENGTH>
         sensorData{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     rc = decode_state_sensor_data(reinterpret_cast<uint8_t*>(sensorData.data()),
                                   sensorDataLength - 1, &sensorOffset,
                                   &eventState, &previousEventState);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     rc = decode_state_sensor_data(reinterpret_cast<uint8_t*>(sensorData.data()),
                                   sensorDataLength, &sensorOffset, nullptr,
                                   &previousEventState);
@@ -2544,6 +2657,7 @@ TEST(PlatformEventMessage, testGoodNumericSensorEventDataDecodeRequest)
     uint32_t retPresentReading;
 
     auto rc = decode_numeric_sensor_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(sensorData), sensorDataLength,
         &retEventState, &retPreviousEventState, &retSensorDataSize,
         &retPresentReading);
@@ -2563,6 +2677,7 @@ TEST(PlatformEventMessage, testGoodNumericSensorEventDataDecodeRequest)
     sensorData->sensor_data_size = sensorDataSize;
     sensorDataLength = PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_16BIT_DATA_LENGTH;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     rc = decode_numeric_sensor_data(reinterpret_cast<uint8_t*>(sensorData),
                                     sensorDataLength, &retEventState,
                                     &retPreviousEventState, &retSensorDataSize,
@@ -2590,6 +2705,7 @@ TEST(PlatformEventMessage, testBadNumericSensorEventDataDecodeRequest)
     std::array<uint8_t, PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH>
         sensorData{};
     rc = decode_numeric_sensor_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(sensorData.data()), sensorDataLength - 1,
         &eventState, &previousEventState, &sensorDataSize, &presentReading);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
@@ -2598,12 +2714,14 @@ TEST(PlatformEventMessage, testBadNumericSensorEventDataDecodeRequest)
         (struct pldm_sensor_event_numeric_sensor_state*)sensorData.data();
     numericSensorData->sensor_data_size = PLDM_SENSOR_DATA_SIZE_UINT8;
     rc = decode_numeric_sensor_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(sensorData.data()), sensorDataLength,
         &eventState, &previousEventState, &sensorDataSize, &presentReading);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 
     numericSensorData->sensor_data_size = PLDM_SENSOR_DATA_SIZE_UINT16;
     rc = decode_numeric_sensor_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(sensorData.data()), sensorDataLength,
         &eventState, &previousEventState, &sensorDataSize, &presentReading);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
@@ -2616,11 +2734,13 @@ TEST(GetNumericEffecterValue, testGoodEncodeRequest)
 
     uint16_t effecter_id = 0xab01;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_get_numeric_effecter_value_req(0, effecter_id, request);
 
     struct pldm_get_numeric_effecter_value_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_numeric_effecter_value_req*>(
             request->payload);
 
@@ -2642,8 +2762,10 @@ TEST(GetNumericEffecterValue, testGoodDecodeRequest)
     std::array<uint8_t, hdrSize + PLDM_GET_NUMERIC_EFFECTER_VALUE_REQ_BYTES>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_numeric_effecter_value_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_numeric_effecter_value_req*>(
             request->payload);
 
@@ -2669,8 +2791,10 @@ TEST(GetNumericEffecterValue, testBadDecodeRequest)
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_numeric_effecter_value_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_numeric_effecter_value_req*>(
             request->payload);
 
@@ -2697,15 +2821,19 @@ TEST(GetNumericEffecterValue, testGoodEncodeResponse)
     std::array<uint8_t,
                hdrSize + PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 6>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_get_numeric_effecter_value_resp(
         0, completionCode, effecter_dataSize, effecter_operState,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&pendingValue),
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&presentValue), response,
         responseMsg.size() - hdrSize);
 
     struct pldm_get_numeric_effecter_value_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_numeric_effecter_value_resp*>(
             response->payload);
 
@@ -2728,6 +2856,7 @@ TEST(GetNumericEffecterValue, testBadEncodeResponse)
     std::array<uint8_t,
                hdrSize + PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 2>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t pendingValue = 0x01;
@@ -2739,7 +2868,9 @@ TEST(GetNumericEffecterValue, testBadEncodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     rc = encode_get_numeric_effecter_value_resp(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         0, PLDM_SUCCESS, 6, 9, reinterpret_cast<uint8_t*>(&pendingValue),
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&presentValue), response,
         responseMsg.size() - hdrSize);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
@@ -2749,7 +2880,9 @@ TEST(GetNumericEffecterValue, testBadEncodeResponse)
 
     rc = encode_get_numeric_effecter_value_resp(
         0, PLDM_SUCCESS, effecter_dataSize, effecter_operState,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&pendingValue),
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&presentValue), response,
         responseMsg.size() - hdrSize);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
@@ -2773,8 +2906,10 @@ TEST(GetNumericEffecterValue, testGoodDecodeResponse)
     uint8_t retpendingValue[2];
     uint8_t retpresentValue[2];
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_numeric_effecter_value_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_numeric_effecter_value_resp*>(
             response->payload);
 
@@ -2798,7 +2933,9 @@ TEST(GetNumericEffecterValue, testGoodDecodeResponse)
     EXPECT_EQ(completionCode, retcompletionCode);
     EXPECT_EQ(effecter_dataSize, reteffecter_dataSize);
     EXPECT_EQ(effecter_operState, reteffecter_operState);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     EXPECT_EQ(pendingValue, *(reinterpret_cast<uint16_t*>(retpendingValue)));
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     EXPECT_EQ(presentValue, *(reinterpret_cast<uint16_t*>(retpresentValue)));
 }
 
@@ -2826,8 +2963,10 @@ TEST(GetNumericEffecterValue, testBadDecodeResponse)
     uint8_t retpendingValue[2];
     uint8_t retpresentValue[2];
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_numeric_effecter_value_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_numeric_effecter_value_resp*>(
             response->payload);
 
@@ -2870,11 +3009,13 @@ TEST(PldmPDRRepositoryChgEventEvent, testGoodDecodeRequest)
         eventDataArr{};
 
     struct pldm_pdr_repository_chg_event_data* eventData =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_pdr_repository_chg_event_data*>(
             eventDataArr.data());
     eventData->event_data_format = eventDataFormat;
     eventData->number_of_change_records = numberOfChangeRecords;
     struct pldm_pdr_repository_change_record_data* changeRecord1 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_pdr_repository_change_record_data*>(
             eventData->change_records);
     changeRecord1->event_data_operation = eventDataOperation1;
@@ -2882,6 +3023,7 @@ TEST(PldmPDRRepositoryChgEventEvent, testGoodDecodeRequest)
     memcpy(changeRecord1->change_entry, &changeRecordArr1[0],
            changeRecordArr1.size() * sizeof(uint32_t));
     struct pldm_pdr_repository_change_record_data* changeRecord2 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_pdr_repository_change_record_data*>(
             eventData->change_records +
             PLDM_PDR_REPOSITORY_CHANGE_RECORD_MIN_LENGTH +
@@ -2895,6 +3037,7 @@ TEST(PldmPDRRepositoryChgEventEvent, testGoodDecodeRequest)
     uint8_t retNumberOfChangeRecords{};
     size_t retChangeRecordDataOffset{0};
     auto rc = decode_pldm_pdr_repository_chg_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const uint8_t*>(eventData), eventDataArr.size(),
         &retEventDataFormat, &retNumberOfChangeRecords,
         &retChangeRecordDataOffset);
@@ -2903,6 +3046,7 @@ TEST(PldmPDRRepositoryChgEventEvent, testGoodDecodeRequest)
     EXPECT_EQ(retNumberOfChangeRecords, numberOfChangeRecords);
 
     const uint8_t* changeRecordData =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const uint8_t*>(changeRecord1);
     size_t changeRecordDataSize =
         eventDataArr.size() - PLDM_PDR_REPOSITORY_CHG_EVENT_MIN_LENGTH;
@@ -2911,6 +3055,7 @@ TEST(PldmPDRRepositoryChgEventEvent, testGoodDecodeRequest)
     size_t retChangeEntryDataOffset;
 
     rc = decode_pldm_pdr_repository_change_record_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const uint8_t*>(changeRecordData),
         changeRecordDataSize, &retEventDataOperation, &retNumberOfChangeEntries,
         &retChangeEntryDataOffset);
@@ -2925,6 +3070,7 @@ TEST(PldmPDRRepositoryChgEventEvent, testGoodDecodeRequest)
     changeRecordDataSize -= sizeof(uint32_t) * retNumberOfChangeEntries -
                             PLDM_PDR_REPOSITORY_CHANGE_RECORD_MIN_LENGTH;
     rc = decode_pldm_pdr_repository_change_record_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const uint8_t*>(changeRecordData),
         changeRecordDataSize, &retEventDataOperation, &retNumberOfChangeEntries,
         &retChangeEntryDataOffset);
@@ -2948,6 +3094,7 @@ TEST(PldmPDRRepositoryChgEventEvent, testBadDecodeRequest)
 
     std::array<uint8_t, 2> eventData{};
     rc = decode_pldm_pdr_repository_chg_event_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const uint8_t*>(eventData.data()), 0, &eventDataFormat,
         &numberOfChangeRecords, &changeRecordDataOffset);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
@@ -2962,6 +3109,7 @@ TEST(PldmPDRRepositoryChgEventEvent, testBadDecodeRequest)
 
     std::array<uint8_t, 2> changeRecord{};
     rc = decode_pldm_pdr_repository_change_record_data(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const uint8_t*>(changeRecord.data()), 0,
         &eventDataOperation, &numberOfChangeEntries, &changeEntryDataOffset);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
@@ -2975,11 +3123,13 @@ TEST(GetSensorReading, testGoodEncodeRequest)
     uint16_t sensorId = 0x1234;
     bool8_t rearmEventState = 0x01;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc =
         encode_get_sensor_reading_req(0, sensorId, rearmEventState, request);
 
     struct pldm_get_sensor_reading_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_sensor_reading_req*>(request->payload);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
@@ -3005,9 +3155,11 @@ TEST(GetSensorReading, testGoodDecodeRequest)
     uint16_t retsensorId;
     bool8_t retrearmEventState;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     struct pldm_get_sensor_reading_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_sensor_reading_req*>(request->payload);
 
     req->sensor_id = htole16(sensorId);
@@ -3037,9 +3189,11 @@ TEST(GetSensorReading, testBadDecodeRequest)
     uint16_t retsensorId;
     bool8_t retrearmEventState;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     struct pldm_get_sensor_reading_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_sensor_reading_req*>(request->payload);
 
     req->sensor_id = htole16(sensorId);
@@ -3056,6 +3210,7 @@ TEST(GetSensorReading, testGoodEncodeResponse)
     std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t completionCode = 0;
@@ -3070,10 +3225,12 @@ TEST(GetSensorReading, testGoodEncodeResponse)
     auto rc = encode_get_sensor_reading_resp(
         0, completionCode, sensor_dataSize, sensor_operationalState,
         sensor_event_messageEnable, presentState, previousState, eventState,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&presentReading), response,
         responseMsg.size() - hdrSize);
 
     struct pldm_get_sensor_reading_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_sensor_reading_resp*>(
             response->payload);
 
@@ -3086,6 +3243,7 @@ TEST(GetSensorReading, testGoodEncodeResponse)
     EXPECT_EQ(previousState, resp->previous_state);
     EXPECT_EQ(eventState, resp->event_state);
     EXPECT_EQ(presentReading,
+              // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
               *(reinterpret_cast<uint8_t*>(&resp->present_reading[0])));
 }
 
@@ -3094,6 +3252,7 @@ TEST(GetSensorReading, testBadEncodeResponse)
     std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 3>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t presentReading = 0x1;
@@ -3105,6 +3264,7 @@ TEST(GetSensorReading, testBadEncodeResponse)
 
     rc = encode_get_sensor_reading_resp(
         0, PLDM_SUCCESS, 6, 1, 1, 1, 1, 1,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&presentReading), response,
         responseMsg.size() - hdrSize);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
@@ -3113,6 +3273,7 @@ TEST(GetSensorReading, testBadEncodeResponse)
 
     rc = encode_get_sensor_reading_resp(
         0, PLDM_SUCCESS, sensor_dataSize, 1, 1, 1, 1, 1,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&presentReading), response,
         responseMsg.size() - hdrSize);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
@@ -3141,8 +3302,10 @@ TEST(GetSensorReading, testGoodDecodeResponse)
     uint8_t reteventState;
     uint8_t retpresentReading[4];
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_sensor_reading_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_sensor_reading_resp*>(
             response->payload);
 
@@ -3173,6 +3336,7 @@ TEST(GetSensorReading, testGoodDecodeResponse)
     EXPECT_EQ(previousState, retpreviousState);
     EXPECT_EQ(eventState, reteventState);
     EXPECT_EQ(presentReading,
+              // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
               *(reinterpret_cast<uint32_t*>(retpresentReading)));
 }
 
@@ -3205,8 +3369,10 @@ TEST(GetSensorReading, testBadDecodeResponse)
     uint8_t retevent_state;
     uint8_t retpresentReading;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_sensor_reading_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_sensor_reading_resp*>(
             response->payload);
 
@@ -3223,6 +3389,7 @@ TEST(GetSensorReading, testBadDecodeResponse)
         response, responseMsg.size() - hdrSize, &retcompletionCode,
         &retsensor_dataSize, &retsensor_operationalState,
         &retsensor_event_messageEnable, &retpresent_state, &retprevious_state,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         &retevent_state, reinterpret_cast<uint8_t*>(&retpresentReading));
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
@@ -3238,6 +3405,7 @@ TEST(SetEventReceiver, testGoodEncodeRequest)
 
     std::vector<uint8_t> requestMsg(hdrSize +
                                     PLDM_SET_EVENT_RECEIVER_REQ_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_event_receiver_req(
@@ -3246,6 +3414,7 @@ TEST(SetEventReceiver, testGoodEncodeRequest)
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
     struct pldm_set_event_receiver_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_event_receiver_req*>(request->payload);
     EXPECT_EQ(eventMessageGlobalEnable, req->event_message_global_enable);
     EXPECT_EQ(transportProtocolType, req->transport_protocol_type);
@@ -3263,6 +3432,7 @@ TEST(SetEventReceiver, testBadEncodeRequest)
 
     std::vector<uint8_t> requestMsg(hdrSize +
                                     PLDM_SET_EVENT_RECEIVER_REQ_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_event_receiver_req(
@@ -3280,6 +3450,7 @@ TEST(SetEventReceiver, testGoodDecodeResponse)
     uint8_t retcompletion_code = 0;
     responseMsg[hdrSize] = PLDM_SUCCESS;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     auto rc = decode_set_event_receiver_resp(
         response, responseMsg.size() - sizeof(pldm_msg_hdr),
@@ -3294,6 +3465,7 @@ TEST(SetEventReceiver, testBadDecodeResponse)
     std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_RESP_BYTES>
         responseMsg{};
     uint8_t retcompletion_code = 0;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_set_event_receiver_resp(
@@ -3313,6 +3485,7 @@ TEST(SetEventReceiver, testGoodEncodeResponse)
     std::array<uint8_t,
                sizeof(pldm_msg_hdr) + PLDM_SET_EVENT_RECEIVER_RESP_BYTES>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     uint8_t completionCode = 0;
 
@@ -3340,8 +3513,10 @@ TEST(SetEventReceiver, testGoodDecodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0x78;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_event_receiver_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_event_receiver_req*>(request->payload);
 
     req->event_message_global_enable = eventMessageGlobalEnable;
@@ -3380,8 +3555,10 @@ TEST(SetEventReceiver, testBadDecodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0x78;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_event_receiver_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_event_receiver_req*>(request->payload);
 
     req->event_message_global_enable = eventMessageGlobalEnable;
@@ -5033,6 +5210,7 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeRequest)
 
     constexpr uint16_t effecter_id = 0xab01;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_get_state_effecter_states_req(
@@ -5092,6 +5270,7 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeResponse)
 
     decltype(expectedResponseMsg) responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     std::array<get_effecter_state_field, comp_effecterCnt> stateField{
@@ -5163,6 +5342,7 @@ TEST(GetStateEffecterStates, testBadDecodeResponse)
                             PLDM_GET_EFFECTER_STATE_FIELD_SIZE * 2>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_state_effecter_states_resp(
@@ -5363,10 +5543,12 @@ TEST(PlatformEventMessage, testGoodCperEventDataDecodeRequest)
 
     size_t cperEventSize =
         sizeof(struct pldm_platform_cper_event) + eventDataSize;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto cper_event = reinterpret_cast<struct pldm_platform_cper_event*>(
         malloc(cperEventSize));
 
     auto rc = decode_pldm_platform_cper_event(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const void*>(eventData.data()), eventData.size(),
         cper_event, cperEventSize);
 
@@ -5401,6 +5583,7 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
 
     size_t cperEventSize =
         sizeof(struct pldm_platform_cper_event) + eventDataSize;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto cperEvent = reinterpret_cast<struct pldm_platform_cper_event*>(
         malloc(cperEventSize));
 
@@ -5409,28 +5592,34 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
     EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_platform_cper_event(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const void*>(eventData.data()), eventData.size(), NULL,
         cperEventSize);
     EXPECT_EQ(rc, -EINVAL);
 
 #ifdef NDEBUG
     rc = decode_pldm_platform_cper_event(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
         cperEvent, cperEventSize);
     EXPECT_EQ(rc, -EOVERFLOW);
 #else
-    EXPECT_DEATH(decode_pldm_platform_cper_event(
-                     reinterpret_cast<uint8_t*>(eventData.data()),
-                     eventData.size() - 1, cperEvent, cperEventSize),
-                 "ctx->remaining >= 0");
+    EXPECT_DEATH(
+        decode_pldm_platform_cper_event(
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+            reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
+            cperEvent, cperEventSize),
+        "ctx->remaining >= 0");
 #endif
 
     rc = decode_pldm_platform_cper_event(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
         cperEvent, cperEventSize - 1);
     EXPECT_EQ(rc, -EOVERFLOW);
 
     rc = decode_pldm_platform_cper_event(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size(),
         cperEvent, cperEventSize + 1);
     EXPECT_EQ(rc, 0);
@@ -5438,6 +5627,7 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
     // Invalid CPER Event Format Type
     eventData[1] = 0x2;
     rc = decode_pldm_platform_cper_event(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const void*>(eventData.data()), eventData.size(),
         cperEvent, cperEventSize);
 
@@ -5447,6 +5637,7 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
     eventData[1] = 0x1;
     eventData[2] = 3;
     rc = decode_pldm_platform_cper_event(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const void*>(eventData.data()), eventData.size(),
         cperEvent, cperEventSize);
 
@@ -5454,6 +5645,7 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
 
     eventData[2] = 5;
     rc = decode_pldm_platform_cper_event(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const void*>(eventData.data()), eventData.size(),
         cperEvent, cperEventSize);
 

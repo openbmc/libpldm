@@ -38,6 +38,7 @@ TEST(DecodeOemMetaFileIoReq, testGoodDecodeRequest)
     uint8_t retfileHandle = 0;
     uint32_t retFileDataCnt = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(buf);
 
     rc = decode_oem_meta_file_io_req(request, sizeof(buf) - hdrSize,
@@ -56,6 +57,7 @@ TEST(DecodeOemMetaFileIoReq, testGoodDecodeRequest)
 TEST(DecodeOemMetaFileIoReq, testInvalidFieldsDecodeRequest)
 {
     std::array<uint8_t, oemMetaDecodeWriteFileIoReqBytes> requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = decode_oem_meta_file_io_req(request, requestMsg.size(), NULL,
@@ -71,6 +73,7 @@ TEST(DecodeOemMetaFileIoReq, testInvalidLengthDecodeRequest)
     uint8_t buf[1] = {};
     std::array<uint8_t, oemMetaDecodeWriteFileIoReqBytes> retDataField{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(buf);
 
     auto rc = decode_oem_meta_file_io_req(request, 0, &retfileHandle,
@@ -87,6 +90,7 @@ TEST(DecodeOemMetaFileIoReq, testInvalidDataRequest)
 
     std::array<uint8_t, invalidDataSize> retDataField{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(buf);
 
     auto rc = decode_oem_meta_file_io_req(request, sizeof(buf), &retfileHandle,

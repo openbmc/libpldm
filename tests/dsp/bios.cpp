@@ -33,6 +33,7 @@ TEST(GetDateTime, testEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_DATE_TIME_RESP_BYTES>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_get_date_time_resp(0, PLDM_SUCCESS, seconds, minutes,
@@ -103,6 +104,7 @@ TEST(GetDateTime, testDecodeResponse)
                hdrSize,
            &yearLe, sizeof(yearLe));
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_date_time_resp(
@@ -126,6 +128,7 @@ TEST(SetDateTime, testGoodEncodeResponse)
     std::array<uint8_t, hdrSize + sizeof(struct pldm_only_cc_resp)>
         responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
 
     auto rc = encode_set_date_time_resp(instanceId, completionCode, response,
@@ -133,6 +136,7 @@ TEST(SetDateTime, testGoodEncodeResponse)
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_only_cc_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_only_cc_resp*>(response->payload);
     EXPECT_EQ(completionCode, resp->completion_code);
 }
@@ -145,6 +149,7 @@ TEST(SetDateTime, testBadEncodeResponse)
     std::array<uint8_t, hdrSize + sizeof(struct pldm_only_cc_resp)>
         responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
     auto rc = encode_set_date_time_resp(instanceId, completionCode, nullptr,
                                         responseMsg.size() - hdrSize);
@@ -162,8 +167,10 @@ TEST(SetDateTime, testGoodDecodeResponse)
     std::array<uint8_t, hdrSize + sizeof(struct pldm_only_cc_resp)>
         responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
     struct pldm_only_cc_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_only_cc_resp*>(response->payload);
 
     resp->completion_code = completionCode;
@@ -183,6 +190,7 @@ TEST(SetDateTime, testBadDecodeResponse)
     std::array<uint8_t, hdrSize + sizeof(struct pldm_only_cc_resp)>
         responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
     auto rc = decode_set_date_time_resp(nullptr, responseMsg.size() - hdrSize,
                                         &completionCode);
@@ -207,6 +215,7 @@ TEST(SetDateTime, testGoodEncodeRequset)
     std::array<uint8_t, hdrSize + sizeof(struct pldm_set_date_time_req)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_set_date_time_req(instanceId, seconds, minutes, hours, day,
                                        month, year, request,
@@ -215,6 +224,7 @@ TEST(SetDateTime, testGoodEncodeRequset)
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_set_date_time_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_date_time_req*>(request->payload);
     EXPECT_EQ(seconds, bcd2dec8(req->seconds));
     EXPECT_EQ(minutes, bcd2dec8(req->minutes));
@@ -240,6 +250,7 @@ TEST(SetDateTime, testBadEncodeRequset)
     std::array<uint8_t, hdrSize + sizeof(struct pldm_set_date_time_req)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_date_time_req(instanceId, seconds, minutes, hours, day,
@@ -269,8 +280,10 @@ TEST(SetDateTime, testGoodDecodeRequest)
     uint8_t month = 0x11;
     uint16_t year = 0x2019;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
     struct pldm_set_date_time_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_date_time_req*>(request->payload);
     req->seconds = seconds;
     req->minutes = minutes;
@@ -311,6 +324,7 @@ TEST(SetDateTime, testBadDecodeRequest)
     std::array<uint8_t, hdrSize + sizeof(struct pldm_set_date_time_req)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
 
     decode_set_date_time_req(request, requestMsg.size() - hdrSize, &seconds,
@@ -336,6 +350,7 @@ TEST(GetBIOSTable, testGoodEncodeResponse)
     std::array<uint8_t,
                sizeof(pldm_msg_hdr) + PLDM_GET_BIOS_TABLE_MIN_RESP_BYTES + 4>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t completionCode = PLDM_SUCCESS;
@@ -350,6 +365,7 @@ TEST(GetBIOSTable, testGoodEncodeResponse)
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_get_bios_table_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_bios_table_resp*>(response->payload);
 
     EXPECT_EQ(completionCode, resp->completion_code);
@@ -378,6 +394,7 @@ TEST(GetBIOSTable, testGoodEncodeRequest)
     uint8_t transferOpFlag = 0x01;
     uint8_t tableType = PLDM_BIOS_ATTR_TABLE;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_get_bios_table_req(0, transferHandle, transferOpFlag,
                                         tableType, request);
@@ -385,6 +402,7 @@ TEST(GetBIOSTable, testGoodEncodeRequest)
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_get_bios_table_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_bios_table_req*>(request->payload);
     EXPECT_EQ(transferHandle, le32toh(req->transfer_handle));
     EXPECT_EQ(transferOpFlag, req->transfer_op_flag);
@@ -414,8 +432,10 @@ TEST(GetBIOSTable, testGoodDecodeRequest)
     uint8_t retTransferOpFlag = 0;
     uint8_t retTableType = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_bios_table_req* request =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_bios_table_req*>(req->payload);
 
     request->transfer_handle = htole32(transferHandle);
@@ -442,8 +462,10 @@ TEST(GetBIOSTable, testBadDecodeRequest)
     uint8_t retTransferOpFlag = 0;
     uint8_t retTableType = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_bios_table_req* request =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_bios_table_req*>(req->payload);
 
     request->transfer_handle = htole32(transferHandle);
@@ -471,8 +493,10 @@ TEST(GetBIOSTable, testBadDecodeRequest)
     uint8_t retTransferOpFlag = 0;
     uint8_t retTableType = 0;
 
+// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_bios_table_req* request =
+// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_bios_table_req*>(req->payload);
 
     request->transfer_handle = htole32(transferHandle);
@@ -498,8 +522,10 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testGoodDecodeRequest)
                             sizeof(transferOpFlag) + sizeof(attributehandle)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_bios_attribute_current_value_by_handle_req* request =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<
             struct pldm_get_bios_attribute_current_value_by_handle_req*>(
             req->payload);
@@ -531,8 +557,10 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testBadDecodeRequest)
                             sizeof(transferOpFlag) + sizeof(attribute_handle)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto req = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_get_bios_attribute_current_value_by_handle_req* request =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<
             struct pldm_get_bios_attribute_current_value_by_handle_req*>(
             req->payload);
@@ -564,6 +592,7 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testGoodEncodeRequest)
     uint8_t transferOpFlag = PLDM_GET_FIRSTPART;
     uint8_t attributeHandle = 10;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_get_bios_attribute_current_value_by_handle_req(
         0, transferHandle, transferOpFlag, attributeHandle, request);
@@ -571,6 +600,7 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testGoodEncodeRequest)
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_get_bios_attribute_current_value_by_handle_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<
             struct pldm_get_bios_attribute_current_value_by_handle_req*>(
             request->payload);
@@ -603,6 +633,7 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testGoodEncodeResponse)
                hdrSize +
                    sizeof(pldm_get_bios_attribute_current_value_by_handle_resp)>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_get_bios_current_value_by_handle_resp(
@@ -612,6 +643,7 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testGoodEncodeResponse)
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_get_bios_attribute_current_value_by_handle_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<
             struct pldm_get_bios_attribute_current_value_by_handle_resp*>(
             response->payload);
@@ -638,6 +670,7 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testBadEncodeResponse)
                hdrSize +
                    sizeof(pldm_get_bios_attribute_current_value_by_handle_resp)>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     rc = encode_get_bios_current_value_by_handle_resp(
         0, PLDM_SUCCESS, nextTransferHandle, transferFlag, nullptr,
@@ -654,15 +687,18 @@ TEST(SetBiosAttributeCurrentValue, testGoodEncodeRequest)
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES +
                             sizeof(attributeData)>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_set_bios_attribute_current_value_req(
         instanceId, transferHandle, transferFlag,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&attributeData), sizeof(attributeData),
         request, requestMsg.size() - hdrSize);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_set_bios_attribute_current_value_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_attribute_current_value_req*>(
             request->payload);
     EXPECT_EQ(htole32(transferHandle), req->transfer_handle);
@@ -679,6 +715,7 @@ TEST(SetBiosAttributeCurrentValue, testBadEncodeRequest)
     uint32_t attributeData = 44;
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_bios_attribute_current_value_req(
@@ -686,6 +723,7 @@ TEST(SetBiosAttributeCurrentValue, testBadEncodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     rc = encode_set_bios_attribute_current_value_req(
         instanceId, transferHandle, transferFlag,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&attributeData), sizeof(attributeData),
         request, requestMsg.size() - hdrSize);
 
@@ -701,8 +739,10 @@ TEST(SetBiosAttributeCurrentValue, testGoodDecodeRequest)
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES +
                             sizeof(attributeData)>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
     struct pldm_set_bios_attribute_current_value_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_attribute_current_value_req*>(
             request->payload);
     req->transfer_handle = htole32(transferHandle);
@@ -730,6 +770,7 @@ TEST(SetBiosAttributeCurrentValue, testBadDecodeRequest)
     struct variable_field attribute;
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES - 1>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
 
     auto rc = decode_set_bios_attribute_current_value_req(
@@ -750,12 +791,14 @@ TEST(SetBiosAttributeCurrentValue, testGoodEncodeResponse)
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_ATTR_CURR_VAL_RESP_BYTES>
         responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
     auto rc = encode_set_bios_attribute_current_value_resp(
         instanceId, completionCode, nextTransferHandle, response);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_set_bios_attribute_current_value_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_attribute_current_value_resp*>(
             response->payload);
     EXPECT_EQ(completionCode, resp->completion_code);
@@ -779,8 +822,10 @@ TEST(SetBiosAttributeCurrentValue, testGoodDecodeResponse)
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_ATTR_CURR_VAL_RESP_BYTES>
         responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
     struct pldm_set_bios_attribute_current_value_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_attribute_current_value_resp*>(
             response->payload);
 
@@ -806,8 +851,10 @@ TEST(SetBiosAttributeCurrentValue, testBadDecodeResponse)
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_ATTR_CURR_VAL_RESP_BYTES>
         responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
     struct pldm_set_bios_attribute_current_value_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_attribute_current_value_resp*>(
             response->payload);
 
@@ -834,9 +881,11 @@ TEST(GetBIOSTable, testDecodeResponse)
     std::array<uint8_t, hdrSize + PLDM_GET_BIOS_TABLE_MIN_RESP_BYTES>
         responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
 
     struct pldm_get_bios_table_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_bios_table_resp*>(response->payload);
 
     resp->completion_code = completionCode;
@@ -872,9 +921,11 @@ TEST(GetBIOSAttributeCurrentValueByHandle, testDecodeResponse)
                    sizeof(attributeData)>
         responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
 
     struct pldm_get_bios_attribute_current_value_by_handle_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<
             struct pldm_get_bios_attribute_current_value_by_handle_resp*>(
             response->payload);
@@ -911,15 +962,18 @@ TEST(SetBIOSTable, testGoodEncodeRequest)
     std::array<uint8_t,
                hdrSize + PLDM_SET_BIOS_TABLE_MIN_REQ_BYTES + sizeof(tableData)>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_set_bios_table_req(
         instanceId, transferHandle, transferFlag, tableType,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&tableData), sizeof(tableData), request,
         requestMsg.size() - hdrSize);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_set_bios_table_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_table_req*>(request->payload);
 
     EXPECT_EQ(htole32(transferHandle), req->transfer_handle);
@@ -938,6 +992,7 @@ TEST(SetBIOSTable, testBadEncodeRequest)
     std::array<uint8_t,
                hdrSize + PLDM_SET_BIOS_TABLE_MIN_REQ_BYTES + sizeof(tableData)>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_bios_table_req(
@@ -947,6 +1002,7 @@ TEST(SetBIOSTable, testBadEncodeRequest)
 
     rc = encode_set_bios_table_req(
         instanceId, transferHandle, transferFlag, tableType,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&tableData), sizeof(tableData), request,
         requestMsg.size() - hdrSize + 1);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
@@ -958,8 +1014,10 @@ TEST(SetBIOSTable, testGoodDecodeResponse)
     uint8_t completionCode = PLDM_SUCCESS;
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_TABLE_RESP_BYTES> responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
     struct pldm_set_bios_table_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_table_resp*>(response->payload);
 
     resp->completion_code = completionCode;
@@ -982,8 +1040,10 @@ TEST(SetBIOSTable, testBadDecodeResponse)
     uint8_t completionCode = PLDM_SUCCESS;
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_TABLE_RESP_BYTES> responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
     struct pldm_set_bios_table_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_table_resp*>(response->payload);
 
     resp->completion_code = completionCode;
@@ -1009,12 +1069,14 @@ TEST(SetBIOSTable, testGoodEncodeResponse)
 
     std::array<uint8_t, hdrSize + PLDM_SET_BIOS_TABLE_RESP_BYTES> responseMsg{};
     struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_msg*>(responseMsg.data());
     auto rc = encode_set_bios_table_resp(instanceId, completionCode,
                                          nextTransferHandle, response);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_set_bios_table_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_table_resp*>(response->payload);
     EXPECT_EQ(completionCode, resp->completion_code);
     EXPECT_EQ(htole32(nextTransferHandle), resp->next_transfer_handle);
@@ -1036,8 +1098,10 @@ TEST(SetBIOSTable, testGoodDecodeRequest)
     std::array<uint8_t,
                hdrSize + PLDM_SET_BIOS_TABLE_MIN_REQ_BYTES + sizeof(tableData)>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
     struct pldm_set_bios_table_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_table_req*>(request->payload);
     req->transfer_handle = htole32(transferHandle);
     req->transfer_flag = transferFlag;
@@ -1070,8 +1134,10 @@ TEST(SetBIOSTable, testBadDecodeRequest)
     std::array<uint8_t,
                hdrSize + PLDM_SET_BIOS_TABLE_MIN_REQ_BYTES + sizeof(tableData)>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
     struct pldm_set_bios_table_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_table_req*>(request->payload);
     req->transfer_handle = htole32(transferHandle);
     req->transfer_flag = transferFlag;

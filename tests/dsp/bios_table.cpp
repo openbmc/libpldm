@@ -49,6 +49,7 @@ TEST(AttrTable, HeaderDecodeTest)
         0     /* default value string handle index */
     };
     auto entry =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_bios_attr_table_entry*>(enumEntry.data());
     auto attrHandle = pldm_bios_table_attr_entry_decode_attribute_handle(entry);
     EXPECT_EQ(attrHandle, 2);
@@ -72,6 +73,7 @@ TEST(AttrTable, EnumEntryDecodeTest)
     };
 
     auto entry =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_bios_attr_table_entry*>(enumEntry.data());
     uint8_t pvNumber;
     ASSERT_EQ(pldm_bios_table_attr_entry_enum_decode_pv_num(entry, &pvNumber),
@@ -201,6 +203,7 @@ TEST(AttrTable, StringEntryDecodeTest)
         'a', 'b', 'c' /* default string  */
     };
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto entry = reinterpret_cast<struct pldm_bios_attr_table_entry*>(
         stringEntry.data());
     auto stringType =
@@ -416,6 +419,7 @@ TEST(AttrTable, integerEntryDecodeTest)
     uint64_t upper;
     uint64_t def;
     uint32_t scalar;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto entry = reinterpret_cast<struct pldm_bios_attr_table_entry*>(
         integerEntry.data());
     pldm_bios_table_attr_entry_integer_decode(entry, &lower, &upper, &scalar,
@@ -524,6 +528,7 @@ TEST(AttrTable, FindTest)
     auto entry =
         pldm_bios_table_attr_find_by_handle(table.data(), table.size(), 1);
     EXPECT_NE(entry, nullptr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto p = reinterpret_cast<const uint8_t*>(entry);
     EXPECT_THAT(std::vector<uint8_t>(p, p + stringEntry.size()),
                 ElementsAreArray(stringEntry));
@@ -534,6 +539,7 @@ TEST(AttrTable, FindTest)
     entry = pldm_bios_table_attr_find_by_string_handle(table.data(),
                                                        table.size(), 2);
     EXPECT_NE(entry, nullptr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     p = reinterpret_cast<const uint8_t*>(entry);
     EXPECT_THAT(std::vector<uint8_t>(p, p + stringEntry.size()),
                 ElementsAreArray(stringEntry));
@@ -552,6 +558,7 @@ TEST(AttrValTable, HeaderDecodeTest)
         0,    /* current value string handle index */
         1,    /* current value string handle index */
     };
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         enumEntry.data());
     auto attrHandle =
@@ -590,6 +597,7 @@ TEST(AttrValTable, EnumEntryEncodeTest)
         handles);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, enumEntry);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         enumEntry.data());
     entry->attr_type = PLDM_BIOS_ENUMERATION_READ_ONLY;
@@ -618,6 +626,7 @@ TEST(AttrValTable, EnumEntryDecodeTest)
         1,    /* current value string handle index */
     };
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         enumEntry.data());
     auto number = pldm_bios_table_attr_value_entry_enum_decode_number(entry);
@@ -671,6 +680,7 @@ TEST(AttrValTable, stringEntryEncodeTest)
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_STRING, 3, "abc");
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, stringEntry);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         stringEntry.data());
     entry->attr_type = PLDM_BIOS_STRING_READ_ONLY;
@@ -698,6 +708,7 @@ TEST(AttrValTable, StringEntryDecodeTest)
         'a', 'b', 'c', /* default value string handle index */
     };
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         stringEntry.data());
     auto length = pldm_bios_table_attr_value_entry_string_decode_length(entry);
@@ -743,6 +754,7 @@ TEST(AttrValTable, integerEntryEncodeTest)
         encodeEntry.data(), encodeEntry.size(), 0, PLDM_BIOS_INTEGER, 10);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(encodeEntry, integerEntry);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         integerEntry.data());
     entry->attr_type = PLDM_BIOS_INTEGER_READ_ONLY;
@@ -769,6 +781,7 @@ TEST(AttrValTable, integerEntryDecodeTest)
         10, 0, 0, 0, 0, 0, 0, 0, /* current value */
     };
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto entry = reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(
         integerEntry.data());
     auto cv = pldm_bios_table_attr_value_entry_integer_decode_cv(entry);
@@ -803,24 +816,28 @@ TEST(AttrValTable, IteratorTest)
                                             PLDM_BIOS_ATTR_VAL_TABLE);
     auto entry = pldm_bios_table_iter_attr_value_entry_value(iter);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto p = reinterpret_cast<const uint8_t*>(entry);
     EXPECT_THAT(std::vector<uint8_t>(p, p + enumEntry.size()),
                 ElementsAreArray(enumEntry));
 
     pldm_bios_table_iter_next(iter);
     entry = pldm_bios_table_iter_attr_value_entry_value(iter);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     p = reinterpret_cast<const uint8_t*>(entry);
     EXPECT_THAT(std::vector<uint8_t>(p, p + stringEntry.size()),
                 ElementsAreArray(stringEntry));
 
     pldm_bios_table_iter_next(iter);
     entry = pldm_bios_table_iter_attr_value_entry_value(iter);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     p = reinterpret_cast<const uint8_t*>(entry);
     EXPECT_THAT(std::vector<uint8_t>(p, p + integerEntry.size()),
                 ElementsAreArray(integerEntry));
 
     pldm_bios_table_iter_next(iter);
     entry = pldm_bios_table_iter_attr_value_entry_value(iter);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     p = reinterpret_cast<const uint8_t*>(entry);
     EXPECT_THAT(std::vector<uint8_t>(p, p + enumEntry.size()),
                 ElementsAreArray(enumEntry));
@@ -858,6 +875,7 @@ TEST(AttrValTable, FindTest)
     auto entry = pldm_bios_table_attr_value_find_by_handle(table.data(),
                                                            table.size(), 1);
     EXPECT_NE(entry, nullptr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto p = reinterpret_cast<const uint8_t*>(entry);
     EXPECT_THAT(std::vector<uint8_t>(p, p + stringEntry.size()),
                 ElementsAreArray(stringEntry));
@@ -867,6 +885,7 @@ TEST(AttrValTable, FindTest)
     EXPECT_EQ(entry, nullptr);
 
     auto firstEntry =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_bios_attr_val_table_entry*>(table.data());
     firstEntry->attr_type = PLDM_BIOS_PASSWORD;
 #ifdef NDEBUG
@@ -1013,6 +1032,7 @@ TEST(StringTable, EntryDecodeTest)
         7,   0,                            /* string length */
         'A', 'l', 'l', 'o', 'w', 'e', 'd', /* string */
     };
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto entry = reinterpret_cast<struct pldm_bios_string_table_entry*>(
         stringEntry.data());
     auto handle = pldm_bios_table_string_entry_decode_handle(entry);
@@ -1126,6 +1146,7 @@ TEST(Iterator, DeathTest)
 
     /* first entry */
     auto attr_entry =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_bios_attr_table_entry*>(table.data());
     auto iter = pldm_bios_table_iter_create(table.data(), table.size(),
                                             PLDM_BIOS_ATTR_TABLE);
