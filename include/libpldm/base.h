@@ -9,6 +9,7 @@ extern "C" {
 #include <libpldm/pldm_types.h>
 
 #include <asm/byteorder.h>
+#include <stdalign.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -172,6 +173,10 @@ struct pldm_msg {
 	struct pldm_msg_hdr hdr; //!< PLDM message header
 	uint8_t payload[1]; //!< &payload[0] is the beginning of the payload
 } __attribute__((packed));
+#define PLDM_MSG_SIZE(size)                                                    \
+	(sizeof(pldm_msg) - sizeof(((struct pldm_msg *)NULL)->payload) + (size))
+#define PLDM_MSG_BUFFER(name, size)                                            \
+	alignas(struct pldm_msg) unsigned char(name)[PLDM_MSG_SIZE(size)]
 
 /**
  * @brief Compare the headers from two PLDM messages to determine if the latter
