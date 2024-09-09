@@ -40,6 +40,7 @@ TEST(ReadWriteFileMemory, testGoodDecodeRequest)
     uint32_t retLength = 0;
     uint64_t retAddress = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Invoke decode the read file memory request
@@ -68,6 +69,7 @@ TEST(ReadWriteFileMemory, testBadDecodeRequest)
 
     std::array<uint8_t, PLDM_RW_FILE_MEM_REQ_BYTES> requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Address is NULL
@@ -87,6 +89,7 @@ TEST(ReadWriteFileMemory, testGoodEncodeResponse)
         responseMsg{};
     uint32_t length = 0xff00ee11;
     uint32_t lengthLe = htole32(length);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // ReadFileIntoMemory
@@ -121,6 +124,7 @@ TEST(ReadWriteFileMemory, testBadEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_RW_FILE_MEM_RESP_BYTES>
         responseMsg{};
     uint32_t length = 0;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // ReadFileIntoMemory
@@ -162,6 +166,7 @@ TEST(ReadWriteFileIntoMemory, testGoodDecodeResponse)
     uint8_t retCompletionCode = 0;
     uint32_t retLength = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Invoke decode the read file memory response
@@ -183,6 +188,7 @@ TEST(ReadWriteFileIntoMemory, testBadDecodeResponse)
 
     std::array<uint8_t, PLDM_RW_FILE_MEM_RESP_BYTES> responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Payload length is invalid
@@ -204,6 +210,7 @@ TEST(ReadWriteFileIntoMemory, testGoodEncodeRequest)
     uint32_t lengthLe = htole32(length);
     uint64_t addressLe = htole64(address);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc =
@@ -264,6 +271,7 @@ TEST(GetFileTable, GoodDecodeRequest)
     uint8_t retTransferOpFlag = 0;
     uint8_t retTableType = 0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Invoke decode get file table request
@@ -290,6 +298,7 @@ TEST(GetFileTable, BadDecodeRequest)
 
     std::array<uint8_t, PLDM_GET_FILE_TABLE_REQ_BYTES> requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // TableType is NULL
@@ -317,6 +326,7 @@ TEST(GetFileTable, GoodEncodeResponse)
                                     sizeof(transferFlag) + fileTable.size();
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + responseSize> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // GetFileTable
@@ -353,6 +363,7 @@ TEST(GetFileTable, BadEncodeResponse)
                                     sizeof(transferFlag);
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + responseSize> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // GetFileTable
@@ -375,12 +386,14 @@ TEST(GetFileTable, GoodEncodeRequest)
     uint8_t transferOpFlag = 0x01;
     uint8_t tableType = PLDM_FILE_ATTRIBUTE_TABLE;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_get_file_table_req(0, transferHandle, transferOpFlag,
                                         tableType, request);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
     struct pldm_get_file_table_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_get_file_table_req*>(request->payload);
     EXPECT_EQ(transferHandle, le32toh(req->transfer_handle));
     EXPECT_EQ(transferOpFlag, req->operation_flag);
@@ -409,9 +422,11 @@ TEST(GetFileTable, GoodDecodeResponse)
     std::vector<uint8_t> responseMsg(
         hdrSize + PLDM_GET_FILE_TABLE_MIN_RESP_BYTES + fileTableData.size());
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - hdrSize;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto resp = reinterpret_cast<struct pldm_get_file_table_resp*>(
         responsePtr->payload);
 
@@ -450,6 +465,7 @@ TEST(GetFileTable, BadDecodeResponse)
     std::vector<uint8_t> responseMsg(
         hdrSize + PLDM_GET_FILE_TABLE_MIN_RESP_BYTES + fileTableData.size());
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = decode_get_file_table_resp(
@@ -470,8 +486,10 @@ TEST(ReadFile, testGoodDecodeRequest)
     std::array<uint8_t, PLDM_READ_FILE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_read_file_req*>(requestPtr->payload);
 
     // Random value for fileHandle, offset and length
@@ -506,8 +524,10 @@ TEST(WriteFile, testGoodDecodeRequest)
 
     std::vector<uint8_t> requestMsg(PLDM_WRITE_FILE_REQ_BYTES +
                                     sizeof(pldm_msg_hdr) + length);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_write_file_req*>(requestPtr->payload);
 
     size_t fileDataOffset =
@@ -541,9 +561,11 @@ TEST(ReadFile, testGoodDecodeResponse)
 
     std::vector<uint8_t> responseMsg(PLDM_READ_FILE_RESP_BYTES +
                                      sizeof(pldm_msg_hdr) + length);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
     auto response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<pldm_read_file_resp*>(responsePtr->payload);
 
     response->completion_code = completionCode;
@@ -570,9 +592,11 @@ TEST(WriteFile, testGoodDecodeResponse)
 {
     std::array<uint8_t, PLDM_WRITE_FILE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
     auto response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<pldm_write_file_resp*>(responsePtr->payload);
 
     uint8_t completionCode = PLDM_SUCCESS;
@@ -602,6 +626,7 @@ TEST(ReadWriteFile, testBadDecodeResponse)
     // Bad decode response for read file
     std::vector<uint8_t> responseMsg(PLDM_READ_FILE_RESP_BYTES +
                                      sizeof(pldm_msg_hdr) + length);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Request payload message is missing
@@ -617,6 +642,7 @@ TEST(ReadWriteFile, testBadDecodeResponse)
     // Bad decode response for write file
     std::array<uint8_t, PLDM_WRITE_FILE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsgWr{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responseWr = reinterpret_cast<pldm_msg*>(responseMsgWr.data());
 
     // Request payload message is missing
@@ -637,6 +663,7 @@ TEST(ReadWriteFile, testBadDecodeRequest)
     // Bad decode request for read file
     std::array<uint8_t, PLDM_READ_FILE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Request payload message is missing
@@ -650,6 +677,7 @@ TEST(ReadWriteFile, testBadDecodeRequest)
     // Bad decode request for write file
     size_t fileDataOffset = 0;
     std::array<uint8_t, PLDM_WRITE_FILE_REQ_BYTES> requestMsgWr{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestWr = reinterpret_cast<pldm_msg*>(requestMsgWr.data());
 
     // Request payload message is missing
@@ -670,8 +698,10 @@ TEST(ReadFile, testGoodEncodeResponse)
 
     std::vector<uint8_t> responseMsg(PLDM_READ_FILE_RESP_BYTES +
                                      sizeof(pldm_msg_hdr) + length);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     auto response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<pldm_read_file_resp*>(responsePtr->payload);
 
     // ReadFile
@@ -693,8 +723,10 @@ TEST(WriteFile, testGoodEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_WRITE_FILE_RESP_BYTES>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     auto response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<pldm_write_file_resp*>(responsePtr->payload);
 
     // WriteFile
@@ -716,7 +748,9 @@ TEST(ReadFile, testGoodEncodeRequest)
     uint32_t fileHandle = 0x12345678;
     uint32_t offset = 0x87654321;
     uint32_t length = 0x13245768;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_read_file_req*>(requestPtr->payload);
 
     // ReadFile
@@ -740,7 +774,9 @@ TEST(WriteFile, testGoodEncodeRequest)
 
     std::vector<uint8_t> requestMsg(PLDM_WRITE_FILE_REQ_BYTES +
                                     sizeof(pldm_msg_hdr) + length);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_write_file_req*>(requestPtr->payload);
 
     // WriteFile
@@ -765,6 +801,7 @@ TEST(ReadWriteFile, testBadEncodeRequest)
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_READ_FILE_REQ_BYTES>
         requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // ReadFile check invalid file length
@@ -775,6 +812,7 @@ TEST(ReadWriteFile, testBadEncodeRequest)
     // Bad encode request for write file
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_WRITE_FILE_REQ_BYTES>
         requestMsgWr{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestWr = reinterpret_cast<pldm_msg*>(requestMsgWr.data());
 
     // WriteFile check for invalid file length
@@ -790,6 +828,7 @@ TEST(ReadWriteFile, testBadEncodeResponse)
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_READ_FILE_RESP_BYTES>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // ReadFile
@@ -805,6 +844,7 @@ TEST(ReadWriteFile, testBadEncodeResponse)
     // Bad encode response for write file
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_WRITE_FILE_RESP_BYTES>
         responseMsgWr{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responseWr = reinterpret_cast<pldm_msg*>(responseMsgWr.data());
 
     // WriteFile
@@ -824,8 +864,10 @@ TEST(ReadWriteFileByTypeMemory, testGoodDecodeRequest)
                PLDM_RW_FILE_BY_TYPE_MEM_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_read_write_file_by_type_memory_req*>(
         requestPtr->payload);
 
@@ -867,8 +909,10 @@ TEST(ReadWriteFileByTypeMemory, testGoodDecodeResponse)
                PLDM_RW_FILE_BY_TYPE_MEM_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_read_write_file_by_type_memory_resp*>(
         responsePtr->payload);
 
@@ -908,6 +952,7 @@ TEST(ReadWriteFileByTypeMemory, testBadDecodeRequest)
                PLDM_RW_FILE_BY_TYPE_MEM_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Address is NULL
@@ -936,6 +981,7 @@ TEST(ReadWriteFileByTypeMemory, testBadDecodeResponse)
                PLDM_RW_FILE_BY_TYPE_MEM_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Length is NULL
@@ -966,6 +1012,7 @@ TEST(ReadWriteFileByTypeMemory, testGoodEncodeRequest)
     uint32_t lengthLe = htole32(length);
     uint64_t addressLe = htole64(address);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_rw_file_by_type_memory_req(
@@ -1004,6 +1051,7 @@ TEST(ReadWriteFileByTypeMemory, testGoodEncodeResponse)
     uint32_t lengthLe = htole32(length);
     uint8_t completionCode = 0x0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_rw_file_by_type_memory_resp(
@@ -1028,6 +1076,7 @@ TEST(ReadWriteFileByTypeMemory, testBadEncodeResponse)
                sizeof(pldm_msg_hdr) + PLDM_RW_FILE_BY_TYPE_MEM_RESP_BYTES>
         responseMsg{};
     uint32_t length = 0;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // completion code is PLDM_ERROR
@@ -1069,8 +1118,10 @@ TEST(NewFile, testGoodDecodeRequest)
     std::array<uint8_t, PLDM_NEW_FILE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_new_file_req*>(requestPtr->payload);
 
     // Random value for fileHandle and length
@@ -1101,8 +1152,10 @@ TEST(NewFile, testGoodDecodeResponse)
     std::array<uint8_t, PLDM_NEW_FILE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_new_file_resp*>(responsePtr->payload);
 
     // Random value for completion code
@@ -1134,6 +1187,7 @@ TEST(NewFile, testBadDecodeRequest)
     std::array<uint8_t, PLDM_NEW_FILE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Payload length is invalid
@@ -1152,6 +1206,7 @@ TEST(NewFile, testBadDecodeResponse)
     std::array<uint8_t, PLDM_NEW_FILE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Payload length is invalid
@@ -1171,6 +1226,7 @@ TEST(NewFile, testGoodEncodeRequest)
     uint32_t fileHandleLe = htole32(fileHandle);
     uint32_t lengthLe = htole32(length);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_new_file_req(0, fileType, fileHandle, length, request);
@@ -1195,6 +1251,7 @@ TEST(NewFile, testGoodEncodeResponse)
 
     uint8_t completionCode = 0x0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_new_file_resp(0, completionCode, response);
@@ -1212,6 +1269,7 @@ TEST(NewFile, testBadEncodeResponse)
 {
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_NEW_FILE_RESP_BYTES>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // completion code is PLDM_ERROR
@@ -1247,8 +1305,10 @@ TEST(ReadWriteFileByType, testGoodDecodeRequest)
     std::array<uint8_t, PLDM_RW_FILE_BY_TYPE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_read_write_file_by_type_req*>(
         requestPtr->payload);
 
@@ -1284,8 +1344,10 @@ TEST(ReadWriteFileByType, testGoodDecodeResponse)
     std::array<uint8_t, PLDM_RW_FILE_BY_TYPE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_read_write_file_by_type_resp*>(
         responsePtr->payload);
 
@@ -1323,6 +1385,7 @@ TEST(ReadWriteFileByType, testBadDecodeRequest)
     std::array<uint8_t, PLDM_RW_FILE_BY_TYPE_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Payload length is invalid
@@ -1343,6 +1406,7 @@ TEST(ReadWriteFileByType, testBadDecodeResponse)
     std::array<uint8_t, PLDM_RW_FILE_BY_TYPE_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Length is NULL
@@ -1369,6 +1433,7 @@ TEST(ReadWriteFileByType, testGoodEncodeRequest)
     uint32_t offsetLe = htole32(offset);
     uint32_t lengthLe = htole32(length);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_rw_file_by_type_req(0, PLDM_READ_FILE_BY_TYPE, fileType,
@@ -1400,6 +1465,7 @@ TEST(ReadWriteFileByType, testGoodEncodeResponse)
     uint32_t length = 0x13245768;
     uint32_t lengthLe = htole32(length);
     uint8_t completionCode = 0x0;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_rw_file_by_type_resp(0, PLDM_READ_FILE_BY_TYPE,
@@ -1422,6 +1488,7 @@ TEST(ReadWriteFileByType, testBadEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_RW_FILE_BY_TYPE_RESP_BYTES>
         responseMsg{};
     uint32_t length = 0;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // completion code is PLDM_ERROR
@@ -1461,8 +1528,10 @@ TEST(FileAck, testGoodDecodeRequest)
     std::array<uint8_t, PLDM_FILE_ACK_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_file_ack_req*>(requestPtr->payload);
 
     // Random value for fileHandle
@@ -1493,8 +1562,10 @@ TEST(FileAck, testGoodDecodeResponse)
     std::array<uint8_t, PLDM_FILE_ACK_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_file_ack_resp*>(responsePtr->payload);
 
     // Random value for completion code
@@ -1526,6 +1597,7 @@ TEST(FileAck, testBadDecodeRequest)
     std::array<uint8_t, PLDM_FILE_ACK_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Payload length is invalid
@@ -1545,6 +1617,7 @@ TEST(FileAck, testBadDecodeResponse)
     std::array<uint8_t, PLDM_FILE_ACK_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Payload length is invalid
@@ -1563,6 +1636,7 @@ TEST(FileAck, testGoodEncodeRequest)
     uint16_t fileTypeLe = htole16(fileType);
     uint32_t fileHandleLe = htole32(fileHandle);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_file_ack_req(0, fileType, fileHandle, fileStatus, request);
@@ -1584,6 +1658,7 @@ TEST(FileAck, testGoodEncodeResponse)
 
     uint8_t completionCode = 0x0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_file_ack_resp(0, completionCode, response);
@@ -1601,6 +1676,7 @@ TEST(FileAck, testBadEncodeResponse)
 {
     std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_FILE_ACK_RESP_BYTES>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // completion code is PLDM_ERROR
@@ -1639,6 +1715,7 @@ TEST(FileAckWithMetadata, testGoodEncodeResponse)
 
     uint8_t completionCode = 0x0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_file_ack_with_meta_data_resp(0, completionCode, response);
@@ -1657,6 +1734,7 @@ TEST(FileAckWithMetadata, testBadEncodeResponse)
     std::array<uint8_t,
                sizeof(pldm_msg_hdr) + PLDM_FILE_ACK_WITH_META_DATA_RESP_BYTES>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // completion code is PLDM_ERROR
@@ -1681,8 +1759,10 @@ TEST(FileAckWithMetadata, testGoodDecodeResponse)
                PLDM_FILE_ACK_WITH_META_DATA_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_file_ack_with_meta_data_resp*>(
         responsePtr->payload);
 
@@ -1713,6 +1793,7 @@ TEST(FileAckWithMetadata, testBadDecodeResponse)
                PLDM_FILE_ACK_WITH_META_DATA_RESP_BYTES + sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Payload length is invalid
@@ -1741,6 +1822,7 @@ TEST(FileAckWithMetadata, testGoodEncodeRequest)
     uint32_t fileMetaData3Le = htole32(fileMetaData3);
     uint32_t fileMetaData4Le = htole32(fileMetaData4);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_file_ack_with_meta_data_req(
@@ -1802,8 +1884,10 @@ TEST(FileAckWithMetadata, testGoodDecodeRequest)
                sizeof(pldm_msg_hdr) + PLDM_FILE_ACK_WITH_META_DATA_REQ_BYTES>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_file_ack_with_meta_data_req*>(
         requestPtr->payload);
 
@@ -1866,6 +1950,7 @@ TEST(FileAckWithMetadata, testBadDecodeRequest)
                PLDM_FILE_ACK_WITH_META_DATA_REQ_BYTES + sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Payload length is invalid
@@ -1883,6 +1968,7 @@ TEST(NewFileAvailableWithMetaData, testGoodEncodeResponse)
 
     uint8_t completionCode = 0x0;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     auto rc = encode_new_file_with_metadata_resp(0, completionCode, response);
@@ -1901,6 +1987,7 @@ TEST(NewFileAvailableWithMetaData, testBadEncodeResponse)
     std::array<uint8_t, sizeof(pldm_msg_hdr) +
                             PLDM_NEW_FILE_AVAILABLE_WITH_META_DATA_RESP_BYTES>
         responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // completion code is PLDM_ERROR
@@ -1925,8 +2012,10 @@ TEST(NewFileAvailableWithMetaData, testGoodDecodeResponse)
                             sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
     size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_file_ack_with_meta_data_resp*>(
         responsePtr->payload);
 
@@ -1957,6 +2046,7 @@ TEST(NewFileAvailableWithMetaData, testBadDecodeResponse)
                             sizeof(pldm_msg_hdr)>
         responseMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     // Payload length is invalid
@@ -1986,6 +2076,7 @@ TEST(NewFileAvailableWithMetaData, testGoodEncodeRequest)
     uint32_t fileMetaData3Le = htole32(fileMetaData3);
     uint32_t fileMetaData4Le = htole32(fileMetaData4);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_msg* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_new_file_with_metadata_req(
@@ -2049,9 +2140,11 @@ TEST(NewFileAvailableWithMetaData, testGoodDecodeRequest)
                             sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     size_t payload_length = requestMsg.size() - sizeof(pldm_msg_hdr);
     auto request =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<pldm_new_file_with_metadata_req*>(requestPtr->payload);
 
     // Random value for fileHandle and length
@@ -2116,6 +2209,7 @@ TEST(NewFileAvailableWithMetaData, testBadDecodeRequest)
                             sizeof(pldm_msg_hdr)>
         requestMsg{};
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     // Payload length is invalid
