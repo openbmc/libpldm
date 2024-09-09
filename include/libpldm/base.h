@@ -9,6 +9,7 @@ extern "C" {
 #include <libpldm/pldm_types.h>
 
 #include <asm/byteorder.h>
+#include <stdalign.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -172,6 +173,47 @@ struct pldm_msg {
 	struct pldm_msg_hdr hdr; //!< PLDM message header
 	uint8_t payload[1]; //!< &payload[0] is the beginning of the payload
 } __attribute__((packed));
+
+/** @brief Determine the underlying object size for a @struct pldm_msg
+ *
+ * @pre @p size must be a constant expression
+ *
+ * @note Providing an expression for @p size that is not an integer constant
+ *       expression will force a compilation failure.
+ *
+ * @param size The desired size of the @struct pldm_msg payload
+ */
+#define PLDM_MSG_SIZE(size)                                                    \
+	(sizeof(char[(__builtin_constant_p(size)) ? 1 : -1])) *                \
+		(sizeof(struct pldm_msg) -                                     \
+		 sizeof(((struct pldm_msg *)NULL)->payload) + (size))
+
+/** @brief Stack-allocate a buffer to hold a @struct pldm_msg
+ *
+ * Allocate an appropriately aligned array named @p name of type unsigned char
+ * with the necessary length to hold a payload of the requested size.
+ *
+ * @param name - The variable name used to define the buffer
+ * @param size - The desired payload length for the intended @struct pldm_msg
+ */
+#define PLDM_MSG_BUFFER(name, size)                                            \
+	alignas(struct pldm_msg) unsigned char(name)[PLDM_MSG_SIZE(size)]
+
+/** @brief Create a pointer to a stack-allocated @struct pldm_msg
+ *
+ * Define a pointer named @p name of type @struct pldm_msg to an object on the
+ * stack of appropriate alignment and length to hold a @struct pldm_msg with a
+ * payload of @p size.
+ *
+ * @param name - The variable name for pointer
+ * @param size - The desired payload length for the underlying @struct pldm_msg
+ *        buffer
+ */
+#ifdef __cplusplus
+#define PLDM_MSG_DEFINE_P(name, size)                                          \
+	PLDM_MSG_BUFFER(name##_buf, size);                                     \
+	auto *(name) = new (name##_buf) pldm_msg
+#endif
 
 /**
  * @brief Compare the headers from two PLDM messages to determine if the latter
