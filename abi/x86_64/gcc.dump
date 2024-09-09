@@ -3723,7 +3723,7 @@ $VAR1 = {
     },
     '58323' => {
       'Header' => 'fru.h',
-      'Line' => '505',
+      'Line' => '502',
       'Param' => {
         '0' => {
           'name' => 'instance_id',
@@ -3751,7 +3751,7 @@ $VAR1 = {
     },
     '58563' => {
       'Header' => 'fru.h',
-      'Line' => '490',
+      'Line' => '487',
       'Param' => {
         '0' => {
           'name' => 'msg',
@@ -9492,7 +9492,6 @@ $VAR1 = {
       'encode_write_file_req' => 1,
       'encode_write_file_resp' => 1,
       'get_fru_record_by_option' => 1,
-      'get_fru_record_by_option_check' => 1,
       'is_time_legal' => 1,
       'is_transfer_flag_valid' => 1,
       'pack_pldm_header' => 1,

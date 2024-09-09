@@ -468,9 +468,6 @@ int decode_get_fru_record_by_option_resp(
 int get_fru_record_by_option(const uint8_t *table, size_t table_size,
 			     uint8_t *record_table, size_t *record_size,
 			     uint16_t rsi, uint8_t rt, uint8_t ft);
-int get_fru_record_by_option_check(const uint8_t *table, size_t table_size,
-				   uint8_t *record_table, size_t *record_size,
-				   uint16_t rsi, uint8_t rt, uint8_t ft);
 
 /* SetFruRecordTable */
 

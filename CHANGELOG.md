@@ -21,6 +21,7 @@ Change categories:
 
 1. Deprecated functions with the `_check` suffix
 
+   - `get_fru_record_by_option_check()`
    - `pldm_bios_table_append_pad_checksum_check()`
    - `pldm_bios_table_attr_entry_enum_decode_def_num_check()`
    - `pldm_bios_table_attr_entry_enum_decode_pv_hdls_check()`
