@@ -132,6 +132,8 @@ Change categories:
    The additional bounds-checking required the addition of further length
    parameters.
 
+5. oem: ibm: PCIE slot sensor/effecter state ID update
+
 ### Deprecated
 
 1. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
