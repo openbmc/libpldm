@@ -43,6 +43,9 @@ Change categories:
    Register assignment for function parameters was changed with the removal of
    some asserts in related implementations.
 
+4. oem: state-set: Use new state ID for PCIE slot sensor/effecter and reserve
+   old state ID for code update.
+
 ### Deprecated
 
 1. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
