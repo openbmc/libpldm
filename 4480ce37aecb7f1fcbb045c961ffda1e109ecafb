@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b383af6b_dd3fcc11",
+        "filename": "docs/oem/meta/file-io.md",
+        "patchSetId": 32
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T01:42:20Z",
+      "side": 1,
+      "message": "Okay, a bit late to the party here, but can this please be combined to a `uint16_t` with PLDM-endianness? Manually reconstructing an offset seems way more error-prone than `pldm_msgbuf_extract(buf, req-\u003eoffset)` where `req-\u003eoffset` is `uint16_t`.",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 63
+      },
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4108a34_f9f89b4d",
+        "filename": "docs/oem/meta/file-io.md",
+        "patchSetId": 32
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T01:42:20Z",
+      "side": 1,
+      "message": "Seems odd to me that the size is `uint16` but the `length` field in the messages is `uint8`. This means we need ~64 transactions to read a full-sized file. Is there a reason for this?",
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3792f035_acfacc4e",
+        "filename": "docs/oem/meta/file-io.md",
+        "patchSetId": 32
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T01:42:20Z",
+      "side": 1,
+      "message": "Combine this into a `uint16_t` here also.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 65
+      },
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da7b6c2_066ae41e",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T01:42:20Z",
+      "side": 1,
+      "message": "See comments on message documentation.",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 48,
+        "endChar": 19
+      },
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "538007dd_ab7485ee",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T01:42:20Z",
+      "side": 1,
+      "message": "See comments on message documentation.",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 132,
+        "endChar": 53
+      },
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
