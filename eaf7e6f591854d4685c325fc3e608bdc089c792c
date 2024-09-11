@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68df5df9_d8befc9e",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T23:48:28Z",
+      "side": 1,
+      "message": "Sorry, yep, that looks good!",
+      "parentUuid": "3227b12a_7265ba1a",
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b77d6943_dc555695",
         "filename": "src/oem/meta/file_io.c",
         "patchSetId": 31
@@ -301,6 +319,30 @@
       "side": 1,
       "message": "As suggested I should make the following changes：\n1. Use option to confirm whether you want to insert the read result into attr (Option \u003d PLDM_OEM_META_FILE_IO_READ_ATTR) or info (Option \u003d PLDM_OEM_META_FILE_IO_READ_DATA).\n2. If the option is PLDM_OEM_META_FILE_IO_READ_DATA, the file data is inserted into data according to length.",
       "parentUuid": "f4ae9b90_762ca647",
+      "range": {
+        "startLine": 189,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 41
+      },
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3244240_73a23876",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T23:48:28Z",
+      "side": 1,
+      "message": "Sounds good. I think we also want to include the metadata for `*_READ_DATA` as well, right?",
+      "parentUuid": "1fb5fad9_165d8f2e",
       "range": {
         "startLine": 189,
         "startChar": 1,
