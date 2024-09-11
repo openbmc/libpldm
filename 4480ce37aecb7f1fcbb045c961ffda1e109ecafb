@@ -89,6 +89,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd443ca9_2bd76486",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T02:11:17Z",
+      "side": 1,
+      "message": "See my comment about extensible structs here:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/72759/comment/0434ff06_ed1bd477/\n\nThis one also needs the `size_t version` field.",
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "538007dd_ab7485ee",
         "filename": "src/oem/meta/file_io.c",
         "patchSetId": 32
