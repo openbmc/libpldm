@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4eee5ce_3b103f14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:17:06Z",
+      "side": 1,
+      "message": "Hi Varsha, a few comments inline on this one. I still have some concerns about the API and endianness.",
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f4417d9_8cfdfc89",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:17:06Z",
+      "side": 1,
+      "message": "This needs a changelog entry.",
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb93070c_eb2768de",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:17:06Z",
+      "side": 1,
+      "message": "Please instead return 0 (false) if it\u0027s not found, or 1 (true) if it is found, or a negative error code if there\u0027s an error. Taking a bool pointer is a bit much.",
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee304bfd_6ca4770e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:17:06Z",
+      "side": 1,
+      "message": "Please do not dereference the argument before you\u0027ve check that it isn\u0027t NULL. Do the assignments separate from the definitions and below the test for validity of the arguments.",
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ea0653c_91fbf510",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:17:06Z",
+      "side": 1,
+      "message": "Maybe we could give this a more succinct name too. Maybe just `entity`, or `e`?",
+      "range": {
+        "startLine": 2070,
+        "startChar": 21,
+        "endLine": 2070,
+        "endChar": 37
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a95cbe9a_418971e2",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2074,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:17:06Z",
+      "side": 1,
+      "message": "` \u003d {0};` is much more succinct.",
+      "range": {
+        "startLine": 2070,
+        "startChar": 40,
+        "endLine": 2074,
+        "endChar": 4
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6206c83d_5701964f",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2156,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:17:06Z",
+      "side": 1,
+      "message": "Please use placement-new instead of `reinterpret_cast\u003c\u003e()`. I have a patch banning use of `reinterpret_cast\u003c\u003e()`:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/74448",
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8de8f14b_3ff78981",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2181,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:17:06Z",
+      "side": 1,
+      "message": "Do we not have existing APIs to do all this?",
+      "range": {
+        "startLine": 2157,
+        "startChar": 1,
+        "endLine": 2181,
+        "endChar": 45
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35b863e4_b3c11c98",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2196,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:17:06Z",
+      "side": 1,
+      "message": "Didn\u0027t we agree somewhere that the arguments were always host-endian?",
+      "range": {
+        "startLine": 2196,
+        "startChar": 24,
+        "endLine": 2196,
+        "endChar": 32
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70f41078_0ab71c26",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:17:06Z",
+      "side": 1,
+      "message": "Either we need endianness conversion or we don\u0027t (we shouldn\u0027t). Which is it?",
+      "range": {
+        "startLine": 2201,
+        "startChar": 1,
+        "endLine": 2203,
+        "endChar": 36
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
