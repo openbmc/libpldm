@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b95647ce_b930b664",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:02:59Z",
+      "side": 1,
+      "message": "Why? Can you please unpack this in the commit message?",
+      "range": {
+        "startLine": 9,
+        "startChar": 65,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3012635_b74f09d0",
+        "filename": "src/compiler.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:02:59Z",
+      "side": 1,
+      "message": "Can you rebase this change on top of main? I\u0027ve merged a patch that added support for `__attribute__((nonnull))` (also this one is missing underscores, I\u0027m surprised it worked).",
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20551ac4_8241d8df",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1555,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:02:59Z",
+      "side": 1,
+      "message": "Can we leave this as a unassigned variable for now, so:\n\n```\nvoid *container_id;\n```\n\nAnd then below...",
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2e84f62_eb9afbe6",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1626,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:02:59Z",
+      "side": 1,
+      "message": "...add `container_id_addr \u003d NULL;` on the line above so it\u0027s visually local to where it\u0027s used.",
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aab81f9f_96812528",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1630,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:02:59Z",
+      "side": 1,
+      "message": "And then on the line below, add:\n\n```\nassert(container_id_addr);\n```\n\nand...",
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd59aef3_83471159",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:02:59Z",
+      "side": 1,
+      "message": "`LIBPLDM_CC_NONNULL`",
+      "range": {
+        "startLine": 1700,
+        "startChar": 1,
+        "endLine": 1702,
+        "endChar": 23
+      },
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "825d293b_8f99a640",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 2013,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:02:59Z",
+      "side": 1,
+      "message": "We can just put these on the stack right? The struct is only 6 bytes. No need for malloc:\n\n```\nstruct pldm_entity entities[4];\n```",
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "862ffdc8_418e804b",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 2026,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:02:59Z",
+      "side": 1,
+      "message": "We can use designated initialisers too, right?\n\n```\nstruct pldm_entity entities[4] \u003d {\n    { .entity_type \u003d 1, },\n    { .entity_type \u003d 2, .entity_instance_num \u003d 1, .entity_container_id \u003d 2 },\n    ...\n};\n```",
+      "range": {
+        "startLine": 2014,
+        "startChar": 1,
+        "endLine": 2026,
+        "endChar": 40
+      },
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

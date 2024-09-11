@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23df0f55_c805a5be",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1647,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:02:59Z",
+      "side": 1,
+      "message": "...drop the condition here, so we have:\n\n```\n...\ncontainer_id \u003d htole16(container_id);\nmemcpy(container_id_addr, \u0026container_id), sizeof(container_id));\n...\n```\n\nThat should deal with clang-tidy without requiring the runtime branch.",
+      "parentUuid": "023b1c10_f8c59a59",
+      "revId": "fc3b3034385f64c4e9a76ba80043c6a06cfa4800",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9304b456_d2c5308f",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 11
