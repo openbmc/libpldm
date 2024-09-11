@@ -231,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f3b1058_d58bb914",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T23:52:59Z",
+      "side": 1,
+      "message": "\u003e PLDM_OEM_META_FILE_IO_READ_REQ_MIN_LENGTH will be changed to 11u.\n\nNo, because we\u0027re not going to encode `version` in the message itself. The structure of the struct is not the same as the message - the idea behind the encode/decode functions is we make the messages easier to work with in C. The representations do not need to be equivalent (and shouldn\u0027t be). The `version` field is purely a C construct dealing with the shape of the `struct` definition for API forwards-compatibility.\n\n\u003e We need to add size_t to the pldm_msgbuf_extract function to extract the version.\n\nNo need, see the above. The version field just allows us to accommodate any new values for `option` added in the future but retain backwards compatibility of the library API.\n\n\u003e After extracting the version, check whether the size of version and struct pldm_oem_meta_file_io_read_req are the same.\n\nNot necessary, as above.",
+      "parentUuid": "cf080dea_b14541aa",
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "538007dd_ab7485ee",
         "filename": "src/oem/meta/file_io.c",
         "patchSetId": 32
