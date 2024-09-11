@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "da8a5abc_346f4f1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T05:38:22Z",
+      "side": 1,
+      "message": "I meant in the commit message, not just a reply to this comment thread.\n\nAlso if you\u0027re claiming something is fixed, please provide test cases to prevent regression of the behaviour.",
+      "parentUuid": "54d44c93_3bd15d4c",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 60
+      },
+      "revId": "145a5f542d89a554680517d2de2bf0774950561a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1291b192_3a50fc46",
