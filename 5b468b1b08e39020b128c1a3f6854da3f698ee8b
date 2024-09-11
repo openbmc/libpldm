@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "839f56a1_4459e093",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:09:16Z",
+      "side": 1,
+      "message": "Hi Varsha, only a few minor comments on this one.",
+      "revId": "5b468b1b08e39020b128c1a3f6854da3f698ee8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53776207_733cb7db",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:09:16Z",
+      "side": 1,
+      "message": "which endianness is `record-\u003erecord_handle`? Host-endianness I hope?",
+      "revId": "5b468b1b08e39020b128c1a3f6854da3f698ee8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b241a289_598c9905",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2024,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T06:09:16Z",
+      "side": 1,
+      "message": "I realise I\u0027ve bikeshedded this a bit, but perhaps we invert the test:\n\n```\n...\nif (match) {\n    *record_handle \u003d record-\u003erecord_handle;\n    prev \u003d pldm_pdr_get_prev_record(repo, record);\n    return pldm_pdr_remove_record(repo, record, prev);\n}\n...\n```",
+      "range": {
+        "startLine": 2019,
+        "startChar": 1,
+        "endLine": 2024,
+        "endChar": 52
+      },
+      "revId": "5b468b1b08e39020b128c1a3f6854da3f698ee8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
