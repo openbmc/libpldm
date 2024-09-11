@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7284e4d8_60906a43",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T02:10:29Z",
+      "side": 1,
+      "message": "We should adda `size_t version` field above here when you introduced this in the previous patch. See the comment below about extensible commands.",
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0434ff06_ed1bd477",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T02:10:29Z",
+      "side": 1,
+      "message": "I think we need to do a bit more here:\n\n```\nstruct pldm_oem_meta_file_io_read_attr_info {\n    uint16_t size;\n    uint32_t crc32;\n};\n\nstruct pldm_oem_meta_file_io_read_resp {\n    size_t version;\n    uint8_t completion_code;\n    uint8_t handle;\n    uint8_t option;\n    uint8_t length;\n    union {\n        struct pldm_oem_file_io_read_attr_info attr;\n    };\n#ifndef __cplusplus\n    uint8_t data[] LIBPLDM_CC_COUNTED_BY(length);\n#endif\n};\n```\n\nHow this is used by the caller is to do:\n\n```\nstruct pldm_oem_meta_file_io_read_resp resp;\n\nresp.version \u003d sizeof(struct pldm_oem_meta_file_io_read_resp);\n...\n```\n\nThis is a trick borrowed from the kernel:\n\n[Conventions for extensible system calls](https://lwn.net/Articles/830666/)\n\nIt allows you to add further read options later while still providing backwards-compatibility.\n\nI\u0027ll leave some further comments in the implementation.",
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b77d6943_dc555695",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T02:10:29Z",
+      "side": 1,
+      "message": "You _must_ also include a parameter for the length of the object pointed to by `resp` since it contains a flexible array member.\n\nWith that you also need to add the following check:\n\n```\nif (resp_len \u003c sizeof(*resp)) {\n    return -EINVAL;\n}\n```",
+      "range": {
+        "startLine": 150,
+        "startChar": 22,
+        "endLine": 150,
+        "endChar": 67
+      },
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43c59931_37d7d5f8",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T02:10:29Z",
+      "side": 1,
+      "message": "So regarding the extensible struct idea I suggested in the header, here we add:\n\n```\nif (resp-\u003eversion \u003e sizeof(*resp)) {\n    return -E2BIG;\n}\n```",
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "502ecf9f_2fba3ef0",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T02:10:29Z",
+      "side": 1,
+      "message": "Can we please keep the variable declarations and definitions at the top of the function, before any code?",
+      "range": {
+        "startLine": 161,
+        "startChar": 1,
+        "endLine": 164,
+        "endChar": 40
+      },
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ea9fc4a_b2ae82cc",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T02:10:29Z",
+      "side": 1,
+      "message": "Don\u0027t need to check the return value here as we\u0027re not extracting the length, it\u0027s provided by the caller.",
+      "range": {
+        "startLine": 185,
+        "startChar": 1,
+        "endLine": 188,
+        "endChar": 1
+      },
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4ae9b90_762ca647",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-11T02:10:29Z",
+      "side": 1,
+      "message": "We should only do this if we\u0027re returning data. If the response is for an attribute read we should explicitly insert the fields.",
+      "range": {
+        "startLine": 189,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 41
+      },
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
