@@ -65,6 +65,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0783c89d_5ee6eb14",
+        "filename": "docs/oem/meta/file-io.md",
+        "patchSetId": 32
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T07:01:06Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "8249da83_9433ccdf",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 63
+      },
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4108a34_f9f89b4d",
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "I will change the length type in struct pldm_oem_meta_file_io_read_req to uint16_t so that users can obtain more data at one time.",
       "parentUuid": "b4108a34_f9f89b4d",
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08fbc87c_e04ebcd1",
+        "filename": "docs/oem/meta/file-io.md",
+        "patchSetId": 32
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T07:01:06Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "4ca10673_6768fe33",
       "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -147,6 +189,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc17854c_867f3fbe",
+        "filename": "docs/oem/meta/file-io.md",
+        "patchSetId": 32
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T07:01:06Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "3e09cb32_26443d8b",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 65
+      },
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5da7b6c2_066ae41e",
@@ -184,6 +250,30 @@
       "side": 1,
       "message": "I will change it to a parameter offset, type is uint16_t.",
       "parentUuid": "5da7b6c2_066ae41e",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 48,
+        "endChar": 19
+      },
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4e7a75b_f2491c2b",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T07:01:06Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "09d65b86_b651df26",
       "range": {
         "startLine": 47,
         "startChar": 1,
@@ -247,6 +337,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a813929_b01692da",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T07:01:06Z",
+      "side": 1,
+      "message": "Thank you for your explanation.\nThe version field has been added.",
+      "parentUuid": "9f3b1058_d58bb914",
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "538007dd_ab7485ee",
@@ -284,6 +392,30 @@
       "side": 1,
       "message": "I will change it to a parameter offset, type is uint16_t.",
       "parentUuid": "538007dd_ab7485ee",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 132,
+        "endChar": 53
+      },
+      "revId": "4480ce37aecb7f1fcbb045c961ffda1e109ecafb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8af79a2_25eb4499",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T07:01:06Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "93ec0ca8_37e4c176",
       "range": {
         "startLine": 131,
         "startChar": 1,
