@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a868edf_83b0ed78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T09:10:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "690de901_e32be4bf",
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7284e4d8_60906a43",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "I will add a field for size_t version.",
       "parentUuid": "7284e4d8_60906a43",
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01637f4f_ae14b1d6",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T09:10:21Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "1bc5262e_5853452e",
       "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -106,6 +142,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0702c1b_f269e516",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T09:10:21Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "68df5df9_d8befc9e",
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b77d6943_dc555695",
@@ -153,6 +207,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f680c55d_24b1a61b",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T09:10:21Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "9f709e4e_2299be4e",
+      "range": {
+        "startLine": 150,
+        "startChar": 22,
+        "endLine": 150,
+        "endChar": 67
+      },
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43c59931_37d7d5f8",
@@ -184,6 +262,24 @@
       "side": 1,
       "message": "I will add this check.",
       "parentUuid": "43c59931_37d7d5f8",
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cba7543_70c091a0",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T09:10:21Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "9a013421_de845970",
       "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -235,6 +331,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a31227f_e2a7b52b",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T09:10:21Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "14d7dd26_4dfd7a41",
+      "range": {
+        "startLine": 161,
+        "startChar": 1,
+        "endLine": 164,
+        "endChar": 40
+      },
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ea9fc4a_b2ae82cc",
@@ -272,6 +392,30 @@
       "side": 1,
       "message": "I will remove this check.",
       "parentUuid": "0ea9fc4a_b2ae82cc",
+      "range": {
+        "startLine": 185,
+        "startChar": 1,
+        "endLine": 188,
+        "endChar": 1
+      },
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a86a3c39_54530a1d",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T09:10:21Z",
+      "side": 1,
+      "message": "Done. Please check, thank you.",
+      "parentUuid": "3e82f457_09796c1a",
       "range": {
         "startLine": 185,
         "startChar": 1,
@@ -343,6 +487,30 @@
       "side": 1,
       "message": "Sounds good. I think we also want to include the metadata for `*_READ_DATA` as well, right?",
       "parentUuid": "1fb5fad9_165d8f2e",
+      "range": {
+        "startLine": 189,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 41
+      },
+      "revId": "eaf7e6f591854d4685c325fc3e608bdc089c792c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9bcc875_d4bcc09b",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-12T09:10:21Z",
+      "side": 1,
+      "message": "We will not need to add another \"metadata\" parameter, and will put the read data into the data of struct pldm_oem_meta_file_io_read_resp.",
+      "parentUuid": "d3244240_73a23876",
       "range": {
         "startLine": 189,
         "startChar": 1,
