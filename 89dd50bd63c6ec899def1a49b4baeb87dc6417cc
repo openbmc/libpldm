@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de1dd00_e86d16b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-13T09:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b95647ce_b930b664",
+      "range": {
+        "startLine": 9,
+        "startChar": 65,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3012635_b74f09d0",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-09-11T06:02:59Z",
       "side": 1,
       "message": "Can you rebase this change on top of main? I\u0027ve merged a patch that added support for `__attribute__((nonnull))` (also this one is missing underscores, I\u0027m surprised it worked).",
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "638df274_ca1aa84d",
+        "filename": "src/compiler.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-13T09:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3012635_b74f09d0",
       "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -58,6 +100,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e9f7543_7e4a49da",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1555,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-13T09:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20551ac4_8241d8df",
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2e84f62_eb9afbe6",
@@ -71,6 +131,24 @@
       "writtenOn": "2024-09-11T06:02:59Z",
       "side": 1,
       "message": "...add `container_id_addr \u003d NULL;` on the line above so it\u0027s visually local to where it\u0027s used.",
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4d21854_67bde57c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1626,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-13T09:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2e84f62_eb9afbe6",
       "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -92,6 +170,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3a66905_ab4d0893",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1630,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-13T09:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aab81f9f_96812528",
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd59aef3_83471159",
@@ -105,6 +201,30 @@
       "writtenOn": "2024-09-11T06:02:59Z",
       "side": 1,
       "message": "`LIBPLDM_CC_NONNULL`",
+      "range": {
+        "startLine": 1700,
+        "startChar": 1,
+        "endLine": 1702,
+        "endChar": 23
+      },
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eb01a36_e23a8f46",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-13T09:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd59aef3_83471159",
       "range": {
         "startLine": 1700,
         "startChar": 1,
@@ -134,6 +254,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5618688_26b5dcbb",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 2013,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-13T09:53:22Z",
+      "side": 1,
+      "message": "yes , but I have explained why this declaration is used here and in other unit tests below-",
+      "parentUuid": "825d293b_8f99a640",
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "862ffdc8_418e804b",
         "filename": "tests/dsp/pdr.cpp",
         "patchSetId": 16
@@ -145,6 +283,30 @@
       "writtenOn": "2024-09-11T06:02:59Z",
       "side": 1,
       "message": "We can use designated initialisers too, right?\n\n```\nstruct pldm_entity entities[4] \u003d {\n    { .entity_type \u003d 1, },\n    { .entity_type \u003d 2, .entity_instance_num \u003d 1, .entity_container_id \u003d 2 },\n    ...\n};\n```",
+      "range": {
+        "startLine": 2014,
+        "startChar": 1,
+        "endLine": 2026,
+        "endChar": 40
+      },
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca84320_e8e82fa1",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 2026,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-13T09:53:22Z",
+      "side": 1,
+      "message": "yes but we need it for this use case. Because in this test we use pldm_entity_association_pdr_add_from_node_with_record_handle to set the record handle of the PDR added to the repo after the repo and tree are initialized.\n\npldm_entity_association_pdr_add_from_node_with_record_handle(pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,\n        size_t num_entities, bool is_remote, uint16_t terminus_handle,\n        uint32_t record_handle)\n\nAbove API requires entities to be sent in double pointer type. So we need to define the PDR in pldm_entity* type so we can set the record handle. This record handle is checked with the initial value to validate if unit completed successfully\n\nSo we have defined entities in a similar way throughout this file only in places where we need to use pldm_entity_association_pdr_add_from_node_with_record_handle for setting the record handle.",
+      "parentUuid": "862ffdc8_418e804b",
       "range": {
         "startLine": 2014,
         "startChar": 1,
