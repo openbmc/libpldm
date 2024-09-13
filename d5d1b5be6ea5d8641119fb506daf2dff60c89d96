@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55a30152_bb98b461",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T05:02:46Z",
+      "side": 1,
+      "message": "Right, given its all internal, perhaps we change the static functions to return `int64_t` and avoid the need for a pointer for an in-out parameter.",
+      "parentUuid": "08c1e988_2432f964",
+      "revId": "d5d1b5be6ea5d8641119fb506daf2dff60c89d96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91b255a1_6ece4be9",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 2
@@ -85,6 +103,41 @@
       "writtenOn": "2024-09-11T05:39:07Z",
       "side": 1,
       "message": "Ah, so for the record, this is the read that I missed previously.",
+      "revId": "d5d1b5be6ea5d8641119fb506daf2dff60c89d96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d834afc6_701a992d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T05:02:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91b255a1_6ece4be9",
+      "revId": "d5d1b5be6ea5d8641119fb506daf2dff60c89d96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6011a3e_b254003d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T05:02:46Z",
+      "side": 1,
+      "message": "Can you please send a separate patch to return the result of `entity_association_pdr_add()`? We should not be unconditionally returning 0 here.",
       "revId": "d5d1b5be6ea5d8641119fb506daf2dff60c89d96",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

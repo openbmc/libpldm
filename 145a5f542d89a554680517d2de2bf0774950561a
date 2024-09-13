@@ -124,6 +124,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2c47a7a_9f90d1a5",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T05:02:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1abcfdd_bf12660a",
+      "revId": "145a5f542d89a554680517d2de2bf0774950561a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0dbcd08_f0875ee1",
@@ -161,6 +179,30 @@
       "side": 1,
       "message": "entity_association_pdr_add function is called recursively for the child and sibling. \nhttps://github.com/openbmc/libpldm/blob/main/src/dsp/pdr.c#L923\nhttps://github.com/openbmc/libpldm/blob/main/src/dsp/pdr.c#L930\n\nIf new PDR gets added for child/sibling, the record handle which is needed for next PDR has to be incremented for next entity_association_pdr_add. The record handle is incremented inside this function\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/73465/1/src/dsp/pdr.c#843\nIf there are Physical and logical children for an parent entity we are creating separate PDRs for each of them, and incrementing the record handle.\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/73465/1/src/dsp/pdr.c#867\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/73465/1/src/dsp/pdr.c#883",
       "parentUuid": "d0dbcd08_f0875ee1",
+      "range": {
+        "startLine": 974,
+        "startChar": 35,
+        "endLine": 974,
+        "endChar": 50
+      },
+      "revId": "145a5f542d89a554680517d2de2bf0774950561a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c38013c_96f9494b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T05:02:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a4fb239_a02e6035",
       "range": {
         "startLine": 974,
         "startChar": 35,
