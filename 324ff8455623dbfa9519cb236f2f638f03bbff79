@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75674e20_00ffa5ec",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-09-13T05:33:21Z",
+      "side": 1,
+      "message": "may be use \n\n```\n#define PLDM_MSG_SIZE(size) \\\n    (offsetof(struct pldm_msg, payload) + (size))\n\n``` \ninstead ? seems much more safer ?",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 73
+      },
+      "revId": "324ff8455623dbfa9519cb236f2f638f03bbff79",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e47b4a_bdd44ca6",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-09-13T05:33:21Z",
+      "side": 1,
+      "message": "may be change this to\n\n```\n#define PLDM_MSG_BUFFER(name, size) \\\n    alignas(struct pldm_msg) unsigned char name[PLDM_MSG_SIZE(size)]\n```\nits a little more intuitive ?",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 66
+      },
+      "revId": "324ff8455623dbfa9519cb236f2f638f03bbff79",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
