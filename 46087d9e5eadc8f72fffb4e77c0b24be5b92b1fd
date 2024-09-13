@@ -16,6 +16,108 @@
       "message": "Modify with the suggestions. Please help to review, thank you.",
       "revId": "46087d9e5eadc8f72fffb4e77c0b24be5b92b1fd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60eef7db_b6d9dbb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:16:45Z",
+      "side": 1,
+      "message": "Hi Lora, this is looking pretty good now. I have a few comments remaining that I hope are straight-forward to address.",
+      "revId": "46087d9e5eadc8f72fffb4e77c0b24be5b92b1fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bc852f5_59787de5",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:16:45Z",
+      "side": 1,
+      "message": "This should rather be set by the caller and checked by the implementation here:\n\n```\nif (req-\u003eversion \u003e sizeof(struct pldm_oem_meta_file_io_read_req)) {\n    return -E2BIG;\n}\n```",
+      "revId": "46087d9e5eadc8f72fffb4e77c0b24be5b92b1fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca875d9_a3f9bc11",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:16:45Z",
+      "side": 1,
+      "message": "This should be `-EPROTO`, see below.",
+      "revId": "46087d9e5eadc8f72fffb4e77c0b24be5b92b1fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da66803c_c8ebf4fb",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:16:45Z",
+      "side": 1,
+      "message": "This should be `-EPROTO`. It\u0027s not an invalid parameter, it\u0027s invalid data from the sender (a protocol violation with respect to the libpldm\u0027s understanding of the message defintion).",
+      "revId": "46087d9e5eadc8f72fffb4e77c0b24be5b92b1fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0259e8ee_410079c4",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:16:45Z",
+      "side": 1,
+      "message": "So, based on the comment in the implementation:\n\n```\nstruct pldm_oem_meta_file_io_read_req req \u003d { .version \u003d sizeof(req) };\n```",
+      "revId": "46087d9e5eadc8f72fffb4e77c0b24be5b92b1fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f560db0_f2cd3a72",
+        "filename": "tests/oem/meta/fileio.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:16:45Z",
+      "side": 1,
+      "message": "Then this isn\u0027t strictly necessary, as we (as the caller) populated the value. However, we probably want to keep it to make sure it\u0027s not clobbered by the implementation.",
+      "revId": "46087d9e5eadc8f72fffb4e77c0b24be5b92b1fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
