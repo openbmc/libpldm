@@ -139,6 +139,8 @@ Change categories:
 ### Fixed
 
 1. requester: instance-id: Release read lock on conflict
+2. pdr: Error propagation for
+   pldm_entity_association_pdr_add_from_node_with_record_handle()
 
 ## [0.8.0] - 2024-05-23
 

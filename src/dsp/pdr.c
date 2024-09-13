@@ -964,10 +964,9 @@ int pldm_entity_association_pdr_add_from_node_with_record_handle(
 		return -EINVAL;
 	}
 
-	entity_association_pdr_add(node, repo, entities, num_entities,
-				   is_remote, terminus_handle, record_handle);
-
-	return 0;
+	return entity_association_pdr_add(node, repo, entities, num_entities,
+					  is_remote, terminus_handle,
+					  record_handle);
 }
 
 static void find_entity_ref_in_tree(pldm_entity_node *tree_node,
