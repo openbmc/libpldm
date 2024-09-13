@@ -16,6 +16,258 @@
       "message": "Hi Andrew：\nModify with the suggestions. Please help to review, thank you.",
       "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b549b6c_39ad5da6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "Hi Lora, a few more comments that I also hope are straight-forward to address.",
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63eee6b7_4263ea60",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "Can we call this `data`?",
+      "range": {
+        "startLine": 88,
+        "startChar": 46,
+        "endLine": 88,
+        "endChar": 50
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44258211_23681e92",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "and then use `info` for the union member name just like on line 72 above? So:\n\n```\nunion {\n    struct pldm_oem_meta_file_io_read_attr_info attr;\n    struct pldm_oem_meta_file_io_read_data_info data;\n} info;\n```",
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22721076_632d8e28",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "This should be `size_t`.",
+      "range": {
+        "startLine": 161,
+        "startChar": 22,
+        "endLine": 161,
+        "endChar": 30
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa0ef7a_438aba9f",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "`size_t`.",
+      "range": {
+        "startLine": 162,
+        "startChar": 47,
+        "endLine": 162,
+        "endChar": 55
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb9c73d2_a80cb132",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "The idiomatic approach to passing object sizes is to pass them after the corresponding pointer argument. So to match conventions, this should be:\n\n```\nint encode_oem_meta_file_io_read_resp(uint8_t instance_id, struct pldm_oem_meta_file_io_read_resp *resp, size_t resp_len, struct pldm_msg *msg, size_t payload_length);\n```\n\nAnd with that, you\u0027ll need to fix the ordering in the doxygen.",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 31
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d39b36b6_a0429dad",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "`size_t` please.",
+      "range": {
+        "startLine": 155,
+        "startChar": 1,
+        "endLine": 155,
+        "endChar": 8
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90347a4e_e282cf50",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "This should be `return -EPROTO;` - it\u0027s not that the parameter values are invalid from a (C) language perspective, rather the definition for the message isn\u0027t one that the current implementation of libpldm recognises (though the definition of the message may expand in the future).",
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d74ac6_48262bf6",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "Based on the comment on line 187 I think this can rather be:\n\n```\nswitch (resp-\u003eoption) {\ncase PLDM_OEM_META_FILE_IO_READ_ATTR:\ncase PLDM_OEM_META_FILE_IO_READ_DATA:\n    break;\ndefault:\n    return -EPROTO;\n}\n```\n\nWe need to validate that we have a option value that we understand, but that should be all.",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 183,
+        "endChar": 2
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b5750b1_9f918e6b",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "I don\u0027t think we need this test as it\u0027s handled by the msgbuf implementation.",
+      "range": {
+        "startLine": 185,
+        "startChar": 1,
+        "endLine": 187,
+        "endChar": 2
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f950a4d_5a2e9855",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "No, this argument must reflect the size of the buffer holding the data at `resp-\u003edata`. This should be `resp_len - sizeof(*resp)`.",
+      "range": {
+        "startLine": 220,
+        "startChar": 3,
+        "endLine": 220,
+        "endChar": 34
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3309fed_a2d65f43",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-13T04:50:47Z",
+      "side": 1,
+      "message": "I think this should rather be `pldm_msgbuf_destroy(buf)` - it\u0027s fine if the caller over-allocates the memory for `responseMsg`. Note that this is different to the `decode_*()` implementations, where the caller should know exactly how much data they read off the transport. We absolutely should use `pldm_msgbuf_destroy_consumed(buf)` in the `decode_*()` cases, but not in the `encode_*()` cases.",
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
