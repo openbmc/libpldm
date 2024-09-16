@@ -100,6 +100,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c013a8d4_4467a04d",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-16T11:32:32Z",
+      "side": 1,
+      "message": "Added a note in the commit explaining this",
+      "parentUuid": "e38c8f75_507864b9",
+      "range": {
+        "startLine": 669,
+        "startChar": 7,
+        "endLine": 669,
+        "endChar": 17
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afd7a07f_151b6b2f",
@@ -290,6 +314,30 @@
       "side": 1,
       "message": "Please rebase it on the latest in the main branch, I\u0027ve added `LIBPLDM_CC_NONNULL_ARGS(...)` that allows you to be more specific.",
       "parentUuid": "07f8ca5e_d0d790b1",
+      "range": {
+        "startLine": 1959,
+        "startChar": 1,
+        "endLine": 1961,
+        "endChar": 1
+      },
+      "revId": "5a1208a986d59079ff3eb13cc1377cfb3962b2a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5357807_45e10cdc",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1961,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-16T11:32:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fb54fa3_38f06381",
       "range": {
         "startLine": 1959,
         "startChar": 1,
