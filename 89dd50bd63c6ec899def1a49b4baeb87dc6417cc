@@ -270,6 +270,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "685b5a54_3f297a49",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 2013,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-16T11:31:59Z",
+      "side": 1,
+      "message": "This is addressed with the above suggestion",
+      "parentUuid": "d5618688_26b5dcbb",
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "862ffdc8_418e804b",
@@ -331,6 +349,30 @@
       "side": 1,
       "message": "So I\u0027m poking at this a bit, and the first thing I find is that the doxygen for `pldm_entity_association_pdr_add_from_node_with_record_handle()` is inaccurate, as it also is for `pldm_entity_association_pdr_add_from_node()`.\n\nCan you please send patches fixing it for both?\n\n\u003e Above API requires entities to be sent in double pointer type. So we need to define the PDR in pldm_entity* type so we can set the record handle. This record handle is checked with the initial value to validate if unit completed successfully\n\nThis isn\u0027t making sense to me. Can you walk me through why setting the record handle requires that entities is a double-pointer?\n\nIf we\u0027re allocating in the implementation and passing back out the pointer to the new memory, then this is sufficient, right?\n\n```\nstruct pldm_entity entities[4] \u003d { ... };\nstruct pldm_entity *base \u003d entities;\n\n...\n\npldm_entity_association_pdr_add_from_node_with_record_handle(..., \u0026base, ...);\n\n...\n```\n\nAlso if we\u0027re passing out the pointer to the internally allocated object this way, aren\u0027t we leaking the original memory? Or do I have a misunderstanding there?",
       "parentUuid": "6ca84320_e8e82fa1",
+      "range": {
+        "startLine": 2014,
+        "startChar": 1,
+        "endLine": 2026,
+        "endChar": 40
+      },
+      "revId": "89dd50bd63c6ec899def1a49b4baeb87dc6417cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b8ab318_34b71463",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 2026,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-16T11:31:59Z",
+      "side": 1,
+      "message": "I have addressed this as you suggested. Will keep this in mind in future commits. Thank you for your review comment and explanation. I will add commit to fix doxygen for  pldm_entity_association_pdr_add_from_node_with_record_handle().",
+      "parentUuid": "7084be77_58c3ce5f",
       "range": {
         "startLine": 2014,
         "startChar": 1,
