@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb2bfde6_da5ac61f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-16T04:49:11Z",
+      "side": 1,
+      "message": "I think we can improve the descriptiveness of this subject line. As it stands this a little unhelpful for someone skimming over the single-line commit descriptions. We should be able to answer:\n\n1. What subsystem is affected\n2. Which function is affected\n3. What proper means in this context\n\nSo:\n\n```\npdr: Error propagation for pldm_entity_association_pdr_add_from_node_with_record_handle()\n```",
+      "revId": "d78d2b6f47e60895abc2bdf46529df87ed91a135",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98ff14d4_931b871a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-16T04:49:11Z",
+      "side": 1,
+      "message": "Please add:\n\n```\nFixes: 25ddbccfae0e (\"pdr: Add pldm_entity_association_pdr_add_from_node_with_record_handle()\")\n```\n\nimmediately (no empty lines) above the `Change-Id:` line",
+      "revId": "d78d2b6f47e60895abc2bdf46529df87ed91a135",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed6ac7ae_40803df5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-16T04:49:11Z",
+      "side": 1,
+      "message": "Hi Archana, in addition to addressing the comments inline, can you please add an entry to the changelog under a `### Fixes` header?",
+      "revId": "d78d2b6f47e60895abc2bdf46529df87ed91a135",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
