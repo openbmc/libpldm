@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee071aaf_cb05d5f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:19:38Z",
+      "side": 1,
+      "message": "Hi Varsha, I think we\u0027re getting closer. I have a few comments inline.",
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a717443_91124f87",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 14
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:19:38Z",
+      "side": 1,
+      "message": "This is not part of the v0.9.0 release, can you please move this up to the `## [Unreleased]` section?",
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f8cd5d7_9b8f78be",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:19:38Z",
+      "side": 1,
+      "message": "It\u0027s just called `record_handle` below.",
+      "range": {
+        "startLine": 651,
+        "startChar": 16,
+        "endLine": 651,
+        "endChar": 33
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3710c57b_6454adc3",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2007,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:19:38Z",
+      "side": 1,
+      "message": "`size_t` please.",
+      "range": {
+        "startLine": 2007,
+        "startChar": 2,
+        "endLine": 2007,
+        "endChar": 9
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a82427a7_7074389b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2009,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:19:38Z",
+      "side": 1,
+      "message": "Can we please put all the variable definitions before any logic (i.e. move these to the top of the while loop)",
+      "range": {
+        "startLine": 2007,
+        "startChar": 1,
+        "endLine": 2009,
+        "endChar": 23
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d57e4a59_31428dcc",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2010,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:19:38Z",
+      "side": 1,
+      "message": "Didn\u0027t we have a patch allowing this to be `NULL`?",
+      "range": {
+        "startLine": 2010,
+        "startChar": 49,
+        "endLine": 2010,
+        "endChar": 59
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82a88c0_786cb79e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:19:38Z",
+      "side": 1,
+      "message": "Please define this at the top of the loop.",
+      "range": {
+        "startLine": 2018,
+        "startChar": 2,
+        "endLine": 2018,
+        "endChar": 11
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62b66356_2e630a79",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:19:38Z",
+      "side": 1,
+      "message": "Looking at this more closely, I think this condition comes up short. Looking at your implementation of `pldm_pdr_record_matches_fru_rsi()` it can return a negative errno value, as well as either 0 or 1.\n\nI think you need:\n\n```\nmatch \u003d pldm_pdr_record_matches_fru_rsi(...);\nif (match \u003c 0) {\n    return match;\n}\n\nif (match) {\n    ...\n}\n```",
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d2c51e5_94826e25",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 2096,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:19:38Z",
+      "side": 1,
+      "message": "This formatting isn\u0027t very nice. Can you extract this out to its own statement? Same for the remaining instances below.",
+      "range": {
+        "startLine": 2094,
+        "startChar": 27,
+        "endLine": 2096,
+        "endChar": 65
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
