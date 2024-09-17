@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0f719df_6b50282d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:29:44Z",
+      "side": 1,
+      "message": "Hi Varsha, the main issue is that you\u0027re going to trigger UB with some assignments. However, I\u0027ve suggested the fix inline, and I hope that otherwise the comments are straight-forward to address.",
+      "revId": "fea57941f4ece2213bd1429cfe3d94eebcb960aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f93d906_07692945",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:29:44Z",
+      "side": 1,
+      "message": "This isn\u0027t part of the v0.9.0 release. Can you please move it up under the `## [Unreleased]` section above?",
+      "revId": "fea57941f4ece2213bd1429cfe3d94eebcb960aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef156d2f_bfd1b249",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:29:44Z",
+      "side": 1,
+      "message": "You must not do this before you\u0027ve tested that `repo` is not null. Please separate the assignments from the definitions of the variables, and do the assignments after the tests on 1765.\n\nIf you leave this as is the optimiser will delete the test for `repo` being NULL (\"undefined behaviour must not happen, therefore as you\u0027ve already dereferenced `repo` it mustn\u0027t be `NULL`, therefore the `NULL` check is redundant.\"). Hopefully you can see how that will proceed when someone passes `NULL` for repo 😊",
+      "range": {
+        "startLine": 1755,
+        "startChar": 1,
+        "endLine": 1756,
+        "endChar": 37
+      },
+      "revId": "fea57941f4ece2213bd1429cfe3d94eebcb960aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b070603c_0085b988",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 2054,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-17T01:29:44Z",
+      "side": 1,
+      "message": "Nit: You can use designated initialisers here too.",
+      "range": {
+        "startLine": 2051,
+        "startChar": 3,
+        "endLine": 2054,
+        "endChar": 35
+      },
+      "revId": "fea57941f4ece2213bd1429cfe3d94eebcb960aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
