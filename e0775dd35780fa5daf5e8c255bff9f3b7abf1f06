@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e37fdf6f_2198d813",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 14
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-18T11:42:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a717443_91124f87",
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f8cd5d7_9b8f78be",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-09-17T01:19:38Z",
       "side": 1,
       "message": "It\u0027s just called `record_handle` below.",
+      "range": {
+        "startLine": 651,
+        "startChar": 16,
+        "endLine": 651,
+        "endChar": 33
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4af64d17_2f4ffde8",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-18T11:42:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f8cd5d7_9b8f78be",
       "range": {
         "startLine": 651,
         "startChar": 16,
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e95bfd16_5dda93c3",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2007,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-18T11:42:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3710c57b_6454adc3",
+      "range": {
+        "startLine": 2007,
+        "startChar": 2,
+        "endLine": 2007,
+        "endChar": 9
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a82427a7_7074389b",
@@ -94,6 +160,30 @@
       "writtenOn": "2024-09-17T01:19:38Z",
       "side": 1,
       "message": "Can we please put all the variable definitions before any logic (i.e. move these to the top of the while loop)",
+      "range": {
+        "startLine": 2007,
+        "startChar": 1,
+        "endLine": 2009,
+        "endChar": 23
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d25adfbd_42c3a06b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2009,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-18T11:42:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a82427a7_7074389b",
       "range": {
         "startLine": 2007,
         "startChar": 1,
@@ -127,6 +217,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18d3e282_b286106b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2010,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-18T11:42:12Z",
+      "side": 1,
+      "message": "I thought it was not required with the latest LIBPLDM_CC_NONNULL change but I can modify it with LIBPLDM_CC_NONNULL_ARGS . So I retored that commit , im sorry about the confusion u may need to +1 that commit again- https://gerrit.openbmc.org/c/openbmc/libpldm/+/73500\n\nI have added those changes back",
+      "parentUuid": "d57e4a59_31428dcc",
+      "range": {
+        "startLine": 2010,
+        "startChar": 49,
+        "endLine": 2010,
+        "endChar": 59
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b82a88c0_786cb79e",
@@ -140,6 +254,30 @@
       "writtenOn": "2024-09-17T01:19:38Z",
       "side": 1,
       "message": "Please define this at the top of the loop.",
+      "range": {
+        "startLine": 2018,
+        "startChar": 2,
+        "endLine": 2018,
+        "endChar": 11
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b8f480d_ec4446ca",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-18T11:42:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b82a88c0_786cb79e",
       "range": {
         "startLine": 2018,
         "startChar": 2,
@@ -167,6 +305,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c88fe0d1_e1476d75",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-18T11:42:12Z",
+      "side": 1,
+      "message": "did not use else if for the second as that is the same as above",
+      "parentUuid": "62b66356_2e630a79",
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d2c51e5_94826e25",
@@ -180,6 +336,30 @@
       "writtenOn": "2024-09-17T01:19:38Z",
       "side": 1,
       "message": "This formatting isn\u0027t very nice. Can you extract this out to its own statement? Same for the remaining instances below.",
+      "range": {
+        "startLine": 2094,
+        "startChar": 27,
+        "endLine": 2096,
+        "endChar": 65
+      },
+      "revId": "e0775dd35780fa5daf5e8c255bff9f3b7abf1f06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55c3b965_227dcbb3",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 2096,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-18T11:42:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d2c51e5_94826e25",
       "range": {
         "startLine": 2094,
         "startChar": 27,
