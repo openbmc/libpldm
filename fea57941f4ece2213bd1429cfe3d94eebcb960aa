@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13d059e0_8aa9dcdd",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-18T11:42:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f93d906_07692945",
+      "revId": "fea57941f4ece2213bd1429cfe3d94eebcb960aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef156d2f_bfd1b249",
@@ -58,6 +76,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e07e917_8b35ec55",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-18T11:42:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef156d2f_bfd1b249",
+      "range": {
+        "startLine": 1755,
+        "startChar": 1,
+        "endLine": 1756,
+        "endChar": 37
+      },
+      "revId": "fea57941f4ece2213bd1429cfe3d94eebcb960aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b070603c_0085b988",
@@ -71,6 +113,30 @@
       "writtenOn": "2024-09-17T01:29:44Z",
       "side": 1,
       "message": "Nit: You can use designated initialisers here too.",
+      "range": {
+        "startLine": 2051,
+        "startChar": 3,
+        "endLine": 2054,
+        "endChar": 35
+      },
+      "revId": "fea57941f4ece2213bd1429cfe3d94eebcb960aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20091a2b_6c809686",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 2054,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-18T11:42:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b070603c_0085b988",
       "range": {
         "startLine": 2051,
         "startChar": 3,
