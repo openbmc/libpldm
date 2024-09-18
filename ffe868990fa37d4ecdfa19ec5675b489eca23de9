@@ -58,6 +58,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6c7a79d_7c9bb365",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-18T02:08:23Z",
+      "side": 1,
+      "message": "Done. Please help to review, thank you.",
+      "parentUuid": "63eee6b7_4263ea60",
+      "range": {
+        "startLine": 88,
+        "startChar": 46,
+        "endLine": 88,
+        "endChar": 50
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44258211_23681e92",
@@ -75,6 +99,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c39feec_6f360188",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-18T02:08:23Z",
+      "side": 1,
+      "message": "Done. Please help to review, thank you.",
+      "parentUuid": "44258211_23681e92",
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22721076_632d8e28",
@@ -88,6 +130,30 @@
       "writtenOn": "2024-09-13T04:50:47Z",
       "side": 1,
       "message": "This should be `size_t`.",
+      "range": {
+        "startLine": 161,
+        "startChar": 22,
+        "endLine": 161,
+        "endChar": 30
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbfb6397_216ad990",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-18T02:08:23Z",
+      "side": 1,
+      "message": "Done. Please help to review, thank you.",
+      "parentUuid": "22721076_632d8e28",
       "range": {
         "startLine": 161,
         "startChar": 22,
@@ -121,6 +187,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "762d2a35_af9c6ee7",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-18T02:08:23Z",
+      "side": 1,
+      "message": "Done. Please help to review, thank you.",
+      "parentUuid": "9aa0ef7a_438aba9f",
+      "range": {
+        "startLine": 162,
+        "startChar": 47,
+        "endLine": 162,
+        "endChar": 55
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb9c73d2_a80cb132",
@@ -134,6 +224,30 @@
       "writtenOn": "2024-09-13T04:50:47Z",
       "side": 1,
       "message": "The idiomatic approach to passing object sizes is to pass them after the corresponding pointer argument. So to match conventions, this should be:\n\n```\nint encode_oem_meta_file_io_read_resp(uint8_t instance_id, struct pldm_oem_meta_file_io_read_resp *resp, size_t resp_len, struct pldm_msg *msg, size_t payload_length);\n```\n\nAnd with that, you\u0027ll need to fix the ordering in the doxygen.",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 31
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00dfb90f_f3699b9e",
+        "filename": "include/libpldm/oem/meta/file_io.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-18T02:08:23Z",
+      "side": 1,
+      "message": "Done. Please help to review, thank you.",
+      "parentUuid": "bb9c73d2_a80cb132",
       "range": {
         "startLine": 160,
         "startChar": 0,
@@ -167,6 +281,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dd45262_835ceb5d",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-18T02:08:23Z",
+      "side": 1,
+      "message": "After modification, compare_length parameter is no longer needed, so delete this parameter.",
+      "parentUuid": "d39b36b6_a0429dad",
+      "range": {
+        "startLine": 155,
+        "startChar": 1,
+        "endLine": 155,
+        "endChar": 8
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90347a4e_e282cf50",
@@ -184,6 +322,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3fc9dfb_035838e5",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-18T02:08:23Z",
+      "side": 1,
+      "message": "The modified line 209 has been changed to -EPROTO.",
+      "parentUuid": "90347a4e_e282cf50",
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6d74ac6_48262bf6",
@@ -197,6 +353,30 @@
       "writtenOn": "2024-09-13T04:50:47Z",
       "side": 1,
       "message": "Based on the comment on line 187 I think this can rather be:\n\n```\nswitch (resp-\u003eoption) {\ncase PLDM_OEM_META_FILE_IO_READ_ATTR:\ncase PLDM_OEM_META_FILE_IO_READ_DATA:\n    break;\ndefault:\n    return -EPROTO;\n}\n```\n\nWe need to validate that we have a option value that we understand, but that should be all.",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 183,
+        "endChar": 2
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eea20ba_75459f26",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-18T02:08:23Z",
+      "side": 1,
+      "message": "The modified line 209 has been changed to -EPROTO.",
+      "parentUuid": "b6d74ac6_48262bf6",
       "range": {
         "startLine": 172,
         "startChar": 1,
@@ -230,6 +410,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aac59eba_d77a77fc",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-18T02:08:23Z",
+      "side": 1,
+      "message": "Removed. Please help to review, thank you.",
+      "parentUuid": "9b5750b1_9f918e6b",
+      "range": {
+        "startLine": 185,
+        "startChar": 1,
+        "endLine": 187,
+        "endChar": 2
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f950a4d_5a2e9855",
@@ -253,6 +457,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59131fa7_15d1066d",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-18T02:08:23Z",
+      "side": 1,
+      "message": "Done. Please help to review, thank you.",
+      "parentUuid": "6f950a4d_5a2e9855",
+      "range": {
+        "startLine": 220,
+        "startChar": 3,
+        "endLine": 220,
+        "endChar": 34
+      },
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3309fed_a2d65f43",
@@ -266,6 +494,24 @@
       "writtenOn": "2024-09-13T04:50:47Z",
       "side": 1,
       "message": "I think this should rather be `pldm_msgbuf_destroy(buf)` - it\u0027s fine if the caller over-allocates the memory for `responseMsg`. Note that this is different to the `decode_*()` implementations, where the caller should know exactly how much data they read off the transport. We absolutely should use `pldm_msgbuf_destroy_consumed(buf)` in the `decode_*()` cases, but not in the `encode_*()` cases.",
+      "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76fc0d73_0423d891",
+        "filename": "src/oem/meta/file_io.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1002130
+      },
+      "writtenOn": "2024-09-18T02:08:23Z",
+      "side": 1,
+      "message": "Done. Please help to review, thank you.",
+      "parentUuid": "e3309fed_a2d65f43",
       "revId": "ffe868990fa37d4ecdfa19ec5675b489eca23de9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
