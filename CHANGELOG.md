@@ -25,6 +25,7 @@ Change categories:
 4. pdr: Add pldm_entity_association_pdr_remove_contained_entity()
 5. pdr: Add pldm_pdr_remove_fru_record_set_by_rsi()
 6. pldm_entity_association_tree_copy_root_check()
+7. oem: ibm: Add topology related state set and enum
 
 7. base: Add size and buffer macros for struct pldm_msg
 
