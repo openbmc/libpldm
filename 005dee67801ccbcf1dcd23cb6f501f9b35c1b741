@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "625476f3_5cd22b30",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1991,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-19T07:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19fd2155_dacb50ad",
+      "revId": "005dee67801ccbcf1dcd23cb6f501f9b35c1b741",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c298c838_3de75474",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-09-19T02:30:23Z",
       "side": 1,
       "message": "I realise this is contrary to the advice generally applied for C++, but for C projects can you please not default-initialise variables if the value has no meaning? Default-assignment prevents detection of incorrect use of the variable via e.g. valgrind or ubsan.",
+      "revId": "005dee67801ccbcf1dcd23cb6f501f9b35c1b741",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f334f89_37f012ee",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1996,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-19T07:33:51Z",
+      "side": 1,
+      "message": "Done. I have removed the initial value for match variable but clang-tidy is not happy if I remove the initial value of other variables like hdr_type, rc",
+      "parentUuid": "c298c838_3de75474",
       "revId": "005dee67801ccbcf1dcd23cb6f501f9b35c1b741",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
