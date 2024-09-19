@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2ea7982_1f8296a7",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1001614
+      },
+      "writtenOn": "2024-09-19T07:47:15Z",
+      "side": 1,
+      "message": "Can you please add new abi dumps, as you are putting changes in stable libpldm api",
+      "revId": "8de33ff0cfafe523538866db3bf28a21e216b004",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a959fdd_6518b13a",
         "filename": "tests/dsp/pdr.cpp",
         "patchSetId": 7
