@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d779104d_0d76958a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-09-19T09:48:36Z",
+      "side": 1,
+      "message": "Done, as your suggestion.",
+      "parentUuid": "53832a26_490d9dbc",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 24
+      },
+      "revId": "e0c8a8120187887148bf3d977dbe33f8f5ee8c22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e5fd8816_b8881ff6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-19T02:42:53Z",
       "side": 1,
       "message": "Perhaps:\n\n\u003e Mark them as stable to make to make the symbols visible\n\n?",
+      "range": {
+        "startLine": 10,
+        "startChar": 26,
+        "endLine": 12,
+        "endChar": 1
+      },
+      "revId": "e0c8a8120187887148bf3d977dbe33f8f5ee8c22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edb1a29a_2fc45134",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-09-19T09:48:36Z",
+      "side": 1,
+      "message": "Done, as your suggestion.",
+      "parentUuid": "e5fd8816_b8881ff6",
       "range": {
         "startLine": 10,
         "startChar": 26,
@@ -60,6 +108,24 @@
       "writtenOn": "2024-09-19T02:42:53Z",
       "side": 1,
       "message": "Hi Unive, thanks for the change. There\u0027s some information on both the considerations when creating stabilisation patches in the changes checklist:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md#stabilising-an-existing-api\n\nPlease make sure to address all the points there 😊\n\nAn important part of the stabilisation is updating the ABI dump. If you\u0027d like to tackle that on your own there are some hints in the section that follows:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md#updating-an-abi-dump\n\n(in fact, that documentation should be updated, as there\u0027s now a script you can run from inside the container that handles the process).\n\nHowever, if you\u0027d like me to do that for you please let me know.\n\nI have some other comments inline.",
+      "revId": "e0c8a8120187887148bf3d977dbe33f8f5ee8c22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ec7814_6c7cf08d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-09-19T09:48:36Z",
+      "side": 1,
+      "message": "Thank you for the review, due to this patch is based on previous one, which has not yet figure out to be nessesarily merged or not, so let me handle that one first, and then I\u0027ll turn back to this section. The corrections you\u0027ve indecated below have all been solved.",
+      "parentUuid": "25cf6300_d5c27c43",
       "revId": "e0c8a8120187887148bf3d977dbe33f8f5ee8c22",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
