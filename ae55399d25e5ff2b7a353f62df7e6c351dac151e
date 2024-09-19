@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb6bce71_d0d5b543",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-19T02:53:39Z",
+      "side": 1,
+      "message": "I realise that I might have caused some confusion with how I phrased the request on PS1, but can you please put an empty line above this `Fixes:` line?\n\nThe tags should be in their own \"paragraph\".\n\nNote that you can use `gitlint-ignore: T1` to allow long subject/title lines, and `gitlint-ignore: B1` to allow long lines in the body of the commit message. Though, this will obviously be policed heavily 😊\n\nSo:\n\n```\npdr: Improve error propagation\n\nEnhance error propagation in\npldm_entity_association_pdr_add_from_node_with_record_handle(). Instead\nof always returning 0, the function now returns the result from\nentity_association_pdr_add to accurately reflect success/failure.\n\ngitlint-ignore: B1\nFixes: 25ddbccfae0e (\"pdr: Add pldm_entity_association_pdr_add_from_node_with_record_handle()\")\nChange-Id: I4d3711e096b2a90c62a600be89a16b47e6b20f79\nSigned-off-by: Archana Kakani \u003carchana.kakani@ibm.com\u003e\n```",
+      "revId": "ae55399d25e5ff2b7a353f62df7e6c351dac151e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
