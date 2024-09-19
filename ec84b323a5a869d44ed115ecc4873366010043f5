@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ccd2de_fe7c3929",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-19T07:42:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f4417d9_8cfdfc89",
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb93070c_eb2768de",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-09-11T06:17:06Z",
       "side": 1,
       "message": "Please instead return 0 (false) if it\u0027s not found, or 1 (true) if it is found, or a negative error code if there\u0027s an error. Taking a bool pointer is a bit much.",
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6f0cec7_56b8ed1c",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-19T07:42:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb93070c_eb2768de",
       "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc110e7b_b5937698",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-19T07:42:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee304bfd_6ca4770e",
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ea0653c_91fbf510",
@@ -82,6 +136,30 @@
       "writtenOn": "2024-09-11T06:17:06Z",
       "side": 1,
       "message": "Maybe we could give this a more succinct name too. Maybe just `entity`, or `e`?",
+      "range": {
+        "startLine": 2070,
+        "startChar": 21,
+        "endLine": 2070,
+        "endChar": 37
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45a744d2_b3da7334",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-19T07:42:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ea0653c_91fbf510",
       "range": {
         "startLine": 2070,
         "startChar": 21,
@@ -115,6 +193,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "106cc9f3_32d4eebe",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2074,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-19T07:42:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a95cbe9a_418971e2",
+      "range": {
+        "startLine": 2070,
+        "startChar": 40,
+        "endLine": 2074,
+        "endChar": 4
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6206c83d_5701964f",
@@ -134,6 +236,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ad7de12_46ab6648",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2156,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-19T07:42:45Z",
+      "side": 1,
+      "message": "changing the entire test case and will use msgbuf APIs here",
+      "parentUuid": "6206c83d_5701964f",
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8de8f14b_3ff78981",
         "filename": "tests/dsp/pdr.cpp",
         "patchSetId": 3
@@ -145,6 +265,30 @@
       "writtenOn": "2024-09-11T06:17:06Z",
       "side": 1,
       "message": "Do we not have existing APIs to do all this?",
+      "range": {
+        "startLine": 2157,
+        "startChar": 1,
+        "endLine": 2181,
+        "endChar": 45
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01694d4a_671cddbe",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2181,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-19T07:42:45Z",
+      "side": 1,
+      "message": "we dont have an API for this yet. I can add one if required because it will help with unit tests only",
+      "parentUuid": "8de8f14b_3ff78981",
       "range": {
         "startLine": 2157,
         "startChar": 1,
@@ -178,6 +322,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec775df_cd8488ae",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2196,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-19T07:42:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35b863e4_b3c11c98",
+      "range": {
+        "startLine": 2196,
+        "startChar": 24,
+        "endLine": 2196,
+        "endChar": 32
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70f41078_0ab71c26",
@@ -191,6 +359,30 @@
       "writtenOn": "2024-09-11T06:17:06Z",
       "side": 1,
       "message": "Either we need endianness conversion or we don\u0027t (we shouldn\u0027t). Which is it?",
+      "range": {
+        "startLine": 2201,
+        "startChar": 1,
+        "endLine": 2203,
+        "endChar": 36
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f85abf4_7bd9c72f",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-19T07:42:45Z",
+      "side": 1,
+      "message": "we should not be doing an endian conversion anywhere in test since the unit test is only handled and executed within Libpldm. I will correct this unit test",
+      "parentUuid": "70f41078_0ab71c26",
       "range": {
         "startLine": 2201,
         "startChar": 1,
