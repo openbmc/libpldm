@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0842334c_7ee74c9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-19T02:47:49Z",
+      "side": 1,
+      "message": "I think you may have a misunderstanding here. The structs intentionally do not specify the `__attribute__((packed))`. It sounds like you\u0027re trying to cast them directly over the wire-formatted buffer, which is not intended to work, because many PLDM messages are not specified in a way that can be directly mapped to a C struct. This is why there is a serialisation process (the `encode_*()` / `decode_*()` APIs) at all.\n\nThe issue is called out in the changes checklist:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L109-L110\n\nIf you\u0027d like to post a demonstration of how you were using the type such that you observed data corruption I\u0027d appreciate it. That way we can work towards consensus on what it is that you should be doing.",
+      "revId": "bb657a6d02755d1a1d570a19253a470432461ee2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
