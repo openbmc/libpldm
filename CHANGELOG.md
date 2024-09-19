@@ -24,6 +24,7 @@ Change categories:
 3. oem: meta: Add encode_oem_meta_file_io_read_resp()
 4. pdr: Add pldm_entity_association_pdr_remove_contained_entity()
 5. pdr: Add pldm_pdr_remove_fru_record_set_by_rsi()
+6. oem: ibm: Add topology related state set and enum
 
 ### Deprecated
 
