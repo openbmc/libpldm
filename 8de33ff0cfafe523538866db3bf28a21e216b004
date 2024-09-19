@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a959fdd_6518b13a",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1435,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-19T03:02:55Z",
+      "side": 1,
+      "message": "😞\n\nHave you seen [clang-tidy: Enable cppcoreguidelines-pro-type-reinterpret-cast](https://gerrit.openbmc.org/c/openbmc/libpldm/+/74448) ?\n\nI\u0027m planning to prevent further additions of `reinterpret_cast\u003c\u003e()`. Can we use the `msgbuf` APIs here instead?",
+      "revId": "8de33ff0cfafe523538866db3bf28a21e216b004",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
