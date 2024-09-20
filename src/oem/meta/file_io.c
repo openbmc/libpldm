@@ -9,14 +9,14 @@
 #include "msgbuf.h"
 #include "dsp/base.h"
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 void *pldm_oem_meta_file_io_write_req_data(
 	struct pldm_oem_meta_file_io_write_req *req)
 {
 	return req->data;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_oem_meta_file_io_write_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_oem_meta_file_io_write_req *req, size_t req_length)
@@ -90,7 +90,7 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 	return 0;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 				     size_t payload_length,
 				     struct pldm_oem_meta_file_io_read_req *req)
@@ -141,14 +141,14 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 	return pldm_msgbuf_destroy_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 void *pldm_oem_meta_file_io_read_resp_data(
 	struct pldm_oem_meta_file_io_read_resp *resp)
 {
 	return resp->data;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_oem_meta_file_io_read_resp(
 	uint8_t instance_id, struct pldm_oem_meta_file_io_read_resp *resp,
 	size_t resp_len, struct pldm_msg *responseMsg, size_t payload_length)

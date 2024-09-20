@@ -9256,9 +9256,72 @@ $VAR1 = {
       'Return' => '100',
       'ShortName' => 'encode_bios_attribute_update_event_req'
     },
-    '310332' => {
+    '311088' => {
       'Header' => 'file_io.h',
-      'Line' => '36',
+      'Line' => '160',
+      'Param' => {
+        '0' => {
+          'name' => 'instance_id',
+          'type' => '121'
+        },
+        '1' => {
+          'name' => 'resp',
+          'type' => '313640'
+        },
+        '2' => {
+          'name' => 'resp_len',
+          'type' => '1145'
+        },
+        '3' => {
+          'name' => 'responseMsg',
+          'type' => '4155'
+        },
+        '4' => {
+          'name' => 'payload_length',
+          'type' => '1145'
+        }
+      },
+      'Return' => '100',
+      'ShortName' => 'encode_oem_meta_file_io_read_resp'
+    },
+    '313655' => {
+      'Header' => 'file_io.h',
+      'Line' => '147',
+      'Param' => {
+        '0' => {
+          'name' => 'resp',
+          'type' => '313640'
+        }
+      },
+      'Reg' => {
+        '0' => 'rdi'
+      },
+      'Return' => '2579',
+      'ShortName' => 'pldm_oem_meta_file_io_read_resp_data'
+    },
+    '313703' => {
+      'Header' => 'file_io.h',
+      'Line' => '137',
+      'Param' => {
+        '0' => {
+          'name' => 'msg',
+          'type' => '4602'
+        },
+        '1' => {
+          'name' => 'payload_length',
+          'type' => '1145'
+        },
+        '2' => {
+          'name' => 'req',
+          'type' => '315228'
+        }
+      },
+      'Return' => '100',
+      'ShortName' => 'decode_oem_meta_file_io_read_req'
+    },
+    '315233' => {
+      'Header' => 'file_io.h',
+      'Line' => '126',
       'Param' => {
         '0' => {
           'name' => 'msg',
@@ -9281,8 +9344,54 @@ $VAR1 = {
           'type' => '4607'
         }
       },
+      'Reg' => {
+        '0' => 'rbx',
+        '1' => 'rsi',
+        '2' => 'rbp',
+        '3' => 'rcx',
+        '4' => 'r8'
+      },
       'Return' => '100',
       'ShortName' => 'decode_oem_meta_file_io_req'
+    },
+    '315667' => {
+      'Header' => 'file_io.h',
+      'Line' => '113',
+      'Param' => {
+        '0' => {
+          'name' => 'msg',
+          'type' => '4602'
+        },
+        '1' => {
+          'name' => 'payload_length',
+          'type' => '1145'
+        },
+        '2' => {
+          'name' => 'req',
+          'type' => '315662'
+        },
+        '3' => {
+          'name' => 'req_length',
+          'type' => '1145'
+        }
+      },
+      'Return' => '100',
+      'ShortName' => 'decode_oem_meta_file_io_write_req'
+    },
+    '317039' => {
+      'Header' => 'file_io.h',
+      'Line' => '102',
+      'Param' => {
+        '0' => {
+          'name' => 'req',
+          'type' => '315662'
+        }
+      },
+      'Reg' => {
+        '0' => 'rdi'
+      },
+      'Return' => '2579',
+      'ShortName' => 'pldm_oem_meta_file_io_write_req_data'
     }
   },
   'SymbolVersion' => {},
@@ -9351,7 +9460,9 @@ $VAR1 = {
       'decode_new_file_with_metadata_resp' => 1,
       'decode_numeric_sensor_data' => 1,
       'decode_numeric_sensor_pdr_data' => 1,
+      'decode_oem_meta_file_io_read_req' => 1,
       'decode_oem_meta_file_io_req' => 1,
+      'decode_oem_meta_file_io_write_req' => 1,
       'decode_pass_component_table_resp' => 1,
       'decode_platform_event_message_req' => 1,
       'decode_platform_event_message_resp' => 1,
@@ -9451,6 +9562,7 @@ $VAR1 = {
       'encode_new_file_resp' => 1,
       'encode_new_file_with_metadata_req' => 1,
       'encode_new_file_with_metadata_resp' => 1,
+      'encode_oem_meta_file_io_read_resp' => 1,
       'encode_pass_component_table_req' => 1,
       'encode_platform_event_message_req' => 1,
       'encode_platform_event_message_resp' => 1,
@@ -9579,6 +9691,8 @@ $VAR1 = {
       'pldm_is_current_parent_child' => 1,
       'pldm_is_empty_entity_assoc_tree' => 1,
       'pldm_msg_hdr_correlate_response' => 1,
+      'pldm_oem_meta_file_io_read_resp_data' => 1,
+      'pldm_oem_meta_file_io_write_req_data' => 1,
       'pldm_open' => 1,
       'pldm_pdr_add' => 1,
       'pldm_pdr_add_fru_record_set' => 1,
@@ -12935,6 +13049,197 @@ $VAR1 = {
     '283493' => {
       'BaseType' => '283175',
       'Name' => 'struct pldm_transport_af_mctp**',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '309990' => {
+      'Header' => 'file_io.h',
+      'Line' => '32',
+      'Memb' => {
+        '0' => {
+          'name' => 'handle',
+          'offset' => '0',
+          'type' => '121'
+        },
+        '1' => {
+          'name' => 'length',
+          'offset' => '4',
+          'type' => '1023'
+        },
+        '2' => {
+          'name' => 'data',
+          'offset' => '8',
+          'type' => '85650'
+        }
+      },
+      'Name' => 'struct pldm_oem_meta_file_io_write_req',
+      'Size' => '8',
+      'Type' => 'Struct'
+    },
+    '310057' => {
+      'Header' => 'file_io.h',
+      'Line' => '45',
+      'Memb' => {
+        '0' => {
+          'name' => 'transferFlag',
+          'offset' => '0',
+          'type' => '121'
+        },
+        '1' => {
+          'name' => 'offset',
+          'offset' => '2',
+          'type' => '1011'
+        }
+      },
+      'Name' => 'struct pldm_oem_meta_file_io_read_data_info',
+      'Size' => '4',
+      'Type' => 'Struct'
+    },
+    '310096' => {
+      'Header' => 'file_io.h',
+      'Line' => '55',
+      'Memb' => {
+        '0' => {
+          'name' => 'size',
+          'offset' => '0',
+          'type' => '1011'
+        },
+        '1' => {
+          'name' => 'crc32',
+          'offset' => '4',
+          'type' => '1023'
+        }
+      },
+      'Name' => 'struct pldm_oem_meta_file_io_read_attr_info',
+      'Size' => '8',
+      'Type' => 'Struct'
+    },
+    '310135' => {
+      'Header' => 'file_io.h',
+      'Line' => '70',
+      'Memb' => {
+        '0' => {
+          'name' => 'data',
+          'offset' => '0',
+          'type' => '310057'
+        }
+      },
+      'Name' => 'anon-union-file_io.h-70',
+      'Size' => '4',
+      'Type' => 'Union'
+    },
+    '310153' => {
+      'Header' => 'file_io.h',
+      'Line' => '65',
+      'Memb' => {
+        '0' => {
+          'name' => 'version',
+          'offset' => '0',
+          'type' => '1145'
+        },
+        '1' => {
+          'name' => 'handle',
+          'offset' => '8',
+          'type' => '121'
+        },
+        '2' => {
+          'name' => 'option',
+          'offset' => '9',
+          'type' => '121'
+        },
+        '3' => {
+          'name' => 'length',
+          'offset' => '16',
+          'type' => '121'
+        },
+        '4' => {
+          'name' => 'info',
+          'offset' => '18',
+          'type' => '310135'
+        }
+      },
+      'Name' => 'struct pldm_oem_meta_file_io_read_req',
+      'Size' => '16',
+      'Type' => 'Struct'
+    },
+    '310231' => {
+      'Header' => 'file_io.h',
+      'Line' => '86',
+      'Memb' => {
+        '0' => {
+          'name' => 'attr',
+          'offset' => '0',
+          'type' => '310096'
+        },
+        '1' => {
+          'name' => 'data',
+          'offset' => '0',
+          'type' => '310057'
+        }
+      },
+      'Name' => 'anon-union-file_io.h-86',
+      'Size' => '8',
+      'Type' => 'Union'
+    },
+    '310259' => {
+      'Header' => 'file_io.h',
+      'Line' => '80',
+      'Memb' => {
+        '0' => {
+          'name' => 'version',
+          'offset' => '0',
+          'type' => '1145'
+        },
+        '1' => {
+          'name' => 'completion_code',
+          'offset' => '8',
+          'type' => '121'
+        },
+        '2' => {
+          'name' => 'handle',
+          'offset' => '9',
+          'type' => '121'
+        },
+        '3' => {
+          'name' => 'option',
+          'offset' => '16',
+          'type' => '121'
+        },
+        '4' => {
+          'name' => 'length',
+          'offset' => '17',
+          'type' => '121'
+        },
+        '5' => {
+          'name' => 'info',
+          'offset' => '18',
+          'type' => '310231'
+        },
+        '6' => {
+          'name' => 'data',
+          'offset' => '32',
+          'type' => '85650'
+        }
+      },
+      'Name' => 'struct pldm_oem_meta_file_io_read_resp',
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '313640' => {
+      'BaseType' => '310259',
+      'Name' => 'struct pldm_oem_meta_file_io_read_resp*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '315228' => {
+      'BaseType' => '310153',
+      'Name' => 'struct pldm_oem_meta_file_io_read_req*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '315662' => {
+      'BaseType' => '309990',
+      'Name' => 'struct pldm_oem_meta_file_io_write_req*',
       'Size' => '8',
       'Type' => 'Pointer'
     }
