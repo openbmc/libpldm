@@ -34,6 +34,24 @@
       "parentUuid": "0842334c_7ee74c9c",
       "revId": "bb657a6d02755d1a1d570a19253a470432461ee2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43549e95_57eef6af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-20T03:08:48Z",
+      "side": 1,
+      "message": "Okay, so if the issue was with `sizeof()`, I think we\u0027re missing the message size macros. Perhaps you can add them instead? Generally I\u0027ve been asking people to add a `define` immediately following struct definition.",
+      "parentUuid": "b4672dc8_d5ea8370",
+      "revId": "bb657a6d02755d1a1d570a19253a470432461ee2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
