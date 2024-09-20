@@ -136,6 +136,9 @@ Change categories:
    parameter `previous_op_state`.
 
 5. platform: Stabilise decode_pldm_platform_cper_event() API
+6. oem: meta: Stabilise decode_oem_meta_file_io_write_req() API
+7. oem: meta: Stabilise decode_oem_meta_file_io_read_req() API
+8. oem: meta: Stabilise encode_oem_meta_file_io_read_resp() API
 
 ### Deprecated
 
