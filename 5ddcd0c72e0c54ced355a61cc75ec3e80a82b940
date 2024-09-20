@@ -51,6 +51,24 @@
       "parentUuid": "e2afac9a_d70c5676",
       "revId": "5ddcd0c72e0c54ced355a61cc75ec3e80a82b940",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcb3a25e_87e75b04",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-20T03:02:51Z",
+      "side": 1,
+      "message": "I mean, if this is what you say you need, then fine, but I\u0027d be wary of the forwards/backwards incompatibility fallout. If you mark this as resolved I\u0027ll merge it, but you must also update  the changelog so the break is clear to library users.",
+      "parentUuid": "e38446b9_c302b35d",
+      "revId": "5ddcd0c72e0c54ced355a61cc75ec3e80a82b940",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
