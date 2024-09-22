@@ -1210,26 +1210,49 @@ pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
 	return node;
 }
 
-static void entity_association_tree_copy(pldm_entity_node *org_node,
-					 pldm_entity_node **new_node)
+static int entity_association_tree_copy(pldm_entity_node *org_node,
+					pldm_entity_node **new_node)
 {
+	int rc;
+
 	if (org_node == NULL) {
-		return;
+		return 0;
 	}
+
 	*new_node = malloc(sizeof(pldm_entity_node));
+	if (!*new_node) {
+		return -ENOMEM;
+	}
+
 	(*new_node)->parent = org_node->parent;
 	(*new_node)->entity = org_node->entity;
 	(*new_node)->association_type = org_node->association_type;
 	(*new_node)->remote_container_id = org_node->remote_container_id;
 	(*new_node)->first_child = NULL;
 	(*new_node)->next_sibling = NULL;
-	entity_association_tree_copy(org_node->first_child,
-				     &((*new_node)->first_child));
-	entity_association_tree_copy(org_node->next_sibling,
-				     &((*new_node)->next_sibling));
+
+	rc = entity_association_tree_copy(org_node->first_child,
+					  &((*new_node)->first_child));
+	if (rc) {
+		goto cleanup;
+	}
+
+	rc = entity_association_tree_copy(org_node->next_sibling,
+					  &((*new_node)->next_sibling));
+	if (rc) {
+		entity_association_tree_destroy((*new_node)->first_child);
+		goto cleanup;
+	}
+
+	return 0;
+
+cleanup:
+	free(*new_node);
+	*new_node = NULL;
+	return rc;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 void pldm_entity_association_tree_copy_root(
 	pldm_entity_association_tree *org_tree,
 	pldm_entity_association_tree *new_tree)
@@ -1239,6 +1262,19 @@ void pldm_entity_association_tree_copy_root(
 
 	new_tree->last_used_container_id = org_tree->last_used_container_id;
 	entity_association_tree_copy(org_tree->root, &(new_tree->root));
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_entity_association_tree_copy_root_check(
+	pldm_entity_association_tree *org_tree,
+	pldm_entity_association_tree *new_tree)
+{
+	if (!org_tree || !new_tree) {
+		return -EINVAL;
+	}
+
+	new_tree->last_used_container_id = org_tree->last_used_container_id;
+	return entity_association_tree_copy(org_tree->root, &(new_tree->root));
 }
 
 LIBPLDM_ABI_STABLE

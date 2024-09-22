@@ -22,6 +22,7 @@ Change categories:
 1. oem: meta: Add decode_oem_meta_file_io_write_req()
 2. oem: meta: Add decode_oem_meta_file_io_read_req()
 3. oem: meta: Add encode_oem_meta_file_io_read_resp()
+4. pldm_entity_association_tree_copy_root_check()
 
 ### Changed
 
@@ -52,6 +53,12 @@ Change categories:
    - The meaning of the returned result.
    - Change parameters from individual pointers to a struct.
    - Check the length provided in the message won't exceed the buffer.
+
+2. pldm_entity_association_tree_copy_root()
+
+   The implementation allocates, but gives no indication to the caller if an
+   allocation (and hence the copy) has failed. Users should migrate to
+   pldm_entity_association_tree_copy_root_check().
 
 ### Removed
 
