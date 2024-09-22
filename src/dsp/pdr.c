@@ -33,12 +33,10 @@ typedef struct pldm_pdr {
 	pldm_pdr_record *last;
 } pldm_pdr;
 
+LIBPLDM_CC_NONNULL
 static inline uint32_t get_next_record_handle(const pldm_pdr *repo,
 					      const pldm_pdr_record *record)
 {
-	assert(repo != NULL);
-	assert(record != NULL);
-
 	if (record == repo->last) {
 		return 0;
 	}
@@ -463,9 +461,9 @@ typedef struct pldm_entity_node {
 	uint8_t association_type;
 } pldm_entity_node;
 
+LIBPLDM_CC_NONNULL
 static inline uint16_t next_container_id(pldm_entity_association_tree *tree)
 {
-	assert(tree != NULL);
 	assert(tree->last_used_container_id != UINT16_MAX);
 
 	return ++tree->last_used_container_id;
@@ -502,11 +500,10 @@ pldm_entity_association_tree *pldm_entity_association_tree_init(void)
 	return tree;
 }
 
+LIBPLDM_CC_NONNULL
 static pldm_entity_node *find_insertion_at(pldm_entity_node *start,
 					   uint16_t entity_type)
 {
-	assert(start != NULL);
-
 	/* Insert after the the last node that matches the input entity type, or
 	 * at the end if no such match occurs
 	 */
@@ -735,7 +732,9 @@ pldm_entity pldm_entity_get_parent(pldm_entity_node *node)
 LIBPLDM_ABI_STABLE
 bool pldm_entity_is_exist_parent(pldm_entity_node *node)
 {
-	assert(node != NULL);
+	if (!node) {
+		return false;
+	}
 
 	if (node->parent.entity_type == 0 &&
 	    node->parent.entity_instance_num == 0 &&
@@ -1327,15 +1326,11 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 /* Find the position of record in pldm_pdr repo and place new_record in
  * the same position.
  */
+LIBPLDM_CC_NONNULL
 static int pldm_pdr_replace_record(pldm_pdr *repo, pldm_pdr_record *record,
 				   pldm_pdr_record *prev,
 				   pldm_pdr_record *new_record)
 {
-	assert(repo);
-	assert(record);
-	assert(prev);
-	assert(new_record);
-
 	if (repo->size < record->size) {
 		return -EOVERFLOW;
 	}
@@ -1362,13 +1357,10 @@ static int pldm_pdr_replace_record(pldm_pdr *repo, pldm_pdr_record *record,
 /* Insert a new record to pldm_pdr repo to a position that comes after
  * pldm_pdr_record record.
  */
+LIBPLDM_CC_NONNULL
 static int pldm_pdr_insert_record(pldm_pdr *repo, pldm_pdr_record *record,
 				  pldm_pdr_record *new_record)
 {
-	assert(repo);
-	assert(record);
-	assert(new_record);
-
 	if (repo->size + new_record->size < new_record->size) {
 		return -EOVERFLOW;
 	}
@@ -1391,13 +1383,11 @@ static int pldm_pdr_insert_record(pldm_pdr *repo, pldm_pdr_record *record,
 
 /* Find the position of PDR when its record handle is known
  */
+LIBPLDM_CC_NONNULL
 static bool pldm_pdr_find_record_by_handle(pldm_pdr_record **record,
 					   pldm_pdr_record **prev,
 					   uint32_t record_handle)
 {
-	assert(record);
-	assert(prev);
-
 	while (*record != NULL) {
 		if ((*record)->record_handle == record_handle) {
 			return true;

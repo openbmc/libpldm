@@ -32,6 +32,16 @@ Change categories:
    pldm_bios_table_iter_is_end() now returns true if the provided argument is
    NULL.
 
+2. ABI break for pldm_pdr_find_record()
+
+   Register assignment for function parameters was changed with the removal of
+   some asserts in related implementations.
+
+3. ABI break for pldm_pdr_get_next_record()
+
+   Register assignment for function parameters was changed with the removal of
+   some asserts in related implementations.
+
 ### Deprecated
 
 1. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
