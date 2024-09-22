@@ -23,6 +23,10 @@ endif
 add_project_arguments('-D_GNU_SOURCE', language: ['c'])
 
 compiler = meson.get_compiler('c')
+if compiler.has_argument('-Wvla')
+    add_project_arguments('-Wvla', language: ['c'])
+endif
+
 conf = configuration_data()
 if compiler.has_header('poll.h')
     conf.set('PLDM_HAS_POLL', 1)

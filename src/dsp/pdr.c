@@ -295,9 +295,8 @@ int pldm_pdr_add_fru_record_set(pldm_pdr *repo, uint16_t terminus_handle,
 		return -EINVAL;
 	}
 
-	uint32_t size = sizeof(struct pldm_pdr_hdr) +
-			sizeof(struct pldm_pdr_fru_record_set);
-	uint8_t data[size];
+	uint8_t data[sizeof(struct pldm_pdr_hdr) +
+		     sizeof(struct pldm_pdr_fru_record_set)];
 
 	struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)&data;
 	hdr->version = 1;
@@ -314,7 +313,7 @@ int pldm_pdr_add_fru_record_set(pldm_pdr *repo, uint16_t terminus_handle,
 	fru->entity_instance_num = htole16(entity_instance_num);
 	fru->container_id = htole16(container_id);
 
-	return pldm_pdr_add(repo, data, size, false, terminus_handle,
+	return pldm_pdr_add(repo, data, sizeof(data), false, terminus_handle,
 			    bmc_record_handle);
 }
 
@@ -798,8 +797,16 @@ static int entity_association_pdr_add_children(
 	uint8_t contained_count, uint8_t association_type, bool is_remote,
 	uint16_t terminus_handle, uint32_t record_handle)
 {
-	uint8_t pdr[size];
-	uint8_t *start = pdr;
+	uint8_t *start;
+	uint8_t *pdr;
+	int rc;
+
+	pdr = calloc(1, size);
+	if (!pdr) {
+		return -ENOMEM;
+	}
+
+	start = pdr;
 
 	struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)start;
 	hdr->version = 1;
@@ -838,8 +845,10 @@ static int entity_association_pdr_add_children(
 		node = node->next_sibling;
 	}
 
-	return pldm_pdr_add(repo, pdr, size, is_remote, terminus_handle,
-			    &record_handle);
+	rc = pldm_pdr_add(repo, pdr, size, is_remote, terminus_handle,
+			  &record_handle);
+	free(pdr);
+	return rc;
 }
 
 static int entity_association_pdr_add_entry(pldm_entity_node *curr,
