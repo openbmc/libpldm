@@ -594,6 +594,19 @@ void pldm_entity_association_tree_copy_root(
 	pldm_entity_association_tree *org_tree,
 	pldm_entity_association_tree *new_tree);
 
+/** @brief Create a copy of an existing entity association tree
+ *
+ *  @param[in] org_tree - pointer to source tree
+ *  @param[in/out] new_tree - pointer to destination tree
+ *
+ *  @return 0 if the entity association tree was copied, -EINVAL if the argument
+ *          values are invalid, or -ENOMEM if memory required for the copy
+ *          cannot be allocated.
+ */
+int pldm_entity_association_tree_copy_root_check(
+	pldm_entity_association_tree *org_tree,
+	pldm_entity_association_tree *new_tree);
+
 /** @brief Destroy all the nodes of the entity association tree
  *
  *  @param[in] tree - pointer to entity association tree

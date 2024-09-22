@@ -1464,9 +1464,12 @@ TEST(EntityAssociationPDR, testFind)
     pldm_entity_association_tree_destroy(tree);
 }
 
+#ifdef LIBPLDM_API_TESTING
 TEST(EntityAssociationPDR, testCopyTree)
 {
     pldm_entity entities[4]{};
+    int rc;
+
     entities[0].entity_type = 1;
     entities[1].entity_type = 2;
     entities[2].entity_type = 2;
@@ -1492,7 +1495,8 @@ TEST(EntityAssociationPDR, testCopyTree)
     pldm_entity_association_tree_visit(orgTree, &orgOut, &orgNum);
     EXPECT_EQ(orgNum, 4u);
 
-    pldm_entity_association_tree_copy_root(orgTree, newTree);
+    rc = pldm_entity_association_tree_copy_root_check(orgTree, newTree);
+    ASSERT_EQ(rc, 0);
     size_t newNum{};
     pldm_entity* newOut = nullptr;
     pldm_entity_association_tree_visit(newTree, &newOut, &newNum);
@@ -1505,6 +1509,7 @@ TEST(EntityAssociationPDR, testCopyTree)
     pldm_entity_association_tree_destroy(orgTree);
     pldm_entity_association_tree_destroy(newTree);
 }
+#endif
 
 TEST(EntityAssociationPDR, testExtract)
 {

@@ -24,6 +24,7 @@ Change categories:
 3. oem: meta: Add encode_oem_meta_file_io_read_resp()
 4. pdr: Add pldm_entity_association_pdr_remove_contained_entity()
 5. pdr: Add pldm_pdr_remove_fru_record_set_by_rsi()
+6. pldm_entity_association_tree_copy_root_check()
 
 ### Changed
 
@@ -54,6 +55,12 @@ Change categories:
    - The meaning of the returned result.
    - Change parameters from individual pointers to a struct.
    - Check the length provided in the message won't exceed the buffer.
+
+2. pldm_entity_association_tree_copy_root()
+
+   The implementation allocates, but gives no indication to the caller if an
+   allocation (and hence the copy) has failed. Users should migrate to
+   pldm_entity_association_tree_copy_root_check().
 
 ### Removed
 
