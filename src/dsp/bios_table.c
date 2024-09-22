@@ -988,6 +988,10 @@ bool pldm_bios_table_iter_is_end(const struct pldm_bios_table_iter *iter)
 {
 	ssize_t len;
 
+	if (!iter) {
+		return true;
+	}
+
 	if (iter->table_len - iter->current_pos <= pad_and_check_max) {
 		return true;
 	}

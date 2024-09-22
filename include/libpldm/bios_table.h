@@ -35,7 +35,8 @@ void pldm_bios_table_iter_free(struct pldm_bios_table_iter *iter);
 
 /** @brief Check if the iterator reaches the end of the bios table
  *  @param[in] iter - Pointer to the bios table iterator
- *  @return true if iterator reaches the end
+ *  @return true if either the iterator reaches the end or @p iter is NULL,
+ *          otherwise false.
  *  @note *end* is a position after the last entry.
  */
 bool pldm_bios_table_iter_is_end(const struct pldm_bios_table_iter *iter);

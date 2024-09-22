@@ -25,6 +25,13 @@ Change categories:
 4. pdr: Add pldm_entity_association_pdr_remove_contained_entity()
 5. pdr: Add pldm_pdr_remove_fru_record_set_by_rsi()
 
+### Changed
+
+1. dsp: bios_table: Null check for pldm_bios_table_iter_is_end()
+
+   pldm_bios_table_iter_is_end() now returns true if the provided argument is
+   NULL.
+
 ### Deprecated
 
 1. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
@@ -60,6 +67,13 @@ Change categories:
    - `pldm_entity_association_pdr_add_from_node_check()`
    - `pldm_pdr_add_check()`
    - `pldm_pdr_add_fru_record_set_check()`
+
+### Fixed
+
+1. dsp: bios_table: Null check for pldm_bios_table_iter_is_end()
+
+   Avoid a caller-controlled NULL pointer dereference in the library
+   implementation.
 
 ## [0.9.1] - 2024-09-07
 

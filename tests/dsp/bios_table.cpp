@@ -484,6 +484,8 @@ TEST(AttrTable, ItearatorTest)
     pldm_bios_table_iter_next(iter);
     EXPECT_TRUE(pldm_bios_table_iter_is_end(iter));
     pldm_bios_table_iter_free(iter);
+
+    EXPECT_TRUE(pldm_bios_table_iter_is_end(nullptr));
 }
 
 TEST(AttrTable, FindTest)
