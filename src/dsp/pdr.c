@@ -458,14 +458,6 @@ typedef struct pldm_entity_node {
 	uint8_t association_type;
 } pldm_entity_node;
 
-LIBPLDM_CC_NONNULL
-static inline uint16_t next_container_id(pldm_entity_association_tree *tree)
-{
-	assert(tree->last_used_container_id != UINT16_MAX);
-
-	return ++tree->last_used_container_id;
-}
-
 LIBPLDM_ABI_STABLE
 pldm_entity pldm_entity_extract(pldm_entity_node *node)
 {
@@ -592,8 +584,11 @@ pldm_entity_node *pldm_entity_association_tree_add_entity(
 			if (container_id != 0xffff) {
 				node->entity.entity_container_id = container_id;
 			} else {
+				/* We will have returned above */
+				assert(tree->last_used_container_id !=
+				       UINT16_MAX);
 				node->entity.entity_container_id =
-					next_container_id(tree);
+					++tree->last_used_container_id;
 			}
 		} else {
 			node->entity.entity_container_id =
