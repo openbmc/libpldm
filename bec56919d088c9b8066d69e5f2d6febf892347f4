@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b867c6a9_49ced5be",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-23T01:57:06Z",
+      "side": 1,
+      "message": "Nitpick: Can you please remove the empty line here, so the macro is more strongly associated with the struct?",
+      "revId": "bec56919d088c9b8066d69e5f2d6febf892347f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d8c0ac_fcb0c7cb",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-23T01:57:06Z",
+      "side": 1,
+      "message": "Is this the only size macro you need? Previously you had marked many more structs as packed.",
+      "revId": "bec56919d088c9b8066d69e5f2d6febf892347f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

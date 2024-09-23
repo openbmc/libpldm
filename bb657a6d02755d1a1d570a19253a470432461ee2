@@ -70,6 +70,24 @@
       "parentUuid": "43549e95_57eef6af",
       "revId": "bb657a6d02755d1a1d570a19253a470432461ee2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c15d49a_3b2411ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-23T01:57:06Z",
+      "side": 1,
+      "message": "\u003e Done, as your request, the macro was defined right behind the struct definition,\n\nThanks\n\n\u003e but I\u0027ve notice that those other size-define macros did not done like that.\n\nYeah, my philosophy is \"keep things that go together together\". I don\u0027t like how the functions, structs and macros have been split historically, it makes it hard to keep track of. There are many historical things that need fixing 😊\n\n\u003e Done, as your request, the macro was defined right behind the struct definition, but I\u0027ve notice that those other size-define macros did not done like that.\n\nThanks.",
+      "parentUuid": "45f8d0d4_12d70e05",
+      "revId": "bb657a6d02755d1a1d570a19253a470432461ee2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
