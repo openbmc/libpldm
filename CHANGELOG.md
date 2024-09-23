@@ -38,22 +38,8 @@ Change categories:
    pldm_bios_table_iter_is_end() now returns true if the provided argument is
    NULL.
 
-2. ABI break for pldm_pdr_find_record()
-
-   Register assignment for function parameters was changed with the removal of
-   some asserts in related implementations.
-
-3. ABI break for pldm_pdr_get_next_record()
-
-   Register assignment for function parameters was changed with the removal of
-   some asserts in related implementations.
-
-4. platform: Support PLDM_CPER_EVENT in encode_platform_event_message_req()
-
-5. ABI break for the following functions
-
-   Register assignment for function parameters was changed with the removal of
-   some asserts in related implementations.
+2. Register assignment for parameters of a number of APIs changed with increased
+   scrutiny on their implementations.
 
    - `decode_entity_auxiliary_names_pdr()`
    - `decode_get_state_sensor_readings_resp()`
@@ -61,6 +47,10 @@ Change categories:
    - `decode_platform_event_message_resp()`
    - `decode_sensor_op_data()`
    - `encode_get_state_effecter_states_resp()`
+   - `pldm_pdr_find_record()`
+   - `pldm_pdr_get_next_record()`
+
+3. platform: Support PLDM_CPER_EVENT in encode_platform_event_message_req()
 
 ### Deprecated
 
