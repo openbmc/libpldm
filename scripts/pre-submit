@@ -10,7 +10,7 @@ git diff --quiet
 # Ensure the test suite passes in the default configuration. Note
 # that we don't specify -Dabi=... - the default is equivalent to
 # -Dabi=deprecated,stable,testing.
-meson setup -Dabi-compliance-check=disabled "$BUILD"
+CFLAGS=-fanalyzer meson setup -Dabi-compliance-check=disabled "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD"
 
