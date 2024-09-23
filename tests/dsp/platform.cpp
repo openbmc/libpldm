@@ -5733,20 +5733,11 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
         cperEventSize);
     EXPECT_EQ(rc, -EINVAL);
 
-#ifdef NDEBUG
     rc = decode_pldm_platform_cper_event(
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
         cperEvent, cperEventSize);
     EXPECT_EQ(rc, -EOVERFLOW);
-#else
-    EXPECT_DEATH(
-        decode_pldm_platform_cper_event(
-            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-            reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
-            cperEvent, cperEventSize),
-        "ctx->remaining >= 0");
-#endif
 
     rc = decode_pldm_platform_cper_event(
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
