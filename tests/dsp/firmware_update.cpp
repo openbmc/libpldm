@@ -1653,26 +1653,10 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
     struct pldm_query_downstream_identifiers_resp resp_data = {};
     struct variable_field downstreamDevices = {};
 
-    /** In test mode, this will trigger an assert failure and cause the unit
-     * test to fail if only testing by the rc. Use ASSERT_DEATH to test this
-     * scenario.
-     *
-     *  The 1st parameter is the function under test.
-     *  The 2nd parameter compares the output of the program.
-     */
-#ifdef NDEBUG
     EXPECT_NE(decode_query_downstream_identifiers_resp(
                   response, responseMsg.size() - hdrSize, &resp_data,
                   &downstreamDevices),
               PLDM_SUCCESS);
-#else
-    EXPECT_DEATH(
-        decode_query_downstream_identifiers_resp(
-            response, responseMsg.size() - hdrSize, &resp_data,
-            &downstreamDevices),
-        // This error doesn't output any error message, leave it be empty
-        "");
-#endif
 }
 #endif
 
@@ -1919,24 +1903,9 @@ TEST(GetDownstreamFirmwareParameters, decodeResponseInvalidLength)
     pldm_downstream_device_parameter_entry entry{};
     variable_field versions{};
 
-    /** In test mode, this will trigger an assert failure and cause the unit
-     * test to fail if only testing by the rc. Use ASSERT_DEATH to test this
-     * scenario.
-     *
-     *  The 1st parameter is the function under test.
-     *  The 2nd parameter compares the output of the program.
-     */
-#ifdef NDEBUG
     EXPECT_NE(decode_downstream_device_parameter_table_entry(
                   &downstreamDeviceParamTable, &entry, &versions),
               0);
-#else
-    EXPECT_DEATH(
-        decode_downstream_device_parameter_table_entry(
-            &downstreamDeviceParamTable, &entry, &versions),
-        // This error doesn't output any error message, leave it be empty
-        "");
-#endif
 }
 #endif
 

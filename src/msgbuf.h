@@ -103,7 +103,7 @@ pldm_msgbuf_init_errno(struct pldm_msgbuf *ctx, size_t minsize, const void *buf,
 	}
 #endif
 
-	if ((uintptr_t)buf + len < len) {
+	if (UINTPTR_MAX - (uintptr_t)buf < len) {
 		return -EOVERFLOW;
 	}
 
@@ -312,20 +312,18 @@ pldm__msgbuf_extract_uint8(struct pldm_msgbuf *ctx, void *dst)
 		return -EINVAL;
 	}
 
-	if (ctx->remaining == INTMAX_MIN) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= sizeof(uint8_t);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+	if (ctx->remaining >= (intmax_t)sizeof(uint8_t)) {
+		memcpy(dst, ctx->cursor, sizeof(uint8_t));
+		ctx->cursor++;
+		ctx->remaining -= sizeof(uint8_t);
+		return 0;
 	}
 
-	memcpy(dst, ctx->cursor, sizeof(uint8_t));
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(uint8_t)) {
+		ctx->remaining -= sizeof(uint8_t);
+	}
 
-	ctx->cursor++;
-	return 0;
+	return -EOVERFLOW;
 }
 
 #define pldm_msgbuf_extract_int8(ctx, dst)                                     \
@@ -340,19 +338,18 @@ pldm__msgbuf_extract_int8(struct pldm_msgbuf *ctx, void *dst)
 		return -EINVAL;
 	}
 
-	if (ctx->remaining == INTMAX_MIN) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= sizeof(int8_t);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+	if (ctx->remaining >= (intmax_t)sizeof(int8_t)) {
+		memcpy(dst, ctx->cursor, sizeof(int8_t));
+		ctx->cursor++;
+		ctx->remaining -= sizeof(int8_t);
+		return 0;
 	}
 
-	memcpy(dst, ctx->cursor, sizeof(int8_t));
-	ctx->cursor++;
-	return 0;
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(int8_t)) {
+		ctx->remaining -= sizeof(int8_t);
+	}
+
+	return -EOVERFLOW;
 }
 
 #define pldm_msgbuf_extract_uint16(ctx, dst)                                   \
@@ -374,37 +371,28 @@ pldm__msgbuf_extract_uint16(struct pldm_msgbuf *ctx, void *dst)
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
 		sizeof(ldst) < INTMAX_MAX,
 		"The following addition may not uphold the runtime assertion");
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)sizeof(ldst)) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= (intmax_t)sizeof(ldst)) {
+		// Use memcpy() to have the compiler deal with any alignment
+		// issues on the target architecture
+		memcpy(&ldst, ctx->cursor, sizeof(ldst));
+
+		// Only assign the target value once it's correctly decoded
+		ldst = le16toh(ldst);
+
+		// Allow storing to unaligned
+		memcpy(dst, &ldst, sizeof(ldst));
+
+		ctx->cursor += sizeof(ldst);
+		ctx->remaining -= sizeof(ldst);
+		return 0;
 	}
 
-	// Check for buffer overflow. If we overflow, account for the request as
-	// negative values in ctx->remaining. This way we can debug how far
-	// we've overflowed.
-	ctx->remaining -= sizeof(ldst);
-
-	// Prevent the access if it would overflow. First, assert so we blow up
-	// the test suite right at the point of failure. However, cater to
-	// -DNDEBUG by explicitly testing that the access is valid.
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(ldst)) {
+		ctx->remaining -= sizeof(ldst);
 	}
 
-	// Use memcpy() to have the compiler deal with any alignment
-	// issues on the target architecture
-	memcpy(&ldst, ctx->cursor, sizeof(ldst));
-
-	// Only assign the target value once it's correctly decoded
-	ldst = le16toh(ldst);
-
-	// Allow storing to unaligned
-	memcpy(dst, &ldst, sizeof(ldst));
-
-	ctx->cursor += sizeof(ldst);
-
-	return 0;
+	return -EOVERFLOW;
 }
 
 #define pldm_msgbuf_extract_int16(ctx, dst)                                    \
@@ -425,23 +413,21 @@ pldm__msgbuf_extract_int16(struct pldm_msgbuf *ctx, void *dst)
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
 		sizeof(ldst) < INTMAX_MAX,
 		"The following addition may not uphold the runtime assertion");
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)sizeof(ldst)) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= (intmax_t)sizeof(ldst)) {
+		memcpy(&ldst, ctx->cursor, sizeof(ldst));
+		ldst = le16toh(ldst);
+		memcpy(dst, &ldst, sizeof(ldst));
+		ctx->cursor += sizeof(ldst);
+		ctx->remaining -= sizeof(ldst);
+		return 0;
 	}
-	ctx->remaining -= sizeof(ldst);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(ldst)) {
+		ctx->remaining -= sizeof(ldst);
 	}
 
-	memcpy(&ldst, ctx->cursor, sizeof(ldst));
-
-	ldst = le16toh(ldst);
-	memcpy(dst, &ldst, sizeof(ldst));
-	ctx->cursor += sizeof(ldst);
-
-	return 0;
+	return -EOVERFLOW;
 }
 
 #define pldm_msgbuf_extract_uint32(ctx, dst)                                   \
@@ -462,22 +448,21 @@ pldm__msgbuf_extract_uint32(struct pldm_msgbuf *ctx, void *dst)
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
 		sizeof(ldst) < INTMAX_MAX,
 		"The following addition may not uphold the runtime assertion");
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)sizeof(ldst)) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= sizeof(ldst);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= (intmax_t)sizeof(ldst)) {
+		memcpy(&ldst, ctx->cursor, sizeof(ldst));
+		ldst = le32toh(ldst);
+		memcpy(dst, &ldst, sizeof(ldst));
+		ctx->cursor += sizeof(ldst);
+		ctx->remaining -= sizeof(ldst);
+		return 0;
 	}
 
-	memcpy(&ldst, ctx->cursor, sizeof(ldst));
-	ldst = le32toh(ldst);
-	memcpy(dst, &ldst, sizeof(ldst));
-	ctx->cursor += sizeof(ldst);
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(ldst)) {
+		ctx->remaining -= sizeof(ldst);
+	}
 
-	return 0;
+	return -EOVERFLOW;
 }
 
 #define pldm_msgbuf_extract_int32(ctx, dst)                                    \
@@ -498,22 +483,21 @@ pldm__msgbuf_extract_int32(struct pldm_msgbuf *ctx, void *dst)
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
 		sizeof(ldst) < INTMAX_MAX,
 		"The following addition may not uphold the runtime assertion");
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)sizeof(ldst)) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= sizeof(ldst);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= (intmax_t)sizeof(ldst)) {
+		memcpy(&ldst, ctx->cursor, sizeof(ldst));
+		ldst = le32toh(ldst);
+		memcpy(dst, &ldst, sizeof(ldst));
+		ctx->cursor += sizeof(ldst);
+		ctx->remaining -= sizeof(ldst);
+		return 0;
 	}
 
-	memcpy(&ldst, ctx->cursor, sizeof(ldst));
-	ldst = le32toh(ldst);
-	memcpy(dst, &ldst, sizeof(ldst));
-	ctx->cursor += sizeof(ldst);
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(ldst)) {
+		ctx->remaining -= sizeof(ldst);
+	}
 
-	return PLDM_SUCCESS;
+	return -EOVERFLOW;
 }
 
 #define pldm_msgbuf_extract_real32(ctx, dst)                                   \
@@ -537,22 +521,21 @@ pldm__msgbuf_extract_real32(struct pldm_msgbuf *ctx, void *dst)
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
 		sizeof(ldst) < INTMAX_MAX,
 		"The following addition may not uphold the runtime assertion");
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)sizeof(ldst)) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= sizeof(ldst);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= (intmax_t)sizeof(ldst)) {
+		memcpy(&ldst, ctx->cursor, sizeof(ldst));
+		ldst = le32toh(ldst);
+		memcpy(dst, &ldst, sizeof(ldst));
+		ctx->cursor += sizeof(ldst);
+		ctx->remaining -= sizeof(ldst);
+		return 0;
 	}
 
-	memcpy(&ldst, ctx->cursor, sizeof(ldst));
-	ldst = le32toh(ldst);
-	memcpy(dst, &ldst, sizeof(ldst));
-	ctx->cursor += sizeof(ldst);
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(ldst)) {
+		ctx->remaining -= sizeof(ldst);
+	}
 
-	return 0;
+	return -EOVERFLOW;
 }
 
 /**
@@ -617,19 +600,18 @@ pldm__msgbuf_extract_array_void(struct pldm_msgbuf *ctx, size_t count,
 	}
 #endif
 
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)count) {
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= (intmax_t)count;
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+	if (ctx->remaining >= (intmax_t)count) {
+		memcpy(dst, ctx->cursor, count);
+		ctx->cursor += count;
+		ctx->remaining -= (intmax_t)count;
+		return 0;
 	}
 
-	memcpy(dst, ctx->cursor, count);
-	ctx->cursor += count;
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)count) {
+		ctx->remaining -= (intmax_t)count;
+	}
 
-	return 0;
+	return -EOVERFLOW;
 }
 
 /**
@@ -689,20 +671,19 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx,
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
 		sizeof(src) < INTMAX_MAX,
 		"The following addition may not uphold the runtime assertion");
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)sizeof(src)) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= sizeof(src);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= (intmax_t)sizeof(src)) {
+		memcpy(ctx->cursor, &val, sizeof(val));
+		ctx->cursor += sizeof(src);
+		ctx->remaining -= sizeof(src);
+		return 0;
 	}
 
-	memcpy(ctx->cursor, &val, sizeof(val));
-	ctx->cursor += sizeof(src);
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(src)) {
+		ctx->remaining -= sizeof(src);
+	}
 
-	return 0;
+	return -EOVERFLOW;
 }
 
 LIBPLDM_CC_NONNULL
@@ -719,20 +700,19 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint16(struct pldm_msgbuf *ctx,
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
 		sizeof(src) < INTMAX_MAX,
 		"The following addition may not uphold the runtime assertion");
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)sizeof(src)) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= sizeof(src);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= (intmax_t)sizeof(src)) {
+		memcpy(ctx->cursor, &val, sizeof(val));
+		ctx->cursor += sizeof(src);
+		ctx->remaining -= sizeof(src);
+		return 0;
 	}
 
-	memcpy(ctx->cursor, &val, sizeof(val));
-	ctx->cursor += sizeof(src);
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(src)) {
+		ctx->remaining -= sizeof(src);
+	}
 
-	return 0;
+	return -EOVERFLOW;
 }
 
 LIBPLDM_CC_NONNULL
@@ -747,20 +727,19 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint8(struct pldm_msgbuf *ctx,
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
 		sizeof(src) < INTMAX_MAX,
 		"The following addition may not uphold the runtime assertion");
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)sizeof(src)) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= sizeof(src);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= (intmax_t)sizeof(src)) {
+		memcpy(ctx->cursor, &src, sizeof(src));
+		ctx->cursor += sizeof(src);
+		ctx->remaining -= sizeof(src);
+		return 0;
 	}
 
-	memcpy(ctx->cursor, &src, sizeof(src));
-	ctx->cursor += sizeof(src);
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(src)) {
+		ctx->remaining -= sizeof(src);
+	}
 
-	return 0;
+	return -EOVERFLOW;
 }
 
 LIBPLDM_CC_NONNULL
@@ -777,20 +756,19 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int32(struct pldm_msgbuf *ctx,
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
 		sizeof(src) < INTMAX_MAX,
 		"The following addition may not uphold the runtime assertion");
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)sizeof(src)) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= sizeof(src);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= (intmax_t)sizeof(src)) {
+		memcpy(ctx->cursor, &val, sizeof(val));
+		ctx->cursor += sizeof(src);
+		ctx->remaining -= sizeof(src);
+		return 0;
 	}
 
-	memcpy(ctx->cursor, &val, sizeof(val));
-	ctx->cursor += sizeof(src);
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(src)) {
+		ctx->remaining -= sizeof(src);
+	}
 
-	return 0;
+	return -EOVERFLOW;
 }
 
 LIBPLDM_CC_NONNULL
@@ -807,20 +785,19 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int16(struct pldm_msgbuf *ctx,
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
 		sizeof(src) < INTMAX_MAX,
 		"The following addition may not uphold the runtime assertion");
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)sizeof(src)) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= sizeof(src);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= (intmax_t)sizeof(src)) {
+		memcpy(ctx->cursor, &val, sizeof(val));
+		ctx->cursor += sizeof(src);
+		ctx->remaining -= sizeof(src);
+		return 0;
 	}
 
-	memcpy(ctx->cursor, &val, sizeof(val));
-	ctx->cursor += sizeof(src);
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(src)) {
+		ctx->remaining -= sizeof(src);
+	}
 
-	return 0;
+	return -EOVERFLOW;
 }
 
 LIBPLDM_CC_NONNULL
@@ -835,20 +812,19 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int8(struct pldm_msgbuf *ctx,
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
 		sizeof(src) < INTMAX_MAX,
 		"The following addition may not uphold the runtime assertion");
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)sizeof(src)) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= sizeof(src);
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+
+	if (ctx->remaining >= (intmax_t)sizeof(src)) {
+		memcpy(ctx->cursor, &src, sizeof(src));
+		ctx->cursor += sizeof(src);
+		ctx->remaining -= sizeof(src);
+		return 0;
 	}
 
-	memcpy(ctx->cursor, &src, sizeof(src));
-	ctx->cursor += sizeof(src);
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(src)) {
+		ctx->remaining -= sizeof(src);
+	}
 
-	return 0;
+	return -EOVERFLOW;
 }
 
 #define pldm_msgbuf_insert(dst, src)                                           \
@@ -884,19 +860,18 @@ pldm__msgbuf_insert_array_void(struct pldm_msgbuf *ctx, size_t count,
 	}
 #endif
 
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)count) {
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= (intmax_t)count;
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+	if (ctx->remaining >= (intmax_t)count) {
+		memcpy(ctx->cursor, src, count);
+		ctx->cursor += count;
+		ctx->remaining -= (intmax_t)count;
+		return 0;
 	}
 
-	memcpy(ctx->cursor, src, count);
-	ctx->cursor += count;
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)count) {
+		ctx->remaining -= (intmax_t)count;
+	}
 
-	return 0;
+	return -EOVERFLOW;
 }
 
 /**
@@ -958,21 +933,20 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
 	}
 #endif
 
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)required) {
-		return -EOVERFLOW;
-	}
-	ctx->remaining -= (intmax_t)required;
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+	if (ctx->remaining >= (intmax_t)required) {
+		if (cursor) {
+			*cursor = ctx->cursor;
+		}
+		ctx->cursor += required;
+		ctx->remaining -= (intmax_t)required;
+		return 0;
 	}
 
-	if (cursor) {
-		*cursor = ctx->cursor;
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)required) {
+		ctx->remaining -= (intmax_t)required;
 	}
-	ctx->cursor += required;
 
-	return 0;
+	return -EOVERFLOW;
 }
 
 LIBPLDM_CC_NONNULL_ARGS(1)
@@ -1006,27 +980,26 @@ pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor,
 	/* Include the NUL terminator in the span length, as spans are opaque */
 	measured++;
 
-	if (ctx->remaining < INTMAX_MIN + measured) {
-		return -EOVERFLOW;
+	if (ctx->remaining >= measured) {
+		if (cursor) {
+			*cursor = ctx->cursor;
+		}
+
+		ctx->cursor += measured;
+
+		if (length) {
+			*length = measured;
+		}
+
+		ctx->remaining -= measured;
+		return 0;
 	}
 
-	ctx->remaining -= measured;
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+	if (ctx->remaining >= INTMAX_MIN + measured) {
+		ctx->remaining -= measured;
 	}
 
-	if (cursor) {
-		*cursor = ctx->cursor;
-	}
-
-	ctx->cursor += measured;
-
-	if (length) {
-		*length = measured;
-	}
-
-	return 0;
+	return -EOVERFLOW;
 }
 
 LIBPLDM_CC_NONNULL_ARGS(1)
@@ -1085,28 +1058,26 @@ pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor,
 	}
 #endif
 
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)measured) {
-		assert(ctx->remaining < 0);
-		return -EOVERFLOW;
+	if (ctx->remaining >= (intmax_t)measured) {
+		if (cursor) {
+			*cursor = ctx->cursor;
+		}
+
+		ctx->cursor += measured;
+
+		if (length) {
+			*length = (size_t)measured;
+		}
+
+		ctx->remaining -= (intmax_t)measured;
+		return 0;
 	}
 
-	ctx->remaining -= (intmax_t)measured;
-	assert(ctx->remaining >= 0);
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)measured) {
+		ctx->remaining -= (intmax_t)measured;
 	}
 
-	if (cursor) {
-		*cursor = ctx->cursor;
-	}
-
-	ctx->cursor += measured;
-
-	if (length) {
-		*length = (size_t)measured;
-	}
-
-	return 0;
+	return -EOVERFLOW;
 }
 
 LIBPLDM_CC_NONNULL
@@ -1117,7 +1088,6 @@ pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 		return -EINVAL;
 	}
 
-	assert(ctx->remaining >= 0);
 	if (ctx->remaining < 0) {
 		return -EOVERFLOW;
 	}
@@ -1160,31 +1130,25 @@ pldm__msgbuf_copy(struct pldm_msgbuf *dst, struct pldm_msgbuf *src, size_t size,
 	}
 #endif
 
-	if (src->remaining < INTMAX_MIN + (intmax_t)size) {
-		return -EOVERFLOW;
+	if (src->remaining >= (intmax_t)size &&
+	    dst->remaining >= (intmax_t)size) {
+		memcpy(dst->cursor, src->cursor, size);
+		src->cursor += size;
+		src->remaining -= (intmax_t)size;
+		dst->cursor += size;
+		dst->remaining -= (intmax_t)size;
+		return 0;
 	}
 
-	if (dst->remaining < INTMAX_MIN + (intmax_t)size) {
-		return -EOVERFLOW;
+	if (src->remaining >= INTMAX_MIN + (intmax_t)size) {
+		src->remaining -= (intmax_t)size;
 	}
 
-	src->remaining -= (intmax_t)size;
-	assert(src->remaining >= 0);
-	if (src->remaining < 0) {
-		return -EOVERFLOW;
+	if (dst->remaining >= INTMAX_MIN + (intmax_t)size) {
+		dst->remaining -= (intmax_t)size;
 	}
 
-	dst->remaining -= (intmax_t)size;
-	assert(dst->remaining >= 0);
-	if (dst->remaining < 0) {
-		return -EOVERFLOW;
-	}
-
-	memcpy(dst->cursor, src->cursor, size);
-	src->cursor += size;
-	dst->cursor += size;
-
-	return 0;
+	return -EOVERFLOW;
 }
 
 LIBPLDM_CC_NONNULL

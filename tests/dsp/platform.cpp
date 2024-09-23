@@ -3706,6 +3706,7 @@ TEST(SetEventReceiver, testBadDecodeRequest)
     uint8_t rettransportProtocolType;
     uint8_t reteventReceiverAddressInfo;
     uint16_t retheartbeatTimer;
+
     rc = decode_set_event_receiver_req(
         request, requestMsg.size() - hdrSize - 1, &reteventMessageGlobalEnable,
         &rettransportProtocolType, &reteventReceiverAddressInfo,
@@ -5733,20 +5734,11 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
         cperEventSize);
     EXPECT_EQ(rc, -EINVAL);
 
-#ifdef NDEBUG
     rc = decode_pldm_platform_cper_event(
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
         cperEvent, cperEventSize);
     EXPECT_EQ(rc, -EOVERFLOW);
-#else
-    EXPECT_DEATH(
-        decode_pldm_platform_cper_event(
-            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-            reinterpret_cast<uint8_t*>(eventData.data()), eventData.size() - 1,
-            cperEvent, cperEventSize),
-        "ctx->remaining >= 0");
-#endif
 
     rc = decode_pldm_platform_cper_event(
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
