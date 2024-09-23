@@ -33,6 +33,24 @@
       "message": "Is this the only size macro you need? Previously you had marked many more structs as packed.",
       "revId": "bec56919d088c9b8066d69e5f2d6febf892347f4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32b620fa_233f13e9",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-09-23T03:05:36Z",
+      "side": 1,
+      "message": "Actually, the other structs have its size macro already, but not placed toghether, just like you said, the historical things😄.\n\nIf you want me to bring those historic to present, feel free to tell me, I\u0027ll deal it toghether with the empty line.",
+      "parentUuid": "61d8c0ac_fcb0c7cb",
+      "revId": "bec56919d088c9b8066d69e5f2d6febf892347f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
