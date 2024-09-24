@@ -52,10 +52,18 @@ enum pldm_platform_transfer_flag {
 #define PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES	    1
 #define PLDM_EVENT_MESSAGE_SUPPORTED_MIN_RESP_BYTES 4
 
+/* PollForPlatformEventMessage PLDM request */
 #define PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES	    8
 #define PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES 4
 #define PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_RESP_BYTES	    14
 #define PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_CHECKSUM_BYTES 4
+
+/* Platform event message request */
+#define PLDM_PLATFORM_EVENT_ID_NULL	0x0000
+#define PLDM_PLATFORM_EVENT_ID_FRAGMENT 0xffff
+/* Platform event message response */
+#define PLDM_PLATFORM_EVENT_ID_NONE 0x0000
+#define PLDM_PLATFORM_EVENT_ID_ACK  0xffff
 
 /* Minimum response length */
 #define PLDM_GET_PDR_MIN_RESP_BYTES		       12
@@ -1874,7 +1882,7 @@ int decode_platform_event_message_req(const struct pldm_msg *msg,
  *  @param[out] data_transfer_handle - The data transfer handle
  *  @param[out] event_id_to_acknowledge - The class of event being sent
  *  from pldm msg
- *  @return pldm_completion_codes
+ *  @return error code
  */
 int decode_poll_for_platform_event_message_req(
 	const struct pldm_msg *msg, size_t payload_length,
@@ -1945,7 +1953,7 @@ int encode_platform_event_message_req(
  *  @param[in] data_transfer_handle - The data transfer handle
  *  @param[in] event_id_to_acknowledge - the event data to acknowleadge
  *  @param[out] msg - Request message
- *  @return pldm_completion_codes
+ *  @return error code
  *  @note Caller is responsible for memory alloc and dealloc of param
  *  'msg.payload'
  */
