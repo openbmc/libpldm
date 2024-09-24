@@ -27,7 +27,7 @@ Change categories:
 6. pldm_entity_association_tree_copy_root_check()
 7. oem: ibm: Add topology related state set and enum
 
-7. base: Add size and buffer macros for struct pldm_msg
+8. base: Add size and buffer macros for struct pldm_msg
 
    Together these macros reduce the need for use of reinterpret_cast<>() in C++.
 
@@ -96,6 +96,11 @@ Change categories:
 
    Avoid a caller-controlled NULL pointer dereference in the library
    implementation.
+
+2. platform: fix encode/decode_poll_for_platform_event_message_req
+
+   Update checking of `TransferOperationFlag` and `eventIDToAcknowledge` to
+   follow spec.
 
 ## [0.9.1] - 2024-09-07
 
