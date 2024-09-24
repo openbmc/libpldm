@@ -27,6 +27,22 @@ static int pldm_platform_pdr_hdr_validate(struct pldm_value_pdr_hdr *ctx,
 	return PLDM_SUCCESS;
 }
 
+static int pldm_platform_poll_for_platform_event_message_validate(
+	uint8_t transfer_operation_flag, uint16_t event_id_to_acknowledge)
+{
+	if (((transfer_operation_flag == PLDM_GET_FIRSTPART) &&
+	     (event_id_to_acknowledge != PLDM_PLATFORM_EVENT_ID_NULL)) ||
+	    ((transfer_operation_flag == PLDM_GET_NEXTPART) &&
+	     (event_id_to_acknowledge != PLDM_PLATFORM_EVENT_ID_FRAGMENT)) ||
+	    ((transfer_operation_flag == PLDM_ACKNOWLEDGEMENT_ONLY) &&
+	     (event_id_to_acknowledge != PLDM_PLATFORM_EVENT_ID_FRAGMENT)) ||
+	    (transfer_operation_flag > PLDM_ACKNOWLEDGEMENT_ONLY)) {
+		return -EPROTO;
+	}
+
+	return 0;
+}
+
 LIBPLDM_ABI_STABLE
 int encode_state_effecter_pdr(
 	struct pldm_state_effecter_pdr *const effecter,
@@ -1059,12 +1075,12 @@ int decode_poll_for_platform_event_message_req(
 	if (msg == NULL || format_version == NULL ||
 	    transfer_operation_flag == NULL || data_transfer_handle == NULL ||
 	    event_id_to_acknowledge == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
-	rc = pldm_msgbuf_init_cc(buf,
-				 PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES,
-				 msg->payload, payload_length);
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES,
+		msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -1074,9 +1090,6 @@ int decode_poll_for_platform_event_message_req(
 	if (rc) {
 		return rc;
 	}
-	if (*transfer_operation_flag > PLDM_ACKNOWLEDGEMENT_ONLY) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
 
 	pldm_msgbuf_extract_p(buf, data_transfer_handle);
 	rc = pldm_msgbuf_extract_p(buf, event_id_to_acknowledge);
@@ -1084,15 +1097,13 @@ int decode_poll_for_platform_event_message_req(
 		return rc;
 	}
 
-	if (!(((*transfer_operation_flag == PLDM_GET_NEXTPART) &&
-	       (*event_id_to_acknowledge == 0xffff)) ||
-	      ((*transfer_operation_flag == PLDM_GET_FIRSTPART) &&
-	       (*event_id_to_acknowledge == 0x000)) ||
-	      (*transfer_operation_flag == PLDM_ACKNOWLEDGEMENT_ONLY))) {
-		return PLDM_ERROR_INVALID_DATA;
+	rc = pldm_platform_poll_for_platform_event_message_validate(
+		*transfer_operation_flag, *event_id_to_acknowledge);
+	if (rc) {
+		return rc;
 	}
 
-	return pldm_msgbuf_destroy(buf);
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -2470,7 +2481,13 @@ int encode_poll_for_platform_event_message_req(uint8_t instance_id,
 	int rc;
 
 	if (msg == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
+	}
+
+	rc = pldm_platform_poll_for_platform_event_message_validate(
+		transfer_operation_flag, event_id_to_acknowledge);
+	if (rc) {
+		return rc;
 	}
 
 	struct pldm_header_info header = { 0 };
@@ -2479,12 +2496,12 @@ int encode_poll_for_platform_event_message_req(uint8_t instance_id,
 	header.pldm_type = PLDM_PLATFORM;
 	header.command = PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE;
 
-	rc = pack_pldm_header(&header, &(msg->hdr));
-	if (rc != PLDM_SUCCESS) {
+	rc = pack_pldm_header_errno(&header, &(msg->hdr));
+	if (rc) {
 		return rc;
 	}
 
-	rc = pldm_msgbuf_init_cc(
+	rc = pldm_msgbuf_init_errno(
 		buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
 		msg->payload, payload_length);
 	if (rc) {
@@ -2496,7 +2513,7 @@ int encode_poll_for_platform_event_message_req(uint8_t instance_id,
 	pldm_msgbuf_insert(buf, data_transfer_handle);
 	pldm_msgbuf_insert(buf, event_id_to_acknowledge);
 
-	return pldm_msgbuf_destroy(buf);
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
