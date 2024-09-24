@@ -1084,11 +1084,13 @@ int decode_poll_for_platform_event_message_req(
 		return rc;
 	}
 
-	if (!(((*transfer_operation_flag == PLDM_GET_NEXTPART) &&
-	       (*event_id_to_acknowledge == 0xffff)) ||
-	      ((*transfer_operation_flag == PLDM_GET_FIRSTPART) &&
-	       (*event_id_to_acknowledge == 0x000)) ||
-	      (*transfer_operation_flag == PLDM_ACKNOWLEDGEMENT_ONLY))) {
+	if (((*transfer_operation_flag == PLDM_GET_NEXTPART) &&
+	     (*event_id_to_acknowledge != PLDM_SPECIAL_EVENT_ID)) ||
+	    ((*transfer_operation_flag == PLDM_GET_FIRSTPART) &&
+	     (*event_id_to_acknowledge != PLDM_NULL_EVENT_ID)) ||
+	    ((*transfer_operation_flag == PLDM_ACKNOWLEDGEMENT_ONLY) &&
+	     (*event_id_to_acknowledge != PLDM_SPECIAL_EVENT_ID)) ||
+	    (*transfer_operation_flag > PLDM_ACKNOWLEDGEMENT_ONLY)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -2469,7 +2471,14 @@ int encode_poll_for_platform_event_message_req(uint8_t instance_id,
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (msg == NULL) {
+	if (msg == NULL ||
+	    ((transfer_operation_flag == PLDM_GET_FIRSTPART) &&
+	     (event_id_to_acknowledge != PLDM_NULL_EVENT_ID)) ||
+	    ((transfer_operation_flag == PLDM_GET_NEXTPART) &&
+	     (event_id_to_acknowledge != PLDM_SPECIAL_EVENT_ID)) ||
+	    ((transfer_operation_flag == PLDM_ACKNOWLEDGEMENT_ONLY) &&
+	     (event_id_to_acknowledge != PLDM_SPECIAL_EVENT_ID)) ||
+	    (transfer_operation_flag > PLDM_ACKNOWLEDGEMENT_ONLY)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 

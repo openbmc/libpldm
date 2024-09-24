@@ -52,10 +52,15 @@ enum pldm_platform_transfer_flag {
 #define PLDM_EVENT_MESSAGE_SUPPORTED_REQ_BYTES	    1
 #define PLDM_EVENT_MESSAGE_SUPPORTED_MIN_RESP_BYTES 4
 
+/* PollForPlatformEventMessage PLDM request */
 #define PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES	    8
 #define PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES 4
 #define PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_RESP_BYTES	    14
 #define PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_CHECKSUM_BYTES 4
+
+/* Table 16 - PollForPlatformEventMessage command format */
+#define PLDM_NULL_EVENT_ID    0x0000
+#define PLDM_SPECIAL_EVENT_ID 0xffff
 
 /* Minimum response length */
 #define PLDM_GET_PDR_MIN_RESP_BYTES		       12
