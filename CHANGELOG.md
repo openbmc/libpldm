@@ -91,6 +91,10 @@ Change categories:
 
    Avoid a caller-controlled NULL pointer dereference in the library
    implementation.
+2. platform: fix encode/decode_poll_for_platform_event_message_req
+
+   Update checking of `TransferOperationFlag` and `eventIDToAcknowledge` to
+   follow spec.
 
 ## [0.9.1] - 2024-09-07
 
