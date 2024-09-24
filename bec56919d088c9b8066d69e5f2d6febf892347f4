@@ -51,6 +51,24 @@
       "parentUuid": "61d8c0ac_fcb0c7cb",
       "revId": "bec56919d088c9b8066d69e5f2d6febf892347f4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bf537d1_a2fe89b9",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-24T02:07:41Z",
+      "side": 1,
+      "message": "No need to worry about that, but can you please address the nitpick above? 😊",
+      "parentUuid": "32b620fa_233f13e9",
+      "revId": "bec56919d088c9b8066d69e5f2d6febf892347f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
