@@ -12,7 +12,7 @@ project(
         'tests=' + (meson.is_subproject() ? 'disabled' : 'enabled'),
     ],
     version: '0.9.1',
-    meson_version: '>=1.1.1',
+    meson_version: '>=1.3.0',
 )
 
 if get_option('tests').allowed()
@@ -33,17 +33,33 @@ if compiler.has_header('poll.h')
 endif
 
 # ABI control
-visible = '__attribute__((visibility("default")))'
+compiler.has_function_attribute('visibility:default', required: true)
+entrypoint = '__attribute__((visibility("default")))'
+
+## Compile test until meson supports it via compiler.has_function_attribute()
+have_tainted_args_test = '#if !__has_attribute(tainted_args)\n#error\n#endif'
+if compiler.compiles(
+    have_tainted_args_test,
+    args: '-E',
+    name: 'compiler supports function attribute tainted_args',
+)
+    entrypoint += ' __attribute__((tainted_args))'
+endif
+
 libpldm_deprecated_aliases = []
 if get_option('abi').contains('deprecated')
-    conf.set('LIBPLDM_ABI_DEPRECATED', visible)
+    conf.set('LIBPLDM_ABI_DEPRECATED', entrypoint)
+    conf.set(
+        'LIBPLDM_ABI_DEPRECATED_UNSAFE',
+        '__attribute((visibility("default")))',
+    )
     add_project_arguments('-DLIBPLDM_API_DEPRECATED', language: ['c', 'cpp'])
 else
     conf.set('LIBPLDM_ABI_DEPRECATED', '')
 endif
-conf.set('LIBPLDM_ABI_STABLE', visible)  # Always expose the stable symbols
+conf.set('LIBPLDM_ABI_STABLE', entrypoint)  # Always expose the stable symbols
 if get_option('abi').contains('testing')
-    conf.set('LIBPLDM_ABI_TESTING', visible)
+    conf.set('LIBPLDM_ABI_TESTING', entrypoint)
     add_project_arguments('-DLIBPLDM_API_TESTING', language: ['c', 'cpp'])
 else
     conf.set('LIBPLDM_ABI_TESTING', '')

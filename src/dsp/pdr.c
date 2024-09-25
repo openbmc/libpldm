@@ -1255,7 +1255,7 @@ cleanup:
 	return rc;
 }
 
-LIBPLDM_ABI_DEPRECATED
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 void pldm_entity_association_tree_copy_root(
 	pldm_entity_association_tree *org_tree,
 	pldm_entity_association_tree *new_tree)
