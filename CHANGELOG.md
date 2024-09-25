@@ -112,6 +112,8 @@ Change categories:
    `tranferFlag` is `AcknowledgementOnly`, the value `eventIDToAcknowledge`
    should be the previously retrieved eventID (from the PLDM terminus).
 
+4. dsp: platform: Prevent overflow of arithmetic on event_data_length
+
 ## [0.9.1] - 2024-09-07
 
 ### Changed
