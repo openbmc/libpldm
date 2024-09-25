@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edb056a1_7f257804",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1382,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-25T02:46:59Z",
+      "side": 1,
+      "message": "This name feels a bit uninformative, are there better options?",
+      "range": {
+        "startLine": 1382,
+        "startChar": 27,
+        "endLine": 1382,
+        "endChar": 35
+      },
+      "revId": "6d21fa112a93ee35b7ded485754047b09f943630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62dbbfa1_6eef51a8",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-25T02:46:59Z",
+      "side": 1,
+      "message": "Please don\u0027t use the double-underscore functions, that was meant to be a hint that you shouldn\u0027t be using them. Use the macro wrapper instead, as that enforces type-safety.\n\n```\npldm_msgbuf_extract_uint32(buf, record_handle_from_pdr);\n```\n\nPlease also address the other instances of this below.",
+      "revId": "6d21fa112a93ee35b7ded485754047b09f943630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10fd03d8_245203b3",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1449,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-25T02:46:59Z",
+      "side": 1,
+      "message": "Why define `skip_data_size`? We can instead use `sizeof(...)` in its place in the function call arguments.",
+      "revId": "6d21fa112a93ee35b7ded485754047b09f943630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b93e286_e7df598b",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1546,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-25T02:46:59Z",
+      "side": 1,
+      "message": "Please use `pldm_entity_association_tree_destroy_check()`.",
+      "revId": "6d21fa112a93ee35b7ded485754047b09f943630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
