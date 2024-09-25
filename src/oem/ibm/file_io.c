@@ -135,13 +135,14 @@ int decode_get_file_table_req(const struct pldm_msg *msg, size_t payload_length,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int encode_get_file_table_resp(uint8_t instance_id, uint8_t completion_code,
 			       uint32_t next_transfer_handle,
 			       uint8_t transfer_flag, const uint8_t *table_data,
 			       size_t table_size, struct pldm_msg *msg)
 {
-	if (msg == NULL) {
+	if ((completion_code == PLDM_SUCCESS && table_data == NULL) ||
+	    msg == NULL) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 

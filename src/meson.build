@@ -61,9 +61,9 @@ if get_option('tests').allowed()
             required: get_option('abi-compliance-check'),
         )
 
-        test_abi_compliance = abi_dumper.found() and\
-abi_compliance_checker.found() and\
-import('fs').is_file(baseline_dump)
+        test_abi_compliance = abi_dumper.found() and \
+    abi_compliance_checker.found() and \
+    import('fs').is_file(baseline_dump)
 
         if test_abi_compliance
             current_dump = custom_target(
