@@ -252,6 +252,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eea5122f_6cbf31ee",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2156,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-25T05:35:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ad7de12_46ab6648",
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8de8f14b_3ff78981",
@@ -289,6 +307,30 @@
       "side": 1,
       "message": "we dont have an API for this yet. I can add one if required because it will help with unit tests only",
       "parentUuid": "8de8f14b_3ff78981",
+      "range": {
+        "startLine": 2157,
+        "startChar": 1,
+        "endLine": 2181,
+        "endChar": 45
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a76d59_65299563",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2181,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-25T05:35:02Z",
+      "side": 1,
+      "message": "used msgbuf APIs instead",
+      "parentUuid": "01694d4a_671cddbe",
       "range": {
         "startLine": 2157,
         "startChar": 1,
@@ -383,6 +425,30 @@
       "side": 1,
       "message": "we should not be doing an endian conversion anywhere in test since the unit test is only handled and executed within Libpldm. I will correct this unit test",
       "parentUuid": "70f41078_0ab71c26",
+      "range": {
+        "startLine": 2201,
+        "startChar": 1,
+        "endLine": 2203,
+        "endChar": 36
+      },
+      "revId": "ec84b323a5a869d44ed115ecc4873366010043f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0593a4c4_b21d8b27",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 1000393
+      },
+      "writtenOn": "2024-09-25T05:35:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f85abf4_7bd9c72f",
       "range": {
         "startLine": 2201,
         "startChar": 1,
