@@ -198,7 +198,7 @@ size_t pldm_bios_table_attr_entry_enum_encode_length(uint8_t pv_num,
 	       def_num;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int pldm_bios_table_attr_entry_enum_encode(
 	void *entry, size_t entry_length,
 	const struct pldm_bios_table_attr_entry_enum_info *info)
@@ -248,7 +248,7 @@ int pldm_bios_table_attr_entry_enum_decode_pv_num(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int pldm_bios_table_attr_entry_enum_decode_def_num(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *def_num)
 {
@@ -281,7 +281,7 @@ int pldm_bios_table_attr_entry_enum_decode_pv_hdls(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 uint8_t pldm_bios_table_attr_entry_enum_decode_def_indices(
 	const struct pldm_bios_attr_table_entry *entry, uint8_t *def_indices,
 	uint8_t def_num)
@@ -961,7 +961,7 @@ struct pldm_bios_table_iter {
 	ssize_t (*entry_length_handler)(const void *table_entry);
 };
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 struct pldm_bios_table_iter *
 pldm_bios_table_iter_create(const void *table, size_t length,
 			    enum pldm_bios_table_types type)
@@ -997,12 +997,16 @@ void pldm_bios_table_iter_free(struct pldm_bios_table_iter *iter)
 }
 
 #define pad_and_check_max 7
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 bool pldm_bios_table_iter_is_end(const struct pldm_bios_table_iter *iter)
 {
 	ssize_t len;
 
 	if (!iter) {
+		return true;
+	}
+
+	if (iter->current_pos > iter->table_len) {
 		return true;
 	}
 
@@ -1077,7 +1081,7 @@ static bool string_table_handle_equal(const void *entry, const void *key)
 	return false;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 const struct pldm_bios_string_table_entry *
 pldm_bios_table_string_find_by_handle(const void *table, size_t length,
 				      uint16_t handle)
@@ -1107,7 +1111,7 @@ static bool string_table_string_equal(const void *entry, const void *key)
 	return true;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 const struct pldm_bios_string_table_entry *
 pldm_bios_table_string_find_by_string(const void *table, size_t length,
 				      const char *str)
@@ -1127,7 +1131,7 @@ static bool attr_table_handle_equal(const void *entry, const void *key)
 	       handle;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 const struct pldm_bios_attr_table_entry *
 pldm_bios_table_attr_find_by_handle(const void *table, size_t length,
 				    uint16_t handle)
@@ -1144,7 +1148,7 @@ static bool attr_table_string_handle_equal(const void *entry, const void *key)
 	return pldm_bios_table_attr_entry_decode_string_handle(entry) == handle;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 const struct pldm_bios_attr_table_entry *
 pldm_bios_table_attr_find_by_string_handle(const void *table, size_t length,
 					   uint16_t handle)
@@ -1160,7 +1164,7 @@ static bool attr_value_table_handle_equal(const void *entry, const void *key)
 	return pldm_bios_table_attr_value_entry_decode_handle(entry) == handle;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 const struct pldm_bios_attr_val_table_entry *
 pldm_bios_table_attr_value_find_by_handle(const void *table, size_t length,
 					  uint16_t handle)

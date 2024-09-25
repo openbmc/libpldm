@@ -55,7 +55,7 @@ int decode_oem_meta_file_io_write_req(
 	return pldm_msgbuf_destroy_consumed(buf);
 }
 
-LIBPLDM_ABI_DEPRECATED
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 				size_t payload_length, uint8_t *file_handle,
 				uint32_t *length, uint8_t *data)
@@ -67,6 +67,10 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 	if (msg == NULL || file_handle == NULL || length == NULL ||
 	    data == NULL) {
 		return pldm_xlate_errno(-EINVAL);
+	}
+
+	if (SIZE_MAX - sizeof(*request_msg) < payload_length) {
+		return pldm_xlate_errno(-EOVERFLOW);
 	}
 
 	request_msg_len = sizeof(*request_msg) + payload_length;
