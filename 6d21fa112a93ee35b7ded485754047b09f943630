@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2142e51f_44e24f9e",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1382,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2024-09-25T03:31:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edb056a1_7f257804",
+      "range": {
+        "startLine": 1382,
+        "startChar": 27,
+        "endLine": 1382,
+        "endChar": 35
+      },
+      "revId": "6d21fa112a93ee35b7ded485754047b09f943630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62dbbfa1_6eef51a8",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-09-25T02:46:59Z",
       "side": 1,
       "message": "Please don\u0027t use the double-underscore functions, that was meant to be a hint that you shouldn\u0027t be using them. Use the macro wrapper instead, as that enforces type-safety.\n\n```\npldm_msgbuf_extract_uint32(buf, record_handle_from_pdr);\n```\n\nPlease also address the other instances of this below.",
+      "revId": "6d21fa112a93ee35b7ded485754047b09f943630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f00bcc7_4b799b56",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2024-09-25T03:31:19Z",
+      "side": 1,
+      "message": "pldm_msgbuf_extract macro uses \"_Generic\", and cpp compilation fails to understand _Generic. Below is the error \n`in expansion of macro ‘pldm_msgbuf_extract’\n 1449 |     pldm_msgbuf_extract(buf, record_handle_from_pdr);\n      |     ^~~~~~~~~~~~~~~~~~~\n../src/msgbuf.h:681:9: error: ‘_Generic’ was not declared in this scope\n  681 |         _Generic((dst),                                                       `",
+      "parentUuid": "62dbbfa1_6eef51a8",
       "revId": "6d21fa112a93ee35b7ded485754047b09f943630",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -58,6 +100,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71fad4c1_442c5817",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1449,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2024-09-25T03:31:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10fd03d8_245203b3",
+      "revId": "6d21fa112a93ee35b7ded485754047b09f943630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b93e286_e7df598b",
@@ -71,6 +131,24 @@
       "writtenOn": "2024-09-25T02:46:59Z",
       "side": 1,
       "message": "Please use `pldm_entity_association_tree_destroy_check()`.",
+      "revId": "6d21fa112a93ee35b7ded485754047b09f943630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1965d4d3_1c473fec",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1546,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2024-09-25T03:31:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b93e286_e7df598b",
       "revId": "6d21fa112a93ee35b7ded485754047b09f943630",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
