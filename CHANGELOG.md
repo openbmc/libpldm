@@ -117,6 +117,8 @@ Change categories:
    The heartbeat field shall be omitted if `eventMessageGlobalEnable` is not
    `enableAsyncKeepAlive`.
 
+5. dsp: platform: Prevent overflow of arithmetic on event_data_length
+
 ## [0.9.1] - 2024-09-07
 
 ### Changed
