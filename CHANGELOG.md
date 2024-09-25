@@ -43,6 +43,7 @@ Change categories:
 
    - `decode_entity_auxiliary_names_pdr()`
    - `decode_get_state_sensor_readings_resp()`
+   - `decode_oem_meta_file_io_req()`
    - `decode_platform_event_message_req()`
    - `decode_platform_event_message_resp()`
    - `decode_sensor_op_data()`
@@ -81,6 +82,38 @@ Change categories:
    The implementation allocates, but gives no indication to the caller if an
    allocation (and hence the copy) has failed. Users should migrate to
    pldm_entity_association_tree_copy_root_check().
+
+3. The following APIs are deprecated as unsafe due to various unfixable CWE
+   violations:
+
+   - [CWE-129: Improper Validation of Array Index](https://cwe.mitre.org/data/definitions/129.html)
+
+     - `encode_get_bios_current_value_by_handle_resp()`
+     - `encode_get_bios_table_resp()`
+     - `encode_get_file_table_resp()`
+     - `encode_get_version_resp()`
+     - `pldm_bios_table_attr_entry_enum_decode_def_indices()`
+     - `pldm_bios_table_attr_entry_enum_decode_def_num()`
+     - `pldm_bios_table_attr_find_by_handle()`
+     - `pldm_bios_table_attr_find_by_string_handle()`
+     - `pldm_bios_table_attr_value_find_by_handle()`
+     - `pldm_bios_table_iter_create()`
+     - `pldm_bios_table_iter_is_end()`
+     - `pldm_bios_table_string_find_by_handle()`
+     - `pldm_bios_table_string_find_by_string()`
+
+   - [CWE-617: Reachable Assertion](https://cwe.mitre.org/data/definitions/617.html)
+
+     - `pldm_entity_association_tree_copy_root()`
+
+   - [CWE-789: Memory Allocation with Excessive Size Value](https://cwe.mitre.org/data/definitions/789.html)
+
+     - `decode_oem_meta_file_io_req()`
+
+   - [CWE-823: Use of Out-of-range Pointer Offset](https://cwe.mitre.org/data/definitions/823.html)
+     - `encode_fru_record()`
+     - `encode_get_pdr_resp()`
+     - `pldm_bios_table_attr_entry_enum_encode_length()`
 
 ### Removed
 
