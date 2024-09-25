@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47aa2e82_df0da1ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-25T02:30:45Z",
+      "side": 1,
+      "message": "Hi Unive,\n\nAs a general note I don\u0027t merge stablisation patches until the comments on the linked changes are resolved. There\u0027s still the issue of the subsequent parsing that\u0027s not yet implemented in libpldm in the first patch. I\u0027d like to get that resolved before we merge this, as it may impact API decisions.",
+      "revId": "0679ddb5823da306093d6c969c0d69c30bcf957d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

@@ -194,6 +194,24 @@
       "parentUuid": "e2ec7814_6c7cf08d",
       "revId": "e0c8a8120187887148bf3d977dbe33f8f5ee8c22",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a74f062_1b6f2d8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-25T02:30:45Z",
+      "side": 1,
+      "message": "\u003e Apologies for the trouble, but I\u0027m not very familiar with how to dump the ABI. Could you help me with it this time?\n\nAh, so there are some hints here:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md#updating-an-abi-dump\n\nHowever, this is also slightly out of date as we now have this script that you can run from inside the container:\n\nhttps://github.com/openbmc/libpldm/blob/main/scripts/abi-dump-updater\n\nThat said, what\u0027s not described above is how to build the OpenBMC CI container locally. There are some more hints here:\n\nhttps://github.com/openbmc/docs/blob/master/testing/local-ci-build.md\n\nLet me know if you need any further info.",
+      "parentUuid": "d06914cb_516b6dda",
+      "revId": "e0c8a8120187887148bf3d977dbe33f8f5ee8c22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
