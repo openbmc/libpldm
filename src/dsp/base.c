@@ -327,13 +327,13 @@ int encode_get_version_req(uint8_t instance_id, uint32_t transfer_handle,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int encode_get_version_resp(uint8_t instance_id, uint8_t completion_code,
 			    uint32_t next_transfer_handle,
 			    uint8_t transfer_flag, const ver32_t *version_data,
 			    size_t version_size, struct pldm_msg *msg)
 {
-	if (NULL == msg) {
+	if (NULL == msg || NULL == version_data) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
