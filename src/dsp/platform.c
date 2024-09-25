@@ -1296,6 +1296,11 @@ int encode_platform_event_message_req(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
+	if ((SIZE_MAX - PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES) <
+	    event_data_length) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
 	if (payload_length !=
 	    PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES + event_data_length) {
 		return PLDM_ERROR_INVALID_LENGTH;
