@@ -1152,7 +1152,7 @@ int encode_poll_for_platform_event_message_resp(
 	int rc;
 
 	if (!msg) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	struct pldm_header_info header = { 0 };
@@ -1161,12 +1161,12 @@ int encode_poll_for_platform_event_message_resp(
 	header.pldm_type = PLDM_PLATFORM;
 	header.command = PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE;
 
-	rc = pack_pldm_header(&header, &(msg->hdr));
-	if (rc != PLDM_SUCCESS) {
+	rc = pack_pldm_header_errno(&header, &(msg->hdr));
+	if (rc) {
 		return rc;
 	}
 
-	rc = pldm_msgbuf_init_cc(
+	rc = pldm_msgbuf_init_errno(
 		buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
 		msg->payload, payload_length);
 	if (rc) {
@@ -1177,16 +1177,17 @@ int encode_poll_for_platform_event_message_resp(
 	pldm_msgbuf_insert(buf, tid);
 	pldm_msgbuf_insert(buf, event_id);
 
-	if (event_id == 0xffff || event_id == 0x0000) {
+	if (event_id == PLDM_PLATFORM_EVENT_ID_ACK ||
+	    event_id == PLDM_PLATFORM_EVENT_ID_NONE) {
 		if (PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES !=
 		    payload_length) {
-			return PLDM_ERROR_INVALID_LENGTH;
+			return -EINVAL;
 		}
-		return pldm_msgbuf_destroy(buf);
+		return pldm_msgbuf_destroy_consumed(buf);
 	}
 
 	if ((event_data == NULL) && (event_data_size > 0)) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	pldm_msgbuf_insert(buf, next_data_transfer_handle);
@@ -1206,7 +1207,7 @@ int encode_poll_for_platform_event_message_resp(
 		pldm_msgbuf_insert(buf, checksum);
 	}
 
-	return pldm_msgbuf_destroy(buf);
+	return pldm_msgbuf_destroy_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -2533,10 +2534,10 @@ int decode_poll_for_platform_event_message_resp(
 	    transfer_flag == NULL || event_class == NULL ||
 	    event_data_size == NULL || event_data == NULL ||
 	    event_data_integrity_checksum == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
-	rc = pldm_msgbuf_init_cc(
+	rc = pldm_msgbuf_init_errno(
 		buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
 		msg->payload, payload_length);
 	if (rc) {
@@ -2556,8 +2557,9 @@ int decode_poll_for_platform_event_message_resp(
 	if (rc) {
 		return rc;
 	}
-	if ((*event_id == 0) || (*event_id == 0xffff)) {
-		return PLDM_SUCCESS;
+	if ((*event_id == PLDM_PLATFORM_EVENT_ID_NONE) ||
+	    (*event_id == PLDM_PLATFORM_EVENT_ID_ACK)) {
+		return 0;
 	}
 
 	pldm_msgbuf_extract_p(buf, next_data_transfer_handle);
@@ -2572,7 +2574,7 @@ int decode_poll_for_platform_event_message_resp(
 		return rc;
 	}
 	if (*event_data_size > payload_length) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	if (*event_data_size > 0) {
