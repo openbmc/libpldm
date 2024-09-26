@@ -47,6 +47,7 @@ Change categories:
    - `decode_platform_event_message_resp()`
    - `decode_sensor_op_data()`
    - `encode_get_state_effecter_states_resp()`
+   - `encode_state_sensor_pdr()`
    - `pldm_pdr_find_record()`
    - `pldm_pdr_get_next_record()`
 
@@ -118,6 +119,7 @@ Change categories:
    `enableAsyncKeepAlive`.
 
 5. dsp: platform: Prevent overflow of arithmetic on event_data_length
+6. dsp: platform: Bounds check encode_sensor_state_pdr()
 
 ## [0.9.1] - 2024-09-07
 
