@@ -122,6 +122,24 @@
       "parentUuid": "bcb3a25e_87e75b04",
       "revId": "5ddcd0c72e0c54ced355a61cc75ec3e80a82b940",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9b02c04_ada5bdc9",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-26T01:52:50Z",
+      "side": 1,
+      "message": "My comment was more about the protocol-level incompatibilities with e.g. host firmware (which I assume is what these messages are for).",
+      "parentUuid": "6b4ad97c_e0542c9a",
+      "revId": "5ddcd0c72e0c54ced355a61cc75ec3e80a82b940",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
