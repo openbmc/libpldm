@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1d77a66_9ec17076",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2177,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-26T02:08:31Z",
+      "side": 1,
+      "message": "Do we not have an API for encoding a PDR? If not perhaps it would be best to add one?\n\nAt the _very_ least you need to add references to what message you\u0027re encoding and the associated message definition in the specs. Otherwise this is terribly opaque and the reader is left guessing at what you\u0027re doing.",
+      "range": {
+        "startLine": 2145,
+        "startChar": 0,
+        "endLine": 2177,
+        "endChar": 38
+      },
+      "revId": "231d9f3fdb7a54722f6dd47428ab1994aa09d0f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
