@@ -2201,6 +2201,22 @@ TEST(PlatformEventMessage, testGoodEncodeRequest)
     EXPECT_EQ(Tid, req->tid);
     EXPECT_EQ(eventClass, req->event_class);
     EXPECT_EQ(0, memcmp(&eventData, req->event_data, sizeof(eventData)));
+
+    rc = encode_platform_event_message_req(
+        0, formatVersion, Tid, PLDM_CPER_EVENT,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<uint8_t*>(&eventData), sizeof(eventData), request,
+        sizeof(eventData) + PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES);
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    req = reinterpret_cast<struct pldm_platform_event_message_req*>(
+        request->payload);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(formatVersion, req->format_version);
+    EXPECT_EQ(Tid, req->tid);
+    EXPECT_EQ(PLDM_CPER_EVENT, req->event_class);
+    EXPECT_EQ(0, memcmp(&eventData, req->event_data, sizeof(eventData)));
 }
 
 TEST(PlatformEventMessage, testBadEncodeRequest)
@@ -2238,6 +2254,13 @@ TEST(PlatformEventMessage, testBadEncodeRequest)
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&eventData), sz_eventData, request, 0);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    rc = encode_platform_event_message_req(
+        0, formatVersion, Tid, PLDM_CPER_EVENT + 1,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<uint8_t*>(&eventData), sz_eventData, request,
+        payloadLen);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
 TEST(PlatformEventMessage, testGoodDecodeResponse)
