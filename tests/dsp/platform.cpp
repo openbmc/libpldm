@@ -1654,7 +1654,7 @@ TEST(PollForPlatformEventMessage, testGoodDecodeRespond)
         &retEventDataSize, (void**)&retEventData,
         &retEventDataIntegrityChecksum);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
     EXPECT_EQ(retCompletionCode, completionCode);
     EXPECT_EQ(retTid, tId);
     EXPECT_EQ(retEventId, eventId);
@@ -1699,7 +1699,7 @@ TEST(PollForPlatformEventMessage, testGoodDecodeAckOnlyRespond)
         &retEventDataSize, (void**)&retEventData,
         &retEventDataIntegrityChecksum);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
     EXPECT_EQ(retCompletionCode, completionCode);
     EXPECT_EQ(retTid, tId);
     EXPECT_EQ(retEventId, eventId);
@@ -1716,7 +1716,7 @@ TEST(PollForPlatformEventMessage, testGoodDecodeAckOnlyRespond)
         &retEventDataSize, (void**)&retEventData,
         &retEventDataIntegrityChecksum);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
     EXPECT_EQ(retCompletionCode, completionCode);
     EXPECT_EQ(retTid, tId);
     EXPECT_EQ(retEventId, eventId);
@@ -1724,6 +1724,7 @@ TEST(PollForPlatformEventMessage, testGoodDecodeAckOnlyRespond)
 
 TEST(PollForPlatformEventMessage, testBadDecodeRespond)
 {
+    const uint32_t respMsgLen = 23;
     std::vector<uint8_t> responseMsg{
         0x1,
         0x0,
@@ -1752,7 +1753,6 @@ TEST(PollForPlatformEventMessage, testBadDecodeRespond)
         0x77,
         0x66 // event_data_integrity_checksum
     };
-    // const uint32_t respMsgLen = 23;
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
@@ -1761,7 +1761,7 @@ TEST(PollForPlatformEventMessage, testBadDecodeRespond)
         nullptr, 0, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
         nullptr, nullptr, nullptr);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 
     uint8_t retCompletionCode;
     uint8_t retTid = 0;
@@ -1773,13 +1773,14 @@ TEST(PollForPlatformEventMessage, testBadDecodeRespond)
     uint8_t* retEventData = nullptr;
     uint32_t retEventDataIntegrityChecksum = 0;
 
+    responseMsg[13] = respMsgLen + 1;
     rc = decode_poll_for_platform_event_message_resp(
-        response, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES - 1,
-        &retCompletionCode, &retTid, &retEventId, &retNextDataTransferHandle,
-        &retTransferFlag, &retEventClass, &retEventDataSize,
-        (void**)&retEventData, &retEventDataIntegrityChecksum);
+        response, respMsgLen, &retCompletionCode, &retTid, &retEventId,
+        &retNextDataTransferHandle, &retTransferFlag, &retEventClass,
+        &retEventDataSize, (void**)&retEventData,
+        &retEventDataIntegrityChecksum);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EINVAL);
 }
 
 TEST(PollForPlatformEventMessage, testGoodDecodeRequestFirstPart)
@@ -1984,14 +1985,14 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP1)
         instance_id, completionCode, tId, eventId, nextDataTransferHandle,
         transferFlag, eventClass, eventDataSize, pEventData,
         eventDataIntegrityChecksum, response, payloadLength);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(
+    rc = pldm_msgbuf_init_errno(
         buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
         response->payload, payloadLength);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
 
     uint8_t retCompletionCode;
     uint8_t retTid = 0;
@@ -2012,7 +2013,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP1)
     pldm_msgbuf_extract_uint32(buf, &retEventDataSize);
     rc = pldm_msgbuf_extract_array_uint8(buf, retEventDataSize, retEventData,
                                          sizeof(retEventData));
-    ASSERT_EQ(rc, 0);
+    ASSERT_EQ(rc, PLDM_SUCCESS);
     pldm_msgbuf_extract_uint32(buf, &retEventDataIntegrityChecksum);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
@@ -2026,7 +2027,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP1)
     EXPECT_EQ(retEventDataIntegrityChecksum, eventDataIntegrityChecksum);
     EXPECT_EQ(0, memcmp(pEventData, retEventData, eventDataSize));
 
-    EXPECT_EQ(pldm_msgbuf_destroy(buf), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
 }
 
 TEST(PollForPlatformEventMessage, testGoodEncodeResposeP2)
@@ -2034,7 +2035,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP2)
     uint8_t completionCode = PLDM_SUCCESS;
     uint8_t instance_id = 0;
     uint8_t tId = 0x9;
-    uint16_t eventId = 0x0000;
+    uint16_t eventId = PLDM_PLATFORM_EVENT_ID_NONE;
     constexpr size_t payloadLength =
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES;
 
@@ -2045,14 +2046,14 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP2)
     auto rc = encode_poll_for_platform_event_message_resp(
         instance_id, completionCode, tId, eventId, 0, 0, 0, 0, NULL, 0,
         response, payloadLength);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(
+    rc = pldm_msgbuf_init_errno(
         buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
         response->payload, payloadLength);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
 
     uint8_t retCompletionCode;
     uint8_t retTid = 0;
@@ -2062,11 +2063,10 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP2)
     pldm_msgbuf_extract_uint8(buf, &retTid);
     pldm_msgbuf_extract_uint16(buf, &retEventId);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(retCompletionCode, completionCode);
     EXPECT_EQ(retTid, tId);
     EXPECT_EQ(retEventId, eventId);
-    EXPECT_EQ(pldm_msgbuf_destroy(buf), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
 }
 
 TEST(PollForPlatformEventMessage, testGoodEncodeResposeP3)
@@ -2074,7 +2074,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP3)
     uint8_t completionCode = PLDM_SUCCESS;
     uint8_t instance_id = 0;
     uint8_t tId = 0x9;
-    uint16_t eventId = 0xffff;
+    uint16_t eventId = PLDM_PLATFORM_EVENT_ID_ACK;
     constexpr size_t payloadLength =
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES;
 
@@ -2085,14 +2085,14 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP3)
     auto rc = encode_poll_for_platform_event_message_resp(
         instance_id, completionCode, tId, eventId, 0, 0, 0, 0, NULL, 0,
         response, payloadLength);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(
+    rc = pldm_msgbuf_init_errno(
         buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
         response->payload, payloadLength);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
 
     uint8_t retCompletionCode;
     uint8_t retTid = 0;
@@ -2102,11 +2102,10 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP3)
     pldm_msgbuf_extract_uint8(buf, &retTid);
     pldm_msgbuf_extract_uint16(buf, &retEventId);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(retCompletionCode, completionCode);
     EXPECT_EQ(retTid, tId);
     EXPECT_EQ(retEventId, eventId);
-    EXPECT_EQ(pldm_msgbuf_destroy(buf), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
 }
 
 TEST(PollForPlatformEventMessage, testGoodEncodeResposeP4)
@@ -2134,14 +2133,14 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP4)
         instance_id, completionCode, tId, eventId, nextDataTransferHandle,
         transferFlag, eventClass, eventDataSize, NULL,
         eventDataIntegrityChecksum, response, payloadLength);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(
+    rc = pldm_msgbuf_init_errno(
         buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
         response->payload, payloadLength);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
 
     uint8_t retCompletionCode;
     uint8_t retTid = 0;
@@ -2161,7 +2160,6 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP4)
     pldm_msgbuf_extract_uint32(buf, &retEventDataSize);
     pldm_msgbuf_extract_uint32(buf, &retEventDataIntegrityChecksum);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(retCompletionCode, completionCode);
     EXPECT_EQ(retTid, tId);
     EXPECT_EQ(retEventId, eventId);
@@ -2171,7 +2169,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP4)
     EXPECT_EQ(retEventDataSize, eventDataSize);
     EXPECT_EQ(retEventDataIntegrityChecksum, eventDataIntegrityChecksum);
 
-    EXPECT_EQ(pldm_msgbuf_destroy(buf), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
 }
 
 TEST(PollForPlatformEventMessage, testBadEncodeResponse)
@@ -2197,13 +2195,13 @@ TEST(PollForPlatformEventMessage, testBadEncodeResponse)
         transferFlag, eventClass, eventDataSize, NULL,
         eventDataIntegrityChecksum, NULL, payloadLength);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 
     rc = encode_poll_for_platform_event_message_resp(
         instance_id, completionCode, tId, eventId, nextDataTransferHandle,
         transferFlag, eventClass, 1, NULL, eventDataIntegrityChecksum, response,
         payloadLength);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 }
 
 TEST(PlatformEventMessage, testGoodStateSensorDecodeRequest)

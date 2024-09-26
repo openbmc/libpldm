@@ -1917,7 +1917,7 @@ int encode_platform_event_message_resp(uint8_t instance_id,
  *  @param[in] checksum - The checksum
  *  @param[out] msg - Message will be written to this
  *  @param[in] payload_length - Length of Response message payload
- *  @return pldm_completion_codes
+ *  @return error code
  *  @note Caller is responsible for memory alloc and dealloc of param
  *  'msg.payload'
  */
@@ -1979,7 +1979,7 @@ int encode_poll_for_platform_event_message_req(uint8_t instance_id,
  *  msg.payload and therefore has the same lifetime as msg.payload.
  *  @param[out] event_data_integrity_checksum - The checksum
  *  command
- *  @return pldm_completion_codes
+ *  @return error code
  *  @note Caller is responsible for memory alloc and dealloc of param
  *  'msg.payload'
  */

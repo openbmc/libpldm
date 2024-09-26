@@ -47,6 +47,11 @@ Change categories:
    Register assignment for function parameters was changed with the removal of
    some asserts in related implementations.
 
+4. platform: update encode/decode_poll_for_platform_event_message_resp()
+
+   Update the return code of encode/decode_poll_for_platform_event_message_resp
+   APIs from pldm_completion_codes to error_code.
+
 ### Deprecated
 
 1. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
