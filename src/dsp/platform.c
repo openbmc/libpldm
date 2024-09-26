@@ -15,20 +15,6 @@
 #include <string.h>
 #include <uchar.h>
 
-static int pldm_platform_pdr_hdr_validate(struct pldm_value_pdr_hdr *ctx,
-					  size_t lower, size_t upper)
-{
-	if (ctx->length + sizeof(*ctx) < lower) {
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
-
-	if (ctx->length > upper) {
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
-
-	return PLDM_SUCCESS;
-}
-
 LIBPLDM_ABI_STABLE
 int encode_state_effecter_pdr(
 	struct pldm_state_effecter_pdr *const effecter,
@@ -1805,16 +1791,11 @@ int decode_numeric_sensor_pdr_data(
 		return pldm_xlate_errno(rc);
 	}
 
-	rc = pldm_msgbuf_extract_value_pdr_hdr(buf, &pdr_value->hdr);
-	if (rc) {
-		return pldm_xlate_errno(rc);
-	}
-
-	rc = pldm_platform_pdr_hdr_validate(
-		&pdr_value->hdr, PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH,
+	rc = pldm_msgbuf_extract_value_pdr_hdr(
+		buf, &pdr_value->hdr, PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH,
 		pdr_data_length);
 	if (rc) {
-		return rc;
+		return pldm_xlate_errno(rc);
 	}
 
 	pldm_msgbuf_extract(buf, pdr_value->terminus_handle);
@@ -2787,16 +2768,11 @@ int decode_numeric_effecter_pdr_data(
 		return pldm_xlate_errno(rc);
 	}
 
-	rc = pldm_msgbuf_extract_value_pdr_hdr(buf, &hdr);
-	if (rc) {
-		return pldm_xlate_errno(rc);
-	}
-
-	rc = pldm_platform_pdr_hdr_validate(
-		&hdr, PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH,
+	rc = pldm_msgbuf_extract_value_pdr_hdr(
+		buf, &hdr, PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH,
 		pdr_data_length);
 	if (rc) {
-		return rc;
+		return pldm_xlate_errno(rc);
 	}
 
 	memcpy(&pdr_value->hdr, &hdr, sizeof(hdr));
@@ -3074,13 +3050,8 @@ int decode_entity_auxiliary_names_pdr(
 		return rc;
 	}
 
-	rc = pldm_msgbuf_extract_value_pdr_hdr(buf, &pdr->hdr);
-	if (rc) {
-		return rc;
-	}
-
-	rc = pldm_platform_pdr_hdr_validate(
-		&pdr->hdr, PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH,
+	rc = pldm_msgbuf_extract_value_pdr_hdr(
+		buf, &pdr->hdr, PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH,
 		data_length);
 	if (rc) {
 		return rc;
