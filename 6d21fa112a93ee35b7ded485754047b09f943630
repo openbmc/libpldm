@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68f57074_5098c3e5",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-26T02:01:54Z",
+      "side": 1,
+      "message": "That\u0027s not what I was suggesting though.\n\nI suggested\n\n`pldm_msgbuf_extract_uint32()`\n\nand you\u0027ve responded discussing\n\n`pldm_msgbuf_extract()`.\n\nI was not suggesting the latter (for the reason you outlined).\n\nPlease recognise that there are type-specific wrapper macros _in addition to_ the generic `pldm_msgbuf_extract()` macro.\n\nThere\u0027s a type-safety difference between\n\n`pldm_msgbuf_extract_uint32()`\n\nand\n\n`pldm__msgbuf_extract_uint32()`\n\nThe latter drops all the type information by taking a `void *` argument, where the former still requires type information for size (but drops the alignment requirement for the type). You must use the former (macro wrapper, no double-underscore), and not the latter (static inline function, double underscores to make it feel like you shouldn\u0027t use it).",
+      "parentUuid": "0f00bcc7_4b799b56",
+      "revId": "6d21fa112a93ee35b7ded485754047b09f943630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10fd03d8_245203b3",
         "filename": "tests/dsp/pdr.cpp",
         "patchSetId": 9
