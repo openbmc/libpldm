@@ -93,11 +93,25 @@ int encode_state_sensor_pdr(
 	const struct state_sensor_possible_states *const possible_states,
 	const size_t possible_states_size, size_t *const actual_size)
 {
-	// Encode possible states
-
 	size_t calculated_possible_states_size = 0;
 
+	if (!sensor || !possible_states || !actual_size) {
+		return PLDM_ERROR;
+	}
+
+	if (SIZE_MAX - (sizeof(*sensor) - sizeof(sensor->possible_states)) <
+	    possible_states_size) {
+		return PLDM_ERROR;
+	}
+
+	if (allocation_size <
+	    (sizeof(*sensor) - sizeof(sensor->possible_states) +
+	     possible_states_size)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
 	{
+		// Encode possible states
 		char *states_ptr = (char *)possible_states;
 		char *const begin_states_ptr = states_ptr;
 
@@ -125,11 +139,6 @@ int encode_state_sensor_pdr(
 
 	*actual_size = (sizeof(struct pldm_state_sensor_pdr) +
 			possible_states_size - sizeof(sensor->possible_states));
-
-	if (allocation_size < *actual_size) {
-		*actual_size = 0;
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
 
 	// Encode rest of PDR
 
