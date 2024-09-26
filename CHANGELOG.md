@@ -48,6 +48,8 @@ Change categories:
    Register assignment for function parameters was changed with the removal of
    some asserts in related implementations.
 
+4. platform: Support PLDM_CPER_EVENT in encode_platform_event_message_req()
+
 ### Deprecated
 
 1. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
