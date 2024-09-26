@@ -1222,7 +1222,7 @@ int encode_platform_event_message_req(
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	if (event_class > PLDM_HEARTBEAT_TIMER_ELAPSED_EVENT &&
+	if (event_class > PLDM_CPER_EVENT &&
 	    !(event_class >= 0xf0 && event_class <= 0xfe)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
