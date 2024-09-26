@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ba59478_d5185500",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-26T01:41:16Z",
+      "side": 1,
+      "message": "Hi Thu, a few comments inline.",
+      "revId": "4fa89b0a3373b19261cb56ed892103d9409328c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "255f3be3_405001e0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-26T01:41:16Z",
+      "side": 1,
+      "message": "I realise that historically we haven\u0027t required this, but can you please also add `_PLATFORM_` to the symbol prefix? Also, I prefer we take a bit more of a hierarchical approach to the name, so.\n\nFinally, the spec text in v1.3.0 says the following for `eventIDToAcknowledge` in the request:\n\n\u003e The event receiver shall use the null value 0x0000 when requesting the first entry from the terminus’ event queue or the GetFirstPart of a multipart event as indicated by a eventData format for pldmMessagePollEvent. The event receiver shall use the special value 0xFFFF when in the middle of a multipart event transfer (TransferOperationFlag is GetNextPart)\n\nand this for `eventID` in the response:\n\n\u003e The terminus assigns the Event ID to an event so the requester can acknowledge it on the next invocation of this command. The terminus shall supply a value of 0x0000 if the terminus internal event queue is empty. If TransferOperationFlag in the request message was set to AcknowledgementOnly and the event queue is non-empty, the terminus shall supply special value 0xFFFF for this field.\n\nSo perhaps we cater to both separately:\n\n```\n/* Platform event message request */\n#define PLDM_PLATFORM_EVENT_ID_NULL 0x0000\n#define PLDM_PLATFORM_EVENT_ID_FRAGMENT 0xffff\n/* Platform event message response */\n#define PLDM_PLATFORM_EVENT_ID_NONE 0x0000\n#define PLDM_PLATFORM_EVENT_ID_ACK 0xffff\n```",
+      "revId": "4fa89b0a3373b19261cb56ed892103d9409328c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d082a3f6_bb2e3a89",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2481,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-26T01:41:16Z",
+      "side": 1,
+      "message": "This is the same logic as in the decode, right? Can you please split this out to a `static inline` helper function?",
+      "revId": "4fa89b0a3373b19261cb56ed892103d9409328c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2320fbe0_0b7f0c24",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-26T01:41:16Z",
+      "side": 1,
+      "message": "Please rebase this on top of main, as the clang-tidy check for `reinterpret_cast\u003c\u003e()` has now been enabled. You can use `PLDM_MSGBUF_DEFINE_P()` instead (or manual placement-new as required).",
+      "revId": "4fa89b0a3373b19261cb56ed892103d9409328c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36fa5342_86cbe4de",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-26T01:41:16Z",
+      "side": 1,
+      "message": "Please don\u0027t add more invocations of `pldm_msgbuf_init_cc()`, use `pldm_msgbuf_init_errno()` instead and fix the error handling comparisons.",
+      "revId": "4fa89b0a3373b19261cb56ed892103d9409328c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
