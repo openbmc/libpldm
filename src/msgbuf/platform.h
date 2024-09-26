@@ -7,17 +7,32 @@
 #include <libpldm/base.h>
 #include <libpldm/platform.h>
 
-static inline int
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
 pldm_msgbuf_extract_value_pdr_hdr(struct pldm_msgbuf *ctx,
-				  struct pldm_value_pdr_hdr *hdr)
+				  struct pldm_value_pdr_hdr *hdr, size_t lower,
+				  size_t upper)
 {
+	int rc;
+
 	pldm_msgbuf_extract(ctx, hdr->record_handle);
 	pldm_msgbuf_extract(ctx, hdr->version);
 	pldm_msgbuf_extract(ctx, hdr->type);
 	pldm_msgbuf_extract(ctx, hdr->record_change_num);
-	pldm_msgbuf_extract(ctx, hdr->length);
+	rc = pldm_msgbuf_extract(ctx, hdr->length);
+	if (rc) {
+		return rc;
+	}
 
-	return pldm_msgbuf_validate(ctx);
+	if (hdr->length + sizeof(*ctx) < lower) {
+		return -EOVERFLOW;
+	}
+
+	if (hdr->length > upper) {
+		return -EOVERFLOW;
+	}
+
+	return 0;
 }
 
 LIBPLDM_CC_ALWAYS_INLINE int
