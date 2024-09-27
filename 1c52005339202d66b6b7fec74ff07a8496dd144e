@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "372d5481_d1f1f5d1",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-09-27T01:27:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7c40a339_238fc90b",
+      "revId": "1c52005339202d66b6b7fec74ff07a8496dd144e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11a1c894_5eca57d1",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-27T00:14:28Z",
       "side": 1,
       "message": "No, we can\u0027t do this, as this is marked as a stable ABI. The comment about avoiding `pldm_msgbuf_init_cc()` was _only_ with regard to the tests, I wasn\u0027t asking it to be done here also.",
+      "revId": "1c52005339202d66b6b7fec74ff07a8496dd144e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de147d6f_55fa347e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-09-27T01:27:28Z",
+      "side": 1,
+      "message": "I reverted the changing in patch set #3 and #4. I backed to patch set #2. And update code in `platform.cpp` as your comment in patch set #2.",
+      "parentUuid": "11a1c894_5eca57d1",
       "revId": "1c52005339202d66b6b7fec74ff07a8496dd144e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ab5131c_e7b5c6c5",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2516,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-09-27T01:27:28Z",
+      "side": 1,
+      "message": "I reverted the change as your comment because we will not change in the APIs.",
+      "parentUuid": "656ab7b7_bc7bc843",
+      "revId": "1c52005339202d66b6b7fec74ff07a8496dd144e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f7e5e3a_1cd11c23",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-09-27T00:14:28Z",
       "side": 1,
       "message": "Please don\u0027t do this.\n\nThe point of enabling the tidy rule wasn\u0027t so people would add more `NOLINT`. It is to ban further additions of `reinterpret_cast\u003c\u003e()`.\n\nThe use of `NOLINT` in [the change adding the clang-tidy rule](https://github.com/openbmc/libpldm/commit/d0ba43af817d5a7763dec75a1309fe2ae37b95a6) was so that I didn\u0027t have to first clean up all the existing instances.\n\nYou can use `PLDM_MSG_DEFINE_P()` to create yourself an appropriate buffer.\n\nSee the following change for the documentation and examples:\n\nhttps://github.com/openbmc/libpldm/commit/7a3c14ecebf0b165850e484d3ca202af9a4fc59a\n\nPlease fix all instances in the patch.",
+      "revId": "1c52005339202d66b6b7fec74ff07a8496dd144e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f92c59a_ea28a9e6",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1453,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2024-09-27T01:27:28Z",
+      "side": 1,
+      "message": "I updated to use `PLDM_MSG_DEFINE_P()` as your comment.",
+      "parentUuid": "6f7e5e3a_1cd11c23",
       "revId": "1c52005339202d66b6b7fec74ff07a8496dd144e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
