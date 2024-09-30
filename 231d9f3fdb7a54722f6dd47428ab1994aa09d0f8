@@ -116,6 +116,30 @@
       },
       "revId": "231d9f3fdb7a54722f6dd47428ab1994aa09d0f8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa52e623_e665d32d",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2177,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-30T06:14:18Z",
+      "side": 1,
+      "message": "Well, I wouldn\u0027t want anything exposed if it doesn\u0027t make sense, but open-coding this is also not right. It needs documentation as noted above, and should probably be done as a static function in the test implementation to begin with?",
+      "parentUuid": "25064b84_8dc9c091",
+      "range": {
+        "startLine": 2145,
+        "startChar": 0,
+        "endLine": 2177,
+        "endChar": 38
+      },
+      "revId": "231d9f3fdb7a54722f6dd47428ab1994aa09d0f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
