@@ -92,6 +92,30 @@
       },
       "revId": "231d9f3fdb7a54722f6dd47428ab1994aa09d0f8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25064b84_8dc9c091",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2177,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-09-30T06:11:33Z",
+      "side": 1,
+      "message": "Hey andrew - is it a suggested practice to create a new API in the library ..just for the purpose of unit testing ?",
+      "parentUuid": "c1d77a66_9ec17076",
+      "range": {
+        "startLine": 2145,
+        "startChar": 0,
+        "endLine": 2177,
+        "endChar": 38
+      },
+      "revId": "231d9f3fdb7a54722f6dd47428ab1994aa09d0f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
