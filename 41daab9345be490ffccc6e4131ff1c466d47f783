@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f26afc91_524af170",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1475,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-09-30T06:53:58Z",
+      "side": 1,
+      "message": "You should do this immediately after your last `pldm_msgbuf_extract_*()` call and before testing any of the variable values (i.e. the `EXPECT_EQ()` calls) above. As it stands there\u0027s an opportunity for UB.\n\nYou should fix this throughout, but otherwise I think the patch is good to go.",
+      "revId": "41daab9345be490ffccc6e4131ff1c466d47f783",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
