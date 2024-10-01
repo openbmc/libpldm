@@ -2429,7 +2429,16 @@ int decode_set_event_receiver_req(const struct pldm_msg *msg,
 	pldm_msgbuf_extract_p(buf, event_message_global_enable);
 	pldm_msgbuf_extract_p(buf, transport_protocol_type);
 	pldm_msgbuf_extract_p(buf, event_receiver_address_info);
-	pldm_msgbuf_extract_p(buf, heartbeat_timer);
+	if ((*event_message_global_enable ==
+	     PLDM_EVENT_MESSAGE_GLOBAL_ENABLE_ASYNC_KEEP_ALIVE)) {
+		rc = pldm_msgbuf_init_cc(
+			buf, PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES,
+			buf->cursor, buf->remaining);
+		if (rc) {
+			return rc;
+		}
+		pldm_msgbuf_extract_p(buf, heartbeat_timer);
+	}
 
 	rc = pldm_msgbuf_destroy(buf);
 	if (rc) {

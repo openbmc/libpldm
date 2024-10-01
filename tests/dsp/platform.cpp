@@ -3491,8 +3491,9 @@ TEST(SetEventReceiver, testGoodEncodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0x78;
 
-    std::vector<uint8_t> requestMsg(hdrSize +
-                                    PLDM_SET_EVENT_RECEIVER_REQ_BYTES);
+    std::vector<uint8_t> requestMsg(
+        hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
+        PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES);
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
@@ -3518,8 +3519,9 @@ TEST(SetEventReceiver, testBadEncodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0;
 
-    std::vector<uint8_t> requestMsg(hdrSize +
-                                    PLDM_SET_EVENT_RECEIVER_REQ_BYTES);
+    std::vector<uint8_t> requestMsg(
+        hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
+        PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES);
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
@@ -3592,7 +3594,8 @@ TEST(SetEventReceiver, testBadEncodeResponse)
 TEST(SetEventReceiver, testGoodDecodeRequest)
 {
 
-    std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES>
+    std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
+                            PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES>
         requestMsg{};
 
     uint8_t eventMessageGlobalEnable =
@@ -3630,7 +3633,8 @@ TEST(SetEventReceiver, testGoodDecodeRequest)
 
 TEST(SetEventReceiver, testBadDecodeRequest)
 {
-    std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES>
+    std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
+                            PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES>
         requestMsg{};
 
     auto rc = decode_set_event_receiver_req(NULL, requestMsg.size() - hdrSize,
