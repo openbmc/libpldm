@@ -415,7 +415,7 @@ pldm_msgbuf_destroy_consumed(struct pldm_msgbuf *ctx)
  */
 #define pldm_msgbuf_extract_uint8(ctx, dst)                                    \
 	pldm_msgbuf_extract_typecheck(uint8_t, pldm__msgbuf_extract_uint8,     \
-				      dst, ctx, dst)
+				      dst, ctx, (void *)&(dst))
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
@@ -443,7 +443,7 @@ pldm__msgbuf_extract_uint8(struct pldm_msgbuf *ctx, void *dst)
 
 #define pldm_msgbuf_extract_int8(ctx, dst)                                     \
 	pldm_msgbuf_extract_typecheck(int8_t, pldm__msgbuf_extract_int8, dst,  \
-				      ctx, dst)
+				      ctx, (void *)&(dst))
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
@@ -470,7 +470,7 @@ pldm__msgbuf_extract_int8(struct pldm_msgbuf *ctx, void *dst)
 
 #define pldm_msgbuf_extract_uint16(ctx, dst)                                   \
 	pldm_msgbuf_extract_typecheck(uint16_t, pldm__msgbuf_extract_uint16,   \
-				      dst, ctx, dst)
+				      dst, ctx, (void *)&(dst))
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
@@ -522,7 +522,7 @@ pldm__msgbuf_extract_uint16(struct pldm_msgbuf *ctx, void *dst)
 
 #define pldm_msgbuf_extract_int16(ctx, dst)                                    \
 	pldm_msgbuf_extract_typecheck(int16_t, pldm__msgbuf_extract_int16,     \
-				      dst, ctx, dst)
+				      dst, ctx, (void *)&(dst))
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
@@ -559,7 +559,7 @@ pldm__msgbuf_extract_int16(struct pldm_msgbuf *ctx, void *dst)
 
 #define pldm_msgbuf_extract_uint32(ctx, dst)                                   \
 	pldm_msgbuf_extract_typecheck(uint32_t, pldm__msgbuf_extract_uint32,   \
-				      dst, ctx, dst)
+				      dst, ctx, (void *)&(dst))
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
@@ -595,7 +595,7 @@ pldm__msgbuf_extract_uint32(struct pldm_msgbuf *ctx, void *dst)
 
 #define pldm_msgbuf_extract_int32(ctx, dst)                                    \
 	pldm_msgbuf_extract_typecheck(int32_t, pldm__msgbuf_extract_int32,     \
-				      dst, ctx, dst)
+				      dst, ctx, (void *)&(dst))
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
@@ -631,7 +631,7 @@ pldm__msgbuf_extract_int32(struct pldm_msgbuf *ctx, void *dst)
 
 #define pldm_msgbuf_extract_real32(ctx, dst)                                   \
 	pldm_msgbuf_extract_typecheck(real32_t, pldm__msgbuf_extract_real32,   \
-				      dst, ctx, dst)
+				      dst, ctx, (void *)&(dst))
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
@@ -1347,7 +1347,7 @@ template <typename T>
 static inline int pldm_msgbuf_typecheck_uint8_t(struct pldm_msgbuf *ctx,
 						void *buf)
 {
-	static_assert(std::is_same<uint8_t *, T>::value);
+	static_assert(std::is_same<uint8_t, T>::value);
 	return pldm__msgbuf_extract_uint8(ctx, buf);
 }
 
@@ -1355,7 +1355,7 @@ template <typename T>
 static inline int pldm_msgbuf_typecheck_int8_t(struct pldm_msgbuf *ctx,
 					       void *buf)
 {
-	static_assert(std::is_same<int8_t *, T>::value);
+	static_assert(std::is_same<int8_t, T>::value);
 	return pldm__msgbuf_extract_int8(ctx, buf);
 }
 
@@ -1363,7 +1363,7 @@ template <typename T>
 static inline int pldm_msgbuf_typecheck_uint16_t(struct pldm_msgbuf *ctx,
 						 void *buf)
 {
-	static_assert(std::is_same<uint16_t *, T>::value);
+	static_assert(std::is_same<uint16_t, T>::value);
 	return pldm__msgbuf_extract_uint16(ctx, buf);
 }
 
@@ -1371,7 +1371,7 @@ template <typename T>
 static inline int pldm_msgbuf_typecheck_int16_t(struct pldm_msgbuf *ctx,
 						void *buf)
 {
-	static_assert(std::is_same<int16_t *, T>::value);
+	static_assert(std::is_same<int16_t, T>::value);
 	return pldm__msgbuf_extract_int16(ctx, buf);
 }
 
@@ -1379,7 +1379,7 @@ template <typename T>
 static inline int pldm_msgbuf_typecheck_uint32_t(struct pldm_msgbuf *ctx,
 						 void *buf)
 {
-	static_assert(std::is_same<uint32_t *, T>::value);
+	static_assert(std::is_same<uint32_t, T>::value);
 	return pldm__msgbuf_extract_uint32(ctx, buf);
 }
 
@@ -1387,7 +1387,7 @@ template <typename T>
 static inline int pldm_msgbuf_typecheck_int32_t(struct pldm_msgbuf *ctx,
 						void *buf)
 {
-	static_assert(std::is_same<int32_t *, T>::value);
+	static_assert(std::is_same<int32_t, T>::value);
 	return pldm__msgbuf_extract_int32(ctx, buf);
 }
 
@@ -1395,7 +1395,7 @@ template <typename T>
 static inline int pldm_msgbuf_typecheck_real32_t(struct pldm_msgbuf *ctx,
 						 void *buf)
 {
-	static_assert(std::is_same<real32_t *, T>::value);
+	static_assert(std::is_same<real32_t, T>::value);
 	return pldm__msgbuf_extract_real32(ctx, buf);
 }
 #endif
