@@ -1,0 +1,203 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b058d177_260b2235",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T05:02:10Z",
+      "side": 1,
+      "message": "Can you please add a `Fixes:` tag?\n\nAlso, given this is a fix for (library) user-facing behaviour it needs an entry in the changelog.",
+      "revId": "7951c32d8fdeb58ac3a4edbb815ae8f41fde77df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "644a66cc_41acdf3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T05:02:10Z",
+      "side": 1,
+      "message": "Hi Archana, thanks for the improvements. I have some more comments inline. Do note the comment about the change to the `pldm_msgbuf_extract_*()` APIs, it simplifies things slightly.",
+      "revId": "7951c32d8fdeb58ac3a4edbb815ae8f41fde77df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7875ee1_be0f5353",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T05:02:10Z",
+      "side": 1,
+      "message": "This must be `ASSERT_NE()`. Otherwise the test case will proceed, and you\u0027ll deref a `nullptr`.",
+      "revId": "7951c32d8fdeb58ac3a4edbb815ae8f41fde77df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a7b2647_58663e98",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T05:02:10Z",
+      "side": 1,
+      "message": "`ASSERT_NE()` again.",
+      "revId": "7951c32d8fdeb58ac3a4edbb815ae8f41fde77df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "204db2d4_4ad7b4bf",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1420,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T05:02:10Z",
+      "side": 1,
+      "message": "`ASSERT_NE()`",
+      "revId": "7951c32d8fdeb58ac3a4edbb815ae8f41fde77df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f431481_b20ac3f2",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1446,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T05:02:10Z",
+      "side": 1,
+      "message": "`ASSERT_EQ()` - executing beyond this point in the case of a failure is meaningless and may lead to UB.",
+      "revId": "7951c32d8fdeb58ac3a4edbb815ae8f41fde77df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a7e0382_838b4b3b",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T05:02:10Z",
+      "side": 1,
+      "message": "Note that I\u0027ve just submitted https://github.com/openbmc/libpldm/commit/e5f125385e237ed4e7398acd8b67181cd18db745 which helps out with the ergonomics of these extraction functions. The impact on this patch is that you\u0027ll need to remove all the \"address-of\" operators here, so:\n\n```\npldm_msgbuf_extract_uint32(buf, \u0026record_handle_from_pdr);\n```\n\nbecomes\n\n```\npldm_msgbuf_extract_uint32(buf, record_handle_from_pdr);\n```",
+      "range": {
+        "startLine": 1448,
+        "startChar": 36,
+        "endLine": 1448,
+        "endChar": 37
+      },
+      "revId": "7951c32d8fdeb58ac3a4edbb815ae8f41fde77df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cb80d31_3b2a679b",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1449,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T05:02:10Z",
+      "side": 1,
+      "message": "You can\u0027t use `record_handle_from_pdr` until you\u0027ve established that `pldm_msgbuf_extract_uint32()` has correctly extracted a value into it. If you wish to interleave your `EXPECT_*()` calls with the extraction like this, you need to do:\n\n```\nrc \u003d pldm_msgbuf_extract_uint32(buf, \u0026record_handle_from_pdr);\nASSERT_EQ(rc, 0);\nEXPECT_EQ(record_handle_from_pdr, 10u);\n```\n\nHowever, that will get tedious. I suggest you do all your extractions up front, followed by an `ASSERT_EQ(pldm_msgbuf_validate(buf), 0);` and then a batch of `EXPECT_*()`s.\n\nPlease fix this throughout.",
+      "revId": "7951c32d8fdeb58ac3a4edbb815ae8f41fde77df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e1f6be2_9484510e",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1486,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T05:02:10Z",
+      "side": 1,
+      "message": "Do we not have a struct declared somewhere that contains all these members? Must we really declare individual variables for them?",
+      "range": {
+        "startLine": 1457,
+        "startChar": 0,
+        "endLine": 1486,
+        "endChar": 39
+      },
+      "revId": "7951c32d8fdeb58ac3a4edbb815ae8f41fde77df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b79eec_377a896b",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1492,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T05:02:10Z",
+      "side": 1,
+      "message": "Need an `ASSERT_EQ(pldm_msgbuf_validate(...), 0);` between the last extract call and the first `EXPECT_EQ()` here.",
+      "revId": "7951c32d8fdeb58ac3a4edbb815ae8f41fde77df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d3182c2_8516ad71",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1500,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T05:02:10Z",
+      "side": 1,
+      "message": "Need to call `pldm_msgbuf_destroy()` before reinitialising over the top of the `buf` struct.",
+      "revId": "7951c32d8fdeb58ac3a4edbb815ae8f41fde77df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
