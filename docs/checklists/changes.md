@@ -213,14 +213,34 @@
 
 ## Updating an ABI dump
 
-Each of the following must succeed:
+To update the ABI dump you'll need to build an appropriate OpenBMC CI container
+image of your own. Some hints on how to do this locally can be found [in the
+openbmc/docs repository][openbmc-docs-local-ci]. You can list your locally built
+images with `docker images`.
 
-- [ ] Enter the OpenBMC CI Docker container
-  - Approximately:
-    `docker run --cap-add=sys_admin --rm=true --privileged=true -u $USER -w $(pwd) -v $(pwd):$(pwd) -e MAKEFLAGS= -it openbmc/ubuntu-unit-test:2024-W21-ce361f95ff4fa669`
-- [ ] `CC=gcc CXX=g++; [ $(uname -m) = 'x86_64' ] && meson setup -Dabi=deprecated,stable build`
-- [ ] `meson compile -C build`
-- [ ] `./scripts/abi-dump-formatter < build/src/current.dump > abi/x86_64/gcc.dump`
+[openbmc-docs-local-ci]:
+  https://github.com/openbmc/docs/blob/master/testing/local-ci-build.md
+
+Assuming:
+
+```
+export OPENBMC_CI_IMAGE=openbmc/ubuntu-unit-test:2024-W21-ce361f95ff4fa669
+```
+
+the ABI dump can be updated with:
+
+```
+docker run \
+  --cap-add=sys_admin \
+  --rm=true \
+  --privileged=true \
+  -u $USER \
+  -w $(pwd) \
+  -v $(pwd):$(pwd) \
+  -e MAKEFLAGS= \
+  -t $OPENBMC_CI_IMAGE \
+  ./scripts/abi-dump-updater
+```
 
 ## Removing an API
 
