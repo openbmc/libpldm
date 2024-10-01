@@ -1054,7 +1054,9 @@ static int pldm_platform_poll_for_platform_event_message_validate(
 	    ((transfer_operation_flag == PLDM_GET_NEXTPART) &&
 	     (event_id_to_acknowledge != PLDM_PLATFORM_EVENT_ID_FRAGMENT)) ||
 	    ((transfer_operation_flag == PLDM_ACKNOWLEDGEMENT_ONLY) &&
-	     (event_id_to_acknowledge != PLDM_PLATFORM_EVENT_ID_FRAGMENT)) ||
+	     (event_id_to_acknowledge == PLDM_PLATFORM_EVENT_ID_FRAGMENT)) ||
+	    ((transfer_operation_flag == PLDM_ACKNOWLEDGEMENT_ONLY) &&
+	     (event_id_to_acknowledge == PLDM_PLATFORM_EVENT_ID_NULL)) ||
 	    (transfer_operation_flag > PLDM_ACKNOWLEDGEMENT_ONLY)) {
 		return -EPROTO;
 	}

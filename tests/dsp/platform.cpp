@@ -1480,7 +1480,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequestAckOnly)
     uint8_t formatVersion = 0x01;
     uint8_t transferOperationFlag = PLDM_ACKNOWLEDGEMENT_ONLY;
     uint32_t dataTransferHandle = 0xaabbccdd;
-    uint16_t eventIdToAcknowledge = PLDM_PLATFORM_EVENT_ID_FRAGMENT;
+    uint16_t eventIdToAcknowledge = 0x1234;
 
     PLDM_MSG_DEFINE_P(request, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES);
 
@@ -1554,7 +1554,7 @@ TEST(PollForPlatformEventMessage, testBadEncodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     transferOperationFlag = PLDM_ACKNOWLEDGEMENT_ONLY;
-    eventIdToAcknowledge = 0x1234;
+    eventIdToAcknowledge = PLDM_PLATFORM_EVENT_ID_NULL;
     rc = encode_poll_for_platform_event_message_req(
         0, formatVersion, transferOperationFlag, dataTransferHandle,
         eventIdToAcknowledge, request,
@@ -1562,7 +1562,7 @@ TEST(PollForPlatformEventMessage, testBadEncodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     transferOperationFlag = PLDM_ACKNOWLEDGEMENT_ONLY;
-    eventIdToAcknowledge = PLDM_PLATFORM_EVENT_ID_NULL;
+    eventIdToAcknowledge = PLDM_PLATFORM_EVENT_ID_FRAGMENT;
     rc = encode_poll_for_platform_event_message_req(
         0, formatVersion, transferOperationFlag, dataTransferHandle,
         eventIdToAcknowledge, request,
@@ -1830,10 +1830,10 @@ TEST(PollForPlatformEventMessage, testGoodDecodeRequestAck)
     uint8_t formatVersion = 0x1;
     uint8_t transferOperationFlag = PLDM_ACKNOWLEDGEMENT_ONLY;
     uint32_t dataTransferHandle = 0x11223344;
-    uint16_t eventIdToAcknowledge = PLDM_PLATFORM_EVENT_ID_FRAGMENT;
+    uint16_t eventIdToAcknowledge = 0x1234;
     std::vector<uint8_t> requestMsg{
         0x1,  0x0,  0x0,  0x1, PLDM_ACKNOWLEDGEMENT_ONLY, 0x44, 0x33,
-        0x22, 0x11, 0xff, 0xff};
+        0x22, 0x11, 0x34, 0x12};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
@@ -1908,11 +1908,26 @@ TEST(PollForPlatformEventMessage, testBadDecodeRequest)
 
     /*
      * transfer_operation_flag is PLDM_ACKNOWLEDGEMENT_ONLY and
-     * event_id_to_acknowledge is not PLDM_PLATFORM_EVENT_ID_FRAGMENT
+     * event_id_to_acknowledge is PLDM_PLATFORM_EVENT_ID_FRAGMENT
      */
     requestMsg[4] = PLDM_ACKNOWLEDGEMENT_ONLY;
-    requestMsg[9] = 0x11;
-    requestMsg[10] = 0x22;
+    requestMsg[9] = 0xff;
+    requestMsg[10] = 0xff;
+
+    rc = decode_poll_for_platform_event_message_req(
+        request, requestMsg.size() - hdrSize, &retFormatVersion,
+        &retTransferOperationFlag, &retDataTransferHandle,
+        &retEventIdToAcknowledge);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    /*
+     * transfer_operation_flag is PLDM_ACKNOWLEDGEMENT_ONLY and
+     * event_id_to_acknowledge is PLDM_PLATFORM_EVENT_ID_NULL
+     */
+    requestMsg[4] = PLDM_ACKNOWLEDGEMENT_ONLY;
+    requestMsg[9] = 0x00;
+    requestMsg[10] = 0x00;
 
     rc = decode_poll_for_platform_event_message_req(
         request, requestMsg.size() - hdrSize, &retFormatVersion,
