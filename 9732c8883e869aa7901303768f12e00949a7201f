@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f735940_5e485662",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T06:12:55Z",
+      "side": 1,
+      "message": "So I added a new section to the changes checklist: https://docs.kernel.org/process/submitting-patches.html#describe-your-changes\n\nThe main thing is I\u0027d like to see a `Fixes:` tag added to the commit message here.",
+      "revId": "9732c8883e869aa7901303768f12e00949a7201f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b9def094_e180bd3c",
