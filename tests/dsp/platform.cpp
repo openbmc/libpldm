@@ -3524,8 +3524,9 @@ TEST(SetEventReceiver, testGoodEncodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0x78;
 
-    std::vector<uint8_t> requestMsg(hdrSize +
-                                    PLDM_SET_EVENT_RECEIVER_REQ_BYTES);
+    std::vector<uint8_t> requestMsg(
+        hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
+        PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES);
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
@@ -3551,8 +3552,9 @@ TEST(SetEventReceiver, testBadEncodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0;
 
-    std::vector<uint8_t> requestMsg(hdrSize +
-                                    PLDM_SET_EVENT_RECEIVER_REQ_BYTES);
+    std::vector<uint8_t> requestMsg(
+        hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
+        PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES);
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
@@ -3625,7 +3627,8 @@ TEST(SetEventReceiver, testBadEncodeResponse)
 TEST(SetEventReceiver, testGoodDecodeRequest)
 {
 
-    std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES>
+    std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
+                            PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES>
         requestMsg{};
 
     uint8_t eventMessageGlobalEnable =
@@ -3663,7 +3666,8 @@ TEST(SetEventReceiver, testGoodDecodeRequest)
 
 TEST(SetEventReceiver, testBadDecodeRequest)
 {
-    std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES>
+    std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
+                            PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES>
         requestMsg{};
 
     auto rc = decode_set_event_receiver_req(NULL, requestMsg.size() - hdrSize,
@@ -3691,11 +3695,13 @@ TEST(SetEventReceiver, testBadDecodeRequest)
     uint8_t rettransportProtocolType;
     uint8_t reteventReceiverAddressInfo;
     uint16_t retheartbeatTimer;
-    rc = decode_set_event_receiver_req(
-        request, requestMsg.size() - hdrSize - 1, &reteventMessageGlobalEnable,
-        &rettransportProtocolType, &reteventReceiverAddressInfo,
-        &retheartbeatTimer);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_DEATH(
+        decode_set_event_receiver_req(
+            request, requestMsg.size() - hdrSize - 1,
+            &reteventMessageGlobalEnable, &rettransportProtocolType,
+            &reteventReceiverAddressInfo, &retheartbeatTimer),
+        "dsp_platform: ../src/msgbuf.h:503: pldm__msgbuf_extract_uint16: "
+        "Assertion `ctx->remaining >= 0' failed");
 }
 
 TEST(decodeNumericSensorPdrData, Uint8Test)
