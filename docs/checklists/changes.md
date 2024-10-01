@@ -283,3 +283,14 @@ actions:
 
 - [ ] I've updated the ABI dump to capture the rename, or will mark the change
       as WIP until it has been.
+
+## Fixing Implementation Defects
+
+- [ ] My change fixing the bug includes a [Fixes tag][linux-kernel-fixes-tag]
+      identifying the change introducing the defect.
+
+[linux-kernel-fixes-tag]:
+  https://docs.kernel.org/process/submitting-patches.html#describe-your-changes
+
+- [ ] My change fixing the bug includes test cases demonstrating that the bug is
+      fixed.
