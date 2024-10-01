@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b5fa9e0_4c3c82dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T03:44:45Z",
+      "side": 1,
+      "message": "Hi John, I\u0027ve reworked the tests to remove the new instances of `reinterpret_cast\u003c\u003e()` that you\u0027d added. I\u0027ve set things up so we shouldn\u0027t need them, there\u0027s more info in the following changes:\n\n- https://github.com/openbmc/libpldm/commit/7a3c14ecebf0b165850e484d3ca202af9a4fc59a\n- https://github.com/openbmc/libpldm/commit/d0ba43af817d5a7763dec75a1309fe2ae37b95a6",
+      "revId": "e0e89a20aba0f228d4b9c06c896e0f78bfc2dfb9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
