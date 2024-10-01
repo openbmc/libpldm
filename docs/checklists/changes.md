@@ -94,6 +94,26 @@
 
 ## Adding a new API
 
+### Naming macros, functions and types
+
+- [ ] All publicly exposed macros, types and functions relating to the PLDM
+      specifications must be prefixed with either `pldm_` or `PLDM_` as
+      appropriate
+
+  - The only (temporary) exception are the `encode_*()` and `decode_*()`
+    function symbols
+
+- [ ] All publicly exposed macros, types and functions relating to the library
+      implementation must be prefixed with `libpldm_` or `LIBPLDM_`
+
+- [ ] All `pldm_`-prefixed symbols must also name the related specification. For
+      example, for DSP0248 Platform Monitoring and Control, the symbol prefix
+      should be `pldm_platform_`.
+
+- [ ] All enum members must be prefixed with the type name
+
+### All other concerns
+
 - [ ] My new public message codec functions take a `struct` representing the
       message as a parameter
 
