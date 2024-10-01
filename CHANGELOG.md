@@ -102,6 +102,12 @@ Change categories:
    Update checking of `TransferOperationFlag` and `eventIDToAcknowledge` to
    follow spec.
 
+3. platform: Fix checking `eventIDToAcknowledge`
+
+   As the event receiver sends `PollForPlatformEventMessage` with the
+   `tranferFlag` is `AcknowledgementOnly`, the value `eventIDToAcknowledge`
+   should be the previously retrieved eventID (from the PLDM terminus).
+
 ## [0.9.1] - 2024-09-07
 
 ### Changed
