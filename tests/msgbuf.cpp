@@ -72,7 +72,7 @@ TEST(msgbuf, destroy_exact)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, sizeof(buf), buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(val, 0xa5);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
@@ -86,9 +86,9 @@ TEST(msgbuf, destroy_over)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, sizeof(buf), buf, sizeof(buf)),
               PLDM_SUCCESS);
-    ASSERT_EQ(pldm_msgbuf_extract_uint8(ctx, &val), PLDM_SUCCESS);
+    ASSERT_EQ(pldm_msgbuf_extract_uint8(ctx, val), PLDM_SUCCESS);
     ASSERT_EQ(val, 0xa5);
-    EXPECT_NE(pldm_msgbuf_extract_uint8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_uint8(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -101,7 +101,7 @@ TEST(msgbuf, destroy_under)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, sizeof(buf), buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(val, 0x5a);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
@@ -115,7 +115,7 @@ TEST(msgbuf, extract_one_uint8)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, sizeof(buf), buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(val, 0xa5);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
@@ -128,7 +128,7 @@ TEST(msgbuf, extract_over_uint8)
     uint8_t val;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
-    EXPECT_NE(pldm_msgbuf_extract_uint8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_uint8(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -142,7 +142,7 @@ TEST(msgbuf, extract_under_uint8)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
     ctx->remaining = INTMAX_MIN;
-    EXPECT_NE(pldm_msgbuf_extract_uint8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_uint8(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -155,7 +155,7 @@ TEST(msgbuf, extract_one_int8)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, sizeof(buf), buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_int8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_int8(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(val, -1);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
@@ -168,7 +168,7 @@ TEST(msgbuf, extract_over_int8)
     int8_t val;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
-    EXPECT_NE(pldm_msgbuf_extract_int8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_int8(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -182,7 +182,7 @@ TEST(msgbuf, extract_under_int8)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
     ctx->remaining = INTMAX_MIN;
-    EXPECT_NE(pldm_msgbuf_extract_int8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_int8(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -195,7 +195,7 @@ TEST(msgbuf, extract_one_uint16)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, sizeof(buf), buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(val, 0x5aa5);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
@@ -210,7 +210,7 @@ TEST(msgbuf, extract_under_uint16)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
     ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
-    EXPECT_NE(pldm_msgbuf_extract_uint16(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_uint16(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -222,7 +222,7 @@ TEST(msgbuf, extract_over_uint16)
     uint16_t val;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
-    EXPECT_NE(pldm_msgbuf_extract_uint16(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_uint16(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -235,7 +235,7 @@ TEST(msgbuf, extract_one_int16)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, sizeof(buf), buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_int16(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_int16(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(val, INT16_MIN);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
@@ -248,7 +248,7 @@ TEST(msgbuf, extract_over_int16)
     int16_t val;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
-    EXPECT_NE(pldm_msgbuf_extract_int16(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_int16(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -262,7 +262,7 @@ TEST(msgbuf, extract_under_int16)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
     ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
-    EXPECT_NE(pldm_msgbuf_extract_int16(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_int16(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -275,7 +275,7 @@ TEST(msgbuf, extract_one_uint32)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, sizeof(buf), buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint32(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(val, 0x5a00ffa5);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
@@ -288,7 +288,7 @@ TEST(msgbuf, extract_over_uint32)
     uint32_t val;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
-    EXPECT_NE(pldm_msgbuf_extract_uint32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_uint32(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -302,7 +302,7 @@ TEST(msgbuf, extract_under_uint32)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
     ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
-    EXPECT_NE(pldm_msgbuf_extract_uint32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_uint32(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -315,7 +315,7 @@ TEST(msgbuf, extract_one_int32)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, sizeof(buf), buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_int32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_int32(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(val, INT32_MIN);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
@@ -328,7 +328,7 @@ TEST(msgbuf, extract_over_int32)
     int32_t val;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
-    EXPECT_NE(pldm_msgbuf_extract_int32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_int32(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -342,7 +342,7 @@ TEST(msgbuf, extract_under_int32)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
     ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
-    EXPECT_NE(pldm_msgbuf_extract_int32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_int32(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -361,7 +361,7 @@ TEST(msgbuf, extract_one_real32)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, sizeof(buf), buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_real32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_real32(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(val, FLT_MAX);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
 }
@@ -374,7 +374,7 @@ TEST(msgbuf, extract_over_real32)
     real32_t val;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
-    EXPECT_NE(pldm_msgbuf_extract_real32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_real32(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -388,7 +388,7 @@ TEST(msgbuf, extract_under_real32)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, 0), PLDM_SUCCESS);
     ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
-    EXPECT_NE(pldm_msgbuf_extract_real32(ctx, &val), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_real32(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -516,7 +516,7 @@ TEST(msgbuf, consumed_exact)
     uint8_t val;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctx, &val), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctx, val), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy_consumed(ctx), PLDM_SUCCESS);
 }
 
@@ -525,11 +525,11 @@ TEST(msgbuf, consumed_over)
     struct pldm_msgbuf _ctx;
     struct pldm_msgbuf* ctx = &_ctx;
     uint8_t buf[1] = {};
-    uint8_t val[2];
+    uint8_t valid, invalid;
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctx, 0, buf, sizeof(buf)), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctx, &val[0]), PLDM_SUCCESS);
-    EXPECT_NE(pldm_msgbuf_extract_uint8(ctx, &val[1]), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctx, valid), PLDM_SUCCESS);
+    EXPECT_NE(pldm_msgbuf_extract_uint8(ctx, invalid), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy_consumed(ctx), PLDM_ERROR_INVALID_LENGTH);
 }
 
@@ -549,7 +549,7 @@ TEST(msgbuf, pldm_msgbuf_insert_int32_good)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_int32(ctxExtract, &checkVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_int32(ctxExtract, checkVal), PLDM_SUCCESS);
 
     EXPECT_EQ(src, checkVal);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
@@ -586,7 +586,7 @@ TEST(msgbuf, pldm_msgbuf_insert_uint32_good)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint32(ctxExtract, &checkVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint32(ctxExtract, checkVal), PLDM_SUCCESS);
 
     EXPECT_EQ(src, checkVal);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
@@ -623,7 +623,7 @@ TEST(msgbuf, pldm_msgbuf_insert_uint16_good)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &checkVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, checkVal), PLDM_SUCCESS);
 
     EXPECT_EQ(src, checkVal);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
@@ -660,7 +660,7 @@ TEST(msgbuf, pldm_msgbuf_insert_int16_good)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_int16(ctxExtract, &checkVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_int16(ctxExtract, checkVal), PLDM_SUCCESS);
 
     EXPECT_EQ(src, checkVal);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
@@ -697,7 +697,7 @@ TEST(msgbuf, pldm_msgbuf_insert_uint8_good)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, &checkVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, checkVal), PLDM_SUCCESS);
 
     EXPECT_EQ(src, checkVal);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
@@ -734,7 +734,7 @@ TEST(msgbuf, pldm_msgbuf_insert_int8_good)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_int8(ctxExtract, &checkVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_int8(ctxExtract, checkVal), PLDM_SUCCESS);
 
     EXPECT_EQ(src, checkVal);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
@@ -858,7 +858,7 @@ TEST(msgbuf, pldm_msgbuf_span_required_good)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_span_required(ctxExtract, required, (void**)&retBuff),
               PLDM_SUCCESS);
 
@@ -887,7 +887,7 @@ TEST(msgbuf, pldm_msgbuf_span_required_bad)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_span_required(ctxExtract, required, NULL),
               PLDM_SUCCESS);
 
@@ -921,11 +921,11 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_good)
     char* retBuff = NULL;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
     EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&retBuff, NULL),
               0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, &testVal1), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, testVal1), 0);
     EXPECT_EQ(0x77, testVal1);
 
     EXPECT_EQ(required, strlen(retBuff) + 1);
@@ -946,12 +946,12 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_good_with_length)
     size_t length;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
     EXPECT_EQ(
         pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&retBuff, &length),
         0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, &testVal1), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, testVal1), 0);
     EXPECT_EQ(0x77, testVal1);
 
     EXPECT_EQ(required, strlen(retBuff) + 1);
@@ -969,7 +969,7 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_allow_null_args)
     uint16_t testVal;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
     EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, NULL, NULL), 0);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), 0);
@@ -984,7 +984,7 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_bad_no_terminator)
     char* retBuff = NULL;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
     EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&retBuff, NULL),
               -EOVERFLOW);
@@ -1030,12 +1030,12 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_good)
     void* retBuff = NULL;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
 
     ASSERT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
               0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal1), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal1), 0);
     EXPECT_EQ(0x1234, testVal1);
 
     ASSERT_EQ(0, (uintptr_t)retBuff & (alignof(char16_t) - 1));
@@ -1062,7 +1062,7 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_good2)
     size_t length = 0;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
 
     EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
@@ -1074,7 +1074,7 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_good2)
                      sizeof(char16_t) * (str16len((char16_t*)retBuff) + 1)),
               0);
 
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal1), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal1), 0);
     EXPECT_EQ(0x1234, testVal1);
 
     EXPECT_EQ(
@@ -1084,7 +1084,7 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_good2)
     EXPECT_EQ(0, length % 2);
     EXPECT_EQ(memcmp(expectData1, retBuff1, length), 0);
 
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal1), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal1), 0);
     EXPECT_EQ(0x1234, testVal1);
 
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), 0);
@@ -1099,7 +1099,7 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_allow_null_args)
     uint16_t testVal;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
     EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, NULL, NULL), 0);
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), 0);
@@ -1115,7 +1115,7 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_bad_no_terminator)
     char16_t* retBuff = NULL;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
     EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
               -EOVERFLOW);
@@ -1132,7 +1132,7 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_bad_odd_size)
     char16_t* retBuff = NULL;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
     EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
               -EOVERFLOW);
@@ -1170,7 +1170,7 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_mix)
     size_t length = 0;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, &name_count), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, name_count), 0);
     EXPECT_EQ(0x2, name_count);
 
     EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&tag, NULL), 0);
@@ -1203,7 +1203,7 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_mix)
                      sizeof(char16_t) * (str16len((char16_t*)name2) + 1)),
               0);
 
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &test_val), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, test_val), 0);
     EXPECT_EQ(0x8877, test_val);
 
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), 0);
@@ -1245,7 +1245,7 @@ TEST(msgbuf, pldm_msgbuf_span_remaining_good)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), PLDM_SUCCESS);
     EXPECT_EQ(
         pldm_msgbuf_span_remaining(ctxExtract, (void**)&retBuff, &remaining),
         PLDM_SUCCESS);
@@ -1274,7 +1274,7 @@ TEST(msgbuf, pldm_msgbuf_span_remaining_bad)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(ctxExtract, 0, buf, sizeof(buf)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, &testVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), PLDM_SUCCESS);
 
     EXPECT_EQ(pldm_msgbuf_destroy(ctxExtract), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(ctx), PLDM_SUCCESS);
@@ -1300,7 +1300,7 @@ TEST(msgbuf, pldm_msgbuf_copy_good)
 
     ASSERT_EQ(pldm_msgbuf_init_cc(dst, sizeof(buf1), buf1, sizeof(buf1)),
               PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(dst, &checkVal), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(dst, checkVal), PLDM_SUCCESS);
 
     EXPECT_EQ(pldm_msgbuf_destroy(src), PLDM_SUCCESS);
     EXPECT_EQ(pldm_msgbuf_destroy(dst), PLDM_SUCCESS);

@@ -1424,10 +1424,10 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequestFirstPart)
     uint32_t retDataTransferHandle;
     uint16_t retEventIdToAcknowledge;
 
-    pldm_msgbuf_extract_uint8(buf, &retFormatVersion);
-    pldm_msgbuf_extract_uint8(buf, &retTransferOperationFlag);
-    pldm_msgbuf_extract_uint32(buf, &retDataTransferHandle);
-    pldm_msgbuf_extract_uint16(buf, &retEventIdToAcknowledge);
+    pldm_msgbuf_extract_uint8(buf, retFormatVersion);
+    pldm_msgbuf_extract_uint8(buf, retTransferOperationFlag);
+    pldm_msgbuf_extract_uint32(buf, retDataTransferHandle);
+    pldm_msgbuf_extract_uint16(buf, retEventIdToAcknowledge);
     ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
 
     EXPECT_EQ(retFormatVersion, formatVersion);
@@ -1463,10 +1463,10 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequestNextPart)
     uint32_t retDataTransferHandle;
     uint16_t retEventIdToAcknowledge;
 
-    pldm_msgbuf_extract_uint8(buf, &retFormatVersion);
-    pldm_msgbuf_extract_uint8(buf, &retTransferOperationFlag);
-    pldm_msgbuf_extract_uint32(buf, &retDataTransferHandle);
-    pldm_msgbuf_extract_uint16(buf, &retEventIdToAcknowledge);
+    pldm_msgbuf_extract_uint8(buf, retFormatVersion);
+    pldm_msgbuf_extract_uint8(buf, retTransferOperationFlag);
+    pldm_msgbuf_extract_uint32(buf, retDataTransferHandle);
+    pldm_msgbuf_extract_uint16(buf, retEventIdToAcknowledge);
     ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
 
     EXPECT_EQ(retFormatVersion, formatVersion);
@@ -1502,10 +1502,10 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequestAckOnly)
     uint32_t retDataTransferHandle;
     uint16_t retEventIdToAcknowledge;
 
-    pldm_msgbuf_extract_uint8(buf, &retFormatVersion);
-    pldm_msgbuf_extract_uint8(buf, &retTransferOperationFlag);
-    pldm_msgbuf_extract_uint32(buf, &retDataTransferHandle);
-    pldm_msgbuf_extract_uint16(buf, &retEventIdToAcknowledge);
+    pldm_msgbuf_extract_uint8(buf, retFormatVersion);
+    pldm_msgbuf_extract_uint8(buf, retTransferOperationFlag);
+    pldm_msgbuf_extract_uint32(buf, retDataTransferHandle);
+    pldm_msgbuf_extract_uint16(buf, retEventIdToAcknowledge);
     ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
 
     EXPECT_EQ(retFormatVersion, formatVersion);
@@ -1965,17 +1965,17 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP1)
     uint8_t retEventData[payloadLength] = {0};
     uint32_t retEventDataIntegrityChecksum = 0;
 
-    pldm_msgbuf_extract_uint8(buf, &retCompletionCode);
-    pldm_msgbuf_extract_uint8(buf, &retTid);
-    pldm_msgbuf_extract_uint16(buf, &retEventId);
-    pldm_msgbuf_extract_uint32(buf, &retNextDataTransferHandle);
-    pldm_msgbuf_extract_uint8(buf, &retTransferFlag);
-    pldm_msgbuf_extract_uint8(buf, &retEventClass);
-    pldm_msgbuf_extract_uint32(buf, &retEventDataSize);
+    pldm_msgbuf_extract_uint8(buf, retCompletionCode);
+    pldm_msgbuf_extract_uint8(buf, retTid);
+    pldm_msgbuf_extract_uint16(buf, retEventId);
+    pldm_msgbuf_extract_uint32(buf, retNextDataTransferHandle);
+    pldm_msgbuf_extract_uint8(buf, retTransferFlag);
+    pldm_msgbuf_extract_uint8(buf, retEventClass);
+    pldm_msgbuf_extract_uint32(buf, retEventDataSize);
     rc = pldm_msgbuf_extract_array_uint8(buf, retEventDataSize, retEventData,
                                          sizeof(retEventData));
     ASSERT_EQ(rc, 0);
-    pldm_msgbuf_extract_uint32(buf, &retEventDataIntegrityChecksum);
+    pldm_msgbuf_extract_uint32(buf, retEventDataIntegrityChecksum);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(retCompletionCode, completionCode);
@@ -2020,9 +2020,9 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP2)
     uint8_t retTid = 0;
     uint16_t retEventId = 0;
 
-    pldm_msgbuf_extract_uint8(buf, &retCompletionCode);
-    pldm_msgbuf_extract_uint8(buf, &retTid);
-    pldm_msgbuf_extract_uint16(buf, &retEventId);
+    pldm_msgbuf_extract_uint8(buf, retCompletionCode);
+    pldm_msgbuf_extract_uint8(buf, retTid);
+    pldm_msgbuf_extract_uint16(buf, retEventId);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(retCompletionCode, completionCode);
@@ -2060,9 +2060,9 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP3)
     uint8_t retTid = 0;
     uint16_t retEventId = 0;
 
-    pldm_msgbuf_extract_uint8(buf, &retCompletionCode);
-    pldm_msgbuf_extract_uint8(buf, &retTid);
-    pldm_msgbuf_extract_uint16(buf, &retEventId);
+    pldm_msgbuf_extract_uint8(buf, retCompletionCode);
+    pldm_msgbuf_extract_uint8(buf, retTid);
+    pldm_msgbuf_extract_uint16(buf, retEventId);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(retCompletionCode, completionCode);
@@ -2114,14 +2114,14 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP4)
     uint32_t retEventDataSize = 0;
     uint32_t retEventDataIntegrityChecksum = 0;
 
-    pldm_msgbuf_extract_uint8(buf, &retCompletionCode);
-    pldm_msgbuf_extract_uint8(buf, &retTid);
-    pldm_msgbuf_extract_uint16(buf, &retEventId);
-    pldm_msgbuf_extract_uint32(buf, &retNextDataTransferHandle);
-    pldm_msgbuf_extract_uint8(buf, &retTransferFlag);
-    pldm_msgbuf_extract_uint8(buf, &retEventClass);
-    pldm_msgbuf_extract_uint32(buf, &retEventDataSize);
-    pldm_msgbuf_extract_uint32(buf, &retEventDataIntegrityChecksum);
+    pldm_msgbuf_extract_uint8(buf, retCompletionCode);
+    pldm_msgbuf_extract_uint8(buf, retTid);
+    pldm_msgbuf_extract_uint16(buf, retEventId);
+    pldm_msgbuf_extract_uint32(buf, retNextDataTransferHandle);
+    pldm_msgbuf_extract_uint8(buf, retTransferFlag);
+    pldm_msgbuf_extract_uint8(buf, retEventClass);
+    pldm_msgbuf_extract_uint32(buf, retEventDataSize);
+    pldm_msgbuf_extract_uint32(buf, retEventDataIntegrityChecksum);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(retCompletionCode, completionCode);
@@ -2575,9 +2575,9 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
     uint16_t reteventID;
     uint32_t retDataTransferHandle;
 
-    EXPECT_EQ(pldm_msgbuf_extract_uint8(buf, &retFormatVersion), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(buf, &reteventID), PLDM_SUCCESS);
-    EXPECT_EQ(pldm_msgbuf_extract_uint32(buf, &retDataTransferHandle),
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(buf, retFormatVersion), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(buf, reteventID), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_extract_uint32(buf, retDataTransferHandle),
               PLDM_SUCCESS);
     EXPECT_EQ(retFormatVersion, poll_event.format_version);
     EXPECT_EQ(reteventID, poll_event.event_id);
