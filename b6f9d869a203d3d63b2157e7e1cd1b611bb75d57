@@ -16,6 +16,24 @@
       "message": "The `Fixes:` tag isn\u0027t a free-form thing. Did you find the documentation at the link provided? It\u0027s at the end of the section, just above the next section (https://docs.kernel.org/process/submitting-patches.html#separate-your-changes)\n\nHere\u0027s a proper `Fixes:` tag for reference:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/72490/1//COMMIT_MSG#18",
       "revId": "b6f9d869a203d3d63b2157e7e1cd1b611bb75d57",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e434c95_fea5e3cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-01T07:59:37Z",
+      "side": 1,
+      "message": "Also you can use `git log --grep Fixes:` to find more examples (though some are not quite right still, such as the one in `74c9a5469802 (\"pdr: Improve error propagation\")`)",
+      "parentUuid": "32a876f0_28465ecc",
+      "revId": "b6f9d869a203d3d63b2157e7e1cd1b611bb75d57",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
