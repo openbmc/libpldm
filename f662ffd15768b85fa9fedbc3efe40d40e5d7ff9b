@@ -159,6 +159,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "421246e9_8d63b93b",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2439,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-02T08:08:54Z",
+      "side": 1,
+      "message": "Also, which assert? Do you have a backtrace?",
+      "parentUuid": "cf0b6394_6b91f91f",
+      "range": {
+        "startLine": 2434,
+        "startChar": 2,
+        "endLine": 2439,
+        "endChar": 3
+      },
+      "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b9f206c6_53711ba1",
