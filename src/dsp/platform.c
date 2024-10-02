@@ -22,9 +22,24 @@ int encode_state_effecter_pdr(
 	const struct state_effecter_possible_states *const possible_states,
 	const size_t possible_states_size, size_t *const actual_size)
 {
-	// Encode possible states
-
 	size_t calculated_possible_states_size = 0;
+
+	if (!effecter || !possible_states || !actual_size) {
+		return PLDM_ERROR;
+	}
+
+	if (SIZE_MAX - (sizeof(*effecter) - sizeof(effecter->possible_states) <
+			possible_states_size)) {
+		return PLDM_ERROR;
+	}
+
+	if (allocation_size <
+	    (sizeof(*effecter) - sizeof(effecter->possible_states)) +
+		    possible_states_size) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	// Encode possible states
 
 	{
 		char *states_ptr = (char *)possible_states;
@@ -55,11 +70,6 @@ int encode_state_effecter_pdr(
 	*actual_size =
 		(sizeof(struct pldm_state_effecter_pdr) + possible_states_size -
 		 sizeof(effecter->possible_states));
-
-	if (allocation_size < *actual_size) {
-		*actual_size = 0;
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
 
 	// Encode rest of PDR
 
