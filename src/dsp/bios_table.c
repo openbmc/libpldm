@@ -887,7 +887,7 @@ uint16_t pldm_bios_table_attr_value_entry_decode_handle(
 
 static size_t pad_size_get(size_t size_without_pad)
 {
-	return ((size_without_pad % 4) ? (4 - size_without_pad % 4) : 0);
+	return (4 - (size_without_pad % 4)) % 4;
 }
 
 static uint8_t *pad_append(uint8_t *table_end, size_t pad_size)
