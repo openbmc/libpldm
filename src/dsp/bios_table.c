@@ -694,22 +694,23 @@ int pldm_bios_table_attr_value_entry_encode_enum(
 	void *entry, size_t entry_length, uint16_t attr_handle,
 	uint8_t attr_type, uint8_t count, const uint8_t *handles)
 {
+	struct pldm_bios_attr_val_table_entry *table_entry;
+
 	POINTER_CHECK(entry);
 	POINTER_CHECK(handles);
 	if (count != 0 && handles == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 	ATTR_TYPE_EXPECT(attr_type, PLDM_BIOS_ENUMERATION);
-	size_t length =
-		pldm_bios_table_attr_value_entry_encode_enum_length(count);
-	BUFFER_SIZE_EXPECT(entry_length, length);
-	struct pldm_bios_attr_val_table_entry *table_entry = entry;
+	BUFFER_SIZE_EXPECT(entry_length, sizeof(*table_entry));
+	table_entry = entry;
 	table_entry->attr_handle = htole16(attr_handle);
 	table_entry->attr_type = attr_type;
 	table_entry->value[0] = count;
-	if (count != 0) {
-		memcpy(&table_entry->value[1], handles, count);
+	if (entry_length - sizeof(*table_entry) < count) {
+		return PLDM_ERROR_INVALID_LENGTH;
 	}
+	memcpy(&table_entry->value[1], handles, count);
 	return PLDM_SUCCESS;
 }
 

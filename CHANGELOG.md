@@ -50,6 +50,7 @@ Change categories:
    - `encode_state_effecter_pdr()`
    - `encode_state_sensor_pdr()`
    - `pldm_bios_table_append_pad_checksum()`
+   - `pldm_bios_table_attr_value_entry_encode_enum()`
    - `pldm_bios_table_attr_value_entry_encode_string()`
    - `pldm_pdr_find_record()`
    - `pldm_pdr_get_next_record()`
@@ -128,6 +129,7 @@ Change categories:
 9. dsp: bios_table: Bounds check pldm_bios_table_append_pad_checksum()
 10. dsp: bios_table: Bounds check
     pldm_bios_table_attr_value_entry_encode_string()
+11. dsp: bios_table: Bounds check pldm_bios_table_attr_value_entry_encode_enum()
 
 ## [0.9.1] - 2024-09-07
 
