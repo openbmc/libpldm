@@ -1561,12 +1561,12 @@ TEST(EntityAssociationPDR, testExtract)
 {
     std::vector<uint8_t> pdr{};
     pdr.resize(sizeof(pldm_pdr_hdr) + sizeof(pldm_pdr_entity_association) +
-               sizeof(pldm_entity) * 4);
+               sizeof(pldm_entity) * 5);
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     pldm_pdr_hdr* hdr = reinterpret_cast<pldm_pdr_hdr*>(pdr.data());
     hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
     hdr->length =
-        htole16(sizeof(pldm_pdr_entity_association) + sizeof(pldm_entity) * 4);
+        htole16(sizeof(pldm_pdr_entity_association) + sizeof(pldm_entity) * 5);
 
     pldm_pdr_entity_association* e =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)

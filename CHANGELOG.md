@@ -117,6 +117,7 @@ Change categories:
 4. dsp: platform: Prevent overflow of arithmetic on event_data_length
 5. dsp: platform: Bounds check encode_sensor_state_pdr()
 6. dsp: platform: Bounds check encode_state_effecter_pdr()
+7. dsp: pdr: Bounds check pldm_entity_association_pdr_extract()
 
 ## [0.9.1] - 2024-09-07
 
