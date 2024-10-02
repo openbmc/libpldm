@@ -922,11 +922,19 @@ int pldm_bios_table_append_pad_checksum(void *table, size_t capacity,
 	}
 
 	size_t pad_checksum_size = pldm_bios_table_pad_checksum_size(*size);
+
+	if (SIZE_MAX - pad_checksum_size < *size) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
 	size_t total_length = *size + pad_checksum_size;
 	if (capacity < total_length) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
+	if (UINTPTR_MAX - *size < (uintptr_t)table) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
 	uint8_t *table_end = (uint8_t *)table + *size;
 	size_t pad_size = pad_size_get(*size);
 	table_end = pad_append(table_end, pad_size);
