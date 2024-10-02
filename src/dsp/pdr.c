@@ -6,6 +6,7 @@
 
 #include <assert.h>
 #include <endian.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
@@ -1316,21 +1317,45 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 	}
 
 	const uint8_t *start = (uint8_t *)pdr;
-	const uint8_t *end LIBPLDM_CC_UNUSED =
+
+	if (UINTPTR_MAX - (uintptr_t)start <
+	    (sizeof(struct pldm_pdr_hdr) + le16toh(hdr->length))) {
+		return;
+	}
+
+	if (pdr_len < (sizeof(struct pldm_pdr_hdr) + le16toh(hdr->length))) {
+		return;
+	}
+
+	const uint8_t *end =
 		start + sizeof(struct pldm_pdr_hdr) + le16toh(hdr->length);
 	start += sizeof(struct pldm_pdr_hdr);
+
+	if ((uintptr_t)end - (uintptr_t)start <
+	    sizeof(struct pldm_pdr_entity_association)) {
+		return;
+	}
 	struct pldm_pdr_entity_association *entity_association_pdr =
 		(struct pldm_pdr_entity_association *)start;
+
+	if (entity_association_pdr->num_children == UINT8_MAX) {
+		return;
+	}
 	size_t l_num_entities = entity_association_pdr->num_children + 1;
 	if (l_num_entities < 2) {
 		return;
 	}
-	if (start + sizeof(struct pldm_pdr_entity_association) +
-		    sizeof(pldm_entity) * (l_num_entities - 2) !=
-	    end) {
+
+	if (SIZE_MAX / sizeof(pldm_entity) < l_num_entities) {
 		return;
 	}
-	pldm_entity *l_entities = malloc(sizeof(pldm_entity) * l_num_entities);
+
+	if (pdr_len - sizeof(*entity_association_pdr) + 1 <
+	    sizeof(pldm_entity) * l_num_entities) {
+		return;
+	}
+
+	pldm_entity *l_entities = calloc(l_num_entities, sizeof(pldm_entity));
 	if (!l_entities) {
 		return;
 	}
