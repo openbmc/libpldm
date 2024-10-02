@@ -910,9 +910,7 @@ static uint8_t *checksum_append(uint8_t *table_end, uint32_t checksum)
 LIBPLDM_ABI_STABLE
 size_t pldm_bios_table_pad_checksum_size(size_t size_without_pad)
 {
-	size_t size = pad_size_get(size_without_pad) +
-		      sizeof(uint32_t) /*sizeof(checksum)*/;
-	return size;
+	return pad_size_get(size_without_pad) + sizeof(uint32_t);
 }
 
 LIBPLDM_ABI_STABLE
