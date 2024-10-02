@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2b1dce8d_60a63160",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2024-10-02T08:02:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bc1fba9b_abc4ec06",
+      "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e607a036_0a66ea96",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d441f06a_e6e9f3eb",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2432,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2024-10-02T08:02:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d01efbad_438d75f9",
+      "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "764e7c78_c60d64ce",
@@ -65,6 +101,30 @@
       "writtenOn": "2024-10-02T03:30:18Z",
       "side": 1,
       "message": "This is dangerous (as you\u0027re passing a signed value to an unsigned type for the buffer size), unnecessary (as the msgbuf design already handles what you\u0027re trying to do) and incorrect (as you\u0027ve lost any overflow information for the extractions so far).\n\nThe `pldm_msgbuf_extract_p()` below is enough.\n\n```\nif (*event_message_global_enable \u003d\u003d PLDM_EVENT_MESSAGE_GLOBAL_ENABLE_ASYNC_KEEP_ALIVE) {\n    pldm_msgbuf_extract_p(buf, hearbeat_timer);\n}\n\n...\n```",
+      "range": {
+        "startLine": 2434,
+        "startChar": 2,
+        "endLine": 2439,
+        "endChar": 3
+      },
+      "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fbc707d_620b4362",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2439,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2024-10-02T08:02:41Z",
+      "side": 1,
+      "message": "It is for avoiding assert() by pldm_msgbuf_extract_p(). The assert() causes valgrind test FAIL. \n\n```\n[66/66] Linking target tests/dsp_platform\nninja: Entering directory `/data/github/libpldm/tmp.QVOQjlcc4E\u0027\nninja: no work to do.\n 1/22 dsp/bios_table_iter                            OK               0.55s\n 2/22 utils                                          OK               0.91s\n 3/22 instance-id                                    OK               0.97s\n 4/22 dsp/fru                                        OK               1.00s\n 5/22 dsp/base                                       OK               1.03s\n 6/22 dsp/bios                                       OK               1.05s\n 7/22 dsp/bios_table                                 OK               1.07s\n 8/22 responder                                      OK               1.09s\n 9/22 msgbuf                                         OK               1.13s\n10/22 dsp/firmware_update                            OK               1.32s\n11/22 dsp/pdr                                        OK               1.34s\n12/22 transport/transport                            OK               1.02s\n13/22 dsp/platform                                   FAIL             1.62s   exit status 1\n\u003e\u003e\u003e ASAN_OPTIONS\u003dhalt_on_error\u003d1:abort_on_error\u003d1:print_summary\u003d1 MALLOC_PERTURB_\u003d101 LD_LIBRARY_PATH\u003d/data/github/libpldm/tmp.QVOQjlcc4E/src UBSAN_OPTIONS\u003dhalt_on_error\u003d1:abort_on_error\u003d1:print_summary\u003d1:print_stacktrace\u003d1 valgrind --error-exitcode\u003d1 /data/github/libpldm/tmp.QVOQjlcc4E/tests/dsp_platform\n```\n\nI reverted the code back to previous commit and study how to fix the valgrind FAIL.",
+      "parentUuid": "764e7c78_c60d64ce",
       "range": {
         "startLine": 2434,
         "startChar": 2,
@@ -105,6 +165,24 @@
       "writtenOn": "2024-10-02T03:30:18Z",
       "side": 1,
       "message": "Given you\u0027re adjusting this, can you please switch to using `PLDM_MSG_DEFINE_P()` instead and remove the `reinterpret_cast\u003c\u003e()` calls (along with the corresponding `NOLINT`)?\n\nSee the following two changes:\n\n- [base: Add size and buffer macros for struct pldm_msg](https://gerrit.openbmc.org/c/openbmc/libpldm/+/74449)\n- [clang-tidy: Enable cppcoreguidelines-pro-type-reinterpret-cast](https://gerrit.openbmc.org/c/openbmc/libpldm/+/74448)\n\nCan you please do the same for the rest of your changes below also?",
+      "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d2d8aa7_177078c7",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 3496,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2024-10-02T08:02:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "dac241e9_6e00f46e",
       "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
