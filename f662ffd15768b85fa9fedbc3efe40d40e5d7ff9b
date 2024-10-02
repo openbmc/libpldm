@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1fba9b_abc4ec06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-02T03:30:18Z",
+      "side": 1,
+      "message": "As this is a fix, can you please add a `Fixes:` tag and an entry in `CHANGELOG.md`?\n\nYou can find more information on the `Fixes:` tag at the bottom of this section in the kernel docs:\n\nhttps://docs.kernel.org/process/submitting-patches.html#describe-your-changes",
+      "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e607a036_0a66ea96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-02T03:30:18Z",
+      "side": 1,
+      "message": "Hi Gilbert, thanks for the fix. I have a few requests inline that need to be addressed before we merge it.",
+      "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d01efbad_438d75f9",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2432,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-02T03:30:18Z",
+      "side": 1,
+      "message": "First, I think you have too many parentheses here. Can you trim out the redundant pair?\n\nSecond, you can\u0027t dereference `event_message_global_enable` before you\u0027re sure it was correctly extracted. It may not have been initialised by the caller, in which case a read here with a failure to extract the data will cause undefined behaviour (read of uninitialised memory). You should do the following:\n\n```\n...\nrc \u003d pldm_msgbuf_extract_p(buf, event_message_global_enable);\nif (rc) {\n    return rc;\n}\n...\nif (*event_message_global_enable \u003d\u003d ...) {\n```",
+      "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "764e7c78_c60d64ce",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2439,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-02T03:30:18Z",
+      "side": 1,
+      "message": "This is dangerous (as you\u0027re passing a signed value to an unsigned type for the buffer size), unnecessary (as the msgbuf design already handles what you\u0027re trying to do) and incorrect (as you\u0027ve lost any overflow information for the extractions so far).\n\nThe `pldm_msgbuf_extract_p()` below is enough.\n\n```\nif (*event_message_global_enable \u003d\u003d PLDM_EVENT_MESSAGE_GLOBAL_ENABLE_ASYNC_KEEP_ALIVE) {\n    pldm_msgbuf_extract_p(buf, hearbeat_timer);\n}\n\n...\n```",
+      "range": {
+        "startLine": 2434,
+        "startChar": 2,
+        "endLine": 2439,
+        "endChar": 3
+      },
+      "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9f206c6_53711ba1",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2450,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-02T03:30:18Z",
+      "side": 1,
+      "message": "Note that the `pldm_msgbuf_destroy(buf)` on line 2443 above is protecting this deref of `heartbeat_timer`.",
+      "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dac241e9_6e00f46e",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 3496,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-02T03:30:18Z",
+      "side": 1,
+      "message": "Given you\u0027re adjusting this, can you please switch to using `PLDM_MSG_DEFINE_P()` instead and remove the `reinterpret_cast\u003c\u003e()` calls (along with the corresponding `NOLINT`)?\n\nSee the following two changes:\n\n- [base: Add size and buffer macros for struct pldm_msg](https://gerrit.openbmc.org/c/openbmc/libpldm/+/74449)\n- [clang-tidy: Enable cppcoreguidelines-pro-type-reinterpret-cast](https://gerrit.openbmc.org/c/openbmc/libpldm/+/74448)\n\nCan you please do the same for the rest of your changes below also?",
+      "revId": "f662ffd15768b85fa9fedbc3efe40d40e5d7ff9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
