@@ -34,6 +34,24 @@
       "parentUuid": "2794f93f_8780b977",
       "revId": "156bab349db635a7630d76fb3acaa0574ca29d41",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7bf1292_3459d685",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-03T04:49:39Z",
+      "side": 1,
+      "message": "No worries!\n\nNow that it\u0027s there I poked at it a bit more, and this bug certainly has some history. I added a few more `Fixes:` tags as a result.",
+      "parentUuid": "6e995b2f_696a9725",
+      "revId": "156bab349db635a7630d76fb3acaa0574ca29d41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
