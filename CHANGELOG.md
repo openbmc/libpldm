@@ -57,6 +57,12 @@ Change categories:
 
 3. platform: Support PLDM_CPER_EVENT in encode_platform_event_message_req()
 
+4. dsp: firmware_update: Bounds check
+   decode_downstream_device_parameter_table_entry()
+
+   The additional bounds-checking required the addition of further length
+   parameters.
+
 ### Deprecated
 
 1. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
@@ -125,6 +131,8 @@ Change categories:
 9. dsp: bios_table: Bounds check
    pldm_bios_table_attr_value_entry_encode_string()
 10. dsp: bios_table: Bounds check pldm_bios_table_attr_value_entry_encode_enum()
+11. dsp: firmware_update: Bounds check
+    decode_downstream_device_parameter_table_entry()
 
 ## [0.9.1] - 2024-09-07
 

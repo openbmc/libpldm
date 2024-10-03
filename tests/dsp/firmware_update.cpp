@@ -1987,7 +1987,9 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamDeviceParamTable)
     // Further decode the version strings
     rc = decode_downstream_device_parameter_table_entry_versions(
         &versions, &entry_version.entry, entry_version.active_comp_ver_str,
-        entry_version.pending_comp_ver_str);
+        sizeof(entry_version.active_comp_ver_str),
+        entry_version.pending_comp_ver_str,
+        sizeof(entry_version.pending_comp_ver_str));
     struct pldm_downstream_device_parameter_entry entry = entry_version.entry;
     EXPECT_EQ(rc, 0);
 
@@ -2049,7 +2051,9 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamTableVersions)
 
     int rc = decode_downstream_device_parameter_table_entry_versions(
         &versions, &entryVersion.entry, entryVersion.active_comp_ver_str,
-        entryVersion.pending_comp_ver_str);
+        sizeof(entryVersion.active_comp_ver_str),
+        entryVersion.pending_comp_ver_str,
+        sizeof(entryVersion.pending_comp_ver_str));
 
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(0, memcmp(entryVersion.active_comp_ver_str, versions.ptr,
@@ -2086,7 +2090,9 @@ TEST(GetDownstreamFirmwareParameters, decodeInvalidDownstreamTableVersions)
 
     int rc = decode_downstream_device_parameter_table_entry_versions(
         &versions, nullptr, entryVersion.active_comp_ver_str,
-        entryVersion.pending_comp_ver_str);
+        sizeof(entryVersion.active_comp_ver_str),
+        entryVersion.pending_comp_ver_str,
+        sizeof(entryVersion.pending_comp_ver_str));
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -2113,7 +2119,9 @@ TEST(GetDownstreamFirmwareParameters, decodeOverflowDownstreamTableVersions)
     EXPECT_EQ(decode_downstream_device_parameter_table_entry_versions(
                   &versions, &entryVersion.entry,
                   entryVersion.active_comp_ver_str,
-                  entryVersion.pending_comp_ver_str),
+                  sizeof(entryVersion.active_comp_ver_str),
+                  entryVersion.pending_comp_ver_str,
+                  sizeof(entryVersion.pending_comp_ver_str)),
               -EOVERFLOW);
 }
 #endif
