@@ -34,6 +34,24 @@
       "parentUuid": "89a1f434_fb40bf43",
       "revId": "c205f3c10984a8a0ae616de7efc0929ad633b2e0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0204ab9_fe4fa706",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 3713,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-03T02:53:29Z",
+      "side": 1,
+      "message": "Ah, I just did the usual except I made a commit that deleted this line:\n\nhttps://github.com/openbmc/libpldm/blob/main/scripts/pre-submit#L5\n\nThat way after the run failed the logs were still accessible.",
+      "parentUuid": "bf881b27_1fbd9a6e",
+      "revId": "c205f3c10984a8a0ae616de7efc0929ad633b2e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
