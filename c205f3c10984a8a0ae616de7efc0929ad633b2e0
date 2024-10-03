@@ -16,6 +16,24 @@
       "message": "CI is failing with:\n\n```\nlibpldm 0.9.1\n\n  Subprojects\n    googletest          : YES\n\n  User defined options\n    buildtype           : release\n    abi-compliance-check: disabled\n\nFound ninja-1.12.1 at /usr/bin/ninja\nCleaning... 0 files.\n[74/75] Linking target tests/oem_meta_fileio\nninja: Entering directory `/home/andrew/src/openbmc.org/openbmc/libpldm/origin/tmp.I1LVOr2of7\u0027\nninja: no work to do.\n 1/22 dsp/bios_table_iter                            OK               0.48s\n 2/22 responder                                      OK               0.80s\n 3/22 instance-id                                    OK               0.85s\n 4/22 transport/transport                            OK               0.82s\n 5/22 dsp/fru                                        OK               0.88s\n 6/22 utils                                          OK               0.91s\n 7/22 msgbuf                                         OK               0.95s\n 8/22 dsp/base                                       OK               1.03s\n 9/22 dsp/bios                                       OK               1.03s\n10/22 dsp/bios_table                                 OK               1.04s\n11/22 dsp/firmware_update                            OK               1.21s\n12/22 dsp/pdr                                        OK               1.23s\n13/22 msgbuf_generic                                 OK               0.46s\n14/22 dsp/platform                                   FAIL             1.45s   exit status 1\n\u003e\u003e\u003e UBSAN_OPTIONS\u003dhalt_on_error\u003d1:abort_on_error\u003d1:print_summary\u003d1:print_stacktrace\u003d1 MESON_TEST_ITERATION\u003d1 ASAN_OPTIONS\u003dhalt_on_error\u003d1:abort_on_error\u003d1:print_summary\u003d1 MALLOC_PERTURB_\u003d192 MSAN_OPTIONS\u003dhalt_on_error\u003d1:abort_on_error\u003d1:print_summary\u003d1:print_stacktrace\u003d1 LD_LIBRARY_PATH\u003d/home/andrew/src/openbmc.org/openbmc/libpldm/origin/tmp.I1LVOr2of7/src valgrind --error-exitcode\u003d1 /home/andrew/src/openbmc.org/openbmc/libpldm/origin/tmp.I1LVOr2of7/tests/dsp_platform\n```\n\nWhere the log file contains:\n\n```\n[ RUN      ] SetEventReceiver.testBadDecodeRequest\n../tests/dsp/platform.cpp:3713: Failure\nExpected equality of these values:\n  rc\n    Which is: 3\n  -75\n\n[  FAILED  ] SetEventReceiver.testBadDecodeRequest (24 ms)\n```\n\nThe problem is that the implementation of `decode_set_event_receiver_req()` sets the return type personality to PLDM completion codes, but here you\u0027re testing against a negative errno. `rc \u003d\u003d 3` maps to `PLDM_ERROR_INVALID_LENGTH`, so this `EXPECT_EQ()` should be:\n\n```\nEXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);\n```",
       "revId": "c205f3c10984a8a0ae616de7efc0929ad633b2e0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf881b27_1fbd9a6e",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 3713,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2024-10-03T02:47:42Z",
+      "side": 1,
+      "message": "Thank you for the help. It fixed and CI passed.\n\nCan you please share how you run the local CI? I tried the local CI but there is no testlog-valgrind.txt in my local libpldm/build/meson-logs folder",
+      "parentUuid": "89a1f434_fb40bf43",
+      "revId": "c205f3c10984a8a0ae616de7efc0929ad633b2e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
