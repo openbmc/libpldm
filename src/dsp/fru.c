@@ -184,7 +184,20 @@ int encode_fru_record(uint8_t *fru_table, size_t total_size, size_t *curr_size,
 	if (fru_table == NULL || curr_size == NULL || !tlvs_size) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
-	if ((*curr_size + record_hdr_size + tlvs_size) != total_size) {
+
+	if (SIZE_MAX - *curr_size < record_hdr_size) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if (SIZE_MAX - (*curr_size + record_hdr_size) < tlvs_size) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if (total_size < *curr_size + record_hdr_size) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if (total_size - (*curr_size + record_hdr_size) < tlvs_size) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
