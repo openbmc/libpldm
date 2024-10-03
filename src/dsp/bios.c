@@ -590,8 +590,12 @@ int encode_set_bios_table_req(uint8_t instance_id, uint32_t transfer_handle,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (PLDM_SET_BIOS_TABLE_MIN_REQ_BYTES + table_length !=
-	    payload_length) {
+	if (payload_length < PLDM_SET_BIOS_TABLE_MIN_REQ_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if (payload_length - PLDM_SET_BIOS_TABLE_MIN_REQ_BYTES !=
+	    table_length) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
