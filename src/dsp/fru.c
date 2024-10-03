@@ -362,8 +362,12 @@ int encode_get_fru_record_by_option_resp(uint8_t instance_id,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length !=
-	    PLDM_GET_FRU_RECORD_BY_OPTION_MIN_RESP_BYTES + data_size) {
+	if (payload_length < PLDM_GET_FRU_RECORD_BY_OPTION_MIN_RESP_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	if (payload_length - PLDM_GET_FRU_RECORD_BY_OPTION_MIN_RESP_BYTES <
+	    data_size) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
