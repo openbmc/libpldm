@@ -139,6 +139,7 @@ Change categories:
 12. dsp: firmware_update: Bounds check
     decode_downstream_device_parameter_table_entry()
 13. oem: ibm: platform: Bounds check encode_bios_attribute_update_event_req()
+14. dsp: fru: Bounds check encode_get_fru_record_by_option_resp()
 
 ## [0.9.1] - 2024-09-07
 
