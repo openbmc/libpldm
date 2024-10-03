@@ -138,6 +138,7 @@ Change categories:
 11. dsp: bios_table: Bounds check pldm_bios_table_attr_value_entry_encode_enum()
 12. dsp: firmware_update: Bounds check
     decode_downstream_device_parameter_table_entry()
+13. oem: ibm: platform: Bounds check encode_bios_attribute_update_event_req()
 
 ## [0.9.1] - 2024-09-07
 
