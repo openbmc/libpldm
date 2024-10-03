@@ -141,6 +141,7 @@ Change categories:
 13. oem: ibm: platform: Bounds check encode_bios_attribute_update_event_req()
 14. dsp: fru: Bounds check encode_get_fru_record_by_option_resp()
 15. dsp: fru: Bounds check encode_fru_record()
+16. dsp: bios: Bounds check encode_set_bios_table_req()
 
 ## [0.9.1] - 2024-09-07
 
