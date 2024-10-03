@@ -1225,7 +1225,7 @@ LIBPLDM_ABI_TESTING
 int decode_downstream_device_parameter_table_entry_versions(
 	const struct variable_field *versions,
 	struct pldm_downstream_device_parameter_entry *entry, char *active,
-	char *pending)
+	size_t active_len, char *pending, size_t pending_len)
 {
 	struct pldm_msgbuf _buf;
 	struct pldm_msgbuf *buf = &_buf;
@@ -1234,6 +1234,14 @@ int decode_downstream_device_parameter_table_entry_versions(
 	if (versions == NULL || versions->ptr == NULL || !versions->length ||
 	    entry == NULL || active == NULL || pending == NULL) {
 		return -EINVAL;
+	}
+
+	if (!active_len || active_len - 1 < entry->active_comp_ver_str_len) {
+		return -EOVERFLOW;
+	}
+
+	if (!pending_len || pending_len - 1 < entry->pending_comp_ver_str_len) {
+		return -EOVERFLOW;
 	}
 
 	/* This API should be called after decode_downstream_device_parameter_table_entry
@@ -1248,15 +1256,14 @@ int decode_downstream_device_parameter_table_entry_versions(
 	}
 
 	rc = pldm_msgbuf_extract_array(buf, entry->active_comp_ver_str_len,
-				       active, entry->active_comp_ver_str_len);
+				       active, active_len);
 	if (rc < 0) {
 		return rc;
 	}
 
 	active[entry->active_comp_ver_str_len] = '\0';
 	rc = pldm_msgbuf_extract_array(buf, entry->pending_comp_ver_str_len,
-				       pending,
-				       entry->pending_comp_ver_str_len);
+				       pending, pending_len);
 	if (rc < 0) {
 		return rc;
 	}
