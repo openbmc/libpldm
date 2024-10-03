@@ -1092,10 +1092,10 @@ int decode_downstream_device_parameter_table_entry(
  *
  * @param[in] versions - pointer to version strings raw data
  * @param[in,out] entry - pointer to the decoded downstream device parameter table entry
- * @param[out] active - pointer to active component version string, the object pointed-to
- *                      must be at least as large as `entry->active_comp_ver_str_len + 1`
- * @param[out] pending - pointer to pending component version string, the object pointed-to
- *                      must be at least as large as `entry->pending_comp_ver_str_len + 1`
+ * @param[out] active - pointer to active component version string container
+ * @param[in] active_len - The size of the object pointed to by @p active
+ * @param[out] pending - pointer to pending component version string container
+ * @param[in] pending_len - The size of the object pointed to by @p pending
  *
  * @note Caller is responsible for memory alloc and dealloc of all the params,
  *    and the param `entry` should be the instance which has successfully decoded
@@ -1105,7 +1105,7 @@ int decode_downstream_device_parameter_table_entry(
 int decode_downstream_device_parameter_table_entry_versions(
 	const struct variable_field *versions,
 	struct pldm_downstream_device_parameter_entry *entry, char *active,
-	char *pending);
+	size_t active_len, char *pending, size_t pending_len);
 
 /** @brief Create PLDM request message for RequestUpdate
  *
