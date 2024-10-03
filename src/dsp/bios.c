@@ -474,10 +474,16 @@ int encode_set_bios_attribute_current_value_req(
 	if (msg == NULL || attribute_data == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
-	if (PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES + attribute_length !=
-	    payload_length) {
+
+	if (payload_length < PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
+
+	if (payload_length - PLDM_SET_BIOS_ATTR_CURR_VAL_MIN_REQ_BYTES <
+	    attribute_length) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
 	struct pldm_header_info header = { 0 };
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
