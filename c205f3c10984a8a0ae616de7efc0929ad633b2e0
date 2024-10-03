@@ -52,6 +52,24 @@
       "parentUuid": "bf881b27_1fbd9a6e",
       "revId": "c205f3c10984a8a0ae616de7efc0929ad633b2e0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fe9ac7d_29a363e1",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 3713,
+      "author": {
+        "id": 1000957
+      },
+      "writtenOn": "2024-10-03T04:38:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d0204ab9_fe4fa706",
+      "revId": "c205f3c10984a8a0ae616de7efc0929ad633b2e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
