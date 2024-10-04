@@ -50,6 +50,18 @@ Change categories:
 
 4. platform: Support PLDM_CPER_EVENT in encode_platform_event_message_req()
 
+5. ABI break for the following functions
+
+   Register assignment for function parameters was changed with the removal of
+   some asserts in related implementations.
+
+   - `decode_entity_auxiliary_names_pdr()`
+   - `decode_get_state_sensor_readings_resp()`
+   - `decode_platform_event_message_req()`
+   - `decode_platform_event_message_resp()`
+   - `decode_sensor_op_data()`
+   - `encode_get_state_effecter_states_resp()`
+
 ### Deprecated
 
 1. oem: meta: Deprecate `decode_oem_meta_file_io_req()`
