@@ -1351,9 +1351,9 @@ TEST(QueryDownstreamDevices, goodPathDecodeResponse)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(buf, 0, responseMsg.data() + hdrSize,
-                             responseMsg.size() - hdrSize);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
+                                responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, 0);
 
     pldm_msgbuf_insert_uint8(buf, completion_code_resp);
     pldm_msgbuf_insert_uint8(buf, downstream_device_update_supported_resp);
@@ -1399,9 +1399,9 @@ TEST(QueryDownstreamDevices, decodeRequestUndefinedValue)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(buf, 0, responseMsg.data() + hdrSize,
-                             responseMsg.size() - hdrSize);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
+                                responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, 0);
 
     pldm_msgbuf_insert_uint8(buf, completion_code_resp);
     pldm_msgbuf_insert_uint8(buf, downstream_device_update_supported_resp);
@@ -1441,9 +1441,9 @@ TEST(QueryDownstreamDevices, decodeRequestErrorBufSize)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(buf, 0, responseMsg.data() + hdrSize,
-                             responseMsg.size() - hdrSize);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
+                                responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, 0);
 
     pldm_msgbuf_insert_uint8(buf, completion_code_resp);
     pldm_msgbuf_insert_uint8(buf, downstream_device_update_supported_resp);
@@ -1537,9 +1537,9 @@ TEST(QueryDownstreamIdentifiers, goodPathDecodeResponse)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(buf, 0, responseMsg.data() + hdrSize,
-                             responseMsg.size() - hdrSize);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
+                                responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, 0);
 
     pldm_msgbuf_insert_uint8(buf, complition_code_resp);
     pldm_msgbuf_insert_uint32(buf, next_data_transfer_handle_resp);
@@ -1631,9 +1631,9 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(buf, 0, responseMsg.data() + hdrSize,
-                             responseMsg.size() - hdrSize);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
+                                responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, 0);
 
     pldm_msgbuf_insert_uint8(buf, complition_code_resp);
     pldm_msgbuf_insert_uint32(buf, next_data_transfer_handle_resp);
@@ -1695,9 +1695,9 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorBufSize)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(buf, 0, responseMsg.data() + hdrSize,
-                             responseMsg.size() - hdrSize);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
+                                responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, 0);
 
     pldm_msgbuf_insert_uint8(buf, complition_code_resp);
     pldm_msgbuf_insert_uint32(buf, next_data_transfer_handle_resp);
