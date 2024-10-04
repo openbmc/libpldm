@@ -71,6 +71,11 @@ int pldm_bios_table_string_entry_encode(void *entry, size_t entry_length,
 	POINTER_CHECK(str);
 	size_t length = pldm_bios_table_string_entry_encode_length(str_length);
 	BUFFER_SIZE_EXPECT(entry_length, length);
+	if (entry_length - (sizeof(struct pldm_bios_string_table_entry) -
+			    MEMBER_SIZE(pldm_bios_string_table_entry, name)) <
+	    str_length) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
 	struct pldm_bios_string_table_entry *string_entry = entry;
 	uint16_t handle;
 	int rc = get_bios_string_handle(&handle);

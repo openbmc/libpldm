@@ -143,6 +143,7 @@ Change categories:
 15. dsp: fru: Bounds check encode_fru_record()
 16. dsp: bios: Bounds check encode_set_bios_table_req()
 17. dsp: bios: Bounds check encode_set_bios_attribute_current_value_req()
+18. dsp: bios_table: Bounds check pldm_bios_table_string_entry_encode()
 
 ## [0.9.1] - 2024-09-07
 
