@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d9e97e4_d9054c7c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1259,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-07T04:49:17Z",
+      "side": 1,
+      "message": "`active_len`",
+      "range": {
+        "startLine": 1259,
+        "startChar": 19,
+        "endLine": 1259,
+        "endChar": 49
+      },
+      "revId": "a6c6dd90d8129d36e195be17e99f042290be21f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b926188d_acc3e567",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1267,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-07T04:49:17Z",
+      "side": 1,
+      "message": "`pending_len`",
+      "range": {
+        "startLine": 1267,
+        "startChar": 11,
+        "endLine": 1267,
+        "endChar": 42
+      },
+      "revId": "a6c6dd90d8129d36e195be17e99f042290be21f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
