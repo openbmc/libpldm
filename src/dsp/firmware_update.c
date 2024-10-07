@@ -687,6 +687,109 @@ int decode_query_device_identifiers_resp(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int decode_pldm_downstream_devices(
+	const struct variable_field *downstream_devices,
+	uint16_t number_of_downstream_devices,
+	struct pldm_downstream_device **pldm_downstream_devices,
+	struct variable_field *downstream_descriptors)
+{
+	if (!downstream_devices || !pldm_downstream_devices ||
+	    !downstream_descriptors) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc = pldm_msgbuf_init_errno(buf, downstream_devices->length,
+					downstream_devices->ptr,
+					downstream_devices->length);
+	if (rc) {
+		return rc;
+	}
+	for (uint16_t device_count = 0;
+	     device_count < number_of_downstream_devices; device_count++) {
+		rc = pldm_msgbuf_span_required(
+			buf, PLDM_DOWNSTREAM_DEVICE_BYTES,
+			(void **)(pldm_downstream_devices + device_count));
+		if (rc) {
+			return rc;
+		}
+		size_t downstream_descriptor_count =
+			pldm_downstream_devices[device_count]
+				->downstream_descriptor_count;
+		//uint8_t *descriptor_ptr = buf->cursor;
+
+		struct pldm_msgbuf size_peeker = *buf;
+		size_t downstream_descriptors_length = 0;
+		while (downstream_descriptor_count--) {
+			struct pldm_descriptor_tlv *pldm_descriptor = NULL;
+			rc = pldm_msgbuf_span_required(
+				&size_peeker,
+				PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN,
+				(void **)&pldm_descriptor);
+			if (rc) {
+				return rc;
+			}
+			void *payload = NULL;
+			rc = pldm_msgbuf_span_required(
+				&size_peeker,
+				pldm_descriptor->descriptor_length - 1,
+				&payload);
+			if (rc) {
+				return rc;
+			}
+			downstream_descriptors_length +=
+				PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN +
+				pldm_descriptor->descriptor_length - 1;
+		}
+		downstream_descriptors[device_count].length =
+			downstream_descriptors_length;
+		rc = pldm_msgbuf_span_required(
+			buf, downstream_descriptors[device_count].length,
+			(void **)&downstream_descriptors[device_count].ptr);
+		if (rc) {
+			return rc;
+		}
+	}
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_extract_descriptor_buf(const struct variable_field *descriptors,
+				size_t number_of_descriptors,
+				struct variable_field *descriptor_datas)
+{
+	int rc = PLDM_SUCCESS;
+	struct pldm_msgbuf descriptors_buf;
+	rc = pldm_msgbuf_init_errno(&descriptors_buf, descriptors->length,
+				    descriptors->ptr, descriptors->length);
+	if (rc) {
+		return rc;
+	}
+	for (size_t descriptor_count = 0;
+	     descriptor_count < number_of_descriptors; descriptor_count++) {
+		struct pldm_msgbuf size_peeker = descriptors_buf;
+		struct pldm_descriptor_tlv *descriptor_header = NULL;
+		rc = pldm_msgbuf_span_required(
+			&size_peeker, PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN,
+			(void **)&descriptor_header);
+		if (rc) {
+			return rc;
+		}
+		descriptor_datas[descriptor_count].length =
+			PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN +
+			descriptor_header->descriptor_length - 1;
+		rc = pldm_msgbuf_span_required(
+			&descriptors_buf,
+			descriptor_datas[descriptor_count].length,
+			(void **)&descriptor_datas[descriptor_count].ptr);
+		if (rc) {
+			return rc;
+		}
+	}
+	return PLDM_SUCCESS;
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_firmware_parameters_req(uint8_t instance_id,
 				       size_t payload_length,
