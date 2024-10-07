@@ -1016,6 +1016,16 @@ int decode_query_downstream_identifiers_resp(
 	struct pldm_query_downstream_identifiers_resp *resp_data,
 	struct variable_field *downstream_devices);
 
+int decode_pldm_downstream_devices(
+	const struct variable_field *downstream_devices,
+	uint16_t number_of_downstream_devices,
+	struct pldm_downstream_device **pldm_downstream_devices,
+	struct variable_field *downstream_descriptors);
+
+int pldm_extract_descriptor_buf(const struct variable_field *descriptors,
+								size_t number_of_descriptors,
+								struct variable_field *descriptor_datas);
+
 /**
  * @brief Encodes request message for Get Downstream Firmware Parameters.
  *
