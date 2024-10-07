@@ -1017,6 +1017,39 @@ int decode_query_downstream_identifiers_resp(
 	struct variable_field *downstream_devices);
 
 /**
+ * @brief Extract the Downstream Devices form the decoded response data.
+ * @param[in] resp_data Pointer to the decoded response data.
+ * @param[in] number_of_downstream_devices Number of the downstream devices.
+ * @param[out] downstream_devices Pointer array to Downstream Devices.
+ * @param[out] descriptors_data_array Pointer to array of descriptors_data.
+ * @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *         are not allocated, -EOVERFLOW if the payload length is not enough
+ *         to decode the entry.
+ *
+ * @note Caller is responsible for memory alloc and dealloc of pointer params
+ */
+int pldm_extract_downstream_devices(
+	const struct variable_field *resp_data,
+	uint16_t number_of_downstream_devices,
+	struct pldm_downstream_device **downstream_devices,
+	struct variable_field *descriptors_data_array);
+
+/**
+ * @brief Extract Descriptor Data to separate descriptors.
+ * @param[in] descriptors_data Descriptor data to extract.
+ * @param[in] number_of_descriptors Number of the descriptors.
+ * @param[out] descriptors Pointer to array of descriptors.
+ * @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *         are not allocated, -EOVERFLOW if the payload length is not enough
+ *         to decode the entry.
+ *
+ * @note Caller is responsible for memory alloc and dealloc of pointer params
+ */
+int pldm_extract_descriptors(const struct variable_field *descriptors_data,
+				size_t number_of_descriptors,
+				struct variable_field *descriptors);
+
+/**
  * @brief Encodes request message for Get Downstream Firmware Parameters.
  *
  * @param[in] instance_id - The instance ID of the PLDM entity.
