@@ -3706,11 +3706,20 @@ TEST(SetEventReceiver, testBadDecodeRequest)
     uint8_t rettransportProtocolType;
     uint8_t reteventReceiverAddressInfo;
     uint16_t retheartbeatTimer;
+
+#ifdef NDEBUG
     rc = decode_set_event_receiver_req(
         request, requestMsg.size() - hdrSize - 1, &reteventMessageGlobalEnable,
         &rettransportProtocolType, &reteventReceiverAddressInfo,
         &retheartbeatTimer);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+#else
+    EXPECT_DEATH(decode_set_event_receiver_req(
+                     request, requestMsg.size() - hdrSize - 1,
+                     &reteventMessageGlobalEnable, &rettransportProtocolType,
+                     &reteventReceiverAddressInfo, &retheartbeatTimer),
+                 "ctx->remaining >= 0");
+#endif
 }
 
 TEST(decodeNumericSensorPdrData, Uint8Test)

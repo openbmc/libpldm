@@ -35,6 +35,10 @@ enum pldm_platform_transfer_flag {
 #define PLDM_GET_STATE_EFFECTER_STATES_REQ_BYTES  2
 #define PLDM_GET_SENSOR_READING_REQ_BYTES	  3
 #define PLDM_SET_EVENT_RECEIVER_REQ_BYTES	  5
+
+/* Minimum size for request */
+#define PLDM_SET_EVENT_RECEIVER_MIN_REQ_BYTES 3
+
 /* Response lengths are inclusive of completion code */
 #define PLDM_SET_STATE_EFFECTER_STATES_RESP_BYTES 1
 
