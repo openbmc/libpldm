@@ -110,11 +110,6 @@ Change categories:
    `tranferFlag` is `AcknowledgementOnly`, the value `eventIDToAcknowledge`
    should be the previously retrieved eventID (from the PLDM terminus).
 
-4. dsp: platform: Fix decode_set_event_receiver_req()
-
-   The heartbeat field shall be omitted if `eventMessageGlobalEnable` is not
-   `enableAsyncKeepAlive`.
-
 ## [0.9.1] - 2024-09-07
 
 ### Changed

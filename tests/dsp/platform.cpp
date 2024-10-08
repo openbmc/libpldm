@@ -3539,8 +3539,10 @@ TEST(SetEventReceiver, testGoodEncodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0x78;
 
-    PLDM_MSG_DEFINE_P(request, PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
-                                   PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES);
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_SET_EVENT_RECEIVER_REQ_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_event_receiver_req(
         0, eventMessageGlobalEnable, transportProtocolType,
@@ -3564,8 +3566,10 @@ TEST(SetEventReceiver, testBadEncodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0;
 
-    PLDM_MSG_DEFINE_P(request, PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
-                                   PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES);
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_SET_EVENT_RECEIVER_REQ_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_set_event_receiver_req(
         0, eventMessageGlobalEnable, transportProtocolType,
@@ -3635,8 +3639,9 @@ TEST(SetEventReceiver, testBadEncodeResponse)
 
 TEST(SetEventReceiver, testGoodDecodeRequest)
 {
-    PLDM_MSG_DEFINE_P(request, PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
-                                   PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES);
+
+    std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES>
+        requestMsg{};
 
     uint8_t eventMessageGlobalEnable =
         PLDM_EVENT_MESSAGE_GLOBAL_ENABLE_ASYNC_KEEP_ALIVE;
@@ -3644,6 +3649,8 @@ TEST(SetEventReceiver, testGoodDecodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0x78;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_event_receiver_req* req =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_event_receiver_req*>(request->payload);
@@ -3658,11 +3665,9 @@ TEST(SetEventReceiver, testGoodDecodeRequest)
     uint8_t reteventReceiverAddressInfo;
     uint16_t retheartbeatTimer;
     auto rc = decode_set_event_receiver_req(
-        request,
-        PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
-            PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES,
-        &reteventMessageGlobalEnable, &rettransportProtocolType,
-        &reteventReceiverAddressInfo, &retheartbeatTimer);
+        request, requestMsg.size() - hdrSize, &reteventMessageGlobalEnable,
+        &rettransportProtocolType, &reteventReceiverAddressInfo,
+        &retheartbeatTimer);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(eventMessageGlobalEnable, reteventMessageGlobalEnable);
@@ -3673,14 +3678,11 @@ TEST(SetEventReceiver, testGoodDecodeRequest)
 
 TEST(SetEventReceiver, testBadDecodeRequest)
 {
-    PLDM_MSG_DEFINE_P(request, PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
-                                   PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES);
+    std::array<uint8_t, hdrSize + PLDM_SET_EVENT_RECEIVER_REQ_BYTES>
+        requestMsg{};
 
-    auto rc = decode_set_event_receiver_req(
-        NULL,
-        PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
-            PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES,
-        NULL, NULL, NULL, NULL);
+    auto rc = decode_set_event_receiver_req(NULL, requestMsg.size() - hdrSize,
+                                            NULL, NULL, NULL, NULL);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     uint8_t eventMessageGlobalEnable =
@@ -3689,6 +3691,8 @@ TEST(SetEventReceiver, testBadDecodeRequest)
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0x78;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     struct pldm_set_event_receiver_req* req =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_event_receiver_req*>(request->payload);
@@ -3702,24 +3706,11 @@ TEST(SetEventReceiver, testBadDecodeRequest)
     uint8_t rettransportProtocolType;
     uint8_t reteventReceiverAddressInfo;
     uint16_t retheartbeatTimer;
-
-#ifdef NDEBUG
     rc = decode_set_event_receiver_req(
-        request,
-        PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
-            PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES - 1,
-        &reteventMessageGlobalEnable, &rettransportProtocolType,
-        &reteventReceiverAddressInfo, &retheartbeatTimer);
+        request, requestMsg.size() - hdrSize - 1, &reteventMessageGlobalEnable,
+        &rettransportProtocolType, &reteventReceiverAddressInfo,
+        &retheartbeatTimer);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
-#else
-    EXPECT_DEATH(decode_set_event_receiver_req(
-                     request,
-                     PLDM_SET_EVENT_RECEIVER_REQ_BYTES +
-                         PLDM_SET_EVENT_RECEIVER_REQ_HEARTBEAT_BYTES - 1,
-                     &reteventMessageGlobalEnable, &rettransportProtocolType,
-                     &reteventReceiverAddressInfo, &retheartbeatTimer),
-                 "ctx->remaining >= 0");
-#endif
 }
 
 TEST(decodeNumericSensorPdrData, Uint8Test)
