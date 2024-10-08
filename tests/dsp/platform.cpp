@@ -3674,6 +3674,17 @@ TEST(SetEventReceiver, testGoodDecodeRequest)
     EXPECT_EQ(transportProtocolType, rettransportProtocolType);
     EXPECT_EQ(eventReceiverAddressInfo, reteventReceiverAddressInfo);
     EXPECT_EQ(heartbeatTimer, retheartbeatTimer);
+
+    eventMessageGlobalEnable = PLDM_EVENT_MESSAGE_GLOBAL_ENABLE_ASYNC;
+    req->event_message_global_enable = eventMessageGlobalEnable;
+    rc = decode_set_event_receiver_req(
+        request, PLDM_SET_EVENT_RECEIVER_MIN_REQ_BYTES,
+        &reteventMessageGlobalEnable, &rettransportProtocolType,
+        &reteventReceiverAddressInfo, &retheartbeatTimer);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(eventMessageGlobalEnable, reteventMessageGlobalEnable);
+    EXPECT_EQ(transportProtocolType, rettransportProtocolType);
+    EXPECT_EQ(eventReceiverAddressInfo, reteventReceiverAddressInfo);
 }
 
 TEST(SetEventReceiver, testBadDecodeRequest)
@@ -3685,8 +3696,7 @@ TEST(SetEventReceiver, testBadDecodeRequest)
                                             NULL, NULL, NULL, NULL);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
-    uint8_t eventMessageGlobalEnable =
-        PLDM_EVENT_MESSAGE_GLOBAL_ENABLE_ASYNC_KEEP_ALIVE;
+    uint8_t eventMessageGlobalEnable = PLDM_EVENT_MESSAGE_GLOBAL_ENABLE_ASYNC_KEEP_ALIVE;
     uint8_t transportProtocolType = PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP;
     uint8_t eventReceiverAddressInfo = 0x08;
     uint16_t heartbeatTimer = 0x78;
@@ -3712,6 +3722,21 @@ TEST(SetEventReceiver, testBadDecodeRequest)
         &rettransportProtocolType, &reteventReceiverAddressInfo,
         &retheartbeatTimer);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    req->event_message_global_enable = PLDM_EVENT_MESSAGE_GLOBAL_ENABLE_ASYNC;
+    rc = decode_set_event_receiver_req(
+        request, PLDM_SET_EVENT_RECEIVER_MIN_REQ_BYTES - 1,
+        &reteventMessageGlobalEnable, &rettransportProtocolType,
+        &reteventReceiverAddressInfo, &retheartbeatTimer);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    req->event_message_global_enable = PLDM_EVENT_MESSAGE_GLOBAL_ENABLE_ASYNC_KEEP_ALIVE;
+    req->heartbeat_timer = 0;
+    rc = decode_set_event_receiver_req(
+        request, PLDM_SET_EVENT_RECEIVER_REQ_BYTES,
+        &reteventMessageGlobalEnable, &rettransportProtocolType,
+        &reteventReceiverAddressInfo, &retheartbeatTimer);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
 TEST(decodeNumericSensorPdrData, Uint8Test)
