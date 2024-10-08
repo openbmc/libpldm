@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da07abbc_b7060e7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-10-08T08:55:08Z",
+      "side": 1,
+      "message": "yeah, seems like clang is not perfect in detecting this. But the functionality is still the same. Looks okay to me (if it passes the check).",
+      "revId": "a180963a4e3279fca3331d94d9ab71f13b7048fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
