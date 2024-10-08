@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "262fb0e0_72e4ab66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2024-10-08T09:12:35Z",
+      "side": 1,
+      "message": "sounds good to me andrew, thanks for the cleanup. Its surprising to see we have so many bound checks missing. \n\nIts even more surprising to see we have even more API\u0027s which cannot be even made safe without a huge refactor. I agree with the current direction that we are taking.",
+      "revId": "36324f6bea8c5de1e380659bb56aca5e0b8724b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
