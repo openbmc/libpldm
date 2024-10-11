@@ -172,6 +172,7 @@ Change categories:
 15. dsp: bios: Bounds check encode_set_bios_table_req()
 16. dsp: bios: Bounds check encode_set_bios_attribute_current_value_req()
 17. dsp: bios_table: Bounds check pldm_bios_table_string_entry_encode()
+18. dsp: pdr: Rework test in pldm_entity_association_pdr_extract()
 
 ## [0.9.1] - 2024-09-07
 
