@@ -32,6 +32,9 @@ Change categories:
    The prototype for `decode_query_downstream_identifiers_resp()` was updated to
    improve ergonomics for the iterator APIs.
 
+3. Return `ENOENT` rather than `ENOKEY` from
+   `pldm_pdr_find_child_container_id_index_range_exclude()`
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
