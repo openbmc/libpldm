@@ -445,7 +445,7 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
 			return 0;
 		}
 	}
-	return -ENOKEY;
+	return -ENOENT;
 }
 
 typedef struct pldm_entity_association_tree {
