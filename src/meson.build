@@ -1,8 +1,11 @@
 libpldm_sources = files('responder.c', 'utils.c')
 
 subdir('dsp')
-subdir('requester')
-subdir('transport')
+
+if get_option('transport')
+    subdir('requester')
+    subdir('transport')
+endif
 
 if get_option('oem-ibm').allowed()
     subdir('oem/ibm')
