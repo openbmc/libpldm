@@ -227,7 +227,7 @@ pldm_pdr_record *pldm_pdr_find_last_in_range(const pldm_pdr *repo,
  * @param[out] container_id - container id of the contained entity
  *
  * @return container id of the PDR record found on success,-EINVAL when repo is NULL
- * or -ENOKEY if the container id is not found.
+ * or -ENOENT if the container id is not found.
  */
 int pldm_pdr_find_child_container_id_index_range_exclude(
 	const pldm_pdr *repo, uint16_t entity_type, uint16_t entity_instance,
