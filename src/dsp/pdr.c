@@ -1341,17 +1341,13 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 	if (entity_association_pdr->num_children == UINT8_MAX) {
 		return;
 	}
+
 	size_t l_num_entities = entity_association_pdr->num_children + 1;
 	if (l_num_entities < 2) {
 		return;
 	}
 
-	if (SIZE_MAX / sizeof(pldm_entity) < l_num_entities) {
-		return;
-	}
-
-	if (pdr_len - sizeof(*entity_association_pdr) + 1 <
-	    sizeof(pldm_entity) * l_num_entities) {
+	if (UINT8_MAX < l_num_entities) {
 		return;
 	}
 
