@@ -6,6 +6,7 @@
 extern "C" {
 #endif
 
+#include <libpldm/compiler.h>
 #include <libpldm/pldm_types.h>
 
 #include <asm/byteorder.h>
@@ -71,6 +72,14 @@ enum transfer_multipart_op_flag {
 	PLDM_XFER_CURRENT_PART = 4,
 };
 
+enum pldm_base_multipart_receive_transfer_flag {
+	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_START = 0x01,
+	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_MIDDLE = 0x02,
+	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_END = 0x04,
+	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_START_AND_END = 0x05,
+	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_ACK_COMPLETION = 0x08,
+};
+
 enum transfer_resp_flag {
 	PLDM_START = 0x01,
 	PLDM_MIDDLE = 0x02,
@@ -115,8 +124,9 @@ typedef enum {
 #define PLDM_SET_TID_RESP_BYTES	     1
 #define PLDM_GET_COMMANDS_RESP_BYTES 33
 /* Response data has only one version and does not contain the checksum */
-#define PLDM_GET_VERSION_RESP_BYTES	 10
-#define PLDM_MULTIPART_RECEIVE_REQ_BYTES 18
+#define PLDM_GET_VERSION_RESP_BYTES		   10
+#define PLDM_MULTIPART_RECEIVE_REQ_BYTES	   18
+#define PLDM_BASE_MULTIPART_RECEIVE_RESP_MIN_BYTES 10
 
 #define PLDM_VERSION_0	     0
 #define PLDM_CURRENT_VERSION PLDM_VERSION_0
@@ -339,6 +349,25 @@ struct pldm_multipart_receive_req {
 	uint32_t section_length;  //!< The length (in bytes) of the section
 				  //!< requested.
 } __attribute__((packed));
+
+/** @struct pldm_multipart_receive_resp
+ *
+ * Structure representing PLDM multipart receive request.
+ */
+
+struct pldm_multipart_receive_resp {
+	uint8_t completion_code;       //!< Completion code of the command
+				       //!< command.
+	uint8_t transfer_flag;	       //!< PLDM MultipartReceive transfer flag.
+	uint32_t next_transfer_handle; //!< The handle for the next part of
+				       //!< data for this section transfer.
+	uint32_t data_length;	       //!< The length (in bytes) of the data.
+#ifndef __cplusplus
+	uint8_t data[] LIBPLDM_CC_COUNTED_BY(data_length);
+	//!< &data[0] is the beginning of the data.
+#endif
+};
+
 /**
  * @brief Populate the PLDM message with the PLDM header.The caller of this API
  *        allocates buffer for the PLDM header when forming the PLDM message.
@@ -631,6 +660,46 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 				 uint32_t *transfer_handle,
 				 uint32_t *section_offset,
 				 uint32_t *section_length);
+
+/** @brief Encode a PLDM MultipartReceive request message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - The pointer to the request message to be encoded
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in] payload_length - length of request message payload
+ *  @return 0 on success, -EINVAL if the input parameters' memory
+ *         are not allocated and negative `errno` on other errors
+ */
+int encode_base_multipart_receive_req(
+	uint8_t instance_id, const struct pldm_multipart_receive_req *req,
+	struct pldm_msg *msg, size_t payload_length);
+
+/** @brief Decode a PLDM MultipartReceive response message
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - length of request message payload
+ *  @param[out] resp - pointer to the decoded response message,
+ 			excluding the data integrity checksum
+ *  @param[out] data_integrity_checksum - The checksum of data field
+			of the decoded response message
+ *  @return 0 on success, -EINVAL if the input parameters' memory
+ *          are not allocated, -EBADMSG if the payload length is not
+ *		    valid and negative `errno` on other errors
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *     'msg.payload'
+ */
+int decode_base_multipart_receive_resp(const struct pldm_msg *msg,
+				       size_t payload_length,
+				       struct pldm_multipart_receive_resp *resp,
+				       uint32_t *data_integrity_checksum);
+
+/** @brief Helper function to extract MultipartReceive response data
+ *
+ *  @param[in] resp - the decoded pldm_multipart_receive_resp struct
+ *  @return the MultipartReceive response data array pointer
+ */
+uint8_t *
+pldm_multipart_receive_resp_data(struct pldm_multipart_receive_resp *resp);
 
 /** @brief Create a PLDM response message containing only cc
  *
