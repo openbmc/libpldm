@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "api.h"
 #include "dsp/base.h"
+#include "msgbuf.h"
 
 #include <assert.h>
 #include <libpldm/base.h>
@@ -551,6 +552,106 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 	*transfer_handle = handle;
 	*section_offset = sec_offset;
 	*section_length = le32toh(request->section_length);
+
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_STABLE
+int encode_multipart_receive_req(uint8_t instance_id, uint8_t pldm_type,
+				 uint8_t transfer_opflag, uint32_t transfer_ctx,
+				 uint32_t data_transfer_handle,
+				 uint32_t req_section_offset,
+				 uint32_t req_section_length,
+				 struct pldm_msg *msg, size_t payload_length)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length != PLDM_MULTIPART_RECEIVE_REQ_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_REQUEST;
+	header.pldm_type = PLDM_BASE;
+	header.command = PLDM_MULTIPART_RECEIVE;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_multipart_receive_req *request =
+		(struct pldm_multipart_receive_req *)msg->payload;
+	request->pldm_type = pldm_type;
+	request->transfer_opflag = transfer_opflag;
+	request->transfer_ctx = htole32(transfer_ctx);
+	request->transfer_handle = htole32(data_transfer_handle);
+	request->section_offset = htole32(req_section_offset);
+	request->section_length = htole32(req_section_length);
+
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_STABLE
+int decode_multipart_receive_resp(const struct pldm_msg *msg,
+				  size_t payload_length,
+				  uint8_t *completion_code,
+				  uint8_t *transfer_opflag,
+				  uint32_t *transfer_handle,
+				  uint32_t *data_length, void **data,
+				  uint32_t *data_integrity_checksum)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (msg == NULL || completion_code == NULL || transfer_opflag == NULL ||
+	    transfer_handle == NULL || data_length == NULL ||
+	    data_integrity_checksum == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_MULTIPART_RECEIVE_RESP_MIN_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	rc = pldm_msgbuf_extract_p(buf, completion_code);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+	if (PLDM_SUCCESS != *completion_code) {
+		return *completion_code;
+	}
+
+	if (payload_length < PLDM_MULTIPART_RECEIVE_RESP_MIN_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	pldm_msgbuf_extract_p(buf, transfer_opflag);
+	pldm_msgbuf_extract_p(buf, transfer_handle);
+	rc = pldm_msgbuf_extract_p(buf, data_length);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	if (*data_length > 0) {
+		pldm_msgbuf_span_required(buf, *data_length, data);
+	}
+
+	if (*transfer_opflag == PLDM_XFER_END ||
+	    *transfer_opflag == PLDM_XFER_START_AND_END) {
+		pldm_msgbuf_extract_p(buf, data_integrity_checksum);
+	}
+
+	rc = pldm_msgbuf_destroy_consumed(buf);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
 
 	return PLDM_SUCCESS;
 }
