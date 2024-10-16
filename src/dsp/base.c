@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "api.h"
 #include "dsp/base.h"
+#include "msgbuf.h"
 
 #include <assert.h>
 #include <libpldm/base.h>
@@ -553,6 +554,100 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 	*section_length = le32toh(request->section_length);
 
 	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_base_multipart_receive_req(
+	uint8_t instance_id, const struct pldm_multipart_receive_req *req,
+	struct pldm_msg *msg, size_t payload_length)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (req == NULL || msg == NULL) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_REQUEST;
+	header.pldm_type = PLDM_BASE;
+	header.command = PLDM_MULTIPART_RECEIVE;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_MULTIPART_RECEIVE_REQ_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, req->pldm_type);
+	pldm_msgbuf_insert(buf, req->transfer_opflag);
+	pldm_msgbuf_insert(buf, req->transfer_ctx);
+	pldm_msgbuf_insert(buf, req->transfer_handle);
+	pldm_msgbuf_insert(buf, req->section_offset);
+	pldm_msgbuf_insert(buf, req->section_length);
+
+	return pldm_msgbuf_complete(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_base_multipart_receive_resp(const struct pldm_msg *msg,
+				       size_t payload_length,
+				       struct pldm_multipart_receive_resp *resp,
+				       uint32_t *data_integrity_checksum)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL || data_integrity_checksum == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msg_has_error(msg, payload_length);
+
+	if (rc) {
+		resp->completion_code = rc;
+		return 0;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_BASE_MULTIPART_RECEIVE_RESP_MIN_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, resp->completion_code);
+	rc = pldm_msgbuf_extract(buf, resp->transfer_flag);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	pldm_msgbuf_extract(buf, resp->next_transfer_handle);
+
+	rc = pldm_msgbuf_extract_uint32_to_size(buf, resp->data.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	if (resp->data.length > 0) {
+		resp->data.ptr = NULL;
+		pldm_msgbuf_span_required(buf, resp->data.length,
+					  (void **)&resp->data.ptr);
+	}
+
+	if (resp->transfer_flag ==
+		    PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_END ||
+	    resp->transfer_flag ==
+		    PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_START_AND_END) {
+		pldm_msgbuf_extract_p(buf, data_integrity_checksum);
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
