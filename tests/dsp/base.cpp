@@ -6,6 +6,8 @@
 #include <cstring>
 #include <vector>
 
+#include "msgbuf.h"
+
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -758,6 +760,176 @@ TEST(MultipartReceive, testDecodeRequestFailBadHandle)
                                            &section_length),
               PLDM_ERROR_INVALID_DATA);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(MultipartReceive, testGoodEncodeRequest)
+{
+    uint8_t instance_id = 0;
+    uint8_t pldm_type = PLDM_BASE;
+    uint8_t transfer_opflag = PLDM_XFER_FIRST_PART;
+    uint32_t transfer_ctx = 0x1;
+    uint32_t transfer_handle = 0x10;
+    uint32_t section_offset = 0;
+    uint32_t section_length = 0x10;
+
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_MULTIPART_RECEIVE_REQ_BYTES>
+        requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto rc = encode_multipart_receive_req(
+        instance_id, pldm_type, transfer_opflag, transfer_ctx, transfer_handle,
+        section_offset, section_length, requestPtr,
+        PLDM_MULTIPART_RECEIVE_REQ_BYTES);
+
+    struct pldm_multipart_receive_req* request =
+        (struct pldm_multipart_receive_req*)requestPtr->payload;
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(request->pldm_type, pldm_type);
+    EXPECT_EQ(request->transfer_opflag, transfer_opflag);
+    EXPECT_EQ(request->transfer_ctx, transfer_ctx);
+    EXPECT_EQ(request->transfer_handle, transfer_handle);
+    EXPECT_EQ(request->section_offset, section_offset);
+    EXPECT_EQ(request->section_length, section_length);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(MultipartReceive, testBadEncodeRequest)
+{
+    uint8_t instance_id = 0;
+    uint8_t pldm_type = PLDM_BASE;
+    uint8_t transfer_opflag = PLDM_XFER_FIRST_PART;
+    uint32_t transfer_ctx = 0x1;
+    uint32_t transfer_handle = 0x10;
+    uint32_t section_offset = 0;
+    uint32_t section_length = 0x10;
+
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_MULTIPART_RECEIVE_REQ_BYTES>
+        requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_multipart_receive_req(
+        instance_id, pldm_type, transfer_opflag, transfer_ctx, transfer_handle,
+        section_offset, section_length, nullptr,
+        PLDM_MULTIPART_RECEIVE_REQ_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+    rc = encode_multipart_receive_req(
+        instance_id, pldm_type, transfer_opflag, transfer_ctx, transfer_handle,
+        section_offset, section_length, requestPtr, 1);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(MultipartReceive, testGoodDecodeResponse)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint8_t transferFlag = PLDM_XFER_END;
+    uint32_t nextDataTransferHandle = 0x15;
+    uint32_t dataSize = 9;
+    std::vector<uint8_t> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    uint32_t dataIntegrityChecksum = 0x3C;
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    int rc;
+
+    std::vector<uint8_t> responseMsg(
+        sizeof(pldm_msg_hdr) + PLDM_MULTIPART_RECEIVE_RESP_MIN_BYTES +
+        data.size() + sizeof(dataIntegrityChecksum));
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
+                                responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint8(buf, completionCode);
+    pldm_msgbuf_insert_uint8(buf, transferFlag);
+    pldm_msgbuf_insert_uint32(buf, nextDataTransferHandle);
+    pldm_msgbuf_insert_uint32(buf, dataSize);
+    rc = pldm_msgbuf_insert_array_uint8(buf, dataSize, data.data(), dataSize);
+    EXPECT_EQ(rc, 0);
+    pldm_msgbuf_insert_uint32(buf, dataIntegrityChecksum);
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    size_t payload_length = responseMsg.size() - hdrSize;
+
+    uint8_t retCompletionCode;
+    uint8_t retTransferFlag = 0;
+    uint32_t retNextDataTransferHandle = 0;
+    uint32_t retDataSize = 0;
+    uint8_t* retData = nullptr;
+    uint32_t retDataIntegrityChecksum = 0;
+
+    rc = decode_multipart_receive_resp(
+        responsePtr, payload_length, &retCompletionCode, &retTransferFlag,
+        &retNextDataTransferHandle, &retDataSize, (void**)&retData,
+        &retDataIntegrityChecksum);
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(retCompletionCode, completionCode);
+    EXPECT_EQ(retTransferFlag, transferFlag);
+    EXPECT_EQ(retNextDataTransferHandle, nextDataTransferHandle);
+    EXPECT_EQ(retDataSize, dataSize);
+    EXPECT_EQ(retDataIntegrityChecksum, dataIntegrityChecksum);
+    EXPECT_EQ(0, memcmp(data.data(), retData, dataSize));
+    EXPECT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(MultipartReceive, testBadDecodeResponse)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint8_t transferFlag = PLDM_XFER_END;
+    uint32_t nextDataTransferHandle = 0x15;
+    uint32_t dataSize = 9;
+    std::vector<uint8_t> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    uint32_t dataIntegrityChecksum = 0x3C;
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    int rc;
+
+    std::vector<uint8_t> responseMsg(
+        sizeof(pldm_msg_hdr) + PLDM_MULTIPART_RECEIVE_RESP_MIN_BYTES +
+        data.size() + sizeof(dataIntegrityChecksum));
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
+                                responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint8(buf, completionCode);
+    pldm_msgbuf_insert_uint8(buf, transferFlag);
+    pldm_msgbuf_insert_uint32(buf, nextDataTransferHandle);
+    pldm_msgbuf_insert_uint32(buf, dataSize);
+    rc = pldm_msgbuf_insert_array_uint8(buf, dataSize, data.data(), dataSize);
+    EXPECT_EQ(rc, 0);
+    pldm_msgbuf_insert_uint32(buf, dataIntegrityChecksum);
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    size_t payload_length = responseMsg.size() - hdrSize;
+
+    uint8_t retCompletionCode;
+    uint8_t retTransferFlag = 0;
+    uint32_t retNextDataTransferHandle = 0;
+    uint32_t retDataSize = 0;
+    uint8_t* retData = nullptr;
+    uint32_t retDataIntegrityChecksum = 0;
+
+    rc = decode_multipart_receive_resp(
+        nullptr, payload_length, &retCompletionCode, &retTransferFlag,
+        &retNextDataTransferHandle, &retDataSize, (void**)&retData,
+        &retDataIntegrityChecksum);
+
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_multipart_receive_resp(
+        responsePtr, 0, &retCompletionCode, &retTransferFlag,
+        &retNextDataTransferHandle, &retDataSize, (void**)&retData,
+        &retDataIntegrityChecksum);
+
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
 
 TEST(CcOnlyResponse, testEncode)
 {
