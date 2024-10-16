@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49c77705_0a6f0bfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-16T05:24:06Z",
+      "side": 1,
+      "message": "Hi Archana, thanks for the rework so far, the conversion of the tests to the msgbuf APIs helps a lot. However, they\u0027re still far to difficult to follow. I\u0027ve left some requests inline.",
+      "revId": "9595d44659fd1f7e2f9846a79613e29ce7613f81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e647d754_383c22e0",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1460,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-16T05:24:06Z",
+      "side": 1,
+      "message": "Why are you defining these inside the function scope? Why not lift them out, because I think you\u0027re using the same definitions (repeated) below.",
+      "range": {
+        "startLine": 1443,
+        "startChar": 0,
+        "endLine": 1460,
+        "endChar": 1
+      },
+      "revId": "9595d44659fd1f7e2f9846a79613e29ce7613f81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c319c5_968fc9f6",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-16T05:24:06Z",
+      "side": 1,
+      "message": "Firstly, thank you for converting the buffer parsing to use the msgbuf APIs. It\u0027s much easier to have confidence that we\u0027re not doing wildly inappropriate things wrt the object storage.",
+      "revId": "9595d44659fd1f7e2f9846a79613e29ce7613f81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7042e57f_68e481d5",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-16T05:24:06Z",
+      "side": 1,
+      "message": "This should rather be:\n\n```\nASSERT_EQ(pldm_msgbuf_destroy(buf), 0);\n```\n\nAnd remove the `pldm_msgbuf_destroy(buf)` call on line 1550.",
+      "revId": "9595d44659fd1f7e2f9846a79613e29ce7613f81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa7be09_46b3d651",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1548,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-16T05:24:06Z",
+      "side": 1,
+      "message": "Rather than this, can we instead define a static function that tests for equality of two instances of `struct pldm_association_pdr_test` and then EXPECT_EQ() on the result of the function call?\n\nThen you can reuse all the logic without all the tedium.",
+      "range": {
+        "startLine": 1536,
+        "startChar": 0,
+        "endLine": 1548,
+        "endChar": 52
+      },
+      "revId": "9595d44659fd1f7e2f9846a79613e29ce7613f81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb5513fc_937eaa03",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1585,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-16T05:24:06Z",
+      "side": 1,
+      "message": "Is this not functionally equivalent to what\u0027s between lines 1512-1532? I\u0027m struggling with the tedium.\n\nCan you please pull this out to a static function defined in the test case? From there, use it in all circumstances where it\u0027s appropriate.",
+      "range": {
+        "startLine": 1565,
+        "startChar": 0,
+        "endLine": 1585,
+        "endChar": 5
+      },
+      "revId": "9595d44659fd1f7e2f9846a79613e29ce7613f81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc6c9edb_c4f66ce4",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-16T05:24:06Z",
+      "side": 1,
+      "message": "`pldm_msgbuf_destroy(buf)` on line 1603 must be here instead, and it must also be of the form:\n\n```\nASSERT_EQ(pldm_msgbuf_destroy(buf), 0);\n```",
+      "revId": "9595d44659fd1f7e2f9846a79613e29ce7613f81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e163123b_39f52da8",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1608,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-16T05:24:06Z",
+      "side": 1,
+      "message": "Unfortunately I\u0027m struggling to understand exactly what properties this test is trying to demonstrate. It\u0027s too tedious for me to comprehend in detail, and seems to have too much going on.\n\nCan you please write down the list of properties your trying to demonstrate are upheld?\n\nFrom there we can think about whether we can split this test.",
+      "revId": "9595d44659fd1f7e2f9846a79613e29ce7613f81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
