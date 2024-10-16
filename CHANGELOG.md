@@ -28,6 +28,7 @@ Change categories:
 7. oem: ibm: Add topology related state set and enum
 
 8. base: Add size and buffer macros for struct pldm_msg
+9. base: Add encode req & decode resp for MultipartReceive
 
    Together these macros reduce the need for use of reinterpret_cast<>() in C++.
 
