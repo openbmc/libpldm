@@ -1100,6 +1100,50 @@ pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 	return 0;
 }
 
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_peek_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
+{
+	if (!ctx->cursor || *cursor) {
+		return -EINVAL;
+	}
+
+	if (ctx->remaining < 0) {
+		return -EOVERFLOW;
+	}
+
+	*cursor = ctx->cursor;
+	*len = ctx->remaining;
+
+	return 0;
+}
+
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_increment(struct pldm_msgbuf *ctx,
+						   size_t count)
+{
+	if (!ctx->cursor) {
+		return -EINVAL;
+	}
+
+#if INTMAX_MAX < SIZE_MAX
+	if (count > INTMAX_MAX) {
+		return -EOVERFLOW;
+	}
+#endif
+
+	if (ctx->remaining < INTMAX_MIN + (intmax_t)count) {
+		return -EOVERFLOW;
+	}
+	ctx->remaining -= (intmax_t)count;
+	if (ctx->remaining < 0) {
+		return -EOVERFLOW;
+	}
+	ctx->cursor += count;
+
+	return 0;
+}
+
 /**
  * @brief pldm_msgbuf copy data between two msg buffers
  *
