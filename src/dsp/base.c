@@ -555,6 +555,92 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int encode_multipart_receive_req(uint8_t instance_id, uint8_t pldm_type,
+				 uint8_t transfer_opflag, uint32_t transfer_ctx,
+				 uint32_t data_transfer_handle,
+				 uint32_t req_section_offset,
+				 uint32_t req_section_length,
+				 struct pldm_msg *msg, size_t payload_length)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length != PLDM_MULTIPART_RECEIVE_REQ_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_REQUEST;
+	header.pldm_type = PLDM_BASE;
+	header.command = PLDM_MULTIPART_RECEIVE;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_multipart_receive_req *request =
+		(struct pldm_multipart_receive_req *)msg->payload;
+	request->pldm_type = pldm_type;
+	request->transfer_opflag = transfer_opflag;
+	request->transfer_ctx = htole32(transfer_ctx);
+	request->transfer_handle = htole32(data_transfer_handle);
+	request->section_offset = htole32(req_section_offset);
+	request->section_length = htole32(req_section_length);
+
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_multipart_receive_resp(const struct pldm_msg *msg,
+				  size_t payload_length,
+				  uint8_t *completion_code,
+				  uint8_t *transfer_opflag,
+				  uint32_t *transfer_handle,
+				  uint32_t *data_length, uint8_t **data,
+				  uint32_t *data_integrity_checksum)
+{
+	if (msg == NULL || completion_code == NULL || transfer_opflag == NULL ||
+	    transfer_handle == NULL || data_length == NULL ||
+	    data_integrity_checksum == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	*completion_code = msg->payload[0];
+
+	if (PLDM_SUCCESS != *completion_code) {
+		return *completion_code;
+	}
+
+	if (payload_length < PLDM_MULTIPART_RECEIVE_RESP_MIN_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_multipart_receive_min_resp *response =
+		(struct pldm_multipart_receive_min_resp *)msg->payload;
+
+	*transfer_opflag = response->transfer_opflag;
+	*transfer_handle = le32toh(response->next_transfer_handle);
+	*data_length = le32toh(response->data_length);
+
+	if (*data_length > 0) {
+		*data = (uint8_t *)(msg->payload +
+				    PLDM_MULTIPART_RECEIVE_RESP_MIN_BYTES);
+	}
+
+	if (*transfer_opflag == PLDM_XFER_END) {
+		*data_integrity_checksum = le32toh(
+			*(uint32_t *)(msg->payload +
+				      PLDM_MULTIPART_RECEIVE_RESP_MIN_BYTES +
+				      response->data_length));
+	}
+
+	return PLDM_SUCCESS;
+}
+
 LIBPLDM_ABI_STABLE
 int encode_cc_only_resp(uint8_t instance_id, uint8_t type, uint8_t command,
 			uint8_t cc, struct pldm_msg *msg)

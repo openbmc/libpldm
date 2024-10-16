@@ -67,6 +67,14 @@ enum transfer_multipart_op_flag {
 	PLDM_XFER_CURRENT_PART = 4,
 };
 
+enum transfer_resp_multipart_op_flag {
+	PLDM_XFER_START = 0x01,
+	PLDM_XFER_MIDDLE = 0x02,
+	PLDM_XFER_END = 0x04,
+	PLDM_XFER_START_AND_END = 0x05,
+	PLDM_XFER_ACKNOWLEDGEMENT_COMPLETION = 0x08,
+};
+
 enum transfer_resp_flag {
 	PLDM_START = 0x01,
 	PLDM_MIDDLE = 0x02,
@@ -109,8 +117,9 @@ typedef enum {
 #define PLDM_SET_TID_RESP_BYTES	     1
 #define PLDM_GET_COMMANDS_RESP_BYTES 33
 /* Response data has only one version and does not contain the checksum */
-#define PLDM_GET_VERSION_RESP_BYTES	 10
-#define PLDM_MULTIPART_RECEIVE_REQ_BYTES 18
+#define PLDM_GET_VERSION_RESP_BYTES	      10
+#define PLDM_MULTIPART_RECEIVE_REQ_BYTES      18
+#define PLDM_MULTIPART_RECEIVE_RESP_MIN_BYTES 10
 
 #define PLDM_VERSION_0	     0
 #define PLDM_CURRENT_VERSION PLDM_VERSION_0
@@ -333,6 +342,18 @@ struct pldm_multipart_receive_req {
 	uint32_t section_length;  //!< The length (in bytes) of the section
 				  //!< requested.
 } __attribute__((packed));
+
+/** @struct pldm_multipart_receive_resp
+ *
+ *  Structure representing PLDM multipart receive response.
+ */
+struct pldm_multipart_receive_min_resp {
+	uint8_t completion_code;
+	uint8_t transfer_opflag;
+	uint32_t next_transfer_handle;
+	uint32_t data_length;
+} __attribute__((packed));
+
 /**
  * @brief Populate the PLDM message with the PLDM header.The caller of this API
  *        allocates buffer for the PLDM header when forming the PLDM message.
@@ -625,6 +646,49 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 				 uint32_t *transfer_handle,
 				 uint32_t *section_offset,
 				 uint32_t *section_length);
+
+/** @brief Encode a PLDM MultipartReceive request message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] pldm_type - PLDM Type
+ *  @param[in] transfer_opflag - Transfer Flag
+ *  @param[in] transfer_ctx - The context of the packet
+ *  @param[in] data_transfer_handle - The handle of data
+ *  @param[in] req_section_offset - The start of the requested section
+ *  @param[in] req_section_length - The length of the requested section
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in] payload_length - length of request message payload
+ *  @return pldm_completion_codes
+ */
+int encode_multipart_receive_req(uint8_t instance_id, uint8_t pldm_type,
+				 uint8_t transfer_opflag, uint32_t transfer_ctx,
+				 uint32_t data_transfer_handle,
+				 uint32_t req_section_offset,
+				 uint32_t req_section_length,
+				 struct pldm_msg *msg, size_t payload_length);
+
+/** @brief Decode a PLDM MultipartReceive response message
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - length of request message payload
+ *  @param[out] completion_code - the completion code
+ *  @param[out] transfer_opflag - Transfer Flag
+ *  @param[out] transfer_handle - The handle of data
+ *  @param[out] data_length - The length of response data
+ *  @param[out] data - The pointer points into
+ *      msg.payload and therefore has the same lifetime as msg.payload.
+ *  @param[out] data_integrity_checksum - The checksum of response data
+ *  @return pldm_completion_codes
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *     'msg.payload'
+ */
+int decode_multipart_receive_resp(const struct pldm_msg *msg,
+				  size_t payload_length,
+				  uint8_t *completion_code,
+				  uint8_t *transfer_opflag,
+				  uint32_t *transfer_handle,
+				  uint32_t *data_length, uint8_t **data,
+				  uint32_t *data_integrity_checksum);
 
 /** @brief Create a PLDM response message containing only cc
  *
