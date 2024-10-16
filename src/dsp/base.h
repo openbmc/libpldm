@@ -7,6 +7,8 @@
 #include "compiler.h"
 #include <libpldm/base.h>
 
+#define PLDM_BASE_MULTIPART_RECEIVE_RESP_MIN_BYTES 10
+
 int pack_pldm_header_errno(const struct pldm_header_info *hdr,
 			   struct pldm_msg_hdr *msg);
 
