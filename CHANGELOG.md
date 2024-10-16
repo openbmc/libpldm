@@ -32,6 +32,8 @@ Change categories:
 
 - pdr: Add pldm_pdr_delete_by_record_handle() API
 
+- base: Add encode req & decode resp for MultipartReceive
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
