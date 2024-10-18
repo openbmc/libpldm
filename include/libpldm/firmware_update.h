@@ -8,6 +8,7 @@ extern "C" {
 
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
+#include <libpldm/compiler.h>
 
 #include "stdbool.h"
 #include <stddef.h>
@@ -557,6 +558,22 @@ struct pldm_query_downstream_identifiers_resp {
 	uint8_t transfer_flag;
 	uint32_t downstream_devices_length;
 	uint16_t number_of_downstream_devices;
+	struct pldm_downstream_device *downstream_devices;
+	size_t data_length;
+#ifndef __cplusplus
+	unsigned char data[] LIBPLDM_CC_COUNTED_BY(data_length);
+#endif
+};
+
+/** @struct pldm_fw_descriptor
+ *
+ *  Structure representing descriptor type, length and value
+ *  defined in Table 7 - Initial Descriptor ub DSP0267_1.1.0
+ */
+struct pldm_fw_descriptor {
+	uint16_t descriptor_type;
+	uint16_t descriptor_length;
+	unsigned char *descriptor_data;
 };
 
 /** @struct pldm_downstream_device
@@ -567,6 +584,7 @@ struct pldm_query_downstream_identifiers_resp {
 struct pldm_downstream_device {
 	uint16_t downstream_device_index;
 	uint8_t downstream_descriptor_count;
+	struct pldm_fw_descriptor *downstream_descriptors;
 };
 #define PLDM_DOWNSTREAM_DEVICE_BYTES 3
 
@@ -1005,8 +1023,10 @@ int encode_query_downstream_identifiers_req(
  * @brief Decodes the response message for Querying Downstream Identifiers.
  * @param[in] msg The PLDM message to decode.
  * @param[in] payload_length The length of the message payload.
- * @param[out] resp_data Pointer to the decoded response data.
- * @param[out] downstream_devices Pointer to the downstream devices.
+ * @param[out] resp_data Decoded response data.
+ * @param[in] resp_length Allocated length of response data.
+ * @param[out] device_data Device data to be decode.
+ * @param[out] total_descriptors Total descriptors that the device have.
  * @return pldm_completion_codes
  *
  * @note Caller is responsible for memory alloc and dealloc of pointer params
@@ -1014,7 +1034,29 @@ int encode_query_downstream_identifiers_req(
 int decode_query_downstream_identifiers_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_query_downstream_identifiers_resp *resp_data,
-	struct variable_field *downstream_devices);
+	size_t resp_length, struct variable_field *device_data,
+	size_t *total_descriptors);
+
+/**
+ * @brief Decodes the response data for Querying Downstream Identifiers,
+ *        extracts length informan
+ * @param[in] device_data The device data to decode.
+ * @param[in] resp_data The response data to provide for decoding.
+ * @param[in] resp_length The length of response data.
+ * @param[out] devices Decoded devices.
+ * @param[out] device_length The count of devices.
+ * @param[out] pldm_fw_descriptor pldm descriptors that all the device have.
+ * @param[out] descriptor_length The count of descriptors.
+ * @return pldm_completion_codes
+ *
+ * @note Caller is responsible for memory alloc and dealloc of pointer params
+ */
+int decode_query_downstream_identifiers_index(
+	const struct variable_field *device_data,
+	struct pldm_query_downstream_identifiers_resp *resp_data,
+	size_t resp_length, struct pldm_downstream_device *devices,
+	size_t devices_length, struct pldm_fw_descriptor *descriptors,
+	size_t descriptors_length);
 
 /**
  * @brief Encodes request message for Get Downstream Firmware Parameters.
