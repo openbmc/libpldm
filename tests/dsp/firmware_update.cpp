@@ -1520,15 +1520,22 @@ TEST(QueryDownstreamIdentifiers, encodeRequestInvalidErrorPaths)
 #ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, goodPathDecodeResponse)
 {
-    // Len is not fixed here taking it as 9, contains 1 downstream device with
-    // 1 descriptor
-    constexpr uint32_t downstreamDevicesLen = 9;
+    // Len involve 1 downstream device and 1 descriptor
+    constexpr uint32_t downstreamDevicesLen =
+        PLDM_DOWNSTREAM_DEVICE_BYTES + PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN;
     constexpr uint8_t complition_code_resp = PLDM_SUCCESS;
     constexpr uint32_t next_data_transfer_handle_resp = 0x0;
     constexpr uint8_t transfer_flag_resp = PLDM_START_AND_END;
     const uint32_t downstream_devices_length_resp =
         htole32(downstreamDevicesLen);
     constexpr uint16_t number_of_downstream_devices_resp = 1;
+    // For pldm_downstream_device
+    constexpr uint16_t downstream_device_index = 0;
+    constexpr uint8_t downstream_descriptor_count = 1;
+    // For pldm_fw_descriptor
+    constexpr uint16_t descriptor_type = 0xFFFF;
+    constexpr uint16_t descriptor_length = 1;
+
     std::array<uint8_t, hdrSize +
                             PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN +
                             downstreamDevicesLen>
@@ -1537,32 +1544,35 @@ TEST(QueryDownstreamIdentifiers, goodPathDecodeResponse)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(buf, 0, responseMsg.data() + hdrSize,
-                             responseMsg.size() - hdrSize);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
+                                responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, 0);
 
+    // Insert response header
     pldm_msgbuf_insert_uint8(buf, complition_code_resp);
     pldm_msgbuf_insert_uint32(buf, next_data_transfer_handle_resp);
     pldm_msgbuf_insert_uint8(buf, transfer_flag_resp);
     pldm_msgbuf_insert_uint32(buf, downstream_devices_length_resp);
     pldm_msgbuf_insert_uint16(buf, number_of_downstream_devices_resp);
+    // Insert downstream device
+    pldm_msgbuf_insert_uint16(buf, downstream_device_index);
+    pldm_msgbuf_insert_uint8(buf, downstream_descriptor_count);
+    // Insert descriptor
+    pldm_msgbuf_insert_uint16(buf, descriptor_type);
+    pldm_msgbuf_insert_uint16(buf, descriptor_length);
 
-    /** Filling descriptor data, the correctness of the downstream devices data
-     *  is not checked in this test case so filling with 0xff
-     */
-    std::fill_n(responseMsg.data() + hdrSize +
-                    PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN,
-                downstreamDevicesLen, 0xff);
-
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto response = new (responseMsg.data()) pldm_msg;
     struct pldm_query_downstream_identifiers_resp resp_data = {};
-    struct variable_field downstreamDevices = {};
+    struct variable_field deviceData = {};
+    size_t total_descriptors = 0;
 
     rc = decode_query_downstream_identifiers_resp(
-        response, responseMsg.size() - hdrSize, &resp_data, &downstreamDevices);
+        response, responseMsg.size() - hdrSize, &resp_data,
+        responseMsg.size() - hdrSize + sizeof(resp_data), &deviceData,
+        &total_descriptors);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    // Varify response header
+    EXPECT_EQ(rc, 0);
     EXPECT_EQ(resp_data.completion_code, complition_code_resp);
     EXPECT_EQ(resp_data.next_data_transfer_handle,
               next_data_transfer_handle_resp);
@@ -1571,13 +1581,35 @@ TEST(QueryDownstreamIdentifiers, goodPathDecodeResponse)
               downstream_devices_length_resp);
     EXPECT_EQ(resp_data.number_of_downstream_devices,
               number_of_downstream_devices_resp);
-    EXPECT_EQ(downstreamDevices.length, downstreamDevicesLen);
-    EXPECT_EQ(true,
-              std::equal(downstreamDevices.ptr,
-                         downstreamDevices.ptr + downstreamDevices.length,
-                         responseMsg.begin() + hdrSize +
-                             PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN,
-                         responseMsg.end()));
+    // Device data would be varified in another test
+    // Varify total descriptors
+    EXPECT_EQ(total_descriptors, downstream_descriptor_count);
+
+    std::array<struct pldm_downstream_device, number_of_downstream_devices_resp>
+        devices{};
+    std::vector<struct pldm_fw_descriptor> descriptors(total_descriptors);
+
+    rc = decode_query_downstream_identifiers_index(
+        &deviceData, &resp_data,
+        responseMsg.size() - hdrSize + sizeof(resp_data), devices.data(),
+        resp_data.number_of_downstream_devices * sizeof(*devices.data()),
+        descriptors.data(), total_descriptors * sizeof(*descriptors.data()));
+    EXPECT_EQ(rc, 0);
+    for (const auto& device : devices)
+    {
+        EXPECT_EQ(device.downstream_device_index, downstream_device_index);
+        EXPECT_EQ(device.downstream_descriptor_count,
+                  downstream_descriptor_count);
+        for (size_t i = 0; i < device.downstream_descriptor_count; i++)
+        {
+            EXPECT_EQ(device.downstream_descriptors[i].descriptor_type,
+                      descriptor_type);
+            EXPECT_EQ(device.downstream_descriptors[i].descriptor_length,
+                      descriptor_length);
+           EXPECT_EQ(device.downstream_descriptors[i].descriptor_data,
+                     descriptors[i].descriptor_data);
+        }
+    }
 }
 #endif
 
@@ -1585,37 +1617,45 @@ TEST(QueryDownstreamIdentifiers, goodPathDecodeResponse)
 TEST(QueryDownstreamIdentifiers, decodeRequestErrorPaths)
 {
     std::array<uint8_t, hdrSize + sizeof(uint8_t)> responseMsg{};
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto response = new (responseMsg.data()) pldm_msg;
     struct pldm_query_downstream_identifiers_resp resp_data = {};
-    struct variable_field downstreamDevices = {};
+    struct variable_field deviceData = {};
+    size_t total_descriptors = 0;
 
     // Test nullptr
     auto rc = decode_query_downstream_identifiers_resp(
-        nullptr, responseMsg.size() - hdrSize, nullptr, &downstreamDevices);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+        nullptr, responseMsg.size() - hdrSize, nullptr,
+        responseMsg.size() - hdrSize + sizeof(resp_data), &deviceData,
+        &total_descriptors);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_query_downstream_identifiers_index(nullptr, nullptr, 0, nullptr,
+                                                   0, nullptr, 0);
+    EXPECT_EQ(rc, -EINVAL);
 
     // Test not PLDM_SUCCESS completion code
     response->payload[0] = PLDM_ERROR_UNSUPPORTED_PLDM_CMD;
     rc = decode_query_downstream_identifiers_resp(
-        response, responseMsg.size() - hdrSize, &resp_data, &downstreamDevices);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+        response, responseMsg.size() - hdrSize, &resp_data,
+        responseMsg.size() - hdrSize + sizeof(resp_data), &deviceData,
+        &total_descriptors);
+    EXPECT_EQ(rc, 0);
     EXPECT_EQ(resp_data.completion_code, PLDM_ERROR_UNSUPPORTED_PLDM_CMD);
 
     // Test payload length less than minimum length
     response->payload[0] = PLDM_SUCCESS;
     rc = decode_query_downstream_identifiers_resp(
-        response, responseMsg.size() - hdrSize, &resp_data, &downstreamDevices);
-
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+        response, responseMsg.size() - hdrSize, &resp_data,
+        responseMsg.size() - hdrSize + sizeof(resp_data), &deviceData,
+        &total_descriptors);
+    EXPECT_EQ(rc, -EINVAL);
 }
 #endif
 
 #ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
 {
-    // Len is not fixed here taking it as 9, contains 1 downstream device with
-    // 1 descriptor
+    // Len involve 1 downstream device and 1 descriptor
     constexpr uint32_t actualDownstreamDevicesLen = 9;
     constexpr uint8_t complition_code_resp = PLDM_SUCCESS;
     constexpr uint32_t next_data_transfer_handle_resp = 0x0;
@@ -1623,6 +1663,12 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
     const uint32_t downstream_devices_length_resp =
         htole32(actualDownstreamDevicesLen + 1 /* inject error length*/);
     constexpr uint16_t number_of_downstream_devices_resp = 1;
+    // For pldm_downstream_device
+    constexpr uint16_t downstream_device_index = 0;
+    constexpr uint8_t downstream_descriptor_count = 1;
+    // For pldm_fw_descriptor
+    constexpr uint16_t descriptor_type = 0xFFFF;
+    constexpr uint16_t descriptor_length = 1;
     std::array<uint8_t, hdrSize +
                             PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN +
                             actualDownstreamDevicesLen>
@@ -1631,48 +1677,33 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(buf, 0, responseMsg.data() + hdrSize,
-                             responseMsg.size() - hdrSize);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
+                                responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, 0);
 
+    // Insert response header
     pldm_msgbuf_insert_uint8(buf, complition_code_resp);
     pldm_msgbuf_insert_uint32(buf, next_data_transfer_handle_resp);
     pldm_msgbuf_insert_uint8(buf, transfer_flag_resp);
     pldm_msgbuf_insert_uint32(buf, downstream_devices_length_resp);
     pldm_msgbuf_insert_uint16(buf, number_of_downstream_devices_resp);
+    // Insert downstream device
+    pldm_msgbuf_insert_uint16(buf, downstream_device_index);
+    pldm_msgbuf_insert_uint8(buf, downstream_descriptor_count);
+    // Insert descriptor
+    pldm_msgbuf_insert_uint16(buf, descriptor_type);
+    pldm_msgbuf_insert_uint16(buf, descriptor_length);
 
-    /** Filling descriptor data, the correctness of the downstream devices data
-     *  is not checked in this test case so filling with 0xff
-     */
-    std::fill_n(responseMsg.data() + hdrSize +
-                    PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN,
-                actualDownstreamDevicesLen, 0xff);
-
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto response = new (responseMsg.data()) pldm_msg;
     struct pldm_query_downstream_identifiers_resp resp_data = {};
-    struct variable_field downstreamDevices = {};
+    struct variable_field devicesData = {};
+    size_t total_descriptors = 0;
 
-    /** In test mode, this will trigger an assert failure and cause the unit
-     * test to fail if only testing by the rc. Use ASSERT_DEATH to test this
-     * scenario.
-     *
-     *  The 1st parameter is the function under test.
-     *  The 2nd parameter compares the output of the program.
-     */
-#ifdef NDEBUG
     EXPECT_NE(decode_query_downstream_identifiers_resp(
                   response, responseMsg.size() - hdrSize, &resp_data,
-                  &downstreamDevices),
+                  responseMsg.size() - hdrSize + sizeof(resp_data),
+                  &devicesData, &total_descriptors),
               PLDM_SUCCESS);
-#else
-    EXPECT_DEATH(
-        decode_query_downstream_identifiers_resp(
-            response, responseMsg.size() - hdrSize, &resp_data,
-            &downstreamDevices),
-        // This error doesn't output any error message, leave it be empty
-        "");
-#endif
 }
 #endif
 
@@ -1695,9 +1726,9 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorBufSize)
 
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_cc(buf, 0, responseMsg.data() + hdrSize,
-                             responseMsg.size() - hdrSize);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
+                                responseMsg.size() - hdrSize);
+    EXPECT_EQ(rc, 0);
 
     pldm_msgbuf_insert_uint8(buf, complition_code_resp);
     pldm_msgbuf_insert_uint32(buf, next_data_transfer_handle_resp);
@@ -1706,20 +1737,22 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorBufSize)
     // Inject error buffer size
     pldm_msgbuf_insert_uint8(buf, (uint8_t)number_of_downstream_devices_resp);
 
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto response = new (responseMsg.data()) pldm_msg;
     struct pldm_query_downstream_identifiers_resp resp_data = {};
-    struct variable_field downstreamDevices = {};
+    struct variable_field devicesData = {};
+    size_t total_descriptors = 0;
 
     rc = decode_query_downstream_identifiers_resp(
-        response, responseMsg.size() - hdrSize, &resp_data, &downstreamDevices);
+        response, responseMsg.size() - hdrSize, &resp_data,
+        responseMsg.size() - hdrSize + sizeof(resp_data), &devicesData,
+        &total_descriptors);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EINVAL);
 }
 #endif
 
 #ifdef LIBPLDM_API_TESTING
-TEST(GetDownstreamFirmwareParameters, goodPathEncodeRequest)
+TEST(GetDownstreamFirmwareParameters, decodeRequestErrorBufSize)
 {
     constexpr uint8_t instanceId = 1;
     constexpr uint32_t dataTransferHandle = 0x0;
