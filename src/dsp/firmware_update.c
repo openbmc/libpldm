@@ -987,19 +987,22 @@ LIBPLDM_ABI_TESTING
 int decode_query_downstream_identifiers_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_query_downstream_identifiers_resp *resp_data,
-	struct variable_field *downstream_devices)
+	size_t resp_length, struct variable_field *device_data,
+	size_t *total_descriptors)
 {
 	struct pldm_msgbuf _buf;
 	struct pldm_msgbuf *buf = &_buf;
-	int rc = PLDM_ERROR;
+	int rc = 0;
 
-	if (msg == NULL || resp_data == NULL || downstream_devices == NULL ||
-	    !payload_length) {
-		return PLDM_ERROR_INVALID_DATA;
+	if (!msg || !resp_data || !device_data || !total_descriptors) {
+		return -EINVAL;
 	}
+	/*if (resp_length < sizeof(*resp_data)) {
+		return -EINVAL;
+	}*/
 
-	rc = pldm_msgbuf_init_cc(buf, PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN,
-				 msg->payload, payload_length);
+	rc = pldm_msgbuf_init_errno(buf, PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN,
+				    msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -1009,31 +1012,170 @@ int decode_query_downstream_identifiers_resp(
 		return rc;
 	}
 	if (PLDM_SUCCESS != resp_data->completion_code) {
-		return PLDM_SUCCESS;
+		return 0;
 	}
-
 	if (payload_length < PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EINVAL;
 	}
 
 	pldm_msgbuf_extract(buf, resp_data->next_data_transfer_handle);
 	pldm_msgbuf_extract(buf, resp_data->transfer_flag);
-
-	rc = pldm_msgbuf_extract(buf, resp_data->downstream_devices_length);
+	pldm_msgbuf_extract(buf, resp_data->downstream_devices_length);
+	rc = pldm_msgbuf_extract(buf, resp_data->number_of_downstream_devices);
 	if (rc) {
 		return rc;
 	}
 
-	pldm_msgbuf_extract(buf, resp_data->number_of_downstream_devices);
-	rc = pldm_msgbuf_span_required(buf,
-				       resp_data->downstream_devices_length,
-				       (void **)&downstream_devices->ptr);
+	resp_data->downstream_devices = NULL;
+	pldm_msgbuf_span_remaining(buf, (void **)&device_data->ptr,
+				   &device_data->length);
+	rc = pldm_msgbuf_destroy_consumed(buf);
 	if (rc) {
 		return rc;
 	}
-	downstream_devices->length = resp_data->downstream_devices_length;
 
-	return pldm_msgbuf_destroy(buf);
+	rc = pldm_msgbuf_init_errno(buf, device_data->length, device_data->ptr,
+				    device_data->length);
+	if (rc) {
+		return rc;
+	}
+
+	size_t count = 0;
+	for (uint16_t i = 0; i < resp_data->number_of_downstream_devices; i++) {
+		struct pldm_downstream_device dev;
+		pldm_msgbuf_extract(buf, dev.downstream_device_index);
+		rc = pldm_msgbuf_extract(buf, dev.downstream_descriptor_count);
+		if (rc) {
+			return rc;
+		}
+
+		for (uint8_t j = 0; j < dev.downstream_descriptor_count; j++) {
+			struct pldm_descriptor_tlv tlv;
+			pldm_msgbuf_extract(buf, tlv.descriptor_type);
+			rc = pldm_msgbuf_extract(buf, tlv.descriptor_length);
+			if (rc) {
+				return rc;
+			}
+			/* Skip over the data now */
+			pldm_msgbuf_span_required(buf, tlv.descriptor_length,
+						  NULL);
+		}
+
+		if (SIZE_MAX - count < dev.downstream_descriptor_count) {
+			return -EOVERFLOW;
+		}
+		count += dev.downstream_descriptor_count;
+	}
+	*total_descriptors = count;
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_query_downstream_identifiers_index(
+	const struct variable_field *device_data,
+	struct pldm_query_downstream_identifiers_resp *resp_data,
+	size_t resp_length, struct pldm_downstream_device *devices,
+	size_t devices_length, struct pldm_fw_descriptor *descriptors,
+	size_t descriptors_length)
+{
+	struct pldm_msgbuf _src;
+	struct pldm_msgbuf *src = &_src;
+	struct pldm_msgbuf _dst;
+	struct pldm_msgbuf *dst = &_dst;
+
+	int rc = 0;
+
+	if (!device_data || !resp_data || !devices || !descriptors) {
+		return -EINVAL;
+	}
+	if (resp_length < sizeof(*resp_data)) {
+		return -EINVAL;
+	}
+	if (devices_length / sizeof(*devices) !=
+	    resp_data->number_of_downstream_devices) {
+		return -EINVAL;
+	}
+
+	resp_data->data_length = resp_length - sizeof(*resp_data);
+
+	rc = pldm_msgbuf_init_errno(src, device_data->length, device_data->ptr,
+				    device_data->length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(dst, resp_data->data_length,
+				    resp_data->data, resp_data->data_length);
+	if (rc) {
+		return rc;
+	}
+
+	size_t consumed = 0;
+	for (uint16_t i = 0; i < resp_data->number_of_downstream_devices; i++) {
+		struct pldm_downstream_device *dev = &devices[i];
+		pldm_msgbuf_extract(src, dev->downstream_device_index);
+		rc = pldm_msgbuf_extract(src, dev->downstream_descriptor_count);
+		if (rc) {
+			return rc;
+		}
+
+		if (consumed + dev->downstream_descriptor_count >
+		    descriptors_length / sizeof(*descriptors)) {
+			return -EOVERFLOW;
+		}
+
+		dev->downstream_descriptors = &descriptors[consumed];
+
+		for (uint8_t j = 0; j < dev->downstream_descriptor_count;
+		     j++, consumed++) {
+			struct pldm_fw_descriptor *desc;
+
+			desc = &dev->downstream_descriptors[j];
+			pldm_msgbuf_extract(src, desc->descriptor_type);
+			rc = pldm_msgbuf_extract(src, desc->descriptor_length);
+			if (rc) {
+				return rc;
+			}
+			pldm__msgbuf_copy(dst, src, desc->descriptor_length,
+					  "skip");
+		}
+	}
+
+	rc = pldm_msgbuf_destroy_consumed(src);
+	if (rc) {
+		return rc;
+	}
+
+	/* Don't use pldm_msgbuf_destroy_consumed() here, we want to allow over-allocation */
+	rc = pldm_msgbuf_destroy(dst);
+	if (rc) {
+		return rc;
+	}
+
+	/* Do a second pass to fix up the identifier data */
+	rc = pldm_msgbuf_init_errno(src, resp_data->data_length,
+				    resp_data->data, resp_data->data_length);
+
+	for (uint16_t i = 0; i < resp_data->number_of_downstream_devices; i++) {
+		struct pldm_downstream_device *dev = &devices[i];
+		for (uint8_t j = 0; j < dev->downstream_descriptor_count; j++) {
+			struct pldm_fw_descriptor *desc =
+				&dev->downstream_descriptors[j];
+
+			pldm_msgbuf_span_required(
+				src, desc->descriptor_length,
+				(void **)&desc->descriptor_data);
+		}
+	}
+
+	rc = pldm_msgbuf_destroy(src);
+	if (rc) {
+		return rc;
+	}
+
+	resp_data->downstream_devices = devices;
+
+	return 0;
 }
 
 LIBPLDM_ABI_TESTING
