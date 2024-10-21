@@ -1302,7 +1302,6 @@ TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
                         outPendingCompVerStr.length));
 }
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamDevices, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
@@ -1318,9 +1317,7 @@ TEST(QueryDownstreamDevices, goodPathEncodeRequest)
     EXPECT_EQ(requestPtr->hdr.type, PLDM_FWUP);
     EXPECT_EQ(requestPtr->hdr.command, PLDM_QUERY_DOWNSTREAM_DEVICES);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamDevices, encodeRequestInvalidData)
 {
     constexpr uint8_t instanceId = 1;
@@ -1329,9 +1326,7 @@ TEST(QueryDownstreamDevices, encodeRequestInvalidData)
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamDevices, goodPathDecodeResponse)
 {
     uint8_t completion_code_resp = PLDM_SUCCESS;
@@ -1378,9 +1373,7 @@ TEST(QueryDownstreamDevices, goodPathDecodeResponse)
               max_number_of_downstream_devices_resp);
     EXPECT_EQ(resp_data.capabilities.value, capabilities_resp.value);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamDevices, decodeRequestUndefinedValue)
 {
     uint8_t completion_code_resp = PLDM_SUCCESS;
@@ -1418,9 +1411,7 @@ TEST(QueryDownstreamDevices, decodeRequestUndefinedValue)
 
     ASSERT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamDevices, decodeRequestErrorBufSize)
 {
     uint8_t completion_code_resp = PLDM_SUCCESS;
@@ -1461,9 +1452,7 @@ TEST(QueryDownstreamDevices, decodeRequestErrorBufSize)
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
@@ -1484,9 +1473,7 @@ TEST(QueryDownstreamIdentifiers, goodPathEncodeRequest)
         expectedReq{0x81, 0x05, 0x04, 0xFF, 0xFF, 0xFF, 0xFF, 0x01};
     EXPECT_EQ(requestMsg, expectedReq);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, encodeRequestInvalidErrorPaths)
 {
     constexpr uint8_t instanceId = 1;
@@ -1515,9 +1502,7 @@ TEST(QueryDownstreamIdentifiers, encodeRequestInvalidErrorPaths)
                                                  requestPtr, payload_length);
     EXPECT_EQ(rc, PLDM_INVALID_TRANSFER_OPERATION_FLAG);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, goodPathDecodeResponse)
 {
     // Len involve 1 downstream device and 1 descriptor
@@ -1611,9 +1596,7 @@ TEST(QueryDownstreamIdentifiers, goodPathDecodeResponse)
         }
     }
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeRequestErrorPaths)
 {
     std::array<uint8_t, hdrSize + sizeof(uint8_t)> responseMsg{};
@@ -1650,9 +1633,7 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorPaths)
         &total_descriptors);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
 {
     // Len involve 1 downstream device and 1 descriptor
@@ -1706,9 +1687,7 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
                   &devicesData, &total_descriptors),
               PLDM_SUCCESS);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeRequestErrorBufSize)
 {
     constexpr uint32_t actualDownstreamDevicesLen = 0;
@@ -1750,9 +1729,7 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorBufSize)
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetDownstreamFirmwareParameters, decodeRequestErrorBufSize)
 {
     constexpr uint8_t instanceId = 1;
@@ -1773,9 +1750,7 @@ TEST(GetDownstreamFirmwareParameters, decodeRequestErrorBufSize)
         expectedReq{0x81, 0x05, 0x05, 0x00, 0x00, 0x00, 0x00, 0x01};
     EXPECT_EQ(requestMsg, expectedReq);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetDownstreamFirmwareParameters, encodeRequestInvalidTransferOperationFlag)
 {
     constexpr uint8_t instanceId = 1;
@@ -1794,9 +1769,7 @@ TEST(GetDownstreamFirmwareParameters, encodeRequestInvalidTransferOperationFlag)
         payload_length);
     EXPECT_EQ(rc, -EBADMSG);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetDownstreamFirmwareParameters, encodeRequestErrorBufSize)
 {
     constexpr uint8_t instanceId = 1;
@@ -1817,9 +1790,7 @@ TEST(GetDownstreamFirmwareParameters, encodeRequestErrorBufSize)
         payload_length);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponse)
 {
     /** Count is not fixed here taking it as 1, and the downstream device's
@@ -1893,9 +1864,7 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponse)
                              PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN,
                          responseMsg.end()));
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetDownstreamFirmwareParameters, decodeResponseInvalidLength)
 {
     /** Count is not fixed here taking it as 1, and the downstream device's
@@ -1957,9 +1926,7 @@ TEST(GetDownstreamFirmwareParameters, decodeResponseInvalidLength)
                   &downstreamDeviceParamTable, &entry, &versions),
               0);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamDeviceParamTable)
 {
     // Arbitrary downstream device index
@@ -2079,9 +2046,7 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamDeviceParamTable)
                         pendingCompVerStrLen));
     EXPECT_EQ('\0', entry_version.pending_comp_ver_str[pendingCompVerStrLen]);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamTableVersions)
 {
     // Arbitrary component version string length
@@ -2123,9 +2088,7 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamTableVersions)
     EXPECT_EQ('\0',
               entryVersion.entry.pending_comp_ver_str[activeCompVerStrLen]);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetDownstreamFirmwareParameters, decodeInvalidDownstreamTableVersions)
 {
     // Arbitrary ActiveVersionStr and pendingVersionStr
@@ -2145,9 +2108,7 @@ TEST(GetDownstreamFirmwareParameters, decodeInvalidDownstreamTableVersions)
         sizeof(entryVersion.pending_comp_ver_str));
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(GetDownstreamFirmwareParameters, decodeOverflowDownstreamTableVersions)
 {
     // Arbitrary component version string length
@@ -2174,7 +2135,6 @@ TEST(GetDownstreamFirmwareParameters, decodeOverflowDownstreamTableVersions)
                   sizeof(entryVersion.pending_comp_ver_str)),
               -EOVERFLOW);
 }
-#endif
 
 TEST(RequestUpdate, goodPathEncodeRequest)
 {
