@@ -880,7 +880,7 @@ int decode_get_firmware_parameters_resp_comp_entry(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_query_downstream_devices_req(uint8_t instance_id,
 					struct pldm_msg *msg)
 {
@@ -892,7 +892,7 @@ int encode_query_downstream_devices_req(uint8_t instance_id,
 				       PLDM_QUERY_DOWNSTREAM_DEVICES, msg);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_query_downstream_devices_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_query_downstream_devices_resp *resp_data)
@@ -947,7 +947,7 @@ int decode_query_downstream_devices_resp(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_query_downstream_identifiers_req(
 	uint8_t instance_id, uint32_t data_transfer_handle,
 	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
@@ -994,7 +994,7 @@ int encode_query_downstream_identifiers_req(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_query_downstream_identifiers_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_query_downstream_identifiers_resp *resp_data,
@@ -1044,8 +1044,8 @@ int decode_query_downstream_identifiers_resp(
 	if (rc) {
 		return pldm_xlate_errno(rc);
 	}
-	if (device_data->length != resp_data->downstream_devices_length) {
-		return PLDM_ERROR_INVALID_LENGTH;
+	if (device_data->length < resp_data->downstream_devices_length) {
+		return device_data->length;
 	}
 
 	rc = pldm_msgbuf_init_errno(buf, device_data->length, device_data->ptr,
@@ -1088,7 +1088,7 @@ int decode_query_downstream_identifiers_resp(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_query_downstream_identifiers_index(
 	const struct variable_field *device_data,
 	struct pldm_query_downstream_identifiers_resp *resp_data,
@@ -1202,7 +1202,7 @@ int decode_query_downstream_identifiers_index(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_get_downstream_firmware_params_req(
 	uint8_t instance_id, uint32_t data_transfer_handle,
 	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
@@ -1244,7 +1244,7 @@ int encode_get_downstream_firmware_params_req(
 	return pldm_msgbuf_destroy(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_get_downstream_firmware_params_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_get_downstream_firmware_params_resp *resp_data,
@@ -1288,7 +1288,7 @@ int decode_get_downstream_firmware_params_resp(
 		&downstream_device_param_table->length);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_downstream_device_parameter_table_entry(
 	struct variable_field *data,
 	struct pldm_downstream_device_parameter_entry *entry,
@@ -1371,7 +1371,7 @@ int decode_downstream_device_parameter_table_entry(
 	return 0;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_downstream_device_parameter_table_entry_versions(
 	const struct variable_field *versions,
 	struct pldm_downstream_device_parameter_entry *entry, char *active,
