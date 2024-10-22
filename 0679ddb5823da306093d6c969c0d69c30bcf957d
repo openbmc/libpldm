@@ -16,6 +16,24 @@
       "message": "Hi Unive,\n\nAs a general note I don\u0027t merge stablisation patches until the comments on the linked changes are resolved. There\u0027s still the issue of the subsequent parsing that\u0027s not yet implemented in libpldm in the first patch. I\u0027d like to get that resolved before we merge this, as it may impact API decisions.",
       "revId": "0679ddb5823da306093d6c969c0d69c30bcf957d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c914bef3_42997d98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-10-22T09:40:40Z",
+      "side": 1,
+      "message": "The linked changes refer to pldm/[70731] and pldm/[70732] are now merged to one patch pldm/[75390], all of the reviewer\u0027s suggestion are applied to the new patch, rebased and reset this patch to active.\n\n[70731]: https://gerrit.openbmc.org/c/openbmc/pldm/+/70731\n[70732]: https://gerrit.openbmc.org/c/openbmc/pldm/+/70732\n[75390]: https://gerrit.openbmc.org/c/openbmc/pldm/+/75390",
+      "parentUuid": "47aa2e82_df0da1ae",
+      "revId": "0679ddb5823da306093d6c969c0d69c30bcf957d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
