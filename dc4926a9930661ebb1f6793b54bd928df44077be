@@ -1,0 +1,340 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e015a3a5_ed0ba597",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "These are all static functions, and not part of the public library API, right? Can you please make that clear in the text? Otherwise this sounds like an ABI break.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 37
+      },
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86b9ae5b_65ddf301",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "Please remove this blank line.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08587f0_686ac5c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "Hi Archana, thanks for the improvements. I\u0027ve left another round of comments as I still think it\u0027s possible to reduce the tedium of the tests. I also have some queries on the implementation.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "911ca9b5_13bf75b7",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "This needs an underflow check.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f626b67_01f00563",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "This needs an overflow check.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f32bf56_5e80c958",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "Hmm, is this an error case though?\n\nI think it would be a good idea to add a comment here explaining the behaviour.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ddaefe_641a868a",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "This needs an overflow check.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90268e4e_1bc2b3b2",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "This seems like a strange condition. Can we please have some documentation?",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35506d44_b6338bf5",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "This needs an overflow check.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e61ac94a_149691b8",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "This seems odd. Why are we doing this? This should be the responsibility of the caller.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f15756a3_fa6babc3",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "Again here?",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26b3bad_775df4ff",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "So it occurs to me now that this might be better as `operator\u003d\u003d()` (possibly implemented by `operator\u003c\u003d\u003e()`?) on the associated struct?",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c97b1f2_36b25b75",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "793ef566_cbdc695c",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1556,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "Given that we know how many children are expected, I think we can integrate all this together and make our lives a little less clumsy. It may be that you end up merging the implementation of `getEntity()` into a loop over `.num_children` in the `getAssociationPdrDetails()` implementation.",
+      "range": {
+        "startLine": 1553,
+        "startChar": 0,
+        "endLine": 1556,
+        "endChar": 33
+      },
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4170f305_0a715e15",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1558,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "This should be `pldm_msgbuf_destroy_consumed()`?",
+      "range": {
+        "startLine": 1558,
+        "startChar": 14,
+        "endLine": 1558,
+        "endChar": 34
+      },
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "315b3e5f_94a73a0f",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "Can you pull this definition out and make it a `static constexpr const ...`? That way it will look less ugly but still hopefully allow the compiler to think about it a bit.\n\nPlease apply this approach for any similar remaining instances in the patch.",
+      "range": {
+        "startLine": 1562,
+        "startChar": 8,
+        "endLine": 1565,
+        "endChar": 49
+      },
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4388037_f1400d1d",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1619,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "Does the tree need to be so complex? Can we simplify it and still demonstrate the required properties?",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23a302e2_92b9b2a5",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-22T01:10:50Z",
+      "side": 1,
+      "message": "See the suggestion on line 1556. It should help here, and in each of the instances below.",
+      "range": {
+        "startLine": 1729,
+        "startChar": 1,
+        "endLine": 1735,
+        "endChar": 5
+      },
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
