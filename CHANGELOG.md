@@ -30,6 +30,7 @@ Change categories:
 8. base: Add size and buffer macros for struct pldm_msg
 
    Together these macros reduce the need for use of reinterpret_cast<>() in C++.
+9. entity: Add missing entity types from dsp0249 v1.3.0
 
 ### Changed
 
