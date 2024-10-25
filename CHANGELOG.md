@@ -32,6 +32,7 @@ Change categories:
    Together these macros reduce the need for use of reinterpret_cast<>() in C++.
 
 9. entity: Add new entity types from DSP0249 v1.3.0
+10. stateset: Add new state sets from DSP0249 v1.3.0
 
 ### Changed
 
