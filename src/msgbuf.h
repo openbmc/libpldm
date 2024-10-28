@@ -658,6 +658,35 @@ pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, size_t count,
 						      dst_count)
 
 LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint64(struct pldm_msgbuf *ctx,
+						       const uint64_t src)
+{
+	uint64_t val = htole64(src);
+
+	if (!ctx->cursor) {
+		return -EINVAL;
+	}
+
+	static_assert(
+		// NOLINTNEXTLINE(bugprone-sizeof-expression)
+		sizeof(src) < INTMAX_MAX,
+		"The following addition may not uphold the runtime assertion");
+
+	if (ctx->remaining >= (intmax_t)sizeof(src)) {
+		memcpy(ctx->cursor, &val, sizeof(val));
+		ctx->cursor += sizeof(src);
+		ctx->remaining -= sizeof(src);
+		return 0;
+	}
+
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)sizeof(src)) {
+		ctx->remaining -= sizeof(src);
+	}
+
+	return -EOVERFLOW;
+}
+
+LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx,
 						       const uint32_t src)
 {
@@ -834,7 +863,8 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int8(struct pldm_msgbuf *ctx,
 		uint16_t: pldm_msgbuf_insert_uint16,                           \
 		int16_t: pldm_msgbuf_insert_int16,                             \
 		uint32_t: pldm_msgbuf_insert_uint32,                           \
-		int32_t: pldm_msgbuf_insert_int32)(dst, src)
+		int32_t: pldm_msgbuf_insert_int32,                             \
+		uint64_t: pldm_msgbuf_insert_uint64)(dst, src)
 
 /**
  * @ref pldm_msgbuf_insert_array
@@ -1119,13 +1149,12 @@ pldm_msgbuf_peek_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 }
 
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_increment(struct pldm_msgbuf *ctx, size_t count)
+LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_increment(struct pldm_msgbuf *ctx,
+						   size_t count)
 {
 	if (!ctx->cursor) {
 		return -EINVAL;
 	}
-
 
 #if INTMAX_MAX < SIZE_MAX
 	if (count > INTMAX_MAX) {
