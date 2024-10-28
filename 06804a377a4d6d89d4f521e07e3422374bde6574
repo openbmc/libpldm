@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d510b011_e30c4a8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-28T00:59:26Z",
+      "side": 1,
+      "message": "Hi Dung, thanks for the rework so far. I\u0027ve highlighted a few more areas where changes are required.",
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "500f81c4_ca9d4820",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-28T00:59:26Z",
+      "side": 1,
+      "message": "Can we please have consistency between the type and member names? Either use `_xfer_` here or `_TRANSFER_` in the member names.",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 46
+      },
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3648ca7_2330c59b",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-28T00:59:26Z",
+      "side": 1,
+      "message": "Where\u0027s this used? It\u0027s not used by either of the function prototypes below, which appears to go against https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L126-L127",
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f12e01a_6fd99f51",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-28T00:59:26Z",
+      "side": 1,
+      "message": "See https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L117-L123",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 658,
+        "endChar": 71
+      },
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59e5dbec_d156159d",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-28T00:59:26Z",
+      "side": 1,
+      "message": "Please not for new APIs. See https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L168-L169\n\nAlso, something I\u0027ve been considering that I\u0027d like to experiment with here is requiring that `encode_*()` functions return `ssize_t`, with `-1` on error, and the size of the payload buffer consumed by the encoding on success.",
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac0ca02_6ffcbe01",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-28T00:59:26Z",
+      "side": 1,
+      "message": "See https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L117-L123",
+      "range": {
+        "startLine": 673,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 46
+      },
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24d57f86_a716c865",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-28T00:59:26Z",
+      "side": 1,
+      "message": "See https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L168-L169",
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d28d0ab6_38610dd2",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-28T00:59:26Z",
+      "side": 1,
+      "message": "Before the `pldm_msgbuf_init_errno()` call below, I think we need a call to `pldm_msg_has_error()` (from `src/dsp/base.h`). That way we cater to error responses before requiring the minimum buffer size be the expected response length.",
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
