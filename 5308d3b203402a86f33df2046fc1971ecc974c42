@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64e640b8_3aa9f00c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-30T00:57:00Z",
+      "side": 1,
+      "message": "can we use \"DSP0249\" here, as it\u0027s an acronym?",
+      "range": {
+        "startLine": 7,
+        "startChar": 34,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "5308d3b203402a86f33df2046fc1971ecc974c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bd5751f_47660d0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-30T00:57:00Z",
+      "side": 1,
+      "message": "I would like to avoid \"this commit\" type phrases in commit messages. Can you reword the description to avoid it?\n\nMaybe something like:\n\n\u003e Add entity types that are newly defined in v1.3.0 of DSP0249 Platform Level Data Model (PLDM) State Set Specification.",
+      "range": {
+        "startLine": 10,
+        "startChar": 32,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "5308d3b203402a86f33df2046fc1971ecc974c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10e623d7_b563af8c",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-30T00:57:00Z",
+      "side": 1,
+      "message": "Update as per the commit subject.",
+      "revId": "5308d3b203402a86f33df2046fc1971ecc974c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
