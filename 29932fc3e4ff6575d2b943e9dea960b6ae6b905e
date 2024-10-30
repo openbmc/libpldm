@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ec8e753_cfae29fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-30T01:02:12Z",
+      "side": 1,
+      "message": "Try to eliminate this one too.",
+      "range": {
+        "startLine": 10,
+        "startChar": 57,
+        "endLine": 10,
+        "endChar": 68
+      },
+      "revId": "29932fc3e4ff6575d2b943e9dea960b6ae6b905e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd59ed1d_0c485d3b",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-30T01:02:12Z",
+      "side": 1,
+      "message": "Update as per commit subject.",
+      "range": {
+        "startLine": 35,
+        "startChar": 46,
+        "endLine": 35,
+        "endChar": 53
+      },
+      "revId": "29932fc3e4ff6575d2b943e9dea960b6ae6b905e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e155014_b999c380",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-30T01:02:12Z",
+      "side": 1,
+      "message": "Typo: SIGNAL",
+      "range": {
+        "startLine": 60,
+        "startChar": 16,
+        "endLine": 60,
+        "endChar": 22
+      },
+      "revId": "29932fc3e4ff6575d2b943e9dea960b6ae6b905e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
