@@ -16,6 +16,24 @@
       "message": "Thanks Unive. I\u0027m going to take a little bit of time to experiment with the iteration thought I had. I\u0027ll report back.",
       "revId": "725cf9e7827cbf414a6efc7c821ee548b1c88453",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd3924e6_6fb33336",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-10-31T05:19:59Z",
+      "side": 1,
+      "message": "Hi Unive,\n\nSo I\u0027ve done another sketch for your consideration:\n\nhttps://gist.github.com/amboar/3c934d9e2e5383226d4975892e5dee89\n\nI think this is my preferred approach over splitting the API to handle the allocation as we have here (which I suggested to you in a previous sketch of related APIs: https://gist.github.com/amboar/c82ea6a9217d4d786b92733c0af7a451).\n\nI want to be clear that I\u0027m not flip-flopping just to be disruptive, rather, these thoughts have emerged over time. I\u0027ve polled a couple of people on the iterator concept and it\u0027s held up so far (with some tweaks suggested).\n\nIf you don\u0027t find it distasteful I\u0027m happy to do the rework your change here (and please accept my apologies for having you chase the first sketch).",
+      "parentUuid": "4f36338d_9cbe18cb",
+      "revId": "725cf9e7827cbf414a6efc7c821ee548b1c88453",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
