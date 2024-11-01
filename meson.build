@@ -11,7 +11,7 @@ project(
         'b_ndebug=if-release',
         'tests=' + (meson.is_subproject() ? 'disabled' : 'enabled'),
     ],
-    version: '0.9.1',
+    version: '0.10.0',
     meson_version: '>=1.3.0',
 )
 
