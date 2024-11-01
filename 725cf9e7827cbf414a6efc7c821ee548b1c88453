@@ -34,6 +34,24 @@
       "parentUuid": "4f36338d_9cbe18cb",
       "revId": "725cf9e7827cbf414a6efc7c821ee548b1c88453",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe53a220_0f5d9d6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-11-01T04:41:31Z",
+      "side": 1,
+      "message": "Hi Andrew,\n\n\u003e If you don\u0027t find it distasteful I\u0027m happy to do the rework your change here (and please accept my apologies for having you chase the first sketch).\n\nFor now I\u0027m rushing on another portion of PLDM Firmware update develoment and probably need your help this time.\n\n\u003e I want to be clear that I\u0027m not flip-flopping just to be disruptive, rather, these thoughts have emerged over time. I\u0027ve polled a couple of people on the iterator concept and it\u0027s held up so far (with some tweaks suggested).\n\nI would love to make all of these wonderful but unfortunately not allowed by the time limit. (Sorry I haven\u0027t tell you I have that concern so far) \nPLDM formal update development is a long distance running but this patch is the first step of all, there is still a long chain of patches floating in the air because there isn\u0027t a stable design to depend on, so I hope this is our last time spining around this patch.\nI\u0027m fully supported to make things better, but perhaps we can start a new ABI cycle to achieve that next time.\n\n\u003e So I\u0027ve done another sketch for your consideration:\n\u003e \n\u003e https://gist.github.com/amboar/3c934d9e2e5383226d4975892e5dee89\n\nLet me take some time to read it and give feedbeck to you, thank\u0027s for your work anyway.",
+      "parentUuid": "bd3924e6_6fb33336",
+      "revId": "725cf9e7827cbf414a6efc7c821ee548b1c88453",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
