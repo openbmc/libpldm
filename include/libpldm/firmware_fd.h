@@ -10,6 +10,7 @@ extern "C" {
 #include <libpldm/pldm.h>
 #include <libpldm/base.h>
 #include <libpldm/utils.h>
+#include <libpldm/control.h>
 #include <libpldm/firmware_update.h>
 
 struct pldm_firmware_component_standalone {
@@ -137,7 +138,8 @@ struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx,
 				   );
 
 pldm_requester_rc_t pldm_fd_setup(struct pldm_fd *fd, size_t pldm_fd_size,
-				  const struct pldm_fd_ops *ops, void *ops_ctx);
+				  const struct pldm_fd_ops *ops, void *ops_ctx,
+				  struct pldm_control *control);
 
 pldm_requester_rc_t pldm_fd_handle_msg(struct pldm_fd *fd,
 				       uint8_t remote_address,
