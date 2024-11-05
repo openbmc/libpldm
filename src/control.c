@@ -5,10 +5,26 @@
 #include <libpldm/pldm.h>
 #include <libpldm/utils.h>
 #include <libpldm/platform.h>
+#include <libpldm/control.h>
 #include <compiler.h>
 #include <msgbuf.h>
 
 #include "control-internal.h"
+
+#define PLDM_BASE_VERSIONS_COUNT 2
+static const uint32_t PLDM_BASE_VERSIONS[PLDM_BASE_VERSIONS_COUNT] = {
+	/* PLDM 1.1.0 is current implemented. */
+	0xf1f1f000,
+	/* CRC. Calculated with python:
+	hex(crccheck.crc.Crc32.calc(struct.pack('<I', 0xf1f1f000)))
+	*/
+	0x539dbeba,
+};
+const bitfield8_t PLDM_CONTROL_COMMANDS[32] = {
+	// 0x00..0x07
+	{ .byte = (1 << PLDM_GET_TID | 1 << PLDM_GET_PLDM_VERSION |
+		   1 << PLDM_GET_PLDM_TYPES | 1 << PLDM_GET_PLDM_COMMANDS) }
+};
 
 static pldm_requester_rc_t
 pldm_control_reply_error(uint8_t ccode, const struct pldm_header_info *req_hdr,
@@ -97,7 +113,7 @@ pldm_control_get_version(struct pldm_control *control,
 
 	/* encode_get_version_resp doesn't have length checking */
 	uint32_t required_resp_payload =
-		1 + 4 + 1 + v->version_count * sizeof(ver32_t);
+		1 + 4 + 1 + v->versions_count * sizeof(ver32_t);
 	if (*resp_payload_len < required_resp_payload) {
 		return PLDM_REQUESTER_RESP_MSG_TOO_SMALL;
 	}
@@ -106,7 +122,7 @@ pldm_control_get_version(struct pldm_control *control,
 	/* crc32 is included in the versions buffer */
 	cc = encode_get_version_resp(hdr->instance, PLDM_SUCCESS, 0,
 				     PLDM_START_AND_END, v->versions,
-				     v->version_count * sizeof(ver32_t), resp);
+				     v->versions_count * sizeof(ver32_t), resp);
 	if (cc) {
 		return pldm_control_reply_error(cc, hdr, resp,
 						resp_payload_len);
@@ -265,4 +281,62 @@ pldm_requester_rc_t pldm_control_handle_msg(struct pldm_control *control,
 	}
 
 	return rc;
+}
+
+LIBPLDM_ABI_TESTING
+pldm_requester_rc_t pldm_control_setup(struct pldm_control *control,
+				       size_t pldm_control_size)
+{
+	pldm_requester_rc_t rc;
+
+	if (pldm_control_size < sizeof(struct pldm_control)) {
+		assert(0);
+		return PLDM_REQUESTER_SETUP_FAIL;
+	}
+
+	memset(control, 0, sizeof(struct pldm_control));
+
+	rc = pldm_control_add_type(control, PLDM_BASE, &PLDM_BASE_VERSIONS,
+				   PLDM_BASE_VERSIONS_COUNT,
+				   PLDM_CONTROL_COMMANDS);
+	if (rc) {
+		return rc;
+	}
+
+	return PLDM_REQUESTER_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+pldm_requester_rc_t pldm_control_add_type(struct pldm_control *control,
+					  uint8_t pldm_type,
+					  const void *versions,
+					  size_t versions_count,
+					  const bitfield8_t *commands)
+{
+	if (versions_count < 2) {
+		/* At least one version must be provided, along with a CRC32 */
+		return PLDM_REQUESTER_SETUP_FAIL;
+	}
+
+	struct pldm_type_versions *v = NULL;
+	for (int i = 0; i < PLDM_CONTROL_MAX_VERSION_TYPES; i++) {
+		if (control->types[i].versions == NULL ||
+		    (control->types[i].versions != NULL &&
+		     control->types[i].pldm_type == pldm_type)) {
+			v = &control->types[i];
+			break;
+		}
+	}
+
+	if (!v) {
+		return PLDM_REQUESTER_SETUP_FAIL;
+		// No spare slots
+	}
+
+	v->pldm_type = pldm_type;
+	v->versions = versions;
+	v->versions_count = versions_count;
+	v->commands = commands;
+
+	return PLDM_REQUESTER_SUCCESS;
 }

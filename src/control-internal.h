@@ -18,7 +18,7 @@ struct pldm_type_versions {
 	/* NULL for unused entries */
 	const void *versions;
 	/* Includes the trailing crc32 entry */
-	uint8_t version_count;
+	uint8_t versions_count;
 
 	/* A buffer of 32 entries, for commands 0-0xff */
 	const bitfield8_t *commands;

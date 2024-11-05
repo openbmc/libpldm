@@ -11,6 +11,7 @@ extern "C" {
 #include <libpldm/pldm.h>
 #include <libpldm/base.h>
 #include <libpldm/utils.h>
+#include <libpldm/control.h>
 #include <libpldm/firmware_update.h>
 
 /** @struct pldm_firmware_component_standalone
@@ -242,7 +243,8 @@ struct pldm_fd;
  *
  * This will call pldm_fd_setup() on the allocated pldm_fd.
  */
-struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx);
+struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx,
+			    struct pldm_control *control);
 
 /** @brief Initialise a FD responder struct
  *
@@ -261,7 +263,8 @@ struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx);
  * @return PLDM_REQUESTER_SUCCESS, or a failure code.
  */
 pldm_requester_rc_t pldm_fd_setup(struct pldm_fd *fd, size_t pldm_fd_size,
-				  const struct pldm_fd_ops *ops, void *ops_ctx);
+				  const struct pldm_fd_ops *ops, void *ops_ctx,
+				  struct pldm_control *control);
 
 /** @brief Handle a PLDM Firmware Update message
  *
