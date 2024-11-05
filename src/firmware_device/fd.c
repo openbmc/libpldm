@@ -20,6 +20,33 @@ static const pldm_fd_time_t RETRY_TIME = 1000;
 static const uint8_t INSTANCE_ID_COUNT = 32;
 static const uint8_t PROGRESS_PERCENT_NOT_SUPPORTED = 101;
 
+#define PLDM_FD_VERSIONS_COUNT 2
+static const uint32_t PLDM_FD_VERSIONS[PLDM_FD_VERSIONS_COUNT] = {
+	/* Only PLDM Firmware 1.1.0 is current implemented. */
+	0xf1f1f000,
+	/* CRC. Calculated with python:
+	hex(crccheck.crc.Crc32.calc(struct.pack('<I', 0xf1f1f000)))
+	*/
+	0x539dbeba,
+};
+const bitfield8_t PLDM_FD_COMMANDS[32] = {
+	// 0x00..0x07
+	{ .byte = (1 << PLDM_QUERY_DEVICE_IDENTIFIERS |
+		   1 << PLDM_GET_FIRMWARE_PARAMETERS) },
+	{ 0 },
+	// 0x10..0x17
+	{ .byte = (1u << PLDM_REQUEST_UPDATE | 1u << PLDM_PASS_COMPONENT_TABLE |
+		   1u << PLDM_UPDATE_COMPONENT) >>
+		  0x10 },
+	// 0x18..0x1f
+	{
+		.byte = (1u << PLDM_ACTIVATE_FIRMWARE | 1u << PLDM_GET_STATUS |
+			 1u << PLDM_CANCEL_UPDATE_COMPONENT |
+			 1u << PLDM_CANCEL_UPDATE) >>
+			0x18,
+	},
+};
+
 static pldm_requester_rc_t
 pldm_fd_reply_error(uint8_t ccode, const struct pldm_header_info *req_hdr,
 		    struct pldm_msg *resp, size_t *resp_payload_len)
@@ -1131,8 +1158,11 @@ static pldm_requester_rc_t pldm_fd_progress_apply(struct pldm_fd *fd,
 
 LIBPLDM_ABI_TESTING
 pldm_requester_rc_t pldm_fd_setup(struct pldm_fd *fd, size_t pldm_fd_size,
+				  struct pldm_control *control,
 				  const struct pldm_fd_ops *ops, void *ops_ctx)
 {
+	pldm_requester_rc_t rc;
+
 	if (pldm_fd_size < sizeof(struct pldm_fd)) {
 		/* Safety check that sufficient storage was provided for *fd,
 		 * in case PLDM_SIZEOF_PLDM_FD is incorrect */
@@ -1141,6 +1171,16 @@ pldm_requester_rc_t pldm_fd_setup(struct pldm_fd *fd, size_t pldm_fd_size,
 	memset(fd, 0x0, sizeof(*fd));
 	fd->ops = ops;
 	fd->ops_ctx = ops_ctx;
+
+	if (control) {
+		rc = pldm_control_add_type(control, PLDM_FWUP,
+					   &PLDM_FD_VERSIONS,
+					   PLDM_FD_VERSIONS_COUNT,
+					   PLDM_FD_COMMANDS);
+		if (rc) {
+			return rc;
+		}
+	}
 
 	return PLDM_REQUESTER_SUCCESS;
 }
@@ -1221,7 +1261,8 @@ pldm_requester_rc_t pldm_fd_handle_msg(struct pldm_fd *fd,
 		break;
 	}
 
-	/* Dispatch command */
+	/* Dispatch command.
+	 Update PLDM_FD_COMMANDS if adding new handlers */
 	switch (hdr.command) {
 	case PLDM_QUERY_DEVICE_IDENTIFIERS:
 		rc = pldm_fd_qdi(fd, &hdr, req, req_payload_len, resp,
