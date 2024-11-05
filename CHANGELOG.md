@@ -54,6 +54,9 @@ Change categories:
 
 8. Add firmware update FD responder
 
+9. Add PLDM control responder. PLDM types and support commands/versions can be
+   registered.
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
