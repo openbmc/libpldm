@@ -4,6 +4,7 @@ libpldm_headers = files(
     'bios.h',
     'bios_table.h',
     'compiler.h',
+    'control.h',
     'entity.h',
     'firmware_fd.h',
     'firmware_update.h',
@@ -47,8 +48,16 @@ sizeof_pldm_fd = compiler.sizeof(
     prefix: '#include "firmware_device/fd-internal.h"',
     include_directories: [include_src, libpldm_include_dir],
 )
+sizeof_pldm_control = compiler.sizeof(
+    'struct pldm_control',
+    prefix: '#include "control-internal.h"',
+    include_directories: [include_src, libpldm_include_dir],
+)
 sizes_h = configure_file(
-    configuration: {'sizeof_pldm_fd': sizeof_pldm_fd},
+    configuration: {
+        'sizeof_pldm_fd': sizeof_pldm_fd,
+        'sizeof_pldm_control': sizeof_pldm_control,
+    },
     input: 'sizes.h.in',
     output: 'sizes.h',
     install: true,
