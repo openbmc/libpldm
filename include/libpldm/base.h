@@ -104,7 +104,9 @@ typedef enum {
 #define PLDM_GET_VERSION_REQ_BYTES  6
 
 /* Response lengths are inclusive of completion code */
+#define PLDM_GET_TYPES_REQ_BYTES     0
 #define PLDM_GET_TYPES_RESP_BYTES    9
+#define PLDM_GET_TID_REQ_BYTES	     0
 #define PLDM_GET_TID_RESP_BYTES	     2
 #define PLDM_SET_TID_RESP_BYTES	     1
 #define PLDM_GET_COMMANDS_RESP_BYTES 33
