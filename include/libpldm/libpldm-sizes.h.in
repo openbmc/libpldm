@@ -2,3 +2,6 @@
 
 /* sizeof(struct pldm_fd) */
 #define PLDM_SIZEOF_PLDM_FD @sizeof_pldm_fd@
+
+/* sizeof(struct pldm_control) */
+#define PLDM_SIZEOF_PLDM_CONTROL @sizeof_pldm_control@
