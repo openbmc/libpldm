@@ -1,4 +1,4 @@
-libpldm_sources = files('responder.c', 'utils.c')
+libpldm_sources = files('responder.c', 'utils.c', 'control.c')
 
 subdir('dsp')
 
