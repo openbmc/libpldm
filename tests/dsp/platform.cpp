@@ -16,6 +16,68 @@
 
 constexpr auto hdrSize = sizeof(pldm_msg_hdr);
 
+TEST(StateEffecterPdr, testIncorrectInvocations)
+{
+    struct state_effecter_possible_states possible_states
+    {
+    };
+    struct pldm_state_effecter_pdr effecter
+    {
+    };
+    size_t actual_size;
+    int rc;
+
+    /* effecter can't be NULL */
+    rc = encode_state_effecter_pdr(NULL, 0, &possible_states, 1, &actual_size);
+    EXPECT_EQ(rc, PLDM_ERROR);
+
+    /* possible states size can't be NULL */
+    rc = encode_state_effecter_pdr(&effecter, sizeof(effecter), NULL, 0,
+                                   &actual_size);
+    EXPECT_EQ(rc, PLDM_ERROR);
+
+    /* possible states size can't be too large */
+    rc = encode_state_effecter_pdr(&effecter, sizeof(effecter),
+                                   &possible_states, SIZE_MAX, &actual_size);
+    EXPECT_EQ(rc, PLDM_ERROR);
+
+    /* actual size can't be NULL */
+    rc = encode_state_effecter_pdr(&effecter, sizeof(effecter),
+                                   &possible_states, 0, NULL);
+    EXPECT_EQ(rc, PLDM_ERROR);
+
+    /* allocation size can't be less than effecter size with possible states */
+    rc = encode_state_effecter_pdr(&effecter, 0, &possible_states, 1,
+                                   &actual_size);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    /* disallow mismatches between recorded possible state size and provided
+     * possible state size */
+    effecter.composite_effecter_count = 1;
+    rc = encode_state_effecter_pdr(&effecter, sizeof(effecter),
+                                   &possible_states, 1, &actual_size);
+    EXPECT_EQ(rc, PLDM_ERROR);
+    EXPECT_EQ(actual_size, 0);
+}
+
+TEST(StateEffecterPdr, testReasonableInvocations)
+{
+    struct state_effecter_possible_states possible_states
+    {
+    };
+    struct pldm_state_effecter_pdr effecter
+    {
+    };
+    size_t actual_size;
+    int rc;
+
+    /* Accept 0 possible states */
+    rc = encode_state_effecter_pdr(&effecter, sizeof(effecter),
+                                   &possible_states, 0, &actual_size);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(actual_size, sizeof(effecter) - sizeof(effecter.possible_states));
+}
+
 TEST(SetStateEffecterStates, testEncodeResponse)
 {
     std::array<uint8_t,

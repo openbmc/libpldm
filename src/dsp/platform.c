@@ -28,8 +28,8 @@ int encode_state_effecter_pdr(
 		return PLDM_ERROR;
 	}
 
-	if (SIZE_MAX - (sizeof(*effecter) - sizeof(effecter->possible_states) <
-			possible_states_size)) {
+	if (SIZE_MAX - (sizeof(*effecter) - sizeof(effecter->possible_states)) <
+	    possible_states_size) {
 		return PLDM_ERROR;
 	}
 

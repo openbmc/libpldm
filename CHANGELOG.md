@@ -15,6 +15,16 @@ Change categories:
 - Fixed
 - Security
 
+## [Unreleased]
+
+### Changed
+
+1. Register assignment for parameters of `encode_state_effecter_pdr()`
+
+### Fixed
+
+1. dsp: platform: Fix location of closing paren in overflow detection
+
 ## [0.10.0] 2024-11-01
 
 ### Added
