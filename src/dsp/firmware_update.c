@@ -478,36 +478,44 @@ int decode_descriptor_type_length_value(const uint8_t *data, size_t length,
 					uint16_t *descriptor_type,
 					struct variable_field *descriptor_data)
 {
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
 	uint16_t descriptor_length = 0;
+	int rc;
 
 	if (data == NULL || descriptor_type == NULL ||
 	    descriptor_data == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (length < PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN) {
+	rc = pldm_msgbuf_init_errno(buf, PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN,
+				    data, length);
+	if (rc < 0) {
+		return pldm_xlate_errno(rc);
+	}
+
+	pldm_msgbuf_extract_p(buf, descriptor_type);
+	rc = pldm_msgbuf_extract(buf, descriptor_length);
+	if (rc < 0) {
+		return pldm_xlate_errno(rc);
+	}
+
+	if (*descriptor_type != PLDM_FWUP_VENDOR_DEFINED &&
+	    descriptor_length != get_descriptor_type_length(*descriptor_type)) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	struct pldm_descriptor_tlv *entry =
-		(struct pldm_descriptor_tlv *)(data);
-
-	*descriptor_type = le16toh(entry->descriptor_type);
-	descriptor_length = le16toh(entry->descriptor_length);
-	if (*descriptor_type != PLDM_FWUP_VENDOR_DEFINED) {
-		if (descriptor_length !=
-		    get_descriptor_type_length(*descriptor_type)) {
-			return PLDM_ERROR_INVALID_LENGTH;
-		}
+	rc = pldm_msgbuf_span_required(buf, descriptor_length,
+				       (void **)&descriptor_data->ptr);
+	if (rc) {
+		return pldm_xlate_errno(rc);
 	}
-
-	if (length < (sizeof(*descriptor_type) + sizeof(descriptor_length) +
-		      descriptor_length)) {
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
-
-	descriptor_data->ptr = entry->descriptor_data;
 	descriptor_data->length = descriptor_length;
+
+	rc = pldm_msgbuf_destroy(buf);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
 
 	return PLDM_SUCCESS;
 }

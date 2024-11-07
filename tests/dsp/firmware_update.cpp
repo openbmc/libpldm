@@ -180,7 +180,8 @@ TEST(DecodeFirmwareDeviceIdRecord, goodPath)
     constexpr uint16_t recordLen =
         sizeof(pldm_firmware_device_id_record) +
         (componentBitmapBitLength / PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE) +
-        imageSetVersionStr.size() + sizeof(pldm_descriptor_tlv) - 1 +
+        imageSetVersionStr.size() + 2 + /* descriptor type field */
+        2 +                             /* descriptor length field */
         uuid.size() + fwDevicePkgData.size();
     // Firmware device ID record
     constexpr std::array<uint8_t, recordLen> record{
@@ -270,10 +271,9 @@ TEST(DecodeFirmwareDeviceIdRecord, goodPathNofwDevicePkgData)
     constexpr uint16_t recordLen =
         sizeof(pldm_firmware_device_id_record) +
         (componentBitmapBitLength / PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE) +
-        imageSetVersionStr.size() +
-        sizeof(pldm_descriptor_tlv().descriptor_type) +
-        sizeof(pldm_descriptor_tlv().descriptor_length) + uuid.size() +
-        fwDevicePkgDataLen;
+        imageSetVersionStr.size() + 2 + /* descriptor type field */
+        2 +                             /* descriptor length field */
+        +uuid.size() + fwDevicePkgDataLen;
     // Firmware device ID record
     constexpr std::array<uint8_t, recordLen> record{
         0x2e, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x0e, 0x00, 0x00, 0x03,
@@ -457,10 +457,10 @@ TEST(DecodeDescriptors, goodPath3Descriptors)
                    .vendor_defined_descriptor_title_str_len) +
         vendorTitle.size() + vendorDescriptorData.size();
 
-    constexpr size_t descriptorsLength =
-        3 * (sizeof(pldm_descriptor_tlv().descriptor_type) +
-             sizeof(pldm_descriptor_tlv().descriptor_length)) +
-        iana.size() + uuid.size() + vendorDefinedDescriptorLen;
+    constexpr size_t descriptorsLength = 3 * (2 + /* descriptor type field */
+                                              2 /* descriptor length field */) +
+                                         iana.size() + uuid.size() +
+                                         vendorDefinedDescriptorLen;
 
     constexpr std::array<uint8_t, descriptorsLength> descriptors{
         0x01, 0x00, 0x04, 0x00, 0x0a, 0x0b, 0x0c, 0x0d, 0x02, 0x00, 0x10,
