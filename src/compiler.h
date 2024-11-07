@@ -2,6 +2,8 @@
 #ifndef PLDM_COMPILER_H
 #define PLDM_COMPILER_H
 
+#include <libpldm/compiler.h>
+
 #ifndef __has_attribute
 #error The libpldm implementation requires __has_attribute
 #endif
@@ -20,8 +22,14 @@ static struct {
 	int compliance;
 } pldm_required_attributes __attribute__((unused));
 
-#define LIBPLDM_CC_ALWAYS_INLINE      __attribute__((always_inline)) static inline
-#define LIBPLDM_CC_NONNULL	      __attribute__((nonnull))
+#ifndef LIBPLDM_CC_ALWAYS_INLINE
+#error Missing definition for LIBPLDM_ALWAYS_INLINE
+#endif
+
+#ifndef LIBPLDM_CC_NONNULL
+#error Missing definition for LIBPLDM_CC_NONNULL
+#endif
+
 #define LIBPLDM_CC_NONNULL_ARGS(...)  __attribute__((nonnull(__VA_ARGS__)))
 #define LIBPLDM_CC_UNUSED	      __attribute__((unused))
 #define LIBPLDM_CC_WARN_UNUSED_RESULT __attribute__((warn_unused_result))
