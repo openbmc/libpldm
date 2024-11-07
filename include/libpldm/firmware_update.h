@@ -7,6 +7,7 @@ extern "C" {
 #endif
 
 #include <libpldm/base.h>
+#include <libpldm/compiler.h>
 #include <libpldm/pldm_types.h>
 
 #include <stdbool.h>
