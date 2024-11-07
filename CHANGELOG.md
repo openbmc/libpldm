@@ -40,6 +40,8 @@ Change categories:
 4. Return `ENOENT` rather than `ENOKEY` from
    `pldm_pdr_find_child_container_id_index_range_exclude()`
 
+4. Add Firmware Device side firmware_update encode/decode functions
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
