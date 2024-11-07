@@ -659,9 +659,9 @@ pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, size_t count,
 
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint64(struct pldm_msgbuf *ctx,
-                               const uint64_t src)
+						       const uint64_t src)
 {
-    uint64_t val = htole64(src);
+	uint64_t val = htole64(src);
 
 	if (!ctx->cursor) {
 		return -EINVAL;
@@ -1149,13 +1149,12 @@ pldm_msgbuf_peek_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 }
 
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_increment(struct pldm_msgbuf *ctx, size_t count)
+LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_increment(struct pldm_msgbuf *ctx,
+						   size_t count)
 {
 	if (!ctx->cursor) {
 		return -EINVAL;
 	}
-
 
 #if INTMAX_MAX < SIZE_MAX
 	if (count > INTMAX_MAX) {
