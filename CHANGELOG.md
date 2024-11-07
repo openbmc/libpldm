@@ -42,6 +42,8 @@ Change categories:
 
 5. Add Firmware Device side firmware_update encode/decode functions
 
+6. Add firmware update FD responder
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
