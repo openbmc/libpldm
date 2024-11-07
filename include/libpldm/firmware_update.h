@@ -2,10 +2,12 @@
 #ifndef FW_UPDATE_H
 #define FW_UPDATE_H
 
+#include "utils.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
 
@@ -569,6 +571,191 @@ struct pldm_downstream_device {
 	uint8_t downstream_descriptor_count;
 };
 #define PLDM_DOWNSTREAM_DEVICE_BYTES 3
+
+struct pldm_downstream_device_iter {
+	struct variable_field *field;
+	size_t count;
+};
+
+LIBPLDM_ITERATOR
+struct pldm_downstream_device_iter pldm_downstream_device_iter_init(
+	const struct pldm_query_downstream_identifiers_resp *resp,
+	struct variable_field *remaining)
+{
+	struct pldm_downstream_device_iter iter = {
+		remaining, resp->number_of_downstream_devices
+	};
+	return iter;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_downstream_device_iter_end(
+	const struct pldm_downstream_device_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_downstream_device_iter_next(struct pldm_downstream_device_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+int decode_pldm_downstream_device_from_iter(
+	struct pldm_downstream_device_iter *iter,
+	struct pldm_downstream_device *dev);
+
+/** @brief Iterate downstream devices in QueryDownstreamIdentifiers response
+ *
+ * @param resp The @ref "struct pldm_query_downstream_identifiers_resp" lvalue
+ *             over whose devices to iterate
+ * @param remaining The @ref "struct variable_field" lvalue used as the
+ *                  out-value from the corresponding call to @ref
+ *                  decode_query_downstream_identifiers_resp
+ * @param dev The @ref "struct pldm_downstream_device" lvalue into which the
+ *            next device instance should be decoded.
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed.
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * struct pldm_query_downstream_identifiers_resp resp;
+ * struct pldm_downstream_device dev;
+ * struct variable_field remaining;
+ * int rc;
+ *
+ * rc = decode_query_downstream_identifiers_resp(..., &resp, &remaining);
+ * if (rc) {
+ *     // Handle any error from decoding fixed-portion of response
+ * }
+ *
+ * foreach_pldm_downstream_device(resp, remaining, dev, rc) {
+ *     // Do something with each decoded device placed in `dev`
+ * }
+ *
+ * if (rc) {
+ *     // Handle any decoding error while iterating variable-length set of
+ *     // devices
+ * }
+ * @endcode
+ */
+#define foreach_pldm_downstream_device(resp, remaining, dev, rc)               \
+	for (struct pldm_downstream_device_iter dev##_iter =                   \
+		     ((rc) = 0,                                                \
+		     pldm_downstream_device_iter_init(&(resp), &(remaining))); \
+	     (!pldm_downstream_device_iter_end(&(dev##_iter)) &&               \
+	      !((rc) = decode_pldm_downstream_device_from_iter(&(dev##_iter),  \
+							       &(dev))));      \
+	     pldm_downstream_device_iter_next(&(dev##_iter)))
+
+/** @struct pldm_descriptor
+ *
+ * Structure representing a type-length-value descriptor as defined in Table 7 -
+ * Descriptor Definition.
+ *
+ * Member values are always host-endian. When decoding messages, the
+ * descriptor_data member points into the message buffer.
+ */
+struct pldm_descriptor {
+	uint16_t descriptor_type;
+	uint16_t descriptor_length;
+	const void *descriptor_data;
+};
+
+struct pldm_descriptor_iter {
+	struct variable_field *field;
+	size_t count;
+};
+
+LIBPLDM_ITERATOR
+struct pldm_descriptor_iter pldm_downstream_device_descriptor_iter_init(
+	const struct pldm_downstream_device *dev,
+	struct variable_field *remaining)
+{
+	struct pldm_descriptor_iter iter = { remaining,
+					     dev->downstream_descriptor_count };
+	return iter;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_descriptor_iter_end(const struct pldm_descriptor_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_descriptor_iter_next(struct pldm_descriptor_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
+				     struct pldm_descriptor *desc);
+
+/** @brief Iterate a downstream device's descriptors in a
+ *         QueryDownstreamIdentifiers response
+ *
+ * @param dev The @ref "struct pldm_downstream_device" lvalue over whose
+ *            descriptors to iterate
+ * @param remaining The @ref "struct variable_field" lvalue used as
+ *                  the out-value from the corresponding call to @ref
+ *                  decode_query_downstream_identifiers_resp
+ * @param desc The @ref "struct pldm_descriptor" lvalue into which the next
+ *             descriptor instance should be decoded
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * struct pldm_query_downstream_identifiers_resp resp;
+ * struct pldm_downstream_device dev;
+ * struct variable_field remaining;
+ * int rc;
+ *
+ * rc = decode_query_downstream_identifiers_resp(..., &resp, &remaining);
+ * if (rc) {
+ *     // Handle any error from decoding fixed-portion of response
+ * }
+ *
+ * foreach_pldm_downstream_device(resp, remaining, dev, rc) {
+ *     struct pldm_descriptor desc;
+ *
+ *     foreach_pldm_downstream_device_descriptor(dev, remaining, desc, rc) {
+ *         // Do something with each decoded descriptor placed in `desc`
+ *     }
+ *
+ *     if (rc) {
+ *         // Handle any decoding error while iterating on the variable-length
+ *         // set of descriptors
+ *     }
+ * }
+ *
+ * if (rc) {
+ *     // Handle any decoding error while iterating variable-length set of
+ *     // devices
+ * }
+ * @endcode
+ */
+#define foreach_pldm_downstream_device_descriptor(dev, remaining, desc, rc)    \
+	for (struct pldm_descriptor_iter desc##_iter =                         \
+		     ((rc) = 0, pldm_downstream_device_descriptor_iter_init(   \
+					&(dev), &(remaining)));                \
+	     (!pldm_descriptor_iter_end(&(desc##_iter)) &&                     \
+	      !((rc) = decode_pldm_descriptor_from_iter(&(desc##_iter),        \
+							&(desc))));            \
+	     pldm_descriptor_iter_next(&(desc##_iter)))
 
 /** @struct pldm_query_downstream_firmware_param_req
  *
