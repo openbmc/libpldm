@@ -19,7 +19,6 @@
 
 constexpr auto hdrSize = sizeof(pldm_msg_hdr);
 
-
 #ifdef LIBPLDM_API_TESTING
 
 static const uint8_t FIXED_INSTANCE_ID = 31;
