@@ -9,7 +9,7 @@ extern "C" {
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
 
-#include "stdbool.h"
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 struct variable_field;
