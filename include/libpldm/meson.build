@@ -5,6 +5,7 @@ libpldm_headers = files(
     'bios_table.h',
     'compiler.h',
     'entity.h',
+    'firmware_fd.h',
     'firmware_update.h',
     'fru.h',
     'instance-id.h',
@@ -37,3 +38,19 @@ endif
 
 
 install_headers(libpldm_headers, subdir: 'libpldm', preserve_path: true)
+
+# TODO: these should depend on the input headers so they rebuild
+# on changes, unclear how to do that.
+include_src = include_directories('../../src', is_system: true)
+sizeof_pldm_fd = compiler.sizeof(
+    'struct pldm_fd',
+    prefix: '#include "firmware_device/fd-internal.h"',
+    include_directories: [include_src, libpldm_include_dir],
+)
+sizes_h = configure_file(
+    configuration: {'sizeof_pldm_fd': sizeof_pldm_fd},
+    input: 'sizes.h.in',
+    output: 'sizes.h',
+    install: true,
+    install_dir: 'libpldm',
+)
