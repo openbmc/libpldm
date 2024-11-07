@@ -1,0 +1,4 @@
+#pragma once
+
+/* sizeof(struct pldm_fd) */
+#define PLDM_SIZEOF_PLDM_FD @sizeof_pldm_fd@
