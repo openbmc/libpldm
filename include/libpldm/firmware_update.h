@@ -411,6 +411,29 @@ enum pldm_firmware_update_downstream_device_update_supported {
 	PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_SUPPORTED = 1
 };
 
+/* An arbitrary limit, for static storage */
+#define PLDM_FIRMWARE_MAX_STRING 64
+
+/** @struct pldm_firmware_string
+ *
+ *  A fixed maximum length PLDM firmware string
+*/
+struct pldm_firmware_string {
+	enum pldm_firmware_update_string_type str_type;
+	uint8_t str_len;
+	uint8_t str_data[PLDM_FIRMWARE_MAX_STRING];
+};
+
+/** @struct pldm_firmware_version
+ *
+ *  A PLDM component version
+*/
+struct pldm_firmware_version {
+	uint32_t comparison_stamp;
+	struct pldm_firmware_string str;
+	uint8_t date[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN];
+};
+
 /** @struct pldm_package_header_information
  *
  *  Structure representing fixed part of package header information
@@ -499,6 +522,18 @@ struct pldm_get_firmware_parameters_resp {
 	uint8_t pending_comp_image_set_ver_str_len;
 } __attribute__((packed));
 
+/** @struct pldm_get_firmware_parameters_resp_full
+ *
+ *  Structure representing a full GetFirmwareParameters response
+ */
+struct pldm_get_firmware_parameters_resp_full {
+	uint8_t completion_code;
+	bitfield32_t capabilities_during_update;
+	uint16_t comp_count;
+	struct pldm_firmware_string active_comp_image_set_ver_str;
+	struct pldm_firmware_string pending_comp_image_set_ver_str;
+};
+
 /** @struct pldm_query_downstream_devices_resp
  *
  *  Structure representing response of QueryDownstreamDevices.
@@ -515,7 +550,7 @@ struct pldm_query_downstream_devices_resp {
 
 /** @struct pldm_component_parameter_entry
  *
- *  Structure representing component parameter table entry.
+ *  Structure representing component parameter table entry, as wire format.
  */
 struct pldm_component_parameter_entry {
 	uint16_t comp_classification;
@@ -532,6 +567,24 @@ struct pldm_component_parameter_entry {
 	bitfield16_t comp_activation_methods;
 	bitfield32_t capabilities_during_update;
 } __attribute__((packed));
+
+/** @struct pldm_component_parameter_entry_full
+ *
+ *  Structure representing component parameter table entry.
+ *  This is non-packed (contrast with struct pldm_component_parameter_entry),
+ *  with version strings included.
+ */
+struct pldm_component_parameter_entry_full {
+	uint16_t comp_classification;
+	uint16_t comp_identifier;
+	uint8_t comp_classification_index;
+
+	struct pldm_firmware_version active_ver;
+	struct pldm_firmware_version pending_ver;
+
+	bitfield16_t comp_activation_methods;
+	bitfield32_t capabilities_during_update;
+};
 
 /** @struct pldm_query_downstream_identifiers_req
  *
@@ -821,7 +874,7 @@ struct pldm_downstream_device_parameter_entry_versions {
 
 /** @struct pldm_request_update_req
  *
- *  Structure representing fixed part of Request Update request
+ *  Structure representing fixed part of Request Update request, as wire format.
  */
 struct pldm_request_update_req {
 	uint32_t max_transfer_size;
@@ -831,6 +884,20 @@ struct pldm_request_update_req {
 	uint8_t comp_image_set_ver_str_type;
 	uint8_t comp_image_set_ver_str_len;
 } __attribute__((packed));
+
+/** @struct pldm_request_update_req_full
+ *
+ *  Structure representing fixed part of Request Update request, including
+ *  version string. This is unpacked (contrast to struct pldm_request_update_req).
+ */
+struct pldm_request_update_req_full {
+	uint32_t max_transfer_size;
+	uint16_t num_of_comp;
+	uint8_t max_outstanding_transfer_req;
+	uint16_t pkg_data_len;
+
+	struct pldm_firmware_string image_set_ver;
+};
 
 /** @struct pldm_request_update_resp
  *
@@ -844,7 +911,9 @@ struct pldm_request_update_resp {
 
 /** @struct pldm_pass_component_table_req
  *
- *  Structure representing PassComponentTable request
+ *  Structure representing PassComponentTable request, wire format.
+ *  Version string data is not included.
+ *  Prefer pldm_pass_component_table_req_full for new uses.
  */
 struct pldm_pass_component_table_req {
 	uint8_t transfer_flag;
@@ -855,6 +924,20 @@ struct pldm_pass_component_table_req {
 	uint8_t comp_ver_str_type;
 	uint8_t comp_ver_str_len;
 } __attribute__((packed));
+
+/** @struct pldm_pass_component_table_req_full
+ *
+ *  Structure representing PassComponentTable request, including
+ *  version string storage.
+ */
+struct pldm_pass_component_table_req_full {
+	uint8_t transfer_flag;
+	uint16_t comp_classification;
+	uint16_t comp_identifier;
+	uint8_t comp_classification_index;
+	uint32_t comp_comparison_stamp;
+	struct pldm_firmware_string version;
+};
 
 /** @struct pldm_pass_component_table_resp
  *
@@ -868,7 +951,9 @@ struct pldm_pass_component_table_resp {
 
 /** @struct pldm_update_component_req
  *
- *  Structure representing UpdateComponent request
+ *  Structure representing UpdateComponent request, wire format.
+ *  Version string data is not included.
+ *  Prefer pldm_update_component_req_full for new uses.
  */
 struct pldm_update_component_req {
 	uint16_t comp_classification;
@@ -880,6 +965,23 @@ struct pldm_update_component_req {
 	uint8_t comp_ver_str_type;
 	uint8_t comp_ver_str_len;
 } __attribute__((packed));
+
+/** @struct pldm_update_component_req_full
+ *
+ *  Structure representing UpdateComponent request, including
+ *  version string storage.
+ */
+struct pldm_update_component_req_full {
+	uint16_t comp_classification;
+	uint16_t comp_identifier;
+	uint8_t comp_classification_index;
+
+	uint32_t comp_comparison_stamp;
+	struct pldm_firmware_string version;
+
+	uint32_t comp_image_size;
+	bitfield32_t update_option_flags;
+};
 
 /** @struct pldm_update_component_resp
  *
@@ -1054,6 +1156,25 @@ int encode_query_device_identifiers_req(uint8_t instance_id,
 					size_t payload_length,
 					struct pldm_msg *msg);
 
+/** @brief Create a PLDM response message for QueryDeviceIdentifiers
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] descriptor_count - Number of descriptors
+ *  @param[in] descriptor - Array of descriptors
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in,out] payload_length - Size of the response message payload, updated
+ *				    with used length.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ *
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_query_device_identifiers_resp(
+	uint8_t instance_id, uint8_t descriptor_count,
+	const struct pldm_descriptor *descriptors, struct pldm_msg *msg,
+	size_t *payload_length);
+
 /** @brief Decode QueryDeviceIdentifiers response message
  *
  *  @param[in] msg - Response message
@@ -1124,6 +1245,34 @@ int decode_get_firmware_parameters_resp_comp_entry(
 	struct pldm_component_parameter_entry *component_data,
 	struct variable_field *active_comp_ver_str,
 	struct variable_field *pending_comp_ver_str);
+
+/** @brief Encode a GetFirmwareParameters response
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp_data - Parameter data
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in,out] payload_length - Size of the response message payload, updated
+ *				    with used length.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_get_firmware_parameters_resp(
+	uint8_t instance_id,
+	const struct pldm_get_firmware_parameters_resp_full *resp_data,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Encode a ComponentParameterTable entry
+ *
+ *  @param[in] comp - Component entry
+ *  @param[in,out] payload - Message will be written to this
+ *  @param[in,out] payload_length - Size of payload, updated
+ *				    with used length.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_get_firmware_parameters_resp_comp_entry(
+	const struct pldm_component_parameter_entry_full *comp,
+	uint8_t *payload, size_t *payload_length);
 
 /** @brief Create a PLDM request message for QueryDownstreamDevices
  *
@@ -1297,7 +1446,7 @@ int decode_downstream_device_parameter_table_entry_versions(
  *  @param[in] num_of_comp - Total number of components that will be passed to
  *                           the FD during the update
  *  @param[in] max_outstanding_transfer_req - Total number of outstanding
- * 											  RequestFirmwareData
+ * 					      RequestFirmwareData
  * commands that can be sent by the FD
  *  @param[in] pkg_data_len - Value of the FirmwareDevicePackageDataLength field
  *                            present in firmware package header
@@ -1323,6 +1472,20 @@ int encode_request_update_req(uint8_t instance_id, uint32_t max_transfer_size,
 			      const struct variable_field *comp_img_set_ver_str,
 			      struct pldm_msg *msg, size_t payload_length);
 
+/** @brief Decode PLDM request message for RequestUpdate
+ *
+ *  @param[in] msg - Message
+ *  @param[in] payload_length - Length of request message payload
+ *  @param[out] req - RequestUpdate request parameters
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ *
+ *  @note Caller is responsible for memory alloc and dealloc of param
+ *        'msg.payload'
+ */
+int decode_request_update_req(const struct pldm_msg *msg, size_t payload_length,
+			      struct pldm_request_update_req_full *req);
+
 /** @brief Decode a RequestUpdate response message
  *
  *  @param[in] msg - Response message
@@ -1337,6 +1500,22 @@ int decode_request_update_resp(const struct pldm_msg *msg,
 			       size_t payload_length, uint8_t *completion_code,
 			       uint16_t *fd_meta_data_len,
 			       uint8_t *fd_will_send_pkg_data);
+
+/** @brief Create PLDM response message for RequestUpdate
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp_data - Response data
+ *  @param[out] msg - Message will be written to this
+ *  @param[inout] payload_length - Length of response message payload
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ *
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *		   'msg.payload'
+ */
+int encode_request_update_resp(uint8_t instance_id,
+			       const struct pldm_request_update_resp *resp_data,
+			       struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM request message for PassComponentTable
  *
@@ -1366,6 +1545,18 @@ int encode_pass_component_table_req(
 	const struct variable_field *comp_ver_str, struct pldm_msg *msg,
 	size_t payload_length);
 
+/** @brief Decode a PassComponentTable request
+ *
+ *  @param[in] msg - PLDM Message
+ *  @param[in] payload_length
+ *  @param[out] pcomp - Pass Component Table Request
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pass_component_table_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_pass_component_table_req_full *pcomp);
+
 /** @brief Decode PassComponentTable response message
  *
  *  @param[in] msg - Response message
@@ -1381,6 +1572,22 @@ int decode_pass_component_table_resp(const struct pldm_msg *msg,
 				     uint8_t *completion_code,
 				     uint8_t *comp_resp,
 				     uint8_t *comp_resp_code);
+
+/** @brief Encode PassComponentTable response
+ *
+ *  @param[in] instance_id - PLDM Instance ID matching the request
+ *  @param[in] resp_data - response data
+ *  @param[out] msg - Response message
+ *  @param[inout] payload_length - Length of msg payload buffer,
+ *				   will be updated with the written
+ * 				   length on success.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pass_component_table_resp(
+	uint8_t instance_id,
+	const struct pldm_pass_component_table_resp *resp_data,
+	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM request message for UpdateComponent
  *
@@ -1411,6 +1618,18 @@ int encode_update_component_req(
 	uint8_t comp_ver_str_len, const struct variable_field *comp_ver_str,
 	struct pldm_msg *msg, size_t payload_length);
 
+/** @brief Decode UpdateComponent request message
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - Length of request message payload
+ *  @param[out] up - UpdateComponent request parameters
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_update_component_req(const struct pldm_msg *msg,
+				size_t payload_length,
+				struct pldm_update_component_req_full *up);
+
 /** @brief Decode UpdateComponent response message
  *
  *  @param[in] msg - Response message
@@ -1435,6 +1654,21 @@ int decode_update_component_resp(const struct pldm_msg *msg,
 				 bitfield32_t *update_option_flags_enabled,
 				 uint16_t *time_before_req_fw_data);
 
+/** @brief Encode UpdateComponent response
+ *
+ *  @param[in] instance_id - PLDM Instance ID matching the request
+ *  @param[in] resp_data - Response data
+ *  @param[out] msg - Response message
+ *  @param[inout] payload_length - Length of msg payload buffer,
+ *				   will be updated with the written
+ * 				   length on success.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_update_component_resp(
+	uint8_t instance_id, const struct pldm_update_component_resp *resp_data,
+	struct pldm_msg *msg, size_t *payload_length);
+
 /** @brief Decode RequestFirmwareData request message
  *
  *	@param[in] msg - Request message
@@ -1448,6 +1682,23 @@ int decode_update_component_resp(const struct pldm_msg *msg,
 int decode_request_firmware_data_req(const struct pldm_msg *msg,
 				     size_t payload_length, uint32_t *offset,
 				     uint32_t *length);
+
+/** @brief Encode RequestFirmwareData request
+ *
+ *  @param[in] instance_id - PLDM Instance ID
+ *  @param[in] req_params - Request parameters
+ *  @param[in] length - firmware data length to request
+ *  @param[out] msg - Response message
+ *  @param[inout] payload_length - Length of msg payload buffer,
+ *				   will be updated with the written
+ * 				   length on success.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_request_firmware_data_req(
+	uint8_t instance_id,
+	const struct pldm_request_firmware_data_req *req_params,
+	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM response message for RequestFirmwareData
  *
@@ -1484,6 +1735,20 @@ int decode_transfer_complete_req(const struct pldm_msg *msg,
 				 size_t payload_length,
 				 uint8_t *transfer_result);
 
+/** @brief Encode TransferComplete request
+ *
+ *  @param[in] instance_id - PLDM Instance ID
+ *  @param[in] transfer_result
+ *  @param[out] msg - Response message
+ *  @param[inout] payload_length - Length of msg payload buffer,
+ *				   will be updated with the written
+ * 				   length on success.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_transfer_complete_req(uint8_t instance_id, uint8_t transfer_result,
+				 struct pldm_msg *msg, size_t *payload_length);
+
 /** @brief Create PLDM response message for TransferComplete
  *
  *  @param[in] instance_id - Message's instance id
@@ -1509,6 +1774,20 @@ int encode_transfer_complete_resp(uint8_t instance_id, uint8_t completion_code,
  */
 int decode_verify_complete_req(const struct pldm_msg *msg,
 			       size_t payload_length, uint8_t *verify_result);
+
+/** @brief Encode VerifyComplete request
+ *
+ *  @param[in] instance_id - PLDM Instance ID
+ *  @param[in] verify_result
+ *  @param[out] msg - Response message
+ *  @param[inout] payload_length - Length of msg payload buffer,
+ *				   will be updated with the written
+ * 				   length on success.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_verify_complete_req(uint8_t instance_id, uint8_t verify_result,
+			       struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM response message for VerifyComplete
  *
@@ -1539,6 +1818,21 @@ int decode_apply_complete_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *apply_result,
 	bitfield16_t *comp_activation_methods_modification);
+
+/** @brief Encode ApplyComplete request
+ *
+ *  @param[in] instance_id - PLDM Instance ID
+ *  @param[in] req_data - Request data
+ *  @param[out] msg - Request message
+ *  @param[inout] payload_length - Length of msg payload buffer,
+ *				   will be updated with the written
+ * 				   length on success.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_apply_complete_req(uint8_t instance_id,
+			      const struct pldm_apply_complete_req *req_data,
+			      struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM response message for ApplyComplete
  *
@@ -1571,6 +1865,17 @@ int encode_activate_firmware_req(uint8_t instance_id,
 				 bool8_t self_contained_activation_req,
 				 struct pldm_msg *msg, size_t payload_length);
 
+/** @brief Decode ActivateFirmware request
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - Length of request message payload
+ *  @param[out] self_contained
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_activate_firmware_req(const struct pldm_msg *msg,
+				 size_t payload_length, bool *self_contained);
+
 /** @brief Decode ActivateFirmware response message
  *
  *  @param[in] msg - Response message
@@ -1585,6 +1890,22 @@ int decode_activate_firmware_resp(const struct pldm_msg *msg,
 				  size_t payload_length,
 				  uint8_t *completion_code,
 				  uint16_t *estimated_time_activation);
+
+/** @brief Encode ActivateFirmware response
+ *
+ *  @param[in] instance_id - PLDM Instance ID matching the request
+ *  @param[in] resp_data - Response data
+ *  @param[out] msg - Response message
+ *  @param[inout] payload_length - Length of msg payload buffer,
+ *				   will be updated with the written
+ * 				   length on success.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_activate_firmware_resp(
+	uint8_t instance_id,
+	const struct pldm_activate_firmware_resp *resp_data,
+	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM request message for GetStatus
  *
@@ -1623,6 +1944,21 @@ int decode_get_status_resp(const struct pldm_msg *msg, size_t payload_length,
 			   uint8_t *aux_state_status, uint8_t *progress_percent,
 			   uint8_t *reason_code,
 			   bitfield32_t *update_option_flags_enabled);
+
+/** @brief Encode GetStatus response
+ *
+ *  @param[in] instance_id - PLDM Instance ID matching the request
+ *  @param[in] status - GetStatus response. completion_code must be PLDM_SUCCESS.
+ *  @param[out] msg - Response message
+ *  @param[inout] payload_length - Length of msg payload buffer,
+ *				   will be updated with the written
+ * 				   length on success.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_get_status_resp(uint8_t instance_id,
+			   const struct pldm_get_status_resp *status,
+			   struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM request message for CancelUpdateComponent
  *
@@ -1683,6 +2019,21 @@ int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
 			      uint8_t *completion_code,
 			      bool8_t *non_functioning_component_indication,
 			      bitfield64_t *non_functioning_component_bitmap);
+
+/** @brief Encode CancelUpdate response
+ *
+ *  @param[in] instance_id - PLDM Instance ID matching the request
+ *  @param[in] resp_data - Response data,
+ *  @param[out] msg - Response message
+ *  @param[inout] payload_length - Length of msg payload buffer,
+ *				   will be updated with the written
+ * 				   length on success.
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_cancel_update_resp(uint8_t instance_id,
+			      const struct pldm_cancel_update_resp *resp_data,
+			      struct pldm_msg *msg, size_t *payload_length);
 
 #ifdef __cplusplus
 }
