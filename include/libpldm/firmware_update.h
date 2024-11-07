@@ -8,6 +8,7 @@ extern "C" {
 
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
+#include <libpldm/utils.h>
 
 #include "stdbool.h"
 #include <stddef.h>
@@ -408,6 +409,23 @@ enum pldm_firmware_update_non_functioning_component_indication {
 enum pldm_firmware_update_downstream_device_update_supported {
 	PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_NOT_SUPPORTED = 0,
 	PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_SUPPORTED = 1
+};
+
+#ifndef PLDM_FIRMWARE_MAX_STRING
+/* An arbitrary limit, for static storage */
+#define PLDM_FIRMWARE_MAX_STRING 32
+#endif
+
+struct pldm_firmware_string {
+	enum pldm_firmware_update_string_type str_type;
+	uint8_t str_len;
+	uint8_t str_data[PLDM_FIRMWARE_MAX_STRING];
+};
+
+struct pldm_firmware_version {
+	uint32_t comparison_stamp;
+	struct pldm_firmware_string str;
+	uint8_t date[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN];
 };
 
 /** @struct pldm_package_header_information
@@ -884,6 +902,29 @@ int encode_query_device_identifiers_req(uint8_t instance_id,
 					size_t payload_length,
 					struct pldm_msg *msg);
 
+/** @brief Create a PLDM response message for QueryDeviceIdentifiers
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] device_identifiers_len - Length of descriptor_data
+ *  @param[in] descriptor_count - Number of descriptors
+ *  @param[in] descriptor_data - Device descriptor data
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in,out] payload_length - Size of the response message payload, updated
+ *				    with used length.
+ *
+ *  @return pldm_completion_codes
+ *
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+// LIBPLDM_CC_NONNULL
+int encode_query_device_identifiers_resp(uint8_t instance_id,
+					 uint32_t device_identifiers_len,
+					 uint8_t descriptor_count,
+					 const uint8_t *descriptor_data,
+					 struct pldm_msg *msg,
+					 size_t *payload_length);
+
 /** @brief Decode QueryDeviceIdentifiers response message
  *
  *  @param[in] msg - Response message
@@ -954,6 +995,42 @@ int decode_get_firmware_parameters_resp_comp_entry(
 	struct pldm_component_parameter_entry *component_data,
 	struct variable_field *active_comp_ver_str,
 	struct variable_field *pending_comp_ver_str);
+
+/** @brief Encode a GetFirmwareParameters response
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp_data - Fixed part of parameter data
+ *  @param[in] active_comp_image_set_ver_str - Active ImageSet
+ *  @param[in] pending_comp_image_set_ver_str - Pending ImageSet
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in,out] payload_length - Size of the response message payload, updated
+ *				    with used length.
+ *
+ *  @return pldm_completion_codes
+ */
+int encode_get_firmware_parameters_resp(
+	uint8_t instance_id,
+	const struct pldm_get_firmware_parameters_resp *resp_data,
+	const struct variable_field *active_comp_image_set_ver_str,
+	const struct variable_field *pending_comp_image_set_ver_str,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Encode a ComponentParameterTable entry
+ *
+ *  @param[in] comp - Fixed part of the entry
+ *  @param[in] active_ver - Version string
+ *  @param[in] pending_ver - Version string
+ *  @param[in,out] payload - Message will be written to this
+ *  @param[in,out] payload_length - Size of payload, updated
+ *				    with used length.
+ *
+ *  @return pldm_completion_codes
+ */
+int encode_get_firmware_parameters_resp_comp_entry(
+	const struct pldm_component_parameter_entry *comp,
+	const struct variable_field *active_ver,
+	const struct variable_field *pending_ver, uint8_t *payload,
+	size_t *payload_length);
 
 /** @brief Create a PLDM request message for QueryDownstreamDevices
  *
@@ -1142,6 +1219,37 @@ int encode_request_update_req(uint8_t instance_id, uint32_t max_transfer_size,
 			      const struct variable_field *comp_img_set_ver_str,
 			      struct pldm_msg *msg, size_t payload_length);
 
+/** @brief Decode PLDM request message for RequestUpdate
+ *
+ *  @param[in] msg - Message
+ *  @param[in] payload_length - Length of request message payload
+ *  @param[in] max_transfer_size - Maximum size of the variable payload allowed
+ *                                 to be requested via RequestFirmwareData
+ *                                 command
+ *  @param[in] num_of_comp - Total number of components that will be passed to
+ *                           the FD during the update
+ *  @param[in] max_outstanding_transfer_req - Total number of outstanding
+ * 											  RequestFirmwareData
+ * commands that can be sent by the FD
+ *  @param[in] pkg_data_len - Value of the FirmwareDevicePackageDataLength field
+ *                            present in firmware package header
+ *  @param[in] comp_image_set_ver_str_type - StringType of
+ *                                           ComponentImageSetVersionString
+ *  @param[in] comp_img_set_ver_str - Component Image Set version information
+ *
+ *  @return pldm_completion_codes
+ *
+ *  @note Caller is responsible for memory alloc and dealloc of param
+ *        'msg.payload'
+ */
+int decode_request_update_req(const struct pldm_msg *msg, size_t payload_length,
+			      uint32_t *max_transfer_size,
+			      uint16_t *num_of_comp,
+			      uint8_t *max_outstanding_transfer_req,
+			      uint16_t *pkg_data_len,
+			      uint8_t *comp_image_set_ver_str_type,
+			      struct variable_field *comp_img_set_ver_str);
+
 /** @brief Decode a RequestUpdate response message
  *
  *  @param[in] msg - Response message
@@ -1156,6 +1264,22 @@ int decode_request_update_resp(const struct pldm_msg *msg,
 			       size_t payload_length, uint8_t *completion_code,
 			       uint16_t *fd_meta_data_len,
 			       uint8_t *fd_will_send_pkg_data);
+
+/** @brief Create PLDM response message for RequestUpdate
+ *
+ *	@param[in] instance_id - Message's instance id
+ *	@param[in] completion_code - CompletionCode
+ *	@param[in,out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of response message payload
+ *
+ *	@return pldm_completion_codes
+ *
+ *	@note  Caller is responsible for memory alloc and dealloc of param
+ *		   'msg.payload'
+ */
+int encode_request_update_resp(uint8_t instance_id, uint16_t fd_meta_data_len,
+			       uint8_t fd_will_send_pkg_data,
+			       struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM request message for PassComponentTable
  *
@@ -1185,6 +1309,13 @@ int encode_pass_component_table_req(
 	const struct variable_field *comp_ver_str, struct pldm_msg *msg,
 	size_t payload_length);
 
+int decode_pass_component_table_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	uint8_t *transfer_flag, uint16_t *comp_classification,
+	uint16_t *comp_identifier, uint8_t *comp_classification_index,
+	uint32_t *comp_comparison_stamp, uint8_t *comp_ver_str_type,
+	struct variable_field *comp_ver_str);
+
 /** @brief Decode PassComponentTable response message
  *
  *  @param[in] msg - Response message
@@ -1200,6 +1331,11 @@ int decode_pass_component_table_resp(const struct pldm_msg *msg,
 				     uint8_t *completion_code,
 				     uint8_t *comp_resp,
 				     uint8_t *comp_resp_code);
+
+int encode_pass_component_table_resp(uint8_t instance_id, uint8_t comp_resp,
+				     uint8_t comp_resp_code,
+				     struct pldm_msg *msg,
+				     size_t *payload_length);
 
 /** @brief Create PLDM request message for UpdateComponent
  *
@@ -1230,6 +1366,13 @@ int encode_update_component_req(
 	uint8_t comp_ver_str_len, const struct variable_field *comp_ver_str,
 	struct pldm_msg *msg, size_t payload_length);
 
+int decode_update_component_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	uint16_t *comp_classification, uint16_t *comp_identifier,
+	uint8_t *comp_classification_index, uint32_t *comp_comparison_stamp,
+	uint32_t *comp_image_size, bitfield32_t *update_option_flags,
+	uint8_t *comp_ver_str_type, struct variable_field *comp_ver_str);
+
 /** @brief Decode UpdateComponent response message
  *
  *  @param[in] msg - Response message
@@ -1254,6 +1397,12 @@ int decode_update_component_resp(const struct pldm_msg *msg,
 				 bitfield32_t *update_option_flags_enabled,
 				 uint16_t *time_before_req_fw_data);
 
+int encode_update_component_resp(uint8_t instance_id, uint8_t comp_resp,
+				 uint8_t comp_resp_code,
+				 bitfield32_t update_option_flags_enabled,
+				 uint16_t time_before_req_fw_data,
+				 struct pldm_msg *msg, size_t *payload_length);
+
 /** @brief Decode RequestFirmwareData request message
  *
  *	@param[in] msg - Request message
@@ -1267,6 +1416,10 @@ int decode_update_component_resp(const struct pldm_msg *msg,
 int decode_request_firmware_data_req(const struct pldm_msg *msg,
 				     size_t payload_length, uint32_t *offset,
 				     uint32_t *length);
+
+int encode_request_firmware_data_req(uint8_t instance_id, uint32_t offset,
+				     uint32_t length, struct pldm_msg *msg,
+				     size_t *payload_length);
 
 /** @brief Create PLDM response message for RequestFirmwareData
  *
@@ -1303,6 +1456,9 @@ int decode_transfer_complete_req(const struct pldm_msg *msg,
 				 size_t payload_length,
 				 uint8_t *transfer_result);
 
+int encode_transfer_complete_req(uint8_t instance_id, uint8_t transfer_result,
+				 struct pldm_msg *msg, size_t *payload_length);
+
 /** @brief Create PLDM response message for TransferComplete
  *
  *  @param[in] instance_id - Message's instance id
@@ -1328,6 +1484,9 @@ int encode_transfer_complete_resp(uint8_t instance_id, uint8_t completion_code,
  */
 int decode_verify_complete_req(const struct pldm_msg *msg,
 			       size_t payload_length, uint8_t *verify_result);
+
+int encode_verify_complete_req(uint8_t instance_id, uint8_t verify_result,
+			       struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM response message for VerifyComplete
  *
@@ -1358,6 +1517,10 @@ int decode_apply_complete_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *apply_result,
 	bitfield16_t *comp_activation_methods_modification);
+
+int encode_apply_complete_req(uint8_t instance_id, uint8_t result,
+			      bitfield16_t activation_methods,
+			      struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM response message for ApplyComplete
  *
@@ -1390,6 +1553,9 @@ int encode_activate_firmware_req(uint8_t instance_id,
 				 bool8_t self_contained_activation_req,
 				 struct pldm_msg *msg, size_t payload_length);
 
+int decode_activate_firmware_req(const struct pldm_msg *msg,
+				 size_t payload_length, bool *self_contained);
+
 /** @brief Decode ActivateFirmware response message
  *
  *  @param[in] msg - Response message
@@ -1404,6 +1570,10 @@ int decode_activate_firmware_resp(const struct pldm_msg *msg,
 				  size_t payload_length,
 				  uint8_t *completion_code,
 				  uint16_t *estimated_time_activation);
+
+int encode_activate_firmware_resp(uint8_t instance_id, uint8_t completion_code,
+				  uint16_t estimated_time_activation,
+				  struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM request message for GetStatus
  *
@@ -1442,6 +1612,13 @@ int decode_get_status_resp(const struct pldm_msg *msg, size_t payload_length,
 			   uint8_t *aux_state_status, uint8_t *progress_percent,
 			   uint8_t *reason_code,
 			   bitfield32_t *update_option_flags_enabled);
+
+int encode_get_status_resp(uint8_t instance_id, uint8_t current_state,
+			   uint8_t previous_state, uint8_t aux_state,
+			   uint8_t aux_state_status, uint8_t progress_percent,
+			   uint8_t reason_code,
+			   bitfield32_t update_option_flags_enabled,
+			   struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create PLDM request message for CancelUpdateComponent
  *
@@ -1502,6 +1679,15 @@ int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
 			      uint8_t *completion_code,
 			      bool8_t *non_functioning_component_indication,
 			      bitfield64_t *non_functioning_component_bitmap);
+
+int encode_cancel_update_resp(uint8_t instance_id,
+			      bool8_t non_functioning_component_indication,
+			      bitfield64_t non_functioning_component_bitmap,
+			      struct pldm_msg *msg, size_t *payload_length);
+
+int pldm_firmware_variable_to_string(
+	enum pldm_firmware_update_string_type str_type,
+	const struct variable_field *var, struct pldm_firmware_string *str);
 
 #ifdef __cplusplus
 }
