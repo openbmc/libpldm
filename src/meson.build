@@ -15,6 +15,8 @@ if get_option('oem-meta').allowed()
     subdir('oem/meta')
 endif
 
+subdir('firmware_device')
+
 libpldm_link_args = []
 foreach alias : libpldm_deprecated_aliases
     libpldm_link_args += '-Wl,--defsym=@0@=@1@'.format(alias[0], alias[1])
