@@ -473,6 +473,40 @@ int decode_firmware_device_id_record(
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
+				     struct pldm_descriptor *desc)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (!iter || !iter->field || !desc) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN,
+				    iter->field->ptr, iter->field->length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, desc->descriptor_type);
+	rc = pldm_msgbuf_extract(buf, desc->descriptor_length);
+	if (rc) {
+		return rc;
+	}
+
+	desc->descriptor_data = NULL;
+	pldm_msgbuf_span_required(buf, desc->descriptor_length,
+				  (void **)&desc->descriptor_data);
+	iter->field->ptr = NULL;
+	pldm_msgbuf_span_remaining(buf, (void **)&iter->field->ptr,
+				   &iter->field->length);
+
+	return pldm_msgbuf_destroy(buf);
+}
+
 LIBPLDM_ABI_STABLE
 int decode_descriptor_type_length_value(const uint8_t *data, size_t length,
 					uint16_t *descriptor_type,
@@ -1050,6 +1084,34 @@ int decode_query_downstream_identifiers_resp(
 	}
 
 	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_downstream_device_from_iter(
+	struct pldm_downstream_device_iter *iter,
+	struct pldm_downstream_device *dev)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (!iter || !iter->field || !dev) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 3, iter->field->ptr,
+				    iter->field->length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, dev->downstream_device_index);
+	pldm_msgbuf_extract(buf, dev->downstream_descriptor_count);
+	iter->field->ptr = NULL;
+	pldm_msgbuf_span_remaining(buf, (void **)&iter->field->ptr,
+				   &iter->field->length);
+
+	return pldm_msgbuf_destroy(buf);
 }
 
 LIBPLDM_ABI_TESTING
