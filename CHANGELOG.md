@@ -52,6 +52,8 @@ Change categories:
    `encode_query_downstream_identifiers_req()` and
    `encode_get_downstream_firmware_params_req()`
 
+7. Add Firmware Device side firmware_update encode/decode functions
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
