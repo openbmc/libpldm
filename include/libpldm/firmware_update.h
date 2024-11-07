@@ -2,6 +2,7 @@
 #ifndef FW_UPDATE_H
 #define FW_UPDATE_H
 
+#include "utils.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -570,6 +571,111 @@ struct pldm_downstream_device {
 	uint8_t downstream_descriptor_count;
 };
 #define PLDM_DOWNSTREAM_DEVICE_BYTES 3
+
+struct pldm_downstream_device_iter {
+	struct variable_field *field;
+	size_t count;
+};
+
+LIBPLDM_ITERATOR
+struct pldm_downstream_device_iter pldm_downstream_device_iter_init(
+	const struct pldm_query_downstream_identifiers_resp *resp,
+	struct variable_field *remaining)
+{
+	struct pldm_downstream_device_iter iter = {
+		remaining, resp->number_of_downstream_devices
+	};
+	return iter;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_downstream_device_iter_end(
+	const struct pldm_downstream_device_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_downstream_device_iter_next(struct pldm_downstream_device_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+int decode_pldm_downstream_device_from_iter(
+	struct pldm_downstream_device_iter *iter,
+	struct pldm_downstream_device *dev);
+
+#define foreach_pldm_downstream_device(resp, remaining, dev, rc)               \
+	for (struct pldm_downstream_device_iter dev##_iter =                   \
+		     ((rc) = 0,                                                \
+		     pldm_downstream_device_iter_init(&(resp), &(remaining))); \
+	     (!pldm_downstream_device_iter_end(&(dev##_iter)) &&               \
+	      !((rc) = decode_pldm_downstream_device_from_iter(&(dev##_iter),  \
+							       &(dev))));      \
+	     pldm_downstream_device_iter_next(&(dev##_iter)))
+
+/** @struct pldm_descriptor
+ *
+ * Structure representing a type-length-value descriptor as defined in Table 7 -
+ * Descriptor Definition.
+ *
+ * Member values are always host-endian. When decoding messages, the
+ * descriptor_data member points into the message buffer.
+ */
+struct pldm_descriptor {
+	uint16_t descriptor_type;
+	uint16_t descriptor_length;
+	const void *descriptor_data;
+};
+
+struct pldm_descriptor_iter {
+	struct variable_field *field;
+	size_t count;
+};
+
+LIBPLDM_ITERATOR
+struct pldm_descriptor_iter
+pldm_descriptor_iter_init(const struct pldm_downstream_device *dev,
+			  struct variable_field *remaining)
+{
+	struct pldm_descriptor_iter iter = { remaining,
+					     dev->downstream_descriptor_count };
+	return iter;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_descriptor_iter_end(const struct pldm_descriptor_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_descriptor_iter_next(struct pldm_descriptor_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
+				     struct pldm_descriptor *desc);
+
+#define foreach_pldm_device_descriptor(dev, remaining, desc, rc)               \
+	for (struct pldm_descriptor_iter desc##_iter =                         \
+		     ((rc) = 0,                                                \
+		     pldm_descriptor_iter_init(&(dev), &(remaining)));         \
+	     (!pldm_descriptor_iter_end(&(desc##_iter)) &&                     \
+	      !((rc) = decode_pldm_descriptor_from_iter(&(desc##_iter),        \
+							&(desc))));            \
+	     pldm_descriptor_iter_next(&(desc##_iter)))
 
 /** @struct pldm_query_downstream_firmware_param_req
  *
