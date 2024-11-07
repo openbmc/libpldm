@@ -446,7 +446,7 @@ struct pldm_descriptor_tlv {
 	uint16_t descriptor_type;
 	uint16_t descriptor_length;
 	uint8_t descriptor_data[1];
-} __attribute__((packed));
+} __attribute__((packed)) LIBPLDM_CC_UNAVAILABLE;
 
 /** @struct pldm_vendor_defined_descriptor_title_data
  *
