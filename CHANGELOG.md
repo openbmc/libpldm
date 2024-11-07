@@ -63,6 +63,8 @@ Change categories:
 
    The change removes redundant APIs in the process.
 
+9. Add Firmware Device side firmware_update encode/decode functions
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
