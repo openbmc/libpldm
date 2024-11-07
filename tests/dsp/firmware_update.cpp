@@ -23,6 +23,24 @@ using testing::ElementsAreArray;
 
 constexpr auto hdrSize = sizeof(pldm_msg_hdr);
 
+#ifdef LIBPLDM_API_TESTING
+
+static const uint8_t FIXED_INSTANCE_ID = 31;
+
+/* data is a pointer to pldm message response header */
+static void check_response(const void* data, uint8_t command)
+{
+    auto enc = static_cast<const pldm_msg*>(data);
+    EXPECT_EQ(enc->hdr.request, PLDM_RESPONSE);
+    EXPECT_EQ(enc->hdr.type, PLDM_FWUP);
+    EXPECT_EQ(enc->hdr.command, command);
+    EXPECT_EQ(enc->hdr.reserved, 0);
+    EXPECT_EQ(enc->hdr.datagram, 0);
+    EXPECT_EQ(enc->hdr.header_ver, 0);
+    EXPECT_EQ(enc->hdr.instance_id, FIXED_INSTANCE_ID);
+}
+#endif
+
 TEST(DecodePackageHeaderInfo, goodPath)
 {
     // Package header identifier for Version 1.0.x
@@ -857,6 +875,61 @@ TEST(QueryDeviceIdentifiers, goodPathDecodeResponse)
                          responseMsg.end()));
 }
 
+#ifdef LIBPLDM_API_TESTING
+TEST(QueryDeviceIdentifiers, goodPathEncodeResponse)
+{
+    int rc;
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+    pldm_descriptor check_desc[] = {
+        {
+            .descriptor_type = PLDM_FWUP_IANA_ENTERPRISE_ID,
+            .descriptor_length = 4,
+            .descriptor_data = "a123",
+        },
+        {
+            .descriptor_type = PLDM_FWUP_VENDOR_DEFINED,
+            .descriptor_length = 3,
+            .descriptor_data = "987",
+        },
+    };
+    rc = encode_query_device_identifiers_resp(FIXED_INSTANCE_ID, 2, check_desc,
+                                              enc, &enc_payload_len);
+    EXPECT_EQ(rc, 0);
+    EXPECT_THAT(std::span<uint8_t>(enc_buf + hdrSize, enc_payload_len),
+                ElementsAreArray<uint8_t>({
+                    // completion code
+                    0x00,
+                    // device identifiers length = 15
+                    0x0f,
+                    0x00,
+                    0x00,
+                    0x00,
+                    // descriptor count
+                    0x02,
+                    // desc 0
+                    0x01,
+                    0x00,
+                    0x04,
+                    0x00,
+                    0x61,
+                    0x31,
+                    0x32,
+                    0x33,
+                    // desc 1
+                    0xff,
+                    0xff,
+                    0x03,
+                    0x00,
+                    0x39,
+                    0x38,
+                    0x37,
+                }));
+
+    check_response(enc, PLDM_QUERY_DEVICE_IDENTIFIERS);
+}
+#endif
+
 TEST(GetFirmwareParameters, goodPathEncodeRequest)
 {
     std::array<uint8_t, sizeof(pldm_msg_hdr)> requestMsg{};
@@ -1220,6 +1293,7 @@ TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
     constexpr uint16_t compClassification = 0x0a0b;
     // Random value for component classification
     constexpr uint16_t compIdentifier = 0x0c0d;
+    constexpr uint16_t compClassificationIndex = 0xf;
     // Random value for component classification
     constexpr uint32_t timestamp = 0x12345678;
     // Random value for component activation methods
@@ -1242,7 +1316,7 @@ TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
 
     inEntry->comp_classification = htole16(compClassification);
     inEntry->comp_identifier = htole16(compIdentifier);
-    inEntry->comp_classification_index = 0x0f;
+    inEntry->comp_classification_index = compClassificationIndex;
     inEntry->active_comp_comparison_stamp = htole32(timestamp);
     inEntry->active_comp_ver_str_type = 1;
     inEntry->active_comp_ver_str_len = activeCompVerStrLen;
@@ -1304,6 +1378,48 @@ TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
     EXPECT_EQ(0, memcmp(outPendingCompVerStr.ptr,
                         entry.data() + pendingCompVerStrPos,
                         outPendingCompVerStr.length));
+
+#ifdef LIBPLDM_API_TESTING
+    /* Check the roundtrip matches */
+    std::vector<uint8_t> enc_data(1000);
+    size_t enc_payload_len = enc_data.size();
+    struct pldm_component_parameter_entry_full entryFull = {
+        .comp_classification = compClassification,
+        .comp_identifier = compIdentifier,
+        .comp_classification_index = compClassificationIndex,
+        .active_ver =
+            {
+                .comparison_stamp = 0x12345678,
+                .str = {.str_type = PLDM_STR_TYPE_ASCII,
+                        .str_len = activeCompVerStrLen,
+                        .str_data = {}},
+                .date = {},
+            },
+        .pending_ver =
+            {
+                .comparison_stamp = 0x12345678,
+                .str = {.str_type = PLDM_STR_TYPE_ASCII,
+                        .str_len = pendingCompVerStrLen,
+                        .str_data = {}},
+                .date = {},
+            },
+        .comp_activation_methods = inEntry->comp_activation_methods,
+        .capabilities_during_update = inEntry->capabilities_during_update,
+    };
+    // Fill strings
+    std::fill_n(entryFull.active_ver.str.str_data, activeCompVerStrLen, 0xaa);
+    std::fill_n(entryFull.pending_ver.str.str_data, pendingCompVerStrLen, 0xbb);
+    std::fill_n(entryFull.active_ver.date, PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN,
+                0xff);
+    std::fill_n(entryFull.pending_ver.date,
+                PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN, 0xff);
+
+    rc = encode_get_firmware_parameters_resp_comp_entry(
+        &entryFull, enc_data.data(), &enc_payload_len);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(enc_payload_len, entryLength);
+    EXPECT_TRUE(std::equal(entry.begin(), entry.end(), enc_data.begin()));
+#endif
 }
 
 #ifdef LIBPLDM_API_TESTING
@@ -2701,6 +2817,7 @@ TEST(RequestUpdate, errorPathEncodeRequest)
 
 TEST(RequestUpdate, goodPathDecodeResponse)
 {
+    /* Test a success completion code */
     constexpr uint16_t fdMetaDataLen = 1024;
     constexpr uint8_t fdWillSendPkgData = 1;
     constexpr std::array<uint8_t, hdrSize + sizeof(pldm_request_update_resp)>
@@ -2721,6 +2838,21 @@ TEST(RequestUpdate, goodPathDecodeResponse)
     EXPECT_EQ(outFdMetaDataLen, fdMetaDataLen);
     EXPECT_EQ(outFdWillSendPkgData, fdWillSendPkgData);
 
+#ifdef LIBPLDM_API_TESTING
+    /* Check the success roundtrip matches */
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+    rc =
+        encode_request_update_resp(FIXED_INSTANCE_ID, outFdMetaDataLen,
+                                   outFdWillSendPkgData, enc, &enc_payload_len);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(enc_payload_len + hdrSize, requestUpdateResponse1.size());
+    EXPECT_TRUE(std::equal(requestUpdateResponse1.begin() + hdrSize,
+                           requestUpdateResponse1.end(), enc_buf + hdrSize));
+    check_response(enc, PLDM_REQUEST_UPDATE);
+#endif
+
+    /* Test a failure completion code */
     outCompletionCode = 0;
     outFdMetaDataLen = 0;
     outFdWillSendPkgData = 0;
@@ -2812,6 +2944,27 @@ TEST(PassComponentTable, goodPathEncodeRequest)
                    0x78, 0x56, 0x34, 0x12, 0x01, 0x0b, 0x30, 0x70, 0x65,
                    0x6e, 0x42, 0x6d, 0x63, 0x76, 0x31, 0x2e, 0x31};
     EXPECT_EQ(request, outRequest);
+
+#ifdef LIBPLDM_API_TESTING
+    /* Check the roundtrip */
+    struct pldm_pass_component_table_req_full req;
+    PLDM_MSG_DEFINE_P(dec, outRequest.size());
+    std::copy(outRequest.begin(), outRequest.end(), dec_buf);
+    rc =
+        decode_pass_component_table_req(dec, outRequest.size() - hdrSize, &req);
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(req.transfer_flag, PLDM_START_AND_END);
+    EXPECT_EQ(req.comp_classification, PLDM_COMP_FIRMWARE);
+    EXPECT_EQ(req.comp_identifier, compIdentifier);
+    EXPECT_EQ(req.comp_classification_index, compClassificationIndex);
+    EXPECT_EQ(req.comp_comparison_stamp, compComparisonStamp);
+    EXPECT_EQ(req.version.str_type, PLDM_STR_TYPE_ASCII);
+    EXPECT_EQ(req.version.str_len, compVerStrLen);
+    EXPECT_TRUE(std::equal(req.version.str_data,
+                           req.version.str_data + req.version.str_len,
+                           compVerStr.data()));
+#endif
 }
 
 TEST(PassComponentTable, errorPathEncodeRequest)
@@ -3056,6 +3209,27 @@ TEST(UpdateComponent, goodPathEncodeRequest)
                    0x00, 0x00, 0x01, 0x0b, 0x4f, 0x70, 0x65, 0x6e, 0x42,
                    0x6d, 0x63, 0x76, 0x32, 0x2e, 0x32};
     EXPECT_EQ(request, outRequest);
+
+#ifdef LIBPLDM_API_TESTING
+    /* Check the roundtrip */
+    struct pldm_update_component_req_full req;
+    PLDM_MSG_DEFINE_P(dec, outRequest.size());
+    std::copy(outRequest.begin(), outRequest.end(), dec_buf);
+    rc = decode_update_component_req(dec, outRequest.size() - hdrSize, &req);
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(req.comp_classification, PLDM_COMP_FIRMWARE);
+    EXPECT_EQ(req.comp_identifier, compIdentifier);
+    EXPECT_EQ(req.comp_classification_index, compClassificationIndex);
+    EXPECT_EQ(req.comp_comparison_stamp, compComparisonStamp);
+    EXPECT_EQ(req.comp_image_size, compImageSize);
+    EXPECT_EQ(req.update_option_flags.value, updateOptionFlags.value);
+    EXPECT_EQ(req.version.str_type, PLDM_STR_TYPE_ASCII);
+    EXPECT_EQ(req.version.str_len, compVerStrLen);
+    EXPECT_TRUE(std::equal(req.version.str_data,
+                           req.version.str_data + req.version.str_len,
+                           compVerStr.data()));
+#endif
 }
 
 TEST(UpdateComponent, errorPathEncodeRequest)
@@ -3898,6 +4072,30 @@ TEST(GetStatus, goodPathDecodeResponse)
     EXPECT_EQ(reasonCode, PLDM_FD_TIMEOUT_DOWNLOAD);
     EXPECT_EQ(updateOptionFlagsEnabled.value, updateOptionFlagsEnabled2);
 
+#ifdef LIBPLDM_API_TESTING
+    /* Check the roundtrip */
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+    const struct pldm_get_status_resp status_enc = {
+        .completion_code = PLDM_SUCCESS,
+        .current_state = currentState,
+        .previous_state = previousState,
+        .aux_state = auxState,
+        .aux_state_status = auxStateStatus,
+        .progress_percent = progressPercent,
+        .reason_code = reasonCode,
+        .update_option_flags_enabled = updateOptionFlagsEnabled,
+    };
+    rc = encode_get_status_resp(FIXED_INSTANCE_ID, &status_enc, enc,
+                                &enc_payload_len);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(enc_payload_len + hdrSize, getStatusResponse2.size());
+    EXPECT_TRUE(std::equal(getStatusResponse2.begin() + hdrSize,
+                           getStatusResponse2.end(), enc_buf + hdrSize));
+    check_response(enc, PLDM_GET_STATUS);
+#endif
+
+    /* Check a not-ready completion code */
     constexpr std::array<uint8_t, hdrSize + sizeof(completionCode)>
         getStatusResponse3{0x00, 0x00, 0x00, 0x04};
     auto responseMsg3 =
