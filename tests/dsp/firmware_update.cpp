@@ -1523,7 +1523,7 @@ TEST(QueryDownstreamIdentifiers, goodPathDecodeResponse)
     // Len is not fixed here taking it as 9, contains 1 downstream device with
     // 1 descriptor
     constexpr uint32_t downstreamDevicesLen = 9;
-    constexpr uint8_t complition_code_resp = PLDM_SUCCESS;
+    constexpr uint8_t completion_code_resp = PLDM_SUCCESS;
     constexpr uint32_t next_data_transfer_handle_resp = 0x0;
     constexpr uint8_t transfer_flag_resp = PLDM_START_AND_END;
     const uint32_t downstream_devices_length_resp =
@@ -1541,7 +1541,7 @@ TEST(QueryDownstreamIdentifiers, goodPathDecodeResponse)
                                 responseMsg.size() - hdrSize);
     EXPECT_EQ(rc, 0);
 
-    pldm_msgbuf_insert_uint8(buf, complition_code_resp);
+    pldm_msgbuf_insert_uint8(buf, completion_code_resp);
     pldm_msgbuf_insert_uint32(buf, next_data_transfer_handle_resp);
     pldm_msgbuf_insert_uint8(buf, transfer_flag_resp);
     pldm_msgbuf_insert_uint32(buf, downstream_devices_length_resp);
@@ -1563,7 +1563,7 @@ TEST(QueryDownstreamIdentifiers, goodPathDecodeResponse)
         response, responseMsg.size() - hdrSize, &resp_data, &downstreamDevices);
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
-    EXPECT_EQ(resp_data.completion_code, complition_code_resp);
+    EXPECT_EQ(resp_data.completion_code, completion_code_resp);
     EXPECT_EQ(resp_data.next_data_transfer_handle,
               next_data_transfer_handle_resp);
     EXPECT_EQ(resp_data.transfer_flag, transfer_flag_resp);
