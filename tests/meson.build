@@ -18,6 +18,10 @@ tests = ['instance-id', 'msgbuf', 'responder', 'utils']
 
 subdir('dsp')
 
+if get_option('abi').contains('testing')
+    subdir('fuzz')
+endif
+
 # The 'test' transport APIs will never be marked stable as they are just for
 # testing.
 if get_option('abi').contains('testing')
