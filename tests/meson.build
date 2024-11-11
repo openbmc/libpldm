@@ -17,6 +17,7 @@ test_include_dirs = [libpldm_include_dir, include_directories('../src')]
 tests = ['instance-id', 'msgbuf', 'responder', 'utils']
 
 subdir('dsp')
+subdir('fuzz')
 
 # The 'test' transport APIs will never be marked stable as they are just for
 # testing.
