@@ -18,7 +18,7 @@ int encode_get_fru_record_table_metadata_req(uint8_t instance_id,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_GET_FRU_RECORD_TABLE_METADATA_REQ_BYTES) {
+	if (payload_length < PLDM_GET_FRU_RECORD_TABLE_METADATA_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -52,7 +52,7 @@ int decode_get_fru_record_table_metadata_resp(
 		return PLDM_SUCCESS;
 	}
 
-	if (payload_length != PLDM_GET_FRU_RECORD_TABLE_METADATA_RESP_BYTES) {
+	if (payload_length < PLDM_GET_FRU_RECORD_TABLE_METADATA_RESP_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -123,7 +123,7 @@ int decode_get_fru_record_table_req(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_GET_FRU_RECORD_TABLE_REQ_BYTES) {
+	if (payload_length < PLDM_GET_FRU_RECORD_TABLE_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -303,7 +303,7 @@ int encode_get_fru_record_by_option_req(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length !=
+	if (payload_length <
 	    sizeof(struct pldm_get_fru_record_by_option_req)) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
@@ -345,7 +345,7 @@ int decode_get_fru_record_by_option_req(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length !=
+	if (payload_length <
 	    sizeof(struct pldm_get_fru_record_by_option_req)) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
@@ -451,7 +451,7 @@ int encode_get_fru_record_table_req(uint8_t instance_id,
 	if (msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
-	if (payload_length != sizeof(struct pldm_get_fru_record_table_req)) {
+	if (payload_length < sizeof(struct pldm_get_fru_record_table_req)) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -568,7 +568,7 @@ int encode_set_fru_record_table_resp(uint8_t instance_id,
 	if (msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
-	if (payload_length != PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES) {
+	if (payload_length < PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 

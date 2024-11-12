@@ -14,7 +14,7 @@ int encode_get_alert_status_req(uint8_t instance_id, uint8_t version_id,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	if (payload_length != PLDM_GET_ALERT_STATUS_REQ_BYTES) {
+	if (payload_length < PLDM_GET_ALERT_STATUS_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -49,7 +49,7 @@ int decode_get_alert_status_resp(const struct pldm_msg *msg,
 		return PLDM_SUCCESS;
 	}
 
-	if (payload_length != PLDM_GET_ALERT_STATUS_RESP_BYTES) {
+	if (payload_length < PLDM_GET_ALERT_STATUS_RESP_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -70,7 +70,7 @@ int decode_get_alert_status_req(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_GET_ALERT_STATUS_REQ_BYTES) {
+	if (payload_length < PLDM_GET_ALERT_STATUS_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -85,11 +85,11 @@ int encode_get_alert_status_resp(uint8_t instance_id, uint8_t completion_code,
 				 struct pldm_msg *msg, size_t payload_length)
 {
 	if (msg == NULL) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_GET_ALERT_STATUS_RESP_BYTES) {
-		return PLDM_ERROR_INVALID_DATA;
+	if (payload_length < PLDM_GET_ALERT_STATUS_RESP_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
 	struct pldm_header_info header = { 0 };

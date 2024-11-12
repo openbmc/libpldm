@@ -288,7 +288,7 @@ int decode_get_bios_table_req(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_GET_BIOS_TABLE_REQ_BYTES) {
+	if (payload_length < PLDM_GET_BIOS_TABLE_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 

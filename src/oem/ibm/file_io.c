@@ -15,7 +15,7 @@ int decode_rw_file_memory_req(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_RW_FILE_MEM_REQ_BYTES) {
+	if (payload_length < PLDM_RW_FILE_MEM_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -97,7 +97,7 @@ int decode_rw_file_memory_resp(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_RW_FILE_MEM_RESP_BYTES) {
+	if (payload_length < PLDM_RW_FILE_MEM_RESP_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -121,7 +121,7 @@ int decode_get_file_table_req(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_GET_FILE_TABLE_REQ_BYTES) {
+	if (payload_length < PLDM_GET_FILE_TABLE_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -245,7 +245,7 @@ int decode_read_file_req(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_READ_FILE_REQ_BYTES) {
+	if (payload_length < PLDM_READ_FILE_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -417,7 +417,7 @@ int decode_write_file_resp(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_WRITE_FILE_RESP_BYTES) {
+	if (payload_length < PLDM_WRITE_FILE_RESP_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -473,7 +473,7 @@ int decode_rw_file_by_type_memory_req(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_RW_FILE_BY_TYPE_MEM_REQ_BYTES) {
+	if (payload_length < PLDM_RW_FILE_BY_TYPE_MEM_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -558,7 +558,7 @@ int decode_rw_file_by_type_memory_resp(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_RW_FILE_BY_TYPE_MEM_RESP_BYTES) {
+	if (payload_length < PLDM_RW_FILE_BY_TYPE_MEM_RESP_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -582,7 +582,7 @@ int decode_new_file_req(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_NEW_FILE_REQ_BYTES) {
+	if (payload_length < PLDM_NEW_FILE_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -656,7 +656,7 @@ int decode_new_file_resp(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_NEW_FILE_RESP_BYTES) {
+	if (payload_length < PLDM_NEW_FILE_RESP_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -768,7 +768,7 @@ int decode_rw_file_by_type_resp(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_RW_FILE_BY_TYPE_RESP_BYTES) {
+	if (payload_length < PLDM_RW_FILE_BY_TYPE_RESP_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -791,7 +791,7 @@ int decode_file_ack_req(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_FILE_ACK_REQ_BYTES) {
+	if (payload_length < PLDM_FILE_ACK_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -865,7 +865,7 @@ int decode_file_ack_resp(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_FILE_ACK_RESP_BYTES) {
+	if (payload_length < PLDM_FILE_ACK_RESP_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -919,7 +919,7 @@ int decode_file_ack_with_meta_data_resp(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_FILE_ACK_WITH_META_DATA_RESP_BYTES) {
+	if (payload_length < PLDM_FILE_ACK_WITH_META_DATA_RESP_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -941,7 +941,7 @@ int decode_file_ack_with_meta_data_req(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_FILE_ACK_WITH_META_DATA_REQ_BYTES) {
+	if (payload_length < PLDM_FILE_ACK_WITH_META_DATA_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -1029,7 +1029,7 @@ int decode_new_file_with_metadata_resp(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length !=
+	if (payload_length <
 	    PLDM_NEW_FILE_AVAILABLE_WITH_META_DATA_RESP_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
@@ -1056,7 +1056,7 @@ int decode_new_file_with_metadata_req(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length !=
+	if (payload_length <
 	    PLDM_NEW_FILE_AVAILABLE_WITH_META_DATA_REQ_BYTES) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
