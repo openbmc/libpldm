@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e2cbba4_3106f281",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-11-12T09:03:43Z",
+      "side": 1,
+      "message": "can we trim this?\nThe commit adds an API that finds the existing container ID of the effecter or sensor from the corresponding Entity Association PDR.\nsomething like this?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 18
+      },
+      "revId": "f6e98580f79de98e71a07daa92c9a7f14f8c5344",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa9974d5_9a5a3e0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-11-12T09:03:43Z",
+      "side": 1,
+      "message": "nit: container\nThis is just finding the container ID correct? how will this API update the container ID?",
+      "range": {
+        "startLine": 16,
+        "startChar": 21,
+        "endLine": 16,
+        "endChar": 31
+      },
+      "revId": "f6e98580f79de98e71a07daa92c9a7f14f8c5344",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceb832e3_32540a1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-11-12T09:03:43Z",
+      "side": 1,
+      "message": "Can we add a CHANGELOG entry for the change?",
+      "revId": "f6e98580f79de98e71a07daa92c9a7f14f8c5344",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a23c1a_3bc9b493",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-11-12T09:03:43Z",
+      "side": 1,
+      "message": "nit:extra space",
+      "range": {
+        "startLine": 242,
+        "startChar": 86,
+        "endLine": 242,
+        "endChar": 89
+      },
+      "revId": "f6e98580f79de98e71a07daa92c9a7f14f8c5344",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5982f5d8_28fd75f5",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2024-11-12T09:03:43Z",
+      "side": 1,
+      "message": "do we need a proper error return here rather than assert?",
+      "range": {
+        "startLine": 536,
+        "startChar": 1,
+        "endLine": 537,
+        "endChar": 52
+      },
+      "revId": "f6e98580f79de98e71a07daa92c9a7f14f8c5344",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
