@@ -1,0 +1,351 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6056ed2d_eef1d4cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Please avoid using \"This commit\" in commit messages - it\u0027s implicit, right?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 23
+      },
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72aa9c84_0fb3e3c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Can you please discuss the motivations and use-cases? The commit message is for explaining \"why\" and analyzing trade-offs made in the implementation.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfe0e5d1_bf67b37e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Drop this, it seems redundant?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 28
+      },
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3c94006_a267c5d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Please drop the `Tested:` line. I find them to be meaningless, and they\u0027re largely supplanted by good unit tests.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65a1e2f2_ac65ff5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Hi Riya, thanks for the patch. I\u0027ve left a number of comments throughout that hopefully help improve things.\n\nFurther, as you\u0027re changing the public headers of the library, can you please add an entry to the changelog?",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1ebc867_667e3c65",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "What happens on error? Is it impossible for an error to occur?",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a109ae21_d22a79e9",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Please prefix symbols with a short-name for the relevant specification. We\u0027re using `pdr` for e.g. the API defined immediately above this. Using that and including `entity` as the relevant subject of the search:\n\n`pldm_pdr_find_entity_container_id()`.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d708255_6d707c35",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Asserts must not be used for error handling. Please make sure you understand these definitions in the changes checklist:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md#definitions\n\nFurther, for whatever reason, GCC-14\u0027s analyzer doesn\u0027t catch this as an instance of a reachable assertion. That\u0027s kinda surprising, and I\u0027m a bit suspicious I\u0027ve missed something in how the CI is set up.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77eb6d38_32b1fcd0",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Please don\u0027t default-initialise variables unnecessarily, it prevents subsequent bugs from being caught by valgrind or ubsan.\n\nI realise this is not what is preferred for C++, but this is not C++.",
+      "range": {
+        "startLine": 473,
+        "startChar": 1,
+        "endLine": 478,
+        "endChar": 12
+      },
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b36a9e2_100df25e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "`pldm_msgbuf_init_errno()` returns negative errno values, but the declaration of `pldm_find_container_id()` defines the return type as uint16_t. These are not compatible.\n\nPlease change the declaration of `pldm_find_container_id()` to return an `int` so it can correctly signal errors.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0feadd77_b9b3a142",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Just pass `NULL` here and in any other similar calls to `pldm_msgbuf_span_required()`.",
+      "range": {
+        "startLine": 489,
+        "startChar": 7,
+        "endLine": 489,
+        "endChar": 30
+      },
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "721bde45_84ccafe5",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "You must check the return code here before using the value of `hdr_type`.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e04b4d1d_a543ee23",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Can we negate this condition and use `goto cleanup_buf` after adding a `cleanup_buf:` label above line 525?\n\nThat way the following code in the if-body can be unindented one level.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38ad4ae8_fb43e52b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "You must check the return code here before subsequent use of `num_children`.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efffde35_352ec876",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "You need to check the return value of this.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8138a925_3513e1e9",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Is zero not a valid container ID?",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36accb3_9f3c4796",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Building this with GCC-14 via `./scripts/pre-submit` I see:\n\n```\n[73/75] Compiling C++ object tests/dsp_pdr.p/dsp_pdr.cpp.o\nFAILED: tests/dsp_pdr.p/dsp_pdr.cpp.o \nccache c++ -Itests/dsp_pdr.p -Isrc -I../src -I../subprojects/googletest/googletest/include -I../subprojects/googletest/googletest -Isubprojects/googletest/__CMake_build -I../subprojects/googletest/__CMake_build -Isubprojects/googletest -I../subprojects/googletest -I../subprojects/googletest/googlemock/include -I../subprojects/googletest/googlemock -fdiagnostics-color\u003dalways -DNDEBUG -D_FILE_OFFSET_BITS\u003d64 -Wall -Winvalid-pch -Wextra -Wpedantic -Werror -std\u003dc++23 -O3 -DLIBPLDM_API_DEPRECATED -DLIBPLDM_API_TESTING -pthread -isystem../subprojects/googletest/googletest -isystem../subprojects/googletest/googletest/include -isystem../include -isysteminclude -MD -MQ tests/dsp_pdr.p/dsp_pdr.cpp.o -MF tests/dsp_pdr.p/dsp_pdr.cpp.o.d -o tests/dsp_pdr.p/dsp_pdr.cpp.o -c ../tests/dsp/pdr.cpp\nIn file included from ../tests/dsp/pdr.cpp:11:\nIn function ‘int pldm_msgbuf_insert_uint16(pldm_msgbuf*, uint16_t)’,\n    inlined from ‘virtual void FindContainerID_testValidInstanceID_Test::TestBody()’ at ../tests/dsp/pdr.cpp:139:30:\n../src/msgbuf.h:705:23: error: ‘_buf.pldm_msgbuf::cursor’ may be used uninitialized [-Werror\u003dmaybe-uninitialized]\n  705 |                 memcpy(ctx-\u003ecursor, \u0026val, sizeof(val));\n      |                 ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n../tests/dsp/pdr.cpp: In member function ‘virtual void FindContainerID_testValidInstanceID_Test::TestBody()’:\n../tests/dsp/pdr.cpp:107:24: note: ‘_buf.pldm_msgbuf::cursor’ was declared here\n  107 |     struct pldm_msgbuf _buf;\n      |                        ^~~~\ncc1plus: all warnings being treated as errors\nninja: build stopped: subcommand failed.\n```\n\nGiven this is C++, it seems to be the case that you need to construct it?\n\n```\nstruct pldm_msgbuf _buf{};\n```\n\nThat resolved the error for me.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fa8a749_d36ccb40",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Once you\u0027ve finished populating the buffer you must call `pldm_msgbuf_destroy_consumed()` and validate the return value with `ASSERT_EQ()`.\n\nPlease make sure you\u0027ve done this everywhere necessary in this patch.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62de40c7_e6d0ab5e",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-13T01:50:01Z",
+      "side": 1,
+      "message": "Building this with GCC-14 via `./scripts/pre-submit` I see:\n\n```\n[51/75] Compiling C++ object tests/dsp_pdr.p/dsp_pdr.cpp.o\nFAILED: tests/dsp_pdr.p/dsp_pdr.cpp.o \nccache c++ -Itests/dsp_pdr.p -Isrc -I../src -I../subprojects/googletest/googletest/include -I../subprojects/googletest/googletest -Isubprojects/googletest/__CMake_build -I../subprojects/googletest/__CMake_build -Isubprojects/googletest -I../subprojects/googletest -I../subprojects/googletest/googlemock/include -I../subprojects/googletest/googlemock -fdiagnostics-color\u003dalways -DNDEBUG -D_FILE_OFFSET_BITS\u003d64 -Wall -Winvalid-pch -Wextra -Wpedantic -Werror -std\u003dc++23 -O3 -DLIBPLDM_API_DEPRECATED -DLIBPLDM_API_TESTING -pthread -isystem../subprojects/googletest/googletest -isystem../subprojects/googletest/googletest/include -isystem../include -isysteminclude -MD -MQ tests/dsp_pdr.p/dsp_pdr.cpp.o -MF tests/dsp_pdr.p/dsp_pdr.cpp.o.d -o tests/dsp_pdr.p/dsp_pdr.cpp.o -c ../tests/dsp/pdr.cpp\nIn file included from ../tests/dsp/pdr.cpp:11:\nIn function ‘int pldm_msgbuf_insert_uint16(pldm_msgbuf*, uint16_t)’,\n    inlined from ‘virtual void FindContainerID_testValidInstanceID_Test::TestBody()’ at ../tests/dsp/pdr.cpp:139:30:\n../src/msgbuf.h:705:23: error: ‘_buf.pldm_msgbuf::cursor’ may be used uninitialized [-Werror\u003dmaybe-uninitialized]\n  705 |                 memcpy(ctx-\u003ecursor, \u0026val, sizeof(val));\n      |                 ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n../tests/dsp/pdr.cpp: In member function ‘virtual void FindContainerID_testValidInstanceID_Test::TestBody()’:\n../tests/dsp/pdr.cpp:107:24: note: ‘_buf.pldm_msgbuf::cursor’ was declared here\n  107 |     struct pldm_msgbuf _buf;\n      |                        ^~~~\nIn function ‘int pldm_msgbuf_insert_uint16(pldm_msgbuf*, uint16_t)’,\n    inlined from ‘virtual void FindContainerID_testInvalidInstanceID_Test::TestBody()’ at ../tests/dsp/pdr.cpp:187:30:\n../src/msgbuf.h:705:23: error: ‘_buf.pldm_msgbuf::cursor’ may be used uninitialized [-Werror\u003dmaybe-uninitialized]\n  705 |                 memcpy(ctx-\u003ecursor, \u0026val, sizeof(val));\n      |                 ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n../tests/dsp/pdr.cpp: In member function ‘virtual void FindContainerID_testInvalidInstanceID_Test::TestBody()’:\n../tests/dsp/pdr.cpp:156:24: note: ‘_buf.pldm_msgbuf::cursor’ was declared here\n  156 |     struct pldm_msgbuf _buf;\n      |                        ^~~~\ncc1plus: all warnings being treated as errors\n[53/75] Compiling C++ object subprojects/googletest/libgtest.a.p/googletest_src_gtest-all.cc.o\nninja: build stopped: subcommand failed.\n```\n\nSee proposed solution above.",
+      "revId": "1baabae6d935d74bd5421b7789018ba5148011c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
