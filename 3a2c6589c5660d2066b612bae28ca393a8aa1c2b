@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28bed5a6_ab608fa6",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-20T23:23:02Z",
+      "side": 1,
+      "message": "The expanded definition of `LIBPLDM_ITERATOR` includes `__attribute__((nonnull))`, which requires that callers do not pass a NULL pointer, and warns on any tests for NULL as they are redundant.\n\nNothing marked `LIBPLDM_ITERATOR` should be called directly by user code. Rather, user code must use the `foreach_*()` macro definitions (which correctly call these `LIBPLDM_ITERATOR` functions).",
+      "parentUuid": "a9db8629_bbe6cc93",
+      "revId": "3a2c6589c5660d2066b612bae28ca393a8aa1c2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ee0d2e2_9b444768",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-11-20T08:47:49Z",
       "side": 1,
       "message": "why can\u0027t we have this as a static inline function ? whats the rationale for using the #define vs an inline function ?",
+      "range": {
+        "startLine": 634,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 48
+      },
+      "revId": "3a2c6589c5660d2066b612bae28ca393a8aa1c2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5a09a52_b61933d6",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-20T23:23:02Z",
+      "side": 1,
+      "message": "The definition of the macro expands to a for-loop header, i.e.\n\n```\nforeach_pldm_downstream_device(...)\n```\n\nbecomes\n\n```\nfor (...)\n```\n\nafter macro expansion.\n\nThis technique can\u0027t be implemented as a static inline function.",
+      "parentUuid": "5ee0d2e2_9b444768",
       "range": {
         "startLine": 634,
         "startChar": 0,
