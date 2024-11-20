@@ -17,6 +17,10 @@ Change categories:
 
 ## [Unreleased]
 
+### Added
+
+1. platform: add PLDM Command numbers
+
 ### Changed
 
 1. Register assignment for parameters of `encode_state_effecter_pdr()`
