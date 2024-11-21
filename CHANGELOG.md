@@ -21,6 +21,7 @@ Change categories:
 
 1. dsp: firmware_update: Iterators for downstream device descriptors
 2. platform: add PLDM Command numbers
+3. base: add PLDM Command numbers
 
 ### Changed
 
