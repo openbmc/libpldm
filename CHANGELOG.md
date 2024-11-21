@@ -17,13 +17,23 @@ Change categories:
 
 ## [Unreleased]
 
+### Added
+
+1. dsp: firmware_update: Iterators for downstream device descriptors
+
 ### Changed
 
 1. Register assignment for parameters of `encode_state_effecter_pdr()`
 
+2. dsp: firmware_update: Iterators for downstream device descriptors
+
+   The prototype for `decode_query_downstream_identifiers_resp()` was updated to
+   improve ergonomics for the iterator APIs.
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
+2. libpldm: Install api header, update changelog
 
 ## [0.10.0] 2024-11-01
 
