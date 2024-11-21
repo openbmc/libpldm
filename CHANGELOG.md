@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 1. platform: add PLDM Command numbers
+2. base: add PLDM Command numbers
 
 ### Changed
 
