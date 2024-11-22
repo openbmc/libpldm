@@ -5,7 +5,14 @@ BUILD="$(mktemp --directory --tmpdir=.)"
 trap 'rm -rf "$BUILD"' EXIT
 
 meson format --recursive --inplace || true
-git diff --quiet
+if ! git diff --quiet
+then
+  echo Your changes must meet the upstream meson style guide
+  echo
+  echo https://mesonbuild.com/Style-guide.html
+  echo https://mesonbuild.com/Commands.html#format
+  exit 1
+fi
 
 # Make sure if the change touches the public headers, it also updates the
 # changelog.
