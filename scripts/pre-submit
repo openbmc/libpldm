@@ -7,6 +7,15 @@ trap 'rm -rf "$BUILD"' EXIT
 meson format --recursive --inplace || true
 git diff --quiet
 
+# Make sure if the change touches the public headers, it also updates the
+# changelog.
+if ! git show --format="" --name-only HEAD -- CHANGELOG.md include/libpldm |
+  awk -f scripts/changelog.awk
+then
+  echo You must document your changes under include/libpldm in CHANGELOG.md
+  exit 1
+fi
+
 # Ensure the test suite passes in the default configuration. Note
 # that we don't specify -Dabi=... - the default is equivalent to
 # -Dabi=deprecated,stable,testing.
