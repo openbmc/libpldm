@@ -579,6 +579,7 @@ int encode_cc_only_resp(uint8_t instance_id, uint8_t type, uint8_t command,
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_STABLE
 int encode_pldm_header_only_errno(uint8_t msg_type, uint8_t instance_id,
 				  uint8_t pldm_type, uint8_t command,
 				  struct pldm_msg *msg)
