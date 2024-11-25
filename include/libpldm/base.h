@@ -648,6 +648,20 @@ int encode_cc_only_resp(uint8_t instance_id, uint8_t type, uint8_t command,
  *
  *	@return pldm_completion_codes
  */
+int encode_pldm_header_only_errno(uint8_t msg_type, uint8_t instance_id,
+				  uint8_t pldm_type, uint8_t command,
+				  struct pldm_msg *msg);
+
+/** @brief Create a PLDM message only with the header
+ *
+ *	@param[in] msg_type - PLDM message type
+ *	@param[in] instance_id - Message's instance id
+ *	@param[in] pldm_type - PLDM Type
+ *	@param[in] command - PLDM Command
+ *	@param[out] msg - Message will be written to this
+ *
+ *	@return pldm_completion_codes
+ */
 int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
 			    uint8_t pldm_type, uint8_t command,
 			    struct pldm_msg *msg);
