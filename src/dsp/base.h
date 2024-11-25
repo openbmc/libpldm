@@ -13,6 +13,10 @@ int pack_pldm_header_errno(const struct pldm_header_info *hdr,
 int unpack_pldm_header_errno(const struct pldm_msg_hdr *msg,
 			     struct pldm_header_info *hdr);
 
+int encode_pldm_header_only_errno(uint8_t msg_type, uint8_t instance_id,
+				  uint8_t pldm_type, uint8_t command,
+				  struct pldm_msg *msg);
+
 LIBPLDM_CC_ALWAYS_INLINE
 int pldm_msg_has_error(const struct pldm_msg *msg, size_t payload_length)
 {
