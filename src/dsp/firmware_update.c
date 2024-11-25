@@ -914,16 +914,57 @@ int decode_get_firmware_parameters_resp_comp_entry(
 	return PLDM_SUCCESS;
 }
 
+int tmp_pack_pldm_header_errno(const struct pldm_header_info *hdr,
+			       struct pldm_msg_hdr *msg)
+{
+	if (msg == NULL || hdr == NULL) {
+		return -EINVAL;
+	}
+
+	if (hdr->msg_type != PLDM_RESPONSE && hdr->msg_type != PLDM_REQUEST &&
+	    hdr->msg_type != PLDM_ASYNC_REQUEST_NOTIFY) {
+		return -EINVAL;
+	}
+
+	if (hdr->instance > PLDM_INSTANCE_MAX) {
+		return -EINVAL;
+	}
+
+	if (hdr->pldm_type > (PLDM_MAX_TYPES - 1)) {
+		return -ENOMSG;
+	}
+
+	uint8_t datagram = (hdr->msg_type == PLDM_ASYNC_REQUEST_NOTIFY) ? 1 : 0;
+
+	if (hdr->msg_type == PLDM_RESPONSE) {
+		msg->request = PLDM_RESPONSE;
+	} else if (hdr->msg_type == PLDM_REQUEST ||
+		   hdr->msg_type == PLDM_ASYNC_REQUEST_NOTIFY) {
+		msg->request = PLDM_REQUEST;
+	}
+	msg->datagram = datagram;
+	msg->reserved = 0;
+	msg->instance_id = hdr->instance;
+	msg->header_ver = PLDM_CURRENT_VERSION;
+	msg->type = hdr->pldm_type;
+	msg->command = hdr->command;
+
+	return 0;
+}
+
 LIBPLDM_ABI_TESTING
 int encode_query_downstream_devices_req(uint8_t instance_id,
 					struct pldm_msg *msg)
 {
 	if (msg == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
-
-	return encode_pldm_header_only(PLDM_REQUEST, instance_id, PLDM_FWUP,
-				       PLDM_QUERY_DOWNSTREAM_DEVICES, msg);
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_FWUP;
+	header.command = PLDM_QUERY_DOWNSTREAM_DEVICES;
+	return tmp_pack_pldm_header_errno(&header, &(msg->hdr));
 }
 
 LIBPLDM_ABI_TESTING
@@ -936,7 +977,7 @@ int decode_query_downstream_devices_resp(
 	int rc;
 
 	if (msg == NULL || resp_data == NULL || !payload_length) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	rc = pldm_msgbuf_init_errno(buf, PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN,
@@ -947,26 +988,26 @@ int decode_query_downstream_devices_resp(
 
 	rc = pldm_msgbuf_extract(buf, resp_data->completion_code);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 	if (PLDM_SUCCESS != resp_data->completion_code) {
 		// Return the CC directly without decoding the rest of the payload
-		return PLDM_SUCCESS;
+		return 0;
 	}
 
 	if (payload_length < PLDM_QUERY_DOWNSTREAM_DEVICES_RESP_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EINVAL;
 	}
 
 	rc = pldm_msgbuf_extract(buf,
 				 resp_data->downstream_device_update_supported);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
 	if (!is_downstream_device_update_support_valid(
 		    resp_data->downstream_device_update_supported)) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	pldm_msgbuf_extract(buf, resp_data->number_of_downstream_devices);
@@ -975,10 +1016,10 @@ int decode_query_downstream_devices_resp(
 
 	rc = pldm_msgbuf_destroy_consumed(buf);
 	if (rc) {
-		pldm_xlate_errno(rc);
+		return rc;
 	}
 
-	return PLDM_SUCCESS;
+	return 0;
 }
 
 LIBPLDM_ABI_TESTING
@@ -992,11 +1033,11 @@ int encode_query_downstream_identifiers_req(
 	int rc;
 
 	if (msg == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	if (!is_transfer_operation_flag_valid(transfer_operation_flag)) {
-		return PLDM_INVALID_TRANSFER_OPERATION_FLAG;
+		return -EINVAL;
 	}
 
 	struct pldm_header_info header = { 0 };
@@ -1004,7 +1045,7 @@ int encode_query_downstream_identifiers_req(
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FWUP;
 	header.command = PLDM_QUERY_DOWNSTREAM_IDENTIFIERS;
-	rc = pack_pldm_header(&header, &(msg->hdr));
+	rc = pack_pldm_header_errno(&header, &(msg->hdr));
 	if (rc) {
 		return rc;
 	}
@@ -1013,7 +1054,7 @@ int encode_query_downstream_identifiers_req(
 				    PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_REQ_BYTES,
 				    msg->payload, payload_length);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
 	pldm_msgbuf_insert(buf, data_transfer_handle);
@@ -1022,10 +1063,10 @@ int encode_query_downstream_identifiers_req(
 
 	rc = pldm_msgbuf_destroy(buf);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
-	return PLDM_SUCCESS;
+	return 0;
 }
 
 LIBPLDM_ABI_TESTING
@@ -1037,29 +1078,29 @@ int decode_query_downstream_identifiers_resp(
 	struct pldm_msgbuf _buf;
 	struct pldm_msgbuf *buf = &_buf;
 	void *remaining = NULL;
-	int rc = PLDM_ERROR;
+	int rc = 0;
 
 	if (msg == NULL || resp_data == NULL || iter == NULL ||
 	    !payload_length) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	rc = pldm_msgbuf_init_errno(buf, PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN,
 				    msg->payload, payload_length);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
 	rc = pldm_msgbuf_extract(buf, resp_data->completion_code);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 	if (PLDM_SUCCESS != resp_data->completion_code) {
-		return PLDM_SUCCESS;
+		return 0;
 	}
 
 	if (payload_length < PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EBADMSG;
 	}
 
 	pldm_msgbuf_extract(buf, resp_data->next_data_transfer_handle);
@@ -1067,26 +1108,26 @@ int decode_query_downstream_identifiers_resp(
 
 	rc = pldm_msgbuf_extract(buf, resp_data->downstream_devices_length);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
 	pldm_msgbuf_extract(buf, resp_data->number_of_downstream_devices);
 	rc = pldm_msgbuf_span_required(
 		buf, resp_data->downstream_devices_length, &remaining);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
 	rc = pldm_msgbuf_destroy(buf);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
 	iter->field.ptr = remaining;
 	iter->field.length = resp_data->downstream_devices_length;
 	iter->devs = resp_data->number_of_downstream_devices;
 
-	return PLDM_SUCCESS;
+	return 0;
 }
 
 LIBPLDM_ABI_TESTING
