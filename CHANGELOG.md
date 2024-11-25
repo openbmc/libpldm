@@ -22,6 +22,7 @@ Change categories:
 1. dsp: firmware_update: Iterators for downstream device descriptors
 2. platform: add PLDM Command numbers
 3. base: add PLDM Command numbers
+4. dsp: base: `encode_pldm_header_only_errno()` as an internal API
 
 ### Changed
 
