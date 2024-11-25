@@ -33,6 +33,11 @@ Change categories:
    The prototype for `decode_query_downstream_identifiers_resp()` was updated to
    improve ergonomics for the iterator APIs.
 
+3. dsp: firmware_update: Change return type of downstream device ABIs to ERRNO
+
+   Those downstream device related ABIs have not been stabilized yet, change
+   return type from PLDM Completion Code to ERRNO
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
