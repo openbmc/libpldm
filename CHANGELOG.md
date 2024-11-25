@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 1. dsp: firmware_update: Iterators for downstream device descriptors
+2. dsp: base: `encode_pldm_header_only_errno()` as an internal API
 
 ### Changed
 
