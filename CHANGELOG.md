@@ -40,6 +40,11 @@ Change categories:
 4. Return `ENOENT` rather than `ENOKEY` from
    `pldm_pdr_find_child_container_id_index_range_exclude()`
 
+6. dsp: firmware_update: Change return type of downstream device ABIs to ERRNO
+
+   Those downstream device related ABIs have not been stabilized yet, change
+   return type from PLDM Completion Code to ERRNO
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
