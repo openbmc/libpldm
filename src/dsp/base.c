@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <string.h>
 
+LIBPLDM_ABI_STABLE
 int pack_pldm_header_errno(const struct pldm_header_info *hdr,
 			   struct pldm_msg_hdr *msg)
 {
@@ -49,6 +50,7 @@ int pack_pldm_header_errno(const struct pldm_header_info *hdr,
 	return 0;
 }
 
+LIBPLDM_ABI_STABLE
 int unpack_pldm_header_errno(const struct pldm_msg_hdr *msg,
 			     struct pldm_header_info *hdr)
 {
@@ -580,12 +582,12 @@ int encode_cc_only_resp(uint8_t instance_id, uint8_t type, uint8_t command,
 }
 
 LIBPLDM_ABI_STABLE
-int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
-			    uint8_t pldm_type, uint8_t command,
-			    struct pldm_msg *msg)
+int encode_pldm_header_only_errno(uint8_t msg_type, uint8_t instance_id,
+				  uint8_t pldm_type, uint8_t command,
+				  struct pldm_msg *msg)
 {
 	if (msg == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	struct pldm_header_info header = { 0 };
@@ -593,5 +595,18 @@ int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
 	header.instance = instance_id;
 	header.pldm_type = pldm_type;
 	header.command = command;
-	return pack_pldm_header(&header, &(msg->hdr));
+	return pack_pldm_header_errno(&header, &(msg->hdr));
+}
+
+LIBPLDM_ABI_STABLE
+int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
+			    uint8_t pldm_type, uint8_t command,
+			    struct pldm_msg *msg)
+{
+	int rc = encode_pldm_header_only_errno(msg_type, instance_id, pldm_type,
+					       command, msg);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+	return rc;
 }
