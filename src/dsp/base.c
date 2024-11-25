@@ -593,5 +593,6 @@ int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
 	header.instance = instance_id;
 	header.pldm_type = pldm_type;
 	header.command = command;
+	header.command = command;
 	return pack_pldm_header(&header, &(msg->hdr));
 }
