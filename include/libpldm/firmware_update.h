@@ -1130,7 +1130,9 @@ int decode_get_firmware_parameters_resp_comp_entry(
  *  @param[in] instance_id - Message's instance id
  *  @param[out] msg - Message will be written to this
  *
- *  @return pldm_completion_codes
+ *  @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *          are not allocated, -EOVERFLOW if the payload length is not enough
+ *          to encode the message, -EBADMSG if the message is not valid.
  *
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
@@ -1144,7 +1146,9 @@ int encode_query_downstream_devices_req(uint8_t instance_id,
  * @param[in] msg The PLDM message to decode.
  * @param[in] payload_length The length of the message payload.
  * @param[out] resp_data Pointer to the structure to store the decoded response data.
- * @return pldm_completion_codes
+ * @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *         are not allocated, -EOVERFLOW if the payload length is not enough
+ *         to decode the message, -EBADMSG if the message is not valid.
  *
  * @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
@@ -1161,7 +1165,9 @@ int decode_query_downstream_devices_resp(
  * @param[in] transfer_operation_flag The flag indicating the transfer operation.
  * @param[out] msg Pointer to the PLDM message structure to store the encoded message.
  * @param[in] payload_length The length of the payload.
- * @return pldm_completion_codes
+ * @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *         are not allocated, -EOVERFLOW if the payload length is not enough
+ *         to encode the message, -EBADMSG if the message is not valid.
  *
  * @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
@@ -1177,7 +1183,9 @@ int encode_query_downstream_identifiers_req(
  * @param[in] payload_length The length of the message payload.
  * @param[out] resp_data Pointer to the decoded response data.
  * @param[out] iter Pointer to the downstream device iterator structure.
- * @return pldm_completion_codes
+ * @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *         are not allocated, -EOVERFLOW if the payload length is not enough
+ *         to decode the message, -EBADMSG if the message is not valid.
  *
  * @note Caller is responsible for memory alloc and dealloc of pointer params
  */
@@ -1266,6 +1274,9 @@ int decode_downstream_device_parameter_table_entry(
  * @param[in] active_len - The size of the object pointed to by @p active
  * @param[out] pending - pointer to pending component version string container
  * @param[in] pending_len - The size of the object pointed to by @p pending
+ * @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *         are not allocated, -EOVERFLOW if the payload length is not enough
+ *         to decode the message, -EBADMSG if the message is not valid.
  *
  * @note Caller is responsible for memory alloc and dealloc of all the params,
  *    and the param `entry` should be the instance which has successfully decoded

@@ -1316,7 +1316,7 @@ TEST(QueryDownstreamDevices, goodPathEncodeRequest)
 
     auto rc = encode_query_downstream_devices_req(instanceId, requestPtr);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
     EXPECT_EQ(requestPtr->hdr.request, PLDM_REQUEST);
     EXPECT_EQ(requestPtr->hdr.instance_id, instanceId);
     EXPECT_EQ(requestPtr->hdr.type, PLDM_FWUP);
@@ -1331,7 +1331,7 @@ TEST(QueryDownstreamDevices, encodeRequestInvalidData)
 
     auto rc = encode_query_downstream_devices_req(instanceId, nullptr);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 }
 #endif
 
@@ -1372,7 +1372,7 @@ TEST(QueryDownstreamDevices, goodPathDecodeResponse)
     rc = decode_query_downstream_devices_resp(
         response, responseMsg.size() - hdrSize, &resp_data);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
     EXPECT_EQ(resp_data.completion_code, completion_code_resp);
     EXPECT_EQ(resp_data.downstream_device_update_supported,
               downstream_device_update_supported_resp);
@@ -1420,7 +1420,7 @@ TEST(QueryDownstreamDevices, decodeRequestUndefinedValue)
     rc = decode_query_downstream_devices_resp(
         response, responseMsg.size() - hdrSize, &resp_data);
 
-    ASSERT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    ASSERT_EQ(rc, -EINVAL);
 }
 #endif
 
@@ -1463,7 +1463,7 @@ TEST(QueryDownstreamDevices, decodeRequestErrorBufSize)
     rc = decode_query_downstream_devices_resp(
         response, responseMsg.size() - hdrSize, &resp_data);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
 
@@ -1479,7 +1479,7 @@ TEST(QueryDownstreamIdentifiers, goodPathEncodeRequest)
     auto rc = encode_query_downstream_identifiers_req(
         instanceId, dataTransferHandle, transferOperationFlag, request,
         payloadLen);
-    ASSERT_EQ(rc, PLDM_SUCCESS);
+    ASSERT_EQ(rc, 0);
     EXPECT_THAT(std::span<uint8_t>(request_buf, sizeof(request_buf)),
                 ElementsAreArray<uint8_t>(
                     {0x81, 0x05, 0x04, 0xFF, 0xFF, 0xFF, 0xFF, 0x01}));
@@ -1503,17 +1503,17 @@ TEST(QueryDownstreamIdentifiers, encodeRequestInvalidErrorPaths)
     auto rc = encode_query_downstream_identifiers_req(
         instanceId, dataTransferHandle, transferOperationFlag, nullptr,
         payload_length);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 
     rc = encode_query_downstream_identifiers_req(
         instanceId, dataTransferHandle, transferOperationFlag, requestPtr,
         payload_length - 1);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EOVERFLOW);
 
     rc = encode_query_downstream_identifiers_req(instanceId, dataTransferHandle,
                                                  invalidTransferOperationFlag,
                                                  requestPtr, payload_length);
-    EXPECT_EQ(rc, PLDM_INVALID_TRANSFER_OPERATION_FLAG);
+    EXPECT_EQ(rc, -EINVAL);
 }
 #endif
 
@@ -1549,7 +1549,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseNoDevices)
         response, PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN, &resp_data,
         &devs);
 
-    ASSERT_EQ(rc, PLDM_SUCCESS);
+    ASSERT_EQ(rc, 0);
     EXPECT_EQ(resp_data.completion_code, completion_code_resp);
     EXPECT_EQ(resp_data.next_data_transfer_handle,
               next_data_transfer_handle_resp);
@@ -1592,7 +1592,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseNoDevicesBadCount)
 
     rc = decode_query_downstream_identifiers_resp(
         response, PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN, &resp, &devs);
-    ASSERT_EQ(rc, PLDM_SUCCESS);
+    ASSERT_EQ(rc, 0);
 
     foreach_pldm_downstream_device(devs, dev, rc)
     {
@@ -1646,7 +1646,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseOneDeviceOneDescriptor)
     rc = decode_query_downstream_identifiers_resp(response, payloadLen,
                                                   &resp_data, &devs);
 
-    ASSERT_EQ(rc, PLDM_SUCCESS);
+    ASSERT_EQ(rc, 0);
     EXPECT_EQ(resp_data.completion_code, completion_code_resp);
     EXPECT_EQ(resp_data.next_data_transfer_handle,
               next_data_transfer_handle_resp);
@@ -1750,7 +1750,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneDescriptorEach)
     rc = decode_query_downstream_identifiers_resp(response, payloadLen,
                                                   &resp_data, &devs);
 
-    ASSERT_EQ(rc, PLDM_SUCCESS);
+    ASSERT_EQ(rc, 0);
     EXPECT_EQ(resp_data.number_of_downstream_devices,
               number_of_downstream_devices_resp);
 
@@ -1870,7 +1870,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesTwoOneDescriptors)
     rc = decode_query_downstream_identifiers_resp(response, payloadLen,
                                                   &resp_data, &devs);
 
-    ASSERT_EQ(rc, PLDM_SUCCESS);
+    ASSERT_EQ(rc, 0);
     EXPECT_EQ(resp_data.number_of_downstream_devices,
               number_of_downstream_devices_resp);
 
@@ -1990,7 +1990,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneTwoDescriptors)
     rc = decode_query_downstream_identifiers_resp(response, payloadLen,
                                                   &resp_data, &devs);
 
-    ASSERT_EQ(rc, PLDM_SUCCESS);
+    ASSERT_EQ(rc, 0);
     EXPECT_EQ(resp_data.number_of_downstream_devices,
               number_of_downstream_devices_resp);
 
@@ -2048,13 +2048,13 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorPaths)
     // Test nullptr
     auto rc = decode_query_downstream_identifiers_resp(nullptr, payloadLen,
                                                        nullptr, &devs);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, -EINVAL);
 
     // Test not PLDM_SUCCESS completion code
     response->payload[0] = PLDM_ERROR_UNSUPPORTED_PLDM_CMD;
     rc = decode_query_downstream_identifiers_resp(response, payloadLen,
                                                   &resp_data, &devs);
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(rc, 0);
     EXPECT_EQ(resp_data.completion_code, PLDM_ERROR_UNSUPPORTED_PLDM_CMD);
 
     // Test payload length less than minimum length
@@ -2062,7 +2062,7 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorPaths)
     rc = decode_query_downstream_identifiers_resp(response, payloadLen,
                                                   &resp_data, &devs);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
 
@@ -2110,7 +2110,7 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
 
     EXPECT_NE(decode_query_downstream_identifiers_resp(response, payloadLen,
                                                        &resp_data, &devs),
-              PLDM_SUCCESS);
+              0);
 }
 #endif
 
@@ -2148,7 +2148,7 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorBufSize)
     rc = decode_query_downstream_identifiers_resp(response, payloadLen,
                                                   &resp_data, &devs);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
 
