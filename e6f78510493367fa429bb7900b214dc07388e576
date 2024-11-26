@@ -102,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19c46fe1_6b3a245c",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T23:49:29Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s fine I think, so long as the documentation calls it out.",
+      "parentUuid": "3373ae71_214d9849",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "777277d9_9964fdaa",
         "filename": "include/libpldm/firmware_fd.h",
         "patchSetId": 10
@@ -131,6 +149,24 @@
       "side": 1,
       "message": "Can do. It would be nice to have a macro working with C too, unsure if there\u0027s any way to cast there in a way that that clang-tidy will be happy with (without the placement new).",
       "parentUuid": "777277d9_9964fdaa",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5e8d086_2bd96640",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T23:49:29Z",
+      "side": 1,
+      "message": "Yeah, defining something for C is fine. I hadn\u0027t done it as I didn\u0027t want to expose anything in the public headers that didn\u0027t have an immediate use. The clang-tidy warning is specific to `reinterpret_cast\u003c\u003e()`, C-style casts in C code should be fine.",
+      "parentUuid": "a573b184_84a215c8",
       "revId": "e6f78510493367fa429bb7900b214dc07388e576",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -207,6 +243,30 @@
       "side": 1,
       "message": "Probably? That said, I suspect most users would end up translating back to MCTP EID themselves (as pldmd firmware update does)",
       "parentUuid": "64f39ba5_49149cdf",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 54
+      },
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b6c8cc0_6e48def5",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T23:49:29Z",
+      "side": 1,
+      "message": "Yeah, I just prefer to keep non-PLDM concepts out of the APIs as much as we can. The transport APIs do provide transport-specific mapping functions. Maybe it\u0027s worth some thought about whether we should separate those out so there\u0027s less impact from the meson `transport` build switch?",
+      "parentUuid": "b7975cb0_aad5a9b4",
       "range": {
         "startLine": 269,
         "startChar": 0,
