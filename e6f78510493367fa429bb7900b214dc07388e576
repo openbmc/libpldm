@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d34b4e1d_5ef2b989",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-26T04:35:22Z",
+      "side": 1,
+      "message": "OK, I\u0027ll have a look at using the structures from https://gerrit.openbmc.org/c/openbmc/libpldm/+/75733 .",
+      "parentUuid": "c08c592e_71065865",
+      "range": {
+        "startLine": 63,
+        "startChar": 1,
+        "endLine": 63,
+        "endChar": 68
+      },
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9eb7e5e2_8a4ac104",
         "filename": "include/libpldm/firmware_fd.h",
         "patchSetId": 10
@@ -54,6 +78,24 @@
       "writtenOn": "2024-11-26T02:01:18Z",
       "side": 1,
       "message": "Can we please switch these throughout to negative errnos as discussed in comments on other patches?",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3373ae71_214d9849",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-26T04:35:22Z",
+      "side": 1,
+      "message": "Can do. I think any -ve errno would be translated into a generic `PLDM_ERROR`. \n\nNote that `firmware_data()`/`verify()`/`activate()` will still return specific status codes since they have meaning, so there\u0027ll be a bit of variation in the API there.",
+      "parentUuid": "9eb7e5e2_8a4ac104",
       "revId": "e6f78510493367fa429bb7900b214dc07388e576",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a573b184_84a215c8",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-26T04:35:22Z",
+      "side": 1,
+      "message": "Can do. It would be nice to have a macro working with C too, unsure if there\u0027s any way to cast there in a way that that clang-tidy will be happy with (without the placement new).",
+      "parentUuid": "777277d9_9964fdaa",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b79a095_045be640",
         "filename": "include/libpldm/firmware_fd.h",
         "patchSetId": 10
@@ -94,6 +154,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "606f81b4_e8e95ef2",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-26T04:35:22Z",
+      "side": 1,
+      "message": "Negative errno makes sense here, `pldm_requester_rc_t` was a bit arbitrary, I\u0027ll change it.",
+      "parentUuid": "3b79a095_045be640",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64f39ba5_49149cdf",
         "filename": "include/libpldm/firmware_fd.h",
         "patchSetId": 10
@@ -105,6 +183,30 @@
       "writtenOn": "2024-11-26T02:01:18Z",
       "side": 1,
       "message": "Should we be using TIDs instead?",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 54
+      },
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7975cb0_aad5a9b4",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-26T04:35:22Z",
+      "side": 1,
+      "message": "Probably? That said, I suspect most users would end up translating back to MCTP EID themselves (as pldmd firmware update does)",
+      "parentUuid": "64f39ba5_49149cdf",
       "range": {
         "startLine": 269,
         "startChar": 0,
