@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b5c5832_947838b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-11-26T09:16:05Z",
+      "side": 1,
+      "message": "Hi Andrew, thanks for the review and mentioning the problem,\nto avoid confusion, the return type revision has been made in [#75955], and has [#75954] dependency to add internal `encode_pldm_header_only_errno()` API, this patch has been rebased onto them, due to the fixes are done in those patches, the rest of the inline requests are marked as resolved.\n\n[#75955]: https://gerrit.openbmc.org/c/openbmc/libpldm/+/75955\n[#75954]: https://gerrit.openbmc.org/c/openbmc/libpldm/+/75954",
+      "parentUuid": "5d3117f5_235a25d9",
+      "revId": "1c8292a27dc9a88886ec865aac1305e1c58d730f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccc68e09_4b9a40dd",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9620f2da_db731529",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-11-26T09:16:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccc68e09_4b9a40dd",
+      "revId": "1c8292a27dc9a88886ec865aac1305e1c58d730f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b1cf3bc_251ee120",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-11-25T02:24:14Z",
       "side": 1,
       "message": "Again for this function.",
+      "revId": "1c8292a27dc9a88886ec865aac1305e1c58d730f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fcce1ab_6ee1812a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-11-26T09:16:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b1cf3bc_251ee120",
       "revId": "1c8292a27dc9a88886ec865aac1305e1c58d730f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -103,6 +157,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c781bb9_952f0e9b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-11-26T09:16:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcb2e639_1f7fe22b",
+      "revId": "1c8292a27dc9a88886ec865aac1305e1c58d730f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fde39a31_8d46c8f9",
@@ -116,6 +188,24 @@
       "writtenOn": "2024-11-25T02:24:14Z",
       "side": 1,
       "message": "Again for this function.",
+      "revId": "1c8292a27dc9a88886ec865aac1305e1c58d730f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bda2625e_4d80ea26",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-11-26T09:16:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fde39a31_8d46c8f9",
       "revId": "1c8292a27dc9a88886ec865aac1305e1c58d730f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
