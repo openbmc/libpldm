@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f3082fd_7e65b933",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T02:01:18Z",
+      "side": 1,
+      "message": "Hi Matt, I\u0027ve left some initial queries in the headers. I figure I can take a closer look at the implementation once we have consensus on the header discussions.",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c08c592e_71065865",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T02:01:18Z",
+      "side": 1,
+      "message": "Must we encode them at this stage? Can we instead pass back a pointer to an array of a concrete type (`struct pldm_descriptor`?) rather than an opaque buffer? I prefer we keep the marshalling in the message codec APIs and avoid spreading it around if possible.",
+      "range": {
+        "startLine": 63,
+        "startChar": 1,
+        "endLine": 63,
+        "endChar": 68
+      },
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb7e5e2_8a4ac104",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T02:01:18Z",
+      "side": 1,
+      "message": "Can we please switch these throughout to negative errnos as discussed in comments on other patches?",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "777277d9_9964fdaa",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T02:01:18Z",
+      "side": 1,
+      "message": "Maybe it\u0027s worth adding a `PLDM_FD_DEFINE_P()` macro in the same sense as `PLDM_MSG_DEFINE_P()`?",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b79a095_045be640",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T02:01:18Z",
+      "side": 1,
+      "message": "I prefer we don\u0027t propagate the `pldm_requester_rc_t` type either, and again defer to negative errnos. Do you mind fixing it throughout? Hopefully it doesn\u0027t cause too much grief in the implementation.",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f39ba5_49149cdf",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T02:01:18Z",
+      "side": 1,
+      "message": "Should we be using TIDs instead?",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 54
+      },
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f996a022_46f56927",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T02:01:18Z",
+      "side": 1,
+      "message": "Same query here.",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 294,
+        "endChar": 55
+      },
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb5a1450_ebe06c3b",
+        "filename": "include/libpldm/libpldm-sizes.h.in",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T02:01:18Z",
+      "side": 1,
+      "message": "What\u0027s the motivation for the `libpldm-` prefix in the basename of the file given it\u0027s already namespaced under the `libpldm/` directory?",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b676901_255b8e8b",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-26T02:01:18Z",
+      "side": 1,
+      "message": "Maybe try adding them to the `dependencies` argument to the `compiler.sizeof()` call?",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 36
+      },
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
