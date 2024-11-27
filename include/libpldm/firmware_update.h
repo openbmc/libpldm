@@ -1173,9 +1173,9 @@ int decode_query_downstream_devices_resp(
  *        'msg.payload'
  */
 int encode_query_downstream_identifiers_req(
-	uint8_t instance_id, uint32_t data_transfer_handle,
-	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
-	size_t payload_length);
+	uint8_t instance_id,
+	const struct pldm_query_downstream_identifiers_req *params_req,
+	struct pldm_msg *msg, size_t payload_length);
 
 /**
  * @brief Decodes the response message for Querying Downstream Identifiers.
@@ -1211,9 +1211,9 @@ int decode_query_downstream_identifiers_resp(
  *        'msg.payload'
  */
 int encode_get_downstream_firmware_params_req(
-	uint8_t instance_id, uint32_t data_transfer_handle,
-	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
-	size_t payload_length);
+	uint8_t instance_id,
+	const struct pldm_get_downstream_firmware_params_req *params_req,
+	struct pldm_msg *msg, size_t payload_length);
 
 /**
  * @brief Decode response message for Get Downstream Firmware Parameters

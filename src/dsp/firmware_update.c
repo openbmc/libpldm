@@ -980,19 +980,21 @@ int decode_query_downstream_devices_resp(
 
 LIBPLDM_ABI_TESTING
 int encode_query_downstream_identifiers_req(
-	uint8_t instance_id, uint32_t data_transfer_handle,
-	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
-	size_t payload_length)
+	uint8_t instance_id,
+	const struct pldm_query_downstream_identifiers_req *params_req,
+	struct pldm_msg *msg, size_t payload_length)
 {
 	struct pldm_msgbuf _buf;
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (msg == NULL) {
+	if (!msg || !params_req) {
 		return -EINVAL;
 	}
 
-	if (!is_transfer_operation_flag_valid(transfer_operation_flag)) {
+	if (!is_transfer_operation_flag_valid(
+		    (enum transfer_op_flag)
+			    params_req->transfer_operation_flag)) {
 		return -EINVAL;
 	}
 
@@ -1013,9 +1015,9 @@ int encode_query_downstream_identifiers_req(
 		return rc;
 	}
 
-	pldm_msgbuf_insert(buf, data_transfer_handle);
+	pldm_msgbuf_insert(buf, params_req->data_transfer_handle);
 	// Data correctness has been verified, cast it to 1-byte data directly.
-	pldm_msgbuf_insert(buf, (uint8_t)transfer_operation_flag);
+	pldm_msgbuf_insert(buf, params_req->transfer_operation_flag);
 
 	return pldm_msgbuf_destroy(buf);
 }
@@ -1111,15 +1113,15 @@ int decode_pldm_downstream_device_from_iter(
 
 LIBPLDM_ABI_TESTING
 int encode_get_downstream_firmware_params_req(
-	uint8_t instance_id, uint32_t data_transfer_handle,
-	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
-	size_t payload_length)
+	uint8_t instance_id,
+	const struct pldm_get_downstream_firmware_params_req *params_req,
+	struct pldm_msg *msg, size_t payload_length)
 {
 	struct pldm_msgbuf _buf;
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (msg == NULL) {
+	if (!msg || !params_req) {
 		return -EINVAL;
 	}
 
@@ -1130,7 +1132,9 @@ int encode_get_downstream_firmware_params_req(
 		return rc;
 	}
 
-	if (!is_transfer_operation_flag_valid(transfer_operation_flag)) {
+	if (!is_transfer_operation_flag_valid(
+		    (enum transfer_op_flag)
+			    params_req->transfer_operation_flag)) {
 		return -EBADMSG;
 	}
 
@@ -1144,9 +1148,9 @@ int encode_get_downstream_firmware_params_req(
 		return rc;
 	}
 
-	pldm_msgbuf_insert(buf, data_transfer_handle);
+	pldm_msgbuf_insert(buf, params_req->data_transfer_handle);
 	// Data correctness has been verified, cast it to 1-byte data directly.
-	pldm_msgbuf_insert(buf, (uint8_t)transfer_operation_flag);
+	pldm_msgbuf_insert(buf, params_req->transfer_operation_flag);
 
 	return pldm_msgbuf_destroy(buf);
 }
