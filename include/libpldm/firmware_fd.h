@@ -11,6 +11,7 @@ extern "C" {
 #include <libpldm/pldm.h>
 #include <libpldm/base.h>
 #include <libpldm/utils.h>
+#include <libpldm/control.h>
 #include <libpldm/firmware_update.h>
 
 /** @struct pldm_firmware_component_standalone
@@ -243,13 +244,17 @@ struct pldm_fd;
  *                  update behaviour
  * @param[in] ops_ctx - opaque context pointer that will be passed as ctx
  *                      to ops callbacks
+ * @param[in] control - an optional struct pldm_control. If provided
+ *                      the FD responder will set PLDM FW update type
+ *			and commands for the control.
  *
  * @return a malloced struct pldm_fd, owned by the caller. It should be released
  *         with free(). Returns NULL on failure.
  *
  * This will call pldm_fd_setup() on the allocated pldm_fd.
  */
-struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx);
+struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx,
+			    struct pldm_control *control);
 
 /** @brief Initialise a FD responder struct
  *
@@ -261,11 +266,15 @@ struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx);
  *                  update behaviour
  * @param[in] ops_ctx - opaque context pointer that will be passed as ctx
  *                      to ops callbacks
+ * @param[in] control - an optional struct pldm_control. If provided
+ *                      the FD responder will set PLDM FW update type
+ *			and commands for the control.
  *
  * @return 0 on success, a negative errno value on failure.
  */
 int pldm_fd_setup(struct pldm_fd *fd, size_t pldm_fd_size,
-		  const struct pldm_fd_ops *ops, void *ops_ctx);
+		  const struct pldm_fd_ops *ops, void *ops_ctx,
+		  struct pldm_control *control);
 
 /** @brief Handle a PLDM Firmware Update message
  *
