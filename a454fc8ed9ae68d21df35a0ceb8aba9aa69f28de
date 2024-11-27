@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dbc82f1_f7f03631",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-27T00:14:46Z",
+      "side": 1,
+      "message": "Hi Unive, thanks for the help so far with fixing the API design prior to stabilisation. However, there are other elements of the changes checklist that apply to these APIs as well, such as [not decomposing message members into individual function parameters](https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L117-L124). Again, prior to stabilisation, I prefer we get these addressed. I\u0027ve left some comments inline.",
+      "revId": "a454fc8ed9ae68d21df35a0ceb8aba9aa69f28de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d6e51e2_e43be89d",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-27T00:14:46Z",
+      "side": 1,
+      "message": "This should take a struct pointer argument rather than the decomposed values.",
+      "range": {
+        "startLine": 988,
+        "startChar": 22,
+        "endLine": 989,
+        "endChar": 47
+      },
+      "revId": "a454fc8ed9ae68d21df35a0ceb8aba9aa69f28de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df796d2_73012941",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-27T00:14:46Z",
+      "side": 1,
+      "message": "Again, let\u0027s make this take a struct pointer rather than decomposed values.",
+      "range": {
+        "startLine": 1124,
+        "startChar": 22,
+        "endLine": 1125,
+        "endChar": 47
+      },
+      "revId": "a454fc8ed9ae68d21df35a0ceb8aba9aa69f28de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8085124a_3137e283",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1168,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-27T00:14:46Z",
+      "side": 1,
+      "message": "So before we stabilise this I would prefer we rework the related APIs (`decode_get_downstream_firmware_params_resp()`, `decode_downstream_device_parameter_table_entry()`, `decode_downstream_device_parameter_table_entry_versions()`) to use the iterator form we have for the downstream devices.\n\nGive me a short while to sort out how we might go about this effort. I\u0027m going to try not hold up this stabilisation request and I\u0027m not asking you to do it yourself, but feel free to let me know you\u0027re taking up the work if you feel comfortable with doing so.",
+      "revId": "a454fc8ed9ae68d21df35a0ceb8aba9aa69f28de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
