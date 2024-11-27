@@ -44,6 +44,11 @@ Change categories:
    Those downstream device related ABIs have not been stabilized yet, change
    return type from PLDM Completion Code to ERRNO
 
+6. dsp: firmware_update: pack decomposed parameters to struct
+
+   `encode_query_downstream_identifiers_req()` and
+   `encode_get_downstream_firmware_params_req()`
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
