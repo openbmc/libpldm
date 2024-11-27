@@ -985,18 +985,22 @@ int decode_query_downstream_devices_resp(
 
 LIBPLDM_ABI_TESTING
 int encode_query_downstream_identifiers_req(
-	uint8_t instance_id, uint32_t data_transfer_handle,
-	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
-	size_t payload_length)
+	uint8_t instance_id,
+	const struct pldm_query_downstream_identifiers_req *params_req,
+	struct pldm_msg *msg, size_t payload_length)
 {
+	uint32_t data_transfer_handle;
+	enum transfer_op_flag transfer_operation_flag;
 	struct pldm_msgbuf _buf;
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (msg == NULL) {
+	if (!msg || !params_req) {
 		return -EINVAL;
 	}
 
+	data_transfer_handle = params_req->data_transfer_handle;
+	transfer_operation_flag = params_req->transfer_operation_flag;
 	if (!is_transfer_operation_flag_valid(transfer_operation_flag)) {
 		return -EINVAL;
 	}
@@ -1121,18 +1125,22 @@ int decode_pldm_downstream_device_from_iter(
 
 LIBPLDM_ABI_TESTING
 int encode_get_downstream_firmware_params_req(
-	uint8_t instance_id, uint32_t data_transfer_handle,
-	enum transfer_op_flag transfer_operation_flag, struct pldm_msg *msg,
-	size_t payload_length)
+	uint8_t instance_id,
+	const struct pldm_get_downstream_firmware_params_req *params_req,
+	struct pldm_msg *msg, size_t payload_length)
 {
+	uint32_t data_transfer_handle;
+	enum transfer_op_flag transfer_operation_flag;
 	struct pldm_msgbuf _buf;
 	struct pldm_msgbuf *buf = &_buf;
 	int rc;
 
-	if (msg == NULL) {
+	if (!msg || !params_req) {
 		return -EINVAL;
 	}
 
+	data_transfer_handle = params_req->data_transfer_handle;
+	transfer_operation_flag = params_req->transfer_operation_flag;
 	rc = pldm_msgbuf_init_errno(
 		buf, PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES,
 		msg->payload, payload_length);
