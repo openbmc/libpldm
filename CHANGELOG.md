@@ -57,6 +57,9 @@ Change categories:
 9. Add PLDM control responder. PLDM types and support commands/versions can be
    registered.
 
+10. PLDM FD responder accepts a PLDM control handle and will register its
+    version.
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
