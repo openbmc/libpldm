@@ -16,6 +16,24 @@
       "message": "Ah, so I was proposing we _don\u0027t_ expose this in the public headers. Rather, just add it to an internal header (e.g. `src/dsp/base.h`). Doing so removes a lot of the complication.",
       "revId": "8e8eded16bdc1b1aab11fba698694b5ea27b14ed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c6081c3_9a609ebe",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-11-27T00:43:21Z",
+      "side": 1,
+      "message": "Done, I wasn\u0027t notice theres an internal one in `src/dsp`,\nsince the API goes internal, the append of `CHANGELOG.md` has removed.",
+      "parentUuid": "ff5bc0d6_441acfb9",
+      "revId": "8e8eded16bdc1b1aab11fba698694b5ea27b14ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
