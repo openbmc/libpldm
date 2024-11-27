@@ -93,8 +93,8 @@ static int pldm_control_get_version(struct pldm_control *control,
 	/* Response is always sent as a single transfer */
 	if (opflag != PLDM_GET_FIRSTPART) {
 		return pldm_control_reply_error(
-			PLDM_PLATFORM_INVALID_TRANSFER_OPERATION_FLAG, hdr,
-			resp, resp_payload_len);
+			PLDM_CONTROL_INVALID_TRANSFER_OPERATION_FLAG, hdr, resp,
+			resp_payload_len);
 	}
 
 	const struct pldm_type_versions *v = NULL;
@@ -108,7 +108,7 @@ static int pldm_control_get_version(struct pldm_control *control,
 
 	if (!v) {
 		return pldm_control_reply_error(
-			PLDM_PLATFORM_INVALID_PLDM_TYPE_IN_REQUEST_DATA, hdr,
+			PLDM_CONTROL_INVALID_PLDM_TYPE_IN_REQUEST_DATA, hdr,
 			resp, resp_payload_len);
 	}
 
@@ -198,7 +198,7 @@ static int pldm_control_get_commands(struct pldm_control *control,
 
 	if (!v) {
 		return pldm_control_reply_error(
-			PLDM_PLATFORM_INVALID_PLDM_TYPE_IN_REQUEST_DATA, hdr,
+			PLDM_CONTROL_INVALID_PLDM_TYPE_IN_REQUEST_DATA, hdr,
 			resp, resp_payload_len);
 	}
 

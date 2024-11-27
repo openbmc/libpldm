@@ -4,6 +4,13 @@
 #include <libpldm/base.h>
 #include <libpldm/utils.h>
 
+enum pldm_control_completion_codes {
+	PLDM_CONTROL_INVALID_DATA_TRANSFER_HANDLE = 0x80,
+	PLDM_CONTROL_INVALID_TRANSFER_OPERATION_FLAG = 0x81,
+	PLDM_CONTROL_INVALID_PLDM_TYPE_IN_REQUEST_DATA = 0x83,
+	PLDM_CONTROL_INVALID_PLDM_VERSION_IN_REQUEST_DATA = 0x84,
+};
+
 // Static storage can be allocated with PLDM_SIZEOF_CONTROL macro */
 struct pldm_control;
 
