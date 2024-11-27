@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0c98391_b4271bc6",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-27T07:17:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62e993fa_36ca7241",
+      "revId": "67f8cb46e16dba5d1ded6a1a93e4b8d27395343e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc6f7b9f_6b0e9421",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-11-26T01:15:37Z",
       "side": 1,
       "message": "We should probably have a `static_assert()` that `PLDM_FIRMWARE_MAX_STRING \u003c\u003d UINT8_MAX`?",
+      "revId": "67f8cb46e16dba5d1ded6a1a93e4b8d27395343e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a45fcc90_050ab764",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-27T07:17:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc6f7b9f_6b0e9421",
       "revId": "67f8cb46e16dba5d1ded6a1a93e4b8d27395343e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86fea153_8dc59b55",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-27T07:17:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f15d041_359c5e8e",
+      "revId": "67f8cb46e16dba5d1ded6a1a93e4b8d27395343e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7f1d1a6_1da3986c",
@@ -86,6 +140,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c6ef693_8e563478",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-27T07:17:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7f1d1a6_1da3986c",
+      "revId": "67f8cb46e16dba5d1ded6a1a93e4b8d27395343e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9db9a245_e0d81a24",
@@ -99,6 +171,30 @@
       "writtenOn": "2024-11-26T01:15:37Z",
       "side": 1,
       "message": "My current preference for the design of libpldm APIs is that we add a regular struct (not packed) that captures the message members, and pass a (const) pointer through the encode functions. I feel this keeps things coherent with respect to the message definitions, requires fewer parameters for the function definition, and in the case of `decode_*()` functions removes the burden on tests for pointer validity (as we only need to test the struct pointer). As a bit of a hand-wave, it also helps address ambiguity about whether an object passed by reference points to an array or just a single object in the API definition.\n\nThe preference impacts the remainder of the API definitions here, so once we have consensus on an approach we\u0027ll need to adjust the rest as necessary too.\n\nAlso, can we pass through a pointer to an array of `struct pldm_descriptor` for `descriptor_data` rather than `const uint8_t *` (which I expect would be better as `const void *` otherwise)? Trying to keep the APIs defined in terms of concrete types rather than pointers to opaque buffers helps mentally model the relationships between things and so improves ergonomics.",
+      "range": {
+        "startLine": 930,
+        "startChar": 1,
+        "endLine": 932,
+        "endChar": 37
+      },
+      "revId": "67f8cb46e16dba5d1ded6a1a93e4b8d27395343e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba06995_c40e4c90",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-27T07:17:59Z",
+      "side": 1,
+      "message": "I\u0027ve changed it to use `struct pldm_descriptor`, and also changed `encode_get_status_resp` to take a struct argument rather than several separate arguments.",
+      "parentUuid": "9db9a245_e0d81a24",
       "range": {
         "startLine": 930,
         "startChar": 1,
@@ -132,6 +228,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "350680ec_12347c15",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-27T07:17:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82ce81f3_0261b3d4",
+      "range": {
+        "startLine": 1022,
+        "startChar": 1,
+        "endLine": 1023,
+        "endChar": 61
+      },
+      "revId": "67f8cb46e16dba5d1ded6a1a93e4b8d27395343e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13bc5eb8_d9f9d23e",
@@ -145,6 +265,30 @@
       "writtenOn": "2024-11-26T01:15:37Z",
       "side": 1,
       "message": "Same query regarding `struct variable_field` as above.",
+      "range": {
+        "startLine": 1039,
+        "startChar": 1,
+        "endLine": 1040,
+        "endChar": 43
+      },
+      "revId": "67f8cb46e16dba5d1ded6a1a93e4b8d27395343e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ce3cf0_88aad7ee",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-27T07:17:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13bc5eb8_d9f9d23e",
       "range": {
         "startLine": 1039,
         "startChar": 1,
@@ -178,6 +322,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd1331cd_625a3fae",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1258,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-27T07:17:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2265d33_4e8d2c16",
+      "range": {
+        "startLine": 1254,
+        "startChar": 1,
+        "endLine": 1258,
+        "endChar": 46
+      },
+      "revId": "67f8cb46e16dba5d1ded6a1a93e4b8d27395343e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "724f83ca_06628a30",
@@ -191,6 +359,30 @@
       "writtenOn": "2024-11-26T01:15:37Z",
       "side": 1,
       "message": "Can we please avoid adding further invocations of `reinterpret_cast\u003c\u003e()`? `PLDM_MSG_DEFINE_P()` can be used here instead.\n\nThis applies to other instances throughout the change as well.",
+      "range": {
+        "startLine": 876,
+        "startChar": 0,
+        "endLine": 877,
+        "endChar": 67
+      },
+      "revId": "67f8cb46e16dba5d1ded6a1a93e4b8d27395343e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "798c2208_8fc553cc",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-27T07:17:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "724f83ca_06628a30",
       "range": {
         "startLine": 876,
         "startChar": 0,
