@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50215461_3829f5de",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-11-27T07:19:29Z",
+      "side": 1,
+      "message": "Open to better naming suggestions than `_full` for these structs.",
+      "revId": "ce1b450d5d31fc35649254751e9824309e4cc2de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
