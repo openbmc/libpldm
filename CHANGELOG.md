@@ -68,7 +68,10 @@ Change categories:
 10. Add firmware update FD responder
 
 11. Add PLDM control responder. PLDM types and support commands/versions can be
-   registered.
+    registered.
+
+12. PLDM FD responder accepts a PLDM control handle and will register its
+    version.
 
 ### Fixed
 
