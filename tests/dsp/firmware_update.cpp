@@ -1471,14 +1471,13 @@ TEST(QueryDownstreamDevices, decodeRequestErrorBufSize)
 TEST(QueryDownstreamIdentifiers, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
-    constexpr uint32_t dataTransferHandle = 0xFFFFFFFF;
-    constexpr enum transfer_op_flag transferOperationFlag = PLDM_GET_FIRSTPART;
     constexpr size_t payloadLen = PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_REQ_BYTES;
     PLDM_MSG_DEFINE_P(request, payloadLen);
+    constexpr pldm_query_downstream_identifiers_req params_req{
+        0xFFFFFFFF, PLDM_GET_FIRSTPART};
 
-    auto rc = encode_query_downstream_identifiers_req(
-        instanceId, dataTransferHandle, transferOperationFlag, request,
-        payloadLen);
+    auto rc = encode_query_downstream_identifiers_req(instanceId, &params_req,
+                                                      request, payloadLen);
     ASSERT_EQ(rc, 0);
     EXPECT_THAT(std::span<uint8_t>(request_buf, sizeof(request_buf)),
                 ElementsAreArray<uint8_t>(
@@ -1490,29 +1489,26 @@ TEST(QueryDownstreamIdentifiers, goodPathEncodeRequest)
 TEST(QueryDownstreamIdentifiers, encodeRequestInvalidErrorPaths)
 {
     constexpr uint8_t instanceId = 1;
-    constexpr uint32_t dataTransferHandle = 0x0;
-    constexpr enum transfer_op_flag transferOperationFlag = PLDM_GET_FIRSTPART;
-    constexpr enum transfer_op_flag invalidTransferOperationFlag =
-        PLDM_ACKNOWLEDGEMENT_ONLY;
+    constexpr pldm_query_downstream_identifiers_req params_req{
+        0xFFFFFFFF, PLDM_GET_FIRSTPART};
+    constexpr pldm_query_downstream_identifiers_req params_req_invalid{
+        0xFFFFFFFF, PLDM_ACKNOWLEDGEMENT_ONLY};
     constexpr size_t payload_length =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_REQ_BYTES;
     std::array<uint8_t, hdrSize + payload_length> requestMsg{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
-    auto rc = encode_query_downstream_identifiers_req(
-        instanceId, dataTransferHandle, transferOperationFlag, nullptr,
-        payload_length);
+    auto rc = encode_query_downstream_identifiers_req(instanceId, &params_req,
+                                                      nullptr, payload_length);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = encode_query_downstream_identifiers_req(
-        instanceId, dataTransferHandle, transferOperationFlag, requestPtr,
-        payload_length - 1);
+        instanceId, &params_req, requestPtr, payload_length - 1);
     EXPECT_EQ(rc, -EOVERFLOW);
 
-    rc = encode_query_downstream_identifiers_req(instanceId, dataTransferHandle,
-                                                 invalidTransferOperationFlag,
-                                                 requestPtr, payload_length);
+    rc = encode_query_downstream_identifiers_req(
+        instanceId, &params_req_invalid, requestPtr, payload_length);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -2156,8 +2152,8 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorBufSize)
 TEST(GetDownstreamFirmwareParameters, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
-    constexpr uint32_t dataTransferHandle = 0x0;
-    constexpr enum transfer_op_flag transferOperationFlag = PLDM_GET_FIRSTPART;
+    constexpr pldm_get_downstream_firmware_params_req params_req{
+        0x0, PLDM_GET_FIRSTPART};
     constexpr size_t payload_length =
         PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES;
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payload_length> requestMsg{};
@@ -2165,8 +2161,7 @@ TEST(GetDownstreamFirmwareParameters, goodPathEncodeRequest)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_get_downstream_firmware_params_req(
-        instanceId, dataTransferHandle, transferOperationFlag, requestPtr,
-        payload_length);
+        instanceId, &params_req, requestPtr, payload_length);
     EXPECT_EQ(rc, 0);
 
     std::array<uint8_t, hdrSize + PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES>
@@ -2179,10 +2174,9 @@ TEST(GetDownstreamFirmwareParameters, goodPathEncodeRequest)
 TEST(GetDownstreamFirmwareParameters, encodeRequestInvalidTransferOperationFlag)
 {
     constexpr uint8_t instanceId = 1;
-    constexpr uint32_t dataTransferHandle = 0x0;
     // Setup invalid transfer operation flag
-    constexpr enum transfer_op_flag transferOperationFlag =
-        PLDM_ACKNOWLEDGEMENT_ONLY;
+    constexpr pldm_get_downstream_firmware_params_req params_req{
+        0x0, PLDM_ACKNOWLEDGEMENT_ONLY};
     constexpr size_t payload_length =
         PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES;
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payload_length> requestMsg{};
@@ -2190,8 +2184,7 @@ TEST(GetDownstreamFirmwareParameters, encodeRequestInvalidTransferOperationFlag)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_get_downstream_firmware_params_req(
-        instanceId, dataTransferHandle, transferOperationFlag, requestPtr,
-        payload_length);
+        instanceId, &params_req, requestPtr, payload_length);
     EXPECT_EQ(rc, -EBADMSG);
 }
 #endif
@@ -2200,10 +2193,9 @@ TEST(GetDownstreamFirmwareParameters, encodeRequestInvalidTransferOperationFlag)
 TEST(GetDownstreamFirmwareParameters, encodeRequestErrorBufSize)
 {
     constexpr uint8_t instanceId = 1;
-    constexpr uint32_t dataTransferHandle = 0x0;
     // Setup invalid transfer operation flag
-    constexpr enum transfer_op_flag transferOperationFlag =
-        PLDM_ACKNOWLEDGEMENT_ONLY;
+    constexpr pldm_get_downstream_firmware_params_req params_req{
+        0x0, PLDM_ACKNOWLEDGEMENT_ONLY};
     constexpr size_t payload_length =
         PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES -
         1 /* inject erro length*/;
@@ -2213,8 +2205,7 @@ TEST(GetDownstreamFirmwareParameters, encodeRequestErrorBufSize)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = encode_get_downstream_firmware_params_req(
-        instanceId, dataTransferHandle, transferOperationFlag, requestPtr,
-        payload_length);
+        instanceId, &params_req, requestPtr, payload_length);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
