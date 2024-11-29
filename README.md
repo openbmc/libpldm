@@ -182,35 +182,21 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 
 ## OEM/vendor-specific functions
 
-This will support OEM or vendor-specific functions and semantic information.
-Following directory structure has to be used:
+libpldm accepts support for OEM or vendor-specific extensions. To add support
+for an OEM's extensions:
 
-```text
- libpldm
-    |---- include/libpldm
-    |        |---- oem/<oem_name>
-    |                    |----<oem based .h files>
-    |---- src
-    |        |---- oem/<oem_name>
-    |                    |----<oem based .c files>
-    |---- tests
-    |        |---- oem/<oem_name>
-    |                    |----<oem based test files>
+1. Document the wire format for all OEM messages under `docs/oem/${OEM_NAME}/`
 
-```
+2. Add public OEM APIs declarations and definitions under
+   `include/libpldm/oem/${OEM_NAME}/`, and install them to the same relative
+   location.
 
-<oem_name> - This folder must be created with the name of the OEM/vendor in
+3. Implement the public OEM APIs under `src/oem/${OEM_NAME}/`
+
+4. Implement the OEM API tests under `test/oem/${OEM_NAME}/`
+
+The `${OEM_NAME}` folder must be created with the name of the OEM/vendor in
 lower case.
-
-Header files & source files having the oem functionality for the libpldm library
-should be placed under the respective folder hierarchy as mentioned in the above
-figure. They must be adhering to the rules mentioned under the libpldm section
-above.
-
-Once the above is done a meson option has to be created in `meson.options` with
-its mapped compiler flag to enable conditional compilation.
-
-For consistency would recommend using "oem-<oem_name>".
 
 Finally, the OEM name must be added to the list of choices for the `oem` meson
 option, and the `meson.build` files updated throughout the tree to guard
