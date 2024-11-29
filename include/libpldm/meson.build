@@ -20,7 +20,7 @@ libpldm_headers = files(
     'utils.h',
 )
 
-if get_option('oem-ibm').allowed()
+if get_option('oem').contains('ibm')
     libpldm_headers += files(
         'oem/ibm/entity.h',
         'oem/ibm/file_io.h',
@@ -31,7 +31,7 @@ if get_option('oem-ibm').allowed()
     )
 endif
 
-if get_option('oem-meta').allowed()
+if get_option('oem').contains('meta')
     libpldm_headers += files('oem/meta/file_io.h')
 endif
 

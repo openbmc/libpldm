@@ -24,11 +24,11 @@ if get_option('abi').contains('testing')
     subdir('transport')
 endif
 
-if get_option('oem-ibm').allowed()
+if get_option('oem').contains('ibm')
     subdir('oem/ibm')
 endif
 
-if get_option('oem-meta').allowed()
+if get_option('oem').contains('meta')
     subdir('oem/meta')
 endif
 
