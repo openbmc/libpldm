@@ -9,13 +9,13 @@ project(
         'cpp_std': 'c++23',
         'c_std': 'c17',
         'b_ndebug': 'if-release',
-        'tests': (meson.is_subproject() ? 'disabled' : 'enabled'),
+        'tests': not meson.is_subproject(),
     },
     version: '0.10.0',
     meson_version: '>=1.3.0',
 )
 
-if get_option('tests').allowed()
+if get_option('tests')
     add_languages('cpp')
 endif
 
@@ -74,7 +74,7 @@ libpldm_include_dir = include_directories('include', is_system: true)
 subdir('include')
 subdir('src')
 
-if get_option('tests').allowed()
+if get_option('tests')
     subdir('tests')
 endif
 

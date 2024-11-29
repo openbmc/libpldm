@@ -40,11 +40,11 @@ import('pkgconfig').generate(
     libraries: libpldm,
 )
 
-if get_option('tests').allowed()
+if get_option('tests')
     c_suite = meson.get_compiler('c').get_id()
     cpp_suite = meson.get_compiler('cpp').get_id()
 
-    if get_option('abi-compliance-check').allowed() and c_suite == cpp_suite and c_suite == 'gcc'
+    if get_option('abi-compliance-check') and c_suite == cpp_suite and c_suite == 'gcc'
         host = host_machine.cpu_family()
         baseline_dump = meson.project_source_root() / 'abi' / host / '@0@.dump'.format(
             c_suite,

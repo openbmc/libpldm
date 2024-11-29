@@ -1,4 +1,4 @@
 option('abi', type: 'array', description: 'Constrain exposed symbol classes', choices: ['deprecated', 'stable', 'testing'], value: ['deprecated', 'stable', 'testing'])
-option('abi-compliance-check', type: 'feature', description: 'Detect public ABI/API changes')
+option('abi-compliance-check', type: 'boolean', description: 'Detect public ABI/API changes')
 option('oem', type: 'array', description: 'Enable OEM PLDM extensions', choices: ['ibm', 'meta'], value: ['ibm', 'meta'])
-option('tests', type: 'feature', description: 'Build tests')
+option('tests', type: 'boolean', description: 'Build tests')
