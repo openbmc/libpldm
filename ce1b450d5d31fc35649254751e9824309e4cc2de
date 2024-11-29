@@ -16,6 +16,24 @@
       "message": "Open to better naming suggestions than `_full` for these structs.",
       "revId": "ce1b450d5d31fc35649254751e9824309e4cc2de",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af02dc26_78831b1b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-29T06:34:07Z",
+      "side": 1,
+      "message": "Let\u0027s go with `_full` for now. But, I think eventually we want to get rid of the wire-format structs from the header. Given that, it would be nice if down the track we can rename the structs to drop `_full`. In order to get there we could also now add a typedef for the `_full` structs and document that consumers should use the typedef rather than a raw `struct ..._full`. Then down the track when we\u0027ve removed the wire-format structs we can drop the `_full` from the struct name and deprecate the typedef for removal.\n\nThoughts?\n\nPerhaps if the typedef doesn\u0027t have the `_full` suffix but maps to the `_full` struct it will be easier to \"remove\" down the track after we\u0027ve renamed the struct, as it will be a matter of adding `struct ` in-front of the typedef name where it\u0027s used.",
+      "parentUuid": "50215461_3829f5de",
+      "revId": "ce1b450d5d31fc35649254751e9824309e4cc2de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

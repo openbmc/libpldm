@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a729d14_1ad86808",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-29T06:34:07Z",
+      "side": 1,
+      "message": "This doesn\u0027t match the parameters?",
+      "range": {
+        "startLine": 1488,
+        "startChar": 1,
+        "endLine": 1488,
+        "endChar": 47
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6656ecf_ed624c8f",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-29T06:34:07Z",
+      "side": 1,
+      "message": "Was there a trade-off consideration with not struct-ifying these? I have the same query on the APIs added below as well.",
+      "range": {
+        "startLine": 1497,
+        "startChar": 52,
+        "endLine": 1498,
+        "endChar": 40
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a53512_b485cb02",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-11-29T06:34:07Z",
+      "side": 1,
+      "message": "This seems to be a recurring pattern below. Perhaps we should add an API for it? `pldm_msgbuf_destroy_size()` or something?",
+      "range": {
+        "startLine": 784,
+        "startChar": 1,
+        "endLine": 789,
+        "endChar": 52
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
