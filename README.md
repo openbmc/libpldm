@@ -212,6 +212,6 @@ its mapped compiler flag to enable conditional compilation.
 
 For consistency would recommend using "oem-<oem_name>".
 
-The `meson.build` and the corresponding source file(s) will need to incorporate
-the logic of adding its mapped compiler flag to allow conditional compilation of
-the code.
+Finally, the OEM name must be added to the list of choices for the `oem` meson
+option, and the `meson.build` files updated throughout the tree to guard
+integration of the OEM extensions.
