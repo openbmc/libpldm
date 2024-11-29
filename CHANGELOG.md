@@ -32,6 +32,11 @@ Change categories:
    The prototype for `decode_query_downstream_identifiers_resp()` was updated to
    improve ergonomics for the iterator APIs.
 
+3. meson: Specify OEM extensions in an array
+
+   `include/libpldm/meson.build` is modified, but not in ways that are
+   significant.
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
