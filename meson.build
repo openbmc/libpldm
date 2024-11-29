@@ -1,16 +1,16 @@
 project(
     'libpldm',
     'c',
-    default_options: [
-        'debug=true',
-        'optimization=g',
-        'warning_level=3',
-        'werror=true',
-        'cpp_std=c++23',
-        'c_std=c17',
-        'b_ndebug=if-release',
-        'tests=' + (meson.is_subproject() ? 'disabled' : 'enabled'),
-    ],
+    default_options: {
+        'debug': true,
+        'optimization': 'g',
+        'warning_level': '3',
+        'werror': true,
+        'cpp_std': 'c++23',
+        'c_std': 'c17',
+        'b_ndebug': 'if-release',
+        'tests': (meson.is_subproject() ? 'disabled' : 'enabled'),
+    },
     version: '0.10.0',
     meson_version: '>=1.3.0',
 )
