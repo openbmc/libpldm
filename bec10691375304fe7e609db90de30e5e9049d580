@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81697d13_9a6f1080",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-02T02:57:54Z",
+      "side": 1,
+      "message": "Bit of a nit, but I think it would be less surprising if you return PLDM_SUCCESS here.",
+      "revId": "bec10691375304fe7e609db90de30e5e9049d580",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
