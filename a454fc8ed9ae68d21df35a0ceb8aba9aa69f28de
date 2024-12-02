@@ -163,6 +163,24 @@
       "parentUuid": "8085124a_3137e283",
       "revId": "a454fc8ed9ae68d21df35a0ceb8aba9aa69f28de",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdab15a6_01451af6",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1168,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-02T03:01:07Z",
+      "side": 1,
+      "message": "No worries. I\u0027ll get this reworked.",
+      "parentUuid": "063a8f3b_e3e72453",
+      "revId": "a454fc8ed9ae68d21df35a0ceb8aba9aa69f28de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
