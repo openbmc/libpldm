@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9141866_42e3dfd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-02T03:53:30Z",
+      "side": 1,
+      "message": "Hi Riya, thanks for the updates. I\u0027ve made some comments inline. Some touch on what I think are misunderstandings of intent with the msgbuf APIs, but others are hopefully straight-forward to address.",
+      "revId": "31a33db75668cbed72acb1d2a475c1c826ac4184",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47618590_60e864a5",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 19
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-02T03:53:30Z",
+      "side": 1,
+      "message": "This isn\u0027t right; changes should only be added under the `[Unreleased]` header. Can you please rebase this patch on the tip of `main`?",
+      "revId": "31a33db75668cbed72acb1d2a475c1c826ac4184",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f187ff04_66e89785",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-02T03:53:30Z",
+      "side": 1,
+      "message": "Can you please change this to `-ENOENT` in line with https://gerrit.openbmc.org/c/openbmc/libpldm/+/75825 ?",
+      "range": {
+        "startLine": 243,
+        "startChar": 27,
+        "endLine": 243,
+        "endChar": 68
+      },
+      "revId": "31a33db75668cbed72acb1d2a475c1c826ac4184",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffec83fd_ab3f9887",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-02T03:53:30Z",
+      "side": 1,
+      "message": "A bit of a nitpick, but Can we please separate the variable definitions from assignment, as is common C style?\n\n```c\nint pldm_pdr_find_entity_container_id(...)\n{\n    pldm_pdr_record *record;\n    struct pldm_msgbuf _buf;\n    struct pldm_msgbuf *buf \u003d \u0026_buf;\n    uint8_t skip_data_size;\n    uint8_t hdr_type;\n    uint8_t num_children;\n    int rc;\n\n    if (!repo) {\n        return -EINVAL;\n    }\n\n    record \u003d repo-\u003efirst;\n    ...\n}\n```",
+      "range": {
+        "startLine": 469,
+        "startChar": 1,
+        "endLine": 478,
+        "endChar": 8
+      },
+      "revId": "31a33db75668cbed72acb1d2a475c1c826ac4184",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8f667aa_7652f844",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-02T03:53:30Z",
+      "side": 1,
+      "message": "I\u0027ve un-resolved the comment on PS16, as my request there hasn\u0027t yet been addressed.",
+      "revId": "31a33db75668cbed72acb1d2a475c1c826ac4184",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "086e0113_dc011759",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-02T03:53:30Z",
+      "side": 1,
+      "message": "This return doesn\u0027t make sense if you\u0027re unconditionally jumping over it with the `goto` above.",
+      "revId": "31a33db75668cbed72acb1d2a475c1c826ac4184",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e4a0219_3ffc4abd",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-02T03:53:30Z",
+      "side": 1,
+      "message": "We\u0027ve already failed the call to `pldm_msgbuf_destroy()` but the jump to `cleanup` will just try to destroy it again before returning. The only thing to do on failure of `pldm_msgbuf_destroy()` is to immediately return the error.",
+      "revId": "31a33db75668cbed72acb1d2a475c1c826ac4184",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b5bf006_125eb4cd",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-02T03:53:30Z",
+      "side": 1,
+      "message": "This must be done **before** you use the memory backing the msgbuf. You need to do it on line 142 above, which is roughly where I left the comment on PS16.",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 21
+      },
+      "revId": "31a33db75668cbed72acb1d2a475c1c826ac4184",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98caa68_f5e8683a",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-02T03:53:30Z",
+      "side": 1,
+      "message": "Again, you must do this before you use the buffer that underlies the msgbuf instance. This must be done between lines 193 and 195.\n\nPlease note you are not \"destroying\" the underlying buffer, but rather the msgbuf instance itself, which does not own the underlying buffer[^1]. Destroying the msgbuf instance validates that you\u0027ve not encountered any errors in the process of packing or unpacking data into or from the underlying buffer. It has no other side-effect - specifically, it **does not** e.g. erase or corrupt the data, free the memory, etc of the underlying buffer.\n\n[^1]: If it helps, in rust terms, the msgbuf instance has a mutable borrow of your underlying buffer.",
+      "range": {
+        "startLine": 199,
+        "startChar": 2,
+        "endLine": 200,
+        "endChar": 21
+      },
+      "revId": "31a33db75668cbed72acb1d2a475c1c826ac4184",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
