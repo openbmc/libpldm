@@ -16,6 +16,24 @@
       "message": "Bit of a nit, but I think it would be less surprising if you return PLDM_SUCCESS here.",
       "revId": "bec10691375304fe7e609db90de30e5e9049d580",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17bfb881_204d4daf",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-12-03T02:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81697d13_9a6f1080",
+      "revId": "bec10691375304fe7e609db90de30e5e9049d580",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
