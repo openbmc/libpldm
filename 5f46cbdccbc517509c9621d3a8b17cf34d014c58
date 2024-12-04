@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e0313cc_1549420e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-04T00:04:44Z",
+      "side": 1,
+      "message": "Hi Unive, thanks for the update. Looking at it again I have some minor comments.",
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7674b73_1344d21d",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-04T00:04:44Z",
+      "side": 1,
+      "message": "We\u0027re decoding the message here, right? :)",
+      "range": {
+        "startLine": 1151,
+        "startChar": 14,
+        "endLine": 1151,
+        "endChar": 20
+      },
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de934a62_cec92227",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1188,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-04T00:04:44Z",
+      "side": 1,
+      "message": "`s/encode/decode/`",
+      "range": {
+        "startLine": 1188,
+        "startChar": 14,
+        "endLine": 1188,
+        "endChar": 20
+      },
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b618266_add6b365",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-04T00:04:44Z",
+      "side": 1,
+      "message": "`s/encode/decode/`",
+      "range": {
+        "startLine": 1279,
+        "startChar": 14,
+        "endLine": 1279,
+        "endChar": 20
+      },
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "735f94bc_6caa10c3",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-04T00:04:44Z",
+      "side": 1,
+      "message": "This should rather be `-EOVERFLOW`. `-EINVAL` should only be used for arguments directly under the caller\u0027s control. The length of the received message is not something that\u0027s under the caller\u0027s control.\n\nPlease audit the rest of the patch for the same.",
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c959de_a0a8fc51",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-04T00:04:44Z",
+      "side": 1,
+      "message": "This can now be reduced to:\n\n```\nreturn pldm_msgbuf_destroy_consumed(buf);\n```\n\nPlease audit the rest of the patch for the same.",
+      "range": {
+        "startLine": 978,
+        "startChar": 1,
+        "endLine": 983,
+        "endChar": 10
+      },
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "217c59d6_2d6422dd",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-04T00:04:44Z",
+      "side": 1,
+      "message": "Again, `-EOVERFLOW` here.",
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
