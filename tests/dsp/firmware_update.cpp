@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <array>
 #include <bitset>
+#include <cstddef>
 #include <cstdint>
 #include <cstring>
 #include <span>
@@ -1592,7 +1593,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseNoDevicesBadCount)
 
     foreach_pldm_downstream_device(devs, dev, rc)
     {
-        ASSERT_TRUE(false);
+        FAIL();
     }
     ASSERT_NE(rc, 0);
 }
@@ -2212,79 +2213,274 @@ TEST(GetDownstreamFirmwareParameters, encodeRequestErrorBufSize)
 #endif
 
 #ifdef LIBPLDM_API_TESTING
-TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponse)
+TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponseOneEntry)
 {
-    /** Count is not fixed here taking it as 1, and the downstream device's
-     *  version strings length are set to 8
-     */
     constexpr uint16_t downstreamDeviceCount = 1;
     constexpr uint8_t activeComponentVersionStringLength = 8;
     constexpr uint8_t pendingComponentVersionStringLength = 8;
     constexpr size_t downstreamDeviceParamTableLen =
-        sizeof(pldm_component_parameter_entry) +
+        PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN +
         activeComponentVersionStringLength +
         pendingComponentVersionStringLength;
-    constexpr uint8_t complition_code_resp = PLDM_SUCCESS;
+    constexpr uint8_t completion_code_resp = PLDM_SUCCESS;
     constexpr uint32_t next_data_transfer_handle_resp = 0x0;
     constexpr uint8_t transfer_flag_resp = PLDM_START_AND_END;
     constexpr bitfield32_t fdp_capabilities_during_update = {.value = 0x0002};
+    constexpr size_t payload_len =
+        PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN +
+        downstreamDeviceParamTableLen;
 
-    std::array<uint8_t,
-               hdrSize + PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN +
-                   downstreamDeviceParamTableLen>
-        responseMsg{};
-
-    int rc = 0;
-
+    PLDM_MSG_DEFINE_P(response, payload_len);
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg.data() + hdrSize,
-                                responseMsg.size() - hdrSize);
+    int rc = 0;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, response->payload, payload_len);
     EXPECT_EQ(rc, 0);
 
-    pldm_msgbuf_insert_uint8(buf, complition_code_resp);
+    // Table 24
+    pldm_msgbuf_insert_uint8(buf, completion_code_resp);
     pldm_msgbuf_insert_uint32(buf, next_data_transfer_handle_resp);
     pldm_msgbuf_insert_uint8(buf, transfer_flag_resp);
+
+    // Table 25
     pldm_msgbuf_insert_uint32(buf, fdp_capabilities_during_update.value);
     pldm_msgbuf_insert_uint16(buf, downstreamDeviceCount);
 
-    /** Filling paramter table, the correctness of the downstream devices data
-     *  is not checked in this test case so filling with 0xff
-     */
-    std::fill_n(responseMsg.data() + hdrSize +
-                    PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN,
-                downstreamDeviceParamTableLen, 0xff);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-    auto table = reinterpret_cast<pldm_component_parameter_entry*>(
-        responseMsg.data() + hdrSize +
-        PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN);
-    table->active_comp_ver_str_len = activeComponentVersionStringLength;
-    table->pending_comp_ver_str_len = pendingComponentVersionStringLength;
+    // Table 26
+    pldm_msgbuf_insert_uint16(buf, 0);
 
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    // - Active metadata
+    pldm_msgbuf_insert_uint32(buf, 0);
+    pldm_msgbuf_insert_uint8(buf, 1);
+    pldm_msgbuf_insert_uint8(buf, activeComponentVersionStringLength);
+    rc = pldm__msgbuf_insert_array_void(buf, 8, "20241206", 8);
+    ASSERT_EQ(rc, 0);
+
+    // - Pending metadata
+    pldm_msgbuf_insert_uint32(buf, 0);
+    pldm_msgbuf_insert_uint8(buf, 1);
+    pldm_msgbuf_insert_uint8(buf, pendingComponentVersionStringLength);
+    rc = pldm__msgbuf_insert_array_void(buf, 8, "20241206", 8);
+    ASSERT_EQ(rc, 0);
+
+    // - Methods and capabilities
+    pldm_msgbuf_insert_uint16(buf, 1);
+    pldm_msgbuf_insert_uint32(buf, 0);
+
+    // - Version strings
+    rc = pldm__msgbuf_insert_array_void(buf, activeComponentVersionStringLength,
+                                        "abcdefgh", 8);
+    ASSERT_EQ(rc, 0);
+    rc = pldm__msgbuf_insert_array_void(
+        buf, pendingComponentVersionStringLength, "zyxwvuts", 8);
+    ASSERT_EQ(rc, 0);
+
+    rc = pldm_msgbuf_destroy_consumed(buf);
+    ASSERT_EQ(rc, 0);
+
     struct pldm_get_downstream_firmware_parameters_resp resp_data = {};
-    struct variable_field downstreamDeviceParamTable = {};
+    struct pldm_downstream_device_parameters_iter iter = {};
 
-    rc = decode_get_downstream_firmware_parameters_resp(
-        response, responseMsg.size() - hdrSize, &resp_data,
-        &downstreamDeviceParamTable);
+    rc = decode_get_downstream_firmware_parameters_resp(response, payload_len,
+                                                        &resp_data, &iter);
 
-    EXPECT_EQ(rc, 0);
-    EXPECT_EQ(resp_data.completion_code, complition_code_resp);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(resp_data.completion_code, completion_code_resp);
     EXPECT_EQ(resp_data.next_data_transfer_handle,
               next_data_transfer_handle_resp);
     EXPECT_EQ(resp_data.transfer_flag, transfer_flag_resp);
     EXPECT_EQ(resp_data.downstream_device_count, downstreamDeviceCount);
-    EXPECT_EQ(downstreamDeviceParamTable.length, downstreamDeviceParamTableLen);
-    EXPECT_EQ(
-        true,
-        std::equal(downstreamDeviceParamTable.ptr,
-                   downstreamDeviceParamTable.ptr +
-                       downstreamDeviceParamTable.length,
-                   responseMsg.begin() + hdrSize +
-                       PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN,
-                   responseMsg.end()));
+
+    struct pldm_downstream_device_parameters_entry entry;
+    size_t entries = 0;
+    foreach_pldm_downstream_device_parameters_entry(iter, entry, rc)
+    {
+        EXPECT_EQ(entry.downstream_device_index, 0);
+        EXPECT_EQ(entry.active_comp_comparison_stamp, 0);
+        EXPECT_EQ(entry.active_comp_ver_str_type, 1);
+        EXPECT_EQ(entry.active_comp_ver_str_len,
+                  activeComponentVersionStringLength);
+        EXPECT_STREQ("20241206", entry.active_comp_release_date);
+        EXPECT_EQ(entry.pending_comp_comparison_stamp, 0);
+        EXPECT_EQ(entry.pending_comp_ver_str_type, 1);
+        EXPECT_EQ(entry.pending_comp_ver_str_len,
+                  pendingComponentVersionStringLength);
+        EXPECT_STREQ("20241206", entry.pending_comp_release_date);
+        EXPECT_EQ(entry.comp_activation_methods.value, 1);
+        EXPECT_EQ(entry.capabilities_during_update.value, 0);
+        EXPECT_FALSE(memcmp("abcdefgh", entry.active_comp_ver_str,
+                            entry.active_comp_ver_str_len));
+        EXPECT_FALSE(memcmp("zyxwvuts", entry.pending_comp_ver_str,
+                            entry.pending_comp_ver_str_len));
+        entries++;
+    }
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(entries, 1);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponseTwoEntries)
+{
+    /** Count is not fixed here taking it as 1, and the downstream device's
+     *  version strings length are set to 8
+     */
+    constexpr uint16_t downstreamDeviceCount = 2;
+    constexpr uint8_t activeComponentVersionStringLength = 8;
+    constexpr uint8_t pendingComponentVersionStringLength = 9;
+    constexpr size_t downstreamDeviceParamTableLen =
+        static_cast<size_t>(downstreamDeviceCount *
+                            (PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN +
+                             activeComponentVersionStringLength +
+                             pendingComponentVersionStringLength));
+    constexpr uint8_t completion_code_resp = PLDM_SUCCESS;
+    constexpr uint32_t next_data_transfer_handle_resp = 0x0;
+    constexpr uint8_t transfer_flag_resp = PLDM_START_AND_END;
+    constexpr bitfield32_t fdp_capabilities_during_update = {.value = 0x0002};
+    constexpr size_t payload_len =
+        PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN +
+        downstreamDeviceParamTableLen;
+
+    PLDM_MSG_DEFINE_P(response, payload_len);
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+    int rc = 0;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, response->payload, payload_len);
+    EXPECT_EQ(rc, 0);
+
+    // Table 24
+    pldm_msgbuf_insert_uint8(buf, completion_code_resp);
+    pldm_msgbuf_insert_uint32(buf, next_data_transfer_handle_resp);
+    pldm_msgbuf_insert_uint8(buf, transfer_flag_resp);
+
+    // Table 25
+    pldm_msgbuf_insert_uint32(buf, fdp_capabilities_during_update.value);
+    pldm_msgbuf_insert_uint16(buf, downstreamDeviceCount);
+
+    constexpr const std::array<pldm_downstream_device_parameters_entry, 2>
+        table = {{{
+                      0,
+                      0,
+                      1,
+                      8,
+                      "20241206",
+                      0,
+                      1,
+                      9,
+                      "20241209",
+                      {1},
+                      {0},
+                      "active_0",
+                      "pending_0",
+                  },
+                  {
+                      1,
+                      0,
+                      1,
+                      8,
+                      "20241209",
+                      0,
+                      1,
+                      9,
+                      "20241206",
+                      {1},
+                      {0},
+                      "active_1",
+                      "pending_1",
+                  }}};
+    for (const auto& e : table)
+    {
+        // Table 26
+        pldm_msgbuf_insert_uint16(buf, e.downstream_device_index);
+
+        // - Active metadata
+        pldm_msgbuf_insert_uint32(buf, e.active_comp_comparison_stamp);
+        pldm_msgbuf_insert_uint8(buf, e.active_comp_ver_str_type);
+        pldm_msgbuf_insert_uint8(buf, e.active_comp_ver_str_len);
+        rc = pldm__msgbuf_insert_array_void(buf, 8, &e.active_comp_release_date,
+                                            sizeof(e.active_comp_release_date));
+        ASSERT_EQ(rc, 0);
+
+        // - Pending metadata
+        pldm_msgbuf_insert_uint32(buf, e.pending_comp_comparison_stamp);
+        pldm_msgbuf_insert_uint8(buf, e.pending_comp_ver_str_type);
+        pldm_msgbuf_insert_uint8(buf, e.pending_comp_ver_str_len);
+        rc =
+            pldm__msgbuf_insert_array_void(buf, 8, e.pending_comp_release_date,
+                                           sizeof(e.pending_comp_release_date));
+        ASSERT_EQ(rc, 0);
+
+        // - Methods and capabilities
+        pldm_msgbuf_insert_uint16(buf, e.comp_activation_methods.value);
+        pldm_msgbuf_insert_uint32(buf, e.capabilities_during_update.value);
+
+        // - Version strings
+        rc = pldm__msgbuf_insert_array_void(buf, e.active_comp_ver_str_len,
+                                            e.active_comp_ver_str,
+                                            e.active_comp_ver_str_len);
+        ASSERT_EQ(rc, 0);
+        rc = pldm__msgbuf_insert_array_void(buf, e.pending_comp_ver_str_len,
+                                            e.pending_comp_ver_str,
+                                            e.pending_comp_ver_str_len);
+        ASSERT_EQ(rc, 0);
+    }
+
+    rc = pldm_msgbuf_destroy_consumed(buf);
+    ASSERT_EQ(rc, 0);
+
+    struct pldm_get_downstream_firmware_parameters_resp resp_data = {};
+    struct pldm_downstream_device_parameters_iter iter = {};
+
+    rc = decode_get_downstream_firmware_parameters_resp(response, payload_len,
+                                                        &resp_data, &iter);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(resp_data.completion_code, completion_code_resp);
+    EXPECT_EQ(resp_data.next_data_transfer_handle,
+              next_data_transfer_handle_resp);
+    EXPECT_EQ(resp_data.transfer_flag, transfer_flag_resp);
+    EXPECT_EQ(resp_data.downstream_device_count, downstreamDeviceCount);
+
+    struct pldm_downstream_device_parameters_entry entry;
+    size_t entryIndex = 0;
+    foreach_pldm_downstream_device_parameters_entry(iter, entry, rc)
+    {
+        ASSERT_LE(entryIndex, table.size());
+
+        EXPECT_EQ(table[entryIndex].downstream_device_index,
+                  entry.downstream_device_index);
+        EXPECT_EQ(table[entryIndex].active_comp_comparison_stamp,
+                  entry.active_comp_comparison_stamp);
+        EXPECT_EQ(table[entryIndex].active_comp_ver_str_type,
+                  entry.active_comp_ver_str_type);
+        EXPECT_EQ(table[entryIndex].active_comp_ver_str_len,
+                  entry.active_comp_ver_str_len);
+        EXPECT_STREQ(&table[entryIndex].active_comp_release_date[0],
+                     &entry.active_comp_release_date[0]);
+        EXPECT_EQ(table[entryIndex].pending_comp_comparison_stamp,
+                  entry.pending_comp_comparison_stamp);
+        EXPECT_EQ(table[entryIndex].pending_comp_ver_str_type,
+                  entry.pending_comp_ver_str_type);
+        EXPECT_EQ(table[entryIndex].pending_comp_ver_str_len,
+                  entry.pending_comp_ver_str_len);
+        EXPECT_STREQ(&table[entryIndex].pending_comp_release_date[0],
+                     &entry.pending_comp_release_date[0]);
+        EXPECT_EQ(table[entryIndex].comp_activation_methods.value,
+                  entry.comp_activation_methods.value);
+        EXPECT_EQ(table[entryIndex].capabilities_during_update.value,
+                  entry.capabilities_during_update.value);
+        EXPECT_FALSE(memcmp(table[entryIndex].active_comp_ver_str,
+                            entry.active_comp_ver_str,
+                            table[entryIndex].active_comp_ver_str_len));
+        EXPECT_FALSE(memcmp(table[entryIndex].pending_comp_ver_str,
+                            entry.pending_comp_ver_str,
+                            table[entryIndex].pending_comp_ver_str_len));
+        entryIndex++;
+    }
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(entryIndex, table.size());
 }
 #endif
 
@@ -2336,236 +2532,18 @@ TEST(GetDownstreamFirmwareParameters, decodeResponseInvalidLength)
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
     struct pldm_get_downstream_firmware_parameters_resp resp_data = {};
-    struct variable_field downstreamDeviceParamTable = {};
+    struct pldm_downstream_device_parameters_iter iter;
 
     rc = decode_get_downstream_firmware_parameters_resp(
-        response, responseMsg.size() - hdrSize, &resp_data,
-        &downstreamDeviceParamTable);
+        response, responseMsg.size() - hdrSize, &resp_data, &iter);
     EXPECT_EQ(rc, 0);
 
-    pldm_downstream_device_parameters_entry entry{};
-    variable_field versions{};
-
-    EXPECT_NE(decode_downstream_device_parameter_table_entry(
-                  &downstreamDeviceParamTable, &entry, &versions),
-              0);
-}
-#endif
-
-#ifdef LIBPLDM_API_TESTING
-TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamDeviceParamTable)
-{
-    // Arbitrary downstream device index
-    constexpr uint16_t downstreamDeviceIndex = 1;
-    // Arbitrary value for component classification
-    constexpr uint32_t comparisonStamp = 0x12345678;
-    // Arbitrary value for component activation methods
-    constexpr uint16_t compActivationMethods = 0xbbdd;
-    // Arbitrary value for capabilities during update
-    constexpr uint32_t capabilitiesDuringUpdate = 0xbadbeefe;
-    // ActiveCompImageSetVerStrLen is not fixed here taking it as 8
-    constexpr uint8_t activeCompVerStrLen = 8;
-    // PendingCompImageSetVerStrLen is not fixed here taking it as 8
-    constexpr uint8_t pendingCompVerStrLen = 8;
-    // Arbitrary value for release date
-    constexpr char release_date[8] = {'2', '0', '2', '4', '0', '6', '2', '1'};
-    // Arbitrary version strings
-    constexpr char activeCompVerStr[activeCompVerStrLen] = {'1', '2', '3', '4',
-                                                            '5', '6', '7', '8'};
-    constexpr char pendingCompVerStr[pendingCompVerStrLen] = {
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-
-    std::array<uint8_t, PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN +
-                            activeCompVerStrLen + pendingCompVerStrLen>
-        responseMsg{};
-
-    int rc = 0;
-
-    struct pldm_msgbuf _buf;
-    struct pldm_msgbuf* buf = &_buf;
-    rc = pldm_msgbuf_init_errno(buf,
-                                PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN,
-                                responseMsg.data(), responseMsg.size());
-    EXPECT_EQ(rc, 0);
-
-    pldm_msgbuf_insert_uint16(buf, downstreamDeviceIndex);
-    pldm_msgbuf_insert_uint32(buf, comparisonStamp);
-    pldm_msgbuf_insert_uint8(buf, (uint8_t)PLDM_STR_TYPE_ASCII);
-    pldm_msgbuf_insert_uint8(buf, activeCompVerStrLen);
-    rc = pldm_msgbuf_insert_array_char(buf, sizeof(release_date), release_date,
-                                       sizeof(release_date));
-    ASSERT_EQ(rc, 0);
-    pldm_msgbuf_insert_uint32(buf, comparisonStamp);
-    pldm_msgbuf_insert_uint8(buf, (uint8_t)PLDM_STR_TYPE_ASCII);
-    pldm_msgbuf_insert_uint8(buf, pendingCompVerStrLen);
-    rc = pldm_msgbuf_insert_array_char(buf, sizeof(release_date), release_date,
-                                       sizeof(release_date));
-    ASSERT_EQ(rc, 0);
-    pldm_msgbuf_insert_uint16(buf, compActivationMethods);
-    pldm_msgbuf_insert_uint32(buf, capabilitiesDuringUpdate);
-    rc = pldm_msgbuf_insert_array_char(
-        buf, activeCompVerStrLen, activeCompVerStr, sizeof(activeCompVerStr));
-    ASSERT_EQ(rc, 0);
-    rc = pldm_msgbuf_insert_array_char(buf, pendingCompVerStrLen,
-                                       pendingCompVerStr,
-                                       sizeof(pendingCompVerStr));
-    ASSERT_EQ(rc, 0);
-
-    variable_field rawData = {.ptr = responseMsg.data(),
-                              .length = responseMsg.size()};
-    struct pldm_downstream_device_parameter_entry_versions entry_version = {};
-    struct variable_field versions = {};
-    const uint8_t* original_ptr = rawData.ptr;
-
-    rc = decode_downstream_device_parameter_table_entry(
-        &rawData, &entry_version.entry, &versions);
-
-    EXPECT_EQ(rc, 0);
-    EXPECT_EQ(rawData.ptr, original_ptr +
-                               PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN +
-                               entry_version.entry.active_comp_ver_str_len +
-                               entry_version.entry.pending_comp_ver_str_len);
-    EXPECT_EQ(rawData.length, 0);
-
-    // Further decode the version strings
-    rc = decode_downstream_device_parameter_table_entry_versions(
-        &versions, &entry_version.entry, entry_version.active_comp_ver_str,
-        sizeof(entry_version.active_comp_ver_str),
-        entry_version.pending_comp_ver_str,
-        sizeof(entry_version.pending_comp_ver_str));
-    struct pldm_downstream_device_parameters_entry entry = entry_version.entry;
-    EXPECT_EQ(rc, 0);
-
-    // Verify the decoded table entry
-    EXPECT_EQ(entry.downstream_device_index, downstreamDeviceIndex);
-    EXPECT_EQ(entry.active_comp_comparison_stamp, comparisonStamp);
-    EXPECT_EQ(entry.active_comp_ver_str_type, PLDM_STR_TYPE_ASCII);
-    EXPECT_EQ(entry.active_comp_ver_str_len, activeCompVerStrLen);
-    EXPECT_EQ(0, memcmp(entry.active_comp_release_date, release_date,
-                        sizeof(release_date)));
-    EXPECT_EQ(entry.pending_comp_comparison_stamp, comparisonStamp);
-    EXPECT_EQ(entry.pending_comp_ver_str_type, PLDM_STR_TYPE_ASCII);
-    EXPECT_EQ(entry.pending_comp_ver_str_len, pendingCompVerStrLen);
-    EXPECT_EQ(0, memcmp(entry.pending_comp_release_date, release_date,
-                        sizeof(release_date)));
-    EXPECT_EQ(entry.comp_activation_methods.value, compActivationMethods);
-    EXPECT_EQ(entry.capabilities_during_update.value, capabilitiesDuringUpdate);
-    EXPECT_EQ(entry.active_comp_ver_str_len + entry.pending_comp_ver_str_len,
-              versions.length);
-    EXPECT_EQ(0, memcmp(versions.ptr, activeCompVerStr, activeCompVerStrLen));
-    EXPECT_EQ(0, memcmp(versions.ptr + entry.active_comp_ver_str_len,
-                        pendingCompVerStr, pendingCompVerStrLen));
-
-    // Verify version strings
-    EXPECT_EQ(0, memcmp(entry_version.entry.active_comp_ver_str,
-                        activeCompVerStr, activeCompVerStrLen));
-    EXPECT_EQ('\0',
-              entry_version.entry.active_comp_ver_str[activeCompVerStrLen]);
-    EXPECT_EQ(0, memcmp(entry_version.entry.pending_comp_ver_str,
-                        pendingCompVerStr, pendingCompVerStrLen));
-    EXPECT_EQ('\0',
-              entry_version.entry.pending_comp_ver_str[pendingCompVerStrLen]);
-    EXPECT_EQ(0, memcmp(entry_version.active_comp_ver_str, activeCompVerStr,
-                        activeCompVerStrLen));
-    EXPECT_EQ('\0', entry_version.active_comp_ver_str[activeCompVerStrLen]);
-    EXPECT_EQ(0, memcmp(entry_version.pending_comp_ver_str, pendingCompVerStr,
-                        pendingCompVerStrLen));
-    EXPECT_EQ('\0', entry_version.pending_comp_ver_str[pendingCompVerStrLen]);
-}
-#endif
-
-#ifdef LIBPLDM_API_TESTING
-TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamTableVersions)
-{
-    // Arbitrary component version string length
-    constexpr uint8_t activeCompVerStrLen = 8;
-    constexpr uint8_t pendingCompVerStrLen = 8;
-    // Arbitrary ActiveVersionStr and pendingVersionStr
-    constexpr char versionsStr[] = {'1', '2', '3', '4', '5', '6', '7', '8',
-                                    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-    const struct variable_field versions = {
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-        .ptr = reinterpret_cast<const uint8_t*>(versionsStr),
-        .length = sizeof(versionsStr)};
-
-    struct pldm_downstream_device_parameter_entry_versions entryVersion = {};
-    entryVersion.entry.active_comp_ver_str_len = activeCompVerStrLen;
-    entryVersion.entry.pending_comp_ver_str_len = pendingCompVerStrLen;
-
-    int rc = decode_downstream_device_parameter_table_entry_versions(
-        &versions, &entryVersion.entry, entryVersion.active_comp_ver_str,
-        sizeof(entryVersion.active_comp_ver_str),
-        entryVersion.pending_comp_ver_str,
-        sizeof(entryVersion.pending_comp_ver_str));
-
-    EXPECT_EQ(rc, 0);
-    EXPECT_EQ(0, memcmp(entryVersion.active_comp_ver_str, versions.ptr,
-                        activeCompVerStrLen));
-    EXPECT_EQ('\0', entryVersion.active_comp_ver_str[activeCompVerStrLen]);
-    EXPECT_EQ(0,
-              memcmp(entryVersion.pending_comp_ver_str,
-                     versions.ptr + activeCompVerStrLen, pendingCompVerStrLen));
-    EXPECT_EQ('\0', entryVersion.pending_comp_ver_str[activeCompVerStrLen]);
-    EXPECT_EQ(0, memcmp(entryVersion.entry.active_comp_ver_str, versions.ptr,
-                        activeCompVerStrLen));
-    EXPECT_EQ('\0',
-              entryVersion.entry.pending_comp_ver_str[activeCompVerStrLen]);
-    EXPECT_EQ(0,
-              memcmp(entryVersion.entry.pending_comp_ver_str,
-                     versions.ptr + activeCompVerStrLen, pendingCompVerStrLen));
-    EXPECT_EQ('\0',
-              entryVersion.entry.pending_comp_ver_str[activeCompVerStrLen]);
-}
-#endif
-
-#ifdef LIBPLDM_API_TESTING
-TEST(GetDownstreamFirmwareParameters, decodeInvalidDownstreamTableVersions)
-{
-    // Arbitrary ActiveVersionStr and pendingVersionStr
-    constexpr char versionsStr[] = {'1', '2', '3', '4', '5', '6', '7', '8',
-                                    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-    const struct variable_field versions = {
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-        .ptr = reinterpret_cast<const uint8_t*>(versionsStr),
-        .length = sizeof(versionsStr)};
-
-    struct pldm_downstream_device_parameter_entry_versions entryVersion = {};
-
-    int rc = decode_downstream_device_parameter_table_entry_versions(
-        &versions, nullptr, entryVersion.active_comp_ver_str,
-        sizeof(entryVersion.active_comp_ver_str),
-        entryVersion.pending_comp_ver_str,
-        sizeof(entryVersion.pending_comp_ver_str));
-    EXPECT_EQ(rc, -EINVAL);
-}
-#endif
-
-#ifdef LIBPLDM_API_TESTING
-TEST(GetDownstreamFirmwareParameters, decodeOverflowDownstreamTableVersions)
-{
-    // Arbitrary component version string length
-    constexpr uint8_t activeCompVerStrLen = 8;
-    constexpr uint8_t pendingCompVerStrLen = 8;
-    // Arbitrary ActiveVersionStr and pendingVersionStr
-    constexpr char versionsStr[] = {'1', '2', '3', '4', '5', '6', '7', '8',
-                                    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-    const struct variable_field versions = {
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-        .ptr = reinterpret_cast<const uint8_t*>(versionsStr),
-        .length = sizeof(versionsStr) - 1 // Inject error length
-    };
-
-    struct pldm_downstream_device_parameter_entry_versions entryVersion = {};
-    entryVersion.entry.active_comp_ver_str_len = activeCompVerStrLen;
-    entryVersion.entry.pending_comp_ver_str_len = pendingCompVerStrLen;
-
-    EXPECT_EQ(decode_downstream_device_parameter_table_entry_versions(
-                  &versions, &entryVersion.entry,
-                  entryVersion.active_comp_ver_str,
-                  sizeof(entryVersion.active_comp_ver_str),
-                  entryVersion.pending_comp_ver_str,
-                  sizeof(entryVersion.pending_comp_ver_str)),
-              -EOVERFLOW);
+    struct pldm_downstream_device_parameters_entry entry;
+    foreach_pldm_downstream_device_parameters_entry(iter, entry, rc)
+    {
+        FAIL();
+    }
+    EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
 

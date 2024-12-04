@@ -56,6 +56,11 @@ Change categories:
    marked as testing. There should be no impact on users of the stable APIs/
    ABIs.
 
+8. Reimplement parsing of the firmware update downstream device parameter table
+   using an iterator macro
+
+   The change removes redundant APIs in the process.
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection

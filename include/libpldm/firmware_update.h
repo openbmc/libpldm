@@ -795,28 +795,8 @@ struct pldm_downstream_device_parameters_entry {
 	char pending_comp_release_date[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN + 1];
 	bitfield16_t comp_activation_methods;
 	bitfield32_t capabilities_during_update;
-	const char *active_comp_ver_str;
-	const char *pending_comp_ver_str;
-};
-
-/** @struct pldm_downstream_device_parameter_entry_versions
- *
- *  Structure representing downstream device parameter table entry with
- *  copies of active and pending component version strings to avoid the
- *  message buffer is subsequently freed.
- *
- *  Clients should allocate memory for this struct then decode the response
- *  instead of using `pldm_downstream_device_parameter_entry`.
- */
-struct pldm_downstream_device_parameter_entry_versions {
-	struct pldm_downstream_device_parameters_entry entry;
-	/* The "Length of ComponentVersionString" field is 1 byte, so
-	 * "ComponentVersionString" can be at most 255 characters, allocate
-	 * memory for it and append 1 bytes for null termination so that it
-	 * can be used as a Null-terminated string.
-	 */
-	char active_comp_ver_str[UINT8_MAX + 1];
-	char pending_comp_ver_str[UINT8_MAX + 1];
+	const void *active_comp_ver_str;
+	const void *pending_comp_ver_str;
 };
 
 /** @struct pldm_request_update_req
@@ -1215,6 +1195,11 @@ int encode_get_downstream_firmware_parameters_req(
 	const struct pldm_get_downstream_firmware_parameters_req *params_req,
 	struct pldm_msg *msg, size_t payload_length);
 
+struct pldm_downstream_device_parameters_iter {
+	struct variable_field field;
+	size_t entries;
+};
+
 /**
  * @brief Decode response message for Get Downstream Firmware Parameters
  *
@@ -1234,7 +1219,7 @@ int encode_get_downstream_firmware_parameters_req(
 int decode_get_downstream_firmware_parameters_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_get_downstream_firmware_parameters_resp *resp_data,
-	struct variable_field *downstream_device_param_table);
+	struct pldm_downstream_device_parameters_iter *iter);
 
 /**
  * @brief Decode the next downstream device parameter table entry
@@ -1260,33 +1245,69 @@ int decode_get_downstream_firmware_parameters_resp(
  * @note Caller is responsible for memory alloc and dealloc of param
  * 	  'entry', 'active_comp_ver_str' and 'pending_comp_ver_str'
  */
-int decode_downstream_device_parameter_table_entry(
-	struct variable_field *data,
-	struct pldm_downstream_device_parameters_entry *entry,
-	struct variable_field *versions);
+int decode_pldm_downstream_device_parameters_entry_from_iter(
+	struct pldm_downstream_device_parameters_iter *iter,
+	struct pldm_downstream_device_parameters_entry *entry);
 
-/**
- * @brief Decode the downstream device parameter table entry versions
+LIBPLDM_ITERATOR
+bool pldm_downstream_device_parameters_iter_end(
+	const struct pldm_downstream_device_parameters_iter *iter)
+{
+	return !iter->entries;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_downstream_device_parameters_iter_next(
+	struct pldm_downstream_device_parameters_iter *iter)
+{
+	if (!iter->entries) {
+		return false;
+	}
+
+	iter->entries--;
+	return true;
+}
+
+/** @brief Iterator downstream device parameter entries in Get Downstream
+ *         Firmware Parameters response
  *
- * @param[in] versions - pointer to version strings raw data
- * @param[in,out] entry - pointer to the decoded downstream device parameter table entry
- * @param[out] active - pointer to active component version string container
- * @param[in] active_len - The size of the object pointed to by @p active
- * @param[out] pending - pointer to pending component version string container
- * @param[in] pending_len - The size of the object pointed to by @p pending
- * @return 0 on success, otherwise -EINVAL if the input parameters' memory
- *         are not allocated, -EOVERFLOW if the payload length is not enough
- *         to decode the message, -EBADMSG if the message is not valid.
+ * @param params The @ref "struct pldm_downstream_device_parameters_iter" lvalue
+ *               used as the out-value from the corresponding call to @ref
+ *               decode_get_downstream_firmware_parameters_resp
+ * @param entry The @ref "struct pldm_downstream_device_parameters_entry" lvalue
+ *              into which the next parameter table entry should be decoded
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed
  *
- * @note Caller is responsible for memory alloc and dealloc of all the params,
- *    and the param `entry` should be the instance which has successfully decoded
- *    by `decode_downstream_device_parameter_table_entry()`.
+ * Example use of the macro is as follows:
  *
+ * @code
+ * struct pldm_get_downstream_firmware_parameters_resp resp;
+ * struct pldm_downstream_device_parameters_iter params;
+ * struct pldm_downstream_device_parameters_entry entry;
+ * int rc;
+ *
+ * rc = decode_get_downstream_firmware_parameters_resp(..., &resp, &params);
+ * if (rc) {
+ *     // Handle any error from decoding the fixed-portion of response
+ * }
+ *
+ * foreach_pldm_downstream_device_parameters_entry(params, entry, rc) {
+ *     // Do something with the decoded entry
+ * }
+ *
+ * if (rc) {
+ *     // Handle any decoding error while iterating the variable-length set of
+ *     //parameter entries
+ * }
+ * @endcode
  */
-int decode_downstream_device_parameter_table_entry_versions(
-	const struct variable_field *versions,
-	struct pldm_downstream_device_parameters_entry *entry, char *active,
-	size_t active_len, char *pending, size_t pending_len);
+#define foreach_pldm_downstream_device_parameters_entry(params, entry, rc)       \
+	for ((rc) = 0;                                                           \
+	     (!pldm_downstream_device_parameters_iter_end(&(params)) &&          \
+	      !((rc) = decode_pldm_downstream_device_parameters_entry_from_iter( \
+			&(params), &(entry))));                                  \
+	     pldm_downstream_device_parameters_iter_next(&(params)))
 
 /** @brief Create PLDM request message for RequestUpdate
  *
