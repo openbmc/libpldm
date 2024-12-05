@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5612de8_3c76749b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-12-05T01:34:07Z",
+      "side": 1,
+      "message": "Oops, let me fix it. ;)",
+      "parentUuid": "c7674b73_1344d21d",
+      "range": {
+        "startLine": 1151,
+        "startChar": 14,
+        "endLine": 1151,
+        "endChar": 20
+      },
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de934a62_cec92227",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-12-04T00:04:44Z",
       "side": 1,
       "message": "`s/encode/decode/`",
+      "range": {
+        "startLine": 1188,
+        "startChar": 14,
+        "endLine": 1188,
+        "endChar": 20
+      },
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b188ff38_bdf72754",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1188,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-12-05T01:34:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de934a62_cec92227",
       "range": {
         "startLine": 1188,
         "startChar": 14,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b45556_9558c92e",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-12-05T01:34:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b618266_add6b365",
+      "range": {
+        "startLine": 1279,
+        "startChar": 14,
+        "endLine": 1279,
+        "endChar": 20
+      },
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "735f94bc_6caa10c3",
@@ -100,6 +172,24 @@
       "writtenOn": "2024-12-04T00:04:44Z",
       "side": 1,
       "message": "This should rather be `-EOVERFLOW`. `-EINVAL` should only be used for arguments directly under the caller\u0027s control. The length of the received message is not something that\u0027s under the caller\u0027s control.\n\nPlease audit the rest of the patch for the same.",
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "287f9535_c451a6b8",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-12-05T01:34:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "735f94bc_6caa10c3",
       "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -127,6 +217,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76ebc8e5_d27abbc0",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-12-05T01:34:07Z",
+      "side": 1,
+      "message": "Done, looking around this is the only one for this patch.",
+      "parentUuid": "a8c959de_a0a8fc51",
+      "range": {
+        "startLine": 978,
+        "startChar": 1,
+        "endLine": 983,
+        "endChar": 10
+      },
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "217c59d6_2d6422dd",
@@ -140,6 +254,24 @@
       "writtenOn": "2024-12-04T00:04:44Z",
       "side": 1,
       "message": "Again, `-EOVERFLOW` here.",
+      "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ae2d0b_9cc5768c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-12-05T01:34:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "217c59d6_2d6422dd",
       "revId": "5f46cbdccbc517509c9621d3a8b17cf34d014c58",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
