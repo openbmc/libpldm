@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ded762d_b2076ac0",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-12-05T05:35:32Z",
+      "side": 1,
+      "message": "I\u0027m fine with the type change, but give me a second to look back if there is any reason that it is `enum`, because I have a very early version of this part of code(from my former colleague) and it _was_ declared as `uint8_t`, if there is no significant resason with this I\u0027ll just revise it back.",
+      "parentUuid": "1b03cfa8_50d8c32d",
+      "revId": "6c2cc26c22549ea175a11d0db988afaa90a2532b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f6f5b59_8bf0afb3",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 9
