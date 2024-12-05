@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "012b0bf3_6f71b417",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-05T04:30:09Z",
+      "side": 1,
+      "message": "Ah, so while `-EINVAL` not right, my suggestion for `-EOVERFLOW` could also do with some improvement. We\u0027ve returned `-EBADMSG` in other decoders for this error. As the message can never have been valid I think that\u0027s reasonable.\n\nI\u0027ve fixed them up myself and I\u0027ll push the result in a moment.",
+      "revId": "a2ecba657312131980eab7c59d6678de6a0796a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d84fe019_4076e58a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-05T04:30:09Z",
+      "side": 1,
+      "message": "This is another instance of being able to do:\n\n```\nreturn pldm_msgbuf_destroy(buf);\n```\n\nI\u0027ll fix it for you though.",
+      "range": {
+        "startLine": 1020,
+        "startChar": 1,
+        "endLine": 1025,
+        "endChar": 10
+      },
+      "revId": "a2ecba657312131980eab7c59d6678de6a0796a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
