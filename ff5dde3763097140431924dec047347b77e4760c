@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "624d1489_a7f6c3a6",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-12-05T02:16:12Z",
+      "side": 1,
+      "message": "No, I\u0027ll revise it 😊\nDone",
+      "parentUuid": "1050a0f9_cf599b82",
+      "revId": "ff5dde3763097140431924dec047347b77e4760c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfa757d6_99287598",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-12-03T23:54:15Z",
       "side": 1,
       "message": "Same query as above.",
+      "revId": "ff5dde3763097140431924dec047347b77e4760c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e12394cb_24df77a4",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2024-12-05T02:16:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfa757d6_99287598",
       "revId": "ff5dde3763097140431924dec047347b77e4760c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
