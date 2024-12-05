@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b03cfa8_50d8c32d",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-05T04:41:58Z",
+      "side": 1,
+      "message": "So, as some pretext, I\u0027ve been going back-and-forth on this internally.\n\nDo you mind leaving this as `uint8_t`? How C compilers treat `enum` storage is implementation-defined, and this can make FFI bindings tricky.\n\nFrom an FFI perspective we\u0027d ideally drop enums from the public APIs entirely (and instead use macros for constants and fixed-width integer types).",
+      "revId": "6c2cc26c22549ea175a11d0db988afaa90a2532b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f6f5b59_8bf0afb3",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-05T04:41:58Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "6c2cc26c22549ea175a11d0db988afaa90a2532b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
