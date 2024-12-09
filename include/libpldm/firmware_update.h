@@ -59,7 +59,7 @@ extern "C" {
  * 4 bytes for Data Transfer Handle
  * 1 byte for Transfer Operation Flag
  */
-#define PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES 5
+#define PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES 5
 
 /** @brief Minimum length of GetDownstreamFirmwareParameters response from
  * DSP0267_1.1.0 if the completion code is success.
@@ -70,7 +70,7 @@ extern "C" {
  * 4 bytes for FDP capabilities during update
  * 2 bytes for downstream device count
  */
-#define PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN 12
+#define PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN 12
 
 /** @brief Minimum length of DownstreamDeviceParameterTable entry from
  * DSP0267_1.1.0 table 21 - DownstreamDeviceParameterTable
@@ -87,7 +87,7 @@ extern "C" {
  * 2 bytes for Component Activation Methods
  * 4 bytes for Capabilities During Update
  */
-#define PLDM_DOWNSTREAM_DEVICE_PARAMETER_ENTRY_MIN_LEN 36
+#define PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN 36
 
 #define PLDM_GET_FIRMWARE_PARAMETERS_REQ_BYTES 0
 #define PLDM_FWUP_BASELINE_TRANSFER_SIZE       32
@@ -744,12 +744,12 @@ int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
  *
  *  Structure representing QueryDownstreamFirmwareParameters request
  */
-struct pldm_get_downstream_firmware_params_req {
+struct pldm_get_downstream_firmware_parameters_req {
 	uint32_t data_transfer_handle;
 	uint8_t transfer_operation_flag;
 };
 
-/** @struct pldm_query_downstream_firmware_param_resp
+/** @struct pldm_get_downstream_firmware_parameters_resp
  *
  *  Structure representing the fixed part of QueryDownstreamFirmwareParameters
  *  response in Table 19 - GetDownstreamFirmwareParameters command format, and
@@ -759,7 +759,7 @@ struct pldm_get_downstream_firmware_params_req {
  *  Squash the two tables into one since the definition of Table 20 is `Portion
  *  of GetDownstreamFirmwareParameters response`
  */
-struct pldm_get_downstream_firmware_params_resp {
+struct pldm_get_downstream_firmware_parameters_resp {
 	uint8_t completion_code;
 	uint32_t next_data_transfer_handle;
 	uint8_t transfer_flag;
@@ -767,7 +767,7 @@ struct pldm_get_downstream_firmware_params_resp {
 	uint16_t downstream_device_count;
 };
 
-/** @struct pldm_downstream_device_parameter_entry
+/** @struct pldm_downstream_device_parameters_entry
  *
  *  Structure representing downstream device parameter table entry defined in
  *  Table 21 - DownstreamDeviceParameterTable in DSP0267_1.1.0
@@ -777,7 +777,7 @@ struct pldm_get_downstream_firmware_params_resp {
  *  that the active and pending component version strings are copied from the
  *  message buffer.
  */
-struct pldm_downstream_device_parameter_entry {
+struct pldm_downstream_device_parameters_entry {
 	uint16_t downstream_device_index;
 	uint32_t active_comp_comparison_stamp;
 	uint8_t active_comp_ver_str_type;
@@ -809,7 +809,7 @@ struct pldm_downstream_device_parameter_entry {
  *  instead of using `pldm_downstream_device_parameter_entry`.
  */
 struct pldm_downstream_device_parameter_entry_versions {
-	struct pldm_downstream_device_parameter_entry entry;
+	struct pldm_downstream_device_parameters_entry entry;
 	/* The "Length of ComponentVersionString" field is 1 byte, so
 	 * "ComponentVersionString" can be at most 255 characters, allocate
 	 * memory for it and append 1 bytes for null termination so that it
@@ -1210,9 +1210,9 @@ int decode_query_downstream_identifiers_resp(
  * @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
  */
-int encode_get_downstream_firmware_params_req(
+int encode_get_downstream_firmware_parameters_req(
 	uint8_t instance_id,
-	const struct pldm_get_downstream_firmware_params_req *params_req,
+	const struct pldm_get_downstream_firmware_parameters_req *params_req,
 	struct pldm_msg *msg, size_t payload_length);
 
 /**
@@ -1231,9 +1231,9 @@ int encode_get_downstream_firmware_params_req(
  * @note Caller is responsible for memory alloc and dealloc of param
  *        'resp_data' and 'downstream_device_param_table'
  */
-int decode_get_downstream_firmware_params_resp(
+int decode_get_downstream_firmware_parameters_resp(
 	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_get_downstream_firmware_params_resp *resp_data,
+	struct pldm_get_downstream_firmware_parameters_resp *resp_data,
 	struct variable_field *downstream_device_param_table);
 
 /**
@@ -1262,7 +1262,7 @@ int decode_get_downstream_firmware_params_resp(
  */
 int decode_downstream_device_parameter_table_entry(
 	struct variable_field *data,
-	struct pldm_downstream_device_parameter_entry *entry,
+	struct pldm_downstream_device_parameters_entry *entry,
 	struct variable_field *versions);
 
 /**
@@ -1285,7 +1285,7 @@ int decode_downstream_device_parameter_table_entry(
  */
 int decode_downstream_device_parameter_table_entry_versions(
 	const struct variable_field *versions,
-	struct pldm_downstream_device_parameter_entry *entry, char *active,
+	struct pldm_downstream_device_parameters_entry *entry, char *active,
 	size_t active_len, char *pending, size_t pending_len);
 
 /** @brief Create PLDM request message for RequestUpdate

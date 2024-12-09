@@ -1112,9 +1112,9 @@ int decode_pldm_downstream_device_from_iter(
 }
 
 LIBPLDM_ABI_TESTING
-int encode_get_downstream_firmware_params_req(
+int encode_get_downstream_firmware_parameters_req(
 	uint8_t instance_id,
-	const struct pldm_get_downstream_firmware_params_req *params_req,
+	const struct pldm_get_downstream_firmware_parameters_req *params_req,
 	struct pldm_msg *msg, size_t payload_length)
 {
 	struct pldm_msgbuf _buf;
@@ -1126,7 +1126,7 @@ int encode_get_downstream_firmware_params_req(
 	}
 
 	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES,
+		buf, PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES,
 		msg->payload, payload_length);
 	if (rc < 0) {
 		return rc;
@@ -1156,9 +1156,9 @@ int encode_get_downstream_firmware_params_req(
 }
 
 LIBPLDM_ABI_TESTING
-int decode_get_downstream_firmware_params_resp(
+int decode_get_downstream_firmware_parameters_resp(
 	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_get_downstream_firmware_params_resp *resp_data,
+	struct pldm_get_downstream_firmware_parameters_resp *resp_data,
 	struct variable_field *downstream_device_param_table)
 {
 	struct pldm_msgbuf _buf;
@@ -1184,7 +1184,8 @@ int decode_get_downstream_firmware_params_resp(
 		return 0;
 	}
 
-	if (payload_length < PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN) {
+	if (payload_length <
+	    PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN) {
 		return -EBADMSG;
 	}
 
@@ -1202,7 +1203,7 @@ int decode_get_downstream_firmware_params_resp(
 LIBPLDM_ABI_TESTING
 int decode_downstream_device_parameter_table_entry(
 	struct variable_field *data,
-	struct pldm_downstream_device_parameter_entry *entry,
+	struct pldm_downstream_device_parameters_entry *entry,
 	struct variable_field *versions)
 {
 	struct pldm_msgbuf _buf;
@@ -1216,7 +1217,7 @@ int decode_downstream_device_parameter_table_entry(
 	}
 
 	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_DOWNSTREAM_DEVICE_PARAMETER_ENTRY_MIN_LEN, data->ptr,
+		buf, PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN, data->ptr,
 		data->length);
 	if (rc < 0) {
 		return rc;
@@ -1285,7 +1286,7 @@ int decode_downstream_device_parameter_table_entry(
 LIBPLDM_ABI_TESTING
 int decode_downstream_device_parameter_table_entry_versions(
 	const struct variable_field *versions,
-	struct pldm_downstream_device_parameter_entry *entry, char *active,
+	struct pldm_downstream_device_parameters_entry *entry, char *active,
 	size_t active_len, char *pending, size_t pending_len)
 {
 	struct pldm_msgbuf _buf;
