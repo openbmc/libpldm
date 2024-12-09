@@ -65,6 +65,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47c6e2d2_bfd533ae",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-09T03:38:46Z",
+      "side": 1,
+      "message": "I\u0027ve done that now.",
+      "parentUuid": "d34b4e1d_5ef2b989",
+      "range": {
+        "startLine": 63,
+        "startChar": 1,
+        "endLine": 63,
+        "endChar": 68
+      },
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9eb7e5e2_8a4ac104",
@@ -114,6 +138,24 @@
       "side": 1,
       "message": "Yeah, that\u0027s fine I think, so long as the documentation calls it out.",
       "parentUuid": "3373ae71_214d9849",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4ca891e_afc2a354",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-09T03:38:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19c46fe1_6b3a245c",
       "revId": "e6f78510493367fa429bb7900b214dc07388e576",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -173,6 +215,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d89960cd_f8365ac8",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-09T03:38:46Z",
+      "side": 1,
+      "message": "In my use case I\u0027m putting the backing storage and `struct pldm_fd*` into an separate external struct, so will think about the best way to do that.",
+      "parentUuid": "d5e8d086_2bd96640",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b79a095_045be640",
         "filename": "include/libpldm/firmware_fd.h",
         "patchSetId": 10
@@ -202,6 +262,24 @@
       "side": 1,
       "message": "Negative errno makes sense here, `pldm_requester_rc_t` was a bit arbitrary, I\u0027ll change it.",
       "parentUuid": "3b79a095_045be640",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aa292ef_98b87f89",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-09T03:38:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "606f81b4_e8e95ef2",
       "revId": "e6f78510493367fa429bb7900b214dc07388e576",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -277,6 +355,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ba64a85_9d55a67a",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-09T03:38:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b6c8cc0_6e48def5",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 54
+      },
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f996a022_46f56927",
@@ -290,6 +392,30 @@
       "writtenOn": "2024-11-26T02:01:18Z",
       "side": 1,
       "message": "Same query here.",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 294,
+        "endChar": 55
+      },
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1b877e8_628ee583",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-09T03:38:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f996a022_46f56927",
       "range": {
         "startLine": 293,
         "startChar": 0,
@@ -317,6 +443,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57d56b76_cad5bd11",
+        "filename": "include/libpldm/libpldm-sizes.h.in",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-09T03:38:46Z",
+      "side": 1,
+      "message": "I think I\u0027d missed there was already a directory, have moved it.",
+      "parentUuid": "eb5a1450_ebe06c3b",
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b676901_255b8e8b",
@@ -330,6 +474,30 @@
       "writtenOn": "2024-11-26T02:01:18Z",
       "side": 1,
       "message": "Maybe try adding them to the `dependencies` argument to the `compiler.sizeof()` call?",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 36
+      },
+      "revId": "e6f78510493367fa429bb7900b214dc07388e576",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f58c9aab_132aff14",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-09T03:38:46Z",
+      "side": 1,
+      "message": "I tried a few things there, but didn\u0027t manage to get it to work. Will have a look further.",
+      "parentUuid": "5b676901_255b8e8b",
       "range": {
         "startLine": 41,
         "startChar": 14,
