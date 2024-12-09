@@ -2152,19 +2152,20 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorBufSize)
 TEST(GetDownstreamFirmwareParameters, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
-    constexpr pldm_get_downstream_firmware_params_req params_req{
+    constexpr pldm_get_downstream_firmware_parameters_req params_req{
         0x0, PLDM_GET_FIRSTPART};
     constexpr size_t payload_length =
-        PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES;
+        PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES;
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payload_length> requestMsg{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
-    auto rc = encode_get_downstream_firmware_params_req(
+    auto rc = encode_get_downstream_firmware_parameters_req(
         instanceId, &params_req, requestPtr, payload_length);
     EXPECT_EQ(rc, 0);
 
-    std::array<uint8_t, hdrSize + PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES>
+    std::array<uint8_t,
+               hdrSize + PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES>
         expectedReq{0x81, 0x05, 0x05, 0x00, 0x00, 0x00, 0x00, 0x01};
     EXPECT_EQ(requestMsg, expectedReq);
 }
@@ -2175,15 +2176,15 @@ TEST(GetDownstreamFirmwareParameters, encodeRequestInvalidTransferOperationFlag)
 {
     constexpr uint8_t instanceId = 1;
     // Setup invalid transfer operation flag
-    constexpr pldm_get_downstream_firmware_params_req params_req{
+    constexpr pldm_get_downstream_firmware_parameters_req params_req{
         0x0, PLDM_ACKNOWLEDGEMENT_ONLY};
     constexpr size_t payload_length =
-        PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES;
+        PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES;
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payload_length> requestMsg{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
-    auto rc = encode_get_downstream_firmware_params_req(
+    auto rc = encode_get_downstream_firmware_parameters_req(
         instanceId, &params_req, requestPtr, payload_length);
     EXPECT_EQ(rc, -EBADMSG);
 }
@@ -2194,17 +2195,17 @@ TEST(GetDownstreamFirmwareParameters, encodeRequestErrorBufSize)
 {
     constexpr uint8_t instanceId = 1;
     // Setup invalid transfer operation flag
-    constexpr pldm_get_downstream_firmware_params_req params_req{
+    constexpr pldm_get_downstream_firmware_parameters_req params_req{
         0x0, PLDM_ACKNOWLEDGEMENT_ONLY};
     constexpr size_t payload_length =
-        PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_REQ_BYTES -
+        PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES -
         1 /* inject erro length*/;
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payload_length> requestMsg{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
-    auto rc = encode_get_downstream_firmware_params_req(
+    auto rc = encode_get_downstream_firmware_parameters_req(
         instanceId, &params_req, requestPtr, payload_length);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
@@ -2228,9 +2229,9 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponse)
     constexpr uint8_t transfer_flag_resp = PLDM_START_AND_END;
     constexpr bitfield32_t fdp_capabilities_during_update = {.value = 0x0002};
 
-    std::array<uint8_t, hdrSize +
-                            PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN +
-                            downstreamDeviceParamTableLen>
+    std::array<uint8_t,
+               hdrSize + PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN +
+                   downstreamDeviceParamTableLen>
         responseMsg{};
 
     int rc = 0;
@@ -2251,21 +2252,21 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponse)
      *  is not checked in this test case so filling with 0xff
      */
     std::fill_n(responseMsg.data() + hdrSize +
-                    PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN,
+                    PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN,
                 downstreamDeviceParamTableLen, 0xff);
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto table = reinterpret_cast<pldm_component_parameter_entry*>(
         responseMsg.data() + hdrSize +
-        PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN);
+        PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN);
     table->active_comp_ver_str_len = activeComponentVersionStringLength;
     table->pending_comp_ver_str_len = pendingComponentVersionStringLength;
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
-    struct pldm_get_downstream_firmware_params_resp resp_data = {};
+    struct pldm_get_downstream_firmware_parameters_resp resp_data = {};
     struct variable_field downstreamDeviceParamTable = {};
 
-    rc = decode_get_downstream_firmware_params_resp(
+    rc = decode_get_downstream_firmware_parameters_resp(
         response, responseMsg.size() - hdrSize, &resp_data,
         &downstreamDeviceParamTable);
 
@@ -2276,13 +2277,14 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponse)
     EXPECT_EQ(resp_data.transfer_flag, transfer_flag_resp);
     EXPECT_EQ(resp_data.downstream_device_count, downstreamDeviceCount);
     EXPECT_EQ(downstreamDeviceParamTable.length, downstreamDeviceParamTableLen);
-    EXPECT_EQ(true,
-              std::equal(downstreamDeviceParamTable.ptr,
-                         downstreamDeviceParamTable.ptr +
-                             downstreamDeviceParamTable.length,
-                         responseMsg.begin() + hdrSize +
-                             PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN,
-                         responseMsg.end()));
+    EXPECT_EQ(
+        true,
+        std::equal(downstreamDeviceParamTable.ptr,
+                   downstreamDeviceParamTable.ptr +
+                       downstreamDeviceParamTable.length,
+                   responseMsg.begin() + hdrSize +
+                       PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN,
+                   responseMsg.end()));
 }
 #endif
 
@@ -2296,7 +2298,7 @@ TEST(GetDownstreamFirmwareParameters, decodeResponseInvalidLength)
     constexpr uint8_t activeComponentVersionStringLength = 8;
     constexpr uint8_t pendingComponentVersionStringLength = 8;
     constexpr size_t downstreamDeviceParamTableLen =
-        PLDM_DOWNSTREAM_DEVICE_PARAMETER_ENTRY_MIN_LEN +
+        PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN +
         activeComponentVersionStringLength +
         pendingComponentVersionStringLength;
     constexpr uint8_t complition_code_resp = PLDM_SUCCESS;
@@ -2305,7 +2307,7 @@ TEST(GetDownstreamFirmwareParameters, decodeResponseInvalidLength)
     constexpr bitfield32_t fdp_capabilities_during_update = {.value = 0x0002};
 
     std::array<uint8_t,
-               hdrSize + PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN +
+               hdrSize + PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN +
                    downstreamDeviceParamTableLen - 1 /* inject error length*/>
         responseMsg{};
 
@@ -2327,21 +2329,21 @@ TEST(GetDownstreamFirmwareParameters, decodeResponseInvalidLength)
      *  is not checked in this test case so filling with 0xff
      */
     std::fill_n(responseMsg.data() + hdrSize +
-                    PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMS_RESP_MIN_LEN,
+                    PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_RESP_MIN_LEN,
                 downstreamDeviceParamTableLen - 1 /* inject error length*/,
                 0xff);
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
-    struct pldm_get_downstream_firmware_params_resp resp_data = {};
+    struct pldm_get_downstream_firmware_parameters_resp resp_data = {};
     struct variable_field downstreamDeviceParamTable = {};
 
-    rc = decode_get_downstream_firmware_params_resp(
+    rc = decode_get_downstream_firmware_parameters_resp(
         response, responseMsg.size() - hdrSize, &resp_data,
         &downstreamDeviceParamTable);
     EXPECT_EQ(rc, 0);
 
-    pldm_downstream_device_parameter_entry entry{};
+    pldm_downstream_device_parameters_entry entry{};
     variable_field versions{};
 
     EXPECT_NE(decode_downstream_device_parameter_table_entry(
@@ -2373,7 +2375,7 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamDeviceParamTable)
     constexpr char pendingCompVerStr[pendingCompVerStrLen] = {
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 
-    std::array<uint8_t, PLDM_DOWNSTREAM_DEVICE_PARAMETER_ENTRY_MIN_LEN +
+    std::array<uint8_t, PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN +
                             activeCompVerStrLen + pendingCompVerStrLen>
         responseMsg{};
 
@@ -2382,7 +2384,7 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamDeviceParamTable)
     struct pldm_msgbuf _buf;
     struct pldm_msgbuf* buf = &_buf;
     rc = pldm_msgbuf_init_errno(buf,
-                                PLDM_DOWNSTREAM_DEVICE_PARAMETER_ENTRY_MIN_LEN,
+                                PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN,
                                 responseMsg.data(), responseMsg.size());
     EXPECT_EQ(rc, 0);
 
@@ -2420,7 +2422,7 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamDeviceParamTable)
 
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(rawData.ptr, original_ptr +
-                               PLDM_DOWNSTREAM_DEVICE_PARAMETER_ENTRY_MIN_LEN +
+                               PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN +
                                entry_version.entry.active_comp_ver_str_len +
                                entry_version.entry.pending_comp_ver_str_len);
     EXPECT_EQ(rawData.length, 0);
@@ -2431,7 +2433,7 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeDownstreamDeviceParamTable)
         sizeof(entry_version.active_comp_ver_str),
         entry_version.pending_comp_ver_str,
         sizeof(entry_version.pending_comp_ver_str));
-    struct pldm_downstream_device_parameter_entry entry = entry_version.entry;
+    struct pldm_downstream_device_parameters_entry entry = entry_version.entry;
     EXPECT_EQ(rc, 0);
 
     // Verify the decoded table entry
