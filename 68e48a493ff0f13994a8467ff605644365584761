@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1543919_431d7d33",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-09T03:58:22Z",
+      "side": 1,
+      "message": "It didn\u0027t seem worth creating a struct to pass just a couple of arguments. Can add structs to all of them if you\u0027d prefer.",
+      "parentUuid": "a6656ecf_ed624c8f",
+      "range": {
+        "startLine": 1497,
+        "startChar": 52,
+        "endLine": 1498,
+        "endChar": 40
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95a53512_b485cb02",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 11
@@ -60,6 +84,30 @@
       "writtenOn": "2024-11-29T06:34:07Z",
       "side": 1,
       "message": "This seems to be a recurring pattern below. Perhaps we should add an API for it? `pldm_msgbuf_destroy_size()` or something?",
+      "range": {
+        "startLine": 784,
+        "startChar": 1,
+        "endLine": 789,
+        "endChar": 52
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdafe691_f7f0ecdf",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-09T03:58:22Z",
+      "side": 1,
+      "message": "Maybe `pldm_msgbuf_used(msgbuf*, size_t orig_len, size_t *ret_used_len)` ?\nIn this case it\u0027d be called as `pldm_msgbuf_used(buf, *payload_len, payload_len)`.",
+      "parentUuid": "95a53512_b485cb02",
       "range": {
         "startLine": 784,
         "startChar": 1,
