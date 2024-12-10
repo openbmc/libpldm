@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "713c3ff6_58ab1983",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-10T04:25:06Z",
+      "side": 1,
+      "message": "Yeah, I\u0027m still trying to find the balance and so I appreciate your input here. My existing recommendation was for the encode/decode APIs is to use a struct regardless.\n\nI think the concerning circumstances here are:\n\n1. The number of message parameters is low (2)\n2. None of the parameters require pointers and so there\u0027s no need for object size arguments\n3. We\u0027re encoding a message - decoding is where we\u0027re most exposed to the potential to overflow short out-buffers.\n\nSo then it comes back to consistency.\n\nRegarding 3, having different design rules for encode and decode APIs feels awkward, and I don\u0027t feel like I want to compromise on the decode side (all out parameters must be pointers), which leaves me preferring that encode APIs have struct arguments.\n\nRegarding 1 I feel that we\u0027d at least have to find some line in the sand for how many parameters are too many (look at function call ABIs for various ISAs?).\n\nI appreciate that when taken as a whole the current libpldm APIs generally aren\u0027t consistent, or where they are they\u0027re consistent in ways I have a preference against (instance ID parameter to encode APIs, PLDM completion codes for error handling, etc), but the aim is to repair all that.\n\nHow much do you think compound literals (... at least, for C) salvage the \"always a struct\" approach?\n\n```\nencode_request_update_resp(iid, \u0026(struct pldm_request_update_resp){ len, flag }, msg, plen);\n```",
+      "parentUuid": "b1543919_431d7d33",
+      "range": {
+        "startLine": 1497,
+        "startChar": 52,
+        "endLine": 1498,
+        "endChar": 40
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95a53512_b485cb02",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 11
@@ -108,6 +132,30 @@
       "side": 1,
       "message": "Maybe `pldm_msgbuf_used(msgbuf*, size_t orig_len, size_t *ret_used_len)` ?\nIn this case it\u0027d be called as `pldm_msgbuf_used(buf, *payload_len, payload_len)`.",
       "parentUuid": "95a53512_b485cb02",
+      "range": {
+        "startLine": 784,
+        "startChar": 1,
+        "endLine": 789,
+        "endChar": 52
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7581eeca_d34eab6a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-10T04:25:06Z",
+      "side": 1,
+      "message": "Sounds good, though how do you feel about `pldm_msgbuf_destroy_used(...)`? Just to make it clear where in the lifecycle it\u0027s intended to be invoked.",
+      "parentUuid": "fdafe691_f7f0ecdf",
       "range": {
         "startLine": 784,
         "startChar": 1,
