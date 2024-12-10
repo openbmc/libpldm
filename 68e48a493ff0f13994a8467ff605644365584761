@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb2ca4eb_989336d6",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-10T05:57:02Z",
+      "side": 1,
+      "message": "I\u0027ll change them to all passed structs. Not sure that compound literals are much more legible than a struct instance on the lines above, but maybe that\u0027s just unfamiliar to my eyes.\n\nI don\u0027t think function call ABI should matter too much - if size/performance is an issue then applying LTO would make that all moot.",
+      "parentUuid": "713c3ff6_58ab1983",
+      "range": {
+        "startLine": 1497,
+        "startChar": 52,
+        "endLine": 1498,
+        "endChar": 40
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95a53512_b485cb02",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 11
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "Sounds good, though how do you feel about `pldm_msgbuf_destroy_used(...)`? Just to make it clear where in the lifecycle it\u0027s intended to be invoked.",
       "parentUuid": "fdafe691_f7f0ecdf",
+      "range": {
+        "startLine": 784,
+        "startChar": 1,
+        "endLine": 789,
+        "endChar": 52
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74acdba6_5e20be83",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-10T05:57:02Z",
+      "side": 1,
+      "message": "Fine by me.",
+      "parentUuid": "7581eeca_d34eab6a",
       "range": {
         "startLine": 784,
         "startChar": 1,
