@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "417b2758_a2e0ef61",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-12T08:05:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a729d14_1ad86808",
+      "range": {
+        "startLine": 1488,
+        "startChar": 1,
+        "endLine": 1488,
+        "endChar": 47
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6656ecf_ed624c8f",
@@ -143,6 +167,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a4ed2bd_3de93a9b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-12T08:05:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f1563f5_3c912c84",
+      "range": {
+        "startLine": 1497,
+        "startChar": 52,
+        "endLine": 1498,
+        "endChar": 40
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95a53512_b485cb02",
@@ -252,6 +300,30 @@
       "side": 1,
       "message": "👍",
       "parentUuid": "74acdba6_5e20be83",
+      "range": {
+        "startLine": 784,
+        "startChar": 1,
+        "endLine": 789,
+        "endChar": 52
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a83f7e7_bec6b123",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-12T08:05:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab4783a3_315b32ae",
       "range": {
         "startLine": 784,
         "startChar": 1,
