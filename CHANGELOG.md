@@ -17,6 +17,8 @@ Change categories:
 
 ## [Unreleased]
 
+## [0.11.0] 2024-12-12
+
 ### Added
 
 1. dsp: firmware_update: Iterators for downstream device descriptors
