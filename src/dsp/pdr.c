@@ -35,6 +35,14 @@ typedef struct pldm_pdr {
 } pldm_pdr;
 
 LIBPLDM_CC_NONNULL
+static pldm_pdr_record *pldm_pdr_get_prev_record(pldm_pdr *repo,
+						 pldm_pdr_record *record);
+
+LIBPLDM_CC_NONNULL_ARGS(1, 2)
+static int pldm_pdr_remove_record(pldm_pdr *repo, pldm_pdr_record *record,
+				  pldm_pdr_record *prev);
+
+LIBPLDM_CC_NONNULL
 static inline uint32_t get_next_record_handle(const pldm_pdr *repo,
 					      const pldm_pdr_record *record)
 {
@@ -1852,8 +1860,9 @@ int pldm_entity_association_pdr_remove_contained_entity(
 
 	// Initialize new PDR record with data from original PDR record.
 	// Start with adding the header of original PDR
-	rc = pldm_msgbuf_init_errno(dst, PDR_ENTITY_ASSOCIATION_MIN_SIZE,
-				    new_record->data, new_record->size);
+	rc = pldm_msgbuf_init_errno(
+		dst, (PDR_ENTITY_ASSOCIATION_MIN_SIZE - sizeof(pldm_entity)),
+		new_record->data, new_record->size);
 	if (rc) {
 		goto cleanup_new_record_data;
 	}
@@ -1885,9 +1894,9 @@ int pldm_entity_association_pdr_remove_contained_entity(
 		goto cleanup_new_record_data;
 	}
 	if (num_children == 1) {
-		prev->next = record->next;
-		free(record->data);
-		free(record);
+		// This is the last child which is getting removed so we need to delete the Entity Association PDR.
+		pldm_pdr_remove_record(repo, record,
+				       pldm_pdr_get_prev_record(repo, record));
 		goto cleanup_new_record_data;
 	} else if (num_children < 1) {
 		rc = -EOVERFLOW;
