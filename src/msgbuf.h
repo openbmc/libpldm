@@ -1148,6 +1148,38 @@ pldm_msgbuf_peek_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 	return 0;
 }
 
+/**
+ * Return the number of bytes used in a msgbuf instance.
+ *
+ * @param ctx - The msgbuf.
+ * @param orig_len - The original size of the msgbuf, the `len` argument passed to
+ * 		pldm_msgbuf_init_errno().
+ * @param ret_used_len - The number of bytes that have been used from the msgbuf instance.
+ *
+ * This can be called after a number of pldm_msgbuf_insert...() calls to
+ * determine the total size that was written.
+ *
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_destroy_used(struct pldm_msgbuf *ctx,
+						      size_t orig_len,
+						      size_t *ret_used_len)
+{
+	int rc;
+	rc = pldm_msgbuf_validate(ctx);
+	if (rc) {
+		return rc;
+	}
+
+	if ((size_t)ctx->remaining > orig_len) {
+		/* Caller passed incorrect orig_len */
+		return -EOVERFLOW;
+	}
+
+	*ret_used_len = orig_len - ctx->remaining;
+	return 0;
+}
+
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_increment(struct pldm_msgbuf *ctx,
 						   size_t count)
