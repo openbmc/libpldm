@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f1563f5_3c912c84",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-12T04:34:06Z",
+      "side": 1,
+      "message": "\u003e I\u0027ll change them to all passed structs.\n\nOkay.\n\n\u003e Not sure that compound literals are much more legible than a struct instance on the lines above, but maybe that\u0027s just unfamiliar to my eyes.\n\nYeah, it\u0027s only saving naming the thing. It\u0027d be nice if `\u0026(auto){ ... }` worked...\n\n\u003e I don\u0027t think function call ABI should matter too much - if size/performance is an issue then applying LTO would make that all moot.\n\nYeah, I was just considering leveraging ABIs to define a line in the sand for \"how many arguments are too many\", not really anything more than that.",
+      "parentUuid": "bb2ca4eb_989336d6",
+      "range": {
+        "startLine": 1497,
+        "startChar": 52,
+        "endLine": 1498,
+        "endChar": 40
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95a53512_b485cb02",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 11
@@ -204,6 +228,30 @@
       "side": 1,
       "message": "Fine by me.",
       "parentUuid": "7581eeca_d34eab6a",
+      "range": {
+        "startLine": 784,
+        "startChar": 1,
+        "endLine": 789,
+        "endChar": 52
+      },
+      "revId": "68e48a493ff0f13994a8467ff605644365584761",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab4783a3_315b32ae",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-12T04:34:06Z",
+      "side": 1,
+      "message": "👍",
+      "parentUuid": "74acdba6_5e20be83",
       "range": {
         "startLine": 784,
         "startChar": 1,
