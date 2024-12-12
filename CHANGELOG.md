@@ -69,6 +69,7 @@ Change categories:
 
 1. dsp: platform: Fix location of closing paren in overflow detection
 2. libpldm: Install api header, update changelog
+3. pdr: Remove PDR if the contained entity to be removed is the last one
 
 ## [0.10.0] 2024-11-01
 

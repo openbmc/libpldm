@@ -1,6 +1,7 @@
 #include <endian.h>
 #include <libpldm/pdr.h>
 #include <libpldm/platform.h>
+#include <msgbuf.h>
 
 #include <array>
 #include <cstdint>
@@ -2102,14 +2103,33 @@ TEST(EntityAssociationPDR, testRemoveContainedEntity)
 
     EXPECT_EQ(pldm_pdr_get_record_count(repo), 1u);
 
+    // Remove first contained entity from the entity association PDR
     uint32_t removed_record_handle{};
     struct pldm_entity entity[1] = {
-        {.entity_type = 2, .entity_instance_num = 1, .entity_container_id = 2}};
+        {.entity_type = 4, .entity_instance_num = 1, .entity_container_id = 2}};
 
     EXPECT_EQ(pldm_entity_association_pdr_remove_contained_entity(
                   repo, entity, false, &removed_record_handle),
               0);
     EXPECT_EQ(removed_record_handle, 3);
+
+    // Remove second contained entity from the entity association PDR
+    removed_record_handle = 0;
+    EXPECT_EQ(pldm_entity_association_pdr_remove_contained_entity(
+                  repo, &entities[1], false, &removed_record_handle),
+              0);
+    EXPECT_EQ(removed_record_handle, 3);
+
+    // Remove third contained entity from the entity association PDR
+    removed_record_handle = 0;
+    EXPECT_EQ(pldm_entity_association_pdr_remove_contained_entity(
+                  repo, &entities[2], false, &removed_record_handle),
+              0);
+    EXPECT_EQ(removed_record_handle, 3);
+
+    // As all the contained entities are removed the entity association PDR
+    // also gets deleted
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 0u);
 
     pldm_pdr_destroy(repo);
     pldm_entity_association_tree_destroy(tree);
