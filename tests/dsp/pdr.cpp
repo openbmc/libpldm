@@ -1,6 +1,7 @@
 #include <endian.h>
 #include <libpldm/pdr.h>
 #include <libpldm/platform.h>
+#include <msgbuf.h>
 
 #include <array>
 #include <cstdint>
@@ -2104,12 +2105,75 @@ TEST(EntityAssociationPDR, testRemoveContainedEntity)
 
     uint32_t removed_record_handle{};
     struct pldm_entity entity[1] = {
-        {.entity_type = 2, .entity_instance_num = 1, .entity_container_id = 2}};
+        {.entity_type = 4, .entity_instance_num = 1, .entity_container_id = 2}};
 
     EXPECT_EQ(pldm_entity_association_pdr_remove_contained_entity(
                   repo, entity, false, &removed_record_handle),
               0);
     EXPECT_EQ(removed_record_handle, 3);
+
+    // After removing one contained entity we are verifying the remaining
+    // two contained entities
+    uint32_t currRecHandle{};
+    uint32_t nextRecHandle{};
+    uint8_t* data = nullptr;
+    uint32_t size{};
+    pldm_pdr_find_record(repo, currRecHandle, &data, &size, &nextRecHandle);
+    struct pldm_msgbuf _buf;
+    struct pldm_msgbuf* buf = &_buf;
+
+    auto rc =
+        pldm_msgbuf_init_errno(buf,
+                               (sizeof(struct pldm_pdr_hdr) +
+                                sizeof(struct pldm_pdr_entity_association)),
+                               data, size);
+    ASSERT_EQ(rc, 0);
+
+    uint8_t* skip_data = NULL;
+    size_t skip_data_size = sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t) +
+                            sizeof(uint8_t) + sizeof(struct pldm_entity) +
+                            sizeof(uint8_t);
+
+    pldm_msgbuf_span_required(buf, skip_data_size, (void**)&skip_data);
+
+    uint16_t child_data;
+
+    // check pldm_entity data for first child after remove
+    pldm_msgbuf_extract_uint16(buf, child_data);
+    EXPECT_EQ(child_data, 2);
+    pldm_msgbuf_extract_uint16(buf, child_data);
+    EXPECT_EQ(child_data, 1);
+    pldm_msgbuf_extract_uint16(buf, child_data);
+    EXPECT_EQ(child_data, 2);
+
+    // check pldm_entity data for second child after remove
+    pldm_msgbuf_extract_uint16(buf, child_data);
+    EXPECT_EQ(child_data, 3);
+    pldm_msgbuf_extract_uint16(buf, child_data);
+    EXPECT_EQ(child_data, 1);
+    pldm_msgbuf_extract_uint16(buf, child_data);
+    EXPECT_EQ(child_data, 2);
+
+    pldm_msgbuf_destroy(buf);
+
+    removed_record_handle = 0;
+
+    // Remove second contained entity from the entity association PDR
+    EXPECT_EQ(pldm_entity_association_pdr_remove_contained_entity(
+                  repo, &entities[1], false, &removed_record_handle),
+              0);
+    EXPECT_EQ(removed_record_handle, 3);
+
+    removed_record_handle = 0;
+
+    EXPECT_EQ(pldm_entity_association_pdr_remove_contained_entity(
+                  repo, &entities[2], false, &removed_record_handle),
+              0);
+    EXPECT_EQ(removed_record_handle, 3);
+
+    EXPECT_EQ(pldm_entity_get_num_children(l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL),
+              3);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 0u);
 
     pldm_pdr_destroy(repo);
     pldm_entity_association_tree_destroy(tree);
