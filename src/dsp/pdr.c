@@ -1852,8 +1852,9 @@ int pldm_entity_association_pdr_remove_contained_entity(
 
 	// Initialize new PDR record with data from original PDR record.
 	// Start with adding the header of original PDR
-	rc = pldm_msgbuf_init_errno(dst, PDR_ENTITY_ASSOCIATION_MIN_SIZE,
-				    new_record->data, new_record->size);
+	rc = pldm_msgbuf_init_errno(
+		dst, (PDR_ENTITY_ASSOCIATION_MIN_SIZE - sizeof(pldm_entity)),
+		new_record->data, new_record->size);
 	if (rc) {
 		goto cleanup_new_record_data;
 	}
@@ -1885,9 +1886,9 @@ int pldm_entity_association_pdr_remove_contained_entity(
 		goto cleanup_new_record_data;
 	}
 	if (num_children == 1) {
-		prev->next = record->next;
-		free(record->data);
-		free(record);
+		// This is the last child which is getting removed so we need to delete the Entity Association PDR.
+		pldm_delete_by_record_handle(repo, record->record_handle,
+					     record->is_remote);
 		goto cleanup_new_record_data;
 	} else if (num_children < 1) {
 		rc = -EOVERFLOW;
@@ -2029,6 +2030,41 @@ static int pldm_pdr_remove_record(pldm_pdr *repo, pldm_pdr_record *record,
 	free(record);
 
 	return 0;
+}
+
+/* API to remove PLDM PDR record from a PLDM PDR repository
+ */
+static int pldm_pdr_remove_record(pldm_pdr *repo, pldm_pdr_record *record,
+                                  pldm_pdr_record *prev)
+{
+        if (!repo || !record) {
+                return -EINVAL;
+        }
+        if (!is_prev_record_present(repo, record)) {
+                return -EINVAL;
+        }
+        assert(repo->size >= record->size);
+        if (repo->size < record->size) {
+                return -EOVERFLOW;
+        }
+        if (repo->first == record) {
+                repo->first = record->next;
+        } else {
+                if (prev != NULL) {
+                        prev->next = record->next;
+                }
+        }
+        if (repo->last == record) {
+                repo->last = prev;
+                if (prev != NULL) {
+                        prev->next = NULL;
+                }
+        }
+        repo->record_count -= 1;
+        repo->size -= record->size;
+        free(record->data);
+        free(record);
+        return 0;
 }
 
 LIBPLDM_ABI_TESTING
