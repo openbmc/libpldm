@@ -1307,7 +1307,6 @@ TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
                         outPendingCompVerStr.length));
 }
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamDevices, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
@@ -1323,9 +1322,7 @@ TEST(QueryDownstreamDevices, goodPathEncodeRequest)
     EXPECT_EQ(requestPtr->hdr.type, PLDM_FWUP);
     EXPECT_EQ(requestPtr->hdr.command, PLDM_QUERY_DOWNSTREAM_DEVICES);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamDevices, encodeRequestInvalidData)
 {
     constexpr uint8_t instanceId = 1;
@@ -1334,9 +1331,7 @@ TEST(QueryDownstreamDevices, encodeRequestInvalidData)
 
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamDevices, goodPathDecodeResponse)
 {
     uint8_t completion_code_resp = PLDM_SUCCESS;
@@ -1383,9 +1378,7 @@ TEST(QueryDownstreamDevices, goodPathDecodeResponse)
               max_number_of_downstream_devices_resp);
     EXPECT_EQ(resp_data.capabilities.value, capabilities_resp.value);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamDevices, decodeRequestUndefinedValue)
 {
     uint8_t completion_code_resp = PLDM_SUCCESS;
@@ -1423,9 +1416,7 @@ TEST(QueryDownstreamDevices, decodeRequestUndefinedValue)
 
     ASSERT_EQ(rc, -EINVAL);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamDevices, decodeRequestErrorBufSize)
 {
     uint8_t completion_code_resp = PLDM_SUCCESS;
@@ -1466,9 +1457,7 @@ TEST(QueryDownstreamDevices, decodeRequestErrorBufSize)
 
     EXPECT_EQ(rc, -EBADMSG);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
@@ -1484,9 +1473,7 @@ TEST(QueryDownstreamIdentifiers, goodPathEncodeRequest)
                 ElementsAreArray<uint8_t>(
                     {0x81, 0x05, 0x04, 0xFF, 0xFF, 0xFF, 0xFF, 0x01}));
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, encodeRequestInvalidErrorPaths)
 {
     constexpr uint8_t instanceId = 1;
@@ -1512,9 +1499,7 @@ TEST(QueryDownstreamIdentifiers, encodeRequestInvalidErrorPaths)
         instanceId, &params_req_invalid, requestPtr, payload_length);
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeResponseNoDevices)
 {
     constexpr uint8_t completion_code_resp = PLDM_SUCCESS;
@@ -1556,9 +1541,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseNoDevices)
     EXPECT_EQ(resp_data.number_of_downstream_devices,
               number_of_downstream_devices_resp);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeResponseNoDevicesBadCount)
 {
     constexpr uint8_t completion_code_resp = PLDM_SUCCESS;
@@ -1597,9 +1580,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseNoDevicesBadCount)
     }
     ASSERT_NE(rc, 0);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeResponseOneDeviceOneDescriptor)
 {
     constexpr uint32_t downstreamDevicesLen = 11;
@@ -1671,16 +1652,12 @@ TEST(QueryDownstreamIdentifiers, decodeResponseOneDeviceOneDescriptor)
     }
     ASSERT_EQ(rc, 0);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 constexpr const uint16_t descriptor_id_type_iana_pen = 0x1;
 constexpr const uint16_t descriptor_id_len_iana_pen = 0x4;
 const uint32_t iana_pen_openbmc = htole16(49871u);
 const uint32_t iana_pen_dmtf = htole16(412u);
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneDescriptorEach)
 {
     constexpr const std::array<pldm_downstream_device, 2> expected_devices = {{
@@ -1791,9 +1768,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneDescriptorEach)
     ASSERT_EQ(rc, 0);
     EXPECT_EQ(devIndex, 2);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesTwoOneDescriptors)
 {
     constexpr const std::array<pldm_downstream_device, 2> expected_devices = {{
@@ -1911,9 +1886,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesTwoOneDescriptors)
     EXPECT_EQ(devIndex, 2);
     EXPECT_EQ(descIndex, 3);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneTwoDescriptors)
 {
     constexpr const std::array<pldm_downstream_device, 2> expected_devices = {{
@@ -2031,9 +2004,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneTwoDescriptors)
     EXPECT_EQ(devIndex, 2);
     EXPECT_EQ(descIndex, 3);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeRequestErrorPaths)
 {
     constexpr size_t payloadLen = sizeof(uint8_t);
@@ -2061,9 +2032,7 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorPaths)
 
     EXPECT_EQ(rc, -EBADMSG);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
 {
     // Len is not fixed here taking it as 9, contains 1 downstream device with
@@ -2109,9 +2078,7 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorDownstreamDevicesSize)
                                                        &resp_data, &devs),
               0);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(QueryDownstreamIdentifiers, decodeRequestErrorBufSize)
 {
     constexpr uint32_t actualDownstreamDevicesLen = 0;
@@ -2147,7 +2114,6 @@ TEST(QueryDownstreamIdentifiers, decodeRequestErrorBufSize)
 
     EXPECT_EQ(rc, -EBADMSG);
 }
-#endif
 
 #ifdef LIBPLDM_API_TESTING
 TEST(GetDownstreamFirmwareParameters, goodPathEncodeRequest)
