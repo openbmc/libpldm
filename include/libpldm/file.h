@@ -16,6 +16,8 @@ extern "C" {
 
 #define PLDM_DF_OPEN_REQ_BYTES	     4
 #define PLDM_DF_OPEN_RESP_BYTES      3
+#define PLDM_DF_CLOSE_REQ_BYTES      4
+#define PLDM_DF_CLOSE_RESP_BYTES     1
 
 enum pldm_file_completion_codes {
 	PLDM_FILE_INVALID_DESCRIPTOR = 0x80,
@@ -62,6 +64,22 @@ struct pldm_df_open_resp {
     uint16_t file_descriptor;
 } __attribute__((packed));
 
+/** @struct pldm_df_close_req
+ *
+ *  Structure representing PLDM File DfClose request.
+ */
+struct pldm_df_close_req {
+    uint16_t file_descriptor;
+    bitfield16_t options;
+} __attribute__((packed));
+
+/** @struct pldm_df_close_resp
+ *
+ *  Structure representing PLDM File DfClose response.
+ */
+struct pldm_df_close_resp {
+    uint8_t completion_code;
+} __attribute__((packed));
 
 /** @brief Create a PLDM request message for DFOpen
  *
@@ -92,6 +110,33 @@ int decode_df_open_resp(
     const struct pldm_msg *msg, size_t payload_length,
     uint8_t *completion_code, uint16_t *file_descriptor);
 
+/** @brief Create a PLDM request message for DFClose
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] file_descriptor - File Descriptor
+ *  @param[in] options - Close option
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of the request message payload
+ *  @return pldm_completion_codes
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_df_close_req(uint8_t instance_id,
+                        uint16_t file_descriptor,
+                        bitfield16_t options,
+                        struct pldm_msg *msg,
+                        size_t payload_length);
+
+/** @brief Decode DFClose response data
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] completion_code - Pointer to response msg's PLDM completion code
+ *  @return pldm_completion_codes
+ */
+int decode_df_close_resp(
+    const struct pldm_msg *msg,
+    uint8_t *completion_code);
 
 #ifdef __cplusplus
 }
