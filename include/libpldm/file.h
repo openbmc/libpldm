@@ -18,6 +18,8 @@ extern "C" {
 #define PLDM_DF_OPEN_RESP_BYTES      3
 #define PLDM_DF_CLOSE_REQ_BYTES      4
 #define PLDM_DF_CLOSE_RESP_BYTES     1
+#define PLDM_DF_HEARTBEAT_REQ_BYTES  6
+#define PLDM_DF_HEARTBEAT_RESP_BYTES 5
 
 enum pldm_file_completion_codes {
 	PLDM_FILE_INVALID_DESCRIPTOR = 0x80,
@@ -81,6 +83,25 @@ struct pldm_df_close_resp {
     uint8_t completion_code;
 } __attribute__((packed));
 
+/** @struct pldm_df_heartbeat_req
+ *
+ *  Structure representing PLDM File DfHeartbeat request.
+ */
+struct pldm_df_heartbeat_req {
+    uint16_t file_descriptor;
+    uint32_t req_max_interval;
+} __attribute__((packed));
+
+/** @struct pldm_df_heartbeat_resp
+ *
+ *  Structure representing PLDM File DfHearbeat response.
+ */
+struct pldm_df_heartbeat_resp {
+    uint8_t completion_code;
+    uint32_t rsp_max_interval;
+} __attribute__((packed));
+
+
 /** @brief Create a PLDM request message for DFOpen
  *
  *  @param[in] instance_id - Message's instance id
@@ -138,6 +159,36 @@ int decode_df_close_resp(
     const struct pldm_msg *msg,
     uint8_t *completion_code);
 
+/** @brief Create a PLDM request message for DFHeartbeat
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] file_descriptor - File Descriptor
+ *  @param[in] req_max_interval - The requested maximum supported
+ *                                NegotiatedInterval in milliseconds
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of the request message payload
+ *  @return pldm_completion_codes
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_df_heartbeat_req(uint8_t instance_id,
+                       uint16_t file_descriptor,
+                       uint32_t req_max_interval,
+                       struct pldm_msg *msg,
+                       size_t payload_length);
+
+/** @brief Decode DFHeartbeat response data
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] completion_code - Pointer to response msg's PLDM completion code
+ *  @param[out] rsp_max_interval - The maximum supported NegotiatedInterval
+ *                                 in milliseconds from the responder
+ *  @return pldm_completion_codes
+ */
+int decode_df_heartbeat_resp(
+    const struct pldm_msg *msg, size_t payload_length,
+    uint8_t *completion_code, uint32_t *rsp_max_interval);
 #ifdef __cplusplus
 }
 #endif

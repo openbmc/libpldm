@@ -119,3 +119,66 @@ int decode_df_close_resp(
 
 	return PLDM_SUCCESS;
 }
+
+LIBPLDM_ABI_STABLE
+int encode_df_heartbeat_req(uint8_t instance_id,
+                       uint16_t file_descriptor,
+                       uint32_t req_max_interval,
+                       struct pldm_msg *msg,
+                       size_t payload_length)
+{
+    if (msg == NULL) {
+        return PLDM_ERROR_INVALID_DATA;
+    }
+
+    if (payload_length != PLDM_DF_HEARTBEAT_REQ_BYTES) {
+        return PLDM_ERROR_INVALID_LENGTH;
+    }
+
+    struct pldm_header_info header = { 0 };
+    header.instance = instance_id;
+    header.msg_type = PLDM_REQUEST;
+    header.pldm_type = PLDM_FILE;
+    header.command = PLDM_DF_HEARBEAT;
+
+    uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+    if (rc != PLDM_SUCCESS) {
+        return rc;
+    }
+
+    struct pldm_df_heartbeat_req *request =
+        (struct pldm_df_heartbeat_req *)msg->payload;
+    request->file_descriptor = htole16(file_descriptor);
+    request->req_max_interval = htole32(req_max_interval);
+
+    return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_STABLE
+int decode_df_heartbeat_resp(
+    const struct pldm_msg *msg, size_t payload_length,
+    uint8_t *completion_code, uint32_t *rsp_max_interval)
+{
+    if (msg == NULL || completion_code == NULL ||
+        rsp_max_interval == NULL) {
+        return PLDM_ERROR_INVALID_DATA;
+    }
+
+    *completion_code = msg->payload[0];
+    if (PLDM_SUCCESS != *completion_code) {
+        return PLDM_SUCCESS;
+    }
+
+    if (payload_length != PLDM_DF_HEARTBEAT_RESP_BYTES) {
+        return PLDM_ERROR_INVALID_LENGTH;
+    }
+
+    struct pldm_df_heartbeat_resp *response =
+        (struct pldm_df_heartbeat_resp *)msg->payload;
+
+    *rsp_max_interval = le32toh(response->rsp_max_interval);
+
+    return PLDM_SUCCESS;
+}
+
+
