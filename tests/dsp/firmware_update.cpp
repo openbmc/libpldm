@@ -1705,9 +1705,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneDescriptorEach)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data
-    {
-    };
+    struct pldm_query_downstream_identifiers_resp resp_data{};
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -1820,9 +1818,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesTwoOneDescriptors)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data
-    {
-    };
+    struct pldm_query_downstream_identifiers_resp resp_data{};
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -1940,9 +1936,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneTwoDescriptors)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data
-    {
-    };
+    struct pldm_query_downstream_identifiers_resp resp_data{};
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;

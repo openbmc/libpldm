@@ -5,9 +5,7 @@
 
 TEST(Responder, track_untrack_one)
 {
-    struct pldm_responder_cookie jar
-    {
-    };
+    struct pldm_responder_cookie jar{};
     struct pldm_responder_cookie cookie = {
         .tid = 1,
         .instance_id = 1,
@@ -24,9 +22,7 @@ TEST(Responder, track_untrack_one)
 
 TEST(Responder, untrack_none)
 {
-    struct pldm_responder_cookie jar
-    {
-    };
+    struct pldm_responder_cookie jar{};
 
     ASSERT_EQ(jar.next, nullptr);
     ASSERT_EQ(pldm_responder_cookie_untrack(&jar, 1, 1, 0, 0x01), nullptr);
@@ -35,9 +31,7 @@ TEST(Responder, untrack_none)
 
 TEST(Responder, track_one_untrack_bad)
 {
-    struct pldm_responder_cookie jar
-    {
-    };
+    struct pldm_responder_cookie jar{};
     struct pldm_responder_cookie cookie = {
         .tid = 1,
         .instance_id = 1,
@@ -59,9 +53,7 @@ TEST(Responder, track_one_untrack_bad)
 
 TEST(Responder, track_untrack_two)
 {
-    struct pldm_responder_cookie jar
-    {
-    };
+    struct pldm_responder_cookie jar{};
     struct pldm_responder_cookie cookies[] = {
         {
             .tid = 1,

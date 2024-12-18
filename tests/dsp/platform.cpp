@@ -18,12 +18,8 @@ constexpr auto hdrSize = sizeof(pldm_msg_hdr);
 
 TEST(StateEffecterPdr, testIncorrectInvocations)
 {
-    struct state_effecter_possible_states possible_states
-    {
-    };
-    struct pldm_state_effecter_pdr effecter
-    {
-    };
+    struct state_effecter_possible_states possible_states{};
+    struct pldm_state_effecter_pdr effecter{};
     size_t actual_size;
     int rc;
 
@@ -62,12 +58,8 @@ TEST(StateEffecterPdr, testIncorrectInvocations)
 
 TEST(StateEffecterPdr, testReasonableInvocations)
 {
-    struct state_effecter_possible_states possible_states
-    {
-    };
-    struct pldm_state_effecter_pdr effecter
-    {
-    };
+    struct state_effecter_possible_states possible_states{};
+    struct pldm_state_effecter_pdr effecter{};
     size_t actual_size;
     int rc;
 
@@ -5503,13 +5495,8 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeResponse)
         {{EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING, 2, 2},
          {EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING, 2, 3}}};
 
-    struct pldm_get_state_effecter_states_resp resp_fields
-    {
-        PLDM_SUCCESS, comp_effecterCnt,
-        {
-            stateField[0], stateField[1]
-        }
-    };
+    struct pldm_get_state_effecter_states_resp resp_fields{
+        PLDM_SUCCESS, comp_effecterCnt, {stateField[0], stateField[1]}};
 
     auto rc = encode_get_state_effecter_states_resp(
         0, &resp_fields, response, responseMsg.size() - hdrSize);
@@ -5550,12 +5537,7 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeResponse)
 
 TEST(GetStateEffecterStates, testBadEncodeResponse)
 {
-    struct pldm_get_state_effecter_states_resp resp
-    {
-        PLDM_SUCCESS, 0,
-        {
-        }
-    };
+    struct pldm_get_state_effecter_states_resp resp{PLDM_SUCCESS, 0, {}};
     auto rc = decode_get_state_effecter_states_resp(nullptr, 0, &resp);
 
     EXPECT_EQ(rc, -EINVAL);
