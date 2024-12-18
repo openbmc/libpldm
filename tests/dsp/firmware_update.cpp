@@ -455,6 +455,22 @@ TEST(DecodeFirmwareDeviceIdRecord, ErrorPaths)
         &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
         &recordDescriptors, &outFwDevicePkgData);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    // Large FirmwareDevicePackageDataLength could cause overflow in calculation
+    constexpr std::array<uint8_t, 49> invalidRecord5{
+        0x31, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x0e,
+        // FirmwareDevicePackageDataLength = 0xffff
+        0xff, 0xff,
+        //
+        0x93, 0x01, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72,
+        0x69, 0x6e, 0x67, 0x31, 0x02, 0x00, 0x10, 0x00, 0x12, 0x44, 0xd2, 0x64,
+        0x8d, 0x7d, 0x47, 0x18, 0xa0, 0x30, 0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5b,
+        0xab, 0xcd};
+    rc = decode_firmware_device_id_record(
+        invalidRecord5.data(), invalidRecord5.size(), componentBitmapBitLength,
+        &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
+        &recordDescriptors, &outFwDevicePkgData);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(DecodeDescriptors, goodPath3Descriptors)
