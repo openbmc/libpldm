@@ -434,7 +434,7 @@ int decode_firmware_device_id_record(
 	uint16_t applicable_components_length =
 		component_bitmap_bit_length /
 		PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE;
-	uint16_t calc_min_record_length =
+	size_t calc_min_record_length =
 		sizeof(struct pldm_firmware_device_id_record) +
 		applicable_components_length +
 		data_record->comp_image_set_version_string_length +
