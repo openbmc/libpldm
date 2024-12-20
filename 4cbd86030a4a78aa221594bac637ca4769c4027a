@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d1ee0ec_8d84ade3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 46
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:24:27Z",
+      "side": 1,
+      "message": "So my current understanding of the situation is that there are issues with the OpenBIC PLDM implementation that are driving incorrect choices in the associated pldmd patch. Until that changes or someone corrects my understanding, I plan to defer considering this for merging.",
+      "revId": "4cbd86030a4a78aa221594bac637ca4769c4027a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
