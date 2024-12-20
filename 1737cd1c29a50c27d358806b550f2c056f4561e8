@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f278c1a_adf69519",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-20T05:37:11Z",
+      "side": 1,
+      "message": "Don\u0027t think so, removed.",
+      "parentUuid": "53e06881_943384bf",
+      "range": {
+        "startLine": 939,
+        "startChar": 1,
+        "endLine": 943,
+        "endChar": 1
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "feb39227_93f970ed",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-12-20T01:05:21Z",
       "side": 1,
       "message": "I prefer we formulate this as:\n\n```c\n...\nuint8_t t;\nrc \u003d pldm_msgbuf_extract(buf, t);\nif (rc) {\n    return rc;\n}\nif (t \u003e PLDM_STR_TYPE_UTF_16BE) {\n    return -EBADMSG;\n}\nreq-\u003eimage_set_ver.str_type \u003d (enum pldm_firmware_update_string_type)t;\n...\n```\n\nAlso, as a bit of a nit, can we declare `t` at the top?",
+      "range": {
+        "startLine": 1569,
+        "startChar": 1,
+        "endLine": 1571,
+        "endChar": 72
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eed305e6_d1554b46",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1571,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-20T05:37:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feb39227_93f970ed",
       "range": {
         "startLine": 1569,
         "startChar": 1,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "260fd265_c9095084",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-20T05:37:11Z",
+      "side": 1,
+      "message": "Thanks, hadn\u0027t seen that function",
+      "parentUuid": "92063299_cb533f94",
+      "range": {
+        "startLine": 1581,
+        "startChar": 1,
+        "endLine": 1586,
+        "endChar": 10
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c5f74f3_cebd0885",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-12-20T01:05:21Z",
       "side": 1,
       "message": "Same as discussed above.",
+      "range": {
+        "startLine": 1740,
+        "startChar": 1,
+        "endLine": 1742,
+        "endChar": 68
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb0f0cd8_6ecefa77",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1742,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-20T05:37:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c5f74f3_cebd0885",
       "range": {
         "startLine": 1740,
         "startChar": 1,
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1db059ab_9d71edc4",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1750,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-20T05:37:11Z",
+      "side": 1,
+      "message": "Makes sense",
+      "parentUuid": "e9018cdf_61f23d38",
+      "range": {
+        "startLine": 1743,
+        "startChar": 1,
+        "endLine": 1750,
+        "endChar": 1
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d43849bb_e74f2418",
@@ -156,6 +276,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "030fd7d2_18d06a62",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1755,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-20T05:37:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d43849bb_e74f2418",
+      "range": {
+        "startLine": 1751,
+        "startChar": 1,
+        "endLine": 1755,
+        "endChar": 10
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34ea40e8_ca30074d",
@@ -169,6 +313,30 @@
       "writtenOn": "2024-12-20T01:05:21Z",
       "side": 1,
       "message": "See discussions above.",
+      "range": {
+        "startLine": 1911,
+        "startChar": 1,
+        "endLine": 1926,
+        "endChar": 10
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a87cd6a_5b2481ab",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1926,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-20T05:37:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34ea40e8_ca30074d",
       "range": {
         "startLine": 1911,
         "startChar": 1,
