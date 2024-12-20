@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea1abc49_fb13115a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:05:21Z",
+      "side": 1,
+      "message": "Hi Matt, I have some comments on the implementation now. Largely looks good.\n\nI have some longer-term thoughts brewing on the APIs themselves, but as they\u0027re marked testing we can get what you\u0027ve written submitted without worrying about that too much.",
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53e06881_943384bf",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:05:21Z",
+      "side": 1,
+      "message": "Is there a reason this is necessary?",
+      "range": {
+        "startLine": 939,
+        "startChar": 1,
+        "endLine": 943,
+        "endChar": 1
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb39227_93f970ed",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1571,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:05:21Z",
+      "side": 1,
+      "message": "I prefer we formulate this as:\n\n```c\n...\nuint8_t t;\nrc \u003d pldm_msgbuf_extract(buf, t);\nif (rc) {\n    return rc;\n}\nif (t \u003e PLDM_STR_TYPE_UTF_16BE) {\n    return -EBADMSG;\n}\nreq-\u003eimage_set_ver.str_type \u003d (enum pldm_firmware_update_string_type)t;\n...\n```\n\nAlso, as a bit of a nit, can we declare `t` at the top?",
+      "range": {
+        "startLine": 1569,
+        "startChar": 1,
+        "endLine": 1571,
+        "endChar": 72
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92063299_cb533f94",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:05:21Z",
+      "side": 1,
+      "message": "Is there a reason this can\u0027t be `pldm_msgbuf_destroy_consumed()`?",
+      "range": {
+        "startLine": 1581,
+        "startChar": 1,
+        "endLine": 1586,
+        "endChar": 10
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c5f74f3_cebd0885",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1742,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:05:21Z",
+      "side": 1,
+      "message": "Same as discussed above.",
+      "range": {
+        "startLine": 1740,
+        "startChar": 1,
+        "endLine": 1742,
+        "endChar": 68
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9018cdf_61f23d38",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1750,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:05:21Z",
+      "side": 1,
+      "message": "For consistency and to ward off any variable-length decodding issues, my preferred convention is that if we use an extracted value later in the parsing, we first test for error upon its extraction. That way we stay out of trouble with respect uninitialised values, but if it can be proved safe, the optimiser will elide the redundant check in the generated code.\n\nSo:\n\n```\n...\nrc \u003d pldm_msgbuf_extract(buf, pcomp-\u003eversion.str_len);\nif (rc) {\n    return rc;\n}\nrc \u003d pldm_msgbuf_extract_array(buf, pcomp.vesrion.str_len, pcomp-\u003eversion.str_data, PLDM_FIRMWARE_MAX_STRING);\nif (rc) {\n    return rc;\n}\n...\n```",
+      "range": {
+        "startLine": 1743,
+        "startChar": 1,
+        "endLine": 1750,
+        "endChar": 1
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d43849bb_e74f2418",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1755,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:05:21Z",
+      "side": 1,
+      "message": "As discussed above.",
+      "range": {
+        "startLine": 1751,
+        "startChar": 1,
+        "endLine": 1755,
+        "endChar": 10
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34ea40e8_ca30074d",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1926,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:05:21Z",
+      "side": 1,
+      "message": "See discussions above.",
+      "range": {
+        "startLine": 1911,
+        "startChar": 1,
+        "endLine": 1926,
+        "endChar": 10
+      },
+      "revId": "1737cd1c29a50c27d358806b550f2c056f4561e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
