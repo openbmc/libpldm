@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33aa6da2_c49be68f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-20T05:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfc2013b_a2492836",
+      "revId": "32bd4cadf54f8a4acc06150b0664caf5bf85a0c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48b0aeed_be6579ab",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4ede5bc_0dbbd196",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-20T05:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48b0aeed_be6579ab",
+      "revId": "32bd4cadf54f8a4acc06150b0664caf5bf85a0c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfb552b7_4cff091a",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-12-20T01:12:11Z",
       "side": 1,
       "message": "Will these two be used together? Can we use `pldm_msgbuf_span_remaining()` instead?",
+      "revId": "32bd4cadf54f8a4acc06150b0664caf5bf85a0c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb3edfe_e1a5272f",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1146,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2024-12-20T05:36:56Z",
+      "side": 1,
+      "message": "The usecase is:\n```\npldm_msgbuf_peek_remaining(buf, \u0026out, \u0026len);\nrc \u003d populate_out(out, len);\nif (rc) {\n   return rc;\n}\npldm_msgbuf_skip(buf, len);\n```\n\nIt would be possible to call `pldm_msgbuf_span_remaining()` and then fill `out`, but you\u0027d need to rewind in the rc failure case, which is more error prone. The split design means the msgbuf contents are always valid.",
+      "parentUuid": "cfb552b7_4cff091a",
       "revId": "32bd4cadf54f8a4acc06150b0664caf5bf85a0c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
