@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc2013b_a2492836",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:12:11Z",
+      "side": 1,
+      "message": "Can you re-order this one immediately before [libpldm: Add firmware update FD responder](https://gerrit.openbmc.org/c/openbmc/libpldm/+/75830) ? That way we can submit the patches up to [dsp: Add FD side firmware_update encode/decode](https://gerrit.openbmc.org/c/openbmc/libpldm/+/75829)",
+      "revId": "32bd4cadf54f8a4acc06150b0664caf5bf85a0c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b0aeed_be6579ab",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:12:11Z",
+      "side": 1,
+      "message": "Bikeshed colouring: maybe `pldm_msgbuf_skip()` is more succinct?",
+      "revId": "32bd4cadf54f8a4acc06150b0664caf5bf85a0c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfb552b7_4cff091a",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1146,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-12-20T01:12:11Z",
+      "side": 1,
+      "message": "Will these two be used together? Can we use `pldm_msgbuf_span_remaining()` instead?",
+      "revId": "32bd4cadf54f8a4acc06150b0664caf5bf85a0c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
