@@ -6,7 +6,7 @@
 
 typedef union {
 	uint8_t byte;
-	struct {
+	struct bits8 {
 		uint8_t bit0 : 1;
 		uint8_t bit1 : 1;
 		uint8_t bit2 : 1;
@@ -33,7 +33,7 @@ typedef uint8_t bool8_t;
 
 typedef union {
 	uint16_t value;
-	struct {
+	struct bits16 {
 		uint8_t bit0 : 1;
 		uint8_t bit1 : 1;
 		uint8_t bit2 : 1;
@@ -55,7 +55,7 @@ typedef union {
 
 typedef union {
 	uint32_t value;
-	struct {
+	struct bits32 {
 		uint8_t bit0 : 1;
 		uint8_t bit1 : 1;
 		uint8_t bit2 : 1;
@@ -93,7 +93,7 @@ typedef union {
 
 typedef union {
 	uint64_t value;
-	struct {
+	struct bits64 {
 		uint8_t bit0 : 1;
 		uint8_t bit1 : 1;
 		uint8_t bit2 : 1;
