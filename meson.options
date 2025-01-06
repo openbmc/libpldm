@@ -3,3 +3,4 @@ option('abi-compliance-check', type: 'boolean', description: 'Detect public ABI/
 option('oem', type: 'array', description: 'Enable OEM PLDM extensions', choices: ['ibm', 'meta'], value: ['ibm', 'meta'])
 option('tests', type: 'boolean', description: 'Build tests')
 option('transport', type: 'boolean', description: 'Enable transport implementation')
+option('binding-cxx', type: 'boolean', description: 'Enable C++ binding')
