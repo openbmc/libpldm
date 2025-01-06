@@ -19,6 +19,10 @@ Change categories:
 
 ### Added
 
+- bindings:
+  - Add 'include/libpldm/bindings/cpp/types.hpp'
+  - Add 'include/libpldm/bindings/cpp/firmware_update.hpp'
+
 ### Changed
 
 - base:
