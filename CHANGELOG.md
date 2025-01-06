@@ -19,6 +19,11 @@ Change categories:
 
 ### Added
 
+- bindings:
+  - Add 'include/libpldm/bindings/cpp/types.hpp'
+  - Add 'include/libpldm/bindings/cpp/firmware_update.hpp'
+  - Add libpldmplus library for the C++ binding
+
 - platform: Added file descriptor PDR encoding support
   - Added `encode_pldm_platform_file_descriptor_pdr()`
 - utils: Added `pldm_edac_crc32_extend()`
