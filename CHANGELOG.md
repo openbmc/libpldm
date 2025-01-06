@@ -65,6 +65,11 @@ Change categories:
 - pdr: Indicates success or failure depending on the outcome of the entity
   association PDR creation
 
+- Changed the bitfield structs in pldm_types.h to be named structs. This fixes
+  an issue with the abi-dumper mistakenly seeing those as 1 byte wide when
+  compiling with the C++ binding.
+
+
 ### Deprecated
 
 ### Removed
