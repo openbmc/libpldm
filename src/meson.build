@@ -1,4 +1,4 @@
-libpldm_sources = files('responder.c', 'utils.c')
+libpldm_sources += files('responder.c', 'utils.c')
 
 subdir('dsp')
 
@@ -80,6 +80,8 @@ import('fs').is_file(baseline_dump)
                     meson.project_source_root() / 'src',
                     '-public-headers',
                     meson.project_source_root() / 'include',
+                    '-public-headers',
+                    meson.project_source_root() / 'bindings' / 'cxx',
                     '-sort',
                     '@INPUT@',
                     '-o',

@@ -17,6 +17,12 @@ Change categories:
 
 ## [Unreleased]
 
+### Changed
+
+1. Changed the bitfield structs in pldm_types.h to be named structs. This fixes
+   an issue with the abi-dumper mistakenly seeing those as 1 byte wide when
+   compiling with the C++ binding.
+
 ## [0.11.0] 2024-12-12
 
 ### Added
