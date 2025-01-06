@@ -1,4 +1,4 @@
-libpldm_headers = files(
+libpldm_headers += files(
     'api.h',
     'base.h',
     'bios.h',
