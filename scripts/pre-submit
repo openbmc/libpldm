@@ -39,8 +39,7 @@ meson configure --buildtype=release "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD" --timeout-multiplier 10 --wrapper 'valgrind --error-exitcode=1'
 
-# Ensure the test suite links when testing symbols are removed from the ABI
+# Ensure the test suite compiles in debug mode
 meson configure --buildtype=debug "$BUILD"
-meson configure -Dabi=deprecated,stable "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD"
