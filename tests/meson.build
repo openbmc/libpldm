@@ -24,7 +24,7 @@ if not gtest_dep.found() or not gmock_dep.found()
 endif
 
 test_include_dirs = [
-    libpldm_include_dir,
+    include_root,
     include_directories('../src', '../tests'),
 ]
 
@@ -48,6 +48,10 @@ endif
 
 if get_option('oem').contains('meta')
     subdir('oem/meta')
+endif
+
+if get_option('bindings').contains('cpp')
+    subdir('bindings/cpp')
 endif
 
 foreach t : tests

@@ -1,0 +1,745 @@
+$VAR1 = {
+  'ABI_DUMPER_VERSION' => '1.4',
+  'ABI_DUMP_VERSION' => '3.5',
+  'Arch' => 'x86_64',
+  'GccVersion' => '15.2.0',
+  'Headers' => {
+    'firmware_update.hpp' => 1
+  },
+  'Language' => 'C++',
+  'LibraryName' => 'libpldm++.so.0.15.0',
+  'LibraryVersion' => '0.15.0',
+  'NameSpaces' => {
+    '__gnu_cxx' => 1,
+    'pldm::fw_update' => 1,
+    'pldm::utils' => 1,
+    'std' => 1,
+    'std::__cxx11' => 1,
+    'std::__detail' => 1,
+    'std::__exception_ptr' => 1,
+    'std::__rb_tree' => 1,
+    'std::ranges' => 1
+  },
+  'Needed' => {
+    'libc.so.6' => 1,
+    'libgcc_s.so.1' => 1,
+    'libpldm.so.0' => 1,
+    'libstdc++.so.6' => 1
+  },
+  'PublicABI' => '1',
+  'Sources' => {
+    'firmware_update.cpp' => 1
+  },
+  'SymbolInfo' => {
+    '90700' => {
+      'Header' => 'firmware_update.hpp',
+      'MnglName' => '_ZN4pldm9fw_update10stable_nopEv',
+      'NameSpace' => 'pldm::fw_update',
+      'Return' => '1',
+      'ShortName' => 'stable_nop',
+      'Source' => 'firmware_update.cpp',
+      'SourceLine' => '14'
+    },
+    '135789' => {
+      'Artificial' => 1,
+      'Class' => '90402',
+      'Constructor' => 1,
+      'Header' => 'firmware_update.hpp',
+      'InLine' => 1,
+      'Line' => '164',
+      'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorC2EOS1_',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '92492'
+        },
+        '1' => {
+          'name' => 'p1',
+          'type' => '93321'
+        }
+      },
+      'ShortName' => 'PackageParserError'
+    },
+    '135790' => {
+      'Artificial' => 1,
+      'Class' => '90402',
+      'Constructor' => 1,
+      'Header' => 'firmware_update.hpp',
+      'InLine' => 1,
+      'Line' => '164',
+      'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorC1EOS1_',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '92492'
+        },
+        '1' => {
+          'name' => 'p1',
+          'type' => '93321'
+        }
+      },
+      'ShortName' => 'PackageParserError'
+    },
+    '161559' => {
+      'Artificial' => 1,
+      'Class' => '90402',
+      'Destructor' => 1,
+      'Header' => 'firmware_update.hpp',
+      'InLine' => 1,
+      'Line' => '164',
+      'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorD2Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '92492'
+        }
+      },
+      'ShortName' => 'PackageParserError'
+    },
+    '161560' => {
+      'Artificial' => 1,
+      'Class' => '90402',
+      'Destructor' => 1,
+      'Header' => 'firmware_update.hpp',
+      'InLine' => 1,
+      'Line' => '164',
+      'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorD0Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '92492'
+        }
+      },
+      'ShortName' => 'PackageParserError'
+    },
+    '378349' => {
+      'Artificial' => 1,
+      'Class' => '90402',
+      'Destructor' => 1,
+      'Header' => 'firmware_update.hpp',
+      'InLine' => 1,
+      'Line' => '164',
+      'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorD1Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '92492'
+        }
+      },
+      'ShortName' => 'PackageParserError'
+    }
+  },
+  'SymbolVersion' => {},
+  'Symbols' => {
+    'libpldm++.so.0.15.0' => {
+      '_ZN4pldm9fw_update10stable_nopEv' => 1,
+      '_ZNKRSt8optionalINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEdeEv' => 1,
+      '_ZNKSt19bad_expected_accessIvE4whatEv' => 1,
+      '_ZNKSt6vectorImSaImEE12_M_check_lenEmPKc' => 1,
+      '_ZNKSt6vectorImSaImEE5emptyEv' => 1,
+      '_ZNKSt6vectorItSaItEE12_M_check_lenEmPKc' => 1,
+      '_ZNKSt6vectorItSaItEE5emptyEv' => 1,
+      '_ZNRSt8expectedINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_E5errorEv' => 1,
+      '_ZNRSt8expectedINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_E5valueEv' => 1,
+      '_ZNRSt8expectedIvNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE5errorEv' => 1,
+      '_ZNSt12_Vector_baseIhSaIhEE11_M_allocateEm' => 1,
+      '_ZNSt12_Vector_baseIhSaIhEE17_M_create_storageEm' => 1,
+      '_ZNSt12_Vector_baseIhSaIhEE17_Vector_impl_data12_M_swap_dataERS2_' => 1,
+      '_ZNSt12_Vector_baseIhSaIhEED1Ev' => 1,
+      '_ZNSt12_Vector_baseIhSaIhEED2Ev' => 1,
+      '_ZNSt12_Vector_baseImSaImEE17_M_create_storageEm' => 1,
+      '_ZNSt12_Vector_baseImSaImEED1Ev' => 1,
+      '_ZNSt12_Vector_baseImSaImEED2Ev' => 1,
+      '_ZNSt12_Vector_baseItSaItEED1Ev' => 1,
+      '_ZNSt12_Vector_baseItSaItEED2Ev' => 1,
+      '_ZNSt15__new_allocatorImE8allocateEmPKv' => 1,
+      '_ZNSt15__new_allocatorItE8allocateEmPKv' => 1,
+      '_ZNSt19bad_expected_accessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEED0Ev' => 1,
+      '_ZNSt19bad_expected_accessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEED1Ev' => 1,
+      '_ZNSt19bad_expected_accessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEED2Ev' => 1,
+      '_ZNSt19bad_expected_accessIvED0Ev' => 1,
+      '_ZNSt19bad_expected_accessIvED1Ev' => 1,
+      '_ZNSt19bad_expected_accessIvED2Ev' => 1,
+      '_ZNSt22_Optional_payload_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE8_M_resetEv' => 1,
+      '_ZNSt22_Optional_payload_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEC1EbRKS6_' => 1,
+      '_ZNSt22_Optional_payload_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEC2EbRKS6_' => 1,
+      '_ZNSt6vectorIhSaIhEE14_M_move_assignEOS1_St17integral_constantIbLb1EE' => 1,
+      '_ZNSt6vectorIhSaIhEE21_M_range_initialize_nIPKhS4_EEvT_T0_m' => 1,
+      '_ZNSt6vectorIhSaIhEEC1ERKS1_' => 1,
+      '_ZNSt6vectorIhSaIhEEC1IPKhvEET_S5_RKS0_' => 1,
+      '_ZNSt6vectorIhSaIhEEC2ERKS1_' => 1,
+      '_ZNSt6vectorIhSaIhEEC2IPKhvEET_S5_RKS0_' => 1,
+      '_ZNSt6vectorImSaImEE12_Guard_allocD1Ev' => 1,
+      '_ZNSt6vectorImSaImEE12_Guard_allocD2Ev' => 1,
+      '_ZNSt6vectorImSaImEE12emplace_backIJRmEEES3_DpOT_' => 1,
+      '_ZNSt6vectorImSaImEE17_M_realloc_appendIJRmEEEvDpOT_' => 1,
+      '_ZNSt6vectorImSaImEE4backEv' => 1,
+      '_ZNSt6vectorImSaImEEC1ERKS1_' => 1,
+      '_ZNSt6vectorImSaImEEC2ERKS1_' => 1,
+      '_ZNSt6vectorItSaItEE12_Guard_allocD1Ev' => 1,
+      '_ZNSt6vectorItSaItEE12_Guard_allocD2Ev' => 1,
+      '_ZNSt6vectorItSaItEE12emplace_backIJRKtEEERtDpOT_' => 1,
+      '_ZNSt6vectorItSaItEE17_M_realloc_appendIJRKtEEEvDpOT_' => 1,
+      '_ZNSt6vectorItSaItEE4backEv' => 1,
+      '_ZNSt6vectorItSaItEE7reserveEm' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE10_M_disposeEv' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructEmc' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructILb1EEEvPKcm' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_St20forward_iterator_tag' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE20resize_and_overwriteIRZNS_9to_stringEiEUlPcmE_EEvmT_' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE20resize_and_overwriteIRZNS_9to_stringEmEUlPcmE_EEvmT_' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE6appendEPKc' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE6appendEPKcm' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE7_S_copyEPcPKcm' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE7reserveEm' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE9_M_appendEPKcm' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE9_M_createERmm' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE9_M_mutateEmmPKcm' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE9_S_assignEPcmc' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1EOS4_' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1IS3_EEPKcRKS3_' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC2EOS4_' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC2IS3_EEPKcRKS3_' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEixEm' => 1,
+      '_ZNSt7__cxx119to_stringEi' => 1,
+      '_ZNSt7__cxx119to_stringEm' => 1,
+      '_ZNSt7__equalILb0EE5equalIPKN4pldm9fw_update18ComponentImageInfoES6_EEbT_S7_T0_' => 1,
+      '_ZNSt7__equalILb0EE5equalIPKN4pldm9fw_update22FirmwareDeviceIDRecordES6_EEbT_S7_T0_' => 1,
+      '_ZNSt7__equalILb0EE5equalISt23_Rb_tree_const_iteratorISt4pairIKtSt10unique_ptrIN4pldm9fw_update14DescriptorDataESt14default_deleteIS8_EEEESD_EEbT_SE_T0_' => 1,
+      '_ZNSt7__equalILb1EE5equalIhEEbPKT_S4_S4_' => 1,
+      '_ZNSt7__equalILb1EE5equalImEEbPKT_S4_S4_' => 1,
+      '_ZNSt8__detail14__to_chars_lenIjEEjT_i' => 1,
+      '_ZNSt8__detail14__to_chars_lenImEEjT_i' => 1,
+      '_ZNSt8__detail18__to_chars_10_implIjEEvPcjT_' => 1,
+      '_ZNSt8__detail18__to_chars_10_implImEEvPcjT_' => 1,
+      '_ZNSt8expectedINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ED1Ev' => 1,
+      '_ZNSt8expectedINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ED1EvQoont27is_trivially_destructible_vIT_Ent27is_trivially_destructible_vIT0_E' => 1,
+      '_ZNSt8expectedINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ED2Ev' => 1,
+      '_ZNSt8expectedINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ED2EvQoont27is_trivially_destructible_vIT_Ent27is_trivially_destructible_vIT0_E' => 1,
+      '_ZSt18uninitialized_copyIN9__gnu_cxx17__normal_iteratorIPKhSt6vectorIhSaIhEEEEPhET0_T_SA_S9_' => 1,
+      '_ZSt18uninitialized_copyIN9__gnu_cxx17__normal_iteratorIPKmSt6vectorImSaImEEEEPmET0_T_SA_S9_' => 1,
+      '_ZSt5equalIN9__gnu_cxx17__normal_iteratorIPKhSt6vectorIhSaIhEEEES7_EbT_S8_T0_' => 1,
+      '_ZSt5equalIN9__gnu_cxx17__normal_iteratorIPKmSt6vectorImSaImEEEES7_EbT_S8_T0_' => 1,
+      '_ZSteqIcSt11char_traitsIcESaIcEEbRKNSt7__cxx1112basic_stringIT_T0_T1_EESA_' => 1,
+      '_ZSteqIhSaIhEEbRKSt6vectorIT_T0_ES6_' => 1,
+      '_ZSteqImSaImEEbRKSt6vectorIT_T0_ES6_' => 1,
+      '_ZStneINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ENSt9enable_ifIX16is_convertible_vIDTnecl7declvalIRKT_EEcl7declvalIRKT0_EEEbEEbE4typeERKSt8optionalIS7_ERKSG_ISA_E' => 1,
+      '_ZTISt19bad_expected_accessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE' => -24,
+      '_ZTISt19bad_expected_accessIvE' => -24,
+      '_ZTSSt19bad_expected_accessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE' => -78,
+      '_ZTSSt19bad_expected_accessIvE' => -27,
+      '_ZTVSt19bad_expected_accessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE' => -40,
+      '_ZTVSt19bad_expected_accessIvE' => -40
+    }
+  },
+  'Target' => 'unix',
+  'TypeInfo' => {
+    '1' => {
+      'Name' => 'void',
+      'Type' => 'Intrinsic'
+    },
+    '282' => {
+      'BaseType' => '72938',
+      'Header' => 'c++config.h',
+      'Line' => '338',
+      'Name' => 'std::size_t',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '2242' => {
+      'Header' => 'new_allocator.h',
+      'Line' => '63',
+      'Name' => 'std::__new_allocator<char>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '81046'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '2486' => {
+      'Base' => {
+        '2242' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'allocator.h',
+      'Line' => '133',
+      'Name' => 'std::allocator<char>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'name' => 'char'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '6004' => {
+      'Copied' => 1,
+      'Header' => 'alloc_traits.h',
+      'Line' => '560',
+      'Name' => 'struct std::allocator_traits<std::allocator<char> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'type' => '2486'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '6018' => {
+      'BaseType' => '82344',
+      'Header' => 'alloc_traits.h',
+      'Line' => '569',
+      'Name' => 'std::allocator_traits<std::allocator<char> >::pointer',
+      'NameSpace' => 'std::allocator_traits<std::allocator<char> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '6081' => {
+      'BaseType' => '282',
+      'Header' => 'alloc_traits.h',
+      'Line' => '584',
+      'Name' => 'std::allocator_traits<std::allocator<char> >::size_type',
+      'NameSpace' => 'std::allocator_traits<std::allocator<char> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '6272' => {
+      'Header' => 'basic_string.h',
+      'Line' => '94',
+      'Memb' => {
+        '0' => {
+          'access' => 'private',
+          'name' => '_M_dataplus',
+          'offset' => '0',
+          'type' => '6285'
+        },
+        '1' => {
+          'access' => 'private',
+          'name' => '_M_string_length',
+          'offset' => '8',
+          'type' => '6480'
+        },
+        '2' => {
+          'access' => 'private',
+          'name' => 'unnamed0',
+          'offset' => '22',
+          'type' => '6445'
+        }
+      },
+      'Name' => 'std::__cxx11::basic_string<char>',
+      'NameSpace' => 'std::__cxx11',
+      'PrivateABI' => 1,
+      'Size' => '32',
+      'TParam' => {
+        '0' => {
+          'key' => '_CharT',
+          'type' => '81046'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '6285' => {
+      'Base' => {
+        '2486' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'basic_string.h',
+      'Line' => '197',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_p',
+          'offset' => '0',
+          'type' => '6410'
+        }
+      },
+      'Name' => 'struct std::__cxx11::basic_string<char>::_Alloc_hider',
+      'NameSpace' => 'std::__cxx11::basic_string<char>',
+      'Private' => 1,
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Struct'
+    },
+    '6410' => {
+      'BaseType' => '73404',
+      'Header' => 'basic_string.h',
+      'Line' => '119',
+      'Name' => 'std::__cxx11::basic_string<char>::pointer',
+      'NameSpace' => 'std::__cxx11::basic_string<char>',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '6445' => {
+      'Header' => 'basic_string.h',
+      'Line' => '221',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_local_buf',
+          'offset' => '0',
+          'type' => '86354'
+        },
+        '1' => {
+          'name' => '_M_allocated_capacity',
+          'offset' => '0',
+          'type' => '6480'
+        }
+      },
+      'Name' => 'std::__cxx11::basic_string<char>::anon-union-basic_string.h-221',
+      'NameSpace' => 'std::__cxx11::basic_string<char>',
+      'Private' => 1,
+      'PrivateABI' => 1,
+      'Size' => '16',
+      'Type' => 'Union'
+    },
+    '6480' => {
+      'BaseType' => '73428',
+      'Header' => 'basic_string.h',
+      'Line' => '115',
+      'Name' => 'std::__cxx11::basic_string<char>::size_type',
+      'NameSpace' => 'std::__cxx11::basic_string<char>',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '16459' => {
+      'BaseType' => '6272',
+      'Header' => 'stringfwd.h',
+      'Line' => '79',
+      'Name' => 'std::string',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '32',
+      'Type' => 'Typedef'
+    },
+    '54119' => {
+      'Header' => 'optional',
+      'Line' => '115',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_payload',
+          'offset' => '0',
+          'type' => '54141'
+        },
+        '1' => {
+          'name' => '_M_engaged',
+          'offset' => '4',
+          'type' => '72916'
+        }
+      },
+      'Name' => 'struct std::_Optional_payload_base<int>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '73007'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '54132' => {
+      'Header' => 'optional',
+      'Line' => '203',
+      'Name' => 'struct std::_Optional_payload_base<int>::_Empty_byte',
+      'NameSpace' => 'std::_Optional_payload_base<int>',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'Type' => 'Struct'
+    },
+    '54141' => {
+      'Header' => 'optional',
+      'Line' => '206',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_empty',
+          'offset' => '0',
+          'type' => '54132'
+        },
+        '1' => {
+          'name' => '_M_value',
+          'offset' => '0',
+          'type' => '73007'
+        }
+      },
+      'Name' => 'union std::_Optional_payload_base<int>::_Storage<int>',
+      'NameSpace' => 'std::_Optional_payload_base<int>',
+      'PrivateABI' => 1,
+      'Size' => '4',
+      'TParam' => {
+        '0' => {
+          'key' => '_Up',
+          'type' => '73007'
+        }
+      },
+      'Type' => 'Union'
+    },
+    '54955' => {
+      'Base' => {
+        '54119' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'optional',
+      'Line' => '358',
+      'Name' => 'struct std::_Optional_payload<int>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '73007'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '55060' => {
+      'Header' => 'optional',
+      'Line' => '485',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_payload',
+          'offset' => '0',
+          'type' => '54955'
+        }
+      },
+      'Name' => 'struct std::_Optional_base<int>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '73007'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '55532' => {
+      'Header' => 'enable_special_members.h',
+      'Line' => '89',
+      'Name' => 'struct std::_Enable_copy_move<true, true, true, true, std::optional<int> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Copy',
+          'type' => '72916',
+          'val' => '1'
+        },
+        '1' => {
+          'key' => '_CopyAssignment',
+          'type' => '72916',
+          'val' => '1'
+        },
+        '2' => {
+          'key' => '_Move',
+          'type' => '72916',
+          'val' => '1'
+        },
+        '3' => {
+          'key' => '_MoveAssignment',
+          'type' => '72916',
+          'val' => '1'
+        },
+        '4' => {
+          'key' => '_Tag',
+          'type' => '55595'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '55595' => {
+      'Base' => {
+        '55060' => {
+          'pos' => '0'
+        },
+        '55532' => {
+          'pos' => '1'
+        }
+      },
+      'Header' => 'optional',
+      'Line' => '778',
+      'Name' => 'std::optional<int>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '73007'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '72916' => {
+      'Name' => 'bool',
+      'Size' => '1',
+      'Type' => 'Intrinsic'
+    },
+    '72938' => {
+      'Name' => 'unsigned long',
+      'Size' => '8',
+      'Type' => 'Intrinsic'
+    },
+    '73007' => {
+      'Name' => 'int',
+      'Size' => '4',
+      'Type' => 'Intrinsic'
+    },
+    '73203' => {
+      'Base' => {
+        '6004' => {
+          'pos' => '0'
+        }
+      },
+      'Copied' => 1,
+      'Header' => 'alloc_traits.h',
+      'Line' => '47',
+      'Name' => 'struct __gnu_cxx::__alloc_traits<std::allocator<char> >',
+      'NameSpace' => '__gnu_cxx',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Alloc',
+          'type' => '2486'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '73404' => {
+      'BaseType' => '6018',
+      'Header' => 'alloc_traits.h',
+      'Line' => '56',
+      'Name' => '__gnu_cxx::__alloc_traits<std::allocator<char> >::pointer',
+      'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<char> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '73428' => {
+      'BaseType' => '6081',
+      'Header' => 'alloc_traits.h',
+      'Line' => '58',
+      'Name' => '__gnu_cxx::__alloc_traits<std::allocator<char> >::size_type',
+      'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<char> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '81046' => {
+      'Name' => 'char',
+      'Size' => '1',
+      'Type' => 'Intrinsic'
+    },
+    '82344' => {
+      'BaseType' => '81046',
+      'Name' => 'char*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '86354' => {
+      'BaseType' => '81046',
+      'Name' => 'char[16]',
+      'Size' => '16',
+      'Type' => 'Array'
+    },
+    '90402' => {
+      'Header' => 'firmware_update.hpp',
+      'Line' => '164',
+      'Memb' => {
+        '0' => {
+          'name' => 'msg',
+          'offset' => '0',
+          'type' => '16459'
+        },
+        '1' => {
+          'name' => 'rc',
+          'offset' => '50',
+          'type' => '55595'
+        }
+      },
+      'Name' => 'pldm::fw_update::PackageParserError',
+      'NameSpace' => 'pldm::fw_update',
+      'Size' => '40',
+      'Type' => 'Class'
+    },
+    '92487' => {
+      'BaseType' => '90402',
+      'Name' => 'pldm::fw_update::PackageParserError*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '92492' => {
+      'BaseType' => '92487',
+      'Name' => 'pldm::fw_update::PackageParserError*const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '93321' => {
+      'BaseType' => '90402',
+      'Name' => 'pldm::fw_update::PackageParserError&&',
+      'Size' => '8',
+      'Type' => 'RvalueRef'
+    }
+  },
+  'UndefinedSymbols' => {
+    'libpldm++.so.0.15.0' => {
+      '_ITM_deregisterTMCloneTable' => 0,
+      '_ITM_registerTMCloneTable' => 0,
+      '_Unwind_Resume@GCC_3.0' => 0,
+      '_ZNSt9exceptionD2Ev@GLIBCXX_3.4' => 0,
+      '_ZSt17__throw_bad_allocv@GLIBCXX_3.4' => 0,
+      '_ZSt18_Rb_tree_decrementPSt18_Rb_tree_node_base@GLIBCXX_3.4' => 0,
+      '_ZSt18_Rb_tree_incrementPSt18_Rb_tree_node_base@GLIBCXX_3.4' => 0,
+      '_ZSt19__throw_logic_errorPKc@GLIBCXX_3.4' => 0,
+      '_ZSt20__throw_length_errorPKc@GLIBCXX_3.4' => 0,
+      '_ZSt21__glibcxx_assert_failPKciS0_S0_@GLIBCXX_3.4.30' => 0,
+      '_ZSt28__throw_bad_array_new_lengthv@GLIBCXX_3.4.29' => 0,
+      '_ZSt29_Rb_tree_insert_and_rebalancebPSt18_Rb_tree_node_baseS0_RS_@GLIBCXX_3.4' => 0,
+      '_ZTISt9exception@GLIBCXX_3.4' => 0,
+      '_ZTVN10__cxxabiv120__si_class_type_infoE@CXXABI_1.3' => 0,
+      '_ZTVSt9exception@GLIBCXX_3.4' => 0,
+      '_ZdlPvm@CXXABI_1.3.9' => 0,
+      '_Znwm@GLIBCXX_3.4' => 0,
+      '__assert_fail@GLIBC_2.2.5' => 0,
+      '__cxa_allocate_exception@CXXABI_1.3' => 0,
+      '__cxa_finalize@GLIBC_2.2.5' => 0,
+      '__cxa_free_exception@CXXABI_1.3' => 0,
+      '__cxa_throw@CXXABI_1.3' => 0,
+      '__gmon_start__' => 0,
+      '__gxx_personality_v0@CXXABI_1.3' => 0,
+      '__stack_chk_fail@GLIBC_2.4' => 0,
+      'decode_pldm_descriptor_from_iter' => 0,
+      'decode_pldm_firmware_update_package' => 0,
+      'decode_pldm_package_component_image_information_from_iter' => 0,
+      'decode_pldm_package_firmware_device_id_record_from_iter' => 0,
+      'decode_vendor_defined_descriptor_value' => 0,
+      'memcmp@GLIBC_2.2.5' => 0,
+      'memcpy@GLIBC_2.14' => 0,
+      'memset@GLIBC_2.2.5' => 0,
+      'pldm_package_component_image_information_iter_init' => 0,
+      'pldm_package_firmware_device_id_record_iter_init' => 0,
+      'strlen@GLIBC_2.2.5' => 0
+    }
+  },
+  'WordSize' => '8'
+};

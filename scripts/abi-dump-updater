@@ -16,3 +16,6 @@ export CXX=g++;
 meson setup -Dabi=deprecated,stable -Dabi-compliance-check=true "$UPDATE_BUILDDIR"
 meson compile -C "$UPDATE_BUILDDIR" abi-dump
 ./scripts/abi-dump-formatter < "$UPDATE_BUILDDIR"/src/current.dump > abi/x86_64/gcc.dump
+
+meson compile -C "$UPDATE_BUILDDIR" abi-dump-cpp
+./scripts/abi-dump-formatter < "$UPDATE_BUILDDIR"/bindings/cpp/current.dump > abi/x86_64/libpldm++/gcc.dump

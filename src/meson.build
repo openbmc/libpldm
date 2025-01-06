@@ -27,7 +27,7 @@ libpldm = library(
     'pldm',
     libpldm_sources,
     implicit_include_directories: false,
-    include_directories: [libpldm_include_dir, include_directories('.')],
+    include_directories: [include_root, include_directories('.')],
     link_args: libpldm_link_args,
     version: meson.project_version(),
     gnu_symbol_visibility: 'hidden',
@@ -35,7 +35,7 @@ libpldm = library(
 )
 
 libpldm_dep = declare_dependency(
-    include_directories: libpldm_include_dir,
+    include_directories: include_root,
     link_with: libpldm,
 )
 

@@ -39,6 +39,8 @@ Change categories:
 - dsp: firmware_update: Add Update Security Revision from DSP0267 v1.3.0
 - include: Added header file for Redfish Device Enablement (DSP0218 v1.2.0)
 - include: Added header file for SMBIOS Data Transfer (DSP0246 v1.0.1)
+- bindings:
+  - Add libpldm++ library for the C++ binding
 
 ### Changed
 
