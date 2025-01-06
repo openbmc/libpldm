@@ -46,12 +46,12 @@ install_headers(libpldm_headers, subdir: 'libpldm', preserve_path: true)
 # TODO: these should depend on the input headers so they rebuild
 # on changes, unclear how to do that.
 include_src = include_directories('../../src', is_system: true)
-sizeof_pldm_fd = compiler.sizeof(
+sizeof_pldm_fd = cc.sizeof(
     'struct pldm_fd',
     prefix: '#include "firmware_device/fd-internal.h"',
     include_directories: [include_src, libpldm_include_dir],
 )
-sizeof_pldm_control = compiler.sizeof(
+sizeof_pldm_control = cc.sizeof(
     'struct pldm_control',
     prefix: '#include "control-internal.h"',
     include_directories: [include_src, libpldm_include_dir],
@@ -66,3 +66,7 @@ sizes_h = configure_file(
     install: true,
     install_dir: get_option('includedir') / 'libpldm',
 )
+
+if get_option('bindings').contains('cpp') or get_option('tests')
+    subdir('bindings/cpp')
+endif
