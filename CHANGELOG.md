@@ -36,6 +36,10 @@ Change categories:
 - platform: Added enum for Redfish Parallel Resource PDR
 - bios: Added all possible values to enum pldm_bios_commands from DSP0247 v1.0.0
 - fru: Added all possible values to enum pldm_fru_commands from DSP0257 v2.0.0
+- bindings:
+  - Add 'include/libpldm++/types.hpp'
+  - Add 'include/libpldm++/firmware_update.hpp'
+  - Add libpldm++ library for the C++ binding
 
 ### Changed
 
