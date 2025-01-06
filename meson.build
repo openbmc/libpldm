@@ -74,6 +74,11 @@ libpldm_include_dir = include_directories('include', is_system: true)
 subdir('include')
 subdir('src')
 
+if get_option('bindings').contains('c++')
+  add_languages('cpp')
+  subdir('bindings/cxx')
+endif
+
 if get_option('tests')
     subdir('tests')
 endif
