@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b312145f_a2725394",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 22
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:17:15Z",
+      "side": 1,
+      "message": "I think this needs to go in the previous change.",
+      "revId": "a0bf3a87387a99dfada1ad444a8a10938e0888b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "335930ae_45635d90",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:17:15Z",
+      "side": 1,
+      "message": "Where\u0027s this defined in the specification?",
+      "revId": "a0bf3a87387a99dfada1ad444a8a10938e0888b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
