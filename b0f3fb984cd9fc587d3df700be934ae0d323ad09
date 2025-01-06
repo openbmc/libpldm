@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c10b9fa3_f1031e4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:00:58Z",
+      "side": 1,
+      "message": "Hi Matt, I\u0027m happy to merge this aside from a few nitpicks noted inline.",
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f6b4b8d_88a8c044",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:00:58Z",
+      "side": 1,
+      "message": "Whitespace seems a bit funky here.",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 67
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dbfb34d_ffdff372",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:00:58Z",
+      "side": 1,
+      "message": "And here",
+      "range": {
+        "startLine": 113,
+        "startChar": 6,
+        "endLine": 114,
+        "endChar": 65
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1dd598d_073d4cb5",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:00:58Z",
+      "side": 1,
+      "message": "More funky whitespace 😊",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 2
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e154755f_2130067b",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:00:58Z",
+      "side": 1,
+      "message": "The described parameter doesn\u0027t exist in the function declaration. Should this be deleted?",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 40
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ffa76d_892654e6",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:00:58Z",
+      "side": 1,
+      "message": "Drop this as well?",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 40
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99a8ac9e_5fa12749",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:00:58Z",
+      "side": 1,
+      "message": "Funky whitespace again",
+      "range": {
+        "startLine": 302,
+        "startChar": 11,
+        "endLine": 303,
+        "endChar": 51
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "552a4d57_0fc1f0f6",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:00:58Z",
+      "side": 1,
+      "message": "Probably worth adding `LIBPLDM_CC_NONNULL` annotations for the static functions. It\u0027s an optimisation, but it also provides some compiler hints on misuse.",
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "231c87a6_129e751c",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:00:58Z",
+      "side": 1,
+      "message": "Bit of a nit, but I\u0027ve generally been requesting that variables are declared up-front and assigned later, rather than mixing code and declarations. This tends to match kernel-style (though this isn\u0027t required by `Documentation/process/coding-style.rst` from a brief search).\n\nDo you mind addressing this throughout, unless there are good reasons otherwise (`const` objects)?",
+      "range": {
+        "startLine": 211,
+        "startChar": 1,
+        "endLine": 212,
+        "endChar": 43
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0daf70c_99c048a8",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-06T05:00:58Z",
+      "side": 1,
+      "message": "prefer `LIBPLDM_CC_UNUSED`?\n\nIf so, there are a few other instances where this can be applied below.",
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
