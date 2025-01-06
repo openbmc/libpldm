@@ -23,3 +23,10 @@ option(
     type: 'boolean',
     description: 'Enable transport implementation',
 )
+option(
+    'bindings',
+    type: 'array',
+    description: 'Language bindings for libpldm',
+    choices: ['cpp'],
+    value: ['cpp'],
+)
