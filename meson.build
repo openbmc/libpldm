@@ -15,7 +15,7 @@ project(
     meson_version: '>=1.3.0',
 )
 
-if get_option('tests')
+if get_option('bindings').contains('cpp') or get_option('tests')
     add_languages('cpp')
 endif
 
@@ -36,6 +36,8 @@ endif
 compiler.has_function_attribute('visibility:default', required: true)
 entrypoint = '__attribute__((visibility("default")))'
 
+cpp_compiler = meson.get_compiler('cpp')
+
 ## Compile test until meson supports it via compiler.has_function_attribute()
 have_tainted_args_test = '#if !__has_attribute(tainted_args)\n#error\n#endif'
 if compiler.compiles(
@@ -43,7 +45,21 @@ if compiler.compiles(
     args: '-E',
     name: 'compiler supports function attribute tainted_args',
 )
-    entrypoint += ' __attribute__((tainted_args))'
+    if get_option('bindings').contains('cpp')
+        if not cpp_compiler.compiles(
+            have_tainted_args_test,
+            args: '-E',
+            name: 'compiler supports function attribute tainted_args',
+        )
+            warning(
+                'C++ compiler should support function attribute tainted_args: ' + cpp_compiler.get_id() + cpp_compiler.version(),
+            )
+        else
+            entrypoint += ' __attribute__((tainted_args))'
+        endif
+    else
+        entrypoint += ' __attribute__((tainted_args))'
+    endif
 endif
 
 libpldm_deprecated_aliases = []
@@ -67,9 +83,16 @@ endif
 
 config = configure_file(output: 'config.h', configuration: conf)
 
-add_project_arguments('-include', '@0@'.format(config), language: 'c')
+add_project_arguments('-include', '@0@'.format(config), language: ['c', 'cpp'])
 
 libpldm_include_dir = include_directories('include', is_system: true)
+
+libpldm_headers = []
+libpldm_sources = []
+
+if get_option('bindings').contains('cpp')
+    subdir('bindings/cpp')
+endif
 
 subdir('include')
 subdir('src')
