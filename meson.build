@@ -23,6 +23,7 @@ endif
 add_project_arguments('-D_GNU_SOURCE', language: ['c'])
 
 compiler = meson.get_compiler('c')
+cpp_compiler = meson.get_compiler('cpp')
 if compiler.has_argument('-Wvla')
     add_project_arguments('-Wvla', language: ['c'])
 endif
@@ -43,7 +44,18 @@ if compiler.compiles(
     args: '-E',
     name: 'compiler supports function attribute tainted_args',
 )
-    entrypoint += ' __attribute__((tainted_args))'
+    if get_option('bindings').contains('c++')
+        if cpp_compiler.compiles(
+            have_tainted_args_test,
+            args: '-E',
+            name: 'compiler supports function attribute tainted_args',
+        )
+
+            entrypoint += ' __attribute__((tainted_args))'
+        endif
+    else
+        entrypoint += ' __attribute__((tainted_args))'
+    endif
 endif
 
 libpldm_deprecated_aliases = []
@@ -67,9 +79,17 @@ endif
 
 config = configure_file(output: 'config.h', configuration: conf)
 
-add_project_arguments('-include', '@0@'.format(config), language: 'c')
+add_project_arguments('-include', '@0@'.format(config), language: ['c', 'cpp'])
 
 libpldm_include_dir = include_directories('include', is_system: true)
+
+libpldm_headers = []
+libpldm_sources = []
+
+if get_option('bindings').contains('c++')
+    add_languages('cpp')
+    subdir('bindings/cxx')
+endif
 
 subdir('include')
 subdir('src')

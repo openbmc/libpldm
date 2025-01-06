@@ -32,6 +32,12 @@ if get_option('oem').contains('meta')
     subdir('oem/meta')
 endif
 
+if get_option('abi').contains('testing')
+  if get_option('bindings').contains('c++')
+      subdir('bindings/cxx')
+  endif
+endif
+
 foreach t : tests
     test(
         t,
