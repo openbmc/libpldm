@@ -22,6 +22,10 @@ Change categories:
 - entity: Added new entity types from DSP0249 v1.4.0
 - stateset: Added new state sets from DSP0249 v1.4.0
 - stateset: Added new enum pldm_state_set_presence_values from DSP0249 v1.4.0
+- bindings:
+  - Add 'include/libpldm/bindings/cpp/types.hpp'
+  - Add 'include/libpldm/bindings/cpp/firmware_update.hpp'
+  - Add libpldmplus library for the C++ binding
 
 ### Changed
 

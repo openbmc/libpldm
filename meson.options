@@ -31,3 +31,10 @@ option(
     choices: ['pd'],
     value: ['pd'],
 )
+option(
+    'bindings',
+    type: 'array',
+    description: 'Language bindings for libpldm',
+    choices: ['cpp'],
+    value: ['cpp'],
+)
