@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "02ff557c_1f91d080",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "Added some explanation there of the changes done to the original code.\n\n\u003e I\u0027m a bit wary of wholesale importing things from openbmc/pldm.\n\nI thought that would be the place to find the best pldm related code 😄 with all the best practices.",
+      "parentUuid": "72059a94_18c52726",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "90832089_721745c1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6e91348_7e689e84",
+        "filename": "bindings/cxx/meson.build",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "I don\u0027t have any preference there.\n\nProbably easier for the user to have a single library.\n\nBut since the C++ binding is optional then libpldm !\u003d libpldm.\n\nIf it\u0027s not optional then the size of the library might be too big for some people because of the additional code. Not sure if size is a big topic.\n\nLet me know what you want to go with 👍",
+      "parentUuid": "c5fa988e_bd9ab40b",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f55e15f2_3827affb",
         "filename": "bindings/cxx/meson.build",
         "patchSetId": 2
@@ -65,6 +101,24 @@
       "writtenOn": "2025-01-07T05:03:07Z",
       "side": 1,
       "message": "Are the headers installed? Which headers?",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcb023a3_a11c0a44",
+        "filename": "bindings/cxx/meson.build",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "They were not installed but the newest revision has an ```install_headers``` statement similar to what is there for libpldm.\n\nChecked with ```DESTDIR\u003d/tmp/install meson install``` that only the headers we want are installed.",
+      "parentUuid": "f55e15f2_3827affb",
       "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -82,6 +136,30 @@
       "writtenOn": "2025-01-07T05:03:07Z",
       "side": 1,
       "message": "I don\u0027t like this 😞\n\nThe newer libpldm iterator-style APIs are a big improvement. We should do the conversion where necessary.\n\nImplementation of these methods shouldn\u0027t be doing any raw indexing into the provided buffer. That\u0027s the responsibility of the C APIs.",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc536296_6306866b",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "Makes sense. Agree that the stuff from libpldm should not be re-implemented in the binding.\n\nSince the firmware_update.h header is quite big, can you suggest which functions/macros would be appropriate? I have split the functions here up into more smaller functions, so the indentation should be less and easier to see which does what.\n\nI found several macros (ew, C macros) of the form ```foreach_pldm_*``` in the libpldm headers, but unsure if they are complete (covering all structs) and which is appropriate to use.\n\nPerhaps this is what you meant with\n\u003e We should do the conversion where necessary.\n\n? That not all of these iterators are implemented?",
+      "parentUuid": "4e889021_abb45eb3",
       "range": {
         "startLine": 23,
         "startChar": 2,
@@ -115,6 +193,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea000c0b_f988cba3",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "It\u0027s necessary since the compiler does not accept the implicit conversion in this case. I inlined these expressions and got some errors like below.\n```\nFAILED: bindings/cxx/libpldmcxx.so.p/package_parser.cpp.o \nc++ -Ibindings/cxx/libpldmcxx.so.p -Ibindings/cxx -I../bindings/cxx -fdiagnostics-color\u003dalways -D_GLIBCXX_ASSERTIONS\u003d1 -D_FILE_OFFSET_BITS\u003d64 -Wall -Winvalid-pch -Wextra -Wpedantic -Werror -std\u003dc++23 -Og -g -DLIBPLDM_API_DEPRECATED -DLIBPLDM_API_TESTING -fPIC -isystem../include -isysteminclude -MD -MQ bindings/cxx/libpldmcxx.so.p/package_parser.cpp.o -MF bindings/cxx/libpldmcxx.so.p/package_parser.cpp.o.d -o bindings/cxx/libpldmcxx.so.p/package_parser.cpp.o -c ../bindings/cxx/package_parser.cpp\n../bindings/cxx/package_parser.cpp: In static member function ‘static std::expected\u003clong unsigned int, std::__cxx11::basic_string\u003cchar\u003e \u003e pldm::fw_update::PackageParser::parseCompImageInfoArea(pldm::fw_update::Package\u0026, pldm::fw_update::ComponentImageCount, const std::vector\u003cunsigned char\u003e\u0026, size_t)’:\n../bindings/cxx/package_parser.cpp:191:63: error: cannot bind packed field ‘compImageInfo.pldm_component_image_information::comp_identifier’ to ‘short unsigned int\u0026’\n  191 |                                                 compImageInfo.comp_identifier,\n      |                                                 ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~\nninja: build stopped: subcommand failed.\n```",
+      "parentUuid": "6d63ac7b_4bd604fc",
+      "range": {
+        "startLine": 169,
+        "startChar": 3,
+        "endLine": 182,
+        "endChar": 47
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "662754ee_7ae2fec9",
@@ -132,6 +234,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c5bf585_6cee0cda",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "removed the exceptions",
+      "parentUuid": "662754ee_7ae2fec9",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03cde315_723fc3ec",
@@ -145,6 +265,30 @@
       "writtenOn": "2025-01-07T05:03:07Z",
       "side": 1,
       "message": "Why is any of this the responsibility of the binding implementation? All of this should be the responsibility of the C APIs. The C++ APIs should just be a wrapper, improving the ergonomics of the C API using the features of the C++ language.",
+      "range": {
+        "startLine": 234,
+        "startChar": 2,
+        "endLine": 292,
+        "endChar": 1
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2229a524_cc0235f6",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "Having the ```std::format``` strings is nice for debugging in the error case. \nIt can provide more information and help to create a correct PLDM package faster.\n\nInstead of having error codes or fixed strings.\nSo it makes sense to me to have that be part of the binding.\n\nCan we discuss a specific section of code and how it can be better done with an equivalent libpldm call?\n\n\u0027any of this\u0027 includes creating the C++ object with the package header information and component info and such, which cannot be done with the C API.",
+      "parentUuid": "03cde315_723fc3ec",
       "range": {
         "startLine": 234,
         "startChar": 2,
@@ -178,6 +322,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13dfff91_46c1def7",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "Yes, DSP0267 (version 1.3.0), page 1011, **PackageHeaderIdentifier**\nfor package format version 1.0",
+      "parentUuid": "cd6f709d_a9ce7b5f",
+      "range": {
+        "startLine": 299,
+        "startChar": 2,
+        "endLine": 302,
+        "endChar": 31
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fcd5d5e_c07fc385",
@@ -191,6 +359,24 @@
       "writtenOn": "2025-01-07T05:03:07Z",
       "side": 1,
       "message": "The whitespace thoughout seems quite messed up. I feel like it shouldn\u0027t pass clang-format. Does it actually? Are we confident it\u0027s actually being processed?",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2158caaa_4aab0e43",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "It should be as intended by the .clang-format file.\n\nThe indentation is different from what is in the \u0027pldm\u0027 repo, which makes sense since they use different .clang-format files.\n\n```\ndiff ~/upstreaming/libpldm/.clang-format ~/upstreaming/pldm/.clang-format  | wc -l\n221\n```",
+      "parentUuid": "9fcd5d5e_c07fc385",
       "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -212,6 +398,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "625dfd53_68db8dfa",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "Yes, error as value is better 👍. Reworked the functions to return the ```std::expected\u003cT, std::string\u003e```",
+      "parentUuid": "353955d9_a0d7914c",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bb4a9f9_8b4455e4",
@@ -225,6 +429,30 @@
       "writtenOn": "2025-01-07T05:03:07Z",
       "side": 1,
       "message": "Is there a reason for this to be virtual? I\u0027d prefer it be static and produce a polymorphic const type rather than mutate an existing instance.",
+      "range": {
+        "startLine": 62,
+        "startChar": 2,
+        "endLine": 62,
+        "endChar": 9
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a22e31de_c74f83f0",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "Removed most of the \u0027virtual\u0027 stuff from the newest revision.\nAlso introduced \u0027class Package\u0027 to represent a PLDM FW Package.\n\nWhich can then be separate from the parser.",
+      "parentUuid": "1bb4a9f9_8b4455e4",
       "range": {
         "startLine": 62,
         "startChar": 2,
@@ -260,6 +488,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e16dd5a_5138b7a8",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "For the new revision, i removed all the instance variables from \u0027class PackageParser\u0027.\n\nThere are now classes \u0027PackageHeaderInfo\u0027 and \u0027Package\u0027 to contain the parsing result.\n\nSo the API now primarily has one function to parse the package header, and then the \u0027parse\u0027 function which is static as requested.\n\nIt is still 2 function calls to parse, do you want it combined?\nThen it would only be one call to parse the entire package.",
+      "parentUuid": "ed2227b9_8dd2fabc",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 23
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bed7c060_9dfa6e62",
         "filename": "bindings/cxx/package_parser.hpp",
         "patchSetId": 2
@@ -271,6 +523,24 @@
       "writtenOn": "2025-01-07T05:03:07Z",
       "side": 1,
       "message": "I\u0027d prefer we avoid extension for this. I expect we can handle it directly in the implementation of parse()?",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95efdda9_14596f94",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "removed the PackageParserV1 class.",
+      "parentUuid": "bed7c060_9dfa6e62",
       "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -294,6 +564,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe7d76a8_96143ade",
+        "filename": "bindings/cxx/types.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "The point of the binding is to make things easier. Of course everything is possible to do in plain C. But then we also have the plain C pointers and everything that comes along.\n\nI\u0027m not sure how to translate\n```cpp\nusing VendorDefinedDescriptorInfo \u003d\n\t\tstd::tuple\u003cVendorDefinedDescriptorTitle,\n\t\t\t   VendorDefinedDescriptorData\u003e;\n\tusing Descriptors \u003d std::map\u003c\n\t\tDescriptorType,\n\t\tstd::variant\u003cDescriptorData, VendorDefinedDescriptorInfo\u003e \u003e;\n\tusing DescriptorMap \u003d std::unordered_map\u003ceid, Descriptors\u003e;\n\n```\n\ninto C structs without getting into the manual memory management.\n\nFor example this one,\n```c\nint decode_firmware_device_id_record(\n|       const uint8_t *data, size_t length,\n|       uint16_t component_bitmap_bit_length,\n|       struct pldm_firmware_device_id_record *fw_device_id_record,\n|       struct variable_field *applicable_components,\n|       struct variable_field *comp_image_set_version_str,\n|       struct variable_field *record_descriptors,\n|       struct variable_field *fw_device_pkg_data);\n```\n\nthe ```struct variable_field``` can be anything.\nSo there is heavy reliance on the programmer to always have the spec/docs at hand to know how to cast it and iterate over it. Which makes it time-consuming to work with the PLDM.\n\nIn the C++ types in this header, all the members have their own types.\n\n```\n// FirmwareDeviceIDRecords\n\tusing DeviceIDRecordCount \u003d uint8_t;\n\tusing DeviceUpdateOptionFlags \u003d std::bitset\u003c32\u003e;\n\tusing ApplicableComponents \u003d std::vector\u003csize_t\u003e;\n\tusing ComponentImageSetVersion \u003d std::string;\n\tusing FirmwareDevicePackageData \u003d std::vector\u003cuint8_t\u003e;\n\tusing FirmwareDeviceIDRecord \u003d\n\t\tstd::tuple\u003cDeviceUpdateOptionFlags, ApplicableComponents,\n\t\t\t   ComponentImageSetVersion, Descriptors,\n\t\t\t   FirmwareDevicePackageData\u003e;\n```\n\nEven if it\u0027s just renaming of the underlying. This makes it easy to e.g. pass a ```ComponentImageSetVersion``` as a function parameter and later be able to know what it is based on the types alone and their relationships in this header.",
+      "parentUuid": "b372e704_97875684",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e450845_e7d67c68",
         "filename": "bindings/cxx/utils.cpp",
         "patchSetId": 2
@@ -305,6 +593,24 @@
       "writtenOn": "2025-01-07T05:03:07Z",
       "side": 1,
       "message": "Any logic required should exist in the C API and be wrapped by the C++ API. The C++ API should not be providing behaviour beyond the C API.",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a2fa3f_b881dbaa",
+        "filename": "bindings/cxx/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "Removed the ```std::replace_if``` 👍",
+      "parentUuid": "3e450845_e7d67c68",
       "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -326,6 +632,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f86bb558_0465df05",
+        "filename": "bindings/cxx/utils.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "no, i did not include it in the list in the newest revision.\nIt\u0027s used internally in package_parser.cpp",
+      "parentUuid": "ff76f51c_673c3c4a",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86175f22_90179441",
@@ -339,6 +663,24 @@
       "writtenOn": "2025-01-07T05:03:07Z",
       "side": 1,
       "message": "This should be an array type with choices, like the `oem` option.\n\n```\noption(\u0027bindings\u0027, type: \u0027array\u0027, description: \u0027Language bindings for libpldm\u0027, choices: [\u0027c++\u0027], value: [\u0027c++\u0027])\n```",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "616ff1cd_eefbb5fc",
+        "filename": "meson.options",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-07T15:16:58Z",
+      "side": 1,
+      "message": "Done. A little surprised that you consider the binding as enabled by default.",
+      "parentUuid": "86175f22_90179441",
       "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
