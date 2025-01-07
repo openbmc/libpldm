@@ -1,0 +1,346 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72059a94_18c52726",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "I\u0027m a bit wary of wholesale importing things from openbmc/pldm.",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90832089_721745c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "Hi Alexander, thanks for kicking this off. I do have some reservations, which I\u0027ve covered inline.",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5fa988e_bd9ab40b",
+        "filename": "bindings/cxx/meson.build",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "I guess this is in the vein of what libgpiod does with its separate libraries, but I\u0027d like to understand if that\u0027s definitely the right direction, rather than providing one library with both C and C++ APIs.",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f55e15f2_3827affb",
+        "filename": "bindings/cxx/meson.build",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "Are the headers installed? Which headers?",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e889021_abb45eb3",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "I don\u0027t like this 😞\n\nThe newer libpldm iterator-style APIs are a big improvement. We should do the conversion where necessary.\n\nImplementation of these methods shouldn\u0027t be doing any raw indexing into the provided buffer. That\u0027s the responsibility of the C APIs.",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d63ac7b_4bd604fc",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "Why is this necessary?",
+      "range": {
+        "startLine": 169,
+        "startChar": 3,
+        "endLine": 182,
+        "endChar": 47
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "662754ee_7ae2fec9",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "I don\u0027t think libraries should be throwing `std::runtime_error()`. You might as well be calling `abort()` in terms of the process life. Libraries can\u0027t have that luxury.",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03cde315_723fc3ec",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "Why is any of this the responsibility of the binding implementation? All of this should be the responsibility of the C APIs. The C++ APIs should just be a wrapper, improving the ergonomics of the C API using the features of the C++ language.",
+      "range": {
+        "startLine": 234,
+        "startChar": 2,
+        "endLine": 292,
+        "endChar": 1
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd6f709d_a9ce7b5f",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "This is a UUID?",
+      "range": {
+        "startLine": 299,
+        "startChar": 2,
+        "endLine": 302,
+        "endChar": 31
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fcd5d5e_c07fc385",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "The whitespace thoughout seems quite messed up. I feel like it shouldn\u0027t pass clang-format. Does it actually? Are we confident it\u0027s actually being processed?",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "353955d9_a0d7914c",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "I prefer we design the APIs to conform to `noexcept`. Can you try using `std::expected` instead?\n\nhttps://en.cppreference.com/w/cpp/utility/expected",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bb4a9f9_8b4455e4",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "Is there a reason for this to be virtual? I\u0027d prefer it be static and produce a polymorphic const type rather than mutate an existing instance.",
+      "range": {
+        "startLine": 62,
+        "startChar": 2,
+        "endLine": 62,
+        "endChar": 9
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed2227b9_8dd2fabc",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "Going with the comment immediately above, this is why I\u0027m not a fan, because we can instances that are in the zombie state of existing but failed to successfully parse the buffer.",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 23
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bed7c060_9dfa6e62",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "I\u0027d prefer we avoid extension for this. I expect we can handle it directly in the implementation of parse()?",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b372e704_97875684",
+        "filename": "bindings/cxx/types.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "This is all a bit much. Can we not use the message structs from the C headers?",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e450845_e7d67c68",
+        "filename": "bindings/cxx/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "Any logic required should exist in the C API and be wrapped by the C++ API. The C++ API should not be providing behaviour beyond the C API.",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff76f51c_673c3c4a",
+        "filename": "bindings/cxx/utils.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "Is this header installed?",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86175f22_90179441",
+        "filename": "meson.options",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-07T05:03:07Z",
+      "side": 1,
+      "message": "This should be an array type with choices, like the `oem` option.\n\n```\noption(\u0027bindings\u0027, type: \u0027array\u0027, description: \u0027Language bindings for libpldm\u0027, choices: [\u0027c++\u0027], value: [\u0027c++\u0027])\n```",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
