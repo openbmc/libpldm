@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c1efdce_7df54daf",
+        "filename": "bindings/cxx/meson.build",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "Well, we already have the meson option to drop the transport APIs and implementations from the build. I think the specific approach could be more fine-grained, but that depends on people actually caring about it too.\n\nI think it\u0027s reasonable to allow customisation. The only trick would be not installing the headers for the symbols that configured out.",
+      "parentUuid": "e6e91348_7e689e84",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f55e15f2_3827affb",
         "filename": "bindings/cxx/meson.build",
         "patchSetId": 2
@@ -172,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4f8f6f9_c352278d",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "\u003e Perhaps this is what you meant with\n\u003e\n\u003e \u003e We should do the conversion where necessary.\n\u003e\n\u003e ? That not all of these iterators are implemented?\n\nYes, not all messages with variable length substructures have iterators. The iterator approach was introduced only recently:\n\nhttps://github.com/openbmc/libpldm/commit/3a2c6589c5660d2066b612bae28ca393a8aa1c2b\n\n\u003e I found several macros (ew, C macros) ... \n\nI\u0027m not sure how the commentary helps? \n\n\u003e ... of the form foreach_pldm_* in the libpldm headers\n\nGiven the code here, I\u0027d rather than macros.\n\nSo to set expectations, currently I don\u0027t plan to merge the C++ binding without making improvements to the C API to eliminate most of the implementation of these APIs.",
+      "parentUuid": "cc536296_6306866b",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d63ac7b_4bd604fc",
         "filename": "bindings/cxx/package_parser.cpp",
         "patchSetId": 2
@@ -207,6 +249,30 @@
       "side": 1,
       "message": "It\u0027s necessary since the compiler does not accept the implicit conversion in this case. I inlined these expressions and got some errors like below.\n```\nFAILED: bindings/cxx/libpldmcxx.so.p/package_parser.cpp.o \nc++ -Ibindings/cxx/libpldmcxx.so.p -Ibindings/cxx -I../bindings/cxx -fdiagnostics-color\u003dalways -D_GLIBCXX_ASSERTIONS\u003d1 -D_FILE_OFFSET_BITS\u003d64 -Wall -Winvalid-pch -Wextra -Wpedantic -Werror -std\u003dc++23 -Og -g -DLIBPLDM_API_DEPRECATED -DLIBPLDM_API_TESTING -fPIC -isystem../include -isysteminclude -MD -MQ bindings/cxx/libpldmcxx.so.p/package_parser.cpp.o -MF bindings/cxx/libpldmcxx.so.p/package_parser.cpp.o.d -o bindings/cxx/libpldmcxx.so.p/package_parser.cpp.o -c ../bindings/cxx/package_parser.cpp\n../bindings/cxx/package_parser.cpp: In static member function ‘static std::expected\u003clong unsigned int, std::__cxx11::basic_string\u003cchar\u003e \u003e pldm::fw_update::PackageParser::parseCompImageInfoArea(pldm::fw_update::Package\u0026, pldm::fw_update::ComponentImageCount, const std::vector\u003cunsigned char\u003e\u0026, size_t)’:\n../bindings/cxx/package_parser.cpp:191:63: error: cannot bind packed field ‘compImageInfo.pldm_component_image_information::comp_identifier’ to ‘short unsigned int\u0026’\n  191 |                                                 compImageInfo.comp_identifier,\n      |                                                 ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~\nninja: build stopped: subcommand failed.\n```",
       "parentUuid": "6d63ac7b_4bd604fc",
+      "range": {
+        "startLine": 169,
+        "startChar": 3,
+        "endLine": 182,
+        "endChar": 47
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00e70875_b299d716",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "Ah, well, that\u0027s the result of exposing packed structs. Hence:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L134-L135\n\nAny API making use of packed structs is legacy in my view. This code demonstrates why.",
+      "parentUuid": "ea000c0b_f988cba3",
       "range": {
         "startLine": 169,
         "startChar": 3,
@@ -289,6 +355,30 @@
       "side": 1,
       "message": "Having the ```std::format``` strings is nice for debugging in the error case. \nIt can provide more information and help to create a correct PLDM package faster.\n\nInstead of having error codes or fixed strings.\nSo it makes sense to me to have that be part of the binding.\n\nCan we discuss a specific section of code and how it can be better done with an equivalent libpldm call?\n\n\u0027any of this\u0027 includes creating the C++ object with the package header information and component info and such, which cannot be done with the C API.",
       "parentUuid": "03cde315_723fc3ec",
+      "range": {
+        "startLine": 234,
+        "startChar": 2,
+        "endLine": 292,
+        "endChar": 1
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d847ea2_7db661ac",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "Sorry, my comment wasn\u0027t as specific as it should have been. I was not concerned about the use of `std::format`.\n\nThe code is parsing the provided message byte buffer. That\u0027s not the responsibility of the C++ binding, that\u0027s the core responsibility of the (C) library. Internally, libpldm provides a number of mechanisms to ensure spatial memory safety and correct handling of endianness that are both ergonomic to use and generate code with good performance. Specifically, the APIs provided by `src/msgbuf.h`. Those are completely dodged by this implementation. This is not code I wish to maintain. Reviewing stuff like this requires constant vigilance to prevent CVEs (which I will fail at), whereas use of the msgbuf APIs allows me to assume no unsafe accesses are performed or incorrect representations generated, or if there are bugs of this nature, they can be fixed centrally to the benefit of the rest of the library implementation.\n\nThere should be C APIs to extract the necessary data to (unpacked) C structs, and from there you can populate your C++ classes (though, possibly it would make sense to embed the C struct as a member in the class). If we do not yet have C APIs to do the job, then it\u0027s a deficiency of the (C) library that must first be fixed.",
+      "parentUuid": "2229a524_cc0235f6",
       "range": {
         "startLine": 234,
         "startChar": 2,
@@ -582,6 +672,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c50d704_2193be4a",
+        "filename": "bindings/cxx/types.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "Adding `using` aliases for complex generic data structures is one thing, but adding individual `using` aliases for individual message fields is the wrong way to tackle the problem IMO. Pass a pointer/reference to the message struct around instead, and this problem disappears?\n\nFunctions defined like below have poor form and are not something I want to maintain:\n\n```\nint decode_firmware_device_id_record(\n|       const uint8_t *data, size_t length,\n|       uint16_t component_bitmap_bit_length,\n|       struct pldm_firmware_device_id_record *fw_device_id_record,\n|       struct variable_field *applicable_components,\n|       struct variable_field *comp_image_set_version_str,\n|       struct variable_field *record_descriptors,\n|       struct variable_field *fw_device_pkg_data);\n```\n\nThere are far too many ways to shoot yourself in the foot with this. It\u0027s just bad API design. We should try to do better.\n\nParticularly, from [[1](https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md#philosophy-and-influences)], see:\n\n[How Do I Make This Hard to Misuse?](https://ozlabs.org/~rusty/index.cgi/tech/2008-03-30.html)\n\nand\n\n[What If I Don\u0027t Actually Like My Users?](https://ozlabs.org/~rusty/index.cgi/tech/2008-04-01.html)",
+      "parentUuid": "fe7d76a8_96143ade",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e450845_e7d67c68",
         "filename": "bindings/cxx/utils.cpp",
         "patchSetId": 2
@@ -611,6 +719,24 @@
       "side": 1,
       "message": "Removed the ```std::replace_if``` 👍",
       "parentUuid": "3e450845_e7d67c68",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de68af06_93a01e85",
+        "filename": "bindings/cxx/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "That\u0027s not really resolving my concern, but since it\u0027s not part of the public API, then it doesn\u0027t matter so much.",
+      "parentUuid": "d7a2fa3f_b881dbaa",
       "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -681,6 +807,24 @@
       "side": 1,
       "message": "Done. A little surprised that you consider the binding as enabled by default.",
       "parentUuid": "86175f22_90179441",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85f20e5b_e126d72f",
+        "filename": "meson.options",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "All options need to be enabled by default so that they are exercised by CI.\n\nDistros like OpenBMC and other integrations always have to set specific options as required. They don\u0027t get to skate by on the defaults.",
+      "parentUuid": "616ff1cd_eefbb5fc",
       "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

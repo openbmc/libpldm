@@ -16,6 +16,120 @@
       "message": "ready for round 2 😄",
       "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68b47042_792ecb43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "A requirement that I have for accepting this is that the C++ ABI is controlled in the same way as the C ABI, using the `LIBPLDM_ABI_*` annotations. We need to figure out how to make that work, if the obvious approach doesn\u0027t.",
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01223a82_ae79c024",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "whitespace is still busted throughout 😞",
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2aa5b17_56a0da1e",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "This isn\u0027t documented.",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 44
+      },
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9262e28b_1e77733f",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "`uintmax_t` is a bad type and should be avoided in public APIs. I think it should be `size_t` anyway?",
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40b5928c_013ee0a3",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be true ...",
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b914d1e_6c319c90",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-08T04:23:27Z",
+      "side": 1,
+      "message": "... especially given this.",
+      "range": {
+        "startLine": 120,
+        "startChar": 28,
+        "endLine": 120,
+        "endChar": 36
+      },
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
