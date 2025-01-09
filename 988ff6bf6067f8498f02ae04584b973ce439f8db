@@ -708,6 +708,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70b0dcd8_25b02cd5",
+        "filename": "bindings/cxx/types.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-09T15:40:28Z",
+      "side": 1,
+      "message": "Let\u0027s say we want to use the C structs.\n```\n struct pldm_component_image_information {\n  |       uint16_t comp_classification;\n  |       uint16_t comp_identifier;\n  |       uint32_t comp_comparison_stamp;\n  |       bitfield16_t comp_options;\n  |       bitfield16_t requested_comp_activation_method;\n  |       uint32_t comp_location_offset;\n  |       uint32_t comp_size;\n  |       uint8_t comp_version_string_type;\n  |       uint8_t comp_version_string_length;\n  } __attribute__((packed));\n```\n\nThat\u0027s not really usable, the Component Version String is not in the struct. \nSo i need to use the ```using ComponentImageInfo \u003d ....```\n\nAnother example: the pldm firmware device id record\n```\n  /** @struct pldm_firmware_device_id_record\n   *\n   *  Structure representing firmware device ID record\n   */\n  struct pldm_firmware_device_id_record {\n  |       uint16_t record_length;\n  |       uint8_t descriptor_count;\n  |       bitfield32_t device_update_option_flags;\n  |       uint8_t comp_image_set_version_string_type;\n  |       uint8_t comp_image_set_version_string_length;\n  |       uint16_t fw_device_pkg_data_length;\n  } __attribute__((packed));\n```\n\nIt is also unusable since it has the same problem with the string.\nPeople do not want to figure out like oh which string type is it and then make a switch-case to extract something from another buffer which is not even in that struct. That\u0027s just externalizing all the problems onto the library user.\n\nWhat i need (pseudocode):\n```\nauto mypkg \u003d pldm::fw_update::PackageParser::parse(...)\n\n// check some version\n\n// look for some device identifier\n\n// extract some component image offset from component info\n\n// done\n```\n\nI (as the user of the binding) do not want to even know about the existence of the different string types or how to interpret the pldm timestamp 104 format.\n\nI would be happy to integrate the existing C structs into the binding but it has to be consistent and user-friendly...\n\nSo if there is a struct which does not require any boilerplate code to use it, we can integrate it. But the examples above do not make a user happy.",
+      "parentUuid": "8c50d704_2193be4a",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e450845_e7d67c68",
         "filename": "bindings/cxx/utils.cpp",
         "patchSetId": 2
