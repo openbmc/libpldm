@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c8a3bb3_b6f57ecb",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-01-09T17:12:46Z",
+      "side": 1,
+      "message": "Adding this comment at the top as I have a few questions about the design-\n\n1. Considering the platform might support non-PLDM updaters, if a platform implements multiple code updaters, does each updater need to parse the package independently? This would imply running the same parsing logic and decode APIs multiple times in the update flow.\n\n2. The PackageIntegrity check needs to be integrated with the parsing logic. If the libpldm API implements this functionality, does it mean the integrity check will be performed every time different updaters parse the package?",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
