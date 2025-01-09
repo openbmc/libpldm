@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb31a501_06cbe07b",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-09T07:44:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f6b4b8d_88a8c044",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 67
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dbfb34d_ffdff372",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-01-06T05:00:58Z",
       "side": 1,
       "message": "And here",
+      "range": {
+        "startLine": 113,
+        "startChar": 6,
+        "endLine": 114,
+        "endChar": 65
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80695d39_1cd62d2f",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-09T07:44:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dbfb34d_ffdff372",
       "range": {
         "startLine": 113,
         "startChar": 6,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "241cc2f9_810902d9",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-09T07:44:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1dd598d_073d4cb5",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 2
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e154755f_2130067b",
@@ -100,6 +172,30 @@
       "writtenOn": "2025-01-06T05:00:58Z",
       "side": 1,
       "message": "The described parameter doesn\u0027t exist in the function declaration. Should this be deleted?",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 40
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51b84956_c290ff28",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-09T07:44:33Z",
+      "side": 1,
+      "message": "I\u0027ve moved it to a later commit",
+      "parentUuid": "e154755f_2130067b",
       "range": {
         "startLine": 246,
         "startChar": 0,
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63e246c8_8d108577",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-09T07:44:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8ffa76d_892654e6",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 40
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99a8ac9e_5fa12749",
@@ -146,6 +266,30 @@
       "writtenOn": "2025-01-06T05:00:58Z",
       "side": 1,
       "message": "Funky whitespace again",
+      "range": {
+        "startLine": 302,
+        "startChar": 11,
+        "endLine": 303,
+        "endChar": 51
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccc788c0_cb7b53cb",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-09T07:44:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99a8ac9e_5fa12749",
       "range": {
         "startLine": 302,
         "startChar": 11,
@@ -173,6 +317,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7680242_0064069b",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-09T07:44:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "552a4d57_0fc1f0f6",
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "231c87a6_129e751c",
@@ -196,6 +358,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "927e6675_e6256158",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-09T07:44:33Z",
+      "side": 1,
+      "message": "I\u0027ve changed these to match the style. I think it\u0027s slightly more error-prone in terms of risk of using variables before assignment.",
+      "parentUuid": "231c87a6_129e751c",
+      "range": {
+        "startLine": 211,
+        "startChar": 1,
+        "endLine": 212,
+        "endChar": 43
+      },
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0daf70c_99c048a8",
@@ -209,6 +395,24 @@
       "writtenOn": "2025-01-06T05:00:58Z",
       "side": 1,
       "message": "prefer `LIBPLDM_CC_UNUSED`?\n\nIf so, there are a few other instances where this can be applied below.",
+      "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49edf6d5_9cc1c3a5",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-09T07:44:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0daf70c_99c048a8",
       "revId": "b0f3fb984cd9fc587d3df700be934ae0d323ad09",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
