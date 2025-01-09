@@ -70,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63b4a105_d8cd1a3a",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-09T14:31:46Z",
+      "side": 1,
+      "message": "Fixed this now, at least for the comments.\n\nI did not realize there was any wiggle room left with the .clang-format.\n\nThought the .clang-format would already completely define how the code and comments should be formatted.",
+      "parentUuid": "01223a82_ae79c024",
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2aa5b17_56a0da1e",
@@ -83,6 +101,30 @@
       "writtenOn": "2025-01-08T04:23:27Z",
       "side": 1,
       "message": "This isn\u0027t documented.",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 44
+      },
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70b76bb9_bc823ce8",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-09T14:31:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2aa5b17_56a0da1e",
       "range": {
         "startLine": 69,
         "startChar": 8,
@@ -110,6 +152,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b08e118e_3915d98e",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-09T14:31:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9262e28b_1e77733f",
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40b5928c_013ee0a3",
@@ -127,6 +187,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed74aae6_e19f2c60",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-09T14:31:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40b5928c_013ee0a3",
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b914d1e_6c319c90",
@@ -140,6 +218,30 @@
       "writtenOn": "2025-01-08T04:23:27Z",
       "side": 1,
       "message": "... especially given this.",
+      "range": {
+        "startLine": 120,
+        "startChar": 28,
+        "endLine": 120,
+        "endChar": 36
+      },
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1210b7bd_dd133620",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-09T14:31:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b914d1e_6c319c90",
       "range": {
         "startLine": 120,
         "startChar": 28,
