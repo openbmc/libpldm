@@ -16,6 +16,24 @@
       "message": "Adding this comment at the top as I have a few questions about the design-\n\n1. Considering the platform might support non-PLDM updaters, if a platform implements multiple code updaters, does each updater need to parse the package independently? This would imply running the same parsing logic and decode APIs multiple times in the update flow.\n\n2. The PackageIntegrity check needs to be integrated with the parsing logic. If the libpldm API implements this functionality, does it mean the integrity check will be performed every time different updaters parse the package?",
       "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab07b820_24ee1cf8",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-09T18:01:09Z",
+      "side": 1,
+      "message": "Thanks for your interest in this patch 😊\n\n\u003e If a platform implements multiple code updaters, does each updater need to parse the package independently? \n\nI believe it depends on the package routing. If you go via bmcweb/redfish then the update is performed via dbus and the dbus fw inventory. In the new design \nhttps://github.com/openbmc/docs/blob/master/designs/code-update.md\nthe package has PLDM format. So if the component is not managed by the specific code updater, it may not even receive the update package.\n\nCurrently i do not know of any plans to have a front-end for the pldm package which does the parsing. So each updater to receive the package may need to parse it.\n\nHowever, parsing the PLDM package is easily done with the C++ binding.\n\n\u003e This would imply running the same parsing logic and decode APIs multiple times in the update flow.\n\nIf that happens for some reason, i do not see it as a problem. Parsing a PLDM package is quite efficient. And firmware update is not something that happens very often.\n\n\u003e The PackageIntegrity check needs to be integrated with the parsing logic. If the libpldm API implements this functionality, does it mean the integrity check will be performed every time different updaters parse the package?\n\nYes, the integrity has to be checked to avoid processing a corrupted pldm package or indexing out of bounds.\n\n\nConsider the following script\n\n```\n\ncurl -k ${creds} \\\n\t-H \"Content-Type:multipart/form-data\" \\\n\t-X POST \\\n\t-F UpdateParameters\u003d\"{\\\"Targets\\\":[\\\"/redfish/v1/UpdateService/FirmwareInventory/${target}\\\"],\\\"@Redfish.OperationApplyTime\\\":\\\"Immediate\\\"};type\u003dapplication/json\" \\\n\t-F \"UpdateFile\u003d@${fwpath};type\u003dapplication/octet-stream\" \\\n\thttps://${bmc}/redfish/v1/UpdateService/update\n```\n\nin which i target a single firmware inventory item. In that case, the PLDM parsing should only happen once.\n\nSo if you target your pldm fw update package correctly, it should not be processed more often than required.\n\nIf you do not know which devices from the fw inventory should receive the update package, you can also target it to all of them, and the update daemons should figure out if the package is intended for that device or not.\n\nThat would be the case you described where the PLDM fw update package is processed multiple times.",
+      "parentUuid": "6c8a3bb3_b6f57ecb",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
