@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c056468_a105253a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-09T14:01:12Z",
+      "side": 1,
+      "message": "It does but apparently clang++ does not know about\n```__attribute__((tainted_args))```\nso i added that to the check.",
+      "parentUuid": "68b47042_792ecb43",
+      "revId": "e184d16d58b57d8dc8c1a60786a2bda732c05010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01223a82_ae79c024",
