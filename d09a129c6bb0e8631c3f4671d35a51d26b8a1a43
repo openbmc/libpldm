@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97983e61_f952d116",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-09T19:31:59Z",
+      "side": 1,
+      "message": "Partially reviewed, posting few comments, will complete review.",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c11b174c_e7bf30a2",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-09T19:31:59Z",
+      "side": 1,
+      "message": "nit: to the application or from the application?",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd67c7de_eae2406b",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-09T19:31:59Z",
+      "side": 1,
+      "message": "imageset is ActiveComponentImageSetVersionString/PendingComponentImageSetVersionString?",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "502b6039_7a3c3472",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-09T19:31:59Z",
+      "side": 1,
+      "message": "ret_pending",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a1df7eb_684d5551",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-09T19:31:59Z",
+      "side": 1,
+      "message": "CancelUpdate will move the State machine to Idle state and CancelUpdateComponent will move the state machine to Ready state, how will it be distinguished with a common function?",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16e9ef6d_159372ed",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-09T19:31:59Z",
+      "side": 1,
+      "message": "Will we add for GetStatus command?",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
