@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b63d2fa_7651bf7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-10T01:45:59Z",
+      "side": 1,
+      "message": "Thanks for the comments Tom",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c11b174c_e7bf30a2",
@@ -31,6 +48,24 @@
       "writtenOn": "2025-01-09T19:31:59Z",
       "side": 1,
       "message": "nit: to the application or from the application?",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c9a37c7_a2711098",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-10T01:45:59Z",
+      "side": 1,
+      "message": "by \"application\" I mean the program using the FD responder library - it populates the component table. So I think \"from\" is right?",
+      "parentUuid": "c11b174c_e7bf30a2",
       "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +87,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "875a6353_3d167509",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-10T01:45:59Z",
+      "side": 1,
+      "message": "Yes. I\u0027ll fix the descriptions there, thanks.",
+      "parentUuid": "fd67c7de_eae2406b",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "502b6039_7a3c3472",
@@ -65,6 +118,24 @@
       "writtenOn": "2025-01-09T19:31:59Z",
       "side": 1,
       "message": "ret_pending",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d1b20c8_235daa04",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-10T01:45:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "502b6039_7a3c3472",
       "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -88,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "462a93d8_2eebfd6b",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-10T01:45:59Z",
+      "side": 1,
+      "message": "Internally the state machine moves to the appropriate state, but the same application callback is called for either, to cancel the currently running component. I don\u0027t think the application callback needs to distinguish the difference?\n\nCancelUpdate\nhttps://gerrit.openbmc.org/plugins/gitiles/openbmc/libpldm/+/refs/changes/30/75830/23/src/firmware_device/fd.c#712\n\nCancelUpdateComponent\nhttps://gerrit.openbmc.org/plugins/gitiles/openbmc/libpldm/+/refs/changes/30/75830/23/src/firmware_device/fd.c#674",
+      "parentUuid": "7a1df7eb_684d5551",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "16e9ef6d_159372ed",
         "filename": "include/libpldm/firmware_fd.h",
         "patchSetId": 23
@@ -99,6 +188,24 @@
       "writtenOn": "2025-01-09T19:31:59Z",
       "side": 1,
       "message": "Will we add for GetStatus command?",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "674a7319_7e3ea7b1",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-10T01:45:59Z",
+      "side": 1,
+      "message": "GetStatus is handled internally by the FD responder, if that\u0027s what you mean? Fields such as ProgressPercent will be filled from eg the `apply` callback\u0027s `ret_progress_percent`",
+      "parentUuid": "16e9ef6d_159372ed",
       "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
