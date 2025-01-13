@@ -35,6 +35,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb8145e7_e708972a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-13T19:52:37Z",
+      "side": 1,
+      "message": "Overall, LGTM. A few items require clarification.",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c11b174c_e7bf30a2",
@@ -66,6 +83,24 @@
       "side": 1,
       "message": "by \"application\" I mean the program using the FD responder library - it populates the component table. So I think \"from\" is right?",
       "parentUuid": "c11b174c_e7bf30a2",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de10af67_11145aa8",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-13T19:52:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8c9a37c7_a2711098",
       "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -175,6 +210,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c49d6226_0a68e245",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-13T19:52:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "462a93d8_2eebfd6b",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16e9ef6d_159372ed",
@@ -206,6 +259,115 @@
       "side": 1,
       "message": "GetStatus is handled internally by the FD responder, if that\u0027s what you mean? Fields such as ProgressPercent will be filled from eg the `apply` callback\u0027s `ret_progress_percent`",
       "parentUuid": "16e9ef6d_159372ed",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3e69779_c34273a2",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-13T19:52:37Z",
+      "side": 1,
+      "message": "Per my understanding pldm_fd_ops exposes callbacks for all commands, so when PLDM UA asks for GetStatus, the PLDM FD application will invoke which function in the library?",
+      "parentUuid": "674a7319_7e3ea7b1",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9ad5e43_a340ca93",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-13T19:52:37Z",
+      "side": 1,
+      "message": "Instead of hardcoding, the application should be able to configure within the supported range of 1sec-5sec and similarly for other FD parameters.",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e3dfbc4_8fec595f",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-13T19:52:37Z",
+      "side": 1,
+      "message": "How would this library need to be configured if OEM completion codes for VerifyComplete needs to be supported?",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81557174_f4e0e1bd",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-13T19:52:37Z",
+      "side": 1,
+      "message": "aux_state is enumeration?",
+      "range": {
+        "startLine": 142,
+        "startChar": 60,
+        "endLine": 142,
+        "endChar": 67
+      },
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85ade0f6_9f9904e7",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-13T19:52:37Z",
+      "side": 1,
+      "message": "Do we compare the ComponentStamp passed with the current ComponentStamp and send identical/downgrade completion codes here and use Force Update?",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a236c66_d25a58f3",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-13T19:52:37Z",
+      "side": 1,
+      "message": "For the PLDM requester commands implemented by FD, the command retries are part of the library or to be handled by application?",
       "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
