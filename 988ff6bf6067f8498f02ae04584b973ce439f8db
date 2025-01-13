@@ -726,6 +726,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4e4ee34_ed675038",
+        "filename": "bindings/cxx/types.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-13T01:10:33Z",
+      "side": 1,
+      "message": "\u003e That\u0027s not really usable, the Component Version String is not in the struct.\nSo i need to use the using ComponentImageInfo \u003d ....\n\nRight. Both structs you quote use `__attribute__((packed))`, and as outlined in the changes checklist [this is not the desired style moving forward](https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L134-L135). The APIs were created prior to current design tastes and I don\u0027t doubt that we could come up with a better design. I\u0027m asking you to do so, in the C APIs, so the C++ APIs remain purely a translation of ergonomics between available language features.\n\nI have reservations about abstracting over the string types. libpldm should not be prescribing any specific string codec implementation. What are your suggestions here? You need to consider the impact of any new dependencies on using libpldm in freestanding applications (host firmware, device firmware, etc). You mustn\u0027t assume OpenBMC or glibc.",
+      "parentUuid": "70b0dcd8_25b02cd5",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e450845_e7d67c68",
         "filename": "bindings/cxx/utils.cpp",
         "patchSetId": 2
