@@ -52,6 +52,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f906153f_25a454ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-14T04:01:40Z",
+      "side": 1,
+      "message": "I\u0027ve pushed an update that allows setting the timeouts.\nI also cleaned up a few TODOs (some were outdated, the cancel_update on timeout is now added).",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c11b174c_e7bf30a2",
@@ -283,6 +300,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f27b5869_ba29860c",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-14T04:01:40Z",
+      "side": 1,
+      "message": "`pldm_fd_ops` isn\u0027t exposing all commands directly, it\u0027s a bit of a higher level API. GetStatus is handled internally by the library, since it knows the current state based on previous commands and callbacks.",
+      "parentUuid": "e3e69779_c34273a2",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b9ad5e43_a340ca93",
         "filename": "src/firmware_device/fd.c",
         "patchSetId": 23
@@ -300,6 +335,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7013f146_646127c5",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-14T04:01:40Z",
+      "side": 1,
+      "message": "I\u0027ve added functions to set FD_T1 and FD_T2.",
+      "parentUuid": "b9ad5e43_a340ca93",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e3dfbc4_8fec595f",
         "filename": "src/firmware_device/fd.c",
         "patchSetId": 23
@@ -311,6 +364,24 @@
       "writtenOn": "2025-01-13T19:52:37Z",
       "side": 1,
       "message": "How would this library need to be configured if OEM completion codes for VerifyComplete needs to be supported?",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c992737_2a4776e2",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-14T04:01:40Z",
+      "side": 1,
+      "message": "The `pldm_fd_ops.verify()` callback returns uint8_t, so errors in the vendor 0x90-0xaf range can be returned.",
+      "parentUuid": "4e3dfbc4_8fec595f",
       "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -340,6 +411,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f5f71d6_a308ef80",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-14T04:01:40Z",
+      "side": 1,
+      "message": "It\u0027s a helper to fill a `struct pldm_get_status_resp` which uses uint8_t, since that\u0027s one of the old packed structs. Using a pointer to enum would mean the caller needs a temporary enum to copy through.",
+      "parentUuid": "81557174_f4e0e1bd",
+      "range": {
+        "startLine": 142,
+        "startChar": 60,
+        "endLine": 142,
+        "endChar": 67
+      },
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85ade0f6_9f9904e7",
         "filename": "src/firmware_device/fd.c",
         "patchSetId": 23
@@ -357,6 +452,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98d93254_c95ce8da",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-14T04:01:40Z",
+      "side": 1,
+      "message": "An application\u0027s `update_component()` handler could compare ComponentStamp itself based on the `update` struct, and also look for Force Update set in `update_option_flags`.\nThen it can return `PLDM_CRC_COMP_COMPARISON_STAMP_IDENTICAL` etc.",
+      "parentUuid": "85ade0f6_9f9904e7",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a236c66_d25a58f3",
         "filename": "src/firmware_device/fd.c",
         "patchSetId": 23
@@ -368,6 +481,24 @@
       "writtenOn": "2025-01-13T19:52:37Z",
       "side": 1,
       "message": "For the PLDM requester commands implemented by FD, the command retries are part of the library or to be handled by application?",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20028201_1c0968ee",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-14T04:01:40Z",
+      "side": 1,
+      "message": "The library handles retries - the application needs to periodically call `pldm_fd_progress()` which will provide any retry message that needs to be sent (as `out_msg`/`out_len`).",
+      "parentUuid": "9a236c66_d25a58f3",
       "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
