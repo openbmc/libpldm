@@ -316,6 +316,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb41b296_3ab6d7ac",
+        "filename": "include/libpldm/firmware_fd.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-14T16:31:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f27b5869_ba29860c",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9ad5e43_a340ca93",
@@ -347,6 +365,24 @@
       "side": 1,
       "message": "I\u0027ve added functions to set FD_T1 and FD_T2.",
       "parentUuid": "b9ad5e43_a340ca93",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1788924e_e04ac872",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-14T16:31:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7013f146_646127c5",
       "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -433,6 +469,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c111726f_7f43c693",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-14T16:31:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0f5f71d6_a308ef80",
+      "range": {
+        "startLine": 142,
+        "startChar": 60,
+        "endLine": 142,
+        "endChar": 67
+      },
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85ade0f6_9f9904e7",
@@ -464,6 +524,24 @@
       "side": 1,
       "message": "An application\u0027s `update_component()` handler could compare ComponentStamp itself based on the `update` struct, and also look for Force Update set in `update_option_flags`.\nThen it can return `PLDM_CRC_COMP_COMPARISON_STAMP_IDENTICAL` etc.",
       "parentUuid": "85ade0f6_9f9904e7",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eef43d9_853b5663",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-14T16:31:06Z",
+      "side": 1,
+      "message": "I think it will be elegant that this is handled in the libpldm-fd library, since current ActiveStamp and PLDM request data is available with the libarary.",
+      "parentUuid": "98d93254_c95ce8da",
       "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
