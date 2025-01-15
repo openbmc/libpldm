@@ -548,6 +548,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8681933_2870546d",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-01-15T05:01:53Z",
+      "side": 1,
+      "message": "I think for flexibility it\u0027s better to let the application perform the version comparison. The version can also be compared with Component Version String, and the library won\u0027t know how to interpret it in that case.\n\nThe ActiveStamp is should be available in any caller (since it provided it with the `components()` callback). The request data is passed through in the `comp` argument as a `struct pldm_firmware_update_component`. (In the previous comment I mistakenly said the `update` struct for the request data).",
+      "parentUuid": "1eef43d9_853b5663",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a236c66_d25a58f3",
         "filename": "src/firmware_device/fd.c",
         "patchSetId": 23
