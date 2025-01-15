@@ -564,6 +564,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df3c79d6_6a849658",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-15T17:44:41Z",
+      "side": 1,
+      "message": "Yeah, the spec leaves with that flexibility to comparison using either stamp or string, so application doing that check is appropriate.",
+      "parentUuid": "e8681933_2870546d",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a236c66_d25a58f3",
@@ -595,6 +613,24 @@
       "side": 1,
       "message": "The library handles retries - the application needs to periodically call `pldm_fd_progress()` which will provide any retry message that needs to be sent (as `out_msg`/`out_len`).",
       "parentUuid": "9a236c66_d25a58f3",
+      "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d6205c4_d4cfa4c5",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-01-15T17:44:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "20028201_1c0968ee",
       "revId": "d09a129c6bb0e8631c3f4671d35a51d26b8a1a43",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
