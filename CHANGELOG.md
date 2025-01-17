@@ -97,7 +97,7 @@ Change categories:
 
 9. entity: Add new entity types from DSP0249 v1.3.0
 10. stateset: Add new state sets from DSP0249 v1.3.0
-
+11. firmware_update: Add APIs for parsing firmware packages 
 ### Changed
 
 1. dsp: bios_table: Null check for pldm_bios_table_iter_is_end()

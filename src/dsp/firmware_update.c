@@ -8,6 +8,18 @@
 #include <endian.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+// Identifier for a valid PLDM Firmware Update Package for Version 1.0.x as per
+// spec
+static const uint8_t HDR_IDENTIFIER_V1[PLDM_FWUP_UUID_LENGTH] = {
+	0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D, 0x49, 0x43,
+	0x98, 0x00, 0xA0, 0x2F, 0x05, 0x9A, 0xCA, 0x02
+};
+
+// PLDM Firmware Update Package Version.
+static const uint8_t PKG_HDR_V1 = 0x01;
 
 static_assert(PLDM_FIRMWARE_MAX_STRING <= UINT8_MAX, "too large");
 
@@ -2729,4 +2741,182 @@ int encode_cancel_update_resp(uint8_t instance_id,
 	pldm_msgbuf_insert(buf, resp_data->non_functioning_component_bitmap);
 
 	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_fwup_pkg_iter_init(const uint8_t *data, size_t length,
+			    struct pldm_fwup_pkg_iter *iter)
+{
+	if (!data || !iter) {
+		return -EINVAL;
+	}
+
+	/* Verify the final 4-byte checksum. */
+	uint32_t calc_crc = crc32(data, length - 4);
+	uint32_t pkg_crc = 0;
+	memcpy(&pkg_crc, data + length - 4, 4);
+	if (calc_crc != le32toh(pkg_crc)) {
+		return -EINVAL;
+	}
+
+	/* Must have at least enough data for the fixed package header. */
+	if (length < sizeof(struct pldm_package_header_information)) {
+		return -EINVAL;
+	}
+
+	struct variable_field pkg_version = { 0 };
+	struct pldm_package_header_information *hdr =
+		(struct pldm_package_header_information *)data;
+
+	int rc = decode_pldm_package_header_info(data, length, hdr,
+						 &pkg_version);
+	if (rc) {
+		return rc;
+	}
+
+	/* Validate header: check format version & UUID. */
+	if ((hdr->package_header_format_version != PKG_HDR_V1) ||
+	    (memcmp(hdr->uuid, HDR_IDENTIFIER_V1, PLDM_FWUP_UUID_LENGTH) !=
+	     0)) {
+		return -EINVAL;
+	}
+
+	hdr->package_header_size = (uint16_t)length;
+	iter->header = hdr;
+	iter->pkg_version = pkg_version;
+	iter->data = data;
+	iter->length = length;
+
+	size_t offset = sizeof(struct pldm_package_header_information) +
+			pkg_version.length;
+	if (offset > length) {
+		return -EINVAL;
+	}
+
+	/* Next 1 byte: device record count. */
+	if ((offset + 1) > length) {
+		return -EINVAL;
+	}
+	uint8_t dev_count = data[offset];
+	offset += 1;
+
+	/* Scan device records to compute total length of the device records. */
+	size_t dev_records_length = 0;
+	const uint8_t *ptr = data + offset;
+	for (uint8_t i = 0; i < dev_count; i++) {
+		if ((ptr + sizeof(struct pldm_firmware_device_id_record)) >
+		    (data + length)) {
+			return -EINVAL;
+		}
+		const struct pldm_firmware_device_id_record *rec =
+			(const struct pldm_firmware_device_id_record *)ptr;
+		uint16_t rec_len = le16toh(rec->record_length);
+		if ((ptr + rec_len) > (data + length)) {
+			return -EINVAL;
+		}
+		dev_records_length += rec_len;
+		ptr += rec_len;
+	}
+	if ((offset + dev_records_length) > length) {
+		return -EINVAL;
+	}
+
+	/* Initialize the device record iterator. */
+	iter->dev_iter.field.ptr = data + offset;
+	iter->dev_iter.field.length = dev_records_length;
+	iter->dev_iter.entries = dev_count;
+	iter->dev_iter.component_bitmap_bit_length =
+		le16toh(hdr->component_bitmap_bit_length);
+	iter->dev_iter.last_record_length = 0;
+
+	offset += dev_records_length;
+
+	/* Next 2 bytes: number of component image records. */
+	if ((offset + 2) > length) {
+		return -EINVAL;
+	}
+
+	uint16_t comp_count;
+	memcpy(&comp_count, data + offset, 2);
+	comp_count = le16toh(comp_count);
+	offset += 2;
+
+	/* The component records area ends 4 bytes before the package end (for checksum). */
+	size_t comp_records_length = length - offset - 4;
+	;
+
+	iter->comp_iter.field.ptr = data + offset;
+	iter->comp_iter.field.length = comp_records_length;
+	iter->comp_iter.entries = comp_count;
+	iter->comp_iter.last_record_length = 0;
+	offset += comp_records_length;
+
+	/* Now offset should point exactly at (length - 4). */
+	if ((offset + 4) != length) {
+		return -EINVAL;
+	}
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_fw_device_record_from_iter(
+	struct pldm_fw_device_record_iter *iter,
+	struct pldm_firmware_device_id_record *rec,
+	struct variable_field *applicable_components,
+	struct variable_field *comp_image_set_version_str,
+	struct variable_field *record_descriptors,
+	struct variable_field *fw_device_pkg_data)
+{
+	if (iter->field.length <
+	    sizeof(struct pldm_firmware_device_id_record)) {
+		return -EINVAL;
+	}
+
+	const struct pldm_firmware_device_id_record *raw =
+		(const struct pldm_firmware_device_id_record *)iter->field.ptr;
+	uint16_t rec_len = le16toh(raw->record_length);
+	if (rec_len > iter->field.length) {
+		return -EINVAL;
+	}
+	int rc = decode_firmware_device_id_record(
+		iter->field.ptr, rec_len, iter->component_bitmap_bit_length,
+		rec, applicable_components, comp_image_set_version_str,
+		record_descriptors, fw_device_pkg_data);
+	if (rc) {
+		return rc;
+	}
+
+	iter->last_record_length = rec_len;
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_comp_image_from_iter(
+	struct pldm_comp_image_iter *iter,
+	struct pldm_component_image_information *comp_info,
+	struct variable_field *comp_version_str)
+{
+	if (iter->field.length <
+	    sizeof(struct pldm_component_image_information)) {
+		return -EINVAL;
+	}
+	const struct pldm_component_image_information *raw =
+		(const struct pldm_component_image_information *)iter->field.ptr;
+	uint8_t ver_len = raw->comp_version_string_length;
+	size_t rec_len =
+		sizeof(struct pldm_component_image_information) + ver_len;
+	if (rec_len > iter->field.length) {
+		return -EINVAL;
+	}
+
+	size_t effective_len = rec_len;
+
+	int rc = decode_pldm_comp_image_info(iter->field.ptr, effective_len,
+					     comp_info, comp_version_str);
+	if (rc) {
+		return rc;
+	}
+	iter->last_record_length = (uint16_t)rec_len;
+	return 0;
 }
