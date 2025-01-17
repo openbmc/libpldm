@@ -28,6 +28,8 @@ Change categories:
 
 - PLDM FD responder accepts a PLDM control handle and will register its version.
 
+- firmware_update: Add Iterators for parsing firmware packages
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
