@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec5716cf_4b7f4003",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-17T11:42:44Z",
+      "side": 1,
+      "message": "My main goal here is to have any function which can parse a PLDM package and produces some data structure which can be queried. Processing a PLDM package should not involve 100s of lines of boilerplate code.\n\nEssentially what PackageParser (from pldm repo) does already.\n\nArguably such code should be part of libpldm since it will be needed in multiple places.\n\nI chose to make ```package_parser.cpp``` the starting point as i assume that code would already be very close to a solution.... Which was not the case.\n\nThe requirements for libpldm code seem to be a lot stricter that what that code does.\n\nIf there is a C API which does what i need, that is also fine for me.\n\nBut that API would need to allocate, to fill that data structure, and the data structure would need to be defined.",
+      "parentUuid": "7ca321f7_92bd4c92",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2788d134_f278dbc9",
         "filename": "CHANGELOG.md",
         "patchSetId": 6
