@@ -1035,6 +1035,28 @@ struct pldm_cancel_update_resp {
 	uint64_t non_functioning_component_bitmap;
 } __attribute__((packed));
 
+struct pldm_fw_device_record_iter {
+	struct variable_field field;
+	size_t entries;
+	uint16_t component_bitmap_bit_length;
+	uint16_t last_record_length;
+};
+
+struct pldm_comp_image_iter {
+	struct variable_field field;
+	size_t entries;
+	uint16_t last_record_length;
+};
+
+struct pldm_fwup_pkg_iter {
+	const uint8_t *data;
+	size_t length;
+	const struct pldm_package_header_information *header;
+	struct variable_field pkg_version;
+	struct pldm_fw_device_record_iter dev_iter;
+	struct pldm_comp_image_iter comp_iter;
+};
+
 /** @brief Decode the PLDM package header information
  *
  *  @param[in] data - pointer to package header information
@@ -2055,6 +2077,254 @@ int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
 int encode_cancel_update_resp(uint8_t instance_id,
 			      const struct pldm_cancel_update_resp *resp_data,
 			      struct pldm_msg *msg, size_t *payload_length);
+
+LIBPLDM_ITERATOR
+bool pldm_fw_device_record_iter_end(
+	const struct pldm_fw_device_record_iter *iter)
+{
+	return (iter->entries == 0);
+}
+
+LIBPLDM_ITERATOR
+bool pldm_fw_device_record_iter_next(struct pldm_fw_device_record_iter *iter)
+{
+	if (!iter->entries) {
+		return false;
+	}
+	iter->field.ptr += iter->last_record_length;
+	iter->field.length -= iter->last_record_length;
+	iter->entries--;
+	return true;
+}
+
+/**
+ * @brief Decode the next firmware device ID record from the iterator.
+ *
+ * Uses the existing decode_firmware_device_id_record API.
+ *
+ * @param[in,out] iter                  Pointer to the device record iterator.
+ * @param[out]    rec                   Filled with the decoded firmware device ID record.
+ * @param[out]    applicable_components Variable field for applicable components.
+ * @param[out]    comp_image_set_version_str Variable field for the component image set version string.
+ * @param[out]    record_descriptors    Variable field for descriptors.
+ * @param[out]    fw_device_pkg_data    Variable field for firmware device package data.
+ *
+ * @return 0 on success, negative error code on failure.
+ */
+int decode_pldm_fw_device_record_from_iter(
+	struct pldm_fw_device_record_iter *iter,
+	struct pldm_firmware_device_id_record *rec,
+	struct variable_field *applicable_components,
+	struct variable_field *comp_image_set_version_str,
+	struct variable_field *record_descriptors,
+	struct variable_field *fw_device_pkg_data);
+
+/**
+ * @brief Iterate over all firmware device ID records.
+ *
+ * @param iter         The @ref "struct pldm_fw_device_record_iter" lvalue that was initialized by the package parser.
+ * @param rec          The @ref "struct pldm_firmware_device_id_record" lvalue that will be filled with the decoded record header.
+ * @param applicable   The @ref "struct variable_field" lvalue that will be filled with the applicable components.
+ * @param comp_ver     The @ref "struct variable_field" lvalue that will be filled with the component image set version string.
+ * @param descriptors  The @ref "struct variable_field" lvalue that will be filled with the descriptor TLVs.
+ * @param fw_pkg       The @ref "struct variable_field" lvalue that will be filled with the firmware device package data.
+ * @param rc           An lvalue of type int into which the return code from decoding will be placed.
+ *
+ * Example usage:
+ * @code
+ * struct pldm_firmware_device_id_record rec;
+ * struct variable_field applicable, comp_ver, descriptors, fw_pkg;
+ * int rc;
+ * foreach_pldm_fw_device_record(dev_iter, rec, applicable, comp_ver, descriptors, fw_pkg, rc) {
+ *     // Process the decoded device record 'rec' and its variable fields.
+ * }
+ * if (rc != 0) {
+ *     // Handle any decoding error.
+ * }
+ * @endcode
+ */
+#define foreach_pldm_fw_device_record(iter, rec, applicable, comp_ver,         \
+				      descriptors, fw_pkg, rc)                 \
+	for ((rc) = 0; !pldm_fw_device_record_iter_end(&(iter)) &&             \
+		       !((rc) = decode_pldm_fw_device_record_from_iter(        \
+				 &(iter), &(rec), &(applicable), &(comp_ver),  \
+				 &(descriptors), &(fw_pkg)));                  \
+	     pldm_fw_device_record_iter_next(&(iter)))
+
+/**
+ * @brief Iterate over all descriptors in a variable‐length descriptor field.
+ *
+ * This macro iterates over each descriptor present in a variable‐length field
+ * (a @ref variable_field that contains one or more TLVs). For each descriptor, it
+ * decodes the descriptor type, length, and value using
+ * @ref decode_descriptor_type_length_value. If the decoded descriptor type equals
+ * PLDM_FWUP_VENDOR_DEFINED, the macro further calls
+ * @ref decode_vendor_defined_descriptor_value to extract the vendor‐specific title
+ * string and descriptor data.
+ *
+ * @param var_desc_field  A @ref variable_field containing the encoded descriptors.
+ * @param count           The number of descriptors expected.
+ * @param desc_type       An lvalue (of type uint16_t) that will receive the decoded descriptor type.
+ * @param desc_data       An lvalue (of type struct variable_field) that will receive the decoded
+ *                        descriptor value (data) from the TLV.
+ * @param vendor_title    An lvalue (of type struct variable_field) that will receive the decoded
+ *                        vendor-defined title string if the descriptor is vendor-defined.
+ *                        Otherwise, it will be left cleared.
+ * @param vendor_data     An lvalue (of type struct variable_field) that will receive the decoded
+ *                        vendor-defined descriptor data if the descriptor is vendor-defined.
+ *                        Otherwise, it will be left cleared.
+ * @param rc              An lvalue of type int into which the return code from the decoding
+ *                        operation will be placed.
+ *
+ * Example usage:
+ * @code
+ * // Assume 'descField' is a variable_field containing descriptor TLVs,
+ * // and 'descriptorCount' is the number of descriptors.
+ * int rc = 0;
+ * uint16_t descType = 0;
+ * struct variable_field descData;
+ * struct variable_field vendorTitle;
+ * struct variable_field vendorData;
+ *
+ * foreach_pldm_descriptor(descField, descriptorCount, descType, descData,
+ *                         vendorTitle, vendorData, rc)
+ * {
+ *     if (descType == PLDM_FWUP_VENDOR_DEFINED) {
+ *         // Process vendor-defined descriptor:
+ *         // 'vendorTitle' holds the title string and 'vendorData' holds the vendor data.
+ *     } else {
+ *         // Process a standard descriptor.
+ *     }
+ * }
+ *
+ * if (rc != 0) {
+ *     // Handle any error from decoding descriptors.
+ * }
+ * @endcode
+ */
+#define foreach_pldm_descriptor(var_desc_field, count, desc_type, desc_data,           \
+				vendor_title_str_type, vendor_title,                   \
+				vendor_data, rc)                                       \
+	for (uint8_t _i = 0;                                                           \
+	     _i < (count) && (var_desc_field).length > 0 && !(rc); _i++) {             \
+		/* Decode the TLV (type, length, value) */                             \
+		(rc) = decode_descriptor_type_length_value(                            \
+			(var_desc_field).ptr, (var_desc_field).length,                 \
+			&(desc_type), &(desc_data));                                   \
+		if (!(rc)) {                                                           \
+			if ((desc_type) == PLDM_FWUP_VENDOR_DEFINED) {                 \
+				/* Vendor-defined descriptor: decode title and data */ \
+				int rc2 =                                              \
+					decode_vendor_defined_descriptor_value(        \
+						(desc_data).ptr,                       \
+						(desc_data).length,                    \
+						&(vendor_title_str_type),              \
+						&(vendor_title),                       \
+						&(vendor_data));                       \
+				if (rc2) {                                             \
+					(rc) = rc2;                                    \
+				}                                                      \
+			} else {                                                       \
+				/* For normal descriptors, clear vendor fields */      \
+				(vendor_title_str_type) = 0;                           \
+				(vendor_title).ptr = NULL;                             \
+				(vendor_title).length = 0;                             \
+				(vendor_data).ptr = NULL;                              \
+				(vendor_data).length = 0;                              \
+			}                                                              \
+			/* Advance pointer by the full TLV size: */                    \
+			size_t _used =                                                 \
+				sizeof(((struct pldm_descriptor_tlv *)0)               \
+					       ->descriptor_type) +                    \
+				sizeof(((struct pldm_descriptor_tlv *)0)               \
+					       ->descriptor_length) +                  \
+				(desc_data).length;                                    \
+			(var_desc_field).ptr += _used;                                 \
+			(var_desc_field).length -= _used;                              \
+		}                                                                      \
+		if ((rc))                                                              \
+			break;                                                         \
+	}
+
+LIBPLDM_ITERATOR
+bool pldm_comp_image_iter_end(const struct pldm_comp_image_iter *iter)
+{
+	return (iter->entries == 0);
+}
+
+LIBPLDM_ITERATOR
+bool pldm_comp_image_iter_next(struct pldm_comp_image_iter *iter)
+{
+	if (!iter->entries) {
+		return false;
+	}
+
+	iter->field.ptr += iter->last_record_length;
+	iter->field.length -= iter->last_record_length;
+	iter->entries--;
+	return true;
+}
+
+/**
+ * @brief Decode the next component image record from the iterator.
+ *
+ * Uses the existing decode_pldm_comp_image_info API.
+ *
+ * @param[in,out] iter         Pointer to the component image iterator.
+ * @param[out]    comp_info    pointer to fixed part of component image
+ *                                     information.
+ * @param[out]    comp_version_str  Variable field for the component version string.
+ *
+ * @return 0 on success, negative error code on failure.
+ */
+int decode_pldm_comp_image_from_iter(
+	struct pldm_comp_image_iter *iter,
+	struct pldm_component_image_information *comp_info,
+	struct variable_field *comp_version_str);
+
+/**
+ * @brief Iterate over all component image records.
+ *
+ * @param iter      The component image iterator.
+ * @param comp      An lvalue of type @ref pldm_component_image_information to hold
+ *                  the decoded fixed header for the current record.
+ * @param comp_ver  An lvalue of type @ref variable_field to receive the component
+ *                  version string for the current record.
+ * @param rc        An lvalue of type int into which the return code is stored.
+ *
+ * Example usage:
+  * @code
+ * struct pldm_component_image_information comp;
+ * struct variable_field comp_ver;
+ * int rc;
+ * foreach_pldm_comp_image_record(comp_iter, comp, comp_ver, rc) {
+ *     // Process 'comp' and its version string (pointed by comp_ver.ptr)
+ * }
+ * if (rc) {
+ *     // Handle error during iteration.
+ * }
+ * @endcode
+ */
+#define foreach_pldm_comp_image_record(iter, comp, comp_ver, rc)               \
+	for ((rc) = 0; !pldm_comp_image_iter_end(&(iter)) &&                   \
+		       !((rc) = decode_pldm_comp_image_from_iter(              \
+				 &(iter), &(comp), &(comp_ver)));              \
+	     pldm_comp_image_iter_next(&(iter)))
+
+/**
+ * @brief Initialize the firmware update package iterator.
+ *
+ * This function parses the package header, device ID records,
+ * component image records and validates the checksum.
+ *
+ * @param[in]  data   Pointer to the complete package.
+ * @param[in]  length Length in bytes.
+ * @param[out] iter   Package iterator structure to be initialized.
+ *
+ * @return 0 on success, negative error code on failure.
+ */
+int pldm_fwup_pkg_iter_init(const uint8_t *data, size_t length,
+			    struct pldm_fwup_pkg_iter *iter);
 
 #ifdef __cplusplus
 }
