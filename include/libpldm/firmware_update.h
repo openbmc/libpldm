@@ -1035,6 +1035,77 @@ struct pldm_cancel_update_resp {
 	uint64_t non_functioning_component_bitmap;
 } __attribute__((packed));
 
+/** @struct pldm_fwup_device_descriptor
+ *
+ *  Structure representing the device descriptor from pldm firmware package.
+ */
+typedef struct pldm_fwup_device_descriptor
+{
+    uint16_t descriptor_type;
+    bool is_vendor_defined;
+    char* vendor_title;
+    uint8_t* descriptor_data;
+    size_t descriptor_length;
+} pldm_fwup_device_descriptor;
+
+/** @struct pldm_fwup_descriptors
+ *
+ *  Structure representing the array of pldm_fwup_device_descriptor from pldm
+ * firmware package.
+ */
+typedef struct pldm_fwup_descriptors
+{
+    pldm_fwup_device_descriptor* desc_array;
+    size_t desc_count;
+} pldm_fwup_descriptors;
+
+/** @struct pldm_fwup_device_id_record
+ *
+ *  Struct representing the firmware device ID record from pldm firmware
+ * package.
+ */
+typedef struct pldm_fwup_device_id_record
+{
+    uint32_t device_update_option_flags;
+    size_t* applicable_components;
+    size_t num_applicable_components;
+    char* comp_image_set_version;
+    pldm_fwup_descriptors descriptors;
+    uint8_t* fw_device_pkg_data;
+    size_t fw_device_pkg_data_len;
+} pldm_fwup_device_id_record;
+
+/** @struct pldm_fwup_component_image_info
+ *
+ *  Struct representing the component image info record from pldm firmware
+ * package.
+ */
+typedef struct pldm_fwup_component_image_info
+{
+    uint16_t comp_classification;
+    uint16_t comp_identifier;
+    uint32_t comp_comparison_stamp;
+    uint16_t comp_options;
+    uint16_t requested_comp_activation_method;
+    uint32_t comp_location_offset;
+    uint32_t comp_size;
+    char* comp_version;
+} pldm_fwup_component_image_info;
+
+/** @struct pldm_fwup_package_data
+ *
+ *  Struct representing the pldm firmware package data.
+ */
+typedef struct pldm_fwup_package_data
+{
+    struct pldm_package_header_information pkg_header;
+    char* package_version_str;
+    pldm_fwup_device_id_record* device_id_records;
+    size_t device_id_records_count;
+    pldm_fwup_component_image_info* comp_image_infos;
+    size_t comp_image_infos_count;
+} pldm_fwup_package_data;
+
 /** @brief Decode the PLDM package header information
  *
  *  @param[in] data - pointer to package header information
@@ -2055,6 +2126,25 @@ int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
 int encode_cancel_update_resp(uint8_t instance_id,
 			      const struct pldm_cancel_update_resp *resp_data,
 			      struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Parse the firmware package
+ *
+ * @param[in] data - Pointer to the package header
+ * @param[in] length - The size in bytes of the package header
+ * @param[out] parsed_fw_package_data - Pointer to parsed firmware package data
+ * pldm_fwup_package_data
+ *
+ * @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an
+ * internal memory allocation fails
+ */
+int pldm_fwup_parse_package(const uint8_t* data, size_t length,
+                            pldm_fwup_package_data** parsed_fw_package_data);
+
+/** @brief Free a pldm_fwup_package_data struct
+ *
+ * @param[in] pkg_data - Pointer returned by pldm_fwup_parse_package().
+ */
+void pldm_fwup_free_package_data(pldm_fwup_package_data* pkg_data);
 
 #ifdef __cplusplus
 }
