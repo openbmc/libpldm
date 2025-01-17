@@ -73,6 +73,8 @@ Change categories:
 12. PLDM FD responder accepts a PLDM control handle and will register its
     version.
 
+13. Add libpldm C APIs for parsing pldm firmware package.
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
