@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ca321f7_92bd4c92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000056
+      },
+      "writtenOn": "2025-01-17T10:50:06Z",
+      "side": 1,
+      "message": "Alexander/Andrew - Is there a plan to write C APIs as well as part of this patchset? Or do we think we are ok with the C++ ones? I think it would be better to have a C API as well.",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2788d134_f278dbc9",
         "filename": "CHANGELOG.md",
         "patchSetId": 6
