@@ -8,6 +8,17 @@
 #include <endian.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
+
+// Identifier for a valid PLDM Firmware Update Package for Version 1.0.x as per
+// spec
+static const uint8_t HDR_IDENTIFIER_V1[PLDM_FWUP_UUID_LENGTH] = {
+	0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D, 0x49, 0x43,
+	0x98, 0x00, 0xA0, 0x2F, 0x05, 0x9A, 0xCA, 0x02
+};
+
+// PLDM Firmware Update Package Version.
+static const uint8_t PKG_HDR_V1 = 0x01;
 
 static_assert(PLDM_FIRMWARE_MAX_STRING <= UINT8_MAX, "too large");
 
@@ -2729,4 +2740,444 @@ int encode_cancel_update_resp(uint8_t instance_id,
 	pldm_msgbuf_insert(buf, resp_data->non_functioning_component_bitmap);
 
 	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+}
+
+static void free_device_descriptor(pldm_fwup_device_descriptor *desc)
+{
+	if (!desc) {
+		return;
+	}
+	free(desc->vendor_title);
+	free(desc->descriptor_data);
+}
+
+static void free_device_id_record(pldm_fwup_device_id_record *rec)
+{
+	if (!rec) {
+		return;
+	}
+	free(rec->applicable_components);
+	free(rec->comp_image_set_version);
+
+	if (rec->descriptors.desc_array) {
+		for (size_t i = 0; i < rec->descriptors.desc_count; i++) {
+			free_device_descriptor(&rec->descriptors.desc_array[i]);
+		}
+		free(rec->descriptors.desc_array);
+	}
+	free(rec->fw_device_pkg_data);
+}
+
+static void free_component_image_info(pldm_fwup_component_image_info *info)
+{
+	if (!info) {
+		return;
+	}
+	free(info->comp_version);
+}
+
+LIBPLDM_ABI_TESTING
+void pldm_fwup_free_package_data(pldm_fwup_package_data *pkg_data)
+{
+	if (!pkg_data) {
+		return;
+	}
+
+	free(pkg_data->package_version_str);
+
+	if (pkg_data->device_id_records) {
+		for (size_t i = 0; i < pkg_data->device_id_records_count; i++) {
+			free_device_id_record(&pkg_data->device_id_records[i]);
+		}
+		free(pkg_data->device_id_records);
+	}
+
+	if (pkg_data->comp_image_infos) {
+		for (size_t i = 0; i < pkg_data->comp_image_infos_count; i++) {
+			free_component_image_info(
+				&pkg_data->comp_image_infos[i]);
+		}
+		free(pkg_data->comp_image_infos);
+	}
+
+	free(pkg_data);
+}
+
+static int parse_record_descriptors(const struct variable_field *desc_field,
+				    uint8_t descriptor_count,
+				    pldm_fwup_descriptors *out_descs)
+{
+	if (!out_descs) {
+		return -EINVAL;
+	}
+
+	if (descriptor_count == 0) {
+		out_descs->desc_array = NULL;
+		out_descs->desc_count = 0;
+		return 0;
+	}
+
+	out_descs->desc_array = (pldm_fwup_device_descriptor *)calloc(
+		descriptor_count, sizeof(pldm_fwup_device_descriptor));
+	if (!out_descs->desc_array) {
+		return -ENOMEM;
+	}
+	out_descs->desc_count = 0;
+
+	const uint8_t *ptr = desc_field->ptr;
+	size_t remaining = desc_field->length;
+
+	for (uint8_t i = 0; i < descriptor_count; i++) {
+		if (remaining < PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN) {
+			return -EINVAL;
+		}
+
+		uint16_t desc_type = 0;
+		struct variable_field desc_data = { 0 };
+		int rc = decode_descriptor_type_length_value(
+			ptr, remaining, &desc_type, &desc_data);
+		if (rc) {
+			return rc;
+		}
+
+		pldm_fwup_device_descriptor *desc =
+			&out_descs->desc_array[out_descs->desc_count];
+		desc->descriptor_type = desc_type;
+		desc->is_vendor_defined =
+			(desc_type == PLDM_FWUP_VENDOR_DEFINED);
+		desc->vendor_title = NULL;
+
+		if (!desc_data.length) {
+			return -EINVAL;
+		}
+
+		if (desc->is_vendor_defined) {
+			uint8_t title_str_type = 0;
+			struct variable_field title_str = { 0 };
+			struct variable_field vendor_data = { 0 };
+
+			rc = decode_vendor_defined_descriptor_value(
+				desc_data.ptr, desc_data.length,
+				&title_str_type, &title_str, &vendor_data);
+			if (rc) {
+				return rc;
+			}
+			desc->descriptor_length = vendor_data.length;
+			desc->descriptor_data =
+				(uint8_t *)calloc(desc->descriptor_length, 1);
+			if (!desc->descriptor_data) {
+				return -ENOMEM;
+			}
+			memcpy(desc->descriptor_data, vendor_data.ptr,
+			       desc->descriptor_length);
+			if (title_str.length > 0) {
+				desc->vendor_title =
+					(char *)calloc(title_str.length + 1, 1);
+				if (!desc->vendor_title) {
+					return -ENOMEM;
+				}
+				memcpy(desc->vendor_title, title_str.ptr,
+				       title_str.length);
+			}
+		} else {
+			{
+				desc->descriptor_length = desc_data.length;
+				desc->descriptor_data = (uint8_t *)calloc(
+					desc->descriptor_length, 1);
+				if (!desc->descriptor_data) {
+					return -ENOMEM;
+				}
+				memcpy(desc->descriptor_data, desc_data.ptr,
+				       desc->descriptor_length);
+			}
+		}
+
+		size_t used = sizeof(struct pldm_descriptor_tlv) - 1 +
+			      desc_data.length;
+		ptr += used;
+		remaining -= used;
+
+		out_descs->desc_count++;
+	}
+
+	return 0;
+}
+
+static int
+parse_device_id_records(const uint8_t *data, size_t length, size_t *offset,
+			const struct pldm_package_header_information *hdr,
+			pldm_fwup_package_data *pkg_data)
+{
+	if ((*offset + 1) > length) {
+		return -EINVAL;
+	}
+	uint8_t device_id_record_count = data[*offset];
+	(*offset) += 1;
+
+	pkg_data->device_id_records_count = device_id_record_count;
+	if (device_id_record_count > 0) {
+		pkg_data->device_id_records =
+			(pldm_fwup_device_id_record *)calloc(
+				device_id_record_count,
+				sizeof(pldm_fwup_device_id_record));
+		if (!pkg_data->device_id_records) {
+			return -ENOMEM;
+		}
+	}
+
+	for (uint8_t i = 0; i < device_id_record_count; i++) {
+		if ((*offset + sizeof(struct pldm_firmware_device_id_record)) >
+		    length) {
+			return -EINVAL;
+		}
+
+		struct pldm_firmware_device_id_record tmp_rec = { 0 };
+		struct variable_field applicable_components = { 0 };
+		struct variable_field comp_img_set_version_str = { 0 };
+		struct variable_field record_descs = { 0 };
+		struct variable_field fw_device_pkg_data = { 0 };
+
+		int rc = decode_firmware_device_id_record(
+			data + *offset, length - *offset,
+			hdr->component_bitmap_bit_length, &tmp_rec,
+			&applicable_components, &comp_img_set_version_str,
+			&record_descs, &fw_device_pkg_data);
+		if (rc) {
+			return rc;
+		}
+
+		pldm_fwup_device_id_record *rec =
+			&pkg_data->device_id_records[i];
+		rec->device_update_option_flags =
+			tmp_rec.device_update_option_flags.value;
+
+		if (applicable_components.length > 0) {
+			size_t bit_count = applicable_components.length * 8;
+			rec->applicable_components =
+				(size_t *)calloc(bit_count, sizeof(size_t));
+			if (!rec->applicable_components) {
+				return -ENOMEM;
+			}
+			rec->num_applicable_components = 0;
+
+			for (size_t byte_idx = 0;
+			     byte_idx < applicable_components.length;
+			     byte_idx++) {
+				uint8_t bits =
+					applicable_components.ptr[byte_idx];
+				for (size_t bit = 0; bit < 8; bit++) {
+					if (bits & (1 << bit)) {
+						rec->applicable_components
+							[rec->num_applicable_components] =
+							(byte_idx * 8) + bit;
+						rec->num_applicable_components++;
+					}
+				}
+			}
+		}
+
+		if (comp_img_set_version_str.length > 0) {
+			rec->comp_image_set_version = (char *)calloc(
+				comp_img_set_version_str.length + 1, 1);
+			if (!rec->comp_image_set_version) {
+				return -ENOMEM;
+			}
+			memcpy(rec->comp_image_set_version,
+			       comp_img_set_version_str.ptr,
+			       comp_img_set_version_str.length);
+		}
+
+		rc = parse_record_descriptors(&record_descs,
+					      tmp_rec.descriptor_count,
+					      &rec->descriptors);
+		if (rc) {
+			return rc;
+		}
+
+		if (fw_device_pkg_data.length > 0) {
+			rec->fw_device_pkg_data =
+				(uint8_t *)calloc(fw_device_pkg_data.length, 1);
+			if (!rec->fw_device_pkg_data) {
+				return -ENOMEM;
+			}
+			memcpy(rec->fw_device_pkg_data, fw_device_pkg_data.ptr,
+			       fw_device_pkg_data.length);
+			rec->fw_device_pkg_data_len = fw_device_pkg_data.length;
+		}
+
+		uint16_t record_length = le16toh(tmp_rec.record_length);
+		if ((*offset + record_length) > length) {
+			return -EINVAL;
+		}
+		(*offset) += record_length;
+	}
+
+	return 0;
+}
+
+static int parse_component_images(const uint8_t *data, size_t length,
+				  size_t *offset,
+				  pldm_fwup_package_data *pkg_data)
+{
+	if ((*offset + 2) > length) {
+		return -EINVAL;
+	}
+
+	uint16_t raw_comp_count;
+	memcpy(&raw_comp_count, data + *offset, sizeof(raw_comp_count));
+	uint16_t comp_count = le16toh(raw_comp_count);
+
+	(*offset) += 2;
+	pkg_data->comp_image_infos_count = comp_count;
+	if (comp_count > 0) {
+		pkg_data->comp_image_infos =
+			(pldm_fwup_component_image_info *)calloc(
+				comp_count,
+				sizeof(pldm_fwup_component_image_info));
+		if (!pkg_data->comp_image_infos) {
+			return -ENOMEM;
+		}
+	}
+
+	for (uint16_t i = 0; i < comp_count; i++) {
+		if ((*offset +
+		     sizeof(struct pldm_component_image_information)) >
+		    length) {
+			return -EINVAL;
+		}
+
+		struct pldm_component_image_information tmp_info = { 0 };
+		struct variable_field comp_version_field = { 0 };
+
+		int rc = decode_pldm_comp_image_info(data + *offset,
+						     length - *offset,
+						     &tmp_info,
+						     &comp_version_field);
+		if (rc) {
+			return rc;
+		}
+
+		pldm_fwup_component_image_info *cinfo =
+			&pkg_data->comp_image_infos[i];
+		cinfo->comp_classification = tmp_info.comp_classification;
+		cinfo->comp_identifier = tmp_info.comp_identifier;
+		cinfo->comp_comparison_stamp = tmp_info.comp_comparison_stamp;
+		cinfo->comp_options = tmp_info.comp_options.value;
+		cinfo->requested_comp_activation_method =
+			tmp_info.requested_comp_activation_method.value;
+		cinfo->comp_location_offset = tmp_info.comp_location_offset;
+		cinfo->comp_size = tmp_info.comp_size;
+
+		if (comp_version_field.length > 0) {
+			cinfo->comp_version = (char *)calloc(
+				comp_version_field.length + 1, 1);
+			if (!cinfo->comp_version) {
+				return -ENOMEM;
+			}
+			memcpy(cinfo->comp_version, comp_version_field.ptr,
+			       comp_version_field.length);
+		}
+
+		size_t comp_info_len =
+			sizeof(struct pldm_component_image_information) +
+			tmp_info.comp_version_string_length;
+		if ((*offset + comp_info_len) > length) {
+			return -EINVAL;
+		}
+		(*offset) += comp_info_len;
+	}
+
+	return 0;
+}
+
+static int validate_checksum(const uint8_t *data, size_t length, size_t *offset)
+{
+	if ((*offset + 4) > length) {
+		return -EINVAL;
+	}
+
+	uint32_t calc_checksum = crc32(data, *offset);
+
+	uint32_t raw_pkg_checksum;
+	memcpy(&raw_pkg_checksum, data + *offset, sizeof(raw_pkg_checksum));
+	uint32_t pkg_checksum = le32toh(raw_pkg_checksum);
+
+	if (calc_checksum != pkg_checksum) {
+		return -EINVAL;
+	}
+	(*offset) += 4;
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_fwup_parse_package(const uint8_t *data, size_t length,
+			    pldm_fwup_package_data **parsed_fw_package_data)
+{
+	if (!data || !parsed_fw_package_data) {
+		return -EINVAL;
+	}
+	*parsed_fw_package_data = NULL;
+
+	struct pldm_package_header_information hdr = { 0 };
+	struct variable_field pkg_version_field = { 0 };
+	int rc = decode_pldm_package_header_info(data, length, &hdr,
+						 &pkg_version_field);
+	if (rc) {
+		return rc;
+	}
+
+	if ((hdr.package_header_format_version != PKG_HDR_V1) ||
+	    (memcmp(hdr.uuid, HDR_IDENTIFIER_V1, PLDM_FWUP_UUID_LENGTH) != 0)) {
+		return -EINVAL;
+	}
+
+	pldm_fwup_package_data *pkg_data = (pldm_fwup_package_data *)calloc(
+		1, sizeof(pldm_fwup_package_data));
+	if (!pkg_data) {
+		return -ENOMEM;
+	}
+	pkg_data->pkg_header = hdr;
+
+	if (pkg_version_field.length > 0) {
+		pkg_data->package_version_str =
+			(char *)calloc(pkg_version_field.length + 1, 1);
+		if (!pkg_data->package_version_str) {
+			pldm_fwup_free_package_data(pkg_data);
+			return -ENOMEM;
+		}
+		memcpy(pkg_data->package_version_str, pkg_version_field.ptr,
+		       pkg_version_field.length);
+	}
+
+	size_t offset = sizeof(struct pldm_package_header_information) +
+			pkg_version_field.length;
+	if (offset > length) {
+		pldm_fwup_free_package_data(pkg_data);
+		return -EINVAL;
+	}
+
+	rc = parse_device_id_records(data, length, &offset, &hdr, pkg_data);
+	if (rc) {
+		pldm_fwup_free_package_data(pkg_data);
+		return rc;
+	}
+
+	rc = parse_component_images(data, length, &offset, pkg_data);
+	if (rc) {
+		pldm_fwup_free_package_data(pkg_data);
+		return rc;
+	}
+
+	rc = validate_checksum(data, length, &offset);
+	if (rc) {
+		pldm_fwup_free_package_data(pkg_data);
+		return rc;
+	}
+
+	if (offset != length) {
+		pldm_fwup_free_package_data(pkg_data);
+		return -EINVAL;
+	}
+	*parsed_fw_package_data = pkg_data;
+	return 0;
 }
