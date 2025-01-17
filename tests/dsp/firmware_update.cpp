@@ -4450,3 +4450,432 @@ TEST(CancelUpdate, errorPathDecodeResponse)
         &nonFunctioningComponentIndication, &nonFunctioningComponentBitmap);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
+
+#ifdef LIBPLDM_API_TESTING
+static void compareByteVector(const uint8_t* actual, size_t actualLen,
+                              const std::vector<uint8_t>& expected)
+{
+    ASSERT_EQ(actualLen, expected.size());
+    for (size_t i = 0; i < actualLen; i++)
+    {
+        EXPECT_EQ(actual[i], expected[i]);
+    }
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PackageParser, ValidPkgSingleDescriptorSingleComponent)
+{
+    std::vector<uint8_t> fwPkgHdr{
+        0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D, 0x49, 0x43, 0x98, 0x00, 0xA0, 0x2F,
+        0x05, 0x9A, 0xCA, 0x02, 0x01, 0x8B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x19, 0x0C, 0xE5, 0x07, 0x00, 0x08, 0x00, 0x01, 0x0E,
+        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
+        0x67, 0x31, 0x01, 0x2E, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x0E,
+        0x00, 0x00, 0x01, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74,
+        0x72, 0x69, 0x6E, 0x67, 0x32, 0x02, 0x00, 0x10, 0x00, 0x16, 0x20, 0x23,
+        0xC9, 0x3E, 0xC5, 0x41, 0x15, 0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6,
+        0x75, 0x01, 0x00, 0x0A, 0x00, 0x64, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x00,
+        0x00, 0x00, 0x00, 0x8B, 0x00, 0x00, 0x00, 0x1B, 0x00, 0x00, 0x00, 0x01,
+        0x0E, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69,
+        0x6E, 0x67, 0x33, 0x4F, 0x96, 0xAE, 0x56};
+
+    constexpr std::string_view pkgVersion{"VersionString1"};
+
+    struct pldm_fwup_pkg_iter pkgIter;
+    int rc =
+        pldm_fwup_pkg_iter_init(fwPkgHdr.data(), fwPkgHdr.size(), &pkgIter);
+    EXPECT_EQ(rc, 0);
+
+    ASSERT_NE(pkgIter.header, nullptr);
+    EXPECT_EQ(le16toh(pkgIter.header->package_header_size), fwPkgHdr.size());
+
+    ASSERT_NE(pkgIter.pkg_version.ptr, nullptr);
+    std::string verStr(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const char*>(pkgIter.pkg_version.ptr),
+        pkgIter.pkg_version.length);
+    EXPECT_EQ(verStr, pkgVersion);
+
+    EXPECT_EQ(pkgIter.dev_iter.entries, 1);
+
+    struct pldm_firmware_device_id_record devRec;
+    struct variable_field applicable;
+    struct variable_field compSetVer;
+    struct variable_field recDesc;
+    struct variable_field fwPkgData;
+    int rcDev = 0;
+    foreach_pldm_fw_device_record(pkgIter.dev_iter, devRec, applicable,
+                                  compSetVer, recDesc, fwPkgData, rcDev)
+    {
+        EXPECT_EQ(rcDev, 0);
+        ASSERT_NE(compSetVer.ptr, nullptr);
+        EXPECT_EQ(compSetVer.length, 14);
+        std::string compImageSetVersionStr(
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+            reinterpret_cast<const char*>(compSetVer.ptr), compSetVer.length);
+        EXPECT_EQ(compImageSetVersionStr, "VersionString2");
+
+        EXPECT_EQ(devRec.descriptor_count, 1);
+
+        int descRc = 0;
+        uint16_t descType = 0;
+        struct variable_field descData;
+        struct variable_field vendorTitle;
+        struct variable_field vendorData;
+        uint8_t descCount = devRec.descriptor_count;
+        uint8_t vendorTitleStrType = 0;
+        foreach_pldm_descriptor(recDesc, descCount, descType, descData,
+                                vendorTitleStrType, vendorTitle, vendorData,
+                                descRc)
+        {
+            EXPECT_EQ(descRc, 0);
+            EXPECT_EQ(descType, 2);
+            std::vector<uint8_t> expectedDescData{
+                0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41, 0x15,
+                0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6, 0x75};
+            compareByteVector(descData.ptr, descData.length, expectedDescData);
+            EXPECT_EQ(vendorTitle.ptr, nullptr);
+            EXPECT_EQ(vendorTitle.length, 0u);
+            EXPECT_EQ(vendorData.ptr, nullptr);
+            EXPECT_EQ(vendorData.length, 0u);
+        }
+    }
+
+    EXPECT_EQ(pkgIter.comp_iter.entries, 1);
+
+    struct pldm_component_image_information compInfo;
+    struct variable_field compVer;
+    int rcComp = 0;
+    foreach_pldm_comp_image_record(pkgIter.comp_iter, compInfo, compVer, rcComp)
+    {
+        EXPECT_EQ(rcComp, 0);
+        ASSERT_NE(compVer.ptr, nullptr);
+        std::string compVersionString(
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+            reinterpret_cast<const char*>(compVer.ptr), compVer.length);
+        EXPECT_EQ(compVersionString, "VersionString3");
+    }
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PackageParser, InvalidPkgHeaderInfoIncomplete)
+{
+    std::vector<uint8_t> fwPkgHdr{0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D,
+                                  0x49, 0x43, 0x98, 0x00, 0xA0, 0x2F,
+                                  0x05, 0x9A, 0xCA, 0x02};
+
+    struct pldm_fwup_pkg_iter pkgIter;
+    int rc =
+        pldm_fwup_pkg_iter_init(fwPkgHdr.data(), fwPkgHdr.size(), &pkgIter);
+    EXPECT_NE(rc, 0);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PackageParser, InvalidPkgNotSupportedHeaderFormat)
+{
+    std::vector<uint8_t> fwPkgHdr{
+        0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18, 0xA0, 0x30,
+        0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5B, 0x02, 0x8B, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x0C, 0xE5,
+        0x07, 0x00, 0x08, 0x00, 0x01, 0x0E, 'V',  'e',  'r',  's',
+        'i',  'o',  'n',  'S',  't',  'r',  'i',  'n',  'g',  '1'};
+
+    struct pldm_fwup_pkg_iter pkgIter;
+    int rc =
+        pldm_fwup_pkg_iter_init(fwPkgHdr.data(), fwPkgHdr.size(), &pkgIter);
+    EXPECT_NE(rc, 0);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PackageParser, ValidPkgMultipleDescriptorsMultipleComponents)
+{
+    std::vector<uint8_t> fwPkgHdr{
+        0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D, 0x49, 0x43, 0x98, 0x00, 0xA0, 0x2F,
+        0x05, 0x9A, 0xCA, 0x02, 0x01, 0x46, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x19, 0x0C, 0xE5, 0x07, 0x00, 0x08, 0x00, 0x01, 0x0E,
+        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
+        0x67, 0x31, 0x03, 0x45, 0x00, 0x03, 0x01, 0x00, 0x00, 0x00, 0x01, 0x0E,
+        0x00, 0x00, 0x03, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74,
+        0x72, 0x69, 0x6E, 0x67, 0x32, 0x02, 0x00, 0x10, 0x00, 0x12, 0x44, 0xD2,
+        0x64, 0x8D, 0x7D, 0x47, 0x18, 0xA0, 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D,
+        0x5B, 0x01, 0x00, 0x04, 0x00, 0x47, 0x16, 0x00, 0x00, 0xFF, 0xFF, 0x0B,
+        0x00, 0x01, 0x07, 0x4F, 0x70, 0x65, 0x6E, 0x42, 0x4D, 0x43, 0x12, 0x34,
+        0x2E, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x0E, 0x00, 0x00, 0x07,
+        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
+        0x67, 0x33, 0x02, 0x00, 0x10, 0x00, 0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D,
+        0x47, 0x18, 0xA0, 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5C, 0x2E, 0x00,
+        0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x0E, 0x00, 0x00, 0x01, 0x56, 0x65,
+        0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x34,
+        0x02, 0x00, 0x10, 0x00, 0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18,
+        0xA0, 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5D, 0x03, 0x00, 0x0A, 0x00,
+        0x64, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x46, 0x01,
+        0x00, 0x00, 0x1B, 0x00, 0x00, 0x00, 0x01, 0x0E, 0x56, 0x65, 0x72, 0x73,
+        0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x35, 0x0A, 0x00,
+        0xC8, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x01, 0x00, 0x61, 0x01,
+        0x00, 0x00, 0x1B, 0x00, 0x00, 0x00, 0x01, 0x0E, 0x56, 0x65, 0x72, 0x73,
+        0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x36, 0x10, 0x00,
+        0x2C, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x0C, 0x00, 0x7C, 0x01,
+        0x00, 0x00, 0x1B, 0x00, 0x00, 0x00, 0x01, 0x0E, 0x56, 0x65, 0x72, 0x73,
+        0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x37, 0xF1, 0x90,
+        0x9C, 0x71};
+
+    constexpr std::string_view expectedPkgVersion{"VersionString1"};
+
+    struct pldm_fwup_pkg_iter pkgIter;
+    int rc =
+        pldm_fwup_pkg_iter_init(fwPkgHdr.data(), fwPkgHdr.size(), &pkgIter);
+    EXPECT_EQ(rc, 0);
+
+    ASSERT_NE(pkgIter.header, nullptr);
+
+    EXPECT_EQ(le16toh(pkgIter.header->package_header_size), fwPkgHdr.size());
+
+    ASSERT_NE(pkgIter.pkg_version.ptr, nullptr);
+    std::string actualPkgVer(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const char*>(pkgIter.pkg_version.ptr),
+        pkgIter.pkg_version.length);
+    EXPECT_EQ(actualPkgVer, expectedPkgVersion);
+    EXPECT_EQ(pkgIter.dev_iter.entries, 3u);
+
+    struct pldm_firmware_device_id_record devRec;
+    struct variable_field applicable;
+    struct variable_field compSetVer;
+    struct variable_field descField;
+    struct variable_field fwPkgData;
+    int rcDev = 0;
+    uint8_t recordIndex = 0;
+    foreach_pldm_fw_device_record(pkgIter.dev_iter, devRec, applicable,
+                                  compSetVer, descField, fwPkgData, rcDev)
+    {
+        EXPECT_EQ(rcDev, 0);
+        ASSERT_NE(compSetVer.ptr, nullptr);
+        uint8_t descCount = devRec.descriptor_count;
+        if (recordIndex == 0)
+        {
+            EXPECT_EQ(compSetVer.length, 14);
+            std::string compImageSetVersionStr(
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+                reinterpret_cast<const char*>(compSetVer.ptr),
+                compSetVer.length);
+            EXPECT_EQ(compImageSetVersionStr, "VersionString2");
+            EXPECT_EQ(devRec.descriptor_count, 3);
+            std::cout << "1";
+            std::vector<std::bitset<8>> applicableComponentsBitfield{0x03};
+            EXPECT_EQ(applicable.length, applicableComponentsBitfield.size());
+            EXPECT_EQ(true, std::equal(applicable.ptr,
+                                       applicable.ptr + applicable.length,
+                                       applicableComponentsBitfield.begin(),
+                                       applicableComponentsBitfield.end()));
+
+            int descRc = 0;
+            uint16_t descType = 0;
+            struct variable_field descData;
+            struct variable_field vendorTitle;
+            struct variable_field vendorData;
+
+            uint8_t vendorTitleStrType = 0;
+            foreach_pldm_descriptor(descField, descCount, descType, descData,
+                                    vendorTitleStrType, vendorTitle, vendorData,
+                                    descRc)
+            {
+                EXPECT_EQ(descRc, 0);
+
+                if (descType == PLDM_FWUP_UUID)
+                {
+                    std::vector<uint8_t> expectedDescData = {
+                        0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18,
+                        0xA0, 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5B};
+                    std::cout << "2";
+                    compareByteVector(descData.ptr, descData.length,
+                                      expectedDescData);
+                }
+                else if (descType == PLDM_FWUP_IANA_ENTERPRISE_ID)
+                {
+                    std::vector<uint8_t> expectedDescData = {0x47, 0x16, 0x00,
+                                                             0x00};
+                    std::cout << "3\n";
+                    compareByteVector(descData.ptr, descData.length,
+                                      expectedDescData);
+                }
+                else if (descType == PLDM_FWUP_VENDOR_DEFINED)
+                {
+                    ASSERT_NE(vendorTitle.ptr, nullptr);
+                    EXPECT_EQ(std::string(reinterpret_cast<const char*>(
+                                                   vendorTitle.ptr),
+                                               vendorTitle.length),
+                              "OpenBMC");
+                    std::vector<uint8_t> expectedDescData = {0x12, 0x34};
+                    std::cout << "4\n";
+                    compareByteVector(vendorData.ptr, vendorData.length,
+                                      expectedDescData);
+                }
+            }
+        }
+        else if (recordIndex == 1)
+        {
+            EXPECT_EQ(compSetVer.length, 14);
+            std::string compImageSetVersionStr(
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+                reinterpret_cast<const char*>(compSetVer.ptr),
+                compSetVer.length);
+            EXPECT_EQ(compImageSetVersionStr, "VersionString3");
+            EXPECT_EQ(devRec.descriptor_count, 1);
+            std::vector<uint8_t> expectedAppComp = {0, 1, 2};
+            std::cout << "5\n";
+            std::vector<std::bitset<8>> applicableComponentsBitfield{0x7};
+            EXPECT_EQ(applicable.length, applicableComponentsBitfield.size());
+            EXPECT_EQ(true, std::equal(applicable.ptr,
+                                       applicable.ptr + applicable.length,
+                                       applicableComponentsBitfield.begin(),
+                                       applicableComponentsBitfield.end()));
+
+            int descRc = 0;
+            uint16_t descType = 0;
+            struct variable_field descData;
+            struct variable_field vendorTitle;
+            struct variable_field vendorData;
+
+            uint8_t vendorTitleStrType = 0;
+            foreach_pldm_descriptor(descField, descCount, descType, descData,
+                                    vendorTitleStrType, vendorTitle, vendorData,
+                                    descRc)
+            {
+                EXPECT_EQ(descRc, 0);
+
+                EXPECT_EQ(descType, PLDM_FWUP_UUID);
+
+                std::vector<uint8_t> expectedDescData = {
+                    0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18,
+                    0xA0, 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5C};
+                std::cout << "6\n";
+                compareByteVector(descData.ptr, descData.length,
+                                  expectedDescData);
+            }
+        }
+        else if (recordIndex == 2)
+        {
+            EXPECT_EQ(compSetVer.length, 14);
+            std::string compImageSetVersionStr(
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+                reinterpret_cast<const char*>(compSetVer.ptr),
+                compSetVer.length);
+            EXPECT_EQ(compImageSetVersionStr, "VersionString4");
+
+            EXPECT_EQ(devRec.descriptor_count, 1);
+            std::cout << "7\n";
+            for (size_t i = 0; i < applicable.length; i++)
+            {
+                std::cout << "R: " << static_cast<int>(applicable.ptr[i]);
+            }
+            std::vector<std::bitset<8>> applicableComponentsBitfield{0x1};
+            EXPECT_EQ(applicable.length, applicableComponentsBitfield.size());
+            EXPECT_EQ(true, std::equal(applicable.ptr,
+                                       applicable.ptr + applicable.length,
+                                       applicableComponentsBitfield.begin(),
+                                       applicableComponentsBitfield.end()));
+
+            int descRc = 0;
+            uint16_t descType = 0;
+            struct variable_field descData;
+            struct variable_field vendorTitle;
+            struct variable_field vendorData;
+
+            uint8_t vendorTitleStrType = 0;
+            foreach_pldm_descriptor(descField, descCount, descType, descData,
+                                    vendorTitleStrType, vendorTitle, vendorData,
+                                    descRc)
+            {
+                EXPECT_EQ(descRc, 0);
+
+                EXPECT_EQ(descType, PLDM_FWUP_UUID);
+
+                std::vector<uint8_t> expectedDescData = {
+                    0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18,
+                    0xA0, 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5D};
+                std::cout << "8\n";
+                compareByteVector(descData.ptr, descData.length,
+                                  expectedDescData);
+            }
+        }
+
+        recordIndex++;
+    }
+
+    EXPECT_EQ(pkgIter.comp_iter.entries, 3u);
+
+    {
+        struct pldm_component_image_information compInfo;
+        struct variable_field compVer;
+        int rcComp = 0;
+        uint8_t compIndex = 0;
+
+        foreach_pldm_comp_image_record(pkgIter.comp_iter, compInfo, compVer,
+                                       rcComp)
+        {
+            EXPECT_EQ(rcComp, 0);
+            if (compIndex == 0)
+            {
+                ASSERT_NE(compVer.ptr, nullptr);
+                EXPECT_EQ(compVer.length, 14);
+                std::string compVersionString(
+                    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+                    reinterpret_cast<const char*>(compVer.ptr), compVer.length);
+                EXPECT_EQ(compVersionString, "VersionString5");
+
+                EXPECT_EQ(compInfo.comp_classification, 10);
+                EXPECT_EQ(compInfo.comp_identifier, 100);
+                EXPECT_EQ(compInfo.comp_comparison_stamp, 0xFFFFFFFF);
+                EXPECT_EQ(static_cast<uint16_t>(compInfo.comp_options.value),
+                          0);
+                EXPECT_EQ(static_cast<uint16_t>(
+                              compInfo.requested_comp_activation_method.value),
+                          0);
+                EXPECT_EQ(compInfo.comp_location_offset, 326);
+                EXPECT_EQ(compInfo.comp_size, 27);
+            }
+            else if (compIndex == 1)
+            {
+                ASSERT_NE(compVer.ptr, nullptr);
+                std::string compVersionString(
+                    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+                    reinterpret_cast<const char*>(compVer.ptr), compVer.length);
+                EXPECT_EQ(compVersionString, "VersionString6");
+                EXPECT_EQ(compInfo.comp_classification, 10);
+                EXPECT_EQ(compInfo.comp_identifier, 200);
+                EXPECT_EQ(compInfo.comp_comparison_stamp, 0xFFFFFFFF);
+                EXPECT_EQ(static_cast<uint16_t>(compInfo.comp_options.value),
+                          0);
+                EXPECT_EQ(static_cast<uint16_t>(
+                              compInfo.requested_comp_activation_method.value),
+                          1);
+                EXPECT_EQ(compInfo.comp_location_offset, 353);
+                EXPECT_EQ(compInfo.comp_size, 27);
+            }
+            else if (compIndex == 2)
+            {
+                ASSERT_NE(compVer.ptr, nullptr);
+                std::string compVersionString(
+                    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+                    reinterpret_cast<const char*>(compVer.ptr), compVer.length);
+                EXPECT_EQ(compVersionString, "VersionString7");
+                EXPECT_EQ(compInfo.comp_classification, 16);
+                EXPECT_EQ(compInfo.comp_identifier, 300);
+                EXPECT_EQ(compInfo.comp_comparison_stamp, 0xFFFFFFFF);
+                EXPECT_EQ(static_cast<uint16_t>(compInfo.comp_options.value),
+                          1);
+                EXPECT_EQ(static_cast<uint16_t>(
+                              compInfo.requested_comp_activation_method.value),
+                          12);
+                EXPECT_EQ(compInfo.comp_location_offset, 380);
+                EXPECT_EQ(compInfo.comp_size, 27);
+            }
+            compIndex++;
+        }
+    }
+}
+#endif
