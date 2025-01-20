@@ -75,6 +75,9 @@ Change categories:
 
 13. Add libpldm C APIs for parsing pldm firmware package.
 
+14. Add libpldm APIs to check component presence and fetch the required component 
+    offset from the pldm firmware package.
+
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
