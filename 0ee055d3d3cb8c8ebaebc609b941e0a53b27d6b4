@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "562f0a70_73ad5f6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-20T17:57:29Z",
+      "side": 1,
+      "message": "Still needs some work but wanted to get some feedback on the iterator macros that needed to be defined.\n\nDid not do the full circle yet with the documentation comments as i wanted to get some feedback on how to iterate the nested structures.",
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

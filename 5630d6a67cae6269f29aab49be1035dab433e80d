@@ -93,6 +93,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edbcb83c_5b1f56ff",
+        "filename": "bindings/cxx/meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-20T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b35839c_5b5cfa11",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c8a3bb3_b6f57ecb",
@@ -168,6 +186,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6178ef98_aed2f707",
+        "filename": "meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-20T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fc8b138_e9018ee4",
+      "range": {
+        "startLine": 3,
+        "startChar": 8,
+        "endLine": 3,
+        "endChar": 14
+      },
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ea8cef1_bf2a5818",
@@ -181,6 +223,24 @@
       "writtenOn": "2025-01-13T01:10:33Z",
       "side": 1,
       "message": "Change this to:\n\n```\nif get_option(\u0027bindings\u0027).contains(\u0027cpp\u0027) or get_option(\u0027tests\u0027)\n```",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "306a1d0c_81e4dbd6",
+        "filename": "meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-20T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea8cef1_bf2a5818",
       "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -204,6 +264,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00cae98b_0b64db1e",
+        "filename": "meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-20T17:57:29Z",
+      "side": 1,
+      "message": "What\u0027s wrong with ```cpp_compiler```? Which name do you want?\n\nMoved the definition further down to limit the scope.",
+      "parentUuid": "c5314f10_4909f87e",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2b5118f_b7f860db",
         "filename": "meson.build",
         "patchSetId": 6
@@ -215,6 +293,24 @@
       "writtenOn": "2025-01-13T01:10:33Z",
       "side": 1,
       "message": "I prefer we negate the condition and `error()` here.",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b321135b_6ddede3d",
+        "filename": "meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-20T17:57:29Z",
+      "side": 1,
+      "message": "That would fail the CI. Output:\n```\nmeson.build:54:10: ERROR: Problem encountered: C++ compiler should support function attribute tainted_args: clang19.1.6\n```\n\nMade it a warning.",
+      "parentUuid": "f2b5118f_b7f860db",
       "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -236,6 +332,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "159731c9_fe674289",
+        "filename": "meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-20T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a85326f8_95c501d1",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d7cde20_1e81513c",
@@ -249,6 +363,30 @@
       "writtenOn": "2025-01-13T01:10:33Z",
       "side": 1,
       "message": "we should make a consistent choice between `c++`, `cpp` and `cxx`. Mixing all three all throughout is a bit messy.",
+      "range": {
+        "startLine": 91,
+        "startChar": 21,
+        "endLine": 91,
+        "endChar": 24
+      },
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8e2005a_d51b189c",
+        "filename": "meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-20T17:57:29Z",
+      "side": 1,
+      "message": "choosing cpp, it\u0027s easier to write.",
+      "parentUuid": "9d7cde20_1e81513c",
       "range": {
         "startLine": 91,
         "startChar": 21,
@@ -282,6 +420,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02b71e3d_6ab8149a",
+        "filename": "meson.options",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-20T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1ebf7a4_04848feb",
+      "range": {
+        "startLine": 6,
+        "startChar": 91,
+        "endLine": 6,
+        "endChar": 94
+      },
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b28cec5_58d1db47",
@@ -299,6 +461,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85a19116_4b7ec2b4",
+        "filename": "src/meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-20T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b28cec5_58d1db47",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8693bb2_37b43455",
@@ -312,6 +492,24 @@
       "writtenOn": "2025-01-13T01:10:33Z",
       "side": 1,
       "message": "Please drop this guard.",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90356a51_92010af8",
+        "filename": "tests/meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-01-20T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8693bb2_37b43455",
       "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
