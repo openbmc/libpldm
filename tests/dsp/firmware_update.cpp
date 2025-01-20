@@ -4849,3 +4849,223 @@ TEST_F(PackageParserMultipleDescSameType, DescriptorsMatch)
     }
 }
 #endif
+
+#ifdef LIBPLDM_API_TESTING
+static pldm_fwup_device_descriptor
+    makeDescriptor(uint16_t type, bool isVendor,
+                   const std::vector<uint8_t>& data,
+                   const std::string& vendorTitle = "")
+{
+    pldm_fwup_device_descriptor desc{};
+    desc.descriptor_type = type;
+    desc.is_vendor_defined = isVendor;
+    desc.descriptor_length = data.size();
+    if (!data.empty())
+    {
+        desc.descriptor_data = (uint8_t*)calloc(data.size(), 1);
+        std::memcpy(desc.descriptor_data, data.data(), data.size());
+    }
+    if (!vendorTitle.empty())
+    {
+        desc.vendor_title = (char*)calloc(vendorTitle.size() + 1, 1);
+        std::memcpy(desc.vendor_title, vendorTitle.c_str(), vendorTitle.size());
+    }
+    return desc;
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+static void freeDescriptor(pldm_fwup_device_descriptor& d)
+{
+    if (d.descriptor_data)
+    {
+        free(d.descriptor_data);
+        d.descriptor_data = nullptr;
+    }
+    if (d.vendor_title)
+    {
+        free(d.vendor_title);
+        d.vendor_title = nullptr;
+    }
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+class PackageParserFetchComponentInfoTest : public ::testing::Test
+{
+  protected:
+    PackageParserFetchComponentInfoTest()
+    {
+    }
+
+    pldm_fwup_package_data* pkgData = nullptr;
+
+    void SetUp() override
+    {
+        pkgData =
+            (pldm_fwup_package_data*)calloc(1, sizeof(pldm_fwup_package_data));
+
+        pkgData->device_id_records_count = 1;
+        pkgData->device_id_records = (pldm_fwup_device_id_record*)calloc(
+            pkgData->device_id_records_count,
+            sizeof(pldm_fwup_device_id_record));
+        auto& record = pkgData->device_id_records[0];
+        record.device_update_option_flags = 1;
+        record.num_applicable_components = 1;
+        record.applicable_components = (size_t*)calloc(1, sizeof(size_t));
+        record.applicable_components[0] = 0;
+        const char* versionStr = "VersionString";
+        record.comp_image_set_version =
+            (char*)calloc(strlen(versionStr) + 1, 1);
+        std::memcpy(record.comp_image_set_version, versionStr,
+                    strlen(versionStr));
+        record.descriptors.desc_count = 2;
+        record.descriptors.desc_array = (pldm_fwup_device_descriptor*)calloc(
+            record.descriptors.desc_count, sizeof(pldm_fwup_device_descriptor));
+        record.descriptors.desc_array[0] =
+            makeDescriptor(PLDM_FWUP_UUID, false,
+                           {0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18,
+                            0xA0, 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5D});
+        record.descriptors.desc_array[1] =
+            makeDescriptor(PLDM_FWUP_VENDOR_DEFINED, true,
+                           {0xDE, 0xAD, 0xBE, 0xEF}, "OpenBMC");
+
+        pkgData->comp_image_infos_count = 1;
+        pkgData->comp_image_infos = (pldm_fwup_component_image_info*)calloc(
+            pkgData->comp_image_infos_count,
+            sizeof(pldm_fwup_component_image_info));
+
+        auto& compInfo = pkgData->comp_image_infos[0];
+        compInfo.comp_classification = 10;
+        compInfo.comp_identifier = 100;
+        compInfo.comp_comparison_stamp = 0xFFFFFFFF;
+        compInfo.comp_options = 0;
+        compInfo.requested_comp_activation_method = 0;
+        compInfo.comp_location_offset = 0x1234;
+        compInfo.comp_size = 64;
+        const char* cver = "CompVersion";
+        compInfo.comp_version = (char*)calloc(strlen(cver) + 1, 1);
+        std::memcpy(compInfo.comp_version, cver, strlen(cver));
+    }
+
+    void TearDown() override
+    {
+        if (!pkgData)
+        {
+            return;
+        }
+        for (size_t i = 0; i < pkgData->device_id_records_count; i++)
+        {
+            auto& rec = pkgData->device_id_records[i];
+            for (size_t d = 0; d < rec.descriptors.desc_count; d++)
+            {
+                freeDescriptor(rec.descriptors.desc_array[d]);
+            }
+            free(rec.descriptors.desc_array);
+            free(rec.applicable_components);
+            free(rec.comp_image_set_version);
+        }
+        free(pkgData->device_id_records);
+
+        for (size_t c = 0; c < pkgData->comp_image_infos_count; c++)
+        {
+            free(pkgData->comp_image_infos[c].comp_version);
+        }
+        free(pkgData->comp_image_infos);
+
+        free(pkgData->package_version_str);
+        free(pkgData);
+        pkgData = nullptr;
+    }
+};
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST_F(PackageParserFetchComponentInfoTest, AllDescriptorsMatch)
+{
+    pldm_fwup_device_descriptor devDescArray[3] = {};
+
+    devDescArray[0] =
+        makeDescriptor(PLDM_FWUP_UUID, false,
+                       {0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18, 0xA0,
+                        0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5D});
+    devDescArray[1] = makeDescriptor(PLDM_FWUP_VENDOR_DEFINED, true,
+                                     {0xDE, 0xAD, 0xBE, 0xEF}, "OpenBMC");
+    devDescArray[2] = makeDescriptor(PLDM_FWUP_IANA_ENTERPRISE_ID, false,
+                                     {0x11, 0x22, 0x00, 0x00});
+
+    size_t* appComps = nullptr;
+    size_t numApp = 0;
+    int rc = pldm_fwup_is_component_in_package(pkgData, devDescArray, 3,
+                                               &appComps, &numApp);
+    EXPECT_EQ(rc, 0);
+    EXPECT_NE(appComps, nullptr);
+    EXPECT_EQ(numApp, 1u);
+    EXPECT_EQ(appComps[0], 0u);
+
+    for (auto& d : devDescArray)
+    {
+        freeDescriptor(d);
+    }
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST_F(PackageParserFetchComponentInfoTest, DeviceFewerDescriptorsNoMatch)
+{
+    pldm_fwup_device_descriptor devDesc =
+        makeDescriptor(PLDM_FWUP_UUID, false,
+                       {0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18, 0xA0,
+                        0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5D});
+
+    size_t* appComps = nullptr;
+    size_t numApp = 0;
+    int rc = pldm_fwup_is_component_in_package(pkgData, &devDesc, 1, &appComps,
+                                               &numApp);
+    EXPECT_EQ(rc, -ENOENT);
+
+    freeDescriptor(devDesc);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST_F(PackageParserFetchComponentInfoTest, PartialMismatch)
+{
+    pldm_fwup_device_descriptor devDescArray[2];
+    devDescArray[0] =
+        makeDescriptor(PLDM_FWUP_UUID, false,
+                       {0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18, 0xA0,
+                        0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5D});
+    devDescArray[1] = makeDescriptor(PLDM_FWUP_VENDOR_DEFINED, true,
+                                     {0xDE, 0xAD, 0xBE, 0x00}, "OpenBMC");
+    size_t* appComps = nullptr;
+    size_t numApp = 0;
+    int rc = pldm_fwup_is_component_in_package(pkgData, devDescArray, 2,
+                                               &appComps, &numApp);
+    EXPECT_EQ(rc, -ENOENT);
+
+    for (auto& d : devDescArray)
+    {
+        freeDescriptor(d);
+    }
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST_F(PackageParserFetchComponentInfoTest, GetComponentImageOffsetValid)
+{
+    uint32_t offsetVal = 0;
+    int rc = pldm_fwup_get_component_image_offset(pkgData, 0, &offsetVal);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(offsetVal, (uint32_t)0x1234);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST_F(PackageParserFetchComponentInfoTest, GetComponentImageOffsetOutOfRange)
+{
+    uint32_t offsetVal = 0;
+    int rc = pldm_fwup_get_component_image_offset(pkgData, 9, &offsetVal);
+    EXPECT_NE(rc, 0);
+}
+#endif
