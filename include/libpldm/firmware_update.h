@@ -2146,6 +2146,39 @@ int pldm_fwup_parse_package(const uint8_t* data, size_t length,
  */
 void pldm_fwup_free_package_data(pldm_fwup_package_data* pkg_data);
 
+/** @brief Determines if a device descriptor matches a device ID record
+ *        in the package. If found, returns its applicable components.
+ *
+ * @param[in]  pkg_data - Parsed package data from pldm_fwup_parse_package().
+ * @param[in]  dev_desc_array - A pointer to a pldm_fwup_device_descriptor
+ * representing the device descriptor to match.
+ * @param[in]  dev_desc_count - The count of device descriptors.
+ * @param[out] app_comps - Pointer to applicable component indices.
+ * @param[out] num_app_comps - The count of applicable_components in that
+ * record.
+ *
+ * @return 0 on success, -EINVAL if the arguments are invalid, -ENOENT if no
+ * matching component is found.
+ */
+int pldm_fwup_is_component_in_package(
+    const pldm_fwup_package_data* pkg_data,
+    const pldm_fwup_device_descriptor* dev_desc_array, size_t dev_desc_count,
+    size_t** app_comps, size_t* num_app_comps);
+
+/**
+ * @brief Retrieve the offset for a given applicable component
+ *        index in the package.
+ *
+ * @param[in]  pkg_data - Parsed package data from pldm_fwup_parse_package().
+ * @param[in]  component_idx - Applicable component index
+ * @param[out] offset - Pointer to applicable component offset.
+ *
+ * @return 0 on success, -EINVAL if the arguments are invalid.
+ */
+int pldm_fwup_get_component_image_offset(const pldm_fwup_package_data* pkg_data,
+                                         size_t component_idx,
+                                         uint32_t* offset);
+
 #ifdef __cplusplus
 }
 #endif

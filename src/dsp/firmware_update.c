@@ -3223,3 +3223,119 @@ int pldm_fwup_parse_package(const uint8_t* data, size_t length,
     *parsed_fw_package_data = pkg_data;
     return 0;
 }
+
+static bool descriptors_match(const pldm_fwup_device_descriptor* d1,
+                              const pldm_fwup_device_descriptor* d2)
+{
+    if (d1->descriptor_type != d2->descriptor_type)
+    {
+        return false;
+    }
+    if (d1->is_vendor_defined != d2->is_vendor_defined)
+    {
+        return false;
+    }
+    if (d1->descriptor_length != d2->descriptor_length)
+    {
+        return false;
+    }
+    if (d1->descriptor_length > 0)
+    {
+        if (memcmp(d1->descriptor_data, d2->descriptor_data,
+                   d1->descriptor_length) != 0)
+        {
+            return false;
+        }
+    }
+    if (d1->is_vendor_defined)
+    {
+        const bool have_title1 = (d1->vendor_title != NULL);
+        const bool have_title2 = (d2->vendor_title != NULL);
+        if (have_title1 != have_title2)
+        {
+            return false;
+        }
+        if (have_title1 && have_title2)
+        {
+            if (strcmp(d1->vendor_title, d2->vendor_title) != 0)
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+static bool pldm_fwup_package_desc_in_device(
+    const pldm_fwup_device_id_record* record,
+    const pldm_fwup_device_descriptor* dev_desc_array, size_t dev_desc_count)
+{
+    for (size_t i = 0; i < record->descriptors.desc_count; i++)
+    {
+        const pldm_fwup_device_descriptor* rec_desc =
+            &record->descriptors.desc_array[i];
+
+        bool found_in_device = false;
+        for (size_t j = 0; j < dev_desc_count; j++)
+        {
+            if (descriptors_match(rec_desc, &dev_desc_array[j]))
+            {
+                found_in_device = true;
+                break;
+            }
+        }
+        if (!found_in_device)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_fwup_is_component_in_package(
+    const pldm_fwup_package_data* pkg_data,
+    const pldm_fwup_device_descriptor* dev_desc_array, size_t dev_desc_count,
+    size_t** app_comps, size_t* num_app_comps)
+{
+    if (!pkg_data || !dev_desc_array || !app_comps || !num_app_comps)
+    {
+        return -EINVAL;
+    }
+
+    for (size_t rec_idx = 0; rec_idx < pkg_data->device_id_records_count;
+         rec_idx++)
+    {
+        const pldm_fwup_device_id_record* record =
+            &pkg_data->device_id_records[rec_idx];
+
+        if (pldm_fwup_package_desc_in_device(record, dev_desc_array,
+                                             dev_desc_count))
+        {
+            *app_comps = record->applicable_components;
+            *num_app_comps = record->num_applicable_components;
+            return 0;
+        }
+    }
+
+    return -ENOENT;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_fwup_get_component_image_offset(const pldm_fwup_package_data* pkg_data,
+                                         size_t component_idx, uint32_t* offset)
+{
+    if (!pkg_data || !offset)
+    {
+        return -EINVAL;
+    }
+    if (component_idx >= pkg_data->comp_image_infos_count)
+    {
+        return -EINVAL;
+    }
+    const pldm_fwup_component_image_info* cinfo =
+        &pkg_data->comp_image_infos[component_idx];
+    *offset = cinfo->comp_location_offset;
+    return 0;
+}
