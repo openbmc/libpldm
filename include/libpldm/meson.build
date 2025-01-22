@@ -61,5 +61,5 @@ sizes_h = configure_file(
     input: 'sizes.h.in',
     output: 'sizes.h',
     install: true,
-    install_dir: 'libpldm',
+    install_dir: get_option('includedir') / 'libpldm',
 )
