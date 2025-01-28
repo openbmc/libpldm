@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2e5cbe0_5cf6afe4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "No need to mention `libpldm` here - this is implicit (you\u0027re modifying its repo). Nor `C` really, as that\u0027s libpldm\u0027s implementation language. Perhaps:\n\n```\ndsp: firmware_update: Add APIs for parsing firmware packages\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 17,
+        "endLine": 7,
+        "endChar": 31
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c297908a_ebca0e6d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
@@ -14,6 +37,64 @@
       "writtenOn": "2025-01-27T05:31:14Z",
       "side": 1,
       "message": "can we add the SPEC table information which talks about this command?",
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a063667_e9c31a5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "Yes, please be specific about which specification, its version, and the section:\n\nhttps://github.com/openbmc/libpldm/blob/fa2e26593ec961593c44391e5182a6d57a3918a6/docs/checklists/changes.md#L193-L198",
+      "parentUuid": "c297908a_ebca0e6d",
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a296c6f6_46db971b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "So a highly desirable feature of libpldm\u0027s APIs is they don\u0027t allocate, as it makes the library much easier to exploit in free-standing contexts. It\u0027s already the case that many of the APIs don\u0027t allocate, but I don\u0027t think we\u0027d written that desire down anywhere. To that end I\u0027ve created the following change:\n\n[docs: checklists: Document heap allocation constraint](https://gerrit.openbmc.org/c/openbmc/libpldm/+/77509)\n\nCan you please rework your design to not require heap allocation?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 11
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4884dee_9f6a1dfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "Hi Rajeev, thanks for the patch. I have a number of comments inline.\n\nCan you please also collaborate with Alexander, who appears to be doing work with similar motivations:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/77095",
       "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -37,6 +118,173 @@
         "endLine": 77,
         "endChar": 1
       },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5902ce_29e64e4e",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "Yes, this should be under `### Added` above.",
+      "parentUuid": "03c8312b_c81f5fd4",
+      "range": {
+        "startLine": 76,
+        "startChar": 3,
+        "endLine": 77,
+        "endChar": 1
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10637f31_b174b432",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "It\u0027s getting tricky for me to correlate how people are naming structs with structures that are defined in the specification. I realise this hasn\u0027t been done in other cases, but for each struct you\u0027ve added here can you please add the spec version along with the table number and description to your doxygen comment to make it easier for me to match them up?\n\nI\u0027m concerned that we\u0027re going to introduce types that are essentially duplicates with minor variation on naming and content.",
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be243b13_423b208b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "Please prefix the name of static symbols as well, that way it\u0027s obvious in context and in backtraces where the symbols has come from. Apply this throughout.",
+      "range": {
+        "startLine": 15,
+        "startChar": 21,
+        "endLine": 15,
+        "endChar": 38
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99061c47_af3d6d25",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3103,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "Please exploit the APIs provided in `src/msgbuf.h` and apply throughout the patch (i.e. all the code beyond what I\u0027ve highlighted here).\n\nhttps://github.com/openbmc/libpldm/blob/fa2e26593ec961593c44391e5182a6d57a3918a6/docs/checklists/changes.md#L158-L160",
+      "range": {
+        "startLine": 3095,
+        "startChar": 1,
+        "endLine": 3103,
+        "endChar": 51
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1787ca97_c663c86a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "No need to cast void pointers in C.",
+      "range": {
+        "startLine": 3134,
+        "startChar": 36,
+        "endLine": 3134,
+        "endChar": 62
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78988985_be7c8cb2",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3135,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "Please see the comment about allocation on the commit message.",
+      "range": {
+        "startLine": 3134,
+        "startChar": 1,
+        "endLine": 3135,
+        "endChar": 37
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b1c6ba_265d04d1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "If we were to maintain dynamic allocations, you should instead use `goto` to consolidate cleanups.",
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ca6a67d_bffd7c26",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3171,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:20:02Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we validate the checksum before trusting the data?",
       "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
