@@ -16,6 +16,24 @@
       "message": "A single point looks better to me :-) An example can help clarify this better.\n\nencode_xxx_req\nencode_xxx_resp\ndecode_xxx_req\ndecode_xxx_resp\n\nsomething like this?",
       "revId": "b570e1e6d0fddac61cf39d575fc524a7aa36ed0d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc7b0d4e_a62ef47d",
+        "filename": "docs/checklists/changes.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T23:18:27Z",
+      "side": 1,
+      "message": "Can you push a separate patch to add examples?",
+      "parentUuid": "78e46c03_86b2a272",
+      "revId": "b570e1e6d0fddac61cf39d575fc524a7aa36ed0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
