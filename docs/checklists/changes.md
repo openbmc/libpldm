@@ -120,8 +120,9 @@
 ### API design
 
 - [ ] If I've added support for a new PLDM message type, then I've defined
-      both the encoder and decoder for that message. Note this applies for both
-      request _and_ response message types.
+      both the encoder and decoder for that message.
+
+  - This applies for both request _and_ response message types.
 
 - [ ] My new public message codec functions take a `struct` representing the
       message as a parameter
