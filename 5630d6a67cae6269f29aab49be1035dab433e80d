@@ -335,6 +335,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68a87d07_4fddf434",
+        "filename": "meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T00:23:58Z",
+      "side": 1,
+      "message": "Well, that\u0027s part of the point? We shouldn\u0027t be mixing gcc for the C files with clang++ for the C++ files?\n\nIf that mix is occurring, whatever is causing the mix should be fixed.",
+      "parentUuid": "b321135b_6ddede3d",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a85326f8_95c501d1",
         "filename": "meson.build",
         "patchSetId": 6
