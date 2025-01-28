@@ -124,6 +124,18 @@
 
   - This applies for both request _and_ response message types.
 
+- [ ] I've designed my APIs so their implementation does not require heap
+      allocation.
+
+  - Prefer [defining iterators][libpldm-iterator] over the message buffer to
+    extract sub-structures from variable-length messages. Iterators avoid both
+    requiring heap allocation in the implementation or splitting the API to
+    allow the caller to allocate appropriate space. Instead, the caller is
+    provided with an on-stack struct containing the extracted sub-structure.
+
+[libpldm-iterator]:
+  https://github.com/openbmc/libpldm/commit/3a2c6589c5660d2066b612bae28ca393a8aa1c2b
+
 - [ ] My new public message codec functions take a `struct` representing the
       message as a parameter
 
