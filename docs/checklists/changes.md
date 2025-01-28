@@ -117,7 +117,11 @@
 
 - [ ] All enum members must be prefixed with the type name
 
-### All other concerns
+### API design
+
+- [ ] If I've added support for a new PLDM message type, then I've defined
+      both the encoder and decoder for that message. Note this applies for both
+      request _and_ response message types.
 
 - [ ] My new public message codec functions take a `struct` representing the
       message as a parameter
@@ -155,9 +159,16 @@
     [C17 draft specification][c17-draft-standard], 6.7.2.1 Structure and union
     specifiers, paragraph 18.
 
-- [ ] If my work interacts with the PLDM wire format, then I have done so using
-      the `msgbuf` APIs found in `src/msgbuf.h` (and under `src/msgbuf/`) to
-      minimise concerns around spatial memory safety and endian-correctness.
+### ABI control
+
+- [ ] My new function symbols are marked with `LIBPLDM_ABI_TESTING` in the
+      implementation
+
+- [ ] I've guarded the test cases of functions marked `LIBPLDM_ABI_TESTING` so
+      that they are not compiled when the corresponding function symbols aren't
+      visible
+
+### Error handling and invariants
 
 - [ ] All my error conditions are handled by returning an error code to the
       caller.
@@ -176,19 +187,18 @@
   - [ ] The specific error values my function returns and their meaning in the
         context of the function call are listed in the API documentation.
 
-- [ ] If I've added support for a new PLDM message type, then I've implemented
-      both the encoder and decoder for that message. Note this applies for both
-      request _and_ response message types.
+### Implementation
 
-- [ ] My new function symbols are marked with `LIBPLDM_ABI_TESTING` in the
-      implementation
+- [ ] If my work interacts with the PLDM wire format, then I have done so using
+      the `msgbuf` APIs found in `src/msgbuf.h` (and under `src/msgbuf/`) to
+      minimise concerns around spatial memory safety and endian-correctness.
+
+### Testing
 
 - [ ] I've implemented test cases with reasonable branch coverage of each new
       function I've added
 
-- [ ] I've guarded the test cases of functions marked `LIBPLDM_ABI_TESTING` so
-      that they are not compiled when the corresponding function symbols aren't
-      visible
+### Maintenance
 
 - [ ] If I've added support for a new message type, then my commit message
       specifies all of:
