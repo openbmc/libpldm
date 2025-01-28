@@ -206,6 +206,17 @@
       the `msgbuf` APIs found in `src/msgbuf.h` (and under `src/msgbuf/`) to
       minimise concerns around spatial memory safety and endian-correctness.
 
+- [ ] I've used `goto` to clean up resources acquired prior to encountering an
+      error condition
+
+  - Replication of resource cleanup across multiple error paths is error-prone,
+    especially when multiple, dependent resources have been acquired.
+
+- [ ] I've released acquired resources in stack-order
+
+  - This should be the case regardless of whether we're in the happy path at the
+    end of object lifetime or an error path during construction.
+
 ### Testing
 
 - [ ] I've implemented test cases with reasonable branch coverage of each new
