@@ -16,6 +16,223 @@
       "message": "Still needs some work but wanted to get some feedback on the iterator macros that needed to be defined.\n\nDid not do the full circle yet with the documentation comments as i wanted to get some feedback on how to iterate the nested structures.",
       "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43fa27b9_07158c0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "Hi Alexander, thanks for iterating on this. I\u0027ve left further comments inline.",
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b0840f8_e5ef7eb3",
+        "filename": "include/libpldm/bindings/cpp/package_parser.hpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "I think I\u0027d rather we align the C++ header files with the C header files. In that case, `package_parser.hpp` is too specific. I would rather we name it `firmware_update.hpp` (\"PLDM package parsing is part of the firmware update spec\").",
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c75d67a_16c6ecb0",
+        "filename": "include/libpldm/bindings/cpp/package_parser.hpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "What are we achieving by defining these classes? Are they not already defined in the C headers? If not, why are we not defining them there?\n\nIf they\u0027re necessary here, then I expect we can switch to using `struct` and drop the `public:`",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 3
+      },
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f206ae4_5e8154a4",
+        "filename": "include/libpldm/bindings/cpp/package_parser.hpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "What\u0027s the benefit to defining this as a static method on a class vs defining a free function that calls into `validatePkgTotalSize()` as a static free function defined in the same translation unit?",
+      "range": {
+        "startLine": 69,
+        "startChar": 1,
+        "endLine": 73,
+        "endChar": 33
+      },
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd9fcff5_6f8db296",
+        "filename": "include/libpldm/bindings/cpp/utils.hpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "My understanding is this header isn\u0027t to be installed, that it\u0027s only for internal use. If that\u0027s the case it should go under `src/bindings/cpp`, not under `include/libpldm/bindings/cpp`.\n\nRelated, I can\u0027t see that we\u0027re installing the headers that we do want to install either?\n\nFinally, I\u0027m still mulling over whether I like the include statement `#include \u003clibpldm/bindings/cpp/...\u003e`. I may ask you to change that (FYI for now).",
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b371100_55d0d08f",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "Can you please split this (and the corresponding implementation) out to its own patch?",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 58
+      },
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca7fca2_138d52fa",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "Can you please split this (and its corresponding implementation) out to its own patch (also separate from the one I requested above), including the new `foreach` macro below on lines 1173-1178?",
+      "range": {
+        "startLine": 1114,
+        "startChar": 0,
+        "endLine": 1158,
+        "endChar": 1
+      },
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cbdfffb_4bae7cc9",
+        "filename": "meson.build",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "If we\u0027re implementing the binding APIs in `libpldm.so` then I think these should live under `src/bindings/cpp`.",
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b91473d_171a49d6",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "I think this is more obviously correct if you use `pldm_msgbuf_span_remaining()`.",
+      "range": {
+        "startLine": 506,
+        "startChar": 1,
+        "endLine": 507,
+        "endChar": 42
+      },
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d219ae1_da9e87d8",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "Please no. I prefer you use `pldm_msgbuf_span_remaining()` before calling `pldm_msgbuf_destroy()`.",
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d374d875_9aa2545f",
+        "filename": "tests/bindings/cpp/package_parser_test.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "Similar to the header naming, I think this should be `firmware_update.cpp` for now.",
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

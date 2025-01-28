@@ -165,6 +165,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51ad97a5_990cb878",
+        "filename": "include/libpldm/pldm_types.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T01:01:04Z",
+      "side": 1,
+      "message": "This still needs to be addressed.",
+      "parentUuid": "b78a43e4_a392af6d",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fc8b138_e9018ee4",
         "filename": "meson.build",
         "patchSetId": 6
