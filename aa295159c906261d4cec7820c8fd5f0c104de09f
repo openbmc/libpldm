@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf121b3_38665a61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:29:21Z",
+      "side": 1,
+      "message": "See comment about commit subject on previous patch.",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "aa295159c906261d4cec7820c8fd5f0c104de09f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "953ef4bd_02c5fcf4",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:29:21Z",
+      "side": 1,
+      "message": "This needs to go under `### Added` above, not here in `### Changed`",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 52
+      },
+      "revId": "aa295159c906261d4cec7820c8fd5f0c104de09f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d7b56b4_4d897068",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2161,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:29:21Z",
+      "side": 1,
+      "message": "On the prior patch I requested `pldm_fwup_parse_package()` use an iterator-style implementation. I think that will remove the need for this API, as you can implement the conditional logic inside the loop body.",
+      "range": {
+        "startLine": 2158,
+        "startChar": 0,
+        "endLine": 2161,
+        "endChar": 67
+      },
+      "revId": "aa295159c906261d4cec7820c8fd5f0c104de09f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "140c170d_56532931",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3282,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-28T05:29:21Z",
+      "side": 1,
+      "message": "I\u0027d like more motivation for this one. The caller knows the struct definition right? Can they not index into the array in the same manner themselves?",
+      "range": {
+        "startLine": 3268,
+        "startChar": 0,
+        "endLine": 3282,
+        "endChar": 1
+      },
+      "revId": "aa295159c906261d4cec7820c8fd5f0c104de09f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
