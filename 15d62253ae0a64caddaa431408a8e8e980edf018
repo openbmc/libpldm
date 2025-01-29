@@ -82,6 +82,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a82cbbc6_acc7cff8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000056
+      },
+      "writtenOn": "2025-01-29T09:13:16Z",
+      "side": 1,
+      "message": "+1 to this.\n\nI think we have two options (Andrew also pointed out the same):\n1) Let caller do all the allocation (needs some assumptions about sizes or hints from the library).\n\n2) (I would prefer this) - define structures/APIs for fixed vs variable parts and have the caller invoke APIs as relevant. For example - for the header you can define a structure until the PackageVersionStringLength and have a C flexible array member for the string itself. The caller can then invoke a different API, passing in a buffer large enough to hold the string (as the caller knows the string length from the prior API call to parse the header), to retrieve the string.\nFor variable sized entries, you could do something similar and have iterators (also suggested by Andrew elsewhere in this patchset iirc) to get the next item of something (similar to how readdir() etc. work).\n\nI would also suggest looking at https://kernel.googlesource.com/pub/scm/linux/kernel/git/mark/linux/+/refs/tags/arm64-ftrace-minimal-regs-20221103/lib/pldmfw for reference. This does do iterators but doesn\u0027t expose them as APIs. I also like this in terms of the structuring of the main parsing function two four parts - parse_header, parse_records, parse_components, verify_crc. These can be the public APIs, as iterator APIs though (get_next_component, etc.).\n\n@andrew@codeconstruct.com.au does the above make sense to you? Would like to hear your thougts before we rework.",
+      "parentUuid": "a296c6f6_46db971b",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 11
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b4884dee_9f6a1dfa",
