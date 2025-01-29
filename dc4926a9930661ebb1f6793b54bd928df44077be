@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f17279d_c2501b9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e015a3a5_ed0ba597",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 37
+      },
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86b9ae5b_65ddf301",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-10-22T01:10:50Z",
       "side": 1,
       "message": "Please remove this blank line.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef3483f5_744bae9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86b9ae5b_65ddf301",
       "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25a28740_f4bb2c36",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "911ca9b5_13bf75b7",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f626b67_01f00563",
@@ -92,6 +152,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "758c00f9_c8bbb9d9",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "`rc` is an int64 value and record handle is uint32. Do we still need overflow check here?",
+      "parentUuid": "6f626b67_01f00563",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f32bf56_5e80c958",
@@ -105,6 +183,24 @@
       "writtenOn": "2024-10-22T01:10:50Z",
       "side": 1,
       "message": "Hmm, is this an error case though?\n\nI think it would be a good idea to add a comment here explaining the behaviour.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2ed5a81_0ebc2e46",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f32bf56_5e80c958",
       "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -128,6 +224,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db6acf72_1e71b76c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "`rc` is an int64 value and record handle is uint32. Do we still need overflow check here?",
+      "parentUuid": "41ddaefe_641a868a",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90268e4e_1bc2b3b2",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 21
@@ -139,6 +253,24 @@
       "writtenOn": "2024-10-22T01:10:50Z",
       "side": 1,
       "message": "This seems like a strange condition. Can we please have some documentation?",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2943515_3cb59797",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90268e4e_1bc2b3b2",
       "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -162,6 +294,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c002f24_204c7ce0",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "`rc` is an int64 value and record handle is uint32. Do we still need overflow check here?",
+      "parentUuid": "35506d44_b6338bf5",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e61ac94a_149691b8",
         "filename": "tests/dsp/pdr.cpp",
         "patchSetId": 21
@@ -173,6 +323,24 @@
       "writtenOn": "2024-10-22T01:10:50Z",
       "side": 1,
       "message": "This seems odd. Why are we doing this? This should be the responsibility of the caller.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3242bcc6_39c87d76",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "We added this function to simplify the testcase. This is used at multiple places in the testcase for example:\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/73465/22/tests/dsp/pdr.cpp:1581",
+      "parentUuid": "e61ac94a_149691b8",
       "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -196,6 +364,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "874b1392_91612362",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "We added this function to simplify the testcase. This is used at multiple places in the testcase",
+      "parentUuid": "f15756a3_fa6babc3",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a26b3bad_775df4ff",
         "filename": "tests/dsp/pdr.cpp",
         "patchSetId": 21
@@ -207,6 +393,24 @@
       "writtenOn": "2024-10-22T01:10:50Z",
       "side": 1,
       "message": "So it occurs to me now that this might be better as `operator\u003d\u003d()` (possibly implemented by `operator\u003c\u003d\u003e()`?) on the associated struct?",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d665bc4_0be6c984",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a26b3bad_775df4ff",
       "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -224,6 +428,24 @@
       "writtenOn": "2024-10-22T01:10:50Z",
       "side": 1,
       "message": "As above.",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "310be6c9_685ffb2a",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c97b1f2_36b25b75",
       "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -297,6 +519,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2366adcf_977b0e27",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "315b3e5f_94a73a0f",
+      "range": {
+        "startLine": 1562,
+        "startChar": 8,
+        "endLine": 1565,
+        "endChar": 49
+      },
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4388037_f1400d1d",
@@ -310,6 +556,24 @@
       "writtenOn": "2024-10-22T01:10:50Z",
       "side": 1,
       "message": "Does the tree need to be so complex? Can we simplify it and still demonstrate the required properties?",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "912ca003_36a761c4",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1619,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-01-29T08:34:55Z",
+      "side": 1,
+      "message": "I have created this testcase based on existing testcase at\nhttps://github.com/openbmc/libpldm/blob/main/tests/dsp/pdr.cpp#L1095.\n\nExisting testcase `TEST(EntityAssociationPDR, testPDR)` creates entity association PDR where the record handle are assigned by library. The new testcase record handle is passed by the caller.\nWe can simplify the tree but to have all the cases covered as that of `testPDR testcase` I used the same tree.",
+      "parentUuid": "b4388037_f1400d1d",
       "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
