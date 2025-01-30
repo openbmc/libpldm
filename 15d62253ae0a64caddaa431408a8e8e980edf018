@@ -106,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c0be40_dbd82295",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-01-30T03:17:08Z",
+      "side": 1,
+      "message": "\u003e and have a C flexible array member for the string itself.\n\nPlease be cautious about recommending flexible array members, they cause API trouble:\n\nhttps://github.com/openbmc/libpldm/blob/059684c86558a638c19a64d4f2e4c5bd9a6e87f1/docs/checklists/changes.md#L154-L173\n\n\u003e These can be the public APIs, as iterator APIs though (get_next_component, etc.).\n\nI prefer we follow the pattern I\u0027ve set with the `foreach_*` macros as they hide a lot of the pain and provide consistency.\n\nNote that the iterators I\u0027ve defined so far use a `void *` pointing back into the message buffer for string data. The caller needs to copy the string data out and parse it themselves, with their own choice of library: the encoding and alignment are defined by other struct members and I don\u0027t want libpldm to prescribe string parsing implementations for its users.",
+      "parentUuid": "a82cbbc6_acc7cff8",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 11
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b4884dee_9f6a1dfa",
