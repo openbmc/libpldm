@@ -32,18 +32,25 @@ The library also provides API to pack and unpack PLDM headers.
 
 ## To Build
 
-Need `meson` and `ninja`. Alternatively, source an OpenBMC ARM/x86 SDK.
+`libpldm` is configured and built using `meson`. Python's `pip` or
+[`pipx`][pipx] can be used to install a recent version on your machine:
+
+[pipx]: https://pipx.pypa.io/latest/
 
 ```sh
-meson setup builddir && ninja -C builddir
+pipx install meson
+```
+
+Once `meson` is installed:
+
+```sh
+meson setup build && meson compile -C build
 ```
 
 ## To run unit tests
 
-The simplest way of running the tests is as described by the meson man page:
-
 ```sh
-meson setup builddir && meson test -C builddir
+meson test -C build
 ```
 
 ## Working with `libpldm`
