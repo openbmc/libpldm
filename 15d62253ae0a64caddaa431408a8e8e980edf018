@@ -259,6 +259,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5160a094_87ff70f6",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-07T11:59:25Z",
+      "side": 1,
+      "message": "Removed those struct as those were not needed with iterators.",
+      "parentUuid": "10637f31_b174b432",
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be243b13_423b208b",
@@ -272,6 +290,30 @@
       "writtenOn": "2025-01-28T05:20:02Z",
       "side": 1,
       "message": "Please prefix the name of static symbols as well, that way it\u0027s obvious in context and in backtraces where the symbols has come from. Apply this throughout.",
+      "range": {
+        "startLine": 15,
+        "startChar": 21,
+        "endLine": 15,
+        "endChar": 38
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "293728f0_52e006ed",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-07T11:59:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "be243b13_423b208b",
       "range": {
         "startLine": 15,
         "startChar": 21,
@@ -351,6 +393,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c60a6df_b28beaca",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3135,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-07T11:59:25Z",
+      "side": 1,
+      "message": "Switched to iterators, so memory is not allocated anymore",
+      "parentUuid": "78988985_be7c8cb2",
+      "range": {
+        "startLine": 3134,
+        "startChar": 1,
+        "endLine": 3135,
+        "endChar": 37
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1b1c6ba_265d04d1",
@@ -368,6 +434,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "505d28e8_81b437f2",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-07T11:59:25Z",
+      "side": 1,
+      "message": "Using iterators now, so there\u0027s no dynamic memory allocation in the code.",
+      "parentUuid": "c1b1c6ba_265d04d1",
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ca6a67d_bffd7c26",
@@ -381,6 +465,24 @@
       "writtenOn": "2025-01-28T05:20:02Z",
       "side": 1,
       "message": "Shouldn\u0027t we validate the checksum before trusting the data?",
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aee80949_115b5e68",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3171,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-07T11:59:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8ca6a67d_bffd7c26",
       "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
