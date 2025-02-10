@@ -178,6 +178,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b010dab_b2321513",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-10T07:19:34Z",
+      "side": 1,
+      "message": "Modified the code for package parsing to use iterator style implementation. Please find some time to re-review it @andrew@codeconstruct.com.au @deepak.kodihalli.83@gmail.com @rushtotom@gmail.com",
+      "parentUuid": "351e4b5e_935485c7",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 11
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b4884dee_9f6a1dfa",
@@ -371,6 +395,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f91031a_f90211b0",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3103,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-10T07:19:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "99061c47_af3d6d25",
+      "range": {
+        "startLine": 3095,
+        "startChar": 1,
+        "endLine": 3103,
+        "endChar": 51
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1787ca97_c663c86a",
@@ -384,6 +432,30 @@
       "writtenOn": "2025-01-28T05:20:02Z",
       "side": 1,
       "message": "No need to cast void pointers in C.",
+      "range": {
+        "startLine": 3134,
+        "startChar": 36,
+        "endLine": 3134,
+        "endChar": 62
+      },
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fb8da44_8315d8fe",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-10T07:19:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1787ca97_c663c86a",
       "range": {
         "startLine": 3134,
         "startChar": 36,
