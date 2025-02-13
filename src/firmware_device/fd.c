@@ -1398,6 +1398,7 @@ int pldm_fd_progress(struct pldm_fd *fd, void *out_msg, size_t *out_len,
 	size_t req_payload_len;
 	struct pldm_msg *req = out_msg;
 	int rc = -EINVAL;
+	bool ua_timeout_check = false;
 
 	if (fd == NULL || out_msg == NULL || out_len == NULL) {
 		return -EINVAL;
@@ -1410,6 +1411,7 @@ int pldm_fd_progress(struct pldm_fd *fd, void *out_msg, size_t *out_len,
 	req_payload_len = *out_len - sizeof(struct pldm_msg_hdr);
 	*out_len = 0;
 
+	// Handle FD-driven states
 	switch (fd->state) {
 	case PLDM_FD_STATE_DOWNLOAD:
 		rc = pldm_fd_progress_download(fd, req, &req_payload_len);
@@ -1420,18 +1422,35 @@ int pldm_fd_progress(struct pldm_fd *fd, void *out_msg, size_t *out_len,
 	case PLDM_FD_STATE_APPLY:
 		rc = pldm_fd_progress_apply(fd, req, &req_payload_len);
 		break;
-	case PLDM_FD_STATE_IDLE:
-		req_payload_len = 0;
-		break;
 	default:
 		req_payload_len = 0;
-		// Other Update Mode states have a timeout
+		break;
+	}
+
+	// Cancel update if expected UA message isn't received within timeout
+	switch (fd->state) {
+	case PLDM_FD_STATE_DOWNLOAD:
+	case PLDM_FD_STATE_VERIFY:
+	case PLDM_FD_STATE_APPLY:
+		// FD-driven states will time out if a response isn't received
+		ua_timeout_check = (fd->req.state == PLDM_FD_REQ_SENT);
+		break;
+	case PLDM_FD_STATE_IDLE:
+		ua_timeout_check = false;
+		break;
+	default:
+		// Other Update Mode states have a timeout for the UA to
+		// send a request
+		ua_timeout_check = true;
+	}
+
+	if (ua_timeout_check) {
 		if ((pldm_fd_now(fd) - fd->update_timestamp_fd_t1) >
 		    fd->fd_t1_timeout) {
 			pldm_fd_maybe_cancel_component(fd);
 			pldm_fd_idle_timeout(fd);
+			req_payload_len = 0;
 		}
-		break;
 	}
 
 	if (rc == 0 && fd->ua_address_set && req_payload_len > 0) {
