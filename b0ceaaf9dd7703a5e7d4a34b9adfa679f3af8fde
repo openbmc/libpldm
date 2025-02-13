@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a80035b_78fb4fec",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-02-13T04:29:16Z",
+      "side": 1,
+      "message": "this should be added in the #ADDED section of the Unreleased version",
+      "revId": "b0ceaaf9dd7703a5e7d4a34b9adfa679f3af8fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cad24c4_ec1bb953",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-02-13T04:29:16Z",
+      "side": 1,
+      "message": "can we add it in numerological order itself?",
+      "revId": "b0ceaaf9dd7703a5e7d4a34b9adfa679f3af8fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
