@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "295bd333_ca47fac2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Hi Rajeev, thanks for reworking the change to avoid allocations. I have some further comments.",
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "158eefa6_2422bbd4",
@@ -31,6 +48,41 @@
       "writtenOn": "2025-02-14T15:33:50Z",
       "side": 1,
       "message": "nit: Can we use `uint8_t` or anything else which is not platform dependent?",
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aadefd9_519813d0",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "@arunpapannagari23@gmail.com Can you unpack your concern? I didn\u0027t see this as an issue in other cases, but I\u0027m interested in your perspective.",
+      "parentUuid": "158eefa6_2422bbd4",
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0bd7f1_fcf6c81d",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Let me convince myself about this one, and the others below.",
       "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -65,6 +117,454 @@
       "writtenOn": "2025-02-14T15:33:50Z",
       "side": 1,
       "message": "nit: Same as above",
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34257b19_390f4251",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2095,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "I guess I\u0027ll try to understand why this is necessary. Generally `_next()` should only require decrementing the entry count as the buffer state in the `field` member is manipulated by the corresponding `_from_iter()` implementation",
+      "range": {
+        "startLine": 2094,
+        "startChar": 1,
+        "endLine": 2095,
+        "endChar": 48
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad6f28d0_ae08e1d3",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2120,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "This seems like a concerning UX. It goes against the spirit of this:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L139-L146",
+      "range": {
+        "startLine": 2117,
+        "startChar": 1,
+        "endLine": 2120,
+        "endChar": 42
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76618fb9_450940bc",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2248,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Why are we including the loop body? That should be for the caller?\n\nIf you think it\u0027s too verbose for the caller, then we should fix the APIs so it\u0027s unnecessary. But I\u0027ll need to think about that some more.",
+      "range": {
+        "startLine": 2209,
+        "startChar": 66,
+        "endLine": 2248,
+        "endChar": 1
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b0fe286_04ac0362",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2296,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Funky whitespace :)",
+      "range": {
+        "startLine": 2296,
+        "startChar": 1,
+        "endLine": 2296,
+        "endChar": 2
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f22b77c_56692b85",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2326,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Please make this `const void *`",
+      "range": {
+        "startLine": 2326,
+        "startChar": 34,
+        "endLine": 2326,
+        "endChar": 41
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6aa43b7_8cdda21e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "What\u0027s going on here? This change needs to be separated out and justified properly.",
+      "range": {
+        "startLine": 374,
+        "startChar": 1,
+        "endLine": 382,
+        "endChar": 50
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38cf4911_be7579d1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2753,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Can you please be consistent about putting an empty line after the end of a block (i.e. above the comment here, and throughout)?",
+      "range": {
+        "startLine": 2752,
+        "startChar": 1,
+        "endLine": 2753,
+        "endChar": 53
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7836e5f1_9a87094f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2757,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "The expected style for C is kernel-style; can you please declare local variables at the top of the function before any control-flow?",
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ebaed48_110ea0a5",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2761,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Pointer arithmetic in the arguments to `pldm_msgbuf_init_errno()` is discouraged, because it avoids all the buffer bounds checking that the msgbuf APIs perform internally. For instance, this is missing an overflow check that would be detected by the sequence:\n\n```\nrc \u003d pldm_msgbuf_init_errno(crc_buf, length, data, length);\nif (rc \u003c 0) {\n   return rc;\n}\n```",
+      "range": {
+        "startLine": 2761,
+        "startChar": 45,
+        "endLine": 2761,
+        "endChar": 64
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b27480de_0a84c022",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2767,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Are you trying to extract the header checksum or the payload checksum here? Because depending on what you\u0027re trying to achieve you first need to check `PackageHeaderFormatRevision`",
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b100a705_b0f1b410",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2770,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Don\u0027t need to check this if you immediately destroy the buffer below, because that will propagate the error for you.",
+      "range": {
+        "startLine": 2768,
+        "startChar": 1,
+        "endLine": 2770,
+        "endChar": 2
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67573b6c_c69b0e60",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2778,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "`-EINVAL` should be used when the arguments to the API are themselves invalid, however, this is not that problem. The arguments were valid but the data they pointed to was not. One of `-EPROTO`, `-EBADMSG` or `-EUCLEAN` would be better IMO.",
+      "range": {
+        "startLine": 2778,
+        "startChar": 9,
+        "endLine": 2778,
+        "endChar": 16
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc19444d_8f005ac0",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2789,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Why do we need this?",
+      "range": {
+        "startLine": 2788,
+        "startChar": 1,
+        "endLine": 2789,
+        "endChar": 49
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43908e94_2dd25396",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2792,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "You need the `memmove()` because you\u0027re aliasing `data` and `hdr`? Why do that? Why not declare a new `struct pldm_package_header_information` object on the stack to hold the deserialised version?",
+      "range": {
+        "startLine": 2792,
+        "startChar": 38,
+        "endLine": 2792,
+        "endChar": 56
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c06b97d6_17568f70",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2857,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Please use the msgbuf APIs for all of this. Extracting this data is exactly their use-case.",
+      "range": {
+        "startLine": 2810,
+        "startChar": 1,
+        "endLine": 2857,
+        "endChar": 2
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0c1dd6_4bb7dd8b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2880,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Not sure why you\u0027re using the msgbuf APIs for single fields and avoiding them where you need them most?",
+      "range": {
+        "startLine": 2860,
+        "startChar": 1,
+        "endLine": 2880,
+        "endChar": 2
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28dc4ead_b44f3aef",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2920,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Please use the msgbuf APIs.",
+      "range": {
+        "startLine": 2913,
+        "startChar": 1,
+        "endLine": 2920,
+        "endChar": 48
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6626242_9ea44ea6",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2927,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Just because this existing stable API is terrible it doesn\u0027t mean that we should design APIs with similarly bad UX on top of it. See the comment `decode_pldm_fw_device_record_from_iter()` in the header.",
+      "range": {
+        "startLine": 2924,
+        "startChar": 10,
+        "endLine": 2927,
+        "endChar": 42
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ba9fc9c_9c70b7ec",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2953,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Please use the msgbuf APIs instead.",
+      "range": {
+        "startLine": 2942,
+        "startChar": 1,
+        "endLine": 2953,
+        "endChar": 2
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca898e35_7ed2d6da",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2960,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-17T06:23:28Z",
+      "side": 1,
+      "message": "Needs a test for truncation.",
+      "range": {
+        "startLine": 2960,
+        "startChar": 28,
+        "endLine": 2960,
+        "endChar": 46
+      },
       "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
