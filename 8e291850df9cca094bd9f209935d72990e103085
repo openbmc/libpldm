@@ -20,6 +20,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "477cb702_448f667b",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-18T01:55:07Z",
+      "side": 1,
+      "message": "What internal memory allocation will occur?",
+      "range": {
+        "startLine": 682,
+        "startChar": 26,
+        "endLine": 682,
+        "endChar": 72
+      },
+      "revId": "8e291850df9cca094bd9f209935d72990e103085",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca31bcc0_6beab495",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-18T01:55:07Z",
+      "side": 1,
+      "message": "What does this mean?",
+      "range": {
+        "startLine": 683,
+        "startChar": 6,
+        "endLine": 683,
+        "endChar": 55
+      },
+      "revId": "8e291850df9cca094bd9f209935d72990e103085",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30858c8d_c34597e5",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-18T01:55:07Z",
+      "side": 1,
+      "message": "Rather than this skip business, which is quite opaque, I\u0027d rather we define a static function for extracting entity association records into a `struct pldm_pdr_entity_association` object. While the struct is packed, the extraction ensures the endianness is correctly handled and it\u0027s obvious what we\u0027re doing.",
+      "range": {
+        "startLine": 2121,
+        "startChar": 1,
+        "endLine": 2123,
+        "endChar": 37
+      },
+      "revId": "8e291850df9cca094bd9f209935d72990e103085",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b7640df2_37fd0e3d",
         "filename": "tests/dsp/pdr.cpp",
         "patchSetId": 8

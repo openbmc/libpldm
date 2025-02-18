@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b42894c3_26cda277",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2066,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-18T01:55:07Z",
+      "side": 1,
+      "message": "No, please keep the error handling as is.",
+      "parentUuid": "6cd40acd_26a4ab67",
+      "range": {
+        "startLine": 2066,
+        "startChar": 0,
+        "endLine": 2066,
+        "endChar": 49
+      },
+      "revId": "231d9f3fdb7a54722f6dd47428ab1994aa09d0f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1d77a66_9ec17076",
         "filename": "tests/dsp/pdr.cpp",
         "patchSetId": 5
