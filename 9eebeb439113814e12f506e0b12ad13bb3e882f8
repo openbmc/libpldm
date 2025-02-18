@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3efc82f4_3d657309",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-18T01:57:18Z",
+      "side": 1,
+      "message": "Can we make the return type int32 instead of int so that this still functions as expected on e.g. 16-bit platforms?",
+      "revId": "9eebeb439113814e12f506e0b12ad13bb3e882f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8f258ef_7cb06353",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-18T01:57:18Z",
+      "side": 1,
+      "message": "I don\u0027t mean to flip-flop and drag this out too much, but it occurred to me that this has similar problems to another patch, and I\u0027ve outlined a suggestion there too:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/74173/comment/30858c8d_c34597e5/",
+      "range": {
+        "startLine": 498,
+        "startChar": 2,
+        "endLine": 510,
+        "endChar": 55
+      },
+      "revId": "9eebeb439113814e12f506e0b12ad13bb3e882f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbb5a94d_8449cbb4",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-18T01:57:18Z",
+      "side": 1,
+      "message": "Can you please declare variables at the top of blocks (before any control-flow) to keep with kernel C style?",
+      "revId": "9eebeb439113814e12f506e0b12ad13bb3e882f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
