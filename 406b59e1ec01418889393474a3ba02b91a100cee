@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa2e604b_ae4330ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 29
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T02:27:15Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to note this, the diff tells us.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 37
+      },
+      "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f3b5139_39d81cdd",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T02:27:15Z",
+      "side": 1,
+      "message": "All of the changes in this file need to go into the `[Unreleased]` section. See also the series here:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/78309",
+      "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e48a2b4_e6e16366",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 29
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T02:27:15Z",
+      "side": 1,
+      "message": "This is duplicate to 6?",
+      "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53dc5717_65281239",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 29
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T02:27:15Z",
+      "side": 1,
+      "message": "Please don\u0027t discuss static functions in the changelog. They aren\u0027t user-visible.",
+      "range": {
+        "startLine": 707,
+        "startChar": 0,
+        "endLine": 710,
+        "endChar": 43
+      },
+      "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a37ed0e_c9382ba8",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 29
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T02:27:15Z",
+      "side": 1,
+      "message": "Can you please elaborate on these some more in the changelog text?",
+      "range": {
+        "startLine": 711,
+        "startChar": 0,
+        "endLine": 712,
+        "endChar": 78
+      },
+      "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1662aaf_0133c163",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T02:27:15Z",
+      "side": 1,
+      "message": "I might actually split this fix out to a prior change.",
+      "range": {
+        "startLine": 1377,
+        "startChar": 1,
+        "endLine": 1392,
+        "endChar": 18
+      },
+      "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
