@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c060a8a_3edc0ddc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 29
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-02-19T07:49:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa2e604b_ae4330ac",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 37
+      },
+      "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f3b5139_39d81cdd",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e65a2ec8_fd6e287c",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-02-19T07:49:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f3b5139_39d81cdd",
+      "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e48a2b4_e6e16366",
@@ -54,6 +96,24 @@
       "writtenOn": "2025-02-19T02:27:15Z",
       "side": 1,
       "message": "This is duplicate to 6?",
+      "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72283a3a_5374d0e6",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 29
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-02-19T07:49:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e48a2b4_e6e16366",
       "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -81,6 +141,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75bbca5f_eec227cf",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 29
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-02-19T07:49:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53dc5717_65281239",
+      "range": {
+        "startLine": 707,
+        "startChar": 0,
+        "endLine": 710,
+        "endChar": 43
+      },
+      "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a37ed0e_c9382ba8",
@@ -94,6 +178,30 @@
       "writtenOn": "2025-02-19T02:27:15Z",
       "side": 1,
       "message": "Can you please elaborate on these some more in the changelog text?",
+      "range": {
+        "startLine": 711,
+        "startChar": 0,
+        "endLine": 712,
+        "endChar": 78
+      },
+      "revId": "406b59e1ec01418889393474a3ba02b91a100cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5b6e738_18b267b2",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 29
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-02-19T07:49:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a37ed0e_c9382ba8",
       "range": {
         "startLine": 711,
         "startChar": 0,
