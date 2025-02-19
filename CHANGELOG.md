@@ -123,6 +123,7 @@ Change categories:
 
 - entity: Add new entity types from DSP0249 v1.3.0
 - stateset: Add new state sets from DSP0249 v1.3.0
+- oem: ibm: Add boot side rename state set and enum
 
 ### Changed
 
