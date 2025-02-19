@@ -22,6 +22,10 @@ Change categories:
 - utils: Introduce `pldm_edac_crc32()`
 - utils: Introduce `pldm_edac_crc8()`
 - pdr: Add pldm_pdr_delete_by_effecter_id() API
+- oem: ibm: Add boot side rename state set and enum
+
+  This ID is used to notify the remote PLDM terminus about the boot side change
+  that occurs during an out-of-band code update.
 
 ### Changed
 
