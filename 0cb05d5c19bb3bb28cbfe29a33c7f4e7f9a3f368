@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d5f262e_f22554fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 31
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T23:13:41Z",
+      "side": 1,
+      "message": "Delete the stray `[` here 😊",
+      "range": {
+        "startLine": 19,
+        "startChar": 7,
+        "endLine": 19,
+        "endChar": 8
+      },
+      "revId": "0cb05d5c19bb3bb28cbfe29a33c7f4e7f9a3f368",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b42504_7d0c290a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T23:13:41Z",
+      "side": 1,
+      "message": "Hi Archana, I have a few further comments. Please mark comment threads that you feel have been addressed as resolved.",
+      "revId": "0cb05d5c19bb3bb28cbfe29a33c7f4e7f9a3f368",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bf8397c_a9690b4b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T23:13:41Z",
+      "side": 1,
+      "message": "Needs an overflow check",
+      "revId": "0cb05d5c19bb3bb28cbfe29a33c7f4e7f9a3f368",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "310e8626_80c53783",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T23:13:41Z",
+      "side": 1,
+      "message": "No, rather the overflow check should be for the assignment into `record_handle`, so the constant here should be `UINT32_MAX`:\n\n```\nif (rc \u003e\u003d UINT32_MAX) {\n    return -EOVERFLOW;\n}\n```\n\nSame throughout.",
+      "range": {
+        "startLine": 951,
+        "startChar": 12,
+        "endLine": 951,
+        "endChar": 21
+      },
+      "revId": "0cb05d5c19bb3bb28cbfe29a33c7f4e7f9a3f368",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7edd733_85fa1f42",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T23:13:41Z",
+      "side": 1,
+      "message": "Can you please precede this with:\n\n```\nassert(rc \u003e\u003d INT_MIN);\n```\n\n?\n\nSame throughout.",
+      "revId": "0cb05d5c19bb3bb28cbfe29a33c7f4e7f9a3f368",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

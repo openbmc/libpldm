@@ -419,6 +419,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41cad0da_7e7a06b6",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T23:13:41Z",
+      "side": 1,
+      "message": "I think the caller should initialise the object before passing the reference.",
+      "parentUuid": "3242bcc6_39c87d76",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f15756a3_fa6babc3",
         "filename": "tests/dsp/pdr.cpp",
         "patchSetId": 21
