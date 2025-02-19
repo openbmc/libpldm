@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba9d8068_8e5bf787",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 27
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-19T02:18:57Z",
+      "side": 1,
+      "message": "This doesn\u0027t belong under the `[0.11.0]` release header. I\u0027ve pushed a series fixing up the changelog, as it had numerous other issues:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/78309",
+      "revId": "9eebeb439113814e12f506e0b12ad13bb3e882f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3efc82f4_3d657309",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 27
