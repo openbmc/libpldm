@@ -17,6 +17,42 @@ Change categories:
 
 ## [Unreleased]
 
+### Added
+
+1. Add Firmware Device side firmware_update encode/decode functions
+
+2. Add firmware update FD responder
+
+3. Add PLDM control responder. PLDM types and support commands/versions can be
+   registered.
+
+4. PLDM FD responder accepts a PLDM control handle and will register its
+   version.
+
+### Changed
+
+1. dsp: firmware_update: Expand "params" in symbol names
+
+   The change only affects structs and functions relating to ABIs that are
+   marked as testing. There should be no impact on users of the stable APIs/
+   ABIs.
+
+2. Reimplement parsing of the firmware update downstream device parameter table
+   using an iterator macro
+
+   The change removes redundant APIs in the process.
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+1. pdr: Remove PDR if the contained entity to be removed is the last one
+2. meson: sizes.h: add includedir to install path
+
+### Security
+
 ## [0.11.0] 2024-12-12
 
 ### Added
@@ -52,32 +88,10 @@ Change categories:
    `encode_query_downstream_identifiers_req()` and
    `encode_get_downstream_firmware_params_req()`
 
-7. dsp: firmware_update: Expand "params" in symbol names
-
-   The change only affects structs and functions relating to ABIs that are
-   marked as testing. There should be no impact on users of the stable APIs/
-   ABIs.
-
-8. Reimplement parsing of the firmware update downstream device parameter table
-   using an iterator macro
-
-   The change removes redundant APIs in the process.
-
-9. Add Firmware Device side firmware_update encode/decode functions
-
-10. Add firmware update FD responder
-
-11. Add PLDM control responder. PLDM types and support commands/versions can be
-    registered.
-
-12. PLDM FD responder accepts a PLDM control handle and will register its
-    version.
-
 ### Fixed
 
 1. dsp: platform: Fix location of closing paren in overflow detection
 2. libpldm: Install api header, update changelog
-3. pdr: Remove PDR if the contained entity to be removed is the last one
 
 ## [0.10.0] 2024-11-01
 
@@ -733,4 +747,3 @@ Change categories:
 3. transport: Match on response in pldm_transport_send_recv_msg()
 4. requester: Add check before accessing hdr in pldm_recv()
 5. bios_table: pldm_bios_table_attr_entry_string_info_check() NULL deref
-6. meson: sizes.h: add includedir to install path
