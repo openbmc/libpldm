@@ -25,6 +25,17 @@ Change categories:
 
 ### Removed
 
+- requester: Remove related deprecated APIs
+
+  Remove all of:
+
+  - `pldm_close()`
+  - `pldm_open()`
+  - `pldm_recv()`
+  - `pldm_recv_any()`
+  - `pldm_send()`
+  - `pldm_send_recv()`
+
 ### Fixed
 
 ### Security
