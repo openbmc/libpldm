@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14fe7498_d99a53cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:39:29Z",
+      "side": 1,
+      "message": "Please review the updated commit message and let me know if it meets your expectations. \nI am not sure if I need to add spec details since I am just using the old decode APIs for package parsing",
+      "parentUuid": "8a063667_e9c31a5f",
+      "revId": "15d62253ae0a64caddaa431408a8e8e980edf018",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a296c6f6_46db971b",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
