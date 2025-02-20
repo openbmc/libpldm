@@ -16,6 +16,24 @@
       "message": "@rajeeranjan@nvidia.com can you please mark the comments you feel you\u0027ve addressed as resolved and I\u0027ll take a look at the rest once you\u0027re done?\n\nDo you have any queries that arose from the rework?",
       "revId": "42b8ed0239ce314cbc8ab942be3ffac641820c91",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82cb43c0_2aa33ccc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "@andrew@codeconstruct.com.au I\u0027ve reworked on the patch and updated the comments. Could you please review it again ?\nThank you!",
+      "parentUuid": "1adddc8e_ef523d93",
+      "revId": "42b8ed0239ce314cbc8ab942be3ffac641820c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

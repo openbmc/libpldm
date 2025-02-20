@@ -123,6 +123,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b623d32_58302710",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "modified the _from_iter() implementation as per the comment. This field is redundant now so removed it.",
+      "parentUuid": "bc0bd7f1_fcf6c81d",
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e711fcf_80d69e73",
@@ -216,6 +234,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "725fbc2c_f7a72dd2",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2095,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Fix this in the latest patch.",
+      "parentUuid": "34257b19_390f4251",
+      "range": {
+        "startLine": 2094,
+        "startChar": 1,
+        "endLine": 2095,
+        "endChar": 48
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad6f28d0_ae08e1d3",
@@ -229,6 +271,30 @@
       "writtenOn": "2025-02-17T06:23:28Z",
       "side": 1,
       "message": "This seems like a concerning UX. It goes against the spirit of this:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L139-L146",
+      "range": {
+        "startLine": 2117,
+        "startChar": 1,
+        "endLine": 2120,
+        "endChar": 42
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2609dd3_c5a26162",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2120,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "@andrew@codeconstruct.com.au Can you elaborate on the concern here? I looked at the doc, is the expectation to create a struct with all these variable_fields? \n\nSince the callers will be using the foreach iterators, they are not actually exposed to this method.",
+      "parentUuid": "ad6f28d0_ae08e1d3",
       "range": {
         "startLine": 2117,
         "startChar": 1,
@@ -264,6 +330,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4a8c9c8_b1a5aa63",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2248,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "It simplifies the logic written at the caller which aligns with these APIs objective\n\n```\n    // Iterate through each firmware device record\n    foreach_pldm_fw_device_record(\n        this-\u003epkgIter.dev_iter, deviceIdRecHeader, applicableComponents,\n        compImageSetVersionStr, recordDescriptors, fwDevicePkgData, rc)\n    {\n        if (rc)\n        {\n            error(\n                \"Failed to decode firmware device ID record, response code \u0027{RC}\u0027\",\n                \"RC\", rc);\n            throw InternalFailure();\n        }\n\n        // Parse descriptors for this device record\n        DeviceIDRecordCount descCount \u003d deviceIdRecHeader.descriptor_count;\n        uint16_t descriptorType \u003d 0;\n        variable_field descriptorData{};\n        uint8_t vendorTitleStrType \u003d 0;\n        variable_field vendorTitleStr{};\n        variable_field vendorDefinedDescData{};\n        int rc \u003d 0;\n\n        // Iterate through each descriptor\n        foreach_pldm_descriptor(recordDescriptors, descCount, descriptorType,\n                                descriptorData, vendorTitleStrType, vendorTitleStr,\n                                vendorDefinedDescData, rc);\n        if (rc)\n        {\n            error(\n                \"Failed to decode descriptor type value of type \u0027{TYPE}\u0027 and  length \u0027{LENGTH}\u0027, response code \u0027{RC}\u0027\",\n                \"TYPE\", descriptorType, \"LENGTH\", recordDescriptors.length,\n                \"RC\", rc);\n            throw InternalFailure();\n        }\n```\n@andrew@codeconstruct.com.au let me know if you think otherwise and if there\u0027s a better solution",
+      "parentUuid": "76618fb9_450940bc",
+      "range": {
+        "startLine": 2209,
+        "startChar": 66,
+        "endLine": 2248,
+        "endChar": 1
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b0fe286_04ac0362",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 15
@@ -275,6 +365,30 @@
       "writtenOn": "2025-02-17T06:23:28Z",
       "side": 1,
       "message": "Funky whitespace :)",
+      "range": {
+        "startLine": 2296,
+        "startChar": 1,
+        "endLine": 2296,
+        "endChar": 2
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb83a871_f24fdffb",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2296,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0b0fe286_04ac0362",
       "range": {
         "startLine": 2296,
         "startChar": 1,
@@ -308,6 +422,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4edf4f65_c1a310de",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2326,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5f22b77c_56692b85",
+      "range": {
+        "startLine": 2326,
+        "startChar": 34,
+        "endLine": 2326,
+        "endChar": 41
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6aa43b7_8cdda21e",
@@ -321,6 +459,30 @@
       "writtenOn": "2025-02-17T06:23:28Z",
       "side": 1,
       "message": "What\u0027s going on here? This change needs to be separated out and justified properly.",
+      "range": {
+        "startLine": 374,
+        "startChar": 1,
+        "endLine": 382,
+        "endChar": 50
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93ce7066_e68012f6",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a6aa43b7_8cdda21e",
       "range": {
         "startLine": 374,
         "startChar": 1,
@@ -354,6 +516,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50eb3409_14cf222a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2753,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "38cf4911_be7579d1",
+      "range": {
+        "startLine": 2752,
+        "startChar": 1,
+        "endLine": 2753,
+        "endChar": 53
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7836e5f1_9a87094f",
@@ -367,6 +553,24 @@
       "writtenOn": "2025-02-17T06:23:28Z",
       "side": 1,
       "message": "The expected style for C is kernel-style; can you please declare local variables at the top of the function before any control-flow?",
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20d02270_d1e5ae33",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2757,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7836e5f1_9a87094f",
       "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -394,6 +598,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "739bf055_f7bc96dc",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2761,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0ebaed48_110ea0a5",
+      "range": {
+        "startLine": 2761,
+        "startChar": 45,
+        "endLine": 2761,
+        "endChar": 64
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b27480de_0a84c022",
@@ -407,6 +635,24 @@
       "writtenOn": "2025-02-17T06:23:28Z",
       "side": 1,
       "message": "Are you trying to extract the header checksum or the payload checksum here? Because depending on what you\u0027re trying to achieve you first need to check `PackageHeaderFormatRevision`",
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acaefbad_b409a050",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2767,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b27480de_0a84c022",
       "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -434,6 +680,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48f6c416_7f26cbed",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2770,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b100a705_b0f1b410",
+      "range": {
+        "startLine": 2768,
+        "startChar": 1,
+        "endLine": 2770,
+        "endChar": 2
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67573b6c_c69b0e60",
@@ -447,6 +717,30 @@
       "writtenOn": "2025-02-17T06:23:28Z",
       "side": 1,
       "message": "`-EINVAL` should be used when the arguments to the API are themselves invalid, however, this is not that problem. The arguments were valid but the data they pointed to was not. One of `-EPROTO`, `-EBADMSG` or `-EUCLEAN` would be better IMO.",
+      "range": {
+        "startLine": 2778,
+        "startChar": 9,
+        "endLine": 2778,
+        "endChar": 16
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c02b9d82_a1532eee",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2778,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "67573b6c_c69b0e60",
       "range": {
         "startLine": 2778,
         "startChar": 9,
@@ -503,6 +797,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f95c69_4acbe7bd",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2792,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "43908e94_2dd25396",
+      "range": {
+        "startLine": 2792,
+        "startChar": 38,
+        "endLine": 2792,
+        "endChar": 56
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c06b97d6_17568f70",
@@ -516,6 +834,30 @@
       "writtenOn": "2025-02-17T06:23:28Z",
       "side": 1,
       "message": "Please use the msgbuf APIs for all of this. Extracting this data is exactly their use-case.",
+      "range": {
+        "startLine": 2810,
+        "startChar": 1,
+        "endLine": 2857,
+        "endChar": 2
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e50e582_00a4bb34",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2857,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c06b97d6_17568f70",
       "range": {
         "startLine": 2810,
         "startChar": 1,
@@ -549,6 +891,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8cf24e_4492c8b7",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2880,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0e0c1dd6_4bb7dd8b",
+      "range": {
+        "startLine": 2860,
+        "startChar": 1,
+        "endLine": 2880,
+        "endChar": 2
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28dc4ead_b44f3aef",
@@ -562,6 +928,30 @@
       "writtenOn": "2025-02-17T06:23:28Z",
       "side": 1,
       "message": "Please use the msgbuf APIs.",
+      "range": {
+        "startLine": 2913,
+        "startChar": 1,
+        "endLine": 2920,
+        "endChar": 48
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f91dca5f_af689924",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2920,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "28dc4ead_b44f3aef",
       "range": {
         "startLine": 2913,
         "startChar": 1,
@@ -597,6 +987,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85c10731_c4cc6fff",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2927,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "@andrew@codeconstruct.com.au Replied on the comment on decode_pldm_fw_device_record_from_iter(). Please look at that and let me know if any modification is needed",
+      "parentUuid": "d6626242_9ea44ea6",
+      "range": {
+        "startLine": 2924,
+        "startChar": 10,
+        "endLine": 2927,
+        "endChar": 42
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ba9fc9c_9c70b7ec",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 15
@@ -608,6 +1022,30 @@
       "writtenOn": "2025-02-17T06:23:28Z",
       "side": 1,
       "message": "Please use the msgbuf APIs instead.",
+      "range": {
+        "startLine": 2942,
+        "startChar": 1,
+        "endLine": 2953,
+        "endChar": 2
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e81b83b5_74479702",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2953,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1ba9fc9c_9c70b7ec",
       "range": {
         "startLine": 2942,
         "startChar": 1,
@@ -631,6 +1069,30 @@
       "writtenOn": "2025-02-17T06:23:28Z",
       "side": 1,
       "message": "Needs a test for truncation.",
+      "range": {
+        "startLine": 2960,
+        "startChar": 28,
+        "endLine": 2960,
+        "endChar": 46
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6786cad3_d6020ad1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2960,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:08:28Z",
+      "side": 1,
+      "message": "this property is redundant after the changes and is removed.",
+      "parentUuid": "ca898e35_7ed2d6da",
       "range": {
         "startLine": 2960,
         "startChar": 28,
