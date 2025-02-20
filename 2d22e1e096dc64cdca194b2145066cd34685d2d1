@@ -774,6 +774,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54df7dd4_8fa26579",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2789,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-20T15:21:36Z",
+      "side": 1,
+      "message": "The current PLDM UA implementation retains the package_header_size and componentBitmapBitLength from pldm_package_header_information, therfore making these values available to the caller without the need for an extra copy— since a pointer to the original package header is preserved.",
+      "parentUuid": "cc19444d_8f005ac0",
+      "range": {
+        "startLine": 2788,
+        "startChar": 1,
+        "endLine": 2789,
+        "endChar": 49
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43908e94_2dd25396",
