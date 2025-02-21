@@ -326,19 +326,18 @@ static bool is_non_functioning_component_indication_valid(
 	}
 }
 
-LIBPLDM_ABI_STABLE
-int decode_pldm_package_header_info(
+static int decode_pldm_package_header_info_errno(
 	const uint8_t *data, size_t length,
 	struct pldm_package_header_information *package_header_info,
 	struct variable_field *package_version_str)
 {
 	if (data == NULL || package_header_info == NULL ||
 	    package_version_str == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	if (length < sizeof(struct pldm_package_header_information)) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	struct pldm_package_header_information *data_header =
@@ -346,17 +345,17 @@ int decode_pldm_package_header_info(
 
 	if (!is_string_type_valid(data_header->package_version_string_type) ||
 	    (data_header->package_version_string_length == 0)) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EBADMSG;
 	}
 
 	if (length < sizeof(struct pldm_package_header_information) +
 			     data_header->package_version_string_length) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	if ((data_header->component_bitmap_bit_length %
 	     PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE) != 0) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EBADMSG;
 	}
 
 	memcpy(package_header_info->uuid, data_header->uuid,
@@ -379,11 +378,27 @@ int decode_pldm_package_header_info(
 	package_version_str->length =
 		package_header_info->package_version_string_length;
 
-	return PLDM_SUCCESS;
+	return 0;
 }
 
 LIBPLDM_ABI_STABLE
-int decode_firmware_device_id_record(
+int decode_pldm_package_header_info(
+	const uint8_t *data, size_t length,
+	struct pldm_package_header_information *package_header_info,
+	struct variable_field *package_version_str)
+{
+	int rc;
+
+	rc = decode_pldm_package_header_info_errno(
+		data, length, package_header_info, package_version_str);
+	if (rc < 0) {
+		return pldm_xlate_errno(rc);
+	}
+
+	return PLDM_SUCCESS;
+}
+
+static int decode_firmware_device_id_record_errno(
 	const uint8_t *data, size_t length,
 	uint16_t component_bitmap_bit_length,
 	struct pldm_firmware_device_id_record *fw_device_id_record,
@@ -396,16 +411,16 @@ int decode_firmware_device_id_record(
 	    applicable_components == NULL ||
 	    comp_image_set_version_str == NULL || record_descriptors == NULL ||
 	    fw_device_pkg_data == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	if (length < sizeof(struct pldm_firmware_device_id_record)) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	if ((component_bitmap_bit_length %
 	     PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE) != 0) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EBADMSG;
 	}
 
 	struct pldm_firmware_device_id_record *data_record =
@@ -414,7 +429,7 @@ int decode_firmware_device_id_record(
 	if (!is_string_type_valid(
 		    data_record->comp_image_set_version_string_type) ||
 	    (data_record->comp_image_set_version_string_length == 0)) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EBADMSG;
 	}
 
 	fw_device_id_record->record_length =
@@ -430,7 +445,7 @@ int decode_firmware_device_id_record(
 		le16toh(data_record->fw_device_pkg_data_length);
 
 	if (length < fw_device_id_record->record_length) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	uint16_t applicable_components_length =
@@ -444,7 +459,7 @@ int decode_firmware_device_id_record(
 		fw_device_id_record->fw_device_pkg_data_length;
 
 	if (fw_device_id_record->record_length < calc_min_record_length) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	applicable_components->ptr =
@@ -470,6 +485,29 @@ int decode_firmware_device_id_record(
 			record_descriptors->ptr + record_descriptors->length;
 		fw_device_pkg_data->length =
 			fw_device_id_record->fw_device_pkg_data_length;
+	}
+
+	return 0;
+}
+
+LIBPLDM_ABI_STABLE
+int decode_firmware_device_id_record(
+	const uint8_t *data, size_t length,
+	uint16_t component_bitmap_bit_length,
+	struct pldm_firmware_device_id_record *fw_device_id_record,
+	struct variable_field *applicable_components,
+	struct variable_field *comp_image_set_version_str,
+	struct variable_field *record_descriptors,
+	struct variable_field *fw_device_pkg_data)
+{
+	int rc;
+
+	rc = decode_firmware_device_id_record_errno(
+		data, length, component_bitmap_bit_length, fw_device_id_record,
+		applicable_components, comp_image_set_version_str,
+		record_descriptors, fw_device_pkg_data);
+	if (rc < 0) {
+		return pldm_xlate_errno(rc);
 	}
 
 	return PLDM_SUCCESS;
@@ -509,20 +547,19 @@ int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
 	return pldm_msgbuf_destroy(buf);
 }
 
-LIBPLDM_ABI_STABLE
-int decode_descriptor_type_length_value(const uint8_t *data, size_t length,
-					uint16_t *descriptor_type,
-					struct variable_field *descriptor_data)
+static int decode_descriptor_type_length_value_errno(
+	const uint8_t *data, size_t length, uint16_t *descriptor_type,
+	struct variable_field *descriptor_data)
 {
 	uint16_t descriptor_length = 0;
 
 	if (data == NULL || descriptor_type == NULL ||
 	    descriptor_data == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	if (length < PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	struct pldm_descriptor_tlv *entry =
@@ -533,34 +570,49 @@ int decode_descriptor_type_length_value(const uint8_t *data, size_t length,
 	if (*descriptor_type != PLDM_FWUP_VENDOR_DEFINED) {
 		if (descriptor_length !=
 		    get_descriptor_type_length(*descriptor_type)) {
-			return PLDM_ERROR_INVALID_LENGTH;
+			return -EBADMSG;
 		}
 	}
 
 	if (length < (sizeof(*descriptor_type) + sizeof(descriptor_length) +
 		      descriptor_length)) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	descriptor_data->ptr = entry->descriptor_data;
 	descriptor_data->length = descriptor_length;
 
-	return PLDM_SUCCESS;
+	return 0;
 }
 
 LIBPLDM_ABI_STABLE
-int decode_vendor_defined_descriptor_value(
+int decode_descriptor_type_length_value(const uint8_t *data, size_t length,
+					uint16_t *descriptor_type,
+					struct variable_field *descriptor_data)
+{
+	int rc;
+
+	rc = decode_descriptor_type_length_value_errno(
+		data, length, descriptor_type, descriptor_data);
+	if (rc < 0) {
+		return pldm_xlate_errno(rc);
+	}
+
+	return PLDM_SUCCESS;
+}
+
+static int decode_vendor_defined_descriptor_value_errno(
 	const uint8_t *data, size_t length, uint8_t *descriptor_title_str_type,
 	struct variable_field *descriptor_title_str,
 	struct variable_field *descriptor_data)
 {
 	if (data == NULL || descriptor_title_str_type == NULL ||
 	    descriptor_title_str == NULL || descriptor_data == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	if (length < sizeof(struct pldm_vendor_defined_descriptor_title_data)) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	struct pldm_vendor_defined_descriptor_title_data *entry =
@@ -568,13 +620,13 @@ int decode_vendor_defined_descriptor_value(
 	if (!is_string_type_valid(
 		    entry->vendor_defined_descriptor_title_str_type) ||
 	    (entry->vendor_defined_descriptor_title_str_len == 0)) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EBADMSG;
 	}
 
 	// Assuming at least 1 byte of VendorDefinedDescriptorData
 	if (length < (sizeof(struct pldm_vendor_defined_descriptor_title_data) +
 		      entry->vendor_defined_descriptor_title_str_len)) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	*descriptor_title_str_type =
@@ -591,22 +643,39 @@ int decode_vendor_defined_descriptor_value(
 		sizeof(entry->vendor_defined_descriptor_title_str_len) -
 		descriptor_title_str->length;
 
-	return PLDM_SUCCESS;
+	return 0;
 }
 
 LIBPLDM_ABI_STABLE
-int decode_pldm_comp_image_info(
+int decode_vendor_defined_descriptor_value(
+	const uint8_t *data, size_t length, uint8_t *descriptor_title_str_type,
+	struct variable_field *descriptor_title_str,
+	struct variable_field *descriptor_data)
+{
+	int rc;
+
+	rc = decode_vendor_defined_descriptor_value_errno(
+		data, length, descriptor_title_str_type, descriptor_title_str,
+		descriptor_data);
+	if (rc < 0) {
+		return pldm_xlate_errno(rc);
+	}
+
+	return PLDM_SUCCESS;
+}
+
+static int decode_pldm_comp_image_info_errno(
 	const uint8_t *data, size_t length,
 	struct pldm_component_image_information *pldm_comp_image_info,
 	struct variable_field *comp_version_str)
 {
 	if (data == NULL || pldm_comp_image_info == NULL ||
 	    comp_version_str == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	if (length < sizeof(struct pldm_component_image_information)) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	struct pldm_component_image_information *data_header =
@@ -614,12 +683,12 @@ int decode_pldm_comp_image_info(
 
 	if (!is_string_type_valid(data_header->comp_version_string_type) ||
 	    (data_header->comp_version_string_length == 0)) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EBADMSG;
 	}
 
 	if (length < sizeof(struct pldm_component_image_information) +
 			     data_header->comp_version_string_length) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	pldm_comp_image_info->comp_classification =
@@ -643,18 +712,35 @@ int decode_pldm_comp_image_info(
 	if ((pldm_comp_image_info->comp_options.bits.bit1 == false &&
 	     pldm_comp_image_info->comp_comparison_stamp !=
 		     PLDM_FWUP_INVALID_COMPONENT_COMPARISON_TIMESTAMP)) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EBADMSG;
 	}
 
 	if (pldm_comp_image_info->comp_location_offset == 0 ||
 	    pldm_comp_image_info->comp_size == 0) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EBADMSG;
 	}
 
 	comp_version_str->ptr =
 		data + sizeof(struct pldm_component_image_information);
 	comp_version_str->length =
 		pldm_comp_image_info->comp_version_string_length;
+
+	return 0;
+}
+
+LIBPLDM_ABI_STABLE
+int decode_pldm_comp_image_info(
+	const uint8_t *data, size_t length,
+	struct pldm_component_image_information *pldm_comp_image_info,
+	struct variable_field *comp_version_str)
+{
+	int rc;
+
+	rc = decode_pldm_comp_image_info_errno(
+		data, length, pldm_comp_image_info, comp_version_str);
+	if (rc < 0) {
+		return pldm_xlate_errno(rc);
+	}
 
 	return PLDM_SUCCESS;
 }

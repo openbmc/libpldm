@@ -612,7 +612,7 @@ TEST(DecodeDescriptors, errorPathDecodeDescriptorTLV)
     rc = decode_descriptor_type_length_value(invalidIANADescriptor1.data(),
                                              invalidIANADescriptor1.size(),
                                              &descriptorType, &descriptorData);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     // IANA Enterprise ID descriptor data less than length
     std::array<uint8_t, 7> invalidIANADescriptor2{0x01, 0x00, 0x04, 0x00,

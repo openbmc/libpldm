@@ -43,6 +43,7 @@ Change categories:
 - Returned error values for the following stable APIs have changed their
   semantics:
 
+  - `decode_descriptor_type_length_value()`
   - `decode_event_message_buffer_size_resp()`
   - `decode_get_numeric_effecter_value_resp()`
   - `decode_get_sensor_reading_resp()`
