@@ -307,6 +307,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3239afe_4b1e2edf",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2120,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "My immediate concern without looking at the implementation is the number of arguments involved, and that it\u0027s easy to confuse the ordering of the arguments due to them being the same type.\n\nI understand that the intended use is hidden away behind a macro, but it\u0027s still part of the library ABI.",
+      "parentUuid": "f2609dd3_c5a26162",
+      "range": {
+        "startLine": 2117,
+        "startChar": 1,
+        "endLine": 2120,
+        "endChar": 42
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76618fb9_450940bc",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 15
@@ -342,6 +366,30 @@
       "side": 1,
       "message": "It simplifies the logic written at the caller which aligns with these APIs objective\n\n```\n    // Iterate through each firmware device record\n    foreach_pldm_fw_device_record(\n        this-\u003epkgIter.dev_iter, deviceIdRecHeader, applicableComponents,\n        compImageSetVersionStr, recordDescriptors, fwDevicePkgData, rc)\n    {\n        if (rc)\n        {\n            error(\n                \"Failed to decode firmware device ID record, response code \u0027{RC}\u0027\",\n                \"RC\", rc);\n            throw InternalFailure();\n        }\n\n        // Parse descriptors for this device record\n        DeviceIDRecordCount descCount \u003d deviceIdRecHeader.descriptor_count;\n        uint16_t descriptorType \u003d 0;\n        variable_field descriptorData{};\n        uint8_t vendorTitleStrType \u003d 0;\n        variable_field vendorTitleStr{};\n        variable_field vendorDefinedDescData{};\n        int rc \u003d 0;\n\n        // Iterate through each descriptor\n        foreach_pldm_descriptor(recordDescriptors, descCount, descriptorType,\n                                descriptorData, vendorTitleStrType, vendorTitleStr,\n                                vendorDefinedDescData, rc);\n        if (rc)\n        {\n            error(\n                \"Failed to decode descriptor type value of type \u0027{TYPE}\u0027 and  length \u0027{LENGTH}\u0027, response code \u0027{RC}\u0027\",\n                \"TYPE\", descriptorType, \"LENGTH\", recordDescriptors.length,\n                \"RC\", rc);\n            throw InternalFailure();\n        }\n```\n@andrew@codeconstruct.com.au let me know if you think otherwise and if there\u0027s a better solution",
       "parentUuid": "76618fb9_450940bc",
+      "range": {
+        "startLine": 2209,
+        "startChar": 66,
+        "endLine": 2248,
+        "endChar": 1
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3457878_3980ab8a",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2248,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "It looks like you have a patch to pldmd that exploits these APIs. Have you pushed it? If not can you do so and mark it WIP, then link it here? It would help provide some context for me.",
+      "parentUuid": "d4a8c9c8_b1a5aa63",
       "range": {
         "startLine": 2209,
         "startChar": 66,

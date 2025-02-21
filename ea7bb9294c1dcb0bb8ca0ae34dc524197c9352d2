@@ -1,0 +1,445 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0832eb2_6835d502",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "Comment on PS15 hasn\u0027t been resolved.",
+      "range": {
+        "startLine": 374,
+        "startChar": 1,
+        "endLine": 382,
+        "endChar": 50
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d5c9fd9_ff6a5316",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2757,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "The cast from `void *` is unnecessary in C.",
+      "range": {
+        "startLine": 2757,
+        "startChar": 23,
+        "endLine": 2757,
+        "endChar": 40
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40002df1_d40cb159",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2779,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "I don\u0027t see that this is required by the implementation of `pldm_fwup_pkg_iter_init()`, and it\u0027s redundant with the test in `decode_pldm_package_header_info()` (whose implementation does need this test)",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee6d1f5_b378b4e8",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2786,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "We need to be careful here as `decode_pldm_package_header_info()` is one of the older APIs that returns PLDM protocol error values rather than `errno` values. I\u0027ve reworked things internally for now so you can avoid this particular pain-point:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/78379\n\nCan you rebase your change on top and make use of the internal `_errno()`-suffixed APIs throughout this patch?",
+      "range": {
+        "startLine": 2786,
+        "startChar": 9,
+        "endLine": 2786,
+        "endChar": 11
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d6f733c_17620020",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2792,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "Please don\u0027t use `EINVAL` for issues that aren\u0027t a matter of the arguments being invalid. Not supporting anything other than V1 is a choice your implementation is making - it\u0027s not an error on the caller\u0027s part or the definition of the package.\n\nThis should be e.g. `ENOTSUP`.",
+      "range": {
+        "startLine": 2792,
+        "startChar": 9,
+        "endLine": 2792,
+        "endChar": 16
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15f646c2_2ada120e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2800,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "I think it might be better if you use `pldm_msgbuf_span_required()` here to extract the pointer and the length, which you then pass into `crc32()` below.",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d94e711_bdc3e1db",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2803,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "No need for this test in either case (your current use of `pldm_msgbuf_skip()` above or my suggestion of `pldm_msgbuf_span_remaining()`) as the `crc32()` invocation is beyond the call to `pldm_msgbuf_destroy()`.",
+      "range": {
+        "startLine": 2801,
+        "startChar": 1,
+        "endLine": 2803,
+        "endChar": 2
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef903b11_f8fea5d3",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2805,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "Why? There should be no need for this cast.",
+      "range": {
+        "startLine": 2805,
+        "startChar": 1,
+        "endLine": 2805,
+        "endChar": 7
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcd418a4_22dbc1b0",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2806,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "Generally prefer `pldm_msgbuf_destroy_consumed()` where we can when we\u0027re extracting data (it should be avoided when we\u0027re inserting data as we want to allow the API caller to pass a larger buffer than required).",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ad9e856_6d367c76",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2825,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "I think for now it\u0027s best if instead of unchecked addition you do two separate calls to `pldm_msgbuf_skip()`. That is intended to handle all the arithmetic corner-cases for you.",
+      "range": {
+        "startLine": 2824,
+        "startChar": 1,
+        "endLine": 2825,
+        "endChar": 24
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7734abac_73a56929",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2830,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "There\u0027s no need for this test. It\u0027s handled by `pldm_msgbuf_skip()`.",
+      "range": {
+        "startLine": 2827,
+        "startChar": 1,
+        "endLine": 2830,
+        "endChar": 1
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "095ebd2e_d991646b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2834,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "No need for this test.",
+      "range": {
+        "startLine": 2832,
+        "startChar": 1,
+        "endLine": 2834,
+        "endChar": 2
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b76fe974_0b8e419d",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2839,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "As a contrast to the above cases where I\u0027ve commented that the return value tests aren\u0027t required, this one is required, as you use the value of `dev_count` below.",
+      "range": {
+        "startLine": 2837,
+        "startChar": 1,
+        "endLine": 2839,
+        "endChar": 2
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35cb7a48_7d9a9568",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2848,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "(this is usually a sign that something\u0027s not quite right)",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06e0bcf6_b498edf3",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2859,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "Eh? Why do we need `rec`? Do the extraction from `hdr_buf`?",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa34e506_a49fd43a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2869,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "Please do not reach into the msgbuf struct like this. It should only be accessed via its APIs. If there\u0027s not an API for what you need, then we can consider adding one.",
+      "range": {
+        "startLine": 2869,
+        "startChar": 2,
+        "endLine": 2869,
+        "endChar": 60
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a247be18_765cbca2",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2876,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "Please don\u0027t point into the message buffer in this way. Allocate a separate object and unpack the data into it.",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abf58d11_b0440aec",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2892,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "If we\u0027re scanning through the package just for the purpose of populating `entries` for the iterator, then I don\u0027t think it\u0027s worthwhile. If the package header lacks count information, we can fall back on reaching the end of the buffer to define the termination of the iterator. I think we can drop the entries member from the iterator implementation.",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8908fc9f_2287308e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2930,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "Let me have a think about whether we can improve this API.",
+      "range": {
+        "startLine": 2927,
+        "startChar": 1,
+        "endLine": 2930,
+        "endChar": 42
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1c23c77_dfa9a6df",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2970,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "No need for this.",
+      "range": {
+        "startLine": 2968,
+        "startChar": 1,
+        "endLine": 2970,
+        "endChar": 2
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2ea7d89_02c96940",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2983,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-21T02:34:46Z",
+      "side": 1,
+      "message": "I\u0027ll have a think about this one too.",
+      "range": {
+        "startLine": 2982,
+        "startChar": 1,
+        "endLine": 2983,
+        "endChar": 24
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
