@@ -27,12 +27,12 @@ static inline enum pldm_completion_codes pldm_xlate_errno(int err)
 	assert(err < 0);
 	switch (err) {
 	case -EINVAL:
+	case -EBADMSG:
 		rc = PLDM_ERROR_INVALID_DATA;
 		break;
 	case -ENOMSG:
 		rc = PLDM_ERROR_INVALID_PLDM_TYPE;
 		break;
-	case -EBADMSG:
 	case -EOVERFLOW:
 		rc = PLDM_ERROR_INVALID_LENGTH;
 		break;

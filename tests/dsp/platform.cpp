@@ -1095,7 +1095,7 @@ TEST(GetStateSensorReadings, testBadDecodeResponse)
         response, responseMsg.size() - hdrSize, &retcompletion_code,
         &retcomp_sensorCnt, retstateField.data());
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
 TEST(GetStateSensorReadings, testGoodEncodeRequest)
@@ -1272,7 +1272,7 @@ TEST(EventMessageBufferSize, testBadEventMessageBufferSizeResponse)
 
     rc = decode_event_message_buffer_size_resp(
         response, responseMsg.size(), &retCompletionCode, &retMaxBufferSize);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
 TEST(PlatformEventMessageSupported, testGoodEncodeRequest)
@@ -2759,7 +2759,7 @@ TEST(PlatformEventMessage, testBadSensorOpEventDataDecodeRequest)
     rc = decode_sensor_op_data(reinterpret_cast<uint8_t*>(sensorData.data()),
                                sensorDataLength + 1, &presentOpState,
                                &previousOpState);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     rc = decode_sensor_op_data(reinterpret_cast<uint8_t*>(sensorData.data()),
@@ -2898,7 +2898,7 @@ TEST(PlatformEventMessage, testBadNumericSensorEventDataDecodeRequest)
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(sensorData.data()), sensorDataLength - 1,
         &eventState, &previousEventState, &sensorDataSize, &presentReading);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     struct pldm_sensor_event_numeric_sensor_state* numericSensorData =
         (struct pldm_sensor_event_numeric_sensor_state*)sensorData.data();
@@ -2907,14 +2907,14 @@ TEST(PlatformEventMessage, testBadNumericSensorEventDataDecodeRequest)
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(sensorData.data()), sensorDataLength,
         &eventState, &previousEventState, &sensorDataSize, &presentReading);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     numericSensorData->sensor_data_size = PLDM_SENSOR_DATA_SIZE_UINT16;
     rc = decode_numeric_sensor_data(
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(sensorData.data()), sensorDataLength,
         &eventState, &previousEventState, &sensorDataSize, &presentReading);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
 TEST(GetNumericEffecterValue, testGoodEncodeRequest)
@@ -3176,7 +3176,7 @@ TEST(GetNumericEffecterValue, testBadDecodeResponse)
         &reteffecter_dataSize, &reteffecter_operState, retpendingValue,
         retpresentValue);
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
 TEST(PldmPDRRepositoryChgEventEvent, testGoodDecodeRequest)
@@ -3582,7 +3582,7 @@ TEST(GetSensorReading, testBadDecodeResponse)
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         &retevent_state, reinterpret_cast<uint8_t*>(&retpresentReading));
 
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
 TEST(SetEventReceiver, testGoodEncodeRequest)

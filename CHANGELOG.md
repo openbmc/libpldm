@@ -40,6 +40,19 @@ Change categories:
 
   The change removes redundant APIs in the process.
 
+- Returned error values for the following stable APIs have changed their
+  semantics:
+
+  - `decode_event_message_buffer_size_resp()`
+  - `decode_get_numeric_effecter_value_resp()`
+  - `decode_get_sensor_reading_resp()`
+  - `decode_get_state_sensor_readings_resp()`
+  - `decode_numeric_sensor_data()`
+  - `decode_sensor_op_data()`
+
+  No new error values will be returned, but existing error values may be
+  returned under new conditions.
+
 ### Deprecated
 
 ### Removed
