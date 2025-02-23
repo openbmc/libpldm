@@ -106,6 +106,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "867f2d77_81588764",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Marking it as resolved, please re-open it if there\u0027s any concern. We can discuss",
+      "parentUuid": "c6d61e0d_2feeee65",
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc0bd7f1_fcf6c81d",
@@ -331,6 +349,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "339ee7f8_d500337b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2120,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "@andrew@codeconstruct.com.au Do you have any suggestion here?\n\nAlso including @deepak.kodihalli.83@gmail.com here for any inputs",
+      "parentUuid": "c3239afe_4b1e2edf",
+      "range": {
+        "startLine": 2117,
+        "startChar": 1,
+        "endLine": 2120,
+        "endChar": 42
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76618fb9_450940bc",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 15
@@ -390,6 +432,30 @@
       "side": 1,
       "message": "It looks like you have a patch to pldmd that exploits these APIs. Have you pushed it? If not can you do so and mark it WIP, then link it here? It would help provide some context for me.",
       "parentUuid": "d4a8c9c8_b1a5aa63",
+      "range": {
+        "startLine": 2209,
+        "startChar": 66,
+        "endLine": 2248,
+        "endChar": 1
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77649d25_1190dde7",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2248,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Yes @andrew@codeconstruct.com.au, This is the patch - https://gerrit.openbmc.org/c/openbmc/pldm/+/78399\n\nTesting is pending so I\u0027ve marked it as WIP for now.",
+      "parentUuid": "f3457878_3980ab8a",
       "range": {
         "startLine": 2209,
         "startChar": 66,

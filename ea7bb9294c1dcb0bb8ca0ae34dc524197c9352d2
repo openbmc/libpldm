@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03e36984_54cfdf15",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e0832eb2_6835d502",
+      "range": {
+        "startLine": 374,
+        "startChar": 1,
+        "endLine": 382,
+        "endChar": 50
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d5c9fd9_ff6a5316",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-21T02:34:46Z",
       "side": 1,
       "message": "The cast from `void *` is unnecessary in C.",
+      "range": {
+        "startLine": 2757,
+        "startChar": 23,
+        "endLine": 2757,
+        "endChar": 40
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9902707f_67b10e20",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2757,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5d5c9fd9_ff6a5316",
       "range": {
         "startLine": 2757,
         "startChar": 23,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c14eb633_b630887f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2779,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "40002df1_d40cb159",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ee6d1f5_b378b4e8",
@@ -77,6 +143,30 @@
       "writtenOn": "2025-02-21T02:34:46Z",
       "side": 1,
       "message": "We need to be careful here as `decode_pldm_package_header_info()` is one of the older APIs that returns PLDM protocol error values rather than `errno` values. I\u0027ve reworked things internally for now so you can avoid this particular pain-point:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/78379\n\nCan you rebase your change on top and make use of the internal `_errno()`-suffixed APIs throughout this patch?",
+      "range": {
+        "startLine": 2786,
+        "startChar": 9,
+        "endLine": 2786,
+        "endChar": 11
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5556d4a_5c9d17cb",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2786,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5ee6d1f5_b378b4e8",
       "range": {
         "startLine": 2786,
         "startChar": 9,
@@ -110,6 +200,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d07d293_c01dbc21",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2792,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3d6f733c_17620020",
+      "range": {
+        "startLine": 2792,
+        "startChar": 9,
+        "endLine": 2792,
+        "endChar": 16
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15f646c2_2ada120e",
@@ -129,6 +243,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f64a2226_e422b84e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2800,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "What would be the benefit of making this change ? Wouldn\u0027t we still need a skip and an extract APIs ?",
+      "parentUuid": "15f646c2_2ada120e",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d94e711_bdc3e1db",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 18
@@ -140,6 +272,30 @@
       "writtenOn": "2025-02-21T02:34:46Z",
       "side": 1,
       "message": "No need for this test in either case (your current use of `pldm_msgbuf_skip()` above or my suggestion of `pldm_msgbuf_span_remaining()`) as the `crc32()` invocation is beyond the call to `pldm_msgbuf_destroy()`.",
+      "range": {
+        "startLine": 2801,
+        "startChar": 1,
+        "endLine": 2803,
+        "endChar": 2
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93a6c162_91dabd24",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2803,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Typically(kernel‐style) checking errors immediately after each operation is a standard defensive‐programming approach.\n\nAlso what if skip API fails in pre-check without modifying the ctx-\u003eremaining, wouldn\u0027t there be a case where it\u0027s not caught in the subsequent APIs which leads to an undefined behavior.",
+      "parentUuid": "5d94e711_bdc3e1db",
       "range": {
         "startLine": 2801,
         "startChar": 1,
@@ -173,6 +329,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0586315c_52d868cb",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2805,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ef903b11_f8fea5d3",
+      "range": {
+        "startLine": 2805,
+        "startChar": 1,
+        "endLine": 2805,
+        "endChar": 7
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcd418a4_22dbc1b0",
@@ -186,6 +366,24 @@
       "writtenOn": "2025-02-21T02:34:46Z",
       "side": 1,
       "message": "Generally prefer `pldm_msgbuf_destroy_consumed()` where we can when we\u0027re extracting data (it should be avoided when we\u0027re inserting data as we want to allow the API caller to pass a larger buffer than required).",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb3e982_a320353f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2806,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "dcd418a4_22dbc1b0",
       "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -215,6 +413,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7533300f_d7369edb",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2825,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "The spec says that the pkg version string can be atmost 255 bytes, Even after adding header size (few more bytes) is nowhere near enough to wrap around. (where size_t is typically 4 GB in range for a 32 bit platform)\n\nTherefore a single skip looks safe to me but I can make the change if it\u0027s really needed.",
+      "parentUuid": "8ad9e856_6d367c76",
+      "range": {
+        "startLine": 2824,
+        "startChar": 1,
+        "endLine": 2825,
+        "endChar": 24
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7734abac_73a56929",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 18
@@ -226,6 +448,30 @@
       "writtenOn": "2025-02-21T02:34:46Z",
       "side": 1,
       "message": "There\u0027s no need for this test. It\u0027s handled by `pldm_msgbuf_skip()`.",
+      "range": {
+        "startLine": 2827,
+        "startChar": 1,
+        "endLine": 2830,
+        "endChar": 1
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c2c2553_5d7165b0",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2830,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7734abac_73a56929",
       "range": {
         "startLine": 2827,
         "startChar": 1,
@@ -261,6 +507,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "721dcc4c_c7f153f8",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2834,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "@andrew@codeconstruct.com.au Typically(kernel‐style) checking errors immediately after each operation is a standard defensive‐programming approach.\n\nAlso what if skip API fails in pre-check without modifying the ctx-\u003eremaining, there may be a case where it\u0027s not caught in the next API which leads to an undefined behavior.",
+      "parentUuid": "095ebd2e_d991646b",
+      "range": {
+        "startLine": 2832,
+        "startChar": 1,
+        "endLine": 2834,
+        "endChar": 2
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b76fe974_0b8e419d",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 18
@@ -272,6 +542,30 @@
       "writtenOn": "2025-02-21T02:34:46Z",
       "side": 1,
       "message": "As a contrast to the above cases where I\u0027ve commented that the return value tests aren\u0027t required, this one is required, as you use the value of `dev_count` below.",
+      "range": {
+        "startLine": 2837,
+        "startChar": 1,
+        "endLine": 2839,
+        "endChar": 2
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24aa2192_5dc08340",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2839,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Ahh understood.",
+      "parentUuid": "b76fe974_0b8e419d",
       "range": {
         "startLine": 2837,
         "startChar": 1,
@@ -316,6 +610,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf5768be_b82dc13f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2859,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "The intent was to create a copy of hdr_buf so we can extract the 2‐byte record length without advancing the primary buffer’s offset and and then do a separate pldm_msgbuf_skip(hdr_buf, rec_len) after to avoid restoring restoring or recalculating the offset explicitly.\n\nAs asked I am removing the temp rec and updating the pldm_msgbug_skip() accordingly.",
+      "parentUuid": "06e0bcf6_b498edf3",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa34e506_a49fd43a",
@@ -329,6 +641,30 @@
       "writtenOn": "2025-02-21T02:34:46Z",
       "side": 1,
       "message": "Please do not reach into the msgbuf struct like this. It should only be accessed via its APIs. If there\u0027s not an API for what you need, then we can consider adding one.",
+      "range": {
+        "startLine": 2869,
+        "startChar": 2,
+        "endLine": 2869,
+        "endChar": 60
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a59b31c_b8ca9ecf",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2869,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "It is already used directly at some of the places. If an API is needed then I can create a separate patch for that.",
+      "parentUuid": "fa34e506_a49fd43a",
       "range": {
         "startLine": 2869,
         "startChar": 2,
@@ -358,6 +694,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8035865b_400c194b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2876,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Could you please elaborate on the concern here ?\n\nSince we only read data, not modify it, pointer aliasing avoids unnecessary copying",
+      "parentUuid": "a247be18_765cbca2",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "abf58d11_b0440aec",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 18
@@ -369,6 +723,24 @@
       "writtenOn": "2025-02-21T02:34:46Z",
       "side": 1,
       "message": "If we\u0027re scanning through the package just for the purpose of populating `entries` for the iterator, then I don\u0027t think it\u0027s worthwhile. If the package header lacks count information, we can fall back on reaching the end of the buffer to define the termination of the iterator. I think we can drop the entries member from the iterator implementation.",
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1c20646_3fa40bd5",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2892,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Maybe I didn\u0027t truly understand the concern here.\n\nIt\u0027s consumed in _iter_next() and _iter_end() and similar approach is used for query_downstread_identifiers as well. \n\nIt does help in easy iteration and I think we can rely on the spec defined counts rather than waiting for buffer to end.",
+      "parentUuid": "abf58d11_b0440aec",
       "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -409,6 +781,30 @@
       "writtenOn": "2025-02-21T02:34:46Z",
       "side": 1,
       "message": "No need for this.",
+      "range": {
+        "startLine": 2968,
+        "startChar": 1,
+        "endLine": 2970,
+        "endChar": 2
+      },
+      "revId": "ea7bb9294c1dcb0bb8ca0ae34dc524197c9352d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63f61779_ce7fdbc1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2970,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-02-23T19:45:35Z",
+      "side": 1,
+      "message": "Will update as per discussion in the couple of open threads above.",
+      "parentUuid": "f1c23c77_dfa9a6df",
       "range": {
         "startLine": 2968,
         "startChar": 1,
