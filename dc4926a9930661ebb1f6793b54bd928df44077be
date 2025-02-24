@@ -437,6 +437,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f8fefe3_6fe88e95",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-02-24T06:34:11Z",
+      "side": 1,
+      "message": "getEntity function fetches the entity data(type, instance, container) from msg_buf.\nI have initialied the object\n `struct pldm_entity_test container_entity \u003d {};`\nAnd passed it to the function\n `getEntity(buf, container_entity);`\n\nam I missing anything here?",
+      "parentUuid": "41cad0da_7e7a06b6",
+      "revId": "dc4926a9930661ebb1f6793b54bd928df44077be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f15756a3_fa6babc3",
         "filename": "tests/dsp/pdr.cpp",
         "patchSetId": 21
