@@ -305,6 +305,18 @@ const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 	uint16_t *entity_type, uint16_t *entity_instance_num,
 	uint16_t *container_id);
 
+/** @brief delete the state sensor PDR by sensor id
+ *
+ *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in] sensor_id - sensor ID of the PDR
+ *  @param[in] is_remote - if true, then the PDR is not from this terminus
+ *  @param[out] record_handle - record handle of the sensor PDR deleted
+ *
+ *  @return record handle of the sensor PDR deleted from the repo
+ */
+int pldm_pdr_delete_by_sensor_id(pldm_pdr *repo, uint16_t sensor_id,
+				 bool is_remote, uint32_t *record_handle);
+
 /* =========================== */
 /* Entity Association PDR APIs */
 /* =========================== */
