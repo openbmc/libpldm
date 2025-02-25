@@ -246,6 +246,18 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
 int pldm_pdr_delete_by_record_handle(pldm_pdr *repo, uint32_t record_handle,
 				     bool is_remote);
 
+/** @brief delete the state effecter PDR by effecter id
+ *
+ *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in] effecter_id - effecter ID of the PDR
+ *  @param[in] is_remote - if true, then the PDR is not from this terminus
+ *  @param[out] record_handle - record handle of the effecter PDR deleted
+ *
+ *  @return record handle of the effecter PDR deleted from the repo
+ */
+int pldm_pdr_delete_by_effecter_id(pldm_pdr *repo, uint16_t effecter_id,
+				   bool is_remote, uint32_t *record_handle);
+
 /* ======================= */
 /* FRU Record Set PDR APIs */
 /* ======================= */
