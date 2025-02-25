@@ -642,6 +642,50 @@ TEST(PDRUpdate, testFindLastInRange)
 #endif
 
 #ifdef LIBPLDM_API_TESTING
+TEST(PDRAccess, testRemoveBySensorID)
+{
+    auto repo = pldm_pdr_init();
+
+    size_t pdrSize = 0;
+    pdrSize =
+        sizeof(pldm_state_sensor_pdr) + sizeof(state_sensor_possible_states);
+    std::vector<uint8_t> entry{};
+    entry.resize(pdrSize);
+
+    pldm_state_sensor_pdr* pdr = new (entry.data()) pldm_state_sensor_pdr;
+
+    pdr->hdr.type = PLDM_STATE_SENSOR_PDR;
+    pdr->sensor_id = 1;
+    uint32_t first = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &first),
+              0);
+
+    pdr->sensor_id = 2;
+    uint32_t second = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &second),
+              0);
+
+    pdr->sensor_id = 10;
+    uint32_t third = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &third),
+              0);
+
+    pdr->sensor_id = 20;
+    uint32_t fourth = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &fourth),
+              0);
+
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 4u);
+
+    EXPECT_EQ(pldm_pdr_delete_by_sensor_id(repo, 1, false), first);
+    EXPECT_EQ(pldm_pdr_delete_by_sensor_id(repo, 10, false), third);
+
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 2u);
+    pldm_pdr_destroy(repo);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
 TEST(PDRAccess, testGetTerminusHandle)
 {
 

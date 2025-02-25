@@ -404,6 +404,56 @@ static bool pldm_record_handle_in_range(uint32_t record_handle,
 }
 
 LIBPLDM_ABI_TESTING
+uint16_t pldm_pdr_delete_by_sensor_id(pldm_pdr *repo, uint16_t sensor_id,
+				      bool is_remote)
+{
+	if (!repo) {
+		return -EINVAL;
+	}
+
+	uint32_t deleted_handle = 0;
+	pldm_pdr_record *record = repo->first;
+	pldm_pdr_record *prev = NULL;
+	while (record != NULL) {
+		pldm_pdr_record *next = record->next;
+		struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)record->data;
+		if ((record->is_remote == is_remote) &&
+		    hdr->type == PLDM_STATE_SENSOR_PDR) {
+			struct pldm_state_sensor_pdr *pdr =
+				(struct pldm_state_sensor_pdr
+					 *)((uint8_t *)record->data);
+			if (pdr->sensor_id == sensor_id) {
+				deleted_handle = hdr->record_handle;
+				if (repo->first == record) {
+					repo->first = next;
+				} else {
+					prev->next = next;
+				}
+				if (repo->last == record) {
+					repo->last = prev;
+					if (prev != NULL) {
+						prev->next = NULL;
+					}
+				}
+				--repo->record_count;
+				repo->size -= record->size;
+				if (record->data) {
+					free(record->data);
+				}
+				free(record);
+				break;
+			}
+			prev = record;
+
+		} else {
+			prev = record;
+		}
+		record = next;
+	}
+	return deleted_handle;
+}
+
+LIBPLDM_ABI_TESTING
 int pldm_pdr_find_child_container_id_index_range_exclude(
 	const pldm_pdr *repo, uint16_t entity_type, uint16_t entity_instance,
 	uint8_t child_index, uint32_t range_exclude_start_handle,
