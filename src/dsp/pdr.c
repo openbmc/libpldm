@@ -456,6 +456,104 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
 	return -ENOENT;
 }
 
+/* API to check if effecter ID of the PDR record matches the given effecter ID. This API
+ * returns 0 if the effecter id does not match and returns 1 if it matches, otherwise
+ * returns -EINVAL if the arguments are invalid.
+ */
+LIBPLDM_CC_NONNULL
+static int pldm_pdr_record_find_effecter_id(const pldm_pdr_record *record,
+					    uint16_t effecter_id)
+{
+	uint16_t record_effecter_id = 0;
+	uint8_t *skip_data = NULL;
+	uint8_t skip_data_size = 0;
+	PLDM_MSGBUF_DEFINE_P(dst);
+	int rc = 0;
+	rc = pldm_msgbuf_init_errno(dst, sizeof(struct pldm_state_effecter_pdr),
+				    record->data, record->size);
+	if (rc) {
+		return rc;
+	}
+	skip_data_size = sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t);
+	pldm_msgbuf_span_required(dst, skip_data_size, (void **)&skip_data);
+	pldm_msgbuf_extract(dst, record_effecter_id);
+	rc = pldm_msgbuf_complete(dst);
+	if (rc) {
+		return rc;
+	}
+	return record_effecter_id == effecter_id;
+}
+
+LIBPLDM_CC_NONNULL
+static int decode_pldm_state_effecter_pdr(uint8_t *data, uint32_t size,
+					  struct pldm_state_effecter_pdr *pdr)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc = 0;
+	/* skip parsing the data size as per pldm_pdr_hdr structure*/
+	size_t skip_data_size = sizeof(uint32_t) + sizeof(uint8_t);
+	rc = pldm_msgbuf_init_errno(buf, sizeof(struct pldm_state_effecter_pdr),
+				    (uint8_t *)data, size);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_span_required(buf, skip_data_size, NULL);
+	rc = pldm_msgbuf_extract(buf, pdr->hdr.type);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return rc;
+	}
+	return rc;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_delete_by_effecter_id(pldm_pdr *repo, uint16_t effecter_id,
+				   bool is_remote, uint32_t *record_handle)
+{
+	pldm_pdr_record *record;
+	pldm_pdr_record *prev = NULL;
+	int rc = 0;
+	int found;
+	struct pldm_state_effecter_pdr pdr;
+
+	if (!repo) {
+		return -EINVAL;
+	}
+	record = repo->first;
+
+	while (record != NULL) {
+		if (!record->data) {
+			return -ENOENT;
+		}
+
+		rc = decode_pldm_state_effecter_pdr(record->data, record->size,
+						    &pdr);
+		if (rc) {
+			return rc;
+		}
+
+		if (record->is_remote != is_remote ||
+		    pdr.hdr.type != PLDM_STATE_EFFECTER_PDR) {
+			record = record->next;
+			continue;
+		}
+		found = pldm_pdr_record_find_effecter_id(record, effecter_id);
+		if (found < 0) {
+			return found;
+		}
+		if (found) {
+			*record_handle = record->record_handle;
+			prev = pldm_pdr_get_prev_record(repo, record);
+			return pldm_pdr_remove_record(repo, record, prev);
+		}
+		record = record->next;
+	}
+	return rc;
+}
+
 LIBPLDM_ABI_TESTING
 int pldm_pdr_delete_by_record_handle(pldm_pdr *repo, uint32_t record_handle,
 				     bool is_remote)
