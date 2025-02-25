@@ -772,6 +772,59 @@ TEST(PDRAccess, testGetTerminusHandle)
 }
 #endif
 
+#ifdef LIBPLDM_API_TESTING
+TEST(PDRAccess, testRemoveByEffecterID)
+{
+    auto repo = pldm_pdr_init();
+
+    size_t pdrSize = 0;
+    pdrSize = sizeof(pldm_state_effecter_pdr) +
+              sizeof(state_effecter_possible_states);
+    std::vector<uint8_t> entry{};
+    entry.resize(pdrSize);
+
+    pldm_state_effecter_pdr* pdr = new (entry.data()) pldm_state_effecter_pdr;
+    pdr->hdr.type = PLDM_STATE_EFFECTER_PDR;
+
+    pdr->effecter_id = 1;
+    uint32_t first = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &first),
+              0);
+
+    pdr->effecter_id = 2;
+    uint32_t second = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &second),
+              0);
+
+    pdr->effecter_id = 10;
+    uint32_t third = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &third),
+              0);
+
+    pdr->effecter_id = 20;
+    uint32_t fourth = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &fourth),
+              0);
+
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 4u);
+
+    uint32_t removed_record_handle{};
+    int rc =
+        pldm_pdr_delete_by_effecter_id(repo, 1, false, &removed_record_handle);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(removed_record_handle, 1);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 3u);
+
+    rc =
+        pldm_pdr_delete_by_effecter_id(repo, 20, false, &removed_record_handle);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(removed_record_handle, 4);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 2u);
+
+    pldm_pdr_destroy(repo);
+}
+#endif
+
 TEST(EntityAssociationPDR, testInit)
 {
     auto tree = pldm_entity_association_tree_init();
