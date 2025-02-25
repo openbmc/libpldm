@@ -47,6 +47,8 @@ Change categories:
 
 - file: Add encode req & decode resp for DfHeartbeat command.
 
+- pdr: Add pldm_pdr_delete_by_sensor_id() API
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
