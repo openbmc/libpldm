@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d88ca8cb_38f8d344",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-25T06:41:11Z",
+      "side": 1,
+      "message": "If you don\u0027t mind I\u0027d like to defer these suggestions as arithmetic on void pointers issues an error:\n\n```\n../src/dsp/firmware_update.c: In function ‘decode_pldm_package_header_info_errno’:\n../src/dsp/firmware_update.c:377:22: error: pointer of type ‘void *’ used in arithmetic [-Werror\u003dpointer-arith]\n  377 |                 data + sizeof(struct pldm_package_header_information);\n      |                      ^\n```\n\nThe impact by not yet making the change is low as the symbols are static. We can change the declaration in a subsequent patch without concern. I just don\u0027t want to be fixing semantics that aren\u0027t the error values in this patch.",
+      "parentUuid": "200e2c16_18f7c6fe",
+      "revId": "779e9dbdcfaf8e131b6c35edbc4e057aab52a65a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3f0ae10_670928ec",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 1
