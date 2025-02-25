@@ -456,6 +456,80 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
 	return -ENOENT;
 }
 
+LIBPLDM_CC_NONNULL
+static int decode_pldm_state_effecter_pdr(uint8_t *data, uint32_t size,
+					  struct pldm_state_effecter_pdr *pdr)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc = 0;
+	rc = pldm_msgbuf_init_errno(buf, sizeof(struct pldm_state_effecter_pdr),
+				    (uint8_t *)data, size);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, pdr->hdr.record_handle);
+	pldm_msgbuf_extract(buf, pdr->hdr.version);
+	pldm_msgbuf_extract(buf, pdr->hdr.type);
+	pldm_msgbuf_extract(buf, pdr->hdr.record_change_num);
+	pldm_msgbuf_extract(buf, pdr->hdr.length);
+	pldm_msgbuf_extract(buf, pdr->terminus_handle);
+	pldm_msgbuf_extract(buf, pdr->effecter_id);
+	pldm_msgbuf_extract(buf, pdr->entity_type);
+	pldm_msgbuf_extract(buf, pdr->entity_instance);
+	pldm_msgbuf_extract(buf, pdr->container_id);
+	pldm_msgbuf_extract(buf, pdr->effecter_semantic_id);
+	pldm_msgbuf_extract(buf, pdr->effecter_init);
+	pldm_msgbuf_extract(buf, pdr->has_description_pdr);
+	pldm_msgbuf_extract(buf, pdr->composite_effecter_count);
+
+	return pldm_msgbuf_complete(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_delete_by_effecter_id(pldm_pdr *repo, uint16_t effecter_id,
+				   bool is_remote, uint32_t *record_handle)
+{
+	pldm_pdr_record *record;
+	pldm_pdr_record *prev = NULL;
+	int rc = 0;
+	int found;
+	struct pldm_state_effecter_pdr pdr;
+
+	if (!repo) {
+		return -EINVAL;
+	}
+	record = repo->first;
+
+	while (record != NULL) {
+		if (!record->data) {
+			continue;
+		}
+
+		rc = decode_pldm_state_effecter_pdr(record->data, record->size,
+						    &pdr);
+		if (rc) {
+			return rc;
+		}
+
+		if (record->is_remote != is_remote ||
+		    pdr.hdr.type != PLDM_STATE_EFFECTER_PDR) {
+			record = record->next;
+			continue;
+		}
+		found = pdr.effecter_id == effecter_id;
+		if (found) {
+			if (record_handle) {
+				*record_handle = record->record_handle;
+			}
+			prev = pldm_pdr_get_prev_record(repo, record);
+			return pldm_pdr_remove_record(repo, record, prev);
+		}
+		record = record->next;
+	}
+	return rc;
+}
+
 LIBPLDM_ABI_TESTING
 int pldm_pdr_delete_by_record_handle(pldm_pdr *repo, uint32_t record_handle,
 				     bool is_remote)
