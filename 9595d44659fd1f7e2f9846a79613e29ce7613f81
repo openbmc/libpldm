@@ -297,6 +297,24 @@
       "parentUuid": "e163123b_39f52da8",
       "revId": "9595d44659fd1f7e2f9846a79613e29ce7613f81",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe8358f7_ce7f9ffb",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1608,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-02-25T11:01:08Z",
+      "side": 1,
+      "message": "I have removed this test",
+      "parentUuid": "5d493846_1a2eb21c",
+      "revId": "9595d44659fd1f7e2f9846a79613e29ce7613f81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
