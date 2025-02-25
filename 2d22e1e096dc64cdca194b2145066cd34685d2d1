@@ -373,6 +373,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c989788_3eb730be",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2120,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-25T06:28:55Z",
+      "side": 1,
+      "message": "See my reply here:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/77429/comment/76618fb9_450940bc/\n\nRather than be vaguely concerned without making concrete suggestions I\u0027d like to experiment with it myself.",
+      "parentUuid": "339ee7f8_d500337b",
+      "range": {
+        "startLine": 2117,
+        "startChar": 1,
+        "endLine": 2120,
+        "endChar": 42
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76618fb9_450940bc",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 15
@@ -456,6 +480,30 @@
       "side": 1,
       "message": "Yes @andrew@codeconstruct.com.au, This is the patch - https://gerrit.openbmc.org/c/openbmc/pldm/+/78399\n\nTesting is pending so I\u0027ve marked it as WIP for now.",
       "parentUuid": "f3457878_3980ab8a",
+      "range": {
+        "startLine": 2209,
+        "startChar": 66,
+        "endLine": 2248,
+        "endChar": 1
+      },
+      "revId": "2d22e1e096dc64cdca194b2145066cd34685d2d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71b5eb4_fdc8dd26",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2248,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-25T06:28:55Z",
+      "side": 1,
+      "message": "Great, thanks for that. If you don\u0027t mind, I\u0027ll propose some changes to both patches by working on them and pushing them back. That way you\u0027re not stuck guessing at what I\u0027m trying to suggest, I gain experience with what you\u0027re trying to achieve, and we both have something concrete to discuss.\n\nI\u0027ll mark this as unresolved for your feedback.",
+      "parentUuid": "77649d25_1190dde7",
       "range": {
         "startLine": 2209,
         "startChar": 66,
