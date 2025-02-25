@@ -456,6 +456,211 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
 	return -ENOENT;
 }
 
+/* API to check if effecter ID of the PDR record matches the given effecter ID. This API
+ * returns 0 if the effecter id does not match and returns 1 if it matches, otherwise
+ * returns -EINVAL if the arguments are invalid.
+ */
+LIBPLDM_CC_NONNULL
+static int pldm_pdr_record_find_effecter_id(const pldm_pdr_record *record,
+					    uint16_t effecter_id)
+{
+	uint16_t record_effecter_id = 0;
+	uint8_t *skip_data = NULL;
+	uint8_t skip_data_size = 0;
+	PLDM_MSGBUF_DEFINE_P(dst);
+	int rc = 0;
+	rc = pldm_msgbuf_init_errno(dst, sizeof(struct pldm_state_effecter_pdr),
+				    record->data, record->size);
+	if (rc) {
+		return rc;
+	}
+	skip_data_size = sizeof(struct pldm_pdr_hdr) + sizeof(uint16_t);
+	pldm_msgbuf_span_required(dst, skip_data_size, (void **)&skip_data);
+	pldm_msgbuf_extract(dst, record_effecter_id);
+	rc = pldm_msgbuf_complete(dst);
+	if (rc) {
+		return rc;
+	}
+	return record_effecter_id == effecter_id;
+}
+
+LIBPLDM_CC_NONNULL
+static int decode_pldm_state_effecter_pdr(uint8_t *data, uint32_t size,
+					  struct pldm_state_effecter_pdr *pdr)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc = 0;
+	rc = pldm_msgbuf_init_errno(buf, sizeof(struct pldm_state_effecter_pdr),
+				    (uint8_t *)data, size);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->hdr.record_handle);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->hdr.version);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->hdr.type);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->hdr.record_change_num);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->hdr.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->terminus_handle);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->effecter_id);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->entity_type);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->entity_instance);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->container_id);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->effecter_semantic_id);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->effecter_init);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->has_description_pdr);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, pdr->composite_effecter_count);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	for (int i = 0; i < pdr->composite_effecter_count; ++i) {
+		struct state_effecter_possible_states *entry;
+
+		uint16_t state_set_id;
+		rc = pldm_msgbuf_extract(buf, state_set_id);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+
+		uint8_t possible_states_size;
+		rc = pldm_msgbuf_extract(buf, possible_states_size);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+
+		// Compute the size of the full entry including the variable-length states[]
+		size_t entry_size =
+			offsetof(struct state_effecter_possible_states,
+				 states) +
+			possible_states_size * sizeof(bitfield8_t);
+
+		// Allocate memory for one full entry
+		entry = malloc(entry_size);
+		if (!entry) {
+			return -ENOMEM;
+		}
+
+		entry->state_set_id = state_set_id;
+		entry->possible_states_size = possible_states_size;
+
+		// Extract each bitfield8_t state
+		for (int j = 0; j < possible_states_size; ++j) {
+			uint8_t tmp_state;
+			rc = pldm_msgbuf_extract(buf, tmp_state);
+			if (rc) {
+				free(entry);
+				return pldm_msgbuf_discard(buf, rc);
+			}
+			entry->states[j].byte = tmp_state;
+		}
+		free(entry);
+	}
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return rc;
+	}
+	return rc;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_delete_by_effecter_id(pldm_pdr *repo, uint16_t effecter_id,
+				   bool is_remote, uint32_t *record_handle)
+{
+	pldm_pdr_record *record;
+	pldm_pdr_record *prev = NULL;
+	int rc = 0;
+	int found;
+	struct pldm_state_effecter_pdr pdr;
+
+	if (!repo) {
+		return -EINVAL;
+	}
+	record = repo->first;
+
+	while (record != NULL) {
+		if (!record->data) {
+			return -ENOENT;
+		}
+
+		rc = decode_pldm_state_effecter_pdr(record->data, record->size,
+						    &pdr);
+		if (rc) {
+			return rc;
+		}
+
+		if (record->is_remote != is_remote ||
+		    pdr.hdr.type != PLDM_STATE_EFFECTER_PDR) {
+			record = record->next;
+			continue;
+		}
+		found = pldm_pdr_record_find_effecter_id(record, effecter_id);
+		if (found < 0) {
+			return found;
+		}
+		if (found) {
+			*record_handle = record->record_handle;
+			prev = pldm_pdr_get_prev_record(repo, record);
+			return pldm_pdr_remove_record(repo, record, prev);
+		}
+		record = record->next;
+	}
+	return rc;
+}
+
 LIBPLDM_ABI_TESTING
 int pldm_pdr_delete_by_record_handle(pldm_pdr *repo, uint32_t record_handle,
 				     bool is_remote)
