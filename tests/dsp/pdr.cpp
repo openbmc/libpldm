@@ -802,6 +802,98 @@ TEST(PDRAccess, testRemoveByRecordHandle)
     pldm_pdr_destroy(repo);
 }
 
+#ifdef LIBPLDM_API_TESTING
+TEST(PDRAccess, testRemoveByEffecterIDDecodeFailure)
+{
+    auto repo = pldm_pdr_init();
+    ASSERT_NE(repo, nullptr);
+
+    // Create a deliberately undersized PDR record
+    size_t invalidPdrSize = sizeof(pldm_state_effecter_pdr) - 5; // Invalid size
+    std::vector<uint8_t> entry(invalidPdrSize, 0);
+    pldm_state_effecter_pdr* pdr = new (entry.data()) pldm_state_effecter_pdr;
+    pdr->hdr.type = PLDM_STATE_EFFECTER_PDR;
+    pdr->effecter_id = 99; // random ID
+
+    uint32_t record_handle = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1,
+                           &record_handle),
+              0);
+
+    // Attempt to delete the malformed record by effecter_id
+    uint32_t removed_record_handle = 0;
+    int rc =
+        pldm_pdr_delete_by_effecter_id(repo, 99, false, &removed_record_handle);
+
+    // We expect a failure from decode_pldm_state_effecter_pdr
+    EXPECT_NE(rc, 0);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo),
+              1u); // Record remains in the repo
+    pldm_pdr_destroy(repo);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(PDRAccess, testRemoveByEffecterID)
+{
+    auto repo = pldm_pdr_init();
+    ASSERT_NE(repo, nullptr);
+
+    size_t pdrSize = 0;
+    pdrSize = sizeof(pldm_state_effecter_pdr) +
+              sizeof(state_effecter_possible_states);
+    std::vector<uint8_t> entry{};
+    entry.resize(pdrSize);
+
+    pldm_state_effecter_pdr* pdr = new (entry.data()) pldm_state_effecter_pdr;
+    pdr->hdr.type = PLDM_STATE_EFFECTER_PDR;
+
+    pdr->effecter_id = 1;
+    uint32_t first = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &first),
+              0);
+
+    pdr->effecter_id = 2;
+    uint32_t second = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &second),
+              0);
+
+    pdr->effecter_id = 10;
+    uint32_t third = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &third),
+              0);
+
+    pdr->effecter_id = 20;
+    uint32_t fourth = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &fourth),
+              0);
+
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 4u);
+
+    uint32_t removed_record_handle{};
+    int rc =
+        pldm_pdr_delete_by_effecter_id(repo, 1, false, &removed_record_handle);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(removed_record_handle, 1);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 3u);
+
+    // Error case where the effceter ID is not present in the repo
+    uint32_t removed_rec_handle{};
+    rc = pldm_pdr_delete_by_effecter_id(repo, 15, false, &removed_rec_handle);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(removed_rec_handle, 0);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 3u);
+
+    rc =
+        pldm_pdr_delete_by_effecter_id(repo, 20, false, &removed_record_handle);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(removed_record_handle, 4);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 2u);
+
+    pldm_pdr_destroy(repo);
+}
+#endif
+
 TEST(EntityAssociationPDR, testInit)
 {
     auto tree = pldm_entity_association_tree_init();
