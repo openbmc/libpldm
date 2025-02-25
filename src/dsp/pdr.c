@@ -456,6 +456,56 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
 	return -ENOENT;
 }
 
+LIBPLDM_ABI_TESTING
+uint16_t pldm_pdr_delete_by_effecter_id(pldm_pdr *repo, uint16_t effecter_id,
+					bool is_remote)
+{
+	if (!repo) {
+		return -EINVAL;
+	}
+
+	uint32_t deleted_handle = 0;
+	pldm_pdr_record *record = repo->first;
+	pldm_pdr_record *prev = NULL;
+	while (record != NULL) {
+		pldm_pdr_record *next = record->next;
+		struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)record->data;
+		if ((record->is_remote == is_remote) &&
+		    hdr->type == PLDM_STATE_EFFECTER_PDR) {
+			struct pldm_state_effecter_pdr *pdr =
+				(struct pldm_state_effecter_pdr
+					 *)((uint8_t *)record->data);
+			if (pdr->effecter_id == effecter_id) {
+				deleted_handle = hdr->record_handle;
+				if (repo->first == record) {
+					repo->first = next;
+				} else {
+					prev->next = next;
+				}
+				if (repo->last == record) {
+					repo->last = prev;
+					if (prev != NULL) {
+						prev->next = NULL;
+					}
+				}
+				--repo->record_count;
+				repo->size -= record->size;
+				if (record->data) {
+					free(record->data);
+				}
+				free(record);
+				break;
+			}
+			prev = record;
+
+		} else {
+			prev = record;
+		}
+		record = next;
+	}
+	return deleted_handle;
+}
+
 typedef struct pldm_entity_association_tree {
 	pldm_entity_node *root;
 	uint16_t last_used_container_id;
