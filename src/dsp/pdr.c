@@ -456,6 +456,51 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
 	return -ENOENT;
 }
 
+LIBPLDM_ABI_TESTING
+int pldm_pdr_delete_by_record_handle(pldm_pdr *repo, uint32_t record_handle,
+				     bool is_remote)
+{
+	pldm_pdr_record *record;
+	pldm_pdr_record *prev = NULL;
+	int rc = 0;
+	uint16_t rec_handle = 0;
+
+	if (!repo) {
+		return -EINVAL;
+	}
+	record = repo->first;
+
+	while (record != NULL) {
+		struct pldm_msgbuf _buf;
+		struct pldm_msgbuf *buf = &_buf;
+		rc = pldm_msgbuf_init_errno(buf, sizeof(struct pldm_pdr_hdr),
+					    record->data, record->size);
+
+		if (rc) {
+			return rc;
+		}
+		if ((rc = pldm_msgbuf_extract(buf, rec_handle))) {
+			return rc;
+		}
+		if (record->is_remote != is_remote ||
+		    rec_handle != record_handle) {
+			goto cleanup;
+		}
+
+		else {
+			prev = pldm_pdr_get_prev_record(repo, record);
+			return pldm_pdr_remove_record(repo, record, prev);
+		}
+	cleanup:
+		rc = pldm_msgbuf_destroy(buf);
+		if (rc) {
+			return rc;
+		}
+		record = record->next;
+	}
+	return rc;
+}
+
 typedef struct pldm_entity_association_tree {
 	pldm_entity_node *root;
 	uint16_t last_used_container_id;

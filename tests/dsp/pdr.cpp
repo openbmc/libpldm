@@ -695,6 +695,38 @@ TEST(PDRAccess, testGetTerminusHandle)
 }
 #endif
 
+#ifdef LIBPLDM_API_TESTING
+TEST(PDRAccess, testRemoveByRecordHandle)
+{
+    std::array<uint8_t, sizeof(pldm_pdr_hdr)> data{};
+
+    auto repo = pldm_pdr_init();
+    uint32_t first = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, data.data(), data.size(), false, 1, &first),
+              0);
+
+    uint32_t second = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, data.data(), data.size(), false, 1, &second),
+              0);
+
+    uint32_t third = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, data.data(), data.size(), false, 1, &third),
+              0);
+
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 3u);
+
+    int rc = pldm_pdr_delete_by_record_handle(repo, 1, false);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 2u);
+
+    rc = pldm_pdr_delete_by_record_handle(repo, 2, false);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 1u);
+
+    pldm_pdr_destroy(repo);
+}
+#endif
+
 TEST(EntityAssociationPDR, testInit)
 {
     auto tree = pldm_entity_association_tree_init();
