@@ -23,6 +23,7 @@ Change categories:
 - utils: Introduce `pldm_edac_crc8()`
 - pdr: Add pldm_pdr_delete_by_effecter_id() API
 - platform: Add encode req for GetPDRRepositoryInfo
+- pdr: Add pldm_entity_association_tree_delete_node() API
 
 - oem: ibm: Add boot side rename state set and enum
 
