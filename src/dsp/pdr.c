@@ -2272,3 +2272,44 @@ int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 	}
 	return rc;
 }
+
+LIBPLDM_ABI_TESTING
+int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
+					     const pldm_entity *entity)
+{
+	if (!tree || !entity) {
+		return -EINVAL;
+	}
+	pldm_entity_node *node = NULL;
+	pldm_find_entity_ref_in_tree(tree, *entity, &node);
+	if (!node) {
+		return -ENOENT;
+	}
+
+	pldm_entity_node *parent = NULL;
+	pldm_find_entity_ref_in_tree(tree, node->parent, &parent);
+	if (!parent) {
+		return -ENOENT;
+	}
+
+	pldm_entity_node *curr = parent->first_child;
+	pldm_entity_node *prev = NULL;
+	while (curr != NULL) {
+		if (pldm_entity_cmp(entity, &curr->entity)) {
+			if (curr == parent->first_child) {
+				parent->first_child = curr->next_sibling;
+			} else {
+				if (prev) {
+					prev->next_sibling = curr->next_sibling;
+				}
+			}
+			curr->next_sibling = NULL;
+
+			entity_association_tree_destroy(node);
+			break;
+		}
+		prev = curr;
+		curr = curr->next_sibling;
+	}
+	return 0;
+}
