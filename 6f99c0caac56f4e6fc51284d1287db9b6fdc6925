@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ce5a24_bcfe284d",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-02-26T08:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81d75978_fd2dfae4",
+      "range": {
+        "startLine": 288,
+        "startChar": 74,
+        "endLine": 288,
+        "endChar": 75
+      },
+      "revId": "6f99c0caac56f4e6fc51284d1287db9b6fdc6925",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9df53fa8_5757a3a5",
@@ -54,6 +78,24 @@
       "writtenOn": "2025-02-26T00:24:22Z",
       "side": 1,
       "message": "Please trim the trailing whitespace",
+      "revId": "6f99c0caac56f4e6fc51284d1287db9b6fdc6925",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dc24372_1609479a",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-02-26T08:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9df53fa8_5757a3a5",
       "revId": "6f99c0caac56f4e6fc51284d1287db9b6fdc6925",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad9cb40f_12c4d039",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-02-26T08:40:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c3999608_58357252",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 8
+      },
+      "revId": "6f99c0caac56f4e6fc51284d1287db9b6fdc6925",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34937cbe_aeb00e47",
@@ -94,6 +160,24 @@
       "writtenOn": "2025-02-26T00:24:22Z",
       "side": 1,
       "message": "None of this is testing the length of the buffer before the casts to the struct types.\n\nPlease use the msgbuf APIs for spatial memory safety and endianness correctness.",
+      "revId": "6f99c0caac56f4e6fc51284d1287db9b6fdc6925",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bad730e_5c5ed8e3",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-02-26T08:40:48Z",
+      "side": 1,
+      "message": "Acknowledged my bad, I have made changes by using msgbuf API for spatial memory safety and endianness correctness.",
+      "parentUuid": "34937cbe_aeb00e47",
       "revId": "6f99c0caac56f4e6fc51284d1287db9b6fdc6925",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
