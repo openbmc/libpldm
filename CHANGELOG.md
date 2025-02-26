@@ -80,6 +80,8 @@ Change categories:
 - oem: ibm: Modified the state set id for slot effecter and sensor
 - base: Add encode req & decode resp for NegotiateTransferParameters.
 
+- pdr: Add pldm_entity_association_tree_delete_node() API
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names

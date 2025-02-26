@@ -2408,3 +2408,66 @@ TEST(PDRUpdate, testRemoveFruRecord)
     pldm_pdr_destroy(repo);
 }
 #endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EntityAssociationPDR, testDeleteNode)
+{
+
+    pldm_entity* entities = (pldm_entity*)malloc(sizeof(pldm_entity) * 4);
+    entities[0].entity_type = 1;
+
+    entities[1].entity_type = 2;
+    entities[1].entity_instance_num = 1;
+    entities[1].entity_container_id = 2;
+
+    entities[2].entity_type = 3;
+    entities[2].entity_instance_num = 1;
+    entities[2].entity_container_id = 2;
+
+    entities[3].entity_type = 4;
+    entities[3].entity_instance_num = 1;
+    entities[3].entity_container_id = 2;
+
+    auto tree = pldm_entity_association_tree_init();
+    auto l1 = pldm_entity_association_tree_add_entity(
+        tree, &entities[0], 0xffff, nullptr, PLDM_ENTITY_ASSOCIAION_LOGICAL,
+        false, true, 0xffff);
+
+    EXPECT_NE(l1, nullptr);
+    auto l2 = pldm_entity_association_tree_add_entity(
+        tree, &entities[1], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL, false,
+        false, 0xffff);
+    EXPECT_NE(l2, nullptr);
+    auto l3 = pldm_entity_association_tree_add_entity(
+        tree, &entities[2], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL, false,
+        true, 0xffff);
+    EXPECT_NE(l3, nullptr);
+    auto l4 = pldm_entity_association_tree_add_entity(
+        tree, &entities[3], 0xffff, l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL, false,
+        true, 0xffff);
+    EXPECT_NE(l4, nullptr);
+
+    EXPECT_EQ(pldm_entity_get_num_children(l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL),
+              3);
+
+    pldm_entity entity{};
+    entity.entity_type = 4;
+    entity.entity_instance_num = 1;
+    entity.entity_container_id = 2;
+
+    pldm_entity_association_tree_delete_node(tree, entity);
+    EXPECT_EQ(pldm_entity_get_num_children(l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL),
+              2);
+
+    entity.entity_type = 3;
+    entity.entity_instance_num = 1;
+    entity.entity_container_id = 2;
+
+    pldm_entity_association_tree_delete_node(tree, entity);
+    EXPECT_EQ(pldm_entity_get_num_children(l1, PLDM_ENTITY_ASSOCIAION_PHYSICAL),
+              1);
+
+    free(entities);
+    pldm_entity_association_tree_destroy(tree);
+}
+#endif
