@@ -669,6 +669,17 @@ int pldm_entity_association_pdr_remove_contained_entity(
 	pldm_pdr *repo, pldm_entity *entity, bool is_remote,
 	uint32_t *pdr_record_handle);
 
+/** @brief deletes a node and it's children from the entity association tree
+ *  @param[in] tree - opaque pointer acting as a handle to the tree
+ *  @param[in] entity - the pldm entity to be deleted
+ *
+ *  @return 0 on success, -EINVAL if the arguments are invalid,
+ *  or -EOVERFLOW if given data is too large for memory allocated
+ *
+ */
+int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
+					     pldm_entity entity);
+
 /** @brief removes a PLDM PDR record if it matches given record set identifier
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
  *  @param[in] fru_rsi - FRU record set identifier

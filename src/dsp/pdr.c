@@ -2198,3 +2198,66 @@ int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 	}
 	return rc;
 }
+
+/*LIBPLDM_CC_NONNULL
+static int decode_pldm_entity(const void *entity, size_t len,
+			      struct pldm_entity *e)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+
+	int rc = pldm_msgbuf_init_errno(buf, len, entity, len);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, e->entity_type);
+	pldm_msgbuf_extract(buf, e->entity_instance_num);
+	pldm_msgbuf_extract(buf, e->entity_container_id);
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+	return 0;
+}*/
+
+LIBPLDM_ABI_TESTING
+int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
+					     pldm_entity entity)
+{
+	if (!tree) {
+		return -EINVAL;
+	}
+	pldm_entity_node *node = NULL;
+	pldm_find_entity_ref_in_tree(tree, entity, &node);
+	if (!node) {
+		return -EINVAL;
+	}
+
+	pldm_entity_node *parent = NULL;
+	pldm_find_entity_ref_in_tree(tree, node->parent, &parent);
+	if (!parent) {
+		return -EINVAL;
+	}
+
+	pldm_entity_node *start = parent->first_child;
+	pldm_entity_node *prev = NULL;
+	while (start != NULL) {
+		if (pldm_entity_cmp(&entity, &start->entity)) {
+			if (start == parent->first_child) {
+				parent->first_child = start->next_sibling;
+			} else {
+				if (prev) {
+					prev->next_sibling =
+						start->next_sibling;
+				}
+			}
+			start->next_sibling = NULL;
+
+			entity_association_tree_destroy(node);
+			break;
+		}
+		prev = start;
+		start = start->next_sibling;
+	}
+	return 0;
+}
