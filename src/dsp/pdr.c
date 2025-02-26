@@ -2091,3 +2091,50 @@ int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 	}
 	return rc;
 }
+
+LIBPLDM_ABI_TESTING
+void pldm_entity_association_tree_delete_node(
+	pldm_entity_association_tree *tree, pldm_entity entity)
+{
+	if (!tree) {
+		return;
+	}
+	pldm_entity_node *node = NULL;
+	pldm_find_entity_ref_in_tree(tree, entity, &node);
+	if (!node) {
+		return;
+	}
+
+	pldm_entity_node *parent = NULL;
+	pldm_find_entity_ref_in_tree(tree, node->parent, &parent);
+	if (!parent) {
+		return;
+	}
+
+	pldm_entity_node *start = parent->first_child;
+	pldm_entity_node *prev = parent->first_child;
+	while (start != NULL) {
+		pldm_entity current_entity;
+		current_entity.entity_type = start->entity.entity_type;
+		current_entity.entity_instance_num =
+			start->entity.entity_instance_num;
+		current_entity.entity_container_id =
+			start->entity.entity_container_id;
+		if (current_entity.entity_type == entity.entity_type &&
+		    current_entity.entity_instance_num ==
+			    entity.entity_instance_num &&
+		    current_entity.entity_container_id ==
+			    entity.entity_container_id) {
+			if (start == parent->first_child) {
+				parent->first_child = start->next_sibling;
+			} else {
+				prev->next_sibling = start->next_sibling;
+			}
+			start->next_sibling = NULL;
+			break;
+		}
+		prev = start;
+		start = start->next_sibling;
+	}
+	entity_association_tree_destroy(node);
+}
