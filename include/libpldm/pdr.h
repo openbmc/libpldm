@@ -234,6 +234,18 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
 	uint8_t child_index, uint32_t range_exclude_start_handle,
 	uint32_t range_exclude_end_handle, uint16_t *container_id);
 
+/** @brief Delete record using its record handle
+ *
+ *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in] record_handle - record handle of input PDR record
+ *  @param[in] is_remote - if true, then the PDR is not from this terminus
+ *
+ *  @return 0 if deleted successful else returns -EINVAL when repo is NULL
+ *  or -ENOENT if the record handle is not found in the repo.
+ */
+int pldm_pdr_delete_by_record_handle(pldm_pdr *repo, uint32_t record_handle,
+				     bool is_remote);
+
 /* ======================= */
 /* FRU Record Set PDR APIs */
 /* ======================= */
