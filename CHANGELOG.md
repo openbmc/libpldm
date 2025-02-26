@@ -22,6 +22,7 @@ Change categories:
 - utils: Introduce `pldm_edac_crc32()`
 - utils: Introduce `pldm_edac_crc8()`
 - pdr: Add pldm_pdr_delete_by_effecter_id() API
+- pdr: Add pldm_entity_association_tree_delete_node() API
 
 ### Changed
 
