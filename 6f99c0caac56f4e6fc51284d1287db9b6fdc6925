@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31030e15_2938063d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-26T00:24:22Z",
+      "side": 1,
+      "message": "Hi Pavithra, thanks for the patch, however it needs some rework as noted inline.",
+      "revId": "6f99c0caac56f4e6fc51284d1287db9b6fdc6925",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d75978_fd2dfae4",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-26T00:24:22Z",
+      "side": 1,
+      "message": "Please trim the trailing `\\`.",
+      "range": {
+        "startLine": 288,
+        "startChar": 74,
+        "endLine": 288,
+        "endChar": 75
+      },
+      "revId": "6f99c0caac56f4e6fc51284d1287db9b6fdc6925",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9df53fa8_5757a3a5",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-26T00:24:22Z",
+      "side": 1,
+      "message": "Please trim the trailing whitespace",
+      "revId": "6f99c0caac56f4e6fc51284d1287db9b6fdc6925",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3999608_58357252",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-26T00:24:22Z",
+      "side": 1,
+      "message": "What about errors? What if the sensor ID provided doesn\u0027t exist?",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 8
+      },
+      "revId": "6f99c0caac56f4e6fc51284d1287db9b6fdc6925",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34937cbe_aeb00e47",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-26T00:24:22Z",
+      "side": 1,
+      "message": "None of this is testing the length of the buffer before the casts to the struct types.\n\nPlease use the msgbuf APIs for spatial memory safety and endianness correctness.",
+      "revId": "6f99c0caac56f4e6fc51284d1287db9b6fdc6925",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
