@@ -28,6 +28,8 @@ Change categories:
 
 - PLDM FD responder accepts a PLDM control handle and will register its version.
 
+- pdr: Add pldm_entity_association_tree_delete_node() API
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
