@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f338a065_946625ac",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-02-27T09:17:19Z",
+      "side": 1,
+      "message": "acknowledged, I have made changes to define proper extraction functions.",
+      "parentUuid": "3339ac7a_67207545",
+      "range": {
+        "startLine": 443,
+        "startChar": 1,
+        "endLine": 443,
+        "endChar": 60
+      },
+      "revId": "fe1a84f5fac7859e40bf17b8304a737b5045bed4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6b15063_d1609e83",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-27T00:06:52Z",
       "side": 1,
       "message": "So it looks like we\u0027re working with a `struct pldm_state_sensor_pdr`. In which case, we should do:\n\n```\nLIBPLDM_NONNULL\nstatic int decode_pldm_state_sensor_pdr(...)\n{\n    /* The usual msgbuf extraction stuff */\n    ...\n}\n\nLIBPLDM_ABI_TESTING\nint pldm_pdr_delete_by_sensor_id(...)\n{\n    ...\n    \n    \n    struct pldm_state_sensor_pdr pdr;\n    int rc;\n    \n    if (!record-\u003edata) {\n        return -ENOENT;\n    }\n\n    rc \u003d decode_pldm_state_sensor_pdr(record-\u003edata, record-\u003esize, \u0026pdr);\n    if (rc) {\n        return rc;\n    }\n\n    if (record-\u003eis_remote !\u003d is_remote || pdr.hdr_type !\u003d PLDM_STATE_SENSOR_PDR) {\n        goto cleanup;\n    }\n    \n    ...\n```\n\nAll this opaque skipping is not maintainable.",
+      "range": {
+        "startLine": 458,
+        "startChar": 8,
+        "endLine": 458,
+        "endChar": 44
+      },
+      "revId": "fe1a84f5fac7859e40bf17b8304a737b5045bed4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21a07c3a_7260e150",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-02-27T09:17:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6b15063_d1609e83",
       "range": {
         "startLine": 458,
         "startChar": 8,
