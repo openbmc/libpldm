@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25585e06_04678db3",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-28T06:31:05Z",
+      "side": 1,
+      "message": "See my comment here:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/78458/comment/076ed358_da5a534e/",
+      "parentUuid": "f338a065_946625ac",
+      "range": {
+        "startLine": 443,
+        "startChar": 1,
+        "endLine": 443,
+        "endChar": 60
+      },
+      "revId": "fe1a84f5fac7859e40bf17b8304a737b5045bed4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6b15063_d1609e83",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 2
