@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50158898_e132249c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-28T04:02:55Z",
+      "side": 1,
+      "message": "Hi Pavithra, I have a few comments inline.",
+      "revId": "77db2e583607ee732ca766dfad16921658671c8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a65a245_18e42566",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-28T04:02:55Z",
+      "side": 1,
+      "message": "Is there really no way this can fail? I don\u0027t think we should silently accept `NULL` as the value for `tree`, for instance. Is it an error to try to delete a node that doesn\u0027t exist? That should be discussed somewhere and be behaviour defined in the documentation.",
+      "range": {
+        "startLine": 665,
+        "startChar": 0,
+        "endLine": 665,
+        "endChar": 4
+      },
+      "revId": "77db2e583607ee732ca766dfad16921658671c8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580b8a9a_a78baff9",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2121,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-28T04:02:55Z",
+      "side": 1,
+      "message": "The cast is unnecessary as the formal parameter is `const void *`",
+      "range": {
+        "startLine": 2121,
+        "startChar": 6,
+        "endLine": 2121,
+        "endChar": 17
+      },
+      "revId": "77db2e583607ee732ca766dfad16921658671c8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d06b567f_be3349cf",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2122,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-28T04:02:55Z",
+      "side": 1,
+      "message": "What assurance do we have that this is true?",
+      "range": {
+        "startLine": 2122,
+        "startChar": 6,
+        "endLine": 2122,
+        "endChar": 25
+      },
+      "revId": "77db2e583607ee732ca766dfad16921658671c8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "368765fb_91105c50",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2127,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-28T04:02:55Z",
+      "side": 1,
+      "message": "Please declare variables at the top of blocks, kernel-C-style.",
+      "revId": "77db2e583607ee732ca766dfad16921658671c8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1af51a89_af009035",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2142,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-28T04:02:55Z",
+      "side": 1,
+      "message": "I think we should rather write this as:\n\n```\npldm_msgbuf_extract(buf, e.entity_type);\npldm_msgbuf_extract(buf, e.entity_instance_num);\npldm_msgbuf_extract(buf, e.entity_container_id);\nrc \u003d pldm_msgbuf_destroy_consumed(buf);\nif (rc) {\n    return;\n}\n```\n\nLet the `pldm_msgbuf_destroy_consumed()` do the error handling for you to make it less tedious.\n\nHowever, no doubt we should have a `static int decode_pldm_entity(const void *buf, size_t len, sturct pldm_entity *e)` to do this for us 😊",
+      "range": {
+        "startLine": 2128,
+        "startChar": 1,
+        "endLine": 2142,
+        "endChar": 3
+      },
+      "revId": "77db2e583607ee732ca766dfad16921658671c8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "355f8085_f379542d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2146,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-28T04:02:55Z",
+      "side": 1,
+      "message": "Hmm, I thought we already had a helper for this comparison somewhere.",
+      "range": {
+        "startLine": 2144,
+        "startChar": 6,
+        "endLine": 2146,
+        "endChar": 57
+      },
+      "revId": "77db2e583607ee732ca766dfad16921658671c8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2492d8a0_d2ea1424",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2152,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-02-28T04:02:55Z",
+      "side": 1,
+      "message": "I don\u0027t think this makes sense if `prev \u003d\u003d start` as you have in the initial conditions on 2114 and 2115?",
+      "range": {
+        "startLine": 2150,
+        "startChar": 4,
+        "endLine": 2152,
+        "endChar": 30
+      },
+      "revId": "77db2e583607ee732ca766dfad16921658671c8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
