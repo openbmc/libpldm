@@ -962,7 +962,7 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
 						       size_t required,
 						       void **cursor)
 {
-	if (!ctx->cursor || (cursor && *cursor)) {
+	if (!ctx->cursor) {
 		return -EINVAL;
 	}
 
@@ -995,7 +995,7 @@ pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor,
 {
 	intmax_t measured;
 
-	if (!ctx->cursor || (cursor && *cursor)) {
+	if (!ctx->cursor) {
 		return -EINVAL;
 	}
 
@@ -1050,7 +1050,7 @@ pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor,
 	ptrdiff_t measured;
 	void *end;
 
-	if (!ctx->cursor || (cursor && *cursor)) {
+	if (!ctx->cursor) {
 		return -EINVAL;
 	}
 
@@ -1123,7 +1123,7 @@ LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 {
-	if (!ctx->cursor || *cursor) {
+	if (!ctx->cursor) {
 		return -EINVAL;
 	}
 
@@ -1143,7 +1143,7 @@ LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 pldm_msgbuf_peek_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 {
-	if (!ctx->cursor || *cursor) {
+	if (!ctx->cursor) {
 		return -EINVAL;
 	}
 
