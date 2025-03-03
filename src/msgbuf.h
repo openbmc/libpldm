@@ -1171,16 +1171,17 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_skip(struct pldm_msgbuf *ctx,
 	}
 #endif
 
-	if (ctx->remaining < INTMAX_MIN + (intmax_t)count) {
-		return -EOVERFLOW;
+	if (ctx->remaining >= (intmax_t)count) {
+		ctx->cursor += count;
+		ctx->remaining -= (intmax_t)count;
+		return 0;
 	}
-	ctx->remaining -= (intmax_t)count;
-	if (ctx->remaining < 0) {
-		return -EOVERFLOW;
-	}
-	ctx->cursor += count;
 
-	return 0;
+	if (ctx->remaining >= INTMAX_MIN + (intmax_t)count) {
+		ctx->remaining -= (intmax_t)count;
+	}
+
+	return -EOVERFLOW;
 }
 
 /**
