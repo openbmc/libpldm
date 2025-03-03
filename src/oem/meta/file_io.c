@@ -21,8 +21,7 @@ int decode_oem_meta_file_io_write_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_oem_meta_file_io_write_req *req, size_t req_length)
 {
-	struct pldm_msgbuf _buf;
-	struct pldm_msgbuf *buf = &_buf;
+	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || req == NULL) {
@@ -43,13 +42,13 @@ int decode_oem_meta_file_io_write_req(
 	pldm_msgbuf_extract(buf, req->handle);
 	rc = pldm_msgbuf_extract(buf, req->length);
 	if (rc) {
-		return rc;
+		return pldm_msgbuf_discard(buf, rc);
 	}
 
 	rc = pldm_msgbuf_extract_array(buf, req->length, req->data,
 				       req_length - sizeof(*req));
 	if (rc) {
-		return rc;
+		return pldm_msgbuf_discard(buf, rc);
 	}
 
 	return pldm_msgbuf_complete_consumed(buf);
@@ -99,8 +98,7 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 				     size_t payload_length,
 				     struct pldm_oem_meta_file_io_read_req *req)
 {
-	struct pldm_msgbuf _buf;
-	struct pldm_msgbuf *buf = &_buf;
+	PLDM_MSGBUF_DEFINE_P(buf);
 
 	if (msg == NULL || req == NULL) {
 		return -EINVAL;
@@ -120,18 +118,18 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 	pldm_msgbuf_extract(buf, req->handle);
 	rc = pldm_msgbuf_extract(buf, req->option);
 	if (rc) {
-		return rc;
+		return pldm_msgbuf_discard(buf, rc);
 	}
 
 	rc = pldm_msgbuf_extract(buf, req->length);
 	if (rc) {
-		return rc;
+		return pldm_msgbuf_discard(buf, rc);
 	}
 
 	switch (req->option) {
 	case PLDM_OEM_META_FILE_IO_READ_ATTR:
 		if (req->length != 0) {
-			return -EPROTO;
+			return pldm_msgbuf_discard(buf, -EPROTO);
 		}
 		break;
 	case PLDM_OEM_META_FILE_IO_READ_DATA:
@@ -139,7 +137,7 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 		pldm_msgbuf_extract(buf, req->info.data.offset);
 		break;
 	default:
-		return -EPROTO;
+		return pldm_msgbuf_discard(buf, -EPROTO);
 	}
 
 	return pldm_msgbuf_complete_consumed(buf);
@@ -158,8 +156,7 @@ int encode_oem_meta_file_io_read_resp(
 	size_t resp_len, struct pldm_msg *responseMsg, size_t payload_length)
 {
 	int rc;
-	struct pldm_msgbuf _buf;
-	struct pldm_msgbuf *buf = &_buf;
+	PLDM_MSGBUF_DEFINE_P(buf);
 	struct pldm_header_info header = { 0 };
 
 	if (resp == NULL || responseMsg == NULL) {
@@ -207,11 +204,11 @@ int encode_oem_meta_file_io_read_resp(
 						    resp->data,
 						    resp_len - sizeof(*resp));
 		if (rc) {
-			return rc;
+			return pldm_msgbuf_discard(buf, rc);
 		}
 		break;
 	default:
-		return -EPROTO;
+		return pldm_msgbuf_discard(buf, -EPROTO);
 	}
 
 	return pldm_msgbuf_complete(buf);
