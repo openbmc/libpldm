@@ -368,11 +368,9 @@ extern "C" int LLVMFuzzerInitialize(int* argc LIBPLDM_CC_UNUSED,
 
 extern "C" int LLVMFuzzerTestOneInput(uint8_t* input, size_t len)
 {
+    PLDM_MSGBUF_DEFINE_P(fuzzproto);
+    PLDM_MSGBUF_DEFINE_P(fuzzctrl);
     int rc;
-    struct pldm_msgbuf _fuzzctrl;
-    struct pldm_msgbuf* fuzzctrl = &_fuzzctrl;
-    struct pldm_msgbuf _fuzzproto;
-    struct pldm_msgbuf* fuzzproto = &_fuzzproto;
 
     /* Split input into two parts. First FUZZCTRL_SIZE (0x400 bytes currently)
      * is used for fuzzing control (random choices etc).
@@ -437,6 +435,9 @@ extern "C" int LLVMFuzzerTestOneInput(uint8_t* input, size_t len)
         }
         assert(len <= send_buf.size());
     }
+    rc = pldm_msgbuf_discard(fuzzproto, rc);
+    rc = pldm_msgbuf_discard(fuzzctrl, rc);
+    (void)rc;
 
     free(fd);
     return 0;

@@ -276,8 +276,7 @@ static int pldm_fd_fw_param(struct pldm_fd *fd,
 {
 	uint16_t entry_count;
 	const struct pldm_firmware_component_standalone **entries;
-	struct pldm_msgbuf _buf;
-	struct pldm_msgbuf *buf = &_buf;
+	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
 
 	/* No request data */
@@ -311,20 +310,22 @@ static int pldm_fd_fw_param(struct pldm_fd *fd,
 			fd->ops_ctx, &fwp.active_comp_image_set_ver_str,
 			&fwp.pending_comp_image_set_ver_str);
 		if (rc) {
-			return pldm_fd_reply_cc(PLDM_ERROR, hdr, resp,
-						resp_payload_len);
+			return pldm_msgbuf_discard(
+				buf, pldm_fd_reply_cc(PLDM_ERROR, hdr, resp,
+						      resp_payload_len));
 		}
 
 		size_t len = buf->remaining;
 		rc = encode_get_firmware_parameters_resp(hdr->instance, &fwp,
 							 resp, &len);
 		if (rc) {
-			return pldm_fd_reply_errno(rc, hdr, resp,
-						   resp_payload_len);
+			return pldm_msgbuf_discard(
+				buf, pldm_fd_reply_errno(rc, hdr, resp,
+							 resp_payload_len));
 		}
 		rc = pldm_msgbuf_skip(buf, len);
 		if (rc) {
-			return rc;
+			return pldm_msgbuf_discard(buf, rc);
 		}
 	}
 
@@ -349,18 +350,18 @@ static int pldm_fd_fw_param(struct pldm_fd *fd,
 		};
 
 		if (pldm_msgbuf_peek_remaining(buf, &out, &len)) {
-			return rc;
+			return pldm_msgbuf_discard(buf, rc);
 		}
+
 		rc = encode_get_firmware_parameters_resp_comp_entry(&comp, out,
 								    &len);
 		if (rc) {
-			return pldm_fd_reply_errno(rc, hdr, resp,
-						   resp_payload_len);
+			return pldm_msgbuf_discard(
+				buf, pldm_fd_reply_errno(rc, hdr, resp,
+							 resp_payload_len));
 		}
-		rc = pldm_msgbuf_skip(buf, len);
-		if (rc) {
-			return rc;
-		}
+
+		pldm_msgbuf_skip(buf, len);
 	}
 
 	return pldm_msgbuf_complete_used(buf, *resp_payload_len,

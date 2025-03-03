@@ -13,8 +13,7 @@
 TEST(DecodeOemMetaFileIoWriteReq, testGoodDecodeRequest)
 {
     constexpr const uint8_t postCode[4] = {0x93, 0xe0, 0x00, 0xea};
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    PLDM_MSGBUF_DEFINE_P(ctx);
     int rc;
 
     constexpr size_t encodedPayloadLen =
@@ -83,8 +82,7 @@ TEST(DecodeOemMetaFileIoWriteReq, testInvalidDataRequest)
 
 TEST(DecodeOemMetaFileIoReadReq, testGoodDecodeRequest)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    PLDM_MSGBUF_DEFINE_P(ctx);
     int rc;
 
     constexpr size_t payloadLen = PLDM_OEM_META_FILE_IO_READ_REQ_MIN_LENGTH +

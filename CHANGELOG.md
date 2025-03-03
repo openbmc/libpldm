@@ -59,6 +59,9 @@ Change categories:
 - Register allocation changed for the following APIs:
 
   - `encode_get_downstream_firmware_parameters_req()`
+  - `encode_get_state_effecter_states_resp()`
+  - `encode_oem_meta_file_io_read_resp()`
+  - `encode_query_downstream_identifiers_req()`
 
 ### Deprecated
 
