@@ -88,7 +88,9 @@ struct pldm_msgbuf {
  *         personality.
  */
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 pldm_msgbuf_init_errno(struct pldm_msgbuf *ctx, size_t minsize, const void *buf,
 		       size_t len)
@@ -125,7 +127,9 @@ pldm_msgbuf_init_errno(struct pldm_msgbuf *ctx, size_t minsize, const void *buf,
  * pointer.
  */
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
 {
 	if (ctx->remaining < 0) {
 		return -EOVERFLOW;
@@ -146,7 +150,9 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
  * pointer.
  */
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_consumed(struct pldm_msgbuf *ctx)
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int pldm_msgbuf_consumed(struct pldm_msgbuf *ctx)
 {
 	if (ctx->remaining != 0) {
 		return -EBADMSG;
@@ -166,7 +172,9 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_consumed(struct pldm_msgbuf *ctx)
  * bounds of the buffer.
  */
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_destroy(struct pldm_msgbuf *ctx)
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int pldm_msgbuf_destroy(struct pldm_msgbuf *ctx)
 {
 	int valid;
 
@@ -190,8 +198,9 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_destroy(struct pldm_msgbuf *ctx)
  * have occurred byond the bounds of the buffer
  */
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_destroy_consumed(struct pldm_msgbuf *ctx)
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int pldm_msgbuf_destroy_consumed(struct pldm_msgbuf *ctx)
 {
 	int consumed;
 
@@ -1187,11 +1196,13 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_skip(struct pldm_msgbuf *ctx,
  *
  */
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_destroy_used(struct pldm_msgbuf *ctx,
-						      size_t orig_len,
-						      size_t *ret_used_len)
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int pldm_msgbuf_destroy_used(struct pldm_msgbuf *ctx, size_t orig_len,
+			     size_t *ret_used_len)
 {
 	int rc;
+
 	rc = pldm_msgbuf_validate(ctx);
 	if (rc) {
 		return rc;
