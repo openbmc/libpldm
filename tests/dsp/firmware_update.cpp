@@ -2284,7 +2284,7 @@ TEST(GetDownstreamFirmwareParameters, encodeRequestErrorBufSize)
     constexpr uint8_t instanceId = 1;
     // Setup invalid transfer operation flag
     constexpr pldm_get_downstream_firmware_parameters_req params_req{
-        0x0, PLDM_ACKNOWLEDGEMENT_ONLY};
+        0x0, PLDM_GET_FIRSTPART};
     constexpr size_t payload_length =
         PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES -
         1 /* inject erro length*/;

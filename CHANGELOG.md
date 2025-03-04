@@ -61,6 +61,10 @@ Change categories:
 - pdr: Indicates success or failure depending on the outcome of the entity
   association PDR creation
 
+- Register allocation changed for the following APIs:
+
+  - `encode_get_downstream_firmware_parameters_req()`
+
 ### Deprecated
 
 ### Removed
