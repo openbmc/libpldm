@@ -1392,13 +1392,6 @@ int encode_get_downstream_firmware_parameters_req(
 		return -EINVAL;
 	}
 
-	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES,
-		msg->payload, payload_length);
-	if (rc < 0) {
-		return rc;
-	}
-
 	if (!is_transfer_operation_flag_valid(
 		    (enum transfer_op_flag)
 			    params_req->transfer_operation_flag)) {
@@ -1411,6 +1404,13 @@ int encode_get_downstream_firmware_parameters_req(
 	header.pldm_type = PLDM_FWUP;
 	header.command = PLDM_QUERY_DOWNSTREAM_FIRMWARE_PARAMETERS;
 	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc < 0) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES,
+		msg->payload, payload_length);
 	if (rc < 0) {
 		return rc;
 	}

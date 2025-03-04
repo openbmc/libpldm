@@ -54,6 +54,10 @@ Change categories:
   No new error values will be returned, but existing error values may be
   returned under new conditions.
 
+- Register allocation changed for the following APIs:
+
+  - `encode_get_downstream_firmware_parameters_req()`
+
 ### Deprecated
 
 ### Removed
