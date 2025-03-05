@@ -32,7 +32,7 @@ TEST(DecodeOemMetaFileIoWriteReq, testGoodDecodeRequest)
                                         sizeof(postCode));
     ASSERT_EQ(rc, 0);
 
-    rc = pldm_msgbuf_destroy_consumed(ctx);
+    rc = pldm_msgbuf_complete_consumed(ctx);
     ASSERT_EQ(rc, 0);
 
     constexpr size_t decodedReqLen =
@@ -101,7 +101,7 @@ TEST(DecodeOemMetaFileIoReadReq, testGoodDecodeRequest)
     pldm_msgbuf_insert_uint8(ctx, 1);
     pldm_msgbuf_insert_uint16(ctx, 1223);
 
-    rc = pldm_msgbuf_destroy_consumed(ctx);
+    rc = pldm_msgbuf_complete_consumed(ctx);
     ASSERT_EQ(rc, 0);
 
     struct pldm_oem_meta_file_io_read_req req = {};

@@ -36,7 +36,7 @@ static void test_msgbuf_extract_generic_uint8(void)
     expect(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)) == 0);
     expect(pldm_msgbuf_extract(ctx, val) == 0);
     expect(val == 0xa5);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_extract_generic_int8(void)
@@ -49,7 +49,7 @@ static void test_msgbuf_extract_generic_int8(void)
     expect(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)) == 0);
     expect(pldm_msgbuf_extract(ctx, val) == 0);
     expect(val == -1);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_extract_generic_uint16(void)
@@ -62,7 +62,7 @@ static void test_msgbuf_extract_generic_uint16(void)
     expect(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)) == 0);
     expect(pldm_msgbuf_extract(ctx, val) == 0);
     expect(val == 0x5aa5);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_extract_generic_int16(void)
@@ -75,7 +75,7 @@ static void test_msgbuf_extract_generic_int16(void)
     expect(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)) == 0);
     expect(pldm_msgbuf_extract(ctx, val) == 0);
     expect(val == INT16_MIN);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_extract_generic_uint32(void)
@@ -88,7 +88,7 @@ static void test_msgbuf_extract_generic_uint32(void)
     expect(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)) == 0);
     expect(pldm_msgbuf_extract(ctx, val) == 0);
     expect(val == 0x5a00ffa5);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_extract_generic_int32(void)
@@ -101,7 +101,7 @@ static void test_msgbuf_extract_generic_int32(void)
     expect(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)) == 0);
     expect(pldm_msgbuf_extract(ctx, val) == 0);
     expect(val == INT32_MIN);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_extract_generic_real32(void)
@@ -120,7 +120,7 @@ static void test_msgbuf_extract_generic_real32(void)
     expect(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)) == 0);
     expect(pldm_msgbuf_extract(ctx, val) == 0);
     expect(val == FLT_MAX);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_extract_array_generic_uint8(void)
@@ -133,7 +133,7 @@ static void test_msgbuf_extract_array_generic_uint8(void)
     expect(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)) == 0);
     expect(pldm_msgbuf_extract_array(ctx, 1, arr, 1) == 0);
     expect(arr[0] == 0);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_insert_generic_int32(void)
@@ -154,8 +154,8 @@ static void test_msgbuf_insert_generic_int32(void)
     expect(pldm_msgbuf_extract(ctxExtract, checkVal) == 0);
 
     expect(src == checkVal);
-    expect(pldm_msgbuf_destroy(ctxExtract) == 0);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctxExtract) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_insert_generic_uint32(void)
@@ -176,8 +176,8 @@ static void test_msgbuf_insert_generic_uint32(void)
     expect(pldm_msgbuf_extract(ctxExtract, checkVal) == 0);
 
     expect(src == checkVal);
-    expect(pldm_msgbuf_destroy(ctxExtract) == 0);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctxExtract) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_insert_generic_uint16(void)
@@ -198,8 +198,8 @@ static void test_msgbuf_insert_generic_uint16(void)
     expect(pldm_msgbuf_extract(ctxExtract, checkVal) == 0);
 
     expect(src == checkVal);
-    expect(pldm_msgbuf_destroy(ctxExtract) == 0);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctxExtract) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_insert_generic_int16(void)
@@ -220,8 +220,8 @@ static void test_msgbuf_insert_generic_int16(void)
     expect(pldm_msgbuf_extract(ctxExtract, checkVal) == 0);
 
     expect(src == checkVal);
-    expect(pldm_msgbuf_destroy(ctxExtract) == 0);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctxExtract) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_insert_generic_uint8(void)
@@ -242,8 +242,8 @@ static void test_msgbuf_insert_generic_uint8(void)
     expect(pldm_msgbuf_extract(ctxExtract, checkVal) == 0);
 
     expect(src == checkVal);
-    expect(pldm_msgbuf_destroy(ctxExtract) == 0);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctxExtract) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_insert_generic_int8(void)
@@ -264,8 +264,8 @@ static void test_msgbuf_insert_generic_int8(void)
     expect(pldm_msgbuf_extract(ctxExtract, checkVal) == 0);
 
     expect(src == checkVal);
-    expect(pldm_msgbuf_destroy(ctxExtract) == 0);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctxExtract) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 static void test_msgbuf_insert_array_generic_uint8(void)
@@ -287,8 +287,8 @@ static void test_msgbuf_insert_array_generic_uint8(void)
                                      sizeof(retBuff)) == 0);
 
     expect(memcmp(src, retBuff, sizeof(retBuff)) == 0);
-    expect(pldm_msgbuf_destroy(ctxExtract) == 0);
-    expect(pldm_msgbuf_destroy(ctx) == 0);
+    expect(pldm_msgbuf_complete(ctxExtract) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
 typedef void (*testfn)(void);
