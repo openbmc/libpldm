@@ -81,7 +81,7 @@ static void
     pldm_msgbuf_extract_uint8(buf, association_pdr_test.num_children);
     getEntity(buf, child_entity);
 
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     EXPECT_TRUE(association_pdr_test == association_pdr);
     EXPECT_TRUE(container_entity == container_entity1);

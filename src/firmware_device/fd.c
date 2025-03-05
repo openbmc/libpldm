@@ -363,8 +363,8 @@ static int pldm_fd_fw_param(struct pldm_fd *fd,
 		}
 	}
 
-	return pldm_msgbuf_destroy_used(buf, *resp_payload_len,
-					resp_payload_len);
+	return pldm_msgbuf_complete_used(buf, *resp_payload_len,
+					 resp_payload_len);
 }
 
 LIBPLDM_CC_NONNULL

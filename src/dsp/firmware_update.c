@@ -544,7 +544,7 @@ int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
 	pldm_msgbuf_span_remaining(buf, (void **)&iter->field->ptr,
 				   &iter->field->length);
 
-	return pldm_msgbuf_destroy(buf);
+	return pldm_msgbuf_complete(buf);
 }
 
 static int decode_descriptor_type_length_value_errno(
@@ -867,7 +867,7 @@ int encode_query_device_identifiers_resp(
 		}
 	}
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
@@ -1041,7 +1041,7 @@ int encode_get_firmware_parameters_resp(
 	/* Further calls to encode_get_firmware_parameters_resp_comp_entry
 	 * will populate the remainder */
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_TESTING
@@ -1102,7 +1102,7 @@ int encode_get_firmware_parameters_resp_comp_entry(
 		return rc;
 	}
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
@@ -1242,7 +1242,7 @@ int decode_query_downstream_devices_resp(
 	pldm_msgbuf_extract(buf, resp_data->max_number_of_downstream_devices);
 	pldm_msgbuf_extract(buf, resp_data->capabilities.value);
 
-	return pldm_msgbuf_destroy_consumed(buf);
+	return pldm_msgbuf_complete_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -1286,7 +1286,7 @@ int encode_query_downstream_identifiers_req(
 	// Data correctness has been verified, cast it to 1-byte data directly.
 	pldm_msgbuf_insert(buf, params_req->transfer_operation_flag);
 
-	return pldm_msgbuf_destroy(buf);
+	return pldm_msgbuf_complete(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -1338,7 +1338,7 @@ int decode_query_downstream_identifiers_resp(
 		return rc;
 	}
 
-	rc = pldm_msgbuf_destroy(buf);
+	rc = pldm_msgbuf_complete(buf);
 	if (rc) {
 		return rc;
 	}
@@ -1375,7 +1375,7 @@ int decode_pldm_downstream_device_from_iter(
 	pldm_msgbuf_span_remaining(buf, (void **)&iter->field.ptr,
 				   &iter->field.length);
 
-	return pldm_msgbuf_destroy(buf);
+	return pldm_msgbuf_complete(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -1419,7 +1419,7 @@ int encode_get_downstream_firmware_parameters_req(
 	// Data correctness has been verified, cast it to 1-byte data directly.
 	pldm_msgbuf_insert(buf, params_req->transfer_operation_flag);
 
-	return pldm_msgbuf_destroy(buf);
+	return pldm_msgbuf_complete(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -1468,7 +1468,7 @@ int decode_get_downstream_firmware_parameters_resp(
 		return rc;
 	}
 
-	rc = pldm_msgbuf_destroy(buf);
+	rc = pldm_msgbuf_complete(buf);
 	if (rc) {
 		return rc;
 	}
@@ -1668,7 +1668,7 @@ int decode_request_update_req(const struct pldm_msg *msg, size_t payload_length,
 		return rc;
 	}
 
-	return pldm_msgbuf_destroy_consumed(buf);
+	return pldm_msgbuf_complete_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -1736,7 +1736,7 @@ int encode_request_update_resp(uint8_t instance_id,
 
 	/* TODO: DSP0267 1.3.0 adds GetPackageDataMaximumTransferSize */
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
@@ -1842,7 +1842,7 @@ int decode_pass_component_table_req(
 		return rc;
 	}
 
-	return pldm_msgbuf_destroy_consumed(buf);
+	return pldm_msgbuf_complete_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -1912,7 +1912,7 @@ int encode_pass_component_table_resp(
 	pldm_msgbuf_insert(buf, resp_data->comp_resp);
 	pldm_msgbuf_insert(buf, resp_data->comp_resp_code);
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
@@ -2103,7 +2103,7 @@ int encode_update_component_resp(
 	pldm_msgbuf_insert(buf, resp_data->update_option_flags_enabled.value);
 	pldm_msgbuf_insert(buf, resp_data->time_before_req_fw_data);
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
@@ -2157,7 +2157,7 @@ int encode_request_firmware_data_req(
 	pldm_msgbuf_insert(buf, req_params->offset);
 	pldm_msgbuf_insert(buf, req_params->length);
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
@@ -2230,7 +2230,7 @@ int encode_transfer_complete_req(uint8_t instance_id, uint8_t transfer_result,
 		return rc;
 	}
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
@@ -2304,7 +2304,7 @@ int encode_verify_complete_req(uint8_t instance_id, uint8_t verify_result,
 		return rc;
 	}
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
@@ -2391,7 +2391,7 @@ int encode_apply_complete_req(uint8_t instance_id,
 	pldm_msgbuf_insert(
 		buf, req_data->comp_activation_methods_modification.value);
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
@@ -2543,7 +2543,7 @@ int encode_activate_firmware_resp(
 	pldm_msgbuf_insert_uint8(buf, PLDM_SUCCESS);
 	pldm_msgbuf_insert(buf, resp_data->estimated_time_activation);
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
@@ -2675,7 +2675,7 @@ int encode_get_status_resp(uint8_t instance_id,
 	pldm_msgbuf_insert(buf, status->reason_code);
 	pldm_msgbuf_insert(buf, status->update_option_flags_enabled.value);
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
@@ -2814,5 +2814,5 @@ int encode_cancel_update_resp(uint8_t instance_id,
 			   resp_data->non_functioning_component_indication);
 	pldm_msgbuf_insert(buf, resp_data->non_functioning_component_bitmap);
 
-	return pldm_msgbuf_destroy_used(buf, *payload_length, payload_length);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }

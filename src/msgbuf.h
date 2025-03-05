@@ -143,11 +143,8 @@ int pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
  *
  * @param[in] ctx - pldm_msgbuf context for extractor
  *
- * @return PLDM_SUCCESS iff there are zero bytes of data that remain unread from
- * the buffer and no overflow has occurred. Otherwise, PLDM_ERROR_INVALID_LENGTH
- * indicates that an incorrect sequence of accesses have occurred, and
- * PLDM_ERROR_INVALID_DATA indicates that the provided context was not a valid
- * pointer.
+ * @return 0 iff there are zero bytes of data that remain unread from the buffer
+ * and no overflow has occurred. Otherwise, -EBADMSG.
  */
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
@@ -162,19 +159,16 @@ int pldm_msgbuf_consumed(struct pldm_msgbuf *ctx)
 }
 
 /**
- * @brief Destroy the pldm buf
+ * @brief Complete the pldm_msgbuf instance
  *
  * @param[in] ctx - pldm_msgbuf context for extractor
  *
- * @return PLDM_SUCCESS if all buffer accesses were in-bounds,
- * PLDM_ERROR_INVALID_DATA if the ctx parameter is invalid, or
- * PLDM_ERROR_INVALID_LENGTH if prior accesses would have occurred beyond the
- * bounds of the buffer.
+ * @return 0 if all buffer accesses were in-bounds, -EOVERFLOW otherwise.
  */
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
-int pldm_msgbuf_destroy(struct pldm_msgbuf *ctx)
+int pldm_msgbuf_complete(struct pldm_msgbuf *ctx)
 {
 	int valid;
 
@@ -187,20 +181,18 @@ int pldm_msgbuf_destroy(struct pldm_msgbuf *ctx)
 }
 
 /**
- * @brief Destroy the pldm_msgbuf instance, and check that the underlying buffer
- * has been completely consumed without overflow
+ * @brief Complete the pldm_msgbuf instance, and check that the underlying buffer
+ * has been entirely consumed without overflow
  *
  * @param[in] ctx - pldm_msgbuf context
  *
- * @return PLDM_SUCCESS if all buffer access were in-bounds and completely
- * consume the underlying buffer. Otherwise, PLDM_ERROR_INVALID_DATA if the ctx
- * parameter is invalid, or PLDM_ERROR_INVALID_LENGTH if prior accesses would
- * have occurred byond the bounds of the buffer
+ * @return 0 if all buffer access were in-bounds and completely consume the
+ * underlying buffer. Otherwise, -EBADMSG.
  */
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
-int pldm_msgbuf_destroy_consumed(struct pldm_msgbuf *ctx)
+int pldm_msgbuf_complete_consumed(struct pldm_msgbuf *ctx)
 {
 	int consumed;
 
@@ -1009,7 +1001,7 @@ pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor,
 		/*
 		 * We have hit the end of the buffer prior to the NUL terminator.
 		 * Optimistically, the NUL terminator was one-beyond-the-end. Setting
-		 * ctx->remaining negative ensures the `pldm_msgbuf_destroy*()` APIs also
+		 * ctx->remaining negative ensures the `pldm_msgbuf_complete*()` APIs also
 		 * return an error.
 		 */
 		ctx->remaining = -1;
@@ -1082,7 +1074,7 @@ pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor,
 		/*
 		 * Optimistically, the last required pattern byte was one beyond the end of
 		 * the buffer. Setting ctx->remaining negative ensures the
-		 * `pldm_msgbuf_destroy*()` APIs also return an error.
+		 * `pldm_msgbuf_complete*()` APIs also return an error.
 		 */
 		ctx->remaining = -1;
 		return -EOVERFLOW;
@@ -1185,7 +1177,8 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_skip(struct pldm_msgbuf *ctx,
 }
 
 /**
- * Return the number of bytes used in a msgbuf instance.
+ * @brief Complete the pldm_msgbuf instance and return the number of bytes
+ * consumed.
  *
  * @param ctx - The msgbuf.
  * @param orig_len - The original size of the msgbuf, the `len` argument passed to
@@ -1195,12 +1188,14 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_skip(struct pldm_msgbuf *ctx,
  * This can be called after a number of pldm_msgbuf_insert...() calls to
  * determine the total size that was written.
  *
+ * @return 0 on success, -EOVERFLOW if an implausible orig_len was provided or
+ * an out-of-bounds access occurred.
  */
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
-int pldm_msgbuf_destroy_used(struct pldm_msgbuf *ctx, size_t orig_len,
-			     size_t *ret_used_len)
+int pldm_msgbuf_complete_used(struct pldm_msgbuf *ctx, size_t orig_len,
+			      size_t *ret_used_len)
 {
 	int rc;
 

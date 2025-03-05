@@ -486,7 +486,7 @@ TEST(GetPDR, testGoodDecodeResponseSafe)
                                        sizeof(recordData) - 1);
     ASSERT_EQ(rc, 0);
     pldm_msgbuf_insert_uint8(buf, 96);
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     alignas(pldm_get_pdr_resp) unsigned char
         resp_data[sizeof(pldm_get_pdr_resp) + sizeof(recordData) - 1];
@@ -730,7 +730,7 @@ TEST(GetPDRRepositoryInfo, testGoodDecodeResponseSafe)
     pldm_msgbuf_insert_uint32(buf, 100);
     pldm_msgbuf_insert_uint32(buf, UINT32_MAX);
     pldm_msgbuf_insert_uint8(buf, PLDM_NO_TIMEOUT);
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     struct pldm_pdr_repository_info_resp resp;
     rc = decode_get_pdr_repository_info_resp_safe(
@@ -1482,7 +1482,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequestFirstPart)
     pldm_msgbuf_extract_uint8(buf, retTransferOperationFlag);
     pldm_msgbuf_extract_uint32(buf, retDataTransferHandle);
     pldm_msgbuf_extract_uint16(buf, retEventIdToAcknowledge);
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     EXPECT_EQ(retFormatVersion, formatVersion);
     EXPECT_EQ(retTransferOperationFlag, transferOperationFlag);
@@ -1521,7 +1521,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequestNextPart)
     pldm_msgbuf_extract_uint8(buf, retTransferOperationFlag);
     pldm_msgbuf_extract_uint32(buf, retDataTransferHandle);
     pldm_msgbuf_extract_uint16(buf, retEventIdToAcknowledge);
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     EXPECT_EQ(retFormatVersion, formatVersion);
     EXPECT_EQ(retTransferOperationFlag, transferOperationFlag);
@@ -1560,7 +1560,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequestAckOnly)
     pldm_msgbuf_extract_uint8(buf, retTransferOperationFlag);
     pldm_msgbuf_extract_uint32(buf, retDataTransferHandle);
     pldm_msgbuf_extract_uint16(buf, retEventIdToAcknowledge);
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     EXPECT_EQ(retFormatVersion, formatVersion);
     EXPECT_EQ(retTransferOperationFlag, transferOperationFlag);
@@ -2057,7 +2057,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP1)
     EXPECT_EQ(retEventDataIntegrityChecksum, eventDataIntegrityChecksum);
     EXPECT_EQ(0, memcmp(pEventData, retEventData, eventDataSize));
 
-    EXPECT_EQ(pldm_msgbuf_destroy(buf), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_complete(buf), PLDM_SUCCESS);
 }
 
 TEST(PollForPlatformEventMessage, testGoodEncodeResposeP2)
@@ -2097,7 +2097,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP2)
     EXPECT_EQ(retCompletionCode, completionCode);
     EXPECT_EQ(retTid, tId);
     EXPECT_EQ(retEventId, eventId);
-    EXPECT_EQ(pldm_msgbuf_destroy(buf), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_complete(buf), PLDM_SUCCESS);
 }
 
 TEST(PollForPlatformEventMessage, testGoodEncodeResposeP3)
@@ -2137,7 +2137,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP3)
     EXPECT_EQ(retCompletionCode, completionCode);
     EXPECT_EQ(retTid, tId);
     EXPECT_EQ(retEventId, eventId);
-    EXPECT_EQ(pldm_msgbuf_destroy(buf), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_complete(buf), PLDM_SUCCESS);
 }
 
 TEST(PollForPlatformEventMessage, testGoodEncodeResposeP4)
@@ -2202,7 +2202,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP4)
     EXPECT_EQ(retEventDataSize, eventDataSize);
     EXPECT_EQ(retEventDataIntegrityChecksum, eventDataIntegrityChecksum);
 
-    EXPECT_EQ(pldm_msgbuf_destroy(buf), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_complete(buf), PLDM_SUCCESS);
 }
 
 TEST(PollForPlatformEventMessage, testBadEncodeResponse)
@@ -2360,7 +2360,7 @@ TEST(PlatformEventMessage, testGoodEncodeRequest)
     pldm_msgbuf_extract_uint8(buf, req.event_class);
     data = nullptr;
     pldm_msgbuf_span_remaining(buf, &data, &len);
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     EXPECT_EQ(formatVersion, req.format_version);
     EXPECT_EQ(Tid, req.tid);
@@ -2385,7 +2385,7 @@ TEST(PlatformEventMessage, testGoodEncodeRequest)
 
     data = nullptr;
     pldm_msgbuf_span_remaining(buf, &data, &len);
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     EXPECT_EQ(formatVersion, req.format_version);
     EXPECT_EQ(Tid, req.tid);
@@ -2684,7 +2684,7 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
     EXPECT_EQ(retFormatVersion, poll_event.format_version);
     EXPECT_EQ(reteventID, poll_event.event_id);
     EXPECT_EQ(retDataTransferHandle, poll_event.data_transfer_handle);
-    EXPECT_EQ(pldm_msgbuf_destroy_consumed(buf), PLDM_SUCCESS);
+    EXPECT_EQ(pldm_msgbuf_complete_consumed(buf), PLDM_SUCCESS);
 }
 #endif
 

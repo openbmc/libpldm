@@ -1657,7 +1657,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseNoDevices)
     pldm_msgbuf_insert_uint32(buf, downstream_devices_length_resp);
     pldm_msgbuf_insert_uint16(buf, number_of_downstream_devices_resp);
 
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     rc = decode_query_downstream_identifiers_resp(
         response, PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN, &resp_data,
@@ -1700,7 +1700,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseNoDevicesBadCount)
     pldm_msgbuf_insert_uint32(buf, downstream_devices_length_resp);
     pldm_msgbuf_insert_uint16(buf, number_of_downstream_devices_resp);
 
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     rc = decode_query_downstream_identifiers_resp(
         response, PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN, &resp, &devs);
@@ -1751,7 +1751,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseOneDeviceOneDescriptor)
     pldm_msgbuf_insert_uint16(buf, 4);
     pldm_msgbuf_insert_uint32(buf, 412);
 
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     rc = decode_query_downstream_identifiers_resp(response, payloadLen,
                                                   &resp_data, &devs);
@@ -1849,7 +1849,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneDescriptorEach)
     pldm_msgbuf_insert_uint16(buf, descriptor_id_len_iana_pen);
     pldm_msgbuf_insert_uint32(buf, iana_pen_openbmc);
 
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     rc = decode_query_downstream_identifiers_resp(response, payloadLen,
                                                   &resp_data, &devs);
@@ -1965,7 +1965,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesTwoOneDescriptors)
     pldm_msgbuf_insert_uint16(buf, descriptor_id_len_iana_pen);
     pldm_msgbuf_insert_uint32(buf, iana_pen_dmtf);
 
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     rc = decode_query_downstream_identifiers_resp(response, payloadLen,
                                                   &resp_data, &devs);
@@ -2081,7 +2081,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneTwoDescriptors)
     pldm_msgbuf_insert_uint16(buf, descriptor_id_len_iana_pen);
     pldm_msgbuf_insert_uint32(buf, iana_pen_dmtf);
 
-    ASSERT_EQ(pldm_msgbuf_destroy_consumed(buf), 0);
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
 
     rc = decode_query_downstream_identifiers_resp(response, payloadLen,
                                                   &resp_data, &devs);
@@ -2361,7 +2361,7 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponseOneEntry)
         buf, pendingComponentVersionStringLength, "zyxwvuts", 8);
     ASSERT_EQ(rc, 0);
 
-    rc = pldm_msgbuf_destroy_consumed(buf);
+    rc = pldm_msgbuf_complete_consumed(buf);
     ASSERT_EQ(rc, 0);
 
     struct pldm_get_downstream_firmware_parameters_resp resp_data = {};
@@ -2510,7 +2510,7 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponseTwoEntries)
         ASSERT_EQ(rc, 0);
     }
 
-    rc = pldm_msgbuf_destroy_consumed(buf);
+    rc = pldm_msgbuf_complete_consumed(buf);
     ASSERT_EQ(rc, 0);
 
     struct pldm_get_downstream_firmware_parameters_resp resp_data = {};

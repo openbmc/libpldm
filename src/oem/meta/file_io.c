@@ -52,7 +52,7 @@ int decode_oem_meta_file_io_write_req(
 		return rc;
 	}
 
-	return pldm_msgbuf_destroy_consumed(buf);
+	return pldm_msgbuf_complete_consumed(buf);
 }
 
 LIBPLDM_ABI_DEPRECATED_UNSAFE
@@ -142,7 +142,7 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 		return -EPROTO;
 	}
 
-	return pldm_msgbuf_destroy_consumed(buf);
+	return pldm_msgbuf_complete_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -214,5 +214,5 @@ int encode_oem_meta_file_io_read_resp(
 		return -EPROTO;
 	}
 
-	return pldm_msgbuf_destroy(buf);
+	return pldm_msgbuf_complete(buf);
 }

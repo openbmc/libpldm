@@ -487,7 +487,7 @@ int pldm_pdr_delete_by_record_handle(pldm_pdr *repo, uint32_t record_handle,
 			prev = pldm_pdr_get_prev_record(repo, record);
 			return pldm_pdr_remove_record(repo, record, prev);
 		}
-		rc = pldm_msgbuf_destroy(buf);
+		rc = pldm_msgbuf_complete(buf);
 		if (rc) {
 			return rc;
 		}
@@ -1641,7 +1641,7 @@ int pldm_entity_association_pdr_add_contained_entity_to_remote_pdr(
 	}
 
 	// Add new contained entity as a child of new PDR
-	rc = pldm_msgbuf_destroy(src);
+	rc = pldm_msgbuf_complete(src);
 	if (rc) {
 		goto cleanup_new_record_data;
 	}
@@ -1654,11 +1654,11 @@ int pldm_entity_association_pdr_add_contained_entity_to_remote_pdr(
 	pldm_msgbuf_copy(dst, src, uint16_t, child_entity_instance_num);
 	pldm_msgbuf_copy(dst, src, uint16_t, child_entity_container_id);
 
-	rc = pldm_msgbuf_destroy(src);
+	rc = pldm_msgbuf_complete(src);
 	if (rc) {
 		goto cleanup_new_record_data;
 	}
-	rc = pldm_msgbuf_destroy(dst);
+	rc = pldm_msgbuf_complete(dst);
 	if (rc) {
 		goto cleanup_new_record_data;
 	}
@@ -1791,15 +1791,15 @@ int pldm_entity_association_pdr_create_new(pldm_pdr *repo,
 	container_id = htole16(container_id);
 	memcpy(container_id_addr, &container_id, sizeof(uint16_t));
 
-	rc = pldm_msgbuf_destroy(dst);
+	rc = pldm_msgbuf_complete(dst);
 	if (rc) {
 		goto cleanup_new_record_data;
 	}
-	rc = pldm_msgbuf_destroy(src_p);
+	rc = pldm_msgbuf_complete(src_p);
 	if (rc) {
 		goto cleanup_new_record_data;
 	}
-	rc = pldm_msgbuf_destroy(src_c);
+	rc = pldm_msgbuf_complete(src_c);
 	if (rc) {
 		goto cleanup_new_record_data;
 	}
@@ -1878,7 +1878,7 @@ static int pldm_entity_association_find_record_handle_by_entity(
 			}
 		}
 	cleanup:
-		rc = pldm_msgbuf_destroy(dst);
+		rc = pldm_msgbuf_complete(dst);
 		if (rc) {
 			return rc;
 		}
@@ -2006,8 +2006,8 @@ int pldm_entity_association_pdr_remove_contained_entity(
 		pldm_msgbuf_insert(dst, e.entity_container_id);
 	}
 
-	if ((rc = pldm_msgbuf_destroy(src)) ||
-	    (rc = pldm_msgbuf_destroy(dst)) ||
+	if ((rc = pldm_msgbuf_complete(src)) ||
+	    (rc = pldm_msgbuf_complete(dst)) ||
 	    (rc = pldm_pdr_replace_record(repo, record, prev, new_record))) {
 		goto cleanup_new_record_data;
 	}
@@ -2079,7 +2079,7 @@ static int pldm_pdr_record_matches_fru_rsi(const pldm_pdr_record *record,
 	pldm_msgbuf_span_required(dst, skip_data_size, (void **)&skip_data);
 	pldm_msgbuf_extract(dst, record_fru_rsi);
 
-	rc = pldm_msgbuf_destroy(dst);
+	rc = pldm_msgbuf_complete(dst);
 	if (rc) {
 		return rc;
 	}
@@ -2166,7 +2166,7 @@ int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 			return pldm_pdr_remove_record(repo, record, prev);
 		}
 	cleanup:
-		rc = pldm_msgbuf_destroy(buf);
+		rc = pldm_msgbuf_complete(buf);
 		if (rc) {
 			return rc;
 		}
