@@ -144,15 +144,21 @@ int pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
  * @param[in] ctx - pldm_msgbuf context for extractor
  *
  * @return 0 iff there are zero bytes of data that remain unread from the buffer
- * and no overflow has occurred. Otherwise, -EBADMSG.
+ * and no overflow has occurred. Otherwise, -EBADMSG if the buffer has not been
+ * completely consumed, or -EOVERFLOW if accesses were attempted beyond the
+ * bounds of the buffer.
  */
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
 int pldm_msgbuf_consumed(struct pldm_msgbuf *ctx)
 {
-	if (ctx->remaining != 0) {
+	if (ctx->remaining > 0) {
 		return -EBADMSG;
+	}
+
+	if (ctx->remaining < 0) {
+		return -EOVERFLOW;
 	}
 
 	return 0;
@@ -187,7 +193,9 @@ int pldm_msgbuf_complete(struct pldm_msgbuf *ctx)
  * @param[in] ctx - pldm_msgbuf context
  *
  * @return 0 if all buffer access were in-bounds and completely consume the
- * underlying buffer. Otherwise, -EBADMSG.
+ * underlying buffer. Otherwise, -EBADMSG if the buffer has not been completely
+ * consumed, or -EOVERFLOW if accesses were attempted beyond the bounds of the
+ * buffer.
  */
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
