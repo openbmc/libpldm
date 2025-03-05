@@ -32,6 +32,8 @@ Change categories:
 
 - pdr: Add pldm_pdr_delete_by_record_handle() API
 
+- Support for building the documentation with doxygen
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names

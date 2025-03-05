@@ -74,6 +74,34 @@ libpldm_include_dir = include_directories('include', is_system: true)
 subdir('include')
 subdir('src')
 
+doxygen = find_program('doxygen', required: false)
+if doxygen.found()
+    doxydata = configuration_data()
+    doxydata.set('description', meson.project_name())
+    doxydata.set('project', meson.project_name())
+    doxydata.set('version', meson.project_version())
+    doxydata.set(
+        'sources',
+        '@0@ @1@'.format(
+            meson.project_source_root() / 'include',
+            meson.project_source_root() / 'src',
+        ),
+    )
+    doxyfile = configure_file(
+        input: 'Doxyfile.in',
+        output: 'Doxyfile',
+        configuration: doxydata,
+        install: false,
+    )
+
+    docs = custom_target(
+        'docs',
+        input: doxyfile,
+        output: 'doxygen',
+        command: [doxygen, doxyfile],
+    )
+endif
+
 if get_option('tests')
     subdir('tests')
 endif
