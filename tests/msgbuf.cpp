@@ -516,7 +516,7 @@ TEST(msgbuf, consumed_over)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint8(ctx, valid), 0);
     EXPECT_NE(pldm_msgbuf_extract_uint8(ctx, invalid), 0);
-    EXPECT_EQ(pldm_msgbuf_complete_consumed(ctx), -EBADMSG);
+    EXPECT_EQ(pldm_msgbuf_complete_consumed(ctx), -EOVERFLOW);
 }
 
 TEST(msgbuf, pldm_msgbuf_insert_int32_good)
