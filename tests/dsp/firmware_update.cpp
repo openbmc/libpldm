@@ -42,14 +42,15 @@ static void check_response(const void* data, uint8_t command)
 }
 #endif
 
+static constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>
+    PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_0{0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d,
+                                             0x49, 0x43, 0x98, 0x00, 0xa0, 0x2f,
+                                             0x05, 0x9a, 0xca, 0x02};
+
+static constexpr uint8_t PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_V1_0 = 0x01;
+
 TEST(DecodePackageHeaderInfo, goodPath)
 {
-    // Package header identifier for Version 1.0.x
-    constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH> uuid{
-        0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43,
-        0x98, 0x00, 0xa0, 0x2f, 0x05, 0x9a, 0xca, 0x02};
-    // Package header version for DSP0267 version 1.0.x
-    constexpr uint8_t pkgHeaderFormatRevision = 0x01;
     // Random PackageHeaderSize
     constexpr uint16_t pkgHeaderSize = 303;
     // PackageReleaseDateTime - "25/12/2021 00:00:00"
@@ -77,8 +78,10 @@ TEST(DecodePackageHeaderInfo, goodPath)
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(true,
               std::equal(pkgHeader.uuid, pkgHeader.uuid + PLDM_FWUP_UUID_LENGTH,
-                         uuid.begin(), uuid.end()));
-    EXPECT_EQ(pkgHeader.package_header_format_version, pkgHeaderFormatRevision);
+                         PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_0.begin(),
+                         PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_0.end()));
+    EXPECT_EQ(pkgHeader.package_header_format_version,
+              PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_V1_0);
     EXPECT_EQ(pkgHeader.package_header_size, pkgHeaderSize);
     EXPECT_EQ(true, std::equal(pkgHeader.package_release_date_time,
                                pkgHeader.package_release_date_time +
