@@ -327,7 +327,7 @@ static bool is_non_functioning_component_indication_valid(
 }
 
 static int decode_pldm_package_header_info_errno(
-	const uint8_t *data, size_t length,
+	const void *data, size_t length,
 	struct pldm_package_header_information *package_header_info,
 	struct variable_field *package_version_str)
 {
@@ -374,7 +374,8 @@ static int decode_pldm_package_header_info_errno(
 	package_header_info->package_version_string_length =
 		data_header->package_version_string_length;
 	package_version_str->ptr =
-		data + sizeof(struct pldm_package_header_information);
+		(const uint8_t *)data +
+		sizeof(struct pldm_package_header_information);
 	package_version_str->length =
 		package_header_info->package_version_string_length;
 
@@ -399,8 +400,7 @@ int decode_pldm_package_header_info(
 }
 
 static int decode_firmware_device_id_record_errno(
-	const uint8_t *data, size_t length,
-	uint16_t component_bitmap_bit_length,
+	const void *data, size_t length, uint16_t component_bitmap_bit_length,
 	struct pldm_firmware_device_id_record *fw_device_id_record,
 	struct variable_field *applicable_components,
 	struct variable_field *comp_image_set_version_str,
@@ -463,7 +463,8 @@ static int decode_firmware_device_id_record_errno(
 	}
 
 	applicable_components->ptr =
-		data + sizeof(struct pldm_firmware_device_id_record);
+		(const uint8_t *)data +
+		sizeof(struct pldm_firmware_device_id_record);
 	applicable_components->length = applicable_components_length;
 
 	comp_image_set_version_str->ptr =
@@ -547,7 +548,7 @@ int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
 }
 
 static int decode_descriptor_type_length_value_errno(
-	const uint8_t *data, size_t length, uint16_t *descriptor_type,
+	const void *data, size_t length, uint16_t *descriptor_type,
 	struct variable_field *descriptor_data)
 {
 	uint16_t descriptor_length = 0;
@@ -601,7 +602,7 @@ int decode_descriptor_type_length_value(const uint8_t *data, size_t length,
 }
 
 static int decode_vendor_defined_descriptor_value_errno(
-	const uint8_t *data, size_t length, uint8_t *descriptor_title_str_type,
+	const void *data, size_t length, uint8_t *descriptor_title_str_type,
 	struct variable_field *descriptor_title_str,
 	struct variable_field *descriptor_data)
 {
@@ -664,7 +665,7 @@ int decode_vendor_defined_descriptor_value(
 }
 
 static int decode_pldm_comp_image_info_errno(
-	const uint8_t *data, size_t length,
+	const void *data, size_t length,
 	struct pldm_component_image_information *pldm_comp_image_info,
 	struct variable_field *comp_version_str)
 {
@@ -719,8 +720,8 @@ static int decode_pldm_comp_image_info_errno(
 		return -EBADMSG;
 	}
 
-	comp_version_str->ptr =
-		data + sizeof(struct pldm_component_image_information);
+	comp_version_str->ptr = (const uint8_t *)data +
+				sizeof(struct pldm_component_image_information);
 	comp_version_str->length =
 		pldm_comp_image_info->comp_version_string_length;
 
