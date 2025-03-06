@@ -99,15 +99,66 @@ TEST(DecodePackageHeaderInfo, goodPath)
     EXPECT_EQ(packageVersionString, packageVersionStr);
 }
 
-TEST(DecodePackageHeaderInfo, errorPaths)
+TEST(DecodePackageHeaderInfo, invalidArguments)
 {
-    int rc = 0;
     constexpr std::string_view packageVersionStr{"OpenBMCv1.0"};
     constexpr size_t packageHeaderSize =
         sizeof(pldm_package_header_information) + packageVersionStr.size();
 
-    // Invalid Package Version String Type - 0x06
-    constexpr std::array<uint8_t, packageHeaderSize> invalidPackagerHeaderInfo1{
+    constexpr std::array<uint8_t, packageHeaderSize> packagerHeaderInfo{
+        0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00, 0xa0, 0x2f,
+        0x05, 0x9a, 0xca, 0x02, 0x01, 0x2f, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x19, 0x0c, 0xe5, 0x07, 0x00, 0x08, 0x00, 0x01, 0x0b,
+        0x4f, 0x70, 0x65, 0x6e, 0x42, 0x4d, 0x43, 0x76, 0x31, 0x2e, 0x30};
+
+    pldm_package_header_information packageHeader{};
+    variable_field packageVersion{};
+    int rc = 0;
+
+    rc = decode_pldm_package_header_info(nullptr, packagerHeaderInfo.size(),
+                                         &packageHeader, &packageVersion);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_pldm_package_header_info(packagerHeaderInfo.data(),
+                                         packagerHeaderInfo.size(), nullptr,
+                                         &packageVersion);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_pldm_package_header_info(packagerHeaderInfo.data(),
+                                         packagerHeaderInfo.size(),
+                                         &packageHeader, nullptr);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(DecodePackageHeaderInfo, invalidPackageLengths)
+{
+    constexpr std::string_view packageVersionStr{"OpenBMCv1.0"};
+    constexpr size_t packageHeaderSize =
+        sizeof(pldm_package_header_information) + packageVersionStr.size();
+
+    constexpr std::array<uint8_t, packageHeaderSize> packagerHeaderInfo{
+        0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00, 0xa0, 0x2f,
+        0x05, 0x9a, 0xca, 0x02, 0x01, 0x2f, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x19, 0x0c, 0xe5, 0x07, 0x00, 0x08, 0x00, 0x01, 0x0b,
+        0x4f, 0x70, 0x65, 0x6e, 0x42, 0x4d, 0x43, 0x76, 0x31, 0x2e, 0x30};
+
+    pldm_package_header_information packageHeader{};
+    variable_field packageVersion{};
+    int rc = 0;
+
+    rc = decode_pldm_package_header_info(
+        packagerHeaderInfo.data(), sizeof(pldm_package_header_information) - 1,
+        &packageHeader, &packageVersion);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+
+TEST(DecodePackageHeaderInfo, invalidPackageVersionStringType)
+{
+    constexpr std::string_view packageVersionStr{"OpenBMCv1.0"};
+    constexpr size_t packageHeaderSize =
+        sizeof(pldm_package_header_information) + packageVersionStr.size();
+
+    constexpr std::array<uint8_t, packageHeaderSize> invalidPackagerHeaderInfo{
         0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00, 0xa0, 0x2f,
         0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x19, 0x0c, 0xe5, 0x07, 0x00, 0x08, 0x00, 0x06, 0x0b,
@@ -115,65 +166,78 @@ TEST(DecodePackageHeaderInfo, errorPaths)
 
     pldm_package_header_information packageHeader{};
     variable_field packageVersion{};
+    int rc = 0;
 
-    rc = decode_pldm_package_header_info(nullptr,
-                                         invalidPackagerHeaderInfo1.size(),
+    rc = decode_pldm_package_header_info(invalidPackagerHeaderInfo.data(),
+                                         invalidPackagerHeaderInfo.size(),
                                          &packageHeader, &packageVersion);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
 
-    rc = decode_pldm_package_header_info(invalidPackagerHeaderInfo1.data(),
-                                         invalidPackagerHeaderInfo1.size(),
-                                         nullptr, &packageVersion);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+TEST(DecodePackageHeaderInfo, invalidPackageVersionStringLength)
+{
+    constexpr std::string_view packageVersionStr{"OpenBMCv1.0"};
+    constexpr size_t packageHeaderSize =
+        sizeof(pldm_package_header_information) + packageVersionStr.size();
 
-    rc = decode_pldm_package_header_info(invalidPackagerHeaderInfo1.data(),
-                                         invalidPackagerHeaderInfo1.size(),
-                                         &packageHeader, nullptr);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-
-    rc = decode_pldm_package_header_info(
-        invalidPackagerHeaderInfo1.data(),
-        sizeof(pldm_package_header_information) - 1, &packageHeader,
-        &packageVersion);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
-
-    rc = decode_pldm_package_header_info(invalidPackagerHeaderInfo1.data(),
-                                         invalidPackagerHeaderInfo1.size(),
-                                         &packageHeader, &packageVersion);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-
-    // Invalid Package Version String Length - 0x00
-    constexpr std::array<uint8_t, packageHeaderSize> invalidPackagerHeaderInfo2{
+    constexpr std::array<uint8_t, packageHeaderSize> invalidPackagerHeaderInfo{
         0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00, 0xa0, 0x2f,
         0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x19, 0x0c, 0xe5, 0x07, 0x00, 0x08, 0x00, 0x01, 0x00,
         0x4f, 0x70, 0x65, 0x6e, 0x42, 0x4d, 0x43, 0x76, 0x31, 0x2e, 0x30};
-    rc = decode_pldm_package_header_info(invalidPackagerHeaderInfo2.data(),
-                                         invalidPackagerHeaderInfo2.size(),
+
+    pldm_package_header_information packageHeader{};
+    variable_field packageVersion{};
+    int rc = 0;
+
+    rc = decode_pldm_package_header_info(invalidPackagerHeaderInfo.data(),
+                                         invalidPackagerHeaderInfo.size(),
                                          &packageHeader, &packageVersion);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
 
-    // Package version string length less than in the header information
+TEST(DecodePackageHeaderInfo, corruptPackageVersionStringLength)
+{
+    constexpr std::string_view packageVersionStr{"OpenBMCv1.0"};
+    constexpr size_t packageHeaderSize =
+        sizeof(pldm_package_header_information) + packageVersionStr.size();
+
     constexpr std::array<uint8_t, packageHeaderSize - 1>
-        invalidPackagerHeaderInfo3{
+        invalidPackagerHeaderInfo{
             0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00,
             0xa0, 0x2f, 0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00,
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x0c, 0xe5,
             0x07, 0x00, 0x08, 0x00, 0x01, 0x0b, 0x4f, 0x70, 0x65, 0x6e,
             0x42, 0x4d, 0x43, 0x76, 0x31, 0x2e};
-    rc = decode_pldm_package_header_info(invalidPackagerHeaderInfo3.data(),
-                                         invalidPackagerHeaderInfo3.size(),
+
+    pldm_package_header_information packageHeader{};
+    variable_field packageVersion{};
+    int rc = 0;
+
+    rc = decode_pldm_package_header_info(invalidPackagerHeaderInfo.data(),
+                                         invalidPackagerHeaderInfo.size(),
                                          &packageHeader, &packageVersion);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
 
-    // ComponentBitmapBitLength not a multiple of 8
-    constexpr std::array<uint8_t, packageHeaderSize> invalidPackagerHeaderInfo4{
+TEST(DecodePackageHeaderInfo, invalidComponentBitmapBitLength)
+{
+    constexpr std::string_view packageVersionStr{"OpenBMCv1.0"};
+    constexpr size_t packageHeaderSize =
+        sizeof(pldm_package_header_information) + packageVersionStr.size();
+
+    constexpr std::array<uint8_t, packageHeaderSize> invalidPackagerHeaderInfo{
         0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00, 0xa0, 0x2f,
         0x05, 0x9a, 0xca, 0x02, 0x02, 0x2f, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x19, 0x0c, 0xe5, 0x07, 0x00, 0x09, 0x00, 0x01, 0x0b,
         0x4f, 0x70, 0x65, 0x6e, 0x42, 0x4d, 0x43, 0x76, 0x31, 0x2e, 0x30};
-    rc = decode_pldm_package_header_info(invalidPackagerHeaderInfo4.data(),
-                                         invalidPackagerHeaderInfo4.size(),
+
+    pldm_package_header_information packageHeader{};
+    variable_field packageVersion{};
+    int rc = 0;
+
+    rc = decode_pldm_package_header_info(invalidPackagerHeaderInfo.data(),
+                                         invalidPackagerHeaderInfo.size(),
                                          &packageHeader, &packageVersion);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
