@@ -1128,6 +1128,42 @@ pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 	return 0;
 }
 
+LIBPLDM_CC_NONNULL_ARGS(1)
+LIBPLDM_CC_ALWAYS_INLINE
+int pldm_msgbuf_span_until(struct pldm_msgbuf *ctx, size_t trailer,
+			   void **cursor, size_t *length)
+{
+#if INTMAX_MAX < SIZE_MAX
+	if (trailer > INTMAX_MAX) {
+		return pldm__msgbuf_invalidate(ctx);
+	}
+#endif
+
+	if (ctx->remaining >= (intmax_t)trailer) {
+		ptrdiff_t delta;
+
+		assert(ctx->cursor);
+
+		delta = ctx->remaining - (intmax_t)trailer;
+		if (cursor) {
+			*cursor = ctx->cursor;
+		}
+		ctx->cursor += delta;
+		if (length) {
+			*length = delta;
+		}
+		ctx->remaining = (intmax_t)trailer;
+		return 0;
+	}
+
+	if (ctx->remaining > INTMAX_MIN + (intmax_t)trailer) {
+		ctx->remaining = INTMAX_MIN + (intmax_t)trailer;
+		return -EOVERFLOW;
+	}
+
+	return pldm__msgbuf_invalidate(ctx);
+}
+
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 pldm_msgbuf_peek_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
