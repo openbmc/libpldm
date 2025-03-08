@@ -148,8 +148,8 @@ TEST(msgbuf, extract_one_int8)
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_int8(ctx, val), 0);
+    ASSERT_EQ(pldm_msgbuf_complete(ctx), 0);
     EXPECT_EQ(val, -1);
-    EXPECT_EQ(pldm_msgbuf_complete(ctx), 0);
 }
 
 TEST(msgbuf, extract_over_int8)
