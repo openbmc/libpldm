@@ -94,6 +94,15 @@ TEST_F(PldmInstanceDbTest, allocOnNulldb)
     EXPECT_EQ(pldm_instance_id_alloc(db, tid, &iid), -EINVAL);
 }
 
+TEST_F(PldmInstanceDbTest, freeOnNulldb)
+{
+    struct pldm_instance_db* db = nullptr;
+    const pldm_tid_t tid = 1;
+    pldm_instance_id_t iid = 1;
+
+    EXPECT_EQ(pldm_instance_id_free(db, tid, iid), -EINVAL);
+}
+
 TEST_F(PldmInstanceDbTest, allocFreeOne)
 {
     struct pldm_instance_db* db = nullptr;

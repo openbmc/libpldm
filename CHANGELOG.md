@@ -69,6 +69,7 @@ Change categories:
 - meson: sizes.h: add includedir to install path
 - pdr: Create entity association PDRs with unique record handle
 - requester: add null check for instance db object in pldm_instance_id_alloc()
+- requester: add null check for instance db object in pldm_instance_id_free()
 
 ### Security
 
