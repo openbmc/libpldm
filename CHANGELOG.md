@@ -62,6 +62,7 @@ Change categories:
 
 - pdr: Remove PDR if the contained entity to be removed is the last one
 - meson: sizes.h: add includedir to install path
+- requester: add nullptr check in pldm_instance_id_free()
 
 ### Security
 

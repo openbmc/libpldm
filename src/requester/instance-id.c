@@ -219,6 +219,11 @@ int pldm_instance_id_free(struct pldm_instance_db *ctx, pldm_tid_t tid,
 	struct flock flop;
 	int rc;
 
+	/* check if provided context is null */
+	if (!ctx) {
+		return -EINVAL;
+	}
+
 	/* Trying to free an instance ID that is not currently allocated */
 	if (!(ctx->state[tid].allocations & BIT(iid))) {
 		return -EINVAL;
