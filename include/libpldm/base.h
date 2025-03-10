@@ -112,6 +112,7 @@ typedef enum {
 #define PLDM_GET_TYPES_RESP_BYTES    9
 #define PLDM_GET_TID_REQ_BYTES	     0
 #define PLDM_GET_TID_RESP_BYTES	     2
+#define PLDM_SET_TID_REQ_BYTES	     1
 #define PLDM_SET_TID_RESP_BYTES	     1
 #define PLDM_GET_COMMANDS_RESP_BYTES 33
 /* Response data has only one version and does not contain the checksum */
