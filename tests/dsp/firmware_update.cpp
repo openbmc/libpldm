@@ -424,10 +424,78 @@ TEST(DecodeFirmwareDeviceIdRecord, goodPathNofwDevicePkgData)
 
 TEST(DecodeFirmwareDeviceIdRecord, ErrorPaths)
 {
-    constexpr uint16_t componentBitmapBitLength = 8;
     // Invalid ComponentImageSetVersionStringType
-    constexpr std::array<uint8_t, 11> invalidRecord1{
-        0x0b, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x06, 0x0e, 0x00, 0x00};
+    constexpr std::array<uint8_t, 11> rec{0x0b, 0x00, 0x01, 0x01, 0x00, 0x00,
+                                          0x00, 0x06, 0x0e, 0x00, 0x00};
+    constexpr uint16_t componentBitmapBitLength = 8;
+
+    pldm_firmware_device_id_record deviceIdRecHeader{};
+    variable_field outCompImageSetVersionStr{};
+    variable_field applicableComponents{};
+    variable_field outFwDevicePkgData{};
+    variable_field recordDescriptors{};
+    int rc = 0;
+
+    rc = decode_firmware_device_id_record(
+        nullptr, rec.size(), componentBitmapBitLength, &deviceIdRecHeader,
+        &applicableComponents, &outCompImageSetVersionStr, &recordDescriptors,
+        &outFwDevicePkgData);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_firmware_device_id_record(
+        rec.data(), rec.size(), componentBitmapBitLength, nullptr,
+        &applicableComponents, &outCompImageSetVersionStr, &recordDescriptors,
+        &outFwDevicePkgData);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_firmware_device_id_record(
+        rec.data(), rec.size(), componentBitmapBitLength, &deviceIdRecHeader,
+        nullptr, &outCompImageSetVersionStr, &recordDescriptors,
+        &outFwDevicePkgData);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_firmware_device_id_record(
+        rec.data(), rec.size(), componentBitmapBitLength, &deviceIdRecHeader,
+        &applicableComponents, nullptr, &recordDescriptors,
+        &outFwDevicePkgData);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_firmware_device_id_record(
+        rec.data(), rec.size(), componentBitmapBitLength, &deviceIdRecHeader,
+        &applicableComponents, &outCompImageSetVersionStr, nullptr,
+        &outFwDevicePkgData);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_firmware_device_id_record(
+        rec.data(), rec.size(), componentBitmapBitLength, &deviceIdRecHeader,
+        &applicableComponents, &outCompImageSetVersionStr, &recordDescriptors,
+        nullptr);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_firmware_device_id_record(
+        rec.data(), rec.size() - 1, componentBitmapBitLength,
+        &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
+        &recordDescriptors, &outFwDevicePkgData);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    rc = decode_firmware_device_id_record(
+        rec.data(), rec.size(), componentBitmapBitLength + 1,
+        &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
+        &recordDescriptors, &outFwDevicePkgData);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    rc = decode_firmware_device_id_record(
+        rec.data(), rec.size(), componentBitmapBitLength, &deviceIdRecHeader,
+        &applicableComponents, &outCompImageSetVersionStr, &recordDescriptors,
+        &outFwDevicePkgData);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(DecodeFirmwareDeviceIdRecord, invalidComponentImageSetVersionStringLength)
+{
+    constexpr std::array<uint8_t, 11> rec{0x0b, 0x00, 0x01, 0x01, 0x00, 0x00,
+                                          0x00, 0x01, 0x00, 0x00, 0x00};
+    constexpr uint16_t componentBitmapBitLength = 8;
 
     int rc = 0;
     pldm_firmware_device_id_record deviceIdRecHeader{};
@@ -437,88 +505,55 @@ TEST(DecodeFirmwareDeviceIdRecord, ErrorPaths)
     variable_field outFwDevicePkgData{};
 
     rc = decode_firmware_device_id_record(
-        nullptr, invalidRecord1.size(), componentBitmapBitLength,
-        &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
-        &recordDescriptors, &outFwDevicePkgData);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-
-    rc = decode_firmware_device_id_record(
-        invalidRecord1.data(), invalidRecord1.size(), componentBitmapBitLength,
-        nullptr, &applicableComponents, &outCompImageSetVersionStr,
-        &recordDescriptors, &outFwDevicePkgData);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-
-    rc = decode_firmware_device_id_record(
-        invalidRecord1.data(), invalidRecord1.size(), componentBitmapBitLength,
-        &deviceIdRecHeader, nullptr, &outCompImageSetVersionStr,
-        &recordDescriptors, &outFwDevicePkgData);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-
-    rc = decode_firmware_device_id_record(
-        invalidRecord1.data(), invalidRecord1.size(), componentBitmapBitLength,
-        &deviceIdRecHeader, &applicableComponents, nullptr, &recordDescriptors,
+        rec.data(), rec.size(), componentBitmapBitLength, &deviceIdRecHeader,
+        &applicableComponents, &outCompImageSetVersionStr, &recordDescriptors,
         &outFwDevicePkgData);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(DecodeFirmwareDeviceIdRecord, shortBuffer)
+{
+    constexpr std::array<uint8_t, 11> rec{0x2e, 0x00, 0x01, 0x01, 0x00, 0x00,
+                                          0x00, 0x01, 0x0e, 0x00, 0x00};
+    constexpr uint16_t componentBitmapBitLength = 8;
+
+    pldm_firmware_device_id_record deviceIdRecHeader{};
+    variable_field outCompImageSetVersionStr{};
+    variable_field applicableComponents{};
+    variable_field outFwDevicePkgData{};
+    variable_field recordDescriptors{};
+    int rc = 0;
 
     rc = decode_firmware_device_id_record(
-        invalidRecord1.data(), invalidRecord1.size(), componentBitmapBitLength,
-        &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
-        nullptr, &outFwDevicePkgData);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-
-    rc = decode_firmware_device_id_record(
-        invalidRecord1.data(), invalidRecord1.size(), componentBitmapBitLength,
-        &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
-        &recordDescriptors, nullptr);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-
-    rc = decode_firmware_device_id_record(
-        invalidRecord1.data(), invalidRecord1.size() - 1,
-        componentBitmapBitLength, &deviceIdRecHeader, &applicableComponents,
-        &outCompImageSetVersionStr, &recordDescriptors, &outFwDevicePkgData);
+        rec.data(), rec.size(), componentBitmapBitLength, &deviceIdRecHeader,
+        &applicableComponents, &outCompImageSetVersionStr, &recordDescriptors,
+        &outFwDevicePkgData);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+
+TEST(DecodeFirmwareDeviceIdRecord, recordLengthMismatch)
+{
+    constexpr std::array<uint8_t, 11> rec{0x15, 0x00, 0x01, 0x01, 0x00, 0x00,
+                                          0x00, 0x01, 0x0e, 0x02, 0x00};
+    constexpr uint16_t componentBitmapBitLength = 8;
+
+    pldm_firmware_device_id_record deviceIdRecHeader{};
+    variable_field outCompImageSetVersionStr{};
+    variable_field applicableComponents{};
+    variable_field outFwDevicePkgData{};
+    variable_field recordDescriptors{};
+    int rc = 0;
 
     rc = decode_firmware_device_id_record(
-        invalidRecord1.data(), invalidRecord1.size(),
-        componentBitmapBitLength + 1, &deviceIdRecHeader, &applicableComponents,
-        &outCompImageSetVersionStr, &recordDescriptors, &outFwDevicePkgData);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-
-    rc = decode_firmware_device_id_record(
-        invalidRecord1.data(), invalidRecord1.size(), componentBitmapBitLength,
-        &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
-        &recordDescriptors, &outFwDevicePkgData);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-
-    // Invalid ComponentImageSetVersionStringLength
-    constexpr std::array<uint8_t, 11> invalidRecord2{
-        0x0b, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00};
-    rc = decode_firmware_device_id_record(
-        invalidRecord2.data(), invalidRecord2.size(), componentBitmapBitLength,
-        &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
-        &recordDescriptors, &outFwDevicePkgData);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-
-    // invalidRecord3 size is less than RecordLength
-    constexpr std::array<uint8_t, 11> invalidRecord3{
-        0x2e, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x0e, 0x00, 0x00};
-    rc = decode_firmware_device_id_record(
-        invalidRecord3.data(), invalidRecord3.size(), componentBitmapBitLength,
-        &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
-        &recordDescriptors, &outFwDevicePkgData);
+        rec.data(), rec.size(), componentBitmapBitLength, &deviceIdRecHeader,
+        &applicableComponents, &outCompImageSetVersionStr, &recordDescriptors,
+        &outFwDevicePkgData);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
 
-    // RecordLength is less than the calculated RecordLength
-    constexpr std::array<uint8_t, 11> invalidRecord4{
-        0x15, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x0e, 0x02, 0x00};
-    rc = decode_firmware_device_id_record(
-        invalidRecord4.data(), invalidRecord4.size(), componentBitmapBitLength,
-        &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
-        &recordDescriptors, &outFwDevicePkgData);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
-
-    // Large FirmwareDevicePackageDataLength could cause overflow in calculation
-    constexpr std::array<uint8_t, 49> invalidRecord5{
+TEST(DecodeFirmwareDeviceIdRecord, invalidFirmwareDevicePackageDataLength)
+{
+    constexpr std::array<uint8_t, 49> rec{
         0x31, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x0e,
         // FirmwareDevicePackageDataLength = 0xffff
         0xff, 0xff,
@@ -527,10 +562,19 @@ TEST(DecodeFirmwareDeviceIdRecord, ErrorPaths)
         0x69, 0x6e, 0x67, 0x31, 0x02, 0x00, 0x10, 0x00, 0x12, 0x44, 0xd2, 0x64,
         0x8d, 0x7d, 0x47, 0x18, 0xa0, 0x30, 0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5b,
         0xab, 0xcd};
+    constexpr uint16_t componentBitmapBitLength = 8;
+
+    pldm_firmware_device_id_record deviceIdRecHeader{};
+    variable_field outCompImageSetVersionStr{};
+    variable_field applicableComponents{};
+    variable_field outFwDevicePkgData{};
+    variable_field recordDescriptors{};
+    int rc = 0;
+
     rc = decode_firmware_device_id_record(
-        invalidRecord5.data(), invalidRecord5.size(), componentBitmapBitLength,
-        &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
-        &recordDescriptors, &outFwDevicePkgData);
+        rec.data(), rec.size(), componentBitmapBitLength, &deviceIdRecHeader,
+        &applicableComponents, &outCompImageSetVersionStr, &recordDescriptors,
+        &outFwDevicePkgData);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
