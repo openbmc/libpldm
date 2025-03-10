@@ -28,6 +28,8 @@ Change categories:
 
 - PLDM FD responder accepts a PLDM control handle and will register its version.
 
+- base: Add define for the required lenght in a SetTID command
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
