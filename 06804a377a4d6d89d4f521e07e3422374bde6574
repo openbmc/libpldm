@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "991dfa6c_43a7227d",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-10T05:09:44Z",
+      "side": 1,
+      "message": "Done. Updated to `TRANSFER`.",
+      "parentUuid": "500f81c4_ca9d4820",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 46
+      },
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3648ca7_2330c59b",
@@ -58,6 +82,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f67769d0_f893e75d",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-10T05:09:44Z",
+      "side": 1,
+      "message": "Done. Replaced by `pldm_multipart_receive_resp`. However, I do not include the DataIntegrityChecksum field to the struct, because of the flexible array on top of it. I separate it to another output argument that callers need to pass into the decode function.",
+      "parentUuid": "f3648ca7_2330c59b",
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f12e01a_6fd99f51",
@@ -71,6 +113,30 @@
       "writtenOn": "2024-10-28T00:59:26Z",
       "side": 1,
       "message": "See https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L117-L123",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 658,
+        "endChar": 71
+      },
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "599243c2_ff60ace9",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-10T05:09:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f12e01a_6fd99f51",
       "range": {
         "startLine": 654,
         "startChar": 0,
@@ -100,6 +166,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31d1da2d_7cffefe3",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-10T05:09:44Z",
+      "side": 1,
+      "message": "I updated the description. But I don\u0027t quite understand your experiment suggestion. Do you mean that I should return with the total bytes of `buf` that are already extracted to the output params?",
+      "parentUuid": "59e5dbec_d156159d",
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ac0ca02_6ffcbe01",
         "filename": "include/libpldm/base.h",
         "patchSetId": 5
@@ -111,6 +195,30 @@
       "writtenOn": "2024-10-28T00:59:26Z",
       "side": 1,
       "message": "See https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L117-L123",
+      "range": {
+        "startLine": 673,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 46
+      },
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1519393_90f74499",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-10T05:09:44Z",
+      "side": 1,
+      "message": "Updated, please help me review new argument declaration.",
+      "parentUuid": "2ac0ca02_6ffcbe01",
       "range": {
         "startLine": 673,
         "startChar": 0,
@@ -140,6 +248,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7458ff67_fdd0c63e",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-10T05:09:44Z",
+      "side": 1,
+      "message": "Updated, please help me review new description.",
+      "parentUuid": "24d57f86_a716c865",
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d28d0ab6_38610dd2",
         "filename": "src/dsp/base.c",
         "patchSetId": 5
@@ -151,6 +277,24 @@
       "writtenOn": "2024-10-28T00:59:26Z",
       "side": 1,
       "message": "Before the `pldm_msgbuf_init_errno()` call below, I think we need a call to `pldm_msg_has_error()` (from `src/dsp/base.h`). That way we cater to error responses before requiring the minimum buffer size be the expected response length.",
+      "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90c43975_3752e6d7",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-10T05:09:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d28d0ab6_38610dd2",
       "revId": "06804a377a4d6d89d4f521e07e3422374bde6574",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
