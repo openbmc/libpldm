@@ -49,6 +49,54 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "18f01146_cfe53b86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-03-11T09:10:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d0bb9d1_ef11b9d4",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "9630062d2b0a18f2955d254f817fed4fc761290e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd23585_1a4bf87e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-03-11T09:10:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d06ffbd7_8b26cf11",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 14
+      },
+      "revId": "9630062d2b0a18f2955d254f817fed4fc761290e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "946c29c9_a7e2bd59",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -77,6 +125,30 @@
       "writtenOn": "2025-03-11T08:51:08Z",
       "side": 1,
       "message": "can we reframe something like this?\n`base: Define the minumum request bytes for SetTID command.`",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 62
+      },
+      "revId": "9630062d2b0a18f2955d254f817fed4fc761290e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ff6fe64_d53e2647",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-03-11T09:10:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5764c1f_551615e3",
       "range": {
         "startLine": 31,
         "startChar": 2,
