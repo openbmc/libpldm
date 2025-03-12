@@ -73,6 +73,7 @@ libpldm_include_dir = include_directories('include', is_system: true)
 
 subdir('include')
 subdir('src')
+subdir('tools')
 
 doxygen = find_program('doxygen', required: false)
 if doxygen.found()
