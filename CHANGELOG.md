@@ -83,6 +83,8 @@ Change categories:
 - oem: ibm: Added enum PLDM_OEM_IBM_PANEL_TRIGGER_STATE to trigger panel related
   bitmap functions.
 
+- Introduce interator-based firmware update package parsing APIs
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
