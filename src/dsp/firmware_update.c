@@ -2,6 +2,7 @@
 #include "api.h"
 #include "dsp/base.h"
 #include "msgbuf.h"
+#include <libpldm/base.h>
 #include <libpldm/firmware_update.h>
 #include <libpldm/utils.h>
 
@@ -516,96 +517,154 @@ int decode_pldm_package_header_info(
 	return PLDM_SUCCESS;
 }
 
-static int decode_firmware_device_id_record_errno(
-	const void *data, size_t length, uint16_t component_bitmap_bit_length,
-	struct pldm_firmware_device_id_record *fw_device_id_record,
-	struct variable_field *applicable_components,
-	struct variable_field *comp_image_set_version_str,
-	struct variable_field *record_descriptors,
-	struct variable_field *fw_device_pkg_data)
+struct pldm_component_bitmap {
+	struct variable_field bitmap;
+};
+
+/* TODO: Remove struct pldm_firmware_device_id_record from public header, rename padded struct, drop typedef */
+struct pldm__firmware_device_id_record {
+	uint8_t descriptor_count;
+	bitfield32_t device_update_option_flags;
+	uint8_t component_image_set_version_string_type;
+	struct variable_field component_image_set_version_string;
+	struct pldm_component_bitmap applicable_components;
+	struct variable_field record_descriptors;
+	struct variable_field firmware_device_package_data;
+};
+typedef struct pldm__firmware_device_id_record
+	pldm_firmware_device_id_record_pad;
+
+/* Currently only used for decode_firmware_device_id_record_errno() */
+static int pldm_msgbuf_init_dynamic_uint16(struct pldm_msgbuf *buf, size_t req,
+					   const void *data, size_t len)
 {
-	if (data == NULL || fw_device_id_record == NULL ||
-	    applicable_components == NULL ||
-	    comp_image_set_version_str == NULL || record_descriptors == NULL ||
-	    fw_device_pkg_data == NULL) {
+	uint16_t dyn;
+	void *start;
+	int rc;
+
+	/*
+	 * Extract the record length from the first field, then reinitialise the msgbuf
+	 * after determining that it's safe to do so
+	 */
+
+	rc = pldm_msgbuf_init_errno(buf, req, data, len);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, dyn);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, req, data, len);
+	if (rc) {
+		return rc;
+	}
+
+	/* Ensure there's no arithmetic funkiness and the span is within buffer bounds */
+	rc = pldm_msgbuf_span_required(buf, dyn, &start);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return rc;
+	}
+
+	return pldm_msgbuf_init_errno(buf, req, start, dyn);
+}
+
+#define PLDM_FWUP_FIRMWARE_DEVICE_ID_RECORD_MIN_SIZE 11
+static int decode_firmware_device_id_record_errno(
+	const void *data, size_t length,
+	pldm_package_header_information_pad *header,
+	pldm_firmware_device_id_record_pad *rec)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	uint16_t record_len = 0;
+	int rc;
+
+	if (!data || !header || !rec) {
 		return -EINVAL;
 	}
 
-	if (length < sizeof(struct pldm_firmware_device_id_record)) {
-		return -EOVERFLOW;
+	if (header->package_header_format_revision != 1) {
+		return -ENOTSUP;
 	}
 
-	if ((component_bitmap_bit_length %
-	     PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE) != 0) {
-		return -EBADMSG;
+	if (header->component_bitmap_bit_length & 7) {
+		return -EPROTO;
 	}
 
-	struct pldm_firmware_device_id_record *data_record =
-		(struct pldm_firmware_device_id_record *)(data);
+	rc = pldm_msgbuf_init_dynamic_uint16(
+		buf, PLDM_FWUP_FIRMWARE_DEVICE_ID_RECORD_MIN_SIZE, data,
+		length);
+	if (rc) {
+		return rc;
+	}
 
+	pldm_msgbuf_extract(buf, record_len);
+	pldm_msgbuf_extract(buf, rec->descriptor_count);
+	pldm_msgbuf_extract(buf, rec->device_update_option_flags.value);
+
+	rc = pldm_msgbuf_extract(buf,
+				 rec->component_image_set_version_string_type);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
 	if (!is_string_type_valid(
-		    data_record->comp_image_set_version_string_type) ||
-	    (data_record->comp_image_set_version_string_length == 0)) {
-		return -EBADMSG;
+		    rec->component_image_set_version_string_type)) {
+		return pldm_msgbuf_discard(buf, -EPROTO);
 	}
 
-	fw_device_id_record->record_length =
-		le16toh(data_record->record_length);
-	fw_device_id_record->descriptor_count = data_record->descriptor_count;
-	fw_device_id_record->device_update_option_flags.value =
-		le32toh(data_record->device_update_option_flags.value);
-	fw_device_id_record->comp_image_set_version_string_type =
-		data_record->comp_image_set_version_string_type;
-	fw_device_id_record->comp_image_set_version_string_length =
-		data_record->comp_image_set_version_string_length;
-	fw_device_id_record->fw_device_pkg_data_length =
-		le16toh(data_record->fw_device_pkg_data_length);
-
-	if (length < fw_device_id_record->record_length) {
-		return -EOVERFLOW;
+	rc = pldm_msgbuf_extract_uint8_to_size(
+		buf, rec->component_image_set_version_string.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
 	}
 
-	uint16_t applicable_components_length =
-		component_bitmap_bit_length /
-		PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE;
-	size_t calc_min_record_length =
-		sizeof(struct pldm_firmware_device_id_record) +
-		applicable_components_length +
-		data_record->comp_image_set_version_string_length +
-		PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN +
-		fw_device_id_record->fw_device_pkg_data_length;
-
-	if (fw_device_id_record->record_length < calc_min_record_length) {
-		return -EOVERFLOW;
+	if (rec->component_image_set_version_string.length == 0) {
+		return pldm_msgbuf_discard(buf, -EPROTO);
 	}
 
-	applicable_components->ptr =
-		(const uint8_t *)data +
-		sizeof(struct pldm_firmware_device_id_record);
-	applicable_components->length = applicable_components_length;
-
-	comp_image_set_version_str->ptr =
-		applicable_components->ptr + applicable_components->length;
-	comp_image_set_version_str->length =
-		fw_device_id_record->comp_image_set_version_string_length;
-
-	record_descriptors->ptr = comp_image_set_version_str->ptr +
-				  comp_image_set_version_str->length;
-	record_descriptors->length =
-		fw_device_id_record->record_length -
-		sizeof(struct pldm_firmware_device_id_record) -
-		applicable_components_length -
-		fw_device_id_record->comp_image_set_version_string_length -
-		fw_device_id_record->fw_device_pkg_data_length;
-
-	if (fw_device_id_record->fw_device_pkg_data_length) {
-		fw_device_pkg_data->ptr =
-			record_descriptors->ptr + record_descriptors->length;
-		fw_device_pkg_data->length =
-			fw_device_id_record->fw_device_pkg_data_length;
+	rc = pldm_msgbuf_extract_uint16_to_size(
+		buf, rec->firmware_device_package_data.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
 	}
 
-	return 0;
+	rc = pldm_msgbuf_span_required(
+		buf, header->component_bitmap_bit_length / 8,
+		(void **)&rec->applicable_components.bitmap.ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	rec->applicable_components.bitmap.length =
+		header->component_bitmap_bit_length / 8;
+
+	pldm_msgbuf_span_required(
+		buf, rec->component_image_set_version_string.length,
+		(void **)&rec->component_image_set_version_string.ptr);
+
+	pldm_msgbuf_span_until(buf, rec->firmware_device_package_data.length,
+			       (void **)&rec->record_descriptors.ptr,
+			       &rec->record_descriptors.length);
+
+	pldm_msgbuf_span_required(
+		buf, rec->firmware_device_package_data.length,
+		(void **)&rec->firmware_device_package_data.ptr);
+	if (!rec->firmware_device_package_data.length) {
+		rec->firmware_device_package_data.ptr = NULL;
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -618,15 +677,42 @@ int decode_firmware_device_id_record(
 	struct variable_field *record_descriptors,
 	struct variable_field *fw_device_pkg_data)
 {
+	pldm_package_header_information_pad header = { 0 };
+	pldm_firmware_device_id_record_pad rec = { 0 };
 	int rc;
 
-	rc = decode_firmware_device_id_record_errno(
-		data, length, component_bitmap_bit_length, fw_device_id_record,
-		applicable_components, comp_image_set_version_str,
-		record_descriptors, fw_device_pkg_data);
+	if (!data || !fw_device_id_record || !applicable_components ||
+	    !comp_image_set_version_str || !record_descriptors ||
+	    !fw_device_pkg_data) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	header.component_bitmap_bit_length = component_bitmap_bit_length;
+	memcpy(header.package_header_identifier, PLDM_FWUP_HDR_IDENTIFIER_V1,
+	       sizeof(PLDM_FWUP_HDR_IDENTIFIER_V1));
+	header.package_header_format_revision = 1;
+	rc = decode_firmware_device_id_record_errno(data, length, &header,
+						    &rec);
 	if (rc < 0) {
 		return pldm_xlate_errno(rc);
 	}
+
+	memcpy(&fw_device_id_record->record_length, data,
+	       sizeof(fw_device_id_record->record_length));
+	LE16TOH(fw_device_id_record->record_length);
+	fw_device_id_record->descriptor_count = rec.descriptor_count;
+	fw_device_id_record->device_update_option_flags =
+		rec.device_update_option_flags;
+	fw_device_id_record->comp_image_set_version_string_type =
+		rec.component_image_set_version_string_type;
+	fw_device_id_record->comp_image_set_version_string_length =
+		rec.component_image_set_version_string.length;
+	fw_device_id_record->fw_device_pkg_data_length =
+		rec.firmware_device_package_data.length;
+	*applicable_components = rec.applicable_components.bitmap;
+	*comp_image_set_version_str = rec.component_image_set_version_string;
+	*record_descriptors = rec.record_descriptors;
+	*fw_device_pkg_data = rec.firmware_device_package_data;
 
 	return PLDM_SUCCESS;
 }
