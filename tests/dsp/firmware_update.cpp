@@ -368,7 +368,7 @@ TEST(DecodeFirmwareDeviceIdRecord, goodPath)
         &deviceIdRecHeader, &applicableComponents, &outCompImageSetVersionStr,
         &recordDescriptors, &outFwDevicePkgData);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    ASSERT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(deviceIdRecHeader.record_length, recordLen);
     EXPECT_EQ(deviceIdRecHeader.descriptor_count, descriptorCount);
     EXPECT_EQ(deviceIdRecHeader.device_update_option_flags.value,
