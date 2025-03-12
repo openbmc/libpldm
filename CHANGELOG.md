@@ -80,6 +80,8 @@ Change categories:
 - oem: ibm: Modified the state set id for slot effecter and sensor
 - base: Add encode req & decode resp for NegotiateTransferParameters.
 
+- Introduce interator-based firmware update package parsing APIs
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
