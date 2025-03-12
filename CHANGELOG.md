@@ -34,6 +34,8 @@ Change categories:
 
 - Support for building the documentation with doxygen
 
+- Introduce interator-based firmware update package parsing APIs
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
