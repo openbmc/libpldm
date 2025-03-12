@@ -163,4 +163,6 @@ typedef union {
 
 typedef float real32_t;
 
+typedef uint8_t pldm_uuid[16];
+
 #endif /* PLDM_TYPES_H */

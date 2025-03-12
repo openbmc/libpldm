@@ -3,6 +3,9 @@
 #ifndef LIBPLDM_COMPILER_H
 #define LIBPLDM_COMPILER_H
 
+#define LIBPLDM_SIZEAT(type, member)                                           \
+	(offsetof(type, member) + sizeof(((type *)NULL)->member))
+
 #if defined __has_attribute
 
 #if __has_attribute(always_inline)
