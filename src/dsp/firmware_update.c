@@ -8,6 +8,7 @@
 #include <endian.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
 
 static_assert(PLDM_FIRMWARE_MAX_STRING <= UINT8_MAX, "too large");
 
@@ -326,58 +327,146 @@ static bool is_non_functioning_component_indication_valid(
 	}
 }
 
+// Identifier for a valid PLDM Firmware Update Package for Version 1.0.x as per
+// spec
+static const uint8_t PLDM_FWUP_HDR_IDENTIFIER_V1[PLDM_FWUP_UUID_LENGTH] = {
+	0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D, 0x49, 0x43,
+	0x98, 0x00, 0xA0, 0x2F, 0x05, 0x9A, 0xCA, 0x02
+};
+
+/* TODO: Remove struct pldm_package_header_information from public header, rename padded struct, drop typedef */
+struct pldm__package_header_information {
+	uint8_t package_header_identifier[PLDM_FWUP_UUID_LENGTH];
+	uint8_t package_header_format_revision;
+	uint8_t package_release_date_time[PLDM_TIMESTAMP104_SIZE];
+	uint16_t component_bitmap_bit_length;
+	uint8_t package_version_string_type;
+	struct variable_field package_version_string;
+	struct variable_field areas;
+	struct variable_field images;
+};
+typedef struct pldm__package_header_information
+	pldm_package_header_information_pad;
+
+#define PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE 36
 static int decode_pldm_package_header_info_errno(
 	const void *data, size_t length,
-	struct pldm_package_header_information *package_header_info,
-	struct variable_field *package_version_str)
+	pldm_package_header_information_pad *header)
 {
-	if (data == NULL || package_header_info == NULL ||
-	    package_version_str == NULL) {
+	uint8_t package_version_string_length;
+	uint32_t package_header_checksum = 0;
+	size_t package_header_variable_size;
+	size_t package_header_payload_size;
+	size_t package_header_areas_size;
+	uint16_t package_header_size;
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int checksums = 1;
+	int rc;
+
+	if (!data || !header) {
 		return -EINVAL;
 	}
 
-	if (length < sizeof(struct pldm_package_header_information)) {
-		return -EOVERFLOW;
+	rc = pldm_msgbuf_init_errno(buf, PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE,
+				    data, length);
+	if (rc) {
+		return rc;
 	}
 
-	struct pldm_package_header_information *data_header =
-		(struct pldm_package_header_information *)(data);
-
-	if (!is_string_type_valid(data_header->package_version_string_type) ||
-	    (data_header->package_version_string_length == 0)) {
-		return -EBADMSG;
+	rc = pldm_msgbuf_extract_array(
+		buf, sizeof(header->package_header_identifier),
+		header->package_header_identifier,
+		sizeof(header->package_header_identifier));
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
 	}
 
-	if (length < sizeof(struct pldm_package_header_information) +
-			     data_header->package_version_string_length) {
-		return -EOVERFLOW;
+	static_assert(sizeof(PLDM_FWUP_HDR_IDENTIFIER_V1) ==
+			      sizeof(header->package_header_identifier),
+		      "UUID field size");
+	if (memcmp(PLDM_FWUP_HDR_IDENTIFIER_V1,
+		   header->package_header_identifier,
+		   sizeof(PLDM_FWUP_HDR_IDENTIFIER_V1)) != 0) {
+		return pldm_msgbuf_discard(buf, -ENOTSUP);
 	}
 
-	if ((data_header->component_bitmap_bit_length %
-	     PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE) != 0) {
-		return -EBADMSG;
+	rc = pldm_msgbuf_extract(buf, header->package_header_format_revision);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	if (header->package_header_format_revision != 0x01) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
 	}
 
-	memcpy(package_header_info->uuid, data_header->uuid,
-	       sizeof(data_header->uuid));
-	package_header_info->package_header_format_version =
-		data_header->package_header_format_version;
-	package_header_info->package_header_size =
-		le16toh(data_header->package_header_size);
-	memcpy(package_header_info->package_release_date_time,
-	       data_header->package_release_date_time,
-	       sizeof(data_header->package_release_date_time));
-	package_header_info->component_bitmap_bit_length =
-		le16toh(data_header->component_bitmap_bit_length);
-	package_header_info->package_version_string_type =
-		data_header->package_version_string_type;
-	package_header_info->package_version_string_length =
-		data_header->package_version_string_length;
-	package_version_str->ptr =
-		(const uint8_t *)data +
-		sizeof(struct pldm_package_header_information);
-	package_version_str->length =
-		package_header_info->package_version_string_length;
+	rc = pldm_msgbuf_extract(buf, package_header_size);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract_array(
+		buf, sizeof(header->package_release_date_time),
+		header->package_release_date_time,
+		sizeof(header->package_release_date_time));
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, header->component_bitmap_bit_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	if (header->component_bitmap_bit_length & 7) {
+		return pldm_msgbuf_discard(buf, -EPROTO);
+	}
+
+	pldm_msgbuf_extract(buf, header->package_version_string_type);
+
+	rc = pldm_msgbuf_extract(buf, package_version_string_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	if (package_version_string_length == 0) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+	header->package_version_string.length = package_version_string_length;
+
+	pldm_msgbuf_span_required(buf, header->package_version_string.length,
+				  (void **)&header->package_version_string.ptr);
+
+	if (package_header_size < (PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE + 4 +
+				   checksums * sizeof(uint32_t))) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+	package_header_payload_size =
+		package_header_size - (checksums * sizeof(uint32_t));
+	package_header_variable_size = package_header_payload_size -
+				       PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE;
+
+	if (package_header_variable_size <
+	    header->package_version_string.length) {
+		return pldm_msgbuf_discard(buf, -EOVERFLOW);
+	}
+
+	package_header_areas_size = package_header_variable_size -
+				    header->package_version_string.length;
+	rc = pldm_msgbuf_span_required(buf, package_header_areas_size,
+				       (void **)&header->areas.ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	header->areas.length = package_header_areas_size;
+
+	pldm_msgbuf_extract(buf, package_header_checksum);
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return rc;
+	}
+
+	if (package_header_checksum !=
+	    crc32(data, package_header_payload_size)) {
+		return -EUCLEAN;
+	}
 
 	return 0;
 }
@@ -388,13 +477,41 @@ int decode_pldm_package_header_info(
 	struct pldm_package_header_information *package_header_info,
 	struct variable_field *package_version_str)
 {
+	pldm_package_header_information_pad header;
 	int rc;
 
-	rc = decode_pldm_package_header_info_errno(
-		data, length, package_header_info, package_version_str);
+	if (!data || !package_header_info || !package_version_str) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = decode_pldm_package_header_info_errno(data, length, &header);
 	if (rc < 0) {
 		return pldm_xlate_errno(rc);
 	}
+
+	static_assert(sizeof(package_header_info->uuid) ==
+			      sizeof(header.package_header_identifier),
+		      "UUID field size");
+	memcpy(package_header_info->uuid, header.package_header_identifier,
+	       sizeof(header.package_header_identifier));
+	package_header_info->package_header_format_version =
+		header.package_header_format_revision;
+	memcpy(&package_header_info->package_header_size, data + 17,
+	       sizeof(package_header_info->package_header_size));
+	LE16TOH(package_header_info->package_header_size);
+	static_assert(sizeof(package_header_info->package_release_date_time) ==
+			      sizeof(header.package_release_date_time),
+		      "TIMESTAMP104 field size");
+	memcpy(package_header_info->package_release_date_time,
+	       header.package_release_date_time,
+	       sizeof(header.package_release_date_time));
+	package_header_info->component_bitmap_bit_length =
+		header.component_bitmap_bit_length;
+	package_header_info->package_version_string_type =
+		header.package_version_string_type;
+	package_header_info->package_version_string_length =
+		header.package_version_string.length;
+	*package_version_str = header.package_version_string;
 
 	return PLDM_SUCCESS;
 }
