@@ -35,6 +35,7 @@ Change categories:
 
 - firmware update: Add encode/decode API for downstream device update command
 - base: Add `PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION` completion code
+- Introduce interator-based firmware update package parsing APIs
 
 ### Changed
 

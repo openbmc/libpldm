@@ -48,6 +48,13 @@ static constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>
                                              0x05, 0x9a, 0xca, 0x02};
 
 static constexpr uint8_t PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_V1_0 = 0x01;
+
+static constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>
+    PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_1{
+        0x12, 0x44, 0xd2, 0x64, 0x8d, 0x7d, 0x47, 0x18,
+        0xa0, 0x30, 0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5a,
+    };
+
 static constexpr size_t PLDM_FWUP_PACKAGE_HEADER_EMPTY_SIZE_V1_0 = 43;
 
 static constexpr std::array<uint8_t, PLDM_TIMESTAMP104_SIZE>
@@ -208,7 +215,7 @@ TEST(DecodePackageHeaderInfo, incongruentPackageHeaderFormatRevision)
     rc = decode_pldm_package_header_info(packagerHeaderInfo.data(),
                                          packagerHeaderInfo.size(),
                                          &packageHeader, &packageVersion);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, PLDM_ERROR);
 }
 
 TEST(DecodePackageHeaderInfo, invalidPackageVersionStringType)
@@ -4805,3 +4812,605 @@ TEST(CancelUpdate, errorPathDecodeResponse)
         &nonFunctioningComponentIndication, &nonFunctioningComponentBitmap);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodePldmFirmwareUpdatePackage, badArguments)
+{
+    DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
+    pldm_package_header_information_pad hdr;
+    struct pldm_package_iter iter;
+    uint8_t data;
+    int rc;
+
+    rc = decode_pldm_firmware_update_package(nullptr, 0, &pin, &hdr, &iter);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), nullptr, &hdr,
+                                             &iter);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, nullptr,
+                                             &iter);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, &hdr,
+                                             nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinVersion)
+{
+    const struct pldm_package_format_pin pin = {
+        .meta =
+            {
+                .magic = 0,
+                .version = UINT8_MAX,
+            },
+        .format =
+            {
+                .identifier = {0},
+                .revision = 0,
+            },
+    };
+
+    pldm_package_header_information_pad hdr;
+    struct pldm_package_iter iter;
+    uint8_t data = 0;
+    int rc;
+
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, &hdr,
+                                             &iter);
+    EXPECT_EQ(rc, -ENOTSUP);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodePldmFirmwareUpdatePackage, badPinRevision)
+{
+    const struct pldm_package_format_pin lowPin = {
+        .meta =
+            {
+                .magic = 0,
+                .version = 0,
+            },
+        .format =
+            {
+                .identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1,
+                .revision = 0,
+            },
+    };
+
+    const struct pldm_package_format_pin highPin = {
+        .meta =
+            {
+                .magic = 0,
+                .version = 0,
+            },
+        .format =
+            {
+                .identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1,
+                .revision = 3,
+            },
+    };
+
+    pldm_package_header_information_pad hdr;
+    struct pldm_package_iter iter;
+    uint8_t data = 0;
+    int rc;
+
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &lowPin, &hdr,
+                                             &iter);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &highPin,
+                                             &hdr, &iter);
+    EXPECT_EQ(rc, -ENOTSUP);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodePldmFirmwareUpdatePackage, badPinMagic)
+{
+    const struct pldm_package_format_pin lowPin = {
+        .meta =
+            {
+                .magic = 0,
+                .version = 0,
+            },
+        .format =
+            {
+                .identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1,
+                .revision = 2,
+            },
+    };
+
+    const struct pldm_package_format_pin highPin = {
+        .meta =
+            {
+                .magic = UINT32_MAX,
+                .version = 0,
+            },
+        .format =
+            {
+                .identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1,
+                .revision = 2,
+            },
+    };
+
+    pldm_package_header_information_pad hdr;
+    struct pldm_package_iter iter;
+    uint8_t data = 0;
+    int rc;
+
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &lowPin, &hdr,
+                                             &iter);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &highPin,
+                                             &hdr, &iter);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinIdentifier)
+{
+    const struct pldm_package_format_pin pin = {
+        .meta =
+            {
+                .magic =
+                    LIBPLDM_SIZEAT(struct pldm__package_header_information,
+                                   package) +
+                    LIBPLDM_SIZEAT(
+                        struct pldm_package_firmware_device_id_record,
+                        firmware_device_package_data) +
+                    LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
+                    LIBPLDM_SIZEAT(
+                        struct pldm_package_downstream_device_id_record,
+                        package_data) +
+                    LIBPLDM_SIZEAT(
+                        struct pldm_package_component_image_information,
+                        component_version_string) +
+                    LIBPLDM_SIZEAT(struct pldm_package_iter, infos),
+                .version = 0,
+            },
+        .format =
+            {
+                .identifier = {0},
+                .revision = PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H,
+            },
+    };
+
+    pldm_package_header_information_pad hdr;
+    struct pldm_package_iter iter;
+    uint8_t data = 0;
+    int rc;
+
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, &hdr,
+                                             &iter);
+    EXPECT_EQ(rc, -ENOTSUP);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodePldmFirmwareUpdatePackage, oldConsumer)
+{
+    /* Package format revision 2 header */
+    const std::array<uint8_t, 150> package{
+        0x12, 0x44, 0xd2, 0x64, 0x8d, 0x7d, 0x47, 0x18, 0xa0, 0x30,
+        0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5a, 0x02, 0x94, 0x00, 0x00,
+        0xe9, 0x07, 0x03, 0x0b, 0x16, 0x03, 0x00, 0x00, 0x00, 0x00,
+        0x76, 0x02, 0x08, 0x00, 0x01, 0x04, 't',  'e',  's',  't',
+    };
+
+    /* Package format revision 1 consumer */
+    DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(pin);
+
+    pldm_package_header_information_pad hdr;
+    struct pldm_package_iter iter;
+    int rc;
+
+    rc = decode_pldm_firmware_update_package(package.data(), package.size(),
+                                             &pin, &hdr, &iter);
+    EXPECT_EQ(rc, -ENOTSUP);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
+{
+    const std::array<uint8_t, 102> package{
+        0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00, 0xa0,
+        0x2f, 0x05, 0x9a, 0xca, 0x02, 0x01, 0x65, 0x00, 0x00, 0xe9, 0x07,
+        0x03, 0x0b, 0x16, 0x03, 0x00, 0x00, 0x00, 0x00, 0x76, 0x02, 0x08,
+        0x00, 0x01, 0x04, 't',  'e',  's',  't',
+
+        0x01, 0x18, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x04, 0x00,
+        0x00, 0x01, 'v',  '0',  '.',  '1',  0x01, 0x00, 0x04, 0x00, 0x9c,
+        0x01, 0x00, 0x00,
+
+        0x01, 0x00, 0x0a, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x00,
+        0x00, 0x01, 0x00, 0x65, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,
+        0x01, 0x04, 'v',  '0',  '.',  '2',  0x00, 0x00, 0x00, 0x00,
+
+        0xb5, 0x3f, 0xf6, 0x6a,
+
+        0x5a,
+    };
+
+    struct pldm_package_downstream_device_id_record ddrec;
+    struct pldm_package_component_image_information info;
+    struct pldm_package_firmware_device_id_record fdrec;
+    DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
+    pldm_package_header_information_pad hdr;
+    struct pldm_package_iter iter;
+    int nr_fdrec_desc = 0;
+    int nr_ddrec_desc = 0;
+    int nr_fdrec = 0;
+    int nr_ddrec = 0;
+    int nr_infos = 0;
+    int rc;
+
+    rc = decode_pldm_firmware_update_package(package.data(), package.size(),
+                                             &pin, &hdr, &iter);
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_0.data(),
+                     hdr.package_header_identifier,
+                     PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_0.size()),
+              0);
+    EXPECT_EQ(hdr.package_header_format_revision, 1);
+
+    static const std::array<uint8_t, 13> timestamp{0x00, 0xe9, 0x07, 0x03, 0x0b,
+                                                   0x16, 0x03, 0x00, 0x00, 0x00,
+                                                   0x00, 0x76, 0x02};
+    ASSERT_EQ(timestamp.size(), sizeof(hdr.package_release_date_time));
+    EXPECT_EQ(memcmp(timestamp.data(), hdr.package_release_date_time,
+                     timestamp.size()),
+              0);
+
+    EXPECT_EQ(hdr.component_bitmap_bit_length, 8);
+    EXPECT_EQ(hdr.package_version_string_type, 1);
+    ASSERT_EQ(hdr.package_version_string.length, 4);
+    EXPECT_EQ(memcmp("test", hdr.package_version_string.ptr,
+                     hdr.package_version_string.length),
+              0);
+    EXPECT_NE(hdr.areas.ptr, nullptr);
+    EXPECT_NE(hdr.areas.length, 0);
+    EXPECT_NE(hdr.package.ptr, nullptr);
+    EXPECT_NE(hdr.package.length, 0);
+
+    foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc)
+    {
+        struct pldm_descriptor desc;
+
+        EXPECT_EQ(fdrec.descriptor_count, 1);
+        EXPECT_EQ(fdrec.device_update_option_flags.value, 0);
+        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1);
+        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4);
+        EXPECT_EQ(memcmp("v0.1", fdrec.component_image_set_version_string.ptr,
+                         fdrec.component_image_set_version_string.length),
+                  0);
+        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1);
+        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1);
+        EXPECT_NE(fdrec.record_descriptors.length, 0);
+        EXPECT_NE(fdrec.record_descriptors.ptr, nullptr);
+        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0);
+
+        foreach_pldm_package_firmware_device_id_record_descriptor(iter, fdrec,
+                                                                  desc, rc)
+        {
+            static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
+
+            EXPECT_EQ(desc.descriptor_type, 1);
+            ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
+            EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
+                             sizeof(iana_pen_dmtf)),
+                      0);
+
+            nr_fdrec_desc++;
+        }
+        ASSERT_EQ(rc, 0);
+
+        nr_fdrec++;
+    }
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(nr_fdrec, 1);
+    EXPECT_EQ(nr_fdrec_desc, 1);
+
+    foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc)
+    {
+        struct pldm_descriptor desc;
+
+        EXPECT_EQ(ddrec.descriptor_count, 1);
+        EXPECT_EQ(ddrec.update_option_flags.value, 0);
+        EXPECT_EQ(ddrec.self_contained_activation_min_version_string_type, 1);
+        ASSERT_EQ(ddrec.self_contained_activation_min_version_string.length, 4);
+        EXPECT_EQ(
+            memcmp("v1.0",
+                   ddrec.self_contained_activation_min_version_string.ptr,
+                   ddrec.self_contained_activation_min_version_string.length),
+            0);
+        EXPECT_EQ(ddrec.self_contained_activation_min_version_comparison_stamp,
+                  0);
+        ASSERT_EQ(ddrec.applicable_components.bitmap.length, 1);
+        EXPECT_EQ(*ddrec.applicable_components.bitmap.ptr, 2);
+        EXPECT_NE(ddrec.record_descriptors.length, 0);
+        EXPECT_NE(ddrec.record_descriptors.ptr, nullptr);
+        EXPECT_EQ(ddrec.package_data.length, 0);
+
+        foreach_pldm_package_downstream_device_id_record_descriptor(iter, ddrec,
+                                                                    desc, rc)
+        {
+            static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
+
+            EXPECT_EQ(desc.descriptor_type, 1);
+            ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
+            EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
+                             sizeof(iana_pen_dmtf)),
+                      0);
+
+            nr_ddrec_desc++;
+        }
+        ASSERT_EQ(rc, 0);
+
+        nr_ddrec++;
+    }
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(nr_ddrec, 0);
+    EXPECT_EQ(nr_ddrec_desc, 0);
+
+    static const pldm_package_component_image_information expected_info{
+        0x000a, 0x0000, 0xffffffff, {0}, {1}, {nullptr, 1}, 0x01, {nullptr, 0}};
+
+    foreach_pldm_package_component_image_information(iter, info, rc)
+    {
+        EXPECT_EQ(info.component_classification,
+                  expected_info.component_classification);
+        EXPECT_EQ(info.component_identifier,
+                  expected_info.component_identifier);
+        EXPECT_EQ(info.component_comparison_stamp,
+                  expected_info.component_comparison_stamp);
+        EXPECT_EQ(info.component_options.value,
+                  expected_info.component_options.value);
+        EXPECT_EQ(info.requested_component_activation_method.value,
+                  expected_info.requested_component_activation_method.value);
+        EXPECT_NE(nullptr, info.component_image.ptr);
+        EXPECT_EQ(info.component_image.length,
+                  expected_info.component_image.length);
+        EXPECT_EQ(info.component_version_string_type,
+                  expected_info.component_version_string_type);
+        ASSERT_EQ(info.component_version_string.length, 4);
+        EXPECT_EQ(memcmp("v0.2", info.component_version_string.ptr,
+                         info.component_version_string.length),
+                  0);
+
+        nr_infos++;
+    }
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(nr_infos, 1);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
+{
+    const std::array<uint8_t, 150> package{
+        0x12, 0x44, 0xd2, 0x64, 0x8d, 0x7d, 0x47, 0x18, 0xa0, 0x30,
+        0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5a, 0x02, 0x94, 0x00, 0x00,
+        0xe9, 0x07, 0x03, 0x0b, 0x16, 0x03, 0x00, 0x00, 0x00, 0x00,
+        0x76, 0x02, 0x08, 0x00, 0x01, 0x04, 't',  'e',  's',  't',
+
+        0x01, 0x18, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x04,
+        0x00, 0x00, 0x01, 'v',  '0',  '.',  '1',  0x01, 0x00, 0x04,
+        0x00, 0x9c, 0x01, 0x00, 0x00,
+
+        0x01, 0x18, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x04,
+        0x00, 0x00, 0x02, 'v',  '1',  '.',  '0',  0x01, 0x00, 0x04,
+        0x00, 0x9c, 0x01, 0x00, 0x00,
+
+        0x02, 0x00,
+
+        0x0a, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00,
+        0x01, 0x00, 0x94, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,
+        0x01, 0x04, 'v',  '0',  '.',  '2',
+
+        0x0a, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00,
+        0x01, 0x00, 0x95, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,
+        0x01, 0x04, 'v',  '2',  '.',  '0',
+
+        0xd3, 0x5c, 0x1c, 0x8a,
+
+        0x5a,
+
+        0xa5,
+    };
+    struct pldm_package_downstream_device_id_record ddrec;
+    struct pldm_package_component_image_information info;
+    struct pldm_package_firmware_device_id_record fdrec;
+    DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
+    pldm_package_header_information_pad hdr;
+    struct pldm_package_iter iter;
+    int nr_fdrec_desc = 0;
+    int nr_ddrec_desc = 0;
+    int nr_fdrec = 0;
+    int nr_ddrec = 0;
+    int nr_infos = 0;
+    int rc;
+
+    rc = decode_pldm_firmware_update_package(package.data(), package.size(),
+                                             &pin, &hdr, &iter);
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_1.data(),
+                     hdr.package_header_identifier,
+                     PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_1.size()),
+              0);
+    EXPECT_EQ(hdr.package_header_format_revision, 2);
+
+    static const std::array<uint8_t, 13> timestamp{0x00, 0xe9, 0x07, 0x03, 0x0b,
+                                                   0x16, 0x03, 0x00, 0x00, 0x00,
+                                                   0x00, 0x76, 0x02};
+    ASSERT_EQ(timestamp.size(), sizeof(hdr.package_release_date_time));
+    EXPECT_EQ(memcmp(timestamp.data(), hdr.package_release_date_time,
+                     timestamp.size()),
+              0);
+
+    EXPECT_EQ(hdr.component_bitmap_bit_length, 8);
+    EXPECT_EQ(hdr.package_version_string_type, 1);
+    ASSERT_EQ(hdr.package_version_string.length, 4);
+    EXPECT_EQ(memcmp("test", hdr.package_version_string.ptr,
+                     hdr.package_version_string.length),
+              0);
+    EXPECT_NE(hdr.areas.ptr, nullptr);
+    EXPECT_NE(hdr.areas.length, 0);
+    EXPECT_NE(hdr.package.ptr, nullptr);
+    EXPECT_NE(hdr.package.length, 0);
+
+    foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc)
+    {
+        struct pldm_descriptor desc;
+
+        EXPECT_EQ(fdrec.descriptor_count, 1);
+        EXPECT_EQ(fdrec.device_update_option_flags.value, 0);
+        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1);
+        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4);
+        EXPECT_EQ(memcmp("v0.1", fdrec.component_image_set_version_string.ptr,
+                         fdrec.component_image_set_version_string.length),
+                  0);
+        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1);
+        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1);
+        EXPECT_NE(fdrec.record_descriptors.length, 0);
+        EXPECT_NE(fdrec.record_descriptors.ptr, nullptr);
+        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0);
+
+        foreach_pldm_package_firmware_device_id_record_descriptor(iter, fdrec,
+                                                                  desc, rc)
+        {
+            static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
+
+            EXPECT_EQ(desc.descriptor_type, 1);
+            ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
+            EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
+                             sizeof(iana_pen_dmtf)),
+                      0);
+
+            nr_fdrec_desc++;
+        }
+        ASSERT_EQ(rc, 0);
+
+        nr_fdrec++;
+    }
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(nr_fdrec, 1);
+    EXPECT_EQ(nr_fdrec_desc, 1);
+
+    foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc)
+    {
+        struct pldm_descriptor desc;
+
+        EXPECT_EQ(ddrec.descriptor_count, 1);
+        EXPECT_EQ(ddrec.update_option_flags.value, 0);
+        EXPECT_EQ(ddrec.self_contained_activation_min_version_string_type, 1);
+        ASSERT_EQ(ddrec.self_contained_activation_min_version_string.length, 4);
+        EXPECT_EQ(
+            memcmp("v1.0",
+                   ddrec.self_contained_activation_min_version_string.ptr,
+                   ddrec.self_contained_activation_min_version_string.length),
+            0);
+        EXPECT_EQ(ddrec.self_contained_activation_min_version_comparison_stamp,
+                  0);
+        ASSERT_EQ(ddrec.applicable_components.bitmap.length, 1);
+        EXPECT_EQ(*ddrec.applicable_components.bitmap.ptr, 2);
+        EXPECT_NE(ddrec.record_descriptors.length, 0);
+        EXPECT_NE(ddrec.record_descriptors.ptr, nullptr);
+        EXPECT_EQ(ddrec.package_data.length, 0);
+
+        foreach_pldm_package_downstream_device_id_record_descriptor(iter, ddrec,
+                                                                    desc, rc)
+        {
+            static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
+
+            EXPECT_EQ(desc.descriptor_type, 1);
+            ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
+            EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
+                             sizeof(iana_pen_dmtf)),
+                      0);
+
+            nr_ddrec_desc++;
+        }
+        ASSERT_EQ(rc, 0);
+
+        nr_ddrec++;
+    }
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(nr_ddrec, 1);
+    EXPECT_EQ(nr_ddrec_desc, 1);
+
+    static const std::array<const char*, 2> component_versions = {
+        "v0.2",
+        "v2.0",
+    };
+    static const std::array<pldm_package_component_image_information, 2>
+        expected_infos{{{0x000a,
+                         0x0000,
+                         0xffffffff,
+                         {0},
+                         {1},
+                         {nullptr, 1},
+                         0x01,
+                         {nullptr, 0}},
+                        {0x000a,
+                         0x0000,
+                         0xffffffff,
+                         {0},
+                         {1},
+                         {nullptr, 1},
+                         0x01,
+                         {nullptr, 0}}}};
+    static const std::array<uint8_t, 2> expected_images{0x5a, 0xa5};
+
+    foreach_pldm_package_component_image_information(iter, info, rc)
+    {
+        const struct pldm_package_component_image_information* expected;
+        const char* version;
+        uint8_t image;
+
+        expected = &expected_infos.at(nr_infos);
+        version = component_versions.at(nr_infos);
+        image = expected_images.at(nr_infos);
+
+        EXPECT_EQ(info.component_classification,
+                  expected->component_classification);
+        EXPECT_EQ(info.component_identifier, expected->component_identifier);
+        EXPECT_EQ(info.component_comparison_stamp,
+                  expected->component_comparison_stamp);
+        EXPECT_EQ(info.component_options.value,
+                  expected->component_options.value);
+        EXPECT_EQ(info.requested_component_activation_method.value,
+                  expected->requested_component_activation_method.value);
+        EXPECT_NE(info.component_image.ptr, expected->component_image.ptr);
+        EXPECT_EQ(info.component_image.length,
+                  expected->component_image.length);
+        EXPECT_EQ(*info.component_image.ptr, image);
+        EXPECT_EQ(info.component_version_string_type,
+                  expected->component_version_string_type);
+        ASSERT_EQ(info.component_version_string.length, 4);
+        EXPECT_EQ(memcmp(version, info.component_version_string.ptr,
+                         info.component_version_string.length),
+                  0);
+
+        nr_infos++;
+    }
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(nr_infos, 2);
+}
+#endif
