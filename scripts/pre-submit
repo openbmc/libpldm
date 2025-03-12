@@ -26,7 +26,7 @@ fi
 # Ensure the test suite passes in the default configuration. Note
 # that we don't specify -Dabi=... - the default is equivalent to
 # -Dabi=deprecated,stable,testing.
-CFLAGS=-fanalyzer meson setup -Dabi-compliance-check=false "$BUILD"
+CC=gcc CXX=g++ CFLAGS=-fanalyzer meson setup -Dabi-compliance-check=false "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD"
 
