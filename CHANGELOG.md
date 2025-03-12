@@ -33,8 +33,12 @@ Change categories:
   This ID is used to notify the remote PLDM terminus about the boot side change
   that occurs during an out-of-band code update.
 
+<<<<<<< ours
 - firmware update: Add encode/decode API for downstream device update command
 - base: Add `PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION` completion code
+=======
+- Introduce interator-based firmware update package parsing APIs
+>>>>>>> theirs
 
 ### Changed
 
