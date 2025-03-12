@@ -30,6 +30,8 @@ Change categories:
   This ID is used to notify the remote PLDM terminus about the boot side change
   that occurs during an out-of-band code update.
 
+- Introduce interator-based firmware update package parsing APIs
+
 ### Changed
 
 - clang-format: update latest spec and reformat with clang-20

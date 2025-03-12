@@ -437,6 +437,8 @@ struct pldm_firmware_version {
 /** @struct pldm_package_header_information
  *
  *  Structure representing fixed part of package header information
+ *
+ *  @deprecated{Usability, see pldm_package_header_information_api}
  */
 struct pldm_package_header_information {
 	uint8_t uuid[PLDM_FWUP_UUID_LENGTH];
@@ -451,6 +453,8 @@ struct pldm_package_header_information {
 /** @struct pldm_firmware_device_id_record
  *
  *  Structure representing firmware device ID record
+ *
+ *  @deprecated{Usability, see pldm_firmware_device_id_record_api}
  */
 struct pldm_firmware_device_id_record {
 	uint16_t record_length;
@@ -485,6 +489,8 @@ struct pldm_vendor_defined_descriptor_title_data {
  *
  *  Structure representing fixed part of individual component information in
  *  PLDM firmware update package
+ *
+ *  @deprecated{Usability, see pldm_component_image_information_api}
  */
 struct pldm_component_image_information {
 	uint16_t comp_classification;
@@ -2055,6 +2061,259 @@ int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
 int encode_cancel_update_resp(uint8_t instance_id,
 			      const struct pldm_cancel_update_resp *resp_data,
 			      struct pldm_msg *msg, size_t *payload_length);
+
+/* TODO: Remove struct pldm_package_header_information from public header, rename padded struct, drop typedef */
+struct pldm__package_header_information {
+	uint8_t package_header_identifier[PLDM_FWUP_UUID_LENGTH];
+	uint8_t package_header_format_revision;
+	uint8_t package_release_date_time[PLDM_TIMESTAMP104_SIZE];
+	uint16_t component_bitmap_bit_length;
+	uint8_t package_version_string_type;
+	struct variable_field package_version_string;
+	struct variable_field areas;
+	struct variable_field package;
+};
+typedef struct pldm__package_header_information
+	pldm_package_header_information_pad;
+
+struct pldm_component_bitmap {
+	struct variable_field bitmap;
+};
+
+/* TODO: Remove struct pldm_firmware_device_id_record from public header, rename padded struct, drop typedef */
+struct pldm__firmware_device_id_record {
+	uint8_t descriptor_count;
+	bitfield32_t device_update_option_flags;
+
+	/* FIXME: Consider string types */
+	uint8_t component_image_set_version_string_type;
+	struct variable_field component_image_set_version_string;
+	struct pldm_component_bitmap applicable_components;
+	struct variable_field record_descriptors;
+	struct variable_field firmware_device_package_data;
+};
+typedef struct pldm__firmware_device_id_record
+	pldm_firmware_device_id_record_pad;
+
+struct pldm_downstream_device_id_record {
+	uint8_t descriptor_count;
+	bitfield32_t update_option_flags;
+	uint8_t self_contained_activation_min_version_string_type;
+	struct variable_field self_contained_activation_min_version_string;
+	uint32_t self_contained_activation_min_version_comparison_stamp;
+	struct pldm_component_bitmap applicable_components;
+	struct variable_field record_descriptors;
+	struct variable_field package_data;
+};
+
+/* TODO: Remove struct pldm_component_image_information from public header, rename padded struct, drop typedef */
+struct pldm__component_image_information {
+	uint16_t component_classification;
+	uint16_t component_identifier;
+	uint32_t component_comparison_stamp;
+	bitfield16_t component_options;
+	bitfield16_t requested_component_activation_method;
+
+	struct variable_field component_image;
+	uint8_t component_version_string_type;
+
+	/* FIXME: Rework ABI so it's extensible */
+	/* FIXME: only in format revision 3 */
+	struct variable_field component_version_string;
+	struct variable_field component_opaque_data;
+};
+typedef struct pldm__component_image_information
+	pldm_component_image_information_pad;
+
+struct pldm_firmware_device_id_record_iter {
+	struct variable_field field;
+	size_t entries;
+};
+
+struct pldm_downstream_device_id_record_iter {
+	struct variable_field field;
+	size_t entries;
+};
+
+struct pldm_component_image_information_iter {
+	struct variable_field field;
+	size_t entries;
+};
+
+struct pldm_firmware_update_package_iter {
+	/* Unmodified after initialisation */
+	pldm_package_header_information_pad hdr;
+	struct variable_field package;
+
+	/* Modified in the course of iteration */
+	struct pldm_firmware_device_id_record_iter fds;
+	struct pldm_downstream_device_id_record_iter dds;
+	struct pldm_component_image_information_iter infos;
+};
+
+/**
+ * @brief Initialize the firmware update package iterator.
+ *
+ * This function parses the package header, device ID records,
+ * component image records and validates the checksum.
+ *
+ * @return 0 on success, negative error code on failure.
+ */
+int decode_pldm_firmware_update_package(
+	const void *data, size_t length,
+	struct pldm_firmware_update_package_iter *iter);
+
+LIBPLDM_ITERATOR
+bool pldm_firmware_device_id_record_iter_end(
+	const struct pldm_firmware_device_id_record_iter *iter)
+{
+	return iter->entries == 0;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_firmware_device_id_record_iter_next(
+	struct pldm_firmware_device_id_record_iter *iter)
+{
+	if (!iter->entries) {
+		return false;
+	}
+	iter->entries--;
+	return true;
+}
+
+int pldm_firmware_device_id_record_iter_init(
+	pldm_package_header_information_pad *hdr,
+	struct pldm_firmware_device_id_record_iter *iter);
+
+int decode_firmware_device_id_record_from_iter(
+	pldm_package_header_information_pad *hdr,
+	struct pldm_firmware_device_id_record_iter *iter,
+	pldm_firmware_device_id_record_pad *rec);
+
+#define foreach_pldm_firmware_device_id_record(iter, rec, rc)                  \
+	for ((rc) = pldm_firmware_device_id_record_iter_init(&(iter).hdr,      \
+							     &(iter).fds);     \
+	     !(rc) && !pldm_firmware_device_id_record_iter_end(&(iter).fds) && \
+	     !((rc) = decode_firmware_device_id_record_from_iter(              \
+		       &(iter).hdr, &(iter).fds, &(rec)));                     \
+	     pldm_firmware_device_id_record_iter_next(&(iter).fds))
+
+LIBPLDM_ITERATOR
+struct pldm_descriptor_iter pldm_firmware_device_id_record_descriptor_iter_init(
+	struct pldm_firmware_device_id_record_iter *iter,
+	pldm_firmware_device_id_record_pad *rec)
+{
+	/* FIXME: Don't mutate record_descriptors */
+	struct pldm_descriptor_iter desc = { &rec->record_descriptors,
+					     rec->descriptor_count };
+	return desc;
+}
+
+#define foreach_pldm_firmware_device_id_record_descriptor(iter, rec, desc, rc) \
+	for (struct pldm_descriptor_iter desc##_iter =                         \
+		     ((rc) = 0,                                                \
+		     pldm_firmware_device_id_record_descriptor_iter_init(      \
+			      &(iter).fds, &(rec)));                           \
+	     (!pldm_descriptor_iter_end(&(desc##_iter))) &&                    \
+	     !((rc) = decode_pldm_descriptor_from_iter(&(desc##_iter),         \
+						       &(desc)));              \
+	     pldm_descriptor_iter_next(&(desc##_iter)))
+
+LIBPLDM_ITERATOR
+bool pldm_downstream_device_id_record_iter_end(
+	const struct pldm_downstream_device_id_record_iter *iter)
+{
+	return iter->entries == 0;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_downstream_device_id_record_iter_next(
+	struct pldm_downstream_device_id_record_iter *iter)
+{
+	if (!iter->entries) {
+		return false;
+	}
+	iter->entries--;
+	return true;
+}
+
+int pldm_downstream_device_id_record_iter_init(
+	pldm_package_header_information_pad *hdr,
+	struct pldm_firmware_device_id_record_iter *fds,
+	struct pldm_downstream_device_id_record_iter *dds);
+
+int decode_downstream_device_id_record_from_iter(
+	pldm_package_header_information_pad *hdr,
+	struct pldm_downstream_device_id_record_iter *iter,
+	struct pldm_downstream_device_id_record *rec);
+
+#define foreach_pldm_downstream_device_id_record(iter, rec, rc)                \
+	for ((rc) = pldm_downstream_device_id_record_iter_init(                \
+		     &(iter).hdr, &(iter).fds, &(iter).dds);                   \
+	     !(rc) &&                                                          \
+	     !pldm_downstream_device_id_record_iter_end(&(iter).dds) &&        \
+	     !((rc) = decode_downstream_device_id_record_from_iter(            \
+		       &(iter).hdr, &(iter).dds, &(rec)));                     \
+	     pldm_downstream_device_id_record_iter_next(&(iter).dds))
+
+LIBPLDM_ITERATOR
+struct pldm_descriptor_iter
+pldm_downstream_device_id_record_descriptor_iter_init(
+	struct pldm_downstream_device_id_record_iter *iter,
+	struct pldm_downstream_device_id_record *rec)
+{
+	/* FIXME: Don't mutate record_descriptors */
+	struct pldm_descriptor_iter desc = { &rec->record_descriptors,
+					     rec->descriptor_count };
+	return desc;
+}
+
+#define foreach_pldm_downstream_device_id_record_descriptor(iter, rec, desc,   \
+							    rc)                \
+	for (struct pldm_descriptor_iter desc##_iter =                         \
+		     ((rc) = 0,                                                \
+		     pldm_downstream_device_id_record_descriptor_iter_init(    \
+			      &(iter).dds, &(rec)));                           \
+	     (!pldm_descriptor_iter_end(&(desc##_iter))) &&                    \
+	     !((rc) = decode_pldm_descriptor_from_iter(&(desc##_iter),         \
+						       &(desc)));              \
+	     pldm_descriptor_iter_next(&(desc##_iter)))
+
+LIBPLDM_ITERATOR
+bool pldm_component_image_information_iter_end(
+	const struct pldm_component_image_information_iter *iter)
+{
+	return (iter->entries == 0);
+}
+
+LIBPLDM_ITERATOR
+bool pldm_component_image_information_iter_next(
+	struct pldm_component_image_information_iter *iter)
+{
+	if (!iter->entries) {
+		return false;
+	}
+	iter->entries--;
+	return true;
+}
+
+int pldm_component_image_information_iter_init(
+	struct pldm_downstream_device_id_record_iter *dds,
+	struct pldm_component_image_information_iter *infos);
+
+int decode_component_image_information_from_iter(
+	pldm_package_header_information_pad *hdr,
+	struct pldm_component_image_information_iter *iter,
+	pldm_component_image_information_pad *info);
+
+#define foreach_pldm_component_image_information(iter, info, rc)               \
+	for ((rc) = pldm_component_image_information_iter_init(&(iter).dds,    \
+							       &(iter).infos); \
+	     !(rc) &&                                                          \
+	     !pldm_component_image_information_iter_end(&(iter).infos) &&      \
+	     !((rc) = decode_component_image_information_from_iter(            \
+		       &(iter).hdr, &(iter).infos, &(info)));                  \
+	     pldm_component_image_information_iter_next(&(iter).infos))
 
 #ifdef __cplusplus
 }
