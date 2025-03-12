@@ -33,6 +33,7 @@ Change categories:
   that occurs during an out-of-band code update.
 
 - firmware update: Add encode/decode API for downstream device update command
+- Introduce interator-based firmware update package parsing APIs
 
 ### Changed
 
