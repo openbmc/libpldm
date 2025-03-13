@@ -5852,3 +5852,385 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
 
     free(cperEvent);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(decodePldmFileDescriptorPdr, oemFileClassificationPresentTest)
+{
+    std::vector<uint8_t> pdr1{
+        // Common PDR Header
+        0x01, 0x0, 0x0, 0x0,      // Record Handle
+        0x01,                     // PDR Header Version
+        PLDM_FILE_DESCRIPTOR_PDR, // PDRType
+        0x01, 0x00,               // Record Change Number
+        0x29, 0x00,               // Data Length = 41 bytes
+        /* PLDM File Descriptor PDR Data*/
+        0x01, 0x00, // Terminus Handle = 0x01
+        0x01, 0x00, // File Identifier = 0x01
+        0x09, 0x00, // Entity Type = Physical | Device File
+        0x01, 0x00, // Entity instance number = 1
+        PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
+        0,                      // Container ID = Overall system
+        0x02, 0,                // Supper Dir File Identifier = 0x0002
+        0x01,                   // File Classification = 0x01 (BootLog)
+        0x01,                   // OEM File Classification = 0x01
+        0x15, 0x00,             // File Capabilities = 0x0015
+        0xff, 0xff, 0xff, 0xff, // File Version = 0xffffffff (Unversioned)
+        0x00, 0x28, 0x00, 0x00, // File Maximum Size = 10KB
+        0x02,                   // File Maximum File Descriptor count = 2
+        0x06,                   // File Name Length = 6
+        0x46, 0x69, 0x6C, 0x65, 0x31,
+        0x00, // File Name = "File1\NULL"
+        0x09, // OEM File Classification Name Length = 9
+        0x4F, 0x45, 0x4D, 0x20, 0x46, 0x69, 0x6C, 0x65,
+        0x00 // OEM File Classification Name = "OEM File\NULL"
+    };
+
+    const char expectFileName1[] = {'F', 'i', 'l', 'e', '1', 0x00};
+    const char expectOEMClassificationName[] = {'O', 'E', 'M', ' ', 'F',
+                                                'i', 'l', 'e', 0x00};
+
+    auto names_size = pdr1.size() - PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH;
+
+    size_t decodedPdrSize =
+        sizeof(struct pldm_file_descriptor_pdr) + names_size;
+
+    /* names_size can possibly includes the size of
+     * `oem_file_classification_name_len` field if `oem_file_classification` is
+     * not zero. However, we accept to allocate one byte redundant for the
+     * `file_name_array` array */
+    auto decodedPdr =
+        (struct pldm_file_descriptor_pdr*)calloc(1, decodedPdrSize);
+
+    EXPECT_NE(nullptr, decodedPdr);
+
+    auto rc = decode_pldm_file_descriptor_pdr(pdr1.data(), pdr1.size(),
+                                              decodedPdr, decodedPdrSize);
+
+    EXPECT_EQ(0, rc);
+    EXPECT_EQ(1, decodedPdr->terminus_handle);
+    EXPECT_EQ(1, decodedPdr->file_identifier);
+    EXPECT_EQ(9, decodedPdr->container.entity_type);
+    EXPECT_EQ(1, decodedPdr->container.entity_instance_num);
+    EXPECT_EQ(PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
+              decodedPdr->container.entity_container_id);
+    EXPECT_EQ(2, decodedPdr->supper_dir_file_identifier);
+    EXPECT_EQ(1, decodedPdr->file_classification);
+    EXPECT_EQ(1, decodedPdr->oem_file_classification);
+    EXPECT_EQ(21, decodedPdr->file_capabilities.value);
+    EXPECT_EQ(0xff, decodedPdr->file_version.alpha);
+    EXPECT_EQ(0xff, decodedPdr->file_version.update);
+    EXPECT_EQ(0xff, decodedPdr->file_version.minor);
+    EXPECT_EQ(0xff, decodedPdr->file_version.major);
+    EXPECT_EQ(10240, decodedPdr->file_max_size);
+    EXPECT_EQ(2, decodedPdr->file_maximum_file_descriptor_count);
+    EXPECT_EQ(6, decodedPdr->file_name_len);
+
+    size_t expectFileNameArraySize =
+        decodedPdr->file_name_len +
+        decodedPdr->oem_file_classification_name_len;
+
+    EXPECT_EQ(expectFileNameArraySize, decodedPdr->file_name_array_size);
+
+    /* Step: Allocate  memory for `file_name` field */
+    auto fileName = std::vector<char>(decodedPdr->file_name_len);
+    decodedPdr->file_name = fileName.data();
+    EXPECT_NE(nullptr, decodedPdr->file_name);
+
+    if (decodedPdr->oem_file_classification)
+    {
+        EXPECT_EQ(9, decodedPdr->oem_file_classification_name_len);
+        /* Step: Allocate  memory for `oem_file_classification_name` field */
+        auto oemClassName =
+            std::vector<char>(decodedPdr->oem_file_classification_name_len);
+        decodedPdr->oem_file_classification_name = oemClassName.data();
+        EXPECT_NE(nullptr, decodedPdr->oem_file_classification_name);
+    }
+
+    rc = decode_pldm_file_descriptor_pdr_names(decodedPdr);
+    EXPECT_EQ(0, rc);
+
+    EXPECT_EQ(memcmp(expectFileName1, decodedPdr->file_name,
+                     sizeof(char) * decodedPdr->file_name_len),
+              0);
+
+    if (decodedPdr->oem_file_classification)
+    {
+        EXPECT_EQ(
+            memcmp(expectOEMClassificationName,
+                   decodedPdr->oem_file_classification_name,
+                   sizeof(char) * decodedPdr->oem_file_classification_name_len),
+            0);
+    }
+
+    free(decodedPdr);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(decodePldmFileDescriptorPdr, oemFileClassificationNotPresentTest)
+{
+    std::vector<uint8_t> pdr1{
+        // Common PDR Header
+        0x01, 0x0, 0x0, 0x0,      // Record Handle
+        0x01,                     // PDR Header Version
+        PLDM_FILE_DESCRIPTOR_PDR, // PDRType
+        0x01, 0x00,               // Record Change Number
+        0x29, 0x00,               // Data Length = 41 bytes
+        /* PLDM File Descriptor PDR Data*/
+        0x01, 0x00, // Terminus Handle = 0x01
+        0x02, 0x00, // File Identifier = 0x02
+        0x09, 0x00, // Entity Type = Physical | Device File
+        0x02, 0x00, // Entity instance number = 2
+        PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
+        0,                      // Container ID = Overall system
+        0x02, 0,                // Supper Dir File Identifier = 0x0002
+        0x02,                   // File Classification = 0x02 (SerialTxFIFO)
+        0x00,                   // OEM File Classification = 0x00
+        0x15, 0x00,             // File Capabilities = 0x0015
+        0xff, 0xff, 0xff, 0xff, // File Version = 0xffffffff (Unversioned)
+        0x00, 0x28, 0x00, 0x00, // File Maximum Size = 10KB
+        0x02,                   // File Maximum File Descriptor count = 2
+        0x06,                   // File Name Length = 6
+        0x46, 0x69, 0x6C, 0x65, 0x32,
+        0x00 // File Name = "File2\NULL"
+    };
+
+    const char expectFileName[] = {'F', 'i', 'l', 'e', '2', 0x00};
+
+    auto names_size = pdr1.size() - PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH;
+
+    /* names_size can possibly includes the size of
+     * `oem_file_classification_name_len` field if `oem_file_classification` is
+     * not zero. However, we accept to allocate one byte redundant for the
+     * `file_name_array` array */
+    size_t decodedPdrSize =
+        sizeof(struct pldm_file_descriptor_pdr) + names_size;
+
+    auto decodedPdr =
+        (struct pldm_file_descriptor_pdr*)calloc(1, decodedPdrSize);
+
+    EXPECT_NE(nullptr, decodedPdr);
+
+    auto rc = decode_pldm_file_descriptor_pdr(pdr1.data(), pdr1.size(),
+                                              decodedPdr, decodedPdrSize);
+
+    EXPECT_EQ(0, rc);
+    EXPECT_EQ(1, decodedPdr->terminus_handle);
+    EXPECT_EQ(2, decodedPdr->file_identifier);
+    EXPECT_EQ(9, decodedPdr->container.entity_type);
+    EXPECT_EQ(2, decodedPdr->container.entity_instance_num);
+    EXPECT_EQ(PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
+              decodedPdr->container.entity_container_id);
+    EXPECT_EQ(2, decodedPdr->supper_dir_file_identifier);
+    EXPECT_EQ(2, decodedPdr->file_classification);
+    EXPECT_EQ(0, decodedPdr->oem_file_classification);
+    EXPECT_EQ(21, decodedPdr->file_capabilities.value);
+    EXPECT_EQ(0xff, decodedPdr->file_version.alpha);
+    EXPECT_EQ(0xff, decodedPdr->file_version.update);
+    EXPECT_EQ(0xff, decodedPdr->file_version.minor);
+    EXPECT_EQ(0xff, decodedPdr->file_version.major);
+    EXPECT_EQ(10240, decodedPdr->file_max_size);
+    EXPECT_EQ(2, decodedPdr->file_maximum_file_descriptor_count);
+    EXPECT_EQ(6, decodedPdr->file_name_len);
+
+    size_t expectFileNameArraySize =
+        decodedPdr->file_name_len +
+        decodedPdr->oem_file_classification_name_len;
+
+    EXPECT_EQ(expectFileNameArraySize, decodedPdr->file_name_array_size);
+
+    /* Step: Allocate  memory for `file_name` field */
+    auto fileName = std::vector<char>(decodedPdr->file_name_len);
+    decodedPdr->file_name = fileName.data();
+    EXPECT_NE(nullptr, decodedPdr->file_name);
+
+    rc = decode_pldm_file_descriptor_pdr_names(decodedPdr);
+    EXPECT_EQ(0, rc);
+
+    EXPECT_EQ(memcmp(expectFileName, decodedPdr->file_name,
+                     sizeof(char) * decodedPdr->file_name_len),
+              0);
+
+    free(decodedPdr);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(decodePldmFileDescriptorPdr, BadTest)
+{
+    /*Un-matched File Name Length*/
+    std::vector<uint8_t> pdr1{
+        // Common PDR Header
+        0x01, 0x0, 0x0, 0x0,      // Record Handle
+        0x01,                     // PDR Header Version
+        PLDM_FILE_DESCRIPTOR_PDR, // PDRType
+        0x01, 0x00,               // Record Change Number
+        0x29, 0x00,               // Data Length = 41 bytes
+        /* PLDM File Descriptor PDR Data*/
+        0x01, 0x00, // Terminus Handle = 0x01
+        0x01, 0x00, // File Identifier = 0x01
+        0x09, 0x00, // Entity Type = Physical | Device File
+        0x01, 0x00, // Entity instance number = 1
+        PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
+        0,                      // Container ID = Overall system
+        0x02, 0,                // Supper Dir File Identifier = 0x0002
+        0x01,                   // File Classification = 0x01 (BootLog)
+        0x00,                   // OEM File Classification = 0x00
+        0x15, 0x00,             // File Capabilities = 0x0015
+        0xff, 0xff, 0xff, 0xff, // File Version = 0xffffffff (Unversioned)
+        0x00, 0x28, 0x00, 0x00, // File Maximum Size = 10KB
+        0x02,                   // File Maximum File Descriptor count = 2
+        0x05,                   // File Name Length = 5
+        0x46, 0x69, 0x6C, 0x65, 0x31,
+        0x00, // File Name = "File1\NULL"
+    };
+
+    /*Un-matched OEM File Classification Name Length*/
+    std::vector<uint8_t> pdr2{
+        // Common PDR Header
+        0x01, 0x0, 0x0, 0x0,      // Record Handle
+        0x01,                     // PDR Header Version
+        PLDM_FILE_DESCRIPTOR_PDR, // PDRType
+        0x01, 0x00,               // Record Change Number
+        0x29, 0x00,               // Data Length = 41 bytes
+        /* PLDM File Descriptor PDR Data*/
+        0x01, 0x00, // Terminus Handle = 0x01
+        0x01, 0x00, // File Identifier = 0x01
+        0x09, 0x00, // Entity Type = Physical | Device File
+        0x01, 0x00, // Entity instance number = 1
+        PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
+        0,                      // Container ID = Overall system
+        0x02, 0,                // Supper Dir File Identifier = 0x0002
+        0x01,                   // File Classification = 0x01 (BootLog)
+        0x01,                   // OEM File Classification = 0x01
+        0x15, 0x00,             // File Capabilities = 0x0015
+        0xff, 0xff, 0xff, 0xff, // File Version = 0xffffffff (Unversioned)
+        0x00, 0x28, 0x00, 0x00, // File Maximum Size = 10KB
+        0x02,                   // File Maximum File Descriptor count = 2
+        0x06,                   // File Name Length = 6
+        0x46, 0x69, 0x6C, 0x65, 0x31,
+        0x00, // File Name = "File1\NULL"
+        0x0A, // OEM File Classification Name Length = 10
+        0x4F, 0x45, 0x4D, 0x20, 0x46, 0x69, 0x6C, 0x65,
+        0x00 // OEM File Classification Name = "OEM File\NULL"
+    };
+
+    /*Valid PDR*/
+    std::vector<uint8_t> pdr3{
+        // Common PDR Header
+        0x01, 0x0, 0x0, 0x0,      // Record Handle
+        0x01,                     // PDR Header Version
+        PLDM_FILE_DESCRIPTOR_PDR, // PDRType
+        0x01, 0x00,               // Record Change Number
+        0x29, 0x00,               // Data Length = 41 bytes
+        /* PLDM File Descriptor PDR Data*/
+        0x01, 0x00, // Terminus Handle = 0x01
+        0x02, 0x00, // File Identifier = 0x02
+        0x09, 0x00, // Entity Type = Physical | Device File
+        0x02, 0x00, // Entity instance number = 2
+        PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
+        0,                      // Container ID = Overall system
+        0x02, 0,                // Supper Dir File Identifier = 0x0002
+        0x02,                   // File Classification = 0x02 (SerialTxFIFO)
+        0x00,                   // OEM File Classification = 0x00
+        0x15, 0x00,             // File Capabilities = 0x0015
+        0xff, 0xff, 0xff, 0xff, // File Version = 0xffffffff (Unversioned)
+        0x00, 0x28, 0x00, 0x00, // File Maximum Size = 10KB
+        0x02,                   // File Maximum File Descriptor count = 2
+        0x06,                   // File Name Length = 6
+        0x46, 0x69, 0x6C, 0x65, 0x32,
+        0x00 // File Name = "File2\NULL"
+    };
+
+    const char expectFileName[] = {'F', 'i', 'l', 'e', '2', 0x00};
+
+    auto names_size = pdr1.size() - PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH;
+
+    /* names_size can possibly includes the size of
+     * `oem_file_classification_name_len` field if `oem_file_classification` is
+     * not zero. However, we accept to allocate one byte redundant for the
+     * `file_name_array` array */
+    size_t decodedPdrSize =
+        sizeof(struct pldm_file_descriptor_pdr) + names_size;
+
+    auto decodedPdr =
+        (struct pldm_file_descriptor_pdr*)calloc(1, decodedPdrSize);
+
+    EXPECT_NE(nullptr, decodedPdr);
+
+    /* Expect error: Unallocated memory of input/output parameters*/
+    auto rc = decode_pldm_file_descriptor_pdr(nullptr, pdr1.size(), nullptr,
+                                              decodedPdrSize);
+    EXPECT_EQ(-EINVAL, rc);
+
+    /* Expect error: Invalid expected decoded PDR length*/
+    rc = decode_pldm_file_descriptor_pdr(pdr1.data(), pdr1.size(), decodedPdr,
+                                         0);
+    EXPECT_EQ(-EINVAL, rc);
+
+    /* Expect error: Wrong file_name compared to actual strASCII length */
+    rc = decode_pldm_file_descriptor_pdr(pdr1.data(), pdr1.size(), decodedPdr,
+                                         decodedPdrSize);
+    EXPECT_EQ(-EINVAL, rc);
+
+    free(decodedPdr);
+
+    /*------------------------ Test with pdr2 ------------------------------*/
+
+    names_size = pdr2.size() - PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH;
+    decodedPdrSize = sizeof(struct pldm_file_descriptor_pdr) + names_size;
+    decodedPdr = (struct pldm_file_descriptor_pdr*)calloc(1, decodedPdrSize);
+    EXPECT_NE(nullptr, decodedPdr);
+
+    /* Expect error: Wrong oem_file_classification_name_len compared to actual
+     * strASCII length
+     */
+    rc = decode_pldm_file_descriptor_pdr(pdr2.data(), pdr2.size(), decodedPdr,
+                                         decodedPdrSize);
+    EXPECT_EQ(-EINVAL, rc);
+
+    free(decodedPdr);
+
+    /*------------------------ Test with pdr3 ------------------------------*/
+
+    names_size = pdr3.size() - PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH;
+    decodedPdrSize = sizeof(struct pldm_file_descriptor_pdr) + names_size;
+    decodedPdr = (struct pldm_file_descriptor_pdr*)calloc(1, decodedPdrSize);
+    EXPECT_NE(nullptr, decodedPdr);
+
+    rc = decode_pldm_file_descriptor_pdr(pdr3.data(), pdr3.size(), decodedPdr,
+                                         decodedPdrSize);
+    EXPECT_EQ(0, rc);
+
+    /* Expect error: Unallocated `file_name` field */
+    rc = decode_pldm_file_descriptor_pdr_names(decodedPdr);
+    EXPECT_EQ(-EINVAL, rc);
+
+    /* Step: Allocate  memory for `file_name` field */
+    auto fileName = std::vector<char>(decodedPdr->file_name_len);
+    decodedPdr->file_name = fileName.data();
+    EXPECT_NE(nullptr, decodedPdr->file_name);
+
+    /* Step: Allocate  memory for `oem_file_classification_name` field */
+    auto oemClassName = std::vector<char>(2);
+    decodedPdr->oem_file_classification_name = oemClassName.data();
+    EXPECT_NE(nullptr, decodedPdr->oem_file_classification_name);
+
+    /* Expect error: Unxpectedly-allocated `oem_file_classification_name`
+     * field.
+     */
+    rc = decode_pldm_file_descriptor_pdr_names(decodedPdr);
+    EXPECT_EQ(-EINVAL, rc);
+
+    /* Step: Deallocate memory for `oem_file_classification_name` field */
+    decodedPdr->oem_file_classification_name = nullptr;
+    rc = decode_pldm_file_descriptor_pdr_names(decodedPdr);
+    EXPECT_EQ(0, rc);
+
+    EXPECT_EQ(memcmp(expectFileName, decodedPdr->file_name,
+                     sizeof(char) * decodedPdr->file_name_len),
+              0);
+
+    free(decodedPdr);
+}
+#endif
