@@ -70,6 +70,23 @@
       "parentUuid": "00a95e69_39d4dadc",
       "revId": "8bd832f1e2d1cfcf94841f5fc0fddea9eef76a59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dc51ccc_57671fdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-13T11:35:59Z",
+      "side": 1,
+      "message": "Alright, I\u0027ve pushed a WIP series that captures my thoughts.\n\nI didn\u0027t want to replace this change as the series ended up being a bit ... extra, and I want to make sure your effort here is still recognised.\n\nHere\u0027s the alternate patch, following many others:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/78876\n\nPlease take a look. It still needs some work (addressing the `FIXME`s, documentation, etc).\n\nI\u0027m fuzzing the new `tools/pd` binary at the moment; early results look promising (no crashes so far).",
+      "revId": "8bd832f1e2d1cfcf94841f5fc0fddea9eef76a59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
