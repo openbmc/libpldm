@@ -130,6 +130,15 @@ enum pldm_platform_transfer_flag {
  */
 #define PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH 8
 
+/**
+ * Minimum length of File Descriptor PDR, including size of PLDMTerminusHandle,
+ * FileIdentifier, EntityType, EntityInstanceNumber, ContainerID,
+ * SuperiorDirectoryFileIdentifier, FileClassification, OemFileClassification,
+ * FileCapabilities, FileVersion, FileMaximumSize, FileMaximumFileDescriptorCount,
+ * FileNameLength in `Table 108 - File Descriptor PDR` of DSP0248 v1.3.0
+ */
+#define PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH 36
+
 #define PLDM_INVALID_EFFECTER_ID 0xffff
 
 /* DSP0248 Table1 PLDM monitoring and control data types */
@@ -276,6 +285,7 @@ enum pldm_pdr_types {
 	PLDM_REDFISH_RESOURCE_PDR = 22,
 	PLDM_REDFISH_ENTITY_ASSOCIATION_PDR = 23,
 	PLDM_REDFISH_ACTION_PDR = 24,
+	PLDM_FILE_DESCRIPTOR_PDR = 30,
 	PLDM_OEM_DEVICE_PDR = 126,
 	PLDM_OEM_PDR = 127,
 };
@@ -925,6 +935,42 @@ struct pldm_effecter_aux_name_pdr {
 	uint8_t effecter_count;
 	uint8_t effecter_names[1];
 } __attribute__((packed));
+
+/** @struct pldm_file_descriptor_pdr
+ *
+ *  Structure representing PLDM File Descriptor PDR for unpacked value
+ *  Refer to: DSP0248_1.3.0: 28.30 Table 108
+ */
+
+struct pldm_file_descriptor_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint16_t terminus_handle;
+	uint16_t file_identifier;
+	pldm_entity container;
+	uint16_t superior_directory_file_identifier;
+	uint8_t file_classification;
+	uint8_t oem_file_classification;
+	bitfield16_t file_capabilities;
+	ver32_t file_version;
+	uint32_t file_maximum_size;
+	uint8_t file_maximum_file_descriptor_count;
+	uint8_t file_name_len;
+	char *file_name;
+	uint8_t oem_file_classification_name_len;
+	char *oem_file_classification_name;
+	size_t file_name_array_size;
+#ifndef __cplusplus
+	/*
+	* `file_name` and `oem_file_classification_name` are pointers to
+	* strASCII. This `file_name_array` field is an array that holds all the
+	* bytes in the `file_name` field, and if `oem_file_classification` is
+	* not zero, bytes in `oem_file_classification_name` will also be appended
+	* to this array of char. `file_name_array_size` field represents the
+	* number of bytes this array holds.
+	*/
+	char file_name_array[];
+#endif
+};
 
 /** @brief Encode PLDM state effecter PDR
  *
@@ -2541,6 +2587,66 @@ int decode_pldm_platform_cper_event(const void *event_data,
  */
 uint8_t *
 pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event);
+
+/** @brief Decode date fields from File Descriptor PDR
+ *
+ *  @note Use case:
+ *        1. Call `decode_pldm_file_descriptor_pdr()` to decode the File
+ *           Descriptor PDR raw data to the PDR data fields in
+ *           `struct pldm_file_descriptor_pdr` equivalent to the fields in
+ *           `Table 108` of DSP0248_1.3.0, except for `file_name` and
+ *           `oem_file_classification_name` fields.
+ *
+ *        2. Base on the decoded `file_name_len`, to allocate memory for
+ *           `file_name` field, and if `oem_file_classification` is not zero,
+ *           base on `oem_file_classification_name_len` to allocate memory
+ *           for the `oem_file_classification_name`.
+ *
+ *        3. Call `decode_pldm_file_descriptor_pdr_names()` to decode
+ *           `file_name_array[]` field in `struct pldm_file_descriptor_pdr`
+ *           to `file_name` and `oem_file_classification_name` (if
+ *           `oem_file_classification` is not zero).
+ *
+ *  @param[in] data - PLDM response message which includes the File
+ *                        Descriptor PDR in DSP0248_1.3.0 table 108.
+ *  @param[in] data_length - Length of response message payload
+ *  @param[out] pdr - pointer to the decoded pdr struct
+ *  @param[out] pdr_length - expect length of the decoded pdr struct
+ *
+ *  @return error code: 0 on success, -EINVAL if 1. the input and output
+ *          parameters' memory are not allocated, 2. the expected decoded pdr
+ *          length is not valid, -EOVERFLOW if the ascii string len after
+ *          spanning from buffer does not match the expected `file_name_len`
+ *          or `oem_file_classification_name_len`.
+ */
+int decode_pldm_file_descriptor_pdr(const void *data, size_t data_length,
+				    struct pldm_file_descriptor_pdr *pdr,
+				    size_t pdr_length);
+
+/** @brief Decode File Descriptor PDR data. The API will update FileName and
+ *         OemFileClassificationName directly to `file_name` and
+ *         `oem_file_classification_name` (if `oem_file_classification` is not
+ *         zero) fields in the pldm_file_descriptor_pdr struct.
+ *
+ *  @pre The API will decode `file_name_array[]` array in
+ *       `struct pldm_file_descriptor_pdr pdr` to
+ *       the `file_name` and `oem_file_classification_name` fields of the same
+ *       pdr struct.
+ *       Before calling to this API, the caller has to allocate memory for
+ *       `file_name` field with the decoded `file_name_len`, and if
+ *       `oem_file_classification` is not zero, allocate memory for
+ *       `oem_file_classification_name` field with the decoded
+ *       `oem_file_classification_name_len`.
+ *       The value of the lengths needed before-hand for allocation are decoded
+ *       by `decode_pldm_file_descriptor_pdr()` method so the caller has to
+ *       call that API first.
+ *
+ *  @param[out] pdr - File Descriptor PDR struct
+ *  @return error code: 0 on success, -EINVAL if 1. the input and output
+ *          parameters' memory are not allocated, 2. `file_name` or
+ *          `oem_file_classification_name` is allocated unexpectedly.
+ */
+int decode_pldm_file_descriptor_pdr_names(struct pldm_file_descriptor_pdr *pdr);
 #ifdef __cplusplus
 }
 #endif
