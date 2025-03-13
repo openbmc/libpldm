@@ -28,6 +28,8 @@ Change categories:
 
 - PLDM FD responder accepts a PLDM control handle and will register its version.
 
+- platform: Add encode req & decode resp for GetEventReceiver
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
