@@ -130,6 +130,15 @@ enum pldm_platform_transfer_flag {
  */
 #define PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH 8
 
+/**
+ * Minimum length of File Descriptor PDR, including size of PLDMTerminusHandle,
+ * FileIdentifier, EntityType, EntityInstanceNumber, ContainerID,
+ * SuperiorDirectoryFileIdentifier, FileClassification, OemFileClassification,
+ * FileCapabilities, FileVersion, FileMaximumSize, FileMaximumFileDescriptorCount,
+ * FileNameLength in `Table 108 - File Descriptor PDR` of DSP0248 v1.3.0
+ */
+#define PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH 36
+
 #define PLDM_INVALID_EFFECTER_ID 0xffff
 
 /* DSP0248 Table1 PLDM monitoring and control data types */
@@ -276,6 +285,7 @@ enum pldm_pdr_types {
 	PLDM_REDFISH_RESOURCE_PDR = 22,
 	PLDM_REDFISH_ENTITY_ASSOCIATION_PDR = 23,
 	PLDM_REDFISH_ACTION_PDR = 24,
+	PLDM_FILE_DESCRIPTOR_PDR = 30,
 	PLDM_OEM_DEVICE_PDR = 126,
 	PLDM_OEM_PDR = 127,
 };
@@ -925,6 +935,28 @@ struct pldm_effecter_aux_name_pdr {
 	uint8_t effecter_count;
 	uint8_t effecter_names[1];
 } __attribute__((packed));
+
+/** @struct pldm_file_descriptor_pdr
+ *
+ *  Structure representing PLDM File Descriptor PDR for unpacked value
+ *  Refer to: DSP0248_1.3.0: 28.30 Table 108
+ */
+
+struct pldm_file_descriptor_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint16_t terminus_handle;
+	uint16_t file_identifier;
+	pldm_entity container;
+	uint16_t superior_directory_file_identifier;
+	uint8_t file_classification;
+	uint8_t oem_file_classification;
+	bitfield16_t file_capabilities;
+	ver32_t file_version;
+	uint32_t file_maximum_size;
+	uint8_t file_maximum_file_descriptor_count;
+	struct variable_field file_name;
+	struct variable_field oem_file_classification_name;
+};
 
 /** @brief Encode PLDM state effecter PDR
  *
@@ -2541,6 +2573,24 @@ int decode_pldm_platform_cper_event(const void *event_data,
  */
 uint8_t *
 pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event);
+
+/** @brief Decode date fields from File Descriptor PDR
+ *
+ *  @param[in] data - PLDM response message which includes the File
+ *                        Descriptor PDR in DSP0248_1.3.0 table 108.
+ *  @param[in] data_length - Length of response message payload
+ *  @param[out] pdr - pointer to the decoded pdr struct
+ *
+ *  @return error code: 0 on success
+ *          -EINVAL if 1. the input and output parameters' memory are not
+ *                     allocated
+ *          -EBADMSG if the original length of the data buffer is larger
+ *          than the target extract length
+ *          -EOVERFLOW if the original length of the data buffer is smaller
+ *          than the target extract length
+ */
+int decode_pldm_file_descriptor_pdr(const void *data, size_t data_length,
+				    struct pldm_file_descriptor_pdr *pdr);
 #ifdef __cplusplus
 }
 #endif
