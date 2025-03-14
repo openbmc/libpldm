@@ -6,6 +6,7 @@
 
 #include <array>
 #include <cerrno>
+#include <cstddef>
 #include <cstdint>
 #include <cstring>
 #include <vector>
@@ -3591,6 +3592,121 @@ TEST(GetSensorReading, testBadDecodeResponse)
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testGoodEncodeRequest)
+{
+    std::array<uint8_t, hdrSize> requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = new (requestMsg.data()) pldm_msg;
+    auto rc =
+        encode_get_event_receiver_req(0, request, sizeof(struct pldm_msg));
+    ASSERT_EQ(rc, 0);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testBadEncodeRequest)
+{
+    auto rc =
+        encode_get_event_receiver_req(0, nullptr, sizeof(struct pldm_msg));
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testGoodEncodeResponse)
+{
+    struct pldm_get_event_receiver_resp request_event_receiver_values;
+    request_event_receiver_values.completion_code = 1;
+    request_event_receiver_values.transport_protocol_type = 2;
+    request_event_receiver_values.event_receiver_address.mctp_eid = 84;
+    size_t payload_lenght = PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES + 1;
+    std::array<uint8_t, hdrSize + sizeof(pldm_get_event_receiver_resp)>
+        responseMsg{};
+    auto response = new (responseMsg.data()) pldm_msg;
+    auto rc = encode_get_event_receiver_resp(0, &request_event_receiver_values,
+                                             response, &payload_lenght);
+    EXPECT_EQ(rc, 0);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testBadEncodeResponse)
+{
+    struct pldm_get_event_receiver_resp request_event_receiver_values;
+    request_event_receiver_values.completion_code = 0;
+    request_event_receiver_values.transport_protocol_type =
+        PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP;
+    request_event_receiver_values.event_receiver_address.mctp_eid = 64;
+    size_t payload_lenght = PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES;
+    auto rc = encode_get_event_receiver_resp(0, &request_event_receiver_values,
+                                             nullptr, &payload_lenght);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testGoodDecodeResponse)
+{
+    struct pldm_get_event_receiver_resp request_event_receiver_values;
+    request_event_receiver_values.completion_code = 0;
+    request_event_receiver_values.transport_protocol_type =
+        PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP;
+    request_event_receiver_values.event_receiver_address.mctp_eid = 34;
+    size_t payload_lenght = PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES + 1;
+    struct pldm_get_event_receiver_resp decoded_resp;
+    std::array<uint8_t, hdrSize + sizeof(pldm_get_event_receiver_resp)>
+        responseMsg{};
+    auto response = new (responseMsg.data()) pldm_msg;
+    auto rc = encode_get_event_receiver_resp(0, &request_event_receiver_values,
+                                             response, &payload_lenght);
+    EXPECT_EQ(rc, 0);
+    rc = decode_get_event_receiver_resp(
+        response, PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES + 1, &decoded_resp);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(decoded_resp.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(decoded_resp.transport_protocol_type,
+              request_event_receiver_values.transport_protocol_type);
+    EXPECT_EQ(decoded_resp.event_receiver_address.mctp_eid,
+              request_event_receiver_values.event_receiver_address.mctp_eid);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testBadDecodeResponse)
+{
+    struct pldm_get_event_receiver_resp decoded_resp;
+    struct pldm_get_event_receiver_resp expected_resp;
+    expected_resp.completion_code = 0;
+    expected_resp.transport_protocol_type =
+        PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP;
+    expected_resp.event_receiver_address.mctp_eid = 34;
+    std::array<uint8_t, hdrSize + sizeof(pldm_get_event_receiver_resp)>
+        responseMsg{};
+    auto response = new (responseMsg.data()) pldm_msg;
+    size_t payload_lenght = PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES + 1;
+    auto rc = encode_get_event_receiver_resp(0, &expected_resp,
+                                             response, &payload_lenght);
+    EXPECT_EQ(rc, 0);
+    // message can not be null
+    rc = decode_get_event_receiver_resp(
+        nullptr, responseMsg.size() - sizeof(pldm_msg_hdr), &decoded_resp);
+    EXPECT_EQ(rc, -EINVAL);
+    // Allocated less than expected
+    rc = decode_get_event_receiver_resp(
+        response, PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES - 1, &decoded_resp);
+    EXPECT_EQ(rc, -EOVERFLOW);
+    // Not supported protocol
+    expected_resp.transport_protocol_type = 1;
+    rc = encode_get_event_receiver_resp(0, &expected_resp,
+                                             response, &payload_lenght);
+    EXPECT_EQ(rc, 0);
+    rc = decode_get_event_receiver_resp(
+        response, responseMsg.size() - sizeof(pldm_msg_hdr), &decoded_resp);
+    EXPECT_EQ(rc, -ENOTSUP);
+}
+#endif
 
 TEST(SetEventReceiver, testGoodEncodeRequest)
 {
