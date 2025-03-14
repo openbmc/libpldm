@@ -16,6 +16,7 @@ extern "C" {
 #include <libpldm/compiler.h>
 #include <libpldm/pdr.h>
 #include <libpldm/pldm_types.h>
+#include <libpldm/utils.h>
 
 /**
  * @brief PLDM response transfer flag for the Platform and control commands
@@ -47,7 +48,8 @@ enum pldm_platform_transfer_flag {
 
 #define PLDM_GET_PDR_REQ_BYTES 13
 
-#define PLDM_SET_EVENT_RECEIVER_RESP_BYTES 1
+#define PLDM_SET_EVENT_RECEIVER_RESP_BYTES     1
+#define PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES 2
 
 /* Platform event supported request */
 #define PLDM_EVENT_MESSAGE_BUFFER_SIZE_REQ_BYTES  2
@@ -1047,6 +1049,19 @@ struct pldm_set_event_receiver_req {
 	uint8_t transport_protocol_type;
 	uint8_t event_receiver_address_info;
 	uint16_t heartbeat_timer;
+} __attribute__((packed));
+
+/** @struct pldm_get_event_receiver_resp
+ *
+ * Structure representing GetEventReceiver command.
+ */
+struct pldm_get_event_receiver_resp {
+	uint8_t completion_code;
+	uint8_t transport_protocol_type;
+	union {
+		uint8_t mctp_eid;
+		struct variable_field vendor_specific;
+	} event_receiver_address;
 } __attribute__((packed));
 
 /** @struct pldm_event_message_buffer_size_req
@@ -2387,6 +2402,62 @@ int decode_get_sensor_reading_resp(
 	uint8_t *sensor_operational_state, uint8_t *sensor_event_message_enable,
 	uint8_t *present_state, uint8_t *previous_state, uint8_t *event_state,
 	uint8_t *present_reading);
+
+/** @brief Encode the GetEventReceiver request message
+ *
+ * @param[in] instance_id - Message's instance id
+ * @param[out] msg - Argument to capture the Message
+ * @param[in] payload_length - length of request message payload
+ * @return 0 on success
+ *         -EINVAL if the input parameters' memory are not allocated,
+ *         or message type or instance in request header is invalid
+ *         -ENOMSG if the PLDM type in the request header is invalid
+ *         -EOVERFLOW if the input message length is invalid
+ */
+int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg,
+				  size_t payload_length);
+
+/** @brief Decode the GetEventReceiver response message
+ *
+ * @param[in] msg - Request message
+ * @param[in] payload_length - Length of response message payload
+ * @param[out] resp - Structure to store decoded response
+ * @return 0 on success
+ *         -EINVAL if the input parameters' memory are not allocated,
+ *         or message type or instance in request header is invalid
+ *         -ENOMSG if the PLDM type in the request header is invalid
+ *         -EOVERFLOW if the input message length is invalid
+ */
+int decode_get_event_receiver_resp(const struct pldm_msg *msg,
+				   size_t payload_length,
+				   struct pldm_get_event_receiver_resp *resp);
+
+/** @brief Encode the GetEventReceiver response message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] completion_code - PLDM completion code
+ *  @param[in] transport_protocol_type - This value indicates the
+ *        transportProtocolType that the terminus uses for its
+ *        eventReceiverAddress and the format of the eventReceiverAddress
+ *        field.
+ *  @param[in] event_receiver_info -  Structure to encode. All members of
+ * sensor, except those mentioned in the @note below, should be initialized by
+ * the caller.
+ *  @param[out] msg - Argument to capture the Message
+ * @return 0 on success
+ *         -EINVAL if the input parameters' memory are not allocated,
+ *         or message type or instance in request header is invalid
+ *         -ENOMSG if the PLDM type in the request header is invalid
+ *         -EOVERFLOW if the input message length is invalid
+ *
+ * @note Caller is responsible for the allocation of the event_receiver_address_info
+ *       parameter. For MCTP transport event_receiver_info.mctp_eid should be set. For other
+ *       protocol types event_receiver_info.vendor_specific should be used.
+ */
+int encode_get_event_receiver_resp(
+	uint8_t instance_id,
+	struct pldm_get_event_receiver_resp *event_receiver_info,
+	struct pldm_msg *msg, size_t payload_length);
 
 /** @brief Encode the SetEventReceiver request message
  *
