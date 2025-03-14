@@ -6,6 +6,7 @@
 
 #include <array>
 #include <cerrno>
+#include <cstddef>
 #include <cstdint>
 #include <cstring>
 #include <vector>
@@ -3584,6 +3585,124 @@ TEST(GetSensorReading, testBadDecodeResponse)
 
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testGoodEncodeRequest)
+{
+    std::array<uint8_t, hdrSize> requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto rc = encode_get_event_receiver_req(0, request);
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testBadEncodeRequest)
+{
+    auto rc = encode_get_event_receiver_req(0, nullptr);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testGoodEncodeResponse)
+{
+    uint8_t completionCode = 0;
+    uint8_t transportProtocolType = PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP;
+    uint8_t eventReceiverAddressInfo = 22;
+    std::array<uint8_t, hdrSize + PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES>
+        responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    auto rc =
+        encode_get_event_receiver_resp(0, completionCode, transportProtocolType,
+                                       eventReceiverAddressInfo, response);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    struct pldm_get_event_receiver_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_get_event_receiver_resp*>(
+            response->payload);
+    EXPECT_EQ(transportProtocolType, resp->transport_protocol_type);
+    EXPECT_EQ(eventReceiverAddressInfo, resp->payload[0]);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testBadEncodeResponse)
+{
+    uint8_t completionCode = 0;
+    uint8_t transportProtocolType = PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP;
+    uint8_t eventReceiverAddressInfo = 22;
+    auto rc =
+        encode_get_event_receiver_resp(0, completionCode, transportProtocolType,
+                                       eventReceiverAddressInfo, nullptr);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testGoodDecodeResponse)
+{
+    uint8_t completionCode = 0;
+    uint8_t transportProtocolType = PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP;
+    uint8_t eventReceiverAddressInfo = 34;
+    uint8_t received_transport_protocol_type;
+    uint8_t received_event_receiver_address_info;
+    uint8_t received_completion_code;
+    std::array<uint8_t, hdrSize + PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES>
+        responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_get_event_receiver_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_get_event_receiver_resp*>(
+            response->payload);
+    resp->completion_code = completionCode;
+    resp->transport_protocol_type = transportProtocolType;
+    resp->payload[0] = eventReceiverAddressInfo;
+    auto rc = decode_get_event_receiver_resp(
+        response, responseMsg.size(), &received_transport_protocol_type,
+        &received_event_receiver_address_info, &received_completion_code);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(received_transport_protocol_type, transportProtocolType);
+    EXPECT_EQ(received_event_receiver_address_info, eventReceiverAddressInfo);
+    EXPECT_EQ(received_completion_code, PLDM_SUCCESS);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetEventReceiver, testBadDecodeResponse)
+{
+    uint8_t received_transport_protocol_type;
+    uint8_t received_event_receiver_address_info;
+    uint8_t received_completion_code;
+    std::array<uint8_t, hdrSize + PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES>
+        responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    struct pldm_get_event_receiver_resp* res =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_get_event_receiver_resp*>(
+            response->payload);
+    auto rc = decode_get_event_receiver_resp(
+        nullptr, responseMsg.size() - sizeof(pldm_msg_hdr),
+        &received_transport_protocol_type,
+        &received_event_receiver_address_info, &received_completion_code);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    rc = decode_get_event_receiver_resp(
+        response, responseMsg.size() - sizeof(pldm_msg_hdr) - 1,
+        &received_transport_protocol_type,
+        &received_event_receiver_address_info, &received_completion_code);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+    res->transport_protocol_type = 1;
+    rc = decode_get_event_receiver_resp(
+        response, responseMsg.size() - sizeof(pldm_msg_hdr),
+        &received_transport_protocol_type,
+        &received_event_receiver_address_info, &received_completion_code);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+#endif
 
 TEST(SetEventReceiver, testGoodEncodeRequest)
 {

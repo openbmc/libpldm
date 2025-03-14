@@ -47,7 +47,8 @@ enum pldm_platform_transfer_flag {
 
 #define PLDM_GET_PDR_REQ_BYTES 13
 
-#define PLDM_SET_EVENT_RECEIVER_RESP_BYTES 1
+#define PLDM_SET_EVENT_RECEIVER_RESP_BYTES     1
+#define PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES 3
 
 /* Platform event supported request */
 #define PLDM_EVENT_MESSAGE_BUFFER_SIZE_REQ_BYTES  2
@@ -1047,6 +1048,17 @@ struct pldm_set_event_receiver_req {
 	uint8_t transport_protocol_type;
 	uint8_t event_receiver_address_info;
 	uint16_t heartbeat_timer;
+} __attribute__((packed));
+
+/** @struct pldm_get_event_receiver_resp
+ *
+ * Structure representing GetEventReceiver command.
+ * This structure applies only for MCTP as a transport type.
+ */
+struct pldm_get_event_receiver_resp {
+	uint8_t completion_code;
+	uint8_t transport_protocol_type;
+	uint8_t payload[1];
 } __attribute__((packed));
 
 /** @struct pldm_event_message_buffer_size_req
@@ -2387,6 +2399,53 @@ int decode_get_sensor_reading_resp(
 	uint8_t *sensor_operational_state, uint8_t *sensor_event_message_enable,
 	uint8_t *present_state, uint8_t *previous_state, uint8_t *event_state,
 	uint8_t *present_reading);
+
+/** @brief Encode the GetEventReceiver request message
+ *
+ * @param[in] instance_id - Message's instance id
+ * @param[out] msg - Argument to capture the Message
+ * @return pldm_completion_codes
+ */
+int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg);
+
+/** @brief Decode the GetEventReceiver response message
+ *
+ * @param[in] msg - Request message
+ * @param[in] payload_length - Length of response message payload
+ * @param[out] transport_protocol_type - This value indicates the
+ *        transportProtocolType that the terminus uses for its
+ *        eventReceiverAddress and the format of the eventReceiverAddress
+ *        field.
+ * @param[out] event_receiver_address_info - This value is a medium and
+ *        protocol-specific address that the responder should use when
+ *        transmitting event messages using the indicated protocol
+ * @param[out] completion_code - PLDM completion code
+ * @return pldm_completion_codes
+ */
+int decode_get_event_receiver_resp(const struct pldm_msg *msg,
+				   size_t payload_length,
+				   uint8_t *transport_protocol_type,
+				   uint8_t *event_receiver_address_info,
+				   uint8_t *completion_code);
+
+/** @brief Encode the GetEventReceiver response message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] completion_code - PLDM completion code
+ *  @param[in] transport_protocol_type - This value indicates the
+ *        transportProtocolType that the terminus uses for its
+ *        eventReceiverAddress and the format of the eventReceiverAddress
+ *        field.
+ *  @param[in] event_receiver_address_info - This value is a medium and
+ *        protocol-specific address that the responder should use when
+ *        transmitting event messages using the indicated protocol
+ *  @param[out] msg - Argument to capture the Message
+ *  @return pldm_completion_codes
+ */
+int encode_get_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
+				   uint8_t transport_protocol_type,
+				   uint8_t event_receiver_address_info,
+				   struct pldm_msg *msg);
 
 /** @brief Encode the SetEventReceiver request message
  *
