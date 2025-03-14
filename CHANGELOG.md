@@ -34,6 +34,8 @@ Change categories:
 
 - Support for building the documentation with doxygen
 
+- platform: Add encode req & decode resp for GetEventReceiver
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names

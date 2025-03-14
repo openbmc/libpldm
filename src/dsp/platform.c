@@ -2485,6 +2485,80 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg)
+{
+	struct pldm_header_info header;
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_GET_EVENT_RECEIVER;
+
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	return pack_pldm_header(&header, &(msg->hdr));
+}
+
+LIBPLDM_ABI_TESTING
+int encode_get_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
+				   uint8_t transport_protocol_type,
+				   uint8_t event_receiver_address_info,
+				   struct pldm_msg *msg)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header;
+	header.msg_type = PLDM_RESPONSE;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_GET_EVENT_RECEIVER;
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_get_event_receiver_resp *response =
+		(struct pldm_get_event_receiver_resp *)msg->payload;
+	response->completion_code = completion_code;
+	if (response->completion_code == PLDM_SUCCESS) {
+		response->transport_protocol_type = transport_protocol_type;
+		response->payload[0] = event_receiver_address_info;
+	}
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_event_receiver_resp(const struct pldm_msg *msg,
+				   size_t payload_length,
+				   uint8_t *transport_protocol_type,
+				   uint8_t *event_receiver_address_info,
+				   uint8_t *completion_code)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+	*completion_code = msg->payload[0];
+	if (PLDM_SUCCESS != *completion_code) {
+		return PLDM_SUCCESS;
+	}
+	if (payload_length < PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+	struct pldm_get_event_receiver_resp *request =
+		(struct pldm_get_event_receiver_resp *)msg->payload;
+	if (request->transport_protocol_type !=
+	    PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+	*transport_protocol_type = request->transport_protocol_type;
+	*event_receiver_address_info = request->payload[0];
+	return PLDM_SUCCESS;
+}
+
 LIBPLDM_ABI_STABLE
 int encode_set_event_receiver_req(uint8_t instance_id,
 				  uint8_t event_message_global_enable,
