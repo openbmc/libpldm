@@ -2485,6 +2485,121 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg,
+				  size_t payload_length)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+	struct pldm_header_info header;
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_GET_EVENT_RECEIVER;
+
+	if (msg == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pack_pldm_header_errno(&header, &(msg->hdr));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	return pldm_msgbuf_complete(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int encode_get_event_receiver_resp(
+	uint8_t instance_id,
+	struct pldm_get_event_receiver_resp *event_receiver_info,
+	struct pldm_msg *msg, size_t payload_length)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+	if (msg == NULL || event_receiver_info == NULL) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_RESPONSE;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_GET_EVENT_RECEIVER;
+
+	rc = pack_pldm_header_errno(&header, &(msg->hdr));
+	if (rc) {
+		return rc;
+	}
+	rc = pldm_msgbuf_init_errno(buf, PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_insert(buf, event_receiver_info->completion_code);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_insert(buf,
+				event_receiver_info->transport_protocol_type);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_insert(
+		buf, event_receiver_info->event_receiver_address.mctp_eid);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_event_receiver_resp(const struct pldm_msg *msg,
+				   size_t payload_length,
+				   struct pldm_get_event_receiver_resp *resp)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+	if (msg == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	rc = pldm_msgbuf_extract_p(buf, &resp->completion_code);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract_p(buf, &resp->transport_protocol_type);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	rc = pldm_msgbuf_extract_p(buf, &resp->event_receiver_address.mctp_eid);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	struct pldm_get_event_receiver_resp *request =
+		(struct pldm_get_event_receiver_resp *)msg->payload;
+	if (request->transport_protocol_type !=
+	    PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP) {
+		return pldm_msgbuf_discard(buf, -EINVAL);
+	}
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_set_event_receiver_req(uint8_t instance_id,
 				  uint8_t event_message_global_enable,
