@@ -30,6 +30,8 @@ Change categories:
 
 - base: Define the minimum request bytes for SetTID command.
 
+- platform: Add encode req & decode resp for GetEventReceiver
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
