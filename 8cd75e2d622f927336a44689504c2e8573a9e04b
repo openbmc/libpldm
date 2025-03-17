@@ -16,6 +16,24 @@
       "message": "Do we need to add an entry in ChangeLog.md file as it is an API name change?",
       "revId": "8cd75e2d622f927336a44689504c2e8573a9e04b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91ad0f7d_1679cab9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T11:11:48Z",
+      "side": 1,
+      "message": "An entry in the changelog is not necessary in this case because the msgbuf APIs are entirely an implementation detail of the library. They are not exposed in the public APIs.\n\nThere seems to be some confusion here about the purpose of the changelog so I\u0027ll try to clarify: It\u0027s a document for consumers of libpldm (developers of applications or libraries that have a direct dependency on libpldm), and not implementers of libpldm. Possibly you are both, but the changelog only matters when you\u0027re acting as the former. Consumers of libpldm tend to be most worried about what\u0027s changed in `include/libpldm` (as the changes enable new features or potentially break existing applications), or that fixes for implementation bugs affecting them have been included. So that\u0027s what we describe. By contrast implementers of libpldm can consult libpldm\u0027s git history for a level of detail that exceeds the changelog.",
+      "parentUuid": "0a6eddda_bf2838e8",
+      "revId": "8cd75e2d622f927336a44689504c2e8573a9e04b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
