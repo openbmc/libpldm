@@ -290,6 +290,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68e8240f_1eb77058",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2146,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T11:32:22Z",
+      "side": 1,
+      "message": "This is what I was referring to:\n\nhttps://github.com/openbmc/libpldm/blob/main/src/dsp/pdr.c#L1737-L1744",
+      "parentUuid": "ab17d408_ac16ffff",
+      "range": {
+        "startLine": 2144,
+        "startChar": 6,
+        "endLine": 2146,
+        "endChar": 57
+      },
+      "revId": "77db2e583607ee732ca766dfad16921658671c8b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2492d8a0_d2ea1424",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 3
