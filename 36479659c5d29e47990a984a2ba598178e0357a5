@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a44c8fc4_0ee07154",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T11:29:42Z",
+      "side": 1,
+      "message": "Hi Pavithra, I have some comments inline.",
+      "revId": "36479659c5d29e47990a984a2ba598178e0357a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05019414_af3bf559",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T11:29:42Z",
+      "side": 1,
+      "message": "`-ENOENT` should also be possible if the record can\u0027t be found.",
+      "revId": "36479659c5d29e47990a984a2ba598178e0357a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a941238_223f871a",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T11:29:42Z",
+      "side": 1,
+      "message": "You don\u0027t need an `else` block here if you\u0027re jumping over the code using `goto cleanup;` on line 487.\n\nHowever, you can avoid the use of `goto` by inverting the `if` condition:\n\n```\nif ((rc \u003d\u003d pldm_msgbuf_extract(buf, rec_handle))) {\n    return rc;\n}\nif (record-\u003eis_remote \u003d\u003d is_remote \u0026\u0026 rec_handle \u003d\u003d record_handle) {\n    prev \u003d pldm_pdr_get_prev_record(repo, record);\n    return pldm_pdr_remove_record(repo, record, prev);\n}\nrc \u003d pldm_msgbuf_destroy(buf);\nif (rc) {\n    return rc;\n}\nrecord \u003d record-\u003enext;\n```",
+      "range": {
+        "startLine": 490,
+        "startChar": 2,
+        "endLine": 490,
+        "endChar": 8
+      },
+      "revId": "36479659c5d29e47990a984a2ba598178e0357a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3148d9af_a0325622",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T11:29:42Z",
+      "side": 1,
+      "message": "I think this should be `return -ENOENT`. Do you agree?",
+      "revId": "36479659c5d29e47990a984a2ba598178e0357a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
