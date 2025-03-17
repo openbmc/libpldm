@@ -1,0 +1,279 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dedc9225_770cd6e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "Hi Chau, I\u0027ve left some further comments inline. Thanks for reworking it so far.",
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ef47295_0e026d23",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "Must we expose this in the public header? I realise others are, but I\u0027d really prefer we don\u0027t if it\u0027s not necessary.\n\nEventually I\u0027d like to remove the others.\n\nPlease move it to the implementation if it\u0027s not intended to be used by a library user.",
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a13abc25_49383b4d",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "My (current) preference is we use a `struct variable_field` here, and populate it with `pldm_msgbuf_span_remaining()` in the decode implementation.\n\nThe flexible array doesn\u0027t make sense for decoding purposes if the struct can\u0027t be cast over the buffer (which it can\u0027t, because it\u0027s not packed, and we don\u0027t want it to be).",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 368,
+        "endChar": 6
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52194996_4003290b",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "Please be complete with the documentation, avoid catch all phrases like this one at the end.",
+      "range": {
+        "startLine": 687,
+        "startChar": 13,
+        "endLine": 687,
+        "endChar": 50
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a878e343_ac62d599",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "The formatting here looks broken. Can you please fix it?",
+      "range": {
+        "startLine": 681,
+        "startChar": 0,
+        "endLine": 689,
+        "endChar": 20
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bca004fb_eb3bd47c",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "Hmm, I\u0027ll mull this one over for a bit.",
+      "range": {
+        "startLine": 694,
+        "startChar": 11,
+        "endLine": 694,
+        "endChar": 44
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3368dea6_0c13328d",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "If we don\u0027t use a flexible array in the struct then this is unnecessary.",
+      "range": {
+        "startLine": 696,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 75
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6e6bc69_3963f69f",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "I recommend avoiding the `_consumed()` variant here, as we want to allow the caller to pass in larger buffers than required without causing an error. If we make `payload_length` a in-out pointer parameter then we can instead pass back out the encoded message size using `pldm_msgbuf_destroy_used()`.",
+      "range": {
+        "startLine": 596,
+        "startChar": 27,
+        "endLine": 596,
+        "endChar": 36
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64c6b192_2f1b4d5b",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "Please avoid using the `_p()` variants in new code. Instead use `pldm_msgbuf_extract(buf, resp-\u003ecompletion_code)`\n\nFix this throughout.",
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0031fa6f_660152b8",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "This is already tested by `pldm_msg_has_error()` above.",
+      "range": {
+        "startLine": 632,
+        "startChar": 1,
+        "endLine": 634,
+        "endChar": 2
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a423caf6_69c78796",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "This is already tested by `pldm_msgbuf_init_errno()` above.",
+      "range": {
+        "startLine": 636,
+        "startChar": 1,
+        "endLine": 638,
+        "endChar": 2
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ebab6f_f716bb36",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "Need to test the result of this because you use `resp-\u003etransfer_flag` below.",
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e388e7_2ce15917",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:26:58Z",
+      "side": 1,
+      "message": "Rather, just use `ASSERT_NE(respData, nullptr);` and avoid the `if (respData)`. But that goes away by dropping the flexible array as mentioned in my comment on the header.\n\nLook for other opportunities to use `ASSERT_*()` macros throughout.",
+      "range": {
+        "startLine": 870,
+        "startChar": 1,
+        "endLine": 871,
+        "endChar": 17
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
