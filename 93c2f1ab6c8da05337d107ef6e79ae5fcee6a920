@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0991919a_e6f680e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:41:38Z",
+      "side": 1,
+      "message": "Hi Chau, thanks for the patch. I\u0027ve left some comments on the header for now, as I hope they can simplify the implementation.",
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0d52226_4046a51e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:41:38Z",
+      "side": 1,
+      "message": "Do we need this in the public header? Again, my preference has become that we don\u0027t do this.",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 50
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cfb827d_ae3f410c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:41:38Z",
+      "side": 1,
+      "message": "Table 77 PDR Type Values in DSP0248 v1.3.0 says this should be 30.",
+      "range": {
+        "startLine": 288,
+        "startChar": 28,
+        "endLine": 288,
+        "endChar": 30
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc78f54_067f1ba2",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:41:38Z",
+      "side": 1,
+      "message": "\u0027superior\u0027? Also, please avoid contracting words like \u0027directory\u0027 to \u0027dir\u0027 arbitrarily, as it makes it harder to search the spec for the relevant member.",
+      "range": {
+        "startLine": 950,
+        "startChar": 10,
+        "endLine": 950,
+        "endChar": 16
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f4a8485_c12930f7",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:41:38Z",
+      "side": 1,
+      "message": "`maximum` here, rather than `max`, as per the discussion above.\n\nPlease audit all the members for this concern.",
+      "range": {
+        "startLine": 955,
+        "startChar": 15,
+        "endLine": 955,
+        "endChar": 18
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45891d1a_7ee3c4d9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:41:38Z",
+      "side": 1,
+      "message": "Rather use `struct variable_field` members for both.",
+      "range": {
+        "startLine": 962,
+        "startChar": 0,
+        "endLine": 972,
+        "endChar": 6
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00c621b5_0f7a0bd6",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2608,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:41:38Z",
+      "side": 1,
+      "message": "See the suggestion above about `struct variable_field`. I hope we can avoid this dance.",
+      "range": {
+        "startLine": 2600,
+        "startChar": 0,
+        "endLine": 2608,
+        "endChar": 45
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3ceb9ee_0e26f009",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2618,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:41:38Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be `-EINVAL`? Maybe `-EBADMSG` (too short for fixed portion) or `-EOVERFLOW` (invalid variable-length portion).",
+      "range": {
+        "startLine": 2617,
+        "startChar": 43,
+        "endLine": 2618,
+        "endChar": 25
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "837ff6c4_e56e6876",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2620,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:41:38Z",
+      "side": 1,
+      "message": "`-EOVERFLOW` as above.",
+      "range": {
+        "startLine": 2618,
+        "startChar": 26,
+        "endLine": 2620,
+        "endChar": 40
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c27a8a64_69833da2",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2649,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T06:41:38Z",
+      "side": 1,
+      "message": "I think we can avoid this?",
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
