@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7579fff_9af3fe66",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T11:20:23Z",
+      "side": 1,
+      "message": "This is not enough of a description for the break in compatibility that this patch implements.\n\nCan you please describe the impacts and requirements (e.g. firmware versions) on the remote side before and after this change?",
+      "revId": "bcd95b6165dc61da9f19fb2599767842ae0779ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "227ac0f2_1b6af433",
         "filename": "include/libpldm/oem/ibm/state_set.h",
         "patchSetId": 4
@@ -26,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ecab96d_f5fcb498",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T11:20:23Z",
+      "side": 1,
+      "message": "Yes, please. And again, make sure to describe the version requirements affecting local and remote software impacted by this change.",
+      "parentUuid": "227ac0f2_1b6af433",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 45
+      },
+      "revId": "bcd95b6165dc61da9f19fb2599767842ae0779ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba67409a_3f1e0c10",
         "filename": "include/libpldm/oem/ibm/state_set.h",
         "patchSetId": 4
@@ -37,6 +78,30 @@
       "writtenOn": "2025-03-11T05:05:17Z",
       "side": 1,
       "message": "all the latest values that got added were named as - `pldm_oem_ibm_state_set_boot_side_rename_state_values`, can we rename this as well?",
+      "range": {
+        "startLine": 78,
+        "startChar": 5,
+        "endLine": 78,
+        "endChar": 57
+      },
+      "revId": "bcd95b6165dc61da9f19fb2599767842ae0779ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af7bb7ca_e8d497c7",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T11:20:23Z",
+      "side": 1,
+      "message": "The member names also need to be consistent with the type name.",
+      "parentUuid": "ba67409a_3f1e0c10",
       "range": {
         "startLine": 78,
         "startChar": 5,
