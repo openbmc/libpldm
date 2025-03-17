@@ -33,6 +33,24 @@
       "message": "I realise that other messages define this in the public header, but my current preference is that we don\u0027t. Are you expecting library users to need this value? If the answer is yes, that suggests we should modernise this part of the library API. If the answer is no, then it should be instead defined in the implementation (somewhere appropriate under `src/`).",
       "revId": "094086cace458baaf94c63a5aff5d3d290af4078",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0327e58_a4343d3b",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-03-17T08:49:27Z",
+      "side": 1,
+      "message": "The defines are used in the encode / decode implementations but the user of the library shall allocate the memory for the messages so it is expected for a user of the library to have this values available.\n\nMaybe we can move them to /src/dsp/base.h",
+      "parentUuid": "ddd50156_5c303f38",
+      "revId": "094086cace458baaf94c63a5aff5d3d290af4078",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
