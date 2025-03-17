@@ -51,6 +51,24 @@
       "parentUuid": "ddd50156_5c303f38",
       "revId": "094086cace458baaf94c63a5aff5d3d290af4078",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "413030c6_42c21c32",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-17T11:01:39Z",
+      "side": 1,
+      "message": "Hmm, so my apologies. My thought above runs counter to some other goals I have collected over time, so disregard it. I should review in less of a rush.",
+      "parentUuid": "a0327e58_a4343d3b",
+      "revId": "094086cace458baaf94c63a5aff5d3d290af4078",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
