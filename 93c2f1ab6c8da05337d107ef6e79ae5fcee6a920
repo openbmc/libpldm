@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44255c3b_3f3d8578",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-18T00:21:31Z",
+      "side": 1,
+      "message": "Disregard this, it was a comment without thought.",
+      "parentUuid": "f0d52226_4046a51e",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 50
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cfb827d_ae3f410c",
