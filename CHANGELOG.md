@@ -37,6 +37,8 @@ Change categories:
 - platform: Add decode_pldm_file_descriptor_pdr() and
   decode_pldm_file_descriptor_pdr_names()
 
+- file: Add encode req & decode resp for DfOpen command.
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
