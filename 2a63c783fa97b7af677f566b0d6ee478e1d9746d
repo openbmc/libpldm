@@ -16,6 +16,24 @@
       "message": "Thanks Manoj. Can you please add a test?",
       "revId": "2a63c783fa97b7af677f566b0d6ee478e1d9746d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31fa0e91_19073767",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2025-03-18T08:40:40Z",
+      "side": 1,
+      "message": "Done, while writing test i noticed that even the pldm_instance_id_alloc() function seems to miss the null check, hence added that as well in relation chain.",
+      "parentUuid": "9c3b4bc8_ade13e11",
+      "revId": "2a63c783fa97b7af677f566b0d6ee478e1d9746d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
