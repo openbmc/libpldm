@@ -52,6 +52,24 @@
       "parentUuid": "c6a3339c_b5eeb2c8",
       "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6442c4e2_ba3e56b9",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T06:05:22Z",
+      "side": 1,
+      "message": "\u003e #define pldm_msgbuf_extract_uint32_size(ctx, dst)                                   \\\n\tpldm__msgbuf_extract_uint32(ctx, (void *)\u0026(dst))\n\t\nDo you mean the above? I think it still requires the encode/decode API to know beforehand about the type of an element in the struct, which can possibly be changed after spec update.",
+      "parentUuid": "98bcc6d2_b38dcb29",
+      "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
