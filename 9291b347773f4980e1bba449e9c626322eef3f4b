@@ -16,6 +16,24 @@
       "message": "This shouldn\u0027t be a pointer, rather a proper `struct variable field` object. Just populate the `ptr` member with the pointer into the message buffer, and then populate the `length` member appropriately.",
       "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a3339c_b5eeb2c8",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Acknowledged. Please help review my edit. At first I removed the `uint32_t data_length;` field to avoid duplication with the `length` field in the variable_field struct. But `pldm_msgbuf_extract` does not work with `size_t` so it needs casting and breaks the macro with `error: lvalue required as unary ‘\u0026’ operand`, which led me to directly using `pldm__msgbuf_extract_uint32`. I think this is not good, so now I define a local uint32_t var to hold the data length from extraction and assign it back to `length` for use. Both ways seem to make the function be aware of the data type of data length (an element of the struct), I don\u0027t know if I should put data_length back to the struct.",
+      "parentUuid": "3bb868a5_e7e9a60c",
+      "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

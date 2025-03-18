@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f38342_881eb4da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Thank you.",
+      "parentUuid": "dedc9225_770cd6e0",
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ef47295_0e026d23",
@@ -53,6 +71,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f05a1495_2927b267",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "ACK.",
+      "parentUuid": "1ef47295_0e026d23",
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a13abc25_49383b4d",
@@ -66,6 +102,30 @@
       "writtenOn": "2025-03-17T06:26:58Z",
       "side": 1,
       "message": "My (current) preference is we use a `struct variable_field` here, and populate it with `pldm_msgbuf_span_remaining()` in the decode implementation.\n\nThe flexible array doesn\u0027t make sense for decoding purposes if the struct can\u0027t be cast over the buffer (which it can\u0027t, because it\u0027s not packed, and we don\u0027t want it to be).",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 368,
+        "endChar": 6
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d24515a_f5e7d6a1",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Updated. But I chose to use `pldm_msgbuf_span_required()` as we might still have the checksum part at the end of the buffer, so we rely on the `length` field to extract the data.",
+      "parentUuid": "a13abc25_49383b4d",
       "range": {
         "startLine": 365,
         "startChar": 0,
@@ -99,6 +159,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9b2d335_5125d24a",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52194996_4003290b",
+      "range": {
+        "startLine": 687,
+        "startChar": 13,
+        "endLine": 687,
+        "endChar": 50
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a878e343_ac62d599",
@@ -112,6 +196,30 @@
       "writtenOn": "2025-03-17T06:26:58Z",
       "side": 1,
       "message": "The formatting here looks broken. Can you please fix it?",
+      "range": {
+        "startLine": 681,
+        "startChar": 0,
+        "endLine": 689,
+        "endChar": 20
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e2ce80_aa9cdc4a",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a878e343_ac62d599",
       "range": {
         "startLine": 681,
         "startChar": 0,
@@ -168,6 +276,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "710dd8a9_d3b7b2be",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3368dea6_0c13328d",
+      "range": {
+        "startLine": 696,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 75
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6e6bc69_3963f69f",
@@ -181,6 +313,30 @@
       "writtenOn": "2025-03-17T06:26:58Z",
       "side": 1,
       "message": "I recommend avoiding the `_consumed()` variant here, as we want to allow the caller to pass in larger buffers than required without causing an error. If we make `payload_length` a in-out pointer parameter then we can instead pass back out the encoded message size using `pldm_msgbuf_destroy_used()`.",
+      "range": {
+        "startLine": 596,
+        "startChar": 27,
+        "endLine": 596,
+        "endChar": 36
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d71affaf_13779e3a",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Updated to use `pldm_msgbuf_destroy()`",
+      "parentUuid": "b6e6bc69_3963f69f",
       "range": {
         "startLine": 596,
         "startChar": 27,
@@ -208,6 +364,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b7f9993_ab7d4c5d",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Done. But I still use `pldm_msgbuf_extract_p(buf, data_integrity_checksum);`, otherwise it will throw `error: pointer parameter \u0027data_integrity_checksum\u0027 can be pointer to const [readability-non-const-parameter,-warnings-as-errors]` during clang-tidy. Will proceed after you give more feedback about `data_integrity_checksum`.",
+      "parentUuid": "64c6b192_2f1b4d5b",
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0031fa6f_660152b8",
@@ -221,6 +395,30 @@
       "writtenOn": "2025-03-17T06:26:58Z",
       "side": 1,
       "message": "This is already tested by `pldm_msg_has_error()` above.",
+      "range": {
+        "startLine": 632,
+        "startChar": 1,
+        "endLine": 634,
+        "endChar": 2
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43c75c90_6cdff1c4",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0031fa6f_660152b8",
       "range": {
         "startLine": 632,
         "startChar": 1,
@@ -254,6 +452,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3860094_9bb161be",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a423caf6_69c78796",
+      "range": {
+        "startLine": 636,
+        "startChar": 1,
+        "endLine": 638,
+        "endChar": 2
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37ebab6f_f716bb36",
@@ -271,6 +493,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e0d9e56_1d8736bb",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37ebab6f_f716bb36",
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43e388e7_2ce15917",
@@ -284,6 +524,30 @@
       "writtenOn": "2025-03-17T06:26:58Z",
       "side": 1,
       "message": "Rather, just use `ASSERT_NE(respData, nullptr);` and avoid the `if (respData)`. But that goes away by dropping the flexible array as mentioned in my comment on the header.\n\nLook for other opportunities to use `ASSERT_*()` macros throughout.",
+      "range": {
+        "startLine": 870,
+        "startChar": 1,
+        "endLine": 871,
+        "endChar": 17
+      },
+      "revId": "462d90c3840e5fd351d6e86644271d6d748bf906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93565c4b_e696ba68",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T03:09:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43e388e7_2ce15917",
       "range": {
         "startLine": 870,
         "startChar": 1,
