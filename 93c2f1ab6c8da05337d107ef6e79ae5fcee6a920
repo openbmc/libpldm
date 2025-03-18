@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d13f5b8f_f4acd357",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T06:04:10Z",
+      "side": 1,
+      "message": "Thanks for your review.",
+      "parentUuid": "0991919a_e6f680e9",
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0d52226_4046a51e",
@@ -65,6 +83,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c73cefc1_c1ffadb4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T06:04:10Z",
+      "side": 1,
+      "message": "ACK",
+      "parentUuid": "44255c3b_3f3d8578",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 50
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cfb827d_ae3f410c",
@@ -78,6 +120,30 @@
       "writtenOn": "2025-03-17T06:41:38Z",
       "side": 1,
       "message": "Table 77 PDR Type Values in DSP0248 v1.3.0 says this should be 30.",
+      "range": {
+        "startLine": 288,
+        "startChar": 28,
+        "endLine": 288,
+        "endChar": 30
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21420c4e_db24df43",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T06:04:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cfb827d_ae3f410c",
       "range": {
         "startLine": 288,
         "startChar": 28,
@@ -111,6 +177,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43761eba_9fc15c71",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T06:04:10Z",
+      "side": 1,
+      "message": "Done. Changed to `superior_directory_file_identifier`",
+      "parentUuid": "3dc78f54_067f1ba2",
+      "range": {
+        "startLine": 950,
+        "startChar": 10,
+        "endLine": 950,
+        "endChar": 16
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f4a8485_c12930f7",
@@ -124,6 +214,30 @@
       "writtenOn": "2025-03-17T06:41:38Z",
       "side": 1,
       "message": "`maximum` here, rather than `max`, as per the discussion above.\n\nPlease audit all the members for this concern.",
+      "range": {
+        "startLine": 955,
+        "startChar": 15,
+        "endLine": 955,
+        "endChar": 18
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc6b2d2a_9e71463b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T06:04:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f4a8485_c12930f7",
       "range": {
         "startLine": 955,
         "startChar": 15,
@@ -159,6 +273,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d1c7d29_16de334b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T06:04:10Z",
+      "side": 1,
+      "message": "Done. Please help review my edit.",
+      "parentUuid": "45891d1a_7ee3c4d9",
+      "range": {
+        "startLine": 962,
+        "startChar": 0,
+        "endLine": 972,
+        "endChar": 6
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00c621b5_0f7a0bd6",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 3
@@ -170,6 +308,30 @@
       "writtenOn": "2025-03-17T06:41:38Z",
       "side": 1,
       "message": "See the suggestion above about `struct variable_field`. I hope we can avoid this dance.",
+      "range": {
+        "startLine": 2600,
+        "startChar": 0,
+        "endLine": 2608,
+        "endChar": 45
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "280cf479_cf5fc4f0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2608,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T06:04:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00c621b5_0f7a0bd6",
       "range": {
         "startLine": 2600,
         "startChar": 0,
@@ -203,6 +365,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "796af987_ceeb9df7",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2618,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T06:04:10Z",
+      "side": 1,
+      "message": "Done. Updated to `-EOVERFLOW`",
+      "parentUuid": "b3ceb9ee_0e26f009",
+      "range": {
+        "startLine": 2617,
+        "startChar": 43,
+        "endLine": 2618,
+        "endChar": 25
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "837ff6c4_e56e6876",
@@ -226,6 +412,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4af6f65_044e3677",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2620,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T06:04:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "837ff6c4_e56e6876",
+      "range": {
+        "startLine": 2618,
+        "startChar": 26,
+        "endLine": 2620,
+        "endChar": 40
+      },
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c27a8a64_69833da2",
@@ -239,6 +449,24 @@
       "writtenOn": "2025-03-17T06:41:38Z",
       "side": 1,
       "message": "I think we can avoid this?",
+      "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b748e82a_f2da7dd8",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2649,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-18T06:04:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c27a8a64_69833da2",
       "revId": "93c2f1ab6c8da05337d107ef6e79ae5fcee6a920",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
