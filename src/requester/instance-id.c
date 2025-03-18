@@ -122,7 +122,7 @@ int pldm_instance_id_alloc(struct pldm_instance_db *ctx, pldm_tid_t tid,
 {
 	uint8_t l_iid;
 
-	if (!iid) {
+	if (!ctx || !iid) {
 		return -EINVAL;
 	}
 

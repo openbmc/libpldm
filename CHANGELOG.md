@@ -68,6 +68,7 @@ Change categories:
 - pdr: Remove PDR if the contained entity to be removed is the last one
 - meson: sizes.h: add includedir to install path
 - pdr: Create entity association PDRs with unique record handle
+- requester: add null check for instance db object in pldm_instance_id_alloc()
 
 ### Security
 
