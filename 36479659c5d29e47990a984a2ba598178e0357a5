@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c01a12ce_e2b78605",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-03-18T09:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05019414_af3bf559",
+      "revId": "36479659c5d29e47990a984a2ba598178e0357a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a941238_223f871a",
@@ -58,6 +76,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ea284da_a0bb0ed8",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-03-18T09:40:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0a941238_223f871a",
+      "range": {
+        "startLine": 490,
+        "startChar": 2,
+        "endLine": 490,
+        "endChar": 8
+      },
+      "revId": "36479659c5d29e47990a984a2ba598178e0357a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3148d9af_a0325622",
@@ -71,6 +113,24 @@
       "writtenOn": "2025-03-17T11:29:42Z",
       "side": 1,
       "message": "I think this should be `return -ENOENT`. Do you agree?",
+      "revId": "36479659c5d29e47990a984a2ba598178e0357a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f429020_5f530fe9",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-03-18T09:40:15Z",
+      "side": 1,
+      "message": "yes, we can use it as ENOENT is - No such file or directory.",
+      "parentUuid": "3148d9af_a0325622",
       "revId": "36479659c5d29e47990a984a2ba598178e0357a5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
