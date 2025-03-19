@@ -106,6 +106,24 @@
       "parentUuid": "20b85a9c_c972a89d",
       "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f4ce969_d1edc205",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T03:53:35Z",
+      "side": 1,
+      "message": "\u003e I can try it.\n\nGreat!\n\n\u003e How should I easily apply changes upon your existing patches without having to update them every time you push new changes?\n\nHah, well, the best way to sort that out is to get them merged. Are you able to review them?\n\n\u003e Btw, I can\u0027t find the command to quickly cherry-pick the whole relation chain, do you have any suggestion?\n\nHit the `Download` button and copy the `Branch` line:\n\nhttps://gerrit.openbmc.org/Documentation/user-review-ui.html#download",
+      "parentUuid": "c374e718_6d399b6e",
+      "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
