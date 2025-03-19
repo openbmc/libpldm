@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d71ba027_25e030f9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T01:47:00Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need `file_name_len` here because we should use `struct variable_field`\u0027s `length` member instead.",
+      "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd3a90fe_7533e9a5",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T01:47:00Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd2adf5b_27f611f5",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3333,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T01:47:00Z",
+      "side": 1,
+      "message": "This is where we see more of the problem you hit here: https://gerrit.openbmc.org/c/openbmc/libpldm/+/75364/comment/3bb868a5_e7e9a60c/\n\nThe length value should end up in `pdr-\u003efile_name.length` so the call on 3338 is correct.",
+      "range": {
+        "startLine": 3333,
+        "startChar": 5,
+        "endLine": 3333,
+        "endChar": 50
+      },
+      "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8efc3eeb_860b8f5f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3338,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T01:47:00Z",
+      "side": 1,
+      "message": "Be wary of `pldm_msgbuf_span_string_ascii()` - it looks for a `NUL`-terminator in the message and should only be used if we don\u0027t know the length before-hand. DSP0248 does define this string as `NUL`-terminated, however, we\u0027ve extracted the length above on line 3333, no scanning for a null-terminator is required in practice. Instead you can use `pldm_msgbuf_span_required()` here.",
+      "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f795acba_b65a8640",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3356,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T01:47:00Z",
+      "side": 1,
+      "message": "See comment above regarding `file_name`.",
+      "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
