@@ -1,0 +1,250 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35c8129e_8737e7a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "Hi Chau, nice work. I have a few comments.",
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dc01740_a95b0d34",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "Please prefix the symbol with `LIBPLDM_`",
+      "range": {
+        "startLine": 2,
+        "startChar": 8,
+        "endLine": 2,
+        "endChar": 14
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "309adc4b_31796635",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "What is this required for?",
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85407814_606c5076",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "Do library consumers need to use these values? My feeling is they\u0027re only needed by the library implementation.",
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "155c4ff0_dfc32f76",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "Please consistently apply the `pldm_file_` symbol prefix throughout:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L114-L116",
+      "range": {
+        "startLine": 50,
+        "startChar": 7,
+        "endLine": 50,
+        "endChar": 12
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1c4adc8_a0e04850",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "No packed structs please:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L151-L152",
+      "range": {
+        "startLine": 53,
+        "startChar": 1,
+        "endLine": 53,
+        "endChar": 26
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f4fa554_e2791700",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "What about other errors, such as `-EOVERFLOW` if the provided destination buffer is too short?",
+      "range": {
+        "startLine": 70,
+        "startChar": 1,
+        "endLine": 71,
+        "endChar": 28
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09c97160_4f3ae956",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "Please make sure to mention all error values possible.",
+      "range": {
+        "startLine": 83,
+        "startChar": 1,
+        "endLine": 84,
+        "endChar": 29
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f64c9705_bc69d3d7",
+        "filename": "src/dsp/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "I prefer these are tested in the same order as the parameters in the function prototype.",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 24,
+        "endChar": 31
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8548b45a_f57cb2cb",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "No; please rather define a `std::array` with the expected bytes and compare the payload to the array directly.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 67
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "173185e4_2104c055",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "I realise existing practice has been to lump these all together, but going forward I rather we split \"bad\" tests into their own `TEST()` cases.",
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31a23f64_ac4f2c69",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:13:28Z",
+      "side": 1,
+      "message": "See above.",
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
