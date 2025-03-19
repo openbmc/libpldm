@@ -142,6 +142,24 @@
       "parentUuid": "4f4ce969_d1edc205",
       "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "692d9ab8_799730dc",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T04:07:34Z",
+      "side": 1,
+      "message": "\u003e Will try my best on what is in my capability.\n\nThanks!",
+      "parentUuid": "5e2c417b_a17c7885",
+      "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
