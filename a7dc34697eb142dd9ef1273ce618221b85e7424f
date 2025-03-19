@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50fef391_97f07735",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T02:15:19Z",
+      "side": 1,
+      "message": "This isn\u0027t true? Surely it\u0027s possible that both `-EINVAL` and `-ENOENT` can be returned. Please document both.",
+      "range": {
+        "startLine": 243,
+        "startChar": 50,
+        "endLine": 243,
+        "endChar": 86
+      },
+      "revId": "a7dc34697eb142dd9ef1273ce618221b85e7424f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
