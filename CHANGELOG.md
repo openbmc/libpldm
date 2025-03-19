@@ -47,6 +47,8 @@ Change categories:
 
 - file: Add encode req & decode resp for DfHeartbeat command.
 
+- oem: ibm: Modified the state set id for slot effecter and sensor
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
