@@ -88,6 +88,24 @@
       "parentUuid": "6442c4e2_ba3e56b9",
       "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c374e718_6d399b6e",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-19T03:46:02Z",
+      "side": 1,
+      "message": "I can try it. How should I easily apply changes upon your existing patches without having to update them every time you push new changes? Btw, I can\u0027t find the command to quickly cherry-pick the whole relation chain, do you have any suggestion? Thanks.",
+      "parentUuid": "20b85a9c_c972a89d",
+      "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
