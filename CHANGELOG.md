@@ -59,6 +59,8 @@ Change categories:
 - pdr: Indicates success or failure depending on the outcome of the entity
   association PDR creation
 
+- oem: ibm: Update the sensor and effecter state id for slot
+
 ### Deprecated
 
 ### Removed
