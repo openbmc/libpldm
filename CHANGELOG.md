@@ -32,6 +32,10 @@ Change categories:
 
 - pdr: Add pldm_pdr_delete_by_record_handle() API
 
+- oem: ibm: Added new enum for state set ids which contains change in state set
+  for slot effecter and sensor Old enum state set id constants will be
+  removed soon.
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
