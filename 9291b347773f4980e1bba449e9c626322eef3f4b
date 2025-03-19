@@ -70,6 +70,24 @@
       "parentUuid": "98bcc6d2_b38dcb29",
       "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b85a9c_c972a89d",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-19T01:39:14Z",
+      "side": 1,
+      "message": "\u003e I think it still requires the encode/decode API to know beforehand about the type of an element in the struct, which can possibly be changed after spec update.\n\nThe fanciness to elide the type from the API using the `_Generic` implementation for `pldm_msbguf_extract()` was purely about libpldm programming ergonomics rather than an attempt to deal with spec changes. We know the size of the type we wish to extract because the type of the struct member provides that information. Spec changes to message field types will always be disruptive in some fashion. I\u0027m not concerned about spec changes here.\n\nFor some data in PLDM messages, such as strings, libpldm\u0027s abstractions change them from an abstract field in a message to a concrete buffer in memory on a computer system. In C, the specified type representing an object size is `size_t`, so where possible we should represent buffer sizes using `size_t` in libpldm\u0027s API. However, the object size of `size_t` doesn\u0027t necessarily map to the object size of the length type the DMTF have chosen to encode in a given message, so we will always need to specify the latter.\n\nSo what I was proposing is really a family of new `msgbuf` APIs, such as:\n\n```\nint pldm_msgbuf_extract_uint32_as_size(struct pldm_msgbuf *ctx, size_t *sz);\n```\n\nA rough implementation might look like:\n\n```\nint pldm_msgbuf_extract_uint32_as_size(struct pldm_msgbuf *ctx, size_t *sz)\n{\n    uint32_t length;\n    int rc;\n    \n    if (!sz) {\n        ...\n    }\n    \n    rc \u003d pldm_msgbuf_extract(ctx, length);\n    if (rc) {\n        ...\n    }\n    \n    *sz \u003d length;\n    \n    return 0;\n}\n```\n\nThat is obviously incomplete, and I\u0027d like to take into consideration the improvements in https://gerrit.openbmc.org/c/openbmc/libpldm/+/78866/1. Are you interested writing a patch to properly implement and test `pldm_msgbuf_extract_uint32_as_size()`? For reference on expectations, here\u0027s a patch introducing a new `msgbuf` API (`pldm_msgbuf_span_until()`):\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/78873/1",
+      "parentUuid": "6442c4e2_ba3e56b9",
+      "revId": "9291b347773f4980e1bba449e9c626322eef3f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
