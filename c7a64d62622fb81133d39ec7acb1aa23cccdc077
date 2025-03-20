@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d81424c8_f93e6b50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-03-20T20:01:36Z",
+      "side": 1,
+      "message": "Thank you for working on this patch Andrew. I\u0027ve started reviewing it and it looks promising so far.\nI do have a few initial comments which I\u0027d like to share.",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd697ef7_7d76c133",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2215,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-03-20T20:01:36Z",
+      "side": 1,
+      "message": "Are we decoding vendor defined descriptors from the package?",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c020b9f6_b97cfdb9",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2274,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-03-20T20:01:36Z",
+      "side": 1,
+      "message": "Since this is not be present in PLDM package Version 1.0.x, I assume it\u0027s not tightly coupled and we should be able to parse the package descriptors and component information without using this foreach statement.\n\nCould you please add a UT for the same ?",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "455f9894_fa00c20e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-03-20T20:01:36Z",
+      "side": 1,
+      "message": "what if it\u0027s 0, shouldn\u0027t we show an error?",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "828d831f_e8ed6305",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-03-20T20:01:36Z",
+      "side": 1,
+      "message": "do we log in libpldm, didn\u0027t see it anywhere else in the code ?",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b5e16c3_21b3f860",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-03-20T20:01:36Z",
+      "side": 1,
+      "message": "why do we need to repeat this checks again ? \nIt\u0027s already validated in decode_pldm_package_header_info_errno() so this one is redundant.",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
