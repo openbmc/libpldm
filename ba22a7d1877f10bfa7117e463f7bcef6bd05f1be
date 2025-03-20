@@ -22,6 +22,30 @@
       },
       "revId": "ba22a7d1877f10bfa7117e463f7bcef6bd05f1be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27c3cf27_b3443615",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-03-20T04:54:56Z",
+      "side": 1,
+      "message": "Acknowledge, Sorry for this, I have made the changes to the Doxygen accordingly.",
+      "parentUuid": "e8590a3f_789616b7",
+      "range": {
+        "startLine": 243,
+        "startChar": 60,
+        "endLine": 243,
+        "endChar": 67
+      },
+      "revId": "ba22a7d1877f10bfa7117e463f7bcef6bd05f1be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
