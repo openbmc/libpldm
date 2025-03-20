@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bceb4e6_ea713225",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-20T02:50:58Z",
+      "side": 1,
+      "message": "Hi Roger, thanks for the patch. Many parts of the platform spec support are implemented in a \u0027legacy\u0027 style. I\u0027ve left comments inline about how I\u0027d new APIs to be designed and implemented. Unfortunately it means that the library implementation isn\u0027t terribly consistent, but we can fix that over time.",
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fdf299a_1a2b2682",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-20T02:50:58Z",
+      "side": 1,
+      "message": "Why 3 bytes here? The message has two 1-byte fields, `completionCode` and `transportProtocolType`. Beyond that, it\u0027s dependent on the latter. For MCTP, `eventReceiverAddress` should be 1 byte for the EID. NC-SI is a point-to-point protocol (with NC transmit governed by token-ring arbitration), so should have no need for any data here. Vendor-defined is obviously arbitrary. But the minimum size given NC-SI should be 2?",
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "784c6ca8_3ca46b9c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-20T02:50:58Z",
+      "side": 1,
+      "message": "This is an ill-defined way to specify a flexible array, and going forward I want to avoid flexible arrays altogether for ergonomic reasons:\n\nhttps://github.com/openbmc/libpldm/blob/9c57ef5d371cec85075c7524a34c77bb8d8d884b/docs/checklists/changes.md#L154-L173\n\nLooking at the message, this might perhaps be best defined as:\n\n```\nstruct pldm_get_event_receiver_resp {\n    uint8_t completion_code;\n    uint8_t transport_protocol_type;\n    union {\n        uint8_t mctp_eid;\n        struct variable_field vendor_specific;\n    } event_receiver_address;\n};\n```",
+      "range": {
+        "startLine": 1061,
+        "startChar": 1,
+        "endLine": 1061,
+        "endChar": 20
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a177f68_71ee1053",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1062,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-20T02:50:58Z",
+      "side": 1,
+      "message": "Please no more packed structs:\n\nhttps://github.com/openbmc/libpldm/blob/9c57ef5d371cec85075c7524a34c77bb8d8d884b/docs/checklists/changes.md#L151-L152\n\nWhile others here are marked packed, I\u0027ve decided that\u0027s a legacy strategy that shouldn\u0027t be followed any further. I\u0027m aiming for libpldm to provide an ergonomic C API, and packaged structs don\u0027t help that goal.\n\nThis decision has impacts on the implementation too.",
+      "range": {
+        "startLine": 1062,
+        "startChar": 2,
+        "endLine": 1062,
+        "endChar": 26
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb4cee72_af34909b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-20T02:50:58Z",
+      "side": 1,
+      "message": "Using PLDM completion codes to signal library errors is not preferred going forward. See:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L197-L202\n\nPlease fix throughout.",
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38b4916a_2cbab0f9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2409,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-20T02:50:58Z",
+      "side": 1,
+      "message": "Please always pass a length parameter when passing a `struct pldm_msg *` as a matter of obvious C safety and defending against spec changes down the track.",
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fda034ad_2518b7bf",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2429,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-20T02:50:58Z",
+      "side": 1,
+      "message": "Please don\u0027t decompose the message structure this way 😊 See:\n\nhttps://github.com/openbmc/libpldm/blob/9c57ef5d371cec85075c7524a34c77bb8d8d884b/docs/checklists/changes.md#L139-L146",
+      "range": {
+        "startLine": 2427,
+        "startChar": 6,
+        "endLine": 2429,
+        "endChar": 31
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a9de7c3_bb9e282a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2447,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-20T02:50:58Z",
+      "side": 1,
+      "message": "See decomposition comment above.",
+      "range": {
+        "startLine": 2445,
+        "startChar": 56,
+        "endLine": 2447,
+        "endChar": 43
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0c0515a_39d8026c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2448,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-20T02:50:58Z",
+      "side": 1,
+      "message": "See comment about always providing the length above.",
+      "range": {
+        "startLine": 2448,
+        "startChar": 7,
+        "endLine": 2448,
+        "endChar": 27
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f079787_198d3536",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2538,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-20T02:50:58Z",
+      "side": 1,
+      "message": "Please rather use the `msgbuf` APIs for packing (and unpacking) message data. See:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L205-L207\n\nPlease fix this in all the new functions here.\n\nHappy to answer queries on how those APIs are meant to work. This commit message provides some helpful background:\n\nhttps://github.com/openbmc/libpldm/commit/c63f63a2d9d7d25b21b76a1a6098ee1a3176be7e",
+      "range": {
+        "startLine": 2538,
+        "startChar": 2,
+        "endLine": 2538,
+        "endChar": 54
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
