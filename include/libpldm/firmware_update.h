@@ -498,6 +498,41 @@ struct pldm_component_image_information {
 	uint8_t comp_version_string_length;
 } __attribute__((packed));
 
+struct pldm_component_image_information_iter {
+	struct variable_field field;
+	size_t count;
+};
+
+LIBPLDM_ITERATOR
+bool pldm_component_image_information_iter_end(
+	const struct pldm_component_image_information_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_component_image_information_iter_next(
+	struct pldm_component_image_information_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+int decode_pldm_component_image_information_from_iter(
+	struct pldm_component_image_information_iter *iter,
+	struct pldm_component_image_information *compInfo);
+
+#define foreach_pldm_component_image_information(devs, dev, rc)                \
+	for ((rc) = 0;                                                         \
+	     (!pldm_component_image_information_iter_end(&(devs)) &&           \
+	      !((rc) = decode_pldm_component_image_information_from_iter(      \
+			&(devs), &(dev))));                                    \
+	     pldm_component_image_information_iter_next(&(devs)))
+
 /** @struct pldm_query_device_identifiers_resp
  *
  *  Structure representing query device identifiers response.
@@ -1075,6 +1110,51 @@ int decode_firmware_device_id_record(
 	struct variable_field *record_descriptors,
 	struct variable_field *fw_device_pkg_data);
 
+struct pldm_firmware_device_id_iter {
+	struct variable_field field;
+	size_t count;
+};
+
+int decode_query_firmware_device_id_records(
+	const uint8_t *msg, size_t length,
+	struct pldm_firmware_device_id_iter *iter);
+
+LIBPLDM_ITERATOR
+bool pldm_firmware_device_id_iter_end(
+	const struct pldm_firmware_device_id_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_firmware_device_id_iter_next(struct pldm_firmware_device_id_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+int decode_pldm_firmware_device_id_from_iter(
+	struct pldm_firmware_device_id_iter *iter,
+	struct pldm_firmware_device_id_record *dev);
+
+#define foreach_pldm_firmware_device_id_record(devs, dev, rc)                  \
+	for ((rc) = 0; (!pldm_firmware_device_id_iter_end(&(devs)) &&          \
+			!((rc) = decode_pldm_firmware_device_id_from_iter(     \
+				  &(devs), &(dev))));                          \
+	     pldm_firmware_device_id_iter_next(&(devs)))
+
+struct pldm_descriptor_tlv_iter {
+	struct variable_field field;
+	size_t count;
+};
+
+int decode_query_firmware_descriptor_records(const uint8_t *data, size_t length,
+					     struct pldm_descriptor_iter *iter);
+
 /** @brief Decode the record descriptor entries in the firmware update package
  *         and the Descriptors in the QueryDeviceIDentifiers command
  *
@@ -1088,6 +1168,12 @@ int decode_firmware_device_id_record(
 int decode_descriptor_type_length_value(const uint8_t *data, size_t length,
 					uint16_t *descriptor_type,
 					struct variable_field *descriptor_data);
+
+#define foreach_pldm_firmware_descriptor_record(devs, dev, rc)                 \
+	for ((rc) = 0;                                                         \
+	     (!pldm_descriptor_iter_end(&(devs)) &&                            \
+	      !((rc) = decode_pldm_descriptor_from_iter(&(devs), &(dev))));    \
+	     pldm_descriptor_iter_next(&(devs)))
 
 /** @brief Decode the vendor defined descriptor value
  *

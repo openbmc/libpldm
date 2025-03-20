@@ -30,6 +30,10 @@ Change categories:
 
 - base: Define the minimum request bytes for SetTID command.
 
+- Add new functions for decoding firmware device identification.
+
+- Add new functions for decoding component image information.
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
