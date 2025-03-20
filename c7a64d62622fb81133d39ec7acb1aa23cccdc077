@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "104f7633_6f5661f8",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2274,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-03-20T20:31:51Z",
+      "side": 1,
+      "message": "I was able to figure out the flow from the code but please consider adding an UT for the above case.",
+      "parentUuid": "c020b9f6_b97cfdb9",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "455f9894_fa00c20e",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 1
