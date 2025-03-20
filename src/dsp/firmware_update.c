@@ -513,7 +513,41 @@ int decode_firmware_device_id_record(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_TESTING
+int decode_pldm_firmware_device_id_from_iter(
+	struct pldm_firmware_device_id_iter *iter,
+	struct pldm_firmware_device_id_record *dev)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (!iter || !iter->count || !dev) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN,
+				    iter->field.ptr, iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, dev->record_length);
+	pldm_msgbuf_extract(buf, dev->descriptor_count);
+	uint32_t bf = 0;
+	pldm_msgbuf_extract(buf, bf);
+	dev->device_update_option_flags.value = bf;
+	pldm_msgbuf_extract(buf, dev->comp_image_set_version_string_type);
+	pldm_msgbuf_extract(buf, dev->comp_image_set_version_string_length);
+	pldm_msgbuf_extract(buf, dev->fw_device_pkg_data_length);
+
+	iter->field.ptr += dev->record_length;
+	iter->field.length -= dev->record_length;
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
 int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
 				     struct pldm_descriptor *desc)
 {
@@ -644,6 +678,49 @@ static int decode_vendor_defined_descriptor_value_errno(
 		descriptor_title_str->length;
 
 	return 0;
+}
+LIBPLDM_ABI_TESTING
+int decode_pldm_component_image_information_from_iter(
+	struct pldm_component_image_information_iter *iter,
+	struct pldm_component_image_information *comp)
+{
+	//TODO
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	int rc;
+
+	if (!iter || !iter->field.ptr || !comp) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN,
+				    iter->field.ptr, iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, comp->comp_classification);
+	pldm_msgbuf_extract(buf, comp->comp_identifier);
+	pldm_msgbuf_extract(buf, comp->comp_comparison_stamp);
+	pldm_msgbuf_extract(buf, comp->comp_options.value);
+	pldm_msgbuf_extract(buf, comp->requested_comp_activation_method.value);
+	pldm_msgbuf_extract(buf, comp->comp_location_offset);
+	pldm_msgbuf_extract(buf, comp->comp_size);
+	pldm_msgbuf_extract(buf, comp->comp_version_string_type);
+	pldm_msgbuf_extract(buf, comp->comp_version_string_length);
+
+	if (rc) {
+		return rc;
+	}
+
+	char *str = NULL;
+	pldm_msgbuf_span_required(buf, comp->comp_version_string_length,
+				  (void **)&str);
+	iter->field.ptr = NULL;
+	pldm_msgbuf_span_remaining(buf, (void **)&iter->field.ptr,
+				   &iter->field.length);
+
+	return pldm_msgbuf_destroy(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -1289,7 +1366,46 @@ int encode_query_downstream_identifiers_req(
 	return pldm_msgbuf_destroy(buf);
 }
 
-LIBPLDM_ABI_STABLE
+// refer DSP0267 Table 3, iterate over FirmwareDeviceIDRecords
+LIBPLDM_ABI_TESTING
+int decode_query_firmware_device_id_records(
+	const uint8_t *msg, size_t payload_length,
+	struct pldm_firmware_device_id_iter *iter)
+{
+	struct pldm_msgbuf _buf;
+	struct pldm_msgbuf *buf = &_buf;
+	const void *remaining = msg + sizeof(uint8_t);
+	int rc = 0;
+
+	if (msg == NULL || iter == NULL || !payload_length) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_OPTIONAL_COMMAND_RESP_MIN_LEN,
+				    msg, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	uint8_t count;
+	rc = pldm_msgbuf_extract(buf, count);
+	if (rc) {
+		return rc;
+	}
+	iter->count = count;
+
+	rc = pldm_msgbuf_destroy(buf);
+	if (rc) {
+		return rc;
+	}
+
+	iter->field.ptr = remaining;
+	iter->field.length = payload_length;
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
 int decode_query_downstream_identifiers_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_query_downstream_identifiers_resp *resp_data,

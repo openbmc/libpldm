@@ -32,6 +32,10 @@ Change categories:
 
 - pdr: Add pldm_pdr_delete_by_record_handle() API
 
+- Add new functions for decoding firmware device identification.
+
+- Add new functions for decoding component image information.
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
