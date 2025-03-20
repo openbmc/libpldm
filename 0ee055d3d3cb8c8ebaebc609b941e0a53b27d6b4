@@ -69,6 +69,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "055bbda0_fdd14d2a",
+        "filename": "include/libpldm/bindings/cpp/package_parser.hpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-03-20T15:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b0840f8_e5ef7eb3",
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c75d67a_16c6ecb0",
@@ -92,6 +110,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8763876c_3ede4af0",
+        "filename": "include/libpldm/bindings/cpp/package_parser.hpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-03-20T15:36:59Z",
+      "side": 1,
+      "message": "Changed them to ```struct```.",
+      "parentUuid": "2c75d67a_16c6ecb0",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 3
+      },
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f206ae4_5e8154a4",
@@ -105,6 +147,30 @@
       "writtenOn": "2025-01-28T01:01:04Z",
       "side": 1,
       "message": "What\u0027s the benefit to defining this as a static method on a class vs defining a free function that calls into `validatePkgTotalSize()` as a static free function defined in the same translation unit?",
+      "range": {
+        "startLine": 69,
+        "startChar": 1,
+        "endLine": 73,
+        "endChar": 33
+      },
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a669fdff_17feb8e2",
+        "filename": "include/libpldm/bindings/cpp/package_parser.hpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-03-20T15:36:59Z",
+      "side": 1,
+      "message": "Right, better not expose this in the header. Moved it to the .cpp and declared as static.",
+      "parentUuid": "2f206ae4_5e8154a4",
       "range": {
         "startLine": 69,
         "startChar": 1,
@@ -248,6 +314,24 @@
       "writtenOn": "2025-01-28T01:01:04Z",
       "side": 1,
       "message": "Similar to the header naming, I think this should be `firmware_update.cpp` for now.",
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af23e515_48f22d6c",
+        "filename": "tests/bindings/cpp/package_parser_test.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-03-20T15:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d374d875_9aa2545f",
       "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
