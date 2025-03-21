@@ -1373,4 +1373,97 @@ static inline int pldm_msgbuf_typecheck_real32_t(struct pldm_msgbuf *ctx,
 }
 #endif
 
+/**
+ * @brief pldm_msgbuf uint8_t extractor for a size_t
+ *
+ * @param[in,out] ctx - pldm_msgbuf context for extractor
+ * @param[out] dst - destination of extracted value
+ *
+ * @return 0 if buffer accesses were in-bounds,
+ * -EINVAL if dst pointer is invalid,
+ * -EOVERFLOW is the buffer was out of bound.
+ */
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_extract_uint8_to_size(struct pldm_msgbuf *ctx, size_t *dst)
+{
+	uint8_t value;
+	int rc;
+
+	if (!dst) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_extract_uint8(ctx, value);
+	if (rc) {
+		return rc;
+	}
+
+	static_assert(SIZE_MAX >= UINT8_MAX, "Invalid promotion");
+
+	*dst = value;
+	return 0;
+}
+
+/**
+   * @brief pldm_msgbuf uint16_t extractor for a size_t
+   *
+   * @param[in,out] ctx - pldm_msgbuf context for extractor
+   * @param[out] dst - destination of extracted value
+   *
+   * @return 0 if buffer accesses were in-bounds,
+   * -EINVAL if dst pointer is invalid,
+   * -EOVERFLOW is the buffer was out of bound.
+   */
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_extract_uint16_to_size(struct pldm_msgbuf *ctx, size_t *dst)
+{
+	uint16_t value;
+	int rc;
+
+	if (!dst) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_extract_uint16(ctx, value);
+	if (rc) {
+		return rc;
+	}
+
+	static_assert(SIZE_MAX >= UINT8_MAX, "Invalid promotion");
+
+	*dst = value;
+	return 0;
+}
+
+/**
+   * @brief pldm_msgbuf uint32_t extractor for a size_t
+   *
+   * @param[in,out] ctx - pldm_msgbuf context for extractor
+   * @param[out] dst - destination of extracted value
+   *
+   * @return 0 if buffer accesses were in-bounds,
+   * -EINVAL if dst pointer is invalid,
+   * -EOVERFLOW is the buffer was out of bound.
+   */
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_extract_uint32_to_size(struct pldm_msgbuf *ctx, size_t *dst)
+{
+	uint32_t value;
+	int rc;
+
+	if (!dst) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_extract_uint32(ctx, value);
+	if (rc) {
+		return rc;
+	}
+
+	static_assert(SIZE_MAX >= UINT8_MAX, "Invalid promotion");
+
+	*dst = value;
+	return 0;
+}
+
 #endif /* BUF_H */
