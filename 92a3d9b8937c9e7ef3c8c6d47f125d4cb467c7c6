@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c561f717_5578314b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-03-21T09:11:52Z",
+      "side": 1,
+      "message": "This check is redundant and can be removed as it\u0027s already validated in decode_pldm_package_header_info_errno()",
+      "revId": "92a3d9b8937c9e7ef3c8c6d47f125d4cb467c7c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab680a3_c8414a53",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-03-21T09:11:52Z",
+      "side": 1,
+      "message": "This one should also be removed as it\u0027s validated in decode_pldm_package_header_info_errno()",
+      "revId": "92a3d9b8937c9e7ef3c8c6d47f125d4cb467c7c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
