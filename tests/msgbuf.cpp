@@ -1439,3 +1439,123 @@ TEST(msgbuf, pldm_msgbuf_copy_utf16_unterminated_src)
     ASSERT_EQ(pldm_msgbuf_destroy(dst), 0);
     ASSERT_EQ(pldm_msgbuf_destroy(src), -EOVERFLOW);
 }
+
+TEST(msgbuf, extract_one_uint8_to_size)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    uint8_t buf[1] = {0xa5};
+
+    size_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint8_to_size(ctx, &val), 0);
+    EXPECT_EQ(val, 0xa5);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), 0);
+}
+
+TEST(msgbuf, extract_under_uint8_to_size)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint8_t buf[1] = {};
+    size_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_extract_uint8_to_size(ctx, &val), 0);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), -EOVERFLOW);
+}
+
+TEST(msgbuf, extract_over_uint8_to_size)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    uint8_t buf[1] = {};
+    size_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
+    EXPECT_NE(pldm_msgbuf_extract_uint8_to_size(ctx, &val), 0);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), -EOVERFLOW);
+}
+
+TEST(msgbuf, extract_one_uint16_to_size)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    uint16_t buf[1] = {htole16(0x5aa5)};
+
+    size_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16_to_size(ctx, &val), 0);
+    EXPECT_EQ(val, 0x5aa5);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), 0);
+}
+
+TEST(msgbuf, extract_under_uint16_to_size)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint16_t buf[1] = {};
+    size_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_extract_uint16_to_size(ctx, &val), 0);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), -EOVERFLOW);
+}
+
+TEST(msgbuf, extract_over_uint16_to_size)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    uint16_t buf[1] = {};
+    size_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
+    EXPECT_NE(pldm_msgbuf_extract_uint16_to_size(ctx, &val), 0);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), -EOVERFLOW);
+}
+
+TEST(msgbuf, extract_one_uint32_to_size)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    uint32_t buf[1] = {htole32(0x5a00ffa5)};
+
+    size_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint32_to_size(ctx, &val), 0);
+    EXPECT_EQ(val, 0x5a00ffa5);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), 0);
+}
+
+TEST(msgbuf, extract_under_uint32_to_size)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+
+    uint32_t buf[1] = {};
+    size_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_extract_uint32_to_size(ctx, &val), 0);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), -EOVERFLOW);
+}
+
+TEST(msgbuf, extract_over_uint32_to_size)
+{
+    struct pldm_msgbuf _ctx;
+    struct pldm_msgbuf* ctx = &_ctx;
+    uint32_t buf[1] = {};
+    size_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
+    EXPECT_NE(pldm_msgbuf_extract_uint32_to_size(ctx, &val), 0);
+    EXPECT_EQ(pldm_msgbuf_destroy(ctx), -EOVERFLOW);
+}
