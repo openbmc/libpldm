@@ -1309,6 +1309,99 @@ pldm_msgbuf_copy_string_utf16(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
 	return pldm__msgbuf_insert_array_void(dst, len, utf16, len);
 }
 
+#define pldm_msgbuf_extract_uint8_to_size(ctx, dst)                            \
+	pldm__msgbuf_extract_uint8_to_size(ctx, &(dst))
+/**
+ * @brief pldm_msgbuf uint8_t extractor for a size_t
+ *
+ * @param[in,out] ctx - pldm_msgbuf context for extractor
+ * @param[out] dst - destination of extracted value
+ *
+ * @return 0 if buffer accesses were in-bounds,
+ * -EINVAL if dst pointer is invalid,
+ * -EOVERFLOW is the buffer was out of bound.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm__msgbuf_extract_uint8_to_size(struct pldm_msgbuf *ctx, size_t *dst)
+{
+	uint8_t value;
+	int rc;
+
+	rc = pldm__msgbuf_extract_uint8(ctx, &value);
+	if (rc) {
+		return rc;
+	}
+
+	static_assert(SIZE_MAX >= UINT8_MAX, "Invalid promotion");
+
+	*dst = value;
+	return 0;
+}
+
+#define pldm_msgbuf_extract_uint16_to_size(ctx, dst)                           \
+	pldm__msgbuf_extract_uint16_to_size(ctx, &(dst))
+/**
+ * @brief pldm_msgbuf uint16_t extractor for a size_t
+ *
+ * @param[in,out] ctx - pldm_msgbuf context for extractor
+ * @param[out] dst - destination of extracted value
+ *
+ * @return 0 if buffer accesses were in-bounds,
+ * -EINVAL if dst pointer is invalid,
+ * -EOVERFLOW is the buffer was out of bound.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm__msgbuf_extract_uint16_to_size(struct pldm_msgbuf *ctx, size_t *dst)
+{
+	uint16_t value;
+	int rc;
+
+	rc = pldm__msgbuf_extract_uint16(ctx, &value);
+	if (rc) {
+		return rc;
+	}
+
+	static_assert(SIZE_MAX >= UINT16_MAX, "Invalid promotion");
+
+	*dst = value;
+	return 0;
+}
+
+#define pldm_msgbuf_extract_uint32_to_size(ctx, dst)                           \
+	pldm__msgbuf_extract_uint32_to_size(ctx, &(dst))
+/**
+ * @brief pldm_msgbuf uint32_t extractor for a size_t
+ *
+ * @param[in,out] ctx - pldm_msgbuf context for extractor
+ * @param[out] dst - destination of extracted value
+ *
+ * @return 0 if buffer accesses were in-bounds,
+ * -EINVAL if dst pointer is invalid,
+ * -EOVERFLOW is the buffer was out of bound.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm__msgbuf_extract_uint32_to_size(struct pldm_msgbuf *ctx, size_t *dst)
+{
+	uint32_t value;
+	int rc;
+
+	rc = pldm__msgbuf_extract_uint32(ctx, &value);
+	if (rc) {
+		return rc;
+	}
+
+	static_assert(SIZE_MAX >= UINT32_MAX, "Invalid promotion");
+
+	*dst = value;
+	return 0;
+}
+
 #ifdef __cplusplus
 }
 #endif
