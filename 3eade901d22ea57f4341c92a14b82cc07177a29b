@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74c314e_7ee20f9c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-03-21T08:35:59Z",
+      "side": 1,
+      "message": "Since length of UUID is not defined as fixed explicitly in the spec, should we avoid hardcoding it to 17 here ?",
+      "revId": "3eade901d22ea57f4341c92a14b82cc07177a29b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
