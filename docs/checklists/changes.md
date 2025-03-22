@@ -46,6 +46,12 @@
 [command-center-byte-order-fallacy]:
   https://commandcenter.blogspot.com/2012/04/byte-order-fallacy.html
 
+- [what’s the most annoying thing about writing C - Jessica
+  Paquette][barrelshifter-annoying-c]
+
+[barrelshifter-annoying-c]:
+  https://mastodon.social/@barrelshifter/114016810912730423
+
 ## References
 
 - [The C programming language - C Standards Committee][c-language]
