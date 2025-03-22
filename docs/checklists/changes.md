@@ -52,6 +52,12 @@
 [barrelshifter-annoying-c]:
   https://mastodon.social/@barrelshifter/114016810912730423
 
+- [The Power of Ten: Rules for Developing Safety Critical Code - NASA/JPL
+  Laboratory for Reliable Software][nasa-reliable-code]
+
+[nasa-reliable-code]:
+  https://www.cs.otago.ac.nz/cosc345/resources/nasa-10-rules.pdf
+
 ## References
 
 - [The C programming language - C Standards Committee][c-language]
