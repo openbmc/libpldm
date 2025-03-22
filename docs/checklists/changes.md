@@ -48,10 +48,9 @@
 
 ## References
 
-- [C17 draft standard][c17-draft-standard]
+- [The C programming language - C Standards Committee][c-language]
 
-[c17-draft-standard]:
-  https://web.archive.org/web/20181230041359if_/http://www.open-std.org/jtc1/sc22/wg14/www/abq/c17_updated_proposed_fdis.pdf
+[c-language]: https://www.c-language.org/
 
 - [SEI CERT C Coding Standard][sei-cert-c-coding-standard]
 
