@@ -16,6 +16,24 @@
       "message": "Hi Alexander, do you mind helping review the following series so we can get it merged?\n\nhttps://gerrit.openbmc.org/q/topic:%22type5-pkg-iters%22",
       "revId": "0ef44a8e3a4b73ea405b4223b65782223a0f241f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8c1ba9f_0bbb8940",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-03-24T16:09:37Z",
+      "side": 1,
+      "message": "Looked and voted on a few of the patches there 👍",
+      "parentUuid": "9d01ea04_e29c3020",
+      "revId": "0ef44a8e3a4b73ea405b4223b65782223a0f241f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
