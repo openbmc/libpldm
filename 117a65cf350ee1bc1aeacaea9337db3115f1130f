@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1405ebf7_a15ed19d",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dc01740_a95b0d34",
+      "range": {
+        "startLine": 2,
+        "startChar": 8,
+        "endLine": 2,
+        "endChar": 14
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "309adc4b_31796635",
@@ -54,6 +78,24 @@
       "writtenOn": "2025-03-19T02:13:28Z",
       "side": 1,
       "message": "What is this required for?",
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "470fb1e2_7c9c8470",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "309adc4b_31796635",
       "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9fc2d88_72c11f8d",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:57Z",
+      "side": 1,
+      "message": "Table 16 Section 9.7 in DSP0242 v1.0.0 mentions these as\n\n\u003e PLDM completion codes for file transfer that are beyond the scope of PLDM_BASE_CODES in DSP0240\n\nI think callers of DfOpen() would need these to handle each situation correspondingly.",
+      "parentUuid": "85407814_606c5076",
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "155c4ff0_dfc32f76",
         "filename": "include/libpldm/file.h",
         "patchSetId": 2
@@ -88,6 +148,30 @@
       "writtenOn": "2025-03-19T02:13:28Z",
       "side": 1,
       "message": "Please consistently apply the `pldm_file_` symbol prefix throughout:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L114-L116",
+      "range": {
+        "startLine": 50,
+        "startChar": 7,
+        "endLine": 50,
+        "endChar": 12
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "261d9516_a4a125f2",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "155c4ff0_dfc32f76",
       "range": {
         "startLine": 50,
         "startChar": 7,
@@ -121,6 +205,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aab763bc_e8b7688c",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1c4adc8_a0e04850",
+      "range": {
+        "startLine": 53,
+        "startChar": 1,
+        "endLine": 53,
+        "endChar": 26
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f4fa554_e2791700",
@@ -134,6 +242,30 @@
       "writtenOn": "2025-03-19T02:13:28Z",
       "side": 1,
       "message": "What about other errors, such as `-EOVERFLOW` if the provided destination buffer is too short?",
+      "range": {
+        "startLine": 70,
+        "startChar": 1,
+        "endLine": 71,
+        "endChar": 28
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e73c0091_5419ecb8",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f4fa554_e2791700",
       "range": {
         "startLine": 70,
         "startChar": 1,
@@ -167,6 +299,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a0bc0fb_ec6c038a",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09c97160_4f3ae956",
+      "range": {
+        "startLine": 83,
+        "startChar": 1,
+        "endLine": 84,
+        "endChar": 29
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f64c9705_bc69d3d7",
@@ -180,6 +336,30 @@
       "writtenOn": "2025-03-19T02:13:28Z",
       "side": 1,
       "message": "I prefer these are tested in the same order as the parameters in the function prototype.",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 24,
+        "endChar": 31
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fe54a79_22335ef0",
+        "filename": "src/dsp/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f64c9705_bc69d3d7",
       "range": {
         "startLine": 24,
         "startChar": 5,
@@ -213,6 +393,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c1191bd_0d718b39",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8548b45a_f57cb2cb",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 67
+      },
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "173185e4_2104c055",
@@ -232,6 +436,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f7737a6_80de85b1",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:57Z",
+      "side": 1,
+      "message": "I split bad test into various cases for this patch and the previous. Invalid memory allocation cases will be in the same function, and invalid input/output length will be in the same function. Please help review.",
+      "parentUuid": "173185e4_2104c055",
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31a23f64_ac4f2c69",
         "filename": "tests/dsp/file.cpp",
         "patchSetId": 2
@@ -243,6 +465,24 @@
       "writtenOn": "2025-03-19T02:13:28Z",
       "side": 1,
       "message": "See above.",
+      "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "447b8aa5_569a8971",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31a23f64_ac4f2c69",
       "revId": "117a65cf350ee1bc1aeacaea9337db3115f1130f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
