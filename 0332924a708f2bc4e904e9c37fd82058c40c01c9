@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0d220b8_8da7add3",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d71ba027_25e030f9",
+      "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd3a90fe_7533e9a5",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-03-19T01:47:00Z",
       "side": 1,
       "message": "As above.",
+      "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "317fc3a9_b1220610",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd3a90fe_7533e9a5",
       "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -60,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eeb84246_704c5b38",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3333,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:51Z",
+      "side": 1,
+      "message": "Updated. Please help review.",
+      "parentUuid": "dd2adf5b_27f611f5",
+      "range": {
+        "startLine": 3333,
+        "startChar": 5,
+        "endLine": 3333,
+        "endChar": 50
+      },
+      "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8efc3eeb_860b8f5f",
         "filename": "src/dsp/platform.c",
         "patchSetId": 9
@@ -71,6 +131,24 @@
       "writtenOn": "2025-03-19T01:47:00Z",
       "side": 1,
       "message": "Be wary of `pldm_msgbuf_span_string_ascii()` - it looks for a `NUL`-terminator in the message and should only be used if we don\u0027t know the length before-hand. DSP0248 does define this string as `NUL`-terminated, however, we\u0027ve extracted the length above on line 3333, no scanning for a null-terminator is required in practice. Instead you can use `pldm_msgbuf_span_required()` here.",
+      "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7471649a_247a30a7",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3338,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8efc3eeb_860b8f5f",
       "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -88,6 +166,24 @@
       "writtenOn": "2025-03-19T01:47:00Z",
       "side": 1,
       "message": "See comment above regarding `file_name`.",
+      "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f9b64f8_ce861b8b",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3356,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-24T10:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f795acba_b65a8640",
       "revId": "0332924a708f2bc4e904e9c37fd82058c40c01c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
