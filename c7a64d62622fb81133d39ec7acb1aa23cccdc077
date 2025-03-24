@@ -89,6 +89,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9026ec6_f4d9536c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-03-24T15:39:42Z",
+      "side": 1,
+      "message": "Looking into DSP0267_1.3.0.pdf, page 1011, \n\nTable 3 - PLDM Firmware Package Header\n\n```\nA value of 1244D2648D7D4718A030FC8A56587D5A shall indicate that the update package format\nconforms to Version 1.1\n```\n\nI\u0027m confused why the variable is named ```PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V2_0```\n\nIn the entire document i cannot find anything when looking for ```Version 2```\nand it seems to be the latest version of the document\n\nhttps://www.dmtf.org/standards/pmci",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "455f9894_fa00c20e",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 1
@@ -157,6 +174,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "acf05402_1612fe49",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3038,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-03-24T15:39:42Z",
+      "side": 1,
+      "message": "Looks like it discards the buffer and returns the passed error.\n```\n  int pldm_msgbuf_discard(struct pldm_msgbuf *ctx, int error)\n  {\n  |       ctx-\u003ecursor \u003d NULL;\n  |       pldm__msgbuf_invalidate(ctx);\n  |       return error;\n  }\n```\nand\n```\n  int pldm_msgbuf_discard(struct pldm_msgbuf *ctx, int error)\n  {\n  |       ctx-\u003ecursor \u003d NULL;\n  |       pldm__msgbuf_invalidate(ctx);\n  |       return error;\n  }\n```",
+      "parentUuid": "1ee96ddd_09c145b0",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da1e2e8b_9f1aee7f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3048,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-03-24T15:39:42Z",
+      "side": 1,
+      "message": "nit: Putting this constant in the middle of the file will make it harder to reorder and refactor functions later on.\n\nIt might just get lost or re-defined in such a long file.\n\nIf it\u0027s only needed for this one function, can it be defined as\n\n\n```\nconst unsigned int PLDM_FWUP_DOWNSTREAM_DEVICE_ID_RECORD_MIN_SIZE \u003d 11;\n```\n\ninside the function, to limit the scope.\n\nIf it\u0027s needed for multiple functions, maybe put it near the start of the file.",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4b2d466_5143fa8a",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 1
@@ -185,6 +237,57 @@
       "writtenOn": "2025-03-20T20:27:49Z",
       "side": 1,
       "message": "Decode for ComponentOpaqueData is missing",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be8f8622_bc866b0d",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-03-24T15:39:42Z",
+      "side": 1,
+      "message": "Looking into DSP0267_1.3.0.pdf, page 1011, \n\nTable 3 - PLDM Firmware Package Header\n\n```\nA value of 1244D2648D7D4718A030FC8A56587D5A shall indicate that the update package format\nconforms to Version 1.1\n```\n\nI\u0027m confused why the variable is named ```PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V2_0```\n\nIn the entire document i cannot find anything when looking for ```Version 2```\nand it seems to be the latest version of the document\n\nhttps://www.dmtf.org/standards/pmci",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8490c9b_6ec56a9d",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4643,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-03-24T15:39:42Z",
+      "side": 1,
+      "message": "```v1h1fd1fdd1cii``` is this some kind of shorthand to define the name of the testcase?\n\nDo we need a decoder program to translate to english 😄",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef71ee6d_50f9f49b",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4819,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-03-24T15:39:42Z",
+      "side": 1,
+      "message": "same comment about the testcase name ```v2h1fd1fdd1dd1ddd2cii```",
       "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
