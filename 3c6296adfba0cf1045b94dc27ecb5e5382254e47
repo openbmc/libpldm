@@ -94,6 +94,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21033a21_a30110c8",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-25T09:25:29Z",
+      "side": 1,
+      "message": "But `dst` will always be of `size_t` type, so caller has to specify the necessary function name to specify the extract type. What else should the wrapper do? typecheck for size_t?",
+      "parentUuid": "3026d602_f9eaed65",
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84535728_50b5520e",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
