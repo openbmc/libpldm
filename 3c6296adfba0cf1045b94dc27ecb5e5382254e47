@@ -112,6 +112,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "977c1866_6457ec80",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-25T23:17:38Z",
+      "side": 1,
+      "message": "Yes, take the address, and do a typecheck for `size_t`. I\u0027d like the behaviour match the existing `_extract()` macros. Otherwise we should call it `pldm_msgbuf_extract_uint8_to_size_p()` (`p` for \"pointer\"). I\u0027d rather not do the latter.",
+      "parentUuid": "21033a21_a30110c8",
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84535728_50b5520e",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
@@ -147,6 +165,30 @@
       "side": 1,
       "message": "When these functions use `pldm_msgbuf_extract()`, it fails with the below msg unless I put them inside #ifndef __cplusplus. I think something is wrong.\n\n\u003e error: ‘_Generic’ was not declared in this scope",
       "parentUuid": "84535728_50b5520e",
+      "range": {
+        "startLine": 1379,
+        "startChar": 6,
+        "endLine": 1379,
+        "endChar": 31
+      },
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "732ceee1_f9c6eaca",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-25T23:17:38Z",
+      "side": 1,
+      "message": "`_Generic` is not specified by C++. If you\u0027re hitting that error you\u0027re trying to compile the translation unit including the header with a C++ compiler. That should never happen in the library implementation as it\u0027s all C, and for the tests, you should be testing these APIs in `tests/msgbuf_generic.c` (for this reason).",
+      "parentUuid": "69d3eb32_d8f63666",
       "range": {
         "startLine": 1379,
         "startChar": 6,
