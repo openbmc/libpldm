@@ -117,6 +117,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69d3eb32_d8f63666",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-25T09:23:06Z",
+      "side": 1,
+      "message": "When these functions use `pldm_msgbuf_extract()`, it fails with the below msg unless I put them inside #ifndef __cplusplus. I think something is wrong.\n\n\u003e error: ‘_Generic’ was not declared in this scope",
+      "parentUuid": "84535728_50b5520e",
+      "range": {
+        "startLine": 1379,
+        "startChar": 6,
+        "endLine": 1379,
+        "endChar": 31
+      },
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2c27e8e_15c30b9e",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
