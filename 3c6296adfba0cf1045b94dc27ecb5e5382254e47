@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0afc5148_e0a0ce25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-25T00:53:42Z",
+      "side": 1,
+      "message": "Try to avoid \"this commit\" - hopefully the message is about the commit it\u0027s written in 😊\n\nThis can instead be:\n\n\u003e Add `pldm_msgbuf_extract_uint8_to_size()`",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9337934_8936c1af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-25T00:53:42Z",
+      "side": 1,
+      "message": "Hi Chau, thanks for taking this up. I have a few requests inline.",
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9823e866_bb2723f5",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-25T00:53:42Z",
+      "side": 1,
+      "message": "Please let\u0027s avoid unrelated whitespace changes.",
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca84d8ff_f187dfee",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-25T00:53:42Z",
+      "side": 1,
+      "message": "Can you please put this code above the C++ typecheck functions on line 1294",
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3026d602_f9eaed65",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-25T00:53:42Z",
+      "side": 1,
+      "message": "For consistency I think it would be nice to add the macro wrapper to take the address of `dst` and rename this function to `pldm__msgbuf_extract_uint8_to_size` (double-underscore)",
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84535728_50b5520e",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-25T00:53:42Z",
+      "side": 1,
+      "message": "This can just be `pldm_msgbuf_extract()` - the type is defined by `value` and the call will be correctly dispatched thanks to the `_Generic()` macro.",
+      "range": {
+        "startLine": 1379,
+        "startChar": 6,
+        "endLine": 1379,
+        "endChar": 31
+      },
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2c27e8e_15c30b9e",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-25T00:53:42Z",
+      "side": 1,
+      "message": "Above this line, can you add:\n\n```\nstatic_assert(SIZE_MAX \u003e\u003d UINT8_MAX, \"Invalid promotion\");\n```\n\nAnd similarly for the other implementations",
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
