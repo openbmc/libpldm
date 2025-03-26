@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6d8fb16c_4201e84a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T04:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0afc5148_e0a0ce25",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b9337934_8936c1af",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -58,6 +82,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26e634ee_0c236596",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T04:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9823e866_bb2723f5",
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca84d8ff_f187dfee",
@@ -71,6 +113,24 @@
       "writtenOn": "2025-03-25T00:53:42Z",
       "side": 1,
       "message": "Can you please put this code above the C++ typecheck functions on line 1294",
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c75e6985_834eacff",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T04:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca84d8ff_f187dfee",
       "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -124,6 +184,24 @@
       "side": 1,
       "message": "Yes, take the address, and do a typecheck for `size_t`. I\u0027d like the behaviour match the existing `_extract()` macros. Otherwise we should call it `pldm_msgbuf_extract_uint8_to_size_p()` (`p` for \"pointer\"). I\u0027d rather not do the latter.",
       "parentUuid": "21033a21_a30110c8",
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea18e22_b20aa32e",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T04:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "977c1866_6457ec80",
       "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -295,6 +373,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd1038b7_fc1e6bbb",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T04:23:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9b39d1c2_46cac127",
+      "range": {
+        "startLine": 1379,
+        "startChar": 6,
+        "endLine": 1379,
+        "endChar": 31
+      },
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2c27e8e_15c30b9e",
@@ -308,6 +410,24 @@
       "writtenOn": "2025-03-25T00:53:42Z",
       "side": 1,
       "message": "Above this line, can you add:\n\n```\nstatic_assert(SIZE_MAX \u003e\u003d UINT8_MAX, \"Invalid promotion\");\n```\n\nAnd similarly for the other implementations",
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "302ef0d4_d7651e66",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T04:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2c27e8e_15c30b9e",
       "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
