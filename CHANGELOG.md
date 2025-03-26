@@ -43,6 +43,8 @@ Change categories:
 
 - file: Add encode req & decode resp for DfOpen command.
 
+- file: Add encode req & decode resp for DfClose command.
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
