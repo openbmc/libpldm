@@ -249,6 +249,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b295622_37b53e9b",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T03:31:15Z",
+      "side": 1,
+      "message": "Would you prefer putting them inside #ifndef __cplusplus? Otherwise, it has to be placed at the end to be able to use the c++ `pldm_msgbuf_typecheck_*` APIs, contradicting to your [comment](https://gerrit.openbmc.org/c/openbmc/libpldm/+/79130/comment/ca84d8ff_f187dfee/), as it will be built in the .cpp test files.",
+      "parentUuid": "4b2a007b_82ebba47",
+      "range": {
+        "startLine": 1379,
+        "startChar": 6,
+        "endLine": 1379,
+        "endChar": 31
+      },
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2c27e8e_15c30b9e",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
