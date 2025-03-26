@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b1f1149_5d419017",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T08:44:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80e4f1d8_c4144073",
+      "range": {
+        "startLine": 667,
+        "startChar": 32,
+        "endLine": 667,
+        "endChar": 65
+      },
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ae0237d_9f8857df",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-03-26T05:14:33Z",
       "side": 1,
       "message": "Are there other errors that can be returned? If so they should be documented.",
+      "range": {
+        "startLine": 681,
+        "startChar": 26,
+        "endLine": 682,
+        "endChar": 29
+      },
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6530a86_9cb130f0",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T08:44:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ae0237d_9f8857df",
       "range": {
         "startLine": 681,
         "startChar": 26,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85383d68_136fb515",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T08:44:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c77caea9_0ac85029",
+      "range": {
+        "startLine": 567,
+        "startChar": 5,
+        "endLine": 567,
+        "endChar": 31
+      },
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f36359e_2948cc49",
@@ -100,6 +172,30 @@
       "writtenOn": "2025-03-26T05:14:33Z",
       "side": 1,
       "message": "You can eliminate some of the noise here by direct struct initialisation:\n\n```\nconst struct pldm_multipart_receive_req req_data \u003d {\n    PLDM_BASE, PLDM_XFER_FIRST_PART, 0x1, 0x10, 0, 0x10\n};\n```\n\nAnd then e.g.\n\n```\n...\nEXPECT_EQ(request-\u003epldm_type, req_data-\u003epldm_type);\n...\n```\n\nConsider applying that throughout.",
+      "range": {
+        "startLine": 767,
+        "startChar": 0,
+        "endLine": 777,
+        "endChar": 58
+      },
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c02fbbb_ac1d3969",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T08:44:28Z",
+      "side": 1,
+      "message": "ACK. But I also constructed an array to be compared with the requestMsg at the end, just like what was done for EncodeDfOpenReq as you suggested here https://gerrit.openbmc.org/c/openbmc/libpldm/+/78996/comment/8548b45a_f57cb2cb/",
+      "parentUuid": "0f36359e_2948cc49",
       "range": {
         "startLine": 767,
         "startChar": 0,
@@ -127,6 +223,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e9399c7_a01936db",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 940,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T08:44:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7929265_fc625f1a",
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96412b37_a52060cd",
@@ -140,6 +254,24 @@
       "writtenOn": "2025-03-26T05:14:33Z",
       "side": 1,
       "message": "See comment above.",
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ec1f574_fbe2a625",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T08:44:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96412b37_a52060cd",
       "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
