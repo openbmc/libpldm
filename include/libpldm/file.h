@@ -12,10 +12,12 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 
-#define PLDM_DF_OPEN_REQ_BYTES	 4
-#define PLDM_DF_OPEN_RESP_BYTES	 3
-#define PLDM_DF_CLOSE_REQ_BYTES	 4
-#define PLDM_DF_CLOSE_RESP_BYTES 1
+#define PLDM_DF_OPEN_REQ_BYTES	     4
+#define PLDM_DF_OPEN_RESP_BYTES	     3
+#define PLDM_DF_CLOSE_REQ_BYTES	     4
+#define PLDM_DF_CLOSE_RESP_BYTES     1
+#define PLDM_DF_HEARTBEAT_REQ_BYTES  6
+#define PLDM_DF_HEARTBEAT_RESP_BYTES 5
 
 /** @brief PLDM File Transfer Completion Code */
 enum pldm_file_cc {
@@ -77,6 +79,24 @@ struct pldm_file_df_close_req {
  */
 struct pldm_file_df_close_resp {
 	uint8_t completion_code;
+};
+
+/** @struct pldm_file_df_heartbeat_req
+ *
+ *  Structure representing PLDM File DfHeartbeat request.
+ */
+struct pldm_file_df_heartbeat_req {
+	uint16_t file_descriptor;
+	uint32_t requester_max_interval;
+};
+
+/** @struct pldm_file_df_heartbeat_resp
+ *
+ *  Structure representing PLDM File DfHearbeat response.
+ */
+struct pldm_file_df_heartbeat_resp {
+	uint8_t completion_code;
+	uint32_t responder_max_interval;
 };
 
 /** @brief Create a PLDM request message for DFOpen
@@ -142,6 +162,40 @@ int encode_pldm_file_df_close_req(uint8_t instance_id,
 int decode_pldm_file_df_close_resp(const struct pldm_msg *msg,
 				   size_t payload_length,
 				   struct pldm_file_df_close_resp *resp);
+
+/** @brief Create a PLDM request message for DFHeartbeat
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - The pointer to the request message to be encoded
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of the request message payload
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated,
+ *          or message type or instance in request header is invalid
+ *          -ENOMSG if the PLDM type in the request header is invalid
+ *          -EOVERFLOW if the input message length is invalid
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_pldm_file_df_heartbeat_req(
+	uint8_t instance_id, const struct pldm_file_df_heartbeat_req *req,
+	struct pldm_msg *msg, size_t payload_length);
+
+/** @brief Decode DFHeartbeat response data
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] resp - pointer to the decoded response message
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated
+ *          -EOVERFLOW if the input message buffer is too short for the output
+ *          response struct
+ *          -EBADMSG if the input message buffer is too large for the output
+ *          response struct
+*/
+int decode_pldm_file_df_heartbeat_resp(const struct pldm_msg *msg,
+				       size_t payload_length,
+				       struct pldm_file_df_heartbeat_resp *resp);
 
 #ifdef __cplusplus
 }
