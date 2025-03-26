@@ -45,6 +45,8 @@ Change categories:
 
 - file: Add encode req & decode resp for DfClose command.
 
+- file: Add encode req & decode resp for DfHeartbeat command.
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
