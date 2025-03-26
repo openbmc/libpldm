@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df6557ec_7777b76d",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T04:24:45Z",
+      "side": 1,
+      "message": "Done. Did similarly for patch https://gerrit.openbmc.org/c/openbmc/libpldm/+/78851/12",
+      "parentUuid": "0e76cfe1_aa010086",
+      "range": {
+        "startLine": 628,
+        "startChar": 1,
+        "endLine": 631,
+        "endChar": 1
+      },
+      "revId": "f4a39964a9abece02e40dd2e40e51532eff1774f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d38b68b_99586a92",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-03-25T01:06:07Z",
       "side": 1,
       "message": "I think this test is unnecessary.",
+      "range": {
+        "startLine": 647,
+        "startChar": 2,
+        "endLine": 649,
+        "endChar": 3
+      },
+      "revId": "f4a39964a9abece02e40dd2e40e51532eff1774f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24b8480f_3e21499e",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T04:24:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d38b68b_99586a92",
       "range": {
         "startLine": 647,
         "startChar": 2,
