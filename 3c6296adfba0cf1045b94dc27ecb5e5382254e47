@@ -225,6 +225,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b2a007b_82ebba47",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-26T03:22:28Z",
+      "side": 1,
+      "message": "Ugh, yeah, okay. Obviously I didn\u0027t think that through enough! Sorry for the detour, leave it as you have it, though maybe add a comment about it so the question is answered for anyone wondering the same.",
+      "parentUuid": "87e2fa3c_4483ebab",
+      "range": {
+        "startLine": 1379,
+        "startChar": 6,
+        "endLine": 1379,
+        "endChar": 31
+      },
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2c27e8e_15c30b9e",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
