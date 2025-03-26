@@ -201,6 +201,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87e2fa3c_4483ebab",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T03:20:13Z",
+      "side": 1,
+      "message": "```\n LIBPLDM_CC_ALWAYS_INLINE int\n pldm__msgbuf_extract_uint8_to_size(struct pldm_msgbuf *ctx, size_t *dst)\n {\n\t uint8_t value;\n\t int rc;\n \n\t if (!dst) {\n\t\t return -EINVAL;\n\t }\n \n\t rc \u003d pldm_msgbuf_extract(ctx, value);\n\t if (rc) {\n\t\t return rc;\n\t }\n \n\t static_assert(SIZE_MAX \u003e\u003d UINT8_MAX, \"Invalid promotion\");\n \n\t *dst \u003d value;\n\t return 0;\n }\n \n#define pldm_msgbuf_extract_uint8_to_size(ctx, dst) \\\n\tpldm_msgbuf_extract_typecheck(size_t, pldm__msgbuf_extract_uint8_to_size, dst, ctx, \u0026(dst))\n```\n\nWith the above code added to msgbuf.hs at line 1294, when the test/*.cpp files include this msgbuf.h, the `pldm_msgbuf_extract()` line will be expanded and _Generic exposed. That\u0027s why it fails with the error unless I put it inside #ifndef __cplusplus, or make it a macro function.",
+      "parentUuid": "732ceee1_f9c6eaca",
+      "range": {
+        "startLine": 1379,
+        "startChar": 6,
+        "endLine": 1379,
+        "endChar": 31
+      },
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2c27e8e_15c30b9e",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
