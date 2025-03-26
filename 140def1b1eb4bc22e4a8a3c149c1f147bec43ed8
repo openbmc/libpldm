@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20365bf0_2467efa3",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 2583,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T08:51:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c341a405_6b21ed3d",
+      "range": {
+        "startLine": 2583,
+        "startChar": 2,
+        "endLine": 2583,
+        "endChar": 67
+      },
+      "revId": "140def1b1eb4bc22e4a8a3c149c1f147bec43ed8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e9930d8_ad5d95f8",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-03-26T05:28:38Z",
       "side": 1,
       "message": "This shouldn\u0027t be necessary, see comment on header.",
+      "range": {
+        "startLine": 3280,
+        "startChar": 1,
+        "endLine": 3284,
+        "endChar": 1
+      },
+      "revId": "140def1b1eb4bc22e4a8a3c149c1f147bec43ed8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64855471_76940986",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3284,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T08:51:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e9930d8_ad5d95f8",
       "range": {
         "startLine": 3280,
         "startChar": 1,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0c06c93_8c438558",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 5875,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T08:51:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff1973a1_55f0b304",
+      "range": {
+        "startLine": 5875,
+        "startChar": 34,
+        "endLine": 5875,
+        "endChar": 66
+      },
+      "revId": "140def1b1eb4bc22e4a8a3c149c1f147bec43ed8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a29fa137_13399de9",
@@ -100,6 +172,30 @@
       "writtenOn": "2025-03-26T05:28:38Z",
       "side": 1,
       "message": "The data for these tests is independent. Can you please split them into separate `TEST()` cases?",
+      "range": {
+        "startLine": 6071,
+        "startChar": 0,
+        "endLine": 6086,
+        "endChar": 30
+      },
+      "revId": "140def1b1eb4bc22e4a8a3c149c1f147bec43ed8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a9136c_eef44417",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 6086,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-26T08:51:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a29fa137_13399de9",
       "range": {
         "startLine": 6071,
         "startChar": 0,
