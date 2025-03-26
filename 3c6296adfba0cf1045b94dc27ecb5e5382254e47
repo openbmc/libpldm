@@ -273,6 +273,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b39d1c2_46cac127",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-26T03:36:52Z",
+      "side": 1,
+      "message": "No, please let\u0027s avoid more `#ifdef`ery where we can. Just use the typed function name as you have in the existing code.\n\nBut perhaps we can drop the typecheck from the macros I suggested. They\u0027re only required for unaligned stores. I\u0027m not yet aware of cases where we need that. Just define them to take the address of the `size_t` parameter\n\n```c\n#define pldm_msgbuf_extract_uint8_to_size(ctx, dst) \\\n    pldm__msgbuf_extract_uint8_to_size(ctx, \u0026(dst))\nLIBPLDM_CC_ALWAYS_INLINE int\npldm__msgbuf_extract_uint8_to_size(struct pldm_msgbuf *ctx, size_t *dst)\n{\n...\n}\n```",
+      "parentUuid": "4b295622_37b53e9b",
+      "range": {
+        "startLine": 1379,
+        "startChar": 6,
+        "endLine": 1379,
+        "endChar": 31
+      },
+      "revId": "3c6296adfba0cf1045b94dc27ecb5e5382254e47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2c27e8e_15c30b9e",
         "filename": "src/msgbuf.h",
         "patchSetId": 2
