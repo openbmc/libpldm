@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e85341c1_d2d3346a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-26T05:14:33Z",
+      "side": 1,
+      "message": "Hi Chau, broadly this looks good. I have a few thoughts in-line that I hope are straight-forward to resolve.",
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e4f1d8_c4144073",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-26T05:14:33Z",
+      "side": 1,
+      "message": "Can we please enumerate the specific errors here?",
+      "range": {
+        "startLine": 667,
+        "startChar": 32,
+        "endLine": 667,
+        "endChar": 65
+      },
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ae0237d_9f8857df",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-26T05:14:33Z",
+      "side": 1,
+      "message": "Are there other errors that can be returned? If so they should be documented.",
+      "range": {
+        "startLine": 681,
+        "startChar": 26,
+        "endLine": 682,
+        "endChar": 29
+      },
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c77caea9_0ac85029",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-26T05:14:33Z",
+      "side": 1,
+      "message": "Can we please test these in the order they\u0027re defined in the function parameter list?\n\n```\nif (req \u003d\u003d NULL || msg \u003d\u003d NULL) {\n```",
+      "range": {
+        "startLine": 567,
+        "startChar": 5,
+        "endLine": 567,
+        "endChar": 31
+      },
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f36359e_2948cc49",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-26T05:14:33Z",
+      "side": 1,
+      "message": "You can eliminate some of the noise here by direct struct initialisation:\n\n```\nconst struct pldm_multipart_receive_req req_data \u003d {\n    PLDM_BASE, PLDM_XFER_FIRST_PART, 0x1, 0x10, 0, 0x10\n};\n```\n\nAnd then e.g.\n\n```\n...\nEXPECT_EQ(request-\u003epldm_type, req_data-\u003epldm_type);\n...\n```\n\nConsider applying that throughout.",
+      "range": {
+        "startLine": 767,
+        "startChar": 0,
+        "endLine": 777,
+        "endChar": 58
+      },
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7929265_fc625f1a",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 940,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-26T05:14:33Z",
+      "side": 1,
+      "message": "`ASSERT_EQ(pldm_msgbuf_complete*(), 0);` must come _before_ the call into the `encode_*()` or `decode_*()` libpldm APIs, otherwise your test might be invalid. That is, this should be placed somewhere after line 926 and before line 930.",
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96412b37_a52060cd",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-26T05:14:33Z",
+      "side": 1,
+      "message": "See comment above.",
+      "revId": "4963fbb7481c4bfb8cb48c655bc91b063a10b68e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
