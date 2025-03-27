@@ -58,6 +58,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b9f64bc_d5dc5c95",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-27T03:45:58Z",
+      "side": 1,
+      "message": "Sorry, my rebase mistake. Done.",
+      "parentUuid": "7f189edc_bbda0518",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 38
+      },
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ed3131d_7e68e030",
@@ -71,6 +95,30 @@
       "writtenOn": "2025-03-27T00:27:39Z",
       "side": 1,
       "message": "These should be part of https://gerrit.openbmc.org/c/openbmc/libpldm/+/79200/3?usp\u003drelated-change ?",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 2
+      },
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "439d94e8_57ada020",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-27T03:45:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ed3131d_7e68e030",
       "range": {
         "startLine": 84,
         "startChar": 0,
@@ -104,6 +152,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e9801e_7989eb6e",
+        "filename": "src/dsp/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-27T03:45:58Z",
+      "side": 1,
+      "message": "That saves a lot of work. Updated. Thank you.",
+      "parentUuid": "73026f41_4f5121eb",
+      "range": {
+        "startLine": 126,
+        "startChar": 1,
+        "endLine": 140,
+        "endChar": 43
+      },
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6df13ac7_f971116d",
@@ -117,6 +189,24 @@
       "writtenOn": "2025-03-27T00:27:39Z",
       "side": 1,
       "message": "Please delete this 😊",
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "929e573d_42e41d7c",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-27T03:45:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6df13ac7_f971116d",
       "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -138,6 +228,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "834705ab_26c57d15",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-27T03:45:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03bb5a83_3b7a5640",
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d8d574c_71ae6c84",
@@ -151,6 +259,24 @@
       "writtenOn": "2025-03-27T00:27:39Z",
       "side": 1,
       "message": "This needs to be `ASSERT_EQ`. The test mustn\u0027t continue if `pldm_msgbuf_init_errno()` fails.\n\nPlease fix throughout.",
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4495499_586dc60b",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-03-27T03:45:58Z",
+      "side": 1,
+      "message": "Done. Updated elsewhere.",
+      "parentUuid": "4d8d574c_71ae6c84",
       "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
