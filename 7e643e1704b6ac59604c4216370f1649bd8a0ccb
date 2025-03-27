@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcfc7285_6e62e945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:31:42Z",
+      "side": 1,
+      "message": "Hi Chau, this looks good, but see comments on the prior patch for the bits that are missing from this one.",
+      "revId": "7e643e1704b6ac59604c4216370f1649bd8a0ccb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68e29a3b_f14555ec",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:31:42Z",
+      "side": 1,
+      "message": "Please delete this",
+      "revId": "7e643e1704b6ac59604c4216370f1649bd8a0ccb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
