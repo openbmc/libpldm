@@ -16,6 +16,143 @@
       "message": "Hi",
       "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be78e6dd_9a991369",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:27:39Z",
+      "side": 1,
+      "message": "Hi Chau, I\u0027ve made some suggestions inline.",
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f189edc_bbda0518",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:27:39Z",
+      "side": 1,
+      "message": "These should be part of https://gerrit.openbmc.org/c/openbmc/libpldm/+/79200/3?usp\u003drelated-change ?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 38
+      },
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ed3131d_7e68e030",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:27:39Z",
+      "side": 1,
+      "message": "These should be part of https://gerrit.openbmc.org/c/openbmc/libpldm/+/79200/3?usp\u003drelated-change ?",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 2
+      },
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73026f41_4f5121eb",
+        "filename": "src/dsp/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:27:39Z",
+      "side": 1,
+      "message": "I think we can take a short-cut here. How about we simplify to:\n\n```\nresp-\u003ecompletion_code \u003d pldm_msg_has_error(msg, payload_length);\nreturn 0;\n```",
+      "range": {
+        "startLine": 126,
+        "startChar": 1,
+        "endLine": 140,
+        "endChar": 43
+      },
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6df13ac7_f971116d",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:27:39Z",
+      "side": 1,
+      "message": "Please delete this 😊",
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03bb5a83_3b7a5640",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:27:39Z",
+      "side": 1,
+      "message": "Please delete this.",
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d8d574c_71ae6c84",
+        "filename": "tests/dsp/file.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:27:39Z",
+      "side": 1,
+      "message": "This needs to be `ASSERT_EQ`. The test mustn\u0027t continue if `pldm_msgbuf_init_errno()` fails.\n\nPlease fix throughout.",
+      "revId": "5a9e783860c2ec6084c6b67ed8a140930e43d2b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
