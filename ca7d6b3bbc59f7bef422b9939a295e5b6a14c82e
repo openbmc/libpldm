@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "410aa2ed_033a944d",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:14:10Z",
+      "side": 1,
+      "message": "Can we add the wrapper macros?\n\nFor this case:\n\n```c\n#define pldm_msgbuf_extract_uint8_to_size(ctx, dst) \\\n    pldm__msgbuf_extract_uint8_to_size(ctx, \u0026(dst)) \nLIBPLDM_CC_ALWAYS_INLINE int\npldm__msgbuf_extract_uint8_to_size(struct pldm_msgbuf *ctx, size_t *dst)\n{\n...\n}\n```\n\nThat way the call sites look the same as for the other extractors (no need to take the address of the destination in the call-site code).\n\nI mentioned this in the comment on PS2, though I guess it got lost in some of the discussion.\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/79130/comment/84535728_50b5520e/",
+      "revId": "ca7d6b3bbc59f7bef422b9939a295e5b6a14c82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "502928e3_37dad177",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:14:10Z",
+      "side": 1,
+      "message": "This must match the type we\u0027re extracting, `UINT16_MAX` in this case.",
+      "range": {
+        "startLine": 1432,
+        "startChar": 27,
+        "endLine": 1432,
+        "endChar": 36
+      },
+      "revId": "ca7d6b3bbc59f7bef422b9939a295e5b6a14c82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c2045f4_b71eb21a",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1463,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-03-27T00:14:10Z",
+      "side": 1,
+      "message": "As above: `UINT32_MAX`.",
+      "range": {
+        "startLine": 1463,
+        "startChar": 27,
+        "endLine": 1463,
+        "endChar": 36
+      },
+      "revId": "ca7d6b3bbc59f7bef422b9939a295e5b6a14c82e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
