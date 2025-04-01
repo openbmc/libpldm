@@ -1180,3 +1180,194 @@ TEST(PldmMsgHdr, correlateFailRequestIsResponse)
     ASSERT_EQ(pldm_msg_hdr_correlate_response(&req, &resp), false);
 }
 #endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeNegotiateTransferParamsRequest, GoodTest)
+{
+    uint8_t instance_id = 0;
+
+    const struct pldm_base_negotiate_transfer_params_req req_data = {
+        0x0001, // BE 256
+        {{0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x81}}};
+
+    std::array<uint8_t, PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES>
+        requestMsg = {0x01, 0x00, // requester_part_size = 256
+                      0x00, 0x00, 0x00, 0x00,
+                      0x00, 0x00, 0x00, 0x81}; // requester_protocol_support =
+                                               // PLDM_BASE & PLDM_FILE
+
+    PLDM_MSG_DEFINE_P(requestPtr,
+                      PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+    auto rc = encode_pldm_base_negotiate_transfer_params_req(
+        instance_id, &req_data, requestPtr,
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(
+        0, memcmp(requestPtr->payload, requestMsg.data(), sizeof(requestMsg)));
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeNegotiateTransferParamsRequest, BadTestUnAllocatedPtrParams)
+{
+    int rc;
+    uint8_t instance_id = 0;
+    const struct pldm_base_negotiate_transfer_params_req req_data = {
+        0x0001, // BE 256
+        {{0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x81}}};
+
+    PLDM_MSG_DEFINE_P(requestPtr,
+                      PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+    rc = encode_pldm_base_negotiate_transfer_params_req(
+        instance_id, nullptr, requestPtr,
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = encode_pldm_base_negotiate_transfer_params_req(
+        instance_id, &req_data, nullptr,
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeNegotiateTransferParamsRequest,
+     BadTestInvalidExpectedOutputMsgLength)
+{
+    int rc;
+    uint8_t instance_id = 0;
+    const struct pldm_base_negotiate_transfer_params_req req_data = {
+        0x0001, // BE 256
+        {{0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x81}}};
+
+    PLDM_MSG_DEFINE_P(requestPtr,
+                      PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+
+    rc = encode_pldm_base_negotiate_transfer_params_req(instance_id, &req_data,
+                                                        requestPtr, 1);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeNegotiateTransferParamsResponse, GoodTest)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint16_t responderPartSize = 128;
+    std::array<uint8_t, 8> responderProtocolSupport = {0x00, 0x00, 0x00, 0x00,
+                                                       0x00, 0x00, 0x00, 0x81};
+
+    struct pldm_base_negotiate_transfer_params_resp resp_data = {};
+
+    PLDM_MSGBUF_DEFINE_P(buf);
+    int rc;
+
+    static constexpr const size_t payload_length =
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES;
+    PLDM_MSG_DEFINE_P(responseMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint8(buf, completionCode);
+    pldm_msgbuf_insert_uint16(buf, responderPartSize);
+    rc = pldm_msgbuf_insert_array_uint8(
+        buf, sizeof(resp_data.responder_protocol_support),
+        responderProtocolSupport.data(),
+        sizeof(resp_data.responder_protocol_support));
+    EXPECT_EQ(rc, 0);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_pldm_base_negotiate_transfer_params_resp(
+        responseMsg, payload_length, &resp_data);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(resp_data.completion_code, completionCode);
+    EXPECT_EQ(resp_data.responder_part_size, responderPartSize);
+    EXPECT_EQ(0, memcmp(responderProtocolSupport.data(),
+                        resp_data.responder_protocol_support,
+                        sizeof(resp_data.responder_protocol_support)));
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeNegotiateTransferParamsResponse, BadTestUnAllocatedPtrParams)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint16_t responderPartSize = 128;
+    std::array<uint8_t, 8> responderProtocolSupport = {0x00, 0x00, 0x00, 0x00,
+                                                       0x00, 0x00, 0x00, 0x81};
+
+    struct pldm_base_negotiate_transfer_params_resp resp_data = {};
+
+    PLDM_MSGBUF_DEFINE_P(buf);
+    int rc;
+
+    static constexpr const size_t payload_length =
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES;
+    PLDM_MSG_DEFINE_P(responseMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint8(buf, completionCode);
+    pldm_msgbuf_insert_uint16(buf, responderPartSize);
+    rc = pldm_msgbuf_insert_array_uint8(
+        buf, sizeof(resp_data.responder_protocol_support),
+        responderProtocolSupport.data(),
+        sizeof(resp_data.responder_protocol_support));
+    EXPECT_EQ(rc, 0);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_pldm_base_negotiate_transfer_params_resp(
+        nullptr, payload_length, &resp_data);
+
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_base_negotiate_transfer_params_resp(
+        responseMsg, payload_length, nullptr);
+
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeNegotiateTransferParamsResponse,
+     BadTestInvalidExpectedInputMsgLength)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint16_t responderPartSize = 128;
+    std::array<uint8_t, 8> responderProtocolSupport = {0x00, 0x00, 0x00, 0x00,
+                                                       0x00, 0x00, 0x00, 0x81};
+
+    struct pldm_base_negotiate_transfer_params_resp resp_data = {};
+
+    PLDM_MSGBUF_DEFINE_P(buf);
+    int rc;
+
+    static constexpr const size_t payload_length =
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES;
+    PLDM_MSG_DEFINE_P(responseMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint8(buf, completionCode);
+    pldm_msgbuf_insert_uint16(buf, responderPartSize);
+    rc = pldm_msgbuf_insert_array_uint8(
+        buf, sizeof(resp_data.responder_protocol_support),
+        responderProtocolSupport.data(),
+        sizeof(resp_data.responder_protocol_support));
+    EXPECT_EQ(rc, 0);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_pldm_base_negotiate_transfer_params_resp(responseMsg, 0,
+                                                         &resp_data);
+
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
