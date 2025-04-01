@@ -47,6 +47,8 @@ Change categories:
 
 - file: Add encode req & decode resp for DfHeartbeat command.
 
+- base: Add encode req & decode resp for NegotiateTransferParameters.
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names

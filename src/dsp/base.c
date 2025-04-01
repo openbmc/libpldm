@@ -702,3 +702,85 @@ int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
 	}
 	return PLDM_SUCCESS;
 }
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_base_negotiate_transfer_params_req(
+	uint8_t instance_id,
+	const struct pldm_base_negotiate_transfer_params_req *req,
+	struct pldm_msg *msg, size_t payload_length)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (req == NULL || msg == NULL) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_REQUEST;
+	header.pldm_type = PLDM_BASE;
+	header.command = PLDM_NEGOTIATE_TRANSFER_PARAMETERS;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_BASE_NEGOTIATE_TRANSFER_PARAMS_REQ_BYTES,
+		msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, req->requester_part_size);
+	rc = pldm_msgbuf_insert_array_uint8(
+		buf, sizeof(req->requester_protocol_support),
+		(uint8_t *)req->requester_protocol_support,
+		sizeof(req->requester_protocol_support));
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_base_negotiate_transfer_params_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_negotiate_transfer_params_resp *resp)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msg_has_error(msg, payload_length);
+
+	if (rc) {
+		resp->completion_code = rc;
+		return 0;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_BASE_NEGOTIATE_TRANSFER_PARAMS_RESP_BYTES,
+		msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, resp->completion_code);
+	pldm_msgbuf_extract(buf, resp->responder_part_size);
+	rc = pldm_msgbuf_extract_array_uint8(
+		buf, sizeof(resp->responder_protocol_support),
+		(uint8_t *)resp->responder_protocol_support,
+		sizeof(resp->responder_protocol_support));
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
