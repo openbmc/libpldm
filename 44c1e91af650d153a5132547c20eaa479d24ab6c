@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf9c9dd8_ddfcf795",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-03T03:51:38Z",
+      "side": 1,
+      "message": "Hi Chau, some minor comments inline. Looks good!",
+      "revId": "44c1e91af650d153a5132547c20eaa479d24ab6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6de7f25c_3c44b696",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-03T03:51:38Z",
+      "side": 1,
+      "message": "Can you please spell this `PARAMETERS` in accordance with the name in the spec?",
+      "range": {
+        "startLine": 134,
+        "startChar": 37,
+        "endLine": 134,
+        "endChar": 43
+      },
+      "revId": "44c1e91af650d153a5132547c20eaa479d24ab6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4ea3a43_f72b9602",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-03T03:51:38Z",
+      "side": 1,
+      "message": "as above.",
+      "range": {
+        "startLine": 135,
+        "startChar": 37,
+        "endLine": 135,
+        "endChar": 43
+      },
+      "revId": "44c1e91af650d153a5132547c20eaa479d24ab6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4218d65a_4c6dd33d",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-03T03:51:38Z",
+      "side": 1,
+      "message": "You should be able to use `pldm_msgbuf_insert_array()` here, the cast on line 740 should make the type-based dispatch work for you.",
+      "range": {
+        "startLine": 738,
+        "startChar": 6,
+        "endLine": 738,
+        "endChar": 36
+      },
+      "revId": "44c1e91af650d153a5132547c20eaa479d24ab6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfbeda19_f3b8959a",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-03T03:51:38Z",
+      "side": 1,
+      "message": "Similarly, this can hopefully be `pldm_msgbuf_extract_array()`.",
+      "revId": "44c1e91af650d153a5132547c20eaa479d24ab6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
