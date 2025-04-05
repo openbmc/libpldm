@@ -260,7 +260,7 @@ $VAR1 = {
     },
     '5959' => {
       'Header' => 'utils.h',
-      'Line' => '108',
+      'Line' => '109',
       'Param' => {
         '0' => {
           'name' => 'transfer_flag',
@@ -272,7 +272,7 @@ $VAR1 = {
     },
     '6019' => {
       'Header' => 'utils.h',
-      'Line' => '99',
+      'Line' => '100',
       'Param' => {
         '0' => {
           'name' => 'seconds',
@@ -304,7 +304,7 @@ $VAR1 = {
     },
     '6263' => {
       'Header' => 'utils.h',
-      'Line' => '87',
+      'Line' => '88',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -316,7 +316,7 @@ $VAR1 = {
     },
     '6392' => {
       'Header' => 'utils.h',
-      'Line' => '81',
+      'Line' => '82',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -328,7 +328,7 @@ $VAR1 = {
     },
     '6495' => {
       'Header' => 'utils.h',
-      'Line' => '75',
+      'Line' => '76',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -340,7 +340,7 @@ $VAR1 = {
     },
     '6611' => {
       'Header' => 'utils.h',
-      'Line' => '69',
+      'Line' => '70',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -352,7 +352,7 @@ $VAR1 = {
     },
     '6714' => {
       'Header' => 'utils.h',
-      'Line' => '63',
+      'Line' => '64',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -364,7 +364,7 @@ $VAR1 = {
     },
     '6767' => {
       'Header' => 'utils.h',
-      'Line' => '57',
+      'Line' => '58',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -376,7 +376,7 @@ $VAR1 = {
     },
     '6820' => {
       'Header' => 'utils.h',
-      'Line' => '51',
+      'Line' => '52',
       'Param' => {
         '0' => {
           'name' => 'version',
@@ -418,6 +418,7 @@ $VAR1 = {
       'ShortName' => 'crc8'
     },
     '7063' => {
+      'Alias' => 'pldm_edac_crc32',
       'Header' => 'utils.h',
       'Line' => '39',
       'Param' => {
@@ -9632,6 +9633,7 @@ $VAR1 = {
       'pldm_bios_table_string_entry_encode_length' => 1,
       'pldm_bios_table_string_find_by_handle' => 1,
       'pldm_bios_table_string_find_by_string' => 1,
+      'pldm_edac_crc32' => 1,
       'pldm_entity_association_pdr_add' => 1,
       'pldm_entity_association_pdr_add_from_node' => 1,
       'pldm_entity_association_pdr_add_from_node_with_record_handle' => 1,

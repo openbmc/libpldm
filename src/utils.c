@@ -86,7 +86,7 @@ static const uint8_t crc8_table[] = {
 };
 
 LIBPLDM_ABI_STABLE
-uint32_t crc32(const void *data, size_t size)
+uint32_t pldm_edac_crc32(const void *data, size_t size)
 {
 	const uint8_t *p = data;
 	uint32_t crc = ~0U;
