@@ -19,12 +19,18 @@ Change categories:
 
 ### Added
 
+- utils: Introduce `pldm_edac_crc32()`
+
 ### Changed
 
 ### Deprecated
 
 - utils: Deprecate `is_time_legal()`
 - utils: Deprecate `is_transfer_flag_valid()`
+
+- utils: Deprecate `crc32()`
+
+  Users of `crc32()` should move to `pldm_edac_crc32()`
 
 ### Removed
 

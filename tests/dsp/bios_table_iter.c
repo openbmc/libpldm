@@ -15,8 +15,8 @@
 #include "dsp/bios_table.c"
 
 /* Satisfy the symbol needs of bios_table.c */
-uint32_t crc32(const void* data LIBPLDM_CC_UNUSED,
-               size_t size LIBPLDM_CC_UNUSED)
+uint32_t pldm_edac_crc32(const void* data LIBPLDM_CC_UNUSED,
+                         size_t size LIBPLDM_CC_UNUSED)
 {
     return 0;
 }
