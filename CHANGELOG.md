@@ -24,6 +24,7 @@ Change categories:
 ### Deprecated
 
 - utils: Deprecate `is_time_legal()`
+- utils: Deprecate `is_transfer_flag_valid()`
 
 ### Removed
 

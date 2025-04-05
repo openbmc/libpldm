@@ -251,7 +251,7 @@ bool is_time_legal(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t day,
 	return true;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 bool is_transfer_flag_valid(uint8_t transfer_flag)
 {
 	switch (transfer_flag) {
