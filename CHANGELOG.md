@@ -23,6 +23,8 @@ Change categories:
 
 ### Deprecated
 
+- utils: Deprecate `is_time_legal()`
+
 ### Removed
 
 - requester: Remove related deprecated APIs
