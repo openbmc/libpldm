@@ -28,6 +28,7 @@ struct variable_field {
  *  @param[in] size - Size of the data
  *  @return The checksum
  */
+uint8_t pldm_edac_crc8(const void *data, size_t size);
 uint8_t crc8(const void *data, size_t size);
 
 /** @brief Compute crc32 (same as the one used by IEEE802.3)

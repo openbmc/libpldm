@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 - utils: Introduce `pldm_edac_crc32()`
+- utils: Introduce `pldm_edac_crc8()`
 
 ### Changed
 
@@ -31,6 +32,10 @@ Change categories:
 - utils: Deprecate `crc32()`
 
   Users of `crc32()` should move to `pldm_edac_crc32()`
+
+- utils: Deprecate `crc8()`
+
+  Users of `crc8()` should move to `pldm_edac_crc8()`
 
 ### Removed
 

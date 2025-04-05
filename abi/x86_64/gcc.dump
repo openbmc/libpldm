@@ -260,7 +260,7 @@ $VAR1 = {
     },
     '5959' => {
       'Header' => 'utils.h',
-      'Line' => '109',
+      'Line' => '110',
       'Param' => {
         '0' => {
           'name' => 'transfer_flag',
@@ -272,7 +272,7 @@ $VAR1 = {
     },
     '6019' => {
       'Header' => 'utils.h',
-      'Line' => '100',
+      'Line' => '101',
       'Param' => {
         '0' => {
           'name' => 'seconds',
@@ -304,7 +304,7 @@ $VAR1 = {
     },
     '6263' => {
       'Header' => 'utils.h',
-      'Line' => '88',
+      'Line' => '89',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -316,7 +316,7 @@ $VAR1 = {
     },
     '6392' => {
       'Header' => 'utils.h',
-      'Line' => '82',
+      'Line' => '83',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -328,7 +328,7 @@ $VAR1 = {
     },
     '6495' => {
       'Header' => 'utils.h',
-      'Line' => '76',
+      'Line' => '77',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -340,7 +340,7 @@ $VAR1 = {
     },
     '6611' => {
       'Header' => 'utils.h',
-      'Line' => '70',
+      'Line' => '71',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -352,7 +352,7 @@ $VAR1 = {
     },
     '6714' => {
       'Header' => 'utils.h',
-      'Line' => '64',
+      'Line' => '65',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -364,7 +364,7 @@ $VAR1 = {
     },
     '6767' => {
       'Header' => 'utils.h',
-      'Line' => '58',
+      'Line' => '59',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -376,7 +376,7 @@ $VAR1 = {
     },
     '6820' => {
       'Header' => 'utils.h',
-      'Line' => '52',
+      'Line' => '53',
       'Param' => {
         '0' => {
           'name' => 'version',
@@ -399,6 +399,7 @@ $VAR1 = {
       'ShortName' => 'ver2str'
     },
     '6949' => {
+      'Alias' => 'pldm_edac_crc8',
       'Header' => 'utils.h',
       'Line' => '31',
       'Param' => {
@@ -420,7 +421,7 @@ $VAR1 = {
     '7063' => {
       'Alias' => 'pldm_edac_crc32',
       'Header' => 'utils.h',
-      'Line' => '39',
+      'Line' => '40',
       'Param' => {
         '0' => {
           'name' => 'data',
@@ -9634,6 +9635,7 @@ $VAR1 = {
       'pldm_bios_table_string_find_by_handle' => 1,
       'pldm_bios_table_string_find_by_string' => 1,
       'pldm_edac_crc32' => 1,
+      'pldm_edac_crc8' => 1,
       'pldm_entity_association_pdr_add' => 1,
       'pldm_entity_association_pdr_add_from_node' => 1,
       'pldm_entity_association_pdr_add_from_node_with_record_handle' => 1,

@@ -97,7 +97,7 @@ uint32_t pldm_edac_crc32(const void *data, size_t size)
 }
 
 LIBPLDM_ABI_STABLE
-uint8_t crc8(const void *data, size_t size)
+uint8_t pldm_edac_crc8(const void *data, size_t size)
 {
 	const uint8_t *p = data;
 	uint8_t crc = 0x00;

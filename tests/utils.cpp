@@ -16,7 +16,7 @@ TEST(Crc32, CheckSumTest)
 TEST(Crc8, CheckSumTest)
 {
     const char* data = "123456789";
-    auto checksum = crc8(data, 9);
+    auto checksum = pldm_edac_crc8(data, 9);
     EXPECT_EQ(checksum, 0xf4);
 }
 
