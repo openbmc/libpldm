@@ -80,6 +80,9 @@ Change categories:
 - oem: ibm: Modified the state set id for slot effecter and sensor
 - base: Add encode req & decode resp for NegotiateTransferParameters.
 
+- Added enum PLDM_OEM_IBM_PANEL_TRIGGER_STATE to trigger panel related bitmap
+  functions.
+
 ### Changed
 
 - dsp: firmware_update: Expand "params" in symbol names
