@@ -58,6 +58,11 @@
 [nasa-reliable-code]:
   https://www.cs.otago.ac.nz/cosc345/resources/nasa-10-rules.pdf
 
+- [C Isn't A Programming Language Anymore - Aria Desires][aria-c-is-a-protocol]
+
+[aria-c-is-a-protocol]:
+  https://faultlore.com/blah/c-isnt-a-language/
+
 ## References
 
 - [The C programming language - C Standards Committee][c-language]
