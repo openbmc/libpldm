@@ -67,6 +67,24 @@
       "message": "Is this the correct value? We\u0027ve had incorrect values submitted previously. Someone other than the submitter needs to answer here.",
       "revId": "faf71f20809d345a260b12a6b516ecd983c215a0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a51bfe65_2ba07a2c",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2025-04-10T03:11:19Z",
+      "side": 1,
+      "message": ":(  Unfortunate that this happened.\n\nI double-checked this value, and it is correct.",
+      "parentUuid": "9ec03865_46699304",
+      "revId": "faf71f20809d345a260b12a6b516ecd983c215a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
