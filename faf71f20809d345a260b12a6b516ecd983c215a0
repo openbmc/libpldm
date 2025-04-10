@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49621255_0131ccc0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-10T00:07:42Z",
+      "side": 1,
+      "message": "Please prefix the commit subject with the affected component(s), and be specific in its description. In this case:\n\n```\noem: ibm: Add PLDM_OEM_IBM_PANEL_TRIGGER_STATE\n```",
+      "revId": "faf71f20809d345a260b12a6b516ecd983c215a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce1eca8a_245f81b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-10T00:07:42Z",
+      "side": 1,
+      "message": "What does this mean? Can you explain the behaviour a bit more?",
+      "revId": "faf71f20809d345a260b12a6b516ecd983c215a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07c44a7e_e1585875",
         "filename": "CHANGELOG.md",
         "patchSetId": 1
@@ -14,6 +48,23 @@
       "writtenOn": "2025-04-09T09:43:32Z",
       "side": 1,
       "message": "please follow the format to write this - \n\noem: ibm: Add a new enum to trigger the operator panel function\n\nCan you change the commit message as well.",
+      "revId": "faf71f20809d345a260b12a6b516ecd983c215a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ec03865_46699304",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-10T00:07:42Z",
+      "side": 1,
+      "message": "Is this the correct value? We\u0027ve had incorrect values submitted previously. Someone other than the submitter needs to answer here.",
       "revId": "faf71f20809d345a260b12a6b516ecd983c215a0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
