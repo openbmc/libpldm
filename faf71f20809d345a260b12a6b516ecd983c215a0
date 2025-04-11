@@ -85,6 +85,24 @@
       "parentUuid": "9ec03865_46699304",
       "revId": "faf71f20809d345a260b12a6b516ecd983c215a0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dae4f8a_396e46c3",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-11T02:21:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a51bfe65_2ba07a2c",
+      "revId": "faf71f20809d345a260b12a6b516ecd983c215a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
