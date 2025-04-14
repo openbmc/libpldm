@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2ddf8dd_91252052",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-14T08:36:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f70ec85b_b6a7d349",
+      "revId": "a13a1f71fae9d2bf8937c67c80830592787ed503",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40559801_4309ab0b",
@@ -102,6 +120,30 @@
       "side": 1,
       "message": "@arj Yes, we can skip using the msgbuf extraction here and directly use struct. Since we already have a defined structure (like pldm_entity) and a well-typed pointer. But I need to check if the endianness will be a problem. I think PLDM is little-endian in nature and we do the host endianness conversions in a few places -`https://github.com/openbmc/libpldm/blob/3b986d3a6829eba0c546df7035e095c7abe48ae3/src/dsp/fru.c#L64` but don\u0027t see it in the Entity Association structures.",
       "parentUuid": "ea380636_283190e4",
+      "range": {
+        "startLine": 2246,
+        "startChar": 30,
+        "endLine": 2246,
+        "endChar": 31
+      },
+      "revId": "a13a1f71fae9d2bf8937c67c80830592787ed503",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48553c18_5e5b9490",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2246,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-14T08:36:26Z",
+      "side": 1,
+      "message": "My unit test cases passed with this change.",
+      "parentUuid": "facc69c1_ef85348e",
       "range": {
         "startLine": 2246,
         "startChar": 30,
