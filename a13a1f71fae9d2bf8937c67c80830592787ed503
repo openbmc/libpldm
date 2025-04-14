@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f70ec85b_b6a7d349",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-14T02:20:23Z",
+      "side": 1,
+      "message": "This needs to go in the `[Unreleased]` section.",
+      "revId": "a13a1f71fae9d2bf8937c67c80830592787ed503",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40559801_4309ab0b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2220,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-14T02:20:23Z",
+      "side": 1,
+      "message": "This can be:\n\n```\nreturn pldm_msgbuf_complete_consumed(buf);\n```\n\nHowever, see below.",
+      "range": {
+        "startLine": 2216,
+        "startChar": 1,
+        "endLine": 2220,
+        "endChar": 10
+      },
+      "revId": "a13a1f71fae9d2bf8937c67c80830592787ed503",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea380636_283190e4",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2246,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-14T02:20:23Z",
+      "side": 1,
+      "message": "Taking the address here seemed odd to me. So I looked at the definition of `pldm_entity_node`, and the type of the `entity` member is already `struct pldm_entity`, which describes all the members anyway. Now, given it\u0027s a packed struct I can only assume the value endianness is PLDM wire format (if they\u0027re host (BMC CPU) endian then we have bugs), so we still have to do the conversion, but otherwise there\u0027s no need for the msgbuf extraction, right? Just use the struct members?\n\nThe msgbuf APIs should be used where we\u0027d otherwise cast void pointers to a packed struct. But here we don\u0027t have void pointers, we have a well-typed pointer.\n\nThis needs some discussion.",
+      "range": {
+        "startLine": 2246,
+        "startChar": 30,
+        "endLine": 2246,
+        "endChar": 31
+      },
+      "revId": "a13a1f71fae9d2bf8937c67c80830592787ed503",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
