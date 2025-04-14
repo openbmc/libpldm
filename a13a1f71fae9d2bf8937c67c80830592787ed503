@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e52ed3bc_e1484123",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2220,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-14T07:26:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "40559801_4309ab0b",
+      "range": {
+        "startLine": 2216,
+        "startChar": 1,
+        "endLine": 2220,
+        "endChar": 10
+      },
+      "revId": "a13a1f71fae9d2bf8937c67c80830592787ed503",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea380636_283190e4",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-04-14T02:20:23Z",
       "side": 1,
       "message": "Taking the address here seemed odd to me. So I looked at the definition of `pldm_entity_node`, and the type of the `entity` member is already `struct pldm_entity`, which describes all the members anyway. Now, given it\u0027s a packed struct I can only assume the value endianness is PLDM wire format (if they\u0027re host (BMC CPU) endian then we have bugs), so we still have to do the conversion, but otherwise there\u0027s no need for the msgbuf extraction, right? Just use the struct members?\n\nThe msgbuf APIs should be used where we\u0027d otherwise cast void pointers to a packed struct. But here we don\u0027t have void pointers, we have a well-typed pointer.\n\nThis needs some discussion.",
+      "range": {
+        "startLine": 2246,
+        "startChar": 30,
+        "endLine": 2246,
+        "endChar": 31
+      },
+      "revId": "a13a1f71fae9d2bf8937c67c80830592787ed503",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "facc69c1_ef85348e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2246,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-14T07:26:50Z",
+      "side": 1,
+      "message": "@arj Yes, we can skip using the msgbuf extraction here and directly use struct. Since we already have a defined structure (like pldm_entity) and a well-typed pointer. But I need to check if the endianness will be a problem. I think PLDM is little-endian in nature and we do the host endianness conversions in a few places -`https://github.com/openbmc/libpldm/blob/3b986d3a6829eba0c546df7035e095c7abe48ae3/src/dsp/fru.c#L64` but don\u0027t see it in the Entity Association structures.",
+      "parentUuid": "ea380636_283190e4",
       "range": {
         "startLine": 2246,
         "startChar": 30,
