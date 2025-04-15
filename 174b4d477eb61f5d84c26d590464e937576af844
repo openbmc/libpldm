@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f8540fa_42fc450c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-15T07:28:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c215abdc_a25fb7c7",
+      "range": {
+        "startLine": 477,
+        "startChar": 1,
+        "endLine": 478,
+        "endChar": 69
+      },
+      "revId": "174b4d477eb61f5d84c26d590464e937576af844",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f34bf25_696630de",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-04-15T05:12:49Z",
       "side": 1,
       "message": "This runs afoul of the following:\n\nhttps://github.com/openbmc/libpldm/blob/3b986d3a6829eba0c546df7035e095c7abe48ae3/docs/checklists/changes.md#L142-L149\n\nGenerally my advice is to avoid decoding the substructures here. Instead, when necessary, we can define iterators (as mentioned in the link). I don\u0027t think it\u0027s necessary to define them _yet_, as we only want to locate the PDR of interest, which we can do via `pdr-\u003eeffecter_id` right? It\u0027s enough to decode up to `pdr-\u003ecomposite_effecter_count`, as what follows are the substructures that we\u0027d iterate over.\n\nFurther, this is an internal API for now, so we can change it around as we see fit.",
+      "revId": "174b4d477eb61f5d84c26d590464e937576af844",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba0f85a_f3a2f6c9",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-15T07:28:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6f34bf25_696630de",
       "revId": "174b4d477eb61f5d84c26d590464e937576af844",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -58,6 +100,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da60d0e_bd3c837d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-15T07:28:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40a77a61_188ca035",
+      "revId": "174b4d477eb61f5d84c26d590464e937576af844",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02021380_aadc14b7",
@@ -71,6 +131,24 @@
       "writtenOn": "2025-04-15T05:12:49Z",
       "side": 1,
       "message": "Can\u0027t we rather derive found like:\n\n```\nfound \u003d pdr-\u003eeffecter_id \u003d\u003d effecter_id;\n```\n\n? \n\nWe\u0027ve done all the work to decode the PDR.",
+      "revId": "174b4d477eb61f5d84c26d590464e937576af844",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86cb0fb5_44d330fe",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-15T07:28:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "02021380_aadc14b7",
       "revId": "174b4d477eb61f5d84c26d590464e937576af844",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
