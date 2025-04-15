@@ -152,6 +152,30 @@
       },
       "revId": "a13a1f71fae9d2bf8937c67c80830592787ed503",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e71057d_70dc8a45",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2246,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-15T04:53:56Z",
+      "side": 1,
+      "message": "Yes, the tests will always pass, as the endianness is always consistent on the same processor without explicit conversions.",
+      "parentUuid": "48553c18_5e5b9490",
+      "range": {
+        "startLine": 2246,
+        "startChar": 30,
+        "endLine": 2246,
+        "endChar": 31
+      },
+      "revId": "a13a1f71fae9d2bf8937c67c80830592787ed503",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
