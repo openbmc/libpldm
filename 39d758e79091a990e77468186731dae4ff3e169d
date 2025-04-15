@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaa91038_850f01cd",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-15T04:53:18Z",
+      "side": 1,
+      "message": "So the endianness of all of the struct members is generally not well defined in the libpldm API. My rough approach is that values passed in packed structs need to be in the wire-format endianness, as the whole point of a packed struct is that it is to be cast over a wire-format byte buffer. So to pick any other endianness for the packed structs would lead to confusion.\n\nHowever, working in wire-format endianness is not ergonomic. I\u0027ll need to think about what we do here, e.g. whether we define another struct that isn\u0027t packed that requires values in host-endianness.",
+      "revId": "39d758e79091a990e77468186731dae4ff3e169d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a281f1df_cdfb2463",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-15T04:53:18Z",
+      "side": 1,
+      "message": "I\u0027d prefer this be `const pldm_entity *entity`.",
+      "range": {
+        "startLine": 681,
+        "startChar": 10,
+        "endLine": 681,
+        "endChar": 28
+      },
+      "revId": "39d758e79091a990e77468186731dae4ff3e169d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
