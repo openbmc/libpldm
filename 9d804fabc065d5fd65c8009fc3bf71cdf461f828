@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b48dad_d931b448",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-16T08:34:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db0c9f1f_969699b9",
+      "range": {
+        "startLine": 486,
+        "startChar": 1,
+        "endLine": 490,
+        "endChar": 11
+      },
+      "revId": "9d804fabc065d5fd65c8009fc3bf71cdf461f828",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9885710_2173c1b1",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-04-15T23:21:39Z",
       "side": 1,
       "message": "This condition will never evaluate true as found is either 1 or 0 by the equality test. The code can be removed.",
+      "range": {
+        "startLine": 525,
+        "startChar": 2,
+        "endLine": 527,
+        "endChar": 3
+      },
+      "revId": "9d804fabc065d5fd65c8009fc3bf71cdf461f828",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f184ac35_17cede1e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-16T08:34:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9885710_2173c1b1",
       "range": {
         "startLine": 525,
         "startChar": 2,
