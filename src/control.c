@@ -1,3 +1,4 @@
+#include <errno.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
@@ -7,7 +8,6 @@
 #include <libpldm/platform.h>
 #include <libpldm/control.h>
 #include <compiler.h>
-#include <msgbuf.h>
 
 #include "control-internal.h"
 
