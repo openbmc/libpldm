@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee8b69b8_e4145424",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-16T23:46:59Z",
+      "side": 1,
+      "message": "Sorry, I feel like we\u0027re going around on this a bit, but we\u0027re still making progress. Having dealt with the msgbuf-related concerns, I have some more queries on the control flow.",
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "403c28d3_22edc4e1",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-16T23:46:59Z",
+      "side": 1,
+      "message": "This is a pointer, is it allowed to be `NULL`? I suggest we allow it, but that must be documented above.",
+      "range": {
+        "startLine": 259,
+        "startChar": 32,
+        "endLine": 259,
+        "endChar": 46
+      },
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b80f949_14dc2bdb",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-16T23:46:59Z",
+      "side": 1,
+      "message": "Should this be `continue` rather than a `return`?",
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0fc6ce9_1e08f10c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-16T23:46:59Z",
+      "side": 1,
+      "message": "You must ensure `record_handle` is not `NULL` before dereferencing it.",
+      "range": {
+        "startLine": 522,
+        "startChar": 4,
+        "endLine": 522,
+        "endChar": 17
+      },
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be2ede7a_5d810e7e",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-16T23:46:59Z",
+      "side": 1,
+      "message": "This at least needs `ASSERT_NE(repo, nullptr);`",
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c85264_636030be",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-04-16T23:46:59Z",
+      "side": 1,
+      "message": "This hasn\u0027t tested any of the error paths? Can you please provide some coverage there?",
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
