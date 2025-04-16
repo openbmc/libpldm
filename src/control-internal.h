@@ -7,7 +7,6 @@
 #include <libpldm/pldm.h>
 #include <libpldm/utils.h>
 #include <compiler.h>
-#include <msgbuf.h>
 
 #ifndef PLDM_CONTROL_MAX_VERSION_TYPES
 #define PLDM_CONTROL_MAX_VERSION_TYPES 6
