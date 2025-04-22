@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bfee29e_9379038c",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-22T10:42:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "403c28d3_22edc4e1",
+      "range": {
+        "startLine": 259,
+        "startChar": 32,
+        "endLine": 259,
+        "endChar": 46
+      },
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b80f949_14dc2bdb",
@@ -54,6 +78,24 @@
       "writtenOn": "2025-04-16T23:46:59Z",
       "side": 1,
       "message": "Should this be `continue` rather than a `return`?",
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e187b07_11fd3b4f",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-22T10:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b80f949_14dc2bdb",
       "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e8e6603_7bd893f2",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-22T10:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0fc6ce9_1e08f10c",
+      "range": {
+        "startLine": 522,
+        "startChar": 4,
+        "endLine": 522,
+        "endChar": 17
+      },
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be2ede7a_5d810e7e",
@@ -98,6 +164,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "276f1326_a0b9e5c0",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-22T10:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be2ede7a_5d810e7e",
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4c85264_636030be",
@@ -111,6 +195,24 @@
       "writtenOn": "2025-04-16T23:46:59Z",
       "side": 1,
       "message": "This hasn\u0027t tested any of the error paths? Can you please provide some coverage there?",
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90804d1a_1f6d0232",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-04-22T10:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4c85264_636030be",
       "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
