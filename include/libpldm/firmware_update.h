@@ -2072,6 +2072,7 @@ struct pldm__package_header_information {
 	struct variable_field package_version_string;
 	struct variable_field areas;
 	struct variable_field images;
+	uint32_t package_payload_checksum; // Added for format revision 3+
 };
 typedef struct pldm__package_header_information
 	pldm_package_header_information_api;

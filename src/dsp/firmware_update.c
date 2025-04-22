@@ -341,6 +341,16 @@ static const uint8_t PLDM_FWUP_HDR_IDENTIFIER_V2[PLDM_FWUP_UUID_LENGTH] = {
 	0xa0, 0x30, 0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5a,
 };
 
+static const uint8_t PLDM_FWUP_HDR_IDENTIFIER_V3[PLDM_FWUP_UUID_LENGTH] = {
+	0x31, 0x19, 0xCE, 0x2F, 0xE8, 0x0A, 0x4A, 0x99,
+	0xAF, 0x6D, 0x46, 0xF8, 0xB1, 0x21, 0xF6, 0xBF
+};
+
+static const uint8_t PLDM_FWUP_HDR_IDENTIFIER_V4[PLDM_FWUP_UUID_LENGTH] = {
+	0x7B, 0x29, 0x1C, 0x99, 0x6D, 0xB6, 0x42, 0x08,
+	0x80, 0x1B, 0x02, 0x02, 0x6E, 0x46, 0x3C, 0x78
+};
+
 #define PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE 36
 static int decode_pldm_package_header_info_errno(
 	const void *data, size_t length,
@@ -348,6 +358,7 @@ static int decode_pldm_package_header_info_errno(
 {
 	uint8_t package_version_string_length;
 	uint32_t package_header_checksum = 0;
+	uint32_t package_payload_checksum = 0;
 	size_t package_header_variable_size;
 	size_t package_header_payload_size;
 	size_t package_header_areas_size;
@@ -382,7 +393,13 @@ static int decode_pldm_package_header_info_errno(
 		   sizeof(PLDM_FWUP_HDR_IDENTIFIER_V1)) != 0 &&
 	    memcmp(PLDM_FWUP_HDR_IDENTIFIER_V2,
 		   header->package_header_identifier,
-		   sizeof(PLDM_FWUP_HDR_IDENTIFIER_V2)) != 0) {
+		   sizeof(PLDM_FWUP_HDR_IDENTIFIER_V2)) != 0 &&
+	    memcmp(PLDM_FWUP_HDR_IDENTIFIER_V3,
+		   header->package_header_identifier,
+		   sizeof(PLDM_FWUP_HDR_IDENTIFIER_V3)) != 0 &&
+	    memcmp(PLDM_FWUP_HDR_IDENTIFIER_V4,
+		   header->package_header_identifier,
+		   sizeof(PLDM_FWUP_HDR_IDENTIFIER_V4)) != 0) {
 		return pldm_msgbuf_discard(buf, -ENOTSUP);
 	}
 
@@ -390,7 +407,7 @@ static int decode_pldm_package_header_info_errno(
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
-	if (header->package_header_format_revision > 2) {
+	if (header->package_header_format_revision > 4) {
 		return pldm_msgbuf_discard(buf, -EBADMSG);
 	}
 
@@ -458,7 +475,28 @@ static int decode_pldm_package_header_info_errno(
 	}
 	header->areas.length = package_header_areas_size;
 
-	pldm_msgbuf_extract(buf, package_header_checksum);
+	// Update checksums count for format revision 3+
+	if (header->package_header_format_revision >= 3) {
+		checksums = 2;
+	}
+
+	// ... existing code ...
+
+	// Extract package header checksum
+	rc = pldm_msgbuf_extract(buf, package_header_checksum);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	// Extract package payload checksum if format revision >= 3
+	if (header->package_header_format_revision >= 3) {
+		rc = pldm_msgbuf_extract(buf, package_payload_checksum);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		header->package_payload_checksum = package_payload_checksum;
+	}
+
 	pldm_msgbuf_span_remaining(buf, (void **)&header->images.ptr,
 				   &header->images.length);
 
@@ -467,11 +505,31 @@ static int decode_pldm_package_header_info_errno(
 		return rc;
 	}
 
+	// Verify package header checksum
 	if (package_header_checksum !=
 	    crc32(data, package_header_payload_size)) {
 		printf("h: %#08x, c: %#08x\n", package_header_checksum,
 		       crc32(data, package_header_payload_size));
 		return -EUCLEAN;
+	}
+
+	// Verify package payload checksum if format revision >= 3
+	if (header->package_header_format_revision >= 3) {
+		// Payload starts after the header (which includes checksums)
+		const uint8_t *payload_data =
+			(const uint8_t *)data + package_header_size;
+		size_t payload_size = length - package_header_size;
+
+		uint32_t calculated_payload_checksum =
+			crc32(payload_data, payload_size);
+
+		if (header->package_payload_checksum !=
+		    calculated_payload_checksum) {
+			printf("Payload checksum mismatch: expected %#08x, calculated %#08x\n",
+			       header->package_payload_checksum,
+			       calculated_payload_checksum);
+			return -EUCLEAN;
+		}
 	}
 
 	return 0;
@@ -539,7 +597,7 @@ static int decode_firmware_device_id_record_errno(
 		return -EINVAL;
 	}
 
-	if (header->package_header_format_revision > 2) {
+	if (header->package_header_format_revision > 4) {
 		return -ENOTSUP;
 	}
 
@@ -3063,7 +3121,7 @@ int decode_downstream_device_id_record_from_iter(
 		return -EINVAL;
 	}
 
-	if (hdr->package_header_format_revision > 3) {
+	if (hdr->package_header_format_revision > 4) {
 		return -ENOTSUP;
 	}
 
