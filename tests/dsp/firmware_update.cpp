@@ -5031,3 +5031,174 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
     EXPECT_EQ(nr_infos, 2);
 }
 #endif
+
+TEST(VerifyPayloadChecksum, ValidChecksum)
+{
+    std::vector<uint8_t> packageHeader{
+        0x7B, 0x29, 0x1C, 0x99, 0x6D, 0xB6, 0x42, 0x08, 0x80, 0x1B,
+        0x02, 0x02, 0x6E, 0x46, 0x3C, 0x78, 0x04, 0x00, 0x00, 0x00,
+        0xe9, 0x07, 0x03, 0x0b, 0x16, 0x03, 0x00, 0x00, 0x00, 0x00,
+        0x76, 0x02, 0x08, 0x00, 0x01, 0x04, 't',  'e',  's',  't'};
+
+    constexpr size_t payloadSize = 150ULL * 1024ULL * 1024ULL;
+    std::vector<uint8_t> payload(payloadSize);
+
+    for (size_t i = 0; i < payloadSize; i++)
+    {
+        payload[i] = i & 0xFF;
+    }
+
+    printf("Testing with package size: %zu bytes\n",
+           packageHeader.size() + 8 + payloadSize);
+
+    uint16_t headerSize = packageHeader.size() + 8;
+    packageHeader[17] = headerSize & 0xFF;
+    packageHeader[18] = (headerSize >> 8) & 0xFF;
+
+    printf("Package header size: %d bytes\n", headerSize);
+
+    std::vector<uint8_t> fullPackage = packageHeader;
+    fullPackage.resize(fullPackage.size() + 8, 0);
+
+    printf("Calculating CRC32 for %zu MB payload...\n",
+           payloadSize / (static_cast<size_t>(1024 * 1024)));
+    struct timespec start;
+    struct timespec end;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    uint32_t payload_crc = crc32(payload.data(), payload.size());
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    double elapsed = (end.tv_sec - start.tv_sec) +
+                     (end.tv_nsec - start.tv_nsec) / 1000000000.0;
+
+    printf("Payload size: %zu bytes\n", payload.size());
+    printf("Calculated payload checksum: 0x%08x (took %.3f seconds)\n",
+           payload_crc, elapsed);
+
+    uint32_t headerChecksum = crc32(fullPackage.data(), headerSize - 8);
+    printf("Header checksum: 0x%08x\n", headerChecksum);
+
+    size_t checksumPos = headerSize - 8;
+    fullPackage[checksumPos] = headerChecksum & 0xFF;
+    fullPackage[checksumPos + 1] = (headerChecksum >> 8) & 0xFF;
+    fullPackage[checksumPos + 2] = (headerChecksum >> 16) & 0xFF;
+    fullPackage[checksumPos + 3] = (headerChecksum >> 24) & 0xFF;
+
+    fullPackage[checksumPos + 4] = payload_crc & 0xFF;
+    fullPackage[checksumPos + 5] = (payload_crc >> 8) & 0xFF;
+    fullPackage[checksumPos + 6] = (payload_crc >> 16) & 0xFF;
+    fullPackage[checksumPos + 7] = (payload_crc >> 24) & 0xFF;
+
+    printf("Adding payload to package...\n");
+    fullPackage.insert(fullPackage.end(), payload.begin(), payload.end());
+
+    uint32_t verification_crc = payload_crc;
+    printf("Verification CRC: 0x%08x\n", verification_crc);
+
+    printf("Calling verify function...\n");
+    int rc = verify_pldm_firmware_update_package_payload_checksum(
+        fullPackage.data(), fullPackage.size());
+
+    printf("Return code: %d\n", rc);
+    EXPECT_EQ(rc, 0);
+}
+
+TEST(VerifyPayloadChecksum, InvalidChecksum)
+{
+    std::vector<uint8_t> packageHeader{
+        0x7B, 0x29, 0x1C, 0x99, 0x6D, 0xB6, 0x42, 0x08, 0x80, 0x1B, 0x02,
+        0x02, 0x6E, 0x46, 0x3C, 0x78, 0x04, 0x00, 0x00, 0x00, 0xe9, 0x07,
+        0x03, 0x0b, 0x16, 0x03, 0x00, 0x00, 0x00, 0x00, 0x76, 0x02, 0x08,
+        0x00, 0x01, 0x04, 't',  'e',  's',  't',  0x01, 0x18, 0x00, 0x01,
+        0x00, 0x00, 0x00, 0x00, 0x01, 0x04, 0x00, 0x00, 0x01, 'v',  '0',
+        '.',  '1',  0x01, 0x00, 0x04, 0x00, 0x9c, 0x01, 0x00, 0x00, 0x01,
+        0x00, 0x0a, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00,
+        0x01, 0x00, 0x65, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01,
+        0x04, 'v',  '0',  '.',  '2',  0x00, 0x00, 0x00, 0x00};
+
+    std::vector<uint8_t> payload;
+    payload.push_back(0x5a);
+
+    constexpr size_t additionalPayloadSize = 1024;
+    payload.reserve(payload.size() + additionalPayloadSize);
+    for (size_t i = 0; i < additionalPayloadSize; ++i)
+    {
+        payload.push_back(static_cast<uint8_t>(i & 0xFF));
+    }
+
+    uint16_t headerSize = packageHeader.size() + 8;
+    packageHeader[17] = headerSize & 0xFF;
+    packageHeader[18] = (headerSize >> 8) & 0xFF;
+
+    std::vector<uint8_t> fullPackage = packageHeader;
+    fullPackage.resize(fullPackage.size() + 8, 0);
+
+    uint32_t payload_crc = crc32(payload.data(), payload.size());
+
+    fullPackage.insert(fullPackage.end(), payload.begin(), payload.end());
+
+    uint32_t headerChecksum = crc32(fullPackage.data(), headerSize - 8);
+
+    size_t checksumPos = headerSize - 8;
+    fullPackage[checksumPos] = headerChecksum & 0xFF;
+    fullPackage[checksumPos + 1] = (headerChecksum >> 8) & 0xFF;
+    fullPackage[checksumPos + 2] = (headerChecksum >> 16) & 0xFF;
+    fullPackage[checksumPos + 3] = (headerChecksum >> 24) & 0xFF;
+
+    uint32_t invalid_payload_crc = ~payload_crc;
+    fullPackage[checksumPos + 4] = invalid_payload_crc & 0xFF;
+    fullPackage[checksumPos + 5] = (invalid_payload_crc >> 8) & 0xFF;
+    fullPackage[checksumPos + 6] = (invalid_payload_crc >> 16) & 0xFF;
+    fullPackage[checksumPos + 7] = (invalid_payload_crc >> 24) & 0xFF;
+
+    int rc = verify_pldm_firmware_update_package_payload_checksum(
+        fullPackage.data(), fullPackage.size());
+
+    EXPECT_EQ(rc, -EUCLEAN);
+}
+
+TEST(VerifyPayloadChecksum, UnsupportedRevision)
+{
+    std::vector<uint8_t> packageHeader{
+        0xf0, 0x18, 0x87, 0x8c, 0xcb, 0x7d, 0x49, 0x43, 0x98, 0x00,
+        0xa0, 0x2f, 0x05, 0x9a, 0xca, 0x02, 0x01, 0x00, 0x00, 0x00,
+        0xe9, 0x07, 0x03, 0x0b, 0x16, 0x03, 0x00, 0x00, 0x00, 0x00,
+        0x76, 0x02, 0x08, 0x00, 0x01, 0x04, 't',  'e',  's',  't'};
+
+    std::vector<uint8_t> payload;
+    payload.push_back(0x5a);
+
+    uint16_t headerSize = packageHeader.size() + 4;
+    packageHeader[17] = headerSize & 0xFF;
+    packageHeader[18] = (headerSize >> 8) & 0xFF;
+
+    std::vector<uint8_t> fullPackage = packageHeader;
+    fullPackage.resize(fullPackage.size() + 4, 0);
+
+    fullPackage.insert(fullPackage.end(), payload.begin(), payload.end());
+
+    uint32_t headerChecksum = crc32(fullPackage.data(), headerSize - 4);
+
+    size_t checksumPos = headerSize - 4;
+    fullPackage[checksumPos] = headerChecksum & 0xFF;
+    fullPackage[checksumPos + 1] = (headerChecksum >> 8) & 0xFF;
+    fullPackage[checksumPos + 2] = (headerChecksum >> 16) & 0xFF;
+    fullPackage[checksumPos + 3] = (headerChecksum >> 24) & 0xFF;
+
+    int rc = verify_pldm_firmware_update_package_payload_checksum(
+        fullPackage.data(), fullPackage.size());
+
+    EXPECT_EQ(rc, -ENOTSUP);
+}
+
+TEST(VerifyPayloadChecksum, InvalidInput)
+{
+    int rc = verify_pldm_firmware_update_package_payload_checksum(NULL, 100);
+    EXPECT_EQ(rc, -EINVAL);
+
+    uint8_t data[10] = {0};
+    rc = verify_pldm_firmware_update_package_payload_checksum(data, 0);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = verify_pldm_firmware_update_package_payload_checksum(data, 10);
+    EXPECT_EQ(rc, -EINVAL);
+}
