@@ -47,6 +47,18 @@ static constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>
                                              0x49, 0x43, 0x98, 0x00, 0xa0, 0x2f,
                                              0x05, 0x9a, 0xca, 0x02};
 
+static constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>
+    PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_2{0x31, 0x19, 0xCE, 0x2F, 0xE8, 0x0A,
+                                             0x4A, 0x99, 0xAF, 0x6D, 0x46, 0xF8,
+                                             0xB1, 0x21, 0xF6, 0xBF};
+
+static constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>
+    PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_3{0x7B, 0x29, 0x1C, 0x99, 0x6D, 0xB6,
+                                             0x42, 0x08, 0x80, 0x1B, 0x02, 0x02,
+                                             0x6E, 0x46, 0x3C, 0x78};
+
+static constexpr uint8_t PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_V1_2 = 0x03;
+static constexpr uint8_t PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_V1_3 = 0x04;
 static constexpr uint8_t PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_V1_0 = 0x01;
 
 static constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>
@@ -331,6 +343,281 @@ TEST(DecodePackageHeaderInfo, badChecksum)
                                          invalidPackagerHeaderInfo.size(),
                                          &packageHeader, &packageVersion);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(DecodePldmFirmwareUpdatePackage, ValidPayloadChecksum)
+{
+    // Create the package header without checksums
+    std::vector<uint8_t> packageHeader{
+        // UUID for format version 1.3 (big-endian)
+        0x7B, 0x29, 0x1C, 0x99, 0x6D, 0xB6, 0x42, 0x08, 
+        0x80, 0x1B, 0x02, 0x02, 0x6E, 0x46, 0x3C, 0x78,
+        // Format revision 4
+        0x04, 
+        // Package header size (little-endian) - will be updated later
+        0x00, 0x00, 
+        // Release date/time (same as original test)
+        0x00, 0xe9, 0x07, 0x03, 0x0b, 0x16, 0x03, 0x00, 
+        0x00, 0x00, 0x00, 0x76, 0x02, 
+        // Component bitmap bit length
+        0x08, 0x00, 
+        // Package version string type
+        0x01, 
+        // Package version string length
+        0x04, 
+        // Package version string "test"
+        't', 'e', 's', 't',
+
+        // Firmware Device ID Record (same as original test)
+        0x01, 0x18, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
+        0x01, 0x04, 0x00, 0x00, 0x01, 'v', '0', '.', 
+        '1', 0x01, 0x00, 0x04, 0x00, 0x9c, 0x01, 0x00, 
+        0x00,
+
+        // Component Image Information (same as original test)
+        0x01, 0x00, 0x0a, 0x00, 0x00, 0x00, 0xff, 0xff, 
+        0xff, 0xff, 0x00, 0x00, 0x01, 0x00, 0x65, 0x00, 
+        0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x04, 
+        'v', '0', '.', '2', 0x00, 0x00, 0x00, 0x00
+    };
+    
+    // Create the payload
+    std::vector<uint8_t> payload;
+    
+    // Add a small payload (similar to the original test's 0x5a byte)
+    payload.push_back(0x5a);
+    
+    // Add more payload data to make it substantial enough for timing
+    constexpr size_t additionalPayloadSize = 150 * 1024 * 1024; // 4MB
+    payload.reserve(payload.size() + additionalPayloadSize);
+    for (size_t i = 0; i < additionalPayloadSize; ++i) {
+        payload.push_back(static_cast<uint8_t>(i & 0xFF));
+    }
+    
+    // Calculate the correct header size (including both checksums)
+    uint16_t headerSize = packageHeader.size() + 8; // +8 for both checksums
+    packageHeader[17] = headerSize & 0xFF;
+    packageHeader[18] = (headerSize >> 8) & 0xFF;
+    
+    // Create the full package (without checksums yet)
+    std::vector<uint8_t> fullPackage = packageHeader;
+    
+    // Reserve space for both checksums (8 bytes total)
+    fullPackage.resize(fullPackage.size() + 8, 0);
+    
+    // Calculate the payload checksum
+    uint32_t payload_crc = crc32(payload.data(), payload.size());
+    
+    // Add the payload after the checksums
+    fullPackage.insert(fullPackage.end(), payload.begin(), payload.end());
+    
+    // Calculate header checksum (excluding both checksum fields)
+    // This matches how the successful tests do it - only include the header portion
+    uint32_t headerChecksum = crc32(packageHeader.data(), packageHeader.size());
+    
+    // Insert header checksum (little-endian) at the correct position
+    size_t checksumPos = packageHeader.size();
+    fullPackage[checksumPos] = headerChecksum & 0xFF;
+    fullPackage[checksumPos + 1] = (headerChecksum >> 8) & 0xFF;
+    fullPackage[checksumPos + 2] = (headerChecksum >> 16) & 0xFF;
+    fullPackage[checksumPos + 3] = (headerChecksum >> 24) & 0xFF;
+    
+    // Insert payload checksum (little-endian) after header checksum
+    fullPackage[checksumPos + 4] = payload_crc & 0xFF;
+    fullPackage[checksumPos + 5] = (payload_crc >> 8) & 0xFF;
+    fullPackage[checksumPos + 6] = (payload_crc >> 16) & 0xFF;
+    fullPackage[checksumPos + 7] = (payload_crc >> 24) & 0xFF;
+    
+    // Add debug output
+    printf("Testing with package size: %zu bytes\n", fullPackage.size());
+    printf("Package header size: %u bytes\n", headerSize);
+    printf("Header checksum: 0x%08x\n", headerChecksum);
+    printf("Payload size: %zu bytes\n", payload.size());
+    printf("Calculated payload checksum: 0x%08x\n", payload_crc);
+    
+    // Verify our CRC calculation
+    uint32_t verify_crc = crc32(payload.data(), payload.size());
+    printf("Verification CRC: 0x%08x\n", verify_crc);
+    
+    // Now test the package parsing
+    struct pldm_firmware_update_package_iter iter;
+    int rc;
+    
+    // Measure time for the full function call
+    auto start = std::chrono::high_resolution_clock::now();
+    rc = decode_pldm_firmware_update_package(fullPackage.data(), fullPackage.size(), &iter);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    
+    printf("Full function time: %ld microseconds\n", duration.count());
+    printf("Return code: %d\n", rc);
+    
+    // We expect the function to succeed since the payload checksum is valid
+    EXPECT_EQ(rc, 0);
+    
+    // Verify that the package header was correctly parsed
+    EXPECT_EQ(iter.hdr.package_header_format_revision, 4);
+    EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_3.data(),
+                    iter.hdr.package_header_identifier,
+                    PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_3.size()),
+            0);
+    
+    // Verify the package version string
+    EXPECT_EQ(iter.hdr.package_version_string_type, 1);
+    ASSERT_EQ(iter.hdr.package_version_string.length, 4);
+    EXPECT_EQ(memcmp("test", iter.hdr.package_version_string.ptr,
+                    iter.hdr.package_version_string.length),
+            0);
+}
+
+TEST(DecodePldmFirmwareUpdatePackage, InvalidPayloadChecksum)
+{
+    // Create the package header without checksums
+    std::vector<uint8_t> packageHeader{
+        // UUID for format version 1.3 (big-endian)
+        0x7B, 0x29, 0x1C, 0x99, 0x6D, 0xB6, 0x42, 0x08, 
+        0x80, 0x1B, 0x02, 0x02, 0x6E, 0x46, 0x3C, 0x78,
+        // Format revision 4
+        0x04, 
+        // Package header size (little-endian) - will be updated later
+        0x00, 0x00, 
+        // Release date/time (same as original test)
+        0x00, 0xe9, 0x07, 0x03, 0x0b, 0x16, 0x03, 0x00, 
+        0x00, 0x00, 0x00, 0x76, 0x02, 
+        // Component bitmap bit length
+        0x08, 0x00, 
+        // Package version string type
+        0x01, 
+        // Package version string length
+        0x04, 
+        // Package version string "test"
+        't', 'e', 's', 't',
+
+        // Firmware Device ID Record (same as original test)
+        0x01, 0x18, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 
+        0x01, 0x04, 0x00, 0x00, 0x01, 'v', '0', '.', 
+        '1', 0x01, 0x00, 0x04, 0x00, 0x9c, 0x01, 0x00, 
+        0x00,
+
+        // Component Image Information (same as original test)
+        0x01, 0x00, 0x0a, 0x00, 0x00, 0x00, 0xff, 0xff, 
+        0xff, 0xff, 0x00, 0x00, 0x01, 0x00, 0x65, 0x00, 
+        0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x04, 
+        'v', '0', '.', '2', 0x00, 0x00, 0x00, 0x00
+    };
+    
+    // Create the payload
+    std::vector<uint8_t> payload;
+    
+    // Add a small payload (similar to the original test's 0x5a byte)
+    payload.push_back(0x5a);
+    
+    // Add more payload data to make it substantial enough for timing
+    constexpr size_t additionalPayloadSize = 1024; // Smaller size for faster test
+    payload.reserve(payload.size() + additionalPayloadSize);
+    for (size_t i = 0; i < additionalPayloadSize; ++i) {
+        payload.push_back(static_cast<uint8_t>(i & 0xFF));
+    }
+    
+    // Calculate the correct header size (including both checksums)
+    uint16_t headerSize = packageHeader.size() + 8; // +8 for both checksums
+    packageHeader[17] = headerSize & 0xFF;
+    packageHeader[18] = (headerSize >> 8) & 0xFF;
+    
+    // Create the full package (without checksums yet)
+    std::vector<uint8_t> fullPackage = packageHeader;
+    
+    // Reserve space for both checksums (8 bytes total)
+    fullPackage.resize(fullPackage.size() + 8, 0);
+    
+    // Calculate the payload checksum
+    uint32_t payload_crc = crc32(payload.data(), payload.size());
+    
+    // Add the payload after the checksums
+    fullPackage.insert(fullPackage.end(), payload.begin(), payload.end());
+    
+    // Calculate header checksum over the entire header up to the checksum field
+    uint32_t headerChecksum = crc32(fullPackage.data(), headerSize - 8);
+    
+    // Insert header checksum (little-endian) at the correct position
+    size_t checksumPos = headerSize - 8;
+    fullPackage[checksumPos] = headerChecksum & 0xFF;
+    fullPackage[checksumPos + 1] = (headerChecksum >> 8) & 0xFF;
+    fullPackage[checksumPos + 2] = (headerChecksum >> 16) & 0xFF;
+    fullPackage[checksumPos + 3] = (headerChecksum >> 24) & 0xFF;
+    
+    // Insert INVALID payload checksum (just flip some bits to make it wrong)
+    uint32_t invalid_payload_crc = ~payload_crc;  // Bitwise NOT to create invalid checksum
+    fullPackage[checksumPos + 4] = invalid_payload_crc & 0xFF;
+    fullPackage[checksumPos + 5] = (invalid_payload_crc >> 8) & 0xFF;
+    fullPackage[checksumPos + 6] = (invalid_payload_crc >> 16) & 0xFF;
+    fullPackage[checksumPos + 7] = (invalid_payload_crc >> 24) & 0xFF;
+    
+    // Add debug output
+    printf("Testing with package size: %zu bytes\n", fullPackage.size());
+    printf("Package header size: %u bytes\n", headerSize);
+    printf("Header checksum: 0x%08x\n", headerChecksum);
+    printf("Payload size: %zu bytes\n", payload.size());
+    printf("Correct payload checksum: 0x%08x\n", payload_crc);
+    printf("Invalid payload checksum used: 0x%08x\n", invalid_payload_crc);
+    
+    // Now test the package parsing
+    struct pldm_firmware_update_package_iter iter;
+    int rc;
+    
+    // Measure time for the full function call
+    auto start = std::chrono::high_resolution_clock::now();
+    rc = decode_pldm_firmware_update_package(fullPackage.data(), fullPackage.size(), &iter);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    
+    printf("Full function time: %ld microseconds\n", duration.count());
+    printf("Return code: %d\n", rc);
+    
+    // We expect the function to FAIL since the payload checksum is INVALID
+    EXPECT_NE(rc, 0);
+    
+    // Create a second package with valid checksums to verify the function works correctly
+    std::vector<uint8_t> validPackage = packageHeader;
+    validPackage.resize(validPackage.size() + 8, 0);
+    validPackage.insert(validPackage.end(), payload.begin(), payload.end());
+    
+    // Insert the same valid header checksum
+    validPackage[checksumPos] = headerChecksum & 0xFF;
+    validPackage[checksumPos + 1] = (headerChecksum >> 8) & 0xFF;
+    validPackage[checksumPos + 2] = (headerChecksum >> 16) & 0xFF;
+    validPackage[checksumPos + 3] = (headerChecksum >> 24) & 0xFF;
+    
+    // Insert VALID payload checksum
+    validPackage[checksumPos + 4] = payload_crc & 0xFF;
+    validPackage[checksumPos + 5] = (payload_crc >> 8) & 0xFF;
+    validPackage[checksumPos + 6] = (payload_crc >> 16) & 0xFF;
+    validPackage[checksumPos + 7] = (payload_crc >> 24) & 0xFF;
+    
+    printf("Testing with valid package for comparison\n");
+    
+    // Test with valid package
+    rc = decode_pldm_firmware_update_package(validPackage.data(), validPackage.size(), &iter);
+    printf("Valid package return code: %d\n", rc);
+    
+    // This should succeed
+    EXPECT_EQ(rc, 0);
+    
+    if (rc == 0) {
+        // Verify that the package header was correctly parsed
+        EXPECT_EQ(iter.hdr.package_header_format_revision, 4);
+        EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_3.data(),
+                        iter.hdr.package_header_identifier,
+                        PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_3.size()),
+                0);
+        
+        // Verify the package version string
+        EXPECT_EQ(iter.hdr.package_version_string_type, 1);
+        ASSERT_EQ(iter.hdr.package_version_string.length, 4);
+        EXPECT_EQ(memcmp("test", iter.hdr.package_version_string.ptr,
+                        iter.hdr.package_version_string.length),
+                0);
+    }
 }
 
 TEST(DecodeFirmwareDeviceIdRecord, goodPath)
@@ -725,8 +1012,8 @@ TEST(DecodeDescriptors, goodPath3Descriptors)
                       PLDM_FWUP_IANA_ENTERPRISE_ID_LENGTH);
             EXPECT_EQ(true,
                       std::equal(descriptorData.ptr,
-                                 descriptorData.ptr + descriptorData.length,
-                                 iana.begin(), iana.end()));
+                                  descriptorData.ptr + descriptorData.length,
+                                  iana.begin(), iana.end()));
         }
         else if (descriptorCount == 2)
         {
@@ -2006,7 +2293,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneDescriptorEach)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -2116,7 +2405,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesTwoOneDescriptors)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -2231,7 +2522,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneTwoDescriptors)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -3753,7 +4046,7 @@ TEST(TransferComplete, goodPathDecodeRequest)
 TEST(TransferComplete, errorPathDecodeRequest)
 {
     constexpr std::array<uint8_t, hdrSize> transferCompleteReq{0x00, 0x00,
-                                                               0x00};
+                                                              0x00};
     auto requestMsg =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const pldm_msg*>(transferCompleteReq.data());
@@ -4670,7 +4963,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
     int nr_ddrec = 0;
     int nr_infos = 0;
     int rc;
-
+    
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
                                              &iter);
     ASSERT_EQ(rc, 0);
@@ -4729,8 +5022,8 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
 
             nr_fdrec_desc++;
         }
-        ASSERT_EQ(rc, 0);
-
+    ASSERT_EQ(rc, 0);
+    
         nr_fdrec++;
     }
     ASSERT_EQ(rc, 0);
