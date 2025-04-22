@@ -47,6 +47,18 @@ static constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>
                                              0x49, 0x43, 0x98, 0x00, 0xa0, 0x2f,
                                              0x05, 0x9a, 0xca, 0x02};
 
+static constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>
+    PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_2{0x31, 0x19, 0xCE, 0x2F, 0xE8, 0x0A,
+                                             0x4A, 0x99, 0xAF, 0x6D, 0x46, 0xF8,
+                                             0xB1, 0x21, 0xF6, 0xBF};
+
+static constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>
+    PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_3{0x7B, 0x29, 0x1C, 0x99, 0x6D, 0xB6,
+                                             0x42, 0x08, 0x80, 0x1B, 0x02, 0x02,
+                                             0x6E, 0x46, 0x3C, 0x78};
+
+static constexpr uint8_t PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_V1_2 = 0x03;
+static constexpr uint8_t PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_V1_3 = 0x04;
 static constexpr uint8_t PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_V1_0 = 0x01;
 
 static constexpr std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>
@@ -725,8 +737,8 @@ TEST(DecodeDescriptors, goodPath3Descriptors)
                       PLDM_FWUP_IANA_ENTERPRISE_ID_LENGTH);
             EXPECT_EQ(true,
                       std::equal(descriptorData.ptr,
-                                 descriptorData.ptr + descriptorData.length,
-                                 iana.begin(), iana.end()));
+                                  descriptorData.ptr + descriptorData.length,
+                                  iana.begin(), iana.end()));
         }
         else if (descriptorCount == 2)
         {
@@ -2006,7 +2018,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneDescriptorEach)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -2116,7 +2130,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesTwoOneDescriptors)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -2231,7 +2247,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneTwoDescriptors)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -3753,7 +3771,7 @@ TEST(TransferComplete, goodPathDecodeRequest)
 TEST(TransferComplete, errorPathDecodeRequest)
 {
     constexpr std::array<uint8_t, hdrSize> transferCompleteReq{0x00, 0x00,
-                                                               0x00};
+                                                              0x00};
     auto requestMsg =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const pldm_msg*>(transferCompleteReq.data());
@@ -4670,7 +4688,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
     int nr_ddrec = 0;
     int nr_infos = 0;
     int rc;
-
+    
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
                                              &iter);
     ASSERT_EQ(rc, 0);
@@ -4729,8 +4747,8 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
 
             nr_fdrec_desc++;
         }
-        ASSERT_EQ(rc, 0);
-
+    ASSERT_EQ(rc, 0);
+    
         nr_fdrec++;
     }
     ASSERT_EQ(rc, 0);
