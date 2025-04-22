@@ -40,6 +40,8 @@ Change categories:
 - Introduce interator-based firmware update package parsing APIs
 >>>>>>> theirs
 
+- firmware_update: add package payload checksum
+
 ### Changed
 
 - clang-format: update latest spec and reformat with clang-20
