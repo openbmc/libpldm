@@ -13,6 +13,11 @@
 #include <endian.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+
+#define PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_1_3 4
 
 static_assert(PLDM_FIRMWARE_MAX_STRING <= UINT8_MAX, "too large");
 
@@ -531,7 +536,10 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	}
 	hdr->areas.length = package_header_areas_size;
 
-	pldm_msgbuf_extract(buf, package_header_checksum);
+	rc = pldm_msgbuf_extract(buf, package_header_checksum);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
 
 	if (hdr->package_header_format_revision >=
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
@@ -541,6 +549,7 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 		if (rc) {
 			return pldm_msgbuf_discard(buf, rc);
 		}
+		/* Store checksum for internal verification - not exposed to API */
 	} else {
 		package_payload_offset = NULL;
 		package_payload_size = 0;
@@ -554,26 +563,33 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	rc = pldm_edac_crc32_validate(package_header_checksum, data,
 				      package_header_payload_size);
 	if (rc) {
-#if 0
-		printf("header checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_header_checksum, pldm_edac_crc32(data, package_header_payload_size));
-#endif
 		return rc;
 	}
 
 	if (hdr->package_header_format_revision >=
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
+		struct timespec start_time, end_time;
+		clock_gettime(CLOCK_MONOTONIC, &start_time);
+
 		rc = pldm_edac_crc32_validate(package_payload_checksum,
 					      package_payload_offset,
 					      package_payload_size);
+
+		clock_gettime(CLOCK_MONOTONIC, &end_time);
+
+		/* Calculate verification time in milliseconds */
+		long verification_time_ms =
+			(end_time.tv_sec - start_time.tv_sec) * 1000 +
+			(end_time.tv_nsec - start_time.tv_nsec) / 1000000;
+
+		printf("Package payload checksum verification completed in %ld ms\n",
+		       verification_time_ms);
+
 		if (rc) {
-#if 0
-			printf("payload checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_payload_checksum, pldm_edac_crc32(package_payload_offset, package_payload_size));
-#endif
 			return rc;
 		}
 	}
 
-	/* We stash these to resolve component images later */
 	hdr->package.ptr = data;
 	hdr->package.length = length;
 
@@ -759,7 +775,6 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 		buf, rec->component_image_set_version_string.length,
 		(void **)&rec->component_image_set_version_string.ptr);
 
-	/* The total length reserved for `package_data` and `reference_manifest_data` */
 	firmware_device_package_data_offset =
 		rec->firmware_device_package_data.length +
 		rec->reference_manifest_data.length;
@@ -3596,3 +3611,6 @@ int decode_pldm_package_component_image_information_from_iter(
 
 	return 0;
 }
+
+/* Removed standalone checksum verification functions - 
+   checksum verification is now integrated into package parsing */

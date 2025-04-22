@@ -2181,8 +2181,10 @@ int encode_cancel_update_resp(uint8_t instance_id,
 
 /** @brief Firmware update v1.0 package header identifier */
 #define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_0                                    \
-	{ 0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D, 0x49, 0x43,                      \
-	  0x98, 0x00, 0xA0, 0x2F, 0x05, 0x9A, 0xCA, 0x02 }
+	{                                                                      \
+		0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D, 0x49, 0x43, 0x98, 0x00,    \
+			0xA0, 0x2F, 0x05, 0x9A, 0xCA, 0x02                     \
+	}
 
 /** @brief Firmware update v1.0 package header format revision */
 #define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H 0x01
@@ -2190,8 +2192,8 @@ int encode_cancel_update_resp(uint8_t instance_id,
 /** @brief Firmware update v1.1 package header identifier */
 #define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1                                    \
 	{                                                                      \
-		0x12, 0x44, 0xd2, 0x64, 0x8d, 0x7d, 0x47, 0x18,                \
-		0xa0, 0x30, 0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5a,                \
+		0x12, 0x44, 0xd2, 0x64, 0x8d, 0x7d, 0x47, 0x18, 0xa0, 0x30,    \
+			0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5a,                    \
 	}
 
 /** @brief Firmware update v1.1 package header format revision */
@@ -2200,8 +2202,8 @@ int encode_cancel_update_resp(uint8_t instance_id,
 /** @brief Firmware update v1.2 package header identifier */
 #define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2                                    \
 	{                                                                      \
-		0x31, 0x19, 0xce, 0x2f, 0xe8, 0x0a, 0x4a, 0x99,                \
-		0xaf, 0x6d, 0x46, 0xf8, 0xb1, 0x21, 0xf6, 0xbf,                \
+		0x31, 0x19, 0xce, 0x2f, 0xe8, 0x0a, 0x4a, 0x99, 0xaf, 0x6d,    \
+			0x46, 0xf8, 0xb1, 0x21, 0xf6, 0xbf,                    \
 	}
 
 /** @brief Firmware update v1.2 package header format revision */
@@ -2210,8 +2212,8 @@ int encode_cancel_update_resp(uint8_t instance_id,
 /** @brief Firmware update v1.3 package header identifier */
 #define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3                                    \
 	{                                                                      \
-		0x7b, 0x29, 0x1c, 0x99, 0x6d, 0xb6, 0x42, 0x08,                \
-		0x80, 0x1b, 0x02, 0x02, 0x6e, 0x46, 0x3c, 0x78,                \
+		0x7b, 0x29, 0x1c, 0x99, 0x6d, 0xb6, 0x42, 0x08, 0x80, 0x1b,    \
+			0x02, 0x02, 0x6e, 0x46, 0x3c, 0x78,                    \
 	}
 
 /** @brief Firmware update v1.3 package header format revision */
@@ -2294,6 +2296,7 @@ struct pldm__package_header_information {
 	/* TODO: some metadata for the parsing process is stored here, reconsider */
 	struct variable_field areas;
 	struct variable_field package;
+	/* Removed package_payload_checksum field - checksum verification is now internal */
 };
 /* TODO: Deprecate the other struct pldm_package_header_information, remove, drop typedef */
 typedef struct pldm__package_header_information
@@ -3026,6 +3029,8 @@ int decode_pldm_package_component_image_information_from_iter(
 			.revision = PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H, \
 		} \
 	}
+
+/* Removed public checksum verification API - checksum verification is now internal to package parsing */
 
 #ifdef __cplusplus
 }

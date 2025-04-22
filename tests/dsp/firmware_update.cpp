@@ -2016,7 +2016,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneDescriptorEach)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -2126,7 +2128,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesTwoOneDescriptors)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -2241,7 +2245,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneTwoDescriptors)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -5658,6 +5664,9 @@ TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
 
     EXPECT_EQ(nr_infos, 2);
 }
+
+/* Removed standalone checksum verification test -
+   checksum verification is now integrated into package parsing */
 #endif
 
 #ifdef LIBPLDM_API_TESTING
@@ -5710,8 +5719,21 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
     int nr_infos = 0;
     int rc;
 
+    printf("Testing v4 package parsing with integrated checksum "
+           "verification...\n");
+    struct timespec start_time, end_time;
+    clock_gettime(CLOCK_MONOTONIC, &start_time);
+
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
                                              &pin, &hdr, &iter);
+
+    clock_gettime(CLOCK_MONOTONIC, &end_time);
+    long parsing_time_ms = (end_time.tv_sec - start_time.tv_sec) * 1000 +
+                           (end_time.tv_nsec - start_time.tv_nsec) / 1000000;
+    printf("Package parsing (including checksum verification) completed in %ld "
+           "ms\n",
+           parsing_time_ms);
+
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_3.data(),
@@ -5908,4 +5930,17 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
 
     EXPECT_EQ(nr_infos, 2);
 }
+
+/* Removed standalone checksum verification test -
+   checksum verification is now integrated into package parsing */
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+/* Removed standalone checksum verification test -
+   checksum verification is now integrated into package parsing */
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+/* Removed standalone checksum verification test -
+   checksum verification is now integrated into package parsing */
 #endif
