@@ -24,6 +24,7 @@ Change categories:
 - pdr: Add pldm_pdr_delete_by_effecter_id() API
 - platform: Add encode req for GetPDRRepositoryInfo
 - pdr: Add pldm_pdr_delete_by_sensor_id() API
+- firmware_update: add package payload checksum
 
 - oem: ibm: Add boot side rename state set and enum
 
