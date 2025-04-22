@@ -13,6 +13,11 @@
 #include <endian.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+
+#define PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_1_3 4
 
 static_assert(PLDM_FIRMWARE_MAX_STRING <= UINT8_MAX, "too large");
 
@@ -531,7 +536,10 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	}
 	hdr->areas.length = package_header_areas_size;
 
-	pldm_msgbuf_extract(buf, package_header_checksum);
+	rc = pldm_msgbuf_extract(buf, package_header_checksum);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
 
 	if (hdr->package_header_format_revision >=
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
@@ -541,6 +549,7 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 		if (rc) {
 			return pldm_msgbuf_discard(buf, rc);
 		}
+		hdr->package_payload_checksum = package_payload_checksum;
 	} else {
 		package_payload_offset = NULL;
 		package_payload_size = 0;
@@ -554,9 +563,6 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	rc = pldm_edac_crc32_validate(package_header_checksum, data,
 				      package_header_payload_size);
 	if (rc) {
-#if 0
-		printf("header checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_header_checksum, pldm_edac_crc32(data, package_header_payload_size));
-#endif
 		return rc;
 	}
 
@@ -566,14 +572,10 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 					      package_payload_offset,
 					      package_payload_size);
 		if (rc) {
-#if 0
-			printf("payload checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_payload_checksum, pldm_edac_crc32(package_payload_offset, package_payload_size));
-#endif
 			return rc;
 		}
 	}
 
-	/* We stash these to resolve component images later */
 	hdr->package.ptr = data;
 	hdr->package.length = length;
 
@@ -759,7 +761,6 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 		buf, rec->component_image_set_version_string.length,
 		(void **)&rec->component_image_set_version_string.ptr);
 
-	/* The total length reserved for `package_data` and `reference_manifest_data` */
 	firmware_device_package_data_offset =
 		rec->firmware_device_package_data.length +
 		rec->reference_manifest_data.length;
@@ -3595,4 +3596,131 @@ int decode_pldm_package_component_image_information_from_iter(
 	info->component_image.length = component_size;
 
 	return 0;
+}
+
+#define PLDM_FWUP_CHECKSUM_CHUNK_SIZE (8ULL * 1024ULL)
+
+struct pldm_payload_checksum_ctx {
+	const uint8_t *payload_data;
+	size_t payload_size;
+	size_t bytes_processed;
+	uint32_t current_checksum;
+	uint32_t stored_checksum;
+	struct timespec start_time;
+	bool initialized;
+};
+
+static int verify_pldm_firmware_update_package_payload_checksum_init_ctx(
+	const void *data, size_t length, struct pldm_payload_checksum_ctx *ctx)
+{
+	if (!data || length == 0 || !ctx) {
+		return -EINVAL;
+	}
+
+	const uint8_t *bytes = data;
+
+	if (length < PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE) {
+		return -EINVAL;
+	}
+
+	const uint8_t formatRevision = bytes[16];
+
+	if (formatRevision < PLDM_FWUP_PACKAGE_HEADER_FORMAT_REVISION_1_3) {
+		return -ENOTSUP;
+	}
+
+	uint16_t headerSize = bytes[17] | (bytes[18] << 8);
+
+	if (headerSize > length) {
+		return -EBADMSG;
+	}
+
+	size_t payloadSize = length - headerSize;
+
+	if (payloadSize == 0) {
+		return -EBADMSG;
+	}
+
+	uint32_t storedPayloadChecksum =
+		(uint32_t)bytes[headerSize - 4] |
+		((uint32_t)bytes[headerSize - 3] << 8) |
+		((uint32_t)bytes[headerSize - 2] << 16) |
+		((uint32_t)bytes[headerSize - 1] << 24);
+
+	ctx->payload_data = bytes + headerSize;
+	ctx->payload_size = payloadSize;
+	ctx->bytes_processed = 0;
+	ctx->current_checksum = 0;
+	ctx->stored_checksum = storedPayloadChecksum;
+	clock_gettime(CLOCK_MONOTONIC, &ctx->start_time);
+	ctx->initialized = true;
+
+	return 0;
+}
+
+static int verify_pldm_firmware_update_package_payload_checksum_process_ctx(
+	struct pldm_payload_checksum_ctx *ctx)
+{
+	if (!ctx || !ctx->initialized) {
+		return -EINVAL;
+	}
+
+	if (ctx->bytes_processed >= ctx->payload_size) {
+		struct timespec end;
+		clock_gettime(CLOCK_MONOTONIC, &end);
+
+		if (ctx->current_checksum != ctx->stored_checksum) {
+			return -EUCLEAN;
+		}
+
+		ctx->initialized = false;
+		return 0;
+	}
+
+	size_t remaining = ctx->payload_size - ctx->bytes_processed;
+	size_t chunk_size = (remaining < PLDM_FWUP_CHECKSUM_CHUNK_SIZE) ?
+				    remaining :
+				    PLDM_FWUP_CHECKSUM_CHUNK_SIZE;
+
+	const uint8_t *chunk_data = ctx->payload_data + ctx->bytes_processed;
+
+	if (ctx->bytes_processed == 0) {
+		ctx->current_checksum = 0xFFFFFFFF;
+	}
+
+	uint32_t crc = ctx->current_checksum;
+	for (size_t i = 0; i < chunk_size; i++) {
+		uint8_t byte = chunk_data[i];
+		crc ^= byte;
+		for (int j = 0; j < 8; j++) {
+			crc = (crc >> 1) ^ (0xEDB88320 & -(crc & 1));
+		}
+	}
+	ctx->current_checksum = crc;
+
+	ctx->bytes_processed += chunk_size;
+
+	if (ctx->bytes_processed >= ctx->payload_size) {
+		ctx->current_checksum = ~ctx->current_checksum;
+	}
+
+	return 1;
+}
+
+LIBPLDM_ABI_TESTING
+int verify_pldm_firmware_update_package_payload_checksum(const void *data,
+							 size_t length)
+{
+	struct pldm_payload_checksum_ctx ctx = { 0 };
+	int rc = verify_pldm_firmware_update_package_payload_checksum_init_ctx(
+		data, length, &ctx);
+	if (rc < 0) {
+		return rc;
+	}
+
+	while ((rc = verify_pldm_firmware_update_package_payload_checksum_process_ctx(
+			&ctx)) > 0) {
+	}
+
+	return rc;
 }

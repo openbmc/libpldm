@@ -69,6 +69,8 @@ Change categories:
 - base: Add `PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION` completion code
 - Introduce interator-based firmware update package parsing APIs
 
+- firmware_update: add package payload checksum
+
 ### Changed
 
 - clang-format: update latest spec and reformat with clang-20

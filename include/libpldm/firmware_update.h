@@ -2294,6 +2294,7 @@ struct pldm__package_header_information {
 	/* TODO: some metadata for the parsing process is stored here, reconsider */
 	struct variable_field areas;
 	struct variable_field package;
+	uint32_t package_payload_checksum; // Added for format revision 3+
 };
 /* TODO: Deprecate the other struct pldm_package_header_information, remove, drop typedef */
 typedef struct pldm__package_header_information
@@ -3026,6 +3027,25 @@ int decode_pldm_package_component_image_information_from_iter(
 			.revision = PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H, \
 		} \
 	}
+
+/**
+ * @brief Verify the payload checksum of a PLDM firmware update package
+ *
+ * This function extracts the payload checksum from the package header
+ * and verifies it against the calculated CRC-32 of the payload data.
+ * The payload is all data after the package header.
+ *
+ * @param[in] data - Pointer to the complete firmware update package
+ * @param[in] length - Total length of the firmware update package
+ *
+ * @return 0 on success (checksum matches), negative error code on failure:
+ *         -EINVAL: Invalid input parameters
+ *         -ENOTSUP: Package format revision doesn't support payload checksum (<3)
+ *         -EBADMSG: Invalid package structure
+ *         -EUCLEAN: Checksum verification failed
+ */
+int verify_pldm_firmware_update_package_payload_checksum(const void *data,
+							 size_t length);
 
 #ifdef __cplusplus
 }
