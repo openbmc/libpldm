@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8042adf9_ae5a5057",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-04-23T10:43:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2fdf299a_1a2b2682",
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "784c6ca8_3ca46b9c",
@@ -48,6 +66,30 @@
       "writtenOn": "2025-03-20T02:50:58Z",
       "side": 1,
       "message": "This is an ill-defined way to specify a flexible array, and going forward I want to avoid flexible arrays altogether for ergonomic reasons:\n\nhttps://github.com/openbmc/libpldm/blob/9c57ef5d371cec85075c7524a34c77bb8d8d884b/docs/checklists/changes.md#L154-L173\n\nLooking at the message, this might perhaps be best defined as:\n\n```\nstruct pldm_get_event_receiver_resp {\n    uint8_t completion_code;\n    uint8_t transport_protocol_type;\n    union {\n        uint8_t mctp_eid;\n        struct variable_field vendor_specific;\n    } event_receiver_address;\n};\n```",
+      "range": {
+        "startLine": 1061,
+        "startChar": 1,
+        "endLine": 1061,
+        "endChar": 20
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6450573_8b8412ce",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-04-23T10:43:17Z",
+      "side": 1,
+      "message": "Corrected in patch 10",
+      "parentUuid": "784c6ca8_3ca46b9c",
       "range": {
         "startLine": 1061,
         "startChar": 1,
@@ -83,6 +125,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a828657_ffacd0b4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1062,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-04-23T10:43:17Z",
+      "side": 1,
+      "message": "Test fails without packed. Not sure why, need to investigate more. Feedback appreciated",
+      "parentUuid": "4a177f68_71ee1053",
+      "range": {
+        "startLine": 1062,
+        "startChar": 2,
+        "endLine": 1062,
+        "endChar": 26
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb4cee72_af34909b",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 7
@@ -94,6 +160,24 @@
       "writtenOn": "2025-03-20T02:50:58Z",
       "side": 1,
       "message": "Using PLDM completion codes to signal library errors is not preferred going forward. See:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L197-L202\n\nPlease fix throughout.",
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28e3ba10_814daa45",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-04-23T10:43:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fb4cee72_af34909b",
       "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -115,6 +199,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de096263_3147e118",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2409,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-04-23T10:43:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "38b4916a_2cbab0f9",
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fda034ad_2518b7bf",
@@ -128,6 +230,30 @@
       "writtenOn": "2025-03-20T02:50:58Z",
       "side": 1,
       "message": "Please don\u0027t decompose the message structure this way 😊 See:\n\nhttps://github.com/openbmc/libpldm/blob/9c57ef5d371cec85075c7524a34c77bb8d8d884b/docs/checklists/changes.md#L139-L146",
+      "range": {
+        "startLine": 2427,
+        "startChar": 6,
+        "endLine": 2429,
+        "endChar": 31
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b54cb28e_bc739281",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2429,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-04-23T10:43:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fda034ad_2518b7bf",
       "range": {
         "startLine": 2427,
         "startChar": 6,
@@ -163,6 +289,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a722d5d_5797b664",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2447,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-04-23T10:43:17Z",
+      "side": 1,
+      "message": "Corrected in patch 10",
+      "parentUuid": "1a9de7c3_bb9e282a",
+      "range": {
+        "startLine": 2445,
+        "startChar": 56,
+        "endLine": 2447,
+        "endChar": 43
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0c0515a_39d8026c",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 7
@@ -174,6 +324,30 @@
       "writtenOn": "2025-03-20T02:50:58Z",
       "side": 1,
       "message": "See comment about always providing the length above.",
+      "range": {
+        "startLine": 2448,
+        "startChar": 7,
+        "endLine": 2448,
+        "endChar": 27
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "082855c7_168a6363",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2448,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-04-23T10:43:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e0c0515a_39d8026c",
       "range": {
         "startLine": 2448,
         "startChar": 7,
