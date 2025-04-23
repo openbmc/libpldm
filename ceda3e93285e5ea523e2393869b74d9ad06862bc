@@ -100,6 +100,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9c21b23_e44c6b1a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-04-23T10:43:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a6450573_8b8412ce",
+      "range": {
+        "startLine": 1061,
+        "startChar": 1,
+        "endLine": 1061,
+        "endChar": 20
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a177f68_71ee1053",
@@ -311,6 +335,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c8dca5a_03fa9188",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2447,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-04-23T10:43:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9a722d5d_5797b664",
+      "range": {
+        "startLine": 2445,
+        "startChar": 56,
+        "endLine": 2447,
+        "endChar": 43
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0c0515a_39d8026c",
@@ -371,6 +419,30 @@
       "writtenOn": "2025-03-20T02:50:58Z",
       "side": 1,
       "message": "Please rather use the `msgbuf` APIs for packing (and unpacking) message data. See:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L205-L207\n\nPlease fix this in all the new functions here.\n\nHappy to answer queries on how those APIs are meant to work. This commit message provides some helpful background:\n\nhttps://github.com/openbmc/libpldm/commit/c63f63a2d9d7d25b21b76a1a6098ee1a3176be7e",
+      "range": {
+        "startLine": 2538,
+        "startChar": 2,
+        "endLine": 2538,
+        "endChar": 54
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d8a8c54_d8997293",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2538,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-04-23T10:43:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5f079787_198d3536",
       "range": {
         "startLine": 2538,
         "startChar": 2,
