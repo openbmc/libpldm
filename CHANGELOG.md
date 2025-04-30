@@ -29,6 +29,8 @@ Change categories:
   No functional change APIs; clang-format was unhappy with some whitespace in
   the headers.
 
+- pdr: Stabilize pldm_pdr_delete_by_record_handle()
+
 ### Deprecated
 
 - utils: Deprecate `is_time_legal()`
