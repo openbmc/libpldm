@@ -772,7 +772,6 @@ TEST(PDRAccess, testGetTerminusHandle)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(PDRAccess, testRemoveByRecordHandle)
 {
     std::array<uint8_t, sizeof(pldm_pdr_hdr)> data{};
@@ -802,7 +801,6 @@ TEST(PDRAccess, testRemoveByRecordHandle)
 
     pldm_pdr_destroy(repo);
 }
-#endif
 
 TEST(EntityAssociationPDR, testInit)
 {
