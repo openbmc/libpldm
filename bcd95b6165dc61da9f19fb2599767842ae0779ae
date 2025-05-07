@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce4e74b1_368214b8",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001384
+      },
+      "writtenOn": "2025-05-07T06:11:48Z",
+      "side": 1,
+      "message": "This is addressed in commit f38afa5(oem: ibm: Update the slot sensor and effecter state set id)",
+      "parentUuid": "b7579fff_9af3fe66",
+      "revId": "bcd95b6165dc61da9f19fb2599767842ae0779ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "227ac0f2_1b6af433",
