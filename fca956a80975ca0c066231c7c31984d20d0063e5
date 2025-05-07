@@ -215,6 +215,24 @@
       "parentUuid": "b4c85264_636030be",
       "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980dbfa1_884854ad",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-07T03:32:43Z",
+      "side": 1,
+      "message": "What do you feel makes this done? What I was asking was that you look at each of the places you return an error in the implementation and provide a corresponding test for that path.\n\nAlso, please avoid single test cases that test multiple behaviours. I would like the tests to have a relationship of one behaviour to one test function (a new `TEST(...)` defined for each behaviour exercised), unless they truly are trivial (e.g. where passing `NULL` for a parameter value should result in an error value returned - anything beyond that is non-trivial).",
+      "parentUuid": "90804d1a_1f6d0232",
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
