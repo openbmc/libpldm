@@ -909,7 +909,7 @@ struct pldm_entity_auxiliary_names_pdr {
 	char auxiliary_name_data[]
 		__attribute__((aligned(alignof(pldm_utf16be))));
 #else
-#error("__has_attribute() support is required to uphold runtime safety")
+#error ("__has_attribute() support is required to uphold runtime safety")
 #endif
 #endif
 };
