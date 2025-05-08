@@ -173,6 +173,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99775fa8_208595ff",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1062,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-08T07:06:38Z",
+      "side": 1,
+      "message": "I expect you\u0027re trying to cast the struct over the message buffer, which is what I\u0027m asking you to avoid 😊\n\nThe idea of the encode/decode APIs they transform a standard C struct into a buffer, or a buffer into a standard C struct, without the mess that comes with `__attribute__((packed))`.",
+      "parentUuid": "5a828657_ffacd0b4",
+      "range": {
+        "startLine": 1062,
+        "startChar": 2,
+        "endLine": 1062,
+        "endChar": 26
+      },
+      "revId": "ceda3e93285e5ea523e2393869b74d9ad06862bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb4cee72_af34909b",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 7

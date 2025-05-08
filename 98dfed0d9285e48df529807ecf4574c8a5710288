@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a236b6d_cdf673ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-08T07:06:38Z",
+      "side": 1,
+      "message": "Hi Roger, thanks for the rework. I\u0027ve made some comments, though I haven\u0027t yet got to the test cases.",
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edfb62bc_6995d677",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 16
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-08T07:06:38Z",
+      "side": 1,
+      "message": "This needs to be moved up to the `[Unreleased]` section above 😊",
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f73928c_430717ab",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2514,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-08T07:06:38Z",
+      "side": 1,
+      "message": "I think we can reduce this to:\n\n```c\nreturn pldm_pack_header_errno(...);\n```\n\nSince this leaves `payload_length` unused, you can mark it `LIBPLDM_CC_UNUSED`.",
+      "range": {
+        "startLine": 2504,
+        "startChar": 1,
+        "endLine": 2514,
+        "endChar": 34
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "660f7cae_19fd525c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2521,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-08T07:06:38Z",
+      "side": 1,
+      "message": "Given the message isn\u0027t fixed-length, we should make this an in-out pointer ...",
+      "range": {
+        "startLine": 2521,
+        "startChar": 23,
+        "endLine": 2521,
+        "endChar": 44
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad63f723_65422812",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2562,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-08T07:06:38Z",
+      "side": 1,
+      "message": "So part of the trick of the `msgbuf` APIs is that they can handle errors in aggregate. We can reduce this to:\n\n```c\npldm_msgbuf_insert(buf, event_receiver_info-\u003ecompletion_code);\npldm_msgbuf_insert(buf, event_receiver_info-\u003etransport_protocol_type);\npldm_msgbuf_insert(buf, event_receiver_info-\u003eevent_receiver_address.mctp_eid);\nreturn pldm_msgbuf_complete(buf);\n```",
+      "range": {
+        "startLine": 2545,
+        "startChar": 1,
+        "endLine": 2562,
+        "endChar": 43
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "269d42d4_198824dc",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2562,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-08T07:06:38Z",
+      "side": 1,
+      "message": "Note that we don\u0027t want to require that the caller supply us an exactly-sized buffer - this makes the APIs tricky to use in cases where messages are variable length. Instead, for `encode_*()` functions, we should use:\n\n```\nreturn pldm_msgbuf_complete_used(buf, *payload_length, payload_length);\n```\n\nThis ensures the supplied buffer was at least big enough, but doesn\u0027t care if it was bigger than required, and provides the length consumed back to the caller.",
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77f05498_15f448fd",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2581,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-08T07:06:38Z",
+      "side": 1,
+      "message": "So the `*_p()` APIs exist to deal with legacy public APIs that deconstruct message members into a bunch of pointer parameters to the decode function. We don\u0027t have that concern here as you\u0027re passing through a `struct pldm_get_event_receiver_resp *`.\n\nYou can change these to e.g the following, throughout:\n\n```\npldm_msgbuf_extract(buf, resp-\u003ecompletion_code);\n```\n\nNote that in this specific case of extracting the completion code, if the completion code isn\u0027t success, then it\u0027s likely that there\u0027s no following content in the message. You can use `pldm_msg_has_error()` like so, prior to initialising the msgbuf:\n\n```\nrc \u003d pldm_msg_has_error(msg, payload_length);\nif (rc) {\n\tresp-\u003ecompletion_code \u003d rc;\n\treturn 0;\n}\n\nrc \u003d pldm_msgbuf_init_errno(...)\n```",
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b529c267_247f64ab",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2590,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-08T07:06:38Z",
+      "side": 1,
+      "message": "We can\u0027t do this unless we know it is actually an MCTP EID that\u0027s in the message. You need to do this extraction conditionally:\n\n```\nrc \u003d pldm_msgbuf_exract(buf, resp-\u003etransport_protocol_type);\nif (rc) {\n    return pldm_msgbuf_discard(buf, rc);\n}\nif (resp-\u003etransport_protocol_type \u003d\u003d PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP) {\n    pldm_msgbuf_extract(buf, resp-\u003eevent_receiver_addres.mctp_eid);\n} else {\n    return pldm_msgbuf_discard(buf, -ENOTSUP);\n}\n\nreturn pldm_msgbuf_complete_consumed(buf);\n```",
+      "range": {
+        "startLine": 2590,
+        "startChar": 1,
+        "endLine": 2590,
+        "endChar": 73
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d531d61a_e25e6a11",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2597,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-08T07:06:38Z",
+      "side": 1,
+      "message": "Please no casting like this - it\u0027s what\u0027s causing the problems you noted in the comment thread in the header\n\nRather, you\u0027ve already extracted the value into `resp-\u003etransport_protocol_type`, so we can do:\n\n```\nif (resp-\u003etransport_protocol_type !\u003d PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP) {\n    return pldm_msgbuf_discard(buf, -ENOTOSUP);\n```",
+      "range": {
+        "startLine": 2594,
+        "startChar": 1,
+        "endLine": 2597,
+        "endChar": 41
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
