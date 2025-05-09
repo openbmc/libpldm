@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "470bd5c1_d0471305",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-09T00:43:14Z",
+      "side": 1,
+      "message": "Can you please move this entry up to the `[Unreleased]` section? The patch wasn\u0027t merged for the 0.10.0 release.",
+      "revId": "6687cdb1b5a3fdf8fdcef465d273c5801c09f184",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb00413d_aad9e084",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-09T00:43:14Z",
+      "side": 1,
+      "message": "Can you please put the body of the description highlighted by this comment in its own paragraph. See lines 182-184 above for an example.",
+      "range": {
+        "startLine": 188,
+        "startChar": 52,
+        "endLine": 190,
+        "endChar": 26
+      },
+      "revId": "6687cdb1b5a3fdf8fdcef465d273c5801c09f184",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
