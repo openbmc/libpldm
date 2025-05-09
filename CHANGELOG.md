@@ -24,6 +24,11 @@ Change categories:
 
 ### Changed
 
+- clang-format: update latest spec and reformat with clang-20
+
+  No functional change APIs; clang-format was unhappy with some whitespace in
+  the headers.
+
 ### Deprecated
 
 - utils: Deprecate `is_time_legal()`

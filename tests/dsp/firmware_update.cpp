@@ -2839,7 +2839,7 @@ TEST(RequestUpdate, errorPathEncodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
     maxTransferSize = PLDM_FWUP_BASELINE_TRANSFER_SIZE;
 
-    maxOutstandingTransferReq = PLDM_FWUP_MIN_OUTSTANDING_REQ - 1;
+    maxOutstandingTransferReq = 0;
     rc = encode_request_update_req(
         instanceId, maxTransferSize, numOfComp, maxOutstandingTransferReq,
         pkgDataLen, PLDM_STR_TYPE_ASCII, compImgSetVerStrLen,
