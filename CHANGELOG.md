@@ -59,6 +59,8 @@ Change categories:
 
 ### Fixed
 
+- meson: Define LIBPLDM_ABI_DEPRECATED_UNSAFE as empty as required
+
 ### Security
 
 ## [0.12.0] 2025-04-05
