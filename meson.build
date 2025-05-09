@@ -54,7 +54,7 @@ if get_option('abi').contains('deprecated')
     conf.set('LIBPLDM_ABI_DEPRECATED', entrypoint)
     conf.set(
         'LIBPLDM_ABI_DEPRECATED_UNSAFE',
-        '__attribute((visibility("default")))',
+        '__attribute__((visibility("default")))',
     )
     add_project_arguments('-DLIBPLDM_API_DEPRECATED', language: ['c', 'cpp'])
 else
