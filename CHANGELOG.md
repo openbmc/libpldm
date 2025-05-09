@@ -57,6 +57,8 @@ Change categories:
 
 ### Fixed
 
+- meson: Define LIBPLDM_ABI_DEPRECATED as empty for -Dabi=stable,testing
+
 ### Security
 
 ## [0.12.0] 2025-04-05

@@ -44,3 +44,8 @@ meson configure --buildtype=debug "$BUILD"
 meson configure -Dabi=deprecated,stable "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD"
+
+# Ensure the build completes for maintenance purposes. Note that tests are
+# disabled as we don't yet guard them appropriately.
+meson configure -Dabi=stable,testing -Dtests=false "$BUILD"
+meson compile -C "$BUILD"
