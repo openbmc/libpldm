@@ -233,6 +233,24 @@
       "parentUuid": "90804d1a_1f6d0232",
       "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be577e85_c3e0d5ee",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-09T07:11:20Z",
+      "side": 1,
+      "message": "Andrew, in the old patchset, I had added a test case where if the effecter ID is not found, we return, and the number of records in the repo remains the same.\n\nIn the new patchset, I have added the test case in the error scenario during the decode of the state effecter. I believe these are the two scenarios where this API could return an error. The trivial case where the parameter is `NULL` is asserted in the test case.\n\nPlease suggest to me if you think any other test case should be handled.",
+      "parentUuid": "980dbfa1_884854ad",
+      "revId": "fca956a80975ca0c066231c7c31984d20d0063e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
