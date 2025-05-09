@@ -59,6 +59,7 @@ if get_option('abi').contains('deprecated')
     add_project_arguments('-DLIBPLDM_API_DEPRECATED', language: ['c', 'cpp'])
 else
     conf.set('LIBPLDM_ABI_DEPRECATED', '')
+    conf.set('LIBPLDM_ABI_DEPRECATED_UNSAFE', '')
 endif
 conf.set('LIBPLDM_ABI_STABLE', entrypoint)  # Always expose the stable symbols
 if get_option('abi').contains('testing')
