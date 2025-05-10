@@ -448,6 +448,51 @@ struct pldm_package_header_information {
 	uint8_t package_version_string_length;
 } __attribute__((packed));
 
+/** @struct pldm_package_header_information_v130
+ *
+ *  Structure representing fixed part of package header information
+ */
+struct pldm_package_header_information_v130 {
+	uint8_t uuid[PLDM_FWUP_UUID_LENGTH];
+	uint8_t package_header_format_version;
+	uint16_t package_header_size;
+	uint8_t package_release_date_time[PLDM_TIMESTAMP104_SIZE];
+	uint16_t component_bitmap_bit_length;
+	uint8_t package_version_string_type;
+	uint8_t package_version_string_length;
+	uint32_t package_header_checksum;
+	uint32_t package_payload_checksum;
+	const void *package_version_string;
+};
+#define PLDM_FWUP_PACKAGE_HEADER_INFO_V130_MIN_SIZE 48
+
+/** @struct pldm_firmware_device_id_record_v130_iter
+ *
+ *  Structure representing firmware device ID record iterator
+ */
+struct pldm_firmware_device_id_record_v130_iter {
+	struct variable_field field;
+	size_t count;
+};
+
+/** @struct pldm_downstream_device_id_record_v130_iter
+ *
+ *  Structure representing downstream device ID record iterator
+ */
+struct pldm_downstream_device_id_record_v130_iter {
+	struct variable_field field;
+	size_t count;
+};
+
+/** @struct pldm_component_image_infornation_v130_iter
+ *
+ *  Structure representing component image information iterator
+ */
+struct pldm_component_image_infornation_v130_iter {
+	struct variable_field field;
+	size_t count;
+};
+
 /** @struct pldm_firmware_device_id_record
  *
  *  Structure representing firmware device ID record
@@ -460,6 +505,46 @@ struct pldm_firmware_device_id_record {
 	uint8_t comp_image_set_version_string_length;
 	uint16_t fw_device_pkg_data_length;
 } __attribute__((packed));
+
+/** @struct pldm_firmware_device_id_record_v130
+ *
+ *  Structure representing firmware device ID record
+ */
+struct pldm_firmware_device_id_record_v130 {
+	uint16_t record_length;
+	uint8_t descriptor_count;
+	bitfield32_t device_update_option_flags;
+	uint8_t component_image_set_version_string_type;
+	uint8_t component_image_set_version_string_length;
+	uint16_t firmware_device_package_data_length;
+	uint32_t reference_manifest_length;
+	struct variable_field applicable_components;
+	const void *component_image_set_version_string;
+	const void *firmware_device_package_data;
+	const void *reference_manifest_data;
+};
+#define PLDM_FWUP_DEVICE_ID_RECORD_V130_MIN_SIZE 15
+
+/** @struct pldm_downstream_device_id_record_v130
+ * 
+ *  Structure representing downstream device ID record
+ */
+struct pldm_downstream_device_id_record_v130 {
+	uint16_t downstream_device_record_length;
+	uint8_t downstream_descriptor_count;
+	bitfield32_t downstream_device_update_option_flags;
+	uint8_t downstream_device_self_contained_activation_min_version_string_type;
+	uint8_t downstream_device_self_contained_activation_min_version_string_length;
+	uint16_t downstream_device_package_data_length;
+	uint32_t downstream_device_reference_manifest_length;
+	struct variable_field downstream_device_applicable_components;
+	const void
+		*downstream_device_self_contained_activation_min_version_string;
+	uint32_t downstream_device_self_contained_activation_min_version_comparison_stamp;
+	const void *downstream_device_package_data;
+	const void *downstream_device_reference_manifest_data;
+};
+#define PLDM_FWUP_DOWNSTREAM_DEVICE_ID_RECORD_V130_MIN_SIZE 15
 
 /** @struct pldm_descriptor_tlv
  *
@@ -497,6 +582,27 @@ struct pldm_component_image_information {
 	uint8_t comp_version_string_type;
 	uint8_t comp_version_string_length;
 } __attribute__((packed));
+
+/** @struct pldm_component_image_information_v130
+ *
+ *  Structure representing fixed part of individual component information in
+ *  PLDM firmware update package
+ */
+struct pldm_component_image_information_v130 {
+	uint16_t component_classification;
+	uint16_t component_identifier;
+	uint32_t component_comparison_stamp;
+	bitfield16_t component_options;
+	bitfield16_t requested_component_activation_method;
+	uint32_t component_location_offset;
+	uint32_t component_size;
+	uint8_t component_version_string_type;
+	uint8_t component_version_string_length;
+	const void *component_version_string;
+	uint32_t component_opaque_data_length;
+	const void *component_opaque_data;
+};
+#define PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_V130_MIN_SIZE 26
 
 /** @struct pldm_query_device_identifiers_resp
  *
@@ -710,6 +816,205 @@ struct pldm_descriptor_iter {
 };
 
 LIBPLDM_ITERATOR
+bool pldm_firmware_device_id_record_v130_iter_end(
+	const struct pldm_firmware_device_id_record_v130_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_firmware_device_id_record_v130_iter_next(
+	struct pldm_firmware_device_id_record_v130_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+/** @brief Iterate firmware device ID records
+ * 
+ * @param info The @ref "struct pldm_package_header_information_v130" lvalue
+ *             used as the out-value from the corresponding call to @ref
+ *             decode_pldm_package_header_information_v130
+ * @param recs The @ref "struct pldm_firmware_device_id_record_v130_iter" lvalue
+ *             used as the out-value from the corresponding call to @ref
+ *             decode_firmware_device_id_record_v130_from_iter
+ * @param rec The @ref "struct pldm_firmware_device_id_record" lvalue into which
+ *            the next record instance should be decoded.
+ * @param descs The @ref "struct pldm_descriptor_iter" lvalue used as the out-
+ *              value from the corresponding call to @ref
+ *              decode_firmware_device_id_record_v130_from_iter or @ref
+ *              decode_downstream_device_id_record_v130_from_iter
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed.
+ * 
+ * @note Caller is responsible for memory alloc and dealloc of param
+ * 	  `descs->field`
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * struct pldm_package_header_information_v130 info;
+ * struct pldm_firmware_device_id_record_v130_iter recs;
+ * struct pldm_firmware_device_id_record rec;
+ * struct pldm_descriptor_iter descs;
+ * int rc;
+ * 
+ * foreach_pldm_firmware_device_id_record_v130(resp, recs, rec, descs, rc) {
+ *    // Do something with each decoded record placed in `rec`
+ *    struct pldm_descriptor desc;
+ *    foreach_pldm_descriptor(descs, desc, rc) {
+ *	 	  // Do something with each decoded descriptor placed in `desc`
+ *    }
+ * 	  if (rc) {
+ *        // Handle any decoding error while iterating variable-length set of
+ *        // descriptors
+ *    }
+ * }
+ * if (rc) {
+ *     // Handle any decoding error while iterating variable-length set of
+ *     // records
+ * }
+ * 	  
+ */
+#define foreach_pldm_firmware_device_id_record_v130(info, recs, rec, descs,    \
+						    rc)                        \
+	for ((rc) = 0;                                                         \
+	     (!pldm_firmware_device_id_record_v130_iter_end(&(recs)) &&        \
+	      !((rc) = decode_firmware_device_id_record_v130_from_iter(        \
+			&(info), &(recs), &(rec), &(descs))));                 \
+	     pldm_firmware_device_id_record_v130_iter_next(&(recs)))
+
+LIBPLDM_ITERATOR
+bool pldm_downstream_device_id_record_v130_iter_end(
+	const struct pldm_downstream_device_id_record_v130_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_downstream_device_id_record_v130_iter_next(
+	struct pldm_downstream_device_id_record_v130_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+/** @brief Iterate downstream device ID records
+ *
+ * @param info The @ref "struct pldm_package_header_information_v130" lvalue
+ *             used as the out-value from the corresponding call to @ref
+ *             decode_pldm_package_header_information_v130
+ * @param recs The @ref "struct pldm_downstream_device_id_record_v130_iter" lvalue
+ *             used as the out-value from the corresponding call to @ref
+ *             decode_downstream_device_id_record_v130_from_iter
+ * @param rec The @ref "struct pldm_downstream_device_id_record" lvalue into which
+ *            the next record instance should be decoded.
+ * @param descs The @ref "struct pldm_descriptor_iter" lvalue used as the out-
+ *              value from the corresponding call to @ref
+ *              decode_firmware_device_id_record_v130_from_iter or @ref
+ *              decode_downstream_device_id_record_v130_from_iter
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed.
+ * 
+ * @note Caller is responsible for memory alloc and dealloc of param
+ * 	  `descs->field`
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * struct pldm_package_header_information_v130 info;
+ * struct pldm_downstream_device_id_record_v130_iter recs;
+ * struct pldm_downstream_device_id_record rec;
+ * struct pldm_descriptor_iter descs;
+ * int rc;
+ *
+ * foreach_pldm_downstream_device_id_record_v130(resp, recs, rec, descs, rc) {
+ *     // Do something with each decoded record placed in `rec`
+ *     struct pldm_descriptor desc;
+ *     foreach_pldm_descriptor(descs, desc, rc) {
+ *         // Do something with each decoded descriptor placed in `desc`
+ *     }
+ *     if (rc) {
+ *         // Handle any decoding error while iterating variable-length set of
+ *         // descriptors
+ *     }
+ * }
+ * if (rc) {
+ *     // Handle any decoding error while iterating variable-length set of
+ *     // records
+ * }
+ * @endcode
+ */
+#define foreach_pldm_downstream_device_id_record_v130(info, recs, rec, descs,  \
+						      rc)                      \
+	for ((rc) = 0;                                                         \
+	     (!pldm_downstream_device_id_record_v130_iter_end(&(recs)) &&      \
+	      !((rc) = decode_downstream_device_id_record_v130_from_iter(      \
+			&(info), &(recs), &(rec), &(descs))));                 \
+	     pldm_downstream_device_id_record_v130_iter_next(&(recs)))
+
+LIBPLDM_ITERATOR
+bool pldm_component_image_information_v130_iter_end(
+	const struct pldm_component_image_infornation_v130_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_component_image_information_v130_iter_next(
+	struct pldm_component_image_infornation_v130_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+/** @brief Iterate component image informations
+ * 
+ * @param infos The @ref "struct pldm_component_image_infornation_v130_iter"
+ * 			lvalue used as the out-value from the corresponding call to @ref
+ * 			decode_component_image_information_v130_from_iter
+ * @param info The @ref "struct pldm_component_image_information_v130" lvalue
+ * 		   into which the next component image information instance should
+ * 		   be decoded
+ * @param rc An lvalue of type int into which the return code from the
+ * 		 decoding will be placed
+ * 
+ * Example use of the macro is as follows:
+ * @code
+ * struct pldm_component_image_infornation_v130_iter infos;
+ * struct pldm_component_image_information_v130 info;
+ * int rc;
+ * 
+ * foreach_pldm_component_image_information_v130(infos, info, rc) {
+ *    // Do something with each decoded component image information placed in
+ *    // `info`
+ * }
+ * if (rc) {
+ *    // Handle any decoding error while iterating variable-length set of
+ *    // component image information
+ * }
+ * @endcode
+ */
+#define foreach_pldm_component_image_information_v130(infos, info, rc)         \
+	for ((rc) = 0;                                                         \
+	     (!pldm_component_image_information_v130_iter_end(&(infos)) &&     \
+	      !((rc) = decode_component_image_information_v130_from_iter(      \
+			&(infos), &(info))));                                  \
+	     pldm_component_image_information_v130_iter_next(&(infos)))
+
+LIBPLDM_ITERATOR
 struct pldm_descriptor_iter pldm_downstream_device_descriptor_iter_init(
 	struct pldm_downstream_device_iter *devs,
 	const struct pldm_downstream_device *dev)
@@ -738,6 +1043,35 @@ bool pldm_descriptor_iter_next(struct pldm_descriptor_iter *iter)
 
 int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
 				     struct pldm_descriptor *desc);
+
+/** @brief Iterate input descriptors
+ * 
+ * @param descs The @ref "struct pldm_descriptor_iter" lvalue to be decoded
+ * @param desc The @ref "struct pldm_descriptor" lvalue into which the next
+ *             descriptor instance should be decoded
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed
+ *
+ * Example use of the macro is as follows:
+ * @code
+ * struct pldm_descriptor_iter descs;
+ * struct pldm_descriptor desc;
+ * int rc;
+ *
+ * foreach_pldm_descriptor(descs, desc, rc) {
+ *     // Do something with each decoded descriptor placed in `desc`
+ * }
+ * if (rc) {
+ *     // Handle any decoding error while iterating variable-length set of
+ *     // descriptors
+ * }
+ * @endcode
+ */
+#define foreach_pldm_descriptor(descs, desc, rc)                               \
+	for ((rc) = 0;                                                         \
+	     (!pldm_descriptor_iter_end(&(descs)) &&                           \
+	      !((rc) = decode_pldm_descriptor_from_iter(&(descs), &(desc))));  \
+	     pldm_descriptor_iter_next(&(descs)))
 
 /** @brief Iterate a downstream device's descriptors in a
  *         QueryDownstreamIdentifiers response
@@ -1050,6 +1384,33 @@ int decode_pldm_package_header_info(
 	struct pldm_package_header_information *package_header_info,
 	struct variable_field *package_version_str);
 
+/** @brief Decode the PLDM package header information v1.3.0
+ * 
+ *  @param[in] data - pointer to package header information
+ *  @param[in] length - available length in the firmware update package
+ *  @param[out] package_header_info - pointer to fixed part of PLDM package
+ *                                    header information
+ *  @param[out] fw_device_id_records - pointer to firmware device ID
+ *                                     records
+ *  @param[out] downstream_device_id_records - pointer to downstream device ID
+ *  @param[out] comp_image_infos - pointer to component image information
+ * 
+ *  @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *          are not allocated, -EOVERFLOW if the payload length is not enough
+ *          to encode the message, -EBADMSG if the message is not valid.
+ * 
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ * 		'package_header_info', 'fw_device_id_records',
+ * 		'downstream_device_id_records', 'comp_image_infos'
+ */
+int decode_pldm_package_header_info_v130(
+	const uint8_t *data, size_t length,
+	struct pldm_package_header_information_v130 *package_header_info,
+	struct pldm_firmware_device_id_record_v130_iter *fw_device_id_records,
+	struct pldm_downstream_device_id_record_v130_iter
+		*downstream_device_id_records,
+	struct pldm_component_image_infornation_v130_iter *comp_image_infos);
+
 /** @brief Decode individual firmware device ID record
  *
  *  @param[in] data - pointer to firmware device ID record
@@ -1074,6 +1435,49 @@ int decode_firmware_device_id_record(
 	struct variable_field *comp_image_set_version_str,
 	struct variable_field *record_descriptors,
 	struct variable_field *fw_device_pkg_data);
+
+/** @brief Decode individual firmware device ID record from iterator
+ *
+ *  @param[in] package_header_info - pointer to package header information
+ *  @param[in] iter - pointer to firmware device ID record iterator
+ *  @param[out] fw_device_id_record - pointer to fixed part of firmware device
+ *                                    id record
+ *  @param[out] record_descriptors - pointer to RecordDescriptors
+ * 
+ *  @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *          are not allocated, -EOVERFLOW if the payload length is not enough
+ *          to encode the message, -EBADMSG if the message is not valid.
+ * 
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ * 		'fw_device_id_record', 'record_descriptors'
+ */
+int decode_firmware_device_id_record_v130_from_iter(
+	struct pldm_package_header_information_v130 *package_header_info,
+	struct pldm_firmware_device_id_record_v130_iter *iter,
+	struct pldm_firmware_device_id_record_v130 *device_id_record,
+	struct pldm_descriptor_iter *record_descriptors);
+
+/** @brief Decode individual downstream device ID record from iterator
+ *
+ *  @param[in] package_header_info - pointer to package header information
+ *  @param[in] iter - pointer to downstream device ID record iterator
+ *  @param[out] downstream_device_id_record - pointer to fixed part of
+ *                                            downstream device id record
+ *  @param[out] record_descriptors - pointer to RecordDescriptors
+ *
+ *  @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *          are not allocated, -EOVERFLOW if the payload length is not enough
+ *          to encode the message, -EBADMSG if the message is not valid.
+ *
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ * 		'downstream_device_id_record', 'record_descriptors'
+ */
+int decode_downstream_device_id_record_v130_from_iter(
+	struct pldm_package_header_information_v130 *package_header_info,
+	struct pldm_downstream_device_id_record_v130_iter *iter,
+	struct pldm_downstream_device_id_record_v130
+		*downstream_device_id_record,
+	struct pldm_descriptor_iter *downstream_record_descriptors);
 
 /** @brief Decode the record descriptor entries in the firmware update package
  *         and the Descriptors in the QueryDeviceIDentifiers command
@@ -1120,6 +1524,23 @@ int decode_pldm_comp_image_info(
 	const uint8_t *data, size_t length,
 	struct pldm_component_image_information *pldm_comp_image_info,
 	struct variable_field *comp_version_str);
+
+/** @brief Decode individual component image information v1.3.0 from iterator
+ *
+ *  @param[in] iter - pointer to component image information iterator
+ *  @param[out] component_image_info - pointer to fixed part of component image
+ *                                     information
+ * 
+ *  @return 0 on success, otherwise -EINVAL if the input parameters' memory
+ *          are not allocated, -EOVERFLOW if the payload length is not enough
+ *          to encode the message, -EBADMSG if the message is not valid.
+ *
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ * 		'component_image_info'
+ */
+int decode_component_image_information_v130_from_iter(
+	struct pldm_component_image_infornation_v130_iter *iter,
+	struct pldm_component_image_information_v130 *component_image_info);
 
 /** @brief Create a PLDM request message for QueryDeviceIdentifiers
  *
