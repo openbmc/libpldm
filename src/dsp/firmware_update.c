@@ -399,6 +399,236 @@ int decode_pldm_package_header_info(
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int decode_pldm_package_header_info_v130(
+	const uint8_t *data, size_t length,
+	struct pldm_package_header_information_v130 *package_header_info,
+	struct pldm_firmware_device_id_record_v130_iter *fw_device_id_records,
+	struct pldm_downstream_device_id_record_v130_iter
+		*downstream_device_id_records,
+	struct pldm_component_image_infornation_v130_iter *comp_image_infos)
+{
+	if (data == NULL || package_header_info == NULL ||
+	    fw_device_id_records == NULL ||
+	    downstream_device_id_records == NULL || comp_image_infos == NULL) {
+		return -EINVAL;
+	}
+	if (length < PLDM_FWUP_PACKAGE_HEADER_INFO_V130_MIN_SIZE) {
+		return -EOVERFLOW;
+	}
+
+	uint8_t device_id_record_count = 0;
+	uint8_t downstream_device_id_record_count = 0;
+	uint16_t component_image_information_count = 0;
+
+	size_t evaluated_header_info_size =
+		PLDM_FWUP_PACKAGE_HEADER_INFO_V130_MIN_SIZE -
+		sizeof(device_id_record_count) -
+		sizeof(downstream_device_id_record_count) -
+		sizeof(component_image_information_count) -
+		sizeof(package_header_info->package_header_checksum) -
+		sizeof(package_header_info->package_payload_checksum);
+
+	// First pass: fetch the fixed part of the header
+	// and the size of the variable part
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc = pldm_msgbuf_init_errno(buf, evaluated_header_info_size, data,
+					evaluated_header_info_size);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	// Temporary structure to extract the header
+	struct pldm_package_header_information_v130 _data_header_info;
+	struct pldm_package_header_information_v130 *data_header_info =
+		(struct pldm_package_header_information_v130
+			 *)&_data_header_info;
+
+	rc = pldm_msgbuf_extract_array(buf, PLDM_FWUP_UUID_LENGTH,
+				       data_header_info->uuid,
+				       sizeof(data_header_info->uuid));
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	pldm_msgbuf_extract(buf,
+			    data_header_info->package_header_format_version);
+	pldm_msgbuf_extract(buf, data_header_info->package_header_size);
+	rc = pldm_msgbuf_extract_array(
+		buf, PLDM_TIMESTAMP104_SIZE,
+		data_header_info->package_release_date_time,
+		sizeof(data_header_info->package_release_date_time));
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	pldm_msgbuf_extract(buf, data_header_info->component_bitmap_bit_length);
+	pldm_msgbuf_extract(buf, data_header_info->package_version_string_type);
+	rc = pldm_msgbuf_extract(
+		buf, data_header_info->package_version_string_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	data_header_info->package_header_size =
+		le16toh(data_header_info->package_header_size);
+	data_header_info->component_bitmap_bit_length =
+		le16toh(data_header_info->component_bitmap_bit_length);
+	data_header_info->package_header_checksum =
+		le32toh(data_header_info->package_header_checksum);
+	data_header_info->package_payload_checksum =
+		le32toh(data_header_info->package_payload_checksum);
+
+	if (!is_string_type_valid(
+		    data_header_info->package_version_string_type) ||
+	    (data_header_info->package_version_string_length == 0 ||
+	     data_header_info->component_bitmap_bit_length %
+		     PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE)) {
+		return -EBADMSG;
+	}
+
+	// Second pass: fetch the variable part of the header
+	// and create the iterators
+	if (length < data_header_info->package_header_size) {
+		return -EOVERFLOW;
+	}
+	rc = pldm_msgbuf_init_errno(buf, data_header_info->package_header_size,
+				    data,
+				    data_header_info->package_header_size);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_skip(buf, evaluated_header_info_size);
+	rc = pldm_msgbuf_span_required(
+		buf, data_header_info->package_version_string_length,
+		(void **)&data_header_info->package_version_string);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	evaluated_header_info_size +=
+		data_header_info->package_version_string_length;
+
+	// Create iterator for FirmwareDeviceIDRecords
+	uint16_t entry_length = 0;
+	size_t firmware_device_id_total_length = 0;
+	rc = pldm_msgbuf_extract(buf, device_id_record_count);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	evaluated_header_info_size += sizeof(device_id_record_count);
+	for (size_t i = 0; i < device_id_record_count; i++) {
+		pldm_msgbuf_extract(buf, entry_length);
+		entry_length = le16toh(entry_length);
+		firmware_device_id_total_length += entry_length;
+		rc = pldm_msgbuf_skip(buf, entry_length - sizeof(entry_length));
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	}
+	struct pldm_firmware_device_id_record_v130_iter
+		_data_fw_device_id_records;
+	struct pldm_firmware_device_id_record_v130_iter
+		*data_fw_device_id_records = &_data_fw_device_id_records;
+	data_fw_device_id_records->field.ptr =
+		data + evaluated_header_info_size;
+	data_fw_device_id_records->field.length =
+		firmware_device_id_total_length;
+	data_fw_device_id_records->count = device_id_record_count;
+	evaluated_header_info_size += firmware_device_id_total_length;
+
+	// Create iterator for DownstreamDeviceIDRecords
+	size_t downstream_device_id_total_length = 0;
+	rc = pldm_msgbuf_extract(buf, downstream_device_id_record_count);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	evaluated_header_info_size += sizeof(downstream_device_id_record_count);
+	for (size_t i = 0; i < downstream_device_id_record_count; i++) {
+		pldm_msgbuf_extract(buf, entry_length);
+		entry_length = le16toh(entry_length);
+		downstream_device_id_total_length += entry_length;
+		rc = pldm_msgbuf_skip(buf, entry_length - sizeof(entry_length));
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	}
+	struct pldm_downstream_device_id_record_v130_iter
+		_data_downstream_device_id_records;
+	struct pldm_downstream_device_id_record_v130_iter
+		*data_downstream_device_id_records =
+			&_data_downstream_device_id_records;
+	data_downstream_device_id_records->field.ptr =
+		data + evaluated_header_info_size;
+	data_downstream_device_id_records->field.length =
+		downstream_device_id_total_length;
+	data_downstream_device_id_records->count =
+		downstream_device_id_record_count;
+	evaluated_header_info_size += downstream_device_id_total_length;
+
+	// Create iterator for ComponentImageInformation
+	size_t component_image_info_total_length = 0;
+	const size_t component_image_info_entry_skip_size = 21;
+	rc = pldm_msgbuf_extract(buf, component_image_information_count);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	evaluated_header_info_size += sizeof(component_image_information_count);
+	for (size_t i = 0; i < component_image_information_count; i++) {
+		uint8_t component_version_str_len = 0;
+		uint32_t component_opaque_data_len = 0;
+		rc = pldm_msgbuf_skip(buf,
+				      component_image_info_entry_skip_size);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		pldm_msgbuf_extract(buf, component_version_str_len);
+		component_version_str_len = le32toh(component_version_str_len);
+		rc = pldm_msgbuf_skip(buf, component_version_str_len);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		pldm_msgbuf_extract(buf, component_opaque_data_len);
+		component_opaque_data_len = le32toh(component_opaque_data_len);
+		rc = pldm_msgbuf_skip(buf, component_opaque_data_len);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		component_image_info_total_length +=
+			PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_V130_MIN_SIZE +
+			component_version_str_len + component_opaque_data_len;
+	}
+	struct pldm_component_image_infornation_v130_iter _data_comp_image_infos;
+	struct pldm_component_image_infornation_v130_iter
+		*data_comp_image_infos = &_data_comp_image_infos;
+	data_comp_image_infos->field.ptr = data + evaluated_header_info_size;
+	data_comp_image_infos->field.length = component_image_info_total_length;
+	data_comp_image_infos->count = component_image_information_count;
+	evaluated_header_info_size += component_image_info_total_length;
+
+	// Extract the checksum
+	pldm_msgbuf_extract(buf, data_header_info->package_header_checksum);
+	pldm_msgbuf_extract(buf, data_header_info->package_payload_checksum);
+	evaluated_header_info_size +=
+		sizeof(data_header_info->package_header_checksum) +
+		sizeof(data_header_info->package_payload_checksum);
+
+	// Check if the header size is correct
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	// Output parameter will be only set if everything is ok
+	*package_header_info = *data_header_info;
+	*fw_device_id_records = *data_fw_device_id_records;
+	*downstream_device_id_records = *data_downstream_device_id_records;
+	*comp_image_infos = *data_comp_image_infos;
+	return 0;
+}
+
 static int decode_firmware_device_id_record_errno(
 	const void *data, size_t length, uint16_t component_bitmap_bit_length,
 	struct pldm_firmware_device_id_record *fw_device_id_record,
@@ -512,6 +742,357 @@ int decode_firmware_device_id_record(
 	}
 
 	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_firmware_device_id_record_v130_from_iter(
+	struct pldm_package_header_information_v130 *package_header_info,
+	struct pldm_firmware_device_id_record_v130_iter *iter,
+	struct pldm_firmware_device_id_record_v130 *device_id_record,
+	struct pldm_descriptor_iter *record_descriptors)
+{
+	if (iter == NULL || iter->field.ptr == NULL ||
+	    device_id_record == NULL || package_header_info == NULL ||
+	    record_descriptors == NULL || record_descriptors->field == NULL) {
+		return -EINVAL;
+	}
+	if (iter->field.length < PLDM_FWUP_DEVICE_ID_RECORD_V130_MIN_SIZE) {
+		return -EOVERFLOW;
+	}
+	if ((package_header_info->component_bitmap_bit_length %
+	     PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE) != 0) {
+		return -EBADMSG;
+	}
+
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+	rc = pldm_msgbuf_init_errno(buf, iter->field.length, iter->field.ptr,
+				    iter->field.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	// Temporary structure to extract the record
+	struct pldm_firmware_device_id_record_v130 _data_record;
+	struct pldm_firmware_device_id_record_v130 *data_record = &_data_record;
+
+	// Extract fixed part of the record
+	pldm_msgbuf_extract(buf, data_record->record_length);
+	pldm_msgbuf_extract(buf, data_record->descriptor_count);
+	pldm_msgbuf_extract(buf, data_record->device_update_option_flags.value);
+	pldm_msgbuf_extract(
+		buf, data_record->component_image_set_version_string_type);
+	pldm_msgbuf_extract(
+		buf, data_record->component_image_set_version_string_length);
+	pldm_msgbuf_extract(buf,
+			    data_record->firmware_device_package_data_length);
+	rc = pldm_msgbuf_extract(buf, data_record->reference_manifest_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	if (!is_string_type_valid(
+		    data_record->component_image_set_version_string_type) ||
+	    (data_record->component_image_set_version_string_length == 0)) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+
+	data_record->record_length = le16toh(data_record->record_length);
+	data_record->device_update_option_flags.value =
+		le32toh(data_record->device_update_option_flags.value);
+	data_record->firmware_device_package_data_length =
+		le16toh(data_record->firmware_device_package_data_length);
+	data_record->reference_manifest_length =
+		le32toh(data_record->reference_manifest_length);
+
+	if (iter->field.length < data_record->record_length) {
+		return pldm_msgbuf_discard(buf, -EOVERFLOW);
+	}
+
+	uint16_t applicable_components_length =
+		package_header_info->component_bitmap_bit_length /
+		PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE;
+
+	size_t calc_min_record_length =
+		PLDM_FWUP_DEVICE_ID_RECORD_V130_MIN_SIZE +
+		applicable_components_length +
+		data_record->component_image_set_version_string_length +
+		PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN *
+			data_record->descriptor_count +
+		data_record->firmware_device_package_data_length +
+		data_record->reference_manifest_length;
+	if (data_record->record_length < calc_min_record_length) {
+		return pldm_msgbuf_discard(buf, -EOVERFLOW);
+	}
+	rc = pldm_msgbuf_span_required(
+		buf, applicable_components_length,
+		(void **)&data_record->applicable_components.ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	data_record->applicable_components.length =
+		applicable_components_length;
+	rc = pldm_msgbuf_span_required(
+		buf, data_record->component_image_set_version_string_length,
+		(void **)&data_record->component_image_set_version_string);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	// Create iterator for Descriptors
+	struct variable_field descriptor_field;
+	struct pldm_descriptor_iter _data_descriptors;
+	struct pldm_descriptor_iter *data_descriptors = &_data_descriptors;
+	data_descriptors->field = &descriptor_field;
+	data_descriptors->count = data_record->descriptor_count;
+	size_t descriptors_length =
+		data_record->record_length -
+		PLDM_FWUP_DEVICE_ID_RECORD_V130_MIN_SIZE -
+		applicable_components_length -
+		data_record->component_image_set_version_string_length -
+		data_record->firmware_device_package_data_length -
+		data_record->reference_manifest_length;
+	rc = pldm_msgbuf_span_required(
+		buf, descriptors_length,
+		(void **)&(data_descriptors->field->ptr));
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	data_descriptors->field->length = descriptors_length;
+
+	// Extract rest of the variable part of the record
+	if (data_record->firmware_device_package_data_length) {
+		rc = pldm_msgbuf_span_required(
+			buf, data_record->firmware_device_package_data_length,
+			(void **)&data_record->firmware_device_package_data);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	} else {
+		data_record->firmware_device_package_data = NULL;
+	}
+
+	if (data_record->reference_manifest_length) {
+		rc = pldm_msgbuf_span_required(
+			buf, data_record->reference_manifest_length,
+			(void **)&data_record->reference_manifest_data);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	} else {
+		data_record->reference_manifest_data = NULL;
+	}
+
+	// Set the iterator to the next field
+	iter->field.ptr = NULL;
+	pldm_msgbuf_span_remaining(buf, (void **)&iter->field.ptr,
+				   &iter->field.length);
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	// Output parameter will be only set if everything is ok
+	*device_id_record = *data_record;
+	*record_descriptors->field = *data_descriptors->field;
+	record_descriptors->count = data_descriptors->count;
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_downstream_device_id_record_v130_from_iter(
+	struct pldm_package_header_information_v130 *package_header_info,
+	struct pldm_downstream_device_id_record_v130_iter *iter,
+	struct pldm_downstream_device_id_record_v130
+		*downstream_device_id_record,
+	struct pldm_descriptor_iter *downstream_record_descriptors)
+{
+	if (iter == NULL || iter->field.ptr == NULL ||
+	    downstream_device_id_record == NULL ||
+	    package_header_info == NULL ||
+	    downstream_record_descriptors == NULL ||
+	    downstream_record_descriptors->field == NULL) {
+		return -EINVAL;
+	}
+	if (iter->field.length <
+	    PLDM_FWUP_DOWNSTREAM_DEVICE_ID_RECORD_V130_MIN_SIZE) {
+		return -EOVERFLOW;
+	}
+	if ((package_header_info->component_bitmap_bit_length %
+	     PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE) != 0) {
+		return -EBADMSG;
+	}
+
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+	rc = pldm_msgbuf_init_errno(buf, iter->field.length, iter->field.ptr,
+				    iter->field.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	// Temporary structure to extract the record
+	struct pldm_downstream_device_id_record_v130 _data_record;
+	struct pldm_downstream_device_id_record_v130 *data_record =
+		&_data_record;
+
+	// Extract fixed part of the record
+	pldm_msgbuf_extract(buf, data_record->downstream_device_record_length);
+	pldm_msgbuf_extract(buf, data_record->downstream_descriptor_count);
+	pldm_msgbuf_extract(
+		buf, data_record->downstream_device_update_option_flags.value);
+	pldm_msgbuf_extract(
+		buf,
+		data_record
+			->downstream_device_self_contained_activation_min_version_string_type);
+	pldm_msgbuf_extract(
+		buf,
+		data_record
+			->downstream_device_self_contained_activation_min_version_string_length);
+	pldm_msgbuf_extract(buf,
+			    data_record->downstream_device_package_data_length);
+	rc = pldm_msgbuf_extract(
+		buf, data_record->downstream_device_reference_manifest_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	if (!is_string_type_valid(
+		    data_record
+			    ->downstream_device_self_contained_activation_min_version_string_type) ||
+	    (data_record
+		     ->downstream_device_self_contained_activation_min_version_string_length ==
+	     0)) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+
+	data_record->downstream_device_record_length =
+		le16toh(data_record->downstream_device_record_length);
+	data_record->downstream_device_update_option_flags.value = le32toh(
+		data_record->downstream_device_update_option_flags.value);
+	data_record->downstream_device_package_data_length =
+		le16toh(data_record->downstream_device_package_data_length);
+	data_record->downstream_device_reference_manifest_length = le32toh(
+		data_record->downstream_device_reference_manifest_length);
+
+	if (iter->field.length < data_record->downstream_device_record_length) {
+		return pldm_msgbuf_discard(buf, -EOVERFLOW);
+	}
+
+	uint16_t applicable_components_length =
+		package_header_info->component_bitmap_bit_length /
+		PLDM_FWUP_COMPONENT_BITMAP_MULTIPLE;
+	size_t calc_min_record_length =
+		PLDM_FWUP_DOWNSTREAM_DEVICE_ID_RECORD_V130_MIN_SIZE +
+		applicable_components_length +
+		data_record
+			->downstream_device_self_contained_activation_min_version_string_length +
+		PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN *
+			data_record->downstream_descriptor_count +
+		data_record->downstream_device_package_data_length +
+		data_record->downstream_device_reference_manifest_length;
+	if (data_record->downstream_device_record_length <
+	    calc_min_record_length) {
+		return pldm_msgbuf_discard(buf, -EOVERFLOW);
+	}
+	rc = pldm_msgbuf_span_required(
+		buf, applicable_components_length,
+		(void **)&data_record->downstream_device_applicable_components
+			.ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	data_record->downstream_device_applicable_components.length =
+		applicable_components_length;
+
+	if (data_record
+		    ->downstream_device_self_contained_activation_min_version_string_length) {
+		rc = pldm_msgbuf_span_required(
+			buf,
+			data_record
+				->downstream_device_self_contained_activation_min_version_string_length,
+			(void **)&data_record
+				->downstream_device_self_contained_activation_min_version_string);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	}
+
+	size_t comparison_stamp_length = 0;
+	if (data_record->downstream_device_update_option_flags.bits.bit0) {
+		comparison_stamp_length = sizeof(uint32_t);
+		pldm_msgbuf_extract(
+			buf,
+			data_record
+				->downstream_device_self_contained_activation_min_version_comparison_stamp);
+		data_record
+			->downstream_device_self_contained_activation_min_version_comparison_stamp =
+			le32toh(data_record
+					->downstream_device_self_contained_activation_min_version_comparison_stamp);
+	}
+
+	// Create iterator for Descriptors
+	struct pldm_descriptor_iter _data_descriptors;
+	struct pldm_descriptor_iter *data_descriptors = &_data_descriptors;
+	struct variable_field descriptor_field;
+	data_descriptors->field = &descriptor_field;
+	data_descriptors->count = data_record->downstream_descriptor_count;
+	size_t descriptors_length =
+		data_record->downstream_device_record_length -
+		PLDM_FWUP_DOWNSTREAM_DEVICE_ID_RECORD_V130_MIN_SIZE -
+		applicable_components_length -
+		data_record
+			->downstream_device_self_contained_activation_min_version_string_length -
+		comparison_stamp_length -
+		data_record->downstream_device_package_data_length -
+		data_record->downstream_device_reference_manifest_length;
+	rc = pldm_msgbuf_span_required(buf, descriptors_length,
+				       (void **)&data_descriptors->field->ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	data_descriptors->field->length = descriptors_length;
+
+	// Extract rest of the variable part of the record
+	if (data_record->downstream_device_package_data_length) {
+		rc = pldm_msgbuf_span_required(
+			buf, data_record->downstream_device_package_data_length,
+			(void **)&data_record->downstream_device_package_data);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	} else {
+		data_record->downstream_device_package_data = NULL;
+	}
+	if (data_record->downstream_device_reference_manifest_length) {
+		rc = pldm_msgbuf_span_required(
+			buf,
+			data_record->downstream_device_reference_manifest_length,
+			(void **)&data_record
+				->downstream_device_reference_manifest_data);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	} else {
+		data_record->downstream_device_reference_manifest_data = NULL;
+	}
+
+	// Set the iterator to the next field
+	iter->field.ptr = NULL;
+	pldm_msgbuf_span_remaining(buf, (void **)&iter->field.ptr,
+				   &iter->field.length);
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	// Output parameter will be only set if everything is ok
+	*downstream_device_id_record = *data_record;
+	*downstream_record_descriptors->field = *data_descriptors->field;
+	downstream_record_descriptors->count = data_descriptors->count;
+	return 0;
 }
 
 LIBPLDM_ABI_STABLE
@@ -743,6 +1324,129 @@ int decode_pldm_comp_image_info(
 	}
 
 	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_component_image_information_v130_from_iter(
+	struct pldm_component_image_infornation_v130_iter *iter,
+	struct pldm_component_image_information_v130 *component_image_info)
+{
+	if (iter == NULL || iter->field.ptr == NULL ||
+	    component_image_info == NULL) {
+		return -EINVAL;
+	}
+	if (iter->field.length <
+	    PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_V130_MIN_SIZE) {
+		return -EOVERFLOW;
+	}
+
+	int rc;
+	PLDM_MSGBUF_DEFINE_P(buf);
+	rc = pldm_msgbuf_init_errno(buf, iter->field.length, iter->field.ptr,
+				    iter->field.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	// Temporary structure to extract the information
+	struct pldm_component_image_information_v130 _data_comp_image_info;
+	struct pldm_component_image_information_v130 *data_comp_image_info =
+		&_data_comp_image_info;
+
+	// Extract fixed part of the information
+	pldm_msgbuf_extract(buf,
+			    data_comp_image_info->component_classification);
+	pldm_msgbuf_extract(buf, data_comp_image_info->component_identifier);
+	pldm_msgbuf_extract(buf,
+			    data_comp_image_info->component_comparison_stamp);
+	pldm_msgbuf_extract(buf, data_comp_image_info->component_options.value);
+	pldm_msgbuf_extract(
+		buf, data_comp_image_info->requested_component_activation_method
+			     .value);
+	pldm_msgbuf_extract(buf,
+			    data_comp_image_info->component_location_offset);
+	pldm_msgbuf_extract(buf, data_comp_image_info->component_size);
+	pldm_msgbuf_extract(
+		buf, data_comp_image_info->component_version_string_type);
+	rc = pldm_msgbuf_extract(
+		buf, data_comp_image_info->component_version_string_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	data_comp_image_info->component_classification =
+		le16toh(data_comp_image_info->component_classification);
+	data_comp_image_info->component_identifier =
+		le16toh(data_comp_image_info->component_identifier);
+	data_comp_image_info->component_comparison_stamp =
+		le32toh(data_comp_image_info->component_comparison_stamp);
+	data_comp_image_info->component_options.value =
+		le16toh(data_comp_image_info->component_options.value);
+	data_comp_image_info->requested_component_activation_method.value =
+		le16toh(data_comp_image_info
+				->requested_component_activation_method.value);
+	data_comp_image_info->component_location_offset =
+		le32toh(data_comp_image_info->component_location_offset);
+	data_comp_image_info->component_size =
+		le32toh(data_comp_image_info->component_size);
+
+	if (!is_string_type_valid(
+		    data_comp_image_info->component_version_string_type) ||
+	    (data_comp_image_info->component_version_string_length == 0)) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+	if (data_comp_image_info->component_location_offset == 0 ||
+	    data_comp_image_info->component_size == 0) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+	if ((data_comp_image_info->component_options.bits.bit1 == false &&
+	     data_comp_image_info->component_comparison_stamp !=
+		     PLDM_FWUP_INVALID_COMPONENT_COMPARISON_TIMESTAMP)) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+	if (iter->field.length <
+	    (unsigned)PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_V130_MIN_SIZE +
+		    data_comp_image_info->component_version_string_length) {
+		return pldm_msgbuf_discard(buf, -EOVERFLOW);
+	}
+
+	// Extract variable part of the information
+	rc = pldm_msgbuf_span_required(
+		buf, data_comp_image_info->component_version_string_length,
+		(void **)&data_comp_image_info->component_version_string);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_extract(buf,
+			    data_comp_image_info->component_opaque_data_length);
+	data_comp_image_info->component_opaque_data_length =
+		le32toh(data_comp_image_info->component_opaque_data_length);
+	if (iter->field.length <
+	    data_comp_image_info->component_opaque_data_length +
+		    data_comp_image_info->component_version_string_length +
+		    PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_V130_MIN_SIZE) {
+		return pldm_msgbuf_discard(buf, -EOVERFLOW);
+	}
+	rc = pldm_msgbuf_span_required(
+		buf, data_comp_image_info->component_opaque_data_length,
+		(void **)&data_comp_image_info->component_opaque_data);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	// Set the iterator to the next field
+	iter->field.ptr = NULL;
+	pldm_msgbuf_span_remaining(buf, (void **)&iter->field.ptr,
+				   &iter->field.length);
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	// Output parameter will be only set if everything is ok
+	*component_image_info = *data_comp_image_info;
+	return 0;
 }
 
 LIBPLDM_ABI_STABLE
