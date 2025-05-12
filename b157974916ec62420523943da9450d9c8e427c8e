@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dafad01_52d17dd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-12T10:05:21Z",
+      "side": 1,
+      "message": "Hi all,\nI was intending to add DSP0267 v1.3.0 support for firmware package to libpldm, but seems like some of the related ABI/API is currently under re-construction and I unfortunately didn\u0027t notice that before rasing this MR.\nWould be appriciate if anyone can provide suggestions about how to intergate changes between this MR and the ABI/API reconstruction.",
+      "revId": "b157974916ec62420523943da9450d9c8e427c8e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
