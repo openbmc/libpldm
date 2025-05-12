@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16ed567b_f80736b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-12T08:47:05Z",
+      "side": 1,
+      "message": "Hi Roger, I have some nit comments",
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edfb62bc_6995d677",
@@ -31,6 +48,29 @@
       "writtenOn": "2025-05-08T07:06:38Z",
       "side": 1,
       "message": "This needs to be moved up to the `[Unreleased]` section above 😊",
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b89c9a89_2a4529c2",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2500,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-12T08:47:05Z",
+      "side": 1,
+      "message": "if(!msg)",
+      "range": {
+        "startLine": 2500,
+        "startChar": 1,
+        "endLine": 2500,
+        "endChar": 19
+      },
       "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -83,6 +123,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2b75dd8_4095276e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2525,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-12T08:47:05Z",
+      "side": 1,
+      "message": "we could write this as - `if(!msg || !event_receiver_info)`",
+      "range": {
+        "startLine": 2525,
+        "startChar": 1,
+        "endLine": 2525,
+        "endChar": 50
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad63f723_65422812",
         "filename": "src/dsp/platform.c",
         "patchSetId": 16
@@ -117,6 +180,29 @@
       "writtenOn": "2025-05-08T07:06:38Z",
       "side": 1,
       "message": "Note that we don\u0027t want to require that the caller supply us an exactly-sized buffer - this makes the APIs tricky to use in cases where messages are variable length. Instead, for `encode_*()` functions, we should use:\n\n```\nreturn pldm_msgbuf_complete_used(buf, *payload_length, payload_length);\n```\n\nThis ensures the supplied buffer was at least big enough, but doesn\u0027t care if it was bigger than required, and provides the length consumed back to the caller.",
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a093519a_e90814c3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2572,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-12T08:47:05Z",
+      "side": 1,
+      "message": "if(!msg)",
+      "range": {
+        "startLine": 2572,
+        "startChar": 1,
+        "endLine": 2572,
+        "endChar": 19
+      },
       "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -179,6 +265,52 @@
         "startChar": 1,
         "endLine": 2597,
         "endChar": 41
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c61974a_edc50e65",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 3580,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-12T08:47:05Z",
+      "side": 1,
+      "message": "Can we use the placement new operator?\nsame to the entire file",
+      "range": {
+        "startLine": 3580,
+        "startChar": 4,
+        "endLine": 3580,
+        "endChar": 66
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5ebda23_2f844eec",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 3607,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-12T08:47:05Z",
+      "side": 1,
+      "message": "can we use placement new",
+      "range": {
+        "startLine": 3607,
+        "startChar": 4,
+        "endLine": 3607,
+        "endChar": 68
       },
       "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
