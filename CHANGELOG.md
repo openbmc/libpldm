@@ -33,6 +33,8 @@ Change categories:
 - Introduce interator-based firmware update package parsing APIs
 
 - firmware_update: add package payload checksum
+- firmware_update: add reference_manifest_data to
+  pldm_firmware_device_id_record_pad and pldm_downstream_device_id_record
 
 ### Changed
 
