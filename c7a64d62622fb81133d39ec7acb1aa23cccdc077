@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86eb3ce4_8cd37c31",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:52:37Z",
+      "side": 1,
+      "message": "Guessing that `2` comes from the value of `PackageHeaderFormatRevision`, but agree with Alexander, a more formal name decleration would be better.",
+      "parentUuid": "d9026ec6_f4d9536c",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "455f9894_fa00c20e",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 1
@@ -151,6 +169,24 @@
       "writtenOn": "2025-03-20T20:01:36Z",
       "side": 1,
       "message": "why do we need to repeat this checks again ? \nIt\u0027s already validated in decode_pldm_package_header_info_errno() so this one is redundant.",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c5beb5d_a65d2ca8",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:52:37Z",
+      "side": 1,
+      "message": "Maybe the data would be assembled elsewhere, although this is out of libpldm expected?",
+      "parentUuid": "6b5e16c3_21b3f860",
       "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -237,6 +273,24 @@
       "writtenOn": "2025-03-20T20:27:49Z",
       "side": 1,
       "message": "Decode for ComponentOpaqueData is missing",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "630ada9a_af3aee6b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3242,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:52:37Z",
+      "side": 1,
+      "message": "+1 for v1.3.0 support",
+      "parentUuid": "894edd1f_aec53c4f",
       "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

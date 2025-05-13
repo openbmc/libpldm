@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4383b6c2_cac02ea9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:52:37Z",
+      "side": 1,
+      "message": "I\u0027m planning to add DSP0267 v1.3.0 support for these APIs, therefore I leave some `placeholder` comments below to indicate the upcoming changes, also leaved comments for previous two patches.",
+      "revId": "26d744a606d713973f6c99b30bc45d358d9293e9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b35df466_ae432414",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2093,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:52:37Z",
+      "side": 1,
+      "message": "placeholder for v1.3.0: `struct variable_field reference_manifest`",
+      "revId": "26d744a606d713973f6c99b30bc45d358d9293e9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "100a1eef_14779187",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2107,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:52:37Z",
+      "side": 1,
+      "message": "placeholder for v1.3.0: `downstream_device_reference_manifest`",
+      "revId": "26d744a606d713973f6c99b30bc45d358d9293e9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "022630ff_ede11774",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:52:37Z",
+      "side": 1,
+      "message": "placeholder: another `PLDM_FWUP_HDR_IDENTIFIER`s will be here for supporting v1.2.0 and v1.3.0, whatever it names...",
+      "revId": "26d744a606d713973f6c99b30bc45d358d9293e9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8b36ede_67e9716d",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:52:37Z",
+      "side": 1,
+      "message": "placeholder for v1.3.0: `PLDM_FWUP_HDR_IDENTIFIER_V3` and `PLDM_FWUP_HDR_IDENTIFIER_V4`",
+      "revId": "26d744a606d713973f6c99b30bc45d358d9293e9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a69957a_a5bd7577",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3124,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:52:37Z",
+      "side": 1,
+      "message": "placeholder for v1.3.0: `downstream_device_reference_manifest_length`",
+      "revId": "26d744a606d713973f6c99b30bc45d358d9293e9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f937da41_03e20f9c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3149,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:52:37Z",
+      "side": 1,
+      "message": "placeholder for v1.3.0: `downstream_device_reference_manifest`",
+      "revId": "26d744a606d713973f6c99b30bc45d358d9293e9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
