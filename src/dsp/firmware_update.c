@@ -679,6 +679,16 @@ static int decode_firmware_device_id_record_errno(
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
+	if (header->package_header_format_revision == 4) {
+		rc = pldm_msgbuf_extract_uint32_to_size(
+			buf, rec->reference_manifest_data.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	} else {
+		rec->reference_manifest_data.length = 0;
+		rec->reference_manifest_data.ptr = NULL;
+	}
 
 	rc = pldm_msgbuf_span_required(
 		buf, header->component_bitmap_bit_length / 8,
@@ -693,7 +703,9 @@ static int decode_firmware_device_id_record_errno(
 		buf, rec->component_image_set_version_string.length,
 		(void **)&rec->component_image_set_version_string.ptr);
 
-	pldm_msgbuf_span_until(buf, rec->firmware_device_package_data.length,
+	size_t tail_length = rec->firmware_device_package_data.length +
+			     rec->reference_manifest_data.length;
+	pldm_msgbuf_span_until(buf, tail_length,
 			       (void **)&rec->record_descriptors.ptr,
 			       &rec->record_descriptors.length);
 
@@ -702,6 +714,11 @@ static int decode_firmware_device_id_record_errno(
 		(void **)&rec->firmware_device_package_data.ptr);
 	if (!rec->firmware_device_package_data.length) {
 		rec->firmware_device_package_data.ptr = NULL;
+	}
+	if (header->package_header_format_revision == 4) {
+		pldm_msgbuf_span_required(
+			buf, rec->reference_manifest_data.length,
+			(void **)&rec->reference_manifest_data.ptr);
 	}
 
 	return pldm_msgbuf_complete_consumed(buf);
@@ -3184,6 +3201,16 @@ int decode_downstream_device_id_record_from_iter(
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
+	if (hdr->package_header_format_revision == 4) {
+		rc = pldm_msgbuf_extract_uint32_to_size(
+			buf, rec->reference_manifest_data.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	} else {
+		rec->reference_manifest_data.length = 0;
+		rec->reference_manifest_data.ptr = NULL;
+	}
 
 	rc = pldm_msgbuf_span_required(
 		buf, hdr->component_bitmap_bit_length / 8,
@@ -3205,12 +3232,19 @@ int decode_downstream_device_id_record_from_iter(
 		rec->self_contained_activation_min_version_comparison_stamp = 0;
 	}
 
-	pldm_msgbuf_span_until(buf, rec->package_data.length,
+	size_t tail_length =
+		rec->package_data.length + rec->reference_manifest_data.length;
+	pldm_msgbuf_span_until(buf, tail_length,
 			       (void **)&rec->record_descriptors.ptr,
 			       &rec->record_descriptors.length);
 
 	pldm_msgbuf_span_required(buf, rec->package_data.length,
 				  (void **)&rec->package_data.ptr);
+	if (hdr->package_header_format_revision == 4) {
+		pldm_msgbuf_span_required(
+			buf, rec->reference_manifest_data.length,
+			(void **)&rec->reference_manifest_data.ptr);
+	}
 
 	return pldm_msgbuf_complete_consumed(buf);
 }
