@@ -2092,6 +2092,7 @@ struct pldm__firmware_device_id_record {
 	struct pldm_component_bitmap applicable_components;
 	struct variable_field record_descriptors;
 	struct variable_field firmware_device_package_data;
+	struct variable_field reference_manifest_data;
 };
 typedef struct pldm__firmware_device_id_record
 	pldm_firmware_device_id_record_api;
@@ -2106,6 +2107,7 @@ struct pldm_downstream_device_id_record {
 	struct pldm_component_bitmap applicable_components;
 	struct variable_field record_descriptors;
 	struct variable_field package_data;
+	struct variable_field reference_manifest_data;
 };
 
 /* TODO: Remove struct pldm_component_image_information from public header, rename padded struct, drop typedef */
