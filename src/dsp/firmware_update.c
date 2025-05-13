@@ -572,6 +572,7 @@ static int decode_firmware_device_id_record_errno(
 {
 	uint8_t component_image_set_version_string_length;
 	uint16_t firmware_device_package_data_length;
+	uint32_t reference_manifest_length;
 	PLDM_MSGBUF_DEFINE_P(buf);
 	uint16_t record_len = 0;
 	void *record_buf;
@@ -640,6 +641,16 @@ static int decode_firmware_device_id_record_errno(
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
+	if (header->package_header_format_revision == 4) {
+		rc = pldm_msgbuf_extract(buf, reference_manifest_length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	} else {
+		rec->reference_manifest_data.length = 0;
+		reference_manifest_length = 0;
+		rec->reference_manifest_data.ptr = NULL;
+	}
 	static_assert(SIZE_MAX >= UINT16_MAX, "Result may be truncated");
 	rec->firmware_device_package_data.length =
 		firmware_device_package_data_length;
@@ -664,6 +675,12 @@ static int decode_firmware_device_id_record_errno(
 				  (void **)&rec->firmware_device_package_data.ptr);
 	if (!firmware_device_package_data_length) {
 		rec->firmware_device_package_data.ptr = NULL;
+	}
+	if (header->package_header_format_revision == 4) {
+		pldm_msgbuf_span_required(
+			buf, reference_manifest_length,
+			(void **)&rec->reference_manifest_data.ptr);
+		rec->reference_manifest_data.length = reference_manifest_length;
 	}
 
 	return pldm_msgbuf_complete_consumed(buf);
@@ -3095,6 +3112,7 @@ int decode_downstream_device_id_record_from_iter(
 {
 	uint8_t self_contained_activation_min_version_string_length;
 	uint16_t package_data_length;
+	uint32_t reference_manifest_length;
 	PLDM_MSGBUF_DEFINE_P(buf);
 	uint16_t record_len = 0;
 	void *record_buf;
@@ -3162,6 +3180,16 @@ int decode_downstream_device_id_record_from_iter(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 	rec->package_data.length = package_data_length;
+	if (hdr->package_header_format_revision == 4) {
+		rc = pldm_msgbuf_extract(buf, reference_manifest_length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		rec->reference_manifest_data.length = reference_manifest_length;
+	} else {
+		rec->reference_manifest_data.length = 0;
+		rec->reference_manifest_data.ptr = NULL;
+	}
 
 	rc = pldm_msgbuf_span_required(
 		buf, hdr->component_bitmap_bit_length / 8,
@@ -3187,6 +3215,11 @@ int decode_downstream_device_id_record_from_iter(
 			       &rec->record_descriptors.length);
 	pldm_msgbuf_span_required(buf, package_data_length,
 				  (void **)&rec->package_data.ptr);
+	if (hdr->package_header_format_revision == 4) {
+		pldm_msgbuf_span_required(
+			buf, reference_manifest_length,
+			(void **)&rec->reference_manifest_data.ptr);
+	}
 
 	return pldm_msgbuf_complete_consumed(buf);
 }
