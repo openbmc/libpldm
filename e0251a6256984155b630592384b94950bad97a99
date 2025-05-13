@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aabba089_7c01ffc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:40:43Z",
+      "side": 1,
+      "message": "Leaving some `placeholder` comment for marking the upcoming changes for DSP0267 v1.3.0",
+      "revId": "e0251a6256984155b630592384b94950bad97a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0d9682c_6d3a532a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:40:43Z",
+      "side": 1,
+      "message": "placeholder for v1.3.0: `package_payload_checksum`",
+      "revId": "e0251a6256984155b630592384b94950bad97a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "066313df_73b6cc9f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:40:43Z",
+      "side": 1,
+      "message": "placeholder: `package_payload_checksum` is present for v1.3.0, supposed to be extracted right after `package_header_checksum` if we\u0027re supporting this.\n\n@anany@nvidia.com is working on this by adding a separated member to the header struct and validate elsewhere out of this scope, see also [#79819].\n\n[#79819]: https://gerrit.openbmc.org/c/openbmc/libpldm/+/79819",
+      "revId": "e0251a6256984155b630592384b94950bad97a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "277ad4b0_e53e9d12",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:40:43Z",
+      "side": 1,
+      "message": "placeholder for `package_payload_checksum`: is it better to be calculated right here, since the image data has been extracted properly?\n@anany@nvidia.com, do you have any opinions on this?",
+      "revId": "e0251a6256984155b630592384b94950bad97a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
