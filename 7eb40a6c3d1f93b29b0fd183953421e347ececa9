@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f29a607_6e083b2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:36:36Z",
+      "side": 1,
+      "message": "Leaving some `placeholder` comment for marking the upcoming changes for DSP0267 v1.3.0",
+      "revId": "7eb40a6c3d1f93b29b0fd183953421e347ececa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adb13b16_906cd72a",
@@ -14,6 +31,40 @@
       "writtenOn": "2025-04-16T04:02:00Z",
       "side": 1,
       "message": "is this new wrapper struct really needed ?",
+      "revId": "7eb40a6c3d1f93b29b0fd183953421e347ececa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0449a04_9b7c289c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:36:36Z",
+      "side": 1,
+      "message": "placeholder for v1.3.0: `reference_manifest_data_length`",
+      "revId": "7eb40a6c3d1f93b29b0fd183953421e347ececa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c2be7e3_9d600c13",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T05:36:36Z",
+      "side": 1,
+      "message": "placeholder for v1.3.0: `reference_menifest_data`",
       "revId": "7eb40a6c3d1f93b29b0fd183953421e347ececa9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
