@@ -54,6 +54,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4abc3c9c_29bff333",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T07:04:09Z",
+      "side": 1,
+      "message": "update: implemented in [#79819]\n\n[#79819]: https://gerrit.openbmc.org/c/openbmc/libpldm/+/79819",
+      "parentUuid": "066313df_73b6cc9f",
+      "revId": "e0251a6256984155b630592384b94950bad97a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "277ad4b0_e53e9d12",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 5
@@ -65,6 +83,24 @@
       "writtenOn": "2025-05-13T05:40:43Z",
       "side": 1,
       "message": "placeholder for `package_payload_checksum`: is it better to be calculated right here, since the image data has been extracted properly?\n@anany@nvidia.com, do you have any opinions on this?",
+      "revId": "e0251a6256984155b630592384b94950bad97a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f05ca6b2_4847184b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-13T07:04:09Z",
+      "side": 1,
+      "message": "@anany@nvidia.com Oh sorry, found I missed some of the changes in your patch, seems like payload integrity check for both in and out of `pldm_package_header_information_api` were implemented.",
+      "parentUuid": "277ad4b0_e53e9d12",
       "revId": "e0251a6256984155b630592384b94950bad97a99",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
