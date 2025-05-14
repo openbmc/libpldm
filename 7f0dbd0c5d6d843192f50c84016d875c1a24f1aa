@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad07b1d5_8bcd557d",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-14T04:48:59Z",
+      "side": 1,
+      "message": "Is `record_handle` allowed to be `NULL`? What behaviour occurs? This needs to be documented.",
+      "revId": "7f0dbd0c5d6d843192f50c84016d875c1a24f1aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b22945d2_6d7b2a17",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-14T04:48:59Z",
+      "side": 1,
+      "message": "Is it possible for this function to fail? If so, the errors need to be documented.\n\n(you\u0027re taking pointers for arguments, so presumably this might want to error out if they\u0027re `NULL`, or if there\u0027s no such sensor ID).",
+      "revId": "7f0dbd0c5d6d843192f50c84016d875c1a24f1aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
