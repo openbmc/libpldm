@@ -3,6 +3,7 @@
 #include "transport.h"
 
 #include <libpldm/transport.h>
+#include <libpldm/instance-id.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm.h>
 
@@ -73,6 +74,13 @@ pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
 	if (msg_len < sizeof(struct pldm_msg_hdr)) {
 		return PLDM_REQUESTER_NOT_REQ_MSG;
 	}
+
+	struct pldm_msg_hdr *hdr = (struct pldm_msg_hdr *)pldm_msg;
+	uint8_t instance_id = 0;
+	if (pldm_instance_id_alloc(transport->db, tid, &instance_id)) {
+		return PLDM_REQUESTER_SETUP_FAIL;
+	}
+	hdr->instance_id = instance_id;
 
 	return transport->send(transport, tid, pldm_msg, msg_len);
 }
@@ -195,14 +203,18 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 	if (rc != PLDM_REQUESTER_SUCCESS) {
 		return rc;
 	}
+	uint8_t instance_id =
+		((struct pldm_msg_hdr *)pldm_req_msg)->instance_id;
 
 	ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
 	if (ret < 0) {
+		pldm_instance_id_free(transport->db, tid, instance_id);
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
 
 	timeradd(&now, &max_response_interval, &end);
 	if (!timeval_is_valid(&end)) {
+		pldm_instance_id_free(transport->db, tid, instance_id);
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
 
@@ -215,11 +227,13 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		ret = pldm_transport_poll(transport,
 					  (int)(timeval_to_msec(&remaining)));
 		if (ret <= 0) {
+			pldm_instance_id_free(transport->db, tid, instance_id);
 			return PLDM_REQUESTER_RECV_FAIL;
 		}
 
 		ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
 		if (ret < 0) {
+			pldm_instance_id_free(transport->db, tid, instance_id);
 			return PLDM_REQUESTER_POLL_FAIL;
 		}
 
@@ -234,9 +248,10 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			free(*pldm_resp_msg);
 			continue;
 		}
-
+		pldm_instance_id_free(transport->db, tid, instance_id);
 		return PLDM_REQUESTER_SUCCESS;
 	}
+	pldm_instance_id_free(transport->db, tid, instance_id);
 
 	return PLDM_REQUESTER_RECV_FAIL;
 }

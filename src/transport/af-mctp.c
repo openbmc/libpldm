@@ -10,6 +10,7 @@
 #include <libpldm/pldm.h>
 #include <libpldm/transport.h>
 #include <libpldm/transport/af-mctp.h>
+#include <libpldm/instance-id.h>
 
 #include <errno.h>
 #include <limits.h>
@@ -248,6 +249,10 @@ int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
 	if (!af_mctp) {
 		return -ENOMEM;
 	}
+	if (pldm_instance_db_init_default(&af_mctp->transport.db)) {
+		free(af_mctp);
+		return -1;
+	}
 
 	af_mctp->transport.name = AF_MCTP_NAME;
 	af_mctp->transport.version = 1;
@@ -258,6 +263,7 @@ int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
 	af_mctp->cookie_jar.next = NULL;
 	af_mctp->socket = socket(AF_MCTP, SOCK_DGRAM, 0);
 	if (af_mctp->socket == -1) {
+		pldm_instance_db_destroy(af_mctp->transport.db);
 		free(af_mctp);
 		return -1;
 	}
@@ -265,6 +271,7 @@ int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
 	if (pldm_socket_sndbuf_init(&af_mctp->socket_send_buf,
 				    af_mctp->socket)) {
 		close(af_mctp->socket);
+		pldm_instance_db_destroy(af_mctp->transport.db);
 		free(af_mctp);
 		return -1;
 	}
@@ -279,6 +286,7 @@ void pldm_transport_af_mctp_destroy(struct pldm_transport_af_mctp *ctx)
 	if (!ctx) {
 		return;
 	}
+	pldm_instance_db_destroy(ctx->transport.db);
 	close(ctx->socket);
 	free(ctx);
 }
