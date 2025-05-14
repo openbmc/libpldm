@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf3def4_b5926273",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2286,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-14T04:42:48Z",
+      "side": 1,
+      "message": "I don\u0027t think this is reasonable. I think this should be `-ENOENT`, and the documentation should be updated.",
+      "revId": "48e7e5c9bf4d902b770b5b90558d1a685b4a032e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70d4fb31_0784d882",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2292,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-14T04:42:48Z",
+      "side": 1,
+      "message": "`-ENOENT` again here.",
+      "revId": "48e7e5c9bf4d902b770b5b90558d1a685b4a032e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18aa52a3_8edadfc7",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2295,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-14T04:42:48Z",
+      "side": 1,
+      "message": "Can we call this `curr` (\"current\") rather than `start`?",
+      "range": {
+        "startLine": 2295,
+        "startChar": 19,
+        "endLine": 2295,
+        "endChar": 24
+      },
+      "revId": "48e7e5c9bf4d902b770b5b90558d1a685b4a032e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a0b6b7_8eaa5b8c",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2506,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-14T04:42:48Z",
+      "side": 1,
+      "message": "Need to `ASSERT_NE(entities, nullptr)`.",
+      "revId": "48e7e5c9bf4d902b770b5b90558d1a685b4a032e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b62eee9_9576709e",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2560,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-14T04:42:48Z",
+      "side": 1,
+      "message": "Resources acquisition and release needs to be done in stack-order. You `malloc()`ed `entities` before initialising `tree`, so you must destroy `tree` before you `free()` `entities`.",
+      "revId": "48e7e5c9bf4d902b770b5b90558d1a685b4a032e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
