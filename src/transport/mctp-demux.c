@@ -9,6 +9,7 @@
 #include <libpldm/pldm.h>
 #include <libpldm/transport.h>
 #include <libpldm/transport/mctp-demux.h>
+#include <libpldm/instance-id.h>
 
 #include <errno.h>
 #include <limits.h>
@@ -248,6 +249,11 @@ int pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx)
 		return -ENOMEM;
 	}
 
+	if (pldm_instance_db_init_default(&demux->transport.db)) {
+		free(demux);
+		return -1;
+	}
+
 	demux->transport.name = MCTP_DEMUX_NAME;
 	demux->transport.version = 1;
 	demux->transport.recv = pldm_transport_mctp_demux_recv;
@@ -255,12 +261,14 @@ int pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx)
 	demux->transport.init_pollfd = pldm_transport_mctp_demux_init_pollfd;
 	demux->socket = pldm_transport_mctp_demux_open();
 	if (demux->socket == -1) {
+		pldm_instance_db_destroy(demux->transport.db);
 		free(demux);
 		return -1;
 	}
 
 	if (pldm_socket_sndbuf_init(&demux->socket_send_buf, demux->socket)) {
 		close(demux->socket);
+		pldm_instance_db_destroy(demux->transport.db);
 		free(demux);
 		return -1;
 	}
@@ -275,6 +283,7 @@ void pldm_transport_mctp_demux_destroy(struct pldm_transport_mctp_demux *ctx)
 	if (!ctx) {
 		return;
 	}
+	pldm_instance_db_destroy(ctx->transport.db);
 	close(ctx->socket);
 	free(ctx);
 }

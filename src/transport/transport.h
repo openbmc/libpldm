@@ -18,6 +18,7 @@ struct pollfd;
 struct pldm_transport {
 	const char *name;
 	uint8_t version;
+	struct pldm_instance_db *db;
 	pldm_requester_rc_t (*recv)(struct pldm_transport *transport,
 				    pldm_tid_t *tid, void **pldm_resp_msg,
 				    size_t *msg_len);
