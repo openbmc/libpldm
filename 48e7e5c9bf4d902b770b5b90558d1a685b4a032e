@@ -153,6 +153,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce3d1cdd_c8d1b5e6",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2506,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-14T06:19:13Z",
+      "side": 1,
+      "message": "The assert added threw a clang-analyzer issue `Potential leak of memory pointed to by \u0027entities\u0027 [clang-analyzer-unix.Malloc,-warnings-as-errors]`. Moved the pointer to be std::unique_ptr with a custom deleter which guarantes the free.",
+      "parentUuid": "5ede2ef7_03f7da0d",
+      "revId": "48e7e5c9bf4d902b770b5b90558d1a685b4a032e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b62eee9_9576709e",
