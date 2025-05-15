@@ -453,7 +453,7 @@ static int decode_pldm_package_header_info_errno(
 	pldm_msgbuf_span_required(buf, header->package_version_string.length,
 				  (void **)&header->package_version_string.ptr);
 
-    // Update checksums count for format revision 3+
+	// Update checksums count for format revision 3+
 	if (header->package_header_format_revision >= 3) {
 		checksums = 2;
 	}
@@ -505,14 +505,16 @@ static int decode_pldm_package_header_info_errno(
 
 	if (package_header_checksum !=
 	    crc32(data, package_header_payload_size)) {
-		printf("header checksum failed h: %#08x, c: %#08x\n", package_header_checksum,
+		printf("header checksum failed h: %#08x, c: %#08x\n",
+		       package_header_checksum,
 		       crc32(data, package_header_payload_size));
 		return -EUCLEAN;
 	}
 
 	if (package_header_checksum ==
 	    crc32(data, package_header_payload_size)) {
-		printf("header checksum passed h: %#08x, c: %#08x\n", package_header_checksum,
+		printf("header checksum passed h: %#08x, c: %#08x\n",
+		       package_header_checksum,
 		       crc32(data, package_header_payload_size));
 	}
 
@@ -660,8 +662,9 @@ static int decode_firmware_device_id_record_errno(
 	pldm_msgbuf_span_until(buf, firmware_device_package_data_length,
 			       (void **)&rec->record_descriptors.ptr,
 			       &rec->record_descriptors.length);
-	pldm_msgbuf_span_required(buf, firmware_device_package_data_length,
-				  (void **)&rec->firmware_device_package_data.ptr);
+	pldm_msgbuf_span_required(
+		buf, firmware_device_package_data_length,
+		(void **)&rec->firmware_device_package_data.ptr);
 	if (!firmware_device_package_data_length) {
 		rec->firmware_device_package_data.ptr = NULL;
 	}
@@ -3301,169 +3304,189 @@ int decode_component_image_information_from_iter(
 #define PLDM_FWUP_CHECKSUM_CHUNK_SIZE (8 * 1024)
 
 struct pldm_payload_checksum_ctx {
-    const uint8_t *payload_data;
-    size_t payload_size;
-    size_t bytes_processed;
-    uint32_t current_checksum;
-    uint32_t stored_checksum;
-    struct timespec start_time;
-    bool initialized;
+	const uint8_t *payload_data;
+	size_t payload_size;
+	size_t bytes_processed;
+	uint32_t current_checksum;
+	uint32_t stored_checksum;
+	struct timespec start_time;
+	bool initialized;
 };
 
-static struct pldm_payload_checksum_ctx g_checksum_ctx = {0};
+static struct pldm_payload_checksum_ctx g_checksum_ctx = { 0 };
 
 LIBPLDM_ABI_TESTING
-int verify_pldm_firmware_update_package_payload_checksum_init(
-    const void *data, size_t length)
+int verify_pldm_firmware_update_package_payload_checksum_init(const void *data,
+							      size_t length)
 {
-    if (!data || length == 0) {
-        fprintf(stderr, "Invalid input: data=%p, length=%zu\n", data, length);
-        return -EINVAL;
-    }
-    
-    const uint8_t *bytes = data;
-    
-    if (length < PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE) {
-        fprintf(stderr, "Package too small: %zu bytes (minimum: %d)\n", 
-                length, PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE);
-        return -EINVAL;
-    }
-    
-    const uint8_t formatRevision = bytes[16];
-    fprintf(stderr, "Package header format revision: %u\n", formatRevision);
-    
-    if (formatRevision < 3) {
-        fprintf(stderr, "Format revision %u doesn't support payload checksum\n", 
-                formatRevision);
-        return -ENOTSUP;
-    }
-    
-    uint16_t headerSize = bytes[17] | (bytes[18] << 8);
-    fprintf(stderr, "Package header size: %u bytes\n", headerSize);
-    
-    if (headerSize > length) {
-        fprintf(stderr, "Header size (%u) exceeds package length (%zu)\n", 
-                headerSize, length);
-        return -EBADMSG;
-    }
-    
-    uint32_t headerChecksum = crc32(bytes, headerSize - 8);
-    fprintf(stderr, "Header checksum: 0x%08x\n", headerChecksum);
-    
-    uint32_t storedHeaderChecksum = bytes[headerSize - 8] |
-                                  (bytes[headerSize - 7] << 8) |
-                                  (bytes[headerSize - 6] << 16) |
-                                  (bytes[headerSize - 5] << 24);
-    fprintf(stderr, "header checksum passed h: 0x%08x, c: 0x%08x\n", 
-            storedHeaderChecksum, headerChecksum);
-    
-    size_t payloadSize = length - headerSize;
-    fprintf(stderr, "Payload size: %zu bytes\n", payloadSize);
-    
-    if (payloadSize == 0) {
-        fprintf(stderr, "No payload data found\n");
-        return -EBADMSG;
-    }
-    
-    uint32_t storedPayloadChecksum = bytes[headerSize - 4] |
-                                   (bytes[headerSize - 3] << 8) |
-                                   (bytes[headerSize - 2] << 16) |
-                                   (bytes[headerSize - 1] << 24);
-    
-    g_checksum_ctx.payload_data = bytes + headerSize;
-    g_checksum_ctx.payload_size = payloadSize;
-    g_checksum_ctx.bytes_processed = 0;
-    g_checksum_ctx.current_checksum = 0;
-    g_checksum_ctx.stored_checksum = storedPayloadChecksum;
-    clock_gettime(CLOCK_MONOTONIC, &g_checksum_ctx.start_time);
-    g_checksum_ctx.initialized = true;
-    
-    fprintf(stderr, "Checksum calculation initialized for %zu bytes payload\n", 
-            payloadSize);
-    fprintf(stderr, "Expected checksum: 0x%08x\n", storedPayloadChecksum);
-    
-    return 0;
+	if (!data || length == 0) {
+		fprintf(stderr, "Invalid input: data=%p, length=%zu\n", data,
+			length);
+		return -EINVAL;
+	}
+
+	const uint8_t *bytes = data;
+
+	if (length < PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE) {
+		fprintf(stderr, "Package too small: %zu bytes (minimum: %d)\n",
+			length, PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE);
+		return -EINVAL;
+	}
+
+	const uint8_t formatRevision = bytes[16];
+	fprintf(stderr, "Package header format revision: %u\n", formatRevision);
+
+	if (formatRevision < 3) {
+		fprintf(stderr,
+			"Format revision %u doesn't support payload checksum\n",
+			formatRevision);
+		return -ENOTSUP;
+	}
+
+	uint16_t headerSize = bytes[17] | (bytes[18] << 8);
+	fprintf(stderr, "Package header size: %u bytes\n", headerSize);
+
+	if (headerSize > length) {
+		fprintf(stderr,
+			"Header size (%u) exceeds package length (%zu)\n",
+			headerSize, length);
+		return -EBADMSG;
+	}
+
+	uint32_t headerChecksum = crc32(bytes, headerSize - 8);
+	fprintf(stderr, "Header checksum: 0x%08x\n", headerChecksum);
+
+	uint32_t storedHeaderChecksum =
+		bytes[headerSize - 8] | (bytes[headerSize - 7] << 8) |
+		(bytes[headerSize - 6] << 16) | (bytes[headerSize - 5] << 24);
+	fprintf(stderr, "header checksum passed h: 0x%08x, c: 0x%08x\n",
+		storedHeaderChecksum, headerChecksum);
+
+	size_t payloadSize = length - headerSize;
+	fprintf(stderr, "Payload size: %zu bytes\n", payloadSize);
+
+	if (payloadSize == 0) {
+		fprintf(stderr, "No payload data found\n");
+		return -EBADMSG;
+	}
+
+	uint32_t storedPayloadChecksum =
+		bytes[headerSize - 4] | (bytes[headerSize - 3] << 8) |
+		(bytes[headerSize - 2] << 16) | (bytes[headerSize - 1] << 24);
+
+	g_checksum_ctx.payload_data = bytes + headerSize;
+	g_checksum_ctx.payload_size = payloadSize;
+	g_checksum_ctx.bytes_processed = 0;
+	g_checksum_ctx.current_checksum = 0;
+	g_checksum_ctx.stored_checksum = storedPayloadChecksum;
+	clock_gettime(CLOCK_MONOTONIC, &g_checksum_ctx.start_time);
+	g_checksum_ctx.initialized = true;
+
+	fprintf(stderr,
+		"Checksum calculation initialized for %zu bytes payload\n",
+		payloadSize);
+	fprintf(stderr, "Expected checksum: 0x%08x\n", storedPayloadChecksum);
+
+	return 0;
 }
 
 LIBPLDM_ABI_TESTING
 int verify_pldm_firmware_update_package_payload_checksum_process(void)
 {
-    if (!g_checksum_ctx.initialized) {
-        fprintf(stderr, "Checksum context not initialized\n");
-        return -EINVAL;
-    }
-    
-    if (g_checksum_ctx.bytes_processed >= g_checksum_ctx.payload_size) {
-        struct timespec end;
-        clock_gettime(CLOCK_MONOTONIC, &end);
-        double elapsed = (end.tv_sec - g_checksum_ctx.start_time.tv_sec) + 
-                        (end.tv_nsec - g_checksum_ctx.start_time.tv_nsec) / 1000000000.0;
-        
-        if (g_checksum_ctx.current_checksum != g_checksum_ctx.stored_checksum) {
-            fprintf(stderr, "Payload checksum mismatch: expected 0x%08x, calculated 0x%08x (time: %f seconds, size: %zu bytes)\n", 
-                    g_checksum_ctx.stored_checksum, g_checksum_ctx.current_checksum, 
-                    elapsed, g_checksum_ctx.payload_size);
-            return -EUCLEAN;
-        }
-        
-        printf("Payload checksum match: expected 0x%08x, calculated 0x%08x (time: %f seconds, size: %zu bytes)\n", 
-               g_checksum_ctx.stored_checksum, g_checksum_ctx.current_checksum, 
-               elapsed, g_checksum_ctx.payload_size);
-        
-        double total_elapsed = (end.tv_sec - g_checksum_ctx.start_time.tv_sec) * 1000000 + 
-                              (end.tv_nsec - g_checksum_ctx.start_time.tv_nsec) / 1000;
-        
-        fprintf(stderr, "Full function time: %.0f microseconds\n", total_elapsed);
-        fprintf(stderr, "Return code: 0\n");
-        
-        g_checksum_ctx.initialized = false;
-        return 0;
-    }
-    
-    size_t remaining = g_checksum_ctx.payload_size - g_checksum_ctx.bytes_processed;
-    size_t chunk_size = (remaining < PLDM_FWUP_CHECKSUM_CHUNK_SIZE) ? 
-                        remaining : PLDM_FWUP_CHECKSUM_CHUNK_SIZE;
-    
-    const uint8_t *chunk_data = g_checksum_ctx.payload_data + g_checksum_ctx.bytes_processed;
-    
-    if (g_checksum_ctx.bytes_processed == 0) {
-        g_checksum_ctx.current_checksum = 0xFFFFFFFF;
-    }
-    
-    uint32_t crc = g_checksum_ctx.current_checksum;
-    for (size_t i = 0; i < chunk_size; i++) {
-        uint8_t byte = chunk_data[i];
-        crc ^= byte;
-        for (int j = 0; j < 8; j++) {
-            crc = (crc >> 1) ^ (0xEDB88320 & -(crc & 1));
-        }
-    }
-    g_checksum_ctx.current_checksum = crc;
-    
-    g_checksum_ctx.bytes_processed += chunk_size;
-    
-    double progress = (double)g_checksum_ctx.bytes_processed / g_checksum_ctx.payload_size * 100.0;
-    fprintf(stderr, "Checksum progress: %.1f%% (%zu/%zu bytes)\n", 
-            progress, g_checksum_ctx.bytes_processed, g_checksum_ctx.payload_size);
-    
-    if (g_checksum_ctx.bytes_processed >= g_checksum_ctx.payload_size) {
-        g_checksum_ctx.current_checksum = ~g_checksum_ctx.current_checksum;
-    }
-    
-    return 1;
+	if (!g_checksum_ctx.initialized) {
+		fprintf(stderr, "Checksum context not initialized\n");
+		return -EINVAL;
+	}
+
+	if (g_checksum_ctx.bytes_processed >= g_checksum_ctx.payload_size) {
+		struct timespec end;
+		clock_gettime(CLOCK_MONOTONIC, &end);
+		double elapsed =
+			(end.tv_sec - g_checksum_ctx.start_time.tv_sec) +
+			(end.tv_nsec - g_checksum_ctx.start_time.tv_nsec) /
+				1000000000.0;
+
+		if (g_checksum_ctx.current_checksum !=
+		    g_checksum_ctx.stored_checksum) {
+			fprintf(stderr,
+				"Payload checksum mismatch: expected 0x%08x, calculated 0x%08x (time: %f seconds, size: %zu bytes)\n",
+				g_checksum_ctx.stored_checksum,
+				g_checksum_ctx.current_checksum, elapsed,
+				g_checksum_ctx.payload_size);
+			return -EUCLEAN;
+		}
+
+		printf("Payload checksum match: expected 0x%08x, calculated 0x%08x (time: %f seconds, size: %zu bytes)\n",
+		       g_checksum_ctx.stored_checksum,
+		       g_checksum_ctx.current_checksum, elapsed,
+		       g_checksum_ctx.payload_size);
+
+		double total_elapsed =
+			(end.tv_sec - g_checksum_ctx.start_time.tv_sec) *
+				1000000 +
+			(end.tv_nsec - g_checksum_ctx.start_time.tv_nsec) /
+				1000;
+
+		fprintf(stderr, "Full function time: %.0f microseconds\n",
+			total_elapsed);
+		fprintf(stderr, "Return code: 0\n");
+
+		g_checksum_ctx.initialized = false;
+		return 0;
+	}
+
+	size_t remaining =
+		g_checksum_ctx.payload_size - g_checksum_ctx.bytes_processed;
+	size_t chunk_size = (remaining < PLDM_FWUP_CHECKSUM_CHUNK_SIZE) ?
+				    remaining :
+				    PLDM_FWUP_CHECKSUM_CHUNK_SIZE;
+
+	const uint8_t *chunk_data =
+		g_checksum_ctx.payload_data + g_checksum_ctx.bytes_processed;
+
+	if (g_checksum_ctx.bytes_processed == 0) {
+		g_checksum_ctx.current_checksum = 0xFFFFFFFF;
+	}
+
+	uint32_t crc = g_checksum_ctx.current_checksum;
+	for (size_t i = 0; i < chunk_size; i++) {
+		uint8_t byte = chunk_data[i];
+		crc ^= byte;
+		for (int j = 0; j < 8; j++) {
+			crc = (crc >> 1) ^ (0xEDB88320 & -(crc & 1));
+		}
+	}
+	g_checksum_ctx.current_checksum = crc;
+
+	g_checksum_ctx.bytes_processed += chunk_size;
+
+	double progress = (double)g_checksum_ctx.bytes_processed /
+			  g_checksum_ctx.payload_size * 100.0;
+	fprintf(stderr, "Checksum progress: %.1f%% (%zu/%zu bytes)\n", progress,
+		g_checksum_ctx.bytes_processed, g_checksum_ctx.payload_size);
+
+	if (g_checksum_ctx.bytes_processed >= g_checksum_ctx.payload_size) {
+		g_checksum_ctx.current_checksum =
+			~g_checksum_ctx.current_checksum;
+	}
+
+	return 1;
 }
 
 LIBPLDM_ABI_TESTING
-int verify_pldm_firmware_update_package_payload_checksum(
-    const void *data, size_t length)
+int verify_pldm_firmware_update_package_payload_checksum(const void *data,
+							 size_t length)
 {
-    int rc = verify_pldm_firmware_update_package_payload_checksum_init(data, length);
-    if (rc < 0) {
-        return rc;
-    }
-    
-    while ((rc = verify_pldm_firmware_update_package_payload_checksum_process()) > 0) {
-    }
-    
-    return rc;
+	int rc = verify_pldm_firmware_update_package_payload_checksum_init(
+		data, length);
+	if (rc < 0) {
+		return rc;
+	}
+
+	while ((rc = verify_pldm_firmware_update_package_payload_checksum_process()) >
+	       0) {
+	}
+
+	return rc;
 }
+ 
