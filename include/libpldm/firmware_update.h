@@ -2335,8 +2335,8 @@ int decode_component_image_information_from_iter(
  *         -EBADMSG: Invalid package structure
  *         -EUCLEAN: Checksum verification failed
  */
-int verify_pldm_firmware_update_package_payload_checksum(
-	const void *data, size_t length);
+int verify_pldm_firmware_update_package_payload_checksum(const void *data,
+							 size_t length);
 
 #ifdef __cplusplus
 }
