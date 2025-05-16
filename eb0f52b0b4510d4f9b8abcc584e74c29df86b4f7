@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bffde0d_c1ab23ee",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-16T04:44:43Z",
+      "side": 1,
+      "message": "yes, I have updated the doxygen as if success return is the out-param.",
+      "parentUuid": "9fe386d1_1cd99861",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 65
+      },
+      "revId": "eb0f52b0b4510d4f9b8abcc584e74c29df86b4f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af37db5c_97a801ce",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d62c0138_d4d2077e",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-16T04:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af37db5c_97a801ce",
+      "range": {
+        "startLine": 316,
+        "startChar": 7,
+        "endLine": 316,
+        "endChar": 51
+      },
+      "revId": "eb0f52b0b4510d4f9b8abcc584e74c29df86b4f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adf9dafd_3b5d042b",
@@ -60,6 +108,24 @@
       "writtenOn": "2025-05-16T01:28:26Z",
       "side": 1,
       "message": "`return -ENOENT`?",
+      "revId": "eb0f52b0b4510d4f9b8abcc584e74c29df86b4f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9de8d749_21ad4cc3",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-16T04:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adf9dafd_3b5d042b",
       "revId": "eb0f52b0b4510d4f9b8abcc584e74c29df86b4f7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
