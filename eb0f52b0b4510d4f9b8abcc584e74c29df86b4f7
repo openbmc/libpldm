@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe386d1_1cd99861",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-16T01:28:26Z",
+      "side": 1,
+      "message": "Isn\u0027t this rather provided by the `record_handle` out-parameter? I expect we want to return 0 on success.",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 65
+      },
+      "revId": "eb0f52b0b4510d4f9b8abcc584e74c29df86b4f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af37db5c_97a801ce",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-16T01:28:26Z",
+      "side": 1,
+      "message": "`0` seems strange. I think `-ENOENT` is preferable here.",
+      "range": {
+        "startLine": 316,
+        "startChar": 7,
+        "endLine": 316,
+        "endChar": 51
+      },
+      "revId": "eb0f52b0b4510d4f9b8abcc584e74c29df86b4f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adf9dafd_3b5d042b",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-16T01:28:26Z",
+      "side": 1,
+      "message": "`return -ENOENT`?",
+      "revId": "eb0f52b0b4510d4f9b8abcc584e74c29df86b4f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
