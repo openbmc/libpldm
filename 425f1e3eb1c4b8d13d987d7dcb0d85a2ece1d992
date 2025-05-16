@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc62281b_af986472",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-16T01:24:37Z",
+      "side": 1,
+      "message": "As it stands entity can\u0027t be `NULL` as it\u0027s passed by value. That said, I think passing by pointer might be preferable here (i.e. `const pldm_entity *entity`), but a `NULL` pointer should be dealt with by returning `-EINVAL` and not `-ENOENT`.\n\nThe `-ENOENT` suggestion was with respect to `entity` being semantically valid, but the entity itself was not present in `tree`.",
+      "range": {
+        "startLine": 690,
+        "startChar": 7,
+        "endLine": 690,
+        "endChar": 54
+      },
+      "revId": "425f1e3eb1c4b8d13d987d7dcb0d85a2ece1d992",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "137bb0f5_80f5469e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-16T01:24:37Z",
+      "side": 1,
+      "message": "Need to test `entity` here too when changing it to a pointer.",
+      "revId": "425f1e3eb1c4b8d13d987d7dcb0d85a2ece1d992",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f053c5c0_55cb522a",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 2508,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-16T01:24:37Z",
+      "side": 1,
+      "message": "Seems a little complex when we could instead free at the end, but sure.",
+      "range": {
+        "startLine": 2507,
+        "startChar": 4,
+        "endLine": 2508,
+        "endChar": 62
+      },
+      "revId": "425f1e3eb1c4b8d13d987d7dcb0d85a2ece1d992",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
