@@ -40,6 +40,10 @@ Change categories:
   PLDM_INVALID_TRANSFER_OPERATION_FLAG in encode_pass_component_table_req()
   command.
 
+- Renamed `PLDM_INVALID_TRANSFER_OPERATION_FLAG` to
+  `PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION` (code 0x23) to align with PLDM
+  specification
+
 ### Deprecated
 
 - utils: Deprecate `is_time_legal()`

@@ -686,7 +686,7 @@ TEST(MultipartReceive, testDecodeRequestFailBadTransferFlag)
                                            &pldm_type, &flag, &transfer_ctx,
                                            &transfer_handle, &section_offset,
                                            &section_length),
-              PLDM_INVALID_TRANSFER_OPERATION_FLAG);
+              PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION);
 }
 
 TEST(MultipartReceive, testDecodeRequestFailBadOffset)

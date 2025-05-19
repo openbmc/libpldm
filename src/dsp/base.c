@@ -530,7 +530,7 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 
 	// Any enum value above PLDM_XFER_CURRENT_PART is invalid.
 	if (request->transfer_opflag > PLDM_XFER_CURRENT_PART) {
-		return PLDM_INVALID_TRANSFER_OPERATION_FLAG;
+		return PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION;
 	}
 
 	// A section offset of 0 is only valid on FIRST_PART or COMPLETE Xfers.
