@@ -1598,6 +1598,17 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 
 /*GetPDRRepositoryInfo*/
 
+/** @brief Encode GetPDRRepositoryInfo request data
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[out] msg - Message will be written to this
+ *  @return pldm_completion_codes
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_get_pdr_repository_info_req(uint8_t instance_id,
+				       struct pldm_msg *msg);
+
 /** @brief Encode GetPDRRepositoryInfo response data
  *
  *  @param[in] instance_id - Message's instance id
