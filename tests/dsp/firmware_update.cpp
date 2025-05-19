@@ -3081,7 +3081,7 @@ TEST(PassComponentTable, errorPathEncodeRequest)
         compClassificationIndex, compComparisonStamp, PLDM_STR_TYPE_ASCII,
         compVerStrLen, &compVerStrInfo, requestMsg,
         sizeof(pldm_pass_component_table_req) + compVerStrLen);
-    EXPECT_EQ(rc, PLDM_INVALID_TRANSFER_OPERATION_FLAG);
+    EXPECT_EQ(rc, PLDM_FWUP_INVALID_TRANSFER_OPERATION_FLAG);
 
     rc = encode_pass_component_table_req(
         instanceId, PLDM_START_AND_END, PLDM_COMP_FIRMWARE, compIdentifier,

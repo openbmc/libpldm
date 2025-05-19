@@ -1752,7 +1752,7 @@ int encode_pass_component_table_req(uint8_t instance_id, uint8_t transfer_flag,
 	}
 
 	if (!is_transfer_flag_valid(transfer_flag)) {
-		return PLDM_INVALID_TRANSFER_OPERATION_FLAG;
+		return PLDM_FWUP_INVALID_TRANSFER_OPERATION_FLAG;
 	}
 
 	if (!is_string_type_valid(comp_ver_str_type)) {

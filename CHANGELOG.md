@@ -36,6 +36,9 @@ Change categories:
   the headers.
 
 - pdr: Stabilize pldm_pdr_delete_by_record_handle()
+- fw_update: Return PLDM_FWUP_INVALID_TRANSFER_OPERATION_FLAG instead of
+  PLDM_INVALID_TRANSFER_OPERATION_FLAG in encode_pass_component_table_req()
+  command.
 
 ### Deprecated
 
