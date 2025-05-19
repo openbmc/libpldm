@@ -533,6 +533,16 @@ TEST(GetPDR, testBadDecodeResponseSafeTrivial)
 }
 #endif
 
+#ifdef LIBPLDM_API_TESTING
+TEST(GetPDRRepositoryInfo, testEncodeRequest)
+{
+    pldm_msg request{};
+
+    auto rc = encode_get_pdr_repository_info_req(0, &request);
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+}
+#endif
+
 TEST(GetPDRRepositoryInfo, testGoodEncodeResponse)
 {
     uint8_t completionCode = 0;
