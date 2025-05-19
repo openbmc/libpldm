@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43bdd8ae_735c9a4b",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-19T00:30:48Z",
+      "side": 1,
+      "message": "This mentions nothing about the actual return value now though 😞. The documentation is meant to be a specification that the function implements, and if this is the case, function could effectively return any value on success aside from `-EINVAL` and `-ENOENT`, which is not a very nice thing for callers to then have to handle. This should say:\n\n\u003e @return 0 on success, with the record handle of the deleted sensor PDR stored in `record_handle` if `record_handle` is non-NULL. Otherwise, returns -EINVAL ...",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 82
+      },
+      "revId": "062b47515fadbf7f7ad2000e32e703949d475e7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c057098_631ba78b",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-19T00:30:48Z",
+      "side": 1,
+      "message": "`-ENOENT`?",
+      "range": {
+        "startLine": 799,
+        "startChar": 18,
+        "endLine": 799,
+        "endChar": 20
+      },
+      "revId": "062b47515fadbf7f7ad2000e32e703949d475e7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
