@@ -49,6 +49,12 @@ Change categories:
   `PLDM_INVALID_TRANSFER_OPERATION_FLAG` in `encode_pass_component_table_req()`
   command.
 
+- base: Return valid completion code from `decode_multipart_receive_req()`
+
+  As per the base specification `PLDM_INVALID_TRANSFER_OPERATION_FLAG` (`0x21`)
+  is inaccurate. Reduce the usage of it by returning
+  `PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION` (code 0x23) instead.
+
 ### Deprecated
 
 - utils: Deprecate `is_time_legal()`
