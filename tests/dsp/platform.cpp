@@ -533,6 +533,26 @@ TEST(GetPDR, testBadDecodeResponseSafeTrivial)
 }
 #endif
 
+#ifdef LIBPLDM_API_TESTING
+TEST(GetPDRRepositoryInfo, testGoodEncodeRequest)
+{
+    pldm_msg request{};
+
+    auto rc = encode_get_pdr_repository_info_req(0, &request,
+                                                 sizeof(struct pldm_msg));
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(GetPDRRepositoryInfo, testBadEncodeRequest)
+{
+    auto rc =
+        encode_get_pdr_repository_info_req(0, nullptr, sizeof(struct pldm_msg));
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
 TEST(GetPDRRepositoryInfo, testGoodEncodeResponse)
 {
     uint8_t completionCode = 0;

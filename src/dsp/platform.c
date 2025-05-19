@@ -393,6 +393,24 @@ int encode_get_pdr_resp(uint8_t instance_id, uint8_t completion_code,
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int encode_get_pdr_repository_info_req(uint8_t instance_id,
+				       struct pldm_msg *msg,
+				       size_t payload_length LIBPLDM_CC_UNUSED)
+{
+	if (!msg) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_GET_PDR_REPOSITORY_INFO;
+
+	return pack_pldm_header_errno(&header, &(msg->hdr));
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_pdr_repository_info_resp(
 	uint8_t instance_id, uint8_t completion_code, uint8_t repository_state,

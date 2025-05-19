@@ -1598,6 +1598,23 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 
 /*GetPDRRepositoryInfo*/
 
+/** @brief Encode GetPDRRepositoryInfo request data
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[out] msg - Message will be written to this
+  * @param[in] payload_length - length of request message payload
+ *  @return 0 on success
+ *         -EINVAL if the input parameters' memory are not allocated,
+ *         or message type or instance in request header is invalid
+ *         -ENOMSG if the PLDM type in the request header is invalid
+ *         -EOVERFLOW if the input message length is invalid
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_get_pdr_repository_info_req(uint8_t instance_id,
+				       struct pldm_msg *msg,
+				       size_t payload_length);
+
 /** @brief Encode GetPDRRepositoryInfo response data
  *
  *  @param[in] instance_id - Message's instance id
