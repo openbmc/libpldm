@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd3072ac_ffdc1370",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-20T05:21:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "43bdd8ae_735c9a4b",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 82
+      },
+      "revId": "062b47515fadbf7f7ad2000e32e703949d475e7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c057098_631ba78b",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-05-19T00:30:48Z",
       "side": 1,
       "message": "`-ENOENT`?",
+      "range": {
+        "startLine": 799,
+        "startChar": 18,
+        "endLine": 799,
+        "endChar": 20
+      },
+      "revId": "062b47515fadbf7f7ad2000e32e703949d475e7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f9836bd_1558a32d",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-20T05:21:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c057098_631ba78b",
       "range": {
         "startLine": 799,
         "startChar": 18,
