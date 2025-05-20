@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9898674b_0c146504",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-20T05:33:32Z",
+      "side": 1,
+      "message": "yes, I have tried to capture the return values in the doxygen, please suggest if I have missed anything",
+      "parentUuid": "cc62281b_af986472",
+      "range": {
+        "startLine": 690,
+        "startChar": 7,
+        "endLine": 690,
+        "endChar": 54
+      },
+      "revId": "425f1e3eb1c4b8d13d987d7dcb0d85a2ece1d992",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "137bb0f5_80f5469e",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-05-16T01:24:37Z",
       "side": 1,
       "message": "Need to test `entity` here too when changing it to a pointer.",
+      "revId": "425f1e3eb1c4b8d13d987d7dcb0d85a2ece1d992",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d55df263_5a9efc78",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-20T05:33:32Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "137bb0f5_80f5469e",
       "revId": "425f1e3eb1c4b8d13d987d7dcb0d85a2ece1d992",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
