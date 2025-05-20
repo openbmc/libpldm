@@ -22,6 +22,7 @@ Change categories:
 - base: Add command specific completion codes.
 - firmware update: Add support for DSP0267 v1.2.0 by adding
   `component_opaque_data` fields to correctly parse their contents.
+- firmware update: Add 1.3.0 version updates.
 
 ### Changed
 
