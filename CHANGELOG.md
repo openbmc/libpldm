@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- base: Add command specific completion codes.
+
 ### Changed
 
 - Stabilised `decode_get_event_receiver_resp()`
