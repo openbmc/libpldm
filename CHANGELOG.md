@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 - base: Add command specific completion codes.
+- firmware_update: Add 1.3.0 version updates.
 
 ### Changed
 
