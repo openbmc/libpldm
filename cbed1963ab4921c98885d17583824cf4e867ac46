@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1dfeb04_558cb0e0",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-21T06:54:37Z",
+      "side": 1,
+      "message": "Andrew, I am extremely sorry for not proofreading the patchset. I have created the documentation to incorporate all the return values. The `-EOVERFLOW` error was returned when we had the `msgbuf` code in the patchset. Since we moved away from it as per one of your earlier review comments, I have removed it from the documentation.",
+      "parentUuid": "db5a5e66_e28d6036",
+      "revId": "cbed1963ab4921c98885d17583824cf4e867ac46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fbdcf41_45aff29e",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-21T02:18:52Z",
       "side": 1,
       "message": "e.g. we\u0027re returning `-ENOENT` here, so the cases where we return `-ENOENT` must be described in the documentation (the implementation must conform to the documentation).",
+      "revId": "cbed1963ab4921c98885d17583824cf4e867ac46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d452d5_5317c1d0",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2286,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-21T06:54:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6fbdcf41_45aff29e",
       "revId": "cbed1963ab4921c98885d17583824cf4e867ac46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
