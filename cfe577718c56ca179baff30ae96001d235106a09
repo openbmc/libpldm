@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31e7d84f_f07ce78d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-21T02:14:26Z",
+      "side": 1,
+      "message": "Hi Vishnu, thanks for the patch! I have some comments inline.",
+      "revId": "cfe577718c56ca179baff30ae96001d235106a09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5768df1_7a1a6a16",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1605,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-21T02:14:26Z",
+      "side": 1,
+      "message": "Please use errno values instead:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L212-L216",
+      "range": {
+        "startLine": 1605,
+        "startChar": 12,
+        "endLine": 1605,
+        "endChar": 33
+      },
+      "revId": "cfe577718c56ca179baff30ae96001d235106a09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b230b3a_c8e3ef08",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1610,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-21T02:14:26Z",
+      "side": 1,
+      "message": "Please add a `payload_length` parameter here that describes the size of msg-\u003epayload flexible array member.",
+      "revId": "cfe577718c56ca179baff30ae96001d235106a09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33dcfcd4_2a29d595",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-21T02:14:26Z",
+      "side": 1,
+      "message": "Should be\n\n```\nreturn -EINVAL;\n```",
+      "revId": "cfe577718c56ca179baff30ae96001d235106a09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc5f29c2_9e7a6f8c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-21T02:14:26Z",
+      "side": 1,
+      "message": "`pack_pldm_header_errno()` would help here.",
+      "range": {
+        "startLine": 410,
+        "startChar": 8,
+        "endLine": 410,
+        "endChar": 24
+      },
+      "revId": "cfe577718c56ca179baff30ae96001d235106a09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7136ef9_f7b663f1",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-21T02:14:26Z",
+      "side": 1,
+      "message": "Please test failure cases as well to ensure the implementation conforms to the contract outlined in the function\u0027s doxygen description.",
+      "revId": "cfe577718c56ca179baff30ae96001d235106a09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
