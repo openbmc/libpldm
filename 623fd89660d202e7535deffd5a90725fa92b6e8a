@@ -16,6 +16,24 @@
       "message": "This is better, thanks. However, the sentence is now broken (and the wrapping is a bit funky). Can you please fix both (make complete sentences, with sensible line wrapping at the line limit)?",
       "revId": "623fd89660d202e7535deffd5a90725fa92b6e8a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8002ee7_5f04cf21",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-21T06:24:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ac87e119_72fd8b62",
+      "revId": "623fd89660d202e7535deffd5a90725fa92b6e8a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
