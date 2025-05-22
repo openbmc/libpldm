@@ -1555,6 +1555,46 @@ int decode_pldm_downstream_device_parameters_entry_from_iter(
 	return pldm_msgbuf_complete(buf);
 }
 
+#ifdef SORA
+int encode_request_downstream_dev_update_req(
+	uint8_t instance_id, uint32_t max_dd_transfer_size,
+	uint8_t max_outstanding_transfer_req, uint16_t dd_pkg_data_len,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (!msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	if ((max_downstream_dev_transfer_size <
+	     PLDM_FWUP_BASELINE_TRANSFER_SIZE) ||
+	    (max_outstanding_transfer_req < PLDM_FWUP_MIN_OUTSTANDING_REQ)) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = encode_pldm_header_only(PLDM_REQUEST, instance_id, PLDM_FWUP,
+				     PLADM_REQUEST_DOWNSTREAM_DEVICE_UPDATE,
+				     msg);
+	if (rc) {
+		return EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, max_dd_transfer_size);
+	pldm_msgbuf_insert(buf, max_outstanding_transfer_req);
+	pldm_msgbuf_insert(buf, dd_pkg_data_len);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+#endif
+
 LIBPLDM_ABI_STABLE
 int encode_request_update_req(uint8_t instance_id, uint32_t max_transfer_size,
 			      uint16_t num_of_comp,
