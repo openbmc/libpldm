@@ -121,10 +121,16 @@ enum pldm_firmware_update_commands {
 	PLDM_TRANSFER_COMPLETE = 0x16,
 	PLDM_VERIFY_COMPLETE = 0x17,
 	PLDM_APPLY_COMPLETE = 0x18,
+  PLDM_GET_META_DATA = 0x19,
 	PLDM_ACTIVATE_FIRMWARE = 0x1a,
 	PLDM_GET_STATUS = 0x1b,
 	PLDM_CANCEL_UPDATE_COMPONENT = 0x1c,
-	PLDM_CANCEL_UPDATE = 0x1d
+	PLDM_CANCEL_UPDATE = 0x1d,
+  PLDM_ACTIVATE_PENDING_COMPONENT_IMAGE_SET = 0x1E,
+  PLDM_ACTIVATE_PENDING_COMPONENT_IMAGE = 0x1F,
+  PLADM_REQUEST_DOWNSTREAM_DEVICE_UPDATE = 0x20,
+  PLDM_GET_COMPONENT_OPAQUE_DATA = 0x21,
+  PLDM_UPTATE_SECURITY_REVISION = 0x22
 };
 
 /** @brief PLDM Firmware update completion codes
@@ -851,6 +857,30 @@ struct pldm_downstream_device_parameters_entry {
 	const void *active_comp_ver_str;
 	const void *pending_comp_ver_str;
 };
+
+#ifdef SORA
+/** @struct pldm_request_downstream_dev_update_req
+ *
+ */
+
+struct pldm_request_downstream_dev_update_req {
+  uint32_t max_dd_transfer_size;
+  uint8_t max_outstanding_transfer_req;
+  uint16_t dd_pkg_data_len;
+}
+
+/** @struct pldm_request_downstream_dev_update_resp
+ *
+ */
+
+struct pldm_request_downstream_dev_update_resp {
+  uint8_t completion_code;
+  uint16_t dd_meta_data_len;
+  uint8_t dd_will_send_get_pkg_data;
+  uint16_t get_pkg_data_max_transfer_size;
+}
+
+#endif
 
 /** @struct pldm_request_update_req
  *
