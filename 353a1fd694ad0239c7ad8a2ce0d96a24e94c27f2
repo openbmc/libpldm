@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10104f0d_914bb042",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-23T00:17:35Z",
+      "side": 1,
+      "message": "This should be \"-ENOENT @p entity is not found in @p tree\", right? The implementation of the search might return `NULL` if it\u0027s not found, but saying `NULL` here isn\u0027t useful to the reader 😞",
+      "range": {
+        "startLine": 690,
+        "startChar": 45,
+        "endLine": 690,
+        "endChar": 79
+      },
+      "revId": "353a1fd694ad0239c7ad8a2ce0d96a24e94c27f2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e422cb31_76af53e1",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 2504,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-23T00:17:35Z",
+      "side": 1,
+      "message": "Can you remove the blank line here?",
+      "revId": "353a1fd694ad0239c7ad8a2ce0d96a24e94c27f2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
