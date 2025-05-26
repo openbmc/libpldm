@@ -1555,6 +1555,127 @@ int decode_pldm_downstream_device_parameters_entry_from_iter(
 	return pldm_msgbuf_complete(buf);
 }
 
+int encode_request_downstream_dev_update_req(uint8_t instance_id, 
+          const struct pldm_request_downstream_dev_update_req *req_data,
+			    struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+  int rc;
+
+  if (msg == NULL || payload_length == NULL || req_data == NULL) {
+    return -EINVAL;
+  }
+
+	if ((req_data->max_dd_transfer_size < PLDM_FWUP_BASELINE_TRANSFER_SIZE) ||
+	    (req_data->max_outstanding_transfer_req < PLDM_FWUP_MIN_OUTSTANDING_REQ)) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+  rc = encode_pldm_header_only(PLDM_REQUEST, instance_id, PLDM_FWUP,
+      PLDM_REQUEST_DOWNSTREAM_DEVICE_UPDATE, msg);
+	if (rc) {
+		return EINVAL;
+	}
+
+  rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+  pldm_msgbuf_insert(buf, req_data->max_dd_transfer_size);
+  pldm_msgbuf_insert(buf, req_data->max_outstanding_transfer_req);
+  pldm_msgbuf_insert(buf, req_data->dd_pkg_data_len);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+int decode_request_downstream_dev_update_req(const struct pldm_msg *msg, 
+            size_t payload_length,
+			      struct pldm_request_downstream_dev_update_req *req)
+{
+	int rc;
+	PLDM_MSGBUF_DEFINE_P(buf);
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+  pldm_msgbuf_extract(buf, req->max_dd_transfer_size);
+  pldm_msgbuf_extract(buf, req->max_outstanding_transfer_req);
+  rc = pldm_msgbuf_extract(buf, req->dd_pkg_data_len);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+int encode_request_downstream_dev_update_resp(uint8_t instance_id,
+			       const struct pldm_request_downstream_dev_update_resp *resp_data,
+			       struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = {
+		.instance = instance_id,
+		.msg_type = PLDM_RESPONSE,
+		.pldm_type = PLDM_FWUP,
+		.command = PLDM_REQUEST_DOWNSTREAM_DEVICE_UPDATE,
+	};
+	rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, resp_data->max_dd_transfer_size);
+	pldm_msgbuf_insert(buf, resp_data->max_outstanding_transfer_req);
+	pldm_msgbuf_insert(buf, resp_data->dd_pkg_data_len);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+int decode_request_downstream_dev_update_resp(const struct pldm_msg *msg,
+			       size_t payload_length,
+			       struct pldm_request_downstream_dev_update_resp *resp_data)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp_data == NULL || !payload_length) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+  pldm_msgbuf_extract(buf, resp_data->completion_code);
+  pldm_msgbuf_extract(buf, resp_data->dd_meta_data_len);
+  pldm_msgbuf_extract(buf, resp_data->dd_will_send_get_pkg_data);
+  rc = pldm_msgbuf_extract(buf, resp_data->get_pkg_data_max_transfer_size);
+  if (rc) {
+    return pldm_msgbuf_discard(buf, rc);
+  }
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_request_update_req(uint8_t instance_id, uint32_t max_transfer_size,
 			      uint16_t num_of_comp,
