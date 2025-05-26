@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "954c4c56_34787451",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-05-26T10:39:24Z",
+      "side": 1,
+      "message": "Hi @anany@nvidia.com, forgive me to modify some of the code to pass CI build, since this patch seems inactive for a long time but I need to base on this patch to implement other portion of DSP0267 v1.3.0 support. All features of this patch are not effected, you can takeover back this patch anytime.",
+      "revId": "c796cab5a2d381640da5deeb428a4af682b69a19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
