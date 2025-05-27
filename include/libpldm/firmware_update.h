@@ -121,10 +121,16 @@ enum pldm_firmware_update_commands {
 	PLDM_TRANSFER_COMPLETE = 0x16,
 	PLDM_VERIFY_COMPLETE = 0x17,
 	PLDM_APPLY_COMPLETE = 0x18,
+	PLDM_GET_META_DATA = 0x19,
 	PLDM_ACTIVATE_FIRMWARE = 0x1a,
 	PLDM_GET_STATUS = 0x1b,
 	PLDM_CANCEL_UPDATE_COMPONENT = 0x1c,
-	PLDM_CANCEL_UPDATE = 0x1d
+	PLDM_CANCEL_UPDATE = 0x1d,
+	PLDM_ACTIVATE_PENDING_COMPONENT_IMAGE_SET = 0x1E,
+	PLDM_ACTIVATE_PENDING_COMPONENT_IMAGE = 0x1F,
+	PLDM_REQUEST_DOWNSTREAM_DEVICE_UPDATE = 0x20,
+	PLDM_GET_COMPONENT_OPAQUE_DATA = 0x21,
+	PLDM_UPTATE_SECURITY_REVISION = 0x22
 };
 
 /** @brief PLDM Firmware update completion codes
@@ -889,6 +895,27 @@ struct pldm_request_update_resp {
 	uint8_t fd_will_send_pkg_data;
 } __attribute__((packed));
 
+/** @struct pldm_request_downstream_dev_update_req
+ *
+ */
+
+struct pldm_request_downstream_dev_update_req {
+	uint32_t max_dd_transfer_size;
+	uint8_t max_outstanding_transfer_req;
+	uint16_t dd_pkg_data_len;
+};
+
+/** @struct pldm_request_downstream_dev_update_resp
+ *
+ */
+
+struct pldm_request_downstream_dev_update_resp {
+	uint8_t completion_code;
+	uint16_t dd_meta_data_len;
+	uint8_t dd_will_send_get_pkg_data;
+	uint16_t get_pkg_data_max_transfer_size;
+};
+
 /** @struct pldm_pass_component_table_req
  *
  *  Structure representing PassComponentTable request, wire format.
@@ -1537,6 +1564,66 @@ int decode_request_update_resp(const struct pldm_msg *msg,
 int encode_request_update_resp(uint8_t instance_id,
 			       const struct pldm_request_update_resp *resp_data,
 			       struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Create PLDM request message for RequestDownstreamDeviceUpdate
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req_data - Request data.
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[inout] payload_length - Length of response message payload
+ *
+ *  @return pldm_completion_codes
+ *
+ *  @note Caller is responsible for memory alloc and dealloc of param
+ *        'msg.payload'
+ */
+int encode_request_downstream_dev_update_req(
+	uint8_t instance_id,
+	const struct pldm_request_downstream_dev_update_req *req_data,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode PLDM request message for RequestDownstreamDeviceUpdate
+ *
+ *  @param[in] msg - Message
+ *  @param[in] payload_length - Length of request message payload
+ *  @param[out] req_data - RequestDownstreamDeviceUpdate request parameters
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ *
+ *  @note Caller is responsible for memory alloc and dealloc of param
+ *        'msg.payload'
+ */
+int decode_request_downstream_dev_update_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_request_downstream_dev_update_req *req_data);
+
+/** @brief Create PLDM response message for RequestDownstreamDeviceUpdate
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp_data - Response data
+ *  @param[out] msg - Message will be written to this
+ *  @param[inout] payload_length - Length of response message payload
+ *
+ *  @return 0 on success, a negative errno value on failure.
+ *
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *		   'msg.payload'
+ */
+int encode_request_downstream_dev_update_resp(
+	uint8_t instance_id,
+	const struct pldm_request_downstream_dev_update_resp *resp_data,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode a RequestDownstreamDeviceUpdate response message
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] resp_data - RequestDownstreamDeviceUpdate respond parameters
+ *  @return pldm_completion_codes
+ */
+int decode_request_downstream_dev_update_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	const struct pldm_request_downstream_dev_update_resp *resp_data);
 
 /** @brief Create PLDM request message for PassComponentTable
  *
