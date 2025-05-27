@@ -4639,7 +4639,6 @@ TEST(CancelUpdate, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
 {
     const std::array<uint8_t, 102> package{
@@ -4813,9 +4812,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
 
     EXPECT_EQ(nr_infos, 1);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
 {
     const std::array<uint8_t, 150> package{
@@ -5030,7 +5027,6 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
 
     EXPECT_EQ(nr_infos, 2);
 }
-#endif
 
 #ifdef LIBPLDM_API_TESTING
 TEST(VerifyPayloadChecksum, ValidChecksum)

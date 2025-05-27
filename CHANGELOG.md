@@ -45,6 +45,8 @@ Change categories:
 
 - pdr: Stabilize pldm_pdr_delete_by_record_handle()
 
+- firmware_update: change package parsing API to stable
+
 ### Deprecated
 
 - utils: Deprecate `is_time_legal()`
