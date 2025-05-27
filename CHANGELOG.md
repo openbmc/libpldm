@@ -834,3 +834,11 @@ Change categories:
 - transport: Match on response in pldm_transport_send_recv_msg()
 - requester: Add check before accessing hdr in pldm_recv()
 - bios_table: pldm_bios_table_attr_entry_string_info_check() NULL deref
+
+## [0.3.0] - 2025-05-27
+
+### Added
+
+- firmware update: Add new support commands.
+- firmware update: Add new struct for downstream device update command
+- firmware update: Add encode/decode API for downstream device update command
