@@ -2,6 +2,8 @@
 #ifndef FW_UPDATE_H
 #define FW_UPDATE_H
 
+// hello
+
 #ifdef __cplusplus
 extern "C" {
 #endif
