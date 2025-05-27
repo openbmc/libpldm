@@ -52,6 +52,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6b53b32_6eafd347",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 16
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edfb62bc_6995d677",
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b89c9a89_2a4529c2",
@@ -65,6 +83,30 @@
       "writtenOn": "2025-05-12T08:47:05Z",
       "side": 1,
       "message": "if(!msg)",
+      "range": {
+        "startLine": 2500,
+        "startChar": 1,
+        "endLine": 2500,
+        "endChar": 19
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff050ff8_f455b274",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2500,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b89c9a89_2a4529c2",
       "range": {
         "startLine": 2500,
         "startChar": 1,
@@ -98,6 +140,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b47b0db_7394749c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2514,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2f73928c_430717ab",
+      "range": {
+        "startLine": 2504,
+        "startChar": 1,
+        "endLine": 2514,
+        "endChar": 34
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "660f7cae_19fd525c",
@@ -121,6 +187,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3a9bab9_7b233ebe",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2521,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "660f7cae_19fd525c",
+      "range": {
+        "startLine": 2521,
+        "startChar": 23,
+        "endLine": 2521,
+        "endChar": 44
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2b75dd8_4095276e",
@@ -134,6 +224,30 @@
       "writtenOn": "2025-05-12T08:47:05Z",
       "side": 1,
       "message": "we could write this as - `if(!msg || !event_receiver_info)`",
+      "range": {
+        "startLine": 2525,
+        "startChar": 1,
+        "endLine": 2525,
+        "endChar": 50
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9bb2b71_a9420b4a",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2525,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2b75dd8_4095276e",
       "range": {
         "startLine": 2525,
         "startChar": 1,
@@ -184,6 +298,48 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1bd4f20_af950022",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2562,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ad63f723_65422812",
+      "range": {
+        "startLine": 2545,
+        "startChar": 1,
+        "endLine": 2562,
+        "endChar": 43
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c409b20_89e2bbd3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2562,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "269d42d4_198824dc",
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a093519a_e90814c3",
@@ -197,6 +353,30 @@
       "writtenOn": "2025-05-12T08:47:05Z",
       "side": 1,
       "message": "if(!msg)",
+      "range": {
+        "startLine": 2572,
+        "startChar": 1,
+        "endLine": 2572,
+        "endChar": 19
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b171ed22_fd782ab0",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2572,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a093519a_e90814c3",
       "range": {
         "startLine": 2572,
         "startChar": 1,
@@ -224,6 +404,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cee07a21_ce233040",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2581,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77f05498_15f448fd",
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b529c267_247f64ab",
@@ -237,6 +435,30 @@
       "writtenOn": "2025-05-08T07:06:38Z",
       "side": 1,
       "message": "We can\u0027t do this unless we know it is actually an MCTP EID that\u0027s in the message. You need to do this extraction conditionally:\n\n```\nrc \u003d pldm_msgbuf_exract(buf, resp-\u003etransport_protocol_type);\nif (rc) {\n    return pldm_msgbuf_discard(buf, rc);\n}\nif (resp-\u003etransport_protocol_type \u003d\u003d PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP) {\n    pldm_msgbuf_extract(buf, resp-\u003eevent_receiver_addres.mctp_eid);\n} else {\n    return pldm_msgbuf_discard(buf, -ENOTSUP);\n}\n\nreturn pldm_msgbuf_complete_consumed(buf);\n```",
+      "range": {
+        "startLine": 2590,
+        "startChar": 1,
+        "endLine": 2590,
+        "endChar": 73
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b05ab78_d58a2239",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2590,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b529c267_247f64ab",
       "range": {
         "startLine": 2590,
         "startChar": 1,
@@ -270,6 +492,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38035a92_dd1c9450",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2597,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d531d61a_e25e6a11",
+      "range": {
+        "startLine": 2594,
+        "startChar": 1,
+        "endLine": 2597,
+        "endChar": 41
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c61974a_edc50e65",
@@ -293,6 +539,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e6a4274_99fc22bf",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 3580,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2c61974a_edc50e65",
+      "range": {
+        "startLine": 3580,
+        "startChar": 4,
+        "endLine": 3580,
+        "endChar": 66
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5ebda23_2f844eec",
@@ -306,6 +576,30 @@
       "writtenOn": "2025-05-12T08:47:05Z",
       "side": 1,
       "message": "can we use placement new",
+      "range": {
+        "startLine": 3607,
+        "startChar": 4,
+        "endLine": 3607,
+        "endChar": 68
+      },
+      "revId": "98dfed0d9285e48df529807ecf4574c8a5710288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c193627_b5e18921",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 3607,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-27T13:37:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d5ebda23_2f844eec",
       "range": {
         "startLine": 3607,
         "startChar": 4,
