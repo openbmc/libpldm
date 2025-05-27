@@ -2957,6 +2957,180 @@ TEST(RequestUpdate, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
+#ifdef LIBPLDM_API_TESTING
+TEST(RequestDownstreamDeviceUpdate, goodPathEncodeRequest)
+{
+    constexpr uint8_t instanceId = 1;
+
+    std::array<uint8_t, hdrSize + PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES>
+        request{};
+
+    auto requestMsg = new (request.data()) pldm_msg;
+
+    constexpr struct pldm_request_downstream_device_update_req req_data = {
+        .maximum_downstream_device_transfer_size = 512,
+        .maximum_outstanding_transfer_requests = 2,
+        .downstream_device_package_data_length = 0x1234,
+    };
+    size_t enc_payload_len = PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES;
+
+    auto rc = encode_request_downstream_device_update_req(
+        instanceId, &req_data, requestMsg, &enc_payload_len);
+
+    EXPECT_EQ(rc, 0);
+
+    std::array<uint8_t, hdrSize + PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES>
+        outRequest{0x81, 0x05, 0x20, 0x00, 0x02, 0x00, 0x00, 0x02, 0x34, 0x12};
+    EXPECT_EQ(request, outRequest);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(RequestDownstreamDeviceUpdate, errorPathEncodeRequest)
+{
+    constexpr uint8_t instanceId = 1;
+    size_t enc_payload_len = PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES;
+
+    std::array<uint8_t, hdrSize + PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES>
+        request{};
+
+    struct pldm_request_downstream_device_update_req req_data = {
+        .maximum_downstream_device_transfer_size = 512,
+        .maximum_outstanding_transfer_requests = 2,
+        .downstream_device_package_data_length = 0x1234,
+    };
+
+    auto requestMsg = new (request.data()) pldm_msg;
+
+    auto rc = encode_request_downstream_device_update_req(
+        instanceId, nullptr, requestMsg, &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+    rc = encode_request_downstream_device_update_req(
+        instanceId, &req_data, requestMsg, &enc_payload_len);
+    EXPECT_EQ(rc, 0);
+
+    rc = encode_request_downstream_device_update_req(instanceId, &req_data,
+                                                     nullptr, &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+    rc = encode_request_downstream_device_update_req(
+        instanceId, &req_data, requestMsg, &enc_payload_len);
+    EXPECT_EQ(rc, 0);
+
+    rc = encode_request_downstream_device_update_req(instanceId, &req_data,
+                                                     requestMsg, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+    rc = encode_request_downstream_device_update_req(
+        instanceId, &req_data, requestMsg, &enc_payload_len);
+    EXPECT_EQ(rc, 0);
+
+    enc_payload_len =
+        static_cast<size_t>(PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES) - 1;
+    rc = encode_request_downstream_device_update_req(
+        instanceId, &req_data, requestMsg, &enc_payload_len);
+    EXPECT_EQ(rc, -EOVERFLOW);
+    enc_payload_len =
+        static_cast<size_t>(PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES);
+    rc = encode_request_downstream_device_update_req(
+        instanceId, &req_data, requestMsg, &enc_payload_len);
+    EXPECT_EQ(rc, 0);
+
+    req_data.maximum_downstream_device_transfer_size = 31;
+    rc = encode_request_downstream_device_update_req(
+        instanceId, &req_data, requestMsg, &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+    req_data.maximum_downstream_device_transfer_size =
+        PLDM_FWUP_BASELINE_TRANSFER_SIZE;
+
+    req_data.maximum_outstanding_transfer_requests = 0;
+    rc = encode_request_downstream_device_update_req(
+        instanceId, &req_data, requestMsg, &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+    req_data.maximum_outstanding_transfer_requests = 2;
+    rc = encode_request_downstream_device_update_req(
+        instanceId, &req_data, requestMsg, &enc_payload_len);
+    EXPECT_EQ(rc, 0);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(RequestDownstreamDeviceUpdate, goodPathDecodeResponse)
+{
+    /* Test a success completion code */
+    constexpr uint16_t ddMetaDataLen = 1024;
+    constexpr uint8_t ddWillSendPkgData = 1;
+    constexpr uint16_t getPkgDataMaxTransferSize = 512;
+    std::array<uint8_t, hdrSize + PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES>
+        requestUpdateResponse1{0x00, 0x00, 0x00, 0x00, 0x00,
+                               0x04, 0x01, 0x00, 0x02};
+
+    auto responseMsg1 = new (requestUpdateResponse1.data()) pldm_msg;
+
+    struct pldm_request_downstream_device_update_resp resp_data1 = {
+        .completion_code = 0,
+        .downstream_device_meta_data_length = 0,
+        .downstream_device_will_send_get_package_data = 0,
+        .get_package_data_maximum_transfer_size = 0};
+
+    auto rc = decode_request_downstream_device_update_resp(
+        responseMsg1, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES,
+        &resp_data1);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(resp_data1.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(resp_data1.downstream_device_meta_data_length, ddMetaDataLen);
+    EXPECT_EQ(resp_data1.downstream_device_will_send_get_package_data,
+              ddWillSendPkgData);
+    EXPECT_EQ(resp_data1.get_package_data_maximum_transfer_size,
+              getPkgDataMaxTransferSize);
+
+    /* Test a failure completion code */
+    std::array<uint8_t, hdrSize + PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES>
+        requestUpdateResponse2{0x00, 0x00, 0x00, 0x81};
+
+    auto responseMsg2 = new (requestUpdateResponse2.data()) pldm_msg;
+
+    struct pldm_request_downstream_device_update_resp resp_data2 = {
+        .completion_code = 0,
+        .downstream_device_meta_data_length = 0,
+        .downstream_device_will_send_get_package_data = 0,
+        .get_package_data_maximum_transfer_size = 0};
+
+    rc = decode_request_downstream_device_update_resp(
+        responseMsg2, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES,
+        &resp_data2);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(resp_data2.completion_code, PLDM_FWUP_ALREADY_IN_UPDATE_MODE);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(RequestDownstreamDeviceUpdate, errorPathDecodeResponse)
+{
+    std::array<uint8_t, hdrSize + PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES>
+        requestUpdateResponse{0x00, 0x00, 0x00, 0x00, 0x00,
+                              0x04, 0x01, 0x00, 0x02};
+
+    auto responseMsg = new (requestUpdateResponse.data()) pldm_msg;
+
+    struct pldm_request_downstream_device_update_resp resp_data = {
+        .completion_code = 0,
+        .downstream_device_meta_data_length = 0,
+        .downstream_device_will_send_get_package_data = 0,
+        .get_package_data_maximum_transfer_size = 0};
+
+    auto rc = decode_request_downstream_device_update_resp(
+        nullptr, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES, &resp_data);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_request_downstream_device_update_resp(
+        responseMsg, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_request_downstream_device_update_resp(responseMsg, 0,
+                                                      &resp_data);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif // LIBPLDM_API_TESTING
+
 TEST(PassComponentTable, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
