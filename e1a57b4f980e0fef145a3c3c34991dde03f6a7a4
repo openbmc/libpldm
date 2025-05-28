@@ -16,6 +16,86 @@
       "message": "I think I\u0027ve solved all the points",
       "revId": "e1a57b4f980e0fef145a3c3c34991dde03f6a7a4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f792c5fa_2ae8d285",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-28T00:23:21Z",
+      "side": 1,
+      "message": "Hi Roger, I\u0027ve left a few notes regarding the CI failure.",
+      "revId": "e1a57b4f980e0fef145a3c3c34991dde03f6a7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce3fec3f_9f8543cb",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 3687,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-28T00:23:21Z",
+      "side": 1,
+      "message": "Please don\u0027t add new lint violations. Especially because CI finds:\n\n```\nstderr:\n../tests/dsp/platform.cpp:3695:34: runtime error: member access within misaligned address 0x770331204fc3 for type \u0027struct pldm_get_event_receiver_resp\u0027, which requires 8 byte alignment\n0x770331204fc3: note: pointer points here\n 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00\n              ^ \n    #0 0x5a765f6782ed in GetEventReceiver_testBadDecodeResponse_Test::TestBody() ../tests/dsp/platform.cpp:3695\n    #1 0x77033403b006 in void testing::internal::HandleSehExceptionsInMethodIfSupported\u003ctesting::Test, void\u003e(testing::Test*, void (testing::Test::*)(), char const*) /googletest-1.15.2/googletest/src/gtest.cc:2638\n    #2 0x77033403b006 in void testing::internal::HandleExceptionsInMethodIfSupported\u003ctesting::Test, void\u003e(testing::Test*, void (testing::Test::*)(), char const*) /googletest-1.15.2/googletest/src/gtest.cc:2674\n    #3 0x77033402a205 in testing::Test::Run() /googletest-1.15.2/googletest/src/gtest.cc:2713\n    #4 0x77033402a205 in testing::Test::Run() /googletest-1.15.2/googletest/src/gtest.cc:2703\n    #5 0x77033402a394 in testing::TestInfo::Run() /googletest-1.15.2/googletest/src/gtest.cc:2859\n    #6 0x77033402aa5e in testing::TestSuite::Run() /googletest-1.15.2/googletest/src/gtest.cc:3037\n    #7 0x77033402aa5e in testing::TestSuite::Run() /googletest-1.15.2/googletest/src/gtest.cc:2991\n    #8 0x770334030feb in testing::internal::UnitTestImpl::RunAllTests() /googletest-1.15.2/googletest/src/gtest.cc:5967\n    #9 0x77033403b6c6 in bool testing::internal::HandleSehExceptionsInMethodIfSupported\u003ctesting::internal::UnitTestImpl, bool\u003e(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) /googletest-1.15.2/googletest/src/gtest.cc:2638\n    #10 0x77033403b6c6 in bool testing::internal::HandleExceptionsInMethodIfSupported\u003ctesting::internal::UnitTestImpl, bool\u003e(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) /googletest-1.15.2/googletest/src/gtest.cc:2674\n    #11 0x77033402a421 in testing::UnitTest::Run() /googletest-1.15.2/googletest/src/gtest.cc:5546\n    #12 0x770334058103 in RUN_ALL_TESTS() /googletest-1.15.2/googletest/include/gtest/gtest.h:2334\n    #13 0x770334058103 in main /googletest-1.15.2/googletest/src/gtest_main.cc:64\n    #14 0x7703331763b7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58\n    #15 0x77033317647a in __libc_start_main_impl ../csu/libc-start.c:360\n    #16 0x5a765f65a424 in _start (/data0/jenkins/workspace/ci-repository/openbmc/libpldm/build/tests/dsp_platform+0xbd424) (BuildId: 4829faa3230a2155dcaa9c4e39b59ae28682d44b)\n```",
+      "range": {
+        "startLine": 3684,
+        "startChar": 0,
+        "endLine": 3687,
+        "endChar": 30
+      },
+      "revId": "e1a57b4f980e0fef145a3c3c34991dde03f6a7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8d23c5b_4298850f",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 3689,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-28T00:23:21Z",
+      "side": 1,
+      "message": "If you don\u0027t need the header then we can drop its space from the underlying byte array defined by `responseMsg`.",
+      "range": {
+        "startLine": 3689,
+        "startChar": 17,
+        "endLine": 3689,
+        "endChar": 58
+      },
+      "revId": "e1a57b4f980e0fef145a3c3c34991dde03f6a7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89ae25b5_de9fb713",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 3695,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-28T00:23:21Z",
+      "side": 1,
+      "message": "This won\u0027t work as the struct isn\u0027t packed, and your array pointer is invalid wrt alignment as identified by CI above.\n\nThe way to handle this is either manually populating the array with the constant at the appropriate offset, or using the corresponding encode function to populate the payload buffer you\u0027re passing to the decode function here.",
+      "revId": "e1a57b4f980e0fef145a3c3c34991dde03f6a7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
