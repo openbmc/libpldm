@@ -58,6 +58,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "699f8d38_cf46d581",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 3687,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-28T08:41:04Z",
+      "side": 1,
+      "message": "I have removed the casting and instead used the encode to modify the underlying buffer.",
+      "parentUuid": "ce3fec3f_9f8543cb",
+      "range": {
+        "startLine": 3684,
+        "startChar": 0,
+        "endLine": 3687,
+        "endChar": 30
+      },
+      "revId": "e1a57b4f980e0fef145a3c3c34991dde03f6a7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8d23c5b_4298850f",
@@ -83,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cad9de3b_726a44cf",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 3689,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-28T08:41:04Z",
+      "side": 1,
+      "message": "I quite do not understand what you are requesting. the encode / decode expects a full pldm msg to be passed (and to be consistent with other encode / decode functions)",
+      "parentUuid": "f8d23c5b_4298850f",
+      "range": {
+        "startLine": 3689,
+        "startChar": 17,
+        "endLine": 3689,
+        "endChar": 58
+      },
+      "revId": "e1a57b4f980e0fef145a3c3c34991dde03f6a7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "89ae25b5_de9fb713",
         "filename": "tests/dsp/platform.cpp",
         "patchSetId": 21
@@ -94,6 +142,24 @@
       "writtenOn": "2025-05-28T00:23:21Z",
       "side": 1,
       "message": "This won\u0027t work as the struct isn\u0027t packed, and your array pointer is invalid wrt alignment as identified by CI above.\n\nThe way to handle this is either manually populating the array with the constant at the appropriate offset, or using the corresponding encode function to populate the payload buffer you\u0027re passing to the decode function here.",
+      "revId": "e1a57b4f980e0fef145a3c3c34991dde03f6a7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc9b7692_c0682e74",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 3695,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-28T08:41:04Z",
+      "side": 1,
+      "message": "Populated it via the encode function",
+      "parentUuid": "89ae25b5_de9fb713",
       "revId": "e1a57b4f980e0fef145a3c3c34991dde03f6a7a4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
