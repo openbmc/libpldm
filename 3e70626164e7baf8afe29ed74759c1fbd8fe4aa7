@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af446e68_a2682d53",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T08:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "febf7f4a_959b54a0",
+      "revId": "3e70626164e7baf8afe29ed74759c1fbd8fe4aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6379f93_565c7d4f",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "837228eb_70070a12",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2525,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T08:27:43Z",
+      "side": 1,
+      "message": "I did not see it necessary given that the encode request has no payload.",
+      "parentUuid": "a6379f93_565c7d4f",
+      "revId": "3e70626164e7baf8afe29ed74759c1fbd8fe4aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03a42cd0_ac057b96",
         "filename": "src/dsp/platform.c",
         "patchSetId": 23
@@ -48,6 +84,30 @@
       "writtenOn": "2025-05-29T02:25:24Z",
       "side": 1,
       "message": "We need to make sure the EID is the object in the union first. Otherwise this access may be invalid. Perhaps add the following after line 2537 above:\n\n```\n/* See Table 2, DSP0245 v1.4.0 */\nif (event_receiver_info-\u003etransport_protocol_type !\u003d PLDM_TRANSPORT_PROTOCOL_TYPE_MCTP) {\n    return -ENOTSUP;\n}\n```",
+      "range": {
+        "startLine": 2557,
+        "startChar": 1,
+        "endLine": 2558,
+        "endChar": 61
+      },
+      "revId": "3e70626164e7baf8afe29ed74759c1fbd8fe4aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56864d68_345b9a9c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2558,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T08:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03a42cd0_ac057b96",
       "range": {
         "startLine": 2557,
         "startChar": 1,
@@ -81,6 +141,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18d04f5d_90b27ef1",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2587,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T08:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1779c904_537f51c5",
+      "range": {
+        "startLine": 2585,
+        "startChar": 1,
+        "endLine": 2587,
+        "endChar": 2
+      },
+      "revId": "3e70626164e7baf8afe29ed74759c1fbd8fe4aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "836e98a4_0ed9b084",
@@ -94,6 +178,30 @@
       "writtenOn": "2025-05-29T02:25:24Z",
       "side": 1,
       "message": "(this is necessary as we do read `resp-\u003etransport_protocol_type` on the line below).",
+      "range": {
+        "startLine": 2590,
+        "startChar": 1,
+        "endLine": 2592,
+        "endChar": 2
+      },
+      "revId": "3e70626164e7baf8afe29ed74759c1fbd8fe4aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "140f8e85_7d5d62c3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T08:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "836e98a4_0ed9b084",
       "range": {
         "startLine": 2590,
         "startChar": 1,
