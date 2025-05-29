@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b95f547_0a27483e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T18:51:02Z",
+      "side": 1,
+      "message": "Hello,\nThanks for the patch. \nI\u0027ve left some comments based on my experience on other patches to this same repo.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0f310d_62d14549",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T18:51:02Z",
+      "side": 1,
+      "message": "This should go to unreleased at the top",
+      "range": {
+        "startLine": 837,
+        "startChar": 0,
+        "endLine": 844,
+        "endChar": 77
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b51f9f20_72ac03a8",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T18:51:02Z",
+      "side": 1,
+      "message": "Should be [in,out]",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84ce8e54_ec80392e",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1577,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T18:51:02Z",
+      "side": 1,
+      "message": "The new API calls should not return PLDM completion codes anymore, instead, return negative `errno`\n\nSee https://github.com/openbmc/libpldm/blob/59edcb14c996fd701e3065e3e9106bedc2d3befb/docs/checklists/changes.md?plain\u003d1#L212\n\nAlso, the specific errors that the function returns shall be documented here.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b0796a0_f5b755ad",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1593,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T18:51:02Z",
+      "side": 1,
+      "message": "Need to specify the error values the function returns and their meaning in the context of the function",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7781942e_8461386f",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1607,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T18:51:02Z",
+      "side": 1,
+      "message": "Same as before,\n[in,out]",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e785972f_c4986956",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T18:51:02Z",
+      "side": 1,
+      "message": "Same as before, do not return PLDM completion codes",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c1bb28a_822be2b1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1670,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T18:51:02Z",
+      "side": 1,
+      "message": "Returning PLDM completion codes is no longer the way to go with the library see [https://github.com/openbmc/libpldm/blob/59edcb14c996fd701e3065e3e9106bedc2d3befb/docs/checklists/changes.md?plain\u003d1#L212], use negative return codes instead.\nHere should be -EINVAL",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bc825be_b4958e7e",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 3000,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-05-29T18:51:02Z",
+      "side": 1,
+      "message": "Not needed",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
