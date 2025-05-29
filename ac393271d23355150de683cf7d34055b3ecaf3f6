@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eab01cd_13a928f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-29T02:28:15Z",
+      "side": 1,
+      "message": "Can you unpack the consistency issue here in the commit message?",
+      "range": {
+        "startLine": 11,
+        "startChar": 24,
+        "endLine": 11,
+        "endChar": 69
+      },
+      "revId": "ac393271d23355150de683cf7d34055b3ecaf3f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1ea0221_a3a7065c",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-29T02:28:15Z",
+      "side": 1,
+      "message": "https://github.com/search?q\u003dorg%3Aopenbmc+PLDM_INVALID_TRANSFER_OPERATION_FLAG+NOT+repo%3Aopenbmc%2Flibpldm\u0026type\u003dcode\n\n😞\n\nIf we merge this we\u0027ll break pldmd.\n\nCan we introduce the new member alongside the old, and then add a note about deprecating the old one. Then patch pldmd to use the new member, and then we can delete it.",
+      "revId": "ac393271d23355150de683cf7d34055b3ecaf3f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
