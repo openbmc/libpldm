@@ -129,6 +129,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb04f26_9e15a2ae",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 3689,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-29T02:25:24Z",
+      "side": 1,
+      "message": "Yeah, sorry, that was a hasty comment. Disregard 😊",
+      "parentUuid": "cad9de3b_726a44cf",
+      "range": {
+        "startLine": 3689,
+        "startChar": 17,
+        "endLine": 3689,
+        "endChar": 58
+      },
+      "revId": "e1a57b4f980e0fef145a3c3c34991dde03f6a7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89ae25b5_de9fb713",
