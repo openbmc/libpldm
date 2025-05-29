@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a972ac32_63c03368",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-29T02:36:47Z",
+      "side": 1,
+      "message": "It looks as if you\u0027re were adding empty lines between the each collection of command-specific members above. I think that\u0027s a good idea, so can you add an empty line above this one?",
+      "revId": "3d5f10fdc73084a98ec6a41a4537f2d4be20768d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aae8905_2fb81118",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-05-29T02:36:47Z",
+      "side": 1,
+      "message": "Another new line here?",
+      "revId": "3d5f10fdc73084a98ec6a41a4537f2d4be20768d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
