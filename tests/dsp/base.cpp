@@ -1026,6 +1026,62 @@ TEST(SetTID, testBadEncodeRequest)
 }
 
 #ifdef LIBPLDM_API_TESTING
+TEST(SetTID, testGoodDecodeRequest)
+{
+    uint8_t tid = 0x01;
+    uint8_t tidOut = 0x00;
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + sizeof(tid)> requestMsg{};
+
+    requestMsg[sizeof(pldm_msg_hdr)] = tid;
+
+    pldm_msg* request = new (requestMsg.data()) pldm_msg;
+    auto rc = decode_set_tid_req(
+        request, requestMsg.size() - sizeof(pldm_msg_hdr), &tidOut);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(tid, tidOut);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetTID, testBadDecodeRequestMsg)
+{
+    uint8_t tid = 0x01;
+    std::array<uint8_t, hdrSize + PLDM_SET_TID_REQ_BYTES> requestMsg{};
+
+    auto rc = decode_set_tid_req(
+        nullptr, requestMsg.size() - sizeof(pldm_msg_hdr), &tid);
+
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetTID, testBadDecodeRequestTid)
+{
+    std::array<uint8_t, hdrSize + PLDM_SET_TID_REQ_BYTES> requestMsg{};
+    pldm_msg* request = new (requestMsg.data()) pldm_msg;
+
+    auto rc = decode_set_tid_req(
+        request, requestMsg.size() - sizeof(pldm_msg_hdr), nullptr);
+
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetTID, testBadDecodeRequestMsgSize)
+{
+    std::array<uint8_t, hdrSize + PLDM_SET_TID_REQ_BYTES> requestMsg{};
+    pldm_msg* request = new (requestMsg.data()) pldm_msg;
+
+    auto rc = decode_set_tid_req(request, -1, nullptr);
+
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
 TEST(PldmMsgHdr, correlateSuccess)
 {
     static const struct pldm_msg_hdr req = {
