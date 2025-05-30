@@ -502,6 +502,26 @@ int encode_set_tid_req(uint8_t instance_id, uint8_t tid, struct pldm_msg *msg)
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int decode_set_tid_req(const struct pldm_msg *msg, size_t payload_length,
+		       uint8_t *tid)
+{
+	if (!msg || !tid) {
+		return -EINVAL;
+	}
+
+	if (payload_length != PLDM_SET_TID_REQ_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	struct pldm_set_tid_req *request =
+		(struct pldm_set_tid_req *)msg->payload;
+
+	*tid = request->tid;
+
+	return PLDM_SUCCESS;
+}
+
 LIBPLDM_ABI_STABLE
 int decode_multipart_receive_req(const struct pldm_msg *msg,
 				 size_t payload_length, uint8_t *pldm_type,

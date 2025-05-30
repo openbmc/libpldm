@@ -1026,6 +1026,43 @@ TEST(SetTID, testBadEncodeRequest)
 }
 
 #ifdef LIBPLDM_API_TESTING
+TEST(SetTID, testGoodDecodeRequest)
+{
+    uint8_t tid = 0x01;
+    uint8_t tidOut = 0x00;
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + sizeof(tid)> requestMsg{};
+
+    memcpy(requestMsg.data() + sizeof(pldm_msg_hdr), &tid, sizeof(tid));
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto rc = decode_set_tid_req(
+        request, requestMsg.size() - sizeof(pldm_msg_hdr), &tidOut);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(0, memcmp(&tidOut, &tid, sizeof(tid)));
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetTID, testBadDecodeRequest)
+{
+    uint16_t tid = 0x01;
+    uint8_t tidOut = 0x00;
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + sizeof(tid)> requestMsg{};
+
+    memcpy(requestMsg.data() + sizeof(pldm_msg_hdr), &tid, sizeof(tid));
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    auto rc = decode_set_tid_req(
+        request, requestMsg.size() - sizeof(pldm_msg_hdr), &tidOut);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
 TEST(PldmMsgHdr, correlateSuccess)
 {
     static const struct pldm_msg_hdr req = {
