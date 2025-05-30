@@ -656,6 +656,21 @@ int encode_get_tid_resp(uint8_t instance_id, uint8_t completion_code,
  */
 int encode_set_tid_req(uint8_t instance_id, uint8_t tid, struct pldm_msg *msg);
 
+/** @brief Decode a SetTID request message
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - length of request message payload
+ *  @param[out] tid - Terminus ID
+ *  @return 0 on success
+ *         -EINVAL if the input parameters' memory are not allocated,Add commentMore actions
+ *         or message type or instance in request header is invalid
+ *         -ENOMSG if the PLDM type in the request header is invalid
+ *         -EOVERFLOW if the input message length is invalid
+ *         -ENOTSUP if the transport protocol is not supported
+ */
+int decode_set_tid_req(const struct pldm_msg *msg, size_t payload_length,
+		       uint8_t *tid);
+
 /* Responder */
 
 /* MultipartRecieve */

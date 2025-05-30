@@ -25,6 +25,7 @@ Change categories:
 - platform: Add encode req for GetPDRRepositoryInfo
 - pdr: Add pldm_pdr_delete_by_sensor_id() API
 - pdr: Add pldm_entity_association_tree_delete_node() API
+- base: Add decode_set_tid_req() API
 
 - oem: ibm: Add boot side rename state set and enum
 
