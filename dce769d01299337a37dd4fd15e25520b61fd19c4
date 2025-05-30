@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94d94788_0ea8acdd",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-30T05:18:09Z",
+      "side": 1,
+      "message": "I guess a single changeLog comment would be good enough say - `firmware update: Add encode/decode API for downstream device update command` ?",
+      "parentUuid": "0e0f310d_62d14549",
+      "range": {
+        "startLine": 837,
+        "startChar": 0,
+        "endLine": 844,
+        "endChar": 77
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b51f9f20_72ac03a8",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 13
@@ -122,6 +146,144 @@
       "writtenOn": "2025-05-29T18:51:02Z",
       "side": 1,
       "message": "Same as before, do not return PLDM completion codes",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b206eab_1ce56a59",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1567,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-30T05:18:09Z",
+      "side": 1,
+      "message": "Can we write it like this? - `if (!msg || !payload_length || !req_data)`",
+      "range": {
+        "startLine": 1567,
+        "startChar": 1,
+        "endLine": 1567,
+        "endChar": 65
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28e1bdac_d924d23e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-30T05:18:09Z",
+      "side": 1,
+      "message": "returning PLDM error codes is no longer the way, can we use -EINVAL or some other suitable error code?",
+      "range": {
+        "startLine": 1575,
+        "startChar": 2,
+        "endLine": 1575,
+        "endChar": 33
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ffd336a_10b9745e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-30T05:18:09Z",
+      "side": 1,
+      "message": "-EINVAL? or `rc` itself?",
+      "range": {
+        "startLine": 1582,
+        "startChar": 2,
+        "endLine": 1582,
+        "endChar": 15
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed293a00_15468ebf",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1605,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-30T05:18:09Z",
+      "side": 1,
+      "message": "`!msg || !req`",
+      "range": {
+        "startLine": 1605,
+        "startChar": 1,
+        "endLine": 1605,
+        "endChar": 34
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea7a756a_e76883bf",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1633,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-30T05:18:09Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 1633,
+        "startChar": 1,
+        "endLine": 1633,
+        "endChar": 45
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4394d23_c41e7c3c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1669,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-05-30T05:18:09Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 1669,
+        "startChar": 1,
+        "endLine": 1669,
+        "endChar": 59
+      },
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
