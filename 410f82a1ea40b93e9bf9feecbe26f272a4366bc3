@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8168b1f3_6b287cdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:30:39Z",
+      "side": 1,
+      "message": "Hi Vishnu, thanks for the patch.\n\nI\u0027m wondering why you\u0027ve give CR+1 to your own submission?\n\nRegardless, I\u0027ve left some comments inline.",
+      "revId": "410f82a1ea40b93e9bf9feecbe26f272a4366bc3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "464e0d4a_fc3bd42b",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:30:39Z",
+      "side": 1,
+      "message": "I recognise this will be inconsistent with the rest of the get/set TID APIs, but can you please make this return negative errnos rather than PLDM completion codes:\n\nhttps://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L212-L216\n\nModernising the APIs is a bit painful, but beneficial in the long run.",
+      "revId": "410f82a1ea40b93e9bf9feecbe26f272a4366bc3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a777143_11e4813d",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:30:39Z",
+      "side": 1,
+      "message": "Please implement this in terms of the `msgbuf` APIs",
+      "range": {
+        "startLine": 513,
+        "startChar": 1,
+        "endLine": 521,
+        "endChar": 1
+      },
+      "revId": "410f82a1ea40b93e9bf9feecbe26f272a4366bc3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3659b903_2150fded",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:30:39Z",
+      "side": 1,
+      "message": "I do not accept additions of suppressing reinterpret-cast lints. We have other means of dealing with this (aligned buffers and placement-new). Please fix throughout.",
+      "revId": "410f82a1ea40b93e9bf9feecbe26f272a4366bc3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
