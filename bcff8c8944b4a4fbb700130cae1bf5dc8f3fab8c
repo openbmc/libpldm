@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b021a600_a9095a90",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-02T21:46:11Z",
+      "side": 1,
+      "message": "Better to do a consexpr define for 4 stating what it means and use that here.",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10588e55_60a573f4",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-02T21:46:11Z",
+      "side": 1,
+      "message": "Same as above.",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "811f74e4_498244ad",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-02T21:46:11Z",
+      "side": 1,
+      "message": "Do you need this as package_header_checksum was already verified at line#504?\n\nAlso don\u0027t you need to verify the package_payload_checksum?",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "177bc5c1_d70b137b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3351,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-02T21:46:11Z",
+      "side": 1,
+      "message": "I suppose this ctx shouldn\u0027t be static but some local var from caller or returned from init API as multiple updates can exist in parallel so each update would have its own context of this type?",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7df3dc7_2d3cb4e5",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3354,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-02T21:46:11Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be static API as its not exposed in header and only used locally?",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ec03cd9_23fb8c9e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3358,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-02T21:46:11Z",
+      "side": 1,
+      "message": "I am not sure whats the error logging mechanism here but i don\u0027t see any other API using fprintf, so i would leave it to maintainer to comment on this.",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be14d0b5_00f0bf8c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3372,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-02T21:46:11Z",
+      "side": 1,
+      "message": "I suppose you shouldn\u0027t log on every update and this seems like a regular message and not an error.",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5688e241_13c97270",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3382,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-02T21:46:11Z",
+      "side": 1,
+      "message": "I suppose you shouldn\u0027t log on every update and this seems like a regular message and not an error.",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cde08eac_cc6603ea",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3392,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-02T21:46:11Z",
+      "side": 1,
+      "message": "I suppose you shouldn\u0027t log on every update and this seems like a regular message and not an error.\n\nSame goes for all other related messages in this changeset.",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771f1f83_5f979e37",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3433,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-02T21:46:11Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be static API as its not exposed in header and only used locally?",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

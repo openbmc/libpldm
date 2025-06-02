@@ -56,6 +56,30 @@
       },
       "revId": "0c86fe37fb4400069818408f220fd4871bc395ec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cac79db_4ad8ea66",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-02T21:46:11Z",
+      "side": 1,
+      "message": "@unive.tien.wiwynn@gmail.com Please resolve all the comments addressed thanks.",
+      "parentUuid": "1e888fe7_68bdb3d7",
+      "range": {
+        "startLine": 490,
+        "startChar": 47,
+        "endLine": 490,
+        "endChar": 48
+      },
+      "revId": "0c86fe37fb4400069818408f220fd4871bc395ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
