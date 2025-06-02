@@ -106,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "042c3e12_6bf73f40",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14b7baaf_e831ef87",
+      "range": {
+        "startLine": 837,
+        "startChar": 0,
+        "endLine": 844,
+        "endChar": 77
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e9ebf0c_f74b5abf",
@@ -119,6 +143,30 @@
       "writtenOn": "2025-06-02T02:17:43Z",
       "side": 1,
       "message": "Nitpick: Can you please use lower-case for hex constants?",
+      "range": {
+        "startLine": 129,
+        "startChar": 45,
+        "endLine": 129,
+        "endChar": 49
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6908492_b3de98b9",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9ebf0c_f74b5abf",
       "range": {
         "startLine": 129,
         "startChar": 45,
@@ -152,6 +200,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "796086ae_32d11689",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2e1e990_bc1157cc",
+      "range": {
+        "startLine": 130,
+        "startChar": 41,
+        "endLine": 130,
+        "endChar": 45
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cbc4c73_6d3d470d",
@@ -165,6 +237,24 @@
       "writtenOn": "2025-06-02T02:17:43Z",
       "side": 1,
       "message": "Please remove the blank line to attach the doxygen comment to the struct.\n\nIn-fact, the comment itself doesn\u0027t add any information. I\u0027d prefer you expand on it, or otherwise remove it.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afe962ed_25495cb7",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cbc4c73_6d3d470d",
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -192,6 +282,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3f92d7e_140758be",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33b2bb50_ea6d7cb4",
+      "range": {
+        "startLine": 902,
+        "startChar": 7,
+        "endLine": 902,
+        "endChar": 45
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02e92b0f_55fec3f9",
@@ -209,6 +323,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d5d4e5e_aac290f9",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02e92b0f_55fec3f9",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51173ccd_f3454689",
@@ -222,6 +354,24 @@
       "writtenOn": "2025-06-02T02:17:43Z",
       "side": 1,
       "message": "As above.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1217911e_f2203414",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51173ccd_f3454689",
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -261,6 +411,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84c184ef_128b9fc0",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbc4d08a_5426400b",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84ce8e54_ec80392e",
@@ -296,6 +464,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a07ed3b4_67fda4d0",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1577,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed502544_ef2a1479",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b37ac27_88d39c8e",
@@ -309,6 +495,24 @@
       "writtenOn": "2025-06-02T02:17:43Z",
       "side": 1,
       "message": "Again, please address the issue with abbreviation, across all new function names.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b25ad969_6f1f0472",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b37ac27_88d39c8e",
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -330,6 +534,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f375864_bf4cad8e",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1593,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b0796a0_f5b755ad",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7781942e_8461386f",
@@ -343,6 +565,24 @@
       "writtenOn": "2025-05-29T18:51:02Z",
       "side": 1,
       "message": "Same as before,\n[in,out]",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caa93977_a2203ca2",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1607,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7781942e_8461386f",
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -364,6 +604,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "051678e0_0fa290b8",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6118e3ee_71ad9f16",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e785972f_c4986956",
@@ -377,6 +635,24 @@
       "writtenOn": "2025-05-29T18:51:02Z",
       "side": 1,
       "message": "Same as before, do not return PLDM completion codes",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bee4d5e_fd5727a5",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e785972f_c4986956",
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -418,6 +694,30 @@
       "side": 1,
       "message": "+1.\n\nNit: Can you please also test them in the same order as the formal parameters for the function?\n\n```\nif (!req_data || !msg || !payload_length) {\n```",
       "parentUuid": "8b206eab_1ce56a59",
+      "range": {
+        "startLine": 1567,
+        "startChar": 1,
+        "endLine": 1567,
+        "endChar": 65
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ca39cbe_02235b4b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1567,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c047212_3e3785e2",
       "range": {
         "startLine": 1567,
         "startChar": 1,
@@ -475,6 +775,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a17dacad_7f1fb28c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b95523_db93f35c",
+      "range": {
+        "startLine": 1575,
+        "startChar": 2,
+        "endLine": 1575,
+        "endChar": 33
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ffd336a_10b9745e",
@@ -522,6 +846,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf139810_845e8303",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d55be15_a5ac11df",
+      "range": {
+        "startLine": 1582,
+        "startChar": 2,
+        "endLine": 1582,
+        "endChar": 15
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed293a00_15468ebf",
@@ -558,6 +906,30 @@
       "writtenOn": "2025-06-02T02:17:43Z",
       "side": 1,
       "message": "This is unnecessary as `req-\u003edd_pkg_data_len` isn\u0027t read before the `pldm_msgbuf_complete_consumed()` call immediatey below.",
+      "range": {
+        "startLine": 1617,
+        "startChar": 1,
+        "endLine": 1620,
+        "endChar": 1
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95147a56_f4d0300d",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b67e4feb_abed6851",
       "range": {
         "startLine": 1617,
         "startChar": 1,
@@ -615,6 +987,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aae5a29d_36d1301e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1633,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a82fa9bb_ab9937e4",
+      "range": {
+        "startLine": 1633,
+        "startChar": 1,
+        "endLine": 1633,
+        "endChar": 45
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfff7481_50b3a6a4",
@@ -628,6 +1024,30 @@
       "writtenOn": "2025-06-02T02:17:43Z",
       "side": 1,
       "message": "```\nrc \u003d pack_pldm_header_errno(...);\nif (rc) {\n    return rc;\n}\n```",
+      "range": {
+        "startLine": 1643,
+        "startChar": 1,
+        "endLine": 1646,
+        "endChar": 2
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02156250_94d8963b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1646,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfff7481_50b3a6a4",
       "range": {
         "startLine": 1643,
         "startChar": 1,
@@ -678,6 +1098,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b4440c3_73c83d2d",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1670,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c1bb28a_822be2b1",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ed3c895_0739bfb5",
@@ -691,6 +1129,24 @@
       "writtenOn": "2025-06-02T02:17:43Z",
       "side": 1,
       "message": "If the completion code is not `PLDM_SUCCESS` then none of the following extractions are warranted. Please use `pldm_msg_has_error()` to check the message before `pldm_msgbuf_init_errno()` above.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80b87147_39964f69",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1678,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ed3c895_0739bfb5",
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -718,6 +1174,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a82ba7e_66ca6bfa",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1685,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bda4459_c1dd7c5d",
+      "range": {
+        "startLine": 1683,
+        "startChar": 1,
+        "endLine": 1685,
+        "endChar": 2
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bc825be_b4958e7e",
@@ -731,6 +1211,24 @@
       "writtenOn": "2025-05-29T18:51:02Z",
       "side": 1,
       "message": "Not needed",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3faad0b_b1eeff24",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 3000,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-02T08:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bc825be_b4958e7e",
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
