@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cfdb150_e5638fd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "Hi Sora, thanks for the patch! I agree with comments from @roger.gili-coscojuela@sipearl.com and @pavithrabarithaya07@gmail.com, and have left some of my own.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e0f310d_62d14549",
@@ -67,6 +84,150 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14b7baaf_e831ef87",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "+1 on both counts!",
+      "parentUuid": "94d94788_0ea8acdd",
+      "range": {
+        "startLine": 837,
+        "startChar": 0,
+        "endLine": 844,
+        "endChar": 77
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e9ebf0c_f74b5abf",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "Nitpick: Can you please use lower-case for hex constants?",
+      "range": {
+        "startLine": 129,
+        "startChar": 45,
+        "endLine": 129,
+        "endChar": 49
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e1e990_bc1157cc",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "again here.",
+      "range": {
+        "startLine": 130,
+        "startChar": 41,
+        "endLine": 130,
+        "endChar": 45
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cbc4c73_6d3d470d",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "Please remove the blank line to attach the doxygen comment to the struct.\n\nIn-fact, the comment itself doesn\u0027t add any information. I\u0027d prefer you expand on it, or otherwise remove it.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33b2bb50_ea6d7cb4",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "Please don\u0027t abbreviate names from the spec (`device` as `dev` here). Arbitrary abbreviations make it harder to search the relevant spec for the details.\n\n```\nstruct pldm_request_downstream_device_update_req\n```\n\nPlease apply this consistently throughout.",
+      "range": {
+        "startLine": 902,
+        "startChar": 7,
+        "endLine": 902,
+        "endChar": 45
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e92b0f_55fec3f9",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "Again, please refrain from abbreviating:\n\n```\nuint32_t maximum_downstream_device_transfer_size;\n```\n\nPlease audit the rest of the member names in all new structs.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51173ccd_f3454689",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b51f9f20_72ac03a8",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 13
@@ -84,6 +245,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbc4d08a_5426400b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "b51f9f20_72ac03a8",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84ce8e54_ec80392e",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 13
@@ -95,6 +274,41 @@
       "writtenOn": "2025-05-29T18:51:02Z",
       "side": 1,
       "message": "The new API calls should not return PLDM completion codes anymore, instead, return negative `errno`\n\nSee https://github.com/openbmc/libpldm/blob/59edcb14c996fd701e3065e3e9106bedc2d3befb/docs/checklists/changes.md?plain\u003d1#L212\n\nAlso, the specific errors that the function returns shall be documented here.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed502544_ef2a1479",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1577,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "+1\n\nThe documentation should be considered a _specification_ for the API. The implementation then needs to conform to the specification, as do the callers.\n\nIf the specification is vague then neither the caller nor the implementer can be certain about correctness. Hence explicit documentation of returned error codes. Given the state of error code handling in the implementation I think this perspective is useful 😊",
+      "parentUuid": "84ce8e54_ec80392e",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b37ac27_88d39c8e",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "Again, please address the issue with abbreviation, across all new function names.",
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -129,6 +343,23 @@
       "writtenOn": "2025-05-29T18:51:02Z",
       "side": 1,
       "message": "Same as before,\n[in,out]",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6118e3ee_71ad9f16",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "Please document the specific error values as noted in other comments above.",
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -175,6 +406,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c047212_3e3785e2",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1567,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "+1.\n\nNit: Can you please also test them in the same order as the formal parameters for the function?\n\n```\nif (!req_data || !msg || !payload_length) {\n```",
+      "parentUuid": "8b206eab_1ce56a59",
+      "range": {
+        "startLine": 1567,
+        "startChar": 1,
+        "endLine": 1567,
+        "endChar": 65
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28e1bdac_d924d23e",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 13
@@ -186,6 +441,30 @@
       "writtenOn": "2025-05-30T05:18:09Z",
       "side": 1,
       "message": "returning PLDM error codes is no longer the way, can we use -EINVAL or some other suitable error code?",
+      "range": {
+        "startLine": 1575,
+        "startChar": 2,
+        "endLine": 1575,
+        "endChar": 33
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72b95523_db93f35c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "+1.\n\nCertainly don\u0027t mix negative errno values and PLDM completion codes.",
+      "parentUuid": "28e1bdac_d924d23e",
       "range": {
         "startLine": 1575,
         "startChar": 2,
@@ -221,6 +500,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d55be15_a5ac11df",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "We should rather do:\n\n```c\nrc \u003d encode_pldm_header_only_errno(...);\nif (rc) {\n   return rc;\n}\n```",
+      "parentUuid": "8ffd336a_10b9745e",
+      "range": {
+        "startLine": 1582,
+        "startChar": 2,
+        "endLine": 1582,
+        "endChar": 15
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed293a00_15468ebf",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 13
@@ -244,6 +547,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b67e4feb_abed6851",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "This is unnecessary as `req-\u003edd_pkg_data_len` isn\u0027t read before the `pldm_msgbuf_complete_consumed()` call immediatey below.",
+      "range": {
+        "startLine": 1617,
+        "startChar": 1,
+        "endLine": 1620,
+        "endChar": 1
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea7a756a_e76883bf",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 13
@@ -260,6 +586,53 @@
         "startChar": 1,
         "endLine": 1633,
         "endChar": 45
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a82fa9bb_ab9937e4",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1633,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "Needs to test `resp_data` too (along with fixing the ordering).",
+      "parentUuid": "ea7a756a_e76883bf",
+      "range": {
+        "startLine": 1633,
+        "startChar": 1,
+        "endLine": 1633,
+        "endChar": 45
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfff7481_50b3a6a4",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1646,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "```\nrc \u003d pack_pldm_header_errno(...);\nif (rc) {\n    return rc;\n}\n```",
+      "range": {
+        "startLine": 1643,
+        "startChar": 1,
+        "endLine": 1646,
+        "endChar": 2
       },
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
@@ -301,6 +674,46 @@
       "writtenOn": "2025-05-29T18:51:02Z",
       "side": 1,
       "message": "Returning PLDM completion codes is no longer the way to go with the library see [https://github.com/openbmc/libpldm/blob/59edcb14c996fd701e3065e3e9106bedc2d3befb/docs/checklists/changes.md?plain\u003d1#L212], use negative return codes instead.\nHere should be -EINVAL",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ed3c895_0739bfb5",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1678,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "If the completion code is not `PLDM_SUCCESS` then none of the following extractions are warranted. Please use `pldm_msg_has_error()` to check the message before `pldm_msgbuf_init_errno()` above.",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bda4459_c1dd7c5d",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1685,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-02T02:17:43Z",
+      "side": 1,
+      "message": "Unnecessary as `resp_data-\u003eget_pkg_data_max_transfer_size` isn\u0027t read before the call to `pldm_msgbuf_complete_consumed(buf)` immediately below.",
+      "range": {
+        "startLine": 1683,
+        "startChar": 1,
+        "endLine": 1685,
+        "endChar": 2
+      },
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
