@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "232604d2_608c093f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-03T02:51:54Z",
+      "side": 1,
+      "message": "Also replace PLDM_SUCCESS with 0 in the test code.",
+      "revId": "4afce2c9508bbfed590887b686534fa0e23f9287",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
