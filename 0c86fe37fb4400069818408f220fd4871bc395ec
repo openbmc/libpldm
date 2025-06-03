@@ -80,6 +80,30 @@
       },
       "revId": "0c86fe37fb4400069818408f220fd4871bc395ec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead7adf9_294a699f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-06-03T06:28:29Z",
+      "side": 1,
+      "message": "Perhaps raising a patch elsewhere would be a better idea(if Ananya is not responsive in the following days)? Since she just took back the patch one day right after I took over it, furthermore, there would be a large diff to address all of the concern.\n\nHi @anany@nvidia.com, please let us know if you\u0027re going to address Jagpal\u0027s comments, I\u0027m unintended to overlap your effort, but we have to stabilize some features in the near future.\n\nMarked as resolve since `header-\u003epackage_header_format_revision` has been fixed.",
+      "parentUuid": "5cac79db_4ad8ea66",
+      "range": {
+        "startLine": 490,
+        "startChar": 47,
+        "endLine": 490,
+        "endChar": 48
+      },
+      "revId": "0c86fe37fb4400069818408f220fd4871bc395ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
