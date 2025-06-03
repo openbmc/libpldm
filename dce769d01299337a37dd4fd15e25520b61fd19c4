@@ -261,6 +261,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e3105c7_aacc3ed5",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "The blank line remains in PS15.",
+      "parentUuid": "afe962ed_25495cb7",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33b2bb50_ea6d7cb4",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 13
@@ -372,6 +390,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "51173ccd_f3454689",
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c303f63_b912e4c4",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "Blank line remains in PS15.",
+      "parentUuid": "1217911e_f2203414",
       "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

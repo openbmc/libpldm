@@ -1,0 +1,227 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d66320d_8fef31a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "Hi Sora, thanks for the rework. I have a few more comments.",
+      "revId": "a87c12851c11a05a190fa3baecaeb2b103bae8ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51377416_1a54bece",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "Please fix trailing whitespace throughout.",
+      "revId": "a87c12851c11a05a190fa3baecaeb2b103bae8ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ff4b06_f4757f9e",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "Can you please make sure the indentation is consistent?\n\nPlease audit the documentation for the other functions for this same issue.",
+      "range": {
+        "startLine": 1580,
+        "startChar": 2,
+        "endLine": 1582,
+        "endChar": 49
+      },
+      "revId": "a87c12851c11a05a190fa3baecaeb2b103bae8ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "258e73db_0b276e22",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1568,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "Please drop this. It\u0027s desirable that callers can pass buffers that are larger than required. Further, the msgbuf APIs will check the length constraints for you automatically.",
+      "range": {
+        "startLine": 1568,
+        "startChar": 5,
+        "endLine": 1568,
+        "endChar": 70
+      },
+      "revId": "a87c12851c11a05a190fa3baecaeb2b103bae8ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7826acb8_883743e3",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1583,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "This is where you pass `PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES` to check the buffer size constraint.",
+      "range": {
+        "startLine": 1583,
+        "startChar": 34,
+        "endLine": 1583,
+        "endChar": 35
+      },
+      "revId": "a87c12851c11a05a190fa3baecaeb2b103bae8ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0817f135_08351338",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1607,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "Please drop this as noted above.",
+      "revId": "a87c12851c11a05a190fa3baecaeb2b103bae8ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a49992fd_11c44649",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1612,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "`PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES` here.",
+      "range": {
+        "startLine": 1612,
+        "startChar": 34,
+        "endLine": 1612,
+        "endChar": 35
+      },
+      "revId": "a87c12851c11a05a190fa3baecaeb2b103bae8ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e533a15e_a7597f8a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1644,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "`PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES`.",
+      "range": {
+        "startLine": 1644,
+        "startChar": 34,
+        "endLine": 1644,
+        "endChar": 35
+      },
+      "revId": "a87c12851c11a05a190fa3baecaeb2b103bae8ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8121611_e4c40c9c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1668,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "Please drop this.",
+      "revId": "a87c12851c11a05a190fa3baecaeb2b103bae8ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7b180d6_c588a0de",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1675,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "`-EAGAIN` is inappropriate here. The decode is successful but the response contained an erroneous completion code. The return value of the function _only_ corresponds to the success or failure of decoding the response. This should be:\n\n```\nrc \u003d pldm_msg_has_error(msg, payload_length);\nif (rc) {\n    resp_data-\u003ecompletion_code \u003d rc;\n    return 0;\n}\n```\n\nThe caller then needs to check the `completion_code` member before proceeding to read the remaining members.",
+      "revId": "a87c12851c11a05a190fa3baecaeb2b103bae8ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0dd1a73_ffd81599",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1678,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-03T01:55:11Z",
+      "side": 1,
+      "message": "`PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES`",
+      "range": {
+        "startLine": 1678,
+        "startChar": 34,
+        "endLine": 1678,
+        "endChar": 35
+      },
+      "revId": "a87c12851c11a05a190fa3baecaeb2b103bae8ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
