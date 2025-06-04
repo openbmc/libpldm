@@ -50,6 +50,24 @@
       "message": "Please wrap each test method in its own `#ifdef`. It helps me to know that they\u0027re bounded to the method, and makes it easier to stabilise APIs separately.",
       "revId": "4afce2c9508bbfed590887b686534fa0e23f9287",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96e72acf_c0ddb6c2",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 3126,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-04T02:36:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27951e1d_36cb7578",
+      "revId": "4afce2c9508bbfed590887b686534fa0e23f9287",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
