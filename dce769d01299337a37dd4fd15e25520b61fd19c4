@@ -965,6 +965,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6edbc398_eaee4b05",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1605,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-04T02:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed293a00_15468ebf",
+      "range": {
+        "startLine": 1605,
+        "startChar": 1,
+        "endLine": 1605,
+        "endChar": 34
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b67e4feb_abed6851",
@@ -1143,6 +1167,30 @@
       "writtenOn": "2025-05-30T05:18:09Z",
       "side": 1,
       "message": "same as above",
+      "range": {
+        "startLine": 1669,
+        "startChar": 1,
+        "endLine": 1669,
+        "endChar": 59
+      },
+      "revId": "dce769d01299337a37dd4fd15e25520b61fd19c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6d93438_e4b94127",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1669,
+      "author": {
+        "id": 1002480
+      },
+      "writtenOn": "2025-06-04T02:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4394d23_c41e7c3c",
       "range": {
         "startLine": 1669,
         "startChar": 1,
