@@ -16,6 +16,40 @@
       "message": "Also replace PLDM_SUCCESS with 0 in the test code.",
       "revId": "4afce2c9508bbfed590887b686534fa0e23f9287",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f369b05_3121c70d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-04T02:25:54Z",
+      "side": 1,
+      "message": "Hi Sora, I\u0027ve only one remaining request on the tests, the rest looks good.",
+      "revId": "4afce2c9508bbfed590887b686534fa0e23f9287",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27951e1d_36cb7578",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 3126,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-04T02:25:54Z",
+      "side": 1,
+      "message": "Please wrap each test method in its own `#ifdef`. It helps me to know that they\u0027re bounded to the method, and makes it easier to stabilise APIs separately.",
+      "revId": "4afce2c9508bbfed590887b686534fa0e23f9287",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
