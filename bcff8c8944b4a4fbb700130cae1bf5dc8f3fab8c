@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbc91e16_1c46e31e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1002431
+      },
+      "writtenOn": "2025-06-04T11:01:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b021a600_a9095a90",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10588e55_60a573f4",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-06-02T21:46:11Z",
       "side": 1,
       "message": "Same as above.",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2a28f06_1a39d454",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1002431
+      },
+      "writtenOn": "2025-06-04T11:01:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "10588e55_60a573f4",
       "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -120,6 +156,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a75d6388_bcd1bf7e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3372,
+      "author": {
+        "id": 1002431
+      },
+      "writtenOn": "2025-06-04T11:01:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be14d0b5_00f0bf8c",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5688e241_13c97270",
@@ -137,6 +191,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3827279_d83401bb",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3382,
+      "author": {
+        "id": 1002431
+      },
+      "writtenOn": "2025-06-04T11:01:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5688e241_13c97270",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cde08eac_cc6603ea",
@@ -150,6 +222,24 @@
       "writtenOn": "2025-06-02T21:46:11Z",
       "side": 1,
       "message": "I suppose you shouldn\u0027t log on every update and this seems like a regular message and not an error.\n\nSame goes for all other related messages in this changeset.",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ecbab99_fbb44b19",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3392,
+      "author": {
+        "id": 1002431
+      },
+      "writtenOn": "2025-06-04T11:01:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cde08eac_cc6603ea",
       "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
