@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "329f2680_e10795fc",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2095,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-05T04:27:05Z",
+      "side": 1,
+      "message": "This change only passes CI because the struct isn\u0027t captured in the ABI dump as the related functions are still marked as `LIBPLDM_ABI_TESTING`. It\u0027s not a sustainable change to make.\n\nI\u0027m working on making the API/ABI for the package iterators support multiple package formats in a sustainable way.",
+      "revId": "a480b89a32772ec4e7b243a90fa34892dea97a54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dff2dfbe_51deaa83",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 6
