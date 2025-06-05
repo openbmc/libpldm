@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dff2dfbe_51deaa83",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-05T01:54:37Z",
+      "side": 1,
+      "message": "Does the code initialize the struct var to \u0027\\0\u0027 somewhere because i am wondering if you need to set \nrec-\u003ereference_manifest_data.ptr \u003d NULL \n\nin case !rec-\u003ereference_manifest_data.length as on line# 715.",
+      "revId": "a480b89a32772ec4e7b243a90fa34892dea97a54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "772329a2_7a7d9d9e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3206,
+      "author": {
+        "id": 1001758
+      },
+      "writtenOn": "2025-06-05T01:54:37Z",
+      "side": 1,
+      "message": "Does the code initialize the struct var to \u0027\\0\u0027 somewhere because i am wondering if you need to set\nrec-\u003ereference_manifest_data.ptr \u003d NULL\n\nin case !rec-\u003ereference_manifest_data.length as on line# 715.",
+      "revId": "a480b89a32772ec4e7b243a90fa34892dea97a54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
