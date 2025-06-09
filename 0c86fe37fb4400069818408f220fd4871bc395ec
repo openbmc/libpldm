@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ddeb007_83a094fe",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1002431
+      },
+      "writtenOn": "2025-06-09T09:23:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e8aa2b3c_1fda1bbe",
+      "revId": "0c86fe37fb4400069818408f220fd4871bc395ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e888fe7_68bdb3d7",
