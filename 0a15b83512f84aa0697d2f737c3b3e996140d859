@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2ed4d77_cc322566",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1002356
+      },
+      "writtenOn": "2025-06-09T09:28:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18012e69_3424441d",
+      "range": {
+        "startLine": 665,
+        "startChar": 69,
+        "endLine": 665,
+        "endChar": 92
+      },
+      "revId": "0a15b83512f84aa0697d2f737c3b3e996140d859",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3546d620_4ff8c9cf",
         "filename": "include/libpldm/base.h",
         "patchSetId": 2
@@ -54,6 +78,24 @@
       "writtenOn": "2025-06-04T02:22:31Z",
       "side": 1,
       "message": "This doesn\u0027t seem right; we\u0027re just encoding the message to send, not sending the encoded message.",
+      "revId": "0a15b83512f84aa0697d2f737c3b3e996140d859",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "090c9ac2_362d23ea",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1002356
+      },
+      "writtenOn": "2025-06-09T09:28:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3546d620_4ff8c9cf",
       "revId": "0a15b83512f84aa0697d2f737c3b3e996140d859",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f9803a7_9873393c",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1002356
+      },
+      "writtenOn": "2025-06-09T09:28:59Z",
+      "side": 1,
+      "message": "Corrected.",
+      "parentUuid": "c8496a0b_6cee3c72",
+      "revId": "0a15b83512f84aa0697d2f737c3b3e996140d859",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "baafcb7d_594ae3da",
         "filename": "tests/dsp/base.cpp",
         "patchSetId": 2
@@ -94,6 +154,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b2002cd_4242395f",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1002356
+      },
+      "writtenOn": "2025-06-09T09:28:59Z",
+      "side": 1,
+      "message": "Corrected.",
+      "parentUuid": "baafcb7d_594ae3da",
+      "revId": "0a15b83512f84aa0697d2f737c3b3e996140d859",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dbfe577_411309df",
         "filename": "tests/dsp/base.cpp",
         "patchSetId": 2
@@ -105,6 +183,24 @@
       "writtenOn": "2025-06-04T02:22:31Z",
       "side": 1,
       "message": "Tetsing multiple erroneous parameters simultaneously doesn\u0027t get us coverage of handling for each erroneous parameter.\n\nCan you please test them separately?",
+      "revId": "0a15b83512f84aa0697d2f737c3b3e996140d859",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef0ec6cd_465b843b",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1002356
+      },
+      "writtenOn": "2025-06-09T09:28:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dbfe577_411309df",
       "revId": "0a15b83512f84aa0697d2f737c3b3e996140d859",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
