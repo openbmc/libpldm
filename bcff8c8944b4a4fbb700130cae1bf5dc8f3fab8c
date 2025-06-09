@@ -105,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5980cee9_0c0382a6",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3351,
+      "author": {
+        "id": 1002431
+      },
+      "writtenOn": "2025-06-09T09:22:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "177bc5c1_d70b137b",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7df3dc7_2d3cb4e5",
@@ -118,6 +136,24 @@
       "writtenOn": "2025-06-02T21:46:11Z",
       "side": 1,
       "message": "Shouldn\u0027t this be static API as its not exposed in header and only used locally?",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8716123b_f498b3a2",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3354,
+      "author": {
+        "id": 1002431
+      },
+      "writtenOn": "2025-06-09T09:22:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7df3dc7_2d3cb4e5",
       "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -257,6 +293,24 @@
       "writtenOn": "2025-06-02T21:46:11Z",
       "side": 1,
       "message": "Shouldn\u0027t this be static API as its not exposed in header and only used locally?",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc2aaddb_60832655",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3433,
+      "author": {
+        "id": 1002431
+      },
+      "writtenOn": "2025-06-09T09:22:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "771f1f83_5f979e37",
       "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
