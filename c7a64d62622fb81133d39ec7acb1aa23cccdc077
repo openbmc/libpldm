@@ -122,6 +122,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fc55f1e_4081f60e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-11T00:57:17Z",
+      "side": 1,
+      "message": "@unive.tien.wiwynn@gmail.com yes, that\u0027s the explanation, but I will change it to be more intuitive.",
+      "parentUuid": "86eb3ce4_8cd37c31",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "455f9894_fa00c20e",
@@ -191,6 +209,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94608f32_222fe1fe",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-11T00:57:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c5beb5d_a65d2ca8",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ee96ddd_09c145b0",
@@ -226,6 +262,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a95b48_ff28043f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3038,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-11T00:57:17Z",
+      "side": 1,
+      "message": "@alexander.hansen@9elements.com yep. This helps ensure correct use of the msgbuf instance (errors are returned to the caller appropriately)",
+      "parentUuid": "acf05402_1612fe49",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da1e2e8b_9f1aee7f",
@@ -243,6 +297,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17453cfa_53673ca5",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3048,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-11T00:57:17Z",
+      "side": 1,
+      "message": "It is only needed for the single function, but defining it as `const unsigned int` means it\u0027s not an \"integer constant expression\" with respect to the C language (which then may affect constant propagation during optimisation). I\u0027ll leave it for now. Any incorrect refactoring due to the location will yield a compilation failure, so it\u0027s not going to trip anyone up for too long.",
+      "parentUuid": "da1e2e8b_9f1aee7f",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4b2d466_5143fa8a",
@@ -256,6 +328,24 @@
       "writtenOn": "2025-03-20T20:27:49Z",
       "side": 1,
       "message": "Redundant and not needed as it\u0027s validated while decoding the header",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bd0647c_cea062b8",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3205,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-11T00:57:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4b2d466_5143fa8a",
       "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -295,6 +385,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab148773_393d00e9",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3242,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-11T00:57:17Z",
+      "side": 1,
+      "message": "We will add v1.3.0 support in a subsequent patch.",
+      "parentUuid": "630ada9a_af3aee6b",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be8f8622_bc866b0d",
@@ -308,6 +416,24 @@
       "writtenOn": "2025-03-24T15:39:42Z",
       "side": 1,
       "message": "Looking into DSP0267_1.3.0.pdf, page 1011, \n\nTable 3 - PLDM Firmware Package Header\n\n```\nA value of 1244D2648D7D4718A030FC8A56587D5A shall indicate that the update package format\nconforms to Version 1.1\n```\n\nI\u0027m confused why the variable is named ```PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V2_0```\n\nIn the entire document i cannot find anything when looking for ```Version 2```\nand it seems to be the latest version of the document\n\nhttps://www.dmtf.org/standards/pmci",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5550be6_a5fc71d4",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-11T00:57:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be8f8622_bc866b0d",
       "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -329,6 +455,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "167bc463_c1cc18c3",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4643,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-11T00:57:17Z",
+      "side": 1,
+      "message": "It means:\n\nv1 header,\n1 firmware device\n1 firmware device descriptor\n1 component image information",
+      "parentUuid": "b8490c9b_6ec56a9d",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef71ee6d_50f9f49b",
@@ -342,6 +486,24 @@
       "writtenOn": "2025-03-24T15:39:42Z",
       "side": 1,
       "message": "same comment about the testcase name ```v2h1fd1fdd1dd1ddd2cii```",
+      "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceb37a90_f33223ca",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4819,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-11T00:57:17Z",
+      "side": 1,
+      "message": "v2 header\n1 firmware device\n1 firmware device descriptor\n1 downstream device\n1 downstream device descriptor\n2 component image informations",
+      "parentUuid": "ef71ee6d_50f9f49b",
       "revId": "c7a64d62622fb81133d39ec7acb1aa23cccdc077",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
