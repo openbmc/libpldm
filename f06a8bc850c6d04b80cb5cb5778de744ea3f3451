@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "021dd682_9f3fc7a7",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 2281,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-11T11:40:28Z",
+      "side": 1,
+      "message": "I understand the confusion there, but the v1.3.0 spec also encompasses the earlier package format revisions. We\u0027re only implementing up to package format revision 2 in this patch. Package format revision 3 can follow in a subsequent patch.\n\nThe package format pin concept that I\u0027ve now introduced allows us (with a little bit of work) to append further members to these structs, which is an act that would otherwise break the ABI. Both sides (library implementation and library consumer) have to demonstrate that they agree on specific struct sizes for each package format revision. This ensures that changes are forwards and backwards compatible (in the sense that the library will either function as required or gracefully return an error, and not perform invalid memory accesses).",
+      "parentUuid": "6f2f6987_155c366a",
+      "revId": "f06a8bc850c6d04b80cb5cb5778de744ea3f3451",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f5bef64_6a5d8381",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 8
