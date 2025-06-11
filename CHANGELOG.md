@@ -69,6 +69,18 @@ Change categories:
 
   Users of `crc8()` should move to `pldm_edac_crc8()`
 
+- Old package parsing APIs are deprecated, including:
+
+  - `struct pldm_package_header_information`
+  - `struct pldm_firmware_device_id_record`
+  - `struct pldm_component_image_information`
+  - `decode_pldm_package_header_info()`
+  - `decode_firmware_device_id_record()`
+  - `decode_pldm_comp_image_info()`
+
+  Users should move to the new iterator-based APIs instead. See the
+  documentation for `decode_pldm_firmware_update_package()`
+
 ### Removed
 
 - requester: Remove related deprecated APIs
