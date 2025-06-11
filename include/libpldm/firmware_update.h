@@ -446,6 +446,8 @@ struct pldm_firmware_version {
 /** @struct pldm_package_header_information
  *
  *  Structure representing fixed part of package header information
+ *
+ *  @deprecated{Usability, see pldm_package_header_information_pad}
  */
 struct pldm_package_header_information {
 	uint8_t uuid[PLDM_FWUP_UUID_LENGTH];
@@ -460,6 +462,8 @@ struct pldm_package_header_information {
 /** @struct pldm_firmware_device_id_record
  *
  *  Structure representing firmware device ID record
+ *
+ *  @deprecated{Usability, see pldm_package_firmware_device_id_record}
  */
 struct pldm_firmware_device_id_record {
 	uint16_t record_length;
@@ -494,6 +498,8 @@ struct pldm_vendor_defined_descriptor_title_data {
  *
  *  Structure representing fixed part of individual component information in
  *  PLDM firmware update package
+ *
+ *  @deprecated{Usability, see pldm_package_component_image_information}
  */
 struct pldm_component_image_information {
 	uint16_t comp_classification;
