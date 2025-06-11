@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3375ca6_3621f520",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-06-11T09:03:03Z",
+      "side": 1,
+      "message": "Thanks Andrew, just being here to leave my concern for supporting next DSP0267 revision.",
+      "revId": "f06a8bc850c6d04b80cb5cb5778de744ea3f3451",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f2f6987_155c366a",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 2281,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-06-11T09:03:03Z",
+      "side": 1,
+      "message": "There should be a `reference_manifest` here if we\u0027re referencing DSP0267 v1.3.0, otherwise an older revision should be linked.\n\nEven it is optional(length can be 0), a 4-byte field is still used in the format for describing the length.",
+      "revId": "f06a8bc850c6d04b80cb5cb5778de744ea3f3451",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f5bef64_6a5d8381",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 2323,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-06-11T09:03:03Z",
+      "side": 1,
+      "message": "Same as above, `reference_manifest` for DSP0267 v1.3.0.",
+      "revId": "f06a8bc850c6d04b80cb5cb5778de744ea3f3451",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b536b977_46ab65a8",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 2352,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-06-11T09:03:03Z",
+      "side": 1,
+      "message": "A `component_opaque_data` should be here if it is DSP0267 v1.3.0 revision.",
+      "revId": "f06a8bc850c6d04b80cb5cb5778de744ea3f3451",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
