@@ -517,7 +517,7 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	return 0;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 int decode_pldm_package_header_info(
 	const uint8_t *data, size_t length,
 	struct pldm_package_header_information *package_header_info,
@@ -698,7 +698,7 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 int decode_firmware_device_id_record(
 	const uint8_t *data, size_t length,
 	uint16_t component_bitmap_bit_length,
@@ -962,7 +962,7 @@ static int decode_pldm_comp_image_info_errno(
 	return 0;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 int decode_pldm_comp_image_info(
 	const uint8_t *data, size_t length,
 	struct pldm_component_image_information *pldm_comp_image_info,
