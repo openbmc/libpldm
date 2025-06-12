@@ -2503,7 +2503,7 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg,
 				  size_t payload_length LIBPLDM_CC_UNUSED)
 {
@@ -2520,7 +2520,7 @@ int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg,
 	return pack_pldm_header_errno(&header, &(msg->hdr));
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_get_event_receiver_resp(
 	uint8_t instance_id,
 	struct pldm_get_event_receiver_resp *event_receiver_info,
@@ -2561,7 +2561,7 @@ int encode_get_event_receiver_resp(
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_get_event_receiver_resp(const struct pldm_msg *msg,
 				   size_t payload_length,
 				   struct pldm_get_event_receiver_resp *resp)
