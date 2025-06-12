@@ -2561,7 +2561,7 @@ int encode_get_event_receiver_resp(
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_get_event_receiver_resp(const struct pldm_msg *msg,
 				   size_t payload_length,
 				   struct pldm_get_event_receiver_resp *resp)
