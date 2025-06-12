@@ -34,6 +34,7 @@ Change categories:
   that occurs during an out-of-band code update.
 
 - firmware update: Add encode/decode API for downstream device update command
+- base: Add `PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION` completion code
 
 ### Changed
 
