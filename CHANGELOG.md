@@ -61,11 +61,21 @@ Change categories:
   - `decode_pldm_file_df_close_resp()`
   - `encode_pldm_file_df_heartbeat_req()`
   - `decode_pldm_file_df_heartbeat_resp()`
+  - `decode_pldm_firmware_update_package()`
+  - `pldm_package_firmware_device_id_record_iter_init()`
+  - `decode_pldm_package_firmware_device_id_record_from_iter()`
+  - `pldm_package_downstream_device_id_record_iter_init()`
+  - `decode_pldm_package_downstream_device_id_record_from_iter()`
+  - `pldm_package_component_image_information_iter_init()`
+  - `decode_pldm_package_component_image_information_from_iter()`
 
 - Reworked the firmware update package parsing APIs to track parse state using a
   run-time state machine
 - Add flags parameter to `decode_pldm_firmware_update_package()`
 - Add NOLINT to `pldm__package_header_information` to prevent clang-tidy errors.
+
+- firmware_update: change package parsing API to stable
+
 
 ### Deprecated
 
