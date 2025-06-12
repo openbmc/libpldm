@@ -9,7 +9,7 @@
 #endif
 
 #include <assert.h>
-
+// hi
 static struct {
 	static_assert(__has_attribute(always_inline),
 		      "`always_inline` attribute is required");
