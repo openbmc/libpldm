@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc51e5ee_63a7019c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-06-12T09:40:11Z",
+      "side": 1,
+      "message": "nit: even",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 11
+      },
+      "revId": "9ae77ddb4df7329dc81f1e7da58f29eb0e74a972",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff8d9dfc_6ada5c7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-06-12T09:40:11Z",
+      "side": 1,
+      "message": "A few minor comments.",
+      "revId": "9ae77ddb4df7329dc81f1e7da58f29eb0e74a972",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a237196_fd0417ba",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3292,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-06-12T09:40:11Z",
+      "side": 1,
+      "message": "is_string_type_valid() check can be added here as well ?",
+      "range": {
+        "startLine": 3291,
+        "startChar": 0,
+        "endLine": 3292,
+        "endChar": 63
+      },
+      "revId": "9ae77ddb4df7329dc81f1e7da58f29eb0e74a972",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8206132_ac21c343",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3406,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-06-12T09:40:11Z",
+      "side": 1,
+      "message": "is_string_type_valid() check is missing here ?",
+      "range": {
+        "startLine": 3406,
+        "startChar": 0,
+        "endLine": 3406,
+        "endChar": 63
+      },
+      "revId": "9ae77ddb4df7329dc81f1e7da58f29eb0e74a972",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6fb697_2ee9524f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3428,
+      "author": {
+        "id": 1002325
+      },
+      "writtenOn": "2025-06-12T09:40:11Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be done just after extracting component_classification ?",
+      "range": {
+        "startLine": 3424,
+        "startChar": 0,
+        "endLine": 3428,
+        "endChar": 2
+      },
+      "revId": "9ae77ddb4df7329dc81f1e7da58f29eb0e74a972",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
