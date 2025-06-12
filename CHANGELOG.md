@@ -67,6 +67,8 @@ Change categories:
 - Add flags parameter to `decode_pldm_firmware_update_package()`
 - Add NOLINT to `pldm__package_header_information` to prevent clang-tidy errors.
 
+- firmware_update: change package parsing API to stable
+
 ### Deprecated
 
 ### Removed
