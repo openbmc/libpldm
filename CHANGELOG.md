@@ -32,6 +32,8 @@ Change categories:
   - `crc32()`: Users must switch to `pldm_edac_crc32()`
   - `crc8()`: Users must switch to `pldm_edac_crc8()`
 
+- base: Remove `PLDM_INVALID_TRANSFER_OPERATION_FLAG` completion code
+
 ### Fixed
 
 ### Security
