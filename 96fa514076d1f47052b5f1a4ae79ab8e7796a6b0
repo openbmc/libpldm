@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6542f040_2c39bbe0",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2025-06-12T06:59:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fff76a7a_489de294",
+      "revId": "96fa514076d1f47052b5f1a4ae79ab8e7796a6b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25f611a1_d0483ba0",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-29T02:39:08Z",
       "side": 1,
       "message": "Can you please add backticks around symbols?",
+      "revId": "96fa514076d1f47052b5f1a4ae79ab8e7796a6b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca03a429_25a0bd3a",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2025-06-12T06:59:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25f611a1_d0483ba0",
       "revId": "96fa514076d1f47052b5f1a4ae79ab8e7796a6b0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
