@@ -81,6 +81,8 @@ Change categories:
   - `pldm_send()`
   - `pldm_send_recv()`
 
+- base: Remove `PLDM_INVALID_TRANSFER_OPERATION_FLAG` completion code
+
 ### Fixed
 
 - meson: Define LIBPLDM_ABI_DEPRECATED_UNSAFE as empty as required
