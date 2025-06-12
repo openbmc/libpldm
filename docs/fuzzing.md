@@ -26,14 +26,14 @@ needs to be built from source.
 
 Run with
 
-```
+```shell
 nice honggfuzz -i corpusdir --linux_perf_branch --dict tests/fuzz/fd.dict  -- ./bhf/tests/fuzz/fd-fuzz
 ```
 
 The `--linux_perf_branch` switch is optional, it requires permissions for perf
 counters:
 
-```
+```shell
 echo 0 | sudo tee /proc/sys/kernel/perf_event_paranoid
 ```
 
@@ -48,7 +48,7 @@ handcrafted input.
 
 Running a single instance (just for testing):
 
-```
+```shell
 afl-fuzz -i fuzzrun/hf11/ -o fuzzrun/out12single ./bfuzz/tests/fuzz/fd-fuzz
 ```
 
@@ -57,7 +57,7 @@ AFL++ requires a separate GUI instantiation for each CPU thread. The helper
 
 Running with 20 threads:
 
-```
+```shell
 nice aflr run  -t bfuzz/tests/fuzz/fd-fuzz -i workdir/out5/m_fd-fuzz/queue -o workdir/out6 -c bcmplog/tests/fuzz/fd-fuzz -s bfuzzasan/tests/fuzz/fd-fuzz -n 20 -x tests/fuzz/fd.dict --session-name fuzz
 ```
 
@@ -81,7 +81,7 @@ It will:
 
 Typical usage, with corpus in `fuzzrun/corpus`:
 
-```
+```shell
 ./tests/fuzz/fuzz-coverage.py fuzzrun/corpus bnoopt/tests/fuzz/fd-fuzz . bnoopt/ coverage-output
 ```
 
@@ -90,7 +90,7 @@ Typical usage, with corpus in `fuzzrun/corpus`:
 When the fuzz run encounters a crash, the testcase can be run against the built
 target manually, and stepped through with GDB etc.
 
-```
+```shell
 env TRACEFWFD=1 ./bnoopt/tests/fuzz/fd-fuzz < crashing.bin
 ```
 

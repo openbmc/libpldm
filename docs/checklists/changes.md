@@ -187,6 +187,9 @@
     [C17 draft specification][c17-draft-standard], 6.7.2.1 Structure and union
     specifiers, paragraph 18.
 
+[c17-draft-standard]:
+  https://web.archive.org/web/20181230041359/http://www.open-std.org/jtc1/sc22/wg14/www/abq/c17_updated_proposed_fdis.pdf
+
 ### ABI control
 
 - [ ] My new function symbols are marked with `LIBPLDM_ABI_TESTING` in the
@@ -277,13 +280,13 @@ images with `docker images`.
 
 Assuming:
 
-```
+```shell
 export OPENBMC_CI_IMAGE=openbmc/ubuntu-unit-test:2024-W21-ce361f95ff4fa669
 ```
 
 the ABI dump can be updated with:
 
-```
+```shell
 docker run \
   --cap-add=sys_admin \
   --rm=true \
