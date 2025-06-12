@@ -3233,7 +3233,7 @@ int encode_cancel_update_resp(uint8_t instance_id,
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_firmware_update_package(
 	const void *data, size_t length,
 	const struct pldm_package_format_pin *pin,
@@ -3249,7 +3249,7 @@ int decode_pldm_firmware_update_package(
 	return decode_pldm_package_header_info_errno(data, length, pin, hdr);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_package_firmware_device_id_record_iter_init(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_firmware_device_id_record_iter *iter)
@@ -3277,7 +3277,7 @@ int pldm_package_firmware_device_id_record_iter_init(
 	return pldm_msgbuf_complete(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_package_firmware_device_id_record_from_iter(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_firmware_device_id_record_iter *iter,
@@ -3287,7 +3287,7 @@ int decode_pldm_package_firmware_device_id_record_from_iter(
 		hdr, &iter->field, rec);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_package_downstream_device_id_record_iter_init(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_firmware_device_id_record_iter *fds,
@@ -3325,7 +3325,7 @@ int pldm_package_downstream_device_id_record_iter_init(
 }
 
 #define PLDM_FWUP_DOWNSTREAM_DEVICE_ID_RECORD_MIN_SIZE 11
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_package_downstream_device_id_record_from_iter(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_downstream_device_id_record_iter *iter,
@@ -3441,7 +3441,7 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_package_component_image_information_iter_init(
 	const pldm_package_header_information_pad *hdr LIBPLDM_CC_UNUSED,
 	struct pldm_package_downstream_device_id_record_iter *dds,
@@ -3479,7 +3479,7 @@ int pldm_package_component_image_information_iter_init(
 }
 
 #define PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_MIN_SIZE 22
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_package_component_image_information_from_iter(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_component_image_information_iter *iter,

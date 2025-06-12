@@ -4818,7 +4818,6 @@ TEST(CancelUpdate, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, badArguments)
 {
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
@@ -4842,9 +4841,7 @@ TEST(DecodePldmFirmwareUpdatePackage, badArguments)
                                              nullptr);
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinVersion)
 {
     const struct pldm_package_format_pin pin = {
@@ -4869,9 +4866,7 @@ TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinVersion)
                                              &iter);
     EXPECT_EQ(rc, -ENOTSUP);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, badPinRevision)
 {
     const struct pldm_package_format_pin lowPin = {
@@ -4913,9 +4908,7 @@ TEST(DecodePldmFirmwareUpdatePackage, badPinRevision)
                                              &hdr, &iter);
     EXPECT_EQ(rc, -ENOTSUP);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, badPinMagic)
 {
     const struct pldm_package_format_pin lowPin = {
@@ -4957,9 +4950,7 @@ TEST(DecodePldmFirmwareUpdatePackage, badPinMagic)
                                              &hdr, &iter);
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinIdentifier)
 {
     const struct pldm_package_format_pin pin = {
@@ -4997,9 +4988,7 @@ TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinIdentifier)
                                              &iter);
     EXPECT_EQ(rc, -ENOTSUP);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, oldConsumer)
 {
     /* Package format revision 2 header */
@@ -5021,9 +5010,7 @@ TEST(DecodePldmFirmwareUpdatePackage, oldConsumer)
                                              &pin, &hdr, &iter);
     EXPECT_EQ(rc, -ENOTSUP);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
 {
     const std::array<uint8_t, 102> package{
@@ -5201,9 +5188,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
 
     EXPECT_EQ(nr_infos, 1);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
 {
     const std::array<uint8_t, 150> package{
@@ -5421,9 +5406,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
 
     EXPECT_EQ(nr_infos, 2);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
 {
     const std::array<uint8_t, 170> package{
@@ -5649,4 +5632,3 @@ TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
 
     EXPECT_EQ(nr_infos, 2);
 }
-#endif
