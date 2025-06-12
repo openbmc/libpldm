@@ -2666,6 +2666,163 @@ $VAR1 = {
       'Return' => '164',
       'ShortName' => 'pldm_bios_table_string_entry_encode_length'
     },
+    '61266' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2757',
+      'Param' => {
+        '0' => {
+          'name' => 'hdr',
+          'type' => '60987'
+        },
+        '1' => {
+          'name' => 'iter',
+          'type' => '65918'
+        },
+        '2' => {
+          'name' => 'info',
+          'type' => '65923'
+        }
+      },
+      'Reg' => {
+        '2' => 'rbx'
+      },
+      'Return' => '53',
+      'ShortName' => 'decode_pldm_package_component_image_information_from_iter'
+    },
+    '65933' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2752',
+      'Param' => {
+        '0' => {
+          'name' => 'hdr',
+          'type' => '60987'
+        },
+        '1' => {
+          'name' => 'dds',
+          'type' => '66937'
+        },
+        '2' => {
+          'name' => 'infos',
+          'type' => '65918'
+        }
+      },
+      'Return' => '53',
+      'ShortName' => 'pldm_package_component_image_information_iter_init'
+    },
+    '66942' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2592',
+      'Param' => {
+        '0' => {
+          'name' => 'hdr',
+          'type' => '60987'
+        },
+        '1' => {
+          'name' => 'iter',
+          'type' => '66937'
+        },
+        '2' => {
+          'name' => 'rec',
+          'type' => '71097'
+        }
+      },
+      'Reg' => {
+        '2' => 'rbp'
+      },
+      'Return' => '53',
+      'ShortName' => 'decode_pldm_package_downstream_device_id_record_from_iter'
+    },
+    '71102' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2587',
+      'Param' => {
+        '0' => {
+          'name' => 'hdr',
+          'type' => '60987'
+        },
+        '1' => {
+          'name' => 'fds',
+          'type' => '72095'
+        },
+        '2' => {
+          'name' => 'dds',
+          'type' => '66937'
+        }
+      },
+      'Return' => '53',
+      'ShortName' => 'pldm_package_downstream_device_id_record_iter_init'
+    },
+    '72100' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2450',
+      'Param' => {
+        '0' => {
+          'name' => 'hdr',
+          'type' => '60987'
+        },
+        '1' => {
+          'name' => 'iter',
+          'type' => '72095'
+        },
+        '2' => {
+          'name' => 'rec',
+          'type' => '72229'
+        }
+      },
+      'Return' => '53',
+      'ShortName' => 'decode_pldm_package_firmware_device_id_record_from_iter'
+    },
+    '72234' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2446',
+      'Param' => {
+        '0' => {
+          'name' => 'hdr',
+          'type' => '60987'
+        },
+        '1' => {
+          'name' => 'iter',
+          'type' => '72095'
+        }
+      },
+      'Return' => '53',
+      'ShortName' => 'pldm_package_firmware_device_id_record_iter_init'
+    },
+    '73143' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2422',
+      'Param' => {
+        '0' => {
+          'name' => 'data',
+          'type' => '1237'
+        },
+        '1' => {
+          'name' => 'length',
+          'type' => '164'
+        },
+        '2' => {
+          'name' => 'pin',
+          'type' => '73319'
+        },
+        '3' => {
+          'name' => 'hdr',
+          'type' => '73324'
+        },
+        '4' => {
+          'name' => 'iter',
+          'type' => '73329'
+        }
+      },
+      'Reg' => {
+        '0' => 'rdi',
+        '1' => 'r9',
+        '2' => 'rdx',
+        '3' => 'rcx',
+        '4' => 'r8'
+      },
+      'Return' => '53',
+      'ShortName' => 'decode_pldm_firmware_update_package'
+    },
     '74800' => {
       'Header' => 'firmware_update.h',
       'Line' => '2146',
@@ -9466,7 +9623,11 @@ $VAR1 = {
       'decode_pldm_downstream_device_from_iter' => 1,
       'decode_pldm_downstream_device_parameters_entry_from_iter' => 1,
       'decode_pldm_entity_auxiliary_names_pdr_index' => 1,
+      'decode_pldm_firmware_update_package' => 1,
       'decode_pldm_message_poll_event_data' => 1,
+      'decode_pldm_package_component_image_information_from_iter' => 1,
+      'decode_pldm_package_downstream_device_id_record_from_iter' => 1,
+      'decode_pldm_package_firmware_device_id_record_from_iter' => 1,
       'decode_pldm_package_header_info' => 1,
       'decode_pldm_pdr_repository_change_record_data' => 1,
       'decode_pldm_pdr_repository_chg_event_data' => 1,
@@ -9697,6 +9858,9 @@ $VAR1 = {
       'pldm_msg_hdr_correlate_response' => 1,
       'pldm_oem_meta_file_io_read_resp_data' => 1,
       'pldm_oem_meta_file_io_write_req_data' => 1,
+      'pldm_package_component_image_information_iter_init' => 1,
+      'pldm_package_downstream_device_id_record_iter_init' => 1,
+      'pldm_package_firmware_device_id_record_iter_init' => 1,
       'pldm_pdr_add' => 1,
       'pldm_pdr_add_fru_record_set' => 1,
       'pldm_pdr_delete_by_record_handle' => 1,
@@ -10844,11 +11008,25 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Union'
     },
+    '54814' => {
+      'BaseType' => '54826',
+      'Header' => 'pldm_types.h',
+      'Line' => '166',
+      'Name' => 'pldm_uuid',
+      'Size' => '16',
+      'Type' => 'Typedef'
+    },
     '54826' => {
       'BaseType' => '135',
       'Name' => 'uint8_t[16]',
       'Size' => '16',
       'Type' => 'Array'
+    },
+    '54842' => {
+      'BaseType' => '54826',
+      'Name' => 'uint8_t[16] const',
+      'Size' => '16',
+      'Type' => 'Const'
     },
     '54871' => {
       'BaseType' => '164',
@@ -11460,6 +11638,434 @@ $VAR1 = {
       'Name' => 'struct pldm_downstream_device_parameters_iter',
       'Size' => '24',
       'Type' => 'Struct'
+    },
+    '60127' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2202',
+      'Memb' => {
+        '0' => {
+          'name' => 'magic',
+          'offset' => '0',
+          'type' => '159'
+        },
+        '1' => {
+          'name' => 'version',
+          'offset' => '4',
+          'type' => '5635'
+        }
+      },
+      'Name' => 'anon-struct-firmware_update.h-2202',
+      'Size' => '8',
+      'Type' => 'Struct'
+    },
+    '60164' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2209',
+      'Memb' => {
+        '0' => {
+          'name' => 'identifier',
+          'offset' => '0',
+          'type' => '54842'
+        },
+        '1' => {
+          'name' => 'revision',
+          'offset' => '22',
+          'type' => '5635'
+        }
+      },
+      'Name' => 'anon-struct-firmware_update.h-2209',
+      'Size' => '17',
+      'Type' => 'Struct'
+    },
+    '60201' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2201',
+      'Memb' => {
+        '0' => {
+          'name' => 'meta',
+          'offset' => '0',
+          'type' => '60127'
+        },
+        '1' => {
+          'name' => 'format',
+          'offset' => '8',
+          'type' => '60164'
+        }
+      },
+      'Name' => 'struct pldm_package_format_pin',
+      'Size' => '28',
+      'Type' => 'Struct'
+    },
+    '60244' => {
+      'BaseType' => '60201',
+      'Name' => 'struct pldm_package_format_pin const',
+      'Size' => '28',
+      'Type' => 'Const'
+    },
+    '60249' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2225',
+      'Memb' => {
+        '0' => {
+          'name' => 'package_header_identifier',
+          'offset' => '0',
+          'type' => '54814'
+        },
+        '1' => {
+          'name' => 'package_header_format_revision',
+          'offset' => '22',
+          'type' => '135'
+        },
+        '2' => {
+          'name' => 'package_release_date_time',
+          'offset' => '23',
+          'type' => '57013'
+        },
+        '3' => {
+          'name' => 'component_bitmap_bit_length',
+          'offset' => '48',
+          'type' => '5640'
+        },
+        '4' => {
+          'name' => 'package_version_string_type',
+          'offset' => '50',
+          'type' => '135'
+        },
+        '5' => {
+          'name' => 'package_version_string',
+          'offset' => '64',
+          'type' => '7680'
+        },
+        '6' => {
+          'name' => 'areas',
+          'offset' => '86',
+          'type' => '7680'
+        },
+        '7' => {
+          'name' => 'package',
+          'offset' => '114',
+          'type' => '7680'
+        }
+      },
+      'Name' => 'struct pldm__package_header_information',
+      'Size' => '88',
+      'Type' => 'Struct'
+    },
+    '60376' => {
+      'BaseType' => '60249',
+      'Header' => 'firmware_update.h',
+      'Line' => '2241',
+      'Name' => 'pldm_package_header_information_pad',
+      'Size' => '88',
+      'Type' => 'Typedef'
+    },
+    '60389' => {
+      'BaseType' => '60376',
+      'Name' => 'pldm_package_header_information_pad const',
+      'Size' => '88',
+      'Type' => 'Const'
+    },
+    '60394' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2244',
+      'Memb' => {
+        '0' => {
+          'name' => 'bitmap',
+          'offset' => '0',
+          'type' => '7680'
+        }
+      },
+      'Name' => 'struct pldm_package_component_bitmap',
+      'Size' => '16',
+      'Type' => 'Struct'
+    },
+    '60423' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2256',
+      'Memb' => {
+        '0' => {
+          'name' => 'descriptor_count',
+          'offset' => '0',
+          'type' => '135'
+        },
+        '1' => {
+          'name' => 'device_update_option_flags',
+          'offset' => '4',
+          'type' => '53847'
+        },
+        '2' => {
+          'name' => 'component_image_set_version_string_type',
+          'offset' => '8',
+          'type' => '135'
+        },
+        '3' => {
+          'name' => 'component_image_set_version_string',
+          'offset' => '22',
+          'type' => '7680'
+        },
+        '4' => {
+          'name' => 'applicable_components',
+          'offset' => '50',
+          'type' => '60394'
+        },
+        '5' => {
+          'name' => 'record_descriptors',
+          'offset' => '72',
+          'type' => '7680'
+        },
+        '6' => {
+          'name' => 'firmware_device_package_data',
+          'offset' => '100',
+          'type' => '7680'
+        }
+      },
+      'Name' => 'struct pldm_package_firmware_device_id_record',
+      'Size' => '80',
+      'Type' => 'Struct'
+    },
+    '60536' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2292',
+      'Memb' => {
+        '0' => {
+          'name' => 'descriptor_count',
+          'offset' => '0',
+          'type' => '135'
+        },
+        '1' => {
+          'name' => 'update_option_flags',
+          'offset' => '4',
+          'type' => '53847'
+        },
+        '2' => {
+          'name' => 'self_contained_activation_min_version_string_type',
+          'offset' => '8',
+          'type' => '135'
+        },
+        '3' => {
+          'name' => 'self_contained_activation_min_version_string',
+          'offset' => '22',
+          'type' => '7680'
+        },
+        '4' => {
+          'name' => 'self_contained_activation_min_version_comparison_stamp',
+          'offset' => '50',
+          'type' => '147'
+        },
+        '5' => {
+          'name' => 'applicable_components',
+          'offset' => '64',
+          'type' => '60394'
+        },
+        '6' => {
+          'name' => 'record_descriptors',
+          'offset' => '86',
+          'type' => '7680'
+        },
+        '7' => {
+          'name' => 'package_data',
+          'offset' => '114',
+          'type' => '7680'
+        }
+      },
+      'Name' => 'struct pldm_package_downstream_device_id_record',
+      'Size' => '88',
+      'Type' => 'Struct'
+    },
+    '60663' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2334',
+      'Memb' => {
+        '0' => {
+          'name' => 'component_classification',
+          'offset' => '0',
+          'type' => '5640'
+        },
+        '1' => {
+          'name' => 'component_identifier',
+          'offset' => '2',
+          'type' => '5640'
+        },
+        '2' => {
+          'name' => 'component_comparison_stamp',
+          'offset' => '4',
+          'type' => '147'
+        },
+        '3' => {
+          'name' => 'component_options',
+          'offset' => '8',
+          'type' => '45174'
+        },
+        '4' => {
+          'name' => 'requested_component_activation_method',
+          'offset' => '16',
+          'type' => '45174'
+        },
+        '5' => {
+          'name' => 'component_image',
+          'offset' => '22',
+          'type' => '7680'
+        },
+        '6' => {
+          'name' => 'component_version_string_type',
+          'offset' => '50',
+          'type' => '135'
+        },
+        '7' => {
+          'name' => 'component_version_string',
+          'offset' => '64',
+          'type' => '7680'
+        }
+      },
+      'Name' => 'struct pldm_package_component_image_information',
+      'Size' => '56',
+      'Type' => 'Struct'
+    },
+    '60790' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2355',
+      'Memb' => {
+        '0' => {
+          'name' => 'field',
+          'offset' => '0',
+          'type' => '7680'
+        },
+        '1' => {
+          'name' => 'entries',
+          'offset' => '22',
+          'type' => '164'
+        }
+      },
+      'Name' => 'struct pldm_package_firmware_device_id_record_iter',
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '60833' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2360',
+      'Memb' => {
+        '0' => {
+          'name' => 'field',
+          'offset' => '0',
+          'type' => '7680'
+        },
+        '1' => {
+          'name' => 'entries',
+          'offset' => '22',
+          'type' => '164'
+        }
+      },
+      'Name' => 'struct pldm_package_downstream_device_id_record_iter',
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '60876' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2365',
+      'Memb' => {
+        '0' => {
+          'name' => 'field',
+          'offset' => '0',
+          'type' => '7680'
+        },
+        '1' => {
+          'name' => 'entries',
+          'offset' => '22',
+          'type' => '164'
+        }
+      },
+      'Name' => 'struct pldm_package_component_image_information_iter',
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '60919' => {
+      'Header' => 'firmware_update.h',
+      'Line' => '2384',
+      'Memb' => {
+        '0' => {
+          'name' => 'hdr',
+          'offset' => '0',
+          'type' => '60987'
+        },
+        '1' => {
+          'name' => 'fds',
+          'offset' => '8',
+          'type' => '60790'
+        },
+        '2' => {
+          'name' => 'dds',
+          'offset' => '50',
+          'type' => '60833'
+        },
+        '3' => {
+          'name' => 'infos',
+          'offset' => '86',
+          'type' => '60876'
+        }
+      },
+      'Name' => 'struct pldm_package_iter',
+      'Size' => '80',
+      'Type' => 'Struct'
+    },
+    '60987' => {
+      'BaseType' => '60389',
+      'Name' => 'pldm_package_header_information_pad const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '65918' => {
+      'BaseType' => '60876',
+      'Name' => 'struct pldm_package_component_image_information_iter*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '65923' => {
+      'BaseType' => '60663',
+      'Name' => 'struct pldm_package_component_image_information*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '66937' => {
+      'BaseType' => '60833',
+      'Name' => 'struct pldm_package_downstream_device_id_record_iter*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '71097' => {
+      'BaseType' => '60536',
+      'Name' => 'struct pldm_package_downstream_device_id_record*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '72095' => {
+      'BaseType' => '60790',
+      'Name' => 'struct pldm_package_firmware_device_id_record_iter*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '72229' => {
+      'BaseType' => '60423',
+      'Name' => 'struct pldm_package_firmware_device_id_record*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '73319' => {
+      'BaseType' => '60244',
+      'Name' => 'struct pldm_package_format_pin const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '73324' => {
+      'BaseType' => '60376',
+      'Name' => 'pldm_package_header_information_pad*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '73329' => {
+      'BaseType' => '60919',
+      'Name' => 'struct pldm_package_iter*',
+      'Size' => '8',
+      'Type' => 'Pointer'
     },
     '74982' => {
       'BaseType' => '53071',
