@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9bf8055e_b7c54505",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2095,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-12T04:21:58Z",
+      "side": 1,
+      "message": "So to make sure we have things crisp here, while DSP0267 v1.3.0 specifies e.g. header format revision 4, it also (implicitly) specifies header format revisions 3, 2 and 1. From my perspective it\u0027s valid to use DSP0267 v1.3.0 to implement support for e.g. revision 2, and still not yet support revision 4.\n\nTo implement format revision 4, yes, we need to add e.g. the reference manifest data field. Now that my iterator patch introduces the pin concept, we can do that with confidence that we won\u0027t cause invalid memory accesses on behalf of the application when upgrading or downgrading the library.",
+      "parentUuid": "5b534ee5_ae75923c",
+      "revId": "a480b89a32772ec4e7b243a90fa34892dea97a54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dff2dfbe_51deaa83",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 6
