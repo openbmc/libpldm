@@ -44,6 +44,8 @@ Change categories:
 
 - pdr: Stabilize pldm_pdr_delete_by_record_handle()
 
+- firmware update: Support Reference Manifest, opaque data, and payload checksum per DSP0267 v1.3.
+
 ### Deprecated
 
 - utils: Deprecate `is_time_legal()`

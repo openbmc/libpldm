@@ -2184,8 +2184,18 @@ int encode_cancel_update_resp(uint8_t instance_id,
 		0xa0, 0x30, 0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5a,                \
 	}
 
+/** @brief Firmware update v1.3 package header identifier */
+#define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3                                    \
+	{                                                                      \
+		0x7b, 0x29, 0x1c, 0x99, 0x6d, 0xb6, 0x42, 0x08, 0x80, 0x1b,    \
+			0x02, 0x02, 0x6e, 0x46, 0x3c, 0x78,                    \
+	}
+
 /** @brief Firmware update v1.1 package header format revision */
 #define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H 0x02
+
+/** @brief Firmware update v1.3 package header format revision */
+#define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H 0x04
 
 /** @brief Client-side version pinning for package format parsing
  *
@@ -2285,6 +2295,18 @@ struct pldm_package_firmware_device_id_record {
 	 */
 	struct variable_field record_descriptors;
 	struct variable_field firmware_device_package_data;
+
+	/**
+	* An optional field that can contain a Reference Manifest for the firmware update package.
+	* If present, this field points to the Reference Manifest data, which describes the firmware update
+	* provided by this package. The UA(Update Agent) may use this data as a reference for the firmware version.
+	* Note that this data shall not be transferred to the firmware device (FD).
+	* The format of the data is either a Standard Body or Vendor-Defined Header, followed by the
+	* Reference Manifest data.
+	*
+	* See Table 7, DSP0267 v1.3.0
+	*/
+	struct variable_field reference_manifest_data;
 };
 
 /**
@@ -2327,6 +2349,14 @@ struct pldm_package_downstream_device_id_record {
 	 * If present, points into the provided package data.
 	 */
 	struct variable_field package_data;
+
+	/**
+	* A field pointing to a Reference Manifest for the downstream device.
+    * If present, this field points to the Reference Manifest data, which describes
+	*
+	* See Table 7, DSP0267 v1.3.0
+	*/
+	struct variable_field reference_manifest_data;
 };
 
 /**
@@ -2356,6 +2386,12 @@ struct pldm_package_component_image_information {
 	 * provided package data.
 	 */
 	struct variable_field component_version_string;
+
+	/**
+	 * A field that points to the component image metadata in the
+  	 * provided package data.
+    */
+	struct variable_field component_opaque_data;
 };
 
 struct pldm_package_firmware_device_id_record_iter {
