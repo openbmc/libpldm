@@ -44,6 +44,8 @@ Change categories:
 
 - pdr: Stabilize pldm_pdr_delete_by_record_handle()
 
+- firmware update: Update decode logic to handle Reference Manifest and component opaque data as per DSP0267 v1.3.
+
 ### Deprecated
 
 - utils: Deprecate `is_time_legal()`

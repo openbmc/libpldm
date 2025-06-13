@@ -368,8 +368,10 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 
 	const struct pldm_package_header_format_revision_info *info;
 	uint32_t package_header_checksum = 0;
+	uint32_t package_payload_checksum = 0;
 	size_t package_header_variable_size;
 	size_t package_header_payload_size;
+	size_t package_payload_size;
 	size_t package_header_areas_size;
 	uint16_t package_header_size;
 	PLDM_MSGBUF_DEFINE_P(buf);
@@ -495,6 +497,7 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	hdr->areas.length = package_header_areas_size;
 
 	pldm_msgbuf_extract(buf, package_header_checksum);
+	pldm_msgbuf_extract(buf, package_payload_checksum);
 
 	rc = pldm_msgbuf_complete(buf);
 	if (rc) {
@@ -504,6 +507,18 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	// TODO: pldm_edac_crc32_test(uint32_t expected, const void *data, size_t len)
 	if (package_header_checksum !=
 	    pldm_edac_crc32(data, package_header_payload_size)) {
+#if 0
+		printf("checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_header_checksum, pldm_edac_crc32(data, package_header_payload_size));
+#endif
+		return -EUCLEAN;
+	}
+
+	package_payload_size =
+		length - package_header_size - (checksums * sizeof(uint32_t));
+
+	if (package_payload_checksum !=
+	    pldm_edac_crc32((const uint8_t *)data + package_header_size,
+			    package_payload_size)) {
 #if 0
 		printf("checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_header_checksum, pldm_edac_crc32(data, package_header_payload_size));
 #endif
@@ -671,6 +686,12 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
+	rc = pldm_msgbuf_extract_uint32_to_size(
+		buf, rec->reference_manifest_data.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
 	rc = pldm_msgbuf_span_required(
 		buf, hdr->component_bitmap_bit_length / 8,
 		(void **)&rec->applicable_components.bitmap.ptr);
@@ -693,6 +714,17 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 		(void **)&rec->firmware_device_package_data.ptr);
 	if (!rec->firmware_device_package_data.length) {
 		rec->firmware_device_package_data.ptr = NULL;
+	}
+
+	if (rec->reference_manifest_data.length > 0) {
+		rc = pldm_msgbuf_span_required(
+			buf, rec->reference_manifest_data.length,
+			(void **)&rec->reference_manifest_data.ptr);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	} else {
+		rec->reference_manifest_data.ptr = NULL;
 	}
 
 	return pldm_msgbuf_complete_consumed(buf);
@@ -3301,6 +3333,12 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
+	rc = pldm_msgbuf_extract_uint32_to_size(
+		buf, rec->reference_manifest_data.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
 	rc = pldm_msgbuf_span_required(
 		buf, hdr->component_bitmap_bit_length / 8,
 		(void **)&rec->applicable_components.bitmap.ptr);
@@ -3328,6 +3366,16 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 	pldm_msgbuf_span_required(buf, rec->package_data.length,
 				  (void **)&rec->package_data.ptr);
 
+	if (rec->reference_manifest_data.length > 0) {
+		rc = pldm_msgbuf_span_required(
+			buf, rec->reference_manifest_data.length,
+			(void **)&rec->reference_manifest_data.ptr);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	} else {
+		rec->reference_manifest_data.ptr = NULL;
+	}
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
@@ -3413,6 +3461,15 @@ int decode_pldm_package_component_image_information_from_iter(
 
 	pldm_msgbuf_span_required(buf, info->component_version_string.length,
 				  (void **)&info->component_version_string.ptr);
+
+	rc = pldm_msgbuf_extract_uint32_to_size(
+		buf, info->component_opaque_data.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_span_required(buf, info->component_opaque_data.length,
+				  (void **)&info->component_opaque_data.ptr);
 
 	pldm_msgbuf_span_remaining(buf, (void **)&iter->field.ptr,
 				   &iter->field.length);
