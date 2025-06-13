@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53b3bd01_db2ff975",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-13T07:46:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44b27238_a43f7922",
+      "revId": "44c59b67db47b5c56065f7e825836832d82148b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8f0bd8f_f6a91266",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c8e63be_3637b8ac",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-13T07:46:41Z",
+      "side": 1,
+      "message": "Yep, good catch.",
+      "parentUuid": "b8f0bd8f_f6a91266",
+      "revId": "44c59b67db47b5c56065f7e825836832d82148b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c61a388_05592d03",
@@ -65,6 +101,24 @@
       "writtenOn": "2025-06-11T20:04:22Z",
       "side": 1,
       "message": "Again,I think it should be be 43 for format revision 0x01",
+      "revId": "44c59b67db47b5c56065f7e825836832d82148b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbb92727_a67ef964",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-13T07:46:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5c61a388_05592d03",
       "revId": "44c59b67db47b5c56065f7e825836832d82148b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

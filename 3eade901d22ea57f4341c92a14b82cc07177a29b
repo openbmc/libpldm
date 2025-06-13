@@ -16,6 +16,24 @@
       "message": "Since length of UUID is not defined as fixed explicitly in the spec, should we avoid hardcoding it to 17 here ?",
       "revId": "3eade901d22ea57f4341c92a14b82cc07177a29b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab723fdb_088c2a14",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-13T07:46:41Z",
+      "side": 1,
+      "message": "It\u0027s defined in the spec by normative reference. See the reference on lines 233-234 in Section 2 of DSP0267 v1.3.0. The length of a UUID isn\u0027t about to change:\n\n\u003e A UUID is 128 bits long\n\nhttps://www.ietf.org/rfc/rfc4122.txt\n\nIf it does change, everything else is broken. Given that, 17 is the offset of `package_header_size` in `data`. That value isn\u0027t something that\u0027s recorded in `pldm_package_header_information_pad` as it\u0027s metadata about the package header, which is not something consumers of the new iterator APIs need. So the implementation here needs to extract it itself.\n\nWe know this is safe to do because if we reach this point we know the `decode_pldm_package_header_info_errno()` call succeeded and that the access must therefore be in-bounds.",
+      "parentUuid": "b74c314e_7ee20f9c",
+      "revId": "3eade901d22ea57f4341c92a14b82cc07177a29b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
