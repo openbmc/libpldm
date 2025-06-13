@@ -175,6 +175,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c40026e2_6c5ba2d7",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3358,
+      "author": {
+        "id": 1002431
+      },
+      "writtenOn": "2025-06-13T10:25:48Z",
+      "side": 1,
+      "message": "Removed all the logs",
+      "parentUuid": "4ec03cd9_23fb8c9e",
+      "revId": "bcff8c8944b4a4fbb700130cae1bf5dc8f3fab8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be14d0b5_00f0bf8c",
