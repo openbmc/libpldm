@@ -5165,7 +5165,8 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
     EXPECT_EQ(nr_ddrec_desc, 0);
 
     static const pldm_package_component_image_information expected_info{
-        0x000a, 0x0000, 0xffffffff, {0}, {1}, {nullptr, 1}, 0x01, {nullptr, 0}};
+        0x000a,       0x0000, 0xffffffff,   {0},         {1},
+        {nullptr, 1}, 0x01,   {nullptr, 0}, {nullptr, 0}};
 
     foreach_pldm_package_component_image_information(iter, info, rc)
     {
@@ -5188,6 +5189,10 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
         EXPECT_EQ(memcmp("v0.2", info.component_version_string.ptr,
                          info.component_version_string.length),
                   0);
+        EXPECT_EQ(info.component_opaque_data.length,
+                  expected_info.component_opaque_data.length);
+        EXPECT_EQ(info.component_opaque_data.ptr,
+                  expected_info.component_opaque_data.ptr);
 
         nr_infos++;
     }
@@ -5366,6 +5371,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
                          {1},
                          {nullptr, 1},
                          0x01,
+                         {nullptr, 0},
                          {nullptr, 0}},
                         {0x000a,
                          0x0000,
@@ -5374,6 +5380,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
                          {1},
                          {nullptr, 1},
                          0x01,
+                         {nullptr, 0},
                          {nullptr, 0}}}};
     static const std::array<uint8_t, 2> expected_images{0x5a, 0xa5};
 
