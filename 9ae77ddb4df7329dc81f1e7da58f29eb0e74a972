@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "56579db4_6d57e6f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-13T06:39:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc51e5ee_63a7019c",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 11
+      },
+      "revId": "9ae77ddb4df7329dc81f1e7da58f29eb0e74a972",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ff8d9dfc_6ada5c7e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 9
@@ -64,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26b1948b_d3917811",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3292,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-13T06:39:31Z",
+      "side": 1,
+      "message": "Good catch, thanks.",
+      "parentUuid": "5a237196_fd0417ba",
+      "range": {
+        "startLine": 3291,
+        "startChar": 0,
+        "endLine": 3292,
+        "endChar": 63
+      },
+      "revId": "9ae77ddb4df7329dc81f1e7da58f29eb0e74a972",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8206132_ac21c343",
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9defe06_388293d9",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3406,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-13T06:39:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a8206132_ac21c343",
+      "range": {
+        "startLine": 3406,
+        "startChar": 0,
+        "endLine": 3406,
+        "endChar": 63
+      },
+      "revId": "9ae77ddb4df7329dc81f1e7da58f29eb0e74a972",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e6fb697_2ee9524f",
@@ -100,6 +172,30 @@
       "writtenOn": "2025-06-12T09:40:11Z",
       "side": 1,
       "message": "shouldn\u0027t this be done just after extracting component_classification ?",
+      "range": {
+        "startLine": 3424,
+        "startChar": 0,
+        "endLine": 3428,
+        "endChar": 2
+      },
+      "revId": "9ae77ddb4df7329dc81f1e7da58f29eb0e74a972",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa3d5a7f_79235c3f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3428,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-13T06:39:31Z",
+      "side": 1,
+      "message": "Either is fine. Doing it here saves a few lines of error handling.",
+      "parentUuid": "4e6fb697_2ee9524f",
       "range": {
         "startLine": 3424,
         "startChar": 0,
