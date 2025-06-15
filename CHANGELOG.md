@@ -19,6 +19,20 @@ Change categories:
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.13.0] 2025-06-15
+
+### Added
+
 - utils: Introduce `pldm_edac_crc32()`
 - utils: Introduce `pldm_edac_crc8()`
 - pdr: Add pldm_pdr_delete_by_effecter_id() API
@@ -85,8 +99,6 @@ Change categories:
 ### Fixed
 
 - meson: Define LIBPLDM_ABI_DEPRECATED_UNSAFE as empty as required
-
-### Security
 
 ## [0.12.0] 2025-04-05
 
