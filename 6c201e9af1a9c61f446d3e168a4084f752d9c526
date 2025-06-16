@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c17d7838_c29d7ad1",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2506,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-06-16T07:19:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6b64071c_00338356",
+      "revId": "6c201e9af1a9c61f446d3e168a4084f752d9c526",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdff8807_63725c34",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-06-13T02:16:18Z",
       "side": 1,
       "message": "Please leave this as `LIBPLDM_ABI_TESTING` - it\u0027s use isn\u0027t demonstrated in the patch linked in the commit message",
+      "revId": "6c201e9af1a9c61f446d3e168a4084f752d9c526",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d2f8a73_9649067b",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2523,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-06-16T07:19:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bdff8807_63725c34",
       "revId": "6c201e9af1a9c61f446d3e168a4084f752d9c526",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
