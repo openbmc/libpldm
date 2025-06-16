@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "976784a1_6b58bf5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-16T01:02:05Z",
+      "side": 1,
+      "message": "The patch needs to be rebased. From there it should implement support for the newer versions of the packaging format in their entirety, and expose the necessary pin macros.",
+      "revId": "eb79971b75dabf88fb58966f920e0e6a5c5e986c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fe754f1_e394670c",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 2179,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-16T01:02:05Z",
+      "side": 1,
+      "message": "Can we please try to avoid exposing the checksum value?\n\nWe should be able to test this in the library implementation and return an error on failure.",
+      "revId": "eb79971b75dabf88fb58966f920e0e6a5c5e986c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3c4d04b_cc502dad",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 2440,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-16T01:02:05Z",
+      "side": 1,
+      "message": "Testing the checksum internal to the implementation should remove the need for this.",
+      "revId": "eb79971b75dabf88fb58966f920e0e6a5c5e986c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
