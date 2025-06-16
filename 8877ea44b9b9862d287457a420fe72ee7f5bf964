@@ -16,6 +16,23 @@
       "message": "I have pushed https://gerrit.openbmc.org/c/openbmc/pldm/+/81062 for removing PLDM_INVALID_TRANSFER_OPERATION_FLAG from pldm repository too.",
       "revId": "8877ea44b9b9862d287457a420fe72ee7f5bf964",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9265d36_61ed1057",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-16T01:04:02Z",
+      "side": 1,
+      "message": "The patch should be rebased in light of the v0.13.0 tag.",
+      "revId": "8877ea44b9b9862d287457a420fe72ee7f5bf964",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
