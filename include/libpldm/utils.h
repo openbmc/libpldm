@@ -29,7 +29,6 @@ struct variable_field {
  *  @return The checksum
  */
 uint8_t pldm_edac_crc8(const void *data, size_t size);
-uint8_t crc8(const void *data, size_t size);
 
 /** @brief Compute crc32 (same as the one used by IEEE802.3)
  *
@@ -38,7 +37,6 @@ uint8_t crc8(const void *data, size_t size);
  *  @return The checksum
  */
 uint32_t pldm_edac_crc32(const void *data, size_t size);
-uint32_t crc32(const void *data, size_t size);
 
 /** @brief Convert ver32_t to string
  *  @param[in] version - Pointer to ver32_t

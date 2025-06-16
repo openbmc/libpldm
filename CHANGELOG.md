@@ -25,6 +25,11 @@ Change categories:
 
 ### Removed
 
+- Previously deprecated symbols:
+
+  - `crc32()`: Users must switch to `pldm_edac_crc32()`
+  - `crc8()`: Users must switch to `pldm_edac_crc8()`
+
 ### Fixed
 
 ### Security

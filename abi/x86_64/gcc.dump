@@ -260,7 +260,7 @@ $VAR1 = {
     },
     '5932' => {
       'Header' => 'utils.h',
-      'Line' => '110',
+      'Line' => '108',
       'Param' => {
         '0' => {
           'name' => 'transfer_flag',
@@ -272,7 +272,7 @@ $VAR1 = {
     },
     '5992' => {
       'Header' => 'utils.h',
-      'Line' => '101',
+      'Line' => '99',
       'Param' => {
         '0' => {
           'name' => 'seconds',
@@ -304,7 +304,7 @@ $VAR1 = {
     },
     '6236' => {
       'Header' => 'utils.h',
-      'Line' => '89',
+      'Line' => '87',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -316,7 +316,7 @@ $VAR1 = {
     },
     '6365' => {
       'Header' => 'utils.h',
-      'Line' => '83',
+      'Line' => '81',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -328,7 +328,7 @@ $VAR1 = {
     },
     '6468' => {
       'Header' => 'utils.h',
-      'Line' => '77',
+      'Line' => '75',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -340,7 +340,7 @@ $VAR1 = {
     },
     '6584' => {
       'Header' => 'utils.h',
-      'Line' => '71',
+      'Line' => '69',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -352,7 +352,7 @@ $VAR1 = {
     },
     '6687' => {
       'Header' => 'utils.h',
-      'Line' => '65',
+      'Line' => '63',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -364,7 +364,7 @@ $VAR1 = {
     },
     '6740' => {
       'Header' => 'utils.h',
-      'Line' => '59',
+      'Line' => '57',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -376,7 +376,7 @@ $VAR1 = {
     },
     '6793' => {
       'Header' => 'utils.h',
-      'Line' => '53',
+      'Line' => '51',
       'Param' => {
         '0' => {
           'name' => 'version',
@@ -399,7 +399,6 @@ $VAR1 = {
       'ShortName' => 'ver2str'
     },
     '6922' => {
-      'Alias' => 'pldm_edac_crc8',
       'Header' => 'utils.h',
       'Line' => '31',
       'Param' => {
@@ -416,12 +415,11 @@ $VAR1 = {
         '1' => 'rdx'
       },
       'Return' => '135',
-      'ShortName' => 'crc8'
+      'ShortName' => 'pldm_edac_crc8'
     },
     '7036' => {
-      'Alias' => 'pldm_edac_crc32',
       'Header' => 'utils.h',
-      'Line' => '40',
+      'Line' => '39',
       'Param' => {
         '0' => {
           'name' => 'data',
@@ -436,7 +434,7 @@ $VAR1 = {
         '1' => 'rcx'
       },
       'Return' => '147',
-      'ShortName' => 'crc32'
+      'ShortName' => 'pldm_edac_crc32'
     },
     '11984' => {
       'Header' => 'base.h',
@@ -9394,8 +9392,6 @@ $VAR1 = {
       'bcd2dec16' => 1,
       'bcd2dec32' => 1,
       'bcd2dec8' => 1,
-      'crc32' => 1,
-      'crc8' => 1,
       'dec2bcd16' => 1,
       'dec2bcd32' => 1,
       'dec2bcd8' => 1,
