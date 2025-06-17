@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "041205ed_6e80217d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T12:00:04Z",
+      "side": 1,
+      "message": "Closing this discussion thread since the iterator APIs which were merged already provide a much more high-level and ergonomic C API.\n\nLet me know if there is still a need to have a different API.",
+      "parentUuid": "ec5716cf_4b7f4003",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2788d134_f278dbc9",
