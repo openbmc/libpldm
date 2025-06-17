@@ -349,6 +349,12 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
   - This should be the case regardless of whether we're in the happy path at the
     end of object lifetime or an error path during construction.
 
+- [ ] I've declared variables in [reverse-christmas-tree (inverted pyramid)
+      order][hisham-make-pyramids] in any block scopes I've added or changed.
+
+[hisham-make-pyramids]:
+  https://web.archive.org/web/20220404224603/https://hisham.hm/2018/06/16/when-listing-repeated-things-make-pyramids/
+
 ### Testing
 
 - [ ] I've implemented test cases with reasonable branch coverage of each new
