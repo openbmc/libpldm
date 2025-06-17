@@ -21,6 +21,8 @@ Change categories:
 
 ### Changed
 
+- Stabilised `decode_get_event_receiver_resp()`
+
 ### Deprecated
 
 ### Removed

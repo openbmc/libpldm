@@ -5735,6 +5735,26 @@ $VAR1 = {
       'Return' => '53',
       'ShortName' => 'encode_set_event_receiver_req'
     },
+    '277670' => {
+      'Header' => 'platform.h',
+      'Line' => '2481',
+      'Param' => {
+        '0' => {
+          'name' => 'msg',
+          'type' => '1497'
+        },
+        '1' => {
+          'name' => 'payload_length',
+          'type' => '164'
+        },
+        '2' => {
+          'name' => 'resp',
+          'type' => '279190'
+        }
+      },
+      'Return' => '53',
+      'ShortName' => 'decode_get_event_receiver_resp'
+    },
     '280806' => {
       'Header' => 'platform.h',
       'Line' => '1577',
@@ -9418,6 +9438,7 @@ $VAR1 = {
       'decode_get_commands_resp' => 1,
       'decode_get_date_time_resp' => 1,
       'decode_get_downstream_firmware_parameters_resp' => 1,
+      'decode_get_event_receiver_resp' => 1,
       'decode_get_file_table_req' => 1,
       'decode_get_file_table_resp' => 1,
       'decode_get_firmware_parameters_resp' => 1,
@@ -12753,6 +12774,49 @@ $VAR1 = {
       'Size' => '3',
       'Type' => 'Typedef'
     },
+    '217168' => {
+      'Header' => 'platform.h',
+      'Line' => '1093',
+      'Memb' => {
+        '0' => {
+          'name' => 'mctp_eid',
+          'offset' => '0',
+          'type' => '135'
+        },
+        '1' => {
+          'name' => 'vendor_specific',
+          'offset' => '0',
+          'type' => '7680'
+        }
+      },
+      'Name' => 'anon-union-platform.h-1093',
+      'Size' => '16',
+      'Type' => 'Union'
+    },
+    '217202' => {
+      'Header' => 'platform.h',
+      'Line' => '1090',
+      'Memb' => {
+        '0' => {
+          'name' => 'completion_code',
+          'offset' => '0',
+          'type' => '135'
+        },
+        '1' => {
+          'name' => 'transport_protocol_type',
+          'offset' => '1',
+          'type' => '135'
+        },
+        '2' => {
+          'name' => 'event_receiver_address',
+          'offset' => '8',
+          'type' => '217168'
+        }
+      },
+      'Name' => 'struct pldm_get_event_receiver_resp',
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
     '217504' => {
       'Header' => 'platform.h',
       'Line' => '1178',
@@ -12905,6 +12969,12 @@ $VAR1 = {
     '239296' => {
       'BaseType' => '217504',
       'Name' => 'struct pldm_get_state_effecter_states_resp*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '279190' => {
+      'BaseType' => '217202',
+      'Name' => 'struct pldm_get_event_receiver_resp*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
