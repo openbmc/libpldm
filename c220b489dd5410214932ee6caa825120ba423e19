@@ -1,0 +1,261 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "319ab420_14c99c8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "Can probably drop this?",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f684903_27dc26cc",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "This _must_ be a separate change.",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 33
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4afc212_2bc04197",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "At some point I think we should put some thought into how we can tidy this up a bit via the C API.",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d200707_ec7ad0ec",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "Can you order these in reverse-christmas-tree?",
+      "range": {
+        "startLine": 70,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 44
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42316365_1ae64588",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "Need to test `rc` here to catch any decoding error detected in the descriptor parsing.",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "526432c0_872167fb",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "This should be at best an `assert()`. If we\u0027re looking for bugs in the library implementation we should rather add tests.",
+      "range": {
+        "startLine": 106,
+        "startChar": 1,
+        "endLine": 110,
+        "endChar": 4
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67729c75_a4096317",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "Can we instead store the bitmap for now, and resolve the relationships to components later, when we have the image ranges?\n\nThis seems messy as it is, and not really an improvement over the variable-length bitset.",
+      "range": {
+        "startLine": 116,
+        "startChar": 1,
+        "endLine": 135,
+        "endChar": 1
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc8e8546_63353ad3",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "You\u0027re pinning the parsing to format revision 1, so no need to implement anything relating to downstream devices. This can be removed entirely. The library implementation is aware of the caller constraints via the pin (this is the purpose of the pin).",
+      "range": {
+        "startLine": 163,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 3
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84051b4c_605583ea",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "These properties are upheld by the library implementation, no need to re-test them here. Component image infos whose component data exceeds the package bounds will cause an `-EOVERFLOW` return. That could probably be documented better, but for now see:\n\nhttps://github.com/openbmc/libpldm/blob/74689ccc07d86deda89715e692d239e94c0e1241/src/dsp/firmware_update.c#L3445-L3461",
+      "range": {
+        "startLine": 195,
+        "startChar": 3,
+        "endLine": 207,
+        "endChar": 4
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "970faebb_57300aae",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "Tidy up all the empty lines?",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e483279_7ef93f87",
+        "filename": "bindings/cpp/utils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "Please be specific about the lint you\u0027re disabling. Don\u0027t blanket-disable them like this.",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aecf6b2_e3f68d16",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "Still not sold on almost all of this. Someone please add some comments as to _why_ this is required.",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0be102a7_176e6a23",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-17T01:00:10Z",
+      "side": 1,
+      "message": "Why is this change necessary?",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
