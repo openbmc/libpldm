@@ -167,7 +167,7 @@ pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
 As mentioned above, all new functions must first be added in the testing
 category (using the `LIBPLDM_ABI_TESTING` annotation).
 
-To move a function from the testing category to the stable category, its
+To move a function from the testing category to the stable category, it's
 required that patches demonstrating use of the function in a dependent
 application or library be linked in the commit message of the stabilisation
 change. We require this to demonstrate that the implementer has considered its
