@@ -198,6 +198,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3651a592_0865d302",
+        "filename": "include/libpldm/bindings/cpp/utils.hpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T13:05:07Z",
+      "side": 1,
+      "message": "moved the header and added some lines in ```include/libpldm/meson.build``` to install the relevant headers from the C++ binding 👍",
+      "parentUuid": "dd9fcff5_6f8db296",
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b371100_55d0d08f",
@@ -350,6 +368,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fe853ec_681fd4bf",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T13:05:07Z",
+      "side": 1,
+      "message": "file not part of diff anymore since rebasing on your changes.",
+      "parentUuid": "3b91473d_171a49d6",
+      "range": {
+        "startLine": 506,
+        "startChar": 1,
+        "endLine": 507,
+        "endChar": 42
+      },
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d219ae1_da9e87d8",
@@ -363,6 +405,24 @@
       "writtenOn": "2025-01-28T01:01:04Z",
       "side": 1,
       "message": "Please no. I prefer you use `pldm_msgbuf_span_remaining()` before calling `pldm_msgbuf_destroy()`.",
+      "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c48e5b42_7f0e878e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T13:05:07Z",
+      "side": 1,
+      "message": "file not part of diff anymore since rebasing on your changes.",
+      "parentUuid": "0d219ae1_da9e87d8",
       "revId": "0ee055d3d3cb8c8ebaebc609b941e0a53b27d6b4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

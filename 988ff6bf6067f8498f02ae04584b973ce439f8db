@@ -230,6 +230,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1ba5800_102794e4",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T13:05:07Z",
+      "side": 1,
+      "message": "Using the newer iterator macros now, thanks for implementing 😊\n\nAgree the C++ binding should use the most high-level API available from the C side and try to avoid manual memory handling.",
+      "parentUuid": "d4f8f6f9_c352278d",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d63ac7b_4bd604fc",
@@ -397,6 +421,30 @@
       "side": 1,
       "message": "Sorry, my comment wasn\u0027t as specific as it should have been. I was not concerned about the use of `std::format`.\n\nThe code is parsing the provided message byte buffer. That\u0027s not the responsibility of the C++ binding, that\u0027s the core responsibility of the (C) library. Internally, libpldm provides a number of mechanisms to ensure spatial memory safety and correct handling of endianness that are both ergonomic to use and generate code with good performance. Specifically, the APIs provided by `src/msgbuf.h`. Those are completely dodged by this implementation. This is not code I wish to maintain. Reviewing stuff like this requires constant vigilance to prevent CVEs (which I will fail at), whereas use of the msgbuf APIs allows me to assume no unsafe accesses are performed or incorrect representations generated, or if there are bugs of this nature, they can be fixed centrally to the benefit of the rest of the library implementation.\n\nThere should be C APIs to extract the necessary data to (unpacked) C structs, and from there you can populate your C++ classes (though, possibly it would make sense to embed the C struct as a member in the class). If we do not yet have C APIs to do the job, then it\u0027s a deficiency of the (C) library that must first be fixed.",
       "parentUuid": "2229a524_cc0235f6",
+      "range": {
+        "startLine": 234,
+        "startChar": 2,
+        "endLine": 292,
+        "endChar": 1
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7018b10_a19a49cb",
+        "filename": "bindings/cxx/package_parser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T13:05:07Z",
+      "side": 1,
+      "message": "I think the concerns here are fixed with my usage of the newer libpldm iterator macros, otherwise let me know 😊",
+      "parentUuid": "9d847ea2_7db661ac",
       "range": {
         "startLine": 234,
         "startChar": 2,
@@ -618,6 +666,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aaab580_d3ff9c7d",
+        "filename": "bindings/cxx/package_parser.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T13:05:07Z",
+      "side": 1,
+      "message": "combined the APIs now to only provide a single call to parse the entire package.",
+      "parentUuid": "7e16dd5a_5138b7a8",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 23
+      },
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bed7c060_9dfa6e62",
@@ -738,6 +810,24 @@
       "side": 1,
       "message": "\u003e That\u0027s not really usable, the Component Version String is not in the struct.\nSo i need to use the using ComponentImageInfo \u003d ....\n\nRight. Both structs you quote use `__attribute__((packed))`, and as outlined in the changes checklist [this is not the desired style moving forward](https://github.com/openbmc/libpldm/blob/main/docs/checklists/changes.md?plain\u003d1#L134-L135). The APIs were created prior to current design tastes and I don\u0027t doubt that we could come up with a better design. I\u0027m asking you to do so, in the C APIs, so the C++ APIs remain purely a translation of ergonomics between available language features.\n\nI have reservations about abstracting over the string types. libpldm should not be prescribing any specific string codec implementation. What are your suggestions here? You need to consider the impact of any new dependencies on using libpldm in freestanding applications (host firmware, device firmware, etc). You mustn\u0027t assume OpenBMC or glibc.",
       "parentUuid": "70b0dcd8_25b02cd5",
+      "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "496f8311_41864889",
+        "filename": "bindings/cxx/types.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T13:05:07Z",
+      "side": 1,
+      "message": "\u003e I have reservations about abstracting over the string types. libpldm should not be prescribing any specific string codec implementation.\n\nI want to provide an API which is actually useful, and not push all the complexity onto the user. Not aware of any C++ string type which can support all of the string encodings from the spec.\n\nJust passing the plain buffer means every user will have to roll their own code to deal with it or pull in some dependency.\n\nI do not want to use libiconv, utfcpp, or any of the boost stuff and pull it in here.\n\nChanged the implementation of the ```toString``` utility to receive the string type\nas argument and return an empty string in case the encoding is unsupported.",
+      "parentUuid": "b4e4ee34_ed675038",
       "revId": "988ff6bf6067f8498f02ae04584b973ce439f8db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
