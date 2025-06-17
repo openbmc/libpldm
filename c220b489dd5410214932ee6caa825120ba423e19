@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f47c0660_dba3c45c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T10:51:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "319ab420_14c99c8f",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f684903_27dc26cc",
@@ -81,6 +99,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "922cfcf2_381c8eb9",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T10:51:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d200707_ec7ad0ec",
+      "range": {
+        "startLine": 70,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 44
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42316365_1ae64588",
@@ -98,6 +140,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce66581f_8a2a4c3c",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T10:51:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42316365_1ae64588",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "526432c0_872167fb",
@@ -111,6 +171,30 @@
       "writtenOn": "2025-06-17T01:00:10Z",
       "side": 1,
       "message": "This should be at best an `assert()`. If we\u0027re looking for bugs in the library implementation we should rather add tests.",
+      "range": {
+        "startLine": 106,
+        "startChar": 1,
+        "endLine": 110,
+        "endChar": 4
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf5300c7_0f931d57",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T10:51:31Z",
+      "side": 1,
+      "message": "Removed it for now 😊",
+      "parentUuid": "526432c0_872167fb",
       "range": {
         "startLine": 106,
         "startChar": 1,
@@ -190,6 +274,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c4d671d_b3cd9630",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T10:51:31Z",
+      "side": 1,
+      "message": "Ok, removed those checks.",
+      "parentUuid": "84051b4c_605583ea",
+      "range": {
+        "startLine": 195,
+        "startChar": 3,
+        "endLine": 207,
+        "endChar": 4
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "970faebb_57300aae",
@@ -203,6 +311,24 @@
       "writtenOn": "2025-06-17T01:00:10Z",
       "side": 1,
       "message": "Tidy up all the empty lines?",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28484bc9_1997b08e",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T10:51:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "970faebb_57300aae",
       "revId": "c220b489dd5410214932ee6caa825120ba423e19",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -241,6 +367,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4de3a7c9_627e106e",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T10:51:31Z",
+      "side": 1,
+      "message": "Added a comment inside the namespace.\n\nWhen representing the structure of the PLDM packgage, we can use classes/structs or the plain STL containers.\n\nI am using STL containers since that what was the original PackageParser was doing.\n\nThe upside is that we do not have to define any constructors or worry about encapsulation. And all of the STL algorithms work well with the STL containers.\n\nThe downside is that we expose the complete public API of the various STL containers which may not be needed. And we don\u0027t have the opportunity to add our own member functions.\n\nWhen using STL containers, we cannot name any members so we may need type aliases to prevent any confusion.",
+      "parentUuid": "5aecf6b2_e3f68d16",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0be102a7_176e6a23",
@@ -254,6 +398,24 @@
       "writtenOn": "2025-06-17T01:00:10Z",
       "side": 1,
       "message": "Why is this change necessary?",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71d71374_2ee8561f",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T10:51:31Z",
+      "side": 1,
+      "message": "```meson.build``` defines ```libpldm_headers```\nand in the current revision ```subdir(\u0027include\u0027)``` is after \n```subdir(\u0027bindings/cpp\u0027)```.\n\nSo i made this change here to avoid overwriting the variable.",
+      "parentUuid": "0be102a7_176e6a23",
       "revId": "c220b489dd5410214932ee6caa825120ba423e19",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

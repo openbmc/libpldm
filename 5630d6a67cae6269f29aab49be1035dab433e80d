@@ -387,6 +387,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c2db37c_d27dae87",
+        "filename": "meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-17T10:51:31Z",
+      "side": 1,
+      "message": "I\u0027m not sure if there is actually a mix-up in CI, or if it is using clang for everything.\n\nBut since i am introducing this as a potential problem, added a check in ```meson.build``` to ensure we use the same compiler project for both C and C++.",
+      "parentUuid": "68a87d07_4fddf434",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a85326f8_95c501d1",
