@@ -112,6 +112,120 @@
 
 - `assert()` is the recommended way to demonstrate invariants are upheld.
 
+## Library background
+
+### The ABI lifecycle
+
+```mermaid
+---
+title: libpldm symbol lifecycle
+---
+stateDiagram-v2
+    direction LR
+    [*] --> Testing: Add
+    Testing --> Testing: Change
+    Testing --> [*]: Remove
+    Testing --> Stable: Stabilise
+    Stable --> Deprecated: Deprecate
+    Deprecated --> [*]: Remove
+```
+
+The ABI of the library produced by the build is controlled using the `abi` meson
+option. The following use cases determine how the `abi` option should be
+specified:
+
+| Use Case    | Meson Configuration               |
+| ----------- | --------------------------------- |
+| Production  | `-Dabi=deprecated,stable`         |
+| Maintenance | `-Dabi=stable`                    |
+| Development | `-Dabi=deprecated,stable,testing` |
+
+### Maintenance
+
+Applications and libraries that depend on `libpldm` can identify how to migrate
+off of deprecated APIs by constraining the library ABI to the stable category.
+This will force the compiler identify any call-sites that try to link against
+deprecated symbols.
+
+### Development
+
+Applications and libraries often require functionality that doesn't yet exist in
+`libpldm`. The work is thus in two parts:
+
+1. Add the required APIs to `libpldm`
+2. Use the new APIs from `libpldm` in the dependent application or library
+
+Adding APIs to a library is a difficult task. Generally, once an API is exposed
+in the library's ABI, any changes to the API risk breaking applications already
+making use of it. To make sure we have more than one shot at getting an API
+right, all new APIs must first be exposed in the testing category. Concretely:
+
+Patches adding new APIs MUST mark them as testing and MUST NOT mark them as
+stable.
+
+### Marking functions as testing, stable or deprecated
+
+Three macros are provided through `config.h` (automatically included for all
+translation units) to mark functions as testing, stable or deprecated:
+
+1. `LIBPLDM_ABI_TESTING`
+2. `LIBPLDM_ABI_STABLE`
+3. `LIBPLDM_ABI_DEPRECATED`
+
+These annotations go immediately before your function signature:
+
+```c
+LIBPLDM_ABI_TESTING
+pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
+                                            pldm_tid_t tid,
+                                            const void *pldm_req_msg,
+                                            size_t req_msg_len)
+{
+    ...
+}
+```
+
+### What does it mean to mark a function as stable?
+
+Marking a function as stable makes the following promise to users of the
+library:
+
+> We will not remove or change the symbol name, argument count, argument types,
+> return type, or interpretation of relevant values for the function before
+> first marking it as `LIBPLDM_ABI_DEPRECATED` and then subsequently creating a
+> tagged release
+
+Marking a function as stable does _not_ promise that it is free of
+implementation bugs. It is just a promise that the prototype won't change
+without notice.
+
+Given this, it is always okay to implement functions marked stable in terms of
+functions marked testing inside of libpldm. If we remove or change the prototype
+of a function marked testing the only impact is that we need to fix up any call
+sites of that function in the same patch.
+
+### Requirements for stabilising a function
+
+To move a function from the testing category to the stable category, it's
+required that patches demonstrating use of the function in a dependent
+application or library be linked in the commit message of the stabilisation
+change. We require this to demonstrate that the implementer has considered its
+use in context _before_ preventing us from making changes to the API.
+
+### Building a dependent application or library against a testing ABI
+
+Meson is broadly used in the OpenBMC ecosystem, the historical home of
+`libpldm`. Meson's subprojects are a relatively painless way of managing
+dependencies for the purpose of developing complex applications and libraries.
+Use of `libpldm` as a subproject is both supported and encouraged.
+
+`libpldm`'s ABI can be controlled from a parent project through meson's
+subproject configuration syntax:
+
+```shell
+meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
+```
+
 ## Adding a new API
 
 ### Naming macros, functions and types
@@ -251,6 +365,26 @@
 
 - [ ] If my work impacts the public API of the library, then I've added an entry
       to `CHANGELOG.md` describing my work
+
+### OEM/vendor-specific APIs
+
+- [ ] I've documented the wire format for all OEM messages under
+      `docs/oem/${OEM_NAME}/`
+
+- [ ] I've added public OEM API declarations and definitions under
+      `include/libpldm/oem/${OEM_NAME}/`, and installed them to the same
+      relative location.
+
+- [ ] I've implemented the public OEM APIs under `src/oem/${OEM_NAME}/`
+
+- [ ] I've implemented the OEM API tests under `tests/oem/${OEM_NAME}/`
+
+The `${OEM_NAME}` folder must be created with the name of the OEM/vendor in
+lower case.
+
+Finally, the OEM name must be added to the list of choices for the `oem` meson
+option, and the `meson.build` files updated throughout the tree to guard
+integration of the OEM extensions.
 
 ## Stabilising an existing API
 
