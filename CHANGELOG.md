@@ -1,4 +1,4 @@
-# Changelog
+#Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -26,6 +26,7 @@ Change categories:
 - platform: Add encode req & decode resp for GetEventReceiver
 - pdr: Add pldm_pdr_delete_by_sensor_id() API
 - pdr: Add pldm_entity_association_tree_delete_node() API
+- base: Add decode_set_tid_req() API
 
 - oem: ibm: Add boot side rename state set and enum
 
@@ -33,7 +34,14 @@ Change categories:
   that occurs during an out-of-band code update.
 
 - firmware update: Add encode/decode API for downstream device update command
+- base: Add `PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION` completion code
 - Introduce interator-based firmware update package parsing APIs
+
+- firmware update: Add support for PLDM 1.2 and 1.3 by: Adding
+  `reference_manifest_data`, `component_opaque_data`, and `payload_checksum`
+  fields to relevant data structures Implementing decode functionality for these
+  fields to correctly parse their contents Added unit tests for PLDM 1.3 to
+  verify the new decoding functionality
 
 ### Changed
 
@@ -44,8 +52,15 @@ Change categories:
 
 - pdr: Stabilize pldm_pdr_delete_by_record_handle()
 
-- firmware update: Support Reference Manifest, opaque data, and payload checksum
-  per DSP0267 v1.3.
+- fw_update: Return `PLDM_FWUP_INVALID_TRANSFER_OPERATION_FLAG` instead of
+  `PLDM_INVALID_TRANSFER_OPERATION_FLAG` in `encode_pass_component_table_req()`
+  command.
+
+- base: Return valid completion code from `decode_multipart_receive_req()`
+
+  As per the base specification `PLDM_INVALID_TRANSFER_OPERATION_FLAG` (`0x21`)
+  is inaccurate. Reduce the usage of it by returning
+  `PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION` (code 0x23) instead.
 
 ### Deprecated
 
