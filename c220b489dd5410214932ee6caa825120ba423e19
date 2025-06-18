@@ -230,6 +230,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4d4158c_1f9be756",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-18T16:49:03Z",
+      "side": 1,
+      "message": "\u003e Can we instead store the bitmap for now, and resolve the relationships to components later, when we have the image ranges?\n\nHow do the image ranges help with the task?\n\n\u003e This seems messy as it is, and not really an improvement over the variable-length bitset.\n\nUsing an STL container avoids the multi-level abstraction with the bitfield.\n\nTo find out if a component is applicable, ```std::find``` or similar will work with the STL container.\n\nWith the bitfield, one would need a special API function or first index into the bitfield and then mask + shift, keeping in mind the endianness of the bitfield.\n\nExtracted the iteration there into a separate function and golfed it to only use a single loop.",
+      "parentUuid": "67729c75_a4096317",
+      "range": {
+        "startLine": 116,
+        "startChar": 1,
+        "endLine": 135,
+        "endChar": 1
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc8e8546_63353ad3",
         "filename": "bindings/cpp/firmware_update.cpp",
         "patchSetId": 11
