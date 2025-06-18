@@ -1,4 +1,4 @@
-# Changelog
+#Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -57,6 +57,12 @@ Change categories:
 - firmware update: Add encode/decode API for downstream device update command
 - base: Add `PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION` completion code
 - Introduce interator-based firmware update package parsing APIs
+
+- firmware update: Add support for PLDM 1.2 and 1.3 by: Adding
+  `reference_manifest_data`, `component_opaque_data`, and `payload_checksum`
+  fields to relevant data structures Implementing decode functionality for these
+  fields to correctly parse their contents Added unit tests for PLDM 1.3 to
+  verify the new decoding functionality
 
 ### Changed
 
