@@ -77,6 +77,7 @@ Change categories:
 - Add flags parameter to `decode_pldm_firmware_update_package()`
 - Add NOLINT to `pldm__package_header_information` to prevent clang-tidy errors.
 - Updated PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH macro comment.
+- Added ACKNOWLEDGE_COMPLETION flag to transfer_resp_flag list.
 
 ### Deprecated
 
