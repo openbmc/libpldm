@@ -340,7 +340,7 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	static const struct pldm_package_header_format_revision_info {
 		pldm_uuid identifier;
 		size_t magic;
-	} revision_info[1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H] = {
+	} revision_info[1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H] = {
 		[0] = {
 			.identifier = {0},
 			.magic = 0,
@@ -364,17 +364,43 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string) +
 				LIBPLDM_SIZEAT(struct pldm_package_iter, infos),
 		},
+		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H] = { /* PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H */
+			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2,
+			.magic =
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package) +
+				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) +
+				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
+				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, package_data) +
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string) +
+				LIBPLDM_SIZEAT(struct pldm_package_iter, infos),
+		},
+		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H] = { /* PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H */
+			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3,
+			.magic =
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package) +
+				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) +
+				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
+				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, package_data) +
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string) +
+				LIBPLDM_SIZEAT(struct pldm_package_iter, infos),
+		},
 	};
 
 	const struct pldm_package_header_format_revision_info *info;
 	uint32_t package_header_checksum = 0;
+	uint32_t package_payload_checksum = 0;
 	size_t package_header_variable_size;
 	size_t package_header_payload_size;
+	size_t package_payload_size;
 	size_t package_header_areas_size;
 	uint16_t package_header_size;
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int checksums = 1;
 	int rc;
+
+	if (pin->format.revision >= PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
+		checksums = 2;
+	}
 
 	if (pin->meta.version > 0) {
 		return -ENOTSUP;
@@ -384,11 +410,11 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 		return -EINVAL;
 	}
 
-	if (pin->format.revision > PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H) {
+	if (pin->format.revision > PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
 		return -ENOTSUP;
 	}
 	static_assert(ARRAY_SIZE(revision_info) ==
-			      1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H,
+			      1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H,
 		      "Mismatched array bounds test");
 
 	info = &revision_info[pin->format.revision];
@@ -420,6 +446,14 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 		   hdr->package_header_identifier,
 		   sizeof(hdr->package_header_identifier)) != 0 &&
 	    memcmp(revision_info[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H]
+			   .identifier,
+		   hdr->package_header_identifier,
+		   sizeof(hdr->package_header_identifier)) != 0 &&
+	    memcmp(revision_info[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H]
+			   .identifier,
+		   hdr->package_header_identifier,
+		   sizeof(hdr->package_header_identifier)) != 0 &&
+	    memcmp(revision_info[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H]
 			   .identifier,
 		   hdr->package_header_identifier,
 		   sizeof(hdr->package_header_identifier)) != 0) {
@@ -496,6 +530,10 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 
 	pldm_msgbuf_extract(buf, package_header_checksum);
 
+	if (pin->format.revision >= PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
+		pldm_msgbuf_extract(buf, package_payload_checksum);
+	}
+
 	rc = pldm_msgbuf_complete(buf);
 	if (rc) {
 		return rc;
@@ -508,6 +546,20 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 		printf("checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_header_checksum, pldm_edac_crc32(data, package_header_payload_size));
 #endif
 		return -EUCLEAN;
+	}
+
+	package_payload_size = length - package_header_size;
+
+	if (pin->format.revision >= PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
+		if (package_payload_checksum !=
+		    pldm_edac_crc32((const uint8_t *)data + package_header_size,
+				    package_payload_size)) {
+#if 0
+			printf("checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_payload_checksum, pldm_edac_crc32((const uint8_t *)data + package_header_size,
+							package_payload_size));
+#endif
+			return -EUCLEAN;
+		}
 	}
 
 	/* We stash these to resolve component images later */
@@ -671,6 +723,18 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
+	if (hdr->package_header_format_revision >=
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
+		rc = pldm_msgbuf_extract_uint32_to_size(
+			buf, rec->reference_manifest_data.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	} else {
+		rec->reference_manifest_data.length = 0;
+		rec->reference_manifest_data.ptr = NULL;
+	}
+
 	rc = pldm_msgbuf_span_required(
 		buf, hdr->component_bitmap_bit_length / 8,
 		(void **)&rec->applicable_components.bitmap.ptr);
@@ -693,6 +757,19 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 		(void **)&rec->firmware_device_package_data.ptr);
 	if (!rec->firmware_device_package_data.length) {
 		rec->firmware_device_package_data.ptr = NULL;
+	}
+
+	if (hdr->package_header_format_revision >=
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
+		rc = pldm_msgbuf_span_required(
+			buf, rec->reference_manifest_data.length,
+			(void **)&rec->reference_manifest_data.ptr);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	}
+	if (!rec->reference_manifest_data.length) {
+		rec->reference_manifest_data.ptr = NULL;
 	}
 
 	return pldm_msgbuf_complete_consumed(buf);
@@ -3309,6 +3386,17 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
+	if (hdr->package_header_format_revision >=
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
+		rc = pldm_msgbuf_extract_uint32_to_size(
+			buf, rec->reference_manifest_data.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	} else {
+		rec->reference_manifest_data.length = 0;
+	}
+
 	rc = pldm_msgbuf_span_required(
 		buf, hdr->component_bitmap_bit_length / 8,
 		(void **)&rec->applicable_components.bitmap.ptr);
@@ -3335,6 +3423,20 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 
 	pldm_msgbuf_span_required(buf, rec->package_data.length,
 				  (void **)&rec->package_data.ptr);
+
+	// Supported in package header revision 1.3 (FR04H) and above.
+	if (hdr->package_header_format_revision >=
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
+		rc = pldm_msgbuf_span_required(
+			buf, rec->reference_manifest_data.length,
+			(void **)&rec->reference_manifest_data.ptr);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	}
+	if (!rec->reference_manifest_data.length) {
+		rec->reference_manifest_data.ptr = NULL;
+	}
 
 	return pldm_msgbuf_complete_consumed(buf);
 }
@@ -3428,6 +3530,25 @@ int decode_pldm_package_component_image_information_from_iter(
 
 	pldm_msgbuf_span_required(buf, info->component_version_string.length,
 				  (void **)&info->component_version_string.ptr);
+
+	// Supported in package header revision 1.2 (FR03H) and above.
+	if (hdr->package_header_format_revision >=
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H) {
+		rc = pldm_msgbuf_extract_uint32_to_size(
+			buf, info->component_opaque_data.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		pldm_msgbuf_span_required(
+			buf, info->component_opaque_data.length,
+			(void **)&info->component_opaque_data.ptr);
+	} else {
+		info->component_opaque_data.length = 0;
+	}
+
+	if (info->component_opaque_data.length == 0) {
+		info->component_opaque_data.ptr = NULL;
+	}
 
 	pldm_msgbuf_span_remaining(buf, (void **)&iter->field.ptr,
 				   &iter->field.length);
