@@ -108,6 +108,7 @@ enum transfer_resp_flag {
 	PLDM_MIDDLE = 0x02,
 	PLDM_END = 0x04,
 	PLDM_START_AND_END = 0x05,
+	PLDM_ACKNOWLEDGE_COMPLETION = 0x08,
 };
 
 /** @brief PLDM transport protocol type
