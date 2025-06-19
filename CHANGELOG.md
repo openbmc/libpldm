@@ -19,6 +19,12 @@ Change categories:
 
 ### Added
 
+- firmware update: Add support for PLDM 1.2 and 1.3 by: Adding
+  `reference_manifest_data`, `component_opaque_data`, and `payload_checksum`
+  fields to relevant data structures Implementing decode functionality for these
+  fields to correctly parse their contents Added unit tests for PLDM 1.3 to
+  verify the new decoding functionality
+
 ### Changed
 
 - Stabilised `decode_get_event_receiver_resp()`
