@@ -815,6 +815,25 @@ int encode_pldm_base_negotiate_transfer_params_req(
 	const struct pldm_base_negotiate_transfer_params_req *req,
 	struct pldm_msg *msg, size_t *payload_length);
 
+/** @brief Decode a PLDM Negotiate Transfer Parameters request message
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - length of request message payload
+ *  @param[out] req - pointer to the decoded request message
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated
+ *          -EOVERFLOW if the input message buffer is too short for the output
+ *          request struct
+ *          -EBADMSG if the input message buffer is too large for the output
+ *          request struct
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int decode_pldm_base_negotiate_transfer_params_req(
+	const struct pldm_msg *msg,
+	struct pldm_base_negotiate_transfer_params_req *req,
+	size_t payload_length);
+
 /** @brief Decode a PLDM Negotiate Transfer Parameters response message
  *
  *  @param[in] msg - Response message
