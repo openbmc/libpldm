@@ -22,6 +22,7 @@ Change categories:
 - platform: Added file descriptor PDR encoding support
   - Added `encode_pldm_platform_file_descriptor_pdr()`
 - utils: Added `pldm_edac_cumulative_crc32()`
+- base: Added `decode_pldm_base_negotiate_transfer_params_req()`
 
 ### Changed
 

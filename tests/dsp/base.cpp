@@ -1741,3 +1741,105 @@ TEST(DecodeNegotiateTransferParamsResponse,
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(NegotiateTransferParams, TestDecodeNegotiateTransferParamsReqPass)
+{
+    // Prepare a sample request message
+    uint8_t instance_id = 0x0A;
+    uint16_t requester_part_size = 1024; // 0x0400
+    bitfield8_t requester_protocol_support[8];
+    for (int i = 0; i < 8; ++i)
+    {
+        requester_protocol_support[i].byte = static_cast<uint8_t>(i + 1);
+    }
+
+    std::vector<uint8_t> request_msg_bytes(
+        sizeof(pldm_msg_hdr) +
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+    // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
+    struct pldm_msg* request =
+        reinterpret_cast<struct pldm_msg*>(request_msg_bytes.data());
+    // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
+
+    // Build the request using the an appropriate API
+    struct pldm_base_negotiate_transfer_params_req req;
+    req.requester_part_size = requester_part_size;
+    memcpy(req.requester_protocol_support, requester_protocol_support,
+           sizeof(requester_protocol_support));
+
+    size_t req_payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES;
+    ASSERT_EQ(encode_pldm_base_negotiate_transfer_params_req(
+                  instance_id, &req, request, &req_payload_len),
+              0);
+
+    struct pldm_base_negotiate_transfer_params_req decoded_req;
+    size_t payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES;
+
+    // Successful decode
+    int rc = decode_pldm_base_negotiate_transfer_params_req(
+        request, &decoded_req, payload_len);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(decoded_req.requester_part_size, requester_part_size);
+    for (int i = 0; i < 8; ++i)
+    {
+        EXPECT_EQ(decoded_req.requester_protocol_support[i].byte,
+                  requester_protocol_support[i].byte);
+    }
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(NegotiateTransferParams, TestDecodeNegotiateTransferParamsReqFail)
+{
+    // Prepare a sample request message
+    uint8_t instance_id = 0x0A;
+    uint16_t requester_part_size = 1024; // 0x0400
+    bitfield8_t requester_protocol_support[8];
+    for (int i = 0; i < 8; ++i)
+    {
+        requester_protocol_support[i].byte = static_cast<uint8_t>(i + 1);
+    }
+
+    std::vector<uint8_t> request_msg_bytes(
+        sizeof(pldm_msg_hdr) +
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+    // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
+    struct pldm_msg* request =
+        reinterpret_cast<struct pldm_msg*>(request_msg_bytes.data());
+    // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
+
+    // Build the request using the an appropriate API
+    struct pldm_base_negotiate_transfer_params_req req;
+    req.requester_part_size = requester_part_size;
+    memcpy(req.requester_protocol_support, requester_protocol_support,
+           sizeof(requester_protocol_support));
+
+    size_t req_payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES;
+    ASSERT_EQ(encode_pldm_base_negotiate_transfer_params_req(
+                  instance_id, &req, request, &req_payload_len),
+              0);
+
+    struct pldm_base_negotiate_transfer_params_req decoded_req;
+    size_t payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES;
+    int rc = 0;
+
+    // Null arguments
+    rc = decode_pldm_base_negotiate_transfer_params_req(nullptr, &decoded_req,
+                                                        payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+    rc = decode_pldm_base_negotiate_transfer_params_req(request, nullptr,
+                                                        payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Incorrect payload length - too short
+    rc = decode_pldm_base_negotiate_transfer_params_req(request, &decoded_req,
+                                                        payload_len - 1);
+    EXPECT_EQ(rc, -EOVERFLOW);
+
+    // Incorrect payload length - too long
+    rc = decode_pldm_base_negotiate_transfer_params_req(request, &decoded_req,
+                                                        payload_len + 1);
+    EXPECT_EQ(rc, -EBADMSG);
+}
+#endif
