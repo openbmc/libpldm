@@ -834,7 +834,85 @@ int encode_pldm_base_negotiate_transfer_params_req(
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_TESTING
+int decode_pldm_base_negotiate_transfer_params_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_negotiate_transfer_params_req *req)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES,
+		msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, req->requester_part_size);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	rc = pldm_msgbuf_extract_array(
+		buf, sizeof(req->requester_protocol_support),
+		(uint8_t *)req->requester_protocol_support,
+		sizeof(req->requester_protocol_support));
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_base_negotiate_transfer_params_resp(
+	uint8_t instance_id,
+	const struct pldm_base_negotiate_transfer_params_resp *resp,
+	struct pldm_msg *msg, size_t payload_length)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (resp == NULL || msg == NULL) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_RESPONSE;
+	header.pldm_type = PLDM_BASE;
+	header.command = PLDM_NEGOTIATE_TRANSFER_PARAMETERS;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES,
+		msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, resp->completion_code);
+	pldm_msgbuf_insert(buf, resp->responder_part_size);
+	rc = pldm_msgbuf_insert_array(
+		buf, sizeof(resp->responder_protocol_support),
+		(uint8_t *)resp->responder_protocol_support,
+		sizeof(resp->responder_protocol_support));
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete(buf);
+}
+
+LIBPLDM_ABI_TESTING
 int decode_pldm_base_negotiate_transfer_params_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_base_negotiate_transfer_params_resp *resp)

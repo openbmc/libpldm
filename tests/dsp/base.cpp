@@ -1641,3 +1641,215 @@ TEST(DecodeNegotiateTransferParamsResponse,
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(NegotiateTransferParams, TestDecodeNegotiateTransferParamsReqPass)
+{
+    // Prepare a sample request message
+    uint8_t instance_id = 0x0A;
+    uint16_t requester_part_size = 1024; // 0x0400
+    bitfield8_t requester_protocol_support[8];
+    for (int i = 0; i < 8; ++i)
+    {
+        requester_protocol_support[i].byte = static_cast<uint8_t>(i + 1);
+    }
+
+    std::vector<uint8_t> request_msg_bytes(
+        sizeof(pldm_msg_hdr) +
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+    // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
+    struct pldm_msg* request =
+        reinterpret_cast<struct pldm_msg*>(request_msg_bytes.data());
+    // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
+
+    // Build the request using the an appropriate API
+    struct pldm_base_negotiate_transfer_params_req req;
+    req.requester_part_size = requester_part_size;
+    memcpy(req.requester_protocol_support, requester_protocol_support,
+           sizeof(requester_protocol_support));
+
+    size_t req_payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES;
+    ASSERT_EQ(encode_pldm_base_negotiate_transfer_params_req(
+                  instance_id, &req, request, &req_payload_len),
+              0);
+
+    struct pldm_base_negotiate_transfer_params_req decoded_req;
+    size_t payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES;
+
+    // Successful decode
+    int rc = decode_pldm_base_negotiate_transfer_params_req(
+        request, payload_len, &decoded_req);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(decoded_req.requester_part_size, requester_part_size);
+    for (int i = 0; i < 8; ++i)
+    {
+        EXPECT_EQ(decoded_req.requester_protocol_support[i].byte,
+                  requester_protocol_support[i].byte);
+    }
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(NegotiateTransferParams, TestDecodeNegotiateTransferParamsReqFail)
+{
+    // Prepare a sample request message
+    uint8_t instance_id = 0x0A;
+    uint16_t requester_part_size = 1024; // 0x0400
+    bitfield8_t requester_protocol_support[8];
+    for (int i = 0; i < 8; ++i)
+    {
+        requester_protocol_support[i].byte = static_cast<uint8_t>(i + 1);
+    }
+
+    std::vector<uint8_t> request_msg_bytes(
+        sizeof(pldm_msg_hdr) +
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+    // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
+    struct pldm_msg* request =
+        reinterpret_cast<struct pldm_msg*>(request_msg_bytes.data());
+    // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
+
+    // Build the request using the an appropriate API
+    struct pldm_base_negotiate_transfer_params_req req;
+    req.requester_part_size = requester_part_size;
+    memcpy(req.requester_protocol_support, requester_protocol_support,
+           sizeof(requester_protocol_support));
+
+    size_t req_payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES;
+    ASSERT_EQ(encode_pldm_base_negotiate_transfer_params_req(
+                  instance_id, &req, request, &req_payload_len),
+              0);
+
+    struct pldm_base_negotiate_transfer_params_req decoded_req;
+    size_t payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES;
+    int rc = 0;
+
+    // Null arguments
+    rc = decode_pldm_base_negotiate_transfer_params_req(nullptr, payload_len,
+                                                        &decoded_req);
+    EXPECT_EQ(rc, -EINVAL);
+    rc = decode_pldm_base_negotiate_transfer_params_req(request, payload_len,
+                                                        nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Incorrect payload length - too short
+    rc = decode_pldm_base_negotiate_transfer_params_req(
+        request, payload_len - 1, &decoded_req);
+    EXPECT_EQ(rc, -EOVERFLOW);
+
+    // Incorrect payload length - too long
+    rc = decode_pldm_base_negotiate_transfer_params_req(
+        request, payload_len + 1, &decoded_req);
+    EXPECT_EQ(rc, -EBADMSG);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(NegotiateTransferParams, TestEncodeNegotiateTransferParamsRespPass)
+{
+    // Prepare encode parameters for a successful response
+    uint8_t instance_id = 0x0B;
+    uint8_t completion_code_success = PLDM_SUCCESS;
+    uint16_t responder_part_size = 2048; // 0x0800
+    bitfield8_t responder_protocol_support[8];
+    for (int i = 0; i < 8; ++i)
+    {
+        responder_protocol_support[i].byte = static_cast<uint8_t>(0xA0 + i);
+    }
+
+    struct pldm_base_negotiate_transfer_params_resp resp_params_success;
+    resp_params_success.completion_code = completion_code_success;
+    resp_params_success.responder_part_size = responder_part_size;
+    memcpy(resp_params_success.responder_protocol_support,
+           responder_protocol_support, sizeof(responder_protocol_support));
+
+    std::vector<uint8_t> response_msg_bytes(
+        sizeof(pldm_msg_hdr) +
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES);
+    // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
+    struct pldm_msg* response =
+        reinterpret_cast<struct pldm_msg*>(response_msg_bytes.data());
+    // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
+    size_t payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES;
+
+    // Encode success case
+    int rc = encode_pldm_base_negotiate_transfer_params_resp(
+        instance_id, &resp_params_success, response, payload_len);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(response->hdr.request, PLDM_RESPONSE);
+    EXPECT_EQ(response->hdr.instance_id, instance_id);
+    EXPECT_EQ(response->hdr.type, PLDM_BASE);
+    EXPECT_EQ(response->hdr.command, PLDM_NEGOTIATE_TRANSFER_PARAMETERS);
+
+    // Verify the encoded response using the decode function
+    struct pldm_base_negotiate_transfer_params_resp decoded_resp;
+    rc = decode_pldm_base_negotiate_transfer_params_resp(response, payload_len,
+                                                         &decoded_resp);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(decoded_resp.completion_code, completion_code_success);
+    EXPECT_EQ(decoded_resp.responder_part_size, responder_part_size);
+    for (int i = 0; i < 8; ++i)
+    {
+        EXPECT_EQ(decoded_resp.responder_protocol_support[i].byte,
+                  responder_protocol_support[i].byte);
+    }
+}
+
+TEST(NegotiateTransferParams, TestEncodeNegotiateTransferParamsRespFail)
+{
+    // Prepare encode parameters
+    uint8_t instance_id = 0x0B;
+    uint8_t completion_code_success = PLDM_SUCCESS;
+    uint16_t responder_part_size = 2048; // 0x0800
+    bitfield8_t responder_protocol_support[8];
+    for (int i = 0; i < 8; ++i)
+    {
+        responder_protocol_support[i].byte = static_cast<uint8_t>(0xA0 + i);
+    }
+
+    struct pldm_base_negotiate_transfer_params_resp resp_params_success;
+    resp_params_success.completion_code = completion_code_success;
+    resp_params_success.responder_part_size = responder_part_size;
+    memcpy(resp_params_success.responder_protocol_support,
+           responder_protocol_support, sizeof(responder_protocol_support));
+
+    std::vector<uint8_t> response_msg_bytes(
+        sizeof(pldm_msg_hdr) +
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES);
+    // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
+    struct pldm_msg* response =
+        reinterpret_cast<struct pldm_msg*>(response_msg_bytes.data());
+    // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
+    size_t payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES;
+    int rc = 0;
+
+    // Encode error case (only completion code matters)
+    uint8_t completion_code_error = PLDM_ERROR;
+    struct pldm_base_negotiate_transfer_params_resp resp_params_error;
+    resp_params_error.completion_code = completion_code_error;
+    
+    // Other fields can be garbage if CC is not success
+    rc = encode_pldm_base_negotiate_transfer_params_resp(
+        instance_id, &resp_params_error, response, payload_len);
+    ASSERT_EQ(rc, 0);
+    
+    struct pldm_base_negotiate_transfer_params_resp decoded_resp;
+    rc = decode_pldm_base_negotiate_transfer_params_resp(response, payload_len,
+                                                         &decoded_resp);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(decoded_resp.completion_code, completion_code_error);
+
+    // Null arguments
+    rc = encode_pldm_base_negotiate_transfer_params_resp(instance_id, nullptr,
+                                                         response, payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+    rc = encode_pldm_base_negotiate_transfer_params_resp(
+        instance_id, &resp_params_success, nullptr, payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Incorrect payload length
+    rc = encode_pldm_base_negotiate_transfer_params_resp(
+        instance_id, &resp_params_success, response, payload_len - 1);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
