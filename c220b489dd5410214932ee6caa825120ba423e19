@@ -254,6 +254,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ca29fc7_d1ef6836",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-19T00:55:53Z",
+      "side": 1,
+      "message": "\u003e \u003e Can we instead store the bitmap for now, and resolve the relationships to components later, when we have the image ranges?\n\u003e\n\u003e How do the image ranges help with the task?\n\nI don\u0027t understand the question. The definition of ApplicableComponents in DSP0267 v1.3.0 Table 4 is:\n\n\u003e Bitmap of which firmware components are applicable to FDs which match this Device Identifier\nrecord. A set bit N indicates the Nth (0-based) component in the payload (which is described by the Nth entry in the component information area of the package header) is applicable to this device.\n\nThe whole point is to associate component images with a firmware device.\n\nI\u0027m proposing we stash the bitmap as-is for now, until we\u0027ve processed all the component images. After that can create a structure that directly lists the component images for a given firmware device, rather than leaving it to the library consumer to resolve the images from the bitmap themselves. That way we\u0027re not exposing this variable-length bitmap with slightly troubling semantics (regarding the potential discrepancy between the available bits and the number of component images), or just a raw list of indexes. We can use [std::reference_wrapper](https://en.cppreference.com/w/cpp/utility/functional/reference_wrapper.html) to maintain the actual component image infos in a canonical list and references to these objects in the list maintained in the firmware device object.",
+      "parentUuid": "b4d4158c_1f9be756",
+      "range": {
+        "startLine": 116,
+        "startChar": 1,
+        "endLine": 135,
+        "endChar": 1
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc8e8546_63353ad3",
         "filename": "bindings/cpp/firmware_update.cpp",
         "patchSetId": 11
@@ -423,6 +447,24 @@
       "side": 1,
       "message": "Added a comment inside the namespace.\n\nWhen representing the structure of the PLDM packgage, we can use classes/structs or the plain STL containers.\n\nI am using STL containers since that what was the original PackageParser was doing.\n\nThe upside is that we do not have to define any constructors or worry about encapsulation. And all of the STL algorithms work well with the STL containers.\n\nThe downside is that we expose the complete public API of the various STL containers which may not be needed. And we don\u0027t have the opportunity to add our own member functions.\n\nWhen using STL containers, we cannot name any members so we may need type aliases to prevent any confusion.",
       "parentUuid": "5aecf6b2_e3f68d16",
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca9af71e_9011b726",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-19T00:55:53Z",
+      "side": 1,
+      "message": "The point about STL containers is fine, but much of what\u0027s in this header are aliases for standard integer types. Why? And why are we decomposing these things from their natural representation as a struct into tuples of aliased types? That\u0027s not an ergonomioc API in my opinion, and is not something I intend to maintain.\n\nWe don\u0027t have to swallow whatever API design was done in pldmd. We can try to do better.",
+      "parentUuid": "4de3a7c9_627e106e",
       "revId": "c220b489dd5410214932ee6caa825120ba423e19",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
