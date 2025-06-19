@@ -97,6 +97,16 @@ uint32_t pldm_edac_crc32(const void *data, size_t size)
 	return crc ^ ~0U;
 }
 
+LIBPLDM_ABI_TESTING
+uint32_t pldm_edac_crc32_extend(const void *data, size_t size, uint32_t crc)
+{
+	const uint8_t *p = data;
+	crc ^= ~0U;
+	while (size--)
+		crc = crc32_tab[(crc ^ *p++) & 0xff] ^ (crc >> 8);
+	return crc ^ ~0U;
+}
+
 int pldm_edac_crc32_validate(uint32_t expected, const void *data, size_t size)
 {
 	if (!data && size) { /* data is NULL but size is not zero */
