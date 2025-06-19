@@ -13,6 +13,18 @@ TEST(Crc32, CheckSumTest)
     EXPECT_EQ(checksum, 0xcbf43926);
 }
 
+TEST(Crc32, CumulativeCheckSumTest)
+{
+    const char* password = "123456789ABCD";
+    auto password_len = strlen(password);
+    auto expected_checksum = pldm_edac_crc32(password, password_len);
+
+    auto partial_checksum = pldm_edac_crc32(password, password_len - 5);
+    auto final_checksum = pldm_edac_crc32_extend(password + password_len - 5, 5,
+                                                 partial_checksum);
+    EXPECT_EQ(final_checksum, expected_checksum);
+}
+
 TEST(Crc8, CheckSumTest)
 {
     const char* data = "123456789";
