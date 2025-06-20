@@ -23,3 +23,10 @@ option(
     type: 'boolean',
     description: 'Enable transport implementation',
 )
+option(
+    'tools',
+    type: 'array',
+    description: 'Tools to build with the library',
+    choices: ['pd'],
+    value: ['pd'],
+)
