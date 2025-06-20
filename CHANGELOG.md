@@ -23,6 +23,8 @@ Change categories:
 - firmware update: Add support for DSP0267 v1.2.0 by adding
   `component_opaque_data` fields to correctly parse their contents.
 - firmware_update: Add 1.3.0 version updates.
+- platform: Add SetStateSensorEnables and SetNumericSensorEnable responder
+  decode.
 
 - firmware update: Add support for DSP0267 v1.3.0 by: Adding
   `reference_manifest_data` and `payload_checksum` fields to correctly parse
