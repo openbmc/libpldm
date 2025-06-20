@@ -3594,6 +3594,210 @@ TEST(GetSensorReading, testBadDecodeResponse)
 }
 
 #ifdef LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testDecodeRequest)
+{
+    int rc;
+    uint16_t sensor_id;
+    enum pldm_set_sensor_operational_state op_state;
+    enum pldm_sensor_event_message_enable event_enable;
+
+    const std::array<uint8_t, hdrSize + 5> req
+        // PLDM header
+        {
+            PLDM_PLATFORM, 0x80, PLDM_SET_NUMERIC_SENSOR_ENABLE,
+            0x67,          0x45, // sensor ID 0x4567
+            0x00,                // sensorOperationalState
+            0x01,                // sensorEventMessageEnable
+            0x00,                // extra
+        };
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto msg = reinterpret_cast<const pldm_msg*>(req.data());
+
+    // Good decode
+    rc = decode_set_numeric_sensor_enable_req(msg, 4, &sensor_id, &op_state,
+                                              &event_enable);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(sensor_id, 0x4567);
+    EXPECT_EQ(op_state, PLDM_SENSOR_ENABLED);
+    EXPECT_EQ(event_enable, PLDM_EVENTS_DISABLED);
+
+    // Fail short
+    rc = decode_set_numeric_sensor_enable_req(msg, 3, &sensor_id, &op_state,
+                                              &event_enable);
+    EXPECT_NE(rc, PLDM_SUCCESS);
+    // Fail long
+    rc = decode_set_numeric_sensor_enable_req(msg, 5, &sensor_id, &op_state,
+                                              &event_enable);
+    EXPECT_NE(rc, PLDM_SUCCESS);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testDecodeInvalidOpRequest)
+{
+    int rc;
+    uint16_t sensor_id;
+    enum pldm_set_sensor_operational_state op_state;
+    enum pldm_sensor_event_message_enable event_enable;
+
+    const std::array<uint8_t, hdrSize + 4> req
+        // PLDM header
+        {
+            PLDM_PLATFORM, 0x80, PLDM_SET_NUMERIC_SENSOR_ENABLE,
+            0x67,          0x45, // sensor ID 0x4567
+            0x30,                // Invalid sensorOperationalState
+            0x01,                // sensorEventMessageEnable
+        };
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto msg = reinterpret_cast<const pldm_msg*>(req.data());
+
+    // Good decode
+    rc = decode_set_numeric_sensor_enable_req(msg, 4, &sensor_id, &op_state,
+                                              &event_enable);
+    EXPECT_EQ(rc, PLDM_PLATFORM_INVALID_SENSOR_OPERATIONAL_STATE);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testDecodeInvalidEventRequest)
+{
+    int rc;
+    uint16_t sensor_id;
+    enum pldm_set_sensor_operational_state op_state;
+    enum pldm_sensor_event_message_enable event_enable;
+
+    const std::array<uint8_t, hdrSize + 4> req
+        // PLDM header
+        {
+            PLDM_PLATFORM, 0x80, PLDM_SET_NUMERIC_SENSOR_ENABLE,
+            0x67,          0x45, // sensor ID 0x4567
+            0x00,                // sensorOperationalState
+            0x77,                // Invalid sensorEventMessageEnable
+        };
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto msg = reinterpret_cast<const pldm_msg*>(req.data());
+
+    // Good decode
+    rc = decode_set_numeric_sensor_enable_req(msg, 4, &sensor_id, &op_state,
+                                              &event_enable);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testDecodeRequest)
+{
+    int rc;
+    uint16_t sensor_id;
+    struct pldm_set_state_sensor_enable_field fields[3];
+    uint8_t count;
+
+    const std::array<uint8_t, hdrSize + 8> req
+        // PLDM header
+        {
+            PLDM_PLATFORM, 0x80, PLDM_SET_STATE_SENSOR_ENABLES,
+            0x67,          0x45, // sensor ID 0x4567
+            0x02,                // count
+            0x01,          0x00, // field 0
+            0x02,          0x01, // field 1
+            0x00,                // extra byte
+        };
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto msg = reinterpret_cast<const pldm_msg*>(req.data());
+
+    // Good decode
+    count = 3;
+    rc =
+        decode_set_state_sensor_enables_req(msg, 7, &sensor_id, &count, fields);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(sensor_id, 0x4567);
+    EXPECT_EQ(count, 2);
+    EXPECT_EQ(fields[0].op_state, PLDM_SET_SENSOR_DISABLED);
+    EXPECT_EQ(fields[0].event_enable, PLDM_NO_EVENT_GENERATION);
+    EXPECT_EQ(fields[1].op_state, PLDM_SET_SENSOR_UNAVAILABLE);
+    EXPECT_EQ(fields[1].event_enable, PLDM_EVENTS_DISABLED);
+
+    // Short count
+    count = 1;
+    rc =
+        decode_set_state_sensor_enables_req(msg, 7, &sensor_id, &count, fields);
+    EXPECT_NE(rc, PLDM_SUCCESS);
+
+    // Short message
+    count = 2;
+    rc =
+        decode_set_state_sensor_enables_req(msg, 6, &sensor_id, &count, fields);
+    EXPECT_NE(rc, PLDM_SUCCESS);
+
+    // Overlength message
+    count = 2;
+    rc =
+        decode_set_state_sensor_enables_req(msg, 8, &sensor_id, &count, fields);
+    EXPECT_NE(rc, PLDM_SUCCESS);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testDecodeInvalidOpRequest)
+{
+    int rc;
+    uint16_t sensor_id;
+    struct pldm_set_state_sensor_enable_field fields[3];
+    uint8_t count;
+
+    const std::array<uint8_t, hdrSize + 7> req
+        // PLDM header
+        {
+            PLDM_PLATFORM, 0x80, PLDM_SET_STATE_SENSOR_ENABLES,
+            0x67,          0x45, // sensor ID 0x4567
+            0x02,                // count
+            0x01,          0x00, // field 0
+            0x99,          0x01, // field 1 invalid op
+        };
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto msg = reinterpret_cast<const pldm_msg*>(req.data());
+
+    count = 3;
+    rc =
+        decode_set_state_sensor_enables_req(msg, 7, &sensor_id, &count, fields);
+    EXPECT_NE(rc, PLDM_SUCCESS);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testDecodeInvalidEventRequest)
+{
+    int rc;
+    uint16_t sensor_id;
+    struct pldm_set_state_sensor_enable_field fields[3];
+    uint8_t count;
+
+    const std::array<uint8_t, hdrSize + 7> req
+        // PLDM header
+        {
+            PLDM_PLATFORM, 0x80, PLDM_SET_STATE_SENSOR_ENABLES,
+            0x67,          0x45, // sensor ID 0x4567
+            0x02,                // count
+            0x01,          0x00, // field 0
+            0x00,          0x77, // field 1 invalid event
+        };
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto msg = reinterpret_cast<const pldm_msg*>(req.data());
+
+    count = 3;
+    rc =
+        decode_set_state_sensor_enables_req(msg, 7, &sensor_id, &count, fields);
+    EXPECT_NE(rc, PLDM_SUCCESS);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
 TEST(GetEventReceiver, testGoodEncodeRequest)
 {
     std::array<uint8_t, hdrSize> requestMsg{};

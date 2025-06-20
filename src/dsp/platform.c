@@ -2504,6 +2504,105 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
 }
 
 LIBPLDM_ABI_TESTING
+int decode_set_numeric_sensor_enable_req(
+	const struct pldm_msg *msg, size_t payload_length, uint16_t *sensor_id,
+	enum pldm_set_sensor_operational_state *op_state,
+	enum pldm_sensor_event_message_enable *event_enable)
+{
+	uint8_t op_state_val = 0;
+	uint8_t event_enable_val = 0;
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, payload_length);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	pldm_msgbuf_extract_p(buf, sensor_id);
+	pldm_msgbuf_extract_p(buf, &op_state_val);
+	pldm_msgbuf_extract_p(buf, &event_enable_val);
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	if (op_state_val > PLDM_SET_SENSOR_UNAVAILABLE) {
+		return PLDM_PLATFORM_INVALID_SENSOR_OPERATIONAL_STATE;
+	}
+	if (event_enable_val > PLDM_STATE_EVENTS_ONLY_ENABLED) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+	*op_state = op_state_val;
+	*event_enable = event_enable_val;
+
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_set_state_sensor_enables_req(
+	const struct pldm_msg *msg, size_t payload_length, uint16_t *sensor_id,
+	uint8_t *count, struct pldm_set_state_sensor_enable_field *fields)
+{
+	uint8_t msg_count = 0;
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL) {
+		return PLDM_ERROR;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 3, msg->payload, payload_length);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	pldm_msgbuf_extract_p(buf, sensor_id);
+	rc = pldm_msgbuf_extract_p(buf, &msg_count);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	if (msg_count > *count) {
+		return pldm_msgbuf_discard(buf, PLDM_ERROR);
+	}
+
+	for (uint8_t i = 0; i < msg_count; i++) {
+		uint8_t op_state_val = 0;
+		uint8_t event_enable_val = 0;
+		pldm_msgbuf_extract_p(buf, &op_state_val);
+		rc = pldm_msgbuf_extract_p(buf, &event_enable_val);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, pldm_xlate_errno(rc));
+		}
+		if (op_state_val > PLDM_SET_SENSOR_UNAVAILABLE) {
+			return pldm_msgbuf_discard(buf,
+						   PLDM_ERROR_INVALID_DATA);
+		}
+		if (event_enable_val > PLDM_STATE_EVENTS_ONLY_ENABLED) {
+			return pldm_msgbuf_discard(buf,
+						   PLDM_ERROR_INVALID_DATA);
+		}
+		fields[i].op_state = op_state_val;
+		fields[i].event_enable = event_enable_val;
+	}
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	*count = msg_count;
+
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
 int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg,
 				  size_t payload_length LIBPLDM_CC_UNUSED)
 {
