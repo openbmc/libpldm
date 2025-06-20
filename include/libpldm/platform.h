@@ -321,6 +321,9 @@ enum pldm_platform_completion_codes {
 	PLDM_PLATFORM_INVALID_PROTOCOL_TYPE = 0x80,
 	PLDM_PLATFORM_ENABLE_METHOD_NOT_SUPPORTED = 0x81,
 	PLDM_PLATFORM_HEARTBEAT_FREQUENCY_TOO_HIGH = 0x82,
+
+	PLDM_PLATFORM_INVALID_SENSOR_OPERATIONAL_STATE = 0x81,
+	PLDM_PLATFORM_EVENT_GENERATION_NOT_SUPPORTED = 0x82,
 };
 
 /** @brief PLDM Event types
@@ -355,6 +358,15 @@ enum pldm_sensor_operational_state {
 	PLDM_SENSOR_INITIALIZING,
 	PLDM_SENSOR_SHUTTINGDOWN,
 	PLDM_SENSOR_INTEST
+};
+
+/** @brief PLDM operation states for Set Numeric/State Sensor State.
+ *  This is a subset of pldm_sensor_operational_state.
+ */
+enum pldm_set_sensor_operational_state {
+	PLDM_SET_SENSOR_ENABLED,
+	PLDM_SET_SENSOR_DISABLED,
+	PLDM_SET_SENSOR_UNAVAILABLE,
 };
 
 /** @brief PLDM pldmPDRRepositoryChgEvent class eventData format
@@ -1354,6 +1366,38 @@ struct pldm_get_sensor_reading_resp {
 	uint8_t event_state;
 	uint8_t present_reading[1];
 } __attribute__((packed));
+
+/** @struct pldm_set_numeric_sensor_enable_req
+ *
+ *  Structure representing a SetNumericSensorEnable request
+ */
+struct pldm_set_numeric_sensor_enable_req {
+	uint16_t sensor_id;
+	enum pldm_set_sensor_operational_state op_state;
+	enum pldm_sensor_event_message_enable event_enable;
+};
+
+/** @struct pldm_set_state_sensor_enable_field
+ *
+ *  Structure representing PLDM set state sensor enables fields
+ */
+struct pldm_set_state_sensor_enable_field {
+	enum pldm_set_sensor_operational_state op_state;
+	enum pldm_sensor_event_message_enable event_enable;
+};
+
+#define PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT 8
+
+/** @struct pldm_set_state_sensor_enables_req
+ *
+ *  Structure representing a SetStateSensorEnables request
+ */
+struct pldm_set_state_sensor_enables_req {
+	uint16_t sensor_id;
+	uint8_t field_count;
+	struct pldm_set_state_sensor_enable_field
+		fields[PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT];
+};
 
 /* Responder */
 
@@ -2677,6 +2721,40 @@ pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event);
  */
 int decode_pldm_file_descriptor_pdr(const void *data, size_t data_length,
 				    struct pldm_file_descriptor_pdr *pdr);
+
+/** @brief Decode SetNumericSensorEnable request
+ *
+ *  @param[in] msg - PLDM request message.
+ *  @param[in] payload_length - Length of request message.
+ *  @param[out] req - Returned decoded request. 
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EPROTO if the input request message is invalid
+ *                      -EBADMSG if the input request message is too long
+ *                      -EOVERFLOW if the input request message is too short.
+ */
+int decode_set_numeric_sensor_enable_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_set_numeric_sensor_enable_req *req);
+
+/** @brief Decode SetStateSensorEnables request
+ *
+ *  @param[in] msg - PLDM request message.
+ *  @param[in] payload_length - Length of request message.
+ *  @param[out] req - Returned decoded request. 
+ *                    .field_count is set to the number of populated fields.
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EPROTO if the input request message is invalid
+ *                      -EBADMSG if the input request message is too long
+ *                      -EOVERFLOW if the input request message is too short.
+ */
+int decode_set_state_sensor_enables_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_set_state_sensor_enables_req *req);
+
 #ifdef __cplusplus
 }
 #endif

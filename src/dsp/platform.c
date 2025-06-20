@@ -2504,6 +2504,101 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
 }
 
 LIBPLDM_ABI_TESTING
+int decode_set_numeric_sensor_enable_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_set_numeric_sensor_enable_req *req)
+{
+	int rc;
+	PLDM_MSGBUF_DEFINE_P(buf);
+	uint8_t op_state = 0;
+	uint8_t event_enable = 0;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, req->sensor_id);
+	pldm_msgbuf_extract(buf, op_state);
+	pldm_msgbuf_extract(buf, event_enable);
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	req->op_state = op_state;
+	req->event_enable = event_enable;
+
+	if (req->op_state > PLDM_SET_SENSOR_UNAVAILABLE) {
+		return -EPROTO;
+	}
+	if (req->event_enable > PLDM_STATE_EVENTS_ONLY_ENABLED) {
+		return -EPROTO;
+	}
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_set_state_sensor_enables_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_set_state_sensor_enables_req *req)
+{
+	int rc;
+	PLDM_MSGBUF_DEFINE_P(buf);
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 3, msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, req->sensor_id);
+	rc = pldm_msgbuf_extract(buf, req->field_count);
+	if (rc) {
+		return rc;
+	}
+
+	if (req->field_count < 1 ||
+	    req->field_count > PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT) {
+		return -EPROTO;
+	}
+
+	for (uint8_t i = 0; i < req->field_count; i++) {
+		uint8_t op_state_val = 0;
+		uint8_t event_enable_val = 0;
+		pldm_msgbuf_extract(buf, op_state_val);
+		rc = pldm_msgbuf_extract(buf, event_enable_val);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		if (op_state_val > PLDM_SET_SENSOR_UNAVAILABLE) {
+			return pldm_msgbuf_discard(buf, -EPROTO);
+		}
+		if (event_enable_val > PLDM_STATE_EVENTS_ONLY_ENABLED) {
+			return pldm_msgbuf_discard(buf, -EPROTO);
+		}
+		req->fields[i].op_state = op_state_val;
+		req->fields[i].event_enable = event_enable_val;
+	}
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
 int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg,
 				  size_t payload_length LIBPLDM_CC_UNUSED)
 {
