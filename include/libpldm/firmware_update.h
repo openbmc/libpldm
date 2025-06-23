@@ -2181,29 +2181,50 @@ int encode_cancel_update_resp(uint8_t instance_id,
 /** @brief Firmware update v1.1 package header format revision */
 #define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H 0x02
 
-/** @brief Client-side version pinning for package format parsing
+/** @brief Consumer-side version pinning for package format parsing
  *
  * Parsing a firmware update package requires the package to be of a revision
  * defined in the specification, for libpldm to support parsing a package
- * formatted at the specified revision, and for the client to support calling
+ * formatted at the specified revision, and for the consumer to support calling
  * libpldm's package-parsing APIs in the manner required for the package format.
  *
  * pldm_package_format_pin communicates to libpldm the maximum package format
- * revision supported by the client.
+ * revision supported by the consumer.
  *
- * The definition of the pldm_package_format_pin object in the client
+ * The definition of the pldm_package_format_pin object in the consumer
  * application should not be open-coded. Instead, users should call on of the
  * following macros:
  *
  * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H
  * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H
+ *
+ * The package pinning operates by providing versioning over multiple structs
+ * required to perform the package parsing. See [Conventions for extensible
+ * system calls][lwn-extensible-syscalls] for discussion of related concepts.
+ * Like the syscall structs described there, the structs captured here by the
+ * pinning concept must only ever be modified by addition of new members, never
+ * alteration of existing members.
+ *
+ * [lwn-extensible-syscalls]: https://lwn.net/Articles/830666/
  */
 struct pldm_package_format_pin {
 	struct {
-		/** A value that communicates information about object sizes to the implementation */
+		/**
+		 * A value that communicates information about object sizes to the implementation.
+		 *
+		 * For magic version 0, the sum must be calculated using @ref LIBPLDM_SIZEAT for
+		 * the final relevant member of each relevant struct for the format revision
+		 * represented by the pin.
+		 */
 		const uint32_t magic;
 
-		/** Versioning for the derivation of the magic value */
+		/**
+		 * Versioning for the derivation of the magic value
+		 *
+		 * A version value of 0 defines the magic number to be the sum of the relevant
+		 * struct sizes for the members required at the format revision specified by
+		 * the pin.
+		 */
 		const uint8_t version;
 	} meta;
 	struct {
