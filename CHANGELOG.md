@@ -22,6 +22,7 @@ Change categories:
 ### Changed
 
 - Stabilised `decode_get_event_receiver_resp()`
+- Improved documentation of `struct pldm_package_format_pin`
 
 ### Deprecated
 
