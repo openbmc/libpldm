@@ -1,0 +1,410 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f878f531_fa00986e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "Hi Carter, thanks for the patch. There are a few things that need addressing, and as noted in the comments I\u0027ve tried to improve some of the related documentation. Please take a look.",
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b58993b_b58ada9a",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "Can you please split the addition of support for FR03 and FR04 into separate patches? They shouldn\u0027t be mashed together this way.",
+      "range": {
+        "startLine": 2194,
+        "startChar": 0,
+        "endLine": 2203,
+        "endChar": 1
+      },
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd808385_ce57995b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2219,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "Please keep this list up-to-date with the new macros.",
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aad994f_7dc34430",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2309,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "Please wrap the comment and make sure the indentation of the stars on the left hand edge matches the style of the other doxygen comments.",
+      "range": {
+        "startLine": 2304,
+        "startChar": 1,
+        "endLine": 2309,
+        "endChar": 27
+      },
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15d7112e_c6612d67",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2951,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "You must not blindly copy/paste the derivation of the magic value. It has a specific meaning, though I admit it was under-documented. Please review this patch:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/81302\n\nIf it\u0027s still unclear what you need to adjust here, please ask questions so we can improve the documentation.",
+      "range": {
+        "startLine": 2946,
+        "startChar": 1,
+        "endLine": 2951,
+        "endChar": 53
+      },
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f55a3e79_ae45bc4b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2978,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "See comment on line 2951.",
+      "range": {
+        "startLine": 2973,
+        "startChar": 3,
+        "endLine": 2978,
+        "endChar": 53
+      },
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "956c14d6_e11aaafb",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "See related comments on the header.",
+      "range": {
+        "startLine": 367,
+        "startChar": 2,
+        "endLine": 386,
+        "endChar": 4
+      },
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48a4aa1e_e736f75c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "Move this calculation into the condition body below.",
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c09af769_042baa5a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "Please don\u0027t do raw pointer arithmetic here. We can use `pldm_msgbuf_span_remaining()` prior to `pldm_msgbuf_complete()` above to extract the pointer and length pair covering the payload.",
+      "range": {
+        "startLine": 555,
+        "startChar": 22,
+        "endLine": 555,
+        "endChar": 65
+      },
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a706dc31_1d92c30a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "Are you happy to help me with a bit of a cleanup here? It\u0027s not something I got to when writing the initial patch.\n\nI\u0027d rather we write this like:\n\n```c\nif (pldm_edac_crc32_validate(package_payload_checksum, ptr, len)) { ... }\n```\n\nThis requires we add the `pldm_edac_crc32_validate()` API, which I suggest returns 0 on miscompare, if the expected value matches the derived value, and a negative errno if some error occurs (NULL pointer?).\n\nWith that, it becomes easier to stub validations to support fuzzing, which tends to get hung up on issues such as checksum comparisons.",
+      "range": {
+        "startLine": 554,
+        "startChar": 6,
+        "endLine": 556,
+        "endChar": 29
+      },
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9319ff1_92012d41",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "Drop this `NULL` assignment, as it makes more sense on line 772 below.",
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "842f6ea0_2917b1ff",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "No need for this as we don\u0027t use the extracted pointer value before returning below.",
+      "range": {
+        "startLine": 767,
+        "startChar": 1,
+        "endLine": 769,
+        "endChar": 3
+      },
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3af1dc99_9aeb3e56",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "Just make it an `else` block and add `assert(rec-\u003ereference_manifest_data.length \u003d\u003d 0);` before the assignment of `NULL`?",
+      "range": {
+        "startLine": 770,
+        "startChar": 1,
+        "endLine": 771,
+        "endChar": 44
+      },
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cb48482_716a6727",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3398,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "See related comments above.",
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d66d423e_3b0685ae",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3439,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "See related comments above.",
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a4e5d6a_4dcade01",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3551,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "See comment about splitting FR03H vs FR04H support.",
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a353951_26c804c2",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "Should be `..._V1_3`?",
+      "range": {
+        "startLine": 51,
+        "startChar": 41,
+        "endLine": 51,
+        "endChar": 44
+      },
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95ab983_e2dfa8a7",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 5519,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "You should probably add some data in to exercise extraction of the data? It\u0027s hard to determine that we actually did the right thing in the implementation if you expect this to be zero-length.",
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f0f7cf_a672e30f",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 5563,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "326b573a_2605c51a",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 5644,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-23T01:12:14Z",
+      "side": 1,
+      "message": "Please demonstrate the extraction of component data in a separate test to the extraction of reference manifest data. This should happen naturally with splitting the patches to support FR03H and FR04H separately.",
+      "range": {
+        "startLine": 5641,
+        "startChar": 0,
+        "endLine": 5644,
+        "endChar": 55
+      },
+      "revId": "ef0a86ce801c6ef68f6d91cec5e229f95e154188",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
