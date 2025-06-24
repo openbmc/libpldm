@@ -103,7 +103,6 @@
   APIs (see error condition).
 
 - Corollaries of the above two points:
-
   - Incorrect use of public API functions is always an error condition, and is
     dealt with by returning an error code.
 
@@ -233,7 +232,6 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 - [ ] All publicly exposed macros, types and functions relating to the PLDM
       specifications must be prefixed with either `pldm_` or `PLDM_` as
       appropriate
-
   - The only (temporary) exception are the `encode_*()` and `decode_*()`
     function symbols
 
@@ -250,7 +248,6 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 
 - [ ] If I've added support for a new PLDM message type, then I've defined both
       the encoder and decoder for that message.
-
   - This applies for both request _and_ response message types.
 
 - [ ] I've designed my APIs so their implementation does not require heap
@@ -267,7 +264,6 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 
 - [ ] My new public message codec functions take a `struct` representing the
       message as a parameter
-
   - Function prototypes must _not_ decompose the message to individual
     parameters. This approach is not ergonomic and is difficult to make
     type-safe. This is especially true for message decoding functions which must
@@ -282,7 +278,6 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 
 - [ ] My new public `struct` definitions do _not_ define a flexible array
       member, unless:
-
   - [ ] It's contained in an `#ifndef __cplusplus` macro guard, as flexible
         arrays are not specified by C++, and
 
@@ -290,7 +285,6 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
         accessed from C++, and
 
   - [ ] It is defined as per the C17 specification by omitting the length[^1]
-
     - Note: Any array defined with length 1 is _not_ a flexible array, and any
       access beyond the first element invokes undefined behaviour in both C and
       C++.
@@ -322,13 +316,11 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 
 - [ ] I have not used `assert()` to evaluate any error conditions without also
       handling the error condition by returning an error code the the caller.
-
   - Release builds of the library are configured with `assert()` disabled
     (`-Db_ndebug=if-release`, which provides `-DNDEBUG` in `CFLAGS`).
 
 - [ ] My new APIs return negative `errno` values on error and not PLDM
       completion codes.
-
   - [ ] The specific error values my function returns and their meaning in the
         context of the function call are listed in the API documentation.
 
@@ -340,12 +332,10 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 
 - [ ] I've used `goto` to clean up resources acquired prior to encountering an
       error condition
-
   - Replication of resource cleanup across multiple error paths is error-prone,
     especially when multiple, dependent resources have been acquired.
 
 - [ ] I've released acquired resources in stack-order
-
   - This should be the case regardless of whether we're in the happy path at the
     end of object lifetime or an error path during construction.
 
@@ -364,7 +354,6 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 
 - [ ] If I've added support for a new message type, then my commit message
       specifies all of:
-
   - [ ] The relevant DMTF specification by its DSP number and title
   - [ ] The relevant version of the specification
   - [ ] The section of the specification that defines the message type
@@ -445,13 +434,11 @@ docker run \
 
 - [ ] If the function is marked `LIBPLDM_ABI_STABLE`, then I have changed the
       annotation to `LIBPLDM_ABI_DEPRECATED` and left it in-place.
-
   - [ ] I have updated the ABI dump, or will mark the change as WIP until it has
         been.
 
 - [ ] If the function is marked `LIBPLDM_ABI_DEPRECATED`, then I have removed it
       only after satisfying myself that each of the following is true:
-
   - [ ] There are no known users of the function left in the community
   - [ ] There has been at least one tagged release of `libpldm` subsequent to
         the API being marked deprecated

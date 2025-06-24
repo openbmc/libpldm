@@ -32,6 +32,8 @@ Change categories:
   - `crc32()`: Users must switch to `pldm_edac_crc32()`
   - `crc8()`: Users must switch to `pldm_edac_crc8()`
 
+- Remove unnecessary line breaks in Markdown files under the checklist folder
+
 ### Fixed
 
 ### Security
