@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- firmware update: Add support for DSP0267 v1.2.0 by adding
+  `component_opaque_data` fields to correctly parse their contents.
+
 ### Changed
 
 - Stabilised `decode_get_event_receiver_resp()`
