@@ -20,6 +20,8 @@ Change categories:
 ### Added
 
 - base: Add command specific completion codes.
+- firmware update: Add support for PLDM 1.2 by adding `component_opaque_data`
+  fields to correctly parse their contents.
 
 ### Changed
 

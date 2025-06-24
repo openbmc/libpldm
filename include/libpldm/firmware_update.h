@@ -2181,6 +2181,16 @@ int encode_cancel_update_resp(uint8_t instance_id,
 /** @brief Firmware update v1.1 package header format revision */
 #define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H 0x02
 
+/** @brief Firmware update v1.2 package header identifier */
+#define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2                                    \
+	{                                                                      \
+		0x31, 0x19, 0xce, 0x2f, 0xe8, 0x0a, 0x4a, 0x99,                \
+		0xaf, 0x6d, 0x46, 0xf8, 0xb1, 0x21, 0xf6, 0xbf,                \
+	}
+
+/** @brief Firmware update v1.2 package header format revision */
+#define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H 0x03
+
 /** @brief Consumer-side version pinning for package format parsing
  *
  * Parsing a firmware update package requires the package to be of a revision
@@ -2197,6 +2207,7 @@ int encode_cancel_update_resp(uint8_t instance_id,
  *
  * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H
  * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H
+ * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR03H
  *
  * The package pinning operates by providing versioning over multiple structs
  * required to perform the package parsing. See [Conventions for extensible
@@ -2371,6 +2382,12 @@ struct pldm_package_component_image_information {
 	 * provided package data.
 	 */
 	struct variable_field component_version_string;
+
+	/**
+	 * A field that points to the component opaque data in the
+  	 * provided package data.
+     */
+	struct variable_field component_opaque_data;
 };
 
 struct pldm_package_firmware_device_id_record_iter {
@@ -2903,6 +2920,33 @@ int decode_pldm_package_component_image_information_from_iter(
 		.format = { \
 			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1, \
 			.revision = PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H, \
+		} \
+	}
+
+/**
+ * Declare consumer support for at most revision 3 of the firmware update
+ * package header
+ *
+ * @param name The name for the pin object
+ *
+ * The pin object must be provided to @ref decode_pldm_firmware_update_package
+ */
+#define DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR03H(name)                             \
+	struct pldm_package_format_pin name = { \
+		.meta = { \
+			.magic = ( \
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package) + \
+				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) + \
+				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, package_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_opaque_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_iter, infos) \
+			), \
+			.version = 0u, \
+		}, \
+		.format = { \
+			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2, \
+			.revision = PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H, \
 		} \
 	}
 
