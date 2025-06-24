@@ -340,7 +340,7 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	static const struct pldm_package_header_format_revision_info {
 		pldm_uuid identifier;
 		size_t magic;
-	} revision_info[1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H] = {
+	} revision_info[1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H] = {
 		[0] = {
 			.identifier = {0},
 			.magic = 0,
@@ -364,6 +364,16 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string) +
 				LIBPLDM_SIZEAT(struct pldm_package_iter, infos),
 		},
+		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H] = { /* PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H */
+			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2,
+			.magic =
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package) +
+				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) +
+				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
+				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, package_data) +
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_opaque_data) +
+				LIBPLDM_SIZEAT(struct pldm_package_iter, infos),
+		},
 	};
 
 	const struct pldm_package_header_format_revision_info *info;
@@ -384,11 +394,11 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 		return -EINVAL;
 	}
 
-	if (pin->format.revision > PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H) {
+	if (pin->format.revision > PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H) {
 		return -ENOTSUP;
 	}
 	static_assert(ARRAY_SIZE(revision_info) ==
-			      1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H,
+			      1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H,
 		      "Mismatched array bounds test");
 
 	info = &revision_info[pin->format.revision];
@@ -420,6 +430,10 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 		   hdr->package_header_identifier,
 		   sizeof(hdr->package_header_identifier)) != 0 &&
 	    memcmp(revision_info[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H]
+			   .identifier,
+		   hdr->package_header_identifier,
+		   sizeof(hdr->package_header_identifier)) != 0 &&
+	    memcmp(revision_info[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H]
 			   .identifier,
 		   hdr->package_header_identifier,
 		   sizeof(hdr->package_header_identifier)) != 0) {
@@ -3428,6 +3442,25 @@ int decode_pldm_package_component_image_information_from_iter(
 
 	pldm_msgbuf_span_required(buf, info->component_version_string.length,
 				  (void **)&info->component_version_string.ptr);
+
+	/* Supported in package header revision 1.2 (FR03H) and above. */
+	if (hdr->package_header_format_revision >=
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H) {
+		rc = pldm_msgbuf_extract_uint32_to_size(
+			buf, info->component_opaque_data.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		pldm_msgbuf_span_required(
+			buf, info->component_opaque_data.length,
+			(void **)&info->component_opaque_data.ptr);
+	} else {
+		info->component_opaque_data.length = 0;
+	}
+
+	if (info->component_opaque_data.length == 0) {
+		info->component_opaque_data.ptr = NULL;
+	}
 
 	pldm_msgbuf_span_remaining(buf, (void **)&iter->field.ptr,
 				   &iter->field.length);
