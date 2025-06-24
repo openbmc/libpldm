@@ -19,6 +19,11 @@ Change categories:
 
 ### Added
 
+- firmware update: Add support for PLDM 1.2 by: Adding
+  `component_opaque_data`.
+  fields to correctly parse their contents Added unit tests
+  for PLDM 1.3 to verify the new decoding functionality.
+
 ### Changed
 
 - Stabilised `decode_get_event_receiver_resp()`
