@@ -7,7 +7,6 @@
 ## ABI
 
 - [ ] Generate the ABI dump for the release
-
   - This must be done from a shell session inside the OpenBMC CI Docker
     container for consistency
 
