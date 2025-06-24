@@ -32,6 +32,8 @@ Change categories:
   - `crc32()`: Users must switch to `pldm_edac_crc32()`
   - `crc8()`: Users must switch to `pldm_edac_crc8()`
 
+- Remove unnecessary line breaks in Markdown files under the checklist folder
+
 ### Fixed
 
 ### Security
@@ -166,7 +168,6 @@ Change categories:
   association PDR creation
 
 - Register allocation changed for the following APIs:
-
   - `encode_get_downstream_firmware_parameters_req()`
   - `encode_get_state_effecter_states_resp()`
   - `encode_oem_meta_file_io_read_resp()`
@@ -326,7 +327,6 @@ Change categories:
 ### Removed
 
 - Deprecated functions with the `_check` suffix
-
   - `get_fru_record_by_option_check()`
   - `pldm_bios_table_append_pad_checksum_check()`
   - `pldm_bios_table_attr_entry_enum_decode_def_num_check()`
@@ -790,7 +790,6 @@ Change categories:
 ### Removed
 
 - bios_table: Remove deprecated APIs sanitized by assert():
-
   - pldm_bios_table_string_entry_encode()
   - pldm_bios_table_string_entry_decode_string()
   - pldm_bios_table_attr_entry_enum_encode()

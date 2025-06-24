@@ -255,7 +255,6 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 
 - [ ] I've designed my APIs so their implementation does not require heap
       allocation.
-
   - Prefer [defining iterators][libpldm-iterator] over the message buffer to
     extract sub-structures from variable-length messages. Iterators avoid both
     requiring heap allocation in the implementation or splitting the API to
@@ -328,7 +327,6 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 
 - [ ] My new APIs return negative `errno` values on error and not PLDM
       completion codes.
-
   - [ ] The specific error values my function returns and their meaning in the
         context of the function call are listed in the API documentation.
 
@@ -451,7 +449,6 @@ docker run \
 
 - [ ] If the function is marked `LIBPLDM_ABI_DEPRECATED`, then I have removed it
       only after satisfying myself that each of the following is true:
-
   - [ ] There are no known users of the function left in the community
   - [ ] There has been at least one tagged release of `libpldm` subsequent to
         the API being marked deprecated
