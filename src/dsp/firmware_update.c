@@ -330,6 +330,24 @@ static bool is_non_functioning_component_indication_valid(
 	}
 }
 
+/**
+ * @brief Validate the CRC32 checksum of the given data.
+ *
+ * @return 0 	    if the checksum matches,
+ * 		   -EUCLEAN if the checksum mismatches,
+ * 		   -EFAULT  if the arguments are invalid
+ * 				   (e.g., data is NULL and size is not zero)
+ */
+LIBPLDM_ABI_TESTING
+int pldm_edac_crc32_validate(uint32_t expected, const void *data, size_t size)
+{
+	if (!data && size) { /* data is NULL but size is not zero */
+		return -EFAULT;
+	}
+	uint32_t actual = pldm_edac_crc32(data, size);
+	return (expected == actual) ? 0 : -EUCLEAN;
+}
+
 #define PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE 36
 LIBPLDM_CC_NONNULL
 static int
