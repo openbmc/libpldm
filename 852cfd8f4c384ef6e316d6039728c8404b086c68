@@ -1,0 +1,358 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64fab98f_8ac40c84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "Hi Alexander, thanks for the rework.",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fea03bd6_cc0045d4",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "Is this necessary?",
+      "range": {
+        "startLine": 182,
+        "startChar": 1,
+        "endLine": 187,
+        "endChar": 44
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e7fc320_5f7dd702",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "Please don\u0027t do this.",
+      "range": {
+        "startLine": 194,
+        "startChar": 1,
+        "endLine": 197,
+        "endChar": 65
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab626788_0dab2d80",
+        "filename": "bindings/cpp/utils.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "See comment on header.",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 1
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "743ccc10_6f693f6c",
+        "filename": "bindings/cpp/utils.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "Let me consider this.",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d53539be_a60a976f",
+        "filename": "bindings/cpp/utils.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "This doesn\u0027t implement the non-printable-characters behaviour described in the documentation (but I prefer we don\u0027t anyway).",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcc8ebda_e0306d3e",
+        "filename": "bindings/cpp/utils.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "Please rather make this use `std::expected` and just error out if there\u0027s something that can\u0027t be handled.",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 74
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4927068e_42d22b1b",
+        "filename": "bindings/cpp/utils.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "Whitespace is a bit funky above.",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "072f7cb9_ca12cd56",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a great idea. It\u0027s a has-a relationship, not an is-a. Let\u0027s do composition rather than inheritance.",
+      "range": {
+        "startLine": 18,
+        "startChar": 26,
+        "endLine": 18,
+        "endChar": 46
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "825daee2_843c389b",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "`std::optional\u003cint\u003e rc`?",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "854dba01_36167172",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "Need to consider the ABI bit drama of adding support for downstream devices.",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 3
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "840e45a2_f65e257a",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "It should be the whole package, not just the header.",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51f98f24_dd582c9d",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "This is mis-named given the above.",
+      "range": {
+        "startLine": 61,
+        "startChar": 36,
+        "endLine": 61,
+        "endChar": 42
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d895a2_255c3912",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "Why\u0027s this necessary?",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b32b378a_41af053e",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "Span?",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab6a7bc2_3c94ef50",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "What happened to the suggestion about resolving the components after parsing the info data, rather than leaving the consumer with a set of offsets?",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97a8d6bf_25fa9e00",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "Should this rather be a span so we\u0027re not copying it?",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1846fe4_f3c19346",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-25T01:40:55Z",
+      "side": 1,
+      "message": "Why are we doing this when it\u0027s already resolved to a valid pointer/length pair by the C API?",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
