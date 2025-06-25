@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "api.h"
 #include "array.h"
+#include "utils.h"
 #include "compiler.h"
 #include "dsp/base.h"
 #include "msgbuf.h"
@@ -515,13 +516,13 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 		return rc;
 	}
 
-	// TODO: pldm_edac_crc32_test(uint32_t expected, const void *data, size_t len)
-	if (package_header_checksum !=
-	    pldm_edac_crc32(data, package_header_payload_size)) {
+	rc = pldm_edac_crc32_validate(package_header_checksum, data,
+				      package_header_payload_size);
+	if (rc) {
 #if 0
-		printf("checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_header_checksum, pldm_edac_crc32(data, package_header_payload_size));
+		printf("header checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_header_checksum, pldm_edac_crc32(data, package_header_payload_size));
 #endif
-		return -EUCLEAN;
+		return rc;
 	}
 
 	/* We stash these to resolve component images later */
