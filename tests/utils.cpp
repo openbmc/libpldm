@@ -13,11 +13,47 @@ TEST(Crc32, CheckSumTest)
     EXPECT_EQ(checksum, 0xcbf43926);
 }
 
+TEST(Crc32, ValidateCheckSum)
+{
+    const char* password = "123456789";
+    uint32_t expected = 0xcbf43926;
+
+    /* Case 1: checksum matches */
+    EXPECT_EQ(pldm_edac_crc32_validate(expected, password, 9), 0);
+
+    /* Case 2: checksum does not match */
+    EXPECT_EQ(pldm_edac_crc32_validate(0xdeadbeef, password, 9), -EUCLEAN);
+
+    /* Case 3: data is NULL but size is not zero (invalid argument) */
+    EXPECT_EQ(pldm_edac_crc32_validate(expected, nullptr, 9), -EFAULT);
+
+    /* Case 4: data is NULL and size is zero (should match, as empty data is valid) */
+    EXPECT_EQ(pldm_edac_crc32_validate(0, nullptr, 0), 0);
+}
+
 TEST(Crc8, CheckSumTest)
 {
     const char* data = "123456789";
     auto checksum = pldm_edac_crc8(data, 9);
     EXPECT_EQ(checksum, 0xf4);
+}
+
+TEST(Crc8, ValidateCheckSum)
+{
+    const char* data = "123456789";
+    uint8_t expected = 0xf4;
+
+    /* Case 1: checksum matches */
+    EXPECT_EQ(pldm_edac_crc8_validate(expected, data, 9), 0);
+
+    /* Case 2: checksum does not match */
+    EXPECT_EQ(pldm_edac_crc8_validate(0x12, data, 9), -EUCLEAN);
+
+    /* Case 3: data is NULL but size is not zero (invalid argument) */
+    EXPECT_EQ(pldm_edac_crc8_validate(expected, nullptr, 9), -EFAULT);
+
+    /* Case 4: data is NULL and size is zero (should match, as empty data is valid) */
+    EXPECT_EQ(pldm_edac_crc8_validate(0, nullptr, 0), 0);
 }
 
 TEST(Ver2string, Ver2string)
