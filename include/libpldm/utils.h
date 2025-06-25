@@ -30,6 +30,19 @@ struct variable_field {
  */
 uint8_t pldm_edac_crc8(const void *data, size_t size);
 
+/**
+ * @brief Validate the CRC8 checksum of the given data.
+ *
+ * @param[in] expected The expected CRC8 value.
+ * @param[in] data     Pointer to the data to validate.
+ * @param[in] size     Size of the data in bytes.
+ * @return 0 	    if the checksum matches,
+ * 		   -EUCLEAN if the checksum mismatches,
+ * 		   -EFAULT  if the arguments are invalid
+ * 				   (e.g., data is NULL and size is not zero)
+ */
+int pldm_edac_crc8_validate(uint8_t expected, const void *data, size_t size);
+
 /** @brief Compute crc32 (same as the one used by IEEE802.3)
  *
  *  @param[in] data - Pointer to the target data
@@ -37,6 +50,19 @@ uint8_t pldm_edac_crc8(const void *data, size_t size);
  *  @return The checksum
  */
 uint32_t pldm_edac_crc32(const void *data, size_t size);
+
+/**
+ * @brief Validate the CRC32 checksum of the given data.
+ *
+ * @param[in] expected The expected CRC32 value.
+ * @param[in] data     Pointer to the data to validate.
+ * @param[in] size     Size of the data in bytes.
+ * @return 0 	    if the checksum matches,
+ * 		   -EUCLEAN if the checksum mismatches,
+ * 		   -EFAULT  if the arguments are invalid
+ * 				   (e.g., data is NULL and size is not zero)
+ */
+int pldm_edac_crc32_validate(uint32_t expected, const void *data, size_t size);
 
 /** @brief Convert ver32_t to string
  *  @param[in] version - Pointer to ver32_t
