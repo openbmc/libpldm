@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include <libpldm/base.h>
 #include <libpldm/utils.h>
+#include "utils.h"
 
 #include <limits.h>
 #include <stdio.h>
@@ -95,6 +96,16 @@ uint32_t pldm_edac_crc32(const void *data, size_t size)
 	}
 	return crc ^ ~0U;
 }
+
+int pldm_edac_crc32_validate(uint32_t expected, const void *data, size_t size)
+{
+	if (!data && size) { /* data is NULL but size is not zero */
+		return -EFAULT;
+	}
+	uint32_t actual = pldm_edac_crc32(data, size);
+	return (expected == actual) ? 0 : -EUCLEAN;
+}
+
 
 LIBPLDM_ABI_STABLE
 uint8_t pldm_edac_crc8(const void *data, size_t size)
