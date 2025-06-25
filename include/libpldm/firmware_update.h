@@ -2207,6 +2207,16 @@ int encode_cancel_update_resp(uint8_t instance_id,
 /** @brief Firmware update v1.2 package header format revision */
 #define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H 0x03
 
+/** @brief Firmware update v1.3 package header identifier */
+#define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3                                    \
+	{                                                                      \
+		0x7b, 0x29, 0x1c, 0x99, 0x6d, 0xb6, 0x42, 0x08,                \
+		0x80, 0x1b, 0x02, 0x02, 0x6e, 0x46, 0x3c, 0x78,                \
+	}
+
+/** @brief Firmware update v1.3 package header format revision */
+#define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H 0x04
+
 /** @brief Consumer-side version pinning for package format parsing
  *
  * Parsing a firmware update package requires the package to be of a revision
@@ -2224,6 +2234,7 @@ int encode_cancel_update_resp(uint8_t instance_id,
  * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H
  * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H
  * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR03H
+ * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H
  *
  * The package pinning operates by providing versioning over multiple structs
  * required to perform the package parsing. See [Conventions for extensible
@@ -2327,6 +2338,21 @@ struct pldm_package_firmware_device_id_record {
 	 */
 	struct variable_field record_descriptors;
 	struct variable_field firmware_device_package_data;
+
+	/**
+	 * An optional field that can contain a Reference Manifest for the firmware
+	 * update package. If present, this field points to the Reference Manifest
+	 * data, which describes the firmware update provided by this package. The
+	 * UA (Update Agent) may use this data as a reference for the firmware
+	 * version.
+	 *
+	 * Note that this data shall not be transferred to the firmware device (FD).
+	 * The format of the data is either a Standard Body or Vendor-Defined Header,
+	 * followed by the Reference Manifest data.
+	 *
+	 * See Table 7, DSP0267 v1.3.0
+	 */
+	struct variable_field reference_manifest_data;
 };
 
 /**
@@ -2369,6 +2395,14 @@ struct pldm_package_downstream_device_id_record {
 	 * If present, points into the provided package data.
 	 */
 	struct variable_field package_data;
+
+	/**
+	* A field pointing to a Reference Manifest for the downstream device.
+	* If present, this field points to the Reference Manifest data, which describes
+	*
+	* See Table 7, DSP0267 v1.3.0
+	*/
+	struct variable_field reference_manifest_data;
 };
 
 /**
@@ -2963,6 +2997,33 @@ int decode_pldm_package_component_image_information_from_iter(
 		.format = { \
 			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2, \
 			.revision = PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H, \
+		} \
+	}
+
+/**
+ * Declare consumer support for at most revision 4 of the firmware update
+ * package header
+ *
+ * @param name The name for the pin object
+ *
+ * The pin object must be provided to @ref decode_pldm_firmware_update_package
+ */
+#define DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H(name)                             \
+	struct pldm_package_format_pin name = { \
+		.meta = { \
+			.magic = ( \
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package) + \
+				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, reference_manifest_data) + \
+				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, reference_manifest_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_opaque_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_iter, infos) \
+			), \
+			.version = 0u, \
+		}, \
+		.format = { \
+			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3, \
+			.revision = PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H, \
 		} \
 	}
 
