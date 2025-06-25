@@ -28,7 +28,6 @@ Change categories:
 ### Removed
 
 - Previously deprecated symbols:
-
   - `crc32()`: Users must switch to `pldm_edac_crc32()`
   - `crc8()`: Users must switch to `pldm_edac_crc8()`
 
@@ -95,7 +94,6 @@ Change categories:
 - requester: Remove related deprecated APIs
 
   Remove all of:
-
   - `pldm_close()`
   - `pldm_open()`
   - `pldm_recv()`
@@ -150,7 +148,6 @@ Change categories:
 
 - Returned error values for the following stable APIs have changed their
   semantics:
-
   - `decode_descriptor_type_length_value()`
   - `decode_event_message_buffer_size_resp()`
   - `decode_get_numeric_effecter_value_resp()`
@@ -166,7 +163,6 @@ Change categories:
   association PDR creation
 
 - Register allocation changed for the following APIs:
-
   - `encode_get_downstream_firmware_parameters_req()`
   - `encode_get_state_effecter_states_resp()`
   - `encode_oem_meta_file_io_read_resp()`
@@ -248,7 +244,6 @@ Change categories:
 
 - Register assignment for parameters of a number of APIs changed with increased
   scrutiny on their implementations.
-
   - `decode_entity_auxiliary_names_pdr()`
   - `decode_get_state_sensor_readings_resp()`
   - `decode_oem_meta_file_io_req()`
@@ -280,7 +275,6 @@ Change categories:
   function to make it safer.
 
   Modification:
-
   - The meaning of the returned result.
   - Change parameters from individual pointers to a struct.
   - Check the length provided in the message won't exceed the buffer.
@@ -293,9 +287,7 @@ Change categories:
 
 - The following APIs are deprecated as unsafe due to various unfixable CWE
   violations:
-
   - [CWE-129: Improper Validation of Array Index](https://cwe.mitre.org/data/definitions/129.html)
-
     - `encode_get_bios_current_value_by_handle_resp()`
     - `encode_get_bios_table_resp()`
     - `encode_get_file_table_resp()`
@@ -311,11 +303,9 @@ Change categories:
     - `pldm_bios_table_string_find_by_string()`
 
   - [CWE-617: Reachable Assertion](https://cwe.mitre.org/data/definitions/617.html)
-
     - `pldm_entity_association_tree_copy_root()`
 
   - [CWE-789: Memory Allocation with Excessive Size Value](https://cwe.mitre.org/data/definitions/789.html)
-
     - `decode_oem_meta_file_io_req()`
 
   - [CWE-823: Use of Out-of-range Pointer Offset](https://cwe.mitre.org/data/definitions/823.html)
@@ -326,7 +316,6 @@ Change categories:
 ### Removed
 
 - Deprecated functions with the `_check` suffix
-
   - `get_fru_record_by_option_check()`
   - `pldm_bios_table_append_pad_checksum_check()`
   - `pldm_bios_table_attr_entry_enum_decode_def_num_check()`
@@ -439,7 +428,6 @@ Change categories:
   and the [clang-rename][] configurations under `evolutions/`
 
   The deprecated functions:
-
   - `get_fru_record_by_option_check()`
   - `pldm_bios_table_append_pad_checksum_check()`
   - `pldm_bios_table_attr_entry_enum_decode_def_num_check()`
@@ -550,16 +538,13 @@ Change categories:
 - transport: Stabilise core transport and implementation APIs
 
   This stabilisation covers the following headers and functions:
-
   - libpldm/transport.h
-
     - pldm_transport_poll()
     - pldm_transport_send_msg()
     - pldm_transport_recv_msg()
     - pldm_transport_send_recv_msg()
 
   - libpldm/transport/af-mctp.h
-
     - pldm_transport_af_mctp_init()
     - pldm_transport_af_mctp_destroy()
     - pldm_transport_af_mctp_core()
@@ -579,7 +564,6 @@ Change categories:
 
 - All the existing "requester" APIs from `libpldm/pldm.h` (also known as
   `libpldm/requester/pldm.h`):
-
   - pldm_open()
   - pldm_send_recv()
   - pldm_send()
@@ -694,7 +678,6 @@ Change categories:
   function. For APIs meeting this definition we define a precondition that
   struct pointers must point to valid objects to avoid polluting the function
   prototypes. The following APIs now have this precondition explicitly defined:
-
   - pldm_entity_extract()
   - pldm_entity_get_parent()
   - pldm_entity_is_exist_parent()
@@ -790,7 +773,6 @@ Change categories:
 ### Removed
 
 - bios_table: Remove deprecated APIs sanitized by assert():
-
   - pldm_bios_table_string_entry_encode()
   - pldm_bios_table_string_entry_decode_string()
   - pldm_bios_table_attr_entry_enum_encode()
@@ -848,7 +830,6 @@ Change categories:
   C provides enough foot-guns without us encoding them into library APIs.
   Specifically, deprecate the following in favour of their `*_check()` variants
   which ensure assertions won't fail or otherwise invoke UB:
-
   - pldm_bios_table_string_entry_encode()
   - pldm_bios_table_string_entry_decode_string()
   - pldm_bios_table_attr_entry_enum_encode()
