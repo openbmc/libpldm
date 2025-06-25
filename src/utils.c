@@ -4,6 +4,7 @@
 
 #include <limits.h>
 #include <stdio.h>
+#include <errno.h>
 
 /** CRC32 code derived from work by Gary S. Brown.
  *  http://web.mit.edu/freebsd/head/sys/libkern/crc32.c
