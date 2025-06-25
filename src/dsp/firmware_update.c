@@ -330,6 +330,24 @@ static bool is_non_functioning_component_indication_valid(
 	}
 }
 
+/**
+ * @brief Validate the CRC32 checksum of the given data.
+ * 
+ * @return 0 	    if the checksum matches,
+ * 		   -EUCLEAN if the checksum mismatches,
+ * 		   -EFAULT  if the arguments are invalid
+ * 				   (e.g., data is NULL and size is not zero)
+ */
+LIBPLDM_ABI_TESTING
+int pldm_edac_crc32_validate(uint32_t expected, const void *data, size_t size)
+{
+	if (!data && size) { /* data is NULL but size is not zero */
+		return -EFAULT;
+	}
+	uint32_t actual = pldm_edac_crc32(data, size);
+	return (expected == actual) ? 0 : -EUCLEAN;
+}
+
 #define PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE 36
 LIBPLDM_CC_NONNULL
 static int
@@ -515,13 +533,13 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 		return rc;
 	}
 
-	// TODO: pldm_edac_crc32_test(uint32_t expected, const void *data, size_t len)
-	if (package_header_checksum !=
-	    pldm_edac_crc32(data, package_header_payload_size)) {
+	rc = pldm_edac_crc32_validate(package_header_checksum, data,
+				      package_header_payload_size);
+	if (rc) {
 #if 0
-		printf("checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_header_checksum, pldm_edac_crc32(data, package_header_payload_size));
+		printf("header checksum failure, expected: %#08" PRIx32 ", found: %#08" PRIx32 "\n", package_header_checksum, pldm_edac_crc32(data, package_header_payload_size));
 #endif
-		return -EUCLEAN;
+		return rc;
 	}
 
 	/* We stash these to resolve component images later */
