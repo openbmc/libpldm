@@ -278,6 +278,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8753d400_3f2dff5a",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:14:39Z",
+      "side": 1,
+      "message": "We can do the ```std::reference_wrapper``` but it will require our returned object to be stationary. Any copying would invalidate the references.\n\nSo i am tending towards ```std::unique_ptr``` here to provide this guarantee.\n\nBecause the result of parsing may be passed around, so our toplevel return type has to live on the heap.\n\nLet me know if that\u0027s ok with you.",
+      "parentUuid": "2ca29fc7_d1ef6836",
+      "range": {
+        "startLine": 116,
+        "startChar": 1,
+        "endLine": 135,
+        "endChar": 1
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc8e8546_63353ad3",
         "filename": "bindings/cpp/firmware_update.cpp",
         "patchSetId": 11

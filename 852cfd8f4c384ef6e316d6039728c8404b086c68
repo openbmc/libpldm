@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b882fba_fb795733",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:14:39Z",
+      "side": 1,
+      "message": "nope, the underlying type is the same for most of them, so we can inline.",
+      "parentUuid": "fea03bd6_cc0045d4",
+      "range": {
+        "startLine": 182,
+        "startChar": 1,
+        "endLine": 187,
+        "endChar": 44
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e7fc320_5f7dd702",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-06-25T01:40:55Z",
       "side": 1,
       "message": "Please don\u0027t do this.",
+      "range": {
+        "startLine": 194,
+        "startChar": 1,
+        "endLine": 197,
+        "endChar": 65
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1332561d_0d612064",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:14:39Z",
+      "side": 1,
+      "message": "Changed to using the ```variable_field``` struct already provided by the C API.",
+      "parentUuid": "9e7fc320_5f7dd702",
       "range": {
         "startLine": 194,
         "startChar": 1,
@@ -184,6 +232,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f409a7b0_185edd55",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:14:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "072f7cb9_ca12cd56",
+      "range": {
+        "startLine": 18,
+        "startChar": 26,
+        "endLine": 18,
+        "endChar": 46
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "825daee2_843c389b",
@@ -197,6 +269,24 @@
       "writtenOn": "2025-06-25T01:40:55Z",
       "side": 1,
       "message": "`std::optional\u003cint\u003e rc`?",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e51d1fb7_baf9d252",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:14:39Z",
+      "side": 1,
+      "message": "The int is for passing through the libpldm error codes?\n\nWhy do you want an optional int, is there cases where we do not have an error code or cannot somehow map it?",
+      "parentUuid": "825daee2_843c389b",
       "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -241,6 +331,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f8e5a06_c5149422",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:14:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "840e45a2_f65e257a",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51f98f24_dd582c9d",
@@ -264,6 +372,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "167ba5cd_024dffd2",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:14:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51f98f24_dd582c9d",
+      "range": {
+        "startLine": 61,
+        "startChar": 36,
+        "endLine": 61,
+        "endChar": 42
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61d895a2_255c3912",
@@ -277,6 +409,24 @@
       "writtenOn": "2025-06-25T01:40:55Z",
       "side": 1,
       "message": "Why\u0027s this necessary?",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d166ae3_900f1ff4",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:14:39Z",
+      "side": 1,
+      "message": "removed it, leftovers from pldm repo.",
+      "parentUuid": "61d895a2_255c3912",
       "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -315,6 +465,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c86008fe_2d8f04a2",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:14:39Z",
+      "side": 1,
+      "message": "Using ```std::vector\u003cstd::reference_wrapper\u003cComponentImageInfo\u003e\u003e``` in latest revision.",
+      "parentUuid": "ab6a7bc2_3c94ef50",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97a8d6bf_25fa9e00",
@@ -334,6 +502,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f527c422_4f0980c3",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:14:39Z",
+      "side": 1,
+      "message": "I wanted to have a value object at least for the package header.\n\nMakes things easier to test and perhaps easier to go the other way\nfor PackageBuilder API.\n\nLet me know if we must have everything be a reference, or have it be as small as possible in memory.\n\nFrom my perception the package header is tiny compared to the component images so i did not worry too much about minimizing the header struct.",
+      "parentUuid": "97a8d6bf_25fa9e00",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1846fe4_f3c19346",
         "filename": "include/libpldm/bindings/cpp/types.hpp",
         "patchSetId": 15
@@ -345,6 +531,30 @@
       "writtenOn": "2025-06-25T01:40:55Z",
       "side": 1,
       "message": "Why are we doing this when it\u0027s already resolved to a valid pointer/length pair by the C API?",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4db2fee9_a6be1f4f",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:14:39Z",
+      "side": 1,
+      "message": "Changed to using the ```variable_field``` struct already provided by the C API.",
+      "parentUuid": "c1846fe4_f3c19346",
       "range": {
         "startLine": 49,
         "startChar": 1,
