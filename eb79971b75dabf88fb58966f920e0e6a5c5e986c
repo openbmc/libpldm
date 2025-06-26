@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c3b6f22_af2aa858",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 2179,
+      "author": {
+        "id": 1002431
+      },
+      "writtenOn": "2025-06-26T06:06:29Z",
+      "side": 1,
+      "message": "Thanks, Andrew. The goal is to allow updaters to opt out of payload checksum validation, especially in full bundle updates where multiple validations are redundant. This just adds flexibility for specific use cases. Open to suggestions if there\u0027s a cleaner approach.",
+      "parentUuid": "2fe754f1_e394670c",
+      "revId": "eb79971b75dabf88fb58966f920e0e6a5c5e986c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3c4d04b_cc502dad",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 20
