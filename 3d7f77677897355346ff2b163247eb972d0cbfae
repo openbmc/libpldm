@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "533d44b6_b30c943d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:29:01Z",
+      "side": 1,
+      "message": "Done. Actually, I added this feature in version 1.3.0, but you are right; it should be included in this patch.",
+      "parentUuid": "9304bc5d_2045fd21",
+      "revId": "3d7f77677897355346ff2b163247eb972d0cbfae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c059655_c252ea2e",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-06-26T02:50:44Z",
       "side": 1,
       "message": "I suspect we can drop this, see other comments in the patch.",
+      "revId": "3d7f77677897355346ff2b163247eb972d0cbfae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ca30cee_bc28831f",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:29:01Z",
+      "side": 1,
+      "message": "Done, you mean is delete this comment?",
+      "parentUuid": "4c059655_c252ea2e",
       "revId": "3d7f77677897355346ff2b163247eb972d0cbfae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea51819f_34a6bd01",
+        "filename": "include/libpldm/utils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:29:01Z",
+      "side": 1,
+      "message": "I\u0027m sorry I didn\u0027t understand its meaning when I was writing it. I removed the `CRC8` verification feature (unuse) and moved the `CRC32` verification to `firmware_update.c`. I assume you want it to be an internal function and not intended for public use, right?",
+      "parentUuid": "86e9353d_58029e59",
+      "revId": "3d7f77677897355346ff2b163247eb972d0cbfae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10afb001_bf6a3877",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-06-26T02:50:44Z",
       "side": 1,
       "message": "See above.",
+      "revId": "3d7f77677897355346ff2b163247eb972d0cbfae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bda3e6b_db26e0f4",
+        "filename": "include/libpldm/utils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10afb001_bf6a3877",
       "revId": "3d7f77677897355346ff2b163247eb972d0cbfae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
