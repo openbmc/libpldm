@@ -24,6 +24,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba50d053_19704090",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:29:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "388c39e8_36ae628a",
+      "range": {
+        "startLine": 23,
+        "startChar": 43,
+        "endLine": 24,
+        "endChar": 40
+      },
+      "revId": "f66956da7212645343111f908bf98f0af3a51a98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13cd399e_15ea9df4",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:29:07Z",
+      "side": 1,
+      "message": "Done, Thank you for your reminder.",
+      "parentUuid": "388c39e8_36ae628a",
+      "range": {
+        "startLine": 23,
+        "startChar": 43,
+        "endLine": 24,
+        "endChar": 40
+      },
+      "revId": "f66956da7212645343111f908bf98f0af3a51a98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96144aa6_5474e4de",
@@ -47,6 +95,78 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce1f1273_7bed01a0",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2366,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:29:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96144aa6_5474e4de",
+      "range": {
+        "startLine": 2366,
+        "startChar": 41,
+        "endLine": 2366,
+        "endChar": 55
+      },
+      "revId": "f66956da7212645343111f908bf98f0af3a51a98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a062f14e_a0f5b684",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2366,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:29:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96144aa6_5474e4de",
+      "range": {
+        "startLine": 2366,
+        "startChar": 41,
+        "endLine": 2366,
+        "endChar": 55
+      },
+      "revId": "f66956da7212645343111f908bf98f0af3a51a98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e309e184_e8c9100f",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2366,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:29:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96144aa6_5474e4de",
+      "range": {
+        "startLine": 2366,
+        "startChar": 41,
+        "endLine": 2366,
+        "endChar": 55
+      },
+      "revId": "f66956da7212645343111f908bf98f0af3a51a98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2dbd864_e6db47a4",
@@ -60,6 +180,42 @@
       "writtenOn": "2025-06-26T02:43:54Z",
       "side": 1,
       "message": "Can you please fix the whitespace here?",
+      "revId": "f66956da7212645343111f908bf98f0af3a51a98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2be6187e_3eed6220",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2368,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:29:07Z",
+      "side": 1,
+      "message": "Done, but actually i look my VScode it is normal.",
+      "parentUuid": "c2dbd864_e6db47a4",
+      "revId": "f66956da7212645343111f908bf98f0af3a51a98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ed9f2bf_27718361",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2368,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:29:07Z",
+      "side": 1,
+      "message": "It\u0027s a bit strange, it looks normal on my VS Code.",
+      "parentUuid": "c2dbd864_e6db47a4",
       "revId": "f66956da7212645343111f908bf98f0af3a51a98",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
