@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9304bc5d_2045fd21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-26T02:50:44Z",
+      "side": 1,
+      "message": "Hi Carter, thanks for this! The only other trick I had in mind is switching `decode_pldm_firmware_update_package()` to use the `_validate()` function. Can you do that in this patch?\n\nI have a couple of comments inline.",
+      "revId": "3d7f77677897355346ff2b163247eb972d0cbfae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c059655_c252ea2e",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-26T02:50:44Z",
+      "side": 1,
+      "message": "I suspect we can drop this, see other comments in the patch.",
+      "revId": "3d7f77677897355346ff2b163247eb972d0cbfae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86e9353d_58029e59",
+        "filename": "include/libpldm/utils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-26T02:50:44Z",
+      "side": 1,
+      "message": "Can we please not expose this in the public API (at least, for now)?\n\nI\u0027d move the declarations to `src/utils.h` (you will need to create it - make sure to follow the patterns used in other headers that live under `src/`).\n\nCallers can implement the behaviour themselves using `pldm_edac_crc8()`. I probably should have been clearer that the need for these is driven by testing the library implementation.",
+      "revId": "3d7f77677897355346ff2b163247eb972d0cbfae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10afb001_bf6a3877",
+        "filename": "include/libpldm/utils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-26T02:50:44Z",
+      "side": 1,
+      "message": "See above.",
+      "revId": "3d7f77677897355346ff2b163247eb972d0cbfae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
