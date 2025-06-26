@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90dd8833_f4d93f17",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done, Thank you for your reminder.",
+      "parentUuid": "36c78637_cf052c97",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 53
+      },
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3ff7e88_b6427ce4",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-06-26T03:15:31Z",
       "side": 1,
       "message": "Please don\u0027t mention unit tests here, they\u0027re an implementation detail.",
+      "range": {
+        "startLine": 31,
+        "startChar": 43,
+        "endLine": 32,
+        "endChar": 40
+      },
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2647ba4a_3f3ef1ec",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Ok, I delete this comment.",
+      "parentUuid": "b3ff7e88_b6427ce4",
       "range": {
         "startLine": 31,
         "startChar": 43,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82caf3ff_5bbb151c",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 2367,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done, but actually i look my VScode it is normal.",
+      "parentUuid": "e1887abc_ef8a30d2",
+      "range": {
+        "startLine": 2362,
+        "startChar": 1,
+        "endLine": 2367,
+        "endChar": 3
+      },
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d295b24_73f46799",
@@ -100,6 +172,30 @@
       "writtenOn": "2025-06-26T03:15:31Z",
       "side": 1,
       "message": "Can you please keep these in reverse-christmas-tree order?\n\nhttps://github.com/openbmc/libpldm/blob/c28bbbbb4aaaaca8e5d1a060a1935a41136bed70/docs/checklists/changes.md#L341-L345",
+      "range": {
+        "startLine": 391,
+        "startChar": 1,
+        "endLine": 397,
+        "endChar": 30
+      },
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96c0af48_a264fbdd",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Oh sorry! I will follow this doc from now on. Done",
+      "parentUuid": "4d295b24_73f46799",
       "range": {
         "startLine": 391,
         "startChar": 1,
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28d87a06_a3ad301f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a54834a_43e8e018",
+      "range": {
+        "startLine": 402,
+        "startChar": 1,
+        "endLine": 404,
+        "endChar": 2
+      },
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f968b7d_f2694da8",
@@ -146,6 +266,24 @@
       "writtenOn": "2025-06-26T03:15:31Z",
       "side": 1,
       "message": "Reverse-christmas-tree again please 😊",
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88cea7ae_257e2664",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f968b7d_f2694da8",
       "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -173,6 +311,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "861134b3_fa2ed4de",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65698e06_a9f5ec21",
+      "range": {
+        "startLine": 758,
+        "startChar": 1,
+        "endLine": 759,
+        "endChar": 51
+      },
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9482fce4_58290b08",
@@ -186,6 +348,24 @@
       "writtenOn": "2025-06-26T03:15:31Z",
       "side": 1,
       "message": "Can we rename this to `firmware_device_package_data_offset`?",
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44b1a9a3_56e28cce",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9482fce4_58290b08",
       "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -207,6 +387,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dde4a6c7_8e0add26",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3348,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95f5eb00_3df4a781",
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61d03fc1_20da9b67",
@@ -220,6 +418,30 @@
       "writtenOn": "2025-06-26T03:15:31Z",
       "side": 1,
       "message": "Please fix the wrapping and whitespace",
+      "range": {
+        "startLine": 3429,
+        "startChar": 1,
+        "endLine": 3430,
+        "endChar": 51
+      },
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f796f3a_05b27ead",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3430,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61d03fc1_20da9b67",
       "range": {
         "startLine": 3429,
         "startChar": 1,
@@ -253,6 +475,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d4c74f_2d465f30",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3431,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "504710e2_48d87823",
+      "range": {
+        "startLine": 3431,
+        "startChar": 1,
+        "endLine": 3431,
+        "endChar": 33
+      },
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d563bc2_7d3627c8",
@@ -266,6 +512,30 @@
       "writtenOn": "2025-06-26T03:15:31Z",
       "side": 1,
       "message": "Can you please put the payload checksum on its own line?",
+      "range": {
+        "startLine": 5690,
+        "startChar": 32,
+        "endLine": 5690,
+        "endChar": 55
+      },
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb2f3308_0743ae86",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 5690,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d563bc2_7d3627c8",
       "range": {
         "startLine": 5690,
         "startChar": 32,
@@ -299,6 +569,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94de178c_5093a605",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 5744,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1176bff7_847960c0",
+      "range": {
+        "startLine": 5744,
+        "startChar": 38,
+        "endLine": 5744,
+        "endChar": 40
+      },
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "063c0ccb_eac72af3",
@@ -312,6 +606,30 @@
       "writtenOn": "2025-06-26T03:15:31Z",
       "side": 1,
       "message": "Drop the `ex` here?",
+      "range": {
+        "startLine": 5791,
+        "startChar": 38,
+        "endLine": 5791,
+        "endChar": 40
+      },
+      "revId": "6ba1b6e012717c01f0267c787f0f3b4f15ab8dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c64ddec_a5fc7ece",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 5791,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-26T08:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "063c0ccb_eac72af3",
       "range": {
         "startLine": 5791,
         "startChar": 38,
