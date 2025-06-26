@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c2392d0_614ee18f",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 2179,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-26T06:08:49Z",
+      "side": 1,
+      "message": "Can you please review this? https://gerrit.openbmc.org/c/openbmc/libpldm/+/81363",
+      "parentUuid": "0c3b6f22_af2aa858",
+      "revId": "eb79971b75dabf88fb58966f920e0e6a5c5e986c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3c4d04b_cc502dad",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 20
