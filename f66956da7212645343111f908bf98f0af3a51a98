@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "388c39e8_36ae628a",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-26T02:43:54Z",
+      "side": 1,
+      "message": "Why does this mention 1.3? I think you need to move that to the relevant patch.\n\nSeparately, the changelog is intended to be purely for user-facing behaviour. Unit tests are an implementation detail and so should not be mentioned here.",
+      "range": {
+        "startLine": 23,
+        "startChar": 43,
+        "endLine": 24,
+        "endChar": 40
+      },
+      "revId": "f66956da7212645343111f908bf98f0af3a51a98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96144aa6_5474e4de",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2366,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-26T02:43:54Z",
+      "side": 1,
+      "message": "I think this should be `opaque data`? It\u0027s not metadata, and it\u0027s separate from the image.",
+      "range": {
+        "startLine": 2366,
+        "startChar": 41,
+        "endLine": 2366,
+        "endChar": 55
+      },
+      "revId": "f66956da7212645343111f908bf98f0af3a51a98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2dbd864_e6db47a4",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2368,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-26T02:43:54Z",
+      "side": 1,
+      "message": "Can you please fix the whitespace here?",
+      "revId": "f66956da7212645343111f908bf98f0af3a51a98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
