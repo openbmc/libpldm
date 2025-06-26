@@ -135,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a208673_2b1e15ed",
+        "filename": "bindings/cpp/utils.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:31:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab626788_0dab2d80",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 1
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "743ccc10_6f693f6c",
@@ -169,6 +193,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23b9136f_9d9c83d9",
+        "filename": "bindings/cpp/utils.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:31:56Z",
+      "side": 1,
+      "message": "Ok, removed that part. Not checking for printable chars anymore.",
+      "parentUuid": "d53539be_a60a976f",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcc8ebda_e0306d3e",
@@ -192,6 +234,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86c991fe_95db2493",
+        "filename": "bindings/cpp/utils.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:31:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcc8ebda_e0306d3e",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 74
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4927068e_42d22b1b",
@@ -205,6 +271,24 @@
       "writtenOn": "2025-06-25T01:40:55Z",
       "side": 1,
       "message": "Whitespace is a bit funky above.",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05d75b40_9f7e6199",
+        "filename": "bindings/cpp/utils.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-06-26T15:31:56Z",
+      "side": 1,
+      "message": "Indented it to be above the declaration.",
+      "parentUuid": "4927068e_42d22b1b",
       "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
