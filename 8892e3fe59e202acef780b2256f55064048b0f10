@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbd8eb47_2b3b9a24",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:37:37Z",
+      "side": 1,
+      "message": "This is not necessary for internal APIs as it controls the external ABI (which symbols are exported by the `.so`).",
+      "revId": "8892e3fe59e202acef780b2256f55064048b0f10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86f9decc_0a354e67",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:37:37Z",
+      "side": 1,
+      "message": "Can you please rather put this in `src/utils.c` and add `src/utils.h` to expose the API?",
+      "revId": "8892e3fe59e202acef780b2256f55064048b0f10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
