@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6ec6cbb_3e576d0b",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:54:14Z",
+      "side": 1,
+      "message": "Please be more specific here: DSP0267 v1.3",
+      "range": {
+        "startLine": 25,
+        "startChar": 35,
+        "endLine": 25,
+        "endChar": 39
+      },
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04f58b12_2844e401",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:54:14Z",
+      "side": 1,
+      "message": "Why the change from `payload` to `data`? Now the naming is inconsistent? Consider how it looks on lines 579-581.",
+      "range": {
+        "startLine": 415,
+        "startChar": 15,
+        "endLine": 415,
+        "endChar": 19
+      },
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c478d8ea_e115f34b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:54:14Z",
+      "side": 1,
+      "message": "Maybe I should have been more specific about where I wanted this with my comment on PS9, however, _I_ was also wrong about the suggestion because I overlooked that you\u0027re testing `pin-\u003eformat.revision`.\n\nThat\u0027s incorrect: You _must_ rather test `hdr-\u003epackage_header_format_revision`.\n\nHowever, you can only test that after you\u0027ve actually extracted it from the package header: The checksum behaviour is determined by the _provided package_ (and _after_ we\u0027ve determined that the consumer actually supports parsing that package format revision, by the pin they provided).",
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75ff7a05_01a682a2",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:54:14Z",
+      "side": 1,
+      "message": "This is where we need to set `checksums`:\n\n```\nif (hdr-\u003epackage_header_format_revision \u003e\u003d PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {\n    checksums \u003d 2;\n}\n```",
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e1ad99f_6c4b89f7",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:54:14Z",
+      "side": 1,
+      "message": "Can you please swap these two lines?",
+      "range": {
+        "startLine": 701,
+        "startChar": 1,
+        "endLine": 702,
+        "endChar": 44
+      },
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ba0193_30768ab8",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:54:14Z",
+      "side": 1,
+      "message": "The wrapping and the comment style is still odd here. This could be one line?",
+      "range": {
+        "startLine": 776,
+        "startChar": 1,
+        "endLine": 777,
+        "endChar": 51
+      },
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7ba2c9e_53fda8e9",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3364,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:54:14Z",
+      "side": 1,
+      "message": "Swap these two lines?",
+      "range": {
+        "startLine": 3363,
+        "startChar": 1,
+        "endLine": 3364,
+        "endChar": 28
+      },
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
