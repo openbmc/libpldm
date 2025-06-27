@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd51cac9_34e6f196",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 20
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:33:45Z",
+      "side": 1,
+      "message": "Sorry, I guess I should have asked previously, but can you be more specific here? \"DSP0267 v1.2\"",
+      "range": {
+        "startLine": 22,
+        "startChar": 35,
+        "endLine": 22,
+        "endChar": 39
+      },
+      "revId": "c5467bdc14131ee058c5f4f92d97e2fa0b5e52b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "106a7b8d_9483c24b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 2388,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:33:45Z",
+      "side": 1,
+      "message": "This looks like a space before the tab?",
+      "range": {
+        "startLine": 2388,
+        "startChar": 1,
+        "endLine": 2388,
+        "endChar": 2
+      },
+      "revId": "c5467bdc14131ee058c5f4f92d97e2fa0b5e52b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
