@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a023145_fc19e19e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:21:31Z",
+      "side": 1,
+      "message": "Sorry, not sure why I didn\u0027t look so deeply last time, but I\u0027ve have some comments.",
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebb87e38_8b63c438",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:21:31Z",
+      "side": 1,
+      "message": "Too many `E`s here, unfortunately!",
+      "range": {
+        "startLine": 337,
+        "startChar": 44,
+        "endLine": 337,
+        "endChar": 49
+      },
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "431b5208_a7d39889",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:21:31Z",
+      "side": 1,
+      "message": "Hmm. Perhaps `TRANSFER_ABORTED_BY_DOWNSTREAM_DEVICE`?",
+      "range": {
+        "startLine": 338,
+        "startChar": 14,
+        "endLine": 338,
+        "endChar": 66
+      },
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29810aff_ecfe40f5",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:21:31Z",
+      "side": 1,
+      "message": "Above uses the order `ABORTED_TRANSFER`, but here you\u0027re using `TRANSFER_ABORTED`. Can we be consistent?",
+      "range": {
+        "startLine": 340,
+        "startChar": 11,
+        "endLine": 340,
+        "endChar": 27
+      },
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b880b26_f2e5e958",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:21:31Z",
+      "side": 1,
+      "message": "Having `ERROR` twice in the string is a bit 😞",
+      "range": {
+        "startLine": 353,
+        "startChar": 42,
+        "endLine": 353,
+        "endChar": 48
+      },
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8823a5a2_466aeac8",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-27T02:21:31Z",
+      "side": 1,
+      "message": "Too many `P`s, not enough `Y`s 😊",
+      "range": {
+        "startLine": 364,
+        "startChar": 11,
+        "endLine": 364,
+        "endChar": 16
+      },
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
