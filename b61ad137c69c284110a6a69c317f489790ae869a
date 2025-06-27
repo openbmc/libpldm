@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c25b2d11_254d41ae",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-27T08:10:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6ec6cbb_3e576d0b",
+      "range": {
+        "startLine": 25,
+        "startChar": 35,
+        "endLine": 25,
+        "endChar": 39
+      },
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04f58b12_2844e401",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-06-27T02:54:14Z",
       "side": 1,
       "message": "Why the change from `payload` to `data`? Now the naming is inconsistent? Consider how it looks on lines 579-581.",
+      "range": {
+        "startLine": 415,
+        "startChar": 15,
+        "endLine": 415,
+        "endChar": 19
+      },
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8a3f2e4_79320800",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-27T08:10:36Z",
+      "side": 1,
+      "message": "Done, sorry I change back.",
+      "parentUuid": "04f58b12_2844e401",
       "range": {
         "startLine": 415,
         "startChar": 15,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dba9f0d2_78aaac20",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-27T08:10:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c478d8ea_e115f34b",
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75ff7a05_01a682a2",
@@ -81,6 +147,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "257244de_cdc62988",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-27T08:10:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75ff7a05_01a682a2",
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e1ad99f_6c4b89f7",
@@ -94,6 +178,30 @@
       "writtenOn": "2025-06-27T02:54:14Z",
       "side": 1,
       "message": "Can you please swap these two lines?",
+      "range": {
+        "startLine": 701,
+        "startChar": 1,
+        "endLine": 702,
+        "endChar": 44
+      },
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ebaa38_13ab0d90",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-27T08:10:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e1ad99f_6c4b89f7",
       "range": {
         "startLine": 701,
         "startChar": 1,
@@ -127,6 +235,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cef3c17_24a7d684",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-27T08:10:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43ba0193_30768ab8",
+      "range": {
+        "startLine": 776,
+        "startChar": 1,
+        "endLine": 777,
+        "endChar": 51
+      },
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7ba2c9e_53fda8e9",
@@ -140,6 +272,30 @@
       "writtenOn": "2025-06-27T02:54:14Z",
       "side": 1,
       "message": "Swap these two lines?",
+      "range": {
+        "startLine": 3363,
+        "startChar": 1,
+        "endLine": 3364,
+        "endChar": 28
+      },
+      "revId": "b61ad137c69c284110a6a69c317f489790ae869a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b1fd513_d03a3fed",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3364,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-27T08:10:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7ba2c9e_53fda8e9",
       "range": {
         "startLine": 3363,
         "startChar": 1,
