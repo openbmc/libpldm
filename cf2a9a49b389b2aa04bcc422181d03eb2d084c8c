@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcbdfff9_088d9e1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2025-06-28T13:32:47Z",
+      "side": 1,
+      "message": "ah, not sure how I did these :( . I should have been more thorough. Thanks for the review.",
+      "parentUuid": "0a023145_fc19e19e",
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebb87e38_8b63c438",
@@ -41,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "114f3919_fad6fb65",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2025-06-28T13:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebb87e38_8b63c438",
+      "range": {
+        "startLine": 337,
+        "startChar": 44,
+        "endLine": 337,
+        "endChar": 49
+      },
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "431b5208_a7d39889",
@@ -54,6 +96,30 @@
       "writtenOn": "2025-06-27T02:21:31Z",
       "side": 1,
       "message": "Hmm. Perhaps `TRANSFER_ABORTED_BY_DOWNSTREAM_DEVICE`?",
+      "range": {
+        "startLine": 338,
+        "startChar": 14,
+        "endLine": 338,
+        "endChar": 66
+      },
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f3dfca_2f1df0be",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2025-06-28T13:32:47Z",
+      "side": 1,
+      "message": "changed it to \n\n`PLDM_FWUP_FD_ABORTED_TRANSFER_DOWNSTREAM_DEVICE_FAILURE` . Does this sound okay ?",
+      "parentUuid": "431b5208_a7d39889",
       "range": {
         "startLine": 338,
         "startChar": 14,
@@ -89,6 +155,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1ee21e74_636a49df",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2025-06-28T13:32:47Z",
+      "side": 1,
+      "message": "done, changed to \n`PLDM_FWUP_FD_ABORTED_TRANSFER_SECURITY_REVISION_ERROR`",
+      "parentUuid": "29810aff_ecfe40f5",
+      "range": {
+        "startLine": 340,
+        "startChar": 11,
+        "endLine": 340,
+        "endChar": 27
+      },
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6b880b26_f2e5e958",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 4
@@ -100,6 +190,30 @@
       "writtenOn": "2025-06-27T02:21:31Z",
       "side": 1,
       "message": "Having `ERROR` twice in the string is a bit 😞",
+      "range": {
+        "startLine": 353,
+        "startChar": 42,
+        "endLine": 353,
+        "endChar": 48
+      },
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dab9573_f92dce55",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2025-06-28T13:32:47Z",
+      "side": 1,
+      "message": "changed to `PLDM_FWUP_VERIFY_FAILURE_SECURITY_REVISION_ERROR`",
+      "parentUuid": "6b880b26_f2e5e958",
       "range": {
         "startLine": 353,
         "startChar": 42,
@@ -123,6 +237,30 @@
       "writtenOn": "2025-06-27T02:21:31Z",
       "side": 1,
       "message": "Too many `P`s, not enough `Y`s 😊",
+      "range": {
+        "startLine": 364,
+        "startChar": 11,
+        "endLine": 364,
+        "endChar": 16
+      },
+      "revId": "cf2a9a49b389b2aa04bcc422181d03eb2d084c8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1749ae1_ba7bf365",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2025-06-28T13:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8823a5a2_466aeac8",
       "range": {
         "startLine": 364,
         "startChar": 11,
