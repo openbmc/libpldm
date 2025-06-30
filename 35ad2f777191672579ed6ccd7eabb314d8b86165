@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2366670a_bd981492",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-30T00:32:36Z",
+      "side": 1,
+      "message": "This must be `hdr-\u003epackage_header_format_revision` as discussed previously.",
+      "range": {
+        "startLine": 536,
+        "startChar": 5,
+        "endLine": 536,
+        "endChar": 25
+      },
+      "revId": "35ad2f777191672579ed6ccd7eabb314d8b86165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1505790d_1ee4be30",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-06-30T00:32:36Z",
+      "side": 1,
+      "message": "This must be `hdr-\u003epackage_header_format_revision` as discussed previously.",
+      "range": {
+        "startLine": 562,
+        "startChar": 5,
+        "endLine": 562,
+        "endChar": 25
+      },
+      "revId": "35ad2f777191672579ed6ccd7eabb314d8b86165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
