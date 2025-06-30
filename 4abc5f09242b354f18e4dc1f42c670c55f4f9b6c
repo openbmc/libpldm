@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae365d14_8170e81e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 34
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-30T05:26:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46d75253_1944e100",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 47
+      },
+      "revId": "4abc5f09242b354f18e4dc1f42c670c55f4f9b6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "501401f7_3a1673df",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-06-30T00:22:12Z",
       "side": 1,
       "message": "The patch tells us what you did. Can you please rather explain why?\n\nSomething like:\n\n\u003e Checksum validation is a hazard for fuzzing. Provide an API that allows us to adjust the implementation of the test based on whether we\u0027re building to fuzz the library implementation.",
+      "revId": "4abc5f09242b354f18e4dc1f42c670c55f4f9b6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c7f9764_3a7c098a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 34
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-06-30T05:26:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "501401f7_3a1673df",
       "revId": "4abc5f09242b354f18e4dc1f42c670c55f4f9b6c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
