@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "588b49fa_cfc6cf45",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-07-01T14:55:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a8d2e0dc_59837e08",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 1
+      },
+      "revId": "1b5d93cc403b90854bc4d06394e44081ae24302e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "608d34bf_b6135c54",
@@ -84,6 +108,30 @@
       "writtenOn": "2025-06-19T00:55:53Z",
       "side": 1,
       "message": "Please delete this. You\u0027re pinning the package parsing to format revision 1, which makes this code unnecessary.\n\nWhen you decide to pin to format revision 2 or above you should add proper support for handling downstream device descriptors.\n\nHowever, you do need to make considerations for the API/ABI of the binding and how you manage future changes to the spec along these lines. Consider taking the pin from the caller.",
+      "range": {
+        "startLine": 151,
+        "startChar": 1,
+        "endLine": 162,
+        "endChar": 2
+      },
+      "revId": "1b5d93cc403b90854bc4d06394e44081ae24302e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e9122a1_b517bed1",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-07-01T14:55:52Z",
+      "side": 1,
+      "message": "This seems to be a required call to go over the loop for downstream devices.\n\nBecause \nforeach_pldm_package_component_image_information\n\nrequires ```\u0026(iter).dds``` to be set and initialized as documented\nhttps://github.com/openbmc/libpldm/blob/0178274543250f489db18420782379ff4e62c6a5/include/libpldm/firmware_update.h#L2851\n\n```\n/**\n * @brief Iterate over the component image information contained in the package\n *\n * @param iter[in,out] The lvalue for the instance of @ref \"struct pldm_package_iter\"\n *             initialised by @ref decode_pldm_firmware_update_package\n * @param rec[in] An lvalue of type @ref \"struct pldm_package_downstream_device_id_record\"\n * @param desc[out] An lvalue of type @ref \"struct pldm_descriptor\" that holds\n *                  the parsed descriptor\n * @param rc[out] An lvalue of type int that holds the status result of parsing the\n *                downstream device ID record\n```\n\nThe iterator initialization seems to make use of that as-well\n\n```\n  LIBPLDM_ABI_TESTING\n  int pldm_package_component_image_information_iter_init(\n  |       const pldm_package_header_information_pad *hdr LIBPLDM_CC_UNUSED,\n  |       struct pldm_package_downstream_device_id_record_iter *dds,\n  |       struct pldm_package_component_image_information_iter *infos)\n  {\n  |       uint16_t component_image_count;\n  |       PLDM_MSGBUF_DEFINE_P(buf);\n  |       int rc;\n  \n  |       if (!dds || !infos) {\n  |       |       return -EINVAL;\n  |       }\n  \n  |       infos-\u003efield \u003d dds-\u003efield;\n```",
+      "parentUuid": "6825587e_8c7b5064",
       "range": {
         "startLine": 151,
         "startChar": 1,

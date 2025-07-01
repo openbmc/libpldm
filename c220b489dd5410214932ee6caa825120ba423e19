@@ -300,6 +300,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d4d6f8a_b918175d",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-07-01T14:55:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8753d400_3f2dff5a",
+      "range": {
+        "startLine": 116,
+        "startChar": 1,
+        "endLine": 135,
+        "endChar": 1
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc8e8546_63353ad3",
@@ -313,6 +337,30 @@
       "writtenOn": "2025-06-17T01:00:10Z",
       "side": 1,
       "message": "You\u0027re pinning the parsing to format revision 1, so no need to implement anything relating to downstream devices. This can be removed entirely. The library implementation is aware of the caller constraints via the pin (this is the purpose of the pin).",
+      "range": {
+        "startLine": 163,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 3
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34b89fd2_17a2ca28",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-07-01T14:55:52Z",
+      "side": 1,
+      "message": "passing pin now 😊",
+      "parentUuid": "dc8e8546_63353ad3",
       "range": {
         "startLine": 163,
         "startChar": 1,

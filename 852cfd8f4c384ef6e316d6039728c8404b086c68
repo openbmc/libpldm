@@ -176,6 +176,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47fff4e2_1b213f64",
+        "filename": "bindings/cpp/utils.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-07-01T14:55:52Z",
+      "side": 1,
+      "message": "replaced this with a copy loop.\n\nThere is overhead, but the implementation can always be optimized at a later point, to avoid getting stuck on this clang-tidy warning.",
+      "parentUuid": "743ccc10_6f693f6c",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d53539be_a60a976f",
@@ -398,6 +416,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3df3302f_30ee8661",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-07-01T14:55:52Z",
+      "side": 1,
+      "message": "Taking pin as an argument now. Everything besides 1.0.0 results in an std::unexpected error.",
+      "parentUuid": "854dba01_36167172",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 3
+      },
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "840e45a2_f65e257a",
@@ -528,6 +570,24 @@
       "writtenOn": "2025-06-25T01:40:55Z",
       "side": 1,
       "message": "Span?",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abaa9f40_0e44188e",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-07-01T14:55:52Z",
+      "side": 1,
+      "message": "Wanted a value object at least for the package header.\n\nSee the other discussion, let me know what you think of it 😊",
+      "parentUuid": "b32b378a_41af053e",
       "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
