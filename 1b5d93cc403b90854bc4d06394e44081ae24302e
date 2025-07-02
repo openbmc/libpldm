@@ -140,6 +140,30 @@
       },
       "revId": "1b5d93cc403b90854bc4d06394e44081ae24302e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c09f52c1_f7be27a3",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-02T01:46:19Z",
+      "side": 1,
+      "message": "Ah, good find. Let\u0027s get that fixed.",
+      "parentUuid": "7e9122a1_b517bed1",
+      "range": {
+        "startLine": 151,
+        "startChar": 1,
+        "endLine": 162,
+        "endChar": 2
+      },
+      "revId": "1b5d93cc403b90854bc4d06394e44081ae24302e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
