@@ -16,6 +16,24 @@
       "message": "Can we make it an array type with choices? That way if we grow further tools we can add them as a new choice rather than a new option.\n\n```\noption(\n    \u0027tools\u0027,\n    type: \u0027array\u0027,\n    description: \u0027Tools to build with the library\u0027,\n    choices: [\u0027pd\u0027],\n    value: [\u0027pd\u0027]\n)\n```",
       "revId": "8fbf3e63c61d0e7cff65a69e482a4f1255f6a25a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a8e6d83_a252d7be",
+        "filename": "meson.options",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T03:26:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21c33c14_ec42e4e0",
+      "revId": "8fbf3e63c61d0e7cff65a69e482a4f1255f6a25a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
