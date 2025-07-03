@@ -100,6 +100,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71a889a_fc1d67ea",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2715,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T07:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee5d0153_d5e4cb5e",
+      "range": {
+        "startLine": 2713,
+        "startChar": 52,
+        "endLine": 2715,
+        "endChar": 52
+      },
+      "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa3faacc_5d8ed353",
@@ -161,6 +185,30 @@
       "side": 1,
       "message": "Heh, I should have checked the spec before I commented. Yeah, an iterator is overkill. 8 entries of 2 bytes - I\u0027d make it a fixed-sized array in the struct?",
       "parentUuid": "30975dfd_84d6e187",
+      "range": {
+        "startLine": 2729,
+        "startChar": 1,
+        "endLine": 2729,
+        "endChar": 66
+      },
+      "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe99407_f4df4152",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2729,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T07:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43de4334_b3b9c4cd",
       "range": {
         "startLine": 2729,
         "startChar": 1,
@@ -302,6 +350,24 @@
       "side": 1,
       "message": "Yeah, if you could translate it in the caller that would be nice.",
       "parentUuid": "04b94795_dc7a989c",
+      "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08961062_29f5adf4",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2536,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T07:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a95a0d4_f73ee6e7",
       "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
