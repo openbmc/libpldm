@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "540b4b06_db13803b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2710,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T03:24:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e68287e6_1c0fe029",
+      "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41e17529_f9fbabb3",
@@ -48,6 +66,30 @@
       "writtenOn": "2025-07-03T02:41:15Z",
       "side": 1,
       "message": "I prefer we don\u0027t decompose the message this way. Was there some benefit over not defining a struct?",
+      "range": {
+        "startLine": 2713,
+        "startChar": 52,
+        "endLine": 2715,
+        "endChar": 52
+      },
+      "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee5d0153_d5e4cb5e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2715,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T03:24:34Z",
+      "side": 1,
+      "message": "Not really, will make a struct.",
+      "parentUuid": "41e17529_f9fbabb3",
       "range": {
         "startLine": 2713,
         "startChar": 52,
@@ -83,6 +125,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30975dfd_84d6e187",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2729,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T03:24:34Z",
+      "side": 1,
+      "message": "Given it\u0027s limited to 8 items an iterator API might be overkill. (Do you know if composite state sensors are used much?). I\u0027ll add a struct.",
+      "parentUuid": "fa3faacc_5d8ed353",
+      "range": {
+        "startLine": 2729,
+        "startChar": 1,
+        "endLine": 2729,
+        "endChar": 66
+      },
+      "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c0ab8da_8a56f683",
         "filename": "src/dsp/platform.c",
         "patchSetId": 1
@@ -94,6 +160,30 @@
       "writtenOn": "2025-07-03T02:41:15Z",
       "side": 1,
       "message": "Needs a `NULL` check.",
+      "range": {
+        "startLine": 2526,
+        "startChar": 28,
+        "endLine": 2526,
+        "endChar": 37
+      },
+      "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6be7e6be_00e26d66",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2526,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T03:24:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3c0ab8da_8a56f683",
       "range": {
         "startLine": 2526,
         "startChar": 28,
@@ -121,6 +211,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ef2393c_6f99b02a",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2527,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T03:24:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "87b33228_73a7652a",
+      "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9591129_495bc6cf",
@@ -134,6 +242,24 @@
       "writtenOn": "2025-07-03T02:41:15Z",
       "side": 1,
       "message": "Is it necessary to use this for the return value? I prefer we use errnos going forward.",
+      "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04b94795_dc7a989c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2536,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T03:24:34Z",
+      "side": 1,
+      "message": "`INVALID_SENSOR_OPERATIONAL_STATE` is listed as a response completion code for SetNumericSensorEnable in the spec, so I thought it would be best to return the most specific error response. Could change it to a generic `-EINVAL` which will get translated to a `PLDM_ERROR_INVALID_DATA` response.",
+      "parentUuid": "b9591129_495bc6cf",
       "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -161,6 +287,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bde6bb8_97fb138c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2543,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T03:24:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e9793fe3_e6044a46",
+      "range": {
+        "startLine": 2541,
+        "startChar": 1,
+        "endLine": 2543,
+        "endChar": 1
+      },
+      "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a625e72_3a3dd0e2",
@@ -174,6 +324,24 @@
       "writtenOn": "2025-07-03T02:41:15Z",
       "side": 1,
       "message": "Similar thoughts as above on this implementation.",
+      "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54397026_3735b911",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2603,
+      "author": {
+        "id": 1001129
+      },
+      "writtenOn": "2025-07-03T03:24:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5a625e72_3a3dd0e2",
       "revId": "72a6e9bea77d4ca07373c61dda4f8d9b47272101",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
