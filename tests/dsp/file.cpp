@@ -441,3 +441,258 @@ TEST(DecodeDfHeartbeatResp, BadTestInvalidExpectedInputMsgLength)
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeDfOpenResp, GoodTest)
+{
+    uint8_t instance_id = 0;
+    uint8_t completion_code = PLDM_SUCCESS;
+    uint16_t file_descriptor = 0x0100;
+    std::array<uint8_t, PLDM_DF_OPEN_RESP_BYTES> responseMsg = {0x00, 0x00,
+                                                                0x01};
+
+    const struct pldm_file_df_open_resp resp_data = {completion_code,
+                                                     file_descriptor};
+
+    PLDM_MSG_DEFINE_P(responsePtr, PLDM_DF_OPEN_RESP_BYTES);
+    auto rc = encode_pldm_file_df_open_resp(
+        instance_id, &resp_data, responsePtr, PLDM_DF_OPEN_RESP_BYTES);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(0, memcmp(responsePtr->payload, responseMsg.data(),
+                        sizeof(responseMsg)));
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeDfOpenResp, BadTestUnAllocatedPtrParams)
+{
+    uint8_t instance_id = 0;
+    uint8_t completion_code = PLDM_SUCCESS;
+    uint16_t file_descriptor = 0x0100;
+    int rc;
+    const struct pldm_file_df_open_resp resp_data = {completion_code,
+                                                     file_descriptor};
+
+    PLDM_MSG_DEFINE_P(responsePtr, PLDM_DF_OPEN_RESP_BYTES);
+    rc = encode_pldm_file_df_open_resp(instance_id, &resp_data, nullptr,
+                                       PLDM_DF_OPEN_RESP_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = encode_pldm_file_df_open_req(instance_id, nullptr, responsePtr,
+                                      PLDM_DF_OPEN_RESP_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeDfOpenResp, BadTestInvalidExpectedOutputMsgLength)
+{
+    uint8_t instance_id = 0;
+    uint8_t completion_code = PLDM_SUCCESS;
+    uint16_t file_descriptor = 0x0100;
+
+    const struct pldm_file_df_open_resp resp_data = {completion_code,
+                                                     file_descriptor};
+
+    PLDM_MSG_DEFINE_P(responsePtr, PLDM_DF_OPEN_RESP_BYTES);
+    auto rc =
+        encode_pldm_file_df_open_resp(instance_id, &resp_data, responsePtr, 1);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeDfOpenReq, GoodTest)
+{
+    uint16_t file_identifier = 0x0100;
+    bitfield16_t file_attribute;
+    file_attribute.value = 0x0400;
+
+    struct pldm_file_df_open_req req_data = {};
+
+    PLDM_MSGBUF_DEFINE_P(buf);
+    int rc;
+
+    static constexpr const size_t payload_length = PLDM_DF_OPEN_REQ_BYTES;
+
+    PLDM_MSG_DEFINE_P(requestMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, requestMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint16(buf, file_identifier);
+    pldm_msgbuf_insert_uint16(buf, file_attribute.value);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_pldm_file_df_open_req(requestMsg, payload_length, &req_data);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(req_data.file_identifier, file_identifier);
+    EXPECT_EQ(req_data.file_attribute.value, file_attribute.value);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeDfOpenReq, BadTestUnAllocatedPtrParams)
+{
+    uint16_t file_identifier = 0x0100;
+    bitfield16_t file_attribute;
+    file_attribute.value = 0x0400;
+
+    struct pldm_file_df_open_req req_data = {};
+
+    PLDM_MSGBUF_DEFINE_P(buf);
+    int rc;
+
+    static constexpr const size_t payload_length = PLDM_DF_OPEN_REQ_BYTES;
+
+    PLDM_MSG_DEFINE_P(requestMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, requestMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint16(buf, file_identifier);
+    pldm_msgbuf_insert_uint16(buf, file_attribute.value);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_pldm_file_df_open_req(nullptr, payload_length, &req_data);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_file_df_open_req(requestMsg, payload_length, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeDfOpenReq, BadTestInvalidExpectedInputMsgLength)
+{
+    uint16_t file_identifier = 0x0100;
+    bitfield16_t file_attribute;
+    file_attribute.value = 0x0400;
+
+    struct pldm_file_df_open_req req_data = {};
+
+    PLDM_MSGBUF_DEFINE_P(buf);
+    int rc;
+
+    static constexpr const size_t payload_length = PLDM_DF_OPEN_REQ_BYTES;
+
+    PLDM_MSG_DEFINE_P(requestMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, requestMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint16(buf, file_identifier);
+    pldm_msgbuf_insert_uint16(buf, file_attribute.value);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_pldm_file_df_open_req(requestMsg, 0, &req_data);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeDfCloseResp, GoodTest)
+{
+    uint8_t instance_id = 0;
+    std::array<uint8_t, PLDM_DF_CLOSE_RESP_BYTES> responseMsg = {PLDM_SUCCESS};
+
+    const struct pldm_file_df_close_resp resp_data = {PLDM_SUCCESS};
+
+    PLDM_MSG_DEFINE_P(responsePtr, PLDM_DF_OPEN_RESP_BYTES);
+
+    auto rc = encode_pldm_file_df_close_resp(
+        instance_id, &resp_data, responsePtr, PLDM_DF_CLOSE_RESP_BYTES);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(0, memcmp(responsePtr->payload, responseMsg.data(),
+                        sizeof(responseMsg)));
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EncodeDfCloseResp, BadTestUnAllocatedPtrParams)
+{
+    uint8_t instance_id = 0;
+    const struct pldm_file_df_close_resp resp_data = {PLDM_SUCCESS};
+    int rc;
+
+    PLDM_MSG_DEFINE_P(responsePtr, PLDM_DF_CLOSE_RESP_BYTES);
+
+    rc = encode_pldm_file_df_close_resp(instance_id, &resp_data, nullptr,
+                                        PLDM_DF_CLOSE_RESP_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = encode_pldm_file_df_close_resp(instance_id, nullptr, responsePtr,
+                                        PLDM_DF_CLOSE_RESP_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeDfCloseReq, GoodTest)
+{
+    uint16_t file_descriptor = 0x1000;
+    bitfield16_t df_close_options;
+    df_close_options.value = 0x4000;
+
+    struct pldm_file_df_close_req req_data = {};
+
+    PLDM_MSGBUF_DEFINE_P(buf);
+    int rc;
+
+    static constexpr const size_t payload_length = PLDM_DF_CLOSE_REQ_BYTES;
+
+    PLDM_MSG_DEFINE_P(requestMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, requestMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint16(buf, file_descriptor);
+    pldm_msgbuf_insert_uint16(buf, df_close_options.value);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_pldm_file_df_close_req(requestMsg, payload_length, &req_data);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(req_data.file_descriptor, file_descriptor);
+    EXPECT_EQ(req_data.df_close_options.value, df_close_options.value);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeDfCloseReq, BadTestUnAllocatedPtrParams)
+{
+    uint16_t file_descriptor = 0x1000;
+    bitfield16_t df_close_options;
+    df_close_options.value = 0x4000;
+
+    struct pldm_file_df_close_req req_data = {};
+
+    PLDM_MSGBUF_DEFINE_P(buf);
+    int rc;
+
+    static constexpr const size_t payload_length = PLDM_DF_CLOSE_REQ_BYTES;
+
+    PLDM_MSG_DEFINE_P(requestMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, requestMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint16(buf, file_descriptor);
+    pldm_msgbuf_insert_uint16(buf, df_close_options.value);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_pldm_file_df_close_req(nullptr, payload_length, &req_data);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_file_df_close_req(requestMsg, payload_length, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
