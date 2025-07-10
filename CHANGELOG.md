@@ -30,6 +30,8 @@ Change categories:
   `reference_manifest_data` and `payload_checksum` fields to correctly parse
   their contents.
 
+- file: Add encode req & decode resp for DfOpen and DfClose command
+
 ### Changed
 
 - Stabilised `decode_get_event_receiver_resp()`

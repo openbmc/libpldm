@@ -117,6 +117,40 @@ int encode_pldm_file_df_open_req(uint8_t instance_id,
 				 const struct pldm_file_df_open_req *req,
 				 struct pldm_msg *msg, size_t payload_length);
 
+/** @brief Decode DFOpen request data
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] req - Pointer to the decoded request message
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated
+ *          -EOVERFLOW if the input message buffer is too short for the output
+ *          response struct
+ *          -EBADMSG if the input message buffer is too large for the output
+ *          response struct.
+ */
+int decode_pldm_file_df_open_req(const struct pldm_msg *msg,
+				 size_t payload_length,
+				 struct pldm_file_df_open_req *req);
+
+/** @brief Create a PLDM response message for DFOpen
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp - The pointer to the response message to be encoded
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of the request message payload
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated,
+ *          or message type or instance in request header is invalid
+ *          -ENOMSG if the PLDM type in the request header is invalid
+ *          -EOVERFLOW if the input message length is invalid
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_pldm_file_df_open_resp(uint8_t instance_id,
+				  const struct pldm_file_df_open_resp *resp,
+				  struct pldm_msg *msg, size_t payload_length);
+
 /** @brief Decode DFOpen response data
  *
  *  @param[in] msg - Response message
@@ -151,11 +185,45 @@ int encode_pldm_file_df_close_req(uint8_t instance_id,
 				  const struct pldm_file_df_close_req *req,
 				  struct pldm_msg *msg, size_t payload_length);
 
+/** @brief Decode DFClose request data
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] req - pointer to the decoded request message
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated
+ *          -EOVERFLOW if the input message buffer is too short for the output
+ *          response struct
+ *          -EBADMSG if the input message buffer is too large for the output
+ *          response struct.
+ */
+int decode_pldm_file_df_close_req(const struct pldm_msg *msg,
+				  size_t payload_length,
+				  struct pldm_file_df_close_req *req);
+
+/** @brief Create a PLDM response message for DFClose
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp - The pointer to the response message to be encoded
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of the request message payload
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated,
+ *          or message type or instance in request header is invalid
+ *          -ENOMSG if the PLDM type in the request header is invalid
+ *          -EOVERFLOW if the input message length is invalid
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_pldm_file_df_close_resp(uint8_t instance_id,
+				   const struct pldm_file_df_close_resp *resp,
+				   struct pldm_msg *msg, size_t payload_length);
+
 /** @brief Decode DFClose response data
  *
  *  @param[in] msg - Response message
  *  @param[in] payload_length - Length of response message payload
- *  @param[out] resp - pointer to the decoded response message
+ *  @param[out] resp - Pointer to the decoded response message
  *  @return 0 on success
  *          -EINVAL if the input parameters' memory are not allocated
  */
