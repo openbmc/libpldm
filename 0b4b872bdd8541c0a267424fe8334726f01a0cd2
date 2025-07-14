@@ -22,6 +22,30 @@
       },
       "revId": "0b4b872bdd8541c0a267424fe8334726f01a0cd2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f369eca6_f3084c5c",
+        "filename": "src/dsp/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-07-14T15:56:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "514a44f5_44cb03fa",
+      "range": {
+        "startLine": 83,
+        "startChar": 1,
+        "endLine": 83,
+        "endChar": 35
+      },
+      "revId": "0b4b872bdd8541c0a267424fe8334726f01a0cd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
