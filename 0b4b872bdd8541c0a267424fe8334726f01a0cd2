@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "514a44f5_44cb03fa",
+        "filename": "src/dsp/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-07-14T03:57:12Z",
+      "side": 1,
+      "message": "Can we modify it like this? \nif(!msg || !resp)",
+      "range": {
+        "startLine": 83,
+        "startChar": 1,
+        "endLine": 83,
+        "endChar": 35
+      },
+      "revId": "0b4b872bdd8541c0a267424fe8334726f01a0cd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
