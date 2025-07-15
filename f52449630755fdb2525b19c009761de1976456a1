@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5019271d_22890b20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-15T01:23:06Z",
+      "side": 1,
+      "message": "Hi John, thanks for the patch. I have a few comments inline.",
+      "revId": "f52449630755fdb2525b19c009761de1976456a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53ee059a_3bc3ff07",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-15T01:23:06Z",
+      "side": 1,
+      "message": "This wording seems a little confusing. How about:\n\n\u003e -EINVAL if argument values are invalid for the invocation",
+      "revId": "f52449630755fdb2525b19c009761de1976456a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a8f2ec3_cc4d0e6a",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-15T01:23:06Z",
+      "side": 1,
+      "message": "`payload_length` should be an `in,out` parameter (i.e. pointer), which is updated with the encoded length of the message on success.",
+      "revId": "f52449630755fdb2525b19c009761de1976456a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bf410c7_f9c20e22",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-15T01:23:06Z",
+      "side": 1,
+      "message": "See above.",
+      "range": {
+        "startLine": 143,
+        "startChar": 20,
+        "endLine": 143,
+        "endChar": 70
+      },
+      "revId": "f52449630755fdb2525b19c009761de1976456a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d3541af_7180fcb7",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-15T01:23:06Z",
+      "side": 1,
+      "message": "See earlier comments",
+      "revId": "f52449630755fdb2525b19c009761de1976456a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cabeb98_cc2ea336",
+        "filename": "include/libpldm/file.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-15T01:23:06Z",
+      "side": 1,
+      "message": "This is unrelated, please drop it (or make it a separate patch).",
+      "revId": "f52449630755fdb2525b19c009761de1976456a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9643a884_5ba5b849",
+        "filename": "src/dsp/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-15T01:23:06Z",
+      "side": 1,
+      "message": "We shouldn\u0027t encode this in the response if the completion code isn\u0027t success. This motivates the out-parameter mode for `payload_length`.",
+      "revId": "f52449630755fdb2525b19c009761de1976456a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c64d76b_03746138",
+        "filename": "src/dsp/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-15T01:23:06Z",
+      "side": 1,
+      "message": "Use `pldm_msgbuf_complete_used()` here.",
+      "revId": "f52449630755fdb2525b19c009761de1976456a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da9cd2f3_d4b8b088",
+        "filename": "src/dsp/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-15T01:23:06Z",
+      "side": 1,
+      "message": "Pointer here, though more for consistency.",
+      "range": {
+        "startLine": 202,
+        "startChar": 29,
+        "endLine": 202,
+        "endChar": 50
+      },
+      "revId": "f52449630755fdb2525b19c009761de1976456a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b38ff16a_953ad3b9",
+        "filename": "src/dsp/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-15T01:23:06Z",
+      "side": 1,
+      "message": "Again for consistency more than anything `pldm_msgbuf_complete_used()`.",
+      "revId": "f52449630755fdb2525b19c009761de1976456a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
