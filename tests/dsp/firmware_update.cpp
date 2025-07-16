@@ -4831,20 +4831,21 @@ TEST(DecodePldmFirmwareUpdatePackage, badArguments)
     struct pldm_package_iter iter;
     uint8_t data;
     int rc;
+    uint32_t features = 0;
 
-    rc = decode_pldm_firmware_update_package(nullptr, 0, &pin, &hdr, &iter);
+    rc = decode_pldm_firmware_update_package(nullptr, 0, &pin, &hdr, &iter, features);
     EXPECT_EQ(rc, -EINVAL);
 
-    rc = decode_pldm_firmware_update_package(&data, sizeof(data), nullptr, &hdr,
-                                             &iter);
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), nullptr,
+                                             &hdr, &iter, features);
     EXPECT_EQ(rc, -EINVAL);
 
-    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, nullptr,
-                                             &iter);
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin,
+                                             nullptr, &iter, features);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, &hdr,
-                                             nullptr);
+                                             nullptr, features);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -4869,9 +4870,10 @@ TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinVersion)
     struct pldm_package_iter iter;
     uint8_t data = 0;
     int rc;
+    uint32_t features = 0;
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, &hdr,
-                                             &iter);
+                                             &iter, features);
     EXPECT_EQ(rc, -ENOTSUP);
 }
 #endif
@@ -4909,13 +4911,14 @@ TEST(DecodePldmFirmwareUpdatePackage, badPinRevision)
     struct pldm_package_iter iter;
     uint8_t data = 0;
     int rc;
+    uint32_t features = 0;
 
-    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &lowPin, &hdr,
-                                             &iter);
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &lowPin,
+                                             &hdr, &iter, features);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &highPin,
-                                             &hdr, &iter);
+                                             &hdr, &iter, features);
     EXPECT_EQ(rc, -ENOTSUP);
 }
 #endif
@@ -4953,13 +4956,14 @@ TEST(DecodePldmFirmwareUpdatePackage, badPinMagic)
     struct pldm_package_iter iter;
     uint8_t data = 0;
     int rc;
+    uint32_t features = 0;
 
-    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &lowPin, &hdr,
-                                             &iter);
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &lowPin,
+                                             &hdr, &iter, features);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &highPin,
-                                             &hdr, &iter);
+                                             &hdr, &iter, features);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -4997,9 +5001,10 @@ TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinIdentifier)
     struct pldm_package_iter iter;
     uint8_t data = 0;
     int rc;
+    uint32_t features = 0;
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, &hdr,
-                                             &iter);
+                                             &iter, features);
     EXPECT_EQ(rc, -ENOTSUP);
 }
 #endif
@@ -5021,9 +5026,10 @@ TEST(DecodePldmFirmwareUpdatePackage, oldConsumer)
     pldm_package_header_information_pad hdr;
     struct pldm_package_iter iter;
     int rc;
+    uint32_t features = 0;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &iter);
+                                             &pin, &hdr, &iter, features);
     EXPECT_EQ(rc, -ENOTSUP);
 }
 #endif
@@ -5062,9 +5068,10 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
     int nr_ddrec = 0;
     int nr_infos = 0;
     int rc;
+    uint32_t features = 0;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &iter);
+                                             &pin, &hdr, &iter, features);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_0.data(),
@@ -5092,7 +5099,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
     EXPECT_NE(hdr.package.ptr, nullptr);
     EXPECT_NE(hdr.package.length, 0);
 
-    foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc)
+    foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc, features)
     {
         struct pldm_descriptor desc;
 
@@ -5131,7 +5138,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
     EXPECT_EQ(nr_fdrec, 1);
     EXPECT_EQ(nr_fdrec_desc, 1);
 
-    foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc)
+    foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc, features)
     {
         struct pldm_descriptor desc;
 
@@ -5178,7 +5185,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
         0x000a,       0x0000, 0xffffffff,   {0},         {1},
         {nullptr, 1}, 0x01,   {nullptr, 0}, {nullptr, 0}};
 
-    foreach_pldm_package_component_image_information(iter, info, rc)
+    foreach_pldm_package_component_image_information(iter, info, rc, features)
     {
         EXPECT_EQ(info.component_classification,
                   expected_info.component_classification);
@@ -5253,9 +5260,10 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
     int nr_ddrec = 0;
     int nr_infos = 0;
     int rc;
+    uint32_t features = 0;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &iter);
+                                             &pin, &hdr, &iter, features);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_1.data(),
@@ -5283,7 +5291,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
     EXPECT_NE(hdr.package.ptr, nullptr);
     EXPECT_NE(hdr.package.length, 0);
 
-    foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc)
+    foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc, features)
     {
         struct pldm_descriptor desc;
 
@@ -5322,7 +5330,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
     EXPECT_EQ(nr_fdrec, 1);
     EXPECT_EQ(nr_fdrec_desc, 1);
 
-    foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc)
+    foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc, features)
     {
         struct pldm_descriptor desc;
 
@@ -5390,7 +5398,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
                          {nullptr, 0}}}};
     static const std::array<uint8_t, 2> expected_images{0x5a, 0xa5};
 
-    foreach_pldm_package_component_image_information(iter, info, rc)
+    foreach_pldm_package_component_image_information(iter, info, rc, features)
     {
         const struct pldm_package_component_image_information* expected;
         const char* version;
@@ -5475,9 +5483,10 @@ TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
     int nr_ddrec = 0;
     int nr_infos = 0;
     int rc;
+    uint32_t features = 0;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &iter);
+                                             &pin, &hdr, &iter, features);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_2.data(),
@@ -5505,7 +5514,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
     EXPECT_NE(hdr.package.ptr, nullptr);
     EXPECT_NE(hdr.package.length, 0);
 
-    foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc)
+    foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc, features)
     {
         struct pldm_descriptor desc;
 
@@ -5544,7 +5553,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
     EXPECT_EQ(nr_fdrec, 1);
     EXPECT_EQ(nr_fdrec_desc, 1);
 
-    foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc)
+    foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc, features)
     {
         struct pldm_descriptor desc;
 
@@ -5617,7 +5626,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
               {expected_opaque_data.data(), expected_opaque_data.size()}}}};
     static const std::array<uint8_t, 2> expected_images{0x5a, 0xa5};
 
-    foreach_pldm_package_component_image_information(iter, info, rc)
+    foreach_pldm_package_component_image_information(iter, info, rc, features)
     {
         const struct pldm_package_component_image_information* expected;
         const char* version;
@@ -5709,9 +5718,10 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
     int nr_ddrec = 0;
     int nr_infos = 0;
     int rc;
+    uint32_t features = 0;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &iter);
+                                             &pin, &hdr, &iter, features);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_3.data(),
@@ -5739,7 +5749,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
     EXPECT_NE(hdr.package.ptr, nullptr);
     EXPECT_NE(hdr.package.length, 0);
 
-    foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc)
+    foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc, features)
     {
         struct pldm_descriptor desc;
 
@@ -5785,7 +5795,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
     EXPECT_EQ(nr_fdrec, 1);
     EXPECT_EQ(nr_fdrec_desc, 1);
 
-    foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc)
+    foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc, features)
     {
         struct pldm_descriptor desc;
 
@@ -5866,7 +5876,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
               {expected_opaque_data.data(), expected_opaque_data.size()}}}};
     static const std::array<uint8_t, 2> expected_images{0x5a, 0xa5};
 
-    foreach_pldm_package_component_image_information(iter, info, rc)
+    foreach_pldm_package_component_image_information(iter, info, rc, features)
     {
         const struct pldm_package_component_image_information* expected;
         const char* version;

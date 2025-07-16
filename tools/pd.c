@@ -111,6 +111,7 @@ int main(void)
 	int status;
 	size_t in;
 	int rc;
+	uint32_t features = 0;
 
 	status = EXIT_SUCCESS;
 	package = calloc(PD_PACKAGE_BUFFER, 1);
@@ -120,7 +121,7 @@ int main(void)
 
 	in = fread(package, 1, PD_PACKAGE_BUFFER, stdin);
 	rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
-						 &iter);
+						 &iter, features);
 	if (rc < 0) {
 		warnx("Failed to parse PLDM package: %s\n",
 		      strerrorname_np(-rc));
@@ -135,7 +136,7 @@ int main(void)
 	       hdr.package_header_format_revision);
 	fwrite("\n", 1, 1, stdout);
 
-	foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc)
+	foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc, features)
 	{
 		struct pldm_descriptor desc;
 
@@ -172,7 +173,7 @@ int main(void)
 		goto cleanup_package;
 	}
 
-	foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc)
+	foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc, features)
 	{
 		struct pldm_descriptor desc;
 
@@ -209,7 +210,7 @@ int main(void)
 		goto cleanup_package;
 	}
 
-	foreach_pldm_package_component_image_information(iter, info, rc)
+	foreach_pldm_package_component_image_information(iter, info, rc, features)
 	{
 		printf("Component image info: %zu\n", nr_infos++);
 		printf("\tComponent classification: %" PRIu16 "\n",

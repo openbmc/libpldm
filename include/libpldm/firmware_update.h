@@ -2486,6 +2486,7 @@ struct pldm_package_iter {
  * @param[in] pin The maximum supported package format revision of the caller
  * @param[out] hdr The parsed package header structure
  * @param[out] iter State-tracking for parsing subsequent package records and components
+ * @param[in] features The feature flags reserved for future use, default to 0
  *
  * Must be called to ensure version requirements for parsing are met by all
  * components, and to initialise @p iter prior to any subsequent extraction of
@@ -2511,7 +2512,7 @@ int decode_pldm_firmware_update_package(
 	const void *data, size_t length,
 	const struct pldm_package_format_pin *pin,
 	pldm_package_header_information_pad *hdr,
-	struct pldm_package_iter *iter);
+	struct pldm_package_iter *iter, uint32_t features);
 
 LIBPLDM_ITERATOR
 bool pldm_package_firmware_device_id_record_iter_end(
@@ -2533,12 +2534,14 @@ bool pldm_package_firmware_device_id_record_iter_next(
 
 int pldm_package_firmware_device_id_record_iter_init(
 	const pldm_package_header_information_pad *hdr,
-	struct pldm_package_firmware_device_id_record_iter *iter);
+	struct pldm_package_firmware_device_id_record_iter *iter,
+	uint32_t features);
 
 int decode_pldm_package_firmware_device_id_record_from_iter(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_firmware_device_id_record_iter *iter,
-	struct pldm_package_firmware_device_id_record *rec);
+	struct pldm_package_firmware_device_id_record *rec,
+	uint32_t features);
 
 /**
  * @brief Iterate over a package's firmware device ID records
@@ -2548,6 +2551,7 @@ int decode_pldm_package_firmware_device_id_record_from_iter(
  * @param rec[out] An lvalue of type @ref "struct pldm_package_firmware_device_id_record"
  * @param rc[out] An lvalue of type int that holds the status result of parsing the
  *                firmware device ID record
+ * @param features[in] A bitfield of features reserved for future use, default to 0
  *
  * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
  * - -EINVAL if parameters values are invalid
@@ -2563,13 +2567,14 @@ int decode_pldm_package_firmware_device_id_record_from_iter(
  * pldm_package_header_information_pad hdr;
  * struct pldm_package_iter iter;
  * int rc;
+ * uint32_t features = 0;
  *
  * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
- * 					 &iter);
+ * 					 &iter, features);
  * if (rc < 0) {
  * 	   // Handle header parsing failure
  * }
- * foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc) {
+ * foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc, features) {
  * 	   // Do something with fdrec
  * }
  * if (rc) {
@@ -2577,13 +2582,13 @@ int decode_pldm_package_firmware_device_id_record_from_iter(
  * }
  * @endcode
  */
-#define foreach_pldm_package_firmware_device_id_record(iter, rec, rc)          \
+#define foreach_pldm_package_firmware_device_id_record(iter, rec, rc, features)          \
 	for ((rc) = pldm_package_firmware_device_id_record_iter_init(          \
-		     (iter).hdr, &(iter).fds);                                 \
+		     (iter).hdr, &(iter).fds, (features));                                 \
 	     !(rc) &&                                                          \
 	     !pldm_package_firmware_device_id_record_iter_end(&(iter).fds) &&  \
 	     !((rc) = decode_pldm_package_firmware_device_id_record_from_iter( \
-		       (iter).hdr, &(iter).fds, &(rec)));                      \
+		       (iter).hdr, &(iter).fds, &(rec), (features)));                      \
 	     pldm_package_firmware_device_id_record_iter_next(&(iter).fds))
 
 LIBPLDM_ITERATOR
@@ -2622,12 +2627,13 @@ pldm_package_firmware_device_id_record_descriptor_iter_init(
  * pldm_package_header_information_pad hdr;
  * struct pldm_package_iter iter;
  * int rc;
+ * uint32_t features = 0;
  *
  * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
- * 					 &iter);
+ * 					 &iter, features);
  * if (rc < 0) { ... }
  *
- * foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc) {
+ * foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc, features) {
  *     struct pldm_descriptor desc;
  *
  * 	   ...
@@ -2675,12 +2681,14 @@ bool pldm_package_downstream_device_id_record_iter_next(
 int pldm_package_downstream_device_id_record_iter_init(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_firmware_device_id_record_iter *fds,
-	struct pldm_package_downstream_device_id_record_iter *dds);
+	struct pldm_package_downstream_device_id_record_iter *dds,
+	uint32_t features);
 
 int decode_pldm_package_downstream_device_id_record_from_iter(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_downstream_device_id_record_iter *iter,
-	struct pldm_package_downstream_device_id_record *rec);
+	struct pldm_package_downstream_device_id_record *rec,
+	uint32_t features);
 
 /**
  * @brief Iterate over a package's downstream device ID records
@@ -2690,6 +2698,7 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
  * @param rec[out] An lvalue of type @ref "struct pldm_package_downstream_device_id_record"
  * @param rc[out] An lvalue of type int that holds the status result of parsing the
  *                firmware device ID record
+ * @param features[in] A bitfield of features reserved for future use, default to 0
  *
  * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
  * - -EINVAL if parameters values are invalid
@@ -2706,12 +2715,13 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
  * pldm_package_header_information_pad hdr;
  * struct pldm_package_iter iter;
  * int rc;
+ * uint32_t features = 0;
  *
  * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
- * 					 &iter);
+ * 					 &iter, features);
  * if (rc < 0) { ... }
  *
- * foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc) {
+ * foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc, features) {
  *     struct pldm_descriptor desc;
  * 	   ...
  *     foreach_pldm_package_firmware_device_id_record_descriptor(
@@ -2722,7 +2732,7 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
  * }
  * if (rc) { ... }
  *
- * foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc) {
+ * foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc, features) {
  * 	   // Do something with ddrec
  * }
  * if (rc) {
@@ -2730,14 +2740,14 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
  * }
  * @endcode
  */
-#define foreach_pldm_package_downstream_device_id_record(iter, rec, rc)          \
+#define foreach_pldm_package_downstream_device_id_record(iter, rec, rc, features)          \
 	for ((rc) = pldm_package_downstream_device_id_record_iter_init(          \
-		     (iter).hdr, &(iter).fds, &(iter).dds);                      \
+		     (iter).hdr, &(iter).fds, &(iter).dds, (features));                      \
 	     !(rc) &&                                                            \
 	     !pldm_package_downstream_device_id_record_iter_end(                 \
 		     &(iter).dds) &&                                             \
 	     !((rc) = decode_pldm_package_downstream_device_id_record_from_iter( \
-		       (iter).hdr, &(iter).dds, &(rec)));                        \
+		       (iter).hdr, &(iter).dds, &(rec), (features)));                        \
 	     pldm_package_downstream_device_id_record_iter_next(&(iter).dds))
 
 LIBPLDM_ITERATOR
@@ -2777,12 +2787,13 @@ pldm_package_downstream_device_id_record_descriptor_iter_init(
  * pldm_package_header_information_pad hdr;
  * struct pldm_package_iter iter;
  * int rc;
+ * uint32_t features = 0;
  *
  * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
- * 					 &iter);
+ * 					 &iter, features);
  * if (rc < 0) { ... }
  *
- * foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc) {
+ * foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc, features) {
  *     struct pldm_descriptor desc;
  * 	   ...
  *     foreach_pldm_package_firmware_device_id_record_descriptor(
@@ -2793,7 +2804,7 @@ pldm_package_downstream_device_id_record_descriptor_iter_init(
  * }
  * if (rc) { ... }
  *
- * foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc) {
+ * foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc, features) {
  *     struct pldm_descriptor desc;
  * 	   ...
  *     foreach_pldm_package_downstream_device_id_record_descriptor(
@@ -2840,12 +2851,14 @@ bool pldm_package_component_image_information_iter_next(
 int pldm_package_component_image_information_iter_init(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_downstream_device_id_record_iter *dds,
-	struct pldm_package_component_image_information_iter *infos);
+	struct pldm_package_component_image_information_iter *infos,
+	uint32_t features);
 
 int decode_pldm_package_component_image_information_from_iter(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_component_image_information_iter *iter,
-	struct pldm_package_component_image_information *info);
+	struct pldm_package_component_image_information *info,
+	uint32_t features);
 
 /**
  * @brief Iterate over the component image information contained in the package
@@ -2857,6 +2870,7 @@ int decode_pldm_package_component_image_information_from_iter(
  *                  the parsed descriptor
  * @param rc[out] An lvalue of type int that holds the status result of parsing the
  *                downstream device ID record
+ * @param features[in] A bitfield of features reserved for future use, default to 0
  *
  * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
  * - -EINVAL if parameters values are invalid
@@ -2874,12 +2888,13 @@ int decode_pldm_package_component_image_information_from_iter(
  * pldm_package_header_information_pad hdr;
  * struct pldm_package_iter iter;
  * int rc;
+ * uint32_t features = 0;
  *
  * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
- * 					 &iter);
+ * 					 &iter, features);
  * if (rc < 0) { ... }
  *
- * foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc) {
+ * foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc, features) {
  *     struct pldm_descriptor desc;
  * 	   ...
  *     foreach_pldm_package_firmware_device_id_record_descriptor(
@@ -2890,7 +2905,7 @@ int decode_pldm_package_component_image_information_from_iter(
  * }
  * if (rc) { ... }
  *
- * foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc) {
+ * foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc, features) {
  *     struct pldm_descriptor desc;
  * 	   ...
  *     foreach_pldm_package_downstream_device_id_record_descriptor(
@@ -2901,7 +2916,7 @@ int decode_pldm_package_component_image_information_from_iter(
  * }
  * if (rc) { ... }
  *
- * foreach_pldm_package_component_image_information(iter, info, rc) {
+ * foreach_pldm_package_component_image_information(iter, info, rc, features) {
  *     // Do something with info
  * }
  * if (rc) {
@@ -2909,14 +2924,14 @@ int decode_pldm_package_component_image_information_from_iter(
  * }
  * @endcode
  */
-#define foreach_pldm_package_component_image_information(iter, info, rc)         \
+#define foreach_pldm_package_component_image_information(iter, info, rc, features)         \
 	for ((rc) = pldm_package_component_image_information_iter_init(          \
-		     (iter).hdr, &(iter).dds, &(iter).infos);                    \
+		     (iter).hdr, &(iter).dds, &(iter).infos, (features));                    \
 	     !(rc) &&                                                            \
 	     !pldm_package_component_image_information_iter_end(                 \
 		     &(iter).infos) &&                                           \
 	     !((rc) = decode_pldm_package_component_image_information_from_iter( \
-		       (iter).hdr, &(iter).infos, &(info)));                     \
+		       (iter).hdr, &(iter).infos, &(info), (features)));                     \
 	     pldm_package_component_image_information_iter_next(                 \
 		     &(iter).infos))
 
