@@ -2484,6 +2484,7 @@ struct pldm_package_iter {
  * @param[in] data The buffer containing the complete firmware update package
  * @param[in] length The length of the buffer pointed at by @p data
  * @param[in] pin The maximum supported package format revision of the caller
+ * @param[in] features The feature flags reserved for future use, default to 0
  * @param[out] hdr The parsed package header structure
  * @param[out] iter State-tracking for parsing subsequent package records and components
  *
@@ -2509,7 +2510,7 @@ struct pldm_package_iter {
  */
 int decode_pldm_firmware_update_package(
 	const void *data, size_t length,
-	const struct pldm_package_format_pin *pin,
+	const struct pldm_package_format_pin *pin, uint32_t features,
 	pldm_package_header_information_pad *hdr,
 	struct pldm_package_iter *iter);
 
@@ -2564,7 +2565,7 @@ int decode_pldm_package_firmware_device_id_record_from_iter(
  * struct pldm_package_iter iter;
  * int rc;
  *
- * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
+ * rc = decode_pldm_firmware_update_package(package, in, &pin, 0, &hdr,
  * 					 &iter);
  * if (rc < 0) {
  * 	   // Handle header parsing failure
@@ -2623,7 +2624,7 @@ pldm_package_firmware_device_id_record_descriptor_iter_init(
  * struct pldm_package_iter iter;
  * int rc;
  *
- * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
+ * rc = decode_pldm_firmware_update_package(package, in, &pin, 0, &hdr,
  * 					 &iter);
  * if (rc < 0) { ... }
  *
@@ -2707,7 +2708,7 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
  * struct pldm_package_iter iter;
  * int rc;
  *
- * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
+ * rc = decode_pldm_firmware_update_package(package, in, &pin, 0, &hdr,
  * 					 &iter);
  * if (rc < 0) { ... }
  *
@@ -2778,7 +2779,7 @@ pldm_package_downstream_device_id_record_descriptor_iter_init(
  * struct pldm_package_iter iter;
  * int rc;
  *
- * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
+ * rc = decode_pldm_firmware_update_package(package, in, &pin, 0, &hdr,
  * 					 &iter);
  * if (rc < 0) { ... }
  *
@@ -2875,7 +2876,7 @@ int decode_pldm_package_component_image_information_from_iter(
  * struct pldm_package_iter iter;
  * int rc;
  *
- * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
+ * rc = decode_pldm_firmware_update_package(package, in, &pin, 0, &hdr,
  * 					 &iter);
  * if (rc < 0) { ... }
  *
