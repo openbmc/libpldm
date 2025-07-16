@@ -36,6 +36,7 @@ Change categories:
 
 - Stabilised `decode_get_event_receiver_resp()`
 - Improved documentation of `struct pldm_package_format_pin`
+- Add feature flag to `decode_pldm_firmware_update_package()`
 
 ### Deprecated
 
