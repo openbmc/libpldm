@@ -3251,9 +3251,11 @@ LIBPLDM_ABI_TESTING
 int decode_pldm_firmware_update_package(
 	const void *data, size_t length,
 	const struct pldm_package_format_pin *pin,
+	uint32_t features,
 	pldm_package_header_information_pad *hdr,
 	struct pldm_package_iter *iter)
 {
+	features = features;
 	if (!data || !pin || !hdr || !iter) {
 		return -EINVAL;
 	}
