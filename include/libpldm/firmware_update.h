@@ -2839,6 +2839,7 @@ bool pldm_package_component_image_information_iter_next(
 
 int pldm_package_component_image_information_iter_init(
 	const pldm_package_header_information_pad *hdr,
+	struct pldm_package_firmware_device_id_record_iter *fds,
 	struct pldm_package_downstream_device_id_record_iter *dds,
 	struct pldm_package_component_image_information_iter *infos);
 
@@ -2911,7 +2912,7 @@ int decode_pldm_package_component_image_information_from_iter(
  */
 #define foreach_pldm_package_component_image_information(iter, info, rc)         \
 	for ((rc) = pldm_package_component_image_information_iter_init(          \
-		     (iter).hdr, &(iter).dds, &(iter).infos);                    \
+		     (iter).hdr, &(iter).fds, &(iter).dds, &(iter).infos);       \
 	     !(rc) &&                                                            \
 	     !pldm_package_component_image_information_iter_end(                 \
 		     &(iter).infos) &&                                           \
