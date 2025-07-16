@@ -3457,6 +3457,7 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 LIBPLDM_ABI_TESTING
 int pldm_package_component_image_information_iter_init(
 	const pldm_package_header_information_pad *hdr LIBPLDM_CC_UNUSED,
+	struct pldm_package_firmware_device_id_record_iter *fds,
 	struct pldm_package_downstream_device_id_record_iter *dds,
 	struct pldm_package_component_image_information_iter *infos)
 {
@@ -3464,13 +3465,24 @@ int pldm_package_component_image_information_iter_init(
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
 
-	if (!dds || !infos) {
+	if (!infos) {
 		return -EINVAL;
 	}
 
-	infos->field = dds->field;
-	dds->field.ptr = NULL;
-	dds->field.length = 0;
+	if (!dds && !fds) {
+		return -EINVAL;
+	}
+
+	// downstream devices iterator may be present depending on pldm package version
+	if (dds && dds->field.ptr) {
+		infos->field = dds->field;
+		dds->field.ptr = NULL;
+		dds->field.length = 0;
+	} else {
+		infos->field = fds->field;
+		fds->field.ptr = NULL;
+		fds->field.length = 0;
+	}
 
 	/* Extract the component image count */
 	rc = pldm_msgbuf_init_errno(buf, 1, infos->field.ptr,

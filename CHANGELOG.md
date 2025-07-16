@@ -38,6 +38,9 @@ Change categories:
 - Stabilised `decode_get_event_receiver_resp()`
 - Improved documentation of `struct pldm_package_format_pin`
 - base: Allow PLDM File Transfer to use MultiPartReceive decode API
+- Fix `pldm_package_component_image_information_iter_init` to accept firmware
+  device iterator since lower pldm package versions do not have the downstream
+  devices.
 
 ### Deprecated
 
