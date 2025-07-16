@@ -393,6 +393,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b15dfe5_2bc76b00",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-07-16T11:37:51Z",
+      "side": 1,
+      "message": "With the good idea i can avoid formatting the `rc` into error messages. Thank you.\n\nAdded this `optional\u003cint\u003e rc`",
+      "parentUuid": "e51d1fb7_baf9d252",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "854dba01_36167172",
@@ -592,6 +610,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45798543_b6fb6e8d",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-07-16T11:37:51Z",
+      "side": 1,
+      "message": "Closing this discussion thread since there was no further comment.",
+      "parentUuid": "abaa9f40_0e44188e",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab6a7bc2_3c94ef50",
@@ -658,6 +694,24 @@
       "side": 1,
       "message": "I wanted to have a value object at least for the package header.\n\nMakes things easier to test and perhaps easier to go the other way\nfor PackageBuilder API.\n\nLet me know if we must have everything be a reference, or have it be as small as possible in memory.\n\nFrom my perception the package header is tiny compared to the component images so i did not worry too much about minimizing the header struct.",
       "parentUuid": "97a8d6bf_25fa9e00",
+      "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39afa2d9_42408d30",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-07-16T11:37:51Z",
+      "side": 1,
+      "message": "Closing this discussion thread since there was no further comment.",
+      "parentUuid": "f527c422_4f0980c3",
       "revId": "852cfd8f4c384ef6e316d6039728c8404b086c68",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
