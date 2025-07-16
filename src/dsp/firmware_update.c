@@ -3252,8 +3252,9 @@ int decode_pldm_firmware_update_package(
 	const void *data, size_t length,
 	const struct pldm_package_format_pin *pin,
 	pldm_package_header_information_pad *hdr,
-	struct pldm_package_iter *iter)
+	struct pldm_package_iter *iter, uint32_t features)
 {
+	(void)features;
 	if (!data || !pin || !hdr || !iter) {
 		return -EINVAL;
 	}
@@ -3266,8 +3267,10 @@ int decode_pldm_firmware_update_package(
 LIBPLDM_ABI_TESTING
 int pldm_package_firmware_device_id_record_iter_init(
 	const pldm_package_header_information_pad *hdr,
-	struct pldm_package_firmware_device_id_record_iter *iter)
+	struct pldm_package_firmware_device_id_record_iter *iter,
+	uint32_t features)
 {
+	(void)features;
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
 
@@ -3295,8 +3298,9 @@ LIBPLDM_ABI_TESTING
 int decode_pldm_package_firmware_device_id_record_from_iter(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_firmware_device_id_record_iter *iter,
-	struct pldm_package_firmware_device_id_record *rec)
+	struct pldm_package_firmware_device_id_record *rec, uint32_t features)
 {
+	(void)features;
 	return decode_pldm_package_firmware_device_id_record_errno(
 		hdr, &iter->field, rec);
 }
@@ -3305,8 +3309,10 @@ LIBPLDM_ABI_TESTING
 int pldm_package_downstream_device_id_record_iter_init(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_firmware_device_id_record_iter *fds,
-	struct pldm_package_downstream_device_id_record_iter *dds)
+	struct pldm_package_downstream_device_id_record_iter *dds,
+	uint32_t features)
 {
+	(void)features;
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
 
@@ -3343,8 +3349,9 @@ LIBPLDM_ABI_TESTING
 int decode_pldm_package_downstream_device_id_record_from_iter(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_downstream_device_id_record_iter *iter,
-	struct pldm_package_downstream_device_id_record *rec)
+	struct pldm_package_downstream_device_id_record *rec, uint32_t features)
 {
+	(void)features;
 	size_t package_data_offset;
 	PLDM_MSGBUF_DEFINE_P(buf);
 	uint16_t record_len = 0;
@@ -3458,8 +3465,10 @@ LIBPLDM_ABI_TESTING
 int pldm_package_component_image_information_iter_init(
 	const pldm_package_header_information_pad *hdr LIBPLDM_CC_UNUSED,
 	struct pldm_package_downstream_device_id_record_iter *dds,
-	struct pldm_package_component_image_information_iter *infos)
+	struct pldm_package_component_image_information_iter *infos,
+	uint32_t features)
 {
+	(void)features;
 	uint16_t component_image_count;
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
@@ -3496,8 +3505,10 @@ LIBPLDM_ABI_TESTING
 int decode_pldm_package_component_image_information_from_iter(
 	const pldm_package_header_information_pad *hdr,
 	struct pldm_package_component_image_information_iter *iter,
-	struct pldm_package_component_image_information *info)
+	struct pldm_package_component_image_information *info,
+	uint32_t features)
 {
+	(void)features;
 	uint32_t component_location_offset = 0;
 	uint32_t component_size = 0;
 	PLDM_MSGBUF_DEFINE_P(buf);
