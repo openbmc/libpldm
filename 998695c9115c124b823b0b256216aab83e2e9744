@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd654eac_50cf54d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-17T05:49:00Z",
+      "side": 1,
+      "message": "Ah, thanks for the effort to fix this. I\u0027ve been thinking about it too, and I think we might do well to rejig the iterator types and add a run-time state machine based on the pin information. I intend to explore that line of though in the coming week or so.",
+      "revId": "998695c9115c124b823b0b256216aab83e2e9744",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
