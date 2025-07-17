@@ -31,6 +31,7 @@ Change categories:
   their contents.
 
 - file: Add encode req & decode resp for DfOpen and DfClose command
+- base: Add encode resp for MultipartReceive command
 
 ### Changed
 

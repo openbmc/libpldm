@@ -672,6 +672,67 @@ int decode_base_multipart_receive_resp(const struct pldm_msg *msg,
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
+LIBPLDM_ABI_TESTING
+int encode_base_multipart_receive_resp(
+	uint8_t instance_id, const struct pldm_multipart_receive_resp *resp,
+	uint32_t checksum, struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (!msg || !resp || !payload_length || !resp->data.ptr) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_RESPONSE;
+	header.pldm_type = PLDM_BASE;
+	header.command = PLDM_MULTIPART_RECEIVE;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_BASE_MULTIPART_RECEIVE_RESP_MIN_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, resp->completion_code);
+	if (resp->completion_code != PLDM_SUCCESS) {
+		// Return without encoding the rest of the field
+		return pldm_msgbuf_complete_used(buf, *payload_length,
+						 payload_length);
+	}
+
+	pldm_msgbuf_insert(buf, resp->transfer_flag);
+	pldm_msgbuf_insert(buf, resp->next_transfer_handle);
+
+	pldm_msgbuf_insert_uint32(buf, resp->data.length);
+	if (resp->data.length == 0) {
+		// Return without encoding data payload
+		return pldm_msgbuf_complete_used(buf, *payload_length,
+						 payload_length);
+	}
+
+	rc = pldm_msgbuf_insert_array(buf, resp->data.length, resp->data.ptr,
+				      resp->data.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	if (resp->transfer_flag == PLDM_END ||
+	    resp->transfer_flag == PLDM_START_AND_END) {
+		pldm_msgbuf_insert(buf, checksum);
+	}
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_cc_only_resp(uint8_t instance_id, uint8_t type, uint8_t command,
 			uint8_t cc, struct pldm_msg *msg)

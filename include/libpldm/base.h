@@ -752,6 +752,24 @@ int decode_base_multipart_receive_resp(const struct pldm_msg *msg,
 				       struct pldm_multipart_receive_resp *resp,
 				       uint32_t *data_integrity_checksum);
 
+/** @brief Encode a PLDM MultipartReceive response message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp - The pointer to the response message to be encoded
+ *  @param[in] checksum - Checksum of the entirely data payload
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in,out] payload_length - length of request message payload
+ *  @return 0 on success
+ *          -EINVAL if argument values are invalid for the invocation
+ *          -ENOMSG if the PLDM type in the request header is invalid
+ *          -EOVERFLOW if the input message length is invalid
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_base_multipart_receive_resp(
+	uint8_t instance_id, const struct pldm_multipart_receive_resp *resp,
+	uint32_t checksum, struct pldm_msg *msg, size_t *payload_length);
+
 /** @brief Create a PLDM response message containing only cc
  *
  *  @param[in] instance_id - Message's instance id
