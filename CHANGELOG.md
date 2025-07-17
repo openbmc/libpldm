@@ -31,11 +31,14 @@ Change categories:
   their contents.
 
 - file: Add encode req & decode resp for DfOpen and DfClose command
+- base: Add encode resp for MultipartReceive command
 
 ### Changed
 
 - Stabilised `decode_get_event_receiver_resp()`
 - Improved documentation of `struct pldm_package_format_pin`
+- base: Skip decoding data field if complete code invalid in
+  `decode_base_multipart_receive_resp()` command
 
 ### Deprecated
 
