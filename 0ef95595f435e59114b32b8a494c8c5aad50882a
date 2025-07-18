@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25709a9f_d7ae0c3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-18T01:16:39Z",
+      "side": 1,
+      "message": "Hi John, I have a few comments inline",
+      "revId": "0ef95595f435e59114b32b8a494c8c5aad50882a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7364f58f_ad3f5f81",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-18T01:16:39Z",
+      "side": 1,
+      "message": "If we\u0027re doing this, it should occur immediately after the extraction of the completion code.\n\nAlso: can you please make this a separate patch.",
+      "revId": "0ef95595f435e59114b32b8a494c8c5aad50882a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c958a35_29ef05fa",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-18T01:16:39Z",
+      "side": 1,
+      "message": "If the completion code is not `PLDM_SUCCESS` then we should finish encoding the response here, right?\n\nFrom DSP0240 v1.2.0 8.2:\n\n\u003e For a PLDM operation resulting in an error, unless otherwise specified, the responder shall\nnot return any additional parameter data and the requester shall ignore any additional parameter data provided in the response.",
+      "revId": "0ef95595f435e59114b32b8a494c8c5aad50882a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ddcb259_68540ea3",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-18T01:16:39Z",
+      "side": 1,
+      "message": "This can be tested before we start encoding the response.",
+      "revId": "0ef95595f435e59114b32b8a494c8c5aad50882a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
