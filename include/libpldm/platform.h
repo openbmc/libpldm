@@ -2705,6 +2705,23 @@ int decode_pldm_platform_cper_event(const void *event_data,
 uint8_t *
 pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event);
 
+/** @brief Encode data in to File Descriptor PDR
+ *
+ *  @param[in] pdr - Populated pldm_platform_file_descriptor_pdr struct
+ *  @param[out] data - Pointer to a buffer to save encoded PDR data
+ *  @param[in/out] data_len - Length of the response PDR buffer (data)
+ *
+ *  @return error code: 0 on success
+ *          -EINVAL if the input values are invalid
+ *          -EBADMSG if the original length of the data buffer is larger
+ *          than the target extract length
+ *          -EOVERFLOW if the original length of the data buffer is smaller
+ *          than the target extract length
+ */
+int encode_pldm_platform_file_descriptor_pdr(
+	const struct pldm_platform_file_descriptor_pdr *pdr, void *data,
+	size_t *data_len);
+
 /** @brief Decode date fields from File Descriptor PDR
  *
  *  @param[in] data - PLDM response message which includes the File
