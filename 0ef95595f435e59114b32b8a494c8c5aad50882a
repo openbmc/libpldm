@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "494b49f6_0607b638",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-07-18T19:49:08Z",
+      "side": 1,
+      "message": "Acked. `pldm_msg_has_error` has already checked completion code in decode API.",
+      "parentUuid": "7364f58f_ad3f5f81",
+      "revId": "0ef95595f435e59114b32b8a494c8c5aad50882a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c958a35_29ef05fa",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "878b9bda_684cda59",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-07-18T19:49:08Z",
+      "side": 1,
+      "message": "Acked. We should return completion code only if it is not `PLDM_SUCCESS`.",
+      "parentUuid": "4c958a35_29ef05fa",
+      "revId": "0ef95595f435e59114b32b8a494c8c5aad50882a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ddcb259_68540ea3",
@@ -65,6 +101,24 @@
       "writtenOn": "2025-07-18T01:16:39Z",
       "side": 1,
       "message": "This can be tested before we start encoding the response.",
+      "revId": "0ef95595f435e59114b32b8a494c8c5aad50882a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28f94e1e_4c2a046b",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-07-18T19:49:08Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5ddcb259_68540ea3",
       "revId": "0ef95595f435e59114b32b8a494c8c5aad50882a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
