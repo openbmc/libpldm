@@ -138,6 +138,7 @@ enum pldm_platform_transfer_flag {
  * SuperiorDirectoryFileIdentifier, FileClassification, OemFileClassification,
  * FileCapabilities, FileVersion, FileMaximumSize, FileMaximumFileDescriptorCount,
  * FileNameLength in `Table 108 - File Descriptor PDR` of DSP0248 v1.3.0
+ * This also includes the size of the common PDR header 10 bytes.
  */
 #define PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH 36
 
@@ -160,6 +161,15 @@ enum pldm_platform_transfer_flag {
  *         0x0000, the containing entity is considered to be the overall system"
  */
 #define PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID 0
+
+/**
+ * File entity types from DSP0249
+ */
+#define PLDM_DEVICE_FILE_ENTITY_TYPE	       9
+#define PLDM_DEVICE_FILE_DIRECTORY_ENTITY_TYPE 10
+
+/* Maximum length possible for file descriptor PDR FileName property */
+#define PLDM_FILE_PDR_FILE_NAME_MAX_LENGTH 255
 
 enum pldm_effecter_data_size {
 	PLDM_EFFECTER_DATA_SIZE_UINT8,
@@ -2703,6 +2713,23 @@ int decode_pldm_platform_cper_event(const void *event_data,
  */
 uint8_t *
 pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event);
+
+/** @brief Encode data in to File Descriptor PDR
+ *
+ *  @param[in] pdr_data - Populated pldm_platform_file_descriptor_pdr struct
+ *  @param[in] buffer_len - Length of the response PDR buffer (resp_pdr_buffer)
+ *  @param[out] resp_pdr_buffer - Pointer to a buffer to save encoded PDR data
+ *
+ *  @return error code: 0 on success
+ *          -EINVAL if the input values are invalid
+ *          -EBADMSG if the original length of the data buffer is larger
+ *          than the target extract length
+ *          -EOVERFLOW if the original length of the data buffer is smaller
+ *          than the target extract length
+ */
+int encode_pldm_platform_file_descriptor_pdr(
+	const struct pldm_platform_file_descriptor_pdr *pdr_data,
+	size_t buffer_len, uint8_t *resp_pdr_buffer);
 
 /** @brief Decode date fields from File Descriptor PDR
  *
