@@ -546,7 +546,8 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 	struct pldm_multipart_receive_req *request =
 		(struct pldm_multipart_receive_req *)msg->payload;
 
-	if (request->pldm_type != PLDM_BASE) {
+	if (request->pldm_type != PLDM_BASE &&
+	    request->pldm_type != PLDM_FILE) {
 		return PLDM_ERROR_INVALID_PLDM_TYPE;
 	}
 

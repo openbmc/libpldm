@@ -36,6 +36,7 @@ Change categories:
 
 - Stabilised `decode_get_event_receiver_resp()`
 - Improved documentation of `struct pldm_package_format_pin`
+- base: Allow PLDM File Transfer to use MultiPartReceive decode API
 
 ### Deprecated
 
