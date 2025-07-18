@@ -3537,3 +3537,96 @@ int decode_pldm_platform_file_descriptor_pdr(
 
 	return pldm_msgbuf_complete_consumed(buf);
 }
+
+/* Maximum length possible for file descriptor PDR FileName property */
+#define PLDM_FILE_PDR_FILE_NAME_MAX_LENGTH 255
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_platform_file_descriptor_pdr(
+	const struct pldm_platform_file_descriptor_pdr *pdr, void *data,
+	size_t *data_len)
+{
+	PLDM_MSGBUF_DEFINE_P(buf);
+
+	if (!pdr || !pdr->file_name.ptr || !data ||
+	    (pdr->file_name.length <= 1)) {
+		return -EINVAL;
+	}
+
+	if ((pdr->oem_file_classification_name.length > 1) &&
+	    !pdr->oem_file_classification_name.ptr) {
+		return -EINVAL;
+	}
+
+	if ((pdr->file_name.length > PLDM_FILE_PDR_FILE_NAME_MAX_LENGTH) ||
+	    (pdr->oem_file_classification_name.length >
+	     PLDM_FILE_PDR_FILE_NAME_MAX_LENGTH)) {
+		return -EINVAL;
+	}
+
+	size_t total_oem_name_segment_size = 0;
+	if (pdr->oem_file_classification_name.length > 1) {
+		total_oem_name_segment_size =
+			pdr->oem_file_classification_name.length +
+			sizeof(uint8_t);
+	}
+
+	// Length of the PDR in the response
+	size_t pdr_len = PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH +
+			 pdr->file_name.length + total_oem_name_segment_size;
+	if (pdr->hdr.length != (pdr_len - sizeof(struct pldm_pdr_hdr))) {
+		return -EINVAL;
+	}
+
+	int rc = pldm_msgbuf_init_errno(buf, pdr_len, data, *data_len);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, pdr->hdr.record_handle);
+	pldm_msgbuf_insert(buf, pdr->hdr.version);
+	pldm_msgbuf_insert(buf, pdr->hdr.type);
+	pldm_msgbuf_insert(buf, pdr->hdr.record_change_num);
+	pldm_msgbuf_insert(buf, pdr->hdr.length);
+	pldm_msgbuf_insert(buf, pdr->terminus_handle);
+	pldm_msgbuf_insert(buf, pdr->file_identifier);
+	pldm_msgbuf_insert(buf, pdr->container.entity_type);
+	pldm_msgbuf_insert(buf, pdr->container.entity_instance_num);
+	pldm_msgbuf_insert(buf, pdr->container.entity_container_id);
+	pldm_msgbuf_insert(buf, pdr->superior_directory_file_identifier);
+	pldm_msgbuf_insert(buf, pdr->file_classification);
+	pldm_msgbuf_insert(buf, pdr->oem_file_classification);
+	pldm_msgbuf_insert(buf, pdr->file_capabilities.value);
+
+	rc = pldm_msgbuf_insert_array(buf, sizeof(pdr->file_version),
+				      (uint8_t *)(&pdr->file_version),
+				      sizeof(pdr->file_version));
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_insert(buf, pdr->file_maximum_size);
+	pldm_msgbuf_insert(buf, pdr->file_maximum_file_descriptor_count);
+	pldm_msgbuf_insert(buf, (uint8_t)pdr->file_name.length);
+
+	rc = pldm_msgbuf_insert_array(buf, pdr->file_name.length,
+				      pdr->file_name.ptr,
+				      pdr->file_name.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	if (pdr->oem_file_classification_name.length > 1) {
+		pldm_msgbuf_insert(
+			buf, (uint8_t)pdr->oem_file_classification_name.length);
+		rc = pldm_msgbuf_insert_array(
+			buf, pdr->oem_file_classification_name.length,
+			pdr->oem_file_classification_name.ptr,
+			pdr->oem_file_classification_name.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	}
+
+	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
+}
