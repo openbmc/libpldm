@@ -6397,3 +6397,218 @@ TEST(decodePldmFileDescriptorPdr, BadTestDataBufferUnderLength)
     EXPECT_EQ(-EOVERFLOW, rc);
 }
 #endif
+
+// #ifdef LIBPLDM_API_TESTING
+namespace
+{
+void createFileDescriptorPDR(pldm_platform_file_descriptor_pdr& pdr,
+                             const std::string& fileName,
+                             const std::string& oemName)
+{
+    pdr.hdr = {1, 1, PLDM_FILE_DESCRIPTOR_PDR, 0, 0};
+    pdr.terminus_handle = 2;
+    pdr.file_identifier = 10;
+    pdr.container = {20, 1, 0};
+    pdr.superior_directory_file_identifier = 0;
+    pdr.file_classification = 1;
+    pdr.oem_file_classification = oemName.empty() ? 0 : 1;
+    pdr.file_capabilities = {0};
+    pdr.file_version = {1, 2, 3, 4};
+    pdr.file_maximum_size = 1024;
+    pdr.file_maximum_file_descriptor_count = 1;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    pdr.file_name.ptr = reinterpret_cast<const uint8_t*>(fileName.c_str());
+    pdr.file_name.length = fileName.length() + 1;
+
+    size_t total_oem_name_segment_size = 0;
+    if (!oemName.empty())
+    {
+        // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
+        pdr.oem_file_classification_name.ptr =
+            reinterpret_cast<const uint8_t*>(oemName.c_str());
+        // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
+        pdr.oem_file_classification_name.length = oemName.length() + 1;
+        total_oem_name_segment_size =
+            pdr.oem_file_classification_name.length + sizeof(uint8_t);
+    }
+    else
+    {
+        pdr.oem_file_classification_name.ptr = nullptr;
+        pdr.oem_file_classification_name.length = 0;
+        total_oem_name_segment_size = 0;
+    }
+
+    size_t pdrLen = PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH +
+                    pdr.file_name.length + total_oem_name_segment_size;
+    pdr.hdr.length = pdrLen - sizeof(struct pldm_pdr_hdr);
+}
+} // namespace
+
+TEST(EncodePldmFileDescriptorPdr, SuccessCase)
+{
+    pldm_platform_file_descriptor_pdr pdr{};
+    std::string fileName = "test_file.txt";
+    std::string oemName = "test_oem_name";
+    createFileDescriptorPDR(pdr, fileName, oemName);
+
+    size_t pdrLen = sizeof(struct pldm_pdr_hdr) + pdr.hdr.length;
+    std::vector<uint8_t> buffer(pdrLen);
+
+    auto rc = encode_pldm_platform_file_descriptor_pdr(&pdr, buffer.size(),
+                                                       buffer.data());
+    EXPECT_EQ(rc, 0);
+
+    pldm_platform_file_descriptor_pdr decoded_pdr{};
+    rc = decode_pldm_platform_file_descriptor_pdr(buffer.data(), buffer.size(),
+                                                  &decoded_pdr);
+    EXPECT_EQ(rc, 0);
+
+    EXPECT_EQ(pdr.hdr.record_handle, decoded_pdr.hdr.record_handle);
+    EXPECT_EQ(pdr.hdr.version, decoded_pdr.hdr.version);
+    EXPECT_EQ(pdr.hdr.type, decoded_pdr.hdr.type);
+    EXPECT_EQ(pdr.hdr.record_change_num, decoded_pdr.hdr.record_change_num);
+    EXPECT_EQ(pdr.hdr.length, decoded_pdr.hdr.length);
+    EXPECT_EQ(pdr.terminus_handle, decoded_pdr.terminus_handle);
+    EXPECT_EQ(pdr.file_identifier, decoded_pdr.file_identifier);
+    EXPECT_EQ(pdr.container.entity_type, decoded_pdr.container.entity_type);
+    EXPECT_EQ(pdr.container.entity_instance_num,
+              decoded_pdr.container.entity_instance_num);
+    EXPECT_EQ(pdr.container.entity_container_id,
+              decoded_pdr.container.entity_container_id);
+    EXPECT_EQ(pdr.superior_directory_file_identifier,
+              decoded_pdr.superior_directory_file_identifier);
+    EXPECT_EQ(pdr.file_classification, decoded_pdr.file_classification);
+    EXPECT_EQ(pdr.oem_file_classification, decoded_pdr.oem_file_classification);
+    EXPECT_EQ(pdr.file_capabilities.value, decoded_pdr.file_capabilities.value);
+    EXPECT_EQ(0, memcmp(&pdr.file_version, &decoded_pdr.file_version,
+                        sizeof(pdr.file_version)));
+    EXPECT_EQ(pdr.file_maximum_size, decoded_pdr.file_maximum_size);
+    EXPECT_EQ(pdr.file_maximum_file_descriptor_count,
+              decoded_pdr.file_maximum_file_descriptor_count);
+    EXPECT_EQ(pdr.file_name.length, decoded_pdr.file_name.length);
+    EXPECT_EQ(0, memcmp(pdr.file_name.ptr, decoded_pdr.file_name.ptr,
+                        pdr.file_name.length));
+    EXPECT_EQ(pdr.oem_file_classification_name.length,
+              decoded_pdr.oem_file_classification_name.length);
+    EXPECT_EQ(0, memcmp(pdr.oem_file_classification_name.ptr,
+                        decoded_pdr.oem_file_classification_name.ptr,
+                        pdr.oem_file_classification_name.length));
+}
+
+TEST(EncodePldmFileDescriptorPdr, BadParamStringTooLong)
+{
+    pldm_platform_file_descriptor_pdr pdr{};
+    std::string shortFileName = "file";
+    std::string longName(256, 'a');
+
+    // Test file_name.length > 255
+    createFileDescriptorPDR(pdr, longName, "");
+    size_t pdrLen = sizeof(struct pldm_pdr_hdr) + pdr.hdr.length;
+    std::vector<uint8_t> buffer(pdrLen);
+    EXPECT_EQ(encode_pldm_platform_file_descriptor_pdr(&pdr, buffer.size(),
+                                                       buffer.data()),
+              -EINVAL);
+
+    // Test oem_file_classification_name.length > 255
+    createFileDescriptorPDR(pdr, shortFileName, longName);
+    pdrLen = sizeof(struct pldm_pdr_hdr) + pdr.hdr.length;
+    buffer.resize(pdrLen);
+    EXPECT_EQ(encode_pldm_platform_file_descriptor_pdr(&pdr, buffer.size(),
+                                                       buffer.data()),
+              -EINVAL);
+}
+
+TEST(EncodePldmFileDescriptorPdr, BadParamNullPdrData)
+{
+    std::vector<uint8_t> pdrBuf(100);
+    EXPECT_EQ(encode_pldm_platform_file_descriptor_pdr(NULL, pdrBuf.size(),
+                                                       pdrBuf.data()),
+              -EINVAL);
+}
+
+TEST(EncodePldmFileDescriptorPdr, BadParamNullRespBuffer)
+{
+    pldm_platform_file_descriptor_pdr pdr{};
+    std::string fileName = "test_file.txt";
+    createFileDescriptorPDR(pdr, fileName, "");
+    size_t pdrLen = sizeof(struct pldm_pdr_hdr) + pdr.hdr.length;
+    EXPECT_EQ(encode_pldm_platform_file_descriptor_pdr(&pdr, pdrLen, NULL),
+              -EINVAL);
+}
+
+TEST(EncodePldmFileDescriptorPdr, BadParamNullFileNamePtr)
+{
+    pldm_platform_file_descriptor_pdr pdr{};
+    std::string fileName = "test_file.txt";
+    createFileDescriptorPDR(pdr, fileName, "");
+    pdr.file_name.ptr = nullptr;
+    size_t pdrLen = sizeof(struct pldm_pdr_hdr) + pdr.hdr.length;
+    std::vector<uint8_t> buffer(pdrLen);
+    EXPECT_EQ(encode_pldm_platform_file_descriptor_pdr(&pdr, buffer.size(),
+                                                       buffer.data()),
+              -EINVAL);
+}
+
+TEST(EncodePldmFileDescriptorPdr, BadParamInvalidFileNameLength)
+{
+    pldm_platform_file_descriptor_pdr pdr{};
+    std::string fileName = "t";
+    createFileDescriptorPDR(pdr, "ab", "");
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    pdr.file_name.ptr = reinterpret_cast<const uint8_t*>(fileName.c_str());
+
+    pdr.file_name.length = 1;
+    pdr.hdr.length -= 1;
+    size_t pdrLen = sizeof(struct pldm_pdr_hdr) + pdr.hdr.length;
+    std::vector<uint8_t> buffer(pdrLen);
+    EXPECT_EQ(encode_pldm_platform_file_descriptor_pdr(&pdr, buffer.size(),
+                                                       buffer.data()),
+              -EINVAL);
+
+    pdr.file_name.length = 0;
+    pdr.hdr.length -= 1;
+    EXPECT_EQ(encode_pldm_platform_file_descriptor_pdr(&pdr, buffer.size(),
+                                                       buffer.data()),
+              -EINVAL);
+}
+
+TEST(EncodePldmFileDescriptorPdr, BadParamNullOemNamePtr)
+{
+    pldm_platform_file_descriptor_pdr pdr{};
+    std::string fileName = "test_file.txt";
+    std::string oemName = "test_oem";
+    createFileDescriptorPDR(pdr, fileName, oemName);
+    pdr.oem_file_classification_name.ptr = nullptr;
+    size_t pdrLen = sizeof(struct pldm_pdr_hdr) + pdr.hdr.length;
+    std::vector<uint8_t> buffer(pdrLen);
+    EXPECT_EQ(encode_pldm_platform_file_descriptor_pdr(&pdr, buffer.size(),
+                                                       buffer.data()),
+              -EINVAL);
+}
+
+TEST(EncodePldmFileDescriptorPdr, BadParamIncorrectHdrLength)
+{
+    pldm_platform_file_descriptor_pdr pdr{};
+    std::string fileName = "test_file.txt";
+    createFileDescriptorPDR(pdr, fileName, "");
+    pdr.hdr.length += 1;
+    size_t pdrLen = sizeof(struct pldm_pdr_hdr) + pdr.hdr.length;
+    std::vector<uint8_t> buffer(pdrLen);
+    EXPECT_EQ(encode_pldm_platform_file_descriptor_pdr(&pdr, buffer.size(),
+                                                       buffer.data()),
+              -EINVAL);
+}
+
+TEST(EncodePldmFileDescriptorPdr, BadParamBufferTooSmall)
+{
+    pldm_platform_file_descriptor_pdr pdr{};
+    std::string fileName = "test_file.txt";
+    createFileDescriptorPDR(pdr, fileName, "");
+    size_t pdrLen = sizeof(struct pldm_pdr_hdr) + pdr.hdr.length;
+    std::vector<uint8_t> buffer(pdrLen - 1);
+    EXPECT_EQ(encode_pldm_platform_file_descriptor_pdr(&pdr, buffer.size(),
+                                                       buffer.data()),
+              -EOVERFLOW);
+}
+// #endif
