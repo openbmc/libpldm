@@ -19,6 +19,11 @@ Change categories:
 
 ### Added
 
+- platform: Added file descriptor PDR encoding support
+  -   Added `encode_pldm_platform_file_descriptor_pdr()`
+  -   Added `PLDM_DEVICE_FILE_ENTITY_TYPE`, `PLDM_DEVICE_FILE_DIRECTORY_ENTITY_TYPE`
+      and `PLDM_FILE_PDR_FILE_NAME_MAX_LENGTH`
+
 ### Changed
 
 - base:
