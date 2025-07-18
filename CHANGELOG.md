@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- platform: Added file descriptor PDR encoding support
+  - Added `encode_pldm_platform_file_descriptor_pdr()`
+
 ### Changed
 
 - base:
