@@ -88,6 +88,42 @@
       "parentUuid": "d806943e_59c5f2dd",
       "revId": "c30af0a83ef638744ccf1aa0de5209403cbcfe4f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "881ad580_a4e3d8ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-07-28T01:52:52Z",
+      "side": 1,
+      "message": "\u003e We need the following discussion resolved: https://gerrit.openbmc.org/c/openbmc/libpldm/+/77095/comment/6825587e_8c7b5064/\n\nSeems like this is resolved now,",
+      "parentUuid": "cd452531_dc975df9",
+      "revId": "c30af0a83ef638744ccf1aa0de5209403cbcfe4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64a17bd1_72cc3f18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2025-07-28T01:52:52Z",
+      "side": 1,
+      "message": "\u003e We need the following discussion resolved: https://gerrit.openbmc.org/c/openbmc/libpldm/+/77095/comment/6825587e_8c7b5064/\n\nSeems like this has been addressed and awaiting for merge",
+      "parentUuid": "cd452531_dc975df9",
+      "revId": "c30af0a83ef638744ccf1aa0de5209403cbcfe4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
