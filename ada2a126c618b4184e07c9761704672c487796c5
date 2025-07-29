@@ -33,6 +33,24 @@
       "message": "Ah, thanks for the effort to fix this. I\u0027ve been thinking about it too, and I think we might do well to rejig the iterator types so we\u0027re able to carry this state through all the package APIs involved. I intend to explore that thought in the next week or so.",
       "revId": "ada2a126c618b4184e07c9761704672c487796c5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aa87b4c_5198b10f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-29T01:13:22Z",
+      "side": 1,
+      "message": "Marking this as unresolved",
+      "parentUuid": "cd93a4bb_d20ff026",
+      "revId": "ada2a126c618b4184e07c9761704672c487796c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
