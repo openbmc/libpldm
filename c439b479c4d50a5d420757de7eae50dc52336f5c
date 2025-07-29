@@ -16,6 +16,23 @@
       "message": "Hi all, we are encountering an unknown CI failure, so I just opened it anyways for reviewing, would be appreciated if anyone can tell the reason of the failure.",
       "revId": "c439b479c4d50a5d420757de7eae50dc52336f5c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9be4849e_cc93dd96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-07-29T01:13:58Z",
+      "side": 1,
+      "message": "Need to resolve the issues at https://gerrit.openbmc.org/c/openbmc/libpldm/+/82052/comments/cd93a4bb_d20ff026",
+      "revId": "c439b479c4d50a5d420757de7eae50dc52336f5c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
