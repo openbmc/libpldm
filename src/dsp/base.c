@@ -579,7 +579,7 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_base_multipart_receive_req(
 	uint8_t instance_id, const struct pldm_multipart_receive_req *req,
 	struct pldm_msg *msg, size_t payload_length)
@@ -618,7 +618,7 @@ int encode_base_multipart_receive_req(
 	return pldm_msgbuf_complete(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_base_multipart_receive_resp(const struct pldm_msg *msg,
 				       size_t payload_length,
 				       struct pldm_multipart_receive_resp *resp,
@@ -787,7 +787,7 @@ int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_pldm_base_negotiate_transfer_params_req(
 	uint8_t instance_id,
 	const struct pldm_base_negotiate_transfer_params_req *req,
@@ -830,7 +830,7 @@ int encode_pldm_base_negotiate_transfer_params_req(
 	return pldm_msgbuf_complete(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_base_negotiate_transfer_params_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_base_negotiate_transfer_params_resp *resp)

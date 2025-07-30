@@ -52,6 +52,13 @@ Change categories:
 - Stabilised `decode_get_event_receiver_resp()`
 - Improved documentation of `struct pldm_package_format_pin`
 - base: Allow PLDM File Transfer to use MultiPartReceive decode API
+- Stabilised `decode_pldm_file_descriptor_pdr()`,
+  `encode_base_multipart_receive_req()`, `decode_base_multipart_receive_resp()`,
+  `encode_pldm_base_negotiate_transfer_params_req()`,
+  `decode_pldm_base_negotiate_transfer_params_resp()`,
+  `encode_pldm_file_df_open_req()`, `decode_pldm_file_df_open_resp()`,
+  `encode_pldm_file_df_close_req()`, `decode_pldm_file_df_close_resp()`,
+  `encode_pldm_file_df_heartbeat_req()`, `decode_pldm_file_df_heartbeat_resp()`
 
 ### Removed
 
