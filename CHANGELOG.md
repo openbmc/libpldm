@@ -40,6 +40,19 @@ Change categories:
   - `decode_pldm_file_descriptor_pdr()` to
     `decode_pldm_platform_file_descriptor_pdr()`
 
+- Stabilised:
+  - `decode_pldm_platform_file_descriptor_pdr()`
+  - `encode_pldm_base_multipart_receive_req()`
+  - `decode_pldm_base_multipart_receive_resp()`
+  - `encode_pldm_base_negotiate_transfer_params_req()`
+  - `decode_pldm_base_negotiate_transfer_params_resp()`
+  - `encode_pldm_file_df_open_req()`
+  - `decode_pldm_file_df_open_resp()`
+  - `encode_pldm_file_df_close_req()`
+  - `decode_pldm_file_df_close_resp()`
+  - `encode_pldm_file_df_heartbeat_req()`
+  - `decode_pldm_file_df_heartbeat_resp()`
+
 ### Deprecated
 
 ### Removed

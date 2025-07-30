@@ -8,6 +8,7 @@ $VAR1 = {
     'base.h' => 1,
     'bios.h' => 1,
     'bios_table.h' => 1,
+    'file.h' => 1,
     'file_io.h' => 1,
     'firmware_update.h' => 1,
     'fru.h' => 1,
@@ -39,7 +40,7 @@ $VAR1 = {
   'SymbolInfo' => {
     '1459' => {
       'Header' => 'base.h',
-      'Line' => '782',
+      'Line' => '783',
       'Param' => {
         '0' => {
           'name' => 'instance_id',
@@ -436,9 +437,56 @@ $VAR1 = {
       'Return' => '152',
       'ShortName' => 'pldm_edac_crc32'
     },
+    '9411' => {
+      'Header' => 'base.h',
+      'Line' => '832',
+      'Param' => {
+        '0' => {
+          'name' => 'msg',
+          'type' => '1580'
+        },
+        '1' => {
+          'name' => 'payload_length',
+          'type' => '169'
+        },
+        '2' => {
+          'name' => 'resp',
+          'type' => '10994'
+        }
+      },
+      'Return' => '58',
+      'ShortName' => 'decode_pldm_base_negotiate_transfer_params_resp'
+    },
+    '11004' => {
+      'Header' => 'base.h',
+      'Line' => '812',
+      'Param' => {
+        '0' => {
+          'name' => 'instance_id',
+          'type' => '140'
+        },
+        '1' => {
+          'name' => 'req',
+          'type' => '12264'
+        },
+        '2' => {
+          'name' => 'msg',
+          'type' => '1501'
+        },
+        '3' => {
+          'name' => 'payload_length',
+          'type' => '169'
+        }
+      },
+      'Reg' => {
+        '2' => 'r14'
+      },
+      'Return' => '58',
+      'ShortName' => 'encode_pldm_base_negotiate_transfer_params_req'
+    },
     '12274' => {
       'Header' => 'base.h',
-      'Line' => '795',
+      'Line' => '796',
       'Param' => {
         '0' => {
           'name' => 'msg_type',
@@ -463,6 +511,57 @@ $VAR1 = {
       },
       'Return' => '58',
       'ShortName' => 'encode_pldm_header_only'
+    },
+    '15860' => {
+      'Header' => 'base.h',
+      'Line' => '750',
+      'Param' => {
+        '0' => {
+          'name' => 'msg',
+          'type' => '1580'
+        },
+        '1' => {
+          'name' => 'payload_length',
+          'type' => '169'
+        },
+        '2' => {
+          'name' => 'resp',
+          'type' => '18280'
+        },
+        '3' => {
+          'name' => 'data_integrity_checksum',
+          'type' => '1731'
+        }
+      },
+      'Return' => '58',
+      'ShortName' => 'decode_pldm_base_multipart_receive_resp'
+    },
+    '18290' => {
+      'Header' => 'base.h',
+      'Line' => '729',
+      'Param' => {
+        '0' => {
+          'name' => 'instance_id',
+          'type' => '140'
+        },
+        '1' => {
+          'name' => 'req',
+          'type' => '20367'
+        },
+        '2' => {
+          'name' => 'msg',
+          'type' => '1501'
+        },
+        '3' => {
+          'name' => 'payload_length',
+          'type' => '169'
+        }
+      },
+      'Reg' => {
+        '2' => 'r14'
+      },
+      'Return' => '58',
+      'ShortName' => 'encode_pldm_base_multipart_receive_req'
     },
     '20372' => {
       'Header' => 'base.h',
@@ -2663,6 +2762,152 @@ $VAR1 = {
       },
       'Return' => '169',
       'ShortName' => 'pldm_bios_table_string_entry_encode_length'
+    },
+    '49612' => {
+      'Header' => 'file.h',
+      'Line' => '263',
+      'Param' => {
+        '0' => {
+          'name' => 'msg',
+          'type' => '1580'
+        },
+        '1' => {
+          'name' => 'payload_length',
+          'type' => '169'
+        },
+        '2' => {
+          'name' => 'resp',
+          'type' => '50781'
+        }
+      },
+      'Return' => '58',
+      'ShortName' => 'decode_pldm_file_df_heartbeat_resp'
+    },
+    '50791' => {
+      'Header' => 'file.h',
+      'Line' => '247',
+      'Param' => {
+        '0' => {
+          'name' => 'instance_id',
+          'type' => '140'
+        },
+        '1' => {
+          'name' => 'req',
+          'type' => '51885'
+        },
+        '2' => {
+          'name' => 'msg',
+          'type' => '1501'
+        },
+        '3' => {
+          'name' => 'payload_length',
+          'type' => '169'
+        }
+      },
+      'Reg' => {
+        '2' => 'rbp'
+      },
+      'Return' => '58',
+      'ShortName' => 'encode_pldm_file_df_heartbeat_req'
+    },
+    '51895' => {
+      'Header' => 'file.h',
+      'Line' => '229',
+      'Param' => {
+        '0' => {
+          'name' => 'msg',
+          'type' => '1580'
+        },
+        '1' => {
+          'name' => 'payload_length',
+          'type' => '169'
+        },
+        '2' => {
+          'name' => 'resp',
+          'type' => '52016'
+        }
+      },
+      'Reg' => {
+        '0' => 'rdi',
+        '1' => 'rsi',
+        '2' => 'rdx'
+      },
+      'Return' => '58',
+      'ShortName' => 'decode_pldm_file_df_close_resp'
+    },
+    '54105' => {
+      'Header' => 'file.h',
+      'Line' => '183',
+      'Param' => {
+        '0' => {
+          'name' => 'instance_id',
+          'type' => '140'
+        },
+        '1' => {
+          'name' => 'req',
+          'type' => '55182'
+        },
+        '2' => {
+          'name' => 'msg',
+          'type' => '1501'
+        },
+        '3' => {
+          'name' => 'payload_length',
+          'type' => '169'
+        }
+      },
+      'Reg' => {
+        '2' => 'rbp'
+      },
+      'Return' => '58',
+      'ShortName' => 'encode_pldm_file_df_close_req'
+    },
+    '55187' => {
+      'Header' => 'file.h',
+      'Line' => '165',
+      'Param' => {
+        '0' => {
+          'name' => 'msg',
+          'type' => '1580'
+        },
+        '1' => {
+          'name' => 'payload_length',
+          'type' => '169'
+        },
+        '2' => {
+          'name' => 'resp',
+          'type' => '56515'
+        }
+      },
+      'Return' => '58',
+      'ShortName' => 'decode_pldm_file_df_open_resp'
+    },
+    '58850' => {
+      'Header' => 'file.h',
+      'Line' => '116',
+      'Param' => {
+        '0' => {
+          'name' => 'instance_id',
+          'type' => '140'
+        },
+        '1' => {
+          'name' => 'req',
+          'type' => '59927'
+        },
+        '2' => {
+          'name' => 'msg',
+          'type' => '1501'
+        },
+        '3' => {
+          'name' => 'payload_length',
+          'type' => '169'
+        }
+      },
+      'Reg' => {
+        '2' => 'rbp'
+      },
+      'Return' => '58',
+      'ShortName' => 'encode_pldm_file_df_open_req'
     },
     '84247' => {
       'Header' => 'firmware_update.h',
@@ -5370,6 +5615,26 @@ $VAR1 = {
       },
       'Return' => '58',
       'ShortName' => 'pldm_pdr_add'
+    },
+    '228323' => {
+      'Header' => 'platform.h',
+      'Line' => '2722',
+      'Param' => {
+        '0' => {
+          'name' => 'data',
+          'type' => '1320'
+        },
+        '1' => {
+          'name' => 'data_length',
+          'type' => '169'
+        },
+        '2' => {
+          'name' => 'pdr',
+          'type' => '235788'
+        }
+      },
+      'Return' => '58',
+      'ShortName' => 'decode_pldm_platform_file_descriptor_pdr'
     },
     '235798' => {
       'Header' => 'platform.h',
@@ -9484,16 +9749,22 @@ $VAR1 = {
       'decode_pass_component_table_resp' => 1,
       'decode_platform_event_message_req' => 1,
       'decode_platform_event_message_resp' => 1,
+      'decode_pldm_base_multipart_receive_resp' => 1,
+      'decode_pldm_base_negotiate_transfer_params_resp' => 1,
       'decode_pldm_comp_image_info' => 1,
       'decode_pldm_descriptor_from_iter' => 1,
       'decode_pldm_downstream_device_from_iter' => 1,
       'decode_pldm_downstream_device_parameters_entry_from_iter' => 1,
       'decode_pldm_entity_auxiliary_names_pdr_index' => 1,
+      'decode_pldm_file_df_close_resp' => 1,
+      'decode_pldm_file_df_heartbeat_resp' => 1,
+      'decode_pldm_file_df_open_resp' => 1,
       'decode_pldm_message_poll_event_data' => 1,
       'decode_pldm_package_header_info' => 1,
       'decode_pldm_pdr_repository_change_record_data' => 1,
       'decode_pldm_pdr_repository_chg_event_data' => 1,
       'decode_pldm_platform_cper_event' => 1,
+      'decode_pldm_platform_file_descriptor_pdr' => 1,
       'decode_poll_for_platform_event_message_req' => 1,
       'decode_poll_for_platform_event_message_resp' => 1,
       'decode_query_device_identifiers_resp' => 1,
@@ -9590,6 +9861,11 @@ $VAR1 = {
       'encode_pass_component_table_req' => 1,
       'encode_platform_event_message_req' => 1,
       'encode_platform_event_message_resp' => 1,
+      'encode_pldm_base_multipart_receive_req' => 1,
+      'encode_pldm_base_negotiate_transfer_params_req' => 1,
+      'encode_pldm_file_df_close_req' => 1,
+      'encode_pldm_file_df_heartbeat_req' => 1,
+      'encode_pldm_file_df_open_req' => 1,
       'encode_pldm_header_only' => 1,
       'encode_pldm_pdr_repository_chg_event_data' => 1,
       'encode_poll_for_platform_event_message_req' => 1,
@@ -10063,6 +10339,12 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Const'
     },
+    '1158' => {
+      'BaseType' => '349',
+      'Name' => 'bitfield8_t[8]',
+      'Size' => '8',
+      'Type' => 'Array'
+    },
     '1320' => {
       'BaseType' => '1325',
       'Name' => 'void const*',
@@ -10352,9 +10634,156 @@ $VAR1 = {
       'Size' => '16',
       'Type' => 'Struct'
     },
+    '8998' => {
+      'Header' => 'base.h',
+      'Line' => '366',
+      'Memb' => {
+        '0' => {
+          'name' => 'pldm_type',
+          'offset' => '0',
+          'type' => '140'
+        },
+        '1' => {
+          'name' => 'transfer_opflag',
+          'offset' => '1',
+          'type' => '140'
+        },
+        '2' => {
+          'name' => 'transfer_ctx',
+          'offset' => '4',
+          'type' => '152'
+        },
+        '3' => {
+          'name' => 'transfer_handle',
+          'offset' => '8',
+          'type' => '152'
+        },
+        '4' => {
+          'name' => 'section_offset',
+          'offset' => '18',
+          'type' => '152'
+        },
+        '5' => {
+          'name' => 'section_length',
+          'offset' => '22',
+          'type' => '152'
+        }
+      },
+      'Name' => 'struct pldm_base_multipart_receive_req',
+      'Size' => '20',
+      'Type' => 'Struct'
+    },
+    '9089' => {
+      'BaseType' => '8998',
+      'Name' => 'struct pldm_base_multipart_receive_req const',
+      'Size' => '20',
+      'Type' => 'Const'
+    },
+    '9094' => {
+      'Header' => 'base.h',
+      'Line' => '384',
+      'Memb' => {
+        '0' => {
+          'name' => 'completion_code',
+          'offset' => '0',
+          'type' => '140'
+        },
+        '1' => {
+          'name' => 'transfer_flag',
+          'offset' => '1',
+          'type' => '140'
+        },
+        '2' => {
+          'name' => 'next_transfer_handle',
+          'offset' => '4',
+          'type' => '152'
+        },
+        '3' => {
+          'name' => 'data',
+          'offset' => '8',
+          'type' => '7881'
+        }
+      },
+      'Name' => 'struct pldm_base_multipart_receive_resp',
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '9164' => {
+      'Header' => 'base.h',
+      'Line' => '396',
+      'Memb' => {
+        '0' => {
+          'name' => 'requester_part_size',
+          'offset' => '0',
+          'type' => '5733'
+        },
+        '1' => {
+          'name' => 'requester_protocol_support',
+          'offset' => '2',
+          'type' => '1158'
+        }
+      },
+      'Name' => 'struct pldm_base_negotiate_transfer_params_req',
+      'Size' => '10',
+      'Type' => 'Struct'
+    },
+    '9203' => {
+      'BaseType' => '9164',
+      'Name' => 'struct pldm_base_negotiate_transfer_params_req const',
+      'Size' => '10',
+      'Type' => 'Const'
+    },
+    '9208' => {
+      'Header' => 'base.h',
+      'Line' => '405',
+      'Memb' => {
+        '0' => {
+          'name' => 'completion_code',
+          'offset' => '0',
+          'type' => '140'
+        },
+        '1' => {
+          'name' => 'responder_part_size',
+          'offset' => '2',
+          'type' => '5733'
+        },
+        '2' => {
+          'name' => 'responder_protocol_support',
+          'offset' => '4',
+          'type' => '1158'
+        }
+      },
+      'Name' => 'struct pldm_base_negotiate_transfer_params_resp',
+      'Size' => '12',
+      'Type' => 'Struct'
+    },
     '9294' => {
       'BaseType' => '7507',
       'Name' => 'char const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '10994' => {
+      'BaseType' => '9208',
+      'Name' => 'struct pldm_base_negotiate_transfer_params_resp*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '12264' => {
+      'BaseType' => '9203',
+      'Name' => 'struct pldm_base_negotiate_transfer_params_req const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '18280' => {
+      'BaseType' => '9094',
+      'Name' => 'struct pldm_base_multipart_receive_resp*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '20367' => {
+      'BaseType' => '9089',
+      'Name' => 'struct pldm_base_multipart_receive_req const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
@@ -10806,6 +11235,169 @@ $VAR1 = {
       'Name' => 'union bitfield16_t',
       'Size' => '2',
       'Type' => 'Union'
+    },
+    '49285' => {
+      'Header' => 'file.h',
+      'Line' => '53',
+      'Memb' => {
+        '0' => {
+          'name' => 'file_identifier',
+          'offset' => '0',
+          'type' => '5733'
+        },
+        '1' => {
+          'name' => 'file_attribute',
+          'offset' => '2',
+          'type' => '48547'
+        }
+      },
+      'Name' => 'struct pldm_file_df_open_req',
+      'Size' => '4',
+      'Type' => 'Struct'
+    },
+    '49324' => {
+      'BaseType' => '49285',
+      'Name' => 'struct pldm_file_df_open_req const',
+      'Size' => '4',
+      'Type' => 'Const'
+    },
+    '49329' => {
+      'Header' => 'file.h',
+      'Line' => '62',
+      'Memb' => {
+        '0' => {
+          'name' => 'completion_code',
+          'offset' => '0',
+          'type' => '140'
+        },
+        '1' => {
+          'name' => 'file_descriptor',
+          'offset' => '2',
+          'type' => '5733'
+        }
+      },
+      'Name' => 'struct pldm_file_df_open_resp',
+      'Size' => '4',
+      'Type' => 'Struct'
+    },
+    '49373' => {
+      'Header' => 'file.h',
+      'Line' => '71',
+      'Memb' => {
+        '0' => {
+          'name' => 'file_descriptor',
+          'offset' => '0',
+          'type' => '5733'
+        },
+        '1' => {
+          'name' => 'df_close_options',
+          'offset' => '2',
+          'type' => '48547'
+        }
+      },
+      'Name' => 'struct pldm_file_df_close_req',
+      'Size' => '4',
+      'Type' => 'Struct'
+    },
+    '49412' => {
+      'BaseType' => '49373',
+      'Name' => 'struct pldm_file_df_close_req const',
+      'Size' => '4',
+      'Type' => 'Const'
+    },
+    '49417' => {
+      'Header' => 'file.h',
+      'Line' => '80',
+      'Memb' => {
+        '0' => {
+          'name' => 'completion_code',
+          'offset' => '0',
+          'type' => '140'
+        }
+      },
+      'Name' => 'struct pldm_file_df_close_resp',
+      'Size' => '1',
+      'Type' => 'Struct'
+    },
+    '49448' => {
+      'Header' => 'file.h',
+      'Line' => '88',
+      'Memb' => {
+        '0' => {
+          'name' => 'file_descriptor',
+          'offset' => '0',
+          'type' => '5733'
+        },
+        '1' => {
+          'name' => 'requester_max_interval',
+          'offset' => '4',
+          'type' => '152'
+        }
+      },
+      'Name' => 'struct pldm_file_df_heartbeat_req',
+      'Size' => '8',
+      'Type' => 'Struct'
+    },
+    '49487' => {
+      'BaseType' => '49448',
+      'Name' => 'struct pldm_file_df_heartbeat_req const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '49492' => {
+      'Header' => 'file.h',
+      'Line' => '97',
+      'Memb' => {
+        '0' => {
+          'name' => 'completion_code',
+          'offset' => '0',
+          'type' => '140'
+        },
+        '1' => {
+          'name' => 'responder_max_interval',
+          'offset' => '4',
+          'type' => '152'
+        }
+      },
+      'Name' => 'struct pldm_file_df_heartbeat_resp',
+      'Size' => '8',
+      'Type' => 'Struct'
+    },
+    '50781' => {
+      'BaseType' => '49492',
+      'Name' => 'struct pldm_file_df_heartbeat_resp*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '51885' => {
+      'BaseType' => '49487',
+      'Name' => 'struct pldm_file_df_heartbeat_req const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '52016' => {
+      'BaseType' => '49417',
+      'Name' => 'struct pldm_file_df_close_resp*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '55182' => {
+      'BaseType' => '49412',
+      'Name' => 'struct pldm_file_df_close_req const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '56515' => {
+      'BaseType' => '49329',
+      'Name' => 'struct pldm_file_df_open_resp*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '59927' => {
+      'BaseType' => '49324',
+      'Name' => 'struct pldm_file_df_open_req const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
     },
     '61253' => {
       'BaseType' => '140',
@@ -12684,6 +13276,80 @@ $VAR1 = {
       'Size' => '4',
       'Type' => 'Const'
     },
+    '225886' => {
+      'Header' => 'platform.h',
+      'Line' => '959',
+      'Memb' => {
+        '0' => {
+          'name' => 'hdr',
+          'offset' => '0',
+          'type' => '224917'
+        },
+        '1' => {
+          'name' => 'terminus_handle',
+          'offset' => '18',
+          'type' => '5733'
+        },
+        '2' => {
+          'name' => 'file_identifier',
+          'offset' => '20',
+          'type' => '5733'
+        },
+        '3' => {
+          'name' => 'container',
+          'offset' => '22',
+          'type' => '171582'
+        },
+        '4' => {
+          'name' => 'superior_directory_file_identifier',
+          'offset' => '34',
+          'type' => '5733'
+        },
+        '5' => {
+          'name' => 'file_classification',
+          'offset' => '36',
+          'type' => '140'
+        },
+        '6' => {
+          'name' => 'oem_file_classification',
+          'offset' => '37',
+          'type' => '140'
+        },
+        '7' => {
+          'name' => 'file_capabilities',
+          'offset' => '38',
+          'type' => '48547'
+        },
+        '8' => {
+          'name' => 'file_version',
+          'offset' => '40',
+          'type' => '432'
+        },
+        '9' => {
+          'name' => 'file_maximum_size',
+          'offset' => '50',
+          'type' => '152'
+        },
+        '10' => {
+          'name' => 'file_maximum_file_descriptor_count',
+          'offset' => '54',
+          'type' => '140'
+        },
+        '11' => {
+          'name' => 'file_name',
+          'offset' => '64',
+          'type' => '7881'
+        },
+        '12' => {
+          'name' => 'oem_file_classification_name',
+          'offset' => '86',
+          'type' => '7881'
+        }
+      },
+      'Name' => 'struct pldm_platform_file_descriptor_pdr',
+      'Size' => '72',
+      'Type' => 'Struct'
+    },
     '226082' => {
       'Header' => 'platform.h',
       'Line' => '1005',
@@ -12959,6 +13625,12 @@ $VAR1 = {
       'Name' => 'struct pldm_pdr_repository_chg_event_data',
       'Size' => '3',
       'Type' => 'Struct'
+    },
+    '235788' => {
+      'BaseType' => '225886',
+      'Name' => 'struct pldm_platform_file_descriptor_pdr*',
+      'Size' => '8',
+      'Type' => 'Pointer'
     },
     '235847' => {
       'BaseType' => '227348',
