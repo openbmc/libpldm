@@ -16,6 +16,24 @@
       "message": "Ah, thanks for the effort to fix this. I\u0027ve been thinking about it too, and I think we might do well to rejig the iterator types and add a run-time state machine based on the pin information. I intend to explore that line of though in the coming week or so.",
       "revId": "998695c9115c124b823b0b256216aab83e2e9744",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "487566b9_e92de78d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-08T11:17:34Z",
+      "side": 1,
+      "message": "Do you think the fix is wrong, or does it suffice as a band-aid solution 😊\n\nDo you want to see testcases for this fix.",
+      "parentUuid": "dd654eac_50cf54d6",
+      "revId": "998695c9115c124b823b0b256216aab83e2e9744",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
