@@ -21,6 +21,9 @@ Change categories:
 
 ### Changed
 
+- Reworked the firmware update package parsing APIs to track parse state using a
+  run-time state machine
+
 ### Deprecated
 
 ### Removed

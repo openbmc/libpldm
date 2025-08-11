@@ -336,7 +336,8 @@ LIBPLDM_CC_NONNULL
 static int
 decode_pldm_package_header_info_errno(const void *data, size_t length,
 				      const struct pldm_package_format_pin *pin,
-				      pldm_package_header_information_pad *hdr)
+				      pldm_package_header_information_pad *hdr,
+				      struct pldm_package *pkg)
 {
 	static const struct pldm_package_header_format_revision_info {
 		pldm_uuid identifier;
@@ -346,44 +347,44 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 			.identifier = {0},
 			.magic = 0,
 		},
-		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H] = { /* PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H */
+		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H] = {
 			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_0,
 			.magic =
-				LIBPLDM_SIZEAT(struct pldm__package_header_information, package) +
+				LIBPLDM_SIZEAT(struct pldm_package, iter) +
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) +
 				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) +
 				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string) +
-				LIBPLDM_SIZEAT(struct pldm_package_iter, infos)
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string)
 		},
-		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H] = { /* PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H */
+		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H] = {
 			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1,
 			.magic =
-				LIBPLDM_SIZEAT(struct pldm__package_header_information, package) +
+				LIBPLDM_SIZEAT(struct pldm_package, iter) +
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) +
 				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) +
 				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
 				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, package_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string) +
-				LIBPLDM_SIZEAT(struct pldm_package_iter, infos),
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string)
 		},
-		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H] = { /* PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H */
+		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H] = {
 			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2,
 			.magic =
-				LIBPLDM_SIZEAT(struct pldm__package_header_information, package) +
+				LIBPLDM_SIZEAT(struct pldm_package, iter) +
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) +
 				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) +
 				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
 				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, package_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_opaque_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_iter, infos),
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_opaque_data)
 		},
-		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H] = { /* PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H */
+		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H] = {
 			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3,
 			.magic =
-				LIBPLDM_SIZEAT(struct pldm__package_header_information, package) +
+				LIBPLDM_SIZEAT(struct pldm_package, iter) +
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) +
 				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, reference_manifest_data) +
 				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
 				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, reference_manifest_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_opaque_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_iter, infos),
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_opaque_data)
 		},
 	};
 
@@ -400,11 +401,15 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	int checksums = 1;
 	int rc;
 
-	if (pin->meta.version > 0) {
+	if (pkg->state != PLDM_PACKAGE_PARSE_INIT) {
+		return -EINVAL;
+	}
+
+	if (pin->meta.version > 0u) {
 		return -ENOTSUP;
 	}
 
-	if (pin->format.revision == 0) {
+	if (pin->format.revision == 0u) {
 		return -EINVAL;
 	}
 
@@ -415,7 +420,7 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 			      1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H,
 		      "Mismatched array bounds test");
 
-	info = &revision_info[pin->format.revision];
+	info = &revision_info[(size_t)pin->format.revision];
 	if (memcmp(&pin->format.identifier, info->identifier,
 		   sizeof(info->identifier)) != 0) {
 		return -ENOTSUP;
@@ -525,11 +530,11 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	package_header_areas_size = package_header_variable_size -
 				    hdr->package_version_string.length;
 	rc = pldm_msgbuf_span_required(buf, package_header_areas_size,
-				       (void **)&hdr->areas.ptr);
+				       (void **)&pkg->areas.ptr);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
-	hdr->areas.length = package_header_areas_size;
+	pkg->areas.length = package_header_areas_size;
 
 	pldm_msgbuf_extract(buf, package_header_checksum);
 
@@ -574,8 +579,11 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	}
 
 	/* We stash these to resolve component images later */
-	hdr->package.ptr = data;
-	hdr->package.length = length;
+	pkg->pin = pin;
+	pkg->hdr = hdr;
+	pkg->state = PLDM_PACKAGE_PARSE_HEADER;
+	pkg->package.ptr = data;
+	pkg->package.length = length;
 
 	return 0;
 }
@@ -588,13 +596,15 @@ int decode_pldm_package_header_info(
 {
 	DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(pin);
 	pldm_package_header_information_pad hdr;
+	struct pldm_package pkg = { 0 };
 	int rc;
 
 	if (!data || !package_header_info || !package_version_str) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	rc = decode_pldm_package_header_info_errno(data, length, &pin, &hdr);
+	rc = decode_pldm_package_header_info_errno(data, length, &pin, &hdr,
+						   &pkg);
 	if (rc < 0) {
 		return pldm_xlate_errno(rc);
 	}
@@ -693,10 +703,6 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 		return -EINVAL;
 	}
 
-	if (hdr->component_bitmap_bit_length & 7) {
-		return -EPROTO;
-	}
-
 	rc = pldm_msgbuf_init_dynamic_uint16(
 		buf, PLDM_FWUP_FIRMWARE_DEVICE_ID_RECORD_MIN_SIZE,
 		(void *)field->ptr, field->length, (void **)&field->ptr,
@@ -746,6 +752,7 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 		rec->reference_manifest_data.length = 0;
 	}
 
+	assert((hdr->component_bitmap_bit_length & 7) == 0);
 	rc = pldm_msgbuf_span_required(
 		buf, hdr->component_bitmap_bit_length / 8,
 		(void **)&rec->applicable_components.bitmap.ptr);
@@ -3251,31 +3258,48 @@ LIBPLDM_ABI_TESTING
 int decode_pldm_firmware_update_package(
 	const void *data, size_t length,
 	const struct pldm_package_format_pin *pin,
-	pldm_package_header_information_pad *hdr,
-	struct pldm_package_iter *iter)
+	pldm_package_header_information_pad *hdr, struct pldm_package *pkg)
 {
-	if (!data || !pin || !hdr || !iter) {
+	if (!data || !pin || !hdr || !pkg) {
 		return -EINVAL;
 	}
 
-	iter->hdr = hdr;
-
-	return decode_pldm_package_header_info_errno(data, length, pin, hdr);
+	return decode_pldm_package_header_info_errno(data, length, pin, hdr,
+						     pkg);
 }
 
 LIBPLDM_ABI_TESTING
-int pldm_package_firmware_device_id_record_iter_init(
-	const pldm_package_header_information_pad *hdr,
-	struct pldm_package_firmware_device_id_record_iter *iter)
+int pldm_package_firmware_device_id_record_iter_init(struct pldm_package *pkg)
 {
+	struct pldm_package_iter *iter;
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
 
-	if (!hdr || !iter || !hdr->areas.ptr) {
+	if (!pkg || !pkg->pin || !pkg->hdr) {
 		return -EINVAL;
 	}
 
-	iter->field = hdr->areas;
+	assert(pkg->pin->format.revision >=
+	       PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H);
+	assert(pkg->pin->format.revision <=
+	       PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H);
+	assert(pkg->hdr->package_header_format_revision >=
+	       PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H);
+	assert(pkg->hdr->package_header_format_revision <=
+	       pkg->pin->format.revision);
+
+	if (pkg->state != PLDM_PACKAGE_PARSE_HEADER) {
+		return -EPROTO;
+	}
+
+	if (!pkg->areas.ptr) {
+		return -EINVAL;
+	}
+
+	pkg->state = PLDM_PACKAGE_PARSE_FIRMWARE_DEVICES;
+
+	iter = &pkg->iter;
+	iter->field = pkg->areas;
 
 	/* Extract the fd record id count */
 	rc = pldm_msgbuf_init_errno(buf, 1, iter->field.ptr,
@@ -3293,47 +3317,81 @@ int pldm_package_firmware_device_id_record_iter_init(
 
 LIBPLDM_ABI_TESTING
 int decode_pldm_package_firmware_device_id_record_from_iter(
-	const pldm_package_header_information_pad *hdr,
-	struct pldm_package_firmware_device_id_record_iter *iter,
+	struct pldm_package *pkg LIBPLDM_CC_UNUSED,
 	struct pldm_package_firmware_device_id_record *rec)
 {
-	return decode_pldm_package_firmware_device_id_record_errno(
-		hdr, &iter->field, rec);
-}
-
-LIBPLDM_ABI_TESTING
-int pldm_package_downstream_device_id_record_iter_init(
-	const pldm_package_header_information_pad *hdr,
-	struct pldm_package_firmware_device_id_record_iter *fds,
-	struct pldm_package_downstream_device_id_record_iter *dds)
-{
-	PLDM_MSGBUF_DEFINE_P(buf);
-	int rc;
-
-	if (!hdr || !fds || !dds || !fds->field.ptr) {
+	if (!pkg) {
 		return -EINVAL;
 	}
 
-	dds->field = fds->field;
-	fds->field.ptr = NULL;
-	fds->field.length = 0;
+	if (pkg->state != PLDM_PACKAGE_PARSE_FIRMWARE_DEVICES) {
+		return -EPROTO;
+	}
 
-	/* Downstream device ID records aren't specified in revision 1 */
-	if (hdr->package_header_format_revision <
-	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H) {
-		dds->entries = 0;
+	return decode_pldm_package_firmware_device_id_record_errno(
+		pkg->hdr, &pkg->iter.field, rec);
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_package_downstream_device_id_record_iter_init(struct pldm_package *pkg)
+{
+	struct pldm_package_iter *iter;
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
+	if (!pkg || !pkg->pin || !pkg->hdr) {
+		return -EINVAL;
+	}
+
+	assert(pkg->pin->format.revision >=
+	       PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H);
+	assert(pkg->pin->format.revision <=
+	       PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H);
+	assert(pkg->hdr->package_header_format_revision >=
+	       PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H);
+	assert(pkg->hdr->package_header_format_revision <=
+	       pkg->pin->format.revision);
+
+	if (pkg->state != PLDM_PACKAGE_PARSE_FIRMWARE_DEVICES) {
+		return -EPROTO;
+	}
+
+	if (pkg->pin->format.revision ==
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H) {
+		return -EPROTO;
+	}
+
+	if (!pkg->iter.field.ptr) {
+		return -EINVAL;
+	}
+	iter = &pkg->iter;
+
+	pkg->state = PLDM_PACKAGE_PARSE_DOWNSTREAM_DEVICES;
+
+	/* Where:
+	 *
+	 * 1. The pin revision is greater than 1, and
+	 * 2. The package header format revision is 1
+	 *
+	 * We must account for the invocation of this function but present no downstream
+   * devices, as they're not specified.
+	 */
+	if (pkg->hdr->package_header_format_revision ==
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H) {
+		iter->entries = 0;
 		return 0;
 	}
 
 	/* Extract the dd record id count */
-	rc = pldm_msgbuf_init_errno(buf, 1, dds->field.ptr, dds->field.length);
+	rc = pldm_msgbuf_init_errno(buf, 1, iter->field.ptr,
+				    iter->field.length);
 	if (rc) {
 		return rc;
 	}
 
-	pldm_msgbuf_extract_uint8_to_size(buf, dds->entries);
-	pldm_msgbuf_span_remaining(buf, (void **)&dds->field.ptr,
-				   &dds->field.length);
+	pldm_msgbuf_extract_uint8_to_size(buf, iter->entries);
+	pldm_msgbuf_span_remaining(buf, (void **)&iter->field.ptr,
+				   &iter->field.length);
 
 	return pldm_msgbuf_complete(buf);
 }
@@ -3341,28 +3399,30 @@ int pldm_package_downstream_device_id_record_iter_init(
 #define PLDM_FWUP_DOWNSTREAM_DEVICE_ID_RECORD_MIN_SIZE 11
 LIBPLDM_ABI_TESTING
 int decode_pldm_package_downstream_device_id_record_from_iter(
-	const pldm_package_header_information_pad *hdr,
-	struct pldm_package_downstream_device_id_record_iter *iter,
+	struct pldm_package *pkg,
 	struct pldm_package_downstream_device_id_record *rec)
 {
+	struct pldm_package_iter *iter;
 	size_t package_data_offset;
 	PLDM_MSGBUF_DEFINE_P(buf);
 	uint16_t record_len = 0;
 	int rc;
 
-	if (!hdr || !iter || !rec || !iter->field.ptr) {
+	if (!pkg || !rec || !pkg->hdr) {
 		return -EINVAL;
 	}
 
-	if (hdr->package_header_format_revision <
-	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H) {
-		/* Should not be reached due to corresponding test in iter initialisation */
-		return -ENOTSUP;
-	}
-
-	if (hdr->component_bitmap_bit_length & 7) {
+	if (pkg->state != PLDM_PACKAGE_PARSE_DOWNSTREAM_DEVICES) {
 		return -EPROTO;
 	}
+
+	assert(pkg->hdr->package_header_format_revision >
+	       PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H);
+
+	if (!pkg->iter.field.ptr) {
+		return -EINVAL;
+	}
+	iter = &pkg->iter;
 
 	rc = pldm_msgbuf_init_dynamic_uint16(
 		buf, PLDM_FWUP_DOWNSTREAM_DEVICE_ID_RECORD_MIN_SIZE,
@@ -3401,7 +3461,7 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
-	if (hdr->package_header_format_revision >=
+	if (pkg->hdr->package_header_format_revision >=
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
 		pldm_msgbuf_extract_uint32_to_size(
 			buf, rec->reference_manifest_data.length);
@@ -3409,14 +3469,15 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 		rec->reference_manifest_data.length = 0;
 	}
 
+	assert((pkg->hdr->component_bitmap_bit_length & 7) == 0);
 	rc = pldm_msgbuf_span_required(
-		buf, hdr->component_bitmap_bit_length / 8,
+		buf, pkg->hdr->component_bitmap_bit_length / 8,
 		(void **)&rec->applicable_components.bitmap.ptr);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 	rec->applicable_components.bitmap.length =
-		hdr->component_bitmap_bit_length / 8;
+		pkg->hdr->component_bitmap_bit_length / 8;
 
 	pldm_msgbuf_span_required(
 		buf, rec->self_contained_activation_min_version_string.length,
@@ -3441,7 +3502,7 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 				  (void **)&rec->package_data.ptr);
 
 	/* Supported in package header revision 1.3 (FR04H) and above. */
-	if (hdr->package_header_format_revision >=
+	if (pkg->hdr->package_header_format_revision >=
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
 		pldm_msgbuf_span_required(
 			buf, rec->reference_manifest_data.length,
@@ -3455,26 +3516,50 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 }
 
 LIBPLDM_ABI_TESTING
-int pldm_package_component_image_information_iter_init(
-	const pldm_package_header_information_pad *hdr LIBPLDM_CC_UNUSED,
-	struct pldm_package_downstream_device_id_record_iter *dds,
-	struct pldm_package_component_image_information_iter *infos)
+int pldm_package_component_image_information_iter_init(struct pldm_package *pkg)
 {
+	struct pldm_package_iter *iter;
 	uint16_t component_image_count;
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
 
-	if (!dds || !infos) {
+	if (!pkg || !pkg->pin || !pkg->hdr) {
 		return -EINVAL;
 	}
 
-	infos->field = dds->field;
-	dds->field.ptr = NULL;
-	dds->field.length = 0;
+	assert(pkg->pin->format.revision >=
+	       PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H);
+	assert(pkg->pin->format.revision <=
+	       PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H);
+	assert(pkg->hdr->package_header_format_revision >=
+	       PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H);
+	assert(pkg->hdr->package_header_format_revision <=
+	       pkg->pin->format.revision);
+
+	if (pkg->state == PLDM_PACKAGE_PARSE_FIRMWARE_DEVICES) {
+		if (pkg->pin->format.revision !=
+			    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H ||
+		    pkg->hdr->package_header_format_revision !=
+			    pkg->pin->format.revision) {
+			return -EPROTO;
+		}
+	} else if (pkg->state == PLDM_PACKAGE_PARSE_DOWNSTREAM_DEVICES) {
+		assert(pkg->pin->format.revision !=
+		       PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H);
+	} else {
+		return -EPROTO;
+	}
+
+	if (!pkg->iter.field.ptr) {
+		return -EINVAL;
+	}
+	iter = &pkg->iter;
+
+	pkg->state = PLDM_PACKAGE_PARSE_COMPONENT_IMAGE_INFORMATION;
 
 	/* Extract the component image count */
-	rc = pldm_msgbuf_init_errno(buf, 1, infos->field.ptr,
-				    infos->field.length);
+	rc = pldm_msgbuf_init_errno(buf, 1, iter->field.ptr,
+				    iter->field.length);
 	if (rc) {
 		return rc;
 	}
@@ -3483,10 +3568,10 @@ int pldm_package_component_image_information_iter_init(
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
-	infos->entries = component_image_count;
+	iter->entries = component_image_count;
 
-	pldm_msgbuf_span_remaining(buf, (void **)&infos->field.ptr,
-				   &infos->field.length);
+	pldm_msgbuf_span_remaining(buf, (void **)&iter->field.ptr,
+				   &iter->field.length);
 
 	return pldm_msgbuf_complete(buf);
 }
@@ -3494,22 +3579,27 @@ int pldm_package_component_image_information_iter_init(
 #define PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_MIN_SIZE 22
 LIBPLDM_ABI_TESTING
 int decode_pldm_package_component_image_information_from_iter(
-	const pldm_package_header_information_pad *hdr,
-	struct pldm_package_component_image_information_iter *iter,
+	struct pldm_package *pkg,
 	struct pldm_package_component_image_information *info)
 {
 	uint32_t component_location_offset = 0;
+	struct pldm_package_iter *iter;
 	uint32_t component_size = 0;
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
 
-	if (!hdr || !iter || !info || !iter->field.ptr) {
+	if (!pkg || !info) {
 		return -EINVAL;
 	}
 
-	if (hdr->component_bitmap_bit_length & 7) {
+	if (pkg->state != PLDM_PACKAGE_PARSE_COMPONENT_IMAGE_INFORMATION) {
 		return -EPROTO;
 	}
+
+	if (!pkg->iter.field.ptr) {
+		return -EINVAL;
+	}
+	iter = &pkg->iter;
 
 	rc = pldm_msgbuf_init_errno(
 		buf, PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_MIN_SIZE,
@@ -3545,7 +3635,7 @@ int decode_pldm_package_component_image_information_from_iter(
 				  (void **)&info->component_version_string.ptr);
 
 	/* Supported in package header revision 1.2 (FR03H) and above. */
-	if (hdr->package_header_format_revision >=
+	if (pkg->hdr->package_header_format_revision >=
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H) {
 		rc = pldm_msgbuf_extract_uint32_to_size(
 			buf, info->component_opaque_data.length);
@@ -3577,8 +3667,8 @@ int decode_pldm_package_component_image_information_from_iter(
 	}
 
 	/* Resolve the component image in memory */
-	rc = pldm_msgbuf_init_errno(buf, 0, hdr->package.ptr,
-				    hdr->package.length);
+	rc = pldm_msgbuf_init_errno(buf, 0, pkg->package.ptr,
+				    pkg->package.length);
 	if (rc) {
 		return rc;
 	}
