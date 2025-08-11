@@ -62,6 +62,12 @@
 
 [aria-c-is-a-protocol]: https://faultlore.com/blah/c-isnt-a-language/
 
+- [To be a better programmer, write little proofs in your head - Matthew
+  Prast][matthew-prast-little-proofs]
+
+[matthew-prast-little-proofs]:
+  https://the-nerve-blog.ghost.io/to-be-a-better-programmer-write-little-proofs-in-your-head/
+
 ## References
 
 - [The C programming language - C Standards Committee][c-language]
