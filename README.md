@@ -71,3 +71,12 @@ Applications depending on `libpldm` should aim to only use functions from the
 stable category. However, this may not always be possible. What to do when
 required functions fall into the deprecated or testing categories is discussed
 in [CONTRIBUTING](CONTRIBUTING.md#Library-background).
+
+### Upgrading libpldm
+
+libpldm is maintained with the expectation that users move between successive
+releases when upgrading. This constraint allows the library to reintroduce types
+and functions of the same name in subsequent releases in the knowledge that
+there are no remaining users of previous definitions. While strategies are
+employed to avoid breaking existing APIs unnecessarily, the library is still to
+reach maturity, and we must allow for improvements to be made in the design.
