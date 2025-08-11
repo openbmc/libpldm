@@ -103,7 +103,7 @@ int main(void)
 	struct pldm_package_firmware_device_id_record fdrec;
 	DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
 	pldm_package_header_information_pad hdr;
-	struct pldm_package_iter iter;
+	struct pldm_package pkg = { 0 };
 	size_t nr_fdrecs = 0;
 	size_t nr_ddrecs = 0;
 	size_t nr_infos = 0;
@@ -119,8 +119,7 @@ int main(void)
 	}
 
 	in = fread(package, 1, PD_PACKAGE_BUFFER, stdin);
-	rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
-						 &iter);
+	rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr, &pkg);
 	if (rc < 0) {
 		warnx("Failed to parse PLDM package: %s\n",
 		      strerrorname_np(-rc));
@@ -135,7 +134,7 @@ int main(void)
 	       hdr.package_header_format_revision);
 	fwrite("\n", 1, 1, stdout);
 
-	foreach_pldm_package_firmware_device_id_record(iter, fdrec, rc)
+	foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc)
 	{
 		struct pldm_descriptor desc;
 
@@ -153,7 +152,7 @@ int main(void)
 
 		printf("\tDescriptors:\n");
 		foreach_pldm_package_firmware_device_id_record_descriptor(
-			iter, fdrec, desc, rc)
+			pkg, fdrec, desc, rc)
 		{
 			pd_print_descriptor("\t\t", &desc, "\n");
 		}
@@ -172,7 +171,7 @@ int main(void)
 		goto cleanup_package;
 	}
 
-	foreach_pldm_package_downstream_device_id_record(iter, ddrec, rc)
+	foreach_pldm_package_downstream_device_id_record(pkg, ddrec, rc)
 	{
 		struct pldm_descriptor desc;
 
@@ -190,7 +189,7 @@ int main(void)
 			       " ]\n");
 		printf("\tDescriptors:\n");
 		foreach_pldm_package_downstream_device_id_record_descriptor(
-			iter, ddrec, desc, rc)
+			pkg, ddrec, desc, rc)
 		{
 			pd_print_descriptor("\t\t", &desc, "\n");
 		}
@@ -209,7 +208,7 @@ int main(void)
 		goto cleanup_package;
 	}
 
-	foreach_pldm_package_component_image_information(iter, info, rc)
+	foreach_pldm_package_component_image_information(pkg, info, rc)
 	{
 		printf("Component image info: %zu\n", nr_infos++);
 		printf("\tComponent classification: %" PRIu16 "\n",

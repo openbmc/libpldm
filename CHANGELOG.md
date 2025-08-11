@@ -62,6 +62,9 @@ Change categories:
   - `encode_pldm_file_df_heartbeat_req()`
   - `decode_pldm_file_df_heartbeat_resp()`
 
+- Reworked the firmware update package parsing APIs to track parse state using a
+  run-time state machine
+
 ### Deprecated
 
 ### Removed
