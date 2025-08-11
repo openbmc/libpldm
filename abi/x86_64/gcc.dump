@@ -22,8 +22,8 @@ $VAR1 = {
     'utils.h' => 1
   },
   'Language' => 'C',
-  'LibraryName' => 'libpldm.so.0.13.0',
-  'LibraryVersion' => '0.13.0',
+  'LibraryName' => 'libpldm.so.0.14.0',
+  'LibraryVersion' => '0.14.0',
   'NameSpaces' => {},
   'Needed' => {
     'libc.so.6' => 1
@@ -9414,7 +9414,7 @@ $VAR1 = {
   },
   'SymbolVersion' => {},
   'Symbols' => {
-    'libpldm.so.0.13.0' => {
+    'libpldm.so.0.14.0' => {
       'bcd2dec16' => 1,
       'bcd2dec32' => 1,
       'bcd2dec8' => 1,
@@ -13715,7 +13715,7 @@ $VAR1 = {
     }
   },
   'UndefinedSymbols' => {
-    'libpldm.so.0.13.0' => {
+    'libpldm.so.0.14.0' => {
       '_ITM_deregisterTMCloneTable' => 0,
       '_ITM_registerTMCloneTable' => 0,
       '__assert_fail@GLIBC_2.2.5' => 0,

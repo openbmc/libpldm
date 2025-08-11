@@ -19,6 +19,20 @@ Change categories:
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.14.0] 2025-08-11
+
+### Added
+
 - base: Add command specific completion codes.
 - firmware update: Add support for DSP0267 v1.2.0 by adding
   `component_opaque_data` fields to correctly parse their contents.
@@ -39,8 +53,6 @@ Change categories:
 - Improved documentation of `struct pldm_package_format_pin`
 - base: Allow PLDM File Transfer to use MultiPartReceive decode API
 
-### Deprecated
-
 ### Removed
 
 - Previously deprecated symbols:
@@ -48,10 +60,6 @@ Change categories:
   - `crc8()`: Users must switch to `pldm_edac_crc8()`
 
 - base: Remove `PLDM_INVALID_TRANSFER_OPERATION_FLAG` completion code
-
-### Fixed
-
-### Security
 
 ## [0.13.0] 2025-06-15
 
