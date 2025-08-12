@@ -2468,6 +2468,7 @@ struct pldm_package {
 	const struct pldm_package_format_pin *pin;
 	const pldm_package_header_information_pad *hdr;
 	enum pldm_package_parse state;
+	uint32_t flags;
 	struct variable_field package;
 	struct variable_field areas;
 	struct pldm_package_iter iter;
@@ -2481,6 +2482,7 @@ struct pldm_package {
  * @param[in] pin The maximum supported package format revision of the caller
  * @param[out] hdr The parsed package header structure
  * @param[out] pkg State-tracking for parsing subsequent package records and components
+ * @param[in] flags Affects the parsing behaviour of the library
  *
  * @pre @p pkg must be zero-initialised.
  *
@@ -2488,6 +2490,7 @@ struct pldm_package {
  * components, and to initialise @p pkg prior to any subsequent extraction of
  * package records and components.
  *
+ * @note @p flags must be zero
  * @note @p data is stored in @iter for later reference, and therefore must
  *       out-live @p iter
  * @note @p hdr is stored in @iter for later reference, and therefore must
@@ -2507,7 +2510,8 @@ struct pldm_package {
 int decode_pldm_firmware_update_package(
 	const void *data, size_t length,
 	const struct pldm_package_format_pin *pin,
-	pldm_package_header_information_pad *hdr, struct pldm_package *pkg);
+	pldm_package_header_information_pad *hdr, struct pldm_package *pkg,
+	uint32_t flags);
 
 LIBPLDM_ITERATOR
 bool pldm_package_firmware_device_id_record_iter_end(
