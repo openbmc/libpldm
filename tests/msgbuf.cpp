@@ -225,7 +225,7 @@ TEST(msgbuf, extract_one_int16)
     int16_t val;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_int16(ctx, val), 0);
+    ASSERT_EQ(pldm_msgbuf_extract_int16(ctx, val), 0);
     EXPECT_EQ(val, INT16_MIN);
     EXPECT_EQ(pldm_msgbuf_complete(ctx), 0);
 }
@@ -264,7 +264,7 @@ TEST(msgbuf, extract_one_uint32)
     uint32_t val;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint32(ctx, val), 0);
+    ASSERT_EQ(pldm_msgbuf_extract_uint32(ctx, val), 0);
     EXPECT_EQ(val, 0x5a00ffa5);
     EXPECT_EQ(pldm_msgbuf_complete(ctx), 0);
 }
