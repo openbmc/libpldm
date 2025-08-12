@@ -119,7 +119,8 @@ int main(void)
 	}
 
 	in = fread(package, 1, PD_PACKAGE_BUFFER, stdin);
-	rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr, &pkg);
+	rc = decode_pldm_firmware_update_package(package, in, &pin, 0, &hdr,
+						 &pkg);
 	if (rc < 0) {
 		warnx("Failed to parse PLDM package: %s\n",
 		      strerrorname_np(-rc));

@@ -582,6 +582,7 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	pkg->pin = pin;
 	pkg->hdr = hdr;
 	pkg->state = PLDM_PACKAGE_PARSE_HEADER;
+	pkg->flags = 0;
 	pkg->package.ptr = data;
 	pkg->package.length = length;
 
@@ -3257,10 +3258,14 @@ int encode_cancel_update_resp(uint8_t instance_id,
 LIBPLDM_ABI_TESTING
 int decode_pldm_firmware_update_package(
 	const void *data, size_t length,
-	const struct pldm_package_format_pin *pin,
+	const struct pldm_package_format_pin *pin, uint32_t flags,
 	pldm_package_header_information_pad *hdr, struct pldm_package *pkg)
 {
 	if (!data || !pin || !hdr || !pkg) {
+		return -EINVAL;
+	}
+
+	if (flags) {
 		return -EINVAL;
 	}
 
