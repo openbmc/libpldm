@@ -4832,19 +4832,23 @@ TEST(DecodePldmFirmwareUpdatePackage, badArguments)
     uint8_t data;
     int rc;
 
-    rc = decode_pldm_firmware_update_package(nullptr, 0, &pin, &hdr, &pkg);
+    rc = decode_pldm_firmware_update_package(nullptr, 0, &pin, &hdr, &pkg, 0);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), nullptr, &hdr,
-                                             &pkg);
+                                             &pkg, 0);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, nullptr,
-                                             &pkg);
+                                             &pkg, 0);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, &hdr,
-                                             nullptr);
+                                             nullptr, 0);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, &hdr,
+                                             &pkg, UINT32_MAX);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -4871,7 +4875,7 @@ TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinVersion)
     int rc;
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, &hdr,
-                                             &pkg);
+                                             &pkg, 0);
     EXPECT_EQ(rc, -ENOTSUP);
 }
 #endif
@@ -4911,11 +4915,11 @@ TEST(DecodePldmFirmwareUpdatePackage, badPinRevision)
     int rc;
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &lowPin, &hdr,
-                                             &pkg);
+                                             &pkg, 0);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &highPin,
-                                             &hdr, &pkg);
+                                             &hdr, &pkg, 0);
     EXPECT_EQ(rc, -ENOTSUP);
 }
 #endif
@@ -4955,11 +4959,11 @@ TEST(DecodePldmFirmwareUpdatePackage, badPinMagic)
     int rc;
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &lowPin, &hdr,
-                                             &pkg);
+                                             &pkg, 0);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &highPin,
-                                             &hdr, &pkg);
+                                             &hdr, &pkg, 0);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -4999,7 +5003,7 @@ TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinIdentifier)
     int rc;
 
     rc = decode_pldm_firmware_update_package(&data, sizeof(data), &pin, &hdr,
-                                             &pkg);
+                                             &pkg, 0);
     EXPECT_EQ(rc, -ENOTSUP);
 }
 #endif
@@ -5023,7 +5027,7 @@ TEST(DecodePldmFirmwareUpdatePackage, oldConsumer)
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &pkg);
+                                             &pin, &hdr, &pkg, 0);
     EXPECT_EQ(rc, -ENOTSUP);
 }
 #endif
@@ -5061,7 +5065,7 @@ TEST(DecodePldmFirmwareUpdatePackage, p1v1h1fd1cii)
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &pkg);
+                                             &pin, &hdr, &pkg, 0);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_0.data(),
@@ -5194,7 +5198,7 @@ TEST(DecodePldmFirmwareUpdatePackage, invalidDownstreamDeviceIteration)
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &pkg);
+                                             &pin, &hdr, &pkg, 0);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_0.data(),
@@ -5302,7 +5306,7 @@ TEST(DecodePldmFirmwareUpdatePackage, p2v1h1fd1fdd1cii)
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &pkg);
+                                             &pin, &hdr, &pkg, 0);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_0.data(),
@@ -5468,7 +5472,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &pkg);
+                                             &pin, &hdr, &pkg, 0);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_1.data(),
@@ -5690,7 +5694,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &pkg);
+                                             &pin, &hdr, &pkg, 0);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_2.data(),
@@ -5924,7 +5928,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &pkg);
+                                             &pin, &hdr, &pkg, 0);
     ASSERT_EQ(rc, 0);
 
     EXPECT_EQ(memcmp(PLDM_FWUP_PACKAGE_HEADER_IDENTIFIER_V1_3.data(),
@@ -6167,7 +6171,7 @@ TEST(DecodePldmFirmwareUpdatePackage, downstreamDeviceBeforeFirmwareDevice)
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &pkg);
+                                             &pin, &hdr, &pkg, 0);
     ASSERT_EQ(rc, 0);
 
     foreach_pldm_package_downstream_device_id_record(pkg, ddrec, rc)
@@ -6221,7 +6225,7 @@ TEST(DecodePldmFirmwareUpdatePackage, componentImageInfosBeforeFirmwareDevice)
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &pkg);
+                                             &pin, &hdr, &pkg, 0);
     ASSERT_EQ(rc, 0);
 
     foreach_pldm_package_component_image_information(pkg, info, rc)
@@ -6277,7 +6281,7 @@ TEST(DecodePldmFirmwareUpdatePackage,
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
-                                             &pin, &hdr, &pkg);
+                                             &pin, &hdr, &pkg, 0);
     ASSERT_EQ(rc, 0);
 
     foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc)
