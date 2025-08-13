@@ -34,6 +34,12 @@ Change categories:
   - Remove `__attribute__((packed))` from
     `struct pldm_base_multipart_receive_req`
 
+- platform: Rename symbols:
+  - `struct pldm_file_descriptor_pdr` to
+    `struct pldm_platform_file_descriptor_pdr`
+  - `decode_pldm_file_descriptor_pdr()` to
+    `decode_pldm_platform_file_descriptor_pdr()`
+
 ### Deprecated
 
 ### Removed

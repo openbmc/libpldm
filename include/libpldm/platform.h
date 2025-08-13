@@ -950,13 +950,13 @@ struct pldm_effecter_aux_name_pdr {
 	uint8_t effecter_names[1];
 } __attribute__((packed));
 
-/** @struct pldm_file_descriptor_pdr
+/** @struct pldm_platform_file_descriptor_pdr
  *
  *  Structure representing PLDM File Descriptor PDR for unpacked value
  *  Refer to: DSP0248_1.3.0: 28.30 Table 108
  */
 
-struct pldm_file_descriptor_pdr {
+struct pldm_platform_file_descriptor_pdr {
 	struct pldm_value_pdr_hdr hdr;
 	uint16_t terminus_handle;
 	uint16_t file_identifier;
@@ -2719,8 +2719,9 @@ pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event);
  *          -EOVERFLOW if the original length of the data buffer is smaller
  *          than the target extract length
  */
-int decode_pldm_file_descriptor_pdr(const void *data, size_t data_length,
-				    struct pldm_file_descriptor_pdr *pdr);
+int decode_pldm_platform_file_descriptor_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_file_descriptor_pdr *pdr);
 
 /** @brief Decode SetNumericSensorEnable request
  *

@@ -3473,8 +3473,9 @@ pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event)
 }
 
 LIBPLDM_ABI_TESTING
-int decode_pldm_file_descriptor_pdr(const void *data, size_t data_length,
-				    struct pldm_file_descriptor_pdr *pdr)
+int decode_pldm_platform_file_descriptor_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_file_descriptor_pdr *pdr)
 {
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
