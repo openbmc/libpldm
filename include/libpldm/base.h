@@ -359,11 +359,11 @@ struct pldm_get_tid_resp {
 	uint8_t tid;		 //!< PLDM GetTID TID field
 } __attribute__((packed));
 
-/** @struct pldm_multipart_receive_req
+/** @struct pldm_base_multipart_receive_req
  *
  * Structure representing PLDM multipart receive request.
  */
-struct pldm_multipart_receive_req {
+struct pldm_base_multipart_receive_req {
 	uint8_t pldm_type;	  //!< PLDM Type for the MultipartReceive
 				  //!< command.
 	uint8_t transfer_opflag;  //!< PLDM MultipartReceive operation flag.
@@ -375,13 +375,13 @@ struct pldm_multipart_receive_req {
 				  //!< section.
 	uint32_t section_length;  //!< The length (in bytes) of the section
 				  //!< requested.
-} __attribute__((packed));
+};
 
-/** @struct pldm_multipart_receive_resp
+/** @struct pldm_base_multipart_receive_resp
  *
  * Structure representing PLDM multipart receive request.
  */
-struct pldm_multipart_receive_resp {
+struct pldm_base_multipart_receive_resp {
 	uint8_t completion_code;       //!< Completion code of the command.
 	uint8_t transfer_flag;	       //!< PLDM MultipartReceive transfer flag.
 	uint32_t next_transfer_handle; //!< The handle for the next part of
@@ -726,8 +726,8 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
  *          -ENOMSG if the PLDM type in the request header is invalid
  *          -EOVERFLOW if the input message length is invalid
  */
-int encode_base_multipart_receive_req(
-	uint8_t instance_id, const struct pldm_multipart_receive_req *req,
+int encode_pldm_base_multipart_receive_req(
+	uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,
 	struct pldm_msg *msg, size_t payload_length);
 
 /** @brief Decode a PLDM MultipartReceive response message
@@ -747,10 +747,10 @@ int encode_base_multipart_receive_req(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
-int decode_base_multipart_receive_resp(const struct pldm_msg *msg,
-				       size_t payload_length,
-				       struct pldm_multipart_receive_resp *resp,
-				       uint32_t *data_integrity_checksum);
+int decode_pldm_base_multipart_receive_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_multipart_receive_resp *resp,
+	uint32_t *data_integrity_checksum);
 
 /** @brief Encode a PLDM MultipartReceive response message
  *
@@ -767,8 +767,9 @@ int decode_base_multipart_receive_resp(const struct pldm_msg *msg,
  *         'msg.payload'
  */
 int encode_base_multipart_receive_resp(
-	uint8_t instance_id, const struct pldm_multipart_receive_resp *resp,
-	uint32_t checksum, struct pldm_msg *msg, size_t *payload_length);
+	uint8_t instance_id,
+	const struct pldm_base_multipart_receive_resp *resp, uint32_t checksum,
+	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create a PLDM response message containing only cc
  *

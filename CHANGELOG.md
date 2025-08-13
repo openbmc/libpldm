@@ -21,6 +21,19 @@ Change categories:
 
 ### Changed
 
+- base:
+  - Rename symbols:
+    - `encode_base_multipart_receive_req()` to
+      `encode_pldm_base_multipart_receive_req()`
+    - `decode_base_multipart_receive_resp()` to
+      `decode_pldm_base_multipart_receive_resp()`
+    - `struct pldm_multipart_receive_resp` to
+      `struct pldm_base_multipart_receive_resp`
+    - `struct pldm_multipart_receive_req` to
+      `struct pldm_base_multipart_receive_req`
+  - Remove `__attribute__((packed))` from
+    `struct pldm_base_multipart_receive_req`
+
 ### Deprecated
 
 ### Removed

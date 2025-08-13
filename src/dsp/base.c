@@ -583,8 +583,8 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 }
 
 LIBPLDM_ABI_TESTING
-int encode_base_multipart_receive_req(
-	uint8_t instance_id, const struct pldm_multipart_receive_req *req,
+int encode_pldm_base_multipart_receive_req(
+	uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,
 	struct pldm_msg *msg, size_t payload_length)
 {
 	PLDM_MSGBUF_DEFINE_P(buf);
@@ -622,10 +622,10 @@ int encode_base_multipart_receive_req(
 }
 
 LIBPLDM_ABI_TESTING
-int decode_base_multipart_receive_resp(const struct pldm_msg *msg,
-				       size_t payload_length,
-				       struct pldm_multipart_receive_resp *resp,
-				       uint32_t *data_integrity_checksum)
+int decode_pldm_base_multipart_receive_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_multipart_receive_resp *resp,
+	uint32_t *data_integrity_checksum)
 {
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
@@ -678,8 +678,9 @@ int decode_base_multipart_receive_resp(const struct pldm_msg *msg,
 
 LIBPLDM_ABI_TESTING
 int encode_base_multipart_receive_resp(
-	uint8_t instance_id, const struct pldm_multipart_receive_resp *resp,
-	uint32_t checksum, struct pldm_msg *msg, size_t *payload_length)
+	uint8_t instance_id,
+	const struct pldm_base_multipart_receive_resp *resp, uint32_t checksum,
+	struct pldm_msg *msg, size_t *payload_length)
 {
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
