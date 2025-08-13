@@ -29,6 +29,12 @@ Change categories:
   - `struct pldm_multipart_receive_resp` to
     `struct pldm_base_multipart_receive_resp`
 
+- platform: Rename symbols:
+  - `struct pldm_file_descriptor_pdr` to
+    `struct pldm_platform_file_descriptor_pdr`
+  - `decode_pldm_file_descriptor_pdr()` to
+    `decode_pldm_platform_file_descriptor_pdr()`
+
 ### Deprecated
 
 ### Removed
