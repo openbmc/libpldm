@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c8ac56f_e1880f2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-13T13:47:41Z",
+      "side": 1,
+      "message": "For some reason it only worked for me in the online tool after wrapping in\n\n```\n---- MODULE scratch ----\n...\n\u003d\u003d\u003d\u003d\n```\n\notherwise i would get a parse error. Is it required to have a named module or is it some quirk of the tool?",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54312e58_3b579baf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-13T13:47:41Z",
+      "side": 1,
+      "message": "This TLA+ spec could be useful to have in a separate file for further extension down the line, and to be able to run the TLA+ specific tools on it.",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47439118_fd603d93",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-13T13:47:41Z",
+      "side": 1,
+      "message": "Could use a `Tested` statement with the commands/tools you used to check this spec. \n\nCould check this for example `https://will62794.github.io/spectacle/` or with local tools.",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7734a00b_34fb28f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-13T13:47:41Z",
+      "side": 1,
+      "message": "Thank you!",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a730a36f_678664f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-13T13:47:41Z",
+      "side": 1,
+      "message": "Did not look into the C code much so far.",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9f7175e_eb5bac66",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2284,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-13T13:47:41Z",
+      "side": 1,
+      "message": "`Unsupported` and `Error` states are missing here, should we add those to match the TLA+ spec?",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
