@@ -781,7 +781,7 @@ TEST(EncodeMultipartReceiveRequest, GoodTest)
         0x00,      0x00};
 
     PLDM_MSG_DEFINE_P(requestPtr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    auto rc = encode_base_multipart_receive_req(
+    auto rc = encode_pldm_base_multipart_receive_req(
         instance_id, &req_data, requestPtr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
 
     ASSERT_EQ(rc, 0);
@@ -800,12 +800,12 @@ TEST(EncodeMultipartReceiveRequest, BadTestUnAllocatedPtrParams)
         PLDM_BASE, PLDM_XFER_FIRST_PART, 0x01, 0x10, 0x00, 0x10};
 
     PLDM_MSG_DEFINE_P(requestPtr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    rc = encode_base_multipart_receive_req(instance_id, nullptr, requestPtr,
-                                           PLDM_MULTIPART_RECEIVE_REQ_BYTES);
+    rc = encode_pldm_base_multipart_receive_req(
+        instance_id, nullptr, requestPtr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
     EXPECT_EQ(rc, -EINVAL);
 
-    rc = encode_base_multipart_receive_req(instance_id, &req_data, nullptr,
-                                           PLDM_MULTIPART_RECEIVE_REQ_BYTES);
+    rc = encode_pldm_base_multipart_receive_req(
+        instance_id, &req_data, nullptr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -821,8 +821,8 @@ TEST(EncodeMultipartReceiveRequest, BadTestInvalidExpectedOutputMsgLength)
 
     PLDM_MSG_DEFINE_P(requestPtr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
 
-    rc = encode_base_multipart_receive_req(instance_id, &req_data, requestPtr,
-                                           1);
+    rc = encode_pldm_base_multipart_receive_req(instance_id, &req_data,
+                                                requestPtr, 1);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
@@ -837,7 +837,7 @@ TEST(DecodeMultipartReceiveResponse, GoodTest)
     std::vector<uint8_t> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     uint32_t dataIntegrityChecksum = 0x3C;
 
-    struct pldm_multipart_receive_resp resp_data = {};
+    struct pldm_base_multipart_receive_resp resp_data = {};
 
     PLDM_MSGBUF_DEFINE_P(buf);
     int rc;
@@ -863,7 +863,7 @@ TEST(DecodeMultipartReceiveResponse, GoodTest)
 
     uint32_t respDataIntegrityChecksum = 0;
 
-    rc = decode_base_multipart_receive_resp(
+    rc = decode_pldm_base_multipart_receive_resp(
         responseMsg, payload_length, &resp_data, &respDataIntegrityChecksum);
 
     ASSERT_EQ(rc, 0);
@@ -887,7 +887,7 @@ TEST(DecodeMultipartReceiveResponse, BadTestUnAllocatedPtrParams)
     std::vector<uint8_t> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     uint32_t dataIntegrityChecksum = 0x3C;
 
-    struct pldm_multipart_receive_resp resp_data = {};
+    struct pldm_base_multipart_receive_resp resp_data = {};
 
     PLDM_MSGBUF_DEFINE_P(buf);
     int rc;
@@ -913,12 +913,12 @@ TEST(DecodeMultipartReceiveResponse, BadTestUnAllocatedPtrParams)
 
     uint32_t respDataIntegrityChecksum = 0;
 
-    rc = decode_base_multipart_receive_resp(nullptr, payload_length, &resp_data,
-                                            &respDataIntegrityChecksum);
+    rc = decode_pldm_base_multipart_receive_resp(
+        nullptr, payload_length, &resp_data, &respDataIntegrityChecksum);
 
     EXPECT_EQ(rc, -EINVAL);
 
-    rc = decode_base_multipart_receive_resp(
+    rc = decode_pldm_base_multipart_receive_resp(
         responseMsg, payload_length, nullptr, &respDataIntegrityChecksum);
 
     EXPECT_EQ(rc, -EINVAL);
@@ -935,7 +935,7 @@ TEST(DecodeMultipartReceiveResponse, BadTestInvalidExpectedInputMsgLength)
     std::vector<uint8_t> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     uint32_t dataIntegrityChecksum = 0x3C;
 
-    struct pldm_multipart_receive_resp resp_data = {};
+    struct pldm_base_multipart_receive_resp resp_data = {};
 
     PLDM_MSGBUF_DEFINE_P(buf);
     int rc;
@@ -961,8 +961,8 @@ TEST(DecodeMultipartReceiveResponse, BadTestInvalidExpectedInputMsgLength)
 
     uint32_t respDataIntegrityChecksum = 0;
 
-    rc = decode_base_multipart_receive_resp(responseMsg, 0, &resp_data,
-                                            &respDataIntegrityChecksum);
+    rc = decode_pldm_base_multipart_receive_resp(responseMsg, 0, &resp_data,
+                                                 &respDataIntegrityChecksum);
 
     EXPECT_EQ(rc, -EOVERFLOW);
 }
@@ -985,7 +985,7 @@ TEST(EncodeMultipartReceiveResponse, GoodTestWithChecksum)
     size_t payload_length = responseMsgLength;
 
     struct variable_field payload = {data.data(), dataLength};
-    struct pldm_multipart_receive_resp resp_data = {
+    struct pldm_base_multipart_receive_resp resp_data = {
         completionCode, transferFlag, nextDataTransferHandle, payload};
     std::array<uint8_t, responseMsgLength> responseMsg = {
         completionCode,
@@ -1040,7 +1040,7 @@ TEST(EncodeMultipartReceiveResponse, GoodTestWithoutChecksum)
     size_t payload_length = responseMsgLength;
 
     struct variable_field payload = {data.data(), dataLength};
-    struct pldm_multipart_receive_resp resp_data = {
+    struct pldm_base_multipart_receive_resp resp_data = {
         completionCode, transferFlag, nextDataTransferHandle, payload};
     std::array<uint8_t, responseMsgLength> responseMsg = {
         completionCode,
@@ -1090,7 +1090,7 @@ TEST(EncodeMultipartReceiveResponse, GoodTestCompletionCode)
     size_t payload_length = responseMsgLength;
 
     struct variable_field payload = {data.data(), dataLength};
-    struct pldm_multipart_receive_resp resp_data = {
+    struct pldm_base_multipart_receive_resp resp_data = {
         completionCode, transferFlag, nextDataTransferHandle, payload};
     std::array<uint8_t, 1> responseMsg = {completionCode};
 
@@ -1124,7 +1124,7 @@ TEST(EncodeMultipartReceiveResponse, BadTestUnAllocatedParams)
     size_t payload_length = responseMsgLength;
 
     struct variable_field payload = {data.data(), dataLength};
-    struct pldm_multipart_receive_resp resp_data = {
+    struct pldm_base_multipart_receive_resp resp_data = {
         completionCode, transferFlag, nextDataTransferHandle, payload};
 
     PLDM_MSG_DEFINE_P(responsePtr, responseMsgLength);
@@ -1166,7 +1166,7 @@ TEST(EncodeMultipartReceiveResponse, BadTestInvalidExpectedOutputMsgLength)
     size_t payload_length = responseMsgLength;
 
     struct variable_field payload = {data.data(), dataLength};
-    struct pldm_multipart_receive_resp resp_data = {
+    struct pldm_base_multipart_receive_resp resp_data = {
         completionCode, transferFlag, nextDataTransferHandle, payload};
 
     PLDM_MSG_DEFINE_P(responsePtr, responseMsgLength);
