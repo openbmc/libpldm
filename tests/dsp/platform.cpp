@@ -6188,10 +6188,10 @@ TEST(decodePldmFileDescriptorPdr, oemFileClassificationPresentTest)
     const char expectFileName[] = "File1";
     const char expectOEMClassificationName[] = "OEM File";
 
-    struct pldm_file_descriptor_pdr decodedPdr = {};
+    struct pldm_platform_file_descriptor_pdr decodedPdr = {};
 
-    auto rc =
-        decode_pldm_file_descriptor_pdr(pdr1.data(), pdr1.size(), &decodedPdr);
+    auto rc = decode_pldm_platform_file_descriptor_pdr(pdr1.data(), pdr1.size(),
+                                                       &decodedPdr);
 
     ASSERT_EQ(0, rc);
     EXPECT_EQ(1, decodedPdr.terminus_handle);
@@ -6258,12 +6258,14 @@ TEST(decodePldmFileDescriptorPdr, BadTestUnAllocatedPtrParams)
         0x00, // File Name = "File1\NULL"
     };
 
-    struct pldm_file_descriptor_pdr decodedPdr = {};
+    struct pldm_platform_file_descriptor_pdr decodedPdr = {};
 
-    rc = decode_pldm_file_descriptor_pdr(nullptr, pdr1.size(), &decodedPdr);
+    rc = decode_pldm_platform_file_descriptor_pdr(nullptr, pdr1.size(),
+                                                  &decodedPdr);
     EXPECT_EQ(-EINVAL, rc);
 
-    rc = decode_pldm_file_descriptor_pdr(pdr1.data(), pdr1.size(), nullptr);
+    rc = decode_pldm_platform_file_descriptor_pdr(pdr1.data(), pdr1.size(),
+                                                  nullptr);
     EXPECT_EQ(-EINVAL, rc);
 }
 #endif
@@ -6299,10 +6301,10 @@ TEST(decodePldmFileDescriptorPdr, BadTestInvalidExpectedParamLength)
         0x00, // File Name = "File1\NULL"
     };
 
-    struct pldm_file_descriptor_pdr decodedPdr = {};
+    struct pldm_platform_file_descriptor_pdr decodedPdr = {};
 
     /* Expect error: Invalid input data length*/
-    rc = decode_pldm_file_descriptor_pdr(pdr1.data(), 1, &decodedPdr);
+    rc = decode_pldm_platform_file_descriptor_pdr(pdr1.data(), 1, &decodedPdr);
     EXPECT_EQ(-EOVERFLOW, rc);
 }
 #endif
@@ -6339,13 +6341,14 @@ TEST(decodePldmFileDescriptorPdr, BadTestDataBufferOverLength)
         0x00, // File Name = "File1\NULL"
     };
 
-    struct pldm_file_descriptor_pdr decodedPdr = {};
+    struct pldm_platform_file_descriptor_pdr decodedPdr = {};
 
     /*
      * Expect error: The original length of the data buffer is larger than
      * the target extract length.
      */
-    rc = decode_pldm_file_descriptor_pdr(pdr1.data(), pdr1.size(), &decodedPdr);
+    rc = decode_pldm_platform_file_descriptor_pdr(pdr1.data(), pdr1.size(),
+                                                  &decodedPdr);
     EXPECT_EQ(-EBADMSG, rc);
 }
 
@@ -6383,13 +6386,14 @@ TEST(decodePldmFileDescriptorPdr, BadTestDataBufferUnderLength)
         0x00 // OEM File Classification Name = "OEM File\NULL"
     };
 
-    struct pldm_file_descriptor_pdr decodedPdr = {};
+    struct pldm_platform_file_descriptor_pdr decodedPdr = {};
 
     /*
      * Expect error: The original length of the data buffer is smaller than
      * the target extract length.
      */
-    rc = decode_pldm_file_descriptor_pdr(pdr1.data(), pdr1.size(), &decodedPdr);
+    rc = decode_pldm_platform_file_descriptor_pdr(pdr1.data(), pdr1.size(),
+                                                  &decodedPdr);
     EXPECT_EQ(-EOVERFLOW, rc);
 }
 #endif
