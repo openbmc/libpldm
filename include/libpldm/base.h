@@ -813,6 +813,40 @@ int encode_pldm_base_negotiate_transfer_params_req(
 	const struct pldm_base_negotiate_transfer_params_req *req,
 	struct pldm_msg *msg, size_t payload_length);
 
+/** @brief Decode a PLDM Negotiate Transfer Parameters request message
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - Length of request message payload
+ *  @param[out] req - Pointer to the decoded request message
+ *  @return 0 on success
+ *          -EINVAL if argument values are invalid for the invocation
+ *          -EOVERFLOW if the input message buffer is too short for the output
+ *          response struct
+ *          -EBADMSG if the input message buffer is too large for the output
+ *          response struct.
+ */
+int decode_pldm_base_negotiate_transfer_params_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_negotiate_transfer_params_req *req);
+
+/** @brief Encode a PLDM Negotiate Transfer Parameters response message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp - The pointer to the response message to be encoded
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in, out] payload_length - Length of the request message payload
+ *  @return 0 on success
+ *          -EINVAL if argument values are invalid for the invocation
+ *          -ENOMSG if the PLDM type in the request header is invalid
+ *          -EOVERFLOW if the input message length is invalid
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_pldm_base_negotiate_transfer_params_resp(
+	uint8_t instance_id,
+	const struct pldm_base_negotiate_transfer_params_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
 /** @brief Decode a PLDM Negotiate Transfer Parameters response message
  *
  *  @param[in] msg - Response message
