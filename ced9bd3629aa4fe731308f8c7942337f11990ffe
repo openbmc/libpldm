@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e24a82a1_556a21f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-14T03:08:46Z",
+      "side": 1,
+      "message": "I prefer we represent it as a sorted list:\n\n```\n- decode_pldm_base_multipart_receive_resp\n- decode_pldm_base_negotiate_transfer_params_resp\n- decode_pldm_file_df_close_resp\n- decode_pldm_file_df_heartbeat_resp\n- decode_pldm_file_df_open_resp\n- decode_pldm_platform_file_descriptor_pdr\n- encode_pldm_base_multipart_receive_req\n- encode_pldm_base_negotiate_transfer_params_req\n- encode_pldm_file_df_close_req\n- encode_pldm_file_df_heartbeat_req\n- encode_pldm_file_df_open_req\n```\n\nThen say something like:\n\n\u003e Use of `decode_pldm_platform_file_descriptor_pdr()` is demonstrated in [1], and the remainder in [2]",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 56
+      },
+      "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "693852ff_17d91b75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-14T03:08:46Z",
+      "side": 1,
+      "message": "I think this should rather point to https://gerrit.openbmc.org/c/openbmc/pldm/+/82471",
+      "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71de6ab5_72d19215",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-14T03:08:46Z",
+      "side": 1,
+      "message": "I\u0027ve left some comments on https://gerrit.openbmc.org/c/openbmc/pldm/+/82471 and some inline",
+      "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6609be8f_ba8532a5",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-14T03:08:46Z",
+      "side": 1,
+      "message": "Can you please just make this a bulleted list rather than a hard-wrapped, comma-separated list?",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 79
+      },
+      "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0037f209_e2607c64",
+        "filename": "abi/x86_64/gcc.dump",
+        "patchSetId": 5
+      },
+      "lineNbr": 10672,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-14T03:08:46Z",
+      "side": 1,
+      "message": "So this is new: Can you please fix the naming, and drop the `__attribute__((packed))` from the struct in accordance with the guideline here:\n\nhttps://github.com/openbmc/libpldm/blob/ada5871a7ac63a6bfbfa470e1f4f190597c6c601/docs/checklists/changes.md#L275-L276",
+      "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
