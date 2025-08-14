@@ -548,36 +548,35 @@ TEST(MultipartReceive, testDecodeRequestPass)
     constexpr uint32_t kTransferHandle = 0x10;
     constexpr uint32_t kSectionOffset = 0x0;
     constexpr uint32_t kSectionLength = 0x10;
-    uint8_t pldm_type = 0x0;
-    uint8_t flag = PLDM_GET_FIRSTPART;
+
+    PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
+    PLDM_MSGBUF_DEFINE_P(buf);
+    int rc;
+
+    // Header values don't matter for this test.
+    rc = pldm_msgbuf_init_errno(buf, PLDM_MULTIPART_RECEIVE_REQ_BYTES,
+                                msg->payload, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
+    ASSERT_EQ(rc, 0);
+    pldm_msgbuf_insert_uint8(buf, kPldmType);
+    pldm_msgbuf_insert_uint8(buf, kFlag);
+    pldm_msgbuf_insert_uint32(buf, kTransferCtx);
+    pldm_msgbuf_insert_uint32(buf, kTransferHandle);
+    pldm_msgbuf_insert_uint32(buf, kSectionOffset);
+    pldm_msgbuf_insert_uint32(buf, kSectionLength);
+    rc = pldm_msgbuf_complete(buf);
+    ASSERT_EQ(rc, 0);
+
+    uint8_t pldm_type;
+    uint8_t flag;
     uint32_t transfer_ctx;
     uint32_t transfer_handle;
     uint32_t section_offset;
     uint32_t section_length;
-
-    // Header values don't matter for this test.
-    pldm_msg_hdr hdr{};
-    // Assign values to the packet struct and memcpy to ensure correct byte
-    // ordering.
-    pldm_multipart_receive_req req_pkt = {
-        .pldm_type = kPldmType,
-        .transfer_opflag = kFlag,
-        .transfer_ctx = kTransferCtx,
-        .transfer_handle = kTransferHandle,
-        .section_offset = kSectionOffset,
-        .section_length = kSectionLength,
-    };
-    std::vector<uint8_t> req(sizeof(hdr) + PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    std::memcpy(req.data(), &hdr, sizeof(hdr));
-    std::memcpy(req.data() + sizeof(hdr), &req_pkt, sizeof(req_pkt));
-
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-    pldm_msg* pldm_request = reinterpret_cast<pldm_msg*>(req.data());
-    int rc = decode_multipart_receive_req(
-        pldm_request, req.size() - hdrSize, &pldm_type, &flag, &transfer_ctx,
+    rc = decode_multipart_receive_req(
+        msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &pldm_type, &flag, &transfer_ctx,
         &transfer_handle, &section_offset, &section_length);
 
-    EXPECT_EQ(rc, PLDM_SUCCESS);
+    ASSERT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(pldm_type, kPldmType);
     EXPECT_EQ(flag, kFlag);
     EXPECT_EQ(transfer_ctx, kTransferCtx);
@@ -595,8 +594,7 @@ TEST(MultipartReceive, testDecodeRequestFailNullData)
 
 TEST(MultipartReceive, testDecodeRequestFailBadLength)
 {
-    constexpr uint8_t kPldmType = PLDM_BASE;
-    constexpr uint8_t kFlag = PLDM_XFER_FIRST_PART;
+    PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES + 1);
     uint8_t pldm_type;
     uint8_t flag;
     uint32_t transfer_ctx;
@@ -604,25 +602,12 @@ TEST(MultipartReceive, testDecodeRequestFailBadLength)
     uint32_t section_offset;
     uint32_t section_length;
 
-    // Header values don't matter for this test.
-    pldm_msg_hdr hdr{};
-    // Assign values to the packet struct and memcpy to ensure correct byte
-    // ordering.
-    pldm_multipart_receive_req req_pkt{};
-    req_pkt.pldm_type = kPldmType;
-    req_pkt.transfer_opflag = kFlag;
-
-    std::vector<uint8_t> req(sizeof(hdr) + PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    std::memcpy(req.data(), &hdr, sizeof(hdr));
-    std::memcpy(req.data() + sizeof(hdr), &req_pkt, sizeof(req_pkt));
-
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-    pldm_msg* pldm_request = reinterpret_cast<pldm_msg*>(req.data());
+    memset(msg, 0, PLDM_MSG_SIZE(PLDM_MULTIPART_RECEIVE_REQ_BYTES + 1));
     EXPECT_EQ(decode_multipart_receive_req(
-                  pldm_request, (req.size() - hdrSize) + 1, &pldm_type, &flag,
+                  msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES + 1, &pldm_type, &flag,
                   &transfer_ctx, &transfer_handle, &section_offset,
                   &section_length),
-              PLDM_ERROR_INVALID_LENGTH);
+              PLDM_ERROR_INVALID_DATA);
 }
 
 TEST(MultipartReceive, testDecodeRequestFailBadPldmType)

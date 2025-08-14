@@ -533,48 +533,51 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 				 uint32_t *section_offset,
 				 uint32_t *section_length)
 {
+	PLDM_MSGBUF_DEFINE_P(buf);
+	int rc;
+
 	if (msg == NULL || pldm_type == NULL || transfer_opflag == NULL ||
 	    transfer_ctx == NULL || transfer_handle == NULL ||
 	    section_offset == NULL || section_length == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (payload_length != PLDM_MULTIPART_RECEIVE_REQ_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
+	rc = pldm_msgbuf_init_errno(buf, PLDM_MULTIPART_RECEIVE_REQ_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return pldm_xlate_errno(rc);
 	}
 
-	struct pldm_multipart_receive_req *request =
-		(struct pldm_multipart_receive_req *)msg->payload;
+	pldm_msgbuf_extract_p(buf, pldm_type);
+	pldm_msgbuf_extract_p(buf, transfer_opflag);
+	pldm_msgbuf_extract_p(buf, transfer_ctx);
+	pldm_msgbuf_extract_p(buf, transfer_handle);
+	pldm_msgbuf_extract_p(buf, section_offset);
+	pldm_msgbuf_extract_p(buf, section_length);
 
-	if (request->pldm_type != PLDM_BASE &&
-	    request->pldm_type != PLDM_FILE) {
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	if (*pldm_type != PLDM_BASE && *pldm_type != PLDM_FILE) {
 		return PLDM_ERROR_INVALID_PLDM_TYPE;
 	}
 
 	// Any enum value above PLDM_XFER_CURRENT_PART is invalid.
-	if (request->transfer_opflag > PLDM_XFER_CURRENT_PART) {
+	if (*transfer_opflag > PLDM_XFER_CURRENT_PART) {
 		return PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION;
 	}
 
 	// A section offset of 0 is only valid on FIRST_PART or COMPLETE Xfers.
-	uint32_t sec_offset = le32toh(request->section_offset);
-	if (sec_offset == 0 &&
-	    (request->transfer_opflag != PLDM_XFER_FIRST_PART &&
-	     request->transfer_opflag != PLDM_XFER_COMPLETE)) {
+	if (*section_offset == 0 && (*transfer_opflag != PLDM_XFER_FIRST_PART &&
+				     *transfer_opflag != PLDM_XFER_COMPLETE)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	uint32_t handle = le32toh(request->transfer_handle);
-	if (handle == 0 && request->transfer_opflag != PLDM_XFER_COMPLETE) {
+	if (*transfer_handle == 0 && *transfer_opflag != PLDM_XFER_COMPLETE) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
-
-	*pldm_type = request->pldm_type;
-	*transfer_opflag = request->transfer_opflag;
-	*transfer_ctx = request->transfer_ctx;
-	*transfer_handle = handle;
-	*section_offset = sec_offset;
-	*section_length = le32toh(request->section_length);
 
 	return PLDM_SUCCESS;
 }
