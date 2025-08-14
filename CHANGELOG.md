@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- base: Add encode req & decode resp for NegotiateTranferParameters command
+
 ### Changed
 
 - base:
