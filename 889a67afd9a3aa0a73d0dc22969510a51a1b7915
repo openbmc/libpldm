@@ -37,6 +37,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10f73cc0_85d92296",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-14T02:16:46Z",
+      "side": 1,
+      "message": "So I did consider whether I should add it to the repo itself. I had decided against it for the following reasons:\n\n1. I wasn\u0027t sure if anyone beside myself would be interested in it\n2. Writing a spec can be quite a personal learning journey\n3. Maintaining the spec over time can be tricky as they really require people to \"live\" them\n\nAs a consequence I consider it a bit temporary in nature - something I used to guide me in the implementation. With respect to that, it really did act like a super-power and prevented me from agonizing with myself over how to represent all the related state - it boiled down to a few choice early-exit conditions, rather than trying to maintain a swamp of switch statements, for instance.\n\nRegarding 2, it tends to be that no-one sees the battles you fight with TLC, as by the time the spec is presented to others, it\u0027s generally upholding the desired properties 😊 The battles with TLC _are_ the learning experience and I haven\u0027t found an easy way to document them.\n\nThis article captures the essence of my feelings:\n\nhttps://ahelwer.ca/post/2025-07-04-tla-contracts/",
+      "parentUuid": "54312e58_3b579baf",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3454160c_8af7b3c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-14T02:16:46Z",
+      "side": 1,
+      "message": "Ah, yeah, that\u0027s a silly trap I guess. I\u0027ll add them in to ease use; I removed them because I thought they were noisy.",
+      "parentUuid": "2c8ac56f_e1880f2c",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47439118_fd603d93",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2025-08-13T13:47:41Z",
       "side": 1,
       "message": "Could use a `Tested` statement with the commands/tools you used to check this spec. \n\nCould check this for example `https://will62794.github.io/spectacle/` or with local tools.",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd30be9b_2b8a6250",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-14T02:16:46Z",
+      "side": 1,
+      "message": "I\u0027m not sure there\u0027s much value in that; if you\u0027ve come far enough to understand what is going on above, no doubt you have access to the tools needed to exercise the spec with a model checker. I mentioned above setting `NR_FORMATS \u003c- 4`. I think that\u0027s enough to reproduce?",
+      "parentUuid": "47439118_fd603d93",
       "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -65,6 +119,24 @@
       "writtenOn": "2025-08-13T13:47:41Z",
       "side": 1,
       "message": "Thank you!",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46f0decd_32dee89c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-14T02:16:46Z",
+      "side": 1,
+      "message": "It makes me happy that you share some enthusiasm for this kind of thing 😊",
+      "parentUuid": "7734a00b_34fb28f8",
       "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -99,6 +171,24 @@
       "writtenOn": "2025-08-13T13:47:41Z",
       "side": 1,
       "message": "`Unsupported` and `Error` states are missing here, should we add those to match the TLA+ spec?",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "725aa161_f78834c9",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2284,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-14T02:16:46Z",
+      "side": 1,
+      "message": "In my opinion, no; `Unsupported` and `Error` are represented in the implementation in return values and incorrect state for the current action.",
+      "parentUuid": "f9f7175e_eb5bac66",
       "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
