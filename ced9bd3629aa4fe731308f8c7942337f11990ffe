@@ -24,6 +24,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9285d1b_b14dae49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-14T09:04:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e24a82a1_556a21f9",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 56
+      },
+      "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c247a7b6_0c0c11e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-14T09:04:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e24a82a1_556a21f9",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 56
+      },
+      "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "693852ff_17d91b75",
@@ -37,6 +85,42 @@
       "writtenOn": "2025-08-14T03:08:46Z",
       "side": 1,
       "message": "I think this should rather point to https://gerrit.openbmc.org/c/openbmc/pldm/+/82471",
+      "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3229072_759cbeb7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-14T09:04:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "693852ff_17d91b75",
+      "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "300a37df_fc2ad388",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-14T09:04:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "693852ff_17d91b75",
       "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -81,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0447e5a_8a0f054a",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-14T09:04:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6609be8f_ba8532a5",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 79
+      },
+      "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0037f209_e2607c64",
@@ -94,6 +202,24 @@
       "writtenOn": "2025-08-14T03:08:46Z",
       "side": 1,
       "message": "So this is new: Can you please fix the naming, and drop the `__attribute__((packed))` from the struct in accordance with the guideline here:\n\nhttps://github.com/openbmc/libpldm/blob/ada5871a7ac63a6bfbfa470e1f4f190597c6c601/docs/checklists/changes.md#L275-L276",
+      "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da67f3e_e2bab267",
+        "filename": "abi/x86_64/gcc.dump",
+        "patchSetId": 5
+      },
+      "lineNbr": 10672,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-14T09:04:58Z",
+      "side": 1,
+      "message": "Did so in https://gerrit.openbmc.org/c/openbmc/libpldm/+/82755/2",
+      "parentUuid": "0037f209_e2607c64",
       "revId": "ced9bd3629aa4fe731308f8c7942337f11990ffe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
