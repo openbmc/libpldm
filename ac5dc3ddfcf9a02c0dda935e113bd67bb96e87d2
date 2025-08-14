@@ -94,6 +94,30 @@
       },
       "revId": "ac5dc3ddfcf9a02c0dda935e113bd67bb96e87d2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97310303_6f9dc62f",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-08-14T05:07:27Z",
+      "side": 1,
+      "message": "Acknowledged, yes since all are in TESTING.",
+      "parentUuid": "3e9b5b55_dd6574e3",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 39
+      },
+      "revId": "ac5dc3ddfcf9a02c0dda935e113bd67bb96e87d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
