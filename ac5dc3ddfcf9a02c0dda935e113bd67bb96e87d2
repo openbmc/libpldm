@@ -70,6 +70,30 @@
       },
       "revId": "ac5dc3ddfcf9a02c0dda935e113bd67bb96e87d2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e9b5b55_dd6574e3",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-14T02:24:55Z",
+      "side": 1,
+      "message": "\u003e Both APIs are TESTING, and as long as they are both not stabilized yet, I think the struct must have not been used anywhere\n\nThis is the expectation, yes. If all functions in the library API using a given type or its pointer are marked testing, then I consider the type itself to also be in the testing set. This is also how `abi-compliance-checker` works. The change has passed CI, so `abi-compliance-checker` has not indicated a concern. Therefore the rename is okay.\n\n@pavithrabarithaya07@gmail.com if this makes sense, please mark the thread as resolved.",
+      "parentUuid": "d4c12b44_f0cdd689",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 39
+      },
+      "revId": "ac5dc3ddfcf9a02c0dda935e113bd67bb96e87d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
