@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a07bb63b_3b1c0769",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-15T01:02:48Z",
+      "side": 1,
+      "message": "Thanks for putting in the effort to translate the spec into dot, it was nice to render it and take a look.\n\nSo I did consider mermaid initially, but then decided that if I was going to put the effort in to specifying a state machine, I\u0027d much rather do so in a way that was testable for the properties I needed, hence TLA+.\n\nWe should keep in mind what we\u0027re trying to achieve here. The spec and the state machine cover _implementation details_ of the library - a means to catch erroneous use of the APIs, given the problems with enforcing sequencing via the type system. The user-facing result of the state machine is the errors that are visible to the callers of the APIs. We should make sure *those* are documented appropriately, with descriptions of the circumstances in which specific error values arise, and the pre- and post- conditions as you suggested.\n\nOtherwise, the information on the sequencing required can be gleaned from DSP0267 in the context of the desired format revision to pin against. I don\u0027t think we should cater to people who aren\u0027t willing to read the spec that the APIs implement.\n\nI rather we be conservative about including implementer-oriented documentation because the implementation can change on a whim, and all of a sudden the documentation is incorrect. I\u0027m trying to avoid increasing my maintenance burden by acknowledging that some information is only temporally relevant, and locating it in time with the change (by putting it in the commit message).",
+      "parentUuid": "c76b231f_70f534bd",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47439118_fd603d93",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -261,6 +279,24 @@
       "side": 1,
       "message": "Then the implementation does not match the state machine, right?\n\nI thought it should match. From the code perspective, i agree, the implemented behavior still works as the precondition state will be wrong in error case.\n\nBut from contributor perspective it might be harder to reason about since the state machine is not making progress and not ending up in one of the 3 final states.",
       "parentUuid": "725aa161_f78834c9",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4905ef8e_75971376",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2284,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-15T01:02:48Z",
+      "side": 1,
+      "message": "\u003e Then the implementation does not match the state machine, right?\n\nTo give myself some credit here, I never claimed that it did. The commit message says:\n\n\u003e The state machine implementation is **modeled** on the TLA+ specification below\n\n(emphasis added)\n\nThe intent was that \"modeled\" suggested relative alignment rather than strict alignment between the two.\n\nFurther, there are details the TLA+ specification omits - it only tackles one specific problem, so you can claim it\u0027s not accurate regardless of whether we fix this issue.\n\nThat said, the spec was about setting expectations for the implementation, and I think you make a reasonable point that it diverges without any real discussion. I will update the commit message to describe how the `Unsupported` and `Error` states map to the implementation, which will hopefully reduce the surprise.\n\n\u003e since the state machine is not making progress and not ending up in one of the 3 final states\n\nThe reason that it doesn\u0027t is that the APIs shouldn\u0027t observe the problem in practice, because the callers are expected to perform appropriate error handling. This will detect the incorrect use and cause progress to stop (by way of no further calls into the APIs). Incorrect use should be caught quickly in testing.",
+      "parentUuid": "1c3db7ff_775188b8",
       "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
