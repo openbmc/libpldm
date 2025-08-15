@@ -540,7 +540,7 @@ TEST(GetTID, testDecodeResponse)
     EXPECT_EQ(tid, 1);
 }
 
-TEST(DecodeMultipartReceiveResponse, testDecodeRequestPass)
+TEST(DecodeMultipartReceiveRequest, testDecodeRequestPass)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
     constexpr uint8_t kFlag = PLDM_XFER_FIRST_PART;
@@ -585,14 +585,14 @@ TEST(DecodeMultipartReceiveResponse, testDecodeRequestPass)
     EXPECT_EQ(section_length, kSectionLength);
 }
 
-TEST(DecodeMultipartReceiveResponse, testDecodeRequestFailNullData)
+TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailNullData)
 {
     EXPECT_EQ(decode_multipart_receive_req(NULL, 0, NULL, NULL, NULL, NULL,
                                            NULL, NULL),
               PLDM_ERROR_INVALID_DATA);
 }
 
-TEST(DecodeMultipartReceiveResponse, testDecodeRequestFailBadLength)
+TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadLength)
 {
     PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES + 1);
     uint8_t pldm_type;
@@ -610,7 +610,7 @@ TEST(DecodeMultipartReceiveResponse, testDecodeRequestFailBadLength)
               PLDM_ERROR_INVALID_DATA);
 }
 
-TEST(DecodeMultipartReceiveResponse, testDecodeRequestFailBadPldmType)
+TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadPldmType)
 {
     constexpr uint8_t kPldmType = 0xff;
     constexpr uint8_t kFlag = PLDM_XFER_FIRST_PART;
@@ -642,7 +642,7 @@ TEST(DecodeMultipartReceiveResponse, testDecodeRequestFailBadPldmType)
               PLDM_ERROR_INVALID_PLDM_TYPE);
 }
 
-TEST(DecodeMultipartReceiveResponse, testDecodeRequestFailBadTransferFlag)
+TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadTransferFlag)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
     constexpr uint8_t kFlag = PLDM_XFER_CURRENT_PART + 0x10;
@@ -674,7 +674,7 @@ TEST(DecodeMultipartReceiveResponse, testDecodeRequestFailBadTransferFlag)
               PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION);
 }
 
-TEST(DecodeMultipartReceiveResponse, testDecodeRequestFailBadOffset)
+TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadOffset)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
     constexpr uint8_t kFlag = PLDM_XFER_NEXT_PART;
@@ -711,7 +711,7 @@ TEST(DecodeMultipartReceiveResponse, testDecodeRequestFailBadOffset)
               PLDM_ERROR_INVALID_DATA);
 }
 
-TEST(DecodeMultipartReceiveResponse, testDecodeRequestFailBadHandle)
+TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadHandle)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
     constexpr uint8_t kFlag = PLDM_XFER_NEXT_PART;
