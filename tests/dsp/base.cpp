@@ -968,6 +968,106 @@ TEST(DecodeMultipartReceiveResponse, BadTestInvalidExpectedInputMsgLength)
 #endif
 
 #ifdef LIBPLDM_API_TESTING
+TEST(DecodeMultipartReceiveResponse, BadTestRedundantCheckSum)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint8_t transferFlag =
+        PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_ACK_COMPLETION;
+    uint32_t nextDataTransferHandle = 0x00;
+    static constexpr const uint32_t dataLength = 0;
+    uint32_t dataIntegrityChecksum = 0x2c;
+
+    struct pldm_base_multipart_receive_resp resp_data = {};
+
+    PLDM_MSGBUF_DEFINE_P(buf);
+    int rc;
+
+    /*
+     * Data field is omitted in a response with ACKNOWLEDGE_COMPLETION
+     * TransferFlag. Intentionally insert a DataIntegrityChecksum field to the
+     * response message
+     */
+
+    static constexpr const size_t payload_length =
+        PLDM_BASE_MULTIPART_RECEIVE_RESP_MIN_BYTES + dataLength +
+        sizeof(dataIntegrityChecksum);
+    PLDM_MSG_DEFINE_P(responseMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint8(buf, completionCode);
+    pldm_msgbuf_insert_uint8(buf, transferFlag);
+    pldm_msgbuf_insert_uint32(buf, nextDataTransferHandle);
+    pldm_msgbuf_insert_uint32(buf, dataLength);
+    pldm_msgbuf_insert_uint32(buf, dataIntegrityChecksum);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    uint32_t respDataIntegrityChecksum = 0;
+
+    rc = decode_pldm_base_multipart_receive_resp(
+        responseMsg, payload_length, &resp_data, &respDataIntegrityChecksum);
+
+    /*
+     * pldm_msgbuf_complete_consumed() returns -EBADMSG as
+     * decode_pldm_base_multipart_receive_resp() didn't consume all the input
+     * message buffer.
+     */
+    EXPECT_EQ(rc, -EBADMSG);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeMultipartReceiveResponse, BadTestMissingCheckSum)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint8_t transferFlag = PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_END;
+    uint32_t nextDataTransferHandle = 0x00;
+    static constexpr const uint32_t dataLength = 9;
+    std::vector<uint8_t> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    struct pldm_base_multipart_receive_resp resp_data = {};
+
+    PLDM_MSGBUF_DEFINE_P(buf);
+    int rc;
+
+    /*
+     * Intentionally do not insert DataIntegrityChecksum field to the response
+     * message
+     */
+    static constexpr const size_t payload_length =
+        PLDM_BASE_MULTIPART_RECEIVE_RESP_MIN_BYTES + dataLength;
+    PLDM_MSG_DEFINE_P(responseMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, responseMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint8(buf, completionCode);
+    pldm_msgbuf_insert_uint8(buf, transferFlag);
+    pldm_msgbuf_insert_uint32(buf, nextDataTransferHandle);
+    pldm_msgbuf_insert_uint32(buf, dataLength);
+    rc = pldm_msgbuf_insert_array_uint8(buf, dataLength, data.data(),
+                                        dataLength);
+    EXPECT_EQ(rc, 0);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    uint32_t respDataIntegrityChecksum = 0;
+
+    rc = decode_pldm_base_multipart_receive_resp(
+        responseMsg, payload_length, &resp_data, &respDataIntegrityChecksum);
+
+    /*
+     * pldm_msgbuf_extract_p() returns -EOVERFLOW as
+     * decode_pldm_base_multipart_receive_resp() tried to consume more than
+     * the expected input message buffer.
+     */
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
 TEST(EncodeMultipartReceiveResponse, GoodTestWithChecksum)
 {
     uint8_t instance_id = 0;

@@ -72,6 +72,8 @@ Change categories:
 
 ### Fixed
 
+- dsp: base: Don't extract MultipartReceive resp's CRC once complete
+
 ### Security
 
 ## [0.14.0] 2025-08-11
