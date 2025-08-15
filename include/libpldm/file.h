@@ -104,7 +104,7 @@ struct pldm_file_df_heartbeat_resp {
  *  @param[in] instance_id - Message's instance id
  *  @param[in] req - The pointer to the request message to be encoded
  *  @param[in,out] msg - Message will be written to this
- *  @param[in] payload_length - Length of the request message payload
+ *  @param[in, out] payload_length - Length of the request message payload
  *  @return 0 on success
  *          -EINVAL if the input parameters' memory are not allocated,
  *          or message type or instance in request header is invalid
@@ -115,7 +115,7 @@ struct pldm_file_df_heartbeat_resp {
  */
 int encode_pldm_file_df_open_req(uint8_t instance_id,
 				 const struct pldm_file_df_open_req *req,
-				 struct pldm_msg *msg, size_t payload_length);
+				 struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode DFOpen request data
  *
@@ -171,7 +171,7 @@ int decode_pldm_file_df_open_resp(const struct pldm_msg *msg,
  *  @param[in] instance_id - Message's instance id
  *  @param[in] req - The pointer to the request message to be encoded
  *  @param[in,out] msg - Message will be written to this
- *  @param[in] payload_length - Length of the request message payload
+ *  @param[in, out] payload_length - Length of the request message payload
  *  @return 0 on success
  *          -EINVAL if the input parameters' memory are not allocated,
  *          or message type or instance in request header is invalid
@@ -182,7 +182,7 @@ int decode_pldm_file_df_open_resp(const struct pldm_msg *msg,
  */
 int encode_pldm_file_df_close_req(uint8_t instance_id,
 				  const struct pldm_file_df_close_req *req,
-				  struct pldm_msg *msg, size_t payload_length);
+				  struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode DFClose request data
  *
@@ -235,7 +235,7 @@ int decode_pldm_file_df_close_resp(const struct pldm_msg *msg,
  *  @param[in] instance_id - Message's instance id
  *  @param[in] req - The pointer to the request message to be encoded
  *  @param[in,out] msg - Message will be written to this
- *  @param[in] payload_length - Length of the request message payload
+ *  @param[in, out] payload_length - Length of the request message payload
  *  @return 0 on success
  *          -EINVAL if the input parameters' memory are not allocated,
  *          or message type or instance in request header is invalid
@@ -246,7 +246,7 @@ int decode_pldm_file_df_close_resp(const struct pldm_msg *msg,
  */
 int encode_pldm_file_df_heartbeat_req(
 	uint8_t instance_id, const struct pldm_file_df_heartbeat_req *req,
-	struct pldm_msg *msg, size_t payload_length);
+	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode DFHeartbeat response data
  *
