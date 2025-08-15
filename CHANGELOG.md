@@ -62,6 +62,9 @@ Change categories:
   - `encode_pldm_file_df_heartbeat_req()`
   - `decode_pldm_file_df_heartbeat_resp()`
 
+- base: Update `decode_pldm_base_multipart_receive_resp()` to only extract
+  `DataIntegrityChecksum` when `TransferFlag` field is `ACKNOWLEDGE_COMPLETION`.
+
 ### Deprecated
 
 ### Removed
