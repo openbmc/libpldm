@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b628d08_bec1263e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-15T05:04:50Z",
+      "side": 1,
+      "message": "Hi, I added a patch in front of this patch to address your comments. Please help review. Thank you.",
+      "parentUuid": "138da580_6d601bc2",
+      "revId": "8914ecafe3aa995da8d6231bb165067eba424062",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "284da002_6dfd03c6",
         "filename": "abi/x86_64/gcc.dump",
         "patchSetId": 6
@@ -31,6 +49,30 @@
       "writtenOn": "2025-08-15T02:27:02Z",
       "side": 1,
       "message": "So type 169 is `size_t` (you can search for this). We want that to rather be 2760, which is `size_t*` (i.e. a pointer), so the APIs can satisfy this:\n\nhttps://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L270-L272\n\n(which I just merged via https://gerrit.openbmc.org/c/openbmc/libpldm/+/82827 - so don\u0027t worry if you hadn\u0027t seen it).\n\nCan you please fix it up, using `pldm_msgbuf_complete_used()` to discover the encoded length?",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 25
+      },
+      "revId": "8914ecafe3aa995da8d6231bb165067eba424062",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e4a8a72_562321f4",
+        "filename": "abi/x86_64/gcc.dump",
+        "patchSetId": 6
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-15T05:04:50Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "284da002_6dfd03c6",
       "range": {
         "startLine": 477,
         "startChar": 0,
@@ -58,6 +100,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c316d0d_b58c589b",
+        "filename": "abi/x86_64/gcc.dump",
+        "patchSetId": 6
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-15T05:04:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13b2cff7_a71a48ee",
+      "revId": "8914ecafe3aa995da8d6231bb165067eba424062",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d558d8ac_81e42b28",
@@ -71,6 +131,24 @@
       "writtenOn": "2025-08-15T02:27:02Z",
       "side": 1,
       "message": "Needs to be `size_t*`.",
+      "revId": "8914ecafe3aa995da8d6231bb165067eba424062",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8aef59d_58d11dbf",
+        "filename": "abi/x86_64/gcc.dump",
+        "patchSetId": 6
+      },
+      "lineNbr": 2804,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-15T05:04:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d558d8ac_81e42b28",
       "revId": "8914ecafe3aa995da8d6231bb165067eba424062",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -92,6 +170,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b969e598_fc9fc217",
+        "filename": "abi/x86_64/gcc.dump",
+        "patchSetId": 6
+      },
+      "lineNbr": 2856,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-15T05:04:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23da021e_754a9188",
+      "revId": "8914ecafe3aa995da8d6231bb165067eba424062",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbf40805_8f03af20",
@@ -105,6 +201,24 @@
       "writtenOn": "2025-08-15T02:27:02Z",
       "side": 1,
       "message": "`size_t*`.",
+      "revId": "8914ecafe3aa995da8d6231bb165067eba424062",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76e3f82c_f19e83fc",
+        "filename": "abi/x86_64/gcc.dump",
+        "patchSetId": 6
+      },
+      "lineNbr": 2903,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-15T05:04:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbf40805_8f03af20",
       "revId": "8914ecafe3aa995da8d6231bb165067eba424062",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
