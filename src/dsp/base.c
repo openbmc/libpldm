@@ -666,10 +666,8 @@ int decode_pldm_base_multipart_receive_resp(
 					  (void **)&resp->data.ptr);
 	}
 
-	if (resp->transfer_flag ==
-		    PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_END ||
-	    resp->transfer_flag ==
-		    PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_START_AND_END) {
+	if (resp->transfer_flag !=
+	    PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_ACK_COMPLETION) {
 		pldm_msgbuf_extract_p(buf, data_integrity_checksum);
 	}
 
