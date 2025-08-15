@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b68910f4_e8560a59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-15T08:51:21Z",
+      "side": 1,
+      "message": "Did not go through in detail, but looks good to me.\n\nPackageParser can be rebased on top of this with minimal changes\n\n```\ndiff --git a/bindings/cpp/firmware_update.cpp b/bindings/cpp/firmware_update.cpp\nindex 613df98..e477742 100644\n--- a/bindings/cpp/firmware_update.cpp\n+++ b/bindings/cpp/firmware_update.cpp\n@@ -96,7 +96,7 @@ pldm::fw_update::PackageParser::parse(\n {\n        const size_t pkgSize \u003d pkg.size();\n \n-       struct pldm_package_iter packageItr \u003d {};\n+       struct pldm_package packageItr \u003d {};\n        std::vector\u003cFirmwareDeviceIDRecord\u003e fwDeviceIDRecords \u003d {};\n        pldm_package_header_information_pad hdr \u003d {};\n        int rc;\n```\n\nand all it\u0027s tests still pass.",
+      "revId": "b7804bba452f43df0d5936e1aaf3846e19b97a7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7b7c175_2279f807",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2485,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-15T08:51:21Z",
+      "side": 1,
+      "message": "I wonder if we need this requirement since it\u0027s an out parameter.\n\nZero initializing it would cause runtime overhead but simplify the API for the caller.",
+      "revId": "b7804bba452f43df0d5936e1aaf3846e19b97a7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed384e81_da64fb1c",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2614,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-15T08:51:21Z",
+      "side": 1,
+      "message": "I wonder if all these examples are helpful here, but that is unrelated to this patch so i am marking this comment as resolved.\n\nWould it be more helpful to point to working code in unit tests?\n\nThe unit tests at least compile and are syntax highlighted.\n\nThese extensive comments are not guaranteed to compile.",
+      "revId": "b7804bba452f43df0d5936e1aaf3846e19b97a7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d9baa7c_276df37b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2817,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-15T08:51:21Z",
+      "side": 1,
+      "message": "Could we do \n```\nreturn pkg-\u003estate \u003d\u003d PLDM_PACKAGE_PARSE_COMPLETE;\n```\n\nhere since `pldm_package_component_image_information_iter_next` should set this value.\n\nThis would make the code rely more on the state machine.",
+      "revId": "b7804bba452f43df0d5936e1aaf3846e19b97a7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

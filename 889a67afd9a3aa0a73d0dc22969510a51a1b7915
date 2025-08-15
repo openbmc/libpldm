@@ -125,6 +125,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "589a2563_e47ea49a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-15T08:51:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a07bb63b_3b1c0769",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47439118_fd603d93",
@@ -297,6 +315,24 @@
       "side": 1,
       "message": "\u003e Then the implementation does not match the state machine, right?\n\nTo give myself some credit here, I never claimed that it did. The commit message says:\n\n\u003e The state machine implementation is **modeled** on the TLA+ specification below\n\n(emphasis added)\n\nThe intent was that \"modeled\" suggested relative alignment rather than strict alignment between the two.\n\nFurther, there are details the TLA+ specification omits - it only tackles one specific problem, so you can claim it\u0027s not accurate regardless of whether we fix this issue.\n\nThat said, the spec was about setting expectations for the implementation, and I think you make a reasonable point that it diverges without any real discussion. I will update the commit message to describe how the `Unsupported` and `Error` states map to the implementation, which will hopefully reduce the surprise.\n\n\u003e since the state machine is not making progress and not ending up in one of the 3 final states\n\nThe reason that it doesn\u0027t is that the APIs shouldn\u0027t observe the problem in practice, because the callers are expected to perform appropriate error handling. This will detect the incorrect use and cause progress to stop (by way of no further calls into the APIs). Incorrect use should be caught quickly in testing.",
       "parentUuid": "1c3db7ff_775188b8",
+      "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c2df5e0_1c5171fc",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2284,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-15T08:51:21Z",
+      "side": 1,
+      "message": "ok, i see there is some tradeoff as fully conforming to the state machine would introduce extra code and runtime overhead which is redundant if the caller handles error codes.",
+      "parentUuid": "4905ef8e_75971376",
       "revId": "889a67afd9a3aa0a73d0dc22969510a51a1b7915",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
