@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acb3ef08_97a5bfd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-15T00:33:17Z",
+      "side": 1,
+      "message": "Hi John, nice work. I have a couple of queries inline.",
+      "revId": "1497e524d7126c6c4dcb632deb782aca9bae7620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6adf53_e53ed546",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-15T00:33:17Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right? The fact that this compiles suggests like I need to fix up msgbuf sooner rather than later.",
+      "range": {
+        "startLine": 836,
+        "startChar": 1,
+        "endLine": 836,
+        "endChar": 6
+      },
+      "revId": "1497e524d7126c6c4dcb632deb782aca9bae7620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c95d2ebc_58540297",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-15T00:33:17Z",
+      "side": 1,
+      "message": "Can we please declare this with the other variables at the top of the function body?",
+      "revId": "1497e524d7126c6c4dcb632deb782aca9bae7620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
