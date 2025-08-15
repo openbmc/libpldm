@@ -585,12 +585,12 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 LIBPLDM_ABI_TESTING
 int encode_pldm_base_multipart_receive_req(
 	uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,
-	struct pldm_msg *msg, size_t payload_length)
+	struct pldm_msg *msg, size_t *payload_length)
 {
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
 
-	if (req == NULL || msg == NULL) {
+	if (req == NULL || msg == NULL || payload_length == NULL) {
 		return -EINVAL;
 	}
 
@@ -606,7 +606,7 @@ int encode_pldm_base_multipart_receive_req(
 	}
 
 	rc = pldm_msgbuf_init_errno(buf, PLDM_MULTIPART_RECEIVE_REQ_BYTES,
-				    msg->payload, payload_length);
+				    msg->payload, *payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -618,7 +618,7 @@ int encode_pldm_base_multipart_receive_req(
 	pldm_msgbuf_insert(buf, req->section_offset);
 	pldm_msgbuf_insert(buf, req->section_length);
 
-	return pldm_msgbuf_complete(buf);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_TESTING
@@ -795,12 +795,12 @@ LIBPLDM_ABI_TESTING
 int encode_pldm_base_negotiate_transfer_params_req(
 	uint8_t instance_id,
 	const struct pldm_base_negotiate_transfer_params_req *req,
-	struct pldm_msg *msg, size_t payload_length)
+	struct pldm_msg *msg, size_t *payload_length)
 {
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
 
-	if (req == NULL || msg == NULL) {
+	if (req == NULL || msg == NULL || payload_length == NULL) {
 		return -EINVAL;
 	}
 
@@ -817,7 +817,7 @@ int encode_pldm_base_negotiate_transfer_params_req(
 
 	rc = pldm_msgbuf_init_errno(
 		buf, PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES,
-		msg->payload, payload_length);
+		msg->payload, *payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -831,7 +831,7 @@ int encode_pldm_base_negotiate_transfer_params_req(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
-	return pldm_msgbuf_complete(buf);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_TESTING

@@ -40,6 +40,10 @@ Change categories:
   - `decode_pldm_file_descriptor_pdr()` to
     `decode_pldm_platform_file_descriptor_pdr()`
 
+- base: Let `payload_length` be an in/out buffer for:
+  - `encode_pldm_base_multipart_receive_req()`
+  - `encode_pldm_base_negotiate_transfer_params_req()`
+
 ### Deprecated
 
 ### Removed
