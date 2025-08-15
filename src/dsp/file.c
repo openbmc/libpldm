@@ -16,7 +16,7 @@
 LIBPLDM_ABI_TESTING
 int encode_pldm_file_df_open_req(uint8_t instance_id,
 				 const struct pldm_file_df_open_req *req,
-				 struct pldm_msg *msg, size_t payload_length)
+				 struct pldm_msg *msg, size_t *payload_length)
 {
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
@@ -37,7 +37,7 @@ int encode_pldm_file_df_open_req(uint8_t instance_id,
 	}
 
 	rc = pldm_msgbuf_init_errno(buf, PLDM_DF_OPEN_REQ_BYTES, msg->payload,
-				    payload_length);
+				    *payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -45,7 +45,7 @@ int encode_pldm_file_df_open_req(uint8_t instance_id,
 	pldm_msgbuf_insert(buf, req->file_identifier);
 	pldm_msgbuf_insert(buf, req->file_attribute.value);
 
-	return pldm_msgbuf_complete(buf);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_TESTING
@@ -147,7 +147,7 @@ int decode_pldm_file_df_open_resp(const struct pldm_msg *msg,
 LIBPLDM_ABI_TESTING
 int encode_pldm_file_df_close_req(uint8_t instance_id,
 				  const struct pldm_file_df_close_req *req,
-				  struct pldm_msg *msg, size_t payload_length)
+				  struct pldm_msg *msg, size_t *payload_length)
 {
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
@@ -168,7 +168,7 @@ int encode_pldm_file_df_close_req(uint8_t instance_id,
 	}
 
 	rc = pldm_msgbuf_init_errno(buf, PLDM_DF_CLOSE_REQ_BYTES, msg->payload,
-				    payload_length);
+				    *payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -176,7 +176,7 @@ int encode_pldm_file_df_close_req(uint8_t instance_id,
 	pldm_msgbuf_insert(buf, req->file_descriptor);
 	pldm_msgbuf_insert(buf, req->df_close_options.value);
 
-	return pldm_msgbuf_complete(buf);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_TESTING
@@ -254,7 +254,7 @@ int decode_pldm_file_df_close_resp(const struct pldm_msg *msg,
 LIBPLDM_ABI_TESTING
 int encode_pldm_file_df_heartbeat_req(
 	uint8_t instance_id, const struct pldm_file_df_heartbeat_req *req,
-	struct pldm_msg *msg, size_t payload_length)
+	struct pldm_msg *msg, size_t *payload_length)
 {
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
@@ -275,7 +275,7 @@ int encode_pldm_file_df_heartbeat_req(
 	}
 
 	rc = pldm_msgbuf_init_errno(buf, PLDM_DF_HEARTBEAT_REQ_BYTES,
-				    msg->payload, payload_length);
+				    msg->payload, *payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -283,7 +283,7 @@ int encode_pldm_file_df_heartbeat_req(
 	pldm_msgbuf_insert(buf, req->file_descriptor);
 	pldm_msgbuf_insert(buf, req->requester_max_interval);
 
-	return pldm_msgbuf_complete(buf);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_TESTING

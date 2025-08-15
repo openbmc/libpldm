@@ -719,7 +719,7 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
  *  @param[in] instance_id - Message's instance id
  *  @param[in] req - The pointer to the request message to be encoded
  *  @param[in,out] msg - Message will be written to this
- *  @param[in] payload_length - length of request message payload
+ *  @param[in, out] payload_length - length of request message payload
  *  @return 0 on success
  *          -EINVAL if the input parameters' memory are not allocated,
  *          or message type or instance in request header is invalid
@@ -728,7 +728,7 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
  */
 int encode_pldm_base_multipart_receive_req(
 	uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,
-	struct pldm_msg *msg, size_t payload_length);
+	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode a PLDM MultipartReceive response message
  *
@@ -802,7 +802,7 @@ int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
  *  @param[in] instance_id - Message's instance id
  *  @param[in] req - The pointer to the request message to be encoded
  *  @param[in,out] msg - Message will be written to this
- *  @param[in] payload_length - length of request message payload
+ *  @param[in, out] payload_length - length of request message payload
  *  @return 0 on success
  *          -EINVAL if the input parameters' memory are not allocated,
  *          or message type or instance in request header is invalid
@@ -812,7 +812,7 @@ int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
 int encode_pldm_base_negotiate_transfer_params_req(
 	uint8_t instance_id,
 	const struct pldm_base_negotiate_transfer_params_req *req,
-	struct pldm_msg *msg, size_t payload_length);
+	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode a PLDM Negotiate Transfer Parameters response message
  *

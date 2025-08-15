@@ -18,19 +18,22 @@ TEST(EncodeDfOpenReq, GoodTest)
     uint16_t file_identifier = 0x0100;
     bitfield16_t file_attribute;
     file_attribute.value = 0x0400;
-    std::array<uint8_t, PLDM_DF_OPEN_REQ_BYTES> requestMsg = {0x00, 0x01, 0x00,
-                                                              0x04};
+
+    static constexpr const size_t requestMsgLength = PLDM_DF_OPEN_REQ_BYTES;
+    std::array<uint8_t, requestMsgLength> requestMsg = {0x00, 0x01, 0x00, 0x04};
 
     const struct pldm_file_df_open_req req_data = {file_identifier,
                                                    file_attribute};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_DF_OPEN_REQ_BYTES);
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = requestMsgLength;
     auto rc = encode_pldm_file_df_open_req(instance_id, &req_data, requestPtr,
-                                           PLDM_DF_OPEN_REQ_BYTES);
+                                           &payload_length);
 
     ASSERT_EQ(rc, 0);
     EXPECT_EQ(
         0, memcmp(requestPtr->payload, requestMsg.data(), sizeof(requestMsg)));
+    EXPECT_EQ(payload_length, requestMsgLength);
 }
 #endif
 
@@ -43,16 +46,19 @@ TEST(EncodeDfOpenReq, BadTestUnAllocatedPtrParams)
     file_attribute.value = 0x0400;
     int rc;
 
+    static constexpr const size_t requestMsgLength = PLDM_DF_OPEN_REQ_BYTES;
+
     const struct pldm_file_df_open_req req_data = {file_identifier,
                                                    file_attribute};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_DF_OPEN_REQ_BYTES);
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = requestMsgLength;
     rc = encode_pldm_file_df_open_req(instance_id, &req_data, nullptr,
-                                      PLDM_DF_OPEN_REQ_BYTES);
+                                      &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = encode_pldm_file_df_open_req(instance_id, nullptr, requestPtr,
-                                      PLDM_DF_OPEN_REQ_BYTES);
+                                      &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -66,11 +72,15 @@ TEST(EncodeDfOpenReq, BadTestInvalidExpectedOutputMsgLength)
     file_attribute.value = 0x0400;
     int rc;
 
+    static constexpr const size_t requestMsgLength = PLDM_DF_OPEN_REQ_BYTES;
+
     const struct pldm_file_df_open_req req_data = {file_identifier,
                                                    file_attribute};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_DF_OPEN_REQ_BYTES);
-    rc = encode_pldm_file_df_open_req(instance_id, &req_data, requestPtr, 1);
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = 1;
+    rc = encode_pldm_file_df_open_req(instance_id, &req_data, requestPtr,
+                                      &payload_length);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
@@ -172,19 +182,22 @@ TEST(EncodeDfCloseReq, GoodTest)
     uint16_t file_descriptor = 0x0200;
     bitfield16_t df_close_options;
     df_close_options.value = 0x0100;
-    std::array<uint8_t, PLDM_DF_CLOSE_REQ_BYTES> requestMsg = {0x00, 0x02, 0x00,
-                                                               0x01};
+
+    static constexpr const size_t requestMsgLength = PLDM_DF_OPEN_REQ_BYTES;
+    std::array<uint8_t, requestMsgLength> requestMsg = {0x00, 0x02, 0x00, 0x01};
 
     const struct pldm_file_df_close_req req_data = {file_descriptor,
                                                     df_close_options};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_DF_OPEN_REQ_BYTES);
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = requestMsgLength;
     auto rc = encode_pldm_file_df_close_req(instance_id, &req_data, requestPtr,
-                                            PLDM_DF_CLOSE_REQ_BYTES);
+                                            &payload_length);
 
     ASSERT_EQ(rc, 0);
     EXPECT_EQ(
         0, memcmp(requestPtr->payload, requestMsg.data(), sizeof(requestMsg)));
+    EXPECT_EQ(payload_length, requestMsgLength);
 }
 #endif
 
@@ -197,16 +210,19 @@ TEST(EncodeDfCloseReq, BadTestUnAllocatedPtrParams)
     df_close_options.value = 0x0100;
     int rc;
 
+    static constexpr const size_t requestMsgLength = PLDM_DF_OPEN_REQ_BYTES;
+
     const struct pldm_file_df_close_req req_data = {file_descriptor,
                                                     df_close_options};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_DF_CLOSE_REQ_BYTES);
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = requestMsgLength;
     rc = encode_pldm_file_df_close_req(instance_id, &req_data, nullptr,
-                                       PLDM_DF_CLOSE_REQ_BYTES);
+                                       &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = encode_pldm_file_df_close_req(instance_id, nullptr, requestPtr,
-                                       PLDM_DF_CLOSE_REQ_BYTES);
+                                       &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -220,11 +236,15 @@ TEST(EncodeDfCloseReq, BadTestInvalidExpectedOutputMsgLength)
     df_close_options.value = 0x0100;
     int rc;
 
+    static constexpr const size_t requestMsgLength = PLDM_DF_OPEN_REQ_BYTES;
+
     const struct pldm_file_df_close_req req_data = {file_descriptor,
                                                     df_close_options};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_DF_CLOSE_REQ_BYTES);
-    rc = encode_pldm_file_df_close_req(instance_id, &req_data, requestPtr, 1);
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = 1;
+    rc = encode_pldm_file_df_close_req(instance_id, &req_data, requestPtr,
+                                       &payload_length);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
@@ -293,19 +313,24 @@ TEST(EncodeDfHeartbeatReq, GoodTest)
     uint8_t instance_id = 0;
     uint16_t file_descriptor = 0x0200;
     uint32_t requester_max_interval = 0x88130000; // 5000 ms
-    std::array<uint8_t, PLDM_DF_HEARTBEAT_REQ_BYTES> requestMsg = {
-        0x00, 0x02, 0x00, 0x00, 0x13, 0x88};
+
+    static constexpr const size_t requestMsgLength =
+        PLDM_DF_HEARTBEAT_REQ_BYTES;
+    std::array<uint8_t, requestMsgLength> requestMsg = {0x00, 0x02, 0x00,
+                                                        0x00, 0x13, 0x88};
 
     const struct pldm_file_df_heartbeat_req req_data = {file_descriptor,
                                                         requester_max_interval};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_DF_HEARTBEAT_REQ_BYTES);
-    auto rc = encode_pldm_file_df_heartbeat_req(
-        instance_id, &req_data, requestPtr, PLDM_DF_HEARTBEAT_REQ_BYTES);
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = requestMsgLength;
+    auto rc = encode_pldm_file_df_heartbeat_req(instance_id, &req_data,
+                                                requestPtr, &payload_length);
 
     ASSERT_EQ(rc, 0);
     EXPECT_EQ(
         0, memcmp(requestPtr->payload, requestMsg.data(), sizeof(requestMsg)));
+    EXPECT_EQ(payload_length, requestMsgLength);
 }
 #endif
 
@@ -317,16 +342,20 @@ TEST(EncodeDfHeartbeatReq, BadTestUnAllocatedPtrParams)
     uint32_t requester_max_interval = 0x88130000; // 5000 ms
     int rc;
 
+    static constexpr const size_t requestMsgLength =
+        PLDM_DF_HEARTBEAT_REQ_BYTES;
+
     const struct pldm_file_df_heartbeat_req req_data = {file_descriptor,
                                                         requester_max_interval};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_DF_HEARTBEAT_REQ_BYTES);
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = requestMsgLength;
     rc = encode_pldm_file_df_heartbeat_req(instance_id, &req_data, nullptr,
-                                           PLDM_DF_HEARTBEAT_REQ_BYTES);
+                                           &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = encode_pldm_file_df_heartbeat_req(instance_id, nullptr, requestPtr,
-                                           PLDM_DF_HEARTBEAT_REQ_BYTES);
+                                           &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -339,12 +368,16 @@ TEST(EncodeDfHeartbeatReq, BadTestInvalidExpectedOutputMsgLength)
     uint32_t requester_max_interval = 0x88130000; // 5000 ms
     int rc;
 
+    static constexpr const size_t requestMsgLength =
+        PLDM_DF_HEARTBEAT_REQ_BYTES;
+
     const struct pldm_file_df_heartbeat_req req_data = {file_descriptor,
                                                         requester_max_interval};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_DF_HEARTBEAT_REQ_BYTES);
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = 1;
     rc = encode_pldm_file_df_heartbeat_req(instance_id, &req_data, requestPtr,
-                                           1);
+                                           &payload_length);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
@@ -483,7 +516,7 @@ TEST(EncodeDfOpenResp, BadTestUnAllocatedPtrParams)
     EXPECT_EQ(rc, -EINVAL);
 
     rc = encode_pldm_file_df_open_req(instance_id, nullptr, responsePtr,
-                                      PLDM_DF_OPEN_RESP_BYTES);
+                                      &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif

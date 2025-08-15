@@ -756,7 +756,10 @@ TEST(EncodeMultipartReceiveRequest, GoodTest)
     const struct pldm_base_multipart_receive_req req_data = {
         PLDM_BASE, PLDM_XFER_FIRST_PART, 0x01, 0x10, 0x00, 0x10};
 
-    std::array<uint8_t, PLDM_MULTIPART_RECEIVE_REQ_BYTES> requestMsg = {
+    static constexpr const size_t requestMsgLength =
+        PLDM_MULTIPART_RECEIVE_REQ_BYTES;
+
+    std::array<uint8_t, requestMsgLength> requestMsg = {
         PLDM_BASE, PLDM_XFER_FIRST_PART,
         0x01,      0x00,
         0x00,      0x00,
@@ -767,13 +770,15 @@ TEST(EncodeMultipartReceiveRequest, GoodTest)
         0x10,      0x00,
         0x00,      0x00};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = requestMsgLength;
     auto rc = encode_pldm_base_multipart_receive_req(
-        instance_id, &req_data, requestPtr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
+        instance_id, &req_data, requestPtr, &payload_length);
 
     ASSERT_EQ(rc, 0);
     EXPECT_EQ(
         0, memcmp(requestPtr->payload, requestMsg.data(), sizeof(requestMsg)));
+    EXPECT_EQ(payload_length, requestMsgLength);
 }
 #endif
 
@@ -786,13 +791,17 @@ TEST(EncodeMultipartReceiveRequest, BadTestUnAllocatedPtrParams)
     const struct pldm_base_multipart_receive_req req_data = {
         PLDM_BASE, PLDM_XFER_FIRST_PART, 0x01, 0x10, 0x00, 0x10};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    rc = encode_pldm_base_multipart_receive_req(
-        instance_id, nullptr, requestPtr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
+    static constexpr const size_t requestMsgLength =
+        PLDM_MULTIPART_RECEIVE_REQ_BYTES;
+
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = requestMsgLength;
+    rc = encode_pldm_base_multipart_receive_req(instance_id, nullptr,
+                                                requestPtr, &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 
-    rc = encode_pldm_base_multipart_receive_req(
-        instance_id, &req_data, nullptr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
+    rc = encode_pldm_base_multipart_receive_req(instance_id, &req_data, nullptr,
+                                                &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -806,10 +815,13 @@ TEST(EncodeMultipartReceiveRequest, BadTestInvalidExpectedOutputMsgLength)
     const struct pldm_base_multipart_receive_req req_data = {
         PLDM_BASE, PLDM_XFER_FIRST_PART, 0x01, 0x10, 0x00, 0x10};
 
-    PLDM_MSG_DEFINE_P(requestPtr, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
+    static constexpr const size_t requestMsgLength =
+        PLDM_MULTIPART_RECEIVE_REQ_BYTES;
 
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = 1;
     rc = encode_pldm_base_multipart_receive_req(instance_id, &req_data,
-                                                requestPtr, 1);
+                                                requestPtr, &payload_length);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
@@ -1443,21 +1455,24 @@ TEST(EncodeNegotiateTransferParamsRequest, GoodTest)
         0x0001, // BE 256
         {{0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x81}}};
 
-    std::array<uint8_t, PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES>
-        requestMsg = {0x01, 0x00, // requester_part_size = 256
-                      0x00, 0x00, 0x00, 0x00,
-                      0x00, 0x00, 0x00, 0x81}; // requester_protocol_support =
-                                               // PLDM_BASE & PLDM_FILE
+    static constexpr const size_t requestMsgLength =
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES;
 
-    PLDM_MSG_DEFINE_P(requestPtr,
-                      PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+    std::array<uint8_t, requestMsgLength> requestMsg = {
+        0x01, 0x00, // requester_part_size = 256
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x81}; // requester_protocol_support =
+                                 // PLDM_BASE & PLDM_FILE
+
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = requestMsgLength;
     auto rc = encode_pldm_base_negotiate_transfer_params_req(
-        instance_id, &req_data, requestPtr,
-        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+        instance_id, &req_data, requestPtr, &payload_length);
 
     ASSERT_EQ(rc, 0);
     EXPECT_EQ(
         0, memcmp(requestPtr->payload, requestMsg.data(), sizeof(requestMsg)));
+    EXPECT_EQ(payload_length, requestMsgLength);
 }
 #endif
 
@@ -1470,16 +1485,17 @@ TEST(EncodeNegotiateTransferParamsRequest, BadTestUnAllocatedPtrParams)
         0x0001, // BE 256
         {{0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x00}, {0x81}}};
 
-    PLDM_MSG_DEFINE_P(requestPtr,
-                      PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+    static constexpr const size_t requestMsgLength =
+        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES;
+
+    PLDM_MSG_DEFINE_P(requestPtr, requestMsgLength);
+    size_t payload_length = requestMsgLength;
     rc = encode_pldm_base_negotiate_transfer_params_req(
-        instance_id, nullptr, requestPtr,
-        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+        instance_id, nullptr, requestPtr, &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 
     rc = encode_pldm_base_negotiate_transfer_params_req(
-        instance_id, &req_data, nullptr,
-        PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
+        instance_id, &req_data, nullptr, &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
@@ -1497,8 +1513,9 @@ TEST(EncodeNegotiateTransferParamsRequest,
     PLDM_MSG_DEFINE_P(requestPtr,
                       PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES);
 
-    rc = encode_pldm_base_negotiate_transfer_params_req(instance_id, &req_data,
-                                                        requestPtr, 1);
+    size_t payload_length = 1;
+    rc = encode_pldm_base_negotiate_transfer_params_req(
+        instance_id, &req_data, requestPtr, &payload_length);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 #endif
