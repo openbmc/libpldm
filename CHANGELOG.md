@@ -65,6 +65,8 @@ Change categories:
 - base: Update `decode_pldm_base_multipart_receive_resp()` to only extract
   `DataIntegrityChecksum` when `TransferFlag` field is `ACKNOWLEDGE_COMPLETION`.
 
+- base: Correct test case name for `decode_multipart_receive_req()`
+
 ### Deprecated
 
 ### Removed
