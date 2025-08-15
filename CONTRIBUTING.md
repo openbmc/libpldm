@@ -267,6 +267,10 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 [libpldm-iterator]:
   https://github.com/openbmc/libpldm/commit/3a2c6589c5660d2066b612bae28ca393a8aa1c2b
 
+- [ ] My `encode_*()` APIs exchange with the caller the size of the destination
+      buffer and the length of the encoded data using an in-out buffer length
+      parameter
+
 - [ ] My new public message codec functions take a `struct` representing the
       message as a parameter
   - Function prototypes must _not_ decompose the message to individual
