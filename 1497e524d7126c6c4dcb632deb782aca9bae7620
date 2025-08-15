@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2edc4285_14a307be",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-08-15T15:22:37Z",
+      "side": 1,
+      "message": "Ack. Sure. Let me know if anything I can help with!",
+      "parentUuid": "e2e326b7_d0ccf707",
+      "range": {
+        "startLine": 836,
+        "startChar": 1,
+        "endLine": 836,
+        "endChar": 6
+      },
+      "revId": "1497e524d7126c6c4dcb632deb782aca9bae7620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c95d2ebc_58540297",
         "filename": "src/dsp/base.c",
         "patchSetId": 1
@@ -78,6 +102,24 @@
       "writtenOn": "2025-08-15T00:33:17Z",
       "side": 1,
       "message": "Can we please declare this with the other variables at the top of the function body?",
+      "revId": "1497e524d7126c6c4dcb632deb782aca9bae7620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dd96a2d_0777c332",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-08-15T15:22:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c95d2ebc_58540297",
       "revId": "1497e524d7126c6c4dcb632deb782aca9bae7620",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
