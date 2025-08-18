@@ -20,6 +20,41 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "30a4f057_24ba5235",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-18T01:46:56Z",
+      "side": 1,
+      "message": "Nice.",
+      "parentUuid": "b68910f4_e8560a59",
+      "revId": "b7804bba452f43df0d5936e1aaf3846e19b97a7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dc81b00_57ea31db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-18T01:46:56Z",
+      "side": 1,
+      "message": "Thanks for the feedback.",
+      "revId": "b7804bba452f43df0d5936e1aaf3846e19b97a7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e7b7c175_2279f807",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 2
@@ -31,6 +66,24 @@
       "writtenOn": "2025-08-15T08:51:21Z",
       "side": 1,
       "message": "I wonder if we need this requirement since it\u0027s an out parameter.\n\nZero initializing it would cause runtime overhead but simplify the API for the caller.",
+      "revId": "b7804bba452f43df0d5936e1aaf3846e19b97a7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4afd391a_9fb794b7",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2485,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-18T01:46:56Z",
+      "side": 1,
+      "message": "The purpose of this statement is to require the user to not pass in partial state from a previous parsing effort, so the implementation can assume it\u0027s starting from the expected (initial) state.",
+      "parentUuid": "e7b7c175_2279f807",
       "revId": "b7804bba452f43df0d5936e1aaf3846e19b97a7f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -54,6 +107,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "461aefda_b9157e38",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2614,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-18T01:46:56Z",
+      "side": 1,
+      "message": "Yeah, that was a concern I had. But I thought that practical demonstration would be helpful. It\u0027s a trade-off.",
+      "parentUuid": "ed384e81_da64fb1c",
+      "revId": "b7804bba452f43df0d5936e1aaf3846e19b97a7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4d9baa7c_276df37b",
         "filename": "include/libpldm/firmware_update.h",
         "patchSetId": 2
@@ -65,6 +136,24 @@
       "writtenOn": "2025-08-15T08:51:21Z",
       "side": 1,
       "message": "Could we do \n```\nreturn pkg-\u003estate \u003d\u003d PLDM_PACKAGE_PARSE_COMPLETE;\n```\n\nhere since `pldm_package_component_image_information_iter_next` should set this value.\n\nThis would make the code rely more on the state machine.",
+      "revId": "b7804bba452f43df0d5936e1aaf3846e19b97a7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1868d35_808cfbbf",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2817,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-18T01:46:56Z",
+      "side": 1,
+      "message": "Yeah, seems reasonable.",
+      "parentUuid": "4d9baa7c_276df37b",
       "revId": "b7804bba452f43df0d5936e1aaf3846e19b97a7f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
