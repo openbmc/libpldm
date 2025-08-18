@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fd6e900_44a9ce7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-18T09:14:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6865586_72bec50f",
+      "range": {
+        "startLine": 16,
+        "startChar": 31,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "0d5654bcfe92e25f1fae828b483944f85048d54c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d244530a_e34db7db",
@@ -41,6 +65,41 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d4ef52_5aafc1fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-18T09:14:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d244530a_e34db7db",
+      "revId": "0d5654bcfe92e25f1fae828b483944f85048d54c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c387b46_a27ef4a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-18T09:14:32Z",
+      "side": 1,
+      "message": "Hi @john.chung@arm.com, can you please also weigh in?\n\nLooking at the `encode_base_multipart_receive_resp` API, it\u0027s only encoding the checksum field in END and START_AND_END part, which also contradicts to the spec where it says:\n\n\u003e DataIntegrityChecksum\n32-bit cumulative CRC for the entirety of data received so far for this section (all parts concatenated together, excluding checksums). **Shall be included with all part transfers**.",
+      "revId": "0d5654bcfe92e25f1fae828b483944f85048d54c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f00c4235_fdc5b449",
@@ -54,6 +113,30 @@
       "writtenOn": "2025-08-18T01:26:44Z",
       "side": 1,
       "message": "Easiest to just use the commit subject here:\n\n```\n- dsp: base: Don\u0027t extract MultipartReceive resp\u0027s CRC once complete\n```\n\nHowever, this should go in the `### Fixed` section below, rather than `### Changed` as you have it.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 80
+      },
+      "revId": "0d5654bcfe92e25f1fae828b483944f85048d54c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7106c7e6_7941fd5b",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-08-18T09:14:32Z",
+      "side": 1,
+      "message": "Moved to the Fixed section with a simple description.",
+      "parentUuid": "f00c4235_fdc5b449",
       "range": {
         "startLine": 65,
         "startChar": 0,
