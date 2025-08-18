@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4445aaf_4575eaa7",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-18T01:28:22Z",
+      "side": 1,
+      "message": "This change doesn\u0027t need an update to the changelog as it\u0027s addressing something that\u0027s purely an implementation detail. There\u0027s no library-user-facing impact to renaming the test.\n\nPlease drop this part.",
+      "revId": "c63883d9f636bbc17df34c9fdd344d74283a43e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
