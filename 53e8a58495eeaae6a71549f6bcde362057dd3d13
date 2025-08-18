@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b2329af_71f6b9cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-18T11:24:27Z",
+      "side": 1,
+      "message": "I assume you intend to stabilize this API then.",
+      "revId": "53e8a58495eeaae6a71549f6bcde362057dd3d13",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fabbffb6_ed34de97",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2471,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-18T11:24:27Z",
+      "side": 1,
+      "message": "```suggestion\n\n        // zero-initialized, reserved for future use\n\tuint32_t flags;\n```",
+      "revId": "53e8a58495eeaae6a71549f6bcde362057dd3d13",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
