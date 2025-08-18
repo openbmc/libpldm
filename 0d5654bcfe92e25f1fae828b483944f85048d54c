@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6865586_72bec50f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-18T01:26:44Z",
+      "side": 1,
+      "message": "Drop this to fix the grammer",
+      "range": {
+        "startLine": 16,
+        "startChar": 31,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "0d5654bcfe92e25f1fae828b483944f85048d54c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d244530a_e34db7db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-18T01:26:44Z",
+      "side": 1,
+      "message": "Can you please add a `Fixes:` tag pointing to the change that introduced the bug?\n\n```\nFixes: 8836784f1e06 (\"dsp: base: Add encode req \u0026 decode resp for MultipartReceive command\")\n```",
+      "revId": "0d5654bcfe92e25f1fae828b483944f85048d54c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f00c4235_fdc5b449",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-18T01:26:44Z",
+      "side": 1,
+      "message": "Easiest to just use the commit subject here:\n\n```\n- dsp: base: Don\u0027t extract MultipartReceive resp\u0027s CRC once complete\n```\n\nHowever, this should go in the `### Fixed` section below, rather than `### Changed` as you have it.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 80
+      },
+      "revId": "0d5654bcfe92e25f1fae828b483944f85048d54c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
