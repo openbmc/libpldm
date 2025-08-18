@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97836354_10ea6087",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-18T01:06:33Z",
+      "side": 1,
+      "message": "The issue is we cast away the `const` qualifier in the `pldm_msgbuf_init_errno()` constructor, which was always a hack: msgbuf was initially only conceived to decode received buffers, but it is obviously useful for encoding buffers to send as well, as a concept.\n\nReally we need separate constructors for each type, where the decode constructor takes a const-qualified pointer, and the encode constructor takes a pointer which is not const-qualified.\n\nSo we could either:\n\n1. Define a separate msgbuf structs, decode with a const-qualified member, encode with a member that is not const-qualified, and fix the extract/insert APIs to take the appropriate type, or\n2. Introduce a tagged union over whether the pointer is const-qualified or not.\n\nI think I prefer that we encode the const property in the type system so misuse yields a compile error, though perhaps there are other approaches. Possibly we could use a pointer-type-equivalence check?",
+      "parentUuid": "2edc4285_14a307be",
+      "range": {
+        "startLine": 836,
+        "startChar": 1,
+        "endLine": 836,
+        "endChar": 6
+      },
+      "revId": "1497e524d7126c6c4dcb632deb782aca9bae7620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c95d2ebc_58540297",
         "filename": "src/dsp/base.c",
         "patchSetId": 1
