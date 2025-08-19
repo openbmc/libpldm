@@ -2295,6 +2295,7 @@ struct pldm_package_iter {
  *
  * The provided package data must out-live the header struct.
  */
+// NOLINTNEXTLINE(bugprone-reserved-identifier, cert-dcl37-c, cert-dcl51-cpp)
 struct pldm__package_header_information {
 	pldm_uuid package_header_identifier;
 	uint8_t package_header_format_revision;
@@ -2306,6 +2307,7 @@ struct pldm__package_header_information {
 	struct variable_field package_version_string;
 };
 /* TODO: Deprecate the other struct pldm_package_header_information, remove, drop typedef */
+// NOLINTNEXTLINE(bugprone-reserved-identifier, cert-dcl37-c, cert-dcl51-cpp)
 typedef struct pldm__package_header_information
 	pldm_package_header_information_pad;
 
