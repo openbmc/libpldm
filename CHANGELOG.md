@@ -65,6 +65,8 @@ Change categories:
 - Reworked the firmware update package parsing APIs to track parse state using a
   run-time state machine
 - Add flags parameter to `decode_pldm_firmware_update_package()`
+- Add NOLINT to `pldm__package_header_information` and
+  `pldm__package_header_information` to prevent clang-tidy errors.
 
 ### Deprecated
 
