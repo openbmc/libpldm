@@ -94,6 +94,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3abbcb99_93e6787b",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-19T12:22:56Z",
+      "side": 1,
+      "message": "Moved it to related change https://gerrit.openbmc.org/c/openbmc/libpldm/+/82914/1?usp\u003drelated-change",
+      "parentUuid": "2788d134_f278dbc9",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b35839c_5b5cfa11",
@@ -195,6 +219,24 @@
       "side": 1,
       "message": "This still needs to be addressed.",
       "parentUuid": "b78a43e4_a392af6d",
+      "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c1b73da_a1273038",
+        "filename": "include/libpldm/pldm_types.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-19T12:22:56Z",
+      "side": 1,
+      "message": "Moved it to related change https://gerrit.openbmc.org/c/openbmc/libpldm/+/82914/1?usp\u003drelated-change",
+      "parentUuid": "51ad97a5_990cb878",
       "revId": "5630d6a67cae6269f29aab49be1035dab433e80d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

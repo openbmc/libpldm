@@ -61,6 +61,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "18ee277c_ad76f7b1",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-19T12:22:56Z",
+      "side": 1,
+      "message": "Moved that to https://gerrit.openbmc.org/c/openbmc/libpldm/+/82914/1?usp\u003drelated-change",
+      "parentUuid": "6f684903_27dc26cc",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 33
+      },
+      "revId": "c220b489dd5410214932ee6caa825120ba423e19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f4afc212_2bc04197",
         "filename": "bindings/cpp/firmware_update.cpp",
         "patchSetId": 11
