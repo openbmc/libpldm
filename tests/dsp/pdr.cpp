@@ -719,7 +719,6 @@ TEST(PDRUpdate, testFindLastInRange)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(PDRAccess, testRemoveBySensorIDDecodeFailure)
 {
     auto repo = pldm_pdr_init();
@@ -748,9 +747,7 @@ TEST(PDRAccess, testRemoveBySensorIDDecodeFailure)
 
     pldm_pdr_destroy(repo);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(PDRAccess, testRemoveBySensorID)
 {
     auto repo = pldm_pdr_init();
@@ -808,7 +805,6 @@ TEST(PDRAccess, testRemoveBySensorID)
 
     pldm_pdr_destroy(repo);
 }
-#endif
 
 #ifdef LIBPLDM_API_TESTING
 TEST(PDRAccess, testGetTerminusHandle)
@@ -894,7 +890,6 @@ TEST(PDRAccess, testRemoveByRecordHandle)
     pldm_pdr_destroy(repo);
 }
 
-#ifdef LIBPLDM_API_TESTING
 TEST(PDRAccess, testRemoveByEffecterIDDecodeFailure)
 {
     auto repo = pldm_pdr_init();
@@ -923,9 +918,7 @@ TEST(PDRAccess, testRemoveByEffecterIDDecodeFailure)
               1u); // Record remains in the repo
     pldm_pdr_destroy(repo);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(PDRAccess, testRemoveByEffecterID)
 {
     auto repo = pldm_pdr_init();
@@ -984,7 +977,6 @@ TEST(PDRAccess, testRemoveByEffecterID)
 
     pldm_pdr_destroy(repo);
 }
-#endif
 
 TEST(EntityAssociationPDR, testInit)
 {
@@ -2451,7 +2443,6 @@ TEST(EntityAssociationPDR, testAddContainedEntityNew)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(EntityAssociationPDR, testRemoveContainedEntity)
 {
     struct pldm_entity entities[4] = {
@@ -2522,9 +2513,7 @@ TEST(EntityAssociationPDR, testRemoveContainedEntity)
     pldm_pdr_destroy(repo);
     pldm_entity_association_tree_destroy(tree);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(PDRUpdate, testRemoveFruRecord)
 {
     auto repo = pldm_pdr_init();
@@ -2589,9 +2578,7 @@ TEST(PDRUpdate, testRemoveFruRecord)
 
     pldm_pdr_destroy(repo);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(EntityAssociationPDR, testDeleteNode)
 {
     std::unique_ptr<pldm_entity, decltype(&free)> entities(
@@ -2657,4 +2644,3 @@ TEST(EntityAssociationPDR, testDeleteNode)
 
     pldm_entity_association_tree_destroy(tree);
 }
-#endif
