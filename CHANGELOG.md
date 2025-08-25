@@ -66,6 +66,14 @@ Change categories:
   run-time state machine
 - Add flags parameter to `decode_pldm_firmware_update_package()`
 
+- Stabilised:
+  - `pldm_entity_association_pdr_remove_contained_entity()`
+  - `pldm_pdr_remove_fru_record_set_by_rsi()`
+  - `pldm_entity_association_tree_delete_node()`
+  - `pldm_entity_association_tree_delete_node()`
+  - `pldm_pdr_delete_by_effecter_id()`
+  - `pldm_pdr_delete_by_sensor_id()`
+
 ### Deprecated
 
 ### Removed
