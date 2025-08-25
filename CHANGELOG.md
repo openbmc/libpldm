@@ -74,6 +74,14 @@ Change categories:
 - Add flags parameter to `decode_pldm_firmware_update_package()`
 - Add NOLINT to `pldm__package_header_information` to prevent clang-tidy errors.
 
+- Stabilised:
+  - `pldm_entity_association_pdr_remove_contained_entity()`
+  - `pldm_pdr_remove_fru_record_set_by_rsi()`
+  - `pldm_entity_association_tree_delete_node()`
+  - `pldm_entity_association_tree_delete_node()`
+  - `pldm_pdr_delete_by_effecter_id()`
+  - `pldm_pdr_delete_by_sensor_id()`
+
 ### Deprecated
 
 ### Removed
