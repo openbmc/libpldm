@@ -433,7 +433,7 @@ static int decode_pldm_state_sensor_pdr(uint8_t *data, uint32_t size,
 	return pldm_msgbuf_complete(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_pdr_delete_by_sensor_id(pldm_pdr *repo, uint16_t sensor_id,
 				 bool is_remote, uint32_t *record_handle)
 {
@@ -561,7 +561,7 @@ static int decode_pldm_state_effecter_pdr(uint8_t *data, uint32_t size,
 	return pldm_msgbuf_complete(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_pdr_delete_by_effecter_id(pldm_pdr *repo, uint16_t effecter_id,
 				   bool is_remote, uint32_t *record_handle)
 {
@@ -2051,7 +2051,7 @@ static int pldm_entity_association_find_record_handle_by_entity(
 	return 0;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_entity_association_pdr_remove_contained_entity(
 	pldm_pdr *repo, pldm_entity *entity, bool is_remote,
 	uint32_t *pdr_record_handle)
@@ -2299,7 +2299,7 @@ static int pldm_pdr_remove_record(pldm_pdr *repo, pldm_pdr_record *record,
 	return 0;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 					  bool is_remote,
 					  uint32_t *record_handle)
@@ -2349,7 +2349,7 @@ int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 	return rc;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
 					     const pldm_entity *entity)
 {
