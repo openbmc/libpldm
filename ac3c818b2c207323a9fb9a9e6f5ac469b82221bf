@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3612ba57_5ad59ef0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-26T00:22:45Z",
+      "side": 1,
+      "message": "The `Fixes:` tag should be part of the \"commit trailer\":\n\nhttps://git-scm.com/docs/git-interpret-trailers\n\nCan you please put it between the `Change-Id: and `Signed-off-by:` tags? So:\n\n```\nChange-Id: I325a6393eaabfecc08f758dcae417470dde65efb\nFixes: 8836784f1e06 (\"dsp: base: Add encode req \u0026 decode resp for MultipartReceive command\")\nSigned-off-by: Chau Ly \u003cchaul@amperecomputing.com\u003e\n```\n\nNote that tags shouldn\u0027t be line-wrapped (as this complicates parsing). If you find it fails CI, you can add the following as a trailer as well:\n\n```\ngitlint-ignore: B1\n```\n\nSo:\n\n```\ngitlint-ignore: B1\nChange-Id: I325a6393eaabfecc08f758dcae417470dde65efb\nFixes: 8836784f1e06 (\"dsp: base: Add encode req \u0026 decode resp for MultipartReceive command\")\nSigned-off-by: Chau Ly \u003cchaul@amperecomputing.com\u003e\n```",
+      "revId": "ac3c818b2c207323a9fb9a9e6f5ac469b82221bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
