@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f890d384_f3a1c579",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-26T00:33:07Z",
+      "side": 1,
+      "message": "What strategy do we have for extending this, in a way that doesn\u0027t break e.g. for FR02H? Some care was put into the C API for that. Also, `FirmwareDeviceIDRecord` and `ComponentImageInfo` grow between FR01H and FR04H.",
+      "revId": "31e108bec4bcff87ae7cc67500ca27730e1f4cdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "759a0776_9dff9ac8",
+        "filename": "meson.build",
+        "patchSetId": 25
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-26T00:33:07Z",
+      "side": 1,
+      "message": "I don\u0027t think this is necessary. `tainted_args` is an attribute used for CI and doesn\u0027t itself influence the API, ABI, or correctness.",
+      "range": {
+        "startLine": 63,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 13
+      },
+      "revId": "31e108bec4bcff87ae7cc67500ca27730e1f4cdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
