@@ -22,6 +22,30 @@
       },
       "revId": "8ef15c0e7785eeee26081700d0071f9fa8bf3d45",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d6a5e70_0706c6e3",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-26T15:48:01Z",
+      "side": 1,
+      "message": "Sorry, i just copy-pasted the 2 symbols without really thinking about it.\n\nIt\u0027s the same symbol which is creating the problem, so i should list it only once. \n\nDone.",
+      "parentUuid": "86c2a5db_4eda03a1",
+      "range": {
+        "startLine": 69,
+        "startChar": 3,
+        "endLine": 69,
+        "endChar": 35
+      },
+      "revId": "8ef15c0e7785eeee26081700d0071f9fa8bf3d45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
