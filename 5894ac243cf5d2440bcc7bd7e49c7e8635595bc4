@@ -34,6 +34,24 @@
       "parentUuid": "4dc1de5f_d2268667",
       "revId": "5894ac243cf5d2440bcc7bd7e49c7e8635595bc4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b07647d4_c2329b00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-08-26T00:14:13Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t think this change will be a problem for C ABI or API.\n\n\u003e Because naming the struct does not change anything else about it, right?\nIt just gives it a name.\n\nOh, sorry, I think I somehow had the wrong expectation of what the patch was doing and didn\u0027t take the time to understand it properly.\n\n\u003e And i\u0027m not a perl developer so getting into the abi-compliance tooling would be some big work item for me. Without any guarantee that the issue we are seeing here can actually be fixed.\n\nI understand your hesitance there, I\u0027m no perl person either.\n\n\u003e From my perspective i don\u0027t even need any ABI stability for the C++ binding.\n\u003e\n\u003e I would be perfectly fine to have an unstable ABI for the C++ binding and whoever likes that kind of work can stabilize it at a later point.\n\nYou may not, but I do, especially as much of OpenBMC\u0027s userspace is C++ and the package parsing APIs will likely see reasonable adoption.\n\n\u003e Currently the use-case for it is only limited to OpenBMC where the whole thing gets built by the same compiler version anyways.\n\nWhile that\u0027s true, the ABI dump also captures the API, which is the more important bit for the purpose of OpenBMC. That said, libpldm is packaged in e.g. AUR for Arch, so we can\u0027t be too cavalier about it.",
+      "parentUuid": "46c0b895_d461a594",
+      "revId": "5894ac243cf5d2440bcc7bd7e49c7e8635595bc4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
