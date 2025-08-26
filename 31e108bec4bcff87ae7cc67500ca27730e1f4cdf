@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0d45787_cce85c86",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-26T15:55:40Z",
+      "side": 1,
+      "message": "C++ API/ABI compatibility has been explored by QT project\n\nhttps://wiki.qt.io/D-Pointer\n\nand they use the D-Pointer pattern to hide the data layout of classes.\n\nI applied a modern variation of that pattern using `std::unique_ptr` to avoid manual memory management.\n\nLet me know if you like it or if we should instead use `new`/`delete` with raw pointer like described in QT wiki.\n\nWith the new revision every data field gets its own method for access.\n\nSo the caller does not know the size of the internal objects and we can freely modify them.\n\nDue to the verbosity of namespaces + getter functions the new revision is somewhat larger but the code is rather simple.",
+      "parentUuid": "f890d384_f3a1c579",
+      "revId": "31e108bec4bcff87ae7cc67500ca27730e1f4cdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "759a0776_9dff9ac8",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-08-26T00:33:07Z",
       "side": 1,
       "message": "I don\u0027t think this is necessary. `tainted_args` is an attribute used for CI and doesn\u0027t itself influence the API, ABI, or correctness.",
+      "range": {
+        "startLine": 63,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 13
+      },
+      "revId": "31e108bec4bcff87ae7cc67500ca27730e1f4cdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e390677e_cd692dcb",
+        "filename": "meson.build",
+        "patchSetId": 25
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-08-26T15:55:40Z",
+      "side": 1,
+      "message": "Removed the warning print.",
+      "parentUuid": "759a0776_9dff9ac8",
       "range": {
         "startLine": 63,
         "startChar": 8,
