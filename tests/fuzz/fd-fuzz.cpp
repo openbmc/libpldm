@@ -48,7 +48,7 @@ static void debug_printf(const char* fmt, ...)
 
 struct fuzz_ops_ctx
 {
-    struct pldm_msgbuf* fuzz_ctrl;
+    struct pldm_msgbuf_ro* fuzz_ctrl;
 
     /* Details of in-progress update, for consistency checking */
     bool current_update;
@@ -64,7 +64,7 @@ struct fuzz_ops_ctx
 /* Returns true with roughly `percent` chance */
 static bool fuzz_chance(struct fuzz_ops_ctx* ctx, uint8_t percent)
 {
-    uint8_t v;
+    uint8_t v = 0;
     assert(percent <= 100);
     int rc = pldm_msgbuf_extract_uint8(ctx->fuzz_ctrl, v);
     if (rc != 0)
@@ -368,8 +368,8 @@ extern "C" int LLVMFuzzerInitialize(int* argc LIBPLDM_CC_UNUSED,
 
 extern "C" int LLVMFuzzerTestOneInput(uint8_t* input, size_t len)
 {
-    PLDM_MSGBUF_DEFINE_P(fuzzproto);
-    PLDM_MSGBUF_DEFINE_P(fuzzctrl);
+    PLDM_MSGBUF_RO_DEFINE_P(fuzzproto);
+    PLDM_MSGBUF_RO_DEFINE_P(fuzzctrl);
     int rc;
 
     /* Split input into two parts. First FUZZCTRL_SIZE (0x400 bytes currently)
@@ -397,7 +397,7 @@ extern "C" int LLVMFuzzerTestOneInput(uint8_t* input, size_t len)
     while (true)
     {
         /* Arbitrary length send buffer */
-        uint32_t send_len;
+        uint32_t send_len = 0;
         rc = pldm_msgbuf_extract_uint32(fuzzctrl, send_len);
         if (rc)
         {
