@@ -21,7 +21,7 @@ int decode_oem_meta_file_io_write_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_oem_meta_file_io_write_req *req, size_t req_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || req == NULL) {
@@ -98,7 +98,7 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 				     size_t payload_length,
 				     struct pldm_oem_meta_file_io_read_req *req)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 
 	if (msg == NULL || req == NULL) {
 		return -EINVAL;
@@ -156,7 +156,7 @@ int encode_oem_meta_file_io_read_resp(
 	size_t resp_len, struct pldm_msg *responseMsg, size_t payload_length)
 {
 	int rc;
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	struct pldm_header_info header = { 0 };
 
 	if (resp == NULL || responseMsg == NULL) {

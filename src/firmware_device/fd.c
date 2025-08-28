@@ -276,7 +276,7 @@ static int pldm_fd_fw_param(struct pldm_fd *fd,
 {
 	uint16_t entry_count;
 	const struct pldm_firmware_component_standalone **entries;
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	/* No request data */
