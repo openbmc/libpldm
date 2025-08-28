@@ -18,7 +18,7 @@ int encode_pldm_file_df_open_req(uint8_t instance_id,
 				 const struct pldm_file_df_open_req *req,
 				 struct pldm_msg *msg, size_t *payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (req == NULL || msg == NULL) {
@@ -53,7 +53,7 @@ int decode_pldm_file_df_open_req(const struct pldm_msg *msg,
 				 size_t payload_length,
 				 struct pldm_file_df_open_req *req)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (!msg || !req) {
@@ -77,7 +77,7 @@ int encode_pldm_file_df_open_resp(uint8_t instance_id,
 				  const struct pldm_file_df_open_resp *resp,
 				  struct pldm_msg *msg, size_t *payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (!msg || !resp) {
@@ -114,7 +114,7 @@ int decode_pldm_file_df_open_resp(const struct pldm_msg *msg,
 				  size_t payload_length,
 				  struct pldm_file_df_open_resp *resp)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (!msg || !resp) {
@@ -149,7 +149,7 @@ int encode_pldm_file_df_close_req(uint8_t instance_id,
 				  const struct pldm_file_df_close_req *req,
 				  struct pldm_msg *msg, size_t *payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (!req || !msg) {
@@ -184,7 +184,7 @@ int decode_pldm_file_df_close_req(const struct pldm_msg *msg,
 				  size_t payload_length,
 				  struct pldm_file_df_close_req *req)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (!msg || !req) {
@@ -208,7 +208,7 @@ int encode_pldm_file_df_close_resp(uint8_t instance_id,
 				   const struct pldm_file_df_close_resp *resp,
 				   struct pldm_msg *msg, size_t *payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (!msg || !resp) {
@@ -256,7 +256,7 @@ int encode_pldm_file_df_heartbeat_req(
 	uint8_t instance_id, const struct pldm_file_df_heartbeat_req *req,
 	struct pldm_msg *msg, size_t *payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (!req || !msg) {
@@ -291,7 +291,7 @@ int decode_pldm_file_df_heartbeat_resp(const struct pldm_msg *msg,
 				       size_t payload_length,
 				       struct pldm_file_df_heartbeat_resp *resp)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (!msg || !resp) {

@@ -1,17 +1,17 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#include <stdint.h>
-#include <stdbool.h>
-#include <string.h>
-#include <stdlib.h>
+#include "compiler.h"
+#include "fd-internal.h"
+#include "msgbuf.h"
 
 #include <libpldm/pldm.h>
 #include <libpldm/firmware_update.h>
 #include <libpldm/firmware_fd.h>
 #include <libpldm/utils.h>
-#include <compiler.h>
-#include <msgbuf.h>
 
-#include "fd-internal.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
 
 /* FD_T1 Update mode idle timeout, 120 seconds (range [60s, 120s])*/
 static const pldm_fd_time_t DEFAULT_FD_T1_TIMEOUT = 120000;
@@ -276,7 +276,7 @@ static int pldm_fd_fw_param(struct pldm_fd *fd,
 {
 	uint16_t entry_count;
 	const struct pldm_firmware_component_standalone **entries;
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	/* No request data */

@@ -12,7 +12,10 @@ if not gtest_dep.found() or not gmock_dep.found()
     gmock_dep = gtest_proj.dependency('gmock')
 endif
 
-test_include_dirs = [libpldm_include_dir, include_directories('../src')]
+test_include_dirs = [
+    libpldm_include_dir,
+    include_directories('../src', '../tests'),
+]
 
 tests = ['instance-id', 'msgbuf', 'responder', 'utils']
 
