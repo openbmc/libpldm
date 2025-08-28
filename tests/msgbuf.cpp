@@ -10,12 +10,12 @@
 #define NDEBUG 1
 #endif
 
-#include "msgbuf.h"
+#include "msgbuf.hpp"
 
 TEST(msgbuf, init_bad_minsize)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t buf[1] = {};
 
     EXPECT_NE(pldm_msgbuf_init_errno(ctx, sizeof(buf) + 1U, buf, sizeof(buf)),
@@ -24,8 +24,8 @@ TEST(msgbuf, init_bad_minsize)
 
 TEST(msgbuf, init_bad_len)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t buf[1] = {};
 
     EXPECT_NE(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, SIZE_MAX), 0);
@@ -33,8 +33,8 @@ TEST(msgbuf, init_bad_len)
 
 TEST(msgbuf, init_overflow)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     // NOLINTNEXTLINE(performance-no-int-to-ptr)
     void* buf = (void*)UINTPTR_MAX;
 
@@ -43,8 +43,8 @@ TEST(msgbuf, init_overflow)
 
 TEST(msgbuf, init_success)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t buf[1] = {};
 
     EXPECT_EQ(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)), 0);
@@ -52,8 +52,8 @@ TEST(msgbuf, init_success)
 
 TEST(msgbuf, destroy_none)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t buf[1] = {};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)), 0);
@@ -62,8 +62,8 @@ TEST(msgbuf, destroy_none)
 
 TEST(msgbuf, destroy_exact)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[1] = {0xa5};
     uint8_t val;
 
@@ -75,8 +75,8 @@ TEST(msgbuf, destroy_exact)
 
 TEST(msgbuf, destroy_over)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[1] = {0xa5};
     uint8_t val;
 
@@ -89,8 +89,8 @@ TEST(msgbuf, destroy_over)
 
 TEST(msgbuf, destroy_under)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[2] = {0x5a, 0xa5};
     uint8_t val;
 
@@ -102,8 +102,8 @@ TEST(msgbuf, destroy_under)
 
 TEST(msgbuf, extract_one_uint8)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[1] = {0xa5};
     uint8_t val;
 
@@ -115,8 +115,8 @@ TEST(msgbuf, extract_one_uint8)
 
 TEST(msgbuf, extract_over_uint8)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[1] = {};
     uint8_t val;
 
@@ -127,8 +127,8 @@ TEST(msgbuf, extract_over_uint8)
 
 TEST(msgbuf, extract_under_uint8)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
 
     uint8_t buf[1] = {};
     uint8_t val;
@@ -141,8 +141,8 @@ TEST(msgbuf, extract_under_uint8)
 
 TEST(msgbuf, extract_one_int8)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     int8_t buf[1] = {-1};
     int8_t val;
 
@@ -154,8 +154,8 @@ TEST(msgbuf, extract_one_int8)
 
 TEST(msgbuf, extract_over_int8)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     int8_t buf[1] = {};
     int8_t val;
 
@@ -166,8 +166,8 @@ TEST(msgbuf, extract_over_int8)
 
 TEST(msgbuf, extract_under_int8)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
 
     uint8_t buf[1] = {};
     int8_t val;
@@ -180,8 +180,8 @@ TEST(msgbuf, extract_under_int8)
 
 TEST(msgbuf, extract_one_uint16)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint16_t buf[1] = {htole16(0x5aa5)};
     uint16_t val = {};
 
@@ -193,8 +193,8 @@ TEST(msgbuf, extract_one_uint16)
 
 TEST(msgbuf, extract_under_uint16)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
 
     uint16_t buf[1] = {};
     uint16_t val;
@@ -207,8 +207,8 @@ TEST(msgbuf, extract_under_uint16)
 
 TEST(msgbuf, extract_over_uint16)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint16_t buf[1] = {};
     uint16_t val;
 
@@ -219,8 +219,8 @@ TEST(msgbuf, extract_over_uint16)
 
 TEST(msgbuf, extract_one_int16)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     int16_t buf[1] = {(int16_t)(htole16((uint16_t)INT16_MIN))};
     int16_t val;
 
@@ -232,8 +232,8 @@ TEST(msgbuf, extract_one_int16)
 
 TEST(msgbuf, extract_over_int16)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     int16_t buf[1] = {};
     int16_t val;
 
@@ -244,8 +244,8 @@ TEST(msgbuf, extract_over_int16)
 
 TEST(msgbuf, extract_under_int16)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
 
     int16_t buf[1] = {};
     int16_t val;
@@ -258,8 +258,8 @@ TEST(msgbuf, extract_under_int16)
 
 TEST(msgbuf, extract_one_uint32)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint32_t buf[1] = {htole32(0x5a00ffa5)};
     uint32_t val;
 
@@ -271,8 +271,8 @@ TEST(msgbuf, extract_one_uint32)
 
 TEST(msgbuf, extract_over_uint32)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint32_t buf[1] = {};
     uint32_t val;
 
@@ -283,8 +283,8 @@ TEST(msgbuf, extract_over_uint32)
 
 TEST(msgbuf, extract_under_uint32)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
 
     uint32_t buf[1] = {};
     uint32_t val;
@@ -297,8 +297,8 @@ TEST(msgbuf, extract_under_uint32)
 
 TEST(msgbuf, extract_one_int32)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     int32_t buf[1] = {(int32_t)(htole32((uint32_t)(INT32_MIN)))};
     int32_t val;
 
@@ -310,8 +310,8 @@ TEST(msgbuf, extract_one_int32)
 
 TEST(msgbuf, extract_over_int32)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     int32_t buf[1] = {};
     int32_t val;
 
@@ -322,8 +322,8 @@ TEST(msgbuf, extract_over_int32)
 
 TEST(msgbuf, extract_under_int32)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
 
     int32_t buf[1] = {};
     int32_t val;
@@ -336,8 +336,8 @@ TEST(msgbuf, extract_under_int32)
 
 TEST(msgbuf, extract_one_real32)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint32_t buf[1] = {};
     uint32_t xform;
     real32_t val;
@@ -355,8 +355,8 @@ TEST(msgbuf, extract_one_real32)
 
 TEST(msgbuf, extract_over_real32)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     real32_t buf[1] = {};
     real32_t val;
 
@@ -367,8 +367,8 @@ TEST(msgbuf, extract_over_real32)
 
 TEST(msgbuf, extract_under_real32)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
 
     real32_t buf[1] = {};
     real32_t val;
@@ -381,8 +381,8 @@ TEST(msgbuf, extract_under_real32)
 
 TEST(msgbuf, extract_array_uint8_buf0_req0)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[1] = {};
     uint8_t arr[1];
 
@@ -393,8 +393,8 @@ TEST(msgbuf, extract_array_uint8_buf0_req0)
 
 TEST(msgbuf, extract_array_uint8_buf1_req1)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[1] = {};
     uint8_t arr[1];
 
@@ -407,8 +407,8 @@ TEST(msgbuf, extract_array_uint8_buf1_req1)
 
 TEST(msgbuf, extract_array_uint8_buf1_req2)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[1] = {};
     uint8_t arr[2];
 
@@ -420,8 +420,8 @@ TEST(msgbuf, extract_array_uint8_buf1_req2)
 
 TEST(msgbuf, extract_under_array_uint8)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[1] = {};
     uint8_t arr[1];
 
@@ -433,8 +433,8 @@ TEST(msgbuf, extract_under_array_uint8)
 
 TEST(msgbuf, extract_array_char_buf0_req0)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     char buf[1] = {'\0'};
     char arr[1] = {'1'};
 
@@ -445,8 +445,8 @@ TEST(msgbuf, extract_array_char_buf0_req0)
 
 TEST(msgbuf, extract_array_char_buf1_req1)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     char buf[1] = {'\0'};
     char arr[1] = {'1'};
 
@@ -459,8 +459,8 @@ TEST(msgbuf, extract_array_char_buf1_req1)
 
 TEST(msgbuf, extract_array_char_buf1_req2)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     char buf[1] = {'\0'};
     char arr[2] = {'1', '2'};
 
@@ -472,8 +472,8 @@ TEST(msgbuf, extract_array_char_buf1_req2)
 
 TEST(msgbuf, extract_under_array_char)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     char buf[1] = {'\0'};
     char arr[1] = {'1'};
 
@@ -485,8 +485,8 @@ TEST(msgbuf, extract_under_array_char)
 
 TEST(msgbuf, consumed_under)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t buf[1] = {};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
@@ -495,8 +495,8 @@ TEST(msgbuf, consumed_under)
 
 TEST(msgbuf, consumed_exact)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[1] = {};
     uint8_t val;
 
@@ -507,8 +507,8 @@ TEST(msgbuf, consumed_exact)
 
 TEST(msgbuf, consumed_over)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[1] = {};
     uint8_t valid;
     uint8_t invalid;
@@ -521,8 +521,8 @@ TEST(msgbuf, consumed_over)
 
 TEST(msgbuf, pldm_msgbuf_insert_int32_good)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     int32_t src = -12345;
     int32_t checkVal = 0;
     uint8_t buf[sizeof(int32_t)] = {};
@@ -530,8 +530,8 @@ TEST(msgbuf, pldm_msgbuf_insert_int32_good)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_insert_int32(ctx, src), 0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_int32(ctxExtract, checkVal), 0);
@@ -543,8 +543,8 @@ TEST(msgbuf, pldm_msgbuf_insert_int32_good)
 
 TEST(msgbuf, insert_under_int32)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
 
     int32_t buf[1] = {};
     int32_t val = 0;
@@ -557,8 +557,8 @@ TEST(msgbuf, insert_under_int32)
 
 TEST(msgbuf, pldm_msgbuf_insert_uint32_good)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint32_t src = 0xf1223344;
     uint32_t checkVal = 0;
     uint8_t buf[sizeof(uint32_t)] = {};
@@ -566,8 +566,8 @@ TEST(msgbuf, pldm_msgbuf_insert_uint32_good)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_insert_uint32(ctx, src), 0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint32(ctxExtract, checkVal), 0);
@@ -579,8 +579,8 @@ TEST(msgbuf, pldm_msgbuf_insert_uint32_good)
 
 TEST(msgbuf, insert_under_uint32)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
 
     uint32_t buf[1] = {};
     uint32_t val = 0;
@@ -593,8 +593,8 @@ TEST(msgbuf, insert_under_uint32)
 
 TEST(msgbuf, pldm_msgbuf_insert_uint16_good)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint16_t src = 0xf344;
     uint16_t checkVal = 0;
     uint8_t buf[sizeof(uint16_t)] = {};
@@ -602,8 +602,8 @@ TEST(msgbuf, pldm_msgbuf_insert_uint16_good)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(uint16_t)), 0);
     EXPECT_EQ(pldm_msgbuf_insert_uint16(ctx, src), 0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, checkVal), 0);
@@ -615,8 +615,8 @@ TEST(msgbuf, pldm_msgbuf_insert_uint16_good)
 
 TEST(msgbuf, insert_under_uint16)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
 
     uint16_t buf[1] = {};
     uint16_t val = 0;
@@ -629,8 +629,8 @@ TEST(msgbuf, insert_under_uint16)
 
 TEST(msgbuf, pldm_msgbuf_insert_int16_good)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     int16_t src = -12;
     int16_t checkVal = 0;
     uint8_t buf[sizeof(int16_t)] = {};
@@ -638,8 +638,8 @@ TEST(msgbuf, pldm_msgbuf_insert_int16_good)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(uint16_t)), 0);
     EXPECT_EQ(pldm_msgbuf_insert_int16(ctx, src), 0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_int16(ctxExtract, checkVal), 0);
@@ -651,8 +651,8 @@ TEST(msgbuf, pldm_msgbuf_insert_int16_good)
 
 TEST(msgbuf, insert_under_int16)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
 
     int16_t buf[1] = {};
     int16_t val = 0;
@@ -665,8 +665,8 @@ TEST(msgbuf, insert_under_int16)
 
 TEST(msgbuf, pldm_msgbuf_insert_uint8_good)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t src = 0xf4;
     uint8_t checkVal = 0;
     uint8_t buf[sizeof(uint8_t)] = {};
@@ -674,8 +674,8 @@ TEST(msgbuf, pldm_msgbuf_insert_uint8_good)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_insert_uint8(ctx, src), 0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, checkVal), 0);
@@ -687,8 +687,8 @@ TEST(msgbuf, pldm_msgbuf_insert_uint8_good)
 
 TEST(msgbuf, insert_under_uint8)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
 
     uint8_t buf[1] = {};
     uint8_t val = 0;
@@ -701,8 +701,8 @@ TEST(msgbuf, insert_under_uint8)
 
 TEST(msgbuf, pldm_msgbuf_insert_int8_good)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     int8_t src = -4;
     int8_t checkVal = 0;
     uint8_t buf[sizeof(int8_t)] = {};
@@ -710,8 +710,8 @@ TEST(msgbuf, pldm_msgbuf_insert_int8_good)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_insert_int8(ctx, src), 0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_int8(ctxExtract, checkVal), 0);
@@ -723,8 +723,8 @@ TEST(msgbuf, pldm_msgbuf_insert_int8_good)
 
 TEST(msgbuf, insert_under_int8)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
 
     int8_t buf[1] = {};
     int8_t val = 0;
@@ -737,8 +737,8 @@ TEST(msgbuf, insert_under_int8)
 
 TEST(msgbuf, pldm_msgbuf_insert_array_uint8_good)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t src[6] = {0x11, 0x22, 0x44, 0x55, 0x66, 0x77};
     uint8_t buf[6] = {};
     uint8_t retBuff[6] = {};
@@ -747,8 +747,8 @@ TEST(msgbuf, pldm_msgbuf_insert_array_uint8_good)
     EXPECT_EQ(
         pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), src, sizeof(src)), 0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_array_uint8(ctxExtract, sizeof(retBuff),
@@ -762,8 +762,8 @@ TEST(msgbuf, pldm_msgbuf_insert_array_uint8_good)
 
 TEST(msgbuf, insert_under_array_uint8)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
 
     uint8_t buf[1] = {};
     uint8_t val[1] = {0};
@@ -777,8 +777,8 @@ TEST(msgbuf, insert_under_array_uint8)
 
 TEST(msgbuf, pldm_msgbuf_insert_array_char_good)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     char src[6] = {0x11, 0x22, 0x44, 0x55, 0x66, 0x77};
     char buf[6] = {};
     char retBuff[6] = {};
@@ -787,8 +787,8 @@ TEST(msgbuf, pldm_msgbuf_insert_array_char_good)
     EXPECT_EQ(pldm_msgbuf_insert_array_char(ctx, sizeof(src), src, sizeof(src)),
               0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_array_char(ctxExtract, sizeof(retBuff),
@@ -802,8 +802,8 @@ TEST(msgbuf, pldm_msgbuf_insert_array_char_good)
 
 TEST(msgbuf, insert_under_array_char)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     char buf[1] = {};
     char val[1] = {0};
 
@@ -816,8 +816,8 @@ TEST(msgbuf, insert_under_array_char)
 
 TEST(msgbuf, pldm_msgbuf_span_required_good)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t src[6] = {0x11, 0x22, 0x44, 0x55, 0x66, 0x77};
     uint8_t buf[6] = {0};
     const size_t required = 4;
@@ -829,13 +829,14 @@ TEST(msgbuf, pldm_msgbuf_span_required_good)
     EXPECT_EQ(
         pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), src, sizeof(src)), 0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
-    EXPECT_EQ(pldm_msgbuf_span_required(ctxExtract, required, (void**)&retBuff),
-              0);
+    EXPECT_EQ(
+        pldm_msgbuf_span_required(ctxExtract, required, (const void**)&retBuff),
+        0);
 
     EXPECT_EQ(memcmp(expectData, retBuff, required), 0);
     EXPECT_EQ(pldm_msgbuf_complete(ctxExtract), 0);
@@ -844,8 +845,8 @@ TEST(msgbuf, pldm_msgbuf_span_required_good)
 
 TEST(msgbuf, pldm_msgbuf_span_required_bad)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t src[6] = {0x11, 0x22, 0x44, 0x55, 0x66, 0x77};
     uint8_t buf[6] = {0};
     const size_t required = 4;
@@ -856,8 +857,8 @@ TEST(msgbuf, pldm_msgbuf_span_required_bad)
     EXPECT_EQ(
         pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), src, sizeof(src)), 0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
@@ -869,8 +870,8 @@ TEST(msgbuf, pldm_msgbuf_span_required_bad)
 
 TEST(msgbuf, span_required_under)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
 
     uint8_t buf[1] = {};
     void* cursor = nullptr;
@@ -883,8 +884,8 @@ TEST(msgbuf, span_required_under)
 
 TEST(msgbuf, pldm_msgbuf_span_string_ascii_good)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
     uint8_t src[9] = {0x11, 0x22, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x00, 0x77};
     constexpr size_t required = 6;
     const char expectData[required] = {0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x00};
@@ -895,8 +896,9 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_good)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
-    EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&retBuff, NULL),
-              0);
+    EXPECT_EQ(
+        pldm_msgbuf_span_string_ascii(ctxExtract, (const void**)&retBuff, NULL),
+        0);
     EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, testVal1), 0);
     EXPECT_EQ(0x77, testVal1);
 
@@ -907,8 +909,8 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_good)
 
 TEST(msgbuf, pldm_msgbuf_span_string_ascii_good_with_length)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
     uint8_t src[9] = {0x11, 0x22, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x00, 0x77};
     constexpr size_t required = 6;
     const char expectData[required] = {0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x00};
@@ -920,9 +922,9 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_good_with_length)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
-    EXPECT_EQ(
-        pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&retBuff, &length),
-        0);
+    EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (const void**)&retBuff,
+                                            &length),
+              0);
     EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, testVal1), 0);
     EXPECT_EQ(0x77, testVal1);
 
@@ -935,8 +937,8 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_good_with_length)
 
 TEST(msgbuf, pldm_msgbuf_span_string_ascii_allow_null_args)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
     uint8_t src[8] = {0x11, 0x22, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x00};
     uint16_t testVal;
 
@@ -949,8 +951,8 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_allow_null_args)
 
 TEST(msgbuf, pldm_msgbuf_span_string_ascii_bad_no_terminator)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
     uint8_t src[8] = {0x11, 0x22, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x77};
     uint16_t testVal;
     char* retBuff = NULL;
@@ -958,15 +960,16 @@ TEST(msgbuf, pldm_msgbuf_span_string_ascii_bad_no_terminator)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
-    EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&retBuff, NULL),
-              -EOVERFLOW);
+    EXPECT_EQ(
+        pldm_msgbuf_span_string_ascii(ctxExtract, (const void**)&retBuff, NULL),
+        -EOVERFLOW);
     EXPECT_EQ(pldm_msgbuf_complete(ctxExtract), -EOVERFLOW);
 }
 
 TEST(msgbuf, pldm_msgbuf_span_string_ascii_under)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_rw _ctxExtract;
+    struct pldm_msgbuf_rw* ctxExtract = &_ctxExtract;
 
     uint8_t src[1] = {};
     char* retBuff = NULL;
@@ -990,8 +993,8 @@ static size_t str16len(char16_t* startptr)
 
 TEST(msgbuf, pldm_msgbuf_span_string_utf16_good)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
     uint8_t src[] __attribute__((aligned(alignof(char16_t)))) = {
         0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33, 0x6c,
         0x44, 0x6c, 0x55, 0x6f, 0x00, 0x00, 0x34, 0x12};
@@ -1005,8 +1008,9 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_good)
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
 
-    ASSERT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
-              0);
+    ASSERT_EQ(
+        pldm_msgbuf_span_string_utf16(ctxExtract, (const void**)&retBuff, NULL),
+        0);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal1), 0);
     EXPECT_EQ(0x1234, testVal1);
 
@@ -1018,8 +1022,8 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_good)
 
 TEST(msgbuf, pldm_msgbuf_span_string_utf16_good2)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
     uint8_t src[24] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33, 0x6c,
                        0x44, 0x6c, 0x55, 0x6f, 0x00, 0x00, 0x34, 0x12,
                        0x44, 0x6c, 0x55, 0x6f, 0x00, 0x00, 0x34, 0x12};
@@ -1037,8 +1041,9 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_good2)
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
 
-    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
-              0);
+    EXPECT_EQ(
+        pldm_msgbuf_span_string_utf16(ctxExtract, (const void**)&retBuff, NULL),
+        0);
 
     ASSERT_EQ(0ul, (uintptr_t)retBuff & (alignof(char16_t) - 1));
     EXPECT_EQ(6ul, str16len((char16_t*)retBuff) + 1);
@@ -1049,9 +1054,9 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_good2)
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal1), 0);
     EXPECT_EQ(0x1234, testVal1);
 
-    EXPECT_EQ(
-        pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff1, &length),
-        0);
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (const void**)&retBuff1,
+                                            &length),
+              0);
 
     EXPECT_EQ(0ul, length % 2);
     EXPECT_EQ(memcmp(expectData1, retBuff1, length), 0);
@@ -1064,8 +1069,8 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_good2)
 
 TEST(msgbuf, pldm_msgbuf_span_string_utf16_allow_null_args)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
     uint8_t src[14] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33,
                        0x6c, 0x44, 0x6c, 0x55, 0x6f, 0x00, 0x00};
     uint16_t testVal;
@@ -1079,8 +1084,8 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_allow_null_args)
 
 TEST(msgbuf, pldm_msgbuf_span_string_utf16_bad_no_terminator)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
     uint8_t src[14] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33,
                        0x6c, 0x44, 0x6c, 0x55, 0x6f, 0x66, 0x77};
     uint16_t testVal;
@@ -1089,15 +1094,16 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_bad_no_terminator)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
-    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
-              -EOVERFLOW);
+    EXPECT_EQ(
+        pldm_msgbuf_span_string_utf16(ctxExtract, (const void**)&retBuff, NULL),
+        -EOVERFLOW);
     EXPECT_EQ(pldm_msgbuf_complete(ctxExtract), -EOVERFLOW);
 }
 
 TEST(msgbuf, pldm_msgbuf_span_string_utf16_bad_odd_size)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
     uint8_t src[] = {0x11, 0x22, 0x11, 0x68, 0x22, 0x65, 0x33,
                      0x6c, 0x44, 0x6c, 0x55, 0x00, 0x00};
     uint16_t testVal;
@@ -1106,15 +1112,16 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_bad_odd_size)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, src, sizeof(src)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
     EXPECT_EQ(0x2211, testVal);
-    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&retBuff, NULL),
-              -EOVERFLOW);
+    EXPECT_EQ(
+        pldm_msgbuf_span_string_utf16(ctxExtract, (const void**)&retBuff, NULL),
+        -EOVERFLOW);
     EXPECT_EQ(pldm_msgbuf_complete(ctxExtract), -EOVERFLOW);
 }
 
 TEST(msgbuf, pldm_msgbuf_span_string_utf16_mix)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
     uint8_t src[36] = {0x2,  0x65, 0x6e, 0x00, // Language Tag "en"
                        0x00, 0x53, 0x00, 0x30, 0x00, 0x53, 0x00,
                        0x58, 0x00, 0x00,                   // Entity Name "S0S"
@@ -1145,30 +1152,36 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_mix)
     EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, name_count), 0);
     EXPECT_EQ(0x2, name_count);
 
-    EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&tag, NULL), 0);
+    EXPECT_EQ(
+        pldm_msgbuf_span_string_ascii(ctxExtract, (const void**)&tag, NULL), 0);
     EXPECT_EQ(strncmp(expectTag0, tag, strlen(tag) + 1), 0);
 
-    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&name, NULL),
-              0);
+    EXPECT_EQ(
+        pldm_msgbuf_span_string_utf16(ctxExtract, (const void**)&name, NULL),
+        0);
     ASSERT_EQ(0ul, (uintptr_t)name & (alignof(char16_t) - 1));
     EXPECT_EQ(5ul, str16len((char16_t*)name) + 1);
     EXPECT_EQ(memcmp(expectName0, name,
                      sizeof(char16_t) * (str16len((char16_t*)name) + 1)),
               0);
 
-    EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&tag1, &length),
-              0);
-    EXPECT_EQ(strncmp(expectTag1, tag1, length), 0);
     EXPECT_EQ(
-        pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&name1, &length), 0);
+        pldm_msgbuf_span_string_ascii(ctxExtract, (const void**)&tag1, &length),
+        0);
+    EXPECT_EQ(strncmp(expectTag1, tag1, length), 0);
+    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (const void**)&name1,
+                                            &length),
+              0);
     EXPECT_EQ(0ul, length % 2);
     EXPECT_EQ(memcmp(expectName1, name1, length), 0);
 
-    EXPECT_EQ(pldm_msgbuf_span_string_ascii(ctxExtract, (void**)&tag2, NULL),
-              0);
+    EXPECT_EQ(
+        pldm_msgbuf_span_string_ascii(ctxExtract, (const void**)&tag2, NULL),
+        0);
     EXPECT_EQ(strncmp(expectTag2, tag2, strlen(tag2) + 1), 0);
-    EXPECT_EQ(pldm_msgbuf_span_string_utf16(ctxExtract, (void**)&name2, NULL),
-              0);
+    EXPECT_EQ(
+        pldm_msgbuf_span_string_utf16(ctxExtract, (const void**)&name2, NULL),
+        0);
     ASSERT_EQ(0ul, (uintptr_t)name2 & (alignof(char16_t) - 1));
     EXPECT_EQ(4ul, str16len((char16_t*)name2) + 1);
     EXPECT_EQ(memcmp(expectName2, name2,
@@ -1183,8 +1196,8 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_mix)
 
 TEST(msgbuf, pldm_msgbuf_span_string_utf16_under)
 {
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_rw _ctxExtract;
+    struct pldm_msgbuf_rw* ctxExtract = &_ctxExtract;
 
     uint8_t src[1] = {};
     char* retBuff = NULL;
@@ -1198,8 +1211,8 @@ TEST(msgbuf, pldm_msgbuf_span_string_utf16_under)
 
 TEST(msgbuf, pldm_msgbuf_span_remaining_good)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t src[8] = {0x11, 0x22, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99};
     uint8_t buf[8] = {0};
     uint16_t testVal;
@@ -1211,14 +1224,14 @@ TEST(msgbuf, pldm_msgbuf_span_remaining_good)
     EXPECT_EQ(
         pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), src, sizeof(src)), 0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
-    EXPECT_EQ(
-        pldm_msgbuf_span_remaining(ctxExtract, (void**)&retBuff, &remaining),
-        0);
+    EXPECT_EQ(pldm_msgbuf_span_remaining(ctxExtract, (const void**)&retBuff,
+                                         &remaining),
+              0);
 
     EXPECT_EQ(remaining, sizeof(expectData));
     EXPECT_EQ(memcmp(expectData, retBuff, remaining), 0);
@@ -1228,8 +1241,8 @@ TEST(msgbuf, pldm_msgbuf_span_remaining_good)
 
 TEST(msgbuf, pldm_msgbuf_span_remaining_bad)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t src[8] = {0x11, 0x22, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99};
     uint8_t buf[8] = {0};
     uint16_t testVal;
@@ -1238,8 +1251,8 @@ TEST(msgbuf, pldm_msgbuf_span_remaining_bad)
     EXPECT_EQ(
         pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), src, sizeof(src)), 0);
 
-    struct pldm_msgbuf _ctxExtract;
-    struct pldm_msgbuf* ctxExtract = &_ctxExtract;
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_extract_uint16(ctxExtract, testVal), 0);
@@ -1250,8 +1263,8 @@ TEST(msgbuf, pldm_msgbuf_span_remaining_bad)
 
 TEST(msgbuf, pldm_msgbuf_span_until_0_1)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t buf[] = {1};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
@@ -1261,8 +1274,8 @@ TEST(msgbuf, pldm_msgbuf_span_until_0_1)
 
 TEST(msgbuf, pldm_msgbuf_span_until_0_1_p)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t buf[] = {1};
     void* start;
     size_t len;
@@ -1276,8 +1289,8 @@ TEST(msgbuf, pldm_msgbuf_span_until_0_1_p)
 
 TEST(msgbuf, pldm_msgbuf_span_until_1_1)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[] = {1};
     uint8_t val;
 
@@ -1289,8 +1302,8 @@ TEST(msgbuf, pldm_msgbuf_span_until_1_1)
 
 TEST(msgbuf, pldm_msgbuf_span_until_1_2)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[] = {0, 1};
     uint8_t val;
 
@@ -1303,8 +1316,8 @@ TEST(msgbuf, pldm_msgbuf_span_until_1_2)
 
 TEST(msgbuf, pldm_msgbuf_span_until_1_3)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[] = {0, 1, 2};
     uint8_t val;
 
@@ -1317,8 +1330,8 @@ TEST(msgbuf, pldm_msgbuf_span_until_1_3)
 
 TEST(msgbuf, pldm_msgbuf_span_until_2_3)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[] = {0, 1, 2};
     uint8_t val0;
     uint8_t val1;
@@ -1334,8 +1347,8 @@ TEST(msgbuf, pldm_msgbuf_span_until_2_3)
 
 TEST(msgbuf, pldm_msgbuf_span_until_short)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
     uint8_t buf[] = {1};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
@@ -1345,8 +1358,8 @@ TEST(msgbuf, pldm_msgbuf_span_until_short)
 
 TEST(msgbuf, pldm_msgbuf_span_until_saturated)
 {
-    struct pldm_msgbuf _ctx;
-    struct pldm_msgbuf* ctx = &_ctx;
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
     uint8_t buf[] = {1};
     uint16_t val;
 
@@ -1359,22 +1372,22 @@ TEST(msgbuf, pldm_msgbuf_span_until_saturated)
 
 TEST(msgbuf, pldm_msgbuf_copy_good)
 {
-    struct pldm_msgbuf _src;
-    struct pldm_msgbuf* src = &_src;
+    struct pldm_msgbuf_ro _src;
+    struct pldm_msgbuf_ro* src = &_src;
     uint16_t buf[1] = {htole16(0x5aa5)};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(src, sizeof(buf), buf, sizeof(buf)), 0);
 
-    struct pldm_msgbuf _dst;
-    struct pldm_msgbuf* dst = &_dst;
+    struct pldm_msgbuf_rw _dst;
+    struct pldm_msgbuf_rw* dst = &_dst;
     uint16_t checkVal = 0;
     uint8_t buf1[sizeof(buf)] = {};
 
     ASSERT_EQ(pldm_msgbuf_init_errno(dst, sizeof(buf1), buf1, sizeof(buf1)), 0);
     EXPECT_EQ(pldm_msgbuf_copy(dst, src, buf[0], name), 0);
 
-    ASSERT_EQ(pldm_msgbuf_init_errno(dst, sizeof(buf1), buf1, sizeof(buf1)), 0);
-    EXPECT_EQ(pldm_msgbuf_extract_uint16(dst, checkVal), 0);
+    ASSERT_EQ(pldm_msgbuf_init_errno(src, sizeof(buf1), buf1, sizeof(buf1)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint16(src, checkVal), 0);
 
     EXPECT_EQ(pldm_msgbuf_complete(src), 0);
     EXPECT_EQ(pldm_msgbuf_complete(dst), 0);
@@ -1384,10 +1397,10 @@ TEST(msgbuf, pldm_msgbuf_copy_good)
 
 TEST(msgbuf, pldm_msgbuf_copy_bad)
 {
-    struct pldm_msgbuf _src;
-    struct pldm_msgbuf* src = &_src;
-    struct pldm_msgbuf _dst;
-    struct pldm_msgbuf* dst = &_dst;
+    struct pldm_msgbuf_ro _src;
+    struct pldm_msgbuf_ro* src = &_src;
+    struct pldm_msgbuf_rw _dst;
+    struct pldm_msgbuf_rw* dst = &_dst;
     uint8_t buf[1] = {sizeof(uint8_t)};
     uint8_t buf1[1] = {sizeof(uint16_t)};
     uint16_t value = 8;
@@ -1405,10 +1418,10 @@ TEST(msgbuf, pldm_msgbuf_copy_string_ascii_exact)
 {
     const char msg[] = "this is a message";
 
-    struct pldm_msgbuf _src;
-    struct pldm_msgbuf* src = &_src;
-    struct pldm_msgbuf _dst;
-    struct pldm_msgbuf* dst = &_dst;
+    struct pldm_msgbuf_ro _src;
+    struct pldm_msgbuf_ro* src = &_src;
+    struct pldm_msgbuf_rw _dst;
+    struct pldm_msgbuf_rw* dst = &_dst;
 
     char buf[sizeof(msg)] = {};
 
@@ -1424,10 +1437,10 @@ TEST(msgbuf, pldm_msgbuf_copy_string_ascii_dst_exceeds_src)
 {
     const char msg[] = "this is a message";
 
-    struct pldm_msgbuf _src;
-    struct pldm_msgbuf* src = &_src;
-    struct pldm_msgbuf _dst;
-    struct pldm_msgbuf* dst = &_dst;
+    struct pldm_msgbuf_ro _src;
+    struct pldm_msgbuf_ro* src = &_src;
+    struct pldm_msgbuf_rw _dst;
+    struct pldm_msgbuf_rw* dst = &_dst;
 
     char buf[sizeof(msg) + 1] = {};
 
@@ -1443,10 +1456,10 @@ TEST(msgbuf, pldm_msgbuf_copy_string_ascii_src_exceeds_dst)
 {
     const char msg[] = "this is a message";
 
-    struct pldm_msgbuf _src;
-    struct pldm_msgbuf* src = &_src;
-    struct pldm_msgbuf _dst;
-    struct pldm_msgbuf* dst = &_dst;
+    struct pldm_msgbuf_ro _src;
+    struct pldm_msgbuf_ro* src = &_src;
+    struct pldm_msgbuf_rw _dst;
+    struct pldm_msgbuf_rw* dst = &_dst;
 
     char buf[sizeof(msg) - 1] = {};
 
@@ -1461,10 +1474,10 @@ TEST(msgbuf, pldm_msgbuf_copy_string_ascii_unterminated_src)
 {
     const char msg[] = {'a'};
 
-    struct pldm_msgbuf _src;
-    struct pldm_msgbuf* src = &_src;
-    struct pldm_msgbuf _dst;
-    struct pldm_msgbuf* dst = &_dst;
+    struct pldm_msgbuf_ro _src;
+    struct pldm_msgbuf_ro* src = &_src;
+    struct pldm_msgbuf_rw _dst;
+    struct pldm_msgbuf_rw* dst = &_dst;
 
     char buf[sizeof(msg)] = {};
 
@@ -1479,10 +1492,10 @@ TEST(msgbuf, pldm_msgbuf_copy_utf16_exact)
 {
     const char16_t msg[] = u"this is a message";
 
-    struct pldm_msgbuf _src;
-    struct pldm_msgbuf* src = &_src;
-    struct pldm_msgbuf _dst;
-    struct pldm_msgbuf* dst = &_dst;
+    struct pldm_msgbuf_ro _src;
+    struct pldm_msgbuf_ro* src = &_src;
+    struct pldm_msgbuf_rw _dst;
+    struct pldm_msgbuf_rw* dst = &_dst;
 
     char buf[sizeof(msg)] = {};
 
@@ -1498,10 +1511,10 @@ TEST(msgbuf, pldm_msgbuf_copy_utf16_dst_exceeds_src)
 {
     const char16_t msg[] = u"this is a message";
 
-    struct pldm_msgbuf _src;
-    struct pldm_msgbuf* src = &_src;
-    struct pldm_msgbuf _dst;
-    struct pldm_msgbuf* dst = &_dst;
+    struct pldm_msgbuf_ro _src;
+    struct pldm_msgbuf_ro* src = &_src;
+    struct pldm_msgbuf_rw _dst;
+    struct pldm_msgbuf_rw* dst = &_dst;
 
     char buf[sizeof(msg) + 1] = {};
 
@@ -1517,10 +1530,10 @@ TEST(msgbuf, pldm_msgbuf_copy_utf16_src_exceeds_dst)
 {
     const char16_t msg[] = u"this is a message";
 
-    struct pldm_msgbuf _src;
-    struct pldm_msgbuf* src = &_src;
-    struct pldm_msgbuf _dst;
-    struct pldm_msgbuf* dst = &_dst;
+    struct pldm_msgbuf_ro _src;
+    struct pldm_msgbuf_ro* src = &_src;
+    struct pldm_msgbuf_rw _dst;
+    struct pldm_msgbuf_rw* dst = &_dst;
 
     char buf[sizeof(msg) - 1] = {};
 
@@ -1535,10 +1548,10 @@ TEST(msgbuf, pldm_msgbuf_copy_utf16_unterminated_src)
 {
     const char16_t msg[] = {u'a'};
 
-    struct pldm_msgbuf _src;
-    struct pldm_msgbuf* src = &_src;
-    struct pldm_msgbuf _dst;
-    struct pldm_msgbuf* dst = &_dst;
+    struct pldm_msgbuf_ro _src;
+    struct pldm_msgbuf_ro* src = &_src;
+    struct pldm_msgbuf_rw _dst;
+    struct pldm_msgbuf_rw* dst = &_dst;
 
     char buf[sizeof(msg)] = {};
 
@@ -1551,7 +1564,7 @@ TEST(msgbuf, pldm_msgbuf_copy_utf16_unterminated_src)
 
 TEST(msgbuf, extract_one_uint8_to_size)
 {
-    PLDM_MSGBUF_DEFINE_P(ctx);
+    PLDM_MSGBUF_RO_DEFINE_P(ctx);
     uint8_t buf[1] = {0xa5};
 
     size_t val;
@@ -1564,7 +1577,7 @@ TEST(msgbuf, extract_one_uint8_to_size)
 
 TEST(msgbuf, extract_under_uint8_to_size)
 {
-    PLDM_MSGBUF_DEFINE_P(ctx);
+    PLDM_MSGBUF_RO_DEFINE_P(ctx);
     uint8_t buf[1] = {};
     size_t val;
 
@@ -1576,7 +1589,7 @@ TEST(msgbuf, extract_under_uint8_to_size)
 
 TEST(msgbuf, extract_over_uint8_to_size)
 {
-    PLDM_MSGBUF_DEFINE_P(ctx);
+    PLDM_MSGBUF_RO_DEFINE_P(ctx);
     uint8_t buf[1] = {};
     size_t val;
 
@@ -1587,7 +1600,7 @@ TEST(msgbuf, extract_over_uint8_to_size)
 
 TEST(msgbuf, extract_one_uint16_to_size)
 {
-    PLDM_MSGBUF_DEFINE_P(ctx);
+    PLDM_MSGBUF_RO_DEFINE_P(ctx);
     uint16_t buf[1] = {htole16(0x5aa5)};
     size_t val;
 
@@ -1599,7 +1612,7 @@ TEST(msgbuf, extract_one_uint16_to_size)
 
 TEST(msgbuf, extract_under_uint16_to_size)
 {
-    PLDM_MSGBUF_DEFINE_P(ctx);
+    PLDM_MSGBUF_RO_DEFINE_P(ctx);
     uint16_t buf[1] = {};
     size_t val;
 
@@ -1611,7 +1624,7 @@ TEST(msgbuf, extract_under_uint16_to_size)
 
 TEST(msgbuf, extract_over_uint16_to_size)
 {
-    PLDM_MSGBUF_DEFINE_P(ctx);
+    PLDM_MSGBUF_RO_DEFINE_P(ctx);
     uint16_t buf[1] = {};
     size_t val;
 
@@ -1622,7 +1635,7 @@ TEST(msgbuf, extract_over_uint16_to_size)
 
 TEST(msgbuf, extract_one_uint32_to_size)
 {
-    PLDM_MSGBUF_DEFINE_P(ctx);
+    PLDM_MSGBUF_RO_DEFINE_P(ctx);
     uint32_t buf[1] = {htole32(0x5a00ffa5)};
     size_t val;
 
@@ -1634,7 +1647,7 @@ TEST(msgbuf, extract_one_uint32_to_size)
 
 TEST(msgbuf, extract_under_uint32_to_size)
 {
-    PLDM_MSGBUF_DEFINE_P(ctx);
+    PLDM_MSGBUF_RO_DEFINE_P(ctx);
     uint32_t buf[1] = {};
     size_t val;
 
@@ -1646,7 +1659,7 @@ TEST(msgbuf, extract_under_uint32_to_size)
 
 TEST(msgbuf, extract_over_uint32_to_size)
 {
-    PLDM_MSGBUF_DEFINE_P(ctx);
+    PLDM_MSGBUF_RO_DEFINE_P(ctx);
     uint32_t buf[1] = {};
     size_t val;
 
