@@ -506,7 +506,7 @@ LIBPLDM_ABI_TESTING
 int decode_set_tid_req(const struct pldm_msg *msg, size_t payload_length,
 		       uint8_t *tid)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (!msg || !tid) {
@@ -533,7 +533,7 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 				 uint32_t *section_offset,
 				 uint32_t *section_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || pldm_type == NULL || transfer_opflag == NULL ||
@@ -587,7 +587,7 @@ int encode_pldm_base_multipart_receive_req(
 	uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,
 	struct pldm_msg *msg, size_t *payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (req == NULL || msg == NULL || payload_length == NULL) {
@@ -627,7 +627,7 @@ int decode_pldm_base_multipart_receive_resp(
 	struct pldm_base_multipart_receive_resp *resp,
 	uint32_t *data_integrity_checksum)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || resp == NULL || data_integrity_checksum == NULL) {
@@ -663,7 +663,7 @@ int decode_pldm_base_multipart_receive_resp(
 	if (resp->data.length > 0) {
 		resp->data.ptr = NULL;
 		pldm_msgbuf_span_required(buf, resp->data.length,
-					  (void **)&resp->data.ptr);
+					  (const void **)&resp->data.ptr);
 	}
 
 	if (resp->transfer_flag !=
@@ -680,7 +680,7 @@ int encode_base_multipart_receive_resp(
 	const struct pldm_base_multipart_receive_resp *resp, uint32_t checksum,
 	struct pldm_msg *msg, size_t *payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (!msg || !resp || !payload_length || !resp->data.ptr) {
@@ -795,7 +795,7 @@ int encode_pldm_base_negotiate_transfer_params_req(
 	const struct pldm_base_negotiate_transfer_params_req *req,
 	struct pldm_msg *msg, size_t *payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (req == NULL || msg == NULL || payload_length == NULL) {
@@ -837,7 +837,7 @@ int decode_pldm_base_negotiate_transfer_params_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_base_negotiate_transfer_params_resp *resp)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || resp == NULL) {

@@ -93,7 +93,7 @@ TEST(DecodeDfOpenResp, GoodTest)
 
     struct pldm_file_df_open_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_OPEN_RESP_BYTES;
@@ -124,7 +124,7 @@ TEST(DecodeDfOpenResp, BadTestUnAllocatedPtrParams)
 
     struct pldm_file_df_open_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_OPEN_RESP_BYTES;
@@ -155,7 +155,7 @@ TEST(DecodeDfOpenResp, BadTestInvalidExpectedInputMsgLength)
 
     struct pldm_file_df_open_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_OPEN_RESP_BYTES;
@@ -256,7 +256,7 @@ TEST(DecodeDfCloseResp, GoodTest)
 
     struct pldm_file_df_close_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_CLOSE_RESP_BYTES;
@@ -285,7 +285,7 @@ TEST(DecodeDfCloseResp, BadTestUnAllocatedPtrParams)
 
     struct pldm_file_df_close_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_CLOSE_RESP_BYTES;
@@ -390,7 +390,7 @@ TEST(DecodeDfHeartbeatResp, GoodTest)
 
     struct pldm_file_df_heartbeat_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_HEARTBEAT_RESP_BYTES;
@@ -422,7 +422,7 @@ TEST(DecodeDfHeartbeatResp, BadTestUnAllocatedPtrParams)
 
     struct pldm_file_df_heartbeat_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_HEARTBEAT_RESP_BYTES;
@@ -455,7 +455,7 @@ TEST(DecodeDfHeartbeatResp, BadTestInvalidExpectedInputMsgLength)
 
     struct pldm_file_df_heartbeat_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_HEARTBEAT_RESP_BYTES;
@@ -568,7 +568,7 @@ TEST(DecodeDfOpenReq, GoodTest)
 
     struct pldm_file_df_open_req req_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_OPEN_REQ_BYTES;
@@ -600,7 +600,7 @@ TEST(DecodeDfOpenReq, BadTestUnAllocatedPtrParams)
 
     struct pldm_file_df_open_req req_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_OPEN_REQ_BYTES;
@@ -632,7 +632,7 @@ TEST(DecodeDfOpenReq, BadTestInvalidExpectedInputMsgLength)
 
     struct pldm_file_df_open_req req_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_OPEN_REQ_BYTES;
@@ -701,7 +701,7 @@ TEST(DecodeDfCloseReq, GoodTest)
 
     struct pldm_file_df_close_req req_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_CLOSE_REQ_BYTES;
@@ -733,7 +733,7 @@ TEST(DecodeDfCloseReq, BadTestUnAllocatedPtrParams)
 
     struct pldm_file_df_close_req req_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length = PLDM_DF_CLOSE_REQ_BYTES;

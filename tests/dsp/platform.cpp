@@ -468,10 +468,10 @@ TEST(GetPDR, testGoodDecodeResponseSafe)
     alignas(pldm_msg) unsigned char data[sizeof(pldm_msg_hdr) +
                                          PLDM_GET_PDR_MIN_RESP_BYTES +
                                          sizeof(recordData) - 1 + 1];
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
-    pldm_msg* msg = new (data) pldm_msg;
+    pldm_msg* msg = new (data) pldm_msg();
 
     rc = pldm_msgbuf_init_errno(buf, PLDM_GET_PDR_MIN_RESP_BYTES, msg->payload,
                                 sizeof(data) - sizeof(msg->hdr));
@@ -729,10 +729,10 @@ TEST(GetPDRRepositoryInfo, testGoodDecodeResponseSafe)
         data[sizeof(pldm_msg_hdr) + PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES];
     uint8_t updateTime[PLDM_TIMESTAMP104_SIZE] = {0};
     uint8_t oemUpdateTime[PLDM_TIMESTAMP104_SIZE] = {0};
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
-    pldm_msg* msg = new (data) pldm_msg;
+    pldm_msg* msg = new (data) pldm_msg();
 
     rc = pldm_msgbuf_init_errno(buf, PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES,
                                 msg->payload, sizeof(data) - sizeof(msg->hdr));
@@ -1485,7 +1485,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequestFirstPart)
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
     rc = pldm_msgbuf_init_errno(
         buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES, request->payload,
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES);
@@ -1523,7 +1523,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequestNextPart)
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
     rc = pldm_msgbuf_init_errno(
         buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES, request->payload,
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES);
@@ -1561,7 +1561,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeRequestAckOnly)
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
     rc = pldm_msgbuf_init_errno(
         buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES, request->payload,
         PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_REQ_BYTES);
@@ -2033,7 +2033,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP1)
         eventDataIntegrityChecksum, response, payloadLength);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
     rc = pldm_msgbuf_init_errno(
         buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
         response->payload, payloadLength);
@@ -2092,7 +2092,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP2)
         response, payloadLength);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
     rc = pldm_msgbuf_init_errno(
         buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
         response->payload, payloadLength);
@@ -2131,7 +2131,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP3)
         response, payloadLength);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
     rc = pldm_msgbuf_init_errno(
         buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
         response->payload, payloadLength);
@@ -2179,7 +2179,7 @@ TEST(PollForPlatformEventMessage, testGoodEncodeResposeP4)
         eventDataIntegrityChecksum, response, payloadLength);
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
     rc = pldm_msgbuf_init_errno(
         buf, PLDM_POLL_FOR_PLATFORM_EVENT_MESSAGE_MIN_RESP_BYTES,
         response->payload, payloadLength);
@@ -2346,9 +2346,9 @@ TEST(PlatformEventMessage, testGoodEncodeRequest)
     static constexpr const uint8_t eventData = 34;
     static constexpr const uint8_t Tid = 0x03;
     struct pldm_platform_event_message_req req;
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    const void* data;
     size_t len;
-    void* data;
 
     PLDM_MSG_DEFINE_P(request, PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES +
                                    sizeof(eventData));
@@ -2673,7 +2673,7 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
 
     EXPECT_EQ(rc, PLDM_SUCCESS);
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
 
     rc = pldm_msgbuf_init_errno(
         buf, PLDM_MSG_POLL_EVENT_LENGTH,

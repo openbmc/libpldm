@@ -265,7 +265,7 @@ int decode_set_state_effecter_states_req(const struct pldm_msg *msg,
 					 uint8_t *comp_effecter_count,
 					 set_effecter_state_field *field)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 	int i;
 
@@ -314,7 +314,7 @@ int decode_get_pdr_req(const struct pldm_msg *msg, size_t payload_length,
 		       uint8_t *transfer_op_flag, uint16_t *request_cnt,
 		       uint16_t *record_chg_num)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || record_hndl == NULL || data_transfer_hndl == NULL ||
@@ -466,7 +466,7 @@ int decode_get_pdr_repository_info_resp(
 	uint32_t *repository_size, uint32_t *largest_record_size,
 	uint8_t *data_transfer_handle_timeout)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || completion_code == NULL ||
@@ -533,7 +533,7 @@ int decode_get_pdr_repository_info_resp_safe(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_pdr_repository_info_resp *resp)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || resp == NULL) {
@@ -626,7 +626,7 @@ int decode_get_pdr_resp(const struct pldm_msg *msg, size_t payload_length,
 			uint8_t *record_data, size_t record_data_length,
 			uint8_t *transfer_crc)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || completion_code == NULL ||
@@ -688,7 +688,7 @@ int decode_get_pdr_resp_safe(const struct pldm_msg *msg, size_t payload_length,
 			     struct pldm_get_pdr_resp *resp, size_t resp_len,
 			     uint8_t *transfer_crc)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || resp == NULL || transfer_crc == NULL) {
@@ -742,7 +742,7 @@ int decode_set_numeric_effecter_value_req(const struct pldm_msg *msg,
 					  uint8_t *effecter_data_size,
 					  uint8_t effecter_value[4])
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || effecter_id == NULL || effecter_data_size == NULL ||
@@ -966,7 +966,7 @@ int decode_get_state_sensor_readings_resp(const struct pldm_msg *msg,
 					  uint8_t *comp_sensor_count,
 					  get_sensor_state_field *field)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	uint8_t i;
 	int rc;
 
@@ -1022,7 +1022,7 @@ int decode_get_state_sensor_readings_req(const struct pldm_msg *msg,
 					 bitfield8_t *sensor_rearm,
 					 uint8_t *reserved)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || sensor_id == NULL || sensor_rearm == NULL) {
@@ -1091,7 +1091,7 @@ int decode_platform_event_message_req(const struct pldm_msg *msg,
 				      uint8_t *event_class,
 				      size_t *event_data_offset)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || format_version == NULL || tid == NULL ||
@@ -1145,7 +1145,7 @@ int decode_poll_for_platform_event_message_req(
 	uint8_t *format_version, uint8_t *transfer_operation_flag,
 	uint32_t *data_transfer_handle, uint16_t *event_id_to_acknowledge)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || format_version == NULL ||
@@ -1231,7 +1231,7 @@ int encode_poll_for_platform_event_message_resp(
 	uint8_t *event_data, uint32_t checksum, struct pldm_msg *msg,
 	size_t payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (!msg) {
@@ -1371,7 +1371,7 @@ int decode_platform_event_message_resp(const struct pldm_msg *msg,
 				       uint8_t *completion_code,
 				       uint8_t *platform_event_status)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || completion_code == NULL ||
@@ -1441,7 +1441,7 @@ int decode_event_message_buffer_size_resp(const struct pldm_msg *msg,
 					  uint8_t *completion_code,
 					  uint16_t *terminus_max_buffer_size)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || completion_code == NULL ||
@@ -1516,7 +1516,7 @@ int decode_event_message_supported_resp(const struct pldm_msg *msg,
 					uint8_t *event_class,
 					uint8_t event_class_count)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int i;
 	int rc;
 
@@ -1589,7 +1589,7 @@ int decode_sensor_event_data(const uint8_t *event_data,
 			     uint8_t *sensor_event_class_type,
 			     size_t *event_class_data_offset)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (event_data == NULL || sensor_id == NULL ||
@@ -1656,7 +1656,7 @@ LIBPLDM_ABI_STABLE
 int decode_sensor_op_data(const uint8_t *sensor_data, size_t sensor_data_length,
 			  uint8_t *present_op_state, uint8_t *previous_op_state)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (sensor_data == NULL || present_op_state == NULL ||
@@ -1688,7 +1688,7 @@ int decode_state_sensor_data(const uint8_t *sensor_data,
 			     uint8_t *event_state,
 			     uint8_t *previous_event_state)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (sensor_data == NULL || sensor_offset == NULL ||
@@ -1722,7 +1722,7 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 			       uint8_t *sensor_data_size,
 			       uint32_t *present_reading)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (sensor_data == NULL || sensor_data_size == NULL ||
@@ -1815,7 +1815,7 @@ int decode_numeric_sensor_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_sensor_value_pdr *pdr_value)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (!pdr_data || !pdr_value) {
@@ -2027,7 +2027,7 @@ int decode_get_numeric_effecter_value_req(const struct pldm_msg *msg,
 					  size_t payload_length,
 					  uint16_t *effecter_id)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || effecter_id == NULL) {
@@ -2060,7 +2060,7 @@ int decode_get_numeric_effecter_value_resp(const struct pldm_msg *msg,
 					   uint8_t *pending_value,
 					   uint8_t *present_value)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || effecter_data_size == NULL ||
@@ -2187,7 +2187,7 @@ int decode_pldm_pdr_repository_chg_event_data(const uint8_t *event_data,
 					      uint8_t *number_of_change_records,
 					      size_t *change_record_data_offset)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (event_data == NULL || event_data_format == NULL ||
@@ -2222,7 +2222,7 @@ int decode_pldm_message_poll_event_data(
 	const void *event_data, size_t event_data_length,
 	struct pldm_message_poll_event *poll_event)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (!event_data || !poll_event) {
@@ -2255,7 +2255,7 @@ int encode_pldm_message_poll_event_data(
 	const struct pldm_message_poll_event *poll_event, void *event_data,
 	size_t event_data_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (poll_event == NULL || event_data == NULL) {
@@ -2284,7 +2284,7 @@ int decode_pldm_pdr_repository_change_record_data(
 	uint8_t *event_data_operation, uint8_t *number_of_change_entries,
 	size_t *change_entry_data_offset)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (change_record_data == NULL || event_data_operation == NULL ||
@@ -2351,7 +2351,7 @@ int decode_get_sensor_reading_resp(
 	uint8_t *present_state, uint8_t *previous_state, uint8_t *event_state,
 	uint8_t *present_reading)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || completion_code == NULL ||
@@ -2479,7 +2479,7 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
 				  size_t payload_length, uint16_t *sensor_id,
 				  uint8_t *rearm_event_state)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || sensor_id == NULL || rearm_event_state == NULL) {
@@ -2508,7 +2508,7 @@ int decode_set_numeric_sensor_enable_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_numeric_sensor_enable_req *req)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	uint8_t event_enable = 0;
 	uint8_t op_state = 0;
 	int rc;
@@ -2550,7 +2550,7 @@ int decode_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_state_sensor_enables_req *req)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || req == NULL) {
@@ -2621,7 +2621,7 @@ int encode_get_event_receiver_resp(
 	struct pldm_get_event_receiver_resp *event_receiver_info,
 	struct pldm_msg *msg, size_t *payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 	if (!msg || !event_receiver_info) {
 		return -EINVAL;
@@ -2661,7 +2661,7 @@ int decode_get_event_receiver_resp(const struct pldm_msg *msg,
 				   size_t payload_length,
 				   struct pldm_get_event_receiver_resp *resp)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 	if (!msg) {
 		return -EINVAL;
@@ -2742,7 +2742,7 @@ int decode_set_event_receiver_resp(const struct pldm_msg *msg,
 				   size_t payload_length,
 				   uint8_t *completion_code)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || completion_code == NULL) {
@@ -2774,7 +2774,7 @@ int decode_set_event_receiver_req(const struct pldm_msg *msg,
 				  uint16_t *heartbeat_timer)
 
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || event_message_global_enable == NULL ||
@@ -2849,7 +2849,7 @@ int encode_poll_for_platform_event_message_req(uint8_t instance_id,
 					       struct pldm_msg *msg,
 					       size_t payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL) {
@@ -2901,7 +2901,7 @@ int decode_poll_for_platform_event_message_resp(
 	uint8_t *event_class, uint32_t *event_data_size, void **event_data,
 	uint32_t *event_data_integrity_checksum)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || completion_code == NULL || tid == NULL ||
@@ -2952,7 +2952,8 @@ int decode_poll_for_platform_event_message_resp(
 	}
 
 	if (*event_data_size > 0) {
-		pldm_msgbuf_span_required(buf, *event_data_size, event_data);
+		pldm_msgbuf_span_required(buf, *event_data_size,
+					  (const void **)event_data);
 	}
 
 	if (*transfer_flag == PLDM_END ||
@@ -2973,7 +2974,7 @@ int decode_numeric_effecter_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_effecter_value_pdr *pdr_value)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	struct pldm_value_pdr_hdr hdr;
 	int rc;
 
@@ -3069,7 +3070,7 @@ int encode_get_state_effecter_states_req(uint8_t instance_id,
 					 struct pldm_msg *msg,
 					 size_t payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL) {
@@ -3104,7 +3105,7 @@ int decode_get_state_effecter_states_req(const struct pldm_msg *msg,
 					 size_t payload_length,
 					 uint16_t *effecter_id)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (msg == NULL || effecter_id == NULL) {
@@ -3128,7 +3129,7 @@ int decode_get_state_effecter_states_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_get_state_effecter_states_resp *resp)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	get_effecter_state_field *field;
 	int rc;
 	int i;
@@ -3180,7 +3181,7 @@ int encode_get_state_effecter_states_resp(
 	uint8_t instance_id, struct pldm_get_state_effecter_states_resp *resp,
 	struct pldm_msg *msg, size_t payload_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	get_effecter_state_field *field;
 	int rc;
 	int i;
@@ -3232,11 +3233,11 @@ int decode_entity_auxiliary_names_pdr(
 	const void *data, size_t data_length,
 	struct pldm_entity_auxiliary_names_pdr *pdr, size_t pdr_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
-	PLDM_MSGBUF_DEFINE_P(src);
-	PLDM_MSGBUF_DEFINE_P(dst);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(src);
+	PLDM_MSGBUF_RW_DEFINE_P(dst);
+	const void *names = NULL;
 	size_t names_len = 0;
-	void *names = NULL;
 	int rc;
 	int i;
 
@@ -3355,7 +3356,7 @@ LIBPLDM_ABI_STABLE
 int decode_pldm_entity_auxiliary_names_pdr_index(
 	struct pldm_entity_auxiliary_names_pdr *pdr)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 	int i;
 
@@ -3398,13 +3399,13 @@ int decode_pldm_entity_auxiliary_names_pdr_index(
 
 	for (i = 0; i < pdr->name_string_count; i++) {
 		void *loc = NULL;
-		pldm_msgbuf_span_string_utf16(buf, &loc, NULL);
+		pldm_msgbuf_span_string_utf16(buf, (const void **)&loc, NULL);
 		pdr->names[i].name = loc;
 	}
 
 	for (i = 0; i < pdr->name_string_count; i++) {
 		void *loc = NULL;
-		pldm_msgbuf_span_string_ascii(buf, &loc, NULL);
+		pldm_msgbuf_span_string_ascii(buf, (const void **)&loc, NULL);
 		pdr->names[i].tag = loc;
 	}
 
@@ -3417,7 +3418,7 @@ int decode_pldm_platform_cper_event(const void *event_data,
 				    struct pldm_platform_cper_event *cper_event,
 				    size_t cper_event_length)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (!cper_event || !event_data) {
@@ -3477,7 +3478,7 @@ int decode_pldm_platform_file_descriptor_pdr(
 	const void *data, size_t data_length,
 	struct pldm_platform_file_descriptor_pdr *pdr)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
 	if (!data || !pdr) {
@@ -3519,7 +3520,7 @@ int decode_pldm_platform_file_descriptor_pdr(
 	}
 
 	pldm_msgbuf_span_required(buf, pdr->file_name.length,
-				  (void **)&pdr->file_name.ptr);
+				  (const void **)&pdr->file_name.ptr);
 
 	pdr->oem_file_classification_name.length = 0;
 
@@ -3532,7 +3533,7 @@ int decode_pldm_platform_file_descriptor_pdr(
 
 		pldm_msgbuf_span_required(
 			buf, pdr->oem_file_classification_name.length,
-			(void **)&pdr->oem_file_classification_name.ptr);
+			(const void **)&pdr->oem_file_classification_name.ptr);
 	}
 
 	return pldm_msgbuf_complete_consumed(buf);
