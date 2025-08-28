@@ -255,7 +255,7 @@ struct pldm_msg {
 #ifdef __cplusplus
 #define PLDM_MSG_DEFINE_P(name, size)                                          \
 	PLDM_MSG_BUFFER(name##_buf, size);                                     \
-	auto *(name) = new (name##_buf) pldm_msg
+	auto *(name) = new (name##_buf) pldm_msg()
 #endif
 
 /**

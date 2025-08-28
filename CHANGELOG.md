@@ -72,6 +72,10 @@ Change categories:
 
 ### Fixed
 
+- msgbuf: Define a seperate msgbuf structure, pldm_msgbuf_rw and pldm_msg_ro,
+  for pldm encode/decode functions. And fix msgbuf related functions to take
+  appropriate type.
+
 ### Security
 
 ## [0.14.0] 2025-08-11

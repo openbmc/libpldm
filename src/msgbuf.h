@@ -31,6 +31,16 @@
  */
 
 #ifdef __cplusplus
+
+#include <type_traits>
+
+template <typename T> static inline int pldm_msgbuf_discard(T ctx, int error);
+template <typename T> static inline int pldm_msgbuf_complete(T ctx);
+template <typename T> static inline int pldm_msgbuf_complete_consumed(T ctx);
+template <typename T> static inline int pldm_msgbuf_validate(T ctx);
+template <typename T> static inline int pldm_msgbuf_consumed(T ctx);
+template <typename T> static inline int pldm_msgbuf_invalidate(T ctx);
+
 /*
  * Fix up C11's _Static_assert() vs C++'s static_assert().
  *
@@ -71,37 +81,132 @@ static struct {
 	int compliance;
 } build_assertions LIBPLDM_CC_UNUSED;
 
-struct pldm_msgbuf {
+struct pldm_msgbuf_rw {
 	uint8_t *cursor;
+	intmax_t remaining;
+};
+
+struct pldm_msgbuf_ro {
+	const uint8_t *cursor;
 	intmax_t remaining;
 };
 
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-void pldm__msgbuf_cleanup(struct pldm_msgbuf *ctx LIBPLDM_CC_UNUSED)
+void pldm__msgbuf_rw_cleanup(struct pldm_msgbuf_rw *ctx LIBPLDM_CC_UNUSED)
+{
+	assert(ctx->cursor == NULL && ctx->remaining == INTMAX_MIN);
+}
+
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+void pldm__msgbuf_ro_cleanup(struct pldm_msgbuf_ro *ctx LIBPLDM_CC_UNUSED)
 {
 	assert(ctx->cursor == NULL && ctx->remaining == INTMAX_MIN);
 }
 
 #ifdef __cplusplus
 // NOLINTBEGIN(bugprone-macro-parentheses)
-#define PLDM_MSGBUF_DEFINE_P(name)                                             \
-	struct pldm_msgbuf _##name LIBPLDM_CC_CLEANUP(                         \
-		pldm__msgbuf_cleanup) = { NULL, INTMAX_MIN };                  \
+#define PLDM_MSGBUF_RW_DEFINE_P(name)                                          \
+	struct pldm_msgbuf_rw _##name LIBPLDM_CC_CLEANUP(                      \
+		pldm__msgbuf_rw_cleanup) = { NULL, INTMAX_MIN };               \
+	auto *name = &(_##name)
+
+#define PLDM_MSGBUF_RO_DEFINE_P(name)                                          \
+	struct pldm_msgbuf_ro _##name LIBPLDM_CC_CLEANUP(                      \
+		pldm__msgbuf_ro_cleanup) = { NULL, INTMAX_MIN };               \
 	auto *name = &(_##name)
 // NOLINTEND(bugprone-macro-parentheses)
 #else
-#define PLDM_MSGBUF_DEFINE_P(name)                                             \
-	struct pldm_msgbuf _##name LIBPLDM_CC_CLEANUP(                         \
-		pldm__msgbuf_cleanup) = { NULL, INTMAX_MIN };                  \
-	struct pldm_msgbuf *(name) = &(_##name)
+#define PLDM_MSGBUF_RW_DEFINE_P(name)                                          \
+	struct pldm_msgbuf_rw _##name LIBPLDM_CC_CLEANUP(                      \
+		pldm__msgbuf_rw_cleanup) = { NULL, INTMAX_MIN };               \
+	struct pldm_msgbuf_rw *(name) = &(_##name)
+
+#define PLDM_MSGBUF_RO_DEFINE_P(name)                                          \
+	struct pldm_msgbuf_ro _##name LIBPLDM_CC_CLEANUP(                      \
+		pldm__msgbuf_ro_cleanup) = { NULL, INTMAX_MIN };               \
+	struct pldm_msgbuf_ro *(name) = &(_##name)
 #endif
+
+/*
+ * Use the C11 `_Generic` keyword to keep pldm_msgbuf related function consistent
+ * and to produce compile-time errors when the wrong pldm_msgbuf type is passed.
+ *
+ * Previously we cast away `const` in `pldm_msgbuf_init_error()`, which was a hack.
+ * Instead, introduce:
+ *   - pldm_msgbuf_ro: read-only buffer with a `const` cursor
+ *   - pldm_msgbuf_rw: read–write buffer with a non-const cursor
+ *
+ * `pldm_msgbuf_ro` is used by decode APIs to extract payloads into PLDM
+ * structures. `pldm_msgbuf_rw` is used by encode APIs to insert payloads from
+ * PLDM structures.
+ */
+#ifndef __cplusplus
+#define pldm_msgbuf_init_errno(ctx, minsize, buf, len)                         \
+	_Generic((ctx),                                                        \
+		struct pldm_msgbuf_rw *: pldm_msgbuf_rw_init_errno,            \
+		struct pldm_msgbuf_ro *: pldm_msgbuf_ro_init_errno)(           \
+		ctx, minsize, buf, len)
+
+#define pldm_msgbuf_discard(ctx, error)                                        \
+	_Generic((ctx),                                                        \
+		struct pldm_msgbuf_rw *: pldm_msgbuf_rw_discard,               \
+		struct pldm_msgbuf_ro *: pldm_msgbuf_ro_discard)(ctx, error)
+
+#define pldm_msgbuf_complete(ctx)                                              \
+	_Generic((ctx),                                                        \
+		struct pldm_msgbuf_rw *: pldm_msgbuf_rw_complete,              \
+		struct pldm_msgbuf_ro *: pldm_msgbuf_ro_complete)(ctx)
+
+#define pldm_msgbuf_complete_consumed(ctx)                                     \
+	_Generic((ctx),                                                        \
+		struct pldm_msgbuf_rw *: pldm_msgbuf_rw_complete_consumed,     \
+		struct pldm_msgbuf_ro *: pldm_msgbuf_ro_complete_consumed)(    \
+		ctx)
+
+#define pldm_msgbuf_validate(ctx)                                              \
+	_Generic((ctx),                                                        \
+		struct pldm_msgbuf_rw *: pldm_msgbuf_rw_validate,              \
+		struct pldm_msgbuf_ro *: pldm_msgbuf_ro_validate)(ctx)
+
+#define pldm_msgbuf_consumed(ctx)                                              \
+	_Generic((ctx),                                                        \
+		struct pldm_msgbuf_rw *: pldm_msgbuf_rw_consumed,              \
+		struct pldm_msgbuf_ro *: pldm_msgbuf_ro_consumed)(ctx)
+
+#define pldm_msgbuf_invalidate(ctx)                                            \
+	_Generic((ctx),                                                        \
+		struct pldm_msgbuf_rw *: pldm_msgbuf_rw_invalidate,            \
+		struct pldm_msgbuf_ro *: pldm_msgbuf_ro_invalidate)(ctx)
+#endif
+
+#define pldm_msgbuf_span_required(ctx, required, cursor)                       \
+	pldm_msgbuf_span_required_impl((void *)(ctx), required, cursor)
+#define pldm_msgbuf_span_string_ascii(ctx, cursor, len)                        \
+	pldm_msgbuf_span_string_ascii_impl((void *)(ctx), cursor, len)
+#define pldm_msgbuf_span_string_utf16(ctx, cursor, len)                        \
+	pldm_msgbuf_span_string_utf16_impl((void *)(ctx), cursor, len)
+#define pldm_msgbuf_span_remaining(ctx, cursor, len)                           \
+	pldm_msgbuf_span_remaining_impl((void *)(ctx), cursor, len)
+#define pldm_msgbuf_span_until(ctx, trailer, cursor, length)                   \
+	pldm_msgbuf_span_until_impl((void *)(ctx), trailer, cursor, length)
 
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-int pldm__msgbuf_invalidate(struct pldm_msgbuf *ctx)
+int pldm_msgbuf_rw_invalidate(struct pldm_msgbuf_rw *ctx)
+{
+	ctx->remaining = INTMAX_MIN;
+	return -EOVERFLOW;
+}
+
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+int pldm_msgbuf_ro_invalidate(struct pldm_msgbuf_ro *ctx)
 {
 	ctx->remaining = INTMAX_MIN;
 	return -EOVERFLOW;
@@ -110,7 +215,7 @@ int pldm__msgbuf_invalidate(struct pldm_msgbuf *ctx)
 /**
  * @brief Initialize pldm buf struct for buf extractor
  *
- * @param[out] ctx - pldm_msgbuf context for extractor
+ * @param[out] ctx - pldm_msgbuf_rw context for extractor
  * @param[in] minsize - The minimum required length of buffer `buf`
  * @param[in] buf - buffer to be extracted
  * @param[in] len - size of buffer
@@ -123,26 +228,67 @@ LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
 int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm_msgbuf_init_errno(struct pldm_msgbuf *ctx, size_t minsize, const void *buf,
-		       size_t len)
+pldm_msgbuf_rw_init_errno(struct pldm_msgbuf_rw *ctx, size_t minsize,
+			  const void *buf, size_t len)
 {
 	ctx->cursor = NULL;
 
 	if ((minsize > len)) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 
 #if INTMAX_MAX < SIZE_MAX
 	if (len > INTMAX_MAX) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 #endif
 
 	if (UINTPTR_MAX - (uintptr_t)buf < len) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 
 	ctx->cursor = (uint8_t *)buf;
+	ctx->remaining = (intmax_t)len;
+
+	return 0;
+}
+
+/**
+ * @brief Initialize pldm buf struct for buf extractor
+ *
+ * @param[out] ctx - pldm_msgbuf_ro context for extractor
+ * @param[in] minsize - The minimum required length of buffer `buf`
+ * @param[in] buf - buffer to be extracted
+ * @param[in] len - size of buffer
+ *
+ * @return 0 on success, otherwise an error code appropriate for the current
+ *         personality.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm_msgbuf_ro_init_errno(struct pldm_msgbuf_ro *ctx, size_t minsize,
+			  const void *buf, size_t len)
+{
+	ctx->cursor = NULL;
+
+	if ((minsize > len)) {
+		return pldm_msgbuf_invalidate(ctx);
+	}
+
+#if INTMAX_MAX < SIZE_MAX
+	if (len > INTMAX_MAX) {
+		return pldm_msgbuf_invalidate(ctx);
+	}
+#endif
+
+	if (UINTPTR_MAX - (uintptr_t)buf < len) {
+		return pldm_msgbuf_invalidate(ctx);
+	}
+
+	ctx->cursor = (const uint8_t *)buf;
 	ctx->remaining = (intmax_t)len;
 
 	return 0;
@@ -162,7 +308,30 @@ pldm_msgbuf_init_errno(struct pldm_msgbuf *ctx, size_t minsize, const void *buf,
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
-int pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
+int pldm_msgbuf_ro_validate(struct pldm_msgbuf_ro *ctx)
+{
+	if (ctx->remaining < 0) {
+		return -EOVERFLOW;
+	}
+
+	return 0;
+}
+
+/**
+ * @brief Validate buffer overflow state
+ *
+ * @param[in] ctx - pldm_msgbuf context for extractor
+ *
+ * @return PLDM_SUCCESS if there are zero or more bytes of data that remain
+ * unread from the buffer. Otherwise, PLDM_ERROR_INVALID_LENGTH indicates that a
+ * prior accesses would have occurred beyond the bounds of the buffer, and
+ * PLDM_ERROR_INVALID_DATA indicates that the provided context was not a valid
+ * pointer.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int pldm_msgbuf_rw_validate(struct pldm_msgbuf_rw *ctx)
 {
 	if (ctx->remaining < 0) {
 		return -EOVERFLOW;
@@ -174,7 +343,7 @@ int pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
 /**
  * @brief Test whether a message buffer has been exactly consumed
  *
- * @param[in] ctx - pldm_msgbuf context for extractor
+ * @param[in] ctx - pldm_msgbuf_ro context for extractor
  *
  * @return 0 iff there are zero bytes of data that remain unread from the buffer
  * and no overflow has occurred. Otherwise, -EBADMSG if the buffer has not been
@@ -184,7 +353,7 @@ int pldm_msgbuf_validate(struct pldm_msgbuf *ctx)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
-int pldm_msgbuf_consumed(struct pldm_msgbuf *ctx)
+int pldm_msgbuf_ro_consumed(struct pldm_msgbuf_ro *ctx)
 {
 	if (ctx->remaining > 0) {
 		return -EBADMSG;
@@ -198,48 +367,112 @@ int pldm_msgbuf_consumed(struct pldm_msgbuf *ctx)
 }
 
 /**
- * @brief End use of a msgbuf under error conditions
+ * @brief Test whether a message buffer has been exactly consumed
  *
- * @param[in] ctx - The msgbuf instance to discard
+ * @param[in] ctx - pldm_msgbuf_rw context for extractor
+ *
+ * @return 0 iff there are zero bytes of data that remain unread from the buffer
+ * and no overflow has occurred. Otherwise, -EBADMSG if the buffer has not been
+ * completely consumed, or -EOVERFLOW if accesses were attempted beyond the
+ * bounds of the buffer.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int pldm_msgbuf_rw_consumed(struct pldm_msgbuf_rw *ctx)
+{
+	if (ctx->remaining > 0) {
+		return -EBADMSG;
+	}
+
+	if (ctx->remaining < 0) {
+		return -EOVERFLOW;
+	}
+
+	return 0;
+}
+
+/**
+ * @brief End use of a msgbuf_rw under error conditions
+ *
+ * @param[in] ctx - The msgbuf_rw instance to discard
  * @param[in] error - The error value to propagate
  *
- * Under normal conditions use of a msgbuf instance must be ended using @ref
+ * Under normal conditions use of a msgbuf_rw instance must be ended using @ref
  * pldm_msgbuf_complete or one of its related APIs. Under error conditions, @ref
  * pldm_msgbuf_discard should be used instead, as it makes it straight-forward
- * to finalise the msgbuf while propagating the existing error code.
+ * to finalise the msgbuf_rw while propagating the existing error code.
  *
  * @return The value provided in @param error
  */
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
-int pldm_msgbuf_discard(struct pldm_msgbuf *ctx, int error)
+int pldm_msgbuf_rw_discard(struct pldm_msgbuf_rw *ctx, int error)
 {
 	ctx->cursor = NULL;
-	pldm__msgbuf_invalidate(ctx);
+	pldm_msgbuf_invalidate(ctx);
 	return error;
 }
 
 /**
- * @brief Complete the pldm_msgbuf instance
+ * @brief End use of a msgbuf_ro under error conditions
  *
- * @param[in] ctx - pldm_msgbuf context for extractor
+ * @param[in] ctx - The msgbuf_ro instance to discard
+ * @param[in] error - The error value to propagate
+ *
+ * Under normal conditions use of a msgbuf_ro instance must be ended using @ref
+ * pldm_msgbuf_complete or one of its related APIs. Under error conditions, @ref
+ * pldm_msgbuf_discard should be used instead, as it makes it straight-forward
+ * to finalise the msgbuf_ro while propagating the existing error code.
+ *
+ * @return The value provided in @param error
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int pldm_msgbuf_ro_discard(struct pldm_msgbuf_ro *ctx, int error)
+{
+	ctx->cursor = NULL;
+	pldm_msgbuf_invalidate(ctx);
+	return error;
+}
+
+/**
+ * @brief Complete the pldm_msgbuf_rw instance
+ *
+ * @param[in] ctx - pldm_msgbuf_rw context for extractor
  *
  * @return 0 if all buffer accesses were in-bounds, -EOVERFLOW otherwise.
  */
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
-int pldm_msgbuf_complete(struct pldm_msgbuf *ctx)
+int pldm_msgbuf_rw_complete(struct pldm_msgbuf_rw *ctx)
 {
 	return pldm_msgbuf_discard(ctx, pldm_msgbuf_validate(ctx));
 }
 
 /**
- * @brief Complete the pldm_msgbuf instance, and check that the underlying buffer
+ * @brief Complete the pldm_msgbuf_ro instance
+ *
+ * @param[in] ctx - pldm_msgbuf_ro context for extractor
+ *
+ * @return 0 if all buffer accesses were in-bounds, -EOVERFLOW otherwise.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int pldm_msgbuf_ro_complete(struct pldm_msgbuf_ro *ctx)
+{
+	return pldm_msgbuf_discard(ctx, pldm_msgbuf_validate(ctx));
+}
+
+/**
+ * @brief Complete the pldm_msgbuf_rw instance, and check that the underlying buffer
  * has been entirely consumed without overflow
  *
- * @param[in] ctx - pldm_msgbuf context
+ * @param[in] ctx - pldm_msgbuf_rw context
  *
  * @return 0 if all buffer access were in-bounds and completely consume the
  * underlying buffer. Otherwise, -EBADMSG if the buffer has not been completely
@@ -249,7 +482,26 @@ int pldm_msgbuf_complete(struct pldm_msgbuf *ctx)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
-int pldm_msgbuf_complete_consumed(struct pldm_msgbuf *ctx)
+int pldm_msgbuf_rw_complete_consumed(struct pldm_msgbuf_rw *ctx)
+{
+	return pldm_msgbuf_discard(ctx, pldm_msgbuf_consumed(ctx));
+}
+
+/**
+ * @brief Complete the pldm_msgbuf_ro instance, and check that the underlying buffer
+ * has been entirely consumed without overflow
+ *
+ * @param[in] ctx - pldm_msgbuf_ro context
+ *
+ * @return 0 if all buffer access were in-bounds and completely consume the
+ * underlying buffer. Otherwise, -EBADMSG if the buffer has not been completely
+ * consumed, or -EOVERFLOW if accesses were attempted beyond the bounds of the
+ * buffer.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+int pldm_msgbuf_ro_complete_consumed(struct pldm_msgbuf_ro *ctx)
 {
 	return pldm_msgbuf_discard(ctx, pldm_msgbuf_consumed(ctx));
 }
@@ -357,7 +609,7 @@ int pldm_msgbuf_complete_consumed(struct pldm_msgbuf *ctx)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_uint8(struct pldm_msgbuf *ctx, void *dst)
+pldm__msgbuf_extract_uint8(struct pldm_msgbuf_ro *ctx, void *dst)
 {
 	if (ctx->remaining >= (intmax_t)sizeof(uint8_t)) {
 		assert(ctx->cursor);
@@ -372,7 +624,7 @@ pldm__msgbuf_extract_uint8(struct pldm_msgbuf *ctx, void *dst)
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 #define pldm_msgbuf_extract_int8(ctx, dst)                                     \
@@ -381,7 +633,7 @@ pldm__msgbuf_extract_uint8(struct pldm_msgbuf *ctx, void *dst)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_int8(struct pldm_msgbuf *ctx, void *dst)
+pldm__msgbuf_extract_int8(struct pldm_msgbuf_ro *ctx, void *dst)
 {
 	if (ctx->remaining >= (intmax_t)sizeof(int8_t)) {
 		assert(ctx->cursor);
@@ -396,7 +648,7 @@ pldm__msgbuf_extract_int8(struct pldm_msgbuf *ctx, void *dst)
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 #define pldm_msgbuf_extract_uint16(ctx, dst)                                   \
@@ -405,7 +657,7 @@ pldm__msgbuf_extract_int8(struct pldm_msgbuf *ctx, void *dst)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_uint16(struct pldm_msgbuf *ctx, void *dst)
+pldm__msgbuf_extract_uint16(struct pldm_msgbuf_ro *ctx, void *dst)
 {
 	uint16_t ldst;
 
@@ -438,7 +690,7 @@ pldm__msgbuf_extract_uint16(struct pldm_msgbuf *ctx, void *dst)
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 #define pldm_msgbuf_extract_int16(ctx, dst)                                    \
@@ -447,7 +699,7 @@ pldm__msgbuf_extract_uint16(struct pldm_msgbuf *ctx, void *dst)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_int16(struct pldm_msgbuf *ctx, void *dst)
+pldm__msgbuf_extract_int16(struct pldm_msgbuf_ro *ctx, void *dst)
 {
 	int16_t ldst;
 
@@ -471,7 +723,7 @@ pldm__msgbuf_extract_int16(struct pldm_msgbuf *ctx, void *dst)
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 #define pldm_msgbuf_extract_uint32(ctx, dst)                                   \
@@ -480,7 +732,7 @@ pldm__msgbuf_extract_int16(struct pldm_msgbuf *ctx, void *dst)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_uint32(struct pldm_msgbuf *ctx, void *dst)
+pldm__msgbuf_extract_uint32(struct pldm_msgbuf_ro *ctx, void *dst)
 {
 	uint32_t ldst;
 
@@ -504,7 +756,7 @@ pldm__msgbuf_extract_uint32(struct pldm_msgbuf *ctx, void *dst)
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 #define pldm_msgbuf_extract_int32(ctx, dst)                                    \
@@ -513,7 +765,7 @@ pldm__msgbuf_extract_uint32(struct pldm_msgbuf *ctx, void *dst)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_int32(struct pldm_msgbuf *ctx, void *dst)
+pldm__msgbuf_extract_int32(struct pldm_msgbuf_ro *ctx, void *dst)
 {
 	int32_t ldst;
 
@@ -537,7 +789,7 @@ pldm__msgbuf_extract_int32(struct pldm_msgbuf *ctx, void *dst)
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 #define pldm_msgbuf_extract_real32(ctx, dst)                                   \
@@ -546,7 +798,7 @@ pldm__msgbuf_extract_int32(struct pldm_msgbuf *ctx, void *dst)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_real32(struct pldm_msgbuf *ctx, void *dst)
+pldm__msgbuf_extract_real32(struct pldm_msgbuf_ro *ctx, void *dst)
 {
 	uint32_t ldst;
 
@@ -573,7 +825,7 @@ pldm__msgbuf_extract_real32(struct pldm_msgbuf *ctx, void *dst)
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 /**
@@ -621,7 +873,7 @@ LIBPLDM_CC_NONNULL
 LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_array_void(struct pldm_msgbuf *ctx, size_t count,
+pldm__msgbuf_extract_array_void(struct pldm_msgbuf_ro *ctx, size_t count,
 				void *dst, size_t dst_count)
 {
 	if (count > dst_count) {
@@ -634,7 +886,7 @@ pldm__msgbuf_extract_array_void(struct pldm_msgbuf *ctx, size_t count,
 
 #if INTMAX_MAX < SIZE_MAX
 	if (count > INTMAX_MAX) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 #endif
 
@@ -651,7 +903,7 @@ pldm__msgbuf_extract_array_void(struct pldm_msgbuf *ctx, size_t count,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 /**
@@ -660,8 +912,8 @@ pldm__msgbuf_extract_array_void(struct pldm_msgbuf *ctx, size_t count,
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_extract_array_char(struct pldm_msgbuf *ctx, size_t count, char *dst,
-			       size_t dst_count)
+pldm_msgbuf_extract_array_char(struct pldm_msgbuf_ro *ctx, size_t count,
+			       char *dst, size_t dst_count)
 {
 	return pldm__msgbuf_extract_array_void(ctx, count, dst, dst_count);
 }
@@ -672,7 +924,7 @@ pldm_msgbuf_extract_array_char(struct pldm_msgbuf *ctx, size_t count, char *dst,
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, size_t count,
+pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf_ro *ctx, size_t count,
 				uint8_t *dst, size_t dst_count)
 {
 	return pldm__msgbuf_extract_array_void(ctx, count, dst, dst_count);
@@ -698,8 +950,8 @@ pldm_msgbuf_extract_array_uint8(struct pldm_msgbuf *ctx, size_t count,
 						      dst_count)
 
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint64(struct pldm_msgbuf *ctx,
-						       const uint64_t src)
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_insert_uint64(struct pldm_msgbuf_rw *ctx, const uint64_t src)
 {
 	uint64_t val = htole64(src);
 
@@ -721,12 +973,12 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint64(struct pldm_msgbuf *ctx,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx,
-						       const uint32_t src)
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_insert_uint32(struct pldm_msgbuf_rw *ctx, const uint32_t src)
 {
 	uint32_t val = htole32(src);
 
@@ -748,12 +1000,12 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint32(struct pldm_msgbuf *ctx,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint16(struct pldm_msgbuf *ctx,
-						       const uint16_t src)
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_insert_uint16(struct pldm_msgbuf_rw *ctx, const uint16_t src)
 {
 	uint16_t val = htole16(src);
 
@@ -775,12 +1027,12 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint16(struct pldm_msgbuf *ctx,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint8(struct pldm_msgbuf *ctx,
-						      const uint8_t src)
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_insert_uint8(struct pldm_msgbuf_rw *ctx, const uint8_t src)
 {
 	static_assert(
 		// NOLINTNEXTLINE(bugprone-sizeof-expression)
@@ -800,12 +1052,12 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_uint8(struct pldm_msgbuf *ctx,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int32(struct pldm_msgbuf *ctx,
-						      const int32_t src)
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_insert_int32(struct pldm_msgbuf_rw *ctx, const int32_t src)
 {
 	int32_t val = htole32(src);
 
@@ -827,12 +1079,12 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int32(struct pldm_msgbuf *ctx,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int16(struct pldm_msgbuf *ctx,
-						      const int16_t src)
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_insert_int16(struct pldm_msgbuf_rw *ctx, const int16_t src)
 {
 	int16_t val = htole16(src);
 
@@ -854,11 +1106,11 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int16(struct pldm_msgbuf *ctx,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int8(struct pldm_msgbuf *ctx,
+LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int8(struct pldm_msgbuf_rw *ctx,
 						     const int8_t src)
 {
 	static_assert(
@@ -879,7 +1131,7 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_insert_int8(struct pldm_msgbuf *ctx,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 #define pldm_msgbuf_insert(dst, src)                                           \
@@ -899,7 +1151,7 @@ LIBPLDM_CC_NONNULL
 LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_insert_array_void(struct pldm_msgbuf *ctx, size_t count,
+pldm__msgbuf_insert_array_void(struct pldm_msgbuf_rw *ctx, size_t count,
 			       const void *src, size_t src_count)
 {
 	if (count > src_count) {
@@ -912,7 +1164,7 @@ pldm__msgbuf_insert_array_void(struct pldm_msgbuf *ctx, size_t count,
 
 #if INTMAX_MAX < SIZE_MAX
 	if (count > INTMAX_MAX) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 #endif
 
@@ -929,7 +1181,7 @@ pldm__msgbuf_insert_array_void(struct pldm_msgbuf *ctx, size_t count,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 /**
@@ -938,7 +1190,7 @@ pldm__msgbuf_insert_array_void(struct pldm_msgbuf *ctx, size_t count,
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_insert_array_char(struct pldm_msgbuf *ctx, size_t count,
+pldm_msgbuf_insert_array_char(struct pldm_msgbuf_rw *ctx, size_t count,
 			      const char *src, size_t src_count)
 {
 	return pldm__msgbuf_insert_array_void(ctx, count, src, src_count);
@@ -950,7 +1202,7 @@ pldm_msgbuf_insert_array_char(struct pldm_msgbuf *ctx, size_t count,
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx, size_t count,
+pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf_rw *ctx, size_t count,
 			       const uint8_t *src, size_t src_count)
 {
 	return pldm__msgbuf_insert_array_void(ctx, count, src, src_count);
@@ -977,13 +1229,14 @@ pldm_msgbuf_insert_array_uint8(struct pldm_msgbuf *ctx, size_t count,
 						     src_count)
 
 LIBPLDM_CC_NONNULL_ARGS(1)
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
-						       size_t required,
-						       void **cursor)
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_span_required_impl(void *ptr, size_t required, void **cursor)
 {
+	struct pldm_msgbuf_rw *ctx = (struct pldm_msgbuf_rw *)ptr;
+
 #if INTMAX_MAX < SIZE_MAX
 	if (required > INTMAX_MAX) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 #endif
 
@@ -1002,24 +1255,24 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_span_required(struct pldm_msgbuf *ctx,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 LIBPLDM_CC_NONNULL_ARGS(1)
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor,
-			      size_t *length)
+pldm_msgbuf_span_string_ascii_impl(void *ptr, void **cursor, size_t *length)
 {
 	intmax_t measured;
+	struct pldm_msgbuf_rw *ctx = (struct pldm_msgbuf_rw *)ptr;
 
 	if (ctx->remaining < 0) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 	assert(ctx->cursor);
 
 	measured = (intmax_t)strnlen((const char *)ctx->cursor, ctx->remaining);
 	if (measured == ctx->remaining) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 
 	/* Include the NUL terminator in the span length, as spans are opaque */
@@ -1046,20 +1299,20 @@ pldm_msgbuf_span_string_ascii(struct pldm_msgbuf *ctx, void **cursor,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 LIBPLDM_CC_NONNULL_ARGS(1)
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor,
-			      size_t *length)
+pldm_msgbuf_span_string_utf16_impl(void *ptr, void **cursor, size_t *length)
 {
 	static const char16_t term = 0;
 	ptrdiff_t measured;
 	void *end;
+	struct pldm_msgbuf_rw *ctx = (struct pldm_msgbuf_rw *)ptr;
 
 	if (ctx->remaining < 0) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 	assert(ctx->cursor);
 
@@ -1088,7 +1341,7 @@ pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor,
 		 * the buffer. Setting ctx->remaining negative ensures the
 		 * `pldm_msgbuf_complete*()` APIs also return an error.
 		 */
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 
 	end = (char *)end + sizeof(char16_t);
@@ -1096,7 +1349,7 @@ pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor,
 
 #if INTMAX_MAX < PTRDIFF_MAX
 	if (measured >= INTMAX_MAX) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 #endif
 
@@ -1121,13 +1374,14 @@ pldm_msgbuf_span_string_utf16(struct pldm_msgbuf *ctx, void **cursor,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
+pldm_msgbuf_span_remaining_impl(void *ptr, void **cursor, size_t *len)
 {
+	struct pldm_msgbuf_rw *ctx = (struct pldm_msgbuf_rw *)ptr;
 	if (ctx->remaining < 0) {
 		return -EOVERFLOW;
 	}
@@ -1143,12 +1397,13 @@ pldm_msgbuf_span_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 
 LIBPLDM_CC_NONNULL_ARGS(1)
 LIBPLDM_CC_ALWAYS_INLINE
-int pldm_msgbuf_span_until(struct pldm_msgbuf *ctx, size_t trailer,
-			   void **cursor, size_t *length)
+int pldm_msgbuf_span_until_impl(void *ptr, size_t trailer, void **cursor,
+				size_t *length)
 {
+	struct pldm_msgbuf_rw *ctx = (struct pldm_msgbuf_rw *)ptr;
 #if INTMAX_MAX < SIZE_MAX
 	if (trailer > INTMAX_MAX) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 #endif
 
@@ -1174,12 +1429,13 @@ int pldm_msgbuf_span_until(struct pldm_msgbuf *ctx, size_t trailer,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_peek_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
+pldm_msgbuf_peek_remaining(struct pldm_msgbuf_rw *ctx, void **cursor,
+			   size_t *len)
 {
 	if (ctx->remaining < 0) {
 		return -EOVERFLOW;
@@ -1193,12 +1449,12 @@ pldm_msgbuf_peek_remaining(struct pldm_msgbuf *ctx, void **cursor, size_t *len)
 }
 
 LIBPLDM_CC_NONNULL
-LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_skip(struct pldm_msgbuf *ctx,
+LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_skip(struct pldm_msgbuf_rw *ctx,
 					      size_t count)
 {
 #if INTMAX_MAX < SIZE_MAX
 	if (count > INTMAX_MAX) {
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 #endif
 
@@ -1214,7 +1470,7 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_skip(struct pldm_msgbuf *ctx,
 		return -EOVERFLOW;
 	}
 
-	return pldm__msgbuf_invalidate(ctx);
+	return pldm_msgbuf_invalidate(ctx);
 }
 
 /**
@@ -1235,7 +1491,7 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_skip(struct pldm_msgbuf *ctx,
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
-int pldm_msgbuf_complete_used(struct pldm_msgbuf *ctx, size_t orig_len,
+int pldm_msgbuf_complete_used(struct pldm_msgbuf_rw *ctx, size_t orig_len,
 			      size_t *ret_used_len)
 {
 	int rc;
@@ -1243,17 +1499,17 @@ int pldm_msgbuf_complete_used(struct pldm_msgbuf *ctx, size_t orig_len,
 	ctx->cursor = NULL;
 	rc = pldm_msgbuf_validate(ctx);
 	if (rc) {
-		pldm__msgbuf_invalidate(ctx);
+		pldm_msgbuf_invalidate(ctx);
 		return rc;
 	}
 
 	if ((size_t)ctx->remaining > orig_len) {
 		/* Caller passed incorrect orig_len */
-		return pldm__msgbuf_invalidate(ctx);
+		return pldm_msgbuf_invalidate(ctx);
 	}
 
 	*ret_used_len = orig_len - ctx->remaining;
-	pldm__msgbuf_invalidate(ctx);
+	pldm_msgbuf_invalidate(ctx);
 	return 0;
 }
 
@@ -1274,13 +1530,13 @@ int pldm_msgbuf_complete_used(struct pldm_msgbuf *ctx, size_t orig_len,
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_copy(struct pldm_msgbuf *dst, struct pldm_msgbuf *src, size_t size,
-		  const char *description LIBPLDM_CC_UNUSED)
+pldm__msgbuf_copy(struct pldm_msgbuf_rw *dst, struct pldm_msgbuf_ro *src,
+		  size_t size, const char *description LIBPLDM_CC_UNUSED)
 {
 #if INTMAX_MAX < SIZE_MAX
 	if (size > INTMAX_MAX) {
-		pldm__msgbuf_invalidate(src);
-		pldm__msgbuf_invalidate(dst);
+		pldm_msgbuf_invalidate(src);
+		pldm_msgbuf_invalidate(dst);
 		return -EOVERFLOW;
 	}
 #endif
@@ -1299,13 +1555,13 @@ pldm__msgbuf_copy(struct pldm_msgbuf *dst, struct pldm_msgbuf *src, size_t size,
 	if (src->remaining > INTMAX_MIN + (intmax_t)size) {
 		src->remaining -= (intmax_t)size;
 	} else {
-		pldm__msgbuf_invalidate(src);
+		pldm_msgbuf_invalidate(src);
 	}
 
 	if (dst->remaining > INTMAX_MIN + (intmax_t)size) {
 		dst->remaining -= (intmax_t)size;
 	} else {
-		pldm__msgbuf_invalidate(dst);
+		pldm_msgbuf_invalidate(dst);
 	}
 
 	return -EOVERFLOW;
@@ -1314,7 +1570,8 @@ pldm__msgbuf_copy(struct pldm_msgbuf *dst, struct pldm_msgbuf *src, size_t size,
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_copy_string_ascii(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
+pldm_msgbuf_copy_string_ascii(struct pldm_msgbuf_rw *dst,
+			      struct pldm_msgbuf_ro *src)
 {
 	void *ascii = NULL;
 	size_t len = 0;
@@ -1331,7 +1588,8 @@ pldm_msgbuf_copy_string_ascii(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
-pldm_msgbuf_copy_string_utf16(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
+pldm_msgbuf_copy_string_utf16(struct pldm_msgbuf_rw *dst,
+			      struct pldm_msgbuf_ro *src)
 {
 	void *utf16 = NULL;
 	size_t len = 0;
@@ -1360,9 +1618,9 @@ pldm_msgbuf_copy_string_utf16(struct pldm_msgbuf *dst, struct pldm_msgbuf *src)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_uint8_to_size(struct pldm_msgbuf *ctx, size_t *dst)
+pldm__msgbuf_extract_uint8_to_size(struct pldm_msgbuf_ro *ctx, size_t *dst)
 {
-	uint8_t value;
+	uint8_t value = 0;
 	int rc;
 
 	rc = pldm__msgbuf_extract_uint8(ctx, &value);
@@ -1391,9 +1649,9 @@ pldm__msgbuf_extract_uint8_to_size(struct pldm_msgbuf *ctx, size_t *dst)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_uint16_to_size(struct pldm_msgbuf *ctx, size_t *dst)
+pldm__msgbuf_extract_uint16_to_size(struct pldm_msgbuf_ro *ctx, size_t *dst)
 {
-	uint16_t value;
+	uint16_t value = 0;
 	int rc;
 
 	rc = pldm__msgbuf_extract_uint16(ctx, &value);
@@ -1422,9 +1680,9 @@ pldm__msgbuf_extract_uint16_to_size(struct pldm_msgbuf *ctx, size_t *dst)
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_extract_uint32_to_size(struct pldm_msgbuf *ctx, size_t *dst)
+pldm__msgbuf_extract_uint32_to_size(struct pldm_msgbuf_ro *ctx, size_t *dst)
 {
-	uint32_t value;
+	uint32_t value = 0;
 	int rc;
 
 	rc = pldm__msgbuf_extract_uint32(ctx, &value);
@@ -1445,8 +1703,87 @@ pldm__msgbuf_extract_uint32_to_size(struct pldm_msgbuf *ctx, size_t *dst)
 #ifdef __cplusplus
 #include <type_traits>
 
+template <typename T> static inline int pldm_msgbuf_consumed(T ctx)
+{
+	if constexpr (std::is_same_v<struct pldm_msgbuf_rw *, T>) {
+		return pldm_msgbuf_rw_consumed(ctx);
+	} else if constexpr (std::is_same_v<struct pldm_msgbuf_ro *, T>) {
+		return pldm_msgbuf_ro_consumed(ctx);
+	}
+
+	return -EINVAL;
+}
+
+template <typename T> static inline int pldm_msgbuf_invalidate(T ctx)
+{
+	if constexpr (std::is_same_v<struct pldm_msgbuf_rw *, T>) {
+		return pldm_msgbuf_rw_invalidate(ctx);
+	} else if constexpr (std::is_same_v<struct pldm_msgbuf_ro *, T>) {
+		return pldm_msgbuf_ro_invalidate(ctx);
+	}
+
+	return -EINVAL;
+}
+
+template <typename T> static inline int pldm_msgbuf_validate(T ctx)
+{
+	if constexpr (std::is_same_v<struct pldm_msgbuf_rw *, T>) {
+		return pldm_msgbuf_rw_validate(ctx);
+	} else if constexpr (std::is_same_v<struct pldm_msgbuf_ro *, T>) {
+		return pldm_msgbuf_ro_validate(ctx);
+	}
+
+	return -EINVAL;
+}
+
+template <typename T> static inline int pldm_msgbuf_discard(T ctx, int error)
+{
+	if constexpr (std::is_same_v<struct pldm_msgbuf_rw *, T>) {
+		return pldm_msgbuf_rw_discard(ctx, error);
+	} else if constexpr (std::is_same_v<struct pldm_msgbuf_ro *, T>) {
+		return pldm_msgbuf_ro_discard(ctx, error);
+	}
+
+	return -EINVAL;
+}
+
+template <typename T> static inline int pldm_msgbuf_complete(T ctx)
+{
+	if constexpr (std::is_same_v<struct pldm_msgbuf_rw *, T>) {
+		return pldm_msgbuf_rw_complete(ctx);
+	} else if constexpr (std::is_same_v<struct pldm_msgbuf_ro *, T>) {
+		return pldm_msgbuf_ro_complete(ctx);
+	}
+
+	return -EINVAL;
+}
+
+template <typename T> static inline int pldm_msgbuf_complete_consumed(T ctx)
+{
+	if constexpr (std::is_same_v<struct pldm_msgbuf_rw *, T>) {
+		return pldm_msgbuf_rw_complete_consumed(ctx);
+	} else if constexpr (std::is_same_v<struct pldm_msgbuf_ro *, T>) {
+		return pldm_msgbuf_ro_complete_consumed(ctx);
+	}
+
+	return -EINVAL;
+}
+
 template <typename T>
-static inline int pldm_msgbuf_typecheck_uint8_t(struct pldm_msgbuf *ctx,
+static inline int pldm_msgbuf_init_errno(T ctx, size_t minsize, const void *buf,
+					 size_t len)
+{
+	if constexpr (std::is_same_v<struct pldm_msgbuf_rw *, T>) {
+		return pldm_msgbuf_rw_init_errno(ctx, minsize, buf, len);
+	} else if constexpr (std::is_same_v<struct pldm_msgbuf_ro *, T>) {
+		return pldm_msgbuf_ro_init_errno(ctx, minsize, buf, len);
+	}
+
+	return -EINVAL;
+}
+
+template <typename T>
+static inline int pldm_msgbuf_typecheck_uint8_t(struct pldm_msgbuf_ro *ctx,
 						void *buf)
 {
 	static_assert(std::is_same<uint8_t, T>::value);
@@ -1454,7 +1791,7 @@ static inline int pldm_msgbuf_typecheck_uint8_t(struct pldm_msgbuf *ctx,
 }
 
 template <typename T>
-static inline int pldm_msgbuf_typecheck_int8_t(struct pldm_msgbuf *ctx,
+static inline int pldm_msgbuf_typecheck_int8_t(struct pldm_msgbuf_ro *ctx,
 					       void *buf)
 {
 	static_assert(std::is_same<int8_t, T>::value);
@@ -1462,7 +1799,7 @@ static inline int pldm_msgbuf_typecheck_int8_t(struct pldm_msgbuf *ctx,
 }
 
 template <typename T>
-static inline int pldm_msgbuf_typecheck_uint16_t(struct pldm_msgbuf *ctx,
+static inline int pldm_msgbuf_typecheck_uint16_t(struct pldm_msgbuf_ro *ctx,
 						 void *buf)
 {
 	static_assert(std::is_same<uint16_t, T>::value);
@@ -1470,7 +1807,7 @@ static inline int pldm_msgbuf_typecheck_uint16_t(struct pldm_msgbuf *ctx,
 }
 
 template <typename T>
-static inline int pldm_msgbuf_typecheck_int16_t(struct pldm_msgbuf *ctx,
+static inline int pldm_msgbuf_typecheck_int16_t(struct pldm_msgbuf_ro *ctx,
 						void *buf)
 {
 	static_assert(std::is_same<int16_t, T>::value);
@@ -1478,7 +1815,7 @@ static inline int pldm_msgbuf_typecheck_int16_t(struct pldm_msgbuf *ctx,
 }
 
 template <typename T>
-static inline int pldm_msgbuf_typecheck_uint32_t(struct pldm_msgbuf *ctx,
+static inline int pldm_msgbuf_typecheck_uint32_t(struct pldm_msgbuf_ro *ctx,
 						 void *buf)
 {
 	static_assert(std::is_same<uint32_t, T>::value);
@@ -1486,7 +1823,7 @@ static inline int pldm_msgbuf_typecheck_uint32_t(struct pldm_msgbuf *ctx,
 }
 
 template <typename T>
-static inline int pldm_msgbuf_typecheck_int32_t(struct pldm_msgbuf *ctx,
+static inline int pldm_msgbuf_typecheck_int32_t(struct pldm_msgbuf_ro *ctx,
 						void *buf)
 {
 	static_assert(std::is_same<int32_t, T>::value);
@@ -1494,7 +1831,7 @@ static inline int pldm_msgbuf_typecheck_int32_t(struct pldm_msgbuf *ctx,
 }
 
 template <typename T>
-static inline int pldm_msgbuf_typecheck_real32_t(struct pldm_msgbuf *ctx,
+static inline int pldm_msgbuf_typecheck_real32_t(struct pldm_msgbuf_ro *ctx,
 						 void *buf)
 {
 	static_assert(std::is_same<real32_t, T>::value);
