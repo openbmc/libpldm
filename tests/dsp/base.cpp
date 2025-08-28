@@ -1,3 +1,5 @@
+#include "msgbuf.hpp"
+
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
 
@@ -5,8 +7,6 @@
 #include <cstdint>
 #include <cstring>
 #include <vector>
-
-#include "msgbuf.h"
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -550,7 +550,7 @@ TEST(DecodeMultipartReceiveRequest, testDecodeRequestPass)
     constexpr uint32_t kSectionLength = 0x10;
 
     PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     // Header values don't matter for this test.
@@ -616,7 +616,7 @@ TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadPldmType)
     constexpr uint8_t kFlag = PLDM_XFER_FIRST_PART;
 
     PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     // Header values don't matter for this test.
@@ -648,7 +648,7 @@ TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadTransferFlag)
     constexpr uint8_t kFlag = PLDM_XFER_CURRENT_PART + 0x10;
 
     PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     // Header values don't matter for this test.
@@ -683,7 +683,7 @@ TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadOffset)
     constexpr uint32_t kSectionOffset = 0x0;
 
     PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     // Header values don't matter for this test.
@@ -720,7 +720,7 @@ TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadHandle)
     constexpr uint32_t kSectionOffset = 0x100;
 
     PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     // Header values don't matter for this test.
@@ -838,7 +838,7 @@ TEST(DecodeMultipartReceiveResponse, GoodTest)
 
     struct pldm_base_multipart_receive_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length =
@@ -888,7 +888,7 @@ TEST(DecodeMultipartReceiveResponse, BadTestUnAllocatedPtrParams)
 
     struct pldm_base_multipart_receive_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length =
@@ -936,7 +936,7 @@ TEST(DecodeMultipartReceiveResponse, BadTestInvalidExpectedInputMsgLength)
 
     struct pldm_base_multipart_receive_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length =
@@ -979,7 +979,7 @@ TEST(DecodeMultipartReceiveResponse, BadTestRedundantCheckSum)
 
     struct pldm_base_multipart_receive_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     /*
@@ -1029,7 +1029,7 @@ TEST(DecodeMultipartReceiveResponse, BadTestMissingCheckSum)
 
     struct pldm_base_multipart_receive_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     /*
@@ -1630,7 +1630,7 @@ TEST(DecodeNegotiateTransferParamsResponse, GoodTest)
 
     struct pldm_base_negotiate_transfer_params_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length =
@@ -1672,7 +1672,7 @@ TEST(DecodeNegotiateTransferParamsResponse, BadTestUnAllocatedPtrParams)
 
     struct pldm_base_negotiate_transfer_params_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length =
@@ -1715,7 +1715,7 @@ TEST(DecodeNegotiateTransferParamsResponse,
 
     struct pldm_base_negotiate_transfer_params_resp resp_data = {};
 
-    PLDM_MSGBUF_DEFINE_P(buf);
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
     int rc;
 
     static constexpr const size_t payload_length =

@@ -1,7 +1,8 @@
+#include "msgbuf.hpp"
+
 #include <endian.h>
 #include <libpldm/pdr.h>
 #include <libpldm/platform.h>
-#include <msgbuf.h>
 
 #include <array>
 #include <cstdint>
@@ -46,7 +47,7 @@ typedef struct pldm_entity_test
     }
 } pldm_entity_test;
 
-static void getEntity(struct pldm_msgbuf* buf, pldm_entity_test& entity)
+static void getEntity(struct pldm_msgbuf_ro* buf, pldm_entity_test& entity)
 {
     pldm_msgbuf_extract_uint16(buf, entity.entity_type);
     pldm_msgbuf_extract_uint16(buf, entity.entity_instance_num);
@@ -54,7 +55,7 @@ static void getEntity(struct pldm_msgbuf* buf, pldm_entity_test& entity)
 }
 
 static void
-    getAssociationPdrDetails(struct pldm_msgbuf* buf,
+    getAssociationPdrDetails(struct pldm_msgbuf_ro* buf,
                              pldm_association_pdr_test& association_pdr_test)
 {
     pldm_msgbuf_extract_uint32(buf, association_pdr_test.record_handle);
@@ -68,7 +69,7 @@ static void
 }
 
 static void
-    verifyEntityAssociationPdr(struct pldm_msgbuf* buf,
+    verifyEntityAssociationPdr(struct pldm_msgbuf_ro* buf,
                                const pldm_association_pdr_test& association_pdr,
                                const pldm_entity_test& container_entity1,
                                const pldm_entity_test& child_entity1)
@@ -1766,8 +1767,8 @@ TEST(EntityAssociationPDR, testPDRWithRecordHandle)
 
     pldm_pdr_find_record(repo, currRecHandle, &data, &size, &nextRecHandle);
 
-    struct pldm_msgbuf _buf;
-    struct pldm_msgbuf* buf = &_buf;
+    struct pldm_msgbuf_ro _buf;
+    struct pldm_msgbuf_ro* buf = &_buf;
 
     auto rc =
         pldm_msgbuf_init_errno(buf,
