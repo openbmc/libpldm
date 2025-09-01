@@ -2387,3 +2387,27 @@ int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
 	}
 	return 0;
 }
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_get_state_effecter_info(const uint8_t *pdr_buf, size_t pdr_len,
+				     uint16_t *entity_type,
+				     uint8_t *composite_effecter_count)
+{
+	if (!pdr_buf || !composite_effecter_count) {
+		return -EINVAL;
+	}
+
+	if (pdr_len < sizeof(struct pldm_state_effecter_pdr)) {
+		return -EOVERFLOW;
+	}
+
+	const struct pldm_state_effecter_pdr *pdr =
+		(const struct pldm_state_effecter_pdr *)pdr_buf;
+
+	if (entity_type) {
+		*entity_type = pdr->entity_type;
+	}
+	*composite_effecter_count = pdr->composite_effecter_count;
+
+	return 0;
+}

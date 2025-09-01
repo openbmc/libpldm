@@ -721,6 +721,19 @@ int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 					  bool is_remote,
 					  uint32_t *record_handle);
 
+/** @brief Get entity type and composite effecter count from a
+        PLDM State Effecter PDR.
+ * @param[in]  pdr_buf -  Pointer to the raw PDR buffer
+ * @param[in]  pdr_len - Length of the PDR buffer in bytes
+ * @param[out] entity_type - Pointer to store the entity type. May be NULL if caller is not interested.
+ * @param[out] composite_effecter_count - Pointer to store the composite effecter count. Must not be NULL.
+ *
+ * @return  0 on success, -EINVAL if input is invalid or -EOVERFLOW if buffer is too small
+ */
+int pldm_pdr_get_state_effecter_info(const uint8_t *pdr_buf, size_t pdr_len,
+				     uint16_t *entity_type,
+				     uint8_t *composite_effecter_count);
+
 #ifdef __cplusplus
 }
 #endif

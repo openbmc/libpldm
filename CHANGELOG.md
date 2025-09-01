@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- pdr: Add pldm_pdr_get_state_effecter_info() API
+
 ### Changed
 
 - base:
