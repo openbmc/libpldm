@@ -2411,3 +2411,53 @@ int pldm_pdr_get_state_effecter_info(const uint8_t *pdr_buf, size_t pdr_len,
 
 	return 0;
 }
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_get_state_effecter_state_set_ids(const uint8_t *pdr_buf,
+					      size_t pdr_len,
+					      uint16_t *state_set_ids,
+					      size_t ids_buf_len)
+{
+	if (!pdr_buf || !state_set_ids) {
+		return -EINVAL;
+	}
+
+	if (pdr_len < sizeof(struct pldm_state_effecter_pdr)) {
+		return -EOVERFLOW;
+	}
+
+	const struct pldm_state_effecter_pdr *pdr =
+		(const struct pldm_state_effecter_pdr *)pdr_buf;
+
+	uint8_t comp_count = pdr->composite_effecter_count;
+	if (ids_buf_len < comp_count) {
+		return -EOVERFLOW;
+	}
+
+	const uint8_t *states_ptr = pdr->possible_states;
+
+	for (uint8_t i = 0; i < comp_count; ++i) {
+		if ((size_t)((states_ptr - pdr_buf) +
+			     sizeof(struct state_effecter_possible_states)) >
+		    pdr_len) {
+			return -EINVAL;
+		}
+
+		const struct state_effecter_possible_states *state =
+			(const struct state_effecter_possible_states *)
+				states_ptr;
+
+		state_set_ids[i] = state->state_set_id;
+
+		size_t advance = sizeof(struct state_effecter_possible_states) +
+				 state->possible_states_size - 1;
+
+		if ((size_t)(states_ptr - pdr_buf) + advance > pdr_len) {
+			return -EINVAL;
+		}
+
+		states_ptr += advance;
+	}
+
+	return 0;
+}
