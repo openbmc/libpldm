@@ -21,6 +21,7 @@ Change categories:
 
 - pdr: Add pldm_pdr_get_state_effecter_info() API
 - pdr: Add pldm_pdr_get_state_effecter_state_set_ids() API
+- pdr: Add pldm_pdr_get_state_effecter_possible_states() API
 
 ### Changed
 

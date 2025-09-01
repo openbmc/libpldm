@@ -2461,3 +2461,113 @@ int pldm_pdr_get_state_effecter_state_set_ids(const uint8_t *pdr_buf,
 
 	return 0;
 }
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_get_state_effecter_possible_states(const uint8_t *pdr_buf,
+						size_t pdr_len, uint8_t index,
+						uint8_t *states_buf,
+						size_t buf_len,
+						size_t *states_size)
+{
+	if (!pdr_buf || !states_buf || !states_size) {
+		return -EINVAL;
+	}
+
+	if (pdr_len < sizeof(struct pldm_state_effecter_pdr)) {
+		return -EOVERFLOW;
+	}
+
+	const struct pldm_state_effecter_pdr *pdr =
+		(const struct pldm_state_effecter_pdr *)pdr_buf;
+
+	// Check if requested index is valid
+	if (index >= pdr->composite_effecter_count) {
+		return -EINVAL;
+	}
+
+	const uint8_t *current_ptr = pdr->possible_states;
+	const uint8_t *pdr_end = pdr_buf + pdr_len;
+
+	for (uint8_t i = 0; i < index; ++i) {
+		if (current_ptr +
+			    sizeof(struct state_effecter_possible_states) >
+		    pdr_end) {
+			return -EINVAL;
+		}
+
+		const struct state_effecter_possible_states *state =
+			(const struct state_effecter_possible_states *)
+				current_ptr;
+
+		const size_t MAX_POSSIBLE_STATES_SIZE = 256;
+		if (state->possible_states_size == 0 ||
+		    state->possible_states_size > MAX_POSSIBLE_STATES_SIZE) {
+			return -EINVAL;
+		}
+
+		// Check for integer overflow in size calculation
+		size_t base_size =
+			sizeof(struct state_effecter_possible_states);
+		if (base_size < 1) {
+			return -EINVAL; // Should never happen, but safety check
+		}
+
+		size_t states_offset = base_size - 1;
+		if (states_offset > SIZE_MAX - state->possible_states_size) {
+			return -EINVAL; // Would overflow
+		}
+		size_t state_total_size =
+			states_offset + state->possible_states_size;
+
+		// Check if we have enough space for the complete state data
+		if (current_ptr > pdr_end ||
+		    state_total_size > (size_t)(pdr_end - current_ptr)) {
+			return -EINVAL;
+		}
+
+		// Advance to next state effecter
+		current_ptr += state_total_size;
+	}
+
+	// Now we're at the target state effecter - validate it
+	if (current_ptr + sizeof(struct state_effecter_possible_states) >
+	    pdr_end) {
+		return -EINVAL;
+	}
+
+	const struct state_effecter_possible_states *target_state =
+		(const struct state_effecter_possible_states *)current_ptr;
+
+	const size_t MAX_POSSIBLE_STATES_SIZE = 256;
+	if (target_state->possible_states_size == 0 ||
+	    target_state->possible_states_size > MAX_POSSIBLE_STATES_SIZE) {
+		return -EINVAL;
+	}
+
+	// Check for integer overflow in target state size calculation
+	size_t base_size = sizeof(struct state_effecter_possible_states);
+	size_t states_offset = base_size - 1;
+	if (states_offset > SIZE_MAX - target_state->possible_states_size) {
+		return -EINVAL; // Would overflow
+	}
+	size_t target_state_size =
+		states_offset + target_state->possible_states_size;
+
+	// Ensure the complete target state fits in the PDR buffer
+	if (current_ptr > pdr_end ||
+	    target_state_size > (size_t)(pdr_end - current_ptr)) {
+		return -EINVAL;
+	}
+
+	// Check if output buffer is large enough
+	if (buf_len < target_state->possible_states_size) {
+		*states_size = target_state->possible_states_size;
+		return -EOVERFLOW;
+	}
+
+	memcpy(states_buf, target_state->states,
+	       target_state->possible_states_size);
+	*states_size = target_state->possible_states_size;
+
+	return 0;
+}

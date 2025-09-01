@@ -748,6 +748,23 @@ int pldm_pdr_get_state_effecter_state_set_ids(const uint8_t *pdr_buf,
 					      uint16_t *state_set_ids,
 					      size_t ids_buf_len);
 
+/** @brief Get the raw possible_states bytes for a given state set in a PLDM State Effecter PDR.
+ * @param[in]  pdr_buf   -  Pointer to the raw PDR buffer
+ * @param[in]  pdr_len   -  Length of the PDR buffer in bytes
+ * @param[in]  index     -  Zero-based index of the composite effecter
+ *                         (must be < composite_effecter_count)
+ * @param[out] states_buf - buffer to store possible_states bytes
+ * @param[in]  buf_len   -  Size of states_buf in bytes
+ * @param[out] states_size - Number of bytes written to states_buf
+ *
+ * @return  0 on success, -EINVAL if input is invalid or -EOVERFLOW if buffer too small
+ */
+int pldm_pdr_get_state_effecter_possible_states(const uint8_t *pdr_buf,
+						size_t pdr_len, uint8_t index,
+						uint8_t *states_buf,
+						size_t buf_len,
+						size_t *states_size);
+
 #ifdef __cplusplus
 }
 #endif
