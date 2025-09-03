@@ -16,6 +16,24 @@
       "message": "Happy for you to use `// NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)` to address these for now.",
       "revId": "9c0c66eacaee769cf23462ca0622dab5ec94dbac",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74621f86_dea7076a",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6420,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-03T01:01:54Z",
+      "side": 1,
+      "message": "Thanks. I added these. \n\nNow it\u0027s failing with \n\n```\nsrc/compiler.h:8:0: error: #error The libpldm implementation requires __has_attribute\n``` \n\nIs this expected?",
+      "parentUuid": "66cfe634_8a1572c7",
+      "revId": "9c0c66eacaee769cf23462ca0622dab5ec94dbac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
