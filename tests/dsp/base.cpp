@@ -674,43 +674,6 @@ TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadTransferFlag)
               PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION);
 }
 
-TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadOffset)
-{
-    constexpr uint8_t kPldmType = PLDM_BASE;
-    constexpr uint8_t kFlag = PLDM_XFER_NEXT_PART;
-    constexpr uint32_t kTransferCtx = 0x01;
-    constexpr uint32_t kTransferHandle = 0x01;
-    constexpr uint32_t kSectionOffset = 0x0;
-
-    PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    PLDM_MSGBUF_RW_DEFINE_P(buf);
-    int rc;
-
-    // Header values don't matter for this test.
-    rc = pldm_msgbuf_init_errno(buf, PLDM_MULTIPART_RECEIVE_REQ_BYTES,
-                                msg->payload, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    ASSERT_EQ(rc, 0);
-    pldm_msgbuf_insert_uint8(buf, kPldmType);
-    pldm_msgbuf_insert_uint8(buf, kFlag);
-    pldm_msgbuf_insert_uint32(buf, kTransferCtx);
-    pldm_msgbuf_insert_uint32(buf, kTransferHandle);
-    pldm_msgbuf_insert_uint32(buf, kSectionOffset);
-    rc = pldm_msgbuf_complete(buf);
-    ASSERT_EQ(rc, 0);
-
-    uint8_t pldm_type;
-    uint8_t flag;
-    uint32_t transfer_ctx;
-    uint32_t transfer_handle;
-    uint32_t section_offset;
-    uint32_t section_length;
-    EXPECT_EQ(decode_multipart_receive_req(
-                  msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &pldm_type, &flag,
-                  &transfer_ctx, &transfer_handle, &section_offset,
-                  &section_length),
-              PLDM_ERROR_INVALID_DATA);
-}
-
 TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadHandle)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;

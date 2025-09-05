@@ -96,6 +96,10 @@ Change categories:
 - include, tests: Address concerns from -Wsign-compare
 - dsp: base: decode_pldm_base_negotiate_transfer_params_resp() is stable
 
+- base:
+  - Removed RequestedSectionOffset check in decode_multipart_receive_req()
+  - Updated DataTransferHandle check in decode_multipart_receive_req()
+
 ### Security
 
 ## [0.14.0] 2025-08-11
