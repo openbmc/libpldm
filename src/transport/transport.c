@@ -143,6 +143,11 @@ static int clock_gettimeval(clockid_t clockid, struct timeval *tv)
 	return 0;
 }
 
+int pldm_transport_get_timeval(struct timeval *tv)
+{
+	return clock_gettimeval(CLOCK_MONOTONIC, tv);
+}
+
 LIBPLDM_ABI_STABLE
 pldm_requester_rc_t
 pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
@@ -196,7 +201,7 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		return rc;
 	}
 
-	ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
+	ret = transport->get_timeval(&now);
 	if (ret < 0) {
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
@@ -218,7 +223,7 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			return PLDM_REQUESTER_RECV_FAIL;
 		}
 
-		ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
+		ret = transport->get_timeval(&now);
 		if (ret < 0) {
 			return PLDM_REQUESTER_POLL_FAIL;
 		}

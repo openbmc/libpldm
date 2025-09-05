@@ -253,6 +253,7 @@ int pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx)
 	demux->transport.recv = pldm_transport_mctp_demux_recv;
 	demux->transport.send = pldm_transport_mctp_demux_send;
 	demux->transport.init_pollfd = pldm_transport_mctp_demux_init_pollfd;
+	demux->transport.get_timeval = pldm_transport_get_timeval;
 	demux->socket = pldm_transport_mctp_demux_open();
 	if (demux->socket == -1) {
 		free(demux);
