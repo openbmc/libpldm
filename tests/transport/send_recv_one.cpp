@@ -32,6 +32,15 @@ int libpldm_clock_gettime(struct timespec* ts)
 
 TEST(Transport, send_recv_one)
 {
+    /* To test the case when timestamp is closer to the 28 day
+     * uptime we would potentially set this to something closer
+     * to 2589793. But unfortunatley, the systems where the
+     * unit tests would be run, could have long be a 64 bit
+     * integer thus would pass with this anyway but fail on
+     * a standard BMC 32bit SOC. Hence workaround this by
+     * using `LONG_MAX - 10` which would fail on either
+     * condition. */
+    global_base_time = LONG_MAX - 10;
     uint8_t req[] = {0x81, 0x00, 0x01, 0x01};
     uint8_t resp[] = {0x01, 0x00, 0x01, 0x00};
     const struct pldm_transport_test_descriptor seq[] = {
