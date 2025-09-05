@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8dc2b7d0_b7da3ebc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T06:38:22Z",
+      "side": 1,
+      "message": "Can you please prefix this with the impacted subcomponent? So:\n\n\n```\ntransport: ...\n```\n\nSeparately, can you use the full function name here? `pldm_transport_send_recv_msg()`? Perhaps:\n\n```\ntransport: Improve time validation in pldm_transport_send_recv_msg()\n```",
+      "revId": "8edb93f7f0a7e57ade8bc6829d64e9d35f9e56dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "decc5aba_ff94a939",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T06:38:22Z",
+      "side": 1,
+      "message": "Generally, can you fix the line wrapping? It seems to come up short of the maximum line length.",
+      "revId": "8edb93f7f0a7e57ade8bc6829d64e9d35f9e56dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "667c2381_08ca30bc",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
