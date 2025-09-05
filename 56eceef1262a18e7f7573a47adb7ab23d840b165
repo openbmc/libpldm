@@ -1,0 +1,243 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e1e8e4_87351c88",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "I think you have the `rw` and `ro` cases the wrong way around here.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 69
+      },
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e1fe9db_06833f28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "I prefer we drop this statement. For this specific change, successful compilation should be enough, and then running the test suite. It\u0027s unclear how the meta-evb-arm platform exercises things.",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4f33acb_f82757c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "Hi John, thanks so much for the effort so far, I appreciate that you\u0027re happy to wade in and deal with implementation issues like this.\n\nI have a few comments inline.",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48685ba8_7db9794b",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "So, first up, this is a significant bit of work, and thanks for taking me up on it!\n\nHowever, I\u0027m using the changelog to document changes to the user-facing components (the API and ABI). msgbuf is purely an implementation detail of the library, and so shouldn\u0027t be mentioned here.\n\nCan you please remove this entry?",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "391b1a59_ca710009",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "I think this should be a separate patch, ordered before this one.",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0875195d_19be0ea5",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "Perhaps we can avoid the duplication here with some more token-pasting:\n\n```c\n#define PLDM__MSGBUF_DEFINE_P(name, mode) \\\n    struct pldm_msgbuf_##mode _##name LIBPLDM_CC_CLEANUP( \\\n        pldm__msgbuf_rw_cleanup) \u003d { NULL, INTMAX_MIN }; \\\n        auto *name \u003d \u0026(_##name)\n        \n#define PLDM_MSGBUF_RO_DEFINE_P(name) PLDM__MSGBUF_DEFINE_P(name, ro)\n#define PLDM_MSGBUF_RW_DEFINE_P(name) PLDM__MSGBUF_DEFINE_P(name, rw)\n```",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d220a40b_35341500",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81672e72_6d6241b9",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "en-dash?",
+      "range": {
+        "startLine": 141,
+        "startChar": 27,
+        "endLine": 141,
+        "endChar": 28
+      },
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "188d12cc_5118e494",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "Rather than `_impl`, the pattern I\u0027ve used is double-underscore after the `pldm` prefix (i.e. `pldm__msgbuf_span_required`), can we do that here too for consistency? In my opinion it feels wrong to be using such as symbol, and so suggests you should reflect on what you\u0027re doing.\n\nHowever, the approach here feels a bit shady as we\u0027re potentially casting to the wrong type, which is no better than where we were to begin with.",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d383ebca_9ef68184",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "Why did the double-underscore get removed?",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70b57080_c3e69b64",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6ecf16c_162ab43c",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "See discussion above. I\u0027d like to find a better approach.",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ba8ecf_986f7b75",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1711,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:19:38Z",
+      "side": 1,
+      "message": "Can we rather use template specialisation? branching seems like a unusual way to express this.",
+      "range": {
+        "startLine": 1707,
+        "startChar": 1,
+        "endLine": 1711,
+        "endChar": 38
+      },
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
