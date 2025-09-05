@@ -202,14 +202,14 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 	}
 
 	timeradd(&now, &max_response_interval, &end);
-	if (!timeval_is_valid(&end)) {
-		return PLDM_REQUESTER_POLL_FAIL;
-	}
 
 	while (timercmp(&now, &end, <)) {
 		pldm_tid_t src_tid;
 
 		timersub(&end, &now, &remaining);
+		if (!timeval_is_valid(&remaining)) {
+			return PLDM_REQUESTER_POLL_FAIL;
+		}
 
 		/* 0 <= `timeval_to_msec()` <= 4800, and 4800 < INT_MAX */
 		ret = pldm_transport_poll(transport,
