@@ -16,6 +16,24 @@
       "message": "Have you looked at how existing testing APIs are tested? They\u0027re guarded using the preprocessor.",
       "revId": "10359fca9b7dcbc5e11383549bdfa01a6e7d7513",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c59c76a9_729d4ff9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-09-05T14:27:42Z",
+      "side": 1,
+      "message": "ok, i will drop this patch.",
+      "parentUuid": "b9ae1da5_4568faea",
+      "revId": "10359fca9b7dcbc5e11383549bdfa01a6e7d7513",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
