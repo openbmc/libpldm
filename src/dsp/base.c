@@ -569,13 +569,14 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 		return PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION;
 	}
 
-	// A section offset of 0 is only valid on FIRST_PART or COMPLETE Xfers.
-	if (*section_offset == 0 && (*transfer_opflag != PLDM_XFER_FIRST_PART &&
-				     *transfer_opflag != PLDM_XFER_COMPLETE)) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-
-	if (*transfer_handle == 0 && *transfer_opflag != PLDM_XFER_COMPLETE) {
+	// By DSP0240 v1.2.0, section 9.6.5, Table 17, transfer handle can be 0 only
+	// if the transfer flag is one of XFER_FIRST_PART, XFER_COMPLETE or
+	// XFER_ABORT. In addition, it must be allowed in PLDM_XFER_CURRENT_PART as
+	// this may be used to retry the first part, in which case the transfer handle
+	// must again be 0. Therefore, the only operation for which it cannot be 0 is
+	// PLDM_XFER_NEXT_PART.
+	if ((*transfer_handle == 0) &&
+	    (*transfer_opflag == PLDM_XFER_NEXT_PART)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
