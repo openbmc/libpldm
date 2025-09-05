@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2faf943_c95728e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000212
+      },
+      "writtenOn": "2025-09-05T16:35:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8dc2b7d0_b7da3ebc",
+      "revId": "8edb93f7f0a7e57ade8bc6829d64e9d35f9e56dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "decc5aba_ff94a939",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50afc91a_d7758c05",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000212
+      },
+      "writtenOn": "2025-09-05T16:35:21Z",
+      "side": 1,
+      "message": "On it. For some reason in my fear of not-overflowing I severely under utilize the lines :-)",
+      "parentUuid": "decc5aba_ff94a939",
+      "revId": "8edb93f7f0a7e57ade8bc6829d64e9d35f9e56dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "667c2381_08ca30bc",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2025-09-05T06:17:27Z",
       "side": 1,
       "message": "I\u0027d like to see some tests around this, can you please have a think about it?",
+      "revId": "8edb93f7f0a7e57ade8bc6829d64e9d35f9e56dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2eb67b8_68054b88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000212
+      },
+      "writtenOn": "2025-09-05T16:35:21Z",
+      "side": 1,
+      "message": "Let me think. The functions themselves are not exported for the tests to use. I can probably throw them in some util header?",
+      "parentUuid": "667c2381_08ca30bc",
       "revId": "8edb93f7f0a7e57ade8bc6829d64e9d35f9e56dc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
