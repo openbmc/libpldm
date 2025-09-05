@@ -14,12 +14,12 @@ then
   exit 1
 fi
 
-# Make sure if the change touches the public headers, it also updates the
-# changelog.
-if ! git show --format="" --name-only HEAD -- CHANGELOG.md include/libpldm |
+# Make sure if the change touches the public headers or ABI dump, it also
+# updates the changelog.
+if ! git show --format="" --name-only HEAD -- CHANGELOG.md abi include/libpldm |
   awk -f scripts/changelog.awk
 then
-  echo You must document your changes under include/libpldm in CHANGELOG.md
+  echo Add a CHANGELOG entry to document updates under abi/ and include/libpldm/
   exit 1
 fi
 
