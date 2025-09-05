@@ -569,13 +569,8 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 		return PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION;
 	}
 
-	// A section offset of 0 is only valid on FIRST_PART or COMPLETE Xfers.
-	if (*section_offset == 0 && (*transfer_opflag != PLDM_XFER_FIRST_PART &&
-				     *transfer_opflag != PLDM_XFER_COMPLETE)) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-
-	if (*transfer_handle == 0 && *transfer_opflag != PLDM_XFER_COMPLETE) {
+	// Transfer handle can be 0 only if the transfer flag is one of XFER_FIRST_PART, XFER_ABORT or XFER_COMPLETE
+	if (*transfer_handle == 0 && ((*transfer_opflag == PLDM_XFER_NEXT_PART) || (*transfer_opflag == PLDM_XFER_CURRENT_PART))) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -653,6 +648,7 @@ int decode_pldm_base_multipart_receive_resp(
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
+
 	pldm_msgbuf_extract(buf, resp->next_transfer_handle);
 
 	rc = pldm_msgbuf_extract_uint32_to_size(buf, resp->data.length);
@@ -666,10 +662,8 @@ int decode_pldm_base_multipart_receive_resp(
 					  (void **)&resp->data.ptr);
 	}
 
-	if (resp->transfer_flag ==
-		    PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_END ||
-	    resp->transfer_flag ==
-		    PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_START_AND_END) {
+	// Checksum is present for all data parts except when response transfer flag is ACKNOWLEDGE_COMPLETION
+	if (resp->transfer_flag != PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_ACK_COMPLETION) {
 		pldm_msgbuf_extract_p(buf, data_integrity_checksum);
 	}
 
@@ -685,7 +679,11 @@ int encode_base_multipart_receive_resp(
 	PLDM_MSGBUF_DEFINE_P(buf);
 	int rc;
 
-	if (!msg || !resp || !payload_length || !resp->data.ptr) {
+	if (!msg || !resp) {
+		return -EINVAL;
+	}
+
+	if (!payload_length && !resp->data.ptr) {
 		return -EINVAL;
 	}
 
@@ -730,8 +728,8 @@ int encode_base_multipart_receive_resp(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
-	if (resp->transfer_flag == PLDM_END ||
-	    resp->transfer_flag == PLDM_START_AND_END) {
+	// Checksum is present for all data parts except when response transfer flag is ACKNOWLEDGE_COMPLETION
+	if (resp->transfer_flag != PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_ACK_COMPLETION) {
 		pldm_msgbuf_insert(buf, checksum);
 	}
 
