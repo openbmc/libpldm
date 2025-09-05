@@ -16,6 +16,24 @@
       "message": "Can you please enumerate the APIs that were stabilised? See examples above.",
       "revId": "5b4342bf57141fb7fd01fa1522ca18634232cf50",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71d1fe4f_2dd1f68b",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002522
+      },
+      "writtenOn": "2025-09-05T03:21:29Z",
+      "side": 1,
+      "message": "I added it under \"Stabilised\" in the \"Unrelease\" section.",
+      "parentUuid": "bed9c027_0f9dbd7c",
+      "revId": "5b4342bf57141fb7fd01fa1522ca18634232cf50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
