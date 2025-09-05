@@ -4,7 +4,17 @@
 
 #include <libpldm/base.h>
 #include <libpldm/pldm.h>
+#include <sys/time.h>
+
 struct pollfd;
+
+/**
+ * @brief Return the default clock's current value.
+ *
+ * @out tv - The current tv_sec, tv_usec pair.
+ * @return - 0 on success, negative error code on failure.
+ */
+int pldm_transport_get_timeval(struct timeval *tv);
 
 /**
  * @brief Generic PLDM transport struct
@@ -26,6 +36,7 @@ struct pldm_transport {
 				    size_t msg_len);
 	int (*init_pollfd)(struct pldm_transport *transport,
 			   struct pollfd *pollfd);
+	int (*get_timeval)(struct timeval *tv);
 };
 
 #endif // LIBPLDM_SRC_TRANSPORT_TRANSPORT_H

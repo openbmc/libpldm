@@ -28,6 +28,12 @@ struct pldm_transport *pldm_transport_test_core(struct pldm_transport_test *ctx)
 	return &ctx->transport;
 }
 
+int pldm_transport_test_get_timeval(struct timeval *tv)
+{
+	// TODO For now just return.
+	return pldm_transport_get_timeval(tv);
+}
+
 #ifdef PLDM_HAS_POLL
 #include <poll.h>
 LIBPLDM_ABI_TESTING
