@@ -86,6 +86,10 @@ Change categories:
 
 ### Removed
 
+- base:
+  - Removed RequestedSectionOffset check in decode_multipart_receive_req()
+  - Updated DataTransferHandle check in decode_multipart_receive_req()
+
 ### Fixed
 
 - dsp: base: Don't extract MultipartReceive resp's CRC once complete
