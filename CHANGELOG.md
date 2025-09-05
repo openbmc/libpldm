@@ -82,6 +82,10 @@ Change categories:
 - Updated PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH macro comment.
 - Added PLDM_ACKNOWLEDGE_COMPLETION flag to transfer_resp_flag list.
 
+- base: 
+  - Removed RequestedSectionOffset check in decode_multipart_receive_req()
+  - Updated DataTransferHandle check in decode_multipart_receive_req()
+
 ### Deprecated
 
 ### Removed
