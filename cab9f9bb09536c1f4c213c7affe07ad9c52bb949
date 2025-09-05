@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d29e014_2a707f04",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2298,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T01:58:26Z",
+      "side": 1,
+      "message": "Clang is wrong here, but :shrug:",
+      "revId": "cab9f9bb09536c1f4c213c7affe07ad9c52bb949",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
