@@ -68,6 +68,24 @@
       "message": "Does this not give us the same problems, but with the vtable, wrt extending the class?",
       "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2083734c_d6044bb7",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-09-05T12:13:12Z",
+      "side": 1,
+      "message": "looked into\n\nhttps://isocpp.org/wiki/faq/virtual-functions#dyn-binding\n\nand to me it looks like the non-virtual member functions have static dispatch and which function to call is resolved at compile-time.\n\nI am not using any virtual functions here, so i assume we will not get this issue.\n\nMade a small example \n```\n\nstruct A {\n    void foo() {}\n};\n\nstruct B {\n    virtual void foo() {}\n};\n\nclass C {\n\tpublic:\n\tint x;\n\tvoid cfoo(){\n\t\tx++;\n\t}\n};\n\nclass CDerived : public C {\n\tpublic:\n\tvoid cfoo() {\n\t\tx--;\n\t}\n};\n\nint main() {\n    A a;\n    B b;\n    C c;\n    CDerived cderived;\n\n    c.cfoo();\n    cderived.cfoo();\n}\n```\n\nand when using `g++ -fdump-lang-class vtable.cpp`\nit does generate some file\n```\nClass A\n   size\u003d1 align\u003d1\n   base size\u003d0 base align\u003d1\nA (0x0x7f3522dd5000) 0 empty\n\nVtable for B\nB::_ZTV1B: 3 entries\n0     (int (*)(...))0\n8     (int (*)(...))(\u0026 _ZTI1B)\n16    (int (*)(...))B::foo\n\nClass B\n   size\u003d8 align\u003d8\n   base size\u003d8 base align\u003d8\nB (0x0x7f3522dd5060) 0 nearly-empty\n    vptr\u003d((\u0026 B::_ZTV1B) + 16)\n\nClass C\n   size\u003d4 align\u003d4\n   base size\u003d4 base align\u003d4\nC (0x0x7f3522dd5180) 0\n\nClass CDerived\n   size\u003d4 align\u003d4\n   base size\u003d4 base align\u003d4\nCDerived (0x0x7f3522c0e478) 0\nC (0x0x7f3522dd51e0) 0\n```\n\nwhere B has a vtable and vptr, but the others do not.\n\nAlso added the dump flag when tests are built, so we have that available for inspection but it does not cause build time overhead for regular usage.\n\n```\n 8375 Class pldm::fw_update::ComponentImageInfoPrivate\n 8376    size\u003d72 align\u003d8\n 8377    base size\u003d72 base align\u003d8\n 8378 pldm::fw_update::ComponentImageInfoPrivate (0x0x7f3877e30780) 0\n\n 8547 Class pldm::fw_update::FirmwareDeviceIDRecordPrivate\n 8548    size\u003d136 align\u003d8\n 8549    base size\u003d136 base align\u003d8\n 8550 pldm::fw_update::FirmwareDeviceIDRecordPrivate (0x0x7f3877e30840) 0\n\n 8686 Class pldm::fw_update::PackagePrivate\n 8687    size\u003d48 align\u003d8\n 8688    base size\u003d48 base align\u003d8\n 8689 pldm::fw_update::PackagePrivate (0x0x7f3877fce900) 0\n\n 7098 Class pldm::fw_update::DescriptorData\n 7099    size\u003d8 align\u003d8\n 7100    base size\u003d8 base align\u003d8\n 7101 pldm::fw_update::DescriptorData (0x0x7f387893ef00) 0\n\n 7404 Class pldm::fw_update::ComponentImageInfo\n 7405    size\u003d8 align\u003d8\n 7406    base size\u003d8 base align\u003d8\n 7407 pldm::fw_update::ComponentImageInfo (0x0x7f387876b7e0) 0\n\n 7710 Class pldm::fw_update::FirmwareDeviceIDRecord\n 7711    size\u003d8 align\u003d8\n 7712    base size\u003d8 base align\u003d8\n 7713 pldm::fw_update::FirmwareDeviceIDRecord (0x0x7f38784e2540) 0\n\n 8016 Class pldm::fw_update::Package\n 8017    size\u003d8 align\u003d8\n 8018    base size\u003d8 base align\u003d8\n 8019 pldm::fw_update::Package (0x0x7f38782427e0) 0\n\n 8166 Class pldm::fw_update::PackageParserError\n 8167    size\u003d40 align\u003d8\n 8168    base size\u003d40 base align\u003d8\n 8169 pldm::fw_update::PackageParserError (0x0x7f38783c4ba0) 0\n\n 8171 Class pldm::fw_update::PackageParser\n 8172    size\u003d1 align\u003d1\n 8173    base size\u003d0 base align\u003d1\n 8174 pldm::fw_update::PackageParser (0x0x7f387815f3c0) 0 empty\n\n 8364 Class pldm::fw_update::DescriptorDataPrivate\n 8365    size\u003d64 align\u003d8\n 8366    base size\u003d64 base align\u003d8\n 8367 pldm::fw_update::DescriptorDataPrivate (0x0x7f387815f420) 0\n```\n\nBased on the dump extract i assume that our public classes (except `PackageParserError`) always have a size of 8 bytes to store the unique pointer to the private struct.\n\nSo the private structs can then be changed in size and layout without effects on ABI.\n\nI might go for D-pointer on `PackageParserError` as well, still considering.",
+      "parentUuid": "5c6af334_8bf70193",
+      "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
