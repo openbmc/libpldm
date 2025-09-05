@@ -569,13 +569,8 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 		return PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION;
 	}
 
-	// A section offset of 0 is only valid on FIRST_PART or COMPLETE Xfers.
-	if (*section_offset == 0 && (*transfer_opflag != PLDM_XFER_FIRST_PART &&
-				     *transfer_opflag != PLDM_XFER_COMPLETE)) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-
-	if (*transfer_handle == 0 && *transfer_opflag != PLDM_XFER_COMPLETE) {
+	// Transfer handle can be 0 only if the transfer flag is one of XFER_FIRST_PART, XFER_ABORT or XFER_COMPLETE
+	if (*transfer_handle == 0 && ((*transfer_opflag == PLDM_XFER_NEXT_PART) || (*transfer_opflag == PLDM_XFER_CURRENT_PART))) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -666,8 +661,10 @@ int decode_pldm_base_multipart_receive_resp(
 					  (void **)&resp->data.ptr);
 	}
 
-	if (resp->transfer_flag !=
-	    PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_ACK_COMPLETION) {
+	if (resp->transfer_flag ==
+		    PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_END ||
+	    resp->transfer_flag ==
+		    PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_START_AND_END) {
 		pldm_msgbuf_extract_p(buf, data_integrity_checksum);
 	}
 
