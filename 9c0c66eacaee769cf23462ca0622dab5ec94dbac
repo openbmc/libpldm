@@ -34,6 +34,24 @@
       "parentUuid": "66cfe634_8a1572c7",
       "revId": "9c0c66eacaee769cf23462ca0622dab5ec94dbac",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaa34ade_c9929e88",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6420,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-05T03:22:33Z",
+      "side": 1,
+      "message": "From the most recent CI run above the problem is:\n\n\u003e You must document your changes under include/libpldm in CHANGELOG.md\n\nAs for\n\n\u003e src/compiler.h:8:0: error: #error The libpldm implementation requires __has_attribute\n\nI really wish we\u0027d just turn off `cppcheck`, it\u0027s incredibly noisy and everyone ignores it",
+      "parentUuid": "74621f86_dea7076a",
+      "revId": "9c0c66eacaee769cf23462ca0622dab5ec94dbac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
