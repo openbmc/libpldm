@@ -86,6 +86,24 @@
       "parentUuid": "5c6af334_8bf70193",
       "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ac01375_0239541d",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-09T02:42:36Z",
+      "side": 1,
+      "message": "Thanks for identifying my error there, and the in-depth discussion.\n\nSo rather, I think we would fail to dynamically link across a library downgrade, where the earlier library version doesn\u0027t export one of the static dispatch symbols referenced?\n\nIf that\u0027s the failure mode, is it the one we want?\n\nFor the C API we won\u0027t get a failure to link but will receive a runtime error due to the unrecognised pin.\n\nSeparately, and more broadly, I feel the approach is a bit duplicative and do wonder if there\u0027s an approach that\u0027s less tedious.\n\nPerhaps there are ideas to steal from here:\n\nhttps://github.com/lotem/mighty_struct?tab\u003dreadme-ov-file\n\nOtherwise, I\u0027m wondering if we could take a similar tack to the C APIs and have the caller pass in a reference to the container (e.g. `std::vec\u003cT\u003e`) where the binding should place the constructed objects. From there, we need to understand the behaviour of e.g. `std::vec\u003cT\u003e` across the library interface where the application and the library have differing ideas of `sizeof(T)`, how that interacts with e.g. `emplace_back()`, whether we have problems of partial construction or otherwise hit sources of undefined behaviour.",
+      "parentUuid": "2083734c_d6044bb7",
+      "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
