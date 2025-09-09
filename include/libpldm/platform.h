@@ -138,6 +138,7 @@ enum pldm_platform_transfer_flag {
  * SuperiorDirectoryFileIdentifier, FileClassification, OemFileClassification,
  * FileCapabilities, FileVersion, FileMaximumSize, FileMaximumFileDescriptorCount,
  * FileNameLength in `Table 108 - File Descriptor PDR` of DSP0248 v1.3.0
+ * This also includes the size of the common PDR header 10 bytes.
  */
 #define PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH 36
 

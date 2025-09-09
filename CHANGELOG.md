@@ -73,6 +73,7 @@ Change categories:
   run-time state machine
 - Add flags parameter to `decode_pldm_firmware_update_package()`
 - Add NOLINT to `pldm__package_header_information` to prevent clang-tidy errors.
+- Updated PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH macro comment.
 
 ### Deprecated
 
