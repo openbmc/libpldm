@@ -104,6 +104,24 @@
       "parentUuid": "2083734c_d6044bb7",
       "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d5bef84_72a8b63c",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-09-09T11:49:31Z",
+      "side": 1,
+      "message": "\u003e So rather, I think we would fail to dynamically link across a library downgrade, where the earlier library version doesn\u0027t export one of the static dispatch symbols referenced?\n\nYes, i would expect linking failure\n\n\u003e If that\u0027s the failure mode, is it the one we want?\n\nThat\u0027s normal for libraries, right? If you depend on newly introduced API functions, then the application will not link against older library versions anymore.\n\n\u003e For the C API we won\u0027t get a failure to link but will receive a runtime error due to the unrecognised pin.\n\nI\u0027m not convinced. `libpldm` also adds new functions to the API surface, right?\n\n```\n## [0.13.0] 2025-06-15\n\n### Added\n\n- utils: Introduce `pldm_edac_crc32()`\n- utils: Introduce `pldm_edac_crc8()`\n- pdr: Add pldm_pdr_delete_by_effecter_id() API \n- platform: Add encode req for GetPDRRepositoryInfo\n- platform: Add encode req \u0026 decode resp for GetEventReceiver\n- pdr: Add pldm_pdr_delete_by_sensor_id() API \n- pdr: Add pldm_entity_association_tree_delete_node() API \n- base: Add decode_set_tid_req() API \n```\n\nIf i were to use the newly introduced function (libpldm `v0.13.0`)\n```\nint pldm_pdr_delete_by_sensor_id(pldm_pdr *repo, uint16_t sensor_id,\n                                bool is_remote, uint32_t *record_handle);\n```\n\nthen i would get linking error if i downgraded to (libpldm `v0.12.0`), right?\n\nThis kind of stability against library downgrade is relevant for callers wanting to be compatible with a range of libpldm versions.\n\nIt should be possible to achieve this with `libpldm`/`libpldmplus` by having a build matrix which compiles and links the application against a range of `libpldm`/`libpldmplus` versions.\n\nThen only symbols available in all of those versions can be used.\n\n\u003e Separately, and more broadly, I feel the approach is a bit duplicative and do wonder if there\u0027s an approach that\u0027s less tedious.\n\nIt\u0027s fairly easy to add struct fields with the proposed solution.\n\nWhere is the \u0027tedious\u0027 located, is it with the caller or the implementer of proposed solution? Is there some workflow which would be time-consuming to do with this API? Can you kindly go into detail here.\n\n\n\u003e Perhaps there are ideas to steal from here:\nhttps://github.com/lotem/mighty_struct?tab\u003dreadme-ov-file\n\nThat repo has 2 stars and is unmaintained for 11 years. Meanwhile Qt and KDE achieve the long-term stable ABI. So i would tend to go with their approach and only modernize it slightly by use of `std::unique_ptr` instead of inventing my own solution.\n\nIt looks to me like `libgpiodcxx` is also going with a smart pointer to a private struct for ABI stability.\n\nhttps://github.com/brgl/libgpiod/blob/4db87075549ebe3fa6d4d381186e30097f327fc7/bindings/cxx/gpiodcxx/chip.hpp#L156\n\nhttps://github.com/brgl/libgpiod/blob/4db87075549ebe3fa6d4d381186e30097f327fc7/bindings/cxx/chip.cpp#L139\n\nThen each public class has a private struct for member variables https://github.com/brgl/libgpiod/blob/4db87075549ebe3fa6d4d381186e30097f327fc7/bindings/cxx/internal.hpp#L92\n\n\n\u003e Otherwise, I\u0027m wondering if we could take a similar tack to the C APIs and have the caller pass in a reference to the container (e.g. std::vec\u003cT\u003e) where the binding should place the constructed objects.\n\nI like the high level API how it\u0027s currently defined. Pass in a pldm fw update package, get a smart pointer to the parsed package, if successful. \n\nIs there any problem with the high level API or any drawback why we would need something different?\n\nI agree there is a bunch of copying involved on various API functions and we can go over those in detail if you want a less overhead. I did not put too much effort there in the optimization since we are still in the API design stage.",
+      "parentUuid": "8ac01375_0239541d",
+      "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
