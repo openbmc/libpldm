@@ -82,6 +82,9 @@ Change categories:
 
 - dsp: base: Don't extract MultipartReceive resp's CRC once complete
 
+- base: Allocating struct pldm_msg with member initialization in
+  PLDM_MSG_DEFINE_P.
+
 ### Security
 
 ## [0.14.0] 2025-08-11
