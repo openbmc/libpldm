@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5b2da1_7ab85b40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "09e1e8e4_87351c88",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 69
+      },
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e1fe9db_06833f28",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-09-05T03:19:38Z",
       "side": 1,
       "message": "I prefer we drop this statement. For this specific change, successful compilation should be enough, and then running the test suite. It\u0027s unclear how the meta-evb-arm platform exercises things.",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01a3c999_69b3d598",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0e1fe9db_06833f28",
       "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fee5ebb8_f74d5fab",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "48685ba8_7db9794b",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "391b1a59_ca710009",
@@ -88,6 +148,24 @@
       "writtenOn": "2025-09-05T03:19:38Z",
       "side": 1,
       "message": "I think this should be a separate patch, ordered before this one.",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2c46b40_f90fe4b0",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "391b1a59_ca710009",
       "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -109,6 +187,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58e9d87f_61e630dd",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0875195d_19be0ea5",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d220a40b_35341500",
@@ -126,6 +222,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df28fce5_64389d6a",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d220a40b_35341500",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81672e72_6d6241b9",
@@ -139,6 +253,54 @@
       "writtenOn": "2025-09-05T03:19:38Z",
       "side": 1,
       "message": "en-dash?",
+      "range": {
+        "startLine": 141,
+        "startChar": 27,
+        "endLine": 141,
+        "endChar": 28
+      },
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea138d75_73ca3a90",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "81672e72_6d6241b9",
+      "range": {
+        "startLine": 141,
+        "startChar": 27,
+        "endLine": 141,
+        "endChar": 28
+      },
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23b27925_6ff1f47a",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "81672e72_6d6241b9",
       "range": {
         "startLine": 141,
         "startChar": 27,
@@ -168,6 +330,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e0776c3_d1be7dd8",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Agreed. There is a potential risk of casting to the wrong type. I will separate the functions by type and see if it looks better.",
+      "parentUuid": "188d12cc_5118e494",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d383ebca_9ef68184",
         "filename": "src/msgbuf.h",
         "patchSetId": 1
@@ -179,6 +359,24 @@
       "writtenOn": "2025-09-05T03:19:38Z",
       "side": 1,
       "message": "Why did the double-underscore get removed?",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df4a17ea_ac5cbdeb",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Acked. \nNot sure why it reported an error at that moment. But now it works.",
+      "parentUuid": "d383ebca_9ef68184",
       "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -196,6 +394,24 @@
       "writtenOn": "2025-09-05T03:19:38Z",
       "side": 1,
       "message": "As above.",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2f8d656_eff34848",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "70b57080_c3e69b64",
       "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -219,6 +435,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe81c436_57847d9a",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Separating the functions by type to see if it works better.",
+      "parentUuid": "d6ecf16c_162ab43c",
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73ba8ecf_986f7b75",
         "filename": "src/msgbuf.h",
         "patchSetId": 1
@@ -230,6 +464,30 @@
       "writtenOn": "2025-09-05T03:19:38Z",
       "side": 1,
       "message": "Can we rather use template specialisation? branching seems like a unusual way to express this.",
+      "range": {
+        "startLine": 1707,
+        "startChar": 1,
+        "endLine": 1711,
+        "endChar": 38
+      },
+      "revId": "56eceef1262a18e7f7573a47adb7ab23d840b165",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ae8fb33_09deda2b",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1711,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2025-09-09T21:09:19Z",
+      "side": 1,
+      "message": "Maybe we can simply use overload functions.",
+      "parentUuid": "73ba8ecf_986f7b75",
       "range": {
         "startLine": 1707,
         "startChar": 1,
