@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8211607_a11504c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-09T03:06:52Z",
+      "side": 1,
+      "message": "Hi Kasun, thanks for the patch! I have a few comments inline.",
+      "revId": "6ab45272df87e392d188c55d683a7e7006bb5c7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b71b81aa_80e794ec",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-09T03:06:52Z",
+      "side": 1,
+      "message": "Can you split this comment out to a separate patch? Essentially it\u0027s a fix for the change that introduced it.",
+      "revId": "6ab45272df87e392d188c55d683a7e7006bb5c7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28f1dec1_d6ad8a28",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-09T03:06:52Z",
+      "side": 1,
+      "message": "These are already provided in `include/libpldm/entity.h`:\n\nhttps://github.com/openbmc/libpldm/blob/main/include/libpldm/entity.h#L23-L24",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 49
+      },
+      "revId": "6ab45272df87e392d188c55d683a7e7006bb5c7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "217e1282_f2aed087",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-09T03:06:52Z",
+      "side": 1,
+      "message": "Do we need to expose this?",
+      "revId": "6ab45272df87e392d188c55d683a7e7006bb5c7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b912da4_0229cab5",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 2732,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-09T03:06:52Z",
+      "side": 1,
+      "message": "APIs throughout the library typically use the opposite order for these parameters. Can you please switch them around such that the length follows the pointer?\n\nAlso, can you please:\n\n1. Make `resp_pdr_buffer` type `void *`\n2. Take `buffer_len` as a type `size_t *`, and [as an in-out parameter](https://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L270-L272)\n\nAs for some nits, I\u0027d prefer we called `pdr_data` just `pdr`, and `resp_pdr_buffer` just `buf` or `buffer`, or better yet, `data` and `data_len` to match `decode_pldm_platform_file_descriptor_pdr()` below.",
+      "range": {
+        "startLine": 2732,
+        "startChar": 1,
+        "endLine": 2732,
+        "endChar": 44
+      },
+      "revId": "6ab45272df87e392d188c55d683a7e7006bb5c7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e54f44_4f97ab73",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3553,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-09T03:06:52Z",
+      "side": 1,
+      "message": "This should be `0`, not `1` (or change `\u003e` to `\u003e\u003d`).",
+      "range": {
+        "startLine": 3553,
+        "startChar": 54,
+        "endLine": 3553,
+        "endChar": 55
+      },
+      "revId": "6ab45272df87e392d188c55d683a7e7006bb5c7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dcf8eb3_a38dc656",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3558,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-09T03:06:52Z",
+      "side": 1,
+      "message": "If this is where the value is used, can we move its definition here into the implementation, instead of exposing it in the library API?",
+      "range": {
+        "startLine": 3558,
+        "startChar": 35,
+        "endLine": 3558,
+        "endChar": 69
+      },
+      "revId": "6ab45272df87e392d188c55d683a7e7006bb5c7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99d29a18_e684231a",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3618,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-09T03:06:52Z",
+      "side": 1,
+      "message": "See related comment above.",
+      "range": {
+        "startLine": 3618,
+        "startChar": 53,
+        "endLine": 3618,
+        "endChar": 54
+      },
+      "revId": "6ab45272df87e392d188c55d683a7e7006bb5c7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19931989_9d6a11f2",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3631,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-09T03:06:52Z",
+      "side": 1,
+      "message": "With respect to the comment about an in-out parameter for the buffer length on the header, you need to use `pldm_msgbuf_complete_used()` here so the encoded length is provided back to the caller.",
+      "revId": "6ab45272df87e392d188c55d683a7e7006bb5c7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
