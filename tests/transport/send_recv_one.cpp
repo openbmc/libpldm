@@ -1,9 +1,36 @@
 #include <libpldm/transport.h>
 
 #include "array.h"
+#include "time-utils.h"
 #include "transport/test.h"
 
 #include <gtest/gtest.h>
+
+extern "C" {
+long global_base_time = 300;
+int libpldm_clock_gettimeval(struct timeval* tv)
+{
+    struct timespec now;
+    static struct timespec init_offset{};
+    int rc;
+
+    rc = clock_gettime(CLOCK_MONOTONIC, &now);
+    if (rc < 0)
+    {
+        return rc;
+    }
+    if (init_offset.tv_sec == 0)
+    {
+        init_offset = now;
+    }
+    /* Adjust the time such that the start of the test
+     * begins at an artificial global_base_time which can
+     * be controlled from any of the TEST() methods */
+    tv->tv_sec = now.tv_sec - init_offset.tv_sec + global_base_time;
+    tv->tv_usec = now.tv_nsec / 1000;
+    return 0;
+}
+}
 
 TEST(Transport, send_recv_one)
 {
