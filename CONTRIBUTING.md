@@ -236,6 +236,14 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 - [ ] My commit message subject is prefixed with the name of the impacted
       subsystem
 
+- [ ] My commit message describes testing practices only if the discussion is
+      substantive.
+  - The description must contain enough information for someone else to
+    reproduce the setup and verify the results.
+
+  - A section on testing should not be added if there was no specific testing
+    performed
+
 ## Adding a new API
 
 ### Naming macros, functions and types
