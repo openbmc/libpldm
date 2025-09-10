@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7108c5d_88eeb2a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:37:49Z",
+      "side": 1,
+      "message": "Generally, can you please prefix your commit subject with the impacted subsystem? So in this case, perhaps:\n\n\u003e dsp: platform: Note inclusion of common PDR header in file descriptor PDR length",
+      "revId": "e1cc80df68fcb4ba501ebbf7619d8a514229e8ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1552f155_8dfaf6d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:37:49Z",
+      "side": 1,
+      "message": "I prefer we don\u0027t add \"Tested:\" sections unless they\u0027re substantive and contain enough information for someone else to reproduce and verify the results. Can you please remove this?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 4
+      },
+      "revId": "e1cc80df68fcb4ba501ebbf7619d8a514229e8ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3294924_90e363ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:37:49Z",
+      "side": 1,
+      "message": "Hi Kasun, just a couple of comments outlining preferences for commit messages.\n\nCan you please adjust the others in the series along these lines as well?",
+      "revId": "e1cc80df68fcb4ba501ebbf7619d8a514229e8ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
