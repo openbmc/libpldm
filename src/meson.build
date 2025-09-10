@@ -1,5 +1,6 @@
 libpldm_sources = files('control.c', 'responder.c', 'utils.c')
 
+subdir('environ')
 subdir('dsp')
 
 if get_option('transport')
