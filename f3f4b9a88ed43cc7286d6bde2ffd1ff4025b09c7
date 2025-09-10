@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d32e25f6_7f19ad4f",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000212
+      },
+      "writtenOn": "2025-09-10T21:24:24Z",
+      "side": 1,
+      "message": "Ahhhh ok. I am well aware of this pattern. We used this in now legacy \"facebook openbmc\" a lot as a poor-man\u0027s inheritance where common is weak and the platform meta-layer can override it. I can take it in that direction. Thanks!\n\nBut... I found another issue. In the container which runs the unit tests, LONG_MAX is defined as a 64bit value. So, you dont run into the issue I was running into on the BMC. :-/. I discovered it when I switched this to\n```\nint pldm_transport_test_get_timeval(struct timeval *tv) {\n    if (pldm_transport_get_timeval(tv) !\u003d 0) return -1;\n    tv-\u003etv_sec +\u003d 2589793;\n    return 0;\n}\n```\nand to my horror (I was expecting the unit tests to fail) the unit tests still passed.\nSo, do you suggest in the tests/ implementation, I use `LONG_MAX - 10`?",
+      "parentUuid": "057ad3a2_6009f2d6",
+      "revId": "f3f4b9a88ed43cc7286d6bde2ffd1ff4025b09c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "598729c3_c0728628",
         "filename": "src/transport/transport.h",
         "patchSetId": 2
