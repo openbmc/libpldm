@@ -122,6 +122,24 @@
       "parentUuid": "8ac01375_0239541d",
       "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f0efd05_68a2a4c7",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:51:54Z",
+      "side": 1,
+      "message": "\u003e \u003e For the C API we won\u0027t get a failure to link but will receive a runtime error due to the unrecognised pin.\n\u003e I\u0027m not convinced. libpldm also adds new functions to the API surface, right?\n\nThough it may not have been clear, I was specifically referring to the case of new members being added to existing components of the firmware update package specification. The C API handles this just fine with the introduction of new struct members and without new exported function symbols.\n\n\u003e Where is the \u0027tedious\u0027 located, is it with the caller or the implementer of proposed solution?\n\nWe have to add a member to the private struct, and (tediously) provide access to that member through a function accessor exposed in the library\u0027s ABI, for all members of all structs. I\u0027m struggling with that, and given the members are specified (indirectly, perhaps) by the DMTF, am wondering whether it\u0027s necessary.\n\nIf we were discussing classes whose implementation could change on a whim, then sure, the D-Pointer approach is understandable, but it\u0027s not so much the case here.\n\n\u003e That repo has 2 stars and is unmaintained for 11 years.\n\nI wasn\u0027t suggesting taking a dependency on that repo. I was musing about whether we could implement ideas it contains.\n\n\u003e Is there any problem with the high level API or any drawback why we would need something different?\n\nWe seem to be discussing the drawbacks here already?",
+      "parentUuid": "9d5bef84_72a8b63c",
+      "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
