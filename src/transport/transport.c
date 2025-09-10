@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "compiler.h"
 #include "transport.h"
+#include "time-utils.h"
 
 #include <libpldm/transport.h>
 #include <libpldm/base.h>
@@ -100,12 +101,6 @@ pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
 	return PLDM_REQUESTER_SUCCESS;
 }
 
-static void timespec_to_timeval(const struct timespec *ts, struct timeval *tv)
-{
-	tv->tv_sec = ts->tv_sec;
-	tv->tv_usec = ts->tv_nsec / 1000;
-}
-
 /* Overflow safety must be upheld before call */
 static long timeval_to_msec(const struct timeval *tv)
 {
@@ -126,21 +121,6 @@ static bool timeval_is_valid(const struct timeval *tv)
 	}
 
 	return true;
-}
-
-static int clock_gettimeval(clockid_t clockid, struct timeval *tv)
-{
-	struct timespec now;
-	int rc;
-
-	rc = clock_gettime(clockid, &now);
-	if (rc < 0) {
-		return rc;
-	}
-
-	timespec_to_timeval(&now, tv);
-
-	return 0;
 }
 
 LIBPLDM_ABI_STABLE
@@ -196,7 +176,7 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		return rc;
 	}
 
-	ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
+	ret = libpldm_clock_gettimeval(&now);
 	if (ret < 0) {
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
@@ -218,7 +198,7 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			return PLDM_REQUESTER_RECV_FAIL;
 		}
 
-		ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
+		ret = libpldm_clock_gettimeval(&now);
 		if (ret < 0) {
 			return PLDM_REQUESTER_POLL_FAIL;
 		}
