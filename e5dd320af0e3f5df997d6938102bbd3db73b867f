@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9db0d5d_0a58a851",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:01:22Z",
+      "side": 1,
+      "message": "Can you please move this up to preserve the reverse-christmas-tree order?\n\nhttps://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L351-L355",
+      "revId": "e5dd320af0e3f5df997d6938102bbd3db73b867f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53b39bef_f3b7b6a4",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:01:22Z",
+      "side": 1,
+      "message": "Reverse-christmas-tree again here.",
+      "revId": "e5dd320af0e3f5df997d6938102bbd3db73b867f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1789ca8_58e1c087",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1813,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:01:22Z",
+      "side": 1,
+      "message": "reverse-christmas-tree",
+      "revId": "e5dd320af0e3f5df997d6938102bbd3db73b867f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43912858_35102e5a",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3240,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:01:22Z",
+      "side": 1,
+      "message": "reverse-christmas-tree",
+      "revId": "e5dd320af0e3f5df997d6938102bbd3db73b867f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11f4758e_cc7367f7",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:01:22Z",
+      "side": 1,
+      "message": "Rather than forward-declare these, can we move the implementations up?\n\nAlso wondering if we just split out a `src/msgbuf.hpp` at this point.",
+      "revId": "e5dd320af0e3f5df997d6938102bbd3db73b867f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c137fb4a_51984fd4",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:01:22Z",
+      "side": 1,
+      "message": "As a general observation, it\u0027s fine to pass a non-const pointer as an argument for a const-qualified parameter. I wonder if we can exploit this to save on duplicating the logic of hte implementations by deconstructing the arguments.\n\nTaking these cleanup functions as an example, say we do (function attributes omitted for brevity):\n\n```c\nvoid pldm__msgbuf_cleanup(\n        const void *cursor LIBPLDM_CC_UNUSED,\n        intmax_t remaining LIBPLDM_CC_UNUSED)\n{\n    assert(cursor \u003d\u003d NULL \u0026\u0026 remaining \u003d\u003d INTMAX_MIN);\n}\n\nvoid pldm__msgbuf_rw_cleanup(struct pldm_msgbuf_rw *ctx)\n{\n    pldm__msgbuf_cleanup(ctx-\u003ecursor, ctx-\u003eremaining);\n}\n\nvoid pldm__msgbuf_ro_cleanup(struct pldm_msgbuf_ro *ctx)\n{\n    pldm__msgbuf_cleanup(ctx-\u003ecursor, ctx-\u003eremaining);\n}\n```\n\nAdmittedly, for this specific case, it\u0027s not more concise, but when we get to  `pldm_msgbuf_span_*()` and similar this tactic might save us a maintenance headache.\n\nThere\u0027s an edge case where a const pointer is returned, pointing into a const argument. In that case we can safely cast the const away, because the pointer was provided to us in that state. To illustrate the idea with an invented example:\n\n```\nstatic int pldm__msgbuf_span_required(\n        const uint8_t *buf,\n        intmax_t remaining,\n        size_t required,\n        const void **cursor)\n{\n    /* Usual safety tests */\n    *cursor \u003d buf + required;\n    return 0;\n}\n\nint pldm_msgbuf_rw_span_required(\n        struct pldm_msgbuf_rw *ctx,\n        size_t required,\n        void **cursor)\n{\n    return pldm__msgbuf_span_required(\n        ctx-\u003ecursor,\n        ctx-\u003eremaining,\n        required,\n        (const void **)cursor);\n}\n```",
+      "revId": "e5dd320af0e3f5df997d6938102bbd3db73b867f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63e25911_a3c99d53",
+        "filename": "src/msgbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:01:22Z",
+      "side": 1,
+      "message": "This looks like a lot, but I see that it caught all the casts with const-correctness problems in the library implementation. Nice!",
+      "revId": "e5dd320af0e3f5df997d6938102bbd3db73b867f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd85d524_634ece1a",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2351,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-10T05:01:22Z",
+      "side": 1,
+      "message": "reverse-christmas-tree",
+      "revId": "e5dd320af0e3f5df997d6938102bbd3db73b867f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
