@@ -231,6 +231,11 @@ subproject configuration syntax:
 meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 ```
 
+## General practices
+
+- [ ] My commit message subject is prefixed with the name of the impacted
+      subsystem
+
 ## Adding a new API
 
 ### Naming macros, functions and types
