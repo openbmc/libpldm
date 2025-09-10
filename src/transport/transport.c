@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "compiler.h"
 #include "transport.h"
+#include "environ/time.h"
 
 #include <libpldm/transport.h>
 #include <libpldm/base.h>
@@ -133,7 +134,7 @@ static int clock_gettimeval(clockid_t clockid, struct timeval *tv)
 	struct timespec now;
 	int rc;
 
-	rc = clock_gettime(clockid, &now);
+	rc = libpldm_clock_gettime(clockid, &now);
 	if (rc < 0) {
 		return rc;
 	}
