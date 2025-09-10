@@ -140,6 +140,24 @@
       "parentUuid": "9d5bef84_72a8b63c",
       "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "211de00b_6c4b91fc",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-09-10T09:52:01Z",
+      "side": 1,
+      "message": "\u003e Though it may not have been clear, I was specifically referring to the case of new members being added to existing components of the firmware update package specification. The C API handles this just fine with the introduction of new struct members and without new exported function symbols.\n\nYes, but introducing new struct members changes the ABI, which we are trying to avoid?\n\nLet\u0027s say we were to add members to\n```\n  /** @struct pldm_firmware_device_id_record\n   *\n   *  Structure representing firmware device ID record\n   */\n  struct pldm_firmware_device_id_record {\n  |       uint16_t record_length;\n  |       uint8_t descriptor_count;\n  |       bitfield32_t device_update_option_flags;\n  |       uint8_t comp_image_set_version_string_type;\n  |       uint8_t comp_image_set_version_string_length;\n  |       uint16_t fw_device_pkg_data_length;\n  } __attribute__((packed));\n```\n\nthen it grows in size, right? So it will no longer be ABI-compatible.\n\n\u003e The C API handles this just fine with the introduction of new struct members and without new exported function symbols.\n\nIf we access these new struct members, then the application will no longer link against older libpldm versions, right? Which is the same failure mode as my patch.\n\n\u003e I\u0027m struggling with that, and given the members are specified (indirectly, perhaps) by the DMTF, am wondering whether it\u0027s necessary.\n\n`libpldm` abstracts over the DMTF specs. `libpldmplus` abstracts over `libpldm`.\n\nI don\u0027t need to have some exact mapping to the underlying data type from the specification. It can be something else entirely. It does not need to have the exact name from the spec.\n\nIMO DMTF does **not** specify our struct members. It specifies the fw update package layout. I did not find any wording like \"if you parse our fw package, it must be parsed into a struct which closely matches the package layout\"\n\n\u003e If we were discussing classes whose implementation could change on a whim, then sure, the D-Pointer approach is understandable, but it\u0027s not so much the case here.\n\nIf that\u0027s possible, i would prefer to be able to change the underlying members for storage and processing. Based on which functions users need from `PackageParser`, there might be a better internal layout.\n\n\n\n\u003e I wasn\u0027t suggesting taking a dependency on that repo. I was musing about whether we could implement ideas it contains.\n\nIt looks like a failed idea to me since it\u0027s unmaintained and abandoned.\n\n\u003e We seem to be discussing the drawbacks here already?\n\n\u003e So rather, I think we would fail to dynamically link across a library downgrade, where the earlier library version doesn\u0027t export one of the static dispatch symbols referenced?\n\nThat\u0027s a problem every library has. If you want to avoid this problem, you cannot ever add any new symbol to a library.\n\nWhich is kind of insane.\n\n\n`libpldm` is also adding new symbols to the API surface, so i wonder why we have this requirement now to not add any new symbols.",
+      "parentUuid": "0f0efd05_68a2a4c7",
+      "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
