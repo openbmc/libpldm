@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "compiler.h"
 #include "transport.h"
+#include "environ/time.h"
 
 #include <libpldm/transport.h>
 #include <libpldm/base.h>
@@ -128,12 +129,12 @@ static bool timeval_is_valid(const struct timeval *tv)
 	return true;
 }
 
-static int clock_gettimeval(clockid_t clockid, struct timeval *tv)
+static int clock_gettimeval(struct timeval *tv)
 {
 	struct timespec now;
 	int rc;
 
-	rc = clock_gettime(clockid, &now);
+	rc = libpldm_clock_gettime(&now);
 	if (rc < 0) {
 		return rc;
 	}
@@ -196,7 +197,7 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		return rc;
 	}
 
-	ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
+	ret = clock_gettimeval(&now);
 	if (ret < 0) {
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
@@ -218,7 +219,7 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			return PLDM_REQUESTER_RECV_FAIL;
 		}
 
-		ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
+		ret = clock_gettimeval(&now);
 		if (ret < 0) {
 			return PLDM_REQUESTER_POLL_FAIL;
 		}
