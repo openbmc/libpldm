@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "compiler.h"
 #include "transport.h"
+#include "utils.h"
 
 #include <libpldm/transport.h>
 #include <libpldm/base.h>
@@ -100,49 +101,6 @@ pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
 	return PLDM_REQUESTER_SUCCESS;
 }
 
-static void timespec_to_timeval(const struct timespec *ts, struct timeval *tv)
-{
-	tv->tv_sec = ts->tv_sec;
-	tv->tv_usec = ts->tv_nsec / 1000;
-}
-
-/* Overflow safety must be upheld before call */
-static long timeval_to_msec(const struct timeval *tv)
-{
-	return tv->tv_sec * 1000 + tv->tv_usec / 1000;
-}
-
-/* If calculations on `tv` don't overflow then operations on derived
- * intervals can't either.
- */
-static bool timeval_is_valid(const struct timeval *tv)
-{
-	if (tv->tv_sec < 0 || tv->tv_usec < 0 || tv->tv_usec >= 1000000) {
-		return false;
-	}
-
-	if (tv->tv_sec > (LONG_MAX - tv->tv_usec / 1000) / 1000) {
-		return false;
-	}
-
-	return true;
-}
-
-static int clock_gettimeval(clockid_t clockid, struct timeval *tv)
-{
-	struct timespec now;
-	int rc;
-
-	rc = clock_gettime(clockid, &now);
-	if (rc < 0) {
-		return rc;
-	}
-
-	timespec_to_timeval(&now, tv);
-
-	return 0;
-}
-
 LIBPLDM_ABI_STABLE
 pldm_requester_rc_t
 pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
@@ -196,13 +154,13 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		return rc;
 	}
 
-	ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
+	ret = libpldm_clock_gettimeval(&now);
 	if (ret < 0) {
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
 
 	timeradd(&now, &max_response_interval, &end);
-	if (!timeval_is_valid(&end)) {
+	if (!libpldm_timeval_is_valid(&end)) {
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
 
@@ -212,13 +170,13 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		timersub(&end, &now, &remaining);
 
 		/* 0 <= `timeval_to_msec()` <= 4800, and 4800 < INT_MAX */
-		ret = pldm_transport_poll(transport,
-					  (int)(timeval_to_msec(&remaining)));
+		ret = pldm_transport_poll(
+			transport, (int)(libpldm_timeval_to_msec(&remaining)));
 		if (ret <= 0) {
 			return PLDM_REQUESTER_RECV_FAIL;
 		}
 
-		ret = clock_gettimeval(CLOCK_MONOTONIC, &now);
+		ret = libpldm_clock_gettimeval(&now);
 		if (ret < 0) {
 			return PLDM_REQUESTER_POLL_FAIL;
 		}

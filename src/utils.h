@@ -5,6 +5,7 @@
 #include <errno.h>
 #include <stdint.h>
 #include <stddef.h>
+#include <sys/time.h>
 
 /**
  * @brief Validate the CRC32 checksum of the given data.
@@ -17,4 +18,29 @@
  *              -EINVAL     if the arguments are invalid
  */
 int pldm_edac_crc32_validate(uint32_t expected, const void *data, size_t size);
+
+/**
+* @brief Convert timeval to milli-seconds
+*
+* @param[in]   tv           The input timeval.
+* @return      time in milliseconds.
+*/
+long libpldm_timeval_to_msec(const struct timeval *tv);
+
+/**
+* @brief Check if timeval is valid
+*
+* @param[in]   tv           The input timeval.
+* @return      true if its within acceptable range for poll.
+*/
+bool libpldm_timeval_is_valid(const struct timeval *tv);
+
+/**
+* @brief Get current time
+*
+* @param[out]   tv           The output current timeval.
+* @return      0 on success. Negative error code on failure.
+*/
+int libpldm_clock_gettimeval(struct timeval *tv);
+
 #endif
