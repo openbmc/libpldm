@@ -1,9 +1,15 @@
 #include <libpldm/transport.h>
 
 #include "array.h"
+#include "time-utils.h"
 #include "transport/test.h"
 
 #include <gtest/gtest.h>
+
+int libpldm_clock_gettimeval(struct timeval*)
+{
+    return -1;
+}
 
 TEST(Transport, create)
 {
