@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6ebe299_80adfdc1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-11T16:26:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad644964_54f77122",
+      "revId": "1744b82b3516c620b8a0ef8ce3c6f78c8535c592",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23438bac_9ed874f5",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-09-11T05:14:52Z",
       "side": 1,
       "message": "can we have it uniform and add a prefix `PLDM_`",
+      "range": {
+        "startLine": 111,
+        "startChar": 1,
+        "endLine": 111,
+        "endChar": 31
+      },
+      "revId": "1744b82b3516c620b8a0ef8ce3c6f78c8535c592",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b69e745c_7eaa40e4",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-11T16:26:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23438bac_9ed874f5",
       "range": {
         "startLine": 111,
         "startChar": 1,
