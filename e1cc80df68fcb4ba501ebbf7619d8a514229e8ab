@@ -109,6 +109,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2e45deb6_53a874fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-11T04:42:25Z",
+      "side": 1,
+      "message": "Yep, I\u0027ve restarted gerrit to recover from some intermittent issues with syncing to github.",
+      "parentUuid": "12961bfb_3f5b13ff",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 4
+      },
+      "revId": "e1cc80df68fcb4ba501ebbf7619d8a514229e8ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a3294924_90e363ca",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
