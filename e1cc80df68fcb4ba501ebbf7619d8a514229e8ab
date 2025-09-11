@@ -133,6 +133,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6e465a9f_f423e7d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-11T16:19:39Z",
+      "side": 1,
+      "message": "I see, thanks. Now the build is passing",
+      "parentUuid": "2e45deb6_53a874fb",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 4
+      },
+      "revId": "e1cc80df68fcb4ba501ebbf7619d8a514229e8ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a3294924_90e363ca",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
