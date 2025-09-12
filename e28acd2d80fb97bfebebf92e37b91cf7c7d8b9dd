@@ -16,6 +16,24 @@
       "message": "I\u0027ve fixed up the abi dump so the diff isn\u0027t so huge.\n\nCan you please drop the macro guards from the test cases for the stabilised APIs?",
       "revId": "e28acd2d80fb97bfebebf92e37b91cf7c7d8b9dd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ff13d45_4c19788c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-09-12T05:30:46Z",
+      "side": 1,
+      "message": "Thanks, Andrew!\nyes made the change in the next patchset.",
+      "parentUuid": "5dd0c68e_f765ef71",
+      "revId": "e28acd2d80fb97bfebebf92e37b91cf7c7d8b9dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
