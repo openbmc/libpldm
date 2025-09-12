@@ -1833,3 +1833,91 @@ TEST(NegotiateTransferParams, TestDecodeNegotiateTransferParamsReqFail)
     EXPECT_EQ(rc, -EBADMSG);
 }
 #endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(NegotiateTransferParams, TestEncodeNegotiateTransferParamsRespPass)
+{
+    // Prepare encode parameters for a successful response
+    uint8_t instance_id = 0x0B;
+    uint8_t completion_code_success = PLDM_SUCCESS;
+    uint16_t responder_part_size = 2048; // 0x0800
+    bitfield8_t responder_protocol_support[8];
+    for (int i = 0; i < 8; ++i)
+    {
+        responder_protocol_support[i].byte = static_cast<uint8_t>(0xA0 + i);
+    }
+
+    struct pldm_base_negotiate_transfer_params_resp resp_params_success;
+    resp_params_success.completion_code = completion_code_success;
+    resp_params_success.responder_part_size = responder_part_size;
+    memcpy(resp_params_success.responder_protocol_support,
+           responder_protocol_support, sizeof(responder_protocol_support));
+
+    PLDM_MSG_DEFINE_P(response,
+                      PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES);
+    size_t payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES;
+
+    // Encode success case
+    int rc = encode_pldm_base_negotiate_transfer_params_resp(
+        instance_id, &resp_params_success, response, &payload_len);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(response->hdr.request, PLDM_RESPONSE);
+    EXPECT_EQ(response->hdr.instance_id, instance_id);
+    EXPECT_EQ(response->hdr.type, PLDM_BASE);
+    EXPECT_EQ(response->hdr.command, PLDM_NEGOTIATE_TRANSFER_PARAMETERS);
+
+    // Verify the encoded response using the decode function
+    struct pldm_base_negotiate_transfer_params_resp decoded_resp;
+    payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES;
+    rc = decode_pldm_base_negotiate_transfer_params_resp(response, payload_len,
+                                                         &decoded_resp);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(decoded_resp.completion_code, completion_code_success);
+    EXPECT_EQ(decoded_resp.responder_part_size, responder_part_size);
+    for (int i = 0; i < 8; ++i)
+    {
+        EXPECT_EQ(decoded_resp.responder_protocol_support[i].byte,
+                  responder_protocol_support[i].byte);
+    }
+}
+
+TEST(NegotiateTransferParams, TestEncodeNegotiateTransferParamsRespFail)
+{
+    // Prepare encode parameters
+    uint8_t instance_id = 0x0B;
+    uint8_t completion_code_success = PLDM_SUCCESS;
+    uint16_t responder_part_size = 2048; // 0x0800
+    bitfield8_t responder_protocol_support[8];
+    for (int i = 0; i < 8; ++i)
+    {
+        responder_protocol_support[i].byte = static_cast<uint8_t>(0xA0 + i);
+    }
+
+    struct pldm_base_negotiate_transfer_params_resp resp_params_success;
+    resp_params_success.completion_code = completion_code_success;
+    resp_params_success.responder_part_size = responder_part_size;
+    memcpy(resp_params_success.responder_protocol_support,
+           responder_protocol_support, sizeof(responder_protocol_support));
+
+    PLDM_MSG_DEFINE_P(response,
+                      PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES);
+    size_t payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES;
+    int rc = 0;
+
+    // Null arguments
+    rc = encode_pldm_base_negotiate_transfer_params_resp(
+        instance_id, nullptr, response, &payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+
+    payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES;
+    rc = encode_pldm_base_negotiate_transfer_params_resp(
+        instance_id, &resp_params_success, nullptr, &payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Incorrect payload length
+    payload_len = PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES - 1;
+    rc = encode_pldm_base_negotiate_transfer_params_resp(
+        instance_id, &resp_params_success, response, &payload_len);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif

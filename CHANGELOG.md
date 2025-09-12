@@ -23,6 +23,7 @@ Change categories:
   - Added `encode_pldm_platform_file_descriptor_pdr()`
 - utils: Added `pldm_edac_crc32_extend()`
 - base: Added `decode_pldm_base_negotiate_transfer_params_req()`
+- base: Added `encode_pldm_base_negotiate_transfer_params_resp()`
 
 ### Changed
 
