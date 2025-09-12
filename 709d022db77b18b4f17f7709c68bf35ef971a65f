@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9094c5df_b07f056f",
+        "filename": "src/utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-12T03:53:30Z",
+      "side": 1,
+      "message": "These aren\u0027t calling into libc, so I don\u0027t see a need to hook them.",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 1
+      },
+      "revId": "709d022db77b18b4f17f7709c68bf35ef971a65f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a943ba4b_4fdad97c",
+        "filename": "src/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-12T03:53:30Z",
+      "side": 1,
+      "message": "What\u0027s the motivation for exposing these? My gut instinct is it should not be necessary.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 56
+      },
+      "revId": "709d022db77b18b4f17f7709c68bf35ef971a65f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e63caa75_89b52aae",
+        "filename": "src/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-12T03:53:30Z",
+      "side": 1,
+      "message": "I left a comment on the patch you abandoned about not putting these in `src/time.h` rather than `src/utils.h`:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/83439/comment/057ad3a2_6009f2d6/\n\nCan you please fix that?",
+      "revId": "709d022db77b18b4f17f7709c68bf35ef971a65f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
