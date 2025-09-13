@@ -99,6 +99,8 @@ Change categories:
 - base:
   - Removed RequestedSectionOffset check in decode_multipart_receive_req()
   - Updated DataTransferHandle check in decode_multipart_receive_req()
+  - Updated encode_base_multipart_receive_resp() to insert checksum except when
+    TransferFlag is ACKNOWLEDGE_COMPLETION
 
 ### Security
 
