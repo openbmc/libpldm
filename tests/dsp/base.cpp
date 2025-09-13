@@ -1093,37 +1093,28 @@ TEST(EncodeMultipartReceiveResponse, GoodTestWithoutChecksum)
 {
     uint8_t instance_id = 0;
     uint8_t completionCode = PLDM_SUCCESS;
-    uint8_t transferFlag = PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_START;
-    uint32_t nextDataTransferHandle = 0x16;
-    static constexpr const uint32_t dataLength = 9;
-    std::vector<uint8_t> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    uint8_t transferFlag =
+        PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_ACK_COMPLETION;
+    uint32_t nextDataTransferHandle = 0;
+    static constexpr const uint32_t dataLength = 0;
     static constexpr const size_t responseMsgLength =
         PLDM_BASE_MULTIPART_RECEIVE_RESP_MIN_BYTES + dataLength;
     size_t payload_length = responseMsgLength;
 
-    struct variable_field payload = {data.data(), dataLength};
+    struct variable_field payload = {nullptr, dataLength};
     struct pldm_base_multipart_receive_resp resp_data = {
         completionCode, transferFlag, nextDataTransferHandle, payload};
     std::array<uint8_t, responseMsgLength> responseMsg = {
-        completionCode,
+        completionCode, 
         transferFlag,
-        0x16, // nextDataTransferHandle
+        0x00, // nextDataTransferHandle
         0x00,
         0x00,
         0x00,
-        0x09, // dataLength
+        0x00, // dataLength
         0x00,
         0x00,
-        0x00,
-        0x1, // data
-        0x2,
-        0x3,
-        0x4,
-        0x5,
-        0x6,
-        0x7,
-        0x8,
-        0x9};
+        0x00};
 
     PLDM_MSG_DEFINE_P(responsePtr, responseMsgLength);
     int rc;
