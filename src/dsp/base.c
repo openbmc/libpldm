@@ -684,7 +684,11 @@ int encode_base_multipart_receive_resp(
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
-	if (!msg || !resp || !payload_length || !resp->data.ptr) {
+	if (!msg || !resp || !payload_length) {
+		return -EINVAL;
+	}
+
+	if ((resp->data.length > 0) && !resp->data.ptr) {
 		return -EINVAL;
 	}
 
@@ -729,8 +733,10 @@ int encode_base_multipart_receive_resp(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
-	if (resp->transfer_flag == PLDM_END ||
-	    resp->transfer_flag == PLDM_START_AND_END) {
+	// Checksum is present for all data parts except when response transfer flag is
+	// ACKNOWLEDGE_COMPLETION
+	if (resp->transfer_flag !=
+	    PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_ACK_COMPLETION) {
 		pldm_msgbuf_insert(buf, checksum);
 	}
 
