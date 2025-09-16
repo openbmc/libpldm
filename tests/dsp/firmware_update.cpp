@@ -5152,7 +5152,6 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
     EXPECT_EQ(nr_infos, 1);
 }
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, invalidDownstreamDeviceIteration)
 {
     const std::array<uint8_t, 102> package{
@@ -5254,9 +5253,7 @@ TEST(DecodePldmFirmwareUpdatePackage, invalidDownstreamDeviceIteration)
     foreach_pldm_package_downstream_device_id_record(pkg, ddrec, rc)
         EXPECT_NE(rc, 0);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, p2v1h1fd1fdd1cii)
 {
     const std::array<uint8_t, 102> package{
@@ -6108,9 +6105,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
 
     EXPECT_EQ(nr_infos, 2);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, downstreamDeviceBeforeFirmwareDevice)
 {
     const std::array<uint8_t, 182> package{
@@ -6162,9 +6157,7 @@ TEST(DecodePldmFirmwareUpdatePackage, downstreamDeviceBeforeFirmwareDevice)
     }
     EXPECT_NE(rc, 0);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage, componentImageInfosBeforeFirmwareDevice)
 {
     const std::array<uint8_t, 182> package{
@@ -6216,9 +6209,7 @@ TEST(DecodePldmFirmwareUpdatePackage, componentImageInfosBeforeFirmwareDevice)
     }
     EXPECT_NE(rc, 0);
 }
-#endif
 
-#ifdef LIBPLDM_API_TESTING
 TEST(DecodePldmFirmwareUpdatePackage,
      p4v2ComponentImageInfosBeforeDownstreamDevice)
 {
@@ -6284,4 +6275,3 @@ TEST(DecodePldmFirmwareUpdatePackage,
     }
     EXPECT_NE(rc, 0);
 }
-#endif
