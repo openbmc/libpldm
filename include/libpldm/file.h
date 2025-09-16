@@ -12,12 +12,12 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 
-#define PLDM_DF_OPEN_REQ_BYTES	     4
-#define PLDM_DF_OPEN_RESP_BYTES	     3
-#define PLDM_DF_CLOSE_REQ_BYTES	     4
-#define PLDM_DF_CLOSE_RESP_BYTES     1
-#define PLDM_DF_HEARTBEAT_REQ_BYTES  6
-#define PLDM_DF_HEARTBEAT_RESP_BYTES 5
+#define PLDM_DF_OPEN_REQ_BYTES	     4ul
+#define PLDM_DF_OPEN_RESP_BYTES	     3ul
+#define PLDM_DF_CLOSE_REQ_BYTES	     4ul
+#define PLDM_DF_CLOSE_RESP_BYTES     1ul
+#define PLDM_DF_HEARTBEAT_REQ_BYTES  6ul
+#define PLDM_DF_HEARTBEAT_RESP_BYTES 5ul
 
 /** @brief PLDM File Transfer Completion Code */
 enum pldm_file_cc {

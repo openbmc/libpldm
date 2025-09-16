@@ -555,7 +555,7 @@ TEST(EncodeDfOpenResp, GoodTestCompletionCode)
     auto rc = encode_pldm_file_df_open_resp(instance_id, &resp_data,
                                             responsePtr, &payload_length);
     EXPECT_EQ(rc, 0);
-    EXPECT_EQ(payload_length, 1); // Completion code only
+    EXPECT_EQ(payload_length, 1ul); // Completion code only
 }
 #endif
 

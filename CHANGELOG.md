@@ -85,6 +85,8 @@ Change categories:
 - base: Allocating struct pldm_msg with member initialization in
   PLDM_MSG_DEFINE_P.
 
+- include, tests: Address concerns from -Wsign-compare
+
 ### Security
 
 ## [0.14.0] 2025-08-11

@@ -1202,7 +1202,7 @@ TEST(EncodeMultipartReceiveResponse, GoodTestCompletionCode)
     ASSERT_EQ(0, rc);
     EXPECT_EQ(0, memcmp(responsePtr->payload, responseMsg.data(),
                         sizeof(responseMsg)));
-    EXPECT_EQ(payload_length, 1);
+    EXPECT_EQ(payload_length, 1ul);
 }
 #endif
 
