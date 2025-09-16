@@ -3547,7 +3547,7 @@ int encode_pldm_platform_file_descriptor_pdr(
 	const struct pldm_platform_file_descriptor_pdr *pdr, void *data,
 	size_t *data_len)
 {
-	PLDM_MSGBUF_DEFINE_P(buf);
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
 
 	if (!pdr || !pdr->file_name.ptr || !data ||
 	    (pdr->file_name.length <= 1)) {
