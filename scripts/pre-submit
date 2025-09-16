@@ -1,6 +1,9 @@
 #!/usr/bin/sh
 set -eu
 
+# For valgrind, value is arbitrarily low-ish
+ulimit -n 2048
+
 BUILD="$(mktemp --directory --tmpdir=.)"
 trap 'rm -rf "$BUILD"' EXIT
 
