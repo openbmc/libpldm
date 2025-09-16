@@ -520,7 +520,7 @@ TEST(DecodeFirmwareDeviceIdRecord, goodPathNofwDevicePkgData)
                                uuid.begin(), uuid.end()));
 
     EXPECT_EQ(outFwDevicePkgData.ptr, nullptr);
-    EXPECT_EQ(outFwDevicePkgData.length, 0);
+    EXPECT_EQ(outFwDevicePkgData.length, 0ul);
 }
 
 TEST(DecodeFirmwareDeviceIdRecord, ErrorPaths)
@@ -1316,7 +1316,7 @@ TEST(GetFirmwareParameters, decodeResponseZeroCompCount)
         outPendingCompImageSetVersion.length);
     EXPECT_EQ(pendingCompImageSetVersionStr, pendingCompImageSetVersion);
     EXPECT_EQ(outCompParameterTable.ptr, nullptr);
-    EXPECT_EQ(outCompParameterTable.length, 0);
+    EXPECT_EQ(outCompParameterTable.length, 0ul);
 }
 
 TEST(GetFirmwareParameters,
@@ -1361,16 +1361,16 @@ TEST(GetFirmwareParameters,
               activeCompImageSetVersion.size());
     EXPECT_EQ(outResp.pending_comp_image_set_ver_str_type,
               PLDM_STR_TYPE_UNKNOWN);
-    EXPECT_EQ(outResp.pending_comp_image_set_ver_str_len, 0);
+    EXPECT_EQ(outResp.pending_comp_image_set_ver_str_len, 0u);
     std::string activeCompImageSetVersionStr(
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const char*>(outActiveCompImageSetVersion.ptr),
         outActiveCompImageSetVersion.length);
     EXPECT_EQ(activeCompImageSetVersionStr, activeCompImageSetVersion);
     EXPECT_EQ(outPendingCompImageSetVersion.ptr, nullptr);
-    EXPECT_EQ(outPendingCompImageSetVersion.length, 0);
+    EXPECT_EQ(outPendingCompImageSetVersion.length, 0ul);
     EXPECT_EQ(outCompParameterTable.ptr, nullptr);
-    EXPECT_EQ(outCompParameterTable.length, 0);
+    EXPECT_EQ(outCompParameterTable.length, 0ul);
 }
 
 TEST(GetFirmwareParameters, decodeResponseErrorCompletionCode)
@@ -2097,7 +2097,7 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneDescriptorEach)
         devIndex++;
     }
     ASSERT_EQ(rc, 0);
-    EXPECT_EQ(devIndex, 2);
+    EXPECT_EQ(devIndex, 2ul);
 }
 
 TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesTwoOneDescriptors)
@@ -2211,8 +2211,8 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesTwoOneDescriptors)
         devIndex++;
     }
     ASSERT_EQ(rc, 0);
-    EXPECT_EQ(devIndex, 2);
-    EXPECT_EQ(descIndex, 3);
+    EXPECT_EQ(devIndex, 2ul);
+    EXPECT_EQ(descIndex, 3ul);
 }
 
 TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneTwoDescriptors)
@@ -2326,8 +2326,8 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneTwoDescriptors)
         devIndex++;
     }
     ASSERT_EQ(rc, 0);
-    EXPECT_EQ(devIndex, 2);
-    EXPECT_EQ(descIndex, 3);
+    EXPECT_EQ(devIndex, 2ul);
+    EXPECT_EQ(descIndex, 3ul);
 }
 
 TEST(QueryDownstreamIdentifiers, decodeRequestErrorPaths)
@@ -2580,19 +2580,19 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponseOneEntry)
     size_t entries = 0;
     foreach_pldm_downstream_device_parameters_entry(iter, entry, rc)
     {
-        EXPECT_EQ(entry.downstream_device_index, 0);
-        EXPECT_EQ(entry.active_comp_comparison_stamp, 0);
-        EXPECT_EQ(entry.active_comp_ver_str_type, 1);
+        EXPECT_EQ(entry.downstream_device_index, 0u);
+        EXPECT_EQ(entry.active_comp_comparison_stamp, 0u);
+        EXPECT_EQ(entry.active_comp_ver_str_type, 1u);
         EXPECT_EQ(entry.active_comp_ver_str_len,
                   activeComponentVersionStringLength);
         EXPECT_STREQ("20241206", entry.active_comp_release_date);
-        EXPECT_EQ(entry.pending_comp_comparison_stamp, 0);
-        EXPECT_EQ(entry.pending_comp_ver_str_type, 1);
+        EXPECT_EQ(entry.pending_comp_comparison_stamp, 0u);
+        EXPECT_EQ(entry.pending_comp_ver_str_type, 1u);
         EXPECT_EQ(entry.pending_comp_ver_str_len,
                   pendingComponentVersionStringLength);
         EXPECT_STREQ("20241206", entry.pending_comp_release_date);
-        EXPECT_EQ(entry.comp_activation_methods.value, 1);
-        EXPECT_EQ(entry.capabilities_during_update.value, 0);
+        EXPECT_EQ(entry.comp_activation_methods.value, 1u);
+        EXPECT_EQ(entry.capabilities_during_update.value, 0u);
         EXPECT_FALSE(memcmp("abcdefgh", entry.active_comp_ver_str,
                             entry.active_comp_ver_str_len));
         EXPECT_FALSE(memcmp("zyxwvuts", entry.pending_comp_ver_str,
@@ -2600,7 +2600,7 @@ TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponseOneEntry)
         entries++;
     }
     EXPECT_EQ(rc, 0);
-    EXPECT_EQ(entries, 1);
+    EXPECT_EQ(entries, 1ul);
 }
 
 TEST(GetDownstreamFirmwareParameters, goodPathDecodeResponseTwoEntries)
@@ -5071,38 +5071,38 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
 
     EXPECT_EQ(hdr.component_bitmap_bit_length, 8);
     EXPECT_EQ(hdr.package_version_string_type, 1);
-    ASSERT_EQ(hdr.package_version_string.length, 4);
+    ASSERT_EQ(hdr.package_version_string.length, 4ul);
     EXPECT_EQ(memcmp("test", hdr.package_version_string.ptr,
                      hdr.package_version_string.length),
               0);
     EXPECT_NE(pkg.areas.ptr, nullptr);
-    EXPECT_NE(pkg.areas.length, 0);
+    EXPECT_NE(pkg.areas.length, 0ul);
     EXPECT_NE(pkg.package.ptr, nullptr);
-    EXPECT_NE(pkg.package.length, 0);
+    EXPECT_NE(pkg.package.length, 0ul);
 
     foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc)
     {
         struct pldm_descriptor desc;
 
-        EXPECT_EQ(fdrec.descriptor_count, 1);
-        EXPECT_EQ(fdrec.device_update_option_flags.value, 0);
-        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1);
-        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4);
+        EXPECT_EQ(fdrec.descriptor_count, 1u);
+        EXPECT_EQ(fdrec.device_update_option_flags.value, 0u);
+        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1u);
+        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4ul);
         EXPECT_EQ(memcmp("v0.1", fdrec.component_image_set_version_string.ptr,
                          fdrec.component_image_set_version_string.length),
                   0);
-        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1);
-        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1);
-        EXPECT_NE(fdrec.record_descriptors.length, 0);
+        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1ul);
+        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1u);
+        EXPECT_NE(fdrec.record_descriptors.length, 0ul);
         EXPECT_NE(fdrec.record_descriptors.ptr, nullptr);
-        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0);
+        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0ul);
 
         foreach_pldm_package_firmware_device_id_record_descriptor(pkg, fdrec,
                                                                   desc, rc)
         {
             static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
 
-            EXPECT_EQ(desc.descriptor_type, 1);
+            EXPECT_EQ(desc.descriptor_type, 1ul);
             ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
             EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
                              sizeof(iana_pen_dmtf)),
@@ -5140,7 +5140,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
                   expected_info.component_image.length);
         EXPECT_EQ(info.component_version_string_type,
                   expected_info.component_version_string_type);
-        ASSERT_EQ(info.component_version_string.length, 4);
+        ASSERT_EQ(info.component_version_string.length, 4ul);
         EXPECT_EQ(memcmp("v0.2", info.component_version_string.ptr,
                          info.component_version_string.length),
                   0);
@@ -5201,40 +5201,40 @@ TEST(DecodePldmFirmwareUpdatePackage, invalidDownstreamDeviceIteration)
                      timestamp.size()),
               0);
 
-    EXPECT_EQ(hdr.component_bitmap_bit_length, 8);
-    EXPECT_EQ(hdr.package_version_string_type, 1);
-    ASSERT_EQ(hdr.package_version_string.length, 4);
+    EXPECT_EQ(hdr.component_bitmap_bit_length, 8u);
+    EXPECT_EQ(hdr.package_version_string_type, 1u);
+    ASSERT_EQ(hdr.package_version_string.length, 4ul);
     EXPECT_EQ(memcmp("test", hdr.package_version_string.ptr,
                      hdr.package_version_string.length),
               0);
     EXPECT_NE(pkg.areas.ptr, nullptr);
-    EXPECT_NE(pkg.areas.length, 0);
+    EXPECT_NE(pkg.areas.length, 0ul);
     EXPECT_NE(pkg.package.ptr, nullptr);
-    EXPECT_NE(pkg.package.length, 0);
+    EXPECT_NE(pkg.package.length, 0ul);
 
     foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc)
     {
         struct pldm_descriptor desc;
 
-        EXPECT_EQ(fdrec.descriptor_count, 1);
-        EXPECT_EQ(fdrec.device_update_option_flags.value, 0);
-        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1);
-        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4);
+        EXPECT_EQ(fdrec.descriptor_count, 1u);
+        EXPECT_EQ(fdrec.device_update_option_flags.value, 0u);
+        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1u);
+        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4ul);
         EXPECT_EQ(memcmp("v0.1", fdrec.component_image_set_version_string.ptr,
                          fdrec.component_image_set_version_string.length),
                   0);
-        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1);
-        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1);
-        EXPECT_NE(fdrec.record_descriptors.length, 0);
+        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1ul);
+        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1u);
+        EXPECT_NE(fdrec.record_descriptors.length, 0ul);
         EXPECT_NE(fdrec.record_descriptors.ptr, nullptr);
-        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0);
+        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0ul);
 
         foreach_pldm_package_firmware_device_id_record_descriptor(pkg, fdrec,
                                                                   desc, rc)
         {
             static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
 
-            EXPECT_EQ(desc.descriptor_type, 1);
+            EXPECT_EQ(desc.descriptor_type, 1u);
             ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
             EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
                              sizeof(iana_pen_dmtf)),
@@ -5309,40 +5309,40 @@ TEST(DecodePldmFirmwareUpdatePackage, p2v1h1fd1fdd1cii)
                      timestamp.size()),
               0);
 
-    EXPECT_EQ(hdr.component_bitmap_bit_length, 8);
-    EXPECT_EQ(hdr.package_version_string_type, 1);
-    ASSERT_EQ(hdr.package_version_string.length, 4);
+    EXPECT_EQ(hdr.component_bitmap_bit_length, 8u);
+    EXPECT_EQ(hdr.package_version_string_type, 1u);
+    ASSERT_EQ(hdr.package_version_string.length, 4ul);
     EXPECT_EQ(memcmp("test", hdr.package_version_string.ptr,
                      hdr.package_version_string.length),
               0);
     EXPECT_NE(pkg.areas.ptr, nullptr);
-    EXPECT_NE(pkg.areas.length, 0);
+    EXPECT_NE(pkg.areas.length, 0ul);
     EXPECT_NE(pkg.package.ptr, nullptr);
-    EXPECT_NE(pkg.package.length, 0);
+    EXPECT_NE(pkg.package.length, 0ul);
 
     foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc)
     {
         struct pldm_descriptor desc;
 
-        EXPECT_EQ(fdrec.descriptor_count, 1);
-        EXPECT_EQ(fdrec.device_update_option_flags.value, 0);
-        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1);
-        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4);
+        EXPECT_EQ(fdrec.descriptor_count, 1u);
+        EXPECT_EQ(fdrec.device_update_option_flags.value, 0u);
+        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1u);
+        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4ul);
         EXPECT_EQ(memcmp("v0.1", fdrec.component_image_set_version_string.ptr,
                          fdrec.component_image_set_version_string.length),
                   0);
-        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1);
-        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1);
-        EXPECT_NE(fdrec.record_descriptors.length, 0);
+        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1ul);
+        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1u);
+        EXPECT_NE(fdrec.record_descriptors.length, 0ul);
         EXPECT_NE(fdrec.record_descriptors.ptr, nullptr);
-        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0);
+        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0ul);
 
         foreach_pldm_package_firmware_device_id_record_descriptor(pkg, fdrec,
                                                                   desc, rc)
         {
             static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
 
-            EXPECT_EQ(desc.descriptor_type, 1);
+            EXPECT_EQ(desc.descriptor_type, 1u);
             ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
             EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
                              sizeof(iana_pen_dmtf)),
@@ -5398,7 +5398,7 @@ TEST(DecodePldmFirmwareUpdatePackage, p2v1h1fd1fdd1cii)
                   expected_info.component_image.length);
         EXPECT_EQ(info.component_version_string_type,
                   expected_info.component_version_string_type);
-        ASSERT_EQ(info.component_version_string.length, 4);
+        ASSERT_EQ(info.component_version_string.length, 4ul);
         EXPECT_EQ(memcmp("v0.2", info.component_version_string.ptr,
                          info.component_version_string.length),
                   0);
@@ -5473,40 +5473,40 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
                      timestamp.size()),
               0);
 
-    EXPECT_EQ(hdr.component_bitmap_bit_length, 8);
-    EXPECT_EQ(hdr.package_version_string_type, 1);
-    ASSERT_EQ(hdr.package_version_string.length, 4);
+    EXPECT_EQ(hdr.component_bitmap_bit_length, 8u);
+    EXPECT_EQ(hdr.package_version_string_type, 1u);
+    ASSERT_EQ(hdr.package_version_string.length, 4ul);
     EXPECT_EQ(memcmp("test", hdr.package_version_string.ptr,
                      hdr.package_version_string.length),
               0);
     EXPECT_NE(pkg.areas.ptr, nullptr);
-    EXPECT_NE(pkg.areas.length, 0);
+    EXPECT_NE(pkg.areas.length, 0ul);
     EXPECT_NE(pkg.package.ptr, nullptr);
-    EXPECT_NE(pkg.package.length, 0);
+    EXPECT_NE(pkg.package.length, 0ul);
 
     foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc)
     {
         struct pldm_descriptor desc;
 
-        EXPECT_EQ(fdrec.descriptor_count, 1);
-        EXPECT_EQ(fdrec.device_update_option_flags.value, 0);
-        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1);
-        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4);
+        EXPECT_EQ(fdrec.descriptor_count, 1u);
+        EXPECT_EQ(fdrec.device_update_option_flags.value, 0u);
+        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1u);
+        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4ul);
         EXPECT_EQ(memcmp("v0.1", fdrec.component_image_set_version_string.ptr,
                          fdrec.component_image_set_version_string.length),
                   0);
-        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1);
-        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1);
-        EXPECT_NE(fdrec.record_descriptors.length, 0);
+        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1ul);
+        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1u);
+        EXPECT_NE(fdrec.record_descriptors.length, 0ul);
         EXPECT_NE(fdrec.record_descriptors.ptr, nullptr);
-        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0);
+        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0ul);
 
         foreach_pldm_package_firmware_device_id_record_descriptor(pkg, fdrec,
                                                                   desc, rc)
         {
             static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
 
-            EXPECT_EQ(desc.descriptor_type, 1);
+            EXPECT_EQ(desc.descriptor_type, 1u);
             ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
             EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
                              sizeof(iana_pen_dmtf)),
@@ -5527,29 +5527,30 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
     {
         struct pldm_descriptor desc;
 
-        EXPECT_EQ(ddrec.descriptor_count, 1);
-        EXPECT_EQ(ddrec.update_option_flags.value, 0);
-        EXPECT_EQ(ddrec.self_contained_activation_min_version_string_type, 1);
-        ASSERT_EQ(ddrec.self_contained_activation_min_version_string.length, 4);
+        EXPECT_EQ(ddrec.descriptor_count, 1u);
+        EXPECT_EQ(ddrec.update_option_flags.value, 0u);
+        EXPECT_EQ(ddrec.self_contained_activation_min_version_string_type, 1u);
+        ASSERT_EQ(ddrec.self_contained_activation_min_version_string.length,
+                  4ul);
         EXPECT_EQ(
             memcmp("v1.0",
                    ddrec.self_contained_activation_min_version_string.ptr,
                    ddrec.self_contained_activation_min_version_string.length),
             0);
         EXPECT_EQ(ddrec.self_contained_activation_min_version_comparison_stamp,
-                  0);
-        ASSERT_EQ(ddrec.applicable_components.bitmap.length, 1);
-        EXPECT_EQ(*ddrec.applicable_components.bitmap.ptr, 2);
-        EXPECT_NE(ddrec.record_descriptors.length, 0);
+                  0u);
+        ASSERT_EQ(ddrec.applicable_components.bitmap.length, 1ul);
+        EXPECT_EQ(*ddrec.applicable_components.bitmap.ptr, 2u);
+        EXPECT_NE(ddrec.record_descriptors.length, 0ul);
         EXPECT_NE(ddrec.record_descriptors.ptr, nullptr);
-        EXPECT_EQ(ddrec.package_data.length, 0);
+        EXPECT_EQ(ddrec.package_data.length, 0ul);
 
         foreach_pldm_package_downstream_device_id_record_descriptor(pkg, ddrec,
                                                                     desc, rc)
         {
             static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
 
-            EXPECT_EQ(desc.descriptor_type, 1);
+            EXPECT_EQ(desc.descriptor_type, 1u);
             ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
             EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
                              sizeof(iana_pen_dmtf)),
@@ -5616,7 +5617,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
         EXPECT_EQ(*info.component_image.ptr, image);
         EXPECT_EQ(info.component_version_string_type,
                   expected->component_version_string_type);
-        ASSERT_EQ(info.component_version_string.length, 4);
+        ASSERT_EQ(info.component_version_string.length, 4ul);
         EXPECT_EQ(memcmp(version, info.component_version_string.ptr,
                          info.component_version_string.length),
                   0);
@@ -5693,40 +5694,40 @@ TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
                      timestamp.size()),
               0);
 
-    EXPECT_EQ(hdr.component_bitmap_bit_length, 8);
-    EXPECT_EQ(hdr.package_version_string_type, 1);
-    ASSERT_EQ(hdr.package_version_string.length, 4);
+    EXPECT_EQ(hdr.component_bitmap_bit_length, 8u);
+    EXPECT_EQ(hdr.package_version_string_type, 1u);
+    ASSERT_EQ(hdr.package_version_string.length, 4ul);
     EXPECT_EQ(memcmp("test", hdr.package_version_string.ptr,
                      hdr.package_version_string.length),
               0);
     EXPECT_NE(pkg.areas.ptr, nullptr);
-    EXPECT_NE(pkg.areas.length, 0);
+    EXPECT_NE(pkg.areas.length, 0ul);
     EXPECT_NE(pkg.package.ptr, nullptr);
-    EXPECT_NE(pkg.package.length, 0);
+    EXPECT_NE(pkg.package.length, 0ul);
 
     foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc)
     {
         struct pldm_descriptor desc;
 
-        EXPECT_EQ(fdrec.descriptor_count, 1);
-        EXPECT_EQ(fdrec.device_update_option_flags.value, 0);
-        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1);
-        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4);
+        EXPECT_EQ(fdrec.descriptor_count, 1u);
+        EXPECT_EQ(fdrec.device_update_option_flags.value, 0u);
+        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1u);
+        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4ul);
         EXPECT_EQ(memcmp("v0.1", fdrec.component_image_set_version_string.ptr,
                          fdrec.component_image_set_version_string.length),
                   0);
-        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1);
-        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1);
-        EXPECT_NE(fdrec.record_descriptors.length, 0);
+        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1ul);
+        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1u);
+        EXPECT_NE(fdrec.record_descriptors.length, 0ul);
         EXPECT_NE(fdrec.record_descriptors.ptr, nullptr);
-        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0);
+        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0ul);
 
         foreach_pldm_package_firmware_device_id_record_descriptor(pkg, fdrec,
                                                                   desc, rc)
         {
             static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
 
-            EXPECT_EQ(desc.descriptor_type, 1);
+            EXPECT_EQ(desc.descriptor_type, 1u);
             ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
             EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
                              sizeof(iana_pen_dmtf)),
@@ -5747,29 +5748,30 @@ TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
     {
         struct pldm_descriptor desc;
 
-        EXPECT_EQ(ddrec.descriptor_count, 1);
-        EXPECT_EQ(ddrec.update_option_flags.value, 0);
-        EXPECT_EQ(ddrec.self_contained_activation_min_version_string_type, 1);
-        ASSERT_EQ(ddrec.self_contained_activation_min_version_string.length, 4);
+        EXPECT_EQ(ddrec.descriptor_count, 1u);
+        EXPECT_EQ(ddrec.update_option_flags.value, 0u);
+        EXPECT_EQ(ddrec.self_contained_activation_min_version_string_type, 1u);
+        ASSERT_EQ(ddrec.self_contained_activation_min_version_string.length,
+                  4ul);
         EXPECT_EQ(
             memcmp("v1.0",
                    ddrec.self_contained_activation_min_version_string.ptr,
                    ddrec.self_contained_activation_min_version_string.length),
             0);
         EXPECT_EQ(ddrec.self_contained_activation_min_version_comparison_stamp,
-                  0);
-        ASSERT_EQ(ddrec.applicable_components.bitmap.length, 1);
-        EXPECT_EQ(*ddrec.applicable_components.bitmap.ptr, 2);
-        EXPECT_NE(ddrec.record_descriptors.length, 0);
+                  0u);
+        ASSERT_EQ(ddrec.applicable_components.bitmap.length, 1ul);
+        EXPECT_EQ(*ddrec.applicable_components.bitmap.ptr, 2u);
+        EXPECT_NE(ddrec.record_descriptors.length, 0ul);
         EXPECT_NE(ddrec.record_descriptors.ptr, nullptr);
-        EXPECT_EQ(ddrec.package_data.length, 0);
+        EXPECT_EQ(ddrec.package_data.length, 0ul);
 
         foreach_pldm_package_downstream_device_id_record_descriptor(pkg, ddrec,
                                                                     desc, rc)
         {
             static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
 
-            EXPECT_EQ(desc.descriptor_type, 1);
+            EXPECT_EQ(desc.descriptor_type, 1u);
             ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
             EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
                              sizeof(iana_pen_dmtf)),
@@ -5841,7 +5843,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
         EXPECT_EQ(*info.component_image.ptr, image);
         EXPECT_EQ(info.component_version_string_type,
                   expected->component_version_string_type);
-        ASSERT_EQ(info.component_version_string.length, 4);
+        ASSERT_EQ(info.component_version_string.length, 4ul);
         EXPECT_EQ(memcmp(version, info.component_version_string.ptr,
                          info.component_version_string.length),
                   0);
@@ -5925,16 +5927,16 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
                      timestamp.size()),
               0);
 
-    EXPECT_EQ(hdr.component_bitmap_bit_length, 8);
-    EXPECT_EQ(hdr.package_version_string_type, 1);
-    ASSERT_EQ(hdr.package_version_string.length, 4);
+    EXPECT_EQ(hdr.component_bitmap_bit_length, 8u);
+    EXPECT_EQ(hdr.package_version_string_type, 1u);
+    ASSERT_EQ(hdr.package_version_string.length, 4ul);
     EXPECT_EQ(memcmp("test", hdr.package_version_string.ptr,
                      hdr.package_version_string.length),
               0);
     EXPECT_NE(pkg.areas.ptr, nullptr);
-    EXPECT_NE(pkg.areas.length, 0);
+    EXPECT_NE(pkg.areas.length, 0ul);
     EXPECT_NE(pkg.package.ptr, nullptr);
-    EXPECT_NE(pkg.package.length, 0);
+    EXPECT_NE(pkg.package.length, 0ul);
 
     foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc)
     {
@@ -5942,18 +5944,18 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
 
         static const uint8_t expected_reference_manifest_data[] = {0x87, 0x65};
 
-        EXPECT_EQ(fdrec.descriptor_count, 1);
-        EXPECT_EQ(fdrec.device_update_option_flags.value, 0);
-        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1);
-        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4);
+        EXPECT_EQ(fdrec.descriptor_count, 1u);
+        EXPECT_EQ(fdrec.device_update_option_flags.value, 0u);
+        EXPECT_EQ(fdrec.component_image_set_version_string_type, 1u);
+        ASSERT_EQ(fdrec.component_image_set_version_string.length, 4ul);
         EXPECT_EQ(memcmp("v0.1", fdrec.component_image_set_version_string.ptr,
                          fdrec.component_image_set_version_string.length),
                   0);
-        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1);
-        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1);
-        EXPECT_NE(fdrec.record_descriptors.length, 0);
+        ASSERT_EQ(fdrec.applicable_components.bitmap.length, 1ul);
+        EXPECT_EQ(*fdrec.applicable_components.bitmap.ptr, 1u);
+        EXPECT_NE(fdrec.record_descriptors.length, 0ul);
         EXPECT_NE(fdrec.record_descriptors.ptr, nullptr);
-        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0);
+        ASSERT_EQ(fdrec.firmware_device_package_data.length, 0ul);
         EXPECT_EQ(fdrec.reference_manifest_data.length,
                   sizeof(expected_reference_manifest_data));
         EXPECT_EQ(memcmp(fdrec.reference_manifest_data.ptr,
@@ -5965,7 +5967,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
         {
             static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
 
-            EXPECT_EQ(desc.descriptor_type, 1);
+            EXPECT_EQ(desc.descriptor_type, 1u);
             ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
             EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
                              sizeof(iana_pen_dmtf)),
@@ -5988,22 +5990,23 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
 
         static const uint8_t expected_reference_manifest_data[] = {0x87, 0x65};
 
-        EXPECT_EQ(ddrec.descriptor_count, 1);
-        EXPECT_EQ(ddrec.update_option_flags.value, 0);
-        EXPECT_EQ(ddrec.self_contained_activation_min_version_string_type, 1);
-        ASSERT_EQ(ddrec.self_contained_activation_min_version_string.length, 4);
+        EXPECT_EQ(ddrec.descriptor_count, 1u);
+        EXPECT_EQ(ddrec.update_option_flags.value, 0u);
+        EXPECT_EQ(ddrec.self_contained_activation_min_version_string_type, 1u);
+        ASSERT_EQ(ddrec.self_contained_activation_min_version_string.length,
+                  4ul);
         EXPECT_EQ(
             memcmp("v1.0",
                    ddrec.self_contained_activation_min_version_string.ptr,
                    ddrec.self_contained_activation_min_version_string.length),
             0);
         EXPECT_EQ(ddrec.self_contained_activation_min_version_comparison_stamp,
-                  0);
-        ASSERT_EQ(ddrec.applicable_components.bitmap.length, 1);
-        EXPECT_EQ(*ddrec.applicable_components.bitmap.ptr, 2);
-        EXPECT_NE(ddrec.record_descriptors.length, 0);
+                  0u);
+        ASSERT_EQ(ddrec.applicable_components.bitmap.length, 1ul);
+        EXPECT_EQ(*ddrec.applicable_components.bitmap.ptr, 2u);
+        EXPECT_NE(ddrec.record_descriptors.length, 0ul);
         EXPECT_NE(ddrec.record_descriptors.ptr, nullptr);
-        EXPECT_EQ(ddrec.package_data.length, 0);
+        EXPECT_EQ(ddrec.package_data.length, 0ul);
         EXPECT_EQ(fdrec.reference_manifest_data.length,
                   sizeof(expected_reference_manifest_data));
         EXPECT_EQ(memcmp(fdrec.reference_manifest_data.ptr,
@@ -6016,7 +6019,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
         {
             static const uint8_t iana_pen_dmtf[] = {0x9c, 0x01, 0x00, 0x00};
 
-            EXPECT_EQ(desc.descriptor_type, 1);
+            EXPECT_EQ(desc.descriptor_type, 1u);
             ASSERT_EQ(desc.descriptor_length, sizeof(iana_pen_dmtf));
             EXPECT_EQ(memcmp(iana_pen_dmtf, desc.descriptor_data,
                              sizeof(iana_pen_dmtf)),
@@ -6088,7 +6091,7 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
         EXPECT_EQ(*info.component_image.ptr, image);
         EXPECT_EQ(info.component_version_string_type,
                   expected->component_version_string_type);
-        ASSERT_EQ(info.component_version_string.length, 4);
+        ASSERT_EQ(info.component_version_string.length, 4ul);
         EXPECT_EQ(memcmp(version, info.component_version_string.ptr,
                          info.component_version_string.length),
                   0);

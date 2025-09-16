@@ -54,7 +54,7 @@ TEST(StateEffecterPdr, testIncorrectInvocations)
     rc = encode_state_effecter_pdr(&effecter, sizeof(effecter),
                                    &possible_states, 1, &actual_size);
     EXPECT_EQ(rc, PLDM_ERROR);
-    EXPECT_EQ(actual_size, 0);
+    EXPECT_EQ(actual_size, 0ul);
 }
 
 TEST(StateEffecterPdr, testReasonableInvocations)
@@ -496,11 +496,11 @@ TEST(GetPDR, testGoodDecodeResponseSafe)
                                   sizeof(resp_data) - sizeof(*resp), &crc);
     ASSERT_EQ(rc, 0);
     EXPECT_EQ(resp->completion_code, PLDM_SUCCESS);
-    EXPECT_EQ(resp->next_record_handle, 0);
-    EXPECT_EQ(resp->next_data_transfer_handle, 0);
+    EXPECT_EQ(resp->next_record_handle, 0u);
+    EXPECT_EQ(resp->next_data_transfer_handle, 0u);
     EXPECT_EQ(resp->transfer_flag, PLDM_END);
     ASSERT_EQ(resp->response_count, sizeof(recordData) - 1);
-    EXPECT_EQ(crc, 96);
+    EXPECT_EQ(crc, 96u);
     EXPECT_EQ(0, memcmp(recordData, resp->record_data, resp->response_count));
 }
 #endif
@@ -762,8 +762,8 @@ TEST(GetPDRRepositoryInfo, testGoodDecodeResponseSafe)
               memcmp(updateTime, resp.update_time, sizeof(resp.update_time)));
     EXPECT_EQ(0, memcmp(oemUpdateTime, resp.oem_update_time,
                         sizeof(resp.oem_update_time)));
-    EXPECT_EQ(100, resp.record_count);
-    EXPECT_EQ(100, resp.repository_size);
+    EXPECT_EQ(100u, resp.record_count);
+    EXPECT_EQ(100u, resp.repository_size);
     EXPECT_EQ(UINT32_MAX, resp.largest_record_size);
     EXPECT_EQ(PLDM_NO_TIMEOUT, resp.data_transfer_handle_timeout);
 }
@@ -3616,7 +3616,7 @@ TEST(SetNumericSensorEnable, testDecodeRequest)
     rc = decode_set_numeric_sensor_enable_req(msg, 4, &decoded);
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(decoded.sensor_id, 0x4567);
-    EXPECT_EQ(decoded.op_state, PLDM_SENSOR_ENABLED);
+    EXPECT_EQ(decoded.op_state, PLDM_SET_SENSOR_ENABLED);
     EXPECT_EQ(decoded.event_enable, PLDM_EVENTS_DISABLED);
 
     // Fail short
@@ -4173,51 +4173,51 @@ TEST(decodeNumericSensorPdrData, Uint8Test)
     auto rc =
         decode_numeric_sensor_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
     EXPECT_EQ(PLDM_SUCCESS, rc);
-    EXPECT_EQ(1, decodedPdr.hdr.record_handle);
-    EXPECT_EQ(1, decodedPdr.hdr.version);
+    EXPECT_EQ(1u, decodedPdr.hdr.record_handle);
+    EXPECT_EQ(1u, decodedPdr.hdr.version);
     EXPECT_EQ(PLDM_NUMERIC_SENSOR_PDR, decodedPdr.hdr.type);
-    EXPECT_EQ(0, decodedPdr.hdr.record_change_num);
+    EXPECT_EQ(0u, decodedPdr.hdr.record_change_num);
     EXPECT_EQ(PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH, decodedPdr.hdr.length);
-    EXPECT_EQ(1, decodedPdr.sensor_id);
+    EXPECT_EQ(1u, decodedPdr.sensor_id);
     EXPECT_EQ(PLDM_ENTITY_POWER_SUPPLY, decodedPdr.entity_type);
-    EXPECT_EQ(1, decodedPdr.entity_instance_num);
-    EXPECT_EQ(1, decodedPdr.container_id);
+    EXPECT_EQ(1u, decodedPdr.entity_instance_num);
+    EXPECT_EQ(1u, decodedPdr.container_id);
     EXPECT_EQ(PLDM_NO_INIT, decodedPdr.sensor_init);
     EXPECT_EQ(false, decodedPdr.sensor_auxiliary_names_pdr);
     EXPECT_EQ(PLDM_SENSOR_UNIT_DEGRESS_C, decodedPdr.base_unit);
     EXPECT_EQ(0, decodedPdr.unit_modifier);
-    EXPECT_EQ(0, decodedPdr.rate_unit);
-    EXPECT_EQ(0, decodedPdr.base_oem_unit_handle);
-    EXPECT_EQ(0, decodedPdr.aux_unit);
+    EXPECT_EQ(0u, decodedPdr.rate_unit);
+    EXPECT_EQ(0u, decodedPdr.base_oem_unit_handle);
+    EXPECT_EQ(0u, decodedPdr.aux_unit);
     EXPECT_EQ(0, decodedPdr.aux_unit_modifier);
-    EXPECT_EQ(0, decodedPdr.aux_rate_unit);
-    EXPECT_EQ(0, decodedPdr.rel);
-    EXPECT_EQ(0, decodedPdr.aux_oem_unit_handle);
+    EXPECT_EQ(0u, decodedPdr.aux_rate_unit);
+    EXPECT_EQ(0u, decodedPdr.rel);
+    EXPECT_EQ(0u, decodedPdr.aux_oem_unit_handle);
     EXPECT_EQ(true, decodedPdr.is_linear);
     EXPECT_EQ(PLDM_SENSOR_DATA_SIZE_UINT8, decodedPdr.sensor_data_size);
     EXPECT_FLOAT_EQ(1.5f, decodedPdr.resolution);
     EXPECT_FLOAT_EQ(1.0f, decodedPdr.offset);
-    EXPECT_EQ(0, decodedPdr.accuracy);
-    EXPECT_EQ(0, decodedPdr.plus_tolerance);
-    EXPECT_EQ(0, decodedPdr.minus_tolerance);
-    EXPECT_EQ(3, decodedPdr.hysteresis.value_u8);
-    EXPECT_EQ(0, decodedPdr.supported_thresholds.byte);
-    EXPECT_EQ(0, decodedPdr.threshold_and_hysteresis_volatility.byte);
+    EXPECT_EQ(0u, decodedPdr.accuracy);
+    EXPECT_EQ(0u, decodedPdr.plus_tolerance);
+    EXPECT_EQ(0u, decodedPdr.minus_tolerance);
+    EXPECT_EQ(3u, decodedPdr.hysteresis.value_u8);
+    EXPECT_EQ(0u, decodedPdr.supported_thresholds.byte);
+    EXPECT_EQ(0u, decodedPdr.threshold_and_hysteresis_volatility.byte);
     EXPECT_FLOAT_EQ(1.0f, decodedPdr.state_transition_interval);
     EXPECT_FLOAT_EQ(1.0f, decodedPdr.update_interval);
-    EXPECT_EQ(255, decodedPdr.max_readable.value_u8);
-    EXPECT_EQ(0, decodedPdr.min_readable.value_u8);
+    EXPECT_EQ(255u, decodedPdr.max_readable.value_u8);
+    EXPECT_EQ(0u, decodedPdr.min_readable.value_u8);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_UINT8, decodedPdr.range_field_format);
-    EXPECT_EQ(0, decodedPdr.range_field_support.byte);
-    EXPECT_EQ(50, decodedPdr.nominal_value.value_u8);
-    EXPECT_EQ(60, decodedPdr.normal_max.value_u8);
-    EXPECT_EQ(40, decodedPdr.normal_min.value_u8);
-    EXPECT_EQ(70, decodedPdr.warning_high.value_u8);
-    EXPECT_EQ(30, decodedPdr.warning_low.value_u8);
-    EXPECT_EQ(80, decodedPdr.critical_high.value_u8);
-    EXPECT_EQ(20, decodedPdr.critical_low.value_u8);
-    EXPECT_EQ(90, decodedPdr.fatal_high.value_u8);
-    EXPECT_EQ(10, decodedPdr.fatal_low.value_u8);
+    EXPECT_EQ(0u, decodedPdr.range_field_support.byte);
+    EXPECT_EQ(50u, decodedPdr.nominal_value.value_u8);
+    EXPECT_EQ(60u, decodedPdr.normal_max.value_u8);
+    EXPECT_EQ(40u, decodedPdr.normal_min.value_u8);
+    EXPECT_EQ(70u, decodedPdr.warning_high.value_u8);
+    EXPECT_EQ(30u, decodedPdr.warning_low.value_u8);
+    EXPECT_EQ(80u, decodedPdr.critical_high.value_u8);
+    EXPECT_EQ(20u, decodedPdr.critical_low.value_u8);
+    EXPECT_EQ(90u, decodedPdr.fatal_high.value_u8);
+    EXPECT_EQ(10u, decodedPdr.fatal_low.value_u8);
 }
 
 TEST(decodeNumericSensorPdrData, Sint8Test)
@@ -4410,18 +4410,18 @@ TEST(decodeNumericSensorPdrData, Uint16Test)
     EXPECT_EQ(PLDM_SUCCESS, rc);
 
     EXPECT_EQ(PLDM_SENSOR_DATA_SIZE_UINT16, decodedPdr.sensor_data_size);
-    EXPECT_EQ(4096, decodedPdr.max_readable.value_u16);
-    EXPECT_EQ(0, decodedPdr.min_readable.value_u16);
+    EXPECT_EQ(4096u, decodedPdr.max_readable.value_u16);
+    EXPECT_EQ(0u, decodedPdr.min_readable.value_u16);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_UINT16, decodedPdr.range_field_format);
-    EXPECT_EQ(5000, decodedPdr.nominal_value.value_u16);
-    EXPECT_EQ(6000, decodedPdr.normal_max.value_u16);
-    EXPECT_EQ(4000, decodedPdr.normal_min.value_u16);
-    EXPECT_EQ(7000, decodedPdr.warning_high.value_u16);
-    EXPECT_EQ(3000, decodedPdr.warning_low.value_u16);
-    EXPECT_EQ(8000, decodedPdr.critical_high.value_u16);
-    EXPECT_EQ(2000, decodedPdr.critical_low.value_u16);
-    EXPECT_EQ(9000, decodedPdr.fatal_high.value_u16);
-    EXPECT_EQ(1000, decodedPdr.fatal_low.value_u16);
+    EXPECT_EQ(5000u, decodedPdr.nominal_value.value_u16);
+    EXPECT_EQ(6000u, decodedPdr.normal_max.value_u16);
+    EXPECT_EQ(4000u, decodedPdr.normal_min.value_u16);
+    EXPECT_EQ(7000u, decodedPdr.warning_high.value_u16);
+    EXPECT_EQ(3000u, decodedPdr.warning_low.value_u16);
+    EXPECT_EQ(8000u, decodedPdr.critical_high.value_u16);
+    EXPECT_EQ(2000u, decodedPdr.critical_low.value_u16);
+    EXPECT_EQ(9000u, decodedPdr.fatal_high.value_u16);
+    EXPECT_EQ(1000u, decodedPdr.fatal_low.value_u16);
 }
 
 TEST(decodeNumericSensorPdrData, Sint16Test)
@@ -4650,18 +4650,18 @@ TEST(decodeNumericSensorPdrData, Uint32Test)
     EXPECT_EQ(PLDM_SUCCESS, rc);
 
     EXPECT_EQ(PLDM_SENSOR_DATA_SIZE_UINT32, decodedPdr.sensor_data_size);
-    EXPECT_EQ(4096, decodedPdr.max_readable.value_u32);
-    EXPECT_EQ(0, decodedPdr.min_readable.value_u32);
+    EXPECT_EQ(4096u, decodedPdr.max_readable.value_u32);
+    EXPECT_EQ(0u, decodedPdr.min_readable.value_u32);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_UINT32, decodedPdr.range_field_format);
-    EXPECT_EQ(5000000, decodedPdr.nominal_value.value_u32);
-    EXPECT_EQ(6000000, decodedPdr.normal_max.value_u32);
-    EXPECT_EQ(4000000, decodedPdr.normal_min.value_u32);
-    EXPECT_EQ(7000000, decodedPdr.warning_high.value_u32);
-    EXPECT_EQ(3000000, decodedPdr.warning_low.value_u32);
-    EXPECT_EQ(8000000, decodedPdr.critical_high.value_u32);
-    EXPECT_EQ(2000000, decodedPdr.critical_low.value_u32);
-    EXPECT_EQ(9000000, decodedPdr.fatal_high.value_u32);
-    EXPECT_EQ(1000000, decodedPdr.fatal_low.value_u32);
+    EXPECT_EQ(5000000u, decodedPdr.nominal_value.value_u32);
+    EXPECT_EQ(6000000u, decodedPdr.normal_max.value_u32);
+    EXPECT_EQ(4000000u, decodedPdr.normal_min.value_u32);
+    EXPECT_EQ(7000000u, decodedPdr.warning_high.value_u32);
+    EXPECT_EQ(3000000u, decodedPdr.warning_low.value_u32);
+    EXPECT_EQ(8000000u, decodedPdr.critical_high.value_u32);
+    EXPECT_EQ(2000000u, decodedPdr.critical_low.value_u32);
+    EXPECT_EQ(9000000u, decodedPdr.fatal_high.value_u32);
+    EXPECT_EQ(1000000u, decodedPdr.fatal_low.value_u32);
 }
 
 TEST(decodeNumericSensorPdrData, Sint32Test)
@@ -5057,44 +5057,44 @@ TEST(decodeNumericEffecterPdrData, Uint8Test)
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
     EXPECT_EQ(PLDM_SUCCESS, rc);
-    EXPECT_EQ(1, decodedPdr.hdr.record_handle);
-    EXPECT_EQ(1, decodedPdr.hdr.version);
+    EXPECT_EQ(1u, decodedPdr.hdr.record_handle);
+    EXPECT_EQ(1u, decodedPdr.hdr.version);
     EXPECT_EQ(PLDM_NUMERIC_EFFECTER_PDR, decodedPdr.hdr.type);
-    EXPECT_EQ(0, decodedPdr.hdr.record_change_num);
+    EXPECT_EQ(0u, decodedPdr.hdr.record_change_num);
     EXPECT_EQ(PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH, decodedPdr.hdr.length);
-    EXPECT_EQ(1, decodedPdr.effecter_id);
+    EXPECT_EQ(1u, decodedPdr.effecter_id);
     EXPECT_EQ(PLDM_ENTITY_POWER_SUPPLY, decodedPdr.entity_type);
-    EXPECT_EQ(1, decodedPdr.entity_instance);
-    EXPECT_EQ(1, decodedPdr.container_id);
-    EXPECT_EQ(2, decodedPdr.effecter_semantic_id);
+    EXPECT_EQ(1u, decodedPdr.entity_instance);
+    EXPECT_EQ(1u, decodedPdr.container_id);
+    EXPECT_EQ(2u, decodedPdr.effecter_semantic_id);
     EXPECT_EQ(PLDM_NO_INIT, decodedPdr.effecter_init);
     EXPECT_EQ(false, decodedPdr.effecter_auxiliary_names);
     EXPECT_EQ(PLDM_SENSOR_UNIT_DEGRESS_C, decodedPdr.base_unit);
     EXPECT_EQ(0, decodedPdr.unit_modifier);
-    EXPECT_EQ(0, decodedPdr.rate_unit);
+    EXPECT_EQ(0u, decodedPdr.rate_unit);
     EXPECT_EQ(0, decodedPdr.base_oem_unit_handle);
-    EXPECT_EQ(0, decodedPdr.aux_unit);
+    EXPECT_EQ(0u, decodedPdr.aux_unit);
     EXPECT_EQ(0, decodedPdr.aux_unit_modifier);
-    EXPECT_EQ(4, decodedPdr.aux_rate_unit);
-    EXPECT_EQ(0, decodedPdr.aux_oem_unit_handle);
+    EXPECT_EQ(4u, decodedPdr.aux_rate_unit);
+    EXPECT_EQ(0u, decodedPdr.aux_oem_unit_handle);
     EXPECT_EQ(true, decodedPdr.is_linear);
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_UINT8, decodedPdr.effecter_data_size);
     EXPECT_FLOAT_EQ(1.5f, decodedPdr.resolution);
     EXPECT_FLOAT_EQ(1.0f, decodedPdr.offset);
-    EXPECT_EQ(0, decodedPdr.accuracy);
-    EXPECT_EQ(0, decodedPdr.plus_tolerance);
-    EXPECT_EQ(0, decodedPdr.minus_tolerance);
+    EXPECT_EQ(0u, decodedPdr.accuracy);
+    EXPECT_EQ(0u, decodedPdr.plus_tolerance);
+    EXPECT_EQ(0u, decodedPdr.minus_tolerance);
     EXPECT_FLOAT_EQ(1.0f, decodedPdr.state_transition_interval);
     EXPECT_FLOAT_EQ(1.0f, decodedPdr.transition_interval);
-    EXPECT_EQ(255, decodedPdr.max_settable.value_u8);
-    EXPECT_EQ(0, decodedPdr.min_settable.value_u8);
+    EXPECT_EQ(255u, decodedPdr.max_settable.value_u8);
+    EXPECT_EQ(0u, decodedPdr.min_settable.value_u8);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_UINT8, decodedPdr.range_field_format);
-    EXPECT_EQ(0x1f, decodedPdr.range_field_support.byte);
-    EXPECT_EQ(50, decodedPdr.nominal_value.value_u8);
-    EXPECT_EQ(60, decodedPdr.normal_max.value_u8);
-    EXPECT_EQ(40, decodedPdr.normal_min.value_u8);
-    EXPECT_EQ(90, decodedPdr.rated_max.value_u8);
-    EXPECT_EQ(10, decodedPdr.rated_min.value_u8);
+    EXPECT_EQ(0x1fu, decodedPdr.range_field_support.byte);
+    EXPECT_EQ(50u, decodedPdr.nominal_value.value_u8);
+    EXPECT_EQ(60u, decodedPdr.normal_max.value_u8);
+    EXPECT_EQ(40u, decodedPdr.normal_min.value_u8);
+    EXPECT_EQ(90u, decodedPdr.rated_max.value_u8);
+    EXPECT_EQ(10u, decodedPdr.rated_min.value_u8);
 }
 #endif
 
@@ -5272,15 +5272,15 @@ TEST(decodeNumericEffecterPdrData, Uint16Test)
     EXPECT_EQ(PLDM_SUCCESS, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_UINT16, decodedPdr.effecter_data_size);
-    EXPECT_EQ(4096, decodedPdr.max_settable.value_u16);
-    EXPECT_EQ(0, decodedPdr.min_settable.value_u16);
+    EXPECT_EQ(4096u, decodedPdr.max_settable.value_u16);
+    EXPECT_EQ(0u, decodedPdr.min_settable.value_u16);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_UINT16, decodedPdr.range_field_format);
-    EXPECT_EQ(0x1f, decodedPdr.range_field_support.byte);
-    EXPECT_EQ(5000, decodedPdr.nominal_value.value_u16);
-    EXPECT_EQ(6000, decodedPdr.normal_max.value_u16);
-    EXPECT_EQ(4000, decodedPdr.normal_min.value_u16);
-    EXPECT_EQ(9000, decodedPdr.rated_max.value_u16);
-    EXPECT_EQ(1000, decodedPdr.rated_min.value_u16);
+    EXPECT_EQ(0x1fu, decodedPdr.range_field_support.byte);
+    EXPECT_EQ(5000u, decodedPdr.nominal_value.value_u16);
+    EXPECT_EQ(6000u, decodedPdr.normal_max.value_u16);
+    EXPECT_EQ(4000u, decodedPdr.normal_min.value_u16);
+    EXPECT_EQ(9000u, decodedPdr.rated_max.value_u16);
+    EXPECT_EQ(1000u, decodedPdr.rated_min.value_u16);
 }
 #endif
 
@@ -5480,15 +5480,15 @@ TEST(decodeNumericEffecterPdrData, Uint32Test)
     EXPECT_EQ(PLDM_SUCCESS, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_UINT32, decodedPdr.effecter_data_size);
-    EXPECT_EQ(4096, decodedPdr.max_settable.value_u32);
-    EXPECT_EQ(0, decodedPdr.min_settable.value_u32);
+    EXPECT_EQ(4096u, decodedPdr.max_settable.value_u32);
+    EXPECT_EQ(0u, decodedPdr.min_settable.value_u32);
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_UINT32, decodedPdr.range_field_format);
-    EXPECT_EQ(0x1f, decodedPdr.range_field_support.byte);
-    EXPECT_EQ(5000000, decodedPdr.nominal_value.value_u32);
-    EXPECT_EQ(6000000, decodedPdr.normal_max.value_u32);
-    EXPECT_EQ(4000000, decodedPdr.normal_min.value_u32);
-    EXPECT_EQ(9000000, decodedPdr.rated_max.value_u32);
-    EXPECT_EQ(1000000, decodedPdr.rated_min.value_u32);
+    EXPECT_EQ(0x1fu, decodedPdr.range_field_support.byte);
+    EXPECT_EQ(5000000u, decodedPdr.nominal_value.value_u32);
+    EXPECT_EQ(6000000u, decodedPdr.normal_max.value_u32);
+    EXPECT_EQ(4000000u, decodedPdr.normal_min.value_u32);
+    EXPECT_EQ(9000000u, decodedPdr.rated_max.value_u32);
+    EXPECT_EQ(1000000u, decodedPdr.rated_min.value_u32);
 }
 #endif
 
@@ -5918,18 +5918,18 @@ TEST(decodeEntityAuxNamePdrData, GoodTest)
                                                 decodedPdr, decodedPdrSize);
 
     EXPECT_EQ(0, rc);
-    EXPECT_EQ(1, decodedPdr->hdr.record_handle);
-    EXPECT_EQ(1, decodedPdr->hdr.version);
+    EXPECT_EQ(1u, decodedPdr->hdr.record_handle);
+    EXPECT_EQ(1u, decodedPdr->hdr.version);
     EXPECT_EQ(PLDM_ENTITY_AUXILIARY_NAMES_PDR, decodedPdr->hdr.type);
-    EXPECT_EQ(1, decodedPdr->hdr.record_change_num);
+    EXPECT_EQ(1u, decodedPdr->hdr.record_change_num);
     EXPECT_EQ(pdr1.size() - sizeof(struct pldm_pdr_hdr),
               decodedPdr->hdr.length);
-    EXPECT_EQ(3, decodedPdr->container.entity_type);
-    EXPECT_EQ(1, decodedPdr->container.entity_instance_num);
+    EXPECT_EQ(3u, decodedPdr->container.entity_type);
+    EXPECT_EQ(1u, decodedPdr->container.entity_instance_num);
     EXPECT_EQ(PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
               decodedPdr->container.entity_container_id);
-    EXPECT_EQ(0, decodedPdr->shared_name_count);
-    EXPECT_EQ(3, decodedPdr->name_string_count);
+    EXPECT_EQ(0u, decodedPdr->shared_name_count);
+    EXPECT_EQ(3u, decodedPdr->name_string_count);
 
     decodedPdr->names = (struct pldm_entity_auxiliary_name*)calloc(
         decodedPdr->name_string_count,
@@ -5944,12 +5944,12 @@ TEST(decodeEntityAuxNamePdrData, GoodTest)
     EXPECT_EQ(strncmp(expectTag0, decodedPdr->names[0].tag, length + 1), 0);
 
     // NOLINTBEGIN(clang-analyzer-unix.Malloc)
-    ASSERT_EQ(0,
+    ASSERT_EQ(0ul,
               (uintptr_t)decodedPdr->names[0].name & (alignof(char16_t) - 1));
     // NOLINTEND(clang-analyzer-unix.Malloc)
     length = str16len((char16_t*)decodedPdr->names[0].name);
     EXPECT_EQ(str16len((char16_t*)expectName0), length);
-    EXPECT_EQ(3, str16len((char16_t*)expectName0));
+    EXPECT_EQ(3ul, str16len((char16_t*)expectName0));
     EXPECT_EQ(memcmp(expectName0, decodedPdr->names[0].name,
                      sizeof(char16_t) * (length + 1)),
               0);
@@ -5959,12 +5959,12 @@ TEST(decodeEntityAuxNamePdrData, GoodTest)
     EXPECT_EQ(strncmp(expectTag1, decodedPdr->names[1].tag, length + 1), 0);
 
     // NOLINTBEGIN(clang-analyzer-unix.Malloc)
-    ASSERT_EQ(0,
+    ASSERT_EQ(0ul,
               (uintptr_t)decodedPdr->names[1].name & (alignof(char16_t) - 1));
     // NOLINTEND(clang-analyzer-unix.Malloc)
     length = str16len((char16_t*)decodedPdr->names[1].name);
     EXPECT_EQ(str16len((char16_t*)expectName1), length);
-    EXPECT_EQ(2, str16len((char16_t*)expectName1));
+    EXPECT_EQ(2ul, str16len((char16_t*)expectName1));
     EXPECT_EQ(memcmp(expectName1, decodedPdr->names[1].name,
                      sizeof(char16_t) * (length + 1)),
               0);
@@ -5974,12 +5974,12 @@ TEST(decodeEntityAuxNamePdrData, GoodTest)
     EXPECT_EQ(strncmp(expectTag2, decodedPdr->names[2].tag, length + 1), 0);
 
     // NOLINTBEGIN(clang-analyzer-unix.Malloc)
-    ASSERT_EQ(0,
+    ASSERT_EQ(0ul,
               (uintptr_t)decodedPdr->names[2].name & (alignof(char16_t) - 1));
     // NOLINTEND(clang-analyzer-unix.Malloc)
     length = str16len((char16_t*)decodedPdr->names[2].name);
     EXPECT_EQ(str16len((char16_t*)expectName2), length);
-    EXPECT_EQ(3, str16len((char16_t*)expectName2));
+    EXPECT_EQ(3ul, str16len((char16_t*)expectName2));
     EXPECT_EQ(memcmp(expectName2, decodedPdr->names[2].name,
                      sizeof(char16_t) * (length + 1)),
               0);
@@ -6208,9 +6208,9 @@ TEST(decodePldmFileDescriptorPdr, oemFileClassificationPresentTest)
     EXPECT_EQ(0xff, decodedPdr.file_version.update);
     EXPECT_EQ(0xff, decodedPdr.file_version.minor);
     EXPECT_EQ(0xff, decodedPdr.file_version.major);
-    EXPECT_EQ(10240, decodedPdr.file_maximum_size);
-    EXPECT_EQ(2, decodedPdr.file_maximum_file_descriptor_count);
-    EXPECT_EQ(6, decodedPdr.file_name.length);
+    EXPECT_EQ(10240u, decodedPdr.file_maximum_size);
+    EXPECT_EQ(2u, decodedPdr.file_maximum_file_descriptor_count);
+    EXPECT_EQ(6ul, decodedPdr.file_name.length);
 
     EXPECT_EQ(memcmp(expectFileName, decodedPdr.file_name.ptr,
                      sizeof(char) * decodedPdr.file_name.length),
@@ -6218,7 +6218,7 @@ TEST(decodePldmFileDescriptorPdr, oemFileClassificationPresentTest)
 
     if (decodedPdr.oem_file_classification)
     {
-        EXPECT_EQ(9, decodedPdr.oem_file_classification_name.length);
+        EXPECT_EQ(9ul, decodedPdr.oem_file_classification_name.length);
         EXPECT_EQ(memcmp(expectOEMClassificationName,
                          decodedPdr.oem_file_classification_name.ptr,
                          sizeof(char) *
