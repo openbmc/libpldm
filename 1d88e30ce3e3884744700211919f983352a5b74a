@@ -93,6 +93,30 @@
       },
       "revId": "1d88e30ce3e3884744700211919f983352a5b74a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38a9ecf0_4d36676c",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-09-17T02:31:16Z",
+      "side": 1,
+      "message": "\u003e XFER_CURRENT_PART: The requester is asking for the part just sent to be retransmitted, such as if the\nchecksum of data cumulatively received did not match the DataIntegrityChecksum in the current part.\n\n\u003e To request retransmission of the current part of data (such as upon detection of a checksum error), the requester shall set TransferOperation to XFER_CURRENT_PART in the request message and shall set DataTransferHandle to the handle that was previously used with this part.\n\nThose are all statements about XFER_CURRENT_PART in DSP0240_1.2.0. From those points, if CRC for first part mis-matches, we can totally re-request first part by using XFER_CURRENT_PART and setting DataTransferHandle to the previous handle (which is 0 for first part).",
+      "parentUuid": "068a5b3e_0d8c09ee",
+      "range": {
+        "startLine": 576,
+        "startChar": 27,
+        "endLine": 576,
+        "endChar": 49
+      },
+      "revId": "1d88e30ce3e3884744700211919f983352a5b74a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
