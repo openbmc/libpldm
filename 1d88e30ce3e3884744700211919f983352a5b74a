@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52bbc4dd_0c8552dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-17T02:11:58Z",
+      "side": 1,
+      "message": "Added your suggestion.",
+      "parentUuid": "a5bc87b3_49bb073a",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 20
+      },
+      "revId": "1d88e30ce3e3884744700211919f983352a5b74a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9ec1e65_88babf96",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-09-16T03:30:53Z",
       "side": 1,
       "message": "If it\u0027s re-requesting FIRST_PART, then transfer_handle can be 0, right?",
+      "range": {
+        "startLine": 576,
+        "startChar": 27,
+        "endLine": 576,
+        "endChar": 49
+      },
+      "revId": "1d88e30ce3e3884744700211919f983352a5b74a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "068a5b3e_0d8c09ee",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-17T02:11:58Z",
+      "side": 1,
+      "message": "My understanding is that for the first part it will always be FIRST_PART, even the first part is being re-requested immediately. PLDM_XFER_CURRENT_PART will be used to re-request any middle or last segment.",
+      "parentUuid": "b9ec1e65_88babf96",
       "range": {
         "startLine": 576,
         "startChar": 27,
