@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d109515_2a082086",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-17T00:07:28Z",
+      "side": 1,
+      "message": "Hi Kasun, most of my comments on the previous patch ( https://gerrit.openbmc.org/c/openbmc/libpldm/+/83308/4?usp\u003drelated-change ) appear to apply here too, can you please fix things accordingly?",
+      "revId": "b6378774c7edccb926f133a6b28f914c3d36a5cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e1e56dc_9b330779",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-17T00:07:28Z",
+      "side": 1,
+      "message": "This should be `in,out` or `in out` as per https://www.doxygen.nl/manual/commands.html#cmdparam",
+      "range": {
+        "startLine": 823,
+        "startChar": 13,
+        "endLine": 823,
+        "endChar": 14
+      },
+      "revId": "b6378774c7edccb926f133a6b28f914c3d36a5cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
