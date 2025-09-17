@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b1a70e70_8b70e862",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-17T01:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6e03698_06cfa61b",
+      "revId": "e5925a3656955dd2ebd8893575a9b5f3247ccc14",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f343c314_53e0b527",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a60a917b_29c428b5",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-17T01:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56ebaa98_1722abed",
+      "revId": "e5925a3656955dd2ebd8893575a9b5f3247ccc14",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbcea998_b26350f0",
@@ -65,6 +101,30 @@
       "writtenOn": "2025-09-17T00:03:08Z",
       "side": 1,
       "message": "The ordering of parameters doesn\u0027t match the documentation, and splitting `msg` from `payload_length` feels quite wrong. Let\u0027s please to keep things that go together together and order the arguments as you\u0027ve ordered their documentation above.",
+      "range": {
+        "startLine": 833,
+        "startChar": 1,
+        "endLine": 835,
+        "endChar": 22
+      },
+      "revId": "e5925a3656955dd2ebd8893575a9b5f3247ccc14",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "766e4057_42ae4780",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-17T01:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbcea998_b26350f0",
       "range": {
         "startLine": 833,
         "startChar": 1,
@@ -98,6 +158,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f6f519f_af44e1ed",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-17T01:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c2f3b85_01cbd236",
+      "range": {
+        "startLine": 837,
+        "startChar": 1,
+        "endLine": 839,
+        "endChar": 22
+      },
+      "revId": "e5925a3656955dd2ebd8893575a9b5f3247ccc14",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de1de5fb_6d93e427",
@@ -111,6 +195,24 @@
       "writtenOn": "2025-09-17T00:03:08Z",
       "side": 1,
       "message": "Can you please rebase this series to the tip of main? Yesterday we merged [msgbuf: Define a separate msgbuf structure for encode/decode function](https://github.com/openbmc/libpldm/commit/7a8d932bc3cd30a0869b2e5cfd38c1b87019cffb) which gives us const-correctness for the msgbuf APIs. In the process it reworked the types and macros involved.\n\nYou\u0027ll need to switch this to:\n\n```\nPLDM_MSGBUF_RO_DEFINE_P(buf);\n```",
+      "revId": "e5925a3656955dd2ebd8893575a9b5f3247ccc14",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa11b6e1_1ce1bbb6",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-17T01:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de1de5fb_6d93e427",
       "revId": "e5925a3656955dd2ebd8893575a9b5f3247ccc14",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -138,6 +240,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ec34d2_967d1032",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-17T01:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf9e6d02_b959b3c6",
+      "range": {
+        "startLine": 856,
+        "startChar": 1,
+        "endLine": 858,
+        "endChar": 2
+      },
+      "revId": "e5925a3656955dd2ebd8893575a9b5f3247ccc14",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64a86f5b_3e812d6c",
@@ -151,6 +277,24 @@
       "writtenOn": "2025-09-17T00:03:08Z",
       "side": 1,
       "message": "Please avoid `reinterpret_cast\u003c\u003e()` as suggested by clang-tidy. Instead we have `PLDM_MSG_DEFINE_P()`:\n\nhttps://github.com/openbmc/libpldm/blob/main/include/libpldm/base.h#L246-L260\n\nPlease fix throughout.",
+      "revId": "e5925a3656955dd2ebd8893575a9b5f3247ccc14",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50a0e167_db633422",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1762,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-17T01:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64a86f5b_3e812d6c",
       "revId": "e5925a3656955dd2ebd8893575a9b5f3247ccc14",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
