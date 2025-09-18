@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1955145a_fd06351f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000212
+      },
+      "writtenOn": "2025-09-18T18:11:49Z",
+      "side": 1,
+      "message": "@andrew@codeconstruct.com.au So, I ran into a snag with your suggestion. Just having these as __attribute__(weak) did not let me override the function by defining it in https://github.com/openbmc/libpldm/blob/main/tests/transport/send_recv_timeout.cpp#L7. Probably because we build libpldm as a library and include it into the C++ test executables.\n\nI could have send_recv_timeout.cpp define libpldm_clock_gettimeval and notice that libpldm calls its own internal function since the linter does not hold onto it.\n\nThe only way was for me to do some function pointer, expose another `libpldm_set_impl_gettimeval` which takes in a function pointer which can override internal aspects. Any ideas? Probably some linker magic?",
+      "revId": "063135d2b8bdc73f873524b15aec2472f99518b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
