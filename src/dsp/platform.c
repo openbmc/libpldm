@@ -740,7 +740,7 @@ int decode_set_numeric_effecter_value_req(const struct pldm_msg *msg,
 					  size_t payload_length,
 					  uint16_t *effecter_id,
 					  uint8_t *effecter_data_size,
-					  uint8_t effecter_value[4])
+					  uint8_t effecter_value[8])
 {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
@@ -763,7 +763,7 @@ int decode_set_numeric_effecter_value_req(const struct pldm_msg *msg,
 		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
 	}
 
-	if (*effecter_data_size > PLDM_EFFECTER_DATA_SIZE_SINT32) {
+	if (*effecter_data_size > PLDM_EFFECTER_DATA_SIZE_SINT64) {
 		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
 	}
 
@@ -820,7 +820,7 @@ int encode_set_numeric_effecter_value_req(uint8_t instance_id,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (effecter_data_size > PLDM_EFFECTER_DATA_SIZE_SINT32) {
+	if (effecter_data_size > PLDM_EFFECTER_DATA_SIZE_SINT64) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -865,6 +865,15 @@ int encode_set_numeric_effecter_value_req(uint8_t instance_id,
 		uint32_t val = *(uint32_t *)(effecter_value);
 		val = htole32(val);
 		memcpy(request->effecter_value, &val, sizeof(uint32_t));
+	} else if (effecter_data_size == PLDM_EFFECTER_DATA_SIZE_UINT64 ||
+		   effecter_data_size == PLDM_EFFECTER_DATA_SIZE_SINT64) {
+		if (payload_length !=
+		    PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 7) {
+			return PLDM_ERROR_INVALID_LENGTH;
+		}
+		uint64_t val = *(uint64_t *)(effecter_value);
+		val = htole64(val);
+		memcpy(request->effecter_value, &val, sizeof(uint64_t));
 	}
 
 	request->effecter_id = htole16(effecter_id);
@@ -1952,7 +1961,7 @@ int encode_get_numeric_effecter_value_resp(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (effecter_data_size > PLDM_EFFECTER_DATA_SIZE_SINT32) {
+	if (effecter_data_size > PLDM_EFFECTER_DATA_SIZE_SINT64) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -2018,7 +2027,24 @@ int encode_get_numeric_effecter_value_resp(
 		memcpy((response->pending_and_present_values +
 			sizeof(uint32_t)),
 		       &val_present, sizeof(uint32_t));
+	} else if (effecter_data_size == PLDM_EFFECTER_DATA_SIZE_UINT64 ||
+		   effecter_data_size == PLDM_EFFECTER_DATA_SIZE_SINT64) {
+		if (payload_length !=
+		    PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES +
+			    14) { // 8+8 bytes pending+present
+			return PLDM_ERROR_INVALID_LENGTH;
+		}
+		uint64_t val_pending = *(uint64_t *)pending_value;
+		val_pending = htole64(val_pending);
+		memcpy(response->pending_and_present_values, &val_pending,
+		       sizeof(uint64_t));
+
+		uint64_t val_present = *(uint64_t *)present_value;
+		val_present = htole64(val_present);
+		memcpy(response->pending_and_present_values + sizeof(uint64_t),
+		       &val_present, sizeof(uint64_t));
 	}
+
 	return PLDM_SUCCESS;
 }
 
