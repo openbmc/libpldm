@@ -914,7 +914,7 @@ int decode_pldm_base_negotiate_transfer_params_req(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_base_negotiate_transfer_params_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_base_negotiate_transfer_params_resp *resp)
