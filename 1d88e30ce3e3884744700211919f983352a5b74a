@@ -117,6 +117,30 @@
       },
       "revId": "1d88e30ce3e3884744700211919f983352a5b74a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7fef46e_9d955670",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-09-18T02:49:39Z",
+      "side": 1,
+      "message": "Re-open cuz maybe I accidentally resolved it.",
+      "parentUuid": "38a9ecf0_4d36676c",
+      "range": {
+        "startLine": 576,
+        "startChar": 27,
+        "endLine": 576,
+        "endChar": 49
+      },
+      "revId": "1d88e30ce3e3884744700211919f983352a5b74a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
