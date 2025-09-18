@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca41cad7_176617ae",
+        "filename": "tests/transport/send_recv_timeout.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000212
+      },
+      "writtenOn": "2025-09-18T21:01:17Z",
+      "side": 1,
+      "message": "You would expect tests to fail. but it passes. That means we failed to override the weak definition of this function in libpldm.",
+      "revId": "5352a7c6dd04ca1f8c034ccadbba8b65a84fe72b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
