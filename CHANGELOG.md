@@ -22,6 +22,7 @@ Change categories:
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
+- dsp: platform: Added 64 bit numeric effecter support
 
 ### Changed
 
@@ -234,6 +235,7 @@ Change categories:
 - utils: Added `pldm_edac_crc32_extend()`
 - base: Added `decode_pldm_base_negotiate_transfer_params_req()`
 - base: Added `encode_pldm_base_negotiate_transfer_params_resp()`
+- platform: Added 64 bit numeric effecter support
 
 ### Changed
 
