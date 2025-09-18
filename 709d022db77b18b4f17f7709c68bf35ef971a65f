@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07513bc3_42575ca7",
+        "filename": "src/utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000212
+      },
+      "writtenOn": "2025-09-18T18:07:28Z",
+      "side": 1,
+      "message": "so keep them in transport.c? I was more into these are \"time related methods\" so these go here rather than in a mindset of \"these need to be overridden\".",
+      "parentUuid": "9094c5df_b07f056f",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 1
+      },
+      "revId": "709d022db77b18b4f17f7709c68bf35ef971a65f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a943ba4b_4fdad97c",
         "filename": "src/utils.h",
         "patchSetId": 2
@@ -60,6 +84,24 @@
       "writtenOn": "2025-09-12T03:53:30Z",
       "side": 1,
       "message": "I left a comment on the patch you abandoned about not putting these in `src/time.h` rather than `src/utils.h`:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/83439/comment/057ad3a2_6009f2d6/\n\nCan you please fix that?",
+      "revId": "709d022db77b18b4f17f7709c68bf35ef971a65f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a6d497a_203ac88f",
+        "filename": "src/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000212
+      },
+      "writtenOn": "2025-09-18T18:07:28Z",
+      "side": 1,
+      "message": "oops. sorry. I totally ignored that gerrit after I abandoned it. I renamed it to time-utils.h. I tried time.[c|h] but I ended up conflicting with \u003ctime.h\u003e (needed for clock_gettime).",
+      "parentUuid": "e63caa75_89b52aae",
       "revId": "709d022db77b18b4f17f7709c68bf35ef971a65f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
