@@ -161,14 +161,24 @@ enum pldm_platform_transfer_flag {
  */
 #define PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID 0
 
+/** @brief PLDM effecter data size types. Support for UINT64 and SINT64 was
+ *         added in DSP0248 v1.3.0.
+ */
 enum pldm_effecter_data_size {
 	PLDM_EFFECTER_DATA_SIZE_UINT8,
 	PLDM_EFFECTER_DATA_SIZE_SINT8,
 	PLDM_EFFECTER_DATA_SIZE_UINT16,
 	PLDM_EFFECTER_DATA_SIZE_SINT16,
 	PLDM_EFFECTER_DATA_SIZE_UINT32,
-	PLDM_EFFECTER_DATA_SIZE_SINT32
+	PLDM_EFFECTER_DATA_SIZE_SINT32,
+	PLDM_EFFECTER_DATA_SIZE_UINT64,
+	PLDM_EFFECTER_DATA_SIZE_SINT64
 };
+
+/** @brief Maximum byte length of a numeric effecter value.
+	*  Corresponds to the size of the largest supported data type (uint64/sint64).
+	*/
+#define PLDM_EFFECTER_DATA_SIZE_MAX_BYTES_LENGTH 8
 
 enum pldm_range_field_format {
 	PLDM_RANGE_FIELD_FORMAT_UINT8,
@@ -177,9 +187,11 @@ enum pldm_range_field_format {
 	PLDM_RANGE_FIELD_FORMAT_SINT16,
 	PLDM_RANGE_FIELD_FORMAT_UINT32,
 	PLDM_RANGE_FIELD_FORMAT_SINT32,
-	PLDM_RANGE_FIELD_FORMAT_REAL32
+	PLDM_RANGE_FIELD_FORMAT_REAL32,
+	PLDM_RANGE_FIELD_FORMAT_UINT64,
+	PLDM_RANGE_FIELD_FORMAT_SINT64
 };
-#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_REAL32
+#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_SINT64
 
 enum set_request { PLDM_NO_CHANGE = 0x00, PLDM_REQUEST_SET = 0x01 };
 
@@ -767,6 +779,8 @@ typedef union {
 	int16_t value_s16;
 	uint32_t value_u32;
 	int32_t value_s32;
+	uint64_t value_u64;
+	int64_t value_s64;
 } union_effecter_data_size;
 
 /** @union union_range_field_format
@@ -783,6 +797,8 @@ typedef union {
 	uint32_t value_u32;
 	int32_t value_s32;
 	real32_t value_f32;
+	uint64_t value_u64;
+	int64_t value_s64;
 } union_range_field_format;
 
 /** @struct pldm_numeric_effecter_value_pdr
@@ -1449,7 +1465,7 @@ int decode_set_numeric_effecter_value_req(const struct pldm_msg *msg,
 					  size_t payload_length,
 					  uint16_t *effecter_id,
 					  uint8_t *effecter_data_size,
-					  uint8_t effecter_value[4]);
+					  uint8_t effecter_value[PLDM_EFFECTER_DATA_SIZE_MAX_BYTES_LENGTH]);
 
 /** @brief Create a PLDM response message for SetNumericEffecterValue
  *
