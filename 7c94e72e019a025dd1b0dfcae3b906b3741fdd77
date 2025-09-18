@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e97dfd58_8649f33b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-09-18T02:44:44Z",
+      "side": 1,
+      "message": "The implementation part and test case looks good to me. Please fix the CI and see if there\u0027s something you can do with the commit title to not having to use gitlint-ignore.",
+      "revId": "7c94e72e019a025dd1b0dfcae3b906b3741fdd77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
