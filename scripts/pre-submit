@@ -29,7 +29,7 @@ fi
 # Ensure the test suite passes in the default configuration. Note
 # that we don't specify -Dabi=... - the default is equivalent to
 # -Dabi=deprecated,stable,testing.
-CC=gcc CXX=g++ CFLAGS=-fanalyzer meson setup -Dabi-compliance-check=false "$BUILD"
+CC=gcc CXX=g++ CFLAGS=-fanalyzer meson setup "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD"
 
@@ -42,13 +42,18 @@ meson configure --buildtype=release "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD" --timeout-multiplier 10 --wrapper 'valgrind --error-exitcode=1'
 
-# Ensure the test suite links when testing symbols are removed from the ABI
+# Ensure that the test suite doesn't fail to link against the stable ABI, and
+# the stable ABI matches what's recorded
 meson configure --buildtype=debug "$BUILD"
 meson configure -Dabi=deprecated,stable "$BUILD"
+! command -v abi-compliance-checker > /dev/null ||
+  meson configure -Dabi-compliance-check=true "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD"
 
 # Ensure the build completes for maintenance purposes. Note that tests are
 # disabled as we don't yet guard them appropriately.
-meson configure -Dabi=stable,testing -Dtests=false "$BUILD"
+meson configure -Dabi=stable,testing "$BUILD"
+meson configure -Dabi-compliance-check=false "$BUILD"
+meson configure -Dtests=false "$BUILD"
 meson compile -C "$BUILD"
