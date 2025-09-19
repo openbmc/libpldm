@@ -34,6 +34,24 @@
       "parentUuid": "1955145a_fd06351f",
       "revId": "063135d2b8bdc73f873524b15aec2472f99518b2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93195625_9045578b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-19T03:38:16Z",
+      "side": 1,
+      "message": "\u003e ... and the one in `transport_send_recv_timeout` is marked `FUNC` (and neither are marked `LOCAL`).\n\nUh, that should rather be: \"... and the one in `transport_send_recv_timeout` is marked `GLOBAL` (and neither are marked `LOCAL`).\"",
+      "parentUuid": "d82e8bf3_78a786e7",
+      "revId": "063135d2b8bdc73f873524b15aec2472f99518b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
