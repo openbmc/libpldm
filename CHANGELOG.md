@@ -94,6 +94,7 @@ Change categories:
   PLDM_MSG_DEFINE_P.
 
 - include, tests: Address concerns from -Wsign-compare
+- dsp: base: decode_pldm_base_negotiate_transfer_params_resp() is stable
 
 ### Security
 
