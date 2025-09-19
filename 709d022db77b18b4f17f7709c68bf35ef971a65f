@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a10f9ed3_4f3e9061",
+        "filename": "src/utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-19T02:53:55Z",
+      "side": 1,
+      "message": "Given their implementation isn\u0027t required outside of transport.c, I prefer we don\u0027t move them out of there.",
+      "parentUuid": "07513bc3_42575ca7",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 1
+      },
+      "revId": "709d022db77b18b4f17f7709c68bf35ef971a65f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a943ba4b_4fdad97c",
         "filename": "src/utils.h",
         "patchSetId": 2
@@ -102,6 +126,24 @@
       "side": 1,
       "message": "oops. sorry. I totally ignored that gerrit after I abandoned it. I renamed it to time-utils.h. I tried time.[c|h] but I ended up conflicting with \u003ctime.h\u003e (needed for clock_gettime).",
       "parentUuid": "e63caa75_89b52aae",
+      "revId": "709d022db77b18b4f17f7709c68bf35ef971a65f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7abcfc5_12813f13",
+        "filename": "src/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-19T02:53:55Z",
+      "side": 1,
+      "message": "Hmm, let me experiment.",
+      "parentUuid": "2a6d497a_203ac88f",
       "revId": "709d022db77b18b4f17f7709c68bf35ef971a65f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
