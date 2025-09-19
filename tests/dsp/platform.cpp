@@ -6234,6 +6234,7 @@ TEST(decodePldmFileDescriptorPdr, BadTestUnAllocatedPtrParams)
     int rc;
     std::vector<uint8_t> pdr1{
         // Common PDR Header
+        // clang-format off
         0x01, 0x0, 0x0, 0x0,      // Record Handle
         0x01,                     // PDR Header Version
         PLDM_FILE_DESCRIPTOR_PDR, // PDRType
@@ -6256,6 +6257,7 @@ TEST(decodePldmFileDescriptorPdr, BadTestUnAllocatedPtrParams)
         0x06,                   // File Name Length = 6
         0x46, 0x69, 0x6C, 0x65, 0x31,
         0x00, // File Name = "File1\NULL"
+        // clang-format on
     };
 
     struct pldm_platform_file_descriptor_pdr decodedPdr = {};
@@ -6277,6 +6279,7 @@ TEST(decodePldmFileDescriptorPdr, BadTestInvalidExpectedParamLength)
 
     std::vector<uint8_t> pdr1{
         // Common PDR Header
+        // clang-format off
         0x01, 0x0, 0x0, 0x0,      // Record Handle
         0x01,                     // PDR Header Version
         PLDM_FILE_DESCRIPTOR_PDR, // PDRType
@@ -6299,6 +6302,7 @@ TEST(decodePldmFileDescriptorPdr, BadTestInvalidExpectedParamLength)
         0x06,                   // File Name Length = 6
         0x46, 0x69, 0x6C, 0x65, 0x31,
         0x00, // File Name = "File1\NULL"
+        // clang-format on
     };
 
     struct pldm_platform_file_descriptor_pdr decodedPdr = {};
@@ -6317,6 +6321,7 @@ TEST(decodePldmFileDescriptorPdr, BadTestDataBufferOverLength)
     /*Un-matched File Name Length*/
     std::vector<uint8_t> pdr1{
         // Common PDR Header
+        // clang-format off
         0x01, 0x0, 0x0, 0x0,      // Record Handle
         0x01,                     // PDR Header Version
         PLDM_FILE_DESCRIPTOR_PDR, // PDRType
@@ -6339,6 +6344,7 @@ TEST(decodePldmFileDescriptorPdr, BadTestDataBufferOverLength)
         0x05,                   // File Name Length = 5
         0x46, 0x69, 0x6C, 0x65, 0x31,
         0x00, // File Name = "File1\NULL"
+        // clang-format on
     };
 
     struct pldm_platform_file_descriptor_pdr decodedPdr = {};
