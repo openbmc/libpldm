@@ -6234,27 +6234,48 @@ TEST(decodePldmFileDescriptorPdr, BadTestUnAllocatedPtrParams)
     int rc;
     std::vector<uint8_t> pdr1{
         // Common PDR Header
-        0x01, 0x0, 0x0, 0x0,      // Record Handle
+        0x01,
+        0x0,
+        0x0,
+        0x0,                      // Record Handle
         0x01,                     // PDR Header Version
         PLDM_FILE_DESCRIPTOR_PDR, // PDRType
-        0x01, 0x00,               // Record Change Number
-        0x20, 0x00,               // Data Length = 32 bytes
+        0x01,
+        0x00, // Record Change Number
+        0x20,
+        0x00, // Data Length = 32 bytes
         /* PLDM File Descriptor PDR Data*/
-        0x01, 0x00, // Terminus Handle = 0x01
-        0x01, 0x00, // File Identifier = 0x01
-        0x09, 0x00, // Entity Type = Physical | Device File
-        0x01, 0x00, // Entity instance number = 1
+        0x01,
+        0x00, // Terminus Handle = 0x01
+        0x01,
+        0x00, // File Identifier = 0x01
+        0x09,
+        0x00, // Entity Type = Physical | Device File
+        0x01,
+        0x00, // Entity instance number = 1
         PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
-        0,                      // Container ID = Overall system
-        0x02, 0,                // Supper Dir File Identifier = 0x0002
-        0x01,                   // File Classification = 0x01 (BootLog)
-        0x00,                   // OEM File Classification = 0x00
-        0x15, 0x00,             // File Capabilities = 0x0015
-        0xff, 0xff, 0xff, 0xff, // File Version = 0xffffffff (Unversioned)
-        0x00, 0x28, 0x00, 0x00, // File Maximum Size = 10KB
-        0x02,                   // File Maximum File Descriptor count = 2
-        0x06,                   // File Name Length = 6
-        0x46, 0x69, 0x6C, 0x65, 0x31,
+        0, // Container ID = Overall system
+        0x02,
+        0,    // Supper Dir File Identifier = 0x0002
+        0x01, // File Classification = 0x01 (BootLog)
+        0x00, // OEM File Classification = 0x00
+        0x15,
+        0x00, // File Capabilities = 0x0015
+        0xff,
+        0xff,
+        0xff,
+        0xff, // File Version = 0xffffffff (Unversioned)
+        0x00,
+        0x28,
+        0x00,
+        0x00, // File Maximum Size = 10KB
+        0x02, // File Maximum File Descriptor count = 2
+        0x06, // File Name Length = 6
+        0x46,
+        0x69,
+        0x6C,
+        0x65,
+        0x31,
         0x00, // File Name = "File1\NULL"
     };
 
@@ -6277,27 +6298,48 @@ TEST(decodePldmFileDescriptorPdr, BadTestInvalidExpectedParamLength)
 
     std::vector<uint8_t> pdr1{
         // Common PDR Header
-        0x01, 0x0, 0x0, 0x0,      // Record Handle
+        0x01,
+        0x0,
+        0x0,
+        0x0,                      // Record Handle
         0x01,                     // PDR Header Version
         PLDM_FILE_DESCRIPTOR_PDR, // PDRType
-        0x01, 0x00,               // Record Change Number
-        0x20, 0x00,               // Data Length = 32 bytes
+        0x01,
+        0x00, // Record Change Number
+        0x20,
+        0x00, // Data Length = 32 bytes
         /* PLDM File Descriptor PDR Data*/
-        0x01, 0x00, // Terminus Handle = 0x01
-        0x01, 0x00, // File Identifier = 0x01
-        0x09, 0x00, // Entity Type = Physical | Device File
-        0x01, 0x00, // Entity instance number = 1
+        0x01,
+        0x00, // Terminus Handle = 0x01
+        0x01,
+        0x00, // File Identifier = 0x01
+        0x09,
+        0x00, // Entity Type = Physical | Device File
+        0x01,
+        0x00, // Entity instance number = 1
         PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
-        0,                      // Container ID = Overall system
-        0x02, 0,                // Supper Dir File Identifier = 0x0002
-        0x01,                   // File Classification = 0x01 (BootLog)
-        0x00,                   // OEM File Classification = 0x00
-        0x15, 0x00,             // File Capabilities = 0x0015
-        0xff, 0xff, 0xff, 0xff, // File Version = 0xffffffff (Unversioned)
-        0x00, 0x28, 0x00, 0x00, // File Maximum Size = 10KB
-        0x02,                   // File Maximum File Descriptor count = 2
-        0x06,                   // File Name Length = 6
-        0x46, 0x69, 0x6C, 0x65, 0x31,
+        0, // Container ID = Overall system
+        0x02,
+        0,    // Supper Dir File Identifier = 0x0002
+        0x01, // File Classification = 0x01 (BootLog)
+        0x00, // OEM File Classification = 0x00
+        0x15,
+        0x00, // File Capabilities = 0x0015
+        0xff,
+        0xff,
+        0xff,
+        0xff, // File Version = 0xffffffff (Unversioned)
+        0x00,
+        0x28,
+        0x00,
+        0x00, // File Maximum Size = 10KB
+        0x02, // File Maximum File Descriptor count = 2
+        0x06, // File Name Length = 6
+        0x46,
+        0x69,
+        0x6C,
+        0x65,
+        0x31,
         0x00, // File Name = "File1\NULL"
     };
 
@@ -6317,27 +6359,48 @@ TEST(decodePldmFileDescriptorPdr, BadTestDataBufferOverLength)
     /*Un-matched File Name Length*/
     std::vector<uint8_t> pdr1{
         // Common PDR Header
-        0x01, 0x0, 0x0, 0x0,      // Record Handle
+        0x01,
+        0x0,
+        0x0,
+        0x0,                      // Record Handle
         0x01,                     // PDR Header Version
         PLDM_FILE_DESCRIPTOR_PDR, // PDRType
-        0x01, 0x00,               // Record Change Number
-        0x20, 0x00,               // Data Length = 32 bytes
+        0x01,
+        0x00, // Record Change Number
+        0x20,
+        0x00, // Data Length = 32 bytes
         /* PLDM File Descriptor PDR Data*/
-        0x01, 0x00, // Terminus Handle = 0x01
-        0x01, 0x00, // File Identifier = 0x01
-        0x09, 0x00, // Entity Type = Physical | Device File
-        0x01, 0x00, // Entity instance number = 1
+        0x01,
+        0x00, // Terminus Handle = 0x01
+        0x01,
+        0x00, // File Identifier = 0x01
+        0x09,
+        0x00, // Entity Type = Physical | Device File
+        0x01,
+        0x00, // Entity instance number = 1
         PLDM_PLATFORM_ENTITY_SYSTEM_CONTAINER_ID,
-        0,                      // Container ID = Overall system
-        0x02, 0,                // Supper Dir File Identifier = 0x0002
-        0x01,                   // File Classification = 0x01 (BootLog)
-        0x00,                   // OEM File Classification = 0x00
-        0x15, 0x00,             // File Capabilities = 0x0015
-        0xff, 0xff, 0xff, 0xff, // File Version = 0xffffffff (Unversioned)
-        0x00, 0x28, 0x00, 0x00, // File Maximum Size = 10KB
-        0x02,                   // File Maximum File Descriptor count = 2
-        0x05,                   // File Name Length = 5
-        0x46, 0x69, 0x6C, 0x65, 0x31,
+        0, // Container ID = Overall system
+        0x02,
+        0,    // Supper Dir File Identifier = 0x0002
+        0x01, // File Classification = 0x01 (BootLog)
+        0x00, // OEM File Classification = 0x00
+        0x15,
+        0x00, // File Capabilities = 0x0015
+        0xff,
+        0xff,
+        0xff,
+        0xff, // File Version = 0xffffffff (Unversioned)
+        0x00,
+        0x28,
+        0x00,
+        0x00, // File Maximum Size = 10KB
+        0x02, // File Maximum File Descriptor count = 2
+        0x05, // File Name Length = 5
+        0x46,
+        0x69,
+        0x6C,
+        0x65,
+        0x31,
         0x00, // File Name = "File1\NULL"
     };
 
