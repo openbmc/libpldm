@@ -52,6 +52,24 @@
       "parentUuid": "d82e8bf3_78a786e7",
       "revId": "063135d2b8bdc73f873524b15aec2472f99518b2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a35df9a4_82a0436c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000212
+      },
+      "writtenOn": "2025-09-23T17:34:19Z",
+      "side": 1,
+      "message": "Wow! Thanks a lot! Now it fails as I expect. I Really appreciate the debug!\n```\nExpected equality of these values:\n  rc\n    Which is: -12\n  PLDM_REQUESTER_RECV_FAIL\n    Which is: -8\n```",
+      "parentUuid": "93195625_9045578b",
+      "revId": "063135d2b8bdc73f873524b15aec2472f99518b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
