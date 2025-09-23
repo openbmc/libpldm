@@ -16,6 +16,7 @@ extern "C" {
 #include <libpldm/compiler.h>
 #include <libpldm/pdr.h>
 #include <libpldm/pldm_types.h>
+#include <libpldm/utils.h>
 
 /**
  * @brief PLDM response transfer flag for the Platform and control commands
@@ -47,7 +48,8 @@ enum pldm_platform_transfer_flag {
 
 #define PLDM_GET_PDR_REQ_BYTES 13
 
-#define PLDM_SET_EVENT_RECEIVER_RESP_BYTES 1
+#define PLDM_SET_EVENT_RECEIVER_RESP_BYTES     1
+#define PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES 2
 
 /* Platform event supported request */
 #define PLDM_EVENT_MESSAGE_BUFFER_SIZE_REQ_BYTES  2
@@ -129,6 +131,16 @@ enum pldm_platform_transfer_flag {
  * v1.2.2
  */
 #define PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH 8
+
+/**
+ * Minimum length of File Descriptor PDR, including size of PLDMTerminusHandle,
+ * FileIdentifier, EntityType, EntityInstanceNumber, ContainerID,
+ * SuperiorDirectoryFileIdentifier, FileClassification, OemFileClassification,
+ * FileCapabilities, FileVersion, FileMaximumSize, FileMaximumFileDescriptorCount,
+ * FileNameLength in `Table 108 - File Descriptor PDR` of DSP0248 v1.3.0
+ * This also includes the size of the common PDR header 10 bytes.
+ */
+#define PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH 36
 
 #define PLDM_INVALID_EFFECTER_ID 0xffff
 
@@ -276,6 +288,7 @@ enum pldm_pdr_types {
 	PLDM_REDFISH_RESOURCE_PDR = 22,
 	PLDM_REDFISH_ENTITY_ASSOCIATION_PDR = 23,
 	PLDM_REDFISH_ACTION_PDR = 24,
+	PLDM_FILE_DESCRIPTOR_PDR = 30,
 	PLDM_OEM_DEVICE_PDR = 126,
 	PLDM_OEM_PDR = 127,
 };
@@ -309,6 +322,9 @@ enum pldm_platform_completion_codes {
 	PLDM_PLATFORM_INVALID_PROTOCOL_TYPE = 0x80,
 	PLDM_PLATFORM_ENABLE_METHOD_NOT_SUPPORTED = 0x81,
 	PLDM_PLATFORM_HEARTBEAT_FREQUENCY_TOO_HIGH = 0x82,
+
+	PLDM_PLATFORM_INVALID_SENSOR_OPERATIONAL_STATE = 0x81,
+	PLDM_PLATFORM_EVENT_GENERATION_NOT_SUPPORTED = 0x82,
 };
 
 /** @brief PLDM Event types
@@ -343,6 +359,15 @@ enum pldm_sensor_operational_state {
 	PLDM_SENSOR_INITIALIZING,
 	PLDM_SENSOR_SHUTTINGDOWN,
 	PLDM_SENSOR_INTEST
+};
+
+/** @brief PLDM operation states for Set Numeric/State Sensor State.
+ *  This is a subset of pldm_sensor_operational_state.
+ */
+enum pldm_set_sensor_operational_state {
+	PLDM_SET_SENSOR_ENABLED,
+	PLDM_SET_SENSOR_DISABLED,
+	PLDM_SET_SENSOR_UNAVAILABLE,
 };
 
 /** @brief PLDM pldmPDRRepositoryChgEvent class eventData format
@@ -899,7 +924,7 @@ struct pldm_entity_auxiliary_names_pdr {
 	char auxiliary_name_data[]
 		__attribute__((aligned(alignof(pldm_utf16be))));
 #else
-#error("__has_attribute() support is required to uphold runtime safety")
+#error ("__has_attribute() support is required to uphold runtime safety")
 #endif
 #endif
 };
@@ -925,6 +950,28 @@ struct pldm_effecter_aux_name_pdr {
 	uint8_t effecter_count;
 	uint8_t effecter_names[1];
 } __attribute__((packed));
+
+/** @struct pldm_platform_file_descriptor_pdr
+ *
+ *  Structure representing PLDM File Descriptor PDR for unpacked value
+ *  Refer to: DSP0248_1.3.0: 28.30 Table 108
+ */
+
+struct pldm_platform_file_descriptor_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint16_t terminus_handle;
+	uint16_t file_identifier;
+	pldm_entity container;
+	uint16_t superior_directory_file_identifier;
+	uint8_t file_classification;
+	uint8_t oem_file_classification;
+	bitfield16_t file_capabilities;
+	ver32_t file_version;
+	uint32_t file_maximum_size;
+	uint8_t file_maximum_file_descriptor_count;
+	struct variable_field file_name;
+	struct variable_field oem_file_classification_name;
+};
 
 /** @brief Encode PLDM state effecter PDR
  *
@@ -1048,6 +1095,19 @@ struct pldm_set_event_receiver_req {
 	uint8_t event_receiver_address_info;
 	uint16_t heartbeat_timer;
 } __attribute__((packed));
+
+/** @struct pldm_get_event_receiver_resp
+ *
+ * Structure representing GetEventReceiver command.
+ */
+struct pldm_get_event_receiver_resp {
+	uint8_t completion_code;
+	uint8_t transport_protocol_type;
+	union {
+		uint8_t mctp_eid;
+		struct variable_field vendor_specific;
+	} event_receiver_address;
+};
 
 /** @struct pldm_event_message_buffer_size_req
  *
@@ -1308,6 +1368,38 @@ struct pldm_get_sensor_reading_resp {
 	uint8_t present_reading[1];
 } __attribute__((packed));
 
+/** @struct pldm_set_numeric_sensor_enable_req
+ *
+ *  Structure representing a SetNumericSensorEnable request
+ */
+struct pldm_set_numeric_sensor_enable_req {
+	uint16_t sensor_id;
+	enum pldm_set_sensor_operational_state op_state;
+	enum pldm_sensor_event_message_enable event_enable;
+};
+
+/** @struct pldm_set_state_sensor_enable_field
+ *
+ *  Structure representing PLDM set state sensor enables fields
+ */
+struct pldm_set_state_sensor_enable_field {
+	enum pldm_set_sensor_operational_state op_state;
+	enum pldm_sensor_event_message_enable event_enable;
+};
+
+#define PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT 8
+
+/** @struct pldm_set_state_sensor_enables_req
+ *
+ *  Structure representing a SetStateSensorEnables request
+ */
+struct pldm_set_state_sensor_enables_req {
+	uint16_t sensor_id;
+	uint8_t field_count;
+	struct pldm_set_state_sensor_enable_field
+		fields[PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT];
+};
+
 /* Responder */
 
 /* SetNumericEffecterValue */
@@ -1565,6 +1657,23 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 /* Requester */
 
 /*GetPDRRepositoryInfo*/
+
+/** @brief Encode GetPDRRepositoryInfo request data
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[out] msg - Message will be written to this
+  * @param[in] payload_length - length of request message payload
+ *  @return 0 on success
+ *         -EINVAL if the input parameters' memory are not allocated,
+ *         or message type or instance in request header is invalid
+ *         -ENOMSG if the PLDM type in the request header is invalid
+ *         -EOVERFLOW if the input message length is invalid
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_get_pdr_repository_info_req(uint8_t instance_id,
+				       struct pldm_msg *msg,
+				       size_t payload_length);
 
 /** @brief Encode GetPDRRepositoryInfo response data
  *
@@ -2388,6 +2497,60 @@ int decode_get_sensor_reading_resp(
 	uint8_t *present_state, uint8_t *previous_state, uint8_t *event_state,
 	uint8_t *present_reading);
 
+/** @brief Encode the GetEventReceiver request message
+ *
+ * @param[in] instance_id - Message's instance id
+ * @param[out] msg - Argument to capture the Message
+ * @param[in] payload_length - length of request message payload
+ * @return 0 on success
+ *         -EINVAL if the input parameters' memory are not allocated,
+ *         or message type or instance in request header is invalid
+ *         -ENOMSG if the PLDM type in the request header is invalid
+ *         -EOVERFLOW if the input message length is invalid
+ */
+int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg,
+				  size_t payload_length);
+
+/** @brief Decode the GetEventReceiver response message
+ *
+ * @param[in] msg - Request message
+ * @param[in] payload_length - Length of response message payload
+ * @param[out] resp - Structure to store decoded response
+ * @return 0 on success
+ *         -EINVAL if the input parameters' memory are not allocated,
+ *         or message type or instance in request header is invalid
+ *         -ENOMSG if the PLDM type in the request header is invalid
+ *         -EOVERFLOW if the input message length is invalid
+ *         -ENOTSUP if the transport protocol is not supported
+ */
+int decode_get_event_receiver_resp(const struct pldm_msg *msg,
+				   size_t payload_length,
+				   struct pldm_get_event_receiver_resp *resp);
+
+/** @brief Encode the GetEventReceiver response message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] event_receiver_info -  Structure to encode. All members,
+ *  except those mentioned in the @note below, should be initialized by
+ * the caller.
+ *  @param[out] msg - Argument to capture the Message
+ *  @param[in/out] payload_lenght - The lenght of the supplied buffer for
+ payload
+ * @return 0 on success
+ *         -EINVAL if the input parameters' memory are not allocated,
+ *         or message type or instance in request header is invalid
+ *         -ENOMSG if the PLDM type in the request header is invalid
+ *         -EOVERFLOW if the input message length is invalid
+ *
+ * @note Caller is responsible for the allocation of the event_receiver_address_info
+ *       parameter. For MCTP transport event_receiver_info.mctp_eid should be set. For other
+ *       protocol types event_receiver_info.vendor_specific should be used.
+ */
+int encode_get_event_receiver_resp(
+	uint8_t instance_id,
+	struct pldm_get_event_receiver_resp *event_receiver_info,
+	struct pldm_msg *msg, size_t *payload_length);
+
 /** @brief Encode the SetEventReceiver request message
  *
  * @param[in] instance_id - Message's instance id
@@ -2541,6 +2704,76 @@ int decode_pldm_platform_cper_event(const void *event_data,
  */
 uint8_t *
 pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event);
+
+/** @brief Encode data in to File Descriptor PDR
+ *
+ *  @param[in] pdr - Populated pldm_platform_file_descriptor_pdr struct
+ *  @param[out] data - Pointer to a buffer to save encoded PDR data
+ *  @param[in/out] data_len - Length of the response PDR buffer (data)
+ *
+ *  @return error code: 0 on success
+ *          -EINVAL if the input values are invalid
+ *          -EBADMSG if the original length of the data buffer is larger
+ *          than the target extract length
+ *          -EOVERFLOW if the original length of the data buffer is smaller
+ *          than the target extract length
+ */
+int encode_pldm_platform_file_descriptor_pdr(
+	const struct pldm_platform_file_descriptor_pdr *pdr, void *data,
+	size_t *data_len);
+
+/** @brief Decode date fields from File Descriptor PDR
+ *
+ *  @param[in] data - PLDM response message which includes the File
+ *                        Descriptor PDR in DSP0248_1.3.0 table 108.
+ *  @param[in] data_length - Length of response message payload
+ *  @param[out] pdr - pointer to the decoded pdr struct
+ *
+ *  @return error code: 0 on success
+ *          -EINVAL if 1. the input and output parameters' memory are not
+ *                     allocated
+ *          -EBADMSG if the original length of the data buffer is larger
+ *          than the target extract length
+ *          -EOVERFLOW if the original length of the data buffer is smaller
+ *          than the target extract length
+ */
+int decode_pldm_platform_file_descriptor_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_file_descriptor_pdr *pdr);
+
+/** @brief Decode SetNumericSensorEnable request
+ *
+ *  @param[in] msg - PLDM request message.
+ *  @param[in] payload_length - Length of request message.
+ *  @param[out] req - Returned decoded request.
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EPROTO if the input request message is invalid
+ *                      -EBADMSG if the input request message is too long
+ *                      -EOVERFLOW if the input request message is too short.
+ */
+int decode_set_numeric_sensor_enable_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_set_numeric_sensor_enable_req *req);
+
+/** @brief Decode SetStateSensorEnables request
+ *
+ *  @param[in] msg - PLDM request message.
+ *  @param[in] payload_length - Length of request message.
+ *  @param[out] req - Returned decoded request.
+ *                    .field_count is set to the number of populated fields.
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EPROTO if the input request message is invalid
+ *                      -EBADMSG if the input request message is too long
+ *                      -EOVERFLOW if the input request message is too short.
+ */
+int decode_set_state_sensor_enables_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_set_state_sensor_enables_req *req);
+
 #ifdef __cplusplus
 }
 #endif

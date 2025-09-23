@@ -234,6 +234,30 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
 	uint8_t child_index, uint32_t range_exclude_start_handle,
 	uint32_t range_exclude_end_handle, uint16_t *container_id);
 
+/** @brief Delete record using its record handle
+ *
+ *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in] record_handle - record handle of input PDR record
+ *  @param[in] is_remote - if true, then the PDR is not from this terminus
+ *
+ *  @return 0 if deleted successful else returns -EINVAL when repo is NULL
+ *  or -ENOENT if the record handle is not found in the repo.
+ */
+int pldm_pdr_delete_by_record_handle(pldm_pdr *repo, uint32_t record_handle,
+				     bool is_remote);
+
+/** @brief delete the state effecter PDR by effecter id
+ *
+ *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in] effecter_id - effecter ID of the PDR
+ *  @param[in] is_remote - if true, then the PDR is not from this terminus
+ *  @param[out] record_handle - if non-NULL, then record handle of the effecter PDR deleted
+ *
+ *  @return record handle of the effecter PDR deleted from the repo
+ */
+int pldm_pdr_delete_by_effecter_id(pldm_pdr *repo, uint16_t effecter_id,
+				   bool is_remote, uint32_t *record_handle);
+
 /* ======================= */
 /* FRU Record Set PDR APIs */
 /* ======================= */
@@ -280,6 +304,21 @@ const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 	const pldm_pdr *repo, uint16_t fru_rsi, uint16_t *terminus_handle,
 	uint16_t *entity_type, uint16_t *entity_instance_num,
 	uint16_t *container_id);
+
+/** @brief delete the state sensor PDR by sensor id
+ *
+ *  @param[in] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in] sensor_id - sensor ID of the PDR
+ *  @param[in] is_remote - if true, then the PDR is not from this terminus
+ *  @param[out] record_handle - if non-NULL, then record handle of the
+ *  sensor PDR deleted
+ *
+ *  @return 0 on success, with the record handle of the deleted sensor PDR
+ *  stored in record_handle if record_handle is non-NULL, or -EINVAL when
+ *  repo is NULL, or -ENOENT if the  sensor id is not found in the repo.
+ */
+int pldm_pdr_delete_by_sensor_id(pldm_pdr *repo, uint16_t sensor_id,
+				 bool is_remote, uint32_t *record_handle);
 
 /* =========================== */
 /* Entity Association PDR APIs */
@@ -656,6 +695,18 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 int pldm_entity_association_pdr_remove_contained_entity(
 	pldm_pdr *repo, pldm_entity *entity, bool is_remote,
 	uint32_t *pdr_record_handle);
+
+/** @brief deletes a node and it's children from the entity association tree
+ *  @param[in] tree - opaque pointer acting as a handle to the tree
+ *  @param[in] entity - the pldm entity to be deleted
+ *  Note - The values passed in entity must be in host-endianness.
+ *
+ *  @return 0 on success, returns -EINVAL if the arguments are invalid and if
+ *  the entity passed is invalid or NULL, or -ENOENT if the @param entity is
+ *  not found in @param tree.
+ */
+int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
+					     const pldm_entity *entity);
 
 /** @brief removes a PLDM PDR record if it matches given record set identifier
  *  @param[in] repo - opaque pointer acting as a PDR repo handle

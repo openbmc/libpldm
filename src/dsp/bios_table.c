@@ -947,7 +947,7 @@ int pldm_bios_table_append_pad_checksum(void *table, size_t capacity,
 	size_t pad_size = pad_size_get(*size);
 	table_end = pad_append(table_end, pad_size);
 
-	uint32_t checksum = crc32(table, *size + pad_size);
+	uint32_t checksum = pldm_edac_crc32(table, *size + pad_size);
 	checksum_append(table_end, checksum);
 	*size = total_length;
 
@@ -1243,7 +1243,7 @@ bool pldm_bios_table_checksum(const uint8_t *table, size_t size)
 	}
 
 	uint32_t src_crc = le32toh(*(uint32_t *)(table + size - 4));
-	uint32_t dst_crc = crc32(table, size - 4);
+	uint32_t dst_crc = pldm_edac_crc32(table, size - 4);
 
 	return src_crc == dst_crc;
 }

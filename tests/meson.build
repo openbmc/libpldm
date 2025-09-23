@@ -12,11 +12,18 @@ if not gtest_dep.found() or not gmock_dep.found()
     gmock_dep = gtest_proj.dependency('gmock')
 endif
 
-test_include_dirs = [libpldm_include_dir, include_directories('../src')]
+test_include_dirs = [
+    libpldm_include_dir,
+    include_directories('../src', '../tests'),
+]
 
 tests = ['instance-id', 'msgbuf', 'responder', 'utils']
 
 subdir('dsp')
+
+if get_option('abi').contains('testing')
+    subdir('fuzz')
+endif
 
 # The 'test' transport APIs will never be marked stable as they are just for
 # testing.

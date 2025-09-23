@@ -11,12 +11,12 @@ project(
         'b_ndebug': 'if-release',
         'tests': not meson.is_subproject(),
     },
-    version: '0.11.0',
-    meson_version: '>=1.3.0',
+    version: '0.14.0',
+    meson_version: '>=1.4.0',
 )
 
 if get_option('tests')
-    add_languages('cpp')
+    add_languages('cpp', native: false)
 endif
 
 # For memmem() in src/msgbuf.h
@@ -51,11 +51,12 @@ if get_option('abi').contains('deprecated')
     conf.set('LIBPLDM_ABI_DEPRECATED', entrypoint)
     conf.set(
         'LIBPLDM_ABI_DEPRECATED_UNSAFE',
-        '__attribute((visibility("default")))',
+        '__attribute__((visibility("default")))',
     )
     add_project_arguments('-DLIBPLDM_API_DEPRECATED', language: ['c', 'cpp'])
 else
     conf.set('LIBPLDM_ABI_DEPRECATED', '')
+    conf.set('LIBPLDM_ABI_DEPRECATED_UNSAFE', '')
 endif
 conf.set('LIBPLDM_ABI_STABLE', entrypoint)  # Always expose the stable symbols
 if get_option('abi').contains('testing')
@@ -67,12 +68,41 @@ endif
 
 config = configure_file(output: 'config.h', configuration: conf)
 
-add_project_arguments('-include', '@0@'.format(config), language: 'c')
+add_project_arguments('-include', config.full_path(), language: 'c')
 
 libpldm_include_dir = include_directories('include', is_system: true)
 
 subdir('include')
 subdir('src')
+subdir('tools')
+
+doxygen = find_program('doxygen', required: false)
+if doxygen.found()
+    doxydata = configuration_data()
+    doxydata.set('description', meson.project_name())
+    doxydata.set('project', meson.project_name())
+    doxydata.set('version', meson.project_version())
+    doxydata.set(
+        'sources',
+        '@0@ @1@'.format(
+            meson.project_source_root() / 'include',
+            meson.project_source_root() / 'src',
+        ),
+    )
+    doxyfile = configure_file(
+        input: 'Doxyfile.in',
+        output: 'Doxyfile',
+        configuration: doxydata,
+        install: false,
+    )
+
+    docs = custom_target(
+        'docs',
+        input: doxyfile,
+        output: 'doxygen',
+        command: [doxygen, doxyfile],
+    )
+endif
 
 if get_option('tests')
     subdir('tests')

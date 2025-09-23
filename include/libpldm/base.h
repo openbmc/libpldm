@@ -6,7 +6,9 @@
 extern "C" {
 #endif
 
+#include <libpldm/compiler.h>
 #include <libpldm/pldm_types.h>
+#include <libpldm/utils.h>
 
 #include <asm/byteorder.h>
 #include <stdalign.h>
@@ -26,6 +28,7 @@ enum pldm_supported_types {
 	PLDM_FRU = 0x04,
 	PLDM_FWUP = 0x05,
 	PLDM_RDE = 0x06,
+	PLDM_FILE = 0x07,
 	PLDM_OEM = 0x3f,
 };
 
@@ -54,7 +57,28 @@ enum pldm_completion_codes {
 	PLDM_ERROR_NOT_READY = 0x04,
 	PLDM_ERROR_UNSUPPORTED_PLDM_CMD = 0x05,
 	PLDM_ERROR_INVALID_PLDM_TYPE = 0x20,
-	PLDM_INVALID_TRANSFER_OPERATION_FLAG = 0x21
+	PLDM_ERROR_INVALID_TRANSFER_CONTEXT = 0x21,
+	PLDM_ERROR_INVALID_DATA_TRANSFER_HANDLE = 0x22,
+	PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION = 0x23,
+	PLDM_ERROR_INVALID_REQUESTED_SECTION_OFFSET = 0x24,
+
+	PLDM_GET_PLDM_VERSION_INVALID_DATA_TRANSFER_HANDLE = 0x80,
+	PLDM_GET_PLDM_VERSION_INVALID_TRANSFER_OPERATION_FLAG = 0x81,
+	PLDM_GET_PLDM_VERSION_INVALID_PLDM_TYPE_IN_REQUEST_DATA = 0x83,
+
+	PLDM_GET_PLDM_COMMANDS_INVALID_PLDM_TYPE_IN_REQUEST_DATA = 0x83,
+	PLDM_GET_PLDM_COMMANDS_INVALID_PLDM_VERSION_IN_REQUEST_DATA = 0x84,
+
+	PLDM_SELECT_PLDM_VERSION_INVALID_PLDM_TYPE_IN_REQUEST_DATA = 0x83,
+	PLDM_SELECT_PLDM_VERSION_INVALID_PLDM_VERSION_IN_REQUEST_DATA = 0x84,
+
+	PLDM_MULTIPART_SEND_NEGOTIATION_INCOMPLETE = 0x83,
+	PLDM_MULTIPART_RECEIVE_NEGOTIATION_INCOMPLETE = 0x83,
+
+	PLDM_GET_MULTIPART_TRANSFER_SUPPORT_INVALID_PLDM_TYPE_IN_REQUEST_DATA =
+		0x83,
+	PLDM_GET_MULTIPART_TRANSFER_SUPPORT_INVALID_PLDM_VERSION_IN_REQUEST_DATA =
+		0x84,
 };
 
 enum transfer_op_flag {
@@ -71,11 +95,20 @@ enum transfer_multipart_op_flag {
 	PLDM_XFER_CURRENT_PART = 4,
 };
 
+enum pldm_base_multipart_receive_transfer_flag {
+	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_START = 0x01,
+	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_MIDDLE = 0x02,
+	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_END = 0x04,
+	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_START_AND_END = 0x05,
+	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_ACK_COMPLETION = 0x08,
+};
+
 enum transfer_resp_flag {
 	PLDM_START = 0x01,
 	PLDM_MIDDLE = 0x02,
 	PLDM_END = 0x04,
 	PLDM_START_AND_END = 0x05,
+	PLDM_ACKNOWLEDGE_COMPLETION = 0x08,
 };
 
 /** @brief PLDM transport protocol type
@@ -108,13 +141,20 @@ typedef enum {
 #define PLDM_GET_VERSION_REQ_BYTES  6
 
 /* Response lengths are inclusive of completion code */
+#define PLDM_GET_TYPES_REQ_BYTES     0
 #define PLDM_GET_TYPES_RESP_BYTES    9
+#define PLDM_GET_TID_REQ_BYTES	     0
 #define PLDM_GET_TID_RESP_BYTES	     2
+#define PLDM_SET_TID_REQ_BYTES	     1
 #define PLDM_SET_TID_RESP_BYTES	     1
 #define PLDM_GET_COMMANDS_RESP_BYTES 33
 /* Response data has only one version and does not contain the checksum */
-#define PLDM_GET_VERSION_RESP_BYTES	 10
-#define PLDM_MULTIPART_RECEIVE_REQ_BYTES 18
+#define PLDM_GET_VERSION_RESP_BYTES		   10
+#define PLDM_MULTIPART_RECEIVE_REQ_BYTES	   18
+#define PLDM_BASE_MULTIPART_RECEIVE_RESP_MIN_BYTES 10
+
+#define PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES  10
+#define PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES 11
 
 #define PLDM_VERSION_0	     0
 #define PLDM_CURRENT_VERSION PLDM_VERSION_0
@@ -216,7 +256,7 @@ struct pldm_msg {
 #ifdef __cplusplus
 #define PLDM_MSG_DEFINE_P(name, size)                                          \
 	PLDM_MSG_BUFFER(name##_buf, size);                                     \
-	auto *(name) = new (name##_buf) pldm_msg
+	auto *(name) = new (name##_buf) pldm_msg()
 #endif
 
 /**
@@ -320,11 +360,11 @@ struct pldm_get_tid_resp {
 	uint8_t tid;		 //!< PLDM GetTID TID field
 } __attribute__((packed));
 
-/** @struct pldm_multipart_receive_req
+/** @struct pldm_base_multipart_receive_req
  *
  * Structure representing PLDM multipart receive request.
  */
-struct pldm_multipart_receive_req {
+struct pldm_base_multipart_receive_req {
 	uint8_t pldm_type;	  //!< PLDM Type for the MultipartReceive
 				  //!< command.
 	uint8_t transfer_opflag;  //!< PLDM MultipartReceive operation flag.
@@ -336,7 +376,39 @@ struct pldm_multipart_receive_req {
 				  //!< section.
 	uint32_t section_length;  //!< The length (in bytes) of the section
 				  //!< requested.
-} __attribute__((packed));
+};
+
+/** @struct pldm_base_multipart_receive_resp
+ *
+ * Structure representing PLDM multipart receive request.
+ */
+struct pldm_base_multipart_receive_resp {
+	uint8_t completion_code;       //!< Completion code of the command.
+	uint8_t transfer_flag;	       //!< PLDM MultipartReceive transfer flag.
+	uint32_t next_transfer_handle; //!< The handle for the next part of
+				       //!< data for this section transfer.
+	struct variable_field data;
+};
+
+/** @struct pldm_base_negotiate_transfer_params_req
+ *
+ * Structure representing PLDM Negotiate Transfer Parameters request
+ */
+struct pldm_base_negotiate_transfer_params_req {
+	uint16_t requester_part_size;
+	bitfield8_t requester_protocol_support[8];
+};
+
+/** @struct pldm_base_negotiate_transfer_params_resp
+ *
+ * Structure representing PLDM Negotiate Transfer Parameters response
+ */
+struct pldm_base_negotiate_transfer_params_resp {
+	uint8_t completion_code;
+	uint16_t responder_part_size;
+	bitfield8_t responder_protocol_support[8];
+};
+
 /**
  * @brief Populate the PLDM message with the PLDM header.The caller of this API
  *        allocates buffer for the PLDM header when forming the PLDM message.
@@ -606,6 +678,19 @@ int encode_get_tid_resp(uint8_t instance_id, uint8_t completion_code,
  */
 int encode_set_tid_req(uint8_t instance_id, uint8_t tid, struct pldm_msg *msg);
 
+/** @brief Decode a SetTID request message
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - length of request message payload
+ *  @param[out] tid - Terminus ID
+ *  @return 0 on success
+ *         -EINVAL if the input parameters' memory are not allocated,
+ *         or tid is invalid
+ *         -EOVERFLOW if the input message length is invalid
+ */
+int decode_set_tid_req(const struct pldm_msg *msg, size_t payload_length,
+		       uint8_t *tid);
+
 /* Responder */
 
 /* MultipartRecieve */
@@ -629,6 +714,63 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 				 uint32_t *transfer_handle,
 				 uint32_t *section_offset,
 				 uint32_t *section_length);
+
+/** @brief Encode a PLDM MultipartReceive request message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - The pointer to the request message to be encoded
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in, out] payload_length - length of request message payload
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated,
+ *          or message type or instance in request header is invalid
+ *          -ENOMSG if the PLDM type in the request header is invalid
+ *          -EOVERFLOW if the input message length is invalid
+ */
+int encode_pldm_base_multipart_receive_req(
+	uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode a PLDM MultipartReceive response message
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - length of request message payload
+ *  @param[out] resp - pointer to the decoded response message,
+ *         excluding the data integrity checksum
+ *  @param[out] data_integrity_checksum - The checksum of data field
+ *         of the decoded response message
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated
+ *          -EOVERFLOW if the input message buffer is too short for the output
+ *          response struct
+ *          -EBADMSG if the input message buffer is too large for the output
+ *          response struct
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int decode_pldm_base_multipart_receive_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_multipart_receive_resp *resp,
+	uint32_t *data_integrity_checksum);
+
+/** @brief Encode a PLDM MultipartReceive response message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp - The pointer to the response message to be encoded
+ *  @param[in] checksum - Checksum of the entirely data payload
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in,out] payload_length - length of request message payload
+ *  @return 0 on success
+ *          -EINVAL if argument values are invalid for the invocation
+ *          -ENOMSG if the PLDM type in the request header is invalid
+ *          -EOVERFLOW if the input message length is invalid
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_base_multipart_receive_resp(
+	uint8_t instance_id,
+	const struct pldm_base_multipart_receive_resp *resp, uint32_t checksum,
+	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create a PLDM response message containing only cc
  *
@@ -655,6 +797,77 @@ int encode_cc_only_resp(uint8_t instance_id, uint8_t type, uint8_t command,
 int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
 			    uint8_t pldm_type, uint8_t command,
 			    struct pldm_msg *msg);
+
+/** @brief Encode a PLDM Negotiate Transfer Parameters request message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - The pointer to the request message to be encoded
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in, out] payload_length - length of request message payload
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated,
+ *          or message type or instance in request header is invalid
+ *          -ENOMSG if the PLDM type in the request header is invalid
+ *          -EOVERFLOW if the input message length is invalid
+ */
+int encode_pldm_base_negotiate_transfer_params_req(
+	uint8_t instance_id,
+	const struct pldm_base_negotiate_transfer_params_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Encode a PLDM Negotiate Transfer Parameters response message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp - The pointer to the response message to be encoded
+ *  @param[out] msg - Message will be written to this
+ *  @param[in,out] payload_length - length of response message payload
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated,
+ *          or message type or instance in request header is invalid
+ *          -ENOMSG if the PLDM type in the request header is invalid
+ *          -EOVERFLOW if the input message length is invalid
+ */
+int encode_pldm_base_negotiate_transfer_params_resp(
+	uint8_t instance_id,
+	const struct pldm_base_negotiate_transfer_params_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode a PLDM Negotiate Transfer Parameters request message
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - length of request message payload
+ *  @param[out] req - pointer to the decoded request message
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated
+ *          -EOVERFLOW if the input message buffer is too short for the output
+ *          request struct
+ *          -EBADMSG if the input message buffer is too large for the output
+ *          request struct
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int decode_pldm_base_negotiate_transfer_params_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_negotiate_transfer_params_req *req);
+
+/** @brief Decode a PLDM Negotiate Transfer Parameters response message
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - length of request message payload
+ *  @param[out] resp - pointer to the decoded response message,
+ *         excluding the data integrity checksum
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated
+ *          -EOVERFLOW if the input message buffer is too short for the output
+ *          response struct
+ *          -EBADMSG if the input message buffer is too large for the output
+ *          response struct
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int decode_pldm_base_negotiate_transfer_params_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_negotiate_transfer_params_resp *resp);
 
 #ifdef __cplusplus
 }

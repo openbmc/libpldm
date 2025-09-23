@@ -6,11 +6,14 @@
 extern "C" {
 #endif
 
+#include "compiler.h"
+
 #include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
 #include <libpldm/utils.h>
 
+#include <assert.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -115,16 +118,24 @@ enum pldm_firmware_update_commands {
 	PLDM_QUERY_DOWNSTREAM_IDENTIFIERS = 0x04,
 	PLDM_QUERY_DOWNSTREAM_FIRMWARE_PARAMETERS = 0x05,
 	PLDM_REQUEST_UPDATE = 0x10,
+	PLDM_GET_PACKAGE_DATA = 0x11,
+	PLDM_GET_DEVICE_META_DATA = 0x12,
 	PLDM_PASS_COMPONENT_TABLE = 0x13,
 	PLDM_UPDATE_COMPONENT = 0x14,
 	PLDM_REQUEST_FIRMWARE_DATA = 0x15,
 	PLDM_TRANSFER_COMPLETE = 0x16,
 	PLDM_VERIFY_COMPLETE = 0x17,
 	PLDM_APPLY_COMPLETE = 0x18,
+	PLDM_GET_META_DATA = 0x19,
 	PLDM_ACTIVATE_FIRMWARE = 0x1a,
 	PLDM_GET_STATUS = 0x1b,
 	PLDM_CANCEL_UPDATE_COMPONENT = 0x1c,
-	PLDM_CANCEL_UPDATE = 0x1d
+	PLDM_CANCEL_UPDATE = 0x1d,
+	PLDM_ACTIVATE_PENDING_COMPONENT_IMAGE_SET = 0x1e,
+	PLDM_ACTIVATE_PENDING_COMPONENT_IMAGE = 0x1f,
+	PLDM_REQUEST_DOWNSTREAM_DEVICE_UPDATE = 0x20,
+	PLDM_GET_COMPONENT_OPAQUE_DATA = 0x21,
+	PLDM_UPTATE_SECURITY_REVISION = 0x22
 };
 
 /** @brief PLDM Firmware update completion codes
@@ -149,7 +160,10 @@ enum pldm_firmware_update_completion_codes {
 	PLDM_FWUP_INVALID_TRANSFER_HANDLE = 0x90,
 	PLDM_FWUP_INVALID_TRANSFER_OPERATION_FLAG = 0x91,
 	PLDM_FWUP_ACTIVATE_PENDING_IMAGE_NOT_PERMITTED = 0x92,
-	PLDM_FWUP_PACKAGE_DATA_ERROR = 0x93
+	PLDM_FWUP_PACKAGE_DATA_ERROR = 0x93,
+	PLDM_FWUP_NO_OPAQUE_DATA = 0x94,
+	PLDM_FWUP_UPDATE_SECURITY_REVISION_NOT_PERMITTED = 0x95,
+	PLDM_FWUP_DOWNSTREAM_DEVICE_LIST_CHANGED = 0x96
 };
 
 /** @brief String type values defined in the PLDM firmware update specification
@@ -183,6 +197,8 @@ enum pldm_firmware_update_descriptor_types {
 	PLDM_FWUP_ASCII_MODEL_NUMBER_SHORT_STRING = 0x0107,
 	PLDM_FWUP_SCSI_PRODUCT_ID = 0x0108,
 	PLDM_FWUP_UBM_CONTROLLER_DEVICE_CODE = 0x0109,
+	PLDM_FWUP_IEEE_EUI_64_ID = 0x010a,
+	PLDM_FWUP_PCI_REVISION_ID_RANGE = 0x010b,
 	PLDM_FWUP_VENDOR_DEFINED = 0xffff
 };
 
@@ -205,7 +221,9 @@ enum pldm_firmware_update_descriptor_types_length {
 	PLDM_FWUP_ASCII_MODEL_NUMBER_LONG_STRING_LENGTH = 40,
 	PLDM_FWUP_ASCII_MODEL_NUMBER_SHORT_STRING_LENGTH = 10,
 	PLDM_FWUP_SCSI_PRODUCT_ID_LENGTH = 16,
-	PLDM_FWUP_UBM_CONTROLLER_DEVICE_CODE_LENGTH = 4
+	PLDM_FWUP_UBM_CONTROLLER_DEVICE_CODE_LENGTH = 4,
+	PLDM_FWUP_IEEE_EUI_64_ID_LENGTH = 8,
+	PLDM_FWUP_PCI_REVISION_ID_RANGE_LENGTH = 2
 };
 
 /** @brief ComponentClassification values defined in firmware update
@@ -316,6 +334,9 @@ enum pldm_firmware_update_transfer_result_values {
 	PLDM_FWUP_FD_ABORTED_TRANSFER_LOW_POWER_STATE = 0x0b,
 	PLDM_FWUP_FD_ABORTED_TRANSFER_RESET_NEEDED = 0x0c,
 	PLDM_FWUP_FD_ABORTED_TRANSFER_STORAGE_ISSUE = 0x0d,
+	PLDM_FWUP_FD_ABORTED_TRANSFER_INVALID_COMPONENT_OPAQUE_DATA = 0x0e,
+	PLDM_FWUP_FD_ABORTED_TRANSFER_DOWNSTREAM_DEVICE_FAILURE = 0x0f,
+	PLDM_FWUP_FD_ABORTED_TRANSFER_SECURITY_REVISION_ERROR = 0x10,
 	PLDM_FWUP_VENDOR_TRANSFER_RESULT_RANGE_MIN = 0x70,
 	PLDM_FWUP_VENDOR_TRANSFER_RESULT_RANGE_MAX = 0x8f
 };
@@ -328,6 +349,7 @@ enum pldm_firmware_update_verify_result_values {
 	PLDM_FWUP_VERIFY_ERROR_VERSION_MISMATCH = 0x02,
 	PLDM_FWUP_VERIFY_FAILED_FD_SECURITY_CHECKS = 0x03,
 	PLDM_FWUP_VERIFY_ERROR_IMAGE_INCOMPLETE = 0x04,
+	PLDM_FWUP_VERIFY_FAILURE_SECURITY_REVISION_ERROR = 0x10,
 	PLDM_FWUP_VENDOR_VERIFY_RESULT_RANGE_MIN = 0x90,
 	PLDM_FWUP_VENDOR_VERIFY_RESULT_RANGE_MAX = 0xaf
 };
@@ -338,6 +360,7 @@ enum pldm_firmware_update_apply_result_values {
 	PLDM_FWUP_APPLY_SUCCESS = 0x00,
 	PLDM_FWUP_APPLY_SUCCESS_WITH_ACTIVATION_METHOD = 0x01,
 	PLDM_FWUP_APPLY_FAILURE_MEMORY_ISSUE = 0x02,
+	PLDM_FWUP_APPLY_FAILURE_SECURITY_REVISION_ERROR = 0x10,
 	PLDM_FWUP_VENDOR_APPLY_RESULT_RANGE_MIN = 0xb0,
 	PLDM_FWUP_VENDOR_APPLY_RESULT_RANGE_MAX = 0xcf
 };
@@ -368,7 +391,8 @@ enum pldm_get_status_aux_states {
 	PLDM_FD_OPERATION_IN_PROGRESS = 0,
 	PLDM_FD_OPERATION_SUCCESSFUL = 1,
 	PLDM_FD_OPERATION_FAILED = 2,
-	PLDM_FD_IDLE_LEARN_COMPONENTS_READ_XFER = 3
+	PLDM_FD_IDLE_LEARN_COMPONENTS_READ_XFER = 3,
+	PLDM_FD_IDLE_SELF_CONTAINED_ACTIVATION_FAILURE = 4
 };
 
 /** @brief Firmware device aux state status in GetStatus response
@@ -377,6 +401,7 @@ enum pldm_get_status_aux_state_status_values {
 	PLDM_FD_AUX_STATE_IN_PROGRESS_OR_SUCCESS = 0x00,
 	PLDM_FD_TIMEOUT = 0x09,
 	PLDM_FD_GENERIC_ERROR = 0x0a,
+	PLDM_FD_SELF_CONTAINED_ACTIVATION_FAILURE = 0x0b,
 	PLDM_FD_VENDOR_DEFINED_STATUS_CODE_START = 0x70,
 	PLDM_FD_VENDOR_DEFINED_STATUS_CODE_END = 0xef
 };
@@ -888,6 +913,29 @@ struct pldm_request_update_resp {
 	uint16_t fd_meta_data_len;
 	uint8_t fd_will_send_pkg_data;
 } __attribute__((packed));
+
+/** @struct pldm_request_downstream_dev_update_req
+ *
+ *  Structure representing Request Downstream Device Update request
+ */
+struct pldm_request_downstream_device_update_req {
+	uint32_t maximum_downstream_device_transfer_size;
+	uint8_t maximum_outstanding_transfer_requests;
+	uint16_t downstream_device_package_data_length;
+};
+#define PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES 7
+
+/** @struct pldm_request_downstream_dev_update_resp
+ *
+ *  Structure representing Request Downstream Device Update response
+ */
+struct pldm_request_downstream_device_update_resp {
+	uint8_t completion_code;
+	uint16_t downstream_device_meta_data_length;
+	uint8_t downstream_device_will_send_get_package_data;
+	uint16_t get_package_data_maximum_transfer_size;
+};
+#define PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES 6
 
 /** @struct pldm_pass_component_table_req
  *
@@ -1538,6 +1586,81 @@ int encode_request_update_resp(uint8_t instance_id,
 			       const struct pldm_request_update_resp *resp_data,
 			       struct pldm_msg *msg, size_t *payload_length);
 
+/** @brief Create PLDM request message for RequestDownstreamDeviceUpdate
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req_data - Request data.
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in,out] payload_length - Length of response message payload
+ *
+ *  @return 0 on success,
+ *		-EINVAL if any argument is invalid,
+ *		-ENOMSG if the message type is incorrect,
+ *		-EOVERFLOW if the payload length is invalid
+ *
+ *  @note Caller is responsible for memory alloc and dealloc of param
+ *        'msg.payload'
+ */
+int encode_request_downstream_device_update_req(
+	uint8_t instance_id,
+	const struct pldm_request_downstream_device_update_req *req_data,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode PLDM request message for RequestDownstreamDeviceUpdate
+ *
+ *  @param[in] msg - Message
+ *  @param[in] payload_length - Length of request message payload
+ *  @param[out] req_data - RequestDownstreamDeviceUpdate request parameters
+ *
+ *  @return 0 on success,
+ *		-EINVAL if any argument is invalid,
+ *		-ENOMSG if the message type is incorrect,
+ *		-EOVERFLOW if the payload length is invalid,
+ *		-EBADMSG if the message buffer was not fully consumed
+ *
+ *  @note Caller is responsible for memory alloc and dealloc of param
+ *        'msg.payload'
+ */
+int decode_request_downstream_device_update_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_request_downstream_device_update_req *req_data);
+
+/** @brief Create PLDM response message for RequestDownstreamDeviceUpdate
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp_data - Response data
+ *  @param[out] msg - Message will be written to this
+ *  @param[inout] payload_length - Length of response message payload
+ *
+ *  @return 0 on success,
+ *		-EINVAL if any argument is invalid,
+ *		-ENOMSG if the message type is incorrect,
+ *		-EOVERFLOW if the payload length is invalid
+ *
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *		   'msg.payload'
+ */
+int encode_request_downstream_device_update_resp(
+	uint8_t instance_id,
+	const struct pldm_request_downstream_device_update_resp *resp_data,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode a RequestDownstreamDeviceUpdate response message
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] resp_data - RequestDownstreamDeviceUpdate respond parameters
+ *
+ *  @return 0 on success,
+ *		-EINVAL if any argument is invalid,
+ *		-ENOMSG if the message type is incorrect,
+ *		-EOVERFLOW if the payload length is invalid,
+ *		-EBADMSG if the message buffer was not fully consumed
+ */
+int decode_request_downstream_device_update_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_request_downstream_device_update_resp *resp_data);
+
 /** @brief Create PLDM request message for PassComponentTable
  *
  *  @param[in] instance_id - Message's instance id
@@ -2055,6 +2178,857 @@ int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
 int encode_cancel_update_resp(uint8_t instance_id,
 			      const struct pldm_cancel_update_resp *resp_data,
 			      struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Firmware update v1.0 package header identifier */
+#define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_0                                    \
+	{ 0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D, 0x49, 0x43,                      \
+	  0x98, 0x00, 0xA0, 0x2F, 0x05, 0x9A, 0xCA, 0x02 }
+
+/** @brief Firmware update v1.0 package header format revision */
+#define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H 0x01
+
+/** @brief Firmware update v1.1 package header identifier */
+#define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1                                    \
+	{                                                                      \
+		0x12, 0x44, 0xd2, 0x64, 0x8d, 0x7d, 0x47, 0x18,                \
+		0xa0, 0x30, 0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5a,                \
+	}
+
+/** @brief Firmware update v1.1 package header format revision */
+#define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H 0x02
+
+/** @brief Firmware update v1.2 package header identifier */
+#define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2                                    \
+	{                                                                      \
+		0x31, 0x19, 0xce, 0x2f, 0xe8, 0x0a, 0x4a, 0x99,                \
+		0xaf, 0x6d, 0x46, 0xf8, 0xb1, 0x21, 0xf6, 0xbf,                \
+	}
+
+/** @brief Firmware update v1.2 package header format revision */
+#define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H 0x03
+
+/** @brief Firmware update v1.3 package header identifier */
+#define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3                                    \
+	{                                                                      \
+		0x7b, 0x29, 0x1c, 0x99, 0x6d, 0xb6, 0x42, 0x08,                \
+		0x80, 0x1b, 0x02, 0x02, 0x6e, 0x46, 0x3c, 0x78,                \
+	}
+
+/** @brief Firmware update v1.3 package header format revision */
+#define PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H 0x04
+
+/** @brief Consumer-side version pinning for package format parsing
+ *
+ * Parsing a firmware update package requires the package to be of a revision
+ * defined in the specification, for libpldm to support parsing a package
+ * formatted at the specified revision, and for the consumer to support calling
+ * libpldm's package-parsing APIs in the manner required for the package format.
+ *
+ * pldm_package_format_pin communicates to libpldm the maximum package format
+ * revision supported by the consumer.
+ *
+ * The definition of the pldm_package_format_pin object in the consumer
+ * application should not be open-coded. Instead, users should call on of the
+ * following macros:
+ *
+ * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H
+ * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H
+ * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR03H
+ * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H
+ *
+ * The package pinning operates by providing versioning over multiple structs
+ * required to perform the package parsing. See [Conventions for extensible
+ * system calls][lwn-extensible-syscalls] for discussion of related concepts.
+ * Like the syscall structs described there, the structs captured here by the
+ * pinning concept must only ever be modified by addition of new members, never
+ * alteration of existing members.
+ *
+ * [lwn-extensible-syscalls]: https://lwn.net/Articles/830666/
+ */
+struct pldm_package_format_pin {
+	struct {
+		/**
+		 * A value that communicates information about object sizes to the implementation.
+		 *
+		 * For magic version 0, the sum must be calculated using @ref LIBPLDM_SIZEAT for
+		 * the final relevant member of each relevant struct for the format revision
+		 * represented by the pin.
+		 */
+		const uint32_t magic;
+
+		/**
+		 * Versioning for the derivation of the magic value
+		 *
+		 * A version value of 0 defines the magic number to be the sum of the relevant
+		 * struct sizes for the members required at the format revision specified by
+		 * the pin.
+		 */
+		const uint8_t version;
+	} meta;
+	struct {
+		/** The maximum supported package format UUID */
+		const pldm_uuid identifier;
+
+		/** The maximum supported header format revision */
+		const uint8_t revision;
+	} format;
+};
+
+enum pldm_package_parse {
+	PLDM_PACKAGE_PARSE_INIT = 0,
+	PLDM_PACKAGE_PARSE_COMPLETE = 1,
+	PLDM_PACKAGE_PARSE_HEADER = 2,
+	PLDM_PACKAGE_PARSE_FIRMWARE_DEVICES = 3,
+	PLDM_PACKAGE_PARSE_DOWNSTREAM_DEVICES = 4,
+	PLDM_PACKAGE_PARSE_COMPONENT_IMAGE_INFORMATION = 5,
+};
+
+struct pldm_package_iter {
+	struct variable_field field;
+	size_t entries;
+};
+
+/**
+ * @brief Header information as parsed from the provided package
+ *
+ * See Table 3, DSP0267 v1.3.0.
+ *
+ * The provided package data must out-live the header struct.
+ */
+// NOLINTNEXTLINE(bugprone-reserved-identifier, cert-dcl37-c, cert-dcl51-cpp)
+struct pldm__package_header_information {
+	pldm_uuid package_header_identifier;
+	uint8_t package_header_format_revision;
+	uint8_t package_release_date_time[PLDM_TIMESTAMP104_SIZE];
+	uint16_t component_bitmap_bit_length;
+	uint8_t package_version_string_type;
+
+	/** A field pointing to the package version string in the provided package data */
+	struct variable_field package_version_string;
+};
+/* TODO: Deprecate the other struct pldm_package_header_information, remove, drop typedef */
+// NOLINTNEXTLINE(bugprone-reserved-identifier, cert-dcl37-c, cert-dcl51-cpp)
+typedef struct pldm__package_header_information
+	pldm_package_header_information_pad;
+
+/* TODO: Consider providing an API to access valid bits */
+struct pldm_package_component_bitmap {
+	struct variable_field bitmap;
+};
+
+/**
+ * @brief A firmware device ID record from the firmware update package
+ *
+ * See Table 4, DSP0267 v1.3.0.
+ *
+ * The provided package data must out-live the @ref "struct
+ * pldm_package_firmware_device_id_record" instance.
+ */
+struct pldm_package_firmware_device_id_record {
+	uint8_t descriptor_count;
+	bitfield32_t device_update_option_flags;
+	uint8_t component_image_set_version_string_type;
+
+	/**
+	 * A field pointing to the component image set version string in the provided
+	 * package data.
+	 */
+	struct variable_field component_image_set_version_string;
+
+	/**
+	 * A field pointing to the to a bitmap of length @ref
+	 * component_bitmap_bit_length in the provided package data..
+	 */
+	struct pldm_package_component_bitmap applicable_components;
+
+	/**
+	 * A field pointing to record descriptors for the
+	 * firmware device. Iterate over the entries using @ref
+	 * foreach_pldm_package_firmware_device_id_record_descriptor
+	 *
+	 * See Table 7, DSP0267 v1.3.0
+	 */
+	struct variable_field record_descriptors;
+	struct variable_field firmware_device_package_data;
+
+	/**
+	 * An optional field that can contain a Reference Manifest for the firmware
+	 * update package. If present, this field points to the Reference Manifest
+	 * data, which describes the firmware update provided by this package. The
+	 * UA (Update Agent) may use this data as a reference for the firmware
+	 * version.
+	 *
+	 * Note that this data shall not be transferred to the firmware device (FD).
+	 * The format of the data is either a Standard Body or Vendor-Defined Header,
+	 * followed by the Reference Manifest data.
+	 *
+	 * See Table 7, DSP0267 v1.3.0
+	 */
+	struct variable_field reference_manifest_data;
+};
+
+/**
+ * @brief A downstream device ID record from the firmware update package
+ *
+ * See Table 5, DSP0267 v1.3.0.
+ *
+ * The provided package data must out-live the @ref "struct
+ * pldm_package_downstream_device_id_record" instance.
+ */
+struct pldm_package_downstream_device_id_record {
+	uint8_t descriptor_count;
+	bitfield32_t update_option_flags;
+	uint8_t self_contained_activation_min_version_string_type;
+
+	/**
+	 * A field pointing to the self-contained activation minimum version string in
+	 * the provided package data.
+	 */
+	struct variable_field self_contained_activation_min_version_string;
+	uint32_t self_contained_activation_min_version_comparison_stamp;
+
+	/**
+	 * A field pointing to a bitmap of length @ref component_bitmap_bit_length in
+	 * the provided package data.
+	 */
+	struct pldm_package_component_bitmap applicable_components;
+
+	/**
+	 * A field pointing to record descriptors for the
+	 * downstream device. Iterate over the entries using @ref
+	 * foreach_pldm_package_downstream_device_id_record_descriptor
+	 *
+	 * See Table 7, DSP0267 v1.3.0
+	 */
+	struct variable_field record_descriptors;
+
+	/**
+	 * A field that may point to package data to be proxied by the firmware device.
+	 * If present, points into the provided package data.
+	 */
+	struct variable_field package_data;
+
+	/**
+	* A field pointing to a Reference Manifest for the downstream device.
+	* If present, this field points to the Reference Manifest data, which describes
+	*
+	* See Table 7, DSP0267 v1.3.0
+	*/
+	struct variable_field reference_manifest_data;
+};
+
+/**
+ * @brief Component image information from the firmware update package.
+ *
+ * See Table 6, DSP0267 v1.3.0
+ *
+ * The provided package data must out-live the @ref "struct
+ * pldm_package_component_image_information" instance.
+ */
+struct pldm_package_component_image_information {
+	uint16_t component_classification;
+	uint16_t component_identifier;
+	uint32_t component_comparison_stamp;
+	bitfield16_t component_options;
+	bitfield16_t requested_component_activation_method;
+
+	/**
+	 * A field that points to the component image for a device in the provided
+	 * package data.
+	 */
+	struct variable_field component_image;
+	uint8_t component_version_string_type;
+
+	/**
+	 * A field that points to the component version string for the image in the
+	 * provided package data.
+	 */
+	struct variable_field component_version_string;
+
+	/**
+	 * A field that points to the component opaque data in the
+	 * provided package data.
+	 */
+	struct variable_field component_opaque_data;
+};
+
+/**
+ * @brief State tracking for firmware update package iteration
+ *
+ * Declare an instance on the stack to be initialised by @ref
+ * decode_pldm_firmware_update_package
+ *
+ * The state is consumed by the following macros:
+ *
+ * - @ref foreach_pldm_package_firmware_device_id_record
+ * - @ref foreach_pldm_package_firmware_device_id_record_descriptor
+ * - @ref foreach_pldm_package_downstream_device_id_record
+ * - @ref foreach_pldm_package_downstream_device_id_record_descriptor
+ * - @ref foreach_pldm_package_component_image_information
+ */
+struct pldm_package {
+	const struct pldm_package_format_pin *pin;
+	const pldm_package_header_information_pad *hdr;
+	enum pldm_package_parse state;
+	uint32_t flags;
+	struct variable_field package;
+	struct variable_field areas;
+	struct pldm_package_iter iter;
+};
+
+/**
+ * @brief Initialize the firmware update package iterator.
+ *
+ * @param[in] data The buffer containing the complete firmware update package
+ * @param[in] length The length of the buffer pointed at by @p data
+ * @param[in] pin The maximum supported package format revision of the caller
+ * @param[out] hdr The parsed package header structure
+ * @param[out] pkg State-tracking for parsing subsequent package records and components
+ * @param[in] flags Affects the parsing behaviour of the library
+ *
+ * @pre @p pkg must be zero-initialised.
+ *
+ * Must be called to ensure version requirements for parsing are met by all
+ * components, and to initialise @p pkg prior to any subsequent extraction of
+ * package records and components.
+ *
+ * @note @p flags must be zero
+ * @note @p data is stored in @iter for later reference, and therefore must
+ *       out-live @p iter
+ * @note @p hdr is stored in @iter for later reference, and therefore must
+ *       out-live @p iter
+ *
+ * @return 0 on success. Otherwise, a negative errno value:
+ * - -EBADMSG if the package fails to meet minimum required length for a valid
+ *   package
+ * - -EINVAL if provided parameter values are invalid
+ * - -ENOTSUP on unrecognised or unsupported versions for the format pin or
+ *   provided package
+ * - -EOVERFLOW if the variable length structures extend beyond the package
+ *   data buffer
+ * - -EPROTO if parsed values violate the package format specification
+ * - -EUCLEAN if the package fails embedded integrity checks
+ */
+int decode_pldm_firmware_update_package(
+	const void *data, size_t length,
+	const struct pldm_package_format_pin *pin,
+	pldm_package_header_information_pad *hdr, struct pldm_package *pkg,
+	uint32_t flags);
+
+LIBPLDM_ITERATOR
+bool pldm_package_firmware_device_id_record_iter_end(
+	const struct pldm_package *pkg)
+{
+	assert(pkg->state == PLDM_PACKAGE_PARSE_FIRMWARE_DEVICES);
+	return pkg->iter.entries == 0;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_package_firmware_device_id_record_iter_next(struct pldm_package *pkg)
+{
+	assert(pkg->state == PLDM_PACKAGE_PARSE_FIRMWARE_DEVICES);
+	if (!pkg->iter.entries) {
+		return false;
+	}
+
+	pkg->iter.entries--;
+	return true;
+}
+
+int pldm_package_firmware_device_id_record_iter_init(struct pldm_package *pkg);
+
+int decode_pldm_package_firmware_device_id_record_from_iter(
+	struct pldm_package *pkg,
+	struct pldm_package_firmware_device_id_record *rec);
+
+/**
+ * @brief Iterate over a package's firmware device ID records
+ *
+ * @param pkg[in,out] The lvalue for the instance of @ref "struct pldm_package"
+ *             initialised by @ref decode_pldm_firmware_update_package
+ * @param rec[out] An lvalue of type @ref "struct pldm_package_firmware_device_id_record"
+ * @param rc[out] An lvalue of type int that holds the status result of parsing the
+ *                firmware device ID record
+ *
+ * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
+ * - -EINVAL if parameters values are invalid
+ * - -EOVERFLOW if the package layout exceeds the bounds of the package buffer
+ * - -EPROTO if package metadata doesn't conform to specification constraints
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
+ *
+ * struct pldm_package_firmware_device_id_record fdrec;
+ * pldm_package_header_information_pad hdr;
+ * struct pldm_package pkg;
+ * int rc;
+ *
+ * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
+ * 					 &pkg);
+ * if (rc < 0) {
+ * 	   // Handle header parsing failure
+ * }
+ * foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc) {
+ * 	   // Do something with fdrec
+ * }
+ * if (rc) {
+ * 	   // Handle parsing failure for fdrec
+ * }
+ * @endcode
+ */
+#define foreach_pldm_package_firmware_device_id_record(pkg, rec, rc)           \
+	for ((rc) = pldm_package_firmware_device_id_record_iter_init(&(pkg));  \
+	     !(rc) &&                                                          \
+	     !pldm_package_firmware_device_id_record_iter_end(&(pkg)) &&       \
+	     !((rc) = decode_pldm_package_firmware_device_id_record_from_iter( \
+		       &(pkg), &(rec)));                                       \
+	     pldm_package_firmware_device_id_record_iter_next(&(pkg)))
+
+LIBPLDM_ITERATOR
+struct pldm_descriptor_iter
+pldm_package_firmware_device_id_record_descriptor_iter_init(
+	struct pldm_package *pkg,
+	struct pldm_package_firmware_device_id_record *rec)
+{
+	(void)pkg;
+	assert(pkg->state == PLDM_PACKAGE_PARSE_FIRMWARE_DEVICES);
+	return (struct pldm_descriptor_iter){ &rec->record_descriptors,
+					      rec->descriptor_count };
+}
+
+/**
+ * @brief Iterate over the descriptors in a package's firmware device ID record
+ *
+ * @param pkg[in,out] The lvalue for the instance of @ref "struct pldm_package"
+ *             initialised by @ref decode_pldm_firmware_update_package
+ * @param rec[in] An lvalue of type @ref "struct pldm_package_firmware_device_id_record"
+ * @param desc[out] An lvalue of type @ref "struct pldm_descriptor" that holds
+ *                  the parsed descriptor
+ * @param rc[out] An lvalue of type int that holds the status result of parsing the
+ *                firmware device ID record
+ *
+ * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
+ * - -EINVAL if parameters values are invalid
+ * - -EOVERFLOW if the package layout exceeds the bounds of the package buffer
+ * - -EPROTO if package metadata doesn't conform to specification constraints
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
+ *
+ * struct pldm_package_firmware_device_id_record fdrec;
+ * pldm_package_header_information_pad hdr;
+ * struct pldm_package pkg;
+ * int rc;
+ *
+ * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
+ * 					 &pkg);
+ * if (rc < 0) { ... }
+ *
+ * foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc) {
+ *     struct pldm_descriptor desc;
+ *
+ * 	   ...
+ *
+ *     foreach_pldm_package_firmware_device_id_record_descriptor(
+ *             pkg, fdrec, desc, rc) {
+ *         // Do something with desc
+ *     }
+ *     if (rc) {
+ *         // Handle failure to parse desc
+ *     }
+ * }
+ * if (rc) { ... }
+ * @endcode
+ */
+#define foreach_pldm_package_firmware_device_id_record_descriptor(pkg, rec,       \
+								  desc, rc)       \
+	for (struct pldm_descriptor_iter desc##_iter =                            \
+		     ((rc) = 0,                                                   \
+		     pldm_package_firmware_device_id_record_descriptor_iter_init( \
+			      &(pkg), &(rec)));                                   \
+	     (!pldm_descriptor_iter_end(&(desc##_iter))) &&                       \
+	     !((rc) = decode_pldm_descriptor_from_iter(&(desc##_iter),            \
+						       &(desc)));                 \
+	     pldm_descriptor_iter_next(&(desc##_iter)))
+
+LIBPLDM_ITERATOR
+bool pldm_package_downstream_device_id_record_iter_end(
+	const struct pldm_package *pkg)
+{
+	assert(pkg->state == PLDM_PACKAGE_PARSE_DOWNSTREAM_DEVICES);
+	return pkg->iter.entries == 0;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_package_downstream_device_id_record_iter_next(struct pldm_package *pkg)
+{
+	assert(pkg->state == PLDM_PACKAGE_PARSE_DOWNSTREAM_DEVICES);
+	if (!pkg->iter.entries) {
+		return false;
+	}
+	pkg->iter.entries--;
+	return true;
+}
+
+int pldm_package_downstream_device_id_record_iter_init(struct pldm_package *pkg);
+
+int decode_pldm_package_downstream_device_id_record_from_iter(
+	struct pldm_package *pkg,
+	struct pldm_package_downstream_device_id_record *rec);
+
+/**
+ * @brief Iterate over a package's downstream device ID records
+ *
+ * @param pkg[in,out] The lvalue for the instance of @ref "struct pldm_package"
+ *             initialised by @ref decode_pldm_firmware_update_package
+ * @param rec[out] An lvalue of type @ref "struct pldm_package_downstream_device_id_record"
+ * @param rc[out] An lvalue of type int that holds the status result of parsing the
+ *                firmware device ID record
+ *
+ * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
+ * - -EINVAL if parameters values are invalid
+ * - -EOVERFLOW if the package layout exceeds the bounds of the package buffer
+ * - -EPROTO if package metadata doesn't conform to specification constraints
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
+ *
+ * struct pldm_package_downstream_device_id_record ddrec;
+ * struct pldm_package_firmware_device_id_record fdrec;
+ * pldm_package_header_information_pad hdr;
+ * struct pldm_package pkg;
+ * int rc;
+ *
+ * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
+ * 					 &pkg);
+ * if (rc < 0) { ... }
+ *
+ * foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc) {
+ *     struct pldm_descriptor desc;
+ * 	   ...
+ *     foreach_pldm_package_firmware_device_id_record_descriptor(
+ *             pkg, fdrec, desc, rc) {
+ *         ...
+ *     }
+ *     if (rc) { ... }
+ * }
+ * if (rc) { ... }
+ *
+ * foreach_pldm_package_downstream_device_id_record(pkg, ddrec, rc) {
+ * 	   // Do something with ddrec
+ * }
+ * if (rc) {
+ * 	   // Handle parsing failure for ddrec
+ * }
+ * @endcode
+ */
+#define foreach_pldm_package_downstream_device_id_record(pkg, rec, rc)           \
+	for ((rc) = pldm_package_downstream_device_id_record_iter_init(          \
+		     &(pkg));                                                    \
+	     !(rc) &&                                                            \
+	     !pldm_package_downstream_device_id_record_iter_end(&(pkg)) &&       \
+	     !((rc) = decode_pldm_package_downstream_device_id_record_from_iter( \
+		       &(pkg), &(rec)));                                         \
+	     pldm_package_downstream_device_id_record_iter_next(&(pkg)))
+
+LIBPLDM_ITERATOR
+struct pldm_descriptor_iter
+pldm_package_downstream_device_id_record_descriptor_iter_init(
+	struct pldm_package *pkg,
+	struct pldm_package_downstream_device_id_record *rec)
+{
+	(void)pkg;
+	return (struct pldm_descriptor_iter){ &rec->record_descriptors,
+					      rec->descriptor_count };
+}
+
+/**
+ * @brief Iterate over the descriptors in a package's downstream device ID record
+ *
+ * @param pkg[in,out] The lvalue for the instance of @ref "struct pldm_package"
+ *             initialised by @ref decode_pldm_firmware_update_package
+ * @param rec[in] An lvalue of type @ref "struct pldm_package_downstream_device_id_record"
+ * @param desc[out] An lvalue of type @ref "struct pldm_descriptor" that holds
+ *                  the parsed descriptor
+ * @param rc[out] An lvalue of type int that holds the status result of parsing the
+ *                downstream device ID record
+ *
+ * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
+ * - -EINVAL if parameters values are invalid
+ * - -EOVERFLOW if the package layout exceeds the bounds of the package buffer
+ * - -EPROTO if package metadata doesn't conform to specification constraints
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
+ *
+ * struct pldm_package_downstream_device_id_record ddrec;
+ * struct pldm_package_firmware_device_id_record fdrec;
+ * pldm_package_header_information_pad hdr;
+ * struct pldm_package pkg;
+ * int rc;
+ *
+ * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
+ * 					 &pkg);
+ * if (rc < 0) { ... }
+ *
+ * foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc) {
+ *     struct pldm_descriptor desc;
+ * 	   ...
+ *     foreach_pldm_package_firmware_device_id_record_descriptor(
+ *             pkg, fdrec, desc, rc) {
+ *         ...
+ *     }
+ *     if (rc) { ... }
+ * }
+ * if (rc) { ... }
+ *
+ * foreach_pldm_package_downstream_device_id_record(pkg, ddrec, rc) {
+ *     struct pldm_descriptor desc;
+ * 	   ...
+ *     foreach_pldm_package_downstream_device_id_record_descriptor(
+ *             pkg, ddrec, desc, rc)
+ *     {
+ *         // Do something with desc
+ *     }
+ *     if (rc) {
+ *         // Handle parsing failure for desc
+ *     }
+ * }
+ * if (rc) { ... }
+ * @endcode
+ */
+#define foreach_pldm_package_downstream_device_id_record_descriptor(pkg, rec,       \
+								    desc, rc)       \
+	for (struct pldm_descriptor_iter desc##_iter =                              \
+		     ((rc) = 0,                                                     \
+		     pldm_package_downstream_device_id_record_descriptor_iter_init( \
+			      &(pkg), &(rec)));                                     \
+	     (!pldm_descriptor_iter_end(&(desc##_iter))) &&                         \
+	     !((rc) = decode_pldm_descriptor_from_iter(&(desc##_iter),              \
+						       &(desc)));                   \
+	     pldm_descriptor_iter_next(&(desc##_iter)))
+
+LIBPLDM_ITERATOR
+bool pldm_package_component_image_information_iter_end(
+	const struct pldm_package *pkg)
+{
+	assert((pkg->state == PLDM_PACKAGE_PARSE_COMPLETE &&
+		pkg->iter.entries == 0) ||
+	       pkg->state == PLDM_PACKAGE_PARSE_COMPONENT_IMAGE_INFORMATION);
+	return pkg->state == PLDM_PACKAGE_PARSE_COMPLETE;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_package_component_image_information_iter_next(struct pldm_package *pkg)
+{
+	if (pkg->state == PLDM_PACKAGE_PARSE_COMPLETE) {
+		return false;
+	}
+
+	assert(pkg->state == PLDM_PACKAGE_PARSE_COMPONENT_IMAGE_INFORMATION);
+	pkg->iter.entries--;
+	if (!pkg->iter.entries) {
+		/*
+		 * Perform the final transition to complete now as there should be no further
+		 * interaction with the package parsing APIs
+		 */
+		pkg->state = PLDM_PACKAGE_PARSE_COMPLETE;
+		return false;
+	}
+	return true;
+}
+
+int pldm_package_component_image_information_iter_init(struct pldm_package *pkg);
+
+int decode_pldm_package_component_image_information_from_iter(
+	struct pldm_package *pkg,
+	struct pldm_package_component_image_information *info);
+
+/**
+ * @brief Iterate over the component image information contained in the package
+ *
+ * @param pkg[in,out] The lvalue for the instance of @ref "struct pldm_package"
+ *             initialised by @ref decode_pldm_firmware_update_package
+ * @param rec[in] An lvalue of type @ref "struct pldm_package_downstream_device_id_record"
+ * @param desc[out] An lvalue of type @ref "struct pldm_descriptor" that holds
+ *                  the parsed descriptor
+ * @param rc[out] An lvalue of type int that holds the status result of parsing the
+ *                downstream device ID record
+ *
+ * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
+ * - -EINVAL if parameters values are invalid
+ * - -EOVERFLOW if the package layout exceeds the bounds of the package buffer
+ * - -EPROTO if package metadata doesn't conform to specification constraints
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
+ *
+ * struct pldm_package_downstream_device_id_record ddrec;
+ * struct pldm_package_component_image_information info;
+ * struct pldm_package_firmware_device_id_record fdrec;
+ * pldm_package_header_information_pad hdr;
+ * struct pldm_package pkg;
+ * int rc;
+ *
+ * rc = decode_pldm_firmware_update_package(package, in, &pin, &hdr,
+ * 					 &pkg);
+ * if (rc < 0) { ... }
+ *
+ * foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc) {
+ *     struct pldm_descriptor desc;
+ * 	   ...
+ *     foreach_pldm_package_firmware_device_id_record_descriptor(
+ *             pkg, fdrec, desc, rc) {
+ *         ...
+ *     }
+ *     if (rc) { ... }
+ * }
+ * if (rc) { ... }
+ *
+ * foreach_pldm_package_downstream_device_id_record(pkg, ddrec, rc) {
+ *     struct pldm_descriptor desc;
+ * 	   ...
+ *     foreach_pldm_package_downstream_device_id_record_descriptor(
+ *             pkg, ddrec, desc, rc) {
+ *         ...
+ *     }
+ *     if (rc) { ... }
+ * }
+ * if (rc) { ... }
+ *
+ * foreach_pldm_package_component_image_information(pkg, info, rc) {
+ *     // Do something with info
+ * }
+ * if (rc) {
+ * 	   // Handle parsing failure for info
+ * }
+ * @endcode
+ */
+#define foreach_pldm_package_component_image_information(pkg, info, rc)          \
+	for ((rc) = pldm_package_component_image_information_iter_init(          \
+		     &(pkg));                                                    \
+	     !(rc) &&                                                            \
+	     !pldm_package_component_image_information_iter_end(&(pkg)) &&       \
+	     !((rc) = decode_pldm_package_component_image_information_from_iter( \
+		       &(pkg), &(info)));                                        \
+	     pldm_package_component_image_information_iter_next(&(pkg)))
+
+/**
+ * Declare consumer support for at most revision 1 of the firmware update
+ * package header
+ *
+ * @param name The name for the pin object
+ *
+ * The pin object must be provided to @ref decode_pldm_firmware_update_package
+ */
+#define DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(name)                             \
+	struct pldm_package_format_pin name = { \
+		.meta = { \
+			.magic = ( \
+				LIBPLDM_SIZEAT(struct pldm_package, iter) + \
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) + \
+				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) + \
+				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string) \
+			), \
+			.version = 0u, \
+		}, \
+		.format = { \
+			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_0, \
+			.revision = PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H, \
+		} \
+	}
+
+/**
+ * Declare consumer support for at most revision 2 of the firmware update
+ * package header
+ *
+ * @param name The name for the pin object
+ *
+ * The pin object must be provided to @ref decode_pldm_firmware_update_package
+ */
+#define DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(name)                             \
+	struct pldm_package_format_pin name = { \
+		.meta = { \
+			.magic = ( \
+				LIBPLDM_SIZEAT(struct pldm_package, iter) + \
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) + \
+				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) + \
+				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, package_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string) \
+			), \
+			.version = 0u, \
+		}, \
+		.format = { \
+			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1, \
+			.revision = PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H, \
+		} \
+	}
+
+/**
+ * Declare consumer support for at most revision 3 of the firmware update
+ * package header
+ *
+ * @param name The name for the pin object
+ *
+ * The pin object must be provided to @ref decode_pldm_firmware_update_package
+ */
+#define DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR03H(name)                             \
+	struct pldm_package_format_pin name = { \
+		.meta = { \
+			.magic = ( \
+				LIBPLDM_SIZEAT(struct pldm_package, iter) + \
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) + \
+				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) + \
+				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, package_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_opaque_data) \
+			), \
+			.version = 0u, \
+		}, \
+		.format = { \
+			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2, \
+			.revision = PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H, \
+		} \
+	}
+
+/**
+ * Declare consumer support for at most revision 4 of the firmware update
+ * package header
+ *
+ * @param name The name for the pin object
+ *
+ * The pin object must be provided to @ref decode_pldm_firmware_update_package
+ */
+#define DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H(name)                             \
+	struct pldm_package_format_pin name = { \
+		.meta = { \
+			.magic = ( \
+				LIBPLDM_SIZEAT(struct pldm_package, iter) + \
+				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) + \
+				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, reference_manifest_data) + \
+				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, reference_manifest_data) + \
+				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_opaque_data) \
+			), \
+			.version = 0u, \
+		}, \
+		.format = { \
+			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3, \
+			.revision = PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H, \
+		} \
+	}
 
 #ifdef __cplusplus
 }

@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include <libpldm/base.h>
 #include <libpldm/utils.h>
+#include "utils.h"
 
 #include <limits.h>
 #include <stdio.h>
@@ -86,18 +87,33 @@ static const uint8_t crc8_table[] = {
 };
 
 LIBPLDM_ABI_STABLE
-uint32_t crc32(const void *data, size_t size)
+uint32_t pldm_edac_crc32(const void *data, size_t size)
+{
+	return pldm_edac_crc32_extend(data, size, 0);
+}
+
+LIBPLDM_ABI_TESTING
+uint32_t pldm_edac_crc32_extend(const void *data, size_t size, uint32_t crc)
 {
 	const uint8_t *p = data;
-	uint32_t crc = ~0U;
+	crc ^= ~0U;
 	while (size--) {
 		crc = crc32_tab[(crc ^ *p++) & 0xff] ^ (crc >> 8);
 	}
 	return crc ^ ~0U;
 }
 
+int pldm_edac_crc32_validate(uint32_t expected, const void *data, size_t size)
+{
+	if (!data && size) { /* data is NULL but size is not zero */
+		return -EINVAL;
+	}
+	uint32_t actual = pldm_edac_crc32(data, size);
+	return (expected == actual) ? 0 : -EUCLEAN;
+}
+
 LIBPLDM_ABI_STABLE
-uint8_t crc8(const void *data, size_t size)
+uint8_t pldm_edac_crc8(const void *data, size_t size)
 {
 	const uint8_t *p = data;
 	uint8_t crc = 0x00;
@@ -232,7 +248,7 @@ static int day_map(uint8_t month)
 	}
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 bool is_time_legal(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t day,
 		   uint8_t month, uint16_t year)
 {
@@ -251,7 +267,7 @@ bool is_time_legal(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t day,
 	return true;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 bool is_transfer_flag_valid(uint8_t transfer_flag)
 {
 	switch (transfer_flag) {

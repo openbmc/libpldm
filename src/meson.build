@@ -1,4 +1,4 @@
-libpldm_sources = files('responder.c', 'utils.c')
+libpldm_sources = files('control.c', 'responder.c', 'utils.c')
 
 subdir('dsp')
 
@@ -14,6 +14,8 @@ endif
 if get_option('oem').contains('meta')
     subdir('oem/meta')
 endif
+
+subdir('firmware_device')
 
 libpldm_link_args = []
 foreach alias : libpldm_deprecated_aliases
@@ -64,9 +66,9 @@ if get_option('tests')
             required: get_option('abi-compliance-check'),
         )
 
-        test_abi_compliance = abi_dumper.found() and\
-abi_compliance_checker.found() and\
-import('fs').is_file(baseline_dump)
+        test_abi_compliance = abi_dumper.found() and \
+    abi_compliance_checker.found() and \
+    import('fs').is_file(baseline_dump)
 
         if test_abi_compliance
             current_dump = custom_target(

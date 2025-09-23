@@ -2,6 +2,7 @@ tests += [
     'dsp/base',
     'dsp/bios_table',
     'dsp/bios',
+    'dsp/file',
     'dsp/firmware_update',
     'dsp/fru',
     'dsp/pdr',

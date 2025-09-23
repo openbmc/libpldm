@@ -22,7 +22,7 @@ void buildTable(Table& table)
 {
     auto padSize = ((table.size() % 4) ? (4 - table.size() % 4) : 0);
     table.insert(table.end(), padSize, 0);
-    uint32_t checksum = crc32(table.data(), table.size());
+    uint32_t checksum = pldm_edac_crc32(table.data(), table.size());
     checksum = htole32(checksum);
     uint8_t a[4];
     std::memcpy(a, &checksum, sizeof(checksum));
@@ -1050,7 +1050,7 @@ TEST(StringTable, EntryDecodeTest)
     EXPECT_EQ(pldm_bios_table_string_entry_decode_string(
                   entry, buffer.data(), 2 + 1 /* sizeof '\0'*/),
               PLDM_SUCCESS);
-    EXPECT_EQ(strlen(buffer.data()), 2);
+    EXPECT_EQ(strlen(buffer.data()), 2ul);
     EXPECT_EQ(std::strcmp("Al", buffer.data()), 0);
 
     auto rc = pldm_bios_table_string_entry_decode_string(entry, buffer.data(),

@@ -2,11 +2,15 @@
 #ifndef PLDM_TYPES_H
 #define PLDM_TYPES_H
 
+#ifdef __cplusplus
+#include <cstdint>
+#else
 #include <stdint.h>
+#endif
 
 typedef union {
 	uint8_t byte;
-	struct {
+	struct bits8 {
 		uint8_t bit0 : 1;
 		uint8_t bit1 : 1;
 		uint8_t bit2 : 1;
@@ -33,7 +37,7 @@ typedef uint8_t bool8_t;
 
 typedef union {
 	uint16_t value;
-	struct {
+	struct bits16 {
 		uint8_t bit0 : 1;
 		uint8_t bit1 : 1;
 		uint8_t bit2 : 1;
@@ -55,7 +59,7 @@ typedef union {
 
 typedef union {
 	uint32_t value;
-	struct {
+	struct bits32 {
 		uint8_t bit0 : 1;
 		uint8_t bit1 : 1;
 		uint8_t bit2 : 1;
@@ -93,7 +97,7 @@ typedef union {
 
 typedef union {
 	uint64_t value;
-	struct {
+	struct bits64 {
 		uint8_t bit0 : 1;
 		uint8_t bit1 : 1;
 		uint8_t bit2 : 1;
@@ -162,5 +166,7 @@ typedef union {
 } bitfield64_t;
 
 typedef float real32_t;
+
+typedef uint8_t pldm_uuid[16];
 
 #endif /* PLDM_TYPES_H */

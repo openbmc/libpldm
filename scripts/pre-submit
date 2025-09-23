@@ -1,11 +1,14 @@
 #!/usr/bin/sh
 set -eu
 
+# For valgrind, value is arbitrarily low-ish
+ulimit -n 2048
+
 BUILD="$(mktemp --directory --tmpdir=.)"
 trap 'rm -rf "$BUILD"' EXIT
 
 meson format --recursive --inplace || true
-if ! git diff
+if ! git diff --exit-code
 then
   echo Your changes must meet the upstream meson style guide
   echo
@@ -14,19 +17,19 @@ then
   exit 1
 fi
 
-# Make sure if the change touches the public headers, it also updates the
-# changelog.
-if ! git show --format="" --name-only HEAD -- CHANGELOG.md include/libpldm |
+# Make sure if the change touches the public headers or ABI dump, it also
+# updates the changelog.
+if ! git show --format="" --name-only HEAD -- CHANGELOG.md abi include/libpldm |
   awk -f scripts/changelog.awk
 then
-  echo You must document your changes under include/libpldm in CHANGELOG.md
+  echo Add a CHANGELOG entry to document updates under abi/ and include/libpldm/
   exit 1
 fi
 
 # Ensure the test suite passes in the default configuration. Note
 # that we don't specify -Dabi=... - the default is equivalent to
 # -Dabi=deprecated,stable,testing.
-CFLAGS=-fanalyzer meson setup -Dabi-compliance-check=false "$BUILD"
+CC=gcc CXX=g++ CFLAGS=-fanalyzer meson setup "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD"
 
@@ -39,8 +42,18 @@ meson configure --buildtype=release "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD" --timeout-multiplier 10 --wrapper 'valgrind --error-exitcode=1'
 
-# Ensure the test suite links when testing symbols are removed from the ABI
+# Ensure that the test suite doesn't fail to link against the stable ABI, and
+# the stable ABI matches what's recorded
 meson configure --buildtype=debug "$BUILD"
 meson configure -Dabi=deprecated,stable "$BUILD"
+! command -v abi-compliance-checker > /dev/null ||
+  meson configure -Dabi-compliance-check=true "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD"
+
+# Ensure the build completes for maintenance purposes. Note that tests are
+# disabled as we don't yet guard them appropriately.
+meson configure -Dabi=stable,testing "$BUILD"
+meson configure -Dabi-compliance-check=false "$BUILD"
+meson configure -Dtests=false "$BUILD"
+meson compile -C "$BUILD"
