@@ -640,12 +640,6 @@ int decode_pldm_comp_image_info(
 	pldm_comp_image_info->comp_version_string_length =
 		data_header->comp_version_string_length;
 
-	if ((pldm_comp_image_info->comp_options.bits.bit1 == true &&
-	     pldm_comp_image_info->comp_comparison_stamp ==
-		     PLDM_FWUP_INVALID_COMPONENT_COMPARISON_TIMESTAMP)) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-
 	if (pldm_comp_image_info->comp_location_offset == 0 ||
 	    pldm_comp_image_info->comp_size == 0) {
 		return PLDM_ERROR_INVALID_DATA;
