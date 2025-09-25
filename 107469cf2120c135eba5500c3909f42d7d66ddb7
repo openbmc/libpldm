@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6ed5807_09fac0a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-25T01:35:42Z",
+      "side": 1,
+      "message": "Hi Amithash. I have a bit of a strong preference against naming things \u0027utils\u0027 because the only thing that happens from that point is they start collecting cruft. See the current `utils.[ch]` contents for an example.\n\nI thought about the problem a bit and settled on the observation that we\u0027re calling out to the environment for some external information, and as such it might be best if we recognise that in the source structure. The concept is that any hooks to e.g. libc or other dependencies can be put in their respective header under `src/environ/`.\n\nAnyway, with that sorted, I have a couple of further requests inline.",
+      "revId": "107469cf2120c135eba5500c3909f42d7d66ddb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "313714cc_2f653ef5",
+        "filename": "src/environ/time.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-25T01:35:42Z",
+      "side": 1,
+      "message": "A couple of things:\n\nCan you please replace the open-coded `__attribute__((weak))` here with `LIBPLDM_CC_WEAK`, and define `LIBPLDM_CC_WEAK` in `src/compiler.h`?\n\nI also prefer that things in `src/environ/` wrap e.g. the libc APIs directly. So rather than `libpldm_clock_gettimeval()` here, we instead have `libpldm_clock_gettime()`, whose implementation is only a call to `clock_gettime()`. The conversion logic to `struct timeval` continues to live in `src/transport/transport.c`.",
+      "revId": "107469cf2120c135eba5500c3909f42d7d66ddb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
