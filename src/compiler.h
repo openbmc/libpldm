@@ -21,6 +21,7 @@ static struct {
 		      "`unused` attribute is required");
 	static_assert(__has_attribute(warn_unused_result),
 		      "`warn_unused_result` attribute is required");
+	static_assert(__has_attribute(weak), "`weak` attribute is required");
 	int compliance;
 } pldm_required_attributes __attribute__((unused));
 
@@ -36,6 +37,7 @@ static struct {
 #define LIBPLDM_CC_NONNULL_ARGS(...)  __attribute__((nonnull(__VA_ARGS__)))
 #define LIBPLDM_CC_UNUSED	      __attribute__((unused))
 #define LIBPLDM_CC_WARN_UNUSED_RESULT __attribute__((warn_unused_result))
+#define LIBPLDM_CC_WEAK		      __attribute__((weak))
 
 // NOLINTBEGIN(bugprone-macro-parentheses)
 /**
