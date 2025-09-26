@@ -1,15 +1,26 @@
-gtest_dep = dependency('gtest', main: true, disabler: true, required: false)
-gmock_dep = dependency('gmock', disabler: true, required: false)
+gtest_dep = dependency(
+    'gtest',
+    main: true,
+    disabler: true,
+    required: false,
+    include_type: 'system',
+)
+gmock_dep = dependency(
+    'gmock',
+    disabler: true,
+    required: false,
+    include_type: 'system',
+)
 if not gtest_dep.found() or not gmock_dep.found()
     gtest_proj = import('cmake').subproject('googletest', required: true)
     gtest_dep = declare_dependency(
         dependencies: [
-            dependency('threads'),
-            gtest_proj.dependency('gtest'),
-            gtest_proj.dependency('gtest_main'),
+            dependency('threads', include_type: 'system'),
+            gtest_proj.dependency('gtest', include_type: 'system'),
+            gtest_proj.dependency('gtest_main', include_type: 'system'),
         ],
     )
-    gmock_dep = gtest_proj.dependency('gmock')
+    gmock_dep = gtest_proj.dependency('gmock', include_type: 'system')
 endif
 
 test_include_dirs = [
