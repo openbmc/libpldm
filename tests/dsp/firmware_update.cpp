@@ -4828,7 +4828,7 @@ TEST(DecodePldmFirmwareUpdatePackage, badArguments)
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
     pldm_package_header_information_pad hdr;
     struct pldm_package pkg{};
-    uint8_t data;
+    uint8_t data = 0;
     int rc;
 
     rc = decode_pldm_firmware_update_package(nullptr, 0, &pin, &hdr, &pkg, 0);

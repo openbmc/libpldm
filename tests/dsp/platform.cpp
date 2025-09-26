@@ -911,7 +911,7 @@ TEST(SetNumericEffecterValue, testBadEncodeRequest)
         0, 0, 0, NULL, NULL, PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
-    uint16_t effecter_value;
+    uint16_t effecter_value = 0;
     rc = encode_set_numeric_effecter_value_req(
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         0, 0, 6, reinterpret_cast<uint8_t*>(&effecter_value), request,
