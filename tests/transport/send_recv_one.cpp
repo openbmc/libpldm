@@ -46,7 +46,7 @@ TEST(Transport, send_recv_one)
     EXPECT_EQ(pldm_transport_test_init(&test, seq, ARRAY_SIZE(seq)), 0);
     ctx = pldm_transport_test_core(test);
     rc = pldm_transport_send_recv_msg(ctx, 1, req, sizeof(req), &msg, &len);
-    EXPECT_EQ(rc, PLDM_REQUESTER_SUCCESS);
+    ASSERT_EQ(rc, PLDM_REQUESTER_SUCCESS);
     EXPECT_EQ(len, sizeof(resp));
     EXPECT_EQ(memcmp(msg, resp, len), 0);
     free(msg);
