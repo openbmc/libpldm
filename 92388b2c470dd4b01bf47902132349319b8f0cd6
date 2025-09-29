@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c40f2ada_fb333622",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-29T19:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cde956b_c5810a71",
+      "range": {
+        "startLine": 9,
+        "startChar": 44,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "92388b2c470dd4b01bf47902132349319b8f0cd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbb0812c_df4d35c5",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-09-26T03:58:25Z",
       "side": 1,
       "message": "Can we be a bit more precise with this reference? I believe you\u0027re referring to the definition of `XFER_FIRST_PART` in section 9.8.2?",
+      "range": {
+        "startLine": 17,
+        "startChar": 54,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "92388b2c470dd4b01bf47902132349319b8f0cd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72271d42_60138068",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-29T19:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbb0812c_df4d35c5",
       "range": {
         "startLine": 17,
         "startChar": 54,
@@ -82,6 +130,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f65bf2e1_d853da99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-29T19:46:06Z",
+      "side": 1,
+      "message": "No worries. Thanks for reviewing this!",
+      "parentUuid": "d1809f38_6861c1fd",
+      "revId": "92388b2c470dd4b01bf47902132349319b8f0cd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bbae7ea_e07eb817",
@@ -95,6 +161,30 @@
       "writtenOn": "2025-09-26T03:58:25Z",
       "side": 1,
       "message": "Is this true? Table 17 says:\n\n\u003e the previous handle, when requesting retransmission with the XFER_CURRENT flag\n\nwhere, presumably, `XFER_CUERRENT` refers to `XFER_CURRENT_PART`?",
+      "range": {
+        "startLine": 573,
+        "startChar": 4,
+        "endLine": 573,
+        "endChar": 26
+      },
+      "revId": "92388b2c470dd4b01bf47902132349319b8f0cd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b201136_df57568b",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1001138
+      },
+      "writtenOn": "2025-09-29T19:46:06Z",
+      "side": 1,
+      "message": "Yea, if XFER_CURRENT_PART request had transfer_handle\u003d0 and then immediately after a request was sent with XFER_CUERRENT, then the previous transfer_handle is 0",
+      "parentUuid": "5bbae7ea_e07eb817",
       "range": {
         "startLine": 573,
         "startChar": 4,
