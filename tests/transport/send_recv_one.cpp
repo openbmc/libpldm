@@ -5,8 +5,47 @@
 
 #include <gtest/gtest.h>
 
+extern "C" {
+#include "environ/time.h"
+
+long global_base_time = 0;
+int libpldm_clock_gettime(clockid_t clockid, struct timespec* ts)
+{
+    static struct timespec init_offset{};
+    int rc;
+
+    rc = clock_gettime(clockid, ts);
+    if (rc < 0)
+    {
+        return rc;
+    }
+
+    if (init_offset.tv_sec == 0)
+    {
+        init_offset = *ts;
+    }
+
+    /*
+     * Adjust the time such that the start of the test begins at an artificial
+     * global_base_time which can be controlled from any of the TEST() methods
+     */
+    ts->tv_sec = ts->tv_sec - init_offset.tv_sec + global_base_time;
+
+    return 0;
+}
+}
+
 TEST(Transport, send_recv_one)
 {
+    /*
+     * To test the case when timestamp is closer to the 28 day uptime we would
+     * potentially set this to something closer to 2589793. But unfortunatley,
+     * the systems where the unit tests would be run, could have long be a 64
+     * bit integer thus would pass with this anyway but fail on a standard BMC
+     * 32bit SOC. Hence workaround this by using `LONG_MAX - 10` which would
+     * fail on either condition.
+     */
+    global_base_time = LONG_MAX - 10;
     uint8_t req[] = {0x81, 0x00, 0x01, 0x01};
     uint8_t resp[] = {0x01, 0x00, 0x01, 0x00};
     const struct pldm_transport_test_descriptor seq[] = {

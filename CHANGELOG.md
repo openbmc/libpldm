@@ -95,6 +95,7 @@ Change categories:
 
 - include, tests: Address concerns from -Wsign-compare
 - dsp: base: decode_pldm_base_negotiate_transfer_params_resp() is stable
+- transport: Improve time validation in pldm_transport_send_recv_msg()
 
 - base:
   - Removed RequestedSectionOffset check in decode_multipart_receive_req()
