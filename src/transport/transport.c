@@ -124,7 +124,7 @@ static bool timeval_validate_for_msec(const struct timeval *tv)
 	}
 
 	/* Components must safely convert to msec */
-	if (tv->tv_sec > ((LONG_MAX / 1000) - 1000)) {
+	if (tv->tv_sec > ((LONG_MAX - 1000) / 1000)) {
 		return false;
 	}
 
