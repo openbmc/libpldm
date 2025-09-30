@@ -217,6 +217,30 @@
       },
       "revId": "92388b2c470dd4b01bf47902132349319b8f0cd6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec36fae1_57b14d03",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-30T01:08:26Z",
+      "side": 1,
+      "message": "Added the comment while poking at some other parts of the series.",
+      "parentUuid": "a0ca4272_9e798050",
+      "range": {
+        "startLine": 573,
+        "startChar": 4,
+        "endLine": 573,
+        "endChar": 26
+      },
+      "revId": "92388b2c470dd4b01bf47902132349319b8f0cd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
