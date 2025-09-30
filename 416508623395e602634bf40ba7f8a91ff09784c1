@@ -51,6 +51,24 @@
       "parentUuid": "d3423db4_5edb435d",
       "revId": "416508623395e602634bf40ba7f8a91ff09784c1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59265f13_c9fe46ad",
+        "filename": "src/transport/transport.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-09-30T00:32:26Z",
+      "side": 1,
+      "message": "I\u0027ve got a better understanding now. I\u0027ve reworked the validation to actually test the property we\u0027re after. If this looks okay to you can you give it a CR+1?",
+      "parentUuid": "c1189124_91486fc5",
+      "revId": "416508623395e602634bf40ba7f8a91ff09784c1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
