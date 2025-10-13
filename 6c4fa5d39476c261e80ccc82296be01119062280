@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "524eddd6_9d83661a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2025-10-13T08:09:54Z",
+      "side": 1,
+      "message": "Can we add the description about from which DSP0248 version the 64data sized is added?",
+      "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "822df320_e8e9de2e",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 1
@@ -48,6 +65,40 @@
       "writtenOn": "2025-10-13T07:38:35Z",
       "side": 1,
       "message": "Can we add PLDM_EFFECTER_DATA_SIZE_MAX_BYTES_LENGTH and use it instead of hardcode 8?",
+      "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d13e6b9_49cb379c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2025-10-13T08:09:54Z",
+      "side": 1,
+      "message": "Need @andrew@codeconstruct.com.au comment in this changing.",
+      "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4ac4577_b57e4e4c",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2025-10-13T08:09:54Z",
+      "side": 1,
+      "message": "Can add new test case for 64 bits and keeps the others test cases do not change?",
       "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
