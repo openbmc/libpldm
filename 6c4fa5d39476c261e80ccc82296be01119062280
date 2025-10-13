@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33e3d6c7_3a69d7b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2025-10-13T07:38:35Z",
+      "side": 1,
+      "message": "Nice to see when IBM is working on 64Bits sensors/effecters.\nI have some comments below.",
+      "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9816573_b103ab10",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2025-10-13T07:38:35Z",
+      "side": 1,
+      "message": "Please add #define PLDM_EFFECTER_DATA_SIZE_MAX PLDM_EFFECTER_DATA_SIZE_SINT64\n\nAnd use it in the others code.",
+      "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "822df320_e8e9de2e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1431,
+      "author": {
+        "id": 1000945
+      },
+      "writtenOn": "2025-10-13T07:38:35Z",
+      "side": 1,
+      "message": "Can we add PLDM_EFFECTER_DATA_SIZE_MAX_BYTES_LENGTH and use it instead of hardcode 8?",
+      "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
