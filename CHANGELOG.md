@@ -17,6 +17,11 @@ Change categories:
 
 ## [Unreleased]
 
+- pdr: Add pldm_pdr_state_effecter_iterator_init() API
+- pdr: Add pldm_pdr_state_effecter_iterator_next() API
+- pdr: Add pldm_pdr_state_effecter_states_iterator_init() API
+- pdr: Add pldm_pdr_state_effecter_states_iterator_next() API
+
 ### Added
 
 - platform: Added file descriptor PDR encoding support

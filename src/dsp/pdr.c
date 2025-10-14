@@ -2389,3 +2389,123 @@ int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
 	}
 	return 0;
 }
+
+static int
+pldm_validate_state_effecter_pdr(const struct pldm_state_effecter_pdr *pdr,
+				 size_t pdr_size)
+{
+	if (!pdr || pdr_size < sizeof(struct pldm_state_effecter_pdr)) {
+		return -EINVAL;
+	}
+
+	if (offsetof(struct pldm_state_effecter_pdr, possible_states) >=
+	    pdr_size) {
+		return -EOVERFLOW;
+	}
+
+	if (pdr->composite_effecter_count == 0) {
+		return -ENODATA;
+	}
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_state_effecter_iterator_init(
+	const struct pldm_state_effecter_pdr *pdr, size_t pdr_size,
+	pldm_effecter_iterator_t *iter)
+{
+	int rc = pldm_validate_state_effecter_pdr(pdr, pdr_size);
+	if (rc) {
+		return rc;
+	}
+
+	if (!iter) {
+		return -EINVAL;
+	}
+
+	iter->data = pdr->possible_states;
+	iter->total_size = pdr_size - offsetof(struct pldm_state_effecter_pdr,
+					       possible_states);
+	iter->current_offset = 0;
+	iter->total_count = pdr->composite_effecter_count;
+	iter->current_index = 0;
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_state_effecter_iterator_next(
+	pldm_effecter_iterator_t *iter,
+	const struct state_effecter_possible_states **states)
+{
+	if (!iter || !states) {
+		return -EINVAL;
+	}
+
+	if (!pldm_effecter_iterator_has_next(iter)) {
+		return -EOVERFLOW;
+	}
+
+	if (iter->current_offset >= iter->total_size) {
+		return -EOVERFLOW;
+	}
+
+	size_t header_size = sizeof(uint16_t) + sizeof(uint8_t);
+	if (iter->current_offset > iter->total_size - header_size) {
+		return -EOVERFLOW;
+	}
+
+	const struct state_effecter_possible_states *curr =
+		(const struct state_effecter_possible_states
+			 *)(iter->data + iter->current_offset);
+
+	uint8_t states_size = curr->possible_states_size;
+	if (states_size == 0) {
+		return -EINVAL;
+	}
+
+	size_t entry_size = header_size + states_size;
+
+	if (iter->current_offset > iter->total_size - entry_size) {
+		return -EOVERFLOW;
+	}
+
+	*states = curr;
+	iter->current_offset += entry_size;
+	iter->current_index++;
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_state_effecter_states_iterator_init(
+	const struct state_effecter_possible_states *states,
+	pldm_effecter_states_iterator_t *iter)
+{
+	if (!states || !iter) {
+		return -EINVAL;
+	}
+
+	iter->states = states->states;
+	iter->total_count = states->possible_states_size;
+	iter->current_index = 0;
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_state_effecter_states_iterator_next(
+	pldm_effecter_states_iterator_t *iter, const bitfield8_t **state)
+{
+	if (!iter || !state) {
+		return -EINVAL;
+	}
+
+	if (!pldm_states_iterator_has_next(iter)) {
+		return -ENODATA;
+	}
+
+	*state = &iter->states[iter->current_index];
+	iter->current_index++;
+	return 0;
+}
