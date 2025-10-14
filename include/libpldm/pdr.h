@@ -9,6 +9,8 @@ extern "C" {
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <libpldm/pldm_types.h>
+#include <libpldm/api.h>
 
 /** @struct pldm_pdr
  *  opaque structure that acts as a handle to a PDR repository
@@ -20,9 +22,242 @@ typedef struct pldm_pdr pldm_pdr;
  */
 typedef struct pldm_pdr_record pldm_pdr_record;
 
+/** @struct state_effecter_possible_states
+ *  Forward declaration of `struct state_effecter_possible_states`
+ *  defined in platform.h
+ */
+struct state_effecter_possible_states;
+
+/**
+ * @struct pldm_pdr_state_effecter_iterator
+ * @brief Iterator context for traversing the possible_states array of a
+ *        PLDM State Effecter PDR
+ *
+ * This iterator provides safe traversal of the variable-length possible_states[]
+ * flexible array member within a pldm_state_effecter_pdr structure.
+ *
+ * The iterator tracks:
+ * - Current position in the buffer (cursor)
+ * - Remaining bytes in the buffer
+ * - The total number of possible_states entries (composite_effecter_count)
+ * - The current iteration index
+ */
+struct pldm_pdr_state_effecter_iterator {
+	const uint8_t *cursor;
+	size_t remaining;
+	uint8_t total_count;
+	uint8_t current_index;
+};
+
+/**
+ * @struct pldm_pdr_state_effecter_states_iterator
+ * @brief Iterator context for traversing the bitfield8_t states array within
+ *        a state_effecter_possible_states entry
+ *
+ * This iterator provides safe traversal of the variable-length states[] array
+ * contained within a single state_effecter_possible_states structure. Each
+ * bitfield8_t element represents the possible state values (bits 0-7) for
+ * the corresponding State Set, where a set bit indicates that state value
+ * is supported by the effecter.
+ *
+ * The iterator tracks:
+ * - Current position in the states[] array (cursor)
+ * - Remaining bytes in the buffer
+ * - The total number of bitfield entries (possible_states_size)
+ * - The current iteration index
+ */
+struct pldm_pdr_state_effecter_states_iterator {
+	const uint8_t *cursor;
+	size_t remaining;
+	uint8_t total_count;
+	uint8_t current_index;
+};
+
 /* ====================== */
 /* Common PDR access APIs */
 /* ====================== */
+
+/**
+ * @brief Initialize iterator for State Effecter PDR possible_states array
+ *
+ * @param[in]  pdr_buf  - Raw PDR buffer
+ * @param[in]  pdr_size - Size of the PDR buffer
+ * @param[out] iter     - Iterator to initialize
+ *
+ * @retval  0         - Success
+ * @retval -EINVAL    - Invalid input
+ * @retval -EOVERFLOW - Buffer too small
+ */
+int pldm_pdr_state_effecter_iterator_init(
+	const void *pdr_buf, size_t pdr_size,
+	struct pldm_pdr_state_effecter_iterator *iter);
+
+/**
+ * @brief Retrieve the next state_effecter_possible_states entry.
+ *
+ * @param[in,out] iter   - Iterator previously initialized with
+ *                         pldm_pdr_state_effecter_iterator_init().
+ * @param[out]    states - Pointer to receive current entry.
+ *
+ * @retval  0          - Success.
+ * @retval -EINVAL     - Invalid input pointers.
+ * @retval -EOVERFLOW  - Iterator has reached end or buffer too small.
+ * @retval -ENODATA    - No more entries.
+ */
+int pldm_pdr_state_effecter_iterator_next(
+	struct pldm_pdr_state_effecter_iterator *iter,
+	const struct state_effecter_possible_states **states);
+
+/**
+ * @brief Check if iterator has more items
+ *
+ * @param[in] iter Pointer to the iterator
+ * @return true if more items available, false otherwise
+ */
+LIBPLDM_ITERATOR
+bool pldm_pdr_state_effecter_iterator_has_next(
+	const struct pldm_pdr_state_effecter_iterator *iter)
+{
+	return iter && (iter->current_index < iter->total_count);
+}
+
+/**
+ * @brief Initialize iterator over bitfield8_t states within a single
+ *        state_effecter_possible_states entry.
+ *
+ * @param[in]  states - Pointer to possible_states entry.
+ * @param[out] iter   - Pointer to iterator to initialize.
+ *
+ * @retval  0        - Success.
+ * @retval -EINVAL   - states or iter is NULL.
+ */
+int pldm_pdr_state_effecter_states_iterator_init(
+	const struct state_effecter_possible_states *states,
+	struct pldm_pdr_state_effecter_states_iterator *iter);
+
+/**
+ * @brief Retrieve next bitfield8_t entry from the current state_effecter_possible_states.
+ *
+ * @param[in,out] iter  - Iterator previously initialized with
+ *                       pldm_pdr_state_effecter_states_iterator_init().
+ * @param[out]    state - Pointer to receive current bitfield8_t entry.
+ *
+ * @retval  0          - Success.
+ * @retval -EINVAL     - Invalid input pointers.
+ * @retval -ENODATA    - No more entries.
+ * @retval -EOVERFLOW  - Iterator has reached end or buffer too small.
+ */
+int pldm_pdr_state_effecter_states_iterator_next(
+	struct pldm_pdr_state_effecter_states_iterator *iter,
+	const bitfield8_t **state);
+
+/**
+ * @brief Check if states iterator has more items
+ *
+ * @param[in] iter Pointer to the iterator
+ * @return true if more items available, false otherwise
+ */
+LIBPLDM_ITERATOR
+bool pldm_pdr_state_effecter_states_iterator_has_next(
+	const struct pldm_pdr_state_effecter_states_iterator *iter)
+{
+	return iter && (iter->current_index < iter->total_count);
+}
+
+/**
+ * @brief Iterate over the possible_states entries in a State Effecter PDR
+ *
+ * @param pdr_buf[in] Pointer to the State Effecter PDR buffer. This should
+ *                    point to the start of a valid pldm_state_effecter_pdr
+ *                    structure in wire format.
+ * @param pdr_size[in] Total size in bytes of the PDR buffer pointed to by
+ *                     @p pdr_buf. Must be at least
+ *                     sizeof(struct pldm_state_effecter_pdr).
+ * @param states_ptr[out] An lvalue of type @ref "struct state_effecter_possible_states *"
+ *                        that holds the pointer to the current possible_states entry
+ * @param iter[in] An identifier for the iterator variable. This creates a
+ *                 loop-scoped variable of type
+ *                 @ref "struct pldm_pdr_state_effecter_iterator" that tracks
+ *                 iteration state.
+ *
+ * @param rc[out] An lvalue of type int that holds the status result of iteration
+ *
+ * @p rc is set to 0 on successful iteration. Otherwise, on error, @p rc is set to:
+ * - -EINVAL if parameter values are invalid
+ * - -EOVERFLOW if the PDR buffer is too small or buffer bounds are exceeded
+ * - -ENODATA if no more entries are available
+ *
+ * The loop body is not executed if iterator initialization fails. After the loop
+ * completes, check @p rc to determine if iteration was successful or if an error
+ * occurred during traversal.
+ */
+#define foreach_pldm_pdr_effecter_possible_states(pdr_buf, pdr_size,           \
+						  states_ptr, iter, rc)        \
+	for (struct pldm_pdr_state_effecter_iterator iter,                     \
+	     *iter##_p = (((rc) = pldm_pdr_state_effecter_iterator_init(       \
+				   (pdr_buf), (pdr_size), &(iter))) == 0 ?     \
+				  &(iter) :                                    \
+				  NULL);                                       \
+	     (iter##_p) &&                                                     \
+	     pldm_pdr_state_effecter_iterator_has_next(iter##_p) &&            \
+	     ((rc) = pldm_pdr_state_effecter_iterator_next(                    \
+		      iter##_p, &(states_ptr))) == 0;)
+
+/**
+ * @brief Iterate over the bitfield8_t states within a state_effecter_possible_states entry
+ *
+ * @param states_ptr[in] An lvalue of type @ref "const struct state_effecter_possible_states *"
+ *                       pointing to a valid possible_states entry (typically obtained from
+ *                       @ref foreach_pldm_pdr_effecter_possible_states)
+ * @param bitfield_ptr[out] An lvalue of type @ref "const bitfield8_t *" that holds
+ *                          the pointer to the current bitfield element
+ * @param iter[in] An identifier for the iterator variable. This creates a
+ *                 loop-scoped variable of type
+ *                 @ref "struct pldm_pdr_state_effecter_states_iterator" that
+ *                 tracks iteration state.
+ *
+ * @p rc is set to 0 on successful iteration. Otherwise, on error, @p rc is set to:
+ * - -EINVAL if parameter values are invalid
+ * - -ENODATA if no more entries are available
+ *
+ * The loop body is not executed if iterator initialization fails. After the loop
+ * completes, check @p rc to determine if iteration was successful or if an error
+ * occurred during traversal.
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * int rc, inner_rc;
+ *
+ * const struct state_effecter_possible_states *states;
+ * foreach_pldm_pdr_effecter_possible_states(pdr.data(), pdr.size(),
+ *                                            states, effIter, rc) {
+ *     ...
+ *     const bitfield8_t *bitfield;
+ *     foreach_pldm_pdr_effecter_bitfield_states(states, bitfield,
+ *                                                statesIter, inner_rc) {
+ *     ...
+ *     }
+ *     if (inner_rc) {
+ * 		   // Error iterating bitfields, break loop
+ *     }
+ * }
+ * if (rc) {
+ * 	   // Error iterating possible_states, return error
+ * }
+ * @endcode
+ */
+#define foreach_pldm_pdr_effecter_bitfield_states(states_ptr, bitfield_ptr,    \
+						  iter, rc)                    \
+	for (struct pldm_pdr_state_effecter_states_iterator iter,              \
+	     *iter##_p =                                                       \
+		     (((rc) = pldm_pdr_state_effecter_states_iterator_init(    \
+			       (states_ptr), &(iter))) == 0 ?                  \
+			      &(iter) :                                        \
+			      NULL);                                           \
+	     (iter##_p) &&                                                     \
+	     pldm_pdr_state_effecter_states_iterator_has_next(iter##_p) &&     \
+	     ((rc) = pldm_pdr_state_effecter_states_iterator_next(             \
+		      iter##_p, &(bitfield_ptr))) == 0;)
 
 /** @brief Make a new PDR repository
  *

@@ -2389,3 +2389,183 @@ int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
 	}
 	return 0;
 }
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_state_effecter_iterator_init(
+	const void *pdr_buf, size_t pdr_size,
+	struct pldm_pdr_state_effecter_iterator *iter)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	const void *flex_buf;
+	size_t flex_len;
+	uint8_t composite_effecter_count;
+	int rc;
+
+	if (!iter) {
+		return -EINVAL;
+	}
+
+	if (!pdr_buf) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, sizeof(struct pldm_state_effecter_pdr),
+				    (uint8_t *)pdr_buf, pdr_size);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	size_t offset = offsetof(struct pldm_state_effecter_pdr,
+				 composite_effecter_count);
+	rc = pldm_msgbuf_span_required(buf, offset, NULL);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_extract(buf, composite_effecter_count);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_span_remaining(buf, &flex_buf, &flex_len);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	iter->cursor = (const uint8_t *)flex_buf;
+	iter->remaining = flex_len;
+	iter->total_count = composite_effecter_count;
+	iter->current_index = 0;
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_state_effecter_iterator_next(
+	struct pldm_pdr_state_effecter_iterator *iter,
+	const struct state_effecter_possible_states **states)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(ctx);
+	const uint8_t *entry_start;
+	uint16_t state_set_id;
+	uint8_t possible_states_size;
+	int rc;
+
+	if (!iter || !states) {
+		return -EINVAL;
+	}
+
+	if (!pldm_pdr_state_effecter_iterator_has_next(iter)) {
+		return -ENODATA;
+	}
+
+	if (!iter->cursor) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(ctx, 0, iter->cursor, iter->remaining);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	entry_start = ctx->cursor;
+
+	rc = pldm_msgbuf_extract(ctx, state_set_id);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	rc = pldm_msgbuf_extract(ctx, possible_states_size);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	if (possible_states_size == 0) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_span_required(ctx, possible_states_size, NULL);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	iter->cursor = ctx->cursor;
+	iter->remaining = ctx->remaining;
+
+	rc = pldm_msgbuf_complete(ctx);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	*states = (const struct state_effecter_possible_states *)entry_start;
+	iter->current_index++;
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_state_effecter_states_iterator_init(
+	const struct state_effecter_possible_states *states,
+	struct pldm_pdr_state_effecter_states_iterator *iter)
+{
+	if (!states || !iter) {
+		return -EINVAL;
+	}
+
+	iter->cursor = (const uint8_t *)states->states;
+	iter->remaining = states->possible_states_size;
+	iter->total_count = states->possible_states_size;
+	iter->current_index = 0;
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_pdr_state_effecter_states_iterator_next(
+	struct pldm_pdr_state_effecter_states_iterator *iter,
+	const bitfield8_t **state)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(ctx);
+	const void *bitfield_ptr;
+	int rc;
+
+	if (!iter || !state) {
+		return -EINVAL;
+	}
+
+	if (!pldm_pdr_state_effecter_states_iterator_has_next(iter)) {
+		return -ENODATA;
+	}
+
+	if (!iter->cursor) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(ctx, 0, iter->cursor, iter->remaining);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	rc = pldm_msgbuf_span_required(ctx, sizeof(bitfield8_t), &bitfield_ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	iter->cursor = ctx->cursor;
+	iter->remaining = ctx->remaining;
+
+	rc = pldm_msgbuf_complete(ctx);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	*state = (const bitfield8_t *)bitfield_ptr;
+	iter->current_index++;
+
+	return 0;
+}

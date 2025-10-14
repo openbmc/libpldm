@@ -12,9 +12,9 @@ extern "C" {
 #include <stdint.h>
 #include <uchar.h>
 
+#include <libpldm/pdr.h>
 #include <libpldm/base.h>
 #include <libpldm/compiler.h>
-#include <libpldm/pdr.h>
 #include <libpldm/pldm_types.h>
 #include <libpldm/utils.h>
 
