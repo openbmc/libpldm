@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef PLATFORM_OEM_IBM_H
-#define PLATFORM_OEM_IBM_H
+#ifndef LIBPLDM_PLATFORM_OEM_IBM_H
+#define LIBPLDM_PLATFORM_OEM_IBM_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -55,4 +55,4 @@ int encode_bios_attribute_update_event_req(uint8_t instance_id,
 }
 #endif
 
-#endif /* PLATFORM_OEM_IBM_H */
+#endif /* LIBPLDM_PLATFORM_OEM_IBM_H */

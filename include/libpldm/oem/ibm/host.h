@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef OEM_IBM_HOST_H
-#define OEM_IBM_HOST_H
+#ifndef LIBPLDM_OEM_IBM_HOST_H
+#define LIBPLDM_OEM_IBM_HOST_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -106,4 +106,4 @@ int encode_get_alert_status_resp(uint8_t instance_id, uint8_t completion_code,
 }
 #endif
 
-#endif /* OEM_IBM_HOST_H */
+#endif /* LIBPLDM_OEM_IBM_HOST_H */

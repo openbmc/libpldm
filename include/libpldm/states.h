@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef STATES_H
-#define STATES_H
+#ifndef LIBPLDM_STATES_H
+#define LIBPLDM_STATES_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,4 +25,4 @@ enum pldm_system_power_states {
 }
 #endif
 
-#endif /* STATES_H */
+#endif /* LIBPLDM_STATES_H */

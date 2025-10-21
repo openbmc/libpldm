@@ -58,4 +58,4 @@ int pldm_transport_af_mctp_bind(struct pldm_transport_af_mctp *transport,
 }
 #endif
 
-#endif /* LIBPLDM_AF_MCTP*/
+#endif /* LIBPLDM_AF_MCTP_H */
