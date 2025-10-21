@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef INSTANCE_ID_H
-#define INSTANCE_ID_H
+#ifndef LIBPLDM_INSTANCE_ID_H
+#define LIBPLDM_INSTANCE_ID_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -91,4 +91,4 @@ int pldm_instance_id_free(struct pldm_instance_db *ctx, pldm_tid_t tid,
 }
 #endif
 
-#endif /* INSTANCE_ID_H */
+#endif /* LIBPLDM_INSTANCE_ID_H */

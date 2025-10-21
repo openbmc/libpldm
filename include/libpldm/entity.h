@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef ENTITY_H
-#define ENTITY_H
+#ifndef LIBPLDM_ENTITY_H
+#define LIBPLDM_ENTITY_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -183,4 +183,4 @@ enum pldm_entity_id_codes {
 }
 #endif
 
-#endif /* ENTITY_H */
+#endif /* LIBPLDM_ENTITY_H */

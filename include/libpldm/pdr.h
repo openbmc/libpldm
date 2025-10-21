@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef PDR_H
-#define PDR_H
+#ifndef LIBPLDM_PDR_H
+#define LIBPLDM_PDR_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -725,4 +725,4 @@ int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 }
 #endif
 
-#endif /* PDR_H */
+#endif /* LIBPLDM_PDR_H */

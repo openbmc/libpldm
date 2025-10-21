@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef PLDM_TYPES_H
-#define PLDM_TYPES_H
+#ifndef LIBPLDM_PLDM_TYPES_H
+#define LIBPLDM_PLDM_TYPES_H
 
 #ifdef __cplusplus
 #include <cstdint>
@@ -169,4 +169,4 @@ typedef float real32_t;
 
 typedef uint8_t pldm_uuid[16];
 
-#endif /* PLDM_TYPES_H */
+#endif /* LIBPLDM_PLDM_TYPES_H */

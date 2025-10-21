@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef BASE_H
-#define BASE_H
+#ifndef LIBPLDM_BASE_H
+#define LIBPLDM_BASE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -873,4 +873,4 @@ int decode_pldm_base_negotiate_transfer_params_resp(
 }
 #endif
 
-#endif /* BASE_H */
+#endif /* LIBPLDM_BASE_H */

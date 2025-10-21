@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef BIOS_H
-#define BIOS_H
+#ifndef LIBPLDM_BIOS_H
+#define LIBPLDM_BIOS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -618,4 +618,4 @@ int decode_set_bios_table_req(const struct pldm_msg *msg, size_t payload_length,
 }
 #endif
 
-#endif /* BIOS_H */
+#endif /* LIBPLDM_BIOS_H */

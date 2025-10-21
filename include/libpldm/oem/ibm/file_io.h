@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef FILEIO_H
-#define FILEIO_H
+#ifndef LIBPLDM_FILEIO_H
+#define LIBPLDM_FILEIO_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -917,4 +917,4 @@ int encode_new_file_with_metadata_resp(uint8_t instance_id,
 }
 #endif
 
-#endif /* FILEIO_H */
+#endif /* LIBPLDM_FILEIO_H */

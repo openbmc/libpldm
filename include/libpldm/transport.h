@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef TRANSPORT_PLDM_H
-#define TRANSPORT_PLDM_H
+#ifndef LIBPLDM_TRANSPORT_PLDM_H
+#define LIBPLDM_TRANSPORT_PLDM_H
 
 #ifdef __cplusplus
 extern "C" {

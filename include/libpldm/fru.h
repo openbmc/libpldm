@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef FRU_H
-#define FRU_H
+#ifndef LIBPLDM_FRU_H
+#define LIBPLDM_FRU_H
 
 #ifdef __cplusplus
 extern "C" {
