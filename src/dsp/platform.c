@@ -1754,6 +1754,9 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 	 * The implementation below is bonkers, but it's because the function
 	 * prototype is bonkers. The `present_reading` argument should have been
 	 * a tagged union.
+	 * Note: For 64-bit sensor values (UINT64/SINT64), this function will
+	 * truncate to 32 bits due to API limitations. Use newer APIs for full
+	 * 64-bit support.
 	 */
 	switch (*sensor_data_size) {
 	case PLDM_SENSOR_DATA_SIZE_UINT8: {
@@ -1794,6 +1797,22 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 	case PLDM_SENSOR_DATA_SIZE_SINT32: {
 		int32_t val;
 		if (!pldm_msgbuf_extract(buf, val)) {
+			*present_reading = (uint32_t)val;
+		}
+		break;
+	}
+	case PLDM_SENSOR_DATA_SIZE_UINT64: {
+		uint64_t val;
+		if (!pldm_msgbuf_extract(buf, val)) {
+			/* Truncate to 32 bits - API limitation */
+			*present_reading = (uint32_t)val;
+		}
+		break;
+	}
+	case PLDM_SENSOR_DATA_SIZE_SINT64: {
+		int64_t val;
+		if (!pldm_msgbuf_extract(buf, val)) {
+			/* Truncate to 32 bits - API limitation */
 			*present_reading = (uint32_t)val;
 		}
 		break;
@@ -2382,7 +2401,7 @@ int decode_get_sensor_reading_resp(
 		return pldm_xlate_errno(pldm_msgbuf_discard(buf, rc));
 	}
 
-	if (*sensor_data_size > PLDM_SENSOR_DATA_SIZE_SINT32) {
+	if (*sensor_data_size > PLDM_SENSOR_DATA_SIZE_SINT64) {
 		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
 	}
 
@@ -2417,7 +2436,7 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (sensor_data_size > PLDM_EFFECTER_DATA_SIZE_SINT32) {
+	if (sensor_data_size > PLDM_SENSOR_DATA_SIZE_SINT64) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -2469,6 +2488,17 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 		uint32_t val = *(uint32_t *)present_reading;
 		val = htole32(val);
 		memcpy(response->present_reading, &val, 4);
+	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT64 ||
+		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT64) {
+		if (payload_length !=
+		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7) {
+			return PLDM_ERROR_INVALID_LENGTH;
+		}
+		uint64_t val = *(uint64_t *)present_reading;
+		val = htole64(val);
+		memcpy(response->present_reading, &val, 8);
+	} else {
+		return PLDM_ERROR_INVALID_DATA;
 	}
 
 	return PLDM_SUCCESS;
