@@ -19,6 +19,11 @@ Change categories:
 
 ### Added
 
+- platform: Added 64-bit sensor support per PLDM Type 2 v1.3.0 (DSP0248)
+  - Added `PLDM_SENSOR_DATA_SIZE_UINT64` and `PLDM_SENSOR_DATA_SIZE_SINT64` enum values
+  - Added `PLDM_RANGE_FIELD_FORMAT_UINT64` and `PLDM_RANGE_FIELD_FORMAT_SINT64` enum values
+  - Added `value_u64` and `value_s64` fields to `union_sensor_data_size` and `union_range_field_format`
+  - Added 64-bit sensor reading encode/decode support with proper endianness conversion
 - platform: Added file descriptor PDR encoding support
   - Added `encode_pldm_platform_file_descriptor_pdr()`
 - utils: Added `pldm_edac_crc32_extend()`
