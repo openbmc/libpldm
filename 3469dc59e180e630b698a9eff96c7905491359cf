@@ -176,6 +176,24 @@
       "parentUuid": "211de00b_6c4b91fc",
       "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29992d41_7f765ffc",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2025-10-27T09:43:01Z",
+      "side": 1,
+      "message": "\u003e The constraint is that the relevant structures must only grow, they must never have their members reordered or removed.\n\nBut DMTF can remove fields in a future version of the package format, right?\n\nAlso the growth of the structure may happen in the middle. This happened in-between package format revision 1.0.0 and 1.3.0 where `Downstream Device ID Records \u0026 Descriptors` was added in-between `Firmware Device ID Records \u0026 Descriptors` and `Component Image Information`\n\n\u003e Bearing in mind the application binary compiled against version N of libpldm is dynamically linking against version N-1, both cases link successfully, as no new function symbols are introduced. However, case 1 results in an error returned from decode_pldm_firmware_update_package() due to the unrecognised package pin provided by the application. Case 2 suffers no failures - despite the application being aware of the increased size of the relevant structs, neither the application nor libpldm will be accessing those members by assertion of the pin, and so the decoding process continues.\n\n\u003e By contrast, the D-Pointer approach with explicit accessor methods for the C++ binding yields a link failure for case 1, but likely not for case 2 (as the new symbols won\u0027t be referenced).\n\nI would much rather get a link failure than a runtime failure. IMO that\u0027s a better failure mode.\n\n\u003e It\u0027s making the general problem of exported symbols significantly worse, and I\u0027m exploring whether we can just not do that.\n\nI would rather export a function than expose a data structure layout. functions appear unordered and better represent what an application needs from a library.\n\nThe application likely does not care about our internal data structure layout or which pin and package format version.\n\nIf we avoid exporting data structure layout, we preserve our design freedom to re-structure things based on usage and evolving specifications.\n\nFor example we could go from `std::vector` to `std::flat_map` internally, or yet another container, if it helps to optimize a given function implementation.\n\nIf we stabilize some struct layout then how can we ever refactor that again? Any poor choices as to which container is used or ordered vs. unordered containers will be stuck forever.",
+      "parentUuid": "5ce85d3b_a8339f85",
+      "revId": "3469dc59e180e630b698a9eff96c7905491359cf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
