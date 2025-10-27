@@ -19,6 +19,29 @@ Change categories:
 
 ### Added
 
+- platform: Added 64-bit sensor support per PLDM Type 2 v1.3.0 (DSP0248)
+  - Added `PLDM_SENSOR_DATA_SIZE_UINT64` and `PLDM_SENSOR_DATA_SIZE_SINT64` enum
+    values
+  - Added `PLDM_RANGE_FIELD_FORMAT_UINT64` and `PLDM_RANGE_FIELD_FORMAT_SINT64`
+    enum values
+  - Added `value_u64` and `value_s64` fields to `union_sensor_data_size` and
+    `union_range_field_format`
+  - Added 64-bit sensor reading encode/decode support with proper endianness
+    conversion
+  - Added `PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_64BIT_DATA_LENGTH` constant
+  - Updated `PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH` to 11
+- platform: Added 64-bit effecter support per PLDM Type 2 v1.3.0 (DSP0248)
+  - Added `PLDM_EFFECTER_DATA_SIZE_UINT64` and `PLDM_EFFECTER_DATA_SIZE_SINT64`
+    enum values
+  - Added `PLDM_EFFECTER_DATA_SIZE_MAX` constant
+  - Added `value_u64` and `value_s64` fields to `union_effecter_data_size`
+  - Added 64-bit effecter value encode support in
+    `encode_set_numeric_effecter_value_req()` and
+    `encode_get_numeric_effecter_value_resp()`
+  - Updated `pldm__msgbuf_extract_effecter_data()` for 64-bit support
+  - Note: `decode_set_numeric_effecter_value_req()` and
+    `decode_get_numeric_effecter_value_resp()` remain limited to 32-bit
+    due to fixed-size buffer parameters in their API
 - platform: Added file descriptor PDR encoding support
   - Added `encode_pldm_platform_file_descriptor_pdr()`
 - utils: Added `pldm_edac_crc32_extend()`
@@ -88,6 +111,9 @@ Change categories:
 
 ### Fixed
 
+- platform: Fixed `encode_get_sensor_reading_resp()` using incorrect
+  `PLDM_EFFECTER_DATA_SIZE_*` constants instead of `PLDM_SENSOR_DATA_SIZE_*`
+  for sensor data size validation
 - dsp: base: Don't extract MultipartReceive resp's CRC once complete
 
 - base: Allocating struct pldm_msg with member initialization in
