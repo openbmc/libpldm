@@ -178,9 +178,11 @@ enum pldm_range_field_format {
 	PLDM_RANGE_FIELD_FORMAT_SINT16,
 	PLDM_RANGE_FIELD_FORMAT_UINT32,
 	PLDM_RANGE_FIELD_FORMAT_SINT32,
-	PLDM_RANGE_FIELD_FORMAT_REAL32
+	PLDM_RANGE_FIELD_FORMAT_REAL32,
+	PLDM_RANGE_FIELD_FORMAT_UINT64,
+	PLDM_RANGE_FIELD_FORMAT_SINT64
 };
-#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_REAL32
+#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_SINT64
 
 enum set_request { PLDM_NO_CHANGE = 0x00, PLDM_REQUEST_SET = 0x01 };
 
@@ -394,6 +396,7 @@ enum pldm_pdr_repository_chg_event_change_record_event_data_operation {
 };
 
 /** @brief PLDM NumericSensorStatePresentReading data type
+ *  @note UINT64 and SINT64 added in PLDM Type 2 v1.3.0 (DSP0248)
  */
 enum pldm_sensor_readings_data_type {
 	PLDM_SENSOR_DATA_SIZE_UINT8,
@@ -401,9 +404,11 @@ enum pldm_sensor_readings_data_type {
 	PLDM_SENSOR_DATA_SIZE_UINT16,
 	PLDM_SENSOR_DATA_SIZE_SINT16,
 	PLDM_SENSOR_DATA_SIZE_UINT32,
-	PLDM_SENSOR_DATA_SIZE_SINT32
+	PLDM_SENSOR_DATA_SIZE_SINT32,
+	PLDM_SENSOR_DATA_SIZE_UINT64,
+	PLDM_SENSOR_DATA_SIZE_SINT64
 };
-#define PLDM_SENSOR_DATA_SIZE_MAX PLDM_SENSOR_DATA_SIZE_SINT32
+#define PLDM_SENSOR_DATA_SIZE_MAX PLDM_SENSOR_DATA_SIZE_SINT64
 
 /** @brief PLDM PlatformEventMessage response status
  */
@@ -757,6 +762,7 @@ typedef union {
  *  Indicates the format used for the nominalValue, normalMax, and normalMin
  *  fields.
  *  Refer to: DSP0248_1.2.0: 28.11 Table 87
+ *  @note uint64_t and int64_t fields added for PLDM Type 2 v1.3.0 support
  */
 typedef union {
 	uint8_t value_u8;
@@ -766,6 +772,8 @@ typedef union {
 	uint32_t value_u32;
 	int32_t value_s32;
 	real32_t value_f32;
+	uint64_t value_u64;
+	int64_t value_s64;
 } union_range_field_format;
 
 /** @struct pldm_numeric_effecter_value_pdr
@@ -815,6 +823,7 @@ struct pldm_numeric_effecter_value_pdr {
  *  The bit width and format of reading and threshold values that the sensor
  *  returns.
  *  Refer to: DSP0248_1.2.0: 28.4 Table 78
+ *  @note uint64_t and int64_t fields added for PLDM Type 2 v1.3.0 support
  */
 typedef union {
 	uint8_t value_u8;
@@ -823,6 +832,8 @@ typedef union {
 	int16_t value_s16;
 	uint32_t value_u32;
 	int32_t value_s32;
+	uint64_t value_u64;
+	int64_t value_s64;
 } union_sensor_data_size;
 
 /** @struct pldm_value_pdr_hdr
