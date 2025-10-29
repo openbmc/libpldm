@@ -152,8 +152,8 @@ pldm_msgbuf_extract_effecter_value(struct pldm_msgbuf_ro *ctx,
 
 #define pldm_msgbuf_extract_effecter_data(ctx, tag, dst)                       \
 	pldm_msgbuf_extract_typecheck(union_effecter_data_size,                \
-				      pldm__msgbuf_extract_range_field_format, \
-				      dst, ctx, tag, (void *)&(dst))
+				      pldm__msgbuf_extract_effecter_data, dst, \
+				      ctx, tag, (void *)&(dst))
 LIBPLDM_CC_ALWAYS_INLINE int
 pldm__msgbuf_extract_effecter_data(struct pldm_msgbuf_ro *ctx,
 				   enum pldm_effecter_data_size tag, void *ed)

@@ -103,6 +103,8 @@ Change categories:
   - Updated encode_base_multipart_receive_resp() to insert checksum except when
     TransferFlag is ACKNOWLEDGE_COMPLETION
 
+- msgbuf: Correct pldm_msgbuf_extract_effecter_data()'s child function
+
 ### Security
 
 ## [0.14.0] 2025-08-11
