@@ -44,6 +44,7 @@ Change categories:
 - include: Added header file for SMBIOS Data Transfer (DSP0246 v1.0.1)
 - bindings:
   - Add libpldm++ library for the C++ binding
+- dsp: platform: Add pldm_platform_file_class enum
 
 ### Changed
 
