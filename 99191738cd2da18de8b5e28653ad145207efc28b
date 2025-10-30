@@ -16,6 +16,24 @@
       "message": "We also need to update `PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH` to 11?",
       "revId": "99191738cd2da18de8b5e28653ad145207efc28b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a776b6e1_645b0a59",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-10-30T08:26:35Z",
+      "side": 1,
+      "message": "Good catch, Fixed. Thank you!",
+      "parentUuid": "02a671c7_df7509e1",
+      "revId": "99191738cd2da18de8b5e28653ad145207efc28b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
