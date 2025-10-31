@@ -97,10 +97,11 @@ enum pldm_platform_transfer_flag {
 #define PLDM_SENSOR_EVENT_SENSOR_OP_STATE_DATA_LENGTH		 2
 #define PLDM_SENSOR_EVENT_STATE_SENSOR_STATE_DATA_LENGTH	 3
 #define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MIN_DATA_LENGTH	 4
-#define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH	 7
+#define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH	 11
 #define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_8BIT_DATA_LENGTH	 4
 #define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_16BIT_DATA_LENGTH 5
 #define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_32BIT_DATA_LENGTH 7
+#define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_64BIT_DATA_LENGTH 11
 
 /* Minimum length of data for pldmPDRRepositoryChgEvent */
 #define PLDM_PDR_REPOSITORY_CHG_EVENT_MIN_LENGTH     2
@@ -168,8 +169,11 @@ enum pldm_effecter_data_size {
 	PLDM_EFFECTER_DATA_SIZE_UINT16,
 	PLDM_EFFECTER_DATA_SIZE_SINT16,
 	PLDM_EFFECTER_DATA_SIZE_UINT32,
-	PLDM_EFFECTER_DATA_SIZE_SINT32
+	PLDM_EFFECTER_DATA_SIZE_SINT32,
+	PLDM_EFFECTER_DATA_SIZE_UINT64,
+	PLDM_EFFECTER_DATA_SIZE_SINT64
 };
+#define PLDM_EFFECTER_DATA_SIZE_MAX PLDM_EFFECTER_DATA_SIZE_SINT64
 
 enum pldm_range_field_format {
 	PLDM_RANGE_FIELD_FORMAT_UINT8,
@@ -178,9 +182,11 @@ enum pldm_range_field_format {
 	PLDM_RANGE_FIELD_FORMAT_SINT16,
 	PLDM_RANGE_FIELD_FORMAT_UINT32,
 	PLDM_RANGE_FIELD_FORMAT_SINT32,
-	PLDM_RANGE_FIELD_FORMAT_REAL32
+	PLDM_RANGE_FIELD_FORMAT_REAL32,
+	PLDM_RANGE_FIELD_FORMAT_UINT64,
+	PLDM_RANGE_FIELD_FORMAT_SINT64
 };
-#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_REAL32
+#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_SINT64
 
 enum set_request { PLDM_NO_CHANGE = 0x00, PLDM_REQUEST_SET = 0x01 };
 
@@ -394,6 +400,7 @@ enum pldm_pdr_repository_chg_event_change_record_event_data_operation {
 };
 
 /** @brief PLDM NumericSensorStatePresentReading data type
+ *  @note UINT64 and SINT64 added in PLDM Type 2 v1.3.0 (DSP0248)
  */
 enum pldm_sensor_readings_data_type {
 	PLDM_SENSOR_DATA_SIZE_UINT8,
@@ -401,9 +408,11 @@ enum pldm_sensor_readings_data_type {
 	PLDM_SENSOR_DATA_SIZE_UINT16,
 	PLDM_SENSOR_DATA_SIZE_SINT16,
 	PLDM_SENSOR_DATA_SIZE_UINT32,
-	PLDM_SENSOR_DATA_SIZE_SINT32
+	PLDM_SENSOR_DATA_SIZE_SINT32,
+	PLDM_SENSOR_DATA_SIZE_UINT64,
+	PLDM_SENSOR_DATA_SIZE_SINT64
 };
-#define PLDM_SENSOR_DATA_SIZE_MAX PLDM_SENSOR_DATA_SIZE_SINT32
+#define PLDM_SENSOR_DATA_SIZE_MAX PLDM_SENSOR_DATA_SIZE_SINT64
 
 /** @brief PLDM PlatformEventMessage response status
  */
@@ -742,6 +751,7 @@ int encode_state_sensor_pdr(
  *  The bit width and format of reading and threshold values that the effecter
  *  returns.
  *  Refer to: DSP0248_1.2.0: 28.11 Table 87
+ *  @note uint64_t and int64_t fields added for PLDM Type 2 v1.3.0 support
  */
 typedef union {
 	uint8_t value_u8;
@@ -750,6 +760,8 @@ typedef union {
 	int16_t value_s16;
 	uint32_t value_u32;
 	int32_t value_s32;
+	uint64_t value_u64;
+	int64_t value_s64;
 } union_effecter_data_size;
 
 /** @union union_range_field_format
@@ -757,6 +769,7 @@ typedef union {
  *  Indicates the format used for the nominalValue, normalMax, and normalMin
  *  fields.
  *  Refer to: DSP0248_1.2.0: 28.11 Table 87
+ *  @note uint64_t and int64_t fields added for PLDM Type 2 v1.3.0 support
  */
 typedef union {
 	uint8_t value_u8;
@@ -766,6 +779,8 @@ typedef union {
 	uint32_t value_u32;
 	int32_t value_s32;
 	real32_t value_f32;
+	uint64_t value_u64;
+	int64_t value_s64;
 } union_range_field_format;
 
 /** @struct pldm_numeric_effecter_value_pdr
@@ -815,6 +830,7 @@ struct pldm_numeric_effecter_value_pdr {
  *  The bit width and format of reading and threshold values that the sensor
  *  returns.
  *  Refer to: DSP0248_1.2.0: 28.4 Table 78
+ *  @note uint64_t and int64_t fields added for PLDM Type 2 v1.3.0 support
  */
 typedef union {
 	uint8_t value_u8;
@@ -823,6 +839,8 @@ typedef union {
 	int16_t value_s16;
 	uint32_t value_u32;
 	int32_t value_s32;
+	uint64_t value_u64;
+	int64_t value_s64;
 } union_sensor_data_size;
 
 /** @struct pldm_value_pdr_hdr
@@ -1225,6 +1243,18 @@ struct pldm_sensor_event_numeric_sensor_state {
 	uint8_t present_reading[1];
 } __attribute__((packed));
 
+/** @struct pldm_numeric_sensor_event_data
+ *
+ *  Structure representing decoded numeric sensor event data with full
+ *  64-bit sensor reading support. Used by decode_numeric_sensor_event_data().
+ */
+struct pldm_numeric_sensor_event_data {
+	uint8_t event_state;
+	uint8_t previous_event_state;
+	uint8_t sensor_data_size;
+	union_sensor_data_size present_reading;
+};
+
 /** @struct pldm_sensor_event_sensor_op_state
  *
  *  structure representing sensorEventClass for SensorOpState
@@ -1411,16 +1441,16 @@ struct pldm_set_state_sensor_enables_req {
  *  @param[out] effecter_id - used to identify and access the effecter
  *  @param[out] effecter_data_size - The bit width and format of the setting
  * 				value for the effecter.
- * 				value:{uint8,sint8,uint16,sint16,uint32,sint32}
+ * 				value:{uint8,sint8,uint16,sint16,uint32,sint32,uint64,sint64}
  *  @param[out] effecter_value - The setting value of numeric effecter being
- * 				requested.
+ * 				requested. Buffer must be at least 8 bytes to support 64-bit values.
  *  @return pldm_completion_codes
  */
 int decode_set_numeric_effecter_value_req(const struct pldm_msg *msg,
 					  size_t payload_length,
 					  uint16_t *effecter_id,
 					  uint8_t *effecter_data_size,
-					  uint8_t effecter_value[4]);
+					  uint8_t effecter_value[8]);
 
 /** @brief Create a PLDM response message for SetNumericEffecterValue
  *
@@ -2274,6 +2304,26 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 			       uint8_t *sensor_data_size,
 			       uint32_t *present_reading);
 
+/** @brief Decode numeric sensor event data with full 64-bit support
+ *
+ *  This function properly handles 64-bit sensor values (UINT64/SINT64) without
+ *  truncation by using a structured output parameter. This is the recommended
+ *  function for decoding numeric sensor event data.
+ *
+ *  @param[in] sensor_data - sensor_data for sensorEventClass =
+ * numericSensorState
+ *  @param[in] sensor_data_length - Length of sensor_data
+ *  @param[out] event_data - Pointer to struct containing decoded numeric sensor
+ * event data. Access present_reading fields based on sensor_data_size
+ * (e.g., present_reading.value_u64 for PLDM_SENSOR_DATA_SIZE_UINT64)
+ *  @return pldm_completion_codes
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'sensor_data' and 'event_data'
+ */
+int decode_numeric_sensor_event_data(
+	const uint8_t *sensor_data, size_t sensor_data_length,
+	struct pldm_numeric_sensor_event_data *event_data);
+
 /** @brief Decode Numeric Sensor Pdr data
  *
  *  @param[in] pdr_data - pdr data for numeric sensor
@@ -2306,14 +2356,12 @@ int encode_get_numeric_effecter_value_req(uint8_t instance_id,
  *  @param[out] completion_code - PLDM completion code
  *  @param[out] effecter_data_size - The bit width and format of the setting
  *		value for the effecter.
- *		value:{uint8,sint8,uint16,sint16,uint32,sint32}
+ *		value:{uint8,sint8,uint16,sint16,uint32,sint32,uint64,sint64}
  *  @param[out] effecter_oper_state - The state of the effecter itself
  *  @param[out] pending_value - The pending numeric value setting of the
- *              effecter. The effecterDataSize field indicates the number of
- *              bits used for this field
+ *              effecter. Buffer must be at least 8 bytes to support 64-bit values.
  *  @param[out] present_value - The present numeric value setting of the
- *              effecter. The effecterDataSize indicates the number of bits
- *              used for this field
+ *              effecter. Buffer must be at least 8 bytes to support 64-bit values.
  *  @return pldm_completion_codes
  */
 int decode_get_numeric_effecter_value_resp(const struct pldm_msg *msg,
