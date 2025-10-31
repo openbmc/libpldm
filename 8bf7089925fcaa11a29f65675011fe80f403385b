@@ -256,6 +256,30 @@
       },
       "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e04abbf1_631717b4",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-10-31T14:24:33Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "bb50c4e6_08913531",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 34
+      },
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
