@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f072c4e_f12e4d9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000206
+      },
+      "writtenOn": "2025-10-31T15:05:40Z",
+      "side": 1,
+      "message": "@apuli@nvidia.com - I already have patches \u0026 was working on adding 64 bit numeric effecter support - can you please limit this review to only the sensor changes ? if you can review my patches and let me know what\u0027s missing I can add those at https://gerrit.openbmc.org/q/topic:%2264-bit-effecter-support%22",
+      "revId": "cb2941e5fb246bea90ea09847ad28b4197755c02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
