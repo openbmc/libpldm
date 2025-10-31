@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af1acc3b_9b84347b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-10-31T09:38:39Z",
+      "side": 1,
+      "message": "Hi @apparao.puli@intel.com. I think it would be nice if you can split this out to separate patches for numeric sensor and numeric effecter. That would ease the review process a lot. However let\u0027s wait for the maintainer\u0027s opinions.",
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a2f89d_101ca08b",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1849,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-10-31T09:38:39Z",
+      "side": 1,
+      "message": "Please use LIBPLDM_ABI_TESTING instead. Read https://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md#abi-control",
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10f10f9a_940886ba",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1850,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-10-31T09:38:39Z",
+      "side": 1,
+      "message": "Can this be something more adherent to the spec, like decode_numeric_sensor_state_sensor_event_data(). What do you think @andrew@codeconstruct.com.au?",
+      "range": {
+        "startLine": 1850,
+        "startChar": 4,
+        "endLine": 1850,
+        "endChar": 33
+      },
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae7c2358_e80b9ff1",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1855,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-10-31T09:38:39Z",
+      "side": 1,
+      "message": "If there needs to be a new function, I would suggest adding a proper struct to hold the numeric sensor event data to follow the new convention https://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md#api-design.",
+      "range": {
+        "startLine": 1852,
+        "startChar": 6,
+        "endLine": 1855,
+        "endChar": 45
+      },
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d370e2f5_c4261b3d",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1889,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-10-31T09:38:39Z",
+      "side": 1,
+      "message": "There\u0027s already a `pldm_msgbuf_extract_sensor_data()` in src/msgbuf/platform.h. I think you should enlist that function instead.",
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a35582b_1e1d63b9",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2277,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-10-31T09:38:39Z",
+      "side": 1,
+      "message": "This function takes uint8_t* for value, I don\u0027t understand why it can\u0027t support 64b.",
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb50c4e6_08913531",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-10-31T09:38:39Z",
+      "side": 1,
+      "message": "There are two places consuming this function `decode_set_numeric_effecter_value_req` and `decode_get_numeric_effecter_value_resp`. `decode_get_numeric_effecter_value_resp` can totally be extended to 64b as the input param for value is uint8_t pointer.\n \nThe only issue left with using this extract function is from `decode_set_numeric_effecter_value_req`, which taking an input array of size 4 for the value. I wonder if we can update that function to extend the array size and update it consumers from pldm. As a result, this extract function can finally supports 64b.",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 34
+      },
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
