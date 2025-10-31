@@ -19,6 +19,35 @@ Change categories:
 
 ### Added
 
+- platform: Added 64-bit sensor support per PLDM Type 2 v1.3.0 (DSP0248)
+  - Added `PLDM_SENSOR_DATA_SIZE_UINT64` and `PLDM_SENSOR_DATA_SIZE_SINT64` enum
+    values
+  - Added `PLDM_RANGE_FIELD_FORMAT_UINT64` and `PLDM_RANGE_FIELD_FORMAT_SINT64`
+    enum values
+  - Added `value_u64` and `value_s64` fields to `union_sensor_data_size` and
+    `union_range_field_format`
+  - Added 64-bit sensor reading encode/decode support with proper endianness
+    conversion
+  - Added `pldm_numeric_sensor_event_data` struct for decoded numeric sensor
+    event data with proper 64-bit reading support
+  - Added `decode_numeric_sensor_event_data()` function for decoding numeric
+    sensor event data with full 64-bit support without truncation. This
+    replaces the legacy `decode_numeric_sensor_data()` which truncates 64-bit
+    values to 32 bits. Uses structured output via `pldm_numeric_sensor_event_data`
+  - Added `PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_64BIT_DATA_LENGTH` constant
+  - Updated `PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH` to 11
+- platform: Added 64-bit effecter support per PLDM Type 2 v1.3.0 (DSP0248)
+  - Added `PLDM_EFFECTER_DATA_SIZE_UINT64` and `PLDM_EFFECTER_DATA_SIZE_SINT64`
+    enum values
+  - Added `PLDM_EFFECTER_DATA_SIZE_MAX` constant
+  - Added `value_u64` and `value_s64` fields to `union_effecter_data_size`
+  - Added 64-bit effecter value encode support in
+    `encode_set_numeric_effecter_value_req()` and
+    `encode_get_numeric_effecter_value_resp()`
+  - Updated `pldm_msgbuf_extract_effecter_value()` and
+    `pldm__msgbuf_extract_effecter_data()` for 64-bit support
+  - Updated `decode_set_numeric_effecter_value_req()` and
+    `decode_get_numeric_effecter_value_resp()` to support 64-bit effecter values
 - platform: Added file descriptor PDR encoding support
   - Added `encode_pldm_platform_file_descriptor_pdr()`
 - utils: Added `pldm_edac_crc32_extend()`
@@ -27,6 +56,14 @@ Change categories:
 
 ### Changed
 
+- platform:
+  - `decode_numeric_sensor_event_data()` uses structured output parameter
+    `pldm_numeric_sensor_event_data` for better encapsulation following modern
+    PLDM library conventions
+  - `decode_set_numeric_effecter_value_req()` signature extended from
+    `effecter_value[4]` to `effecter_value[8]` to support 64-bit effecter values
+  - `decode_get_numeric_effecter_value_resp()` now supports 64-bit effecter
+    values (callers must provide 8-byte buffers)
 - base:
   - Rename symbols:
     - `encode_base_multipart_receive_req()` to
@@ -88,6 +125,9 @@ Change categories:
 
 ### Fixed
 
+- platform: Fixed `encode_get_sensor_reading_resp()` using incorrect
+  `PLDM_EFFECTER_DATA_SIZE_*` constants instead of `PLDM_SENSOR_DATA_SIZE_*` for
+  sensor data size validation
 - dsp: base: Don't extract MultipartReceive resp's CRC once complete
 
 - base: Allocating struct pldm_msg with member initialization in
