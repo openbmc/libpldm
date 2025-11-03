@@ -38,6 +38,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f733da0c_d97f8267",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-11-03T06:35:33Z",
+      "side": 1,
+      "message": "Can we use PLDM_EFFECTER_DATA_SIZE_MAX instead?",
+      "range": {
+        "startLine": 828,
+        "startChar": 26,
+        "endLine": 828,
+        "endChar": 56
+      },
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02a2f89d_101ca08b",
         "filename": "src/dsp/platform.c",
         "patchSetId": 12
@@ -67,6 +90,24 @@
       "side": 1,
       "message": "Since i started updating consumers also (https://gerrit.openbmc.org/c/openbmc/pldm/+/84666 \u0026 https://gerrit.openbmc.org/c/openbmc/pldm/+/84672) CI builds fail\u0027s for those. \n\nI am not fully aware of process and timeline for converting LIBPLDM_ABI_TESTING to LIBPLDM_ABI_STABLE. Can you please point me to more details if possible?\n\nAnyway, for now i changed it.",
       "parentUuid": "02a2f89d_101ca08b",
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cb18c1e_8691fb08",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1849,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-11-03T06:35:33Z",
+      "side": 1,
+      "message": "Usually the APIs should be merged as TESTING first. Then, when there are patches with consumer codes to prove their implementation, we can have a patch to update TESTING -\u003e STABLE and point to the consuming patches in the commit message.\n\nAs you are developing consuming code at the same time so I\u0027m not sure. Maybe we should consult with the maintainer. For CI to pass, you can have a patch in between to do the the STABLE transition and set them all to the same topic for them to be built together.",
+      "parentUuid": "0e4f43c3_ad91b086",
       "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -108,6 +149,30 @@
       "side": 1,
       "message": "With new struct, I renamed it to \" and \"decode_numeric_sensor_event_data\" which is more appropriate. I think state sensors doesn\u0027t fir here.",
       "parentUuid": "10f10f9a_940886ba",
+      "range": {
+        "startLine": 1850,
+        "startChar": 4,
+        "endLine": 1850,
+        "endChar": 33
+      },
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38376957_fea8faa0",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1850,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-11-03T06:35:33Z",
+      "side": 1,
+      "message": "Numeric Sensor State is the sensor event class name for this type of sensor event. You can see that there\u0027s a struct named `pldm_sensor_event_numeric_sensor_state`. So maybe this can be `decode_sensor_event_numeric_sensor_state_data()` as there\u0027s no such event named `numeric_sensor event` in the spec.\n\nHowever, I don\u0027t know what the name of the struct your are adding should be as the name of the one you are replacing is already good.",
+      "parentUuid": "e849985f_bdf23656",
       "range": {
         "startLine": 1850,
         "startChar": 4,
@@ -202,6 +267,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4a1b849_18ba401a",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2116,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-11-03T06:35:33Z",
+      "side": 1,
+      "message": "Can we use PLDM_EFFECTER_DATA_SIZE_MAX instead?",
+      "range": {
+        "startLine": 2116,
+        "startChar": 26,
+        "endLine": 2116,
+        "endChar": 56
+      },
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a35582b_1e1d63b9",
         "filename": "src/dsp/platform.c",
         "patchSetId": 12
@@ -231,6 +319,29 @@
       "side": 1,
       "message": "Resolved now.",
       "parentUuid": "6a35582b_1e1d63b9",
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9739f04_4f8a3794",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2604,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2025-11-03T06:35:33Z",
+      "side": 1,
+      "message": "Can we use PLDM_EFFECTER_DATA_SIZE_MAX instead?",
+      "range": {
+        "startLine": 2604,
+        "startChar": 24,
+        "endLine": 2604,
+        "endChar": 52
+      },
       "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
