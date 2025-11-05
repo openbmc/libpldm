@@ -19,8 +19,12 @@ constexpr auto hdrSize = sizeof(pldm_msg_hdr);
 
 TEST(StateEffecterPdr, testIncorrectInvocations)
 {
-    struct state_effecter_possible_states possible_states{};
-    struct pldm_state_effecter_pdr effecter{};
+    struct state_effecter_possible_states possible_states
+    {
+    };
+    struct pldm_state_effecter_pdr effecter
+    {
+    };
     size_t actual_size;
     int rc;
 
@@ -59,8 +63,12 @@ TEST(StateEffecterPdr, testIncorrectInvocations)
 
 TEST(StateEffecterPdr, testReasonableInvocations)
 {
-    struct state_effecter_possible_states possible_states{};
-    struct pldm_state_effecter_pdr effecter{};
+    struct state_effecter_possible_states possible_states
+    {
+    };
+    struct pldm_state_effecter_pdr effecter
+    {
+    };
     size_t actual_size;
     int rc;
 
@@ -5795,8 +5803,13 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeResponse)
         {{EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING, 2, 2},
          {EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING, 2, 3}}};
 
-    struct pldm_get_state_effecter_states_resp resp_fields{
-        PLDM_SUCCESS, comp_effecterCnt, {stateField[0], stateField[1]}};
+    struct pldm_get_state_effecter_states_resp resp_fields
+    {
+        PLDM_SUCCESS, comp_effecterCnt,
+        {
+            stateField[0], stateField[1]
+        }
+    };
 
     auto rc = encode_get_state_effecter_states_resp(
         0, &resp_fields, response, responseMsg.size() - hdrSize);
@@ -5837,7 +5850,12 @@ TEST(GetStateEffecterStates, testEncodeAndDecodeResponse)
 
 TEST(GetStateEffecterStates, testBadEncodeResponse)
 {
-    struct pldm_get_state_effecter_states_resp resp{PLDM_SUCCESS, 0, {}};
+    struct pldm_get_state_effecter_states_resp resp
+    {
+        PLDM_SUCCESS, 0,
+        {
+        }
+    };
     auto rc = decode_get_state_effecter_states_resp(nullptr, 0, &resp);
 
     EXPECT_EQ(rc, -EINVAL);
@@ -6621,3 +6639,38 @@ TEST(EncodePldmFileDescriptorPdr, BadParamBufferTooSmall)
               -EOVERFLOW);
 }
 #endif
+TEST(EncodeGetStateSensorReadings, InvalidNullMsg)
+{
+    bitfield8_t rearm = {0};
+    uint8_t reserved = 0;
+    auto rc = encode_get_state_sensor_readings_req(0, 0x1234, rearm, reserved,
+                                                   nullptr);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(DecodeGetStateSensorReadings, NullCompletionCode)
+{
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + 3> msg{};
+    auto response = reinterpret_cast<pldm_msg*>(msg.data());
+    response->payload[0] = PLDM_SUCCESS;
+    response->payload[1] = 1; // comp_sensor_count
+
+    auto rc = decode_get_state_sensor_readings_resp(
+        response, msg.size() - sizeof(pldm_msg_hdr), nullptr, nullptr, nullptr);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(DecodeGetStateSensorReadings, PayloadTooShort)
+{
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + 1> msg{};
+    auto response = reinterpret_cast<pldm_msg*>(msg.data());
+
+    uint8_t cc = 0;
+    uint8_t count = 0;
+    auto rc = decode_get_state_sensor_readings_resp(
+        response, msg.size() - sizeof(pldm_msg_hdr), &cc, &count, nullptr);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
