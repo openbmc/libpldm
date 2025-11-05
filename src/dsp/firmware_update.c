@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "api.h"
 #include "array.h"
-#include "utils.h"
 #include "compiler.h"
 #include "dsp/base.h"
 #include "msgbuf.h"
+#include "utils.h"
 #include <libpldm/base.h>
 #include <libpldm/compiler.h>
 #include <libpldm/firmware_update.h>
@@ -20,8 +20,7 @@ static_assert(PLDM_FIRMWARE_MAX_STRING <= UINT8_MAX, "too large");
  *
  *  @return true if string type value is valid, false if not
  */
-static bool is_string_type_valid(uint8_t string_type)
-{
+static bool is_string_type_valid(uint8_t string_type) {
 	switch (string_type) {
 	case PLDM_STR_TYPE_UNKNOWN:
 		return false;
@@ -42,8 +41,7 @@ static bool is_string_type_valid(uint8_t string_type)
  *  @return length of the descriptor type if descriptor type is valid else
  *          return 0
  */
-static uint16_t get_descriptor_type_length(uint16_t descriptor_type)
-{
+static uint16_t get_descriptor_type_length(uint16_t descriptor_type) {
 	switch (descriptor_type) {
 	case PLDM_FWUP_PCI_VENDOR_ID:
 		return PLDM_FWUP_PCI_VENDOR_ID_LENGTH;
@@ -84,8 +82,7 @@ static uint16_t get_descriptor_type_length(uint16_t descriptor_type)
 	}
 }
 
-static bool is_downstream_device_update_support_valid(uint8_t resp)
-{
+static bool is_downstream_device_update_support_valid(uint8_t resp) {
 	switch (resp) {
 	case PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_NOT_SUPPORTED:
 	case PLDM_FWUP_DOWNSTREAM_DEVICE_UPDATE_SUPPORTED:
@@ -96,8 +93,7 @@ static bool is_downstream_device_update_support_valid(uint8_t resp)
 }
 
 static bool
-is_transfer_operation_flag_valid(enum transfer_op_flag transfer_op_flag)
-{
+is_transfer_operation_flag_valid(enum transfer_op_flag transfer_op_flag) {
 	switch (transfer_op_flag) {
 	case PLDM_GET_NEXTPART:
 	case PLDM_GET_FIRSTPART:
@@ -111,8 +107,7 @@ is_transfer_operation_flag_valid(enum transfer_op_flag transfer_op_flag)
  *
  *  @return true if ComponentResponse is valid, false if not
  */
-static bool is_comp_resp_valid(uint8_t comp_resp)
-{
+static bool is_comp_resp_valid(uint8_t comp_resp) {
 	switch (comp_resp) {
 	case PLDM_CR_COMP_CAN_BE_UPDATED:
 	case PLDM_CR_COMP_MAY_BE_UPDATEABLE:
@@ -127,8 +122,7 @@ static bool is_comp_resp_valid(uint8_t comp_resp)
  *
  *  @return true if ComponentResponseCode is valid, false if not
  */
-static bool is_comp_resp_code_valid(uint8_t comp_resp_code)
-{
+static bool is_comp_resp_code_valid(uint8_t comp_resp_code) {
 	switch (comp_resp_code) {
 	case PLDM_CRC_COMP_CAN_BE_UPDATED:
 	case PLDM_CRC_COMP_COMPARISON_STAMP_IDENTICAL:
@@ -146,9 +140,9 @@ static bool is_comp_resp_code_valid(uint8_t comp_resp_code)
 
 	default:
 		if (comp_resp_code >=
-			    PLDM_CRC_VENDOR_COMP_RESP_CODE_RANGE_MIN &&
+			PLDM_CRC_VENDOR_COMP_RESP_CODE_RANGE_MIN &&
 		    comp_resp_code <=
-			    PLDM_CRC_VENDOR_COMP_RESP_CODE_RANGE_MAX) {
+			PLDM_CRC_VENDOR_COMP_RESP_CODE_RANGE_MAX) {
 			return true;
 		}
 		return false;
@@ -159,8 +153,7 @@ static bool is_comp_resp_code_valid(uint8_t comp_resp_code)
  *
  *  @return true if ComponentCompatibilityResponse is valid, false if not
  */
-static bool is_comp_compatibility_resp_valid(uint8_t comp_compatibility_resp)
-{
+static bool is_comp_compatibility_resp_valid(uint8_t comp_compatibility_resp) {
 	switch (comp_compatibility_resp) {
 	case PLDM_CCR_COMP_CAN_BE_UPDATED:
 	case PLDM_CCR_COMP_CANNOT_BE_UPDATED:
@@ -176,8 +169,7 @@ static bool is_comp_compatibility_resp_valid(uint8_t comp_compatibility_resp)
  *  @return true if ComponentCompatibilityResponse Code is valid, false if not
  */
 static bool
-is_comp_compatibility_resp_code_valid(uint8_t comp_compatibility_resp_code)
-{
+is_comp_compatibility_resp_code_valid(uint8_t comp_compatibility_resp_code) {
 	switch (comp_compatibility_resp_code) {
 	case PLDM_CCRC_NO_RESPONSE_CODE:
 	case PLDM_CCRC_COMP_COMPARISON_STAMP_IDENTICAL:
@@ -195,9 +187,9 @@ is_comp_compatibility_resp_code_valid(uint8_t comp_compatibility_resp_code)
 
 	default:
 		if (comp_compatibility_resp_code >=
-			    PLDM_CCRC_VENDOR_COMP_RESP_CODE_RANGE_MIN &&
+			PLDM_CCRC_VENDOR_COMP_RESP_CODE_RANGE_MIN &&
 		    comp_compatibility_resp_code <=
-			    PLDM_CCRC_VENDOR_COMP_RESP_CODE_RANGE_MAX) {
+			PLDM_CCRC_VENDOR_COMP_RESP_CODE_RANGE_MAX) {
 			return true;
 		}
 		return false;
@@ -209,8 +201,7 @@ is_comp_compatibility_resp_code_valid(uint8_t comp_compatibility_resp_code)
  *  @return true if SelfContainedActivationRequest is valid, false if not
  */
 static bool
-is_self_contained_activation_req_valid(bool8_t self_contained_activation_req)
-{
+is_self_contained_activation_req_valid(bool8_t self_contained_activation_req) {
 	switch (self_contained_activation_req) {
 	case PLDM_NOT_ACTIVATE_SELF_CONTAINED_COMPONENTS:
 	case PLDM_ACTIVATE_SELF_CONTAINED_COMPONENTS:
@@ -228,8 +219,7 @@ is_self_contained_activation_req_valid(bool8_t self_contained_activation_req)
  *                     the FD
  *	@return true if state is valid, false if not
  */
-static bool is_state_valid(uint8_t state)
-{
+static bool is_state_valid(uint8_t state) {
 	switch (state) {
 	case PLDM_FD_STATE_IDLE:
 	case PLDM_FD_STATE_LEARN_COMPONENTS:
@@ -252,8 +242,7 @@ static bool is_state_valid(uint8_t state)
  *
  *	@return true if aux state is valid, false if not
  */
-static bool is_aux_state_valid(uint8_t aux_state)
-{
+static bool is_aux_state_valid(uint8_t aux_state) {
 	switch (aux_state) {
 	case PLDM_FD_OPERATION_IN_PROGRESS:
 	case PLDM_FD_OPERATION_SUCCESSFUL:
@@ -272,8 +261,7 @@ static bool is_aux_state_valid(uint8_t aux_state)
  *
  *	@return true if aux state status is valid, false if not
  */
-static bool is_aux_state_status_valid(uint8_t aux_state_status)
-{
+static bool is_aux_state_status_valid(uint8_t aux_state_status) {
 	if (aux_state_status == PLDM_FD_AUX_STATE_IN_PROGRESS_OR_SUCCESS ||
 	    aux_state_status == PLDM_FD_TIMEOUT ||
 	    aux_state_status == PLDM_FD_GENERIC_ERROR ||
@@ -292,8 +280,7 @@ static bool is_aux_state_status_valid(uint8_t aux_state_status)
  *
  *	@return true if reason code is valid, false if not
  */
-static bool is_reason_code_valid(uint8_t reason_code)
-{
+static bool is_reason_code_valid(uint8_t reason_code) {
 	switch (reason_code) {
 	case PLDM_FD_INITIALIZATION:
 	case PLDM_FD_ACTIVATE_FW:
@@ -319,8 +306,7 @@ static bool is_reason_code_valid(uint8_t reason_code)
  *  @return true if non functioning component indication is valid, false if not
  */
 static bool is_non_functioning_component_indication_valid(
-	bool8_t non_functioning_component_indication)
-{
+    bool8_t non_functioning_component_indication) {
 	switch (non_functioning_component_indication) {
 	case PLDM_FWUP_COMPONENTS_FUNCTIONING:
 	case PLDM_FWUP_COMPONENTS_NOT_FUNCTIONING:
@@ -333,59 +319,79 @@ static bool is_non_functioning_component_indication_valid(
 
 #define PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE 36
 LIBPLDM_CC_NONNULL
-static int
-decode_pldm_package_header_info_errno(const void *data, size_t length,
-				      const struct pldm_package_format_pin *pin,
-				      pldm_package_header_information_pad *hdr,
-				      struct pldm_package *pkg)
-{
+static int decode_pldm_package_header_info_errno(
+    const void *data, size_t length, const struct pldm_package_format_pin *pin,
+    pldm_package_header_information_pad *hdr, struct pldm_package *pkg) {
 	static const struct pldm_package_header_format_revision_info {
 		pldm_uuid identifier;
 		size_t magic;
 	} revision_info[1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H] = {
-		[0] = {
-			.identifier = {0},
-			.magic = 0,
+	    [0] =
+		{
+		    .identifier = {0},
+		    .magic = 0,
 		},
-		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H] = {
-			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_0,
-			.magic =
-				LIBPLDM_SIZEAT(struct pldm_package, iter) +
-				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) +
-				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) +
-				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string)
-		},
-		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H] = {
-			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1,
-			.magic =
-				LIBPLDM_SIZEAT(struct pldm_package, iter) +
-				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) +
-				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) +
-				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, package_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_version_string)
-		},
-		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H] = {
-			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2,
-			.magic =
-				LIBPLDM_SIZEAT(struct pldm_package, iter) +
-				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) +
-				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, firmware_device_package_data) +
-				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, package_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_opaque_data)
-		},
-		[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H] = {
-			.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3,
-			.magic =
-				LIBPLDM_SIZEAT(struct pldm_package, iter) +
-				LIBPLDM_SIZEAT(struct pldm__package_header_information, package_version_string) +
-				LIBPLDM_SIZEAT(struct pldm_package_firmware_device_id_record, reference_manifest_data) +
-				LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_downstream_device_id_record, reference_manifest_data) +
-				LIBPLDM_SIZEAT(struct pldm_package_component_image_information, component_opaque_data)
-		},
+	    [PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H] =
+		{.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_0,
+		 .magic =
+		     LIBPLDM_SIZEAT(struct pldm_package, iter) +
+		     LIBPLDM_SIZEAT(struct pldm__package_header_information,
+				    package_version_string) +
+		     LIBPLDM_SIZEAT(
+			 struct pldm_package_firmware_device_id_record,
+			 firmware_device_package_data) +
+		     LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
+		     LIBPLDM_SIZEAT(
+			 struct pldm_package_component_image_information,
+			 component_version_string)},
+	    [PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H] =
+		{.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1,
+		 .magic =
+		     LIBPLDM_SIZEAT(struct pldm_package, iter) +
+		     LIBPLDM_SIZEAT(struct pldm__package_header_information,
+				    package_version_string) +
+		     LIBPLDM_SIZEAT(
+			 struct pldm_package_firmware_device_id_record,
+			 firmware_device_package_data) +
+		     LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
+		     LIBPLDM_SIZEAT(
+			 struct pldm_package_downstream_device_id_record,
+			 package_data) +
+		     LIBPLDM_SIZEAT(
+			 struct pldm_package_component_image_information,
+			 component_version_string)},
+	    [PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H] =
+		{.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2,
+		 .magic =
+		     LIBPLDM_SIZEAT(struct pldm_package, iter) +
+		     LIBPLDM_SIZEAT(struct pldm__package_header_information,
+				    package_version_string) +
+		     LIBPLDM_SIZEAT(
+			 struct pldm_package_firmware_device_id_record,
+			 firmware_device_package_data) +
+		     LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
+		     LIBPLDM_SIZEAT(
+			 struct pldm_package_downstream_device_id_record,
+			 package_data) +
+		     LIBPLDM_SIZEAT(
+			 struct pldm_package_component_image_information,
+			 component_opaque_data)},
+	    [PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H] =
+		{.identifier = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3,
+		 .magic =
+		     LIBPLDM_SIZEAT(struct pldm_package, iter) +
+		     LIBPLDM_SIZEAT(struct pldm__package_header_information,
+				    package_version_string) +
+		     LIBPLDM_SIZEAT(
+			 struct pldm_package_firmware_device_id_record,
+			 reference_manifest_data) +
+		     LIBPLDM_SIZEAT(struct pldm_descriptor, descriptor_data) +
+		     LIBPLDM_SIZEAT(
+			 struct pldm_package_downstream_device_id_record,
+			 reference_manifest_data) +
+		     LIBPLDM_SIZEAT(
+			 struct pldm_package_component_image_information,
+			 component_opaque_data)},
 	};
 
 	const struct pldm_package_header_format_revision_info *info;
@@ -417,7 +423,7 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 		return -ENOTSUP;
 	}
 	static_assert(ARRAY_SIZE(revision_info) ==
-			      1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H,
+			  1 + PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H,
 		      "Mismatched array bounds test");
 
 	info = &revision_info[(size_t)pin->format.revision];
@@ -445,19 +451,19 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	}
 
 	if (memcmp(revision_info[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H]
-			   .identifier,
+		       .identifier,
 		   hdr->package_header_identifier,
 		   sizeof(hdr->package_header_identifier)) != 0 &&
 	    memcmp(revision_info[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H]
-			   .identifier,
+		       .identifier,
 		   hdr->package_header_identifier,
 		   sizeof(hdr->package_header_identifier)) != 0 &&
 	    memcmp(revision_info[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H]
-			   .identifier,
+		       .identifier,
 		   hdr->package_header_identifier,
 		   sizeof(hdr->package_header_identifier)) != 0 &&
 	    memcmp(revision_info[PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H]
-			   .identifier,
+		       .identifier,
 		   hdr->package_header_identifier,
 		   sizeof(hdr->package_header_identifier)) != 0) {
 		return pldm_msgbuf_discard(buf, -ENOTSUP);
@@ -506,30 +512,30 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	}
 
 	rc = pldm_msgbuf_extract_uint8_to_size(
-		buf, hdr->package_version_string.length);
+	    buf, hdr->package_version_string.length);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
 	pldm_msgbuf_span_required(
-		buf, hdr->package_version_string.length,
-		(const void **)&hdr->package_version_string.ptr);
+	    buf, hdr->package_version_string.length,
+	    (const void **)&hdr->package_version_string.ptr);
 
 	if (package_header_size < (PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE + 3 +
 				   checksums * sizeof(uint32_t))) {
 		return pldm_msgbuf_discard(buf, -EOVERFLOW);
 	}
 	package_header_payload_size =
-		package_header_size - (checksums * sizeof(uint32_t));
-	package_header_variable_size = package_header_payload_size -
-				       PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE;
+	    package_header_size - (checksums * sizeof(uint32_t));
+	package_header_variable_size =
+	    package_header_payload_size - PLDM_FWUP_PACKAGE_HEADER_FIXED_SIZE;
 
 	if (package_header_variable_size < hdr->package_version_string.length) {
 		return pldm_msgbuf_discard(buf, -EOVERFLOW);
 	}
 
-	package_header_areas_size = package_header_variable_size -
-				    hdr->package_version_string.length;
+	package_header_areas_size =
+	    package_header_variable_size - hdr->package_version_string.length;
 	rc = pldm_msgbuf_span_required(buf, package_header_areas_size,
 				       (const void **)&pkg->areas.ptr);
 	if (rc) {
@@ -592,13 +598,12 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 
 LIBPLDM_ABI_STABLE
 int decode_pldm_package_header_info(
-	const uint8_t *data, size_t length,
-	struct pldm_package_header_information *package_header_info,
-	struct variable_field *package_version_str)
-{
+    const uint8_t *data, size_t length,
+    struct pldm_package_header_information *package_header_info,
+    struct variable_field *package_version_str) {
 	DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(pin);
 	pldm_package_header_information_pad hdr;
-	struct pldm_package pkg = { 0 };
+	struct pldm_package pkg = {0};
 	int rc;
 
 	if (!data || !package_header_info || !package_version_str) {
@@ -612,27 +617,27 @@ int decode_pldm_package_header_info(
 	}
 
 	static_assert(sizeof(package_header_info->uuid) ==
-			      sizeof(hdr.package_header_identifier),
+			  sizeof(hdr.package_header_identifier),
 		      "UUID field size");
 	memcpy(package_header_info->uuid, hdr.package_header_identifier,
 	       sizeof(hdr.package_header_identifier));
 	package_header_info->package_header_format_version =
-		hdr.package_header_format_revision;
+	    hdr.package_header_format_revision;
 	memcpy(&package_header_info->package_header_size, data + 17,
 	       sizeof(package_header_info->package_header_size));
 	LE16TOH(package_header_info->package_header_size);
 	static_assert(sizeof(package_header_info->package_release_date_time) ==
-			      sizeof(hdr.package_release_date_time),
+			  sizeof(hdr.package_release_date_time),
 		      "TIMESTAMP104 field size");
 	memcpy(package_header_info->package_release_date_time,
 	       hdr.package_release_date_time,
 	       sizeof(hdr.package_release_date_time));
 	package_header_info->component_bitmap_bit_length =
-		hdr.component_bitmap_bit_length;
+	    hdr.component_bitmap_bit_length;
 	package_header_info->package_version_string_type =
-		hdr.package_version_string_type;
+	    hdr.package_version_string_type;
 	package_header_info->package_version_string_length =
-		hdr.package_version_string.length;
+	    hdr.package_version_string.length;
 	*package_version_str = hdr.package_version_string;
 
 	return PLDM_SUCCESS;
@@ -641,8 +646,7 @@ int decode_pldm_package_header_info(
 /* Currently only used for decode_firmware_device_id_record_errno() */
 static int pldm_msgbuf_init_dynamic_uint16(struct pldm_msgbuf_ro *buf,
 					   size_t req, void *data, size_t len,
-					   void **tail_data, size_t *tail_len)
-{
+					   void **tail_data, size_t *tail_len) {
 	const void *dyn_start;
 	size_t dyn_length;
 	int rc;
@@ -652,8 +656,8 @@ static int pldm_msgbuf_init_dynamic_uint16(struct pldm_msgbuf_ro *buf,
 		return rc;
 	}
 	/*
-	 * Extract the record length from the first field, then reinitialise the msgbuf
-	 * after determining that it's safe to do so
+	 * Extract the record length from the first field, then reinitialise the
+	 * msgbuf after determining that it's safe to do so
 	 */
 
 	rc = pldm_msgbuf_extract_uint16_to_size(buf, dyn_length);
@@ -671,14 +675,15 @@ static int pldm_msgbuf_init_dynamic_uint16(struct pldm_msgbuf_ro *buf,
 		return rc;
 	}
 
-	/* Ensure there's no arithmetic funkiness and the span is within buffer bounds */
+	/* Ensure there's no arithmetic funkiness and the span is within buffer
+	 * bounds */
 	rc = pldm_msgbuf_span_required(buf, dyn_length, &dyn_start);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
-	rc = pldm_msgbuf_span_remaining(buf, (const void **)tail_data,
-					tail_len);
+	rc =
+	    pldm_msgbuf_span_remaining(buf, (const void **)tail_data, tail_len);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
@@ -693,10 +698,9 @@ static int pldm_msgbuf_init_dynamic_uint16(struct pldm_msgbuf_ro *buf,
 
 #define PLDM_FWUP_FIRMWARE_DEVICE_ID_RECORD_MIN_SIZE 11
 static int decode_pldm_package_firmware_device_id_record_errno(
-	const pldm_package_header_information_pad *hdr,
-	struct variable_field *field,
-	struct pldm_package_firmware_device_id_record *rec)
-{
+    const pldm_package_header_information_pad *hdr,
+    struct variable_field *field,
+    struct pldm_package_firmware_device_id_record *rec) {
 	size_t firmware_device_package_data_offset;
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	uint16_t record_len = 0;
@@ -707,9 +711,9 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 	}
 
 	rc = pldm_msgbuf_init_dynamic_uint16(
-		buf, PLDM_FWUP_FIRMWARE_DEVICE_ID_RECORD_MIN_SIZE,
-		(void *)field->ptr, field->length, (void **)&field->ptr,
-		&field->length);
+	    buf, PLDM_FWUP_FIRMWARE_DEVICE_ID_RECORD_MIN_SIZE,
+	    (void *)field->ptr, field->length, (void **)&field->ptr,
+	    &field->length);
 	if (rc) {
 		return rc;
 	}
@@ -724,12 +728,12 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 	if (!is_string_type_valid(
-		    rec->component_image_set_version_string_type)) {
+		rec->component_image_set_version_string_type)) {
 		return pldm_msgbuf_discard(buf, -EPROTO);
 	}
 
 	rc = pldm_msgbuf_extract_uint8_to_size(
-		buf, rec->component_image_set_version_string.length);
+	    buf, rec->component_image_set_version_string.length);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
@@ -739,7 +743,7 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 	}
 
 	rc = pldm_msgbuf_extract_uint16_to_size(
-		buf, rec->firmware_device_package_data.length);
+	    buf, rec->firmware_device_package_data.length);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
@@ -747,7 +751,7 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 	if (hdr->package_header_format_revision >=
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
 		rc = pldm_msgbuf_extract_uint32_to_size(
-			buf, rec->reference_manifest_data.length);
+		    buf, rec->reference_manifest_data.length);
 		if (rc) {
 			return pldm_msgbuf_discard(buf, rc);
 		}
@@ -757,30 +761,31 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 
 	assert((hdr->component_bitmap_bit_length & 7) == 0);
 	rc = pldm_msgbuf_span_required(
-		buf, hdr->component_bitmap_bit_length / 8,
-		(const void **)&rec->applicable_components.bitmap.ptr);
+	    buf, hdr->component_bitmap_bit_length / 8,
+	    (const void **)&rec->applicable_components.bitmap.ptr);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 	rec->applicable_components.bitmap.length =
-		hdr->component_bitmap_bit_length / 8;
+	    hdr->component_bitmap_bit_length / 8;
 
 	pldm_msgbuf_span_required(
-		buf, rec->component_image_set_version_string.length,
-		(const void **)&rec->component_image_set_version_string.ptr);
+	    buf, rec->component_image_set_version_string.length,
+	    (const void **)&rec->component_image_set_version_string.ptr);
 
-	/* The total length reserved for `package_data` and `reference_manifest_data` */
+	/* The total length reserved for `package_data` and
+	 * `reference_manifest_data` */
 	firmware_device_package_data_offset =
-		rec->firmware_device_package_data.length +
-		rec->reference_manifest_data.length;
+	    rec->firmware_device_package_data.length +
+	    rec->reference_manifest_data.length;
 
 	pldm_msgbuf_span_until(buf, firmware_device_package_data_offset,
 			       (const void **)&rec->record_descriptors.ptr,
 			       &rec->record_descriptors.length);
 
 	pldm_msgbuf_span_required(
-		buf, rec->firmware_device_package_data.length,
-		(const void **)&rec->firmware_device_package_data.ptr);
+	    buf, rec->firmware_device_package_data.length,
+	    (const void **)&rec->firmware_device_package_data.ptr);
 	if (!rec->firmware_device_package_data.length) {
 		rec->firmware_device_package_data.ptr = NULL;
 	}
@@ -788,8 +793,8 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 	if (hdr->package_header_format_revision >=
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
 		pldm_msgbuf_span_required(
-			buf, rec->reference_manifest_data.length,
-			(const void **)&rec->reference_manifest_data.ptr);
+		    buf, rec->reference_manifest_data.length,
+		    (const void **)&rec->reference_manifest_data.ptr);
 
 	} else {
 		assert(rec->reference_manifest_data.length == 0);
@@ -801,14 +806,12 @@ static int decode_pldm_package_firmware_device_id_record_errno(
 
 LIBPLDM_ABI_STABLE
 int decode_firmware_device_id_record(
-	const uint8_t *data, size_t length,
-	uint16_t component_bitmap_bit_length,
-	struct pldm_firmware_device_id_record *fw_device_id_record,
-	struct variable_field *applicable_components,
-	struct variable_field *comp_image_set_version_str,
-	struct variable_field *record_descriptors,
-	struct variable_field *fw_device_pkg_data)
-{
+    const uint8_t *data, size_t length, uint16_t component_bitmap_bit_length,
+    struct pldm_firmware_device_id_record *fw_device_id_record,
+    struct variable_field *applicable_components,
+    struct variable_field *comp_image_set_version_str,
+    struct variable_field *record_descriptors,
+    struct variable_field *fw_device_pkg_data) {
 	struct pldm_package_firmware_device_id_record rec;
 	pldm_package_header_information_pad hdr;
 	int rc;
@@ -820,11 +823,11 @@ int decode_firmware_device_id_record(
 	}
 
 	hdr.package_header_format_revision =
-		PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H;
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H;
 	hdr.component_bitmap_bit_length = component_bitmap_bit_length;
 
 	rc = decode_pldm_package_firmware_device_id_record_errno(
-		&hdr, &(struct variable_field){ data, length }, &rec);
+	    &hdr, &(struct variable_field){data, length}, &rec);
 	if (rc < 0) {
 		return pldm_xlate_errno(rc);
 	}
@@ -834,13 +837,13 @@ int decode_firmware_device_id_record(
 	LE16TOH(fw_device_id_record->record_length);
 	fw_device_id_record->descriptor_count = rec.descriptor_count;
 	fw_device_id_record->device_update_option_flags =
-		rec.device_update_option_flags;
+	    rec.device_update_option_flags;
 	fw_device_id_record->comp_image_set_version_string_type =
-		rec.component_image_set_version_string_type;
+	    rec.component_image_set_version_string_type;
 	fw_device_id_record->comp_image_set_version_string_length =
-		rec.component_image_set_version_string.length;
+	    rec.component_image_set_version_string.length;
 	fw_device_id_record->fw_device_pkg_data_length =
-		rec.firmware_device_package_data.length;
+	    rec.firmware_device_package_data.length;
 	*applicable_components = rec.applicable_components.bitmap;
 	*comp_image_set_version_str = rec.component_image_set_version_string;
 	*record_descriptors = rec.record_descriptors;
@@ -851,8 +854,7 @@ int decode_firmware_device_id_record(
 
 LIBPLDM_ABI_STABLE
 int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
-				     struct pldm_descriptor *desc)
-{
+				     struct pldm_descriptor *desc) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
@@ -883,9 +885,8 @@ int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
 }
 
 static int decode_descriptor_type_length_value_errno(
-	const void *data, size_t length, uint16_t *descriptor_type,
-	struct variable_field *descriptor_data)
-{
+    const void *data, size_t length, uint16_t *descriptor_type,
+    struct variable_field *descriptor_data) {
 	uint16_t descriptor_length = 0;
 
 	if (data == NULL || descriptor_type == NULL ||
@@ -898,7 +899,7 @@ static int decode_descriptor_type_length_value_errno(
 	}
 
 	struct pldm_descriptor_tlv *entry =
-		(struct pldm_descriptor_tlv *)(data);
+	    (struct pldm_descriptor_tlv *)(data);
 
 	*descriptor_type = le16toh(entry->descriptor_type);
 	descriptor_length = le16toh(entry->descriptor_length);
@@ -921,14 +922,13 @@ static int decode_descriptor_type_length_value_errno(
 }
 
 LIBPLDM_ABI_STABLE
-int decode_descriptor_type_length_value(const uint8_t *data, size_t length,
-					uint16_t *descriptor_type,
-					struct variable_field *descriptor_data)
-{
+int decode_descriptor_type_length_value(
+    const uint8_t *data, size_t length, uint16_t *descriptor_type,
+    struct variable_field *descriptor_data) {
 	int rc;
 
 	rc = decode_descriptor_type_length_value_errno(
-		data, length, descriptor_type, descriptor_data);
+	    data, length, descriptor_type, descriptor_data);
 	if (rc < 0) {
 		return pldm_xlate_errno(rc);
 	}
@@ -937,10 +937,9 @@ int decode_descriptor_type_length_value(const uint8_t *data, size_t length,
 }
 
 static int decode_vendor_defined_descriptor_value_errno(
-	const void *data, size_t length, uint8_t *descriptor_title_str_type,
-	struct variable_field *descriptor_title_str,
-	struct variable_field *descriptor_data)
-{
+    const void *data, size_t length, uint8_t *descriptor_title_str_type,
+    struct variable_field *descriptor_title_str,
+    struct variable_field *descriptor_data) {
 	if (data == NULL || descriptor_title_str_type == NULL ||
 	    descriptor_title_str == NULL || descriptor_data == NULL) {
 		return -EINVAL;
@@ -951,9 +950,9 @@ static int decode_vendor_defined_descriptor_value_errno(
 	}
 
 	struct pldm_vendor_defined_descriptor_title_data *entry =
-		(struct pldm_vendor_defined_descriptor_title_data *)(data);
+	    (struct pldm_vendor_defined_descriptor_title_data *)(data);
 	if (!is_string_type_valid(
-		    entry->vendor_defined_descriptor_title_str_type) ||
+		entry->vendor_defined_descriptor_title_str_type) ||
 	    (entry->vendor_defined_descriptor_title_str_len == 0)) {
 		return -EBADMSG;
 	}
@@ -965,33 +964,31 @@ static int decode_vendor_defined_descriptor_value_errno(
 	}
 
 	*descriptor_title_str_type =
-		entry->vendor_defined_descriptor_title_str_type;
+	    entry->vendor_defined_descriptor_title_str_type;
 	descriptor_title_str->ptr = entry->vendor_defined_descriptor_title_str;
 	descriptor_title_str->length =
-		entry->vendor_defined_descriptor_title_str_len;
+	    entry->vendor_defined_descriptor_title_str_len;
 
 	descriptor_data->ptr =
-		descriptor_title_str->ptr + descriptor_title_str->length;
+	    descriptor_title_str->ptr + descriptor_title_str->length;
 	descriptor_data->length =
-		length -
-		sizeof(entry->vendor_defined_descriptor_title_str_type) -
-		sizeof(entry->vendor_defined_descriptor_title_str_len) -
-		descriptor_title_str->length;
+	    length - sizeof(entry->vendor_defined_descriptor_title_str_type) -
+	    sizeof(entry->vendor_defined_descriptor_title_str_len) -
+	    descriptor_title_str->length;
 
 	return 0;
 }
 
 LIBPLDM_ABI_STABLE
 int decode_vendor_defined_descriptor_value(
-	const uint8_t *data, size_t length, uint8_t *descriptor_title_str_type,
-	struct variable_field *descriptor_title_str,
-	struct variable_field *descriptor_data)
-{
+    const uint8_t *data, size_t length, uint8_t *descriptor_title_str_type,
+    struct variable_field *descriptor_title_str,
+    struct variable_field *descriptor_data) {
 	int rc;
 
 	rc = decode_vendor_defined_descriptor_value_errno(
-		data, length, descriptor_title_str_type, descriptor_title_str,
-		descriptor_data);
+	    data, length, descriptor_title_str_type, descriptor_title_str,
+	    descriptor_data);
 	if (rc < 0) {
 		return pldm_xlate_errno(rc);
 	}
@@ -1000,10 +997,9 @@ int decode_vendor_defined_descriptor_value(
 }
 
 static int decode_pldm_comp_image_info_errno(
-	const void *data, size_t length,
-	struct pldm_component_image_information *pldm_comp_image_info,
-	struct variable_field *comp_version_str)
-{
+    const void *data, size_t length,
+    struct pldm_component_image_information *pldm_comp_image_info,
+    struct variable_field *comp_version_str) {
 	if (data == NULL || pldm_comp_image_info == NULL ||
 	    comp_version_str == NULL) {
 		return -EINVAL;
@@ -1014,7 +1010,7 @@ static int decode_pldm_comp_image_info_errno(
 	}
 
 	struct pldm_component_image_information *data_header =
-		(struct pldm_component_image_information *)(data);
+	    (struct pldm_component_image_information *)(data);
 
 	if (!is_string_type_valid(data_header->comp_version_string_type) ||
 	    (data_header->comp_version_string_length == 0)) {
@@ -1022,31 +1018,31 @@ static int decode_pldm_comp_image_info_errno(
 	}
 
 	if (length < sizeof(struct pldm_component_image_information) +
-			     data_header->comp_version_string_length) {
+			 data_header->comp_version_string_length) {
 		return -EOVERFLOW;
 	}
 
 	pldm_comp_image_info->comp_classification =
-		le16toh(data_header->comp_classification);
+	    le16toh(data_header->comp_classification);
 	pldm_comp_image_info->comp_identifier =
-		le16toh(data_header->comp_identifier);
+	    le16toh(data_header->comp_identifier);
 	pldm_comp_image_info->comp_comparison_stamp =
-		le32toh(data_header->comp_comparison_stamp);
+	    le32toh(data_header->comp_comparison_stamp);
 	pldm_comp_image_info->comp_options.value =
-		le16toh(data_header->comp_options.value);
+	    le16toh(data_header->comp_options.value);
 	pldm_comp_image_info->requested_comp_activation_method.value =
-		le16toh(data_header->requested_comp_activation_method.value);
+	    le16toh(data_header->requested_comp_activation_method.value);
 	pldm_comp_image_info->comp_location_offset =
-		le32toh(data_header->comp_location_offset);
+	    le32toh(data_header->comp_location_offset);
 	pldm_comp_image_info->comp_size = le32toh(data_header->comp_size);
 	pldm_comp_image_info->comp_version_string_type =
-		data_header->comp_version_string_type;
+	    data_header->comp_version_string_type;
 	pldm_comp_image_info->comp_version_string_length =
-		data_header->comp_version_string_length;
+	    data_header->comp_version_string_length;
 
 	if ((pldm_comp_image_info->comp_options.bits.bit1 == false &&
 	     pldm_comp_image_info->comp_comparison_stamp !=
-		     PLDM_FWUP_INVALID_COMPONENT_COMPARISON_TIMESTAMP)) {
+		 PLDM_FWUP_INVALID_COMPONENT_COMPARISON_TIMESTAMP)) {
 		return -EBADMSG;
 	}
 
@@ -1058,21 +1054,20 @@ static int decode_pldm_comp_image_info_errno(
 	comp_version_str->ptr = (const uint8_t *)data +
 				sizeof(struct pldm_component_image_information);
 	comp_version_str->length =
-		pldm_comp_image_info->comp_version_string_length;
+	    pldm_comp_image_info->comp_version_string_length;
 
 	return 0;
 }
 
 LIBPLDM_ABI_STABLE
 int decode_pldm_comp_image_info(
-	const uint8_t *data, size_t length,
-	struct pldm_component_image_information *pldm_comp_image_info,
-	struct variable_field *comp_version_str)
-{
+    const uint8_t *data, size_t length,
+    struct pldm_component_image_information *pldm_comp_image_info,
+    struct variable_field *comp_version_str) {
 	int rc;
 
 	rc = decode_pldm_comp_image_info_errno(
-		data, length, pldm_comp_image_info, comp_version_str);
+	    data, length, pldm_comp_image_info, comp_version_str);
 	if (rc < 0) {
 		return pldm_xlate_errno(rc);
 	}
@@ -1083,8 +1078,7 @@ int decode_pldm_comp_image_info(
 LIBPLDM_ABI_STABLE
 int encode_query_device_identifiers_req(uint8_t instance_id,
 					size_t payload_length,
-					struct pldm_msg *msg)
-{
+					struct pldm_msg *msg) {
 	if (msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -1103,8 +1097,7 @@ int decode_query_device_identifiers_resp(const struct pldm_msg *msg,
 					 uint8_t *completion_code,
 					 uint32_t *device_identifiers_len,
 					 uint8_t *descriptor_count,
-					 uint8_t **descriptor_data)
-{
+					 uint8_t **descriptor_data) {
 	if (msg == NULL || completion_code == NULL ||
 	    device_identifiers_len == NULL || descriptor_count == NULL ||
 	    descriptor_data == NULL) {
@@ -1122,7 +1115,7 @@ int decode_query_device_identifiers_resp(const struct pldm_msg *msg,
 	}
 
 	struct pldm_query_device_identifiers_resp *response =
-		(struct pldm_query_device_identifiers_resp *)msg->payload;
+	    (struct pldm_query_device_identifiers_resp *)msg->payload;
 	*device_identifiers_len = le32toh(response->device_identifiers_len);
 
 	if (*device_identifiers_len < PLDM_FWUP_DEVICE_DESCRIPTOR_MIN_LEN) {
@@ -1131,7 +1124,7 @@ int decode_query_device_identifiers_resp(const struct pldm_msg *msg,
 
 	if (payload_length !=
 	    sizeof(struct pldm_query_device_identifiers_resp) +
-		    *device_identifiers_len) {
+		*device_identifiers_len) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 	*descriptor_count = response->descriptor_count;
@@ -1140,17 +1133,16 @@ int decode_query_device_identifiers_resp(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 	*descriptor_data =
-		(uint8_t *)(msg->payload +
-			    sizeof(struct pldm_query_device_identifiers_resp));
+	    (uint8_t *)(msg->payload +
+			sizeof(struct pldm_query_device_identifiers_resp));
 	return PLDM_SUCCESS;
 }
 
 LIBPLDM_ABI_TESTING
 int encode_query_device_identifiers_resp(
-	uint8_t instance_id, uint8_t descriptor_count,
-	const struct pldm_descriptor *descriptors, struct pldm_msg *msg,
-	size_t *payload_length)
-{
+    uint8_t instance_id, uint8_t descriptor_count,
+    const struct pldm_descriptor *descriptors, struct pldm_msg *msg,
+    size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -1178,7 +1170,7 @@ int encode_query_device_identifiers_resp(
 	for (uint8_t i = 0; i < descriptor_count; i++) {
 		const struct pldm_descriptor *d = &descriptors[i];
 		device_identifiers_len +=
-			2 * sizeof(uint16_t) + d->descriptor_length;
+		    2 * sizeof(uint16_t) + d->descriptor_length;
 	}
 
 	pldm_msgbuf_insert_uint8(buf, PLDM_SUCCESS);
@@ -1193,9 +1185,8 @@ int encode_query_device_identifiers_resp(
 			return pldm_msgbuf_discard(buf, -EINVAL);
 		}
 		rc = pldm_msgbuf_insert_array(
-			buf, d->descriptor_length,
-			(const uint8_t *)d->descriptor_data,
-			d->descriptor_length);
+		    buf, d->descriptor_length,
+		    (const uint8_t *)d->descriptor_data, d->descriptor_length);
 		if (rc) {
 			return pldm_msgbuf_discard(buf, rc);
 		}
@@ -1207,8 +1198,7 @@ int encode_query_device_identifiers_resp(
 LIBPLDM_ABI_STABLE
 int encode_get_firmware_parameters_req(uint8_t instance_id,
 				       size_t payload_length,
-				       struct pldm_msg *msg)
-{
+				       struct pldm_msg *msg) {
 	if (msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -1223,12 +1213,11 @@ int encode_get_firmware_parameters_req(uint8_t instance_id,
 
 LIBPLDM_ABI_STABLE
 int decode_get_firmware_parameters_resp(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_get_firmware_parameters_resp *resp_data,
-	struct variable_field *active_comp_image_set_ver_str,
-	struct variable_field *pending_comp_image_set_ver_str,
-	struct variable_field *comp_parameter_table)
-{
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_get_firmware_parameters_resp *resp_data,
+    struct variable_field *active_comp_image_set_ver_str,
+    struct variable_field *pending_comp_image_set_ver_str,
+    struct variable_field *comp_parameter_table) {
 	if (msg == NULL || resp_data == NULL ||
 	    active_comp_image_set_ver_str == NULL ||
 	    pending_comp_image_set_ver_str == NULL ||
@@ -1246,10 +1235,10 @@ int decode_get_firmware_parameters_resp(
 	}
 
 	struct pldm_get_firmware_parameters_resp *response =
-		(struct pldm_get_firmware_parameters_resp *)msg->payload;
+	    (struct pldm_get_firmware_parameters_resp *)msg->payload;
 
 	if (!is_string_type_valid(
-		    response->active_comp_image_set_ver_str_type) ||
+		response->active_comp_image_set_ver_str_type) ||
 	    (response->active_comp_image_set_ver_str_len == 0)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -1261,44 +1250,44 @@ int decode_get_firmware_parameters_resp(
 		}
 	} else {
 		if (!is_string_type_valid(
-			    response->pending_comp_image_set_ver_str_type)) {
+			response->pending_comp_image_set_ver_str_type)) {
 			return PLDM_ERROR_INVALID_DATA;
 		}
 	}
 
 	size_t partial_response_length =
-		sizeof(struct pldm_get_firmware_parameters_resp) +
-		response->active_comp_image_set_ver_str_len +
-		response->pending_comp_image_set_ver_str_len;
+	    sizeof(struct pldm_get_firmware_parameters_resp) +
+	    response->active_comp_image_set_ver_str_len +
+	    response->pending_comp_image_set_ver_str_len;
 
 	if (payload_length < partial_response_length) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
 	resp_data->capabilities_during_update.value =
-		le32toh(response->capabilities_during_update.value);
+	    le32toh(response->capabilities_during_update.value);
 	resp_data->comp_count = le16toh(response->comp_count);
 	resp_data->active_comp_image_set_ver_str_type =
-		response->active_comp_image_set_ver_str_type;
+	    response->active_comp_image_set_ver_str_type;
 	resp_data->active_comp_image_set_ver_str_len =
-		response->active_comp_image_set_ver_str_len;
+	    response->active_comp_image_set_ver_str_len;
 	resp_data->pending_comp_image_set_ver_str_type =
-		response->pending_comp_image_set_ver_str_type;
+	    response->pending_comp_image_set_ver_str_type;
 	resp_data->pending_comp_image_set_ver_str_len =
-		response->pending_comp_image_set_ver_str_len;
+	    response->pending_comp_image_set_ver_str_len;
 
 	active_comp_image_set_ver_str->ptr =
-		msg->payload + sizeof(struct pldm_get_firmware_parameters_resp);
+	    msg->payload + sizeof(struct pldm_get_firmware_parameters_resp);
 	active_comp_image_set_ver_str->length =
-		resp_data->active_comp_image_set_ver_str_len;
+	    resp_data->active_comp_image_set_ver_str_len;
 
 	if (resp_data->pending_comp_image_set_ver_str_len != 0) {
 		pending_comp_image_set_ver_str->ptr =
-			msg->payload +
-			sizeof(struct pldm_get_firmware_parameters_resp) +
-			resp_data->active_comp_image_set_ver_str_len;
+		    msg->payload +
+		    sizeof(struct pldm_get_firmware_parameters_resp) +
+		    resp_data->active_comp_image_set_ver_str_len;
 		pending_comp_image_set_ver_str->length =
-			resp_data->pending_comp_image_set_ver_str_len;
+		    resp_data->pending_comp_image_set_ver_str_len;
 	} else {
 		pending_comp_image_set_ver_str->ptr = NULL;
 		pending_comp_image_set_ver_str->length = 0;
@@ -1306,12 +1295,12 @@ int decode_get_firmware_parameters_resp(
 
 	if (payload_length > partial_response_length && resp_data->comp_count) {
 		comp_parameter_table->ptr =
-			msg->payload +
-			sizeof(struct pldm_get_firmware_parameters_resp) +
-			resp_data->active_comp_image_set_ver_str_len +
-			resp_data->pending_comp_image_set_ver_str_len;
+		    msg->payload +
+		    sizeof(struct pldm_get_firmware_parameters_resp) +
+		    resp_data->active_comp_image_set_ver_str_len +
+		    resp_data->pending_comp_image_set_ver_str_len;
 		comp_parameter_table->length =
-			payload_length - partial_response_length;
+		    payload_length - partial_response_length;
 	} else {
 		comp_parameter_table->ptr = NULL;
 		comp_parameter_table->length = 0;
@@ -1322,10 +1311,9 @@ int decode_get_firmware_parameters_resp(
 
 LIBPLDM_ABI_TESTING
 int encode_get_firmware_parameters_resp(
-	uint8_t instance_id,
-	const struct pldm_get_firmware_parameters_resp_full *resp_data,
-	struct pldm_msg *msg, size_t *payload_length)
-{
+    uint8_t instance_id,
+    const struct pldm_get_firmware_parameters_resp_full *resp_data,
+    struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -1357,16 +1345,16 @@ int encode_get_firmware_parameters_resp(
 			   resp_data->pending_comp_image_set_ver_str.str_len);
 	/* String data appended */
 	rc = pldm_msgbuf_insert_array(
-		buf, resp_data->active_comp_image_set_ver_str.str_len,
-		resp_data->active_comp_image_set_ver_str.str_data,
-		resp_data->active_comp_image_set_ver_str.str_len);
+	    buf, resp_data->active_comp_image_set_ver_str.str_len,
+	    resp_data->active_comp_image_set_ver_str.str_data,
+	    resp_data->active_comp_image_set_ver_str.str_len);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 	rc = pldm_msgbuf_insert_array(
-		buf, resp_data->pending_comp_image_set_ver_str.str_len,
-		resp_data->pending_comp_image_set_ver_str.str_data,
-		resp_data->pending_comp_image_set_ver_str.str_len);
+	    buf, resp_data->pending_comp_image_set_ver_str.str_len,
+	    resp_data->pending_comp_image_set_ver_str.str_data,
+	    resp_data->pending_comp_image_set_ver_str.str_len);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
@@ -1379,9 +1367,8 @@ int encode_get_firmware_parameters_resp(
 
 LIBPLDM_ABI_TESTING
 int encode_get_firmware_parameters_resp_comp_entry(
-	const struct pldm_component_parameter_entry_full *comp,
-	uint8_t *payload, size_t *payload_length)
-{
+    const struct pldm_component_parameter_entry_full *comp, uint8_t *payload,
+    size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -1439,11 +1426,10 @@ int encode_get_firmware_parameters_resp_comp_entry(
 
 LIBPLDM_ABI_STABLE
 int decode_get_firmware_parameters_resp_comp_entry(
-	const uint8_t *data, size_t length,
-	struct pldm_component_parameter_entry *component_data,
-	struct variable_field *active_comp_ver_str,
-	struct variable_field *pending_comp_ver_str)
-{
+    const uint8_t *data, size_t length,
+    struct pldm_component_parameter_entry *component_data,
+    struct variable_field *active_comp_ver_str,
+    struct variable_field *pending_comp_ver_str) {
 	if (data == NULL || component_data == NULL ||
 	    active_comp_ver_str == NULL || pending_comp_ver_str == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -1454,7 +1440,7 @@ int decode_get_firmware_parameters_resp_comp_entry(
 	}
 
 	struct pldm_component_parameter_entry *entry =
-		(struct pldm_component_parameter_entry *)(data);
+	    (struct pldm_component_parameter_entry *)(data);
 
 	size_t entry_length = sizeof(struct pldm_component_parameter_entry) +
 			      entry->active_comp_ver_str_len +
@@ -1465,36 +1451,36 @@ int decode_get_firmware_parameters_resp_comp_entry(
 	}
 
 	component_data->comp_classification =
-		le16toh(entry->comp_classification);
+	    le16toh(entry->comp_classification);
 	component_data->comp_identifier = le16toh(entry->comp_identifier);
 	component_data->comp_classification_index =
-		entry->comp_classification_index;
+	    entry->comp_classification_index;
 	component_data->active_comp_comparison_stamp =
-		le32toh(entry->active_comp_comparison_stamp);
+	    le32toh(entry->active_comp_comparison_stamp);
 	component_data->active_comp_ver_str_type =
-		entry->active_comp_ver_str_type;
+	    entry->active_comp_ver_str_type;
 	component_data->active_comp_ver_str_len =
-		entry->active_comp_ver_str_len;
+	    entry->active_comp_ver_str_len;
 	memcpy(component_data->active_comp_release_date,
 	       entry->active_comp_release_date,
 	       sizeof(entry->active_comp_release_date));
 	component_data->pending_comp_comparison_stamp =
-		le32toh(entry->pending_comp_comparison_stamp);
+	    le32toh(entry->pending_comp_comparison_stamp);
 	component_data->pending_comp_ver_str_type =
-		entry->pending_comp_ver_str_type;
+	    entry->pending_comp_ver_str_type;
 	component_data->pending_comp_ver_str_len =
-		entry->pending_comp_ver_str_len;
+	    entry->pending_comp_ver_str_len;
 	memcpy(component_data->pending_comp_release_date,
 	       entry->pending_comp_release_date,
 	       sizeof(entry->pending_comp_release_date));
 	component_data->comp_activation_methods.value =
-		le16toh(entry->comp_activation_methods.value);
+	    le16toh(entry->comp_activation_methods.value);
 	component_data->capabilities_during_update.value =
-		le32toh(entry->capabilities_during_update.value);
+	    le32toh(entry->capabilities_during_update.value);
 
 	if (entry->active_comp_ver_str_len != 0) {
 		active_comp_ver_str->ptr =
-			data + sizeof(struct pldm_component_parameter_entry);
+		    data + sizeof(struct pldm_component_parameter_entry);
 		active_comp_ver_str->length = entry->active_comp_ver_str_len;
 	} else {
 		active_comp_ver_str->ptr = NULL;
@@ -1503,8 +1489,8 @@ int decode_get_firmware_parameters_resp_comp_entry(
 
 	if (entry->pending_comp_ver_str_len != 0) {
 		pending_comp_ver_str->ptr =
-			data + sizeof(struct pldm_component_parameter_entry) +
-			entry->active_comp_ver_str_len;
+		    data + sizeof(struct pldm_component_parameter_entry) +
+		    entry->active_comp_ver_str_len;
 		pending_comp_ver_str->length = entry->pending_comp_ver_str_len;
 	} else {
 		pending_comp_ver_str->ptr = NULL;
@@ -1515,23 +1501,20 @@ int decode_get_firmware_parameters_resp_comp_entry(
 
 LIBPLDM_ABI_STABLE
 int encode_query_downstream_devices_req(uint8_t instance_id,
-					struct pldm_msg *msg)
-{
+					struct pldm_msg *msg) {
 	if (msg == NULL) {
 		return -EINVAL;
 	}
 
-	return encode_pldm_header_only_errno(PLDM_REQUEST, instance_id,
-					     PLDM_FWUP,
-					     PLDM_QUERY_DOWNSTREAM_DEVICES,
-					     msg);
+	return encode_pldm_header_only_errno(
+	    PLDM_REQUEST, instance_id, PLDM_FWUP, PLDM_QUERY_DOWNSTREAM_DEVICES,
+	    msg);
 }
 
 LIBPLDM_ABI_STABLE
 int decode_query_downstream_devices_resp(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_query_downstream_devices_resp *resp_data)
-{
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_query_downstream_devices_resp *resp_data) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
@@ -1550,7 +1533,8 @@ int decode_query_downstream_devices_resp(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 	if (PLDM_SUCCESS != resp_data->completion_code) {
-		// Return the CC directly without decoding the rest of the payload
+		// Return the CC directly without decoding the rest of the
+		// payload
 		return pldm_msgbuf_complete(buf);
 	}
 
@@ -1565,7 +1549,7 @@ int decode_query_downstream_devices_resp(
 	}
 
 	if (!is_downstream_device_update_support_valid(
-		    resp_data->downstream_device_update_supported)) {
+		resp_data->downstream_device_update_supported)) {
 		return pldm_msgbuf_discard(buf, -EINVAL);
 	}
 
@@ -1578,10 +1562,9 @@ int decode_query_downstream_devices_resp(
 
 LIBPLDM_ABI_STABLE
 int encode_query_downstream_identifiers_req(
-	uint8_t instance_id,
-	const struct pldm_query_downstream_identifiers_req *params_req,
-	struct pldm_msg *msg, size_t payload_length)
-{
+    uint8_t instance_id,
+    const struct pldm_query_downstream_identifiers_req *params_req,
+    struct pldm_msg *msg, size_t payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -1590,12 +1573,11 @@ int encode_query_downstream_identifiers_req(
 	}
 
 	if (!is_transfer_operation_flag_valid(
-		    (enum transfer_op_flag)
-			    params_req->transfer_operation_flag)) {
+		(enum transfer_op_flag)params_req->transfer_operation_flag)) {
 		return -EINVAL;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FWUP;
@@ -1621,10 +1603,9 @@ int encode_query_downstream_identifiers_req(
 
 LIBPLDM_ABI_STABLE
 int decode_query_downstream_identifiers_resp(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_query_downstream_identifiers_resp *resp_data,
-	struct pldm_downstream_device_iter *iter)
-{
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_query_downstream_identifiers_resp *resp_data,
+    struct pldm_downstream_device_iter *iter) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	const void *remaining = NULL;
 	int rc = 0;
@@ -1678,9 +1659,8 @@ int decode_query_downstream_identifiers_resp(
 
 LIBPLDM_ABI_STABLE
 int decode_pldm_downstream_device_from_iter(
-	struct pldm_downstream_device_iter *iter,
-	struct pldm_downstream_device *dev)
-{
+    struct pldm_downstream_device_iter *iter,
+    struct pldm_downstream_device *dev) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
@@ -1688,8 +1668,8 @@ int decode_pldm_downstream_device_from_iter(
 		return -EINVAL;
 	}
 
-	rc = pldm_msgbuf_init_errno(buf, 3, iter->field.ptr,
-				    iter->field.length);
+	rc =
+	    pldm_msgbuf_init_errno(buf, 3, iter->field.ptr, iter->field.length);
 	if (rc) {
 		return rc;
 	}
@@ -1704,10 +1684,9 @@ int decode_pldm_downstream_device_from_iter(
 
 LIBPLDM_ABI_STABLE
 int encode_get_downstream_firmware_parameters_req(
-	uint8_t instance_id,
-	const struct pldm_get_downstream_firmware_parameters_req *params_req,
-	struct pldm_msg *msg, size_t payload_length)
-{
+    uint8_t instance_id,
+    const struct pldm_get_downstream_firmware_parameters_req *params_req,
+    struct pldm_msg *msg, size_t payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -1716,12 +1695,11 @@ int encode_get_downstream_firmware_parameters_req(
 	}
 
 	if (!is_transfer_operation_flag_valid(
-		    (enum transfer_op_flag)
-			    params_req->transfer_operation_flag)) {
+		(enum transfer_op_flag)params_req->transfer_operation_flag)) {
 		return -EBADMSG;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FWUP;
@@ -1732,8 +1710,8 @@ int encode_get_downstream_firmware_parameters_req(
 	}
 
 	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES,
-		msg->payload, payload_length);
+	    buf, PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES,
+	    msg->payload, payload_length);
 	if (rc < 0) {
 		return rc;
 	}
@@ -1747,10 +1725,9 @@ int encode_get_downstream_firmware_parameters_req(
 
 LIBPLDM_ABI_STABLE
 int decode_get_downstream_firmware_parameters_resp(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_get_downstream_firmware_parameters_resp *resp_data,
-	struct pldm_downstream_device_parameters_iter *iter)
-{
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_get_downstream_firmware_parameters_resp *resp_data,
+    struct pldm_downstream_device_parameters_iter *iter) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	const void *remaining = NULL;
 	size_t length;
@@ -1804,9 +1781,8 @@ int decode_get_downstream_firmware_parameters_resp(
 
 LIBPLDM_ABI_STABLE
 int decode_pldm_downstream_device_parameters_entry_from_iter(
-	struct pldm_downstream_device_parameters_iter *iter,
-	struct pldm_downstream_device_parameters_entry *entry)
-{
+    struct pldm_downstream_device_parameters_iter *iter,
+    struct pldm_downstream_device_parameters_entry *entry) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	const void *comp_ver_str;
 	const void *cursor;
@@ -1818,8 +1794,8 @@ int decode_pldm_downstream_device_parameters_entry_from_iter(
 	}
 
 	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN,
-		iter->field.ptr, iter->field.length);
+	    buf, PLDM_DOWNSTREAM_DEVICE_PARAMETERS_ENTRY_MIN_LEN,
+	    iter->field.ptr, iter->field.length);
 	if (rc < 0) {
 		return rc;
 	}
@@ -1831,17 +1807,17 @@ int decode_pldm_downstream_device_parameters_entry_from_iter(
 	if (rc < 0) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
-	rc = pldm_msgbuf_extract_array(buf,
-				       PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN,
-				       entry->active_comp_release_date,
-				       sizeof(entry->active_comp_release_date));
+	rc =
+	    pldm_msgbuf_extract_array(buf, PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN,
+				      entry->active_comp_release_date,
+				      sizeof(entry->active_comp_release_date));
 	if (rc < 0) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
 	// Fill the last byte with NULL character
 	entry->active_comp_release_date[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN] =
-		'\0';
+	    '\0';
 
 	pldm_msgbuf_extract(buf, entry->pending_comp_comparison_stamp);
 	pldm_msgbuf_extract(buf, entry->pending_comp_ver_str_type);
@@ -1850,17 +1826,17 @@ int decode_pldm_downstream_device_parameters_entry_from_iter(
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
-	rc = pldm_msgbuf_extract_array(
-		buf, PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN,
-		entry->pending_comp_release_date,
-		sizeof(entry->pending_comp_release_date));
+	rc =
+	    pldm_msgbuf_extract_array(buf, PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN,
+				      entry->pending_comp_release_date,
+				      sizeof(entry->pending_comp_release_date));
 	if (rc < 0) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
 	// Fill the last byte with NULL character
 	entry->pending_comp_release_date[PLDM_FWUP_COMPONENT_RELEASE_DATA_LEN] =
-		'\0';
+	    '\0';
 
 	pldm_msgbuf_extract(buf, entry->comp_activation_methods.value);
 	pldm_msgbuf_extract(buf, entry->capabilities_during_update.value);
@@ -1892,24 +1868,23 @@ int decode_pldm_downstream_device_parameters_entry_from_iter(
 
 LIBPLDM_ABI_TESTING
 int encode_request_downstream_device_update_req(
-	uint8_t instance_id,
-	const struct pldm_request_downstream_device_update_req *req_data,
-	struct pldm_msg *msg, size_t *payload_length)
-{
+    uint8_t instance_id,
+    const struct pldm_request_downstream_device_update_req *req_data,
+    struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
 	if (!req_data || !msg || !payload_length ||
 	    req_data->maximum_downstream_device_transfer_size <
-		    PLDM_FWUP_BASELINE_TRANSFER_SIZE ||
+		PLDM_FWUP_BASELINE_TRANSFER_SIZE ||
 	    req_data->maximum_outstanding_transfer_requests <
-		    PLDM_FWUP_MIN_OUTSTANDING_REQ) {
+		PLDM_FWUP_MIN_OUTSTANDING_REQ) {
 		return -EINVAL;
 	}
 
 	rc = encode_pldm_header_only_errno(
-		PLDM_REQUEST, instance_id, PLDM_FWUP,
-		PLDM_REQUEST_DOWNSTREAM_DEVICE_UPDATE, msg);
+	    PLDM_REQUEST, instance_id, PLDM_FWUP,
+	    PLDM_REQUEST_DOWNSTREAM_DEVICE_UPDATE, msg);
 	if (rc) {
 		return rc;
 	}
@@ -1933,9 +1908,8 @@ int encode_request_downstream_device_update_req(
 
 LIBPLDM_ABI_TESTING
 int decode_request_downstream_device_update_req(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_request_downstream_device_update_req *req)
-{
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_request_downstream_device_update_req *req) {
 	int rc;
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 
@@ -1959,10 +1933,9 @@ int decode_request_downstream_device_update_req(
 
 LIBPLDM_ABI_TESTING
 int encode_request_downstream_device_update_resp(
-	uint8_t instance_id,
-	const struct pldm_request_downstream_device_update_resp *resp_data,
-	struct pldm_msg *msg, size_t *payload_length)
-{
+    uint8_t instance_id,
+    const struct pldm_request_downstream_device_update_resp *resp_data,
+    struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -1971,15 +1944,15 @@ int encode_request_downstream_device_update_resp(
 	}
 
 	rc = encode_pldm_header_only_errno(
-		PLDM_RESPONSE, instance_id, PLDM_FWUP,
-		PLDM_REQUEST_DOWNSTREAM_DEVICE_UPDATE, msg);
+	    PLDM_RESPONSE, instance_id, PLDM_FWUP,
+	    PLDM_REQUEST_DOWNSTREAM_DEVICE_UPDATE, msg);
 	if (rc) {
 		return rc;
 	}
 
 	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES, msg->payload,
-		*payload_length);
+	    buf, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES, msg->payload,
+	    *payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -1987,7 +1960,7 @@ int encode_request_downstream_device_update_resp(
 	pldm_msgbuf_insert(buf, resp_data->completion_code);
 	pldm_msgbuf_insert(buf, resp_data->downstream_device_meta_data_length);
 	pldm_msgbuf_insert(
-		buf, resp_data->downstream_device_will_send_get_package_data);
+	    buf, resp_data->downstream_device_will_send_get_package_data);
 	pldm_msgbuf_insert(buf,
 			   resp_data->get_package_data_maximum_transfer_size);
 
@@ -1996,9 +1969,8 @@ int encode_request_downstream_device_update_resp(
 
 LIBPLDM_ABI_TESTING
 int decode_request_downstream_device_update_resp(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_request_downstream_device_update_resp *resp_data)
-{
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_request_downstream_device_update_resp *resp_data) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
@@ -2014,8 +1986,8 @@ int decode_request_downstream_device_update_resp(
 	}
 
 	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES, msg->payload,
-		payload_length);
+	    buf, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES, msg->payload,
+	    payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -2023,7 +1995,7 @@ int decode_request_downstream_device_update_resp(
 	pldm_msgbuf_extract(buf, resp_data->completion_code);
 	pldm_msgbuf_extract(buf, resp_data->downstream_device_meta_data_length);
 	pldm_msgbuf_extract(
-		buf, resp_data->downstream_device_will_send_get_package_data);
+	    buf, resp_data->downstream_device_will_send_get_package_data);
 	pldm_msgbuf_extract(buf,
 			    resp_data->get_package_data_maximum_transfer_size);
 
@@ -2038,15 +2010,14 @@ int encode_request_update_req(uint8_t instance_id, uint32_t max_transfer_size,
 			      uint8_t comp_image_set_ver_str_type,
 			      uint8_t comp_image_set_ver_str_len,
 			      const struct variable_field *comp_img_set_ver_str,
-			      struct pldm_msg *msg, size_t payload_length)
-{
+			      struct pldm_msg *msg, size_t payload_length) {
 	if (comp_img_set_ver_str == NULL || comp_img_set_ver_str->ptr == NULL ||
 	    msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
 	if (payload_length != sizeof(struct pldm_request_update_req) +
-				      comp_img_set_ver_str->length) {
+				  comp_img_set_ver_str->length) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -2064,7 +2035,7 @@ int encode_request_update_req(uint8_t instance_id, uint32_t max_transfer_size,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FWUP;
@@ -2075,7 +2046,7 @@ int encode_request_update_req(uint8_t instance_id, uint32_t max_transfer_size,
 	}
 
 	struct pldm_request_update_req *request =
-		(struct pldm_request_update_req *)msg->payload;
+	    (struct pldm_request_update_req *)msg->payload;
 
 	request->max_transfer_size = htole32(max_transfer_size);
 	request->num_of_comp = htole16(num_of_comp);
@@ -2092,8 +2063,7 @@ int encode_request_update_req(uint8_t instance_id, uint32_t max_transfer_size,
 
 LIBPLDM_ABI_TESTING
 int decode_request_update_req(const struct pldm_msg *msg, size_t payload_length,
-			      struct pldm_request_update_req_full *req)
-{
+			      struct pldm_request_update_req_full *req) {
 	int rc;
 	uint8_t t;
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
@@ -2138,8 +2108,7 @@ LIBPLDM_ABI_STABLE
 int decode_request_update_resp(const struct pldm_msg *msg,
 			       size_t payload_length, uint8_t *completion_code,
 			       uint16_t *fd_meta_data_len,
-			       uint8_t *fd_will_send_pkg_data)
-{
+			       uint8_t *fd_will_send_pkg_data) {
 	if (msg == NULL || completion_code == NULL ||
 	    fd_meta_data_len == NULL || fd_will_send_pkg_data == NULL ||
 	    !payload_length) {
@@ -2156,7 +2125,7 @@ int decode_request_update_resp(const struct pldm_msg *msg,
 	}
 
 	struct pldm_request_update_resp *response =
-		(struct pldm_request_update_resp *)msg->payload;
+	    (struct pldm_request_update_resp *)msg->payload;
 
 	*fd_meta_data_len = le16toh(response->fd_meta_data_len);
 	*fd_will_send_pkg_data = response->fd_will_send_pkg_data;
@@ -2167,8 +2136,7 @@ int decode_request_update_resp(const struct pldm_msg *msg,
 LIBPLDM_ABI_TESTING
 int encode_request_update_resp(uint8_t instance_id,
 			       const struct pldm_request_update_resp *resp_data,
-			       struct pldm_msg *msg, size_t *payload_length)
-{
+			       struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -2177,10 +2145,10 @@ int encode_request_update_resp(uint8_t instance_id,
 	}
 
 	struct pldm_header_info header = {
-		.instance = instance_id,
-		.msg_type = PLDM_RESPONSE,
-		.pldm_type = PLDM_FWUP,
-		.command = PLDM_REQUEST_UPDATE,
+	    .instance = instance_id,
+	    .msg_type = PLDM_RESPONSE,
+	    .pldm_type = PLDM_FWUP,
+	    .command = PLDM_REQUEST_UPDATE,
 	};
 	rc = pack_pldm_header(&header, &(msg->hdr));
 	if (rc) {
@@ -2202,22 +2170,18 @@ int encode_request_update_resp(uint8_t instance_id,
 }
 
 LIBPLDM_ABI_STABLE
-int encode_pass_component_table_req(uint8_t instance_id, uint8_t transfer_flag,
-				    uint16_t comp_classification,
-				    uint16_t comp_identifier,
-				    uint8_t comp_classification_index,
-				    uint32_t comp_comparison_stamp,
-				    uint8_t comp_ver_str_type,
-				    uint8_t comp_ver_str_len,
-				    const struct variable_field *comp_ver_str,
-				    struct pldm_msg *msg, size_t payload_length)
-{
+int encode_pass_component_table_req(
+    uint8_t instance_id, uint8_t transfer_flag, uint16_t comp_classification,
+    uint16_t comp_identifier, uint8_t comp_classification_index,
+    uint32_t comp_comparison_stamp, uint8_t comp_ver_str_type,
+    uint8_t comp_ver_str_len, const struct variable_field *comp_ver_str,
+    struct pldm_msg *msg, size_t payload_length) {
 	if (comp_ver_str == NULL || comp_ver_str->ptr == NULL || msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
 	if (payload_length != sizeof(struct pldm_pass_component_table_req) +
-				      comp_ver_str->length) {
+				  comp_ver_str->length) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
@@ -2234,7 +2198,7 @@ int encode_pass_component_table_req(uint8_t instance_id, uint8_t transfer_flag,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FWUP;
@@ -2245,7 +2209,7 @@ int encode_pass_component_table_req(uint8_t instance_id, uint8_t transfer_flag,
 	}
 
 	struct pldm_pass_component_table_req *request =
-		(struct pldm_pass_component_table_req *)msg->payload;
+	    (struct pldm_pass_component_table_req *)msg->payload;
 
 	request->transfer_flag = transfer_flag;
 	request->comp_classification = htole16(comp_classification);
@@ -2263,9 +2227,8 @@ int encode_pass_component_table_req(uint8_t instance_id, uint8_t transfer_flag,
 
 LIBPLDM_ABI_TESTING
 int decode_pass_component_table_req(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_pass_component_table_req_full *pcomp)
-{
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_pass_component_table_req_full *pcomp) {
 	int rc;
 	uint8_t t;
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
@@ -2311,8 +2274,7 @@ int decode_pass_component_table_resp(const struct pldm_msg *msg,
 				     const size_t payload_length,
 				     uint8_t *completion_code,
 				     uint8_t *comp_resp,
-				     uint8_t *comp_resp_code)
-{
+				     uint8_t *comp_resp_code) {
 	if (msg == NULL || completion_code == NULL || comp_resp == NULL ||
 	    comp_resp_code == NULL || !payload_length) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -2328,7 +2290,7 @@ int decode_pass_component_table_resp(const struct pldm_msg *msg,
 	}
 
 	struct pldm_pass_component_table_resp *response =
-		(struct pldm_pass_component_table_resp *)msg->payload;
+	    (struct pldm_pass_component_table_resp *)msg->payload;
 
 	if (!is_comp_resp_valid(response->comp_resp)) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -2346,10 +2308,8 @@ int decode_pass_component_table_resp(const struct pldm_msg *msg,
 
 LIBPLDM_ABI_TESTING
 int encode_pass_component_table_resp(
-	uint8_t instance_id,
-	const struct pldm_pass_component_table_resp *resp_data,
-	struct pldm_msg *msg, size_t *payload_length)
-{
+    uint8_t instance_id, const struct pldm_pass_component_table_resp *resp_data,
+    struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -2377,13 +2337,12 @@ int encode_pass_component_table_resp(
 
 LIBPLDM_ABI_STABLE
 int encode_update_component_req(
-	uint8_t instance_id, uint16_t comp_classification,
-	uint16_t comp_identifier, uint8_t comp_classification_index,
-	uint32_t comp_comparison_stamp, uint32_t comp_image_size,
-	bitfield32_t update_option_flags, uint8_t comp_ver_str_type,
-	uint8_t comp_ver_str_len, const struct variable_field *comp_ver_str,
-	struct pldm_msg *msg, size_t payload_length)
-{
+    uint8_t instance_id, uint16_t comp_classification, uint16_t comp_identifier,
+    uint8_t comp_classification_index, uint32_t comp_comparison_stamp,
+    uint32_t comp_image_size, bitfield32_t update_option_flags,
+    uint8_t comp_ver_str_type, uint8_t comp_ver_str_len,
+    const struct variable_field *comp_ver_str, struct pldm_msg *msg,
+    size_t payload_length) {
 	if (comp_ver_str == NULL || comp_ver_str->ptr == NULL || msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -2406,7 +2365,7 @@ int encode_update_component_req(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FWUP;
@@ -2417,7 +2376,7 @@ int encode_update_component_req(
 	}
 
 	struct pldm_update_component_req *request =
-		(struct pldm_update_component_req *)msg->payload;
+	    (struct pldm_update_component_req *)msg->payload;
 
 	request->comp_classification = htole16(comp_classification);
 	request->comp_identifier = htole16(comp_identifier);
@@ -2437,8 +2396,7 @@ int encode_update_component_req(
 LIBPLDM_ABI_TESTING
 int decode_update_component_req(const struct pldm_msg *msg,
 				size_t payload_length,
-				struct pldm_update_component_req_full *up)
-{
+				struct pldm_update_component_req_full *up) {
 	int rc;
 	uint8_t t;
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
@@ -2487,8 +2445,7 @@ int decode_update_component_resp(const struct pldm_msg *msg,
 				 uint8_t *comp_compatibility_resp,
 				 uint8_t *comp_compatibility_resp_code,
 				 bitfield32_t *update_option_flags_enabled,
-				 uint16_t *time_before_req_fw_data)
-{
+				 uint16_t *time_before_req_fw_data) {
 	if (msg == NULL || completion_code == NULL ||
 	    comp_compatibility_resp == NULL ||
 	    comp_compatibility_resp_code == NULL ||
@@ -2507,22 +2464,22 @@ int decode_update_component_resp(const struct pldm_msg *msg,
 	}
 
 	struct pldm_update_component_resp *response =
-		(struct pldm_update_component_resp *)msg->payload;
+	    (struct pldm_update_component_resp *)msg->payload;
 
 	if (!is_comp_compatibility_resp_valid(
-		    response->comp_compatibility_resp)) {
+		response->comp_compatibility_resp)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
 	if (!is_comp_compatibility_resp_code_valid(
-		    response->comp_compatibility_resp_code)) {
+		response->comp_compatibility_resp_code)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
 	*comp_compatibility_resp = response->comp_compatibility_resp;
 	*comp_compatibility_resp_code = response->comp_compatibility_resp_code;
 	update_option_flags_enabled->value =
-		le32toh(response->update_option_flags_enabled.value);
+	    le32toh(response->update_option_flags_enabled.value);
 	*time_before_req_fw_data = le16toh(response->time_before_req_fw_data);
 
 	return PLDM_SUCCESS;
@@ -2530,9 +2487,8 @@ int decode_update_component_resp(const struct pldm_msg *msg,
 
 LIBPLDM_ABI_TESTING
 int encode_update_component_resp(
-	uint8_t instance_id, const struct pldm_update_component_resp *resp_data,
-	struct pldm_msg *msg, size_t *payload_length)
-{
+    uint8_t instance_id, const struct pldm_update_component_resp *resp_data,
+    struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -2563,8 +2519,7 @@ int encode_update_component_resp(
 LIBPLDM_ABI_STABLE
 int decode_request_firmware_data_req(const struct pldm_msg *msg,
 				     size_t payload_length, uint32_t *offset,
-				     uint32_t *length)
-{
+				     uint32_t *length) {
 	if (msg == NULL || offset == NULL || length == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -2572,7 +2527,7 @@ int decode_request_firmware_data_req(const struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 	struct pldm_request_firmware_data_req *request =
-		(struct pldm_request_firmware_data_req *)msg->payload;
+	    (struct pldm_request_firmware_data_req *)msg->payload;
 	*offset = le32toh(request->offset);
 	*length = le32toh(request->length);
 
@@ -2585,10 +2540,9 @@ int decode_request_firmware_data_req(const struct pldm_msg *msg,
 
 LIBPLDM_ABI_TESTING
 int encode_request_firmware_data_req(
-	uint8_t instance_id,
-	const struct pldm_request_firmware_data_req *req_params,
-	struct pldm_msg *msg, size_t *payload_length)
-{
+    uint8_t instance_id,
+    const struct pldm_request_firmware_data_req *req_params,
+    struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -2617,13 +2571,12 @@ LIBPLDM_ABI_STABLE
 int encode_request_firmware_data_resp(uint8_t instance_id,
 				      uint8_t completion_code,
 				      struct pldm_msg *msg,
-				      size_t payload_length)
-{
+				      size_t payload_length) {
 	if (msg == NULL || !payload_length) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_RESPONSE;
 	header.pldm_type = PLDM_FWUP;
@@ -2641,8 +2594,7 @@ int encode_request_firmware_data_resp(uint8_t instance_id,
 LIBPLDM_ABI_STABLE
 int decode_transfer_complete_req(const struct pldm_msg *msg,
 				 size_t payload_length,
-				 uint8_t *transfer_result)
-{
+				 uint8_t *transfer_result) {
 	if (msg == NULL || transfer_result == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -2657,8 +2609,7 @@ int decode_transfer_complete_req(const struct pldm_msg *msg,
 
 LIBPLDM_ABI_TESTING
 int encode_transfer_complete_req(uint8_t instance_id, uint8_t transfer_result,
-				 struct pldm_msg *msg, size_t *payload_length)
-{
+				 struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -2684,8 +2635,7 @@ int encode_transfer_complete_req(uint8_t instance_id, uint8_t transfer_result,
 
 LIBPLDM_ABI_STABLE
 int encode_transfer_complete_resp(uint8_t instance_id, uint8_t completion_code,
-				  struct pldm_msg *msg, size_t payload_length)
-{
+				  struct pldm_msg *msg, size_t payload_length) {
 	if (msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -2694,7 +2644,7 @@ int encode_transfer_complete_resp(uint8_t instance_id, uint8_t completion_code,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_RESPONSE;
 	header.pldm_type = PLDM_FWUP;
@@ -2711,8 +2661,7 @@ int encode_transfer_complete_resp(uint8_t instance_id, uint8_t completion_code,
 
 LIBPLDM_ABI_STABLE
 int decode_verify_complete_req(const struct pldm_msg *msg,
-			       size_t payload_length, uint8_t *verify_result)
-{
+			       size_t payload_length, uint8_t *verify_result) {
 	if (msg == NULL || verify_result == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -2727,8 +2676,7 @@ int decode_verify_complete_req(const struct pldm_msg *msg,
 
 LIBPLDM_ABI_TESTING
 int encode_verify_complete_req(uint8_t instance_id, uint8_t verify_result,
-			       struct pldm_msg *msg, size_t *payload_length)
-{
+			       struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -2754,8 +2702,7 @@ int encode_verify_complete_req(uint8_t instance_id, uint8_t verify_result,
 
 LIBPLDM_ABI_STABLE
 int encode_verify_complete_resp(uint8_t instance_id, uint8_t completion_code,
-				struct pldm_msg *msg, size_t payload_length)
-{
+				struct pldm_msg *msg, size_t payload_length) {
 	if (msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -2764,7 +2711,7 @@ int encode_verify_complete_resp(uint8_t instance_id, uint8_t completion_code,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_RESPONSE;
 	header.pldm_type = PLDM_FWUP;
@@ -2780,10 +2727,9 @@ int encode_verify_complete_resp(uint8_t instance_id, uint8_t completion_code,
 }
 
 LIBPLDM_ABI_STABLE
-int decode_apply_complete_req(const struct pldm_msg *msg, size_t payload_length,
-			      uint8_t *apply_result,
-			      bitfield16_t *comp_activation_methods_modification)
-{
+int decode_apply_complete_req(
+    const struct pldm_msg *msg, size_t payload_length, uint8_t *apply_result,
+    bitfield16_t *comp_activation_methods_modification) {
 	if (msg == NULL || apply_result == NULL ||
 	    comp_activation_methods_modification == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -2794,11 +2740,11 @@ int decode_apply_complete_req(const struct pldm_msg *msg, size_t payload_length,
 	}
 
 	struct pldm_apply_complete_req *request =
-		(struct pldm_apply_complete_req *)msg->payload;
+	    (struct pldm_apply_complete_req *)msg->payload;
 
 	*apply_result = request->apply_result;
 	comp_activation_methods_modification->value =
-		le16toh(request->comp_activation_methods_modification.value);
+	    le16toh(request->comp_activation_methods_modification.value);
 
 	if ((*apply_result != PLDM_FWUP_APPLY_SUCCESS_WITH_ACTIVATION_METHOD) &&
 	    comp_activation_methods_modification->value) {
@@ -2811,8 +2757,7 @@ int decode_apply_complete_req(const struct pldm_msg *msg, size_t payload_length,
 LIBPLDM_ABI_TESTING
 int encode_apply_complete_req(uint8_t instance_id,
 			      const struct pldm_apply_complete_req *req_data,
-			      struct pldm_msg *msg, size_t *payload_length)
-{
+			      struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -2833,15 +2778,14 @@ int encode_apply_complete_req(uint8_t instance_id,
 
 	pldm_msgbuf_insert(buf, req_data->apply_result);
 	pldm_msgbuf_insert(
-		buf, req_data->comp_activation_methods_modification.value);
+	    buf, req_data->comp_activation_methods_modification.value);
 
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
 LIBPLDM_ABI_STABLE
 int encode_apply_complete_resp(uint8_t instance_id, uint8_t completion_code,
-			       struct pldm_msg *msg, size_t payload_length)
-{
+			       struct pldm_msg *msg, size_t payload_length) {
 	if (msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -2850,7 +2794,7 @@ int encode_apply_complete_resp(uint8_t instance_id, uint8_t completion_code,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_RESPONSE;
 	header.pldm_type = PLDM_FWUP;
@@ -2867,8 +2811,7 @@ int encode_apply_complete_resp(uint8_t instance_id, uint8_t completion_code,
 
 LIBPLDM_ABI_TESTING
 int decode_activate_firmware_req(const struct pldm_msg *msg,
-				 size_t payload_length, bool *self_contained)
-{
+				 size_t payload_length, bool *self_contained) {
 	uint8_t self_contained_u8 = 0;
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
@@ -2896,8 +2839,7 @@ int decode_activate_firmware_req(const struct pldm_msg *msg,
 LIBPLDM_ABI_STABLE
 int encode_activate_firmware_req(uint8_t instance_id,
 				 bool8_t self_contained_activation_req,
-				 struct pldm_msg *msg, size_t payload_length)
-{
+				 struct pldm_msg *msg, size_t payload_length) {
 	if (msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -2907,11 +2849,11 @@ int encode_activate_firmware_req(uint8_t instance_id,
 	}
 
 	if (!is_self_contained_activation_req_valid(
-		    self_contained_activation_req)) {
+		self_contained_activation_req)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FWUP;
@@ -2922,7 +2864,7 @@ int encode_activate_firmware_req(uint8_t instance_id,
 	}
 
 	struct pldm_activate_firmware_req *request =
-		(struct pldm_activate_firmware_req *)msg->payload;
+	    (struct pldm_activate_firmware_req *)msg->payload;
 
 	request->self_contained_activation_req = self_contained_activation_req;
 
@@ -2933,8 +2875,7 @@ LIBPLDM_ABI_STABLE
 int decode_activate_firmware_resp(const struct pldm_msg *msg,
 				  size_t payload_length,
 				  uint8_t *completion_code,
-				  uint16_t *estimated_time_activation)
-{
+				  uint16_t *estimated_time_activation) {
 	if (msg == NULL || completion_code == NULL ||
 	    estimated_time_activation == NULL || !payload_length) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -2950,20 +2891,18 @@ int decode_activate_firmware_resp(const struct pldm_msg *msg,
 	}
 
 	struct pldm_activate_firmware_resp *response =
-		(struct pldm_activate_firmware_resp *)msg->payload;
+	    (struct pldm_activate_firmware_resp *)msg->payload;
 
 	*estimated_time_activation =
-		le16toh(response->estimated_time_activation);
+	    le16toh(response->estimated_time_activation);
 
 	return PLDM_SUCCESS;
 }
 
 LIBPLDM_ABI_TESTING
 int encode_activate_firmware_resp(
-	uint8_t instance_id,
-	const struct pldm_activate_firmware_resp *resp_data,
-	struct pldm_msg *msg, size_t *payload_length)
-{
+    uint8_t instance_id, const struct pldm_activate_firmware_resp *resp_data,
+    struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -2990,8 +2929,7 @@ int encode_activate_firmware_resp(
 
 LIBPLDM_ABI_STABLE
 int encode_get_status_req(uint8_t instance_id, struct pldm_msg *msg,
-			  size_t payload_length)
-{
+			  size_t payload_length) {
 	if (msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -3000,7 +2938,7 @@ int encode_get_status_req(uint8_t instance_id, struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FWUP;
@@ -3019,8 +2957,7 @@ int decode_get_status_resp(const struct pldm_msg *msg, size_t payload_length,
 			   uint8_t *previous_state, uint8_t *aux_state,
 			   uint8_t *aux_state_status, uint8_t *progress_percent,
 			   uint8_t *reason_code,
-			   bitfield32_t *update_option_flags_enabled)
-{
+			   bitfield32_t *update_option_flags_enabled) {
 	if (msg == NULL || completion_code == NULL || current_state == NULL ||
 	    previous_state == NULL || aux_state == NULL ||
 	    aux_state_status == NULL || progress_percent == NULL ||
@@ -3038,7 +2975,7 @@ int decode_get_status_resp(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 	struct pldm_get_status_resp *response =
-		(struct pldm_get_status_resp *)msg->payload;
+	    (struct pldm_get_status_resp *)msg->payload;
 
 	if (!is_state_valid(response->current_state)) {
 		return PLDM_ERROR_INVALID_DATA;
@@ -3075,7 +3012,7 @@ int decode_get_status_resp(const struct pldm_msg *msg, size_t payload_length,
 	*progress_percent = response->progress_percent;
 	*reason_code = response->reason_code;
 	update_option_flags_enabled->value =
-		le32toh(response->update_option_flags_enabled.value);
+	    le32toh(response->update_option_flags_enabled.value);
 
 	return PLDM_SUCCESS;
 }
@@ -3083,8 +3020,7 @@ int decode_get_status_resp(const struct pldm_msg *msg, size_t payload_length,
 LIBPLDM_ABI_TESTING
 int encode_get_status_resp(uint8_t instance_id,
 			   const struct pldm_get_status_resp *status,
-			   struct pldm_msg *msg, size_t *payload_length)
-{
+			   struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -3122,8 +3058,7 @@ int encode_get_status_resp(uint8_t instance_id,
 LIBPLDM_ABI_STABLE
 int encode_cancel_update_component_req(uint8_t instance_id,
 				       struct pldm_msg *msg,
-				       size_t payload_length)
-{
+				       size_t payload_length) {
 	if (msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -3132,7 +3067,7 @@ int encode_cancel_update_component_req(uint8_t instance_id,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FWUP;
@@ -3148,8 +3083,7 @@ int encode_cancel_update_component_req(uint8_t instance_id,
 LIBPLDM_ABI_STABLE
 int decode_cancel_update_component_resp(const struct pldm_msg *msg,
 					size_t payload_length,
-					uint8_t *completion_code)
-{
+					uint8_t *completion_code) {
 	if (msg == NULL || completion_code == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -3164,8 +3098,7 @@ int decode_cancel_update_component_resp(const struct pldm_msg *msg,
 
 LIBPLDM_ABI_STABLE
 int encode_cancel_update_req(uint8_t instance_id, struct pldm_msg *msg,
-			     size_t payload_length)
-{
+			     size_t payload_length) {
 	if (msg == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -3174,7 +3107,7 @@ int encode_cancel_update_req(uint8_t instance_id, struct pldm_msg *msg,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FWUP;
@@ -3191,8 +3124,7 @@ LIBPLDM_ABI_STABLE
 int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
 			      uint8_t *completion_code,
 			      bool8_t *non_functioning_component_indication,
-			      bitfield64_t *non_functioning_component_bitmap)
-{
+			      bitfield64_t *non_functioning_component_bitmap) {
 	if (msg == NULL || completion_code == NULL ||
 	    non_functioning_component_indication == NULL ||
 	    non_functioning_component_bitmap == NULL || !payload_length) {
@@ -3208,19 +3140,19 @@ int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 	struct pldm_cancel_update_resp *response =
-		(struct pldm_cancel_update_resp *)msg->payload;
+	    (struct pldm_cancel_update_resp *)msg->payload;
 
 	if (!is_non_functioning_component_indication_valid(
-		    response->non_functioning_component_indication)) {
+		response->non_functioning_component_indication)) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
 	*non_functioning_component_indication =
-		response->non_functioning_component_indication;
+	    response->non_functioning_component_indication;
 
 	if (*non_functioning_component_indication) {
 		non_functioning_component_bitmap->value =
-			le64toh(response->non_functioning_component_bitmap);
+		    le64toh(response->non_functioning_component_bitmap);
 	}
 
 	return PLDM_SUCCESS;
@@ -3229,8 +3161,7 @@ int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
 LIBPLDM_ABI_TESTING
 int encode_cancel_update_resp(uint8_t instance_id,
 			      const struct pldm_cancel_update_resp *resp_data,
-			      struct pldm_msg *msg, size_t *payload_length)
-{
+			      struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -3259,11 +3190,9 @@ int encode_cancel_update_resp(uint8_t instance_id,
 
 LIBPLDM_ABI_STABLE
 int decode_pldm_firmware_update_package(
-	const void *data, size_t length,
-	const struct pldm_package_format_pin *pin,
-	pldm_package_header_information_pad *hdr, struct pldm_package *pkg,
-	uint32_t flags)
-{
+    const void *data, size_t length, const struct pldm_package_format_pin *pin,
+    pldm_package_header_information_pad *hdr, struct pldm_package *pkg,
+    uint32_t flags) {
 	if (!data || !pin || !hdr || !pkg) {
 		return -EINVAL;
 	}
@@ -3277,8 +3206,7 @@ int decode_pldm_firmware_update_package(
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_package_firmware_device_id_record_iter_init(struct pldm_package *pkg)
-{
+int pldm_package_firmware_device_id_record_iter_init(struct pldm_package *pkg) {
 	struct pldm_package_iter *iter;
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
@@ -3310,8 +3238,8 @@ int pldm_package_firmware_device_id_record_iter_init(struct pldm_package *pkg)
 	iter->field = pkg->areas;
 
 	/* Extract the fd record id count */
-	rc = pldm_msgbuf_init_errno(buf, 1, iter->field.ptr,
-				    iter->field.length);
+	rc =
+	    pldm_msgbuf_init_errno(buf, 1, iter->field.ptr, iter->field.length);
 	if (rc) {
 		return rc;
 	}
@@ -3325,9 +3253,8 @@ int pldm_package_firmware_device_id_record_iter_init(struct pldm_package *pkg)
 
 LIBPLDM_ABI_STABLE
 int decode_pldm_package_firmware_device_id_record_from_iter(
-	struct pldm_package *pkg LIBPLDM_CC_UNUSED,
-	struct pldm_package_firmware_device_id_record *rec)
-{
+    struct pldm_package *pkg LIBPLDM_CC_UNUSED,
+    struct pldm_package_firmware_device_id_record *rec) {
 	if (!pkg) {
 		return -EINVAL;
 	}
@@ -3337,12 +3264,12 @@ int decode_pldm_package_firmware_device_id_record_from_iter(
 	}
 
 	return decode_pldm_package_firmware_device_id_record_errno(
-		pkg->hdr, &pkg->iter.field, rec);
+	    pkg->hdr, &pkg->iter.field, rec);
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_package_downstream_device_id_record_iter_init(struct pldm_package *pkg)
-{
+int pldm_package_downstream_device_id_record_iter_init(
+    struct pldm_package *pkg) {
 	struct pldm_package_iter *iter;
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
@@ -3381,8 +3308,8 @@ int pldm_package_downstream_device_id_record_iter_init(struct pldm_package *pkg)
 	 * 1. The pin revision is greater than 1, and
 	 * 2. The package header format revision is 1
 	 *
-	 * We must account for the invocation of this function but present no downstream
-   * devices, as they're not specified.
+	 * We must account for the invocation of this function but present no
+	 * downstream devices, as they're not specified.
 	 */
 	if (pkg->hdr->package_header_format_revision ==
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H) {
@@ -3391,8 +3318,8 @@ int pldm_package_downstream_device_id_record_iter_init(struct pldm_package *pkg)
 	}
 
 	/* Extract the dd record id count */
-	rc = pldm_msgbuf_init_errno(buf, 1, iter->field.ptr,
-				    iter->field.length);
+	rc =
+	    pldm_msgbuf_init_errno(buf, 1, iter->field.ptr, iter->field.length);
 	if (rc) {
 		return rc;
 	}
@@ -3407,9 +3334,8 @@ int pldm_package_downstream_device_id_record_iter_init(struct pldm_package *pkg)
 #define PLDM_FWUP_DOWNSTREAM_DEVICE_ID_RECORD_MIN_SIZE 11
 LIBPLDM_ABI_STABLE
 int decode_pldm_package_downstream_device_id_record_from_iter(
-	struct pldm_package *pkg,
-	struct pldm_package_downstream_device_id_record *rec)
-{
+    struct pldm_package *pkg,
+    struct pldm_package_downstream_device_id_record *rec) {
 	struct pldm_package_iter *iter;
 	size_t package_data_offset;
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
@@ -3433,9 +3359,9 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 	iter = &pkg->iter;
 
 	rc = pldm_msgbuf_init_dynamic_uint16(
-		buf, PLDM_FWUP_DOWNSTREAM_DEVICE_ID_RECORD_MIN_SIZE,
-		(void *)iter->field.ptr, iter->field.length,
-		(void **)&iter->field.ptr, &iter->field.length);
+	    buf, PLDM_FWUP_DOWNSTREAM_DEVICE_ID_RECORD_MIN_SIZE,
+	    (void *)iter->field.ptr, iter->field.length,
+	    (void **)&iter->field.ptr, &iter->field.length);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
@@ -3449,17 +3375,17 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 	}
 
 	rc = pldm_msgbuf_extract(
-		buf, rec->self_contained_activation_min_version_string_type);
+	    buf, rec->self_contained_activation_min_version_string_type);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 	if (!is_string_type_valid(
-		    rec->self_contained_activation_min_version_string_type)) {
+		rec->self_contained_activation_min_version_string_type)) {
 		return pldm_msgbuf_discard(buf, -EPROTO);
 	}
 
 	rc = pldm_msgbuf_extract_uint8_to_size(
-		buf, rec->self_contained_activation_min_version_string.length);
+	    buf, rec->self_contained_activation_min_version_string.length);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
@@ -3472,36 +3398,37 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 	if (pkg->hdr->package_header_format_revision >=
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
 		pldm_msgbuf_extract_uint32_to_size(
-			buf, rec->reference_manifest_data.length);
+		    buf, rec->reference_manifest_data.length);
 	} else {
 		rec->reference_manifest_data.length = 0;
 	}
 
 	assert((pkg->hdr->component_bitmap_bit_length & 7) == 0);
 	rc = pldm_msgbuf_span_required(
-		buf, pkg->hdr->component_bitmap_bit_length / 8,
-		(const void **)&rec->applicable_components.bitmap.ptr);
+	    buf, pkg->hdr->component_bitmap_bit_length / 8,
+	    (const void **)&rec->applicable_components.bitmap.ptr);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 	rec->applicable_components.bitmap.length =
-		pkg->hdr->component_bitmap_bit_length / 8;
+	    pkg->hdr->component_bitmap_bit_length / 8;
 
 	pldm_msgbuf_span_required(
-		buf, rec->self_contained_activation_min_version_string.length,
-		(const void **)&rec
-			->self_contained_activation_min_version_string.ptr);
+	    buf, rec->self_contained_activation_min_version_string.length,
+	    (const void **)&rec->self_contained_activation_min_version_string
+		.ptr);
 	if (rec->update_option_flags.bits.bit0) {
 		pldm_msgbuf_extract(
-			buf,
-			rec->self_contained_activation_min_version_comparison_stamp);
+		    buf,
+		    rec->self_contained_activation_min_version_comparison_stamp);
 	} else {
 		rec->self_contained_activation_min_version_comparison_stamp = 0;
 	}
 
-	/* The total length reserved for `package_data` and `reference_manifest_data` */
+	/* The total length reserved for `package_data` and
+	 * `reference_manifest_data` */
 	package_data_offset =
-		rec->package_data.length + rec->reference_manifest_data.length;
+	    rec->package_data.length + rec->reference_manifest_data.length;
 
 	pldm_msgbuf_span_until(buf, package_data_offset,
 			       (const void **)&rec->record_descriptors.ptr,
@@ -3514,8 +3441,8 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 	if (pkg->hdr->package_header_format_revision >=
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
 		pldm_msgbuf_span_required(
-			buf, rec->reference_manifest_data.length,
-			(const void **)&rec->reference_manifest_data.ptr);
+		    buf, rec->reference_manifest_data.length,
+		    (const void **)&rec->reference_manifest_data.ptr);
 	} else {
 		assert(rec->reference_manifest_data.length == 0);
 		rec->reference_manifest_data.ptr = NULL;
@@ -3525,8 +3452,8 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_package_component_image_information_iter_init(struct pldm_package *pkg)
-{
+int pldm_package_component_image_information_iter_init(
+    struct pldm_package *pkg) {
 	struct pldm_package_iter *iter;
 	uint16_t component_image_count;
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
@@ -3547,9 +3474,9 @@ int pldm_package_component_image_information_iter_init(struct pldm_package *pkg)
 
 	if (pkg->state == PLDM_PACKAGE_PARSE_FIRMWARE_DEVICES) {
 		if (pkg->pin->format.revision !=
-			    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H ||
+			PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H ||
 		    pkg->hdr->package_header_format_revision !=
-			    pkg->pin->format.revision) {
+			pkg->pin->format.revision) {
 			return -EPROTO;
 		}
 	} else if (pkg->state == PLDM_PACKAGE_PARSE_DOWNSTREAM_DEVICES) {
@@ -3567,8 +3494,8 @@ int pldm_package_component_image_information_iter_init(struct pldm_package *pkg)
 	pkg->state = PLDM_PACKAGE_PARSE_COMPONENT_IMAGE_INFORMATION;
 
 	/* Extract the component image count */
-	rc = pldm_msgbuf_init_errno(buf, 1, iter->field.ptr,
-				    iter->field.length);
+	rc =
+	    pldm_msgbuf_init_errno(buf, 1, iter->field.ptr, iter->field.length);
 	if (rc) {
 		return rc;
 	}
@@ -3588,9 +3515,8 @@ int pldm_package_component_image_information_iter_init(struct pldm_package *pkg)
 #define PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_MIN_SIZE 22
 LIBPLDM_ABI_STABLE
 int decode_pldm_package_component_image_information_from_iter(
-	struct pldm_package *pkg,
-	struct pldm_package_component_image_information *info)
-{
+    struct pldm_package *pkg,
+    struct pldm_package_component_image_information *info) {
 	uint32_t component_location_offset = 0;
 	struct pldm_package_iter *iter;
 	uint32_t component_size = 0;
@@ -3611,8 +3537,8 @@ int decode_pldm_package_component_image_information_from_iter(
 	iter = &pkg->iter;
 
 	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_MIN_SIZE,
-		iter->field.ptr, iter->field.length);
+	    buf, PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_MIN_SIZE,
+	    iter->field.ptr, iter->field.length);
 	if (rc) {
 		return rc;
 	}
@@ -3635,26 +3561,26 @@ int decode_pldm_package_component_image_information_from_iter(
 	}
 
 	rc = pldm_msgbuf_extract_uint8_to_size(
-		buf, info->component_version_string.length);
+	    buf, info->component_version_string.length);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 
 	pldm_msgbuf_span_required(
-		buf, info->component_version_string.length,
-		(const void **)&info->component_version_string.ptr);
+	    buf, info->component_version_string.length,
+	    (const void **)&info->component_version_string.ptr);
 
 	/* Supported in package header revision 1.2 (FR03H) and above. */
 	if (pkg->hdr->package_header_format_revision >=
 	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H) {
 		rc = pldm_msgbuf_extract_uint32_to_size(
-			buf, info->component_opaque_data.length);
+		    buf, info->component_opaque_data.length);
 		if (rc) {
 			return pldm_msgbuf_discard(buf, rc);
 		}
 		pldm_msgbuf_span_required(
-			buf, info->component_opaque_data.length,
-			(const void **)&info->component_opaque_data.ptr);
+		    buf, info->component_opaque_data.length,
+		    (const void **)&info->component_opaque_data.ptr);
 	} else {
 		info->component_opaque_data.length = 0;
 	}

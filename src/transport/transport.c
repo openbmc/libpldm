@@ -1,11 +1,11 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#include "compiler.h"
 #include "transport.h"
+#include "compiler.h"
 #include "environ/time.h"
 
-#include <libpldm/transport.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm.h>
+#include <libpldm/transport.h>
 
 #include <errno.h>
 #include <limits.h>
@@ -27,22 +27,21 @@ struct pollfd {
 
 static inline int poll(struct pollfd *fds LIBPLDM_CC_UNUSED,
 		       int nfds LIBPLDM_CC_UNUSED,
-		       int timeout LIBPLDM_CC_UNUSED)
-{
+		       int timeout LIBPLDM_CC_UNUSED) {
 	return 0;
 }
 #endif
 
 LIBPLDM_ABI_STABLE
-int pldm_transport_poll(struct pldm_transport *transport, int timeout)
-{
+int pldm_transport_poll(struct pldm_transport *transport, int timeout) {
 	struct pollfd pollfd;
 	int rc = 0;
 	if (!transport) {
 		return PLDM_REQUESTER_INVALID_SETUP;
 	}
 
-	/* If polling isn't supported then always indicate the transport is ready */
+	/* If polling isn't supported then always indicate the transport is
+	 * ready */
 	if (!transport->init_pollfd) {
 		return 1;
 	}
@@ -65,8 +64,7 @@ LIBPLDM_ABI_STABLE
 pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
 					    pldm_tid_t tid,
 					    const void *pldm_msg,
-					    size_t msg_len)
-{
+					    size_t msg_len) {
 	if (!transport || !pldm_msg) {
 		return PLDM_REQUESTER_INVALID_SETUP;
 	}
@@ -81,14 +79,13 @@ pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
 LIBPLDM_ABI_STABLE
 pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
 					    pldm_tid_t *tid, void **pldm_msg,
-					    size_t *msg_len)
-{
+					    size_t *msg_len) {
 	if (!transport || !msg_len) {
 		return PLDM_REQUESTER_INVALID_SETUP;
 	}
 
 	pldm_requester_rc_t rc =
-		transport->recv(transport, tid, pldm_msg, msg_len);
+	    transport->recv(transport, tid, pldm_msg, msg_len);
 	if (rc != PLDM_REQUESTER_SUCCESS) {
 		return rc;
 	}
@@ -101,23 +98,20 @@ pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
 	return PLDM_REQUESTER_SUCCESS;
 }
 
-static void timespec_to_timeval(const struct timespec *ts, struct timeval *tv)
-{
+static void timespec_to_timeval(const struct timespec *ts, struct timeval *tv) {
 	tv->tv_sec = ts->tv_sec;
 	tv->tv_usec = ts->tv_nsec / 1000;
 }
 
 /* Overflow safety must be upheld before call */
-static long timeval_to_msec(const struct timeval *tv)
-{
+static long timeval_to_msec(const struct timeval *tv) {
 	return tv->tv_sec * 1000 + tv->tv_usec / 1000;
 }
 
 /* If calculations on `tv` don't overflow then operations on derived
  * intervals can't either.
  */
-static bool timeval_validate_for_msec(const struct timeval *tv)
-{
+static bool timeval_validate_for_msec(const struct timeval *tv) {
 	/* Must be a normalised, positive interval */
 	if (tv->tv_sec < 0 || tv->tv_usec < 0 || tv->tv_usec >= 1000000) {
 		return false;
@@ -131,8 +125,7 @@ static bool timeval_validate_for_msec(const struct timeval *tv)
 	return true;
 }
 
-static int clock_gettimeval(clockid_t clockid, struct timeval *tv)
-{
+static int clock_gettimeval(clockid_t clockid, struct timeval *tv) {
 	struct timespec now;
 	int rc;
 
@@ -158,9 +151,8 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 	 * waiting for a response of the requester.
 	 * PT2max = PT3min - 2*PT4max = 4800ms
 	 */
-	static const struct timeval max_response_interval = {
-		.tv_sec = 4, .tv_usec = 800000
-	};
+	static const struct timeval max_response_interval = {.tv_sec = 4,
+							     .tv_usec = 800000};
 	const struct pldm_msg_hdr *req_hdr;
 	struct timeval remaining;
 	pldm_requester_rc_t rc;
@@ -234,7 +226,7 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 		}
 
 		if (src_tid != tid || !pldm_msg_hdr_correlate_response(
-					      pldm_req_msg, *pldm_resp_msg)) {
+					  pldm_req_msg, *pldm_resp_msg)) {
 			free(*pldm_resp_msg);
 			continue;
 		}

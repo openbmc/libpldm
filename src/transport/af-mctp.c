@@ -46,15 +46,13 @@ struct pldm_transport_af_mctp {
 
 LIBPLDM_ABI_STABLE
 struct pldm_transport *
-pldm_transport_af_mctp_core(struct pldm_transport_af_mctp *ctx)
-{
+pldm_transport_af_mctp_core(struct pldm_transport_af_mctp *ctx) {
 	return &ctx->transport;
 }
 
 LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_init_pollfd(struct pldm_transport *t,
-				       struct pollfd *pollfd)
-{
+				       struct pollfd *pollfd) {
 	struct pldm_transport_af_mctp *ctx = transport_to_af_mctp(t);
 	pollfd->fd = ctx->socket;
 	pollfd->events = POLLIN;
@@ -62,8 +60,7 @@ int pldm_transport_af_mctp_init_pollfd(struct pldm_transport *t,
 }
 
 static int pldm_transport_af_mctp_get_eid(struct pldm_transport_af_mctp *ctx,
-					  pldm_tid_t tid, mctp_eid_t *eid)
-{
+					  pldm_tid_t tid, mctp_eid_t *eid) {
 	int i;
 	for (i = 0; i < MCTP_MAX_NUM_EID; i++) {
 		if (ctx->tid_eid_map[i] == tid) {
@@ -76,8 +73,7 @@ static int pldm_transport_af_mctp_get_eid(struct pldm_transport_af_mctp *ctx,
 }
 
 static int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
-					  mctp_eid_t eid, pldm_tid_t *tid)
-{
+					  mctp_eid_t eid, pldm_tid_t *tid) {
 	if (ctx->tid_eid_map[eid] != 0) {
 		*tid = ctx->tid_eid_map[eid];
 		return 0;
@@ -87,8 +83,7 @@ static int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
 
 LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_map_tid(struct pldm_transport_af_mctp *ctx,
-				   pldm_tid_t tid, mctp_eid_t eid)
-{
+				   pldm_tid_t tid, mctp_eid_t eid) {
 	ctx->tid_eid_map[eid] = tid;
 
 	return 0;
@@ -97,8 +92,7 @@ int pldm_transport_af_mctp_map_tid(struct pldm_transport_af_mctp *ctx,
 LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
 				     LIBPLDM_CC_UNUSED pldm_tid_t tid,
-				     mctp_eid_t eid)
-{
+				     mctp_eid_t eid) {
 	ctx->tid_eid_map[eid] = 0;
 
 	return 0;
@@ -107,10 +101,9 @@ int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
 static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
 						       pldm_tid_t *tid,
 						       void **pldm_msg,
-						       size_t *msg_len)
-{
+						       size_t *msg_len) {
 	struct pldm_transport_af_mctp *af_mctp = transport_to_af_mctp(t);
-	struct sockaddr_mctp addr = { 0 };
+	struct sockaddr_mctp addr = {0};
 	socklen_t addrlen = sizeof(addr);
 	struct pldm_msg_hdr *hdr;
 	pldm_requester_rc_t res;
@@ -182,11 +175,10 @@ cleanup_msg:
 static pldm_requester_rc_t pldm_transport_af_mctp_send(struct pldm_transport *t,
 						       pldm_tid_t tid,
 						       const void *pldm_msg,
-						       size_t msg_len)
-{
+						       size_t msg_len) {
 	struct pldm_transport_af_mctp *af_mctp = transport_to_af_mctp(t);
 	const struct pldm_msg_hdr *hdr;
-	struct sockaddr_mctp addr = { 0 };
+	struct sockaddr_mctp addr = {0};
 
 	if (msg_len < (ssize_t)sizeof(struct pldm_msg_hdr)) {
 		return PLDM_REQUESTER_SEND_FAIL;
@@ -237,14 +229,13 @@ static pldm_requester_rc_t pldm_transport_af_mctp_send(struct pldm_transport *t,
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
-{
+int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx) {
 	if (!ctx || *ctx) {
 		return -EINVAL;
 	}
 
 	struct pldm_transport_af_mctp *af_mctp =
-		calloc(1, sizeof(struct pldm_transport_af_mctp));
+	    calloc(1, sizeof(struct pldm_transport_af_mctp));
 	if (!af_mctp) {
 		return -ENOMEM;
 	}
@@ -274,8 +265,7 @@ int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx)
 }
 
 LIBPLDM_ABI_STABLE
-void pldm_transport_af_mctp_destroy(struct pldm_transport_af_mctp *ctx)
-{
+void pldm_transport_af_mctp_destroy(struct pldm_transport_af_mctp *ctx) {
 	if (!ctx) {
 		return;
 	}
@@ -285,9 +275,8 @@ void pldm_transport_af_mctp_destroy(struct pldm_transport_af_mctp *ctx)
 
 LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_bind(struct pldm_transport_af_mctp *transport,
-				const struct sockaddr_mctp *smctp, size_t len)
-{
-	struct sockaddr_mctp lsmctp = { 0 };
+				const struct sockaddr_mctp *smctp, size_t len) {
+	struct sockaddr_mctp lsmctp = {0};
 	int rc;
 
 	if (!transport) {

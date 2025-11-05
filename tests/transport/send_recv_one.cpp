@@ -11,7 +11,9 @@ extern "C" {
 long global_base_time = 0;
 int libpldm_clock_gettime(clockid_t clockid, struct timespec* ts)
 {
-    static struct timespec init_offset{};
+    static struct timespec init_offset
+    {
+    };
     int rc;
 
     rc = clock_gettime(clockid, ts);

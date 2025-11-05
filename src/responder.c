@@ -6,17 +6,16 @@
 
 #include <stdbool.h>
 
-static bool pldm_responder_cookie_eq(const struct pldm_responder_cookie *left,
-				     const struct pldm_responder_cookie *right)
-{
+static bool
+pldm_responder_cookie_eq(const struct pldm_responder_cookie *left,
+			 const struct pldm_responder_cookie *right) {
 	return left->tid == right->tid &&
 	       left->instance_id == right->instance_id &&
 	       left->type == right->type && left->command == right->command;
 }
 
 int pldm_responder_cookie_track(struct pldm_responder_cookie *jar,
-				struct pldm_responder_cookie *cookie)
-{
+				struct pldm_responder_cookie *cookie) {
 	struct pldm_responder_cookie *current;
 	struct pldm_responder_cookie *next;
 
@@ -44,10 +43,9 @@ int pldm_responder_cookie_track(struct pldm_responder_cookie *jar,
 struct pldm_responder_cookie *
 pldm_responder_cookie_untrack(struct pldm_responder_cookie *jar, pldm_tid_t tid,
 			      pldm_instance_id_t instance_id, uint8_t type,
-			      uint8_t command)
-{
-	const struct pldm_responder_cookie cookie = { tid, instance_id, type,
-						      command, NULL };
+			      uint8_t command) {
+	const struct pldm_responder_cookie cookie = {tid, instance_id, type,
+						     command, NULL};
 	struct pldm_responder_cookie *current;
 	struct pldm_responder_cookie *next;
 

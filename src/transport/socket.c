@@ -8,8 +8,7 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 
-int pldm_socket_sndbuf_init(struct pldm_socket_sndbuf *ctx, int socket)
-{
+int pldm_socket_sndbuf_init(struct pldm_socket_sndbuf *ctx, int socket) {
 	FILE *fp;
 	long max_buf_size;
 	char line[128];
@@ -51,8 +50,7 @@ int pldm_socket_sndbuf_init(struct pldm_socket_sndbuf *ctx, int socket)
 	return 0;
 }
 
-int pldm_socket_sndbuf_accomodate(struct pldm_socket_sndbuf *ctx, int msg_len)
-{
+int pldm_socket_sndbuf_accomodate(struct pldm_socket_sndbuf *ctx, int msg_len) {
 	if (msg_len < ctx->size) {
 		return 0;
 	}
@@ -75,8 +73,7 @@ int pldm_socket_sndbuf_accomodate(struct pldm_socket_sndbuf *ctx, int msg_len)
 	return 0;
 }
 
-int pldm_socket_sndbuf_get(struct pldm_socket_sndbuf *ctx)
-{
+int pldm_socket_sndbuf_get(struct pldm_socket_sndbuf *ctx) {
 	/* size returned by getsockopt is the actual size of the buffer - twice
 	 * the size of the value used by setsockopt. So for consistency, return
 	 * half of the buffer size */

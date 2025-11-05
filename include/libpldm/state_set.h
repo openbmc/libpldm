@@ -271,7 +271,7 @@ enum pldm_state_set_device_power_state_values {
 
 /* OEM ranges */
 #define PLDM_OEM_STATE_SET_ID_START 32768
-#define PLDM_OEM_STATE_SET_ID_END   65535
+#define PLDM_OEM_STATE_SET_ID_END 65535
 
 #ifdef __cplusplus
 }

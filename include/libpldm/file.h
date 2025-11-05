@@ -12,11 +12,11 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 
-#define PLDM_DF_OPEN_REQ_BYTES	     4ul
-#define PLDM_DF_OPEN_RESP_BYTES	     3ul
-#define PLDM_DF_CLOSE_REQ_BYTES	     4ul
-#define PLDM_DF_CLOSE_RESP_BYTES     1ul
-#define PLDM_DF_HEARTBEAT_REQ_BYTES  6ul
+#define PLDM_DF_OPEN_REQ_BYTES 4ul
+#define PLDM_DF_OPEN_RESP_BYTES 3ul
+#define PLDM_DF_CLOSE_REQ_BYTES 4ul
+#define PLDM_DF_CLOSE_RESP_BYTES 1ul
+#define PLDM_DF_HEARTBEAT_REQ_BYTES 6ul
 #define PLDM_DF_HEARTBEAT_RESP_BYTES 5ul
 
 /** @brief PLDM File Transfer Completion Code */
@@ -245,8 +245,8 @@ int decode_pldm_file_df_close_resp(const struct pldm_msg *msg,
  *         'msg.payload'
  */
 int encode_pldm_file_df_heartbeat_req(
-	uint8_t instance_id, const struct pldm_file_df_heartbeat_req *req,
-	struct pldm_msg *msg, size_t *payload_length);
+    uint8_t instance_id, const struct pldm_file_df_heartbeat_req *req,
+    struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode DFHeartbeat response data
  *
@@ -259,10 +259,10 @@ int encode_pldm_file_df_heartbeat_req(
  *          response struct
  *          -EBADMSG if the input message buffer is too large for the output
  *          response struct
-*/
-int decode_pldm_file_df_heartbeat_resp(const struct pldm_msg *msg,
-				       size_t payload_length,
-				       struct pldm_file_df_heartbeat_resp *resp);
+ */
+int decode_pldm_file_df_heartbeat_resp(
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_file_df_heartbeat_resp *resp);
 
 #ifdef __cplusplus
 }

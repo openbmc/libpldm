@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 /* NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp) */
+#include "test.h"
 #include "array.h"
 #include "container-of.h"
 #include "transport.h"
-#include "test.h"
 
 #include <errno.h>
 #include <poll.h>
@@ -23,8 +23,8 @@ struct pldm_transport_test {
 	container_of(ptr, struct pldm_transport_test, transport)
 
 LIBPLDM_ABI_TESTING
-struct pldm_transport *pldm_transport_test_core(struct pldm_transport_test *ctx)
-{
+struct pldm_transport *
+pldm_transport_test_core(struct pldm_transport_test *ctx) {
 	return &ctx->transport;
 }
 
@@ -32,11 +32,10 @@ struct pldm_transport *pldm_transport_test_core(struct pldm_transport_test *ctx)
 #include <poll.h>
 LIBPLDM_ABI_TESTING
 int pldm_transport_test_init_pollfd(struct pldm_transport *ctx,
-				    struct pollfd *pollfd)
-{
+				    struct pollfd *pollfd) {
 	static const struct itimerspec disable = {
-		.it_value = { 0, 0 },
-		.it_interval = { 0, 0 },
+	    .it_value = {0, 0},
+	    .it_interval = {0, 0},
 	};
 	struct pldm_transport_test *test = transport_to_test(ctx);
 	const struct pldm_transport_test_descriptor *desc;
@@ -59,20 +58,21 @@ int pldm_transport_test_init_pollfd(struct pldm_transport *ctx,
 			return PLDM_REQUESTER_POLL_FAIL;
 		}
 
-		/* This was an explicit latency element, so now move beyond it for recv */
+		/* This was an explicit latency element, so now move beyond it
+		 * for recv */
 		test->cursor++;
 	} else if (desc->type == PLDM_TRANSPORT_TEST_ELEMENT_MSG_RECV) {
 		/* Expire the timer immediately so it appears ready */
 		static const struct timespec ensure_ready = {
-			.tv_sec = 0,
-			.tv_nsec = 2,
+		    .tv_sec = 0,
+		    .tv_nsec = 2,
 		};
 		static const struct itimerspec ready = {
-			.it_value = { 0, 1 },
-			.it_interval = { 0, 0 },
+		    .it_value = {0, 1},
+		    .it_interval = {0, 0},
 		};
 		struct pollfd pfds[] = {
-			{ .fd = test->timerfd, .events = POLLIN },
+		    {.fd = test->timerfd, .events = POLLIN},
 		};
 
 		rc = timerfd_settime(test->timerfd, 0, &ready, NULL);
@@ -85,7 +85,8 @@ int pldm_transport_test_init_pollfd(struct pldm_transport *ctx,
 			return PLDM_REQUESTER_POLL_FAIL;
 		}
 
-		/* Don't increment test->cursor as recv needs to consume the current test element */
+		/* Don't increment test->cursor as recv needs to consume the
+		 * current test element */
 	} else {
 		return PLDM_REQUESTER_POLL_FAIL;
 	}
@@ -100,8 +101,7 @@ int pldm_transport_test_init_pollfd(struct pldm_transport *ctx,
 static pldm_requester_rc_t pldm_transport_test_recv(struct pldm_transport *ctx,
 						    pldm_tid_t *tid,
 						    void **pldm_resp_msg,
-						    size_t *resp_msg_len)
-{
+						    size_t *resp_msg_len) {
 	struct pldm_transport_test *test = transport_to_test(ctx);
 	const struct pldm_transport_test_descriptor *desc;
 	void *msg;
@@ -134,8 +134,7 @@ static pldm_requester_rc_t pldm_transport_test_recv(struct pldm_transport *ctx,
 static pldm_requester_rc_t pldm_transport_test_send(struct pldm_transport *ctx,
 						    pldm_tid_t tid,
 						    const void *pldm_req_msg,
-						    size_t req_msg_len)
-{
+						    size_t req_msg_len) {
 	struct pldm_transport_test *test = transport_to_test(ctx);
 	const struct pldm_transport_test_descriptor *desc;
 
@@ -169,8 +168,7 @@ static pldm_requester_rc_t pldm_transport_test_send(struct pldm_transport *ctx,
 LIBPLDM_ABI_TESTING
 int pldm_transport_test_init(struct pldm_transport_test **ctx,
 			     const struct pldm_transport_test_descriptor *seq,
-			     size_t count)
-{
+			     size_t count) {
 	int rc;
 
 	if (!ctx || *ctx) {
@@ -206,8 +204,7 @@ cleanup_test:
 }
 
 LIBPLDM_ABI_TESTING
-void pldm_transport_test_destroy(struct pldm_transport_test *ctx)
-{
+void pldm_transport_test_destroy(struct pldm_transport_test *ctx) {
 	close(ctx->timerfd);
 	free(ctx);
 }

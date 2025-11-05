@@ -3,8 +3,8 @@
 #define LIBPLDM_SRC_UTILS_H
 
 #include <errno.h>
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
 
 /**
  * @brief Validate the CRC32 checksum of the given data.
