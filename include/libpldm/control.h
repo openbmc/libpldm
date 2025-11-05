@@ -1,7 +1,7 @@
 #pragma once
 
-#include <libpldm/pldm.h>
 #include <libpldm/base.h>
+#include <libpldm/pldm.h>
 #include <libpldm/utils.h>
 
 enum pldm_control_completion_codes {
@@ -45,13 +45,14 @@ int pldm_control_setup(struct pldm_control *control, size_t pldm_control_size);
  * @param[in] type - PLDM type, enum pldm_supported_types
  * @param[in] versions - list of versions for GetPLDMVersion response.
  *			 This is an array of 32-bit version values, followed by
- *			 a CRC32 over the version values. The size of this buffer
- * 			 is 4*versions_count. The versions buffer must remain
- *			 present for the duration of the pldm_control's lifetime.
- * @param[in] versions_count - number of entries in versions, including the trailing CRC32.
- * @param[in] commands - pointer to an array of bitfield8_t[8], for GetPLDMCommands
- * 			 response for this type. The buffer must remain
- *			 present for the duration of the pldm_control's lifetime.
+ *			 a CRC32 over the version values. The size of this
+ *buffer is 4*versions_count. The versions buffer must remain present for the
+ *duration of the pldm_control's lifetime.
+ * @param[in] versions_count - number of entries in versions, including the
+ *trailing CRC32.
+ * @param[in] commands - pointer to an array of bitfield8_t[8], for
+ *GetPLDMCommands response for this type. The buffer must remain present for the
+ *duration of the pldm_control's lifetime.
  *
  * @return 0 on success, a negative errno value on failure.
  */

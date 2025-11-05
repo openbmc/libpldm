@@ -18,8 +18,7 @@ int encode_pldm_header_only_errno(uint8_t msg_type, uint8_t instance_id,
 				  struct pldm_msg *msg);
 
 LIBPLDM_CC_ALWAYS_INLINE
-int pldm_msg_has_error(const struct pldm_msg *msg, size_t payload_length)
-{
+int pldm_msg_has_error(const struct pldm_msg *msg, size_t payload_length) {
 	static_assert(PLDM_SUCCESS == 0, "Rework required");
 	return payload_length < 1 ? 0 : msg->payload[0];
 }

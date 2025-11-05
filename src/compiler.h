@@ -33,11 +33,11 @@ static struct {
 #error Missing definition for LIBPLDM_CC_NONNULL
 #endif
 
-#define LIBPLDM_CC_CLEANUP(fn)	      __attribute__((cleanup(fn)))
-#define LIBPLDM_CC_NONNULL_ARGS(...)  __attribute__((nonnull(__VA_ARGS__)))
-#define LIBPLDM_CC_UNUSED	      __attribute__((unused))
+#define LIBPLDM_CC_CLEANUP(fn) __attribute__((cleanup(fn)))
+#define LIBPLDM_CC_NONNULL_ARGS(...) __attribute__((nonnull(__VA_ARGS__)))
+#define LIBPLDM_CC_UNUSED __attribute__((unused))
 #define LIBPLDM_CC_WARN_UNUSED_RESULT __attribute__((warn_unused_result))
-#define LIBPLDM_CC_WEAK		      __attribute__((weak))
+#define LIBPLDM_CC_WEAK __attribute__((weak))
 
 // NOLINTBEGIN(bugprone-macro-parentheses)
 /**
@@ -73,8 +73,9 @@ static struct {
  * @return The expression either yields 1, or compilation is terminated
  */
 #define pldm_require_obj_type(obj, type)                                       \
-	((void)(sizeof(                                                        \
-		struct { char buf[_Generic((obj), type: 1, default: -1)]; })))
+	((void)(sizeof(struct {                                                \
+		char buf[_Generic((obj), type : 1, default : -1)];             \
+	})))
 // NOLINTEND(bugprone-macro-parentheses)
 
 #endif

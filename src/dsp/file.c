@@ -10,14 +10,13 @@
 #include <errno.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 LIBPLDM_ABI_STABLE
 int encode_pldm_file_df_open_req(uint8_t instance_id,
 				 const struct pldm_file_df_open_req *req,
-				 struct pldm_msg *msg, size_t *payload_length)
-{
+				 struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -25,7 +24,7 @@ int encode_pldm_file_df_open_req(uint8_t instance_id,
 		return -EINVAL;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FILE;
@@ -51,8 +50,7 @@ int encode_pldm_file_df_open_req(uint8_t instance_id,
 LIBPLDM_ABI_TESTING
 int decode_pldm_file_df_open_req(const struct pldm_msg *msg,
 				 size_t payload_length,
-				 struct pldm_file_df_open_req *req)
-{
+				 struct pldm_file_df_open_req *req) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
@@ -75,8 +73,8 @@ int decode_pldm_file_df_open_req(const struct pldm_msg *msg,
 LIBPLDM_ABI_TESTING
 int encode_pldm_file_df_open_resp(uint8_t instance_id,
 				  const struct pldm_file_df_open_resp *resp,
-				  struct pldm_msg *msg, size_t *payload_length)
-{
+				  struct pldm_msg *msg,
+				  size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -84,7 +82,7 @@ int encode_pldm_file_df_open_resp(uint8_t instance_id,
 		return -EINVAL;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_RESPONSE;
 	header.pldm_type = PLDM_FILE;
@@ -112,8 +110,7 @@ int encode_pldm_file_df_open_resp(uint8_t instance_id,
 LIBPLDM_ABI_STABLE
 int decode_pldm_file_df_open_resp(const struct pldm_msg *msg,
 				  size_t payload_length,
-				  struct pldm_file_df_open_resp *resp)
-{
+				  struct pldm_file_df_open_resp *resp) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
@@ -135,7 +132,8 @@ int decode_pldm_file_df_open_resp(const struct pldm_msg *msg,
 
 	pldm_msgbuf_extract(buf, resp->completion_code);
 	if (resp->completion_code != PLDM_SUCCESS) {
-		// Return the CC directly without decoding the rest of the payload
+		// Return the CC directly without decoding the rest of the
+		// payload
 		return pldm_msgbuf_complete(buf);
 	}
 
@@ -147,8 +145,8 @@ int decode_pldm_file_df_open_resp(const struct pldm_msg *msg,
 LIBPLDM_ABI_STABLE
 int encode_pldm_file_df_close_req(uint8_t instance_id,
 				  const struct pldm_file_df_close_req *req,
-				  struct pldm_msg *msg, size_t *payload_length)
-{
+				  struct pldm_msg *msg,
+				  size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -156,7 +154,7 @@ int encode_pldm_file_df_close_req(uint8_t instance_id,
 		return -EINVAL;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FILE;
@@ -182,8 +180,7 @@ int encode_pldm_file_df_close_req(uint8_t instance_id,
 LIBPLDM_ABI_TESTING
 int decode_pldm_file_df_close_req(const struct pldm_msg *msg,
 				  size_t payload_length,
-				  struct pldm_file_df_close_req *req)
-{
+				  struct pldm_file_df_close_req *req) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
@@ -206,8 +203,8 @@ int decode_pldm_file_df_close_req(const struct pldm_msg *msg,
 LIBPLDM_ABI_TESTING
 int encode_pldm_file_df_close_resp(uint8_t instance_id,
 				   const struct pldm_file_df_close_resp *resp,
-				   struct pldm_msg *msg, size_t *payload_length)
-{
+				   struct pldm_msg *msg,
+				   size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -215,7 +212,7 @@ int encode_pldm_file_df_close_resp(uint8_t instance_id,
 		return -EINVAL;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_RESPONSE;
 	header.pldm_type = PLDM_FILE;
@@ -240,8 +237,7 @@ int encode_pldm_file_df_close_resp(uint8_t instance_id,
 LIBPLDM_ABI_STABLE
 int decode_pldm_file_df_close_resp(const struct pldm_msg *msg,
 				   size_t payload_length,
-				   struct pldm_file_df_close_resp *resp)
-{
+				   struct pldm_file_df_close_resp *resp) {
 	if (!msg || !resp) {
 		return -EINVAL;
 	}
@@ -253,9 +249,8 @@ int decode_pldm_file_df_close_resp(const struct pldm_msg *msg,
 
 LIBPLDM_ABI_STABLE
 int encode_pldm_file_df_heartbeat_req(
-	uint8_t instance_id, const struct pldm_file_df_heartbeat_req *req,
-	struct pldm_msg *msg, size_t *payload_length)
-{
+    uint8_t instance_id, const struct pldm_file_df_heartbeat_req *req,
+    struct pldm_msg *msg, size_t *payload_length) {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
 	int rc;
 
@@ -263,7 +258,7 @@ int encode_pldm_file_df_heartbeat_req(
 		return -EINVAL;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.instance = instance_id;
 	header.msg_type = PLDM_REQUEST;
 	header.pldm_type = PLDM_FILE;
@@ -287,10 +282,9 @@ int encode_pldm_file_df_heartbeat_req(
 }
 
 LIBPLDM_ABI_STABLE
-int decode_pldm_file_df_heartbeat_resp(const struct pldm_msg *msg,
-				       size_t payload_length,
-				       struct pldm_file_df_heartbeat_resp *resp)
-{
+int decode_pldm_file_df_heartbeat_resp(
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_file_df_heartbeat_resp *resp) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 

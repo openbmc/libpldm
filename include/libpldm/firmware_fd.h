@@ -5,20 +5,20 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
 #include <stdbool.h>
+#include <stdint.h>
 
-#include <libpldm/pldm.h>
 #include <libpldm/base.h>
-#include <libpldm/utils.h>
 #include <libpldm/control.h>
 #include <libpldm/firmware_update.h>
+#include <libpldm/pldm.h>
+#include <libpldm/utils.h>
 
 /** @struct pldm_firmware_component_standalone
  *
  *  A PLDM Firmware Update Component representation, for use
  *  with pldm_fd_ops callbacks.
-*/
+ */
 struct pldm_firmware_component_standalone {
 	uint16_t comp_classification;
 	uint16_t comp_identifier;
@@ -34,7 +34,7 @@ struct pldm_firmware_component_standalone {
 /** @struct pldm_firmware_update_component
  *
  * An entry for Pass Component Table or Update Component
-*/
+ */
 struct pldm_firmware_update_component {
 	uint16_t comp_classification;
 	uint16_t comp_identifier;
@@ -59,7 +59,7 @@ struct pldm_firmware_update_component {
  *  Note that return values vary between functions. Some return a PLDM
  *  completion code or status code which will be sent to the UA, others
  *  return a negative errno on failure.
-*/
+ */
 struct pldm_fd_ops {
 	/** @brief Provide PLDM descriptors
 	 *
@@ -71,8 +71,8 @@ struct pldm_fd_ops {
 	 *  (specific errno value is ignored)
 	 */
 	int (*device_identifiers)(
-		void *ctx, uint8_t *ret_descriptors_count,
-		const struct pldm_descriptor **ret_descriptors);
+	    void *ctx, uint8_t *ret_descriptors_count,
+	    const struct pldm_descriptor **ret_descriptors);
 
 	/** @brief Provide PLDM component table from the application
 	 *
@@ -86,8 +86,8 @@ struct pldm_fd_ops {
 	 *  It will be called several times in an update flow.
 	 */
 	int (*components)(
-		void *ctx, uint16_t *ret_entry_count,
-		const struct pldm_firmware_component_standalone ***ret_entries);
+	    void *ctx, uint16_t *ret_entry_count,
+	    const struct pldm_firmware_component_standalone ***ret_entries);
 
 	/** @brief Return imageset version from the application
 	 *
@@ -107,18 +107,20 @@ struct pldm_fd_ops {
 	/** @brief Called on PassComponentTable or UpdateComponent
 	 *
 	 *  @param[in] ctx - callback context
-	 *  @param[in] update - will be set for UpdateComponent, and indicates that
-	 *  			an update flow is starting, with the same comp used
-	 * 			for subsequent firmware_data, verify, apply callbacks.
+	 *  @param[in] update - will be set for UpdateComponent, and indicates
+	 *that an update flow is starting, with the same comp used for
+	 *subsequent firmware_data, verify, apply callbacks.
 	 *  @param[in] comp - the component being used. The FD implementation
 	 *		      will only pass comp that has already been
-	 *  		      validated against the pldm_fd_ops.components callback.
+	 *  		      validated against the pldm_fd_ops.components
+	 *callback.
 	 *
-	 *  @return PLDM_CRC_COMP_CAN_BE_UPDATED if the component can be updated.
+	 *  @return PLDM_CRC_COMP_CAN_BE_UPDATED if the component can be
+	 *updated.
 	 */
 	enum pldm_component_response_codes (*update_component)(
-		void *ctx, bool update,
-		const struct pldm_firmware_update_component *comp);
+	    void *ctx, bool update,
+	    const struct pldm_firmware_update_component *comp);
 
 	/** @brief Provide the transfer size to use
 	 *
@@ -141,14 +143,15 @@ struct pldm_fd_ops {
 	 *
 	 *  @return TransferComplete code - either
 	 *			enum pldm_firmware_update_common_error_codes or
-	 *			enum pldm_firmware_update_transfer_result_values.
+	 *			enum
+	 *pldm_firmware_update_transfer_result_values.
 	 *
-	 * PLDM_FWUP_TRANSFER_SUCCESS will accept the data chunk, other codes will
-	 * abort the transfer, returning that code as TransferComplete
+	 * PLDM_FWUP_TRANSFER_SUCCESS will accept the data chunk, other codes
+	 *will abort the transfer, returning that code as TransferComplete
 	 */
 	uint8_t (*firmware_data)(
-		void *ctx, uint32_t offset, const uint8_t *data, uint32_t len,
-		const struct pldm_firmware_update_component *comp);
+	    void *ctx, uint32_t offset, const uint8_t *data, uint32_t len,
+	    const struct pldm_firmware_update_component *comp);
 
 	/* @brief Requests the application verify the update
 	 *
@@ -163,13 +166,14 @@ struct pldm_fd_ops {
 	 *			enum pldm_firmware_update_common_error_codes or
 	 *			enum pldm_firmware_update_verify_result_values.
 	 *
-	 * verify() will only be called once all firmware_data (up to the UA-specified
-	 * comp_image_size) has been provided. Implementations should check that length
-	 * as part of verification, if not already checked.
+	 * verify() will only be called once all firmware_data (up to the
+	 *UA-specified comp_image_size) has been provided. Implementations
+	 *should check that length as part of verification, if not already
+	 *checked.
 	 *
-	 * If the verify is going to complete asynchronously, implementations set
-	 * *ret_pending=true and return PLDM_FWUP_VERIFY_SUCCESS. The FD will then
-	 * call verify() again when pldm_fd_progress() is called.
+	 * If the verify is going to complete asynchronously, implementations
+	 *set *ret_pending=true and return PLDM_FWUP_VERIFY_SUCCESS. The FD will
+	 *then call verify() again when pldm_fd_progress() is called.
 	 */
 	uint8_t (*verify)(void *ctx,
 			  const struct pldm_firmware_update_component *comp,
@@ -189,8 +193,8 @@ struct pldm_fd_ops {
 	 *			enum pldm_firmware_update_apply_result_values.
 	 *
 	 * If the apply is going to complete asynchronously, implementations set
-	 * *ret_pending=true and return PLDM_FWUP_APPLY_SUCCESS. The FD will then
-	 * call apply() again when pldm_fd_progress() is called.
+	 * *ret_pending=true and return PLDM_FWUP_APPLY_SUCCESS. The FD will
+	 *then call apply() again when pldm_fd_progress() is called.
 	 */
 	uint8_t (*apply)(void *ctx,
 			 const struct pldm_firmware_update_component *comp,
@@ -201,7 +205,8 @@ struct pldm_fd_ops {
 	 *  @param[in] ctx - callback context
 	 *  @param[in] self_contained - Self Contained Activation is requested
 	 *  @param[out] ret_estimated_time - a time in seconds to perform
-	 *				     self activation, or may be left as 0.
+	 *				     self activation, or may be left as
+	 *0.
 	 *
 	 *  @return PLDM completion code
 	 *
@@ -221,14 +226,14 @@ struct pldm_fd_ops {
 	 * This function is called for both Cancel Update Component
 	 * and Cancel Update (when a component is currently in progress). */
 	void (*cancel_update_component)(
-		void *ctx, const struct pldm_firmware_update_component *comp);
+	    void *ctx, const struct pldm_firmware_update_component *comp);
 
 	/* @brief Returns a monotonic timestamp
 	 *
 	 *  @param[in] ctx - callback context
 	 *
 	 *  @return timestamp in milliseconds, from an arbitrary origin.
-	            Must not go backwards.
+		    Must not go backwards.
 	 */
 	uint64_t (*now)(void *ctx);
 };
@@ -260,8 +265,8 @@ struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx,
  *
  * @param[in] fd - A pointer to a struct pldm_fd. Applications can allocate this
  *                 in static storage of size PLDM_SIZEOF_PLDM_FD if required.
- * @param[in] pldm_fd_size - applications should pass PLDM_SIZEOF_PLDM_FD, to check
- *                 for consistency with the fd pointer.
+ * @param[in] pldm_fd_size - applications should pass PLDM_SIZEOF_PLDM_FD, to
+ *check for consistency with the fd pointer.
  * @param[in] ops - Application provided callbacks which define the device
  *                  update behaviour
  * @param[in] ops_ctx - opaque context pointer that will be passed as ctx
@@ -333,7 +338,8 @@ int pldm_fd_set_update_idle_timeout(struct pldm_fd *fd, uint32_t time);
  * @param[in] fd
  * @param[in] time - Time for retries of Request Firmware Data,
  *                   Verify, Apply commands, in miliseconds. FD_T2.
- * 					 Should be 1000-5000, initial default is 1000.
+ * 					 Should be 1000-5000, initial default is
+ * 1000.
  *
  * Will return a message to send to remote_address if out_len > 0
  * and returning 0.

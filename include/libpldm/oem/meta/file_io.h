@@ -100,19 +100,20 @@ struct pldm_oem_meta_file_io_read_resp {
  * @return The write request data pointer.
  */
 void *pldm_oem_meta_file_io_write_req_data(
-	struct pldm_oem_meta_file_io_write_req *req);
+    struct pldm_oem_meta_file_io_write_req *req);
 
 /** @brief Decode OEM meta write file io req
  *
  *  @param[in] msg - Pointer to PLDM request message
  *  @param[in] payload_length - Length of request payload
- *  @param[out] req - Pointer to the structure to store the decoded response data
+ *  @param[out] req - Pointer to the structure to store the decoded response
+ * data
  *  @param[in] req_length - Length of request structure
  *  @return 0 on success, negative errno value on failure
  */
 int decode_oem_meta_file_io_write_req(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_oem_meta_file_io_write_req *req, size_t req_length);
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_oem_meta_file_io_write_req *req, size_t req_length);
 
 /** @brief Deprecated decoder for OEM meta write file io req
  *
@@ -131,12 +132,13 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
  *
  *  @param[in] msg - Pointer to PLDM request message
  *  @param[in] payload_length - Length of request payload
- *  @param[out] req - Pointer to the structure to store the decoded response data
+ *  @param[out] req - Pointer to the structure to store the decoded response
+ * data
  *  @return 0 on success, negative errno value on failure
  */
-int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
-				     size_t payload_length,
-				     struct pldm_oem_meta_file_io_read_req *req);
+int decode_oem_meta_file_io_read_req(
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_oem_meta_file_io_read_req *req);
 
 /** @brief Obtain the pointer to the data array of a read response
  *
@@ -145,7 +147,7 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
  * @return The read response data pointer.
  */
 void *pldm_oem_meta_file_io_read_resp_data(
-	struct pldm_oem_meta_file_io_read_resp *resp);
+    struct pldm_oem_meta_file_io_read_resp *resp);
 
 /**
  * @brief Encode OEM meta read file io resp
@@ -158,8 +160,8 @@ void *pldm_oem_meta_file_io_read_resp_data(
  * @return 0 on success, negative errno value on failure
  */
 int encode_oem_meta_file_io_read_resp(
-	uint8_t instance_id, struct pldm_oem_meta_file_io_read_resp *resp,
-	size_t resp_len, struct pldm_msg *responseMsg, size_t payload_length);
+    uint8_t instance_id, struct pldm_oem_meta_file_io_read_resp *resp,
+    size_t resp_len, struct pldm_msg *responseMsg, size_t payload_length);
 
 #ifdef __cplusplus
 }

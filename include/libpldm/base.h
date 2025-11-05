@@ -76,9 +76,9 @@ enum pldm_completion_codes {
 	PLDM_MULTIPART_RECEIVE_NEGOTIATION_INCOMPLETE = 0x83,
 
 	PLDM_GET_MULTIPART_TRANSFER_SUPPORT_INVALID_PLDM_TYPE_IN_REQUEST_DATA =
-		0x83,
+	    0x83,
 	PLDM_GET_MULTIPART_TRANSFER_SUPPORT_INVALID_PLDM_VERSION_IN_REQUEST_DATA =
-		0x84,
+	    0x84,
 };
 
 enum transfer_op_flag {
@@ -129,34 +129,34 @@ typedef enum {
 	PLDM_ASYNC_REQUEST_NOTIFY, //!< Unacknowledged PLDM request messages
 } MessageType;
 
-#define PLDM_INSTANCE_MAX      31
-#define PLDM_MAX_TYPES	       64
+#define PLDM_INSTANCE_MAX 31
+#define PLDM_MAX_TYPES 64
 #define PLDM_MAX_CMDS_PER_TYPE 256
-#define PLDM_MAX_TIDS	       256
-#define PLDM_TID_UNASSIGNED    0x00
-#define PLDM_TID_RESERVED      0xff
+#define PLDM_MAX_TIDS 256
+#define PLDM_TID_UNASSIGNED 0x00
+#define PLDM_TID_RESERVED 0xff
 
 /* Message payload lengths */
 #define PLDM_GET_COMMANDS_REQ_BYTES 5
-#define PLDM_GET_VERSION_REQ_BYTES  6
+#define PLDM_GET_VERSION_REQ_BYTES 6
 
 /* Response lengths are inclusive of completion code */
-#define PLDM_GET_TYPES_REQ_BYTES     0
-#define PLDM_GET_TYPES_RESP_BYTES    9
-#define PLDM_GET_TID_REQ_BYTES	     0
-#define PLDM_GET_TID_RESP_BYTES	     2
-#define PLDM_SET_TID_REQ_BYTES	     1
-#define PLDM_SET_TID_RESP_BYTES	     1
+#define PLDM_GET_TYPES_REQ_BYTES 0
+#define PLDM_GET_TYPES_RESP_BYTES 9
+#define PLDM_GET_TID_REQ_BYTES 0
+#define PLDM_GET_TID_RESP_BYTES 2
+#define PLDM_SET_TID_REQ_BYTES 1
+#define PLDM_SET_TID_RESP_BYTES 1
 #define PLDM_GET_COMMANDS_RESP_BYTES 33
 /* Response data has only one version and does not contain the checksum */
-#define PLDM_GET_VERSION_RESP_BYTES		   10
-#define PLDM_MULTIPART_RECEIVE_REQ_BYTES	   18
+#define PLDM_GET_VERSION_RESP_BYTES 10
+#define PLDM_MULTIPART_RECEIVE_REQ_BYTES 18
 #define PLDM_BASE_MULTIPART_RECEIVE_RESP_MIN_BYTES 10
 
-#define PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES  10
+#define PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_REQ_BYTES 10
 #define PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES 11
 
-#define PLDM_VERSION_0	     0
+#define PLDM_VERSION_0 0
 #define PLDM_CURRENT_VERSION PLDM_VERSION_0
 
 #define PLDM_TIMESTAMP104_SIZE 13
@@ -197,8 +197,8 @@ struct pldm_msg_hdr {
 	uint8_t type : 6;	//!< PLDM type
 	uint8_t header_ver : 2; //!< Header version
 #elif defined(__BIG_ENDIAN_BITFIELD)
-	uint8_t header_ver : 2; //!< Header version
-	uint8_t type : 6;	//!< PLDM type
+	uint8_t header_ver : 2;	 //!< Header version
+	uint8_t type : 6;	 //!< PLDM type
 #endif
 	uint8_t command; //!< PLDM command code
 } __attribute__((packed));
@@ -229,8 +229,8 @@ struct pldm_msg {
  */
 #define PLDM_MSG_SIZE(size)                                                    \
 	(sizeof(char[(__builtin_constant_p(size)) ? 1 : -1])) *                \
-		(sizeof(struct pldm_msg) -                                     \
-		 sizeof(((struct pldm_msg *)NULL)->payload) + (size))
+	    (sizeof(struct pldm_msg) -                                         \
+	     sizeof(((struct pldm_msg *)NULL)->payload) + (size))
 
 /** @brief Stack-allocate a buffer to hold a @struct pldm_msg
  *
@@ -323,9 +323,11 @@ struct pldm_get_commands_resp {
  *  Structure representing PLDM get version request.
  */
 struct pldm_get_version_req {
-	uint32_t transfer_handle; //!< handle to identify PLDM version data transfer
+	uint32_t
+	    transfer_handle; //!< handle to identify PLDM version data transfer
 	uint8_t transfer_opflag; //!< PLDM GetVersion operation flag
-	uint8_t type; //!< PLDM Type for which version information is being requested
+	uint8_t type; //!< PLDM Type for which version information is being
+		      //!< requested
 } __attribute__((packed));
 
 /** @struct pldm_get_version_resp
@@ -707,13 +709,10 @@ int decode_set_tid_req(const struct pldm_msg *msg, size_t payload_length,
  *  @param[out] section_length - The length of the requested section
  *  @return pldm_completion_codes
  */
-int decode_multipart_receive_req(const struct pldm_msg *msg,
-				 size_t payload_length, uint8_t *pldm_type,
-				 uint8_t *transfer_opflag,
-				 uint32_t *transfer_ctx,
-				 uint32_t *transfer_handle,
-				 uint32_t *section_offset,
-				 uint32_t *section_length);
+int decode_multipart_receive_req(
+    const struct pldm_msg *msg, size_t payload_length, uint8_t *pldm_type,
+    uint8_t *transfer_opflag, uint32_t *transfer_ctx, uint32_t *transfer_handle,
+    uint32_t *section_offset, uint32_t *section_length);
 
 /** @brief Encode a PLDM MultipartReceive request message
  *
@@ -728,8 +727,8 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
  *          -EOVERFLOW if the input message length is invalid
  */
 int encode_pldm_base_multipart_receive_req(
-	uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,
-	struct pldm_msg *msg, size_t *payload_length);
+    uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,
+    struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode a PLDM MultipartReceive response message
  *
@@ -749,9 +748,9 @@ int encode_pldm_base_multipart_receive_req(
  *         'msg.payload'
  */
 int decode_pldm_base_multipart_receive_resp(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_base_multipart_receive_resp *resp,
-	uint32_t *data_integrity_checksum);
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_base_multipart_receive_resp *resp,
+    uint32_t *data_integrity_checksum);
 
 /** @brief Encode a PLDM MultipartReceive response message
  *
@@ -768,9 +767,8 @@ int decode_pldm_base_multipart_receive_resp(
  *         'msg.payload'
  */
 int encode_base_multipart_receive_resp(
-	uint8_t instance_id,
-	const struct pldm_base_multipart_receive_resp *resp, uint32_t checksum,
-	struct pldm_msg *msg, size_t *payload_length);
+    uint8_t instance_id, const struct pldm_base_multipart_receive_resp *resp,
+    uint32_t checksum, struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create a PLDM response message containing only cc
  *
@@ -811,9 +809,9 @@ int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
  *          -EOVERFLOW if the input message length is invalid
  */
 int encode_pldm_base_negotiate_transfer_params_req(
-	uint8_t instance_id,
-	const struct pldm_base_negotiate_transfer_params_req *req,
-	struct pldm_msg *msg, size_t *payload_length);
+    uint8_t instance_id,
+    const struct pldm_base_negotiate_transfer_params_req *req,
+    struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Encode a PLDM Negotiate Transfer Parameters response message
  *
@@ -828,9 +826,9 @@ int encode_pldm_base_negotiate_transfer_params_req(
  *          -EOVERFLOW if the input message length is invalid
  */
 int encode_pldm_base_negotiate_transfer_params_resp(
-	uint8_t instance_id,
-	const struct pldm_base_negotiate_transfer_params_resp *resp,
-	struct pldm_msg *msg, size_t *payload_length);
+    uint8_t instance_id,
+    const struct pldm_base_negotiate_transfer_params_resp *resp,
+    struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode a PLDM Negotiate Transfer Parameters request message
  *
@@ -847,8 +845,8 @@ int encode_pldm_base_negotiate_transfer_params_resp(
  *         'msg.payload'
  */
 int decode_pldm_base_negotiate_transfer_params_req(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_base_negotiate_transfer_params_req *req);
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_base_negotiate_transfer_params_req *req);
 
 /** @brief Decode a PLDM Negotiate Transfer Parameters response message
  *
@@ -866,8 +864,8 @@ int decode_pldm_base_negotiate_transfer_params_req(
  *         'msg.payload'
  */
 int decode_pldm_base_negotiate_transfer_params_resp(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_base_negotiate_transfer_params_resp *resp);
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_base_negotiate_transfer_params_resp *resp);
 
 #ifdef __cplusplus
 }

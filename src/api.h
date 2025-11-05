@@ -20,8 +20,7 @@
  *
  * @return An equivalent PLDM completion code for @p err
  */
-static inline enum pldm_completion_codes pldm_xlate_errno(int err)
-{
+static inline enum pldm_completion_codes pldm_xlate_errno(int err) {
 	enum pldm_completion_codes rc;
 
 	assert(err < 0);

@@ -1,26 +1,24 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#include <libpldm/oem/meta/file_io.h>
 #include <endian.h>
+#include <libpldm/oem/meta/file_io.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 #include "api.h"
-#include "msgbuf.h"
 #include "dsp/base.h"
+#include "msgbuf.h"
 
 LIBPLDM_ABI_STABLE
 void *pldm_oem_meta_file_io_write_req_data(
-	struct pldm_oem_meta_file_io_write_req *req)
-{
+    struct pldm_oem_meta_file_io_write_req *req) {
 	return req->data;
 }
 
 LIBPLDM_ABI_STABLE
 int decode_oem_meta_file_io_write_req(
-	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_oem_meta_file_io_write_req *req, size_t req_length)
-{
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_oem_meta_file_io_write_req *req, size_t req_length) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
@@ -57,8 +55,7 @@ int decode_oem_meta_file_io_write_req(
 LIBPLDM_ABI_DEPRECATED_UNSAFE
 int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 				size_t payload_length, uint8_t *file_handle,
-				uint32_t *length, uint8_t *data)
-{
+				uint32_t *length, uint8_t *data) {
 	struct pldm_oem_meta_file_io_write_req *request_msg;
 	size_t request_msg_len;
 	int rc;
@@ -85,7 +82,8 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 	*file_handle = request_msg->handle;
 	*length = request_msg->length;
 
-	/* NOTE: Unsafe, memory safety is not possible due to API constraints. */
+	/* NOTE: Unsafe, memory safety is not possible due to API constraints.
+	 */
 	memcpy(data, request_msg->data, request_msg->length);
 
 	free(request_msg);
@@ -94,10 +92,9 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 }
 
 LIBPLDM_ABI_STABLE
-int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
-				     size_t payload_length,
-				     struct pldm_oem_meta_file_io_read_req *req)
-{
+int decode_oem_meta_file_io_read_req(
+    const struct pldm_msg *msg, size_t payload_length,
+    struct pldm_oem_meta_file_io_read_req *req) {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 
 	if (msg == NULL || req == NULL) {
@@ -109,8 +106,8 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 	}
 
 	int rc = pldm_msgbuf_init_errno(
-		buf, PLDM_OEM_META_FILE_IO_READ_REQ_MIN_LENGTH, msg->payload,
-		payload_length);
+	    buf, PLDM_OEM_META_FILE_IO_READ_REQ_MIN_LENGTH, msg->payload,
+	    payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -145,19 +142,17 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 
 LIBPLDM_ABI_STABLE
 void *pldm_oem_meta_file_io_read_resp_data(
-	struct pldm_oem_meta_file_io_read_resp *resp)
-{
+    struct pldm_oem_meta_file_io_read_resp *resp) {
 	return resp->data;
 }
 
 LIBPLDM_ABI_STABLE
 int encode_oem_meta_file_io_read_resp(
-	uint8_t instance_id, struct pldm_oem_meta_file_io_read_resp *resp,
-	size_t resp_len, struct pldm_msg *responseMsg, size_t payload_length)
-{
+    uint8_t instance_id, struct pldm_oem_meta_file_io_read_resp *resp,
+    size_t resp_len, struct pldm_msg *responseMsg, size_t payload_length) {
 	int rc;
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 
 	if (resp == NULL || responseMsg == NULL) {
 		return -EINVAL;
@@ -200,9 +195,8 @@ int encode_oem_meta_file_io_read_resp(
 	case PLDM_OEM_META_FILE_IO_READ_DATA:
 		pldm_msgbuf_insert(buf, resp->info.data.transferFlag);
 		pldm_msgbuf_insert(buf, resp->info.data.offset);
-		rc = pldm_msgbuf_insert_array_uint8(buf, resp->length,
-						    resp->data,
-						    resp_len - sizeof(*resp));
+		rc = pldm_msgbuf_insert_array_uint8(
+		    buf, resp->length, resp->data, resp_len - sizeof(*resp));
 		if (rc) {
 			return pldm_msgbuf_discard(buf, rc);
 		}

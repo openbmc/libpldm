@@ -17,8 +17,7 @@
 #define PD_PACKAGE_BUFFER (1ul * 1024ul * 1024ul)
 
 static void pd_print_bytes(const char *head, const void *_buf, size_t len,
-			   const char *tail)
-{
+			   const char *tail) {
 	const uint8_t *buf = _buf;
 
 	if (head) {
@@ -38,8 +37,7 @@ static void pd_print_bytes(const char *head, const void *_buf, size_t len,
 
 static void pd_print_variable_field(const char *head,
 				    const struct variable_field *field,
-				    const char *tail)
-{
+				    const char *tail) {
 	if (head) {
 		printf("%s", head);
 	}
@@ -55,8 +53,7 @@ static void pd_print_variable_field(const char *head,
 
 static void pd_print_typed_string(const char *head, size_t type,
 				  const struct variable_field *string,
-				  const char *tail)
-{
+				  const char *tail) {
 	switch (type) {
 	case 1:
 		pd_print_variable_field(head, string, tail);
@@ -69,8 +66,7 @@ static void pd_print_typed_string(const char *head, size_t type,
 
 static void pd_print_descriptor(const char *head,
 				const struct pldm_descriptor *desc,
-				const char *tail)
-{
+				const char *tail) {
 	if (head) {
 		printf("%s", head);
 	}
@@ -96,14 +92,13 @@ static void pd_print_descriptor(const char *head,
 	}
 }
 
-int main(void)
-{
+int main(void) {
 	struct pldm_package_downstream_device_id_record ddrec;
 	struct pldm_package_component_image_information info;
 	struct pldm_package_firmware_device_id_record fdrec;
 	DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
 	pldm_package_header_information_pad hdr;
-	struct pldm_package pkg = { 0 };
+	struct pldm_package pkg = {0};
 	size_t nr_fdrecs = 0;
 	size_t nr_ddrecs = 0;
 	size_t nr_infos = 0;
@@ -135,17 +130,16 @@ int main(void)
 	       hdr.package_header_format_revision);
 	fwrite("\n", 1, 1, stdout);
 
-	foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc)
-	{
+	foreach_pldm_package_firmware_device_id_record(pkg, fdrec, rc) {
 		struct pldm_descriptor desc;
 
 		printf("Firmware device ID record: %zu\n", nr_fdrecs++);
 		printf("\tDevice update option flags: %#.8" PRIx32 "\n",
 		       fdrec.device_update_option_flags.value);
 		pd_print_typed_string(
-			"\tComponent image set version: ",
-			fdrec.component_image_set_version_string_type,
-			&fdrec.component_image_set_version_string, "\n");
+		    "\tComponent image set version: ",
+		    fdrec.component_image_set_version_string_type,
+		    &fdrec.component_image_set_version_string, "\n");
 		pd_print_bytes("\tApplicable components: 0x [ ",
 			       fdrec.applicable_components.bitmap.ptr,
 			       fdrec.applicable_components.bitmap.length,
@@ -153,12 +147,12 @@ int main(void)
 
 		printf("\tDescriptors:\n");
 		foreach_pldm_package_firmware_device_id_record_descriptor(
-			pkg, fdrec, desc, rc)
-		{
+		    pkg, fdrec, desc, rc) {
 			pd_print_descriptor("\t\t", &desc, "\n");
 		}
 		if (rc) {
-			warnx("Failed parsing firmware device ID record descriptors: %s\n",
+			warnx("Failed parsing firmware device ID record "
+			      "descriptors: %s\n",
 			      strerrorname_np(-rc));
 			status = EXIT_FAILURE;
 			goto cleanup_package;
@@ -172,30 +166,28 @@ int main(void)
 		goto cleanup_package;
 	}
 
-	foreach_pldm_package_downstream_device_id_record(pkg, ddrec, rc)
-	{
+	foreach_pldm_package_downstream_device_id_record(pkg, ddrec, rc) {
 		struct pldm_descriptor desc;
 
 		printf("Downstream device ID record: %zu\n", nr_ddrecs++);
 		printf("\tDevice update option flags: %#.4" PRIx32 "\n",
 		       ddrec.update_option_flags.value);
 		pd_print_typed_string(
-			"\tSelf-contained activation min version: ",
-			ddrec.self_contained_activation_min_version_string_type,
-			&ddrec.self_contained_activation_min_version_string,
-			"\n");
+		    "\tSelf-contained activation min version: ",
+		    ddrec.self_contained_activation_min_version_string_type,
+		    &ddrec.self_contained_activation_min_version_string, "\n");
 		pd_print_bytes("\tApplicable components: 0x [ ",
 			       ddrec.applicable_components.bitmap.ptr,
 			       ddrec.applicable_components.bitmap.length,
 			       " ]\n");
 		printf("\tDescriptors:\n");
 		foreach_pldm_package_downstream_device_id_record_descriptor(
-			pkg, ddrec, desc, rc)
-		{
+		    pkg, ddrec, desc, rc) {
 			pd_print_descriptor("\t\t", &desc, "\n");
 		}
 		if (rc) {
-			warnx("Failed parsing downstream device ID record descriptors: %s\n",
+			warnx("Failed parsing downstream device ID record "
+			      "descriptors: %s\n",
 			      strerrorname_np(-rc));
 			status = EXIT_FAILURE;
 			goto cleanup_package;
@@ -209,8 +201,7 @@ int main(void)
 		goto cleanup_package;
 	}
 
-	foreach_pldm_package_component_image_information(pkg, info, rc)
-	{
+	foreach_pldm_package_component_image_information(pkg, info, rc) {
 		printf("Component image info: %zu\n", nr_infos++);
 		printf("\tComponent classification: %" PRIu16 "\n",
 		       info.component_classification);
@@ -225,9 +216,9 @@ int main(void)
 		printf("\tComponent image: %p (%zu)\n",
 		       (void *)info.component_image.ptr,
 		       info.component_image.length);
-		pd_print_typed_string("\tComponent version: ",
-				      info.component_version_string_type,
-				      &info.component_version_string, "\n");
+		pd_print_typed_string(
+		    "\tComponent version: ", info.component_version_string_type,
+		    &info.component_version_string, "\n");
 		fwrite("\n", 1, 1, stdout);
 	}
 	if (rc) {

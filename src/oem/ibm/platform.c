@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include <libpldm/base.h>
-#include <libpldm/platform.h>
 #include <libpldm/oem/ibm/platform.h>
+#include <libpldm/platform.h>
 
 #include <string.h>
 
@@ -11,8 +11,7 @@ int encode_bios_attribute_update_event_req(uint8_t instance_id,
 					   uint8_t num_handles,
 					   const uint8_t *list_of_handles,
 					   size_t payload_length,
-					   struct pldm_msg *msg)
-{
+					   struct pldm_msg *msg) {
 	if (format_version != 1) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -40,7 +39,7 @@ int encode_bios_attribute_update_event_req(uint8_t instance_id,
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
-	struct pldm_header_info header = { 0 };
+	struct pldm_header_info header = {0};
 	header.msg_type = PLDM_REQUEST;
 	header.instance = instance_id;
 	header.pldm_type = PLDM_PLATFORM;
@@ -51,7 +50,7 @@ int encode_bios_attribute_update_event_req(uint8_t instance_id,
 	}
 
 	struct pldm_bios_attribute_update_event_req *request =
-		(struct pldm_bios_attribute_update_event_req *)msg->payload;
+	    (struct pldm_bios_attribute_update_event_req *)msg->payload;
 	request->format_version = format_version;
 	request->tid = tid;
 	request->event_class = PLDM_EVENT_TYPE_OEM_EVENT_BIOS_ATTRIBUTE_UPDATE;

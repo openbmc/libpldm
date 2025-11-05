@@ -1,13 +1,13 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #pragma once
 
-#include <stdint.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <string.h>
 
-#include <libpldm/pldm.h>
-#include <libpldm/firmware_update.h>
 #include <libpldm/firmware_fd.h>
+#include <libpldm/firmware_update.h>
+#include <libpldm/pldm.h>
 #include <libpldm/utils.h>
 
 typedef uint64_t pldm_fd_time_t;
@@ -26,7 +26,8 @@ struct pldm_fd_req {
 	} state;
 
 	/* Set once when ready to move to next state, will return
-     * this result for TransferComplete/VerifyComplete/ApplyComplete request. */
+	 * this result for TransferComplete/VerifyComplete/ApplyComplete
+	 * request. */
 	bool complete;
 	/* Only valid when complete is set */
 	uint8_t result;
@@ -54,7 +55,7 @@ struct pldm_fd {
 	enum pldm_firmware_device_states prev_state;
 
 	/* Reason for last transition to idle state,
-     * only valid when state == PLDM_FD_STATE_IDLE */
+	 * only valid when state == PLDM_FD_STATE_IDLE */
 	enum pldm_get_status_reason_code_values reason;
 
 	/* State-specific content */
@@ -64,8 +65,8 @@ struct pldm_fd {
 		struct pldm_fd_apply apply;
 	} specific;
 	/* Details of the component currently being updated.
-     * Set by UpdateComponent, available during download/verify/apply.
-     * Also used as temporary storage for PassComponentTable */
+	 * Set by UpdateComponent, available during download/verify/apply.
+	 * Also used as temporary storage for PassComponentTable */
 	struct pldm_firmware_update_component update_comp;
 	bitfield32_t update_flags;
 

@@ -1,36 +1,34 @@
 #include <errno.h>
-#include <stdint.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <string.h>
 
+#include <compiler.h>
+#include <libpldm/control.h>
+#include <libpldm/platform.h>
 #include <libpldm/pldm.h>
 #include <libpldm/utils.h>
-#include <libpldm/platform.h>
-#include <libpldm/control.h>
-#include <compiler.h>
 
 #include "control-internal.h"
 
 #define PLDM_BASE_VERSIONS_COUNT 2
 static const uint32_t PLDM_BASE_VERSIONS[PLDM_BASE_VERSIONS_COUNT] = {
-	/* PLDM 1.1.0 is current implemented. */
-	0xf1f1f000,
-	/* CRC. Calculated with python:
-	hex(crccheck.crc.Crc32.calc(struct.pack('<I', 0xf1f1f000)))
-	*/
-	0x539dbeba,
+    /* PLDM 1.1.0 is current implemented. */
+    0xf1f1f000,
+    /* CRC. Calculated with python:
+    hex(crccheck.crc.Crc32.calc(struct.pack('<I', 0xf1f1f000)))
+    */
+    0x539dbeba,
 };
 const bitfield8_t PLDM_CONTROL_COMMANDS[32] = {
-	// 0x00..0x07
-	{ .byte = (1 << PLDM_GET_TID | 1 << PLDM_GET_PLDM_VERSION |
-		   1 << PLDM_GET_PLDM_TYPES | 1 << PLDM_GET_PLDM_COMMANDS) }
-};
+    // 0x00..0x07
+    {.byte = (1 << PLDM_GET_TID | 1 << PLDM_GET_PLDM_VERSION |
+	      1 << PLDM_GET_PLDM_TYPES | 1 << PLDM_GET_PLDM_COMMANDS)}};
 
 static int pldm_control_reply_error(uint8_t ccode,
 				    const struct pldm_header_info *req_hdr,
 				    struct pldm_msg *resp,
-				    size_t *resp_payload_len)
-{
+				    size_t *resp_payload_len) {
 	int rc;
 
 	/* 1 byte completion code */
@@ -50,8 +48,7 @@ static int pldm_control_reply_error(uint8_t ccode,
 static int pldm_control_get_tid(const struct pldm_header_info *hdr,
 				const struct pldm_msg *req LIBPLDM_CC_UNUSED,
 				size_t req_payload_len, struct pldm_msg *resp,
-				size_t *resp_payload_len)
-{
+				size_t *resp_payload_len) {
 	if (req_payload_len != PLDM_GET_TID_REQ_BYTES) {
 		return pldm_control_reply_error(PLDM_ERROR_INVALID_LENGTH, hdr,
 						resp, resp_payload_len);
@@ -76,8 +73,7 @@ static int pldm_control_get_version(struct pldm_control *control,
 				    const struct pldm_msg *req,
 				    size_t req_payload_len,
 				    struct pldm_msg *resp,
-				    size_t *resp_payload_len)
-{
+				    size_t *resp_payload_len) {
 	uint8_t cc;
 
 	uint32_t handle;
@@ -93,8 +89,8 @@ static int pldm_control_get_version(struct pldm_control *control,
 	/* Response is always sent as a single transfer */
 	if (opflag != PLDM_GET_FIRSTPART) {
 		return pldm_control_reply_error(
-			PLDM_CONTROL_INVALID_TRANSFER_OPERATION_FLAG, hdr, resp,
-			resp_payload_len);
+		    PLDM_CONTROL_INVALID_TRANSFER_OPERATION_FLAG, hdr, resp,
+		    resp_payload_len);
 	}
 
 	const struct pldm_type_versions *v = NULL;
@@ -108,13 +104,13 @@ static int pldm_control_get_version(struct pldm_control *control,
 
 	if (!v) {
 		return pldm_control_reply_error(
-			PLDM_CONTROL_INVALID_PLDM_TYPE_IN_REQUEST_DATA, hdr,
-			resp, resp_payload_len);
+		    PLDM_CONTROL_INVALID_PLDM_TYPE_IN_REQUEST_DATA, hdr, resp,
+		    resp_payload_len);
 	}
 
 	/* encode_get_version_resp doesn't have length checking */
 	uint32_t required_resp_payload =
-		1 + 4 + 1 + v->versions_count * sizeof(ver32_t);
+	    1 + 4 + 1 + v->versions_count * sizeof(ver32_t);
 	if (*resp_payload_len < required_resp_payload) {
 		return -EOVERFLOW;
 	}
@@ -135,8 +131,7 @@ static int pldm_control_get_types(struct pldm_control *control,
 				  const struct pldm_header_info *hdr,
 				  const struct pldm_msg *req LIBPLDM_CC_UNUSED,
 				  size_t req_payload_len, struct pldm_msg *resp,
-				  size_t *resp_payload_len)
-{
+				  size_t *resp_payload_len) {
 	uint8_t cc;
 
 	if (req_payload_len != PLDM_GET_TYPES_REQ_BYTES) {
@@ -174,12 +169,12 @@ static int pldm_control_get_commands(struct pldm_control *control,
 				     const struct pldm_msg *req,
 				     size_t req_payload_len,
 				     struct pldm_msg *resp,
-				     size_t *resp_payload_len)
-{
+				     size_t *resp_payload_len) {
 	uint8_t cc;
 
 	uint8_t ty;
-	// version in request is ignored, since SelectPLDMVersion isn't supported currently
+	// version in request is ignored, since SelectPLDMVersion isn't
+	// supported currently
 	ver32_t version;
 	cc = decode_get_commands_req(req, req_payload_len, &ty, &version);
 	if (cc) {
@@ -198,8 +193,8 @@ static int pldm_control_get_commands(struct pldm_control *control,
 
 	if (!v) {
 		return pldm_control_reply_error(
-			PLDM_CONTROL_INVALID_PLDM_TYPE_IN_REQUEST_DATA, hdr,
-			resp, resp_payload_len);
+		    PLDM_CONTROL_INVALID_PLDM_TYPE_IN_REQUEST_DATA, hdr, resp,
+		    resp_payload_len);
 	}
 
 	/* encode_get_commands_resp doesn't have length checking */
@@ -221,8 +216,7 @@ static int pldm_control_get_commands(struct pldm_control *control,
 /* A response should only be used when this returns 0, and *resp_len > 0 */
 LIBPLDM_ABI_TESTING
 int pldm_control_handle_msg(struct pldm_control *control, const void *req_msg,
-			    size_t req_len, void *resp_msg, size_t *resp_len)
-{
+			    size_t req_len, void *resp_msg, size_t *resp_len) {
 	int rc;
 
 	/* Space for header plus completion code */
@@ -286,8 +280,7 @@ int pldm_control_handle_msg(struct pldm_control *control, const void *req_msg,
 }
 
 LIBPLDM_ABI_TESTING
-int pldm_control_setup(struct pldm_control *control, size_t pldm_control_size)
-{
+int pldm_control_setup(struct pldm_control *control, size_t pldm_control_size) {
 	int rc;
 
 	if (pldm_control_size < sizeof(struct pldm_control)) {
@@ -309,8 +302,7 @@ int pldm_control_setup(struct pldm_control *control, size_t pldm_control_size)
 LIBPLDM_ABI_TESTING
 int pldm_control_add_type(struct pldm_control *control, uint8_t pldm_type,
 			  const void *versions, size_t versions_count,
-			  const bitfield8_t *commands)
-{
+			  const bitfield8_t *commands) {
 	if (versions_count < 2) {
 		/* At least one version must be provided, along with a CRC32 */
 		return -EINVAL;

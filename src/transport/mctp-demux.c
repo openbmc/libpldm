@@ -37,13 +37,11 @@ struct pldm_transport_mctp_demux {
 
 LIBPLDM_ABI_STABLE
 struct pldm_transport *
-pldm_transport_mctp_demux_core(struct pldm_transport_mctp_demux *ctx)
-{
+pldm_transport_mctp_demux_core(struct pldm_transport_mctp_demux *ctx) {
 	return &ctx->transport;
 }
 
-static pldm_requester_rc_t pldm_transport_mctp_demux_open(void)
-{
+static pldm_requester_rc_t pldm_transport_mctp_demux_open(void) {
 	int fd = -1;
 	ssize_t rc = -1;
 
@@ -71,8 +69,7 @@ static pldm_requester_rc_t pldm_transport_mctp_demux_open(void)
 
 LIBPLDM_ABI_STABLE
 int pldm_transport_mctp_demux_init_pollfd(struct pldm_transport *t,
-					  struct pollfd *pollfd)
-{
+					  struct pollfd *pollfd) {
 	struct pldm_transport_mctp_demux *ctx = transport_to_demux(t);
 	pollfd->fd = ctx->socket;
 	pollfd->events = POLLIN;
@@ -81,8 +78,7 @@ int pldm_transport_mctp_demux_init_pollfd(struct pldm_transport *t,
 
 static int
 pldm_transport_mctp_demux_get_eid(struct pldm_transport_mctp_demux *ctx,
-				  pldm_tid_t tid, mctp_eid_t *eid)
-{
+				  pldm_tid_t tid, mctp_eid_t *eid) {
 	int i;
 	for (i = 0; i < MCTP_MAX_NUM_EID; i++) {
 		if (ctx->tid_eid_map[i] == tid) {
@@ -96,8 +92,7 @@ pldm_transport_mctp_demux_get_eid(struct pldm_transport_mctp_demux *ctx,
 
 static int
 pldm_transport_mctp_demux_get_tid(struct pldm_transport_mctp_demux *ctx,
-				  mctp_eid_t eid, pldm_tid_t *tid)
-{
+				  mctp_eid_t eid, pldm_tid_t *tid) {
 	/* mapping exists */
 	if (ctx->tid_eid_map[eid] != 0) {
 		*tid = ctx->tid_eid_map[eid];
@@ -108,8 +103,7 @@ pldm_transport_mctp_demux_get_tid(struct pldm_transport_mctp_demux *ctx,
 
 LIBPLDM_ABI_STABLE
 int pldm_transport_mctp_demux_map_tid(struct pldm_transport_mctp_demux *ctx,
-				      pldm_tid_t tid, mctp_eid_t eid)
-{
+				      pldm_tid_t tid, mctp_eid_t eid) {
 	ctx->tid_eid_map[eid] = tid;
 
 	return 0;
@@ -118,8 +112,7 @@ int pldm_transport_mctp_demux_map_tid(struct pldm_transport_mctp_demux *ctx,
 LIBPLDM_ABI_STABLE
 int pldm_transport_mctp_demux_unmap_tid(struct pldm_transport_mctp_demux *ctx,
 					LIBPLDM_CC_UNUSED pldm_tid_t tid,
-					mctp_eid_t eid)
-{
+					mctp_eid_t eid) {
 	ctx->tid_eid_map[eid] = 0;
 
 	return 0;
@@ -127,11 +120,10 @@ int pldm_transport_mctp_demux_unmap_tid(struct pldm_transport_mctp_demux *ctx,
 
 static pldm_requester_rc_t
 pldm_transport_mctp_demux_recv(struct pldm_transport *t, pldm_tid_t *tid,
-			       void **pldm_msg, size_t *msg_len)
-{
+			       void **pldm_msg, size_t *msg_len) {
 	struct pldm_transport_mctp_demux *demux = transport_to_demux(t);
 	size_t mctp_prefix_len = 2;
-	struct msghdr msg = { 0 };
+	struct msghdr msg = {0};
 	pldm_requester_rc_t res;
 	uint8_t mctp_prefix[2];
 	struct iovec iov[2];
@@ -143,8 +135,8 @@ pldm_transport_mctp_demux_recv(struct pldm_transport *t, pldm_tid_t *tid,
 	uint8_t *buf;
 	int rc;
 
-	min_len = sizeof(eid) + sizeof(mctp_msg_type) +
-		  sizeof(struct pldm_msg_hdr);
+	min_len =
+	    sizeof(eid) + sizeof(mctp_msg_type) + sizeof(struct pldm_msg_hdr);
 	length = recv(demux->socket, NULL, 0, MSG_PEEK | MSG_TRUNC);
 	if (length <= 0) {
 		return PLDM_REQUESTER_RECV_FAIL;
@@ -202,15 +194,14 @@ cleanup_buf:
 
 static pldm_requester_rc_t
 pldm_transport_mctp_demux_send(struct pldm_transport *t, pldm_tid_t tid,
-			       const void *pldm_msg, size_t msg_len)
-{
+			       const void *pldm_msg, size_t msg_len) {
 	struct pldm_transport_mctp_demux *demux = transport_to_demux(t);
 	mctp_eid_t eid = 0;
 	if (pldm_transport_mctp_demux_get_eid(demux, tid, &eid)) {
 		return PLDM_REQUESTER_SEND_FAIL;
 	}
 
-	uint8_t hdr[2] = { eid, mctp_msg_type };
+	uint8_t hdr[2] = {eid, mctp_msg_type};
 
 	struct iovec iov[2];
 	iov[0].iov_base = hdr;
@@ -218,13 +209,12 @@ pldm_transport_mctp_demux_send(struct pldm_transport *t, pldm_tid_t tid,
 	iov[1].iov_base = (uint8_t *)pldm_msg;
 	iov[1].iov_len = msg_len;
 
-	struct msghdr msg = { 0 };
+	struct msghdr msg = {0};
 	msg.msg_iov = iov;
 	msg.msg_iovlen = sizeof(iov) / sizeof(iov[0]);
 
-	if (msg_len > INT_MAX ||
-	    pldm_socket_sndbuf_accomodate(&(demux->socket_send_buf),
-					  (int)msg_len)) {
+	if (msg_len > INT_MAX || pldm_socket_sndbuf_accomodate(
+				     &(demux->socket_send_buf), (int)msg_len)) {
 		return PLDM_REQUESTER_SEND_FAIL;
 	}
 
@@ -236,14 +226,13 @@ pldm_transport_mctp_demux_send(struct pldm_transport *t, pldm_tid_t tid,
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx)
-{
+int pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx) {
 	if (!ctx || *ctx) {
 		return -EINVAL;
 	}
 
 	struct pldm_transport_mctp_demux *demux =
-		calloc(1, sizeof(struct pldm_transport_mctp_demux));
+	    calloc(1, sizeof(struct pldm_transport_mctp_demux));
 	if (!demux) {
 		return -ENOMEM;
 	}
@@ -270,8 +259,7 @@ int pldm_transport_mctp_demux_init(struct pldm_transport_mctp_demux **ctx)
 }
 
 LIBPLDM_ABI_STABLE
-void pldm_transport_mctp_demux_destroy(struct pldm_transport_mctp_demux *ctx)
-{
+void pldm_transport_mctp_demux_destroy(struct pldm_transport_mctp_demux *ctx) {
 	if (!ctx) {
 		return;
 	}
@@ -281,10 +269,9 @@ void pldm_transport_mctp_demux_destroy(struct pldm_transport_mctp_demux *ctx)
 
 /* Temporary for old API */
 struct pldm_transport_mctp_demux *
-pldm_transport_mctp_demux_init_with_fd(int mctp_fd)
-{
+pldm_transport_mctp_demux_init_with_fd(int mctp_fd) {
 	struct pldm_transport_mctp_demux *demux =
-		calloc(1, sizeof(struct pldm_transport_mctp_demux));
+	    calloc(1, sizeof(struct pldm_transport_mctp_demux));
 	if (!demux) {
 		return NULL;
 	}
@@ -313,8 +300,7 @@ pldm_transport_mctp_demux_init_with_fd(int mctp_fd)
 }
 
 int pldm_transport_mctp_demux_get_socket_fd(
-	struct pldm_transport_mctp_demux *ctx)
-{
+    struct pldm_transport_mctp_demux *ctx) {
 	if (ctx) {
 		return ctx->socket;
 	}

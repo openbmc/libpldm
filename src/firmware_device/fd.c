@@ -3,15 +3,15 @@
 #include "fd-internal.h"
 #include "msgbuf.h"
 
-#include <libpldm/pldm.h>
-#include <libpldm/firmware_update.h>
 #include <libpldm/firmware_fd.h>
+#include <libpldm/firmware_update.h>
+#include <libpldm/pldm.h>
 #include <libpldm/utils.h>
 
-#include <stdint.h>
 #include <stdbool.h>
-#include <string.h>
+#include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 
 /* FD_T1 Update mode idle timeout, 120 seconds (range [60s, 120s])*/
 static const pldm_fd_time_t DEFAULT_FD_T1_TIMEOUT = 120000;
@@ -24,29 +24,29 @@ static const uint8_t PROGRESS_PERCENT_NOT_SUPPORTED = 101;
 
 #define PLDM_FD_VERSIONS_COUNT 2
 static const uint32_t PLDM_FD_VERSIONS[PLDM_FD_VERSIONS_COUNT] = {
-	/* Only PLDM Firmware 1.1.0 is current implemented. */
-	0xf1f1f000,
-	/* CRC. Calculated with python:
-	hex(crccheck.crc.Crc32.calc(struct.pack('<I', 0xf1f1f000)))
-	*/
-	0x539dbeba,
+    /* Only PLDM Firmware 1.1.0 is current implemented. */
+    0xf1f1f000,
+    /* CRC. Calculated with python:
+    hex(crccheck.crc.Crc32.calc(struct.pack('<I', 0xf1f1f000)))
+    */
+    0x539dbeba,
 };
 const bitfield8_t PLDM_FD_COMMANDS[32] = {
-	// 0x00..0x07
-	{ .byte = (1 << PLDM_QUERY_DEVICE_IDENTIFIERS |
-		   1 << PLDM_GET_FIRMWARE_PARAMETERS) },
-	{ 0 },
-	// 0x10..0x17
-	{ .byte = (1u << PLDM_REQUEST_UPDATE | 1u << PLDM_PASS_COMPONENT_TABLE |
-		   1u << PLDM_UPDATE_COMPONENT) >>
-		  0x10 },
-	// 0x18..0x1f
-	{
-		.byte = (1u << PLDM_ACTIVATE_FIRMWARE | 1u << PLDM_GET_STATUS |
-			 1u << PLDM_CANCEL_UPDATE_COMPONENT |
-			 1u << PLDM_CANCEL_UPDATE) >>
-			0x18,
-	},
+    // 0x00..0x07
+    {.byte = (1 << PLDM_QUERY_DEVICE_IDENTIFIERS |
+	      1 << PLDM_GET_FIRMWARE_PARAMETERS)},
+    {0},
+    // 0x10..0x17
+    {.byte = (1u << PLDM_REQUEST_UPDATE | 1u << PLDM_PASS_COMPONENT_TABLE |
+	      1u << PLDM_UPDATE_COMPONENT) >>
+	     0x10},
+    // 0x18..0x1f
+    {
+	.byte =
+	    (1u << PLDM_ACTIVATE_FIRMWARE | 1u << PLDM_GET_STATUS |
+	     1u << PLDM_CANCEL_UPDATE_COMPONENT | 1u << PLDM_CANCEL_UPDATE) >>
+	    0x18,
+    },
 };
 
 /* Ensure that public definition is kept updated */
@@ -59,8 +59,7 @@ static_assert(alignof(struct pldm_fd) == PLDM_ALIGNOF_PLDM_FD,
 LIBPLDM_CC_NONNULL
 static int pldm_fd_reply_cc(uint8_t ccode,
 			    const struct pldm_header_info *req_hdr,
-			    struct pldm_msg *resp, size_t *resp_payload_len)
-{
+			    struct pldm_msg *resp, size_t *resp_payload_len) {
 	int status;
 
 	/* 1 byte completion code */
@@ -81,8 +80,8 @@ static int pldm_fd_reply_cc(uint8_t ccode,
  * Returns 0 or negative errno. */
 LIBPLDM_CC_NONNULL
 static int pldm_fd_reply_errno(int err, const struct pldm_header_info *req_hdr,
-			       struct pldm_msg *resp, size_t *resp_payload_len)
-{
+			       struct pldm_msg *resp,
+			       size_t *resp_payload_len) {
 	uint8_t ccode = PLDM_ERROR;
 
 	assert(err < 0);
@@ -110,8 +109,7 @@ static int pldm_fd_reply_errno(int err, const struct pldm_header_info *req_hdr,
 
 LIBPLDM_CC_NONNULL
 static void pldm_fd_set_state(struct pldm_fd *fd,
-			      enum pldm_firmware_device_states state)
-{
+			      enum pldm_firmware_device_states state) {
 	/* pldm_fd_set_idle should be used instead */
 	assert(state != PLDM_FD_STATE_IDLE);
 
@@ -125,8 +123,7 @@ static void pldm_fd_set_state(struct pldm_fd *fd,
 
 LIBPLDM_CC_NONNULL
 static void pldm_fd_set_idle(struct pldm_fd *fd,
-			     enum pldm_get_status_reason_code_values reason)
-{
+			     enum pldm_get_status_reason_code_values reason) {
 	fd->prev_state = fd->state;
 	fd->state = PLDM_FD_STATE_IDLE;
 	fd->reason = reason;
@@ -134,8 +131,7 @@ static void pldm_fd_set_idle(struct pldm_fd *fd,
 }
 
 LIBPLDM_CC_NONNULL
-static void pldm_fd_idle_timeout(struct pldm_fd *fd)
-{
+static void pldm_fd_idle_timeout(struct pldm_fd *fd) {
 	enum pldm_get_status_reason_code_values reason = PLDM_FD_INITIALIZATION;
 
 	switch (fd->state) {
@@ -167,8 +163,7 @@ static void pldm_fd_idle_timeout(struct pldm_fd *fd)
 
 LIBPLDM_CC_NONNULL
 static void pldm_fd_get_aux_state(const struct pldm_fd *fd, uint8_t *aux_state,
-				  uint8_t *aux_state_status)
-{
+				  uint8_t *aux_state_status) {
 	*aux_state_status = 0;
 
 	switch (fd->req.state) {
@@ -193,14 +188,12 @@ static void pldm_fd_get_aux_state(const struct pldm_fd *fd, uint8_t *aux_state,
 }
 
 LIBPLDM_CC_NONNULL
-static uint64_t pldm_fd_now(struct pldm_fd *fd)
-{
+static uint64_t pldm_fd_now(struct pldm_fd *fd) {
 	return fd->ops->now(fd->ops_ctx);
 }
 
 LIBPLDM_CC_NONNULL
-static bool pldm_fd_req_should_send(struct pldm_fd *fd)
-{
+static bool pldm_fd_req_should_send(struct pldm_fd *fd) {
 	pldm_fd_time_t now = pldm_fd_now(fd);
 
 	switch (fd->req.state) {
@@ -226,8 +219,7 @@ static bool pldm_fd_req_should_send(struct pldm_fd *fd)
 /* Allocate the next instance ID. Only one request is outstanding so cycling
  * through the range is OK */
 LIBPLDM_CC_NONNULL
-static uint8_t pldm_fd_req_next_instance(struct pldm_fd_req *req)
-{
+static uint8_t pldm_fd_req_next_instance(struct pldm_fd_req *req) {
 	req->instance_id = (req->instance_id + 1) % INSTANCE_ID_COUNT;
 	return req->instance_id;
 }
@@ -236,8 +228,7 @@ LIBPLDM_CC_NONNULL
 static int pldm_fd_qdi(struct pldm_fd *fd, const struct pldm_header_info *hdr,
 		       const struct pldm_msg *req LIBPLDM_CC_UNUSED,
 		       size_t req_payload_len, struct pldm_msg *resp,
-		       size_t *resp_payload_len)
-{
+		       size_t *resp_payload_len) {
 	uint8_t descriptor_count;
 	const struct pldm_descriptor *descriptors;
 	int rc;
@@ -272,8 +263,7 @@ static int pldm_fd_fw_param(struct pldm_fd *fd,
 			    const struct pldm_header_info *hdr,
 			    const struct pldm_msg *req LIBPLDM_CC_UNUSED,
 			    size_t req_payload_len, struct pldm_msg *resp,
-			    size_t *resp_payload_len)
-{
+			    size_t *resp_payload_len) {
 	uint16_t entry_count;
 	const struct pldm_firmware_component_standalone **entries;
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
@@ -300,19 +290,19 @@ static int pldm_fd_fw_param(struct pldm_fd *fd,
 	/* Add the fixed parameters */
 	{
 		struct pldm_get_firmware_parameters_resp_full fwp = {
-			.completion_code = PLDM_SUCCESS,
-			// TODO defaulted to 0, could have a callback.
-			.capabilities_during_update = { 0 },
-			.comp_count = entry_count,
+		    .completion_code = PLDM_SUCCESS,
+		    // TODO defaulted to 0, could have a callback.
+		    .capabilities_during_update = {0},
+		    .comp_count = entry_count,
 		};
 		/* fill active and pending strings */
 		rc = fd->ops->imageset_versions(
-			fd->ops_ctx, &fwp.active_comp_image_set_ver_str,
-			&fwp.pending_comp_image_set_ver_str);
+		    fd->ops_ctx, &fwp.active_comp_image_set_ver_str,
+		    &fwp.pending_comp_image_set_ver_str);
 		if (rc) {
 			return pldm_msgbuf_discard(
-				buf, pldm_fd_reply_cc(PLDM_ERROR, hdr, resp,
-						      resp_payload_len));
+			    buf, pldm_fd_reply_cc(PLDM_ERROR, hdr, resp,
+						  resp_payload_len));
 		}
 
 		size_t len = buf->remaining;
@@ -320,8 +310,8 @@ static int pldm_fd_fw_param(struct pldm_fd *fd,
 							 resp, &len);
 		if (rc) {
 			return pldm_msgbuf_discard(
-				buf, pldm_fd_reply_errno(rc, hdr, resp,
-							 resp_payload_len));
+			    buf, pldm_fd_reply_errno(rc, hdr, resp,
+						     resp_payload_len));
 		}
 		rc = pldm_msgbuf_skip(buf, len);
 		if (rc) {
@@ -336,17 +326,15 @@ static int pldm_fd_fw_param(struct pldm_fd *fd,
 		size_t len;
 
 		struct pldm_component_parameter_entry_full comp = {
-			.comp_classification = e->comp_classification,
-			.comp_identifier = e->comp_identifier,
-			.comp_classification_index =
-				e->comp_classification_index,
+		    .comp_classification = e->comp_classification,
+		    .comp_identifier = e->comp_identifier,
+		    .comp_classification_index = e->comp_classification_index,
 
-			.active_ver = e->active_ver,
-			.pending_ver = e->pending_ver,
+		    .active_ver = e->active_ver,
+		    .pending_ver = e->pending_ver,
 
-			.comp_activation_methods = e->comp_activation_methods,
-			.capabilities_during_update =
-				e->capabilities_during_update,
+		    .comp_activation_methods = e->comp_activation_methods,
+		    .capabilities_during_update = e->capabilities_during_update,
 		};
 
 		if (pldm_msgbuf_peek_remaining(buf, &out, &len)) {
@@ -357,8 +345,8 @@ static int pldm_fd_fw_param(struct pldm_fd *fd,
 								    &len);
 		if (rc) {
 			return pldm_msgbuf_discard(
-				buf, pldm_fd_reply_errno(rc, hdr, resp,
-							 resp_payload_len));
+			    buf, pldm_fd_reply_errno(rc, hdr, resp,
+						     resp_payload_len));
 		}
 
 		pldm_msgbuf_skip(buf, len);
@@ -373,12 +361,11 @@ static int pldm_fd_request_update(struct pldm_fd *fd,
 				  const struct pldm_header_info *hdr,
 				  const struct pldm_msg *req,
 				  size_t req_payload_len, struct pldm_msg *resp,
-				  size_t *resp_payload_len, uint8_t address)
-{
+				  size_t *resp_payload_len, uint8_t address) {
 	struct pldm_request_update_req_full upd;
 	const struct pldm_request_update_resp resp_data = {
-		.fd_meta_data_len = 0,
-		.fd_will_send_pkg_data = 0,
+	    .fd_meta_data_len = 0,
+	    .fd_will_send_pkg_data = 0,
 	};
 	int rc;
 
@@ -402,7 +389,7 @@ static int pldm_fd_request_update(struct pldm_fd *fd,
 	// TODO pass num_of_comp and image_set_ver to application?
 
 	fd->max_transfer =
-		fd->ops->transfer_size(fd->ops_ctx, upd.max_transfer_size);
+	    fd->ops->transfer_size(fd->ops_ctx, upd.max_transfer_size);
 	if (fd->max_transfer > upd.max_transfer_size) {
 		/* Limit to UA's size */
 		fd->max_transfer = upd.max_transfer_size;
@@ -419,11 +406,10 @@ static int pldm_fd_request_update(struct pldm_fd *fd,
 	return 0;
 }
 
-/* wrapper around ops->cancel, will only run ops->cancel when a component update is
- * active */
+/* wrapper around ops->cancel, will only run ops->cancel when a component update
+ * is active */
 LIBPLDM_CC_NONNULL
-static void pldm_fd_maybe_cancel_component(struct pldm_fd *fd)
-{
+static void pldm_fd_maybe_cancel_component(struct pldm_fd *fd) {
 	bool cancel = false;
 
 	switch (fd->state) {
@@ -432,11 +418,11 @@ static void pldm_fd_maybe_cancel_component(struct pldm_fd *fd)
 		cancel = true;
 		break;
 	case PLDM_FD_STATE_APPLY:
-		/* In apply state, once the application ops->apply() has completed
-		 * successfully the component is no longer in update state.
-		 * In that case the cancel should not be forwarded to the application.
-		 * This can occur if a cancel is received while waiting for the
-		 * response to a success ApplyComplete. */
+		/* In apply state, once the application ops->apply() has
+		 * completed successfully the component is no longer in update
+		 * state. In that case the cancel should not be forwarded to the
+		 * application. This can occur if a cancel is received while
+		 * waiting for the response to a success ApplyComplete. */
 		cancel = !(fd->req.complete &&
 			   fd->req.result == PLDM_FWUP_APPLY_SUCCESS);
 		break;
@@ -445,7 +431,8 @@ static void pldm_fd_maybe_cancel_component(struct pldm_fd *fd)
 	}
 
 	if (cancel) {
-		/* Call the platform handler for the current component in progress */
+		/* Call the platform handler for the current component in
+		 * progress */
 		fd->ops->cancel_update_component(fd->ops_ctx, &fd->update_comp);
 	}
 }
@@ -454,9 +441,8 @@ static void pldm_fd_maybe_cancel_component(struct pldm_fd *fd)
  * is in the list returned from ops->components() */
 LIBPLDM_CC_NONNULL
 static enum pldm_component_response_codes pldm_fd_check_update_component(
-	struct pldm_fd *fd, bool update,
-	const struct pldm_firmware_update_component *comp)
-{
+    struct pldm_fd *fd, bool update,
+    const struct pldm_firmware_update_component *comp) {
 	bool found;
 	uint16_t entry_count;
 	int rc;
@@ -470,10 +456,10 @@ static enum pldm_component_response_codes pldm_fd_check_update_component(
 	found = false;
 	for (uint16_t i = 0; i < entry_count; i++) {
 		if (entries[i]->comp_classification ==
-			    comp->comp_classification &&
+			comp->comp_classification &&
 		    entries[i]->comp_identifier == comp->comp_identifier &&
 		    entries[i]->comp_classification_index ==
-			    comp->comp_classification_index) {
+			comp->comp_classification_index) {
 			found = true;
 			break;
 		}
@@ -488,8 +474,7 @@ LIBPLDM_CC_NONNULL
 static int pldm_fd_pass_comp(struct pldm_fd *fd,
 			     const struct pldm_header_info *hdr,
 			     const struct pldm_msg *req, size_t req_payload_len,
-			     struct pldm_msg *resp, size_t *resp_payload_len)
-{
+			     struct pldm_msg *resp, size_t *resp_payload_len) {
 	struct pldm_pass_component_table_req_full pcomp;
 	uint8_t comp_response_code;
 	int rc;
@@ -499,7 +484,8 @@ static int pldm_fd_pass_comp(struct pldm_fd *fd,
 					hdr, resp, resp_payload_len);
 	}
 
-	/* fd->update_comp is used as temporary storage during PassComponent validation */
+	/* fd->update_comp is used as temporary storage during PassComponent
+	 * validation */
 	/* Some portions are unused for PassComponentTable */
 	fd->update_comp.comp_image_size = 0;
 	fd->update_comp.update_option_flags.value = 0;
@@ -512,17 +498,18 @@ static int pldm_fd_pass_comp(struct pldm_fd *fd,
 	fd->update_comp.comp_classification = pcomp.comp_classification;
 	fd->update_comp.comp_identifier = pcomp.comp_identifier;
 	fd->update_comp.comp_classification_index =
-		pcomp.comp_classification_index;
+	    pcomp.comp_classification_index;
 	fd->update_comp.comp_comparison_stamp = pcomp.comp_comparison_stamp;
 	memcpy(&fd->update_comp.version, &pcomp.version, sizeof(pcomp.version));
 
 	comp_response_code =
-		pldm_fd_check_update_component(fd, false, &fd->update_comp);
+	    pldm_fd_check_update_component(fd, false, &fd->update_comp);
 
 	const struct pldm_pass_component_table_resp resp_data = {
-		/* Component Response Code is 0 for ComponentResponse, 1 otherwise */
-		.comp_resp = (comp_response_code != 0),
-		.comp_resp_code = comp_response_code,
+	    /* Component Response Code is 0 for ComponentResponse, 1 otherwise
+	     */
+	    .comp_resp = (comp_response_code != 0),
+	    .comp_resp_code = comp_response_code,
 	};
 
 	rc = encode_pass_component_table_resp(hdr->instance, &resp_data, resp,
@@ -543,8 +530,7 @@ static int pldm_fd_update_comp(struct pldm_fd *fd,
 			       const struct pldm_header_info *hdr,
 			       const struct pldm_msg *req,
 			       size_t req_payload_len, struct pldm_msg *resp,
-			       size_t *resp_payload_len)
-{
+			       size_t *resp_payload_len) {
 	struct pldm_update_component_req_full up;
 	uint8_t comp_response_code;
 	int rc;
@@ -564,26 +550,26 @@ static int pldm_fd_update_comp(struct pldm_fd *fd,
 	fd->update_comp.comp_classification = up.comp_classification;
 	fd->update_comp.comp_identifier = up.comp_identifier;
 	fd->update_comp.comp_classification_index =
-		up.comp_classification_index;
+	    up.comp_classification_index;
 	fd->update_comp.comp_comparison_stamp = up.comp_comparison_stamp;
 	fd->update_comp.comp_image_size = up.comp_image_size;
 	fd->update_comp.update_option_flags = up.update_option_flags;
 	memcpy(&fd->update_comp.version, &up.version, sizeof(up.version));
 
 	comp_response_code =
-		pldm_fd_check_update_component(fd, true, &fd->update_comp);
+	    pldm_fd_check_update_component(fd, true, &fd->update_comp);
 
 	// Mask to only the "Force Update" flag, others are not handled.
 	bitfield32_t update_flags = {
-		.bits.bit0 = fd->update_comp.update_option_flags.bits.bit0
-	};
+	    .bits.bit0 = fd->update_comp.update_option_flags.bits.bit0};
 
 	const struct pldm_update_component_resp resp_data = {
-		/* Component Response Code is 0 for ComponentResponse, 1 otherwise */
-		.comp_compatibility_resp = (comp_response_code != 0),
-		.comp_compatibility_resp_code = comp_response_code,
-		.update_option_flags_enabled = update_flags,
-		.time_before_req_fw_data = 0,
+	    /* Component Response Code is 0 for ComponentResponse, 1 otherwise
+	     */
+	    .comp_compatibility_resp = (comp_response_code != 0),
+	    .comp_compatibility_resp_code = comp_response_code,
+	    .update_option_flags_enabled = update_flags,
+	    .time_before_req_fw_data = 0,
 	};
 
 	rc = encode_update_component_resp(hdr->instance, &resp_data, resp,
@@ -591,8 +577,9 @@ static int pldm_fd_update_comp(struct pldm_fd *fd,
 	if (rc) {
 		/* Encoding response failed */
 		if (comp_response_code == PLDM_CRC_COMP_CAN_BE_UPDATED) {
-			/* Inform the application of cancellation. Call it directly
-			 * rather than going through pldm_fd_maybe_cancel_component() */
+			/* Inform the application of cancellation. Call it
+			 * directly rather than going through
+			 * pldm_fd_maybe_cancel_component() */
 			fd->ops->cancel_update_component(fd->ops_ctx,
 							 &fd->update_comp);
 		}
@@ -616,8 +603,7 @@ static int pldm_fd_get_status(struct pldm_fd *fd,
 			      const struct pldm_header_info *hdr,
 			      const struct pldm_msg *req LIBPLDM_CC_UNUSED,
 			      size_t req_payload_len, struct pldm_msg *resp,
-			      size_t *resp_payload_len)
-{
+			      size_t *resp_payload_len) {
 	int rc;
 
 	/* No request data */
@@ -628,9 +614,9 @@ static int pldm_fd_get_status(struct pldm_fd *fd,
 
 	/* Defaults */
 	struct pldm_get_status_resp st = {
-		.current_state = fd->state,
-		.previous_state = fd->prev_state,
-		.progress_percent = PROGRESS_PERCENT_NOT_SUPPORTED,
+	    .current_state = fd->state,
+	    .previous_state = fd->prev_state,
+	    .progress_percent = PROGRESS_PERCENT_NOT_SUPPORTED,
 	};
 
 	pldm_fd_get_aux_state(fd, &st.aux_state, &st.aux_state_status);
@@ -642,12 +628,12 @@ static int pldm_fd_get_status(struct pldm_fd *fd,
 	case PLDM_FD_STATE_DOWNLOAD:
 		if (fd->update_comp.comp_image_size > 0) {
 			uint32_t one_percent =
-				fd->update_comp.comp_image_size / 100;
+			    fd->update_comp.comp_image_size / 100;
 			if (fd->update_comp.comp_image_size % 100 != 0) {
 				one_percent += 1;
 			}
 			st.progress_percent =
-				(fd->specific.download.offset / one_percent);
+			    (fd->specific.download.offset / one_percent);
 		}
 		st.update_option_flags_enabled = fd->update_flags;
 		break;
@@ -673,10 +659,9 @@ static int pldm_fd_get_status(struct pldm_fd *fd,
 
 LIBPLDM_CC_NONNULL
 static int pldm_fd_cancel_update_comp(
-	struct pldm_fd *fd, const struct pldm_header_info *hdr,
-	const struct pldm_msg *req LIBPLDM_CC_UNUSED, size_t req_payload_len,
-	struct pldm_msg *resp, size_t *resp_payload_len)
-{
+    struct pldm_fd *fd, const struct pldm_header_info *hdr,
+    const struct pldm_msg *req LIBPLDM_CC_UNUSED, size_t req_payload_len,
+    struct pldm_msg *resp, size_t *resp_payload_len) {
 	int rc;
 
 	/* No request data */
@@ -712,8 +697,7 @@ static int pldm_fd_cancel_update(struct pldm_fd *fd,
 				 const struct pldm_header_info *hdr,
 				 const struct pldm_msg *req LIBPLDM_CC_UNUSED,
 				 size_t req_payload_len, struct pldm_msg *resp,
-				 size_t *resp_payload_len)
-{
+				 size_t *resp_payload_len) {
 	int rc;
 
 	/* No request data */
@@ -730,8 +714,8 @@ static int pldm_fd_cancel_update(struct pldm_fd *fd,
 	/* Assume non_functioning_component_indication = False, in future
 	 * could add a platform callback */
 	const struct pldm_cancel_update_resp resp_data = {
-		.non_functioning_component_indication = 0,
-		.non_functioning_component_bitmap = 0,
+	    .non_functioning_component_indication = 0,
+	    .non_functioning_component_bitmap = 0,
 	};
 	rc = encode_cancel_update_resp(hdr->instance, &resp_data, resp,
 				       resp_payload_len);
@@ -751,15 +735,14 @@ static int pldm_fd_activate_firmware(struct pldm_fd *fd,
 				     const struct pldm_msg *req,
 				     size_t req_payload_len,
 				     struct pldm_msg *resp,
-				     size_t *resp_payload_len)
-{
+				     size_t *resp_payload_len) {
 	uint16_t estimated_time;
 	uint8_t ccode;
 	int rc;
 	bool self_contained;
 
-	rc = decode_activate_firmware_req(req, req_payload_len,
-					  &self_contained);
+	rc =
+	    decode_activate_firmware_req(req, req_payload_len, &self_contained);
 	if (rc) {
 		return pldm_fd_reply_errno(rc, hdr, resp, resp_payload_len);
 	}
@@ -774,14 +757,15 @@ static int pldm_fd_activate_firmware(struct pldm_fd *fd,
 
 	if (ccode == PLDM_SUCCESS ||
 	    ccode == PLDM_FWUP_ACTIVATION_NOT_REQUIRED) {
-		/* Transition through states so that the prev_state is correct */
+		/* Transition through states so that the prev_state is correct
+		 */
 		pldm_fd_set_state(fd, PLDM_FD_STATE_ACTIVATE);
 		pldm_fd_set_idle(fd, PLDM_FD_ACTIVATE_FW);
 	}
 
 	if (ccode == PLDM_SUCCESS) {
 		const struct pldm_activate_firmware_resp resp_data = {
-			.estimated_time_activation = estimated_time,
+		    .estimated_time_activation = estimated_time,
 		};
 		rc = encode_activate_firmware_resp(hdr->instance, &resp_data,
 						   resp, resp_payload_len);
@@ -797,8 +781,7 @@ static int pldm_fd_activate_firmware(struct pldm_fd *fd,
 }
 
 LIBPLDM_CC_NONNULL
-static uint32_t pldm_fd_fwdata_size(struct pldm_fd *fd)
-{
+static uint32_t pldm_fd_fwdata_size(struct pldm_fd *fd) {
 	uint32_t size;
 
 	if (fd->state != PLDM_FD_STATE_DOWNLOAD) {
@@ -821,8 +804,7 @@ static uint32_t pldm_fd_fwdata_size(struct pldm_fd *fd)
 LIBPLDM_CC_NONNULL
 static int pldm_fd_handle_fwdata_resp(struct pldm_fd *fd,
 				      const struct pldm_msg *resp,
-				      size_t resp_payload_len)
-{
+				      size_t resp_payload_len) {
 	struct pldm_fd_download *dl;
 	uint32_t fwdata_size;
 	uint8_t res;
@@ -846,7 +828,8 @@ static int pldm_fd_handle_fwdata_resp(struct pldm_fd *fd,
 	case PLDM_SUCCESS:
 		break;
 	case PLDM_FWUP_RETRY_REQUEST_FW_DATA:
-		/* Just return, let the retry timer send another request later */
+		/* Just return, let the retry timer send another request later
+		 */
 		return 0;
 	default:
 		/* Send a TransferComplete failure */
@@ -860,8 +843,8 @@ static int pldm_fd_handle_fwdata_resp(struct pldm_fd *fd,
 
 	fwdata_size = pldm_fd_fwdata_size(fd);
 	if (resp_payload_len != fwdata_size + 1) {
-		/* Data is incorrect size. Could indicate MCTP corruption, drop it
-		 * and let retry timer handle it */
+		/* Data is incorrect size. Could indicate MCTP corruption, drop
+		 * it and let retry timer handle it */
 		return -EOVERFLOW;
 	}
 
@@ -881,7 +864,8 @@ static int pldm_fd_handle_fwdata_resp(struct pldm_fd *fd,
 		/* Move to next offset */
 		dl->offset += fwdata_size;
 		if (dl->offset == fd->update_comp.comp_image_size) {
-			/* Mark as complete, next progress() call will send the TransferComplete request */
+			/* Mark as complete, next progress() call will send the
+			 * TransferComplete request */
 			fd->req.complete = true;
 			fd->req.result = PLDM_FWUP_TRANSFER_SUCCESS;
 		}
@@ -896,9 +880,8 @@ static int pldm_fd_handle_fwdata_resp(struct pldm_fd *fd,
 
 LIBPLDM_CC_NONNULL
 static int pldm_fd_handle_transfer_complete_resp(
-	struct pldm_fd *fd, const struct pldm_msg *resp LIBPLDM_CC_UNUSED,
-	size_t resp_payload_len LIBPLDM_CC_UNUSED)
-{
+    struct pldm_fd *fd, const struct pldm_msg *resp LIBPLDM_CC_UNUSED,
+    size_t resp_payload_len LIBPLDM_CC_UNUSED) {
 	if (fd->state != PLDM_FD_STATE_DOWNLOAD) {
 		return -EPROTO;
 	}
@@ -920,7 +903,7 @@ static int pldm_fd_handle_transfer_complete_resp(
 		/* Switch to Verify */
 		memset(&fd->specific, 0x0, sizeof(fd->specific));
 		fd->specific.verify.progress_percent =
-			PROGRESS_PERCENT_NOT_SUPPORTED;
+		    PROGRESS_PERCENT_NOT_SUPPORTED;
 		fd->req.state = PLDM_FD_REQ_READY;
 		fd->req.complete = false;
 		pldm_fd_set_state(fd, PLDM_FD_STATE_VERIFY);
@@ -933,9 +916,8 @@ static int pldm_fd_handle_transfer_complete_resp(
 
 LIBPLDM_CC_NONNULL
 static int pldm_fd_handle_verify_complete_resp(
-	struct pldm_fd *fd, const struct pldm_msg *resp LIBPLDM_CC_UNUSED,
-	size_t resp_payload_len LIBPLDM_CC_UNUSED)
-{
+    struct pldm_fd *fd, const struct pldm_msg *resp LIBPLDM_CC_UNUSED,
+    size_t resp_payload_len LIBPLDM_CC_UNUSED) {
 	if (fd->state != PLDM_FD_STATE_VERIFY) {
 		return -EPROTO;
 	}
@@ -954,7 +936,7 @@ static int pldm_fd_handle_verify_complete_resp(
 		/* Switch to Apply */
 		memset(&fd->specific, 0x0, sizeof(fd->specific));
 		fd->specific.apply.progress_percent =
-			PROGRESS_PERCENT_NOT_SUPPORTED;
+		    PROGRESS_PERCENT_NOT_SUPPORTED;
 		fd->req.state = PLDM_FD_REQ_READY;
 		fd->req.complete = false;
 		pldm_fd_set_state(fd, PLDM_FD_STATE_APPLY);
@@ -967,9 +949,8 @@ static int pldm_fd_handle_verify_complete_resp(
 
 LIBPLDM_CC_NONNULL
 static int pldm_fd_handle_apply_complete_resp(
-	struct pldm_fd *fd, const struct pldm_msg *resp LIBPLDM_CC_UNUSED,
-	size_t resp_payload_len LIBPLDM_CC_UNUSED)
-{
+    struct pldm_fd *fd, const struct pldm_msg *resp LIBPLDM_CC_UNUSED,
+    size_t resp_payload_len LIBPLDM_CC_UNUSED) {
 	if (fd->state != PLDM_FD_STATE_APPLY) {
 		return -EPROTO;
 	}
@@ -997,8 +978,7 @@ static int pldm_fd_handle_apply_complete_resp(
 
 LIBPLDM_CC_NONNULL
 static int pldm_fd_handle_resp(struct pldm_fd *fd, pldm_tid_t address,
-			       const void *resp_msg, size_t resp_len)
-{
+			       const void *resp_msg, size_t resp_len) {
 	size_t resp_payload_len;
 	const struct pldm_msg *resp = resp_msg;
 
@@ -1054,8 +1034,7 @@ static int pldm_fd_handle_resp(struct pldm_fd *fd, pldm_tid_t address,
 
 LIBPLDM_CC_NONNULL
 static int pldm_fd_progress_download(struct pldm_fd *fd, struct pldm_msg *req,
-				     size_t *req_payload_len)
-{
+				     size_t *req_payload_len) {
 	uint8_t instance_id;
 	struct pldm_fd_download *dl;
 	int rc;
@@ -1075,8 +1054,8 @@ static int pldm_fd_progress_download(struct pldm_fd *fd, struct pldm_msg *req,
 	} else {
 		/* Send a new RequestFirmwareData */
 		const struct pldm_request_firmware_data_req req_params = {
-			.offset = dl->offset,
-			.length = pldm_fd_fwdata_size(fd),
+		    .offset = dl->offset,
+		    .length = pldm_fd_fwdata_size(fd),
 		};
 
 		rc = encode_request_firmware_data_req(instance_id, &req_params,
@@ -1098,8 +1077,7 @@ static int pldm_fd_progress_download(struct pldm_fd *fd, struct pldm_msg *req,
 
 LIBPLDM_CC_NONNULL
 static int pldm_fd_progress_verify(struct pldm_fd *fd, struct pldm_msg *req,
-				   size_t *req_payload_len)
-{
+				   size_t *req_payload_len) {
 	uint8_t instance_id;
 	int rc;
 
@@ -1117,11 +1095,12 @@ static int pldm_fd_progress_verify(struct pldm_fd *fd, struct pldm_msg *req,
 		if (pending) {
 			if (res == PLDM_FWUP_VERIFY_SUCCESS) {
 				/* Return without a VerifyComplete request.
-				* Will call verify() again on next call */
+				 * Will call verify() again on next call */
 				*req_payload_len = 0;
 				return 0;
 			}
-			/* This is an API infraction by the implementer, return a distinctive failure */
+			/* This is an API infraction by the implementer, return
+			 * a distinctive failure */
 			res = PLDM_FWUP_VENDOR_VERIFY_RESULT_RANGE_MAX;
 		}
 		fd->req.result = res;
@@ -1146,8 +1125,7 @@ static int pldm_fd_progress_verify(struct pldm_fd *fd, struct pldm_msg *req,
 
 LIBPLDM_CC_NONNULL
 static int pldm_fd_progress_apply(struct pldm_fd *fd, struct pldm_msg *req,
-				  size_t *req_payload_len)
-{
+				  size_t *req_payload_len) {
 	uint8_t instance_id;
 	int rc;
 
@@ -1165,11 +1143,12 @@ static int pldm_fd_progress_apply(struct pldm_fd *fd, struct pldm_msg *req,
 		if (pending) {
 			if (res == PLDM_FWUP_APPLY_SUCCESS) {
 				/* Return without a ApplyComplete request.
-				* Will call apply() again on next call */
+				 * Will call apply() again on next call */
 				*req_payload_len = 0;
 				return 0;
 			}
-			/* This is an API infraction by the implementer, return a distinctive failure */
+			/* This is an API infraction by the implementer, return
+			 * a distinctive failure */
 			res = PLDM_FWUP_VENDOR_APPLY_RESULT_RANGE_MAX;
 		}
 		fd->req.result = res;
@@ -1183,8 +1162,8 @@ static int pldm_fd_progress_apply(struct pldm_fd *fd, struct pldm_msg *req,
 
 	instance_id = pldm_fd_req_next_instance(&fd->req);
 	const struct pldm_apply_complete_req req_data = {
-		.apply_result = fd->req.result,
-		.comp_activation_methods_modification = { 0 },
+	    .apply_result = fd->req.result,
+	    .comp_activation_methods_modification = {0},
 	};
 	rc = encode_apply_complete_req(instance_id, &req_data, req,
 				       req_payload_len);
@@ -1203,8 +1182,7 @@ static int pldm_fd_progress_apply(struct pldm_fd *fd, struct pldm_msg *req,
 
 LIBPLDM_ABI_TESTING
 struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx,
-			    struct pldm_control *control)
-{
+			    struct pldm_control *control) {
 	struct pldm_fd *fd = malloc(sizeof(*fd));
 	if (fd) {
 		if (pldm_fd_setup(fd, sizeof(*fd), ops, ops_ctx, control) ==
@@ -1220,8 +1198,7 @@ struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx,
 LIBPLDM_ABI_TESTING
 int pldm_fd_setup(struct pldm_fd *fd, size_t pldm_fd_size,
 		  const struct pldm_fd_ops *ops, void *ops_ctx,
-		  struct pldm_control *control)
-{
+		  struct pldm_control *control) {
 	int rc;
 
 	if (fd == NULL || ops == NULL) {
@@ -1248,10 +1225,9 @@ int pldm_fd_setup(struct pldm_fd *fd, size_t pldm_fd_size,
 	fd->fd_t2_retry_time = DEFAULT_FD_T2_RETRY_TIME;
 
 	if (control) {
-		rc = pldm_control_add_type(control, PLDM_FWUP,
-					   &PLDM_FD_VERSIONS,
-					   PLDM_FD_VERSIONS_COUNT,
-					   PLDM_FD_COMMANDS);
+		rc = pldm_control_add_type(
+		    control, PLDM_FWUP, &PLDM_FD_VERSIONS,
+		    PLDM_FD_VERSIONS_COUNT, PLDM_FD_COMMANDS);
 		if (rc) {
 			return rc;
 		}
@@ -1263,8 +1239,7 @@ int pldm_fd_setup(struct pldm_fd *fd, size_t pldm_fd_size,
 LIBPLDM_ABI_TESTING
 int pldm_fd_handle_msg(struct pldm_fd *fd, pldm_tid_t remote_address,
 		       const void *in_msg, size_t in_len, void *out_msg,
-		       size_t *out_len)
-{
+		       size_t *out_len) {
 	size_t req_payload_len;
 	size_t resp_payload_len;
 	struct pldm_header_info hdr;
@@ -1321,7 +1296,8 @@ int pldm_fd_handle_msg(struct pldm_fd *fd, pldm_tid_t remote_address,
 	case PLDM_REQUEST_UPDATE:
 		break;
 	default:
-		/* Requests must come from the same address that requested the update */
+		/* Requests must come from the same address that requested the
+		 * update */
 		if (!fd->ua_address_set || remote_address != fd->ua_address) {
 			return pldm_fd_reply_cc(PLDM_ERROR_NOT_READY, &hdr,
 						resp, &resp_payload_len);
@@ -1352,9 +1328,9 @@ int pldm_fd_handle_msg(struct pldm_fd *fd, pldm_tid_t remote_address,
 				      &resp_payload_len);
 		break;
 	case PLDM_REQUEST_UPDATE:
-		rc = pldm_fd_request_update(fd, &hdr, req, req_payload_len,
-					    resp, &resp_payload_len,
-					    remote_address);
+		rc =
+		    pldm_fd_request_update(fd, &hdr, req, req_payload_len, resp,
+					   &resp_payload_len, remote_address);
 		break;
 	case PLDM_PASS_COMPONENT_TABLE:
 		rc = pldm_fd_pass_comp(fd, &hdr, req, req_payload_len, resp,
@@ -1394,8 +1370,7 @@ int pldm_fd_handle_msg(struct pldm_fd *fd, pldm_tid_t remote_address,
 
 LIBPLDM_ABI_TESTING
 int pldm_fd_progress(struct pldm_fd *fd, void *out_msg, size_t *out_len,
-		     pldm_tid_t *address)
-{
+		     pldm_tid_t *address) {
 	size_t req_payload_len;
 	struct pldm_msg *req = out_msg;
 	int rc = -EINVAL;
@@ -1463,8 +1438,7 @@ int pldm_fd_progress(struct pldm_fd *fd, void *out_msg, size_t *out_len,
 }
 
 LIBPLDM_ABI_TESTING
-int pldm_fd_set_update_idle_timeout(struct pldm_fd *fd, uint32_t time)
-{
+int pldm_fd_set_update_idle_timeout(struct pldm_fd *fd, uint32_t time) {
 	if (fd == NULL) {
 		return -EINVAL;
 	}
@@ -1474,8 +1448,7 @@ int pldm_fd_set_update_idle_timeout(struct pldm_fd *fd, uint32_t time)
 }
 
 LIBPLDM_ABI_TESTING
-int pldm_fd_set_request_retry_time(struct pldm_fd *fd, uint32_t time)
-{
+int pldm_fd_set_request_retry_time(struct pldm_fd *fd, uint32_t time) {
 	if (fd == NULL) {
 		return -EINVAL;
 	}

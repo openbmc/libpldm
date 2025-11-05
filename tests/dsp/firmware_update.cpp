@@ -2016,7 +2016,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneDescriptorEach)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -2126,7 +2128,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesTwoOneDescriptors)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -2241,7 +2245,9 @@ TEST(QueryDownstreamIdentifiers, decodeResponseTwoDevicesOneTwoDescriptors)
     constexpr size_t payloadLen =
         PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstream_devices_len;
 
-    struct pldm_query_downstream_identifiers_resp resp_data{};
+    struct pldm_query_downstream_identifiers_resp resp_data
+    {
+    };
     PLDM_MSG_DEFINE_P(response, payloadLen);
     struct pldm_downstream_device_iter devs;
     struct pldm_downstream_device dev;
@@ -4827,7 +4833,9 @@ TEST(DecodePldmFirmwareUpdatePackage, badArguments)
 {
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     uint8_t data = 0;
     int rc;
 
@@ -4867,7 +4875,9 @@ TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinVersion)
     };
 
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     uint8_t data = 0;
     int rc;
 
@@ -4905,7 +4915,9 @@ TEST(DecodePldmFirmwareUpdatePackage, badPinRevision)
     };
 
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     uint8_t data = 0;
     int rc;
 
@@ -4947,7 +4959,9 @@ TEST(DecodePldmFirmwareUpdatePackage, badPinMagic)
     };
 
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     uint8_t data = 0;
     int rc;
 
@@ -4989,7 +5003,9 @@ TEST(DecodePldmFirmwareUpdatePackage, unsupportedPinIdentifier)
     };
 
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     uint8_t data = 0;
     int rc;
 
@@ -5012,7 +5028,9 @@ TEST(DecodePldmFirmwareUpdatePackage, oldConsumer)
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(pin);
 
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
@@ -5045,7 +5063,9 @@ TEST(DecodePldmFirmwareUpdatePackage, v1h1fd1fdd1cii)
     struct pldm_package_firmware_device_id_record fdrec;
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(pin);
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     int nr_fdrec_desc = 0;
     int nr_fdrec = 0;
     int nr_infos = 0;
@@ -5177,7 +5197,9 @@ TEST(DecodePldmFirmwareUpdatePackage, invalidDownstreamDeviceIteration)
     struct pldm_package_firmware_device_id_record fdrec;
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(pin);
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     int nr_fdrec_desc = 0;
     int nr_fdrec = 0;
     int rc;
@@ -5280,7 +5302,9 @@ TEST(DecodePldmFirmwareUpdatePackage, p2v1h1fd1fdd1cii)
     struct pldm_package_firmware_device_id_record fdrec;
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     int nr_fdrec_desc = 0;
     int nr_ddrec_desc = 0;
     int nr_fdrec = 0;
@@ -5444,7 +5468,9 @@ TEST(DecodePldmFirmwareUpdatePackage, v2h1fd1fdd1dd1ddd2cii)
     struct pldm_package_firmware_device_id_record fdrec;
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(pin);
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     int nr_fdrec_desc = 0;
     int nr_ddrec_desc = 0;
     int nr_fdrec = 0;
@@ -5665,7 +5691,9 @@ TEST(DecodePldmFirmwareUpdatePackage, v3h1fd1fdd1dd1ddd2cii)
     struct pldm_package_firmware_device_id_record fdrec;
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR03H(pin);
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     int nr_fdrec_desc = 0;
     int nr_ddrec_desc = 0;
     int nr_fdrec = 0;
@@ -5898,7 +5926,9 @@ TEST(DecodePldmFirmwareUpdatePackage, v4h1fd1fdd1dd1ddd2cii)
     struct pldm_package_firmware_device_id_record fdrec;
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H(pin);
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     int nr_fdrec_desc = 0;
     int nr_ddrec_desc = 0;
     int nr_fdrec = 0;
@@ -6145,7 +6175,9 @@ TEST(DecodePldmFirmwareUpdatePackage, downstreamDeviceBeforeFirmwareDevice)
     struct pldm_package_downstream_device_id_record ddrec;
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H(pin);
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
@@ -6197,7 +6229,9 @@ TEST(DecodePldmFirmwareUpdatePackage, componentImageInfosBeforeFirmwareDevice)
     struct pldm_package_component_image_information info;
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H(pin);
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),
@@ -6251,7 +6285,9 @@ TEST(DecodePldmFirmwareUpdatePackage,
     struct pldm_package_firmware_device_id_record fdrec;
     DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H(pin);
     pldm_package_header_information_pad hdr;
-    struct pldm_package pkg{};
+    struct pldm_package pkg
+    {
+    };
     int rc;
 
     rc = decode_pldm_firmware_update_package(package.data(), package.size(),

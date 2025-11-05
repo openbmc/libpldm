@@ -11,7 +11,7 @@
 
 #define BIT(i) (1UL << (i))
 
-#define PLDM_TID_MAX	 256
+#define PLDM_TID_MAX 256
 #define PLDM_INST_ID_MAX 32
 
 /* We need to track our allocations explicitly due to OFD lock merging/splitting
@@ -26,14 +26,12 @@ struct pldm_instance_db {
 	int lock_db_fd;
 };
 
-static inline int iid_next(pldm_instance_id_t cur)
-{
+static inline int iid_next(pldm_instance_id_t cur) {
 	return (cur + 1) % PLDM_INST_ID_MAX;
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_instance_db_init(struct pldm_instance_db **ctx, const char *dbpath)
-{
+int pldm_instance_db_init(struct pldm_instance_db **ctx, const char *dbpath) {
 	struct pldm_instance_db *l_ctx;
 	struct stat statbuf;
 	int rc;
@@ -81,15 +79,13 @@ int pldm_instance_db_init(struct pldm_instance_db **ctx, const char *dbpath)
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_instance_db_init_default(struct pldm_instance_db **ctx)
-{
+int pldm_instance_db_init_default(struct pldm_instance_db **ctx) {
 	return pldm_instance_db_init(ctx,
 				     "/usr/share/libpldm/instance-db/default");
 }
 
 LIBPLDM_ABI_STABLE
-int pldm_instance_db_destroy(struct pldm_instance_db *ctx)
-{
+int pldm_instance_db_destroy(struct pldm_instance_db *ctx) {
 	if (!ctx) {
 		return 0;
 	}
@@ -99,27 +95,26 @@ int pldm_instance_db_destroy(struct pldm_instance_db *ctx)
 }
 
 static const struct flock pldm_instance_id_cfls = {
-	.l_type = F_RDLCK,
-	.l_whence = SEEK_SET,
-	.l_len = 1,
+    .l_type = F_RDLCK,
+    .l_whence = SEEK_SET,
+    .l_len = 1,
 };
 
 static const struct flock pldm_instance_id_cflx = {
-	.l_type = F_WRLCK,
-	.l_whence = SEEK_SET,
-	.l_len = 1,
+    .l_type = F_WRLCK,
+    .l_whence = SEEK_SET,
+    .l_len = 1,
 };
 
 static const struct flock pldm_instance_id_cflu = {
-	.l_type = F_UNLCK,
-	.l_whence = SEEK_SET,
-	.l_len = 1,
+    .l_type = F_UNLCK,
+    .l_whence = SEEK_SET,
+    .l_len = 1,
 };
 
 LIBPLDM_ABI_STABLE
 int pldm_instance_id_alloc(struct pldm_instance_db *ctx, pldm_tid_t tid,
-			   pldm_instance_id_t *iid)
-{
+			   pldm_instance_id_t *iid) {
 	uint8_t l_iid;
 
 	if (!ctx || !iid) {
@@ -214,8 +209,7 @@ int pldm_instance_id_alloc(struct pldm_instance_db *ctx, pldm_tid_t tid,
 
 LIBPLDM_ABI_STABLE
 int pldm_instance_id_free(struct pldm_instance_db *ctx, pldm_tid_t tid,
-			  pldm_instance_id_t iid)
-{
+			  pldm_instance_id_t iid) {
 	struct flock flop;
 	int rc;
 
