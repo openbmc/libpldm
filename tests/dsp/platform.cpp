@@ -7,6 +7,7 @@
 #include <libpldm/pldm_types.h>
 
 #include <array>
+#include <bit>
 #include <cerrno>
 #include <cstddef>
 #include <cstdint>
@@ -6620,4 +6621,40 @@ TEST(EncodePldmFileDescriptorPdr, BadParamBufferTooSmall)
                                                        &bufferSize),
               -EOVERFLOW);
 }
+TEST(EncodeGetStateSensorReadings, InvalidNullMsg)
+{
+    bitfield8_t rearm = {0};
+    uint8_t reserved = 0;
+
+    auto rc = encode_get_state_sensor_readings_req(0, 0x1234, rearm, reserved,
+                                                   nullptr);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(DecodeGetStateSensorReadings, NullCompletionCode)
+{
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + 3> msg{};
+    auto* response = std::bit_cast<pldm_msg*>(msg.data());
+    response->payload[0] = PLDM_SUCCESS;
+    response->payload[1] = 1; // comp_sensor_count
+
+    auto rc = decode_get_state_sensor_readings_resp(
+        response, msg.size() - sizeof(pldm_msg_hdr), nullptr, nullptr, nullptr);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(DecodeGetStateSensorReadings, PayloadTooShort)
+{
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + 1> msg{};
+    auto* response = std::bit_cast<pldm_msg*>(msg.data());
+
+    uint8_t cc = 0;
+    uint8_t count = 0;
+    auto rc = decode_get_state_sensor_readings_resp(
+        response, msg.size() - sizeof(pldm_msg_hdr), &cc, &count, nullptr);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
 #endif
