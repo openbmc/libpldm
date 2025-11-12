@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e6d4dba_bf6fa569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-12T23:50:05Z",
+      "side": 1,
+      "message": "Hi Jino, sorry for the delay. Thanks for tackling handling the PDRs in terms of iterators, this is generally a great thing for library ergonomics. I do have some requests inline however.",
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3653cf8b_4f2bcdc7",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-12T23:50:05Z",
+      "side": 1,
+      "message": "The `### Added` section is immediately below. It would make more sense to move these there.\n\nSeparately, the changelog is for users of the library. The git history records implementation details. Users should not be calling the `*_init()` and `*_next()` APIs directly. Rather, they should be using the iterator macros. Let\u0027s keep the descriptions here focused on how the user will use the APIs.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 61
+      },
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7852bc5_bbab470b",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-12T23:50:05Z",
+      "side": 1,
+      "message": "While there are historically instances of typedefs in the codebase (e.g. immediately above), please don\u0027t add more without good reason. The only good reason right now is to abstract over a type for the purpose of renaming it down the track. I don\u0027t expect that\u0027s intended here.\n\nPlease audit the rest of the patch to remove the typedefs.",
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6bdda6e_e75518a8",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-12T23:50:05Z",
+      "side": 1,
+      "message": "Please make sure that the type name is appropriately prefixed:\n\nhttps://github.com/openbmc/libpldm/blob/9f6b9b3aca29a022c597a87f445d487d8020fe51/CONTRIBUTING.md#L249-L264\n\nNote that this also discusses using e.g. `_pdr_` or `_platform_` as part of that prefix.\n\nPlease audit the rest of the patch for such concerns and fix them as appropriate.\n\nIf you haven\u0027t already, please read the rest of `CONTRIBUTING.md`.",
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4535e6a_45955287",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-12T23:50:05Z",
+      "side": 1,
+      "message": "POSIX reserves the namespace of all types suffixed with `_t` (see the tables in section 2.2.2 (\"The Name Space\") of The Open Group Base Specifications Issue 8, IEEE Std 1003.1-2024). Please avoid adding any further instances.\n\nAdditionaly, this is another typedef. Please name the struct, drop the typedef, and audit the rest of the patch for further instances of anonymous structs.",
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b4d70f6_d953543c",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-12T23:50:05Z",
+      "side": 1,
+      "message": "I think this is a mischaracterisation. This _is_ the API that users should use. If we\u0027re to be selective about what we document, _these_ macros are what need it. The documentation on the `*_init()` and `*_next()` APIs above is less of a priority precisely because they\u0027re hidden by use of these macros.\n\nFor an example of what I\u0027d like to see, there\u0027s this:\n\nhttps://github.com/openbmc/libpldm/blob/9f6b9b3aca29a022c597a87f445d487d8020fe51/include/libpldm/firmware_update.h#L2855-L2924",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 22
+      },
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c2a7f5b_80d15bcc",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-12T23:50:05Z",
+      "side": 1,
+      "message": "It probably needs to be documented in `CONTRIBUTING.md`, but I\u0027d like us to be consistent with the existing iterator macros, which means two things: Lower-case naming, and prefixing them as `foreach_`, followed by the type-name.",
+      "range": {
+        "startLine": 158,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 35
+      },
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bb01b8b_1f4ba017",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2404,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-12T23:50:05Z",
+      "side": 1,
+      "message": "I\u0027d rather not see more bespoke overflow testing. Can you discuss why you\u0027re not using the msgbuf APIs? I can\u0027t see a reason you should be avoiding them. They solve these problems in a way that, as a maintainer reviewing the changes, I know I don\u0027t have to worry about analysing whether you\u0027ve missed any checks.",
+      "range": {
+        "startLine": 2397,
+        "startChar": 1,
+        "endLine": 2404,
+        "endChar": 2
+      },
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4427b8f3_e9c97d75",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-12T23:50:05Z",
+      "side": 1,
+      "message": "I expect we don\u0027t want this to be an error condition.",
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
