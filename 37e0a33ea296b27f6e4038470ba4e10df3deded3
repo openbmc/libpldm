@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8054601c_e719cb45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000086
+      },
+      "writtenOn": "2025-11-12T15:49:29Z",
+      "side": 1,
+      "message": "Add additional details.\ntests: add negative tests for state sensor readings APIs\n\n\u003cdescription\u003e",
+      "revId": "37e0a33ea296b27f6e4038470ba4e10df3deded3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ebfdf4b2_086d8c5f",
