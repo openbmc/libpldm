@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e16787db_2da43ed0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-12T23:57:08Z",
+      "side": 1,
+      "message": "The commit message is for explaining why you\u0027re doing something, not what you\u0027ve done. The patch itself tells us the latter.\n\nIf you find yourself writing a list of 15 things your patch does in the commit message this is a _strong sign_ that you should split your change up into constituent parts. Certainly for fixes like what you\u0027ve listed here.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 27
+      },
+      "revId": "cb2941e5fb246bea90ea09847ad28b4197755c02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f072c4e_f12e4d9b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 14
