@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1c2e970_76649ed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-13T00:16:54Z",
+      "side": 1,
+      "message": "I\u0027m intrigued by this approach! My initial thoughts are it looks reasonable. Thanks for your patience and the effort you\u0027ve put in.\n\nDo you mind adding at least one test? I think this would serve as a good demonstration of use of the API.",
+      "revId": "e4c097d06512e8496e0ec00a83105359d6af0212",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d3010e2_81dd3ba4",
+        "filename": "meson.build",
+        "patchSetId": 34
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-13T00:16:54Z",
+      "side": 1,
+      "message": "Do we need to define `LIBPLDM_GTEST_FRIENDS` for C?",
+      "range": {
+        "startLine": 102,
+        "startChar": 64,
+        "endLine": 102,
+        "endChar": 68
+      },
+      "revId": "e4c097d06512e8496e0ec00a83105359d6af0212",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
