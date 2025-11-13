@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57695493_39d8d9b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-13T00:17:25Z",
+      "side": 1,
+      "message": "(ugh, marking unresolved for the purpose of the test query)",
+      "parentUuid": "b1c2e970_76649ed5",
+      "revId": "e4c097d06512e8496e0ec00a83105359d6af0212",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d3010e2_81dd3ba4",
         "filename": "meson.build",
         "patchSetId": 34
