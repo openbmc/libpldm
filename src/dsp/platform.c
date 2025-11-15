@@ -2314,6 +2314,74 @@ int decode_pldm_pdr_repository_change_record_data(
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int encode_pldm_platform_set_numeric_sensor_enable_req(
+	uint8_t instance_id,
+	const struct pldm_platform_set_numeric_sensor_enable_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	struct pldm_header_info header = { 0 };
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (req == NULL || msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	if (req->sensor_operational_state > PLDM_SET_SENSOR_UNAVAILABLE ||
+	    req->sensor_event_message_enable >
+		    PLDM_PLATFORM_SET_SENSOR_EVENT_MESSAGE_ENABLE_STATE_EVENTS_ONLY) {
+		return -EINVAL;
+	}
+
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_SET_NUMERIC_SENSOR_ENABLE;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES,
+		msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, req->sensor_id);
+	pldm_msgbuf_insert(buf, req->sensor_operational_state);
+	pldm_msgbuf_insert(buf, req->sensor_event_message_enable);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_set_numeric_sensor_enable_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	uint8_t *completion_code)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || completion_code == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES,
+		msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract_p(buf, completion_code);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_sensor_reading_req(uint8_t instance_id, uint16_t sensor_id,
 				  uint8_t rearm_event_state,
@@ -2506,11 +2574,9 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
 LIBPLDM_ABI_TESTING
 int decode_set_numeric_sensor_enable_req(
 	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_set_numeric_sensor_enable_req *req)
+	struct pldm_platform_set_numeric_sensor_enable_req *req)
 {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
-	uint8_t event_enable = 0;
-	uint8_t op_state = 0;
 	int rc;
 
 	if (msg == NULL || req == NULL) {
@@ -2523,24 +2589,21 @@ int decode_set_numeric_sensor_enable_req(
 	}
 
 	pldm_msgbuf_extract(buf, req->sensor_id);
-	pldm_msgbuf_extract(buf, op_state);
-	pldm_msgbuf_extract(buf, event_enable);
+	pldm_msgbuf_extract(buf, req->sensor_operational_state);
+	pldm_msgbuf_extract(buf, req->sensor_event_message_enable);
 
 	rc = pldm_msgbuf_complete_consumed(buf);
 	if (rc) {
 		return rc;
 	}
 
-	if (op_state > PLDM_SET_SENSOR_UNAVAILABLE) {
+	if (req->sensor_operational_state > PLDM_SET_SENSOR_UNAVAILABLE) {
 		return -EPROTO;
 	}
 
-	if (event_enable > PLDM_STATE_EVENTS_ONLY_ENABLED) {
+	if (req->sensor_event_message_enable > PLDM_STATE_EVENTS_ONLY_ENABLED) {
 		return -EPROTO;
 	}
-
-	req->op_state = op_state;
-	req->event_enable = event_enable;
 
 	return 0;
 }
