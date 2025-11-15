@@ -3885,6 +3885,144 @@ TEST(GetEventReceiver, testBadDecodeResponse)
 }
 #endif
 
+#ifdef LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testGoodEncodeRequest)
+{
+    std::array<uint8_t,
+               hdrSize + sizeof(PLDM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES)>
+        reqData{};
+    pldm_msg* msg = reinterpret_cast<pldm_msg*>(reqData.data());
+    constexpr uint8_t instanceID = 0x0A;
+    constexpr uint16_t sensorID = 0x1123;
+    constexpr uint8_t sensorOperationalState = PLDM_SENSOR_UNAVAILABLE;
+    constexpr uint8_t sensorEventMessageEnable = PLDM_STATE_EVENTS_ONLY_ENABLED;
+
+    auto rc = encode_set_numeric_sensor_enable_req(
+        instanceID, sensorID, sensorOperationalState, sensorEventMessageEnable,
+        msg);
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(msg->hdr.command, PLDM_SET_NUMERIC_SENSOR_ENABLE);
+    EXPECT_EQ(msg->hdr.type, PLDM_PLATFORM);
+    EXPECT_EQ(msg->hdr.request, 1);
+    EXPECT_EQ(msg->hdr.datagram, 0);
+    EXPECT_EQ(msg->hdr.instance_id, instanceID);
+
+    struct pldm_set_numeric_sensor_enable_req* sensorEnableReq =
+        reinterpret_cast<struct pldm_set_numeric_sensor_enable_req*>(
+            msg->payload);
+
+    EXPECT_EQ(sensorEnableReq->sensor_id, sensorID);
+    EXPECT_EQ(sensorEnableReq->op_state, sensorOperationalState);
+    EXPECT_EQ(sensorEnableReq->event_enable, sensorEventMessageEnable);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testBadEncodeRequest)
+{
+    int rc;
+    std::array<uint8_t,
+               hdrSize + sizeof(PLDM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES)>
+        reqData{};
+    pldm_msg* msg = reinterpret_cast<pldm_msg*>(reqData.data());
+    constexpr uint8_t instanceID = 0x0A;
+    constexpr uint16_t sensorID = 0x1123;
+    uint8_t operationalState = PLDM_SENSOR_UNAVAILABLE;
+    uint8_t eventMessageEnable = PLDM_STATE_EVENTS_ONLY_ENABLED;
+
+    // Test null msg pointer
+    rc = encode_set_numeric_sensor_enable_req(
+        instanceID, sensorID, operationalState, eventMessageEnable, NULL);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test invalid operational state
+    uint8_t invalidOperationalState = PLDM_SENSOR_FAILED;
+    rc = encode_set_numeric_sensor_enable_req(
+        instanceID, sensorID, invalidOperationalState, eventMessageEnable, msg);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test invalid event enable
+    uint8_t invalidEventMessageEnable = PLDM_STATE_EVENTS_ONLY_ENABLED + 1;
+    rc = encode_set_numeric_sensor_enable_req(
+        instanceID, sensorID, operationalState, invalidEventMessageEnable, msg);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testGoodDecodeResponse)
+{
+    std::array<uint8_t, hdrSize + PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES>
+        responseMsg{};
+
+    uint8_t completionCode = PLDM_SUCCESS;
+    responseMsg[hdrSize] = completionCode;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    uint8_t retCompletionCode;
+    auto rc = decode_set_numeric_sensor_enable_resp(
+        response, responseMsg.size() - hdrSize, &retCompletionCode);
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(retCompletionCode, completionCode);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testGoodDecodeResponseInvalidSensorID)
+{
+    std::array<uint8_t, hdrSize + PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES>
+        responseMsg{};
+
+    uint8_t completionCode = PLDM_SET_NUMERIC_SENSOR_ENABLE_INVALID_SENSOR_ID;
+    responseMsg[hdrSize] = completionCode;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    uint8_t retCompletionCode;
+    auto rc = decode_set_numeric_sensor_enable_resp(
+        response, responseMsg.size() - hdrSize, &retCompletionCode);
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(retCompletionCode, completionCode);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testBadDecodeResponse)
+{
+    std::array<uint8_t, hdrSize + PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES>
+        responseMsg{};
+
+    uint8_t completionCode = PLDM_SUCCESS;
+    responseMsg[hdrSize] = completionCode;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    uint8_t retCompletionCode;
+
+    // Test NULL message pointer
+    auto rc = decode_set_numeric_sensor_enable_resp(
+        nullptr, responseMsg.size() - hdrSize, &retCompletionCode);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test NULL completion_code pointer
+    rc = decode_set_numeric_sensor_enable_resp(
+        response, responseMsg.size() - hdrSize, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test invalid payload length
+    rc = decode_set_numeric_sensor_enable_resp(
+        response, responseMsg.size() - hdrSize - 1, &retCompletionCode);
+    EXPECT_EQ(rc, -EPROTO);
+}
+#endif // LIBPLDM_API_TESTING
+
 TEST(SetEventReceiver, testGoodEncodeRequest)
 {
     uint8_t eventMessageGlobalEnable =

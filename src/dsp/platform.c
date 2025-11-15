@@ -2504,6 +2504,69 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
 }
 
 LIBPLDM_ABI_TESTING
+int encode_set_numeric_sensor_enable_req(
+	const uint8_t instance_id, const uint16_t sensor_id,
+	const uint8_t sensor_operational_state,
+	const uint8_t sensor_event_message_enable, struct pldm_msg *msg)
+{
+	if (msg == NULL) {
+		return -EINVAL;
+	}
+
+	if (sensor_event_message_enable >
+		    PLDM_EVENT_MESSAGE_ENABLE_STATE_EVENTS_ONLY ||
+	    sensor_operational_state > PLDM_SENSOR_UNAVAILABLE) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_SET_NUMERIC_SENSOR_ENABLE;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != 0) {
+		return rc;
+	}
+
+	struct pldm_set_numeric_sensor_enable_req *request =
+		(struct pldm_set_numeric_sensor_enable_req *)msg->payload;
+	request->sensor_id = htole16(sensor_id);
+	request->op_state = sensor_operational_state;
+	request->event_enable = sensor_event_message_enable;
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_set_numeric_sensor_enable_resp(const struct pldm_msg *msg,
+					  size_t payload_length,
+					  uint8_t *completion_code)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || completion_code == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return -EPROTO;
+	}
+
+	rc = pldm_msgbuf_extract(buf, *completion_code);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete(buf);
+}
+
+LIBPLDM_ABI_TESTING
 int decode_set_numeric_sensor_enable_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_numeric_sensor_enable_req *req)
