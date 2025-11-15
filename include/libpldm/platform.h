@@ -51,6 +51,8 @@ enum pldm_platform_transfer_flag {
 #define PLDM_SET_EVENT_RECEIVER_RESP_BYTES     1
 #define PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES 2
 
+#define PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES 1
+
 /* Platform event supported request */
 #define PLDM_EVENT_MESSAGE_BUFFER_SIZE_REQ_BYTES  2
 #define PLDM_EVENT_MESSAGE_BUFFER_SIZE_RESP_BYTES 3
@@ -2773,6 +2775,38 @@ int decode_set_numeric_sensor_enable_req(
 int decode_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_state_sensor_enables_req *req);
+
+/** @brief Encode SetNumericSensorEnable request
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] sensor_id - A handle that is used to identify and access the
+ *         sensor
+ *  @param[in] sensor_operational_state - The desired state of the sensor
+ *  @param[in] sensor_event_message_enable - Indicates whether event messages
+ *             are enabled for the sensor
+ *  @param[out] msg - Request message
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ */
+int encode_set_numeric_sensor_enable_req(
+	const uint8_t instance_id, const uint16_t sensor_id,
+	const uint8_t sensor_operational_state,
+	const uint8_t sensor_event_message_enable, struct pldm_msg *msg);
+
+/** @brief Decode SetNumericSensorEnable response
+ *
+ *  @param[in] msg - PLDM response message.
+ *  @param[in] payload_length - Length of response message.
+ *  @param[out] completion_code - PLDM completion code.
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EPROTO if the input response message is invalid
+ */
+int decode_set_numeric_sensor_enable_resp(const struct pldm_msg *msg,
+					  size_t payload_length,
+					  uint8_t *completion_code);
 
 #ifdef __cplusplus
 }
