@@ -50,6 +50,7 @@ Change categories:
 - dsp: platform: Iterator macros for State Effecter PDR
 - base: Added PLDM Base MultipartSend support
 - dsp: platform: add PLDM_SET_STATE_EFFECTER_STATES_MIN_REQ_BYTES
+- dsp: platform: Add requester APIs for SetNumericSensorEnable
 
 ### Changed
 
