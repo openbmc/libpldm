@@ -3885,6 +3885,131 @@ TEST(GetEventReceiver, testBadDecodeResponse)
 }
 #endif
 
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testGoodEncodeRequest)
+{
+    PLDM_MSG_DEFINE_P(msg, PLDM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES);
+    constexpr uint8_t instanceID = 0x0A;
+    struct pldm_set_numeric_sensor_enable_req req = {
+        .sensor_id = 0x1123,
+        .op_state = PLDM_SET_SENSOR_UNAVAILABLE,
+        .event_enable = PLDM_SET_SENSOR_EVENT_MESSAGE_ENABLE_STATE_EVENTS_ONLY,
+    };
+
+    auto rc = encode_set_numeric_sensor_enable_req(instanceID, &req, msg);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(msg->hdr.command, PLDM_SET_NUMERIC_SENSOR_ENABLE);
+    EXPECT_EQ(msg->hdr.type, PLDM_PLATFORM);
+    EXPECT_EQ(msg->hdr.request, 1);
+    EXPECT_EQ(msg->hdr.datagram, 0);
+    EXPECT_EQ(msg->hdr.instance_id, instanceID);
+
+    struct pldm_set_numeric_sensor_enable_req decoded = {};
+    ASSERT_EQ(decode_set_numeric_sensor_enable_req(
+                  msg, PLDM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES, &decoded),
+              0);
+    EXPECT_EQ(decoded.sensor_id, req.sensor_id);
+    EXPECT_EQ(decoded.op_state, req.op_state);
+    EXPECT_EQ(decoded.event_enable, req.event_enable);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testBadEncodeRequest)
+{
+    int rc;
+    PLDM_MSG_DEFINE_P(msg, PLDM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES);
+    constexpr uint8_t instanceID = 0x0A;
+    struct pldm_set_numeric_sensor_enable_req req = {
+        .sensor_id = 0x1123,
+        .op_state = PLDM_SET_SENSOR_UNAVAILABLE,
+        .event_enable = PLDM_SET_SENSOR_EVENT_MESSAGE_ENABLE_STATE_EVENTS_ONLY,
+    };
+
+    // Test null msg pointer
+    rc = encode_set_numeric_sensor_enable_req(instanceID, &req, NULL);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test null req pointer
+    rc = encode_set_numeric_sensor_enable_req(instanceID, NULL, msg);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test invalid operational state
+    struct pldm_set_numeric_sensor_enable_req invalidOpStateReq = req;
+    invalidOpStateReq.op_state = static_cast<pldm_set_sensor_operational_state>(
+        PLDM_SET_SENSOR_UNAVAILABLE + 1);
+    rc = encode_set_numeric_sensor_enable_req(instanceID, &invalidOpStateReq,
+                                              msg);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test invalid event enable
+    struct pldm_set_numeric_sensor_enable_req invalidEventReq = req;
+    invalidEventReq.event_enable =
+        static_cast<pldm_set_sensor_event_message_enable>(
+            PLDM_SET_SENSOR_EVENT_MESSAGE_ENABLE_STATE_EVENTS_ONLY + 1);
+    rc =
+        encode_set_numeric_sensor_enable_req(instanceID, &invalidEventReq, msg);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testGoodDecodeResponse)
+{
+    PLDM_MSG_DEFINE_P(response, PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES);
+
+    uint8_t completionCode = PLDM_SUCCESS;
+    response->payload[0] = completionCode;
+
+    struct pldm_set_numeric_sensor_enable_resp resp = {};
+    auto rc = decode_set_numeric_sensor_enable_resp(
+        response, PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES, &resp);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(resp.completion_code, completionCode);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testGoodDecodeResponseInvalidSensorID)
+{
+    PLDM_MSG_DEFINE_P(response, PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES);
+
+    uint8_t completionCode = PLDM_SET_NUMERIC_SENSOR_ENABLE_INVALID_SENSOR_ID;
+    response->payload[0] = completionCode;
+
+    struct pldm_set_numeric_sensor_enable_resp resp = {};
+    auto rc = decode_set_numeric_sensor_enable_resp(
+        response, PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES, &resp);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(resp.completion_code, completionCode);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetNumericSensorEnable, testBadDecodeResponse)
+{
+    PLDM_MSG_DEFINE_P(response, PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES);
+
+    uint8_t completionCode = PLDM_SUCCESS;
+    response->payload[0] = completionCode;
+
+    struct pldm_set_numeric_sensor_enable_resp resp = {};
+
+    // Test NULL message pointer
+    auto rc = decode_set_numeric_sensor_enable_resp(
+        nullptr, PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES, &resp);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test NULL resp pointer
+    rc = decode_set_numeric_sensor_enable_resp(
+        response, PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif // LIBPLDM_API_TESTING
+
 TEST(SetEventReceiver, testGoodEncodeRequest)
 {
     uint8_t eventMessageGlobalEnable =

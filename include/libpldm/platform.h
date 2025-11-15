@@ -50,6 +50,9 @@ enum pldm_platform_transfer_flag {
 #define PLDM_SET_EVENT_RECEIVER_RESP_BYTES     1
 #define PLDM_GET_EVENT_RECEIVER_MIN_RESP_BYTES 2
 
+#define PLDM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES  4
+#define PLDM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES 1
+
 /* Platform event supported request */
 #define PLDM_EVENT_MESSAGE_BUFFER_SIZE_REQ_BYTES  2
 #define PLDM_EVENT_MESSAGE_BUFFER_SIZE_RESP_BYTES 3
@@ -207,6 +210,15 @@ enum pldm_sensor_event_message_enable {
 	PLDM_STATE_EVENTS_ONLY_ENABLED
 };
 
+/* As defined in DSP0248 v1.3.0 Table 30 */
+enum pldm_set_sensor_event_message_enable {
+	PLDM_SET_SENSOR_EVENT_MESSAGE_NO_CHANGE,
+	PLDM_SET_SENSOR_EVENT_MESSAGE_DISABLE_EVENTS,
+	PLDM_SET_SENSOR_EVENT_MESSAGE_ENABLE_EVENTS,
+	PLDM_SET_SENSOR_EVENT_MESSAGE_ENABLE_OP_EVENTS_ONLY,
+	PLDM_SET_SENSOR_EVENT_MESSAGE_ENABLE_STATE_EVENTS_ONLY
+};
+
 enum pldm_effecter_oper_state {
 	EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING,
 	EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING,
@@ -325,6 +337,10 @@ enum pldm_platform_completion_codes {
 
 	PLDM_PLATFORM_INVALID_SENSOR_OPERATIONAL_STATE = 0x81,
 	PLDM_PLATFORM_EVENT_GENERATION_NOT_SUPPORTED = 0x82,
+
+	PLDM_SET_NUMERIC_SENSOR_ENABLE_INVALID_SENSOR_ID = 0x80,
+	PLDM_SET_NUMERIC_SENSOR_ENABLE_INVALID_SENSOR_OPERATIONAL_STATE = 0x81,
+	PLDM_SET_NUMERIC_SENSOR_ENABLE_EVENT_GENERATION_NOT_SUPPORTED = 0x82
 };
 
 /** @brief PLDM Event types
@@ -1392,7 +1408,15 @@ struct pldm_get_sensor_reading_resp {
 struct pldm_set_numeric_sensor_enable_req {
 	uint16_t sensor_id;
 	enum pldm_set_sensor_operational_state op_state;
-	enum pldm_sensor_event_message_enable event_enable;
+	enum pldm_set_sensor_event_message_enable event_enable;
+};
+
+/** @struct pldm_set_numeric_sensor_enable_resp
+ *
+ *  Structure representing a SetNumericSensorEnable response
+ */
+struct pldm_set_numeric_sensor_enable_resp {
+	uint8_t completion_code;
 };
 
 /** @struct pldm_set_state_sensor_enable_field
@@ -2790,6 +2814,33 @@ int decode_set_numeric_sensor_enable_req(
 int decode_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_state_sensor_enables_req *req);
+
+/** @brief Encode SetNumericSensorEnable request
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - Request parameters
+ *  @param[out] msg - Request message
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ */
+int encode_set_numeric_sensor_enable_req(
+	uint8_t instance_id,
+	const struct pldm_set_numeric_sensor_enable_req *req,
+	struct pldm_msg *msg);
+
+/** @brief Decode SetNumericSensorEnable response
+ *
+ *  @param[in] msg - PLDM response message.
+ *  @param[in] payload_length - Length of response message.
+ *  @param[out] resp - SetNumericSensorEnable response data.
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ */
+int decode_set_numeric_sensor_enable_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_set_numeric_sensor_enable_resp *resp);
 
 #ifdef __cplusplus
 }
