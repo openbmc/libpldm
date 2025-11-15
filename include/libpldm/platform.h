@@ -1388,15 +1388,25 @@ struct pldm_get_sensor_reading_resp {
 	uint8_t present_reading[1];
 } __attribute__((packed));
 
+/* DSP0248 v1.3.0 Table 30 and Table 40 */
+#define PLDM_PLATFORM_SET_SENSOR_EVENT_MESSAGE_NO_CHANGE		0x00
+#define PLDM_PLATFORM_SET_SENSOR_EVENT_MESSAGE_DISABLE_EVENTS		0x01
+#define PLDM_PLATFORM_SET_SENSOR_EVENT_MESSAGE_ENABLE_EVENTS		0x02
+#define PLDM_PLATFORM_SET_SENSOR_EVENT_MESSAGE_ENABLE_OP_EVENTS_ONLY	0x03
+#define PLDM_PLATFORM_SET_SENSOR_EVENT_MESSAGE_ENABLE_STATE_EVENTS_ONLY 0x04
+
 /** @struct pldm_set_numeric_sensor_enable_req
  *
  *  Structure representing a SetNumericSensorEnable request
  */
 struct pldm_set_numeric_sensor_enable_req {
 	uint16_t sensor_id;
-	enum pldm_set_sensor_operational_state op_state;
-	enum pldm_sensor_event_message_enable event_enable;
+	uint8_t op_state;
+	uint8_t event_enable;
 };
+
+#define PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES  4
+#define PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES 1
 
 /** @struct pldm_set_state_sensor_enable_field
  *
@@ -2470,6 +2480,40 @@ int decode_pldm_pdr_repository_change_record_data(
 	const uint8_t *change_record_data, size_t change_record_data_size,
 	uint8_t *event_data_operation, uint8_t *number_of_change_entries,
 	size_t *change_entry_data_offset);
+
+/* SetNumericSensorEnable */
+
+/** @brief Encode SetNumericSensorEnable request
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - Request parameters
+ *  @param[out] msg - Request message
+ *  @param[in] payload_length - Length of the message payload
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EOVERFLOW if payload_length is too small
+ *                      -EBADMSG if payload_length is too large
+ */
+int encode_pldm_platform_set_numeric_sensor_enable_req(
+	uint8_t instance_id,
+	const struct pldm_set_numeric_sensor_enable_req *req,
+	struct pldm_msg *msg, size_t payload_length);
+
+/** @brief Decode SetNumericSensorEnable response
+ *
+ *  @param[in] msg - PLDM response message.
+ *  @param[in] payload_length - Length of response message.
+ *  @param[out] completion_code - PLDM completion code.
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EOVERFLOW if payload is too short
+ *                      -EBADMSG if payload is too long
+ */
+int decode_pldm_platform_set_numeric_sensor_enable_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	uint8_t *completion_code);
 
 /* GetSensorReading */
 
