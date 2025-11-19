@@ -170,6 +170,7 @@
 		int16_t: pldm_msgbuf_insert_int16,                             \
 		uint32_t: pldm_msgbuf_insert_uint32,                           \
 		int32_t: pldm_msgbuf_insert_int32,                             \
+		real32_t: pldm_msgbuf_insert_real32,                           \
 		uint64_t: pldm_msgbuf_insert_uint64)(dst, src)
 
 /**
