@@ -45,6 +45,7 @@ enum pldm_platform_transfer_flag {
 
 #define PLDM_SET_NUMERIC_EFFECTER_VALUE_RESP_BYTES    1
 #define PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES 4
+#define PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES    3
 
 #define PLDM_GET_PDR_REQ_BYTES 13
 
@@ -1234,6 +1235,23 @@ struct pldm_sensor_event_sensor_op_state {
 	uint8_t previous_op_state;
 } __attribute__((packed));
 
+/** @struct pldm_set_numeric_effecter_enable_req
+ *
+ *  Structure representing SetNumericEffecterEnable request
+ *  @var pldm_set_numeric_effecter_enable_req::effecter_id
+ *    Used to identify and access the effecter
+ *  @var pldm_set_numeric_effecter_enable_req::effecter_operational_state
+ *    The state of numeric effecter being requested. Valid values are:
+ *    - EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING
+ *    - EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING
+ *    - EFFECTER_OPER_STATE_DISABLED
+ *    - EFFECTER_OPER_STATE_UNAVAILABLE
+ */
+struct pldm_set_numeric_effecter_enable_req {
+	uint16_t effecter_id;
+	uint8_t effecter_operational_state;
+};
+
 /** @struct pldm_message_poll_event
  *
  *  structure representing pldmMessagePollEvent
@@ -1436,6 +1454,27 @@ int encode_set_numeric_effecter_value_resp(uint8_t instance_id,
 					   uint8_t completion_code,
 					   struct pldm_msg *msg,
 					   size_t payload_length);
+
+/* SetNumericEffecterEnable */
+
+/** @brief Create a PLDM request message for SetNumericEffecterEnable
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - Pointer to pldm_set_numeric_effecter_enable_req structure
+ *  @param[in] payload_length - Length of the message payload buffer
+ *  @param[out] msg - Message will be written to this
+ *  @return 0 on success, negative errno value on failure:
+ *          - -EINVAL: msg or req is NULL or effecter_operational_state is invalid
+ *          - -EOVERFLOW: payload_length is insufficient for the message
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'. The payload must be at least
+ *         PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES in size.
+ */
+
+int encode_set_numeric_effecter_enable_req(
+	uint8_t instance_id,
+	const struct pldm_set_numeric_effecter_enable_req *req,
+	struct pldm_msg *msg, size_t payload_length);
 
 /* SetStateEffecterStates */
 
