@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- platform: Add SetNumericEffecterEnable related APIs
+
 ### Changed
 
 - libpldm++: Preserve multiple descriptors of the same type
