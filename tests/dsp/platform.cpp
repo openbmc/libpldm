@@ -978,6 +978,113 @@ TEST(SetNumericEffecterValue, testBadEncodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
+#ifdef LIBPLDM_API_TESTING
+TEST(SetNumericEffecterEnable, testGoodEncodeRequest)
+{
+    uint16_t effecter_id = 0x1234;
+    uint8_t effecter_operational_state =
+        EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING;
+
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, effecter_id, effecter_operational_state, request,
+        PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(rc, 0);
+
+    struct pldm_set_numeric_effecter_enable_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_set_numeric_effecter_enable_req*>(
+            request->payload);
+    EXPECT_EQ(effecter_id, le16toh(req->effecter_id));
+    EXPECT_EQ(effecter_operational_state, req->effecter_operational_state);
+}
+
+TEST(SetNumericEffecterEnable, testBadEncodeRequestNullMsg)
+{
+    uint16_t effecter_id = 0x1234;
+    uint8_t effecter_operational_state =
+        EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING;
+
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, effecter_id, effecter_operational_state, NULL,
+        PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+}
+
+TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidOperationalState)
+{
+    uint16_t effecter_id = 0x1234;
+    uint8_t effecter_operational_state = EFFECTER_OPER_STATE_UNAVAILABLE + 1;
+
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, effecter_id, effecter_operational_state, request,
+        PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+}
+
+TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidPayloadLength)
+{
+    uint16_t effecter_id = 0x1234;
+    uint8_t effecter_operational_state =
+        EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING;
+
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    // Test with incorrect payload length (too small)
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, effecter_id, effecter_operational_state, request,
+        PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES - 1);
+    EXPECT_LT(rc, 0);
+
+    // Test with zero payload length
+    rc = encode_set_numeric_effecter_enable_req(
+        0, effecter_id, effecter_operational_state, request, 0);
+    EXPECT_LT(rc, 0);
+}
+
+TEST(SetNumericEffecterEnable, testGoodEncodeRequestAllOperationalStates)
+{
+    uint16_t effecter_id = 0xABCD;
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    // Test all valid operational states
+    std::array<uint8_t, 4> valid_states = {
+        EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING,
+        EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING,
+        EFFECTER_OPER_STATE_DISABLED, EFFECTER_OPER_STATE_UNAVAILABLE};
+
+    for (auto state : valid_states)
+    {
+        auto rc = encode_set_numeric_effecter_enable_req(
+            0, effecter_id, state, request,
+            PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+        EXPECT_EQ(rc, 0);
+
+        struct pldm_set_numeric_effecter_enable_req* req =
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+            reinterpret_cast<struct pldm_set_numeric_effecter_enable_req*>(
+                request->payload);
+        EXPECT_EQ(effecter_id, le16toh(req->effecter_id));
+        EXPECT_EQ(state, req->effecter_operational_state);
+    }
+}
+#endif
+
 TEST(GetStateSensorReadings, testGoodEncodeResponse)
 {
     std::array<uint8_t, hdrSize +
