@@ -24,6 +24,10 @@ Change categories:
 - utils: Added `pldm_edac_crc32_extend()`
 - base: Added `decode_pldm_base_negotiate_transfer_params_req()`
 - base: Added `encode_pldm_base_negotiate_transfer_params_resp()`
+- platform: Added SetNumericEffecterEnable command encoding support per DSP0248
+  v1.2.0 Section 22.1
+  - Added `struct pldm_set_numeric_effecter_enable_req`
+  - Added `encode_set_numeric_effecter_enable_req()`
 
 ### Changed
 
