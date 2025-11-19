@@ -978,6 +978,110 @@ TEST(SetNumericEffecterValue, testBadEncodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
+#ifdef LIBPLDM_API_TESTING
+TEST(SetNumericEffecterEnable, testGoodEncodeRequest)
+{
+    struct pldm_set_numeric_effecter_enable_req req = {
+        .effecter_id = 0x1234,
+        .effecter_operational_state =
+            EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING};
+
+    PLDM_MSG_DEFINE_P(request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, &req, request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(rc, 0);
+
+    // Expected payload bytes: effecter_id (0x1234 in little-endian) + state
+    // (0x01)
+    std::array<uint8_t, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES>
+        expectedPayload = {0x34, 0x12, 0x01};
+    EXPECT_EQ(0, memcmp(request->payload, expectedPayload.data(),
+                        PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES));
+}
+
+TEST(SetNumericEffecterEnable, testBadEncodeRequestNullMsg)
+{
+    struct pldm_set_numeric_effecter_enable_req req = {
+        .effecter_id = 0x1234,
+        .effecter_operational_state =
+            EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING};
+
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, &req, NULL, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+}
+
+TEST(SetNumericEffecterEnable, testBadEncodeRequestNullReq)
+{
+    PLDM_MSG_DEFINE_P(request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, NULL, request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+}
+
+TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidOperationalState)
+{
+    struct pldm_set_numeric_effecter_enable_req req = {
+        .effecter_id = 0x1234,
+        .effecter_operational_state =
+            static_cast<uint8_t>(EFFECTER_OPER_STATE_UNAVAILABLE + 1)};
+
+    PLDM_MSG_DEFINE_P(request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, &req, request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+}
+
+TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidPayloadLength)
+{
+    struct pldm_set_numeric_effecter_enable_req req = {
+        .effecter_id = 0x1234,
+        .effecter_operational_state =
+            EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING};
+
+    PLDM_MSG_DEFINE_P(request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+
+    // Test with incorrect payload length (too small)
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, &req, request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES - 1);
+    EXPECT_LT(rc, 0);
+
+    // Test with zero payload length
+    rc = encode_set_numeric_effecter_enable_req(0, &req, request, 0);
+    EXPECT_LT(rc, 0);
+}
+
+TEST(SetNumericEffecterEnable, testGoodEncodeRequestAllOperationalStates)
+{
+    PLDM_MSG_DEFINE_P(request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+
+    // Test all valid operational states
+    std::array<uint8_t, 4> valid_states = {
+        EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING,
+        EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING,
+        EFFECTER_OPER_STATE_DISABLED, EFFECTER_OPER_STATE_UNAVAILABLE};
+
+    for (auto state : valid_states)
+    {
+        struct pldm_set_numeric_effecter_enable_req req = {
+            .effecter_id = 0xABCD, .effecter_operational_state = state};
+
+        auto rc = encode_set_numeric_effecter_enable_req(
+            0, &req, request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+        EXPECT_EQ(rc, 0);
+
+        // Expected payload bytes: effecter_id (0xABCD in little-endian) + state
+        std::array<uint8_t, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES>
+            expectedPayload = {0xCD, 0xAB, state};
+        EXPECT_EQ(0, memcmp(request->payload, expectedPayload.data(),
+                            PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES));
+    }
+}
+#endif
+
 TEST(GetStateSensorReadings, testGoodEncodeResponse)
 {
     std::array<uint8_t, hdrSize +
