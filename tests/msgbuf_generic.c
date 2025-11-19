@@ -136,6 +136,28 @@ static void test_msgbuf_extract_array_generic_uint8(void)
     expect(pldm_msgbuf_complete(ctx) == 0);
 }
 
+static void test_msgbuf_insert_generic_real32(void)
+{
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
+    real32_t src = 2.5f;
+    real32_t checkVal = 0;
+    uint8_t buf[sizeof(real32_t)] = {0};
+
+    expect(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)) == 0);
+    expect(pldm_msgbuf_insert(ctx, src) == 0);
+
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
+
+    expect(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)) == 0);
+    expect(pldm_msgbuf_extract(ctxExtract, checkVal) == 0);
+
+    expect(src == checkVal);
+    expect(pldm_msgbuf_complete(ctxExtract) == 0);
+    expect(pldm_msgbuf_complete(ctx) == 0);
+}
+
 static void test_msgbuf_insert_generic_int32(void)
 {
     struct pldm_msgbuf_rw _ctx;
@@ -307,6 +329,7 @@ static const testfn tests[] = {test_msgbuf_extract_generic_uint8,
                                test_msgbuf_insert_generic_int16,
                                test_msgbuf_insert_generic_uint32,
                                test_msgbuf_insert_generic_int32,
+                               test_msgbuf_insert_generic_real32,
                                test_msgbuf_insert_array_generic_uint8,
                                NULL};
 
