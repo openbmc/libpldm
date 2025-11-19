@@ -21,6 +21,10 @@ Change categories:
 
 - entity: Added new entity types from DSP0249 v1.4.0
 - stateset: Added new state sets from DSP0249 v1.4.0
+- platform: Added `encode_pldm_platform_set_numeric_effecter_enable_req()`
+- platform: Added `decode_pldm_platform_set_numeric_effecter_enable_req()`
+- platform: Added `encode_pldm_platform_set_numeric_effecter_enable_resp()`
+- platform: Added `decode_pldm_platform_set_numeric_effecter_enable_resp()`
 
 ### Changed
 
