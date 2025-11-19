@@ -44,6 +44,10 @@ Change categories:
 - include: Added header file for SMBIOS Data Transfer (DSP0246 v1.0.1)
 - bindings:
   - Add libpldm++ library for the C++ binding
+- platform: Added `encode_pldm_platform_set_numeric_effecter_enable_req()`
+- platform: Added `decode_pldm_platform_set_numeric_effecter_enable_req()`
+- platform: Added `encode_pldm_platform_set_numeric_effecter_enable_resp()`
+- platform: Added `decode_pldm_platform_set_numeric_effecter_enable_resp()`
 
 ### Changed
 
