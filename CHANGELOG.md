@@ -45,6 +45,10 @@ Change categories:
 - bindings:
   - Add libpldm++ library for the C++ binding
 - dsp: platform: Add pldm_platform_file_class enum
+- platform: Added `encode_pldm_platform_set_numeric_effecter_enable_req()`
+- platform: Added `decode_pldm_platform_set_numeric_effecter_enable_req()`
+- platform: Added `encode_pldm_platform_set_numeric_effecter_enable_resp()`
+- platform: Added `decode_pldm_platform_set_numeric_effecter_enable_resp()`
 
 ### Changed
 
