@@ -3631,3 +3631,37 @@ int encode_pldm_platform_file_descriptor_pdr(
 
 	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
 }
+
+LIBPLDM_ABI_STABLE
+int encode_set_numeric_effecter_enable_req(uint8_t instance_id,
+					   uint16_t effecter_id,
+					   uint8_t effecter_operational_state,
+					   struct pldm_msg *msg)
+{
+	if (msg == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (effecter_operational_state > EFFECTER_OPER_STATE_UNAVAILABLE) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_SET_NUMERIC_EFFECTER_ENABLE;
+
+	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc != PLDM_SUCCESS) {
+		return rc;
+	}
+
+	struct pldm_set_numeric_effecter_enable_req *request =
+		(struct pldm_set_numeric_effecter_enable_req *)msg->payload;
+
+	request->effecter_id = htole16(effecter_id);
+	request->effecter_operational_state = effecter_operational_state;
+
+	return PLDM_SUCCESS;
+}
