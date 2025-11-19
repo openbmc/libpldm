@@ -24,6 +24,10 @@ Change categories:
 - utils: Added `pldm_edac_crc32_extend()`
 - base: Added `decode_pldm_base_negotiate_transfer_params_req()`
 - base: Added `encode_pldm_base_negotiate_transfer_params_resp()`
+- platform: Added `encode_pldm_platform_set_numeric_effecter_enable_req()`
+- platform: Added `decode_pldm_platform_set_numeric_effecter_enable_req()`
+- platform: Added `encode_pldm_platform_set_numeric_effecter_enable_resp()`
+- platform: Added `decode_pldm_platform_set_numeric_effecter_enable_resp()`
 
 ### Changed
 
