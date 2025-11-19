@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 - fru: New constants for additional bound on GetFRURecordTable payload size
+- platform: Add SetNumericEffecterEnable related APIs
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
