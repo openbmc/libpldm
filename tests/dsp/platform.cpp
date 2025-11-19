@@ -978,6 +978,120 @@ TEST(SetNumericEffecterValue, testBadEncodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
+#ifdef LIBPLDM_API_TESTING
+TEST(SetNumericEffecterEnable, testGoodEncodeRequest)
+{
+    struct pldm_set_numeric_effecter_enable_req req = {
+        .effecter_id = 0x1234,
+        .effecter_operational_state =
+            EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING};
+
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    auto request = new (requestMsg.data()) pldm_msg;
+
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, &req, request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(rc, 0);
+
+    struct pldm_set_numeric_effecter_enable_req decoded_req;
+    memcpy(&decoded_req, request->payload,
+           PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(req.effecter_id, le16toh(decoded_req.effecter_id));
+    EXPECT_EQ(req.effecter_operational_state,
+              decoded_req.effecter_operational_state);
+}
+
+TEST(SetNumericEffecterEnable, testBadEncodeRequestNullMsg)
+{
+    struct pldm_set_numeric_effecter_enable_req req = {
+        .effecter_id = 0x1234,
+        .effecter_operational_state =
+            EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING};
+
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, &req, NULL, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+}
+
+TEST(SetNumericEffecterEnable, testBadEncodeRequestNullReq)
+{
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    auto request = new (requestMsg.data()) pldm_msg;
+
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, NULL, request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+}
+
+TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidOperationalState)
+{
+    struct pldm_set_numeric_effecter_enable_req req = {
+        .effecter_id = 0x1234,
+        .effecter_operational_state =
+            static_cast<uint8_t>(EFFECTER_OPER_STATE_UNAVAILABLE + 1)};
+
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    auto request = new (requestMsg.data()) pldm_msg;
+
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, &req, request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(rc, -EINVAL);
+}
+
+TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidPayloadLength)
+{
+    struct pldm_set_numeric_effecter_enable_req req = {
+        .effecter_id = 0x1234,
+        .effecter_operational_state =
+            EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING};
+
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    auto request = new (requestMsg.data()) pldm_msg;
+
+    // Test with incorrect payload length (too small)
+    auto rc = encode_set_numeric_effecter_enable_req(
+        0, &req, request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES - 1);
+    EXPECT_LT(rc, 0);
+
+    // Test with zero payload length
+    rc = encode_set_numeric_effecter_enable_req(0, &req, request, 0);
+    EXPECT_LT(rc, 0);
+}
+
+TEST(SetNumericEffecterEnable, testGoodEncodeRequestAllOperationalStates)
+{
+    std::vector<uint8_t> requestMsg(hdrSize +
+                                    PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    auto request = new (requestMsg.data()) pldm_msg;
+
+    // Test all valid operational states
+    std::array<uint8_t, 4> valid_states = {
+        EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING,
+        EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING,
+        EFFECTER_OPER_STATE_DISABLED, EFFECTER_OPER_STATE_UNAVAILABLE};
+
+    for (auto state : valid_states)
+    {
+        struct pldm_set_numeric_effecter_enable_req req = {
+            .effecter_id = 0xABCD, .effecter_operational_state = state};
+
+        auto rc = encode_set_numeric_effecter_enable_req(
+            0, &req, request, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+        EXPECT_EQ(rc, 0);
+
+        struct pldm_set_numeric_effecter_enable_req decoded_req;
+        memcpy(&decoded_req, request->payload,
+               PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+        EXPECT_EQ(req.effecter_id, le16toh(decoded_req.effecter_id));
+        EXPECT_EQ(state, decoded_req.effecter_operational_state);
+    }
+}
+#endif
+
 TEST(GetStateSensorReadings, testGoodEncodeResponse)
 {
     std::array<uint8_t, hdrSize +
