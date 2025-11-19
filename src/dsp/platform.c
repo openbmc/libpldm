@@ -4125,3 +4125,165 @@ int decode_pldm_platform_state_effecter_pdr_possible_states_from_iter(
 
 	return pldm_msgbuf_complete_consumed(ctx);
 }
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_platform_set_numeric_effecter_enable_req(
+	uint8_t instance_id,
+	const struct pldm_platform_set_numeric_effecter_enable_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	struct pldm_header_info header = { 0 };
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (req == NULL || msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	/*
+	 * DSP0248 v1.3.0 Table 47 lists effecterOperationalState as
+	 * `{ enabled, disabled = 2, unavailable }`, and defines those values by
+	 * reference to GetStateEffecterStates, whose stateField (Table 55)
+	 * defers in turn to the effecterOperationalState enumeration of
+	 * Table 49. That enumeration is the one described by
+	 * `enum pldm_effecter_oper_state`, and pinning `disabled` to 2 is what
+	 * keeps the two aligned: it leaves values 0 and 1,
+	 * `enabled-updatePending` and `enabled-noUpdatePending`, as the
+	 * encodings of Table 47's `enabled`. Hence four accepted states rather
+	 * than three.
+	 */
+	switch (req->effecter_operational_state) {
+	case EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING:
+	case EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING:
+	case EFFECTER_OPER_STATE_DISABLED:
+	case EFFECTER_OPER_STATE_UNAVAILABLE:
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_SET_NUMERIC_EFFECTER_ENABLE;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc < 0) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PLATFORM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES,
+		msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, req->effecter_id);
+	pldm_msgbuf_insert(buf, req->effecter_operational_state);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_set_numeric_effecter_enable_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_platform_set_numeric_effecter_enable_req *req)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PLATFORM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES,
+		msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, req->effecter_id);
+	rc = pldm_msgbuf_extract(buf, req->effecter_operational_state);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	/* See the note on the corresponding switch in the encoder above. */
+	switch (req->effecter_operational_state) {
+	case EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING:
+	case EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING:
+	case EFFECTER_OPER_STATE_DISABLED:
+	case EFFECTER_OPER_STATE_UNAVAILABLE:
+		break;
+	default:
+		return -EPROTO;
+	}
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_platform_set_numeric_effecter_enable_resp(
+	uint8_t instance_id, uint8_t completion_code, struct pldm_msg *msg,
+	size_t *payload_length)
+{
+	struct pldm_header_info header = { 0 };
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	header.msg_type = PLDM_RESPONSE;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_SET_NUMERIC_EFFECTER_ENABLE;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc < 0) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PLATFORM_SET_NUMERIC_EFFECTER_ENABLE_RESP_BYTES,
+		msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, completion_code);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_set_numeric_effecter_enable_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	uint8_t *completion_code)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || completion_code == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PLATFORM_SET_NUMERIC_EFFECTER_ENABLE_RESP_BYTES,
+		msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract_p(buf, completion_code);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
