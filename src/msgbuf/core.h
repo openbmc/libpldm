@@ -796,6 +796,33 @@ pldm_msgbuf_insert_uint64(struct pldm_msgbuf_rw *ctx, const uint64_t src)
 
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_insert_real32(struct pldm_msgbuf_rw *ctx, const real32_t src)
+{
+	real32_t val = htole32(src);
+
+	static_assert(
+		// NOLINTNEXTLINE(bugprone-sizeof-expression)
+		sizeof(src) < INTMAX_MAX,
+		"The following addition may not uphold the runtime assertion");
+
+	if (ctx->remaining >= (intmax_t)sizeof(src)) {
+		assert(ctx->cursor);
+		memcpy(ctx->cursor, &val, sizeof(val));
+		ctx->cursor += sizeof(src);
+		ctx->remaining -= sizeof(src);
+		return 0;
+	}
+
+	if (ctx->remaining > INTMAX_MIN + (intmax_t)sizeof(src)) {
+		ctx->remaining -= sizeof(src);
+		return -EOVERFLOW;
+	}
+
+	return pldm__msgbuf_rw_invalidate(ctx);
+}
+
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
 pldm_msgbuf_insert_uint32(struct pldm_msgbuf_rw *ctx, const uint32_t src)
 {
 	uint32_t val = htole32(src);
