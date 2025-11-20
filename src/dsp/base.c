@@ -960,7 +960,7 @@ int decode_pldm_base_negotiate_transfer_params_resp(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_cc_only_resp(const struct pldm_msg *msg, size_t payload_length,
 			uint8_t *completion_code)
 {

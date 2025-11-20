@@ -2969,7 +2969,7 @@ int decode_poll_for_platform_event_message_resp(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_numeric_effecter_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_effecter_value_pdr *pdr_value)
@@ -3632,7 +3632,7 @@ int encode_pldm_platform_file_descriptor_pdr(
 	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_set_numeric_effecter_enable_req(
 	uint8_t instance_id,
 	const struct pldm_set_numeric_effecter_enable_req *req,
