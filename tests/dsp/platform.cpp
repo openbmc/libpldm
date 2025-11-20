@@ -978,7 +978,6 @@ TEST(SetNumericEffecterValue, testBadEncodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
-#ifdef LIBPLDM_API_TESTING
 TEST(SetNumericEffecterEnable, testGoodEncodeRequest)
 {
     struct pldm_set_numeric_effecter_enable_req req = {
@@ -1090,7 +1089,6 @@ TEST(SetNumericEffecterEnable, testGoodEncodeRequestAllOperationalStates)
         EXPECT_EQ(state, decoded_req.effecter_operational_state);
     }
 }
-#endif
 
 TEST(GetStateSensorReadings, testGoodEncodeResponse)
 {
