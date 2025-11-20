@@ -3412,6 +3412,121 @@ int decode_pldm_entity_auxiliary_names_pdr_index(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
+LIBPLDM_ABI_TESTING
+int decode_pldm_effecter_auxiliary_names_pdr(
+	const void *data, size_t data_length,
+	struct pldm_effecter_auxiliary_names_pdr *pdr,
+	struct pldm_effecter_auxiliary_names_iter *iter)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!data || !pdr || !iter) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PDR_EFFECTER_AUXILIARY_NAMES_MIN_LENGTH, data,
+		data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_value_pdr_hdr(
+		buf, &pdr->hdr, PLDM_PDR_EFFECTER_AUXILIARY_NAMES_MIN_LENGTH,
+		data_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_extract(buf, pdr->terminus_handle);
+	pldm_msgbuf_extract(buf, pdr->effecter_id);
+	rc = pldm_msgbuf_extract(buf, pdr->effecter_count);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	iter->field.ptr = NULL;
+	iter->field.length = 0;
+	pldm_msgbuf_span_remaining(buf, (const void **)&iter->field.ptr,
+				   &iter->field.length);
+	iter->count = pdr->effecter_count;
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_effecter_auxiliary_name_from_iter(
+	struct pldm_effecter_auxiliary_names_iter *iter,
+	struct pldm_effecter_auxiliary_name *name)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	PLDM_MSGBUF_RO_DEFINE_P(names_buf);
+	const void *names = NULL;
+	size_t names_len = 0;
+	int rc;
+	int i;
+
+	if (!iter || !name) {
+		return -EINVAL;
+	}
+
+	if (!iter->field.ptr) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 1, iter->field.ptr,
+				    iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, name->name_string_count);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_span_remaining(buf, &names, &names_len);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	if (name->name_string_count > 0) {
+		name->names_data = names;
+	} else {
+		name->names_data = NULL;
+	}
+
+	rc = pldm_msgbuf_init_errno(names_buf, 0, names, names_len);
+	if (rc) {
+		return rc;
+	}
+
+	for (i = 0; i < name->name_string_count; i++) {
+		pldm_msgbuf_span_string_ascii(names_buf, NULL, NULL);
+		pldm_msgbuf_span_string_utf16(names_buf, NULL, NULL);
+	}
+
+	/* Update iterator to remaining data */
+	iter->field.ptr = NULL;
+	iter->field.length = 0;
+	rc = pldm_msgbuf_span_remaining(names_buf,
+					(const void **)&iter->field.ptr,
+					&iter->field.length);
+	if (rc) {
+		return pldm_msgbuf_discard(names_buf, rc);
+	}
+
+	name->names_data_length = names_len - iter->field.length;
+
+	return pldm_msgbuf_complete(names_buf);
+}
+
 LIBPLDM_ABI_STABLE
 int decode_pldm_platform_cper_event(const void *event_data,
 				    size_t event_data_length,
