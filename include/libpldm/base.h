@@ -160,6 +160,7 @@ typedef enum {
 #define PLDM_CURRENT_VERSION PLDM_VERSION_0
 
 #define PLDM_TIMESTAMP104_SIZE 13
+#define PLDM_CC_ONLY_RESP_BYTES 1
 
 /** @brief Minimum length of response for a optional PLDM command
  *
@@ -783,6 +784,18 @@ int encode_base_multipart_receive_resp(
  */
 int encode_cc_only_resp(uint8_t instance_id, uint8_t type, uint8_t command,
 			uint8_t cc, struct pldm_msg *msg);
+
+/** @brief Decode PLDM response message containing only cc
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] completion_code - Pointer to response msg's PLDM completion code
+ *  @return 0 on success, negative errno value on failure:
+ *          - -EINVAL: msg or completion_code is NULL
+ *          - -EOVERFLOW: payload_length is incorrect
+ */
+int decode_cc_only_resp(const struct pldm_msg *msg, size_t payload_length,
+			uint8_t *completion_code);
 
 /** @brief Create a PLDM message only with the header
  *
