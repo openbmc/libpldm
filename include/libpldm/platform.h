@@ -12,6 +12,7 @@ extern "C" {
 #include <stdint.h>
 #include <uchar.h>
 
+#include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/compiler.h>
 #include <libpldm/pdr.h>
@@ -609,6 +610,82 @@ struct pldm_sensor_auxiliary_names_pdr {
 	uint8_t sensor_count;
 	uint8_t names[1];
 } __attribute__((packed));
+
+/** @struct pldm_effecter_auxiliary_name
+ *
+ * Structure representing a single effecter auxiliary name entry.
+ * Member pointers point into the original PDR message buffer.
+ */
+struct pldm_effecter_auxiliary_name {
+	uint8_t name_string_count;
+	const void *names_data;
+	size_t names_data_length;
+};
+
+/** @struct pldm_effecter_auxiliary_names_iter
+ *
+ * Iterator structure for iterating over effecter auxiliary names
+ */
+struct pldm_effecter_auxiliary_names_iter {
+	struct variable_field field;
+	size_t count;
+};
+
+LIBPLDM_ITERATOR
+bool pldm_effecter_auxiliary_names_iter_end(
+	const struct pldm_effecter_auxiliary_names_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_effecter_auxiliary_names_iter_next(
+	struct pldm_effecter_auxiliary_names_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+int decode_pldm_effecter_auxiliary_name_from_iter(
+	struct pldm_effecter_auxiliary_names_iter *iter,
+	struct pldm_effecter_auxiliary_name *name);
+
+/** @brief Iterate effecter auxiliary names
+ *
+ * @param iter The @ref "struct pldm_effecter_auxiliary_names_iter" lvalue
+ * @param name The @ref "struct pldm_effecter_auxiliary_name" lvalue into which
+ *             the next name entry should be decoded
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed
+ *
+ * Example use:
+ *
+ * @code
+ * struct pldm_effecter_auxiliary_names_iter iter;
+ * struct pldm_effecter_auxiliary_name name;
+ * int rc;
+ *
+ * // Initialize iter from PDR data
+ *
+ * foreach_pldm_effecter_auxiliary_name(iter, name, rc) {
+ *     // Do something with each decoded name
+ * }
+ *
+ * if (rc) {
+ *     // Handle any decoding error
+ * }
+ * @endcode
+ */
+#define foreach_pldm_effecter_auxiliary_name(iter, name, rc)                   \
+	for ((rc) = 0;                                                         \
+	     (!pldm_effecter_auxiliary_names_iter_end(&(iter)) &&              \
+	      !((rc) = decode_pldm_effecter_auxiliary_name_from_iter(          \
+			&(iter), &(name))));                                   \
+	     pldm_effecter_auxiliary_names_iter_next(&(iter)))
 
 /** @struct pldm_terminus_locator_type_mctp_eid
  *
