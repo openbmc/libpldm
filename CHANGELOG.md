@@ -48,6 +48,7 @@ Change categories:
 - platform: Added `decode_pldm_platform_set_numeric_effecter_enable_req()`
 - platform: Added `encode_pldm_platform_set_numeric_effecter_enable_resp()`
 - platform: Added `decode_pldm_platform_set_numeric_effecter_enable_resp()`
+- platform: Added `foreach_pldm_effecter_auxiliary_name()` macro
 
 ### Changed
 
