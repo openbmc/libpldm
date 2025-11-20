@@ -1869,4 +1869,102 @@ TEST(NegotiateTransferParams, TestEncodeNegotiateTransferParamsRespFail)
         instance_id, &resp_params_success, response, &payload_len);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(DecodeCcOnlyResp, testGoodDecode)
+{
+    std::array<uint8_t, hdrSize + PLDM_CC_ONLY_RESP_BYTES> responseMsg{};
+    uint8_t expected_cc = PLDM_SUCCESS;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    response->payload[0] = expected_cc;
+
+    uint8_t cc = 0;
+    auto rc = decode_cc_only_resp(response, PLDM_CC_ONLY_RESP_BYTES, &cc);
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(cc, expected_cc);
+}
+
+TEST(DecodeCcOnlyResp, testGoodDecodeErrorCc)
+{
+    std::array<uint8_t, hdrSize + PLDM_CC_ONLY_RESP_BYTES> responseMsg{};
+    uint8_t expected_cc = PLDM_ERROR_INVALID_DATA;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    response->payload[0] = expected_cc;
+
+    uint8_t cc = 0;
+    auto rc = decode_cc_only_resp(response, PLDM_CC_ONLY_RESP_BYTES, &cc);
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(cc, expected_cc);
+}
+
+TEST(DecodeCcOnlyResp, testBadDecodeNullMsg)
+{
+    uint8_t cc = 0;
+    auto rc = decode_cc_only_resp(NULL, PLDM_CC_ONLY_RESP_BYTES, &cc);
+
+    EXPECT_EQ(rc, -EINVAL);
+}
+
+TEST(DecodeCcOnlyResp, testBadDecodeNullCc)
+{
+    std::array<uint8_t, hdrSize + PLDM_CC_ONLY_RESP_BYTES> responseMsg{};
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    auto rc = decode_cc_only_resp(response, PLDM_CC_ONLY_RESP_BYTES, NULL);
+
+    EXPECT_EQ(rc, -EINVAL);
+}
+
+TEST(DecodeCcOnlyResp, testBadDecodeInvalidPayloadLength)
+{
+    std::array<uint8_t, hdrSize + PLDM_CC_ONLY_RESP_BYTES> responseMsg{};
+    uint8_t cc = 0;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    // Test with payload length too small
+    auto rc = decode_cc_only_resp(response, PLDM_CC_ONLY_RESP_BYTES - 1, &cc);
+    EXPECT_LT(rc, 0);
+
+    // Test with payload length too large
+    rc = decode_cc_only_resp(response, PLDM_CC_ONLY_RESP_BYTES + 1, &cc);
+    EXPECT_LT(rc, 0);
+
+    // Test with zero payload length
+    rc = decode_cc_only_resp(response, 0, &cc);
+    EXPECT_LT(rc, 0);
+}
+
+TEST(DecodeCcOnlyResp, testGoodDecodeAllCompletionCodes)
+{
+    std::array<uint8_t, hdrSize + PLDM_CC_ONLY_RESP_BYTES> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    // Test various completion codes
+    std::array<uint8_t, 5> test_codes = {PLDM_SUCCESS, PLDM_ERROR,
+                                         PLDM_ERROR_INVALID_DATA,
+                                         PLDM_ERROR_INVALID_LENGTH, 0xFF};
+
+    for (auto test_cc : test_codes)
+    {
+        response->payload[0] = test_cc;
+        uint8_t cc = 0;
+
+        auto rc = decode_cc_only_resp(response, PLDM_CC_ONLY_RESP_BYTES, &cc);
+
+        EXPECT_EQ(rc, 0);
+        EXPECT_EQ(cc, test_cc);
+    }
+}
+#endif
 #endif
