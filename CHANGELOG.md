@@ -32,6 +32,7 @@ Change categories:
 - platform: Added Effecter Auxiliary Names PDR support per DSP0248 v1.2.0
   Section 28.15
   - Added `struct pldm_effecter_auxiliary_names_pdr`
+- platform: Added `PLDM_SET_NUMERIC_EFFECTER_VALUE_MAX_REQ_BYTES` constant
 
 ### Changed
 
