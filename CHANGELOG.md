@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add iterators for effecter auxiliary names
 - platform: Add SetNumericEffecterEnable related APIs
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
