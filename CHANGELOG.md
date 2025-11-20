@@ -83,6 +83,9 @@ Change categories:
   - `decode_pldm_package_downstream_device_id_record_from_iter()`
   - `pldm_package_component_image_information_iter_init()`
   - `decode_pldm_package_component_image_information_from_iter()`
+  - `decode_cc_only_resp()`
+  - `decode_numeric_effecter_pdr_data()`
+  - `encode_set_numeric_effecter_enable_req()`
 
 - Reworked the firmware update package parsing APIs to track parse state using a
   run-time state machine
