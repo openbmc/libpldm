@@ -610,6 +610,18 @@ struct pldm_sensor_auxiliary_names_pdr {
 	uint8_t names[1];
 } __attribute__((packed));
 
+/** @struct pldm_effecter_auxiliary_names_pdr
+ *
+ *  Structure representing PLDM Effecter Auxiliary Names PDR
+ */
+struct pldm_effecter_auxiliary_names_pdr {
+	struct pldm_pdr_hdr hdr;
+	uint16_t terminus_handle;
+	uint16_t effecter_id;
+	uint8_t effecter_count;
+	uint8_t names[1];
+} __attribute__((packed));
+
 /** @struct pldm_terminus_locator_type_mctp_eid
  *
  *  Structure representing terminus locator value for
