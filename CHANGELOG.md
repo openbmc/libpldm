@@ -29,6 +29,9 @@ Change categories:
   - Added `struct pldm_set_numeric_effecter_enable_req`
   - Added `encode_set_numeric_effecter_enable_req()`
 - base: Added `decode_cc_only_resp()`
+- platform: Added Effecter Auxiliary Names PDR support per DSP0248 v1.2.0
+  Section 28.15
+  - Added `struct pldm_effecter_auxiliary_names_pdr`
 
 ### Changed
 
