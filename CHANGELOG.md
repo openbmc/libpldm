@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 - platform: Add SetNumericEffecterEnable related APIs
+- dsp: platform: Add iterators for effecter auxiliary names
 
 ### Changed
 
