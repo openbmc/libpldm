@@ -1,4 +1,4 @@
-# Changelog
+g Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -29,6 +29,7 @@ Change categories:
 - platform: Added `encode_pldm_platform_set_numeric_effecter_enable_resp()`
 - platform: Added `decode_pldm_platform_set_numeric_effecter_enable_resp()`
 - platform: Added `struct pldm_effecter_auxiliary_names_pdr`
+- platform: Added `PLDM_PLATFORM_SET_NUMERIC_EFFECTER_VALUE_MAX_REQ_BYTES` constant
 
 ### Changed
 
