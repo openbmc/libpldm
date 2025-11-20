@@ -3412,6 +3412,65 @@ int decode_pldm_entity_auxiliary_names_pdr_index(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
+LIBPLDM_ABI_TESTING
+int decode_pldm_effecter_auxiliary_name_from_iter(
+	struct pldm_effecter_auxiliary_names_iter *iter,
+	struct pldm_effecter_auxiliary_name *name)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	size_t names_size;
+	int rc;
+	int i;
+
+	if (!iter || !name) {
+		return -EINVAL;
+	}
+
+	if (iter->field.length > 0 && !iter->field.ptr) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 1, iter->field.ptr,
+				    iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, name->name_string_count);
+
+	/* Point to the start of names data, or NULL if there are no names */
+	if (name->name_string_count > 0) {
+		name->names_data = buf->cursor;
+	} else {
+		name->names_data = NULL;
+	}
+
+	names_size = 0;
+
+	/*
+	 * Scan through the names to calculate total size.
+	 * Format is interleaved: ASCII tag, UTF16-BE name, repeated.
+	 */
+	for (i = 0; i < name->name_string_count; i++) {
+		size_t ascii_len = 0;
+		size_t utf16_len = 0;
+
+		pldm_msgbuf_span_string_ascii(buf, NULL, &ascii_len);
+		pldm_msgbuf_span_string_utf16(buf, NULL, &utf16_len);
+
+		names_size += ascii_len + utf16_len;
+	}
+
+	name->names_data_length = names_size;
+
+	/* Update iterator to remaining data */
+	iter->field.ptr = NULL;
+	pldm_msgbuf_span_remaining(buf, (const void **)&iter->field.ptr,
+				   &iter->field.length);
+
+	return pldm_msgbuf_complete(buf);
+}
+
 LIBPLDM_ABI_STABLE
 int decode_pldm_platform_cper_event(const void *event_data,
 				    size_t event_data_length,

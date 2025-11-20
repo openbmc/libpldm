@@ -7062,3 +7062,127 @@ TEST(EncodePldmFileDescriptorPdr, BadParamBufferTooSmall)
               -EOVERFLOW);
 }
 #endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EffecterAuxiliaryNames, testIteratorGoodPath)
+{
+    // Test data representing effecter auxiliary names PDR payload
+    // Format per spec: nameStringCount, then interleaved (ASCII tag, UTF16-BE
+    // name) pairs
+    std::vector<uint8_t> pdr_data{
+        // First effecter (2 name strings)
+        0x02, // name_string_count
+        // Name 1: ASCII tag "en" followed by UTF16-BE name "T1"
+        0x65, 0x6e, 0x00,                   // "en"
+        0x00, 0x54, 0x00, 0x31, 0x00, 0x00, // "T1" in UTF16-BE
+        // Name 2: ASCII tag "fr" followed by UTF16-BE name "T2"
+        0x66, 0x72, 0x00,                   // "fr"
+        0x00, 0x54, 0x00, 0x32, 0x00, 0x00, // "T2" in UTF16-BE
+
+        // Second effecter (1 name string)
+        0x01, // name_string_count
+        // Name 1: ASCII tag "de" followed by UTF16-BE name "AB"
+        0x64, 0x65, 0x00,                  // "de"
+        0x00, 0x41, 0x00, 0x42, 0x00, 0x00 // "AB" in UTF16-BE
+    };
+
+    struct pldm_effecter_auxiliary_names_iter iter;
+    iter.field.ptr = pdr_data.data();
+    iter.field.length = pdr_data.size();
+    iter.count = 2; // 2 effecters
+
+    struct pldm_effecter_auxiliary_name name;
+    int rc;
+    int effecter_count = 0;
+
+    foreach_pldm_effecter_auxiliary_name(iter, name, rc)
+    {
+        if (effecter_count == 0)
+        {
+            EXPECT_EQ(name.name_string_count, 2);
+            EXPECT_NE(name.names_data, nullptr);
+            EXPECT_GT(name.names_data_length, 0u);
+        }
+        else if (effecter_count == 1)
+        {
+            EXPECT_EQ(name.name_string_count, 1);
+            EXPECT_NE(name.names_data, nullptr);
+            EXPECT_GT(name.names_data_length, 0u);
+        }
+        effecter_count++;
+    }
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(effecter_count, 2);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EffecterAuxiliaryNames, testIteratorNullParams)
+{
+    struct pldm_effecter_auxiliary_names_iter iter;
+    struct pldm_effecter_auxiliary_name name;
+
+    // Test with null iter
+    auto rc = decode_pldm_effecter_auxiliary_name_from_iter(nullptr, &name);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test with null name
+    rc = decode_pldm_effecter_auxiliary_name_from_iter(&iter, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EffecterAuxiliaryNames, testIteratorEmptyData)
+{
+    std::vector<uint8_t> pdr_data{
+        0x00 // name_string_count = 0 (no names)
+    };
+
+    struct pldm_effecter_auxiliary_names_iter iter;
+    iter.field.ptr = pdr_data.data();
+    iter.field.length = pdr_data.size();
+    iter.count = 1;
+
+    struct pldm_effecter_auxiliary_name name;
+    int rc;
+    int effecter_count = 0;
+
+    foreach_pldm_effecter_auxiliary_name(iter, name, rc)
+    {
+        EXPECT_EQ(name.name_string_count, 0);
+        EXPECT_EQ(name.names_data, nullptr);
+        EXPECT_EQ(name.names_data_length, 0u);
+        effecter_count++;
+    }
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(effecter_count, 1);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EffecterAuxiliaryNames, testIteratorInsufficientData)
+{
+    // Incomplete data - missing name strings
+    std::vector<uint8_t> pdr_data{
+        0x02 // name_string_count = 2, but no actual name data follows
+    };
+
+    struct pldm_effecter_auxiliary_names_iter iter;
+    iter.field.ptr = pdr_data.data();
+    iter.field.length = pdr_data.size();
+    iter.count = 1;
+
+    struct pldm_effecter_auxiliary_name name;
+    int rc;
+
+    foreach_pldm_effecter_auxiliary_name(iter, name, rc)
+    {
+        // Should fail on first iteration due to insufficient data
+    }
+
+    EXPECT_LT(rc, 0); // Should have error
+}
+#endif
