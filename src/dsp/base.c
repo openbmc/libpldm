@@ -959,3 +959,25 @@ int decode_pldm_base_negotiate_transfer_params_resp(
 
 	return pldm_msgbuf_complete_consumed(buf);
 }
+
+LIBPLDM_ABI_TESTING
+int decode_cc_only_resp(const struct pldm_msg *msg, size_t payload_length,
+			uint8_t *completion_code)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || completion_code == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_CC_ONLY_RESP_BYTES, msg->payload,
+				    payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract_p(buf, completion_code);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
