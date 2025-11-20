@@ -1869,6 +1869,7 @@ TEST(NegotiateTransferParams, TestEncodeNegotiateTransferParamsRespFail)
         instance_id, &resp_params_success, response, &payload_len);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
+#endif
 
 TEST(DecodeCcOnlyResp, testGoodDecode)
 {
@@ -1965,4 +1966,3 @@ TEST(DecodeCcOnlyResp, testGoodDecodeAllCompletionCodes)
         EXPECT_EQ(cc, test_cc);
     }
 }
-#endif
