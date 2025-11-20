@@ -12,6 +12,7 @@ extern "C" {
 #include <stdint.h>
 #include <uchar.h>
 
+#include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/compiler.h>
 #include <libpldm/pdr.h>
@@ -132,6 +133,13 @@ enum pldm_platform_transfer_flag {
  * v1.2.2
  */
 #define PLDM_PDR_ENTITY_AUXILIARY_NAME_PDR_MIN_LENGTH 8
+
+/**
+ * Minimum length of effecter auxiliary names PDR includes size of the common
+ * PDR header (10 bytes), terminusHandle, effecterID, and effecterCount in
+ * `Table 92 - Effecter Auxiliary Names PDR format` of DSP0248 v1.2.0
+ */
+#define PLDM_PDR_EFFECTER_AUXILIARY_NAMES_MIN_LENGTH 15
 
 /**
  * Minimum length of File Descriptor PDR, including size of PLDMTerminusHandle,
@@ -627,6 +635,30 @@ struct pldm_sensor_auxiliary_names_pdr {
 	uint8_t names[1];
 } __attribute__((packed));
 
+/** @struct pldm_platform_effecter_auxiliary_name
+ *
+ * Structure representing a single effecter entry decoded from an
+ * Effecter Auxiliary Names PDR. Use the inner iterator
+ * @ref foreach_pldm_platform_effecter_aux_name to iterate each
+ * name string (language tag + UTF16 name) within the effecter.
+ */
+struct pldm_platform_effecter_auxiliary_name {
+	uint8_t name_string_count;
+};
+
+/** @struct pldm_platform_effecter_aux_name
+ *
+ * Structure representing a single (language tag, UTF16 name) pair
+ * decoded from an effecter's name strings. Member pointers point
+ * into the original PDR message buffer.
+ */
+struct pldm_platform_effecter_aux_name {
+	const char *tag;
+	size_t tag_length;
+	const char16_t *name;
+	size_t name_length;
+};
+
 /** @struct pldm_terminus_locator_type_mctp_eid
  *
  *  Structure representing terminus locator value for
@@ -856,6 +888,193 @@ struct pldm_value_pdr_hdr {
 	uint16_t record_change_num;
 	uint16_t length;
 };
+
+/** @struct pldm_platform_effecter_auxiliary_names_pdr
+ *
+ * Structure representing the fixed fields of an Effecter Auxiliary Names PDR
+ * (type 13) as defined in DSP0248.
+ */
+struct pldm_platform_effecter_auxiliary_names_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint16_t terminus_handle;
+	uint16_t effecter_id;
+	uint8_t effecter_count;
+};
+
+/** @struct pldm_platform_effecter_auxiliary_names_iter
+ *
+ * Outer iterator for iterating over effecters in an Effecter Auxiliary Names
+ * PDR. Initialized by @ref decode_pldm_platform_effecter_auxiliary_names_pdr.
+ */
+struct pldm_platform_effecter_auxiliary_names_iter {
+	struct variable_field field;
+	size_t count;
+};
+
+LIBPLDM_ITERATOR
+bool pldm_platform_effecter_auxiliary_names_iter_end(
+	const struct pldm_platform_effecter_auxiliary_names_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_platform_effecter_auxiliary_names_iter_next(
+	struct pldm_platform_effecter_auxiliary_names_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+/** @brief Decode the fixed fields of an Effecter Auxiliary Names PDR and
+ *         initialize an iterator over the effecter entries
+ *
+ * @param[in] data - PDR data
+ * @param[in] data_length - Length of PDR data
+ * @param[out] pdr - Decoded fixed PDR fields
+ * @param[out] iter - Iterator initialized to walk the effecter entries
+ *
+ * @return 0 on success, negative errno on error
+ */
+int decode_pldm_platform_effecter_auxiliary_names_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_effecter_auxiliary_names_pdr *pdr,
+	struct pldm_platform_effecter_auxiliary_names_iter *iter);
+
+/** @brief Decode a single effecter entry from the outer iterator
+ *
+ * @param[in,out] iter - The outer effecter iterator
+ * @param[out] effecter - Decoded effecter entry (name_string_count)
+ *
+ * @return 0 on success, negative errno on error
+ */
+int decode_pldm_platform_effecter_auxiliary_name_from_iter(
+	struct pldm_platform_effecter_auxiliary_names_iter *iter,
+	struct pldm_platform_effecter_auxiliary_name *effecter);
+
+/** @brief Iterate effecters in an Effecter Auxiliary Names PDR
+ *
+ * @param iter The @ref "struct pldm_platform_effecter_auxiliary_names_iter"
+ *             lvalue initialized by
+ *             @ref decode_pldm_platform_effecter_auxiliary_names_pdr
+ * @param effecter The @ref "struct pldm_platform_effecter_auxiliary_name"
+ *                 lvalue into which the next effecter entry is decoded
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed
+ *
+ * Example use:
+ *
+ * @code
+ * struct pldm_platform_effecter_auxiliary_names_pdr pdr;
+ * struct pldm_platform_effecter_auxiliary_names_iter iter;
+ * struct pldm_platform_effecter_auxiliary_name effecter;
+ * int rc;
+ *
+ * rc = decode_pldm_platform_effecter_auxiliary_names_pdr(data, data_length,
+ *                                                       &pdr, &iter);
+ * if (rc) {
+ *     // Handle error
+ * }
+ *
+ * foreach_pldm_platform_effecter_auxiliary_name(iter, effecter, rc) {
+ *     struct pldm_platform_effecter_aux_name name;
+ *
+ *     foreach_pldm_platform_effecter_aux_name(iter, effecter, name, rc) {
+ *         // Access name.tag and name.name
+ *     }
+ *
+ *     if (rc) {
+ *         // Handle name decoding error
+ *     }
+ * }
+ *
+ * if (rc) {
+ *     // Handle effecter decoding error
+ * }
+ * @endcode
+ */
+#define foreach_pldm_platform_effecter_auxiliary_name(iter, effecter, rc)      \
+	for ((rc) = 0;                                                         \
+	     (!pldm_platform_effecter_auxiliary_names_iter_end(&(iter)) &&     \
+	      !((rc) = decode_pldm_platform_effecter_auxiliary_name_from_iter( \
+			&(iter), &(effecter))));                               \
+	     pldm_platform_effecter_auxiliary_names_iter_next(&(iter)))
+
+/** @struct pldm_platform_effecter_aux_name_iter
+ *
+ * Inner iterator for iterating over name strings within a single effecter.
+ * Initialized by @ref pldm_platform_effecter_aux_name_iter_init inside
+ * @ref foreach_pldm_platform_effecter_aux_name.
+ */
+struct pldm_platform_effecter_aux_name_iter {
+	struct variable_field *field;
+	size_t count;
+};
+
+LIBPLDM_ITERATOR
+struct pldm_platform_effecter_aux_name_iter
+pldm_platform_effecter_aux_name_iter_init(
+	struct pldm_platform_effecter_auxiliary_names_iter *effecters,
+	const struct pldm_platform_effecter_auxiliary_name *effecter)
+{
+	struct pldm_platform_effecter_aux_name_iter iter = {
+		&effecters->field, effecter->name_string_count
+	};
+	return iter;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_platform_effecter_aux_name_iter_end(
+	const struct pldm_platform_effecter_aux_name_iter *iter)
+{
+	return !iter->count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_platform_effecter_aux_name_iter_next(
+	struct pldm_platform_effecter_aux_name_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+
+	iter->count--;
+	return true;
+}
+
+/** @brief Decode one (language tag, UTF16 name) pair from the inner iterator
+ *
+ * @param[in,out] iter - The inner name iterator
+ * @param[out] entry - Decoded name entry
+ *
+ * @return 0 on success, negative errno on error
+ */
+int decode_pldm_platform_effecter_aux_name_from_iter(
+	struct pldm_platform_effecter_aux_name_iter *iter,
+	struct pldm_platform_effecter_aux_name *entry);
+
+/** @brief Iterate name strings within a single effecter
+ *
+ * @param effecters The outer
+ *        @ref "struct pldm_platform_effecter_auxiliary_names_iter" lvalue
+ * @param effecter The @ref "struct pldm_platform_effecter_auxiliary_name"
+ *                 lvalue of the current effecter
+ * @param name The @ref "struct pldm_platform_effecter_aux_name" lvalue into
+ *             which the next name is decoded
+ * @param rc An lvalue of type int
+ */
+#define foreach_pldm_platform_effecter_aux_name(effecters, effecter, name, rc) \
+	for (struct pldm_platform_effecter_aux_name_iter name##_iter =         \
+		     ((rc) = 0, pldm_platform_effecter_aux_name_iter_init(     \
+					&(effecters), &(effecter)));           \
+	     (!pldm_platform_effecter_aux_name_iter_end(&(name##_iter)) &&     \
+	      !((rc) = decode_pldm_platform_effecter_aux_name_from_iter(       \
+			&(name##_iter), &(name))));                            \
+	     pldm_platform_effecter_aux_name_iter_next(&(name##_iter)))
 
 /** @struct pldm_numeric_sensor_value_pdr
  *
