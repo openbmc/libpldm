@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fefdb49_c790f136",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2025-11-24T06:41:30Z",
+      "side": 1,
+      "message": "Changes done:\n1. Add macros in Changelog.md instead of function in ### Added section\n2. Remove unnecessary typedefs\n3. Remove _t from my structs\n4. Rename macros with foreach_\n5. Use msgbuf APIs\n6. Remove check for comp eff count \u003d 0\n7. Add error code support\n8. Now accepts void buffer instead of struct\n9. Discard buffers on errors\n10. Add more test cases",
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
