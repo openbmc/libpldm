@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9acf3bd6_e14231b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-11-26T09:49:14Z",
+      "side": 1,
+      "message": "I\u0027ve left comments inline about some of the community guidelines for  new APIs in libpldm.\n As this is failing CI, I expect this is still WIP. I will review it again more thoughtfully when it\u0027s done.",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dda8af1b_435b730f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3636,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-11-26T09:49:14Z",
+      "side": 1,
+      "message": "Following the guidelines [https://github.com/openbmc/libpldm/blame/06dcea74c3f956956b9c345c255069054ef66f1c/CONTRIBUTING.md#L287], this should accept a struct instead of decomposing the input parameters.",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2d88494_1c52fb12",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 991,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-11-26T09:49:14Z",
+      "side": 1,
+      "message": "The community is pivoting over using the placement new instead of the reinterpret_cast. See other example usages in the file, for example here:\nhttps://github.com/openbmc/libpldm/blob/06dcea74c3f956956b9c345c255069054ef66f1c/tests/dsp/platform.cpp#L785\n\nsame for all other occurrences in the patch.",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
