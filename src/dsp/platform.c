@@ -3631,3 +3631,102 @@ int encode_pldm_platform_file_descriptor_pdr(
 
 	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
 }
+
+LIBPLDM_ABI_TESTING
+int encode_numeric_sensor_pdr_data(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_numeric_sensor_value_pdr *pdr_value)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+
+	int rc;
+
+	if (!pdr_data || !pdr_value) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (pdr_value->sensor_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH,
+				    pdr_data, pdr_data_length);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	struct pldm_value_pdr_hdr *hdr = &pdr_value->hdr;
+	pldm_msgbuf_insert(buf, hdr->record_handle);
+	pldm_msgbuf_insert(buf, hdr->version);
+	pldm_msgbuf_insert(buf, hdr->type);
+	pldm_msgbuf_insert(buf, hdr->record_change_num);
+	pldm_msgbuf_insert(buf, hdr->length);
+
+	pldm_msgbuf_insert(buf, pdr_value->terminus_handle);
+	pldm_msgbuf_insert(buf, pdr_value->sensor_id);
+	pldm_msgbuf_insert(buf, pdr_value->entity_type);
+	pldm_msgbuf_insert(buf, pdr_value->entity_instance_num);
+	pldm_msgbuf_insert(buf, pdr_value->container_id);
+	pldm_msgbuf_insert(buf, pdr_value->sensor_init);
+	pldm_msgbuf_insert(buf, pdr_value->sensor_auxiliary_names_pdr);
+	pldm_msgbuf_insert(buf, pdr_value->base_unit);
+	pldm_msgbuf_insert(buf, pdr_value->unit_modifier);
+	pldm_msgbuf_insert(buf, pdr_value->rate_unit);
+	pldm_msgbuf_insert(buf, pdr_value->base_oem_unit_handle);
+	pldm_msgbuf_insert(buf, pdr_value->aux_unit);
+	pldm_msgbuf_insert(buf, pdr_value->aux_unit_modifier);
+	pldm_msgbuf_insert(buf, pdr_value->aux_rate_unit);
+	pldm_msgbuf_insert(buf, pdr_value->rel);
+	pldm_msgbuf_insert(buf, pdr_value->aux_oem_unit_handle);
+	pldm_msgbuf_insert(buf, pdr_value->is_linear);
+	pldm_msgbuf_insert(buf, pdr_value->sensor_data_size);
+	pldm_msgbuf_insert(buf, pdr_value->resolution);
+	pldm_msgbuf_insert(buf, pdr_value->offset);
+	pldm_msgbuf_insert(buf, pdr_value->accuracy);
+	pldm_msgbuf_insert(buf, pdr_value->plus_tolerance);
+	pldm_msgbuf_insert(buf, pdr_value->minus_tolerance);
+
+	pldm_msgbuf_insert_sensor_data(buf, pdr_value->sensor_data_size,
+				       &pdr_value->hysteresis);
+
+	pldm_msgbuf_insert(buf, pdr_value->supported_thresholds.byte);
+	pldm_msgbuf_insert(buf,
+			   pdr_value->threshold_and_hysteresis_volatility.byte);
+
+	pldm_msgbuf_insert(buf, pdr_value->state_transition_interval);
+	pldm_msgbuf_insert(buf, pdr_value->update_interval);
+
+	pldm_msgbuf_insert_sensor_data(buf, pdr_value->sensor_data_size,
+				       &pdr_value->max_readable);
+	pldm_msgbuf_insert_sensor_data(buf, pdr_value->sensor_data_size,
+				       &pdr_value->min_readable);
+
+	pldm_msgbuf_insert(buf, pdr_value->range_field_format);
+	pldm_msgbuf_insert(buf, pdr_value->range_field_support.byte);
+
+	pldm_msgbuf_insert_range_field_data(buf, pdr_value->range_field_format,
+					    &pdr_value->nominal_value);
+	pldm_msgbuf_insert_range_field_data(buf, pdr_value->range_field_format,
+					    &pdr_value->normal_max);
+	pldm_msgbuf_insert_range_field_data(buf, pdr_value->range_field_format,
+					    &pdr_value->normal_min);
+	pldm_msgbuf_insert_range_field_data(buf, pdr_value->range_field_format,
+					    &pdr_value->warning_high);
+	pldm_msgbuf_insert_range_field_data(buf, pdr_value->range_field_format,
+					    &pdr_value->warning_low);
+	pldm_msgbuf_insert_range_field_data(buf, pdr_value->range_field_format,
+					    &pdr_value->critical_high);
+	pldm_msgbuf_insert_range_field_data(buf, pdr_value->range_field_format,
+					    &pdr_value->critical_low);
+	pldm_msgbuf_insert_range_field_data(buf, pdr_value->range_field_format,
+					    &pdr_value->fatal_high);
+	pldm_msgbuf_insert_range_field_data(buf, pdr_value->range_field_format,
+					    &pdr_value->fatal_low);
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	return PLDM_SUCCESS;
+}
