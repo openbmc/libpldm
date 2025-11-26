@@ -4985,6 +4985,148 @@ TEST(decodeNumericSensorPdrDataDeathTest, InvalidSizeTest)
 }
 
 #ifdef LIBPLDM_API_TESTING
+TEST(encodeNumericSensorPDRData, Uint8Test)
+{
+    struct pldm_numeric_sensor_value_pdr originalPDR = {
+        {
+            0xABCD, // record_handle
+            1,      // version
+            PLDM_NUMERIC_SENSOR_PDR,
+            0,                                     // record_change_num
+            PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH // dataLength
+        },
+        0,                             // PLDMTerminusHandle
+        1,                             // sensorID
+        PLDM_ENTITY_POWER_SUPPLY,      // entityType=Power Supply(120)
+        {1},                           // entityInstanceNumber
+        0,                             // containerID
+        PLDM_NO_INIT,                  // sensor_init
+        false,                         // sensor_auxiliary_names_pdr
+        PLDM_SENSOR_UNIT_DEGRESS_C,    // base_unit
+        0,                             // unit_modifier
+        0,                             // rate_unit
+        0,                             // base_oem_unit_handle
+        0,                             // aux_unit
+        0,                             // aux_unit_modifier
+        0,                             // aux_rate_unit
+        0,                             // rel
+        0,                             // aux_oem_unit_handle
+        true,                          // is_linear
+        PLDM_SENSOR_DATA_SIZE_UINT8,   // sensor_data_size
+        1.5f,                          // resolution
+        1.0f,                          // offset
+        0,                             // accuracy
+        0,                             // plus_tolerance
+        0,                             // minus_tolerance
+        {3},                           // hysteresis
+        {0},                           // supported_thresholds
+        {0},                           // threshold_and_hysteresis_volatility
+        1.0f,                          // state_transition_interval
+        0,                             // update_interval
+        {255},                         // max_readable
+        {0},                           // min_readable
+        PLDM_RANGE_FIELD_FORMAT_UINT8, // range_field_format
+        {0},                           // range_field_support
+        {50},                          // nominal_value
+        {60},                          // normal_max
+        {40},                          // normal_min
+        {7},                           // warning_high
+        {30},                          // warning_low
+        {80},                          // critical_high
+        {20},                          // critical_low
+        {90},                          // fatal_high
+        {10}                           // fatal_low
+    };
+    std::array<uint8_t,
+               sizeof(pldm_msg_hdr) + PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH>
+        encodedPDR{};
+    auto rc = encode_numeric_sensor_pdr_data(&encodedPDR, encodedPDR.size(),
+                                             &originalPDR);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+
+    struct pldm_numeric_sensor_value_pdr decodedPDR;
+
+    rc = decode_numeric_sensor_pdr_data(&encodedPDR, encodedPDR.size(),
+                                        &decodedPDR);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(decodedPDR.hdr.record_handle, originalPDR.hdr.record_handle);
+    EXPECT_EQ(decodedPDR.hdr.version, originalPDR.hdr.version);
+    EXPECT_EQ(decodedPDR.hdr.type, originalPDR.hdr.type);
+    EXPECT_EQ(decodedPDR.hdr.record_change_num,
+              originalPDR.hdr.record_change_num);
+    EXPECT_EQ(decodedPDR.hdr.length, originalPDR.hdr.length);
+
+    EXPECT_EQ(decodedPDR.terminus_handle, originalPDR.terminus_handle);
+    EXPECT_EQ(decodedPDR.sensor_id, originalPDR.sensor_id);
+    EXPECT_EQ(decodedPDR.entity_type, originalPDR.entity_type);
+    EXPECT_EQ(decodedPDR.entity_instance, originalPDR.entity_instance);
+    EXPECT_EQ(decodedPDR.container_id, originalPDR.container_id);
+
+    EXPECT_EQ(decodedPDR.sensor_init, originalPDR.sensor_init);
+    EXPECT_EQ(decodedPDR.sensor_auxiliary_names_pdr,
+              originalPDR.sensor_auxiliary_names_pdr);
+
+    EXPECT_EQ(decodedPDR.base_unit, originalPDR.base_unit);
+    EXPECT_EQ(decodedPDR.unit_modifier, originalPDR.unit_modifier);
+    EXPECT_EQ(decodedPDR.rate_unit, originalPDR.rate_unit);
+    EXPECT_EQ(decodedPDR.base_oem_unit_handle,
+              originalPDR.base_oem_unit_handle);
+
+    EXPECT_EQ(decodedPDR.aux_unit, originalPDR.aux_unit);
+    EXPECT_EQ(decodedPDR.aux_unit_modifier, originalPDR.aux_unit_modifier);
+    EXPECT_EQ(decodedPDR.aux_rate_unit, originalPDR.aux_rate_unit);
+    EXPECT_EQ(decodedPDR.rel, originalPDR.rel);
+    EXPECT_EQ(decodedPDR.aux_oem_unit_handle, originalPDR.aux_oem_unit_handle);
+
+    EXPECT_EQ(decodedPDR.is_linear, originalPDR.is_linear);
+    EXPECT_EQ(decodedPDR.sensor_data_size, originalPDR.sensor_data_size);
+
+    EXPECT_EQ(decodedPDR.resolution, originalPDR.resolution);
+    EXPECT_EQ(decodedPDR.offset, originalPDR.offset);
+
+    EXPECT_EQ(decodedPDR.accuracy, originalPDR.accuracy);
+    EXPECT_EQ(decodedPDR.plus_tolerance, originalPDR.plus_tolerance);
+    EXPECT_EQ(decodedPDR.minus_tolerance, originalPDR.minus_tolerance);
+
+    EXPECT_EQ(decodedPDR.hysteresis.value_u8, originalPDR.hysteresis.value_u8);
+
+    EXPECT_EQ(decodedPDR.supported_thresholds.byte,
+              originalPDR.supported_thresholds.byte);
+    EXPECT_EQ(decodedPDR.threshold_and_hysteresis_volatility.byte,
+              originalPDR.threshold_and_hysteresis_volatility.byte);
+
+    EXPECT_EQ(decodedPDR.state_transition_interval,
+              originalPDR.state_transition_interval);
+    EXPECT_EQ(decodedPDR.update_interval, originalPDR.update_interval);
+
+    EXPECT_EQ(decodedPDR.max_readable.value_u8,
+              originalPDR.max_readable.value_u8);
+    EXPECT_EQ(decodedPDR.min_readable.value_u8,
+              originalPDR.min_readable.value_u8);
+
+    EXPECT_EQ(decodedPDR.range_field_format, originalPDR.range_field_format);
+    EXPECT_EQ(decodedPDR.range_field_support.byte,
+              originalPDR.range_field_support.byte);
+
+    EXPECT_EQ(decodedPDR.nominal_value.value_u8,
+              originalPDR.nominal_value.value_u8);
+    EXPECT_EQ(decodedPDR.normal_max.value_u8, originalPDR.normal_max.value_u8);
+    EXPECT_EQ(decodedPDR.normal_min.value_u8, originalPDR.normal_min.value_u8);
+    EXPECT_EQ(decodedPDR.warning_high.value_u8,
+              originalPDR.warning_high.value_u8);
+    EXPECT_EQ(decodedPDR.warning_low.value_u8,
+              originalPDR.warning_low.value_u8);
+    EXPECT_EQ(decodedPDR.critical_high.value_u8,
+              originalPDR.critical_high.value_u8);
+    EXPECT_EQ(decodedPDR.critical_low.value_u8,
+              originalPDR.critical_low.value_u8);
+    EXPECT_EQ(decodedPDR.fatal_high.value_u8, originalPDR.fatal_high.value_u8);
+    EXPECT_EQ(decodedPDR.fatal_low.value_u8, originalPDR.fatal_low.value_u8);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint8Test)
 {
     std::vector<uint8_t> pdr1{
