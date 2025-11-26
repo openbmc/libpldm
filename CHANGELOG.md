@@ -24,6 +24,7 @@ Change categories:
 - utils: Added `pldm_edac_crc32_extend()`
 - base: Added `decode_pldm_base_negotiate_transfer_params_req()`
 - base: Added `encode_pldm_base_negotiate_transfer_params_resp()`
+- platform: Add `encode_numeric_sensor_pdr_data()`
 
 ### Changed
 
