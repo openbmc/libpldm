@@ -403,6 +403,18 @@ enum pldm_sensor_readings_data_type {
 	PLDM_SENSOR_DATA_SIZE_UINT32,
 	PLDM_SENSOR_DATA_SIZE_SINT32
 };
+
+/** @brief PLDM NumericSensorStatePresentReading data type
+ */
+enum pldm_sensor_range_field_format {
+	PLDM_SENSOR_RANGE_FORMAT_SIZE_UINT8,
+	PLDM_SENSOR_RANGE_FORMAT_SIZE_SINT8,
+	PLDM_SENSOR_RANGE_FORMAT_SIZE_UINT16,
+	PLDM_SENSOR_RANGE_FORMAT_SIZE_SINT16,
+	PLDM_SENSOR_RANGE_FORMAT_SIZE_UINT32,
+	PLDM_SENSOR_RANGE_FORMAT_SIZE_SINT32,
+	PLDM_SENSOR_RANGE_FORMAT_SIZE_REAL32
+};
 #define PLDM_SENSOR_DATA_SIZE_MAX PLDM_SENSOR_DATA_SIZE_SINT32
 
 /** @brief PLDM PlatformEventMessage response status
@@ -2773,6 +2785,10 @@ int decode_set_numeric_sensor_enable_req(
 int decode_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_state_sensor_enables_req *req);
+
+int encode_numeric_sensor_pdr_data(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_numeric_sensor_value_pdr *pdr_value);
 
 #ifdef __cplusplus
 }
