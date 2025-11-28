@@ -65,6 +65,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae977008_57c077ef",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-28T00:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1050751f_3d3748fe",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 61
+      },
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7852bc5_bbab470b",
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "I\u0027ve removed this typedef for struct pldm_state_effecter_pdr as it\u0027s not required anymore.",
       "parentUuid": "a7852bc5_bbab470b",
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4195396_ab8a4e65",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-28T00:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab9472ad_a1ed5147",
       "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -135,6 +177,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a05e91d6_72f6d5cc",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-28T00:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa3eb5e7_2c0e69be",
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4535e6a_45955287",
@@ -166,6 +226,24 @@
       "side": 1,
       "message": "Thanks for letting me know about this. I have removed typedefs \u0026 _t suffixes from the structs.",
       "parentUuid": "e4535e6a_45955287",
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef395cdc_82b10807",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-28T00:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "042f4783_605df44a",
       "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -217,6 +295,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b58b72_2079ded5",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-28T00:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d653cfe5_0120674a",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 22
+      },
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c2a7f5b_80d15bcc",
@@ -254,6 +356,30 @@
       "side": 1,
       "message": "Done. Renamed both of them with lower case naming and prefixed them in foreach_ and relevant typename. Also added error code support so that the macro users can get error info.",
       "parentUuid": "8c2a7f5b_80d15bcc",
+      "range": {
+        "startLine": 158,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 35
+      },
+      "revId": "715835f54f7c84a9e61fe74724d284ceb55bd502",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "027700ab_177db810",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-28T00:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "359e3802_e4ed75c4",
       "range": {
         "startLine": 158,
         "startChar": 8,
