@@ -18,6 +18,63 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80783931_fb518729",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-28T00:26:54Z",
+      "side": 1,
+      "message": "Hi Aditya, thanks for the change. I have a few comments inline.",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "745c9ac6_47ab40dc",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-28T00:26:54Z",
+      "side": 1,
+      "message": "I recognise that historically the structs have been packed, but that\u0027s no longer desirable.\n\nSee: https://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L298-L299",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee3b3b6d_31b2e426",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1475,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-28T00:26:54Z",
+      "side": 1,
+      "message": "Please avoid decomposing the message members into function parameters.\n\nSee: https://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L287-L293",
+      "range": {
+        "startLine": 1473,
+        "startChar": 43,
+        "endLine": 1475,
+        "endChar": 43
+      },
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dda8af1b_435b730f",
@@ -48,6 +105,23 @@
       "writtenOn": "2025-11-26T09:51:21Z",
       "side": 1,
       "message": "Also, I\u0027m missing the corresponding decode_set_numeric_effecter_enable_req?",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59227be2_277d055e",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-11-28T00:26:54Z",
+      "side": 1,
+      "message": "Writing `// NOLINTNEXTLINE (...)` should be a hint that what you\u0027re doing is not desirable. See @roger.gili-coscojuela@sipearl.com\u0027s comment below.",
       "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
