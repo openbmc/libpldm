@@ -16,6 +16,24 @@
       "message": "Holding off on this until we\u0027re satisfied with the linked commit",
       "revId": "6667be67ea389d9af96b0b0a2850ef4d44ba491c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c56115f8_3226fc75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2025-11-28T06:49:05Z",
+      "side": 1,
+      "message": "@andrew, I have reworked the PLDM commit associated with this, and I believe we are now good to go. Can you take a look and help me merge this libpldm commit?",
+      "parentUuid": "652b5853_e6ec75fb",
+      "revId": "6667be67ea389d9af96b0b0a2850ef4d44ba491c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
