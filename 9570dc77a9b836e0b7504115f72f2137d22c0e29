@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bb7119f_c1524362",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000086
+      },
+      "writtenOn": "2025-12-01T06:27:11Z",
+      "side": 1,
+      "message": "Commit message should follow 50/72 rule:  the subject line should not exceed 50 characters and the body should not exceed 72 characters. This is common practice in many projects which use Git.\n\nhttps://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#formatting-commit-messages",
+      "revId": "9570dc77a9b836e0b7504115f72f2137d22c0e29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40d4ea94_c432d674",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000086
+      },
+      "writtenOn": "2025-12-01T06:27:11Z",
+      "side": 1,
+      "message": "Nit: test:dsp state-sensor: add negative tests for APIs",
+      "revId": "9570dc77a9b836e0b7504115f72f2137d22c0e29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "085cce13_f3222c25",
