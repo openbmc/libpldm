@@ -52,6 +52,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b65f713a_47865515",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-05T11:02:48Z",
+      "side": 1,
+      "message": "Done, the struct is no longer packed.",
+      "parentUuid": "745c9ac6_47ab40dc",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee3b3b6d_31b2e426",
@@ -65,6 +83,30 @@
       "writtenOn": "2025-11-28T00:26:54Z",
       "side": 1,
       "message": "Please avoid decomposing the message members into function parameters.\n\nSee: https://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L287-L293",
+      "range": {
+        "startLine": 1473,
+        "startChar": 43,
+        "endLine": 1475,
+        "endChar": 43
+      },
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e469f0c_492da059",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1475,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-05T11:02:48Z",
+      "side": 1,
+      "message": "Done. Using a struct instead of decomposing function params.",
+      "parentUuid": "ee3b3b6d_31b2e426",
       "range": {
         "startLine": 1473,
         "startChar": 43,
@@ -109,6 +151,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cce46c6d_b7774821",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3636,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-05T11:02:48Z",
+      "side": 1,
+      "message": "Done. Using a struct instead of decomposing function params.",
+      "parentUuid": "dda8af1b_435b730f",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59227be2_277d055e",
@@ -126,6 +186,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63b8f335_bc415ceb",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-05T11:02:48Z",
+      "side": 1,
+      "message": "Done. Replaced with placement new.",
+      "parentUuid": "59227be2_277d055e",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2d88494_1c52fb12",
@@ -139,6 +217,24 @@
       "writtenOn": "2025-11-26T09:49:14Z",
       "side": 1,
       "message": "The community is pivoting over using the placement new instead of the reinterpret_cast. See other example usages in the file, for example here:\nhttps://github.com/openbmc/libpldm/blob/06dcea74c3f956956b9c345c255069054ef66f1c/tests/dsp/platform.cpp#L785\n\nsame for all other occurrences in the patch.",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7275507f_7760f903",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 991,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-05T11:02:48Z",
+      "side": 1,
+      "message": "Done. Replaced with placement new.",
+      "parentUuid": "e2d88494_1c52fb12",
       "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
