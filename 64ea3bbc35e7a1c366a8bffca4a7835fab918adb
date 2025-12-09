@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d23cd5e9_d8538fef",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 6637,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-09T00:57:35Z",
+      "side": 1,
+      "message": "Can you please replace this with `PLDM_MSG_DEFINE_P()`:\n\nhttps://github.com/openbmc/libpldm/blob/06dcea74c3f956956b9c345c255069054ef66f1c/include/libpldm/base.h#L246-L260",
+      "range": {
+        "startLine": 6635,
+        "startChar": 1,
+        "endLine": 6637,
+        "endChar": 58
+      },
+      "revId": "64ea3bbc35e7a1c366a8bffca4a7835fab918adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1bda40f_ca293f91",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 6650,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-09T00:57:35Z",
+      "side": 1,
+      "message": "Also here.",
+      "range": {
+        "startLine": 6649,
+        "startChar": 1,
+        "endLine": 6650,
+        "endChar": 58
+      },
+      "revId": "64ea3bbc35e7a1c366a8bffca4a7835fab918adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
