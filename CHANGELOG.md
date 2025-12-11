@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- platform: Added UINT64/SINT64 sensor data types per DSP0248 v1.3.0
+  - Added `decode_numeric_sensor_event_data()` for full 64-bit support
 - platform: Added file descriptor PDR encoding support
   - Added `encode_pldm_platform_file_descriptor_pdr()`
 - utils: Added `pldm_edac_crc32_extend()`
@@ -95,6 +97,9 @@ Change categories:
 
 ### Fixed
 
+- platform: Fixed `encode_get_sensor_reading_resp()` using incorrect
+  `PLDM_EFFECTER_DATA_SIZE_*` constants instead of `PLDM_SENSOR_DATA_SIZE_*` for
+  sensor data size validation
 - dsp: base: Don't extract MultipartReceive resp's CRC once complete
 
 - base: Allocating struct pldm_msg with member initialization in
