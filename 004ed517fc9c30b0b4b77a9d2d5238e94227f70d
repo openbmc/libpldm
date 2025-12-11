@@ -189,6 +189,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70d0f149_0b88cb6e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3636,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2025-12-11T10:41:25Z",
+      "side": 1,
+      "message": "I understand that there is currently no use case for this within pldmd, but we should aim to make the library usable both for pldmd (inside the BMC) and for any PLDM device implementation that chooses to use our library. Of course, this means the decode function will remain marked as LIBPLDM_ABI_TESTING, since an example usage will not be made public.\n\nIn fact, this is one of the requirements for adding a new API, as described in the contributing guidelines:\nhttps://github.com/openbmc/libpldm/blob/06dcea74c3f956956b9c345c255069054ef66f1c/CONTRIBUTING.md?plain\u003d1#L268",
+      "parentUuid": "442bc78e_f08a01bd",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59227be2_277d055e",
         "filename": "tests/dsp/platform.cpp",
         "patchSetId": 2
