@@ -120,6 +120,14 @@
 	pldm_msgbuf_extract_typecheck(int32_t, pldm__msgbuf_extract_int32,     \
 				      dst, ctx, (void *)&(dst))
 
+#define pldm_msgbuf_extract_uint64(ctx, dst)                                   \
+	pldm_msgbuf_extract_typecheck(uint64_t, pldm__msgbuf_extract_uint64,   \
+				      dst, ctx, (void *)&(dst))
+
+#define pldm_msgbuf_extract_int64(ctx, dst)                                    \
+	pldm_msgbuf_extract_typecheck(int64_t, pldm__msgbuf_extract_int64,     \
+				      dst, ctx, (void *)&(dst))
+
 #define pldm_msgbuf_extract_real32(ctx, dst)                                   \
 	pldm_msgbuf_extract_typecheck(real32_t, pldm__msgbuf_extract_real32,   \
 				      dst, ctx, (void *)&(dst))
@@ -141,6 +149,8 @@
 		int16_t: pldm__msgbuf_extract_int16,                           \
 		uint32_t: pldm__msgbuf_extract_uint32,                         \
 		int32_t: pldm__msgbuf_extract_int32,                           \
+		uint64_t: pldm__msgbuf_extract_uint64,                         \
+		int64_t: pldm__msgbuf_extract_int64,                           \
 		real32_t: pldm__msgbuf_extract_real32)(ctx, (void *)&(dst))
 
 /**
@@ -160,6 +170,8 @@
 		int16_t *: pldm__msgbuf_extract_int16,                         \
 		uint32_t *: pldm__msgbuf_extract_uint32,                       \
 		int32_t *: pldm__msgbuf_extract_int32,                         \
+		uint64_t *: pldm__msgbuf_extract_uint64,                       \
+		int64_t *: pldm__msgbuf_extract_int64,                         \
 		real32_t *: pldm__msgbuf_extract_real32)(ctx, dst)
 
 #define pldm_msgbuf_insert(dst, src)                                           \

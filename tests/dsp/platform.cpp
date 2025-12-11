@@ -3461,7 +3461,7 @@ TEST(GetSensorReading, testBadEncodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     rc = encode_get_sensor_reading_resp(
-        0, PLDM_SUCCESS, 6, 1, 1, 1, 1, 1,
+        0, PLDM_SUCCESS, 8, 1, 1, 1, 1, 1,
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&presentReading), response,
         responseMsg.size() - hdrSize);
@@ -6620,4 +6620,179 @@ TEST(EncodePldmFileDescriptorPdr, BadParamBufferTooSmall)
                                                        &bufferSize),
               -EOVERFLOW);
 }
+
+TEST(GetSensorReading, testGoodEncodeResponseUint64)
+{
+    PLDM_MSG_DEFINE_P(response, PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7);
+
+    uint8_t completionCode = 0;
+    uint8_t sensor_dataSize = PLDM_SENSOR_DATA_SIZE_UINT64;
+    uint8_t sensor_operationalState = PLDM_SENSOR_ENABLED;
+    uint8_t sensor_event_messageEnable = PLDM_NO_EVENT_GENERATION;
+    uint8_t presentState = PLDM_SENSOR_NORMAL;
+    uint8_t previousState = PLDM_SENSOR_WARNING;
+    uint8_t eventState = PLDM_SENSOR_UPPERWARNING;
+    uint64_t presentReading = 0x1234567890ABCDEF;
+
+    auto rc = encode_get_sensor_reading_resp(
+        0, completionCode, sensor_dataSize, sensor_operationalState,
+        sensor_event_messageEnable, presentState, previousState, eventState,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<uint8_t*>(&presentReading), response,
+        PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7);
+
+    // clang-format off
+    std::array<uint8_t, PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7> expected{
+        0x00, // completion_code
+        PLDM_SENSOR_DATA_SIZE_UINT64, // sensor_data_size
+        PLDM_SENSOR_ENABLED, // sensor_operational_state
+        PLDM_NO_EVENT_GENERATION, // sensor_event_message_enable
+        PLDM_SENSOR_NORMAL, // present_state
+        PLDM_SENSOR_WARNING, // previous_state
+        PLDM_SENSOR_UPPERWARNING, // event_state
+        0xEF, 0xCD, 0xAB, 0x90, 0x78, 0x56, 0x34, 0x12 // present_reading (little-endian)
+    };
+    // clang-format on
+
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(0, memcmp(expected.data(), response->payload,
+                        PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7));
+}
+
+TEST(GetSensorReading, testGoodEncodeResponseSint64)
+{
+    PLDM_MSG_DEFINE_P(response, PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7);
+
+    uint8_t completionCode = 0;
+    uint8_t sensor_dataSize = PLDM_SENSOR_DATA_SIZE_SINT64;
+    uint8_t sensor_operationalState = PLDM_SENSOR_ENABLED;
+    uint8_t sensor_event_messageEnable = PLDM_EVENTS_ENABLED;
+    uint8_t presentState = PLDM_SENSOR_CRITICAL;
+    uint8_t previousState = PLDM_SENSOR_UPPERCRITICAL;
+    uint8_t eventState = PLDM_SENSOR_WARNING;
+    int64_t presentReading = -0x1234567890ABCDEF;
+
+    auto rc = encode_get_sensor_reading_resp(
+        0, completionCode, sensor_dataSize, sensor_operationalState,
+        sensor_event_messageEnable, presentState, previousState, eventState,
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<uint8_t*>(&presentReading), response,
+        PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7);
+
+    // clang-format off
+    std::array<uint8_t, PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7> expected{
+        0x00, // completion_code
+        PLDM_SENSOR_DATA_SIZE_SINT64, // sensor_data_size
+        PLDM_SENSOR_ENABLED, // sensor_operational_state
+        PLDM_EVENTS_ENABLED, // sensor_event_message_enable
+        PLDM_SENSOR_CRITICAL, // present_state
+        PLDM_SENSOR_UPPERCRITICAL, // previous_state
+        PLDM_SENSOR_WARNING, // event_state
+        0x11, 0x32, 0x54, 0x6F, 0x87, 0xA9, 0xCB, 0xED // present_reading (little-endian, two's complement)
+    };
+    // clang-format on
+
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(0, memcmp(expected.data(), response->payload,
+                        PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7));
+}
+
+TEST(GetSensorReading, testGoodDecodeResponseUint64)
+{
+    // clang-format off
+    std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7>
+        responseMsg{
+        0x00, 0x00, 0x00, // hdr
+        0x00, // completion_code
+        PLDM_SENSOR_DATA_SIZE_UINT64, // sensor_data_size
+        PLDM_SENSOR_ENABLED, // sensor_operational_state
+        PLDM_EVENTS_ENABLED, // sensor_event_message_enable
+        PLDM_SENSOR_NORMAL, // present_state
+        PLDM_SENSOR_WARNING, // previous_state
+        PLDM_SENSOR_UPPERWARNING, // event_state
+        0x10, 0x32, 0x54, 0x76, 0x98, 0xBA, 0xDC, 0xFE // present_reading (little-endian)
+    };
+    // clang-format on
+
+    PLDM_MSG_DEFINE_P(response, PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7);
+    memcpy(response, responseMsg.data(), responseMsg.size());
+
+    uint8_t retcompletionCode;
+    uint8_t retsensor_dataSize;
+    uint8_t retsensor_operationalState;
+    uint8_t retsensor_event_messageEnable;
+    uint8_t retpresentState;
+    uint8_t retpreviousState;
+    uint8_t reteventState;
+    uint8_t retpresentReading[8];
+
+    auto rc = decode_get_sensor_reading_resp(
+        response, responseMsg.size() - hdrSize, &retcompletionCode,
+        &retsensor_dataSize, &retsensor_operationalState,
+        &retsensor_event_messageEnable, &retpresentState, &retpreviousState,
+        &reteventState, retpresentReading);
+
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(0, retcompletionCode);
+    EXPECT_EQ(PLDM_SENSOR_DATA_SIZE_UINT64, retsensor_dataSize);
+    EXPECT_EQ(PLDM_SENSOR_ENABLED, retsensor_operationalState);
+    EXPECT_EQ(PLDM_EVENTS_ENABLED, retsensor_event_messageEnable);
+    EXPECT_EQ(PLDM_SENSOR_NORMAL, retpresentState);
+    EXPECT_EQ(PLDM_SENSOR_WARNING, retpreviousState);
+    EXPECT_EQ(PLDM_SENSOR_UPPERWARNING, reteventState);
+
+    std::array<uint8_t, 8> expectedReading{0x10, 0x32, 0x54, 0x76,
+                                           0x98, 0xBA, 0xDC, 0xFE};
+    EXPECT_EQ(0, memcmp(expectedReading.data(), retpresentReading, 8));
+}
+
+TEST(GetSensorReading, testGoodDecodeResponseSint64)
+{
+    // clang-format off
+    std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7>
+        responseMsg{
+        0x00, 0x00, 0x00, // hdr
+        0x00, // completion_code
+        PLDM_SENSOR_DATA_SIZE_SINT64, // sensor_data_size
+        PLDM_SENSOR_STATUSUNKOWN, // sensor_operational_state
+        PLDM_NO_EVENT_GENERATION, // sensor_event_message_enable
+        PLDM_SENSOR_CRITICAL, // present_state
+        PLDM_SENSOR_LOWERFATAL, // previous_state
+        PLDM_SENSOR_LOWERCRITICAL, // event_state
+        0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80 // present_reading (little-endian, -9223372036854775807)
+    };
+    // clang-format on
+
+    PLDM_MSG_DEFINE_P(response, PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7);
+    memcpy(response, responseMsg.data(), responseMsg.size());
+
+    uint8_t retcompletionCode;
+    uint8_t retsensor_dataSize;
+    uint8_t retsensor_operationalState;
+    uint8_t retsensor_event_messageEnable;
+    uint8_t retpresentState;
+    uint8_t retpreviousState;
+    uint8_t reteventState;
+    uint8_t retpresentReading[8];
+
+    auto rc = decode_get_sensor_reading_resp(
+        response, responseMsg.size() - hdrSize, &retcompletionCode,
+        &retsensor_dataSize, &retsensor_operationalState,
+        &retsensor_event_messageEnable, &retpresentState, &retpreviousState,
+        &reteventState, retpresentReading);
+
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(0, retcompletionCode);
+    EXPECT_EQ(PLDM_SENSOR_DATA_SIZE_SINT64, retsensor_dataSize);
+    EXPECT_EQ(PLDM_SENSOR_STATUSUNKOWN, retsensor_operationalState);
+    EXPECT_EQ(PLDM_NO_EVENT_GENERATION, retsensor_event_messageEnable);
+    EXPECT_EQ(PLDM_SENSOR_CRITICAL, retpresentState);
+    EXPECT_EQ(PLDM_SENSOR_LOWERFATAL, retpreviousState);
+    EXPECT_EQ(PLDM_SENSOR_LOWERCRITICAL, reteventState);
+
+    std::array<uint8_t, 8> expectedReading{0x01, 0x00, 0x00, 0x00,
+                                           0x00, 0x00, 0x00, 0x80};
+    EXPECT_EQ(0, memcmp(expectedReading.data(), retpresentReading, 8));
+}
+
 #endif
