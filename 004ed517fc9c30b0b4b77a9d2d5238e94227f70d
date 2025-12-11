@@ -207,6 +207,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27f03971_7683e5fe",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3636,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-11T10:42:47Z",
+      "side": 1,
+      "message": "I Agree. I will implement it.",
+      "parentUuid": "70d0f149_0b88cb6e",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59227be2_277d055e",
         "filename": "tests/dsp/platform.cpp",
         "patchSetId": 2
