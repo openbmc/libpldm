@@ -333,6 +333,84 @@ TEST(msgbuf, extract_under_int32)
     EXPECT_EQ(pldm_msgbuf_complete(ctx), -EOVERFLOW);
 }
 
+TEST(msgbuf, extract_one_uint64)
+{
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
+    uint64_t buf[1] = {htole64(0x0123456789abcdefULL)};
+    uint64_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_uint64(ctx, val), 0);
+    EXPECT_EQ(val, 0x0123456789abcdefULL);
+    EXPECT_EQ(pldm_msgbuf_complete(ctx), 0);
+}
+
+TEST(msgbuf, extract_over_uint64)
+{
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
+    uint64_t buf[1] = {};
+    uint64_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
+    EXPECT_NE(pldm_msgbuf_extract_uint64(ctx, val), 0);
+    EXPECT_EQ(pldm_msgbuf_complete(ctx), -EOVERFLOW);
+}
+
+TEST(msgbuf, extract_under_uint64)
+{
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
+
+    uint64_t buf[1] = {};
+    uint64_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_extract_uint64(ctx, val), 0);
+    EXPECT_EQ(pldm_msgbuf_complete(ctx), -EOVERFLOW);
+}
+
+TEST(msgbuf, extract_one_int64)
+{
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
+    int64_t buf[1] = {(int64_t)(htole64((uint64_t)(INT64_MIN)))};
+    int64_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, sizeof(buf), buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_int64(ctx, val), 0);
+    EXPECT_EQ(val, INT64_MIN);
+    EXPECT_EQ(pldm_msgbuf_complete(ctx), 0);
+}
+
+TEST(msgbuf, extract_over_int64)
+{
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
+    int64_t buf[1] = {};
+    int64_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
+    EXPECT_NE(pldm_msgbuf_extract_int64(ctx, val), 0);
+    EXPECT_EQ(pldm_msgbuf_complete(ctx), -EOVERFLOW);
+}
+
+TEST(msgbuf, extract_under_int64)
+{
+    struct pldm_msgbuf_ro _ctx;
+    struct pldm_msgbuf_ro* ctx = &_ctx;
+
+    int64_t buf[1] = {};
+    int64_t val;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_extract_int64(ctx, val), 0);
+    EXPECT_EQ(pldm_msgbuf_complete(ctx), -EOVERFLOW);
+}
+
 TEST(msgbuf, extract_one_real32)
 {
     struct pldm_msgbuf_ro _ctx;
@@ -551,6 +629,42 @@ TEST(msgbuf, insert_under_int32)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
     ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
     EXPECT_NE(pldm_msgbuf_insert_int32(ctx, val), 0);
+    EXPECT_EQ(pldm_msgbuf_complete(ctx), -EOVERFLOW);
+}
+
+TEST(msgbuf, pldm_msgbuf_insert_int64_good)
+{
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
+    int64_t src = -0x0123456789abcdefLL;
+    int64_t checkVal = 0;
+    uint8_t buf[sizeof(int64_t)] = {};
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_insert_int64(ctx, src), 0);
+
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_extract_int64(ctxExtract, checkVal), 0);
+
+    EXPECT_EQ(src, checkVal);
+    EXPECT_EQ(pldm_msgbuf_complete(ctxExtract), 0);
+    EXPECT_EQ(pldm_msgbuf_complete(ctx), 0);
+}
+
+TEST(msgbuf, insert_under_int64)
+{
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
+
+    int64_t buf[1] = {};
+    int64_t val = 0;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, 0), 0);
+    ctx->remaining = INTMAX_MIN + sizeof(val) - 1;
+    EXPECT_NE(pldm_msgbuf_insert_int64(ctx, val), 0);
     EXPECT_EQ(pldm_msgbuf_complete(ctx), -EOVERFLOW);
 }
 

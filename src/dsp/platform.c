@@ -1798,6 +1798,16 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 		}
 		break;
 	}
+	case PLDM_SENSOR_DATA_SIZE_UINT64:
+	case PLDM_SENSOR_DATA_SIZE_SINT64:
+		/*
+		 * 64-bit values cannot fit in the uint32_t present_reading
+		 * output parameter. Return an error instead of silently
+		 * truncating. Callers should use
+		 * decode_pldm_platform_numeric_sensor_event_data() for 64-bit
+		 * support.
+		 */
+		/* fallthrough */
 	default:
 		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
 	}
@@ -1808,6 +1818,38 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 	}
 
 	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_numeric_sensor_event_data(
+	const void *sensor_data, size_t sensor_data_length,
+	struct pldm_platform_numeric_sensor_event_data *event_data)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (sensor_data == NULL || event_data == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MIN_DATA_LENGTH,
+		sensor_data, sensor_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, event_data->event_state);
+	pldm_msgbuf_extract(buf, event_data->previous_event_state);
+	rc = pldm_msgbuf_extract(buf, event_data->sensor_data_size);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_extract_sensor_data(buf, event_data->sensor_data_size,
+					&event_data->present_reading);
+
+	return pldm_msgbuf_complete_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE
@@ -2411,7 +2453,7 @@ int encode_get_sensor_reading_req(uint8_t instance_id, uint16_t sensor_id,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int decode_get_sensor_reading_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code, uint8_t *sensor_data_size,
@@ -2450,6 +2492,11 @@ int decode_get_sensor_reading_resp(
 		return pldm_xlate_errno(pldm_msgbuf_discard(buf, rc));
 	}
 
+	/*
+	 * present_reading is an untyped buffer that callers may have sized for
+	 * at most 32-bit readings. Reject 64-bit readings rather than risk
+	 * writing beyond the end of it.
+	 */
 	if (*sensor_data_size > PLDM_SENSOR_DATA_SIZE_SINT32) {
 		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
 	}
@@ -2471,7 +2518,7 @@ int decode_get_sensor_reading_resp(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 				   uint8_t sensor_data_size,
 				   uint8_t sensor_operational_state,
@@ -2540,6 +2587,89 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 	}
 
 	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_platform_get_sensor_reading_resp(
+	uint8_t instance_id,
+	const struct pldm_platform_get_sensor_reading_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (resp == NULL || msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.instance = instance_id;
+	header.msg_type = PLDM_RESPONSE;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_GET_SENSOR_READING;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_GET_SENSOR_READING_MIN_RESP_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, resp->completion_code);
+	pldm_msgbuf_insert(buf, resp->sensor_data_size);
+	pldm_msgbuf_insert(buf, resp->sensor_operational_state);
+	pldm_msgbuf_insert(buf, resp->sensor_event_message_enable);
+	pldm_msgbuf_insert(buf, resp->present_state);
+	pldm_msgbuf_insert(buf, resp->previous_state);
+	pldm_msgbuf_insert(buf, resp->event_state);
+	rc = pldm_msgbuf_insert_sensor_data(buf, resp->sensor_data_size,
+					    &resp->present_reading);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_get_sensor_reading_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_platform_get_sensor_reading_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msg_has_error(msg, payload_length);
+	if (rc) {
+		resp->completion_code = rc;
+		return 0;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_GET_SENSOR_READING_MIN_RESP_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, resp->completion_code);
+	pldm_msgbuf_extract(buf, resp->sensor_data_size);
+	pldm_msgbuf_extract(buf, resp->sensor_operational_state);
+	pldm_msgbuf_extract(buf, resp->sensor_event_message_enable);
+	pldm_msgbuf_extract(buf, resp->present_state);
+	pldm_msgbuf_extract(buf, resp->previous_state);
+	pldm_msgbuf_extract(buf, resp->event_state);
+	pldm_msgbuf_extract_sensor_data(buf, resp->sensor_data_size,
+					&resp->present_reading);
+
+	return pldm_msgbuf_complete_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE

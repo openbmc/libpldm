@@ -22,6 +22,11 @@ Change categories:
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
+- platform: Added APIs supporting the 64-bit sensor readings added in DSP0248
+  v1.3.0
+  - `decode_pldm_platform_numeric_sensor_event_data()`
+  - `encode_pldm_platform_get_sensor_reading_resp()`
+  - `decode_pldm_platform_get_sensor_reading_resp()`
 
 ### Changed
 
@@ -30,7 +35,29 @@ Change categories:
   Many header files were modified to fix issues identified in the documentation.
   There is no change in behaviour.
 
+- platform: Added the UINT64 and SINT64 sensor data types added in DSP0248
+  v1.3.0. This changes existing definitions and breaks the ABI:
+  - `PLDM_SENSOR_DATA_SIZE_UINT64` and `PLDM_SENSOR_DATA_SIZE_SINT64` are added
+    to `enum pldm_sensor_readings_data_type`, and `PLDM_SENSOR_DATA_SIZE_MAX` is
+    updated accordingly
+  - `PLDM_RANGE_FIELD_FORMAT_UINT64` and `PLDM_RANGE_FIELD_FORMAT_SINT64` are
+    added to `enum pldm_range_field_format`, and `PLDM_RANGE_FIELD_FORMAT_MAX`
+    is updated accordingly
+  - `value_u64` and `value_s64` are added to `union_sensor_data_size` and
+    `union_range_field_format`, which increases the size of both unions and of
+    the structs that contain them
+  - `PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH` is increased from 7
+    to 11
+
 ### Deprecated
+
+- platform: Deprecate `encode_get_sensor_reading_resp()` and
+  `decode_get_sensor_reading_resp()` as unsafe
+
+  The size of the object referenced by their `present_reading` parameter cannot
+  be checked against the sensor data size. Users should migrate to
+  `encode_pldm_platform_get_sensor_reading_resp()` and
+  `decode_pldm_platform_get_sensor_reading_resp()` respectively.
 
 ### Removed
 

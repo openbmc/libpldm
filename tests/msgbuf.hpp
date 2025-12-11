@@ -265,6 +265,14 @@ int pldm_msgbuf_field_end(struct pldm_msgbuf_rw* ctx,
     pldm_msgbuf_extract_typecheck(int32_t, pldm__msgbuf_extract_int32, dst,    \
                                   ctx, (void*)&(dst))
 
+#define pldm_msgbuf_extract_uint64(ctx, dst)                                   \
+    pldm_msgbuf_extract_typecheck(uint64_t, pldm__msgbuf_extract_uint64, dst,  \
+                                  ctx, (void*)&(dst))
+
+#define pldm_msgbuf_extract_int64(ctx, dst)                                    \
+    pldm_msgbuf_extract_typecheck(int64_t, pldm__msgbuf_extract_int64, dst,    \
+                                  ctx, (void*)&(dst))
+
 #define pldm_msgbuf_extract_real32(ctx, dst)                                   \
     pldm_msgbuf_extract_typecheck(real32_t, pldm__msgbuf_extract_real32, dst,  \
                                   ctx, (void*)&(dst))
@@ -315,6 +323,22 @@ LIBPLDM_CC_ALWAYS_INLINE int
 {
     static_assert(std::is_same<int32_t, T>::value);
     return pldm__msgbuf_extract_int32(ctx, buf);
+}
+
+template <typename T>
+LIBPLDM_CC_ALWAYS_INLINE int
+    pldm_msgbuf_typecheck_uint64_t(struct pldm_msgbuf_ro* ctx, void* buf)
+{
+    static_assert(std::is_same<uint64_t, T>::value);
+    return pldm__msgbuf_extract_uint64(ctx, buf);
+}
+
+template <typename T>
+LIBPLDM_CC_ALWAYS_INLINE int
+    pldm_msgbuf_typecheck_int64_t(struct pldm_msgbuf_ro* ctx, void* buf)
+{
+    static_assert(std::is_same<int64_t, T>::value);
+    return pldm__msgbuf_extract_int64(ctx, buf);
 }
 
 template <typename T>

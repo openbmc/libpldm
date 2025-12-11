@@ -96,10 +96,11 @@ enum pldm_platform_transfer_flag {
 #define PLDM_SENSOR_EVENT_SENSOR_OP_STATE_DATA_LENGTH		 2
 #define PLDM_SENSOR_EVENT_STATE_SENSOR_STATE_DATA_LENGTH	 3
 #define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MIN_DATA_LENGTH	 4
-#define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH	 7
+#define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH	 11
 #define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_8BIT_DATA_LENGTH	 4
 #define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_16BIT_DATA_LENGTH 5
 #define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_32BIT_DATA_LENGTH 7
+#define PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_64BIT_DATA_LENGTH 11
 
 /* Minimum length of data for pldmPDRRepositoryChgEvent */
 #define PLDM_PDR_REPOSITORY_CHG_EVENT_MIN_LENGTH     2
@@ -177,9 +178,11 @@ enum pldm_range_field_format {
 	PLDM_RANGE_FIELD_FORMAT_SINT16,
 	PLDM_RANGE_FIELD_FORMAT_UINT32,
 	PLDM_RANGE_FIELD_FORMAT_SINT32,
-	PLDM_RANGE_FIELD_FORMAT_REAL32
+	PLDM_RANGE_FIELD_FORMAT_REAL32,
+	PLDM_RANGE_FIELD_FORMAT_UINT64,
+	PLDM_RANGE_FIELD_FORMAT_SINT64
 };
-#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_REAL32
+#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_SINT64
 
 enum set_request { PLDM_NO_CHANGE = 0x00, PLDM_REQUEST_SET = 0x01 };
 
@@ -394,6 +397,8 @@ enum pldm_pdr_repository_chg_event_change_record_event_data_operation {
 };
 
 /** @brief PLDM NumericSensorStatePresentReading data type
+ *  @note PLDM_SENSOR_DATA_SIZE_UINT64 and PLDM_SENSOR_DATA_SIZE_SINT64 were
+ *        added in DSP0248 v1.3.0
  */
 enum pldm_sensor_readings_data_type {
 	PLDM_SENSOR_DATA_SIZE_UINT8,
@@ -401,9 +406,11 @@ enum pldm_sensor_readings_data_type {
 	PLDM_SENSOR_DATA_SIZE_UINT16,
 	PLDM_SENSOR_DATA_SIZE_SINT16,
 	PLDM_SENSOR_DATA_SIZE_UINT32,
-	PLDM_SENSOR_DATA_SIZE_SINT32
+	PLDM_SENSOR_DATA_SIZE_SINT32,
+	PLDM_SENSOR_DATA_SIZE_UINT64,
+	PLDM_SENSOR_DATA_SIZE_SINT64
 };
-#define PLDM_SENSOR_DATA_SIZE_MAX PLDM_SENSOR_DATA_SIZE_SINT32
+#define PLDM_SENSOR_DATA_SIZE_MAX PLDM_SENSOR_DATA_SIZE_SINT64
 
 /** @brief PLDM PlatformEventMessage response status
  */
@@ -774,6 +781,7 @@ typedef union {
  *  Indicates the format used for the nominalValue, normalMax, and normalMin
  *  fields.
  *  Refer to: DSP0248_1.2.0: 28.11 Table 87
+ *  @note The value_u64 and value_s64 members were added in DSP0248 v1.3.0
  */
 typedef union {
 	uint8_t value_u8;
@@ -783,6 +791,8 @@ typedef union {
 	uint32_t value_u32;
 	int32_t value_s32;
 	real32_t value_f32;
+	uint64_t value_u64;
+	int64_t value_s64;
 } union_range_field_format;
 
 /** @struct pldm_numeric_effecter_value_pdr
@@ -832,6 +842,7 @@ struct pldm_numeric_effecter_value_pdr {
  *  The bit width and format of reading and threshold values that the sensor
  *  returns.
  *  Refer to: DSP0248_1.2.0: 28.4 Table 78
+ *  @note The value_u64 and value_s64 members were added in DSP0248 v1.3.0
  */
 typedef union {
 	uint8_t value_u8;
@@ -840,6 +851,8 @@ typedef union {
 	int16_t value_s16;
 	uint32_t value_u32;
 	int32_t value_s32;
+	uint64_t value_u64;
+	int64_t value_s64;
 } union_sensor_data_size;
 
 /** @struct pldm_value_pdr_hdr
@@ -1244,6 +1257,23 @@ struct pldm_sensor_event_numeric_sensor_state {
 	uint8_t present_reading[1];
 } __attribute__((packed));
 
+/** @struct pldm_platform_numeric_sensor_event_data
+ *
+ *  Structure representing the eventData of the numericSensorState
+ *  sensorEventClass, including 64-bit readings.
+ *  Refer to: DSP0248 v1.3.0: 16.10 Table 19
+ *
+ *  The member of @p present_reading that holds the reading is selected by
+ *  @p sensor_data_size (e.g. present_reading.value_u64 for
+ *  PLDM_SENSOR_DATA_SIZE_UINT64).
+ */
+struct pldm_platform_numeric_sensor_event_data {
+	uint8_t event_state;
+	uint8_t previous_event_state;
+	uint8_t sensor_data_size;
+	union_sensor_data_size present_reading;
+};
+
 /** @struct pldm_sensor_event_sensor_op_state
  *
  *  structure representing sensorEventClass for SensorOpState
@@ -1386,6 +1416,27 @@ struct pldm_get_sensor_reading_resp {
 	uint8_t event_state;
 	uint8_t present_reading[1];
 } __attribute__((packed));
+
+/** @struct pldm_platform_get_sensor_reading_resp
+ *
+ *  Structure representing a GetSensorReading response, including 64-bit
+ *  readings.
+ *  Refer to: DSP0248 v1.3.0: 18.2 Table 31
+ *
+ *  The member of @p present_reading that holds the reading is selected by
+ *  @p sensor_data_size (e.g. present_reading.value_s64 for
+ *  PLDM_SENSOR_DATA_SIZE_SINT64).
+ */
+struct pldm_platform_get_sensor_reading_resp {
+	uint8_t completion_code;
+	uint8_t sensor_data_size;
+	uint8_t sensor_operational_state;
+	uint8_t sensor_event_message_enable;
+	uint8_t present_state;
+	uint8_t previous_state;
+	uint8_t event_state;
+	union_sensor_data_size present_reading;
+};
 
 /* DSP0248 v1.3.0 Table 30 and Table 40 */
 #define PLDM_PLATFORM_SET_SENSOR_EVENT_MESSAGE_NO_CHANGE		0x00
@@ -1654,6 +1705,13 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
 
 /** @brief Encode GetSensorReading response data
  *
+ *  @deprecated The size of the object referenced by @p present_reading cannot
+ *  be checked against @p sensor_data_size. Use
+ *  encode_pldm_platform_get_sensor_reading_resp() instead.
+ *
+ *  This function does not support the 64-bit sensorDataSize values added in
+ *  DSP0248 v1.3.0, and returns PLDM_ERROR_INVALID_DATA for them.
+ *
  *  @param[in] instance_id - Message's instance id
  *  @param[in] completion_code - PLDM completion code
  *  @param[out] sensor_data_size - The bit width and format of reading and
@@ -1682,6 +1740,29 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 				   uint8_t previous_state, uint8_t event_state,
 				   const uint8_t *present_reading,
 				   struct pldm_msg *msg, size_t payload_length);
+
+/** @brief Encode a GetSensorReading response message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp - The response to encode. The member of
+ *         resp->present_reading that is encoded is selected by
+ *         resp->sensor_data_size.
+ *  @param[out] msg - Message will be written to this
+ *  @param[in,out] payload_length - On input, the size of the buffer available
+ *         for the message payload. On output, the length of the encoded
+ *         payload.
+ *  @return 0 on success
+ *          -EINVAL if resp, msg or payload_length is NULL, if instance_id is
+ *          invalid, or if resp->sensor_data_size is not a valid
+ *          enum pldm_sensor_readings_data_type value
+ *          -EOVERFLOW if the payload buffer is too small for the response
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_pldm_platform_get_sensor_reading_resp(
+	uint8_t instance_id,
+	const struct pldm_platform_get_sensor_reading_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
 
 /* Requester */
 
@@ -2296,12 +2377,43 @@ int decode_state_sensor_data(const uint8_t *sensor_data,
  *  @return pldm_completion_codes
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'sensor_data'
+ *  @note  @p present_reading cannot hold the 64-bit readings added in DSP0248
+ *         v1.3.0. Rather than truncate them, this function returns
+ *         PLDM_ERROR_INVALID_DATA when sensorDataSize is
+ *         PLDM_SENSOR_DATA_SIZE_UINT64 or PLDM_SENSOR_DATA_SIZE_SINT64. Use
+ *         decode_pldm_platform_numeric_sensor_event_data() to decode readings
+ *         of any size.
  */
 int decode_numeric_sensor_data(const uint8_t *sensor_data,
 			       size_t sensor_data_length, uint8_t *event_state,
 			       uint8_t *previous_event_state,
 			       uint8_t *sensor_data_size,
 			       uint32_t *present_reading);
+
+/** @brief Decode the eventData of the numericSensorState sensorEventClass
+ *
+ *  Unlike decode_numeric_sensor_data(), this function supports readings of
+ *  every sensorDataSize, including the 64-bit sizes added in DSP0248 v1.3.0.
+ *
+ *  @param[in] sensor_data - sensor_data for sensorEventClass =
+ *         numericSensorState
+ *  @param[in] sensor_data_length - Length of sensor_data
+ *  @param[out] event_data - The decoded event data. Access the member of
+ *         event_data->present_reading selected by
+ *         event_data->sensor_data_size.
+ *  @return 0 on success
+ *          -EINVAL if sensor_data or event_data is NULL
+ *          -EOVERFLOW if sensor_data_length is too short for the event data
+ *          described by sensor_data
+ *          -EBADMSG if sensor_data_length is too long for the event data
+ *          described by sensor_data, or if sensorDataSize is not a valid
+ *          enum pldm_sensor_readings_data_type value
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'sensor_data' and 'event_data'
+ */
+int decode_pldm_platform_numeric_sensor_event_data(
+	const void *sensor_data, size_t sensor_data_length,
+	struct pldm_platform_numeric_sensor_event_data *event_data);
 
 /** @brief Decode Numeric Sensor Pdr data
  *
@@ -2534,6 +2646,13 @@ int encode_get_sensor_reading_req(uint8_t instance_id, uint16_t sensor_id,
 
 /** @brief Decode GetSensorReading response data
  *
+ *  @deprecated The size of the object referenced by @p present_reading cannot
+ *  be checked against the decoded sensorDataSize. Use
+ *  decode_pldm_platform_get_sensor_reading_resp() instead.
+ *
+ *  This function does not support the 64-bit sensorDataSize values added in
+ *  DSP0248 v1.3.0, and returns PLDM_ERROR_INVALID_DATA for them.
+ *
  *  @param[in] msg - Request message
  *  @param[in] payload_length - Length of response message payload
  *  @param[out] completion_code - PLDM completion code
@@ -2559,6 +2678,28 @@ int decode_get_sensor_reading_resp(
 	uint8_t *sensor_operational_state, uint8_t *sensor_event_message_enable,
 	uint8_t *present_state, uint8_t *previous_state, uint8_t *event_state,
 	uint8_t *present_reading);
+
+/** @brief Decode a GetSensorReading response message
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] resp - The decoded response. If the response carries an error
+ *         completion code then only resp->completion_code is set. Otherwise,
+ *         access the member of resp->present_reading selected by
+ *         resp->sensor_data_size.
+ *  @return 0 on success
+ *          -EINVAL if msg or resp is NULL
+ *          -EOVERFLOW if payload_length is too short for the response
+ *          described by msg
+ *          -EBADMSG if payload_length is too long for the response described
+ *          by msg, or if sensorDataSize is not a valid
+ *          enum pldm_sensor_readings_data_type value
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int decode_pldm_platform_get_sensor_reading_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_platform_get_sensor_reading_resp *resp);
 
 /** @brief Encode the GetEventReceiver request message
  *
