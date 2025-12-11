@@ -59,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ba644e_14225978",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-11T18:54:31Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "f733da0c_d97f8267",
+      "range": {
+        "startLine": 828,
+        "startChar": 26,
+        "endLine": 828,
+        "endChar": 56
+      },
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02a2f89d_101ca08b",
@@ -183,6 +207,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc9f0e7e_5d5edb83",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1850,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-11T18:54:31Z",
+      "side": 1,
+      "message": "This decode API is for Numeric Sensors event data decoding so name it that way - But this can be even be event_numeric_sensor . I feel either way is ok.",
+      "parentUuid": "38376957_fea8faa0",
+      "range": {
+        "startLine": 1850,
+        "startChar": 4,
+        "endLine": 1850,
+        "endChar": 33
+      },
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae7c2358_e80b9ff1",
@@ -288,6 +336,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f502ef0c_a4eaf260",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2116,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-11T18:54:31Z",
+      "side": 1,
+      "message": "Same as above",
+      "parentUuid": "e4a1b849_18ba401a",
+      "range": {
+        "startLine": 2116,
+        "startChar": 26,
+        "endLine": 2116,
+        "endChar": 56
+      },
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a35582b_1e1d63b9",
@@ -336,6 +408,30 @@
       "writtenOn": "2025-11-03T06:35:33Z",
       "side": 1,
       "message": "Can we use PLDM_EFFECTER_DATA_SIZE_MAX instead?",
+      "range": {
+        "startLine": 2604,
+        "startChar": 24,
+        "endLine": 2604,
+        "endChar": 52
+      },
+      "revId": "8bf7089925fcaa11a29f65675011fe80f403385b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b3e9ecb_baa98387",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2604,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-11T18:54:31Z",
+      "side": 1,
+      "message": "Same as above",
+      "parentUuid": "e9739f04_4f8a3794",
       "range": {
         "startLine": 2604,
         "startChar": 24,
