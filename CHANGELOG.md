@@ -38,6 +38,8 @@ Change categories:
 - utils: Added `pldm_edac_crc32_extend()`
 - base: Added `decode_pldm_base_negotiate_transfer_params_req()`
 - base: Added `encode_pldm_base_negotiate_transfer_params_resp()`
+- platform: Added UINT64/SINT64 sensor data types per DSP0248 v1.3.0
+  - Added `decode_numeric_sensor_event_data()` for full 64-bit support
 
 ### Changed
 
@@ -132,6 +134,9 @@ Deprecated since v0.13.0:
 
 ### Fixed
 
+- platform: Fixed `encode_get_sensor_reading_resp()` using incorrect
+  `PLDM_EFFECTER_DATA_SIZE_*` constants instead of `PLDM_SENSOR_DATA_SIZE_*` for
+  sensor data size validation
 - dsp: base: Don't extract MultipartReceive resp's CRC once complete
 
 - base: Allocating struct pldm_msg with member initialization in
