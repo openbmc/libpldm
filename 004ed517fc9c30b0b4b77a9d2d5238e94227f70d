@@ -171,6 +171,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "442bc78e_f08a01bd",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3636,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-11T09:38:15Z",
+      "side": 1,
+      "message": "Currently we don\u0027t have use case for this. But I will try to implement and add it.",
+      "parentUuid": "1b3f8bed_dee1fb49",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59227be2_277d055e",
         "filename": "tests/dsp/platform.cpp",
         "patchSetId": 2

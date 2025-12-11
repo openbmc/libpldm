@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1d66891_51bb4cc3",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1463,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-11T09:38:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30820a89_2060e80e",
+      "range": {
+        "startLine": 1457,
+        "startChar": 19,
+        "endLine": 1463,
+        "endChar": 56
+      },
+      "revId": "807768ff1e92c9483fe092739116a1b6377663db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fecce44_b0ac7367",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cca7b25d_57df17e8",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 991,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-11T09:38:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fecce44_b0ac7367",
+      "range": {
+        "startLine": 989,
+        "startChar": 4,
+        "endLine": 991,
+        "endChar": 52
+      },
+      "revId": "807768ff1e92c9483fe092739116a1b6377663db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37d74d92_1987b934",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-12-09T06:10:08Z",
       "side": 1,
       "message": "Please don\u0027t do this. In general you have no guarantee that the encoded message layout matches the layout of the C struct. Instead, provide a manually encoded `std::array\u003cuint8_t\u003e` or `std::vector\u003cuint8_t\u003e` and compare the encoded payload bytes to the expected bytes. You may do _that_ via `memcmp()` if you like, but what you have here is not generally correct or maintainable.\n\nPlease fix throughout",
+      "range": {
+        "startLine": 997,
+        "startChar": 0,
+        "endLine": 999,
+        "endChar": 55
+      },
+      "revId": "807768ff1e92c9483fe092739116a1b6377663db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea084450_efe92a85",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-11T09:38:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37d74d92_1987b934",
       "range": {
         "startLine": 997,
         "startChar": 0,
