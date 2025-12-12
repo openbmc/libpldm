@@ -19,10 +19,22 @@ Change categories:
 
 ### Added
 
+- transport: Added AF_MCTP fully qualified endpoint (FQE) mapping support
+  - Added `pldm_transport_af_mctp_map_tid_fqe()` to map TID to network and EID
+  - Added `pldm_transport_af_mctp_unmap_tid_fqe()` to remove TID-to-FQE mappings
+- meson: Added configuration check for `struct mctp_fq_addr` availability 
+  in `linux/mctp.h`
 - entity: Added new entity types from DSP0249 v1.4.0
 - stateset: Added new state sets from DSP0249 v1.4.0
 
+
 ### Changed
+
+- transport: Updated AF_MCTP transport to use network-aware TID mapping
+  - Changed internal `tid_eid_map` to `tid_map` using `struct mctp_fq_addr`
+  - Modified `pldm_transport_af_mctp_map_tid()` to set default network ID to 1
+  - Updated send/receive operations to handle network-qualified addresses
+- transport: Swapped unused parameter markers in `pldm_transport_af_mctp_unmap_tid()` between tid and eid parameters
 
 ### Deprecated
 
@@ -35,6 +47,13 @@ Change categories:
 
 - `libpldm/utils.h` - users should include headers exposing the specific
   features they require instead.
+
+- transport: Added `pldm_transport_af_mctp_map_tid_fqe()` in
+  `include/libpldm/transport/af-mctp.h` to map TID to 
+  fully qualified endpoint (network and EID)
+
+- transport: Added `pldm_transport_af_mctp_unmap_tid_fqe()` in
+  `include/libpldm/transport/af-mctp.h` to remove TID-to-FQE mappings
 
 #### Function symbols
 
