@@ -37,6 +37,15 @@ int pldm_transport_af_mctp_map_tid(struct pldm_transport_af_mctp *ctx,
 int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
 				     pldm_tid_t tid, mctp_eid_t eid);
 
+/* Maps TID-to-<Network, EID> (fully qualified endpoint) */
+int pldm_transport_af_mctp_map_tid_fqe(struct pldm_transport_af_mctp *ctx,
+				       pldm_tid_t tid, uint32_t network,
+				       mctp_eid_t eid);
+
+/* Removes a TID-to-<Network, EID> (fully qualified endpoint) mapping */
+int pldm_transport_af_mctp_unmap_tid_fqe(struct pldm_transport_af_mctp *ctx,
+					 pldm_tid_t tid);
+
 /**
  * @brief Allow the transport to receive requests from remote endpoints
  *
