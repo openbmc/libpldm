@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- transport: Added AF_MCTP fully qualified endpoint (FQE) mapping support
+  - Added `pldm_transport_af_mctp_map_tid_fqe()` to map TID to network and EID
+  - Added `pldm_transport_af_mctp_unmap_tid_fqe()` to remove TID-to-FQE mappings
 - entity: Added new entity types from DSP0249 v1.4.0
 - stateset: Added new state sets from DSP0249 v1.4.0
 - stateset: Added new enum pldm_state_set_presence_values from DSP0249 v1.4.0
