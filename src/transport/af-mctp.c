@@ -32,10 +32,18 @@ struct pldm_responder_cookie_af_mctp {
 	container_of((c), struct pldm_responder_cookie_af_mctp, req)
 
 #define AF_MCTP_NAME "AF_MCTP"
+
+#if !HAVE_STRUCT_MCTP_FQ_ADDR
+struct mctp_fq_addr {
+	unsigned int net;
+	mctp_eid_t eid;
+};
+#endif
+
 struct pldm_transport_af_mctp {
 	struct pldm_transport transport;
 	int socket;
-	pldm_tid_t tid_eid_map[MCTP_MAX_NUM_EID];
+	struct mctp_fq_addr tid_map[PLDM_MAX_TIDS];
 	struct pldm_socket_sndbuf socket_send_buf;
 	bool bound;
 	struct pldm_responder_cookie cookie_jar;
@@ -61,26 +69,31 @@ int pldm_transport_af_mctp_init_pollfd(struct pldm_transport *t,
 	return 0;
 }
 
-static int pldm_transport_af_mctp_get_eid(struct pldm_transport_af_mctp *ctx,
-					  pldm_tid_t tid, mctp_eid_t *eid)
+static int
+pldm_transport_af_mctp_get_device_id(struct pldm_transport_af_mctp *ctx,
+				     pldm_tid_t tid, mctp_eid_t *eid,
+				     uint32_t *network)
 {
-	int i;
-	for (i = 0; i < MCTP_MAX_NUM_EID; i++) {
-		if (ctx->tid_eid_map[i] == tid) {
-			*eid = i;
-			return 0;
-		}
+	if (tid == 0) {
+		return -1;
 	}
-	*eid = -1;
-	return -1;
+	*network = ctx->tid_map[tid].net;
+	*eid = ctx->tid_map[tid].eid;
+	return 0;
 }
 
 static int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
-					  mctp_eid_t eid, pldm_tid_t *tid)
+					  mctp_eid_t eid, uint32_t network,
+					  pldm_tid_t *tid)
 {
-	if (ctx->tid_eid_map[eid] != 0) {
-		*tid = ctx->tid_eid_map[eid];
-		return 0;
+	if (network != 0 && eid != 0) {
+		for (int i = 0; i < PLDM_MAX_TIDS; i++) {
+			if (ctx->tid_map[i].net == network &&
+			    ctx->tid_map[i].eid == eid) {
+				*tid = i;
+				return 0;
+			}
+		}
 	}
 	return -1;
 }
@@ -89,18 +102,37 @@ LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_map_tid(struct pldm_transport_af_mctp *ctx,
 				   pldm_tid_t tid, mctp_eid_t eid)
 {
-	ctx->tid_eid_map[eid] = tid;
-
+	ctx->tid_map[tid].eid = eid;
+	ctx->tid_map[tid].net = 1;
 	return 0;
 }
 
 LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
-				     LIBPLDM_CC_UNUSED pldm_tid_t tid,
-				     mctp_eid_t eid)
+				     pldm_tid_t tid,
+				     LIBPLDM_CC_UNUSED mctp_eid_t eid)
 {
-	ctx->tid_eid_map[eid] = 0;
+	ctx->tid_map[tid].eid = 0;
+	ctx->tid_map[tid].net = 0;
+	return 0;
+}
 
+LIBPLDM_ABI_TESTING
+int pldm_transport_af_mctp_map_tid_fqe(struct pldm_transport_af_mctp *ctx,
+				       pldm_tid_t tid, mctp_eid_t eid,
+				       uint32_t network)
+{
+	ctx->tid_map[tid].eid = eid;
+	ctx->tid_map[tid].net = network;
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_transport_af_mctp_unmap_tid_fqe(struct pldm_transport_af_mctp *ctx,
+					 pldm_tid_t tid)
+{
+	ctx->tid_map[tid].eid = 0;
+	ctx->tid_map[tid].net = 0;
 	return 0;
 }
 
@@ -115,6 +147,7 @@ static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
 	struct pldm_msg_hdr *hdr;
 	pldm_requester_rc_t res;
 	mctp_eid_t eid = 0;
+	uint32_t network = 0;
 	ssize_t length;
 	void *msg;
 	int rc;
@@ -137,7 +170,8 @@ static pldm_requester_rc_t pldm_transport_af_mctp_recv(struct pldm_transport *t,
 	}
 
 	eid = addr.smctp_addr.s_addr;
-	rc = pldm_transport_af_mctp_get_tid(af_mctp, eid, tid);
+	network = addr.smctp_network;
+	rc = pldm_transport_af_mctp_get_tid(af_mctp, eid, network, tid);
 	if (rc) {
 		res = PLDM_REQUESTER_RECV_FAIL;
 		goto cleanup_msg;
@@ -211,12 +245,15 @@ static pldm_requester_rc_t pldm_transport_af_mctp_send(struct pldm_transport *t,
 		free(cookie);
 	} else {
 		mctp_eid_t eid = 0;
-		if (pldm_transport_af_mctp_get_eid(af_mctp, tid, &eid)) {
+		uint32_t network = 0;
+		if (pldm_transport_af_mctp_get_device_id(af_mctp, tid, &eid,
+							 &network)) {
 			return PLDM_REQUESTER_SEND_FAIL;
 		}
 
 		addr.smctp_family = AF_MCTP;
 		addr.smctp_addr.s_addr = eid;
+		addr.smctp_network = network;
 		addr.smctp_type = MCTP_MSG_TYPE_PLDM;
 		addr.smctp_tag = MCTP_TAG_OWNER;
 	}
