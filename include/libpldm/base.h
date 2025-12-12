@@ -17,6 +17,7 @@ extern "C" {
 #include <stdint.h>
 
 typedef uint8_t pldm_tid_t;
+typedef uint32_t net_id;
 
 /** @brief PLDM Types
  */
