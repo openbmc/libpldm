@@ -11,7 +11,6 @@ $VAR1 = {
   'LibraryVersion' => '0.15.0',
   'NameSpaces' => {
     '__gnu_cxx' => 1,
-    'libpldm' => 1,
     'pldm::fw_update' => 1,
     'pldm::utils' => 1,
     'std' => 1,
@@ -32,7 +31,7 @@ $VAR1 = {
     'firmware_update.cpp' => 1
   },
   'SymbolInfo' => {
-    '91115' => {
+    '90700' => {
       'Header' => 'firmware_update.hpp',
       'MnglName' => '_ZN4pldm9fw_update10stable_nopEv',
       'NameSpace' => 'pldm::fw_update',
@@ -41,90 +40,90 @@ $VAR1 = {
       'Source' => 'firmware_update.cpp',
       'SourceLine' => '14'
     },
-    '135804' => {
+    '135789' => {
       'Artificial' => 1,
-      'Class' => '90817',
+      'Class' => '90402',
       'Constructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
-      'Line' => '172',
+      'Line' => '164',
       'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorC2EOS1_',
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92507'
+          'type' => '92492'
         },
         '1' => {
           'name' => 'p1',
-          'type' => '93336'
+          'type' => '93321'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '135805' => {
+    '135790' => {
       'Artificial' => 1,
-      'Class' => '90817',
+      'Class' => '90402',
       'Constructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
-      'Line' => '172',
+      'Line' => '164',
       'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorC1EOS1_',
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92507'
+          'type' => '92492'
         },
         '1' => {
           'name' => 'p1',
-          'type' => '93336'
+          'type' => '93321'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '161574' => {
+    '161559' => {
       'Artificial' => 1,
-      'Class' => '90817',
+      'Class' => '90402',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
-      'Line' => '172',
+      'Line' => '164',
       'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorD2Ev',
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92507'
+          'type' => '92492'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '161575' => {
+    '161560' => {
       'Artificial' => 1,
-      'Class' => '90817',
+      'Class' => '90402',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
-      'Line' => '172',
+      'Line' => '164',
       'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorD0Ev',
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92507'
+          'type' => '92492'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '378471' => {
+    '378349' => {
       'Artificial' => 1,
-      'Class' => '90817',
+      'Class' => '90402',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
-      'Line' => '172',
+      'Line' => '164',
       'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorD1Ev',
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92507'
+          'type' => '92492'
         }
       },
       'ShortName' => 'PackageParserError'
@@ -206,6 +205,7 @@ $VAR1 = {
       '_ZNSt7__cxx119to_stringEm' => 1,
       '_ZNSt7__equalILb0EE5equalIPKN4pldm9fw_update18ComponentImageInfoES6_EEbT_S7_T0_' => 1,
       '_ZNSt7__equalILb0EE5equalIPKN4pldm9fw_update22FirmwareDeviceIDRecordES6_EEbT_S7_T0_' => 1,
+      '_ZNSt7__equalILb0EE5equalISt23_Rb_tree_const_iteratorISt4pairIKtSt10unique_ptrIN4pldm9fw_update14DescriptorDataESt14default_deleteIS8_EEEESD_EEbT_SE_T0_' => 1,
       '_ZNSt7__equalILb1EE5equalIhEEbPKT_S4_S4_' => 1,
       '_ZNSt7__equalILb1EE5equalImEEbPKT_S4_S4_' => 1,
       '_ZNSt8__detail14__to_chars_lenIjEEjT_i' => 1,
@@ -662,9 +662,9 @@ $VAR1 = {
       'Size' => '16',
       'Type' => 'Array'
     },
-    '90817' => {
+    '90402' => {
       'Header' => 'firmware_update.hpp',
-      'Line' => '172',
+      'Line' => '164',
       'Memb' => {
         '0' => {
           'name' => 'msg',
@@ -682,20 +682,20 @@ $VAR1 = {
       'Size' => '40',
       'Type' => 'Class'
     },
-    '92502' => {
-      'BaseType' => '90817',
+    '92487' => {
+      'BaseType' => '90402',
       'Name' => 'pldm::fw_update::PackageParserError*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '92507' => {
-      'BaseType' => '92502',
+    '92492' => {
+      'BaseType' => '92487',
       'Name' => 'pldm::fw_update::PackageParserError*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '93336' => {
-      'BaseType' => '90817',
+    '93321' => {
+      'BaseType' => '90402',
       'Name' => 'pldm::fw_update::PackageParserError&&',
       'Size' => '8',
       'Type' => 'RvalueRef'
@@ -712,7 +712,6 @@ $VAR1 = {
       '_ZSt18_Rb_tree_incrementPSt18_Rb_tree_node_base@GLIBCXX_3.4' => 0,
       '_ZSt19__throw_logic_errorPKc@GLIBCXX_3.4' => 0,
       '_ZSt20__throw_length_errorPKc@GLIBCXX_3.4' => 0,
-      '_ZSt20__throw_out_of_rangePKc@GLIBCXX_3.4' => 0,
       '_ZSt21__glibcxx_assert_failPKciS0_S0_@GLIBCXX_3.4.30' => 0,
       '_ZSt28__throw_bad_array_new_lengthv@GLIBCXX_3.4.29' => 0,
       '_ZSt29_Rb_tree_insert_and_rebalancebPSt18_Rb_tree_node_baseS0_RS_@GLIBCXX_3.4' => 0,
