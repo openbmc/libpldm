@@ -32,6 +32,17 @@ if compiler.has_header('poll.h')
     conf.set('PLDM_HAS_POLL', 1)
 endif
 
+if compiler.has_header('linux/mctp.h')
+    conf.set10(
+        'HAVE_STRUCT_MCTP_FQ_ADDR',
+        compiler.has_type(
+            'struct mctp_fq_addr',
+            prefix: '#include <linux/mctp.h>',
+        ),
+        description: 'Is struct mctp_fq_addr available?',
+    )
+endif
+
 # ABI control
 compiler.has_function_attribute('visibility:default', required: true)
 entrypoint = '__attribute__((visibility("default")))'
