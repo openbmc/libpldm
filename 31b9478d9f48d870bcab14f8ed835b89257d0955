@@ -16,6 +16,24 @@
       "message": "Since DSP0248_1.3.0 effecterValue can be also uint64 and sint64. Should this be then 11 instead of 7?",
       "revId": "31b9478d9f48d870bcab14f8ed835b89257d0955",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1be3d02_8891b016",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-15T12:18:50Z",
+      "side": 1,
+      "message": "Agree, But the current code doesn\u0027t move to 64 Bit support yet. So, this looks fine as it exists.\n\nChanging it to 11 can be taken care as part of 64Bit effecters addition",
+      "parentUuid": "b6716b1a_bc63d5f7",
+      "revId": "31b9478d9f48d870bcab14f8ed835b89257d0955",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
