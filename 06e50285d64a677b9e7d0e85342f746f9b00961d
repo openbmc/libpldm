@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77bac7d2_29102f59",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-15T13:45:52Z",
+      "side": 1,
+      "message": "Nit: Adding version may be not needed in this case, Latest (v1.3.0) also same struct. For nor make it generic.",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 8
+      },
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

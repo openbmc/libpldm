@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f583a928_42ac65e6",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-15T13:45:52Z",
+      "side": 1,
+      "message": "Doxygen format",
+      "range": {
+        "startLine": 1240,
+        "startChar": 0,
+        "endLine": 1241,
+        "endChar": 10
+      },
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "745c9ac6_47ab40dc",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 2
@@ -219,6 +242,24 @@
       "side": 1,
       "message": "I Agree. I will implement it.",
       "parentUuid": "70d0f149_0b88cb6e",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "776406d0_ca7d3fa8",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3636,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-15T13:45:52Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "27f03971_7683e5fe",
       "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
