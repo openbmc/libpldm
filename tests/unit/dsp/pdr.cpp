@@ -2645,3 +2645,104 @@ TEST(EntityAssociationPDR, testDeleteNode)
 
     pldm_entity_association_tree_destroy(tree);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(EntityAssociationPDR, testFindParentEntity)
+{
+    pldm_entity* entities =
+        static_cast<pldm_entity*>(calloc(3, sizeof(pldm_entity)));
+
+    ASSERT_NE(entities, nullptr);
+
+    entities[0].entity_type = 1;
+    entities[1].entity_type = 2;
+    entities[2].entity_type = 3;
+
+    auto tree = pldm_entity_association_tree_init();
+    ASSERT_NE(tree, nullptr);
+
+    auto root = pldm_entity_association_tree_add(
+        tree, &entities[0], 0xFFFF, nullptr, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(root, nullptr);
+
+    auto firstChild = pldm_entity_association_tree_add(
+        tree, &entities[1], 0xFFFF, root, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(firstChild, nullptr);
+
+    auto secondChild =
+        pldm_entity_association_tree_add(tree, &entities[2], 0xFFFF, firstChild,
+                                         PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+    ASSERT_NE(secondChild, nullptr);
+
+    auto repo = pldm_pdr_init();
+    ASSERT_NE(repo, nullptr);
+
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  root, repo, &entities, 3, false, 1, 10),
+              0);
+
+    EXPECT_EQ(pldm_entity_association_pdr_add_from_node_with_record_handle(
+                  firstChild, repo, &entities, 3, false, 1, 20),
+              0);
+
+    pldm_pdr_record* record = repo->first;
+    while (record != nullptr && record->record_handle != 20)
+    {
+        record = record->next;
+    }
+
+    ASSERT_NE(record, nullptr);
+
+    uint16_t containerType = 0;
+    uint16_t containerInstance = 0;
+    uint16_t containerId = 0;
+
+    PLDM_MSGBUF_RO_DEFINE_P(dst);
+    auto rc = pldm_msgbuf_init_errno(dst, sizeof(uint16_t) * 3,
+                                     record->data + sizeof(pldm_pdr_hdr),
+                                     record->size);
+
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_extract(dst, containerType);
+    pldm_msgbuf_extract(dst, containerInstance);
+    pldm_msgbuf_extract(dst, containerId);
+
+    ASSERT_EQ(pldm_msgbuf_complete(dst), 0);
+
+    pldm_entity parent{};
+    parent.entity_type = containerType;
+    parent.entity_instance_num = containerInstance;
+    parent.entity_container_id = containerId;
+
+    uint32_t recordHandle = 0;
+    bool found = false;
+
+    rc = pldm_entity_association_find_parent_entity(repo, &parent, false,
+                                                    &recordHandle, &found);
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_TRUE(found);
+    EXPECT_EQ(recordHandle, 20);
+
+    /* Negative case */
+    parent.entity_type = 0xFFFF;
+    found = true;
+    recordHandle = 0;
+
+    rc = pldm_entity_association_find_parent_entity(repo, &parent, false,
+                                                    &recordHandle, &found);
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_FALSE(found);
+
+    /* Invalid arguments */
+    EXPECT_EQ(pldm_entity_association_find_parent_entity(
+                  nullptr, nullptr, false, nullptr, nullptr),
+              -EINVAL);
+
+    free(entities);
+    pldm_pdr_destroy(repo);
+    pldm_entity_association_tree_destroy(tree);
+}
+#endif
