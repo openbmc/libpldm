@@ -1,0 +1,232 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c95f552_5419e83c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "Hi Apparao, thanks for the change. I\u0027ve listed a few concerns in comments inline.",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f4a10f6_2039d0bc",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "Please no. Return an error. This is in the neighbourhood of a -5 on Rusty\u0027s API scale from [\"What If I Don\u0027t Actually Like My Users?\"](https://ozlabs.org/~rusty/index.cgi/tech/2008-04-01.html)\n\nI recommend reading the complementary post [How Do I Make This Hard to Misuse?](https://ozlabs.org/~rusty/index.cgi/tech/2008-03-30.html) as well.",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f68f30b_1cd9d2b4",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1815,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00ba88ee_d2f3a3cc",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "I recognise you may be trying to make the behaviour consistent with `decode_numeric_sensor_data()` above, but I rather prefer we don\u0027t. Please return negative errnos:\n\nhttps://github.com/openbmc/libpldm/blob/bf554b2a15505052e7f6803f8ff728465193a0b6/CONTRIBUTING.md#L344-L347",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b22f1a7f_941f343c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1847,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "This check is unnecessary. Please remove it.",
+      "range": {
+        "startLine": 1844,
+        "startChar": 1,
+        "endLine": 1847,
+        "endChar": 2
+      },
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66912d2a_47187ab7",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1853,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "Please drop all calls to `pldm_xlate_errno()` wrt to the comment about negative errno values above.",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b429822_c65c5700",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1856,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "`pldm_msgbuf_extract_p()` is an API that enables us to use the msgbuf abstractions to implement older APIs that deconstruct the message parameters as pointer arguments in library APIs.\n\nThat\u0027s not the case here though.\n\nPlease rather use:\n\n```suggestion\n\tpldm_msgbuf_extract(buf, event_data-\u003eevent_state);\n```\n\nand apply similar changes throughout where relevant.",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd5032a_f3041fef",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1874,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "```suggestion\n\treturn pldm_msgbuf_complete_consumed(buf);\n```",
+      "range": {
+        "startLine": 1869,
+        "startChar": 1,
+        "endLine": 1874,
+        "endChar": 21
+      },
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c8cef8_5ac89335",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2546,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "I\u0027d rather we clean this implementation up to use the msgbuf APIs than expand the approach that requires tedious analysis for spatial memory safety concerns.\n\nIs that something you\u0027re willing to help with?",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "900c198a_32add228",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 6651,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "Please no. Rather, test the encoded payload against an expected, hand-encoded byte vector.\n\nPlease fix throughout.",
+      "range": {
+        "startLine": 6648,
+        "startChar": 3,
+        "endLine": 6651,
+        "endChar": 31
+      },
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ac5a188_1f06c561",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 6653,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "This must instead be `ASSERT_EQ()`. Continuing to access memory in the face of errors may lead to undefined behaviour (e.g. if the memory was never written).\n\nPlease fix throughout.",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f949463_a6ab0354",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 6664,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T00:54:37Z",
+      "side": 1,
+      "message": "Why do both?",
+      "range": {
+        "startLine": 6661,
+        "startChar": 1,
+        "endLine": 6664,
+        "endChar": 41
+      },
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
