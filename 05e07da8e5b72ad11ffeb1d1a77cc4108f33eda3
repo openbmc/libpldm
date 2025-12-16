@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49bc654f_db276256",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T01:32:53Z",
+      "side": 1,
+      "message": "I don\u0027t plan to accept this, based on comments on prior patch introducing the API.",
+      "revId": "05e07da8e5b72ad11ffeb1d1a77cc4108f33eda3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbfacf23_1b45970f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2972,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T01:32:53Z",
+      "side": 1,
+      "message": "API must be first fixed to conform to current expectations, at least returning negative errno values rather than PLDM completion codes.",
+      "revId": "05e07da8e5b72ad11ffeb1d1a77cc4108f33eda3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ba2ebe_84693278",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3635,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T01:32:53Z",
+      "side": 1,
+      "message": "API must be fixed to conform to current expectations, at least changing the prototype to take `payload_length` as a pointer, and using `pldm_msgbuf_complete_used()` to return the encoded length to the caller.",
+      "revId": "05e07da8e5b72ad11ffeb1d1a77cc4108f33eda3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99241cc9_36e3f4a0",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2025-12-16T01:32:53Z",
+      "side": 1,
+      "message": "This seems odd.\n\nAlso, please make sure that tests that must be guarded are _individually_ guarded (i.e. the macro guard doesn\u0027t span multiple test method definitions).",
+      "revId": "05e07da8e5b72ad11ffeb1d1a77cc4108f33eda3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
