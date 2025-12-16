@@ -2389,3 +2389,69 @@ int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
 	}
 	return 0;
 }
+
+LIBPLDM_ABI_TESTING
+int pldm_entity_association_find_parent_entity(const pldm_pdr *repo,
+					       pldm_entity *parent,
+					       bool is_remote,
+					       uint32_t *record_handle,
+					       bool *found)
+{
+	if (!repo || !parent || !record_handle || !found) {
+		return -EINVAL;
+	}
+
+	*found = false;
+	pldm_pdr_record *record = repo->first;
+	int rc = 0;
+
+	while (record != NULL) {
+		if (record->is_remote != is_remote) {
+			record = record->next;
+			continue;
+		}
+
+		struct pldm_pdr_hdr *hdr = (struct pldm_pdr_hdr *)record->data;
+
+		if (hdr->type != PLDM_PDR_ENTITY_ASSOCIATION) {
+			record = record->next;
+			continue;
+		}
+
+		uint16_t container_entity_type = 0;
+		uint16_t container_entity_instance_num = 0;
+		uint16_t entity_container_id = 0;
+
+		PLDM_MSGBUF_RO_DEFINE_P(dst);
+
+		rc = pldm_msgbuf_init_errno(dst, sizeof(uint16_t) * 3,
+					    record->data +
+						    sizeof(struct pldm_pdr_hdr),
+					    record->size);
+		if (rc) {
+			return rc;
+		}
+
+		pldm_msgbuf_extract(dst, container_entity_type);
+		pldm_msgbuf_extract(dst, container_entity_instance_num);
+		pldm_msgbuf_extract(dst, entity_container_id);
+
+		rc = pldm_msgbuf_complete(dst);
+		if (rc) {
+			return rc;
+		}
+
+		if (container_entity_type == parent->entity_type &&
+		    container_entity_instance_num ==
+			    parent->entity_instance_num &&
+		    entity_container_id == parent->entity_container_id) {
+			*record_handle = record->record_handle;
+			*found = true;
+			return 0;
+		}
+
+		record = record->next;
+	}
+
+	return 0;
+}
