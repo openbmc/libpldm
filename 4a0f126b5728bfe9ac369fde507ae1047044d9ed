@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86ea729d_cfb1460c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2025-12-17T12:31:30Z",
+      "side": 1,
+      "message": "Rephrased pls review",
+      "parentUuid": "720fa640_721d510d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 52
+      },
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c2901b1_6cadb1fc",
         "filename": "include/libpldm/transport/af-mctp.h",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2025-12-17T11:30:39Z",
       "side": 1,
       "message": "Let\u0027s have it in reverse, \u003cNetwork, EID\u003e. Which makes more sense.\nIn other places as well.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eccb573b_7ed80375",
+        "filename": "include/libpldm/transport/af-mctp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2025-12-17T12:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c2901b1_6cadb1fc",
       "range": {
         "startLine": 32,
         "startChar": 0,
@@ -107,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9e6d21b_6944f465",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2025-12-17T12:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bc0a981_bf62886e",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "631c868c_1ad41087",
         "filename": "src/transport/af-mctp.c",
         "patchSetId": 1
@@ -118,6 +190,30 @@
       "writtenOn": "2025-12-17T11:30:39Z",
       "side": 1,
       "message": "Why return -1? Initially it can be 0 also right?\nOn the other hand, if tid is 0 it should be an error.",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 76,
+        "endChar": 12
+      },
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fd6c989_73ab7b4e",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2025-12-17T12:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "631c868c_1ad41087",
       "range": {
         "startLine": 75,
         "startChar": 1,
@@ -164,6 +260,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e12f2bb2_1d8caeab",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2025-12-17T12:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1367fe6a_ac8fcf0b",
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b45b92e_a6c4a9ef",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2025-12-17T12:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d408212_746e56c1",
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "938d36de_3555e53b",
         "filename": "src/transport/af-mctp.c",
         "patchSetId": 1
@@ -181,6 +313,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "128c6842_5dd7cbec",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2025-12-17T12:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "938d36de_3555e53b",
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af2ff0f2_6936aaf6",
         "filename": "src/transport/af-mctp.c",
         "patchSetId": 1
@@ -192,6 +342,24 @@
       "writtenOn": "2025-12-17T11:30:39Z",
       "side": 1,
       "message": "Please run clang-format if you haven\u0027t done already.",
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61689642_42768fdc",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2025-12-17T12:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af2ff0f2_6936aaf6",
       "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
