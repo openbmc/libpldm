@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "720fa640_721d510d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2025-12-17T11:30:39Z",
+      "side": 1,
+      "message": "Please look at the commit message guidelines (50/72 rule) and rephase the title and message.\nhttps://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#formatting-commit-messages",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 52
+      },
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c2901b1_6cadb1fc",
+        "filename": "include/libpldm/transport/af-mctp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2025-12-17T11:30:39Z",
+      "side": 1,
+      "message": "Let\u0027s have it in reverse, \u003cNetwork, EID\u003e. Which makes more sense.\nIn other places as well.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad4a0677_48003a7e",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2025-12-17T11:30:39Z",
+      "side": 1,
+      "message": "Also network id which AF_MCTP exposes is `unsigned int`. Probably we should use the same here as well.\nhttps://docs.kernel.org/networking/mctp.html",
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc0a981_bf62886e",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2025-12-17T11:30:39Z",
+      "side": 1,
+      "message": "Let\u0027s have in the reverse order. network first followed by EID.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "631c868c_1ad41087",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2025-12-17T11:30:39Z",
+      "side": 1,
+      "message": "Why return -1? Initially it can be 0 also right?\nOn the other hand, if tid is 0 it should be an error.",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 76,
+        "endChar": 12
+      },
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d408212_746e56c1",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2025-12-17T11:30:39Z",
+      "side": 1,
+      "message": "do we need a check for non zero eid \u0026 network input before start looping?",
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1367fe6a_ac8fcf0b",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2025-12-17T11:30:39Z",
+      "side": 1,
+      "message": "`256`. Please avoid macro numbers.",
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "938d36de_3555e53b",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2025-12-17T11:30:39Z",
+      "side": 1,
+      "message": "nit: Why don\u0027t you define an alias for network id data type as well?",
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af2ff0f2_6936aaf6",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2025-12-17T11:30:39Z",
+      "side": 1,
+      "message": "Please run clang-format if you haven\u0027t done already.",
+      "revId": "4a0f126b5728bfe9ac369fde507ae1047044d9ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
