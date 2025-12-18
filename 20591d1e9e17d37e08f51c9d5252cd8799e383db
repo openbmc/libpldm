@@ -39,6 +39,30 @@
       },
       "revId": "20591d1e9e17d37e08f51c9d5252cd8799e383db",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56ed453e_a9b527c4",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-18T23:59:00Z",
+      "side": 1,
+      "message": "I will squash this with its parent commit in the relation chain and rename the API to `decode_set_numeric_effecter_enable_resp()`",
+      "parentUuid": "0efc0d18_ce193533",
+      "range": {
+        "startLine": 788,
+        "startChar": 0,
+        "endLine": 798,
+        "endChar": 29
+      },
+      "revId": "20591d1e9e17d37e08f51c9d5252cd8799e383db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
