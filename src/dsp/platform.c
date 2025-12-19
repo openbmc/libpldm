@@ -2467,6 +2467,9 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 				   const uint8_t *present_reading,
 				   struct pldm_msg *msg, size_t payload_length)
 {
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
 	if (msg == NULL || present_reading == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
@@ -2475,65 +2478,57 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
+	/* Validate exact payload length based on sensor data size */
+	size_t expected_length = PLDM_GET_SENSOR_READING_MIN_RESP_BYTES;
+	if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT16 ||
+	    sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT16) {
+		expected_length += 1;
+	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT32 ||
+		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT32) {
+		expected_length += 3;
+	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT64 ||
+		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT64) {
+		expected_length += 7;
+	}
+
+	if (payload_length != expected_length) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
 	struct pldm_header_info header = { 0 };
 	header.msg_type = PLDM_RESPONSE;
 	header.instance = instance_id;
 	header.pldm_type = PLDM_PLATFORM;
 	header.command = PLDM_GET_SENSOR_READING;
 
-	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
+	rc = pack_pldm_header(&header, &(msg->hdr));
 	if (rc != PLDM_SUCCESS) {
 		return rc;
 	}
 
-	struct pldm_get_sensor_reading_resp *response =
-		(struct pldm_get_sensor_reading_resp *)msg->payload;
+	rc = pldm_msgbuf_init_errno(buf, PLDM_GET_SENSOR_READING_MIN_RESP_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
 
-	response->completion_code = completion_code;
-	response->sensor_data_size = sensor_data_size;
-	response->sensor_operational_state = sensor_operational_state;
-	response->sensor_event_message_enable = sensor_event_message_enable;
-	response->present_state = present_state;
-	response->previous_state = previous_state;
-	response->event_state = event_state;
+	pldm_msgbuf_insert(buf, completion_code);
+	pldm_msgbuf_insert(buf, sensor_data_size);
+	pldm_msgbuf_insert(buf, sensor_operational_state);
+	pldm_msgbuf_insert(buf, sensor_event_message_enable);
+	pldm_msgbuf_insert(buf, present_state);
+	pldm_msgbuf_insert(buf, previous_state);
+	pldm_msgbuf_insert(buf, event_state);
 
-	if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT8 ||
-	    sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT8) {
-		if (payload_length != PLDM_GET_SENSOR_READING_MIN_RESP_BYTES) {
-			return PLDM_ERROR_INVALID_LENGTH;
-		}
-		response->present_reading[0] = *present_reading;
+	rc = pldm_msgbuf_insert_sensor_reading(buf, sensor_data_size,
+					       present_reading);
+	if (rc) {
+		return pldm_xlate_errno(pldm_msgbuf_discard(buf, rc));
+	}
 
-	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT16 ||
-		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT16) {
-		if (payload_length !=
-		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 1) {
-			return PLDM_ERROR_INVALID_LENGTH;
-		}
-		uint16_t val = *(uint16_t *)present_reading;
-		val = htole16(val);
-		memcpy(response->present_reading, &val, 2);
-
-	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT32 ||
-		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT32) {
-		if (payload_length !=
-		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 3) {
-			return PLDM_ERROR_INVALID_LENGTH;
-		}
-		uint32_t val = *(uint32_t *)present_reading;
-		val = htole32(val);
-		memcpy(response->present_reading, &val, 4);
-	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT64 ||
-		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT64) {
-		if (payload_length !=
-		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7) {
-			return PLDM_ERROR_INVALID_LENGTH;
-		}
-		uint64_t val = *(uint64_t *)present_reading;
-		val = htole64(val);
-		memcpy(response->present_reading, &val, 8);
-	} else {
-		return PLDM_ERROR_INVALID_DATA;
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return pldm_xlate_errno(rc);
 	}
 
 	return PLDM_SUCCESS;

@@ -204,6 +204,37 @@ pldm__msgbuf_extract_effecter_data(struct pldm_msgbuf_ro *ctx,
 	return -PLDM_ERROR_INVALID_DATA;
 }
 
+/*
+ * This API reads sensor reading data from a raw buffer based on sensor data
+ * size
+ */
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_insert_sensor_reading(struct pldm_msgbuf_rw *ctx,
+				  enum pldm_sensor_readings_data_type tag,
+				  const void *src)
+{
+	switch (tag) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		return pldm_msgbuf_insert(ctx, *(const uint8_t *)src);
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+		return pldm_msgbuf_insert(ctx, *(const uint16_t *)src);
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		return pldm_msgbuf_insert(ctx, *(const int16_t *)src);
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+		return pldm_msgbuf_insert(ctx, *(const uint32_t *)src);
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		return pldm_msgbuf_insert(ctx, *(const int32_t *)src);
+	case PLDM_SENSOR_DATA_SIZE_UINT64:
+		return pldm_msgbuf_insert(ctx, *(const uint64_t *)src);
+	case PLDM_SENSOR_DATA_SIZE_SINT64:
+		/* msgbuf doesn't have insert_int64, use uint64 for bit pattern */
+		return pldm_msgbuf_insert(ctx, *(const uint64_t *)src);
+	}
+
+	return -PLDM_ERROR_INVALID_DATA;
+}
+
 #ifdef __cplusplus
 #include <type_traits>
 
