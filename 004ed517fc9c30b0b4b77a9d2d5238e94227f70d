@@ -58,6 +58,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a18eb97e_40753df3",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f583a928_42ac65e6",
+      "range": {
+        "startLine": 1240,
+        "startChar": 0,
+        "endLine": 1241,
+        "endChar": 10
+      },
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "745c9ac6_47ab40dc",
@@ -260,6 +284,24 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "27f03971_7683e5fe",
+      "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdfdc3e6_6bb1fbed",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3636,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "776406d0_ca7d3fa8",
       "revId": "004ed517fc9c30b0b4b77a9d2d5238e94227f70d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

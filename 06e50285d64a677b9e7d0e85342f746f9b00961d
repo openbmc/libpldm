@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b43a7e_dc1fbd0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a6da941_b4ad92a0",
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2a49ac0_e26a815a",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-12-16T01:18:42Z",
       "side": 1,
       "message": "v1.2.0 was released on 1 Nov 2019. The latest revision, v1.3.0 was released 5 Aug 2024. We can\u0027t do better than that, and it\u0027s still over a year old. But that\u0027s a much better place than referencing a 6-year-old version.\n\nCan you please use the most recent specification (currently v1.3.0) as a reference?",
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d53035_d7e953df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2a49ac0_e26a815a",
       "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +111,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45513678_f7a2fbc2",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77bac7d2_29102f59",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 8
+      },
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d259515f_7fe4827e",
@@ -88,6 +148,30 @@
       "writtenOn": "2025-12-16T01:18:42Z",
       "side": 1,
       "message": "I\u0027d rather we try to keep this succinct and just reference the function, so:\n\n```suggestion\n- platform: Added `encode_set_numeric_effecter_enable_req()`\n```",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 52
+      },
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caf193f6_701b516b",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d259515f_7fe4827e",
       "range": {
         "startLine": 27,
         "startChar": 0,
@@ -115,6 +199,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd69936e_10d7c33c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72354f08_a30603af",
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db04db6f_692b5427",
@@ -128,6 +230,24 @@
       "writtenOn": "2025-12-16T01:18:42Z",
       "side": 1,
       "message": "Please prefix the symbol with the specification identifier:\n\nhttps://github.com/openbmc/libpldm/blob/bf554b2a15505052e7f6803f8ff728465193a0b6/CONTRIBUTING.md#L260-L262\n\nSo in this case, `struct pldm_platform_set_numeric_effecter_enable_req`.\n\nI recognise this is inconsistent with e.g `struct pldm_set_numeric_sensor_enable_req`, but I\u0027d rather we have consistent rules going forward rather than bind ourselves to problems of the past.",
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a26af48_b8090d1c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1250,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db04db6f_692b5427",
       "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -155,6 +275,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "928455a3_091e4637",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1463,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03f7e36f_54144f3a",
+      "range": {
+        "startLine": 1463,
+        "startChar": 32,
+        "endLine": 1463,
+        "endChar": 68
+      },
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "683e0524_b8010327",
@@ -168,6 +312,24 @@
       "writtenOn": "2025-12-16T01:18:42Z",
       "side": 1,
       "message": "`payload_length` should be an `[in,out]` parameter so the caller can learn the length used in the payload buffer.",
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56d838d0_9b2700d4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "683e0524_b8010327",
       "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -195,6 +357,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1213759a_f9d5a365",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1465,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6fa0207_4fbd2609",
+      "range": {
+        "startLine": 1464,
+        "startChar": 1,
+        "endLine": 1465,
+        "endChar": 53
+      },
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "174a399e_2134ef51",
@@ -208,6 +394,24 @@
       "writtenOn": "2025-12-16T01:18:42Z",
       "side": 1,
       "message": "Similar prefixing here too please:\n\n```\nint encode_pldm_platform_set_numeric_effecter_enable_req(...)\n```",
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "366e9908_b6e25f7e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "174a399e_2134ef51",
       "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -235,6 +439,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9c0ec81_38f016bd",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a35031f0_dfbb4720",
+      "range": {
+        "startLine": 1477,
+        "startChar": 23,
+        "endLine": 1477,
+        "endChar": 44
+      },
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7eb1bcca_ddb9af18",
@@ -252,6 +480,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e16ac5b7_30fb7c2c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3673,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7eb1bcca_ddb9af18",
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ba91f8d_cdcae5ca",
@@ -265,6 +511,24 @@
       "writtenOn": "2025-12-16T01:18:42Z",
       "side": 1,
       "message": "Must be `ASSERT_EQ(...)` to prevent undefined behaviour due to uninitialised memory in the `memcmp()` below.\n\nPlease fix throughout.",
+      "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e88251ce_3ba19f8c",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ba91f8d_cdcae5ca",
       "revId": "06e50285d64a677b9e7d0e85342f746f9b00961d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
