@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1ea58f2_e55d5ab0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-19T00:16:47Z",
+      "side": 1,
+      "message": "This constant isn\u0027t really used for bounds checking. It will be used for constructing the SetNumericEffecterValue PLDM Request vector. I will remove the reference from the commit.",
+      "parentUuid": "ebb63819_9b45468d",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 1
+      },
+      "revId": "31b9478d9f48d870bcab14f8ed835b89257d0955",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6716b1a_bc63d5f7",
