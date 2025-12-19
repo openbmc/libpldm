@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f36b2ba8_7d01f155",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-19T21:25:26Z",
+      "side": 1,
+      "message": "Agree, Anyway new API is defined to support it 64Bit - decode_numeric_sensor_event_data() - Done",
+      "parentUuid": "6f4a10f6_2039d0bc",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f68f30b_1cd9d2b4",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "924d7638_ef77a380",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1815,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-19T21:25:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f68f30b_1cd9d2b4",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00ba88ee_d2f3a3cc",
@@ -65,6 +101,24 @@
       "writtenOn": "2025-12-16T00:54:37Z",
       "side": 1,
       "message": "I recognise you may be trying to make the behaviour consistent with `decode_numeric_sensor_data()` above, but I rather prefer we don\u0027t. Please return negative errnos:\n\nhttps://github.com/openbmc/libpldm/blob/bf554b2a15505052e7f6803f8ff728465193a0b6/CONTRIBUTING.md#L344-L347",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c01d89e5_a7568875",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-19T21:25:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00ba88ee_d2f3a3cc",
       "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -92,6 +146,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4663cff3_3e638326",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1847,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-19T21:25:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b22f1a7f_941f343c",
+      "range": {
+        "startLine": 1844,
+        "startChar": 1,
+        "endLine": 1847,
+        "endChar": 2
+      },
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66912d2a_47187ab7",
@@ -105,6 +183,24 @@
       "writtenOn": "2025-12-16T00:54:37Z",
       "side": 1,
       "message": "Please drop all calls to `pldm_xlate_errno()` wrt to the comment about negative errno values above.",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3a2b8de_f4b6753b",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1853,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-19T21:25:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66912d2a_47187ab7",
       "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -126,6 +222,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a949434_75317237",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1856,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-19T21:25:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b429822_c65c5700",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecd5032a_f3041fef",
@@ -139,6 +253,30 @@
       "writtenOn": "2025-12-16T00:54:37Z",
       "side": 1,
       "message": "```suggestion\n\treturn pldm_msgbuf_complete_consumed(buf);\n```",
+      "range": {
+        "startLine": 1869,
+        "startChar": 1,
+        "endLine": 1874,
+        "endChar": 21
+      },
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b202f3_2a4d6ae7",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1874,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-19T21:25:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecd5032a_f3041fef",
       "range": {
         "startLine": 1869,
         "startChar": 1,
@@ -189,6 +327,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9fbe97b_5813bf22",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 6651,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-19T21:25:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "900c198a_32add228",
+      "range": {
+        "startLine": 6648,
+        "startChar": 3,
+        "endLine": 6651,
+        "endChar": 31
+      },
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ac5a188_1f06c561",
@@ -206,6 +368,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35092506_ab19fe38",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 6653,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-19T21:25:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ac5a188_1f06c561",
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f949463_a6ab0354",
@@ -219,6 +399,30 @@
       "writtenOn": "2025-12-16T00:54:37Z",
       "side": 1,
       "message": "Why do both?",
+      "range": {
+        "startLine": 6661,
+        "startChar": 1,
+        "endLine": 6664,
+        "endChar": 41
+      },
+      "revId": "f6dd493edce88a8b46d8bf1eba3e158f3e2181fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d2c1bee_1f5a358d",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 6664,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2025-12-19T21:25:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f949463_a6ab0354",
       "range": {
         "startLine": 6661,
         "startChar": 1,
