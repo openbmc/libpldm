@@ -198,6 +198,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88d8178e_d65c8d63",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2025-12-19T10:30:00Z",
+      "side": 1,
+      "message": "Hi Andrew, what should users (which is also our case btw) do if they have a std::vector\u003cuint8_t\u003e pdr containing PDR data? Do they need to convert it to struct pldm_state_effecter_pdr* before calling these macros? If yes, what would be the ideal way? I think our C++ codebase has guidelines to avoid reinterpret_cast. Should they use placement new or memcpy to copy data to a struct pldm_state_effecter_pdr object? (The latter seems wasteful for what should be a zero-copy operation.)\nWould it be acceptable for the C API to take const void* so the type interpretation happens in the C implementation? The C++ callers would then simply pass pdr.data(), pdr.size() directly. This keeps the cast localized within the library rather than scattered across callers.",
+      "parentUuid": "09ab5d0d_498b4efc",
+      "range": {
+        "startLine": 232,
+        "startChar": 45,
+        "endLine": 232,
+        "endChar": 67
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d99627dc_5f136ef7",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 2
