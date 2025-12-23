@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8842c87c_a2048433",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-23T10:44:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7f111894_0cec5c76",
+      "revId": "3163cb178a5828096e2546eab3e4e0d9027a08d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8006b8d0_ba9c2958",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 7
@@ -48,6 +66,24 @@
       "writtenOn": "2025-12-16T01:26:07Z",
       "side": 1,
       "message": "Please avoid more packed structs:\n\nhttps://github.com/openbmc/libpldm/blob/bf554b2a15505052e7f6803f8ff728465193a0b6/CONTRIBUTING.md#L298-L299",
+      "revId": "3163cb178a5828096e2546eab3e4e0d9027a08d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34d14a8f_a91a0296",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-23T10:44:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8006b8d0_ba9c2958",
       "revId": "3163cb178a5828096e2546eab3e4e0d9027a08d8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
