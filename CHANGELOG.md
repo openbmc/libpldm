@@ -63,6 +63,9 @@ Change categories:
 
 - Stabilised:
   - `decode_pldm_platform_file_descriptor_pdr()`
+  - `encode_pldm_platform_set_numeric_effecter_enable_req()`
+  - `decode_pldm_platform_set_numeric_effecter_enable_resp()`
+  - `decode_numeric_effecter_pdr_data()`
   - `encode_pldm_base_multipart_receive_req()`
   - `decode_pldm_base_multipart_receive_resp()`
   - `encode_pldm_base_negotiate_transfer_params_req()`
@@ -80,6 +83,11 @@ Change categories:
   - `decode_pldm_package_downstream_device_id_record_from_iter()`
   - `pldm_package_component_image_information_iter_init()`
   - `decode_pldm_package_component_image_information_from_iter()`
+  - `encode_pldm_platform_set_numeric_effecter_enable_req()`
+  - `decode_pldm_platform_set_numeric_effecter_enable_req()`
+  - `encode_pldm_platform_set_numeric_effecter_enable_resp()`
+  - `decode_pldm_platform_set_numeric_effecter_enable_resp()`
+  - `decode_pldm_effecter_auxiliary_name_from_iter()`
 
 - Reworked the firmware update package parsing APIs to track parse state using a
   run-time state machine
