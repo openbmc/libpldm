@@ -63,6 +63,9 @@ Change categories:
 
 - Stabilised:
   - `decode_pldm_platform_file_descriptor_pdr()`
+  - `encode_pldm_platform_set_numeric_effecter_enable_req()`
+  - `decode_pldm_platform_set_numeric_effecter_enable_resp()`
+  - `decode_numeric_effecter_pdr_data()`
   - `encode_pldm_base_multipart_receive_req()`
   - `decode_pldm_base_multipart_receive_resp()`
   - `encode_pldm_base_negotiate_transfer_params_req()`
