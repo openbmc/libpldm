@@ -161,6 +161,13 @@ Change categories:
 - pldm::fw_update::PackageParser::parse is stable
 - pldm::fw_update::Package::~Package is stable
 
+#### Stabilised
+
+- `encode_pldm_platform_set_numeric_effecter_enable_req()`
+- `decode_pldm_platform_set_numeric_effecter_enable_resp()`
+- `decode_numeric_effecter_pdr_data()`
+- `decode_pldm_effecter_auxiliary_names_pdr()`
+
 ### Deprecated
 
 - dsp: base: Deprecate `encode_get_types_resp()`
