@@ -32,6 +32,15 @@ Change categories:
   Many header files were modified to fix issues identified in the documentation.
   There is no change in behaviour.
 
+#### Stabilisations in libpldm
+
+- `encode_pldm_platform_set_numeric_effecter_enable_req()`
+- `decode_pldm_platform_set_numeric_effecter_enable_resp()`
+- `decode_numeric_effecter_pdr_data()`
+- `decode_pldm_platform_effecter_auxiliary_names_pdr()`
+- `decode_pldm_platform_effecter_auxiliary_name_from_iter()`
+- `decode_pldm_platform_effecter_auxiliary_name_string_from_iter()`
+
 ### Deprecated
 
 ### Removed
