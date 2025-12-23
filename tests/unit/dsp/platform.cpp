@@ -992,7 +992,6 @@ TEST(SetNumericEffecterValue, testBadEncodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericEffecterEnable, testGoodEncodeRequest)
 {
     struct pldm_platform_set_numeric_effecter_enable_req req = {
@@ -1024,9 +1023,7 @@ TEST(SetNumericEffecterEnable, testGoodEncodeRequest)
     EXPECT_EQ(0, memcmp(request->payload, expectedPayload.data(),
                         PLDM_PLATFORM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES));
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericEffecterEnable, testBadEncodeRequestNullMsg)
 {
     struct pldm_platform_set_numeric_effecter_enable_req req = {
@@ -1039,9 +1036,7 @@ TEST(SetNumericEffecterEnable, testBadEncodeRequestNullMsg)
         0, &req, NULL, &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericEffecterEnable, testBadEncodeRequestNullReq)
 {
     PLDM_MSG_DEFINE_P(request,
@@ -1052,9 +1047,7 @@ TEST(SetNumericEffecterEnable, testBadEncodeRequestNullReq)
         0, NULL, request, &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericEffecterEnable, testBadEncodeRequestNullPayloadLength)
 {
     struct pldm_platform_set_numeric_effecter_enable_req req = {
@@ -1069,9 +1062,7 @@ TEST(SetNumericEffecterEnable, testBadEncodeRequestNullPayloadLength)
         0, &req, request, NULL);
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidOperationalState)
 {
     struct pldm_platform_set_numeric_effecter_enable_req req = {
@@ -1086,9 +1077,7 @@ TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidOperationalState)
         0, &req, request, &payload_length);
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidPayloadLength)
 {
     struct pldm_platform_set_numeric_effecter_enable_req req = {
@@ -1112,9 +1101,7 @@ TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidPayloadLength)
                                                               &payload_length);
     EXPECT_LT(rc, 0);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 static void testGoodEncodeRequestOperationalState(uint8_t operationalState)
 {
     PLDM_MSG_DEFINE_P(request,
@@ -1145,7 +1132,6 @@ TEST(SetNumericEffecterEnable, testGoodEncodeRequestAllOperationalStates)
     testGoodEncodeRequestOperationalState(EFFECTER_OPER_STATE_DISABLED);
     testGoodEncodeRequestOperationalState(EFFECTER_OPER_STATE_UNAVAILABLE);
 }
-#endif
 
 #if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeSetNumericEffecterEnableReq, testGoodDecode)
@@ -1354,7 +1340,6 @@ TEST(EncodeSetNumericEffecterEnableResp, testGoodEncodeAllCompletionCodes)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeSetNumericEffecterEnableResp, testGoodDecode)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -1370,9 +1355,7 @@ TEST(DecodeSetNumericEffecterEnableResp, testGoodDecode)
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(cc, expected_cc);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeSetNumericEffecterEnableResp, testGoodDecodeErrorCc)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -1388,9 +1371,7 @@ TEST(DecodeSetNumericEffecterEnableResp, testGoodDecodeErrorCc)
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(cc, expected_cc);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeNullMsg)
 {
     uint8_t cc = 0;
@@ -1399,9 +1380,7 @@ TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeNullMsg)
 
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeNullCc)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -1412,9 +1391,7 @@ TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeNullCc)
 
     EXPECT_EQ(rc, -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeInvalidPayloadLength)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -1438,9 +1415,7 @@ TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeInvalidPayloadLength)
         decode_pldm_platform_set_numeric_effecter_enable_resp(response, 0, &cc);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 static void testGoodDecodeResponseCompletionCode(uint8_t completionCode)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -1465,7 +1440,6 @@ TEST(DecodeSetNumericEffecterEnableResp, testGoodDecodeAllCompletionCodes)
     testGoodDecodeResponseCompletionCode(PLDM_ERROR_INVALID_LENGTH);
     testGoodDecodeResponseCompletionCode(0xFF);
 }
-#endif
 
 TEST(GetStateSensorReadings, testGoodEncodeResponse)
 {
@@ -5645,7 +5619,6 @@ TEST(decodeNumericSensorPdrDataDeathTest, InvalidSizeTest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint8Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5757,9 +5730,7 @@ TEST(decodeNumericEffecterPdrData, Uint8Test)
     EXPECT_EQ(90u, decodedPdr.rated_max.value_u8);
     EXPECT_EQ(10u, decodedPdr.rated_min.value_u8);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Sint8Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5846,9 +5817,7 @@ TEST(decodeNumericEffecterPdrData, Sint8Test)
     EXPECT_EQ(30, decodedPdr.rated_max.value_s8);
     EXPECT_EQ(-30, decodedPdr.rated_min.value_s8);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint16Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5943,9 +5912,7 @@ TEST(decodeNumericEffecterPdrData, Uint16Test)
     EXPECT_EQ(9000u, decodedPdr.rated_max.value_u16);
     EXPECT_EQ(1000u, decodedPdr.rated_min.value_u16);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Sint16Test)
 {
     std::vector<uint8_t> pdr1{
@@ -6040,9 +6007,7 @@ TEST(decodeNumericEffecterPdrData, Sint16Test)
     EXPECT_EQ(3000, decodedPdr.rated_max.value_s16);
     EXPECT_EQ(-3000, decodedPdr.rated_min.value_s16);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -6160,9 +6125,7 @@ TEST(decodeNumericEffecterPdrData, Uint32Test)
     EXPECT_EQ(9000000u, decodedPdr.rated_max.value_u32);
     EXPECT_EQ(1000000u, decodedPdr.rated_min.value_u32);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Sint32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -6279,9 +6242,7 @@ TEST(decodeNumericEffecterPdrData, Sint32Test)
     EXPECT_EQ(3000000, decodedPdr.rated_max.value_s32);
     EXPECT_EQ(-3000000, decodedPdr.rated_min.value_s32);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Real32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -6402,7 +6363,6 @@ TEST(decodeNumericEffecterPdrData, Real32Test)
     EXPECT_FLOAT_EQ(300.003f, decodedPdr.rated_max.value_f32);
     EXPECT_FLOAT_EQ(-300.003f, decodedPdr.rated_min.value_f32);
 }
-#endif
 
 TEST(GetStateEffecterStates, testEncodeAndDecodeRequest)
 {
