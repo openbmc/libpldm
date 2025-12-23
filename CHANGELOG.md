@@ -68,6 +68,13 @@ Change categories:
   - `pldm_transport_af_mctp_map_tid_fqe()`
   - `pldm_transport_af_mctp_unmap_tid_fqe()`
 
+#### Stabilised
+
+- `encode_pldm_platform_set_numeric_effecter_enable_req()`
+- `decode_pldm_platform_set_numeric_effecter_enable_resp()`
+- `decode_numeric_effecter_pdr_data()`
+- `decode_pldm_effecter_auxiliary_names_pdr()`
+
 ### Deprecated
 
 - Misspelled PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG member of the
