@@ -992,7 +992,7 @@ TEST(SetNumericEffecterValue, testBadEncodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(SetNumericEffecterEnable, testGoodEncodeRequest)
 {
     struct pldm_platform_set_numeric_effecter_enable_req req = {
@@ -1019,7 +1019,7 @@ TEST(SetNumericEffecterEnable, testGoodEncodeRequest)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(SetNumericEffecterEnable, testBadEncodeRequestNullMsg)
 {
     struct pldm_platform_set_numeric_effecter_enable_req req = {
@@ -1034,7 +1034,7 @@ TEST(SetNumericEffecterEnable, testBadEncodeRequestNullMsg)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(SetNumericEffecterEnable, testBadEncodeRequestNullReq)
 {
     PLDM_MSG_DEFINE_P(request,
@@ -1047,7 +1047,7 @@ TEST(SetNumericEffecterEnable, testBadEncodeRequestNullReq)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(SetNumericEffecterEnable, testBadEncodeRequestNullPayloadLength)
 {
     struct pldm_platform_set_numeric_effecter_enable_req req = {
@@ -1064,7 +1064,7 @@ TEST(SetNumericEffecterEnable, testBadEncodeRequestNullPayloadLength)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidOperationalState)
 {
     struct pldm_platform_set_numeric_effecter_enable_req req = {
@@ -1083,7 +1083,7 @@ TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidOperationalState)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidPayloadLength)
 {
     struct pldm_platform_set_numeric_effecter_enable_req req = {
@@ -1109,7 +1109,7 @@ TEST(SetNumericEffecterEnable, testBadEncodeRequestInvalidPayloadLength)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(SetNumericEffecterEnable, testGoodEncodeRequestAllOperationalStates)
 {
     PLDM_MSG_DEFINE_P(request,
@@ -1322,7 +1322,7 @@ TEST(EncodeSetNumericEffecterEnableResp, testGoodEncodeAllCompletionCodes)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(DecodeSetNumericEffecterEnableResp, testGoodDecode)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -1340,7 +1340,7 @@ TEST(DecodeSetNumericEffecterEnableResp, testGoodDecode)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(DecodeSetNumericEffecterEnableResp, testGoodDecodeErrorCc)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -1358,7 +1358,7 @@ TEST(DecodeSetNumericEffecterEnableResp, testGoodDecodeErrorCc)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeNullMsg)
 {
     uint8_t cc = 0;
@@ -1369,7 +1369,7 @@ TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeNullMsg)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeNullCc)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -1382,7 +1382,7 @@ TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeNullCc)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeInvalidPayloadLength)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -1408,7 +1408,7 @@ TEST(DecodeSetNumericEffecterEnableResp, testBadDecodeInvalidPayloadLength)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(DecodeSetNumericEffecterEnableResp, testGoodDecodeAllCompletionCodes)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -5612,7 +5612,7 @@ TEST(decodeNumericSensorPdrDataDeathTest, InvalidSizeTest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Uint8Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5684,7 +5684,7 @@ TEST(decodeNumericEffecterPdrData, Uint8Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
     EXPECT_EQ(1u, decodedPdr.hdr.record_handle);
     EXPECT_EQ(1u, decodedPdr.hdr.version);
     EXPECT_EQ(PLDM_NUMERIC_EFFECTER_PDR, decodedPdr.hdr.type);
@@ -5726,7 +5726,7 @@ TEST(decodeNumericEffecterPdrData, Uint8Test)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Sint8Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5800,7 +5800,7 @@ TEST(decodeNumericEffecterPdrData, Sint8Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_SINT8, decodedPdr.effecter_data_size);
     EXPECT_EQ(100, decodedPdr.max_settable.value_s8);
@@ -5815,7 +5815,7 @@ TEST(decodeNumericEffecterPdrData, Sint8Test)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Uint16Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5897,7 +5897,7 @@ TEST(decodeNumericEffecterPdrData, Uint16Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_UINT16, decodedPdr.effecter_data_size);
     EXPECT_EQ(4096u, decodedPdr.max_settable.value_u16);
@@ -5912,7 +5912,7 @@ TEST(decodeNumericEffecterPdrData, Uint16Test)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Sint16Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5994,7 +5994,7 @@ TEST(decodeNumericEffecterPdrData, Sint16Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_SINT16, decodedPdr.effecter_data_size);
     EXPECT_EQ(1000, decodedPdr.max_settable.value_s16);
@@ -6009,7 +6009,7 @@ TEST(decodeNumericEffecterPdrData, Sint16Test)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Uint32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -6105,7 +6105,7 @@ TEST(decodeNumericEffecterPdrData, Uint32Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_UINT32, decodedPdr.effecter_data_size);
 
@@ -6129,7 +6129,7 @@ TEST(decodeNumericEffecterPdrData, Uint32Test)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Sint32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -6225,7 +6225,7 @@ TEST(decodeNumericEffecterPdrData, Sint32Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_SINT32, decodedPdr.effecter_data_size);
 
     {
@@ -6248,7 +6248,7 @@ TEST(decodeNumericEffecterPdrData, Sint32Test)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Real32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -6345,7 +6345,7 @@ TEST(decodeNumericEffecterPdrData, Real32Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_SINT32, decodedPdr.effecter_data_size);
     EXPECT_FLOAT_EQ(1.0f, decodedPdr.state_transition_interval);

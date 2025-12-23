@@ -3032,7 +3032,7 @@ int decode_poll_for_platform_event_message_resp(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_numeric_effecter_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_effecter_value_pdr *pdr_value)
@@ -3042,21 +3042,21 @@ int decode_numeric_effecter_pdr_data(
 	int rc;
 
 	if (!pdr_data || !pdr_value) {
-		return PLDM_ERROR_INVALID_DATA;
+		return -EINVAL;
 	}
 
 	rc = pldm_msgbuf_init_errno(buf,
 				    PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH,
 				    pdr_data, pdr_data_length);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
 	rc = pldm_msgbuf_extract_value_pdr_hdr(
 		buf, &hdr, PLDM_PDR_NUMERIC_EFFECTER_PDR_MIN_LENGTH,
 		pdr_data_length);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
 	memcpy(&pdr_value->hdr, &hdr, sizeof(hdr));
@@ -3081,10 +3081,10 @@ int decode_numeric_effecter_pdr_data(
 
 	rc = pldm_msgbuf_extract(buf, pdr_value->effecter_data_size);
 	if (rc) {
-		return pldm_xlate_errno(pldm_msgbuf_discard(buf, rc));
+		return pldm_msgbuf_discard(buf, rc);
 	}
 	if (pdr_value->effecter_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
-		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
+		return pldm_msgbuf_discard(buf, -EINVAL);
 	}
 
 	pldm_msgbuf_extract(buf, pdr_value->resolution);
@@ -3101,10 +3101,10 @@ int decode_numeric_effecter_pdr_data(
 
 	rc = pldm_msgbuf_extract(buf, pdr_value->range_field_format);
 	if (rc) {
-		return pldm_xlate_errno(pldm_msgbuf_discard(buf, rc));
+		return pldm_msgbuf_discard(buf, rc);
 	}
 	if (pdr_value->range_field_format > PLDM_RANGE_FIELD_FORMAT_MAX) {
-		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
+		return pldm_msgbuf_discard(buf, -EINVAL);
 	}
 
 	pldm_msgbuf_extract(buf, pdr_value->range_field_support.byte);
@@ -3121,10 +3121,10 @@ int decode_numeric_effecter_pdr_data(
 
 	rc = pldm_msgbuf_complete_consumed(buf);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
-	return PLDM_SUCCESS;
+	return 0;
 }
 
 LIBPLDM_ABI_STABLE
@@ -3475,7 +3475,7 @@ int decode_pldm_entity_auxiliary_names_pdr_index(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_effecter_auxiliary_names_pdr(
 	const void *data, size_t data_length,
 	struct pldm_platform_effecter_auxiliary_names_pdr *pdr,
@@ -3518,7 +3518,7 @@ int decode_pldm_platform_effecter_auxiliary_names_pdr(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_effecter_auxiliary_name_from_iter(
 	struct pldm_platform_effecter_auxiliary_names_iter *iter,
 	struct pldm_platform_effecter_auxiliary_name *effecter)
@@ -3553,7 +3553,7 @@ int decode_pldm_platform_effecter_auxiliary_name_from_iter(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_effecter_aux_name_from_iter(
 	struct pldm_platform_effecter_aux_name_iter *iter,
 	struct pldm_platform_effecter_aux_name *entry)
@@ -4247,7 +4247,7 @@ int decode_pldm_platform_state_effecter_pdr_possible_states_from_iter(
 	return pldm_msgbuf_complete_consumed(ctx);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_pldm_platform_set_numeric_effecter_enable_req(
 	uint8_t instance_id,
 	const struct pldm_platform_set_numeric_effecter_enable_req *req,
@@ -4359,7 +4359,7 @@ int encode_pldm_platform_set_numeric_effecter_enable_resp(
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_set_numeric_effecter_enable_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code)
