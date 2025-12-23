@@ -28,6 +28,12 @@ Change categories:
 
 ### Changed
 
+- Stabilised
+    - `encode_pldm_platform_set_numeric_effecter_enable_req()`
+    - `decode_pldm_platform_set_numeric_effecter_enable_resp()`
+    - `decode_numeric_effecter_pdr_data()`
+    - `decode_pldm_effecter_auxiliary_name_from_iter()`
+
 ### Deprecated
 
 ### Removed
