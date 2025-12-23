@@ -35,19 +35,19 @@ $VAR1 = {
     'types.cpp' => 1
   },
   'SymbolInfo' => {
-    '107015' => {
-      'Class' => '106942',
+    '107047' => {
+      'Class' => '106974',
       'Header' => 'firmware_update.hpp',
       'Line' => '318',
       'MnglName' => '_ZN4pldm9fw_update13PackageParser5parseERKSt4spanIKhLm18446744073709551615EENS0_10PackagePinE',
       'Param' => {
         '0' => {
           'name' => 'pkg',
-          'type' => '107621'
+          'type' => '107653'
         },
         '1' => {
           'name' => 'pin',
-          'type' => '105206'
+          'type' => '105238'
         }
       },
       'Return' => '68669',
@@ -56,7 +56,7 @@ $VAR1 = {
       'SourceLine' => '235',
       'Static' => 1
     },
-    '111310' => {
+    '111342' => {
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'Line' => '275',
@@ -64,13 +64,13 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '109366'
+          'type' => '109398'
         }
       }
     },
-    '166696' => {
+    '166728' => {
       'Artificial' => 1,
-      'Class' => '106746',
+      'Class' => '106778',
       'Constructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -79,18 +79,18 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '109526'
+          'type' => '109558'
         },
         '1' => {
           'name' => 'p1',
-          'type' => '110085'
+          'type' => '110117'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '166697' => {
+    '166729' => {
       'Artificial' => 1,
-      'Class' => '106746',
+      'Class' => '106778',
       'Constructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -99,18 +99,18 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '109526'
+          'type' => '109558'
         },
         '1' => {
           'name' => 'p1',
-          'type' => '110085'
+          'type' => '110117'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '202281' => {
+    '205901' => {
       'Artificial' => 1,
-      'Class' => '106746',
+      'Class' => '106778',
       'Constructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -119,11 +119,11 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '109526'
+          'type' => '109558'
         },
         '1' => {
           'name' => 'p1',
-          'type' => '110070'
+          'type' => '110102'
         }
       },
       'Reg' => {
@@ -131,9 +131,9 @@ $VAR1 = {
       },
       'ShortName' => 'PackageParserError'
     },
-    '202282' => {
+    '205902' => {
       'Artificial' => 1,
-      'Class' => '106746',
+      'Class' => '106778',
       'Constructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -142,11 +142,11 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '109526'
+          'type' => '109558'
         },
         '1' => {
           'name' => 'p1',
-          'type' => '110070'
+          'type' => '110102'
         }
       },
       'Reg' => {
@@ -154,9 +154,9 @@ $VAR1 = {
       },
       'ShortName' => 'PackageParserError'
     },
-    '211687' => {
+    '215307' => {
       'Artificial' => 1,
-      'Class' => '106746',
+      'Class' => '106778',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -165,14 +165,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '109526'
+          'type' => '109558'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '211688' => {
+    '215308' => {
       'Artificial' => 1,
-      'Class' => '106746',
+      'Class' => '106778',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -181,13 +181,13 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '109526'
+          'type' => '109558'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '412378' => {
-      'Class' => '106530',
+    '415998' => {
+      'Class' => '106562',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'Line' => '275',
@@ -195,16 +195,16 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '109366'
+          'type' => '109398'
         }
       },
       'ShortName' => 'Package',
       'Source' => 'types.cpp',
       'SourceLine' => '421'
     },
-    '413554' => {
+    '417174' => {
       'Artificial' => 1,
-      'Class' => '105056',
+      'Class' => '105088',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -213,14 +213,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '413522'
+          'type' => '417142'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '413555' => {
+    '417175' => {
       'Artificial' => 1,
-      'Class' => '105056',
+      'Class' => '105088',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -229,14 +229,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '413522'
+          'type' => '417142'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '415825' => {
+    '419445' => {
       'Artificial' => 1,
-      'Class' => '104716',
+      'Class' => '104748',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -245,14 +245,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '415793'
+          'type' => '419413'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '415826' => {
+    '419446' => {
       'Artificial' => 1,
-      'Class' => '104716',
+      'Class' => '104748',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -261,14 +261,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '415793'
+          'type' => '419413'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '422615' => {
+    '426235' => {
       'Artificial' => 1,
-      'Class' => '104971',
+      'Class' => '105003',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -277,14 +277,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '422583'
+          'type' => '426203'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '422616' => {
+    '426236' => {
       'Artificial' => 1,
-      'Class' => '104971',
+      'Class' => '105003',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -293,14 +293,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '422583'
+          'type' => '426203'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '431186' => {
+    '434806' => {
       'Artificial' => 1,
-      'Class' => '104886',
+      'Class' => '104918',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -309,14 +309,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '431154'
+          'type' => '434774'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '431187' => {
+    '434807' => {
       'Artificial' => 1,
-      'Class' => '104886',
+      'Class' => '104918',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -325,14 +325,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '431154'
+          'type' => '434774'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '434589' => {
+    '438209' => {
       'Artificial' => 1,
-      'Class' => '104801',
+      'Class' => '104833',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -341,14 +341,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '434557'
+          'type' => '438177'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '434590' => {
+    '438210' => {
       'Artificial' => 1,
-      'Class' => '104801',
+      'Class' => '104833',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -357,14 +357,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '434557'
+          'type' => '438177'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '441617' => {
+    '445237' => {
       'Artificial' => 1,
-      'Class' => '104631',
+      'Class' => '104663',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -373,14 +373,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '441585'
+          'type' => '445205'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '441618' => {
+    '445238' => {
       'Artificial' => 1,
-      'Class' => '104631',
+      'Class' => '104663',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -389,14 +389,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '441585'
+          'type' => '445205'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '472629' => {
+    '476249' => {
       'Artificial' => 1,
-      'Class' => '106746',
+      'Class' => '106778',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -405,7 +405,7 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '109526'
+          'type' => '109558'
         }
       },
       'ShortName' => 'PackageParserError'
@@ -577,7 +577,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '96360'
+          'type' => '96392'
         }
       },
       'Type' => 'Class'
@@ -617,7 +617,7 @@ $VAR1 = {
       'Type' => 'Struct'
     },
     '6055' => {
-      'BaseType' => '97684',
+      'BaseType' => '97716',
       'Header' => 'alloc_traits.h',
       'Line' => '593',
       'Name' => 'std::allocator_traits<std::allocator<char> >::pointer',
@@ -666,7 +666,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_CharT',
-          'type' => '96360'
+          'type' => '96392'
         }
       },
       'Type' => 'Class'
@@ -710,7 +710,7 @@ $VAR1 = {
         '0' => {
           'name' => '_M_local_buf',
           'offset' => '0',
-          'type' => '101696'
+          'type' => '101728'
         },
         '1' => {
           'name' => '_M_allocated_capacity',
@@ -820,7 +820,7 @@ $VAR1 = {
       'Type' => 'Struct'
     },
     '15900' => {
-      'BaseType' => '104127',
+      'BaseType' => '104159',
       'Header' => 'stl_tree.h',
       'Line' => '109',
       'Name' => 'std::_Rb_tree_node_base::_Base_ptr',
@@ -1109,7 +1109,7 @@ $VAR1 = {
       'Type' => 'Struct'
     },
     '20162' => {
-      'BaseType' => '107371',
+      'BaseType' => '107403',
       'Header' => 'alloc_traits.h',
       'Line' => '593',
       'Name' => 'std::allocator_traits<std::allocator<unsigned char> >::pointer',
@@ -1303,7 +1303,7 @@ $VAR1 = {
       'Type' => 'Class'
     },
     '27689' => {
-      'BaseType' => '107416',
+      'BaseType' => '107448',
       'Header' => 'span',
       'Line' => '160',
       'Name' => 'std::span<unsigned char const, 18446744073709551615ul>::pointer',
@@ -1422,7 +1422,7 @@ $VAR1 = {
       'Type' => 'Struct'
     },
     '31558' => {
-      'BaseType' => '104367',
+      'BaseType' => '104399',
       'Header' => 'alloc_traits.h',
       'Line' => '593',
       'Name' => 'std::allocator_traits<std::allocator<unsigned long> >::pointer',
@@ -1554,7 +1554,7 @@ $VAR1 = {
     },
     '36489' => {
       'Base' => {
-        '80508' => {
+        '80567' => {
           'pos' => '0'
         }
       },
@@ -1819,7 +1819,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105250'
+          'type' => '105282'
         },
         '1' => {
           'key' => '_Dp',
@@ -1850,7 +1850,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105491'
+          'type' => '105523'
         }
       },
       'Type' => 'Struct'
@@ -1876,7 +1876,7 @@ $VAR1 = {
         '1' => {
           'name' => '_M_value',
           'offset' => '0',
-          'type' => '105491'
+          'type' => '105523'
         }
       },
       'Name' => 'union std::_Optional_payload_base<pldm::fw_update::ReferenceManifestData>::_Storage<pldm::fw_update::ReferenceManifestData>',
@@ -1886,7 +1886,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Up',
-          'type' => '105491'
+          'type' => '105523'
         }
       },
       'Type' => 'Union'
@@ -1906,7 +1906,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105491'
+          'type' => '105523'
         }
       },
       'Type' => 'Struct'
@@ -1928,7 +1928,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105491'
+          'type' => '105523'
         }
       },
       'Type' => 'Struct'
@@ -1986,7 +1986,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105491'
+          'type' => '105523'
         }
       },
       'Type' => 'Class'
@@ -2176,7 +2176,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105977'
+          'type' => '106009'
         }
       },
       'Type' => 'Class'
@@ -2195,7 +2195,7 @@ $VAR1 = {
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '105977'
+          'type' => '106009'
         }
       },
       'Type' => 'Class'
@@ -2216,7 +2216,7 @@ $VAR1 = {
       'Type' => 'Struct'
     },
     '51355' => {
-      'BaseType' => '108496',
+      'BaseType' => '108528',
       'Header' => 'alloc_traits.h',
       'Line' => '593',
       'Name' => 'std::allocator_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >::pointer',
@@ -2242,7 +2242,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105977'
+          'type' => '106009'
         },
         '1' => {
           'key' => '_Alloc',
@@ -2320,7 +2320,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105977'
+          'type' => '106009'
         }
       },
       'Type' => 'Class'
@@ -2341,7 +2341,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105689'
+          'type' => '105721'
         }
       },
       'Type' => 'Class'
@@ -2360,7 +2360,7 @@ $VAR1 = {
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '105689'
+          'type' => '105721'
         }
       },
       'Type' => 'Class'
@@ -2381,7 +2381,7 @@ $VAR1 = {
       'Type' => 'Struct'
     },
     '56555' => {
-      'BaseType' => '107666',
+      'BaseType' => '107698',
       'Header' => 'alloc_traits.h',
       'Line' => '593',
       'Name' => 'std::allocator_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >::pointer',
@@ -2407,7 +2407,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105689'
+          'type' => '105721'
         },
         '1' => {
           'key' => '_Alloc',
@@ -2485,7 +2485,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105689'
+          'type' => '105721'
         }
       },
       'Type' => 'Class'
@@ -2506,7 +2506,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '106259'
+          'type' => '106291'
         }
       },
       'Type' => 'Class'
@@ -2525,7 +2525,7 @@ $VAR1 = {
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '106259'
+          'type' => '106291'
         }
       },
       'Type' => 'Class'
@@ -2546,7 +2546,7 @@ $VAR1 = {
       'Type' => 'Struct'
     },
     '61755' => {
-      'BaseType' => '108676',
+      'BaseType' => '108708',
       'Header' => 'alloc_traits.h',
       'Line' => '593',
       'Name' => 'std::allocator_traits<std::allocator<pldm::fw_update::DownstreamDeviceIDRecord> >::pointer',
@@ -2572,7 +2572,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '106259'
+          'type' => '106291'
         },
         '1' => {
           'key' => '_Alloc',
@@ -2650,7 +2650,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '106259'
+          'type' => '106291'
         }
       },
       'Type' => 'Class'
@@ -2852,7 +2852,7 @@ $VAR1 = {
         },
         '1' => {
           'key' => '_Er',
-          'type' => '106746'
+          'type' => '106778'
         }
       },
       'Type' => 'Class'
@@ -2869,7 +2869,7 @@ $VAR1 = {
         '1' => {
           'name' => '_M_unex',
           'offset' => '0',
-          'type' => '106746'
+          'type' => '106778'
         }
       },
       'Name' => 'std::expected<std::unique_ptr<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >, pldm::fw_update::PackageParserError>::anon-union-expected-1353',
@@ -2889,7 +2889,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105250'
+          'type' => '105282'
         }
       },
       'Type' => 'Struct'
@@ -2912,7 +2912,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105250'
+          'type' => '105282'
         },
         '1' => {
           'key' => '_Dp',
@@ -2981,7 +2981,7 @@ $VAR1 = {
         '0' => {
           'name' => '_M_head_impl',
           'offset' => '0',
-          'type' => '107581'
+          'type' => '107613'
         }
       },
       'Name' => 'struct std::_Head_base<0ul, pldm::fw_update::DescriptorData*>',
@@ -2996,7 +2996,7 @@ $VAR1 = {
         },
         '1' => {
           'key' => '_Head',
-          'type' => '107581'
+          'type' => '107613'
         }
       },
       'Type' => 'Struct'
@@ -3025,7 +3025,7 @@ $VAR1 = {
         },
         '1' => {
           'key' => undef,
-          'type' => '107581'
+          'type' => '107613'
         }
       },
       'Type' => 'Struct'
@@ -3067,7 +3067,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '105250'
+          'type' => '105282'
         },
         '1' => {
           'key' => '_Dp',
@@ -3104,7 +3104,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '106530'
+          'type' => '106562'
         },
         '1' => {
           'key' => '_Dp',
@@ -3123,7 +3123,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '106530'
+          'type' => '106562'
         }
       },
       'Type' => 'Struct'
@@ -3146,7 +3146,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '106530'
+          'type' => '106562'
         },
         '1' => {
           'key' => '_Dp',
@@ -3215,7 +3215,7 @@ $VAR1 = {
         '0' => {
           'name' => '_M_head_impl',
           'offset' => '0',
-          'type' => '109361'
+          'type' => '109393'
         }
       },
       'Name' => 'struct std::_Head_base<0ul, pldm::fw_update::Package*>',
@@ -3230,7 +3230,7 @@ $VAR1 = {
         },
         '1' => {
           'key' => '_Head',
-          'type' => '109361'
+          'type' => '109393'
         }
       },
       'Type' => 'Struct'
@@ -3259,7 +3259,7 @@ $VAR1 = {
         },
         '1' => {
           'key' => undef,
-          'type' => '109361'
+          'type' => '109393'
         }
       },
       'Type' => 'Struct'
@@ -3301,7 +3301,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '106530'
+          'type' => '106562'
         },
         '1' => {
           'key' => '_Dp',
@@ -3310,7 +3310,7 @@ $VAR1 = {
       },
       'Type' => 'Struct'
     },
-    '80508' => {
+    '80567' => {
       'Copied' => 1,
       'Header' => 'stl_pair.h',
       'Line' => '278',
@@ -3615,7 +3615,7 @@ $VAR1 = {
         '0' => {
           'name' => '_M_storage',
           'offset' => '0',
-          'type' => '110690'
+          'type' => '110757'
         }
       },
       'Name' => 'struct __gnu_cxx::__aligned_membuf<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
@@ -3630,7 +3630,7 @@ $VAR1 = {
       },
       'Type' => 'Struct'
     },
-    '96176' => {
+    '96208' => {
       'BaseType' => '86978',
       'Header' => 'stddef.h',
       'Line' => '229',
@@ -3639,24 +3639,24 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '96188' => {
-      'BaseType' => '96176',
+    '96220' => {
+      'BaseType' => '96208',
       'Name' => 'size_t const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '96360' => {
+    '96392' => {
       'Name' => 'char',
       'Size' => '1',
       'Type' => 'Intrinsic'
     },
-    '97684' => {
-      'BaseType' => '96360',
+    '97716' => {
+      'BaseType' => '96392',
       'Name' => 'char*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '99517' => {
+    '99549' => {
       'BaseType' => '86990',
       'Header' => 'types.h',
       'Line' => '38',
@@ -3665,7 +3665,7 @@ $VAR1 = {
       'Size' => '1',
       'Type' => 'Typedef'
     },
-    '99541' => {
+    '99573' => {
       'BaseType' => '87002',
       'Header' => 'types.h',
       'Line' => '40',
@@ -3674,7 +3674,7 @@ $VAR1 = {
       'Size' => '2',
       'Type' => 'Typedef'
     },
-    '99570' => {
+    '99602' => {
       'BaseType' => '87014',
       'Header' => 'types.h',
       'Line' => '42',
@@ -3683,7 +3683,7 @@ $VAR1 = {
       'Size' => '4',
       'Type' => 'Typedef'
     },
-    '99594' => {
+    '99626' => {
       'BaseType' => '86978',
       'Header' => 'types.h',
       'Line' => '45',
@@ -3692,14 +3692,14 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '101696' => {
-      'BaseType' => '96360',
+    '101728' => {
+      'BaseType' => '96392',
       'Name' => 'char[16]',
       'Size' => '16',
       'Type' => 'Array'
     },
-    '101894' => {
-      'BaseType' => '99517',
+    '101926' => {
+      'BaseType' => '99549',
       'Header' => 'stdint-uintn.h',
       'Line' => '24',
       'Name' => 'uint8_t',
@@ -3707,14 +3707,14 @@ $VAR1 = {
       'Size' => '1',
       'Type' => 'Typedef'
     },
-    '101906' => {
-      'BaseType' => '101894',
+    '101938' => {
+      'BaseType' => '101926',
       'Name' => 'uint8_t const',
       'Size' => '1',
       'Type' => 'Const'
     },
-    '101911' => {
-      'BaseType' => '99541',
+    '101943' => {
+      'BaseType' => '99573',
       'Header' => 'stdint-uintn.h',
       'Line' => '25',
       'Name' => 'uint16_t',
@@ -3722,14 +3722,14 @@ $VAR1 = {
       'Size' => '2',
       'Type' => 'Typedef'
     },
-    '101923' => {
-      'BaseType' => '101911',
+    '101955' => {
+      'BaseType' => '101943',
       'Name' => 'uint16_t const',
       'Size' => '2',
       'Type' => 'Const'
     },
-    '101928' => {
-      'BaseType' => '99570',
+    '101960' => {
+      'BaseType' => '99602',
       'Header' => 'stdint-uintn.h',
       'Line' => '26',
       'Name' => 'uint32_t',
@@ -3737,14 +3737,14 @@ $VAR1 = {
       'Size' => '4',
       'Type' => 'Typedef'
     },
-    '101940' => {
-      'BaseType' => '101928',
+    '101972' => {
+      'BaseType' => '101960',
       'Name' => 'uint32_t const',
       'Size' => '4',
       'Type' => 'Const'
     },
-    '101945' => {
-      'BaseType' => '99594',
+    '101977' => {
+      'BaseType' => '99626',
       'Header' => 'stdint-uintn.h',
       'Line' => '27',
       'Name' => 'uint64_t',
@@ -3752,19 +3752,19 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '102888' => {
+    '102920' => {
       'Header' => 'pldm_types.h',
       'Line' => '177',
       'Memb' => {
         '0' => {
           'name' => 'ptr',
           'offset' => '0',
-          'type' => '102934'
+          'type' => '102966'
         },
         '1' => {
           'name' => 'length',
           'offset' => '8',
-          'type' => '96176'
+          'type' => '96208'
         }
       },
       'Name' => 'struct variable_field',
@@ -3772,31 +3772,31 @@ $VAR1 = {
       'Size' => '16',
       'Type' => 'Struct'
     },
-    '102929' => {
-      'BaseType' => '102888',
+    '102961' => {
+      'BaseType' => '102920',
       'Name' => 'struct variable_field const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '102934' => {
-      'BaseType' => '101906',
+    '102966' => {
+      'BaseType' => '101938',
       'Name' => 'uint8_t const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '104127' => {
+    '104159' => {
       'BaseType' => '15874',
       'Name' => 'struct std::_Rb_tree_node_base*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '104367' => {
+    '104399' => {
       'BaseType' => '86978',
       'Name' => 'unsigned long*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '104429' => {
+    '104461' => {
       'Header' => 'types.hpp',
       'Line' => '18',
       'Name' => 'struct libpldm::NonCopyableNonMoveable',
@@ -3804,7 +3804,7 @@ $VAR1 = {
       'Size' => '1',
       'Type' => 'Struct'
     },
-    '104631' => {
+    '104663' => {
       'Header' => 'types.hpp',
       'Line' => '33',
       'Memb' => {
@@ -3812,13 +3812,13 @@ $VAR1 = {
           'access' => 'protected',
           'name' => 'struct_size',
           'offset' => '0',
-          'type' => '96188'
+          'type' => '96220'
         },
         '1' => {
           'access' => 'protected',
           'name' => 'reserved_1',
           'offset' => '8',
-          'type' => '101945'
+          'type' => '101977'
         }
       },
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>',
@@ -3827,18 +3827,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => 'Derived',
-          'type' => '105250'
+          'type' => '105282'
         }
       },
       'Type' => 'Struct'
     },
-    '104711' => {
-      'BaseType' => '104631',
+    '104743' => {
+      'BaseType' => '104663',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '104716' => {
+    '104748' => {
       'Header' => 'types.hpp',
       'Line' => '33',
       'Memb' => {
@@ -3846,13 +3846,13 @@ $VAR1 = {
           'access' => 'protected',
           'name' => 'struct_size',
           'offset' => '0',
-          'type' => '96188'
+          'type' => '96220'
         },
         '1' => {
           'access' => 'protected',
           'name' => 'reserved_1',
           'offset' => '8',
-          'type' => '101945'
+          'type' => '101977'
         }
       },
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ReferenceManifestData>',
@@ -3861,12 +3861,12 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => 'Derived',
-          'type' => '105491'
+          'type' => '105523'
         }
       },
       'Type' => 'Struct'
     },
-    '104801' => {
+    '104833' => {
       'Header' => 'types.hpp',
       'Line' => '33',
       'Memb' => {
@@ -3874,13 +3874,13 @@ $VAR1 = {
           'access' => 'protected',
           'name' => 'struct_size',
           'offset' => '0',
-          'type' => '96188'
+          'type' => '96220'
         },
         '1' => {
           'access' => 'protected',
           'name' => 'reserved_1',
           'offset' => '8',
-          'type' => '101945'
+          'type' => '101977'
         }
       },
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>',
@@ -3889,18 +3889,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => 'Derived',
-          'type' => '105689'
+          'type' => '105721'
         }
       },
       'Type' => 'Struct'
     },
-    '104881' => {
-      'BaseType' => '104801',
+    '104913' => {
+      'BaseType' => '104833',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '104886' => {
+    '104918' => {
       'Header' => 'types.hpp',
       'Line' => '33',
       'Memb' => {
@@ -3908,13 +3908,13 @@ $VAR1 = {
           'access' => 'protected',
           'name' => 'struct_size',
           'offset' => '0',
-          'type' => '96188'
+          'type' => '96220'
         },
         '1' => {
           'access' => 'protected',
           'name' => 'reserved_1',
           'offset' => '8',
-          'type' => '101945'
+          'type' => '101977'
         }
       },
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>',
@@ -3923,18 +3923,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => 'Derived',
-          'type' => '105977'
+          'type' => '106009'
         }
       },
       'Type' => 'Struct'
     },
-    '104966' => {
-      'BaseType' => '104886',
+    '104998' => {
+      'BaseType' => '104918',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '104971' => {
+    '105003' => {
       'Header' => 'types.hpp',
       'Line' => '33',
       'Memb' => {
@@ -3942,13 +3942,13 @@ $VAR1 = {
           'access' => 'protected',
           'name' => 'struct_size',
           'offset' => '0',
-          'type' => '96188'
+          'type' => '96220'
         },
         '1' => {
           'access' => 'protected',
           'name' => 'reserved_1',
           'offset' => '8',
-          'type' => '101945'
+          'type' => '101977'
         }
       },
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DownstreamDeviceIDRecord>',
@@ -3957,18 +3957,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => 'Derived',
-          'type' => '106259'
+          'type' => '106291'
         }
       },
       'Type' => 'Struct'
     },
-    '105051' => {
-      'BaseType' => '104971',
+    '105083' => {
+      'BaseType' => '105003',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DownstreamDeviceIDRecord>const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '105056' => {
+    '105088' => {
       'Header' => 'types.hpp',
       'Line' => '33',
       'Memb' => {
@@ -3976,13 +3976,13 @@ $VAR1 = {
           'access' => 'protected',
           'name' => 'struct_size',
           'offset' => '0',
-          'type' => '96188'
+          'type' => '96220'
         },
         '1' => {
           'access' => 'protected',
           'name' => 'reserved_1',
           'offset' => '8',
-          'type' => '101945'
+          'type' => '101977'
         }
       },
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>',
@@ -3991,18 +3991,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => 'Derived',
-          'type' => '106530'
+          'type' => '106562'
         }
       },
       'Type' => 'Struct'
     },
-    '105136' => {
-      'BaseType' => '105056',
+    '105168' => {
+      'BaseType' => '105088',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '105206' => {
+    '105238' => {
       'Header' => 'firmware_update.hpp',
       'Line' => '27',
       'Memb' => {
@@ -4028,13 +4028,13 @@ $VAR1 = {
       'Size' => '4',
       'Type' => 'Enum'
     },
-    '105250' => {
+    '105282' => {
       'Base' => {
-        '104429' => {
+        '104461' => {
           'access' => 'private',
           'pos' => '1'
         },
-        '104631' => {
+        '104663' => {
           'pos' => '0'
         }
       },
@@ -4057,13 +4057,13 @@ $VAR1 = {
       'Size' => '80',
       'Type' => 'Struct'
     },
-    '105491' => {
+    '105523' => {
       'Base' => {
-        '104429' => {
+        '104461' => {
           'access' => 'private',
           'pos' => '1'
         },
-        '104716' => {
+        '104748' => {
           'pos' => '0'
         }
       },
@@ -4073,7 +4073,7 @@ $VAR1 = {
         '0' => {
           'name' => 'SVHID',
           'offset' => '22',
-          'type' => '101906'
+          'type' => '101938'
         },
         '1' => {
           'name' => 'vendorID',
@@ -4091,13 +4091,13 @@ $VAR1 = {
       'Size' => '72',
       'Type' => 'Struct'
     },
-    '105689' => {
+    '105721' => {
       'Base' => {
-        '104429' => {
+        '104461' => {
           'access' => 'private',
           'pos' => '1'
         },
-        '104801' => {
+        '104833' => {
           'pos' => '0'
         }
       },
@@ -4107,17 +4107,17 @@ $VAR1 = {
         '0' => {
           'name' => 'componentClassification',
           'offset' => '22',
-          'type' => '101923'
+          'type' => '101955'
         },
         '1' => {
           'name' => 'componentIdentifier',
           'offset' => '24',
-          'type' => '101923'
+          'type' => '101955'
         },
         '2' => {
           'name' => 'compComparisonStamp',
           'offset' => '32',
-          'type' => '101940'
+          'type' => '101972'
         },
         '3' => {
           'name' => 'componentOptions',
@@ -4132,7 +4132,7 @@ $VAR1 = {
         '5' => {
           'name' => 'componentLocation',
           'offset' => '64',
-          'type' => '102929'
+          'type' => '102961'
         },
         '6' => {
           'name' => 'componentVersion',
@@ -4150,13 +4150,13 @@ $VAR1 = {
       'Size' => '112',
       'Type' => 'Struct'
     },
-    '105977' => {
+    '106009' => {
       'Base' => {
-        '104429' => {
+        '104461' => {
           'access' => 'private',
           'pos' => '1'
         },
-        '104886' => {
+        '104918' => {
           'pos' => '0'
         }
       },
@@ -4199,13 +4199,13 @@ $VAR1 = {
       'Size' => '232',
       'Type' => 'Struct'
     },
-    '106259' => {
+    '106291' => {
       'Base' => {
-        '104429' => {
+        '104461' => {
           'access' => 'private',
           'pos' => '1'
         },
-        '104971' => {
+        '105003' => {
           'pos' => '0'
         }
       },
@@ -4253,13 +4253,13 @@ $VAR1 = {
       'Size' => '248',
       'Type' => 'Struct'
     },
-    '106530' => {
+    '106562' => {
       'Base' => {
-        '104429' => {
+        '104461' => {
           'access' => 'private',
           'pos' => '1'
         },
-        '105056' => {
+        '105088' => {
           'pos' => '0'
         }
       },
@@ -4287,13 +4287,13 @@ $VAR1 = {
       'Size' => '88',
       'Type' => 'Struct'
     },
-    '106741' => {
-      'BaseType' => '106530',
+    '106773' => {
+      'BaseType' => '106562',
       'Name' => 'struct pldm::fw_update::Package const',
       'Size' => '88',
       'Type' => 'Const'
     },
-    '106746' => {
+    '106778' => {
       'Header' => 'firmware_update.hpp',
       'Line' => '292',
       'Memb' => {
@@ -4313,15 +4313,15 @@ $VAR1 = {
       'Size' => '40',
       'Type' => 'Class'
     },
-    '106937' => {
-      'BaseType' => '106746',
+    '106969' => {
+      'BaseType' => '106778',
       'Name' => 'pldm::fw_update::PackageParserError const',
       'Size' => '40',
       'Type' => 'Const'
     },
-    '106942' => {
+    '106974' => {
       'Base' => {
-        '104429' => {
+        '104461' => {
           'pos' => '0'
         }
       },
@@ -4332,242 +4332,242 @@ $VAR1 = {
       'Size' => '1',
       'Type' => 'Class'
     },
-    '107181' => {
-      'BaseType' => '104711',
+    '107213' => {
+      'BaseType' => '104743',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '107371' => {
+    '107403' => {
       'BaseType' => '86990',
       'Name' => 'unsigned char*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '107416' => {
+    '107448' => {
       'BaseType' => '86997',
       'Name' => 'unsigned char const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '107581' => {
-      'BaseType' => '105250',
+    '107613' => {
+      'BaseType' => '105282',
       'Name' => 'struct pldm::fw_update::DescriptorData*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '107621' => {
+    '107653' => {
       'BaseType' => '28308',
       'Name' => 'std::span<unsigned char const, 18446744073709551615ul>const&',
       'Size' => '8',
       'Type' => 'Ref'
     },
-    '107636' => {
-      'BaseType' => '104881',
+    '107668' => {
+      'BaseType' => '104913',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '107666' => {
-      'BaseType' => '105689',
+    '107698' => {
+      'BaseType' => '105721',
       'Name' => 'struct pldm::fw_update::ComponentImageInfo*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '107696' => {
-      'BaseType' => '104966',
+    '107728' => {
+      'BaseType' => '104998',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '108496' => {
-      'BaseType' => '105977',
+    '108528' => {
+      'BaseType' => '106009',
       'Name' => 'struct pldm::fw_update::FirmwareDeviceIDRecord*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '108526' => {
-      'BaseType' => '105051',
+    '108558' => {
+      'BaseType' => '105083',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DownstreamDeviceIDRecord>const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '108676' => {
-      'BaseType' => '106259',
+    '108708' => {
+      'BaseType' => '106291',
       'Name' => 'struct pldm::fw_update::DownstreamDeviceIDRecord*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '108711' => {
-      'BaseType' => '105136',
+    '108743' => {
+      'BaseType' => '105168',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '109361' => {
-      'BaseType' => '106530',
+    '109393' => {
+      'BaseType' => '106562',
       'Name' => 'struct pldm::fw_update::Package*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '109366' => {
-      'BaseType' => '109361',
+    '109398' => {
+      'BaseType' => '109393',
       'Name' => 'struct pldm::fw_update::Package*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '109376' => {
-      'BaseType' => '106741',
+    '109408' => {
+      'BaseType' => '106773',
       'Name' => 'struct pldm::fw_update::Package const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '109521' => {
-      'BaseType' => '106746',
+    '109553' => {
+      'BaseType' => '106778',
       'Name' => 'pldm::fw_update::PackageParserError*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '109526' => {
-      'BaseType' => '109521',
+    '109558' => {
+      'BaseType' => '109553',
       'Name' => 'pldm::fw_update::PackageParserError*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '109531' => {
-      'BaseType' => '106942',
+    '109563' => {
+      'BaseType' => '106974',
       'Name' => 'pldm::fw_update::PackageParser*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '109536' => {
-      'BaseType' => '109531',
+    '109568' => {
+      'BaseType' => '109563',
       'Name' => 'pldm::fw_update::PackageParser*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '110070' => {
-      'BaseType' => '106937',
+    '110102' => {
+      'BaseType' => '106969',
       'Name' => 'pldm::fw_update::PackageParserError const&',
       'Size' => '8',
       'Type' => 'Ref'
     },
-    '110085' => {
-      'BaseType' => '106746',
+    '110117' => {
+      'BaseType' => '106778',
       'Name' => 'pldm::fw_update::PackageParserError&&',
       'Size' => '8',
       'Type' => 'RvalueRef'
     },
-    '110690' => {
+    '110757' => {
       'BaseType' => '86990',
       'Name' => 'unsigned char[16]',
       'Size' => '16',
       'Type' => 'Array'
     },
-    '333752' => {
-      'BaseType' => '107181',
+    '337372' => {
+      'BaseType' => '107213',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>const*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '334237' => {
-      'BaseType' => '107636',
+    '337857' => {
+      'BaseType' => '107668',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>const*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '334302' => {
-      'BaseType' => '107696',
+    '337922' => {
+      'BaseType' => '107728',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>const*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '335157' => {
-      'BaseType' => '108526',
+    '338777' => {
+      'BaseType' => '108558',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DownstreamDeviceIDRecord>const*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '335337' => {
-      'BaseType' => '108711',
+    '338957' => {
+      'BaseType' => '108743',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>const*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '336022' => {
-      'BaseType' => '109376',
+    '339642' => {
+      'BaseType' => '109408',
       'Name' => 'struct pldm::fw_update::Package const*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '413517' => {
-      'BaseType' => '105056',
+    '417137' => {
+      'BaseType' => '105088',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '413522' => {
-      'BaseType' => '413517',
+    '417142' => {
+      'BaseType' => '417137',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '415788' => {
-      'BaseType' => '104716',
+    '419408' => {
+      'BaseType' => '104748',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ReferenceManifestData>*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '415793' => {
-      'BaseType' => '415788',
+    '419413' => {
+      'BaseType' => '419408',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ReferenceManifestData>*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '422578' => {
-      'BaseType' => '104971',
+    '426198' => {
+      'BaseType' => '105003',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DownstreamDeviceIDRecord>*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '422583' => {
-      'BaseType' => '422578',
+    '426203' => {
+      'BaseType' => '426198',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DownstreamDeviceIDRecord>*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '431149' => {
-      'BaseType' => '104886',
+    '434769' => {
+      'BaseType' => '104918',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '431154' => {
-      'BaseType' => '431149',
+    '434774' => {
+      'BaseType' => '434769',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '434552' => {
-      'BaseType' => '104801',
+    '438172' => {
+      'BaseType' => '104833',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '434557' => {
-      'BaseType' => '434552',
+    '438177' => {
+      'BaseType' => '438172',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '441580' => {
-      'BaseType' => '104631',
+    '445200' => {
+      'BaseType' => '104663',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '441585' => {
-      'BaseType' => '441580',
+    '445205' => {
+      'BaseType' => '445200',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>*const',
       'Size' => '8',
       'Type' => 'Const'
