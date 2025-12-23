@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cfb29ca_1a9440a4",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-23T10:43:29Z",
+      "side": 1,
+      "message": "I have renamed this in the latest patch according to your comments.",
+      "parentUuid": "49bc654f_db276256",
+      "revId": "05e07da8e5b72ad11ffeb1d1a77cc4108f33eda3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbfacf23_1b45970f",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-12-16T01:32:53Z",
       "side": 1,
       "message": "API must be first fixed to conform to current expectations, at least returning negative errno values rather than PLDM completion codes.",
+      "revId": "05e07da8e5b72ad11ffeb1d1a77cc4108f33eda3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb32a706_5b2a0d46",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2972,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-23T10:43:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbfacf23_1b45970f",
       "revId": "05e07da8e5b72ad11ffeb1d1a77cc4108f33eda3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cca67b62_0ed91f28",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3635,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-23T10:43:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21ba2ebe_84693278",
+      "revId": "05e07da8e5b72ad11ffeb1d1a77cc4108f33eda3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99241cc9_36e3f4a0",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-12-16T01:32:53Z",
       "side": 1,
       "message": "This seems odd.\n\nAlso, please make sure that tests that must be guarded are _individually_ guarded (i.e. the macro guard doesn\u0027t span multiple test method definitions).",
+      "revId": "05e07da8e5b72ad11ffeb1d1a77cc4108f33eda3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "606a888a_0003a350",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2025-12-23T10:43:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99241cc9_36e3f4a0",
       "revId": "05e07da8e5b72ad11ffeb1d1a77cc4108f33eda3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
