@@ -2790,6 +2790,9 @@ int encode_set_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
  *         message body
  *  @param[in] pdr_data_length - Length of pdr data
  *  @param[out] pdr_value - the numeric effecter PDR data struct
+ *  @return 0 on success, negative errno value on failure:
+ *          - -EINVAL: pdr_data or pdr_value is NULL, or invalid data in PDR
+ *          - -EOVERFLOW: pdr_data_length is insufficient for PDR content
  */
 int decode_numeric_effecter_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
