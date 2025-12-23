@@ -978,7 +978,7 @@ TEST(SetNumericEffecterValue, testBadEncodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#ifdef LIBPLDM_API_STABLE
 TEST(SetNumericEffecterEnable, testGoodEncodeRequest)
 {
     struct pldm_platform_set_numeric_effecter_enable_req req = {
@@ -1117,7 +1117,7 @@ TEST(SetNumericEffecterEnable, testGoodEncodeRequestAllOperationalStates)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#ifdef LIBPLDM_API_STABLE
 TEST(DecodeSetNumericEffecterEnableReq, testGoodDecode)
 {
     std::array<uint8_t,
@@ -1192,7 +1192,7 @@ TEST(DecodeSetNumericEffecterEnableReq, testBadDecodeInvalidPayloadLength)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#ifdef LIBPLDM_API_STABLE
 TEST(EncodeSetNumericEffecterEnableResp, testGoodEncode)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -1290,7 +1290,7 @@ TEST(EncodeSetNumericEffecterEnableResp, testGoodEncodeAllCompletionCodes)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#ifdef LIBPLDM_API_STABLE
 TEST(DecodeSetNumericEffecterEnableResp, testGoodDecode)
 {
     std::array<uint8_t,
@@ -5415,7 +5415,7 @@ TEST(decodeNumericSensorPdrDataDeathTest, InvalidSizeTest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#ifdef LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Uint8Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5529,7 +5529,7 @@ TEST(decodeNumericEffecterPdrData, Uint8Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#ifdef LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Sint8Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5618,7 +5618,7 @@ TEST(decodeNumericEffecterPdrData, Sint8Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#ifdef LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Uint16Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5715,7 +5715,7 @@ TEST(decodeNumericEffecterPdrData, Uint16Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#ifdef LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Sint16Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5812,7 +5812,7 @@ TEST(decodeNumericEffecterPdrData, Sint16Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#ifdef LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Uint32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5923,7 +5923,7 @@ TEST(decodeNumericEffecterPdrData, Uint32Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#ifdef LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Sint32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -6033,7 +6033,7 @@ TEST(decodeNumericEffecterPdrData, Sint32Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#ifdef LIBPLDM_API_STABLE
 TEST(decodeNumericEffecterPdrData, Real32Test)
 {
     std::vector<uint8_t> pdr1{
