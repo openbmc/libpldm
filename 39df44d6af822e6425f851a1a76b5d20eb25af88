@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7cd67fe_64e79e59",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2026-01-08T10:23:35Z",
+      "side": 1,
+      "message": "A type needs to end with suffix _t",
+      "range": {
+        "startLine": 20,
+        "startChar": 17,
+        "endLine": 20,
+        "endChar": 23
+      },
+      "revId": "39df44d6af822e6425f851a1a76b5d20eb25af88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
