@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae984721_3eedd797",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-12T16:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59a69010_f794f294",
+      "revId": "3b6e9a69116bd7814f2bce27cc6abfa4f00c4537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2290f9d3_d755d4a6",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-01-12T04:50:22Z",
       "side": 1,
       "message": "DSP0248 v1.3.0 22.2 allows a 64-bit effecter, which makes this 11, not 7?",
+      "revId": "3b6e9a69116bd7814f2bce27cc6abfa4f00c4537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a741a0c7_cdc63f95",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-12T16:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2290f9d3_d755d4a6",
       "revId": "3b6e9a69116bd7814f2bce27cc6abfa4f00c4537",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
