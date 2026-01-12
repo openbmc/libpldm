@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a46b7a7_dd3c2d30",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2026-01-12T06:31:22Z",
+      "side": 1,
+      "message": "So, we could directly include the mctp.h header file here and use the struct. Or should we re-define it?",
+      "parentUuid": "db540d14_78cd430a",
+      "revId": "14b904472c390f5558dcd46556408ac455423f99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14bc1767_ed13dab7",
         "filename": "src/transport/af-mctp.c",
         "patchSetId": 6
@@ -117,6 +135,24 @@
       "writtenOn": "2026-01-12T04:29:52Z",
       "side": 1,
       "message": "I think given we translate into TID space, which is not currently segmented in anyway, it might be worth avoiding introducing a new type into the public API to hold these two values. I think we can keep them separate as they are now (and in the case of the caller running under linux, they can unpack them from the `struct mctp_fq_addr` instance if they have one for the purpose of the call).",
+      "parentUuid": "8cd7b2af_d21b2981",
+      "revId": "14b904472c390f5558dcd46556408ac455423f99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3a4a263_57744039",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2026-01-12T06:31:22Z",
+      "side": 1,
+      "message": "I am ok either way.\n\nMaybe we can consider like this. \nIf we are re-using the struct from linux/mctp.h then probably we should avoid exposing it in public API. Otherwise, if it is going to be a libpldm defined struct, then we could expose the struct itself.",
       "parentUuid": "8cd7b2af_d21b2981",
       "revId": "14b904472c390f5558dcd46556408ac455423f99",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
