@@ -16,6 +16,92 @@
       "message": "@chaul@amperecomputing.com - Can you please re-review this?",
       "revId": "0264af85d240dda5bc542a107ce26e2803f1bce6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0725e9f_713846c3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2499,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:56:32Z",
+      "side": 1,
+      "message": "The msgbuf APIs handle prevention of overrun for us. This can be dropped.",
+      "range": {
+        "startLine": 2475,
+        "startChar": 1,
+        "endLine": 2499,
+        "endChar": 2
+      },
+      "revId": "0264af85d240dda5bc542a107ce26e2803f1bce6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "582b78b2_2d3716ff",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2562,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:56:32Z",
+      "side": 1,
+      "message": "Consider adding this implementation to the platform-specific msgbuf APIs in `src/msgbuf/platform.h`",
+      "range": {
+        "startLine": 2526,
+        "startChar": 1,
+        "endLine": 2562,
+        "endChar": 2
+      },
+      "revId": "0264af85d240dda5bc542a107ce26e2803f1bce6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1f0ada0_4911c878",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2566,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:56:32Z",
+      "side": 1,
+      "message": "This is unnecessary as it\u0027s handled by the `pldm_msgbuf_complete()` below.",
+      "range": {
+        "startLine": 2564,
+        "startChar": 1,
+        "endLine": 2566,
+        "endChar": 2
+      },
+      "revId": "0264af85d240dda5bc542a107ce26e2803f1bce6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b26d1a14_ea792e09",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2568,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:56:32Z",
+      "side": 1,
+      "message": "This should be `pldm_msgbuf_complete_consumed()` for compatibility. But you\u0027ll also need to use `pldm_xlate_errno()` from `src/api.h` throughout to avoid changing the return values.",
+      "revId": "0264af85d240dda5bc542a107ce26e2803f1bce6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
