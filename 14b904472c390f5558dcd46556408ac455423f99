@@ -174,6 +174,24 @@
       "parentUuid": "8cd7b2af_d21b2981",
       "revId": "14b904472c390f5558dcd46556408ac455423f99",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ac22efd_d1bae13f",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2026-01-12T10:53:33Z",
+      "side": 1,
+      "message": "I missed Andrew\u0027s reply earlier.\nAs I understand, we are going ahead with separate net \u0026 eid.",
+      "parentUuid": "b3a4a263_57744039",
+      "revId": "14b904472c390f5558dcd46556408ac455423f99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
