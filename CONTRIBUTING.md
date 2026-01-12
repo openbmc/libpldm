@@ -263,6 +263,23 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 
 - [ ] All enum members must be prefixed with the type name
 
+- [ ] I haven't added new `typedef`s, unless:
+  - [ ] I already plan to rename the underlying type in the future
+    - The common motivation for this is that there already exists a type of the
+      desired name, and we need to first deprecate its use and then remove it
+      before completing the rename.
+
+  - [ ] The API must abstract over the platform-specific types, and there are no
+        other appropriate types defined.
+
+- [ ] My `typedef` is not suffixed with `_t`
+  - The entire `_t`-suffix namespace is [reserved by
+    POSIX][ieee-1003.1-2024-namespace], on top of the `int[0-9a-z_]*_t` and
+    `uint[0-9a-z_]*_t` reservations from the C standard.
+
+[ieee-1003.1-2024-namespace]:
+  https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_02_02
+
 ### API design
 
 - [ ] If I've added support for a new PLDM message type, then I've defined both
