@@ -40,6 +40,7 @@ ssize_t ver2str(const ver32_t *version, char *buffer, size_t buffer_size);
  *  @return the decimal number
  */
 uint8_t bcd2dec8(uint8_t bcd);
+uint8_t pldm_bcd_bcd2dec8(uint8_t bcd);
 
 /** @brief Convert decimal number(uint8_t) to bcd
  *  @param[in] dec - decimal number

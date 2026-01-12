@@ -226,11 +226,11 @@ TEST(SetDateTime, testGoodEncodeRequset)
     struct pldm_set_date_time_req* req =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_date_time_req*>(request->payload);
-    EXPECT_EQ(seconds, bcd2dec8(req->seconds));
-    EXPECT_EQ(minutes, bcd2dec8(req->minutes));
-    EXPECT_EQ(hours, bcd2dec8(req->hours));
-    EXPECT_EQ(day, bcd2dec8(req->day));
-    EXPECT_EQ(month, bcd2dec8(req->month));
+    EXPECT_EQ(seconds, pldm_bcd_bcd2dec8(req->seconds));
+    EXPECT_EQ(minutes, pldm_bcd_bcd2dec8(req->minutes));
+    EXPECT_EQ(hours, pldm_bcd_bcd2dec8(req->hours));
+    EXPECT_EQ(day, pldm_bcd_bcd2dec8(req->day));
+    EXPECT_EQ(month, pldm_bcd_bcd2dec8(req->month));
     EXPECT_EQ(year, bcd2dec16(le16toh(req->year)));
 }
 

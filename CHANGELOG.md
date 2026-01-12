@@ -93,6 +93,8 @@ Change categories:
 
 ### Deprecated
 
+- `bcd2dec8`: Function symbol has been renamed to `pldm_bcd_bcd2dec8()`.
+
 ### Removed
 
 ### Fixed

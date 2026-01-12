@@ -147,11 +147,11 @@ int decode_set_date_time_req(const struct pldm_msg *msg, size_t payload_length,
 	const struct pldm_set_date_time_req *request =
 		(struct pldm_set_date_time_req *)msg->payload;
 
-	*seconds = bcd2dec8(request->seconds);
-	*minutes = bcd2dec8(request->minutes);
-	*hours = bcd2dec8(request->hours);
-	*day = bcd2dec8(request->day);
-	*month = bcd2dec8(request->month);
+	*seconds = pldm_bcd_bcd2dec8(request->seconds);
+	*minutes = pldm_bcd_bcd2dec8(request->minutes);
+	*hours = pldm_bcd_bcd2dec8(request->hours);
+	*day = pldm_bcd_bcd2dec8(request->day);
+	*month = pldm_bcd_bcd2dec8(request->month);
 	*year = bcd2dec16(le16toh(request->year));
 
 	if (!is_time_legal(*seconds, *minutes, *hours, *day, *month, *year)) {

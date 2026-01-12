@@ -64,7 +64,7 @@ ssize_t ver2str(const ver32_t *version, char *buffer, size_t buffer_size)
 }
 
 LIBPLDM_ABI_STABLE
-uint8_t bcd2dec8(uint8_t bcd)
+uint8_t pldm_bcd_bcd2dec8(uint8_t bcd)
 {
 	return (bcd >> 4) * 10 + (bcd & 0x0f);
 }
@@ -78,7 +78,8 @@ uint8_t dec2bcd8(uint8_t dec)
 LIBPLDM_ABI_STABLE
 uint16_t bcd2dec16(uint16_t bcd)
 {
-	return bcd2dec8(bcd >> 8) * 100 + bcd2dec8(bcd & 0xff);
+	return pldm_bcd_bcd2dec8(bcd >> 8) * 100 +
+	       pldm_bcd_bcd2dec8(bcd & 0xff);
 }
 
 LIBPLDM_ABI_STABLE
