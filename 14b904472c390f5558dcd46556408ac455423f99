@@ -20,6 +20,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7fa14f6_8ddfb84c",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:29:52Z",
+      "side": 1,
+      "message": "I prefer we avoid the typedef. I\u0027ve added a new entry to the contributing checklist covering some of the reasons:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/86562/1/CONTRIBUTING.md",
+      "revId": "14b904472c390f5558dcd46556408ac455423f99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49fe0879_89644cec",
+        "filename": "include/libpldm/transport/af-mctp.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:29:52Z",
+      "side": 1,
+      "message": "I generally prefer we take an incremental approach to fixing APIs: Introduce a new function with a different symbol name, deprecate the existing function, switch known consumers to the new function, then remove the old one.\n\nIt was certainly an oversight that the network wasn\u0027t included as a parameter. How about `pldm_transport_af_mctp_map_tid_fqe()`, where `fqe` means \"fully-qualified endpoint\"?",
+      "revId": "14b904472c390f5558dcd46556408ac455423f99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db540d14_78cd430a",
         "filename": "src/transport/af-mctp.c",
         "patchSetId": 6
@@ -66,6 +100,24 @@
       "side": 1,
       "message": "... or maybe this is more a question of the public API changes. Do we want to represent the (net, eid) as a common structure in the API too, or keep separate (as you have done here)?",
       "parentUuid": "14bc1767_ed13dab7",
+      "revId": "14b904472c390f5558dcd46556408ac455423f99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36d8b758_50d31436",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:29:52Z",
+      "side": 1,
+      "message": "I think given we translate into TID space, which is not currently segmented in anyway, it might be worth avoiding introducing a new type into the public API to hold these two values. I think we can keep them separate as they are now (and in the case of the caller running under linux, they can unpack them from the `struct mctp_fq_addr` instance if they have one for the purpose of the call).",
+      "parentUuid": "8cd7b2af_d21b2981",
       "revId": "14b904472c390f5558dcd46556408ac455423f99",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
