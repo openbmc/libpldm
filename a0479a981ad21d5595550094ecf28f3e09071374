@@ -222,6 +222,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4d14d22_962e5e59",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T05:19:08Z",
+      "side": 1,
+      "message": "The problem I have with that is that the caller could be holding any old byte buffer, not necessarily anything that represents the PDR. Designing the API in the way you suggest doesn\u0027t prevent the caller from doing the wrong thing.\n\nIf the caller is already doing the wrong thing wrt to types then we shouldn\u0027t design _new_ APIs that continue to enable that.\n\nIf that forces the use of reinterpret_cast there then I think that\u0027s fair, it\u0027s a signal of the the approaching hazard. The API design should insulate the library implementation from that hazard via the type system.",
+      "parentUuid": "88d8178e_d65c8d63",
+      "range": {
+        "startLine": 232,
+        "startChar": 45,
+        "endLine": 232,
+        "endChar": 67
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d99627dc_5f136ef7",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 2
