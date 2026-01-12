@@ -75,6 +75,7 @@ uint32_t pldm_bcd_bcd2dec32(uint32_t bcd);
  *  @return the bcd number
  */
 uint32_t dec2bcd32(uint32_t dec);
+uint32_t pldm_bcd_dec2bcd32(uint32_t dec);
 
 /** @brief Check whether the input time is legal
  *

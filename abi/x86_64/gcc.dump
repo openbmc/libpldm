@@ -297,7 +297,7 @@ $VAR1 = {
     },
     '6697' => {
       'Header' => 'utils.h',
-      'Line' => '98',
+      'Line' => '99',
       'Param' => {
         '0' => {
           'name' => 'transfer_flag',
@@ -309,7 +309,7 @@ $VAR1 = {
     },
     '6757' => {
       'Header' => 'utils.h',
-      'Line' => '89',
+      'Line' => '90',
       'Param' => {
         '0' => {
           'name' => 'seconds',
@@ -340,8 +340,9 @@ $VAR1 = {
       'ShortName' => 'is_time_legal'
     },
     '6995' => {
+      'Alias' => 'pldm_bcd_dec2bcd32',
       'Header' => 'utils.h',
-      'Line' => '77',
+      'Line' => '78',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -10159,6 +10160,7 @@ $VAR1 = {
       'pldm_bcd_bcd2dec32' => 1,
       'pldm_bcd_bcd2dec8' => 1,
       'pldm_bcd_dec2bcd16' => 1,
+      'pldm_bcd_dec2bcd32' => 1,
       'pldm_bcd_dec2bcd8' => 1,
       'pldm_bios_table_append_pad_checksum' => 1,
       'pldm_bios_table_attr_entry_decode_attribute_handle' => 1,

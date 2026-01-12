@@ -99,6 +99,7 @@ Change categories:
   - `bcd2dec16()`: `pldm_bcd_bcd2dec16()`
   - `dec2bcd16()`: `pldm_bcd_dec2bcd16()`
   - `bcd2dec32()`: `pldm_bcd_bcd2dec32()`
+  - `dec2bcd32()`: `pldm_bcd_dec2bcd32()`
 
 ### Removed
 

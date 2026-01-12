@@ -97,7 +97,7 @@ uint32_t pldm_bcd_bcd2dec32(uint32_t bcd)
 }
 
 LIBPLDM_ABI_STABLE
-uint32_t dec2bcd32(uint32_t dec)
+uint32_t pldm_bcd_dec2bcd32(uint32_t dec)
 {
 	return pldm_bcd_dec2bcd16(dec % 10000) |
 	       ((uint32_t)(pldm_bcd_dec2bcd16(dec / 10000)) << 16);
