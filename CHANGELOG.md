@@ -97,6 +97,7 @@ Change categories:
   - `bcd2dec8()`: `pldm_bcd_bcd2dec8()`
   - `dec2bcd8()`: `pldm_bcd_dec2bcd8()`
   - `bcd2dec16()`: `pldm_bcd_bcd2dec16()`
+  - `dec2bcd16()`: `pldm_bcd_dec2bcd16()`
 
 ### Removed
 

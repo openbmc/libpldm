@@ -297,7 +297,7 @@ $VAR1 = {
     },
     '6697' => {
       'Header' => 'utils.h',
-      'Line' => '96',
+      'Line' => '97',
       'Param' => {
         '0' => {
           'name' => 'transfer_flag',
@@ -309,7 +309,7 @@ $VAR1 = {
     },
     '6757' => {
       'Header' => 'utils.h',
-      'Line' => '87',
+      'Line' => '88',
       'Param' => {
         '0' => {
           'name' => 'seconds',
@@ -341,7 +341,7 @@ $VAR1 = {
     },
     '6995' => {
       'Header' => 'utils.h',
-      'Line' => '75',
+      'Line' => '76',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -353,7 +353,7 @@ $VAR1 = {
     },
     '7124' => {
       'Header' => 'utils.h',
-      'Line' => '69',
+      'Line' => '70',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -364,8 +364,9 @@ $VAR1 = {
       'ShortName' => 'bcd2dec32'
     },
     '7227' => {
+      'Alias' => 'pldm_bcd_dec2bcd16',
       'Header' => 'utils.h',
-      'Line' => '63',
+      'Line' => '64',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -10155,6 +10156,7 @@ $VAR1 = {
       'pack_pldm_header' => 1,
       'pldm_bcd_bcd2dec16' => 1,
       'pldm_bcd_bcd2dec8' => 1,
+      'pldm_bcd_dec2bcd16' => 1,
       'pldm_bcd_dec2bcd8' => 1,
       'pldm_bios_table_append_pad_checksum' => 1,
       'pldm_bios_table_attr_entry_decode_attribute_handle' => 1,

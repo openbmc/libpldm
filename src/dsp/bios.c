@@ -126,7 +126,7 @@ int encode_set_date_time_req(uint8_t instance_id, uint8_t seconds,
 	request->hours = pldm_bcd_dec2bcd8(hours);
 	request->day = pldm_bcd_dec2bcd8(day);
 	request->month = pldm_bcd_dec2bcd8(month);
-	request->year = htole16(dec2bcd16(year));
+	request->year = htole16(pldm_bcd_dec2bcd16(year));
 
 	return PLDM_SUCCESS;
 }

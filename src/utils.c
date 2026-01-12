@@ -83,7 +83,7 @@ uint16_t pldm_bcd_bcd2dec16(uint16_t bcd)
 }
 
 LIBPLDM_ABI_STABLE
-uint16_t dec2bcd16(uint16_t dec)
+uint16_t pldm_bcd_dec2bcd16(uint16_t dec)
 {
 	return pldm_bcd_dec2bcd8(dec % 100) |
 	       ((uint16_t)(pldm_bcd_dec2bcd8(dec / 100)) << 8);
@@ -99,8 +99,8 @@ uint32_t bcd2dec32(uint32_t bcd)
 LIBPLDM_ABI_STABLE
 uint32_t dec2bcd32(uint32_t dec)
 {
-	return dec2bcd16(dec % 10000) |
-	       ((uint32_t)(dec2bcd16(dec / 10000)) << 16);
+	return pldm_bcd_dec2bcd16(dec % 10000) |
+	       ((uint32_t)(pldm_bcd_dec2bcd16(dec / 10000)) << 16);
 }
 
 static int day_map(uint8_t month)
