@@ -89,6 +89,8 @@ Change categories:
   - `pldm_pdr_delete_by_sensor_id()`
   - `pldm_pdr_remove_fru_record_set_by_rsi()`
 
+- Split EDAC symbols into libpldm/edac.h from libpldm/utils.h
+
 ### Deprecated
 
 ### Removed

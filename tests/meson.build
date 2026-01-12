@@ -28,7 +28,7 @@ test_include_dirs = [
     include_directories('../src', '../tests'),
 ]
 
-tests = ['instance-id', 'msgbuf', 'responder', 'utils']
+tests = ['edac', 'instance-id', 'msgbuf', 'responder', 'utils']
 
 subdir('dsp')
 
