@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e1db8d5_c564f74c",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2026-01-12T06:39:57Z",
+      "side": 1,
+      "message": "We are already directly including `linux/mctp.h` (which defines `mctp_eid_t`).",
+      "parentUuid": "1a46b7a7_dd3c2d30",
+      "revId": "14b904472c390f5558dcd46556408ac455423f99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14bc1767_ed13dab7",
         "filename": "src/transport/af-mctp.c",
         "patchSetId": 6
