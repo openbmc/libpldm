@@ -297,7 +297,7 @@ $VAR1 = {
     },
     '6697' => {
       'Header' => 'utils.h',
-      'Line' => '97',
+      'Line' => '98',
       'Param' => {
         '0' => {
           'name' => 'transfer_flag',
@@ -309,7 +309,7 @@ $VAR1 = {
     },
     '6757' => {
       'Header' => 'utils.h',
-      'Line' => '88',
+      'Line' => '89',
       'Param' => {
         '0' => {
           'name' => 'seconds',
@@ -341,7 +341,7 @@ $VAR1 = {
     },
     '6995' => {
       'Header' => 'utils.h',
-      'Line' => '76',
+      'Line' => '77',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -352,8 +352,9 @@ $VAR1 = {
       'ShortName' => 'dec2bcd32'
     },
     '7124' => {
+      'Alias' => 'pldm_bcd_bcd2dec32',
       'Header' => 'utils.h',
-      'Line' => '70',
+      'Line' => '71',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -10155,6 +10156,7 @@ $VAR1 = {
       'is_transfer_flag_valid' => 1,
       'pack_pldm_header' => 1,
       'pldm_bcd_bcd2dec16' => 1,
+      'pldm_bcd_bcd2dec32' => 1,
       'pldm_bcd_bcd2dec8' => 1,
       'pldm_bcd_dec2bcd16' => 1,
       'pldm_bcd_dec2bcd8' => 1,

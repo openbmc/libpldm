@@ -90,7 +90,7 @@ uint16_t pldm_bcd_dec2bcd16(uint16_t dec)
 }
 
 LIBPLDM_ABI_STABLE
-uint32_t bcd2dec32(uint32_t bcd)
+uint32_t pldm_bcd_bcd2dec32(uint32_t bcd)
 {
 	return pldm_bcd_bcd2dec16(bcd >> 16) * 10000 +
 	       pldm_bcd_bcd2dec16(bcd & 0xffff);

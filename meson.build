@@ -51,6 +51,7 @@ libpldm_deprecated_aliases = [
     ['dec2bcd8', 'pldm_bcd_dec2bcd8'],
     ['bcd2dec16', 'pldm_bcd_bcd2dec16'],
     ['dec2bcd16', 'pldm_bcd_dec2bcd16'],
+    ['bcd2dec32', 'pldm_bcd_bcd2dec32'],
 ]
 if get_option('abi').contains('deprecated')
     conf.set('LIBPLDM_ABI_DEPRECATED', entrypoint)
