@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cda8ed8_7dd7ead6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T05:13:27Z",
+      "side": 1,
+      "message": "I\u0027m still considering the approach, but also have some immediate comments.",
+      "revId": "5a9abd981600facdfee7fad8880c0863ea90ccaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05663981_93d3a58e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T05:13:27Z",
+      "side": 1,
+      "message": "I recognise this won\u0027t be historically consistent, but please take into account the following requests:\n\nhttps://github.com/openbmc/libpldm/blob/f4d8810373a74760d5424218d45b8c9c56dcf3b2/CONTRIBUTING.md#L249-L264\n\nWe can at least be consistent going forward.",
+      "revId": "5a9abd981600facdfee7fad8880c0863ea90ccaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b44b7778_e22d6cbb",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 2317,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T05:13:27Z",
+      "side": 1,
+      "message": "See the earlier request regarding naming consistency. This should be `decode_pldm_platform_numeric_sensor_event_data()`.",
+      "revId": "5a9abd981600facdfee7fad8880c0863ea90ccaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb6f2043_9806ba0a",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T05:13:27Z",
+      "side": 1,
+      "message": "We should deprecate this? And note that in the documentation?",
+      "revId": "5a9abd981600facdfee7fad8880c0863ea90ccaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6112782_04471b07",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 6630,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T05:13:27Z",
+      "side": 1,
+      "message": "Please use `PLDM_MSG_DEFINE_P()`. The `NOLINTNEXTLINE` should be a hint that this isn\u0027t the right way to go about it. Existing uses of `NOLINTNEXTLINE` are an artefact of history.\n\nPlease fix throughout.",
+      "range": {
+        "startLine": 6626,
+        "startChar": 0,
+        "endLine": 6630,
+        "endChar": 68
+      },
+      "revId": "5a9abd981600facdfee7fad8880c0863ea90ccaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
