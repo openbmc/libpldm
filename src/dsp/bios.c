@@ -121,11 +121,11 @@ int encode_set_date_time_req(uint8_t instance_id, uint8_t seconds,
 
 	struct pldm_set_date_time_req *request =
 		(struct pldm_set_date_time_req *)msg->payload;
-	request->seconds = dec2bcd8(seconds);
-	request->minutes = dec2bcd8(minutes);
-	request->hours = dec2bcd8(hours);
-	request->day = dec2bcd8(day);
-	request->month = dec2bcd8(month);
+	request->seconds = pldm_bcd_dec2bcd8(seconds);
+	request->minutes = pldm_bcd_dec2bcd8(minutes);
+	request->hours = pldm_bcd_dec2bcd8(hours);
+	request->day = pldm_bcd_dec2bcd8(day);
+	request->month = pldm_bcd_dec2bcd8(month);
 	request->year = htole16(dec2bcd16(year));
 
 	return PLDM_SUCCESS;

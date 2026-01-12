@@ -47,6 +47,7 @@ uint8_t pldm_bcd_bcd2dec8(uint8_t bcd);
  *  @return the bcd number
  */
 uint8_t dec2bcd8(uint8_t dec);
+uint8_t pldm_bcd_dec2bcd8(uint8_t dec);
 
 /** @brief Convert bcd number(uint16_t) to decimal
  *  @param[in] bcd - bcd number

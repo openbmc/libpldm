@@ -70,7 +70,7 @@ uint8_t pldm_bcd_bcd2dec8(uint8_t bcd)
 }
 
 LIBPLDM_ABI_STABLE
-uint8_t dec2bcd8(uint8_t dec)
+uint8_t pldm_bcd_dec2bcd8(uint8_t dec)
 {
 	return ((dec / 10) << 4) + (dec % 10);
 }
@@ -85,7 +85,8 @@ uint16_t bcd2dec16(uint16_t bcd)
 LIBPLDM_ABI_STABLE
 uint16_t dec2bcd16(uint16_t dec)
 {
-	return dec2bcd8(dec % 100) | ((uint16_t)(dec2bcd8(dec / 100)) << 8);
+	return pldm_bcd_dec2bcd8(dec % 100) |
+	       ((uint16_t)(pldm_bcd_dec2bcd8(dec / 100)) << 8);
 }
 
 LIBPLDM_ABI_STABLE

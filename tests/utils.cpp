@@ -59,8 +59,8 @@ TEST(BcdConversion, BcdCoversion)
     EXPECT_EQ(12345678u, bcd2dec32(0x12345678));
     EXPECT_EQ(99999999u, bcd2dec32(0x99999999));
 
-    EXPECT_EQ(0x12u, dec2bcd8(12));
-    EXPECT_EQ(0x99u, dec2bcd8(99));
+    EXPECT_EQ(0x12u, pldm_bcd_dec2bcd8(12));
+    EXPECT_EQ(0x99u, pldm_bcd_dec2bcd8(99));
     EXPECT_EQ(0x1234u, dec2bcd16(1234));
     EXPECT_EQ(0x9999u, dec2bcd16(9999));
     EXPECT_EQ(0x12345678u, dec2bcd32(12345678));
