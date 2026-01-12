@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e17b948_16a79860",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3696,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:44:48Z",
+      "side": 1,
+      "message": "Please avoid using the `_p` msgbuf APIs, they only exist to cater to old library APIs where message fields were passed as individual pointer parameters. That\u0027s not the case here, we can access the lvalue via the struct member. This should be rewritten as:\n\n```\npldm_msgbuf_extract(buf, req-\u003eeffecter_id);\npldm_msgbuf_extract(buf, req-\u003eeffecter_operational_state);\n```",
+      "range": {
+        "startLine": 3695,
+        "startChar": 1,
+        "endLine": 3696,
+        "endChar": 62
+      },
+      "revId": "124ab5075f19108de1645fa5d96ac0c9672fe81e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "671eca4d_9bb53cb3",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:44:48Z",
+      "side": 1,
+      "message": "Please don\u0027t do this. The `NOLINTNEXTLINE` should be a hint that this is to be avoided.\n\n\nRather, use `PLDM_MSG_DEFINE_P()` as done in some of the tests immediately above.\n\nPlease fix throughout.",
+      "range": {
+        "startLine": 1123,
+        "startChar": 0,
+        "endLine": 1128,
+        "endChar": 66
+      },
+      "revId": "124ab5075f19108de1645fa5d96ac0c9672fe81e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c1464d8_6d02e34f",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:44:48Z",
+      "side": 1,
+      "message": "It may sound tedious, but please `#ifdef`/`#endif` each test individually. That way we can reorder or remove them without concern for whether they were enabled or disabled.\n\nPlease fix throughout.",
+      "revId": "124ab5075f19108de1645fa5d96ac0c9672fe81e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
