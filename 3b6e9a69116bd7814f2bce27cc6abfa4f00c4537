@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a69010_f794f294",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:50:22Z",
+      "side": 1,
+      "message": "Can you please reference the relevant spec, version and section here in the commit message?",
+      "revId": "3b6e9a69116bd7814f2bce27cc6abfa4f00c4537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2290f9d3_d755d4a6",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-12T04:50:22Z",
+      "side": 1,
+      "message": "DSP0248 v1.3.0 22.2 allows a 64-bit effecter, which makes this 11, not 7?",
+      "revId": "3b6e9a69116bd7814f2bce27cc6abfa4f00c4537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
