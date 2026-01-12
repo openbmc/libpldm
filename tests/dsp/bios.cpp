@@ -231,7 +231,7 @@ TEST(SetDateTime, testGoodEncodeRequset)
     EXPECT_EQ(hours, pldm_bcd_bcd2dec8(req->hours));
     EXPECT_EQ(day, pldm_bcd_bcd2dec8(req->day));
     EXPECT_EQ(month, pldm_bcd_bcd2dec8(req->month));
-    EXPECT_EQ(year, bcd2dec16(le16toh(req->year)));
+    EXPECT_EQ(year, pldm_bcd_bcd2dec16(le16toh(req->year)));
 }
 
 TEST(SetDateTime, testBadEncodeRequset)

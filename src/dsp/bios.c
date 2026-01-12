@@ -152,7 +152,7 @@ int decode_set_date_time_req(const struct pldm_msg *msg, size_t payload_length,
 	*hours = pldm_bcd_bcd2dec8(request->hours);
 	*day = pldm_bcd_bcd2dec8(request->day);
 	*month = pldm_bcd_bcd2dec8(request->month);
-	*year = bcd2dec16(le16toh(request->year));
+	*year = pldm_bcd_bcd2dec16(le16toh(request->year));
 
 	if (!is_time_legal(*seconds, *minutes, *hours, *day, *month, *year)) {
 		return PLDM_ERROR_INVALID_DATA;

@@ -297,7 +297,7 @@ $VAR1 = {
     },
     '6697' => {
       'Header' => 'utils.h',
-      'Line' => '95',
+      'Line' => '96',
       'Param' => {
         '0' => {
           'name' => 'transfer_flag',
@@ -309,7 +309,7 @@ $VAR1 = {
     },
     '6757' => {
       'Header' => 'utils.h',
-      'Line' => '86',
+      'Line' => '87',
       'Param' => {
         '0' => {
           'name' => 'seconds',
@@ -341,7 +341,7 @@ $VAR1 = {
     },
     '6995' => {
       'Header' => 'utils.h',
-      'Line' => '74',
+      'Line' => '75',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -353,7 +353,7 @@ $VAR1 = {
     },
     '7124' => {
       'Header' => 'utils.h',
-      'Line' => '68',
+      'Line' => '69',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -365,7 +365,7 @@ $VAR1 = {
     },
     '7227' => {
       'Header' => 'utils.h',
-      'Line' => '62',
+      'Line' => '63',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -376,8 +376,9 @@ $VAR1 = {
       'ShortName' => 'dec2bcd16'
     },
     '7316' => {
+      'Alias' => 'pldm_bcd_bcd2dec16',
       'Header' => 'utils.h',
-      'Line' => '56',
+      'Line' => '57',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -10152,6 +10153,7 @@ $VAR1 = {
       'is_time_legal' => 1,
       'is_transfer_flag_valid' => 1,
       'pack_pldm_header' => 1,
+      'pldm_bcd_bcd2dec16' => 1,
       'pldm_bcd_bcd2dec8' => 1,
       'pldm_bcd_dec2bcd8' => 1,
       'pldm_bios_table_append_pad_checksum' => 1,
