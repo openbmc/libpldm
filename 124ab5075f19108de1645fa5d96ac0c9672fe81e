@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd3a5693_d1c104ef",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3696,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-12T16:36:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e17b948_16a79860",
+      "range": {
+        "startLine": 3695,
+        "startChar": 1,
+        "endLine": 3696,
+        "endChar": 62
+      },
+      "revId": "124ab5075f19108de1645fa5d96ac0c9672fe81e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "671eca4d_9bb53cb3",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28b1c55f_115fc178",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-12T16:36:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "671eca4d_9bb53cb3",
+      "range": {
+        "startLine": 1123,
+        "startChar": 0,
+        "endLine": 1128,
+        "endChar": 66
+      },
+      "revId": "124ab5075f19108de1645fa5d96ac0c9672fe81e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c1464d8_6d02e34f",
@@ -60,6 +108,24 @@
       "writtenOn": "2026-01-12T04:44:48Z",
       "side": 1,
       "message": "It may sound tedious, but please `#ifdef`/`#endif` each test individually. That way we can reorder or remove them without concern for whether they were enabled or disabled.\n\nPlease fix throughout.",
+      "revId": "124ab5075f19108de1645fa5d96ac0c9672fe81e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db1b6cbc_be5960df",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-12T16:36:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c1464d8_6d02e34f",
       "revId": "124ab5075f19108de1645fa5d96ac0c9672fe81e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
