@@ -2,67 +2,6 @@
 #include <libpldm/base.h>
 #include <libpldm/utils.h>
 
-#include <limits.h>
-#include <stdio.h>
-
-#define BCD_H(v)       (((v) >> 4) & 0xf)
-#define BCD_L(v)       ((v) & 0xf)
-#define AS_CHAR(digit) ((digit) + '0')
-#define INSERT_CHAR(c, b, n)                                                   \
-	{                                                                      \
-		if ((n) > 1) {                                                 \
-			*(b)++ = (c);                                          \
-			(n)--;                                                 \
-		}                                                              \
-	}
-#define INSERT_INT(i, b, n) INSERT_CHAR(AS_CHAR(i), (b), (n))
-
-LIBPLDM_ABI_STABLE
-ssize_t pldm_base_ver2str(const ver32_t *version, char *buffer,
-			  size_t buffer_size)
-{
-	ssize_t remaining;
-	char *cursor;
-
-	if (!version || !buffer) {
-		return -1;
-	}
-
-	if (!buffer_size) {
-		return -1;
-	}
-
-	if (buffer_size > SSIZE_MAX) {
-		return -1;
-	}
-
-	cursor = buffer;
-	remaining = (ssize_t)buffer_size;
-
-	if (version->major < 0xf0)
-		INSERT_INT(BCD_H(version->major), cursor, remaining)
-	INSERT_INT(BCD_L(version->major), cursor, remaining);
-	INSERT_CHAR('.', cursor, remaining);
-
-	if (version->minor < 0xf0)
-		INSERT_INT(BCD_H(version->minor), cursor, remaining);
-	INSERT_INT(BCD_L(version->minor), cursor, remaining);
-
-	if (version->update < 0xff) {
-		INSERT_CHAR('.', cursor, remaining);
-		if (version->update < 0xf0)
-			INSERT_INT(BCD_H(version->update), cursor, remaining);
-		INSERT_INT(BCD_L(version->update), cursor, remaining);
-	}
-
-	if (version->alpha)
-		INSERT_CHAR(version->alpha, cursor, remaining);
-
-	*cursor = '\0';
-
-	return (ssize_t)buffer_size - remaining;
-}
-
 static int day_map(uint8_t month)
 {
 	switch (month) {

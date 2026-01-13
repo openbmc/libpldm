@@ -275,6 +275,20 @@ struct pldm_msg {
 bool pldm_msg_hdr_correlate_response(const struct pldm_msg_hdr *req,
 				     const struct pldm_msg_hdr *resp);
 
+/** @brief Convert ver32_t to string
+ *  @param[in] version - Pointer to ver32_t
+ *  @param[out] buffer - Pointer to the buffer
+ *  @param[in] buffer_size - Size of the buffer, up to SSIZE_MAX
+ *  @return The number of characters written to the buffer (excluding the null
+ * byte). The converted string may be truncated, and truncation is not
+ * considered an error. The result is negative if invalid arguments are supplied
+ * (NULL values for required pointers or the buffer size is beyond a
+ *  representable range).
+ */
+ssize_t ver2str(const ver32_t *version, char *buffer, size_t buffer_size);
+ssize_t pldm_base_ver2str(const ver32_t *version, char *buffer,
+			  size_t buffer_size);
+
 /** @struct pldm_header_info
  *
  *  The information needed to prepare PLDM header and this is passed to the

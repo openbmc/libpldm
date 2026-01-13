@@ -91,6 +91,7 @@ Change categories:
 
 - Split EDAC symbols into libpldm/edac.h from libpldm/utils.h
 - Split BCD symbols into libpldm/bcd.h from libpldm/utils.h
+- Move `pldm_base_ver2str()` to libpldm/base.h
 
 ### Deprecated
 
