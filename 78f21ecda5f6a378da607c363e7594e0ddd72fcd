@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "904cd667_efd44205",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-13T22:27:44Z",
+      "side": 1,
+      "message": "I will abandon this patch as the max request size changes based on the PLDM T2 version. I have added the logic to handle this in pldmd itself.",
+      "revId": "78f21ecda5f6a378da607c363e7594e0ddd72fcd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
