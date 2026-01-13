@@ -6,6 +6,13 @@
 
 #include <gtest/gtest.h>
 
+/* We don't need ABI annotations for test purposes */
+#undef LIBPLDM_ABI_DEPRECATED
+#define LIBPLDM_ABI_DEPRECATED
+// Include the implementation so we can test internal interfaces
+// NOLINTNEXTLINE(bugprone-suspicious-include)
+#include "utils.c"
+
 TEST(TimeLegal, TimeLegal)
 {
     EXPECT_EQ(true, is_time_legal(30, 25, 16, 18, 8, 2019));

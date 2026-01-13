@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "utils.h"
+
 #include <libpldm/base.h>
-#include <libpldm/utils.h>
 
 static int day_map(uint8_t month)
 {
@@ -33,7 +34,6 @@ static int day_map(uint8_t month)
 	}
 }
 
-LIBPLDM_ABI_DEPRECATED
 bool is_time_legal(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t day,
 		   uint8_t month, uint16_t year)
 {

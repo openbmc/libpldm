@@ -5,6 +5,7 @@
 #include <errno.h>
 #include <stdint.h>
 #include <stddef.h>
+#include <stdbool.h>
 
 /**
  * @brief Validate the CRC32 checksum of the given data.
@@ -17,4 +18,17 @@
  *              -EINVAL     if the arguments are invalid
  */
 int pldm_edac_crc32_validate(uint32_t expected, const void *data, size_t size);
+
+/** @brief Check whether the input time is legal
+ *
+ *  @param[in] seconds. Value range 0~59
+ *  @param[in] minutes. Value range 0~59
+ *  @param[in] hours. Value range 0~23
+ *  @param[in] day. Value range 1~31
+ *  @param[in] month. Value range 1~12
+ *  @param[in] year. Value range 1970~
+ *  @return true if time is legal,false if time is illegal
+ */
+bool is_time_legal(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t day,
+		   uint8_t month, uint16_t year);
 #endif

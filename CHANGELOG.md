@@ -106,6 +106,8 @@ Change categories:
 
 ### Removed
 
+- `is_time_legal()`: Deprecated since v0.13.0
+
 ### Fixed
 
 - dsp: base: Don't extract MultipartReceive resp's CRC once complete

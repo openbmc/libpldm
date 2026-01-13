@@ -32,19 +32,6 @@ ssize_t ver2str(const ver32_t *version, char *buffer, size_t buffer_size);
 ssize_t pldm_base_ver2str(const ver32_t *version, char *buffer,
 			  size_t buffer_size);
 
-/** @brief Check whether the input time is legal
- *
- *  @param[in] seconds. Value range 0~59
- *  @param[in] minutes. Value range 0~59
- *  @param[in] hours. Value range 0~23
- *  @param[in] day. Value range 1~31
- *  @param[in] month. Value range 1~12
- *  @param[in] year. Value range 1970~
- *  @return true if time is legal,false if time is illegal
- */
-bool is_time_legal(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t day,
-		   uint8_t month, uint16_t year);
-
 /** @brief Check whether transfer flag is valid
  *
  *  @param[in] transfer_flag - TransferFlag
