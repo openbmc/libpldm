@@ -21,8 +21,7 @@ $VAR1 = {
     'platform.h' => 1,
     'pldm.h' => 1,
     'pldm_types.h' => 1,
-    'transport.h' => 1,
-    'utils.h' => 1
+    'transport.h' => 1
   },
   'Language' => 'C',
   'LibraryName' => 'libpldm.so.0.14.0',
@@ -799,7 +798,7 @@ $VAR1 = {
         '0' => 'rdi',
         '1' => 'rcx'
       },
-      'Return' => '8124',
+      'Return' => '8168',
       'ShortName' => 'pldm_base_ver2str'
     },
     '34685' => {
@@ -3207,7 +3206,7 @@ $VAR1 = {
         },
         '1' => {
           'name' => 'self_contained_activation_req',
-          'type' => '75976'
+          'type' => '76019'
         },
         '2' => {
           'name' => 'msg',
@@ -3504,7 +3503,7 @@ $VAR1 = {
         '6' => {
           'name' => 'update_option_flags',
           'offset' => '0',
-          'type' => '76760'
+          'type' => '76803'
         },
         '7' => {
           'name' => 'comp_ver_str_type',
@@ -3545,7 +3544,7 @@ $VAR1 = {
         },
         '1' => {
           'name' => 'payload_length',
-          'type' => '77788'
+          'type' => '76000'
         },
         '2' => {
           'name' => 'completion_code',
@@ -7089,7 +7088,7 @@ $VAR1 = {
         },
         '1' => {
           'name' => 'event_data_size',
-          'type' => '77788'
+          'type' => '76000'
         },
         '2' => {
           'name' => 'sensor_id',
@@ -7760,7 +7759,7 @@ $VAR1 = {
         },
         '1' => {
           'name' => 'allocation_size',
-          'type' => '77788'
+          'type' => '76000'
         },
         '2' => {
           'name' => 'possible_states',
@@ -7768,7 +7767,7 @@ $VAR1 = {
         },
         '3' => {
           'name' => 'possible_states_size',
-          'type' => '77788'
+          'type' => '76000'
         },
         '4' => {
           'name' => 'actual_size',
@@ -7795,7 +7794,7 @@ $VAR1 = {
         },
         '1' => {
           'name' => 'allocation_size',
-          'type' => '77788'
+          'type' => '76000'
         },
         '2' => {
           'name' => 'possible_states',
@@ -7803,7 +7802,7 @@ $VAR1 = {
         },
         '3' => {
           'name' => 'possible_states_size',
-          'type' => '77788'
+          'type' => '76000'
         },
         '4' => {
           'name' => 'actual_size',
@@ -10380,14 +10379,14 @@ $VAR1 = {
     },
     '909' => {
       'Header' => 'pldm_types.h',
-      'Line' => '13',
+      'Line' => '15',
       'Name' => 'struct bits8',
       'Size' => '1',
       'Type' => 'Struct'
     },
     '1067' => {
       'Header' => 'pldm_types.h',
-      'Line' => '23',
+      'Line' => '25',
       'Memb' => {
         '0' => {
           'name' => 'byte',
@@ -10412,7 +10411,7 @@ $VAR1 = {
     },
     '1084' => {
       'Header' => 'pldm_types.h',
-      'Line' => '29',
+      'Line' => '31',
       'Memb' => {
         '0' => {
           'name' => 'alpha',
@@ -10442,7 +10441,7 @@ $VAR1 = {
     '1150' => {
       'BaseType' => '1084',
       'Header' => 'pldm_types.h',
-      'Line' => '34',
+      'Line' => '36',
       'Name' => 'ver32_t',
       'Size' => '4',
       'Type' => 'Typedef'
@@ -10824,17 +10823,8 @@ $VAR1 = {
       'Type' => 'Const'
     },
     '8124' => {
-      'BaseType' => '7729',
-      'Header' => 'types.h',
-      'Line' => '108',
-      'Name' => 'ssize_t',
-      'PrivateABI' => 1,
-      'Size' => '8',
-      'Type' => 'Typedef'
-    },
-    '8143' => {
-      'Header' => 'utils.h',
-      'Line' => '22',
+      'Header' => 'pldm_types.h',
+      'Line' => '178',
       'Memb' => {
         '0' => {
           'name' => 'ptr',
@@ -10850,6 +10840,15 @@ $VAR1 = {
       'Name' => 'struct variable_field',
       'Size' => '16',
       'Type' => 'Struct'
+    },
+    '8168' => {
+      'BaseType' => '7729',
+      'Header' => 'types.h',
+      'Line' => '108',
+      'Name' => 'ssize_t',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
     },
     '9221' => {
       'Header' => 'base.h',
@@ -10918,7 +10917,7 @@ $VAR1 = {
         '3' => {
           'name' => 'data',
           'offset' => '8',
-          'type' => '8143'
+          'type' => '8124'
         }
       },
       'Name' => 'struct pldm_base_multipart_receive_resp',
@@ -11017,7 +11016,7 @@ $VAR1 = {
       'Type' => 'Pointer'
     },
     '39512' => {
-      'BaseType' => '8143',
+      'BaseType' => '8124',
       'Name' => 'struct variable_field*',
       'Size' => '8',
       'Type' => 'Pointer'
@@ -11321,7 +11320,7 @@ $VAR1 = {
           'type' => '2044'
         }
       },
-      'Return' => '8124',
+      'Return' => '8168',
       'Size' => '8',
       'Type' => 'FuncPtr'
     },
@@ -11421,16 +11420,16 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '59023' => {
+    '59049' => {
       'Header' => 'pldm_types.h',
-      'Line' => '40',
+      'Line' => '42',
       'Name' => 'struct bits16',
       'Size' => '2',
       'Type' => 'Struct'
     },
-    '59293' => {
+    '59319' => {
       'Header' => 'pldm_types.h',
-      'Line' => '58',
+      'Line' => '60',
       'Memb' => {
         '0' => {
           'name' => 'value',
@@ -11440,7 +11439,7 @@ $VAR1 = {
         '1' => {
           'name' => 'bits',
           'offset' => '0',
-          'type' => '59023'
+          'type' => '59049'
         }
       },
       'Name' => 'union bitfield16_t',
@@ -11459,7 +11458,7 @@ $VAR1 = {
         '1' => {
           'name' => 'file_attribute',
           'offset' => '2',
-          'type' => '59293'
+          'type' => '59319'
         }
       },
       'Name' => 'struct pldm_file_df_open_req',
@@ -11503,7 +11502,7 @@ $VAR1 = {
         '1' => {
           'name' => 'df_close_options',
           'offset' => '2',
-          'type' => '59293'
+          'type' => '59319'
         }
       },
       'Name' => 'struct pldm_file_df_close_req',
@@ -11610,24 +11609,30 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '75976' => {
+    '76000' => {
+      'BaseType' => '883',
+      'Name' => 'size_t const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '76019' => {
       'BaseType' => '150',
       'Header' => 'pldm_types.h',
-      'Line' => '36',
+      'Line' => '38',
       'Name' => 'bool8_t',
       'Size' => '1',
       'Type' => 'Typedef'
     },
-    '76268' => {
+    '76311' => {
       'Header' => 'pldm_types.h',
-      'Line' => '62',
+      'Line' => '64',
       'Name' => 'struct bits32',
       'Size' => '4',
       'Type' => 'Struct'
     },
-    '76760' => {
+    '76803' => {
       'Header' => 'pldm_types.h',
-      'Line' => '96',
+      'Line' => '98',
       'Memb' => {
         '0' => {
           'name' => 'value',
@@ -11637,23 +11642,23 @@ $VAR1 = {
         '1' => {
           'name' => 'bits',
           'offset' => '0',
-          'type' => '76268'
+          'type' => '76311'
         }
       },
       'Name' => 'union bitfield32_t',
       'Size' => '4',
       'Type' => 'Union'
     },
-    '76772' => {
+    '76815' => {
       'Header' => 'pldm_types.h',
-      'Line' => '100',
+      'Line' => '102',
       'Name' => 'struct bits64',
       'Size' => '8',
       'Type' => 'Struct'
     },
-    '77712' => {
+    '77755' => {
       'Header' => 'pldm_types.h',
-      'Line' => '166',
+      'Line' => '168',
       'Memb' => {
         '0' => {
           'name' => 'value',
@@ -11663,41 +11668,35 @@ $VAR1 = {
         '1' => {
           'name' => 'bits',
           'offset' => '0',
-          'type' => '76772'
+          'type' => '76815'
         }
       },
       'Name' => 'union bitfield64_t',
       'Size' => '8',
       'Type' => 'Union'
     },
-    '77731' => {
-      'BaseType' => '77743',
+    '77774' => {
+      'BaseType' => '77786',
       'Header' => 'pldm_types.h',
-      'Line' => '170',
+      'Line' => '172',
       'Name' => 'pldm_uuid',
       'Size' => '16',
       'Type' => 'Typedef'
     },
-    '77743' => {
+    '77786' => {
       'BaseType' => '150',
       'Name' => 'uint8_t[16]',
       'Size' => '16',
       'Type' => 'Array'
     },
-    '77759' => {
-      'BaseType' => '77743',
+    '77802' => {
+      'BaseType' => '77786',
       'Name' => 'uint8_t[16] const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '77788' => {
-      'BaseType' => '883',
-      'Name' => 'size_t const',
-      'Size' => '8',
-      'Type' => 'Const'
-    },
-    '77853' => {
-      'BaseType' => '8143',
+    '77846' => {
+      'BaseType' => '8124',
       'Name' => 'struct variable_field const',
       'Size' => '16',
       'Type' => 'Const'
@@ -11715,7 +11714,7 @@ $VAR1 = {
         '0' => {
           'name' => 'uuid',
           'offset' => '0',
-          'type' => '77743'
+          'type' => '77786'
         },
         '1' => {
           'name' => 'package_header_format_version',
@@ -11775,7 +11774,7 @@ $VAR1 = {
         '2' => {
           'name' => 'device_update_option_flags',
           'offset' => '3',
-          'type' => '76760'
+          'type' => '76803'
         },
         '3' => {
           'name' => 'comp_image_set_version_string_type',
@@ -11819,12 +11818,12 @@ $VAR1 = {
         '3' => {
           'name' => 'comp_options',
           'offset' => '8',
-          'type' => '59293'
+          'type' => '59319'
         },
         '4' => {
           'name' => 'requested_comp_activation_method',
           'offset' => '16',
-          'type' => '59293'
+          'type' => '59319'
         },
         '5' => {
           'name' => 'comp_location_offset',
@@ -11863,7 +11862,7 @@ $VAR1 = {
         '1' => {
           'name' => 'capabilities_during_update',
           'offset' => '1',
-          'type' => '76760'
+          'type' => '76803'
         },
         '2' => {
           'name' => 'comp_count',
@@ -11922,7 +11921,7 @@ $VAR1 = {
         '4' => {
           'name' => 'capabilities',
           'offset' => '8',
-          'type' => '76760'
+          'type' => '76803'
         }
       },
       'Name' => 'struct pldm_query_downstream_devices_resp',
@@ -11991,12 +11990,12 @@ $VAR1 = {
         '11' => {
           'name' => 'comp_activation_methods',
           'offset' => '51',
-          'type' => '59293'
+          'type' => '59319'
         },
         '12' => {
           'name' => 'capabilities_during_update',
           'offset' => '53',
-          'type' => '76760'
+          'type' => '76803'
         }
       },
       'Name' => 'struct pldm_component_parameter_entry',
@@ -12088,7 +12087,7 @@ $VAR1 = {
         '0' => {
           'name' => 'field',
           'offset' => '0',
-          'type' => '8143'
+          'type' => '8124'
         },
         '1' => {
           'name' => 'devs',
@@ -12190,7 +12189,7 @@ $VAR1 = {
         '3' => {
           'name' => 'fdp_capabilities_during_update',
           'offset' => '18',
-          'type' => '76760'
+          'type' => '76803'
         },
         '4' => {
           'name' => 'downstream_device_count',
@@ -12254,12 +12253,12 @@ $VAR1 = {
         '9' => {
           'name' => 'comp_activation_methods',
           'offset' => '54',
-          'type' => '59293'
+          'type' => '59319'
         },
         '10' => {
           'name' => 'capabilities_during_update',
           'offset' => '64',
-          'type' => '76760'
+          'type' => '76803'
         },
         '11' => {
           'name' => 'active_comp_ver_str',
@@ -12289,7 +12288,7 @@ $VAR1 = {
         '0' => {
           'name' => 'field',
           'offset' => '0',
-          'type' => '8143'
+          'type' => '8124'
         },
         '1' => {
           'name' => 'entries',
@@ -12327,7 +12326,7 @@ $VAR1 = {
         '0' => {
           'name' => 'identifier',
           'offset' => '0',
-          'type' => '77759'
+          'type' => '77802'
         },
         '1' => {
           'name' => 'revision',
@@ -12404,7 +12403,7 @@ $VAR1 = {
         '0' => {
           'name' => 'field',
           'offset' => '0',
-          'type' => '8143'
+          'type' => '8124'
         },
         '1' => {
           'name' => 'entries',
@@ -12423,7 +12422,7 @@ $VAR1 = {
         '0' => {
           'name' => 'package_header_identifier',
           'offset' => '0',
-          'type' => '77731'
+          'type' => '77774'
         },
         '1' => {
           'name' => 'package_header_format_revision',
@@ -12448,7 +12447,7 @@ $VAR1 = {
         '5' => {
           'name' => 'package_version_string',
           'offset' => '64',
-          'type' => '8143'
+          'type' => '8124'
         }
       },
       'Name' => 'struct pldm__package_header_information',
@@ -12476,7 +12475,7 @@ $VAR1 = {
         '0' => {
           'name' => 'bitmap',
           'offset' => '0',
-          'type' => '8143'
+          'type' => '8124'
         }
       },
       'Name' => 'struct pldm_package_component_bitmap',
@@ -12495,7 +12494,7 @@ $VAR1 = {
         '1' => {
           'name' => 'device_update_option_flags',
           'offset' => '4',
-          'type' => '76760'
+          'type' => '76803'
         },
         '2' => {
           'name' => 'component_image_set_version_string_type',
@@ -12505,7 +12504,7 @@ $VAR1 = {
         '3' => {
           'name' => 'component_image_set_version_string',
           'offset' => '22',
-          'type' => '8143'
+          'type' => '8124'
         },
         '4' => {
           'name' => 'applicable_components',
@@ -12515,17 +12514,17 @@ $VAR1 = {
         '5' => {
           'name' => 'record_descriptors',
           'offset' => '72',
-          'type' => '8143'
+          'type' => '8124'
         },
         '6' => {
           'name' => 'firmware_device_package_data',
           'offset' => '100',
-          'type' => '8143'
+          'type' => '8124'
         },
         '7' => {
           'name' => 'reference_manifest_data',
           'offset' => '128',
-          'type' => '8143'
+          'type' => '8124'
         }
       },
       'Name' => 'struct pldm_package_firmware_device_id_record',
@@ -12544,7 +12543,7 @@ $VAR1 = {
         '1' => {
           'name' => 'update_option_flags',
           'offset' => '4',
-          'type' => '76760'
+          'type' => '76803'
         },
         '2' => {
           'name' => 'self_contained_activation_min_version_string_type',
@@ -12554,7 +12553,7 @@ $VAR1 = {
         '3' => {
           'name' => 'self_contained_activation_min_version_string',
           'offset' => '22',
-          'type' => '8143'
+          'type' => '8124'
         },
         '4' => {
           'name' => 'self_contained_activation_min_version_comparison_stamp',
@@ -12569,17 +12568,17 @@ $VAR1 = {
         '6' => {
           'name' => 'record_descriptors',
           'offset' => '86',
-          'type' => '8143'
+          'type' => '8124'
         },
         '7' => {
           'name' => 'package_data',
           'offset' => '114',
-          'type' => '8143'
+          'type' => '8124'
         },
         '8' => {
           'name' => 'reference_manifest_data',
           'offset' => '136',
-          'type' => '8143'
+          'type' => '8124'
         }
       },
       'Name' => 'struct pldm_package_downstream_device_id_record',
@@ -12608,17 +12607,17 @@ $VAR1 = {
         '3' => {
           'name' => 'component_options',
           'offset' => '8',
-          'type' => '59293'
+          'type' => '59319'
         },
         '4' => {
           'name' => 'requested_component_activation_method',
           'offset' => '16',
-          'type' => '59293'
+          'type' => '59319'
         },
         '5' => {
           'name' => 'component_image',
           'offset' => '22',
-          'type' => '8143'
+          'type' => '8124'
         },
         '6' => {
           'name' => 'component_version_string_type',
@@ -12628,12 +12627,12 @@ $VAR1 = {
         '7' => {
           'name' => 'component_version_string',
           'offset' => '64',
-          'type' => '8143'
+          'type' => '8124'
         },
         '8' => {
           'name' => 'component_opaque_data',
           'offset' => '86',
-          'type' => '8143'
+          'type' => '8124'
         }
       },
       'Name' => 'struct pldm_package_component_image_information',
@@ -12667,12 +12666,12 @@ $VAR1 = {
         '4' => {
           'name' => 'package',
           'offset' => '36',
-          'type' => '8143'
+          'type' => '8124'
         },
         '5' => {
           'name' => 'areas',
           'offset' => '64',
-          'type' => '8143'
+          'type' => '8124'
         },
         '6' => {
           'name' => 'iter',
@@ -12727,31 +12726,31 @@ $VAR1 = {
       'Type' => 'Pointer'
     },
     '104579' => {
-      'BaseType' => '75976',
+      'BaseType' => '76019',
       'Name' => 'bool8_t*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
     '104584' => {
-      'BaseType' => '77712',
+      'BaseType' => '77755',
       'Name' => 'bitfield64_t*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
     '108645' => {
-      'BaseType' => '76760',
+      'BaseType' => '76803',
       'Name' => 'bitfield32_t*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
     '113757' => {
-      'BaseType' => '59293',
+      'BaseType' => '59319',
       'Name' => 'bitfield16_t*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
     '126466' => {
-      'BaseType' => '77853',
+      'BaseType' => '77846',
       'Name' => 'struct variable_field const*',
       'Size' => '8',
       'Type' => 'Pointer'
@@ -13162,7 +13161,7 @@ $VAR1 = {
         '7' => {
           'name' => 'sensor_auxiliary_names_pdr',
           'offset' => '33',
-          'type' => '75976'
+          'type' => '76019'
         },
         '8' => {
           'name' => 'composite_sensor_count',
@@ -13226,7 +13225,7 @@ $VAR1 = {
         '8' => {
           'name' => 'has_description_pdr',
           'offset' => '35',
-          'type' => '75976'
+          'type' => '76019'
         },
         '9' => {
           'name' => 'composite_effecter_count',
@@ -13390,10 +13389,10 @@ $VAR1 = {
       'Size' => '4',
       'Type' => 'Typedef'
     },
-    '271875' => {
+    '271918' => {
       'BaseType' => '1167',
       'Header' => 'pldm_types.h',
-      'Line' => '168',
+      'Line' => '170',
       'Name' => 'real32_t',
       'Size' => '4',
       'Type' => 'Typedef'
@@ -13507,7 +13506,7 @@ $VAR1 = {
         '6' => {
           'name' => 'value_f32',
           'offset' => '0',
-          'type' => '271875'
+          'type' => '271918'
         }
       },
       'Name' => 'union union_range_field_format',
@@ -13648,7 +13647,7 @@ $VAR1 = {
         '7' => {
           'name' => 'sensor_auxiliary_names_pdr',
           'offset' => '35',
-          'type' => '75976'
+          'type' => '76019'
         },
         '8' => {
           'name' => 'base_unit',
@@ -13698,7 +13697,7 @@ $VAR1 = {
         '17' => {
           'name' => 'is_linear',
           'offset' => '51',
-          'type' => '75976'
+          'type' => '76019'
         },
         '18' => {
           'name' => 'sensor_data_size',
@@ -13708,12 +13707,12 @@ $VAR1 = {
         '19' => {
           'name' => 'resolution',
           'offset' => '54',
-          'type' => '271875'
+          'type' => '271918'
         },
         '20' => {
           'name' => 'offset',
           'offset' => '64',
-          'type' => '271875'
+          'type' => '271918'
         },
         '21' => {
           'name' => 'accuracy',
@@ -13748,12 +13747,12 @@ $VAR1 = {
         '27' => {
           'name' => 'state_transition_interval',
           'offset' => '86',
-          'type' => '271875'
+          'type' => '271918'
         },
         '28' => {
           'name' => 'update_interval',
           'offset' => '96',
-          'type' => '271875'
+          'type' => '271918'
         },
         '29' => {
           'name' => 'max_readable',
@@ -13986,7 +13985,7 @@ $VAR1 = {
         '7' => {
           'name' => 'file_capabilities',
           'offset' => '38',
-          'type' => '59293'
+          'type' => '59319'
         },
         '8' => {
           'name' => 'file_version',
@@ -14006,12 +14005,12 @@ $VAR1 = {
         '11' => {
           'name' => 'file_name',
           'offset' => '64',
-          'type' => '8143'
+          'type' => '8124'
         },
         '12' => {
           'name' => 'oem_file_classification_name',
           'offset' => '86',
-          'type' => '8143'
+          'type' => '8124'
         }
       },
       'Name' => 'struct pldm_platform_file_descriptor_pdr',
@@ -14126,7 +14125,7 @@ $VAR1 = {
         '1' => {
           'name' => 'vendor_specific',
           'offset' => '0',
-          'type' => '8143'
+          'type' => '8124'
         }
       },
       'Name' => 'anon-union-platform.h-1106',

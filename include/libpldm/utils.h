@@ -14,15 +14,6 @@ extern "C" {
 #include <stdint.h>
 #include <sys/types.h>
 
-/** @struct variable_field
- *
- *  Structure representing variable field in the pldm message
- */
-struct variable_field {
-	const uint8_t *ptr;
-	size_t length;
-};
-
 /*
  * The canonical definition is in base.h. These declarations remain  for
  * historical compatibility

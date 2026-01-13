@@ -4,8 +4,10 @@
 
 #ifdef __cplusplus
 #include <cstdint>
+#include <cstddef>
 #else
 #include <stdint.h>
+#include <stddef.h>
 #endif
 
 typedef union {
@@ -168,5 +170,14 @@ typedef union {
 typedef float real32_t;
 
 typedef uint8_t pldm_uuid[16];
+
+/** @struct variable_field
+ *
+ *  Structure representing variable field in the pldm message
+ */
+struct variable_field {
+	const uint8_t *ptr;
+	size_t length;
+};
 
 #endif /* PLDM_TYPES_H */
