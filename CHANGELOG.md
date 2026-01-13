@@ -106,7 +106,10 @@ Change categories:
 
 ### Removed
 
-- `is_time_legal()`: Deprecated since v0.13.0
+Deprecated since v0.13.0:
+
+- `is_time_legal()`
+- `is_transfer_flag_valid()`
 
 ### Fixed
 

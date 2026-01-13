@@ -10,7 +10,6 @@ extern "C" {
 #include <libpldm/edac.h>
 #include <libpldm/pldm_types.h>
 
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <sys/types.h>
@@ -31,14 +30,6 @@ struct variable_field {
 ssize_t ver2str(const ver32_t *version, char *buffer, size_t buffer_size);
 ssize_t pldm_base_ver2str(const ver32_t *version, char *buffer,
 			  size_t buffer_size);
-
-/** @brief Check whether transfer flag is valid
- *
- *  @param[in] transfer_flag - TransferFlag
- *
- *  @return true if transfer flag is valid, false if not
- */
-bool is_transfer_flag_valid(uint8_t transfer_flag);
 
 #ifdef __cplusplus
 }

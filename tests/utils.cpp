@@ -6,12 +6,12 @@
 
 #include <gtest/gtest.h>
 
-/* We don't need ABI annotations for test purposes */
-#undef LIBPLDM_ABI_DEPRECATED
-#define LIBPLDM_ABI_DEPRECATED
+// Prevent clang-format from re-ordering the included source file
+// clang-format: off
 // Include the implementation so we can test internal interfaces
 // NOLINTNEXTLINE(bugprone-suspicious-include)
 #include "utils.c"
+// clang-format: on
 
 TEST(TimeLegal, TimeLegal)
 {
