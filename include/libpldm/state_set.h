@@ -181,6 +181,13 @@ enum pldm_state_set_operational_running_status_values {
 	PLDM_STATE_SET_OPERATIONAL_RUNNING_STATUS_DORMANT = 6
 };
 
+/* @brief List of states for Presence (ID 13).
+ */
+enum pldm_state_set_presence_values {
+	PLDM_STATE_SET_PRESENCE_PRESENT = 1,
+	PLDM_STATE_SET_PRESENCE_NOT_PRESENT = 2,
+};
+
 /* @brief List of states for the Set Identify state (ID 17).
  */
 enum pldm_state_set_identify_state_values {
