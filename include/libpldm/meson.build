@@ -1,6 +1,7 @@
 libpldm_headers = files(
     'api.h',
     'base.h',
+    'bcd.h',
     'bios.h',
     'bios_table.h',
     'compiler.h',

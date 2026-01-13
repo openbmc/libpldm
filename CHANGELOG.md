@@ -90,6 +90,7 @@ Change categories:
   - `pldm_pdr_remove_fru_record_set_by_rsi()`
 
 - Split EDAC symbols into libpldm/edac.h from libpldm/utils.h
+- Split BCD symbols into libpldm/bcd.h from libpldm/utils.h
 
 ### Deprecated
 
