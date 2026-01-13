@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "051c618f_48fb8664",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-13T22:26:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8842c87c_a2048433",
+      "revId": "3163cb178a5828096e2546eab3e4e0d9027a08d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8006b8d0_ba9c2958",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "8006b8d0_ba9c2958",
+      "revId": "3163cb178a5828096e2546eab3e4e0d9027a08d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c4111d0_28e17e01",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-13T22:26:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34d14a8f_a91a0296",
       "revId": "3163cb178a5828096e2546eab3e4e0d9027a08d8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
