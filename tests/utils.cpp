@@ -11,42 +11,42 @@ TEST(Ver2string, Ver2string)
     ver32_t version{0x61, 0x10, 0xf7, 0xf3};
     const char* vstr = "3.7.10a";
     char buffer[1024];
-    auto rc = ver2str(&version, buffer, sizeof(buffer));
+    auto rc = pldm_base_ver2str(&version, buffer, sizeof(buffer));
     EXPECT_EQ(rc, (signed)std::strlen(vstr));
     EXPECT_STREQ(vstr, buffer);
 
     version = {0x00, 0xf0, 0xf0, 0xf1};
     vstr = "1.0.0";
-    rc = ver2str(&version, buffer, sizeof(buffer));
+    rc = pldm_base_ver2str(&version, buffer, sizeof(buffer));
     EXPECT_EQ(rc, (signed)std::strlen(vstr));
     EXPECT_STREQ(vstr, buffer);
 
     version = {0x00, 0xf7, 0x01, 0x10};
     vstr = "10.01.7";
-    rc = ver2str(&version, buffer, sizeof(buffer));
+    rc = pldm_base_ver2str(&version, buffer, sizeof(buffer));
     EXPECT_EQ(rc, (signed)std::strlen(vstr));
     EXPECT_STREQ(vstr, buffer);
 
     version = {0x00, 0xff, 0xf1, 0xf3};
     vstr = "3.1";
-    rc = ver2str(&version, buffer, sizeof(buffer));
+    rc = pldm_base_ver2str(&version, buffer, sizeof(buffer));
     EXPECT_EQ(rc, (signed)std::strlen(vstr));
     EXPECT_STREQ(vstr, buffer);
 
     version = {0x61, 0xff, 0xf0, 0xf1};
     vstr = "1.0a";
-    rc = ver2str(&version, buffer, sizeof(buffer));
+    rc = pldm_base_ver2str(&version, buffer, sizeof(buffer));
     EXPECT_EQ(rc, (signed)std::strlen(vstr));
     EXPECT_STREQ(vstr, buffer);
 
-    rc = ver2str(&version, buffer, 3);
+    rc = pldm_base_ver2str(&version, buffer, 3);
     EXPECT_EQ(rc, 2);
     EXPECT_STREQ("1.", buffer);
 
-    rc = ver2str(&version, buffer, 1);
+    rc = pldm_base_ver2str(&version, buffer, 1);
     EXPECT_EQ(rc, 0);
 
-    rc = ver2str(&version, buffer, 0);
+    rc = pldm_base_ver2str(&version, buffer, 0);
     EXPECT_EQ(rc, -1);
 }
 

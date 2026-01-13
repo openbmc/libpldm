@@ -35,6 +35,8 @@ struct variable_field {
  *  representable range).
  */
 ssize_t ver2str(const ver32_t *version, char *buffer, size_t buffer_size);
+ssize_t pldm_base_ver2str(const ver32_t *version, char *buffer,
+			  size_t buffer_size);
 
 /** @brief Check whether the input time is legal
  *

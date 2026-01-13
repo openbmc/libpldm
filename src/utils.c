@@ -18,7 +18,8 @@
 #define INSERT_INT(i, b, n) INSERT_CHAR(AS_CHAR(i), (b), (n))
 
 LIBPLDM_ABI_STABLE
-ssize_t ver2str(const ver32_t *version, char *buffer, size_t buffer_size)
+ssize_t pldm_base_ver2str(const ver32_t *version, char *buffer,
+			  size_t buffer_size)
 {
 	ssize_t remaining;
 	char *cursor;

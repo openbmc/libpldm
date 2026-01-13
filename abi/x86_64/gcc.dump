@@ -376,7 +376,7 @@ $VAR1 = {
     },
     '7387' => {
       'Header' => 'utils.h',
-      'Line' => '58',
+      'Line' => '60',
       'Param' => {
         '0' => {
           'name' => 'transfer_flag',
@@ -388,7 +388,7 @@ $VAR1 = {
     },
     '7447' => {
       'Header' => 'utils.h',
-      'Line' => '49',
+      'Line' => '51',
       'Param' => {
         '0' => {
           'name' => 'seconds',
@@ -420,7 +420,7 @@ $VAR1 = {
     },
     '7686' => {
       'Header' => 'utils.h',
-      'Line' => '37',
+      'Line' => '38',
       'Param' => {
         '0' => {
           'name' => 'version',
@@ -440,7 +440,7 @@ $VAR1 = {
         '1' => 'rcx'
       },
       'Return' => '7305',
-      'ShortName' => 'ver2str'
+      'ShortName' => 'pldm_base_ver2str'
     },
     '9894' => {
       'Header' => 'base.h',
@@ -10157,6 +10157,7 @@ $VAR1 = {
       'is_time_legal' => 1,
       'is_transfer_flag_valid' => 1,
       'pack_pldm_header' => 1,
+      'pldm_base_ver2str' => 1,
       'pldm_bcd_bcd2dec16' => 1,
       'pldm_bcd_bcd2dec32' => 1,
       'pldm_bcd_bcd2dec8' => 1,
