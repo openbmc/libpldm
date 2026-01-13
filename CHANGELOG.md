@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- state-set: Added the enum pldm_state_set_presence_values
+
 ### Changed
 
 ### Deprecated
