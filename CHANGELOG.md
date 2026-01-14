@@ -45,6 +45,8 @@ Change categories:
 - bindings:
   - Add libpldm++ library for the C++ binding
 - dsp: platform: Add pldm_platform_file_class enum
+- platform: Add foreach_pldm_pdr_state_effecter_possible_states() iterator macro
+- platform: Add foreach_pldm_pdr_state_effecter_states() iterator macro
 
 ### Changed
 
