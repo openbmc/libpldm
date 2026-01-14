@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- pdr: Add foreach_pldm_pdr_state_effecter_possible_states() iterator macro
+- pdr: Add foreach_pldm_pdr_state_effecter_states() iterator macro
+
 ### Changed
 
 ### Deprecated
