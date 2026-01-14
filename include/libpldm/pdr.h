@@ -23,7 +23,6 @@ typedef struct pldm_pdr_record pldm_pdr_record;
 /* ====================== */
 /* Common PDR access APIs */
 /* ====================== */
-
 /** @brief Make a new PDR repository
  *
  *  @return opaque pointer that acts as a handle to the repository; NULL if no
