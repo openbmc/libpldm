@@ -21,6 +21,8 @@ Change categories:
 
 - entity: Added new entity types from DSP0249 v1.4.0
 - stateset: Added new state sets from DSP0249 v1.4.0
+- pdr: Add foreach_pldm_pdr_state_effecter_possible_states() iterator macro
+- pdr: Add foreach_pldm_pdr_state_effecter_states() iterator macro
 
 ### Changed
 
