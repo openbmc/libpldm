@@ -2645,3 +2645,316 @@ TEST(EntityAssociationPDR, testDeleteNode)
 
     pldm_entity_association_tree_destroy(tree);
 }
+
+#ifdef LIBPLDM_API_TESTING
+TEST(StateEffecterPDR, testExtractPossibleStates)
+{
+    constexpr uint8_t compCount = 2;
+    pldm_state_effecter_pdr hdr{};
+    std::memset(&hdr, 0, sizeof(hdr));
+    hdr.hdr.record_handle = htole32(1);
+    hdr.hdr.type = PLDM_STATE_EFFECTER_PDR;
+    hdr.composite_effecter_count = compCount;
+
+    std::vector<uint8_t> pdrBuf;
+    constexpr size_t headerSize = sizeof(pldm_state_effecter_pdr) - 1;
+    pdrBuf.reserve(headerSize + 16);
+
+    {
+        std::array<uint8_t, headerSize> hdr_bytes{};
+        std::memcpy(hdr_bytes.data(), &hdr, headerSize);
+        pdrBuf.insert(pdrBuf.end(), hdr_bytes.begin(), hdr_bytes.end());
+    }
+
+    // Append possible_states[0]: state_set_id=100, size=1, bits=0x0F
+    {
+        uint16_t state_set_id = htole16(100);
+        uint8_t size = 1;
+        uint8_t bits = 0b00001111;
+        uint8_t id_bytes[2];
+        std::memcpy(id_bytes, &state_set_id, sizeof(state_set_id));
+        pdrBuf.insert(pdrBuf.end(), id_bytes, id_bytes + sizeof(id_bytes));
+        pdrBuf.push_back(size);
+        pdrBuf.push_back(bits);
+    }
+
+    // Append possible_states[1]: state_set_id=200, size=2, bits={0xAA, 0x55}
+    {
+        uint16_t state_set_id = htole16(200);
+        uint8_t size = 2;
+        uint8_t bits[2] = {0b10101010, 0b01010101};
+        uint8_t id_bytes[2];
+        std::memcpy(id_bytes, &state_set_id, sizeof(state_set_id));
+        pdrBuf.insert(pdrBuf.end(), id_bytes, id_bytes + sizeof(id_bytes));
+        pdrBuf.push_back(size);
+        pdrBuf.insert(pdrBuf.end(), bits, bits + sizeof(bits));
+    }
+
+    EXPECT_EQ(compCount, 2);
+    EXPECT_EQ(pdrBuf.size(),
+              sizeof(pldm_state_effecter_pdr) - 1 + // fixed header
+                  (sizeof(uint16_t) + 1 + 1) +      // first entry
+                  (sizeof(uint16_t) + 1 + 2));      // second entry
+
+    std::vector<uint16_t> ids;
+    std::vector<uint8_t> sizes;
+    std::vector<std::vector<uint8_t>> bitLists;
+
+    auto* pdr = new (pdrBuf.data()) pldm_state_effecter_pdr;
+
+    int rc;
+    const state_effecter_possible_states* states;
+    size_t loopGuard = 0;
+
+    foreach_pldm_pdr_state_effecter_possible_states(pdr, pdrBuf.size(), states,
+                                                    rc)
+    {
+        ASSERT_LT(loopGuard++, 50) << "Iterator didn't terminate";
+        ids.push_back(states->state_set_id);
+        sizes.push_back(states->possible_states_size);
+
+        std::vector<uint8_t> bytes;
+        const bitfield8_t* bf;
+        size_t innerLoopGuard = 0;
+
+        foreach_pldm_pdr_state_effecter_states(states, bf, rc)
+        {
+            ASSERT_LT(innerLoopGuard++, 50)
+                << "Inner iterator didn't terminate";
+            bytes.push_back(bf->byte);
+        }
+
+        if (rc)
+        {
+            break;
+        }
+
+        bitLists.push_back(std::move(bytes));
+    }
+
+    // Check iteration completed successfully
+    EXPECT_EQ(rc, 0) << "Iterator failed with rc=" << rc;
+
+    // Expect 2 entries
+    ASSERT_EQ(ids.size(), 2);
+    ASSERT_EQ(bitLists.size(), 2);
+
+    EXPECT_EQ(le16toh(ids[0]), 100);
+    EXPECT_EQ(le16toh(ids[1]), 200);
+
+    // Verify first entry
+    EXPECT_EQ(sizes[0], 1);
+    ASSERT_EQ(bitLists[0].size(), 1);
+    EXPECT_EQ(bitLists[0][0], 0b00001111);
+
+    // Verify second entry
+    EXPECT_EQ(sizes[1], 2);
+    ASSERT_EQ(bitLists[1].size(), 2);
+    EXPECT_EQ(bitLists[1][0], 0b10101010);
+    EXPECT_EQ(bitLists[1][1], 0b01010101);
+}
+#endif
+
+#ifdef LIBPLDM_API_TESTING
+TEST(StateEffecterPDR, testInvalidBufferTooSmall)
+{
+    // Test with buffer too small for PDR header
+    std::vector<uint8_t> pdrBuf(10);
+
+    auto* pdr = new (pdrBuf.data()) pldm_state_effecter_pdr;
+
+    int rc;
+    const state_effecter_possible_states* states;
+
+    foreach_pldm_pdr_state_effecter_possible_states(pdr, pdrBuf.size(), states,
+                                                    rc)
+    {
+        FAIL() << "Should not iterate with invalid buffer";
+    }
+
+    EXPECT_EQ(rc, -EOVERFLOW) << "Expected EOVERFLOW for small buffer";
+}
+
+TEST(StateEffecterPDR, testNullPointer)
+{
+    int rc;
+    const state_effecter_possible_states* states;
+
+    foreach_pldm_pdr_state_effecter_possible_states(nullptr, 100, states, rc)
+    {
+        FAIL() << "Should not iterate with null pointer";
+    }
+
+    EXPECT_EQ(rc, -EINVAL) << "Expected EINVAL for null pointer";
+}
+
+TEST(StateEffecterPDR, testZeroCount)
+{
+    pldm_state_effecter_pdr hdr{};
+    std::memset(&hdr, 0, sizeof(hdr));
+    hdr.composite_effecter_count = 0;
+
+    std::vector<uint8_t> pdrBuf(sizeof(pldm_state_effecter_pdr));
+    std::memcpy(pdrBuf.data(), &hdr, sizeof(pldm_state_effecter_pdr));
+
+    auto* pdr = new (pdrBuf.data()) pldm_state_effecter_pdr;
+
+    int rc;
+    const state_effecter_possible_states* states;
+    size_t count = 0;
+
+    foreach_pldm_pdr_state_effecter_possible_states(pdr, pdrBuf.size(), states,
+                                                    rc)
+    {
+        count++;
+    }
+
+    EXPECT_EQ(count, 0) << "Should not iterate when count is 0";
+    EXPECT_EQ(rc, 0) << "Expected success (rc=0), got rc=" << rc;
+}
+
+TEST(StateEffecterPDR, testSingleEntry)
+{
+    pldm_state_effecter_pdr hdr{};
+    std::memset(&hdr, 0, sizeof(hdr));
+    hdr.hdr.type = PLDM_STATE_EFFECTER_PDR;
+    hdr.composite_effecter_count = 1;
+
+    std::vector<uint8_t> pdrBuf;
+    constexpr size_t headerSize = sizeof(pldm_state_effecter_pdr) - 1;
+
+    {
+        std::array<uint8_t, headerSize> hdr_bytes{};
+        std::memcpy(hdr_bytes.data(), &hdr, headerSize);
+        pdrBuf.insert(pdrBuf.end(), hdr_bytes.begin(), hdr_bytes.end());
+    }
+
+    // Single entry: state_set_id=42, size=3, bits={0x01, 0x02, 0x04}
+    {
+        uint16_t state_set_id = htole16(42);
+        uint8_t size = 3;
+        uint8_t bits[3] = {0x01, 0x02, 0x04};
+        uint8_t id_bytes[2];
+        std::memcpy(id_bytes, &state_set_id, sizeof(state_set_id));
+        pdrBuf.insert(pdrBuf.end(), id_bytes, id_bytes + sizeof(id_bytes));
+        pdrBuf.push_back(size);
+        pdrBuf.insert(pdrBuf.end(), bits, bits + sizeof(bits));
+    }
+
+    auto* pdr = new (pdrBuf.data()) pldm_state_effecter_pdr;
+
+    int rc;
+    const state_effecter_possible_states* states;
+    size_t entryCount = 0;
+
+    foreach_pldm_pdr_state_effecter_possible_states(pdr, pdrBuf.size(), states,
+                                                    rc)
+    {
+        entryCount++;
+        EXPECT_EQ(le16toh(states->state_set_id), 42);
+        EXPECT_EQ(states->possible_states_size, 3);
+
+        std::vector<uint8_t> bytes;
+        const bitfield8_t* bf;
+
+        foreach_pldm_pdr_state_effecter_states(states, bf, rc)
+        {
+            bytes.push_back(bf->byte);
+        }
+
+        if (rc)
+        {
+            break;
+        }
+
+        ASSERT_EQ(bytes.size(), 3);
+        EXPECT_EQ(bytes[0], 0x01);
+        EXPECT_EQ(bytes[1], 0x02);
+        EXPECT_EQ(bytes[2], 0x04);
+    }
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(entryCount, 1);
+}
+
+TEST(StateEffecterPDR, testTruncatedEntry)
+{
+    pldm_state_effecter_pdr hdr{};
+    std::memset(&hdr, 0, sizeof(hdr));
+    hdr.composite_effecter_count = 1;
+
+    std::vector<uint8_t> pdrBuf;
+    constexpr size_t headerSize = sizeof(pldm_state_effecter_pdr) - 1;
+
+    {
+        std::array<uint8_t, headerSize> hdr_bytes{};
+        std::memcpy(hdr_bytes.data(), &hdr, headerSize);
+        pdrBuf.insert(pdrBuf.end(), hdr_bytes.begin(), hdr_bytes.end());
+    }
+
+    // Truncated entry: claims size=5 but only has 2 bytes
+    {
+        uint16_t state_set_id = htole16(100);
+        uint8_t size = 5;               // Claims 5 bytes
+        uint8_t bits[2] = {0xFF, 0xFF}; // Only 2 bytes provided
+        uint8_t id_bytes[2];
+        std::memcpy(id_bytes, &state_set_id, sizeof(state_set_id));
+        pdrBuf.insert(pdrBuf.end(), id_bytes, id_bytes + sizeof(id_bytes));
+        pdrBuf.push_back(size);
+        pdrBuf.insert(pdrBuf.end(), bits, bits + sizeof(bits));
+    }
+
+    auto* pdr = new (pdrBuf.data()) pldm_state_effecter_pdr;
+
+    int rc;
+    const state_effecter_possible_states* states;
+
+    foreach_pldm_pdr_state_effecter_possible_states(pdr, pdrBuf.size(), states,
+                                                    rc)
+    {
+        FAIL() << "Should not successfully iterate truncated entry";
+    }
+
+    EXPECT_EQ(rc, -EOVERFLOW) << "Expected EOVERFLOW for truncated entry";
+}
+
+TEST(StateEffecterPDR, testZeroPossibleStatesSize)
+{
+    pldm_state_effecter_pdr hdr{};
+    std::memset(&hdr, 0, sizeof(hdr));
+    hdr.composite_effecter_count = 1;
+
+    std::vector<uint8_t> pdrBuf;
+    constexpr size_t headerSize = sizeof(pldm_state_effecter_pdr) - 1;
+
+    {
+        std::array<uint8_t, headerSize> hdr_bytes{};
+        std::memcpy(hdr_bytes.data(), &hdr, headerSize);
+        pdrBuf.insert(pdrBuf.end(), hdr_bytes.begin(), hdr_bytes.end());
+    }
+
+    // Entry with possible_states_size = 0 (invalid)
+    {
+        uint16_t state_set_id = htole16(100);
+        uint8_t size = 0; // Invalid: must be >= 1
+        uint8_t id_bytes[2];
+        std::memcpy(id_bytes, &state_set_id, sizeof(state_set_id));
+        pdrBuf.insert(pdrBuf.end(), id_bytes, id_bytes + sizeof(id_bytes));
+        pdrBuf.push_back(size);
+    }
+
+    auto* pdr = new (pdrBuf.data()) pldm_state_effecter_pdr;
+
+    int rc;
+    const state_effecter_possible_states* states;
+
+    foreach_pldm_pdr_state_effecter_possible_states(pdr, pdrBuf.size(), states,
+                                                    rc)
+    {
+        FAIL() << "Should not iterate with zero possible_states_size";
+    }
+
+    EXPECT_EQ(rc, -EOVERFLOW)
+        << "Expected EOVERFLOW for zero possible_states_size";
+}
+#endif
