@@ -2389,3 +2389,163 @@ int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
 	}
 	return 0;
 }
+
+LIBPLDM_ABI_TESTING
+struct pldm_pdr_state_effecter_iter
+pldm_pdr_state_effecter_iter_init(const struct pldm_state_effecter_pdr *pdr,
+				  size_t pdr_size, int *rc)
+{
+	struct pldm_pdr_state_effecter_iter iter = { { NULL, 0 }, 0, 0 };
+
+	if (!pdr) {
+		*rc = -EINVAL;
+		return iter;
+	}
+
+	if (pdr_size < sizeof(struct pldm_state_effecter_pdr)) {
+		*rc = -EOVERFLOW;
+		return iter;
+	}
+
+	*rc = 0;
+	iter.field.ptr = pdr->possible_states;
+	/*
+	 * Calculate the size of the flexible array region.
+	 * struct pldm_state_effecter_pdr contains possible_states[1] as a
+	 * flexible array marker, so we add back its size.
+	 */
+	iter.field.length = pdr_size - sizeof(struct pldm_state_effecter_pdr) +
+			    sizeof(pdr->possible_states);
+	iter.total_count = pdr->composite_effecter_count;
+	iter.current_index = 0;
+	return iter;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_pdr_state_effecter_from_iter(
+	struct pldm_pdr_state_effecter_iter *iter,
+	const struct state_effecter_possible_states **states)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(ctx);
+	const uint8_t *entry_start;
+	uint8_t possible_states_size;
+	int rc;
+
+	if (!iter || !states) {
+		return -EINVAL;
+	}
+
+	if (!iter->field.ptr) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(ctx, 0, iter->field.ptr,
+				    iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	entry_start = iter->field.ptr;
+
+	/* Skip state_set_id - caller accesses via returned struct pointer */
+	pldm_msgbuf_span_required(ctx, sizeof(uint16_t), NULL);
+
+	rc = pldm_msgbuf_extract(ctx, possible_states_size);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	if (possible_states_size < 1) {
+		return pldm_msgbuf_discard(ctx, -EOVERFLOW);
+	}
+
+	rc = pldm_msgbuf_span_required(ctx, possible_states_size, NULL);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	const void *remaining_ptr;
+	size_t remaining_len;
+	rc = pldm_msgbuf_span_remaining(ctx, &remaining_ptr, &remaining_len);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+	iter->field.ptr = remaining_ptr;
+	iter->field.length = remaining_len;
+
+	rc = pldm_msgbuf_complete(ctx);
+	if (rc) {
+		return rc;
+	}
+
+	*states = (const struct state_effecter_possible_states *)entry_start;
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+struct pldm_pdr_state_effecter_states_iter
+pldm_pdr_state_effecter_states_iter_init(
+	const struct state_effecter_possible_states *states, int *rc)
+{
+	struct pldm_pdr_state_effecter_states_iter iter = { { NULL, 0 }, 0, 0 };
+
+	if (!states) {
+		*rc = -EINVAL;
+		return iter;
+	}
+
+	*rc = 0;
+	iter.field.ptr = &states->states->byte;
+	iter.field.length = states->possible_states_size;
+	iter.total_count = states->possible_states_size;
+	iter.current_index = 0;
+	return iter;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_pdr_state_effecter_states_from_iter(
+	struct pldm_pdr_state_effecter_states_iter *iter,
+	const bitfield8_t **state)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(ctx);
+	const void *bitfield_ptr;
+	int rc;
+
+	if (!iter || !state) {
+		return -EINVAL;
+	}
+
+	if (!iter->field.ptr) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(ctx, 0, iter->field.ptr,
+				    iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_span_required(ctx, sizeof(bitfield8_t), &bitfield_ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	const void *remaining_ptr;
+	size_t remaining_len;
+	rc = pldm_msgbuf_span_remaining(ctx, &remaining_ptr, &remaining_len);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+	iter->field.ptr = remaining_ptr;
+	iter->field.length = remaining_len;
+
+	rc = pldm_msgbuf_complete(ctx);
+	if (rc) {
+		return rc;
+	}
+
+	*state = (const bitfield8_t *)bitfield_ptr;
+
+	return 0;
+}
