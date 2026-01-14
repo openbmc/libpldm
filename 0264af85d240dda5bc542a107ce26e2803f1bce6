@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "634dbf14_de65d052",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2499,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2026-01-14T10:14:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0725e9f_713846c3",
+      "range": {
+        "startLine": 2475,
+        "startChar": 1,
+        "endLine": 2499,
+        "endChar": 2
+      },
+      "revId": "0264af85d240dda5bc542a107ce26e2803f1bce6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "582b78b2_2d3716ff",
@@ -54,6 +78,30 @@
       "writtenOn": "2026-01-12T04:56:32Z",
       "side": 1,
       "message": "Consider adding this implementation to the platform-specific msgbuf APIs in `src/msgbuf/platform.h`",
+      "range": {
+        "startLine": 2526,
+        "startChar": 1,
+        "endLine": 2562,
+        "endChar": 2
+      },
+      "revId": "0264af85d240dda5bc542a107ce26e2803f1bce6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42e0bf59_114d4f40",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2562,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2026-01-14T10:14:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "582b78b2_2d3716ff",
       "range": {
         "startLine": 2526,
         "startChar": 1,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d1c8d4e_272f9d4e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2566,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2026-01-14T10:14:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1f0ada0_4911c878",
+      "range": {
+        "startLine": 2564,
+        "startChar": 1,
+        "endLine": 2566,
+        "endChar": 2
+      },
+      "revId": "0264af85d240dda5bc542a107ce26e2803f1bce6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b26d1a14_ea792e09",
@@ -100,6 +172,24 @@
       "writtenOn": "2026-01-12T04:56:32Z",
       "side": 1,
       "message": "This should be `pldm_msgbuf_complete_consumed()` for compatibility. But you\u0027ll also need to use `pldm_xlate_errno()` from `src/api.h` throughout to avoid changing the return values.",
+      "revId": "0264af85d240dda5bc542a107ce26e2803f1bce6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d696455_b977d8e9",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2568,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2026-01-14T10:14:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b26d1a14_ea792e09",
       "revId": "0264af85d240dda5bc542a107ce26e2803f1bce6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
