@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cebcdec_2de89b4c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2026-01-14T10:13:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05663981_93d3a58e",
+      "revId": "5a9abd981600facdfee7fad8880c0863ea90ccaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b44b7778_e22d6cbb",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-01-12T05:13:27Z",
       "side": 1,
       "message": "See the earlier request regarding naming consistency. This should be `decode_pldm_platform_numeric_sensor_event_data()`.",
+      "revId": "5a9abd981600facdfee7fad8880c0863ea90ccaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b61b647_da180b05",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 2317,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2026-01-14T10:13:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b44b7778_e22d6cbb",
       "revId": "5a9abd981600facdfee7fad8880c0863ea90ccaa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe5f6ad6_59065845",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2026-01-14T10:13:59Z",
+      "side": 1,
+      "message": "Yes, May be in near future. But currently new API is under TESTING. So, after moving it to stable, we can deprecate this. \n\nI did extended the comment at 1754. But for now, I can add comment about future deprecation.",
+      "parentUuid": "eb6f2043_9806ba0a",
+      "revId": "5a9abd981600facdfee7fad8880c0863ea90ccaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6112782_04471b07",
         "filename": "tests/dsp/platform.cpp",
         "patchSetId": 17
@@ -82,6 +136,30 @@
       "writtenOn": "2026-01-12T05:13:27Z",
       "side": 1,
       "message": "Please use `PLDM_MSG_DEFINE_P()`. The `NOLINTNEXTLINE` should be a hint that this isn\u0027t the right way to go about it. Existing uses of `NOLINTNEXTLINE` are an artefact of history.\n\nPlease fix throughout.",
+      "range": {
+        "startLine": 6626,
+        "startChar": 0,
+        "endLine": 6630,
+        "endChar": 68
+      },
+      "revId": "5a9abd981600facdfee7fad8880c0863ea90ccaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87b802e_b9219313",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 6630,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2026-01-14T10:13:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6112782_04471b07",
       "range": {
         "startLine": 6626,
         "startChar": 0,
