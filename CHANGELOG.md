@@ -25,6 +25,7 @@ Change categories:
 - base: Added `decode_pldm_base_negotiate_transfer_params_req()`
 - base: Added `encode_pldm_base_negotiate_transfer_params_resp()`
 - entity: Add new entity types from DSP0249 v1.4.0
+- stateset: Add new state sets from DSP0249 v1.4.0
 
 ### Changed
 
