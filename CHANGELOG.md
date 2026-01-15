@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- entity: Added new entity types from DSP0249 v1.4.0
+
 ### Changed
 
 ### Deprecated
