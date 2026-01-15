@@ -22,6 +22,16 @@ Change categories:
 - entity: Added new entity types from DSP0249 v1.4.0
 - stateset: Added new state sets from DSP0249 v1.4.0
 - stateset: Added new enum pldm_state_set_presence_values from DSP0249 v1.4.0
+- state-set: Added new enums from DSP0249 v1.4.0
+  - enum pldm_state_set_predictive_condition_values
+  - enum pldm_state_set_configuration_state_values
+  - enum pldm_state_set_changed_configuration_values
+  - enum pldm_state_set_version_values
+  - enum pldm_state_set_communication_leash_status_values
+  - enum pldm_state_set_acpi_power_state_values
+- state-set: Added new values to the following enums
+  - enum pldm_state_set_availability_values
+  - enum pldm_state_set_boot_progress_state_values
 
 ### Changed
 
