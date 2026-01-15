@@ -24,6 +24,7 @@ Change categories:
 - utils: Added `pldm_edac_crc32_extend()`
 - base: Added `decode_pldm_base_negotiate_transfer_params_req()`
 - base: Added `encode_pldm_base_negotiate_transfer_params_resp()`
+- entity: Added new entity types from DSP0249 v1.4.0
 
 ### Changed
 
