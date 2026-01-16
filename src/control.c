@@ -4,7 +4,6 @@
 #include <string.h>
 
 #include <libpldm/pldm.h>
-#include <libpldm/utils.h>
 #include <libpldm/platform.h>
 #include <libpldm/control.h>
 #include <compiler.h>

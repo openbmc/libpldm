@@ -2,8 +2,8 @@
 #include "utils.h"
 
 #include <libpldm/base.h>
+#include <libpldm/bcd.h>
 #include <libpldm/bios.h>
-#include <libpldm/utils.h>
 
 #include <endian.h>
 #include <string.h>

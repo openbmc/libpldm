@@ -10,7 +10,6 @@ extern "C" {
 
 #include <libpldm/pldm.h>
 #include <libpldm/base.h>
-#include <libpldm/utils.h>
 #include <libpldm/control.h>
 #include <libpldm/firmware_update.h>
 

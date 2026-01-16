@@ -2,7 +2,7 @@
 #include <libpldm/base.h>
 #include <libpldm/bios.h>
 #include <libpldm/bios_table.h>
-#include <libpldm/utils.h>
+#include <libpldm/edac.h>
 
 #include <algorithm>
 #include <cstdint>

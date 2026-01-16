@@ -1,5 +1,4 @@
 #include <libpldm/pldm_types.h>
-#include <libpldm/utils.h>
 
 #include <cstring>
 #include <vector>
