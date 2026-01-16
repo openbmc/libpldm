@@ -27,54 +27,6 @@ Change categories:
 
 ### Changed
 
-- base:
-  - Rename symbols:
-    - `encode_base_multipart_receive_req()` to
-      `encode_pldm_base_multipart_receive_req()`
-    - `decode_base_multipart_receive_resp()` to
-      `decode_pldm_base_multipart_receive_resp()`
-    - `struct pldm_multipart_receive_resp` to
-      `struct pldm_base_multipart_receive_resp`
-    - `struct pldm_multipart_receive_req` to
-      `struct pldm_base_multipart_receive_req`
-  - Remove `__attribute__((packed))` from
-    `struct pldm_base_multipart_receive_req`
-
-- platform: Rename symbols:
-  - `struct pldm_file_descriptor_pdr` to
-    `struct pldm_platform_file_descriptor_pdr`
-  - `decode_pldm_file_descriptor_pdr()` to
-    `decode_pldm_platform_file_descriptor_pdr()`
-
-- base: Let `payload_length` be an in/out buffer for:
-  - `encode_pldm_base_multipart_receive_req()`
-  - `encode_pldm_base_negotiate_transfer_params_req()`
-
-- file: Let `payload_length` be an in/out buffer for:
-  - `encode_pldm_file_df_open_req()`
-  - `encode_pldm_file_df_close_req()`
-  - `encode_pldm_file_df_heartbeat_req()`
-
-- Stabilised:
-  - `decode_pldm_platform_file_descriptor_pdr()`
-  - `encode_pldm_base_multipart_receive_req()`
-  - `decode_pldm_base_multipart_receive_resp()`
-  - `encode_pldm_base_negotiate_transfer_params_req()`
-  - `decode_pldm_base_negotiate_transfer_params_resp()`
-  - `encode_pldm_file_df_open_req()`
-  - `decode_pldm_file_df_open_resp()`
-  - `encode_pldm_file_df_close_req()`
-  - `decode_pldm_file_df_close_resp()`
-  - `encode_pldm_file_df_heartbeat_req()`
-  - `decode_pldm_file_df_heartbeat_resp()`
-  - `decode_pldm_firmware_update_package()`
-  - `pldm_package_firmware_device_id_record_iter_init()`
-  - `decode_pldm_package_firmware_device_id_record_from_iter()`
-  - `pldm_package_downstream_device_id_record_iter_init()`
-  - `decode_pldm_package_downstream_device_id_record_from_iter()`
-  - `pldm_package_component_image_information_iter_init()`
-  - `decode_pldm_package_component_image_information_from_iter()`
-
 - Reworked the firmware update package parsing APIs to track parse state using a
   run-time state machine
 - Add flags parameter to `decode_pldm_firmware_update_package()`
@@ -82,17 +34,69 @@ Change categories:
 - Updated PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH macro comment.
 - Added PLDM_ACKNOWLEDGE_COMPLETION flag to transfer_resp_flag list.
 
-- Stabilised:
-  - `pldm_entity_association_pdr_remove_contained_entity()`
-  - `pldm_entity_association_tree_delete_node()`
-  - `pldm_pdr_delete_by_effecter_id()`
-  - `pldm_pdr_delete_by_sensor_id()`
-  - `pldm_pdr_remove_fru_record_set_by_rsi()`
-
 - Split EDAC symbols into libpldm/edac.h from libpldm/utils.h
 - Split BCD symbols into libpldm/bcd.h from libpldm/utils.h
 - Move `pldm_base_ver2str()` to libpldm/base.h
 - Move `struct variable_field` definition to libpldm/pldm_types.h
+
+#### Base
+
+- Rename symbols
+  - `encode_base_multipart_receive_req()` to
+    `encode_pldm_base_multipart_receive_req()`
+  - `decode_base_multipart_receive_resp()` to
+    `decode_pldm_base_multipart_receive_resp()`
+  - `struct pldm_multipart_receive_resp` to
+    `struct pldm_base_multipart_receive_resp`
+  - `struct pldm_multipart_receive_req` to
+    `struct pldm_base_multipart_receive_req`
+
+- Remove `__attribute__((packed))` from `struct pldm_base_multipart_receive_req`
+
+- Let `payload_length` be an in/out buffer for:
+  - `encode_pldm_base_multipart_receive_req()`
+  - `encode_pldm_base_negotiate_transfer_params_req()`
+
+#### File
+
+- Let `payload_length` be an in/out buffer for:
+  - `encode_pldm_file_df_open_req()`
+  - `encode_pldm_file_df_close_req()`
+  - `encode_pldm_file_df_heartbeat_req()`
+
+#### Platform
+
+- Rename symbols
+  - `struct pldm_file_descriptor_pdr` to
+    `struct pldm_platform_file_descriptor_pdr`
+  - `decode_pldm_file_descriptor_pdr()` to
+    `decode_pldm_platform_file_descriptor_pdr()`
+
+#### Stabilised
+
+- `decode_pldm_base_multipart_receive_resp()`
+- `decode_pldm_base_negotiate_transfer_params_resp()`
+- `decode_pldm_file_df_close_resp()`
+- `decode_pldm_file_df_heartbeat_resp()`
+- `decode_pldm_file_df_open_resp()`
+- `decode_pldm_firmware_update_package()`
+- `decode_pldm_package_component_image_information_from_iter()`
+- `decode_pldm_package_downstream_device_id_record_from_iter()`
+- `decode_pldm_package_firmware_device_id_record_from_iter()`
+- `decode_pldm_platform_file_descriptor_pdr()`
+- `encode_pldm_base_multipart_receive_req()`
+- `encode_pldm_base_negotiate_transfer_params_req()`
+- `encode_pldm_file_df_close_req()`
+- `encode_pldm_file_df_heartbeat_req()`
+- `encode_pldm_file_df_open_req()`
+- `pldm_entity_association_pdr_remove_contained_entity()`
+- `pldm_entity_association_tree_delete_node()`
+- `pldm_package_component_image_information_iter_init()`
+- `pldm_package_downstream_device_id_record_iter_init()`
+- `pldm_package_firmware_device_id_record_iter_init()`
+- `pldm_pdr_delete_by_effecter_id()`
+- `pldm_pdr_delete_by_sensor_id()`
+- `pldm_pdr_remove_fru_record_set_by_rsi()`
 
 ### Deprecated
 
@@ -131,9 +135,7 @@ Deprecated since v0.13.0:
 
 - msgbuf: Correct pldm_msgbuf_extract_effecter_data()'s child function
 
-### Security
-
-## [0.14.0] 2025-08-11
+## [0.14.0] - 2025-08-11
 
 ### Added
 
@@ -165,7 +167,7 @@ Deprecated since v0.13.0:
 
 - base: Remove `PLDM_INVALID_TRANSFER_OPERATION_FLAG` completion code
 
-## [0.13.0] 2025-06-15
+## [0.13.0] - 2025-06-15
 
 ### Added
 
@@ -235,7 +237,7 @@ Deprecated since v0.13.0:
 
 - meson: Define LIBPLDM_ABI_DEPRECATED_UNSAFE as empty as required
 
-## [0.12.0] 2025-04-05
+## [0.12.0] - 2025-04-05
 
 ### Added
 
@@ -310,7 +312,7 @@ Deprecated since v0.13.0:
 - requester: add null check for instance db object in pldm_instance_id_alloc()
 - requester: add null check for instance db object in pldm_instance_id_free()
 
-## [0.11.0] 2024-12-12
+## [0.11.0] - 2024-12-12
 
 ### Added
 
@@ -350,7 +352,7 @@ Deprecated since v0.13.0:
 - dsp: platform: Fix location of closing paren in overflow detection
 - libpldm: Install api header, update changelog
 
-## [0.10.0] 2024-11-01
+## [0.10.0] - 2024-11-01
 
 ### Added
 
