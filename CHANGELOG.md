@@ -25,6 +25,13 @@ Change categories:
 
 ### Removed
 
+#### Declarations and definitions
+
+- `pldm_base_ver2str()` removed from `libpldm/utils.h` - users should include
+  `libpldm/base.h` instead.
+
+#### Function symbols
+
 - `bcd2dec16()`
 - `bcd2dec32()`
 - `bcd2dec8()`
