@@ -16,6 +16,57 @@
       "message": "CI build error related to clang-tidy seems not related to this code. I will try the luck after merging other change - Please review code and add your vote",
       "revId": "b84c46c3dfbe3f93c3d5ffba48dd244d0133cece",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c25943d_c1111b46",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2495,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-16T13:12:50Z",
+      "side": 1,
+      "message": "Please make sure that the API returns negative errnos instead of PLDM completion codes.",
+      "revId": "b84c46c3dfbe3f93c3d5ffba48dd244d0133cece",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18004c12_b3bcb0ca",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2512,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-16T13:12:50Z",
+      "side": 1,
+      "message": "Return negative errnos here. https://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md#error-handling-and-invariants",
+      "revId": "b84c46c3dfbe3f93c3d5ffba48dd244d0133cece",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dcf093d_5b07ce41",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2526,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-16T13:12:50Z",
+      "side": 1,
+      "message": "Same here. https://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md#error-handling-and-invariants",
+      "revId": "b84c46c3dfbe3f93c3d5ffba48dd244d0133cece",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
