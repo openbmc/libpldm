@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "406b0b03_5587f9d4",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2495,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2026-01-16T18:59:17Z",
+      "side": 1,
+      "message": "Good point but the guideline says for new API\u0027s - Since its existing \u0026 STABLE API, Didn\u0027t want to do it in this (Might need some testing at consumers when we change it).",
+      "parentUuid": "6c25943d_c1111b46",
+      "revId": "b84c46c3dfbe3f93c3d5ffba48dd244d0133cece",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18004c12_b3bcb0ca",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39982546_0324dd28",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2512,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2026-01-16T18:59:17Z",
+      "side": 1,
+      "message": "Same as above - Also here we are using rc returning in pldm_msgbuf_init_errno - All things to be changed together.",
+      "parentUuid": "18004c12_b3bcb0ca",
+      "revId": "b84c46c3dfbe3f93c3d5ffba48dd244d0133cece",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dcf093d_5b07ce41",
@@ -65,6 +101,24 @@
       "writtenOn": "2026-01-16T13:12:50Z",
       "side": 1,
       "message": "Same here. https://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md#error-handling-and-invariants",
+      "revId": "b84c46c3dfbe3f93c3d5ffba48dd244d0133cece",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75882808_b8e9e9ce",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2526,
+      "author": {
+        "id": 1002621
+      },
+      "writtenOn": "2026-01-16T18:59:17Z",
+      "side": 1,
+      "message": "Same as above",
+      "parentUuid": "2dcf093d_5b07ce41",
       "revId": "b84c46c3dfbe3f93c3d5ffba48dd244d0133cece",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
