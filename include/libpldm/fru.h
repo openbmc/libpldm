@@ -7,7 +7,6 @@ extern "C" {
 #endif
 
 #include <libpldm/base.h>
-#include <libpldm/utils.h>
 
 #include <asm/byteorder.h>
 #include <stddef.h>

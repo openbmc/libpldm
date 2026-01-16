@@ -1,5 +1,4 @@
 #include <endian.h>
-#include <libpldm/utils.h>
 
 #include <cfloat>
 

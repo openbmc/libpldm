@@ -16,7 +16,6 @@ extern "C" {
 #include <libpldm/compiler.h>
 #include <libpldm/pdr.h>
 #include <libpldm/pldm_types.h>
-#include <libpldm/utils.h>
 
 /**
  * @brief PLDM response transfer flag for the Platform and control commands

@@ -25,10 +25,13 @@ Change categories:
 
 ### Removed
 
-#### Declarations and definitions
+#### Headers, declarations and definitions
 
 - `pldm_base_ver2str()` removed from `libpldm/utils.h` - users should include
   `libpldm/base.h` instead.
+
+- `libpldm/utils.h` - users should include headers exposing the specific
+  features they require instead.
 
 #### Function symbols
 

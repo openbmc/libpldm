@@ -8,13 +8,13 @@ extern "C" {
 
 #include <libpldm/compiler.h>
 #include <libpldm/pldm_types.h>
-#include <libpldm/utils.h>
 
 #include <asm/byteorder.h>
 #include <stdalign.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <sys/types.h>
 
 typedef uint8_t pldm_tid_t;
 

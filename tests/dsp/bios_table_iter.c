@@ -5,6 +5,7 @@
 #endif
 
 #include <assert.h>
+#include <libpldm/edac.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>

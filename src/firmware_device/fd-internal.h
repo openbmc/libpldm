@@ -8,7 +8,6 @@
 #include <libpldm/pldm.h>
 #include <libpldm/firmware_update.h>
 #include <libpldm/firmware_fd.h>
-#include <libpldm/utils.h>
 
 typedef uint64_t pldm_fd_time_t;
 
