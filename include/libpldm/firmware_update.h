@@ -11,7 +11,6 @@ extern "C" {
 #include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
-#include <libpldm/utils.h>
 
 #include <assert.h>
 #include <stdbool.h>

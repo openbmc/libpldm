@@ -4,6 +4,8 @@
 #define NDEBUG
 #endif
 
+#include <libpldm/edac.h>
+
 #include <assert.h>
 #include <stddef.h>
 #include <stdint.h>

@@ -25,6 +25,8 @@ Change categories:
 
 ### Removed
 
+#### Function symbols
+
 - `bcd2dec16()`
 - `bcd2dec32()`
 - `bcd2dec8()`
@@ -32,6 +34,10 @@ Change categories:
 - `dec2bcd32()`
 - `dec2bcd8()`
 - `ver2str()`
+
+#### Headers
+
+- `libpldm/utils.h`
 
 ### Fixed
 

@@ -8,7 +8,6 @@
 #include <libpldm/base.h>
 #include <libpldm/compiler.h>
 #include <libpldm/firmware_update.h>
-#include <libpldm/utils.h>
 
 #include <endian.h>
 #include <stdbool.h>

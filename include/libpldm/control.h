@@ -2,7 +2,6 @@
 
 #include <libpldm/pldm.h>
 #include <libpldm/base.h>
-#include <libpldm/utils.h>
 
 enum pldm_control_completion_codes {
 	PLDM_CONTROL_INVALID_DATA_TRANSFER_HANDLE = 0x80,

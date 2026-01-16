@@ -2,7 +2,6 @@
 #ifndef PLDM_MSGBUF_PLATFORM_H
 #define PLDM_MSGBUF_PLATFORM_H
 
-#include "../compiler.h"
 #include "../msgbuf.h"
 #include <libpldm/base.h>
 #include <libpldm/platform.h>

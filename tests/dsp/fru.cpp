@@ -1,7 +1,6 @@
 #include <endian.h>
 #include <libpldm/base.h>
 #include <libpldm/fru.h>
-#include <libpldm/utils.h>
 
 #include <array>
 #include <cstdint>
