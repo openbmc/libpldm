@@ -18,7 +18,6 @@ extern "C" {
  * The canonical definition is in base.h. These declarations remain  for
  * historical compatibility
  */
-ssize_t ver2str(const ver32_t *version, char *buffer, size_t buffer_size);
 ssize_t pldm_base_ver2str(const ver32_t *version, char *buffer,
 			  size_t buffer_size);
 

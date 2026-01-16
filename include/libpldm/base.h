@@ -285,7 +285,6 @@ bool pldm_msg_hdr_correlate_response(const struct pldm_msg_hdr *req,
  * (NULL values for required pointers or the buffer size is beyond a
  *  representable range).
  */
-ssize_t ver2str(const ver32_t *version, char *buffer, size_t buffer_size);
 ssize_t pldm_base_ver2str(const ver32_t *version, char *buffer,
 			  size_t buffer_size);
 

@@ -46,7 +46,7 @@ if compiler.compiles(
     entrypoint += ' __attribute__((tainted_args))'
 endif
 
-libpldm_deprecated_aliases = [['ver2str', 'pldm_base_ver2str']]
+libpldm_deprecated_aliases = []
 if get_option('abi').contains('deprecated')
     conf.set('LIBPLDM_ABI_DEPRECATED', entrypoint)
     conf.set(

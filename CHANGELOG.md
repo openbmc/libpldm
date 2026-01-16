@@ -31,6 +31,7 @@ Change categories:
 - `dec2bcd16()`
 - `dec2bcd32()`
 - `dec2bcd8()`
+- `ver2str()`
 
 ### Fixed
 
