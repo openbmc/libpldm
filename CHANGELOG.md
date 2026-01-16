@@ -32,6 +32,7 @@ Change categories:
 - state-set: Added new values to the following enums
  - enum pldm_state_set_availability_values
  - enum pldm_state_set_boot_progress_state_values
+- entity: Add new entity types for cases of misspelling
 
 ### Changed
 
