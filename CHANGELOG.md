@@ -19,6 +19,20 @@ Change categories:
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [v0.15.0] - 2026-01-16
+
+### Added
+
 - platform: Added file descriptor PDR encoding support
   - Added `encode_pldm_platform_file_descriptor_pdr()`
 - utils: Added `pldm_edac_crc32_extend()`

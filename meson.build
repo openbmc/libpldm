@@ -11,7 +11,7 @@ project(
         'b_ndebug': 'if-release',
         'tests': not meson.is_subproject(),
     },
-    version: '0.14.0',
+    version: '0.15.0',
     meson_version: '>=1.4.0',
 )
 
