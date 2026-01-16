@@ -46,15 +46,7 @@ if compiler.compiles(
     entrypoint += ' __attribute__((tainted_args))'
 endif
 
-libpldm_deprecated_aliases = [
-    ['bcd2dec8', 'pldm_bcd_bcd2dec8'],
-    ['dec2bcd8', 'pldm_bcd_dec2bcd8'],
-    ['bcd2dec16', 'pldm_bcd_bcd2dec16'],
-    ['dec2bcd16', 'pldm_bcd_dec2bcd16'],
-    ['bcd2dec32', 'pldm_bcd_bcd2dec32'],
-    ['dec2bcd32', 'pldm_bcd_dec2bcd32'],
-    ['ver2str', 'pldm_base_ver2str'],
-]
+libpldm_deprecated_aliases = [['ver2str', 'pldm_base_ver2str']]
 if get_option('abi').contains('deprecated')
     conf.set('LIBPLDM_ABI_DEPRECATED', entrypoint)
     conf.set(

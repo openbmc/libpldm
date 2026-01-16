@@ -40,9 +40,8 @@ $VAR1 = {
   },
   'SymbolInfo' => {
     '186' => {
-      'Alias' => 'pldm_bcd_dec2bcd32',
       'Header' => 'bcd.h',
-      'Line' => '51',
+      'Line' => '45',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -50,12 +49,11 @@ $VAR1 = {
         }
       },
       'Return' => '174',
-      'ShortName' => 'dec2bcd32'
+      'ShortName' => 'pldm_bcd_dec2bcd32'
     },
     '315' => {
-      'Alias' => 'pldm_bcd_bcd2dec32',
       'Header' => 'bcd.h',
-      'Line' => '44',
+      'Line' => '39',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -63,12 +61,11 @@ $VAR1 = {
         }
       },
       'Return' => '174',
-      'ShortName' => 'bcd2dec32'
+      'ShortName' => 'pldm_bcd_bcd2dec32'
     },
     '418' => {
-      'Alias' => 'pldm_bcd_dec2bcd16',
       'Header' => 'bcd.h',
-      'Line' => '37',
+      'Line' => '33',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -76,12 +73,11 @@ $VAR1 = {
         }
       },
       'Return' => '162',
-      'ShortName' => 'dec2bcd16'
+      'ShortName' => 'pldm_bcd_dec2bcd16'
     },
     '507' => {
-      'Alias' => 'pldm_bcd_bcd2dec16',
       'Header' => 'bcd.h',
-      'Line' => '30',
+      'Line' => '27',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -89,12 +85,11 @@ $VAR1 = {
         }
       },
       'Return' => '162',
-      'ShortName' => 'bcd2dec16'
+      'ShortName' => 'pldm_bcd_bcd2dec16'
     },
     '610' => {
-      'Alias' => 'pldm_bcd_dec2bcd8',
       'Header' => 'bcd.h',
-      'Line' => '23',
+      'Line' => '21',
       'Param' => {
         '0' => {
           'name' => 'dec',
@@ -102,12 +97,11 @@ $VAR1 = {
         }
       },
       'Return' => '150',
-      'ShortName' => 'dec2bcd8'
+      'ShortName' => 'pldm_bcd_dec2bcd8'
     },
     '663' => {
-      'Alias' => 'pldm_bcd_bcd2dec8',
       'Header' => 'bcd.h',
-      'Line' => '16',
+      'Line' => '15',
       'Param' => {
         '0' => {
           'name' => 'bcd',
@@ -115,7 +109,7 @@ $VAR1 = {
         }
       },
       'Return' => '150',
-      'ShortName' => 'bcd2dec8'
+      'ShortName' => 'pldm_bcd_bcd2dec8'
     },
     '2183' => {
       'Header' => 'base.h',
@@ -9879,12 +9873,6 @@ $VAR1 = {
   'SymbolVersion' => {},
   'Symbols' => {
     'libpldm.so.0.15.0' => {
-      'bcd2dec16' => 1,
-      'bcd2dec32' => 1,
-      'bcd2dec8' => 1,
-      'dec2bcd16' => 1,
-      'dec2bcd32' => 1,
-      'dec2bcd8' => 1,
       'decode_activate_firmware_resp' => 1,
       'decode_apply_complete_req' => 1,
       'decode_cancel_update_component_resp' => 1,

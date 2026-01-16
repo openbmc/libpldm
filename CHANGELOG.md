@@ -25,6 +25,13 @@ Change categories:
 
 ### Removed
 
+- `bcd2dec16()`
+- `bcd2dec32()`
+- `bcd2dec8()`
+- `dec2bcd16()`
+- `dec2bcd32()`
+- `dec2bcd8()`
+
 ### Fixed
 
 ### Security
