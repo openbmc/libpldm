@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f900dbb_c0563d17",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done. Renamed all my iterator structs to _iter.",
+      "parentUuid": "585aeef7_dbc718d2",
+      "range": {
+        "startLine": 45,
+        "startChar": 30,
+        "endLine": 45,
+        "endChar": 39
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74364b0a_6541edc1",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 2
@@ -71,6 +95,30 @@
       "writtenOn": "2025-11-28T00:04:33Z",
       "side": 1,
       "message": "We have `struct variable_field` for this - while I don\u0027t think its definition is great (should be `const void *ptr`), let\u0027s at least use what we have.\n\nPlease audit the change for other opportunities to switch to it.",
+      "range": {
+        "startLine": 46,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 18
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6face34_022a941e",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done. Used struct variable_field as suggested.",
+      "parentUuid": "74364b0a_6541edc1",
       "range": {
         "startLine": 46,
         "startChar": 1,
@@ -106,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0780fcc_1dd6e3ae",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done. Reworked the methods to return 0 on success and other error codes on failures \u0026 also tried to align with firmware update function naming.",
+      "parentUuid": "b201c203_02b40be5",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 55
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70d53725_43d84385",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 2
@@ -117,6 +189,30 @@
       "writtenOn": "2025-11-28T00:04:33Z",
       "side": 1,
       "message": "I prefer we use `_end` as a suffix for consistency with the other iterator APIs.\n\nPlease audit the rest of the patch for similar concerns.",
+      "range": {
+        "startLine": 118,
+        "startChar": 37,
+        "endLine": 118,
+        "endChar": 46
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fe23f78_79a6a3cb",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "70d53725_43d84385",
       "range": {
         "startLine": 118,
         "startChar": 37,
@@ -152,6 +248,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ba00fec_5d3aa1dc",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done. The APIs now accept struct instead of buffer.",
+      "parentUuid": "6405fe0a_7964ef8f",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 62
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1555b96f_0303afaf",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 2
@@ -163,6 +283,30 @@
       "writtenOn": "2025-11-28T00:04:33Z",
       "side": 1,
       "message": "Must we ask for this? I feel it\u0027s a bit of a distraction for users. If we\u0027re concerned about shadowing we can prefix the name of the variable with e.g. `libpldm_` as we\u0027re already reserving that (along with `pldm_`) anyway.",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 35
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12c505d8_02597c74",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done. Removed this parameter from the macro argument list.",
+      "parentUuid": "1555b96f_0303afaf",
       "range": {
         "startLine": 178,
         "startChar": 0,
@@ -246,6 +390,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e80cf38_cd35fc87",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Got it. Now instead of normal buffer, we\u0027re accepting struct pldm_state_effecter_pdr *.",
+      "parentUuid": "b4d14d22_962e5e59",
+      "range": {
+        "startLine": 232,
+        "startChar": 45,
+        "endLine": 232,
+        "endChar": 67
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d99627dc_5f136ef7",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 2
@@ -257,6 +425,30 @@
       "writtenOn": "2025-11-28T00:04:33Z",
       "side": 1,
       "message": "Please use `snake_case` as is idiomatic for C.",
+      "range": {
+        "startLine": 233,
+        "startChar": 54,
+        "endLine": 233,
+        "endChar": 61
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef5c0037_d10c3e6e",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Not required anymore.",
+      "parentUuid": "d99627dc_5f136ef7",
       "range": {
         "startLine": 233,
         "startChar": 54,
@@ -292,6 +484,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa1e3cfa_03b348de",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done. Used single variable for error handling.",
+      "parentUuid": "f47f73bb_fb466104",
+      "range": {
+        "startLine": 237,
+        "startChar": 62,
+        "endLine": 237,
+        "endChar": 70
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "000eddd6_2f80a123",
         "filename": "include/libpldm/pdr.h",
         "patchSetId": 2
@@ -303,6 +519,24 @@
       "writtenOn": "2025-11-28T00:04:33Z",
       "side": 1,
       "message": "By the above, I\u0027d add `return rc;` here.",
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3254edf_355c5a9d",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "000eddd6_2f80a123",
       "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -326,6 +560,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a169bd4_b6967c1c",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f1448808_b59a5f24",
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c59006cf_1c14c662",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 2
@@ -343,6 +595,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8cefd8ce_0323c476",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Right. I undid that change.",
+      "parentUuid": "c59006cf_1c14c662",
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1070e4f8_9961ed49",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 2
@@ -354,6 +624,30 @@
       "writtenOn": "2025-11-28T00:04:33Z",
       "side": 1,
       "message": "Bit of a nit, but can you please collapse these into one condition, and test them in the same order as the formal parameters?\n\n\n```suggestion\n\tif (!pdr_buf || !iter) {\n\t\treturn -EINVAL;\n\t}\n```\n\nHowever, also take into account the comments from the header.",
+      "range": {
+        "startLine": 2404,
+        "startChar": 1,
+        "endLine": 2410,
+        "endChar": 2
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c913de0_6a6a5bff",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2410,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "I\u0027ve tried to combine similar if statements as mentioned wherever applicable.",
+      "parentUuid": "1070e4f8_9961ed49",
       "range": {
         "startLine": 2404,
         "startChar": 1,
@@ -389,6 +683,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b630d2d4_37be4dff",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2413,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done. Removed the cast.",
+      "parentUuid": "af9a25ac_9ff2afd6",
+      "range": {
+        "startLine": 2413,
+        "startChar": 8,
+        "endLine": 2413,
+        "endChar": 19
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "021c34cb_ab56dc1c",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 2
@@ -400,6 +718,24 @@
       "writtenOn": "2025-11-28T00:04:33Z",
       "side": 1,
       "message": "`pldm_msgbuf_discard()` is only necessary if the msgbuf instance is valid, which is not the case when we error out of `pldm_msgbuf_init_errno()`. In this instance you can `return rc;` directly.\n\nCan you please audit the rest of the patch for similar concerns?\n\nFor the rest of the function, you need `pldm_msgbuf_discard()`, which you\u0027ve done correctly.",
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139572f8_f983c31e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done. Now it just return rc in this case and also audited remaining code to ensure pldm_msgbuf_discard() is used as recommended.",
+      "parentUuid": "021c34cb_ab56dc1c",
       "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -429,6 +765,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5206da25_ad6e401f",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2423,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "2d743f04_cf7487aa",
+      "range": {
+        "startLine": 2418,
+        "startChar": 1,
+        "endLine": 2423,
+        "endChar": 2
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f837c64_f6230348",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 2
@@ -440,6 +800,24 @@
       "writtenOn": "2025-11-28T00:04:33Z",
       "side": 1,
       "message": "Please see the discussion on the header regarding separation of the decoding from the `_next()` implementation (via a `decode_*_from_iter()` API).",
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f59946d_71800c8c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2449,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done. Created decode_pldm_pdr_state_effecter_from_iter \u0026 decode_pldm_pdr_state_effecter_states_from_iter methods for decoding.",
+      "parentUuid": "4f837c64_f6230348",
       "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -469,6 +847,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be3a86ce_9ced5b41",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2481,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Actually state_set_id was not required so was trying to skip/jump to next field but I\u0027ve used pldm_msgbuf_span_required to skip the field without extracting that value.",
+      "parentUuid": "b3f01aef_fec87168",
+      "range": {
+        "startLine": 2479,
+        "startChar": 1,
+        "endLine": 2481,
+        "endChar": 2
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18fa4b43_eca1215a",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 2
@@ -480,6 +882,24 @@
       "writtenOn": "2025-11-28T00:04:33Z",
       "side": 1,
       "message": "In this case you _do_ need to test `rc`, as you use the value of `possible_states_size` in the test on line 2488.",
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48f25d2f_ca056c4c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2484,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Isn\u0027t rc being tested in if(rc)?\nIf extract failed, rc should be -ve and it\u0027ll call \u0027return pldm_msgbuf_discard(...)\u0027",
+      "parentUuid": "18fa4b43_eca1215a",
       "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -509,6 +929,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9dac29f2_4ccc18d2",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2498,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done. Reworked other areas also to handle above suggestion.",
+      "parentUuid": "7bbb9d3a_a7d261f3",
+      "range": {
+        "startLine": 2497,
+        "startChar": 1,
+        "endLine": 2498,
+        "endChar": 34
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3aa91abe_df523acf",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 2
@@ -526,6 +970,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c9f2e70_eb5d07d4",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2505,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done. Added a check for possible_states_size above before using it.",
+      "parentUuid": "3aa91abe_df523acf",
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba4f7d8e_8b235111",
         "filename": "src/dsp/pdr.c",
         "patchSetId": 2
@@ -537,6 +999,30 @@
       "writtenOn": "2025-11-28T00:04:33Z",
       "side": 1,
       "message": "Can we rather use `\u0026states-\u003estates-\u003ebyte` and drop the cast?",
+      "range": {
+        "startLine": 2520,
+        "startChar": 16,
+        "endLine": 2520,
+        "endChar": 33
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "838fdf1f_f5409bc6",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2520,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-20T08:16:04Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "ba4f7d8e_8b235111",
       "range": {
         "startLine": 2520,
         "startChar": 16,
