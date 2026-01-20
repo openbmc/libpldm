@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52c2d67a_c5b08fbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-01-20T22:33:11Z",
+      "side": 1,
+      "message": "It seems like this would be quite a bit easier to read and reason about if we came up with a different mechanism for UT than compilation-switch-hidden friend declarations. A couple of options come to mind, in order of my personal preference:\n\n1. Make the public interface testable. Who are we protecting with the current implementation? Are the interfaces that easy to use incorrectly? Should we just be providing safer interfaces if so? What is the worst that will happen if this interfaces are used incorrectly?\n\n2. Just use \"seam mocking\" instead, i.e. make each layer\u0027s public interface useable for each classes responsibility but obfuscate the inner layers from the end user\n\n3. Use compile time dependency injection for your test fixtures. I don\u0027t like this as much personally, as it complicates the code for the sake of UT, i.e. now I need to understand a bunch of CRTP-esque declarations just to reason about my pldm parser.\n\n\nI understand that UT can often be tricky in C++, but it seems odd to me to add this much compile time switching for the non-production path, almost all of the time, I want to read the production path to figure out whats going on.\n\nThat said, thanks for this change, I\u0027ve looked at doing this elsewhere and written something similar to support it, having it in a reusable place like libpldm will be great.",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c922e5c_4d7f5c06",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-01-20T22:33:11Z",
+      "side": 1,
+      "message": "nit, std::make_unique doesn\u0027t work here? it would be slightly less verbose. Also below on line 76.",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d019ca1_c94d5cb7",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-01-20T22:33:11Z",
+      "side": 1,
+      "message": "nit: \u003ddefault doesn\u0027t work here? is this an ABI stability concern?",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21082e5f_dd2ad34b",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-01-20T22:33:11Z",
+      "side": 1,
+      "message": "do we want explicit here?",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e956fdb_6d7b5cd7",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-01-20T22:33:11Z",
+      "side": 1,
+      "message": "this seems like a very odd set of constructiors? was the move ctor meant to be deleted? I\u0027m having a difficult time imagining a case where I\u0027d want to move construct but not move assign an object.",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82bc7868_a41a81e1",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-01-20T22:33:11Z",
+      "side": 1,
+      "message": "This seems like it would be a good candidate for a free function? Whats the purpose of this class? I cant construct it, except by move construction, it seems I can only call this static method.",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45d5cd4f_15359f2a",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-01-20T22:33:11Z",
+      "side": 1,
+      "message": "Do we have any data to show that we can\u0027t reasonably just use the checked access members as the public interface?",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0173a1c_45cdf7f7",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-01-20T22:33:11Z",
+      "side": 1,
+      "message": "its relatively difficult to read this with all of these ifdefs littered about. Can we come up with a way to consolidate these? I have a feeling that some compile time DI would probably end up a bit cleaner.",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
