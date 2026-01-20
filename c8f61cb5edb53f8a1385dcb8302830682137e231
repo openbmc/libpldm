@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd6d9781_fbf6bb4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2026-01-20T16:02:13Z",
+      "side": 1,
+      "message": "This patch requires a linked patch to fix the PLDM repo, that uses the misspelled PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESOURCE_CONFIG",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
