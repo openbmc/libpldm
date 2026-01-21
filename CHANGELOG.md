@@ -23,6 +23,7 @@ Change categories:
 - stateset: Added new state sets from DSP0249 v1.4.0
 - state-set: Added new enums
 - entity: Fix typos in enums
+- platform: Add enum for Redfish Parallel Resource PDR
 
 ### Changed
 
