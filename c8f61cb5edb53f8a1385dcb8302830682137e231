@@ -16,6 +16,24 @@
       "message": "This patch requires a linked patch to fix the PLDM repo, that uses the misspelled PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESOURCE_CONFIG",
       "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "058547fb_960b3d23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-01-21T13:54:38Z",
+      "side": 1,
+      "message": "I\u0027ve created a necessary change for pldm repo that could be merged with this change\n\n`86829: [DO NOT MERGE] pldmtool: Update defines according to libpldm changes` | https://gerrit.openbmc.org/c/openbmc/pldm/+/86829",
+      "parentUuid": "bd6d9781_fbf6bb4e",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
