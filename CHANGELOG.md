@@ -33,6 +33,7 @@ Change categories:
   - enum pldm_state_set_availability_values
   - enum pldm_state_set_boot_progress_state_values
 - entity: Added new entity types for cases of misspelling
+- platform: Added enum for Redfish Parallel Resource PDR
 
 ### Changed
 
