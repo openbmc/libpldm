@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d00deff1_e1e05dc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-01-22T07:42:42Z",
+      "side": 1,
+      "message": "\u003e Make the public interface testable. Who are we protecting with the current implementation?\n\nIt\u0027s a parser so no one besides the implementation should be able to construct these objects.\n\n\u003e Just use \"seam mocking\" instead, i.e. make each layer\u0027s public interface\n useable for each classes responsibility but obfuscate the inner layers \nfrom the end user\n\nI don\u0027t understand how that would look like. Would you like to fork my patch? Maybe it will be easier to understand from the code itself.\n\n\u003e I understand that UT can often be tricky in C++, but it seems odd to me \nto add this much compile time switching for the non-production path, \nalmost all of the time, I want to read the production path to figure out\n whats going on.\n\nIf i were to use a library like PackageParser, i would look at examples / tests first and if those are fine then no need to dig into implementation details.\n\n\u003e I\u0027ve looked at doing this elsewhere and written something similar to \nsupport it, having it in a reusable place like libpldm will be great.\n\nWell then it\u0027s  \u003e\u003d 3 places which need the PackageParser. There\u0027s `pldm`, `phosphor-bmc-code-mgmt`, and your use-case 😊",
+      "parentUuid": "52c2d67a_c5b08fbd",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c922e5c_4d7f5c06",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-01-20T22:33:11Z",
       "side": 1,
       "message": "nit, std::make_unique doesn\u0027t work here? it would be slightly less verbose. Also below on line 76.",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faf60663_5bd29780",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-01-22T07:42:42Z",
+      "side": 1,
+      "message": "It does not work since that template is not our friend.\n\nSo it cannot call the private constructor.",
+      "parentUuid": "9c922e5c_4d7f5c06",
       "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33637b7f_27cf135b",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-01-22T07:42:42Z",
+      "side": 1,
+      "message": "Changed it to `\u003d default;`. I don\u0027t think it will make a difference here since it\u0027s part of the cpp.",
+      "parentUuid": "1d019ca1_c94d5cb7",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21082e5f_dd2ad34b",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-01-20T22:33:11Z",
       "side": 1,
       "message": "do we want explicit here?",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aefefa83_2f3f0f41",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-01-22T07:42:42Z",
+      "side": 1,
+      "message": "probably. fixed it 👍",
+      "parentUuid": "21082e5f_dd2ad34b",
       "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e632f820_81f3dd32",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-01-22T07:42:42Z",
+      "side": 1,
+      "message": "yep, my mistake. I should have simply inherited from `NonCopyableNonMoveable` like the other classes do. Fixed it.",
+      "parentUuid": "4e956fdb_6d7b5cd7",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82bc7868_a41a81e1",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-01-20T22:33:11Z",
       "side": 1,
       "message": "This seems like it would be a good candidate for a free function? Whats the purpose of this class? I cant construct it, except by move construction, it seems I can only call this static method.",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b51d2c7a_91f2cb0b",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-01-22T07:42:42Z",
+      "side": 1,
+      "message": "The helper and parse functions need to construct a few objects. So `PackageParser` is a friend of these classes to facilitate that.\n\nI did not want to copy-paste these 2 function signatures into the friend declarations of the classes they construct, since it would be verbose and repetitive.\n\nAnd we cannot make an entire namespace a friend, right? So i did not see a way to solve it without a class.\n\n\nI\u0027m tentatively closing this comment but very much open to other solutions here.",
+      "parentUuid": "82bc7868_a41a81e1",
       "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -120,6 +228,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eff2181_914d899e",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-01-22T07:42:42Z",
+      "side": 1,
+      "message": "It worked out to make the unchecked access members private to this class.\n\nThanks for this fix 👍",
+      "parentUuid": "45d5cd4f_15359f2a",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0173a1c_45cdf7f7",
@@ -133,6 +259,24 @@
       "writtenOn": "2026-01-20T22:33:11Z",
       "side": 1,
       "message": "its relatively difficult to read this with all of these ifdefs littered about. Can we come up with a way to consolidate these? I have a feeling that some compile time DI would probably end up a bit cleaner.",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4cb3a17_a3e3af56",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-01-22T07:42:42Z",
+      "side": 1,
+      "message": "yep, it\u0027s not looking nice ... compacted those to only one `#ifdef` per class for now 😊\n\n\u003e I have a feeling that some compile time DI would probably end up a bit cleaner.\n\nCan you go into detail here?\n\nI would also prefer a solution without `#ifdef`.",
+      "parentUuid": "d0173a1c_45cdf7f7",
       "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
