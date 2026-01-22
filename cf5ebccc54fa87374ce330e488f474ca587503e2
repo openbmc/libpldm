@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c10d4c8a_85fc3342",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-01-22T17:52:58Z",
+      "side": 1,
+      "message": "my larger point is that we\u0027re probably making more problems than we\u0027re solving with somewhat draconian public/private/friend disctinctions.\n\nWhats the worst that happens if someone calls the Package constructor? what damage could they actually do with it? It doesn\u0027t seem like they\u0027ll be able to influence the parsing in any way, they\u0027ll just have a Package object that they can\u0027t move or copy.\n\nWhy shouldn\u0027t someone be able to construct a DescriptorData from a vector of data? They\u0027ll just have a data type they can\u0027t do much with, and sure its maybe its wasteful, but they won\u0027t really be able to do anything with it.\n\nWe\u0027re imposing restrictions that are making it harder than necessary to test this, and then we\u0027re making the code more complicated yet to facilitate said testing.",
+      "parentUuid": "d00deff1_e1e05dc3",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c922e5c_4d7f5c06",
         "filename": "bindings/cpp/firmware_update.cpp",
         "patchSetId": 36
