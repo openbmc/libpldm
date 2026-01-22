@@ -16,6 +16,24 @@
       "message": "Why are we NOT allowing other values under this operation state?",
       "revId": "0aa86666ac01d5600600a0c130464ae1f3913210",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53222d9d_e5a5a87d",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3649,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-01-22T10:46:40Z",
+      "side": 1,
+      "message": "Good catch. I have changed this to `EFFECTER_OPER_STATE_INTEST`",
+      "parentUuid": "500a5597_9758804d",
+      "revId": "0aa86666ac01d5600600a0c130464ae1f3913210",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
