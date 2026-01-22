@@ -123,6 +123,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c799ea0_b2dd8481",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-01-22T10:04:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e1db8d5_c564f74c",
+      "revId": "14b904472c390f5558dcd46556408ac455423f99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14bc1767_ed13dab7",
@@ -208,6 +226,24 @@
       "side": 1,
       "message": "I missed Andrew\u0027s reply earlier.\nAs I understand, we are going ahead with separate net \u0026 eid.",
       "parentUuid": "b3a4a263_57744039",
+      "revId": "14b904472c390f5558dcd46556408ac455423f99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbbc6a80_dee26815",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-01-22T10:04:32Z",
+      "side": 1,
+      "message": "I have changed the struct used within libpldm to use the same structure defined by linux kernel in future releases. From my understanding of the comments, since we are going forward with separate net, eid to pass from consumer of the library into the library, I am assuming there is no change needed and resolving this comment.",
+      "parentUuid": "4ac22efd_d1bae13f",
       "revId": "14b904472c390f5558dcd46556408ac455423f99",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
