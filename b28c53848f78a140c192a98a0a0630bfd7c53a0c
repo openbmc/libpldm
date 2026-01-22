@@ -16,6 +16,24 @@
       "message": "Do you have usage implementation for this new enum?",
       "revId": "b28c53848f78a140c192a98a0a0630bfd7c53a0c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b90f5aa6_8e439057",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-01-22T11:14:45Z",
+      "side": 1,
+      "message": "No, I\u0027ve just noticed that it is not present when I was investigating libpldm and the most recent PLDM specification.\n\nI was thinging of adding parsing to all the Redfish PDRs, so pldmtool would print information from them, but I haven\u0027t yet seen device with this Redfish Parallel Resource PDR.",
+      "parentUuid": "230766f8_e2505bc6",
+      "revId": "b28c53848f78a140c192a98a0a0630bfd7c53a0c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
