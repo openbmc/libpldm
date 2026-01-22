@@ -34,6 +34,24 @@
       "parentUuid": "fd197708_c48f8f0d",
       "revId": "f986928a52b98f8baf41158e1629d35a6506dd97",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd7aafe3_f41413fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002071
+      },
+      "writtenOn": "2026-01-22T08:28:24Z",
+      "side": 1,
+      "message": "You can create a relationship between the two commits by putting the same topic on both in gerrit.\n\nThis way they are tested together and helps maintainers understand merge dependencies.",
+      "parentUuid": "658c7391_287b44f4",
+      "revId": "f986928a52b98f8baf41158e1629d35a6506dd97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
