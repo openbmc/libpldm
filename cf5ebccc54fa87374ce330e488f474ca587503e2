@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fd14039_19ba7e6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-01-23T02:31:52Z",
+      "side": 1,
+      "message": "\u003e Why shouldn\u0027t someone be able to construct a DescriptorData from a vector of data? They\u0027ll just have a data type they can\u0027t do much \nwith, and sure its maybe its wasteful, but they won\u0027t really be able to \ndo anything with it.\n\nIt\u0027s an extra function in the ABI dump and possibly a burden to the maintainer.\n\nEvery spec change might involve additional struct members which then require an additional constructor to create it, bloating the API and ABI surface.\n\nI\u0027m happy to consider exposing the constructors to facilitate an actual use-case which cannot otherwise be done.\n\nI would also like to hear @andrew@codeconstruct.com.au thoughts on the subject before exposing the constructors.\n\nSince there was feedback previously about the d-pointer solution that it exposes so many functions/symbols. A constructor is an extra symbol so as per that feedback i should avoid it.\n\n\u003e We\u0027re imposing restrictions that are making it harder than necessary to test this, and then we\u0027re making the code more complicated \nyet to facilitate said testing.\n\nWe have so many constraints from various directions, from C++ language features which don\u0027t work together (looking at you, `make_unique` and `friend`!), ABI stability, need to account for spec changes, being able to test things, needing growable structures, exposing only the minimum amount of symbols, ...\n\nthat it is difficult for me to see how it could be simplified.\n\nI\u0027m following the design and ideas from @andrew@codeconstruct.com.au so for major changes i would like him to provide the feedback. \n\nOtherwise we might \u0027improve it\u0027 from our perspective but then later have to undo all that again if it has become worse from his perspective.",
+      "parentUuid": "c10d4c8a_85fc3342",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c922e5c_4d7f5c06",
         "filename": "bindings/cpp/firmware_update.cpp",
         "patchSetId": 36
@@ -295,6 +313,24 @@
       "side": 1,
       "message": "yep, it\u0027s not looking nice ... compacted those to only one `#ifdef` per class for now 😊\n\n\u003e I have a feeling that some compile time DI would probably end up a bit cleaner.\n\nCan you go into detail here?\n\nI would also prefer a solution without `#ifdef`.",
       "parentUuid": "d0173a1c_45cdf7f7",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d87f58f_4797124c",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-01-23T02:31:52Z",
+      "side": 1,
+      "message": "Is it sufficient to have one per class, how can i simplify further?",
+      "parentUuid": "c4cb3a17_a3e3af56",
       "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
