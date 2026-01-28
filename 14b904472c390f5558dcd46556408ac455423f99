@@ -88,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31aeeab3_0a734f42",
+        "filename": "include/libpldm/transport/af-mctp.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-01-28T04:27:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4849272d_f2ba1ab4",
+      "revId": "14b904472c390f5558dcd46556408ac455423f99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db540d14_78cd430a",
