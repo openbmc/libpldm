@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bd90fa7_fb580c15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-01-29T05:45:42Z",
+      "side": 1,
+      "message": "The IBM Operator Panel is a front-panel interface found on IBM systems like the Power10 servers, which allow users to monitor, configure, and manage system functions directly such as viewing system status, performing diagnostics, and configuring network settings. The panel typically includes a display (LCD/LED), navigation buttons, and status LEDs.\nFunction codes enable detailed system control, dumps and troubleshooting. This enum is required to enable certain functions that will be provided by the hypervisor through PLDM.",
+      "parentUuid": "ce1eca8a_245f81b5",
+      "revId": "faf71f20809d345a260b12a6b516ecd983c215a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07c44a7e_e1585875",
