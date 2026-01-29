@@ -69,6 +69,58 @@
       "parentUuid": "af84e219_da850e4a",
       "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1241a4a1_8b8b5b15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T04:09:28Z",
+      "side": 1,
+      "message": "@jayashankarpadath@gmail.com please review this change.",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22cf86c0_abf5928c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T04:09:28Z",
+      "side": 1,
+      "message": "As these values are specified by the DMTF I don\u0027t have any strong concern with adding them without an existing user.\n\nThe \"existing user\" request is for when the implementation (libpldm) has to make its own creative choices in order to implement the specification - things like struct content and layout, function names, parameters and return values, or interactions between members of a set of APIs (e.g. the firmware update package parser or the transport APIs). These areas tend to be where we make mistakes that effect correctness and ergonomics for the library user.",
+      "parentUuid": "625fb248_5357b443",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46a387a3_d06e9956",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T04:09:28Z",
+      "side": 1,
+      "message": "This isn\u0027t super informative? Compare to the above entries.\n\nAlso `state-set` vs `stateset`?",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
