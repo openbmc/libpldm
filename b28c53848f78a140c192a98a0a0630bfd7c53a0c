@@ -34,6 +34,23 @@
       "parentUuid": "230766f8_e2505bc6",
       "revId": "b28c53848f78a140c192a98a0a0630bfd7c53a0c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf72347_669bd10c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T04:16:27Z",
+      "side": 1,
+      "message": "Can you update the comment here to reflect that not all the definitions are available in v1.2.0 (i.e. change it to v1.3.0)?",
+      "revId": "b28c53848f78a140c192a98a0a0630bfd7c53a0c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
