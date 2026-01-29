@@ -52,6 +52,63 @@
       "parentUuid": "658c7391_287b44f4",
       "revId": "f986928a52b98f8baf41158e1629d35a6506dd97",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aae8d668_e3207037",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T04:13:30Z",
+      "side": 1,
+      "message": "As it stands this isn\u0027t an addition - you\u0027re changing something, so while that\u0027s the case it should go under `### Changed`. However, see other comments.",
+      "revId": "f986928a52b98f8baf41158e1629d35a6506dd97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "433924c5_958bba89",
+        "filename": "include/libpldm/entity.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T04:13:30Z",
+      "side": 1,
+      "message": "I appreciate that you\u0027re fixing a typo, but an immediate change like this can cause breakage.\n\nMultiple enum members can take the same enum value. We can make use of this to introduce the correct spelling, then remove the incorrect spelling down the track.\n\n```suggestion\n\tPLDM_ENTITY_SOLID_STATE_SRIVE \u003d 111,\n\tPLDM_ENTITY_SOLID_STATE_DRIVE \u003d 111,\n\n```\n\nThat way we can merge this fix without having to simultaneously merge any dependent changes.",
+      "revId": "f986928a52b98f8baf41158e1629d35a6506dd97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e366bbbb_06b7c4fe",
+        "filename": "include/libpldm/entity.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T04:13:30Z",
+      "side": 1,
+      "message": "See the comment above.",
+      "range": {
+        "startLine": 187,
+        "startChar": 1,
+        "endLine": 188,
+        "endChar": 28
+      },
+      "revId": "f986928a52b98f8baf41158e1629d35a6506dd97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
