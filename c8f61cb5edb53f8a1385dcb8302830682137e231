@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b5f357d_a7324bf1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000207
+      },
+      "writtenOn": "2026-01-29T07:30:42Z",
+      "side": 1,
+      "message": "Please rephrase \"This commit adds\" to \"Add enum values\" so that its more explicit on the intended change",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65b86093_39f28f68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000207
+      },
+      "writtenOn": "2026-01-29T07:30:42Z",
+      "side": 1,
+      "message": "As this is a document name please be specific like \"Platform Data Model (PLDM) State Set Specification\"",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be45e4dd_64f60938",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000207
+      },
+      "writtenOn": "2026-01-29T07:30:42Z",
+      "side": 1,
+      "message": "It would be good to have relevant section and table names mentioned here as this commit message looks too generic in nature",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "bd6d9781_fbf6bb4e",
@@ -119,6 +170,23 @@
       "writtenOn": "2026-01-29T04:09:28Z",
       "side": 1,
       "message": "This isn\u0027t super informative? Compare to the above entries.\n\nAlso `state-set` vs `stateset`?",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "910e620e_d20881d8",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000207
+      },
+      "writtenOn": "2026-01-29T07:30:42Z",
+      "side": 1,
+      "message": "Could you please remove this Presence state set id as there is already one commit only for this change at https://gerrit.openbmc.org/c/openbmc/libpldm/+/86627",
       "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
