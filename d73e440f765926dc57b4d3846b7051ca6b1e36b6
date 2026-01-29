@@ -1,0 +1,249 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc79b60_b35e0de8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "Can you please reference the spec, version, and section or relevant tables?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 15
+      },
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46227ca5_6c4226ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "Hi Aditya, thanks for adopting the iterator pattern here, I think it\u0027s helpful.",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac5bec34_ebff2c4a",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 19
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "Generally, while it is part of the API/ABI, users should use the wrapper macros instead. I\u0027d prefer we drop this from the changelog.",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "539099b6_68da61dc",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "Can you please include the code to do so in the example? Otherwise it\u0027s not clear how `iter` should be initialised.",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "effe8886_70979f46",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 3429,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "Please make sure your test cases cover all branch paths for this condition.",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acd71ed2_60535bd3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 3439,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "You use this directly below. Before you do so you need to test for error on extraction. Otherwise this risks using an uninitialised value.\n\n```suggestion\n\trc \u003d pldm_msgbuf_extract(buf, name-\u003ename_string_count);\n\tif (rc) {\n\t    return pldm_msgbuf_discard(buf, rc);\n\t}\n```",
+      "range": {
+        "startLine": 3439,
+        "startChar": 32,
+        "endLine": 3439,
+        "endChar": 49
+      },
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8620c648_5b733017",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 3443,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "Please never reach into `buf` directly. The internals can only be accessed safely through the msgbuf APIs. You should likely use `pldm_msgbuf_span_remaining()` here.",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "177071aa_3310824f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 3461,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "Both addition operations should have overflow tests. You could also accumulate them serially, which may help:\n\n```suggestion\n\t\tnames_size +\u003d ascii_len;\n\t\tnames_size +\u003d utf16_len;\n\n\n```\n\nThe overflow tests look like:\n\n```\nif ((SIZE_MAX - ascii_len) \u003c names_size) { /* error handling */ }\n\n```\n\nAnd then again for `utf16_len`.",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7c459fe_b7af0a35",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 3464,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "Do we need the precise calculation? Can we not rather just assume the remaining buffer length and error out later?",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a98b75_2d8974d6",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 7092,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "Is it expected that library users will set up `iter` in this fashion as well? Or is this an artefact of the test case?",
+      "range": {
+        "startLine": 7088,
+        "startChar": 1,
+        "endLine": 7092,
+        "endChar": 34
+      },
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7594715_65297869",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 7115,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "This should be `ASSERT_EQ()`. The `EXPECT_EQ(effecter_count, 2);` below cannot be sensible if `rc` is not `0`.\n\nPlease fix any similar cases throughout.",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b396f31_3c871785",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 7156,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "If there are no names then we shouldn\u0027t enter the loop body, right? We could instead `ASSERT_TRUE(false)` here?",
+      "range": {
+        "startLine": 7154,
+        "startChar": 0,
+        "endLine": 7156,
+        "endChar": 46
+      },
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7efbb24_e136c93d",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 7183,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:13:17Z",
+      "side": 1,
+      "message": "`ASSERT_TRUE(false)`",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
