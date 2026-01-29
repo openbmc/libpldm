@@ -1,0 +1,393 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e2b7431_fc30b35d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "Can you please rephrase this as \"DSP0248 v1.3.0 ...\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dacbea8_ecbeedef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "Can you please reference relevant sections and table here?",
+      "range": {
+        "startLine": 10,
+        "startChar": 29,
+        "endLine": 10,
+        "endChar": 59
+      },
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77c11aed_bf50b9a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "This needs to be a separate change. I feel like I\u0027ve requested that previously?\n\nPlease include a `Fixes:` tag in that separate commit as well. `git log --grep \u0027Fixes:\u0027` will give you an idea of the expectations there.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 71
+      },
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b8a7549_98e09edd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "Please remove this `Tested` line, it\u0027s self evident from the CI result.\n\nSee: https://github.com/openbmc/libpldm/blob/c6837f00be70b3aac2c654d5e399f57a652452ae/CONTRIBUTING.md#L239-L245",
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd151a2_c6336290",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 21
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "Please move this to the `## [Unreleased]` section.\n\nAlso, for now, I ask that you put this under the `### Changed` subheader, as it affects existing definitions (is an ABI break).",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 70
+      },
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53b1fda_5925494f",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 21
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "This needs to go in the commit you split out that addresses this specific problem.\n\nIt also needs to be moved to under the `## [Unreleased]` section.",
+      "range": {
+        "startLine": 152,
+        "startChar": 1,
+        "endLine": 154,
+        "endChar": 29
+      },
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f223d358_f4d81298",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "Can we switch this around to say `added in DSP0248 v1.3.0`?\n\nPlease fix throughout.",
+      "range": {
+        "startLine": 400,
+        "startChar": 37,
+        "endLine": 400,
+        "endChar": 65
+      },
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41e2142c_d66aaf83",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 2281,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "This annotation suggests you\u0027re deprecating it now, which is in conflict with the description stating \"in the future\".",
+      "range": {
+        "startLine": 2281,
+        "startChar": 4,
+        "endLine": 2281,
+        "endChar": 15
+      },
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5b9450f_7664a4e8",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 2285,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "Thanks for adding this note.",
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa29204a_6a14d0af",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 2319,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "Please do not return PLDM completion codes in new APIs.\n\nSee: https://github.com/openbmc/libpldm/blob/c6837f00be70b3aac2c654d5e399f57a652452ae/CONTRIBUTING.md#L361-L364",
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db71ddb4_ceb16864",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 2324,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "Buffer arguments should be `const void *`. I recognise this isn\u0027t consistent with `decode_numeric_sensor_data()` above, but let\u0027s try not repeat the sins of the past.",
+      "range": {
+        "startLine": 2324,
+        "startChar": 7,
+        "endLine": 2324,
+        "endChar": 14
+      },
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da2f570c_1f0a1b72",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1724,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "Can you please put this note in the header with the rest of the documentation?",
+      "range": {
+        "startLine": 1718,
+        "startChar": 0,
+        "endLine": 1724,
+        "endChar": 3
+      },
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "704ec68e_9f1f9edb",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "This test should be unnecessary? It should rather be handled by `pldm_msgbuf_complete_consumed()` below.",
+      "range": {
+        "startLine": 1860,
+        "startChar": 1,
+        "endLine": 1863,
+        "endChar": 1
+      },
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae3cbac3_4ac1336c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 2401,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "This should be deprecated as unsafe.\n\nA replacement should be designed and implemented in this patch that meets the current API guidelines.",
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2a67a61_71f2405d",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 2450,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "This must be guarded to prevent the 64-bit access. Existing users may only have passed a 32-bit buffer. This may cause an out-of-bounds write.",
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "171d43f0_91d40a3d",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 2460,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "This should also be deprecated as unsafe.",
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3f235a6_dfbc4db7",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 3464,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "Why is this necessary?",
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aa6324a_ec76684f",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 6718,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "Why do both?\n\nYou could instead use the encode API to do the packing for you rather than manually pack the message.",
+      "range": {
+        "startLine": 6702,
+        "startChar": 0,
+        "endLine": 6718,
+        "endChar": 61
+      },
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f36c806_3dca3766",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 6797,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T01:06:22Z",
+      "side": 1,
+      "message": "None of this is testing the new API, only the older ones. Can you please fix that?\n\nIt\u0027s also not clear why encoding/decoding 64bit values via the old APIs should succeed. They should error out.",
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
