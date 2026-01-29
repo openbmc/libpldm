@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98fd6686_efa953e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:19:49Z",
+      "side": 1,
+      "message": "I\u0027d prefer we don\u0027t capitalise \"presence\" here. Please fix throughout.",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "bd8ef52d0d01c48b1c43b0c32111b849c6249a53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9c2c88_8aadde67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:19:49Z",
+      "side": 1,
+      "message": "Please avoid the phrase \"This commit\" in commit messages. Hopefully the commit message is always about the associated commit.\n\nThis can be rephrased in the imperative mood as:\n\n\"Add two enum values ...\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "bd8ef52d0d01c48b1c43b0c32111b849c6249a53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e086221e_2250ad3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T00:19:49Z",
+      "side": 1,
+      "message": "Can you please call out the spec version and relevant section/tables as well?",
+      "range": {
+        "startLine": 9,
+        "startChar": 52,
+        "endLine": 10,
+        "endChar": 36
+      },
+      "revId": "bd8ef52d0d01c48b1c43b0c32111b849c6249a53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
