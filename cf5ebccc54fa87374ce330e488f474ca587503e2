@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51f3194b_a7f2dab9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T05:30:04Z",
+      "side": 1,
+      "message": "\u003e It\u0027s an extra function in the ABI dump and possibly a burden to the maintainer.\n\u003e\n\n\u003e Every spec change might involve additional struct members which then require an additional constructor to create it, bloating the API and ABI surface.\n\nIf we\u0027re exposing the members directly (in a `struct` sense) I think there\u0027s merit to avoiding attempts to provide constructors that take values for every member, and instead only providing the default constructor (and the usual copy/move constructors as required)? If people want to construct an empty package then that\u0027s their business. The library APIs however will construct it and then populate it, and only ever return the populated object (or an error).\n\n\u003e We have so many constraints from various directions, from C++ language features which don\u0027t work together (looking at you, make_unique and friend!), ABI stability, need to account for spec changes, being able to test things, needing growable structures, exposing only the minimum amount of symbols, ...\n\n\nRight, there\u0027s a bit of tension here between these concerns.\n\nBroadly, what I\u0027m after is that we account for spec changes adding new capabilities in the design (this has already happened several times), in such a way that the additions aren\u0027t often a breaking change, or require branched code paths in the callers, as best we can. Growable structures naturally play into this as a solution, but that\u0027s one approach to achieving the high-level desire, not a requirement in its own right. Symbol minimalism can only go so far, we can\u0027t avoid adding symbols that are essential to the problem, but we can work to eliminate symbols that are accidental complexity (in the No Silver Bullet sense) by decisions in the implementation\n\nThat all relates to ABI stability, however, my concern there isn\u0027t to prevent the unpreventable with changes in e.g. exposed `std::` components, rather, just that we think about things and do the best we can to design something that _shouldn\u0027t_ break _for the bits we\u0027ve defined_. `abi-compliance-checker` failing isn\u0027t an unquestionable gate that prevents submission, it\u0027s an input for consideration as to whether the patch is appropriate.\n\nI\u0027ll probably have further thoughts here but that\u0027s it for the moment.",
+      "parentUuid": "2fd14039_19ba7e6d",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c922e5c_4d7f5c06",
         "filename": "bindings/cpp/firmware_update.cpp",
         "patchSetId": 36
@@ -331,6 +349,24 @@
       "side": 1,
       "message": "Is it sufficient to have one per class, how can i simplify further?",
       "parentUuid": "c4cb3a17_a3e3af56",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57bd5b63_166fbc04",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-01-29T05:30:04Z",
+      "side": 1,
+      "message": "Like, this is a further hack, but at least a tidier one - can we fix up the definition of `LIBPLDM_ABI_TESTING` in the build system to incorporate `LIBPLDM_GTEST_FRIENDS` as an input to its definition rather than `#ifdef` it away here?\n\nThat said, I\u0027d much rather a design where we don\u0027t require this type of trickery at all.",
+      "parentUuid": "6d87f58f_4797124c",
       "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
