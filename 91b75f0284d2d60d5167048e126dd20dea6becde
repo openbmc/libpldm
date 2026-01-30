@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbb8e218_7ae2b655",
+        "filename": "include/libpldm/transport/af-mctp.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2026-01-30T08:21:41Z",
+      "side": 1,
+      "message": "Let\u0027s have it in the reverse order at all places. network followed by eid.",
+      "range": {
+        "startLine": 42,
+        "startChar": 27,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "91b75f0284d2d60d5167048e126dd20dea6becde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3118febf_f6ad97da",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2026-01-30T08:21:41Z",
+      "side": 1,
+      "message": "nit: Here as well. network followed by eid.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 33
+      },
+      "revId": "91b75f0284d2d60d5167048e126dd20dea6becde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
