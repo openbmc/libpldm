@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd6e81d4_7c3d2c79",
+        "filename": "include/libpldm/transport/af-mctp.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-01-30T08:50:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbb8e218_7ae2b655",
+      "range": {
+        "startLine": 42,
+        "startChar": 27,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "91b75f0284d2d60d5167048e126dd20dea6becde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3118febf_f6ad97da",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-01-30T08:21:41Z",
       "side": 1,
       "message": "nit: Here as well. network followed by eid.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 33
+      },
+      "revId": "91b75f0284d2d60d5167048e126dd20dea6becde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "144dce2b_aa68538f",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-01-30T08:50:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3118febf_f6ad97da",
       "range": {
         "startLine": 122,
         "startChar": 0,
