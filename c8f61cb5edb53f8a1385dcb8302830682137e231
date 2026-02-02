@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "813bf37d_fc086ed9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-02T08:21:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b5f357d_a7324bf1",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65b86093_39f28f68",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb5cbd6_ad6ccedd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-02T08:21:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65b86093_39f28f68",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be45e4dd_64f60938",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-01-29T07:30:42Z",
       "side": 1,
       "message": "It would be good to have relevant section and table names mentioned here as this commit message looks too generic in nature",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f265f1d6_2a810dfd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-02T08:21:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be45e4dd_64f60938",
       "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -157,6 +211,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea3665c_bb97cdf3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-02T08:21:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1241a4a1_8b8b5b15",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46a387a3_d06e9956",
@@ -176,6 +248,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "239d2668_e3ab5f0b",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-02T08:21:01Z",
+      "side": 1,
+      "message": "\u003e This isn\u0027t super informative? Compare to the above entries.\n\nWhould you prefer if I write all the 9 new enums here to make it more explicit? I just thought this would overcomplicate the description.\n\n\u003e Also state-set vs stateset?\n\nThere is a general `enum pldm_state_set_ids` (https://github.com/openbmc/libpldm/blob/main/include/libpldm/state_set.h#L11) and detailed state set values like `enum pldm_state_set_health_state_values`/`enum pldm_state_set_availability_values`/... (https://github.com/openbmc/libpldm/blob/main/include/libpldm/state_set.h#L148)\n\nFrom the git log history it looked to me that the first one is referenced as `stateset` in libpldm, and the second one as `state-set`. If this is not the case I can correct the description as necessary.",
+      "parentUuid": "46a387a3_d06e9956",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "910e620e_d20881d8",
         "filename": "include/libpldm/state_set.h",
         "patchSetId": 4
@@ -187,6 +277,24 @@
       "writtenOn": "2026-01-29T07:30:42Z",
       "side": 1,
       "message": "Could you please remove this Presence state set id as there is already one commit only for this change at https://gerrit.openbmc.org/c/openbmc/libpldm/+/86627",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a290d99_8bf8511e",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-02T08:21:01Z",
+      "side": 1,
+      "message": "I would resolve this on rebase if 86627 would be merged first",
+      "parentUuid": "910e620e_d20881d8",
       "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
