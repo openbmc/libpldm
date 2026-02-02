@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3933e050_fa12a283",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-02T16:29:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea42102_262cff35",
+      "revId": "f53d2178b9e77c9b85d43eeb03fe062f474ab3eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d4dd469_4260aacf",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-01-28T23:46:06Z",
       "side": 1,
       "message": "This is the type name and I\u0027d rather we avoid its use in the documentation as its specified in the declaration.\n\nPlease fix throughout.",
+      "range": {
+        "startLine": 1464,
+        "startChar": 32,
+        "endLine": 1464,
+        "endChar": 77
+      },
+      "revId": "f53d2178b9e77c9b85d43eeb03fe062f474ab3eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdda68e3_48a845da",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-02T16:29:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d4dd469_4260aacf",
       "range": {
         "startLine": 1464,
         "startChar": 32,
@@ -58,6 +100,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57c075bf_5bac3341",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1466,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-02T16:29:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "518ad4af_7b2e3b65",
+      "revId": "f53d2178b9e77c9b85d43eeb03fe062f474ab3eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08c9a751_cc725e36",
@@ -71,6 +131,30 @@
       "writtenOn": "2026-01-28T23:46:06Z",
       "side": 1,
       "message": "`invalid` is a valid state for `effecter_operational_state`, so I\u0027d rather you choose a different wording here to remove the ambiguity.",
+      "range": {
+        "startLine": 1468,
+        "startChar": 71,
+        "endLine": 1468,
+        "endChar": 82
+      },
+      "revId": "f53d2178b9e77c9b85d43eeb03fe062f474ab3eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72da6b20_29798b91",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-02T16:29:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08c9a751_cc725e36",
       "range": {
         "startLine": 1468,
         "startChar": 71,
@@ -104,6 +188,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45b54548_088c1235",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-02T16:29:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8f41020_3222cbe5",
+      "range": {
+        "startLine": 1471,
+        "startChar": 26,
+        "endLine": 1472,
+        "endChar": 71
+      },
+      "revId": "f53d2178b9e77c9b85d43eeb03fe062f474ab3eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45d86dd1_d4d64f53",
@@ -117,6 +225,24 @@
       "writtenOn": "2026-01-28T23:46:06Z",
       "side": 1,
       "message": "Please remove the blank line so the documentation is attached to the declaration.",
+      "revId": "f53d2178b9e77c9b85d43eeb03fe062f474ab3eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d35d18d5_85876393",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-02T16:29:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45d86dd1_d4d64f53",
       "revId": "f53d2178b9e77c9b85d43eeb03fe062f474ab3eb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -138,6 +264,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4fae8ca_4357a677",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3645,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-02T16:29:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bdc4152_aad251a1",
+      "revId": "f53d2178b9e77c9b85d43eeb03fe062f474ab3eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bc6604c_217a95b0",
@@ -151,6 +295,24 @@
       "writtenOn": "2026-01-28T23:46:06Z",
       "side": 1,
       "message": "My reading of Table 47 suggests that the `effecterOperationalState` is constrained to `enabled`, `disabled` and `unavailable`. I think we should rather test for those explicitly?",
+      "revId": "f53d2178b9e77c9b85d43eeb03fe062f474ab3eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e57e7e8d_84c9d4f9",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3649,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-02T16:29:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bc6604c_217a95b0",
       "revId": "f53d2178b9e77c9b85d43eeb03fe062f474ab3eb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
