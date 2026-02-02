@@ -369,6 +369,24 @@
       "parentUuid": "6d87f58f_4797124c",
       "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5265b80_44234209",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-02T07:36:00Z",
+      "side": 1,
+      "message": "\u003e can we fix up the definition of LIBPLDM_ABI_TESTING\n\n` \u0027__attribute__((visibility(\"default\")))\u0027  ` and things like that cannot help much with cleaning things up for things which are not symbols.\n\nWe would still require the conditional compilation and would complicate things further by spreading `LIBPLDM_GTEST_FRIENDS` to other places.\n\n\n\n\u003e That said, I\u0027d much rather a design where we don\u0027t require this type of trickery at all.\n\nIf testcases cannot construct our classes here then we cannot use a direct comparison and have to supplement external comparison functions and extra classes to compare with. Also then our comparison functions cannot be tested well since we cannot define the expected result.\n\nSo the testcases need to be friends with our class to call the private constructor.\n\nI\u0027m open to any ideas at this point, but comparing this to `stdexec` or `dbus-sensors` i find it to be plenty readable. \n\nFor most users the data members and operator overloads should be most interesting and those are clearly visible.",
+      "parentUuid": "57bd5b63_166fbc04",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

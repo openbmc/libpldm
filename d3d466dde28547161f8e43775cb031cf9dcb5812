@@ -70,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "399a808d_92aa80b1",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-02T07:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed75ee3c_027b63a3",
+      "revId": "d3d466dde28547161f8e43775cb031cf9dcb5812",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25126ec4_d9e91b47",
