@@ -34,6 +34,7 @@ Change categories:
   - enum pldm_state_set_boot_progress_state_values
 - entity: Add new entity types for cases of misspelling
 - platform: Add enum for Redfish Parallel Resource PDR
+- bios: Add all possible values to enum pldm_bios_commands from DSP0247 v1.0.0
 
 ### Changed
 
