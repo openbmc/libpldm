@@ -6621,3 +6621,199 @@ TEST(EncodePldmFileDescriptorPdr, BadParamBufferTooSmall)
               -EOVERFLOW);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodeRedfishResourcePdr, GoodTest)
+{
+    std::vector<uint8_t> pdr1{
+        // Common PDR Header
+        // clang-format off
+        0x1, 0x0, 0x0, 0x0,        // record handle
+        0x1,                       // PDRHeaderVersion
+        PLDM_REDFISH_RESOURCE_PDR, // PDRType
+        0x1, 0x0,                  // recordChangeNumber
+        0x76, 0x0,                 // dataLength
+        /* Redfish Resource PDR Data */
+        0x11, 0x22, 0x33, 0x44,       // ResourceID
+        0x7,                          // ResourceFlags
+        0x1, 0x2, 0x3, 0x4,           // ContainingResourceID
+        0xa, 0x0,                     // ProposedContainingResourceLengthBytes
+        0x54, 0x65, 0x73, 0x74, 0x2e, // ProposedContainingResourceName
+        0x54, 0x65, 0x73, 0x74, 0x0,
+        // "Test.Test"
+        0x8, 0x0,                                      // SubURILengthBytes
+        0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x0, // SubURI
+        // "Metrics"
+        0x2, 0x0,           // AdditionalResourceIDCount
+        0x1, 0x2, 0x3, 0x4, // AdditionalResourceID[0]
+        0x7, 0x0,           // AdditionalResourceSubURILengthBytes[0]
+        0x30, 0x2f, 0x54, 0x65, 0x73, 0x74, 0x0, // AdditionalResourceSubURI[0]
+        // "0/Test"
+        0xa, 0xb, 0xc, 0xd, // AdditionalResourceID[1]
+        0x7, 0x0,           // AdditionalResourceSubURILengthBytes[1]
+        0x31, 0x2f, 0x54, 0x65, 0x73, 0x74, 0x0, // AdditionalResourceSubURI[1]
+        // "1/Test"
+        0x0, 0xf3, 0xf2, 0xf1,              // MajorSchemaVersion
+        0x11, 0x22,                         // MajorSchemaDictionaryLengthBytes
+        0xca, 0xfe, 0xbe, 0xef,             // MajorSchemaDictionarySignature
+        0x18,                               // MajorSchemaNameLength
+        0x54, 0x65, 0x73, 0x74, 0x4d, 0x65, // MajorSchemaName
+        0x74, 0x72, 0x69, 0x63, 0x73, 0x2e,
+        0x54, 0x65, 0x73, 0x74, 0x4d, 0x65,
+        0x74, 0x72, 0x69, 0x63, 0x73, 0x00,
+        // "TestMetrics.TestMetrics"
+        0x02, 0x00,         // OEMCount
+        0x09, 0x00,         // OEMNameLengthBytes[0]
+        0x4f, 0x45, 0x4d, 0x54, 0x65, 0x73, // OEMName [0]
+        0x74, 0x30, 0x00,
+        // "OEMTest0"
+        0x09, 0x00,         // OEMNameLengthBytes[1]
+        0x4f, 0x45, 0x4d, 0x54, 0x65, 0x73, 0x74, 0x31, 0x00 // OEMName [1]
+        // "OEMTest1"
+        // clang-format on
+    };
+
+    constexpr std::string_view proposedContainingResourceNameStr = "Test.Test";
+    constexpr uint8_t proposedContainingResourceNameStrLen =
+        static_cast<uint8_t>(proposedContainingResourceNameStr.size());
+    variable_field proposedContainingResourceNameStrInfo{};
+    proposedContainingResourceNameStrInfo.ptr =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const uint8_t*>(
+            proposedContainingResourceNameStr.data());
+    proposedContainingResourceNameStrInfo.length =
+        proposedContainingResourceNameStrLen + 1;
+
+    constexpr std::string_view subURIStr = "Metrics";
+    constexpr uint8_t subURIStrLen = static_cast<uint8_t>(subURIStr.size());
+    variable_field subURIStrInfo{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    subURIStrInfo.ptr = reinterpret_cast<const uint8_t*>(subURIStr.data());
+    subURIStrInfo.length = subURIStrLen + 1;
+
+    constexpr std::string_view additionalResourceID0Str = "0/Test";
+    const uint8_t* additionalResourceID0StrPtr =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const uint8_t*>(additionalResourceID0Str.data());
+    constexpr uint16_t additionalResourceID0StrLen =
+        static_cast<uint16_t>(additionalResourceID0Str.size() + 1);
+    constexpr std::string_view additionalResourceID1Str = "1/Test";
+    const uint8_t* additionalResourceID1StrPtr =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const uint8_t*>(additionalResourceID1Str.data());
+    constexpr uint16_t additionalResourceID1StrLen =
+        static_cast<uint16_t>(additionalResourceID1Str.size() + 1);
+
+    std::array<pldm_platform_redfish_resource_pdr_additional_resource, 2>
+        additionalResources = {
+            {{0x04030201,
+              {additionalResourceID0StrPtr, additionalResourceID0StrLen}},
+             {0x0d0c0b0a,
+              {additionalResourceID1StrPtr, additionalResourceID1StrLen}}}};
+
+    constexpr std::string_view majorSchemaNameStr = "TestMetrics.TestMetrics";
+    constexpr uint8_t majorSchemaNameStrLen =
+        static_cast<uint8_t>(majorSchemaNameStr.size());
+    variable_field majorSchemaNameStrInfo{};
+    majorSchemaNameStrInfo.ptr =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const uint8_t*>(majorSchemaNameStr.data());
+    majorSchemaNameStrInfo.length = majorSchemaNameStrLen + 1;
+
+    constexpr std::string_view OEMName0Str = "OEMTest0";
+    const uint8_t* OEMName0StrPtr =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const uint8_t*>(OEMName0Str.data());
+    constexpr uint16_t OEMName0StrLen =
+        static_cast<uint16_t>(OEMName0Str.size() + 1);
+    constexpr std::string_view OEMName1Str = "OEMTest1";
+    const uint8_t* OEMName1StrPtr =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const uint8_t*>(OEMName1Str.data());
+    constexpr uint16_t OEMName1StrLen =
+        static_cast<uint16_t>(OEMName1Str.size() + 1);
+
+    std::array<pldm_platform_redfish_resource_pdr_oem_name, 2> OEMNames = {
+        {{{OEMName0StrPtr, OEMName0StrLen}},
+         {{OEMName1StrPtr, OEMName1StrLen}}}};
+
+    struct pldm_platform_redfish_resource_pdr decodedPdr;
+    struct pldm_platform_redfish_resource_pdr_additional_resource
+        additional_resource;
+    struct pldm_platform_redfish_resource_pdr_oem_name oem_name;
+    auto rc = decode_pldm_platform_redfish_resource_pdr(
+        pdr1.data(), pdr1.size(), &decodedPdr);
+    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(1u, decodedPdr.hdr.record_handle);
+    EXPECT_EQ(1u, decodedPdr.hdr.version);
+    EXPECT_EQ(PLDM_REDFISH_RESOURCE_PDR, decodedPdr.hdr.type);
+    EXPECT_EQ(1u, decodedPdr.hdr.record_change_num);
+    EXPECT_EQ(pdr1.size() - sizeof(struct pldm_pdr_hdr), decodedPdr.hdr.length);
+    EXPECT_EQ(0x44332211, decodedPdr.resource_id);
+    EXPECT_EQ(0x07, decodedPdr.resource_flags.byte);
+    EXPECT_EQ(0x04030201, decodedPdr.containing_resource_id);
+
+    EXPECT_EQ(proposedContainingResourceNameStrInfo.length,
+              decodedPdr.proposed_containing_resource_name.length);
+    EXPECT_EQ(memcmp(proposedContainingResourceNameStrInfo.ptr,
+                     decodedPdr.proposed_containing_resource_name.ptr,
+                     decodedPdr.proposed_containing_resource_name.length),
+              0);
+
+    EXPECT_EQ(subURIStrInfo.length, decodedPdr.sub_uri.length);
+    EXPECT_EQ(memcmp(subURIStrInfo.ptr, decodedPdr.sub_uri.ptr,
+                     decodedPdr.sub_uri.length),
+              0);
+
+    EXPECT_EQ(decodedPdr.additional_resource_id_count, 2);
+
+    size_t additionalResourceIndex = 0;
+    foreach_pldm_platform_redfish_resource_pdr_additional_resource(
+        decodedPdr, additional_resource, rc)
+    {
+        EXPECT_EQ(additionalResources[additionalResourceIndex].id,
+                  additional_resource.id);
+        EXPECT_EQ(additionalResources[additionalResourceIndex].sub_uri.length,
+                  additional_resource.sub_uri.length);
+        EXPECT_EQ(
+            memcmp(additionalResources[additionalResourceIndex].sub_uri.ptr,
+                   additional_resource.sub_uri.ptr,
+                   additional_resource.sub_uri.length),
+            0);
+
+        additionalResourceIndex++;
+    }
+    EXPECT_EQ(additionalResourceIndex, 2);
+    EXPECT_EQ(PLDM_SUCCESS, rc);
+
+    EXPECT_EQ(decodedPdr.major_schema_version.major, 0xf1);
+    EXPECT_EQ(decodedPdr.major_schema_version.minor, 0xf2);
+    EXPECT_EQ(decodedPdr.major_schema_version.update, 0xf3);
+    EXPECT_EQ(decodedPdr.major_schema_version.alpha, 0x00);
+
+    EXPECT_EQ(decodedPdr.major_schema_dictionary_length_bytes, 0x2211);
+    EXPECT_EQ(decodedPdr.major_schema_dictionary_signature, 0xefbefeca);
+
+    EXPECT_EQ(majorSchemaNameStrInfo.length,
+              decodedPdr.major_schema_name.length);
+    EXPECT_EQ(memcmp(majorSchemaNameStrInfo.ptr,
+                     decodedPdr.major_schema_name.ptr,
+                     decodedPdr.major_schema_name.length),
+              0);
+
+    EXPECT_EQ(decodedPdr.oem_count, 2);
+
+    size_t OEMNameIndex = 0;
+    foreach_pldm_platform_redfish_resource_pdr_oem_name(decodedPdr, oem_name,
+                                                        rc)
+    {
+        EXPECT_EQ(OEMNames[OEMNameIndex].name.length, oem_name.name.length);
+        EXPECT_EQ(memcmp(OEMNames[OEMNameIndex].name.ptr, oem_name.name.ptr,
+                         oem_name.name.length),
+                  0);
+        OEMNameIndex++;
+    }
+    EXPECT_EQ(OEMNameIndex, 2);
+    EXPECT_EQ(PLDM_SUCCESS, rc);
+}
+#endif
