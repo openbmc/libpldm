@@ -12,6 +12,7 @@ extern "C" {
 #include <stdint.h>
 #include <uchar.h>
 
+#include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/compiler.h>
 #include <libpldm/pdr.h>
@@ -2790,6 +2791,276 @@ int decode_set_numeric_sensor_enable_req(
 int decode_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_state_sensor_enables_req *req);
+
+/** @struct pldm_platform_redfish_resource_pdr
+ *
+ *  Structure representing Redfish Resource PDR
+ */
+struct pldm_platform_redfish_resource_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint32_t resource_id;
+	bitfield8_t resource_flags;
+	uint32_t containing_resource_id;
+	struct variable_field proposed_containing_resource_name;
+	struct variable_field sub_uri;
+	uint16_t additional_resource_id_count;
+	struct variable_field additional_resources;
+	ver32_t major_schema_version;
+	uint16_t major_schema_dictionary_length_bytes;
+	uint32_t major_schema_dictionary_signature;
+	struct variable_field major_schema_name;
+	uint16_t oem_count;
+	struct variable_field oem_names;
+};
+
+/**
+ * Minimum length of Redfish Resource PDR, including size of CommonHeader,
+ * ResourceID, ResourceFlags, ContainingResourceID,
+ * ProposedContainingResourceLengthBytes, '\0', SubURILengthBytes, '\0',
+ * AdditionalResourceIDCount, MajorSchemaVersion, MajorSchemaDictionaryLengthBytes,
+ * MajorSchemaDictionarySignature, MajorSchemaNameLength, '\0', OEMCount.
+ */
+#define PLDM_PDR_REDFISH_RESOURCE_PDR_MIN_LENGTH 41
+
+/** @brief Decode date fields from Redfish Resource PDR
+ *
+ *  @param[in] data - PLDM response message which includes the Redfish Resource PDR
+ *                        from DSP0248_1.3.0 table 104.
+ *  @param[in] data_length - Length of response message payload
+ *  @param[out] pdr - Redfish resource pdr struct
+ *
+ *  @return error code
+ *
+ * Example use of the function is as follows:
+ *
+ * @code
+ * struct pldm_platform_redfish_resource_pdr pdr;
+ * struct pldm_platform_redfish_resource_pdr_additional_resource additional_resource;
+ * struct pldm_platform_redfish_resource_pdr_oem_name oem_name;
+ * int rc;
+ *
+ * rc = decode_pldm_platform_redfish_resource_pdr(data, data_length, &pdr);
+ * if (rc) {
+ *     // Handle any error from decoding the fixed-portion of response
+ * }
+ *
+ * foreach_pldm_platform_redfish_resource_pdr_additional_resource(pdr, additional_resource, rc) {
+ *     // Do something with the decoded Additional Resource
+ * }
+ *
+ * if (rc) {
+ *     // Handle any decoding error while iterating the variable-length set of
+ *     // parameter entries
+ * }
+ *
+ * foreach_pldm_platform_redfish_resource_pdr_oem_name(pdr, oem_name, rc) {
+ *     // Do something with the decoded OEMName
+ * }
+ *
+ * if (rc) {
+ *     // Handle any decoding error while iterating the variable-length set of
+ *     // parameter entries
+ * }
+ * @endcode
+ */
+int decode_pldm_platform_redfish_resource_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_redfish_resource_pdr *pdr);
+
+/** @struct pldm_platform_redfish_resource_pdr_additional_resource
+ *
+ *  Structure representing individual AdditionalResource from the Redfish Resource PDR
+ *  defined in Table 104 - Redfish Resource PDR format from DSP0248_1.3.0
+ */
+struct pldm_platform_redfish_resource_pdr_additional_resource {
+	uint32_t id;
+	struct variable_field sub_uri;
+};
+
+struct pldm_platform_redfish_resource_pdr_additional_resource_iter {
+	struct variable_field field;
+	size_t entries;
+};
+
+LIBPLDM_ITERATOR
+struct pldm_platform_redfish_resource_pdr_additional_resource_iter
+pldm_platform_redfish_resource_pdr_additional_resource_iter_init(
+	const struct pldm_platform_redfish_resource_pdr *pdr)
+{
+	struct pldm_platform_redfish_resource_pdr_additional_resource_iter iter;
+
+	iter.field = pdr->additional_resources;
+	iter.entries = pdr->additional_resource_id_count;
+
+	return iter;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_platform_redfish_resource_pdr_additional_resource_iter_end(
+	const struct pldm_platform_redfish_resource_pdr_additional_resource_iter
+		*iter)
+{
+	return iter->entries == 0;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_platform_redfish_resource_pdr_additional_resource_iter_next(
+	struct pldm_platform_redfish_resource_pdr_additional_resource_iter *iter)
+{
+	if (!iter->entries) {
+		return false;
+	}
+	iter->entries--;
+	return true;
+}
+
+int decode_pldm_platform_redfish_resource_pdr_additional_resource_from_iter(
+	struct pldm_platform_redfish_resource_pdr_additional_resource_iter *iter,
+	struct pldm_platform_redfish_resource_pdr_additional_resource
+		*additional_resource);
+
+/** @brief Iterator for Additional Resources from the Redfish Resource PDR
+ *
+ * @param pdr The @ref "struct pldm_platform_redfish_resource_pdr" lvalue
+ *                           used as the out-value from the corresponding call to @ref
+ *                           decode_pldm_platform_redfish_resource_pdr
+ * @param additional_resource The @ref "struct pldm_platform_redfish_resource_pdr_additional_resource"
+ *                            lvalue into which the next parameter table entry should be decoded
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * struct pldm_platform_redfish_resource_pdr pdr;
+ * struct pldm_platform_redfish_resource_pdr_additional_resource additional_resource;
+ * int rc;
+ *
+ * rc = decode_pldm_platform_redfish_resource_pdr(..., &pdr);
+ * if (rc) {
+ *     // Handle any error from decoding the fixed-portion of response
+ * }
+ *
+ * foreach_pldm_platform_redfish_resource_pdr_additional_resource(pdr, additional_resource, rc) {
+ *     // Do something with the decoded Additional Resource
+ * }
+ *
+ * if (rc) {
+ *     // Handle any decoding error while iterating the variable-length set of
+ *     // parameter entries
+ * }
+ * @endcode
+ */
+#define foreach_pldm_platform_redfish_resource_pdr_additional_resource(                        \
+	pdr, additional_resource, rc)                                                          \
+	for (struct pldm_platform_redfish_resource_pdr_additional_resource_iter                \
+		     additional_resource##_iter =                                              \
+			     ((rc) = 0,                                                        \
+			     pldm_platform_redfish_resource_pdr_additional_resource_iter_init( \
+				      &(pdr)));                                                \
+	     !(rc) &&                                                                          \
+	     !pldm_platform_redfish_resource_pdr_additional_resource_iter_end(                 \
+		     &(additional_resource##_iter)) &&                                         \
+	     !((rc) = decode_pldm_platform_redfish_resource_pdr_additional_resource_from_iter( \
+		       &(additional_resource##_iter),                                          \
+		       &(additional_resource)));                                               \
+	     pldm_platform_redfish_resource_pdr_additional_resource_iter_next(                 \
+		     &(additional_resource##_iter)))
+
+/** @struct pldm_platform_redfish_resource_pdr_oem_name
+ *
+ *  Structure representing individual OEMName from the Redfish Resource PDR
+ *  defined in Table 104 - Redfish Resource PDR format from DSP0248_1.3.0
+ */
+struct pldm_platform_redfish_resource_pdr_oem_name {
+	struct variable_field name;
+};
+
+struct pldm_platform_redfish_resource_pdr_oem_name_iter {
+	struct variable_field field;
+	size_t entries;
+};
+
+LIBPLDM_ITERATOR
+struct pldm_platform_redfish_resource_pdr_oem_name_iter
+pldm_platform_redfish_resource_pdr_oem_name_iter_init(
+	const struct pldm_platform_redfish_resource_pdr *pdr)
+{
+	struct pldm_platform_redfish_resource_pdr_oem_name_iter iter;
+
+	iter.field = pdr->oem_names;
+	iter.entries = pdr->oem_count;
+
+	return iter;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_platform_redfish_resource_pdr_oem_name_iter_end(
+	const struct pldm_platform_redfish_resource_pdr_oem_name_iter *iter)
+{
+	return iter->entries == 0;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_platform_redfish_resource_pdr_oem_name_iter_next(
+	struct pldm_platform_redfish_resource_pdr_oem_name_iter *iter)
+{
+	if (!iter->entries) {
+		return false;
+	}
+	iter->entries--;
+	return true;
+}
+
+int decode_pldm_platform_redfish_resource_pdr_oem_name_from_iter(
+	struct pldm_platform_redfish_resource_pdr_oem_name_iter *iter,
+	struct pldm_platform_redfish_resource_pdr_oem_name *oem_name);
+
+/** @brief Iterator for OEM Names from the Redfish Resource PDR
+ *
+ * @param pdr The @ref "struct pldm_platform_redfish_resource_pdr" lvalue
+ *                           used as the out-value from the corresponding call to @ref
+ *                           decode_pldm_platform_redfish_resource_pdr
+ * @param oem_name The @ref "struct pldm_platform_redfish_resource_pdr_oem_name" lvalue
+ *                 into which the next parameter table entry should be decoded
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * struct pldm_platform_redfish_resource_pdr pdr;
+ * struct pldm_platform_redfish_resource_pdr_oem_name oem_name;
+ * int rc;
+ *
+ * rc = decode_pldm_platform_redfish_resource_pdr(..., &pdr);
+ * if (rc) {
+ *     // Handle any error from decoding the fixed-portion of response
+ * }
+ *
+ * foreach_pldm_platform_redfish_resource_pdr_oem_name(pdr, oem_name, rc) {
+ *     // Do something with the decoded OEMName
+ * }
+ *
+ * if (rc) {
+ *     // Handle any decoding error while iterating the variable-length set of
+ *     // parameter entries
+ * }
+ * @endcode
+ */
+#define foreach_pldm_platform_redfish_resource_pdr_oem_name(pdr, oem_name, rc)      \
+	for (struct pldm_platform_redfish_resource_pdr_oem_name_iter                \
+		     oem_name##_iter =                                              \
+			     ((rc) = 0,                                             \
+			     pldm_platform_redfish_resource_pdr_oem_name_iter_init( \
+				      &(pdr)));                                     \
+	     !(rc) &&                                                               \
+	     !pldm_platform_redfish_resource_pdr_oem_name_iter_end(                 \
+		     &(oem_name##_iter)) &&                                         \
+	     !((rc) = decode_pldm_platform_redfish_resource_pdr_oem_name_from_iter( \
+		       &(oem_name##_iter), &(oem_name)));                           \
+	     pldm_platform_redfish_resource_pdr_oem_name_iter_next(                 \
+		     &(oem_name##_iter)))
 
 #ifdef __cplusplus
 }
