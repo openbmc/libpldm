@@ -35,6 +35,7 @@ Change categories:
 - entity: Add new entity types for cases of misspelling
 - platform: Add enum for Redfish Parallel Resource PDR
 - bios: Add all possible values to enum pldm_bios_commands from DSP0247 v1.0.0
+- fru: Add all possible values to enum pldm_fru_commands from DSP0257 v2.0.0
 
 ### Changed
 
