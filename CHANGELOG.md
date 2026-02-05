@@ -44,6 +44,8 @@ Change categories:
 - include: Added header file for SMBIOS Data Transfer (DSP0246 v1.0.1)
 - bindings:
   - Add libpldm++ library for the C++ binding
+- platform: Added functions to decode Redfish Resource PDR/Redfish Action PDR
+  (DSP0248 v1.3.0)
 
 ### Changed
 
