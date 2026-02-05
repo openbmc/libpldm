@@ -3631,3 +3631,171 @@ int encode_pldm_platform_file_descriptor_pdr(
 
 	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
 }
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_redfish_resource_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_redfish_resource_pdr *pdr)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!data || !pdr) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_PDR_REDFISH_RESOURCE_PDR_MIN_LENGTH,
+				    data, data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_value_pdr_hdr(
+		buf, &pdr->hdr, PLDM_PDR_REDFISH_RESOURCE_PDR_MIN_LENGTH,
+		data_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_extract(buf, pdr->resource_id);
+	pldm_msgbuf_extract(buf, pdr->resource_flags.byte);
+	pldm_msgbuf_extract(buf, pdr->containing_resource_id);
+	rc = pldm_msgbuf_extract_uint16_to_size(
+		buf, pdr->proposed_containing_resource_name.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	pldm_msgbuf_span_required(
+		buf, pdr->proposed_containing_resource_name.length,
+		(const void **)&pdr->proposed_containing_resource_name.ptr);
+
+	rc = pldm_msgbuf_extract_uint16_to_size(buf, pdr->sub_uri.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	pldm_msgbuf_span_required(buf, pdr->sub_uri.length,
+				  (const void **)&pdr->sub_uri.ptr);
+
+	pldm_msgbuf_extract(buf, pdr->additional_resource_id_count);
+
+	pldm_msgbuf_field_begin(buf, pdr->additional_resources);
+	for (uint16_t i = 0; i < pdr->additional_resource_id_count; i++) {
+		uint32_t id;
+		size_t length;
+
+		pldm_msgbuf_extract(buf, id);
+		rc = pldm_msgbuf_extract_uint16_to_size(buf, length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		pldm_msgbuf_span_required(buf, length, NULL);
+	}
+	rc = pldm_msgbuf_field_end(buf, pdr->additional_resources);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_extract(buf, pdr->major_schema_version.alpha);
+	pldm_msgbuf_extract(buf, pdr->major_schema_version.update);
+	pldm_msgbuf_extract(buf, pdr->major_schema_version.minor);
+	pldm_msgbuf_extract(buf, pdr->major_schema_version.major);
+	pldm_msgbuf_extract(buf, pdr->major_schema_dictionary_length_bytes);
+	pldm_msgbuf_extract(buf, pdr->major_schema_dictionary_signature);
+	rc = pldm_msgbuf_extract_uint8_to_size(buf,
+					       pdr->major_schema_name.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	pldm_msgbuf_span_required(buf, pdr->major_schema_name.length,
+				  (const void **)&pdr->major_schema_name.ptr);
+
+	pldm_msgbuf_extract(buf, pdr->oem_count);
+
+	pldm_msgbuf_field_begin(buf, pdr->oem_names);
+	for (uint16_t i = 0; i < pdr->oem_count; i++) {
+		size_t length;
+
+		rc = pldm_msgbuf_extract_uint16_to_size(buf, length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		pldm_msgbuf_span_required(buf, length, NULL);
+	}
+	rc = pldm_msgbuf_field_end(buf, pdr->oem_names);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_redfish_resource_pdr_additional_resource_from_iter(
+	struct pldm_platform_redfish_resource_pdr_additional_resource_iter *iter,
+	struct pldm_platform_redfish_resource_pdr_additional_resource
+		*additional_resource)
+{
+	int rc;
+
+	if (!iter) {
+		return -EINVAL;
+	}
+
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	if (!additional_resource || !(iter->field.ptr)) {
+		return -EINVAL;
+	}
+
+	/* At least AdditionalResourceID (u32) and AdditionalResourceSubURILengthBytes (u16) should be present */
+	rc = pldm_msgbuf_init_errno(buf, sizeof(uint32_t) + sizeof(uint16_t),
+				    iter->field.ptr, iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, additional_resource->id);
+	pldm_msgbuf_extract_uint16_to_size(buf,
+					   additional_resource->sub_uri.length);
+	pldm_msgbuf_span_required(
+		buf, additional_resource->sub_uri.length,
+		(const void **)&additional_resource->sub_uri.ptr);
+
+	pldm_msgbuf_span_remaining(buf, (const void **)&iter->field.ptr,
+				   &iter->field.length);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_redfish_resource_pdr_oem_name_from_iter(
+	struct pldm_platform_redfish_resource_pdr_oem_name_iter *iter,
+	struct pldm_platform_redfish_resource_pdr_oem_name *oem_name)
+{
+	int rc;
+
+	if (!iter) {
+		return -EINVAL;
+	}
+
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	if (!oem_name || !(iter->field.ptr)) {
+		return -EINVAL;
+	}
+
+	/* At least OEMNameLengthBytes (u16) should be present */
+	rc = pldm_msgbuf_init_errno(buf, sizeof(uint16_t), iter->field.ptr,
+				    iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract_uint16_to_size(buf, oem_name->name.length);
+	pldm_msgbuf_span_required(buf, oem_name->name.length,
+				  (const void **)&oem_name->name.ptr);
+
+	pldm_msgbuf_span_remaining(buf, (const void **)&iter->field.ptr,
+				   &iter->field.length);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
