@@ -266,6 +266,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3eaa915_f9dd709e",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-05T04:19:23Z",
+      "side": 1,
+      "message": "\u003e Whould you prefer if I write all the 9 new enums here to make it more \n\nexplicit? I just thought this would overcomplicate the description.\n\nI\u0027d prefer if you did list them explicitly. The idea of the changelog is that users aren\u0027t forced to read the git history.\n\nOn the second point, let\u0027s go with `state-set` and try to keep it consistent going forwards.",
+      "parentUuid": "239d2668_e3ab5f0b",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "910e620e_d20881d8",
         "filename": "include/libpldm/state_set.h",
         "patchSetId": 4
@@ -295,6 +313,24 @@
       "side": 1,
       "message": "I would resolve this on rebase if 86627 would be merged first",
       "parentUuid": "910e620e_d20881d8",
+      "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c41c937_e367b149",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-05T04:19:23Z",
+      "side": 1,
+      "message": "I\u0027d rather we go with this change instead of doing things piece-meal with 86627. @jayashankarpadath@gmail.com are you okay with that?",
+      "parentUuid": "4a290d99_8bf8511e",
       "revId": "c8f61cb5edb53f8a1385dcb8302830682137e231",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
