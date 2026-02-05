@@ -141,6 +141,21 @@ enum pldm_platform_transfer_flag {
  */
 #define PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH 36
 
+/**
+ * Minimum length of Redfish Resource PDR, including size of CommonHeader,
+ * ResourceID, ResourceFlags, ContainingResourceID,
+ * ProposedContainingResourceLengthBytes, SubURILengthBytes,
+ * AdditionalResourceIDCount, MajorSchemaVersion, MajorSchemaDictionaryLengthBytes,
+ * MajorSchemaDictionarySignature, MajorSchemaNameLength, OEMCount.
+ */
+#define PLDM_PDR_REDFISH_RESOURCE_PDR_MIN_LENGTH 38
+
+/**
+ * Minimum length of Redfish Action PDR, including size of CommonHeader,
+ * ActionPDRIndex, RelatedResourceCount, ActionCount.
+ */
+#define PLDM_PDR_REDFISH_ACTION_PDR_MIN_LENGTH 14
+
 #define PLDM_INVALID_EFFECTER_ID 0xffff
 
 /* DSP0248 Table1 PLDM monitoring and control data types */
@@ -2773,6 +2788,133 @@ int decode_set_numeric_sensor_enable_req(
 int decode_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_state_sensor_enables_req *req);
+
+/** @struct pldm_platform_redfish_resource_pdr
+ *
+ *  Structure representing Redfish Resource PDR
+ */
+struct pldm_platform_redfish_resource_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint32_t resource_id;
+	bitfield8_t resource_flags;
+	uint32_t containing_resource_id;
+	struct variable_field proposed_containing_resource_name;
+	struct variable_field sub_uri;
+	uint16_t additional_resource_id_count;
+	//struct additional_resource additional_resource[1];
+	ver32_t major_schema_version;
+	uint16_t major_schema_dictionary_length_bytes;
+	uint32_t major_schema_dictionary_signature;
+	struct variable_field major_schema_name;
+	uint16_t oem_count;
+	//struct variable_field oem_name[1];
+};
+
+/** @struct additional_resource
+ *
+ *  Structure representing AdditionalResource fields from Redfish Resource PDR
+ */
+struct additional_resource {
+	uint32_t id;
+	struct variable_field sub_uri;
+};
+
+/** @brief Decode date fields from Redfish Resource PDR
+ *
+ *  @note Use case:
+ *        1. Call `decode_pldm_platform_redfish_resource_pdr()` to decode the
+ *           Redfish Resource PDR raw data to the PDR data fields in
+ *           `pldm_platform_redfish_resource_pdr` equivalent the fields in
+ *           `table 104` of DSP0248_1.3.0. Excepts the AdditionalResource and
+ *           OEMNames.
+ *        2. Pass the number of elements that can be allocated in the
+ *           memory pointed by `struct additional_resource *additional_resources`
+ *           via the `uint16_t *additional_resources_count` variable.
+ *        3. Pass the number of elements that can be allocated in the
+ *           memory pointed by `struct variable_field *oem_names`
+ *           via the `uint16_t *oem_names_count` variable.
+ *        4. If the passed `uint16_t *additional_resources_count` value is not
+ *           enough for all the AdditionalResource PDR data, function returns
+ *           PLDM_ERROR_INVALID_LENGTH error and fills
+ *           `uint16_t *additional_resources_count` with a required size.
+ *        5. If the passed `uint16_t *oem_count` value is not enough for all
+ *           the OEMName PDR data, function returns PLDM_ERROR_INVALID_LENGTH
+ *           error and fills `uint16_t *oem_count` with a required size.
+ *
+ *  @param[in] data - PLDM response message which includes the Redfish Resource PDR
+ *                        from DSP0248_1.3.0 table 104.
+ *  @param[in] data_length - Length of response message payload
+ *  @param[out] pdr - Redfish resource pdr struct
+ *  @param[out] resource_flags - ResourceFlags field
+ *  @param[in/out] additional_resources - Pointer to the memory for
+ *         AdditionalResource fields data
+ *  @param[in/out] additional_resources_count - Amount of elements that can be
+ *         allocated in the memory pointed by `additional_resources` field
+ *  @param[in/out] oem_names - Pointer to the memory for OEMName fields data
+ *  @param[in/out] oem_names_count - Amount of elements that can be
+ *          allocated in the memory pointed by `oem_names` field
+ *
+ *  @return error code
+ */
+int decode_pldm_platform_redfish_resource_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_redfish_resource_pdr *pdr,
+	bitfield8_t *resource_flags,
+	struct additional_resource *additional_resources,
+	uint16_t *additional_resources_count, struct variable_field *oem_names,
+	uint16_t *oem_names_count);
+
+/** @struct action
+ *
+ *  Structure representing Action fields from Redfish Action PDR
+ */
+struct action {
+	struct variable_field name;
+	struct variable_field path;
+};
+
+/** @struct pldm_platform_redfish_action_pdr
+ *
+ *  Structure representing Redfish Action PDR
+ */
+struct pldm_platform_redfish_action_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint8_t action_pdr_index;
+	uint16_t related_resource_count;
+	uint32_t *related_resource_id;
+	uint8_t action_count;
+	//struct action actions[1];
+};
+
+/** @brief Decode date fields from Redfish Action PDR
+ *
+ *  @note Use case:
+ *        1. Call `decode_pldm_platform_redfish_action_pdr()` to decode the
+ *           Redfish Action PDR raw data to the PDR data fields in
+ *           `pldm_platform_redfish_action_pdr` equivalent the fields in
+ *           `table 106` of DSP0248_1.3.0. Excepts the Action fields.
+ *        2. Pass the number of elements that can be allocated in the
+ *           memory pointed by `struct action *actions` via the
+ *           `uint8_t *action_count` variable.
+ *        3. If the passed `uint8_t *action_count` value is not
+ *           enough for all the Action PDR data, function returns
+ *           PLDM_ERROR_INVALID_LENGTH error and fills
+ *           `uint8_t *action_count` with a required size.
+ *
+ *  @param[in] data - PLDM response message which includes the Redfish Action PDR
+ *                        from DSP0248_1.3.0 table 106.
+ *  @param[in] data_length - Length of response message payload
+ *  @param[out] pdr - Redfish resource pdr struct
+ *  @param[in/out] actions - Pointer to the memory for Action fields data
+ *  @param[in/out] action_count - Amount of elements that can be
+ *         allocated in the memory pointed by `struct action *actions` field
+ *
+ *  @return error code
+ */
+int decode_pldm_platform_redfish_action_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_redfish_action_pdr *pdr, struct action *actions,
+	uint8_t *action_count);
 
 #ifdef __cplusplus
 }
