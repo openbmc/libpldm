@@ -3631,3 +3631,162 @@ int encode_pldm_platform_file_descriptor_pdr(
 
 	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
 }
+
+LIBPLDM_ABI_STABLE
+int decode_pldm_platform_redfish_resource_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_redfish_resource_pdr *pdr,
+	bitfield8_t *resource_flags,
+	struct additional_resource *additional_resources,
+	uint16_t *additional_resources_count, struct variable_field *oem_names,
+	uint16_t *oem_names_count)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!data || !pdr) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_PDR_REDFISH_RESOURCE_PDR_MIN_LENGTH,
+				    data, data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_value_pdr_hdr(
+		buf, &pdr->hdr, PLDM_PDR_REDFISH_RESOURCE_PDR_MIN_LENGTH,
+		data_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_extract(buf, pdr->resource_id);
+	pldm_msgbuf_extract_p(buf, &resource_flags->byte);
+	pldm_msgbuf_extract(buf, pdr->containing_resource_id);
+	rc = pldm_msgbuf_extract_uint16_to_size(
+		buf, pdr->proposed_containing_resource_name.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	pldm_msgbuf_span_required(
+		buf, pdr->proposed_containing_resource_name.length,
+		(const void **)&pdr->proposed_containing_resource_name.ptr);
+
+	rc = pldm_msgbuf_extract_uint16_to_size(buf, pdr->sub_uri.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	pldm_msgbuf_span_required(buf, pdr->sub_uri.length,
+				  (const void **)&pdr->sub_uri.ptr);
+
+	pldm_msgbuf_extract(buf, pdr->additional_resource_id_count);
+
+	if (*additional_resources_count < pdr->additional_resource_id_count) {
+		*additional_resources_count = pdr->additional_resource_id_count;
+		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_LENGTH);
+	}
+
+	for (uint16_t i = 0; i < pdr->additional_resource_id_count; i++) {
+		pldm_msgbuf_extract(buf, additional_resources[i].id);
+		rc = pldm_msgbuf_extract_uint16_to_size(
+			buf, additional_resources[i].sub_uri.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		pldm_msgbuf_span_required(
+			buf, additional_resources[i].sub_uri.length,
+			(const void **)&additional_resources[i].sub_uri.ptr);
+	}
+	pldm_msgbuf_extract(buf, pdr->major_schema_version.alpha);
+	pldm_msgbuf_extract(buf, pdr->major_schema_version.update);
+	pldm_msgbuf_extract(buf, pdr->major_schema_version.minor);
+	pldm_msgbuf_extract(buf, pdr->major_schema_version.major);
+	pldm_msgbuf_extract(buf, pdr->major_schema_dictionary_length_bytes);
+	pldm_msgbuf_extract(buf, pdr->major_schema_dictionary_signature);
+	rc = pldm_msgbuf_extract_uint8_to_size(buf,
+					       pdr->major_schema_name.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	pldm_msgbuf_span_required(buf, pdr->major_schema_name.length,
+				  (const void **)&pdr->major_schema_name.ptr);
+
+	pldm_msgbuf_extract(buf, pdr->oem_count);
+
+	if (*oem_names_count < pdr->oem_count) {
+		*oem_names_count = pdr->oem_count;
+		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_LENGTH);
+	}
+	for (uint16_t i = 0; i < pdr->oem_count; i++) {
+		rc = pldm_msgbuf_extract_uint16_to_size(buf,
+							oem_names[i].length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		pldm_msgbuf_span_required(buf, oem_names[i].length,
+					  (const void **)&oem_names[i].ptr);
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_STABLE
+int decode_pldm_platform_redfish_action_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_redfish_action_pdr *pdr, struct action *actions,
+	uint8_t *action_count)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!data || !pdr) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_PDR_REDFISH_ACTION_PDR_MIN_LENGTH,
+				    data, data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_value_pdr_hdr(
+		buf, &pdr->hdr, PLDM_PDR_REDFISH_ACTION_PDR_MIN_LENGTH,
+		data_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_extract(buf, pdr->action_pdr_index);
+	pldm_msgbuf_extract(buf, pdr->related_resource_count);
+	pldm_msgbuf_span_required(
+		buf, (pdr->related_resource_count * sizeof(uint32_t)),
+		(const void **)&pdr->related_resource_id);
+
+	pldm_msgbuf_extract(buf, pdr->action_count);
+
+	if (*action_count < pdr->action_count) {
+		*action_count = pdr->action_count;
+		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_LENGTH);
+	}
+
+	for (uint16_t i = 0; i < pdr->action_count; i++) {
+		rc = pldm_msgbuf_extract_uint8_to_size(buf,
+						       actions[i].name.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		pldm_msgbuf_span_required(buf, actions[i].name.length,
+					  (const void **)&actions[i].name.ptr);
+		rc = pldm_msgbuf_extract_uint8_to_size(buf,
+						       actions[i].path.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+		pldm_msgbuf_span_required(buf, actions[i].path.length,
+					  (const void **)&actions[i].path.ptr);
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
