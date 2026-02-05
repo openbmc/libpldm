@@ -12,6 +12,7 @@ extern "C" {
 #include <stdint.h>
 #include <uchar.h>
 
+#include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/compiler.h>
 #include <libpldm/pdr.h>
@@ -140,6 +141,21 @@ enum pldm_platform_transfer_flag {
  * This also includes the size of the common PDR header 10 bytes.
  */
 #define PLDM_PDR_FILE_DESCRIPTOR_PDR_MIN_LENGTH 36
+
+/**
+ * Minimum length of Redfish Resource PDR, including size of CommonHeader,
+ * ResourceID, ResourceFlags, ContainingResourceID,
+ * ProposedContainingResourceLengthBytes, SubURILengthBytes,
+ * AdditionalResourceIDCount, MajorSchemaVersion, MajorSchemaDictionaryLengthBytes,
+ * MajorSchemaDictionarySignature, MajorSchemaNameLength, OEMCount.
+ */
+#define PLDM_PDR_REDFISH_RESOURCE_PDR_MIN_LENGTH 38
+
+/**
+ * Minimum length of Redfish Action PDR, including size of CommonHeader,
+ * ActionPDRIndex, RelatedResourceCount, ActionCount.
+ */
+#define PLDM_PDR_REDFISH_ACTION_PDR_MIN_LENGTH 14
 
 #define PLDM_INVALID_EFFECTER_ID 0xffff
 
@@ -2773,6 +2789,68 @@ int decode_set_numeric_sensor_enable_req(
 int decode_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_state_sensor_enables_req *req);
+
+/** @struct pldm_platform_redfish_resource_pdr
+ *
+ *  Structure representing Redfish Resource PDR
+ */
+struct pldm_platform_redfish_resource_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint32_t resource_id;
+	bitfield8_t resource_flags;
+	uint32_t containing_resource_id;
+	struct variable_field proposed_containing_resource_name;
+	struct variable_field sub_uri;
+	struct variable_field additional_resource_info;
+	ver32_t major_schema_version;
+	uint16_t major_schema_dictionary_length_bytes;
+	uint32_t major_schema_dictionary_signature;
+	struct variable_field major_schema_name;
+	struct variable_field oem_name_info;
+};
+
+/** @brief Decode date fields from Redfish Resource PDR
+ *
+ *  @param[in] data - PLDM response message which includes the Redfish Resource PDR
+ *                        from DSP0248_1.3.0 table 104.
+ *  @param[in] data_length - Length of response message payload
+ *  @param[out] pdr - Redfish resource pdr struct
+ *  @param[out] additional_resource_info - Pointer to the structure used to access Additional Resources area
+ *  @param[out] oem_names - Pointer to the structure used to access OEMNames area
+ *
+ *  @return error code
+ */
+int decode_pldm_platform_redfish_resource_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_redfish_resource_pdr *pdr);
+
+/** @struct pldm_platform_redfish_action_pdr
+ *
+ *  Structure representing Redfish Action PDR
+ */
+struct pldm_platform_redfish_action_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint8_t action_pdr_index;
+	struct variable_field host_resource_info;
+	struct variable_field action_info;
+};
+
+/** @brief Decode date fields from Redfish Action PDR
+ *
+ *  @param[in] data - PLDM response message which includes the Redfish Action PDR
+ *                        from DSP0248_1.3.0 table 106.
+ *  @param[in] data_length - Length of response message payload
+ *  @param[out] pdr - Redfish resource pdr struct
+ *  @param[out] host_resource_info - Pointer to the structure used to access Host
+ *                        Resource Information area
+ *  @param[out] action_info - Pointer to the structure used to access Action
+ *                        Information area
+ *
+ *  @return error code
+ */
+int decode_pldm_platform_redfish_action_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_redfish_action_pdr *pdr);
 
 #ifdef __cplusplus
 }
