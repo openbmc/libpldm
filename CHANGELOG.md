@@ -36,6 +36,7 @@ Change categories:
 - platform: Added enum for Redfish Parallel Resource PDR
 - bios: Added all possible values to enum pldm_bios_commands from DSP0247 v1.0.0
 - fru: Added all possible values to enum pldm_fru_commands from DSP0257 v2.0.0
+- include: Added header file for Redfish Device Enablement (DSP0218 v1.2.0)
 
 ### Changed
 
