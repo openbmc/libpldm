@@ -18,6 +18,7 @@ libpldm_headers = files(
     'pldm.h',
     'pldm_types.h',
     'rde.h',
+    'smbios.h',
     'state_set.h',
     'states.h',
     'transport.h',
