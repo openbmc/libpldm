@@ -17,6 +17,7 @@ libpldm_headers = files(
     'platform.h',
     'pldm.h',
     'pldm_types.h',
+    'rde.h',
     'state_set.h',
     'states.h',
     'transport.h',
