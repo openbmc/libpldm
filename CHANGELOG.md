@@ -37,6 +37,7 @@ Change categories:
 - bios: Added all possible values to enum pldm_bios_commands from DSP0247 v1.0.0
 - fru: Added all possible values to enum pldm_fru_commands from DSP0257 v2.0.0
 - dsp: firmware_update: Add Update Security Revision from DSP0267 v1.3.0
+- include: Added header file for Redfish Device Enablement (DSP0218 v1.2.0)
 
 ### Changed
 
