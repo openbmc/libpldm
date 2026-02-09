@@ -1,0 +1,4 @@
+name: libpldm
+build:
+  cmake: zephyr/
+  kconfig: zephyr/Kconfig.pldm
