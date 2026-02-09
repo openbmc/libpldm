@@ -64,6 +64,12 @@ Change categories:
   - `pldm_transport_af_mctp_unmap_tid_fqe()`
 - include: Use own "byteorder.h" file instead of <asm/byteorder.h>
 
+- include: Added definitions needed for Zephyr support:
+  - Endianness related: `HTOLE32`, `HTOLE16`, `LE32TOH`, `LE16TOH`,
+    `__LITTLE_ENDIAN_BITFIELD`, `__BIG_ENDIAN_BITFIELD`;
+  - Missing definitions, such as `BUILD_ASSERT`, `EUCLEAN` and `SSIZE_MAX`;
+  - Note that those should only affect Zephyr based builds.
+
 ### Deprecated
 
 - Misspelled PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG member of the

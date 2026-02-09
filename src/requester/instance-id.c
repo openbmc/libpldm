@@ -1,9 +1,10 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "environ/errno.h"
+
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 #include <libpldm/instance-id.h>
 #include <libpldm/pldm.h>
 
-#include <errno.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/stat.h>

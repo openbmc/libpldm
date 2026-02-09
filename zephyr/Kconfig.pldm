@@ -1,0 +1,27 @@
+# Copyright (c) 2026 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+
+config PLDM
+	bool "PLDM library"
+	help
+		Enable PLDM support
+
+if PLDM
+
+config PLDM_ABI_TESTING
+	bool "PLDM ABI testing"
+	help
+		Enable PLDM testing features ABI
+
+config PLDM_ABI_DEPRECATED
+	bool "PLDM ABI deprecated"
+	help
+		Enable PLDM deprecated features ABI
+
+config PLDM_ABI_DEPRECATED_UNSAFE
+	bool "PLDM ABI deprecated unsafe"
+	help
+		Enable PLDM deprecated unsafe features ABI
+
+endif

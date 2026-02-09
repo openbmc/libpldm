@@ -2,12 +2,12 @@
 /* NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp) */
 #include "array.h"
 #include "container-of.h"
+#include "environ/errno.h"
 #include "transport.h"
 #include "test.h"
 
 #include <libpldm/api.h>
 
-#include <errno.h>
 #include <poll.h>
 #include <stdlib.h>
 #include <string.h>

@@ -1,12 +1,13 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "compiler.h"
+#include "environ/errno.h"
 #include "msgbuf.h"
+
 #include <libpldm/pdr.h>
 #include <libpldm/platform.h>
 
 #include <assert.h>
 #include <endian.h>
-#include <errno.h>
 #include <limits.h>
 #include <stdint.h>
 #include <stdlib.h>
