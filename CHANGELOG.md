@@ -45,6 +45,7 @@ Change categories:
 - bindings:
   - Add libpldm++ library for the C++ binding
 - dsp: platform: Add pldm_platform_file_class enum
+- include: Use own "byteorder.h" file instead of <asm/byteorder.h>
 
 ### Changed
 
