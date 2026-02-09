@@ -41,11 +41,11 @@ extern "C" {
 #endif
 
 #include "compiler.h"
+#include "environ/errno.h"
 
 #include <libpldm/pldm_types.h>
 
 #include <endian.h>
-#include <errno.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>

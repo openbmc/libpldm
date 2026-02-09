@@ -2,6 +2,7 @@
 #include "af-mctp-internal.h"
 #include "compiler.h"
 #include "container-of.h"
+#include "environ/errno.h"
 #include "mctp-defines.h"
 
 #include <libpldm/api.h>
@@ -10,7 +11,6 @@
 #include <libpldm/transport.h>
 #include <libpldm/transport/af-mctp.h>
 
-#include <errno.h>
 #include <limits.h>
 #include <linux/mctp.h>
 #include <poll.h>

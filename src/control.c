@@ -1,4 +1,3 @@
-#include <errno.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
@@ -9,6 +8,7 @@
 #include <compiler.h>
 
 #include "control-internal.h"
+#include "environ/errno.h"
 
 #define PLDM_BASE_VERSIONS_COUNT 2
 static const uint32_t PLDM_BASE_VERSIONS[PLDM_BASE_VERSIONS_COUNT] = {

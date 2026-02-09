@@ -1,12 +1,12 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "dsp/base.h"
+#include "environ/errno.h"
 #include "msgbuf.h"
 
 #include <libpldm/base.h>
 #include <libpldm/file.h>
 
 #include <assert.h>
-#include <errno.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>

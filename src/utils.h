@@ -2,7 +2,6 @@
 #ifndef LIBPLDM_SRC_UTILS_H
 #define LIBPLDM_SRC_UTILS_H
 
-#include <errno.h>
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>

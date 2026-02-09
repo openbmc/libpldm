@@ -2,10 +2,11 @@
 #ifndef LIBPLDM_SRC_API_H
 #define LIBPLDM_SRC_API_H
 
+#include "environ/errno.h"
+
 #include <libpldm/base.h>
 
 #include <assert.h>
-#include <errno.h>
 
 /**
  * @brief Translate a negative errno value to a PLDM completion code
