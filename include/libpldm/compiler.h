@@ -50,4 +50,10 @@
 #define LIBPLDM_CC_UNAVAILABLE
 #endif
 
+#ifdef __ZEPHYR__
+
+#define EUCLEAN 117
+
+#endif
+
 #endif
