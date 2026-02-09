@@ -50,4 +50,9 @@
 #define LIBPLDM_CC_UNAVAILABLE
 #endif
 
+/* EUCLEAN is not defined on Zephyr RTOS libc */
+#ifndef EUCLEAN
+#define EUCLEAN 117
+#endif
+
 #endif
