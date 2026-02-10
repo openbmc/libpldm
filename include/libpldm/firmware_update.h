@@ -100,6 +100,15 @@ extern "C" {
 #define PLDM_CANCEL_UPDATE_COMPONENT_REQ_BYTES 0
 #define PLDM_CANCEL_UPDATE_REQ_BYTES	       0
 
+/** @brief UpdateSecurityRevision request payload size in bytes
+ *
+ *  Request contains:
+ *  - 2 bytes: ComponentClassification
+ *  - 2 bytes: ComponentIdentifier
+ *  - 1 byte: ComponentClassificationIndex
+ */
+#define PLDM_UPDATE_SECURITY_REVISION_REQ_BYTES 5
+
 /** @brief PLDM component release data size in bytes defined in DSP0267_1.1.0
  * Table 14 - ComponentParameterTable and Table 21 - ComponentParameterTable
  *
@@ -134,7 +143,7 @@ enum pldm_firmware_update_commands {
 	PLDM_ACTIVATE_PENDING_COMPONENT_IMAGE = 0x1f,
 	PLDM_REQUEST_DOWNSTREAM_DEVICE_UPDATE = 0x20,
 	PLDM_GET_COMPONENT_OPAQUE_DATA = 0x21,
-	PLDM_UPTATE_SECURITY_REVISION = 0x22
+	PLDM_UPDATE_SECURITY_REVISION = 0x22
 };
 
 /** @brief PLDM Firmware update completion codes
@@ -1080,6 +1089,24 @@ struct pldm_cancel_update_resp {
 	uint8_t completion_code;
 	bool8_t non_functioning_component_indication;
 	uint64_t non_functioning_component_bitmap;
+} __attribute__((packed));
+
+/** @struct pldm_update_security_revision_req
+ *
+ *  Structure representing UpdateSecurityRevision request.
+ */
+struct pldm_update_security_revision_req {
+	uint16_t comp_classification;
+	uint16_t comp_identifier;
+	uint8_t comp_classification_index;
+} __attribute__((packed));
+
+/** @struct pldm_update_security_revision_resp
+ *
+ *  Structure representing UpdateSecurityRevision response.
+ */
+struct pldm_update_security_revision_resp {
+	uint8_t completion_code;
 } __attribute__((packed));
 
 /** @brief Decode the PLDM package header information
@@ -2177,6 +2204,37 @@ int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
 int encode_cancel_update_resp(uint8_t instance_id,
 			      const struct pldm_cancel_update_resp *resp_data,
 			      struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Create PLDM request message for UpdateSecurityRevision
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] comp_classification - Component classification
+ *  @param[in] comp_identifier - Component identifier
+ *  @param[in] comp_classification_index - Component classification
+ * 	                                        index
+ *  @param[out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of request message payload
+ *
+ *  @return pldm_completion_codes
+ */
+int encode_update_security_revision_req(uint8_t instance_id,
+					uint16_t comp_classification,
+					uint16_t comp_identifier,
+					uint8_t comp_classification_index,
+					struct pldm_msg *msg,
+					size_t payload_length);
+
+/** @brief Decode UpdateSecurityRevision response message
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] completion_code - Pointer to the completion code
+ *
+ *  @return pldm_completion_codes
+ */
+int decode_update_security_revision_resp(const struct pldm_msg *msg,
+					 size_t payload_length,
+					 uint8_t *completion_code);
 
 /** @brief Firmware update v1.0 package header identifier */
 #define PLDM_PACKAGE_HEADER_IDENTIFIER_V1_0                                    \

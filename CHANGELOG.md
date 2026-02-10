@@ -22,6 +22,7 @@ Change categories:
 - entity: Added new entity types from DSP0249 v1.4.0
 - stateset: Added new state sets from DSP0249 v1.4.0
 - stateset: Added new enum pldm_state_set_presence_values from DSP0249 v1.4.0
+- fwu: Added Update Security Revision
 
 ### Changed
 
