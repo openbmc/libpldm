@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f92a016b_f8c97638",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-10T09:55:11Z",
+      "side": 1,
+      "message": "Do mention the area of change.\n\nExample:\n\ndsp: \u003ccommit message\u003e\n\nAdd the following in the commit message:\n1. why the change is required\n2. what is changed\n3. tested section",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "ffafaa47c77dba599952f809561eb944c8c4b15b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4524eb7e_1dbd8281",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-10T09:55:11Z",
+      "side": 1,
+      "message": "Added some comments",
+      "revId": "ffafaa47c77dba599952f809561eb944c8c4b15b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f70b1342_50b28903",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-10T09:55:11Z",
+      "side": 1,
+      "message": "Same change required as commit message title\n\n```suggestion\n- dsp: Added Update Security Revision\n```",
+      "revId": "ffafaa47c77dba599952f809561eb944c8c4b15b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6db0c34c_1dcdc132",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-10T09:55:11Z",
+      "side": 1,
+      "message": "This comment can be removed as its implicitly understood.",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 42
+      },
+      "revId": "ffafaa47c77dba599952f809561eb944c8c4b15b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca236b50_671d6798",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3263,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-10T09:55:11Z",
+      "side": 1,
+      "message": "If these parameters are never modified, do pass them as constants",
+      "range": {
+        "startLine": 3260,
+        "startChar": 40,
+        "endLine": 3263,
+        "endChar": 35
+      },
+      "revId": "ffafaa47c77dba599952f809561eb944c8c4b15b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
