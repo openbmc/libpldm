@@ -3256,6 +3256,74 @@ int encode_cancel_update_resp(uint8_t instance_id,
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
+LIBPLDM_ABI_TESTING
+int encode_update_security_revision_req(
+	const uint8_t instance_id,
+	const struct pldm_update_security_revision_req *req,
+	struct pldm_msg *msg, size_t payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length != PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	rc = encode_pldm_header_only(PLDM_REQUEST, instance_id, PLDM_FWUP,
+				     PLDM_UPDATE_SECURITY_REVISION, msg);
+	if (rc) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, req->component_classification);
+	pldm_msgbuf_insert(buf, req->component_identifier);
+	pldm_msgbuf_insert(buf, req->component_classification_index);
+
+	return pldm_msgbuf_complete_used(buf, payload_length, &payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_update_security_revision_resp(const struct pldm_msg *msg,
+					 size_t payload_length,
+					 uint8_t *completion_code)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	uint8_t cc = 0;
+	int rc;
+
+	if (msg == NULL || completion_code == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length != sizeof(*completion_code)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, cc);
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	*completion_code = cc;
+	return PLDM_SUCCESS;
+}
+
 LIBPLDM_ABI_STABLE
 int decode_pldm_firmware_update_package(
 	const void *data, size_t length,

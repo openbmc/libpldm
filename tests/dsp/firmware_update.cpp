@@ -3493,6 +3493,132 @@ TEST(PassComponentTable, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
+#ifdef LIBPLDM_API_TESTING
+TEST(UpdateSecurityRevision, goodPathEncodeRequest)
+{
+    int rc;
+    constexpr uint8_t instanceId = 3;
+    PLDM_MSG_DEFINE_P(request, PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES);
+
+    pldm_update_security_revision_req req{
+        .component_classification = 0x0005,
+        .component_identifier = 0x0102,
+        .component_classification_index = 0x42,
+    };
+
+    rc = encode_update_security_revision_req(
+        instanceId, &req, request,
+        PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES);
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+
+    EXPECT_THAT(
+        std::span<uint8_t>(request_buf + hdrSize,
+                           PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES),
+        ElementsAreArray<uint8_t>({0x05, 0x00, 0x02, 0x01, 0x42}));
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(UpdateSecurityRevision, errorPathEncodeRequest)
+{
+    int rc;
+    constexpr uint8_t instanceId = 3;
+    PLDM_MSG_DEFINE_P(request, PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES);
+
+    pldm_update_security_revision_req req{
+        .component_classification = 0x0005,
+        .component_identifier = 0x0102,
+        .component_classification_index = 0x42,
+    };
+
+    /* Test with null message pointer */
+    rc = encode_update_security_revision_req(
+        instanceId, &req, nullptr,
+        PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    /* Test with null request pointer */
+    rc = encode_update_security_revision_req(
+        instanceId, nullptr, request,
+        PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    /* Test with invalid payload length (too short) */
+    rc = encode_update_security_revision_req(
+        instanceId, &req, request,
+        PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES - 1);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    /* Test with invalid payload length (too long) */
+    rc = encode_update_security_revision_req(
+        instanceId, &req, request,
+        PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES + 1);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(UpdateSecurityRevision, goodPathDecodeResponse)
+{
+    int rc;
+    uint8_t completionCode = 0;
+
+    /* Test a success completion code */
+    PLDM_MSG_DEFINE_P(response1, sizeof(uint8_t));
+    constexpr std::array<uint8_t, hdrSize + sizeof(uint8_t)> respData1{
+        0x00, 0x00, 0x00, 0x00};
+    std::copy(respData1.begin(), respData1.end(), response1_buf);
+
+    rc = decode_update_security_revision_resp(response1, sizeof(uint8_t),
+                                              &completionCode);
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, PLDM_SUCCESS);
+
+    /* Test an error completion code - UPDATE_SECURITY_REVISION_NOT_PERMITTED */
+    PLDM_MSG_DEFINE_P(response2, sizeof(uint8_t));
+    constexpr std::array<uint8_t, hdrSize + sizeof(uint8_t)> respData2{
+        0x00, 0x00, 0x00, 0x95};
+    std::copy(respData2.begin(), respData2.end(), response2_buf);
+
+    completionCode = 0;
+    rc = decode_update_security_revision_resp(response2, sizeof(uint8_t),
+                                              &completionCode);
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, PLDM_FWUP_UPDATE_SECURITY_REVISION_NOT_PERMITTED);
+}
+#endif // LIBPLDM_API_TESTING
+
+#ifdef LIBPLDM_API_TESTING
+TEST(UpdateSecurityRevision, errorPathDecodeResponse)
+{
+    int rc;
+    PLDM_MSG_DEFINE_P(response, sizeof(uint8_t));
+    constexpr std::array<uint8_t, hdrSize> respData{0x00, 0x00, 0x00};
+    std::copy(respData.begin(), respData.end(), response_buf);
+
+    uint8_t completionCode = 0;
+
+    /* Test with null message pointer */
+    rc = decode_update_security_revision_resp(nullptr, sizeof(uint8_t),
+                                              &completionCode);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    /* Test with null completion code pointer */
+    rc = decode_update_security_revision_resp(response, sizeof(uint8_t),
+                                              nullptr);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    /* Test with invalid payload length (too short) */
+    rc = decode_update_security_revision_resp(response, 0, &completionCode);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    /* Test with invalid payload length (larger than expected) */
+    rc = decode_update_security_revision_resp(response, sizeof(uint8_t) + 1,
+                                              &completionCode);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+#endif // LIBPLDM_API_TESTING
+
 TEST(UpdateComponent, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 2;
