@@ -3493,6 +3493,72 @@ TEST(PassComponentTable, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
+TEST(UpdateSecurityRevision, goodPathDecodeResponse)
+{
+    /* Test a success completion code */
+    constexpr std::array<uint8_t, hdrSize + sizeof(uint8_t)>
+        updateSecurityRevisionResponse1{0x00, 0x00, 0x00, 0x00};
+    auto responseMsg1 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(
+            updateSecurityRevisionResponse1.data());
+
+    uint8_t completionCode = 0;
+    auto rc = decode_update_security_revision_resp(
+        responseMsg1, updateSecurityRevisionResponse1.size() - hdrSize,
+        &completionCode);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, PLDM_SUCCESS);
+
+    /* Test an error completion code - UPDATE_SECURITY_REVISION_NOT_PERMITTED */
+    constexpr std::array<uint8_t, hdrSize + sizeof(uint8_t)>
+        updateSecurityRevisionResponse2{0x00, 0x00, 0x00, 0x95};
+    auto responseMsg2 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(
+            updateSecurityRevisionResponse2.data());
+
+    completionCode = 0;
+    rc = decode_update_security_revision_resp(
+        responseMsg2, updateSecurityRevisionResponse2.size() - hdrSize,
+        &completionCode);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, PLDM_FWUP_UPDATE_SECURITY_REVISION_NOT_PERMITTED);
+}
+
+TEST(UpdateSecurityRevision, errorPathDecodeResponse)
+{
+    constexpr std::array<uint8_t, hdrSize> updateSecurityRevisionResponse1{
+        0x00, 0x00, 0x00};
+    auto responseMsg1 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(
+            updateSecurityRevisionResponse1.data());
+
+    uint8_t completionCode = 0;
+
+    /* Test with null message pointer */
+    auto rc = decode_update_security_revision_resp(nullptr, sizeof(uint8_t),
+                                                   &completionCode);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    /* Test with null completion code pointer */
+    rc = decode_update_security_revision_resp(responseMsg1, sizeof(uint8_t),
+                                              nullptr);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    /* Test with invalid payload length (too short) */
+    rc = decode_update_security_revision_resp(responseMsg1, 0, &completionCode);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    /* Test with invalid payload length (larger than expected) */
+    rc = decode_update_security_revision_resp(responseMsg1, sizeof(uint8_t) + 1,
+                                              &completionCode);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+
 TEST(UpdateComponent, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 2;
