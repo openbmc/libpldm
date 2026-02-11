@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06a2c4ab_dfbcd0ca",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2804,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-11T08:50:07Z",
+      "side": 1,
+      "message": "Since a flexible array must appear only at the end of a structure and there can be at most one per struct, the cleanest approach here would be to use a count + pointer design and allocate the variable-sized data using separate malloc calls. This is just a suggestion—there may be other valid ways to implement it, but this seems the most appropriate given the constraints.",
+      "revId": "8b9833a9fe2c0b4a1550f2d5e29e9371bd6a83a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2e2f4b8_93c5f99f",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 2
