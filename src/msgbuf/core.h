@@ -688,6 +688,66 @@ pldm__msgbuf_extract_real32(struct pldm_msgbuf_ro *ctx, void *dst)
 }
 
 LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm__msgbuf_extract_uint64(struct pldm_msgbuf_ro *ctx, void *dst)
+{
+	uint64_t ldst;
+
+	static_assert(
+		// NOLINTNEXTLINE(bugprone-sizeof-expression)
+		sizeof(ldst) < INTMAX_MAX,
+		"The following addition may not uphold the runtime assertion");
+
+	if (ctx->remaining >= (intmax_t)sizeof(ldst)) {
+		assert(ctx->cursor);
+		memcpy(&ldst, ctx->cursor, sizeof(ldst));
+		ldst = le64toh(ldst);
+		memcpy(dst, &ldst, sizeof(ldst));
+		ctx->cursor += sizeof(ldst);
+		ctx->remaining -= sizeof(ldst);
+		return 0;
+	}
+
+	if (ctx->remaining > INTMAX_MIN + (intmax_t)sizeof(ldst)) {
+		ctx->remaining -= sizeof(ldst);
+		return -EOVERFLOW;
+	}
+
+	return pldm__msgbuf_ro_invalidate(ctx);
+}
+
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm__msgbuf_extract_int64(struct pldm_msgbuf_ro *ctx, void *dst)
+{
+	int64_t ldst;
+
+	static_assert(
+		// NOLINTNEXTLINE(bugprone-sizeof-expression)
+		sizeof(ldst) < INTMAX_MAX,
+		"The following addition may not uphold the runtime assertion");
+
+	if (ctx->remaining >= (intmax_t)sizeof(ldst)) {
+		assert(ctx->cursor);
+		memcpy(&ldst, ctx->cursor, sizeof(ldst));
+		ldst = (int64_t)le64toh((uint64_t)ldst);
+		memcpy(dst, &ldst, sizeof(ldst));
+		ctx->cursor += sizeof(ldst);
+		ctx->remaining -= sizeof(ldst);
+		return 0;
+	}
+
+	if (ctx->remaining > INTMAX_MIN + (intmax_t)sizeof(ldst)) {
+		ctx->remaining -= sizeof(ldst);
+		return -EOVERFLOW;
+	}
+
+	return pldm__msgbuf_ro_invalidate(ctx);
+}
+
+LIBPLDM_CC_NONNULL
 LIBPLDM_CC_WARN_UNUSED_RESULT
 LIBPLDM_CC_ALWAYS_INLINE int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)

@@ -3461,7 +3461,7 @@ TEST(GetSensorReading, testBadEncodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     rc = encode_get_sensor_reading_resp(
-        0, PLDM_SUCCESS, 6, 1, 1, 1, 1, 1,
+        0, PLDM_SUCCESS, PLDM_SENSOR_DATA_SIZE_MAX + 1, 1, 1, 1, 1, 1,
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&presentReading), response,
         responseMsg.size() - hdrSize);

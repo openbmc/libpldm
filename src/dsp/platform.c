@@ -2382,7 +2382,7 @@ int decode_get_sensor_reading_resp(
 		return pldm_xlate_errno(pldm_msgbuf_discard(buf, rc));
 	}
 
-	if (*sensor_data_size > PLDM_SENSOR_DATA_SIZE_SINT32) {
+	if (*sensor_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
 		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
 	}
 
@@ -2417,7 +2417,7 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (sensor_data_size > PLDM_EFFECTER_DATA_SIZE_SINT32) {
+	if (sensor_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -2443,15 +2443,15 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 	response->previous_state = previous_state;
 	response->event_state = event_state;
 
-	if (sensor_data_size == PLDM_EFFECTER_DATA_SIZE_UINT8 ||
-	    sensor_data_size == PLDM_EFFECTER_DATA_SIZE_SINT8) {
+	if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT8 ||
+	    sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT8) {
 		if (payload_length != PLDM_GET_SENSOR_READING_MIN_RESP_BYTES) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
 		response->present_reading[0] = *present_reading;
 
-	} else if (sensor_data_size == PLDM_EFFECTER_DATA_SIZE_UINT16 ||
-		   sensor_data_size == PLDM_EFFECTER_DATA_SIZE_SINT16) {
+	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT16 ||
+		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT16) {
 		if (payload_length !=
 		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 1) {
 			return PLDM_ERROR_INVALID_LENGTH;
@@ -2460,8 +2460,8 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 		val = htole16(val);
 		memcpy(response->present_reading, &val, 2);
 
-	} else if (sensor_data_size == PLDM_EFFECTER_DATA_SIZE_UINT32 ||
-		   sensor_data_size == PLDM_EFFECTER_DATA_SIZE_SINT32) {
+	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT32 ||
+		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT32) {
 		if (payload_length !=
 		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 3) {
 			return PLDM_ERROR_INVALID_LENGTH;
@@ -2469,6 +2469,16 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 		uint32_t val = *(uint32_t *)present_reading;
 		val = htole32(val);
 		memcpy(response->present_reading, &val, 4);
+
+	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT64 ||
+		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT64) {
+		if (payload_length !=
+		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7) {
+			return PLDM_ERROR_INVALID_LENGTH;
+		}
+		uint64_t val = *(uint64_t *)present_reading;
+		val = htole64(val);
+		memcpy(response->present_reading, &val, 8);
 	}
 
 	return PLDM_SUCCESS;

@@ -124,6 +124,14 @@
 	pldm_msgbuf_extract_typecheck(real32_t, pldm__msgbuf_extract_real32,   \
 				      dst, ctx, (void *)&(dst))
 
+#define pldm_msgbuf_extract_uint64(ctx, dst)                                   \
+	pldm_msgbuf_extract_typecheck(uint64_t, pldm__msgbuf_extract_uint64,   \
+				      dst, ctx, (void *)&(dst))
+
+#define pldm_msgbuf_extract_int64(ctx, dst)                                    \
+	pldm_msgbuf_extract_typecheck(int64_t, pldm__msgbuf_extract_int64,     \
+				      dst, ctx, (void *)&(dst))
+
 /**
  * Extract the field at the msgbuf cursor into the lvalue named by dst.
  *
@@ -141,7 +149,9 @@
 		int16_t: pldm__msgbuf_extract_int16,                           \
 		uint32_t: pldm__msgbuf_extract_uint32,                         \
 		int32_t: pldm__msgbuf_extract_int32,                           \
-		real32_t: pldm__msgbuf_extract_real32)(ctx, (void *)&(dst))
+		real32_t: pldm__msgbuf_extract_real32,                         \
+		uint64_t: pldm__msgbuf_extract_uint64,                         \
+		int64_t: pldm__msgbuf_extract_int64)(ctx, (void *)&(dst))
 
 /**
  * Extract the field at the msgbuf cursor into the object pointed-to by dst.
@@ -160,7 +170,9 @@
 		int16_t *: pldm__msgbuf_extract_int16,                         \
 		uint32_t *: pldm__msgbuf_extract_uint32,                       \
 		int32_t *: pldm__msgbuf_extract_int32,                         \
-		real32_t *: pldm__msgbuf_extract_real32)(ctx, dst)
+		real32_t *: pldm__msgbuf_extract_real32,                        \
+		uint64_t *: pldm__msgbuf_extract_uint64,                       \
+		int64_t *: pldm__msgbuf_extract_int64)(ctx, dst)
 
 #define pldm_msgbuf_insert(dst, src)                                           \
 	_Generic((src),                                                        \
