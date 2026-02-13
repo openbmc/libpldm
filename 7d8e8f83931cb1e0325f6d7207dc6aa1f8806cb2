@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c89a8b2c_a8f3d551",
+        "filename": "include/libpldm/entity.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-13T09:13:57Z",
+      "side": 1,
+      "message": "Based on the search below, pldmtool appears to be the only in-tree\nconsumer of the misspelled PLDM_ENTITY_SOLID_STATE_SRIVE:\n\nhttps://github.com/search?q\u003dorg%3Aopenbmc+PLDM_ENTITY_SOLID_STATE_SRIVE\u0026type\u003dcode\n\nThe related cleanup changes are grouped here for context:\n\nhttps://gerrit.openbmc.org/q/topic:%22misspelled-ssd-entity-cleanup%22\n\nLinking these so reviewers can easily follow the sequence and so the\nassociated cleanup is not overlooked.",
+      "revId": "7d8e8f83931cb1e0325f6d7207dc6aa1f8806cb2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09dcf506_1449ca9a",
+        "filename": "include/libpldm/entity.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-13T09:13:57Z",
+      "side": 1,
+      "message": "I believe you don\u0027t have to keep this\n\nhttps://github.com/search?q\u003dorg%3Aopenbmc%20PLDM_ENTITY_OMINIPATH\u0026type\u003dcode\nhttps://github.com/search?q\u003dorg%3Aopenbmc+PLDM_ENTITY_FIBRECHANEL\u0026type\u003dcode\n\nI don\u0027t see any consumer in openbmc family that uses these. So it should be safe to remove the misspelled ones without having to worry about breakage.",
+      "revId": "7d8e8f83931cb1e0325f6d7207dc6aa1f8806cb2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
