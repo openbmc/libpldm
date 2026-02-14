@@ -16,6 +16,23 @@
       "message": "looks good",
       "revId": "2b7976c4f1a5d6fdd1a45d010f0329f5d7568ad3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03db49cc_3188acf2",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 3495,
+      "author": {
+        "id": 1000479
+      },
+      "writtenOn": "2026-02-14T12:17:28Z",
+      "side": 1,
+      "message": "You may need to add test cases for `encode_update_security_revision_req()` API as well.",
+      "revId": "2b7976c4f1a5d6fdd1a45d010f0329f5d7568ad3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
