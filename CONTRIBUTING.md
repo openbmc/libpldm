@@ -397,8 +397,25 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
   - [ ] The relevant version of the specification
   - [ ] The section of the specification that defines the message type
 
-- [ ] If my work impacts the public API of the library, then I've added an entry
-      to `CHANGELOG.md` describing my work
+#### Changelog
+
+The purpose of the changelog is to highlight changes that might interest _users_
+of the library who are not also developers of the library. As such,
+reorganisation or refactoring of implementation should not feature there. That
+type of work is captured in the commit history, which is readily available to
+libpldm developers.
+
+- [ ] I have added entries to `CHANGELOG.md` for work that impacts the users of
+      the library
+  - For example:
+    - Changes to the public headers under `include/libpldm`
+    - Bug-fixes whose impact is observable at runtime
+
+- [ ] I have not added entries to `CHANGELOG.md` for work that has no user
+      impact
+  - For example, refactoring the implementation in a way that:
+    - Doesn't change the public headers under `include/libpldm`
+    - Doesn't change observable runtime behaviour
 
 ### OEM/vendor-specific APIs
 
