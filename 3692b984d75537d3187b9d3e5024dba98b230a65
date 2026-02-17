@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "13a2370f_865b6309",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-17T06:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b09a43f5_7e30fb40",
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "956d1a0e_596031ec",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 24
@@ -58,6 +76,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2f7aed3_438a44b7",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-17T06:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a99bde2_d0f67540",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21fa939f_6a25bca4",
@@ -71,6 +113,30 @@
       "writtenOn": "2026-02-17T00:31:38Z",
       "side": 1,
       "message": "There should be no user-facing change in behaviour as a result of these changes. As such they\u0027re implementation details, and don\u0027t belong in the changelog.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 73
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "598d4d12_34880fb9",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-17T06:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21fa939f_6a25bca4",
       "range": {
         "startLine": 33,
         "startChar": 0,
@@ -104,6 +170,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "332e3d70_92afe942",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-17T06:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "297f7f69_12eb9484",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 69
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f057b19_1d300aa9",
@@ -117,6 +207,30 @@
       "writtenOn": "2026-02-17T00:31:38Z",
       "side": 1,
       "message": "These don\u0027t belong in the `### Removed` section. Please remove them.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 69
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c042fe16_d5c95557",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-17T06:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f057b19_1d300aa9",
       "range": {
         "startLine": 52,
         "startChar": 0,
@@ -144,6 +258,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62b41f5d_8972caca",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-17T06:02:16Z",
+      "side": 1,
+      "message": "Done. Removed the else case since I also realized the non af-mctp side they wont be needing the variable anyway.",
+      "parentUuid": "88e5d861_c9f6857b",
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f19fe63_4defd555",
@@ -157,6 +289,30 @@
       "writtenOn": "2026-02-17T00:31:38Z",
       "side": 1,
       "message": "I\u0027m wary that this definition might be untested for both condition values.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 6
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e44c0ee3_5dbeac51",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-17T06:02:16Z",
+      "side": 1,
+      "message": "I think I didn\u0027t get the question. \n\nI tested this build on a kernel that didn\u0027t have the structure defined. \n\nSo, are you worried that the other condition, where the structure is defined, needs to be tested too?",
+      "parentUuid": "6f19fe63_4defd555",
       "range": {
         "startLine": 36,
         "startChar": 0,
@@ -190,6 +346,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb5e5da4_896e2f96",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-17T06:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6484f459_0d0d061c",
+      "range": {
+        "startLine": 73,
+        "startChar": 27,
+        "endLine": 73,
+        "endChar": 36
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c81d1f65_8ceef620",
@@ -203,6 +383,30 @@
       "writtenOn": "2026-02-17T00:31:38Z",
       "side": 1,
       "message": "I wonder why we used the `eid` local to begin with.\n\nRather than add `network` I think I prefer we remove the `eid` local and use the struct members directly in the call-site below.\n\n```\nrc \u003d pldm_transport_af_mctp_get_tid(af_mctp, addr.smctp_network, addr.smctp_addr.s_addr, tid);```",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 173,
+        "endChar": 30
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2099eed1_8a927f16",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-17T06:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c81d1f65_8ceef620",
       "range": {
         "startLine": 172,
         "startChar": 1,
