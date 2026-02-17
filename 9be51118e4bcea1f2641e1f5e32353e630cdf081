@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09521612_5331c7e9",
+        "filename": "bindings/cpp/utils.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-17T17:27:35Z",
+      "side": 1,
+      "message": "nit, nonblocking: magic number. do we have an enum in libpldm for the string encodings? not worth spinning a review for this, feel free to resolve and merge if andrew is fine with it.",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67bb3899_5e10a108",
+        "filename": "include/libpldm/cpp/types.hpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-17T17:27:35Z",
+      "side": 1,
+      "message": "ultranit: stale comment. not worth spinning the review unless you\u0027re already going to for some reason.",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

@@ -405,6 +405,24 @@
       "parentUuid": "b5265b80_44234209",
       "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f99a5745_c803ac83",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-17T17:27:35Z",
+      "side": 1,
+      "message": "looking at this...give me a day to mull it over. Work is flaring up. Overall, with the reorganization its less jarring to read and I\u0027m not sure its worth holding this review up compared to the utility it provides. Moving away from the friends concept is going to require a fair amount of work and if it meets andrew\u0027s requirements from an API perspective, I can sleep at night without too much trouble.",
+      "parentUuid": "8e7d6c8e_8d47079a",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
