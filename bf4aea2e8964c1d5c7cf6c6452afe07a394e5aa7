@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "055b1b9f_61540bb0",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-17T06:23:35Z",
+      "side": 1,
+      "message": "changed it to `include/libpldm/cpp/` as requested 👍",
+      "parentUuid": "313d513f_56cb153d",
+      "revId": "bf4aea2e8964c1d5c7cf6c6452afe07a394e5aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "068860e7_c26172a0",
@@ -48,6 +66,30 @@
       "writtenOn": "2026-02-17T04:50:56Z",
       "side": 1,
       "message": "Is this necessary if you\u0027re aiming to avoid defining these types in `include/libpldm/bindings/cpp/firmware_update.hpp`?\n\nThough I\u0027d argue `DescriptorData`, `ComponentImageInfo`, `FirmwareDeviceIDRecord` and `Package` should probably be moved?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 1
+      },
+      "revId": "bf4aea2e8964c1d5c7cf6c6452afe07a394e5aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "113d7d57_f1f011de",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-17T06:23:35Z",
+      "side": 1,
+      "message": "\u003e Is this necessary if you\u0027re aiming to avoid defining these types in include/libpldm/bindings/cpp/firmware_update.hpp?\n\nNamespacing is necessary to avid name collision. It does not matter in which file the struct is defined, as long as it\u0027s (transitively) included it will be in some namespace.\n\n\u003e Entities declared outside all namespace blocks belong to the global namespace. The global namespace belongs to the global scope, and can be referred to explicitly with a leading ::. While it has no declaration, the global namespace is not an unnamed namespace.\n\nLet me know if you want to avoid nested namespace, in that case i can try to rename some types to make it clear that they are intended for fw update, and fit everything into `pldm` namespace.\n\n\u003e Though I\u0027d argue DescriptorData, ComponentImageInfo, FirmwareDeviceIDRecord and Package should probably be moved?\n\nmoved these structs to the other header 👍",
+      "parentUuid": "068860e7_c26172a0",
       "range": {
         "startLine": 19,
         "startChar": 0,
@@ -75,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc4e33cf_cabfb186",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-17T06:23:35Z",
+      "side": 1,
+      "message": "wrote an extra note there that the comment does not apply to library users.\n\nLet me know if you think it\u0027s better to remove it altogether.",
+      "parentUuid": "3c8677ca_0679b438",
+      "revId": "bf4aea2e8964c1d5c7cf6c6452afe07a394e5aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b350001_fb6ef1e3",
@@ -88,6 +148,24 @@
       "writtenOn": "2026-02-17T04:50:56Z",
       "side": 1,
       "message": "The only thing I\u0027d ask with respect to member names is that, where relevant, they\u0027re not abbreviated (e.g. `comp` instead of `component`). Naming them the same as the name in the spec makes it easier to correlate between the two (obviously this doesn\u0027t apply to members that don\u0027t have a corresponding definition in the spec, e.g `std::vector`s and such).",
+      "revId": "bf4aea2e8964c1d5c7cf6c6452afe07a394e5aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3bb35e_d47ee186",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-17T06:23:35Z",
+      "side": 1,
+      "message": "yep, makes sense to me and it will help to grep more quickly. I applied it for the structs, please let me know in case i missed anything.",
+      "parentUuid": "9b350001_fb6ef1e3",
       "revId": "bf4aea2e8964c1d5c7cf6c6452afe07a394e5aa7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
