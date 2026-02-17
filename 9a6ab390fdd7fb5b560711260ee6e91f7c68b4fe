@@ -22,6 +22,30 @@
       },
       "revId": "9a6ab390fdd7fb5b560711260ee6e91f7c68b4fe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21e74d07_43928a66",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T23:33:14Z",
+      "side": 1,
+      "message": "Yes, indeed. It was difficult to see that change amongst everything else that was going on in this patch.",
+      "parentUuid": "0e1da56d_f4a0609c",
+      "range": {
+        "startLine": 310,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 56
+      },
+      "revId": "9a6ab390fdd7fb5b560711260ee6e91f7c68b4fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ],
   "submitRequirementResults": []
