@@ -1,0 +1,363 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03ee9e38_06515d5e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "I prefer this mentions the short spec name as well, so: `dsp: firmware_update: Added ...`",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d1d50fc_6501cf64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "Please use imperative mode here too, so `dsp: firmware_update: Add ...` rather than `dsp: Added ...`",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c99dbe8_5c072901",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "This mostly duplicates the patch subject. I suggest just adding the spec ID and version to the patch subject, then removing this line:\n\n\n```\ndsp: firmware_update: Add Update Security Revision from DSP0267 v1.3.0\n```",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56270f07_c8af8b06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "Can you please re-wrap this to 72 characters?",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 48
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "474aa938_81b5e9e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "Hi Mayank, thanks for the change. I have some comments inline.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "047f32b7_df26a9a8",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "Make this match the patch subject (see discussion on commit message)",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0bfc4e7_791c9816",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "The general preference is that we add `PLDM_FWUP_` as a symbol prefix to identify where it\u0027s coming from. Can you please do so here?",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 47
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df3d0def_288ad43b",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "I appreciate you\u0027re fixing a typo, however, this should be done by adding the new enum member with the correct spelling, and leaving the misspelled member in place until we\u0027ve tagged a release with the corrected member.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "724067c8_df1516ee",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "Please avoid abbreviating member names for messages. The abbreviations make it trickier to trace them back to the spec.\n\nPlease fix throughout.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "610ded2f_9db61724",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "I understand you\u0027re probably aiming for consistency with existing structs here, however, I ask that we don\u0027t add further `__attribute__((packed))` structs going forward:\n\n\nhttps://github.com/openbmc/libpldm/blob/799fba23bb28bf4f7b500c030313aeacdb3c53ce/CONTRIBUTING.md#L315-L316\n\nPlease fix throughout.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b2a3f8_572e2fad",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "In the case where the only response is a completion code I\u0027m okay with accepting a `uint8_t *` parameter to the decode API rather than force you to define a struct.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3467df67_5cd43c57",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 2211,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "Please don\u0027t return PLDM completion codes from encode/decode APIs. Instead, return 0 on success, or a negative errno value on failure:\n\n\nhttps://github.com/openbmc/libpldm/blob/799fba23bb28bf4f7b500c030313aeacdb3c53ce/CONTRIBUTING.md#L361-L364\n\nPlease fix throughout.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d0d445a_83ea4b4e",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 2216,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "Please don\u0027t decompose messages into individual members:\n\nhttps://github.com/openbmc/libpldm/blob/799fba23bb28bf4f7b500c030313aeacdb3c53ce/CONTRIBUTING.md#L306-L310",
+      "range": {
+        "startLine": 2214,
+        "startChar": 5,
+        "endLine": 2216,
+        "endChar": 45
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad016b66_ecfcaebf",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3259,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "Please make sure your additions follow the ABI lifecycle:\n\n\nhttps://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md#library-background\n\nThis must be `LIBPLDM_ABI_TESTING` for now.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d561486_99b3bbd9",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3291,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "Please rewrite using the msgbuf APIs.\n\nPlease fix throughout.",
+      "range": {
+        "startLine": 3285,
+        "startChar": 1,
+        "endLine": 3291,
+        "endChar": 1
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b64ca38_8862d205",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3295,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "This must be `LIBPLDM_ABI_TESTING` for now.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d88d8ac5_3abce002",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 3496,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "Please guard tests for APIs in the \"testing\" category with:\n\n```\n#ifdef LIBPLDM_API_TESTING\nTEST(...)\n{\n    ...\n}\n#endif\n```\n\n\nThe guard should be placed around each individual test.\n\nPlease fix throughout.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50440b3c_448d0b84",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 3507,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "This needs to be replaced with `PLDM_MSG_DEFINE_P()` from `include/libpldm/base.h`.\n\nPlease fix throughout.\n\nThe NOLINT should be a hint that this isn\u0027t desirable. Existing instances are historical and not a reflection of current expectations.",
+      "range": {
+        "startLine": 3503,
+        "startChar": 2,
+        "endLine": 3507,
+        "endChar": 1
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a70f5d0_1574c9c2",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 3564,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T06:07:06Z",
+      "side": 1,
+      "message": "Generally yhou should use `ASSERT_EQ()` in this case to prevent subsequent `EXPECT_*()` invocations from spuriously failing on unexpected errors.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
