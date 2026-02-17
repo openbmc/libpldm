@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38ef2ad7_8160a927",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 3193,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-17T15:16:32Z",
+      "side": 1,
+      "message": "This is the part that is labeled `Action Information` area in the specification.\n\nIt contains\n```\n  ActionCount\n  ActionNameLengthBytes [0]\n  ActionName [0]\n  ActionPathLengthBytes [0]\n  ...\n  ActionNameLengthBytes [N]\n  ActionName [N]\n  ActionPathLengthBytes [N]\n```\nIt is also returned in the `pldm_platform_redfish_action_pdr.action_info`.\n\nI think I find it lacking that in case of the `foreach` API that we implement there is no easy way to get `ActionCount` without full iterating.\n\nWhat is preffered way to add this?\n1) add `uint8_t action_count` to the pdr structure\n2) add `uint8_t action_count` to the action_info structure\n3) create another API to get it from the action_info structure\n\nThe easiest way is 1/2, in case we do that, do we need to move area.ptr after the `ActionCount` field, or can we leave things as they are?",
+      "revId": "7de691bc375c7b579e726d8126e37fef202388ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

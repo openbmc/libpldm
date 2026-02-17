@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7a2ef7e_3d799e9a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2804,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-17T15:16:32Z",
+      "side": 1,
+      "message": "Please review the new version with the iterator approach",
+      "parentUuid": "8774bc55_90aa6bc4",
+      "revId": "8b9833a9fe2c0b4a1550f2d5e29e9371bd6a83a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2e2f4b8_93c5f99f",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 2
