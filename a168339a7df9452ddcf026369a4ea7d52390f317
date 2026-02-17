@@ -87,6 +87,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cd305b1_3b0e78cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:28:22Z",
+      "side": 1,
+      "message": "Hi @apparao.puli@intel.com - @garybeihl@microsoft.com has a similar change, can you please review/discuss it with them?\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/87402",
+      "revId": "a168339a7df9452ddcf026369a4ea7d52390f317",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfd151a2_c6336290",
