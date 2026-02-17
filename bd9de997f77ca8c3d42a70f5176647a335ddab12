@@ -1,0 +1,491 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d823cdcb_a337352f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Let\u0027s drop this detail from the commit message, it\u0027s something that\u0027s demonstrated in the patch itself.",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad5cc2bd_183b9f22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Given this is an example that will likely be referenced by others, please add the example error-handling as well 😊",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67a3d9fd_41c2b811",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Hi Jino, I have a quite a few comments again but they\u0027re mostly implementation concerns and not design concerns.",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c98f014_708e0c86",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "I acknowledge that you\u0027re handling PDRs here, however, the existing APIs in this header are largely concerned with maintaining a PDR repository, rather than encoding or decoding specific PDR messages. There\u0027s the unfortunate concern that the repository in-memeory representation is the wire format, but setting that aside, the other PDR encode/decode APIs are currently in `include/libpldm/platform.h`.\n\nCan you please move the definitions to `include/libpldm/platform.h` for now, for consistency?\n\nThe general organisation of the headers is something that needs to be looked at in the future.",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3ae9316_5427c63c",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "As a broad point, functions marked with `LIBPLDM_ITERATOR` are for internal use by the iterator macros, and as such providing documentation isn\u0027t necessary. It will make the patch a bit easier to read if you remove such documentation throughout your change 😊\n\n(However, thanks for the effort to document things!).",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 3
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f4e835e_03e55563",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Drop this as `LIBPLDM_ITERATOR` requires `iter` is non-NULL.\n\nPlease fix throughout.",
+      "range": {
+        "startLine": 119,
+        "startChar": 5,
+        "endLine": 119,
+        "endChar": 13
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e4c90f_18e78455",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Why the extra indirection? We shouldn\u0027t be allocating to assign to it...",
+      "range": {
+        "startLine": 139,
+        "startChar": 45,
+        "endLine": 139,
+        "endChar": 53
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7fc93c1_ce11a285",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Same query as above.",
+      "range": {
+        "startLine": 214,
+        "startChar": 19,
+        "endLine": 214,
+        "endChar": 27
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c0f5f20_c19e28fa",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Rephrase this as:\n\n\u003e A pointer to the current possible_states entry",
+      "range": {
+        "startLine": 224,
+        "startChar": 22,
+        "endLine": 226,
+        "endChar": 81
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "343407d0_bd71ca31",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "While libpldm is used in C++ contexts, it is a C library. Let\u0027s not embed C++ in the examples, especially C++ that\u0027s demonstrating sketchy implementation choices. Please constrain the examples to C code and drop this line.",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 80
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "845d1365_6e4bdff5",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Perhaps you shouldn\u0027t take the address here?",
+      "range": {
+        "startLine": 269,
+        "startChar": 14,
+        "endLine": 269,
+        "endChar": 15
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd15ea82_a44915a9",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "I\u0027d rephrase this as\n\n\u003e A pointer to a possible_states entry ...",
+      "range": {
+        "startLine": 276,
+        "startChar": 21,
+        "endLine": 278,
+        "endChar": 40
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97b0956b_5904e97a",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Same query here.",
+      "range": {
+        "startLine": 299,
+        "startChar": 27,
+        "endLine": 299,
+        "endChar": 28
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cadc18d_e2c79ec0",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2398,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "```suggestion\n\tstruct pldm_pdr_state_effecter_iter iter \u003d {0};\n```",
+      "range": {
+        "startLine": 2398,
+        "startChar": 42,
+        "endLine": 2398,
+        "endChar": 65
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3818da4c_774d207c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2410,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Let\u0027s assign this last, for safety.",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb9dc6af_e5837a64",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "I expect this should be a subtraction.",
+      "range": {
+        "startLine": 2417,
+        "startChar": 71,
+        "endLine": 2417,
+        "endChar": 72
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33a36a6b_cf44a4b0",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2448,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right...",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cab8f370_63038c2a",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2462,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "This is somewhat odd, and I think related to the concern around `entry_start`?",
+      "range": {
+        "startLine": 2462,
+        "startChar": 59,
+        "endLine": 2462,
+        "endChar": 63
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0585891b_9a33edda",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2481,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "... and it appears this is why. Please rather make the caller provide their own object storage for this, and decode the entry into that object.",
+      "range": {
+        "startLine": 2481,
+        "startChar": 1,
+        "endLine": 2481,
+        "endChar": 70
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45df9fd2_e5204320",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2548,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Just copy the byte value in to a caller-provided stack object rather than use a double indirection?",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c46e28c_ec429565",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2668,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Can we rather use either an open-coded definition of the message with literal values initialising an array, or use the C++ msgbuf interface to pack what you need? What you\u0027re doing here and below is approximating the msgbuf APIs\n\nPlease address throughout.\n\n\nAlso perhaps we need some equivalent of `PLDM_MSG_DEFINE_P()` from `include/libpldm/base.h` for PDRs...",
+      "range": {
+        "startLine": 2653,
+        "startChar": 0,
+        "endLine": 2668,
+        "endChar": 1
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38c19841_2159bf8e",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2764,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "I expect this yields undefined behaviour?",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3a97a07_040a456a",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2769,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T01:31:51Z",
+      "side": 1,
+      "message": "Just pass a value that\u0027s explicitly too small. No need to make the object itself too small.",
+      "range": {
+        "startLine": 2769,
+        "startChar": 57,
+        "endLine": 2769,
+        "endChar": 70
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
