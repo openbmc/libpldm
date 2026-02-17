@@ -1,0 +1,302 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92aec9f1_9feea615",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "Can you wrap this so that the lines take full advantage of the width available to them?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 1
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26dc8893_6ca8051d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "Needs a space after the `:`",
+      "range": {
+        "startLine": 15,
+        "startChar": 14,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40ea6de_ffb40605",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "Can we please use `Co-developed-by:` instead, as per Linux convention?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 14
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38c86e0e_73794d75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "Hi Arun, thanks for the changes. I have a few comments inline.",
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfc3aa26_0c942f0c",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 14
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "Needs to be moved to the `## [Unreleased]` section",
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "487f13f3_29b604d0",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "These belong in `enum pldm_platform_completion_codes` from `include/libpldm/platform.h`.",
+      "range": {
+        "startLine": 82,
+        "startChar": 1,
+        "endLine": 84,
+        "endChar": 69
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e64d32_2c8e07fd",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "Can you add a comment about where these are defined?",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 2
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7750dee3_0c60d154",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 1389,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "This can\u0027t be changed without further justification, and it certainly shouldn\u0027t be changed to add `__attribute__((packed))`:\n\nhttps://github.com/openbmc/libpldm/blob/799fba23bb28bf4f7b500c030313aeacdb3c53ce/CONTRIBUTING.md#L315-L316",
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b11c09e0_ed8dc640",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2803,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "Please don\u0027t decompose message elements this way:\n\nhttps://github.com/openbmc/libpldm/blob/799fba23bb28bf4f7b500c030313aeacdb3c53ce/CONTRIBUTING.md#L306-L310",
+      "range": {
+        "startLine": 2801,
+        "startChar": 28,
+        "endLine": 2803,
+        "endChar": 43
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54d92860_475ce71e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2817,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "This is arguably okay as the response only contains the completion code.",
+      "range": {
+        "startLine": 2817,
+        "startChar": 7,
+        "endLine": 2817,
+        "endChar": 31
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a531211f_5a967218",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2538,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "Please encode the message using the msgbuf APIs.",
+      "range": {
+        "startLine": 2533,
+        "startChar": 1,
+        "endLine": 2538,
+        "endChar": 1
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e64205e1_99789b32",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2566,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "This should rather be:\n\n```suggestion\n\tpldm_msgbuf_extract_p(buf, *completion_code);\n\n\treturn pldm_msgbuf_complete_consumed(buf);\n```",
+      "range": {
+        "startLine": 2561,
+        "startChar": 1,
+        "endLine": 2566,
+        "endChar": 34
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b6af90f_9a84075f",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 3893,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "This should instead use `PLDM_MSG_DEFINE_P()` from `include/libpldm/base.h`.\n\nPlease fix throughout.",
+      "range": {
+        "startLine": 3891,
+        "startChar": 4,
+        "endLine": 3893,
+        "endChar": 64
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffa2e3e4_7a222597",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 3903,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T05:46:27Z",
+      "side": 1,
+      "message": "This needs to be `ASSERT_EQ()` to prevent later `EXPECT_*()` tests if the call fails.\n\nPlease fix throughout.",
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
