@@ -41,6 +41,48 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac238bff_e9e9e329",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "03ee9e38_06515d5e",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2991d6f8_127c5f45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5d1d50fc_6501cf64",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c99dbe8_5c072901",
@@ -58,6 +100,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a378c058_f917cddb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0c99dbe8_5c072901",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56270f07_c8af8b06",
@@ -71,6 +131,30 @@
       "writtenOn": "2026-02-17T06:07:06Z",
       "side": 1,
       "message": "Can you please re-wrap this to 72 characters?",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 48
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98adb457_b96da645",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "56270f07_c8af8b06",
       "range": {
         "startLine": 10,
         "startChar": 1,
@@ -115,6 +199,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ac8e932_013e9edf",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "047f32b7_df26a9a8",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0bfc4e7_791c9816",
@@ -128,6 +230,30 @@
       "writtenOn": "2026-02-17T06:07:06Z",
       "side": 1,
       "message": "The general preference is that we add `PLDM_FWUP_` as a symbol prefix to identify where it\u0027s coming from. Can you please do so here?",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 47
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "294ef636_16922b78",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c0bfc4e7_791c9816",
       "range": {
         "startLine": 103,
         "startChar": 8,
@@ -155,6 +281,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78a8b896_3a6bab77",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "df3d0def_288ad43b",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "724067c8_df1516ee",
@@ -168,6 +312,24 @@
       "writtenOn": "2026-02-17T06:07:06Z",
       "side": 1,
       "message": "Please avoid abbreviating member names for messages. The abbreviations make it trickier to trace them back to the spec.\n\nPlease fix throughout.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3844d98e_f9766075",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "724067c8_df1516ee",
       "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -189,6 +351,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd30897_7ff90ae5",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "610ded2f_9db61724",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56b2a3f8_572e2fad",
@@ -206,6 +386,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6ddd4b7_1c626052",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "56b2a3f8_572e2fad",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3467df67_5cd43c57",
@@ -219,6 +417,24 @@
       "writtenOn": "2026-02-17T06:07:06Z",
       "side": 1,
       "message": "Please don\u0027t return PLDM completion codes from encode/decode APIs. Instead, return 0 on success, or a negative errno value on failure:\n\n\nhttps://github.com/openbmc/libpldm/blob/799fba23bb28bf4f7b500c030313aeacdb3c53ce/CONTRIBUTING.md#L361-L364\n\nPlease fix throughout.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f06c8e3_f0ffc7eb",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 2211,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3467df67_5cd43c57",
       "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -246,6 +462,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ff3b23_82425f79",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 2216,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8d0d445a_83ea4b4e",
+      "range": {
+        "startLine": 2214,
+        "startChar": 5,
+        "endLine": 2216,
+        "endChar": 45
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad016b66_ecfcaebf",
@@ -259,6 +499,24 @@
       "writtenOn": "2026-02-17T06:07:06Z",
       "side": 1,
       "message": "Please make sure your additions follow the ABI lifecycle:\n\n\nhttps://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md#library-background\n\nThis must be `LIBPLDM_ABI_TESTING` for now.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e742a156_e8cee4fb",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3259,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ad016b66_ecfcaebf",
       "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -286,6 +544,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b388de33_b1acaa42",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3291,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1d561486_99b3bbd9",
+      "range": {
+        "startLine": 3285,
+        "startChar": 1,
+        "endLine": 3291,
+        "endChar": 1
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b64ca38_8862d205",
@@ -303,6 +585,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd38a008_10c4f128",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3295,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1b64ca38_8862d205",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d88d8ac5_3abce002",
@@ -316,6 +616,24 @@
       "writtenOn": "2026-02-17T06:07:06Z",
       "side": 1,
       "message": "Please guard tests for APIs in the \"testing\" category with:\n\n```\n#ifdef LIBPLDM_API_TESTING\nTEST(...)\n{\n    ...\n}\n#endif\n```\n\n\nThe guard should be placed around each individual test.\n\nPlease fix throughout.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeb95d7e_575090d9",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 3496,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d88d8ac5_3abce002",
       "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -343,6 +661,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5193e574_2e215762",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 3507,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "50440b3c_448d0b84",
+      "range": {
+        "startLine": 3503,
+        "startChar": 2,
+        "endLine": 3507,
+        "endChar": 1
+      },
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a70f5d0_1574c9c2",
@@ -356,6 +698,24 @@
       "writtenOn": "2026-02-17T06:07:06Z",
       "side": 1,
       "message": "Generally yhou should use `ASSERT_EQ()` in this case to prevent subsequent `EXPECT_*()` invocations from spuriously failing on unexpected errors.",
+      "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8e7c30c_01ce24f4",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 3564,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-17T09:31:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0a70f5d0_1574c9c2",
       "revId": "490a0ad7202dbd4f9b1af04d12bb1f47f19817f5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
