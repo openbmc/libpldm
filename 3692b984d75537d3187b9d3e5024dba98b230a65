@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b09a43f5_7e30fb40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T00:31:38Z",
+      "side": 1,
+      "message": "Can we change this to `Co-developed-by:` to match the kernel\u0027s well-known tags?\n\nhttps://docs.kernel.org/process/5.Posting.html#patch-formatting-and-changelogs",
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "956d1a0e_596031ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T00:31:38Z",
+      "side": 1,
+      "message": "Hi Vishnunithyasoundhar, thanks for the change. I have a few comments inline that I hope are straight-forward to address.",
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a99bde2_d0f67540",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T00:31:38Z",
+      "side": 1,
+      "message": "IMO this is an implementation detail that doesn\u0027t belong in the changelog.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21fa939f_6a25bca4",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T00:31:38Z",
+      "side": 1,
+      "message": "There should be no user-facing change in behaviour as a result of these changes. As such they\u0027re implementation details, and don\u0027t belong in the changelog.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 73
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "297f7f69_12eb9484",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T00:31:38Z",
+      "side": 1,
+      "message": "This also sounds like an implementation detail? I\u0027d remove this too.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 69
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f057b19_1d300aa9",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T00:31:38Z",
+      "side": 1,
+      "message": "These don\u0027t belong in the `### Removed` section. Please remove them.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 69
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88e5d861_c9f6857b",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T00:31:38Z",
+      "side": 1,
+      "message": "You don\u0027t provide a description below on line 45, which is inconsistent. I\u0027d remove it here too.\n\nhttps://mesonbuild.com/Reference-manual_returned_cfg_data.html#cfg_dataset10",
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f19fe63_4defd555",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T00:31:38Z",
+      "side": 1,
+      "message": "I\u0027m wary that this definition might be untested for both condition values.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 6
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6484f459_0d0d061c",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T00:31:38Z",
+      "side": 1,
+      "message": "Perhaps `pldm_transport_af_mctp_lookup_fqe()`?",
+      "range": {
+        "startLine": 73,
+        "startChar": 27,
+        "endLine": 73,
+        "endChar": 36
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c81d1f65_8ceef620",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T00:31:38Z",
+      "side": 1,
+      "message": "I wonder why we used the `eid` local to begin with.\n\nRather than add `network` I think I prefer we remove the `eid` local and use the struct members directly in the call-site below.\n\n```\nrc \u003d pldm_transport_af_mctp_get_tid(af_mctp, addr.smctp_network, addr.smctp_addr.s_addr, tid);```",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 173,
+        "endChar": 30
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
