@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16acb742_c421586a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T04:50:56Z",
+      "side": 1,
+      "message": "Hi Alexander, thanks for continuing to push on this. I have a few comments, though I\u0027d like @molberding@nvidia.com to take another look. I think I\u0027m at a point where I don\u0027t have significant opposition to the approach. The API used in the tests looks nice enough.",
+      "revId": "bf4aea2e8964c1d5c7cf6c6452afe07a394e5aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "313d513f_56cb153d",
+        "filename": "include/libpldm/bindings/cpp/firmware_update.hpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T04:50:56Z",
+      "side": 1,
+      "message": "What are your thoughts on dropping \u0027bindings\u0027 from the path for the headers? I like the explicit categorisation but I don\u0027t enjoy the length, so I\u0027m a it torn.",
+      "revId": "bf4aea2e8964c1d5c7cf6c6452afe07a394e5aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "068860e7_c26172a0",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T04:50:56Z",
+      "side": 1,
+      "message": "Is this necessary if you\u0027re aiming to avoid defining these types in `include/libpldm/bindings/cpp/firmware_update.hpp`?\n\nThough I\u0027d argue `DescriptorData`, `ComponentImageInfo`, `FirmwareDeviceIDRecord` and `Package` should probably be moved?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 1
+      },
+      "revId": "bf4aea2e8964c1d5c7cf6c6452afe07a394e5aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c8677ca_0679b438",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T04:50:56Z",
+      "side": 1,
+      "message": "This is constrained to the binding implementation, right? The binding caller/user can always assume they have a struct of a certain size (the one that was supported by the header they included).",
+      "revId": "bf4aea2e8964c1d5c7cf6c6452afe07a394e5aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b350001_fb6ef1e3",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-17T04:50:56Z",
+      "side": 1,
+      "message": "The only thing I\u0027d ask with respect to member names is that, where relevant, they\u0027re not abbreviated (e.g. `comp` instead of `component`). Naming them the same as the name in the spec makes it easier to correlate between the two (obviously this doesn\u0027t apply to members that don\u0027t have a corresponding definition in the spec, e.g `std::vector`s and such).",
+      "revId": "bf4aea2e8964c1d5c7cf6c6452afe07a394e5aa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
