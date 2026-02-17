@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7ee9de3_a2898c13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 40
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-17T23:41:50Z",
+      "side": 1,
+      "message": "After reading through it again, it seems like all of this friend stuff in types.hpp comes from wanting to avoid public constructors from the constituent data types. why not just provide static factory functions local to the cpp file? I feel like I\u0027m being dense and missing something.",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09521612_5331c7e9",
         "filename": "bindings/cpp/utils.cpp",
         "patchSetId": 40
@@ -14,6 +31,40 @@
       "writtenOn": "2026-02-17T17:27:35Z",
       "side": 1,
       "message": "nit, nonblocking: magic number. do we have an enum in libpldm for the string encodings? not worth spinning a review for this, feel free to resolve and merge if andrew is fine with it.",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d058ad3_65df6129",
+        "filename": "include/libpldm/cpp/firmware_update.hpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-17T23:41:50Z",
+      "side": 1,
+      "message": "I\u0027m missing why this needs to be a friend at all? all data is public here.",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "234f6d92_98d092be",
+        "filename": "include/libpldm/cpp/firmware_update.hpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-17T23:41:50Z",
+      "side": 1,
+      "message": "seems like we could just define helper functions in the tests since this is all public data? same for the rest of these ctors.",
       "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
