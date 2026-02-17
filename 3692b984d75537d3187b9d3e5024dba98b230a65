@@ -325,6 +325,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "124b567f_6d4a1a4e",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-17T06:11:38Z",
+      "side": 1,
+      "message": "Adding to my previous comment. (I had to check the kernels from all my test builds)\n\nOne of my build, with this libpldm patch, has kernel dev-6.18 (3fcb5927beef6fc8d9faa16b90c01fc6e67f2065)\n\nIt has the mctp_fq_addr structure defined, \n\nBuild - works\nPLDMD using libpldm - works\n\nCommunication over multi-mctp-network works.",
+      "parentUuid": "e44c0ee3_5dbeac51",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 6
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6484f459_0d0d061c",
         "filename": "src/transport/af-mctp.c",
         "patchSetId": 24
