@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48b9230e_7be67a64",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-18T06:35:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bf4b5ba1_15c20ba9",
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b69a85ce_f1606f14",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8e73971_e3596e62",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2199,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-18T06:35:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b69a85ce_f1606f14",
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51187205_2616549a",
@@ -48,6 +84,30 @@
       "writtenOn": "2026-02-18T05:49:59Z",
       "side": 1,
       "message": "`size_t *payload_length` by above.",
+      "range": {
+        "startLine": 2206,
+        "startChar": 23,
+        "endLine": 2206,
+        "endChar": 44
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "748a92c0_8169f912",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-18T06:35:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "51187205_2616549a",
       "range": {
         "startLine": 2206,
         "startChar": 23,
@@ -81,6 +141,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed699f59_d33c464c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3263,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-18T06:35:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "272a59ba_5bdd4246",
+      "range": {
+        "startLine": 3263,
+        "startChar": 23,
+        "endLine": 3263,
+        "endChar": 44
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31c485a5_e46ce143",
@@ -98,6 +182,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "732bab3a_e80b5f26",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3269,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-18T06:35:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "31c485a5_e46ce143",
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "764ce130_df683a68",
@@ -111,6 +213,30 @@
       "writtenOn": "2026-02-18T05:49:59Z",
       "side": 1,
       "message": "`PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES`, then remove lines 3272-3274.",
+      "range": {
+        "startLine": 3282,
+        "startChar": 34,
+        "endLine": 3282,
+        "endChar": 35
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54757789_1b513df2",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3282,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-18T06:35:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "764ce130_df683a68",
       "range": {
         "startLine": 3282,
         "startChar": 34,
@@ -144,6 +270,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0027c845_245f01aa",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3291,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-18T06:35:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a90942b7_d311fa1a",
+      "range": {
+        "startLine": 3291,
+        "startChar": 39,
+        "endLine": 3291,
+        "endChar": 70
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95dd661a_0b7b9a81",
@@ -157,6 +307,30 @@
       "writtenOn": "2026-02-18T05:49:59Z",
       "side": 1,
       "message": "See next comment.",
+      "range": {
+        "startLine": 3307,
+        "startChar": 1,
+        "endLine": 3309,
+        "endChar": 2
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6adfead4_3c33ab79",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3309,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-18T06:35:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "95dd661a_0b7b9a81",
       "range": {
         "startLine": 3307,
         "startChar": 1,
@@ -190,6 +364,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0b0f897_a19c9564",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3311,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-18T06:35:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a558d0e9_944b225b",
+      "range": {
+        "startLine": 3311,
+        "startChar": 34,
+        "endLine": 3311,
+        "endChar": 35
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d870263_f5080daa",
@@ -203,6 +401,30 @@
       "writtenOn": "2026-02-18T05:49:59Z",
       "side": 1,
       "message": "This can all rather be:\n\n```\npldm_msgbuf_extract_p(buf, completion_code);\n\nreturn pldm_msgbuf_complete_consumed(buf);\n```",
+      "range": {
+        "startLine": 3316,
+        "startChar": 1,
+        "endLine": 3324,
+        "endChar": 21
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c86420_0d5e0522",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3324,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-02-18T06:35:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7d870263_f5080daa",
       "range": {
         "startLine": 3316,
         "startChar": 1,
