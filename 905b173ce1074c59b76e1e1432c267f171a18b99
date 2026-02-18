@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09afdacd_3bdb2d9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T06:58:24Z",
+      "side": 1,
+      "message": "Hi Mayank - I caught a missed errno conversion in the implementation, but then also spotted some naming concerns. Sorry for going around on this a bit 😞",
+      "revId": "905b173ce1074c59b76e1e1432c267f171a18b99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0be66d13_edc90ec1",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T06:58:24Z",
+      "side": 1,
+      "message": "Ah! Sorry, should have caught this earlier, but the prefix for the struct should be `pldm_fwup` as well, so `pldm_fwup_update_security_revision_req`.",
+      "range": {
+        "startLine": 1090,
+        "startChar": 7,
+        "endLine": 1090,
+        "endChar": 12
+      },
+      "revId": "905b173ce1074c59b76e1e1432c267f171a18b99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1341cf3c_b0d140b5",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2205,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T06:58:24Z",
+      "side": 1,
+      "message": "... and likewise, this should match the struct name. Sorry for not catching that earlier.\n\n```\nint encode_pldm_fwup_update_security_revision_req(...);\n```",
+      "range": {
+        "startLine": 2205,
+        "startChar": 11,
+        "endLine": 2205,
+        "endChar": 39
+      },
+      "revId": "905b173ce1074c59b76e1e1432c267f171a18b99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93f83995_772c42dd",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 2218,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T06:58:24Z",
+      "side": 1,
+      "message": "And again (apologies again) here:\n\n```\nint decode_pldm_fwup_update_security_revision_resp(...);\n```",
+      "revId": "905b173ce1074c59b76e1e1432c267f171a18b99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38b7356e_c73b30a8",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3275,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T06:58:24Z",
+      "side": 1,
+      "message": "This needs to be a negative errno value also.\n\nIn-fact, if you switch to using `encode_pldm_header_only_errno()`, this sequence becomes the usual error handling:\n\n```\nrc \u003d encode_pldm_header_only_errno(PLDM_REQUEST, instance_id, PLDM_FWUP,\n\t\t\t\t     PLDM_UPDATE_SECURITY_REVISION, msg);\nif (rc) {\n    return rc;\n}\n```",
+      "revId": "905b173ce1074c59b76e1e1432c267f171a18b99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
