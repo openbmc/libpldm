@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a34e3f8_5c8ed162",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 40
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-18T07:05:24Z",
+      "side": 1,
+      "message": "The constructors are private (not protected) so i don\u0027t see how someone would call them without using any tricks.\n\n\nI tried the `__attribute__((always_inline))` but it looks like the compiler would need the function to be defined when any call site is compiled.\n\nSince the compilation is done separately for each cpp file.\n\n```\n../include/libpldm/cpp/firmware_update.hpp:33:24: error: inlining failed in call\n to ‘always_inline’ ‘pldm::fw_update::DescriptorData::DescriptorData(const std::string\u0026, const std::vector\u003cunsigned char\u003e\u0026)’: \nfunction body not available\n   33 |                 inline DescriptorData(const std::string \u0026title,\n```\n\nSo we would need to define the function as `inline` in the header.\nThat would move us more into the direction of a header-only library.\n\nDo we want that?",
+      "parentUuid": "1383074f_45b967e4",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 48
+      },
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7ee9de3_a2898c13",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 40
@@ -59,6 +83,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cab0612_d917db51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 40
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-18T07:05:24Z",
+      "side": 1,
+      "message": "The test does not need the constructors anyways, i changed it to compare each member individually. That gets rid of a lot of the friend stuff.\n\n\u003e why not just provide static factory functions local to the cpp file? I feel like I\u0027m being dense and missing something.\n\nclass definitions cannot be amended at a later point. One could make the constructors protected and then make them public in a derived class.\n\nBut then we would introduce OOP and library users could think that the class is meant to be derived from.",
+      "parentUuid": "a7ee9de3_a2898c13",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfe5ec32_ee0fd45d",
@@ -72,6 +114,24 @@
       "writtenOn": "2026-02-18T04:27:36Z",
       "side": 1,
       "message": "If you accept the discussion on the header paths and library name (`libpldm++`) then I think we should move this to `abi/x86_64/libpldm++/gcc.dump` also.",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e173e3e_fd47b56d",
+        "filename": "abi/x86_64/bindings/cpp/gcc.dump",
+        "patchSetId": 40
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-18T07:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfe5ec32_ee0fd45d",
       "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -93,6 +153,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40bdbed9_58cdf7bc",
+        "filename": "abi/x86_64/bindings/cpp/gcc.dump",
+        "patchSetId": 40
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-18T07:05:24Z",
+      "side": 1,
+      "message": "updated the ABI dump again via `./scripts/abi-dump-updater`, that should hopefully have taken care of it 👍",
+      "parentUuid": "3d0815d5_72402e9e",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b784dc47_9c9e8c5b",
@@ -110,6 +188,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02873cfe_3f7e8990",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 40
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-18T07:05:24Z",
+      "side": 1,
+      "message": "Moved the headers and renamed things.\n(using `libpldmxx` in the meson files to avoid non-alphanumeric characters)",
+      "parentUuid": "b784dc47_9c9e8c5b",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09521612_5331c7e9",
@@ -123,6 +219,24 @@
       "writtenOn": "2026-02-17T17:27:35Z",
       "side": 1,
       "message": "nit, nonblocking: magic number. do we have an enum in libpldm for the string encodings? not worth spinning a review for this, feel free to resolve and merge if andrew is fine with it.",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb935f84_4af07f4b",
+        "filename": "bindings/cpp/utils.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-18T07:05:24Z",
+      "side": 1,
+      "message": "nice find, yes, we do, `PLDM_STR_TYPE_ASCII`, fixed it here 👍",
+      "parentUuid": "09521612_5331c7e9",
       "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -162,6 +276,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f575781_7faee7bd",
+        "filename": "include/libpldm/cpp/firmware_update.hpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-18T07:05:24Z",
+      "side": 1,
+      "message": "Changed it so the test is not a friend anymore.\n\nThe test does not need to construct these objects and can compare each field individually.",
+      "parentUuid": "9d058ad3_65df6129",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "234f6d92_98d092be",
@@ -175,6 +307,24 @@
       "writtenOn": "2026-02-17T23:41:50Z",
       "side": 1,
       "message": "seems like we could just define helper functions in the tests since this is all public data? same for the rest of these ctors.",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2416670b_7e9e2d95",
+        "filename": "include/libpldm/cpp/firmware_update.hpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-18T07:05:24Z",
+      "side": 1,
+      "message": "removed them from the ABI (removed the `LIBPLDM_GTEST_ONLY`) , the tests do not really \u0027need\u0027 to construct them and can instead assert the value each field of the struct individually.",
+      "parentUuid": "234f6d92_98d092be",
       "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -198,6 +348,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e8070c3_26e668b4",
+        "filename": "include/libpldm/cpp/types.hpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-18T07:05:24Z",
+      "side": 1,
+      "message": "Right, growable structs are not exclusive to fw update..\n\nBut then we would end up with 2 distinct toplevel namespaces (`pldm` and `libpldm`).\n\nGiven that we are in the same library, do we need 2 toplevel namespaces?\n\nCan we go with namespaces `libpldm` and `libpldm::fw_update` instead ?\n\nOr alternatively, `pldm` and `pldm::fw_update` ?\n\nI\u0027m leaning towards `pldm` namespace since `libgpiodcxx` also uses `gpiod` as it\u0027s namespace.",
+      "parentUuid": "b3fd5038_ddd2258e",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67bb3899_5e10a108",
         "filename": "include/libpldm/cpp/types.hpp",
         "patchSetId": 40
@@ -209,6 +377,24 @@
       "writtenOn": "2026-02-17T17:27:35Z",
       "side": 1,
       "message": "ultranit: stale comment. not worth spinning the review unless you\u0027re already going to for some reason.",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e385e8e3_3dae49ae",
+        "filename": "include/libpldm/cpp/types.hpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-18T07:05:24Z",
+      "side": 1,
+      "message": "nice find, fixed it 👍",
+      "parentUuid": "67bb3899_5e10a108",
       "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
