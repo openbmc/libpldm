@@ -3731,7 +3731,8 @@ int decode_pldm_platform_redfish_resource_pdr(
 LIBPLDM_ABI_STABLE
 int decode_pldm_platform_redfish_action_pdr(
 	const void *data, size_t data_length,
-	struct pldm_platform_redfish_action_pdr *pdr)
+	struct pldm_platform_redfish_action_pdr *pdr,
+	struct pldm_platform_redfish_action_pdr_action_info *action_info)
 {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
@@ -3783,6 +3784,79 @@ int decode_pldm_platform_redfish_action_pdr(
 		pldm_msgbuf_span_required(buf, length, NULL);
 		pdr->action_info.length += length + sizeof(uint8_t);
 	}
+	action_info->area = pdr->action_info;
 
 	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_STABLE
+int decode_pldm_platform_redfish_action_pdr_action_from_iter(
+	struct pldm_platform_redfish_action_pdr_action_info *action_info
+		LIBPLDM_CC_UNUSED,
+	struct pldm_platform_redfish_action_pdr_action *action)
+{
+	struct pldm_platform_redfish_action_pdr_action_iter *iter;
+	int rc;
+
+	if (!action_info) {
+		return -EINVAL;
+	}
+
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	if (!action || !(action_info->iter.field.ptr)) {
+		return -EINVAL;
+	}
+
+	iter = &action_info->iter;
+
+	/* At least ActionNameLengthBytes (u8) and ActionPathLengthBytes (u8) should be present*/
+	rc = pldm_msgbuf_init_errno(buf, sizeof(uint8_t) + sizeof(uint8_t),
+				    iter->field.ptr, iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract_uint8_to_size(buf, action->name.length);
+	pldm_msgbuf_span_required(buf, action->name.length,
+				  (const void **)&action->name.ptr);
+	pldm_msgbuf_extract_uint8_to_size(buf, action->path.length);
+	pldm_msgbuf_span_required(buf, action->path.length,
+				  (const void **)&action->path.ptr);
+
+	pldm_msgbuf_span_remaining(buf, (const void **)&iter->field.ptr,
+				   &iter->field.length);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_STABLE
+int pldm_platform_redfish_action_pdr_action_iter_init(
+	struct pldm_platform_redfish_action_pdr_action_info *action_info)
+{
+	struct pldm_platform_redfish_action_pdr_action_iter *iter;
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!action_info) {
+		return -EINVAL;
+	}
+
+	if (!action_info->area.ptr) {
+		return -EINVAL;
+	}
+	iter = &action_info->iter;
+	iter->field = action_info->area;
+
+	/* Extract ActionCount (u8) */
+	rc = pldm_msgbuf_init_errno(buf, sizeof(uint8_t), iter->field.ptr,
+				    iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract_uint8_to_size(buf, iter->entries);
+	pldm_msgbuf_span_remaining(buf, (const void **)&iter->field.ptr,
+				   &iter->field.length);
+
+	return pldm_msgbuf_complete(buf);
 }
