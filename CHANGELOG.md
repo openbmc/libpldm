@@ -36,6 +36,9 @@ Change categories:
 - platform: Added enum for Redfish Parallel Resource PDR
 - bios: Added all possible values to enum pldm_bios_commands from DSP0247 v1.0.0
 - fru: Added all possible values to enum pldm_fru_commands from DSP0257 v2.0.0
+- state-set: Return the misspelled
+  PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG enum value to avoid client
+  breakage
 
 ### Changed
 
