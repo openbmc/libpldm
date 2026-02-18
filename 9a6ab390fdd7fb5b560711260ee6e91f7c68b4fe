@@ -46,6 +46,30 @@
       },
       "revId": "9a6ab390fdd7fb5b560711260ee6e91f7c68b4fe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc0a9ab0_ab14591b",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-18T08:24:55Z",
+      "side": 1,
+      "message": "Sorry again for the inconvenience, here is the patch intendend to fix the issue \n\n87534: state-set: Return missing enum value | https://gerrit.openbmc.org/c/openbmc/libpldm/+/87534",
+      "parentUuid": "21e74d07_43928a66",
+      "range": {
+        "startLine": 310,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 56
+      },
+      "revId": "9a6ab390fdd7fb5b560711260ee6e91f7c68b4fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ],
   "submitRequirementResults": []
