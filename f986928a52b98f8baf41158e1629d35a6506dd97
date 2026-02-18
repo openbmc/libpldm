@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cfe897d3_4feb0e9c",
+        "filename": "include/libpldm/entity.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-18T08:27:25Z",
+      "side": 1,
+      "message": "Should we mark the misspelled enums as deprecated somehow?",
+      "parentUuid": "efa17c41_e7978a4d",
+      "revId": "f986928a52b98f8baf41158e1629d35a6506dd97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e366bbbb_06b7c4fe",
         "filename": "include/libpldm/entity.h",
         "patchSetId": 3
