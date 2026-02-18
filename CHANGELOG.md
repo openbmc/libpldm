@@ -63,6 +63,10 @@ Change categories:
 
 ### Fixed
 
+- state-set: Return the misspelled
+  PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG enum value to avoid client
+  breakage
+
 ### Security
 
 ## [v0.15.0] - 2026-01-16
