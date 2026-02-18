@@ -16,6 +16,23 @@
       "message": "@molberding@nvidia.com thanks for sticking to your taste and steering me in the right direction ... overcomplicated #ifdef gtest friends are gone now.",
       "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4ce3c67_e9b78e56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 41
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-18T17:12:11Z",
+      "side": 1,
+      "message": "lgtm outside of the namespace conversation with andrew. Figure that out and bug me if needed or if severe changes happen, feel free to ask me to review again. Thanks for the work here, this will be very helpful.",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
