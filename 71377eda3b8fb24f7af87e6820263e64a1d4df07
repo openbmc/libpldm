@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf4b5ba1_15c20ba9",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T05:49:59Z",
+      "side": 1,
+      "message": "Can you please define this immediately underneath your addition of the struct below? I recognise this isn\u0027t consistent through the file, but it will be helpful in the long run.",
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b69a85ce_f1606f14",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2199,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T05:49:59Z",
+      "side": 1,
+      "message": "This needs to be a pointer, in-out parameter",
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51187205_2616549a",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T05:49:59Z",
+      "side": 1,
+      "message": "`size_t *payload_length` by above.",
+      "range": {
+        "startLine": 2206,
+        "startChar": 23,
+        "endLine": 2206,
+        "endChar": 44
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "272a59ba_5bdd4246",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3263,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T05:49:59Z",
+      "side": 1,
+      "message": "`size_t *payload_length`",
+      "range": {
+        "startLine": 3263,
+        "startChar": 23,
+        "endLine": 3263,
+        "endChar": 44
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31c485a5_e46ce143",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3269,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T05:49:59Z",
+      "side": 1,
+      "message": "All return codes need to be negative errno values. This specific instance should be `return -EINVAL;`\n\nPlease fix throughout.",
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "764ce130_df683a68",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3282,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T05:49:59Z",
+      "side": 1,
+      "message": "`PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES`, then remove lines 3272-3274.",
+      "range": {
+        "startLine": 3282,
+        "startChar": 34,
+        "endLine": 3282,
+        "endChar": 35
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a90942b7_d311fa1a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3291,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T05:49:59Z",
+      "side": 1,
+      "message": "`..., *payload_length, payload_length);`",
+      "range": {
+        "startLine": 3291,
+        "startChar": 39,
+        "endLine": 3291,
+        "endChar": 70
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95dd661a_0b7b9a81",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3309,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T05:49:59Z",
+      "side": 1,
+      "message": "See next comment.",
+      "range": {
+        "startLine": 3307,
+        "startChar": 1,
+        "endLine": 3309,
+        "endChar": 2
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a558d0e9_944b225b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3311,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T05:49:59Z",
+      "side": 1,
+      "message": "Make this `sizeof(*completion_code)` and lines 3307-3309 become unnecessary.",
+      "range": {
+        "startLine": 3311,
+        "startChar": 34,
+        "endLine": 3311,
+        "endChar": 35
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d870263_f5080daa",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3324,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T05:49:59Z",
+      "side": 1,
+      "message": "This can all rather be:\n\n```\npldm_msgbuf_extract_p(buf, completion_code);\n\nreturn pldm_msgbuf_complete_consumed(buf);\n```",
+      "range": {
+        "startLine": 3316,
+        "startChar": 1,
+        "endLine": 3324,
+        "endChar": 21
+      },
+      "revId": "71377eda3b8fb24f7af87e6820263e64a1d4df07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
