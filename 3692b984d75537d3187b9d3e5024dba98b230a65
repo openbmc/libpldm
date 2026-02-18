@@ -347,6 +347,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71b43b2f_1fbc02f5",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T07:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "124b567f_6d4a1a4e",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 6
+      },
+      "revId": "3692b984d75537d3187b9d3e5024dba98b230a65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6484f459_0d0d061c",
