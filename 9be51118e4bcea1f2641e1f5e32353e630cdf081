@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dced3cc_c7aa06cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 40
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T07:15:42Z",
+      "side": 1,
+      "message": "\u003e The constructors are private (not protected) so i don\u0027t see how someone would call them without using any tricks.\n\nYes, right, that thought might\u0027ve been a bit hasty 😊",
+      "parentUuid": "3a34e3f8_5c8ed162",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 48
+      },
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7ee9de3_a2898c13",
@@ -360,6 +384,24 @@
       "side": 1,
       "message": "Right, growable structs are not exclusive to fw update..\n\nBut then we would end up with 2 distinct toplevel namespaces (`pldm` and `libpldm`).\n\nGiven that we are in the same library, do we need 2 toplevel namespaces?\n\nCan we go with namespaces `libpldm` and `libpldm::fw_update` instead ?\n\nOr alternatively, `pldm` and `pldm::fw_update` ?\n\nI\u0027m leaning towards `pldm` namespace since `libgpiodcxx` also uses `gpiod` as it\u0027s namespace.",
       "parentUuid": "b3fd5038_ddd2258e",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4ce9bd5_0e53e5ca",
+        "filename": "include/libpldm/cpp/types.hpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T07:15:42Z",
+      "side": 1,
+      "message": "So the distinction (in my mind) between `pldm::` and `libpldm::` namespaces is the former is for choices forced by the various PLDM specifications, while the latter is for library implementation details that we can\u0027t otherwise hide (\"accidental complexity\" as such).",
+      "parentUuid": "9e8070c3_26e668b4",
       "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
