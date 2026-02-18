@@ -40,6 +40,7 @@ Change categories:
 - include: Added header file for SMBIOS Data Transfer (DSP0246 v1.0.1)
 - platform: Added functions to decode Redfish Resource PDR/Redfish Action PDR
   (DSP0248 v1.3.0)
+- platform: Add API to iterate through actions from Redfish Action PDR
 
 ### Changed
 
