@@ -125,6 +125,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "507d4e2a_9c562142",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 40
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-18T18:59:50Z",
+      "side": 1,
+      "message": "I guess my original question was not having them be constructors but rather factories local to the cpp file i.e.:\n\n```\nstatic void makeFirmwareIdRecord(FirmwareRecordId\u0026 id, ...args)\n{\n}\n```\n\nFrom our friends in C. ABI wise this is functionally equivalent, if a bit non-idiomatic and should have roughly the same perf. That said, I don\u0027t think it really matters, most of the \"what the heck is going on\" is resolved by the removal of the friends testing stuff. This is much cleaner, and I\u0027m not going to bikeshed further on this, I\u0027m fine with the level of friending going on here.",
+      "parentUuid": "4cab0612_d917db51",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfe5ec32_ee0fd45d",
