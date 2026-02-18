@@ -423,6 +423,24 @@
       "parentUuid": "8e7d6c8e_8d47079a",
       "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "826826f0_7fd188ac",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T04:20:53Z",
+      "side": 1,
+      "message": "Related, I\u0027m wondering if you\u0027re both okay with being owners for the binding? Ideally you\u0027d look at each other\u0027s work before merging changes. I appreciate the depth of C++ experience you\u0027re both applying - it\u0027s at least somewhat beyond my own, and I\u0027d rather get out of the way unless there\u0027s a need for an opinion on abstract design tastes or something.",
+      "parentUuid": "f99a5745_c803ac83",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

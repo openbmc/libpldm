@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1383074f_45b967e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 40
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T04:20:53Z",
+      "side": 1,
+      "message": "Can we lift this with `__attribute__((always_inline))`?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 48
+      },
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7ee9de3_a2898c13",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 40
@@ -14,6 +37,41 @@
       "writtenOn": "2026-02-17T23:41:50Z",
       "side": 1,
       "message": "After reading through it again, it seems like all of this friend stuff in types.hpp comes from wanting to avoid public constructors from the constituent data types. why not just provide static factory functions local to the cpp file? I feel like I\u0027m being dense and missing something.",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3db47be_b86a0f2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 40
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T04:20:53Z",
+      "side": 1,
+      "message": "I\u0027d like consensus on this line of questioning before we merge something.",
+      "parentUuid": "a7ee9de3_a2898c13",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b784dc47_9c9e8c5b",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 40
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T04:20:53Z",
+      "side": 1,
+      "message": "This is in the weeds a bit, but hopefully that reflects less concern with the rest of the implementation :)\n\nI\u0027m considering alternative names here.\n\nMy contention with the `plus`-suffix pattern was it started from a play-on-words with `sdbusplus`. Extending it beyond that context seems questionable to me, even if this has been done in other places (`stdplus` for instance, though that has its own intentions).\n\nThat said, the remaining options aren\u0027t super tasteful to me either:\n- Use `c++`: that incorporates non-alphanumeric symbols into the name\n- Use `cpp`: that aliases to the preprocessor though, so also isn\u0027t ideal\n- Use `cxx`: a bit of a hack, not what the language is called, or an acronym of it\n\nTrying to find some other means to draw conclusions:\n\n```\n\u003e find /usr/lib/x86_64-linux-gnu/ -regex \u0027.*/lib[^/]+\\(\\+\\+\\|xx\\|cpp\\)[^/]*\u0027 -type f | sort\n/usr/lib/x86_64-linux-gnu/libcaca++.so.0.99.20\n/usr/lib/x86_64-linux-gnu/libclang-cpp.so.19.1\n/usr/lib/x86_64-linux-gnu/libclang-cpp.so.22.0\n/usr/lib/x86_64-linux-gnu/libconfig++.so.11.1.0\n/usr/lib/x86_64-linux-gnu/libfcgi++.so.0.0.0\n/usr/lib/x86_64-linux-gnu/libgccpp.so.1.5.0\n/usr/lib/x86_64-linux-gnu/libgmpxx.a\n/usr/lib/x86_64-linux-gnu/libgmpxx.so.4.7.0\n/usr/lib/x86_64-linux-gnu/libgpiodcxx.so.2.1.0\n/usr/lib/x86_64-linux-gnu/libgrpc++_alts.so.1.51.1\n/usr/lib/x86_64-linux-gnu/libgrpc++_error_details.so.1.51.1\n/usr/lib/x86_64-linux-gnu/libgrpcpp_channelz.so.1.51.1\n/usr/lib/x86_64-linux-gnu/libgrpc++_reflection.so.1.51.1\n/usr/lib/x86_64-linux-gnu/libgrpc++.so.1.51.1\n/usr/lib/x86_64-linux-gnu/libgrpc++_unsecure.so.1.51.1\n/usr/lib/x86_64-linux-gnu/libical_cxx.so.3.0.20\n/usr/lib/x86_64-linux-gnu/libicalss_cxx.so.3.0.20\n/usr/lib/x86_64-linux-gnu/libjsoncpp.so.1.9.6\n/usr/lib/x86_64-linux-gnu/liblua5.3-c++.so.0.0.0\n/usr/lib/x86_64-linux-gnu/liblua5.4-c++.so.0.0.0\n/usr/lib/x86_64-linux-gnu/libmpeg2encpp-2.1.so.0.0.0\n/usr/lib/x86_64-linux-gnu/libncurses++.a\n/usr/lib/x86_64-linux-gnu/libncurses++w.a\n/usr/lib/x86_64-linux-gnu/libpoppler-cpp.so.2.0.0\n/usr/lib/x86_64-linux-gnu/libsigrokcxx.so.4.1.1\n/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33\n/usr/lib/x86_64-linux-gnu/libtiffxx.a\n/usr/lib/x86_64-linux-gnu/libtiffxx.so.6.1.0\n/usr/lib/x86_64-linux-gnu/libxml++-2.6.so.2.0.7\n/usr/lib/x86_64-linux-gnu/sane/libsane-gt68xx.so.1.2.1\n/usr/lib/x86_64-linux-gnu/sane/libsane-kvs20xx.so.1.2.1\n/usr/lib/x86_64-linux-gnu/sane/libsane-kvs40xx.so.1.2.1\n```\n\nIt appears as though the `++` naming has the numbers and that others aren\u0027t bothered by the non-alphanumeric concern.\n\n\nSo based on that I guess I have a minor preference for `pldm++`\n\nRelated to _that_, and recognising that you\u0027ve just moved the headers in response to an earlier comment of mine, perhaps they should live under `include/libpldm++` rather than `include/libpldm/cpp`.",
       "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -54,6 +112,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4faf1a4_b37a3081",
+        "filename": "include/libpldm/cpp/firmware_update.hpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T04:20:53Z",
+      "side": 1,
+      "message": "Same here.",
+      "parentUuid": "9d058ad3_65df6129",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "234f6d92_98d092be",
         "filename": "include/libpldm/cpp/firmware_update.hpp",
         "patchSetId": 40
@@ -65,6 +141,23 @@
       "writtenOn": "2026-02-17T23:41:50Z",
       "side": 1,
       "message": "seems like we could just define helper functions in the tests since this is all public data? same for the rest of these ctors.",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3fd5038_ddd2258e",
+        "filename": "include/libpldm/cpp/types.hpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-18T04:20:53Z",
+      "side": 1,
+      "message": "I don\u0027t think this needs to be in the `pldm::fw_update::` namespace? Possibly a `libpldm::` namespace instead?",
       "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
