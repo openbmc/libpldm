@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d094edea_cb839af2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-18T09:53:17Z",
+      "side": 1,
+      "message": "For the complete implementation we need 4 iterators.\n\nI\u0027ve left this patchset with just decode functions, and pushed the patchset for the 1 of the 4 required iterators to the `87536: dsp: platform: Add Redfish actions iterator API` | https://gerrit.openbmc.org/c/openbmc/libpldm/+/87536\n\nOnce we solve all the issues I\u0027ll push the other 3 ones.",
+      "parentUuid": "5b33831b_92b662b6",
+      "revId": "7de691bc375c7b579e726d8126e37fef202388ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38ef2ad7_8160a927",
