@@ -254,6 +254,13 @@ meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
   - The only (temporary) exception are the `encode_*()` and `decode_*()`
     function symbols
 
+- [ ] `encode_*()` and `decode_*()` functions are named after their
+      corresponding message struct type, where applicable
+  - For example, given `struct pldm_platform_cper_event`, the associated
+    functions should be named:
+    - `encode_pldm_platform_cper_event()`
+    - `decode_pldm_platform_cper_event()`
+
 - [ ] All publicly exposed macros, types and functions relating to the library
       implementation must be prefixed with `libpldm_` or `LIBPLDM_`
 
