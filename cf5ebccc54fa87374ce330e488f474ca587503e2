@@ -477,6 +477,24 @@
       "parentUuid": "f99a5745_c803ac83",
       "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65d56817_f73d6a4a",
+        "filename": "include/libpldm/bindings/cpp/types.hpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-18T18:56:20Z",
+      "side": 1,
+      "message": "for the record Andrew, I\u0027m fine with being an owner.",
+      "parentUuid": "a049c3d0_c969a5ee",
+      "revId": "cf5ebccc54fa87374ce330e488f474ca587503e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
