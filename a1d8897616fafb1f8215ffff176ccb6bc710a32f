@@ -126,6 +126,24 @@
       "message": "@andrew@codeconstruct.com.au I\u0027m not entirely sure how to parse what\u0027s important here, seems all pretty reasonable to me. I find it a little odd that we\u0027re not exposing the equals operator here, but it doesn\u0027t seem breaking? Am I reading this (relatively large list) correctly?",
       "revId": "a1d8897616fafb1f8215ffff176ccb6bc710a32f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2dc0f40_49fbb06b",
+        "filename": "abi/x86_64/libpldm++/gcc.dump",
+        "patchSetId": 31
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-19T16:21:55Z",
+      "side": 1,
+      "message": "ah neat, Alexander commented on what caused this. I\u0027m resolving.",
+      "parentUuid": "8748ee21_05f3eb9d",
+      "revId": "a1d8897616fafb1f8215ffff176ccb6bc710a32f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
