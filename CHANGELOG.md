@@ -44,6 +44,8 @@ Change categories:
 
 ### Changed
 
+- OWNERS: Tidy up throughout the tree
+
 ### Deprecated
 
 ### Removed
