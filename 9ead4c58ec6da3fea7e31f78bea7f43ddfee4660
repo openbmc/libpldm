@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d845ad63_5ff56753",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T23:43:01Z",
+      "side": 1,
+      "message": "Let\u0027s avoid the `-`:\n\n```\ntransport: af-mctp: Qualify MCTP TID mapping with target network```",
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56da0c47_41ad0821",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T23:43:01Z",
+      "side": 1,
+      "message": "So as discussed previously, the prior behaviour was to use MCTP_NET_ANY, which is not the same as network ID 1. Can you please update the description?",
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26ddc3f3_cfcc76a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T23:43:01Z",
+      "side": 1,
+      "message": "Hello, I have some comments inline. Two of them regard the `LIBPLDM_ABI_STABLE` annotations. Resolving them means you can drop the update to the ABI dump for now.",
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b81a955f_36022756",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 32
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T23:43:01Z",
+      "side": 1,
+      "message": "I prefer we use the same imperative mood in the changelog as we expect in the commit message. Rather than use the past tense \u0027Added\u0027, just use \u0027Add\u0027 and fix any related grammar as necessary.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 80
+      },
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "699ffc2c_54141a14",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T23:43:01Z",
+      "side": 1,
+      "message": "Please don\u0027t circumvent process, these should start out marked as `LIBPLDM_ABI_TESTING`.\n\nSee:\n\nhttps://github.com/openbmc/libpldm/blob/d6a957481638b00a49aed15d04b60d3d32fede54/CONTRIBUTING.md#L340-L347\n\nand\n\nhttps://github.com/openbmc/libpldm/blob/d6a957481638b00a49aed15d04b60d3d32fede54/CONTRIBUTING.md#L212-L218",
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67ba5028_239db988",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T23:43:01Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
