@@ -424,6 +424,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4713616f_d3f13319",
+        "filename": "include/libpldm/cpp/types.hpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "ok, changed it and documented the intention in a nearby comment 👍",
+      "parentUuid": "b4ce9bd5_0e53e5ca",
+      "revId": "9be51118e4bcea1f2641e1f5e32353e630cdf081",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67bb3899_5e10a108",

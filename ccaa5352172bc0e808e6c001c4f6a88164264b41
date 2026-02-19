@@ -52,6 +52,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99987124_10113d43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 41
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e60ed392_bdfeefad",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e001e0e7_c8b34816",
@@ -65,6 +83,30 @@
       "writtenOn": "2026-02-19T00:08:33Z",
       "side": 1,
       "message": "I\u0027d drop these two, for this work they\u0027re implied by the line below.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 47
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73a3bbd6_bc638bdb",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 41
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e001e0e7_c8b34816",
       "range": {
         "startLine": 40,
         "startChar": 0,
@@ -92,6 +134,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9a65f38_c622c19f",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36ee4985_8347dbf0",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "007b1ca4_5494f234",
@@ -105,6 +165,24 @@
       "writtenOn": "2026-02-19T00:08:33Z",
       "side": 1,
       "message": "Same comment as above regarding `libpldmxx`.",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6529d5f6_431b45fe",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "007b1ca4_5494f234",
       "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -132,6 +210,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4d64741_e490b638",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fc46065_f9b1b208",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1e2c5c1_2eadd6a8",
@@ -145,6 +247,24 @@
       "writtenOn": "2026-02-19T00:08:33Z",
       "side": 1,
       "message": "Again here for `libpldmxx_dep`.",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49fc887c_e874ca32",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1e2c5c1_2eadd6a8",
       "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -172,6 +292,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d39a4926_c5d14e18",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13600ce7_5a4dd8ca",
+      "range": {
+        "startLine": 35,
+        "startChar": 24,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99631b39_fbea637e",
@@ -185,6 +329,24 @@
       "writtenOn": "2026-02-19T00:08:33Z",
       "side": 1,
       "message": "Nit: Unnecessary blank line?",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5e47d12_89973825",
+        "filename": "bindings/cpp/utils.hpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99631b39_fbea637e",
       "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -206,6 +368,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "097f07ff_3b8951c1",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b50b5b28_93aa1f30",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45691665_29345f7f",
@@ -219,6 +399,30 @@
       "writtenOn": "2026-02-19T00:08:33Z",
       "side": 1,
       "message": "Same concern as the root `meson.build`.",
+      "range": {
+        "startLine": 3,
+        "startChar": 41,
+        "endLine": 3,
+        "endChar": 64
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "471addd6_dca3ac77",
+        "filename": "include/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45691665_29345f7f",
       "range": {
         "startLine": 3,
         "startChar": 41,
@@ -252,6 +456,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "787c6142_8e212484",
+        "filename": "meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Changed it so binding library and headers do not depend on tests being enabled.\n\nTests for the binding still need both flags. Let me know in case i overlooked something again 😊",
+      "parentUuid": "1f5d9c09_0d282cdd",
+      "range": {
+        "startLine": 107,
+        "startChar": 41,
+        "endLine": 107,
+        "endChar": 64
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84c7d675_ec0d3fc8",
@@ -265,6 +493,30 @@
       "writtenOn": "2026-02-19T00:08:33Z",
       "side": 1,
       "message": "See comment in `bindings/cpp/meson.build`.",
+      "range": {
+        "startLine": 21,
+        "startChar": 70,
+        "endLine": 21,
+        "endChar": 74
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4526718b_ac4a07e1",
+        "filename": "scripts/abi-dump-updater",
+        "patchSetId": 41
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84c7d675_ec0d3fc8",
       "range": {
         "startLine": 21,
         "startChar": 70,
@@ -292,6 +544,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44ef78a6_76ee25d1",
+        "filename": "tests/bindings/cpp/firmware_update_test.cpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "I wrapped it around the function for now and wrapped `fwPkgHdrSingleComponent` separately.",
+      "parentUuid": "202e5ec4_b59bc2a0",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f98a6956_1706366d",
@@ -309,6 +579,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0611e02_a8359381",
+        "filename": "tests/bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f98a6956_1706366d",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c4ffe59_a711703b",
@@ -322,6 +610,30 @@
       "writtenOn": "2026-02-19T00:08:33Z",
       "side": 1,
       "message": "Unnecessary whitespace here",
+      "range": {
+        "startLine": 3,
+        "startChar": 21,
+        "endLine": 3,
+        "endChar": 24
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7e5b75_02f73e7f",
+        "filename": "tests/bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T01:56:32Z",
+      "side": 1,
+      "message": "yep, and awkward to read. I put it on the next line to align with existing usages of meson `foreach`.",
+      "parentUuid": "3c4ffe59_a711703b",
       "range": {
         "startLine": 3,
         "startChar": 21,
