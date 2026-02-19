@@ -33,6 +33,303 @@
       "message": "lgtm outside of the namespace conversation with andrew. Figure that out and bug me if needed or if severe changes happen, feel free to ask me to review again. Thanks for the work here, this will be very helpful.",
       "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e60ed392_bdfeefad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 41
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "Nice. I have a few minor comments, as well as a request:\n\n\nCan you add OWNERS files with yourself as the owner and @molberding@nvidia.com as reviewer under the following directories:\n\n- `abi/x86_64/libpldm++`\n- `bindings/cpp`\n- `include/libpldm++`\n- `tests/bindings/cpp`",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e001e0e7_c8b34816",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 41
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "I\u0027d drop these two, for this work they\u0027re implied by the line below.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 47
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36ee4985_8347dbf0",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "This is a bit of a nit, but given I have other comments: Can we call it `libpldmpp` for consistency with e.g. the `cpp` variable we use throughout the `meson.build.` files?",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "007b1ca4_5494f234",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "Same comment as above regarding `libpldmxx`.",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fc46065_f9b1b208",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "Another nit, but given this isn\u0027t specific to the C interface anymore, maybe we should rename the variable to e.g. `include_root`.",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e2c5c1_2eadd6a8",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "Again here for `libpldmxx_dep`.",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13600ce7_5a4dd8ca",
+        "filename": "bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "Just call this `current.dump` as well? It\u0027s already in the `cpp` directory; the `_cpp` suffix is a bit redundant.",
+      "range": {
+        "startLine": 35,
+        "startChar": 24,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99631b39_fbea637e",
+        "filename": "bindings/cpp/utils.hpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "Nit: Unnecessary blank line?",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b50b5b28_93aa1f30",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "This needs to be `#include \u003clibpldm++/types.hpp\u003e`",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45691665_29345f7f",
+        "filename": "include/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "Same concern as the root `meson.build`.",
+      "range": {
+        "startLine": 3,
+        "startChar": 41,
+        "endLine": 3,
+        "endChar": 64
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f5d9c09_0d282cdd",
+        "filename": "meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "The C++ binding implementation shouldn\u0027t depend on tests being enabled...\n\n(but conversely the C++ binding _tests_ should rely on `get_option(\u0027bindings\u0027).contains(\u0027cpp\u0027)`)",
+      "range": {
+        "startLine": 107,
+        "startChar": 41,
+        "endLine": 107,
+        "endChar": 64
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84c7d675_ec0d3fc8",
+        "filename": "scripts/abi-dump-updater",
+        "patchSetId": 41
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "See comment in `bindings/cpp/meson.build`.",
+      "range": {
+        "startLine": 21,
+        "startChar": 70,
+        "endLine": 21,
+        "endChar": 74
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "202e5ec4_b59bc2a0",
+        "filename": "tests/bindings/cpp/firmware_update_test.cpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "```\n#endif\n\n#ifdef LIBPLDM_API_TESTING\n\n```\n\nI ask that they go around each test function so we don\u0027t end up covering arbitrary ranges in the test files with these conditionals.",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f98a6956_1706366d",
+        "filename": "tests/bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "`testscpp`",
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c4ffe59_a711703b",
+        "filename": "tests/bindings/cpp/meson.build",
+        "patchSetId": 41
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-19T00:08:33Z",
+      "side": 1,
+      "message": "Unnecessary whitespace here",
+      "range": {
+        "startLine": 3,
+        "startChar": 21,
+        "endLine": 3,
+        "endChar": 24
+      },
+      "revId": "ccaa5352172bc0e808e6c001c4f6a88164264b41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
