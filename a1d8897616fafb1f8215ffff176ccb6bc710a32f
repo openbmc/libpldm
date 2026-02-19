@@ -54,6 +54,63 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d85e741_074bd4cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T16:09:12Z",
+      "side": 1,
+      "message": "Looks like the libpldm++ ABI diff here was my mistake. Sorry for the confusion.",
+      "revId": "a1d8897616fafb1f8215ffff176ccb6bc710a32f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37b7604e_c8c7cbf0",
+        "filename": "abi/x86_64/libpldm++/gcc.dump",
+        "patchSetId": 31
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T16:09:12Z",
+      "side": 1,
+      "message": "That\u0027s the `libpldm` namespace we introduced in later revisions to separate out the implementation specific types from spec types in `pldm` namespace.",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 19
+      },
+      "revId": "a1d8897616fafb1f8215ffff176ccb6bc710a32f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96d1c11_d558c01c",
+        "filename": "abi/x86_64/libpldm++/gcc.dump",
+        "patchSetId": 31
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-19T16:09:12Z",
+      "side": 1,
+      "message": "if you look on current main branch\nhttps://github.com/pointbazaar/libpldm/blob/d6a957481638b00a49aed15d04b60d3d32fede54/include/libpldm%2B%2B/firmware_update.hpp#L172\n\nthe `class PackageParserError` is defined on line 172.\n\nIt looks like the binding did not get in with the ABI generated from most recent version of the headers. It looks like that was not noticed since ABI did not change in incompatible ways.\n\nSome things i had moved around from one to the other header based on feedback.\n\nApologies for the confusion, the re-numbering of the types and line numbers here should be harmless.\n\nIf we want to keep the libpldm++ ABI diff out of this change we can just re-generate it\u0027s ABI from \u0027main\u0027 branch that should take care of it. But i don\u0027t feel like holding up this change due to some mistake on my side.",
+      "revId": "a1d8897616fafb1f8215ffff176ccb6bc710a32f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8748ee21_05f3eb9d",
