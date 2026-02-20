@@ -51,6 +51,9 @@ Change categories:
 
 ### Deprecated
 
+- Misspelled PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG member of the
+  pldm_state_set_boot_progress_state_values enum
+
 ### Removed
 
 #### Headers, declarations and definitions
