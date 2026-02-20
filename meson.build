@@ -60,13 +60,13 @@ have_tainted_args_test = '#if !__has_attribute(tainted_args)\n#error\n#endif'
 if cc.compiles(
     have_tainted_args_test,
     args: '-E',
-    name: 'compiler supports function attribute tainted_args',
+    name: 'C compiler accepts \'tainted_args\' function attribute',
 )
     if get_option('bindings').contains('cpp')
         if cpp.compiles(
             have_tainted_args_test,
             args: '-E',
-            name: 'compiler supports function attribute tainted_args',
+            name: 'C++ compiler accepts \'tainted_args\' function attribute',
         )
             entrypoint += ' __attribute__((tainted_args))'
         endif
