@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aef29f3d_32384be2",
+        "filename": "include/libpldm/entity.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-20T06:52:56Z",
+      "side": 1,
+      "message": "Sooo. That thought had been rolling around in my head for a while too.\n\nI was too tired to get real work done, so I\u0027ve cooked up the series ending at the change linked below which allows exactly that:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/87593\n\nDo you mind taking a look?",
+      "parentUuid": "cfe897d3_4feb0e9c",
+      "revId": "f986928a52b98f8baf41158e1629d35a6506dd97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e366bbbb_06b7c4fe",
         "filename": "include/libpldm/entity.h",
         "patchSetId": 3
