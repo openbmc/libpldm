@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24683a67_838df4cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-20T04:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d845ad63_5ff56753",
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56da0c47_41ad0821",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45be2cab_d8d43fa5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-20T04:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56da0c47_41ad0821",
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26ddc3f3_cfcc76a0",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-02-19T23:43:01Z",
       "side": 1,
       "message": "Hello, I have some comments inline. Two of them regard the `LIBPLDM_ABI_STABLE` annotations. Resolving them means you can drop the update to the ABI dump for now.",
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dd8f506_49f6cb0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-20T04:00:47Z",
+      "side": 1,
+      "message": "I see. I have addressed the comments. I will drop the update to the ABI dump too thanks",
+      "parentUuid": "26ddc3f3_cfcc76a0",
       "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +129,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d99ffffa_313f582a",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 32
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-20T04:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b81a955f_36022756",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 80
+      },
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "699ffc2c_54141a14",
@@ -92,6 +170,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e54911ed_770f9967",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-20T04:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "699ffc2c_54141a14",
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67ba5028_239db988",
@@ -105,6 +201,24 @@
       "writtenOn": "2026-02-19T23:43:01Z",
       "side": 1,
       "message": "As above.",
+      "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3149281_797549b4",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-20T04:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67ba5028_239db988",
       "revId": "9ead4c58ec6da3fea7e31f78bea7f43ddfee4660",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
