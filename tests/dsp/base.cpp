@@ -755,7 +755,7 @@ TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadHandle)
               PLDM_ERROR_INVALID_DATA);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeMultipartReceiveRequest, GoodTest)
 {
     uint8_t instance_id = 0;
@@ -789,7 +789,7 @@ TEST(EncodeMultipartReceiveRequest, GoodTest)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeMultipartReceiveRequest, BadTestUnAllocatedPtrParams)
 {
     uint8_t instance_id = 0;
@@ -813,7 +813,7 @@ TEST(EncodeMultipartReceiveRequest, BadTestUnAllocatedPtrParams)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeMultipartReceiveRequest, BadTestInvalidExpectedOutputMsgLength)
 {
     uint8_t instance_id = 0;
@@ -833,7 +833,7 @@ TEST(EncodeMultipartReceiveRequest, BadTestInvalidExpectedOutputMsgLength)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveResponse, GoodTest)
 {
     uint8_t completionCode = PLDM_SUCCESS;
@@ -883,7 +883,7 @@ TEST(DecodeMultipartReceiveResponse, GoodTest)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveResponse, BadTestUnAllocatedPtrParams)
 {
     uint8_t completionCode = PLDM_SUCCESS;
@@ -931,7 +931,7 @@ TEST(DecodeMultipartReceiveResponse, BadTestUnAllocatedPtrParams)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveResponse, BadTestInvalidExpectedInputMsgLength)
 {
     uint8_t completionCode = PLDM_SUCCESS;
@@ -974,7 +974,7 @@ TEST(DecodeMultipartReceiveResponse, BadTestInvalidExpectedInputMsgLength)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveResponse, BadTestRedundantCheckSum)
 {
     uint8_t completionCode = PLDM_SUCCESS;
@@ -1025,7 +1025,7 @@ TEST(DecodeMultipartReceiveResponse, BadTestRedundantCheckSum)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveResponse, BadTestMissingCheckSum)
 {
     uint8_t completionCode = PLDM_SUCCESS;
@@ -1074,7 +1074,7 @@ TEST(DecodeMultipartReceiveResponse, BadTestMissingCheckSum)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeMultipartReceiveResponse, GoodTestWithChecksum)
 {
     uint8_t instance_id = 0;
@@ -1132,7 +1132,7 @@ TEST(EncodeMultipartReceiveResponse, GoodTestWithChecksum)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeMultipartReceiveResponse, GoodTestWithoutChecksum)
 {
     uint8_t instance_id = 0;
@@ -1168,7 +1168,7 @@ TEST(EncodeMultipartReceiveResponse, GoodTestWithoutChecksum)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeMultipartReceiveResponse, GoodTestCompletionCode)
 {
     uint8_t instance_id = 0;
@@ -1199,7 +1199,7 @@ TEST(EncodeMultipartReceiveResponse, GoodTestCompletionCode)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeMultipartReceiveResponse, BadTestUnAllocatedParams)
 {
     uint8_t instance_id = 0;
@@ -1244,7 +1244,7 @@ TEST(EncodeMultipartReceiveResponse, BadTestUnAllocatedParams)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeMultipartReceiveResponse, BadTestInvalidExpectedOutputMsgLength)
 {
     uint8_t instance_id = 0;
@@ -1327,7 +1327,7 @@ TEST(SetTID, testBadEncodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetTID, testGoodDecodeRequest)
 {
     uint8_t tid = 0x01;
@@ -1345,7 +1345,7 @@ TEST(SetTID, testGoodDecodeRequest)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetTID, testBadDecodeRequestMsg)
 {
     uint8_t tid = 0x01;
@@ -1358,7 +1358,7 @@ TEST(SetTID, testBadDecodeRequestMsg)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetTID, testBadDecodeRequestTid)
 {
     std::array<uint8_t, hdrSize + PLDM_SET_TID_REQ_BYTES> requestMsg{};
@@ -1371,7 +1371,7 @@ TEST(SetTID, testBadDecodeRequestTid)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetTID, testBadDecodeRequestMsgSize)
 {
     std::array<uint8_t, hdrSize + PLDM_SET_TID_REQ_BYTES> requestMsg{};
@@ -1383,7 +1383,7 @@ TEST(SetTID, testBadDecodeRequestMsgSize)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(PldmMsgHdr, correlateSuccess)
 {
     static const struct pldm_msg_hdr req = {
@@ -1409,7 +1409,7 @@ TEST(PldmMsgHdr, correlateSuccess)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(PldmMsgHdr, correlateFailInstanceID)
 {
     static const struct pldm_msg_hdr req = {
@@ -1435,7 +1435,7 @@ TEST(PldmMsgHdr, correlateFailInstanceID)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(PldmMsgHdr, correlateFailRequest)
 {
     static const struct pldm_msg_hdr req = {
@@ -1461,7 +1461,7 @@ TEST(PldmMsgHdr, correlateFailRequest)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(PldmMsgHdr, correlateFailType)
 {
     static const struct pldm_msg_hdr req = {
@@ -1487,7 +1487,7 @@ TEST(PldmMsgHdr, correlateFailType)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(PldmMsgHdr, correlateFailCommand)
 {
     static const struct pldm_msg_hdr req = {
@@ -1513,7 +1513,7 @@ TEST(PldmMsgHdr, correlateFailCommand)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(PldmMsgHdr, correlateFailRequestIsResponse)
 {
     static const struct pldm_msg_hdr req = {
@@ -1539,7 +1539,7 @@ TEST(PldmMsgHdr, correlateFailRequestIsResponse)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeNegotiateTransferParamsRequest, GoodTest)
 {
     uint8_t instance_id = 0;
@@ -1569,7 +1569,7 @@ TEST(EncodeNegotiateTransferParamsRequest, GoodTest)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeNegotiateTransferParamsRequest, BadTestUnAllocatedPtrParams)
 {
     int rc;
@@ -1593,7 +1593,7 @@ TEST(EncodeNegotiateTransferParamsRequest, BadTestUnAllocatedPtrParams)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeNegotiateTransferParamsRequest,
      BadTestInvalidExpectedOutputMsgLength)
 {
@@ -1613,7 +1613,7 @@ TEST(EncodeNegotiateTransferParamsRequest,
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeNegotiateTransferParamsResponse, GoodTest)
 {
     uint8_t completionCode = PLDM_SUCCESS;
@@ -1655,7 +1655,7 @@ TEST(DecodeNegotiateTransferParamsResponse, GoodTest)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeNegotiateTransferParamsResponse, BadTestUnAllocatedPtrParams)
 {
     uint8_t completionCode = PLDM_SUCCESS;
@@ -1697,7 +1697,7 @@ TEST(DecodeNegotiateTransferParamsResponse, BadTestUnAllocatedPtrParams)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeNegotiateTransferParamsResponse,
      BadTestInvalidExpectedInputMsgLength)
 {
@@ -1735,7 +1735,7 @@ TEST(DecodeNegotiateTransferParamsResponse,
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(NegotiateTransferParams, TestDecodeNegotiateTransferParamsReqPass)
 {
     // Prepare a sample request message
@@ -1777,7 +1777,7 @@ TEST(NegotiateTransferParams, TestDecodeNegotiateTransferParamsReqPass)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(NegotiateTransferParams, TestDecodeNegotiateTransferParamsReqFail)
 {
     // Prepare a sample request message
@@ -1827,7 +1827,7 @@ TEST(NegotiateTransferParams, TestDecodeNegotiateTransferParamsReqFail)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(NegotiateTransferParams, TestEncodeNegotiateTransferParamsRespPass)
 {
     // Prepare encode parameters for a successful response

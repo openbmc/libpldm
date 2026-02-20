@@ -460,7 +460,7 @@ TEST(GetPDR, testBadDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetPDR, testGoodDecodeResponseSafe)
 {
     static const char recordData[] = "123456789";
@@ -505,7 +505,7 @@ TEST(GetPDR, testGoodDecodeResponseSafe)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetPDR, testBadDecodeResponseSafeTrivial)
 {
     pldm_get_pdr_resp resp;
@@ -534,7 +534,7 @@ TEST(GetPDR, testBadDecodeResponseSafeTrivial)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetPDRRepositoryInfo, testGoodEncodeRequest)
 {
     pldm_msg request{};
@@ -545,7 +545,7 @@ TEST(GetPDRRepositoryInfo, testGoodEncodeRequest)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetPDRRepositoryInfo, testBadEncodeRequest)
 {
     auto rc =
@@ -722,7 +722,7 @@ TEST(GetPDRRepositoryInfo, testBadDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetPDRRepositoryInfo, testGoodDecodeResponseSafe)
 {
     alignas(pldm_msg) unsigned char
@@ -769,7 +769,7 @@ TEST(GetPDRRepositoryInfo, testGoodDecodeResponseSafe)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetPDRRepositoryInfo, testBadDecodeResponseSafeTrivial)
 {
     struct pldm_pdr_repository_info_resp resp;
@@ -2653,7 +2653,7 @@ TEST(PlatformEventMessage, testBadPldmMsgPollEventDataDecodeRequest)
     EXPECT_EQ(rc, -EPROTO);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
 {
     std::array<uint8_t, PLDM_PLATFORM_EVENT_MESSAGE_FORMAT_VERSION +
@@ -2696,7 +2696,7 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataEncode)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(PlatformEventMessage, testBadPldmMsgPollEventDataEncode)
 {
     std::array<uint8_t, PLDM_PLATFORM_EVENT_MESSAGE_FORMAT_VERSION +
@@ -3593,7 +3593,7 @@ TEST(GetSensorReading, testBadDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericSensorEnable, testDecodeRequest)
 {
     int rc;
@@ -3628,7 +3628,7 @@ TEST(SetNumericSensorEnable, testDecodeRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericSensorEnable, testDecodeInvalidOpRequest)
 {
     int rc;
@@ -3651,7 +3651,7 @@ TEST(SetNumericSensorEnable, testDecodeInvalidOpRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericSensorEnable, testDecodeInvalidEventRequest)
 {
     int rc;
@@ -3674,7 +3674,7 @@ TEST(SetNumericSensorEnable, testDecodeInvalidEventRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetStateSensorEnables, testDecodeRequest)
 {
     int rc;
@@ -3714,7 +3714,7 @@ TEST(SetStateSensorEnables, testDecodeRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetStateSensorEnables, testDecodeInvalidOpRequest)
 {
     int rc;
@@ -3738,7 +3738,7 @@ TEST(SetStateSensorEnables, testDecodeInvalidOpRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetStateSensorEnables, testDecodeInvalidEventRequest)
 {
     int rc;
@@ -3762,7 +3762,7 @@ TEST(SetStateSensorEnables, testDecodeInvalidEventRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetEventReceiver, testGoodEncodeRequest)
 {
     std::array<uint8_t, hdrSize> requestMsg{};
@@ -3774,7 +3774,7 @@ TEST(GetEventReceiver, testGoodEncodeRequest)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetEventReceiver, testBadEncodeRequest)
 {
     auto rc =
@@ -3783,7 +3783,7 @@ TEST(GetEventReceiver, testBadEncodeRequest)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetEventReceiver, testGoodEncodeResponse)
 {
     struct pldm_get_event_receiver_resp request_event_receiver_values;
@@ -3801,7 +3801,7 @@ TEST(GetEventReceiver, testGoodEncodeResponse)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetEventReceiver, testBadEncodeResponse)
 {
     std::array<uint8_t, hdrSize + sizeof(pldm_get_event_receiver_resp)>
@@ -3825,7 +3825,7 @@ TEST(GetEventReceiver, testBadEncodeResponse)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetEventReceiver, testGoodDecodeResponse)
 {
     struct pldm_get_event_receiver_resp request_event_receiver_values;
@@ -3852,7 +3852,7 @@ TEST(GetEventReceiver, testGoodDecodeResponse)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetEventReceiver, testBadDecodeResponse)
 {
     struct pldm_get_event_receiver_resp decoded_resp;
@@ -4984,7 +4984,7 @@ TEST(decodeNumericSensorPdrDataDeathTest, InvalidSizeTest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint8Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5098,7 +5098,7 @@ TEST(decodeNumericEffecterPdrData, Uint8Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Sint8Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5187,7 +5187,7 @@ TEST(decodeNumericEffecterPdrData, Sint8Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint16Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5284,7 +5284,7 @@ TEST(decodeNumericEffecterPdrData, Uint16Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Sint16Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5381,7 +5381,7 @@ TEST(decodeNumericEffecterPdrData, Sint16Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5492,7 +5492,7 @@ TEST(decodeNumericEffecterPdrData, Uint32Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Sint32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -5602,7 +5602,7 @@ TEST(decodeNumericEffecterPdrData, Sint32Test)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Real32Test)
 {
     std::vector<uint8_t> pdr1{
@@ -6153,7 +6153,7 @@ TEST(PlatformEventMessage, testBadCperEventDataDecodeRequest)
     free(cperEvent);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodePldmFileDescriptorPdr, oemFileClassificationPresentTest)
 {
     std::vector<uint8_t> pdr1{
@@ -6228,7 +6228,7 @@ TEST(decodePldmFileDescriptorPdr, oemFileClassificationPresentTest)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodePldmFileDescriptorPdr, BadTestUnAllocatedPtrParams)
 {
     int rc;
@@ -6272,7 +6272,7 @@ TEST(decodePldmFileDescriptorPdr, BadTestUnAllocatedPtrParams)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodePldmFileDescriptorPdr, BadTestInvalidExpectedParamLength)
 {
     int rc;
@@ -6313,7 +6313,7 @@ TEST(decodePldmFileDescriptorPdr, BadTestInvalidExpectedParamLength)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodePldmFileDescriptorPdr, BadTestDataBufferOverLength)
 {
     int rc;
@@ -6404,7 +6404,7 @@ TEST(decodePldmFileDescriptorPdr, BadTestDataBufferUnderLength)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 namespace
 {
 void createFileDescriptorPDR(pldm_platform_file_descriptor_pdr& pdr,

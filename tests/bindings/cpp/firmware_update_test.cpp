@@ -14,7 +14,7 @@ namespace pldm
 namespace fw_update
 {
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 
 const std::vector<uint8_t> fwPkgHdrSingleComponent{
     // clang-format off
@@ -92,7 +92,7 @@ const std::vector<uint8_t> fwPkgHdrSingleComponent{
 
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 
 TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
 {

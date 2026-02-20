@@ -684,7 +684,7 @@ TEST(PDRUpdate, tesFindtFruRecordSet)
     pldm_pdr_destroy(repo);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(PDRUpdate, testFindLastInRange)
 {
     auto repo = pldm_pdr_init();
@@ -807,7 +807,7 @@ TEST(PDRAccess, testRemoveBySensorID)
     pldm_pdr_destroy(repo);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(PDRAccess, testGetTerminusHandle)
 {
 
@@ -1892,7 +1892,7 @@ TEST(EntityAssociationPDR, testFind)
     pldm_entity_association_tree_destroy(tree);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EntityAssociationPDR, testCopyTree)
 {
     pldm_entity entities[4]{};
@@ -2200,7 +2200,7 @@ TEST(EntityAssociationPDR, testEntityInstanceNumber)
     pldm_entity_association_tree_destroy(tree);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EntityAssociationPDR, testFindChildContainerID)
 {
     pldm_entity entities[3]{};
@@ -2319,7 +2319,7 @@ TEST(EntityAssociationPDR, testNodeAddCheck)
     pldm_entity_association_tree_destroy(tree);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EntityAssociationPDR, testAddContainedEntityRemotePDR)
 {
     // pldm_entity entities[5]{};
@@ -2378,7 +2378,7 @@ TEST(EntityAssociationPDR, testAddContainedEntityRemotePDR)
 }
 #endif
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EntityAssociationPDR, testAddContainedEntityNew)
 {
     // pldm_entity entities[5]{};

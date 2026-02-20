@@ -80,17 +80,26 @@ if get_option('abi').contains('deprecated')
         'LIBPLDM_ABI_DEPRECATED_UNSAFE',
         '__attribute__((visibility("default")))',
     )
-    add_project_arguments('-DLIBPLDM_API_DEPRECATED', language: ['c', 'cpp'])
+    add_project_arguments(
+        '-DHAVE_LIBPLDM_API_DEPRECATED=1',
+        language: ['c', 'cpp'],
+    )
 else
     conf.set('LIBPLDM_ABI_DEPRECATED', '')
     conf.set('LIBPLDM_ABI_DEPRECATED_UNSAFE', '')
+    add_project_arguments(
+        '-DHAVE_LIBPLDM_API_DEPRECATED=0',
+        language: ['c', 'cpp'],
+    )
 endif
 conf.set('LIBPLDM_ABI_STABLE', entrypoint)  # Always expose the stable symbols
+conf.set('HAVE_LIBPLDM_API_STABLE', 1)
 if get_option('abi').contains('testing')
     conf.set('LIBPLDM_ABI_TESTING', entrypoint)
-    add_project_arguments('-DLIBPLDM_API_TESTING', language: ['c', 'cpp'])
+    add_project_arguments('-DHAVE_LIBPLDM_API_TESTING=1', language: ['c', 'cpp'])
 else
     conf.set('LIBPLDM_ABI_TESTING', '')
+    add_project_arguments('-DHAVE_LIBPLDM_API_TESTING=0', language: ['c', 'cpp'])
 endif
 
 config = configure_file(output: 'config.h', configuration: conf)
