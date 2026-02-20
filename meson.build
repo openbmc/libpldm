@@ -27,13 +27,6 @@ if cc.has_argument('-Wvla')
     add_project_arguments('-Wvla', language: ['c'])
 endif
 
-conf = configuration_data()
-conf.set10('HAVE_POLL_H', cc.has_header('poll.h'))
-
-# ABI control
-cc.has_function_attribute('visibility:default', required: true)
-entrypoint = '__attribute__((visibility("default")))'
-
 if get_option('bindings').contains('cpp') or get_option('tests')
     cpp = meson.get_compiler('cpp')
 endif
@@ -53,57 +46,19 @@ if get_option('bindings').contains('cpp')
 endif
 
 
-## Compile test until meson supports it via compiler.has_function_attribute()
-have_tainted_args_test = '#if !__has_attribute(tainted_args)\n#error\n#endif'
-if cc.compiles(
-    have_tainted_args_test,
-    args: '-E',
-    name: 'C compiler accepts \'tainted_args\' function attribute',
-)
-    if get_option('bindings').contains('cpp')
-        if cpp.compiles(
-            have_tainted_args_test,
-            args: '-E',
-            name: 'C++ compiler accepts \'tainted_args\' function attribute',
-        )
-            entrypoint += ' __attribute__((tainted_args))'
-        endif
-    else
-        entrypoint += ' __attribute__((tainted_args))'
-    endif
-endif
-
 libpldm_deprecated_aliases = []
-if get_option('abi').contains('deprecated')
-    conf.set('LIBPLDM_ABI_DEPRECATED', entrypoint)
-    conf.set(
-        'LIBPLDM_ABI_DEPRECATED_UNSAFE',
-        '__attribute__((visibility("default")))',
-    )
-    add_project_arguments(
-        '-DHAVE_LIBPLDM_API_DEPRECATED=1',
-        language: ['c', 'cpp'],
-    )
-else
-    conf.set('LIBPLDM_ABI_DEPRECATED', '')
-    conf.set('LIBPLDM_ABI_DEPRECATED_UNSAFE', '')
-    add_project_arguments(
-        '-DHAVE_LIBPLDM_API_DEPRECATED=0',
-        language: ['c', 'cpp'],
-    )
-endif
-conf.set('LIBPLDM_ABI_STABLE', entrypoint)  # Always expose the stable symbols
-conf.set('HAVE_LIBPLDM_API_STABLE', 1)
-if get_option('abi').contains('testing')
-    conf.set('LIBPLDM_ABI_TESTING', entrypoint)
-    add_project_arguments('-DHAVE_LIBPLDM_API_TESTING=1', language: ['c', 'cpp'])
-else
-    conf.set('LIBPLDM_ABI_TESTING', '')
-    add_project_arguments('-DHAVE_LIBPLDM_API_TESTING=0', language: ['c', 'cpp'])
-endif
-
-config = configure_file(output: 'config.h', configuration: conf)
-
+conf = configuration_data()
+conf.set10('HAVE_POLL_H', cc.has_header('poll.h'))
+conf.set10(
+    'HAVE_LIBPLDM_ABI_DEPRECATED',
+    get_option('abi').contains('deprecated'),
+)
+conf.set10('HAVE_LIBPLDM_ABI_TESTING', get_option('abi').contains('testing'))
+config = configure_file(
+    input: 'config.h.in',
+    output: 'config.h',
+    configuration: conf,
+)
 add_project_arguments('-include', config.full_path(), language: ['c', 'cpp'])
 
 include_root = include_directories('include', is_system: true)

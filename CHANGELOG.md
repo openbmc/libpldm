@@ -47,6 +47,8 @@ Change categories:
 - Rename `PLDM_HAS_POLL` test macro to `HAVE_POLL_H` and define it
   unconditionally
 
+- Rework ABI control macros to also enable API control
+
 ### Deprecated
 
 ### Removed
