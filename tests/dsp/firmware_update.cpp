@@ -23,7 +23,7 @@ using testing::ElementsAreArray;
 
 constexpr auto hdrSize = sizeof(pldm_msg_hdr);
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 
 static const uint8_t FIXED_INSTANCE_ID = 31;
 
@@ -1097,7 +1097,7 @@ TEST(QueryDeviceIdentifiers, goodPathDecodeResponse)
                          responseMsg.end()));
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(QueryDeviceIdentifiers, goodPathEncodeResponse)
 {
     int rc;
@@ -1601,7 +1601,7 @@ TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
                         entry.data() + pendingCompVerStrPos,
                         outPendingCompVerStr.length));
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
     /* Check the roundtrip matches */
     std::vector<uint8_t> enc_data(1000);
     size_t enc_payload_len = enc_data.size();
@@ -2979,7 +2979,7 @@ TEST(RequestUpdate, goodPathDecodeResponse)
     EXPECT_EQ(outFdMetaDataLen, fdMetaDataLen);
     EXPECT_EQ(outFdWillSendPkgData, fdWillSendPkgData);
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
     /* Check the success roundtrip matches */
     PLDM_MSG_DEFINE_P(enc, 1000);
     size_t enc_payload_len = 1000;
@@ -3057,7 +3057,7 @@ TEST(RequestUpdate, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(RequestDownstreamDeviceUpdate, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
@@ -3085,7 +3085,7 @@ TEST(RequestDownstreamDeviceUpdate, goodPathEncodeRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(RequestDownstreamDeviceUpdate, errorPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
@@ -3152,7 +3152,7 @@ TEST(RequestDownstreamDeviceUpdate, errorPathEncodeRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(RequestDownstreamDeviceUpdate, goodPathDecodeResponse)
 {
     /* Test a success completion code */
@@ -3202,7 +3202,7 @@ TEST(RequestDownstreamDeviceUpdate, goodPathDecodeResponse)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(RequestDownstreamDeviceUpdate, errorPathDecodeResponse)
 {
     std::array<uint8_t, hdrSize + PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES>
@@ -3264,7 +3264,7 @@ TEST(PassComponentTable, goodPathEncodeRequest)
                    0x6e, 0x42, 0x6d, 0x63, 0x76, 0x31, 0x2e, 0x31};
     EXPECT_EQ(request, outRequest);
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
     /* Check the roundtrip */
     struct pldm_pass_component_table_req_full req;
     PLDM_MSG_DEFINE_P(dec, outRequest.size());
@@ -3493,7 +3493,7 @@ TEST(PassComponentTable, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(UpdateSecurityRevision, goodPathEncodeRequest)
 {
     int rc;
@@ -3518,7 +3518,7 @@ TEST(UpdateSecurityRevision, goodPathEncodeRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(UpdateSecurityRevision, errorPathEncodeRequest)
 {
     int rc;
@@ -3552,7 +3552,7 @@ TEST(UpdateSecurityRevision, errorPathEncodeRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(UpdateSecurityRevision, goodPathDecodeResponse)
 {
     int rc;
@@ -3583,7 +3583,7 @@ TEST(UpdateSecurityRevision, goodPathDecodeResponse)
 }
 #endif // LIBPLDM_API_TESTING
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(UpdateSecurityRevision, errorPathDecodeResponse)
 {
     int rc;
@@ -3651,7 +3651,7 @@ TEST(UpdateComponent, goodPathEncodeRequest)
                    0x6d, 0x63, 0x76, 0x32, 0x2e, 0x32};
     EXPECT_EQ(request, outRequest);
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
     /* Check the roundtrip */
     struct pldm_update_component_req_full req;
     PLDM_MSG_DEFINE_P(dec, outRequest.size());
@@ -4513,7 +4513,7 @@ TEST(GetStatus, goodPathDecodeResponse)
     EXPECT_EQ(reasonCode, PLDM_FD_TIMEOUT_DOWNLOAD);
     EXPECT_EQ(updateOptionFlagsEnabled.value, updateOptionFlagsEnabled2);
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
     /* Check the roundtrip */
     PLDM_MSG_DEFINE_P(enc, 1000);
     size_t enc_payload_len = 1000;

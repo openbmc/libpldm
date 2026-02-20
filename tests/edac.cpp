@@ -10,7 +10,7 @@ TEST(Crc32, CheckSumTest)
     EXPECT_EQ(checksum, 0xcbf43926);
 }
 
-#ifdef LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(Crc32, CumulativeCheckSumTest)
 {
     const char* password = "123456789";
