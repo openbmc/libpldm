@@ -48,6 +48,8 @@ Change categories:
 ### Changed
 
 - OWNERS: Tidy up throughout the tree
+- Rename `PLDM_HAS_POLL` test macro to `HAVE_POLL_H` and define it
+  unconditionally
 
 ### Deprecated
 

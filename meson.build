@@ -28,9 +28,7 @@ if cc.has_argument('-Wvla')
 endif
 
 conf = configuration_data()
-if cc.has_header('poll.h')
-    conf.set('PLDM_HAS_POLL', 1)
-endif
+conf.set10('HAVE_POLL_H', cc.has_header('poll.h'))
 
 if cc.has_header('linux/mctp.h')
     conf.set10(

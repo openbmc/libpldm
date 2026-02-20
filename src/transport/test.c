@@ -28,7 +28,7 @@ struct pldm_transport *pldm_transport_test_core(struct pldm_transport_test *ctx)
 	return &ctx->transport;
 }
 
-#ifdef PLDM_HAS_POLL
+#if HAVE_POLL_H
 #include <poll.h>
 LIBPLDM_ABI_TESTING
 int pldm_transport_test_init_pollfd(struct pldm_transport *ctx,
