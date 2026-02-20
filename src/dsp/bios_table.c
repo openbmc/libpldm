@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "compiler.h"
+
 #define POINTER_CHECK(pointer)                                                 \
 	do {                                                                   \
 		if ((pointer) == NULL)                                         \

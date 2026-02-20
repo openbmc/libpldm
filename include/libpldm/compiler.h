@@ -34,4 +34,10 @@
 #define LIBPLDM_CC_NONNULL
 #endif
 
+#ifdef __ZEPHYR__
+
+#define EUCLEAN 117
+
+#endif
+
 #endif
