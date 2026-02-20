@@ -1,5 +1,4 @@
 libpldm_headers = files(
-    'api.h',
     'base.h',
     'bcd.h',
     'bios.h',
@@ -41,8 +40,20 @@ if get_option('oem').contains('meta')
     libpldm_headers += files('oem/meta/file_io.h')
 endif
 
-
 install_headers(libpldm_headers, subdir: 'libpldm', preserve_path: true)
+api = configuration_data()
+api.set10(
+    'HAVE_LIBPLDM_API_DEPRECATED',
+    get_option('abi').contains('deprecated'),
+)
+api.set10('HAVE_LIBPLDM_API_TESTING', get_option('abi').contains('testing'))
+configure_file(
+    input: 'api.h.in',
+    output: 'api.h',
+    configuration: api,
+    install: true,
+    install_dir: get_option('includedir') / 'libpldm',
+)
 
 # TODO: these should depend on the input headers so they rebuild
 # on changes, unclear how to do that.
