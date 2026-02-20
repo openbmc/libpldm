@@ -9,16 +9,18 @@
 
 #include <errno.h>
 #include <limits.h>
-#ifdef PLDM_HAS_POLL
+
+#if HAVE_POLL_H
 #include <poll.h>
 #endif
+
 #include <stdbool.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <time.h>
 #include <unistd.h>
 
-#ifndef PLDM_HAS_POLL
+#if !HAVE_POLL_H
 struct pollfd {
 	int fd;	       /* file descriptor */
 	short events;  /* requested events */

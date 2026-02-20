@@ -48,7 +48,7 @@ void pldm_transport_test_destroy(struct pldm_transport_test *ctx);
 struct pldm_transport *
 pldm_transport_test_core(struct pldm_transport_test *ctx);
 
-#if PLDM_HAS_POLL
+#if HAVE_POLL_H
 struct pollfd;
 int pldm_transport_test_init_pollfd(struct pldm_transport *ctx,
 				    struct pollfd *pollfd);

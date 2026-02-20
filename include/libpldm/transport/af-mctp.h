@@ -22,7 +22,7 @@ void pldm_transport_af_mctp_destroy(struct pldm_transport_af_mctp *ctx);
 struct pldm_transport *
 pldm_transport_af_mctp_core(struct pldm_transport_af_mctp *ctx);
 
-#ifdef PLDM_HAS_POLL
+#if HAVE_POLL_H
 struct pollfd;
 /* Init pollfd for async calls */
 int pldm_transport_af_mctp_init_pollfd(struct pldm_transport *t,

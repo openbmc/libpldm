@@ -44,6 +44,9 @@ Change categories:
 
 ### Changed
 
+- Rename `PLDM_HAS_POLL` test macro to `HAVE_POLL_H` and define it
+  unconditionally
+
 ### Deprecated
 
 ### Removed
