@@ -13,7 +13,7 @@ export CXX=g++;
 
 [ $(uname -m) = 'x86_64' ]
 
-meson setup -Dabi=deprecated,stable -Dabi-compliance-check=true "$UPDATE_BUILDDIR"
+meson setup --cross-file meson/x86_64-linux-gnu.ini -Dabi=deprecated,stable -Dabi-compliance-check=true "$UPDATE_BUILDDIR"
 meson compile -C "$UPDATE_BUILDDIR" abi-dump
 ./scripts/abi-dump-formatter < "$UPDATE_BUILDDIR"/src/current.dump > abi/x86_64/gcc.dump
 

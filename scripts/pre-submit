@@ -42,12 +42,9 @@ meson configure --buildtype=release "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD" --timeout-multiplier 10 --wrapper 'valgrind --error-exitcode=1'
 
-# Ensure that the test suite doesn't fail to link against the stable ABI, and
-# the stable ABI matches what's recorded
+# Ensure that the test suite doesn't fail to link against the stable ABI
 meson configure --buildtype=debug "$BUILD"
 meson configure -Dabi=deprecated,stable "$BUILD"
-! command -v abi-compliance-checker > /dev/null ||
-  meson configure -Dabi-compliance-check=true "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD"
 
@@ -56,4 +53,12 @@ meson test -C "$BUILD"
 meson configure -Dabi=stable,testing "$BUILD"
 meson configure -Dabi-compliance-check=false "$BUILD"
 meson configure -Dtests=false "$BUILD"
+meson compile -C "$BUILD"
+
+# Ensure that the stable ABI matches what's recorded
+rm -rf "$BUILD"
+meson setup --cross-file meson/x86_64-linux-gnu.ini "$BUILD"
+meson configure -Dabi=deprecated,stable "$BUILD"
+! command -v abi-compliance-checker > /dev/null ||
+  meson configure -Dabi-compliance-check=true "$BUILD"
 meson compile -C "$BUILD"
