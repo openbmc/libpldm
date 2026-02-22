@@ -16,6 +16,24 @@
       "message": "Looks easy to use from the developers perspective.\n\nWould there be any lifecycle policy to the deprecated options? I.e. drop on next major library release or something like that?",
       "revId": "2466655940bcaa8e3025e77c84784b004aa38ef7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0badb146_05d45227",
+        "filename": "include/libpldm/state_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-22T23:48:30Z",
+      "side": 1,
+      "message": "The existing policy is that anything marked deprecated can\u0027t be removed before a tag is made capturing its deprecation. We can remove it at any point following that first tag (there may be subsequent tags too). We can make a tag at any time, i.e. I don\u0027t require any minimum amount of time needs to pass between creating tags. My intent is that they\u0027re just used as \"barriers\" (in the memory-model sense) for removals.",
+      "parentUuid": "d1803348_77870759",
+      "revId": "2466655940bcaa8e3025e77c84784b004aa38ef7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
