@@ -17,6 +17,14 @@ libpldmpp_dep = declare_dependency(
     link_with: libpldmpp,
 )
 
+import('pkgconfig').generate(
+    name: 'libpldm++',
+    description: 'PLDM package parser C++ lib',
+    version: meson.project_version(),
+    libraries: libpldmpp,
+    requires: ['libpldm'],
+)
+
 c_suite = meson.get_compiler('c').get_id()
 cpp_suite = meson.get_compiler('cpp').get_id()
 
