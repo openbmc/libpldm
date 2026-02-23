@@ -21,12 +21,10 @@ void pldm_transport_mctp_demux_destroy(struct pldm_transport_mctp_demux *ctx);
 struct pldm_transport *
 pldm_transport_mctp_demux_core(struct pldm_transport_mctp_demux *ctx);
 
-#if HAVE_POLL_H
 struct pollfd;
 /* Init pollfd for async calls */
 int pldm_transport_mctp_demux_init_pollfd(struct pldm_transport *t,
 					  struct pollfd *pollfd);
-#endif
 
 /* Inserts a TID-to-EID mapping into the transport's device map */
 int pldm_transport_mctp_demux_map_tid(struct pldm_transport_mctp_demux *ctx,

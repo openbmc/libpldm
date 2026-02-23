@@ -52,6 +52,7 @@ Change categories:
   unconditionally
 
 - Rework ABI control macros to also enable API control
+- transport: Eliminate poll guards from headers
 
 ### Deprecated
 
