@@ -41,7 +41,7 @@ libpldm_dep = declare_dependency(
 
 import('pkgconfig').generate(
     name: 'libpldm',
-    description: 'PLDM protocol encode/decode C lib',
+    description: 'C library to work with PLDM functionality and PLDM protocol encode/decode',
     version: meson.project_version(),
     libraries: libpldm,
 )
