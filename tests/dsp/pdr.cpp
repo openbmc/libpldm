@@ -1180,7 +1180,7 @@ TEST(EntityAssociationPDR, testBuild)
     pldm_entity_association_tree_destroy(tree);
 }
 
-#if LIBPLDM_API_TESTING
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EntityAssociationPDR, findAndAddRemotePDR)
 {
     //         Tree - 1
