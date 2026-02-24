@@ -1346,12 +1346,14 @@ int encode_get_firmware_parameters_resp(
 	pldm_msgbuf_insert(buf, resp_data->completion_code);
 	pldm_msgbuf_insert(buf, resp_data->capabilities_during_update.value);
 	pldm_msgbuf_insert(buf, resp_data->comp_count);
-	pldm_msgbuf_insert(buf,
-			   resp_data->active_comp_image_set_ver_str.str_type);
+	pldm_msgbuf_insert(
+		buf,
+		(uint8_t)resp_data->active_comp_image_set_ver_str.str_type);
 	pldm_msgbuf_insert(buf,
 			   resp_data->active_comp_image_set_ver_str.str_len);
-	pldm_msgbuf_insert(buf,
-			   resp_data->pending_comp_image_set_ver_str.str_type);
+	pldm_msgbuf_insert(
+		buf,
+		(uint8_t)resp_data->pending_comp_image_set_ver_str.str_type);
 	pldm_msgbuf_insert(buf,
 			   resp_data->pending_comp_image_set_ver_str.str_len);
 	/* String data appended */
