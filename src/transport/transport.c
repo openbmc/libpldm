@@ -10,30 +10,13 @@
 #include <errno.h>
 #include <limits.h>
 
-#if HAVE_POLL_H
 #include <poll.h>
-#endif
 
 #include <stdbool.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <time.h>
 #include <unistd.h>
-
-#if !HAVE_POLL_H
-struct pollfd {
-	int fd;	       /* file descriptor */
-	short events;  /* requested events */
-	short revents; /* returned events */
-};
-
-static inline int poll(struct pollfd *fds LIBPLDM_CC_UNUSED,
-		       int nfds LIBPLDM_CC_UNUSED,
-		       int timeout LIBPLDM_CC_UNUSED)
-{
-	return 0;
-}
-#endif
 
 LIBPLDM_ABI_STABLE
 int pldm_transport_poll(struct pldm_transport *transport, int timeout)

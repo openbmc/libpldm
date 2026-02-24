@@ -44,6 +44,4 @@
 #define LIBPLDM_ABI_TESTING
 #endif
 
-#mesondefine HAVE_POLL_H
-
 #endif

@@ -61,6 +61,10 @@ Change categories:
 
 ### Removed
 
+- `PLDM_HAS_POLL` and `HAVE_POLL_H` configuration macros
+
+  These are unnecessary now that build targets are enabled by header tests
+
 #### Headers, declarations and definitions
 
 - `pldm_base_ver2str()` removed from `libpldm/utils.h` - users should include

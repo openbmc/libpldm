@@ -47,7 +47,6 @@ endif
 
 
 conf = configuration_data()
-conf.set10('HAVE_POLL_H', cc.has_header('poll.h'))
 conf.set10(
     'HAVE_LIBPLDM_ABI_DEPRECATED',
     get_option('abi').contains('deprecated'),

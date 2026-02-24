@@ -60,14 +60,6 @@ pldm_transport_af_mctp_core(struct pldm_transport_af_mctp *ctx)
 	return &ctx->transport;
 }
 
-#if !HAVE_POLL_H
-LIBPLDM_ABI_STABLE int
-pldm_transport_af_mctp_init_pollfd(struct pldm_transport *t LIBPLDM_CC_UNUSED,
-				   struct pollfd *pollfd LIBPLDM_CC_UNUSED)
-{
-	return PLDM_REQUESTER_POLL_FAIL;
-}
-#else
 LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_init_pollfd(struct pldm_transport *t,
 				       struct pollfd *pollfd)
@@ -77,7 +69,6 @@ int pldm_transport_af_mctp_init_pollfd(struct pldm_transport *t,
 	pollfd->events = POLLIN;
 	return 0;
 }
-#endif
 
 static int pldm_transport_af_mctp_lookup_fqe(struct pldm_transport_af_mctp *ctx,
 					     pldm_tid_t tid, uint32_t *network,

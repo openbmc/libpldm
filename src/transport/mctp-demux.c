@@ -70,14 +70,6 @@ static pldm_requester_rc_t pldm_transport_mctp_demux_open(void)
 	return fd;
 }
 
-#if !HAVE_POLL_H
-int pldm_transport_mctp_demux_init_pollfd(
-	struct pldm_transport *t PLDM_REQUESTER_POLL_FAIL,
-	struct pollfd *pollfd PLDM_REQUESTER_POLL_FAIL)
-{
-	return PLDM_REQUESTER_POLL_FAIL;
-}
-#else
 LIBPLDM_ABI_STABLE
 int pldm_transport_mctp_demux_init_pollfd(struct pldm_transport *t,
 					  struct pollfd *pollfd)
@@ -87,7 +79,6 @@ int pldm_transport_mctp_demux_init_pollfd(struct pldm_transport *t,
 	pollfd->events = POLLIN;
 	return 0;
 }
-#endif
 
 static int
 pldm_transport_mctp_demux_get_eid(struct pldm_transport_mctp_demux *ctx,
