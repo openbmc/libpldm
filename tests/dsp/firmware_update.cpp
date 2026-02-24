@@ -2486,7 +2486,7 @@ TEST(GetDownstreamFirmwareParameters, encodeRequestErrorBufSize)
         0x0, PLDM_GET_FIRSTPART};
     constexpr size_t payload_length =
         PLDM_GET_DOWNSTREAM_FIRMWARE_PARAMETERS_REQ_BYTES -
-        1 /* inject erro length*/;
+        1 /* inject error length*/;
 
     std::array<uint8_t, sizeof(pldm_msg_hdr) + payload_length> requestMsg{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
@@ -2799,7 +2799,7 @@ TEST(GetDownstreamFirmwareParameters, decodeResponseInvalidLength)
     pldm_msgbuf_insert_uint16(buf, downstreamDeviceCount);
     ASSERT_EQ(pldm_msgbuf_complete(buf), 0);
 
-    /** Filling paramter table, the correctness of the downstream devices data
+    /** Filling parameter table, the correctness of the downstream devices data
      *  is not checked in this test case so filling with 0xff
      */
     std::fill_n(responseMsg.data() + hdrSize +
