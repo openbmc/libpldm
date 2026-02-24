@@ -89,6 +89,7 @@ Change categories:
   PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG enum value to avoid client
   breakage
 - abi: Refresh dumps to capture libpldm++ namespace rework
+- libpldm: Fix spelling mistakes using codespell
 
 ### Security
 
