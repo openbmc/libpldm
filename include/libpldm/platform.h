@@ -1459,7 +1459,7 @@ int encode_set_state_effecter_states_resp(uint8_t instance_id,
  *  @param[in] payload_length - Length of request message payload
  *  @param[out] effecter_id - used to identify and access the effecter
  *  @param[out] comp_effecter_count - number of individual sets of effecter
- *         information. Upto eight sets of state effecter info can be accessed
+ *         information. Up to eight sets of state effecter info can be accessed
  *         for a given effecter.
  *  @param[out] field - each unit is an instance of the stateFileld structure
  *         that is used to set the requested state for a particular effecter
@@ -1819,7 +1819,7 @@ int decode_get_pdr_resp_safe(const struct pldm_msg *msg, size_t payload_length,
  *  @param[in] instance_id - Message's instance id
  *  @param[in] effecter_id - used to identify and access the effecter
  *  @param[in] comp_effecter_count - number of individual sets of effecter
- *         information. Upto eight sets of state effecter info can be accessed
+ *         information. Up to eight sets of state effecter info can be accessed
  *         for a given effecter.
  *  @param[in] field - each unit is an instance of the stateField structure
  *         that is used to set the requested state for a particular effecter
@@ -2534,7 +2534,7 @@ int decode_get_event_receiver_resp(const struct pldm_msg *msg,
  *  except those mentioned in the @note below, should be initialized by
  * the caller.
  *  @param[out] msg - Argument to capture the Message
- *  @param[in/out] payload_lenght - The lenght of the supplied buffer for
+ *  @param[in/out] payload_lenght - The length of the supplied buffer for
  payload
  * @return 0 on success
  *         -EINVAL if the input parameters' memory are not allocated,
