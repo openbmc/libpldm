@@ -33,10 +33,10 @@
 
 ### Table 5. ReadInfo Definition when ReadOption is ReadFileData in message type
 
-| Offset | Type   | Name         | Description                                                                                                                                                    |
-| ------ | ------ | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0      | uint8  | TransferFlag | The transfer flag that indiates what part of the transfer this request represents. <br> Possible values: {Start=0x01, Middle=0x02, End=0x04, StartAndEnd=0x05} |
-| 1:2    | uint16 | Offset       | Offset in read file.                                                                                                                                           |
+| Offset | Type   | Name         | Description                                                                                                                                                     |
+| ------ | ------ | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0      | uint8  | TransferFlag | The transfer flag that indicates what part of the transfer this request represents. <br> Possible values: {Start=0x01, Middle=0x02, End=0x04, StartAndEnd=0x05} |
+| 1:2    | uint16 | Offset       | Offset in read file.                                                                                                                                            |
 
 ### Table 6. ReadResponse Definition when ReadOption is ReadFileAttribute in message type
 
@@ -47,8 +47,8 @@
 
 ### Table 7. ReadResponse Definition when ReadOption is ReadFileData in message type
 
-| Offset   | Type   | Name         | Description                                                                                                                                                     |
-| -------- | ------ | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0        | uint8  | TransferFlag | The transfer flag that indiates what part of the transfer this response represents. <br> Possible values: {Start=0x01, Middle=0x02, End=0x04, StartAndEnd=0x05} |
-| 1:2      | uint16 | Offset       | Offset in read file.                                                                                                                                            |
-| Variable | uint8  | FileData     | File data can be up to 255 bytes.                                                                                                                               |
+| Offset   | Type   | Name         | Description                                                                                                                                                      |
+| -------- | ------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0        | uint8  | TransferFlag | The transfer flag that indicates what part of the transfer this response represents. <br> Possible values: {Start=0x01, Middle=0x02, End=0x04, StartAndEnd=0x05} |
+| 1:2      | uint16 | Offset       | Offset in read file.                                                                                                                                             |
+| Variable | uint8  | FileData     | File data can be up to 255 bytes.                                                                                                                                |
