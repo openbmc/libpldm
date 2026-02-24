@@ -1509,6 +1509,189 @@ TEST(GetFirmwareParameters, errorPathdecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetFirmwareParameters, goodPathEncodeResponse)
+{
+    int rc;
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+
+    constexpr std::string_view activeVer{"VersionString1"};
+    constexpr std::string_view pendingVer{"VersionString2"};
+
+    struct pldm_get_firmware_parameters_resp_full resp_data = {};
+    resp_data.completion_code = PLDM_SUCCESS;
+    resp_data.capabilities_during_update.value = 0x00000104;
+    resp_data.comp_count = 1;
+    resp_data.active_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_ASCII;
+    resp_data.active_comp_image_set_ver_str.str_len =
+        static_cast<uint8_t>(activeVer.size());
+    memcpy(resp_data.active_comp_image_set_ver_str.str_data, activeVer.data(),
+           activeVer.size());
+    resp_data.pending_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_ASCII;
+    resp_data.pending_comp_image_set_ver_str.str_len =
+        static_cast<uint8_t>(pendingVer.size());
+    memcpy(resp_data.pending_comp_image_set_ver_str.str_data,
+           pendingVer.data(), pendingVer.size());
+
+    rc = encode_get_firmware_parameters_resp(FIXED_INSTANCE_ID, &resp_data, enc,
+                                             &enc_payload_len);
+    EXPECT_EQ(rc, 0);
+
+    /* Verify wire format: cc(1) + caps(4) + comp_count(2) +
+     * active_str_type(1) + active_str_len(1) + pending_str_type(1) +
+     * pending_str_len(1) + active_str(14) + pending_str(14) = 39 */
+    EXPECT_EQ(enc_payload_len, 39u);
+    EXPECT_THAT(
+        std::span<uint8_t>(enc_buf + hdrSize, enc_payload_len),
+        ElementsAreArray<uint8_t>({
+            // completion code
+            0x00,
+            // capabilities_during_update (little-endian)
+            0x04, 0x01, 0x00, 0x00,
+            // comp_count
+            0x01, 0x00,
+            // active_str_type (ASCII)
+            0x01,
+            // active_str_len
+            0x0e,
+            // pending_str_type (ASCII)
+            0x01,
+            // pending_str_len
+            0x0e,
+            // active string "VersionString1"
+            0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x69,
+            0x6e, 0x67, 0x31,
+            // pending string "VersionString2"
+            0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x69,
+            0x6e, 0x67, 0x32,
+        }));
+
+    check_response(enc, PLDM_GET_FIRMWARE_PARAMETERS);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetFirmwareParameters, goodPathEncodeResponseNoPending)
+{
+    int rc;
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+
+    constexpr std::string_view activeVer{"ActiveOnly"};
+
+    struct pldm_get_firmware_parameters_resp_full resp_data = {};
+    resp_data.completion_code = PLDM_SUCCESS;
+    resp_data.capabilities_during_update.value = 0;
+    resp_data.comp_count = 0;
+    resp_data.active_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_ASCII;
+    resp_data.active_comp_image_set_ver_str.str_len =
+        static_cast<uint8_t>(activeVer.size());
+    memcpy(resp_data.active_comp_image_set_ver_str.str_data, activeVer.data(),
+           activeVer.size());
+    resp_data.pending_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_UNKNOWN;
+    resp_data.pending_comp_image_set_ver_str.str_len = 0;
+
+    rc = encode_get_firmware_parameters_resp(FIXED_INSTANCE_ID, &resp_data, enc,
+                                             &enc_payload_len);
+    EXPECT_EQ(rc, 0);
+    check_response(enc, PLDM_GET_FIRMWARE_PARAMETERS);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetFirmwareParameters, errorPathEncodeResponseNullRespData)
+{
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+
+    int rc = encode_get_firmware_parameters_resp(FIXED_INSTANCE_ID, nullptr,
+                                                 enc, &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetFirmwareParameters, errorPathEncodeResponseInvalidActiveStrType)
+{
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+
+    struct pldm_get_firmware_parameters_resp_full resp_data = {};
+    resp_data.completion_code = PLDM_SUCCESS;
+    resp_data.active_comp_image_set_ver_str.str_type =
+        static_cast<pldm_firmware_update_string_type>(0xff);
+    resp_data.active_comp_image_set_ver_str.str_len = 5;
+    memcpy(resp_data.active_comp_image_set_ver_str.str_data, "hello", 5);
+    resp_data.pending_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_UNKNOWN;
+    resp_data.pending_comp_image_set_ver_str.str_len = 0;
+
+    int rc = encode_get_firmware_parameters_resp(FIXED_INSTANCE_ID, &resp_data,
+                                                 enc, &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetFirmwareParameters, errorPathEncodeResponseActiveStrTypeUnknown)
+{
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+
+    struct pldm_get_firmware_parameters_resp_full resp_data = {};
+    resp_data.completion_code = PLDM_SUCCESS;
+    resp_data.active_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_UNKNOWN;
+    resp_data.active_comp_image_set_ver_str.str_len = 5;
+    memcpy(resp_data.active_comp_image_set_ver_str.str_data, "hello", 5);
+    resp_data.pending_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_UNKNOWN;
+    resp_data.pending_comp_image_set_ver_str.str_len = 0;
+
+    int rc = encode_get_firmware_parameters_resp(FIXED_INSTANCE_ID, &resp_data,
+                                                 enc, &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetFirmwareParameters, errorPathEncodeResponseActiveStrLenZero)
+{
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+
+    struct pldm_get_firmware_parameters_resp_full resp_data = {};
+    resp_data.completion_code = PLDM_SUCCESS;
+    resp_data.active_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_ASCII;
+    resp_data.active_comp_image_set_ver_str.str_len = 0;
+    resp_data.pending_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_UNKNOWN;
+    resp_data.pending_comp_image_set_ver_str.str_len = 0;
+
+    int rc = encode_get_firmware_parameters_resp(FIXED_INSTANCE_ID, &resp_data,
+                                                 enc, &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetFirmwareParameters, errorPathEncodeResponsePendingStrTypeNonUnknown)
+{
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+
+    struct pldm_get_firmware_parameters_resp_full resp_data = {};
+    resp_data.completion_code = PLDM_SUCCESS;
+    resp_data.active_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_ASCII;
+    resp_data.active_comp_image_set_ver_str.str_len = 5;
+    memcpy(resp_data.active_comp_image_set_ver_str.str_data, "hello", 5);
+    /* pending_str_len=0 but str_type is not UNKNOWN */
+    resp_data.pending_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_ASCII;
+    resp_data.pending_comp_image_set_ver_str.str_len = 0;
+
+    int rc = encode_get_firmware_parameters_resp(FIXED_INSTANCE_ID, &resp_data,
+                                                 enc, &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
 TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
 {
     // Random value for component classification
