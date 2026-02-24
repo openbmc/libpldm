@@ -91,6 +91,8 @@ Change categories:
 
 ### Fixed
 
+- dsp: firmware_update: Fix str_type encoding in
+  encode_get_firmware_parameters_resp()
 - state-set: Return the misspelled
   PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG enum value to avoid client
   breakage
