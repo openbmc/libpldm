@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87173e89_8ffa4ac2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-24T16:02:15Z",
+      "side": 1,
+      "message": "thanks for the tests",
+      "revId": "dc01c15d126550a99f1b8288ad8253dc9421e010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c784278_aa24c668",
+        "filename": "tests/bindings/cpp/firmware_update_test.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-24T16:02:15Z",
+      "side": 1,
+      "message": "nit, doesn\u0027t matter for this conversation, but I thought there was a constructor from std::vector\u003cT\u003e to std::span\u003cT\u003e?",
+      "revId": "dc01c15d126550a99f1b8288ad8253dc9421e010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
