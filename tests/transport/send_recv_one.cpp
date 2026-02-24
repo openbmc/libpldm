@@ -39,7 +39,7 @@ TEST(Transport, send_recv_one)
 {
     /*
      * To test the case when timestamp is closer to the 28 day uptime we would
-     * potentially set this to something closer to 2589793. But unfortunatley,
+     * potentially set this to something closer to 2589793. But unfortunately,
      * the systems where the unit tests would be run, could have long be a 64
      * bit integer thus would pass with this anyway but fail on a standard BMC
      * 32bit SOC. Hence workaround this by using `LONG_MAX - 10` which would
