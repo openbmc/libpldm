@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8b4165ae_9c7ef124",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fc79b60_b35e0de8",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 15
+      },
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "46227ca5_6c4226ab",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 19
@@ -58,6 +82,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5a76bb9_ed5656ae",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 19
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac5bec34_ebff2c4a",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "539099b6_68da61dc",
@@ -75,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "888e6266_018e5dd7",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "539099b6_68da61dc",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "effe8886_70979f46",
@@ -88,6 +148,24 @@
       "writtenOn": "2026-01-29T00:13:17Z",
       "side": 1,
       "message": "Please make sure your test cases cover all branch paths for this condition.",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e30c1f26_8ce7199b",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 3429,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "effe8886_70979f46",
       "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -115,6 +193,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69b2bb9b_b39e0fc7",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 3439,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acd71ed2_60535bd3",
+      "range": {
+        "startLine": 3439,
+        "startChar": 32,
+        "endLine": 3439,
+        "endChar": 49
+      },
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8620c648_5b733017",
@@ -128,6 +230,24 @@
       "writtenOn": "2026-01-29T00:13:17Z",
       "side": 1,
       "message": "Please never reach into `buf` directly. The internals can only be accessed safely through the msgbuf APIs. You should likely use `pldm_msgbuf_span_remaining()` here.",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac8ecf4c_9eedc9d6",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 3443,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8620c648_5b733017",
       "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -149,6 +269,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0d50f63_26d632d8",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 3461,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "177071aa_3310824f",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7c459fe_b7af0a35",
@@ -162,6 +300,24 @@
       "writtenOn": "2026-01-29T00:13:17Z",
       "side": 1,
       "message": "Do we need the precise calculation? Can we not rather just assume the remaining buffer length and error out later?",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85ddfb7f_70148892",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 3464,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7c459fe_b7af0a35",
       "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -189,6 +345,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64d503b9_17f34069",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 7092,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Yes, it was expected the library user would setup the `iter`. This doesn\u0027t seem ergonomic. So, I have changed the API. Now, the iterator is initialized by the decode function",
+      "parentUuid": "10a98b75_2d8974d6",
+      "range": {
+        "startLine": 7088,
+        "startChar": 1,
+        "endLine": 7092,
+        "endChar": 34
+      },
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7594715_65297869",
@@ -202,6 +382,24 @@
       "writtenOn": "2026-01-29T00:13:17Z",
       "side": 1,
       "message": "This should be `ASSERT_EQ()`. The `EXPECT_EQ(effecter_count, 2);` below cannot be sensible if `rc` is not `0`.\n\nPlease fix any similar cases throughout.",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0047818c_298bbb10",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 7115,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7594715_65297869",
       "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -229,6 +427,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fba95b6_a8a37699",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 7156,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b396f31_3c871785",
+      "range": {
+        "startLine": 7154,
+        "startChar": 0,
+        "endLine": 7156,
+        "endChar": 46
+      },
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7efbb24_e136c93d",
@@ -242,6 +464,24 @@
       "writtenOn": "2026-01-29T00:13:17Z",
       "side": 1,
       "message": "`ASSERT_TRUE(false)`",
+      "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c29f9be6_83d00ee3",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 7183,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-24T21:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7efbb24_e136c93d",
       "revId": "d73e440f765926dc57b4d3846b7051ca6b1e36b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
