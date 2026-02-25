@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bc054a4_780288d1",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2026-02-25T14:57:57Z",
+      "side": 1,
+      "message": "My mistake. Updated.",
+      "parentUuid": "2387cb4a_b5d1d0d1",
+      "revId": "5bb9452e31f12dd4bb277c71897c9bcc997868d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d6a07b4_5c3061f8",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "Yep, agree with this too. The values taken in the header always need to align with the spec, so despite the spec leaving them implicit, I\u0027d rather we be explicit here.",
       "parentUuid": "8d6a07b4_5c3061f8",
+      "range": {
+        "startLine": 572,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 2
+      },
+      "revId": "5bb9452e31f12dd4bb277c71897c9bcc997868d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "069566ca_31847d7c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2026-02-25T14:57:57Z",
+      "side": 1,
+      "message": "Thank you. Updated.",
+      "parentUuid": "b64f259c_40746f0d",
       "range": {
         "startLine": 572,
         "startChar": 0,
