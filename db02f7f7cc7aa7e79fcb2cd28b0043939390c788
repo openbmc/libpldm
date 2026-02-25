@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75ed2018_a6b33c27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-02-25T09:50:10Z",
+      "side": 1,
+      "message": "Could you wrap this to 50 characters?\n\nhttps://github.com/openbmc/docs/blob/master/CONTRIBUTING.md\n\n`Commit messages should follow the 50/72 rule.`",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 64
+      },
+      "revId": "db02f7f7cc7aa7e79fcb2cd28b0043939390c788",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fec3087_bba40e72",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
