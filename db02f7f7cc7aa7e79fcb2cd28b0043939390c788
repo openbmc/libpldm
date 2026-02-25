@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fec3087_bba40e72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-25T05:05:48Z",
+      "side": 1,
+      "message": "How\u0027d you find it? CI didn\u0027t fail...",
+      "range": {
+        "startLine": 11,
+        "startChar": 65,
+        "endLine": 11,
+        "endChar": 72
+      },
+      "revId": "db02f7f7cc7aa7e79fcb2cd28b0043939390c788",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa000b65_f261ad9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-25T05:05:48Z",
+      "side": 1,
+      "message": "Can you please add `Fixes: 696da55 (\"meson: Migrate to boolean HAVE_LIBPLDM_API_* macros\")` on the line above `Change-Id:` here?",
+      "revId": "db02f7f7cc7aa7e79fcb2cd28b0043939390c788",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5d861a2f_9cab32fd",
