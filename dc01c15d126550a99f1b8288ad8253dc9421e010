@@ -55,6 +55,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bdc40c00_d4e670d9",
+        "filename": "tests/bindings/cpp/firmware_update_test.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-02-25T01:42:34Z",
+      "side": 1,
+      "message": "considering that I think there\u0027s like one tool that does it for everyone (the one in the pldm github repo), afaik, not a huge risk but yeah you\u0027re right",
+      "parentUuid": "f0d10261_62b69632",
+      "revId": "dc01c15d126550a99f1b8288ad8253dc9421e010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9c784278_aa24c668",
         "filename": "tests/bindings/cpp/firmware_update_test.cpp",
         "patchSetId": 23
