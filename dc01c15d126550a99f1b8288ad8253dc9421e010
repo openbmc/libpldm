@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f0d10261_62b69632",
+        "filename": "tests/bindings/cpp/firmware_update_test.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-25T00:49:57Z",
+      "side": 1,
+      "message": "With how it\u0027s written now we at least have some testcases where the package content can be manually verified to be in spec.\n\nIf we get a larger amount of testcases in the future, yes, writing everything down like done here is probably not the way to go, but then we will be relying on whatever generated these packages to be correct.",
+      "parentUuid": "61e81e61_f9192dae",
+      "revId": "dc01c15d126550a99f1b8288ad8253dc9421e010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9c784278_aa24c668",
         "filename": "tests/bindings/cpp/firmware_update_test.cpp",
         "patchSetId": 23
@@ -48,6 +66,24 @@
       "writtenOn": "2026-02-24T16:02:15Z",
       "side": 1,
       "message": "nit, doesn\u0027t matter for this conversation, but I thought there was a constructor from std::vector\u003cT\u003e to std::span\u003cT\u003e?",
+      "revId": "dc01c15d126550a99f1b8288ad8253dc9421e010",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97ee8a44_c99e127f",
+        "filename": "tests/bindings/cpp/firmware_update_test.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-02-25T00:49:57Z",
+      "side": 1,
+      "message": "nice catch, yes, we can save a few lines by using the implicit conversion.\n\nChanged it here and in a few other places.",
+      "parentUuid": "9c784278_aa24c668",
       "revId": "dc01c15d126550a99f1b8288ad8253dc9421e010",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
