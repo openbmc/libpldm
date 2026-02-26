@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9aa906d_4a605fb4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:57:32Z",
+      "side": 1,
+      "message": "I prefer this be prefixed with `dsp:` as well. That indicates the change affects a part of the library that implements a DMTF specification rather than other incidental APIs the library offers.\n\n```\ndsp: firmware_update: Fix str_type encoding size\n```",
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5014e59_8cf70aa1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:57:32Z",
+      "side": 1,
+      "message": "This should have been caught by testing of `encode_get_firmware_parameters_resp()` ... but there appear to be no tests for it.\n\nCan you please add some so we can at least catch any future regressions?",
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a47df3b_a8fc4b28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:57:32Z",
+      "side": 1,
+      "message": "This also needs an entry under `### Fixes` in the `## Unreleased` \nsection of `CHANGELOG.md`. The preferred approach is to add the patch \nsubject line to the list.",
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c218164_8e6b8f49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:57:32Z",
+      "side": 1,
+      "message": "Can you please add `Fixes: cf9a2df37762 (\"dsp: Add FD side firmware_update encode/decode\")` on a new line immediately above `Change-Id` here?",
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09a9abd6_5b983b1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:57:32Z",
+      "side": 1,
+      "message": "Hi Gary, thanks for the fix. It looks like you need to be added to Microsoft\u0027s CCLA. You can contact the following Microsoft CLA managers to handle that:\n\n- Sagar Dharia\n- Dhananjay Phadke\n- Thirupathaiah Annapureddy\n- Chitkala Sethuraman\n- Kiran Bangalore Sathyanarayana",
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76d75259_dff87b8b",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:57:32Z",
+      "side": 1,
+      "message": "I\u0027m not enamored with the ergonomics of the cast. Maybe there should be a better msgbuf API for (de)serialising enums. I don\u0027t have thoughts beyond that though, so no need to take action (yet).",
+      "range": {
+        "startLine": 1351,
+        "startChar": 2,
+        "endLine": 1351,
+        "endChar": 11
+      },
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecda3ad4_18c67799",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:57:32Z",
+      "side": 1,
+      "message": "We should test that the cast isn\u0027t invalid during input validation at the top of the function.",
+      "range": {
+        "startLine": 1351,
+        "startChar": 2,
+        "endLine": 1351,
+        "endChar": 11
+      },
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6aa4640_7e7c1f22",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1356,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:57:32Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
