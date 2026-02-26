@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "701b1280_3d0eec4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2026-02-26T05:12:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc228b19_bb5ebc00",
+      "range": {
+        "startLine": 7,
+        "startChar": 14,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "961634277ced8e0b1b38a70433d0e6ae9e80bb44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0503923_92c1221d",
@@ -70,6 +94,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62f8b85f_1cb63b41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2026-02-26T05:12:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0503923_92c1221d",
+      "range": {
+        "startLine": 9,
+        "startChar": 21,
+        "endLine": 9,
+        "endChar": 47
+      },
+      "revId": "961634277ced8e0b1b38a70433d0e6ae9e80bb44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a6bb4b7_80b77859",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2026-02-26T05:12:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1765b90e_5b410489",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "961634277ced8e0b1b38a70433d0e6ae9e80bb44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ace77521_a4cb668e",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-02-26T01:07:23Z",
       "side": 1,
       "message": "These all have an extra `O` at the end of the symbol name. That doesn\u0027t seem right.",
+      "range": {
+        "startLine": 578,
+        "startChar": 1,
+        "endLine": 583,
+        "endChar": 53
+      },
+      "revId": "961634277ced8e0b1b38a70433d0e6ae9e80bb44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bec515be_984aa892",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2026-02-26T05:12:51Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "ace77521_a4cb668e",
       "range": {
         "startLine": 578,
         "startChar": 1,
