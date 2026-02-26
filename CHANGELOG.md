@@ -86,6 +86,7 @@ Change categories:
 
 ### Fixed
 
+- transport: af-mctp: Fix TID lookup with MCTP_NET_ANY wildcard matching
 - state-set: Return the misspelled
   PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG enum value to avoid client
   breakage
