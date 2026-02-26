@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "455c22de_31f6c6d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:59:42Z",
+      "side": 1,
+      "message": "CI says:\n\n```\nAdd a CHANGELOG entry to document updates under abi/ and include/libpldm/\n```",
+      "revId": "8215532280063cad4d2498e9042a44acc28b4d27",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
