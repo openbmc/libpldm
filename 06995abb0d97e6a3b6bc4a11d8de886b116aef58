@@ -16,6 +16,179 @@
       "message": "Hi @andrew@codeconstruct.com.au, really sorry for the delay in response; I was caught up in some other things. I have addressed your review comments.",
       "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1d05f91_05e232f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T02:01:07Z",
+      "side": 1,
+      "message": "That\u0027s okay, there\u0027s no rush 😊",
+      "parentUuid": "95d9ee3c_32d23b8b",
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "272e63fb_00967878",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T02:01:07Z",
+      "side": 1,
+      "message": "Hi Aditya - my main concern is around the user experience without providing the nested iterator to extract the name entries themselves. Details inline.",
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cfe8754_ec19a327",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T02:01:07Z",
+      "side": 1,
+      "message": "Hmm, I think this should include the common header as well. Was there a reason not to do so?",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 54
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fdc166c_36a62eca",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T02:01:07Z",
+      "side": 1,
+      "message": "See comment about nested iterators below.",
+      "range": {
+        "startLine": 621,
+        "startChar": 0,
+        "endLine": 630,
+        "endChar": 2
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f69a9e_71320ae6",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T02:01:07Z",
+      "side": 1,
+      "message": "Can we please prefix symbols declared in the platform header with `pldm_platform_`?\n\nI recognise this isn\u0027t historically consistent. I\u0027ve asked for it here:\n\n\nhttps://github.com/openbmc/libpldm/blob/8f18fe3355042d41b285f493382e82628715718f/CONTRIBUTING.md#L267-L269\n\nPlease fix throughout your patch.",
+      "range": {
+        "startLine": 867,
+        "startChar": 7,
+        "endLine": 867,
+        "endChar": 12
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f54f65_35be21e3",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T02:01:07Z",
+      "side": 1,
+      "message": "My reading is we actually need nested iterators here. The outer one is to iterate effectors, and the inner one is to iterate the names.",
+      "range": {
+        "startLine": 945,
+        "startChar": 0,
+        "endLine": 947,
+        "endChar": 4
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "949e4fec_759a0a2c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 3459,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T02:01:07Z",
+      "side": 1,
+      "message": "This isn\u0027t decoding the names so much as the effecters. Another iterator is needed to decode the names for each effector.",
+      "range": {
+        "startLine": 3459,
+        "startChar": 35,
+        "endLine": 3459,
+        "endChar": 39
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de8fa5a_bb358566",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 7124,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T02:01:07Z",
+      "side": 1,
+      "message": "I think this is a bit unkind to the user, hence the suggestion for nested iterators.",
+      "range": {
+        "startLine": 7122,
+        "startChar": 0,
+        "endLine": 7124,
+        "endChar": 50
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
