@@ -6817,3 +6817,124 @@ TEST(decodeRedfishResourcePdr, GoodTest)
     EXPECT_EQ(PLDM_SUCCESS, rc);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodeRedfishActionPdr, GoodTest)
+{
+    std::vector<uint8_t> pdr1{
+        // Common PDR Header
+        // clang-format off
+        0x1, 0x0, 0x0, 0x0,      // record handle
+        0x1,                     // PDRHeaderVersion
+        PLDM_REDFISH_ACTION_PDR, // PDRType
+        0x1, 0x0,                // recordChangeNumber
+        0x54, 0x0,               // dataLength
+        /* Redfish Action PDR Data */
+        0x1,                     // ActionPDRIndex
+        0x2, 0x0,                // RelatedResourceCount
+        0x4, 0x3, 0x2, 0x1,      // RelatedResourceID[0]
+        0xf, 0xe, 0xd, 0xc,      // RelatedResourceID[1]
+        0x2,                     // ActionCount
+        0x6,                     // ActionNameLengthBytes[0]
+        0x52, 0x65, 0x73, 0x65, 0x74, 0x0,  // ActionName[0]
+        // "Reset"
+        0x13,                    // ActionPathLengthBytes[0]
+        0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, // ActionPath[0]
+        0x73, 0x2f, 0x54, 0x65, 0x73, 0x74,
+        0x2e, 0x52, 0x65, 0x73, 0x65, 0x74,
+        0x0,
+        // "Actions/Test.Reset"
+        0xf,                     // ActionNameLengthBytes[1]
+        0x52, 0x65, 0x73, 0x65, 0x74, 0x54, // ActionName[1]
+        0x6f, 0x44, 0x65, 0x66, 0x61, 0x75,
+        0x6c, 0x74, 0x00,
+        // "ResetToDefault"
+        0x1c, // ActionPathLengthBytes[1]
+        0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, // ActionPath[1]
+        0x73, 0x2f, 0x54, 0x65, 0x73, 0x74,
+        0x2e, 0x52, 0x65, 0x73, 0x65, 0x74,
+        0x54, 0x6f, 0x44, 0x65, 0x66, 0x61,
+        0x75, 0x6c, 0x74, 0x0,
+        // "Actions/Test.ResetToDefault"
+        // clang-format on
+    };
+
+    std::array<uint32_t, 2> relatedResourceIds = {{0x01020304, 0x0c0d0e0f}};
+
+    constexpr std::string_view actionName0Str = "Reset";
+    const uint8_t* actionName0StrPtr =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const uint8_t*>(actionName0Str.data());
+    constexpr uint16_t actionName0StrLen =
+        static_cast<uint16_t>(actionName0Str.size() + 1);
+    constexpr std::string_view actionPath0Str = "Actions/Test.Reset";
+    const uint8_t* actionPath0StrPtr =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const uint8_t*>(actionPath0Str.data());
+    constexpr uint16_t actionPath0StrLen =
+        static_cast<uint16_t>(actionPath0Str.size() + 1);
+
+    constexpr std::string_view actionName1Str = "ResetToDefault";
+    const uint8_t* actionName1StrPtr =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const uint8_t*>(actionName1Str.data());
+    constexpr uint16_t actionName1StrLen =
+        static_cast<uint16_t>(actionName1Str.size() + 1);
+    constexpr std::string_view actionPath1Str = "Actions/Test.ResetToDefault";
+    const uint8_t* actionPath1StrPtr =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const uint8_t*>(actionPath1Str.data());
+    constexpr uint16_t actionPath1StrLen =
+        static_cast<uint16_t>(actionPath1Str.size() + 1);
+
+    std::array<pldm_platform_redfish_action_pdr_action, 2> actions = {
+        {{{actionName0StrPtr, actionName0StrLen},
+          {actionPath0StrPtr, actionPath0StrLen}},
+         {{actionName1StrPtr, actionName1StrLen},
+          {actionPath1StrPtr, actionPath1StrLen}}}};
+
+    struct pldm_platform_redfish_action_pdr decodedPdr;
+    uint32_t resourceId;
+    struct pldm_platform_redfish_action_pdr_action action;
+    auto rc = decode_pldm_platform_redfish_action_pdr(pdr1.data(), pdr1.size(),
+                                                      &decodedPdr);
+    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(1u, decodedPdr.hdr.record_handle);
+    EXPECT_EQ(1u, decodedPdr.hdr.version);
+    EXPECT_EQ(PLDM_REDFISH_ACTION_PDR, decodedPdr.hdr.type);
+    EXPECT_EQ(1u, decodedPdr.hdr.record_change_num);
+    EXPECT_EQ(pdr1.size() - sizeof(struct pldm_pdr_hdr), decodedPdr.hdr.length);
+
+    EXPECT_EQ(0x1, decodedPdr.action_pdr_index);
+
+    EXPECT_EQ(decodedPdr.related_resource_count, 2);
+
+    size_t relatedResourceIndex = 0;
+    foreach_pldm_platform_redfish_action_pdr_related_resource_id(decodedPdr,
+                                                                 resourceId, rc)
+    {
+        EXPECT_EQ(relatedResourceIds[relatedResourceIndex], resourceId);
+        relatedResourceIndex++;
+    }
+    EXPECT_EQ(relatedResourceIndex, 2);
+    EXPECT_EQ(PLDM_SUCCESS, rc);
+
+    EXPECT_EQ(decodedPdr.action_count, 2);
+
+    size_t actionIndex = 0;
+    foreach_pldm_platform_redfish_action_pdr_action(decodedPdr, action, rc)
+    {
+        EXPECT_EQ(actions[actionIndex].name.length, action.name.length);
+        EXPECT_EQ(memcmp(actions[actionIndex].name.ptr, action.name.ptr,
+                         action.name.length),
+                  0);
+        EXPECT_EQ(actions[actionIndex].path.length, action.path.length);
+        EXPECT_EQ(memcmp(actions[actionIndex].path.ptr, action.path.ptr,
+                         action.path.length),
+                  0);
+        actionIndex++;
+    }
+    EXPECT_EQ(actionIndex, 2);
+    EXPECT_EQ(PLDM_SUCCESS, rc);
+}
+#endif
