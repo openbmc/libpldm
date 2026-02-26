@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc228b19_bb5ebc00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T01:07:23Z",
+      "side": 1,
+      "message": "Can we remove the backticks here?",
+      "range": {
+        "startLine": 7,
+        "startChar": 14,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "961634277ced8e0b1b38a70433d0e6ae9e80bb44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0503923_92c1221d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T01:07:23Z",
+      "side": 1,
+      "message": "Remove the backticks here also.",
+      "range": {
+        "startLine": 9,
+        "startChar": 21,
+        "endLine": 9,
+        "endChar": 47
+      },
+      "revId": "961634277ced8e0b1b38a70433d0e6ae9e80bb44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1765b90e_5b410489",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T01:07:23Z",
+      "side": 1,
+      "message": "Please avoid phrases like \"This commit adds ...\". In this case we can rather use \"Add ...\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "961634277ced8e0b1b38a70433d0e6ae9e80bb44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace77521_a4cb668e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T01:07:23Z",
+      "side": 1,
+      "message": "These all have an extra `O` at the end of the symbol name. That doesn\u0027t seem right.",
+      "range": {
+        "startLine": 578,
+        "startChar": 1,
+        "endLine": 583,
+        "endChar": 53
+      },
+      "revId": "961634277ced8e0b1b38a70433d0e6ae9e80bb44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
