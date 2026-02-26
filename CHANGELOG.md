@@ -46,6 +46,7 @@ Change categories:
   - Add libpldm++ library for the C++ binding
 - dsp: platform: Add pldm_platform_file_class enum
 - platform: Added functions to decode Redfish Resource PDR (DSP0248 v1.3.0)
+- platform: Added functions to decode Redfish Action PDR (DSP0248 v1.3.0)
 
 ### Changed
 

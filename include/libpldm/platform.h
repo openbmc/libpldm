@@ -12,6 +12,7 @@ extern "C" {
 #include <stdint.h>
 #include <uchar.h>
 
+#include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/compiler.h>
 #include <libpldm/pdr.h>
@@ -3043,6 +3044,237 @@ int decode_pldm_platform_redfish_resource_pdr(
 		*additional_resource_info,
 	struct pldm_platform_redfish_resource_pdr_oem_name_info *oem_name_info);
 
+/** @brief Iterator for related resources from the Redfish Action PDR
+ *
+ * @param host_resource_info The @ref "struct pldm_platform_redfish_action_pdr_host_resource_info" lvalue
+ *                           used as the out-value from the corresponding call to @ref
+ *                           decode_pldm_platform_redfish_action_pdr
+ * @param res The "uint32_t *res" lvalue into which the next parameter table entry should be decoded
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * struct pldm_platform_redfish_action_pdr_host_resource_info host_resource_info;
+ * uint32_t resource_id;
+ * int rc;
+ *
+ * rc = decode_pldm_platform_redfish_action_pdr(..., &host_resource_info, ...);
+ * if (rc) {
+ *     // Handle any error from decoding the fixed-portion of response
+ * }
+ *
+ * foreach_pldm_platform_redfish_action_pdr_action(host_resource_info, resource_id, rc) {
+ *     // Do something with the decoded related resource id
+ * }
+ *
+ * if (rc) {
+ *     // Handle any decoding error while iterating the variable-length set of
+ *     // parameter entries
+ * }
+ * @endcode
+ */
+#define foreach_pldm_platform_redfish_action_pdr_related_resource_id(                        \
+	host_resource_info, res, rc)                                                         \
+	for ((rc) = pldm_platform_redfish_action_pdr_related_resource_id_iter_init(          \
+		     &(host_resource_info));                                                 \
+	     !(rc) &&                                                                        \
+	     !pldm_platform_redfish_action_pdr_related_resource_id_iter_end(                 \
+		     &(host_resource_info)) &&                                               \
+	     !((rc) = decode_pldm_platform_redfish_action_pdr_related_resource_id_from_iter( \
+		       &(host_resource_info), &(res)));                                      \
+	     pldm_platform_redfish_action_pdr_related_resource_id_iter_next(                 \
+		     &(host_resource_info)))
+
+struct pldm_platform_redfish_action_pdr_related_resource_id_iter {
+	struct variable_field field;
+	size_t entries;
+};
+
+/**
+ * @brief State tracking for iteration over Related Resource IDs from the Redfish Action PDR
+ *
+ * Declare an instance on the stack to be initialised by @ref
+ * decode_pldm_platform_redfish_action_pdr
+ *
+ * The state is consumed by the following macros:
+ *
+ * - @ref foreach_pldm_platform_redfish_action_pdr_related_resource_id
+ */
+struct pldm_platform_redfish_action_pdr_host_resource_info {
+	size_t count;
+	struct variable_field area;
+	struct pldm_platform_redfish_action_pdr_related_resource_id_iter iter;
+};
+
+int pldm_platform_redfish_action_pdr_related_resource_id_iter_init(
+	struct pldm_platform_redfish_action_pdr_host_resource_info
+		*host_resource_info);
+
+LIBPLDM_ITERATOR
+bool pldm_platform_redfish_action_pdr_related_resource_id_iter_end(
+	const struct pldm_platform_redfish_action_pdr_host_resource_info
+		*host_resource_info)
+{
+	return host_resource_info->iter.entries == 0;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_platform_redfish_action_pdr_related_resource_id_iter_next(
+	struct pldm_platform_redfish_action_pdr_host_resource_info
+		*host_resource_info)
+{
+	if (!host_resource_info->iter.entries) {
+		return false;
+	}
+	host_resource_info->iter.entries--;
+	return true;
+}
+
+int decode_pldm_platform_redfish_action_pdr_related_resource_id_from_iter(
+	struct pldm_platform_redfish_action_pdr_host_resource_info
+		*host_resource_info,
+	uint32_t *res);
+
+/** @brief Iterator for actions from the Redfish Action PDR
+ *
+ * @param action_info The @ref "struct pldm_platform_redfish_action_pdr_action_info" lvalue
+ *                    used as the out-value from the corresponding call to @ref
+ *                    decode_pldm_platform_redfish_action_pdr
+ * @param action The @ref "pldm_platform_redfish_action_pdr_action" lvalue
+ *               into which the next parameter table entry should be decoded
+ * @param rc An lvalue of type int into which the return code from the decoding
+ *           will be placed
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * struct pldm_platform_redfish_action_pdr_action_info action_info;
+ * struct pldm_platform_redfish_action_pdr_action;
+ * int rc;
+ *
+ * rc = decode_pldm_platform_redfish_action_pdr(..., &action_info);
+ * if (rc) {
+ *     // Handle any error from decoding the fixed-portion of response
+ * }
+ *
+ * foreach_pldm_platform_redfish_action_pdr_action(action_info, action, rc) {
+ *     // Do something with the decoded action
+ * }
+ *
+ * if (rc) {
+ *     // Handle any decoding error while iterating the variable-length set of
+ *     // parameter entries
+ * }
+ * @endcode
+ */
+#define foreach_pldm_platform_redfish_action_pdr_action(action_info, action,    \
+							rc)                     \
+	for ((rc) = pldm_platform_redfish_action_pdr_action_iter_init(          \
+		     &(action_info));                                           \
+	     !(rc) &&                                                           \
+	     !pldm_platform_redfish_action_pdr_action_iter_end(                 \
+		     &(action_info)) &&                                         \
+	     !((rc) = decode_pldm_platform_redfish_action_pdr_action_from_iter( \
+		       &(action_info), &(action)));                             \
+	     pldm_platform_redfish_action_pdr_action_iter_next(                 \
+		     &(action_info)))
+
+/** @struct pldm_platform_redfish_action_pdr_action
+ *
+ *  Structure representing individual Action from the Redfish Action PDR
+ *  defined in Table 106 - Redfish Action PDR format from DSP0248_1.3.0
+ */
+struct pldm_platform_redfish_action_pdr_action {
+	struct variable_field name;
+	struct variable_field path;
+};
+
+struct pldm_platform_redfish_action_pdr_action_iter {
+	struct variable_field field;
+	size_t entries;
+};
+
+/**
+ * @brief State tracking for iteration over Actions from the Redfish Action PDR
+ *
+ * Declare an instance on the stack to be initialised by @ref
+ * decode_pldm_platform_redfish_action_pdr
+ *
+ * The state is consumed by the following macros:
+ *
+ * - @ref foreach_pldm_platform_redfish_action_pdr_action
+ */
+struct pldm_platform_redfish_action_pdr_action_info {
+	size_t count;
+	struct variable_field area;
+	struct pldm_platform_redfish_action_pdr_action_iter iter;
+};
+
+int pldm_platform_redfish_action_pdr_action_iter_init(
+	struct pldm_platform_redfish_action_pdr_action_info *action_info);
+
+LIBPLDM_ITERATOR
+bool pldm_platform_redfish_action_pdr_action_iter_end(
+	const struct pldm_platform_redfish_action_pdr_action_info *action_info)
+{
+	return action_info->iter.entries == 0;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_platform_redfish_action_pdr_action_iter_next(
+	struct pldm_platform_redfish_action_pdr_action_info *action_info)
+{
+	if (!action_info->iter.entries) {
+		return false;
+	}
+	action_info->iter.entries--;
+	return true;
+}
+
+int decode_pldm_platform_redfish_action_pdr_action_from_iter(
+	struct pldm_platform_redfish_action_pdr_action_info *action_info,
+	struct pldm_platform_redfish_action_pdr_action *action);
+
+/** @struct pldm_platform_redfish_action_pdr
+ *
+ *  Structure representing Redfish Action PDR
+ */
+struct pldm_platform_redfish_action_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint8_t action_pdr_index;
+	uint16_t related_resource_count;
+	struct variable_field related_resources;
+	uint8_t action_count;
+	struct variable_field actions;
+};
+
+/**
+ * Minimum length of Redfish Action PDR, including size of CommonHeader,
+ * ActionPDRIndex, RelatedResourceCount, ActionCount.
+ */
+#define PLDM_PDR_REDFISH_ACTION_PDR_MIN_LENGTH 14
+
+/** @brief Decode date fields from Redfish Action PDR
+ *
+ *  @param[in] data - PLDM response message which includes the Redfish Action PDR
+ *                        from DSP0248_1.3.0 table 106.
+ *  @param[in] data_length - Length of response message payload
+ *  @param[out] pdr - Redfish resource pdr struct
+ *  @param[out] host_resource_info - Pointer to the structure used to access Host
+ *                        Resource Information area
+ *  @param[out] action_info - Pointer to the structure used to access Action
+ *                        Information area
+ *
+ *  @return error code
+ */
+int decode_pldm_platform_redfish_action_pdr(
+	const void *data, size_t data_length,
+	struct pldm_platform_redfish_action_pdr *pdr,
+	struct pldm_platform_redfish_action_pdr_host_resource_info
+		*host_resource_info,
+	struct pldm_platform_redfish_action_pdr_action_info *action_info);
 
 #ifdef __cplusplus
 }
