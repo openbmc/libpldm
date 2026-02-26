@@ -1,0 +1,370 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bacf77ad_5bf5ce50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Why are we doing both in the one change? Is there a concern with splitting this into separate changes? Because that would be my preference in terms of making this straight-forward to review.",
+      "range": {
+        "startLine": 9,
+        "startChar": 24,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac72fcba_1e01e794",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Can you please include the section number as well?",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a072409_b6ed009d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "I\u0027ve only reviewed the Redfish Resource PDR portion for now. Please see the comment about splitting the change to deal with the Redfish Action PDR.",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc9f62ca_731c57ca",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2803,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Perhaps `additional_resources` rather than `additional_resource_info`",
+      "range": {
+        "startLine": 2803,
+        "startChar": 23,
+        "endLine": 2803,
+        "endChar": 47
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b25a0199_4fc08383",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2803,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Let\u0027s add a struct member to capture the additional resource count. See comment on the implementation.",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60656418_87712635",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2808,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "`oem_names` to reflect `additional_resources` above.",
+      "range": {
+        "startLine": 2808,
+        "startChar": 23,
+        "endLine": 2808,
+        "endChar": 36
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a8656ab_5956bf2f",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2808,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Add a struct member to record the oem count as with the additional resource count above.",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7793c86_9c9e324f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3635,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "No, this must be `LIBPLDM_ABI_TESTING`:\n\nhttps://github.com/openbmc/libpldm/blob/9131a3e07df1169d58ac283a42ac9b4464efe1fd/CONTRIBUTING.md#L347-L354",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a491e5_2373bf41",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3682,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Optional side-quest: I\u0027ve made a comment below about `pldm_msgbuf_skip_required()` and avoiding the ability to pass `NULL` for the double-pointer here - if we implement `pldm_msgbuf_skip_required()` we could rework `pldm_msgbuf_span_required()` such that we pass an lvalue, then the implementation takes the address and performs the cast internally, which would clean up a lot of the call-sites.\n\nMarking this as resolved as it\u0027s optional.",
+      "range": {
+        "startLine": 3680,
+        "startChar": 1,
+        "endLine": 3682,
+        "endChar": 53
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8205ce_a4470ad4",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3684,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Please rather this to the struct member suggested in the comment on the header.",
+      "range": {
+        "startLine": 3683,
+        "startChar": 1,
+        "endLine": 3684,
+        "endChar": 50
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0805ab4_3ef12896",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3687,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "This can be declared inside the loop.",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a852f6f_3edec8d7",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3688,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Use the struct member instead.",
+      "range": {
+        "startLine": 3688,
+        "startChar": 26,
+        "endLine": 3688,
+        "endChar": 55
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a395f374_459a643a",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3695,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Optional side-quest: Perhaps it would be nice to introduce `pldm_msgbuf_skip_required(buf, length)` so we don\u0027t have to pass `NULL` here.\n\n\nMarking this as resolved as it\u0027s optional.",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a96b78_50156b9f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3697,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "`sizeof(id) + sizeof(length)`.",
+      "range": {
+        "startLine": 3697,
+        "startChar": 12,
+        "endLine": 3697,
+        "endChar": 47
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb894849_18a94283",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3703,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Optional side-quest: The `ver32` type would ideally have its own msgbuf API to abstract these extractions.\n\nMarking this as resolved as it\u0027s optional.",
+      "range": {
+        "startLine": 3700,
+        "startChar": 1,
+        "endLine": 3703,
+        "endChar": 59
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da53b12b_c76f7b4d",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3716,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Use the struct member as suggested in the header.",
+      "range": {
+        "startLine": 3714,
+        "startChar": 1,
+        "endLine": 3716,
+        "endChar": 60
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f81f8c_5b62035c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3720,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "Rather than re-use `length` from the declaration above, declare it again inside the loop here.",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c173443_cd0bac82",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3725,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-26T00:24:36Z",
+      "side": 1,
+      "message": "`sizeof(length)`.",
+      "range": {
+        "startLine": 3725,
+        "startChar": 40,
+        "endLine": 3725,
+        "endChar": 56
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
