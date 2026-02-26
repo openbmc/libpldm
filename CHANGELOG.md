@@ -46,6 +46,12 @@ Change categories:
   - Add libpldm++ library for the C++ binding
 - dsp: platform: Add pldm_platform_file_class enum
 
+### Fixed
+
+- transport: af-mctp: Fix TID lookup with MCTP_NET_ANY to act as wildcard
+  - Allow MCTP_NET_ANY (0) in stored mappings to match any incoming network ID
+  - Maintains backward compatibility with old mappings while supporting explicit network values
+
 ### Changed
 
 - OWNERS: Tidy up throughout the tree
