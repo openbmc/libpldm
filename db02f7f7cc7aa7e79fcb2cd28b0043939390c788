@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd07740_1872ff7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-26T14:05:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75ed2018_a6b33c27",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 64
+      },
+      "revId": "db02f7f7cc7aa7e79fcb2cd28b0043939390c788",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fec3087_bba40e72",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5785e07_d862697d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-26T14:05:12Z",
+      "side": 1,
+      "message": "I found it through https://gerrit.openbmc.org/c/openbmc/libpldm/+/85430/27. The CI started failing for this as libpldm/api.h was included in libpldm/paltform.h",
+      "parentUuid": "5fec3087_bba40e72",
+      "range": {
+        "startLine": 11,
+        "startChar": 65,
+        "endLine": 11,
+        "endChar": 72
+      },
+      "revId": "db02f7f7cc7aa7e79fcb2cd28b0043939390c788",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa000b65_f261ad9f",
@@ -60,6 +108,24 @@
       "writtenOn": "2026-02-25T05:05:48Z",
       "side": 1,
       "message": "Can you please add `Fixes: 696da55 (\"meson: Migrate to boolean HAVE_LIBPLDM_API_* macros\")` on the line above `Change-Id:` here?",
+      "revId": "db02f7f7cc7aa7e79fcb2cd28b0043939390c788",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "333a214e_b8c6eb25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-02-26T14:05:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa000b65_f261ad9f",
       "revId": "db02f7f7cc7aa7e79fcb2cd28b0043939390c788",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
