@@ -1,7 +1,8 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include <libpldm/edac.h>
 
-#include <asm-generic/errno.h>
+#include <errno.h>
+#include <compiler.h>
 
 /** CRC32 code derived from work by Gary S. Brown.
  *  http://web.mit.edu/freebsd/head/sys/libkern/crc32.c
