@@ -3256,7 +3256,6 @@ int encode_cancel_update_resp(uint8_t instance_id,
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-LIBPLDM_ABI_TESTING
 int encode_pldm_fwup_update_security_revision_req(
 	const uint8_t instance_id,
 	const struct pldm_fwup_update_security_revision_req *req,
@@ -3289,7 +3288,6 @@ int encode_pldm_fwup_update_security_revision_req(
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-LIBPLDM_ABI_TESTING
 int decode_pldm_fwup_update_security_revision_resp(const struct pldm_msg *msg,
 						   size_t payload_length,
 						   uint8_t *completion_code)
