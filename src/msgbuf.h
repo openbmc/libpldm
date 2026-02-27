@@ -193,4 +193,22 @@
 		char: pldm_msgbuf_insert_array_char)(dst, count, src,          \
 						     src_count)
 
+/**
+ * Functions to fill `struct variable_field` variable without ctx modification
+ *
+ * @param ctx - The msgbuf context object
+ * @param field - The `struct variable_field` variable to fill
+ */
+#define pldm_msgbuf_field_begin(ctx, field)                                    \
+	_Generic((ctx),                                                        \
+		struct pldm_msgbuf_rw *: pldm__msgbuf_rw_field_begin,          \
+		struct pldm_msgbuf_ro *: pldm__msgbuf_ro_field_begin)(         \
+		ctx, &(field))
+
+#define pldm_msgbuf_field_end(ctx, field)                                      \
+	_Generic((ctx),                                                        \
+		struct pldm_msgbuf_rw *: pldm__msgbuf_rw_field_end,            \
+		struct pldm_msgbuf_ro *: pldm__msgbuf_ro_field_end)(ctx,       \
+								    &(field))
+
 #endif /* BUF_H */
