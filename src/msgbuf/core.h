@@ -1601,6 +1601,87 @@ pldm__msgbuf_extract_uint32_to_size(struct pldm_msgbuf_ro *ctx, size_t *dst)
 	return 0;
 }
 
+/**
+ * @brief Begin `struct variable_field` fill
+ *
+ * @param[in] cursor - The pointer from the relevant @ref
+ *                     "struct pldm_msgbuf_ro" or @ref "struct pldm_msgbuf_rw"
+ *                     context
+ * @param[in] remaining - The length remaining from the relevant @ref
+ *                        "struct pldm_msgbuf_ro" or @ref
+ *                        "struct pldm_msgbuf_rw" context
+ * @param[out] field - `struct variable_field` to fill
+ *
+ * @return 0 if all buffer accesses were in-bounds, -EOVERFLOW otherwise.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+int pldm__msgbuf_field_begin(const void *cursor, intmax_t remaining,
+			     struct variable_field *field)
+{
+	if (remaining >= 0) {
+#if SIZE_MAX < INTMAX_MAX
+		assert(ctx->remaining <= (intmax_t)SIZE_MAX);
+#endif
+
+		field->ptr = (const uint8_t *)cursor;
+		field->length = remaining;
+		return 0;
+	}
+
+	field->ptr = NULL;
+	field->length = 0;
+
+	return -EOVERFLOW;
+}
+
+/**
+ * @brief End `struct variable_field` fill from the pldm_msgbuf_ro instance
+ *
+ * @param[in] cursor - The pointer from the relevant @ref
+ *                     "struct pldm_msgbuf_ro" or @ref "struct pldm_msgbuf_rw"
+ *                     context
+ * @param[in] remaining - The length remaining from the relevant @ref
+ *                        "struct pldm_msgbuf_ro" or @ref
+ *                        "struct pldm_msgbuf_rw" context
+ * @param[out] field - `struct variable_field` to fill
+ *
+ * @return 0 if all buffer accesses were in-bounds, -EOVERFLOW otherwise.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+int pldm__msgbuf_field_end(const void *cursor LIBPLDM_CC_UNUSED,
+			   intmax_t remaining, struct variable_field *field)
+{
+	if (!field->ptr) {
+		return -EINVAL;
+	}
+
+#if INTMAX_MAX < SIZE_MAX
+	if (field->length > INTMAX_MAX) {
+		return -EINVAL;
+	}
+#endif
+
+	if (remaining >= 0) {
+		if ((intmax_t)field->length < remaining) {
+			return -EINVAL;
+		}
+
+		if (field->ptr + (field->length - remaining) != cursor) {
+			return -EINVAL;
+		}
+
+		field->length -= remaining;
+		return 0;
+	}
+
+	return -EOVERFLOW;
+}
+
 #ifdef __cplusplus
 }
 #endif

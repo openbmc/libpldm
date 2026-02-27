@@ -1666,3 +1666,68 @@ TEST(msgbuf, extract_over_uint32_to_size)
     EXPECT_NE(pldm_msgbuf_extract_uint32_to_size(ctx, val), 0);
     EXPECT_EQ(pldm_msgbuf_complete(ctx), -EOVERFLOW);
 }
+
+TEST(msgbuf, pldm_msgbuf_field_begin_end)
+{
+    struct pldm_msgbuf_rw _ctx;
+    struct pldm_msgbuf_rw* ctx = &_ctx;
+    uint8_t src[7] = {0x11, 0x22, 0x44, 0x55, 0x66, 0x77, 0x88};
+    uint8_t buf[7] = {0};
+    uint8_t testVal;
+    const size_t offset = 2;
+    const size_t required = 4;
+    struct variable_field data;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctx, 0, buf, sizeof(buf)), 0);
+    EXPECT_EQ(
+        pldm_msgbuf_insert_array_uint8(ctx, sizeof(src), src, sizeof(src)), 0);
+
+    struct pldm_msgbuf_ro _ctxExtract;
+    struct pldm_msgbuf_ro* ctxExtract = &_ctxExtract;
+
+    ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
+    EXPECT_EQ(pldm_msgbuf_span_required(ctxExtract, offset, NULL), 0);
+
+    ASSERT_EQ(pldm_msgbuf_field_begin(ctxExtract, data), 0);
+    EXPECT_EQ(pldm_msgbuf_span_required(ctxExtract, required, NULL), 0);
+    EXPECT_EQ(pldm_msgbuf_field_end(ctxExtract, data), 0);
+
+    EXPECT_EQ(data.length, required);
+    EXPECT_EQ(0, memcmp(data.ptr, &src[offset], required));
+
+    EXPECT_EQ(pldm_msgbuf_extract_uint8(ctxExtract, testVal), 0);
+    EXPECT_EQ(testVal, 0x88);
+
+    EXPECT_EQ(pldm_msgbuf_complete(ctxExtract), 0);
+    EXPECT_EQ(pldm_msgbuf_complete(ctx), 0);
+}
+
+TEST(msgbuf, pldm_msgbuf_field_begin_errors)
+{
+    {
+        // nullptr for ctx->cursor
+        struct variable_field field{};
+        struct pldm_msgbuf_ro ctx{};
+        EXPECT_NE(pldm_msgbuf_field_begin(&ctx, field), 0);
+    }
+
+    {
+        // Overflow
+        std::array<std::uint8_t, 1> buf{};
+        struct variable_field field{};
+        struct pldm_msgbuf_ro ctx{buf.data(), -1};
+        EXPECT_EQ(pldm_msgbuf_field_begin(&ctx, field), -EOVERFLOW);
+    }
+}
+
+TEST(msgbuf, pldm_msgbuf_field_end_errors)
+{
+    {
+        std::array<std::uint8_t, 1> buf{};
+        struct variable_field field{};
+        struct pldm_msgbuf_ro ctx{buf.data(), buf.size()};
+        ASSERT_EQ(pldm_msgbuf_field_begin(&ctx, field), 0);
+        field.ptr = nullptr;
+        EXPECT_NE(pldm_msgbuf_field_end(&ctx, field), 0);
+    }
+}
