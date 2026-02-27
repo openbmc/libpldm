@@ -3493,7 +3493,6 @@ TEST(PassComponentTable, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(UpdateSecurityRevision, goodPathEncodeRequest)
 {
     int rc;
@@ -3516,9 +3515,7 @@ TEST(UpdateSecurityRevision, goodPathEncodeRequest)
                            PLDM_FWUP_UPDATE_SECURITY_REVISION_REQ_BYTES),
         ElementsAreArray<uint8_t>({0x05, 0x00, 0x02, 0x01, 0x42}));
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(UpdateSecurityRevision, errorPathEncodeRequest)
 {
     int rc;
@@ -3550,9 +3547,7 @@ TEST(UpdateSecurityRevision, errorPathEncodeRequest)
                                                        request, &payload_len);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(UpdateSecurityRevision, goodPathDecodeResponse)
 {
     int rc;
@@ -3581,9 +3576,7 @@ TEST(UpdateSecurityRevision, goodPathDecodeResponse)
     ASSERT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(completionCode, PLDM_FWUP_UPDATE_SECURITY_REVISION_NOT_PERMITTED);
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(UpdateSecurityRevision, errorPathDecodeResponse)
 {
     int rc;
@@ -3613,7 +3606,6 @@ TEST(UpdateSecurityRevision, errorPathDecodeResponse)
         response, sizeof(uint8_t) + 1, &completionCode);
     EXPECT_EQ(rc, -EBADMSG);
 }
-#endif // LIBPLDM_API_TESTING
 
 TEST(UpdateComponent, goodPathEncodeRequest)
 {
