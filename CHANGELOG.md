@@ -54,6 +54,8 @@ Change categories:
 
 - Rework ABI control macros to also enable API control
 - transport: Eliminate poll guards from headers
+- Stabilize pldm_transport_af_mctp_map_tid_fqe()
+- Stabilize pldm_transport_af_mctp_unmap_tid_fqe()
 
 ### Deprecated
 
