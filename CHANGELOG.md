@@ -57,6 +57,9 @@ Change categories:
 - dsp: firmware_update: Stabilise Update Security Revision APIs
   - `decode_pldm_fwup_update_security_revision_resp`
   - `encode_pldm_fwup_update_security_revision_req`
+- transport: af-mctp: Stabilize FQE TID mapping APIs
+  - `pldm_transport_af_mctp_map_tid_fqe()`
+  - `pldm_transport_af_mctp_unmap_tid_fqe()`
 
 ### Deprecated
 
