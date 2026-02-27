@@ -117,7 +117,7 @@ int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
 	return 0;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_map_tid_fqe(struct pldm_transport_af_mctp *ctx,
 				       pldm_tid_t tid, uint32_t network,
 				       mctp_eid_t eid)
@@ -127,7 +127,7 @@ int pldm_transport_af_mctp_map_tid_fqe(struct pldm_transport_af_mctp *ctx,
 	return 0;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_unmap_tid_fqe(struct pldm_transport_af_mctp *ctx,
 					 pldm_tid_t tid)
 {
