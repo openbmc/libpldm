@@ -16,6 +16,24 @@
       "message": "These are formatting fixes (from what tool?) and aren\u0027t addressing spelling mistakes. Can you separate the formatting fixes out?",
       "revId": "b71aaa388013ef9e83da23a3e70801be9234771a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44e761c2_c38fdadd",
+        "filename": "docs/oem/meta/file-io.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2026-02-27T01:52:30Z",
+      "side": 1,
+      "message": "Thanks @andrew@codeconstruct.com.au\n\nThe original intent was to fix spelling mistakes (e.g. \"indiates\" → \"indicates\"). However, correcting the typo changed the table width and triggered markdownlint (MD060 table-column-style), which requires strict pipe alignment.\n\nBecause CI runs markdownlint on every commit, separating the spelling fix from the required table reformatting would cause the intermediate commit to fail CI. For that reason, the formatting adjustments are included in the same commit.\n\n```\ndocs/oem/meta/file-io.md:38:196 error MD060/table-column-style Table column style [Table pipe does not align with header for style \"aligned\"]\ndocs/oem/meta/file-io.md:52:199 error MD060/table-column-style Table column style [Table pipe does not align with header for style \"aligned\"]\n    markdownlint - FAILED\n```",
+      "parentUuid": "ebecab0a_9ce0e911",
+      "revId": "b71aaa388013ef9e83da23a3e70801be9234771a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
