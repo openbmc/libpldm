@@ -54,6 +54,9 @@ Change categories:
 
 - Rework ABI control macros to also enable API control
 - transport: Eliminate poll guards from headers
+- dsp: firmware_update: Move Update Security Revision API
+  `decode_pldm_fwup_update_security_revision_resp` and
+  `encode_pldm_fwup_update_security_revision_req` to ABI Stable.
 
 ### Deprecated
 
