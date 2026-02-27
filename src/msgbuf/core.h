@@ -1601,6 +1601,126 @@ pldm__msgbuf_extract_uint32_to_size(struct pldm_msgbuf_ro *ctx, size_t *dst)
 	return 0;
 }
 
+/**
+ * @brief Begin `struct variable_field` fill from the pldm_msgbuf_ro instance
+ *
+ * @param[in] ctx - pldm_msgbuf_ro context
+ * @param[out] field - `struct variable_field` to fill
+ *
+ * @return 0 if all buffer accesses were in-bounds, -EOVERFLOW otherwise.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm__msgbuf_ro_field_begin(const struct pldm_msgbuf_ro *ctx,
+			    struct variable_field *field)
+{
+	if (ctx->remaining >= 0) {
+		field->ptr = ctx->cursor;
+		assert((uintmax_t)ctx->remaining <= SIZE_MAX);
+		field->length = ctx->remaining;
+		return 0;
+	}
+
+	field->ptr = NULL;
+	field->length = 0;
+
+	return -EOVERFLOW;
+}
+
+/**
+ * @brief End `struct variable_field` fill from the pldm_msgbuf_ro instance
+ *
+ * @param[in] ctx - pldm_msgbuf_ro context
+ * @param[out] field - `struct variable_field` to fill
+ *
+ * @return 0 if all buffer accesses were in-bounds, -EOVERFLOW otherwise.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT int
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm__msgbuf_ro_field_end(const struct pldm_msgbuf_ro *ctx,
+			  struct variable_field *field)
+{
+	if (!field->ptr) {
+		return -EINVAL;
+	}
+#if INTMAX_MAX < SIZE_MAX
+	if (field->length > INTMAX_MAX) {
+		return -EINVAL;
+	}
+#endif
+
+	if (ctx->remaining >= 0) {
+		assert((intmax_t)field->length >= ctx->remaining);
+		field->length -= ctx->remaining;
+		return 0;
+	}
+
+	return -EOVERFLOW;
+}
+
+/**
+ * @brief Begin `struct variable_field` fill from the pldm_msgbuf_rw instance
+ *
+ * @param[in] ctx - pldm_msgbuf_rw context
+ * @param[out] field - `struct variable_field` to fill
+ *
+ * @return 0 if all buffer accesses were in-bounds, -EOVERFLOW otherwise.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm__msgbuf_rw_field_begin(const struct pldm_msgbuf_rw *ctx,
+			    struct variable_field *field)
+{
+	if (ctx->remaining >= 0) {
+		field->ptr = ctx->cursor;
+		assert((uintmax_t)ctx->remaining <= SIZE_MAX);
+		field->length = ctx->remaining;
+		return 0;
+	}
+
+	field->ptr = NULL;
+	field->length = 0;
+
+	return -EOVERFLOW;
+}
+
+/**
+ * @brief End `struct variable_field` fill from the pldm_msgbuf_rw instance
+ *
+ * @param[in] ctx - pldm_msgbuf_rw context
+ * @param[out] field - `struct variable_field` to fill
+ *
+ * @return 0 if all buffer accesses were in-bounds, -EOVERFLOW otherwise.
+ */
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE
+LIBPLDM_CC_WARN_UNUSED_RESULT int
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+pldm__msgbuf_rw_field_end(const struct pldm_msgbuf_rw *ctx,
+			  struct variable_field *field)
+{
+	if (!field->ptr) {
+		return -EINVAL;
+	}
+#if INTMAX_MAX < SIZE_MAX
+	if (field->length > INTMAX_MAX) {
+		return -EINVAL;
+	}
+#endif
+
+	if (ctx->remaining >= 0) {
+		assert((intmax_t)field->length >= ctx->remaining);
+		field->length -= ctx->remaining;
+		return 0;
+	}
+
+	return -EOVERFLOW;
+}
+
 #ifdef __cplusplus
 }
 #endif
