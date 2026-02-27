@@ -60,6 +60,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a312df45_9ed44d5b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-27T00:51:15Z",
+      "side": 1,
+      "message": "In the spirit of \"keep things that go together together\", my current preference is we define these length macros immediately below the relevant struct.",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc9f62ca_731c57ca",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 13
@@ -130,6 +147,48 @@
       "side": 1,
       "message": "I guess this question would be resolved based on the thread https://gerrit.openbmc.org/c/openbmc/libpldm/+/87283/comment/b25a0199_4fc08383/\n\nBut for a little bit of explanation, this was done based on these things:\n1) `struct variable_field additional_resource_info;` currently includes both count field and all the records\n2) For some reason this is not the case for Redfish Resource PDR, but in the Redfish Action PDR (Table 106) such areas representing both count field and records are grouped in the table as `Host Resource Information`/`Action Information`.",
       "parentUuid": "fc9f62ca_731c57ca",
+      "range": {
+        "startLine": 2803,
+        "startChar": 23,
+        "endLine": 2803,
+        "endChar": 47
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "389cec9f_6289554c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2803,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-27T00:51:15Z",
+      "side": 1,
+      "message": "Sure. If the current msgbuf APIs don\u0027t meet our needs, we can always add to them.\n\nWhat do you think of this sketch?\n\nhttps://gist.github.com/amboar/23781873e3aba5c7c49cef3bf0ae4503",
+      "parentUuid": "9b4d5dc9_bbc36c37",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfb77f74_772afec9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2803,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-02-27T00:51:15Z",
+      "side": 1,
+      "message": "My preference is the naming should match the spec, even if the spec is not consistent with itself 😊",
+      "parentUuid": "c5ec73b5_d7dcd554",
       "range": {
         "startLine": 2803,
         "startChar": 23,
