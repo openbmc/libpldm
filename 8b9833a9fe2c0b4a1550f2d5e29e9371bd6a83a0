@@ -54,6 +54,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94c970e3_375f2d68",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2804,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7a2ef7e_3d799e9a",
+      "revId": "8b9833a9fe2c0b4a1550f2d5e29e9371bd6a83a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2e2f4b8_93c5f99f",
@@ -67,6 +85,24 @@
       "writtenOn": "2026-02-06T15:34:21Z",
       "side": 1,
       "message": "I didn\u0027t find any standard way in libpldm how to deal with such dynamic information inside the PDR structure. If there is a better way, please advice how to do it properly libpldm-style.",
+      "revId": "8b9833a9fe2c0b4a1550f2d5e29e9371bd6a83a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "876c81dd_147a74b4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2830,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2e2f4b8_93c5f99f",
       "revId": "8b9833a9fe2c0b4a1550f2d5e29e9371bd6a83a0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

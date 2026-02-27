@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c767c6d_bce50e0e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "I\u0027ve split the patches for the Redfish Resource/Action PDRs",
+      "parentUuid": "bacf77ad_5bf5ce50",
+      "range": {
+        "startLine": 9,
+        "startChar": 24,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac72fcba_1e01e794",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-02-26T00:24:36Z",
       "side": 1,
       "message": "Can you please include the section number as well?",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c31f1b9e_ceb89885",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac72fcba_1e01e794",
       "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -71,6 +113,24 @@
       "writtenOn": "2026-02-27T00:51:15Z",
       "side": 1,
       "message": "In the spirit of \"keep things that go together together\", my current preference is we define these length macros immediately below the relevant struct.",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "329e1288_00b8aed0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a312df45_9ed44d5b",
       "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -199,6 +259,48 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1dd4152_85e29f6c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2803,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Since now this `variable_field` inside the PDR structure doesn\u0027t have the `count` field in itself, I\u0027ve renamed it to the `additional_resources` as you\u0027ve requested.\n\nAt the same time I\u0027ve left the `additional_resource_info` name for the structure that is used in the iterators, since it has both count and records",
+      "parentUuid": "bfb77f74_772afec9",
+      "range": {
+        "startLine": 2803,
+        "startChar": 23,
+        "endLine": 2803,
+        "endChar": 47
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e73f64e_730f6343",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2803,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Thanks! I think that is exactly what was needed. I\u0027ve added msgbuf changes to the patchset `87913: msgbuf: Add pldm_msgbuf_field_begin/end` | https://gerrit.openbmc.org/c/openbmc/libpldm/+/87913",
+      "parentUuid": "389cec9f_6289554c",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60656418_87712635",
@@ -239,6 +341,48 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dff8523_c45ad2a1",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2808,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60656418_87712635",
+      "range": {
+        "startLine": 2808,
+        "startChar": 23,
+        "endLine": 2808,
+        "endChar": 36
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e7099b2_584187bd",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2808,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a8656ab_5956bf2f",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7793c86_9c9e324f",
@@ -252,6 +396,24 @@
       "writtenOn": "2026-02-26T00:24:36Z",
       "side": 1,
       "message": "No, this must be `LIBPLDM_ABI_TESTING`:\n\nhttps://github.com/openbmc/libpldm/blob/9131a3e07df1169d58ac283a42ac9b4464efe1fd/CONTRIBUTING.md#L347-L354",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1697668_78103e45",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3635,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7793c86_9c9e324f",
       "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -302,6 +464,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0530e1c4_60fada94",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3684,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd8205ce_a4470ad4",
+      "range": {
+        "startLine": 3683,
+        "startChar": 1,
+        "endLine": 3684,
+        "endChar": 50
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0805ab4_3ef12896",
@@ -319,6 +505,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66ea9d62_00d1fe4e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3687,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0805ab4_3ef12896",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a852f6f_3edec8d7",
@@ -332,6 +536,30 @@
       "writtenOn": "2026-02-26T00:24:36Z",
       "side": 1,
       "message": "Use the struct member instead.",
+      "range": {
+        "startLine": 3688,
+        "startChar": 26,
+        "endLine": 3688,
+        "endChar": 55
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f213cb2d_eee7c981",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3688,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a852f6f_3edec8d7",
       "range": {
         "startLine": 3688,
         "startChar": 26,
@@ -408,6 +636,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fd7d84cd_241bcbc3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3697,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "No longer relevant, this code was deleted",
+      "parentUuid": "81a33157_601512b5",
+      "range": {
+        "startLine": 3697,
+        "startChar": 12,
+        "endLine": 3697,
+        "endChar": 47
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "eb894849_18a94283",
         "filename": "src/dsp/platform.c",
         "patchSetId": 13
@@ -452,6 +704,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f98a836_4a388c6e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3716,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da53b12b_c76f7b4d",
+      "range": {
+        "startLine": 3714,
+        "startChar": 1,
+        "endLine": 3716,
+        "endChar": 60
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24f81f8c_5b62035c",
@@ -469,6 +745,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c338e693_b6932ad6",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3720,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24f81f8c_5b62035c",
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c173443_cd0bac82",
@@ -482,6 +776,30 @@
       "writtenOn": "2026-02-26T00:24:36Z",
       "side": 1,
       "message": "`sizeof(length)`.",
+      "range": {
+        "startLine": 3725,
+        "startChar": 40,
+        "endLine": 3725,
+        "endChar": 56
+      },
+      "revId": "0d1f7b19fe4869ffcd2fd2ba985862a74d4830c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36699164_d2165728",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3725,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-02-27T15:15:59Z",
+      "side": 1,
+      "message": "No longer relevant, this code was deleted",
+      "parentUuid": "5c173443_cd0bac82",
       "range": {
         "startLine": 3725,
         "startChar": 40,
