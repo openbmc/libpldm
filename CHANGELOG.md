@@ -90,6 +90,7 @@ Change categories:
   PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG enum value to avoid client
   breakage
 - abi: Refresh dumps to capture libpldm++ namespace rework
+- transport: af-mctp: Fix TID lookup with MCTP_NET_ANY
 
 ### Security
 
