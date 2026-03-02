@@ -50,6 +50,28 @@ struct pldm_transport_af_mctp {
 	struct pldm_responder_cookie cookie_jar;
 };
 
+LIBPLDM_ABI_TESTING
+int pldm_transport_af_mctp_test_init(struct pldm_transport_af_mctp **ctx)
+{
+	if (!ctx || *ctx) {
+		return -EINVAL;
+	}
+
+	struct pldm_transport_af_mctp *tmp = calloc(1, sizeof(*tmp));
+	if (!tmp) {
+		return -ENOMEM;
+	}
+
+	*ctx = tmp;
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+void pldm_transport_af_mctp_test_destroy(struct pldm_transport_af_mctp *ctx)
+{
+	free(ctx);
+}
+
 #define transport_to_af_mctp(ptr)                                              \
 	container_of(ptr, struct pldm_transport_af_mctp, transport)
 
@@ -88,6 +110,7 @@ static int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
 {
 	if (network != 0 && eid != 0) {
 		for (int i = 0; i < PLDM_MAX_TIDS; i++) {
+			/* Allow MCTP_NET_ANY (0) to match any network for backward compatibility */
 			if (ctx->tid_map[i].net == network &&
 			    ctx->tid_map[i].eid == eid) {
 				*tid = i;
@@ -96,6 +119,14 @@ static int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
 		}
 	}
 	return -1;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_transport_af_mctp_test_lookup_tid(struct pldm_transport_af_mctp *ctx,
+					   uint32_t network, mctp_eid_t eid,
+					   pldm_tid_t *tid)
+{
+	return pldm_transport_af_mctp_get_tid(ctx, network, eid, tid);
 }
 
 LIBPLDM_ABI_STABLE
