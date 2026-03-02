@@ -1,4 +1,5 @@
 tests += [
+    'transport/af-mctp',
     'transport/transport',
     'transport/send_recv_one',
     'transport/send_recv_timeout',

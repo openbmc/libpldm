@@ -12,6 +12,12 @@ extern "C" {
 struct pldm_transport_af_mctp;
 struct sockaddr_mctp;
 
+/* Testing-only helpers: initialize/destroy a minimal ctx without sockets */
+LIBPLDM_ABI_TESTING
+int pldm_transport_af_mctp_test_init(struct pldm_transport_af_mctp **ctx);
+LIBPLDM_ABI_TESTING
+void pldm_transport_af_mctp_test_destroy(struct pldm_transport_af_mctp *ctx);
+
 /* Init the transport backend */
 int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx);
 
@@ -43,6 +49,12 @@ int pldm_transport_af_mctp_map_tid_fqe(struct pldm_transport_af_mctp *ctx,
 /* Removes a TID-to-<Network, EID> (fully qualified endpoint) mapping */
 int pldm_transport_af_mctp_unmap_tid_fqe(struct pldm_transport_af_mctp *ctx,
 					 pldm_tid_t tid);
+
+/* Test helper to verify TID lookup behavior with network matching */
+LIBPLDM_ABI_TESTING
+int pldm_transport_af_mctp_test_lookup_tid(struct pldm_transport_af_mctp *ctx,
+					   uint32_t network, mctp_eid_t eid,
+					   pldm_tid_t *tid);
 
 /**
  * @brief Allow the transport to receive requests from remote endpoints
