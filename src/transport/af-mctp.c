@@ -1,10 +1,8 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "af-mctp-internal.h"
 #include "compiler.h"
 #include "container-of.h"
 #include "mctp-defines.h"
-#include "responder.h"
-#include "socket.h"
-#include "transport.h"
 
 #include <libpldm/api.h>
 #include <libpldm/base.h>
@@ -16,7 +14,6 @@
 #include <limits.h>
 #include <linux/mctp.h>
 #include <poll.h>
-#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
@@ -24,31 +21,10 @@
 #include <sys/un.h>
 #include <unistd.h>
 
-struct pldm_responder_cookie_af_mctp {
-	struct pldm_responder_cookie req;
-	struct sockaddr_mctp smctp;
-};
-
 #define cookie_to_af_mctp(c)                                                   \
 	container_of((c), struct pldm_responder_cookie_af_mctp, req)
 
 #define AF_MCTP_NAME "AF_MCTP"
-
-#if !HAVE_STRUCT_MCTP_FQ_ADDR
-struct mctp_fq_addr {
-	unsigned int net;
-	mctp_eid_t eid;
-};
-#endif
-
-struct pldm_transport_af_mctp {
-	struct pldm_transport transport;
-	int socket;
-	struct mctp_fq_addr tid_map[PLDM_MAX_TIDS];
-	struct pldm_socket_sndbuf socket_send_buf;
-	bool bound;
-	struct pldm_responder_cookie cookie_jar;
-};
 
 #define transport_to_af_mctp(ptr)                                              \
 	container_of(ptr, struct pldm_transport_af_mctp, transport)
@@ -82,19 +58,32 @@ static int pldm_transport_af_mctp_lookup_fqe(struct pldm_transport_af_mctp *ctx,
 	return 0;
 }
 
-static int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
-					  uint32_t network, mctp_eid_t eid,
-					  pldm_tid_t *tid)
+int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
+				   uint32_t network, mctp_eid_t eid,
+				   pldm_tid_t *tid)
 {
-	if (network != 0 && eid != 0) {
-		for (int i = 0; i < PLDM_MAX_TIDS; i++) {
-			if (ctx->tid_map[i].net == network &&
-			    ctx->tid_map[i].eid == eid) {
-				*tid = i;
-				return 0;
-			}
+	if (network == 0 || eid == 0) {
+		return -1;
+	}
+
+	/* Exact network match takes precedence */
+	for (int i = 0; i < PLDM_MAX_TIDS; i++) {
+		if (ctx->tid_map[i].net == network &&
+		    ctx->tid_map[i].eid == eid) {
+			*tid = i;
+			return 0;
 		}
 	}
+
+	/* Fall back to MCTP_NET_ANY for backward compatibility */
+	for (int i = 0; i < PLDM_MAX_TIDS; i++) {
+		if (ctx->tid_map[i].net == MCTP_NET_ANY &&
+		    ctx->tid_map[i].eid == eid) {
+			*tid = i;
+			return 0;
+		}
+	}
+
 	return -1;
 }
 
