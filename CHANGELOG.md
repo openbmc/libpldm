@@ -93,6 +93,7 @@ Change categories:
   breakage
 - abi: Refresh dumps to capture libpldm++ namespace rework
 - libpldm: Fix spelling mistakes using codespell
+- transport: af-mctp: Fix TID lookup with MCTP_NET_ANY
 
 ### Security
 
