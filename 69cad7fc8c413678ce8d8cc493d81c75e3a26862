@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec13de5d_bf3b606f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-03T04:05:34Z",
+      "side": 1,
+      "message": "Can we shuffle this slightly?\n\n```\nconfig: Fix definition of HAVE_STRUCT_MCTP_FQ_ADDR\n```",
+      "revId": "69cad7fc8c413678ce8d8cc493d81c75e3a26862",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
