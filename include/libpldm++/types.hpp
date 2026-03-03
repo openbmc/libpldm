@@ -2,6 +2,7 @@
 
 #include <bitset>
 #include <cstdint>
+#include <libpldm++/_abi_annotation.hpp>
 #include <libpldm/firmware_update.h>
 #include <map>
 #include <memory>
