@@ -16,6 +16,24 @@
       "message": "Blocked by https://github.com/openbmc/libpldm/issues/24",
       "revId": "fec2f3975b457e3340f0abf190fff381c6443838",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54ea3439_2b6e8cb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-03T05:29:44Z",
+      "side": 1,
+      "message": "Fix: https://gerrit.openbmc.org/c/openbmc/libpldm/+/87960\n\n@andrew@codeconstruct.com.au\n\n`conf.set10(\u0027HAVE_LIBPLDM_ABI_TESTING\u0027, get_option(\u0027abi\u0027).contains(\u0027testing\u0027))`\n\nCan I just remove this line as part of stabilizing or should i change it to STABLE?",
+      "parentUuid": "8a76f6b0_cd8a88ac",
+      "revId": "fec2f3975b457e3340f0abf190fff381c6443838",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
