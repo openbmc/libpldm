@@ -16,6 +16,24 @@
       "message": "nit: I suggest using a imperative mood\n\n```suggestion\n- platform: Add functions to decode Redfish Resource PDR (DSP0248 v1.3.0)\n```\n\nhttps://git.kernel.org/pub/scm/git/git.git/tree/Documentation/SubmittingPatches\n\n```\nDescribe your changes in imperative mood, e.g. \"make xyzzy do frotz\"\ninstead of \"[This patch] makes xyzzy do frotz\" or \"[I] changed xyzzy\nto do frotz\", as if you are giving orders to the codebase to change\nits behavior.\n```",
       "revId": "ecf138744d5f0dc1da8733bb41ed1a2e7cdfce4f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d582f52_74bb0683",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 19
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-03T09:23:43Z",
+      "side": 1,
+      "message": "Honestly `Added` looks strange to me too, but this style is used all over the CHANGELOG.md. Maybe the rule above is not applicable in this case, because `CHANGELOG !\u003d commit`. Let\u0027s wait for the maintainers response",
+      "parentUuid": "55085976_e7b52659",
+      "revId": "ecf138744d5f0dc1da8733bb41ed1a2e7cdfce4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
