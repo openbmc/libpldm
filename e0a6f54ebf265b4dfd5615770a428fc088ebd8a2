@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3cb1468_29d9d1d5",
+        "filename": "include/libpldm/transport/af-mctp.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002134
+      },
+      "writtenOn": "2026-03-03T11:15:32Z",
+      "side": 1,
+      "message": "Thanks for the suggestion! `test.c` looks like it\u0027s specifically providing the mock transport for the `send_recv_*` test series, so it might not be the best fit for `af-mctp` helpers.\n\nIf separating them into a dedicated `af-mctp-test.c`, `test_init` needs `sizeof(struct pldm_transport_af_mctp)` to allocate the context, so it would require an internal header to expose that private struct.\n`get_tid` would also need to change from static to non-static for `test_lookup_tid` to call it. Keeping them in `af-mctp.c` avoids both issues.\n\nThis probably needs @andrew@codeconstruct.com.au\u0027s input on which approach he\u0027d prefer.",
+      "parentUuid": "7c70b3e5_183d2faa",
+      "revId": "e0a6f54ebf265b4dfd5615770a428fc088ebd8a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32d2a9a1_2978c100",
         "filename": "src/transport/af-mctp.c",
         "patchSetId": 17
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-03T08:37:42Z",
       "side": 1,
       "message": "I think these would fit better in `src/transport/test.c`, so we keep all test code separate from the core implementation.",
+      "revId": "e0a6f54ebf265b4dfd5615770a428fc088ebd8a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a68470f6_9926e9f8",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002134
+      },
+      "writtenOn": "2026-03-03T11:15:32Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "32d2a9a1_2978c100",
       "revId": "e0a6f54ebf265b4dfd5615770a428fc088ebd8a2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
