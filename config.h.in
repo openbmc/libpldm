@@ -44,4 +44,6 @@
 #define LIBPLDM_ABI_TESTING
 #endif
 
+#mesondefine HAVE_STRUCT_MCTP_FQ_ADDR
+
 #endif
