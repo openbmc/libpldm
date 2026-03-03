@@ -38,7 +38,6 @@ namespace fw_update
 			       const std::vector<uint8_t> &data);
 
 	    public:
-		LIBPLDM_ABI_TESTING
 		~DescriptorData();
 
 		bool operator==(const DescriptorData &other) const;
@@ -64,15 +63,12 @@ namespace fw_update
 			const std::string &componentVersion);
 
 	    public:
-		LIBPLDM_ABI_TESTING
 		ComponentImageInfo(const ComponentImageInfo &ref);
 
-		LIBPLDM_ABI_TESTING
 		~ComponentImageInfo();
 
 		// note: this function compares all members besides the
 		// component image itself
-		LIBPLDM_ABI_TESTING
 		bool operator==(const ComponentImageInfo &other) const;
 
 		// data members
@@ -105,17 +101,13 @@ namespace fw_update
 			const std::vector<uint8_t> &firmwareDevicePackageData);
 
 	    public:
-		LIBPLDM_ABI_TESTING
 		~FirmwareDeviceIDRecord();
 
-		LIBPLDM_ABI_TESTING
 		FirmwareDeviceIDRecord(const FirmwareDeviceIDRecord &ref);
 
-		LIBPLDM_ABI_TESTING
 		bool operator==(const FirmwareDeviceIDRecord &other) const;
 
 		// data members
-		LIBPLDM_ABI_TESTING
 		const std::vector<uint16_t> getDescriptorTypes() const;
 
 		const std::bitset<32> deviceUpdateOptionFlags;
@@ -148,13 +140,10 @@ namespace fw_update
 				&componentImageInformation);
 
 	    public:
-		LIBPLDM_ABI_TESTING
 		~Package();
 
-		LIBPLDM_ABI_TESTING
 		Package(const Package &ref);
 
-		LIBPLDM_ABI_TESTING
 		bool operator==(const Package &other) const;
 
 		// data members
@@ -166,7 +155,6 @@ namespace fw_update
 	// To avoid issues like "ERROR: no symbols info in the ABI dump"
 	// with the ABI tooling, expose a do-nothing stable symbol.
 	// Which ensures we always have a non-empty stable ABI.
-	LIBPLDM_ABI_STABLE
 	void stable_nop();
 
 	class PackageParserError {
@@ -193,7 +181,6 @@ namespace fw_update
 		 *  @returns an error value if parsing fails
 		 *  @returns a unique_ptr to Package struct on success
 		 */
-		LIBPLDM_ABI_TESTING
 		static std::expected<std::unique_ptr<Package>,
 				     PackageParserError>
 		parse(const std::span<const uint8_t> &pkg,
