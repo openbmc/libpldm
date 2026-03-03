@@ -52,6 +52,24 @@
       "parentUuid": "54ea3439_2b6e8cb6",
       "revId": "fec2f3975b457e3340f0abf190fff381c6443838",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edf6dca9_36bcf386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-03T07:37:32Z",
+      "side": 1,
+      "message": "Resolving this comment. Issue marked as `completed`\nhttps://github.com/openbmc/libpldm/issues/24",
+      "parentUuid": "d000c7d5_9bdb80aa",
+      "revId": "fec2f3975b457e3340f0abf190fff381c6443838",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
