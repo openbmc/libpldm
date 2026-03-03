@@ -1,5 +1,6 @@
 #pragma once
 
+#include <libpldm++/_abi_annotation.hpp>
 #include <libpldm++/types.hpp>
 
 #include <libpldm/firmware_update.h>
