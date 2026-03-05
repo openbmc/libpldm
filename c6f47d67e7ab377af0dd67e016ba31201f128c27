@@ -16,6 +16,24 @@
       "message": "decode_pldm_fwup_update_security_revision_resp , encode_pldm_fwup_update_security_revision_req - pls mention the API names too.",
       "revId": "c6f47d67e7ab377af0dd67e016ba31201f128c27",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b70dd2c0_7c53aa3d",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-03-05T05:41:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2c3a1fd6_7765a127",
+      "revId": "c6f47d67e7ab377af0dd67e016ba31201f128c27",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
