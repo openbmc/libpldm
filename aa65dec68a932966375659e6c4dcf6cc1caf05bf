@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b98164da_057c39c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002796
+      },
+      "writtenOn": "2026-03-05T20:58:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9aa906d_4a605fb4",
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5014e59_8cf70aa1",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-02-26T00:57:32Z",
       "side": 1,
       "message": "This should have been caught by testing of `encode_get_firmware_parameters_resp()` ... but there appear to be no tests for it.\n\nCan you please add some so we can at least catch any future regressions?",
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7b2e894_b1d88483",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002796
+      },
+      "writtenOn": "2026-03-05T20:58:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5014e59_8cf70aa1",
       "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -65,6 +101,42 @@
       "writtenOn": "2026-02-26T00:57:32Z",
       "side": 1,
       "message": "Can you please add `Fixes: cf9a2df37762 (\"dsp: Add FD side firmware_update encode/decode\")` on a new line immediately above `Change-Id` here?",
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66aabdb3_14e2cb3c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002796
+      },
+      "writtenOn": "2026-03-05T20:58:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a47df3b_a8fc4b28",
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5ec9de_85decfba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002796
+      },
+      "writtenOn": "2026-03-05T20:58:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c218164_8e6b8f49",
       "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -132,6 +204,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e84e561_b614c760",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1002796
+      },
+      "writtenOn": "2026-03-05T20:58:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecda3ad4_18c67799",
+      "range": {
+        "startLine": 1351,
+        "startChar": 2,
+        "endLine": 1351,
+        "endChar": 11
+      },
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6aa4640_7e7c1f22",
@@ -145,6 +241,24 @@
       "writtenOn": "2026-02-26T00:57:32Z",
       "side": 1,
       "message": "As above.",
+      "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "659b3101_bb230be6",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1356,
+      "author": {
+        "id": 1002796
+      },
+      "writtenOn": "2026-03-05T20:58:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6aa4640_7e7c1f22",
       "revId": "aa65dec68a932966375659e6c4dcf6cc1caf05bf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
