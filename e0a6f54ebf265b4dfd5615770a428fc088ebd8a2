@@ -54,6 +54,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a82616b_d496e89e",
+        "filename": "include/libpldm/transport/af-mctp.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002134
+      },
+      "writtenOn": "2026-03-09T11:30:14Z",
+      "side": 1,
+      "message": "@vishnunithyasoundhar.s@intel.com @adityakurdunkar2@gmail.com\nThanks for the suggestions! I\u0027ve separated the test utilities into dedicated files (af-mctp-test.c, af-mctp-test.h, af-mctp-internal.h) in the latest patchset.\nPlease take a look and let me know if this aligns with what you had in mind.\nThanks!",
+      "parentUuid": "31fef2bb_3907e115",
+      "revId": "e0a6f54ebf265b4dfd5615770a428fc088ebd8a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32d2a9a1_2978c100",
