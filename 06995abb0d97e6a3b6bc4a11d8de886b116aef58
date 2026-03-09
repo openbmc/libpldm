@@ -111,6 +111,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54dd0856_4bba2515",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-03-09T08:32:23Z",
+      "side": 1,
+      "message": "Good catch. Updated PLDM_PDR_EFFECTER_AUXILIARY_NAMES_MIN_LENGTH to 15 (terminusHandle + effecterID + effecterCount).",
+      "parentUuid": "8cfe8754_ec19a327",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 54
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fdc166c_36a62eca",
@@ -124,6 +148,30 @@
       "writtenOn": "2026-02-26T02:01:07Z",
       "side": 1,
       "message": "See comment about nested iterators below.",
+      "range": {
+        "startLine": 621,
+        "startChar": 0,
+        "endLine": 630,
+        "endChar": 2
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f80c36d2_864ca1e2",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-03-09T08:32:23Z",
+      "side": 1,
+      "message": "Addressed. Replaced the flat pldm_effecter_auxiliary_name struct (which exposed raw names_data) with a nested iterator design. The inner pldm_platform_effecter_aux_name struct now provides decoded tag, tag_length, name, and name_length directly.",
+      "parentUuid": "7fdc166c_36a62eca",
       "range": {
         "startLine": 621,
         "startChar": 0,
@@ -157,6 +205,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "133cace7_2a95acb5",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-03-09T08:32:23Z",
+      "side": 1,
+      "message": "Done. All new symbols are now prefixed with `pldm_platform_`",
+      "parentUuid": "64f69a9e_71320ae6",
+      "range": {
+        "startLine": 867,
+        "startChar": 7,
+        "endLine": 867,
+        "endChar": 12
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66f54f65_35be21e3",
@@ -170,6 +242,30 @@
       "writtenOn": "2026-02-26T02:01:07Z",
       "side": 1,
       "message": "My reading is we actually need nested iterators here. The outer one is to iterate effectors, and the inner one is to iterate the names.",
+      "range": {
+        "startLine": 945,
+        "startChar": 0,
+        "endLine": 947,
+        "endChar": 4
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a335c5b_e7430e97",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-03-09T08:32:23Z",
+      "side": 1,
+      "message": "I have made the changes. The outer iterator (foreach_pldm_platform_effecter_auxiliary_name) iterates effecters, and the inner iterator (foreach_pldm_platform_effecter_aux_name) iterates the (language tag, UTF16 name) pairs within each effecter.",
+      "parentUuid": "66f54f65_35be21e3",
       "range": {
         "startLine": 945,
         "startChar": 0,
@@ -203,6 +299,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b6e9f99_849b47bb",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 3459,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-03-09T08:32:23Z",
+      "side": 1,
+      "message": "Agreed. Renamed the outer decode to clearly reflect it decodes effecter entries and added a separate decode function for the individual name strings.",
+      "parentUuid": "949e4fec_759a0a2c",
+      "range": {
+        "startLine": 3459,
+        "startChar": 35,
+        "endLine": 3459,
+        "endChar": 39
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4de8fa5a_bb358566",
@@ -216,6 +336,30 @@
       "writtenOn": "2026-02-26T02:01:07Z",
       "side": 1,
       "message": "I think this is a bit unkind to the user, hence the suggestion for nested iterators.",
+      "range": {
+        "startLine": 7122,
+        "startChar": 0,
+        "endLine": 7124,
+        "endChar": 50
+      },
+      "revId": "06995abb0d97e6a3b6bc4a11d8de886b116aef58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2689de64_d62497bd",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 7124,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-03-09T08:32:23Z",
+      "side": 1,
+      "message": "Addressed with the nested iterator design. Users no longer need to manually parse raw names_data bytes. The inner iterator decodes each (language tag, UTF16 name) pair directly.",
+      "parentUuid": "4de8fa5a_bb358566",
       "range": {
         "startLine": 7122,
         "startChar": 0,
