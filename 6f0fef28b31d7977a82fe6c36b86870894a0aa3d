@@ -16,6 +16,24 @@
       "message": "From CI:\n\n```\nAdd a CHANGELOG entry to document updates under abi/ and include/libpldm/\n```",
       "revId": "6f0fef28b31d7977a82fe6c36b86870894a0aa3d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8682fd33_e360559b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002877
+      },
+      "writtenOn": "2026-03-09T21:30:52Z",
+      "side": 1,
+      "message": "Oh, thanks for pointing that out - kept looking the CI logs and only caring about the red lines, so couldn\u0027t get what was wrong...",
+      "parentUuid": "b494f627_2bd48691",
+      "revId": "6f0fef28b31d7977a82fe6c36b86870894a0aa3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
