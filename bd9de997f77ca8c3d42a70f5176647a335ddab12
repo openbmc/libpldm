@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "022865de_f4d9da85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done Andrew.",
+      "parentUuid": "d823cdcb_a337352f",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad5cc2bd_183b9f22",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-02-17T01:31:51Z",
       "side": 1,
       "message": "Given this is an example that will likely be referenced by others, please add the example error-handling as well 😊",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6ee61f4_eb6594bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Sure, added error handling details to the commit message.",
+      "parentUuid": "ad5cc2bd_183b9f22",
       "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b14aca65_e2b078a0",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Ok done. Moved all of these iterator APIs and related stuffs to platform.h and platform.c \u0026 reverted changes done to pdr.c and pdr.h.",
+      "parentUuid": "1c98f014_708e0c86",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3ae9316_5427c63c",
@@ -88,6 +148,30 @@
       "writtenOn": "2026-02-17T01:31:51Z",
       "side": 1,
       "message": "As a broad point, functions marked with `LIBPLDM_ITERATOR` are for internal use by the iterator macros, and as such providing documentation isn\u0027t necessary. It will make the patch a bit easier to read if you remove such documentation throughout your change 😊\n\n(However, thanks for the effort to document things!).",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 3
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63fce077_99654c22",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Makes sense. Removed description for LIBPLDM_ITERATOR functions.",
+      "parentUuid": "e3ae9316_5427c63c",
       "range": {
         "startLine": 97,
         "startChar": 0,
@@ -121,6 +205,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba6fc224_71909f21",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done. Removed null checks for LIBPLDM_ITERATOR methods.",
+      "parentUuid": "1f4e835e_03e55563",
+      "range": {
+        "startLine": 119,
+        "startChar": 5,
+        "endLine": 119,
+        "endChar": 13
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6e4c90f_18e78455",
@@ -134,6 +242,30 @@
       "writtenOn": "2026-02-17T01:31:51Z",
       "side": 1,
       "message": "Why the extra indirection? We shouldn\u0027t be allocating to assign to it...",
+      "range": {
+        "startLine": 139,
+        "startChar": 45,
+        "endLine": 139,
+        "endChar": 53
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d7274d2_da870213",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done. Removed extra indirection (double pointers) wherever applicable. Added a new current_states field inside pldm_pdr_state_effecter_iter struct to facilitate handling this to track the current entry\u0027s states data for the inner iterator and  saves the pointer and length of that entry\u0027s states.",
+      "parentUuid": "c6e4c90f_18e78455",
       "range": {
         "startLine": 139,
         "startChar": 45,
@@ -167,6 +299,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e4f711d_57bac0ad",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done. Removed extra indirection for everywhere applicable.",
+      "parentUuid": "a7fc93c1_ce11a285",
+      "range": {
+        "startLine": 214,
+        "startChar": 19,
+        "endLine": 214,
+        "endChar": 27
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c0f5f20_c19e28fa",
@@ -180,6 +336,30 @@
       "writtenOn": "2026-02-17T01:31:51Z",
       "side": 1,
       "message": "Rephrase this as:\n\n\u003e A pointer to the current possible_states entry",
+      "range": {
+        "startLine": 224,
+        "startChar": 22,
+        "endLine": 226,
+        "endChar": 81
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "241f7fb7_98caf882",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "9c0f5f20_c19e28fa",
       "range": {
         "startLine": 224,
         "startChar": 22,
@@ -213,6 +393,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3366aff8_122e0410",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Removed C++ code from the comment. Thanks for pointing that out.",
+      "parentUuid": "343407d0_bd71ca31",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 80
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "845d1365_6e4bdff5",
@@ -226,6 +430,30 @@
       "writtenOn": "2026-02-17T01:31:51Z",
       "side": 1,
       "message": "Perhaps you shouldn\u0027t take the address here?",
+      "range": {
+        "startLine": 269,
+        "startChar": 14,
+        "endLine": 269,
+        "endChar": 15
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a771d3b9_7fefbe14",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "I think it will remain, but I\u0027ve removed all double pointers.",
+      "parentUuid": "845d1365_6e4bdff5",
       "range": {
         "startLine": 269,
         "startChar": 14,
@@ -259,6 +487,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4678de85_fb9a4125",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "fd15ea82_a44915a9",
+      "range": {
+        "startLine": 276,
+        "startChar": 21,
+        "endLine": 278,
+        "endChar": 40
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97b0956b_5904e97a",
@@ -272,6 +524,30 @@
       "writtenOn": "2026-02-17T01:31:51Z",
       "side": 1,
       "message": "Same query here.",
+      "range": {
+        "startLine": 299,
+        "startChar": 27,
+        "endLine": 299,
+        "endChar": 28
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b03adbae_98110fe9",
+        "filename": "include/libpldm/pdr.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "As I replied above, I think it will remain, but I\u0027ve removed all double pointers.",
+      "parentUuid": "97b0956b_5904e97a",
       "range": {
         "startLine": 299,
         "startChar": 27,
@@ -305,6 +581,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb8d1ba1_548236ee",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2398,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done. Changed other instances also to single struct initialisation.",
+      "parentUuid": "5cadc18d_e2c79ec0",
+      "range": {
+        "startLine": 2398,
+        "startChar": 42,
+        "endLine": 2398,
+        "endChar": 65
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3818da4c_774d207c",
@@ -318,6 +618,24 @@
       "writtenOn": "2026-02-17T01:31:51Z",
       "side": 1,
       "message": "Let\u0027s assign this last, for safety.",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ec2ee7a_575859b3",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2410,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done. Moved this assignment down before returning from the funtion.",
+      "parentUuid": "3818da4c_774d207c",
       "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -345,6 +663,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "645f3491_3d820825",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "It\u0027s correct, but I\u0027ve made it more clearer by adding parenthesis to both sizeof() operations.",
+      "parentUuid": "bb9dc6af_e5837a64",
+      "range": {
+        "startLine": 2417,
+        "startChar": 71,
+        "endLine": 2417,
+        "endChar": 72
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33a36a6b_cf44a4b0",
@@ -362,6 +704,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b6f07c8_9b0ec75d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2448,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Fixed this.",
+      "parentUuid": "33a36a6b_cf44a4b0",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cab8f370_63038c2a",
@@ -375,6 +735,30 @@
       "writtenOn": "2026-02-17T01:31:51Z",
       "side": 1,
       "message": "This is somewhat odd, and I think related to the concern around `entry_start`?",
+      "range": {
+        "startLine": 2462,
+        "startChar": 59,
+        "endLine": 2462,
+        "endChar": 63
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af5dfa59_fa6522ec",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2462,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Correct I\u0027ve rectified this.",
+      "parentUuid": "cab8f370_63038c2a",
       "range": {
         "startLine": 2462,
         "startChar": 59,
@@ -408,6 +792,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb249a4a_de7a9450",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2481,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done. Added new current_states field inside pldm_pdr_state_effecter_iter to handle this. Now user will assign the memory instead.",
+      "parentUuid": "0585891b_9a33edda",
+      "range": {
+        "startLine": 2481,
+        "startChar": 1,
+        "endLine": 2481,
+        "endChar": 70
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45df9fd2_e5204320",
@@ -421,6 +829,24 @@
       "writtenOn": "2026-02-17T01:31:51Z",
       "side": 1,
       "message": "Just copy the byte value in to a caller-provided stack object rather than use a double indirection?",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "537b8b82_db57b872",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2548,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "45df9fd2_e5204320",
       "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -448,6 +874,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "503e09bc_c4bc39bb",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2668,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done. I\u0027ve refactored the test cases to use msgbuf APIs.",
+      "parentUuid": "4c46e28c_ec429565",
+      "range": {
+        "startLine": 2653,
+        "startChar": 0,
+        "endLine": 2668,
+        "endChar": 1
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38c19841_2159bf8e",
@@ -465,6 +915,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f3adcb8_ed91d736",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2764,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "I\u0027ve used an byte array and used alignas to guarantee proper alignment so it shouldn\u0027t be an undefined behaviour anymore.",
+      "parentUuid": "38c19841_2159bf8e",
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3a97a07_040a456a",
@@ -478,6 +946,30 @@
       "writtenOn": "2026-02-17T01:31:51Z",
       "side": 1,
       "message": "Just pass a value that\u0027s explicitly too small. No need to make the object itself too small.",
+      "range": {
+        "startLine": 2769,
+        "startChar": 57,
+        "endLine": 2769,
+        "endChar": 70
+      },
+      "revId": "bd9de997f77ca8c3d42a70f5176647a335ddab12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96bbd9db_39aae84e",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2769,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "e3a97a07_040a456a",
       "range": {
         "startLine": 2769,
         "startChar": 57,

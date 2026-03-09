@@ -904,6 +904,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c80e20cf_402a390e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2410,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c913de0_6a6a5bff",
+      "range": {
+        "startLine": 2404,
+        "startChar": 1,
+        "endLine": 2410,
+        "endChar": 2
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af9a25ac_9ff2afd6",
@@ -1010,6 +1034,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "612fe8e1_b1a2137c",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "139572f8_f983c31e",
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d743f04_cf7487aa",
@@ -1057,6 +1099,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ff40862_e950e288",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2423,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5206da25_ad6e401f",
+      "range": {
+        "startLine": 2418,
+        "startChar": 1,
+        "endLine": 2423,
+        "endChar": 2
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f837c64_f6230348",
@@ -1088,6 +1154,24 @@
       "side": 1,
       "message": "Done. Created decode_pldm_pdr_state_effecter_from_iter \u0026 decode_pldm_pdr_state_effecter_states_from_iter methods for decoding.",
       "parentUuid": "4f837c64_f6230348",
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "724d4216_6ec453ca",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2449,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f59946d_71800c8c",
       "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -1129,6 +1213,30 @@
       "side": 1,
       "message": "Actually state_set_id was not required so was trying to skip/jump to next field but I\u0027ve used pldm_msgbuf_span_required to skip the field without extracting that value.",
       "parentUuid": "b3f01aef_fec87168",
+      "range": {
+        "startLine": 2479,
+        "startChar": 1,
+        "endLine": 2481,
+        "endChar": 2
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4d3c50b_3a3f22d7",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2481,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be3a86ce_9ced5b41",
       "range": {
         "startLine": 2479,
         "startChar": 1,
@@ -1229,6 +1337,30 @@
       "side": 1,
       "message": "Done. Reworked other areas also to handle above suggestion.",
       "parentUuid": "7bbb9d3a_a7d261f3",
+      "range": {
+        "startLine": 2497,
+        "startChar": 1,
+        "endLine": 2498,
+        "endChar": 34
+      },
+      "revId": "a0479a981ad21d5595550094ecf28f3e09071374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaf255d8_095455cc",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2498,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dac29f2_4ccc18d2",
       "range": {
         "startLine": 2497,
         "startChar": 1,

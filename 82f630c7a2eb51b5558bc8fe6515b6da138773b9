@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43885ac6_0e2590b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-09T08:15:33Z",
+      "side": 1,
+      "message": "Overview of changes done for this patchset:\n1. Remove null checks \u0026 comments for functions marked as LIBPLDM_ITERATOR.\n2. Initialised structs in a simpler way.\n3. Remove double pointers and made the user allocate memory instead.\n4. Used msgbuf APIs for test cases too,\n5. Changed test cases macro to #HAVE_LIBPLDM_API_TESTING\n6. Improved comments and commit messages\n7. Moved all iterator macros/structures/functions to platform.h \u0026 platform.c",
+      "revId": "82f630c7a2eb51b5558bc8fe6515b6da138773b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
