@@ -1332,6 +1332,17 @@ int encode_get_firmware_parameters_resp(
 		return -EINVAL;
 	}
 
+	if (resp_data->active_comp_image_set_ver_str.str_len == 0 ||
+	    resp_data->active_comp_image_set_ver_str.str_len >
+		    PLDM_FIRMWARE_MAX_STRING) {
+		return -EINVAL;
+	}
+
+	if (resp_data->pending_comp_image_set_ver_str.str_len >
+	    PLDM_FIRMWARE_MAX_STRING) {
+		return -EINVAL;
+	}
+
 	rc = encode_pldm_header_only(PLDM_RESPONSE, instance_id, PLDM_FWUP,
 				     PLDM_GET_FIRMWARE_PARAMETERS, msg);
 	if (rc) {
@@ -1385,6 +1396,15 @@ int encode_get_firmware_parameters_resp_comp_entry(
 	int rc;
 
 	if (comp == NULL || payload == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	if (comp->active_ver.str.str_len == 0 ||
+	    comp->active_ver.str.str_len > PLDM_FIRMWARE_MAX_STRING) {
+		return -EINVAL;
+	}
+
+	if (comp->pending_ver.str.str_len > PLDM_FIRMWARE_MAX_STRING) {
 		return -EINVAL;
 	}
 
