@@ -88,8 +88,9 @@ static int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
 {
 	if (network != 0 && eid != 0) {
 		for (int i = 0; i < PLDM_MAX_TIDS; i++) {
-			if (ctx->tid_map[i].net == network &&
-			    ctx->tid_map[i].eid == eid) {
+			if (ctx->tid_map[i].eid == eid &&
+			    (ctx->tid_map[i].net == network ||
+			     ctx->tid_map[i].net == MCTP_NET_ANY)) {
 				*tid = i;
 				return 0;
 			}
