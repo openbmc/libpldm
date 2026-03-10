@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17342c58_36435887",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-10T08:25:23Z",
+      "side": 1,
+      "message": "```suggestion\n\t\t\tif ((ctx-\u003etid_map[i].net \u003d\u003d network ||\n\t\t\t     ctx-\u003etid_map[i].net \u003d\u003d MCTP_NET_ANY) \u0026\u0026\n\t\t\t    ctx-\u003etid_map[i].eid \u003d\u003d eid) {\n```\n\nCan we give precedence to exact network matches and use MCTP_NET_ANY only as a fallback?\n\nBoth mapping APIs currently exist, so there’s an edge case where callers may use them together. In that case, checking for an exact network match first would avoid wildcard entries (MCTP_NET_ANY) shadowing more specific mappings.",
+      "range": {
+        "startLine": 68,
+        "startChar": 3,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "ad96fce0e90e2dbaa3d5dc4ec0bea4df81239ed9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
