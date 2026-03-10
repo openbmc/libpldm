@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d963338_64f8cd30",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002134
+      },
+      "writtenOn": "2026-03-10T11:05:32Z",
+      "side": 1,
+      "message": "Thanks for the suggestion!\nI reworked get_tid() to search in two passes — first for an exact network match, then for MCTP_NET_ANY as a fallback.\nReordering the || operands alone wouldn\u0027t change the result since A || B evaluates the same either way, so the two-pass approach felt necessary to properly avoid MCTP_NET_ANY entries shadowing more specific ones.\nDoes this look reasonable to you?",
+      "parentUuid": "17342c58_36435887",
+      "range": {
+        "startLine": 68,
+        "startChar": 3,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "ad96fce0e90e2dbaa3d5dc4ec0bea4df81239ed9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8524a8e7_8286b75b",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-03-10T08:28:38Z",
       "side": 1,
       "message": "Do you think a test case for the edge case I mentioned \"Caller calling both API\" would be a nice addition?",
+      "revId": "ad96fce0e90e2dbaa3d5dc4ec0bea4df81239ed9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07638355_c20d7ee2",
+        "filename": "tests/transport/af-mctp.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002134
+      },
+      "writtenOn": "2026-03-10T11:05:32Z",
+      "side": 1,
+      "message": "I\u0027ve updated the patch with a test that uses both map_tid() and map_tid_fqe() for the same EID and verifies that the exact network match is returned, while a different network still falls back to MCTP_NET_ANY.\nDoes this cover the scenario you were thinking of?",
+      "parentUuid": "8524a8e7_8286b75b",
       "revId": "ad96fce0e90e2dbaa3d5dc4ec0bea4df81239ed9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
