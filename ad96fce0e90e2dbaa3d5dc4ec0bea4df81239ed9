@@ -22,6 +22,23 @@
       },
       "revId": "ad96fce0e90e2dbaa3d5dc4ec0bea4df81239ed9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8524a8e7_8286b75b",
+        "filename": "tests/transport/af-mctp.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-10T08:28:38Z",
+      "side": 1,
+      "message": "Do you think a test case for the edge case I mentioned \"Caller calling both API\" would be a nice addition?",
+      "revId": "ad96fce0e90e2dbaa3d5dc4ec0bea4df81239ed9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
