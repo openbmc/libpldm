@@ -1509,6 +1509,83 @@ TEST(GetFirmwareParameters, errorPathdecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetFirmwareParameters, errorPathEncodeResponseActiveStrLenTooLong)
+{
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+
+    struct pldm_get_firmware_parameters_resp_full resp_data = {};
+    resp_data.completion_code = PLDM_SUCCESS;
+    resp_data.active_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_ASCII;
+    resp_data.active_comp_image_set_ver_str.str_len =
+        PLDM_FIRMWARE_MAX_STRING + 1;
+    resp_data.pending_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_UNKNOWN;
+    resp_data.pending_comp_image_set_ver_str.str_len = 0;
+
+    int rc = encode_get_firmware_parameters_resp(FIXED_INSTANCE_ID, &resp_data,
+                                                 enc, &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetFirmwareParameters, errorPathEncodeResponsePendingStrLenTooLong)
+{
+    PLDM_MSG_DEFINE_P(enc, 1000);
+    size_t enc_payload_len = 1000;
+
+    struct pldm_get_firmware_parameters_resp_full resp_data = {};
+    resp_data.completion_code = PLDM_SUCCESS;
+    resp_data.active_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_ASCII;
+    resp_data.active_comp_image_set_ver_str.str_len = 5;
+    memcpy(resp_data.active_comp_image_set_ver_str.str_data, "hello", 5);
+    resp_data.pending_comp_image_set_ver_str.str_type = PLDM_STR_TYPE_ASCII;
+    resp_data.pending_comp_image_set_ver_str.str_len =
+        PLDM_FIRMWARE_MAX_STRING + 1;
+
+    int rc = encode_get_firmware_parameters_resp(FIXED_INSTANCE_ID, &resp_data,
+                                                 enc, &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetFirmwareParameters, errorPathEncodeCompEntryActiveStrLenTooLong)
+{
+    std::vector<uint8_t> enc_data(1000);
+    size_t enc_payload_len = enc_data.size();
+
+    struct pldm_component_parameter_entry_full comp = {};
+    comp.active_ver.str.str_type = PLDM_STR_TYPE_ASCII;
+    comp.active_ver.str.str_len = PLDM_FIRMWARE_MAX_STRING + 1;
+    comp.pending_ver.str.str_type = PLDM_STR_TYPE_ASCII;
+    comp.pending_ver.str.str_len = 5;
+
+    int rc = encode_get_firmware_parameters_resp_comp_entry(
+        &comp, enc_data.data(), &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetFirmwareParameters, errorPathEncodeCompEntryPendingStrLenTooLong)
+{
+    std::vector<uint8_t> enc_data(1000);
+    size_t enc_payload_len = enc_data.size();
+
+    struct pldm_component_parameter_entry_full comp = {};
+    comp.active_ver.str.str_type = PLDM_STR_TYPE_ASCII;
+    comp.active_ver.str.str_len = 5;
+    comp.pending_ver.str.str_type = PLDM_STR_TYPE_ASCII;
+    comp.pending_ver.str.str_len = PLDM_FIRMWARE_MAX_STRING + 1;
+
+    int rc = encode_get_firmware_parameters_resp_comp_entry(
+        &comp, enc_data.data(), &enc_payload_len);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
 TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
 {
     // Random value for component classification
