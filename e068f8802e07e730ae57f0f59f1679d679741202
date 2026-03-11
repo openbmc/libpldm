@@ -16,6 +16,24 @@
       "message": "This seems inconsistent. We allow searching with MCTP_NET_ANY (which is 0), but it is blocked here.",
       "revId": "e068f8802e07e730ae57f0f59f1679d679741202",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd8c382b_a603f6b9",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002134
+      },
+      "writtenOn": "2026-03-11T06:47:27Z",
+      "side": 1,
+      "message": "I think the two zeros serve different purposes.\nThe network parameter here comes directly from the kernel when receiving an MCTP packet, and the kernel is expected to fill in the actual device network ID, so 0 shouldn\u0027t appear there.\nThe MCTP_NET_ANY fallback searches stored tid_map entries where map_tid() stores entries with net \u003d 0 to mean \"match any network.\"\nSame numeric value, different layers.\n@vishnunithyasoundhar.s@intel.com might be able to provide more context since the original network !\u003d 0 guard was introduced in [6b8f264].\n\n[6b8f264]: https://github.com/openbmc/libpldm/commit/6b8f2646bc2abbeb7ccb074aa23fb7be929d1f00#diff-1dde80e9a2b9e2874a0aabde1a857d18252904d9c17c31968e4e785836cd3ea4",
+      "parentUuid": "92c4a1cd_28d62099",
+      "revId": "e068f8802e07e730ae57f0f59f1679d679741202",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
