@@ -81,6 +81,24 @@
       "parentUuid": "8524a8e7_8286b75b",
       "revId": "ad96fce0e90e2dbaa3d5dc4ec0bea4df81239ed9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61785eab_f30c967d",
+        "filename": "tests/transport/af-mctp.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-11T06:19:14Z",
+      "side": 1,
+      "message": "cool. This looks good.",
+      "parentUuid": "07638355_c20d7ee2",
+      "revId": "ad96fce0e90e2dbaa3d5dc4ec0bea4df81239ed9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
