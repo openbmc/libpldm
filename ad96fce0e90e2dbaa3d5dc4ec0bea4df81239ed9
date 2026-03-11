@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4de8d50c_756e082c",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-11T06:25:16Z",
+      "side": 1,
+      "message": "cool. Your implementation looks cleaner than my suggestion.",
+      "parentUuid": "6d963338_64f8cd30",
+      "range": {
+        "startLine": 68,
+        "startChar": 3,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "ad96fce0e90e2dbaa3d5dc4ec0bea4df81239ed9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8524a8e7_8286b75b",
