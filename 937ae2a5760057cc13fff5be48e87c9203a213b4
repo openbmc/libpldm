@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41b6d95b_bdf232b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-03-11T04:49:43Z",
+      "side": 1,
+      "message": "Version strings are of unit8 type. Hence the value can range from 0 to 255. Hence this value needs to be corrected.",
+      "revId": "937ae2a5760057cc13fff5be48e87c9203a213b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96eb33d0_ae15c823",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-03-11T04:49:43Z",
+      "side": 1,
+      "message": "A version string of UINT8_MAX can cause buffer overflow for `str_data[64]`.",
+      "revId": "937ae2a5760057cc13fff5be48e87c9203a213b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dce5fb7_4204ca1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-03-11T04:49:43Z",
+      "side": 1,
+      "message": "Thanks for adding this check. Just few comments to enhance these checks.",
+      "revId": "937ae2a5760057cc13fff5be48e87c9203a213b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f1f6d57_907d1612",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1335,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-03-11T04:49:43Z",
+      "side": 1,
+      "message": "Would be safer to add minimum and maximum bound check.",
+      "revId": "937ae2a5760057cc13fff5be48e87c9203a213b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2221179e_8dadf4bb",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1340,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-03-11T04:49:43Z",
+      "side": 1,
+      "message": "Would be safer to add minimum and maximum bound check.",
+      "revId": "937ae2a5760057cc13fff5be48e87c9203a213b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a02b53f_5ddf62eb",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-03-11T04:49:43Z",
+      "side": 1,
+      "message": "Please add minimum and maximum bound check.",
+      "range": {
+        "startLine": 1401,
+        "startChar": 1,
+        "endLine": 1407,
+        "endChar": 2
+      },
+      "revId": "937ae2a5760057cc13fff5be48e87c9203a213b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b388c7d_50d76a10",
+        "filename": "tests/dsp/firmware_update.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1513,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-03-11T04:49:43Z",
+      "side": 1,
+      "message": "These test case are good. Can a test be added with 0 length, 1 byte version string and UNIT8_MAX+1 length as well, just to make sure there is no underflow and overflow happening.",
+      "revId": "937ae2a5760057cc13fff5be48e87c9203a213b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
