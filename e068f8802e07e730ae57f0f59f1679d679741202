@@ -34,6 +34,24 @@
       "parentUuid": "92c4a1cd_28d62099",
       "revId": "e068f8802e07e730ae57f0f59f1679d679741202",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75ad0cc2_f5879dfd",
+        "filename": "src/transport/af-mctp.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-11T09:51:13Z",
+      "side": 1,
+      "message": "https://github.com/openbmc/libpldm/blob/80cde632088394b9b3da90cf677b8d2763278c77/src/transport/af-mctp.c#L170\n\nIn the linked code, this is the point where we obtain the network value that is later passed to pldm_transport_af_mctp_get_tid. The value comes directly from the kernel MCTP socket, which always provides a valid MCTP link identifier—however, MCTP link IDs are never allowed to be 0.\nTherefore, a net \u003d 0 value cannot represent a valid MCTP network.\n\nIn scenarios where someone previously used the old API to map a TID:\n\nThe network would typically be 1, since that is the default MCTP link ID.\nA call to find_tid(..., network, ...) would fail because it would not find a mapping associated with network 1.\nA call to find_tid(..., MCTP_NET_ANY, ...) would succeed, assuming the old-API-based mapping still exists, because it searches across all networks.",
+      "parentUuid": "fd8c382b_a603f6b9",
+      "revId": "e068f8802e07e730ae57f0f59f1679d679741202",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
