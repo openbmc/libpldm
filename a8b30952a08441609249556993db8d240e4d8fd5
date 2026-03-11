@@ -16,6 +16,24 @@
       "message": "do you think a bounds check would be nice here `str_len \u003e PLDM_FIRMWARE_MAX_STRING`?",
       "revId": "a8b30952a08441609249556993db8d240e4d8fd5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a91ecd38_ce1d3c6c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-03-11T04:51:57Z",
+      "side": 1,
+      "message": "Both minimum and max bound check would be better. Also PLDM_FIRMWARE_MAX_STRING is `64 bytes` that parameter too needs to be fixed to UINT8_MAX.",
+      "parentUuid": "879f864e_ee5acb9b",
+      "revId": "a8b30952a08441609249556993db8d240e4d8fd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
