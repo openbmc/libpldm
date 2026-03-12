@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a94f5af7_28e1d0d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001076
+      },
+      "writtenOn": "2026-03-12T02:43:19Z",
+      "side": 1,
+      "message": "Changes looks good. Taking the string max length change from 64 to UINT8_MAX can be part of a separate change based on use case. Thanks for updating the test case as well.",
+      "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
