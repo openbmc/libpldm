@@ -16,6 +16,24 @@
       "message": "how do these macros normally get injected?",
       "revId": "ad073272d7e528b2beecb0ec63c0bab0fb0d1785",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "285d717a_4f01e00a",
+        "filename": "include/libpldm++/_abi_annotation.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T00:39:53Z",
+      "side": 1,
+      "message": "In the C library they\u0027re injected into the implementation by the compiler rather than through the public headers:\n\nhttps://github.com/openbmc/libpldm/blob/80cde632088394b9b3da90cf677b8d2763278c77/meson.build#L70\n\nIn light of the C++ support, maybe we should change that.",
+      "parentUuid": "6e00cac5_34ea1447",
+      "revId": "ad073272d7e528b2beecb0ec63c0bab0fb0d1785",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
