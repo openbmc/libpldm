@@ -451,6 +451,7 @@ int pldm_pdr_delete_by_sensor_id(pldm_pdr *repo, uint16_t sensor_id,
 
 	while (record != NULL) {
 		if (!record->data) {
+			record = record->next;
 			continue;
 		}
 

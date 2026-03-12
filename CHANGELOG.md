@@ -94,6 +94,7 @@ Change categories:
 
 ### Fixed
 
+- pdr: Fix infinite loop in `pldm_pdr_delete_by_sensor_id()`
 - dsp: firmware_update: Fix str_type encoding in
   encode_get_firmware_parameters_resp()
 - state-set: Return the misspelled
