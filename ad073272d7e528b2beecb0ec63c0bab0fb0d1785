@@ -34,6 +34,24 @@
       "parentUuid": "6e00cac5_34ea1447",
       "revId": "ad073272d7e528b2beecb0ec63c0bab0fb0d1785",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b4f3400_5b7fc182",
+        "filename": "include/libpldm++/_abi_annotation.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-03-12T17:06:52Z",
+      "side": 1,
+      "message": "ok, i can try to adjust it on the C side as well to put the macros on both the declaration and the definition.\n\nAs a result of that change some things can come out of `config.h.in` and go into a header `_abi_annotation.h` which can then has to included by all libpldm and libpldm++ headers and implementation files.\n\nForgetting to include that header in some other header would then cause a build failure for library users which is a tradeoff, in the existing implementation there is no need to be careful there since the ABI macros are provided by `config.h`.\n\nAlso there would be a problem since a mismatch between header and source is possible.\n\nI explored this possible rework in https://gerrit.openbmc.org/c/openbmc/libpldm/+/88254",
+      "parentUuid": "285d717a_4f01e00a",
+      "revId": "ad073272d7e528b2beecb0ec63c0bab0fb0d1785",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
