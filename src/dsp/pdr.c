@@ -451,6 +451,7 @@ int pldm_pdr_delete_by_sensor_id(pldm_pdr *repo, uint16_t sensor_id,
 
 	while (record != NULL) {
 		if (!record->data) {
+			record = record->next;
 			continue;
 		}
 
@@ -578,6 +579,7 @@ int pldm_pdr_delete_by_effecter_id(pldm_pdr *repo, uint16_t effecter_id,
 
 	while (record != NULL) {
 		if (!record->data) {
+			record = record->next;
 			continue;
 		}
 
@@ -877,7 +879,8 @@ void pldm_entity_association_tree_visit(pldm_entity_association_tree *tree,
 
 	get_num_nodes(tree->root, size);
 	*entities = malloc(*size * sizeof(pldm_entity));
-	if (!entities) {
+	if (!*entities) {
+		*size = 0;
 		return;
 	}
 	size_t index = 0;

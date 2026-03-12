@@ -86,6 +86,9 @@ Change categories:
 
 ### Fixed
 
+- pdr: Fix infinite loops in `pldm_pdr_delete_by_sensor_id()` and
+  `pldm_pdr_delete_by_effecter_id()`, and fix null pointer dereference on
+  malloc failure in `pldm_entity_association_tree_visit()`
 - state-set: Return the misspelled
   PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG enum value to avoid client
   breakage
