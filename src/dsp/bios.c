@@ -4,6 +4,7 @@
 #include <libpldm/base.h>
 #include <libpldm/bcd.h>
 #include <libpldm/bios.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <endian.h>
 #include <string.h>

@@ -6,6 +6,7 @@
 #include <libpldm/pldm.h>
 #include <libpldm/firmware_update.h>
 #include <libpldm/firmware_fd.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <stdint.h>
 #include <stdbool.h>

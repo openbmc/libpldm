@@ -11,6 +11,7 @@
 #include <libpldm/pldm.h>
 #include <libpldm/transport.h>
 #include <libpldm/transport/af-mctp.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <errno.h>
 #include <limits.h>

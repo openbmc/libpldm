@@ -6,6 +6,7 @@
 #include <assert.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <endian.h>
 #include <errno.h>

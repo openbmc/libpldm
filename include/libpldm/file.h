@@ -6,6 +6,7 @@
 extern "C" {
 #endif
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/pldm_types.h>
 
 #include <asm/byteorder.h>
@@ -113,6 +114,7 @@ struct pldm_file_df_heartbeat_resp {
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_pldm_file_df_open_req(uint8_t instance_id,
 				 const struct pldm_file_df_open_req *req,
 				 struct pldm_msg *msg, size_t *payload_length);
@@ -129,6 +131,7 @@ int encode_pldm_file_df_open_req(uint8_t instance_id,
  *          -EBADMSG if the input message buffer is too large for the output
  *          response struct.
  */
+LIBPLDM_ABI_TESTING
 int decode_pldm_file_df_open_req(const struct pldm_msg *msg,
 				 size_t payload_length,
 				 struct pldm_file_df_open_req *req);
@@ -146,6 +149,7 @@ int decode_pldm_file_df_open_req(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_TESTING
 int encode_pldm_file_df_open_resp(uint8_t instance_id,
 				  const struct pldm_file_df_open_resp *resp,
 				  struct pldm_msg *msg, size_t *payload_length);
@@ -162,6 +166,7 @@ int encode_pldm_file_df_open_resp(uint8_t instance_id,
  *          -EBADMSG if the input message buffer is too large for the output
  *          response struct.
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_file_df_open_resp(const struct pldm_msg *msg,
 				  size_t payload_length,
 				  struct pldm_file_df_open_resp *resp);
@@ -180,6 +185,7 @@ int decode_pldm_file_df_open_resp(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_pldm_file_df_close_req(uint8_t instance_id,
 				  const struct pldm_file_df_close_req *req,
 				  struct pldm_msg *msg, size_t *payload_length);
@@ -196,6 +202,7 @@ int encode_pldm_file_df_close_req(uint8_t instance_id,
  *          -EBADMSG if the input message buffer is too large for the output
  *          response struct.
  */
+LIBPLDM_ABI_TESTING
 int decode_pldm_file_df_close_req(const struct pldm_msg *msg,
 				  size_t payload_length,
 				  struct pldm_file_df_close_req *req);
@@ -213,6 +220,7 @@ int decode_pldm_file_df_close_req(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_TESTING
 int encode_pldm_file_df_close_resp(uint8_t instance_id,
 				   const struct pldm_file_df_close_resp *resp,
 				   struct pldm_msg *msg,
@@ -226,6 +234,7 @@ int encode_pldm_file_df_close_resp(uint8_t instance_id,
  *  @return 0 on success
  *          -EINVAL if the input parameters' memory are not allocated
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_file_df_close_resp(const struct pldm_msg *msg,
 				   size_t payload_length,
 				   struct pldm_file_df_close_resp *resp);
@@ -244,6 +253,7 @@ int decode_pldm_file_df_close_resp(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_pldm_file_df_heartbeat_req(
 	uint8_t instance_id, const struct pldm_file_df_heartbeat_req *req,
 	struct pldm_msg *msg, size_t *payload_length);
@@ -260,6 +270,7 @@ int encode_pldm_file_df_heartbeat_req(
  *          -EBADMSG if the input message buffer is too large for the output
  *          response struct
 */
+LIBPLDM_ABI_STABLE
 int decode_pldm_file_df_heartbeat_resp(const struct pldm_msg *msg,
 				       size_t payload_length,
 				       struct pldm_file_df_heartbeat_resp *resp);

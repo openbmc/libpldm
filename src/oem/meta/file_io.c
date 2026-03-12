@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include <libpldm/oem/meta/file_io.h>
+#include <libpldm/_abi_annotation.h>
 #include <endian.h>
 #include <stdlib.h>
 #include <string.h>

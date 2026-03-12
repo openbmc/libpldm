@@ -2,6 +2,7 @@
 #ifndef LIBPLDM_BCD_H
 #define LIBPLDM_BCD_H
 
+#include <libpldm/_abi_annotation.h>
 #include <stdint.h>
 
 #ifdef __cplusplus
@@ -12,36 +13,42 @@ extern "C" {
  *  @param[in] bcd - bcd number
  *  @return the decimal number
  */
+LIBPLDM_ABI_STABLE
 uint8_t pldm_bcd_bcd2dec8(uint8_t bcd);
 
 /** @brief Convert decimal number(uint8_t) to bcd
  *  @param[in] dec - decimal number
  *  @return the bcd number
  */
+LIBPLDM_ABI_STABLE
 uint8_t pldm_bcd_dec2bcd8(uint8_t dec);
 
 /** @brief Convert bcd number(uint16_t) to decimal
  *  @param[in] bcd - bcd number
  *  @return the decimal number
  */
+LIBPLDM_ABI_STABLE
 uint16_t pldm_bcd_bcd2dec16(uint16_t bcd);
 
 /** @brief Convert decimal number(uint16_t) to bcd
  *  @param[in] dec - decimal number
  *  @return the bcd number
  */
+LIBPLDM_ABI_STABLE
 uint16_t pldm_bcd_dec2bcd16(uint16_t dec);
 
 /** @brief Convert bcd number(uint32_t) to decimal
  *  @param[in] bcd - bcd number
  *  @return the decimal number
  */
+LIBPLDM_ABI_STABLE
 uint32_t pldm_bcd_bcd2dec32(uint32_t bcd);
 
 /** @brief Convert decimal number(uint32_t) to bcd
  *  @param[in] dec - decimal number
  *  @return the bcd number
  */
+LIBPLDM_ABI_STABLE
 uint32_t pldm_bcd_dec2bcd32(uint32_t dec);
 
 #ifdef __cplusplus

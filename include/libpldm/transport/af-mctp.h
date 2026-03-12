@@ -2,6 +2,7 @@
 #ifndef LIBPLDM_AF_MCTP_H
 #define LIBPLDM_AF_MCTP_H
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm.h>
 
@@ -13,34 +14,42 @@ struct pldm_transport_af_mctp;
 struct sockaddr_mctp;
 
 /* Init the transport backend */
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_init(struct pldm_transport_af_mctp **ctx);
 
 /* Destroy the transport backend */
+LIBPLDM_ABI_STABLE
 void pldm_transport_af_mctp_destroy(struct pldm_transport_af_mctp *ctx);
 
 /* Get the core pldm transport struct */
+LIBPLDM_ABI_STABLE
 struct pldm_transport *
 pldm_transport_af_mctp_core(struct pldm_transport_af_mctp *ctx);
 
 struct pollfd;
 /* Init pollfd for async calls */
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_init_pollfd(struct pldm_transport *t,
 				       struct pollfd *pollfd);
 
 /* Inserts a TID-to-EID mapping into the transport's device map */
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_map_tid(struct pldm_transport_af_mctp *ctx,
 				   pldm_tid_t tid, mctp_eid_t eid);
 
 /* Removes a TID-to-EID mapping from the transport's device map */
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_unmap_tid(struct pldm_transport_af_mctp *ctx,
 				     pldm_tid_t tid, mctp_eid_t eid);
 
 /* Maps TID-to-<Network, EID> (fully qualified endpoint) */
+LIBPLDM_ABI_TESTING
 int pldm_transport_af_mctp_map_tid_fqe(struct pldm_transport_af_mctp *ctx,
 				       pldm_tid_t tid, uint32_t network,
 				       mctp_eid_t eid);
 
 /* Removes a TID-to-<Network, EID> (fully qualified endpoint) mapping */
+LIBPLDM_ABI_TESTING
 int pldm_transport_af_mctp_unmap_tid_fqe(struct pldm_transport_af_mctp *ctx,
 					 pldm_tid_t tid);
 
@@ -58,6 +67,7 @@ int pldm_transport_af_mctp_unmap_tid_fqe(struct pldm_transport_af_mctp *ctx,
  * @return PLDM_REQUESTER_SUCCESS on success, or a negative error code on
  * failure.
  */
+LIBPLDM_ABI_STABLE
 int pldm_transport_af_mctp_bind(struct pldm_transport_af_mctp *transport,
 				const struct sockaddr_mctp *smctp, size_t len);
 

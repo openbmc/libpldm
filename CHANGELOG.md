@@ -54,6 +54,8 @@ Change categories:
 
 - Rework ABI control macros to also enable API control
 - transport: Eliminate poll guards from headers
+- Rework ABI control macros to be applied consistently in both declarations and
+  definitions
 
 ### Deprecated
 

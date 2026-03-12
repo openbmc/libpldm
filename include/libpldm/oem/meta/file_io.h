@@ -2,6 +2,7 @@
 #ifndef LIBPLDM_OEM_META_FILE_IO_H
 #define LIBPLDM_OEM_META_FILE_IO_H
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/compiler.h>
 
 #ifdef __cplusplus
@@ -99,6 +100,7 @@ struct pldm_oem_meta_file_io_read_resp {
  *
  * @return The write request data pointer.
  */
+LIBPLDM_ABI_STABLE
 void *pldm_oem_meta_file_io_write_req_data(
 	struct pldm_oem_meta_file_io_write_req *req);
 
@@ -110,6 +112,7 @@ void *pldm_oem_meta_file_io_write_req_data(
  *  @param[in] req_length - Length of request structure
  *  @return 0 on success, negative errno value on failure
  */
+LIBPLDM_ABI_STABLE
 int decode_oem_meta_file_io_write_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_oem_meta_file_io_write_req *req, size_t req_length);
@@ -123,6 +126,7 @@ int decode_oem_meta_file_io_write_req(
  *  @param[out] data - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
 				size_t payload_length, uint8_t *file_handle,
 				uint32_t *length, uint8_t *data);
@@ -134,6 +138,7 @@ int decode_oem_meta_file_io_req(const struct pldm_msg *msg,
  *  @param[out] req - Pointer to the structure to store the decoded response data
  *  @return 0 on success, negative errno value on failure
  */
+LIBPLDM_ABI_STABLE
 int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
 				     size_t payload_length,
 				     struct pldm_oem_meta_file_io_read_req *req);
@@ -144,6 +149,7 @@ int decode_oem_meta_file_io_read_req(const struct pldm_msg *msg,
  *
  * @return The read response data pointer.
  */
+LIBPLDM_ABI_STABLE
 void *pldm_oem_meta_file_io_read_resp_data(
 	struct pldm_oem_meta_file_io_read_resp *resp);
 
@@ -157,6 +163,7 @@ void *pldm_oem_meta_file_io_read_resp_data(
  * @param[in] payload_length - Length of response payload
  * @return 0 on success, negative errno value on failure
  */
+LIBPLDM_ABI_STABLE
 int encode_oem_meta_file_io_read_resp(
 	uint8_t instance_id, struct pldm_oem_meta_file_io_read_resp *resp,
 	size_t resp_len, struct pldm_msg *responseMsg, size_t payload_length);

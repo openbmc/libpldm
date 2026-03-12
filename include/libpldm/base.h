@@ -2,6 +2,7 @@
 #ifndef BASE_H
 #define BASE_H
 
+#include <libpldm/_abi_annotation.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -272,6 +273,7 @@ struct pldm_msg {
  * @return true if the header pointed to by resp represents a message that is a
  *	   response to the header pointed to by req, otherwise false.
  */
+LIBPLDM_ABI_STABLE
 bool pldm_msg_hdr_correlate_response(const struct pldm_msg_hdr *req,
 				     const struct pldm_msg_hdr *resp);
 
@@ -285,6 +287,7 @@ bool pldm_msg_hdr_correlate_response(const struct pldm_msg_hdr *req,
  * (NULL values for required pointers or the buffer size is beyond a
  *  representable range).
  */
+LIBPLDM_ABI_STABLE
 ssize_t pldm_base_ver2str(const ver32_t *version, char *buffer,
 			  size_t buffer_size);
 
@@ -434,6 +437,7 @@ struct pldm_base_negotiate_transfer_params_resp {
  * @note   Caller is responsible for alloc and dealloc of msg
  *         and hdr params
  */
+LIBPLDM_ABI_STABLE
 uint8_t pack_pldm_header(const struct pldm_header_info *hdr,
 			 struct pldm_msg_hdr *msg);
 
@@ -447,6 +451,7 @@ uint8_t pack_pldm_header(const struct pldm_header_info *hdr,
  * @note   Caller is responsible for alloc and dealloc of msg
  *         and hdr params
  */
+LIBPLDM_ABI_STABLE
 uint8_t unpack_pldm_header(const struct pldm_msg_hdr *msg,
 			   struct pldm_header_info *hdr);
 
@@ -462,6 +467,7 @@ uint8_t unpack_pldm_header(const struct pldm_msg_hdr *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_types_req(uint8_t instance_id, struct pldm_msg *msg);
 
 /** @brief Decode a GetPLDMTypes response message
@@ -479,6 +485,7 @@ int encode_get_types_req(uint8_t instance_id, struct pldm_msg *msg);
  *              types (MAX_TYPES/8) = 8), as per DSP0240
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_types_resp(const struct pldm_msg *msg, size_t payload_length,
 			  uint8_t *completion_code, bitfield8_t *types);
 
@@ -494,6 +501,7 @@ int decode_get_types_resp(const struct pldm_msg *msg, size_t payload_length,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_commands_req(uint8_t instance_id, uint8_t type, ver32_t version,
 			    struct pldm_msg *msg);
 
@@ -512,6 +520,7 @@ int encode_get_commands_req(uint8_t instance_id, uint8_t type, ver32_t version,
  *             commands (PLDM_MAX_CMDS_PER_TYPE/8) = 32), as per DSP0240
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_commands_resp(const struct pldm_msg *msg, size_t payload_length,
 			     uint8_t *completion_code, bitfield8_t *commands);
 
@@ -531,6 +540,7 @@ int decode_get_commands_resp(const struct pldm_msg *msg, size_t payload_length,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_version_req(uint8_t instance_id, uint32_t transfer_handle,
 			   uint8_t transfer_opflag, uint8_t type,
 			   struct pldm_msg *msg);
@@ -550,6 +560,7 @@ int encode_get_version_req(uint8_t instance_id, uint32_t transfer_handle,
  *  @param[out] transfer_flag - flag to indicate the part of data
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_version_resp(const struct pldm_msg *msg, size_t payload_length,
 			    uint8_t *completion_code,
 			    uint32_t *next_transfer_handle,
@@ -571,6 +582,7 @@ int decode_get_version_resp(const struct pldm_msg *msg, size_t payload_length,
  *  @param[out] tid - Pointer to the terminus id
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_tid_resp(const struct pldm_msg *msg, size_t payload_length,
 			uint8_t *completion_code, uint8_t *tid);
 
@@ -589,6 +601,7 @@ int decode_get_tid_resp(const struct pldm_msg *msg, size_t payload_length,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_types_resp(uint8_t instance_id, uint8_t completion_code,
 			  const bitfield8_t *types, struct pldm_msg *msg);
 
@@ -602,6 +615,7 @@ int encode_get_types_resp(uint8_t instance_id, uint8_t completion_code,
  *  @param[out] version - Version for PLDM Type
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_commands_req(const struct pldm_msg *msg, size_t payload_length,
 			    uint8_t *type, ver32_t *version);
 
@@ -616,6 +630,7 @@ int decode_get_commands_req(const struct pldm_msg *msg, size_t payload_length,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_commands_resp(uint8_t instance_id, uint8_t completion_code,
 			     const bitfield8_t *commands, struct pldm_msg *msg);
 
@@ -635,6 +650,7 @@ int encode_get_commands_resp(uint8_t instance_id, uint8_t completion_code,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int encode_get_version_resp(uint8_t instance_id, uint8_t completion_code,
 			    uint32_t next_transfer_handle,
 			    uint8_t transfer_flag, const ver32_t *version_data,
@@ -649,6 +665,7 @@ int encode_get_version_resp(uint8_t instance_id, uint8_t completion_code,
  *  @param[out] type - PLDM type for which version is requested
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_version_req(const struct pldm_msg *msg, size_t payload_length,
 			   uint32_t *transfer_handle, uint8_t *transfer_opflag,
 			   uint8_t *type);
@@ -665,6 +682,7 @@ int decode_get_version_req(const struct pldm_msg *msg, size_t payload_length,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_tid_req(uint8_t instance_id, struct pldm_msg *msg);
 
 /** @brief Create a PLDM response message for GetTID
@@ -677,6 +695,7 @@ int encode_get_tid_req(uint8_t instance_id, struct pldm_msg *msg);
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_tid_resp(uint8_t instance_id, uint8_t completion_code,
 			uint8_t tid, struct pldm_msg *msg);
 
@@ -689,6 +708,7 @@ int encode_get_tid_resp(uint8_t instance_id, uint8_t completion_code,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_set_tid_req(uint8_t instance_id, uint8_t tid, struct pldm_msg *msg);
 
 /** @brief Decode a SetTID request message
@@ -701,6 +721,7 @@ int encode_set_tid_req(uint8_t instance_id, uint8_t tid, struct pldm_msg *msg);
  *         or tid is invalid
  *         -EOVERFLOW if the input message length is invalid
  */
+LIBPLDM_ABI_TESTING
 int decode_set_tid_req(const struct pldm_msg *msg, size_t payload_length,
 		       uint8_t *tid);
 
@@ -720,6 +741,7 @@ int decode_set_tid_req(const struct pldm_msg *msg, size_t payload_length,
  *  @param[out] section_length - The length of the requested section
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_multipart_receive_req(const struct pldm_msg *msg,
 				 size_t payload_length, uint8_t *pldm_type,
 				 uint8_t *transfer_opflag,
@@ -740,6 +762,7 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
  *          -ENOMSG if the PLDM type in the request header is invalid
  *          -EOVERFLOW if the input message length is invalid
  */
+LIBPLDM_ABI_STABLE
 int encode_pldm_base_multipart_receive_req(
 	uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,
 	struct pldm_msg *msg, size_t *payload_length);
@@ -761,6 +784,7 @@ int encode_pldm_base_multipart_receive_req(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_base_multipart_receive_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_base_multipart_receive_resp *resp,
@@ -780,6 +804,7 @@ int decode_pldm_base_multipart_receive_resp(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_TESTING
 int encode_base_multipart_receive_resp(
 	uint8_t instance_id,
 	const struct pldm_base_multipart_receive_resp *resp, uint32_t checksum,
@@ -794,6 +819,7 @@ int encode_base_multipart_receive_resp(
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_cc_only_resp(uint8_t instance_id, uint8_t type, uint8_t command,
 			uint8_t cc, struct pldm_msg *msg);
 
@@ -807,6 +833,7 @@ int encode_cc_only_resp(uint8_t instance_id, uint8_t type, uint8_t command,
  *
  *	@return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
 			    uint8_t pldm_type, uint8_t command,
 			    struct pldm_msg *msg);
@@ -823,6 +850,7 @@ int encode_pldm_header_only(uint8_t msg_type, uint8_t instance_id,
  *          -ENOMSG if the PLDM type in the request header is invalid
  *          -EOVERFLOW if the input message length is invalid
  */
+LIBPLDM_ABI_STABLE
 int encode_pldm_base_negotiate_transfer_params_req(
 	uint8_t instance_id,
 	const struct pldm_base_negotiate_transfer_params_req *req,
@@ -840,6 +868,7 @@ int encode_pldm_base_negotiate_transfer_params_req(
  *          -ENOMSG if the PLDM type in the request header is invalid
  *          -EOVERFLOW if the input message length is invalid
  */
+LIBPLDM_ABI_TESTING
 int encode_pldm_base_negotiate_transfer_params_resp(
 	uint8_t instance_id,
 	const struct pldm_base_negotiate_transfer_params_resp *resp,
@@ -859,6 +888,7 @@ int encode_pldm_base_negotiate_transfer_params_resp(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_TESTING
 int decode_pldm_base_negotiate_transfer_params_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_base_negotiate_transfer_params_req *req);
@@ -878,6 +908,7 @@ int decode_pldm_base_negotiate_transfer_params_req(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_base_negotiate_transfer_params_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_base_negotiate_transfer_params_resp *resp);

@@ -6,6 +6,8 @@
 extern "C" {
 #endif
 
+#include <libpldm/_abi_annotation.h>
+
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -33,12 +35,14 @@ typedef struct pldm_pdr_record pldm_pdr_record;
  *  for PDRs received by other entities) and can associate the returned handle
  *  to a PLDM terminus id.
  */
+LIBPLDM_ABI_STABLE
 pldm_pdr *pldm_pdr_init(void);
 
 /** @brief Destroy a PDR repository (and free up associated resources)
  *
  *  @param[in/out] repo - pointer to opaque pointer acting as a PDR repo handle
  */
+LIBPLDM_ABI_STABLE
 void pldm_pdr_destroy(pldm_pdr *repo);
 
 /** @brief Get number of records in a PDR repository
@@ -49,6 +53,7 @@ void pldm_pdr_destroy(pldm_pdr *repo);
  *
  *  @return uint32_t - number of records
  */
+LIBPLDM_ABI_STABLE
 uint32_t pldm_pdr_get_record_count(const pldm_pdr *repo);
 
 /** @brief Get size of a PDR repository, in bytes
@@ -59,6 +64,7 @@ uint32_t pldm_pdr_get_record_count(const pldm_pdr *repo);
  *
  *  @return uint32_t - size in bytes
  */
+LIBPLDM_ABI_STABLE
 uint32_t pldm_pdr_get_repo_size(const pldm_pdr *repo);
 
 /** @brief Add a PDR record to a PDR repository, or return an error
@@ -76,6 +82,7 @@ uint32_t pldm_pdr_get_repo_size(const pldm_pdr *repo);
  *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
  *  allocation fails, or -EOVERFLOW if a record handle could not be allocated
  */
+LIBPLDM_ABI_STABLE
 int pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		 bool is_remote, uint16_t terminus_handle,
 		 uint32_t *record_handle);
@@ -91,6 +98,7 @@ int pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
  *  @return uint32_t - record handle assigned to PDR record; 0 if record is not
  *  found
  */
+LIBPLDM_ABI_STABLE
 uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo,
 				    const pldm_pdr_record *record);
 
@@ -104,6 +112,7 @@ uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo,
  *
  *  @return uint16_t - terminus handle assigned to PDR record
  */
+LIBPLDM_ABI_TESTING
 uint16_t pldm_pdr_get_terminus_handle(const pldm_pdr *repo,
 				      const pldm_pdr_record *record);
 
@@ -120,6 +129,7 @@ uint16_t pldm_pdr_get_terminus_handle(const pldm_pdr *repo,
  *  @return opaque pointer acting as PDR record handle, will be NULL if record
  *  was not found
  */
+LIBPLDM_ABI_STABLE
 const pldm_pdr_record *pldm_pdr_find_record(const pldm_pdr *repo,
 					    uint32_t record_handle,
 					    uint8_t **data, uint32_t *size,
@@ -138,6 +148,7 @@ const pldm_pdr_record *pldm_pdr_find_record(const pldm_pdr *repo,
  *  @return opaque pointer acting as PDR record handle, will be NULL if record
  *  was not found
  */
+LIBPLDM_ABI_STABLE
 const pldm_pdr_record *
 pldm_pdr_get_next_record(const pldm_pdr *repo,
 			 const pldm_pdr_record *curr_record, uint8_t **data,
@@ -156,6 +167,7 @@ pldm_pdr_get_next_record(const pldm_pdr *repo,
  *  @return opaque pointer acting as PDR record handle, will be NULL if record
  *  was not found
  */
+LIBPLDM_ABI_STABLE
 const pldm_pdr_record *
 pldm_pdr_find_record_by_type(const pldm_pdr *repo, uint8_t pdr_type,
 			     const pldm_pdr_record *curr_record, uint8_t **data,
@@ -167,6 +179,7 @@ pldm_pdr_find_record_by_type(const pldm_pdr *repo, uint8_t pdr_type,
  *
  *  @return true if the record is a remote record, false otherwise.
  */
+LIBPLDM_ABI_STABLE
 bool pldm_pdr_record_is_remote(const pldm_pdr_record *record);
 
 /** @brief Remove all PDR records that belong to a remote terminus
@@ -175,6 +188,7 @@ bool pldm_pdr_record_is_remote(const pldm_pdr_record *record);
  *
  *  If repo is NULL then there are no PDRs that can be removed.
  */
+LIBPLDM_ABI_STABLE
 void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo);
 
 /** @brief Remove all remote PDR's that belong to a specific terminus
@@ -184,6 +198,7 @@ void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo);
  *
  *  If repo is NULL there are no PDRs that can be removed.
  */
+LIBPLDM_ABI_STABLE
 void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
 					     uint16_t terminus_handle);
 
@@ -196,6 +211,7 @@ void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
  * @param[in] tl_eid - MCTP endpoint EID
  * @param[in] valid - validity bit of TLPDR
  */
+LIBPLDM_ABI_STABLE
 /* NOLINTNEXTLINE(readability-identifier-naming) */
 void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminus_handle,
 			    uint8_t tid, uint8_t tl_eid, bool valid);
@@ -210,6 +226,7 @@ void pldm_pdr_update_TL_pdr(const pldm_pdr *repo, uint16_t terminus_handle,
  *  @return pointer to the PDR record,will be NULL if record was not
  *  found
  */
+LIBPLDM_ABI_STABLE
 pldm_pdr_record *pldm_pdr_find_last_in_range(const pldm_pdr *repo,
 					     uint32_t first, uint32_t last);
 
@@ -229,6 +246,7 @@ pldm_pdr_record *pldm_pdr_find_last_in_range(const pldm_pdr *repo,
  * @return container id of the PDR record found on success,-EINVAL when repo is NULL
  * or -ENOENT if the container id is not found.
  */
+LIBPLDM_ABI_TESTING
 int pldm_pdr_find_child_container_id_index_range_exclude(
 	const pldm_pdr *repo, uint16_t entity_type, uint16_t entity_instance,
 	uint8_t child_index, uint32_t range_exclude_start_handle,
@@ -243,6 +261,7 @@ int pldm_pdr_find_child_container_id_index_range_exclude(
  *  @return 0 if deleted successful else returns -EINVAL when repo is NULL
  *  or -ENOENT if the record handle is not found in the repo.
  */
+LIBPLDM_ABI_STABLE
 int pldm_pdr_delete_by_record_handle(pldm_pdr *repo, uint32_t record_handle,
 				     bool is_remote);
 
@@ -255,6 +274,7 @@ int pldm_pdr_delete_by_record_handle(pldm_pdr *repo, uint32_t record_handle,
  *
  *  @return record handle of the effecter PDR deleted from the repo
  */
+LIBPLDM_ABI_STABLE
 int pldm_pdr_delete_by_effecter_id(pldm_pdr *repo, uint16_t effecter_id,
 				   bool is_remote, uint32_t *record_handle);
 
@@ -279,6 +299,7 @@ int pldm_pdr_delete_by_effecter_id(pldm_pdr *repo, uint16_t effecter_id,
  *  @return 0 on success, -EINVAL if the arguments are invalid, or -ENOMEM if an internal allocation
  *  	    fails.
  */
+LIBPLDM_ABI_STABLE
 int pldm_pdr_add_fru_record_set(pldm_pdr *repo, uint16_t terminus_handle,
 				uint16_t fru_rsi, uint16_t entity_type,
 				uint16_t entity_instance_num,
@@ -300,6 +321,7 @@ int pldm_pdr_add_fru_record_set(pldm_pdr *repo, uint16_t terminus_handle,
  *
  *  @return An opaque pointer to the PDR record on success, or NULL on failure
  */
+LIBPLDM_ABI_STABLE
 const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
 	const pldm_pdr *repo, uint16_t fru_rsi, uint16_t *terminus_handle,
 	uint16_t *entity_type, uint16_t *entity_instance_num,
@@ -317,6 +339,7 @@ const pldm_pdr_record *pldm_pdr_fru_record_set_find_by_rsi(
  *  stored in record_handle if record_handle is non-NULL, or -EINVAL when
  *  repo is NULL, or -ENOENT if the  sensor id is not found in the repo.
  */
+LIBPLDM_ABI_STABLE
 int pldm_pdr_delete_by_sensor_id(pldm_pdr *repo, uint16_t sensor_id,
 				 bool is_remote, uint32_t *record_handle);
 
@@ -350,6 +373,7 @@ typedef struct pldm_entity_node pldm_entity_node;
  *  @return opaque pointer that acts as a handle to the tree; NULL if no
  *  tree could be created
  */
+LIBPLDM_ABI_STABLE
 pldm_entity_association_tree *pldm_entity_association_tree_init(void);
 
 /** @brief Add a local entity into the entity association tree
@@ -367,6 +391,7 @@ pldm_entity_association_tree *pldm_entity_association_tree_init(void);
  *
  *  @return pldm_entity_node* - opaque pointer to added entity
  */
+LIBPLDM_ABI_STABLE
 pldm_entity_node *pldm_entity_association_tree_add(
 	pldm_entity_association_tree *tree, pldm_entity *entity,
 	uint16_t entity_instance_number, pldm_entity_node *parent,
@@ -395,6 +420,7 @@ pldm_entity_node *pldm_entity_association_tree_add(
  *
  *  @return pldm_entity_node* - opaque pointer to added entity
  */
+LIBPLDM_ABI_STABLE
 pldm_entity_node *pldm_entity_association_tree_add_entity(
 	pldm_entity_association_tree *tree, pldm_entity *entity,
 	uint16_t entity_instance_number, pldm_entity_node *parent,
@@ -413,6 +439,7 @@ pldm_entity_node *pldm_entity_association_tree_add_entity(
  *                         the caller
  *  @param[out] size - number of pldm_entity's
  */
+LIBPLDM_ABI_STABLE
 void pldm_entity_association_tree_visit(pldm_entity_association_tree *tree,
 					pldm_entity **entities, size_t *size);
 
@@ -424,6 +451,7 @@ void pldm_entity_association_tree_visit(pldm_entity_association_tree *tree,
  *
  *  @return pldm_entity - pldm entity
  */
+LIBPLDM_ABI_STABLE
 pldm_entity pldm_entity_extract(pldm_entity_node *node);
 
 /** @brief Extract remote container id from the pldm_entity_node
@@ -434,6 +462,7 @@ pldm_entity pldm_entity_extract(pldm_entity_node *node);
  *
  *  @return The remote container id
  */
+LIBPLDM_ABI_STABLE
 uint16_t
 pldm_entity_node_get_remote_container_id(const pldm_entity_node *entity);
 
@@ -441,6 +470,7 @@ pldm_entity_node_get_remote_container_id(const pldm_entity_node *entity);
  *
  *  @param[in] tree - opaque pointer acting as a handle to the tree
  */
+LIBPLDM_ABI_STABLE
 void pldm_entity_association_tree_destroy(pldm_entity_association_tree *tree);
 
 /** @brief Check if input entity node is a parent
@@ -451,6 +481,7 @@ void pldm_entity_association_tree_destroy(pldm_entity_association_tree *tree);
  *
  *  @return bool true if node is a parent, false otherwise
  */
+LIBPLDM_ABI_STABLE
 bool pldm_entity_is_node_parent(pldm_entity_node *node);
 
 /** @brief Get parent of entity
@@ -461,6 +492,7 @@ bool pldm_entity_is_node_parent(pldm_entity_node *node);
  *
  *  @return pldm_entity - pldm entity
  */
+LIBPLDM_ABI_STABLE
 pldm_entity pldm_entity_get_parent(pldm_entity_node *node);
 
 /** @brief Check the current pldm entity is exist parent
@@ -471,6 +503,7 @@ pldm_entity pldm_entity_get_parent(pldm_entity_node *node);
  *
  *  @return bool true if exist parent, false otherwise
  */
+LIBPLDM_ABI_STABLE
 bool pldm_entity_is_exist_parent(pldm_entity_node *node);
 
 /** @brief Convert entity association tree to PDR, or return an error
@@ -487,6 +520,7 @@ bool pldm_entity_is_exist_parent(pldm_entity_node *node);
  *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
  *  allocation fails, or -EOVERFLOW if a record handle could not be allocated
  */
+LIBPLDM_ABI_STABLE
 int pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
 				    pldm_pdr *repo, bool is_remote,
 				    uint16_t terminus_handle);
@@ -505,6 +539,7 @@ int pldm_entity_association_pdr_add(pldm_entity_association_tree *tree,
  *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
  *  allocation fails, or -EOVERFLOW if a record handle could not be allocated
  */
+LIBPLDM_ABI_TESTING
 int pldm_entity_association_pdr_add_contained_entity_to_remote_pdr(
 	pldm_pdr *repo, pldm_entity *entity, uint32_t pdr_record_handle);
 
@@ -521,6 +556,7 @@ int pldm_entity_association_pdr_add_contained_entity_to_remote_pdr(
  *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
  *  allocation fails, or -EOVERFLOW if a record handle could not be allocated
  */
+LIBPLDM_ABI_TESTING
 int pldm_entity_association_pdr_create_new(pldm_pdr *repo,
 					   uint32_t pdr_record_handle,
 					   pldm_entity *parent,
@@ -536,6 +572,7 @@ int pldm_entity_association_pdr_create_new(pldm_pdr *repo,
  *
  *  @return 0 on success, -EINVAL if the provided arguments are invalid.
  */
+LIBPLDM_ABI_STABLE
 int pldm_entity_association_pdr_add_from_node(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
 	size_t num_entities, bool is_remote, uint16_t terminus_handle);
@@ -553,6 +590,7 @@ int pldm_entity_association_pdr_add_from_node(
  *
  *  @return 0 on success, -EINVAL if the provided arguments are invalid.
  */
+LIBPLDM_ABI_STABLE
 int pldm_entity_association_pdr_add_from_node_with_record_handle(
 	pldm_entity_node *node, pldm_pdr *repo, pldm_entity **entities,
 	size_t num_entities, bool is_remote, uint16_t terminus_handle,
@@ -564,6 +602,7 @@ int pldm_entity_association_pdr_add_from_node_with_record_handle(
  *  @param[in] entity - PLDM entity
  *  @param[in] node - node to the entity
  */
+LIBPLDM_ABI_STABLE
 void pldm_find_entity_ref_in_tree(pldm_entity_association_tree *tree,
 				  pldm_entity entity, pldm_entity_node **node);
 
@@ -576,6 +615,7 @@ void pldm_find_entity_ref_in_tree(pldm_entity_association_tree *tree,
  *  	    association_type is not one of PLDM_ENTITY_ASSOCIAION_PHYSICAL or
  *  	    PLDM_ENTITY_ASSOCIAION_LOGICAL.
  */
+LIBPLDM_ABI_STABLE
 uint8_t pldm_entity_get_num_children(pldm_entity_node *node,
 				     uint8_t association_type);
 
@@ -590,6 +630,7 @@ uint8_t pldm_entity_get_num_children(pldm_entity_node *node,
  *  @return True if the node is a child of parent, false otherwise, including if one or both of
  *  parent or node are NULL.
  */
+LIBPLDM_ABI_STABLE
 bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node);
 
 /** @brief Find an entity in the entity association tree
@@ -602,6 +643,7 @@ bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node);
  *  There are no entity nodes to search if tree is NULL, nor are there entity nodes to find if the
  *  search criteria are unspecified when entity is NULL.
  */
+LIBPLDM_ABI_STABLE
 pldm_entity_node *
 pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
 				  pldm_entity *entity);
@@ -617,6 +659,7 @@ pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
  *
  *  @return pldm_entity_node* pointer to entity if found, NULL otherwise
  */
+LIBPLDM_ABI_STABLE
 pldm_entity_node *pldm_entity_association_tree_find_with_locality(
 	pldm_entity_association_tree *tree, pldm_entity *entity,
 	bool is_remote);
@@ -629,6 +672,7 @@ pldm_entity_node *pldm_entity_association_tree_find_with_locality(
  *  @param[in] org_tree - pointer to source tree
  *  @param[in/out] new_tree - pointer to destination tree
  */
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 void pldm_entity_association_tree_copy_root(
 	pldm_entity_association_tree *org_tree,
 	pldm_entity_association_tree *new_tree);
@@ -642,6 +686,7 @@ void pldm_entity_association_tree_copy_root(
  *          values are invalid, or -ENOMEM if memory required for the copy
  *          cannot be allocated.
  */
+LIBPLDM_ABI_TESTING
 int pldm_entity_association_tree_copy_root_check(
 	pldm_entity_association_tree *org_tree,
 	pldm_entity_association_tree *new_tree);
@@ -652,6 +697,7 @@ int pldm_entity_association_tree_copy_root_check(
  *
  *  There is no tree to destroy if tree is NULL.
  */
+LIBPLDM_ABI_STABLE
 void pldm_entity_association_tree_destroy_root(
 	pldm_entity_association_tree *tree);
 
@@ -662,6 +708,7 @@ void pldm_entity_association_tree_destroy_root(
  *  @param[in] tree - pointer to entity association tree
  *  @return bool, true if tree is empty
  */
+LIBPLDM_ABI_STABLE
 bool pldm_is_empty_entity_assoc_tree(pldm_entity_association_tree *tree);
 
 /** @brief Extract entities from entity association PDR
@@ -674,6 +721,7 @@ bool pldm_is_empty_entity_assoc_tree(pldm_entity_association_tree *tree);
  *  @param[out] entities - extracted entities, container is *entities[0]. Caller
  *              must free *entities
  */
+LIBPLDM_ABI_STABLE
 void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 					 size_t *num_entities,
 					 pldm_entity **entities);
@@ -692,6 +740,7 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
  *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
  *  allocation fails, or -EOVERFLOW if given data is too large for memory allocated
  */
+LIBPLDM_ABI_STABLE
 int pldm_entity_association_pdr_remove_contained_entity(
 	pldm_pdr *repo, pldm_entity *entity, bool is_remote,
 	uint32_t *pdr_record_handle);
@@ -705,6 +754,7 @@ int pldm_entity_association_pdr_remove_contained_entity(
  *  the entity passed is invalid or NULL, or -ENOENT if the @param entity is
  *  not found in @param tree.
  */
+LIBPLDM_ABI_STABLE
 int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
 					     const pldm_entity *entity);
 
@@ -717,6 +767,7 @@ int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
  *  @return 0 on success, -EINVAL if the arguments are invalid or -EOVERFLOW if value is too
  *  large for defined type
  */
+LIBPLDM_ABI_STABLE
 int pldm_pdr_remove_fru_record_set_by_rsi(pldm_pdr *repo, uint16_t fru_rsi,
 					  bool is_remote,
 					  uint32_t *record_handle);

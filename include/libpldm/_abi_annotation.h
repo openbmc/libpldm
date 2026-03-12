@@ -1,0 +1,43 @@
+#pragma once
+
+#if defined __has_attribute
+
+#if __has_attribute(visibility)
+#define LIBPLDM_CC_VISIBILITY_DEFAULT __attribute__((visibility("default")))
+#endif
+
+#if __has_attribute(tainted_args)
+#define LIBPLDM_CC_TAINTED_ARGS __attribute__((tainted_args))
+#endif
+
+#endif
+
+#ifndef LIBPLDM_CC_VISIBILITY_DEFAULT
+#define LIBPLDM_CC_VISIBILITY_DEFAULT
+#endif
+
+#ifndef LIBPLDM_CC_TAINTED_ARGS
+#define LIBPLDM_CC_TAINTED_ARGS
+#endif
+
+#define LIBPLDM_ENTRYPOINT LIBPLDM_CC_VISIBILITY_DEFAULT LIBPLDM_CC_TAINTED_ARGS
+
+#if HAVE_LIBPLDM_ABI_DEPRECATED
+#define LIBPLDM_ABI_DEPRECATED	      LIBPLDM_ENTRYPOINT
+#define LIBPLDM_ABI_DEPRECATED_UNSAFE LIBPLDM_CC_VISIBILITY_DEFAULT
+#else
+#define LIBPLDM_ABI_DEPRECATED
+#define LIBPLDM_ABI_DEPRECATED_UNSAFE
+#endif
+
+#if HAVE_LIBPLDM_ABI_STABLE
+#define LIBPLDM_ABI_STABLE LIBPLDM_ENTRYPOINT
+#else
+#define LIBPLDM_ABI_STABLE
+#endif
+
+#if HAVE_LIBPLDM_ABI_TESTING
+#define LIBPLDM_ABI_TESTING LIBPLDM_ENTRYPOINT
+#else
+#define LIBPLDM_ABI_TESTING
+#endif

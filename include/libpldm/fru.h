@@ -6,6 +6,7 @@
 extern "C" {
 #endif
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/base.h>
 
 #include <asm/byteorder.h>
@@ -178,6 +179,7 @@ struct pldm_fru_record_data_format {
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_fru_record_table_metadata_req(uint8_t instance_id,
 					     struct pldm_msg *msg,
 					     size_t payload_length);
@@ -203,6 +205,7 @@ int encode_get_fru_record_table_metadata_req(uint8_t instance_id,
  *  @param[out] checksum - integrity checksum on the FRU Record Table data
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_fru_record_table_metadata_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code, uint8_t *fru_data_major_version,
@@ -232,6 +235,7 @@ int decode_get_fru_record_table_metadata_resp(
  *         'msg.payload'
  */
 
+LIBPLDM_ABI_STABLE
 int encode_get_fru_record_table_metadata_resp(
 	uint8_t instance_id, uint8_t completion_code,
 	uint8_t fru_data_major_version, uint8_t fru_data_minor_version,
@@ -251,6 +255,7 @@ int encode_get_fru_record_table_metadata_resp(
  *  the start of the transfer
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_fru_record_table_req(const struct pldm_msg *msg,
 				    size_t payload_length,
 				    uint32_t *data_transfer_handle,
@@ -269,6 +274,7 @@ int decode_get_fru_record_table_req(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg',
  *         and for appending the FRU table to the msg.
  */
+LIBPLDM_ABI_STABLE
 int encode_get_fru_record_table_resp(uint8_t instance_id,
 				     uint8_t completion_code,
 				     uint32_t next_data_transfer_handle,
@@ -292,6 +298,7 @@ int encode_get_fru_record_table_resp(uint8_t instance_id,
  *              the start of the transfer
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_fru_record_by_option_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint32_t *data_transfer_handle, uint16_t *fru_table_handle,
@@ -313,6 +320,7 @@ int decode_get_fru_record_by_option_req(
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg',
  *         and for appending the FRU table to the msg.
  */
+LIBPLDM_ABI_STABLE
 int encode_get_fru_record_by_option_resp(uint8_t instance_id,
 					 uint8_t completion_code,
 					 uint32_t next_data_transfer_handle,
@@ -339,6 +347,7 @@ int encode_get_fru_record_by_option_resp(uint8_t instance_id,
  *         'msg.payload'
  */
 
+LIBPLDM_ABI_STABLE
 int encode_get_fru_record_table_req(uint8_t instance_id,
 				    uint32_t data_transfer_handle,
 				    uint8_t transfer_operation_flag,
@@ -360,6 +369,7 @@ int encode_get_fru_record_table_req(uint8_t instance_id,
  *  @return pldm_completion_codes
  */
 
+LIBPLDM_ABI_STABLE
 int decode_get_fru_record_table_resp(const struct pldm_msg *msg,
 				     size_t payload_length,
 				     uint8_t *completion_code,
@@ -387,6 +397,7 @@ int decode_get_fru_record_table_resp(const struct pldm_msg *msg,
  *  @return pldm_completion_codes
  */
 
+LIBPLDM_ABI_STABLE
 int decode_get_fru_record_table_resp_safe(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code, uint32_t *next_data_transfer_handle,
@@ -409,6 +420,7 @@ int decode_get_fru_record_table_resp_safe(
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int encode_fru_record(uint8_t *fru_table, size_t total_size, size_t *curr_size,
 		      uint16_t record_set_id, uint8_t record_type,
 		      uint8_t num_frus, uint8_t encoding, uint8_t *tlvs,
@@ -433,6 +445,7 @@ int encode_fru_record(uint8_t *fru_table, size_t total_size, size_t *curr_size,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_fru_record_by_option_req(
 	uint8_t instance_id, uint32_t data_transfer_handle,
 	uint16_t fru_table_handle, uint16_t record_set_identifier,
@@ -451,6 +464,7 @@ int encode_get_fru_record_by_option_req(
  *  @param[out] fru_structure_data - FRU Structure Data
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_fru_record_by_option_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code, uint32_t *next_transfer_handle,
@@ -468,6 +482,7 @@ int decode_get_fru_record_by_option_resp(
  *  @return PLDM_SUCCESS if no error occurs. PLDM_ERROR_INVALID_LENGTH if record_size lacks capacity
  *  	    to encode the relevant records.
  */
+LIBPLDM_ABI_STABLE
 int get_fru_record_by_option(const uint8_t *table, size_t table_size,
 			     uint8_t *record_table, size_t *record_size,
 			     uint16_t rsi, uint8_t rt, uint8_t ft);
@@ -487,6 +502,7 @@ int get_fru_record_by_option(const uint8_t *table, size_t table_size,
  *                               data
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_fru_record_table_req(const struct pldm_msg *msg,
 				    size_t payload_length,
 				    uint32_t *data_transfer_handle,
@@ -502,6 +518,7 @@ int decode_set_fru_record_table_req(const struct pldm_msg *msg,
  *  @param[in] payload_length - Length of payload message
  *  @param[out] msg - Argument to capture the Message
  */
+LIBPLDM_ABI_STABLE
 int encode_set_fru_record_table_resp(uint8_t instance_id,
 				     uint8_t completion_code,
 				     uint32_t next_data_transfer_handle,

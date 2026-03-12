@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "compiler.h"
 #include "environ/time.h"
+#include <libpldm/_abi_annotation.h>
 
 #include <time.h>
 

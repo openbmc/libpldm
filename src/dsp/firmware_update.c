@@ -8,6 +8,7 @@
 #include <libpldm/base.h>
 #include <libpldm/compiler.h>
 #include <libpldm/firmware_update.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <endian.h>
 #include <stdbool.h>

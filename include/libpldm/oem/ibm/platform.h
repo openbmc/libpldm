@@ -6,6 +6,7 @@
 extern "C" {
 #endif
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/base.h>
 
 #include <stddef.h>
@@ -44,6 +45,7 @@ struct pldm_bios_attribute_update_event_req {
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_bios_attribute_update_event_req(uint8_t instance_id,
 					   uint8_t format_version, uint8_t tid,
 					   uint8_t num_handles,

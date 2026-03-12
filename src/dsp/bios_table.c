@@ -5,6 +5,7 @@
 #include <libpldm/bios.h>
 #include <libpldm/bios_table.h>
 #include <libpldm/edac.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <assert.h>
 #include <endian.h>

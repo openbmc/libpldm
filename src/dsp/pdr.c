@@ -3,6 +3,7 @@
 #include "msgbuf.h"
 #include <libpldm/pdr.h>
 #include <libpldm/platform.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <assert.h>
 #include <endian.h>

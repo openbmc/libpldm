@@ -5,6 +5,7 @@
 
 #include <libpldm/transport.h>
 #include <libpldm/base.h>
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/pldm.h>
 
 #include <errno.h>

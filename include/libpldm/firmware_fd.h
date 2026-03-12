@@ -8,6 +8,7 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/pldm.h>
 #include <libpldm/base.h>
 #include <libpldm/control.h>
@@ -252,6 +253,7 @@ struct pldm_fd;
  *
  * This will call pldm_fd_setup() on the allocated pldm_fd.
  */
+LIBPLDM_ABI_TESTING
 struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx,
 			    struct pldm_control *control);
 
@@ -271,6 +273,7 @@ struct pldm_fd *pldm_fd_new(const struct pldm_fd_ops *ops, void *ops_ctx,
  *
  * @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int pldm_fd_setup(struct pldm_fd *fd, size_t pldm_fd_size,
 		  const struct pldm_fd_ops *ops, void *ops_ctx,
 		  struct pldm_control *control);
@@ -290,6 +293,7 @@ int pldm_fd_setup(struct pldm_fd *fd, size_t pldm_fd_size,
  * Will return a message to send if out_len > 0
  * and returning 0.
  */
+LIBPLDM_ABI_TESTING
 int pldm_fd_handle_msg(struct pldm_fd *fd, pldm_tid_t remote_address,
 		       const void *in_msg, size_t in_len, void *out_msg,
 		       size_t *out_len);
@@ -312,6 +316,7 @@ int pldm_fd_handle_msg(struct pldm_fd *fd, pldm_tid_t remote_address,
  * This could be called periodically by the application to send retries
  * during an update flow. A 1 second interval is recommended.
  */
+LIBPLDM_ABI_TESTING
 int pldm_fd_progress(struct pldm_fd *fd, void *out_msg, size_t *out_len,
 		     pldm_tid_t *remote_address);
 
@@ -325,6 +330,7 @@ int pldm_fd_progress(struct pldm_fd *fd, void *out_msg, size_t *out_len,
  *
  * @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int pldm_fd_set_update_idle_timeout(struct pldm_fd *fd, uint32_t time);
 
 /** @brief Set request retry time
@@ -342,6 +348,7 @@ int pldm_fd_set_update_idle_timeout(struct pldm_fd *fd, uint32_t time);
  *
  * @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int pldm_fd_set_request_retry_time(struct pldm_fd *fd, uint32_t time);
 
 #ifdef __cplusplus
