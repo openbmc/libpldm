@@ -1,0 +1,455 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "083055bd_8d223fdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "Hi Konstantin, I\u0027ve left some more preliminary comments. I haven\u0027t yet thoroughly cross-checked the implementation against the spec.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbc7bf97_f44733c9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3048,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "`host_resource_info` isn\u0027t right - this should be `related_resource_info`?\n\n\nThat said, maybe we could give this more succinct name like `info`? That might help with some of the line lengths / wrapping below.\n\nReplace this throughout as required.",
+      "range": {
+        "startLine": 3048,
+        "startChar": 10,
+        "endLine": 3048,
+        "endChar": 28
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "025bfceb_91acc094",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3057,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "Given the two `foreach` macros have to be used sequentially after the call to `decode_pldm_platform_redfish_action_pdr()`, perhaps we only provide the complete example code in the documentation for `decode_pldm_platform_redfish_action_pdr()` and just document the parameters for the macros.\n\nMy concern is that both examples are incomplete. The sensible place for a complete examples seems to be `decode_pldm_platform_redfish_action_pdr()`.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67119eb2_6ac1ff18",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3067,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "This should be `related_resource_id`?",
+      "range": {
+        "startLine": 3067,
+        "startChar": 44,
+        "endLine": 3067,
+        "endChar": 50
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc7adafe_0d2d315e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3078,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "see comment above",
+      "range": {
+        "startLine": 3078,
+        "startChar": 1,
+        "endLine": 3078,
+        "endChar": 19
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf59a120_a9a87447",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3104,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "`related`",
+      "range": {
+        "startLine": 3104,
+        "startChar": 40,
+        "endLine": 3104,
+        "endChar": 44
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146bfe41_0b2105da",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3111,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "`related`.",
+      "range": {
+        "startLine": 3111,
+        "startChar": 41,
+        "endLine": 3111,
+        "endChar": 45
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d89a5d9f_78500ddd",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3116,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "`related`",
+      "range": {
+        "startLine": 3116,
+        "startChar": 47,
+        "endLine": 3116,
+        "endChar": 51
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4769027e_ba7d437d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3124,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "`related`.",
+      "range": {
+        "startLine": 3124,
+        "startChar": 41,
+        "endLine": 3124,
+        "endChar": 45
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea96ed12_b35a2d71",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3135,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "`related`.",
+      "range": {
+        "startLine": 3135,
+        "startChar": 41,
+        "endLine": 3135,
+        "endChar": 45
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "852dbb32_633c423b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3136,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "`info` here too 😊",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fec5c46c_87d56db1",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3141,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "Call this one `info` too. It\u0027s a local binding for the name, there\u0027s no conflict concern with the host resource macro.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4992e60_ffb5927a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3151,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "See comment above regarding examples.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aee6dcdf_cae7b0d6",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3211,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "This represents the same information twice? `iter` also (conceptually) contains a count (`entries`) and a `struct variable_field`.\n\nThe only concern is loss of information during iteration. But perhaps people wanting to iterate multiple times could either dynamically store the results from the first iteration, or re-decode the message buffer?",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ecb2696_2943a4c8",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3247,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "If we\u0027re storing this then perhaps we don\u0027t need the two `info` arguments to `decode_pldm_platform_redfish_action_pdr()`? We could initialise the `info`s later with the information from an instance of this struct?",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a428355_419de094",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3917,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "I realised I was commenting on the redfish action PDR patch here, where previously I commented on the redfish resource PDR patch.\n\nAnyway, we should probably expand the `pldm_msgbuf_skip()` API to cover `const` buffers.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f540dd30_7a156aac",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3954,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "Can we order the function definitions in \"call\" order? That is, the sequence in which they would be invoked by the library consumer.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d3b50e_ca92410f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3966,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "Please define this at the top of the function before any other code.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71e0b487_32de6144",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3981,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "Fixing the `skip` API deficiency would allow us to avoid these casts too.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dff34c8c_05f9f554",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4016,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "This seems unnecessary?",
+      "range": {
+        "startLine": 4007,
+        "startChar": 1,
+        "endLine": 4016,
+        "endChar": 34
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57ac55d7_e35d612c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4046,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "Needs an error check",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42848efd_a422aca6",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4049,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "Needs an error check",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0eb4434_3a9c0db3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4087,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-12T07:12:29Z",
+      "side": 1,
+      "message": "This seems unnecessary?",
+      "range": {
+        "startLine": 4078,
+        "startChar": 1,
+        "endLine": 4087,
+        "endChar": 34
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
