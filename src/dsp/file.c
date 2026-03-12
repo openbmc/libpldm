@@ -4,6 +4,7 @@
 
 #include <libpldm/base.h>
 #include <libpldm/file.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <assert.h>
 #include <errno.h>

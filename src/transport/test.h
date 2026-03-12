@@ -2,6 +2,7 @@
 #ifndef LIBPLDM_TRANSPORT_TEST_H
 #define LIBPLDM_TRANSPORT_TEST_H
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/base.h>
 
 #include <stddef.h>
@@ -41,15 +42,19 @@ struct pldm_transport_test_descriptor {
 
 struct pldm_transport_test;
 
+LIBPLDM_ABI_TESTING
 int pldm_transport_test_init(struct pldm_transport_test **ctx,
 			     const struct pldm_transport_test_descriptor *seq,
 			     size_t count);
+LIBPLDM_ABI_TESTING
 void pldm_transport_test_destroy(struct pldm_transport_test *ctx);
+LIBPLDM_ABI_TESTING
 struct pldm_transport *
 pldm_transport_test_core(struct pldm_transport_test *ctx);
 
 #if HAVE_POLL_H
 struct pollfd;
+LIBPLDM_ABI_TESTING
 int pldm_transport_test_init_pollfd(struct pldm_transport *ctx,
 				    struct pollfd *pollfd);
 #endif

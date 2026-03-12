@@ -6,6 +6,8 @@
 extern "C" {
 #endif
 
+#include <libpldm/_abi_annotation.h>
+
 #include <stddef.h>
 #include <stdint.h>
 
@@ -223,6 +225,7 @@ struct pldm_set_bios_table_resp {
  *         'msg.body.payload'
  */
 
+LIBPLDM_ABI_STABLE
 int encode_get_date_time_req(uint8_t instance_id, struct pldm_msg *msg);
 
 /** @brief Decode a GetDateTime response message
@@ -244,6 +247,7 @@ int encode_get_date_time_req(uint8_t instance_id, struct pldm_msg *msg);
  *  @param[out] year - year in BCD format
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_date_time_resp(const struct pldm_msg *msg, size_t payload_length,
 			      uint8_t *completion_code, uint8_t *seconds,
 			      uint8_t *minutes, uint8_t *hours, uint8_t *day,
@@ -265,6 +269,7 @@ int decode_get_date_time_resp(const struct pldm_msg *msg, size_t payload_length,
  *  @note  Caller is responsible for memory alloc and dealloc of params
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_set_bios_attribute_current_value_req(
 	uint8_t instance_id, uint32_t transfer_handle, uint8_t transfer_flag,
 	const uint8_t *attribute_data, size_t attribute_length,
@@ -285,6 +290,7 @@ int encode_set_bios_attribute_current_value_req(
  *              next portion of the transfer
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_bios_attribute_current_value_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code, uint32_t *next_transfer_handle);
@@ -308,6 +314,7 @@ int decode_set_bios_attribute_current_value_resp(
  *  @note  Caller is responsible for memory alloc and dealloc of params
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_set_bios_table_req(uint8_t instance_id, uint32_t transfer_handle,
 			      uint8_t transfer_flag, uint8_t table_type,
 			      const uint8_t *table_data, size_t table_length,
@@ -328,6 +335,7 @@ int encode_set_bios_table_req(uint8_t instance_id, uint32_t transfer_handle,
  *              next portion of the transfer
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_bios_table_resp(const struct pldm_msg *msg,
 			       size_t payload_length, uint8_t *completion_code,
 			       uint32_t *next_transfer_handle);
@@ -352,6 +360,7 @@ int decode_set_bios_table_resp(const struct pldm_msg *msg,
  *         'msg.body.payload'
  */
 
+LIBPLDM_ABI_STABLE
 int encode_get_date_time_resp(uint8_t instance_id, uint8_t completion_code,
 			      uint8_t seconds, uint8_t minutes, uint8_t hours,
 			      uint8_t day, uint8_t month, uint16_t year,
@@ -372,6 +381,7 @@ int encode_get_date_time_resp(uint8_t instance_id, uint8_t completion_code,
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int encode_get_bios_table_resp(uint8_t instance_id, uint8_t completion_code,
 			       uint32_t next_transfer_handle,
 			       uint8_t transfer_flag, uint8_t *table_data,
@@ -387,6 +397,7 @@ int encode_get_bios_table_resp(uint8_t instance_id, uint8_t completion_code,
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_get_bios_table_req(uint8_t instance_id, uint32_t transfer_handle,
 			      uint8_t transfer_op_flag, uint8_t table_type,
 			      struct pldm_msg *msg);
@@ -401,6 +412,7 @@ int encode_get_bios_table_req(uint8_t instance_id, uint32_t transfer_handle,
  *  @param[out] table_type - BIOS table type
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_bios_table_req(const struct pldm_msg *msg, size_t payload_length,
 			      uint32_t *transfer_handle,
 			      uint8_t *transfer_op_flag, uint8_t *table_type);
@@ -418,6 +430,7 @@ int decode_get_bios_table_req(const struct pldm_msg *msg, size_t payload_length,
  *                                  in pldm msg
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_bios_table_resp(const struct pldm_msg *msg,
 			       size_t payload_length, uint8_t *completion_code,
 			       uint32_t *next_transfer_handle,
@@ -426,6 +439,7 @@ int decode_get_bios_table_resp(const struct pldm_msg *msg,
 
 /* GetBIOSAttributeCurrentValueByHandle */
 
+LIBPLDM_ABI_STABLE
 /** @brief Decode GetBIOSAttributeCurrentValueByHandle request packet
  *
  *  @param[in] instance_id - Message's instance id
@@ -452,6 +466,7 @@ int encode_get_bios_attribute_current_value_by_handle_req(
  *  @param[out] attribute_data - contains current value of attribute
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_bios_attribute_current_value_by_handle_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code, uint32_t *next_transfer_handle,
@@ -467,6 +482,7 @@ int decode_get_bios_attribute_current_value_by_handle_resp(
  *  @param[out] attribute_handle - Handle to identify the BIOS attribute
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_bios_attribute_current_value_by_handle_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint32_t *transfer_handle, uint8_t *transfer_op_flag,
@@ -486,6 +502,7 @@ int decode_get_bios_attribute_current_value_by_handle_req(
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int encode_get_bios_current_value_by_handle_resp(uint8_t instance_id,
 						 uint8_t completion_code,
 						 uint32_t next_transfer_handle,
@@ -508,6 +525,7 @@ int encode_get_bios_current_value_by_handle_resp(uint8_t instance_id,
  *                          be valid when \p attribute is used.
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_bios_attribute_current_value_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint32_t *transfer_handle, uint8_t *transfer_flag,
@@ -520,6 +538,7 @@ int decode_set_bios_attribute_current_value_req(
  *  @param[in] next_transfer_handle - handle to identify the next portion of the
  *  @param[out] msg - Message will be written to this
  */
+LIBPLDM_ABI_STABLE
 int encode_set_bios_attribute_current_value_resp(uint8_t instance_id,
 						 uint8_t completion_code,
 						 uint32_t next_transfer_handle,
@@ -540,6 +559,7 @@ int encode_set_bios_attribute_current_value_resp(uint8_t instance_id,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.body.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_set_date_time_req(uint8_t instance_id, uint8_t seconds,
 			     uint8_t minutes, uint8_t hours, uint8_t day,
 			     uint8_t month, uint16_t year, struct pldm_msg *msg,
@@ -557,6 +577,7 @@ int encode_set_date_time_req(uint8_t instance_id, uint8_t seconds,
  *  @param[out] year - year in BCD format
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_date_time_req(const struct pldm_msg *msg, size_t payload_length,
 			     uint8_t *seconds, uint8_t *minutes, uint8_t *hours,
 			     uint8_t *day, uint8_t *month, uint16_t *year);
@@ -571,6 +592,7 @@ int decode_set_date_time_req(const struct pldm_msg *msg, size_t payload_length,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.body.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_set_date_time_resp(uint8_t instance_id, uint8_t completion_code,
 			      struct pldm_msg *msg, size_t payload_length);
 
@@ -587,6 +609,7 @@ int encode_set_date_time_resp(uint8_t instance_id, uint8_t completion_code,
  *  @param[out] completion_code - Pointer to response msg's PLDM completion code
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_date_time_resp(const struct pldm_msg *msg, size_t payload_length,
 			      uint8_t *completion_code);
 
@@ -600,6 +623,7 @@ int decode_set_date_time_resp(const struct pldm_msg *msg, size_t payload_length,
  *             transfer
  *  @param[out] msg - Message will be written to this
  */
+LIBPLDM_ABI_STABLE
 int encode_set_bios_table_resp(uint8_t instance_id, uint8_t completion_code,
 			       uint32_t next_transfer_handle,
 			       struct pldm_msg *msg);
@@ -618,6 +642,7 @@ int encode_set_bios_table_resp(uint8_t instance_id, uint8_t completion_code,
  * 				table type and the length of table data.
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_bios_table_req(const struct pldm_msg *msg, size_t payload_length,
 			      uint32_t *transfer_handle, uint8_t *transfer_flag,
 			      uint8_t *table_type,

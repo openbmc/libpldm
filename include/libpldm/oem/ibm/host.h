@@ -6,6 +6,7 @@
 extern "C" {
 #endif
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/base.h>
 
 #include <stddef.h>
@@ -49,6 +50,7 @@ struct pldm_get_alert_status_resp {
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_alert_status_req(uint8_t instance_id, uint8_t version_id,
 				struct pldm_msg *msg, size_t payload_length);
 
@@ -67,6 +69,7 @@ int encode_get_alert_status_req(uint8_t instance_id, uint8_t version_id,
  *  @param[out] pri_cec_node - Enclosure ID, Alert Status, Flags, Config ID
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_alert_status_resp(const struct pldm_msg *msg,
 				 size_t payload_length,
 				 uint8_t *completion_code, uint32_t *rack_entry,
@@ -83,6 +86,7 @@ int decode_get_alert_status_resp(const struct pldm_msg *msg,
  *  @param[out] version_id - the command/response format. 0x00 for this format
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_alert_status_req(const struct pldm_msg *msg,
 				size_t payload_length, uint8_t *version_id);
 
@@ -98,6 +102,7 @@ int decode_get_alert_status_req(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.body.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_alert_status_resp(uint8_t instance_id, uint8_t completion_code,
 				 uint32_t rack_entry, uint32_t pri_cec_node,
 				 struct pldm_msg *msg, size_t payload_length);

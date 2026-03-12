@@ -6,6 +6,7 @@
 #include <libpldm/pldm.h>
 #include <libpldm/platform.h>
 #include <libpldm/control.h>
+#include <libpldm/_abi_annotation.h>
 #include <compiler.h>
 
 #include "control-internal.h"

@@ -2,6 +2,7 @@
 #include <libpldm/base.h>
 #include <libpldm/platform.h>
 #include <libpldm/oem/ibm/platform.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <string.h>
 

@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include <libpldm/bcd.h>
+#include <libpldm/_abi_annotation.h>
 
 LIBPLDM_ABI_STABLE
 uint8_t pldm_bcd_bcd2dec8(uint8_t bcd)

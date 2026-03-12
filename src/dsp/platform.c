@@ -8,6 +8,7 @@
 #include <libpldm/base.h>
 #include <libpldm/platform.h>
 #include <libpldm/pldm_types.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <endian.h>
 #include <stdint.h>

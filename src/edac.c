@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include <libpldm/edac.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <asm-generic/errno.h>
 

@@ -12,6 +12,7 @@ extern "C" {
 #include <stdint.h>
 #include <uchar.h>
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/base.h>
 #include <libpldm/compiler.h>
 #include <libpldm/pdr.h>
@@ -749,6 +750,7 @@ struct pldm_compact_numeric_sensor_pdr {
  *       sensor->possible_states array, otherwise the function will fail.
  * @note sensor->hdr.length, .type, and .version will be set appropriately.
  */
+LIBPLDM_ABI_STABLE
 int encode_state_sensor_pdr(
 	struct pldm_state_sensor_pdr *sensor, size_t allocation_size,
 	const struct state_sensor_possible_states *possible_states,
@@ -1011,6 +1013,7 @@ struct pldm_platform_file_descriptor_pdr {
  *       effecter->possible_states array, otherwise the function will fail.
  * @note effecter->hdr.length, .type, and .version will be set appropriately.
  */
+LIBPLDM_ABI_STABLE
 int encode_state_effecter_pdr(
 	struct pldm_state_effecter_pdr *effecter, size_t allocation_size,
 	const struct state_effecter_possible_states *possible_states,
@@ -1433,6 +1436,7 @@ struct pldm_set_state_sensor_enables_req {
  * 				requested.
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_numeric_effecter_value_req(const struct pldm_msg *msg,
 					  size_t payload_length,
 					  uint16_t *effecter_id,
@@ -1449,6 +1453,7 @@ int decode_set_numeric_effecter_value_req(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.body.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_set_numeric_effecter_value_resp(uint8_t instance_id,
 					   uint8_t completion_code,
 					   struct pldm_msg *msg,
@@ -1466,6 +1471,7 @@ int encode_set_numeric_effecter_value_resp(uint8_t instance_id,
  *         'msg.body.payload'
  */
 
+LIBPLDM_ABI_STABLE
 int encode_set_state_effecter_states_resp(uint8_t instance_id,
 					  uint8_t completion_code,
 					  struct pldm_msg *msg);
@@ -1488,6 +1494,7 @@ int encode_set_state_effecter_states_resp(uint8_t instance_id,
  *  @return pldm_completion_codes
  */
 
+LIBPLDM_ABI_STABLE
 int decode_set_state_effecter_states_req(const struct pldm_msg *msg,
 					 size_t payload_length,
 					 uint16_t *effecter_id,
@@ -1516,6 +1523,7 @@ int decode_set_state_effecter_states_req(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int encode_get_pdr_resp(uint8_t instance_id, uint8_t completion_code,
 			uint32_t next_record_hndl,
 			uint32_t next_data_transfer_hndl, uint8_t transfer_flag,
@@ -1537,6 +1545,7 @@ int encode_get_pdr_resp(uint8_t instance_id, uint8_t completion_code,
  *  @return pldm_completion_codes
  */
 
+LIBPLDM_ABI_STABLE
 int decode_get_pdr_req(const struct pldm_msg *msg, size_t payload_length,
 		       uint32_t *record_hndl, uint32_t *data_transfer_hndl,
 		       uint8_t *transfer_op_flag, uint16_t *request_cnt,
@@ -1558,6 +1567,7 @@ int decode_get_pdr_req(const struct pldm_msg *msg, size_t payload_length,
  *  @return pldm_completion_codes
  */
 
+LIBPLDM_ABI_STABLE
 int decode_get_state_sensor_readings_req(const struct pldm_msg *msg,
 					 size_t payload_length,
 					 uint16_t *sensor_id,
@@ -1578,6 +1588,7 @@ int decode_get_state_sensor_readings_req(const struct pldm_msg *msg,
  *  @return pldm_completion_codes
  */
 
+LIBPLDM_ABI_STABLE
 int encode_get_state_sensor_readings_resp(uint8_t instance_id,
 					  uint8_t completion_code,
 					  uint8_t comp_sensor_count,
@@ -1593,6 +1604,7 @@ int encode_get_state_sensor_readings_resp(uint8_t instance_id,
  *  @param[out] effecter_id - used to identify and access the effecter
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_numeric_effecter_value_req(const struct pldm_msg *msg,
 					  size_t payload_length,
 					  uint16_t *effecter_id);
@@ -1617,6 +1629,7 @@ int decode_get_numeric_effecter_value_req(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_numeric_effecter_value_resp(
 	uint8_t instance_id, uint8_t completion_code,
 	uint8_t effecter_data_size, uint8_t effecter_oper_state,
@@ -1636,6 +1649,7 @@ int encode_get_numeric_effecter_value_resp(
  *  @return pldm_completion_codes
  */
 
+LIBPLDM_ABI_STABLE
 int decode_get_sensor_reading_req(const struct pldm_msg *msg,
 				  size_t payload_length, uint16_t *sensor_id,
 				  bool8_t *rearm_event_state);
@@ -1662,6 +1676,7 @@ int decode_get_sensor_reading_req(const struct pldm_msg *msg,
  *  @return pldm_completion_codes
  */
 
+LIBPLDM_ABI_STABLE
 int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 				   uint8_t sensor_data_size,
 				   uint8_t sensor_operational_state,
@@ -1688,6 +1703,7 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_TESTING
 int encode_get_pdr_repository_info_req(uint8_t instance_id,
 				       struct pldm_msg *msg,
 				       size_t payload_length);
@@ -1709,6 +1725,7 @@ int encode_get_pdr_repository_info_req(uint8_t instance_id,
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_get_pdr_repository_info_resp(
 	uint8_t instance_id, uint8_t completion_code, uint8_t repository_state,
 	const uint8_t *update_time, const uint8_t *oem_update_time,
@@ -1733,6 +1750,7 @@ int encode_get_pdr_repository_info_resp(
  *  @param[out] data_transfer_handle_timeout - Data transmission timeout
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_DEPRECATED
 int decode_get_pdr_repository_info_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code, uint8_t *repository_state,
@@ -1748,6 +1766,7 @@ int decode_get_pdr_repository_info_resp(
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int decode_get_pdr_repository_info_resp_safe(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_pdr_repository_info_resp *resp);
@@ -1771,6 +1790,7 @@ int decode_get_pdr_repository_info_resp_safe(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_pdr_req(uint8_t instance_id, uint32_t record_hndl,
 		       uint32_t data_transfer_hndl, uint8_t transfer_op_flag,
 		       uint16_t request_cnt, uint16_t record_chg_num,
@@ -1802,6 +1822,7 @@ int encode_get_pdr_req(uint8_t instance_id, uint32_t record_hndl,
  *        in the last part of a PDR being transferred
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_DEPRECATED
 int decode_get_pdr_resp(const struct pldm_msg *msg, size_t payload_length,
 			uint8_t *completion_code, uint32_t *next_record_hndl,
 			uint32_t *next_data_transfer_hndl,
@@ -1825,6 +1846,7 @@ int decode_get_pdr_resp(const struct pldm_msg *msg, size_t payload_length,
  *        in the last part of a PDR being transferred
  *  @return 0 on success, otherwise, a negative errno value on failure
  */
+LIBPLDM_ABI_TESTING
 int decode_get_pdr_resp_safe(const struct pldm_msg *msg, size_t payload_length,
 			     struct pldm_get_pdr_resp *resp, size_t resp_len,
 			     uint8_t *transfer_crc);
@@ -1851,6 +1873,7 @@ int decode_get_pdr_resp_safe(const struct pldm_msg *msg, size_t payload_length,
  *         'msg.payload'
  */
 
+LIBPLDM_ABI_STABLE
 int encode_set_state_effecter_states_req(uint8_t instance_id,
 					 uint16_t effecter_id,
 					 uint8_t comp_effecter_count,
@@ -1870,6 +1893,7 @@ int encode_set_state_effecter_states_req(uint8_t instance_id,
  *  @param[out] completion_code - PLDM completion code
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_state_effecter_states_resp(const struct pldm_msg *msg,
 					  size_t payload_length,
 					  uint8_t *completion_code);
@@ -1891,6 +1915,7 @@ int decode_set_state_effecter_states_resp(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_set_numeric_effecter_value_req(uint8_t instance_id,
 					  uint16_t effecter_id,
 					  uint8_t effecter_data_size,
@@ -1904,6 +1929,7 @@ int encode_set_numeric_effecter_value_req(uint8_t instance_id,
  *  @param[out] completion_code - PLDM completion code
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_numeric_effecter_value_resp(const struct pldm_msg *msg,
 					   size_t payload_length,
 					   uint8_t *completion_code);
@@ -1923,6 +1949,7 @@ int decode_set_numeric_effecter_value_resp(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_state_sensor_readings_req(uint8_t instance_id,
 					 uint16_t sensor_id,
 					 bitfield8_t sensor_rearm,
@@ -1943,6 +1970,7 @@ int encode_get_state_sensor_readings_req(uint8_t instance_id,
  *  @return pldm_completion_codes
  */
 
+LIBPLDM_ABI_STABLE
 int decode_get_state_sensor_readings_resp(const struct pldm_msg *msg,
 					  size_t payload_length,
 					  uint8_t *completion_code,
@@ -1958,6 +1986,7 @@ int decode_get_state_sensor_readings_resp(const struct pldm_msg *msg,
  *  @param[out] effecter_id - used to identify and access the effecter
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_state_effecter_states_req(const struct pldm_msg *msg,
 					 size_t payload_length,
 					 uint16_t *effecter_id);
@@ -1972,6 +2001,7 @@ int decode_get_state_effecter_states_req(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_state_effecter_states_req(uint8_t instance_id,
 					 uint16_t effecter_id,
 					 struct pldm_msg *msg,
@@ -1989,6 +2019,7 @@ int encode_get_state_effecter_states_req(uint8_t instance_id,
 *          information contained within the state effecter
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_state_effecter_states_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_get_state_effecter_states_resp *resp);
@@ -2006,6 +2037,7 @@ int decode_get_state_effecter_states_resp(
  *  @param[in] payload_length - Length of response message payload
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_get_state_effecter_states_resp(
 	uint8_t instance_id, struct pldm_get_state_effecter_states_resp *resp,
 	struct pldm_msg *msg, size_t payload_length);
@@ -2023,6 +2055,7 @@ int encode_get_state_effecter_states_resp(
  * from pldm msg
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_platform_event_message_req(const struct pldm_msg *msg,
 				      size_t payload_length,
 				      uint8_t *format_version, uint8_t *tid,
@@ -2039,6 +2072,7 @@ int decode_platform_event_message_req(const struct pldm_msg *msg,
  *  from pldm msg
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_poll_for_platform_event_message_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *format_version, uint8_t *transfer_operation_flag,
@@ -2054,6 +2088,7 @@ int decode_poll_for_platform_event_message_req(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_platform_event_message_resp(uint8_t instance_id,
 				       uint8_t completion_code,
 				       uint8_t platform_event_status,
@@ -2076,6 +2111,7 @@ int encode_platform_event_message_resp(uint8_t instance_id,
  *  @note Caller is responsible for memory alloc and dealloc of param
  *  'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_poll_for_platform_event_message_resp(
 	uint8_t instance_id, uint8_t completion_code, uint8_t tid,
 	uint16_t event_id, uint32_t next_data_transfer_handle,
@@ -2096,6 +2132,7 @@ int encode_poll_for_platform_event_message_resp(
  * @note Caller is responsible for memory alloc and dealloc of param
  * 'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_platform_event_message_req(
 	uint8_t instance_id, uint8_t format_version, uint8_t tid,
 	uint8_t event_class, const uint8_t *event_data,
@@ -2112,6 +2149,7 @@ int encode_platform_event_message_req(
  *  @note Caller is responsible for memory alloc and dealloc of param
  *  'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_poll_for_platform_event_message_req(uint8_t instance_id,
 					       uint8_t format_version,
 					       uint8_t transfer_operation_flag,
@@ -2138,6 +2176,7 @@ int encode_poll_for_platform_event_message_req(uint8_t instance_id,
  *  @note Caller is responsible for memory alloc and dealloc of param
  *  'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int decode_poll_for_platform_event_message_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code, uint8_t *tid, uint16_t *event_id,
@@ -2153,6 +2192,7 @@ int decode_poll_for_platform_event_message_resp(
  * command
  * @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_platform_event_message_resp(const struct pldm_msg *msg,
 				       size_t payload_length,
 				       uint8_t *completion_code,
@@ -2164,6 +2204,7 @@ int decode_platform_event_message_resp(const struct pldm_msg *msg,
  *  @param[out] completion_code - PLDM completion code
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_event_message_buffer_size_resp(const struct pldm_msg *msg,
 					  size_t payload_length,
 					  uint8_t *completion_code,
@@ -2177,6 +2218,7 @@ int decode_event_message_buffer_size_resp(const struct pldm_msg *msg,
  *  @note Caller is responsible for memory alloc and dealloc of param
  *  'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_event_message_buffer_size_req(uint8_t instance_id,
 					 uint16_t event_receiver_max_buffer_size,
 					 struct pldm_msg *msg);
@@ -2191,6 +2233,7 @@ int encode_event_message_buffer_size_req(uint8_t instance_id,
  *  @note Caller is responsible for memory alloc and dealloc of param
  *  'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_event_message_supported_req(uint8_t instance_id,
 				       uint8_t format_version,
 				       struct pldm_msg *msg);
@@ -2208,6 +2251,7 @@ int encode_event_message_supported_req(uint8_t instance_id,
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_event_message_supported_resp(const struct pldm_msg *msg,
 					size_t payload_length,
 					uint8_t *completion_code,
@@ -2229,6 +2273,7 @@ int decode_event_message_supported_resp(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'event_data'
  */
+LIBPLDM_ABI_STABLE
 int decode_sensor_event_data(const uint8_t *event_data,
 			     size_t event_data_length, uint16_t *sensor_id,
 			     uint8_t *sensor_event_class_type,
@@ -2246,6 +2291,7 @@ int decode_sensor_event_data(const uint8_t *event_data,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'sensor_data'
  */
+LIBPLDM_ABI_STABLE
 int decode_sensor_op_data(const uint8_t *sensor_data, size_t sensor_data_length,
 			  uint8_t *present_op_state,
 			  uint8_t *previous_op_state);
@@ -2264,6 +2310,7 @@ int decode_sensor_op_data(const uint8_t *sensor_data, size_t sensor_data_length,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'sensor_data'
  */
+LIBPLDM_ABI_STABLE
 int decode_state_sensor_data(const uint8_t *sensor_data,
 			     size_t sensor_data_length, uint8_t *sensor_offset,
 			     uint8_t *event_state,
@@ -2285,6 +2332,7 @@ int decode_state_sensor_data(const uint8_t *sensor_data,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'sensor_data'
  */
+LIBPLDM_ABI_STABLE
 int decode_numeric_sensor_data(const uint8_t *sensor_data,
 			       size_t sensor_data_length, uint8_t *event_state,
 			       uint8_t *previous_event_state,
@@ -2297,6 +2345,7 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
  *  @param[in] pdr_data_length - Length of pdr data
  *  @param[out] pdr_value - unpacked numeric sensor PDR struct
  */
+LIBPLDM_ABI_STABLE
 int decode_numeric_sensor_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_sensor_value_pdr *pdr_value);
@@ -2312,6 +2361,7 @@ int decode_numeric_sensor_pdr_data(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_numeric_effecter_value_req(uint8_t instance_id,
 					  uint16_t effecter_id,
 					  struct pldm_msg *msg);
@@ -2333,6 +2383,7 @@ int encode_get_numeric_effecter_value_req(uint8_t instance_id,
  *              used for this field
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_numeric_effecter_value_resp(const struct pldm_msg *msg,
 					   size_t payload_length,
 					   uint8_t *completion_code,
@@ -2355,6 +2406,7 @@ int decode_get_numeric_effecter_value_resp(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'event_data'
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_pdr_repository_chg_event_data(
 	const uint8_t *event_data, size_t event_data_size,
 	uint8_t *event_data_format, uint8_t *number_of_change_records,
@@ -2369,6 +2421,7 @@ int decode_pldm_pdr_repository_chg_event_data(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'event_data'
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_message_poll_event_data(
 	const void *event_data, size_t event_data_length,
 	struct pldm_message_poll_event *poll_event);
@@ -2382,6 +2435,7 @@ int decode_pldm_message_poll_event_data(
  *  @note The caller is responsible for allocating and deallocating the
  *        event_data
  */
+LIBPLDM_ABI_TESTING
 int encode_pldm_message_poll_event_data(
 	const struct pldm_message_poll_event *poll_event, void *event_data,
 	size_t event_data_length);
@@ -2417,6 +2471,7 @@ int encode_pldm_message_poll_event_data(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  * 'event_data.change_records'
  */
+LIBPLDM_ABI_STABLE
 int encode_pldm_pdr_repository_chg_event_data(
 	uint8_t event_data_format, uint8_t number_of_change_records,
 	const uint8_t *event_data_operations,
@@ -2441,6 +2496,7 @@ int encode_pldm_pdr_repository_chg_event_data(
  *  @note The caller is responsible for allocating and deallocating the
  *        event_data
  */
+LIBPLDM_ABI_STABLE
 int encode_sensor_event_data(struct pldm_sensor_event_data *event_data,
 			     size_t event_data_size, uint16_t sensor_id,
 			     enum sensor_event_class_states sensor_event_class,
@@ -2463,6 +2519,7 @@ int encode_sensor_event_data(struct pldm_sensor_event_data *event_data,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'change_record_data'
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_pdr_repository_change_record_data(
 	const uint8_t *change_record_data, size_t change_record_data_size,
 	uint8_t *event_data_operation, uint8_t *number_of_change_entries,
@@ -2482,6 +2539,7 @@ int decode_pldm_pdr_repository_change_record_data(
  *  @note	Caller is responsible for memory alloc and dealloc of param
  * 		'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_sensor_reading_req(uint8_t instance_id, uint16_t sensor_id,
 				  bool8_t rearm_event_state,
 				  struct pldm_msg *msg);
@@ -2507,6 +2565,7 @@ int encode_get_sensor_reading_req(uint8_t instance_id, uint16_t sensor_id,
  *  @return pldm_completion_codes
  */
 
+LIBPLDM_ABI_STABLE
 int decode_get_sensor_reading_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code, uint8_t *sensor_data_size,
@@ -2525,6 +2584,7 @@ int decode_get_sensor_reading_resp(
  *         -ENOMSG if the PLDM type in the request header is invalid
  *         -EOVERFLOW if the input message length is invalid
  */
+LIBPLDM_ABI_TESTING
 int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg,
 				  size_t payload_length);
 
@@ -2540,6 +2600,7 @@ int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg,
  *         -EOVERFLOW if the input message length is invalid
  *         -ENOTSUP if the transport protocol is not supported
  */
+LIBPLDM_ABI_STABLE
 int decode_get_event_receiver_resp(const struct pldm_msg *msg,
 				   size_t payload_length,
 				   struct pldm_get_event_receiver_resp *resp);
@@ -2563,6 +2624,7 @@ int decode_get_event_receiver_resp(const struct pldm_msg *msg,
  *       parameter. For MCTP transport event_receiver_info.mctp_eid should be set. For other
  *       protocol types event_receiver_info.vendor_specific should be used.
  */
+LIBPLDM_ABI_TESTING
 int encode_get_event_receiver_resp(
 	uint8_t instance_id,
 	struct pldm_get_event_receiver_resp *event_receiver_info,
@@ -2586,6 +2648,7 @@ int encode_get_event_receiver_resp(
  * @param[out] msg - Argument to capture the Message
  * @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_set_event_receiver_req(uint8_t instance_id,
 				  uint8_t event_message_global_enable,
 				  uint8_t transport_protocol_type,
@@ -2600,6 +2663,7 @@ int encode_set_event_receiver_req(uint8_t instance_id,
  * @param[out] completion_code - PLDM completion code
  * @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_event_receiver_resp(const struct pldm_msg *msg,
 				   size_t payload_length,
 				   uint8_t *completion_code);
@@ -2622,6 +2686,7 @@ int decode_set_event_receiver_resp(const struct pldm_msg *msg,
  *        of which the terminus shall emit a heartbeat event to the receiver
  * @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_set_event_receiver_req(const struct pldm_msg *msg,
 				  size_t payload_length,
 				  uint8_t *event_message_global_enable,
@@ -2636,6 +2701,7 @@ int decode_set_event_receiver_req(const struct pldm_msg *msg,
  *  @param[out] msg - Argument to capture the Message
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_set_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
 				   struct pldm_msg *msg);
 
@@ -2647,6 +2713,7 @@ int encode_set_event_receiver_resp(uint8_t instance_id, uint8_t completion_code,
  *  @param[in] pdr_data_length - Length of pdr data
  *  @param[out] pdr_value - the numeric effecter PDR data struct
  */
+LIBPLDM_ABI_TESTING
 int decode_numeric_effecter_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_effecter_value_pdr *pdr_value);
@@ -2676,6 +2743,7 @@ int decode_numeric_effecter_pdr_data(
  *
  *  @return error code
  */
+LIBPLDM_ABI_STABLE
 int decode_entity_auxiliary_names_pdr(
 	const void *data, size_t data_length,
 	struct pldm_entity_auxiliary_names_pdr *pdr, size_t pdr_length);
@@ -2698,6 +2766,7 @@ int decode_entity_auxiliary_names_pdr(
  *  @param[in] names_size - Size of names data
  *  @return error code
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_entity_auxiliary_names_pdr_index(
 	struct pldm_entity_auxiliary_names_pdr *pdr_value);
 
@@ -2709,6 +2778,7 @@ int decode_pldm_entity_auxiliary_names_pdr_index(
  *  @param[in] cper_event_length - the length of cper event
  *  @return error code
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_cper_event(const void *event_data,
 				    size_t event_data_length,
 				    struct pldm_platform_cper_event *cper_event,
@@ -2719,6 +2789,7 @@ int decode_pldm_platform_cper_event(const void *event_data,
  *  @param[in] cper_event - the decoded pldm_platform_cper_event struct
  *  @return cper event event data array pointer
  */
+LIBPLDM_ABI_STABLE
 uint8_t *
 pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event);
 
@@ -2735,6 +2806,7 @@ pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event);
  *          -EOVERFLOW if the original length of the data buffer is smaller
  *          than the target extract length
  */
+LIBPLDM_ABI_TESTING
 int encode_pldm_platform_file_descriptor_pdr(
 	const struct pldm_platform_file_descriptor_pdr *pdr, void *data,
 	size_t *data_len);
@@ -2754,6 +2826,7 @@ int encode_pldm_platform_file_descriptor_pdr(
  *          -EOVERFLOW if the original length of the data buffer is smaller
  *          than the target extract length
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_file_descriptor_pdr(
 	const void *data, size_t data_length,
 	struct pldm_platform_file_descriptor_pdr *pdr);
@@ -2770,6 +2843,7 @@ int decode_pldm_platform_file_descriptor_pdr(
  *                      -EBADMSG if the input request message is too long
  *                      -EOVERFLOW if the input request message is too short.
  */
+LIBPLDM_ABI_TESTING
 int decode_set_numeric_sensor_enable_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_numeric_sensor_enable_req *req);
@@ -2787,6 +2861,7 @@ int decode_set_numeric_sensor_enable_req(
  *                      -EBADMSG if the input request message is too long
  *                      -EOVERFLOW if the input request message is too short.
  */
+LIBPLDM_ABI_TESTING
 int decode_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_state_sensor_enables_req *req);

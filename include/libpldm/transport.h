@@ -6,6 +6,7 @@
 extern "C" {
 #endif
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm.h>
 
@@ -28,6 +29,7 @@ struct pldm_transport;
  * @return 0 if a timeout occurs, 1 if the transport becomes ready, PLDM_REQUESTER_INVALID_SETUP if
  * 	   transport is NULL, or PLDM_REQUESTER_POLL_FAIL on failure.
  */
+LIBPLDM_ABI_STABLE
 int pldm_transport_poll(struct pldm_transport *transport, int timeout);
 
 /**
@@ -50,6 +52,7 @@ int pldm_transport_poll(struct pldm_transport *transport, int timeout);
  *
  * @return pldm_requester_rc_t (errno may be set)
  */
+LIBPLDM_ABI_STABLE
 pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
 					    pldm_tid_t tid,
 					    const void *pldm_msg,
@@ -78,6 +81,7 @@ pldm_requester_rc_t pldm_transport_send_msg(struct pldm_transport *transport,
  * 	   PLDM messages are available.
  *
  */
+LIBPLDM_ABI_STABLE
 pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
 					    pldm_tid_t *tid, void **pldm_msg,
 					    size_t *msg_len);
@@ -114,6 +118,7 @@ pldm_requester_rc_t pldm_transport_recv_msg(struct pldm_transport *transport,
  *
  * @return pldm_requester_rc_t (errno may be set)
  */
+LIBPLDM_ABI_STABLE
 pldm_requester_rc_t
 pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 			     const void *pldm_req_msg, size_t req_msg_len,

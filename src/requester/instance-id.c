@@ -2,6 +2,7 @@
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 #include <libpldm/instance-id.h>
 #include <libpldm/pldm.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <errno.h>
 #include <fcntl.h>

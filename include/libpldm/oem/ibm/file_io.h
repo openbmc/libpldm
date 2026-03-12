@@ -6,6 +6,8 @@
 extern "C" {
 #endif
 
+#include <libpldm/_abi_annotation.h>
+
 #include <stddef.h>
 #include <stdint.h>
 
@@ -133,6 +135,7 @@ struct pldm_read_write_file_memory_resp {
  *                        written to
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_rw_file_memory_req(const struct pldm_msg *msg, size_t payload_length,
 			      uint32_t *file_handle, uint32_t *offset,
 			      uint32_t *length, uint64_t *address);
@@ -149,6 +152,7 @@ int decode_rw_file_memory_req(const struct pldm_msg *msg, size_t payload_length,
  *  @return pldm_completion_codes
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg'
  */
+LIBPLDM_ABI_STABLE
 int encode_rw_file_memory_resp(uint8_t instance_id, uint8_t command,
 			       uint8_t completion_code, uint32_t length,
 			       struct pldm_msg *msg);
@@ -166,6 +170,7 @@ int encode_rw_file_memory_resp(uint8_t instance_id, uint8_t command,
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_rw_file_memory_req(uint8_t instance_id, uint8_t command,
 			      uint32_t file_handle, uint32_t offset,
 			      uint32_t length, uint64_t address,
@@ -180,6 +185,7 @@ int encode_rw_file_memory_req(uint8_t instance_id, uint8_t command,
  *  @param[out] length - Number of bytes to be read/written
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_rw_file_memory_resp(const struct pldm_msg *msg,
 			       size_t payload_length, uint8_t *completion_code,
 			       uint32_t *length);
@@ -224,6 +230,7 @@ struct pldm_file_attr_table_entry {
  *  @param[out] table_type - the type of file table
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_file_table_req(const struct pldm_msg *msg, size_t payload_length,
 			      uint32_t *transfer_handle,
 			      uint8_t *transfer_opflag, uint8_t *table_type);
@@ -241,6 +248,7 @@ int decode_get_file_table_req(const struct pldm_msg *msg, size_t payload_length,
  *  @return pldm_completion_codes
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg'
  */
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int encode_get_file_table_resp(uint8_t instance_id, uint8_t completion_code,
 			       uint32_t next_transfer_handle,
 			       uint8_t transfer_flag, const uint8_t *table_data,
@@ -255,6 +263,7 @@ int encode_get_file_table_resp(uint8_t instance_id, uint8_t completion_code,
  * @param[out] msg - Message will be written to this
  * @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_get_file_table_req(uint8_t instance_id, uint32_t transfer_handle,
 			      uint8_t transfer_opflag, uint8_t table_type,
 			      struct pldm_msg *msg);
@@ -271,6 +280,7 @@ int encode_get_file_table_req(uint8_t instance_id, uint32_t transfer_handle,
  * @param[out] file_table_length - Length of the File table data
  * @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_file_table_resp(const struct pldm_msg *msg,
 			       size_t payload_length, uint8_t *completion_code,
 			       uint32_t *next_transfer_handle,
@@ -327,6 +337,7 @@ struct pldm_write_file_resp {
  *  @param[out] length - Number of bytes read
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_read_file_req(const struct pldm_msg *msg, size_t payload_length,
 			 uint32_t *file_handle, uint32_t *offset,
 			 uint32_t *length);
@@ -341,6 +352,7 @@ int decode_read_file_req(const struct pldm_msg *msg, size_t payload_length,
  *  @return pldm_completion_codes
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg'
  */
+LIBPLDM_ABI_STABLE
 int encode_read_file_req(uint8_t instance_id, uint32_t file_handle,
 			 uint32_t offset, uint32_t length,
 			 struct pldm_msg *msg);
@@ -356,6 +368,7 @@ int encode_read_file_req(uint8_t instance_id, uint32_t file_handle,
  * msg.
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_read_file_resp(const struct pldm_msg *msg, size_t payload_length,
 			  uint8_t *completion_code, uint32_t *length,
 			  size_t *file_data_offset);
@@ -374,6 +387,7 @@ int decode_read_file_resp(const struct pldm_msg *msg, size_t payload_length,
  *  The position of file data is calculated by caller from address and size
  *  of other input arguments.
  */
+LIBPLDM_ABI_STABLE
 int encode_read_file_resp(uint8_t instance_id, uint8_t completion_code,
 			  uint32_t length, struct pldm_msg *msg);
 
@@ -388,6 +402,7 @@ int encode_read_file_resp(uint8_t instance_id, uint8_t completion_code,
  * msg.
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_write_file_req(const struct pldm_msg *msg, size_t payload_length,
 			  uint32_t *file_handle, uint32_t *offset,
 			  uint32_t *length, size_t *file_data_offset);
@@ -407,6 +422,7 @@ int decode_write_file_req(const struct pldm_msg *msg, size_t payload_length,
  *  The position of file data is calculated by caller from address and size
  *  of other input arguments.
  */
+LIBPLDM_ABI_STABLE
 int encode_write_file_req(uint8_t instance_id, uint32_t file_handle,
 			  uint32_t offset, uint32_t length,
 			  struct pldm_msg *msg);
@@ -419,6 +435,7 @@ int encode_write_file_req(uint8_t instance_id, uint32_t file_handle,
  *  @param[out] length - Number of bytes written
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_write_file_resp(const struct pldm_msg *msg, size_t payload_length,
 			   uint8_t *completion_code, uint32_t *length);
 
@@ -432,6 +449,7 @@ int decode_write_file_resp(const struct pldm_msg *msg, size_t payload_length,
  *  @return pldm_completion_codes
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg'
  */
+LIBPLDM_ABI_STABLE
 int encode_write_file_resp(uint8_t instance_id, uint8_t completion_code,
 			   uint32_t length, struct pldm_msg *msg);
 
@@ -470,6 +488,7 @@ struct pldm_read_write_file_by_type_memory_resp {
  *  @param[out] address - Memory address of the file content
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_rw_file_by_type_memory_req(const struct pldm_msg *msg,
 				      size_t payload_length,
 				      uint16_t *file_type,
@@ -488,6 +507,7 @@ int decode_rw_file_by_type_memory_req(const struct pldm_msg *msg,
  *  @return pldm_completion_codes
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg'
  */
+LIBPLDM_ABI_STABLE
 int encode_rw_file_by_type_memory_resp(uint8_t instance_id, uint8_t command,
 				       uint8_t completion_code, uint32_t length,
 				       struct pldm_msg *msg);
@@ -506,6 +526,7 @@ int encode_rw_file_by_type_memory_resp(uint8_t instance_id, uint8_t command,
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_rw_file_by_type_memory_req(uint8_t instance_id, uint8_t command,
 				      uint16_t file_type, uint32_t file_handle,
 				      uint32_t offset, uint32_t length,
@@ -520,6 +541,7 @@ int encode_rw_file_by_type_memory_req(uint8_t instance_id, uint8_t command,
  *  @param[out] length - Number of bytes to be read/written
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_rw_file_by_type_memory_resp(const struct pldm_msg *msg,
 				       size_t payload_length,
 				       uint8_t *completion_code,
@@ -552,6 +574,7 @@ struct pldm_new_file_resp {
  *  @param[out] length - Number of bytes in new file
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_new_file_req(const struct pldm_msg *msg, size_t payload_length,
 			uint16_t *file_type, uint32_t *file_handle,
 			uint64_t *length);
@@ -564,6 +587,7 @@ int decode_new_file_req(const struct pldm_msg *msg, size_t payload_length,
  *  @return pldm_completion_codes
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg'
  */
+LIBPLDM_ABI_STABLE
 int encode_new_file_resp(uint8_t instance_id, uint8_t completion_code,
 			 struct pldm_msg *msg);
 
@@ -576,6 +600,7 @@ int encode_new_file_resp(uint8_t instance_id, uint8_t completion_code,
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_new_file_req(uint8_t instance_id, uint16_t file_type,
 			uint32_t file_handle, uint64_t length,
 			struct pldm_msg *msg);
@@ -587,6 +612,7 @@ int encode_new_file_req(uint8_t instance_id, uint16_t file_type,
  *  @param[out] completion_code - PLDM completion code
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_new_file_resp(const struct pldm_msg *msg, size_t payload_length,
 			 uint8_t *completion_code);
 
@@ -623,6 +649,7 @@ struct pldm_read_write_file_by_type_resp {
  *  @param[out] length - Number of bytes to be read/written
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_rw_file_by_type_req(const struct pldm_msg *msg,
 			       size_t payload_length, uint16_t *file_type,
 			       uint32_t *file_handle, uint32_t *offset,
@@ -641,6 +668,7 @@ int decode_rw_file_by_type_req(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg'
  *  @note File content has to be copied directly by the caller.
  */
+LIBPLDM_ABI_STABLE
 int encode_rw_file_by_type_resp(uint8_t instance_id, uint8_t command,
 				uint8_t completion_code, uint32_t length,
 				struct pldm_msg *msg);
@@ -658,6 +686,7 @@ int encode_rw_file_by_type_resp(uint8_t instance_id, uint8_t command,
  *  @return pldm_completion_codes
  *  @note File content has to be read directly by the caller.
  */
+LIBPLDM_ABI_STABLE
 int encode_rw_file_by_type_req(uint8_t instance_id, uint8_t command,
 			       uint16_t file_type, uint32_t file_handle,
 			       uint32_t offset, uint32_t length,
@@ -672,6 +701,7 @@ int encode_rw_file_by_type_req(uint8_t instance_id, uint8_t command,
  *  @param[out] length - Number of bytes to be read/written
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_rw_file_by_type_resp(const struct pldm_msg *msg,
 				size_t payload_length, uint8_t *completion_code,
 				uint32_t *length);
@@ -703,6 +733,7 @@ struct pldm_file_ack_resp {
  *  @param[out] file_status - Status of file processing
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_file_ack_req(const struct pldm_msg *msg, size_t payload_length,
 			uint16_t *file_type, uint32_t *file_handle,
 			uint8_t *file_status);
@@ -715,6 +746,7 @@ int decode_file_ack_req(const struct pldm_msg *msg, size_t payload_length,
  *  @return pldm_completion_codes
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg'
  */
+LIBPLDM_ABI_STABLE
 int encode_file_ack_resp(uint8_t instance_id, uint8_t completion_code,
 			 struct pldm_msg *msg);
 
@@ -727,6 +759,7 @@ int encode_file_ack_resp(uint8_t instance_id, uint8_t completion_code,
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_file_ack_req(uint8_t instance_id, uint16_t file_type,
 			uint32_t file_handle, uint8_t file_status,
 			struct pldm_msg *msg);
@@ -738,6 +771,7 @@ int encode_file_ack_req(uint8_t instance_id, uint16_t file_type,
  *  @param[out] completion_code - PLDM completion code
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_file_ack_resp(const struct pldm_msg *msg, size_t payload_length,
 			 uint8_t *completion_code);
 
@@ -778,6 +812,7 @@ struct pldm_file_ack_with_meta_data_resp {
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_file_ack_with_meta_data_req(
 	uint8_t instance_id, uint16_t file_type, uint32_t file_handle,
 	uint8_t file_status, uint32_t file_meta_data_1,
@@ -791,6 +826,7 @@ int encode_file_ack_with_meta_data_req(
  * @param[out] completion_code - PLDM completion code
  * @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_file_ack_with_meta_data_resp(const struct pldm_msg *msg,
 					size_t payload_length,
 					uint8_t *completion_code);
@@ -808,6 +844,7 @@ int decode_file_ack_with_meta_data_resp(const struct pldm_msg *msg,
  * @param[out] file_meta_data_4 - Meta data specific to file type 4
  * @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_file_ack_with_meta_data_req(
 	const struct pldm_msg *msg, size_t payload_length, uint16_t *file_type,
 	uint32_t *file_handle, uint8_t *file_status, uint32_t *file_meta_data_1,
@@ -821,6 +858,7 @@ int decode_file_ack_with_meta_data_req(
  * @param[in,out] msg - Message will be written to this
  * @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_file_ack_with_meta_data_resp(uint8_t instance_id,
 					uint8_t completion_code,
 					struct pldm_msg *msg);
@@ -863,6 +901,7 @@ struct pldm_new_file_with_metadata_resp {
  *  @param[out] msg - Message will be written to this
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int encode_new_file_with_metadata_req(uint8_t instance_id, uint16_t file_type,
 				      uint32_t file_handle, uint64_t length,
 				      uint32_t file_meta_data_1,
@@ -878,6 +917,7 @@ int encode_new_file_with_metadata_req(uint8_t instance_id, uint16_t file_type,
  *  @param[out] completion_code - PLDM completion code
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_new_file_with_metadata_resp(const struct pldm_msg *msg,
 				       size_t payload_length,
 				       uint8_t *completion_code);
@@ -895,6 +935,7 @@ int decode_new_file_with_metadata_resp(const struct pldm_msg *msg,
  *  @param[out] file_meta_data_4 - Meta data specific to file type 4
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_new_file_with_metadata_req(
 	const struct pldm_msg *msg, size_t payload_length, uint16_t *file_type,
 	uint32_t *file_handle, uint64_t *length, uint32_t *file_meta_data_1,
@@ -909,6 +950,7 @@ int decode_new_file_with_metadata_req(
  *  @return pldm_completion_codes
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg'
  */
+LIBPLDM_ABI_STABLE
 int encode_new_file_with_metadata_resp(uint8_t instance_id,
 				       uint8_t completion_code,
 				       struct pldm_msg *msg);

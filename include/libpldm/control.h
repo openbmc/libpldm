@@ -1,5 +1,6 @@
 #pragma once
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/pldm.h>
 #include <libpldm/base.h>
 
@@ -26,6 +27,7 @@ struct pldm_control;
  *
  * Will provide a response to send when resp_len > 0 and returning 0.
  */
+LIBPLDM_ABI_TESTING
 int pldm_control_handle_msg(struct pldm_control *control, const void *req_msg,
 			    size_t req_len, void *resp_msg, size_t *resp_len);
 
@@ -36,6 +38,7 @@ int pldm_control_handle_msg(struct pldm_control *control, const void *req_msg,
  *
  * @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int pldm_control_setup(struct pldm_control *control, size_t pldm_control_size);
 
 /** @brief Add a PLDM type to report.
@@ -54,6 +57,7 @@ int pldm_control_setup(struct pldm_control *control, size_t pldm_control_size);
  *
  * @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int pldm_control_add_type(struct pldm_control *control, uint8_t pldm_type,
 			  const void *versions, size_t versions_count,
 			  const bitfield8_t *commands);

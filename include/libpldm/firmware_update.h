@@ -8,6 +8,7 @@ extern "C" {
 
 #include "compiler.h"
 
+#include <libpldm/_abi_annotation.h>
 #include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
@@ -672,6 +673,7 @@ bool pldm_downstream_device_iter_next(struct pldm_downstream_device_iter *iter)
 	return true;
 }
 
+LIBPLDM_ABI_STABLE
 int decode_pldm_downstream_device_from_iter(
 	struct pldm_downstream_device_iter *iter,
 	struct pldm_downstream_device *dev);
@@ -761,6 +763,7 @@ bool pldm_descriptor_iter_next(struct pldm_descriptor_iter *iter)
 	return true;
 }
 
+LIBPLDM_ABI_STABLE
 int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
 				     struct pldm_descriptor *desc);
 
@@ -1105,6 +1108,7 @@ struct pldm_fwup_update_security_revision_req {
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_package_header_info(
 	const uint8_t *data, size_t length,
 	struct pldm_package_header_information *package_header_info,
@@ -1126,6 +1130,7 @@ int decode_pldm_package_header_info(
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_firmware_device_id_record(
 	const uint8_t *data, size_t length,
 	uint16_t component_bitmap_bit_length,
@@ -1145,6 +1150,7 @@ int decode_firmware_device_id_record(
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_descriptor_type_length_value(const uint8_t *data, size_t length,
 					uint16_t *descriptor_type,
 					struct variable_field *descriptor_data);
@@ -1161,6 +1167,7 @@ int decode_descriptor_type_length_value(const uint8_t *data, size_t length,
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_vendor_defined_descriptor_value(
 	const uint8_t *data, size_t length, uint8_t *descriptor_title_str_type,
 	struct variable_field *descriptor_title_str,
@@ -1176,6 +1183,7 @@ int decode_vendor_defined_descriptor_value(
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_comp_image_info(
 	const uint8_t *data, size_t length,
 	struct pldm_component_image_information *pldm_comp_image_info,
@@ -1192,6 +1200,7 @@ int decode_pldm_comp_image_info(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_query_device_identifiers_req(uint8_t instance_id,
 					size_t payload_length,
 					struct pldm_msg *msg);
@@ -1210,6 +1219,7 @@ int encode_query_device_identifiers_req(uint8_t instance_id,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_TESTING
 int encode_query_device_identifiers_resp(
 	uint8_t instance_id, uint8_t descriptor_count,
 	const struct pldm_descriptor *descriptors, struct pldm_msg *msg,
@@ -1226,6 +1236,7 @@ int encode_query_device_identifiers_resp(
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_query_device_identifiers_resp(const struct pldm_msg *msg,
 					 size_t payload_length,
 					 uint8_t *completion_code,
@@ -1244,6 +1255,7 @@ int decode_query_device_identifiers_resp(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_firmware_parameters_req(uint8_t instance_id,
 				       size_t payload_length,
 				       struct pldm_msg *msg);
@@ -1261,6 +1273,7 @@ int encode_get_firmware_parameters_req(uint8_t instance_id,
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_firmware_parameters_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_get_firmware_parameters_resp *resp_data,
@@ -1280,6 +1293,7 @@ int decode_get_firmware_parameters_resp(
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_firmware_parameters_resp_comp_entry(
 	const uint8_t *data, size_t length,
 	struct pldm_component_parameter_entry *component_data,
@@ -1296,6 +1310,7 @@ int decode_get_firmware_parameters_resp_comp_entry(
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_get_firmware_parameters_resp(
 	uint8_t instance_id,
 	const struct pldm_get_firmware_parameters_resp_full *resp_data,
@@ -1310,6 +1325,7 @@ int encode_get_firmware_parameters_resp(
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_get_firmware_parameters_resp_comp_entry(
 	const struct pldm_component_parameter_entry_full *comp,
 	uint8_t *payload, size_t *payload_length);
@@ -1326,6 +1342,7 @@ int encode_get_firmware_parameters_resp_comp_entry(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_query_downstream_devices_req(uint8_t instance_id,
 					struct pldm_msg *msg);
 
@@ -1342,6 +1359,7 @@ int encode_query_downstream_devices_req(uint8_t instance_id,
  * @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int decode_query_downstream_devices_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_query_downstream_devices_resp *resp_data);
@@ -1361,6 +1379,7 @@ int decode_query_downstream_devices_resp(
  * @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_query_downstream_identifiers_req(
 	uint8_t instance_id,
 	const struct pldm_query_downstream_identifiers_req *params_req,
@@ -1378,6 +1397,7 @@ int encode_query_downstream_identifiers_req(
  *
  * @note Caller is responsible for memory alloc and dealloc of pointer params
  */
+LIBPLDM_ABI_STABLE
 int decode_query_downstream_identifiers_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_query_downstream_identifiers_resp *resp_data,
@@ -1399,6 +1419,7 @@ int decode_query_downstream_identifiers_resp(
  * @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_downstream_firmware_parameters_req(
 	uint8_t instance_id,
 	const struct pldm_get_downstream_firmware_parameters_req *params_req,
@@ -1425,6 +1446,7 @@ struct pldm_downstream_device_parameters_iter {
  * @note Caller is responsible for memory alloc and dealloc of param
  *        'resp_data' and 'downstream_device_param_table'
  */
+LIBPLDM_ABI_STABLE
 int decode_get_downstream_firmware_parameters_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_get_downstream_firmware_parameters_resp *resp_data,
@@ -1454,6 +1476,7 @@ int decode_get_downstream_firmware_parameters_resp(
  * @note Caller is responsible for memory alloc and dealloc of param
  * 	  'entry', 'active_comp_ver_str' and 'pending_comp_ver_str'
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_downstream_device_parameters_entry_from_iter(
 	struct pldm_downstream_device_parameters_iter *iter,
 	struct pldm_downstream_device_parameters_entry *entry);
@@ -1544,6 +1567,7 @@ bool pldm_downstream_device_parameters_iter_next(
  *  @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_request_update_req(uint8_t instance_id, uint32_t max_transfer_size,
 			      uint16_t num_of_comp,
 			      uint8_t max_outstanding_transfer_req,
@@ -1564,6 +1588,7 @@ int encode_request_update_req(uint8_t instance_id, uint32_t max_transfer_size,
  *  @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
  */
+LIBPLDM_ABI_TESTING
 int decode_request_update_req(const struct pldm_msg *msg, size_t payload_length,
 			      struct pldm_request_update_req_full *req);
 
@@ -1577,6 +1602,7 @@ int decode_request_update_req(const struct pldm_msg *msg, size_t payload_length,
  *                                      will send GetPackageData command
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_request_update_resp(const struct pldm_msg *msg,
 			       size_t payload_length, uint8_t *completion_code,
 			       uint16_t *fd_meta_data_len,
@@ -1594,6 +1620,7 @@ int decode_request_update_resp(const struct pldm_msg *msg,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *		   'msg.payload'
  */
+LIBPLDM_ABI_TESTING
 int encode_request_update_resp(uint8_t instance_id,
 			       const struct pldm_request_update_resp *resp_data,
 			       struct pldm_msg *msg, size_t *payload_length);
@@ -1613,6 +1640,7 @@ int encode_request_update_resp(uint8_t instance_id,
  *  @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
  */
+LIBPLDM_ABI_TESTING
 int encode_request_downstream_device_update_req(
 	uint8_t instance_id,
 	const struct pldm_request_downstream_device_update_req *req_data,
@@ -1633,6 +1661,7 @@ int encode_request_downstream_device_update_req(
  *  @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
  */
+LIBPLDM_ABI_TESTING
 int decode_request_downstream_device_update_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_request_downstream_device_update_req *req_data);
@@ -1652,6 +1681,7 @@ int decode_request_downstream_device_update_req(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *		   'msg.payload'
  */
+LIBPLDM_ABI_TESTING
 int encode_request_downstream_device_update_resp(
 	uint8_t instance_id,
 	const struct pldm_request_downstream_device_update_resp *resp_data,
@@ -1669,6 +1699,7 @@ int encode_request_downstream_device_update_resp(
  *		-EOVERFLOW if the payload length is invalid,
  *		-EBADMSG if the message buffer was not fully consumed
  */
+LIBPLDM_ABI_TESTING
 int decode_request_downstream_device_update_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_request_downstream_device_update_resp *resp_data);
@@ -1693,6 +1724,7 @@ int decode_request_downstream_device_update_resp(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_pass_component_table_req(
 	uint8_t instance_id, uint8_t transfer_flag,
 	uint16_t comp_classification, uint16_t comp_identifier,
@@ -1709,6 +1741,7 @@ int encode_pass_component_table_req(
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int decode_pass_component_table_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_pass_component_table_req_full *pcomp);
@@ -1723,6 +1756,7 @@ int decode_pass_component_table_req(
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_pass_component_table_resp(const struct pldm_msg *msg,
 				     size_t payload_length,
 				     uint8_t *completion_code,
@@ -1740,6 +1774,7 @@ int decode_pass_component_table_resp(const struct pldm_msg *msg,
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_pass_component_table_resp(
 	uint8_t instance_id,
 	const struct pldm_pass_component_table_resp *resp_data,
@@ -1766,6 +1801,7 @@ int encode_pass_component_table_resp(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_update_component_req(
 	uint8_t instance_id, uint16_t comp_classification,
 	uint16_t comp_identifier, uint8_t comp_classification_index,
@@ -1782,6 +1818,7 @@ int encode_update_component_req(
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int decode_update_component_req(const struct pldm_msg *msg,
 				size_t payload_length,
 				struct pldm_update_component_req_full *up);
@@ -1802,6 +1839,7 @@ int decode_update_component_req(const struct pldm_msg *msg,
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_update_component_resp(const struct pldm_msg *msg,
 				 size_t payload_length,
 				 uint8_t *completion_code,
@@ -1821,6 +1859,7 @@ int decode_update_component_resp(const struct pldm_msg *msg,
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_update_component_resp(
 	uint8_t instance_id, const struct pldm_update_component_resp *resp_data,
 	struct pldm_msg *msg, size_t *payload_length);
@@ -1835,6 +1874,7 @@ int encode_update_component_resp(
  *
  *	@return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_request_firmware_data_req(const struct pldm_msg *msg,
 				     size_t payload_length, uint32_t *offset,
 				     uint32_t *length);
@@ -1851,6 +1891,7 @@ int decode_request_firmware_data_req(const struct pldm_msg *msg,
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_request_firmware_data_req(
 	uint8_t instance_id,
 	const struct pldm_request_firmware_data_req *req_params,
@@ -1874,6 +1915,7 @@ int encode_request_firmware_data_req(
  *	@note  Caller is responsible for memory alloc and dealloc of param
  *		   'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_request_firmware_data_resp(uint8_t instance_id,
 				      uint8_t completion_code,
 				      struct pldm_msg *msg,
@@ -1887,6 +1929,7 @@ int encode_request_firmware_data_resp(uint8_t instance_id,
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_transfer_complete_req(const struct pldm_msg *msg,
 				 size_t payload_length,
 				 uint8_t *transfer_result);
@@ -1902,6 +1945,7 @@ int decode_transfer_complete_req(const struct pldm_msg *msg,
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_transfer_complete_req(uint8_t instance_id, uint8_t transfer_result,
 				 struct pldm_msg *msg, size_t *payload_length);
 
@@ -1917,6 +1961,7 @@ int encode_transfer_complete_req(uint8_t instance_id, uint8_t transfer_result,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_transfer_complete_resp(uint8_t instance_id, uint8_t completion_code,
 				  struct pldm_msg *msg, size_t payload_length);
 
@@ -1928,6 +1973,7 @@ int encode_transfer_complete_resp(uint8_t instance_id, uint8_t completion_code,
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_verify_complete_req(const struct pldm_msg *msg,
 			       size_t payload_length, uint8_t *verify_result);
 
@@ -1942,6 +1988,7 @@ int decode_verify_complete_req(const struct pldm_msg *msg,
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_verify_complete_req(uint8_t instance_id, uint8_t verify_result,
 			       struct pldm_msg *msg, size_t *payload_length);
 
@@ -1957,6 +2004,7 @@ int encode_verify_complete_req(uint8_t instance_id, uint8_t verify_result,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_verify_complete_resp(uint8_t instance_id, uint8_t completion_code,
 				struct pldm_msg *msg, size_t payload_length);
 
@@ -1970,6 +2018,7 @@ int encode_verify_complete_resp(uint8_t instance_id, uint8_t completion_code,
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_apply_complete_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *apply_result,
@@ -1986,6 +2035,7 @@ int decode_apply_complete_req(
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_apply_complete_req(uint8_t instance_id,
 			      const struct pldm_apply_complete_req *req_data,
 			      struct pldm_msg *msg, size_t *payload_length);
@@ -2002,6 +2052,7 @@ int encode_apply_complete_req(uint8_t instance_id,
  *  @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_apply_complete_resp(uint8_t instance_id, uint8_t completion_code,
 			       struct pldm_msg *msg, size_t payload_length);
 
@@ -2017,6 +2068,7 @@ int encode_apply_complete_resp(uint8_t instance_id, uint8_t completion_code,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_activate_firmware_req(uint8_t instance_id,
 				 bool8_t self_contained_activation_req,
 				 struct pldm_msg *msg, size_t payload_length);
@@ -2029,6 +2081,7 @@ int encode_activate_firmware_req(uint8_t instance_id,
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int decode_activate_firmware_req(const struct pldm_msg *msg,
 				 size_t payload_length, bool *self_contained);
 
@@ -2042,6 +2095,7 @@ int decode_activate_firmware_req(const struct pldm_msg *msg,
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_activate_firmware_resp(const struct pldm_msg *msg,
 				  size_t payload_length,
 				  uint8_t *completion_code,
@@ -2058,6 +2112,7 @@ int decode_activate_firmware_resp(const struct pldm_msg *msg,
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_activate_firmware_resp(
 	uint8_t instance_id,
 	const struct pldm_activate_firmware_resp *resp_data,
@@ -2074,6 +2129,7 @@ int encode_activate_firmware_resp(
  *  @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_get_status_req(uint8_t instance_id, struct pldm_msg *msg,
 			  size_t payload_length);
 
@@ -2094,6 +2150,7 @@ int encode_get_status_req(uint8_t instance_id, struct pldm_msg *msg,
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_get_status_resp(const struct pldm_msg *msg, size_t payload_length,
 			   uint8_t *completion_code, uint8_t *current_state,
 			   uint8_t *previous_state, uint8_t *aux_state,
@@ -2112,6 +2169,7 @@ int decode_get_status_resp(const struct pldm_msg *msg, size_t payload_length,
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_get_status_resp(uint8_t instance_id,
 			   const struct pldm_get_status_resp *status,
 			   struct pldm_msg *msg, size_t *payload_length);
@@ -2127,6 +2185,7 @@ int encode_get_status_resp(uint8_t instance_id,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_cancel_update_component_req(uint8_t instance_id,
 				       struct pldm_msg *msg,
 				       size_t payload_length);
@@ -2139,6 +2198,7 @@ int encode_cancel_update_component_req(uint8_t instance_id,
  *
  *  @return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_cancel_update_component_resp(const struct pldm_msg *msg,
 					size_t payload_length,
 					uint8_t *completion_code);
@@ -2154,6 +2214,7 @@ int decode_cancel_update_component_resp(const struct pldm_msg *msg,
  *	@note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
+LIBPLDM_ABI_STABLE
 int encode_cancel_update_req(uint8_t instance_id, struct pldm_msg *msg,
 			     size_t payload_length);
 
@@ -2171,6 +2232,7 @@ int encode_cancel_update_req(uint8_t instance_id, struct pldm_msg *msg,
  *
  *	@return pldm_completion_codes
  */
+LIBPLDM_ABI_STABLE
 int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
 			      uint8_t *completion_code,
 			      bool8_t *non_functioning_component_indication,
@@ -2187,6 +2249,7 @@ int decode_cancel_update_resp(const struct pldm_msg *msg, size_t payload_length,
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_cancel_update_resp(uint8_t instance_id,
 			      const struct pldm_cancel_update_resp *resp_data,
 			      struct pldm_msg *msg, size_t *payload_length);
@@ -2202,6 +2265,7 @@ int encode_cancel_update_resp(uint8_t instance_id,
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int encode_pldm_fwup_update_security_revision_req(
 	const uint8_t instance_id,
 	const struct pldm_fwup_update_security_revision_req *req,
@@ -2215,6 +2279,7 @@ int encode_pldm_fwup_update_security_revision_req(
  *
  *  @return 0 on success, a negative errno value on failure.
  */
+LIBPLDM_ABI_TESTING
 int decode_pldm_fwup_update_security_revision_resp(const struct pldm_msg *msg,
 						   size_t payload_length,
 						   uint8_t *completion_code);
@@ -2549,6 +2614,7 @@ struct pldm_package {
  * - -EPROTO if parsed values violate the package format specification
  * - -EUCLEAN if the package fails embedded integrity checks
  */
+LIBPLDM_ABI_STABLE
 int decode_pldm_firmware_update_package(
 	const void *data, size_t length,
 	const struct pldm_package_format_pin *pin,
@@ -2575,8 +2641,10 @@ bool pldm_package_firmware_device_id_record_iter_next(struct pldm_package *pkg)
 	return true;
 }
 
+LIBPLDM_ABI_STABLE
 int pldm_package_firmware_device_id_record_iter_init(struct pldm_package *pkg);
 
+LIBPLDM_ABI_STABLE
 int decode_pldm_package_firmware_device_id_record_from_iter(
 	struct pldm_package *pkg,
 	struct pldm_package_firmware_device_id_record *rec);
@@ -2714,8 +2782,10 @@ bool pldm_package_downstream_device_id_record_iter_next(struct pldm_package *pkg
 	return true;
 }
 
+LIBPLDM_ABI_STABLE
 int pldm_package_downstream_device_id_record_iter_init(struct pldm_package *pkg);
 
+LIBPLDM_ABI_STABLE
 int decode_pldm_package_downstream_device_id_record_from_iter(
 	struct pldm_package *pkg,
 	struct pldm_package_downstream_device_id_record *rec);
@@ -2886,8 +2956,10 @@ bool pldm_package_component_image_information_iter_next(struct pldm_package *pkg
 	return true;
 }
 
+LIBPLDM_ABI_STABLE
 int pldm_package_component_image_information_iter_init(struct pldm_package *pkg);
 
+LIBPLDM_ABI_STABLE
 int decode_pldm_package_component_image_information_from_iter(
 	struct pldm_package *pkg,
 	struct pldm_package_component_image_information *info);

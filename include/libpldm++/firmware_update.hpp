@@ -3,6 +3,7 @@
 #include <libpldm++/types.hpp>
 
 #include <libpldm/firmware_update.h>
+#include <libpldm/_abi_annotation.h>
 
 #include <cstdint>
 #include <stdexcept>

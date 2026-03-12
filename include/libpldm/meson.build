@@ -1,4 +1,5 @@
 libpldm_headers = files(
+    '_abi_annotation.h',
     'base.h',
     'bcd.h',
     'bios.h',
