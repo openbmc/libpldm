@@ -52,6 +52,24 @@
       "parentUuid": "a91ecd38_ce1d3c6c",
       "revId": "a8b30952a08441609249556993db8d240e4d8fd5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2094dd1a_9b278a47",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-12T07:57:45Z",
+      "side": 1,
+      "message": "https://gerrit.openbmc.org/c/openbmc/libpldm/+/88176\n\nadding the PR that addresses these comments here for tracking purpose",
+      "parentUuid": "aa28cbd1_0df27142",
+      "revId": "a8b30952a08441609249556993db8d240e4d8fd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
