@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae0f2310_81b1e43b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3048,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-12T09:29:09Z",
+      "side": 1,
+      "message": "This name comes from the specification https://www.dmtf.org/sites/default/files/standards/documents/DSP0248_1.3.0.pdf  Table 106 – Redfish Action PDR format - the area with the fields `RelatedResourceCount` and `RelatedResourceID [...]` is marked as `Host Resource Information`\n\nWith that fact in mind, do we still want to change `host-\u003erelated` everywhere?",
+      "parentUuid": "dbc7bf97_f44733c9",
+      "range": {
+        "startLine": 3048,
+        "startChar": 10,
+        "endLine": 3048,
+        "endChar": 28
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "025bfceb_91acc094",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 11
@@ -54,6 +78,24 @@
       "writtenOn": "2026-03-12T07:12:29Z",
       "side": 1,
       "message": "Given the two `foreach` macros have to be used sequentially after the call to `decode_pldm_platform_redfish_action_pdr()`, perhaps we only provide the complete example code in the documentation for `decode_pldm_platform_redfish_action_pdr()` and just document the parameters for the macros.\n\nMy concern is that both examples are incomplete. The sensible place for a complete examples seems to be `decode_pldm_platform_redfish_action_pdr()`.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "463001b1_e645a1e0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3057,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-12T09:29:09Z",
+      "side": 1,
+      "message": "I was mimicing the foreach docs in the https://github.com/openbmc/libpldm/blob/main/include/libpldm/firmware_update.h\n\nI don\u0027t see any examples for foreach usage besides the actual docs for foreach.\n\nMaybe we need to add cross-reference something similar to this?\nhttps://github.com/openbmc/libpldm/blob/80cde632088394b9b3da90cf677b8d2763278c77/include/libpldm/firmware_update.h#L2387\n\n```\n/** @brief Decode date fields from Redfish Resource PDR\n *\n *  @param[in] data - PLDM response message which includes the Redfish Resource PDR\n *                        from DSP0248_1.3.0 table 104.\n *  @param[in] data_length - Length of response message payload\n *  @param[out] pdr - Redfish resource pdr struct\n *  @param[out] additional_resource_info - Pointer to the structure used to access Additional Resources area, \n * Iterate over the entries using @ref *foreach_pldm_platform_redfish_resource_pdr_additional_resource\n *  @param[out] oem_names - Pointer to the structure used to access OEMNames area\n * Iterate over the entries using @ref *foreach_pldm_platform_redfish_resource_pdr_oem_name\n *\n *  @return error code\n */\n ```",
+      "parentUuid": "025bfceb_91acc094",
       "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -289,6 +331,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1796d12d_230bf467",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3211,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-12T09:29:09Z",
+      "side": 1,
+      "message": "\u003e The only concern is loss of information during iteration\n\nYes, I thought we need to save it, so we can iterate multiple times.\n\nThis iterator API is kinda new to me, I don\u0027t have any experience for designing or using such things, but here are some thoughts to your suggestions.\n\n\u003e But perhaps people wanting to iterate multiple times could either dynamically store the results from the first iteration or re-decode the message buffer?\n\nTo me it looks like going all over the full PDR again seems like a too expensive move. And it is not very intuitive for the user, that iteration can be performed only once on data.\n\nI remember I\u0027ve once asked you, is it okay, that we need to write that much of a boilerplate code in the library to implement this iterator api. And you\u0027ve answered that you don\u0027t mind having it, as long as API for the user is simple. I guess that idea stick with me. I think we shouldn\u0027t require the user to perform additional actions to make parsing permanent. It is not very obvious and gives some burden to the user, and the main point was to simplify things for the user.",
+      "parentUuid": "aee6dcdf_cae7b0d6",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ecb2696_2943a4c8",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 11
@@ -306,6 +366,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "205ea3a7_4c40540a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3247,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-12T09:29:09Z",
+      "side": 1,
+      "message": "I guess we can do something like that, but I don\u0027t think it would be fair/safe to ask the user to manually copy some fields from the `pldm_platform_redfish_action_pdr` to `pldm_platform_redfish_action_pdr_action_info`. So in this case we would need to introduce another API function to initialize the `pldm_platform_redfish_action_pdr_action_info` from  the `pldm_platform_redfish_action_pdr`. And I\u0027m not sure that will simplify things",
+      "parentUuid": "7ecb2696_2943a4c8",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a428355_419de094",
         "filename": "src/dsp/platform.c",
         "patchSetId": 11
@@ -317,6 +395,24 @@
       "writtenOn": "2026-03-12T07:12:29Z",
       "side": 1,
       "message": "I realised I was commenting on the redfish action PDR patch here, where previously I commented on the redfish resource PDR patch.\n\nAnyway, we should probably expand the `pldm_msgbuf_skip()` API to cover `const` buffers.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffa97ce0_72d512e1",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3917,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-12T09:29:09Z",
+      "side": 1,
+      "message": "Whould there be any difference between the `pldm_msgbuf_skip(ctx, len)` and `pldm_msgbuf_span_required(ctx, len, NULL);` ?\n\nShouldn\u0027t `pldm_msgbuf_skip` call `pldm_msgbuf_span_required(ctx, len, NULL);` inside of it?\n\nOr why do we have a possibility to call `pldm_msgbuf_span_required(ctx, len, NULL);` if we don\u0027t really want to use it.",
+      "parentUuid": "9a428355_419de094",
       "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -368,6 +464,24 @@
       "writtenOn": "2026-03-12T07:12:29Z",
       "side": 1,
       "message": "Fixing the `skip` API deficiency would allow us to avoid these casts too.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4fc89d3_33deec90",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3981,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-12T09:29:09Z",
+      "side": 1,
+      "message": "I thought `pldm_msgbuf_skip(buf, len)` can help to get rid of `pldm_msgbuf_span_required(buf, length, NULL);`\n\nHow can it help with `pldm_msgbuf_span_remaining` that is used to update `iter-\u003efield.ptr`/`iter-\u003efield.length`",
+      "parentUuid": "71e0b487_32de6144",
       "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
