@@ -94,6 +94,7 @@ Change categories:
 
 ### Fixed
 
+- pdr: Fix NULL pointer dereference in `pldm_entity_association_tree_visit()`
 - pdr: Fix infinite loop in `pldm_pdr_delete_by_effecter_id()`
 - pdr: Fix infinite loop in `pldm_pdr_delete_by_sensor_id()`
 - dsp: firmware_update: Fix str_type encoding in
