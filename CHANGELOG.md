@@ -94,6 +94,9 @@ Change categories:
 
 ### Fixed
 
+- pdr: Fix infinite loops in `pldm_pdr_delete_by_sensor_id()` and
+  `pldm_pdr_delete_by_effecter_id()`, and fix null pointer dereference on
+  malloc failure in `pldm_entity_association_tree_visit()`
 - dsp: firmware_update: Fix str_type encoding in
   encode_get_firmware_parameters_resp()
 - state-set: Return the misspelled
