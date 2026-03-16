@@ -3043,6 +3043,19 @@ int decode_pldm_platform_redfish_resource_pdr(
 		*additional_resource_info,
 	struct pldm_platform_redfish_resource_pdr_oem_name_info *oem_name_info);
 
+/** @struct pldm_platform_redfish_action_pdr
+ *
+ *  Structure representing Redfish Action PDR
+ */
+struct pldm_platform_redfish_action_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint8_t action_pdr_index;
+	uint16_t related_resource_count;
+	struct variable_field related_resources;
+	uint8_t action_count;
+	struct variable_field actions;
+};
+
 /** @brief Iterator for related resources from the Redfish Action PDR
  *
  * @param host_resource_info The @ref "struct pldm_platform_redfish_action_pdr_host_resource_info" lvalue
@@ -3076,64 +3089,56 @@ int decode_pldm_platform_redfish_resource_pdr(
  */
 #define foreach_pldm_platform_redfish_action_pdr_related_resource_id(                        \
 	host_resource_info, res, rc)                                                         \
-	for ((rc) = pldm_platform_redfish_action_pdr_related_resource_id_iter_init(          \
-		     &(host_resource_info));                                                 \
+	for (struct pldm_platform_redfish_action_pdr_related_resource_id_iter res##_iter = \
+				((rc) = 0, \
+				pldm_platform_redfish_action_pdr_related_resource_id_iter_init(          \
+		     &(res##_iter)));                                                 \
 	     !(rc) &&                                                                        \
 	     !pldm_platform_redfish_action_pdr_related_resource_id_iter_end(                 \
-		     &(host_resource_info)) &&                                               \
+		     &(res##_iter)) &&                                               \
 	     !((rc) = decode_pldm_platform_redfish_action_pdr_related_resource_id_from_iter( \
-		       &(host_resource_info), &(res)));                                      \
+		       &(res##_iter), &(res)));                                      \
 	     pldm_platform_redfish_action_pdr_related_resource_id_iter_next(                 \
-		     &(host_resource_info)))
+		     &(res##_iter)))
 
 struct pldm_platform_redfish_action_pdr_related_resource_id_iter {
 	struct variable_field field;
 	size_t entries;
 };
 
-/**
- * @brief State tracking for iteration over Related Resource IDs from the Redfish Action PDR
- *
- * Declare an instance on the stack to be initialised by @ref
- * decode_pldm_platform_redfish_action_pdr
- *
- * The state is consumed by the following macros:
- *
- * - @ref foreach_pldm_platform_redfish_action_pdr_related_resource_id
- */
-struct pldm_platform_redfish_action_pdr_host_resource_info {
-	size_t count;
-	struct variable_field area;
+LIBPLDM_ITERATOR
+struct pldm_platform_redfish_action_pdr_related_resource_id_iter
+pldm_platform_redfish_action_pdr_related_resource_id_iter_init(
+	struct pldm_platform_redfish_action_pdr *pdr)
+{
 	struct pldm_platform_redfish_action_pdr_related_resource_id_iter iter;
-};
 
-int pldm_platform_redfish_action_pdr_related_resource_id_iter_init(
-	struct pldm_platform_redfish_action_pdr_host_resource_info
-		*host_resource_info);
+	iter.field = pdr->related_resources;
+	iter.entries = pdr->related_resource_count;
+
+	return iter;
+}
 
 LIBPLDM_ITERATOR
 bool pldm_platform_redfish_action_pdr_related_resource_id_iter_end(
-	const struct pldm_platform_redfish_action_pdr_host_resource_info
-		*host_resource_info)
+	const struct pldm_platform_redfish_action_pdr_related_resource_id_iter *iter)
 {
-	return host_resource_info->iter.entries == 0;
+	return iter->entries == 0;
 }
 
 LIBPLDM_ITERATOR
 bool pldm_platform_redfish_action_pdr_related_resource_id_iter_next(
-	struct pldm_platform_redfish_action_pdr_host_resource_info
-		*host_resource_info)
+	struct pldm_platform_redfish_action_pdr_related_resource_id_iter *iter)
 {
-	if (!host_resource_info->iter.entries) {
+	if (!iter->entries) {
 		return false;
 	}
-	host_resource_info->iter.entries--;
+	iter->entries--;
 	return true;
 }
 
 int decode_pldm_platform_redfish_action_pdr_related_resource_id_from_iter(
-	struct pldm_platform_redfish_action_pdr_host_resource_info
-		*host_resource_info,
+	struct pldm_platform_redfish_action_pdr_related_resource_id_iter *iter,
 	uint32_t *res);
 
 /** @brief Iterator for actions from the Redfish Action PDR
@@ -3236,19 +3241,6 @@ int decode_pldm_platform_redfish_action_pdr_action_from_iter(
 	struct pldm_platform_redfish_action_pdr_action_info *action_info,
 	struct pldm_platform_redfish_action_pdr_action *action);
 
-/** @struct pldm_platform_redfish_action_pdr
- *
- *  Structure representing Redfish Action PDR
- */
-struct pldm_platform_redfish_action_pdr {
-	struct pldm_value_pdr_hdr hdr;
-	uint8_t action_pdr_index;
-	uint16_t related_resource_count;
-	struct variable_field related_resources;
-	uint8_t action_count;
-	struct variable_field actions;
-};
-
 /**
  * Minimum length of Redfish Action PDR, including size of CommonHeader,
  * ActionPDRIndex, RelatedResourceCount, ActionCount.
@@ -3270,10 +3262,7 @@ struct pldm_platform_redfish_action_pdr {
  */
 int decode_pldm_platform_redfish_action_pdr(
 	const void *data, size_t data_length,
-	struct pldm_platform_redfish_action_pdr *pdr,
-	struct pldm_platform_redfish_action_pdr_host_resource_info
-		*host_resource_info,
-	struct pldm_platform_redfish_action_pdr_action_info *action_info);
+	struct pldm_platform_redfish_action_pdr *pdr);
 
 #ifdef __cplusplus
 }

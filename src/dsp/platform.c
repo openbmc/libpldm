@@ -3883,10 +3883,7 @@ int pldm_platform_redfish_resource_pdr_oem_name_iter_init(
 LIBPLDM_ABI_TESTING
 int decode_pldm_platform_redfish_action_pdr(
 	const void *data, size_t data_length,
-	struct pldm_platform_redfish_action_pdr *pdr,
-	struct pldm_platform_redfish_action_pdr_host_resource_info
-		*host_resource_info,
-	struct pldm_platform_redfish_action_pdr_action_info *action_info)
+	struct pldm_platform_redfish_action_pdr *pdr)
 {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
@@ -3920,8 +3917,6 @@ int decode_pldm_platform_redfish_action_pdr(
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
-	host_resource_info->count = pdr->related_resource_count;
-	host_resource_info->area = pdr->related_resources;
 
 	pldm_msgbuf_extract(buf, pdr->action_count);
 
@@ -3944,31 +3939,25 @@ int decode_pldm_platform_redfish_action_pdr(
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
-	action_info->count = pdr->action_count;
-	action_info->area = pdr->actions;
 
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
 LIBPLDM_ABI_TESTING
 int decode_pldm_platform_redfish_action_pdr_related_resource_id_from_iter(
-	struct pldm_platform_redfish_action_pdr_host_resource_info
-		*host_resource_info LIBPLDM_CC_UNUSED,
+	struct pldm_platform_redfish_action_pdr_related_resource_id_iter *iter,
 	uint32_t *res)
 {
-	struct pldm_platform_redfish_action_pdr_related_resource_id_iter *iter;
 	int rc;
 
-	if (!host_resource_info) {
+	if (!iter) {
 		return -EINVAL;
 	}
 
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
-	if (!res || !(host_resource_info->iter.field.ptr)) {
+	if (!res || !(iter->field.ptr)) {
 		return -EINVAL;
 	}
-
-	iter = &host_resource_info->iter;
 
 	rc = pldm_msgbuf_init_errno(buf, sizeof(uint32_t), iter->field.ptr,
 				    iter->field.length);
@@ -3982,38 +3971,6 @@ int decode_pldm_platform_redfish_action_pdr_related_resource_id_from_iter(
 				   &iter->field.length);
 
 	return pldm_msgbuf_complete_consumed(buf);
-}
-
-LIBPLDM_ABI_TESTING
-int pldm_platform_redfish_action_pdr_related_resource_id_iter_init(
-	struct pldm_platform_redfish_action_pdr_host_resource_info
-		*host_resource_info)
-{
-	struct pldm_platform_redfish_action_pdr_related_resource_id_iter *iter;
-	PLDM_MSGBUF_RO_DEFINE_P(buf);
-	int rc;
-
-	if (!host_resource_info) {
-		return -EINVAL;
-	}
-
-	if (!host_resource_info->area.ptr) {
-		return -EINVAL;
-	}
-	iter = &host_resource_info->iter;
-	iter->field = host_resource_info->area;
-	iter->entries = host_resource_info->count;
-
-	rc = pldm_msgbuf_init_errno(buf, 0, iter->field.ptr,
-				    iter->field.length);
-	if (rc) {
-		return rc;
-	}
-
-	pldm_msgbuf_span_remaining(buf, (const void **)&iter->field.ptr,
-				   &iter->field.length);
-
-	return pldm_msgbuf_complete(buf);
 }
 
 LIBPLDM_ABI_TESTING
