@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8324c50_63248694",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-16T06:56:53Z",
+      "side": 1,
+      "message": "Can you add a fixes section here mentioning the patch that introduced the problem.\n\nlike this\n\n```\nFixes: commit (\"patch title\")\n```",
+      "revId": "2d668bf94b9e65b0b94433721a4639249648d907",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38761d25_4f99f9ea",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-16T06:56:53Z",
+      "side": 1,
+      "message": "Can you add a test for malloc failures, so that we can catch regressions in the future.",
+      "revId": "2d668bf94b9e65b0b94433721a4639249648d907",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf7ec12_e599066d",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-16T06:56:53Z",
+      "side": 1,
+      "message": "I think you should reset `size \u003d 0` in case of malloc failures. Else the caller might try to access the entries since at that point size contains a valid `number \u003e\u003d 0`.",
+      "revId": "2d668bf94b9e65b0b94433721a4639249648d907",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
