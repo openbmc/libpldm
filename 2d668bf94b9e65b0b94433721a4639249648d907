@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd63969_19d17599",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002796
+      },
+      "writtenOn": "2026-03-16T17:12:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8324c50_63248694",
+      "revId": "2d668bf94b9e65b0b94433721a4639249648d907",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38761d25_4f99f9ea",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17146608_76da1eb7",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1002796
+      },
+      "writtenOn": "2026-03-16T17:12:29Z",
+      "side": 1,
+      "message": "I couldn\u0027t find any malloc-mocking infrastructure (e.g., __wrap_malloc or similar) in this project to inject allocation failures in a test and adding that would be a broader effort beyond this fix. I\u0027ve added *size \u003d 0 on the failure path so callers can\u0027t misuse a stale size value — that\u0027s the observable behavior a test would verify.",
+      "parentUuid": "38761d25_4f99f9ea",
+      "revId": "2d668bf94b9e65b0b94433721a4639249648d907",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cf7ec12_e599066d",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-03-16T06:56:53Z",
       "side": 1,
       "message": "I think you should reset `size \u003d 0` in case of malloc failures. Else the caller might try to access the entries since at that point size contains a valid `number \u003e\u003d 0`.",
+      "revId": "2d668bf94b9e65b0b94433721a4639249648d907",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bace314_065cb1c4",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1002796
+      },
+      "writtenOn": "2026-03-16T17:12:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cf7ec12_e599066d",
       "revId": "2d668bf94b9e65b0b94433721a4639249648d907",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
