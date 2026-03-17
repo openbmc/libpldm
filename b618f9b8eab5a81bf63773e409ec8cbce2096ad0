@@ -16,6 +16,23 @@
       "message": "```suggestion\n\tpdr, res, rc)                                                         \\\n```",
       "revId": "b618f9b8eab5a81bf63773e409ec8cbce2096ad0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4459ef98_f286b422",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3110,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T14:03:51Z",
+      "side": 1,
+      "message": "Do we return it as value? Because in the `foreach_pldm_platform_redfish_action_pdr_related_resource_id` it looks like you\u0027ve wanted it to be initialized passing it by reference via function argument.",
+      "revId": "b618f9b8eab5a81bf63773e409ec8cbce2096ad0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
