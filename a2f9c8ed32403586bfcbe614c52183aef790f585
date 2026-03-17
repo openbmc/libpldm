@@ -89,6 +89,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01c7d8b1_124975c8",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3048,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "No longer relevant, structure `host_resource_info` was deleted",
+      "parentUuid": "c7705f56_24b3d688",
+      "range": {
+        "startLine": 3048,
+        "startChar": 10,
+        "endLine": 3048,
+        "endChar": 28
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "025bfceb_91acc094",
@@ -142,6 +166,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9817ae71_253af3bc",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3057,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Added complete example to the `decode_pldm_platform_redfish_action_pdr()` function",
+      "parentUuid": "9698c902_e497b281",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67119eb2_6ac1ff18",
@@ -155,6 +197,30 @@
       "writtenOn": "2026-03-12T07:12:29Z",
       "side": 1,
       "message": "This should be `related_resource_id`?",
+      "range": {
+        "startLine": 3067,
+        "startChar": 44,
+        "endLine": 3067,
+        "endChar": 50
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0e2bdbd_b2fb725e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3067,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Code was rewritten",
+      "parentUuid": "67119eb2_6ac1ff18",
       "range": {
         "startLine": 3067,
         "startChar": 44,
@@ -188,6 +254,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fbbce3f_7e85635a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3078,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "No longer relevant, structure host_resource_info was deleted",
+      "parentUuid": "bc7adafe_0d2d315e",
+      "range": {
+        "startLine": 3078,
+        "startChar": 1,
+        "endLine": 3078,
+        "endChar": 19
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf59a120_a9a87447",
@@ -201,6 +291,30 @@
       "writtenOn": "2026-03-12T07:12:29Z",
       "side": 1,
       "message": "`related`",
+      "range": {
+        "startLine": 3104,
+        "startChar": 40,
+        "endLine": 3104,
+        "endChar": 44
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "085e5ab2_443ce60e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3104,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Resolved in the https://gerrit.openbmc.org/c/openbmc/libpldm/+/87536/comment/dbc7bf97_f44733c9/",
+      "parentUuid": "cf59a120_a9a87447",
       "range": {
         "startLine": 3104,
         "startChar": 40,
@@ -234,6 +348,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec333b7_6b55aa8d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3111,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Resolved in the https://gerrit.openbmc.org/c/openbmc/libpldm/+/87536/comment/dbc7bf97_f44733c9/",
+      "parentUuid": "146bfe41_0b2105da",
+      "range": {
+        "startLine": 3111,
+        "startChar": 41,
+        "endLine": 3111,
+        "endChar": 45
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d89a5d9f_78500ddd",
@@ -247,6 +385,30 @@
       "writtenOn": "2026-03-12T07:12:29Z",
       "side": 1,
       "message": "`related`",
+      "range": {
+        "startLine": 3116,
+        "startChar": 47,
+        "endLine": 3116,
+        "endChar": 51
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f79520d5_e6e719f6",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3116,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Resolved in the https://gerrit.openbmc.org/c/openbmc/libpldm/+/87536/comment/dbc7bf97_f44733c9/",
+      "parentUuid": "d89a5d9f_78500ddd",
       "range": {
         "startLine": 3116,
         "startChar": 47,
@@ -280,6 +442,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8338b76e_e4033db4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3124,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Resolved in the https://gerrit.openbmc.org/c/openbmc/libpldm/+/87536/comment/dbc7bf97_f44733c9/",
+      "parentUuid": "4769027e_ba7d437d",
+      "range": {
+        "startLine": 3124,
+        "startChar": 41,
+        "endLine": 3124,
+        "endChar": 45
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea96ed12_b35a2d71",
@@ -293,6 +479,30 @@
       "writtenOn": "2026-03-12T07:12:29Z",
       "side": 1,
       "message": "`related`.",
+      "range": {
+        "startLine": 3135,
+        "startChar": 41,
+        "endLine": 3135,
+        "endChar": 45
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f16240_3d207bfe",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3135,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Resolved in the https://gerrit.openbmc.org/c/openbmc/libpldm/+/87536/comment/dbc7bf97_f44733c9/",
+      "parentUuid": "ea96ed12_b35a2d71",
       "range": {
         "startLine": 3135,
         "startChar": 41,
@@ -320,6 +530,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28458e3d_48c7f548",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3136,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "No longer relevant, structure `host_resource_info` was deleted",
+      "parentUuid": "852dbb32_633c423b",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fec5c46c_87d56db1",
@@ -337,6 +565,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "943844e9_960249ed",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3141,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "No longer relevant, structure `pldm_platform_redfish_action_pdr_action_info` was deleted",
+      "parentUuid": "fec5c46c_87d56db1",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4992e60_ffb5927a",
@@ -350,6 +596,24 @@
       "writtenOn": "2026-03-12T07:12:29Z",
       "side": 1,
       "message": "See comment above regarding examples.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a81711b8_9b342ca7",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3151,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Resolved",
+      "parentUuid": "b4992e60_ffb5927a",
       "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -407,6 +671,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7622b30_4fe911c2",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3211,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Things were simplified according to the https://gerrit.openbmc.org/c/openbmc/libpldm/+/88328/",
+      "parentUuid": "1437f5f7_9dd7594f",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ecb2696_2943a4c8",
@@ -456,6 +738,24 @@
       "side": 1,
       "message": "Here\u0027s a sketch of my thoughts, as a patch on top:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/88328/\n\nI think it simplifies things a bit.",
       "parentUuid": "205ea3a7_4c40540a",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03fa920f_a902b280",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3247,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Thanks! I\u0027ve adapted changes from this suggestion",
+      "parentUuid": "61cd7f62_8772c1a0",
       "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -529,6 +829,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fdd9cb3_aade301f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3966,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "95d3b50e_ca92410f",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71e0b487_32de6144",
@@ -587,6 +905,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca141091_2be93e3c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4016,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "No longer relevant, this code was deleted",
+      "parentUuid": "dff34c8c_05f9f554",
+      "range": {
+        "startLine": 4007,
+        "startChar": 1,
+        "endLine": 4016,
+        "endChar": 34
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57ac55d7_e35d612c",
@@ -600,6 +942,24 @@
       "writtenOn": "2026-03-12T07:12:29Z",
       "side": 1,
       "message": "Needs an error check",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d275554_69b331e2",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4046,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Added error check",
+      "parentUuid": "57ac55d7_e35d612c",
       "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -621,6 +981,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1081900_7c8ecb9a",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4049,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "Added error check",
+      "parentUuid": "42848efd_a422aca6",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0eb4434_3a9c0db3",
@@ -634,6 +1012,30 @@
       "writtenOn": "2026-03-12T07:12:29Z",
       "side": 1,
       "message": "This seems unnecessary?",
+      "range": {
+        "startLine": 4078,
+        "startChar": 1,
+        "endLine": 4087,
+        "endChar": 34
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cf9d5a7_242a2a52",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4087,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T22:36:51Z",
+      "side": 1,
+      "message": "No longer relevant, this code was deleted",
+      "parentUuid": "d0eb4434_3a9c0db3",
       "range": {
         "startLine": 4078,
         "startChar": 1,
