@@ -72,6 +72,7 @@ static int pldm_transport_af_mctp_find_tid(struct pldm_transport_af_mctp *ctx,
 	return -1;
 }
 
+LIBPLDM_ABI_TESTING
 int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
 				   uint32_t network, mctp_eid_t eid,
 				   pldm_tid_t *tid)

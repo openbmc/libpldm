@@ -2,7 +2,7 @@ if cc.has_header('poll.h')
     if cc.has_header('sys/socket.h')
         libpldm_sources += files('socket.c')
         if cc.has_header('linux/mctp.h')
-            libpldm_sources += files('af-mctp-test.c', 'af-mctp.c')
+            libpldm_sources += files('af-mctp.c')
         endif
         if cc.has_header('sys/un.h')
             libpldm_sources += files('mctp-demux.c')
