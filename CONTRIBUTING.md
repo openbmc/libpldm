@@ -4,16 +4,16 @@
 
 ### Commit messages
 
-- [ ] My commit message subject is prefixed with the name of the impacted
+- [ ] The commit message subject is prefixed with the name of the impacted
       subsystem
 
-- [ ] If I've added support for a new message type, then my commit message
+- [ ] If the change adds support for a new message type, then the commit message
       specifies all of:
   - [ ] The relevant DMTF specification by its DSP number and title
   - [ ] The relevant version of the specification
   - [ ] The section of the specification that defines the message type
 
-- [ ] My commit message is [written in imperative
+- [ ] The commit message is [written in imperative
       mood][linux-submitting-patches]
 
   > Describe your changes in imperative mood, e.g. “make xyzzy do frotz” instead
@@ -23,7 +23,7 @@
 [linux-submitting-patches]:
   https://docs.kernel.org/process/submitting-patches.html#describe-your-changes
 
-- [ ] My commit message describes testing practices only if the discussion is
+- [ ] The commit message describes testing practices only if the discussion is
       substantive.
   - The description must contain enough information for someone else to
     reproduce the setup and verify the results.
@@ -64,14 +64,12 @@ Changelog entries broadly fall into one of two cases
   >   No new error values will be returned, but existing error values may be
   >   returned under new conditions.
 
-- [ ] I have added entries to `CHANGELOG.md` for work that impacts the users of
-      the library
+- [ ] New changelog entries document work impacting the users of the library
   - For example:
     - Changes to the public headers under `include/libpldm`
     - Bug-fixes whose impact is observable at runtime
 
-- [ ] I have not added entries to `CHANGELOG.md` for work that has no user
-      impact
+- [ ] Work that has no user impact does not have a new changelog entry
   - For example, refactoring the implementation in a way that:
     - Doesn't change the public headers under `include/libpldm`
     - Doesn't change observable runtime behaviour
@@ -102,16 +100,16 @@ Changelog entries broadly fall into one of two cases
 
 - [ ] All enum members must be prefixed with the type name
 
-- [ ] I haven't added new `typedef`s, unless:
-  - [ ] I already plan to rename the underlying type in the future
+- [ ] No new `typedef`s, unless:
+  - [ ] There is already a plan to rename the underlying type in the future
     - The common motivation for this is that there already exists a type of the
       desired name, and we need to first deprecate its use and then remove it
       before completing the rename.
 
-  - [ ] The API must abstract over the platform-specific types, and there are no
-        other appropriate types defined.
+  - [ ] API abstracts over platform-specific types, and there are no other
+        appropriate types defined.
 
-- [ ] My `typedef` is not suffixed with `_t`
+- [ ] New `typedef`s are not suffixed with `_t`
   - The entire `_t`-suffix namespace is [reserved by
     POSIX][ieee-1003.1-2024-namespace], on top of the `int[0-9a-z_]*_t` and
     `uint[0-9a-z_]*_t` reservations from the C standard.
@@ -121,11 +119,11 @@ Changelog entries broadly fall into one of two cases
 
 ### API design
 
-- [ ] If I've added support for a new PLDM message type, then I've defined both
-      the encoder and decoder for that message.
+- [ ] If support is added for a new PLDM message type, then both the encoder and
+      decoder are defined for that message.
   - This applies for both request _and_ response message types.
 
-- [ ] I've designed my APIs so their implementation does not require heap
+- [ ] APIs are designed so their implementation does not require heap
       allocation.
   - Prefer [defining iterators][libpldm-iterator] over the message buffer to
     extract sub-structures from variable-length messages. Iterators avoid both
@@ -136,11 +134,11 @@ Changelog entries broadly fall into one of two cases
 [libpldm-iterator]:
   https://github.com/openbmc/libpldm/commit/3a2c6589c5660d2066b612bae28ca393a8aa1c2b
 
-- [ ] My `encode_*()` APIs exchange with the caller the size of the destination
+- [ ] `encode_*()` APIs exchange with the caller the size of the destination
       buffer and the length of the encoded data using an in-out buffer length
       parameter
 
-- [ ] My new public message codec functions take a `struct` representing the
+- [ ] New public message codec functions take a `struct` representing the
       message as a parameter
   - Function prototypes must _not_ decompose the message to individual
     parameters. This approach is not ergonomic and is difficult to make
@@ -148,26 +146,25 @@ Changelog entries broadly fall into one of two cases
     use pointers for out-parameters, where it has often become ambiguous whether
     the underlying memory represents a single object or an array.
 
-- [ ] Each new `struct` I've defined is used in at least one new function I've
-      added to the public API.
+- [ ] Each new `struct` defined is used in at least one new function added to
+      the public API.
 
-- [ ] My new public `struct` definitions are _not_ marked
-      `__attribute__((packed))`
+- [ ] New public `struct` definitions are _not_ marked `__attribute__((packed))`
 
-- [ ] My new public `struct` definitions do _not_ define a flexible array
-      member, unless:
+- [ ] New public `struct` definitions do _not_ define a flexible array member,
+      unless:
   - [ ] It's contained in an `#ifndef __cplusplus` macro guard, as flexible
         arrays are not specified by C++, and
 
-  - [ ] I've implemented an accessor function so the array base pointer can be
-        accessed from C++, and
+  - [ ] The change implements an accessor function so the array base pointer can
+        be accessed from C++, and
 
   - [ ] It is defined as per the C17 specification by omitting the length[^1]
     - Note: Any array defined with length 1 is _not_ a flexible array, and any
       access beyond the first element invokes undefined behaviour in both C and
       C++.
 
-  - [ ] I've annotated the flexible array member with `LIBPLDM_CC_COUNTED_BY()`
+  - [ ] Flexible array members are annotated with `LIBPLDM_CC_COUNTED_BY()`
 
 [^1]:
     [C17 draft specification][c17-draft-standard], 6.7.2.1 Structure and union
@@ -178,68 +175,67 @@ Changelog entries broadly fall into one of two cases
 
 ### ABI control
 
-- [ ] My new function symbols are marked with `LIBPLDM_ABI_TESTING` in the
+- [ ] New function symbols are marked with `LIBPLDM_ABI_TESTING` in the
       implementation
 
-- [ ] I've guarded the test cases of functions marked `LIBPLDM_ABI_TESTING` so
-      that they are not compiled when the corresponding function symbols aren't
+- [ ] Test cases of functions marked `LIBPLDM_ABI_TESTING` are guarded so that
+      they are not compiled when the corresponding function symbols aren't
       visible
 
 ### Error handling and invariants
 
-- [ ] All my error conditions are handled by returning an error code to the
-      caller.
+- [ ] All error conditions are handled by returning an error code to the caller.
 
-- [ ] All my invariants are tested using `assert()`.
+- [ ] All invariants are tested using `assert()`.
 
-- [ ] I have not used `assert()` to evaluate any error conditions without also
+- [ ] `assert()` is not used to evaluate any error conditions without also
       handling the error condition by returning an error code the the caller.
   - Release builds of the library are configured with `assert()` disabled
     (`-Db_ndebug=if-release`, which provides `-DNDEBUG` in `CFLAGS`).
 
-- [ ] My new APIs return negative `errno` values on error and not PLDM
-      completion codes.
+- [ ] New APIs return negative `errno` values on error and not PLDM completion
+      codes.
   - [ ] The specific error values my function returns and their meaning in the
         context of the function call are listed in the API documentation.
 
 ### Implementation
 
-- [ ] If my work interacts with the PLDM wire format, then I have done so using
-      the `msgbuf` APIs found in `src/msgbuf.h` (and under `src/msgbuf/`) to
+- [ ] If the work interacts with the PLDM wire format, then it does so using the
+      `msgbuf` APIs found in `src/msgbuf.h` (and under `src/msgbuf/`) to
       minimise concerns around spatial memory safety and endian-correctness.
 
-- [ ] I've used `goto` to clean up resources acquired prior to encountering an
+- [ ] `goto` is used to clean up resources acquired prior to encountering an
       error condition
   - Replication of resource cleanup across multiple error paths is error-prone,
     especially when multiple, dependent resources have been acquired.
 
-- [ ] I've released acquired resources in stack-order
+- [ ] acquired resources are released in stack-order
   - This should be the case regardless of whether we're in the happy path at the
     end of object lifetime or an error path during construction.
 
-- [ ] I've declared variables in [reverse-christmas-tree (inverted pyramid)
-      order][hisham-make-pyramids] in any block scopes I've added or changed.
+- [ ] Variables are declared in [reverse-christmas-tree (inverted pyramid)
+      order][hisham-make-pyramids] in any block scopes added or changed.
 
 [hisham-make-pyramids]:
   https://web.archive.org/web/20220404224603/https://hisham.hm/2018/06/16/when-listing-repeated-things-make-pyramids/
 
 ### Testing
 
-- [ ] I've implemented test cases with reasonable branch coverage of each new
+- [ ] Test cases are provided with reasonable branch coverage of each new
       function I've added
 
 ### OEM/vendor-specific APIs
 
-- [ ] I've documented the wire format for all OEM messages under
+- [ ] The wire format for all OEM messages is documented under
       `docs/oem/${OEM_NAME}/`
 
-- [ ] I've added public OEM API declarations and definitions under
-      `include/libpldm/oem/${OEM_NAME}/`, and installed them to the same
-      relative location.
+- [ ] Public OEM APIs are declared or defined under
+      `include/libpldm/oem/${OEM_NAME}/`, and installed to the same relative
+      location.
 
-- [ ] I've implemented the public OEM APIs under `src/oem/${OEM_NAME}/`
+- [ ] Public OEM APIs are implemented under `src/oem/${OEM_NAME}/`
 
-- [ ] I've implemented the OEM API tests under `tests/oem/${OEM_NAME}/`
+- [ ] Tests for OEM APIs are implemented under `tests/oem/${OEM_NAME}/`
 
 The `${OEM_NAME}` folder must be created with the name of the OEM/vendor in
 lower case.
@@ -252,17 +248,17 @@ integration of the OEM extensions.
 
 - [ ] The API of interest is currently marked `LIBPLDM_ABI_TESTING`
 
-- [ ] My commit message links to a publicly visible patch that makes use of the
+- [ ] The commit message links to a publicly visible patch that makes use of the
       API
 
-- [ ] My commit updates the annotation from `LIBPLDM_ABI_TESTING` to
+- [ ] The commit updates the annotation from `LIBPLDM_ABI_TESTING` to
       `LIBPLDM_ABI_STABLE` only for the function symbols demonstrated by the
       patch linked in the commit message.
 
-- [ ] I've removed guards from the function's tests so they are always compiled
+- [ ] Relevant guards are removed from the function's tests so they are always
+      compiled
 
-- [ ] If I've updated the ABI dump, then I've used the OpenBMC CI container to
-      do so.
+- [ ] The OpenBMC CI container has been used to update the ABI dump.
 
 ## Updating an ABI dump
 
@@ -297,15 +293,15 @@ docker run \
 
 ## Removing an API
 
-- [ ] If the function is marked `LIBPLDM_ABI_TESTING`, then I have removed it
+- [ ] If the function is marked `LIBPLDM_ABI_TESTING`, then it has been removed
 
-- [ ] If the function is marked `LIBPLDM_ABI_STABLE`, then I have changed the
-      annotation to `LIBPLDM_ABI_DEPRECATED` and left it in-place.
+- [ ] If the function is marked `LIBPLDM_ABI_STABLE`, then the annotation is
+      changed to `LIBPLDM_ABI_DEPRECATED` and left it in-place.
   - [ ] I have updated the ABI dump, or will mark the change as WIP until it has
         been.
 
-- [ ] If the function is marked `LIBPLDM_ABI_DEPRECATED`, then I have removed it
-      only after satisfying myself that each of the following is true:
+- [ ] If the function is marked `LIBPLDM_ABI_DEPRECATED`, then has only been
+      removed after:
   - [ ] There are no known users of the function left in the community
   - [ ] There has been at least one tagged release of `libpldm` subsequent to
         the API being marked deprecated
@@ -324,27 +320,26 @@ actions:
 
 - [ ] Both the new and the old functions are declared in the public headers
 
-- [ ] I've aliased the old function name to the new function name via the
+- [ ] The old function name has been aliased to the new function name via the
       `libpldm_deprecated_aliases` list in `meson.build`
 
-- [ ] I've added a [semantic patch][coccinelle] to migrate users from the old
-      name to the new name
+- [ ] A [semantic patch][coccinelle] has been added to migrate users from the
+      old name to the new name
 
 [coccinelle]: https://coccinelle.gitlabpages.inria.fr/website/
 
-- [ ] I've updated the ABI dump to capture the rename, or will mark the change
-      as WIP until it has been.
+- [ ] The ABI dump has been updated accordingly.
 
 ## Fixing Implementation Defects
 
-- [ ] My change fixing the bug includes a [Fixes tag][linux-kernel-fixes-tag]
-      identifying the change introducing the defect.
+- [ ] A [Fixes tag][linux-kernel-fixes-tag] is present, identifying the change
+      introducing the defect.
 
 [linux-kernel-fixes-tag]:
   https://docs.kernel.org/process/submitting-patches.html#describe-your-changes
 
-- [ ] My change fixing the bug includes test cases demonstrating that the bug is
-      fixed.
+- [ ] The change fixing the bug includes test cases demonstrating that the bug
+      is fixed.
 
 ## Background
 
