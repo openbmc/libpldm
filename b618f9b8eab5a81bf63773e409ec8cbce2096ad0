@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6b92827_4eea9417",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3092,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-03-17T14:10:31Z",
+      "side": 1,
+      "message": "Why `rc` initialization is in the middle of a statement?\n```\nfor (struct related_resource_id_iter res##_iter \u003d ((rc) \u003d 0, related_resource_id_iter_init(\u0026(res##_iter))); \u003c...\u003e\n```\nShouldn\u0027t it be something like\n```\nfor ((rc) \u003d 0, struct related_resource_id_iter res##_iter \u003d related_resource_id_iter_init(\u0026(res##_iter)); \u003c...\u003e\n```\n?",
+      "revId": "b618f9b8eab5a81bf63773e409ec8cbce2096ad0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4459ef98_f286b422",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 1
