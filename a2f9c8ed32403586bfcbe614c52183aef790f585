@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7705f56_24b3d688",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3048,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-17T00:01:10Z",
+      "side": 1,
+      "message": "Ah, yes, sorry, my eyes glazed over that row in the table.\n\nPlease disregard this and related comments.",
+      "parentUuid": "ae0f2310_81b1e43b",
+      "range": {
+        "startLine": 3048,
+        "startChar": 10,
+        "endLine": 3048,
+        "endChar": 28
+      },
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "025bfceb_91acc094",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 11
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "I was mimicing the foreach docs in the https://github.com/openbmc/libpldm/blob/main/include/libpldm/firmware_update.h\n\nI don\u0027t see any examples for foreach usage besides the actual docs for foreach.\n\nMaybe we need to add cross-reference something similar to this?\nhttps://github.com/openbmc/libpldm/blob/80cde632088394b9b3da90cf677b8d2763278c77/include/libpldm/firmware_update.h#L2387\n\n```\n/** @brief Decode date fields from Redfish Resource PDR\n *\n *  @param[in] data - PLDM response message which includes the Redfish Resource PDR\n *                        from DSP0248_1.3.0 table 104.\n *  @param[in] data_length - Length of response message payload\n *  @param[out] pdr - Redfish resource pdr struct\n *  @param[out] additional_resource_info - Pointer to the structure used to access Additional Resources area, \n * Iterate over the entries using @ref *foreach_pldm_platform_redfish_resource_pdr_additional_resource\n *  @param[out] oem_names - Pointer to the structure used to access OEMNames area\n * Iterate over the entries using @ref *foreach_pldm_platform_redfish_resource_pdr_oem_name\n *\n *  @return error code\n */\n ```",
       "parentUuid": "025bfceb_91acc094",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9698c902_e497b281",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3057,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-17T00:01:10Z",
+      "side": 1,
+      "message": "\u003e Maybe we need to add cross-reference something similar to this?\n\nCross-reference sounds good.\n\n\u003e I was mimicing the foreach docs in the\n\nI understand, but I\u0027m also reconsidering whether that was useful in the end. I think the package parsing docs could benefit from what I\u0027m suggesting here?",
+      "parentUuid": "463001b1_e645a1e0",
       "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -349,6 +391,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1437f5f7_9dd7594f",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3211,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-17T00:01:10Z",
+      "side": 1,
+      "message": "Sure, my query wasn\u0027t a direction to change it, more just to discuss such thoughts. Thanks for your input. I\u0027ll think about it more.",
+      "parentUuid": "1796d12d_230bf467",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ecb2696_2943a4c8",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 11
@@ -378,6 +438,24 @@
       "side": 1,
       "message": "I guess we can do something like that, but I don\u0027t think it would be fair/safe to ask the user to manually copy some fields from the `pldm_platform_redfish_action_pdr` to `pldm_platform_redfish_action_pdr_action_info`. So in this case we would need to introduce another API function to initialize the `pldm_platform_redfish_action_pdr_action_info` from  the `pldm_platform_redfish_action_pdr`. And I\u0027m not sure that will simplify things",
       "parentUuid": "7ecb2696_2943a4c8",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61cd7f62_8772c1a0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3247,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-17T00:01:10Z",
+      "side": 1,
+      "message": "Here\u0027s a sketch of my thoughts, as a patch on top:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/88328/\n\nI think it simplifies things a bit.",
+      "parentUuid": "205ea3a7_4c40540a",
       "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
