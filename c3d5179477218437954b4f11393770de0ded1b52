@@ -16,6 +16,23 @@
       "message": "Resolved the merge conflicts and rebased onto the latest main.",
       "revId": "c3d5179477218437954b4f11393770de0ded1b52",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad16b45f_6bede66a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-17T06:59:41Z",
+      "side": 1,
+      "message": "Hi Eric, thanks for the fix (and apologies for the bug, and taking some time to get to this).\n\nThat said, I think we can improve the way the split is implemented for the purpose of tests. I\u0027ve pushed https://gerrit.openbmc.org/c/openbmc/libpldm/+/88342 to demonstrate what I have in mind. Feel free to squash it in if it seems okay.",
+      "revId": "c3d5179477218437954b4f11393770de0ded1b52",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
