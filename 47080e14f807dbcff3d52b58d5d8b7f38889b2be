@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e96f64b1_b9ec1558",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-03-19T13:03:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "725fbe21_1c72daa7",
+      "range": {
+        "startLine": 14,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "47080e14f807dbcff3d52b58d5d8b7f38889b2be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ed3c15c_45138278",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-03-19T03:24:21Z",
       "side": 1,
       "message": "I interpret this to mean \"you cannot specify `__attribute__((visibility(\"hidden\")))` and `__attribute__((visibility(\"default\")))` on the same declaration\". But that may not be the same as one location specifying `__attribute__((visibility(\"default\")))` and the other not applying the attribute at all.\n\nLooking at the behaviour, from the gcc test suite we have:\n\nhttps://gcc.gnu.org/git/?p\u003dgcc.git;a\u003dblob;f\u003dgcc/testsuite/g%2B%2B.dg/ext/visibility/redecl1.C;h\u003da85e6c38e952f997ff20a96991e816d5cb2ded1a;hb\u003d5115c7e447fc07457443df874bf57840e8316d5f\n\nwhich, by the looks, will exercise this in the implementation:\n\nhttps://gcc.gnu.org/git/?p\u003dgcc.git;a\u003dblob;f\u003dgcc/c-family/c-attribs.cc;h\u003d5a0e3d328ba79b556029b54eda0dc5e00a00504b;hb\u003d5115c7e447fc07457443df874bf57840e8316d5f#l3590\n\nThis seems to concur with my interpretation above, in which case we can constrain the ABI controls to the implementation.\n\nNow, it\u0027s then a question of \"where is the implementation\"? If symbols are emitted in the shared object for inline functions defined in headers then we need the ABI controls in the public headers. But if not, we can constrain them to the library implementation as we\u0027re doing now, and avoid the mess.",
+      "range": {
+        "startLine": 22,
+        "startChar": 41,
+        "endLine": 24,
+        "endChar": 43
+      },
+      "revId": "47080e14f807dbcff3d52b58d5d8b7f38889b2be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23029346_9366b38d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-03-19T13:03:59Z",
+      "side": 1,
+      "message": "Thanks for doing my homework here :)\n\nHow it\u0027s currently done in libpldm sees to be supported and also tested by GCC\n\nhttps://gcc.gnu.org/git/?p\u003dgcc.git;a\u003dblob;f\u003dgcc/testsuite/g%2B%2B.dg/ext/visibility/visibility-2.C;h\u003d26272abb1f9026fff55841ce5f3d8bdacb8d10d8;hb\u003d5115c7e447fc07457443df874bf57840e8316d5f\n\nhttps://gcc.gnu.org/git/?p\u003dgcc.git;a\u003dblob;f\u003dgcc/testsuite/g%2B%2B.dg/ext/visibility/visibility-5.C;h\u003d592529e665d6f65d323ed12060566e340639c255;hb\u003d5115c7e447fc07457443df874bf57840e8316d5f\n\nSo the behavior is unlikely to change in the future and we can continue to rely on it and avoid this huge diff.\n\nI will abandon this patch and upload new version of 87957.",
+      "parentUuid": "2ed3c15c_45138278",
       "range": {
         "startLine": 22,
         "startChar": 41,
