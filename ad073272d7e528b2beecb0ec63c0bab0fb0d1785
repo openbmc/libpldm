@@ -52,6 +52,24 @@
       "parentUuid": "285d717a_4f01e00a",
       "revId": "ad073272d7e528b2beecb0ec63c0bab0fb0d1785",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44934ec3_8e10dde2",
+        "filename": "include/libpldm++/_abi_annotation.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-03-19T13:09:11Z",
+      "side": 1,
+      "message": "Based on the discussion in 88254, changed it to match the existing usage of ABI annotation in libpldm. It looks like that\u0027s well tested and supported in gcc.",
+      "parentUuid": "2b4f3400_5b7fc182",
+      "revId": "ad073272d7e528b2beecb0ec63c0bab0fb0d1785",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
