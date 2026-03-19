@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7123a1fb_5fbba37c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-19T02:48:16Z",
+      "side": 1,
+      "message": "Nit: I\u0027d prefer:\n\n```\ntransport: af-mctp: Stabilize FQE TID mapping APIs```",
+      "revId": "8bdb319bc0816a1830316695218f0162963c6c5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0abcc1a_376da456",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-19T02:48:16Z",
+      "side": 1,
+      "message": "Let\u0027s at least conform to markdown here and add the necessary colons:\n\n```suggestion\n[1]: https://gerrit.openbmc.org/c/openbmc/libpldm/+/85949\n[2]: https://gerrit.openbmc.org/c/openbmc/pldm/+/85952\n```",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 53
+      },
+      "revId": "8bdb319bc0816a1830316695218f0162963c6c5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a4903d3_cd1bc537",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-19T02:48:16Z",
+      "side": 1,
+      "message": "Hi Vishnunithyasoundhar, I\u0027ve made some minor comments and also applied the relevant fixes myself. Please have a read through.",
+      "revId": "8bdb319bc0816a1830316695218f0162963c6c5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d8db7fb_31dc2558",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-19T02:48:16Z",
+      "side": 1,
+      "message": "This mostly falls into the \"simple\" case documented here: https://github.com/openbmc/libpldm/blob/f97f4135eb6d95407de870214a26acdb2f330ec8/CONTRIBUTING.md#L44\n\nI don\u0027t think there\u0027s a need for this line and the commit subject to be different.\n\nSee also my comment on the commit subject.",
+      "revId": "8bdb319bc0816a1830316695218f0162963c6c5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
