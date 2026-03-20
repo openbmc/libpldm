@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "237372b9_d3177545",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T07:27:26Z",
+      "side": 1,
+      "message": "See https://gerrit.openbmc.org/c/openbmc/libpldm/+/88519",
+      "parentUuid": "8f3d00c7_671193ff",
+      "range": {
+        "startLine": 1372,
+        "startChar": 2,
+        "endLine": 1372,
+        "endChar": 50
+      },
+      "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a667ca1_c85f0b3c",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 2
