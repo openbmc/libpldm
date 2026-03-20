@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "503515ee_68dc5e1b",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T00:36:35Z",
+      "side": 1,
+      "message": "I think this might be better in the `### Changed` section.",
+      "revId": "05a7d8f8a397e6a2255c39bc56c9e0830f9d298b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c770c8_56292b91",
+        "filename": "include/libpldm/byteorder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T00:36:35Z",
+      "side": 1,
+      "message": "Can we please use `LIBPLDM_BYTEORDER_H`?\n\nI recognise there may be some inconsistency with older header guards there, however I\u0027d like future patches to adhere to the request. We can fix up the old ones.\n\nhttps://github.com/openbmc/libpldm/blob/969fe632d6a768f265957d8deb635ec434769af5/CONTRIBUTING.md#L94-L95",
+      "range": {
+        "startLine": 2,
+        "startChar": 8,
+        "endLine": 2,
+        "endChar": 19
+      },
+      "revId": "05a7d8f8a397e6a2255c39bc56c9e0830f9d298b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92648f1e_bf464fa9",
+        "filename": "include/libpldm/byteorder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T00:36:35Z",
+      "side": 1,
+      "message": "I\u0027d rather we stop exposing these at some point, but that\u0027s not a problem for this patch 😊",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 37
+      },
+      "revId": "05a7d8f8a397e6a2255c39bc56c9e0830f9d298b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
