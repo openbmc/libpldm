@@ -1332,14 +1332,7 @@ int encode_get_firmware_parameters_resp(
 		return -EINVAL;
 	}
 
-	if (resp_data->active_comp_image_set_ver_str.str_len == 0 ||
-	    resp_data->active_comp_image_set_ver_str.str_len >
-		    PLDM_FIRMWARE_MAX_STRING) {
-		return -EINVAL;
-	}
-
-	if (resp_data->pending_comp_image_set_ver_str.str_len >
-	    PLDM_FIRMWARE_MAX_STRING) {
+	if (resp_data->active_comp_image_set_ver_str.str_len == 0) {
 		return -EINVAL;
 	}
 
@@ -1369,14 +1362,14 @@ int encode_get_firmware_parameters_resp(
 	rc = pldm_msgbuf_insert_array(
 		buf, resp_data->active_comp_image_set_ver_str.str_len,
 		resp_data->active_comp_image_set_ver_str.str_data,
-		resp_data->active_comp_image_set_ver_str.str_len);
+		PLDM_FIRMWARE_MAX_STRING);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 	rc = pldm_msgbuf_insert_array(
 		buf, resp_data->pending_comp_image_set_ver_str.str_len,
 		resp_data->pending_comp_image_set_ver_str.str_data,
-		resp_data->pending_comp_image_set_ver_str.str_len);
+		PLDM_FIRMWARE_MAX_STRING);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
@@ -1399,12 +1392,7 @@ int encode_get_firmware_parameters_resp_comp_entry(
 		return -EINVAL;
 	}
 
-	if (comp->active_ver.str.str_len == 0 ||
-	    comp->active_ver.str.str_len > PLDM_FIRMWARE_MAX_STRING) {
-		return -EINVAL;
-	}
-
-	if (comp->pending_ver.str.str_len > PLDM_FIRMWARE_MAX_STRING) {
+	if (comp->active_ver.str.str_len == 0) {
 		return -EINVAL;
 	}
 
@@ -1442,13 +1430,13 @@ int encode_get_firmware_parameters_resp_comp_entry(
 
 	rc = pldm_msgbuf_insert_array(buf, comp->active_ver.str.str_len,
 				      comp->active_ver.str.str_data,
-				      comp->active_ver.str.str_len);
+				      PLDM_FIRMWARE_MAX_STRING);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
 	rc = pldm_msgbuf_insert_array(buf, comp->pending_ver.str.str_len,
 				      comp->pending_ver.str.str_data,
-				      comp->pending_ver.str.str_len);
+				      PLDM_FIRMWARE_MAX_STRING);
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
