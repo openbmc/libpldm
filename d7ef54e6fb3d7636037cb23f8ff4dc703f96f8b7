@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef9815a_152be6e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T06:57:11Z",
+      "side": 1,
+      "message": "Can you give more detailed information about how to perform this test? It seems interesting, but it would be nice if it were easy to reproduce.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 57
+      },
+      "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "188ee05e_e871fa10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T06:57:11Z",
+      "side": 1,
+      "message": "Can you please add a `Fixes:` tag?\n\n\nhttps://github.com/openbmc/libpldm/blob/969fe632d6a768f265957d8deb635ec434769af5/CONTRIBUTING.md#L335-L336\n\nWith that, can you also please add a changelog entry?\n\nhttps://github.com/openbmc/libpldm/blob/969fe632d6a768f265957d8deb635ec434769af5/CONTRIBUTING.md#L67-L70",
+      "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a94f5af7_28e1d0d2",
@@ -14,6 +54,155 @@
       "writtenOn": "2026-03-12T02:43:19Z",
       "side": 1,
       "message": "Changes looks good. Taking the string max length change from 64 to UINT8_MAX can be part of a separate change based on use case. Thanks for updating the test case as well.",
+      "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f112a218_e2f8a71f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T06:57:11Z",
+      "side": 1,
+      "message": "Hi Gary, thanks for the fix. I have some thoughts inline.\n\nRegarding:\n\n\u003e Raising PLDM_FIRMWARE_MAX_STRING to 255 is a separate change that affects struct sizes across the firmware update ABI — I think that warrants its own patch with maintainer input.\n\nIt warrants its own patch, however the ABI concern is not yet great because the only functions using the struct are marked `LIBPLDM_ABI_TESTING`. While that\u0027s the case we can make changes as we see fit.\n\nHowever, 64 was chosen as a \"reasonable\" value for static storage in the context of the library\u0027s use in freestanding embedded environments, and so changes do warrant some discussion.",
+      "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7434f96e_862ee80c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1335,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T06:57:11Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me from the spec that 0 is an invalid length. It might not be sensible, but I can\u0027t see that it\u0027s ruled out.",
+      "range": {
+        "startLine": 1335,
+        "startChar": 5,
+        "endLine": 1335,
+        "endChar": 58
+      },
+      "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cbefbe9_abdd0f48",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T06:57:11Z",
+      "side": 1,
+      "message": "We can use the semantics of `pldm_msgbuf_insert_array()` to test this. See below.",
+      "range": {
+        "startLine": 1336,
+        "startChar": 5,
+        "endLine": 1337,
+        "endChar": 30
+      },
+      "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace2f8ae_2320331e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T06:57:11Z",
+      "side": 1,
+      "message": "As above, see below.",
+      "range": {
+        "startLine": 1340,
+        "startChar": 1,
+        "endLine": 1344,
+        "endChar": 2
+      },
+      "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f3d00c7_671193ff",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T06:57:11Z",
+      "side": 1,
+      "message": "If I drop the relevant early-exit condition above and change this to `PLDM_FIRMWARE_MAX_STRING` the tests still pass. This is the intended use of providing both length arguments. I admit it\u0027s not intuitive. We can change that if people have suggestions on how to improve it.",
+      "range": {
+        "startLine": 1372,
+        "startChar": 2,
+        "endLine": 1372,
+        "endChar": 50
+      },
+      "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a667ca1_c85f0b3c",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T06:57:11Z",
+      "side": 1,
+      "message": "If I drop the early-exit condition above and change this to `PLDM_FIRMWARE_MAX_STRING` the tests still pass.",
+      "range": {
+        "startLine": 1379,
+        "startChar": 2,
+        "endLine": 1379,
+        "endChar": 51
+      },
+      "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8cdc2a2_9e0046d0",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1403,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-20T06:57:11Z",
+      "side": 1,
+      "message": "See comments above on `encode_get_firmware_parameters_resp()`",
       "revId": "d7ef54e6fb3d7636037cb23f8ff4dc703f96f8b7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
