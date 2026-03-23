@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d45e42b1_b54902c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-23T00:10:08Z",
+      "side": 1,
+      "message": "Oh, also, do you mind adding an `OWNERS` file, with yourself listed as an owner, under the `zephyr/` directory?",
+      "revId": "6f31470caa9e31317f8d5c450a839fcc1a37c255",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86173328_98863944",
         "filename": "include/libpldm/compiler.h",
         "patchSetId": 5
