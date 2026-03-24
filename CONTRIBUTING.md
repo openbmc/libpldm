@@ -229,37 +229,6 @@ integration of the OEM extensions.
 
 - [ ] The OpenBMC CI container has been used to update the ABI dump.
 
-## Updating an ABI dump
-
-To update the ABI dump you'll need to build an appropriate OpenBMC CI container
-image of your own. Some hints on how to do this locally can be found [in the
-openbmc/docs repository][openbmc-docs-local-ci]. You can list your locally built
-images with `docker images`.
-
-[openbmc-docs-local-ci]:
-  https://github.com/openbmc/docs/blob/master/testing/local-ci-build.md
-
-Assuming:
-
-```shell
-export OPENBMC_CI_IMAGE=openbmc/ubuntu-unit-test:2024-W21-ce361f95ff4fa669
-```
-
-the ABI dump can be updated with:
-
-```shell
-docker run \
-  --cap-add=sys_admin \
-  --rm=true \
-  --privileged=true \
-  -u $USER \
-  -w $(pwd) \
-  -v $(pwd):$(pwd) \
-  -e MAKEFLAGS= \
-  -t $OPENBMC_CI_IMAGE \
-  ./scripts/abi-dump-updater
-```
-
 ## Removing an API
 
 - [ ] If the function is marked `LIBPLDM_ABI_TESTING`, then it has been removed
@@ -454,6 +423,37 @@ subproject configuration syntax:
 
 ```shell
 meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
+```
+
+### Updating an ABI dump
+
+To update the ABI dump you'll need to build an appropriate OpenBMC CI container
+image of your own. Some hints on how to do this locally can be found [in the
+openbmc/docs repository][openbmc-docs-local-ci]. You can list your locally built
+images with `docker images`.
+
+[openbmc-docs-local-ci]:
+  https://github.com/openbmc/docs/blob/master/testing/local-ci-build.md
+
+Assuming:
+
+```shell
+export OPENBMC_CI_IMAGE=openbmc/ubuntu-unit-test:2024-W21-ce361f95ff4fa669
+```
+
+the ABI dump can be updated with:
+
+```shell
+docker run \
+  --cap-add=sys_admin \
+  --rm=true \
+  --privileged=true \
+  -u $USER \
+  -w $(pwd) \
+  -v $(pwd):$(pwd) \
+  -e MAKEFLAGS= \
+  -t $OPENBMC_CI_IMAGE \
+  ./scripts/abi-dump-updater
 ```
 
 ### Changelog
