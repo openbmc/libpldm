@@ -17,6 +17,17 @@ namespace pldm
 
 namespace fw_update
 {
+	// similar in concept to libpldm: 'struct pldm_package_format_pin',
+	// this enum allows versioning of our 'struct Package'.
+	//
+	// The caller passes whichever version they want to have and will receive a
+	// package containing at least those members which their requested version supports,
+	// or an error, in case the linked libpldm++ can only support a lower version.
+	// The caller cannot safely access any members beyond what they requested.
+	enum class PackagePin {
+		v1,
+	};
+
 	// forward declare structs and classes for our 'friend' declarations
 	class PackageParser;
 	struct DescriptorData;
@@ -43,7 +54,9 @@ namespace fw_update
 		bool operator==(const DescriptorData &other) const;
 
 		// data members
+		// introduced in PackagePin::v1
 		const std::optional<std::string> vendorDefinedDescriptorTitle;
+		// introduced in PackagePin::v1
 		const std::vector<uint8_t> data;
 	};
 
@@ -72,17 +85,24 @@ namespace fw_update
 		bool operator==(const ComponentImageInfo &other) const;
 
 		// data members
+		// introduced in PackagePin::v1
 		const uint16_t componentClassification;
+		// introduced in PackagePin::v1
 		const uint16_t componentIdentifier;
+		// introduced in PackagePin::v1
 		const uint32_t compComparisonStamp;
+		// introduced in PackagePin::v1
 		const std::bitset<16> componentOptions;
+		// introduced in PackagePin::v1
 		const std::bitset<16> requestedComponentActivationMethod;
 
 		// pointer to, and length of the component image.
 		// The pointer becomes dangling when the
 		// lifetime of the parsed buffer ends.
+		// introduced in PackagePin::v1
 		const variable_field componentLocation;
 
+		// introduced in PackagePin::v1
 		const std::string componentVersion;
 	};
 
@@ -108,12 +128,16 @@ namespace fw_update
 		bool operator==(const FirmwareDeviceIDRecord &other) const;
 
 		// data members
+		// introduced in PackagePin::v1
 		const std::vector<uint16_t> getDescriptorTypes() const;
 
+		// introduced in PackagePin::v1
 		const std::bitset<32> deviceUpdateOptionFlags;
 
+		// introduced in PackagePin::v1
 		const std::vector<size_t> applicableComponents;
 
+		// introduced in PackagePin::v1
 		const std::string componentImageSetVersionString;
 
 		// map descriptor type to descriptor data
@@ -123,9 +147,11 @@ namespace fw_update
 		// anyone who is not a friend (including STL templates like construct_at).
 		// To avoid any mismatch in usage due to layout difference of a value map
 		// on struct growth, we store a unique_ptr.
+		// introduced in PackagePin::v1
 		const std::map<uint16_t, std::unique_ptr<DescriptorData> >
 			recordDescriptors;
 
+		// introduced in PackagePin::v1
 		const std::vector<uint8_t> firmwareDevicePackageData;
 	};
 
@@ -147,8 +173,10 @@ namespace fw_update
 		bool operator==(const Package &other) const;
 
 		// data members
+		// introduced in PackagePin::v1
 		const std::vector<FirmwareDeviceIDRecord>
 			firmwareDeviceIdRecords;
+		// introduced in PackagePin::v1
 		const std::vector<ComponentImageInfo> componentImageInformation;
 	};
 
@@ -176,7 +204,7 @@ namespace fw_update
 		/** @brief Parse the firmware update package
 		 *
 		 *  @param[in] pkg - vector with the pldm fw update package
-		 *  @param[in] pin - pldm package format support
+		 *  @param[in] pin - package struct version support
 		 *
 		 *  @returns an error value if parsing fails
 		 *  @returns a unique_ptr to Package struct on success
@@ -184,7 +212,7 @@ namespace fw_update
 		static std::expected<std::unique_ptr<Package>,
 				     PackageParserError>
 		parse(const std::span<const uint8_t> &pkg,
-		      struct pldm_package_format_pin &pin) noexcept;
+		      PackagePin pin) noexcept;
 
 	    private:
 		static std::expected<void, std::string> helperParseFDDescriptor(

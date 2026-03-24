@@ -103,12 +103,11 @@ static void getApplicableComponents(std::vector<size_t> &compList,
 
 pldm::fw_update::PackageParser::~PackageParser() = default;
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 std::expected<std::unique_ptr<pldm::fw_update::Package>,
 	      pldm::fw_update::PackageParserError>
-pldm::fw_update::PackageParser::parse(
-	const std::span<const uint8_t> &pkg,
-	struct pldm_package_format_pin &pin) noexcept
+pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
+				      PackagePin pin) noexcept
 {
 	const size_t pkgSize = pkg.size();
 
@@ -117,12 +116,14 @@ pldm::fw_update::PackageParser::parse(
 	pldm_package_header_information_pad hdr = {};
 	int rc;
 
-	if (pin.format.revision > PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H) {
+	if (pin != PackagePin::v1) {
 		return std::unexpected(
 			PackageParserError("unsupported format revision"));
 	}
 
-	rc = decode_pldm_firmware_update_package(pkg.data(), pkgSize, &pin,
+	DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(cpin);
+
+	rc = decode_pldm_firmware_update_package(pkg.data(), pkgSize, &cpin,
 						 &hdr, &package, 0);
 
 	if (rc) {

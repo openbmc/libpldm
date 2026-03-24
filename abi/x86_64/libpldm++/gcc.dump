@@ -4,7 +4,8 @@ $VAR1 = {
   'Arch' => 'x86_64',
   'GccVersion' => '15.2.0',
   'Headers' => {
-    'firmware_update.hpp' => 1
+    'firmware_update.hpp' => 1,
+    'types.hpp' => 1
   },
   'Language' => 'C++',
   'LibraryName' => 'libpldm++.so.0.15.0',
@@ -29,10 +30,32 @@ $VAR1 = {
   },
   'PublicABI' => '1',
   'Sources' => {
-    'firmware_update.cpp' => 1
+    'firmware_update.cpp' => 1,
+    'types.cpp' => 1
   },
   'SymbolInfo' => {
-    '91115' => {
+    '90710' => {
+      'Class' => '90637',
+      'Header' => 'firmware_update.hpp',
+      'Line' => '214',
+      'MnglName' => '_ZN4pldm9fw_update13PackageParser5parseERKSt4spanIKhLm18446744073709551615EENS0_10PackagePinE',
+      'Param' => {
+        '0' => {
+          'name' => 'pkg',
+          'type' => '92544'
+        },
+        '1' => {
+          'name' => 'pin',
+          'type' => '89515'
+        }
+      },
+      'Return' => '56220',
+      'ShortName' => 'parse',
+      'Source' => 'firmware_update.cpp',
+      'SourceLine' => '109',
+      'Static' => 1
+    },
+    '90772' => {
       'Header' => 'firmware_update.hpp',
       'MnglName' => '_ZN4pldm9fw_update10stable_nopEv',
       'NameSpace' => 'pldm::fw_update',
@@ -41,90 +64,246 @@ $VAR1 = {
       'Source' => 'firmware_update.cpp',
       'SourceLine' => '14'
     },
-    '135804' => {
+    '94133' => {
+      'Destructor' => 1,
+      'Header' => 'firmware_update.hpp',
+      'Line' => '169',
+      'MnglName' => '_ZN4pldm9fw_update7PackageD1Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '92369'
+        }
+      }
+    },
+    '135821' => {
       'Artificial' => 1,
-      'Class' => '90817',
+      'Class' => '90474',
       'Constructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
-      'Line' => '172',
+      'Line' => '188',
       'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorC2EOS1_',
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92507'
+          'type' => '92529'
         },
         '1' => {
           'name' => 'p1',
-          'type' => '93336'
+          'type' => '93353'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '135805' => {
+    '135822' => {
       'Artificial' => 1,
-      'Class' => '90817',
+      'Class' => '90474',
       'Constructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
-      'Line' => '172',
+      'Line' => '188',
       'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorC1EOS1_',
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92507'
+          'type' => '92529'
         },
         '1' => {
           'name' => 'p1',
-          'type' => '93336'
+          'type' => '93353'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '161574' => {
+    '161614' => {
       'Artificial' => 1,
-      'Class' => '90817',
+      'Class' => '90474',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
-      'Line' => '172',
+      'Line' => '188',
       'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorD2Ev',
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92507'
+          'type' => '92529'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '161575' => {
+    '161615' => {
       'Artificial' => 1,
-      'Class' => '90817',
+      'Class' => '90474',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
-      'Line' => '172',
+      'Line' => '188',
       'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorD0Ev',
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92507'
+          'type' => '92529'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '378471' => {
+    '327346' => {
+      'Class' => '90291',
+      'Destructor' => 1,
+      'Header' => 'firmware_update.hpp',
+      'Line' => '169',
+      'MnglName' => '_ZN4pldm9fw_update7PackageD2Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '92369'
+        }
+      },
+      'ShortName' => 'Package',
+      'Source' => 'types.cpp',
+      'SourceLine' => '256'
+    },
+    '327982' => {
       'Artificial' => 1,
-      'Class' => '90817',
+      'Class' => '89370',
+      'Constructor' => 1,
+      'Header' => 'types.hpp',
+      'InLine' => 1,
+      'Line' => '33',
+      'MnglName' => '_ZN7libpldm14GrowableStructIN4pldm9fw_update7PackageEEC2Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '327950'
+        }
+      },
+      'ShortName' => 'GrowableStruct'
+    },
+    '327983' => {
+      'Artificial' => 1,
+      'Class' => '89370',
+      'Constructor' => 1,
+      'Header' => 'types.hpp',
+      'InLine' => 1,
+      'Line' => '33',
+      'MnglName' => '_ZN7libpldm14GrowableStructIN4pldm9fw_update7PackageEEC1Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '327950'
+        }
+      },
+      'ShortName' => 'GrowableStruct'
+    },
+    '340378' => {
+      'Artificial' => 1,
+      'Class' => '89285',
+      'Constructor' => 1,
+      'Header' => 'types.hpp',
+      'InLine' => 1,
+      'Line' => '33',
+      'MnglName' => '_ZN7libpldm14GrowableStructIN4pldm9fw_update22FirmwareDeviceIDRecordEEC2Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '340346'
+        }
+      },
+      'ShortName' => 'GrowableStruct'
+    },
+    '340379' => {
+      'Artificial' => 1,
+      'Class' => '89285',
+      'Constructor' => 1,
+      'Header' => 'types.hpp',
+      'InLine' => 1,
+      'Line' => '33',
+      'MnglName' => '_ZN7libpldm14GrowableStructIN4pldm9fw_update22FirmwareDeviceIDRecordEEC1Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '340346'
+        }
+      },
+      'ShortName' => 'GrowableStruct'
+    },
+    '343518' => {
+      'Artificial' => 1,
+      'Class' => '89200',
+      'Constructor' => 1,
+      'Header' => 'types.hpp',
+      'InLine' => 1,
+      'Line' => '33',
+      'MnglName' => '_ZN7libpldm14GrowableStructIN4pldm9fw_update18ComponentImageInfoEEC2Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '343486'
+        }
+      },
+      'ShortName' => 'GrowableStruct'
+    },
+    '343519' => {
+      'Artificial' => 1,
+      'Class' => '89200',
+      'Constructor' => 1,
+      'Header' => 'types.hpp',
+      'InLine' => 1,
+      'Line' => '33',
+      'MnglName' => '_ZN7libpldm14GrowableStructIN4pldm9fw_update18ComponentImageInfoEEC1Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '343486'
+        }
+      },
+      'ShortName' => 'GrowableStruct'
+    },
+    '347705' => {
+      'Artificial' => 1,
+      'Class' => '89115',
+      'Constructor' => 1,
+      'Header' => 'types.hpp',
+      'InLine' => 1,
+      'Line' => '33',
+      'MnglName' => '_ZN7libpldm14GrowableStructIN4pldm9fw_update14DescriptorDataEEC2Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '347673'
+        }
+      },
+      'ShortName' => 'GrowableStruct'
+    },
+    '347706' => {
+      'Artificial' => 1,
+      'Class' => '89115',
+      'Constructor' => 1,
+      'Header' => 'types.hpp',
+      'InLine' => 1,
+      'Line' => '33',
+      'MnglName' => '_ZN7libpldm14GrowableStructIN4pldm9fw_update14DescriptorDataEEC1Ev',
+      'Param' => {
+        '0' => {
+          'name' => 'this',
+          'type' => '347673'
+        }
+      },
+      'ShortName' => 'GrowableStruct'
+    },
+    '378511' => {
+      'Artificial' => 1,
+      'Class' => '90474',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
-      'Line' => '172',
+      'Line' => '188',
       'MnglName' => '_ZN4pldm9fw_update18PackageParserErrorD1Ev',
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92507'
+          'type' => '92529'
         }
       },
       'ShortName' => 'PackageParserError'
@@ -134,6 +313,9 @@ $VAR1 = {
   'Symbols' => {
     'libpldm++.so.0.15.0' => {
       '_ZN4pldm9fw_update10stable_nopEv' => 1,
+      '_ZN4pldm9fw_update13PackageParser5parseERKSt4spanIKhLm18446744073709551615EENS0_10PackagePinE' => 1,
+      '_ZN4pldm9fw_update7PackageD1Ev' => 1,
+      '_ZN4pldm9fw_update7PackageD2Ev' => 1,
       '_ZNKRSt8optionalINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEdeEv' => 1,
       '_ZNKSt19bad_expected_accessIvE4whatEv' => 1,
       '_ZNKSt6vectorImSaImEE12_M_check_lenEmPKc' => 1,
@@ -239,7 +421,7 @@ $VAR1 = {
       'Type' => 'Intrinsic'
     },
     '282' => {
-      'BaseType' => '72938',
+      'BaseType' => '72936',
       'Header' => 'c++config.h',
       'Line' => '338',
       'Name' => 'std::size_t',
@@ -247,6 +429,30 @@ $VAR1 = {
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
+    },
+    '567' => {
+      'Header' => 'span',
+      'Line' => '101',
+      'Memb' => {
+        '0' => {
+          'access' => 'private',
+          'name' => '_M_extent_value',
+          'offset' => '0',
+          'type' => '282'
+        }
+      },
+      'Name' => 'std::__detail::__extent_storage<18446744073709551615ul>',
+      'NameSpace' => 'std::__detail',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Extent',
+          'type' => '72936',
+          'val' => '18446744073709551615'
+        }
+      },
+      'Type' => 'Class'
     },
     '2242' => {
       'Header' => 'new_allocator.h',
@@ -258,7 +464,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '81046'
+          'type' => '81044'
         }
       },
       'Type' => 'Class'
@@ -298,7 +504,7 @@ $VAR1 = {
       'Type' => 'Struct'
     },
     '6018' => {
-      'BaseType' => '82344',
+      'BaseType' => '82342',
       'Header' => 'alloc_traits.h',
       'Line' => '569',
       'Name' => 'std::allocator_traits<std::allocator<char> >::pointer',
@@ -347,7 +553,7 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_CharT',
-          'type' => '81046'
+          'type' => '81044'
         }
       },
       'Type' => 'Class'
@@ -375,7 +581,7 @@ $VAR1 = {
       'Type' => 'Struct'
     },
     '6410' => {
-      'BaseType' => '73404',
+      'BaseType' => '73402',
       'Header' => 'basic_string.h',
       'Line' => '119',
       'Name' => 'std::__cxx11::basic_string<char>::pointer',
@@ -391,7 +597,7 @@ $VAR1 = {
         '0' => {
           'name' => '_M_local_buf',
           'offset' => '0',
-          'type' => '86354'
+          'type' => '86352'
         },
         '1' => {
           'name' => '_M_allocated_capacity',
@@ -407,7 +613,7 @@ $VAR1 = {
       'Type' => 'Union'
     },
     '6480' => {
-      'BaseType' => '73428',
+      'BaseType' => '73426',
       'Header' => 'basic_string.h',
       'Line' => '115',
       'Name' => 'std::__cxx11::basic_string<char>::size_type',
@@ -415,6 +621,121 @@ $VAR1 = {
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
+    },
+    '14467' => {
+      'Header' => 'bitset',
+      'Line' => '409',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_w',
+          'offset' => '0',
+          'type' => '14481'
+        }
+      },
+      'Name' => 'struct std::_Base_bitset<1ul>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Nw',
+          'type' => '72936',
+          'val' => '1'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '14481' => {
+      'BaseType' => '72936',
+      'Header' => 'bitset',
+      'Line' => '411',
+      'Name' => 'std::_Base_bitset<1ul>::_WordT',
+      'NameSpace' => 'std::_Base_bitset<1ul>',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '15563' => {
+      'Header' => 'stl_tree.h',
+      'Line' => '105',
+      'Memb' => {
+        '0' => {
+          'name' => '_S_red',
+          'value' => '0'
+        },
+        '1' => {
+          'name' => '_S_black',
+          'value' => '1'
+        }
+      },
+      'Name' => 'enum std::_Rb_tree_color',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '4',
+      'Type' => 'Enum'
+    },
+    '15593' => {
+      'Copied' => 1,
+      'Header' => 'stl_tree.h',
+      'Line' => '107',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_color',
+          'offset' => '0',
+          'type' => '15563'
+        },
+        '1' => {
+          'name' => '_M_parent',
+          'offset' => '8',
+          'type' => '15619'
+        },
+        '2' => {
+          'name' => '_M_left',
+          'offset' => '22',
+          'type' => '15619'
+        },
+        '3' => {
+          'name' => '_M_right',
+          'offset' => '36',
+          'type' => '15619'
+        }
+      },
+      'Name' => 'struct std::_Rb_tree_node_base',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '32',
+      'Type' => 'Struct'
+    },
+    '15619' => {
+      'BaseType' => '88638',
+      'Header' => 'stl_tree.h',
+      'Line' => '109',
+      'Name' => 'std::_Rb_tree_node_base::_Base_ptr',
+      'NameSpace' => 'std::_Rb_tree_node_base',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '15755' => {
+      'Header' => 'stl_tree.h',
+      'Line' => '166',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_header',
+          'offset' => '0',
+          'type' => '15593'
+        },
+        '1' => {
+          'name' => '_M_node_count',
+          'offset' => '50',
+          'type' => '282'
+        }
+      },
+      'Name' => 'struct std::_Rb_tree_header',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '40',
+      'Type' => 'Struct'
     },
     '16459' => {
       'BaseType' => '6272',
@@ -426,19 +747,1267 @@ $VAR1 = {
       'Size' => '32',
       'Type' => 'Typedef'
     },
-    '54119' => {
+    '16471' => {
+      'BaseType' => '16459',
+      'Name' => 'std::string const',
+      'Size' => '32',
+      'Type' => 'Const'
+    },
+    '16693' => {
       'Header' => 'optional',
       'Line' => '115',
       'Memb' => {
         '0' => {
           'name' => '_M_payload',
           'offset' => '0',
-          'type' => '54141'
+          'type' => '16715'
+        },
+        '1' => {
+          'name' => '_M_engaged',
+          'offset' => '50',
+          'type' => '72914'
+        }
+      },
+      'Name' => 'struct std::_Optional_payload_base<std::__cxx11::basic_string<char> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '40',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '6272'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '16706' => {
+      'Header' => 'optional',
+      'Line' => '203',
+      'Name' => 'struct std::_Optional_payload_base<std::__cxx11::basic_string<char> >::_Empty_byte',
+      'NameSpace' => 'std::_Optional_payload_base<std::__cxx11::basic_string<char> >',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'Type' => 'Struct'
+    },
+    '16715' => {
+      'Header' => 'optional',
+      'Line' => '206',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_empty',
+          'offset' => '0',
+          'type' => '16706'
+        },
+        '1' => {
+          'name' => '_M_value',
+          'offset' => '0',
+          'type' => '6272'
+        }
+      },
+      'Name' => 'union std::_Optional_payload_base<std::__cxx11::basic_string<char> >::_Storage<std::__cxx11::basic_string<char> >',
+      'NameSpace' => 'std::_Optional_payload_base<std::__cxx11::basic_string<char> >',
+      'PrivateABI' => 1,
+      'Size' => '32',
+      'TParam' => {
+        '0' => {
+          'key' => '_Up',
+          'type' => '6272'
+        }
+      },
+      'Type' => 'Union'
+    },
+    '17453' => {
+      'Base' => {
+        '16693' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'optional',
+      'Line' => '416',
+      'Name' => 'struct std::_Optional_payload<std::__cxx11::basic_string<char> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '40',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '6272'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '17905' => {
+      'Header' => 'optional',
+      'Line' => '485',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_payload',
+          'offset' => '0',
+          'type' => '17453'
+        }
+      },
+      'Name' => 'struct std::_Optional_base<std::__cxx11::basic_string<char> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '40',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '6272'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '18261' => {
+      'Header' => 'enable_special_members.h',
+      'Line' => '89',
+      'Name' => 'struct std::_Enable_copy_move<true, true, true, true, std::optional<std::__cxx11::basic_string<char> > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Copy',
+          'type' => '72914',
+          'val' => '1'
+        },
+        '1' => {
+          'key' => '_CopyAssignment',
+          'type' => '72914',
+          'val' => '1'
+        },
+        '2' => {
+          'key' => '_Move',
+          'type' => '72914',
+          'val' => '1'
+        },
+        '3' => {
+          'key' => '_MoveAssignment',
+          'type' => '72914',
+          'val' => '1'
+        },
+        '4' => {
+          'key' => '_Tag',
+          'type' => '18352'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '18324' => {
+      'Header' => 'type_traits',
+      'Line' => '1705',
+      'Name' => 'struct std::remove_cv<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'name' => 'std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '18338' => {
+      'BaseType' => '6272',
+      'Header' => 'type_traits',
+      'Line' => '1706',
+      'Name' => 'std::remove_cv<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::type',
+      'NameSpace' => 'std::remove_cv<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >',
+      'PrivateABI' => 1,
+      'Size' => '32',
+      'Type' => 'Typedef'
+    },
+    '18352' => {
+      'Base' => {
+        '17905' => {
+          'pos' => '0'
+        },
+        '18261' => {
+          'pos' => '1'
+        }
+      },
+      'Header' => 'optional',
+      'Line' => '778',
+      'Name' => 'std::optional<std::__cxx11::basic_string<char> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '40',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '6272'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '18932' => {
+      'BaseType' => '18352',
+      'Name' => 'std::optional<std::__cxx11::basic_string<char> >const',
+      'Size' => '40',
+      'Type' => 'Const'
+    },
+    '18937' => {
+      'Header' => 'new_allocator.h',
+      'Line' => '63',
+      'Name' => 'std::__new_allocator<unsigned char>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '72948'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '19181' => {
+      'Base' => {
+        '18937' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'allocator.h',
+      'Line' => '133',
+      'Name' => 'std::allocator<unsigned char>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'name' => 'unsigned char'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '19396' => {
+      'Copied' => 1,
+      'Header' => 'alloc_traits.h',
+      'Line' => '560',
+      'Name' => 'struct std::allocator_traits<std::allocator<unsigned char> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'type' => '19181'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '19410' => {
+      'BaseType' => '90979',
+      'Header' => 'alloc_traits.h',
+      'Line' => '569',
+      'Name' => 'std::allocator_traits<std::allocator<unsigned char> >::pointer',
+      'NameSpace' => 'std::allocator_traits<std::allocator<unsigned char> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '19650' => {
+      'Header' => 'stl_vector.h',
+      'Line' => '91',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_impl',
+          'offset' => '0',
+          'type' => '19848'
+        }
+      },
+      'Name' => 'struct std::_Vector_base<unsigned char, std::allocator<unsigned char> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '72948'
+        },
+        '1' => {
+          'key' => '_Alloc',
+          'type' => '19181'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '19663' => {
+      'Header' => 'stl_vector.h',
+      'Line' => '98',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_start',
+          'offset' => '0',
+          'type' => '19836'
+        },
+        '1' => {
+          'name' => '_M_finish',
+          'offset' => '8',
+          'type' => '19836'
+        },
+        '2' => {
+          'name' => '_M_end_of_storage',
+          'offset' => '22',
+          'type' => '19836'
+        }
+      },
+      'Name' => 'struct std::_Vector_base<unsigned char, std::allocator<unsigned char> >::_Vector_impl_data',
+      'NameSpace' => 'std::_Vector_base<unsigned char, std::allocator<unsigned char> >',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '19836' => {
+      'BaseType' => '74310',
+      'Header' => 'stl_vector.h',
+      'Line' => '96',
+      'Name' => 'std::_Vector_base<unsigned char, std::allocator<unsigned char> >::pointer',
+      'NameSpace' => 'std::_Vector_base<unsigned char, std::allocator<unsigned char> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '19848' => {
+      'Base' => {
+        '19181' => {
+          'pos' => '0'
+        },
+        '19663' => {
+          'pos' => '1'
+        }
+      },
+      'Header' => 'stl_vector.h',
+      'Line' => '139',
+      'Name' => 'struct std::_Vector_base<unsigned char, std::allocator<unsigned char> >::_Vector_impl',
+      'NameSpace' => 'std::_Vector_base<unsigned char, std::allocator<unsigned char> >',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '20649' => {
+      'Base' => {
+        '19650' => {
+          'access' => 'protected',
+          'pos' => '0'
+        }
+      },
+      'Header' => 'stl_vector.h',
+      'Line' => '458',
+      'Name' => 'std::vector<unsigned char>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '72948'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '23834' => {
+      'BaseType' => '20649',
+      'Name' => 'std::vector<unsigned char>const',
+      'Size' => '24',
+      'Type' => 'Const'
+    },
+    '24113' => {
+      'Base' => {
+        '14467' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'bitset',
+      'Line' => '812',
+      'Name' => 'std::bitset<16ul>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Nb',
+          'type' => '72936',
+          'val' => '16'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '25474' => {
+      'BaseType' => '24113',
+      'Name' => 'std::bitset<16ul>const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '25479' => {
+      'Base' => {
+        '14467' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'bitset',
+      'Line' => '812',
+      'Name' => 'std::bitset<32ul>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Nb',
+          'type' => '72936',
+          'val' => '32'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '26840' => {
+      'BaseType' => '25479',
+      'Name' => 'std::bitset<32ul>const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '26845' => {
+      'Header' => 'new_allocator.h',
+      'Line' => '63',
+      'Name' => 'std::__new_allocator<unsigned long>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '72936'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '27089' => {
+      'Base' => {
+        '26845' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'allocator.h',
+      'Line' => '133',
+      'Name' => 'std::allocator<unsigned long>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'name' => 'unsigned long'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '27304' => {
+      'Copied' => 1,
+      'Header' => 'alloc_traits.h',
+      'Line' => '560',
+      'Name' => 'struct std::allocator_traits<std::allocator<unsigned long> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'type' => '27089'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '27318' => {
+      'BaseType' => '91319',
+      'Header' => 'alloc_traits.h',
+      'Line' => '569',
+      'Name' => 'std::allocator_traits<std::allocator<unsigned long> >::pointer',
+      'NameSpace' => 'std::allocator_traits<std::allocator<unsigned long> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '27610' => {
+      'Header' => 'stl_vector.h',
+      'Line' => '91',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_impl',
+          'offset' => '0',
+          'type' => '27808'
+        }
+      },
+      'Name' => 'struct std::_Vector_base<unsigned long, std::allocator<unsigned long> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '72936'
+        },
+        '1' => {
+          'key' => '_Alloc',
+          'type' => '27089'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '27623' => {
+      'Header' => 'stl_vector.h',
+      'Line' => '98',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_start',
+          'offset' => '0',
+          'type' => '27796'
+        },
+        '1' => {
+          'name' => '_M_finish',
+          'offset' => '8',
+          'type' => '27796'
+        },
+        '2' => {
+          'name' => '_M_end_of_storage',
+          'offset' => '22',
+          'type' => '27796'
+        }
+      },
+      'Name' => 'struct std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_Vector_impl_data',
+      'NameSpace' => 'std::_Vector_base<unsigned long, std::allocator<unsigned long> >',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '27796' => {
+      'BaseType' => '74602',
+      'Header' => 'stl_vector.h',
+      'Line' => '96',
+      'Name' => 'std::_Vector_base<unsigned long, std::allocator<unsigned long> >::pointer',
+      'NameSpace' => 'std::_Vector_base<unsigned long, std::allocator<unsigned long> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '27808' => {
+      'Base' => {
+        '27089' => {
+          'pos' => '0'
+        },
+        '27623' => {
+          'pos' => '1'
+        }
+      },
+      'Header' => 'stl_vector.h',
+      'Line' => '139',
+      'Name' => 'struct std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_Vector_impl',
+      'NameSpace' => 'std::_Vector_base<unsigned long, std::allocator<unsigned long> >',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '28609' => {
+      'Base' => {
+        '27610' => {
+          'access' => 'protected',
+          'pos' => '0'
+        }
+      },
+      'Header' => 'stl_vector.h',
+      'Line' => '458',
+      'Name' => 'std::vector<unsigned long>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '72936'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '31985' => {
+      'BaseType' => '28609',
+      'Name' => 'std::vector<unsigned long>const',
+      'Size' => '24',
+      'Type' => 'Const'
+    },
+    '32022' => {
+      'Header' => 'new_allocator.h',
+      'Line' => '63',
+      'Name' => 'std::__new_allocator<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '32266'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '32266' => {
+      'Base' => {
+        '67736' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'stl_pair.h',
+      'Line' => '302',
+      'Memb' => {
+        '0' => {
+          'name' => 'first',
+          'offset' => '0',
+          'type' => '72967'
+        },
+        '1' => {
+          'name' => 'second',
+          'offset' => '8',
+          'type' => '42638'
+        }
+      },
+      'Name' => 'struct std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '16',
+      'TParam' => {
+        '0' => {
+          'key' => '_T1',
+          'type' => '72967'
+        },
+        '1' => {
+          'key' => '_T2',
+          'type' => '42638'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '32802' => {
+      'Base' => {
+        '32022' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'allocator.h',
+      'Line' => '133',
+      'Name' => 'std::allocator<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'type' => '32266'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '33449' => {
+      'Base' => {
+        '15593' => {
+          'pos' => '0'
+        }
+      },
+      'Copied' => 1,
+      'Header' => 'stl_tree.h',
+      'Line' => '214',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_storage',
+          'offset' => '50',
+          'type' => '79686'
+        }
+      },
+      'Name' => 'struct std::_Rb_tree_node<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '48',
+      'TParam' => {
+        '0' => {
+          'key' => '_Val',
+          'type' => '32266'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '34324' => {
+      'Base' => {
+        '34539' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'allocator.h',
+      'Line' => '133',
+      'Name' => 'std::allocator<std::_Rb_tree_node<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'type' => '33449'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '34539' => {
+      'Header' => 'new_allocator.h',
+      'Line' => '63',
+      'Name' => 'std::__new_allocator<std::_Rb_tree_node<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '33449'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '34783' => {
+      'Header' => 'stl_function.h',
+      'Line' => '131',
+      'Name' => 'struct std::binary_function<unsigned short, unsigned short, bool>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Arg1',
+          'type' => '72960'
+        },
+        '1' => {
+          'key' => '_Arg2',
+          'type' => '72960'
+        },
+        '2' => {
+          'key' => '_Result',
+          'type' => '72914'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '34824' => {
+      'Base' => {
+        '34783' => {
+          'pos' => '0'
+        }
+      },
+      'Copied' => 1,
+      'Header' => 'stl_function.h',
+      'Line' => '400',
+      'Name' => 'struct std::less<unsigned short>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '72960'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '34900' => {
+      'Header' => 'stl_tree.h',
+      'Line' => '140',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_key_compare',
+          'offset' => '0',
+          'type' => '34824'
+        }
+      },
+      'Name' => 'struct std::_Rb_tree_key_compare<std::less<unsigned short> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Key_compare',
+          'type' => '34824'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '35060' => {
+      'Header' => 'stl_tree.h',
+      'Line' => '1020',
+      'Memb' => {
+        '0' => {
+          'access' => 'protected',
+          'name' => '_M_impl',
+          'offset' => '0',
+          'type' => '35074'
+        }
+      },
+      'Name' => 'std::_Rb_tree<unsigned short, std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >, std::_Select1st<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >, std::less<unsigned short>, std::allocator<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '48',
+      'TParam' => {
+        '0' => {
+          'key' => '_Key',
+          'type' => '72960'
+        },
+        '1' => {
+          'key' => '_Val',
+          'type' => '32266'
+        },
+        '2' => {
+          'key' => '_KeyOfValue',
+          'type' => '68624'
+        },
+        '3' => {
+          'key' => '_Compare',
+          'type' => '34824'
+        },
+        '4' => {
+          'key' => '_Alloc',
+          'type' => '32802'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '35074' => {
+      'Base' => {
+        '15755' => {
+          'pos' => '2'
+        },
+        '34324' => {
+          'pos' => '0'
+        },
+        '34900' => {
+          'pos' => '1'
+        }
+      },
+      'Header' => 'stl_tree.h',
+      'Line' => '1303',
+      'Name' => 'struct std::_Rb_tree<unsigned short, std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >, std::_Select1st<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >, std::less<unsigned short>, std::allocator<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > > >::_Rb_tree_impl<std::less<unsigned short> >',
+      'NameSpace' => 'std::_Rb_tree<unsigned short, std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >, std::_Select1st<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >, std::less<unsigned short>, std::allocator<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > > >',
+      'PrivateABI' => 1,
+      'Protected' => 1,
+      'Size' => '48',
+      'TParam' => {
+        '0' => {
+          'key' => '_Key_compare',
+          'type' => '34824'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '40149' => {
+      'Header' => 'stl_map.h',
+      'Line' => '105',
+      'Memb' => {
+        '0' => {
+          'access' => 'private',
+          'name' => '_M_t',
+          'offset' => '0',
+          'type' => '40162'
+        }
+      },
+      'Name' => 'std::map<unsigned short, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '48',
+      'TParam' => {
+        '0' => {
+          'key' => '_Key',
+          'type' => '72960'
+        },
+        '1' => {
+          'key' => '_Tp',
+          'type' => '42638'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '40162' => {
+      'BaseType' => '35060',
+      'Header' => 'stl_map.h',
+      'Line' => '158',
+      'Name' => 'std::map<unsigned short, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >::_Rep_type',
+      'NameSpace' => 'std::map<unsigned short, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >',
+      'Private' => 1,
+      'PrivateABI' => 1,
+      'Size' => '48',
+      'Type' => 'Typedef'
+    },
+    '42611' => {
+      'BaseType' => '40149',
+      'Name' => 'std::map<unsigned short, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >const',
+      'Size' => '48',
+      'Type' => 'Const'
+    },
+    '42638' => {
+      'Header' => 'unique_ptr.h',
+      'Line' => '271',
+      'Memb' => {
+        '0' => {
+          'access' => 'private',
+          'name' => '_M_t',
+          'offset' => '0',
+          'type' => '61617'
+        }
+      },
+      'Name' => 'std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '89539'
+        },
+        '1' => {
+          'key' => '_Dp',
+          'type' => '59453'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '43763' => {
+      'Header' => 'new_allocator.h',
+      'Line' => '63',
+      'Name' => 'std::__new_allocator<pldm::fw_update::FirmwareDeviceIDRecord>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '90025'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '44007' => {
+      'Base' => {
+        '43763' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'allocator.h',
+      'Line' => '133',
+      'Name' => 'std::allocator<pldm::fw_update::FirmwareDeviceIDRecord>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'type' => '90025'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '44222' => {
+      'Copied' => 1,
+      'Header' => 'alloc_traits.h',
+      'Line' => '560',
+      'Name' => 'struct std::allocator_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'type' => '44007'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '44236' => {
+      'BaseType' => '91904',
+      'Header' => 'alloc_traits.h',
+      'Line' => '569',
+      'Name' => 'std::allocator_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >::pointer',
+      'NameSpace' => 'std::allocator_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '44528' => {
+      'Header' => 'stl_vector.h',
+      'Line' => '91',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_impl',
+          'offset' => '0',
+          'type' => '44726'
+        }
+      },
+      'Name' => 'struct std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '90025'
+        },
+        '1' => {
+          'key' => '_Alloc',
+          'type' => '44007'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '44541' => {
+      'Header' => 'stl_vector.h',
+      'Line' => '98',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_start',
+          'offset' => '0',
+          'type' => '44714'
+        },
+        '1' => {
+          'name' => '_M_finish',
+          'offset' => '8',
+          'type' => '44714'
+        },
+        '2' => {
+          'name' => '_M_end_of_storage',
+          'offset' => '22',
+          'type' => '44714'
+        }
+      },
+      'Name' => 'struct std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >::_Vector_impl_data',
+      'NameSpace' => 'std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '44714' => {
+      'BaseType' => '76463',
+      'Header' => 'stl_vector.h',
+      'Line' => '96',
+      'Name' => 'std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >::pointer',
+      'NameSpace' => 'std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '44726' => {
+      'Base' => {
+        '44007' => {
+          'pos' => '0'
+        },
+        '44541' => {
+          'pos' => '1'
+        }
+      },
+      'Header' => 'stl_vector.h',
+      'Line' => '139',
+      'Name' => 'struct std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >::_Vector_impl',
+      'NameSpace' => 'std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '45527' => {
+      'Base' => {
+        '44528' => {
+          'access' => 'protected',
+          'pos' => '0'
+        }
+      },
+      'Header' => 'stl_vector.h',
+      'Line' => '458',
+      'Name' => 'std::vector<pldm::fw_update::FirmwareDeviceIDRecord>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '90025'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '48903' => {
+      'BaseType' => '45527',
+      'Name' => 'std::vector<pldm::fw_update::FirmwareDeviceIDRecord>const',
+      'Size' => '24',
+      'Type' => 'Const'
+    },
+    '48940' => {
+      'Header' => 'new_allocator.h',
+      'Line' => '63',
+      'Name' => 'std::__new_allocator<pldm::fw_update::ComponentImageInfo>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '89753'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '49184' => {
+      'Base' => {
+        '48940' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'allocator.h',
+      'Line' => '133',
+      'Name' => 'std::allocator<pldm::fw_update::ComponentImageInfo>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'type' => '89753'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '49399' => {
+      'Copied' => 1,
+      'Header' => 'alloc_traits.h',
+      'Line' => '560',
+      'Name' => 'struct std::allocator_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'type' => '49184'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '49413' => {
+      'BaseType' => '91239',
+      'Header' => 'alloc_traits.h',
+      'Line' => '569',
+      'Name' => 'std::allocator_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >::pointer',
+      'NameSpace' => 'std::allocator_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '49705' => {
+      'Header' => 'stl_vector.h',
+      'Line' => '91',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_impl',
+          'offset' => '0',
+          'type' => '49903'
+        }
+      },
+      'Name' => 'struct std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '89753'
+        },
+        '1' => {
+          'key' => '_Alloc',
+          'type' => '49184'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '49718' => {
+      'Header' => 'stl_vector.h',
+      'Line' => '98',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_start',
+          'offset' => '0',
+          'type' => '49891'
+        },
+        '1' => {
+          'name' => '_M_finish',
+          'offset' => '8',
+          'type' => '49891'
+        },
+        '2' => {
+          'name' => '_M_end_of_storage',
+          'offset' => '22',
+          'type' => '49891'
+        }
+      },
+      'Name' => 'struct std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >::_Vector_impl_data',
+      'NameSpace' => 'std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '49891' => {
+      'BaseType' => '77889',
+      'Header' => 'stl_vector.h',
+      'Line' => '96',
+      'Name' => 'std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >::pointer',
+      'NameSpace' => 'std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '49903' => {
+      'Base' => {
+        '49184' => {
+          'pos' => '0'
+        },
+        '49718' => {
+          'pos' => '1'
+        }
+      },
+      'Header' => 'stl_vector.h',
+      'Line' => '139',
+      'Name' => 'struct std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >::_Vector_impl',
+      'NameSpace' => 'std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'Type' => 'Struct'
+    },
+    '50704' => {
+      'Base' => {
+        '49705' => {
+          'access' => 'protected',
+          'pos' => '0'
+        }
+      },
+      'Header' => 'stl_vector.h',
+      'Line' => '458',
+      'Name' => 'std::vector<pldm::fw_update::ComponentImageInfo>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '24',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '89753'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '54080' => {
+      'BaseType' => '50704',
+      'Name' => 'std::vector<pldm::fw_update::ComponentImageInfo>const',
+      'Size' => '24',
+      'Type' => 'Const'
+    },
+    '54117' => {
+      'Header' => 'optional',
+      'Line' => '115',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_payload',
+          'offset' => '0',
+          'type' => '54139'
         },
         '1' => {
           'name' => '_M_engaged',
           'offset' => '4',
-          'type' => '72916'
+          'type' => '72914'
         }
       },
       'Name' => 'struct std::_Optional_payload_base<int>',
@@ -448,12 +2017,12 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73007'
+          'type' => '73005'
         }
       },
       'Type' => 'Struct'
     },
-    '54132' => {
+    '54130' => {
       'Header' => 'optional',
       'Line' => '203',
       'Name' => 'struct std::_Optional_payload_base<int>::_Empty_byte',
@@ -462,19 +2031,19 @@ $VAR1 = {
       'Size' => '1',
       'Type' => 'Struct'
     },
-    '54141' => {
+    '54139' => {
       'Header' => 'optional',
       'Line' => '206',
       'Memb' => {
         '0' => {
           'name' => '_M_empty',
           'offset' => '0',
-          'type' => '54132'
+          'type' => '54130'
         },
         '1' => {
           'name' => '_M_value',
           'offset' => '0',
-          'type' => '73007'
+          'type' => '73005'
         }
       },
       'Name' => 'union std::_Optional_payload_base<int>::_Storage<int>',
@@ -484,14 +2053,14 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Up',
-          'type' => '73007'
+          'type' => '73005'
         }
       },
       'Type' => 'Union'
     },
-    '54955' => {
+    '54953' => {
       'Base' => {
-        '54119' => {
+        '54117' => {
           'pos' => '0'
         }
       },
@@ -504,19 +2073,19 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73007'
+          'type' => '73005'
         }
       },
       'Type' => 'Struct'
     },
-    '55060' => {
+    '55058' => {
       'Header' => 'optional',
       'Line' => '485',
       'Memb' => {
         '0' => {
           'name' => '_M_payload',
           'offset' => '0',
-          'type' => '54955'
+          'type' => '54953'
         }
       },
       'Name' => 'struct std::_Optional_base<int>',
@@ -526,12 +2095,12 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73007'
+          'type' => '73005'
         }
       },
       'Type' => 'Struct'
     },
-    '55532' => {
+    '55530' => {
       'Header' => 'enable_special_members.h',
       'Line' => '89',
       'Name' => 'struct std::_Enable_copy_move<true, true, true, true, std::optional<int> >',
@@ -541,37 +2110,37 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Copy',
-          'type' => '72916',
+          'type' => '72914',
           'val' => '1'
         },
         '1' => {
           'key' => '_CopyAssignment',
-          'type' => '72916',
+          'type' => '72914',
           'val' => '1'
         },
         '2' => {
           'key' => '_Move',
-          'type' => '72916',
+          'type' => '72914',
           'val' => '1'
         },
         '3' => {
           'key' => '_MoveAssignment',
-          'type' => '72916',
+          'type' => '72914',
           'val' => '1'
         },
         '4' => {
           'key' => '_Tag',
-          'type' => '55595'
+          'type' => '55593'
         }
       },
       'Type' => 'Struct'
     },
-    '55595' => {
+    '55593' => {
       'Base' => {
-        '55060' => {
+        '55058' => {
           'pos' => '0'
         },
-        '55532' => {
+        '55530' => {
           'pos' => '1'
         }
       },
@@ -584,27 +2153,650 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73007'
+          'type' => '73005'
         }
       },
       'Type' => 'Class'
     },
-    '72916' => {
+    '56220' => {
+      'Header' => 'expected',
+      'Line' => '335',
+      'Memb' => {
+        '0' => {
+          'access' => 'private',
+          'name' => 'unnamed0',
+          'offset' => '0',
+          'type' => '56234'
+        },
+        '1' => {
+          'access' => 'private',
+          'name' => '_M_has_value',
+          'offset' => '64',
+          'type' => '72914'
+        }
+      },
+      'Name' => 'std::expected<std::unique_ptr<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >, pldm::fw_update::PackageParserError>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '48',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '62838'
+        },
+        '1' => {
+          'key' => '_Er',
+          'type' => '90474'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '56234' => {
+      'Header' => 'expected',
+      'Line' => '1276',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_val',
+          'offset' => '0',
+          'type' => '62797'
+        },
+        '1' => {
+          'name' => '_M_unex',
+          'offset' => '0',
+          'type' => '90474'
+        }
+      },
+      'Name' => 'std::expected<std::unique_ptr<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >, pldm::fw_update::PackageParserError>::anon-union-expected-1276',
+      'NameSpace' => 'std::expected<std::unique_ptr<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >, pldm::fw_update::PackageParserError>',
+      'Private' => 1,
+      'PrivateABI' => 1,
+      'Size' => '40',
+      'Type' => 'Union'
+    },
+    '57236' => {
+      'Header' => 'span',
+      'Line' => '124',
+      'Memb' => {
+        '0' => {
+          'access' => 'private',
+          'name' => '_M_ptr',
+          'offset' => '0',
+          'type' => '57608'
+        },
+        '1' => {
+          'access' => 'private',
+          'name' => '_M_extent',
+          'offset' => '8',
+          'type' => '567'
+        }
+      },
+      'Name' => 'std::span<unsigned char const, 18446744073709551615ul>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '16',
+      'TParam' => {
+        '0' => {
+          'key' => '_Type',
+          'type' => '72955'
+        },
+        '1' => {
+          'key' => '_Extent',
+          'type' => '72936',
+          'val' => '18446744073709551615'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '57608' => {
+      'BaseType' => '91024',
+      'Header' => 'span',
+      'Line' => '160',
+      'Name' => 'std::span<unsigned char const, 18446744073709551615ul>::pointer',
+      'NameSpace' => 'std::span<unsigned char const, 18446744073709551615ul>',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '58181' => {
+      'BaseType' => '57236',
+      'Name' => 'std::span<unsigned char const, 18446744073709551615ul>const',
+      'Size' => '16',
+      'Type' => 'Const'
+    },
+    '59453' => {
+      'Header' => 'unique_ptr.h',
+      'Line' => '69',
+      'Name' => 'struct std::default_delete<pldm::fw_update::DescriptorData>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '89539'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '59538' => {
+      'Header' => 'unique_ptr.h',
+      'Line' => '142',
+      'Memb' => {
+        '0' => {
+          'access' => 'private',
+          'name' => '_M_t',
+          'offset' => '0',
+          'type' => '61247'
+        }
+      },
+      'Name' => 'std::__uniq_ptr_impl<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '89539'
+        },
+        '1' => {
+          'key' => '_Dp',
+          'type' => '59453'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '59991' => {
+      'Header' => 'tuple',
+      'Line' => '91',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_head_impl',
+          'offset' => '0',
+          'type' => '59453'
+        }
+      },
+      'Name' => 'struct std::_Head_base<1ul, std::default_delete<pldm::fw_update::DescriptorData> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Idx',
+          'type' => '72936',
+          'val' => '1'
+        },
+        '1' => {
+          'key' => '_Head',
+          'type' => '59453'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '60249' => {
+      'Base' => {
+        '59991' => {
+          'access' => 'private',
+          'pos' => '0'
+        }
+      },
+      'Header' => 'tuple',
+      'Line' => '546',
+      'Name' => 'struct std::_Tuple_impl<1ul, std::default_delete<pldm::fw_update::DescriptorData> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Idx',
+          'type' => '72936',
+          'val' => '1'
+        },
+        '1' => {
+          'key' => undef,
+          'type' => '59453'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '60575' => {
+      'Header' => 'tuple',
+      'Line' => '200',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_head_impl',
+          'offset' => '0',
+          'type' => '91189'
+        }
+      },
+      'Name' => 'struct std::_Head_base<0ul, pldm::fw_update::DescriptorData*>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Idx',
+          'type' => '72936',
+          'val' => '0'
+        },
+        '1' => {
+          'key' => '_Head',
+          'type' => '91189'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '60833' => {
+      'Base' => {
+        '60249' => {
+          'pos' => '0'
+        },
+        '60575' => {
+          'access' => 'private',
+          'pos' => '1'
+        }
+      },
+      'Header' => 'tuple',
+      'Line' => '281',
+      'Name' => 'struct std::_Tuple_impl<0ul, pldm::fw_update::DescriptorData*>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Idx',
+          'type' => '72936',
+          'val' => '0'
+        },
+        '1' => {
+          'key' => undef,
+          'type' => '91189'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '61247' => {
+      'Base' => {
+        '60833' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'tuple',
+      'Line' => '833',
+      'Name' => 'std::tuple<pldm::fw_update::DescriptorData*, std::default_delete<pldm::fw_update::DescriptorData> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'name' => 'pldm::fw_update::DescriptorData*'
+        },
+        '1' => {
+          'type' => '59453'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '61617' => {
+      'Base' => {
+        '59538' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'unique_ptr.h',
+      'Line' => '233',
+      'Name' => 'struct std::__uniq_ptr_data<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '89539'
+        },
+        '1' => {
+          'key' => '_Dp',
+          'type' => '59453'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '62797' => {
+      'BaseType' => '18338',
+      'Header' => 'type_traits',
+      'Line' => '1751',
+      'Name' => 'std::remove_cv_t',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '32',
+      'Type' => 'Typedef'
+    },
+    '62838' => {
+      'Header' => 'unique_ptr.h',
+      'Line' => '271',
+      'Memb' => {
+        '0' => {
+          'access' => 'private',
+          'name' => '_M_t',
+          'offset' => '0',
+          'type' => '65618'
+        }
+      },
+      'Name' => 'std::unique_ptr<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '90291'
+        },
+        '1' => {
+          'key' => '_Dp',
+          'type' => '63454'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '63454' => {
+      'Header' => 'unique_ptr.h',
+      'Line' => '69',
+      'Name' => 'struct std::default_delete<pldm::fw_update::Package>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '90291'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '63539' => {
+      'Header' => 'unique_ptr.h',
+      'Line' => '142',
+      'Memb' => {
+        '0' => {
+          'access' => 'private',
+          'name' => '_M_t',
+          'offset' => '0',
+          'type' => '65248'
+        }
+      },
+      'Name' => 'std::__uniq_ptr_impl<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '90291'
+        },
+        '1' => {
+          'key' => '_Dp',
+          'type' => '63454'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '63992' => {
+      'Header' => 'tuple',
+      'Line' => '91',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_head_impl',
+          'offset' => '0',
+          'type' => '63454'
+        }
+      },
+      'Name' => 'struct std::_Head_base<1ul, std::default_delete<pldm::fw_update::Package> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Idx',
+          'type' => '72936',
+          'val' => '1'
+        },
+        '1' => {
+          'key' => '_Head',
+          'type' => '63454'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '64250' => {
+      'Base' => {
+        '63992' => {
+          'access' => 'private',
+          'pos' => '0'
+        }
+      },
+      'Header' => 'tuple',
+      'Line' => '546',
+      'Name' => 'struct std::_Tuple_impl<1ul, std::default_delete<pldm::fw_update::Package> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Idx',
+          'type' => '72936',
+          'val' => '1'
+        },
+        '1' => {
+          'key' => undef,
+          'type' => '63454'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '64576' => {
+      'Header' => 'tuple',
+      'Line' => '200',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_head_impl',
+          'offset' => '0',
+          'type' => '92364'
+        }
+      },
+      'Name' => 'struct std::_Head_base<0ul, pldm::fw_update::Package*>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Idx',
+          'type' => '72936',
+          'val' => '0'
+        },
+        '1' => {
+          'key' => '_Head',
+          'type' => '92364'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '64834' => {
+      'Base' => {
+        '64250' => {
+          'pos' => '0'
+        },
+        '64576' => {
+          'access' => 'private',
+          'pos' => '1'
+        }
+      },
+      'Header' => 'tuple',
+      'Line' => '281',
+      'Name' => 'struct std::_Tuple_impl<0ul, pldm::fw_update::Package*>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Idx',
+          'type' => '72936',
+          'val' => '0'
+        },
+        '1' => {
+          'key' => undef,
+          'type' => '92364'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '65248' => {
+      'Base' => {
+        '64834' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'tuple',
+      'Line' => '833',
+      'Name' => 'std::tuple<pldm::fw_update::Package*, std::default_delete<pldm::fw_update::Package> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'name' => 'pldm::fw_update::Package*'
+        },
+        '1' => {
+          'type' => '63454'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '65618' => {
+      'Base' => {
+        '63539' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'unique_ptr.h',
+      'Line' => '233',
+      'Name' => 'struct std::__uniq_ptr_data<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '90291'
+        },
+        '1' => {
+          'key' => '_Dp',
+          'type' => '63454'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '67736' => {
+      'Copied' => 1,
+      'Header' => 'stl_pair.h',
+      'Line' => '278',
+      'Name' => 'std::__pair_base<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_U1',
+          'type' => '72967'
+        },
+        '1' => {
+          'key' => '_U2',
+          'type' => '42638'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '68592' => {
+      'Header' => 'stl_function.h',
+      'Line' => '117',
+      'Name' => 'struct std::unary_function<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >, unsigned short const>',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Arg',
+          'type' => '32266'
+        },
+        '1' => {
+          'key' => '_Result',
+          'type' => '72967'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '68624' => {
+      'Base' => {
+        '68592' => {
+          'pos' => '0'
+        }
+      },
+      'Copied' => 1,
+      'Header' => 'stl_function.h',
+      'Line' => '1171',
+      'Name' => 'struct std::_Select1st<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Pair',
+          'type' => '32266'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '72914' => {
       'Name' => 'bool',
       'Size' => '1',
       'Type' => 'Intrinsic'
     },
-    '72938' => {
+    '72936' => {
       'Name' => 'unsigned long',
       'Size' => '8',
       'Type' => 'Intrinsic'
     },
-    '73007' => {
+    '72948' => {
+      'Name' => 'unsigned char',
+      'Size' => '1',
+      'Type' => 'Intrinsic'
+    },
+    '72955' => {
+      'BaseType' => '72948',
+      'Name' => 'unsigned char const',
+      'Size' => '1',
+      'Type' => 'Const'
+    },
+    '72960' => {
+      'Name' => 'unsigned short',
+      'Size' => '2',
+      'Type' => 'Intrinsic'
+    },
+    '72967' => {
+      'BaseType' => '72960',
+      'Name' => 'unsigned short const',
+      'Size' => '2',
+      'Type' => 'Const'
+    },
+    '72972' => {
+      'Name' => 'unsigned int',
+      'Size' => '4',
+      'Type' => 'Intrinsic'
+    },
+    '73005' => {
       'Name' => 'int',
       'Size' => '4',
       'Type' => 'Intrinsic'
     },
-    '73203' => {
+    '73201' => {
       'Base' => {
         '6004' => {
           'pos' => '0'
@@ -625,7 +2817,7 @@ $VAR1 = {
       },
       'Type' => 'Struct'
     },
-    '73404' => {
+    '73402' => {
       'BaseType' => '6018',
       'Header' => 'alloc_traits.h',
       'Line' => '56',
@@ -635,7 +2827,7 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '73428' => {
+    '73426' => {
       'BaseType' => '6081',
       'Header' => 'alloc_traits.h',
       'Line' => '58',
@@ -645,26 +2837,635 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '81046' => {
+    '74109' => {
+      'Base' => {
+        '19396' => {
+          'pos' => '0'
+        }
+      },
+      'Copied' => 1,
+      'Header' => 'alloc_traits.h',
+      'Line' => '47',
+      'Name' => 'struct __gnu_cxx::__alloc_traits<std::allocator<unsigned char> >',
+      'NameSpace' => '__gnu_cxx',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Alloc',
+          'type' => '19181'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '74310' => {
+      'BaseType' => '19410',
+      'Header' => 'alloc_traits.h',
+      'Line' => '56',
+      'Name' => '__gnu_cxx::__alloc_traits<std::allocator<unsigned char> >::pointer',
+      'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<unsigned char> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '74401' => {
+      'Base' => {
+        '27304' => {
+          'pos' => '0'
+        }
+      },
+      'Copied' => 1,
+      'Header' => 'alloc_traits.h',
+      'Line' => '47',
+      'Name' => 'struct __gnu_cxx::__alloc_traits<std::allocator<unsigned long> >',
+      'NameSpace' => '__gnu_cxx',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Alloc',
+          'type' => '27089'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '74602' => {
+      'BaseType' => '27318',
+      'Header' => 'alloc_traits.h',
+      'Line' => '56',
+      'Name' => '__gnu_cxx::__alloc_traits<std::allocator<unsigned long> >::pointer',
+      'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<unsigned long> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '76262' => {
+      'Base' => {
+        '44222' => {
+          'pos' => '0'
+        }
+      },
+      'Copied' => 1,
+      'Header' => 'alloc_traits.h',
+      'Line' => '47',
+      'Name' => 'struct __gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
+      'NameSpace' => '__gnu_cxx',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Alloc',
+          'type' => '44007'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '76463' => {
+      'BaseType' => '44236',
+      'Header' => 'alloc_traits.h',
+      'Line' => '56',
+      'Name' => '__gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >::pointer',
+      'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '77688' => {
+      'Base' => {
+        '49399' => {
+          'pos' => '0'
+        }
+      },
+      'Copied' => 1,
+      'Header' => 'alloc_traits.h',
+      'Line' => '47',
+      'Name' => 'struct __gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >',
+      'NameSpace' => '__gnu_cxx',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Alloc',
+          'type' => '49184'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '77889' => {
+      'BaseType' => '49413',
+      'Header' => 'alloc_traits.h',
+      'Line' => '56',
+      'Name' => '__gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >::pointer',
+      'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '79686' => {
+      'Header' => 'aligned_buffer.h',
+      'Line' => '49',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_storage',
+          'offset' => '0',
+          'type' => '93568'
+        }
+      },
+      'Name' => 'struct __gnu_cxx::__aligned_membuf<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
+      'NameSpace' => '__gnu_cxx',
+      'PrivateABI' => 1,
+      'Size' => '16',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '32266'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '80862' => {
+      'BaseType' => '72936',
+      'Header' => 'stddef.h',
+      'Line' => '229',
+      'Name' => 'size_t',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '80874' => {
+      'BaseType' => '80862',
+      'Name' => 'size_t const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '81044' => {
       'Name' => 'char',
       'Size' => '1',
       'Type' => 'Intrinsic'
     },
-    '82344' => {
-      'BaseType' => '81046',
+    '82342' => {
+      'BaseType' => '81044',
       'Name' => 'char*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '86354' => {
-      'BaseType' => '81046',
+    '84173' => {
+      'BaseType' => '72948',
+      'Header' => 'types.h',
+      'Line' => '38',
+      'Name' => '__uint8_t',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'Type' => 'Typedef'
+    },
+    '84197' => {
+      'BaseType' => '72960',
+      'Header' => 'types.h',
+      'Line' => '40',
+      'Name' => '__uint16_t',
+      'PrivateABI' => 1,
+      'Size' => '2',
+      'Type' => 'Typedef'
+    },
+    '84226' => {
+      'BaseType' => '72972',
+      'Header' => 'types.h',
+      'Line' => '42',
+      'Name' => '__uint32_t',
+      'PrivateABI' => 1,
+      'Size' => '4',
+      'Type' => 'Typedef'
+    },
+    '84250' => {
+      'BaseType' => '72936',
+      'Header' => 'types.h',
+      'Line' => '45',
+      'Name' => '__uint64_t',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '86352' => {
+      'BaseType' => '81044',
       'Name' => 'char[16]',
       'Size' => '16',
       'Type' => 'Array'
     },
-    '90817' => {
+    '86550' => {
+      'BaseType' => '84173',
+      'Header' => 'stdint-uintn.h',
+      'Line' => '24',
+      'Name' => 'uint8_t',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'Type' => 'Typedef'
+    },
+    '86562' => {
+      'BaseType' => '86550',
+      'Name' => 'uint8_t const',
+      'Size' => '1',
+      'Type' => 'Const'
+    },
+    '86567' => {
+      'BaseType' => '84197',
+      'Header' => 'stdint-uintn.h',
+      'Line' => '25',
+      'Name' => 'uint16_t',
+      'PrivateABI' => 1,
+      'Size' => '2',
+      'Type' => 'Typedef'
+    },
+    '86579' => {
+      'BaseType' => '86567',
+      'Name' => 'uint16_t const',
+      'Size' => '2',
+      'Type' => 'Const'
+    },
+    '86584' => {
+      'BaseType' => '84226',
+      'Header' => 'stdint-uintn.h',
+      'Line' => '26',
+      'Name' => 'uint32_t',
+      'PrivateABI' => 1,
+      'Size' => '4',
+      'Type' => 'Typedef'
+    },
+    '86596' => {
+      'BaseType' => '86584',
+      'Name' => 'uint32_t const',
+      'Size' => '4',
+      'Type' => 'Const'
+    },
+    '86601' => {
+      'BaseType' => '84250',
+      'Header' => 'stdint-uintn.h',
+      'Line' => '27',
+      'Name' => 'uint64_t',
+      'PrivateABI' => 1,
+      'Size' => '8',
+      'Type' => 'Typedef'
+    },
+    '87540' => {
+      'Header' => 'pldm_types.h',
+      'Line' => '178',
+      'Memb' => {
+        '0' => {
+          'name' => 'ptr',
+          'offset' => '0',
+          'type' => '87586'
+        },
+        '1' => {
+          'name' => 'length',
+          'offset' => '8',
+          'type' => '80862'
+        }
+      },
+      'Name' => 'struct variable_field',
+      'PrivateABI' => 1,
+      'Size' => '16',
+      'Type' => 'Struct'
+    },
+    '87581' => {
+      'BaseType' => '87540',
+      'Name' => 'struct variable_field const',
+      'Size' => '16',
+      'Type' => 'Const'
+    },
+    '87586' => {
+      'BaseType' => '86562',
+      'Name' => 'uint8_t const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '88638' => {
+      'BaseType' => '15593',
+      'Name' => 'struct std::_Rb_tree_node_base*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '88915' => {
+      'Header' => 'types.hpp',
+      'Line' => '18',
+      'Name' => 'struct libpldm::NonCopyableNonMoveable',
+      'NameSpace' => 'libpldm',
+      'Size' => '1',
+      'Type' => 'Struct'
+    },
+    '89115' => {
+      'Header' => 'types.hpp',
+      'Line' => '33',
+      'Memb' => {
+        '0' => {
+          'access' => 'protected',
+          'name' => 'struct_size',
+          'offset' => '0',
+          'type' => '80874'
+        },
+        '1' => {
+          'access' => 'protected',
+          'name' => 'reserved_1',
+          'offset' => '8',
+          'type' => '86601'
+        }
+      },
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>',
+      'NameSpace' => 'libpldm',
+      'Size' => '16',
+      'TParam' => {
+        '0' => {
+          'key' => 'Derived',
+          'type' => '89539'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '89195' => {
+      'BaseType' => '89115',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>const',
+      'Size' => '16',
+      'Type' => 'Const'
+    },
+    '89200' => {
+      'Header' => 'types.hpp',
+      'Line' => '33',
+      'Memb' => {
+        '0' => {
+          'access' => 'protected',
+          'name' => 'struct_size',
+          'offset' => '0',
+          'type' => '80874'
+        },
+        '1' => {
+          'access' => 'protected',
+          'name' => 'reserved_1',
+          'offset' => '8',
+          'type' => '86601'
+        }
+      },
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>',
+      'NameSpace' => 'libpldm',
+      'Size' => '16',
+      'TParam' => {
+        '0' => {
+          'key' => 'Derived',
+          'type' => '89753'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '89280' => {
+      'BaseType' => '89200',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>const',
+      'Size' => '16',
+      'Type' => 'Const'
+    },
+    '89285' => {
+      'Header' => 'types.hpp',
+      'Line' => '33',
+      'Memb' => {
+        '0' => {
+          'access' => 'protected',
+          'name' => 'struct_size',
+          'offset' => '0',
+          'type' => '80874'
+        },
+        '1' => {
+          'access' => 'protected',
+          'name' => 'reserved_1',
+          'offset' => '8',
+          'type' => '86601'
+        }
+      },
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>',
+      'NameSpace' => 'libpldm',
+      'Size' => '16',
+      'TParam' => {
+        '0' => {
+          'key' => 'Derived',
+          'type' => '90025'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '89365' => {
+      'BaseType' => '89285',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>const',
+      'Size' => '16',
+      'Type' => 'Const'
+    },
+    '89370' => {
+      'Header' => 'types.hpp',
+      'Line' => '33',
+      'Memb' => {
+        '0' => {
+          'access' => 'protected',
+          'name' => 'struct_size',
+          'offset' => '0',
+          'type' => '80874'
+        },
+        '1' => {
+          'access' => 'protected',
+          'name' => 'reserved_1',
+          'offset' => '8',
+          'type' => '86601'
+        }
+      },
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>',
+      'NameSpace' => 'libpldm',
+      'Size' => '16',
+      'TParam' => {
+        '0' => {
+          'key' => 'Derived',
+          'type' => '90291'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '89450' => {
+      'BaseType' => '89370',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>const',
+      'Size' => '16',
+      'Type' => 'Const'
+    },
+    '89515' => {
       'Header' => 'firmware_update.hpp',
-      'Line' => '172',
+      'Line' => '27',
+      'Memb' => {
+        '0' => {
+          'name' => 'v1',
+          'value' => '0'
+        }
+      },
+      'Name' => 'enum pldm::fw_update::PackagePin',
+      'NameSpace' => 'pldm::fw_update',
+      'Size' => '4',
+      'Type' => 'Enum'
+    },
+    '89539' => {
+      'Base' => {
+        '88915' => {
+          'access' => 'private',
+          'pos' => '1'
+        },
+        '89115' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'firmware_update.hpp',
+      'Line' => '37',
+      'Memb' => {
+        '0' => {
+          'name' => 'vendorDefinedDescriptorTitle',
+          'offset' => '22',
+          'type' => '18932'
+        },
+        '1' => {
+          'name' => 'data',
+          'offset' => '86',
+          'type' => '23834'
+        }
+      },
+      'Name' => 'struct pldm::fw_update::DescriptorData',
+      'NameSpace' => 'pldm::fw_update',
+      'Size' => '80',
+      'Type' => 'Struct'
+    },
+    '89753' => {
+      'Base' => {
+        '88915' => {
+          'access' => 'private',
+          'pos' => '1'
+        },
+        '89200' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'firmware_update.hpp',
+      'Line' => '63',
+      'Memb' => {
+        '0' => {
+          'name' => 'componentClassification',
+          'offset' => '22',
+          'type' => '86579'
+        },
+        '1' => {
+          'name' => 'componentIdentifier',
+          'offset' => '24',
+          'type' => '86579'
+        },
+        '2' => {
+          'name' => 'compComparisonStamp',
+          'offset' => '32',
+          'type' => '86596'
+        },
+        '3' => {
+          'name' => 'componentOptions',
+          'offset' => '36',
+          'type' => '25474'
+        },
+        '4' => {
+          'name' => 'requestedComponentActivationMethod',
+          'offset' => '50',
+          'type' => '25474'
+        },
+        '5' => {
+          'name' => 'componentLocation',
+          'offset' => '64',
+          'type' => '87581'
+        },
+        '6' => {
+          'name' => 'componentVersion',
+          'offset' => '86',
+          'type' => '16471'
+        }
+      },
+      'Name' => 'struct pldm::fw_update::ComponentImageInfo',
+      'NameSpace' => 'pldm::fw_update',
+      'Size' => '88',
+      'Type' => 'Struct'
+    },
+    '90025' => {
+      'Base' => {
+        '88915' => {
+          'access' => 'private',
+          'pos' => '1'
+        },
+        '89285' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'firmware_update.hpp',
+      'Line' => '109',
+      'Memb' => {
+        '0' => {
+          'name' => 'deviceUpdateOptionFlags',
+          'offset' => '22',
+          'type' => '26840'
+        },
+        '1' => {
+          'name' => 'applicableComponents',
+          'offset' => '36',
+          'type' => '31985'
+        },
+        '2' => {
+          'name' => 'componentImageSetVersionString',
+          'offset' => '72',
+          'type' => '16471'
+        },
+        '3' => {
+          'name' => 'recordDescriptors',
+          'offset' => '128',
+          'type' => '42611'
+        },
+        '4' => {
+          'name' => 'firmwareDevicePackageData',
+          'offset' => '296',
+          'type' => '23834'
+        }
+      },
+      'Name' => 'struct pldm::fw_update::FirmwareDeviceIDRecord',
+      'NameSpace' => 'pldm::fw_update',
+      'Size' => '152',
+      'Type' => 'Struct'
+    },
+    '90291' => {
+      'Base' => {
+        '88915' => {
+          'access' => 'private',
+          'pos' => '1'
+        },
+        '89370' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'firmware_update.hpp',
+      'Line' => '158',
+      'Memb' => {
+        '0' => {
+          'name' => 'firmwareDeviceIdRecords',
+          'offset' => '22',
+          'type' => '48903'
+        },
+        '1' => {
+          'name' => 'componentImageInformation',
+          'offset' => '64',
+          'type' => '54080'
+        }
+      },
+      'Name' => 'struct pldm::fw_update::Package',
+      'NameSpace' => 'pldm::fw_update',
+      'Size' => '64',
+      'Type' => 'Struct'
+    },
+    '90469' => {
+      'BaseType' => '90291',
+      'Name' => 'struct pldm::fw_update::Package const',
+      'Size' => '64',
+      'Type' => 'Const'
+    },
+    '90474' => {
+      'Header' => 'firmware_update.hpp',
+      'Line' => '188',
       'Memb' => {
         '0' => {
           'name' => 'msg',
@@ -674,7 +3475,7 @@ $VAR1 = {
         '1' => {
           'name' => 'rc',
           'offset' => '50',
-          'type' => '55595'
+          'type' => '55593'
         }
       },
       'Name' => 'pldm::fw_update::PackageParserError',
@@ -682,23 +3483,216 @@ $VAR1 = {
       'Size' => '40',
       'Type' => 'Class'
     },
-    '92502' => {
-      'BaseType' => '90817',
+    '90637' => {
+      'Base' => {
+        '88915' => {
+          'pos' => '0'
+        }
+      },
+      'Header' => 'firmware_update.hpp',
+      'Line' => '199',
+      'Name' => 'pldm::fw_update::PackageParser',
+      'NameSpace' => 'pldm::fw_update',
+      'Size' => '1',
+      'Type' => 'Class'
+    },
+    '90824' => {
+      'BaseType' => '89195',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '90979' => {
+      'BaseType' => '72948',
+      'Name' => 'unsigned char*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '91024' => {
+      'BaseType' => '72955',
+      'Name' => 'unsigned char const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '91189' => {
+      'BaseType' => '89539',
+      'Name' => 'struct pldm::fw_update::DescriptorData*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '91209' => {
+      'BaseType' => '89280',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '91239' => {
+      'BaseType' => '89753',
+      'Name' => 'struct pldm::fw_update::ComponentImageInfo*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '91269' => {
+      'BaseType' => '89365',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '91319' => {
+      'BaseType' => '72936',
+      'Name' => 'unsigned long*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '91904' => {
+      'BaseType' => '90025',
+      'Name' => 'struct pldm::fw_update::FirmwareDeviceIDRecord*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '91929' => {
+      'BaseType' => '89450',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '92364' => {
+      'BaseType' => '90291',
+      'Name' => 'struct pldm::fw_update::Package*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '92369' => {
+      'BaseType' => '92364',
+      'Name' => 'struct pldm::fw_update::Package*const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '92379' => {
+      'BaseType' => '90469',
+      'Name' => 'struct pldm::fw_update::Package const*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '92524' => {
+      'BaseType' => '90474',
       'Name' => 'pldm::fw_update::PackageParserError*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '92507' => {
-      'BaseType' => '92502',
+    '92529' => {
+      'BaseType' => '92524',
       'Name' => 'pldm::fw_update::PackageParserError*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '93336' => {
-      'BaseType' => '90817',
+    '92534' => {
+      'BaseType' => '90637',
+      'Name' => 'pldm::fw_update::PackageParser*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '92539' => {
+      'BaseType' => '92534',
+      'Name' => 'pldm::fw_update::PackageParser*const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '92544' => {
+      'BaseType' => '58181',
+      'Name' => 'std::span<unsigned char const, 18446744073709551615ul>const&',
+      'Size' => '8',
+      'Type' => 'Ref'
+    },
+    '93353' => {
+      'BaseType' => '90474',
       'Name' => 'pldm::fw_update::PackageParserError&&',
       'Size' => '8',
       'Type' => 'RvalueRef'
+    },
+    '93568' => {
+      'BaseType' => '72948',
+      'Name' => 'unsigned char[16]',
+      'Size' => '16',
+      'Type' => 'Array'
+    },
+    '265148' => {
+      'BaseType' => '90824',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>const*const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '265593' => {
+      'BaseType' => '91209',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>const*const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '265658' => {
+      'BaseType' => '91269',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>const*const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '266323' => {
+      'BaseType' => '91929',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>const*const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '266788' => {
+      'BaseType' => '92379',
+      'Name' => 'struct pldm::fw_update::Package const*const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '327945' => {
+      'BaseType' => '89370',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '327950' => {
+      'BaseType' => '327945',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>*const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '340341' => {
+      'BaseType' => '89285',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '340346' => {
+      'BaseType' => '340341',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>*const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '343481' => {
+      'BaseType' => '89200',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '343486' => {
+      'BaseType' => '343481',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>*const',
+      'Size' => '8',
+      'Type' => 'Const'
+    },
+    '347668' => {
+      'BaseType' => '89115',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '347673' => {
+      'BaseType' => '347668',
+      'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>*const',
+      'Size' => '8',
+      'Type' => 'Const'
     }
   },
   'UndefinedSymbols' => {

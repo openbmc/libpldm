@@ -102,8 +102,7 @@ TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
 
     std::cout << pkgSize << std::endl;
 
-    DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(pin);
-    auto res = PackageParser::parse(fwPkgHdrSingleComponent, pin);
+    auto res = PackageParser::parse(fwPkgHdrSingleComponent, PackagePin::v1);
 
     if (!res.has_value())
     {
@@ -255,8 +254,7 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
 
     std::cout << pkgSize << std::endl;
 
-    DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(pin);
-    auto res = PackageParser::parse(fwPkgHdr, pin);
+    auto res = PackageParser::parse(fwPkgHdr, PackagePin::v1);
 
     if (!res.has_value())
     {
@@ -434,10 +432,8 @@ TEST(PackageParserTest, InvalidPkgBadChecksum)
         0x0E, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69,
         0x6E, 0x67, 0x33, 0x4F, 0x96, 0xAE, 0x57};
 
-    DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(pin);
-
     std::expected<std::unique_ptr<Package>, PackageParserError> result =
-        PackageParser::parse(fwPkgHdr, pin);
+        PackageParser::parse(fwPkgHdr, PackagePin::v1);
 
     EXPECT_FALSE(result.has_value());
 }
