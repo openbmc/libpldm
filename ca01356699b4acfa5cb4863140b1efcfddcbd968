@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3223ac30_f5a0a591",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done Andrew. Added the necessary prefixing.",
+      "parentUuid": "b6ad18c3_d3a03f4d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cee5c7c_388b5718",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93da3779_3f749bba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done. Edited the commit message with relevant DMTF spec, version and section.",
+      "parentUuid": "3cee5c7c_388b5718",
+      "range": {
+        "startLine": 10,
+        "startChar": 3,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2df00120_534d58d9",
@@ -60,6 +108,24 @@
       "writtenOn": "2026-03-20T06:11:58Z",
       "side": 1,
       "message": "This is evident from the patch itself, so I suggest removing this line.\n\nhttps://github.com/openbmc/libpldm/blob/969fe632d6a768f265957d8deb635ec434769af5/CONTRIBUTING.md#L26-L32",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "593a7228_4fd2b4a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done. Removed this line from commit message.",
+      "parentUuid": "2df00120_534d58d9",
       "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -104,6 +170,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2124e75e_e452b829",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done. It\u0027s now same as commit subject.",
+      "parentUuid": "61004a89_16c279c7",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 71
+      },
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "377ff5ef_113e3d92",
@@ -117,6 +207,24 @@
       "writtenOn": "2026-03-20T06:11:58Z",
       "side": 1,
       "message": "This will need adjusting in the context of the comment below.",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4761e50_136e96c2",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "377ff5ef_113e3d92",
       "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -138,6 +246,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20dad626_5549e59e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 1434,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done. Renamed all structures/functions/macros/comments as per the new naming.",
+      "parentUuid": "e6f99d53_246947e7",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b23acf3_cf3deb93",
@@ -155,6 +281,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3369602a_370457e1",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 1442,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "7b23acf3_cf3deb93",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9e06a78_a462d004",
@@ -168,6 +312,24 @@
       "writtenOn": "2026-03-20T06:11:58Z",
       "side": 1,
       "message": "For the same reasons as above, I suggest changing this to `struct pldm_platform_state_effecter_pdr_possible_states_iter`.\n\nThe functions and macros taking this as an argument will need to be renamed accordingly.",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "886522cc_e9bfc353",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f9e06a78_a462d004",
       "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -195,6 +357,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c428fb_5a280ca0",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3675,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done. Some of the variables are removed as it\u0027s not required anymore.",
+      "parentUuid": "d0e005b8_12d2dab8",
+      "range": {
+        "startLine": 3671,
+        "startChar": 1,
+        "endLine": 3675,
+        "endChar": 1
+      },
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba33c32b_c916b79e",
@@ -208,6 +394,30 @@
       "writtenOn": "2026-03-20T06:11:58Z",
       "side": 1,
       "message": "`states-\u003estate_set_id` is not used prior to returning. This check should be removed.",
+      "range": {
+        "startLine": 3691,
+        "startChar": 1,
+        "endLine": 3693,
+        "endChar": 2
+      },
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6650a590_d4ac1ac5",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3693,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done. Removed this check.",
+      "parentUuid": "ba33c32b_c916b79e",
       "range": {
         "startLine": 3691,
         "startChar": 1,
@@ -258,6 +468,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31745e0e_a7261ddb",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3702,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Got it. Removed this check from the code.",
+      "parentUuid": "a1d1512c_bbfe7e6d",
+      "range": {
+        "startLine": 3700,
+        "startChar": 1,
+        "endLine": 3702,
+        "endChar": 2
+      },
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df02dcd5_5e4ab10b",
@@ -275,6 +509,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61393792_b1f57e46",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3704,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done. Reduced the usage of temp variables and extracted directly wherever applicable.",
+      "parentUuid": "df02dcd5_5e4ab10b",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c420e4e5_6c7fc7d7",
@@ -288,6 +540,30 @@
       "writtenOn": "2026-03-20T06:11:58Z",
       "side": 1,
       "message": "Extract directly to `iter-\u003ecurrent_states.ptr` ...",
+      "range": {
+        "startLine": 3706,
+        "startChar": 59,
+        "endLine": 3706,
+        "endChar": 70
+      },
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5973900e_b3dfe1fa",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3706,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "c420e4e5_6c7fc7d7",
       "range": {
         "startLine": 3706,
         "startChar": 59,
@@ -321,6 +597,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6534a2c4_a193bac8",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3709,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "61733b90_1cf71dd7",
+      "range": {
+        "startLine": 3707,
+        "startChar": 1,
+        "endLine": 3709,
+        "endChar": 2
+      },
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78870f67_6eddd55d",
@@ -334,6 +634,24 @@
       "writtenOn": "2026-03-20T06:11:58Z",
       "side": 1,
       "message": "Same suggestion as above.",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beb237cc_48e697c7",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3716,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "78870f67_6eddd55d",
       "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -355,6 +673,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f319add_b768aa35",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3717,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "5526d4d9_96288948",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "452b4dfb_71ed3fa3",
@@ -372,6 +708,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e2f79d1_c623bfc9",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3723,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done. Changed pldm_msgbuf_complete to pldm_msgbuf_complete_consumed",
+      "parentUuid": "452b4dfb_71ed3fa3",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d575d319_94eb2be0",
@@ -385,6 +739,30 @@
       "writtenOn": "2026-03-20T06:11:58Z",
       "side": 1,
       "message": "Remove this test as it is unnecessary.",
+      "range": {
+        "startLine": 3768,
+        "startChar": 1,
+        "endLine": 3770,
+        "endChar": 2
+      },
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6b5769f_ef963687",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3770,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "d575d319_94eb2be0",
       "range": {
         "startLine": 3768,
         "startChar": 1,
@@ -418,6 +796,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c8da09f_7e843036",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3779,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done. Cleaned up the code.",
+      "parentUuid": "f820d169_be4bd34c",
+      "range": {
+        "startLine": 3772,
+        "startChar": 1,
+        "endLine": 3779,
+        "endChar": 36
+      },
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e104d08_5e35bef8",
@@ -431,6 +833,24 @@
       "writtenOn": "2026-03-20T06:11:58Z",
       "side": 1,
       "message": "`pldm_msgbuf_complete_consumed(ctx)` here too.",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4207f47_c37abe12",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3781,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "1e104d08_5e35bef8",
       "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -452,6 +872,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3484e593_4725dc0d",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2649,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done. Moved all tests to tests/dsp/platform.cpp",
+      "parentUuid": "f2e1a78c_2590c72d",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6226dca1_1be5064a",
@@ -469,6 +907,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d94faa3a_81ec9338",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2725,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done. Guarded all test cases with #if HAVE_LIBPLDM_API_TESTING and #endif",
+      "parentUuid": "6226dca1_1be5064a",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12ffd518_66d66ca1",
@@ -482,6 +938,24 @@
       "writtenOn": "2026-03-20T06:11:58Z",
       "side": 1,
       "message": "```\n#if HAVE_LIBPLDM_API_TESTING\n```\n\non the line above (with a blank line in between the `#endif` and the `#if`).",
+      "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff02258c_fb44e605",
+        "filename": "tests/dsp/pdr.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2727,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-03-24T12:50:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "12ffd518_66d66ca1",
       "revId": "ca01356699b4acfa5cb4863140b1efcfddcbd968",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
