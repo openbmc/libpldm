@@ -103,7 +103,7 @@ static void getApplicableComponents(std::vector<size_t> &compList,
 
 pldm::fw_update::PackageParser::~PackageParser() = default;
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 std::expected<std::unique_ptr<pldm::fw_update::Package>,
 	      pldm::fw_update::PackageParserError>
 pldm::fw_update::PackageParser::parse(
