@@ -46,6 +46,8 @@
     - Changes to the public headers under `include/libpldm`
     - Bug-fixes whose impact is observable at runtime
 
+- [ ] New changelog entries are added at the top of their category's list
+
 - [ ] Work that has no user impact does not have a new changelog entry
   - For example, refactoring the implementation in a way that:
     - Doesn't change the public headers under `include/libpldm`
