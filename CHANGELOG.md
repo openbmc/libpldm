@@ -48,6 +48,9 @@ Change categories:
 
 ### Changed
 
+- libpldm++:
+  - pldm::fw_update::PackageParser::parse is stable
+  - pldm::fw_update::Package::~Package is stable
 - OWNERS: Tidy up throughout the tree
 - Rename `PLDM_HAS_POLL` test macro to `HAVE_POLL_H` and define it
   unconditionally
