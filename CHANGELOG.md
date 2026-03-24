@@ -60,6 +60,9 @@ Change categories:
 - transport: af-mctp: Stabilize FQE TID mapping APIs
   - `pldm_transport_af_mctp_map_tid_fqe()`
   - `pldm_transport_af_mctp_unmap_tid_fqe()`
+- libpldm++:
+  - pldm::fw_update::PackageParser::parse is stable
+  - pldm::fw_update::Package::~Package is stable
 
 ### Deprecated
 
