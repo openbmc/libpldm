@@ -2,6 +2,14 @@
 
 ## General practices
 
+### Organise your work
+
+- [ ] [Solve only one problem per
+      patch][linux-submitting-patches-separate-changes]
+
+[linux-submitting-patches-separate-changes]:
+  https://docs.kernel.org/process/submitting-patches.html#split-changes
+
 ### Commit messages
 
 - [ ] The commit message subject is prefixed with the name of the impacted
@@ -14,13 +22,13 @@
   - [ ] The section of the specification that defines the message type
 
 - [ ] The commit message is [written in imperative
-      mood][linux-submitting-patches]
+      mood][linux-submitting-patches-describe-changes]
 
   > Describe your changes in imperative mood, e.g. “make xyzzy do frotz” instead
   > of "[This patch] makes xyzzy do frotz" or "[I] changed xyzzy to do frotz",
   > as if you are giving orders to the codebase to change its behaviour.
 
-[linux-submitting-patches]:
+[linux-submitting-patches-describe-changes]:
   https://docs.kernel.org/process/submitting-patches.html#describe-your-changes
 
 - [ ] The commit message describes testing practices only if the discussion is
