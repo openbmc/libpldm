@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c99563a_1c063548",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002877
+      },
+      "writtenOn": "2026-03-24T23:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "503515ee_68dc5e1b",
+      "revId": "05a7d8f8a397e6a2255c39bc56c9e0830f9d298b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0c770c8_56292b91",
         "filename": "include/libpldm/byteorder.h",
         "patchSetId": 3
@@ -31,6 +49,30 @@
       "writtenOn": "2026-03-20T00:36:35Z",
       "side": 1,
       "message": "Can we please use `LIBPLDM_BYTEORDER_H`?\n\nI recognise there may be some inconsistency with older header guards there, however I\u0027d like future patches to adhere to the request. We can fix up the old ones.\n\nhttps://github.com/openbmc/libpldm/blob/969fe632d6a768f265957d8deb635ec434769af5/CONTRIBUTING.md#L94-L95",
+      "range": {
+        "startLine": 2,
+        "startChar": 8,
+        "endLine": 2,
+        "endChar": 19
+      },
+      "revId": "05a7d8f8a397e6a2255c39bc56c9e0830f9d298b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49ed1eb8_d8f6d560",
+        "filename": "include/libpldm/byteorder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1002877
+      },
+      "writtenOn": "2026-03-24T23:01:17Z",
+      "side": 1,
+      "message": "Done (not sure if I should also mark as \"Resolved\" or let the reviewer do so)",
+      "parentUuid": "b0c770c8_56292b91",
       "range": {
         "startLine": 2,
         "startChar": 8,
