@@ -33,37 +33,6 @@
 
 ### Changelog
 
-The purpose of the changelog is to highlight changes that might interest _users_
-of the library who are not also developers of the library. As such,
-reorganisation or refactoring of implementation should not feature there. That
-type of work is captured in the commit history, which is readily available to
-libpldm developers.
-
-Changelog entries broadly fall into one of two cases
-
-- Simple: Listing the commit title is enough
-
-  For example:
-
-  > - fru: Add enum values for all possible commands
-
-- Complex: Users need to pay attention to specific details
-
-  For example:
-
-  > - Returned error values for the following stable APIs have changed their
-  >   semantics:
-  >   - `decode_descriptor_type_length_value()`
-  >   - `decode_event_message_buffer_size_resp()`
-  >   - `decode_get_numeric_effecter_value_resp()`
-  >   - `decode_get_sensor_reading_resp()`
-  >   - `decode_get_state_sensor_readings_resp()`
-  >   - `decode_numeric_sensor_data()`
-  >   - `decode_sensor_op_data()`
-  >
-  >   No new error values will be returned, but existing error values may be
-  >   returned under new conditions.
-
 - [ ] New changelog entries document work impacting the users of the library
   - For example:
     - Changes to the public headers under `include/libpldm`
@@ -486,6 +455,39 @@ subproject configuration syntax:
 ```shell
 meson setup ... -Dlibpldm:abi=deprecated,stable,testing ...
 ```
+
+### Changelog
+
+The purpose of the changelog is to highlight changes that might interest _users_
+of the library who are not also developers of the library. As such,
+reorganisation or refactoring of implementation should not feature there. That
+type of work is captured in the commit history, which is readily available to
+libpldm developers.
+
+Changelog entries broadly fall into one of two cases
+
+- Simple: Listing the commit title is enough
+
+  For example:
+
+  > - fru: Add enum values for all possible commands
+
+- Complex: Users need to pay attention to specific details
+
+  For example:
+
+  > - Returned error values for the following stable APIs have changed their
+  >   semantics:
+  >   - `decode_descriptor_type_length_value()`
+  >   - `decode_event_message_buffer_size_resp()`
+  >   - `decode_get_numeric_effecter_value_resp()`
+  >   - `decode_get_sensor_reading_resp()`
+  >   - `decode_get_state_sensor_readings_resp()`
+  >   - `decode_numeric_sensor_data()`
+  >   - `decode_sensor_op_data()`
+  >
+  >   No new error values will be returned, but existing error values may be
+  >   returned under new conditions.
 
 ## References
 
