@@ -252,7 +252,7 @@ pldm::fw_update::Package::Package(const Package &ref)
 {
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 pldm::fw_update::Package::~Package()
 {
 }
