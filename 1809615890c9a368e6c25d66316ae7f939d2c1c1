@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f33beb2c_5da2b706",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-03-25T00:00:46Z",
+      "side": 1,
+      "message": "Thanks Gary. On reflection this is effectively three separate problems fixed in the one commit. There wasn\u0027t anything in the contributing guide asking people to divide their work into separate changes, so I\u0027ve pushed some patches to address it. Given that I didn\u0027t ask you to split it last time, I went ahead and grabbed your change here and did the split myself. Your Signed-off-by and authorship is preserved across the three (though I\u0027ve added my own Signed-off-by as well):\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/88629\n\nLet me know if you have any concerns with what I\u0027ve done there.",
+      "revId": "1809615890c9a368e6c25d66316ae7f939d2c1c1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
