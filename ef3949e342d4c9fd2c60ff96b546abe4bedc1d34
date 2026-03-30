@@ -16,6 +16,23 @@
       "message": "Changes done in this patchset:\n1. Cleaned up the code by removing temp variables\n2. Removed unnecessary checks\n3. Improved commit message\n4. Moved tests to tests/dsp/platform.cpp\n5. Renamed structs/methods/comments to align with platform",
       "revId": "ef3949e342d4c9fd2c60ff96b546abe4bedc1d34",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8627d8f8_43611cb1",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3755,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-30T05:44:29Z",
+      "side": 1,
+      "message": "Can we do a return check here? \n\nCurrently the function still returns pldm_msgbuf_complete_consumed even if pldm_msgbuf_span_remaining failed - potentially masking the error.",
+      "revId": "ef3949e342d4c9fd2c60ff96b546abe4bedc1d34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
