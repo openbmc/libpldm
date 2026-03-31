@@ -33,6 +33,57 @@
       "message": "This assert would always be true\n\n```\nstruct pldm_msgbuf_ro {\n\tconst uint8_t *cursor;\n\tintmax_t remaining;\n};\n```\n\nctx-\u003eremaining is a intmax_t\n\nintmax_t has a range [INTMAX_MIN, INTMAX_MAX]\n\nhttps://man7.org/linux/man-pages/man3/intmax_t.3type.html\n\nso I think the assert is redundant.",
       "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d9b1e98_7d521d73",
+        "filename": "src/msgbuf/core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1650,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-31T05:39:22Z",
+      "side": 1,
+      "message": "Same comment as line 1710",
+      "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd09930c_a5e268b8",
+        "filename": "src/msgbuf/core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1680,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-31T05:39:22Z",
+      "side": 1,
+      "message": "Commented above on line 1620",
+      "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "480c3537_73c00b55",
+        "filename": "src/msgbuf/core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1710,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-31T05:39:22Z",
+      "side": 1,
+      "message": "I think length should overflow only when its length \u003e INTMAX_MAX unless you need one empty space available at the end. Can you pls recheck this?\n\nSimilar implementation\n\nhttps://github.com/openbmc/libpldm/blob/494f34fae1a2eb7c9b86d431e75e55160c74d83b/src/msgbuf/core.h#L143",
+      "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
