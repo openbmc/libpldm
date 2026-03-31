@@ -35,10 +35,10 @@ owners:
 - andrew@codeconstruct.com.au
 
 reviewers:
-- manojkiran.eda@gmail.com
-- rushtotom@gmail.com
-- pavithrabarithaya07@gmail.com
 - chaul@amperecomputing.com
+- manojkiran.eda@gmail.com
+- pavithrabarithaya07@gmail.com
+- rushtotom@gmail.com
 
 matchers:
 - partial_regex: /dsp/(file|base)\.
