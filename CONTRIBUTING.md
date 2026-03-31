@@ -55,6 +55,24 @@
 
 ## Adding a new API
 
+### Organising declarations and definitions
+
+- [ ] Related macros, structs and functions are declared or defined together
+  - Avoid inserting them each at significantly different line locations
+
+- [ ] Message-length macros should immediately follow the definition of the
+      related struct.
+
+- [ ] Message-related API elements are defined in PLDM command-code order
+  - Refer to the command code tables in each specification
+
+  - This order is prefered because the PLDM command-codes must be stable, unlike
+    the organisation of sections in the specification texts.
+
+- [ ] Avoid unnecessary forward-declarations
+  - Macros using structs or functions should be declared following those structs
+    or functions, so the context is clear
+
 ### Naming macros, functions and types
 
 - [ ] All publicly exposed macros, types and functions relating to the PLDM
