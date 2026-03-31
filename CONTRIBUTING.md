@@ -152,6 +152,28 @@
 [c17-draft-standard]:
   https://web.archive.org/web/20181230041359/http://www.open-std.org/jtc1/sc22/wg14/www/abq/c17_updated_proposed_fdis.pdf
 
+#### Strings
+
+- [ ] PLDM strings are not assumed to be `NUL`-terminated
+
+- [ ] Strings are passed-to and received-from libpldm APIs in the appropriately
+      encoded form
+  - [ ] Strings are not encoded or decoded in the libpldm implementation
+
+  - The PLDM specifications utilise multiple string encodings. We avoid
+    prescribing a string handling implementation by deferring that
+    responsibility to the caller.
+
+- [ ] Strings communicated via PLDM messages are referred to using a message
+      struct member of type `struct variable_field`.
+  - In both the message encode and decode cases `struct variable_field` points
+    to a data source: For decode operations the points to the relevant span in
+    the encoded message body.
+
+  - If the string is terminated with a `NUL` value then the span represented by
+    the `struct variable_field` shall include the `NUL` terminator appropriate
+    for the encoding.
+
 ### ABI control
 
 - [ ] New function symbols are marked with `LIBPLDM_ABI_TESTING` in the
