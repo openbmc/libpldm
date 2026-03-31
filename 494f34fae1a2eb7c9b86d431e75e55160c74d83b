@@ -16,6 +16,23 @@
       "message": "Can you please add some tests for this one too.",
       "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8afa5ed2_f2d02d9c",
+        "filename": "src/msgbuf/core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-03-31T05:27:10Z",
+      "side": 1,
+      "message": "This assert would always be true\n\n```\nstruct pldm_msgbuf_ro {\n\tconst uint8_t *cursor;\n\tintmax_t remaining;\n};\n```\n\nctx-\u003eremaining is a intmax_t\n\nintmax_t has a range [INTMAX_MIN, INTMAX_MAX]\n\nhttps://man7.org/linux/man-pages/man3/intmax_t.3type.html\n\nso I think the assert is redundant.",
+      "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
