@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb73c5b6_7d9799ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-04-01T16:05:05Z",
+      "side": 1,
+      "message": "I\u0027ve added a test in the Redfish Resource PDR patch. Please check out if it is any good.\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/87283/26/tests/dsp/platform.cpp",
+      "parentUuid": "74c79aec_a017bc19",
+      "revId": "134b39186a8bba96492b6cbd4880d8ef95a99da1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e804a41_d32f3049",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 14
@@ -31,6 +49,30 @@
       "writtenOn": "2026-03-31T01:12:49Z",
       "side": 1,
       "message": "We take the address in the macro implementation below; I don\u0027t think this should suggest a pointer?",
+      "range": {
+        "startLine": 3081,
+        "startChar": 19,
+        "endLine": 3081,
+        "endChar": 32
+      },
+      "revId": "134b39186a8bba96492b6cbd4880d8ef95a99da1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e352375_c0432886",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 3081,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-04-01T16:05:05Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "2e804a41_d32f3049",
       "range": {
         "startLine": 3081,
         "startChar": 19,
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "360de4c1_419499f5",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 3263,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-04-01T16:05:05Z",
+      "side": 1,
+      "message": "Fixed here and in Redfish Resource commit",
+      "parentUuid": "d5b22d0d_b5dff114",
+      "range": {
+        "startLine": 3259,
+        "startChar": 0,
+        "endLine": 3263,
+        "endChar": 49
+      },
+      "revId": "134b39186a8bba96492b6cbd4880d8ef95a99da1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "332c24fd_8ccc8685",
@@ -77,6 +143,24 @@
       "writtenOn": "2026-03-31T01:12:49Z",
       "side": 1,
       "message": "This all looks pretty good. The only remaining request I have is just the ordering of the declarations. I prefer that we follow the usual declare-before-use order, so:\n\n- `struct pldm_platform_redfish_action_pdr`\n- `decode_pldm_platform_redfish_action_pdr()`\n- `struct pldm_platform_redfish_action_pdr_related_resource_id_iter`\n- resource id iter helper inline functions\n- `foreach_pldm_platform_redfish_action_pdr_related_resource_id()` macro\n- `struct pldm_platform_redfish_action_pdr_action`\n- `struct pldm_platform_redfish_action_pdr_action_iter`\n- action iter helper inline functions\n- `foreach_pldm_platform_redfish_action_pdr_action()` macro\n\nI think it\u0027s okay to forward-reference the types and foreach macros in the documentation for `decode_pldm_platform_redfish_action_pdr()`.",
+      "revId": "134b39186a8bba96492b6cbd4880d8ef95a99da1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9558d166_bdc6a48d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 3309,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-04-01T16:05:05Z",
+      "side": 1,
+      "message": "Fixed here and in Redfish Resource commit",
+      "parentUuid": "332c24fd_8ccc8685",
       "revId": "134b39186a8bba96492b6cbd4880d8ef95a99da1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
