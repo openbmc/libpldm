@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4aebb20_1db1c0ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-04-01T08:43:45Z",
+      "side": 1,
+      "message": "Added a test to check general API correctness",
+      "parentUuid": "f8f1d6de_0f8bd846",
+      "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8afa5ed2_f2d02d9c",
@@ -53,6 +71,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5749acdf_396b0520",
+        "filename": "src/msgbuf/core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-04-01T08:43:45Z",
+      "side": 1,
+      "message": "Using SIZE_MAX gives:\n```\nerror: comparison of integer expressions of different signedness: \u0027intmax_t\u0027 {aka \u0027long int\u0027} and \u0027long unsigned int\u0027 [-Werror\u003dsign-compare]\n```\nFor now I\u0027ve removed this check",
+      "parentUuid": "25dc346a_ad28c58b",
+      "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d9b1e98_7d521d73",
@@ -66,6 +102,24 @@
       "writtenOn": "2026-03-31T05:39:22Z",
       "side": 1,
       "message": "Same comment as line 1710",
+      "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aeb09b4_da28c0f8",
+        "filename": "src/msgbuf/core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1650,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-04-01T08:43:45Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "6d9b1e98_7d521d73",
       "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -87,6 +141,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e6dc5b6_eafc0cf9",
+        "filename": "src/msgbuf/core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1680,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-04-01T08:43:45Z",
+      "side": 1,
+      "message": "This line was removed",
+      "parentUuid": "bd09930c_a5e268b8",
+      "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "480c3537_73c00b55",
@@ -100,6 +172,24 @@
       "writtenOn": "2026-03-31T05:39:22Z",
       "side": 1,
       "message": "I think length should overflow only when its length \u003e INTMAX_MAX unless you need one empty space available at the end. Can you pls recheck this?\n\nSimilar implementation\n\nhttps://github.com/openbmc/libpldm/blob/494f34fae1a2eb7c9b86d431e75e55160c74d83b/src/msgbuf/core.h#L143",
+      "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca674c48_b5824228",
+        "filename": "src/msgbuf/core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1710,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-04-01T08:43:45Z",
+      "side": 1,
+      "message": "I think you are right, fixed",
+      "parentUuid": "480c3537_73c00b55",
       "revId": "494f34fae1a2eb7c9b86d431e75e55160c74d83b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

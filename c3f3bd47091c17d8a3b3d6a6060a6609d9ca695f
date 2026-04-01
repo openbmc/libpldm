@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be8ea857_569691e1",
+        "filename": "tests/msgbuf.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1691,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-04-01T08:43:45Z",
+      "side": 1,
+      "message": "I think ideally here should be `pldm_msgbuf_field_begin`, but I don\u0027t know how to achieve this.\n\nThe file `tests\\msgbuf.hpp` includes only `msgbuf\\core.h`, but not the `msgbuf\\msgbuf.h`. Instead `msgbuf.hpp` has some other wrappers that replace code from the `msgbuf\\msgbuf.h`. And I don\u0027t understand how to add wrappers for the new `pldm_msgbuf_field_begin`, `pldm_msgbuf_field_end` functions. Since they transform \"field\" to \"\u0026(field) \" they should be probably written as defines, but apparently I can\u0027t copy the code with Generic as-is.\n\nFor now I\u0027ve used `pldm__msgbuf_ro_field_begin` from the `msgbuf\\core.h`",
+      "revId": "c3f3bd47091c17d8a3b3d6a6060a6609d9ca695f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
