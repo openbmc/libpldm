@@ -1688,9 +1688,9 @@ TEST(msgbuf, pldm_msgbuf_field_begin_end)
     ASSERT_EQ(pldm_msgbuf_init_errno(ctxExtract, 0, buf, sizeof(buf)), 0);
     EXPECT_EQ(pldm_msgbuf_span_required(ctxExtract, offset, NULL), 0);
 
-    pldm__msgbuf_ro_field_begin(ctxExtract, &data);
+    EXPECT_EQ(pldm_msgbuf_field_begin(ctxExtract, data), 0);
     EXPECT_EQ(pldm_msgbuf_span_required(ctxExtract, required, NULL), 0);
-    EXPECT_EQ(pldm__msgbuf_ro_field_end(ctxExtract, &data), 0);
+    EXPECT_EQ(pldm_msgbuf_field_end(ctxExtract, data), 0);
 
     EXPECT_EQ(data.length, required);
     EXPECT_EQ(0, memcmp(data.ptr, &src[offset], required));

@@ -187,6 +187,39 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_span_until(struct pldm_msgbuf_rw* ctx,
     return pldm_msgbuf_rw_span_until(ctx, trailer, cursor, length);
 }
 
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+LIBPLDM_CC_ALWAYS_INLINE int pldm__msgbuf_field_begin(struct pldm_msgbuf_ro* ctx,
+                                                      struct variable_field* field)
+{
+    return pldm__msgbuf_ro_field_begin(ctx, field);
+}
+
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+LIBPLDM_CC_ALWAYS_INLINE int pldm__msgbuf_field_begin(struct pldm_msgbuf_rw* ctx,
+                                                      struct variable_field* field)
+{
+    return pldm__msgbuf_rw_field_begin(ctx, field);
+}
+
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+LIBPLDM_CC_ALWAYS_INLINE int pldm__msgbuf_field_end(struct pldm_msgbuf_ro* ctx,
+                                                    struct variable_field* field)
+{
+    return pldm__msgbuf_ro_field_end(ctx, field);
+}
+
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+LIBPLDM_CC_ALWAYS_INLINE int pldm__msgbuf_field_end(struct pldm_msgbuf_rw* ctx,
+                                                    struct variable_field* field)
+{
+    return pldm__msgbuf_rw_field_end(ctx, field);
+}
+
+// NOLINTBEGIN(bugprone-macro-parentheses)
+#define pldm_msgbuf_field_begin(ctx, field) pldm__msgbuf_field_begin(ctx, &(field))
+#define pldm_msgbuf_field_end(ctx, field) pldm__msgbuf_field_end(ctx, &(field))
+// NOLINTEND(bugprone-macro-parentheses)
+
 #define pldm_msgbuf_extract_typecheck(ty, fn, dst, ...)                        \
     pldm_msgbuf_typecheck_##ty<decltype(dst)>(__VA_ARGS__)
 
