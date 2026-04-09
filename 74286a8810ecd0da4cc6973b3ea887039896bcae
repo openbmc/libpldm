@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e931546_fd325da2",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 3649,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-09T08:27:24Z",
+      "side": 1,
+      "message": "can u restrict this to 80 chars?",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d11e575_2499dcbd",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 3707,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-09T08:27:24Z",
+      "side": 1,
+      "message": "I think a check like this would be good here.\n\nhttps://github.com/openbmc/libpldm/blob/4509e841f6a4cad2411aa00db7cefac52330f9d2/src/dsp/platform.c#L2538",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
