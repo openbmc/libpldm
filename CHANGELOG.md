@@ -45,6 +45,10 @@ Change categories:
 - bindings:
   - Add libpldm++ library for the C++ binding
 - dsp: platform: Add pldm_platform_file_class enum
+- base: Added `decode_pldm_base_multipart_send_resp()`
+- base: Added `encode_pldm_base_multipart_send_resp()`
+- base: Added `decode_pldm_base_multipart_send_req()`
+- base: Added `encode_pldm_base_multipart_send_req()`
 
 ### Changed
 
