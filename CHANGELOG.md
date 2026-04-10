@@ -47,6 +47,10 @@ Change categories:
 - dsp: platform: Add pldm_platform_file_class enum
 - platform: Add functions to decode Redfish Resource PDR (DSP0248 v1.3.0)
 - platform: Add functions to decode Redfish Action PDR (DSP0248 v1.3.0)
+- base: Added `decode_pldm_base_multipart_send_resp()`
+- base: Added `encode_pldm_base_multipart_send_resp()`
+- base: Added `decode_pldm_base_multipart_send_req()`
+- base: Added `encode_pldm_base_multipart_send_req()`
 
 ### Changed
 
