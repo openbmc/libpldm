@@ -95,6 +95,13 @@ enum transfer_multipart_op_flag {
 	PLDM_XFER_CURRENT_PART = 4,
 };
 
+enum pldm_base_multipart_send_transfer_flag {
+	PLDM_BASE_MULTIPART_SEND_TRANSFER_FLAG_START = 0x01,
+	PLDM_BASE_MULTIPART_SEND_TRANSFER_FLAG_MIDDLE = 0x02,
+	PLDM_BASE_MULTIPART_SEND_TRANSFER_FLAG_END = 0x04,
+	PLDM_BASE_MULTIPART_SEND_TRANSFER_FLAG_START_AND_END = 0x05,
+};
+
 enum pldm_base_multipart_receive_transfer_flag {
 	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_START = 0x01,
 	PLDM_BASE_MULTIPART_RECEIVE_TRANSFER_FLAG_MIDDLE = 0x02,
@@ -366,6 +373,40 @@ struct pldm_get_tid_resp {
 	uint8_t completion_code; //!< completion code
 	uint8_t tid;		 //!< PLDM GetTID TID field
 } __attribute__((packed));
+
+#define PLDM_BASE_MULTIPART_SEND_REQ_MIN_BYTES 26
+
+/** @struct pldm_base_multipart_send_req
+ *
+ * Structure representing PLDM multipart send request.
+ */
+struct pldm_base_multipart_send_req {
+	uint8_t pldm_type;	  //!< PLDM Type for the MultipartSend
+				  //!< command.
+	uint8_t transfer_flag;	  //!< PLDM MultipartSend flag.
+	uint32_t transfer_ctx;	  //!< Protocol-specifc context for this
+				  //!< transfer.
+	uint32_t transfer_handle; //!< handle to identify the part of data to be
+				  //!< sent.
+	uint32_t next_transfer_handle; //!< handle to identify the next part of data to be
+				       //!< sent.
+	uint32_t section_offset; //!< The start offset for the transferred
+				 //!< section.
+	uint32_t section_length; //!< The length (in bytes) of the section
+				 //!< transfer.
+	struct variable_field data;
+};
+
+#define PLDM_BASE_MULTIPART_SEND_RESP_BYTES 2
+
+/** @struct pldm_base_multipart_send_resp
+ *
+ * Structure representing PLDM multipart send response.
+ */
+struct pldm_base_multipart_send_resp {
+	uint8_t completion_code; //!< Completion code of the command.
+	uint8_t next_transfer_operation; //!< PLDM MultipartSend next transfer operation.
+};
 
 /** @struct pldm_base_multipart_receive_req
  *
@@ -778,6 +819,85 @@ int encode_base_multipart_receive_resp(
 	uint8_t instance_id,
 	const struct pldm_base_multipart_receive_resp *resp, uint32_t checksum,
 	struct pldm_msg *msg, size_t *payload_length);
+
+/* MultipartSend */
+
+/** @brief Decode a PLDM MultipartSend response message
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - length of request message payload
+ *  @param[out] resp - Pointer to the decoded response message
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated
+ *          -EOVERFLOW if the input message buffer is too short for the output
+ *          request struct
+ *          -EBADMSG if the input message buffer is too large for the output
+ *          response struct
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int decode_pldm_base_multipart_send_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_multipart_send_resp *resp);
+
+/** @brief Encode a PLDM MultipartSend response message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp - The pointer to the response message to be encoded
+ *  @param[out] msg - Message will be written to this
+ *  @param[in,out] payload_length - length of response message payload
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated,
+ *          or message type or instance in request header is invalid
+ *          -ENOMSG if the PLDM type in the request header is invalid
+ *          -EOVERFLOW if the input message length is invalid
+ */
+int encode_pldm_base_multipart_send_resp(
+	uint8_t instance_id, const struct pldm_base_multipart_send_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode a PLDM MultipartSend request message
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - length of request message payload
+ *  @param[out] req - pointer to the decoded request message,
+ *         excluding the data integrity checksum
+ *  @param[out] data_integrity_checksum - The checksum of data field
+ *         of the decoded request message
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated
+ *          -EOVERFLOW if the input message buffer is too short for the output
+ *          response struct
+ *          -EBADMSG if the input message buffer is too large for the output
+ *          response struct
+ *          -ENOTSUP if the PLDM type is not supported
+ *          -EPROTO if parsed values violate the package format specification
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int decode_pldm_base_multipart_send_req(const struct pldm_msg *msg,
+					size_t payload_length,
+					struct pldm_base_multipart_send_req *req,
+					uint32_t *data_integrity_checksum);
+
+/** @brief Encode a PLDM MultipartSend request message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - The pointer to the request message to be encoded
+ *  @param[in] checksum - Checksum of the entire received data
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in,out] payload_length - length of request message payload
+ *  @return 0 on success
+ *          -EINVAL if argument values are invalid for the invocation
+ *          -ENOMSG if the PLDM type in the request header is invalid
+ *          -EOVERFLOW if the input message length is invalid
+ *          -EPROTO if request values violate the package format specification
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_pldm_base_multipart_send_req(
+	uint8_t instance_id, const struct pldm_base_multipart_send_req *req,
+	uint32_t checksum, struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Create a PLDM response message containing only cc
  *

@@ -48,6 +48,7 @@ Change categories:
 - platform: Add functions to decode Redfish Resource PDR (DSP0248 v1.3.0)
 - platform: Add functions to decode Redfish Action PDR (DSP0248 v1.3.0)
 - dsp: platform: Iterator macros for State Effecter PDR
+- base: Added PLDM Base MultipartSend support
 
 ### Changed
 
