@@ -217,6 +217,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8746840e_1327294b",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-14T06:12:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "487f13f3_29b604d0",
+      "range": {
+        "startLine": 82,
+        "startChar": 1,
+        "endLine": 84,
+        "endChar": 69
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38e64d32_2c8e07fd",
@@ -500,6 +524,30 @@
       "writtenOn": "2026-02-17T05:46:27Z",
       "side": 1,
       "message": "This should instead use `PLDM_MSG_DEFINE_P()` from `include/libpldm/base.h`.\n\nPlease fix throughout.",
+      "range": {
+        "startLine": 3891,
+        "startChar": 4,
+        "endLine": 3893,
+        "endChar": 64
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "162883ec_871abc3e",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 3893,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-14T06:12:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b6af90f_9a84075f",
       "range": {
         "startLine": 3891,
         "startChar": 4,
