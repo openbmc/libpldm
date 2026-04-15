@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f4d6f2c_1a6c2c29",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-15T23:48:52Z",
+      "side": 1,
+      "message": "It had already define `PLDM_PLATFORM_INVALID_SENSOR_ID`, `PLDM_PLATFORM_INVALID_SENSOR_OPERATIONAL_STATE` and `PLDM_PLATFORM_INVALID_SENSOR_OPERATIONAL_STATE`. No need to re-define the complete code.",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 69
+      },
+      "revId": "78a3e6c7d353ac4eb0196e4149187fdf43078c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7617540c_336823f2",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2539,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-15T23:48:52Z",
+      "side": 1,
+      "message": "The payload length needs to be passed, not the MACRO.",
+      "revId": "78a3e6c7d353ac4eb0196e4149187fdf43078c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e610529_7da57bbf",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2545,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-15T23:48:52Z",
+      "side": 1,
+      "message": "Suggest to define `event_enable` as a uint8_t so that no type casting is required.",
+      "revId": "78a3e6c7d353ac4eb0196e4149187fdf43078c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
