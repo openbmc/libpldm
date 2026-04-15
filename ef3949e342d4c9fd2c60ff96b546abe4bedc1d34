@@ -33,6 +33,24 @@
       "message": "Can we do a return check here? \n\nCurrently the function still returns pldm_msgbuf_complete_consumed even if pldm_msgbuf_span_remaining failed - potentially masking the error.",
       "revId": "ef3949e342d4c9fd2c60ff96b546abe4bedc1d34",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ba2de14_46177f7c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3755,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-04-15T06:05:00Z",
+      "side": 1,
+      "message": "The return check isn\u0027t required here as pldm_msgbuf accumulates errors on ctx and a failure in any operation (e.g. pldm_msgbuf_extract) poisons ctx-\u003eremaining to a negative sentinel, and then every subsequent operation returns early without touching its outputs. The final error is returned by pldm_msgbuf_complete_consumed(ctx), so no error is masked.",
+      "parentUuid": "8627d8f8_43611cb1",
+      "revId": "ef3949e342d4c9fd2c60ff96b546abe4bedc1d34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
