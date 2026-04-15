@@ -87,6 +87,24 @@
       "parentUuid": "89ef8de3_b5ae255a",
       "revId": "6316c7a3287ac3ca327cf12e24a52933349cef56",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81c99447_e5c59ba8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-04-15T15:32:02Z",
+      "side": 1,
+      "message": "hah, fair enough. Filtering out internal C++ headers seems like the way to go in my mind, but andrew is probably the right person to chime in on this.",
+      "parentUuid": "0ea4c4f9_7905553e",
+      "revId": "6316c7a3287ac3ca327cf12e24a52933349cef56",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
