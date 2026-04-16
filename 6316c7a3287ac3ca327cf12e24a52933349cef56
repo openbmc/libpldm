@@ -105,6 +105,24 @@
       "parentUuid": "0ea4c4f9_7905553e",
       "revId": "6316c7a3287ac3ca327cf12e24a52933349cef56",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "032864d6_b4c7961b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-16T06:10:59Z",
+      "side": 1,
+      "message": "\u003e A lot of my complaint here is the cruft that comes in that isn\u0027t really directly part of the interface proper...type traits, allocator traits, internal redblack trees.\n\nThe problem is, at the ABI level, their structure matters, and so the details must be included in the dump to evaluate for problems.\n\n\u003e It isn\u0027t terribly pressing, but the amount of stuff coming into gcc dump\u0027s on the two major commits so far make it more of a maintenance burden than it is a tool to spot breakages.\n\nIt\u0027s not my intent that the dump be visually inspected in Gerrit reviews to identify defects. For the most part I recommend skipping it. Historically, I\u0027ve just wanted it recorded. `abi-compliance-checker` is the tool to use to understand problems, and this is run as part of CI. Though in CI it will just fail and give binary feedback, running it locally gives a HTML report of what\u0027s changed, the severity of the problem, and explanations for why the change is problematic.\n\nGiven that, I don\u0027t see it either as either possible or necessary to filter the dump, its integrity is important to the function of `abi-compliance-checker`.\n\nThat said, with some work to the CI scripts in the repo it might be possible to avoid recording the dump files to start with.",
+      "parentUuid": "81c99447_e5c59ba8",
+      "revId": "6316c7a3287ac3ca327cf12e24a52933349cef56",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
