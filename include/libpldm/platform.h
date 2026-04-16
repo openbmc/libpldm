@@ -1060,6 +1060,8 @@ struct pldm_set_state_effecter_states_req {
 	set_effecter_state_field field[8];
 } __attribute__((packed));
 
+#define PLDM_SET_STATE_EFFECTER_STATES_MIN_REQ_BYTES 5
+
 /** @struct pldm_get_pdr_repository_info_resp
  *
  *  Structure representing GetPDRRepositoryInfo response packet
