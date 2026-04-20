@@ -71,6 +71,42 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a59f5108_ddd94aae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-20T09:56:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7af9fca4_3cb20822",
+      "revId": "6f31470caa9e31317f8d5c450a839fcc1a37c255",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88a38d17_2a078912",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-20T09:56:59Z",
+      "side": 1,
+      "message": "I don\u0027t yet have any that I\u0027d be happy to run with in CI.\n\nI think for now I\u0027ll consider this for merging, with the expectation that you\u0027ll eventually find things that break your use-case with zephyr and we can then decide how to address them.",
+      "parentUuid": "b53a33fd_083551f1",
+      "revId": "6f31470caa9e31317f8d5c450a839fcc1a37c255",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86173328_98863944",
@@ -102,6 +138,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "86173328_98863944",
+      "revId": "6f31470caa9e31317f8d5c450a839fcc1a37c255",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "222ee517_e8162313",
+        "filename": "include/libpldm/compiler.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-20T09:56:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90f08fcf_7fc7ccd2",
       "revId": "6f31470caa9e31317f8d5c450a839fcc1a37c255",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
