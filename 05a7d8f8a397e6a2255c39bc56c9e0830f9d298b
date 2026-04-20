@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd908f89_d10dd403",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-20T11:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c99563a_1c063548",
+      "revId": "05a7d8f8a397e6a2255c39bc56c9e0830f9d298b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0c770c8_56292b91",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "Done (not sure if I should also mark as \"Resolved\" or let the reviewer do so)",
       "parentUuid": "b0c770c8_56292b91",
+      "range": {
+        "startLine": 2,
+        "startChar": 8,
+        "endLine": 2,
+        "endChar": 19
+      },
+      "revId": "05a7d8f8a397e6a2255c39bc56c9e0830f9d298b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfbecf9a_8fc23572",
+        "filename": "include/libpldm/byteorder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-20T11:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49ed1eb8_d8f6d560",
       "range": {
         "startLine": 2,
         "startChar": 8,
