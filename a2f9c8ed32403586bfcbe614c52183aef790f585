@@ -795,6 +795,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a4e21f7_335f7ccd",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3917,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-20T08:29:57Z",
+      "side": 1,
+      "message": "Parking this for now.",
+      "parentUuid": "ffa97ce0_72d512e1",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f540dd30_7a156aac",
@@ -808,6 +826,24 @@
       "writtenOn": "2026-03-12T07:12:29Z",
       "side": 1,
       "message": "Can we order the function definitions in \"call\" order? That is, the sequence in which they would be invoked by the library consumer.",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e82639c_6345207b",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3954,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-20T08:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f540dd30_7a156aac",
       "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -878,6 +914,24 @@
       "side": 1,
       "message": "I thought `pldm_msgbuf_skip(buf, len)` can help to get rid of `pldm_msgbuf_span_required(buf, length, NULL);`\n\nHow can it help with `pldm_msgbuf_span_remaining` that is used to update `iter-\u003efield.ptr`/`iter-\u003efield.length`",
       "parentUuid": "71e0b487_32de6144",
+      "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7398ef42_bdb19847",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3981,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-20T08:29:57Z",
+      "side": 1,
+      "message": "Parking this for now.",
+      "parentUuid": "e4fc89d3_33deec90",
       "revId": "a2f9c8ed32403586bfcbe614c52183aef790f585",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
