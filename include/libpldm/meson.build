@@ -3,6 +3,7 @@ libpldm_headers = files(
     'bcd.h',
     'bios.h',
     'bios_table.h',
+    'byteorder.h',
     'compiler.h',
     'control.h',
     'edac.h',
