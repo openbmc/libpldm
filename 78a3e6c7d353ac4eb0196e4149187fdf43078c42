@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d73d74f2_6d2b2a8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T07:53:48Z",
+      "side": 1,
+      "message": "Can you please review @adityakurdunkar2@gmail.com\u0027s change [platform: Add SetNumericEffecterEnable related APIs](https://gerrit.openbmc.org/c/openbmc/libpldm/+/85425) and collaborate with them so we avoid conflicts and duplicate functionality?",
+      "revId": "78a3e6c7d353ac4eb0196e4149187fdf43078c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f4d6f2c_1a6c2c29",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 16
