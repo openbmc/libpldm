@@ -12,6 +12,12 @@ option(
     value: false,
 )
 option(
+    'api',
+    type: 'string',
+    description: 'The path to the public headers for libpldm',
+    value: 'include',
+)
+option(
     'bindings',
     type: 'array',
     description: 'Language bindings for libpldm',

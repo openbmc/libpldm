@@ -71,7 +71,7 @@ add_project_arguments('-include', config.full_path(), language: ['c', 'cpp'])
 
 libpldm_deprecated_aliases = []
 
-include_root = include_directories('include', is_system: true)
+include_root = include_directories(get_option('api'), is_system: true)
 
 subdir('include')
 subdir('src')
