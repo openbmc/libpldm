@@ -55,6 +55,22 @@ meson configure -Dabi-compliance-check=false "$BUILD"
 meson configure -Dtests=false "$BUILD"
 meson compile -C "$BUILD"
 
+# Ensure the set of installed headers are relatively complete by installing the
+# headers then building the library against the installed headers
+(
+  # Use a subshell as a stack for the purpose of trap handling. This way we
+  # don't have to augment the trap configuration for the additional cleanup, we
+  # just override it directly with no effect on the parent.
+  PREFIX="$(mktemp --directory --tmpdir=.)"
+  trap 'rm -rf "$PREFIX"' EXIT
+
+  rm -rf "$BUILD"
+  meson setup -Dprefix="$(realpath "$PREFIX")" "$BUILD"
+  meson install -C "$BUILD"
+  meson configure -Dapi="$PREFIX"/include "$BUILD"
+  meson compile -C "$BUILD"
+)
+
 # Ensure that the stable ABI matches what's recorded
 rm -rf "$BUILD"
 meson setup --cross-file meson/x86_64-linux-gnu.ini "$BUILD"
