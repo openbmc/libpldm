@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e79906d7_8c6d410c",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T03:03:37Z",
+      "side": 1,
+      "message": "My remaining concern here is that the instances of `struct pldm_package_format_pin` represent the extensible _C_ structs, which are distinct from the extensible C++ structs. The value is related to but also separate from the spec\u0027ed package format revisions, so I don\u0027t think it\u0027s appropriate to mix them in this way. I\u0027d rather develop equivalent pins for the C++ API so it can evolve independently of the C API (even if it\u0027s implemented in terms of the C API).",
+      "range": {
+        "startLine": 111,
+        "startChar": 1,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "fa8e42c265889c8a4049480f23c7da5407b552d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
