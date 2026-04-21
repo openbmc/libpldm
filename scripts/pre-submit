@@ -1,5 +1,5 @@
 #!/usr/bin/sh
-set -eu
+set -eux
 
 # For valgrind, value is arbitrarily low-ish
 ulimit -n 2048
