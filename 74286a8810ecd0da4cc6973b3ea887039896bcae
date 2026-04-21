@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14b68ee4_08d8edd4",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 30
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T07:25:04Z",
+      "side": 1,
+      "message": "Please reduce this to just the one entry. The entry can just be the subject of the commit message:\n\nhttps://github.com/openbmc/libpldm/blob/0ba4be11dbc578e7c9b66ba7b3c5f8abc0ec1654/CONTRIBUTING.md#L527-L533",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 75
+      },
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df6eeaba_1509312d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T07:25:04Z",
+      "side": 1,
+      "message": "Please see the advice here for organising header elements:\n\nhttps://github.com/openbmc/libpldm/blob/0ba4be11dbc578e7c9b66ba7b3c5f8abc0ec1654/CONTRIBUTING.md#L58-L74",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 62
+      },
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e931546_fd325da2",
         "filename": "src/dsp/platform.c",
         "patchSetId": 30
@@ -14,6 +60,29 @@
       "writtenOn": "2026-04-09T08:27:24Z",
       "side": 1,
       "message": "can u restrict this to 80 chars?",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea53c3b_9e134556",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 3658,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T07:25:04Z",
+      "side": 1,
+      "message": "Perhaps:\n```suggestion\n\tswitch (req-\u003eeffecter_operational_state) {\n\tcase EFFECTER_OPER_STATE_ENABLED_UPDATEPENDING:\n\tcase EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING:\n\tcase EFFECTER_OPER_STATE_DISABLED:\n\tcase EFFECTER_OPER_STATE_UNAVAILABLE:\n\t\tbreak;\n\tdefault:\n\t\treturn -EINVAL;\n\t}\n```",
+      "range": {
+        "startLine": 3650,
+        "startChar": 1,
+        "endLine": 3658,
+        "endChar": 2
+      },
       "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -37,6 +106,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa02433d_de138dd5",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 3705,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T07:25:04Z",
+      "side": 1,
+      "message": "You must add a test of the result here because you use the value of `operational_state` below.\n\n```suggestion\n\trc \u003d pldm_msgbuf_extract(buf, operational_state);\n\tif (rc) {\n\t\treturn pldm_msgbuf_discard(buf, rc);\n\t}\n\n```\n\nThe result test can only be omitted for extracted values that aren\u0027t later used.",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d11e575_2499dcbd",
         "filename": "src/dsp/platform.c",
         "patchSetId": 30
@@ -48,6 +134,75 @@
       "writtenOn": "2026-04-09T08:27:24Z",
       "side": 1,
       "message": "I think a check like this would be good here.\n\nhttps://github.com/openbmc/libpldm/blob/4509e841f6a4cad2411aa00db7cefac52330f9d2/src/dsp/platform.c#L2538",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6af88000_370f6d4d",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 3707,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T07:25:04Z",
+      "side": 1,
+      "message": "Yes, please add such a check.",
+      "parentUuid": "1d11e575_2499dcbd",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "974eade9_e272c47f",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T07:25:04Z",
+      "side": 1,
+      "message": "The disadvantage of this is if we have a failure we don\u0027t know which entry failed. You could pull the loop body out to a helper function that takes the state under test as a parameter, and just invoke it 4 times below, once for each state. That way we would have some idea of the problem from a backtrace.",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ca902c_df0cbd92",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T07:25:04Z",
+      "side": 1,
+      "message": "See my earlier comment about loops in the tests.",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2167af65_aff673ea",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 1408,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T07:25:04Z",
+      "side": 1,
+      "message": "Same issue here with the loop.",
       "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
