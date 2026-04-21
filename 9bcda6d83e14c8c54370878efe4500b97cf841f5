@@ -1,0 +1,249 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8849dd41_499c7668",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "Hi John, I have a few comments inline.",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5832d26_9927fb54",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "Please reduce this to just the commit subject:\n\nhttps://github.com/openbmc/libpldm/blob/0ba4be11dbc578e7c9b66ba7b3c5f8abc0ec1654/CONTRIBUTING.md#L527-L533",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 53
+      },
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f6c364_e685ba30",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "Please define these above the receive flags, as this matches the operation order defined in the spec. See:\n\nhttps://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L66-L67",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 1
+      },
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a618d98_27c44ff6",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "Can you please define these with the corresponding structs? See:\n\nhttps://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L60-L64",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 52
+      },
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7762ac92_030851e9",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "Again, if you don\u0027t mind moving these above the corresponding receive structs 😊",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "871dc6b4_7f4d52f5",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "I think this wording gives the wrong impression. The spec says:\n\n\u003e 32-bit cumulative CRC for the entirety of data received so far for this section",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5f303c9_65368ce1",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "This needs to return a negative errno value, not a PLDM completion code.",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "712e996b_05b4fef4",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "Please define variables at the top of the function body, in reverse-fir-tree order.",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "064490a1_32dc9b56",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "This must be an errno value, not a PLDM error code.\n\nIn fact, this highlighted that we had some bugs in the test suite. I\u0027ve re-pushed your patch here with a parent patch to solve the problem. With that fix in place this issue also causes the following test suite failure:\n\n```\ndsp_base: ../src/msgbuf/core.h:84: pldm__msgbuf_cleanup: Assertion `cursor \u003d\u003d NULL \u0026\u0026 remaining \u003d\u003d INTMAX_MIN\u0027 failed\n```",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "916c7ddb_ec36b514",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "Negative errno again.",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38c9c2b8_45d923d1",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "Please define this at the top of the function body, in reverse-fir-tree order.",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2350093_8090db6c",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "This must be a negative errno.",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fb9ace2_701190bf",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1939,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T08:56:05Z",
+      "side": 1,
+      "message": "Please use `PLDM_MSG_DEFINE_P()` and fix throughout. You can use the msgbuf C++ APIs to insert things into the message buffer directly.",
+      "range": {
+        "startLine": 1932,
+        "startChar": 0,
+        "endLine": 1939,
+        "endChar": 66
+      },
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
