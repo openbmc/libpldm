@@ -1,5 +1,6 @@
 #include "msgbuf.hpp"
 
+#include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/file.h>
 #include <libpldm/pldm_types.h>

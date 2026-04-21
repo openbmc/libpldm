@@ -1,6 +1,7 @@
 #include "msgbuf.hpp"
 
 #include <endian.h>
+#include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/entity.h>
 #include <libpldm/platform.h>
