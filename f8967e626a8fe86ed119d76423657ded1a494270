@@ -16,6 +16,23 @@
       "message": "Fixed merge conflicts",
       "revId": "f8967e626a8fe86ed119d76423657ded1a494270",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9acba0da_3f202bf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T07:45:05Z",
+      "side": 1,
+      "message": "Hi Jino, I got around to merging a few changes recently and this now conflicts with main. Can you please rebase to address the conflicts?",
+      "revId": "f8967e626a8fe86ed119d76423657ded1a494270",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
