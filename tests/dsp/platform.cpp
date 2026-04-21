@@ -6871,3 +6871,294 @@ TEST(decodeRedfishActionPdr, GoodTest)
     EXPECT_EQ(PLDM_SUCCESS, rc);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateEffecterPDR, testExtractPossibleStates)
+{
+    constexpr size_t pdrSize = sizeof(pldm_state_effecter_pdr) -
+                               1 +                          // fixed header
+                               (sizeof(uint16_t) + 1 + 1) + // entry 0
+                               (sizeof(uint16_t) + 1 + 2);  // entry 1
+    alignas(pldm_state_effecter_pdr) unsigned char pdrBuf[pdrSize] = {};
+    auto* pdr = new (pdrBuf) pldm_state_effecter_pdr;
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
+
+    pdr->hdr.record_handle = htole32(1);
+    pdr->hdr.type = PLDM_STATE_EFFECTER_PDR;
+    pdr->composite_effecter_count = 2;
+
+    int rc = pldm_msgbuf_init_errno(buf, 0, pdr->possible_states,
+                                    pdrSize - sizeof(pldm_state_effecter_pdr) +
+                                        sizeof(pdr->possible_states));
+    ASSERT_EQ(rc, 0);
+
+    // possible_states[0]: state_set_id=100, size=1, bits=0x0F
+    pldm_msgbuf_insert_uint16(buf, 100);
+    pldm_msgbuf_insert_uint8(buf, 1);
+    pldm_msgbuf_insert_uint8(buf, 0x0F);
+
+    // possible_states[1]: state_set_id=200, size=2, bits={0xAA, 0x55}
+    pldm_msgbuf_insert_uint16(buf, 200);
+    pldm_msgbuf_insert_uint8(buf, 2);
+    pldm_msgbuf_insert_uint8(buf, 0xAA);
+    pldm_msgbuf_insert_uint8(buf, 0x55);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    std::vector<uint16_t> ids;
+    std::vector<uint8_t> sizes;
+    std::vector<std::vector<uint8_t>> bitLists;
+
+    state_effecter_possible_states states{};
+
+    foreach_pldm_platform_state_effecter_pdr_possible_states(pdr, pdrSize,
+                                                             states, rc)
+    {
+        ids.push_back(states.state_set_id);
+        sizes.push_back(states.possible_states_size);
+
+        std::vector<uint8_t> bytes;
+        bitfield8_t bf{};
+
+        foreach_pldm_platform_state_effecter_pdr_states(states, bf, rc)
+        {
+            bytes.push_back(bf.byte);
+        }
+
+        if (rc)
+        {
+            break;
+        }
+
+        bitLists.push_back(std::move(bytes));
+    }
+
+    EXPECT_EQ(rc, 0) << "Iterator failed with rc=" << rc;
+
+    ASSERT_EQ(ids.size(), 2);
+    ASSERT_EQ(bitLists.size(), 2);
+
+    EXPECT_EQ(le16toh(ids[0]), 100);
+    EXPECT_EQ(le16toh(ids[1]), 200);
+
+    EXPECT_EQ(sizes[0], 1);
+    ASSERT_EQ(bitLists[0].size(), 1);
+    EXPECT_EQ(bitLists[0][0], 0x0F);
+
+    EXPECT_EQ(sizes[1], 2);
+    ASSERT_EQ(bitLists[1].size(), 2);
+    EXPECT_EQ(bitLists[1][0], 0xAA);
+    EXPECT_EQ(bitLists[1][1], 0x55);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateEffecterPDR, testInvalidBufferTooSmall)
+{
+    alignas(pldm_state_effecter_pdr) unsigned char
+        pdrBuf[sizeof(pldm_state_effecter_pdr)] = {};
+    auto* pdr = new (pdrBuf) pldm_state_effecter_pdr;
+
+    int rc;
+    state_effecter_possible_states states{};
+
+    foreach_pldm_platform_state_effecter_pdr_possible_states(pdr, 10, states,
+                                                             rc)
+    {
+        FAIL() << "Should not iterate with invalid buffer";
+    }
+
+    EXPECT_EQ(rc, -EOVERFLOW) << "Expected EOVERFLOW for small buffer";
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateEffecterPDR, testNullPointer)
+{
+    int rc;
+    state_effecter_possible_states states{};
+
+    foreach_pldm_platform_state_effecter_pdr_possible_states(nullptr, 100,
+                                                             states, rc)
+    {
+        FAIL() << "Should not iterate with null pointer";
+    }
+
+    EXPECT_EQ(rc, -EINVAL) << "Expected EINVAL for null pointer";
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateEffecterPDR, testZeroCount)
+{
+    constexpr size_t pdrSize = sizeof(pldm_state_effecter_pdr);
+    alignas(pldm_state_effecter_pdr) unsigned char pdrBuf[pdrSize] = {};
+    auto* pdr = new (pdrBuf) pldm_state_effecter_pdr;
+    pdr->composite_effecter_count = 0;
+
+    int rc;
+    state_effecter_possible_states states{};
+    size_t count = 0;
+
+    foreach_pldm_platform_state_effecter_pdr_possible_states(pdr, pdrSize,
+                                                             states, rc)
+    {
+        count++;
+    }
+
+    EXPECT_EQ(count, 0) << "Should not iterate when count is 0";
+    EXPECT_EQ(rc, 0) << "Expected success (rc=0), got rc=" << rc;
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateEffecterPDR, testSingleEntry)
+{
+    constexpr size_t pdrSize = sizeof(pldm_state_effecter_pdr) -
+                               1 +                         // fixed header
+                               (sizeof(uint16_t) + 1 + 3); // single entry
+    alignas(pldm_state_effecter_pdr) unsigned char pdrBuf[pdrSize] = {};
+    auto* pdr = new (pdrBuf) pldm_state_effecter_pdr;
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
+
+    pdr->hdr.type = PLDM_STATE_EFFECTER_PDR;
+    pdr->composite_effecter_count = 1;
+
+    int rc = pldm_msgbuf_init_errno(buf, 0, pdr->possible_states,
+                                    pdrSize - sizeof(pldm_state_effecter_pdr) +
+                                        sizeof(pdr->possible_states));
+    ASSERT_EQ(rc, 0);
+
+    // Single entry: state_set_id=42, size=3, bits={0x01, 0x02, 0x04}
+    pldm_msgbuf_insert_uint16(buf, 42);
+    pldm_msgbuf_insert_uint8(buf, 3);
+    pldm_msgbuf_insert_uint8(buf, 0x01);
+    pldm_msgbuf_insert_uint8(buf, 0x02);
+    pldm_msgbuf_insert_uint8(buf, 0x04);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    state_effecter_possible_states states{};
+    size_t entryCount = 0;
+
+    foreach_pldm_platform_state_effecter_pdr_possible_states(pdr, pdrSize,
+                                                             states, rc)
+    {
+        entryCount++;
+        EXPECT_EQ(le16toh(states.state_set_id), 42);
+        EXPECT_EQ(states.possible_states_size, 3);
+
+        std::vector<uint8_t> bytes;
+        bitfield8_t bf{};
+
+        foreach_pldm_platform_state_effecter_pdr_states(states, bf, rc)
+        {
+            bytes.push_back(bf.byte);
+        }
+
+        if (rc)
+        {
+            break;
+        }
+
+        ASSERT_EQ(bytes.size(), 3);
+        EXPECT_EQ(bytes[0], 0x01);
+        EXPECT_EQ(bytes[1], 0x02);
+        EXPECT_EQ(bytes[2], 0x04);
+    }
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(entryCount, 1);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateEffecterPDR, testTruncatedEntry)
+{
+    /* Entry claims size=5 but buffer only has room for 2 state bytes */
+    constexpr size_t pdrSize = sizeof(pldm_state_effecter_pdr) -
+                               1 +                         // fixed header
+                               (sizeof(uint16_t) + 1 + 2); // truncated entry
+    alignas(pldm_state_effecter_pdr) unsigned char pdrBuf[pdrSize] = {};
+    auto* pdr = new (pdrBuf) pldm_state_effecter_pdr;
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
+
+    pdr->composite_effecter_count = 1;
+
+    int rc = pldm_msgbuf_init_errno(buf, 0, pdr->possible_states,
+                                    pdrSize - sizeof(pldm_state_effecter_pdr) +
+                                        sizeof(pdr->possible_states));
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint16(buf, 100);
+    pldm_msgbuf_insert_uint8(buf, 5);    // Claims 5 bytes
+    pldm_msgbuf_insert_uint8(buf, 0xFF); // Only 2 bytes provided
+    pldm_msgbuf_insert_uint8(buf, 0xFF);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    state_effecter_possible_states states{};
+
+    foreach_pldm_platform_state_effecter_pdr_possible_states(pdr, pdrSize,
+                                                             states, rc)
+    {
+        FAIL() << "Should not successfully iterate truncated entry";
+    }
+
+    EXPECT_EQ(rc, -EOVERFLOW) << "Expected EOVERFLOW for truncated entry";
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateEffecterPDR, testZeroPossibleStatesSize)
+{
+    constexpr size_t pdrSize =
+        sizeof(pldm_state_effecter_pdr) - 1 + // fixed header
+        (sizeof(uint16_t) + 1);               // entry with size=0, no bits
+    alignas(pldm_state_effecter_pdr) unsigned char pdrBuf[pdrSize] = {};
+    auto* pdr = new (pdrBuf) pldm_state_effecter_pdr;
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
+
+    pdr->composite_effecter_count = 1;
+
+    int rc = pldm_msgbuf_init_errno(buf, 0, pdr->possible_states,
+                                    pdrSize - sizeof(pldm_state_effecter_pdr) +
+                                        sizeof(pdr->possible_states));
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint16(buf, 100);
+    pldm_msgbuf_insert_uint8(buf, 0); // set possible_states_size as 0
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    state_effecter_possible_states states{};
+    size_t entryCount = 0;
+
+    foreach_pldm_platform_state_effecter_pdr_possible_states(pdr, pdrSize,
+                                                             states, rc)
+    {
+        entryCount++;
+        EXPECT_EQ(le16toh(states.state_set_id), 100);
+        EXPECT_EQ(states.possible_states_size, 0);
+
+        size_t bfCount = 0;
+        bitfield8_t bf{};
+
+        foreach_pldm_platform_state_effecter_pdr_states(states, bf, rc)
+        {
+            bfCount++;
+        }
+
+        EXPECT_EQ(bfCount, 0)
+            << "Should not iterate when possible_states_size is 0";
+
+        if (rc)
+        {
+            break;
+        }
+    }
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(entryCount, 1);
+}
+#endif

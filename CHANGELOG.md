@@ -47,6 +47,7 @@ Change categories:
 - dsp: platform: Add pldm_platform_file_class enum
 - platform: Add functions to decode Redfish Resource PDR (DSP0248 v1.3.0)
 - platform: Add functions to decode Redfish Action PDR (DSP0248 v1.3.0)
+- dsp: platform: Iterator macros for State Effecter PDR
 
 ### Changed
 
