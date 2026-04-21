@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af471e43_4104608d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-21T07:54:35Z",
+      "side": 1,
+      "message": "Can you please review @arun.p.m@intel.com\u0027s change [dsp: platform: Add Sensor Enable requester](https://gerrit.openbmc.org/c/openbmc/libpldm/+/85298) and collaborate with them so we avoid conflicts and duplicate functionality?",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14b68ee4_08d8edd4",
         "filename": "CHANGELOG.md",
         "patchSetId": 30
