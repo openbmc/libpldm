@@ -12,6 +12,13 @@ option(
     value: false,
 )
 option(
+    'bindings',
+    type: 'array',
+    description: 'Language bindings for libpldm',
+    choices: ['cpp'],
+    value: ['cpp'],
+)
+option(
     'oem',
     type: 'array',
     description: 'Enable OEM PLDM extensions',
@@ -20,11 +27,6 @@ option(
 )
 option('tests', type: 'boolean', description: 'Build tests')
 option(
-    'transport',
-    type: 'boolean',
-    description: 'Enable transport implementation',
-)
-option(
     'tools',
     type: 'array',
     description: 'Tools to build with the library',
@@ -32,9 +34,7 @@ option(
     value: ['pd'],
 )
 option(
-    'bindings',
-    type: 'array',
-    description: 'Language bindings for libpldm',
-    choices: ['cpp'],
-    value: ['cpp'],
+    'transport',
+    type: 'boolean',
+    description: 'Enable transport implementation',
 )
