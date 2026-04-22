@@ -71,6 +71,8 @@ Change categories:
   - Missing definitions, such as `BUILD_ASSERT`, `EUCLEAN` and `SSIZE_MAX`;
   - Note that those should only affect Zephyr based builds.
 
+- libpldm: api: Don't diagnose implementation use of unstable features
+
 ### Deprecated
 
 - Misspelled PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG member of the
