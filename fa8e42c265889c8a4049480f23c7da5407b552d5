@@ -22,6 +22,30 @@
       },
       "revId": "fa8e42c265889c8a4049480f23c7da5407b552d5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643572dc_25428ff9",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-04-22T13:07:51Z",
+      "side": 1,
+      "message": "\u003e * @param[in] pin The maximum supported package format revision of the caller\n\nWhat if we dropped this PIN argument entirely from the C++ API.\n\nI can imagine many callers are not terribly interest in specific revisions\nand instead just need to know if a given fields exists in the libpldm++ they are linked against.\n\nFor that purpose we have `HasMember` function from `GrowableStruct`.\n\nCurrently they don\u0027t need to use that though since we only support v1.0 for now.\n\n\n\u003e I\u0027d rather develop equivalent pins for the C++ API so it can evolve independently of the C API\n\nWith \u0027equivalent\u0027 you mean copy-pasting it with a different name?\n\nOr should we start with e.g. `LIBPLDMPP_PKG_PIN_1` and then increment from there and translate internally to some libpldm pin.",
+      "parentUuid": "e79906d7_8c6d410c",
+      "range": {
+        "startLine": 111,
+        "startChar": 1,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "fa8e42c265889c8a4049480f23c7da5407b552d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
