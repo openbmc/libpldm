@@ -16,6 +16,24 @@
       "message": "Can you please define this underneath the corresponding struct?\n\nhttps://github.com/openbmc/libpldm/blob/0ba4be11dbc578e7c9b66ba7b3c5f8abc0ec1654/CONTRIBUTING.md#L58-L74",
       "revId": "99a1578e116b3fa1174fa61fa1eff73368767f0e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f6ade62_1bf0cd76",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-22T05:45:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbdf1151_11f09ff0",
+      "revId": "99a1578e116b3fa1174fa61fa1eff73368767f0e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
