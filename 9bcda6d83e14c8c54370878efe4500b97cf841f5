@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fcc5fd3_2ed9e03f",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f5832d26_9927fb54",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 53
+      },
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37f6c364_e685ba30",
@@ -54,6 +78,30 @@
       "writtenOn": "2026-04-21T08:56:05Z",
       "side": 1,
       "message": "Please define these above the receive flags, as this matches the operation order defined in the spec. See:\n\nhttps://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L66-L67",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 1
+      },
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b528521f_daa6a265",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "37f6c364_e685ba30",
       "range": {
         "startLine": 106,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "375fd722_d5e071b0",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1a618d98_27c44ff6",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 52
+      },
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7762ac92_030851e9",
@@ -100,6 +172,24 @@
       "writtenOn": "2026-04-21T08:56:05Z",
       "side": 1,
       "message": "Again, if you don\u0027t mind moving these above the corresponding receive structs 😊",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6498e9e5_26e968aa",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7762ac92_030851e9",
       "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -121,6 +211,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbcd9bfa_2375cfa9",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "871dc6b4_7f4d52f5",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5f303c9_65368ce1",
@@ -134,6 +242,24 @@
       "writtenOn": "2026-04-21T08:56:05Z",
       "side": 1,
       "message": "This needs to return a negative errno value, not a PLDM completion code.",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b14b716_70c59f71",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f5f303c9_65368ce1",
       "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -155,6 +281,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fa60502_d9108046",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "712e996b_05b4fef4",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "064490a1_32dc9b56",
@@ -168,6 +312,24 @@
       "writtenOn": "2026-04-21T08:56:05Z",
       "side": 1,
       "message": "This must be an errno value, not a PLDM error code.\n\nIn fact, this highlighted that we had some bugs in the test suite. I\u0027ve re-pushed your patch here with a parent patch to solve the problem. With that fix in place this issue also causes the following test suite failure:\n\n```\ndsp_base: ../src/msgbuf/core.h:84: pldm__msgbuf_cleanup: Assertion `cursor \u003d\u003d NULL \u0026\u0026 remaining \u003d\u003d INTMAX_MIN\u0027 failed\n```",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df4c622a_73874067",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "064490a1_32dc9b56",
       "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -189,6 +351,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfd1b470_499a91d8",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "916c7ddb_ec36b514",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38c9c2b8_45d923d1",
@@ -202,6 +382,24 @@
       "writtenOn": "2026-04-21T08:56:05Z",
       "side": 1,
       "message": "Please define this at the top of the function body, in reverse-fir-tree order.",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cadbc81_be11a2ca",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "38c9c2b8_45d923d1",
       "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -223,6 +421,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "907fae69_e8364d45",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e2350093_8090db6c",
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fb9ace2_701190bf",
@@ -236,6 +452,30 @@
       "writtenOn": "2026-04-21T08:56:05Z",
       "side": 1,
       "message": "Please use `PLDM_MSG_DEFINE_P()` and fix throughout. You can use the msgbuf C++ APIs to insert things into the message buffer directly.",
+      "range": {
+        "startLine": 1932,
+        "startChar": 0,
+        "endLine": 1939,
+        "endChar": 66
+      },
+      "revId": "9bcda6d83e14c8c54370878efe4500b97cf841f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7e913ee_64d6dea0",
+        "filename": "tests/dsp/base.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1939,
+      "author": {
+        "id": 1002038
+      },
+      "writtenOn": "2026-04-22T20:52:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6fb9ace2_701190bf",
       "range": {
         "startLine": 1932,
         "startChar": 0,
