@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9b913a9_12b17f40",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1462,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-22T03:50:05Z",
+      "side": 1,
+      "message": "My current preference is that we locate these with the related functions:\n\nhttps://github.com/openbmc/libpldm/blob/4c216a534d4a846c53a0c2c0f8d86620be261e1b/CONTRIBUTING.md#L58-L74",
+      "revId": "94b975bcdbf3d78e1bce4085a3217f6fe644dae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f46572dd_157949b4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 3403,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-22T03:50:05Z",
+      "side": 1,
+      "message": "As a general philosophy, please try to keep things that go together together - avoid grouping things based on their \"class\" (e.g. struct, function, macro). Rather, group things on how they work together (i.e. all the \"state effecter PDR\"-related iteration elements together, all the \"possible states\"-related iteration elements together).",
+      "range": {
+        "startLine": 3386,
+        "startChar": 1,
+        "endLine": 3403,
+        "endChar": 1
+      },
+      "revId": "94b975bcdbf3d78e1bce4085a3217f6fe644dae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88c8edec_59b453cd",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3991,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-22T03:50:05Z",
+      "side": 1,
+      "message": "We can combine these.",
+      "range": {
+        "startLine": 3984,
+        "startChar": 1,
+        "endLine": 3991,
+        "endChar": 2
+      },
+      "revId": "94b975bcdbf3d78e1bce4085a3217f6fe644dae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b95b227_d8037a44",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 4017,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-22T03:50:05Z",
+      "side": 1,
+      "message": "This test should be unnecessary.",
+      "range": {
+        "startLine": 4015,
+        "startChar": 1,
+        "endLine": 4017,
+        "endChar": 2
+      },
+      "revId": "94b975bcdbf3d78e1bce4085a3217f6fe644dae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e7130bd_0a0c7665",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 4058,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-22T03:50:05Z",
+      "side": 1,
+      "message": "Can combine these also.",
+      "range": {
+        "startLine": 4051,
+        "startChar": 1,
+        "endLine": 4058,
+        "endChar": 1
+      },
+      "revId": "94b975bcdbf3d78e1bce4085a3217f6fe644dae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
