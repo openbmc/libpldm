@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ecfcddd6_733ff665",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-22T05:59:39Z",
+      "side": 1,
+      "message": "Oh. Yes I will review and make changes accordingly to my PR if there are duplicate functionality thanks.",
+      "parentUuid": "d73d74f2_6d2b2a8b",
+      "revId": "78a3e6c7d353ac4eb0196e4149187fdf43078c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f4d6f2c_1a6c2c29",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 16
