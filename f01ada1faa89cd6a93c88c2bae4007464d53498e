@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6889fa1d_ce9fc4ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-04-23T13:25:55Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "7a13fb9c_33ea9142",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "f01ada1faa89cd6a93c88c2bae4007464d53498e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6599f7c6_cd670492",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-04-23T03:32:51Z",
       "side": 1,
       "message": "Can drop this with the updated patch subject",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 36
+      },
+      "revId": "f01ada1faa89cd6a93c88c2bae4007464d53498e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05d356cf_1e60d7cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-04-23T13:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6599f7c6_cd670492",
       "range": {
         "startLine": 9,
         "startChar": 0,
