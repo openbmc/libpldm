@@ -46,6 +46,30 @@
       },
       "revId": "fa8e42c265889c8a4049480f23c7da5407b552d5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1050e6f7_90522086",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-23T03:24:35Z",
+      "side": 1,
+      "message": "\u003e For that purpose we have HasMember function from GrowableStruct.\n\nI guess it\u0027s up to you as the maintainer of the C++ API, but I feel that might not be nice to write against. I think it would be better to have a one-off check to handle whether the library supports the requested version.\n\n\u003e With \u0027equivalent\u0027 you mean copy-pasting it with a different name?\n\nNot necessarily. The C pin implementation is my own paranoid scheme, I\u0027m not going to require that you copy it. The idea is that the library implementation can determine the minimum source version the user was compiled against.\n\n\u003e Or should we start with e.g. LIBPLDMPP_PKG_PIN_1 and then increment from there and translate internally to some libpldm pin.\n\nI\u0027m okay with that if that\u0027s what you prefer. Essentially I just made the underlying value of that C pin a constant relevant to the structs at hand and slightly awkward to calculate so people didn\u0027t just plug a literal constant in as the parameter. You could use a scoped enumeration to the same end (so people have to pass the enum value, not just a value of the underlying type).",
+      "parentUuid": "643572dc_25428ff9",
+      "range": {
+        "startLine": 111,
+        "startChar": 1,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "fa8e42c265889c8a4049480f23c7da5407b552d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
