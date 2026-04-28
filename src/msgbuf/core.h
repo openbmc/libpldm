@@ -1622,7 +1622,7 @@ int pldm__msgbuf_field_begin(const void *cursor, intmax_t remaining,
 {
 	if (remaining >= 0) {
 #if SIZE_MAX < INTMAX_MAX
-		assert(ctx->remaining <= (intmax_t)SIZE_MAX);
+		assert(remaining <= (intmax_t)SIZE_MAX);
 #endif
 
 		field->ptr = (const uint8_t *)cursor;
