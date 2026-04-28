@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3c8e65c_72af4a6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-28T10:52:41Z",
+      "side": 1,
+      "message": "Hi @andrew@codeconstruct.com.au\n\nI went through https://gerrit.openbmc.org/c/openbmc/libpldm/+/85425, and made sure there aren\u0027t any duplicate functionalities, nor conflicts. \n\nI also modified the title of this PR to reflect that we are adding only Numeric Sensor Enable API - I realized the title previously said only Sensor Enable which was too generic.",
+      "parentUuid": "ecfcddd6_733ff665",
+      "revId": "78a3e6c7d353ac4eb0196e4149187fdf43078c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f4d6f2c_1a6c2c29",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 16
@@ -131,6 +149,24 @@
       "writtenOn": "2026-04-15T23:48:52Z",
       "side": 1,
       "message": "Suggest to define `event_enable` as a uint8_t so that no type casting is required.",
+      "revId": "78a3e6c7d353ac4eb0196e4149187fdf43078c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "371c1ae3_186b0a07",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2545,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-28T10:52:41Z",
+      "side": 1,
+      "message": "Hi @john.chung@arm.com\n\nFrom a code readability standpoint, I agree that declaring event_enable as a uint8_t would help avoid explicit type casting.\n\nAt the same time, keeping it as an enum makes the code more self-documenting, allowing developers to immediately see the set of valid values.\n\nI’ll leave the final decision to you.",
+      "parentUuid": "2e610529_7da57bbf",
       "revId": "78a3e6c7d353ac4eb0196e4149187fdf43078c42",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
