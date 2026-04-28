@@ -59,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03da37d2_754c06e5",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-28T10:28:44Z",
+      "side": 1,
+      "message": "Understood. Reusing the existing completion code.",
+      "parentUuid": "4f4d6f2c_1a6c2c29",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 69
+      },
+      "revId": "78a3e6c7d353ac4eb0196e4149187fdf43078c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7617540c_336823f2",
@@ -72,6 +96,24 @@
       "writtenOn": "2026-04-15T23:48:52Z",
       "side": 1,
       "message": "The payload length needs to be passed, not the MACRO.",
+      "revId": "78a3e6c7d353ac4eb0196e4149187fdf43078c42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70ec60ff_145f54cb",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2539,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-28T10:28:44Z",
+      "side": 1,
+      "message": "Haa my bad. Thanks for the catch. Fixed.",
+      "parentUuid": "7617540c_336823f2",
       "revId": "78a3e6c7d353ac4eb0196e4149187fdf43078c42",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

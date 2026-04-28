@@ -144,6 +144,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6d3cda69_67a9e49e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-28T10:28:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6a8c3b2_9307c47c",
+      "range": {
+        "startLine": 15,
+        "startChar": 14,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "38c86e0e_73794d75",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 14
@@ -319,6 +343,24 @@
       "side": 1,
       "message": "Understood. I just changed one of the member inside the struct to match the new enum. Is that fine?",
       "parentUuid": "7750dee3_0c60d154",
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fdd313a_1f0d26d5",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 1389,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-28T10:28:44Z",
+      "side": 1,
+      "message": "Minor modificaiton to struct to use the new enum that aligns with spec",
+      "parentUuid": "a171c79e_e74c9089",
       "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -501,6 +543,30 @@
       "side": 1,
       "message": "I have changed it to use struct and based it off of https://github.com/openbmc/libpldm/blob/4509e841f6a4cad2411aa00db7cefac52330f9d2/src/dsp/file.c#L240\n\nIs that alright?",
       "parentUuid": "e64205e1_99789b32",
+      "range": {
+        "startLine": 2561,
+        "startChar": 1,
+        "endLine": 2566,
+        "endChar": 34
+      },
+      "revId": "82fe1473235d83122704936daf7757fa15b1ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "467e4d9f_efada181",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2566,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-28T10:28:44Z",
+      "side": 1,
+      "message": "Modified it again to pass structure inside.",
+      "parentUuid": "bcc2d770_08b9932c",
       "range": {
         "startLine": 2561,
         "startChar": 1,
