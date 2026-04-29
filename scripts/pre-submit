@@ -78,3 +78,13 @@ meson configure -Dabi=deprecated,stable "$BUILD"
 ! command -v abi-compliance-checker > /dev/null ||
   meson configure -Dabi-compliance-check=true "$BUILD"
 meson compile -C "$BUILD"
+
+# Cross-compile to a target where SIZE_MAX < INTMAX_MAX
+(
+  : ${ARM_PREFIX:=/usr/arm-linux-gnueabihf}
+  export QEMU_LD_PREFIX="${ARM_PREFIX}"
+  rm -rf "$BUILD"
+  meson setup --cross-file meson/arm-linux-gnueabihf.ini "$BUILD"
+  meson compile -C "$BUILD"
+  meson test -C "$BUILD"
+)
