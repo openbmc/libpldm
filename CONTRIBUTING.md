@@ -186,6 +186,13 @@
 [c17-draft-standard]:
   https://web.archive.org/web/20181230041359/http://www.open-std.org/jtc1/sc22/wg14/www/abq/c17_updated_proposed_fdis.pdf
 
+#### Constants and Enumerations
+
+- [ ] Field constant values are defined as macros and not enum members
+
+- [ ] Struct members representing enumerated types are defined as the underlying
+      unsigned integer type and not as an enum
+
 #### Strings
 
 - [ ] PLDM strings are not assumed to be `NUL`-terminated
@@ -554,6 +561,19 @@ Changelog entries broadly fall into one of two cases
   >
   >   No new error values will be returned, but existing error values may be
   >   returned under new conditions.
+
+### Constants and Enumerations
+
+Until [C23][c23-draft-standard] the underlying type used for storage of enum
+values is implementation-defined. This makes developing language bindings a
+tricky business. It also underspecifies the type needed to encode or decode the
+enum constant with respect to the PLDM wire format, which leads to error-prone
+casting required to get the job done.
+
+As such, prefer defining constants as macros and using explicit unsigned integer
+types to represent message content.
+
+[c23-draft-standard]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf
 
 ## References
 
