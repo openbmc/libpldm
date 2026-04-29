@@ -53,6 +53,12 @@
     - Doesn't change the public headers under `include/libpldm`
     - Doesn't change observable runtime behaviour
 
+### Build configuration and tools
+
+- [ ] Library can be built with tools from [Debian Stable][debian-releases]
+
+[debian-releases]: https://www.debian.org/releases/index.en.html
+
 ## Adding a new API
 
 ### Organising declarations and definitions
