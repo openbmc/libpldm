@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79a31c01_77b31b1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T03:11:28Z",
+      "side": 1,
+      "message": "Needs the series ending here to be submitted to openbmc-build-scripts:\n\n[build-unit-test-docker: Install qemu-user{,-binfmt} for cross-testing](https://gerrit.openbmc.org/c/openbmc/openbmc-build-scripts/+/89741)",
+      "revId": "a9c68e56929c41edcb5bd708528ebf8ee77bb02d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
