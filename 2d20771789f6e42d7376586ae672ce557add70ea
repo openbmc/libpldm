@@ -129,6 +129,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32b71fa9_0d1fec24",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-04-29T06:56:29Z",
+      "side": 1,
+      "message": "Previously this structure was using the Enum\n\n```\n\nenum pldm_sensor_event_message_enable {\n\tPLDM_NO_EVENT_GENERATION,\n\tPLDM_EVENTS_DISABLED,\n\tPLDM_EVENTS_ENABLED,\n\tPLDM_OP_EVENTS_ONLY_ENABLED,\n\tPLDM_STATE_EVENTS_ONLY_ENABLED\n};\n```\n\nThe `pldm_sensor_event_message_enable` is for GetSensorReading (DMTF v1.3.0 18.2) response field sensorEventMessageEnable\n\n```\nDMTF v1.3.0 Table 31\n\nsensorEventMessageEnable\nvalue:\n{ noEventGeneration, eventsDisabled, eventsEnabled, opEventsOnlyEnabled,\nstateEventsOnlyEnabled }\n```\n\nBut `struct pldm_set_numeric_sensor_enable_req` is supposed to be made for SetNumericSensorEnable (DMTF v1.3.0 18.1), which defines\n\n```\nDMTF v1.3.0 Table 30\n\nsensorEventMessageEnable\nThis value is used to enable or disable event message generation from the sensor.\nvalue:\n{ noChange, disableEvents, enableEvents, enableOpEventsOnly, enableStateEventsOnly}\nnoChange means do not alter the present setting. Use noChange when the sensor does not support\nevent message generation.\n```\n\nHence I made a new enum and changed this.\n\nRef: DMTF v1.3.0 -\u003e PLDM for Platform Monitoring and Control Specification\nhttps://www.dmtf.org/sites/default/files/standards/documents/DSP0248_1.3.0.pdf\n\n----------",
+      "parentUuid": "1fad1573_70587b63",
+      "range": {
+        "startLine": 1410,
+        "startChar": 1,
+        "endLine": 1411,
+        "endChar": 2
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8094dcf_1f031b45",
         "filename": "include/libpldm/platform.h",
         "patchSetId": 17
