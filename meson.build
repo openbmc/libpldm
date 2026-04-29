@@ -29,6 +29,9 @@ endif
 
 if get_option('bindings').contains('cpp') or get_option('tests')
     cpp = meson.get_compiler('cpp')
+    if cpp.has_argument('-Wno-psabi')
+        add_project_arguments('-Wno-psabi', language: ['cpp'])
+    endif
 endif
 
 # avoid using different compilers across C/C++
