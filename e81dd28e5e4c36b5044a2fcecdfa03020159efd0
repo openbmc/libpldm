@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d5deb93_1501966d",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-04-29T07:52:31Z",
+      "side": 1,
+      "message": "I am wondering how this will look like in practice for a developer.\n\nDo we have a specific container image or script that should be run?\n\n\nOtherwise we are asking people to\n- find a container image for debian\n- build a container image based on that which also contains the required packages\n- build test from there\n\n\nI do agree with the intention here but it would be nice if we could streamline it\nfurther to be more like \"run X script\"\n\nor maybe i have misunderstood something 😊",
+      "revId": "e81dd28e5e4c36b5044a2fcecdfa03020159efd0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
