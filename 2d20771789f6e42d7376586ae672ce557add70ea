@@ -1,0 +1,262 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "850357af_f643cd0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "Hello, thanks for the patch. I\u0027ve a few comments inline, mainly concerned with things listed in `CONTRIBUTING.md` 😊",
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33b62f07_07ad7bab",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "Can you please rather define these alongside the associated structs:\n\nhttps://github.com/openbmc/libpldm/blob/46ae245b63239150e49a9ec7beadce3d9d989283/CONTRIBUTING.md#L60-L64",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 51
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25cccc2_b9b7dc86",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "I recognise not all types in the file are named this way, but can you please include the spec name in the type name? See:\n\nhttps://github.com/openbmc/libpldm/blob/46ae245b63239150e49a9ec7beadce3d9d989283/CONTRIBUTING.md#L84-L86\n\nRelated, the member names should then be updated:\n\nhttps://github.com/openbmc/libpldm/blob/46ae245b63239150e49a9ec7beadce3d9d989283/CONTRIBUTING.md#L108",
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "422412e9_adebae83",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "I recognise that the file largely isn\u0027t ordered in the way I\u0027m requesting, but the keep-things-that-go-together-together philosophy applies here too:\n\nhttps://github.com/openbmc/libpldm/blob/46ae245b63239150e49a9ec7beadce3d9d989283/CONTRIBUTING.md#L60-L64",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 2
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "858d38d1_21a7de63",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "I\u0027ve also pushed a change to `CONTRIBUTING.md` that documents a preference for macros and bit-precise unsigned integer types in place of enums:\n\n[CONTRIBUTING: Prefer macro constants over enum types](https://gerrit.openbmc.org/c/openbmc/libpldm/+/89747)",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 2
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fad1573_70587b63",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "What\u0027s going on with this change?",
+      "range": {
+        "startLine": 1410,
+        "startChar": 1,
+        "endLine": 1411,
+        "endChar": 2
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8094dcf_1f031b45",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 1419,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "For responses whose only content is a completion code I still require `encode_*()` and `decode_*()` APIs, but I don\u0027t require that you pass a struct for them. You can just pass the completion code by value or pointer as necessary.",
+      "range": {
+        "startLine": 1413,
+        "startChar": 0,
+        "endLine": 1419,
+        "endChar": 2
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "862b0c60_44b3ea4b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 3569,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "The `encode_*()` and `decode_*()` APIs need to be named after their corresponding types, including the `pldm_platform` prefix:\n\nhttps://github.com/openbmc/libpldm/blob/46ae245b63239150e49a9ec7beadce3d9d989283/CONTRIBUTING.md#L98-L103",
+      "range": {
+        "startLine": 3569,
+        "startChar": 4,
+        "endLine": 3569,
+        "endChar": 40
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6e72b9f_1a2ba8e4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 3585,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "See note above about naming.",
+      "range": {
+        "startLine": 3585,
+        "startChar": 4,
+        "endLine": 3585,
+        "endChar": 41
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05b0b4e0_1299c140",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 3587,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "See the earlier comment about taking just the pointer for the completion code out-parameter.",
+      "range": {
+        "startLine": 3587,
+        "startChar": 1,
+        "endLine": 3587,
+        "endChar": 49
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fa65d4e_f24bfd8a",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2525,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "Please define variables at the top of the function block:\n\nhttps://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L245-L249",
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f8e483c_d2c09649",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2531,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-04-29T05:15:21Z",
+      "side": 1,
+      "message": "The parentheses seem unnecessary here.",
+      "range": {
+        "startLine": 2531,
+        "startChar": 39,
+        "endLine": 2531,
+        "endChar": 49
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
