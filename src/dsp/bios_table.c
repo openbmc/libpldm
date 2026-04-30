@@ -151,7 +151,6 @@ static int attr_table_entry_encode_header(void *entry, size_t length,
 {
 	struct pldm_bios_attr_table_entry *attr_entry = entry;
 
-	assert(sizeof(*attr_entry) <= length);
 	if (sizeof(*attr_entry) > length) {
 		return PLDM_ERROR_INVALID_LENGTH;
 	}
