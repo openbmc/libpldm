@@ -29,21 +29,15 @@ fi
 # Ensure the test suite passes in the default configuration. Note
 # that we don't specify -Dabi=... - the default is equivalent to
 # -Dabi=deprecated,stable,testing.
-CC=gcc CXX=g++ CFLAGS=-fanalyzer meson setup "$BUILD"
+export CC=gcc CXX=g++
+meson setup "$BUILD"
+meson configure -Dabi-compliance-check=false "$BUILD"
+meson configure -Db_sanitize=address,undefined "$BUILD"
+meson configure -Dc_args=-fanalyzer "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD"
 
-# Ensure the test suite passes in release mode. libpldm specifies
-# -Db_ndebug=if-release by default, so building with --buildtype=release passes
-# -DNDEBUG to the compiler for the library implementation. This build
-# configuration will catch any unexpected changes in the library implementation
-# and incorrect test case implementations.
-meson configure --buildtype=release "$BUILD"
-meson compile -C "$BUILD"
-meson test -C "$BUILD" --timeout-multiplier 10 --wrapper 'valgrind --error-exitcode=1'
-
 # Ensure that the test suite doesn't fail to link against the stable ABI
-meson configure --buildtype=debug "$BUILD"
 meson configure -Dabi=deprecated,stable "$BUILD"
 meson compile -C "$BUILD"
 meson test -C "$BUILD"
@@ -51,9 +45,19 @@ meson test -C "$BUILD"
 # Ensure the build completes for maintenance purposes. Note that tests are
 # disabled as we don't yet guard them appropriately.
 meson configure -Dabi=stable,testing "$BUILD"
-meson configure -Dabi-compliance-check=false "$BUILD"
 meson configure -Dtests=false "$BUILD"
 meson compile -C "$BUILD"
+
+# Ensure the test suite passes in release mode. libpldm specifies
+# -Db_ndebug=if-release by default, so building with --buildtype=release passes
+# -DNDEBUG to the compiler for the library implementation. This build
+# configuration will catch any unexpected changes in the library implementation
+# and incorrect test case implementations.
+rm -rf "$BUILD"
+meson setup --buildtype=release "$BUILD"
+meson configure -Dc_args=-fanalyzer "$BUILD"
+meson compile -C "$BUILD"
+meson test -C "$BUILD" --timeout-multiplier 10 --wrapper 'valgrind --error-exitcode=1'
 
 # Ensure the set of installed headers are relatively complete by installing the
 # headers then building the library against the installed headers
@@ -66,6 +70,7 @@ meson compile -C "$BUILD"
 
   rm -rf "$BUILD"
   meson setup -Dprefix="$(realpath "$PREFIX")" "$BUILD"
+  meson configure -Dc_args=-fanalyzer "$BUILD"
   meson install -C "$BUILD"
   meson configure -Dapi="$PREFIX"/include "$BUILD"
   meson compile -C "$BUILD"
@@ -74,6 +79,7 @@ meson compile -C "$BUILD"
 # Ensure that the stable ABI matches what's recorded
 rm -rf "$BUILD"
 meson setup --cross-file meson/x86_64-linux-gnu.ini "$BUILD"
+meson configure -Dc_args=-fanalyzer "$BUILD"
 meson configure -Dabi=deprecated,stable "$BUILD"
 ! command -v abi-compliance-checker > /dev/null ||
   meson configure -Dabi-compliance-check=true "$BUILD"
@@ -85,6 +91,7 @@ meson compile -C "$BUILD"
   export QEMU_LD_PREFIX="${ARM_PREFIX}"
   rm -rf "$BUILD"
   meson setup --cross-file meson/arm-linux-gnueabihf.ini "$BUILD"
+  meson configure -Dc_args=-fanalyzer "$BUILD"
   meson compile -C "$BUILD"
   meson test -C "$BUILD"
 )
