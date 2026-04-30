@@ -1267,7 +1267,8 @@ void pldm_pdr_remove_pdrs_by_terminus_handle(pldm_pdr *repo,
 	while (record != NULL) {
 		pldm_pdr_record *next = record->next;
 		if (record->terminus_handle == terminus_handle) {
-			if (repo->first == record) {
+			if (!prev) {
+				assert(repo->first == record);
 				repo->first = next;
 			} else {
 				prev->next = next;
