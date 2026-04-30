@@ -1319,7 +1319,8 @@ void pldm_pdr_remove_remote_pdrs(pldm_pdr *repo)
 	while (record != NULL) {
 		pldm_pdr_record *next = record->next;
 		if (record->is_remote == true) {
-			if (repo->first == record) {
+			if (!prev) {
+				assert(repo->first == record);
 				repo->first = next;
 			} else {
 				prev->next = next;
