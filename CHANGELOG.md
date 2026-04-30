@@ -127,6 +127,8 @@ Change categories:
 
 ### Security
 
+- dsp: fru: Harden get_fru_record_by_option() implementation
+
 ## [v0.15.0] - 2026-01-16
 
 ### Added
