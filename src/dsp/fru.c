@@ -229,61 +229,113 @@ int get_fru_record_by_option(const uint8_t *table, size_t table_size,
 			     uint8_t *record_table, size_t *record_size,
 			     uint16_t rsi, uint8_t rt, uint8_t ft)
 {
-	const struct pldm_fru_record_data_format *record_data_src =
-		(const struct pldm_fru_record_data_format *)table;
+	const struct pldm_fru_record_data_format *record_data_src;
 	struct pldm_fru_record_data_format *record_data_dest;
-	int count = 0;
-
 	const struct pldm_fru_record_tlv *tlv;
-	size_t len;
 	uint8_t *pos = record_table;
+	uintptr_t record_terminator;
+	uintptr_t table_terminator;
+	int count = 0;
+	size_t len;
+
+	if (!table || !record_table || !record_size) {
+		return PLDM_ERROR;
+	}
+
+	if (table_size < sizeof(*record_data_src)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
+	static_assert(UINTPTR_MAX == SIZE_MAX,
+		      "uintptr_t-based arithmetic is broken");
+	if (UINTPTR_MAX - table_size < (uintptr_t)table) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+	table_terminator = (uintptr_t)(table + table_size);
+
+	if (UINTPTR_MAX - *record_size < (uintptr_t)record_table) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+	record_terminator = (uintptr_t)(record_table + *record_size);
+
+	record_data_src = (const struct pldm_fru_record_data_format *)table;
 
 	while (!is_table_end(record_data_src, table, table_size)) {
 		if ((record_data_src->record_set_id != htole16(rsi) &&
 		     rsi != 0) ||
 		    (record_data_src->record_type != rt && rt != 0)) {
 			tlv = record_data_src->tlvs;
+			len = 0;
 			for (int i = 0; i < record_data_src->num_fru_fields;
 			     i++) {
+				if (table_terminator - len < (uintptr_t)tlv) {
+					return PLDM_ERROR_INVALID_LENGTH;
+				}
+				tlv = (const void *)((const char *)tlv + len);
+
+				if (tlv->length > table_size) {
+					return PLDM_ERROR_INVALID_LENGTH;
+				}
 				len = sizeof(*tlv) - 1 + tlv->length;
-				tlv = (const struct pldm_fru_record_tlv
-					       *)((char *)tlv + len);
+			}
+
+			if (table_terminator - (sizeof(*record_data_src) -
+						sizeof(record_data_src->tlvs)) <
+			    (uintptr_t)tlv + len) {
+				break;
 			}
 			record_data_src =
-				(const struct pldm_fru_record_data_format
-					 *)(tlv);
+				(const void *)((const char *)tlv + len);
 			continue;
 		}
 
 		len = sizeof(struct pldm_fru_record_data_format) -
 		      sizeof(struct pldm_fru_record_tlv);
 
-		if (pos - record_table + len >= *record_size) {
+		if (record_terminator - (uintptr_t)pos < len) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
 		memcpy(pos, record_data_src, len);
 
-		record_data_dest = (struct pldm_fru_record_data_format *)pos;
+		record_data_dest = (void *)pos;
 		pos += len;
 
 		tlv = record_data_src->tlvs;
+		len = 0;
 		count = 0;
 		for (int i = 0; i < record_data_src->num_fru_fields; i++) {
+			if (table_terminator - len < (uintptr_t)tlv) {
+				return PLDM_ERROR_INVALID_LENGTH;
+			}
+			tlv = (const void *)((const char *)tlv + len);
+
+			if (tlv->length > table_size) {
+				return PLDM_ERROR_INVALID_LENGTH;
+			}
 			len = sizeof(*tlv) - 1 + tlv->length;
+
+			if (record_terminator - (uintptr_t)pos < len) {
+				return PLDM_ERROR_INVALID_LENGTH;
+			}
+
+			if (table_terminator - (uintptr_t)tlv < len) {
+				return PLDM_ERROR_INVALID_LENGTH;
+			}
+
 			if (tlv->type == ft || ft == 0) {
-				if (pos - record_table + len >= *record_size) {
-					return PLDM_ERROR_INVALID_LENGTH;
-				}
 				memcpy(pos, tlv, len);
 				pos += len;
 				count++;
 			}
-			tlv = (const struct pldm_fru_record_tlv *)((char *)tlv +
-								   len);
 		}
 		record_data_dest->num_fru_fields = count;
-		record_data_src =
-			(const struct pldm_fru_record_data_format *)(tlv);
+
+		if (table_terminator - (sizeof(*record_data_src) -
+					sizeof(record_data_src->tlvs)) <
+		    (uintptr_t)tlv + len) {
+			break;
+		}
+		record_data_src = (const void *)((const char *)tlv + len);
 	}
 
 	*record_size = pos - record_table;
