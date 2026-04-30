@@ -84,6 +84,7 @@ Change categories:
   pldm_state_set_boot_progress_state_values enum
 - Misspelled PLDM_ENTITY_SOLID_STATE_SRIVE, PLDM_ENTITY_FIBRECHANEL,
   PLDM_ENTITY_OMINIPATH members of the pldm_entity_id_codes enum
+- dsp: bios_table: Mark pldm_bios_table_attr_value_copy_and_update() unsafe
 
 ### Removed
 

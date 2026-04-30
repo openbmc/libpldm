@@ -1175,7 +1175,7 @@ pldm_bios_table_attr_value_find_by_handle(const void *table, size_t length,
 		attr_value_table_handle_equal, &handle);
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int pldm_bios_table_attr_value_copy_and_update(
 	const void *src_table, size_t src_length, void *dest_table,
 	size_t *dest_length, const void *entry, size_t entry_length)
