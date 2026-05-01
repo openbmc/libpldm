@@ -16,6 +16,24 @@
       "message": "I am wondering how this will look like in practice for a developer.\n\nDo we have a specific container image or script that should be run?\n\n\nOtherwise we are asking people to\n- find a container image for debian\n- build a container image based on that which also contains the required packages\n- build test from there\n\n\nI do agree with the intention here but it would be nice if we could streamline it\nfurther to be more like \"run X script\"\n\nor maybe i have misunderstood something 😊",
       "revId": "e81dd28e5e4c36b5044a2fcecdfa03020159efd0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc4ab381_8cff118d",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-01T06:20:45Z",
+      "side": 1,
+      "message": "No, I don\u0027t think you\u0027ve misunderstood anything. Language extensions should be feature-gated in the build config or the source. With those taken care of, basically it boils down to being conscious of which C standard and which meson version we\u0027re requiring. In my view these are things we can catch in review, as they will stand out in the `meson.build` diff. As such it doesn\u0027t need automated enforcement, just some awareness of the policy.\n\nI run Debian stable, so I expect I\u0027ll notice if something slips through.",
+      "parentUuid": "1d5deb93_1501966d",
+      "revId": "e81dd28e5e4c36b5044a2fcecdfa03020159efd0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
