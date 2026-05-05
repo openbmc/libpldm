@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c70071e8_dfd50f26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2026-05-05T10:37:54Z",
+      "side": 1,
+      "message": "LGTM, just one question.",
+      "revId": "9ff76acd820d38ca2d5587bcf6ae7965db90e8c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "faab6988_185f9149",
         "filename": "src/dsp/fru.c",
         "patchSetId": 1
@@ -31,6 +48,23 @@
       "writtenOn": "2026-05-05T01:45:42Z",
       "side": 1,
       "message": "not an actual bug:\nA helper function for this would probably make this easier to reason about from a safety perspective.",
+      "revId": "9ff76acd820d38ca2d5587bcf6ae7965db90e8c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e75fa28_a7ac173f",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2026-05-05T10:37:54Z",
+      "side": 1,
+      "message": "I dont\u0027 know if this case is valid but what if they pass in a malformed record that does not have a tvl length field?\ne.g\nstd::vector\u003cuint8_t\u003e table \u003d {\n          0x01, 0x00, 0x01, 0x01, 0x01,\n          0x05\n      };",
       "revId": "9ff76acd820d38ca2d5587bcf6ae7965db90e8c5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
