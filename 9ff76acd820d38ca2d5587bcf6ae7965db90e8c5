@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faab6988_185f9149",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-05-05T01:45:42Z",
+      "side": 1,
+      "message": "not an actual bug:\nA helper function for this would probably make this easier to reason about from a safety perspective.",
+      "revId": "9ff76acd820d38ca2d5587bcf6ae7965db90e8c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b564c97c_ddfa4bc9",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-05-05T01:45:42Z",
+      "side": 1,
+      "message": "This could also probably use a helper function.",
+      "revId": "9ff76acd820d38ca2d5587bcf6ae7965db90e8c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
