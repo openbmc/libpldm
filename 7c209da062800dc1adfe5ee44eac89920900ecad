@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "314214cb_b7be2bf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-05-05T09:30:16Z",
+      "side": 1,
+      "message": "i am wondering if this style of build matrix could be better expressed by using a bash function for building and testing and passing in the configuration options in multiple calls to that function. Unrelated to this specific change though, so not that important.\n\nOverall in favor of expanding the static analysis 👍",
+      "revId": "7c209da062800dc1adfe5ee44eac89920900ecad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
