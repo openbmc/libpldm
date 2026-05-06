@@ -86,6 +86,7 @@ meson compile -C "$BUILD"
   rm -rf "$BUILD"
   meson setup --cross-file meson/arm-linux-gnueabihf.ini "$BUILD"
   meson compile -C "$BUILD"
+  meson test -C "$BUILD"
 )
 
 # Reproducible builds
