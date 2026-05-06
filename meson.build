@@ -12,7 +12,7 @@ project(
         'tests': not meson.is_subproject(),
     },
     version: '0.15.0',
-    meson_version: '>=1.4.0',
+    meson_version: '>=1.6.0',
 )
 
 if get_option('bindings').contains('cpp') or get_option('tests')
