@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dadd89f4_cba117f1",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33b62f07_07ad7bab",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 51
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d25cccc2_b9b7dc86",
@@ -54,6 +78,24 @@
       "writtenOn": "2026-04-29T05:15:21Z",
       "side": 1,
       "message": "I recognise not all types in the file are named this way, but can you please include the spec name in the type name? See:\n\nhttps://github.com/openbmc/libpldm/blob/46ae245b63239150e49a9ec7beadce3d9d989283/CONTRIBUTING.md#L84-L86\n\nRelated, the member names should then be updated:\n\nhttps://github.com/openbmc/libpldm/blob/46ae245b63239150e49a9ec7beadce3d9d989283/CONTRIBUTING.md#L108",
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f3c1254_6d4bdee0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d25cccc2_b9b7dc86",
       "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -94,6 +136,54 @@
       "writtenOn": "2026-04-29T05:15:21Z",
       "side": 1,
       "message": "I\u0027ve also pushed a change to `CONTRIBUTING.md` that documents a preference for macros and bit-precise unsigned integer types in place of enums:\n\n[CONTRIBUTING: Prefer macro constants over enum types](https://gerrit.openbmc.org/c/openbmc/libpldm/+/89747)",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 2
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ab4ac83_b181924d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "858d38d1_21a7de63",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 2
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb44f96b_7e8e645f",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "422412e9_adebae83",
       "range": {
         "startLine": 214,
         "startChar": 0,
@@ -151,6 +241,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c31bc6e0_113b413a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32b71fa9_0d1fec24",
+      "range": {
+        "startLine": 1410,
+        "startChar": 1,
+        "endLine": 1411,
+        "endChar": 2
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8094dcf_1f031b45",
@@ -164,6 +278,30 @@
       "writtenOn": "2026-04-29T05:15:21Z",
       "side": 1,
       "message": "For responses whose only content is a completion code I still require `encode_*()` and `decode_*()` APIs, but I don\u0027t require that you pass a struct for them. You can just pass the completion code by value or pointer as necessary.",
+      "range": {
+        "startLine": 1413,
+        "startChar": 0,
+        "endLine": 1419,
+        "endChar": 2
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea0a887e_53a35798",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 1419,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "I see. Thanks reverting back to passing CC.",
+      "parentUuid": "b8094dcf_1f031b45",
       "range": {
         "startLine": 1413,
         "startChar": 0,
@@ -197,6 +335,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ce51f35_38cbc923",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 3569,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "862b0c60_44b3ea4b",
+      "range": {
+        "startLine": 3569,
+        "startChar": 4,
+        "endLine": 3569,
+        "endChar": 40
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6e72b9f_1a2ba8e4",
@@ -210,6 +372,30 @@
       "writtenOn": "2026-04-29T05:15:21Z",
       "side": 1,
       "message": "See note above about naming.",
+      "range": {
+        "startLine": 3585,
+        "startChar": 4,
+        "endLine": 3585,
+        "endChar": 41
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d21321d_1c93286b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 3585,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6e72b9f_1a2ba8e4",
       "range": {
         "startLine": 3585,
         "startChar": 4,
@@ -243,6 +429,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cced10f7_2377f643",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 3587,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05b0b4e0_1299c140",
+      "range": {
+        "startLine": 3587,
+        "startChar": 1,
+        "endLine": 3587,
+        "endChar": 49
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fa65d4e_f24bfd8a",
@@ -260,6 +470,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30d05d57_41c0aa25",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2525,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fa65d4e_f24bfd8a",
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f8e483c_d2c09649",
@@ -273,6 +501,30 @@
       "writtenOn": "2026-04-29T05:15:21Z",
       "side": 1,
       "message": "The parentheses seem unnecessary here.",
+      "range": {
+        "startLine": 2531,
+        "startChar": 39,
+        "endLine": 2531,
+        "endChar": 49
+      },
+      "revId": "2d20771789f6e42d7376586ae672ce557add70ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d62eb3e_296863a8",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2531,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f8e483c_d2c09649",
       "range": {
         "startLine": 2531,
         "startChar": 39,

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d8e60c1_e9d878df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-06T10:20:44Z",
+      "side": 1,
+      "message": "Addressed comments. Changed enums -\u003e macros for fixed fields and Struct members representing enumerated -\u003e changed to unsigned int.\n\nAlso reorganized the positions of the API functions to match the command order.",
+      "revId": "56c0c5cba5e3bed3b0a18f31cdc8d2ac1b19ef50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
