@@ -263,8 +263,10 @@
 
 ### Testing
 
-- [ ] Test cases are provided with reasonable branch coverage of each new
-      function I've added
+- [ ] Unit tests are provided with reasonable branch coverage of each new
+      function added
+
+- [ ] Fuzz tests are provided for each new function added
 
 ### OEM/vendor-specific APIs
 

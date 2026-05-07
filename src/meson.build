@@ -29,6 +29,7 @@ libpldm = library(
     implicit_include_directories: false,
     include_directories: [include_root, include_directories('.')],
     link_args: libpldm_link_args,
+    override_options: 'b_lundef=@0@'.format(get_option('b_sanitize') == 'none'),
     version: meson.project_version(),
     gnu_symbol_visibility: 'hidden',
     install: true,

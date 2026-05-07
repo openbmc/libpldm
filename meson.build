@@ -48,6 +48,39 @@ if get_option('bindings').contains('cpp')
     endif
 endif
 
+# Fuzzing support
+if get_option('test-methods').contains('fuzz')
+    # For clang, -fcoverage-mapping requires -fprofile-instr-generate. That
+    # requirement isn't honoured by meson's strategy for feature testing which
+    # expects flags to be independent. Assume that if -fprofile-instr-generate
+    # is supported then -fcoverage-mapping is as well.
+    cc.get_supported_arguments(
+        '-fsanitize=fuzzer',
+        '-fprofile-instr-generate',
+        checked: 'require',
+    )
+    cpp.get_supported_arguments(
+        '-fsanitize=fuzzer',
+        '-fprofile-instr-generate',
+        checked: 'require',
+    )
+    add_project_arguments(
+        '-fsanitize=fuzzer',
+        '-fprofile-instr-generate',
+        '-fcoverage-mapping',
+        language: ['c', 'cpp'],
+    )
+
+    # Avoid adding -fsanitize=fuzzer to the project link arguments. Rather,
+    # require that the flag is provided in the link arguments for relevant
+    # executables. This avoids link failures due to multiple definitions of
+    # main() for executables whose purpose isn't fuzz testing.
+    add_project_link_arguments(
+        '-fprofile-instr-generate',
+        '-fcoverage-mapping',
+        language: ['c', 'cpp'],
+    )
+endif
 
 conf = configuration_data()
 conf.set10(

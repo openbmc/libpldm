@@ -3,8 +3,10 @@ test_include_dirs = [
     include_directories('../src', '../tests'),
 ]
 
-subdir('unit')
+if get_option('test-methods').contains('unit')
+    subdir('unit')
+endif
 
-if get_option('abi').contains('testing')
+if get_option('test-methods').contains('fuzz')
     subdir('fuzz')
 endif

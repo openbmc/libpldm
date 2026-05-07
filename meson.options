@@ -33,6 +33,13 @@ option(
 )
 option('tests', type: 'boolean', description: 'Build tests')
 option(
+    'test-methods',
+    type: 'array',
+    description: 'Select the applied methods of testing',
+    choices: ['unit', 'fuzz'],
+    value: ['unit'],
+)
+option(
     'tools',
     type: 'array',
     description: 'Tools to build with the library',

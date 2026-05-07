@@ -98,3 +98,11 @@ meson compile -C "$BUILD"
 
 # Reproducible builds
 meson reprotest
+
+# Run fuzz tests for a brief time
+(
+  rm -rf "$BUILD"
+  export CC=clang CXX=clang++
+  meson setup -Dtest-methods=fuzz -Db_sanitize=address,undefined -Db_lundef=false "$BUILD"
+  meson test -C "$BUILD"
+)
