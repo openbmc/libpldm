@@ -1,5 +1,7 @@
 #include <libpldm/transport.h>
 
+#include <climits>
+
 #include "array.h"
 #include "transport/test.h"
 
