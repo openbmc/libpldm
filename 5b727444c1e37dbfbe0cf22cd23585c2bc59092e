@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4d13ec8_f8dd9a8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 36
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-08T10:08:42Z",
+      "side": 1,
+      "message": "I think your commit message needs to be updated to reflect your changes in the code. I see that `*_platform_*` is missing here but the code has it.",
+      "range": {
+        "startLine": 16,
+        "startChar": 12,
+        "endLine": 17,
+        "endChar": 12
+      },
+      "revId": "5b727444c1e37dbfbe0cf22cd23585c2bc59092e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd918c0a_1a25b2e9",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 36
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-08T10:08:42Z",
+      "side": 1,
+      "message": "I think you should move this to the top of the list\n\nhttps://github.com/openbmc/libpldm/blob/c5b9e923622ecb03739cc226d436f42f10ab9d09/CONTRIBUTING.md?plain\u003d1#L49",
+      "revId": "5b727444c1e37dbfbe0cf22cd23585c2bc59092e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0baaa7_0d17a5d3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 3451,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-08T10:08:42Z",
+      "side": 1,
+      "message": "Return value is silently dropped. I would suggest check return value in case of failure.",
+      "revId": "5b727444c1e37dbfbe0cf22cd23585c2bc59092e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d0ead03_1fc7da3f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 3459,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-08T10:08:42Z",
+      "side": 1,
+      "message": "This API is missing from the changelog.",
+      "revId": "5b727444c1e37dbfbe0cf22cd23585c2bc59092e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ff2dcb4_45a5a8aa",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 3487,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-08T10:08:42Z",
+      "side": 1,
+      "message": "Same as my above comment on return value silently dropped.",
+      "revId": "5b727444c1e37dbfbe0cf22cd23585c2bc59092e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d298a71b_d4e1f73e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 3494,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-08T10:08:42Z",
+      "side": 1,
+      "message": "Same as my previous comment on missing entry in changelog.",
+      "revId": "5b727444c1e37dbfbe0cf22cd23585c2bc59092e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5712b542_732ee003",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 3517,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-08T10:08:42Z",
+      "side": 1,
+      "message": "Same as my above comment on return value silently dropped.",
+      "revId": "5b727444c1e37dbfbe0cf22cd23585c2bc59092e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2591808f_0ff36b12",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 3522,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-08T10:08:42Z",
+      "side": 1,
+      "message": "Same as my above comment on return value silently dropped.",
+      "revId": "5b727444c1e37dbfbe0cf22cd23585c2bc59092e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
