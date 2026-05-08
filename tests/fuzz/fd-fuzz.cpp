@@ -11,6 +11,7 @@
 #include <libpldm/firmware_fd.h>
 #include <libpldm/firmware_update.h>
 #include <libpldm/sizes.h>
+#include <unistd.h>
 
 #include <cstdarg>
 #include <cstdint>
