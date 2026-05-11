@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3efedabf_6c057e76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 35
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-11T00:07:12Z",
+      "side": 1,
+      "message": "Can you please add the `dsp:` prefix also (as this change implements things specified by a DMTF Standard Publication)?\n\n```\ndsp: platform: Add iterators for effecter auxiliary names\n```",
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b6f15a4_9260b50b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 35
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-11T00:07:12Z",
+      "side": 1,
+      "message": "Is there a reason this can\u0027t reference v1.3.0 instead? v1.2.0 is now 7 years old, with several new revisions published in the intervening time.",
+      "range": {
+        "startLine": 10,
+        "startChar": 34,
+        "endLine": 11,
+        "endChar": 8
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92d9a553_22fd767c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 35
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-11T00:07:12Z",
+      "side": 1,
+      "message": "I suggest removing this. The list is evident from the patch itself.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 1
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16eadd38_b9a15374",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 35
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-11T00:07:12Z",
+      "side": 1,
+      "message": "See the documentation here:\n\nhttps://github.com/openbmc/libpldm/blob/4509e841f6a4cad2411aa00db7cefac52330f9d2/CONTRIBUTING.md#L469-L500\n\nIn my opinion your change falls into the \"simple\" case there - listing just the commit subject is enough.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 67
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "333d6a9a_f2fe3b3b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-11T00:07:12Z",
+      "side": 1,
+      "message": "I understand the rest of the file isn\u0027t really organised this way, but my preference is that length macros are defined immediately below their relevant struct.\n\nCan you please move this?",
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1748fc88_13e0d92b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-11T00:07:12Z",
+      "side": 1,
+      "message": "If you\u0027re going to represent the `tag` member as `const char *` then I expect we can omit `tag_length` as you\u0027re stating that `tag` is a valid C string. If it\u0027s not a valid C string (which we should be wary of if it\u0027s pointing into the message buffer) you should use `struct variable_field` instead.",
+      "range": {
+        "startLine": 656,
+        "startChar": 1,
+        "endLine": 657,
+        "endChar": 19
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47b462da_875688c7",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-11T00:07:12Z",
+      "side": 1,
+      "message": "See comment above.\n\nHowever, for the purpose of multi-byte string encodings I\u0027ve come to the conclusion that we shouldn\u0027t shoot for a valid representation there. We should instead punt to the user\u0027s string decoding implementation by only presenting them with a `struct variable_field`.",
+      "range": {
+        "startLine": 658,
+        "startChar": 1,
+        "endLine": 659,
+        "endChar": 20
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1339909f_4c9c827c",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-11T00:07:12Z",
+      "side": 1,
+      "message": "I prefer you move these declarations down below with the other hunk.",
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79adf59f_90429d17",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-11T00:07:12Z",
+      "side": 1,
+      "message": "Can you please use the uncontracted `auxiliary` form consistently throughout your change?\n\nI\u0027ve pushed a change to `CONTRIBUTING` to document why:",
+      "range": {
+        "startLine": 1013,
+        "startChar": 30,
+        "endLine": 1013,
+        "endChar": 33
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

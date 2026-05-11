@@ -60,6 +60,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d71602de_7bd4b9e3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 3451,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-11T00:07:12Z",
+      "side": 1,
+      "message": "It\u0027s not intended that the return value be checked here. The time to check return values is when the variable the field is extracted _to_ is used _before_ the implementation returns to the caller. For example, how `pdr-\u003eeffecter_count` is tested above on lines 3444-3447, as it is used below on line 3453. If it\u0027s not used then no explicit test is necessary: the failure tests are batched up by calls to the `pldm_msgbuf_complete*()` APIs. This improves ergonomics in the implementation as this way we don\u0027t require tests after every extraction (or insertion).",
+      "parentUuid": "bc0baaa7_0d17a5d3",
+      "revId": "5b727444c1e37dbfbe0cf22cd23585c2bc59092e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d0ead03_1fc7da3f",
         "filename": "src/dsp/platform.c",
         "patchSetId": 36
