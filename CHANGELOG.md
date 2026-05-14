@@ -50,6 +50,11 @@ Change categories:
 - dsp: platform: Iterator macros for State Effecter PDR
 - base: Added PLDM Base MultipartSend support
 - dsp: platform: add PLDM_SET_STATE_EFFECTER_STATES_MIN_REQ_BYTES
+- dsp: platform: Stabilise iterator APIs for State Effecter PDR
+  - `pldm_platform_state_effecter_pdr_iter_init`
+  - `decode_pldm_platform_state_effecter_pdr_from_iter`
+  - `pldm_platform_state_effecter_pdr_possible_states_iter_init`
+  - `decode_pldm_platform_state_effecter_pdr_possible_states_from_iter`
 
 ### Changed
 
