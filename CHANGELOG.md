@@ -80,6 +80,12 @@ Change categories:
 - libpldm: api: Don't diagnose implementation use of unstable features
 - Use #pragma once include guards everywhere
 
+- dsp: platform: Stabilise iterator APIs for State Effecter PDR
+  - `pldm_platform_state_effecter_pdr_iter_init`
+  - `decode_pldm_platform_state_effecter_pdr_from_iter`
+  - `pldm_platform_state_effecter_pdr_possible_states_iter_init`
+  - `decode_pldm_platform_state_effecter_pdr_possible_states_from_iter`
+
 ### Deprecated
 
 - `struct pldm_get_types_resp`
