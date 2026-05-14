@@ -78,6 +78,12 @@ Change categories:
 
 - libpldm: api: Don't diagnose implementation use of unstable features
 
+- dsp: platform: Stabilise iterator APIs for State Effecter PDR
+  - `pldm_platform_state_effecter_pdr_iter_init`
+  - `decode_pldm_platform_state_effecter_pdr_from_iter`
+  - `pldm_platform_state_effecter_pdr_possible_states_iter_init`
+  - `decode_pldm_platform_state_effecter_pdr_possible_states_from_iter`
+
 ### Deprecated
 
 - Misspelled PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG member of the
