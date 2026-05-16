@@ -36,7 +36,7 @@ static int fuzz_get_fru_record_by_option(const uint8_t* data, size_t size)
     rc = pldm_msgbuf_complete(buf);
     if (rc)
     {
-        return pldm_msgbuf_discard(buf, -1);
+        return -1;
     }
 
     record = malloc(record_size);
