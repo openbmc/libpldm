@@ -26,6 +26,7 @@ if get_option('test-methods').contains('fuzz')
             '-jobs=@0@'.format(jobs),
             '-workers=@0@'.format(jobs),
         ],
+        env: {'LLVM_PROFILE_FILE': 'fuzz.%p.profraw'},
         is_parallel: false,
         timeout: 0,
     )
