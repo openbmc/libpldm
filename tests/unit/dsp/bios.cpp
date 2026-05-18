@@ -701,7 +701,8 @@ TEST(SetBiosAttributeCurrentValue, testGoodEncodeRequest)
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_attribute_current_value_req*>(
             request->payload);
-    EXPECT_EQ(htole32(transferHandle), req->transfer_handle);
+    uint32_t reqTransferHandle = req->transfer_handle;
+    EXPECT_EQ(htole32(transferHandle), reqTransferHandle);
     EXPECT_EQ(transferFlag, req->transfer_flag);
     EXPECT_EQ(
         0, memcmp(&attributeData, req->attribute_data, sizeof(attributeData)));
@@ -976,7 +977,8 @@ TEST(SetBIOSTable, testGoodEncodeRequest)
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_bios_table_req*>(request->payload);
 
-    EXPECT_EQ(htole32(transferHandle), req->transfer_handle);
+    uint32_t reqTransferHandle = req->transfer_handle;
+    EXPECT_EQ(htole32(transferHandle), reqTransferHandle);
     EXPECT_EQ(transferFlag, req->transfer_flag);
     EXPECT_EQ(tableType, req->table_type);
     EXPECT_EQ(0, memcmp(&tableData, req->table_data, sizeof(tableData)));

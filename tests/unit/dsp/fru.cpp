@@ -235,11 +235,31 @@ TEST(GetFruRecordTableMetadata, testGoodEncodeResponse)
     ASSERT_EQ(response->completion_code, PLDM_SUCCESS);
     ASSERT_EQ(response->fru_data_major_version, 0x12u);
     ASSERT_EQ(response->fru_data_minor_version, 0x21u);
-    ASSERT_EQ(response->fru_table_maximum_size, 0x1234abcdu);
-    ASSERT_EQ(response->fru_table_length, 0x56781234u);
-    ASSERT_EQ(response->total_record_set_identifiers, 0x34efu);
-    ASSERT_EQ(response->total_table_records, 0xeeefu);
-    ASSERT_EQ(response->checksum, 0x6543fa71u);
+
+    {
+        uint32_t aligned = response->fru_table_maximum_size;
+        ASSERT_EQ(aligned, 0x1234abcdu);
+    }
+
+    {
+        uint32_t aligned = response->fru_table_length;
+        ASSERT_EQ(aligned, 0x56781234u);
+    }
+
+    {
+        uint16_t aligned = response->total_record_set_identifiers;
+        ASSERT_EQ(aligned, 0x34efu);
+    }
+
+    {
+        uint16_t aligned = response->total_table_records;
+        ASSERT_EQ(aligned, 0xeeefu);
+    }
+
+    {
+        uint32_t aligned = response->checksum;
+        ASSERT_EQ(aligned, 0x6543fa71u);
+    }
 
     response->fru_data_major_version = 0;
     response->fru_data_major_version = 0x00;
@@ -263,11 +283,31 @@ TEST(GetFruRecordTableMetadata, testGoodEncodeResponse)
     ASSERT_EQ(completion_code, PLDM_ERROR_INVALID_DATA);
     ASSERT_EQ(response->fru_data_major_version, 0x00u);
     ASSERT_EQ(response->fru_data_minor_version, 0x00u);
-    ASSERT_EQ(response->fru_table_maximum_size, 0x00000000u);
-    ASSERT_EQ(response->fru_table_length, 0x00000000u);
-    ASSERT_EQ(response->total_record_set_identifiers, 0x0000u);
-    ASSERT_EQ(response->total_table_records, 0x0000u);
-    ASSERT_EQ(response->checksum, 0x00000000u);
+
+    {
+        uint32_t aligned = response->fru_table_maximum_size;
+        ASSERT_EQ(aligned, 0);
+    }
+
+    {
+        uint32_t aligned = response->fru_table_length;
+        ASSERT_EQ(aligned, 0);
+    }
+
+    {
+        uint16_t aligned = response->fru_table_length;
+        ASSERT_EQ(aligned, 0);
+    }
+
+    {
+        uint16_t aligned = response->total_table_records;
+        ASSERT_EQ(aligned, 0);
+    }
+
+    {
+        uint32_t aligned = response->checksum;
+        ASSERT_EQ(aligned, 0);
+    }
 }
 
 TEST(GetFruRecordTableMetadata, testBadEncodeResponse)
@@ -300,11 +340,31 @@ TEST(GetFruRecordTableMetadata, testBadEncodeResponse)
     ASSERT_EQ(completion_code, PLDM_SUCCESS);
     ASSERT_EQ(response->fru_data_major_version, 0x00u);
     ASSERT_EQ(response->fru_data_minor_version, 0x00u);
-    ASSERT_EQ(response->fru_table_maximum_size, 0x00000000u);
-    ASSERT_EQ(response->fru_table_length, 0x00000000u);
-    ASSERT_EQ(response->total_record_set_identifiers, 0x0000u);
-    ASSERT_EQ(response->total_table_records, 0x0000u);
-    ASSERT_EQ(response->checksum, 0x00000000u);
+
+    {
+        uint32_t aligned = response->fru_table_maximum_size;
+        ASSERT_EQ(aligned, 0);
+    }
+
+    {
+        uint32_t aligned = response->fru_table_length;
+        ASSERT_EQ(aligned, 0);
+    }
+
+    {
+        uint16_t aligned = response->fru_table_length;
+        ASSERT_EQ(aligned, 0);
+    }
+
+    {
+        uint16_t aligned = response->total_table_records;
+        ASSERT_EQ(aligned, 0);
+    }
+
+    {
+        uint32_t aligned = response->checksum;
+        ASSERT_EQ(aligned, 0);
+    }
 }
 
 TEST(GetFruRecordTable, testGoodDecodeRequest)
@@ -443,7 +503,12 @@ TEST(GetFruRecordTable, testGoodEncodeRequest)
     ASSERT_EQ(requestPtr->hdr.instance_id, 0u);
     ASSERT_EQ(requestPtr->hdr.type, PLDM_FRU);
     ASSERT_EQ(requestPtr->hdr.command, PLDM_GET_FRU_RECORD_TABLE);
-    ASSERT_EQ(le32toh(data_transfer_handle), request->data_transfer_handle);
+
+    {
+        uint32_t reqDataTransferHandle = request->data_transfer_handle;
+        ASSERT_EQ(le32toh(data_transfer_handle), reqDataTransferHandle);
+    }
+
     ASSERT_EQ(transfer_operation_flag, request->transfer_operation_flag);
 }
 

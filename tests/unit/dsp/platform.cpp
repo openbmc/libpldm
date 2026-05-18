@@ -497,8 +497,17 @@ TEST(GetPDR, testGoodDecodeResponseSafe)
                                   sizeof(resp_data) - sizeof(*resp), &crc);
     ASSERT_EQ(rc, 0);
     EXPECT_EQ(resp->completion_code, PLDM_SUCCESS);
-    EXPECT_EQ(resp->next_record_handle, 0u);
-    EXPECT_EQ(resp->next_data_transfer_handle, 0u);
+
+    {
+        uint32_t aligned = resp->next_record_handle;
+        EXPECT_EQ(aligned, 0u);
+    }
+
+    {
+        uint32_t aligned = resp->next_data_transfer_handle;
+        EXPECT_EQ(aligned, 0u);
+    }
+
     EXPECT_EQ(resp->transfer_flag, PLDM_END);
     ASSERT_EQ(resp->response_count, sizeof(recordData) - 1);
     EXPECT_EQ(crc, 96u);
@@ -894,7 +903,11 @@ TEST(SetNumericEffecterValue, testGoodEncodeRequest)
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<struct pldm_set_numeric_effecter_value_req*>(
             request->payload);
-    EXPECT_EQ(effecter_id, req->effecter_id);
+    {
+        uint16_t aligned = req->effecter_id;
+        EXPECT_EQ(effecter_id, aligned);
+    }
+
     EXPECT_EQ(effecter_data_size, req->effecter_data_size);
     uint16_t* val = (uint16_t*)req->effecter_value;
     *val = le16toh(*val);
@@ -5481,8 +5494,17 @@ TEST(decodeNumericEffecterPdrData, Uint32Test)
     EXPECT_EQ(PLDM_SUCCESS, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_UINT32, decodedPdr.effecter_data_size);
-    EXPECT_EQ(4096u, decodedPdr.max_settable.value_u32);
-    EXPECT_EQ(0u, decodedPdr.min_settable.value_u32);
+
+    {
+        union_effecter_data_size aligned = decodedPdr.max_settable;
+        EXPECT_EQ(4096u, aligned.value_u32);
+    }
+
+    {
+        union_effecter_data_size aligned = decodedPdr.min_settable;
+        EXPECT_EQ(0u, aligned.value_u32);
+    }
+
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_UINT32, decodedPdr.range_field_format);
     EXPECT_EQ(0x1fu, decodedPdr.range_field_support.byte);
     EXPECT_EQ(5000000u, decodedPdr.nominal_value.value_u32);
@@ -5591,8 +5613,17 @@ TEST(decodeNumericEffecterPdrData, Sint32Test)
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
     EXPECT_EQ(PLDM_SUCCESS, rc);
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_SINT32, decodedPdr.effecter_data_size);
-    EXPECT_EQ(100000, decodedPdr.max_settable.value_s32);
-    EXPECT_EQ(-100000, decodedPdr.min_settable.value_s32);
+
+    {
+        union_effecter_data_size aligned = decodedPdr.max_settable;
+        EXPECT_EQ(100000, aligned.value_u32);
+    }
+
+    {
+        union_effecter_data_size aligned = decodedPdr.min_settable;
+        EXPECT_EQ(-100000, aligned.value_u32);
+    }
+
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_SINT32, decodedPdr.range_field_format);
     EXPECT_EQ(0x1f, decodedPdr.range_field_support.byte);
     EXPECT_EQ(0, decodedPdr.nominal_value.value_s32);
@@ -5705,8 +5736,17 @@ TEST(decodeNumericEffecterPdrData, Real32Test)
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_SINT32, decodedPdr.effecter_data_size);
     EXPECT_FLOAT_EQ(1.0f, decodedPdr.state_transition_interval);
     EXPECT_FLOAT_EQ(1.0f, decodedPdr.transition_interval);
-    EXPECT_EQ(100000, decodedPdr.max_settable.value_s32);
-    EXPECT_EQ(-100000, decodedPdr.min_settable.value_s32);
+
+    {
+        union_effecter_data_size aligned = decodedPdr.max_settable;
+        EXPECT_EQ(100000, aligned.value_u32);
+    }
+
+    {
+        union_effecter_data_size aligned = decodedPdr.min_settable;
+        EXPECT_EQ(-100000, aligned.value_u32);
+    }
+
     EXPECT_EQ(PLDM_RANGE_FIELD_FORMAT_REAL32, decodedPdr.range_field_format);
     EXPECT_EQ(0x1f, decodedPdr.range_field_support.byte);
     EXPECT_FLOAT_EQ(0, decodedPdr.nominal_value.value_f32);
