@@ -2992,9 +2992,9 @@ TEST(GetNumericEffecterValue, testBadDecodeRequest)
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
-    struct pldm_set_numeric_effecter_value_req* req =
+    struct pldm_get_numeric_effecter_value_req* req =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-        reinterpret_cast<struct pldm_set_numeric_effecter_value_req*>(
+        reinterpret_cast<struct pldm_get_numeric_effecter_value_req*>(
             request->payload);
 
     uint16_t effecter_id = 0x1a;
@@ -3766,7 +3766,7 @@ TEST(SetStateSensorEnables, testDecodeInvalidEventRequest)
 #if HAVE_LIBPLDM_API_TESTING
 TEST(GetEventReceiver, testGoodEncodeRequest)
 {
-    std::array<uint8_t, hdrSize> requestMsg{};
+    std::array<uint8_t, sizeof(pldm_msg)> requestMsg{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto request = new (requestMsg.data()) pldm_msg;
     auto rc =

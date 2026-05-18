@@ -878,7 +878,7 @@ TEST(GetBIOSTable, testDecodeResponse)
     uint8_t completionCode = PLDM_SUCCESS;
     uint8_t transfer_flag = PLDM_START_AND_END;
 
-    std::array<uint8_t, hdrSize + PLDM_GET_BIOS_TABLE_MIN_RESP_BYTES>
+    std::array<uint8_t, sizeof(pldm_msg) + PLDM_GET_BIOS_TABLE_MIN_RESP_BYTES>
         responseMsg{};
     struct pldm_msg* response =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)

@@ -726,15 +726,14 @@ TEST(PDRAccess, testRemoveBySensorIDDecodeFailure)
     auto repo = pldm_pdr_init();
     ASSERT_NE(repo, nullptr);
 
-    // Create a deliberately undersized PDR record
-    size_t invalidPdrSize = sizeof(pldm_state_sensor_pdr) - 4; // Invalid size
-    std::vector<uint8_t> entry(invalidPdrSize, 0);
+    // Report an undersized PDR record
+    std::vector<uint8_t> entry(sizeof(pldm_state_sensor_pdr), 0);
     pldm_state_sensor_pdr* pdr = new (entry.data()) pldm_state_sensor_pdr;
     pdr->hdr.type = PLDM_STATE_SENSOR_PDR;
     pdr->sensor_id = 50; // random ID
 
     uint32_t record_handle = 0;
-    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1,
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size() - 4, false, 1,
                            &record_handle),
               0);
     // Attempt to delete the malformed record by effecter_id
@@ -897,15 +896,15 @@ TEST(PDRAccess, testRemoveByEffecterIDDecodeFailure)
     auto repo = pldm_pdr_init();
     ASSERT_NE(repo, nullptr);
 
-    // Create a deliberately undersized PDR record
-    size_t invalidPdrSize = sizeof(pldm_state_effecter_pdr) - 5; // Invalid size
+    // Report an undersized PDR record
+    size_t invalidPdrSize = sizeof(pldm_state_effecter_pdr); // Invalid size
     std::vector<uint8_t> entry(invalidPdrSize, 0);
     pldm_state_effecter_pdr* pdr = new (entry.data()) pldm_state_effecter_pdr;
     pdr->hdr.type = PLDM_STATE_EFFECTER_PDR;
     pdr->effecter_id = 99; // random ID
 
     uint32_t record_handle = 0;
-    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1,
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size() - 5, false, 1,
                            &record_handle),
               0);
 

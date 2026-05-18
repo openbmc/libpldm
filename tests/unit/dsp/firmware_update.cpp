@@ -1039,7 +1039,7 @@ TEST(DecodeComponentImageInfo, errorPaths)
 
 TEST(QueryDeviceIdentifiers, goodPathEncodeRequest)
 {
-    std::array<uint8_t, sizeof(pldm_msg_hdr)> requestMsg{};
+    std::array<uint8_t, sizeof(pldm_msg)> requestMsg{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
@@ -1155,7 +1155,7 @@ TEST(QueryDeviceIdentifiers, goodPathEncodeResponse)
 
 TEST(GetFirmwareParameters, goodPathEncodeRequest)
 {
-    std::array<uint8_t, sizeof(pldm_msg_hdr)> requestMsg{};
+    std::array<uint8_t, sizeof(pldm_msg)> requestMsg{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     uint8_t instanceId = 0x01;
@@ -1858,7 +1858,7 @@ TEST(GetFirmwareParameters, goodPathDecodeComponentParameterEntry)
 TEST(QueryDownstreamDevices, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
-    std::array<uint8_t, sizeof(pldm_msg_hdr)> requestMsg{};
+    std::array<uint8_t, sizeof(pldm_msg)> requestMsg{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
 

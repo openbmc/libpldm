@@ -11,7 +11,7 @@
 
 TEST(GetFruRecordTableMetadata, testGoodEncodeRequest)
 {
-    std::array<uint8_t, sizeof(pldm_msg_hdr)> requestMsg{};
+    std::array<uint8_t, sizeof(pldm_msg)> requestMsg{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto requestPtr = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = encode_get_fru_record_table_metadata_req(
@@ -365,7 +365,7 @@ TEST(GetFruRecordTable, testGoodEncodeResponse)
     uint32_t next_data_transfer_handle = 32;
     uint8_t transfer_flag = PLDM_START_AND_END;
 
-    std::vector<uint8_t> responseMsg(sizeof(pldm_msg_hdr) +
+    std::vector<uint8_t> responseMsg(sizeof(pldm_msg) +
                                      PLDM_GET_FRU_RECORD_TABLE_MIN_RESP_BYTES);
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
