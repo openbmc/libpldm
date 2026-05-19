@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9c8f178_68778262",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002348
+      },
+      "writtenOn": "2026-05-19T06:24:01Z",
+      "side": 1,
+      "message": "No worries. I have a few queries regarding the fuzz tests:\n1. Can I include these fuzz tests within the same ```fuzz.c``` file, or do I need to create a new file?\n2. The ```foreach_*()``` macros internally invoke the decode functions (unless init or other checks fail). However, do you want me to add separate fuzz tests for the decode methods? And also I hope a single fuzz test would be sufficient for covering both foreach macros.\n3. For the state effecter PDR, do you want the whole fuzz input treated as the raw PDR buffer, or a prefixed layout (e.g., a leading length, then the PDR bytes) so the fuzzer can vary pdr_size independently of the buffer contents?",
+      "parentUuid": "768c31d6_7ee256ab",
+      "revId": "aa35aee7d3292aea48fbe265eecfaefb5010cac4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "087952a0_042e93de",
         "filename": "CHANGELOG.md",
         "patchSetId": 1
