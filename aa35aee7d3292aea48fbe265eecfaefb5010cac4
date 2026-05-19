@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22e0528a_65170fed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-19T02:12:33Z",
+      "side": 1,
+      "message": "Hi Jinu,\n\nRecently I\u0027ve started asking that new APIs also add a fuzz test:\n\nhttps://github.com/openbmc/libpldm/blob/8bfb20aa3d82cf892a50eef3258819c6170a6e0b/CONTRIBUTING.md#L269\n\nBefore we stabilise these, can you please do so (in a separate commit as a parent of this one)?\n\nThe fuzz implementation is here:\n\nhttps://github.com/openbmc/libpldm/blob/main/tests/fuzz/fuzz.c\n\nThe implementation should use the decoder and the `foreach_*()` macros you\u0027ve added for the state effecter PDR.\n\nLet me know if you have questions.",
+      "revId": "aa35aee7d3292aea48fbe265eecfaefb5010cac4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "087952a0_042e93de",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-19T02:12:33Z",
+      "side": 1,
+      "message": "This should go in the `### Changed` section.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 71
+      },
+      "revId": "aa35aee7d3292aea48fbe265eecfaefb5010cac4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
