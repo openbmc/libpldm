@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35feee65_5a979d99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-22T01:07:49Z",
+      "side": 1,
+      "message": "Heh, this should be lower-case.",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 2
+      },
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66eaa093_df37ef4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-22T01:07:49Z",
+      "side": 1,
+      "message": "Hi Vishnu, I have a few more comments that are hopefully straight-forward to resolve. Otherwise, it largely looks to be in reasonable shape.",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "779c3ced_f9996c02",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1402,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-22T01:07:49Z",
+      "side": 1,
+      "message": "This needs to be renamed (`pldm_platform_set_numeric_sensor_enable_req`) before we stabilise the related APIs.\n\nIdeally we\u0027d do it now, if you don\u0027t mind.",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f5467cf_67155cb0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-22T01:07:49Z",
+      "side": 1,
+      "message": "While we\u0027re renaming things, this should be `sensor_operational_state`",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feead716_e829b712",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-22T01:07:49Z",
+      "side": 1,
+      "message": "And this should be `sensor_event_message_enable`",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49f2282e_00852436",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-22T01:07:49Z",
+      "side": 1,
+      "message": "Can you please mark this as `LIBPLDM_API_TESTING`?",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9debc6_530a7b15",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 2496,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-22T01:07:49Z",
+      "side": 1,
+      "message": "Please don\u0027t require exact-sized output buffers, that\u0027s quite hostile to the caller.",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fed4737_af1a5171",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 2501,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-22T01:07:49Z",
+      "side": 1,
+      "message": "This should be `size_t *payload_length`:\n\nhttps://github.com/openbmc/libpldm/blob/8bfb20aa3d82cf892a50eef3258819c6170a6e0b/CONTRIBUTING.md#L150-L152",
+      "range": {
+        "startLine": 2501,
+        "startChar": 23,
+        "endLine": 2501,
+        "endChar": 44
+      },
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "488b0576_386059f3",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2329,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-22T01:07:49Z",
+      "side": 1,
+      "message": "You\u0027ll need to test `payload_length` here also.",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16d28a97_84673461",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2363,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-22T01:07:49Z",
+      "side": 1,
+      "message": "Please use `pldm_msgbuf_complete_used()` instead.",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
