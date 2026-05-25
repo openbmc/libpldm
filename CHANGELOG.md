@@ -80,6 +80,7 @@ Change categories:
 
 ### Deprecated
 
+- `struct pldm_get_types_resp`
 - Misspelled PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG member of the
   pldm_state_set_boot_progress_state_values enum
 - Misspelled PLDM_ENTITY_SOLID_STATE_SRIVE, PLDM_ENTITY_FIBRECHANEL,

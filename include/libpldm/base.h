@@ -6,6 +6,7 @@
 extern "C" {
 #endif
 
+#include <libpldm/api.h>
 #include <libpldm/byteorder.h>
 #include <libpldm/compiler.h>
 #include <libpldm/pldm_types.h>
@@ -310,7 +311,7 @@ struct pldm_get_types_resp {
 	uint8_t completion_code; //!< completion code
 	bitfield8_t types[8]; //!< each bit represents whether a given PLDM Type
 			      //!< is supported
-} __attribute__((packed));
+} __attribute__((packed)) LIBPLDM_API_DEPRECATED;
 
 /** @struct pldm_get_commands_req
  *
