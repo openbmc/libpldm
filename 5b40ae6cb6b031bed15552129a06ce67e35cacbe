@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "70407ecf_81c6554b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-25T09:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35feee65_5a979d99",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 2
+      },
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "66eaa093_df37ef4b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 23
@@ -58,6 +82,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6d2c501_f069bcea",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1402,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-25T09:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "779c3ced_f9996c02",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f5467cf_67155cb0",
@@ -71,6 +113,24 @@
       "writtenOn": "2026-05-22T01:07:49Z",
       "side": 1,
       "message": "While we\u0027re renaming things, this should be `sensor_operational_state`",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f15da70_8512bea8",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-25T09:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f5467cf_67155cb0",
       "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -92,6 +152,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bbf1e33_2135d2f5",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-25T09:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feead716_e829b712",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49f2282e_00852436",
@@ -109,6 +187,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a02d8ca_3515e2d9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-25T09:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49f2282e_00852436",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c9debc6_530a7b15",
@@ -122,6 +218,24 @@
       "writtenOn": "2026-05-22T01:07:49Z",
       "side": 1,
       "message": "Please don\u0027t require exact-sized output buffers, that\u0027s quite hostile to the caller.",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1add405_54e9a995",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 2496,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-25T09:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c9debc6_530a7b15",
       "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -149,6 +263,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d8c4809_3d24763d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 2501,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-25T09:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fed4737_af1a5171",
+      "range": {
+        "startLine": 2501,
+        "startChar": 23,
+        "endLine": 2501,
+        "endChar": 44
+      },
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "488b0576_386059f3",
@@ -166,6 +304,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7cc9ff5_93650f64",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2329,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-25T09:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "488b0576_386059f3",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16d28a97_84673461",
@@ -179,6 +335,24 @@
       "writtenOn": "2026-05-22T01:07:49Z",
       "side": 1,
       "message": "Please use `pldm_msgbuf_complete_used()` instead.",
+      "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4096133_fdfd79bf",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2363,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-05-25T09:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16d28a97_84673461",
       "revId": "5b40ae6cb6b031bed15552129a06ce67e35cacbe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
