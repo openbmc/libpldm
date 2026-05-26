@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include <libpldm/pldm.h>
+#include <libpldm/pldm_types.h>
 #include <compiler.h>
 
 #ifndef PLDM_CONTROL_MAX_VERSION_TYPES
