@@ -3,6 +3,10 @@
 #include <libpldm/pldm.h>
 #include <libpldm/base.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum pldm_control_completion_codes {
 	PLDM_CONTROL_INVALID_DATA_TRANSFER_HANDLE = 0x80,
 	PLDM_CONTROL_INVALID_TRANSFER_OPERATION_FLAG = 0x81,
@@ -57,3 +61,7 @@ int pldm_control_setup(struct pldm_control *control, size_t pldm_control_size);
 int pldm_control_add_type(struct pldm_control *control, uint8_t pldm_type,
 			  const void *versions, size_t versions_count,
 			  const bitfield8_t *commands);
+
+#ifdef __cplusplus
+}
+#endif
