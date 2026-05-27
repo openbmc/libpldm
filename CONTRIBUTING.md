@@ -661,3 +661,9 @@ types to represent message content.
 
 [matthew-prast-little-proofs]:
   https://the-nerve-blog.ghost.io/to-be-a-better-programmer-write-little-proofs-in-your-head/
+
+- [An (In-)Complete Guide to C++ Object Lifetimes - Jonathan
+  Müller][jonathan-müller-c++-object-lifetimes]
+
+[jonathan-müller-c++-object-lifetimes]:
+  https://www.think-cell.com/assets/en/career/talks/pdf/think-cell_talk_lifetime.pdf
