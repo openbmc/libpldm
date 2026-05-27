@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- platform_device: Add `pldm_platform_pd` (DSP0248 v1.2.0) responder
 - dsp: base: Introduce `encode_pldm_base_get_pldm_types_resp()`
 - dsp: base: Introduce `decode_pldm_base_get_pldm_types_resp()`
 - dsp: platform: Add requester APIs for SetNumericSensorEnable

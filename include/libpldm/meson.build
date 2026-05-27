@@ -15,6 +15,7 @@ libpldm_headers = files(
     'instance-id.h',
     'pdr.h',
     'platform.h',
+    'platform_device.h',
     'pldm.h',
     'pldm_types.h',
     'rde.h',
@@ -69,10 +70,16 @@ sizeof_pldm_control = cc.sizeof(
     prefix: '#include "control-internal.h"',
     include_directories: [include_src, include_root],
 )
+sizeof_pldm_platform_pd = cc.sizeof(
+    'struct pldm_platform_pd',
+    prefix: '#include "platform_device/pd-internal.h"',
+    include_directories: [include_src, include_root],
+)
 sizes_h = configure_file(
     configuration: {
         'sizeof_pldm_fd': sizeof_pldm_fd,
         'sizeof_pldm_control': sizeof_pldm_control,
+        'sizeof_pldm_platform_pd': sizeof_pldm_platform_pd,
     },
     input: 'sizes.h.in',
     output: 'sizes.h',
