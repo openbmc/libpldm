@@ -117,6 +117,7 @@ if get_option('bindings').contains('cpp')
 endif
 
 subdir('tools')
+subdir('examples')
 
 doxygen = find_program('doxygen', required: false)
 if doxygen.found()

@@ -5,3 +5,6 @@
 
 /* sizeof(struct pldm_control) */
 #define PLDM_SIZEOF_PLDM_CONTROL @sizeof_pldm_control@
+
+/* sizeof(struct pldm_platform_pd) */
+#define PLDM_SIZEOF_PLDM_PLATFORM_PD @sizeof_pldm_platform_pd@

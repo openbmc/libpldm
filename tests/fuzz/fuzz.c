@@ -5,6 +5,7 @@
 #include <libpldm/fru.h>
 #include <libpldm/pdr.h>
 #include <libpldm/platform.h>
+#include <libpldm/platform_pd.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -572,12 +573,162 @@ static int fuzz_pldm_entity_association_pdr_extract(const uint8_t* data,
     return 0;
 }
 
+static uint8_t
+    fuzz_pd_get_sensor_reading(void* ctx LIBPLDM_CC_UNUSED,
+                               const struct pldm_numeric_sensor_value_pdr* pdr,
+                               bool8_t rearm_event_state LIBPLDM_CC_UNUSED,
+                               struct pldm_platform_pd_sensor_state* state)
+{
+    state->operational_state = PLDM_SENSOR_ENABLED;
+    state->event_enable = PLDM_NO_EVENT_GENERATION;
+    state->present_state = PLDM_SENSOR_NORMAL;
+    state->previous_state = PLDM_SENSOR_NORMAL;
+    state->event_state = PLDM_SENSOR_NORMAL;
+
+    switch (pdr->sensor_data_size)
+    {
+        case PLDM_SENSOR_DATA_SIZE_UINT16:
+        case PLDM_SENSOR_DATA_SIZE_SINT16:
+            state->current_reading.value_u16 = 0;
+            break;
+        case PLDM_SENSOR_DATA_SIZE_UINT32:
+        case PLDM_SENSOR_DATA_SIZE_SINT32:
+            state->current_reading.value_u32 = 0;
+            break;
+        default:
+            state->current_reading.value_u8 = 0;
+            break;
+    }
+
+    return PLDM_SUCCESS;
+}
+
+/*
+ * Numeric sensor PDR for sensor ID 1, uint8 data size.
+ * Used to exercise the GET_SENSOR_READING path in the platform_pd responder.
+ */
+static const uint8_t fuzz_pd_sensor_pdr[] = {
+    /* pldm_value_pdr_hdr */
+    0x00,
+    0x00,
+    0x00,
+    0x00,                    /* record_handle */
+    0x01,                    /* version */
+    PLDM_NUMERIC_SENSOR_PDR, /* type */
+    0x00,
+    0x00, /* record_change_num */
+    0x45,
+    0x00, /* length = PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH */
+    /* body */
+    0x00,
+    0x00, /* terminus_handle */
+    0x01,
+    0x00, /* sensor_id = 1 */
+    0x00,
+    0x00, /* entity_type */
+    0x01,
+    0x00, /* entity_instance_num */
+    0x00,
+    0x00,                        /* container_id */
+    PLDM_NO_INIT,                /* sensor_init */
+    0x00,                        /* sensor_auxiliary_names_pdr */
+    0x00,                        /* base_unit */
+    0x00,                        /* unit_modifier */
+    0x00,                        /* rate_unit */
+    0x00,                        /* base_oem_unit_handle */
+    0x00,                        /* aux_unit */
+    0x00,                        /* aux_unit_modifier */
+    0x00,                        /* aux_rate_unit */
+    0x00,                        /* rel */
+    0x00,                        /* aux_oem_unit_handle */
+    0x01,                        /* is_linear */
+    PLDM_SENSOR_DATA_SIZE_UINT8, /* sensor_data_size */
+    0x00,
+    0x00,
+    0x80,
+    0x3f, /* resolution = 1.0f */
+    0x00,
+    0x00,
+    0x00,
+    0x00, /* offset = 0.0f */
+    0x00,
+    0x00, /* accuracy */
+    0x00, /* plus_tolerance */
+    0x00, /* minus_tolerance */
+    0x00, /* hysteresis */
+    0x00, /* supported_thresholds */
+    0x00, /* threshold_and_hysteresis_volatility */
+    0x00,
+    0x00,
+    0x00,
+    0x00, /* state_transition_interval */
+    0x00,
+    0x00,
+    0x00,
+    0x00,                          /* update_interval */
+    0xff,                          /* max_readable */
+    0x00,                          /* min_readable */
+    PLDM_RANGE_FIELD_FORMAT_UINT8, /* range_field_format */
+    0x00,                          /* range_field_support */
+    0x00,
+    0x00,
+    0x00, /* nominal, normal_max, normal_min */
+    0x00,
+    0x00, /* warning_high, warning_low */
+    0x00,
+    0x00, /* critical_high, critical_low */
+    0x00,
+    0x00, /* fatal_high, fatal_low */
+};
+
+static int fuzz_platform_pd_handle_msg(const uint8_t* data, size_t size)
+{
+    uint8_t out[4096];
+    struct pldm_platform_pd_ops ops = {
+        .get_sensor_reading = fuzz_pd_get_sensor_reading,
+        .ctx = NULL,
+    };
+    struct pldm_platform_pd* pd;
+    uint32_t record_handle = 0;
+    size_t out_len = sizeof(out);
+    pldm_pdr* repo;
+    int rc;
+
+    repo = pldm_pdr_init();
+    if (!repo)
+    {
+        return -1;
+    }
+
+    rc = pldm_pdr_add(repo, fuzz_pd_sensor_pdr, sizeof(fuzz_pd_sensor_pdr),
+                      false, 0, &record_handle);
+    if (rc)
+    {
+        pldm_pdr_destroy(repo);
+        return -1;
+    }
+
+    pd = pldm_platform_pd_new(repo, NULL, &ops, sizeof(ops));
+    if (!pd)
+    {
+        pldm_pdr_destroy(repo);
+        return -1;
+    }
+
+    pldm_platform_pd_handle_msg(pd, data, size, out, &out_len);
+
+    free(pd);
+    pldm_pdr_destroy(repo);
+    return 0;
+}
+
 static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
     fuzz_decode_pldm_firmware_update_package,
     fuzz_get_fru_record_by_option,
     fuzz_pldm_pdr_add,
     fuzz_pldm_entity_association_pdr_extract,
     fuzz_pldm_state_effecter_pdr,
+    fuzz_platform_pd_handle_msg,
     libpldm_decode_one_pldm_msg,
     libpldm_encode_one_pldm_msg,
 };

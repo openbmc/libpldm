@@ -16,6 +16,7 @@ if get_option('oem').contains('meta')
 endif
 
 subdir('firmware_device')
+subdir('platform_device')
 subdir('environ')
 
 libpldm_link_args = []
