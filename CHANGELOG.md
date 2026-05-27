@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- platform_pd: Add `pldm_platform_pd` (DSP0248 v1.2.0) responder
 - dsp: file: Introduce `enum pldm_file_df_open_attribute`
 - dsp: platform: Introduce `encode_pldm_platform_compact_numeric_sensor_pdr()`
 - dsp: platform: Introduce `decode_pldm_platform_compact_numeric_sensor_pdr()`
