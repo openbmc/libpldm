@@ -1,5 +1,6 @@
 if get_option('abi').contains('testing')
     subdir('fd')
+    subdir('pd')
 endif
 
 fuzz = executable(
