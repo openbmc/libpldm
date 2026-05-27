@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- platform_device: Add `pldm_platform_pd` (DSP0248 v1.2.0) responder
+
 ### Changed
 
 ### Deprecated
