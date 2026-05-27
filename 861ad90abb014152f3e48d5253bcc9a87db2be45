@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ae0888a_af9aa0d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002877
+      },
+      "writtenOn": "2026-05-27T17:07:13Z",
+      "side": 1,
+      "message": "Just curious about the \"no packed\" structs. Are we not dealing with serialised data on libpldm? Indeed, there are other packed structs on the same header - will they also be deprecated? Is the idea that encode/decode functions will take all data as arguments? Because I\u0027m imagining that \"packing/unpacking\" data from non-packed structs to the serialised bytes will use some processing that would be \"free\" for the packed case (well, accessing them on the packed structs would have its own costs - are these big enough to justify the extra work on serialisation?).",
+      "revId": "861ad90abb014152f3e48d5253bcc9a87db2be45",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
