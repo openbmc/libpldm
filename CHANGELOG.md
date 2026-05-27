@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- platform_pd: Add `pldm_platform_pd` (DSP0248 v1.2.0) responder
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0

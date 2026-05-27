@@ -31,6 +31,7 @@ subdir('dsp')
 # testing.
 if get_option('abi').contains('testing')
     subdir('transport')
+    subdir('platform_device')
 endif
 
 if get_option('oem').contains('ibm')
