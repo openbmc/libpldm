@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef LIBPLDM_FILE_H
-#define LIBPLDM_FILE_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -265,6 +264,4 @@ int decode_pldm_file_df_heartbeat_resp(const struct pldm_msg *msg,
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

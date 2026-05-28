@@ -77,6 +77,7 @@ Change categories:
   - Note that those should only affect Zephyr based builds.
 
 - libpldm: api: Don't diagnose implementation use of unstable features
+- Use #pragma once include guards everywhere
 
 ### Deprecated
 

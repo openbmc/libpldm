@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef MCTP_DEFINES_H
-#define MCTP_DEFINES_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,5 +11,3 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-
-#endif // MCTP_DEFINES_H

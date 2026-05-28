@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef LIBPLDM_TRANSPORT_AF_MCTP_INTERNAL_H
-#define LIBPLDM_TRANSPORT_AF_MCTP_INTERNAL_H
+#pragma once
 
 #include "responder.h"
 #include "socket.h"
@@ -43,5 +42,3 @@ int pldm_transport_af_mctp_get_tid(struct pldm_transport_af_mctp *ctx,
 #ifdef __cplusplus
 }
 #endif
-
-#endif // LIBPLDM_TRANSPORT_AF_MCTP_INTERNAL_H
