@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef FILEIO_H
-#define FILEIO_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -917,4 +916,3 @@ int encode_new_file_with_metadata_resp(uint8_t instance_id,
 }
 #endif
 
-#endif /* FILEIO_H */

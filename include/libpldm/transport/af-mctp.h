@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef LIBPLDM_AF_MCTP_H
-#define LIBPLDM_AF_MCTP_H
+#pragma once
 
 #include <libpldm/base.h>
 #include <libpldm/pldm.h>
@@ -65,4 +64,3 @@ int pldm_transport_af_mctp_bind(struct pldm_transport_af_mctp *transport,
 }
 #endif
 
-#endif /* LIBPLDM_AF_MCTP*/

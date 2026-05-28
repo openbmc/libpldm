@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef LIBPLDM_SRC_TRANSPORT_TRANSPORT_H
-#define LIBPLDM_SRC_TRANSPORT_TRANSPORT_H
+#pragma once
 
 #include <libpldm/base.h>
 #include <libpldm/pldm.h>
@@ -28,4 +27,3 @@ struct pldm_transport {
 			   struct pollfd *pollfd);
 };
 
-#endif // LIBPLDM_SRC_TRANSPORT_TRANSPORT_H

@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef FW_UPDATE_H
-#define FW_UPDATE_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -3074,4 +3073,3 @@ int decode_pldm_package_component_image_information_from_iter(
 }
 #endif
 
-#endif // End of FW_UPDATE_H

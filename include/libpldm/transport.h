@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef TRANSPORT_PLDM_H
-#define TRANSPORT_PLDM_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -123,4 +122,3 @@ pldm_transport_send_recv_msg(struct pldm_transport *transport, pldm_tid_t tid,
 }
 #endif
 
-#endif /* TRANSPORT_PLDM_H */

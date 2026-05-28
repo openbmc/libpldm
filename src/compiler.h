@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef PLDM_COMPILER_H
-#define PLDM_COMPILER_H
+#pragma once
 
 #include <libpldm/compiler.h>
 
@@ -92,4 +91,3 @@ static struct {
 		struct { char buf[_Generic((obj), type: 1, default: -1)]; })))
 // NOLINTEND(bugprone-macro-parentheses)
 
-#endif

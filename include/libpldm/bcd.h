@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef LIBPLDM_BCD_H
-#define LIBPLDM_BCD_H
+#pragma once
 
 #include <stdint.h>
 
@@ -48,4 +47,3 @@ uint32_t pldm_bcd_dec2bcd32(uint32_t dec);
 }
 #endif
 
-#endif

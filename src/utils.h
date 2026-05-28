@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later
-#ifndef LIBPLDM_SRC_UTILS_H
-#define LIBPLDM_SRC_UTILS_H
+#pragma once
 
 #include <stdint.h>
 #include <stddef.h>
@@ -38,4 +37,4 @@ bool is_time_legal(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t day,
  *  @return true if transfer flag is valid, false if not
  */
 bool is_transfer_flag_valid(uint8_t transfer_flag);
-#endif
+

@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef STATE_SET_OEM_IBM_H
-#define STATE_SET_OEM_IBM_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -85,4 +84,3 @@ enum pldm_oem_ibm_boot_side_rename_state {
 }
 #endif
 
-#endif /* STATE_SET_OEM_IBM_H */

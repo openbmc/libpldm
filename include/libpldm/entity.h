@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef ENTITY_H
-#define ENTITY_H
+#pragma once
 
 #include <libpldm/api.h>
 
@@ -203,4 +202,3 @@ enum pldm_entity_id_codes {
 }
 #endif
 
-#endif /* ENTITY_H */

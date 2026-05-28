@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef FRU_H
-#define FRU_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -511,4 +510,3 @@ int encode_set_fru_record_table_resp(uint8_t instance_id,
 }
 #endif
 
-#endif

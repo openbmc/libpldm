@@ -1,5 +1,4 @@
-#ifndef LIBPLDM_SMBIOS_H
-#define LIBPLDM_SMBIOS_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -33,4 +32,3 @@ enum pldm_smbios_commands {
 }
 #endif
 
-#endif

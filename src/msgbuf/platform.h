@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef PLDM_MSGBUF_PLATFORM_H
-#define PLDM_MSGBUF_PLATFORM_H
+#pragma once
 
 #include "../msgbuf.h"
 #include <libpldm/base.h>
@@ -201,4 +200,3 @@ pldm_msgbuf_typecheck_range_field_format(struct pldm_msgbuf_ro *ctx,
 }
 #endif
 
-#endif

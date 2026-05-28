@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef PLDM_MSGBUF_H
-#define PLDM_MSGBUF_H
+#pragma once
 
 #include "msgbuf/core.h"
 
@@ -205,4 +204,3 @@
 #define pldm_msgbuf_field_end(ctx, field)                                      \
 	pldm__msgbuf_field_end((ctx)->cursor, (ctx)->remaining, &(field))
 
-#endif /* BUF_H */

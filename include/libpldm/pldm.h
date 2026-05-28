@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef MCTP_H
-#define MCTP_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -33,4 +32,3 @@ typedef enum pldm_requester_error_codes {
 }
 #endif
 
-#endif /* MCTP_H */

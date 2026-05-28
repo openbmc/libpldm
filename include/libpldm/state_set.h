@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef STATE_SET_H
-#define STATE_SET_H
+#pragma once
 
 #include <libpldm/api.h>
 
@@ -379,4 +378,3 @@ enum pldm_state_set_acpi_power_state_values {
 }
 #endif
 
-#endif /* STATE_SET_H */
