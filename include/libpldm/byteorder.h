@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef LIBPLDM_BYTEORDER_H
-#define LIBPLDM_BYTEORDER_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,6 +31,4 @@ extern "C" {
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

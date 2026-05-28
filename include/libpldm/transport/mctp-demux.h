@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef LIBPLDM_DEMUX_H
-#define LIBPLDM_DEMUX_H
+#pragma once
 
 #include <libpldm/base.h>
 #include <libpldm/pldm.h>
@@ -37,5 +36,3 @@ int pldm_transport_mctp_demux_unmap_tid(struct pldm_transport_mctp_demux *ctx,
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* LIBPLDM_DEMUX_H */

@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef LIBPLDM_BIOS_TABLE_H
-#define LIBPLDM_BIOS_TABLE_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -634,6 +633,4 @@ bool pldm_bios_table_checksum(const uint8_t *table, size_t size);
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif
