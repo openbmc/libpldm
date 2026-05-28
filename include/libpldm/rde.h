@@ -1,5 +1,4 @@
-#ifndef LIBPLDM_RDE_H
-#define LIBPLDM_RDE_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,6 +50,4 @@ enum pldm_rde_commands {
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

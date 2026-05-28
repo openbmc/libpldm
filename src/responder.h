@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef LIBPLDM_SRC_RESPONDER_H
-#define LIBPLDM_SRC_RESPONDER_H
+#pragma once
 
 #include <libpldm/base.h>
 #include <libpldm/instance-id.h>
@@ -22,5 +21,3 @@ struct pldm_responder_cookie *
 pldm_responder_cookie_untrack(struct pldm_responder_cookie *jar, pldm_tid_t tid,
 			      pldm_instance_id_t instance_id, uint8_t type,
 			      uint8_t command);
-
-#endif

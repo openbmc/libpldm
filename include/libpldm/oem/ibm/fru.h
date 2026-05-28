@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef OEM_IBM_FRU_H
-#define OEM_IBM_FRU_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,5 +24,3 @@ enum pldm_oem_ibm_fru_field_type {
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* OEM_IBM_FRU_H */

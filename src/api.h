@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later
-#ifndef LIBPLDM_SRC_API_H
-#define LIBPLDM_SRC_API_H
+#pragma once
 
 #include "environ/errno.h"
 
@@ -51,5 +50,3 @@ static inline enum pldm_completion_codes pldm_xlate_errno(int err)
 	assert(rc > 0);
 	return rc;
 }
-
-#endif

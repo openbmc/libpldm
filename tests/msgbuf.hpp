@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef PLDM_MSGBUF_HPP
-#define PLDM_MSGBUF_HPP
+#pragma once
 
 #include <libpldm/compiler.h>
 
@@ -325,5 +324,3 @@ LIBPLDM_CC_ALWAYS_INLINE int
     static_assert(std::is_same<real32_t, T>::value);
     return pldm__msgbuf_extract_real32(ctx, buf);
 }
-
-#endif /* BUF_HPP */
