@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
@@ -3537,5 +3536,3 @@ int decode_pldm_platform_state_effecter_pdr_possible_states_from_iter(
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* PLATFORM_H */

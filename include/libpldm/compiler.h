@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 
-#ifndef LIBPLDM_COMPILER_H
-#define LIBPLDM_COMPILER_H
+#pragma once
 
 #define LIBPLDM_SIZEAT(type, member)                                           \
 	(offsetof(type, member) + sizeof(((type *)NULL)->member))
@@ -48,6 +47,4 @@
 
 #ifndef LIBPLDM_CC_UNAVAILABLE
 #define LIBPLDM_CC_UNAVAILABLE
-#endif
-
 #endif

@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef LIBPLDM_TRANSPORT_TEST_H
-#define LIBPLDM_TRANSPORT_TEST_H
+#pragma once
 
 #include <libpldm/base.h>
 
@@ -56,6 +55,4 @@ int pldm_transport_test_init_pollfd(struct pldm_transport *ctx,
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

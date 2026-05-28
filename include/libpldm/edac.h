@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef LIBPLDM_EDAC_H
-#define LIBPLDM_EDAC_H
+#pragma once
 
 #include <stddef.h>
 #include <stdint.h>
@@ -36,6 +35,4 @@ uint32_t pldm_edac_crc32_extend(const void *data, size_t size, uint32_t crc);
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

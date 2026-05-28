@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
-#ifndef PLDM_MSGBUF_CORE_H
-#define PLDM_MSGBUF_CORE_H
+#pragma once
 
 /*
  * Historically, many of the structs exposed in libpldm's public headers are
@@ -1684,6 +1683,4 @@ int pldm__msgbuf_field_end(const void *cursor LIBPLDM_CC_UNUSED,
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

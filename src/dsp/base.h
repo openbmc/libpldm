@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later
-#ifndef LIBPLDM_SRC_DSP_BASE_H
-#define LIBPLDM_SRC_DSP_BASE_H
+#pragma once
 
 /* Internal functions */
 
@@ -23,5 +22,3 @@ int pldm_msg_has_error(const struct pldm_msg *msg, size_t payload_length)
 	static_assert(PLDM_SUCCESS == 0, "Rework required");
 	return payload_length < 1 ? 0 : msg->payload[0];
 }
-
-#endif
