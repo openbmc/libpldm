@@ -115,6 +115,8 @@ Change categories:
 
 ### Fixed
 
+- Drop LIBPLDM_API_TESTING annotation from
+  `struct pldm_platform_set_numeric_sensor_enable_req`
 - meson: Install byteorder.h header
 - pdr: Fix NULL pointer dereference in `pldm_entity_association_tree_visit()`
 - pdr: Fix infinite loop in `pldm_pdr_delete_by_effecter_id()`

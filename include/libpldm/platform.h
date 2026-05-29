@@ -1402,7 +1402,7 @@ struct pldm_platform_set_numeric_sensor_enable_req {
 	uint16_t sensor_id;
 	uint8_t sensor_operational_state;
 	uint8_t sensor_event_message_enable;
-} LIBPLDM_API_TESTING;
+};
 
 #define PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES  4
 #define PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES 1
