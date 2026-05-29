@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c565596_d72288de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-29T01:33:30Z",
+      "side": 1,
+      "message": "Thanks Brad. I\u0027d been avoiding `#pragma once`, but on the basis of the historical inconsistencies, the wikipedia analysis of compiler support for it[1], and that we already have instances of its use in-tree, let\u0027s just go for it.\n\n[1]: https://en.wikipedia.org/wiki/Pragma_once",
+      "revId": "c5c4306587e3dac475be4b8d3cf4d5bbf0270df1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
