@@ -64,6 +64,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7bfa882_ce90776c",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 2586,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-29T01:19:26Z",
+      "side": 1,
+      "message": "Oh, and please avoid default-initialising variables, as it hides warnings from valgrind about reads of uninitialised memory. (Validly) reading 0 may also be wrong, but now we can\u0027t know that it is not the correct value as the warning won\u0027t fire.",
+      "parentUuid": "e580943f_9ed5e7ad",
+      "range": {
+        "startLine": 2585,
+        "startChar": 1,
+        "endLine": 2586,
+        "endChar": 38
+      },
+      "revId": "e7c810d9512189b0e9f8d2ab5db3cc619ff02af8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "251c359d_f162c3a9",
