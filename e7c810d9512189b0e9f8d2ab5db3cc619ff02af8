@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b64494b_4b1a0173",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-29T01:17:47Z",
+      "side": 1,
+      "message": "Hi Vishnu, just one minor concern left (in two parts).\n\nThanks for your patience.",
+      "revId": "e7c810d9512189b0e9f8d2ab5db3cc619ff02af8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d1648aa_7796cbdf",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 2326,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-29T01:17:47Z",
+      "side": 1,
+      "message": "We no-longer need these bounce-buffer variables right? The struct now contains members of the right types - we can insert the values into the buffer directly from the struct members.",
+      "range": {
+        "startLine": 2325,
+        "startChar": 1,
+        "endLine": 2326,
+        "endChar": 34
+      },
+      "revId": "e7c810d9512189b0e9f8d2ab5db3cc619ff02af8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e580943f_9ed5e7ad",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 2586,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-29T01:17:47Z",
+      "side": 1,
+      "message": "Same observation as above.",
+      "range": {
+        "startLine": 2585,
+        "startChar": 1,
+        "endLine": 2586,
+        "endChar": 38
+      },
+      "revId": "e7c810d9512189b0e9f8d2ab5db3cc619ff02af8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "251c359d_f162c3a9",
+        "filename": "tests/fuzz/fuzz.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-05-29T01:17:47Z",
+      "side": 1,
+      "message": "We should probably define the ergonomic C macro for this at some point in the near future.",
+      "range": {
+        "startLine": 157,
+        "startChar": 4,
+        "endLine": 159,
+        "endChar": 40
+      },
+      "revId": "e7c810d9512189b0e9f8d2ab5db3cc619ff02af8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
