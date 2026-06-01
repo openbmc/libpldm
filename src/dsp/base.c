@@ -226,37 +226,6 @@ int encode_get_commands_req(uint8_t instance_id, uint8_t type, ver32_t version,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_DEPRECATED_UNSAFE
-int encode_get_types_resp(uint8_t instance_id, uint8_t completion_code,
-			  const bitfield8_t *types, struct pldm_msg *msg)
-{
-	if (msg == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-
-	struct pldm_header_info header = { 0 };
-	header.instance = instance_id;
-	header.msg_type = PLDM_RESPONSE;
-	header.command = PLDM_GET_PLDM_TYPES;
-
-	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
-	if (rc != PLDM_SUCCESS) {
-		return rc;
-	}
-
-	struct pldm_get_types_resp *response =
-		(struct pldm_get_types_resp *)msg->payload;
-	response->completion_code = completion_code;
-	if (response->completion_code == PLDM_SUCCESS) {
-		if (types == NULL) {
-			return PLDM_ERROR_INVALID_DATA;
-		}
-		memcpy(response->types, &(types->byte), PLDM_MAX_TYPES / 8);
-	}
-
-	return PLDM_SUCCESS;
-}
-
 LIBPLDM_ABI_STABLE
 int decode_get_commands_req(const struct pldm_msg *msg, size_t payload_length,
 			    uint8_t *type, ver32_t *version)
@@ -303,31 +272,6 @@ int encode_get_commands_resp(uint8_t instance_id, uint8_t completion_code,
 		memcpy(response->commands, &(commands->byte),
 		       PLDM_MAX_CMDS_PER_TYPE / 8);
 	}
-
-	return PLDM_SUCCESS;
-}
-
-LIBPLDM_ABI_DEPRECATED_UNSAFE
-int decode_get_types_resp(const struct pldm_msg *msg, size_t payload_length,
-			  uint8_t *completion_code, bitfield8_t *types)
-{
-	if (msg == NULL || types == NULL || completion_code == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-
-	*completion_code = msg->payload[0];
-	if (PLDM_SUCCESS != *completion_code) {
-		return PLDM_SUCCESS;
-	}
-
-	if (payload_length != PLDM_GET_TYPES_RESP_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
-
-	struct pldm_get_types_resp *response =
-		(struct pldm_get_types_resp *)msg->payload;
-
-	memcpy(&(types->byte), response->types, PLDM_MAX_TYPES / 8);
 
 	return PLDM_SUCCESS;
 }
