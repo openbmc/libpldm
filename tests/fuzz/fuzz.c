@@ -155,9 +155,25 @@ static int fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp(
     return 0;
 }
 
+#if HAVE_LIBPLDM_API_TESTING
+static int
+    fuzz_decode_pldm_base_multipart_receive_req(const struct pldm_msg* msg,
+                                                size_t payload_length)
+{
+    struct pldm_base_multipart_receive_req req;
+
+    decode_pldm_base_multipart_receive_req(msg, payload_length, &req);
+
+    return 0;
+}
+#endif
+
 static int (*const decode_pldm_msg_tests[])(const struct pldm_msg*, size_t) = {
     fuzz_decode_pldm_base_get_pldm_types_resp,
     fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp,
+#if HAVE_LIBPLDM_API_TESTING
+    fuzz_decode_pldm_base_multipart_receive_req,
+#endif
 };
 
 static int libpldm_decode_one_pldm_msg(const uint8_t* data, size_t size)

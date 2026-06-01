@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: base: Add `decode_pldm_base_multipart_receive_req()`
+
 ### Changed
 
 ### Deprecated
