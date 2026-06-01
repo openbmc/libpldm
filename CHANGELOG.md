@@ -23,6 +23,7 @@ Change categories:
 - dsp: file: Introduce `encode_pldm_file_df_heartbeat_resp()`
 - libpldm++ support for DSP0267 v1.1.0
 - libpldm++ support for DSP0267 v1.2.0
+- libpldm++ support for DSP0267 v1.3.0
 
 ### Changed
 
