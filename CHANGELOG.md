@@ -21,6 +21,7 @@ Change categories:
 
 - libpldm++ support for DSP0267 v1.1.0
 - libpldm++ support for DSP0267 v1.2.0
+- libpldm++ support for DSP0267 v1.3.0
 
 ### Changed
 
