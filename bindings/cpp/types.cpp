@@ -49,7 +49,8 @@ pldm::fw_update::ComponentImageInfo::ComponentImageInfo(
 	uint32_t componentComparisonStamp, std::bitset<16> componentOptions,
 	std::bitset<16> requestedComponentActivationMethod,
 	const variable_field &componentLocation,
-	const std::string &componentVersion)
+	const std::string &componentVersion,
+	const std::vector<uint8_t> &componentOpaqueData)
 	: componentClassification(componentClassification),
 	  componentIdentifier(componentIdentifier),
 	  compComparisonStamp(componentComparisonStamp),
@@ -57,7 +58,8 @@ pldm::fw_update::ComponentImageInfo::ComponentImageInfo(
 	  requestedComponentActivationMethod(
 		  requestedComponentActivationMethod),
 	  componentLocation(componentLocation),
-	  componentVersion(componentVersion)
+	  componentVersion(componentVersion),
+	  componentOpaqueData(componentOpaqueData)
 {
 }
 
@@ -71,7 +73,8 @@ pldm::fw_update::ComponentImageInfo::ComponentImageInfo(
 	  requestedComponentActivationMethod(
 		  ref.requestedComponentActivationMethod),
 	  componentLocation(ref.componentLocation),
-	  componentVersion(ref.componentVersion)
+	  componentVersion(ref.componentVersion),
+	  componentOpaqueData(ref.componentOpaqueData)
 {
 }
 
@@ -105,6 +108,9 @@ bool pldm::fw_update::ComponentImageInfo::operator==(
 	if (CompareNEQ(&ComponentImageInfo::componentVersion, other)) {
 		return false;
 	}
+	if (CompareNEQ(&ComponentImageInfo::componentOpaqueData, other)) {
+		return false;
+	}
 	return true;
 }
 
@@ -119,7 +125,8 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 	const std::string &componentImageSetVersion,
 	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
 		&descriptorsIn,
-	const std::vector<uint8_t> &firmwareDevicePackageData)
+	const std::vector<uint8_t> &firmwareDevicePackageData,
+	const std::optional<ReferenceManifestData> &referenceManifestData)
 	: deviceUpdateOptionFlags(deviceUpdateOptionFlags),
 	  applicableComponents(applicableComponents),
 	  componentImageSetVersionString(componentImageSetVersion),
@@ -134,7 +141,8 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 
 		  return res;
 	  }()),
-	  firmwareDevicePackageData(firmwareDevicePackageData)
+	  firmwareDevicePackageData(firmwareDevicePackageData),
+	  referenceManifestData(referenceManifestData)
 {
 }
 
@@ -155,7 +163,8 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 
 		  return res;
 	  }()),
-	  firmwareDevicePackageData(ref.firmwareDevicePackageData)
+	  firmwareDevicePackageData(ref.firmwareDevicePackageData),
+	  referenceManifestData(ref.referenceManifestData)
 {
 }
 
@@ -234,7 +243,7 @@ bool pldm::fw_update::FirmwareDeviceIDRecord::operator==(
 		}
 	}
 
-	return true;
+	return CompareEQ(&FirmwareDeviceIDRecord::referenceManifestData, other);
 }
 
 LIBPLDM_ABI_TESTING
@@ -248,7 +257,9 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
 		&recordDescriptors,
 
-	const std::vector<uint8_t> &downstreamDevicePackageData)
+	const std::vector<uint8_t> &downstreamDevicePackageData,
+	const std::optional<ReferenceManifestData>
+		&downstreamDeviceReferenceManifestData)
 	: downstreamDeviceUpdateOptionFlags(downstreamDeviceUpdateOptionFlags),
 	  downstreamDeviceApplicableComponents(applicableComponents),
 	  downstreamDeviceSelfContainedActivationMinVersionString(
@@ -266,7 +277,9 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 
 		  return res;
 	  }()),
-	  downstreamDevicePackageData(downstreamDevicePackageData)
+	  downstreamDevicePackageData(downstreamDevicePackageData),
+	  downstreamDeviceReferenceManifestData(
+		  downstreamDeviceReferenceManifestData)
 {
 }
 
@@ -293,7 +306,15 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 
 		  return res;
 	  }()),
-	  downstreamDevicePackageData(ref.downstreamDevicePackageData)
+	  downstreamDevicePackageData(ref.downstreamDevicePackageData),
+	  downstreamDeviceReferenceManifestData(
+		  ref.downstreamDeviceReferenceManifestData)
+
+{
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::DownstreamDeviceIDRecord::~DownstreamDeviceIDRecord()
 {
 }
 
@@ -342,13 +363,42 @@ bool pldm::fw_update::DownstreamDeviceIDRecord::operator==(
 			return false;
 		}
 	}
-	return !CompareNEQ(
-		&DownstreamDeviceIDRecord::downstreamDevicePackageData, other);
+	if (CompareNEQ(&DownstreamDeviceIDRecord::downstreamDevicePackageData,
+		       other)) {
+		return false;
+	}
+	if (CompareNEQ(&DownstreamDeviceIDRecord::
+			       downstreamDeviceReferenceManifestData,
+		       other)) {
+		return false;
+	}
+
+	return true;
+}
+
+pldm::fw_update::ReferenceManifestData::ReferenceManifestData(
+	const uint8_t SVHID, const std::vector<uint8_t> &vendorID,
+	const std::vector<uint8_t> &data)
+	: SVHID(SVHID), vendorID(vendorID), data(data)
+{
+}
+
+pldm::fw_update::ReferenceManifestData::~ReferenceManifestData()
+{
+}
+
+pldm::fw_update::ReferenceManifestData::ReferenceManifestData(
+	const ReferenceManifestData &ref)
+	: SVHID(ref.SVHID), vendorID(ref.vendorID), data(ref.data)
+{
 }
 
 LIBPLDM_ABI_TESTING
-pldm::fw_update::DownstreamDeviceIDRecord::~DownstreamDeviceIDRecord()
+bool pldm::fw_update::ReferenceManifestData::operator==(
+	const ReferenceManifestData &other) const
 {
+	return SVHID == other.SVHID && vendorID == other.vendorID &&
+	       data == other.data;
 }
 
 pldm::fw_update::Package::Package(
