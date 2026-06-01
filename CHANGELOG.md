@@ -27,6 +27,8 @@ Change categories:
 
 ### Fixed
 
+- control: fix typos control API documentation
+
 ### Security
 
 ## [v0.16.0] - 2026-06-13

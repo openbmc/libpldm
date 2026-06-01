@@ -14,7 +14,7 @@ enum pldm_control_completion_codes {
 	PLDM_CONTROL_INVALID_PLDM_VERSION_IN_REQUEST_DATA = 0x84,
 };
 
-// Static storage can be allocated with PLDM_SIZEOF_CONTROL macro */
+// Static storage can be allocated with PLDM_SIZEOF_PLDM_CONTROL macro */
 struct pldm_control;
 
 /** @brief Handle a PLDM Control message
@@ -36,7 +36,7 @@ int pldm_control_handle_msg(struct pldm_control *control, const void *req_msg,
 /** @brief Initialise a struct pldm_control
  *
  * @param[in] control
- * @param[in] pldm_control_size - pass PLDM_SIZEOF_CONTROL
+ * @param[in] pldm_control_size - pass PLDM_SIZEOF_PLDM_CONTROL
  *
  * @return 0 on success, a negative errno value on failure.
  */
@@ -52,7 +52,7 @@ int pldm_control_setup(struct pldm_control *control, size_t pldm_control_size);
  * 			 is 4*versions_count. The versions buffer must remain
  *			 present for the duration of the pldm_control's lifetime.
  * @param[in] versions_count - number of entries in versions, including the trailing CRC32.
- * @param[in] commands - pointer to an array of bitfield8_t[8], for GetPLDMCommands
+ * @param[in] commands - pointer to an array of bitfield8_t[32], for GetPLDMCommands
  * 			 response for this type. The buffer must remain
  *			 present for the duration of the pldm_control's lifetime.
  *
