@@ -134,13 +134,88 @@ cleanup_pdr:
     return rc;
 }
 
-static int
-    fuzz_encode_pldm_platform_set_numeric_sensor_enable_req(const uint8_t* data,
-                                                            size_t size)
+static int fuzz_decode_pldm_base_get_pldm_types_resp(const struct pldm_msg* msg,
+                                                     size_t payload_length)
 {
-    PLDM_MSG_BUFFER(
-        _msg, PLDM_MSG_SIZE(PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES));
-    struct pldm_msg* msg = (void*)&_msg;
+    struct pldm_base_get_pldm_types_resp resp;
+
+    decode_pldm_base_get_pldm_types_resp(msg, payload_length, &resp);
+
+    return 0;
+}
+
+static int fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp(
+    const struct pldm_msg* msg, size_t payload_length)
+{
+    uint8_t completion_code;
+
+    decode_pldm_platform_set_numeric_sensor_enable_resp(msg, payload_length,
+                                                        &completion_code);
+
+    return 0;
+}
+
+static int (*const decode_tests[])(const struct pldm_msg*, size_t) = {
+    fuzz_decode_pldm_base_get_pldm_types_resp,
+    fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp,
+};
+
+static int libpldm_decode_one(const uint8_t* data, size_t size)
+{
+    if (size < sizeof(struct pldm_msg))
+    {
+        return -1;
+    }
+
+    for (size_t i = 0; i < ARRAY_SIZE(decode_tests); i++)
+    {
+        decode_tests[i]((const void*)data,
+                        size - offsetof(struct pldm_msg, payload));
+    }
+
+    return 0;
+}
+
+static int fuzz_encode_pldm_base_get_pldm_types_resp(struct pldm_msg* msg,
+                                                     size_t payload_length,
+                                                     const uint8_t* data,
+                                                     size_t size)
+{
+    struct pldm_base_get_pldm_types_resp resp;
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    uint8_t instance_id;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 1 + PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES,
+                                data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, instance_id);
+    pldm_msgbuf_extract(buf, resp.completion_code);
+    for (size_t i = 0; i < ARRAY_SIZE(resp.pldm_types); i++)
+    {
+        pldm_msgbuf_extract(buf, resp.pldm_types[i].byte);
+    }
+
+    rc = pldm_msgbuf_complete(buf);
+    if (rc)
+    {
+        return -1;
+    }
+
+    encode_pldm_base_get_pldm_types_resp(instance_id, &resp, msg,
+                                         &payload_length);
+
+    return 0;
+}
+
+static int fuzz_encode_pldm_platform_set_numeric_sensor_enable_req(
+    struct pldm_msg* msg, size_t payload_length, const uint8_t* data,
+    size_t size)
+{
     struct pldm_platform_set_numeric_sensor_enable_req req;
     PLDM_MSGBUF_RO_DEFINE_P(buf);
     uint8_t instance_id;
@@ -163,51 +238,56 @@ static int
         return -1;
     }
 
-    size_t payload_length = PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES;
     encode_pldm_platform_set_numeric_sensor_enable_req(instance_id, &req, msg,
                                                        &payload_length);
 
     return 0;
 }
 
-static int fuzz_decode_pldm_base_get_pldm_types_resp(const struct pldm_msg* msg,
-                                                     size_t payload_length)
-{
-    struct pldm_base_get_pldm_types_resp resp;
-
-    decode_pldm_base_get_pldm_types_resp(msg, payload_length, &resp);
-
-    return 0;
-}
-
-static int fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp(
-    const struct pldm_msg* msg, size_t payload_length)
-{
-    uint8_t completion_code;
-
-    decode_pldm_platform_set_numeric_sensor_enable_resp(msg, payload_length,
-                                                        &completion_code);
-
-    return 0;
-}
-
-static int (*const pldm_msg_fuzz_tests[])(const struct pldm_msg*, size_t) = {
-    fuzz_decode_pldm_base_get_pldm_types_resp,
-    fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp,
+static int (*const encode_tests[])(struct pldm_msg*, size_t, const uint8_t*,
+                                   size_t) = {
+    fuzz_encode_pldm_base_get_pldm_types_resp,
+    fuzz_encode_pldm_platform_set_numeric_sensor_enable_req,
 };
 
-static int libpldm_test_one_pldm_msg(const uint8_t* data, size_t size)
+static int libpldm_encode_one(const uint8_t* data, size_t size)
 {
-    if (size < sizeof(struct pldm_msg))
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    struct pldm_msg* msg;
+    const uint8_t* mat;
+    size_t mat_len;
+    size_t msg_len;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, data, size);
+    if (rc)
     {
         return -1;
     }
 
-    for (size_t i = 0; i < ARRAY_SIZE(pldm_msg_fuzz_tests); i++)
+    pldm_msgbuf_extract_uint16_to_size(buf, msg_len);
+    pldm_msgbuf_span_remaining(buf, (const void**)&mat, &mat_len);
+
+    rc = pldm_msgbuf_complete_consumed(buf);
+    if (rc)
     {
-        pldm_msg_fuzz_tests[i]((const void*)data,
-                               size - offsetof(struct pldm_msg, payload));
+        return -1;
     }
+
+    if (msg_len < sizeof(*msg))
+    {
+        return -1;
+    }
+
+    msg = malloc(msg_len);
+
+    for (size_t i = 0; i < ARRAY_SIZE(encode_tests); i++)
+    {
+        encode_tests[i](msg, msg_len - offsetof(struct pldm_msg, payload), mat,
+                        mat_len);
+    }
+
+    free(msg);
 
     return 0;
 }
@@ -215,8 +295,8 @@ static int libpldm_test_one_pldm_msg(const uint8_t* data, size_t size)
 static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
     fuzz_get_fru_record_by_option,
     fuzz_pldm_state_effecter_pdr,
-    fuzz_encode_pldm_platform_set_numeric_sensor_enable_req,
-    libpldm_test_one_pldm_msg,
+    libpldm_decode_one,
+    libpldm_encode_one,
 };
 
 int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size)
