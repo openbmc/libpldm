@@ -6,6 +6,44 @@
 #include "array.h"
 #include "msgbuf.h"
 
+static int fuzz_encode_pldm_base_get_pldm_types_resp(const uint8_t* data,
+                                                     size_t size)
+{
+    PLDM_MSG_BUFFER(_msg, PLDM_MSG_SIZE(PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES));
+    struct pldm_base_get_pldm_types_resp resp;
+    struct pldm_msg* msg = (void*)&_msg;
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    size_t payload_length;
+    uint8_t instance_id;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(
+        buf, 1 + PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES + 2, data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, instance_id);
+    pldm_msgbuf_extract(buf, resp.completion_code);
+    for (size_t i = 0; i < ARRAY_SIZE(resp.pldm_types); i++)
+    {
+        pldm_msgbuf_extract(buf, resp.pldm_types[i].byte);
+    }
+    pldm_msgbuf_extract_uint16_to_size(buf, payload_length);
+
+    rc = pldm_msgbuf_complete(buf);
+    if (rc)
+    {
+        return -1;
+    }
+
+    encode_pldm_base_get_pldm_types_resp(instance_id, &resp, msg,
+                                         &payload_length);
+
+    return 0;
+}
+
 static int fuzz_get_fru_record_by_option(const uint8_t* data, size_t size)
 {
     PLDM_MSGBUF_RO_DEFINE_P(buf);
@@ -213,9 +251,10 @@ static int libpldm_test_one_pldm_msg(const uint8_t* data, size_t size)
 }
 
 static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
+    fuzz_encode_pldm_base_get_pldm_types_resp,
+    fuzz_encode_pldm_platform_set_numeric_sensor_enable_req,
     fuzz_get_fru_record_by_option,
     fuzz_pldm_state_effecter_pdr,
-    fuzz_encode_pldm_platform_set_numeric_sensor_enable_req,
     libpldm_test_one_pldm_msg,
 };
 

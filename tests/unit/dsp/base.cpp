@@ -2465,6 +2465,68 @@ TEST(EncodeMultipartSendResponse, BadTestInvalidExpectedOutputMsgLength)
 #endif
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(EncodePldmBaseGetPldmTypesResp, InvalidParameters)
+{
+    pldm_base_get_pldm_types_resp resp{};
+    size_t payload_length;
+    pldm_msg msg{};
+
+    payload_length = PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES;
+    EXPECT_EQ(-EINVAL, encode_pldm_base_get_pldm_types_resp(0, NULL, &msg,
+                                                            &payload_length));
+    EXPECT_EQ(-EINVAL, encode_pldm_base_get_pldm_types_resp(0, &resp, NULL,
+                                                            &payload_length));
+    EXPECT_EQ(-EINVAL,
+              encode_pldm_base_get_pldm_types_resp(0, &resp, &msg, NULL));
+    payload_length = 0;
+    EXPECT_EQ(-EOVERFLOW, encode_pldm_base_get_pldm_types_resp(
+                              0, &resp, &msg, &payload_length));
+    payload_length = PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES - 1;
+    EXPECT_EQ(-EOVERFLOW, encode_pldm_base_get_pldm_types_resp(
+                              0, &resp, &msg, &payload_length));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodePldmBaseGetPldmTypesResp, ErrorResponse)
+{
+    PLDM_MSG_DEFINE_P(msg, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES);
+    pldm_base_get_pldm_types_resp resp{};
+    size_t payload_length = PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES;
+    int rc;
+
+    resp.completion_code = PLDM_ERROR;
+    rc = encode_pldm_base_get_pldm_types_resp(0, &resp, msg, &payload_length);
+    ASSERT_EQ(0, rc);
+    EXPECT_EQ(PLDM_ERROR, msg->payload[0]);
+    EXPECT_EQ(1, payload_length);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodePldmBaseGetPldmTypesResp, GoodResponse)
+{
+    size_t payload_length = PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES;
+    PLDM_MSG_DEFINE_P(msg, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES);
+    pldm_base_get_pldm_types_resp resp{};
+    int rc;
+
+    resp.completion_code = PLDM_SUCCESS;
+    for (size_t i = 0; i < ARRAY_SIZE(resp.pldm_types); i++)
+    {
+        resp.pldm_types[i].byte = 1 << i;
+    }
+    rc = encode_pldm_base_get_pldm_types_resp(0, &resp, msg, &payload_length);
+    ASSERT_EQ(0, rc);
+    ASSERT_EQ(PLDM_SUCCESS, msg->payload[0]);
+    for (size_t i = 0; i < PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES - 1; i++)
+    {
+        EXPECT_EQ(msg->payload[1 + i], 1 << i);
+    }
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodePldmBaseGetPldmTypesResp, InvalidParameters)
 {
     pldm_base_get_pldm_types_resp resp{};
