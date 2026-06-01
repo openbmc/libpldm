@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- dsp: base: Introduce `decode_pldm_base_get_pldm_types_resp()`
 - dsp: platform: Add requester APIs for SetNumericSensorEnable
 - transport: Add AF_MCTP fully qualified endpoint (FQE) mapping support
   - Add `pldm_transport_af_mctp_map_tid_fqe()` to map TID to network and EID

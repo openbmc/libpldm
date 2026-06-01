@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #include "api.h"
+#include "array.h"
 #include "dsp/base.h"
 #include "environ/errno.h"
 #include "msgbuf.h"
@@ -1210,6 +1211,38 @@ int decode_pldm_base_negotiate_transfer_params_resp(
 		sizeof(resp->responder_protocol_support));
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_base_get_pldm_types_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_get_pldm_types_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!msg || !resp) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msg_has_error(msg, payload_length);
+	if (rc) {
+		resp->completion_code = rc;
+		return 0;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, resp->completion_code);
+	for (size_t i = 0; i < ARRAY_SIZE(resp->pldm_types); i++) {
+		pldm_msgbuf_extract(buf, resp->pldm_types[i].byte);
 	}
 
 	return pldm_msgbuf_complete_consumed(buf);
