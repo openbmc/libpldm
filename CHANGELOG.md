@@ -32,6 +32,8 @@ Change categories:
 
 ### Fixed
 
+- control: fix typos in control API documentation
+
 ### Security
 
 ## [v0.16.0] - 2026-06-13
