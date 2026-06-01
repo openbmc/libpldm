@@ -52,7 +52,7 @@ int pldm_control_setup(struct pldm_control *control, size_t pldm_control_size);
  * 			 is 4*versions_count. The versions buffer must remain
  *			 present for the duration of the pldm_control's lifetime.
  * @param[in] versions_count - number of entries in versions, including the trailing CRC32.
- * @param[in] commands - pointer to an array of bitfield8_t[8], for GetPLDMCommands
+ * @param[in] commands - pointer to an array of bitfield8_t[32], for GetPLDMCommands
  * 			 response for this type. The buffer must remain
  *			 present for the duration of the pldm_control's lifetime.
  *
