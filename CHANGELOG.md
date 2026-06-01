@@ -103,6 +103,7 @@ Change categories:
 
 ### Removed
 
+- dsp: base: Remove `{en,de}code_get_types_resp()` and associated types
 - `PLDM_HAS_POLL` and `HAVE_POLL_H` configuration macros
 
   These are unnecessary now that build targets are enabled by header tests
