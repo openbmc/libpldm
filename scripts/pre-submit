@@ -114,3 +114,5 @@ meson reprotest
   meson setup -Dtest-methods=fuzz -Db_sanitize=address,undefined -Db_lundef=false "$BUILD"
   meson test -C "$BUILD"
 )
+
+./scripts/crater
