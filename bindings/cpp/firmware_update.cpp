@@ -144,6 +144,9 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 			downstreamDeviceId.package_data.length
 	};
 
+	const auto refManifestData = getReferenceManifestData(
+		downstreamDeviceId.reference_manifest_data);
+
 	std::map<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
 		descriptors{};
 
@@ -172,12 +175,38 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 			selfContainedActivationMinVersion,
 			selfContainedActivationMinVersionComparisonStamp,
 			componentsList, descriptors,
-			downstreamDevicePackageData));
+			downstreamDevicePackageData, refManifestData));
 
 	return {};
 }
 
 pldm::fw_update::PackageParser::~PackageParser() = default;
+
+std::optional<pldm::fw_update::ReferenceManifestData>
+pldm::fw_update::PackageParser::getReferenceManifestData(
+	struct variable_field &reference_manifest_data) noexcept
+{
+	if (reference_manifest_data.length == 0) {
+		return std::nullopt;
+	}
+
+	std::vector<uint8_t> refManifestDataRaw = {
+		reference_manifest_data.ptr,
+		reference_manifest_data.ptr + reference_manifest_data.length
+	};
+
+	const ssize_t len = refManifestDataRaw[1];
+	std::span<uint8_t> vendorID = { refManifestDataRaw.begin() + 2,
+					static_cast<size_t>(len) };
+	std::span<uint8_t> data = { refManifestDataRaw.begin() + 2 + len,
+				    refManifestDataRaw.size() - 2 - len };
+	ReferenceManifestData refManifestData(
+		refManifestDataRaw[0],
+		std::vector(vendorID.begin(), vendorID.end()),
+		std::vector(data.begin(), data.end()));
+
+	return refManifestData;
+}
 
 LIBPLDM_ABI_STABLE
 std::expected<std::unique_ptr<pldm::fw_update::Package>,
@@ -193,12 +222,12 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 	int rc;
 
 	if (pin != PackagePin::v1 && pin != PackagePin::v1_1_0 &&
-	    pin != PackagePin::v1_2_0) {
+	    pin != PackagePin::v1_2_0 && pin != PackagePin::v1_3_0) {
 		return std::unexpected(
 			PackageParserError("unsupported format revision"));
 	}
 
-	DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR03H(cpin);
+	DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H(cpin);
 
 	rc = decode_pldm_firmware_update_package(pkg.data(), pkgSize, &cpin,
 						 &hdr, &package, 0);
@@ -265,10 +294,13 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 				PackageParserError(imageSetVerStr.error()));
 		}
 
+		const auto referenceManifestData = getReferenceManifestData(
+			deviceIdRecordData.reference_manifest_data);
+
 		fwDeviceIDRecords.emplace_back(FirmwareDeviceIDRecord(
 			deviceUpdateOptionFlags, std::move(componentsList),
 			imageSetVerStr.value(), std::move(descriptors),
-			fwDevicePkgData));
+			fwDevicePkgData, std::move(referenceManifestData)));
 	}
 
 	if (rc) {
