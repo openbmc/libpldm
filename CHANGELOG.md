@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- dsp: base: Add `decode_pldm_base_multipart_receive_req()`
 - dsp: base: Expose `PLDM_BASE_MIN_PART_SIZE` in the public header
 - dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
 - dsp: file: Introduce `encode_pldm_file_df_heartbeat_resp()`

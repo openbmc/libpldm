@@ -587,6 +587,56 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int decode_pldm_base_multipart_receive_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_multipart_receive_req *req)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_MULTIPART_RECEIVE_REQ_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, req->pldm_type);
+	rc = pldm_msgbuf_extract(buf, req->transfer_opflag);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	pldm_msgbuf_extract(buf, req->transfer_ctx);
+	rc = pldm_msgbuf_extract(buf, req->transfer_handle);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	pldm_msgbuf_extract(buf, req->section_offset);
+	pldm_msgbuf_extract(buf, req->section_length);
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	if (req->transfer_opflag > PLDM_XFER_CURRENT_PART) {
+		return -EPROTO;
+	}
+
+	// DSP0240 v1.2.0 §9.6.6 Table 17: transfer_handle must be non-zero
+	// only when operation is PLDM_XFER_NEXT_PART.
+	if (req->transfer_handle == 0 &&
+	    req->transfer_opflag == PLDM_XFER_NEXT_PART) {
+		return -EPROTO;
+	}
+
+	return 0;
+}
+
 LIBPLDM_ABI_STABLE
 int encode_pldm_base_multipart_receive_req(
 	uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,
