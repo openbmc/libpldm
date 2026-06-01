@@ -226,7 +226,7 @@ int encode_get_commands_req(uint8_t instance_id, uint8_t type, ver32_t version,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int encode_get_types_resp(uint8_t instance_id, uint8_t completion_code,
 			  const bitfield8_t *types, struct pldm_msg *msg)
 {
@@ -307,7 +307,7 @@ int encode_get_commands_resp(uint8_t instance_id, uint8_t completion_code,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int decode_get_types_resp(const struct pldm_msg *msg, size_t payload_length,
 			  uint8_t *completion_code, bitfield8_t *types)
 {
