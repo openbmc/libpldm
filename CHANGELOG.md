@@ -19,6 +19,10 @@ Change categories:
 
 ### Added
 
+- control: Handle NegotiateTransferParameters Base command
+- control: introduce `pldm_control_set_multipart_size()`
+- control: introduce `pldm_control_get_multipart_size()`
+
 ### Changed
 
 ### Deprecated

@@ -31,6 +31,18 @@ subdir('dsp')
 # testing.
 if get_option('abi').contains('testing')
     subdir('transport')
+
+    test(
+        'control',
+        executable(
+            'control',
+            'control.cpp',
+            implicit_include_directories: false,
+            include_directories: test_include_dirs,
+            dependencies: [libpldm_dep, gtest_dep, gmock_dep],
+        ),
+        workdir: meson.current_source_dir(),
+    )
 endif
 
 if get_option('oem').contains('ibm')

@@ -22,6 +22,11 @@ struct pldm_type_versions {
 	/* A buffer of 32 entries, for commands 0-0xff */
 	const bitfield8_t *commands;
 
+	/* Max bytes per transfer part for NegotiateTransferParameters (0x07).
+	 * Zero means this type does not participate in multipart transfers. */
+	uint16_t max_multipart_size;
+	uint16_t negotiated_multipart_size; /* 0 = not yet negotiated */
+
 	uint8_t pldm_type;
 };
 
