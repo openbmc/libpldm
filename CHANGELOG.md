@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
+- dsp: file: Introduce `encode_pldm_file_df_heartbeat_resp()`
+
 ### Changed
 
 ### Deprecated

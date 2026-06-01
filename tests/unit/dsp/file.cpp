@@ -756,3 +756,254 @@ TEST(DecodeDfCloseReq, BadTestUnAllocatedPtrParams)
     EXPECT_EQ(rc, -EINVAL);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodeDfHeartbeatReq, GoodTest)
+{
+    uint16_t file_descriptor = 0x0200;
+    uint32_t requester_max_interval = 0x88130000; // 5000 ms
+
+    struct pldm_file_df_heartbeat_req req_data = {};
+
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
+    int rc;
+
+    static constexpr const size_t payload_length = PLDM_DF_HEARTBEAT_REQ_BYTES;
+
+    PLDM_MSG_DEFINE_P(requestMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, requestMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint16(buf, file_descriptor);
+    pldm_msgbuf_insert_uint32(buf, requester_max_interval);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_pldm_file_df_heartbeat_req(requestMsg, payload_length,
+                                           &req_data);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(req_data.file_descriptor, file_descriptor);
+    EXPECT_EQ(req_data.requester_max_interval, requester_max_interval);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodeDfHeartbeatReq, BadTestUnAllocatedPtrParams)
+{
+    uint16_t file_descriptor = 0x0200;
+    uint32_t requester_max_interval = 0x88130000; // 5000 ms
+
+    struct pldm_file_df_heartbeat_req req_data = {};
+
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
+    int rc;
+
+    static constexpr const size_t payload_length = PLDM_DF_HEARTBEAT_REQ_BYTES;
+
+    PLDM_MSG_DEFINE_P(requestMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, requestMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint16(buf, file_descriptor);
+    pldm_msgbuf_insert_uint32(buf, requester_max_interval);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_pldm_file_df_heartbeat_req(nullptr, payload_length, &req_data);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_file_df_heartbeat_req(requestMsg, payload_length, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodeDfHeartbeatReq, BadTestInvalidExpectedInputMsgLength)
+{
+    uint16_t file_descriptor = 0x0200;
+    uint32_t requester_max_interval = 0x88130000; // 5000 ms
+
+    struct pldm_file_df_heartbeat_req req_data = {};
+
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
+    int rc;
+
+    static constexpr const size_t payload_length = PLDM_DF_HEARTBEAT_REQ_BYTES;
+
+    PLDM_MSG_DEFINE_P(requestMsg, payload_length);
+
+    rc = pldm_msgbuf_init_errno(buf, 0, requestMsg->payload, payload_length);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint16(buf, file_descriptor);
+    pldm_msgbuf_insert_uint32(buf, requester_max_interval);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_pldm_file_df_heartbeat_req(requestMsg, 0, &req_data);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodeDfHeartbeatResp, GoodTest)
+{
+    uint8_t instance_id = 0;
+    uint8_t completion_code = PLDM_SUCCESS;
+    uint32_t responder_max_interval = 0xa00f0000; // 4000 ms
+    size_t payload_length = PLDM_DF_HEARTBEAT_RESP_BYTES;
+    std::array<uint8_t, PLDM_DF_HEARTBEAT_RESP_BYTES> responseMsg = {
+        0x00, 0x00, 0x00, 0x0f, 0xa0};
+
+    const struct pldm_file_df_heartbeat_resp resp_data = {
+        completion_code, responder_max_interval};
+
+    PLDM_MSG_DEFINE_P(responsePtr, PLDM_DF_HEARTBEAT_RESP_BYTES);
+    auto rc = encode_pldm_file_df_heartbeat_resp(instance_id, &resp_data,
+                                                 responsePtr, &payload_length);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(0, memcmp(responsePtr->payload, responseMsg.data(),
+                        sizeof(responseMsg)));
+    EXPECT_EQ(payload_length, PLDM_DF_HEARTBEAT_RESP_BYTES);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodeDfHeartbeatResp, GoodTestCompletionCode)
+{
+    uint8_t instance_id = 0;
+    uint8_t completion_code = PLDM_FILE_CC_INVALID_FILE_DESCRIPTOR;
+    uint32_t responder_max_interval = 0xa00f0000; // 4000 ms
+    size_t payload_length = PLDM_DF_HEARTBEAT_RESP_BYTES;
+
+    const struct pldm_file_df_heartbeat_resp resp_data = {
+        completion_code, responder_max_interval};
+
+    PLDM_MSG_DEFINE_P(responsePtr, PLDM_DF_HEARTBEAT_RESP_BYTES);
+    auto rc = encode_pldm_file_df_heartbeat_resp(instance_id, &resp_data,
+                                                 responsePtr, &payload_length);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(payload_length, 1ul); // Completion code only
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodeDfHeartbeatResp, BadTestUnAllocatedPtrParams)
+{
+    uint8_t instance_id = 0;
+    uint8_t completion_code = PLDM_SUCCESS;
+    uint32_t responder_max_interval = 0xa00f0000; // 4000 ms
+    int rc;
+    size_t payload_length = PLDM_DF_HEARTBEAT_RESP_BYTES;
+
+    const struct pldm_file_df_heartbeat_resp resp_data = {
+        completion_code, responder_max_interval};
+
+    PLDM_MSG_DEFINE_P(responsePtr, PLDM_DF_HEARTBEAT_RESP_BYTES);
+    rc = encode_pldm_file_df_heartbeat_resp(instance_id, &resp_data, nullptr,
+                                            &payload_length);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = encode_pldm_file_df_heartbeat_resp(instance_id, nullptr, responsePtr,
+                                            &payload_length);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodeDfHeartbeatResp, BadTestInvalidExpectedOutputMsgLength)
+{
+    uint8_t instance_id = 0;
+    uint8_t completion_code = PLDM_SUCCESS;
+    uint32_t responder_max_interval = 0xa00f0000; // 4000 ms
+    size_t payload_length;
+
+    const struct pldm_file_df_heartbeat_resp resp_data = {
+        completion_code, responder_max_interval};
+
+    PLDM_MSG_DEFINE_P(responsePtr, PLDM_DF_HEARTBEAT_RESP_BYTES);
+    payload_length = 1;
+    auto rc = encode_pldm_file_df_heartbeat_resp(instance_id, &resp_data,
+                                                 responsePtr, &payload_length);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DfHeartbeatReq, RoundTrip)
+{
+    uint8_t instance_id = 0;
+    uint16_t file_descriptor = 0x0200;
+    uint32_t requester_max_interval = 0x88130000; // 5000 ms
+
+    const struct pldm_file_df_heartbeat_req req_in = {file_descriptor,
+                                                      requester_max_interval};
+    struct pldm_file_df_heartbeat_req req_out = {};
+
+    PLDM_MSG_DEFINE_P(msg, PLDM_DF_HEARTBEAT_REQ_BYTES);
+    size_t payload_length = PLDM_DF_HEARTBEAT_REQ_BYTES;
+
+    ASSERT_EQ(encode_pldm_file_df_heartbeat_req(instance_id, &req_in, msg,
+                                                &payload_length),
+              0);
+    ASSERT_EQ(decode_pldm_file_df_heartbeat_req(msg, payload_length, &req_out),
+              0);
+
+    EXPECT_EQ(req_out.file_descriptor, req_in.file_descriptor);
+    EXPECT_EQ(req_out.requester_max_interval, req_in.requester_max_interval);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DfHeartbeatResp, RoundTrip)
+{
+    uint8_t instance_id = 0;
+    uint8_t completion_code = PLDM_SUCCESS;
+    uint32_t responder_max_interval = 0xa00f0000; // 4000 ms
+
+    const struct pldm_file_df_heartbeat_resp resp_in = {completion_code,
+                                                        responder_max_interval};
+    struct pldm_file_df_heartbeat_resp resp_out = {};
+
+    PLDM_MSG_DEFINE_P(msg, PLDM_DF_HEARTBEAT_RESP_BYTES);
+    size_t payload_length = PLDM_DF_HEARTBEAT_RESP_BYTES;
+
+    ASSERT_EQ(encode_pldm_file_df_heartbeat_resp(instance_id, &resp_in, msg,
+                                                 &payload_length),
+              0);
+    ASSERT_EQ(
+        decode_pldm_file_df_heartbeat_resp(msg, payload_length, &resp_out), 0);
+
+    EXPECT_EQ(resp_out.completion_code, resp_in.completion_code);
+    EXPECT_EQ(resp_out.responder_max_interval, resp_in.responder_max_interval);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DfHeartbeatResp, RoundTripCompletionCode)
+{
+    uint8_t instance_id = 0;
+    uint8_t completion_code = PLDM_FILE_CC_INVALID_FILE_DESCRIPTOR;
+    uint32_t responder_max_interval = 0xa00f0000; // 4000 ms
+
+    const struct pldm_file_df_heartbeat_resp resp_in = {completion_code,
+                                                        responder_max_interval};
+    struct pldm_file_df_heartbeat_resp resp_out = {};
+
+    PLDM_MSG_DEFINE_P(msg, PLDM_DF_HEARTBEAT_RESP_BYTES);
+    size_t payload_length = PLDM_DF_HEARTBEAT_RESP_BYTES;
+
+    ASSERT_EQ(encode_pldm_file_df_heartbeat_resp(instance_id, &resp_in, msg,
+                                                 &payload_length),
+              0);
+    ASSERT_EQ(payload_length, 1ul);
+    ASSERT_EQ(
+        decode_pldm_file_df_heartbeat_resp(msg, payload_length, &resp_out), 0);
+
+    EXPECT_EQ(resp_out.completion_code, resp_in.completion_code);
+}
+#endif
