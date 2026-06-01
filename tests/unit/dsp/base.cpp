@@ -2464,7 +2464,6 @@ TEST(EncodeMultipartSendResponse, BadTestInvalidExpectedOutputMsgLength)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodePldmBaseGetPldmTypesResp, InvalidParameters)
 {
     pldm_base_get_pldm_types_resp resp{};
@@ -2485,9 +2484,7 @@ TEST(EncodePldmBaseGetPldmTypesResp, InvalidParameters)
     EXPECT_EQ(-EOVERFLOW, encode_pldm_base_get_pldm_types_resp(
                               0, &resp, &msg, &payload_length));
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodePldmBaseGetPldmTypesResp, ErrorResponse)
 {
     PLDM_MSG_DEFINE_P(msg, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES);
@@ -2501,9 +2498,7 @@ TEST(EncodePldmBaseGetPldmTypesResp, ErrorResponse)
     EXPECT_EQ(PLDM_ERROR, msg->payload[0]);
     EXPECT_EQ(1, payload_length);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodePldmBaseGetPldmTypesResp, GoodResponse)
 {
     size_t payload_length = PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES;
@@ -2524,9 +2519,7 @@ TEST(EncodePldmBaseGetPldmTypesResp, GoodResponse)
         EXPECT_EQ(msg->payload[1 + i], 1 << i);
     }
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodePldmBaseGetPldmTypesResp, InvalidParameters)
 {
     pldm_base_get_pldm_types_resp resp{};
@@ -2551,9 +2544,7 @@ TEST(DecodePldmBaseGetPldmTypesResp, InvalidParameters)
         ASSERT_EQ(-EBADMSG, rc);
     }
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodePldmBaseGetPldmTypesResp, ErrorResponse)
 {
     pldm_base_get_pldm_types_resp resp{};
@@ -2565,9 +2556,7 @@ TEST(DecodePldmBaseGetPldmTypesResp, ErrorResponse)
     EXPECT_EQ(0, rc);
     ASSERT_EQ(PLDM_ERROR, resp.completion_code);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodePldmBaseGetPldmTypesResp, GoodResponse)
 {
     PLDM_MSG_DEFINE_P(msg, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES);
@@ -2588,4 +2577,3 @@ TEST(DecodePldmBaseGetPldmTypesResp, GoodResponse)
         ASSERT_EQ(1u << i, resp.pldm_types[i].byte);
     }
 }
-#endif
