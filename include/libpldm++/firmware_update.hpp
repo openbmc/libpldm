@@ -6,6 +6,7 @@
 
 #include <cstdint>
 #include <stdexcept>
+#include <variant>
 #include <vector>
 #include <expected>
 #include <span>
@@ -26,12 +27,14 @@ namespace fw_update
 	// The caller cannot safely access any members beyond what they requested.
 	enum class PackagePin {
 		v1,
+		v2,
 	};
 
 	// forward declare structs and classes for our 'friend' declarations
 	class PackageParser;
 	struct DescriptorData;
 	struct FirmwareDeviceIDRecord;
+	struct DownstreamDeviceIDRecord;
 	struct ComponentImageInfo;
 
 	struct DescriptorData : libpldm::GrowableStruct<struct DescriptorData>,
@@ -42,6 +45,7 @@ namespace fw_update
 		// since it is holding a map of descriptors, it needs to construct
 		// for the private copy constructor
 		friend struct pldm::fw_update::FirmwareDeviceIDRecord;
+		friend struct pldm::fw_update::DownstreamDeviceIDRecord;
 
 		DescriptorData(const struct DescriptorData &ref);
 		DescriptorData(const std::vector<uint8_t> &data);
@@ -155,6 +159,57 @@ namespace fw_update
 		const std::vector<uint8_t> firmwareDevicePackageData;
 	};
 
+	struct DownstreamDeviceIDRecord
+		: libpldm::GrowableStruct<struct DownstreamDeviceIDRecord>,
+		  private libpldm::NonCopyableNonMoveable {
+	    private:
+		friend pldm::fw_update::PackageParser;
+
+		DownstreamDeviceIDRecord(
+			const std::bitset<32> &downstreamDeviceUpdateOptionFlags,
+			const std::optional<std::string> &
+				downstreamDeviceSelfContainedActivationMinVersionString,
+			const std::optional<uint32_t> &
+				downstreamDeviceSelfContainedActivationMinVersionComparisonStamp,
+			const std::vector<size_t> &applicableComponents,
+			const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+				&recordDescriptors,
+
+			const std::vector<uint8_t> &downstreamDevicePackageData,
+			const std::vector<uint8_t>
+				&downstreamDeviceReferenceManifestData);
+
+	    public:
+		~DownstreamDeviceIDRecord();
+
+		DownstreamDeviceIDRecord(const DownstreamDeviceIDRecord &ref);
+
+		bool operator==(const DownstreamDeviceIDRecord &other) const;
+
+		// data members
+		// introduced in PackagePin::v2
+		const std::bitset<32> downstreamDeviceUpdateOptionFlags;
+
+		// introduced in PackagePin::v2
+		const std::optional<std::string>
+			downstreamDeviceSelfContainedActivationMinVersionString;
+		// introduced in PackagePin::v2
+		const std::optional<uint32_t>
+			downstreamDeviceSelfContainedActivationMinVersionComparisonStamp;
+		// introduced in PackagePin::v2
+		const std::vector<size_t> applicableComponents;
+
+		// introduced in PackagePin::v2
+		const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+			recordDescriptors;
+
+		// introduced in PackagePin::v2
+		const std::vector<uint8_t> downstreamDevicePackageData;
+
+		// introduced in PackagePin::v2
+		const std::vector<uint8_t> downstreamDeviceReferenceManifestData;
+	};
+
 	struct Package : libpldm::GrowableStruct<struct Package>,
 			 private libpldm::NonCopyableNonMoveable {
 	    private:
@@ -162,6 +217,8 @@ namespace fw_update
 
 		Package(const std::vector<FirmwareDeviceIDRecord>
 				&firmwareDeviceIdRecords,
+			const std::vector<DownstreamDeviceIDRecord>
+				&downstreamDeviceIdRecords,
 			const std::vector<ComponentImageInfo>
 				&componentImageInformation);
 
@@ -178,6 +235,9 @@ namespace fw_update
 			firmwareDeviceIdRecords;
 		// introduced in PackagePin::v1
 		const std::vector<ComponentImageInfo> componentImageInformation;
+		// introduced in PackagePin::v2
+		const std::vector<DownstreamDeviceIDRecord>
+			downstreamDeviceIdRecords;
 	};
 
 	class PackageParserError {
