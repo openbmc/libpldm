@@ -1,4 +1,4 @@
-testscpp = ['firmware_update_test']
+testscpp = ['firmware_update_test', 'firmware_update_test_v1_3_0']
 
 foreach t : testscpp
     test(
