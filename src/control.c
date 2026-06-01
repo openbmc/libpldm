@@ -136,36 +136,23 @@ static int pldm_control_get_types(struct pldm_control *control,
 				  size_t req_payload_len, struct pldm_msg *resp,
 				  size_t *resp_payload_len)
 {
-	uint8_t cc;
+	struct pldm_base_get_pldm_types_resp body = { PLDM_SUCCESS, { { 0 } } };
 
 	if (req_payload_len != PLDM_GET_TYPES_REQ_BYTES) {
 		return pldm_control_reply_error(PLDM_ERROR_INVALID_LENGTH, hdr,
 						resp, resp_payload_len);
 	}
 
-	bitfield8_t types[8];
-	memset(types, 0, sizeof(types));
 	for (int i = 0; i < PLDM_CONTROL_MAX_VERSION_TYPES; i++) {
 		uint8_t ty = control->types[i].pldm_type;
 		if (ty < 64 && control->types[i].versions) {
 			uint8_t bit = 1 << (ty % 8);
-			types[ty / 8].byte |= bit;
+			body.pldm_types[ty / 8].byte |= bit;
 		}
 	}
 
-	/* encode_get_types_resp doesn't have length checking */
-	uint32_t required_resp_payload = 1 + 8;
-	if (*resp_payload_len < required_resp_payload) {
-		return -EOVERFLOW;
-	}
-	*resp_payload_len = required_resp_payload;
-
-	cc = encode_get_types_resp(hdr->instance, PLDM_SUCCESS, types, resp);
-	if (cc) {
-		return pldm_control_reply_error(cc, hdr, resp,
-						resp_payload_len);
-	}
-	return 0;
+	return encode_pldm_base_get_pldm_types_resp(hdr->instance, &body, resp,
+						    resp_payload_len);
 }
 
 static int pldm_control_get_commands(struct pldm_control *control,
