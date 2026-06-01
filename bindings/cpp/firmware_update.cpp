@@ -98,6 +98,32 @@ static void getApplicableComponents(std::vector<size_t> &compList,
 
 pldm::fw_update::PackageParser::~PackageParser() = default;
 
+std::optional<pldm::fw_update::ReferenceManifestData>
+pldm::fw_update::PackageParser::getReferenceManifestData(
+	struct variable_field &reference_manifest_data) noexcept
+{
+	if (reference_manifest_data.length == 0) {
+		return std::nullopt;
+	}
+
+	std::vector<uint8_t> refManifestDataRaw = {
+		reference_manifest_data.ptr,
+		reference_manifest_data.ptr + reference_manifest_data.length
+	};
+
+	const ssize_t len = refManifestDataRaw[1];
+	std::span<uint8_t> vendorID = { refManifestDataRaw.begin() + 2,
+					static_cast<size_t>(len) };
+	std::span<uint8_t> data = { refManifestDataRaw.begin() + 2 + len,
+				    refManifestDataRaw.size() - 2 - len };
+	ReferenceManifestData refManifestData(
+		refManifestDataRaw[0],
+		std::vector(vendorID.begin(), vendorID.end()),
+		std::vector(data.begin(), data.end()));
+
+	return refManifestData;
+}
+
 LIBPLDM_ABI_STABLE
 std::expected<std::unique_ptr<pldm::fw_update::Package>,
 	      pldm::fw_update::PackageParserError>
@@ -108,15 +134,16 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 
 	struct pldm_package package = {};
 	std::vector<FirmwareDeviceIDRecord> fwDeviceIDRecords = {};
+	std::vector<DownstreamDeviceIDRecord> downstreamDeviceIDRecords = {};
 	pldm_package_header_information_pad hdr = {};
 	int rc;
 
-	if (pin != PackagePin::v1) {
+	if (pin != PackagePin::v1 && pin != PackagePin::v2) {
 		return std::unexpected(
 			PackageParserError("unsupported format revision"));
 	}
 
-	DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(cpin);
+	DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H(cpin);
 
 	rc = decode_pldm_firmware_update_package(pkg.data(), pkgSize, &cpin,
 						 &hdr, &package, 0);
@@ -183,15 +210,95 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 				PackageParserError(imageSetVerStr.error()));
 		}
 
+		const auto referenceManifestData = getReferenceManifestData(
+			deviceIdRecordData.reference_manifest_data);
+
 		fwDeviceIDRecords.emplace_back(FirmwareDeviceIDRecord(
 			deviceUpdateOptionFlags, std::move(componentsList),
 			imageSetVerStr.value(), std::move(descriptors),
-			fwDevicePkgData));
+			fwDevicePkgData, std::move(referenceManifestData)));
 	}
 
 	if (rc) {
 		return std::unexpected(PackageParserError(
 			"could not iterate fw device descriptors", rc));
+	}
+
+	pldm_package_downstream_device_id_record downstreamDeviceId{};
+	foreach_pldm_package_downstream_device_id_record(package,
+							 downstreamDeviceId, rc)
+	{
+		std::optional<std::string> selfContainedActivationMinVersion =
+			std::nullopt;
+		auto selfContainedActivationMinVersionExpected = utils::toString(
+			downstreamDeviceId
+				.self_contained_activation_min_version_string_type,
+			downstreamDeviceId
+				.self_contained_activation_min_version_string);
+
+		if (selfContainedActivationMinVersionExpected.has_value()) {
+			selfContainedActivationMinVersion =
+				selfContainedActivationMinVersionExpected
+					.value();
+		}
+
+		// Spec (DSP0267, v1.3.0, Table 5) has a typo, comparison stamps are uint32_t throughout.
+		std::optional<uint32_t>
+			selfContainedActivationMinVersionComparisonStamp =
+				std::nullopt;
+
+		if (downstreamDeviceId.update_option_flags.value & 0b1) {
+			selfContainedActivationMinVersionComparisonStamp =
+				downstreamDeviceId
+					.self_contained_activation_min_version_comparison_stamp;
+		}
+
+		std::bitset<32> deviceUpdateOptionFlags =
+			downstreamDeviceId.update_option_flags.value;
+
+		std::vector<size_t> componentsList;
+
+		getApplicableComponents(
+			componentsList,
+			downstreamDeviceId.applicable_components.bitmap);
+
+		std::vector<uint8_t> downstreamDevicePackageData = {
+			downstreamDeviceId.package_data.ptr,
+			downstreamDeviceId.package_data.ptr +
+				downstreamDeviceId.package_data.length
+		};
+
+		const auto refManifestData = getReferenceManifestData(
+			downstreamDeviceId.reference_manifest_data);
+
+		std::map<uint16_t, std::unique_ptr<DescriptorData> >
+			descriptors{};
+
+		struct pldm_descriptor desc;
+
+		foreach_pldm_package_downstream_device_id_record_descriptor(
+			package, downstreamDeviceId, desc, rc)
+		{
+			auto result =
+				helperParseFDDescriptor(&desc, descriptors);
+
+			if (!result.has_value()) {
+				return std::unexpected(
+					PackageParserError(result.error()));
+			}
+		}
+
+		downstreamDeviceIDRecords.emplace_back(DownstreamDeviceIDRecord(
+			deviceUpdateOptionFlags,
+			selfContainedActivationMinVersion,
+			selfContainedActivationMinVersionComparisonStamp,
+			componentsList, descriptors,
+			downstreamDevicePackageData, refManifestData));
+	}
+
+	if (rc) {
+		return std::unexpected(PackageParserError(
+			"could not iterate downstream device descriptors", rc));
 	}
 
 	std::vector<ComponentImageInfo> componentImageInfos = {};
@@ -213,12 +320,17 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 				PackageParserError(compVerStr.error()));
 		}
 
+		std::vector<uint8_t> componentOpaqueData = {
+			imageInfo.component_opaque_data.ptr,
+			imageInfo.component_opaque_data.ptr +
+				imageInfo.component_opaque_data.length
+		};
 		componentImageInfos.emplace_back(ComponentImageInfo(
 			imageInfo.component_classification,
 			imageInfo.component_identifier,
 			imageInfo.component_comparison_stamp, compOptions,
 			reqCompActivationMethod, imageInfo.component_image,
-			compVerStr.value()));
+			compVerStr.value(), componentOpaqueData));
 	}
 
 	if (rc) {
@@ -228,6 +340,8 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 
 	// We cannot do a std::make_unique here since since the constructor is private.
 	// We are friends but the constructor is called inside the template which is not a friend.
-	return std::unique_ptr<Package>(new Package(
-		std::move(fwDeviceIDRecords), std::move(componentImageInfos)));
+	return std::unique_ptr<Package>(
+		new Package(std::move(fwDeviceIDRecords),
+			    std::move(downstreamDeviceIDRecords),
+			    std::move(componentImageInfos)));
 }

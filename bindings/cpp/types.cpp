@@ -49,7 +49,8 @@ pldm::fw_update::ComponentImageInfo::ComponentImageInfo(
 	uint32_t componentComparisonStamp, std::bitset<16> componentOptions,
 	std::bitset<16> requestedComponentActivationMethod,
 	const variable_field &componentLocation,
-	const std::string &componentVersion)
+	const std::string &componentVersion,
+	const std::vector<uint8_t> &componentOpaqueData)
 	: componentClassification(componentClassification),
 	  componentIdentifier(componentIdentifier),
 	  compComparisonStamp(componentComparisonStamp),
@@ -57,7 +58,8 @@ pldm::fw_update::ComponentImageInfo::ComponentImageInfo(
 	  requestedComponentActivationMethod(
 		  requestedComponentActivationMethod),
 	  componentLocation(componentLocation),
-	  componentVersion(componentVersion)
+	  componentVersion(componentVersion),
+	  componentOpaqueData(componentOpaqueData)
 {
 }
 
@@ -71,7 +73,8 @@ pldm::fw_update::ComponentImageInfo::ComponentImageInfo(
 	  requestedComponentActivationMethod(
 		  ref.requestedComponentActivationMethod),
 	  componentLocation(ref.componentLocation),
-	  componentVersion(ref.componentVersion)
+	  componentVersion(ref.componentVersion),
+	  componentOpaqueData(ref.componentOpaqueData)
 {
 }
 
@@ -105,6 +108,9 @@ bool pldm::fw_update::ComponentImageInfo::operator==(
 	if (CompareNEQ(&ComponentImageInfo::componentVersion, other)) {
 		return false;
 	}
+	if (CompareNEQ(&ComponentImageInfo::componentOpaqueData, other)) {
+		return false;
+	}
 	return true;
 }
 
@@ -119,7 +125,8 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 	const std::string &componentImageSetVersion,
 	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
 		&descriptorsIn,
-	const std::vector<uint8_t> &firmwareDevicePackageData)
+	const std::vector<uint8_t> &firmwareDevicePackageData,
+	const std::optional<ReferenceManifestData> &referenceManifestData)
 	: deviceUpdateOptionFlags(deviceUpdateOptionFlags),
 	  applicableComponents(applicableComponents),
 	  componentImageSetVersionString(componentImageSetVersion),
@@ -134,7 +141,8 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 
 		  return res;
 	  }()),
-	  firmwareDevicePackageData(firmwareDevicePackageData)
+	  firmwareDevicePackageData(firmwareDevicePackageData),
+	  referenceManifestData(referenceManifestData)
 {
 }
 
@@ -155,7 +163,8 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 
 		  return res;
 	  }()),
-	  firmwareDevicePackageData(ref.firmwareDevicePackageData)
+	  firmwareDevicePackageData(ref.firmwareDevicePackageData),
+	  referenceManifestData(ref.referenceManifestData)
 {
 }
 
@@ -234,14 +243,170 @@ bool pldm::fw_update::FirmwareDeviceIDRecord::operator==(
 		}
 	}
 
+	return CompareEQ(&FirmwareDeviceIDRecord::referenceManifestData, other);
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
+	const std::bitset<32> &downstreamDeviceUpdateOptionFlags,
+	const std::optional<std::string>
+		&downstreamDeviceSelfContainedActivationMinVersionString,
+	const std::optional<uint32_t> &
+		downstreamDeviceSelfContainedActivationMinVersionComparisonStamp,
+	const std::vector<size_t> &applicableComponents,
+	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+		&recordDescriptors,
+
+	const std::vector<uint8_t> &downstreamDevicePackageData,
+	const std::optional<ReferenceManifestData>
+		&downstreamDeviceReferenceManifestData)
+	: downstreamDeviceUpdateOptionFlags(downstreamDeviceUpdateOptionFlags),
+	  downstreamDeviceSelfContainedActivationMinVersionString(
+		  downstreamDeviceSelfContainedActivationMinVersionString),
+	  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp(
+		  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp),
+	  applicableComponents(applicableComponents),
+	  recordDescriptors([&recordDescriptors]() {
+		  std::map<uint16_t, std::unique_ptr<DescriptorData> > res;
+		  // We have to init the map here manually since the descriptor constructor
+		  // is not a friend of the template which would otherwise be able to construct it.
+		  for (const auto &[key, desc] : recordDescriptors) {
+			  res[key] = std::unique_ptr<DescriptorData>(
+				  new DescriptorData(*desc));
+		  }
+
+		  return res;
+	  }()),
+	  downstreamDevicePackageData(downstreamDevicePackageData),
+	  downstreamDeviceReferenceManifestData(
+		  downstreamDeviceReferenceManifestData)
+{
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
+	const DownstreamDeviceIDRecord &ref)
+	: downstreamDeviceUpdateOptionFlags(
+		  ref.downstreamDeviceUpdateOptionFlags),
+	  downstreamDeviceSelfContainedActivationMinVersionString(
+		  ref.downstreamDeviceSelfContainedActivationMinVersionString),
+	  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp(
+		  ref.downstreamDeviceSelfContainedActivationMinVersionComparisonStamp),
+	  applicableComponents(ref.applicableComponents),
+	  recordDescriptors([&ref]() {
+		  std::map<uint16_t, std::unique_ptr<DescriptorData> > res;
+		  // We have to init the map here manually since the descriptor constructor
+		  // is not a friend of the template which would otherwise be able to construct it.
+		  for (const auto &[key, desc] : ref.recordDescriptors) {
+			  res[key] = std::unique_ptr<DescriptorData>(
+				  new DescriptorData(*desc));
+		  }
+
+		  return res;
+	  }()),
+	  downstreamDevicePackageData(ref.downstreamDevicePackageData),
+	  downstreamDeviceReferenceManifestData(
+		  ref.downstreamDeviceReferenceManifestData)
+
+{
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::DownstreamDeviceIDRecord::~DownstreamDeviceIDRecord()
+{
+}
+
+LIBPLDM_ABI_TESTING
+bool pldm::fw_update::DownstreamDeviceIDRecord::operator==(
+	const DownstreamDeviceIDRecord &other) const
+{
+	if (CompareNEQ(
+		    &DownstreamDeviceIDRecord::downstreamDeviceUpdateOptionFlags,
+		    other)) {
+		return false;
+	}
+	if (CompareNEQ(
+		    &DownstreamDeviceIDRecord::
+			    downstreamDeviceSelfContainedActivationMinVersionString,
+		    other)) {
+		return false;
+	}
+	if (CompareNEQ(
+		    &DownstreamDeviceIDRecord::
+			    downstreamDeviceSelfContainedActivationMinVersionComparisonStamp,
+		    other)) {
+		return false;
+	}
+	if (CompareNEQ(&DownstreamDeviceIDRecord::applicableComponents,
+		       other)) {
+		return false;
+	}
+	for (const auto &[k, v] : recordDescriptors) {
+		if (!other.recordDescriptors.contains(k)) {
+			return false;
+		}
+		const auto &otherDesc = other.recordDescriptors.at(k);
+
+		if (!v.get() && !otherDesc.get()) {
+			continue;
+		}
+		if (!v.get() || !otherDesc.get()) {
+			return false;
+		}
+
+		// descriptor value comparison
+		if (*v != *otherDesc) {
+			return false;
+		}
+	}
+	if (CompareNEQ(&DownstreamDeviceIDRecord::downstreamDevicePackageData,
+		       other)) {
+		return false;
+	}
+	if (CompareNEQ(&DownstreamDeviceIDRecord::
+			       downstreamDeviceReferenceManifestData,
+		       other)) {
+		return false;
+	}
+
 	return true;
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::ReferenceManifestData::ReferenceManifestData(
+	const uint8_t SVHID, const std::vector<uint8_t> &vendorID,
+	const std::vector<uint8_t> &data)
+	: SVHID(SVHID), vendorID(vendorID), data(data)
+{
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::ReferenceManifestData::ReferenceManifestData(
+	const ReferenceManifestData &ref)
+	: SVHID(ref.SVHID), vendorID(ref.vendorID), data(ref.data)
+{
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::ReferenceManifestData::~ReferenceManifestData()
+{
+}
+
+LIBPLDM_ABI_TESTING
+bool pldm::fw_update::ReferenceManifestData::operator==(
+	const ReferenceManifestData &other) const
+{
+	return SVHID == other.SVHID && vendorID == other.vendorID &&
+	       data == other.data;
 }
 
 pldm::fw_update::Package::Package(
 	const std::vector<FirmwareDeviceIDRecord> &firmwareDeviceIdRecords,
+	const std::vector<DownstreamDeviceIDRecord> &downstreamDeviceIdRecords,
 	const std::vector<ComponentImageInfo> &componentImageInformation)
 	: firmwareDeviceIdRecords(firmwareDeviceIdRecords),
-	  componentImageInformation(componentImageInformation)
+	  componentImageInformation(componentImageInformation),
+	  downstreamDeviceIdRecords(downstreamDeviceIdRecords)
 {
 }
 
