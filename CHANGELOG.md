@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
+- dsp: file: Introduce `encode_pldm_file_df_heartbeat_resp()`
 - dsp: base: Introduce `encode_pldm_base_get_pldm_types_resp()`
 - dsp: base: Introduce `decode_pldm_base_get_pldm_types_resp()`
 - dsp: platform: Add requester APIs for SetNumericSensorEnable
