@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- control: Handle NegotiateTransferParameters Base command
+- control: introduce `pldm_control_set_multipart_size()`
+- control: introduce `pldm_control_get_multipart_size()`
 - platform_pd: Add `pldm_platform_pd` (DSP0248 v1.2.0) responder
 - dsp: file: Introduce `enum pldm_file_df_open_attribute`
 - dsp: platform: Introduce `encode_pldm_platform_compact_numeric_sensor_pdr()`
