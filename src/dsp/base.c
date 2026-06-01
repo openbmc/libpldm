@@ -643,6 +643,45 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int decode_pldm_base_multipart_receive_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_multipart_receive_req *req)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_MULTIPART_RECEIVE_REQ_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, req->pldm_type);
+	pldm_msgbuf_extract(buf, req->transfer_opflag);
+	pldm_msgbuf_extract(buf, req->transfer_ctx);
+	pldm_msgbuf_extract(buf, req->transfer_handle);
+	pldm_msgbuf_extract(buf, req->section_offset);
+	pldm_msgbuf_extract(buf, req->section_length);
+
+	if (req->transfer_opflag > PLDM_XFER_CURRENT_PART) {
+		return pldm_msgbuf_discard(buf, -EPROTO);
+	}
+
+	// DSP0240 v1.2.0 §9.6.5 Table 17: transfer_handle must be non-zero
+	// only when operation is PLDM_XFER_NEXT_PART.
+	if (req->transfer_handle == 0 &&
+	    req->transfer_opflag == PLDM_XFER_NEXT_PART) {
+		return pldm_msgbuf_discard(buf, -EPROTO);
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_pldm_base_multipart_receive_req(
 	uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,

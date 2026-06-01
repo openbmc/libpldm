@@ -763,6 +763,24 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 				 uint32_t *section_offset,
 				 uint32_t *section_length);
 
+/** @brief Decode a PLDM MultipartReceive request message
+ *
+ *  @param[in] msg - Request message
+ *  @param[in] payload_length - length of request message payload
+ *  @param[out] req - pointer to the decoded request message
+ *  @return 0 on success
+ *          -EINVAL if the input parameters' memory are not allocated
+ *          -EOVERFLOW if the input message buffer is too short
+ *          -EBADMSG if the input message buffer is too large
+ *          -ENOTSUP if the PLDM type is not supported
+ *          -EPROTO if parsed values violate the package format specification
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int decode_pldm_base_multipart_receive_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_multipart_receive_req *req);
+
 /** @brief Encode a PLDM MultipartReceive request message
  *
  *  @param[in] instance_id - Message's instance id

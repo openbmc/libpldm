@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- dsp: base: Add `decode_pldm_base_multipart_receive_req()`
 - dsp: base: Introduce `encode_pldm_base_get_pldm_types_resp()`
 - dsp: base: Introduce `decode_pldm_base_get_pldm_types_resp()`
 - dsp: platform: Add requester APIs for SetNumericSensorEnable
