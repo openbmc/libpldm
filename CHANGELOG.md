@@ -56,6 +56,8 @@ Change categories:
 
 ### Changed
 
+- dsp: base: Stabilise `encode_pldm_base_get_pldm_types_resp()`
+- dsp: base: Stabilise `decode_pldm_base_get_pldm_types_resp()`
 - libpldm++:
   - pldm::fw_update::PackageParser::parse is stable
   - pldm::fw_update::Package::~Package is stable
