@@ -144,8 +144,9 @@ static int fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp(
         return -1;
     }
 
-    decode_pldm_platform_set_numeric_sensor_enable_resp((const void*)data, size,
-                                                        &completion_code);
+    decode_pldm_platform_set_numeric_sensor_enable_resp(
+        (const void*)data, size - offsetof(struct pldm_msg, payload),
+        &completion_code);
 
     return 0;
 }
