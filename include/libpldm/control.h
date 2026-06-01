@@ -62,6 +62,40 @@ int pldm_control_add_type(struct pldm_control *control, uint8_t pldm_type,
 			  const void *versions, size_t versions_count,
 			  const bitfield8_t *commands);
 
+/** @brief Set the maximum transfer part size for a PLDM type.
+ *
+ * DSP0240 §9.6.2: NegotiateTransferParameters part sizes are per PLDM type.
+ * The type must have been registered with pldm_control_add_type first.
+ *
+ * @param[in] control
+ * @param[in] pldm_type  - the type to configure
+ * @param[in] max_size   - max bytes per part (PLDM header + payload).
+ *                         Must be >= 256 (DSP0240 §9.6.2 minimum), or zero to
+ *                         remove this type from multipart participation.
+ *
+ * @return 0 on success, -ENOENT if the type is not registered,
+ *         -EINVAL if max_size is non-zero and less than 256.
+ */
+int pldm_control_set_multipart_size(struct pldm_control *control,
+				    uint8_t pldm_type, uint16_t max_size);
+
+/** @brief Query the negotiated multipart transfer size for a PLDM type.
+ *
+ * Returns the part size agreed in the most recent successful
+ * NegotiateTransferParameters exchange for the given type.
+ * Returns -ENODATA if negotiation has not yet occurred or has been
+ * invalidated by a subsequent call to pldm_control_set_multipart_size.
+ *
+ * @param[in]  control
+ * @param[in]  pldm_type
+ * @param[out] negotiated_size - negotiated size in bytes
+ *
+ * @return 0 on success, -ENOENT if type not registered, -ENODATA if not
+ *         yet negotiated.
+ */
+int pldm_control_get_multipart_size(struct pldm_control *control,
+				    uint8_t pldm_type,
+				    uint16_t *negotiated_size);
 #ifdef __cplusplus
 }
 #endif

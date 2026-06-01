@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- control: Handle NegotiateTransferParameters Base command
+- control: introduce `pldm_control_set_multipart_size()`
+- control: introduce `pldm_control_get_multipart_size()`
 - dsp: base: Expose `PLDM_BASE_MIN_PART_SIZE` in the public header
 
 ### Changed
