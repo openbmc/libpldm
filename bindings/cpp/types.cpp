@@ -143,12 +143,14 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 	const std::string &componentImageSetVersion,
 	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
 		&descriptorsIn,
-	const std::vector<uint8_t> &firmwareDevicePackageData)
+	const std::vector<uint8_t> &firmwareDevicePackageData,
+	const std::optional<ReferenceManifestData> &referenceManifestData)
 	: deviceUpdateOptionFlags(deviceUpdateOptionFlags),
 	  applicableComponents(applicableComponents),
 	  componentImageSetVersionString(componentImageSetVersion),
 	  recordDescriptors(DescriptorData::copyDescriptorMap(descriptorsIn)),
-	  firmwareDevicePackageData(firmwareDevicePackageData)
+	  firmwareDevicePackageData(firmwareDevicePackageData),
+	  referenceManifestData(referenceManifestData)
 {
 }
 
@@ -160,7 +162,8 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 	  componentImageSetVersionString(ref.componentImageSetVersionString),
 	  recordDescriptors(
 		  DescriptorData::copyDescriptorMap(ref.recordDescriptors)),
-	  firmwareDevicePackageData(ref.firmwareDevicePackageData)
+	  firmwareDevicePackageData(ref.firmwareDevicePackageData),
+	  referenceManifestData(ref.referenceManifestData)
 {
 }
 
@@ -239,7 +242,7 @@ bool pldm::fw_update::FirmwareDeviceIDRecord::operator==(
 		}
 	}
 
-	return true;
+	return CompareEQ(&FirmwareDeviceIDRecord::referenceManifestData, other);
 }
 
 LIBPLDM_ABI_TESTING
@@ -253,7 +256,9 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
 		&recordDescriptors,
 
-	const std::vector<uint8_t> &downstreamDevicePackageData)
+	const std::vector<uint8_t> &downstreamDevicePackageData,
+	const std::optional<ReferenceManifestData>
+		&downstreamDeviceReferenceManifestData)
 	: downstreamDeviceUpdateOptionFlags(downstreamDeviceUpdateOptionFlags),
 	  downstreamDeviceApplicableComponents(applicableComponents),
 	  downstreamDeviceSelfContainedActivationMinVersionString(
@@ -262,7 +267,9 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 		  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp),
 	  downstreamDeviceRecordDescriptors(
 		  DescriptorData::copyDescriptorMap(recordDescriptors)),
-	  downstreamDevicePackageData(downstreamDevicePackageData)
+	  downstreamDevicePackageData(downstreamDevicePackageData),
+	  downstreamDeviceReferenceManifestData(
+		  downstreamDeviceReferenceManifestData)
 {
 }
 
@@ -279,7 +286,15 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 		  ref.downstreamDeviceSelfContainedActivationMinVersionComparisonStamp),
 	  downstreamDeviceRecordDescriptors(DescriptorData::copyDescriptorMap(
 		  ref.downstreamDeviceRecordDescriptors)),
-	  downstreamDevicePackageData(ref.downstreamDevicePackageData)
+	  downstreamDevicePackageData(ref.downstreamDevicePackageData),
+	  downstreamDeviceReferenceManifestData(
+		  ref.downstreamDeviceReferenceManifestData)
+
+{
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::DownstreamDeviceIDRecord::~DownstreamDeviceIDRecord()
 {
 }
 
@@ -328,13 +343,42 @@ bool pldm::fw_update::DownstreamDeviceIDRecord::operator==(
 			return false;
 		}
 	}
-	return !CompareNEQ(
-		&DownstreamDeviceIDRecord::downstreamDevicePackageData, other);
+	if (CompareNEQ(&DownstreamDeviceIDRecord::downstreamDevicePackageData,
+		       other)) {
+		return false;
+	}
+	if (CompareNEQ(&DownstreamDeviceIDRecord::
+			       downstreamDeviceReferenceManifestData,
+		       other)) {
+		return false;
+	}
+
+	return true;
+}
+
+pldm::fw_update::ReferenceManifestData::ReferenceManifestData(
+	const uint8_t SVHID, const std::vector<uint8_t> &vendorID,
+	const std::vector<uint8_t> &data)
+	: SVHID(SVHID), vendorID(vendorID), data(data)
+{
+}
+
+pldm::fw_update::ReferenceManifestData::~ReferenceManifestData()
+{
+}
+
+pldm::fw_update::ReferenceManifestData::ReferenceManifestData(
+	const ReferenceManifestData &ref)
+	: SVHID(ref.SVHID), vendorID(ref.vendorID), data(ref.data)
+{
 }
 
 LIBPLDM_ABI_TESTING
-pldm::fw_update::DownstreamDeviceIDRecord::~DownstreamDeviceIDRecord()
+bool pldm::fw_update::ReferenceManifestData::operator==(
+	const ReferenceManifestData &other) const
 {
+	return SVHID == other.SVHID && vendorID == other.vendorID &&
+	       data == other.data;
 }
 
 pldm::fw_update::Package::Package(
