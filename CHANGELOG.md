@@ -86,6 +86,14 @@ Change categories:
 
 ### Deprecated
 
+- dsp: base: Deprecate `encode_get_types_resp()`
+
+  Users should switch to `encode_pldm_base_get_pldm_types_resp()`
+
+- dsp: base: Deprecate `decode_get_types_resp()`
+
+  Users should switch to `decode_pldm_base_get_pldm_types_resp()`
+
 - `struct pldm_get_types_resp`
 - Misspelled PLDM_STATE_SET_BOOT_PROG_STATE_PCI_RESORUCE_CONFIG member of the
   pldm_state_set_boot_progress_state_values enum
