@@ -4,7 +4,52 @@
 #include <string.h>
 
 #include "array.h"
+#include "control-internal.h"
 #include "msgbuf.h"
+
+#if HAVE_LIBPLDM_API_TESTING
+static int fuzz_pldm_control_handle_msg(const uint8_t* data, size_t size)
+{
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    struct pldm_control control;
+    const uint8_t* msg_data;
+    uint8_t resp_buf[128];
+    uint16_t negotiated;
+    uint16_t max_size;
+    uint8_t pldm_type;
+    size_t msg_size;
+    size_t resp_len;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 3, data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, pldm_type);
+    pldm_msgbuf_extract(buf, max_size);
+    pldm_msgbuf_span_remaining(buf, (const void**)&msg_data, &msg_size);
+
+    if (pldm_msgbuf_complete(buf))
+    {
+        return -1;
+    }
+
+    if (pldm_control_setup(&control, sizeof(control)))
+    {
+        return -1;
+    }
+
+    pldm_control_set_multipart_size(&control, pldm_type, max_size);
+    pldm_control_get_multipart_size(&control, pldm_type, &negotiated);
+
+    resp_len = sizeof(resp_buf);
+    pldm_control_handle_msg(&control, msg_data, msg_size, resp_buf, &resp_len);
+
+    return 0;
+}
+#endif
 
 static int fuzz_get_fru_record_by_option(const uint8_t* data, size_t size)
 {
@@ -296,10 +341,11 @@ static int libpldm_encode_one_pldm_msg(const uint8_t* data, size_t size)
 }
 
 static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
-    fuzz_get_fru_record_by_option,
-    fuzz_pldm_state_effecter_pdr,
-    libpldm_decode_one_pldm_msg,
-    libpldm_encode_one_pldm_msg,
+    fuzz_get_fru_record_by_option, fuzz_pldm_state_effecter_pdr,
+    libpldm_decode_one_pldm_msg,   libpldm_encode_one_pldm_msg,
+#if HAVE_LIBPLDM_API_TESTING
+    fuzz_pldm_control_handle_msg,
+#endif
 };
 
 int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size)

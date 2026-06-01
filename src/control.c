@@ -22,7 +22,8 @@ static const uint32_t PLDM_BASE_VERSIONS[PLDM_BASE_VERSIONS_COUNT] = {
 const bitfield8_t PLDM_CONTROL_COMMANDS[32] = {
 	// 0x00..0x07
 	{ .byte = (1 << PLDM_GET_TID | 1 << PLDM_GET_PLDM_VERSION |
-		   1 << PLDM_GET_PLDM_TYPES | 1 << PLDM_GET_PLDM_COMMANDS) }
+		   1 << PLDM_GET_PLDM_TYPES | 1 << PLDM_GET_PLDM_COMMANDS |
+		   1 << PLDM_NEGOTIATE_TRANSFER_PARAMETERS) },
 };
 
 static int pldm_control_reply_error(uint8_t ccode,
@@ -217,6 +218,87 @@ static int pldm_control_get_commands(struct pldm_control *control,
 	return 0;
 }
 
+static int pldm_control_negotiate_transfer_parameters(
+	struct pldm_control *control, const struct pldm_header_info *hdr,
+	const struct pldm_msg *req, size_t req_payload_len,
+	struct pldm_msg *resp, size_t *resp_payload_len)
+{
+	struct pldm_base_negotiate_transfer_params_resp resp_data = {
+		.completion_code = PLDM_SUCCESS,
+	};
+	struct pldm_base_negotiate_transfer_params_req req_data;
+	uint16_t part_size;
+	int rc;
+
+	rc = decode_pldm_base_negotiate_transfer_params_req(
+		req, req_payload_len, &req_data);
+	if (rc) {
+		return pldm_control_reply_error(PLDM_ERROR_INVALID_LENGTH, hdr,
+						resp, resp_payload_len);
+	}
+
+	/* DSP0240 §9.6.2: minimum part size is 256 bytes */
+	if (req_data.requester_part_size < PLDM_BASE_MIN_PART_SIZE) {
+		return pldm_control_reply_error(PLDM_ERROR_INVALID_DATA, hdr,
+						resp, resp_payload_len);
+	}
+
+	if (*resp_payload_len <
+	    PLDM_BASE_NEGOTIATE_TRANSFER_PARAMETERS_RESP_BYTES) {
+		return -EOVERFLOW;
+	}
+
+	for (int i = 0; i < PLDM_CONTROL_MAX_VERSION_TYPES; i++) {
+		uint8_t pldm_type = control->types[i].pldm_type;
+		if (control->types[i].versions &&
+		    control->types[i].max_multipart_size) {
+			resp_data.responder_protocol_support[pldm_type / 8]
+				.byte |= 1 << (pldm_type % 8);
+		}
+	}
+
+	for (int i = 0; i < 8; i++) {
+		resp_data.responder_protocol_support[i].byte &=
+			req_data.requester_protocol_support[i].byte;
+	}
+
+	part_size = req_data.requester_part_size;
+	for (int i = 0; i < PLDM_CONTROL_MAX_VERSION_TYPES; i++) {
+		uint8_t pldm_type = control->types[i].pldm_type;
+		if (!control->types[i].versions ||
+		    !(resp_data.responder_protocol_support[pldm_type / 8].byte &
+		      (1 << (pldm_type % 8)))) {
+			continue;
+		}
+		if (control->types[i].max_multipart_size < part_size) {
+			part_size = control->types[i].max_multipart_size;
+		}
+		if (control->types[i].negotiated_multipart_size &&
+		    control->types[i].negotiated_multipart_size < part_size) {
+			part_size = control->types[i].negotiated_multipart_size;
+		}
+	}
+	resp_data.responder_part_size = part_size;
+
+	rc = encode_pldm_base_negotiate_transfer_params_resp(
+		hdr->instance, &resp_data, resp, resp_payload_len);
+	if (rc) {
+		return -EINVAL;
+	}
+
+	for (int i = 0; i < PLDM_CONTROL_MAX_VERSION_TYPES; i++) {
+		uint8_t ty = control->types[i].pldm_type;
+		if (!control->types[i].versions ||
+		    !(resp_data.responder_protocol_support[ty / 8].byte &
+		      (1 << (ty % 8)))) {
+			continue;
+		}
+		control->types[i].negotiated_multipart_size = part_size;
+	}
+
+	return 0;
+}
+
 /* A response should only be used when this returns 0, and *resp_len > 0 */
 LIBPLDM_ABI_TESTING
 int pldm_control_handle_msg(struct pldm_control *control, const void *req_msg,
@@ -271,6 +353,11 @@ int pldm_control_handle_msg(struct pldm_control *control, const void *req_msg,
 		rc = pldm_control_get_commands(control, &hdr, req,
 					       req_payload_len, resp,
 					       &resp_payload_len);
+		break;
+	case PLDM_NEGOTIATE_TRANSFER_PARAMETERS:
+		rc = pldm_control_negotiate_transfer_parameters(
+			control, &hdr, req, req_payload_len, resp,
+			&resp_payload_len);
 		break;
 	default:
 		rc = pldm_control_reply_error(PLDM_ERROR_UNSUPPORTED_PLDM_CMD,
@@ -336,4 +423,43 @@ int pldm_control_add_type(struct pldm_control *control, uint8_t pldm_type,
 	v->commands = commands;
 
 	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_control_set_multipart_size(struct pldm_control *control,
+				    uint8_t pldm_type, uint16_t max_size)
+{
+	/* DSP0240 §9.6.2: minimum part size is 256 bytes; zero disables multipart */
+	if (max_size != 0 && max_size < PLDM_BASE_MIN_PART_SIZE) {
+		return -EINVAL;
+	}
+
+	for (int i = 0; i < PLDM_CONTROL_MAX_VERSION_TYPES; i++) {
+		if (control->types[i].versions &&
+		    control->types[i].pldm_type == pldm_type) {
+			control->types[i].max_multipart_size = max_size;
+			control->types[i].negotiated_multipart_size = 0;
+			return 0;
+		}
+	}
+	return -ENOENT;
+}
+
+LIBPLDM_ABI_TESTING
+int pldm_control_get_multipart_size(struct pldm_control *control,
+				    uint8_t pldm_type,
+				    uint16_t *negotiated_size)
+{
+	for (int i = 0; i < PLDM_CONTROL_MAX_VERSION_TYPES; i++) {
+		if (control->types[i].versions &&
+		    control->types[i].pldm_type == pldm_type) {
+			if (!control->types[i].negotiated_multipart_size) {
+				return -ENODATA;
+			}
+			*negotiated_size =
+				control->types[i].negotiated_multipart_size;
+			return 0;
+		}
+	}
+	return -ENOENT;
 }
