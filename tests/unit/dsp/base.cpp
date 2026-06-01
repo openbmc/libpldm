@@ -9,6 +9,8 @@
 #include <cstring>
 #include <vector>
 
+#include "array.h"
+
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -2459,5 +2461,69 @@ TEST(EncodeMultipartSendResponse, BadTestInvalidExpectedOutputMsgLength)
     auto rc = encode_pldm_base_multipart_send_resp(0, &resp_data, response,
                                                    &payload_length);
     EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodePldmBaseGetPldmTypesResp, InvalidParameters)
+{
+    pldm_base_get_pldm_types_resp resp{};
+    pldm_msg msg{};
+
+    EXPECT_EQ(-EINVAL, decode_pldm_base_get_pldm_types_resp(
+                           NULL, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES, &resp));
+    EXPECT_EQ(-EINVAL, decode_pldm_base_get_pldm_types_resp(
+                           &msg, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES, NULL));
+    EXPECT_EQ(-EOVERFLOW, decode_pldm_base_get_pldm_types_resp(&msg, 0, &resp));
+    EXPECT_EQ(-EOVERFLOW,
+              decode_pldm_base_get_pldm_types_resp(
+                  &msg, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES - 1, &resp));
+
+    {
+        PLDM_MSG_DEFINE_P(msg, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES + 1);
+        int rc;
+
+        memset(msg, 0, PLDM_MSG_SIZE(PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES + 1));
+        rc = decode_pldm_base_get_pldm_types_resp(
+            msg, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES + 1, &resp);
+        ASSERT_EQ(-EBADMSG, rc);
+    }
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodePldmBaseGetPldmTypesResp, ErrorResponse)
+{
+    pldm_base_get_pldm_types_resp resp{};
+    PLDM_MSG_DEFINE_P(msg, 1);
+    int rc;
+
+    msg->payload[0] = PLDM_ERROR;
+    rc = decode_pldm_base_get_pldm_types_resp(msg, 1, &resp);
+    EXPECT_EQ(0, rc);
+    ASSERT_EQ(PLDM_ERROR, resp.completion_code);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodePldmBaseGetPldmTypesResp, GoodResponse)
+{
+    PLDM_MSG_DEFINE_P(msg, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES);
+    pldm_base_get_pldm_types_resp resp{};
+    int rc;
+
+    msg->payload[0] = PLDM_SUCCESS;
+    for (size_t i = 0; i < ARRAY_SIZE(resp.pldm_types); i++)
+    {
+        msg->payload[1 + i] = 1 << i;
+    }
+    rc = decode_pldm_base_get_pldm_types_resp(
+        msg, PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES, &resp);
+    ASSERT_EQ(0, rc);
+    ASSERT_EQ(PLDM_SUCCESS, resp.completion_code);
+    for (size_t i = 0; i < ARRAY_SIZE(resp.pldm_types); i++)
+    {
+        ASSERT_EQ(1u << i, resp.pldm_types[i].byte);
+    }
 }
 #endif

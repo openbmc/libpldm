@@ -996,6 +996,40 @@ int decode_pldm_base_negotiate_transfer_params_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_base_negotiate_transfer_params_resp *resp);
 
+/*
+ * PLDM Messaging Control and Discovery
+ *
+ * API elements defined in command code order
+ */
+
+/** @struct pldm_base_get_types_resp
+ *
+ * Response structure defined by DSP0240 v1.2.0, 9.3 GetPLDMTypes (0x04), Table
+ * 12.
+ */
+struct pldm_base_get_pldm_types_resp {
+	uint8_t completion_code;
+	bitfield8_t pldm_types[8];
+};
+#define PLDM_BASE_GET_PLDM_TYPES_RESP_BYTES 9
+
+/** @brief Decode a GetPLDMTypes response message
+ *
+ *  @param[in] msg - The response message structure
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] resp - The decoded response
+ *  @return 0 on success
+ *          -EINVAL if the input parameters are invalid
+ *          -EOVERFLOW if the input message buffer is too small
+ *          -EBADMSG if the input message buffer is too large
+ *
+ *  @note Only the value of resp->completion_code is defined if its value is not
+ *        PLDM_SUCCESS.
+ */
+int decode_pldm_base_get_pldm_types_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_base_get_pldm_types_resp *resp);
+
 #ifdef __cplusplus
 }
 #endif
