@@ -237,11 +237,82 @@ bool pldm::fw_update::FirmwareDeviceIDRecord::operator==(
 	return true;
 }
 
+LIBPLDM_ABI_TESTING
+pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
+	const std::bitset<32> &downstreamDeviceUpdateOptionFlags,
+	const std::string
+		&downstreamDeviceSelfContainedActivationMinVersionString,
+	const std::optional<std::variant<std::string, uint32_t> > &
+		downstreamDeviceSelfContainedActivationMinVersionComparisonStamp,
+	const std::vector<size_t> &applicableComponents,
+	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+		&recordDescriptors,
+
+	const std::vector<uint8_t> &downstreamDevicePackageData,
+	const std::vector<uint8_t> &downstreamDeviceReferenceManifestData)
+	: downstreamDeviceUpdateOptionFlags(downstreamDeviceUpdateOptionFlags),
+	  downstreamDeviceSelfContainedActivationMinVersionString(
+		  downstreamDeviceSelfContainedActivationMinVersionString),
+	  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp(
+		  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp),
+	  applicableComponents(applicableComponents),
+	  recordDescriptors([&recordDescriptors]() {
+		  std::map<uint16_t, std::unique_ptr<DescriptorData> > res;
+		  // We have to init the map here manually since the descriptor constructor
+		  // is not a friend of the template which would otherwise be able to construct it.
+		  for (const auto &[key, desc] : recordDescriptors) {
+			  res[key] = std::unique_ptr<DescriptorData>(
+				  new DescriptorData(*desc));
+		  }
+
+		  return res;
+	  }()),
+	  downstreamDevicePackageData(downstreamDevicePackageData),
+	  downstreamDeviceReferenceManifestData(
+		  downstreamDeviceReferenceManifestData)
+{
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
+	const DownstreamDeviceIDRecord &ref)
+	: downstreamDeviceUpdateOptionFlags(
+		  ref.downstreamDeviceUpdateOptionFlags),
+	  downstreamDeviceSelfContainedActivationMinVersionString(
+		  ref.downstreamDeviceSelfContainedActivationMinVersionString),
+	  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp(
+		  ref.downstreamDeviceSelfContainedActivationMinVersionComparisonStamp),
+	  applicableComponents(ref.applicableComponents),
+	  recordDescriptors([&ref]() {
+		  std::map<uint16_t, std::unique_ptr<DescriptorData> > res;
+		  // We have to init the map here manually since the descriptor constructor
+		  // is not a friend of the template which would otherwise be able to construct it.
+		  for (const auto &[key, desc] : ref.recordDescriptors) {
+			  res[key] = std::unique_ptr<DescriptorData>(
+				  new DescriptorData(*desc));
+		  }
+
+		  return res;
+	  }()),
+	  downstreamDevicePackageData(ref.downstreamDevicePackageData),
+	  downstreamDeviceReferenceManifestData(
+		  ref.downstreamDeviceReferenceManifestData)
+
+{
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::DownstreamDeviceIDRecord::~DownstreamDeviceIDRecord()
+{
+}
+
 pldm::fw_update::Package::Package(
 	const std::vector<FirmwareDeviceIDRecord> &firmwareDeviceIdRecords,
+	const std::vector<DownstreamDeviceIDRecord> &downstreamDeviceIdRecords,
 	const std::vector<ComponentImageInfo> &componentImageInformation)
 	: firmwareDeviceIdRecords(firmwareDeviceIdRecords),
-	  componentImageInformation(componentImageInformation)
+	  componentImageInformation(componentImageInformation),
+	  downstreamDeviceIdRecords(downstreamDeviceIdRecords)
 {
 }
 
