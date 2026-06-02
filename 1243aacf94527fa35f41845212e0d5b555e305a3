@@ -16,6 +16,24 @@
       "message": "nit: I don\u0027t see we test this against -EBADMSG?",
       "revId": "1243aacf94527fa35f41845212e0d5b555e305a3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efd30a14_a3e0e5b0",
+        "filename": "tests/unit/dsp/base.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2478,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-02T11:44:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6ab7dece_f3ff246d",
+      "revId": "1243aacf94527fa35f41845212e0d5b555e305a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
