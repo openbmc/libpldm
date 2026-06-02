@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36aedb38_3f3926f9",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 1001526
+      },
+      "writtenOn": "2026-06-02T03:56:21Z",
+      "side": 1,
+      "message": "If we return here, the payload_length output param won\u0027t be updated accordingly?! Will callers always check CC first before proceeding any further?",
+      "range": {
+        "startLine": 1242,
+        "startChar": 0,
+        "endLine": 1245,
+        "endChar": 2
+      },
+      "revId": "8881b2fa50f7cd3b78f59a806316686aa4f90da0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
