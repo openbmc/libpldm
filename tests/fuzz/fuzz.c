@@ -572,12 +572,23 @@ static int fuzz_pldm_entity_association_pdr_extract(const uint8_t* data,
     return 0;
 }
 
+static int fuzz_decode_pldm_platform_state_sensor_pdr(const uint8_t* data,
+                                                      size_t size)
+{
+    struct pldm_platform_state_sensor_pdr pdr;
+
+    decode_pldm_platform_state_sensor_pdr(data, size, &pdr);
+
+    return 0;
+}
+
 static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
     fuzz_decode_pldm_firmware_update_package,
     fuzz_get_fru_record_by_option,
     fuzz_pldm_pdr_add,
     fuzz_pldm_entity_association_pdr_extract,
     fuzz_pldm_state_effecter_pdr,
+    fuzz_decode_pldm_platform_state_sensor_pdr,
     libpldm_decode_one_pldm_msg,
     libpldm_encode_one_pldm_msg,
 };
