@@ -405,35 +405,6 @@ static bool pldm_record_handle_in_range(uint32_t record_handle,
 	       record_handle <= last_record_handle;
 }
 
-LIBPLDM_CC_NONNULL
-static int decode_pldm_state_sensor_pdr(uint8_t *data, uint32_t size,
-					struct pldm_state_sensor_pdr *pdr)
-{
-	PLDM_MSGBUF_RO_DEFINE_P(buf);
-	int rc = 0;
-	rc = pldm_msgbuf_init_errno(buf, sizeof(struct pldm_state_sensor_pdr),
-				    (uint8_t *)data, size);
-	if (rc) {
-		return rc;
-	}
-
-	pldm_msgbuf_extract(buf, pdr->hdr.record_handle);
-	pldm_msgbuf_extract(buf, pdr->hdr.version);
-	pldm_msgbuf_extract(buf, pdr->hdr.type);
-	pldm_msgbuf_extract(buf, pdr->hdr.record_change_num);
-	pldm_msgbuf_extract(buf, pdr->hdr.length);
-	pldm_msgbuf_extract(buf, pdr->terminus_handle);
-	pldm_msgbuf_extract(buf, pdr->sensor_id);
-	pldm_msgbuf_extract(buf, pdr->entity_type);
-	pldm_msgbuf_extract(buf, pdr->entity_instance);
-	pldm_msgbuf_extract(buf, pdr->container_id);
-	pldm_msgbuf_extract(buf, pdr->sensor_init);
-	pldm_msgbuf_extract(buf, pdr->sensor_auxiliary_names_pdr);
-	pldm_msgbuf_extract(buf, pdr->composite_sensor_count);
-
-	return pldm_msgbuf_complete(buf);
-}
-
 LIBPLDM_ABI_STABLE
 int pldm_pdr_delete_by_sensor_id(pldm_pdr *repo, uint16_t sensor_id,
 				 bool is_remote, uint32_t *record_handle)
@@ -456,10 +427,16 @@ int pldm_pdr_delete_by_sensor_id(pldm_pdr *repo, uint16_t sensor_id,
 			continue;
 		}
 
-		rc = decode_pldm_state_sensor_pdr(record->data, record->size,
+		rc = decode_state_sensor_pdr_data(record->data, record->size,
 						  &pdr);
 		if (rc) {
-			return rc;
+			/*
+			 * decode_state_sensor_pdr_data() reports failures as
+			 * PLDM completion codes; this API contracts on negative
+			 * errno, so translate before propagating.
+			 */
+			return rc == PLDM_ERROR_INVALID_LENGTH ? -EOVERFLOW :
+								 -EINVAL;
 		}
 
 		if (record->is_remote != is_remote ||
