@@ -123,6 +123,15 @@ enum pldm_platform_transfer_flag {
 	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_EFFECTER_DATA_SIZE_MIN_LENGTH +  \
 	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_RANGE_FIELD_MIN_LENGTH)
 
+/*
+ * Minimum length of state sensor PDR, including the 10-byte common PDR
+ * header, PLDMTerminusHandle, sensorID, entityType, entityInstanceNumber,
+ * containerID, sensorInit, sensorAuxiliaryNamesPDR and compositeSensorCount
+ * in `Table 81 - State Sensor PDR` of DSP0248 v1.3.0. The variable
+ * possible_states[] array that follows is not covered by this minimum.
+ */
+#define PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH 23
+
 /**
  * Minimum length of entity auxiliary name effecter PDR includes size of hdr,
  * entityType, entityInstanceNumber, entityContainerID, sharedNameCount and
@@ -853,6 +862,29 @@ struct pldm_value_pdr_hdr {
 	uint8_t type;
 	uint16_t record_change_num;
 	uint16_t length;
+};
+
+/** @struct pldm_platform_state_sensor_pdr
+ *
+ *  Structure representing the fixed portion of the State Sensor PDR defined in
+ *  `Table 81 - State Sensor PDR` of DSP0248 v1.3.0, up to and including
+ *  compositeSensorCount. The trailing variable-length possible_states[] array
+ *  is iterated by the caller and is not represented here.
+ *
+ *  This is the unpacked decode target used by
+ *  decode_pldm_platform_state_sensor_pdr(); see @ref pldm_state_sensor_pdr for
+ *  the legacy packed representation.
+ */
+struct pldm_platform_state_sensor_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint16_t terminus_handle;
+	uint16_t sensor_id;
+	uint16_t entity_type;
+	uint16_t entity_instance_number;
+	uint16_t container_id;
+	uint8_t sensor_init;
+	bool8_t sensor_auxiliary_names_pdr;
+	uint8_t composite_sensor_count;
 };
 
 /** @struct pldm_numeric_sensor_value_pdr
@@ -2312,6 +2344,28 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 int decode_numeric_sensor_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_sensor_value_pdr *pdr_value);
+
+/** @brief Decode State Sensor PDR data
+ *
+ *  Decodes the fixed portion of a State Sensor PDR as defined in
+ *  `Table 81 - State Sensor PDR` of DSP0248 v1.3.0, up to and including
+ *  compositeSensorCount, into @ref pldm_platform_state_sensor_pdr. The
+ *  variable-length possible_states[] array that follows compositeSensorCount
+ *  is not decoded here; iterate it from @p pdr_data once compositeSensorCount
+ *  is known.
+ *
+ *  @param[in] pdr_data - pdr data for state sensor
+ *  @param[in] pdr_data_length - Length of pdr data
+ *  @param[out] pdr_value - unpacked state sensor PDR struct (fixed fields)
+ *  @return 0 on success, otherwise a negative errno value:
+ *          -EINVAL - @p pdr_data or @p pdr_value is NULL
+ *          -EOVERFLOW - @p pdr_data_length is shorter than the fixed portion,
+ *                       or the decoded hdr.length exceeds the buffer
+ *          -EBADMSG - the buffer was not fully consumed
+ */
+int decode_pldm_platform_state_sensor_pdr(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_platform_state_sensor_pdr *pdr_value);
 
 /* GetNumericEffecterValue */
 
