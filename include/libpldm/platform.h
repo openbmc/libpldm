@@ -883,10 +883,11 @@ struct pldm_value_pdr_hdr {
  *  Structure representing the fixed portion of the State Sensor PDR defined in
  *  `Table 81 - State Sensor PDR` of DSP0248 v1.3.0, up to and including
  *  compositeSensorCount. The trailing variable-length possible_states[] array
- *  is handled by the caller and is not represented here.
+ *  is iterated by the caller and is not represented here.
  *
  *  This is the unpacked representation exchanged with
- *  encode_pldm_platform_state_sensor_pdr(); see @ref pldm_state_sensor_pdr for
+ *  encode_pldm_platform_state_sensor_pdr() and
+ *  decode_pldm_platform_state_sensor_pdr(); see @ref pldm_state_sensor_pdr for
  *  the legacy packed representation.
  */
 struct pldm_platform_state_sensor_pdr {
@@ -2370,6 +2371,27 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 int decode_numeric_sensor_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_sensor_value_pdr *pdr_value);
+
+/** @brief Decode State Sensor PDR data
+ *
+ *  Decodes the fixed portion of a State Sensor PDR as defined in
+ *  `Table 81 - State Sensor PDR` of DSP0248 v1.3.0, up to and including
+ *  compositeSensorCount, into @ref pldm_platform_state_sensor_pdr. The
+ *  variable-length possible_states[] array that follows compositeSensorCount
+ *  is not decoded here; iterate it from @p pdr_data once compositeSensorCount
+ *  is known.
+ *
+ *  @param[in] pdr_data - pdr data for state sensor
+ *  @param[in] pdr_data_length - Length of pdr data
+ *  @param[out] pdr_value - unpacked state sensor PDR struct (fixed fields)
+ *  @return 0 on success, otherwise a negative errno value:
+ *          -EINVAL - @p pdr_data or @p pdr_value is NULL
+ *          -EOVERFLOW - @p pdr_data_length is shorter than the fixed portion,
+ *                       or the decoded hdr.length exceeds the buffer
+ */
+int decode_pldm_platform_state_sensor_pdr(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_platform_state_sensor_pdr *pdr_value);
 
 /** @brief Encode State Sensor PDR data
  *
