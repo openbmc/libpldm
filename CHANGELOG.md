@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add `decode_pldm_platform_state_sensor_pdr()` and
+  `struct pldm_platform_state_sensor_pdr` (DSP0248 v1.3.0)
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
