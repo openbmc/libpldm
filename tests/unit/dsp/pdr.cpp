@@ -741,7 +741,7 @@ TEST(PDRAccess, testRemoveBySensorIDDecodeFailure)
     int rc =
         pldm_pdr_delete_by_sensor_id(repo, 50, false, &removed_record_handle);
 
-    // We expect a failure from decode_pldm_state_effecter_pdr
+    // We expect a failure from decode_pldm_platform_state_sensor_pdr
     EXPECT_NE(rc, 0);
     EXPECT_EQ(pldm_pdr_get_record_count(repo),
               1u); // Record remains in the repo
@@ -763,6 +763,10 @@ TEST(PDRAccess, testRemoveBySensorID)
     pldm_state_sensor_pdr* pdr = new (entry.data()) pldm_state_sensor_pdr;
 
     pdr->hdr.type = PLDM_STATE_SENSOR_PDR;
+    // hdr.length must reflect the bytes following the common PDR header so the
+    // decoder behind pldm_pdr_delete_by_sensor_id accepts the record; the same
+    // buffer (and length) is reused for every sensor_id added below.
+    pdr->hdr.length = static_cast<uint16_t>(pdrSize - sizeof(pldm_pdr_hdr));
     pdr->sensor_id = 1;
     uint32_t handle = 1;
     EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &handle),
@@ -803,6 +807,40 @@ TEST(PDRAccess, testRemoveBySensorID)
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(removed_record_handle, 3u);
     EXPECT_EQ(pldm_pdr_get_record_count(repo), 2u);
+
+    pldm_pdr_destroy(repo);
+}
+
+TEST(PDRAccess, testRemoveBySensorIDValidLength)
+{
+    auto repo = pldm_pdr_init();
+    ASSERT_NE(repo, nullptr);
+
+    // A well-formed State Sensor PDR whose hdr.length reflects the bytes that
+    // follow the common PDR header. This drives the success path of the
+    // decoder behind the rewired pldm_pdr_delete_by_sensor_id
+    // (decode_pldm_platform_state_sensor_pdr), including its hdr.length check.
+    size_t pdrSize =
+        sizeof(pldm_state_sensor_pdr) + sizeof(state_sensor_possible_states);
+    std::vector<uint8_t> entry(pdrSize, 0);
+
+    pldm_state_sensor_pdr* pdr = new (entry.data()) pldm_state_sensor_pdr;
+    pdr->hdr.type = PLDM_STATE_SENSOR_PDR;
+    pdr->hdr.length = static_cast<uint16_t>(pdrSize - sizeof(pldm_pdr_hdr));
+    pdr->sensor_id = 42;
+    pdr->composite_sensor_count = 1;
+
+    uint32_t handle = 7;
+    EXPECT_EQ(pldm_pdr_add(repo, entry.data(), entry.size(), false, 1, &handle),
+              0);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 1u);
+
+    uint32_t removed_record_handle = 0;
+    int rc =
+        pldm_pdr_delete_by_sensor_id(repo, 42, false, &removed_record_handle);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(removed_record_handle, 7u);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 0u);
 
     pldm_pdr_destroy(repo);
 }
