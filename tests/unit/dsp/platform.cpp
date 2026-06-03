@@ -5171,6 +5171,129 @@ TEST(decodeNumericSensorPdrDataDeathTest, InvalidSizeTest)
 }
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(decodePldmPlatformStateSensorPdr, GoodTest)
+{
+    std::vector<uint8_t> pdr{
+        0x1,
+        0x0,
+        0x0,
+        0x0,                   // record handle = 1
+        0x1,                   // PDRHeaderVersion
+        PLDM_STATE_SENSOR_PDR, // PDRType
+        0x0,
+        0x0, // recordChangeNumber
+        0x15,
+        0x0, // dataLength = 21 (bytes after the 10-byte header)
+        0x2,
+        0x0, // PLDMTerminusHandle = 2
+        0x3,
+        0x0, // sensorID = 3
+        PLDM_ENTITY_POWER_SUPPLY,
+        0x0, // entityType = Power Supply(120)
+        0x1,
+        0x0, // entityInstanceNumber = 1
+        0x4,
+        0x0,          // containerID = 4
+        PLDM_NO_INIT, // sensorInit
+        false,        // sensorAuxiliaryNamesPDR
+        0x2,          // compositeSensorCount = 2
+        // composite sensor 0: stateSetID=1 (Health), 1 byte of states
+        0x1,
+        0x0,
+        0x1,
+        0x0e,
+        // composite sensor 1: stateSetID=13 (Presence), 1 byte of states
+        0xd,
+        0x0,
+        0x1,
+        0x06,
+    };
+
+    struct pldm_platform_state_sensor_pdr decodedPdr;
+    auto rc = decode_pldm_platform_state_sensor_pdr(pdr.data(), pdr.size(),
+                                                    &decodedPdr);
+    EXPECT_EQ(0, rc);
+    EXPECT_EQ(1u, decodedPdr.hdr.record_handle);
+    EXPECT_EQ(1u, decodedPdr.hdr.version);
+    EXPECT_EQ(PLDM_STATE_SENSOR_PDR, decodedPdr.hdr.type);
+    EXPECT_EQ(0u, decodedPdr.hdr.record_change_num);
+    EXPECT_EQ(21u, decodedPdr.hdr.length);
+    EXPECT_EQ(2u, decodedPdr.terminus_handle);
+    EXPECT_EQ(3u, decodedPdr.sensor_id);
+    EXPECT_EQ(PLDM_ENTITY_POWER_SUPPLY, decodedPdr.entity_type);
+    EXPECT_EQ(1u, decodedPdr.entity_instance_number);
+    EXPECT_EQ(4u, decodedPdr.container_id);
+    EXPECT_EQ(PLDM_NO_INIT, decodedPdr.sensor_init);
+    EXPECT_EQ(false, decodedPdr.sensor_auxiliary_names_pdr);
+    EXPECT_EQ(2u, decodedPdr.composite_sensor_count);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodePldmPlatformStateSensorPdr, InvalidArgTest)
+{
+    std::vector<uint8_t> pdr(PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH, 0);
+    struct pldm_platform_state_sensor_pdr decodedPdr;
+
+    EXPECT_EQ(-EINVAL, decode_pldm_platform_state_sensor_pdr(
+                           nullptr, pdr.size(), &decodedPdr));
+    EXPECT_EQ(-EINVAL, decode_pldm_platform_state_sensor_pdr(
+                           pdr.data(), pdr.size(), nullptr));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodePldmPlatformStateSensorPdr, ShortBufferTest)
+{
+    std::vector<uint8_t> pdr(PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH - 1, 0);
+    struct pldm_platform_state_sensor_pdr decodedPdr;
+
+    EXPECT_EQ(-EOVERFLOW, decode_pldm_platform_state_sensor_pdr(
+                              pdr.data(), pdr.size(), &decodedPdr));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodePldmPlatformStateSensorPdr, BadDataLengthTest)
+{
+    // dataLength claims more bytes than the buffer holds.
+    std::vector<uint8_t> pdr{
+        0x1,
+        0x0,
+        0x0,
+        0x0,                   // record handle = 1
+        0x1,                   // PDRHeaderVersion
+        PLDM_STATE_SENSOR_PDR, // PDRType
+        0x0,
+        0x0, // recordChangeNumber
+        0xff,
+        0xff, // dataLength = 65535 (exceeds the buffer)
+        0x2,
+        0x0, // PLDMTerminusHandle = 2
+        0x3,
+        0x0, // sensorID = 3
+        PLDM_ENTITY_POWER_SUPPLY,
+        0x0, // entityType = Power Supply(120)
+        0x1,
+        0x0, // entityInstanceNumber = 1
+        0x4,
+        0x0,          // containerID = 4
+        PLDM_NO_INIT, // sensorInit
+        false,        // sensorAuxiliaryNamesPDR
+        0x1,          // compositeSensorCount = 1
+        0x1,
+        0x0,
+        0x1,
+        0x0e, // composite sensor 0
+    };
+
+    struct pldm_platform_state_sensor_pdr decodedPdr;
+    EXPECT_EQ(-EOVERFLOW, decode_pldm_platform_state_sensor_pdr(
+                              pdr.data(), pdr.size(), &decodedPdr));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint8Test)
 {
     std::vector<uint8_t> pdr1{
