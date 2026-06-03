@@ -1914,6 +1914,60 @@ int decode_numeric_sensor_pdr_data(
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int decode_state_sensor_pdr_data(const void *pdr_data, size_t pdr_data_length,
+				 struct pldm_state_sensor_pdr *pdr_value)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	struct pldm_value_pdr_hdr hdr;
+	int rc;
+
+	if (!pdr_data || !pdr_value) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_PDR_STATE_SENSOR_PDR_MIN_LENGTH,
+				    pdr_data, pdr_data_length);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	/*
+	 * The State Sensor PDR carries the common pldm_pdr_hdr.
+	 * pldm_msgbuf_extract_value_pdr_hdr() additionally validates the
+	 * decoded hdr.length against the buffer bounds, so decode into a
+	 * value_pdr_hdr (identical wire layout) and copy the fields across.
+	 */
+	rc = pldm_msgbuf_extract_value_pdr_hdr(
+		buf, &hdr, PLDM_PDR_STATE_SENSOR_PDR_MIN_LENGTH,
+		pdr_data_length);
+	if (rc) {
+		return pldm_xlate_errno(pldm_msgbuf_discard(buf, rc));
+	}
+
+	pdr_value->hdr.record_handle = hdr.record_handle;
+	pdr_value->hdr.version = hdr.version;
+	pdr_value->hdr.type = hdr.type;
+	pdr_value->hdr.record_change_num = hdr.record_change_num;
+	pdr_value->hdr.length = hdr.length;
+
+	pldm_msgbuf_extract(buf, pdr_value->terminus_handle);
+	pldm_msgbuf_extract(buf, pdr_value->sensor_id);
+	pldm_msgbuf_extract(buf, pdr_value->entity_type);
+	pldm_msgbuf_extract(buf, pdr_value->entity_instance);
+	pldm_msgbuf_extract(buf, pdr_value->container_id);
+	pldm_msgbuf_extract(buf, pdr_value->sensor_init);
+	pldm_msgbuf_extract(buf, pdr_value->sensor_auxiliary_names_pdr);
+	pldm_msgbuf_extract(buf, pdr_value->composite_sensor_count);
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	return PLDM_SUCCESS;
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_numeric_effecter_value_req(uint8_t instance_id,
 					  uint16_t effecter_id,

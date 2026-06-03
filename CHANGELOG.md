@@ -66,6 +66,7 @@ Change categories:
 - dsp: platform: Iterator macros for State Effecter PDR
 - base: Added PLDM Base MultipartSend support
 - dsp: platform: add PLDM_SET_STATE_EFFECTER_STATES_MIN_REQ_BYTES
+- dsp: platform: Add decode_state_sensor_pdr_data (DSP0248 v1.3.0)
 
 ### Changed
 
