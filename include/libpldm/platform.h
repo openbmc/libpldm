@@ -908,6 +908,56 @@ struct pldm_numeric_sensor_value_pdr {
 	union_range_field_format fatal_low;
 };
 
+/** @struct pldm_platform_numeric_sensor_pdr
+ *
+ *  Structure representing PLDM Numeric Sensor PDR for unpacked value
+ *  Refer to: DSP0248_1.2.0: 28.4 Table 79
+ */
+struct pldm_platform_numeric_sensor_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint16_t terminus_handle;
+	uint16_t sensor_id;
+	uint16_t entity_type;
+	uint16_t entity_instance_number;
+	uint16_t container_id;
+	uint8_t sensor_init;
+	bool8_t sensor_auxiliary_names_pdr;
+	uint8_t base_unit;
+	int8_t unit_modifier;
+	uint8_t rate_unit;
+	uint8_t base_oem_unit_handle;
+	uint8_t aux_unit;
+	int8_t aux_unit_modifier;
+	uint8_t aux_rate_unit;
+	uint8_t rel;
+	uint8_t aux_oem_unit_handle;
+	bool8_t is_linear;
+	uint8_t sensor_data_size;
+	real32_t resolution;
+	real32_t offset;
+	uint16_t accuracy;
+	uint8_t plus_tolerance;
+	uint8_t minus_tolerance;
+	union_sensor_data_size hysteresis;
+	bitfield8_t supported_thresholds;
+	bitfield8_t threshold_and_hysteresis_volatility;
+	real32_t state_transition_interval;
+	real32_t update_interval;
+	union_sensor_data_size max_readable;
+	union_sensor_data_size min_readable;
+	uint8_t range_field_format;
+	bitfield8_t range_field_support;
+	union_range_field_format nominal_value;
+	union_range_field_format normal_max;
+	union_range_field_format normal_min;
+	union_range_field_format warning_high;
+	union_range_field_format warning_low;
+	union_range_field_format critical_high;
+	union_range_field_format critical_low;
+	union_range_field_format fatal_high;
+	union_range_field_format fatal_low;
+};
+
 typedef char16_t pldm_utf16be;
 
 struct pldm_entity_auxiliary_name {
@@ -2312,6 +2362,37 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 int decode_numeric_sensor_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_sensor_value_pdr *pdr_value);
+
+/** @brief Decode Numeric Sensor PDR data into struct pldm_platform_numeric_sensor_pdr
+ *
+ *  @param[in] pdr_data - pdr data for numeric sensor
+ *  @param[in] pdr_data_length - Length of pdr data
+ *  @param[out] pdr - unpacked numeric sensor PDR struct
+ *
+ *  @return 0 on success
+ *  @return -EINVAL if pdr_data or pdr is NULL
+ *  @return -EOVERFLOW if pdr_data_length is too small
+ *  @return -EBADMSG if sensor_data_size or range_field_format is out of range
+ */
+int decode_pldm_platform_numeric_sensor_pdr(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_platform_numeric_sensor_pdr *pdr);
+
+/** @brief Encode Numeric Sensor PDR data
+ *
+ *  @param[in] pdr - unpacked numeric sensor PDR struct to encode
+ *  @param[out] data - output buffer for the encoded PDR
+ *  @param[in,out] data_len - in: size of data; out: bytes written
+ *
+ *  @return 0 on success
+ *  @return -EINVAL if pdr, data, or data_len is NULL, if sensor_data_size or
+ *          range_field_format is out of range, or if pdr->hdr.length is
+ *          inconsistent with the data size fields
+ *  @return -EOVERFLOW if data_len is too small for the encoded PDR
+ */
+int encode_pldm_platform_numeric_sensor_pdr(
+	const struct pldm_platform_numeric_sensor_pdr *pdr, void *data,
+	size_t *data_len);
 
 /* GetNumericEffecterValue */
 
