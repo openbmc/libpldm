@@ -186,6 +186,56 @@ pldm__msgbuf_extract_effecter_data(struct pldm_msgbuf_ro *ctx,
 	return -PLDM_ERROR_INVALID_DATA;
 }
 
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_insert_sensor_data(struct pldm_msgbuf_rw *ctx,
+			       enum pldm_sensor_readings_data_type tag,
+			       const union_sensor_data_size *src)
+{
+	switch (tag) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+		return pldm_msgbuf_insert(ctx, src->value_u8);
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		return pldm_msgbuf_insert(ctx, src->value_s8);
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+		return pldm_msgbuf_insert(ctx, src->value_u16);
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		return pldm_msgbuf_insert(ctx, src->value_s16);
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+		return pldm_msgbuf_insert(ctx, src->value_u32);
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		return pldm_msgbuf_insert(ctx, src->value_s32);
+	}
+
+	return -EINVAL;
+}
+
+LIBPLDM_CC_NONNULL
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_insert_range_field_format(struct pldm_msgbuf_rw *ctx,
+				      enum pldm_range_field_format tag,
+				      const union_range_field_format *src)
+{
+	switch (tag) {
+	case PLDM_RANGE_FIELD_FORMAT_UINT8:
+		return pldm_msgbuf_insert(ctx, src->value_u8);
+	case PLDM_RANGE_FIELD_FORMAT_SINT8:
+		return pldm_msgbuf_insert(ctx, src->value_s8);
+	case PLDM_RANGE_FIELD_FORMAT_UINT16:
+		return pldm_msgbuf_insert(ctx, src->value_u16);
+	case PLDM_RANGE_FIELD_FORMAT_SINT16:
+		return pldm_msgbuf_insert(ctx, src->value_s16);
+	case PLDM_RANGE_FIELD_FORMAT_UINT32:
+		return pldm_msgbuf_insert(ctx, src->value_u32);
+	case PLDM_RANGE_FIELD_FORMAT_SINT32:
+		return pldm_msgbuf_insert(ctx, src->value_s32);
+	case PLDM_RANGE_FIELD_FORMAT_REAL32:
+		return pldm_msgbuf_insert(ctx, src->value_f32);
+	}
+
+	return -EINVAL;
+}
+
 #ifdef __cplusplus
 #include <type_traits>
 

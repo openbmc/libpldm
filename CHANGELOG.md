@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Introduce `encode_pldm_platform_numeric_sensor_pdr()`
+- dsp: platform: Introduce `decode_pldm_platform_numeric_sensor_pdr()`
+
 ### Changed
 
 - doxygen: Enable warnings as errors
