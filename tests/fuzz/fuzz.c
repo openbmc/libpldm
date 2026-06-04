@@ -246,6 +246,28 @@ static int fuzz_encode_pldm_platform_set_numeric_sensor_enable_req(
     return 0;
 }
 
+#if HAVE_LIBPLDM_API_TESTING
+static int
+    fuzz_encode_pldm_platform_numeric_sensor_value_pdr(const uint8_t* data,
+                                                       size_t size)
+{
+    struct pldm_numeric_sensor_value_pdr pdr;
+    uint8_t buf[PLDM_PDR_NUMERIC_SENSOR_PDR_FIXED_LENGTH +
+                3 * sizeof(uint32_t) + 9 * sizeof(uint32_t)];
+    size_t buf_len = sizeof(buf);
+
+    if (size < sizeof(pdr))
+    {
+        return -1;
+    }
+
+    memcpy(&pdr, data, sizeof(pdr));
+    encode_pldm_platform_numeric_sensor_value_pdr(&pdr, buf, &buf_len);
+
+    return 0;
+}
+#endif
+
 static int (*const encode_pldm_msg_tests[])(struct pldm_msg*, size_t,
                                             const uint8_t*, size_t) = {
     fuzz_encode_pldm_base_get_pldm_types_resp,
@@ -300,6 +322,9 @@ static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
     fuzz_pldm_state_effecter_pdr,
     libpldm_decode_one_pldm_msg,
     libpldm_encode_one_pldm_msg,
+#if HAVE_LIBPLDM_API_TESTING
+    fuzz_encode_pldm_platform_numeric_sensor_value_pdr,
+#endif
 };
 
 int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size)

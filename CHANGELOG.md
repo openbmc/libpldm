@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add `encode_pldm_platform_numeric_sensor_value_pdr()`
+
 ### Changed
 
 ### Deprecated
