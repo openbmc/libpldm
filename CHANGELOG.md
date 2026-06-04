@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Introduce `encode_pldm_platform_numeric_sensor_pdr()`
+- dsp: platform: Introduce `decode_pldm_platform_numeric_sensor_pdr()`
 - dsp: base: Expose `PLDM_BASE_MIN_PART_SIZE` in the public header
 - dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
 - dsp: file: Introduce `encode_pldm_file_df_heartbeat_resp()`

@@ -7281,6 +7281,673 @@ TEST(StateEffecterPDR, testSingleEntry)
 #endif
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(encodeNumericSensorPdrData, RoundtripUint8)
+{
+    /* build a valid uint8 sensor PDR with uint8 range fields */
+    struct pldm_platform_numeric_sensor_pdr pdr{};
+
+    constexpr size_t sensor_data_bytes = 1;
+    constexpr size_t range_field_bytes = 1;
+    constexpr size_t pdr_len = PLDM_PDR_NUMERIC_SENSOR_PDR_FIXED_LENGTH +
+                               3 * sensor_data_bytes + 9 * range_field_bytes;
+
+    pdr.hdr.record_handle = 1;
+    pdr.hdr.version = 1;
+    pdr.hdr.type = PLDM_NUMERIC_SENSOR_PDR;
+    pdr.hdr.length =
+        static_cast<uint16_t>(pdr_len - sizeof(struct pldm_pdr_hdr));
+
+    pdr.sensor_id = 1;
+    pdr.entity_type = PLDM_ENTITY_POWER_SUPPLY;
+    pdr.entity_instance_number = 1;
+    pdr.container_id = 1;
+    pdr.is_linear = true;
+    pdr.sensor_data_size = PLDM_SENSOR_DATA_SIZE_UINT8;
+    pdr.resolution = 1.5f;
+    pdr.offset = 1.0f;
+    pdr.hysteresis.value_u8 = 3;
+    pdr.state_transition_interval = 1.0f;
+    pdr.update_interval = 1.0f;
+    pdr.max_readable.value_u8 = 255;
+    pdr.range_field_format = PLDM_RANGE_FIELD_FORMAT_UINT8;
+    pdr.nominal_value.value_u8 = 50;
+    pdr.normal_max.value_u8 = 60;
+    pdr.normal_min.value_u8 = 40;
+    pdr.warning_high.value_u8 = 70;
+    pdr.warning_low.value_u8 = 30;
+    pdr.critical_high.value_u8 = 80;
+    pdr.critical_low.value_u8 = 20;
+    pdr.fatal_high.value_u8 = 90;
+    pdr.fatal_low.value_u8 = 10;
+
+    std::vector<uint8_t> buf(pdr_len);
+    size_t buf_len = buf.size();
+    auto rc =
+        encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(buf_len, pdr_len);
+
+    struct pldm_numeric_sensor_value_pdr decoded{};
+    rc = decode_numeric_sensor_pdr_data(buf.data(), buf_len, &decoded);
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+
+    EXPECT_EQ(decoded.hdr.record_handle, pdr.hdr.record_handle);
+    EXPECT_EQ(decoded.hdr.version, pdr.hdr.version);
+    EXPECT_EQ(decoded.hdr.type, pdr.hdr.type);
+    EXPECT_EQ(decoded.hdr.record_change_num, pdr.hdr.record_change_num);
+    EXPECT_EQ(decoded.hdr.length, pdr.hdr.length);
+    EXPECT_EQ(decoded.sensor_id, pdr.sensor_id);
+    EXPECT_EQ(decoded.entity_type, pdr.entity_type);
+    EXPECT_EQ(decoded.entity_instance_num, pdr.entity_instance_number);
+    EXPECT_EQ(decoded.container_id, pdr.container_id);
+    EXPECT_EQ(decoded.sensor_init, pdr.sensor_init);
+    EXPECT_EQ(decoded.sensor_auxiliary_names_pdr,
+              pdr.sensor_auxiliary_names_pdr);
+    EXPECT_EQ(decoded.base_unit, pdr.base_unit);
+    EXPECT_EQ(decoded.unit_modifier, pdr.unit_modifier);
+    EXPECT_EQ(decoded.sensor_data_size, pdr.sensor_data_size);
+    EXPECT_FLOAT_EQ(decoded.resolution, pdr.resolution);
+    EXPECT_FLOAT_EQ(decoded.offset, pdr.offset);
+    EXPECT_EQ(decoded.hysteresis.value_u8, pdr.hysteresis.value_u8);
+    EXPECT_EQ(decoded.max_readable.value_u8, pdr.max_readable.value_u8);
+    EXPECT_EQ(decoded.min_readable.value_u8, pdr.min_readable.value_u8);
+    EXPECT_EQ(decoded.range_field_format, pdr.range_field_format);
+    EXPECT_EQ(decoded.nominal_value.value_u8, pdr.nominal_value.value_u8);
+    EXPECT_EQ(decoded.normal_max.value_u8, pdr.normal_max.value_u8);
+    EXPECT_EQ(decoded.normal_min.value_u8, pdr.normal_min.value_u8);
+    EXPECT_EQ(decoded.warning_high.value_u8, pdr.warning_high.value_u8);
+    EXPECT_EQ(decoded.warning_low.value_u8, pdr.warning_low.value_u8);
+    EXPECT_EQ(decoded.critical_high.value_u8, pdr.critical_high.value_u8);
+    EXPECT_EQ(decoded.critical_low.value_u8, pdr.critical_low.value_u8);
+    EXPECT_EQ(decoded.fatal_high.value_u8, pdr.fatal_high.value_u8);
+    EXPECT_EQ(decoded.fatal_low.value_u8, pdr.fatal_low.value_u8);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(encodeNumericSensorPdrData, RoundtripSint32Real32)
+{
+    /* sint32 sensor data with real32 range fields — different sizes */
+    struct pldm_platform_numeric_sensor_pdr pdr{};
+
+    constexpr size_t sensor_data_bytes = 4;
+    constexpr size_t range_field_bytes = 4;
+    constexpr size_t pdr_len = PLDM_PDR_NUMERIC_SENSOR_PDR_FIXED_LENGTH +
+                               3 * sensor_data_bytes + 9 * range_field_bytes;
+
+    pdr.hdr.record_handle = 2;
+    pdr.hdr.version = 1;
+    pdr.hdr.type = PLDM_NUMERIC_SENSOR_PDR;
+    pdr.hdr.length =
+        static_cast<uint16_t>(pdr_len - sizeof(struct pldm_pdr_hdr));
+
+    pdr.sensor_id = 2;
+    pdr.entity_type = PLDM_ENTITY_POWER_SUPPLY;
+    pdr.entity_instance_number = 1;
+    pdr.container_id = 1;
+    pdr.unit_modifier = -1;
+    pdr.is_linear = true;
+    pdr.sensor_data_size = PLDM_SENSOR_DATA_SIZE_SINT32;
+    pdr.resolution = 0.001f;
+    pdr.hysteresis.value_s32 = 100;
+    pdr.update_interval = 0.5f;
+    pdr.max_readable.value_s32 = INT32_MAX;
+    pdr.min_readable.value_s32 = INT32_MIN;
+    pdr.range_field_format = PLDM_RANGE_FIELD_FORMAT_REAL32;
+    pdr.normal_max.value_f32 = 100.0f;
+    pdr.normal_min.value_f32 = -100.0f;
+    pdr.warning_high.value_f32 = 150.0f;
+    pdr.warning_low.value_f32 = -150.0f;
+    pdr.critical_high.value_f32 = 200.0f;
+    pdr.critical_low.value_f32 = -200.0f;
+    pdr.fatal_high.value_f32 = 300.0f;
+    pdr.fatal_low.value_f32 = -300.0f;
+
+    std::vector<uint8_t> buf(pdr_len);
+    size_t buf_len = buf.size();
+    auto rc =
+        encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(buf_len, pdr_len);
+
+    struct pldm_numeric_sensor_value_pdr decoded{};
+    rc = decode_numeric_sensor_pdr_data(buf.data(), buf_len, &decoded);
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+
+    EXPECT_EQ(decoded.sensor_data_size, pdr.sensor_data_size);
+    EXPECT_EQ(decoded.hysteresis.value_s32, pdr.hysteresis.value_s32);
+    EXPECT_EQ(decoded.max_readable.value_s32, pdr.max_readable.value_s32);
+    EXPECT_EQ(decoded.min_readable.value_s32, pdr.min_readable.value_s32);
+    EXPECT_EQ(decoded.range_field_format, pdr.range_field_format);
+    EXPECT_FLOAT_EQ(decoded.nominal_value.value_f32,
+                    pdr.nominal_value.value_f32);
+    EXPECT_FLOAT_EQ(decoded.normal_max.value_f32, pdr.normal_max.value_f32);
+    EXPECT_FLOAT_EQ(decoded.normal_min.value_f32, pdr.normal_min.value_f32);
+    EXPECT_FLOAT_EQ(decoded.warning_high.value_f32, pdr.warning_high.value_f32);
+    EXPECT_FLOAT_EQ(decoded.warning_low.value_f32, pdr.warning_low.value_f32);
+    EXPECT_FLOAT_EQ(decoded.critical_high.value_f32,
+                    pdr.critical_high.value_f32);
+    EXPECT_FLOAT_EQ(decoded.critical_low.value_f32, pdr.critical_low.value_f32);
+    EXPECT_FLOAT_EQ(decoded.fatal_high.value_f32, pdr.fatal_high.value_f32);
+    EXPECT_FLOAT_EQ(decoded.fatal_low.value_f32, pdr.fatal_low.value_f32);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(encodeNumericSensorPdrData, NullArgs)
+{
+    struct pldm_platform_numeric_sensor_pdr pdr{};
+    std::vector<uint8_t> buf(128);
+    size_t buf_len = buf.size();
+
+    EXPECT_EQ(
+        encode_pldm_platform_numeric_sensor_pdr(nullptr, buf.data(), &buf_len),
+        -EINVAL);
+    EXPECT_EQ(encode_pldm_platform_numeric_sensor_pdr(&pdr, nullptr, &buf_len),
+              -EINVAL);
+    EXPECT_EQ(
+        encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), nullptr),
+        -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(encodeNumericSensorPdrData, BufTooSmall)
+{
+    struct pldm_platform_numeric_sensor_pdr pdr{};
+
+    constexpr size_t sensor_data_bytes = 1;
+    constexpr size_t range_field_bytes = 1;
+    constexpr size_t pdr_len = PLDM_PDR_NUMERIC_SENSOR_PDR_FIXED_LENGTH +
+                               3 * sensor_data_bytes + 9 * range_field_bytes;
+
+    pdr.hdr.record_handle = 1;
+    pdr.hdr.version = 1;
+    pdr.hdr.type = PLDM_NUMERIC_SENSOR_PDR;
+    pdr.hdr.length =
+        static_cast<uint16_t>(pdr_len - sizeof(struct pldm_pdr_hdr));
+    pdr.sensor_data_size = PLDM_SENSOR_DATA_SIZE_UINT8;
+    pdr.range_field_format = PLDM_RANGE_FIELD_FORMAT_UINT8;
+
+    std::vector<uint8_t> buf(pdr_len - 1);
+    size_t buf_len = buf.size();
+    EXPECT_EQ(
+        encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len),
+        -EOVERFLOW);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(encodeNumericSensorPdrData, InvalidSensorDataSize)
+{
+    struct pldm_platform_numeric_sensor_pdr pdr{};
+    pdr.sensor_data_size = PLDM_SENSOR_DATA_SIZE_MAX + 1;
+
+    std::vector<uint8_t> buf(128);
+    size_t buf_len = buf.size();
+    EXPECT_EQ(
+        encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len),
+        -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(encodeNumericSensorPdrData, InvalidRangeFieldFormat)
+{
+    struct pldm_platform_numeric_sensor_pdr pdr{};
+    pdr.sensor_data_size = PLDM_SENSOR_DATA_SIZE_UINT8;
+    pdr.range_field_format = PLDM_RANGE_FIELD_FORMAT_MAX + 1;
+
+    std::vector<uint8_t> buf(128);
+    size_t buf_len = buf.size();
+    EXPECT_EQ(
+        encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len),
+        -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(encodeNumericSensorPdrData, InconsistentHdrLength)
+{
+    struct pldm_platform_numeric_sensor_pdr pdr{};
+    pdr.sensor_data_size = PLDM_SENSOR_DATA_SIZE_UINT8;
+    pdr.range_field_format = PLDM_RANGE_FIELD_FORMAT_UINT8;
+    pdr.hdr.length = 0; /* wrong: should be 59 for uint8/uint8 min PDR */
+
+    std::vector<uint8_t> buf(128);
+    size_t buf_len = buf.size();
+    EXPECT_EQ(
+        encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len),
+        -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodeNumericSensorPdrDataNew, RoundtripUint8)
+{
+    struct pldm_platform_numeric_sensor_pdr pdr{};
+
+    constexpr size_t sensor_data_bytes = 1;
+    constexpr size_t range_field_bytes = 1;
+    constexpr size_t pdr_len = PLDM_PDR_NUMERIC_SENSOR_PDR_FIXED_LENGTH +
+                               3 * sensor_data_bytes + 9 * range_field_bytes;
+
+    pdr.hdr.record_handle = 1;
+    pdr.hdr.version = 1;
+    pdr.hdr.type = PLDM_NUMERIC_SENSOR_PDR;
+    pdr.hdr.length =
+        static_cast<uint16_t>(pdr_len - sizeof(struct pldm_pdr_hdr));
+
+    pdr.terminus_handle = 5;
+    pdr.sensor_id = 1;
+    pdr.entity_type = PLDM_ENTITY_POWER_SUPPLY;
+    pdr.entity_instance_number = 2;
+    pdr.container_id = 3;
+    pdr.sensor_init = PLDM_NO_INIT;
+    pdr.sensor_auxiliary_names_pdr = false;
+    pdr.base_unit = 0x05;
+    pdr.unit_modifier = -2;
+    pdr.rate_unit = 0;
+    pdr.base_oem_unit_handle = 0;
+    pdr.aux_unit = 0;
+    pdr.aux_unit_modifier = 0;
+    pdr.aux_rate_unit = 0;
+    pdr.rel = 0;
+    pdr.aux_oem_unit_handle = 0;
+    pdr.is_linear = true;
+    pdr.sensor_data_size = PLDM_SENSOR_DATA_SIZE_UINT8;
+    pdr.resolution = 1.5f;
+    pdr.offset = 1.0f;
+    pdr.accuracy = 100;
+    pdr.plus_tolerance = 5;
+    pdr.minus_tolerance = 5;
+    pdr.hysteresis.value_u8 = 3;
+    pdr.supported_thresholds.byte = 0x3f;
+    pdr.threshold_and_hysteresis_volatility.byte = 0;
+    pdr.state_transition_interval = 1.0f;
+    pdr.update_interval = 1.0f;
+    pdr.max_readable.value_u8 = 255;
+    pdr.min_readable.value_u8 = 0;
+    pdr.range_field_format = PLDM_RANGE_FIELD_FORMAT_UINT8;
+    pdr.range_field_support.byte = 0xff;
+    pdr.nominal_value.value_u8 = 50;
+    pdr.normal_max.value_u8 = 60;
+    pdr.normal_min.value_u8 = 40;
+    pdr.warning_high.value_u8 = 70;
+    pdr.warning_low.value_u8 = 30;
+    pdr.critical_high.value_u8 = 80;
+    pdr.critical_low.value_u8 = 20;
+    pdr.fatal_high.value_u8 = 90;
+    pdr.fatal_low.value_u8 = 10;
+
+    std::vector<uint8_t> buf(pdr_len);
+    size_t buf_len = buf.size();
+    ASSERT_EQ(
+        encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len), 0);
+
+    struct pldm_platform_numeric_sensor_pdr decoded{};
+    ASSERT_EQ(
+        decode_pldm_platform_numeric_sensor_pdr(buf.data(), buf_len, &decoded),
+        0);
+
+    EXPECT_EQ(decoded.hdr.record_handle, pdr.hdr.record_handle);
+    EXPECT_EQ(decoded.hdr.version, pdr.hdr.version);
+    EXPECT_EQ(decoded.hdr.type, pdr.hdr.type);
+    EXPECT_EQ(decoded.hdr.record_change_num, pdr.hdr.record_change_num);
+    EXPECT_EQ(decoded.hdr.length, pdr.hdr.length);
+    EXPECT_EQ(decoded.terminus_handle, pdr.terminus_handle);
+    EXPECT_EQ(decoded.sensor_id, pdr.sensor_id);
+    EXPECT_EQ(decoded.entity_type, pdr.entity_type);
+    EXPECT_EQ(decoded.entity_instance_number, pdr.entity_instance_number);
+    EXPECT_EQ(decoded.container_id, pdr.container_id);
+    EXPECT_EQ(decoded.sensor_init, pdr.sensor_init);
+    EXPECT_EQ(decoded.sensor_auxiliary_names_pdr,
+              pdr.sensor_auxiliary_names_pdr);
+    EXPECT_EQ(decoded.base_unit, pdr.base_unit);
+    EXPECT_EQ(decoded.unit_modifier, pdr.unit_modifier);
+    EXPECT_EQ(decoded.rate_unit, pdr.rate_unit);
+    EXPECT_EQ(decoded.base_oem_unit_handle, pdr.base_oem_unit_handle);
+    EXPECT_EQ(decoded.aux_unit, pdr.aux_unit);
+    EXPECT_EQ(decoded.aux_unit_modifier, pdr.aux_unit_modifier);
+    EXPECT_EQ(decoded.aux_rate_unit, pdr.aux_rate_unit);
+    EXPECT_EQ(decoded.rel, pdr.rel);
+    EXPECT_EQ(decoded.aux_oem_unit_handle, pdr.aux_oem_unit_handle);
+    EXPECT_EQ(decoded.is_linear, pdr.is_linear);
+    EXPECT_EQ(decoded.sensor_data_size, pdr.sensor_data_size);
+    EXPECT_FLOAT_EQ(decoded.resolution, pdr.resolution);
+    EXPECT_FLOAT_EQ(decoded.offset, pdr.offset);
+    EXPECT_EQ(decoded.accuracy, pdr.accuracy);
+    EXPECT_EQ(decoded.plus_tolerance, pdr.plus_tolerance);
+    EXPECT_EQ(decoded.minus_tolerance, pdr.minus_tolerance);
+    EXPECT_EQ(decoded.hysteresis.value_u8, pdr.hysteresis.value_u8);
+    EXPECT_EQ(decoded.supported_thresholds.byte, pdr.supported_thresholds.byte);
+    EXPECT_EQ(decoded.threshold_and_hysteresis_volatility.byte,
+              pdr.threshold_and_hysteresis_volatility.byte);
+    EXPECT_FLOAT_EQ(decoded.state_transition_interval,
+                    pdr.state_transition_interval);
+    EXPECT_FLOAT_EQ(decoded.update_interval, pdr.update_interval);
+    EXPECT_EQ(decoded.max_readable.value_u8, pdr.max_readable.value_u8);
+    EXPECT_EQ(decoded.min_readable.value_u8, pdr.min_readable.value_u8);
+    EXPECT_EQ(decoded.range_field_format, pdr.range_field_format);
+    EXPECT_EQ(decoded.range_field_support.byte, pdr.range_field_support.byte);
+    EXPECT_EQ(decoded.nominal_value.value_u8, pdr.nominal_value.value_u8);
+    EXPECT_EQ(decoded.normal_max.value_u8, pdr.normal_max.value_u8);
+    EXPECT_EQ(decoded.normal_min.value_u8, pdr.normal_min.value_u8);
+    EXPECT_EQ(decoded.warning_high.value_u8, pdr.warning_high.value_u8);
+    EXPECT_EQ(decoded.warning_low.value_u8, pdr.warning_low.value_u8);
+    EXPECT_EQ(decoded.critical_high.value_u8, pdr.critical_high.value_u8);
+    EXPECT_EQ(decoded.critical_low.value_u8, pdr.critical_low.value_u8);
+    EXPECT_EQ(decoded.fatal_high.value_u8, pdr.fatal_high.value_u8);
+    EXPECT_EQ(decoded.fatal_low.value_u8, pdr.fatal_low.value_u8);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodeNumericSensorPdrDataNew, RoundtripSint32Real32)
+{
+    struct pldm_platform_numeric_sensor_pdr pdr{};
+
+    constexpr size_t sensor_data_bytes = 4;
+    constexpr size_t range_field_bytes = 4;
+    constexpr size_t pdr_len = PLDM_PDR_NUMERIC_SENSOR_PDR_FIXED_LENGTH +
+                               3 * sensor_data_bytes + 9 * range_field_bytes;
+
+    pdr.hdr.record_handle = 2;
+    pdr.hdr.version = 1;
+    pdr.hdr.type = PLDM_NUMERIC_SENSOR_PDR;
+    pdr.hdr.length =
+        static_cast<uint16_t>(pdr_len - sizeof(struct pldm_pdr_hdr));
+
+    pdr.sensor_id = 2;
+    pdr.entity_type = PLDM_ENTITY_POWER_SUPPLY;
+    pdr.entity_instance_number = 1;
+    pdr.container_id = 1;
+    pdr.unit_modifier = -1;
+    pdr.is_linear = true;
+    pdr.sensor_data_size = PLDM_SENSOR_DATA_SIZE_SINT32;
+    pdr.resolution = 0.001f;
+    pdr.hysteresis.value_s32 = 100;
+    pdr.update_interval = 0.5f;
+    pdr.max_readable.value_s32 = INT32_MAX;
+    pdr.min_readable.value_s32 = INT32_MIN;
+    pdr.range_field_format = PLDM_RANGE_FIELD_FORMAT_REAL32;
+    pdr.normal_max.value_f32 = 100.0f;
+    pdr.normal_min.value_f32 = -100.0f;
+    pdr.warning_high.value_f32 = 150.0f;
+    pdr.warning_low.value_f32 = -150.0f;
+    pdr.critical_high.value_f32 = 200.0f;
+    pdr.critical_low.value_f32 = -200.0f;
+    pdr.fatal_high.value_f32 = 300.0f;
+    pdr.fatal_low.value_f32 = -300.0f;
+
+    std::vector<uint8_t> buf(pdr_len);
+    size_t buf_len = buf.size();
+    ASSERT_EQ(
+        encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len), 0);
+
+    struct pldm_platform_numeric_sensor_pdr decoded{};
+    ASSERT_EQ(
+        decode_pldm_platform_numeric_sensor_pdr(buf.data(), buf_len, &decoded),
+        0);
+
+    EXPECT_EQ(decoded.sensor_data_size, pdr.sensor_data_size);
+    EXPECT_EQ(decoded.hysteresis.value_s32, pdr.hysteresis.value_s32);
+    EXPECT_EQ(decoded.max_readable.value_s32, pdr.max_readable.value_s32);
+    EXPECT_EQ(decoded.min_readable.value_s32, pdr.min_readable.value_s32);
+    EXPECT_EQ(decoded.range_field_format, pdr.range_field_format);
+    EXPECT_FLOAT_EQ(decoded.nominal_value.value_f32,
+                    pdr.nominal_value.value_f32);
+    EXPECT_FLOAT_EQ(decoded.normal_max.value_f32, pdr.normal_max.value_f32);
+    EXPECT_FLOAT_EQ(decoded.normal_min.value_f32, pdr.normal_min.value_f32);
+    EXPECT_FLOAT_EQ(decoded.warning_high.value_f32, pdr.warning_high.value_f32);
+    EXPECT_FLOAT_EQ(decoded.warning_low.value_f32, pdr.warning_low.value_f32);
+    EXPECT_FLOAT_EQ(decoded.critical_high.value_f32,
+                    pdr.critical_high.value_f32);
+    EXPECT_FLOAT_EQ(decoded.critical_low.value_f32, pdr.critical_low.value_f32);
+    EXPECT_FLOAT_EQ(decoded.fatal_high.value_f32, pdr.fatal_high.value_f32);
+    EXPECT_FLOAT_EQ(decoded.fatal_low.value_f32, pdr.fatal_low.value_f32);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodeNumericSensorPdrDataNew, NullArgs)
+{
+    std::vector<uint8_t> buf(128);
+    struct pldm_platform_numeric_sensor_pdr pdr{};
+
+    EXPECT_EQ(
+        decode_pldm_platform_numeric_sensor_pdr(nullptr, buf.size(), &pdr),
+        -EINVAL);
+    EXPECT_EQ(decode_pldm_platform_numeric_sensor_pdr(buf.data(), buf.size(),
+                                                      nullptr),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodeNumericSensorPdrDataNew, BufTooSmall)
+{
+    struct pldm_platform_numeric_sensor_pdr pdr{};
+    std::vector<uint8_t> buf(PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH - 1, 0);
+
+    EXPECT_EQ(
+        decode_pldm_platform_numeric_sensor_pdr(buf.data(), buf.size(), &pdr),
+        -EOVERFLOW);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodeNumericSensorPdrDataNew, InvalidSensorDataSize)
+{
+    /* Build a valid uint8 PDR, then corrupt sensor_data_size */
+    struct pldm_platform_numeric_sensor_pdr src{};
+
+    constexpr size_t sensor_data_bytes = 1;
+    constexpr size_t range_field_bytes = 1;
+    constexpr size_t pdr_len = PLDM_PDR_NUMERIC_SENSOR_PDR_FIXED_LENGTH +
+                               3 * sensor_data_bytes + 9 * range_field_bytes;
+
+    src.hdr.version = 1;
+    src.hdr.type = PLDM_NUMERIC_SENSOR_PDR;
+    src.hdr.length =
+        static_cast<uint16_t>(pdr_len - sizeof(struct pldm_pdr_hdr));
+    src.sensor_data_size = PLDM_SENSOR_DATA_SIZE_UINT8;
+    src.range_field_format = PLDM_RANGE_FIELD_FORMAT_UINT8;
+
+    std::vector<uint8_t> buf(pdr_len);
+    size_t buf_len = buf.size();
+    ASSERT_EQ(
+        encode_pldm_platform_numeric_sensor_pdr(&src, buf.data(), &buf_len), 0);
+
+    /* sensor_data_size is at wire offset 32 */
+    constexpr size_t sensor_data_size_offset = 32;
+    buf[sensor_data_size_offset] = PLDM_SENSOR_DATA_SIZE_MAX + 1;
+
+    struct pldm_platform_numeric_sensor_pdr decoded{};
+    EXPECT_EQ(
+        decode_pldm_platform_numeric_sensor_pdr(buf.data(), buf_len, &decoded),
+        -EBADMSG);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodeNumericSensorPdrDataNew, InvalidRangeFieldFormat)
+{
+    /* Build a valid uint8 PDR, then corrupt range_field_format */
+    struct pldm_platform_numeric_sensor_pdr src{};
+
+    constexpr size_t sensor_data_bytes = 1;
+    constexpr size_t range_field_bytes = 1;
+    constexpr size_t pdr_len = PLDM_PDR_NUMERIC_SENSOR_PDR_FIXED_LENGTH +
+                               3 * sensor_data_bytes + 9 * range_field_bytes;
+
+    src.hdr.version = 1;
+    src.hdr.type = PLDM_NUMERIC_SENSOR_PDR;
+    src.hdr.length =
+        static_cast<uint16_t>(pdr_len - sizeof(struct pldm_pdr_hdr));
+    src.sensor_data_size = PLDM_SENSOR_DATA_SIZE_UINT8;
+    src.range_field_format = PLDM_RANGE_FIELD_FORMAT_UINT8;
+
+    std::vector<uint8_t> buf(pdr_len);
+    size_t buf_len = buf.size();
+    ASSERT_EQ(
+        encode_pldm_platform_numeric_sensor_pdr(&src, buf.data(), &buf_len), 0);
+
+    /* range_field_format is at wire offset 58 (for uint8 sensor_data_size) */
+    constexpr size_t range_field_format_offset = 58;
+    buf[range_field_format_offset] = PLDM_RANGE_FIELD_FORMAT_MAX + 1;
+
+    struct pldm_platform_numeric_sensor_pdr decoded{};
+    EXPECT_EQ(
+        decode_pldm_platform_numeric_sensor_pdr(buf.data(), buf_len, &decoded),
+        -EBADMSG);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodeNumericSensorPdrDataNew, ConsistentWithLegacyDecoder)
+{
+    /* Verify both decoders produce identical results from the same wire data */
+    struct pldm_platform_numeric_sensor_pdr src{};
+
+    constexpr size_t sensor_data_bytes = 4;
+    constexpr size_t range_field_bytes = 4;
+    constexpr size_t pdr_len = PLDM_PDR_NUMERIC_SENSOR_PDR_FIXED_LENGTH +
+                               3 * sensor_data_bytes + 9 * range_field_bytes;
+
+    src.hdr.record_handle = 7;
+    src.hdr.version = 1;
+    src.hdr.type = PLDM_NUMERIC_SENSOR_PDR;
+    src.hdr.record_change_num = 3;
+    src.hdr.length =
+        static_cast<uint16_t>(pdr_len - sizeof(struct pldm_pdr_hdr));
+
+    src.terminus_handle = 9;
+    src.sensor_id = 42;
+    src.entity_type = PLDM_ENTITY_POWER_SUPPLY;
+    src.entity_instance_number = 5;
+    src.container_id = 11;
+    src.sensor_init = PLDM_NO_INIT;
+    src.sensor_auxiliary_names_pdr = false;
+    src.base_unit = 0x05;
+    src.unit_modifier = -3;
+    src.rate_unit = 1;
+    src.base_oem_unit_handle = 2;
+    src.aux_unit = 3;
+    src.aux_unit_modifier = -1;
+    src.aux_rate_unit = 4;
+    src.rel = 1;
+    src.aux_oem_unit_handle = 5;
+    src.is_linear = true;
+    src.sensor_data_size = PLDM_SENSOR_DATA_SIZE_SINT32;
+    src.resolution = 0.01f;
+    src.offset = -273.15f;
+    src.accuracy = 500;
+    src.plus_tolerance = 10;
+    src.minus_tolerance = 10;
+    src.hysteresis.value_s32 = 50;
+    src.supported_thresholds.byte = 0x3f;
+    src.threshold_and_hysteresis_volatility.byte = 0x01;
+    src.state_transition_interval = 0.1f;
+    src.update_interval = 1.0f;
+    src.max_readable.value_s32 = INT32_MAX;
+    src.min_readable.value_s32 = INT32_MIN;
+    src.range_field_format = PLDM_RANGE_FIELD_FORMAT_REAL32;
+    src.range_field_support.byte = 0xff;
+    src.nominal_value.value_f32 = 25.0f;
+    src.normal_max.value_f32 = 85.0f;
+    src.normal_min.value_f32 = -40.0f;
+    src.warning_high.value_f32 = 95.0f;
+    src.warning_low.value_f32 = -50.0f;
+    src.critical_high.value_f32 = 105.0f;
+    src.critical_low.value_f32 = -60.0f;
+    src.fatal_high.value_f32 = 125.0f;
+    src.fatal_low.value_f32 = -80.0f;
+
+    std::vector<uint8_t> buf(pdr_len);
+    size_t buf_len = buf.size();
+    ASSERT_EQ(
+        encode_pldm_platform_numeric_sensor_pdr(&src, buf.data(), &buf_len), 0);
+
+    struct pldm_platform_numeric_sensor_pdr new_decoded{};
+    ASSERT_EQ(decode_pldm_platform_numeric_sensor_pdr(buf.data(), buf_len,
+                                                      &new_decoded),
+              0);
+
+    struct pldm_numeric_sensor_value_pdr old_decoded{};
+    ASSERT_EQ(decode_numeric_sensor_pdr_data(buf.data(), buf_len, &old_decoded),
+              PLDM_SUCCESS);
+
+    EXPECT_EQ(new_decoded.hdr.record_handle, old_decoded.hdr.record_handle);
+    EXPECT_EQ(new_decoded.hdr.version, old_decoded.hdr.version);
+    EXPECT_EQ(new_decoded.hdr.type, old_decoded.hdr.type);
+    EXPECT_EQ(new_decoded.hdr.record_change_num,
+              old_decoded.hdr.record_change_num);
+    EXPECT_EQ(new_decoded.hdr.length, old_decoded.hdr.length);
+    EXPECT_EQ(new_decoded.terminus_handle, old_decoded.terminus_handle);
+    EXPECT_EQ(new_decoded.sensor_id, old_decoded.sensor_id);
+    EXPECT_EQ(new_decoded.entity_type, old_decoded.entity_type);
+    EXPECT_EQ(new_decoded.entity_instance_number,
+              old_decoded.entity_instance_num);
+    EXPECT_EQ(new_decoded.container_id, old_decoded.container_id);
+    EXPECT_EQ(new_decoded.sensor_init, old_decoded.sensor_init);
+    EXPECT_EQ(new_decoded.sensor_auxiliary_names_pdr,
+              old_decoded.sensor_auxiliary_names_pdr);
+    EXPECT_EQ(new_decoded.base_unit, old_decoded.base_unit);
+    EXPECT_EQ(new_decoded.unit_modifier, old_decoded.unit_modifier);
+    EXPECT_EQ(new_decoded.rate_unit, old_decoded.rate_unit);
+    EXPECT_EQ(new_decoded.base_oem_unit_handle,
+              old_decoded.base_oem_unit_handle);
+    EXPECT_EQ(new_decoded.aux_unit, old_decoded.aux_unit);
+    EXPECT_EQ(new_decoded.aux_unit_modifier, old_decoded.aux_unit_modifier);
+    EXPECT_EQ(new_decoded.aux_rate_unit, old_decoded.aux_rate_unit);
+    EXPECT_EQ(new_decoded.rel, old_decoded.rel);
+    EXPECT_EQ(new_decoded.aux_oem_unit_handle, old_decoded.aux_oem_unit_handle);
+    EXPECT_EQ(new_decoded.is_linear, old_decoded.is_linear);
+    EXPECT_EQ(new_decoded.sensor_data_size, old_decoded.sensor_data_size);
+    EXPECT_FLOAT_EQ(new_decoded.resolution, old_decoded.resolution);
+    EXPECT_FLOAT_EQ(new_decoded.offset, old_decoded.offset);
+    EXPECT_EQ(new_decoded.accuracy, old_decoded.accuracy);
+    EXPECT_EQ(new_decoded.plus_tolerance, old_decoded.plus_tolerance);
+    EXPECT_EQ(new_decoded.minus_tolerance, old_decoded.minus_tolerance);
+    EXPECT_EQ(new_decoded.hysteresis.value_s32,
+              old_decoded.hysteresis.value_s32);
+    EXPECT_EQ(new_decoded.supported_thresholds.byte,
+              old_decoded.supported_thresholds.byte);
+    EXPECT_EQ(new_decoded.threshold_and_hysteresis_volatility.byte,
+              old_decoded.threshold_and_hysteresis_volatility.byte);
+    EXPECT_FLOAT_EQ(new_decoded.state_transition_interval,
+                    old_decoded.state_transition_interval);
+    EXPECT_FLOAT_EQ(new_decoded.update_interval, old_decoded.update_interval);
+    EXPECT_EQ(new_decoded.max_readable.value_s32,
+              old_decoded.max_readable.value_s32);
+    EXPECT_EQ(new_decoded.min_readable.value_s32,
+              old_decoded.min_readable.value_s32);
+    EXPECT_EQ(new_decoded.range_field_format, old_decoded.range_field_format);
+    EXPECT_EQ(new_decoded.range_field_support.byte,
+              old_decoded.range_field_support.byte);
+    EXPECT_FLOAT_EQ(new_decoded.nominal_value.value_f32,
+                    old_decoded.nominal_value.value_f32);
+    EXPECT_FLOAT_EQ(new_decoded.normal_max.value_f32,
+                    old_decoded.normal_max.value_f32);
+    EXPECT_FLOAT_EQ(new_decoded.normal_min.value_f32,
+                    old_decoded.normal_min.value_f32);
+    EXPECT_FLOAT_EQ(new_decoded.warning_high.value_f32,
+                    old_decoded.warning_high.value_f32);
+    EXPECT_FLOAT_EQ(new_decoded.warning_low.value_f32,
+                    old_decoded.warning_low.value_f32);
+    EXPECT_FLOAT_EQ(new_decoded.critical_high.value_f32,
+                    old_decoded.critical_high.value_f32);
+    EXPECT_FLOAT_EQ(new_decoded.critical_low.value_f32,
+                    old_decoded.critical_low.value_f32);
+    EXPECT_FLOAT_EQ(new_decoded.fatal_high.value_f32,
+                    old_decoded.fatal_high.value_f32);
+    EXPECT_FLOAT_EQ(new_decoded.fatal_low.value_f32,
+                    old_decoded.fatal_low.value_f32);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(StateEffecterPDR, testTruncatedEntry)
 {
     /* Entry claims size=5 but buffer only has room for 2 state bytes */
