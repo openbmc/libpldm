@@ -1914,6 +1914,194 @@ int decode_numeric_sensor_pdr_data(
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int encode_pldm_platform_numeric_sensor_value_pdr(
+	const struct pldm_numeric_sensor_value_pdr *pdr, void *data,
+	size_t *data_len)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	size_t sensor_data_bytes;
+	size_t range_field_bytes;
+	size_t pdr_len;
+	int rc;
+
+	if (!pdr || !data || !data_len) {
+		return -EINVAL;
+	}
+
+	if (pdr->sensor_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
+		return -EINVAL;
+	}
+
+	if (pdr->range_field_format > PLDM_RANGE_FIELD_FORMAT_MAX) {
+		return -EINVAL;
+	}
+
+	switch (pdr->sensor_data_size) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		sensor_data_bytes = 1;
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		sensor_data_bytes = 2;
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		sensor_data_bytes = 4;
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	switch (pdr->range_field_format) {
+	case PLDM_RANGE_FIELD_FORMAT_UINT8:
+	case PLDM_RANGE_FIELD_FORMAT_SINT8:
+		range_field_bytes = 1;
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT16:
+	case PLDM_RANGE_FIELD_FORMAT_SINT16:
+		range_field_bytes = 2;
+		break;
+	case PLDM_RANGE_FIELD_FORMAT_UINT32:
+	case PLDM_RANGE_FIELD_FORMAT_SINT32:
+	case PLDM_RANGE_FIELD_FORMAT_REAL32:
+		range_field_bytes = 4;
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	// 3 data fields: hysteresis, min and max
+	// 9 range fields:
+	//   - warning/critical/fatal hi&lo (6)
+	//   - nominal value/min/max (3)
+	pdr_len = PLDM_PDR_NUMERIC_SENSOR_PDR_FIXED_LENGTH +
+		  3 * sensor_data_bytes + 9 * range_field_bytes;
+
+	if (pdr->hdr.length != pdr_len - sizeof(struct pldm_pdr_hdr)) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_PDR_NUMERIC_SENSOR_PDR_MIN_LENGTH,
+				    data, *data_len);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, pdr->hdr.record_handle);
+	pldm_msgbuf_insert(buf, pdr->hdr.version);
+	pldm_msgbuf_insert(buf, pdr->hdr.type);
+	pldm_msgbuf_insert(buf, pdr->hdr.record_change_num);
+	pldm_msgbuf_insert(buf, pdr->hdr.length);
+
+	pldm_msgbuf_insert(buf, pdr->terminus_handle);
+	pldm_msgbuf_insert(buf, pdr->sensor_id);
+	pldm_msgbuf_insert(buf, pdr->entity_type);
+	pldm_msgbuf_insert(buf, pdr->entity_instance_num);
+	pldm_msgbuf_insert(buf, pdr->container_id);
+	pldm_msgbuf_insert(buf, pdr->sensor_init);
+	pldm_msgbuf_insert(buf, pdr->sensor_auxiliary_names_pdr);
+	pldm_msgbuf_insert(buf, pdr->base_unit);
+	pldm_msgbuf_insert(buf, pdr->unit_modifier);
+	pldm_msgbuf_insert(buf, pdr->rate_unit);
+	pldm_msgbuf_insert(buf, pdr->base_oem_unit_handle);
+	pldm_msgbuf_insert(buf, pdr->aux_unit);
+	pldm_msgbuf_insert(buf, pdr->aux_unit_modifier);
+	pldm_msgbuf_insert(buf, pdr->aux_rate_unit);
+	pldm_msgbuf_insert(buf, pdr->rel);
+	pldm_msgbuf_insert(buf, pdr->aux_oem_unit_handle);
+	pldm_msgbuf_insert(buf, pdr->is_linear);
+	pldm_msgbuf_insert(buf, pdr->sensor_data_size);
+	pldm_msgbuf_insert(buf, pdr->resolution);
+	pldm_msgbuf_insert(buf, pdr->offset);
+	pldm_msgbuf_insert(buf, pdr->accuracy);
+	pldm_msgbuf_insert(buf, pdr->plus_tolerance);
+	pldm_msgbuf_insert(buf, pdr->minus_tolerance);
+
+	rc = pldm_msgbuf_insert_sensor_data(buf, pdr->sensor_data_size,
+					    &pdr->hysteresis);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_insert(buf, pdr->supported_thresholds.byte);
+	pldm_msgbuf_insert(buf, pdr->threshold_and_hysteresis_volatility.byte);
+	pldm_msgbuf_insert(buf, pdr->state_transition_interval);
+	pldm_msgbuf_insert(buf, pdr->update_interval);
+
+	rc = pldm_msgbuf_insert_sensor_data(buf, pdr->sensor_data_size,
+					    &pdr->max_readable);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_insert_sensor_data(buf, pdr->sensor_data_size,
+					    &pdr->min_readable);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_insert(buf, pdr->range_field_format);
+	pldm_msgbuf_insert(buf, pdr->range_field_support.byte);
+
+	rc = pldm_msgbuf_insert_range_field_format(buf, pdr->range_field_format,
+						   &pdr->nominal_value);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_insert_range_field_format(buf, pdr->range_field_format,
+						   &pdr->normal_max);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_insert_range_field_format(buf, pdr->range_field_format,
+						   &pdr->normal_min);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_insert_range_field_format(buf, pdr->range_field_format,
+						   &pdr->warning_high);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_insert_range_field_format(buf, pdr->range_field_format,
+						   &pdr->warning_low);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_insert_range_field_format(buf, pdr->range_field_format,
+						   &pdr->critical_high);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_insert_range_field_format(buf, pdr->range_field_format,
+						   &pdr->critical_low);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_insert_range_field_format(buf, pdr->range_field_format,
+						   &pdr->fatal_high);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_insert_range_field_format(buf, pdr->range_field_format,
+						   &pdr->fatal_low);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_numeric_effecter_value_req(uint8_t instance_id,
 					  uint16_t effecter_id,
