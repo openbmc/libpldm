@@ -2313,6 +2313,22 @@ int decode_numeric_sensor_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_sensor_value_pdr *pdr_value);
 
+/** @brief Encode Numeric Sensor PDR data
+ *
+ *  @param[in] pdr - unpacked numeric sensor PDR struct to encode
+ *  @param[out] data - output buffer for the encoded PDR
+ *  @param[in,out] data_len - in: size of data; out: bytes written
+ *
+ *  @return 0 on success
+ *  @return -EINVAL if pdr, data, or data_len is NULL, if sensor_data_size or
+ *          range_field_format is out of range, or if pdr->hdr.length is
+ *          inconsistent with the data size fields
+ *  @return -EOVERFLOW if data_len is too small for the encoded PDR
+ */
+int encode_pldm_platform_numeric_sensor_value_pdr(
+	const struct pldm_numeric_sensor_value_pdr *pdr, void *data,
+	size_t *data_len);
+
 /* GetNumericEffecterValue */
 
 /** @brief Create a PLDM request message for GetNumericEffecterValue
