@@ -16,6 +16,24 @@
       "message": "Need to honour return values.",
       "revId": "a34f931c9350f2d1976a40e8c7c9687e2af95575",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ec33ee1_96d49df9",
+        "filename": "tests/fuzz/fuzz.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-04T07:07:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fb0fd45_666d5794",
+      "revId": "a34f931c9350f2d1976a40e8c7c9687e2af95575",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
