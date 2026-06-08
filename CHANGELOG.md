@@ -21,6 +21,7 @@ Change categories:
 
 - dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
 - dsp: file: Introduce `encode_pldm_file_df_heartbeat_resp()`
+- libpldm++ support for DSP0267 v1.1.0
 
 ### Changed
 
