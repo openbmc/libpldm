@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- libpldm++ support for fw update pkg v1.1.0
+
 ### Changed
 
 - doxygen: Enable warnings as errors
