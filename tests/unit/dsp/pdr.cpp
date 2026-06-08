@@ -131,6 +131,26 @@ TEST(PDRUpdate, testAdd)
     pldm_pdr_destroy(repo);
 }
 
+TEST(PDRUpdate, testAddBufferTooSmall)
+{
+    auto repo = pldm_pdr_init();
+
+    /* Any buffer smaller than pldm_pdr_hdr is an invariant violation */
+    std::array<uint8_t, sizeof(pldm_pdr_hdr) - 1> small{};
+    uint32_t handle = 0;
+    EXPECT_EQ(pldm_pdr_add(repo, small.data(), small.size(), false, 1, &handle),
+              -EINVAL);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 0u);
+    EXPECT_EQ(pldm_pdr_get_repo_size(repo), 0u);
+
+    handle = 1;
+    EXPECT_EQ(pldm_pdr_add(repo, small.data(), small.size(), false, 1, &handle),
+              -EINVAL);
+    EXPECT_EQ(pldm_pdr_get_record_count(repo), 0u);
+
+    pldm_pdr_destroy(repo);
+}
+
 TEST(PDRRemoveByTerminus, testRemoveByTerminus)
 {
     std::array<uint8_t, 10> data{};

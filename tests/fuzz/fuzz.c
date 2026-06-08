@@ -3,6 +3,7 @@
 #include <libpldm/file.h>
 #include <libpldm/firmware_update.h>
 #include <libpldm/fru.h>
+#include <libpldm/pdr.h>
 #include <libpldm/platform.h>
 #include <stdlib.h>
 #include <string.h>
@@ -454,9 +455,52 @@ static int libpldm_encode_one_pldm_msg(const uint8_t* data, size_t size)
     return -rc == ARRAY_SIZE(encode_pldm_msg_tests) ? -1 : 0;
 }
 
+static int fuzz_pldm_pdr_add(const uint8_t* data, size_t size)
+{
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    const uint8_t* pdr_data;
+    size_t pdr_size;
+    uint16_t terminus_handle;
+    uint32_t record_handle;
+    uint8_t is_remote;
+    pldm_pdr* repo;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, record_handle);
+    pldm_msgbuf_extract(buf, terminus_handle);
+    pldm_msgbuf_extract(buf, is_remote);
+    pldm_msgbuf_span_remaining(buf, (const void**)&pdr_data, &pdr_size);
+
+    rc = pldm_msgbuf_complete(buf);
+    if (rc)
+    {
+        return -1;
+    }
+
+    repo = pldm_pdr_init();
+    if (!repo)
+    {
+        return -1;
+    }
+
+    pldm_pdr_add(repo, pdr_data, pdr_size, is_remote & 1, terminus_handle,
+                 &record_handle);
+
+    pldm_pdr_destroy(repo);
+
+    return 0;
+}
+
 static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
     fuzz_decode_pldm_firmware_update_package,
     fuzz_get_fru_record_by_option,
+    fuzz_pldm_pdr_add,
     fuzz_pldm_state_effecter_pdr,
     libpldm_decode_one_pldm_msg,
     libpldm_encode_one_pldm_msg,
