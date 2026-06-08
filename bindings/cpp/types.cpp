@@ -237,11 +237,127 @@ bool pldm::fw_update::FirmwareDeviceIDRecord::operator==(
 	return true;
 }
 
+LIBPLDM_ABI_TESTING
+pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
+	const std::bitset<32> &downstreamDeviceUpdateOptionFlags,
+	const std::optional<std::string>
+		&downstreamDeviceSelfContainedActivationMinVersionString,
+	const std::optional<uint32_t> &
+		downstreamDeviceSelfContainedActivationMinVersionComparisonStamp,
+	const std::vector<size_t> &applicableComponents,
+	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+		&recordDescriptors,
+
+	const std::vector<uint8_t> &downstreamDevicePackageData)
+	: downstreamDeviceUpdateOptionFlags(downstreamDeviceUpdateOptionFlags),
+	  downstreamDeviceApplicableComponents(applicableComponents),
+	  downstreamDeviceSelfContainedActivationMinVersionString(
+		  downstreamDeviceSelfContainedActivationMinVersionString),
+	  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp(
+		  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp),
+	  downstreamDeviceRecordDescriptors([&recordDescriptors]() {
+		  std::map<uint16_t, std::unique_ptr<DescriptorData> > res;
+		  // We have to init the map here manually since the descriptor constructor
+		  // is not a friend of the template which would otherwise be able to construct it.
+		  for (const auto &[key, desc] : recordDescriptors) {
+			  res[key] = std::unique_ptr<DescriptorData>(
+				  new DescriptorData(*desc));
+		  }
+
+		  return res;
+	  }()),
+	  downstreamDevicePackageData(downstreamDevicePackageData)
+{
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
+	const DownstreamDeviceIDRecord &ref)
+	: downstreamDeviceUpdateOptionFlags(
+		  ref.downstreamDeviceUpdateOptionFlags),
+	  downstreamDeviceApplicableComponents(
+		  ref.downstreamDeviceApplicableComponents),
+	  downstreamDeviceSelfContainedActivationMinVersionString(
+		  ref.downstreamDeviceSelfContainedActivationMinVersionString),
+	  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp(
+		  ref.downstreamDeviceSelfContainedActivationMinVersionComparisonStamp),
+	  downstreamDeviceRecordDescriptors([&ref]() {
+		  std::map<uint16_t, std::unique_ptr<DescriptorData> > res;
+		  // We have to init the map here manually since the descriptor constructor
+		  // is not a friend of the template which would otherwise be able to construct it.
+		  for (const auto &[key, desc] :
+		       ref.downstreamDeviceRecordDescriptors) {
+			  res[key] = std::unique_ptr<DescriptorData>(
+				  new DescriptorData(*desc));
+		  }
+
+		  return res;
+	  }()),
+	  downstreamDevicePackageData(ref.downstreamDevicePackageData)
+{
+}
+
+LIBPLDM_ABI_TESTING
+bool pldm::fw_update::DownstreamDeviceIDRecord::operator==(
+	const DownstreamDeviceIDRecord &other) const
+{
+	if (CompareNEQ(
+		    &DownstreamDeviceIDRecord::downstreamDeviceUpdateOptionFlags,
+		    other)) {
+		return false;
+	}
+	if (CompareNEQ(&DownstreamDeviceIDRecord::
+			       downstreamDeviceApplicableComponents,
+		       other)) {
+		return false;
+	}
+	if (CompareNEQ(
+		    &DownstreamDeviceIDRecord::
+			    downstreamDeviceSelfContainedActivationMinVersionString,
+		    other)) {
+		return false;
+	}
+	if (CompareNEQ(
+		    &DownstreamDeviceIDRecord::
+			    downstreamDeviceSelfContainedActivationMinVersionComparisonStamp,
+		    other)) {
+		return false;
+	}
+	for (const auto &[k, v] : downstreamDeviceRecordDescriptors) {
+		if (!other.downstreamDeviceRecordDescriptors.contains(k)) {
+			return false;
+		}
+		const auto &otherDesc =
+			other.downstreamDeviceRecordDescriptors.at(k);
+
+		if (!v.get() && !otherDesc.get()) {
+			continue;
+		}
+		if (!v.get() || !otherDesc.get()) {
+			return false;
+		}
+
+		// descriptor value comparison
+		if (*v != *otherDesc) {
+			return false;
+		}
+	}
+	return !CompareNEQ(
+		&DownstreamDeviceIDRecord::downstreamDevicePackageData, other);
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::DownstreamDeviceIDRecord::~DownstreamDeviceIDRecord()
+{
+}
+
 pldm::fw_update::Package::Package(
 	const std::vector<FirmwareDeviceIDRecord> &firmwareDeviceIdRecords,
+	const std::vector<DownstreamDeviceIDRecord> &downstreamDeviceIdRecords,
 	const std::vector<ComponentImageInfo> &componentImageInformation)
 	: firmwareDeviceIdRecords(firmwareDeviceIdRecords),
-	  componentImageInformation(componentImageInformation)
+	  componentImageInformation(componentImageInformation),
+	  downstreamDeviceIdRecords(downstreamDeviceIdRecords)
 {
 }
 
