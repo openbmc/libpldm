@@ -103,6 +103,11 @@ int pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 		 * caller supplied the record handle, it would exist in the
 		 * header already.
 		 */
+		if (size < sizeof(struct pldm_pdr_hdr)) {
+			free(record->data);
+			free(record);
+			return -EINVAL;
+		}
 		struct pldm_pdr_hdr *hdr = (void *)record->data;
 		hdr->record_handle = htole32(record->record_handle);
 	}
