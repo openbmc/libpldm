@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- libpldm++ support for DSP0267 v1.1.0
+
 ### Changed
 
 ### Deprecated
