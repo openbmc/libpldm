@@ -129,7 +129,7 @@ static int fuzz_package_parser_parse(const uint8_t* data, size_t size)
     std::expected<std::unique_ptr<pldm::fw_update::Package>,
                   pldm::fw_update::PackageParserError>
         res = pldm::fw_update::PackageParser::parse(
-            p, pldm::fw_update::PackagePin::v1);
+            p, pldm::fw_update::PackagePin::v1_1_0);
 
     if (res.has_value())
     {
