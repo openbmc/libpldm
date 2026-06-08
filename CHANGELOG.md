@@ -47,6 +47,7 @@ Change categories:
 - include: Added header file for SMBIOS Data Transfer (DSP0246 v1.0.1)
 - bindings:
   - Add libpldm++ library for the C++ binding
+  - libpldm++ support for DSP0267 v1.1.0
 - dsp: platform: Add pldm_platform_file_class enum
 - platform: Add functions to decode Redfish Resource PDR (DSP0248 v1.3.0)
 - platform: Add functions to decode Redfish Action PDR (DSP0248 v1.3.0)
