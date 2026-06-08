@@ -61,7 +61,7 @@ int pldm_pdr_add(pldm_pdr *repo, const uint8_t *data, uint32_t size,
 {
 	uint32_t curr = 0;
 
-	if (!repo || !data || !size) {
+	if (!repo || !data || size < sizeof(struct pldm_pdr_hdr)) {
 		return -EINVAL;
 	}
 

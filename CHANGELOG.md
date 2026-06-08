@@ -33,6 +33,7 @@ Change categories:
 
 ### Fixed
 
+- dsp: pdr: Enforce minimum size as a precondition for pldm_pdr_add()
 - control: Use the correct type in error responses
 - dsp: fwup: Reject reserved package format revision
 - control: fix typos in control API documentation
