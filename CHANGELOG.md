@@ -22,6 +22,7 @@ Change categories:
 - dsp: base: Expose `PLDM_BASE_MIN_PART_SIZE` in the public header
 - dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
 - dsp: file: Introduce `encode_pldm_file_df_heartbeat_resp()`
+- libpldm++ support for DSP0267 v1.1.0
 
 ### Changed
 
