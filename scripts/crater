@@ -1,37 +1,49 @@
-#!/usr/bin/make -f
+#!/bin/bash
 
 # Named after Rust's 'crater' subproject. The naming makes a lot more sense
 # there, but we're adopting it as the spirit is similar.
 #
 # https://github.com/rust-lang/crater
 
-LIBPLDM_DIR := $(shell pwd)
-LIBPLDM_REF := HEAD
+set -eux
+LIBPLDM_DIR="$(pwd)"
+LIBPLDM_REF="HEAD"
 
-.PHONY: all
-all: make-pldm
+workdir=
 
-$(PLDM_DIR)/.git:
-	git clone --depth 1 https://github.com/openbmc/pldm.git $(PLDM_DIR)
+function cleanup()
+{
+    if [ -n "${workdir}" ] && [ -d "${workdir}" ]; then
+        rm -rf "${workdir}"
+    fi
+}
 
-$(PLDM_DIR)/build: $(PLDM_DIR)/.git
-	meson setup --force-fallback-for=libpldm $(PLDM_DIR)/build
-	git -C subprojects/libpldm pull --ff-only $(LIBPLDM_DIR) $(LIBPLDM_REF)
+trap cleanup EXIT HUP INT TERM
 
-$(PLDM_DIR)/build/pldmd: $(PLDM_DIR)/build
-	meson compile -C $(PLDM_DIR)/build
-	meson test -C $(PLDM_DIR)/build
+function run_crater()
+{
+    local name="$1"
+    local repo_url="$2"
 
-.PHONY: meson-pldm
-meson-pldm: $(PLDM_DIR)/build/pldmd
+    workdir="$(mktemp -d --tmpdir "libpldm-crater-${name}.XXXXXX")"
 
-.PHONY: make-pldm
-make-pldm: PLDM_DIR := $(shell mktemp --tmpdir --directory)
-make-pldm:
-	$(MAKE) -C $(PLDM_DIR) \
-		-f $(abspath $(lastword $(MAKEFILE_LIST))) \
-		meson-pldm \
-		LIBPLDM_DIR=$(LIBPLDM_DIR) \
-		LIBPLDM_REF=$(LIBPLDM_REF) \
-		PLDM_DIR=$(PLDM_DIR)
-	$(RM) -r $(PLDM_DIR)
+    git clone --depth 1 "${repo_url}" "${workdir}"
+
+    mkdir -p "${workdir}/subprojects/libpldm"
+
+    git clone --depth 1 --revision="${LIBPLDM_REF}" "file://${LIBPLDM_DIR}" "${workdir}/subprojects/libpldm"
+
+    meson setup --force-fallback-for=libpldm "${workdir}/build" "${workdir}"
+
+    meson compile -C "${workdir}/build"
+    meson test -C "${workdir}/build"
+
+    rm -rf "${workdir}"
+    workdir=
+}
+
+run_crater "pldm" \
+    "https://github.com/openbmc/pldm.git"
+
+run_crater "phosphor-bmc-code-mgmt" \
+    "https://github.com/openbmc/phosphor-bmc-code-mgmt.git"
