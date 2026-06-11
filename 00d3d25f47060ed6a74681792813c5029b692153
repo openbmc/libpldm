@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6abc8eb_f6ef8826",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-06-11T22:56:22Z",
+      "side": 1,
+      "message": "Mostly fine, just a few nits",
+      "revId": "00d3d25f47060ed6a74681792813c5029b692153",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44fe2f6e_1ac725ab",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-06-11T22:56:22Z",
+      "side": 1,
+      "message": "Nit, bitwise constants like this were the bain of my existence when I was learning pldm. I know what this means now when reading it, but something like component comparisonEnforced would be nice... It probably has a real name",
+      "revId": "00d3d25f47060ed6a74681792813c5029b692153",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef594b9e_a5a21c64",
+        "filename": "bindings/cpp/types.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-06-11T22:56:22Z",
+      "side": 1,
+      "message": "Why does downstream device record descriptors take a callable??",
+      "revId": "00d3d25f47060ed6a74681792813c5029b692153",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96a9e864_107e65ef",
+        "filename": "tests/unit/bindings/cpp/firmware_update_test_v1_1_0.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-06-11T22:56:22Z",
+      "side": 1,
+      "message": "Nit: can we just collapse all of these #if invocations?",
+      "revId": "00d3d25f47060ed6a74681792813c5029b692153",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
