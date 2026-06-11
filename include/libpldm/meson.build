@@ -9,6 +9,7 @@ libpldm_headers = files(
     'edac.h',
     'entity.h',
     'file.h',
+    'file_fd.h',
     'firmware_fd.h',
     'firmware_update.h',
     'fru.h',
@@ -75,11 +76,29 @@ sizeof_pldm_platform_pd = cc.sizeof(
     prefix: '#include "platform_device/pd-internal.h"',
     include_directories: [include_src, include_root],
 )
+sizeof_pldm_file_fd = cc.sizeof(
+    'struct pldm_file_fd',
+    prefix: '#include "file_device/fd-internal.h"',
+    include_directories: [include_src, include_root],
+)
+sizeof_pldm_file_fd_slot = cc.sizeof(
+    'struct pldm_file_fd_slot',
+    prefix: '#include "file_device/fd-internal.h"',
+    include_directories: [include_src, include_root],
+)
+alignof_pldm_file_fd_slot = cc.compute_int(
+    '__alignof__(struct pldm_file_fd_slot)',
+    prefix: '#include "file_device/fd-internal.h"',
+    include_directories: [include_src, include_root],
+)
 sizes_h = configure_file(
     configuration: {
         'sizeof_pldm_fd': sizeof_pldm_fd,
         'sizeof_pldm_control': sizeof_pldm_control,
         'sizeof_pldm_platform_pd': sizeof_pldm_platform_pd,
+        'sizeof_pldm_file_fd': sizeof_pldm_file_fd,
+        'sizeof_pldm_file_fd_slot': sizeof_pldm_file_fd_slot,
+        'alignof_pldm_file_fd_slot': alignof_pldm_file_fd_slot,
     },
     input: 'sizes.h.in',
     output: 'sizes.h',

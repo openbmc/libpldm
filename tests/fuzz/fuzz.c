@@ -2,6 +2,7 @@
 #include <libpldm/base.h>
 #include <libpldm/control.h>
 #include <libpldm/file.h>
+#include <libpldm/file_fd.h>
 #include <libpldm/firmware_update.h>
 #include <libpldm/fru.h>
 #include <libpldm/pdr.h>
@@ -816,6 +817,64 @@ static int fuzz_platform_pd_handle_msg(const uint8_t* data, size_t size)
     return 0;
 }
 
+static uint8_t fuzz_file_fd_open(void* ctx LIBPLDM_CC_UNUSED,
+                                 uint16_t file_id LIBPLDM_CC_UNUSED,
+                                 bitfield16_t attr LIBPLDM_CC_UNUSED,
+                                 void** app_handle_out)
+{
+    *app_handle_out = NULL;
+    return PLDM_SUCCESS;
+}
+
+static void fuzz_file_fd_close(void* ctx LIBPLDM_CC_UNUSED,
+                               uint16_t file_id LIBPLDM_CC_UNUSED,
+                               void* app_handle LIBPLDM_CC_UNUSED)
+{
+}
+
+static uint8_t fuzz_file_fd_read(void* ctx LIBPLDM_CC_UNUSED,
+                                 uint16_t file_id LIBPLDM_CC_UNUSED,
+                                 void* app_handle LIBPLDM_CC_UNUSED,
+                                 uint32_t offset LIBPLDM_CC_UNUSED, void* buf,
+                                 uint32_t req_len, uint32_t* actual_len)
+{
+    memset(buf, 0, req_len);
+    *actual_len = req_len;
+    return PLDM_SUCCESS;
+}
+
+static void fuzz_file_fd_heartbeat(void* ctx LIBPLDM_CC_UNUSED,
+                                   uint16_t file_id LIBPLDM_CC_UNUSED,
+                                   void* app_handle LIBPLDM_CC_UNUSED,
+                                   uint32_t* interval_ms LIBPLDM_CC_UNUSED)
+{
+}
+
+static int fuzz_file_fd_handle_msg(const uint8_t* data, size_t size)
+{
+    struct pldm_file_fd_ops ops = {
+        .ctx = NULL,
+        .open = fuzz_file_fd_open,
+        .close = fuzz_file_fd_close,
+        .read = fuzz_file_fd_read,
+        .heartbeat = fuzz_file_fd_heartbeat,
+    };
+    struct pldm_file_fd* fd;
+    uint8_t out[4096];
+    size_t out_len = sizeof(out);
+
+    fd = pldm_file_fd_new(4, &ops, sizeof(ops), NULL);
+    if (!fd)
+    {
+        return -1;
+    }
+
+    pldm_file_fd_handle_msg(fd, data, size, out, &out_len);
+
+    free(fd);
+    return 0;
+}
+
 static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
     fuzz_decode_pldm_firmware_update_package,
     fuzz_get_fru_record_by_option,
@@ -823,6 +882,7 @@ static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
     fuzz_pldm_entity_association_pdr_extract,
     fuzz_pldm_state_effecter_pdr,
     fuzz_platform_pd_handle_msg,
+    fuzz_file_fd_handle_msg,
     libpldm_decode_one_pldm_msg,
     libpldm_encode_one_pldm_msg,
     fuzz_encode_pldm_platform_numeric_sensor_pdr,

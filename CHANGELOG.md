@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- file_device: Add `pldm_file_fd` (DSP0242 v1.0.1) responder
 - control: Handle NegotiateTransferParameters Base command
 - control: introduce `pldm_control_set_multipart_size()`
 - control: introduce `pldm_control_get_multipart_size()`

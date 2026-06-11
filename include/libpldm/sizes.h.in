@@ -8,3 +8,11 @@
 
 /* sizeof(struct pldm_platform_pd) */
 #define PLDM_SIZEOF_PLDM_PLATFORM_PD @sizeof_pldm_platform_pd@
+
+/* sizeof(struct pldm_file_fd) */
+#define PLDM_SIZEOF_PLDM_FILE_FD @sizeof_pldm_file_fd@
+
+/* sizeof/alignof(struct pldm_file_fd_slot) */
+#define PLDM_SIZEOF_PLDM_FILE_FD_SLOT @sizeof_pldm_file_fd_slot@
+#define PLDM_ALIGNOF_PLDM_FILE_FD_SLOT @alignof_pldm_file_fd_slot@
+

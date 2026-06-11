@@ -4,4 +4,9 @@ if get_option('abi').contains('testing')
         'platform_pd_responder.c',
         dependencies: [libpldm_dep],
     )
+    executable(
+        'file_fd_responder',
+        'file_fd_responder.c',
+        dependencies: [libpldm_dep],
+    )
 endif

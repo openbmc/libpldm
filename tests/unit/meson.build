@@ -44,6 +44,7 @@ if get_option('abi').contains('testing')
         workdir: meson.current_source_dir(),
     )
     subdir('platform_device')
+    subdir('file_device')
 endif
 
 if get_option('oem').contains('ibm')

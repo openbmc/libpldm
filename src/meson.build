@@ -15,6 +15,7 @@ if get_option('oem').contains('meta')
     subdir('oem/meta')
 endif
 
+subdir('file_device')
 subdir('firmware_device')
 subdir('platform_device')
 subdir('environ')
