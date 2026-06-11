@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: base: Expose `PLDM_BASE_MIN_PART_SIZE` in the public header
+
 ### Changed
 
 ### Deprecated
