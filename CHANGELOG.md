@@ -21,6 +21,8 @@ Change categories:
 
 ### Changed
 
+- control: Use the correct type in error responses
+
 ### Deprecated
 
 ### Removed
