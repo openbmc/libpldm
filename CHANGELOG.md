@@ -32,6 +32,7 @@ Change categories:
 
 ### Fixed
 
+- control: Use the correct type in error responses
 - dsp: fwup: Reject reserved package format revision
 - control: fix typos in control API documentation
 
