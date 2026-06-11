@@ -1039,8 +1039,6 @@ int encode_pldm_base_negotiate_transfer_params_req(
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-#define PLDM_BASE_MIN_PART_SIZE 256
-
 LIBPLDM_ABI_TESTING
 int encode_pldm_base_negotiate_transfer_params_resp(
 	uint8_t instance_id,
