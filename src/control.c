@@ -38,7 +38,7 @@ static int pldm_control_reply_error(uint8_t ccode,
 	}
 	*resp_payload_len = 1;
 
-	rc = encode_cc_only_resp(req_hdr->instance, PLDM_FWUP, req_hdr->command,
+	rc = encode_cc_only_resp(req_hdr->instance, PLDM_BASE, req_hdr->command,
 				 ccode, resp);
 	if (rc != PLDM_SUCCESS) {
 		return -EINVAL;
