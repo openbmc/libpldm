@@ -32,6 +32,8 @@ Change categories:
 
 ### Fixed
 
+- control: Use the correct type in error responses
+
 ### Security
 
 ## [v0.16.0] - 2026-06-13
