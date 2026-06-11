@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- dsp: base: Expose `PLDM_BASE_MIN_PART_SIZE` in the public header
 - dsp: base: Introduce `encode_pldm_base_get_pldm_types_resp()`
 - dsp: base: Introduce `decode_pldm_base_get_pldm_types_resp()`
 - dsp: platform: Add requester APIs for SetNumericSensorEnable
