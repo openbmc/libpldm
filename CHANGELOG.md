@@ -20,6 +20,7 @@ Change categories:
 ### Added
 
 - libpldm++ support for fw update pkg v1.1.0
+- libpldm++ support for fw update pkg v1.2.0
 
 ### Changed
 
