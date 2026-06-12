@@ -67,7 +67,8 @@ pldm::fw_update::ComponentImageInfo::ComponentImageInfo(
 	uint32_t componentComparisonStamp, std::bitset<16> componentOptions,
 	std::bitset<16> requestedComponentActivationMethod,
 	const variable_field &componentLocation,
-	const std::string &componentVersion)
+	const std::string &componentVersion,
+	const std::vector<uint8_t> &componentOpaqueData)
 	: componentClassification(componentClassification),
 	  componentIdentifier(componentIdentifier),
 	  compComparisonStamp(componentComparisonStamp),
@@ -75,7 +76,8 @@ pldm::fw_update::ComponentImageInfo::ComponentImageInfo(
 	  requestedComponentActivationMethod(
 		  requestedComponentActivationMethod),
 	  componentLocation(componentLocation),
-	  componentVersion(componentVersion)
+	  componentVersion(componentVersion),
+	  componentOpaqueData(componentOpaqueData)
 {
 }
 
@@ -89,7 +91,8 @@ pldm::fw_update::ComponentImageInfo::ComponentImageInfo(
 	  requestedComponentActivationMethod(
 		  ref.requestedComponentActivationMethod),
 	  componentLocation(ref.componentLocation),
-	  componentVersion(ref.componentVersion)
+	  componentVersion(ref.componentVersion),
+	  componentOpaqueData(ref.componentOpaqueData)
 {
 }
 
@@ -121,6 +124,9 @@ bool pldm::fw_update::ComponentImageInfo::operator==(
 		}
 	}
 	if (CompareNEQ(&ComponentImageInfo::componentVersion, other)) {
+		return false;
+	}
+	if (CompareNEQ(&ComponentImageInfo::componentOpaqueData, other)) {
 		return false;
 	}
 	return true;
