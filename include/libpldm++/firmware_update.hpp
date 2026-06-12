@@ -27,6 +27,7 @@ namespace fw_update
 	enum class PackagePin {
 		v1,
 		v1_1_0,
+		v1_2_0,
 	};
 
 	// forward declare structs and classes for our 'friend' declarations
@@ -84,7 +85,8 @@ namespace fw_update
 			std::bitset<16> componentOptions,
 			std::bitset<16> requestedComponentActivationMethod,
 			const variable_field &componentLocation,
-			const std::string &componentVersion);
+			const std::string &componentVersion,
+			const std::vector<uint8_t> &componentOpaqueData);
 
 	    public:
 		ComponentImageInfo(const ComponentImageInfo &ref);
@@ -115,6 +117,9 @@ namespace fw_update
 
 		// introduced in PackagePin::v1
 		const std::string componentVersion;
+
+		// introduced in PackagePin::v1_2_0
+		const std::vector<uint8_t> componentOpaqueData;
 	};
 
 	struct FirmwareDeviceIDRecord

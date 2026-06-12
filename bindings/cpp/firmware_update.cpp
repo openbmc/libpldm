@@ -192,12 +192,13 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 	pldm_package_header_information_pad hdr = {};
 	int rc;
 
-	if (pin != PackagePin::v1 && pin != PackagePin::v1_1_0) {
+	if (pin != PackagePin::v1 && pin != PackagePin::v1_1_0 &&
+	    pin != PackagePin::v1_2_0) {
 		return std::unexpected(
 			PackageParserError("unsupported format revision"));
 	}
 
-	DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(cpin);
+	DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR03H(cpin);
 
 	rc = decode_pldm_firmware_update_package(pkg.data(), pkgSize, &cpin,
 						 &hdr, &package, 0);
@@ -314,12 +315,17 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 				PackageParserError(compVerStr.error()));
 		}
 
+		std::vector<uint8_t> componentOpaqueData = {
+			imageInfo.component_opaque_data.ptr,
+			imageInfo.component_opaque_data.ptr +
+				imageInfo.component_opaque_data.length
+		};
 		componentImageInfos.emplace_back(ComponentImageInfo(
 			imageInfo.component_classification,
 			imageInfo.component_identifier,
 			imageInfo.component_comparison_stamp, compOptions,
 			reqCompActivationMethod, imageInfo.component_image,
-			compVerStr.value()));
+			compVerStr.value(), std::move(componentOpaqueData)));
 	}
 
 	if (rc) {
