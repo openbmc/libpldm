@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b1db0a5_38e97c3c",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-12T10:09:43Z",
+      "side": 1,
+      "message": "There is `include/libpldm/firmware_update.h` which as a bunch of enums with bit positions. Among them also\n\n```\n  enum pldm_comp_activation_methods {\n         PLDM_ACTIVATION_AUTOMATIC \u003d 0, \n         PLDM_ACTIVATION_SELF_CONTAINED \u003d 1, \n         PLDM_ACTIVATION_MEDIUM_SPECIFIC_RESET \u003d 2, \n         PLDM_ACTIVATION_SYSTEM_REBOOT \u003d 3, \n         PLDM_ACTIVATION_DC_POWER_CYCLE \u003d 4, \n         PLDM_ACTIVATION_AC_POWER_CYCLE \u003d 5, \n         PLDM_SUPPORTS_ACTIVATE_PENDING_IMAGE \u003d 6, \n         PLDM_SUPPORTS_ACTIVATE_PENDING_IMAGE_SET \u003d 7\n  };\n```\n\nbut that is for component activation. Overall i could not find any define for the bit position and in the PDF this bit in `DownstreamDeviceUpdateOptionFlags` also does not have any defined name.\n\nMaybe it did not get defined anywhere because there is only one out of 32 bits being used for anything.\n\nDefined bit mask `PLDM_DD_SELF_CONTAINED_ACTIVATION` as a local const 👍",
+      "parentUuid": "44fe2f6e_1ac725ab",
+      "revId": "00d3d25f47060ed6a74681792813c5029b692153",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef594b9e_a5a21c64",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f5402cf_99487e66",
+        "filename": "bindings/cpp/types.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-12T10:09:43Z",
+      "side": 1,
+      "message": "You are right, this is garbage and copy-pasted code..\n\nChanged it now and defined\n```\nstd::map\u003cuint16_t, std::unique_ptr\u003cpldm::fw_update::DescriptorData\u003e\u003e\npldm::fw_update::DescriptorData::copyDescriptorMap\n(const std::map\u003cuint16_t, std::unique_ptr\u003cpldm::fw_update::DescriptorData\u003e\u003e\u0026 recordDescriptors)\n```\n\nThat function can then be used in 4 places to copy the map.\n\nThanks for finding it 🙏",
+      "parentUuid": "ef594b9e_a5a21c64",
+      "revId": "00d3d25f47060ed6a74681792813c5029b692153",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96a9e864_107e65ef",
@@ -65,6 +101,24 @@
       "writtenOn": "2026-06-11T22:56:22Z",
       "side": 1,
       "message": "Nit: can we just collapse all of these #if invocations?",
+      "revId": "00d3d25f47060ed6a74681792813c5029b692153",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40ad36b9_3f6142a1",
+        "filename": "tests/unit/bindings/cpp/firmware_update_test_v1_1_0.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-12T10:09:43Z",
+      "side": 1,
+      "message": "I believe Andrew commented somewhere that he wanted all the tests to be guarded individually. I cannot find it anymore, maybe i am hallucinating..\n\nAnyways, the other tests do that as well, `tests/unit/dsp/firmware_update.cpp` for example, so by doing it like this we are staying on the safe side.\n\nLong-term most of these guards will probably fall off as different functions are stabilized due to usage in other projects. I am not even sure if we need all of these functions to be guarded here.",
+      "parentUuid": "96a9e864_107e65ef",
       "revId": "00d3d25f47060ed6a74681792813c5029b692153",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
