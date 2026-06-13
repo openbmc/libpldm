@@ -19,6 +19,20 @@ Change categories:
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [v0.16.0] - 2026-06-13
+
+### Added
+
 - dsp: base: Introduce `encode_pldm_base_get_pldm_types_resp()`
 - dsp: base: Introduce `decode_pldm_base_get_pldm_types_resp()`
 - dsp: platform: Add requester APIs for SetNumericSensorEnable
@@ -45,8 +59,7 @@ Change categories:
 - dsp: firmware_update: Add Update Security Revision from DSP0267 v1.3.0
 - include: Added header file for Redfish Device Enablement (DSP0218 v1.2.0)
 - include: Added header file for SMBIOS Data Transfer (DSP0246 v1.0.1)
-- bindings:
-  - Add libpldm++ library for the C++ binding
+- Add libpldm++ library for the C++ binding
 - dsp: platform: Add pldm_platform_file_class enum
 - platform: Add functions to decode Redfish Resource PDR (DSP0248 v1.3.0)
 - platform: Add functions to decode Redfish Action PDR (DSP0248 v1.3.0)
@@ -56,23 +69,13 @@ Change categories:
 
 ### Changed
 
-- dsp: base: Stabilise `encode_pldm_base_get_pldm_types_resp()`
-- dsp: base: Stabilise `decode_pldm_base_get_pldm_types_resp()`
-- libpldm++:
-  - pldm::fw_update::PackageParser::parse is stable
-  - pldm::fw_update::Package::~Package is stable
 - OWNERS: Tidy up throughout the tree
+
 - Rename `PLDM_HAS_POLL` test macro to `HAVE_POLL_H` and define it
   unconditionally
 
 - Rework ABI control macros to also enable API control
 - transport: Eliminate poll guards from headers
-- dsp: firmware_update: Stabilise Update Security Revision APIs
-  - `decode_pldm_fwup_update_security_revision_resp`
-  - `encode_pldm_fwup_update_security_revision_req`
-- transport: af-mctp: Stabilize FQE TID mapping APIs
-  - `pldm_transport_af_mctp_map_tid_fqe()`
-  - `pldm_transport_af_mctp_unmap_tid_fqe()`
 - include: Use own "byteorder.h" file instead of <asm/byteorder.h>
 
 - include: Added definitions needed for Zephyr support:
@@ -83,6 +86,24 @@ Change categories:
 
 - libpldm: api: Don't diagnose implementation use of unstable features
 - Use #pragma once include guards everywhere
+
+#### Stabilisations in libpldm
+
+- dsp: base: Stabilise `encode_pldm_base_get_pldm_types_resp()`
+- dsp: base: Stabilise `decode_pldm_base_get_pldm_types_resp()`
+
+- dsp: firmware_update: Stabilise Update Security Revision APIs
+  - `decode_pldm_fwup_update_security_revision_resp`
+  - `encode_pldm_fwup_update_security_revision_req`
+
+- transport: af-mctp: Stabilize FQE TID mapping APIs
+  - `pldm_transport_af_mctp_map_tid_fqe()`
+  - `pldm_transport_af_mctp_unmap_tid_fqe()`
+
+#### Stabilisations in libpldm++
+
+- pldm::fw_update::PackageParser::parse is stable
+- pldm::fw_update::Package::~Package is stable
 
 ### Deprecated
 
@@ -106,8 +127,6 @@ Change categories:
 - `PLDM_HAS_POLL` and `HAVE_POLL_H` configuration macros
 
   These are unnecessary now that build targets are enabled by header tests
-
-#### Headers, declarations and definitions
 
 - `pldm_base_ver2str()` removed from `libpldm/utils.h` - users should include
   `libpldm/base.h` instead.
