@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47f70e1e_677cc44b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T01:02:11Z",
+      "side": 1,
+      "message": "Hi Brad, thanks for the fix. Can you please add a test for this case?\n\nAlso, have you considered fuzzing? Not a blocker, but it would be a nice addition.",
+      "revId": "456d4be3394591f2d9dced97bc190ed5c18c1535",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd1353d_eeb30221",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T01:02:11Z",
+      "side": 1,
+      "message": "Is it not an invariant violation that `record-\u003edata` does not contain a `struct pldm_pdr_hdr`? In which case we should never do the `malloc()` above, based on this size test?\n\nThe PDR code is all fairly unsafe in this sense.",
+      "revId": "456d4be3394591f2d9dced97bc190ed5c18c1535",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
