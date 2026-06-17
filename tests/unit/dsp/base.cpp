@@ -522,6 +522,63 @@ TEST(GetTID, testDecodeResponse)
 }
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(EncodePldmBaseGetTidResp, InvalidParameters)
+{
+    pldm_base_get_tid_resp resp{};
+    PLDM_MSG_DEFINE_P(msg, PLDM_BASE_GET_TID_RESP_BYTES);
+    size_t payload_length;
+
+    payload_length = PLDM_BASE_GET_TID_RESP_BYTES;
+    EXPECT_EQ(-EINVAL,
+              encode_pldm_base_get_tid_resp(0, NULL, msg, &payload_length));
+    EXPECT_EQ(-EINVAL,
+              encode_pldm_base_get_tid_resp(0, &resp, NULL, &payload_length));
+    EXPECT_EQ(-EINVAL, encode_pldm_base_get_tid_resp(0, &resp, msg, NULL));
+
+    payload_length = 0;
+    EXPECT_EQ(-EOVERFLOW,
+              encode_pldm_base_get_tid_resp(0, &resp, msg, &payload_length));
+    payload_length = PLDM_BASE_GET_TID_RESP_BYTES - 1;
+    EXPECT_EQ(-EOVERFLOW,
+              encode_pldm_base_get_tid_resp(0, &resp, msg, &payload_length));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodePldmBaseGetTidResp, ErrorResponse)
+{
+    PLDM_MSG_DEFINE_P(msg, PLDM_BASE_GET_TID_RESP_BYTES);
+    pldm_base_get_tid_resp resp{};
+    size_t payload_length = PLDM_BASE_GET_TID_RESP_BYTES;
+    int rc;
+
+    resp.completion_code = PLDM_ERROR;
+    rc = encode_pldm_base_get_tid_resp(0, &resp, msg, &payload_length);
+    ASSERT_EQ(0, rc);
+    EXPECT_EQ(PLDM_ERROR, msg->payload[0]);
+    EXPECT_EQ(1, payload_length);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodePldmBaseGetTidResp, GoodResponse)
+{
+    PLDM_MSG_DEFINE_P(msg, PLDM_BASE_GET_TID_RESP_BYTES);
+    pldm_base_get_tid_resp resp{};
+    size_t payload_length = PLDM_BASE_GET_TID_RESP_BYTES;
+    int rc;
+
+    resp.completion_code = PLDM_SUCCESS;
+    resp.tid = 1;
+    rc = encode_pldm_base_get_tid_resp(0, &resp, msg, &payload_length);
+    ASSERT_EQ(0, rc);
+    EXPECT_EQ(PLDM_SUCCESS, msg->payload[0]);
+    EXPECT_EQ(1, msg->payload[1]);
+    EXPECT_EQ(PLDM_BASE_GET_TID_RESP_BYTES, payload_length);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodePldmBaseGetTidResp, InvalidParameters)
 {
     pldm_base_get_tid_resp resp{};
