@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5649c163_db546ae9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T02:16:28Z",
+      "side": 1,
+      "message": "This disclaimer isn\u0027t acceptable. Each change you propose is done so on the basis of your judgement, and you are responsible for it in its entirety: You cannot outsource this responsibility. If you don\u0027t yet understand the work, please take the time to do so before proposing it, at which point this disclaimer is unnecessary.\n\nIt is enough that you provide your `Signed-off-by:` tag. That says to me you stand behind it, and take responsibility for any of its failings.\n\nPlease remove this.",
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d69dee1e_0860b714",
+        "filename": "scripts/crater",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T02:16:28Z",
+      "side": 1,
+      "message": "This is a bit shouty and pretty verbose. Can we just call this `crater`?",
+      "range": {
+        "startLine": 14,
+        "startChar": 7,
+        "endLine": 15,
+        "endChar": 1
+      },
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2364e6f_246fc7c7",
+        "filename": "scripts/crater",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T02:16:28Z",
+      "side": 1,
+      "message": "Maybe lower-case this one too.",
+      "range": {
+        "startLine": 43,
+        "startChar": 34,
+        "endLine": 43,
+        "endChar": 38
+      },
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b6e6d88_ab6ad978",
+        "filename": "scripts/crater",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T02:16:28Z",
+      "side": 1,
+      "message": "can we drop this last argument and use `$(1)` instead?",
+      "range": {
+        "startLine": 43,
+        "startChar": 81,
+        "endLine": 43,
+        "endChar": 85
+      },
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8c64397_ca083d7a",
+        "filename": "scripts/crater",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T02:16:28Z",
+      "side": 1,
+      "message": "See comments above.",
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
