@@ -21,6 +21,7 @@ Change categories:
 
 - dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
 - dsp: file: Introduce `encode_pldm_file_df_heartbeat_resp()`
+- dsp: base: Introduce `decode_pldm_base_get_tid_resp()`
 
 ### Changed
 

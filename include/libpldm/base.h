@@ -956,6 +956,33 @@ int decode_pldm_base_negotiate_transfer_params_resp(
  * API elements defined in command code order
  */
 
+/** @struct pldm_base_get_tid_resp
+ *
+ * Response structure defined by DSP0240 v1.2.0, 9.1 GetTID (0x02), Table 10.
+ */
+struct pldm_base_get_tid_resp {
+	uint8_t completion_code;
+	uint8_t tid;
+};
+#define PLDM_BASE_GET_TID_RESP_BYTES 2
+
+/** @brief Decode a GetTID response message
+ *
+ *  @param[in] msg - The response message structure
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] resp - The decoded response
+ *  @return 0 on success
+ *          -EINVAL if the input parameters are invalid
+ *          -EOVERFLOW if the input message buffer is too small
+ *          -EBADMSG if the input message buffer is too large
+ *
+ *  @note Only the value of resp->completion_code is defined if its value is not
+ *        PLDM_SUCCESS.
+ */
+int decode_pldm_base_get_tid_resp(const struct pldm_msg *msg,
+				  size_t payload_length,
+				  struct pldm_base_get_tid_resp *resp);
+
 /** @struct pldm_base_get_types_resp
  *
  * Response structure defined by DSP0240 v1.2.0, 9.3 GetPLDMTypes (0x04), Table

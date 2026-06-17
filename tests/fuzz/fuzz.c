@@ -137,6 +137,16 @@ cleanup_pdr:
     return rc;
 }
 
+static int fuzz_decode_pldm_base_get_tid_resp(const struct pldm_msg* msg,
+                                              size_t payload_length)
+{
+    struct pldm_base_get_tid_resp resp;
+
+    decode_pldm_base_get_tid_resp(msg, payload_length, &resp);
+
+    return 0;
+}
+
 static int fuzz_decode_pldm_base_get_pldm_types_resp(const struct pldm_msg* msg,
                                                      size_t payload_length)
 {
@@ -171,6 +181,7 @@ static int fuzz_decode_pldm_file_df_heartbeat_req(const struct pldm_msg* msg,
 #endif
 
 static int (*const decode_pldm_msg_tests[])(const struct pldm_msg*, size_t) = {
+    fuzz_decode_pldm_base_get_tid_resp,
     fuzz_decode_pldm_base_get_pldm_types_resp,
     fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp,
 #if HAVE_LIBPLDM_API_TESTING
