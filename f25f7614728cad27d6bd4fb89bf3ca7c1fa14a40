@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dbfebe7_fc73ba1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T00:57:28Z",
+      "side": 1,
+      "message": "Please annotate functions with a trailing `()`, so `decode_state_sensor_pdr_data()`.",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 47
+      },
+      "revId": "f25f7614728cad27d6bd4fb89bf3ca7c1fa14a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1cb0d04_326c2074",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T00:57:28Z",
+      "side": 1,
+      "message": "This is expected so isn\u0027t necessary to mention. Please remove it.",
+      "revId": "f25f7614728cad27d6bd4fb89bf3ca7c1fa14a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd002f78_2e1bf6b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T00:57:28Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be the case, see:\n\nhttps://github.com/openbmc/libpldm/blob/76f6997a9c85556fbc01f8553bb0fa986d4d79a6/CONTRIBUTING.md#L238-L241",
+      "range": {
+        "startLine": 22,
+        "startChar": 59,
+        "endLine": 24,
+        "endChar": 38
+      },
+      "revId": "f25f7614728cad27d6bd4fb89bf3ca7c1fa14a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f674294_d4fee108",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T00:57:28Z",
+      "side": 1,
+      "message": "The current preference is that new changelog entries go at the top of their section:\n\n\nhttps://github.com/openbmc/libpldm/blob/76f6997a9c85556fbc01f8553bb0fa986d4d79a6/CONTRIBUTING.md#L49\n\nThis also needs to be moved due to the release of v0.16.0.",
+      "revId": "f25f7614728cad27d6bd4fb89bf3ca7c1fa14a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

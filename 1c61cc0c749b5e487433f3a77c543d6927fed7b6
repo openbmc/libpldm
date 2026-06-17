@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bec90eb_4c3da2b6",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2338,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-17T00:57:28Z",
+      "side": 1,
+      "message": "I rather we take a longer path here and avoid introducing more uses of `struct pldm_state_sensor_pdr`. Instead I prefer we deprecate it and introduce `struct pldm_platform_state_sensor_pdr` as its replacement. `struct pldm_platform_state_sensor_pdr` should meet current expectations outlined in `CONTRIBUTING.md`.\n\nAre you happy to work through that process?",
+      "revId": "1c61cc0c749b5e487433f3a77c543d6927fed7b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
